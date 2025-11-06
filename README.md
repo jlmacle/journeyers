@@ -4,6 +4,8 @@ Our appreciability in these teams, and therefore our quality of life, depends on
 
 This open source ed tech and assistive tech project (cross-platform app) is meant to support our problem-solving processes, and to help us reach lasting solutions.
 
+[More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
+
 #GlobalSustainableQualityOfLife<br>
 #SDG3
 <hr>
