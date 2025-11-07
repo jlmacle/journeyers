@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+import 'package:flutter/rendering.dart';
+
 import 'package:journeyers/l10n/app_localizations.dart'; 
-
-
 
 
 class MyHomePage extends StatefulWidget {
@@ -34,21 +34,25 @@ class _MyHomePageState extends State<MyHomePage>
         centerTitle: true,
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,      
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',
-              // 'Journeyers',
-              style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
-            ),
-            Gap(5),
-            Text(
-              'What story will we leave\n'
-              'for our loved ones to tell?',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
+        title: Semantics(
+          headingLevel: 1,
+          container: true,
+          child: Column
+          (
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',              
+                style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
+              ),
+              Gap(5),
+              Text(
+                'What story will we leave\n'
+                'for our loved ones to tell?',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0), // The height of the border
@@ -111,7 +115,19 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
     
 
     return Scaffold(
-      body: Center(child: Text('Context analysis dashboard')),
+      body: Column(
+        children: [
+          Center(child: Text('Context analysis dashboard')),
+          // TextButton(
+          //   onPressed: () {
+          //     // This dumps the Semantics Tree's structure and properties to the console.
+          //     debugDumpSemanticsTree(); 
+          //   },
+          //     child: const Text('Dump Semantics'),
+          //   )
+        ],
+      ),
+      
       );
   }
 }
@@ -134,7 +150,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   {
     return Scaffold
     (
-      body: Center(child: Text("Group problem-solving dashboard")),
-    );
+      body:           Center(child: Text("Group problem-solving dashboard")),
+            );
   }
 }
