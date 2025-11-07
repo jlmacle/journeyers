@@ -11,6 +11,7 @@ import 'app_themes.dart';
 import './pages/homepage.dart';
 
 void main() {
+  // To help debug the layout
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -21,6 +22,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // To visualize the semantics tree
+      // showSemanticsDebugger: true,
       theme: appTheme, 
       localizationsDelegates: [
         AppLocalizations.delegate,

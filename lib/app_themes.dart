@@ -11,6 +11,7 @@ final ThemeData appTheme = ThemeData(
         appBarTheme: const AppBarTheme(
           // backgroundColor: Color(0xFF1ecbe1),
           backgroundColor: Color(0xFF0a2e50),   
+          // backgroundColor: Colors.white, // for constrast testing
           
           // backgroundColor: Color.fromARGB(255, 77, 4, 52),  
           elevation: 0,
