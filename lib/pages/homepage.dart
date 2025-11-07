@@ -116,6 +116,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
 
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(child: Text('Context analysis dashboard')),
           // TextButton(
