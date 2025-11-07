@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart'; 
 // https://docs.flutter.dev/ui/internationalization
+import 'package:journeyers/l10n/app_localizations.dart';
 
 import 'package:flutter/rendering.dart';
 // https://api.flutter.dev/flutter/rendering/
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: appTheme, 
       localizationsDelegates: [
+        AppLocalizations.delegate,
+
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart'; 
+import 'package:gap/gap.dart';
+
+import 'package:journeyers/l10n/app_localizations.dart'; 
+
+
 
 
 class MyHomePage extends StatefulWidget {
@@ -34,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Journeyers',
+              AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',
+              // 'Journeyers',
               style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
             ),
             Gap(5),
