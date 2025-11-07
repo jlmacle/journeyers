@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart'; 
+// https://docs.flutter.dev/ui/internationalization
+
+import 'package:flutter/rendering.dart';
+// https://api.flutter.dev/flutter/rendering/
 
 import 'app_themes.dart';
 import './pages/homepage.dart';
-
-import 'package:flutter/rendering.dart';
-//https://api.flutter.dev/flutter/services/
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -18,7 +20,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: appTheme,      
+      theme: appTheme, 
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('fr'), // Spanish
+      ],     
       home: MyHomePage(),
     );
   }
