@@ -1,4 +1,6 @@
-"appTitle": "Journeyers",
+{ 
+  "appTitle": "Journeyers",
   "@appTitle": {
-    "description": "The conventional newborn programmer greeting"
+    "description": "The title for the app"
   }
+}
