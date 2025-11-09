@@ -55,18 +55,18 @@ class _MyHomePageState extends State<MyHomePage>
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0), // The height of the border
+          preferredSize: const Size.fromHeight(4.0), // the height of the border
           child: Container(
-            color: Color(0xFFBF9D3E), // The color of the border
-            height: 4.0, // The thickness of the border
+            color: Color(0xFFBF9D3E), 
+            height: 4.0, 
           ),
         ),
         
       ),
       
-      body: _pages[_currentIndex], // Body
+      body: _pages[_currentIndex], 
 
-      bottomNavigationBar: BottomNavigationBar // BottomNavigationBar
+      bottomNavigationBar: BottomNavigationBar 
       (
         backgroundColor: Colors.white,
         currentIndex: _currentIndex,
@@ -152,6 +152,6 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     return Scaffold
     (
       body:           Center(child: Text("Group problem-solving dashboard")),
-            );
+    );
   }
 }
