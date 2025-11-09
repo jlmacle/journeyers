@@ -9,11 +9,8 @@ final ThemeData appTheme = ThemeData(
         ),
         
         appBarTheme: const AppBarTheme(
-          // backgroundColor: Color(0xFF1ecbe1),
           backgroundColor: Color(0xFF0a2e50),   
           // backgroundColor: Colors.white, // for constrast testing
-          
-          // backgroundColor: Color.fromARGB(255, 77, 4, 52),  
           elevation: 0,
                 
           titleTextStyle: TextStyle(
@@ -52,15 +49,13 @@ final ThemeData appTheme = ThemeData(
           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         ),
         segmentedButtonTheme: SegmentedButtonThemeData
-        (
-          // The 'style' property takes a ButtonStyle
+        (         
           style: ButtonStyle
-          (
-            // Use MaterialStateProperty.resolveWith to check the state
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return const Color(0xFFE9FAFC); // Example: Set selected color to green
+          (            
+            backgroundColor: WidgetStateProperty.resolveWith<Color>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.selected)) {
+                  return const Color(0xFFE9FAFC);
                 }
                 return Colors.transparent;
                 
@@ -79,10 +74,5 @@ final ThemeData appTheme = ThemeData(
             }         
           )  
         ),
-        // buttonTheme: ButtonThemeData(
-        //   focusColor: Color(0xFFB9EFF6),
-
-        // ),
-        
         useMaterial3: true,
       );
