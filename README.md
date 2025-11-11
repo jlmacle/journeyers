@@ -2,7 +2,7 @@
 Most of our lives are spent in teams: household, school, workplace.<br>
 Our appreciability in these teams, and therefore our quality of life, depends on our ability to problem-solve toward lasting solutions.
 
-This open source ed tech and assistive tech project (cross-platform, cross-cultural, accessible app) is meant to support our problem-solving processes, and to help us reach lasting solutions.
+This open source ed tech and assistive tech project (cross-platform, cross-cultural, accessible app, offline-friendly) is meant to support our problem-solving processes, and to help us reach lasting solutions.
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
