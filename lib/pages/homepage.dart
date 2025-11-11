@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/rendering.dart';
+
 import 'package:gap/gap.dart';
 
-import 'package:flutter/rendering.dart';
-
-import 'package:journeyers/l10n/app_localizations.dart'; 
+import '../l10n/app_localizations.dart'; 
 
 
 class MyHomePage extends StatefulWidget {
@@ -151,7 +151,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   {
     return Scaffold
     (
-      body:           Center(child: Text("Group problem-solving dashboard")),
+      body: Center(child: Text("Group problem-solving dashboard")),
     );
   }
 }

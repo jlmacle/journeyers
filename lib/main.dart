@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_localizations/flutter_localizations.dart'; 
-// https://docs.flutter.dev/ui/internationalization
-import 'package:journeyers/l10n/app_localizations.dart';
-
-import 'package:flutter/rendering.dart';
-// https://api.flutter.dev/flutter/rendering/
+import 'package:flutter_localizations/flutter_localizations.dart'; // https://docs.flutter.dev/ui/internationalization
+// import 'package:flutter/rendering.dart'; // https://api.flutter.dev/flutter/rendering/
 
 import 'app_themes.dart';
 import './pages/homepage.dart';
+import './l10n/app_localizations.dart';
 
 void main() {
   // To help debug the layout
