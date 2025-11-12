@@ -33,7 +33,7 @@ dependencies:
   gap: ^3.0.1
   flutter_localizations:
     sdk: flutter
-  intl: any
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
