@@ -66,6 +66,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
         (padding: EdgeInsets.symmetric(horizontal: widget.paddingHorizontal, vertical: widget.paddingVertical),
         child: Column
         (
+          crossAxisAlignment: widget.crossAxisAlignment,
           children: 
           [
             Text
