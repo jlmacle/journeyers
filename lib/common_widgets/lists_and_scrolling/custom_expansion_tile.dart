@@ -4,38 +4,28 @@ import '../../app_themes.dart';
 import '../interaction_and_inputs/custom_icon_button.dart';
 
 class CustomExpansionTile extends StatefulWidget {
-  final String tileText;
-  final FontWeight fontWeightHeader;
-  final Color colorBackgroundCollapsed;
-  final Color colorBackgroundExpanded;
-  final Color colorTextCollapsed;
-  final Color colorTextExpanded;
-  final Color colorIconCollapsed;
-  final Color colorIconExpanded;
-  final Icon trailingIcon;
-  final double paddingHorizontal;
-  final double paddingVertical;
-  final CrossAxisAlignment crossAxisAlignment;
+  final String headerText;
+  final FontWeight headerFontWeight;
+  final Icon actionIconToExpand;
+  final double expandedContentPaddingHorizontal;
+  final double expandedContentPaddingVertical;
+  final CrossAxisAlignment expandedTextCrossAxisAlignment;
   final String expandedAdditionalText;
   final double dividerHeight;
   final List<List<dynamic>> listActionsIconsData;
+  final MainAxisAlignment listActionsIconsMainAxisAlignment;
 
   const CustomExpansionTile
   ({
     super.key,
-    this.tileText = "Default tile text",
-    this.fontWeightHeader = FontWeight.w600,
-    this.colorBackgroundCollapsed = Colors.white,
-    this.colorBackgroundExpanded = Colors.white,
-    this.colorTextCollapsed = Colors.black,
-    this.colorTextExpanded = Colors.black,
-    this.colorIconCollapsed = Colors.purple,
-    this.colorIconExpanded = Colors.purple,
-    this.trailingIcon = const Icon(Icons.expand_more),
-    this.paddingHorizontal = 16.0,
-    this.paddingVertical = 8.0,
-    this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.headerText = "Default tile text",
+    this.headerFontWeight = FontWeight.w600,
+    this.actionIconToExpand = const Icon(Icons.expand_more),
+    this.expandedContentPaddingHorizontal = 16.0,
+    this.expandedContentPaddingVertical = 8.0,
+    this.expandedTextCrossAxisAlignment = CrossAxisAlignment.start,
     this.expandedAdditionalText = "Default expanded additional text",
+    this.listActionsIconsMainAxisAlignment = MainAxisAlignment.end,
     this.dividerHeight = 20.5,
     this.listActionsIconsData = const
     [
@@ -56,17 +46,17 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
     (
       title: Text
       (
-        widget.tileText,
-        style: TextStyle(fontWeight: widget.fontWeightHeader),
+        widget.headerText,
+        style: TextStyle(fontWeight: widget.headerFontWeight),
       ),
-      trailing: widget.trailingIcon,
+      trailing: widget.actionIconToExpand,
       children: <Widget>
       [
         Padding
-        (padding: EdgeInsets.symmetric(horizontal: widget.paddingHorizontal, vertical: widget.paddingVertical),
+        (padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal, vertical: widget.expandedContentPaddingVertical),
         child: Column
         (
-          crossAxisAlignment: widget.crossAxisAlignment,
+          crossAxisAlignment: widget.expandedTextCrossAxisAlignment,
           children: 
           [
             Text
@@ -80,8 +70,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
             // Action icons
             Row
             (
-              children: 
-              
+              mainAxisAlignment : widget.listActionsIconsMainAxisAlignment,
+              children:               
               widget.listActionsIconsData.map
               (
                 (actionIconData) 
