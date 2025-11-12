@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import './print_utils.dart';
+
 class FileUtils 
 {
   Future<void> appendText(File file, String text) async
@@ -12,11 +14,11 @@ class FileUtils
     }
     on FileSystemException catch (e)
     {
-      print('Error appending text to file: ${e.message}');
+      printd('Error appending text to file: ${e.message}');
     }
     catch(e)
     {
-      print('Error appending text to file: $e');
+      printd('Error appending text to file: $e');
     }
   }
 
