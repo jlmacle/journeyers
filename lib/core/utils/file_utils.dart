@@ -2,10 +2,9 @@ import 'dart:io';
 
 class FileUtils 
 {
-  Future<void> appendText(String filePath, String text) async
+  Future<void> appendText(File file, String text) async
   {
     try{
-      var file = File(filePath);
       var sink = file.openWrite(mode: FileMode.append);
       sink.write(text);
       await sink.flush();

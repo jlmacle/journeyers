@@ -16,7 +16,8 @@ void main()
       // using the library
       var testFilePath = '${tempDir.path}${Platform.pathSeparator}test_file.txt';
       var contentToWrite = 'Hello world';
-      fileUtils.appendText(testFilePath, contentToWrite);
+      var file = File(testFilePath);
+      fileUtils.appendText(file, contentToWrite);
 
       // testing if the content was written
       var testFile = File(testFilePath);
