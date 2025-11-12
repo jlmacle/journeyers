@@ -9,7 +9,7 @@ class ProcessUtils
   ///
   /// Method to determine the rank of the new session data to be added to the dashboard data file.
   /// The method is useful to determine the file name for the session data to be saved.
-  /// The method assumes a json file of Map<String, dynamic>.
+  /// The method assumes a json file of `Map<String, dynamic>`.
   ///
   int newFileNumberDetermination(String pathToDashboardDataFile) 
   {
