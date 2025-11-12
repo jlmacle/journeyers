@@ -9,7 +9,7 @@ void main()
   var fileUtils = FileUtils();
   var tempDir = Directory.current.createTempSync('file_utils_test');
 
-  group('File Utils tests:', () 
+  group('File utils tests:', () 
   {
     test('the content to write should be found in the file', () async
     {
