@@ -9,7 +9,6 @@ import './l10n/app_localizations.dart';
 void main() {
   // To help debug the layout
   // debugPaintSizeEnabled = true;
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
