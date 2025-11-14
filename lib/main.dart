@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         Locale('en'), // English
         Locale('fr'), // Spanish
       ],     
-      home: MyHomePage(),
+      home: SafeArea(child: MyHomePage()),
     );
   }
 }
