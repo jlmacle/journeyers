@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/common_widgets/lists_and_scrolling/custom_expansion_tile.dart';
 
 void main() {  
-  runApp(const MyWidget());
+  runApp(const MyTestingApp());
 }
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class MyTestingApp extends StatelessWidget {
+  const MyTestingApp({super.key});
 
   @override
   Widget build(BuildContext context) {

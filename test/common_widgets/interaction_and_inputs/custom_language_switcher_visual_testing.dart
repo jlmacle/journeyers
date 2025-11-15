@@ -7,19 +7,19 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 
 void main() {  
-  runApp(const MyTestingWidget());
+  runApp(const MyTestingApp());
 }
 
 
-class MyTestingWidget extends StatefulWidget {
+class MyTestingApp extends StatefulWidget {
 
-  const MyTestingWidget({super.key});
+  const MyTestingApp({super.key});
   @override
-  State<MyTestingWidget> createState() => _MyTestingWidgetState();
+  State<MyTestingApp> createState() => _MyTestingAppState();
 }
 
 
-class _MyTestingWidgetState extends State<MyTestingWidget> {
+class _MyTestingAppState extends State<MyTestingApp> {
   Locale? _currentLocale;
 
    void _setLocale(Locale newLocale) {
