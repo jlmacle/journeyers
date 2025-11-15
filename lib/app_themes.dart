@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
+final Color navyBlue = Color(0xFF0a2e50);
+final Color paleCyan = Color(0xFFE9FAFC);
+
+
 final ThemeData appTheme = ThemeData(
+        
+
         scaffoldBackgroundColor: Colors.white,  // left appbar, text field, checkboxes not in white        
         
         colorScheme: ColorScheme.light(
@@ -8,8 +14,8 @@ final ThemeData appTheme = ThemeData(
           
         ),
         
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF0a2e50),   
+        appBarTheme: AppBarTheme(
+          backgroundColor: navyBlue,   
           // backgroundColor: Colors.white, // for constrast testing
           elevation: 0,
                 
@@ -44,9 +50,16 @@ final ThemeData appTheme = ThemeData(
             borderSide: BorderSide.none,
           ),          
           filled: true,          
-          fillColor:Color(0xFFE9FAFC),
+          fillColor:paleCyan,
           
           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData
+        (
+          style:  ButtonStyle
+          (
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+          )
         ),
         segmentedButtonTheme: SegmentedButtonThemeData
         (         
@@ -55,24 +68,29 @@ final ThemeData appTheme = ThemeData(
             backgroundColor: WidgetStateProperty.resolveWith<Color>(
               (Set<WidgetState> states) {
                 if (states.contains(WidgetState.selected)) {
-                  return const Color(0xFFE9FAFC);
+                  return paleCyan;
                 }
-                return Colors.transparent;
-                
+                return Colors.transparent;                
               },
             ),
           ),
         ),
-        checkboxTheme: CheckboxThemeData(
+        checkboxTheme: CheckboxThemeData
+        (
           fillColor: WidgetStateProperty.resolveWith<Color>(
             (Set<WidgetState> states) 
             {
               if (states.contains(WidgetState.selected)) {
-                return Color(0xFF0a2e50);  // Same navy blue
+                return navyBlue;
               }
               return Colors.transparent;   
             }         
           )  
         ),
+        bannerTheme: MaterialBannerThemeData
+        (
+          backgroundColor: const Color.fromARGB(255, 13, 13, 49),
+        ),
+        
         useMaterial3: true,
       );
