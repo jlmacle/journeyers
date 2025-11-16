@@ -9,7 +9,7 @@ required String actiontext, required Color actionTextColor, required FontWeight 
 
   void hideBanner() {
     scaffoldMessenger.hideCurrentMaterialBanner();
-    saveDismissal();
+    saveMaterialBannerDismissal();
     
   }
 
