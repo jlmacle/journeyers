@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/features/settings/user_preferences_helper.dart';
 
+// Kept for educational purposes
+
 void showCustomSnackbarStartMessage({required BuildContext buildContext, required String message, required Color messageColor,
 required Duration duration, required String actiontext}) 
 {
