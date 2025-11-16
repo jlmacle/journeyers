@@ -13,12 +13,24 @@ Future<bool> isMaterialBannerDismissed() async {
 }
 ////////////////////////////////////////////////////
 //                SNACKBAR (Kept for educational purposes)
-Future<void> saveStartMessageAcknowledgement() async {
+Future<void> saveStartSnackbarMessageAcknowledgement() async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.setBool('startSnackbarMessageAcknowledged', true);
 }
 
-Future<bool> isStartMessageAcknowledged() async {
+Future<bool> isStartSnackbarMessageAcknowledged() async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getBool('startSnackbarMessageAcknowledged') ?? false;
+}
+
+////////////////////////////////////////////////////
+//              CONTAINER
+Future<void> saveStartMessageAcknowledgement() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('startMessageAcknowledged', true);
+}
+
+Future<bool> isStartMessageAcknowledged() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('startMessageAcknowledged') ?? false;
 }
