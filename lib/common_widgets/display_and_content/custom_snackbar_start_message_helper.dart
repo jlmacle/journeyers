@@ -12,7 +12,7 @@ required Duration duration, required String actiontext})
   void hideStartMessage() 
   {
     scaffoldMessenger.hideCurrentSnackBar();
-    saveStartMessageAcknowledgement();    
+    saveStartSnackbarMessageAcknowledgement();    
   }
 
   scaffoldMessenger.showSnackBar(

@@ -48,7 +48,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
         messageColor: Colors.white,
         iconData: Icons.info, 
         iconColor: Colors.white,
-        actiontext: 'Dismiss',
+        actionText: 'Dismiss',
         actionTextColor: Colors.white,
         actionTextFontweight: FontWeight.bold
       );
