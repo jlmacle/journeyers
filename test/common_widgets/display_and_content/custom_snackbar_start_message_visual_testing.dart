@@ -1,4 +1,4 @@
-// flutter run -t .\test\common_widgets\display_and_content\custom_snackbar_start_message_visual_testing
+// flutter run -t .\test\common_widgets\display_and_content\custom_snackbar_start_message_visual_testing.dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,7 +40,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
 {
 
   void _showStartMessage() async {
-    if (!(await isStartMessageAcknowledged())) 
+    if (!(await isStartSnackbarMessageAcknowledged())) 
     { 
       showCustomSnackbarStartMessage
       (
