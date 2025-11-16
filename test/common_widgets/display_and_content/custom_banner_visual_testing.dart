@@ -1,8 +1,10 @@
 // flutter run -t .\test\common_widgets\display_and_content\custom_banner_visual_testing.dart
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_material_banner_helper.dart';
+import 'package:journeyers/features/settings/user_preferences_helper.dart';
 
 void main() {  
   runApp(const MyTestingApp());
@@ -36,17 +38,22 @@ class MyTestingWidget extends StatefulWidget {
 class _MyTestingWidgetState extends State<MyTestingWidget> 
 {
 
-  void _showBanner() {
-    showCustomMaterialBanner(
-      buildContext: context,
-      message: 'Externalized Material Banner.',
-      messageColor: Colors.white,
-      iconData: Icons.info, 
-      iconColor: Colors.white,
-      actiontext: 'Dismiss',
-      actionTextColor: Colors.white,
-      actionTextFontweight: FontWeight.bold
-    );
+  void _showBanner() async {
+    if (!(await isBannerDismissed())) 
+    { 
+      showCustomMaterialBanner
+      (
+        buildContext: context,
+        message: 'Externalized Material Banner.',
+        messageColor: Colors.white,
+        iconData: Icons.info, 
+        iconColor: Colors.white,
+        actiontext: 'Dismiss',
+        actionTextColor: Colors.white,
+        actionTextFontweight: FontWeight.bold
+      );
+    }
+   
   }
 
   @override
@@ -62,7 +69,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Press the button to show the persistent banner.',
+                'Press the button to show the banner only once, if not resetting',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
@@ -70,6 +77,15 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
               ElevatedButton.icon(
                 onPressed: _showBanner, 
                 label: const Text('Show banner'),
+              ),
+               const SizedBox(height: 20),
+              ElevatedButton.icon(
+                onPressed: () async 
+                {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('bannerDismissed', false);
+                }, 
+                label: const Text('Reset user preference'),
               ),
             ],
           ),
