@@ -1,12 +1,15 @@
+// flutter run -t test\core\utils\process_utils_test_data\dashboard_data_context_analysis_data_generation.dart
+
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:path/path.dart' as path;
 
 void main() async
 {
-  var jsonFileName = 'dashboard_data_context_analysis.json';
-  var jsonFile = File(jsonFileName);
+  String filePath = path.join('test','core','utils','process_utils_test_data','dashboard_data_context_analysis.json');
+  var jsonFile = File(filePath);
 
   var now = DateTime.now();
   var formatter = DateFormat('MM/dd/yy');
