@@ -38,9 +38,4 @@ void main() async
 
   // print(jsonString);
   await jsonFile.writeAsString(jsonString);
-
-
-
-
-
 }

@@ -1,4 +1,4 @@
-// dart test\core\error_handling\logging_helper_testing.dart
+// flutter run -t test\core\error_handling\logging_helper_testing.dart
 
 import 'package:journeyers/core/error_handling/logging_helper.dart';
 import 'package:logging/logging.dart';
