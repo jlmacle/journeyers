@@ -6,6 +6,7 @@ void setupLogging() {
   Logger.root.onRecord.listen((record) {
   var time = record.time;
   String formattedTime = DateFormat('HH:mm:ss').format(time);
+  // todo: file-based logging and logging reset algorithm
   print('${record.level.name}: $formattedTime: ${record.message}');
   });
 }
