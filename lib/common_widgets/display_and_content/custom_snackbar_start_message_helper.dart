@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/features/settings/user_preferences_helper.dart';
+import 'package:journeyers/core/utils/user_preferences_utils.dart';
 
 // Kept for educational purposes
 

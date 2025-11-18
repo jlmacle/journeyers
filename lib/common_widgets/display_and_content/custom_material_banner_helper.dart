@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/features/settings/user_preferences_helper.dart';
+import 'package:journeyers/core/utils/user_preferences_utils.dart';
 
 void showCustomMaterialBanner({required BuildContext buildContext, required String message, required Color messageColor,
 required IconData iconData, required Color iconColor, 
