@@ -6,8 +6,8 @@ import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-import 'package:journeyers/core/error_handling/logging_helper.dart';
-import 'package:journeyers/core/utils/json_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
+import 'package:journeyers/core/utils/files_and_json/json_utils.dart';
 
 void main()
 {
