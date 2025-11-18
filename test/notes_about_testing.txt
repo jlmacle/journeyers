@@ -1,0 +1,5 @@
+To display groups and tests labels:
+flutter test -r expanded
+
+
+visual_testing_helper.bat needs to be run from the journeyers folder
