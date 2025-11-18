@@ -1,6 +1,8 @@
 To display groups and tests labels:
 flutter test -r expanded
 
-Hot restart is valuable for the "flutter run -t" commands
+Hot restart is valuable for the "flutter run -t" commands.
 
-visual_testing_helper.bat needs to be run from the test folder
+visual_testing_helper.bat needs to be run from the test folder.
+Your anti-virus might not appreciate the multiple tabs opening.
+At times, I noticed the last web server failing to start.
