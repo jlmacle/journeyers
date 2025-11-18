@@ -1,9 +1,18 @@
 import 'dart:io';
 
-import '../printing_and_logging/print_utils.dart';
+import 'package:logging/logging.dart';
+
+import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
 
 class FileUtils 
 {
+  FileUtils()
+  {
+    setupLogging();
+  }
+ 
+  final logger = Logger("file_utils.dart");
+
   Future<void> appendText(File file, String text) async
   {
     try{
@@ -12,14 +21,8 @@ class FileUtils
       await sink.flush();
       await sink.close();
     }
-    on FileSystemException catch (e)
-    {
-      printd('Error appending text to file: ${e.message}');
-    }
-    catch(e)
-    {
-      printd('Error appending text to file: $e');
-    }
+    on FileSystemException catch (e) {logger.shout('Error appending text to file: ${e.message}'); }
+    catch(e) {logger.shout('Error appending text to file: $e');}
   }
 
 }

@@ -4,15 +4,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
-import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 
-import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
 
 void main() async
 {
-  var logger = Logger("dashboard_session_data_context_analysis_data_generation");
-
   String filePath = path.join('test','core','utils','process_utils_test_data','dashboard_session_data_context_analysis.json');
   var jsonFile = File(filePath);
 
