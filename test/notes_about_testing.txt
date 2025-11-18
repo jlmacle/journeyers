@@ -1,5 +1,6 @@
 To display groups and tests labels:
 flutter test -r expanded
 
+Hot restart is valuable for the "flutter run -t" commands
 
-visual_testing_helper.bat needs to be run from the journeyers folder
+visual_testing_helper.bat needs to be run from the test folder
