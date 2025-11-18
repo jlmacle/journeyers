@@ -1,4 +1,7 @@
+//Line for automated processing
 // flutter run -t .\test\common_widgets\display_and_content\custom_dismissable_rectangular_area_visual_testing.dart
+//Line for automated processing
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart'; // for debugPaintSizeEnabled
 import 'package:gap/gap.dart';
@@ -112,7 +115,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                     _visibilityStatus = true;
                   });
                 }, 
-                label: const Text('Reset user preference'),
+                label: const Text('Reset to display the message again'),
               ),
               Gap(20)              
             ],

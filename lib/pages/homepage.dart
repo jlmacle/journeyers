@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 
@@ -14,6 +16,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> 
 {
+  String eol = Platform.lineTerminator;
+
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
@@ -47,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage>
               ),
               Gap(5),
               Text(
-                'What story will we leave\n'
+                'What story will we leave$eol'
                 'for our loved ones to tell?',
                 style: TextStyle(fontSize: 20),
               ),

@@ -1,4 +1,7 @@
+//Line for automated processing
 // flutter run -t .\test\common_widgets\display_and_content\custom_material_banner_visual_testing.dart
+//Line for automated processing
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -85,7 +88,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('bannerDismissed', false);
                 }, 
-                label: const Text('Reset user preference'),
+                label: const Text('Reset to be able to show banner again'),
               ),
             ],
           ),

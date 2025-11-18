@@ -29,7 +29,6 @@ class FileUtils
     on FileSystemException catch (e) {logger.shout('Error appending text to file: ${e.message}'); }
     catch(e) {logger.shout('Error appending text to file: $e');}
   }
-  
   ///
   ///
   ///
