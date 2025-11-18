@@ -1,4 +1,6 @@
 @Skip('All tests in file_utils_test.dart are skipped')
+library;
+
 import "dart:io";
 
 import 'package:path/path.dart' as path;
