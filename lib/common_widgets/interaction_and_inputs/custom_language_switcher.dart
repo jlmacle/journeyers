@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:journeyers/core/utils/files_and_json/file_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:path/path.dart' as path;
 
 typedef ItemSelectedCallback = void Function(String selectedValue);
 
@@ -18,15 +23,29 @@ class CustomLanguageSwitcher extends StatefulWidget {
 }
 
 class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> {
-  // TODO: to get the values from analyzing the i10n folder
-  final List<String> _dropdownItems = ['en', 'fr'];
+
+  final List<String> _dropdownItems = [];
   late String _selectedValue;
 
   @override
-  void initState() {
+  void initState() 
+  {
+    // Building programmatically _dropdownItems = ['en', 'fr',...];
+    FileUtils fileUtils = FileUtils();
+    String languagesDirPath = path.join("lib", "l10n"); 
+    List<File> fileList= fileUtils.getFilesInDirectory(directoryPath: languagesDirPath, fileExtension: ".arb", searchIsRecursive: true);
+    for(var file in fileList)
+    {
+      String fileName = path.basename(file.path);
+      String languageCode = fileName.replaceAll("app_", "");
+      languageCode = languageCode.replaceAll(".arb", "");
+      _dropdownItems.add(languageCode);
+    }
+
+    _selectedValue = _dropdownItems.first;  
+
     super.initState();
-    _selectedValue = _dropdownItems.first;    
-  }
+    }
 
 
   @override
@@ -40,7 +59,7 @@ class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> {
         DropdownButton<String> 
         (       
           value: _selectedValue,
-          items: const <String>['en', 'fr'].map((String value) 
+          items: _dropdownItems.map((String value) 
           {
             return DropdownMenuItem<String>(
               value: value,
