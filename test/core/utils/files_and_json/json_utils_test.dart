@@ -15,7 +15,7 @@ void main()
   String preferenceName = "startMessageAcknowledged";
   bool preferenceValue = true;
 
-  String updatedFilesDirectoryPath = path.join('test','core','utils','json_utils_test_data','updated_files');
+  String updatedFilesDirectoryPath = path.join('test','core','utils','files_and_json','json_utils_test_data','updated_files');
   Directory updatedFilesfolder = Directory(updatedFilesDirectoryPath);   
 
   setUpAll(() async
@@ -38,7 +38,7 @@ void main()
       }    
     }
     // Copying the files from the source folder into the updated_files folder
-    String sourceFilesDirectoryPath = path.join('test','core','utils','json_utils_test_data','source_files');
+    String sourceFilesDirectoryPath = path.join('test','core','utils','files_and_json','json_utils_test_data','source_files');
     Directory sourceFilesfolder = Directory(sourceFilesDirectoryPath);  
 
     List<FileSystemEntity> sourceFilesfolderEntities = await sourceFilesfolder.list().toList();
