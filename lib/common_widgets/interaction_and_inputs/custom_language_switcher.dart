@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:journeyers/core/utils/files_and_json/file_utils.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:path/path.dart' as path;
 
 typedef ItemSelectedCallback = void Function(String selectedValue);
