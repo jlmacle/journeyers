@@ -1,20 +1,24 @@
-// flutter run -t test\core\utils\process_utils_test_data\dashboard_data_context_analysis_data_generation.dart
+// flutter run -t test\core\utils\process_utils_test_data\dashboard_session_data_context_analysis_data_generation.dart
 
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
+
+import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
 
 void main() async
 {
-  String filePath = path.join('test','core','utils','process_utils_test_data','dashboard_data_context_analysis.json');
+  var logger = Logger("dashboard_session_data_context_analysis_data_generation");
+
+  String filePath = path.join('test','core','utils','process_utils_test_data','dashboard_session_data_context_analysis.json');
   var jsonFile = File(filePath);
 
   var now = DateTime.now();
   var formatter = DateFormat('MM/dd/yy');
   var formattedDate = formatter.format(now);
-  // print('formattedDate: $formattedDate');
 
   // First record of data
   var title1 = "Title session 1";
@@ -39,6 +43,5 @@ void main() async
   var data = {'records':records};
   var jsonString = jsonEncode(data);
 
-  // print(jsonString);
   await jsonFile.writeAsString(jsonString);
 }

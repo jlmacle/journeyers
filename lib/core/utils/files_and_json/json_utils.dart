@@ -5,8 +5,6 @@ import 'package:logging/logging.dart';
 
 final logger = Logger("Json Utils");
 
-
-
 ///
 /// This method assumes for the json file to be simple hashmap
 ///

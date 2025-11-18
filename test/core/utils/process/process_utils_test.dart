@@ -1,15 +1,15 @@
-@Skip('All tests in process_utils_test.dart are skipped')
-library;
+// @Skip('All tests in process_utils_test.dart are skipped')
+// library;
 
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-import 'package:journeyers/core/utils/process_utils.dart';
+import 'package:journeyers/core/utils/process/process_utils.dart';
 
 void main()
 {
   var processUtils = ProcessUtils();
-  var dashboardDataJsonFilePath = path.join("test","core","utils","process_utils_test_data","dashboard_data_context_analysis.json");
+  var dashboardDataJsonFilePath = path.join("test","core","utils","process","process_utils_test_data","dashboard_session_data_context_analysis.json");
 
   group('Process utils tests:', ()
   {

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import './print_utils.dart';
+import '../printing_and_logging/print_utils.dart';
 
 class FileUtils 
 {

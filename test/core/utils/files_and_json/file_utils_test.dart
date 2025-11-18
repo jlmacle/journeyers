@@ -1,17 +1,17 @@
-@Skip('All tests in file_utils_test.dart are skipped')
-library;
+// @Skip('All tests in file_utils_test.dart are skipped')
+// library;
 
 import "dart:io";
 
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-import 'package:journeyers/core/utils/file_utils.dart';
+import 'package:journeyers/core/utils/files_and_json/file_utils.dart';
 
 void main()
 {
   var fileUtils = FileUtils();
-  var testFilePath = path.join("test","core","utils","file_utils_test_data","file.txt");
+  var testFilePath = path.join("test","core","utils","files_and_json","file_utils_test_data","file.txt");
 
   group('File utils tests:', () 
   {
