@@ -1,4 +1,7 @@
+//Line for automated processing
 // flutter run -t .\test\common_widgets\interaction_and_inputs\custom_language_switcher_visual_testing.dart
+//Line for automated processing
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

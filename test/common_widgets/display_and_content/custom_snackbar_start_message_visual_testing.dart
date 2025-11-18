@@ -1,4 +1,7 @@
+//Line for automated processing
 // flutter run -t .\test\common_widgets\display_and_content\custom_snackbar_start_message_visual_testing.dart
+//Line for automated processing
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,6 +41,7 @@ class MyTestingWidget extends StatefulWidget {
 
 class _MyTestingWidgetState extends State<MyTestingWidget> 
 {
+  // String eol = Platform.lineTerminator; // Creates an issue when running the visual test on Chrome
 
   void _showStartMessage() async {
     if (!(await isStartSnackbarMessageAcknowledged())) 
@@ -45,7 +49,8 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
       showCustomSnackbarStartMessage
       (
         buildContext: context,
-        message: 'This is your first context analysis.\nThe dashboard will be displayed after data from the context analysis has been saved.',
+        message: 'This is your first context analysis.\n'
+                  'The dashboard will be displayed after data from the context analysis has been saved.',
         messageColor: Colors.white,
         duration: Duration(hours: 24),
         actiontext: 'Acknowledged',
@@ -83,7 +88,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('startSnackbarMessageAcknowledged', false);
                 }, 
-                label: const Text('Reset user preference'),
+                label: const Text('Reset to be able to show the snackbar again'),
               ),
             ],
           ),
