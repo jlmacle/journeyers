@@ -8,6 +8,6 @@ void setupLogging() {
   Logger.root.onRecord.listen((record) {
   var time = record.time;
   String formattedTime = DateFormat('HH:mm:ss').format(time);
-  printd('${record.level.name}: $formattedTime: ${record.message}');
+  print('${record.level.name}: $formattedTime: ${record.message}');
   });
 }
