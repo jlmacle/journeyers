@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_dismissable_rectangular_area.dart';
-import 'package:journeyers/features/settings/user_preferences_helper.dart';
+import 'package:journeyers/core/utils/user_preferences_utils.dart';
 
 
 typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
