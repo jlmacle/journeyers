@@ -27,7 +27,7 @@ void main()
         await file.delete();
       }
       // using the library
-      fileUtils.appendText(file, contentToWrite);
+      fileUtils.appendText(filePath: testFilePath,text: contentToWrite);
 
       // testing if the content was written
       var testFile = File(testFilePath);

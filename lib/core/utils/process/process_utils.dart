@@ -11,7 +11,7 @@ class ProcessUtils
   /// The method is useful to determine the file name for the session data to be saved.
   /// The method assumes a json file of `Map<String, dynamic>`.
   ///
-  int newFileNumberDetermination(String pathToDashboardDataFile) 
+  int newFileNumberDetermination({required String pathToDashboardDataFile}) 
   {
     var dashboardDataFile = File(pathToDashboardDataFile);
     // does the file exist?

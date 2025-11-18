@@ -14,7 +14,7 @@ void main()
   group('Process utils tests:', ()
   {
     test('number of records in the dashboard data', (){
-      var rank = processUtils.newFileNumberDetermination(dashboardDataJsonFilePath);
+      var rank = processUtils.newFileNumberDetermination(pathToDashboardDataFile: dashboardDataJsonFilePath);
       expect(rank,equals(4));
     });
   });
