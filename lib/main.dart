@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'; // https://do
 
 import 'app_themes.dart';
 import './pages/homepage.dart';
-import './l10n/app_localizations.dart';
+import 'l10n/app_localizations.dart';
 
 void main() {
   // To help debug the layout

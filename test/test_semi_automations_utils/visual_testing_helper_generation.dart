@@ -28,9 +28,11 @@ void main() async
   for(var file in fileList)
   {
     printd("file.path: ${file.path}");
-    String comment = commentExtraction(file:file, delimiterLine:"//Line for automated processing");
+    String comment = firstCommentExtraction(file:file, delimiterLine:"//Line for automated processing");
     // Removing // at the start
     comment = comment.substring(2);
+    // Removing everything after .dart
+    comment = comment.substring(0,comment.indexOf(".dart") + 5);
     comment = comment.trim();
 
     //Building the cmd command
@@ -38,7 +40,7 @@ void main() async
     String cmdFlutterSnippet = "start $comment -d web-server --web-port $initPort$eol";
     cmdLines += cmdFlutterSnippet;
   }
-  cmdLines += "timeout /t 30 >nul$eol";
+  cmdLines += "timeout /t 35 >nul$eol";
   // initPort has been incremented
   for (var i = 8091; i<=initPort; i++)
   {
