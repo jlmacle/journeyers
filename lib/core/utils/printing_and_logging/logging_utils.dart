@@ -1,8 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-
 void setupLogging() {
   Logger.root.level = Level.ALL; // Set the root log level
   Logger.root.onRecord.listen((record) {
