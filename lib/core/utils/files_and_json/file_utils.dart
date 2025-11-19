@@ -20,6 +20,7 @@ class FileUtils
   ///
   Future<void> appendText({required String filePath, required String text}) async
   {
+    String errorMsg = 'Error appending text to file:';
     try{
       File file = File(filePath);
       var sink = file.openWrite(mode: FileMode.append);
@@ -27,15 +28,32 @@ class FileUtils
       await sink.flush();
       await sink.close();
     }
-    on FileSystemException catch (e) {logger.shout('Error appending text to file: ${e.message}'); }
-    catch(e) {logger.shout('Error appending text to file: $e');}
+    on FileSystemException catch (e) {logger.shout('$errorMsg ${e.message}'); }
+    catch(e) {logger.shout('$errorMsg $e');}
   }
 
+
+  Future<void> appendTextInFront({required String filePath, required String text}) async
+  {
+    String errorMsg = 'Error appending text in front of file:';
+    try{
+      File file = File(filePath);
+      String fileContent = file.readAsStringSync();
+      String newContent = text + fileContent;
+      var sink = file.openWrite(mode: FileMode.write);
+      sink.write(newContent);
+      await sink.flush();
+      await sink.close();
+    }
+    on FileSystemException catch (e) {logger.shout('$errorMsg ${e.message}'); }
+    catch(e) {logger.shout('$errorMsg  $e');}
+  }
   ///
   ///
   ///
   Future<void> createFileIfNecessaryAndAddContent({required String filePath, required String text}) async
   {
+    String errorMsg = 'Error writitng text to file:';
     try{
       File file = File(filePath);
       var sink = file.openWrite(mode: FileMode.write);
@@ -43,8 +61,8 @@ class FileUtils
       await sink.flush();
       await sink.close();
     }
-    on FileSystemException catch (e) {logger.shout('Error writitng text to file: ${e.message}'); }
-    catch(e) {logger.shout('Error writitng text to file: $e');}
+    on FileSystemException catch (e) {logger.shout('$errorMsg ${e.message}'); }
+    catch(e) {logger.shout('$errorMsg $e');}
   }
 
   ///
