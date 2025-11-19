@@ -1,4 +1,4 @@
-cd ../../..
+cd ../..
 @echo off
 set BROWSER="C:\Program Files\Google\Chrome\Application\chrome.exe"
 echo Programm to wait for the web servers to start before opening browser tabs

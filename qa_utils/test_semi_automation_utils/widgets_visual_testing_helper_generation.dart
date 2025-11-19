@@ -1,6 +1,6 @@
-// flutter run -t test/qa_utils/test_semi_automation_utils/widgets_visual_testing_helper_generation.dart -d linux
-// flutter run -t test/qa_utils/test_semi_automation_utils/widgets_visual_testing_helper_generation.dart -d macos
-// flutter run -t test/qa_utils/test_semi_automation_utils/widgets_visual_testing_helper_generation.dart -d windows
+// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d linux
+// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d macos
+// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d windows
 
 // The purpose of this code is to gather the flutter commands needed to test visually the custom widgets
 // and to create a batch file launching the widgets in Chrome tabs.
@@ -24,7 +24,7 @@ void main() async
 {
   List<File> fileList= fileUtils.getFilesInDirectory(directoryPath: directoryPath, fileExtension: ".dart", searchIsRecursive: true);
   int initPort = 8090;
-  String cmdLines = 'cd ../../..$eol'
+  String cmdLines = 'cd ../..$eol'
                   '@echo off$eol'
                   // 'set BROWSER=\'${path.join("")}C:\Program Files\Google\Chrome\Application\chrome.exe"$eol' // to fix an IDE issue
                   "set BROWSER=\"${path.join('C:','Program Files','Google','Chrome','Application','chrome.exe')}\"$eol" // to fix an IDE issue
@@ -54,7 +54,7 @@ void main() async
     cmdLines += '%BROWSER% "http://localhost:$i$eol';
   }
 
-  String filePath = path.join("test","qa_utils","automated_and_semi_automated_tests","widget_visual_testing_helper.bat");
+  String filePath = path.join("qa_utils","automated_and_semi_automated_tests","widget_visual_testing_helper.bat");
   await fileUtils.createFileIfNecessaryAndAddContent(filePath:filePath, text:cmdLines);
   printd("The file should have been created at $filePath");
 }
