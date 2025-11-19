@@ -3,7 +3,7 @@
 // flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d windows
 
 // The purpose of this code is to gather the flutter commands needed to test visually the custom widgets
-// and to create a batch file launching the widgets in Chrome tabs.
+// and to create a batch file launching the widgets, testing these custom widgets, in Chrome tabs.
 // You might have to augent the timeout lett
 import 'dart:io';
 
@@ -24,7 +24,8 @@ void main() async
 {
   List<File> fileList= fileUtils.getFilesInDirectory(directoryPath: directoryPath, fileExtension: ".dart", searchIsRecursive: true);
   int initPort = 8090;
-  String cmdLines = 'cd ../..$eol'
+  String cmdLines = 'REM Batch file launching the widgets, testing the custom widgets, in Chrome tabs.$eol'                 
+                  'cd ../..$eol'
                   '@echo off$eol'
                   // 'set BROWSER=\'${path.join("")}C:\Program Files\Google\Chrome\Application\chrome.exe"$eol' // to fix an IDE issue
                   "set BROWSER=\"${path.join('C:','Program Files','Google','Chrome','Application','chrome.exe')}\"$eol" // to fix an IDE issue
