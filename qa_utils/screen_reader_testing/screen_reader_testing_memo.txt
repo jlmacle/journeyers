@@ -1,0 +1,32 @@
+Testing with Narrator:
+Ctrl + Windows + Enter: start/stop Narrator
+Narrator + space: scan on/scan off
+Narrator + F5: landmarks
+Narrator + F6: headings
+Narrator + F7: all links
+Ctrl + Arrow down: navigation through the page
+Narrator + Ctrl + F12: Toggle developer mode
+https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a
+
+Testing with NVDA:
+Ctrl + Alt + n: start NVDA
+NVDA + F7: Links, headings, forms fields, buttons, landmarks 
+Tab: navigation through the page
+NVDA + q: exit NVDA
+https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
+
+Testing with Orca:
+orca (terminal): start Orca
+Orca Modifier + z: start/stop the structural navigation
+Alt + Shift + K: list of links 
+Alt + Shift + H: list of headings
+Alt + Shift + F: list of form fields
+Alt + Shift + B: list of buttons 
+Alt + Shift + M: list of landmarks 
+Alt + Shift + L: list of lists 
+Alt + Shift + I: list of list items 
+https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
+
+
+About the accessibility tree
+https://developer.chrome.com/blog/full-accessibility-tree
