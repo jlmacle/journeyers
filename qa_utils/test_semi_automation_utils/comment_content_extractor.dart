@@ -2,6 +2,10 @@ import 'dart:io';
 
 String eol = Platform.lineTerminator;
 
+///
+/// The purpose of this code is to extract a flutter command from the custom widgets, 
+/// before using the command to build a script.
+///
 String commentsExtraction({required File file, required String delimiterLine})
 {
   String comment = "";
