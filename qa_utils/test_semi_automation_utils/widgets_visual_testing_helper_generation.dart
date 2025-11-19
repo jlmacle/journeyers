@@ -4,7 +4,7 @@
 
 // The purpose of this code is to gather the flutter commands needed to test visually the custom widgets
 // and to create a batch file launching the widgets, testing these custom widgets, in Chrome tabs.
-// You might have to augent the timeout lett
+// You might have to augment the timeout left
 import 'dart:io';
 
 import 'package:journeyers/core/utils/files_and_json/file_utils.dart';
