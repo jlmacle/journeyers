@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as path;
 
 import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
-import 'package:path/path.dart' as path;
+
 
 class FileUtils 
 {
