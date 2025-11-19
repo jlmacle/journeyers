@@ -1,3 +1,4 @@
+REM Batch file launching the widgets, testing the custom widgets, in Chrome tabs.
 cd ../..
 @echo off
 set BROWSER="C:\Program Files\Google\Chrome\Application\chrome.exe"
