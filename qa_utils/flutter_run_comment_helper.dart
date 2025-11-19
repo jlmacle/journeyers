@@ -1,5 +1,5 @@
 // The purpose of this code is to add programmatically the pattern of the 3 following lines to dart files that are not widgets, not covered by "flutter test",
-// yet are useful run.
+// yet are useful to run.
 
 // flutter run -t qa_utils\flutter_run_comment_helper.dart -d linux
 // flutter run -t qa_utils\flutter_run_comment_helper.dart -d macos
