@@ -30,10 +30,11 @@ class FileUtils
     on FileSystemException catch (e) {logger.shout('Error appending text to file: ${e.message}'); }
     catch(e) {logger.shout('Error appending text to file: $e');}
   }
+
   ///
   ///
   ///
-  Future<void> createFileAndAddContent({required String filePath, required String text}) async
+  Future<void> createFileIfNecessaryAndAddContent({required String filePath, required String text}) async
   {
     try{
       File file = File(filePath);

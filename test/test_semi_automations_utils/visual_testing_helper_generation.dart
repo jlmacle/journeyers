@@ -40,7 +40,7 @@ void main() async
     String cmdFlutterSnippet = "start $comment -d web-server --web-port $initPort$eol";
     cmdLines += cmdFlutterSnippet;
   }
-  cmdLines += "timeout /t 35 >nul$eol";
+  cmdLines += "timeout /t 30 >nul$eol";
   // initPort has been incremented
   for (var i = 8091; i<=initPort; i++)
   {
@@ -48,7 +48,7 @@ void main() async
   }
 
   String filePath = path.join("test","visual_testing_helper.bat");
-  await fileUtils.createFileAndAddContent(filePath:filePath, text:cmdLines);
+  await fileUtils.createFileIfNecessaryAndAddContent(filePath:filePath, text:cmdLines);
   printd("The file should have been created at $filePath");
 }
 
