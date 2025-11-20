@@ -1,16 +1,17 @@
 //Line for automated processing
-// flutter run -t ./test/common_widgets/display_and_content/custom_material_banner_visual_testing.dart -d linux
-// flutter run -t ./test/common_widgets/display_and_content/custom_material_banner_visual_testing.dart -d macos
-// flutter run -t ./test/common_widgets/display_and_content/custom_material_banner_visual_testing.dart -d windows
+// flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d linux
+// flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d macos
+// flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d windows
 //Line for automated processing
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_material_banner_helper.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_snackbar_start_message_helper.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
+// Kept for educational purposes
 void main() {  
   runApp(const MyTestingApp());
 }
@@ -42,20 +43,19 @@ class MyTestingWidget extends StatefulWidget {
 
 class _MyTestingWidgetState extends State<MyTestingWidget> 
 {
+  // String eol = Platform.lineTerminator; // Creates an issue when running the visual test on Chrome
 
-  void _showBanner() async {
-    if (!(await isMaterialBannerDismissed())) 
+  void _showStartMessage() async {
+    if (!(await isStartSnackbarMessageAcknowledged())) 
     { 
-      showCustomMaterialBanner
+      showCustomSnackbarStartMessage
       (
         buildContext: context,
-        message: 'Externalized Material Banner.',
+        message: 'This is your first context analysis.\n'
+                  'The dashboard will be displayed after data from the context analysis has been saved.',
         messageColor: Colors.white,
-        iconData: Icons.info, 
-        iconColor: Colors.white,
-        actionText: 'Dismiss',
-        actionTextColor: Colors.white,
-        actionTextFontweight: FontWeight.bold
+        duration: Duration(hours: 24),
+        actiontext: 'Acknowledged',
       );
     }
    
@@ -74,23 +74,23 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'Press the button to show the banner only once, if not resetting',
+                'Press the button to show the start message only once, if not resetting',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
-                onPressed: _showBanner, 
-                label: const Text('Show banner'),
+                onPressed: _showStartMessage, 
+                label: const Text('Show start message'),
               ),
                const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () async 
                 {
                   final prefs = await SharedPreferences.getInstance();
-                  await prefs.setBool('bannerDismissed', false);
+                  await prefs.setBool('startSnackbarMessageAcknowledged', false);
                 }, 
-                label: const Text('Reset to be able to show the banner again'),
+                label: const Text('Reset to be able to show the snackbar again'),
               ),
             ],
           ),
