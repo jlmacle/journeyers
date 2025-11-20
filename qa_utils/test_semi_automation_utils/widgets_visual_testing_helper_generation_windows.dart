@@ -1,6 +1,6 @@
-// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_windows.dart -d linux
-// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_windows.dart -d macos
-// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_windows.dart -d windows
+// flutter run -t qa_utils/test_semi_automation_utils/widgets_visual_testing_helper_generation_windows.dart -d linux
+// flutter run -t qa_utils/test_semi_automation_utils/widgets_visual_testing_helper_generation_windows.dart -d macos
+// flutter run -t qa_utils/test_semi_automation_utils/widgets_visual_testing_helper_generation_windows.dart -d windows
 
 // The purpose of this code is to gather the flutter commands needed to test visually the custom widgets
 // and to create a batch file launching the widgets, testing these custom widgets, in Chrome tabs.
