@@ -1,6 +1,6 @@
-// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d linux
-// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d macos
-// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation.dart -d windows
+// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_windows.dart -d linux
+// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_windows.dart -d macos
+// flutter run -t qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_windows.dart -d windows
 
 // The purpose of this code is to gather the flutter commands needed to test visually the custom widgets
 // and to create a batch file launching the widgets, testing these custom widgets, in Chrome tabs.
@@ -24,12 +24,11 @@ void main() async
 {
   List<File> fileList= fileUtils.getFilesInDirectory(directoryPath: directoryPath, fileExtension: ".dart", searchIsRecursive: true);
   int initPort = 8090;
-  String cmdLines = 'REM Batch file launching the widgets, testing the custom widgets, in Chrome tabs.$eol'                 
+  String cmdLines = ':: Batch file launching the widgets, testing the custom widgets, in Chrome tabs.$eol'                 
                   'cd ../..$eol'
-                  '@echo off$eol'
-                  // 'set BROWSER=\'${path.join("")}C:\Program Files\Google\Chrome\Application\chrome.exe"$eol' // to fix an IDE issue
+                  '@echo off$eol'                  
                   "set BROWSER=\"${path.join('C:','Program Files','Google','Chrome','Application','chrome.exe')}\"$eol" // to fix an IDE issue
-                  'echo Programm to wait for the web servers to start before opening browser tabs$eol'
+                  'echo After launching the terminals, programm to wait for the web servers to be completely started before opening the browser tabs$eol'
                   'timeout /t 5 >nul$eol$eol';
   for(var file in fileList)
   {
@@ -48,6 +47,7 @@ void main() async
   }
   // Timeout for the servers to start
   cmdLines += eol;
+  cmdLines += ":: Waiting for the web servers to start$eol";
   cmdLines += "timeout /t 35 >nul$eol";
   // initPort has been incremented
   for (var i = 8091; i<=initPort; i++)
@@ -55,7 +55,7 @@ void main() async
     cmdLines += '%BROWSER% "http://localhost:$i$eol';
   }
 
-  String filePath = path.join("qa_utils","automated_and_semi_automated_tests","widget_visual_testing_helper.bat");
+  String filePath = path.join("qa_utils","automated_and_semi_automated_tests","2_widget_visual_testing_helper.bat");
   await fileUtils.createFileIfNecessaryAndAddContent(filePath:filePath, text:cmdLines);
   printd("The file should have been created at $filePath");
 }
