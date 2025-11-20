@@ -1,5 +1,6 @@
 Testing with Narrator:
 Ctrl + Windows + Enter: start/stop Narrator
+Narrator + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
 Narrator + space: scan on/scan off
 Narrator + F5: landmarks
 Narrator + F6: headings
@@ -18,11 +19,11 @@ https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
 Testing with Orca:
 orca (terminal): start Orca
 Orca Modifier + z: start/stop the structural navigation
-Alt + Shift + K: list of links 
-Alt + Shift + H: list of headings
-Alt + Shift + F: list of form fields
-Alt + Shift + B: list of buttons 
-Alt + Shift + M: list of landmarks 
-Alt + Shift + L: list of lists 
-Alt + Shift + I: list of list items 
+Alt + Shift + k: list of links 
+Alt + Shift + h: list of headings
+Alt + Shift + f: list of form fields
+Alt + Shift + b: list of buttons 
+Alt + Shift + m: list of landmarks 
+Alt + Shift + l: list of lists 
+Alt + Shift + i: list of list items 
 https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
