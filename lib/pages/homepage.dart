@@ -28,6 +28,8 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     final ThemeData appTheme = Theme.of(context);
+
+    FocusNode appBarTitleFocusNode = FocusNode();
     
     return Scaffold
     (
@@ -35,28 +37,34 @@ class _MyHomePageState extends State<MyHomePage>
       appBar: AppBar  
       (
         // forceMaterialTransparency: true, // to avoid the tint effect in the background color when scrolling down
+        
         centerTitle: true,
         toolbarHeight: 90.00,
-        backgroundColor: appTheme.appBarTheme.backgroundColor,      
-        title: Semantics(
-          headingLevel: 1,
-          container: true,
-          child: Column
-          (
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',              
-                style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
-              ),
-              Gap(5),
-              Text(
-                'What story will we leave$eol'
-                'for our loved ones to tell?',
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
+        backgroundColor: appTheme.appBarTheme.backgroundColor,           
+        title: Semantics
+            (
+              header:true,
+              headingLevel: 1,
+              container: true,
+              child: Focus(
+                focusNode: appBarTitleFocusNode,
+                child: Column
+                (
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',              
+                      style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
+                    ),
+                    Gap(5),
+                    Text(
+                      'What story will we leave$eol'
+                      'for our loved ones to tell?',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+              ),            
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0), // the height of the border
@@ -65,7 +73,6 @@ class _MyHomePageState extends State<MyHomePage>
             height: 4.0, 
           ),
         ),
-        
       ),
       
       body: _pages[_currentIndex], 
@@ -122,7 +129,11 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: Text('Context analysis dashboard')),
+          Semantics
+          (        
+
+            child: Center(child: Text('Context analysis dashboard'))
+          ),
           // TextButton(
           //   onPressed: () {
           //     // This dumps the Semantics Tree's structure and properties to the console.
