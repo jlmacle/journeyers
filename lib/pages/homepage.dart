@@ -43,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage>
         backgroundColor: appTheme.appBarTheme.backgroundColor,           
         title: Semantics
             (
+              focused: true,
+              focusable: true,
               header:true,
               headingLevel: 1,
               container: true,
@@ -124,6 +126,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
   @override
   Widget build(BuildContext context) {
     
+    FocusNode contextAnalysisDashboard = FocusNode();
 
     return Scaffold(
       body: Column(
@@ -131,8 +134,14 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
         children: [
           Semantics
           (        
-
-            child: Center(child: Text('Context analysis dashboard'))
+            header: true,
+            headingLevel: 2,
+            focusable: true,
+            child: Focus
+            (
+              focusNode: contextAnalysisDashboard,
+              child: Center(child: Text('Context analysis dashboard'))
+            )
           ),
           // TextButton(
           //   onPressed: () {
@@ -164,9 +173,26 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   @override
   Widget build(BuildContext context) 
   {
+    FocusNode groupProblemSolvingDashboard = FocusNode();
+
     return Scaffold
     (
-      body: Center(child: Text("Group problem-solving dashboard")),
-    );
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Semantics
+          (        
+            header: true,
+            headingLevel: 2,
+            focusable: true,
+            child: Focus
+            (
+              focusNode: groupProblemSolvingDashboard,
+              child: Center(child: Text("Group problem-solving dashboard")),
+            ),
+          ),
+        ],
+      )
+    );;
   }
 }
