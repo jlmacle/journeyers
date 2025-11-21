@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
@@ -137,6 +138,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
             header: true,
             headingLevel: 2,
             focusable: true,
+            role: SemanticsRole.main,
             child: Focus
             (
               focusNode: contextAnalysisDashboard,
@@ -185,6 +187,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
             header: true,
             headingLevel: 2,
             focusable: true,
+            role: SemanticsRole.main,
             child: Focus
             (
               focusNode: groupProblemSolvingDashboard,
