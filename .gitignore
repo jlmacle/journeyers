@@ -121,3 +121,5 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 
+# To define the project's root directory (useful for scripts)
+qa_utils/_qa_utils_config.json
