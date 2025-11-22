@@ -123,3 +123,4 @@ app.*.symbols
 
 # To define the project's root directory (useful for scripts)
 qa_utils/test_semi_automation_utils/_qa_utils_config.json
+.DS_Store
