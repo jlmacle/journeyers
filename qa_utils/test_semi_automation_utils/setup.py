@@ -6,5 +6,5 @@ setup(
     packages=["py_utils"],  # or find_packages() now that layout is standard
 )
 
-# pip install -e .  in the setup.py directory
+# pip install -e .  (in the directory parent to setup.py) 
 # pip show py_utils
