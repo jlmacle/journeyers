@@ -18,6 +18,7 @@ typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
 
 void main() async {  
   // debugPaintSizeEnabled = true;
+  WidgetsFlutterBinding.ensureInitialized();
 
   var userPreferences = await SharedPreferences.getInstance();
   bool startMessageAcknowledged = userPreferences.getBool('startMessageAcknowledged') ?? false;
