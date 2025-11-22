@@ -12,6 +12,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 
 void main() {  
+  WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 

@@ -12,6 +12,7 @@ import 'package:journeyers/common_widgets/display_and_content/custom_material_ba
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
 void main() {  
+  WidgetsFlutterBinding.ensureInitialized();// was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
