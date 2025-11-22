@@ -13,6 +13,7 @@ import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_
 
 // Kept for educational purposes
 void main() {  
+  WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
