@@ -15,9 +15,6 @@ class FileUtils
  
   final logger = Logger("file_utils.dart");
 
-  ///
-  ///
-  ///
   Future<void> appendText({required String filePath, required String text}) async
   {
     String errorMsg = 'Error appending text to file:';
@@ -48,9 +45,7 @@ class FileUtils
     on FileSystemException catch (e) {logger.shout('$errorMsg ${e.message}'); }
     catch(e) {logger.shout('$errorMsg  $e');}
   }
-  ///
-  ///
-  ///
+  
   Future<void> createFileIfNecessaryAndAddContent({required String filePath, required String text}) async
   {
     String errorMsg = 'Error writitng text to file:';
