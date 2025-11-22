@@ -196,6 +196,6 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
           ),
         ],
       )
-    );;
+    );
   }
 }
