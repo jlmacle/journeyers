@@ -13,21 +13,34 @@ eol = os.linesep
 time_for_servers_to_start = 70 # Core i3, 8 GB
 
 # Data used to build to os-specific part
-linux_data = {"chmod":"# chmod u+x 4_widget_visual_testing_helper.sh", "script_type":"Bash", "time_to_read_comment":"sleep 5",
-              "before_flutter_command":"", "after_flutter_command":"", "time_for_servers_to_start":"",
-              "chrome_tab_begin":"", "chrome_tab_end":""}
+linux_output_file_name = "4_widget_visual_testing_helper.sh"
+macos_output_file_name = "6_widget_visual_testing_helper.zsh"
+window_output_file_name = ""
 
-macos_data = {"chmod":"# chmod u+x 6_widget_visual_testing_helper.zsh", "script_type":"Zsh", "time_to_read_comment":"sleep 5",
+linux_data = {"chmod":f"# To make the script executable: chmod u+x {linux_output_file_name}", "script_type":"Bash", "time_to_read_comment":"sleep 5",
+              "before_flutter_command":"xterm -e \"", "after_flutter_command":"-d web-server --web-port", 
+              "after_web_ports":"\" &",
+              "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
+              "chrome_tab_begin":"open \"http://localhost:", "chrome_tab_end":"\"",
+              "output_file_name":f"{linux_output_file_name}"}
+
+macos_data = {"chmod":f"# To make the script executable: chmod u+x {macos_output_file_name}", "script_type":"Zsh", "time_to_read_comment":"sleep 5",
               "before_flutter_command":"osascript -e 'tell application \"Terminal\" to do script \""
-              , "after_flutter_command":"-d web-server --web-port", "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
-              "chrome_tab_begin":"open -a \"Google Chrome\" \"http://localhost:", "chrome_tab_end":"\""
+              , "after_flutter_command":"-d web-server --web-port", 
+              "after_web_ports":"\"'",
+              "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
+              "chrome_tab_begin":"open -a \"Google Chrome\" \"http://localhost:", "chrome_tab_end":"\"",
+              "output_file_name":"{macos_output_file_name}"
               }
 
 windows_data = {"chmod":"", "script_type":"Batch", "time_to_read_comment":"timeout /t 5 >nul",
-              "before_flutter_command":"", "after_flutter_command":"", "time_for_servers_to_start":"",
+              "before_flutter_command":"", "after_flutter_command":"",
+            "after_web_ports":"\"",
+                "time_for_servers_to_start":"",
               "chrome_tab_begin":"", "chrome_tab_end":""}
 
-used_data = macos_data
+# used_data = macos_data
+used_data = linux_data
 
 # Defines the relative path to the widgets directory
 widgets_dir_path = os.path.join("..", "..","test", "common_widgets")
@@ -89,7 +102,7 @@ def main():
         init_port += 1
         # The command snippet is enclosed in single quotes in osascript
         cmd_flutter_snippet = (
-            f"{used_data["before_flutter_command"]}cd {projet_root};{processed_comment} {used_data["after_flutter_command"]} {init_port}\"'{eol}"
+            f"{used_data["before_flutter_command"]}cd {projet_root};{processed_comment} {used_data["after_flutter_command"]} {init_port}{used_data["after_web_ports"]}{eol}"
         )
         cmd_lines += cmd_flutter_snippet
 
@@ -103,15 +116,15 @@ def main():
     for i in range(start_port, init_port + 1):
         cmd_lines += f'{used_data["chrome_tab_begin"]}{i}{used_data["chrome_tab_end"]}{eol}'
 
-    # 5. Write the final Zsh script file
-    file_path_out = os.path.join("..", "..", "qa_utils", "automated_and_semi_automated_tests", "6_widget_visual_testing_helper.zsh")
+    # 5. Write the final script file
+    print("before join")
+    file_path_out = os.path.join("..", "..", "qa_utils", "automated_and_semi_automated_tests"
+                                 , f"{used_data["output_file_name"]}")
     create_file_if_necessary_and_add_content(file_path=file_path_out, text=cmd_lines)
     print()
     print(f"The file should have been created at {file_path_out}")
     print()
-    print("Please run the following command to make the script executable.")
-    print("chmod u+x 6_widget_visual_testing_helper.zsh")
-    print()
+    print(f"{used_data["chmod"]}")
 
 if __name__ == "__main__":
     main()
