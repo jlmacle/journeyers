@@ -27,7 +27,7 @@ macos_output_file_name = "6_widget_visual_testing_helper.zsh"
 linux_data = {"chmod":f"# To make the script executable: chmod u+x {linux_output_file_name}", "script_type":"# Bash",
               "after_comment":"",
               "time_to_read_comment":"sleep 5",
-              "before_flutter_command":f"cd {projet_root};xterm -e \"", "after_flutter_command":"-d web-server --web-port", 
+              "before_flutter_command":f"xterm -e \"cd {projet_root};", "after_flutter_command":"-d web-server --web-port", 
               "after_web_ports":"\" &","comment_character":"#",
               "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
               "chrome_tab_begin":"open \"http://localhost:", "chrome_tab_end":"\"",
@@ -36,7 +36,7 @@ linux_data = {"chmod":f"# To make the script executable: chmod u+x {linux_output
 macos_data = {"chmod":f"# To make the script executable: chmod u+x {macos_output_file_name}", "script_type":"# Zsh", 
               "after_comment":"",
               "time_to_read_comment":"sleep 5",
-              "before_flutter_command":f"cd {projet_root};osascript -e 'tell application \"Terminal\" to do script \"", 
+              "before_flutter_command":f"osascript -e 'tell application \"Terminal\" to do script \"cd {projet_root};", 
               "after_flutter_command":"-d web-server --web-port", 
               "after_web_ports":"\"'","comment_character":"#",
               "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
@@ -55,8 +55,8 @@ windows_data = {"chmod":":: Please note that Chrome must be started to have more
                 "output_file_name":f"{window_output_file_name}"}
 
 # used_data = linux_data
-# used_data = macos_data
-used_data = windows_data
+used_data = macos_data
+# used_data = windows_data
 
 
 
