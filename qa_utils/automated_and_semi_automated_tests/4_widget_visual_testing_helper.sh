@@ -1,0 +1,19 @@
+# To make the script executable: chmod u+x 4_widget_visual_testing_helper.sh
+# Bash file launching the widgets, testing the custom widgets, in Chrome tabs.
+cd ../..
+echo "After launching the terminals, programm to wait for the web servers to be completely started before opening the browser tabs"
+sleep 5
+
+xterm -e "cd /home/jl/Desktop/journeyers;flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switcher_visual_testing.dart -d web-server --web-port 8091" &
+xterm -e "cd /home/jl/Desktop/journeyers;flutter run -t ./test/common_widgets/lists_and_scrolling/custom_expansion_tile_visual_testing.dart -d web-server --web-port 8092" &
+xterm -e "cd /home/jl/Desktop/journeyers;flutter run -t ./test/common_widgets/display_and_content/custom_material_banner_helper_visual_testing.dart -d web-server --web-port 8093" &
+xterm -e "cd /home/jl/Desktop/journeyers;flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d web-server --web-port 8094" &
+xterm -e "cd /home/jl/Desktop/journeyers;flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d web-server --web-port 8095" &
+
+# Waiting for the web servers to start
+sleep 70 
+open "http://localhost:8091"
+open "http://localhost:8092"
+open "http://localhost:8093"
+open "http://localhost:8094"
+open "http://localhost:8095"
