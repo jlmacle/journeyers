@@ -21,7 +21,7 @@ void showCustomSnackbarStartMessage
 {
   final scaffoldMessenger = ScaffoldMessenger.of(buildContext);
 
-
+  /// A helper method to hide the custom snackbar
   void hideStartMessage() 
   {
     scaffoldMessenger.hideCurrentSnackBar();
