@@ -11,7 +11,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_snackbar_start_message_helper.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
-// Kept for educational purposes
+// Kept for illustration purposes
 void main() {  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
@@ -44,7 +44,7 @@ class MyTestingWidget extends StatefulWidget {
 
 class _MyTestingWidgetState extends State<MyTestingWidget> 
 {
-  // String eol = Platform.lineTerminator; // Creates an issue when running the visual test on Chrome
+  // String eol = Platform.lineTerminator; // Creates an issue when running the visual test on Chrome (Windows?)
 
   void _showStartMessage() async {
     if (!(await isStartSnackbarMessageAcknowledged())) 
