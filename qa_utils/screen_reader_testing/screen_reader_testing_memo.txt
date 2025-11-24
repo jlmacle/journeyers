@@ -1,8 +1,3 @@
-Current testing path:
-Narrator + Tab/Shift Tab
-
-----------------------
-
 Testing with Narrator:
 Ctrl + Windows + Enter: to start/stop Narrator
 Tab/Shift Tab: tab navigation
