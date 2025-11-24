@@ -10,7 +10,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/lists_and_scrolling/custom_expansion_tile.dart';
 
 void main() {  
-  WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
+  WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macOS
   runApp(const MyTestingApp());
 }
 

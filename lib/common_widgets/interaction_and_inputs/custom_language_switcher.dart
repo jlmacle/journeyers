@@ -6,14 +6,20 @@ import 'package:path/path.dart' as path;
 
 typedef ItemSelectedCallback = void Function(String selectedValue);
 
-class CustomLanguageSwitcher extends StatefulWidget {
+/// A customizable dropdown menu to select a language
+
+class CustomLanguageSwitcher extends StatefulWidget 
+{
+  /// The function to call when selecting a language value
   final ItemSelectedCallback onLanguageChanged;
+  /// The horizontal localisation of the dropdown menu
   final MainAxisAlignment languageSwitcherMainAxisAlignemnt;
 
   const CustomLanguageSwitcher
   ({
     super.key,
     required this.onLanguageChanged, 
+    // By default, the language menu is on the right side of the screen 
     this.languageSwitcherMainAxisAlignemnt = MainAxisAlignment.end,
   });
 

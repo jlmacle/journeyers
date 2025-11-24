@@ -3,16 +3,29 @@ import 'package:flutter/material.dart';
 import '../../app_themes.dart';
 import '../interaction_and_inputs/custom_icon_button.dart';
 
-class CustomExpansionTile extends StatefulWidget {
+/// A customizable expansion tile
+
+class CustomExpansionTile extends StatefulWidget 
+{
+  /// The text to display when the tile is not expanded
   final String headerText;
+  /// The font for the text to display when the tile is not expanded
   final FontWeight headerFontWeight;
+  /// The icon used to suggest that the tile is expandable
   final Icon actionIconToExpand;
+  /// The horizontal padding for the expanded content
   final double expandedContentPaddingHorizontal;
+  /// The vertical padding for the expanded content
   final double expandedContentPaddingVertical;
+  /// The horizontal location of the expanded content
   final CrossAxisAlignment expandedTextCrossAxisAlignment;
+  /// The text displayed in the expanded content
   final String expandedAdditionalText;
+  /// The height of a divider under the additional text
   final double dividerHeight;
+  /// A list of  [iconData, toolTipLabel, callBackFunction] values
   final List<List<dynamic>> listActionsIconsData;
+  /// The horizontal location of the icon(s)
   final MainAxisAlignment listActionsIconsMainAxisAlignment;
 
   const CustomExpansionTile
@@ -83,11 +96,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
                   return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction ?? (){} );
                 }
               )
-              .toList(),
-              
+              .toList(),              
             )
-
-
           ],
         ),
         )
