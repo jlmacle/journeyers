@@ -60,9 +60,7 @@ class FileUtils
     catch(e) {logger.shout('$errorMsg $e');}
   }
 
-  ///
   /// This method assumes a file extension with the format .file_extension
-  ///
   List<File> getFilesInDirectory({required String directoryPath, required String fileExtension, required bool searchIsRecursive, bool followsLinks = false})
   {
     List<File> fileList = [];

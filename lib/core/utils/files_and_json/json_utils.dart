@@ -5,9 +5,7 @@ import 'package:logging/logging.dart';
 
 final logger = Logger("Json Utils");
 
-///
 /// This method assumes for the json file to be simple hashmap
-///
 Future<void> savePreference({required String jsonFilePath,required String preferenceName,required dynamic preferenceValue}) async
 {
   var jsonFile = File(jsonFilePath);

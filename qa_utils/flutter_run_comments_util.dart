@@ -14,10 +14,8 @@ import 'package:logging/logging.dart';
 
 import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
 
-///
 /// Given a relative path as filePath value, 
 /// the previous pattern of comments is added at the top of the code.
-///
 void main() async
 {
   setupLogging();
