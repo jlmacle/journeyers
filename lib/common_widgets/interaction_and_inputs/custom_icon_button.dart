@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// A customizable icon button
+
 class CustomIconButton extends StatefulWidget {
+  /// The icon to use
   final Icon icon;
+  /// The tool tip label for the icon
   final String toolTipLabel;
+  /// The callback function to call when the icon button is pressed
   final VoidCallback onPressedFunction;   // type alias: typedef VoidCallback = void Function();
 
   const CustomIconButton
