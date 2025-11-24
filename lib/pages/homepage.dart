@@ -106,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 }
-////////////////////////////////////////////////////
+
+//---------------------------------------------------
 
 class ContextAnalysisPage extends StatefulWidget {
   const ContextAnalysisPage({super.key});
@@ -121,8 +122,6 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
   void initState() {
     super.initState();   
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +159,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
 }
 
 
-////////////////////////////////////////////////////
+//---------------------------------------------------
 
 class GroupProblemSolvingPage extends StatefulWidget 
 {

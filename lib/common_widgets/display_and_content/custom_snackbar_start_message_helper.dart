@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
-// Kept for educational purposes
+/// Kept for illustration purposes. The rectangular dismissable area is used instead.
 
-void showCustomSnackbarStartMessage({required BuildContext buildContext, required String message, required Color messageColor,
-required Duration duration, required String actiontext}) 
+/// A helper method to show a custom snackbar
+void showCustomSnackbarStartMessage
+({
+  /// The build context
+  required BuildContext buildContext, 
+  /// The message to display 
+  required String message, 
+  /// The color of the message to display
+  required Color messageColor,
+  /// The duration of the snackbar display
+  required Duration duration, 
+  /// The text to act upon to dismiss the snackbar
+  required String actiontext
+}) 
 {
   final scaffoldMessenger = ScaffoldMessenger.of(buildContext);
+
 
   void hideStartMessage() 
   {

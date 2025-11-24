@@ -56,7 +56,8 @@ class _MyTestingAppState extends State<MyTestingApp> {
       );
   }
 }
-//////////////////////////////////////////////////////
+//---------------------------------------------------
+
 class HomePage extends StatefulWidget {
   final void Function(Locale) setLocale;
 
