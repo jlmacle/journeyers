@@ -1,4 +1,4 @@
-Current testing paths:
+Current testing path:
 Narrator + Tab/Shift Tab
 
 ----------------------
