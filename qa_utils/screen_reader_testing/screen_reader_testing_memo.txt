@@ -1,5 +1,11 @@
+Current testing path:
+Narrator + Tab/Shift Tab
+
+----------------------
+
 Testing with Narrator:
-Ctrl + Windows + Enter: start/stop Narrator
+Ctrl + Windows + Enter: to start/stop Narrator
+Tab/Shift Tab: tab navigation
 Narrator + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
 Narrator + space: scan on/scan off
 Narrator + F5: landmarks
@@ -10,14 +16,14 @@ Narrator + Ctrl + F12: Toggle developer mode
 https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a
 
 Testing with NVDA:
-Ctrl + Alt + n: start NVDA
+Ctrl + Alt + n: to start NVDA
 NVDA + F7: Links, headings, forms fields, buttons, landmarks 
 Tab: navigation through the page
 NVDA + q: exit NVDA
 https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
 
 Testing with Orca:
-orca (terminal): start Orca
+orca (terminal): to start Orca
 Orca Modifier + z: start/stop the structural navigation
 Alt + Shift + k: list of links 
 Alt + Shift + h: list of headings
@@ -27,3 +33,13 @@ Alt + Shift + m: list of landmarks
 Alt + Shift + l: list of lists 
 Alt + Shift + i: list of list items 
 https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
+
+Testing with VoiceOver:
+⌘+F5: to start/stop VoiceOver
+Assuming the default key combination to have been changed to “Caps Lock“<
+(VoiceOver utility, Commands):
+Caps Lock+⌘+h/Shift+Caps Lock+⌘+h: to go to the next/previous heading
+Caps Lock+⌘+l/Shift+Caps Lock+⌘+l: to go to the next/previous link
+Caps Lock+K: keyboard help
+https://www.apple.com/uk/voiceover/info/guide/_1121.html
+https://support.apple.com/guide/voiceover/general-commands-cpvokys01/mac
