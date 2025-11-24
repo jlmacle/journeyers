@@ -125,8 +125,6 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
 
   @override
   Widget build(BuildContext context) {
-    
-    FocusNode contextAnalysisDashboard = FocusNode();
 
     return Scaffold(
       body: Column(
@@ -135,13 +133,9 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
           Semantics
           (        
             header: true,
-            headingLevel: 2,
-            focusable: true,
+            headingLevel: 2,            
             role: SemanticsRole.main,
-            child: Focus
-            (
-              focusNode: contextAnalysisDashboard,
-              child: Center(child: Text('Context analysis dashboard'))
+            child:Center(child: Text('Context analysis dashboard')
             )
           ),
           // TextButton(
@@ -174,8 +168,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode groupProblemSolvingDashboard = FocusNode();
-
+    
     return Scaffold
     (
       body: Column(
@@ -184,13 +177,9 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
           Semantics
           (        
             header: true,
-            headingLevel: 2,
-            focusable: true,
+            headingLevel: 2,            
             role: SemanticsRole.main,
-            child: Focus
-            (
-              focusNode: groupProblemSolvingDashboard,
-              child: Center(child: Text("Group problem-solving dashboard")),
+            child: Center(child: Text("Group problem-solving dashboard"),
             ),
           ),
         ],
