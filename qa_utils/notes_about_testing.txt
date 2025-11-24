@@ -4,5 +4,5 @@ flutter test -r expanded
 Hot restart is valuable for the "flutter run -t" commands.
 
 The widget_visual_testing_helper files need to be run from their parent folder.
-Please note that Chrome must be started to have more than one tab launched.
+Please note that Chrome must be started to have more than one tab launched, when testing on Windows.
 Your anti-virus might not appreciate the multiple tabs opening.
