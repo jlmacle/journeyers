@@ -6,7 +6,8 @@ Narrator + Tab/Shift Tab
 Testing with Narrator:
 Ctrl + Windows + Enter: to start/stop Narrator
 Ctrl: to stop the reading
-Narrator + F2: Commands for current item 
+Narrator + F1: commands list
+Narrator + F2: commands for current item 
 Tab/Shift Tab: tab navigation
 Narrator + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
 Narrator + space: scan on/scan off
