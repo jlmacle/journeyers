@@ -1,6 +1,6 @@
-Current testing path:
+Current testing paths:
 Windows app: Narrator + Tab/Shift Tab
-
+Web app: Enter key after "Enable accessibility", Narrator + F6
 ----------------------
 
 Testing with Narrator:
@@ -25,6 +25,7 @@ NVDA + F7: Links, headings, forms fields, buttons, landmarks
 Tab: navigation through the page
 NVDA + q: exit NVDA
 https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
+
 
 Testing with Orca:
 orca (terminal): to start Orca
