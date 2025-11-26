@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage>
                 child: Column
                 (
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: <Widget>[                    
                     Text(
                       AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',              
                       style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
@@ -126,16 +126,22 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
   @override
   Widget build(BuildContext context) {
 
+    FocusNode contextAnalysisDashboard = FocusNode();
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+         children: [
           Semantics
           (        
             header: true,
-            headingLevel: 2,            
+            headingLevel: 2,
+            focusable: true,
             role: SemanticsRole.main,
-            child:Center(child: Text('Context analysis dashboard')
+            child: Focus
+            (
+              focusNode: contextAnalysisDashboard,
+              child: Center(child: Text('Context analysis dashboard'))
             )
           ),
           // TextButton(
@@ -145,6 +151,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
           //   },
           //     child: const Text('Dump Semantics'),
           //   )
+
         ],
       ),
       
@@ -169,6 +176,8 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   Widget build(BuildContext context) 
   {
     
+    FocusNode groupProblemSolvingDashboard = FocusNode();
+
     return Scaffold
     (
       body: Column(
@@ -177,9 +186,13 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
           Semantics
           (        
             header: true,
-            headingLevel: 2,            
+            headingLevel: 2,
+            focusable: true,
             role: SemanticsRole.main,
-            child: Center(child: Text("Group problem-solving dashboard"),
+            child: Focus
+            (
+              focusNode: groupProblemSolvingDashboard,
+              child: Center(child: Text("Group problem-solving dashboard")),
             ),
           ),
         ],
