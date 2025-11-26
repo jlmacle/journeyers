@@ -41,6 +41,7 @@ https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
 
 Testing with VoiceOver:
 ⌘+F5: to start/stop VoiceOver
+Ctrl: to stop the reading
 Assuming the default key combination to have been changed to “Caps Lock“
 (VoiceOver utility, Commands):
 Caps Lock+⌘+h/Shift+Caps Lock+⌘+h: to go to the next/previous heading
