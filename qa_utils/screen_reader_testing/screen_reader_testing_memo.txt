@@ -47,6 +47,12 @@ Ctrl: to stop the reading
 Escape: to close a menu or rotor, to stop an action, or to exit a mode
 Assuming the default key combination to have been changed to “Caps Lock“
 (VoiceOver utility, Commands):
-Caps Lock + K: keyboard help
+Caps Lock + k: keyboard help
+Caps Lock + u + left/right arrow: to navigate items by category
+Caps Lock + ?: user guide 
+Caps Lock + Shift + Down Arrow: to interact with an area or group 
+Caps Lock + Shift + Up Arrow: To exit an area or group
+Caps Lock + Shift + Escape: to jump to the app’s top level
+Caps Lock + Space bar: to activate an item (button clicked, for example)
 https://www.apple.com/uk/voiceover/info/guide/_1121.html
 https://support.apple.com/guide/voiceover/general-commands-cpvokys01/mac
