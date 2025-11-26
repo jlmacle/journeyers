@@ -1,5 +1,5 @@
 Current testing paths:
-Windows app: Narrator + Tab/Shift Tab
+Windows app: Narrator: Tab/Shift Tab
 Web app: Enter key after "Enable accessibility", Narrator + F6
 ----------------------
 
@@ -41,7 +41,7 @@ https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
 
 Testing with VoiceOver:
 ⌘+F5: to start/stop VoiceOver
-Assuming the default key combination to have been changed to “Caps Lock“<
+Assuming the default key combination to have been changed to “Caps Lock“
 (VoiceOver utility, Commands):
 Caps Lock+⌘+h/Shift+Caps Lock+⌘+h: to go to the next/previous heading
 Caps Lock+⌘+l/Shift+Caps Lock+⌘+l: to go to the next/previous link
