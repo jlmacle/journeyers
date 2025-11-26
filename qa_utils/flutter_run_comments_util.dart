@@ -1,3 +1,4 @@
+// Uses Platform, therefore cannot function on a web app
 // Doesn't function on macos
 
 // The purpose of this code is to add programmatically the pattern of the 3 following lines to dart files that are not widgets, not covered by "flutter test",

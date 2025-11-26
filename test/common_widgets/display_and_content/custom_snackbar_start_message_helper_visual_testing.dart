@@ -44,8 +44,7 @@ class MyTestingWidget extends StatefulWidget {
 
 class _MyTestingWidgetState extends State<MyTestingWidget> 
 {
-  // String eol = Platform.lineTerminator; // Creates an issue when running the visual test on Chrome (Windows?)
-
+  // String eol = Platform.lineTerminator; // Throws an error if used with the web app
   void _showStartMessage() async {
     if (!(await isStartSnackbarMessageAcknowledged())) 
     { 
