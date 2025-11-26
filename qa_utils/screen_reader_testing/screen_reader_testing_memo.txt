@@ -1,6 +1,7 @@
 Current testing paths:
 Windows app: Narrator: Tab/Shift Tab
 Windows app: Nvda: Tab/Shift Tab
+macOS app: VoiceOver: Caps Lock + q, arrow
 Web app: Enter key after "Enable accessibility", Narrator + F6
 ----------------------
 
@@ -38,14 +39,25 @@ Alt + Shift + b: list of buttons
 Alt + Shift + m: list of landmarks 
 Alt + Shift + l: list of lists 
 Alt + Shift + i: list of list items 
-https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
+https://help.gnome.org//gnome-help/a11y-screen-reader.html
+https://docs.oracle.com/cd/E53394_01/html/E54806/gliad.html
+
 
 Testing with VoiceOver:
 ⌘+F5: to start/stop VoiceOver
+Ctrl: to stop the reading
+Escape: to close a menu or rotor, to stop an action, or to exit a mode
 Assuming the default key combination to have been changed to “Caps Lock“
 (VoiceOver utility, Commands):
-Caps Lock+⌘+h/Shift+Caps Lock+⌘+h: to go to the next/previous heading
-Caps Lock+⌘+l/Shift+Caps Lock+⌘+l: to go to the next/previous link
-Caps Lock+K: keyboard help
+Caps Lock + k: keyboard help
+Caps Lock + ?: user guide 
+Caps Lock + Shift + q: to turn arrow-key Quick Nav on or off
+Caps Lock + q: to turn single-key Quick Nav on or off
+Caps Lock + u + left/right arrow: to navigate items by category
+Caps Lock + Shift + Down Arrow: to interact with an area or group 
+Caps Lock + Shift + Up Arrow: to exit an area or group
+Caps Lock + Shift + Escape: to jump to the app’s top level
+Caps Lock + Space bar: to activate an item (button clicked, for example)
+Caps Lock + Shift + n: to hear how to use the item 
 https://www.apple.com/uk/voiceover/info/guide/_1121.html
 https://support.apple.com/guide/voiceover/general-commands-cpvokys01/mac
