@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
-
 import 'package:gap/gap.dart';
 
 import '../l10n/app_localizations.dart'; 
@@ -17,7 +17,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> 
 {
-  String eol = Platform.lineTerminator;
+  String? eol;  
 
   int _currentIndex = 0;
 
@@ -31,6 +31,15 @@ class _MyHomePageState extends State<MyHomePage>
     final ThemeData appTheme = Theme.of(context);
 
     FocusNode appBarTitleFocusNode = FocusNode();
+
+     if (kIsWeb) 
+    {
+    eol = '\n';
+    }
+    else
+    {
+      eol = Platform.lineTerminator; // The use of Platform is not portable on the web
+    } 
     
     return Scaffold
     (
