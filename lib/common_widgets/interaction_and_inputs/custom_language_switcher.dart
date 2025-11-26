@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:journeyers/core/utils/files_and_json/file_utils.dart';
-import 'package:path/path.dart' as path;
+import 'package:journeyers/l10n/app_localizations.dart';
 
 typedef ItemSelectedCallback = void Function(String selectedValue);
 
@@ -35,20 +32,13 @@ class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> {
   @override
   void initState() 
   {
-    // Building programmatically _dropdownItems = ['en', 'fr',...];
-    FileUtils fileUtils = FileUtils();
-    String languagesDirPath = path.join("lib", "l10n"); 
-    List<File> fileList= fileUtils.getFilesInDirectory(directoryPath: languagesDirPath, fileExtension: ".arb", searchIsRecursive: true);
-    for(var file in fileList)
+
+    List<Locale> localesList = AppLocalizations.supportedLocales.toList();
+    for (var locale in  localesList)
     {
-      String fileName = path.basename(file.path);
-      String languageCode = fileName.replaceAll("app_", "");
-      languageCode = languageCode.replaceAll(".arb", "");
-      _dropdownItems.add(languageCode);
+       _dropdownItems.add(locale.toString());
     }
-
     _selectedValue = _dropdownItems.first;  
-
     super.initState();
     }
 
