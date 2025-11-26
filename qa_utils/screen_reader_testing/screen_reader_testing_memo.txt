@@ -1,5 +1,5 @@
 Current testing path:
-Narrator + Tab/Shift Tab
+Windows app: Narrator + Tab/Shift Tab
 
 ----------------------
 
