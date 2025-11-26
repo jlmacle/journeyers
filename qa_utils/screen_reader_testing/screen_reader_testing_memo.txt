@@ -40,9 +40,13 @@ Alt + Shift + l: list of lists
 Alt + Shift + i: list of list items 
 https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
 
+
 Testing with VoiceOver:
 ⌘+F5: to start/stop VoiceOver
 Ctrl: to stop the reading
-Caps Lock+K: keyboard help
+Escape: to close a menu or rotor, to stop an action, or to exit a mode
+Assuming the default key combination to have been changed to “Caps Lock“
+(VoiceOver utility, Commands):
+Caps Lock + K: keyboard help
 https://www.apple.com/uk/voiceover/info/guide/_1121.html
 https://support.apple.com/guide/voiceover/general-commands-cpvokys01/mac
