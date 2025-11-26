@@ -39,7 +39,8 @@ Alt + Shift + b: list of buttons
 Alt + Shift + m: list of landmarks 
 Alt + Shift + l: list of lists 
 Alt + Shift + i: list of list items 
-https://help.gnome.org/users/orca/stable/commands_structural_navigation.html.en
+https://help.gnome.org//gnome-help/a11y-screen-reader.html
+https://docs.oracle.com/cd/E53394_01/html/E54806/gliad.html
 
 
 Testing with VoiceOver:
