@@ -1,5 +1,6 @@
 Current testing paths:
 Windows app: Narrator: Tab/Shift Tab
+Windows app: Nvda: Tab/Shift Tab
 Web app: Enter key after "Enable accessibility", Narrator + F6
 ----------------------
 
