@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_dismissable_rectangular_area.dart'; 
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
