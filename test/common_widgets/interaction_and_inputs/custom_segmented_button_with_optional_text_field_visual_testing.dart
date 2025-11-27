@@ -65,11 +65,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>{
+  Set<String> _selectedValues = {"No value(s) selected yet"};
+
+  _updateSelectedValues(Set<String> newValues){
+    setState(() {
+      _selectedValues = newValues;     
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final appLocalization = AppLocalizations.of(context);
-   
+    final appLocalization = AppLocalizations.of(context);  
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -82,8 +89,10 @@ class _HomePageState extends State<HomePage>{
           child: Column(
             children: [         
               Text('Only clicking on "I don\'t know" should reveal a text field.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),   
+              Gap(16),                    
+              Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}'),
               Gap(16),
-              CustomSegmentedButtonWithOptionalTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20,),
+              CustomSegmentedButtonWithOptionalTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, onSelectionChanged: _updateSelectedValues,),
             ]
           ),
         ),
