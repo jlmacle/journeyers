@@ -136,13 +136,18 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
   @override
   Widget build(BuildContext context) {
 
+    late bool _visibilityStatus = false;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
          children: [
           ContextAnalysisNewSessionPage(),
-          Divider(),
-          ContextAnalysisDashboardPage()
+          if (_visibilityStatus)
+          ...[
+            Divider(),
+            ContextAnalysisDashboardPage()
+          ]
           // TextButton(
           //   onPressed: () {
           //     // This dumps the Semantics Tree's structure and properties to the console.
