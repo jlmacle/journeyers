@@ -49,7 +49,7 @@ class CustomDismissableRectangularArea extends StatefulWidget {
     this.actionTextFontWeight = FontWeight.normal,
 
     this.areaBackgroundColor = Colors.white,
-    this.sizedBoxHeight = 120,
+    this.sizedBoxHeight = 200,
 
     required this.setStateCallBack
   });
@@ -68,65 +68,69 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
   Widget build(BuildContext context) 
   {
     return Semantics
-          (        
-            header: true,
-            headingLevel: 2,
-            focusable: true,            
-            child: Focus
-            (
-              focusNode: dismissableRectangularAreaFocusNode,
-              child: 
-    GestureDetector
-    (
-      onTap:() {bool messageVisibility = false; widget.setStateCallBack(messageVisibility);},
-      child: SizedBox(
-        height: widget.sizedBoxHeight,
-        child: Container(
-          color: widget.areaBackgroundColor,
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end, // to position at the bottom of the box
-            children: [
-              Center(
-                child: Text
-                (
-                  widget.message1,
-                  style: TextStyle
-                  (
-                    color: widget.messagesColor,
-                    fontWeight: widget.messagesFontWeight,                
-                  ),
-                ),
+    (        
+      header: true,
+      headingLevel: 2,
+      focusable: true,            
+      child: Focus
+      (
+        focusNode: dismissableRectangularAreaFocusNode,
+        child: GestureDetector
+        (
+          onTap:() {bool messageVisibility = false; widget.setStateCallBack(messageVisibility);},
+          child: Container(
+            color: widget.areaBackgroundColor,
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: ConstrainedBox(
+              constraints: BoxConstraints
+              (
+                minHeight: widget.sizedBoxHeight,
+                maxHeight: double.infinity,
+                minWidth: double.infinity,
               ),
-              if (widget.message2 != "")       
-                Center(
-                  child: Text
+              child: Column
+              (
+                mainAxisAlignment: MainAxisAlignment.center, 
+                children: [
+                  Text
                   (
-                    widget.message2,
+                    widget.message1,
+                    textAlign: TextAlign.center,
                     style: TextStyle
                     (
                       color: widget.messagesColor,
-                      fontWeight: widget.messagesFontWeight,                  
+                      fontWeight: widget.messagesFontWeight,  
+                                    
                     ),
                   ),
-                ),
-                Gap(20),
-                Center(                
-                    child: Text
+                  if (widget.message2 != "")       
+                    Text
+                    (
+                      widget.message2,
+                      textAlign: TextAlign.center,
+                      style: TextStyle
+                      (
+                        color: widget.messagesColor,
+                        fontWeight: widget.messagesFontWeight,                  
+                      ),
+                    ),
+                    Gap(20),
+                    Text
                     (
                       widget.actionText,
+                      textAlign: TextAlign.center,
                       style: TextStyle
                       (
                         color: widget.actionTextColor,
                         fontWeight: widget.actionTextFontWeight,                  
                       ),
-                    ),                
-                ),
-            ],
+                    ),
+                ],
+              ),
+            ),
           ),
         ),
-      ),
-    ))
+      )
     );
   }
 }
