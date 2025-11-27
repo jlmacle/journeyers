@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
+typedef NewVisibilityStatusCallback = void Function();
 
 /// A customizable, dismissable, rectangular area widget, with a message to display, and a text related to the act of clicking on the widget.
 /// The rectangular area takes the width of the screen.
@@ -77,7 +77,7 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
         focusNode: dismissableRectangularAreaFocusNode,
         child: GestureDetector
         (
-          onTap:() {bool messageVisibility = false; widget.setStateCallBack(messageVisibility);},
+          onTap:() {widget.setStateCallBack();},
           child: Container(
             color: widget.areaBackgroundColor,
             padding: EdgeInsets.symmetric(vertical: 20),

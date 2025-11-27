@@ -141,8 +141,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
     super.initState();   
   }
 
-  // TODO: to modify the signature
-    void _hideMessageArea(bool newVisibilityStatus)
+    void _hideMessageArea()
     {
       setState(() {
         _startMessageVisibilityStatus = false;
