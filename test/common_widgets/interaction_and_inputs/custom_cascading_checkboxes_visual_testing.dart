@@ -1,8 +1,9 @@
 //Line for automated processing
-// flutter run -t test/common_widgets/interaction_and_inputs/custom_cascading_checkbox_visual_testing.dart -d linux
-// flutter run -t test/common_widgets/interaction_and_inputs/custom_cascading_checkbox_visual_testing.dart -d macos
-// flutter run -t test/common_widgets/interaction_and_inputs/custom_cascading_checkbox_visual_testing.dart -d windows
+// flutter run -t test/common_widgets/interaction_and_inputs/custom_cascading_checkboxes_visual_testing.dart -d linux
+// flutter run -t test/common_widgets/interaction_and_inputs/custom_cascading_checkboxes_visual_testing.dart -d macos
+// flutter run -t test/common_widgets/interaction_and_inputs/custom_cascading_checkboxes_visual_testing.dart -d windows
 //Line for automated processing
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
