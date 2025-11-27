@@ -165,7 +165,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
                 message1: 'This is your first context analysis.', 
                 message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
                 messagesColor: paleCyan, // from app_themes
-                actionText:'Please click the colored area to acknowledge.',
+                actionText:'Please click the message area to acknowledge.',
                 actionTextColor: paleCyan, // from app_themes,
                 areaBackgroundColor: navyBlue, // from app_themes
                 setStateCallBack: _hideMessageArea),
@@ -205,7 +205,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   Widget build(BuildContext context) 
   {
     
-    FocusNode groupProblemSolvingDashboard = FocusNode();
+    FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
 
     return Scaffold
     (
@@ -219,7 +219,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
             focusable: true,            
             child: Focus
             (
-              focusNode: groupProblemSolvingDashboard,
+              focusNode: groupProblemSolvingDashboardFocusNode,
               child: Center(child: Text("Group problem-solving dashboard")),
             ),
           ),
