@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 
-import '../l10n/app_localizations.dart'; 
+import 'package:journeyers/l10n/app_localizations.dart'; 
+import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -134,23 +136,13 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
   @override
   Widget build(BuildContext context) {
 
-    FocusNode contextAnalysisDashboard = FocusNode();
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
          children: [
-          Semantics
-          (        
-            header: true,
-            headingLevel: 2,
-            focusable: true,
-            child: Focus
-            (
-              focusNode: contextAnalysisDashboard,
-              child: Center(child: Text('Context analysis dashboard'))
-            )
-          ),
+          ContextAnalysisNewSessionPage(),
+          Divider(),
+          ContextAnalysisDashboardPage()
           // TextButton(
           //   onPressed: () {
           //     // This dumps the Semantics Tree's structure and properties to the console.
@@ -158,11 +150,9 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
           //   },
           //     child: const Text('Dump Semantics'),
           //   )
-
         ],
       ),
-      
-      );
+    );
   }
 }
 
