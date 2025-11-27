@@ -61,10 +61,22 @@ class CustomDismissableRectangularArea extends StatefulWidget {
 }
 
 class _CustomDismissableRectangularAreaState extends State<CustomDismissableRectangularArea> {
+
+  FocusNode dismissableRectangularAreaFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) 
   {
-    return GestureDetector
+    return Semantics
+          (        
+            header: true,
+            headingLevel: 2,
+            focusable: true,            
+            child: Focus
+            (
+              focusNode: dismissableRectangularAreaFocusNode,
+              child: 
+    GestureDetector
     (
       onTap:() {bool messageVisibility = false; widget.setStateCallBack(messageVisibility);},
       child: SizedBox(
@@ -114,6 +126,7 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
           ),
         ),
       ),
+    ))
     );
   }
 }
