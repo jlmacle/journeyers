@@ -35,8 +35,10 @@ class _CascadingCheckboxesState extends State<CascadingCheckboxes>
   bool _isThirdCheckboxChecked = false;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) 
+  {
+    return Column
+    (
       children: [        
         if (!_isFirstCheckboxChecked & !_isSecondCheckboxChecked & !_isThirdCheckboxChecked)
           SizedBox
