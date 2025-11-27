@@ -135,6 +135,7 @@ class ContextAnalysisPage extends StatefulWidget {
 class _ContextAnalysisPageState extends State<ContextAnalysisPage>  { 
 
   late bool _startMessageVisibilityStatus = true;
+  bool isContextAnalysisSessionDataSaved = false;
 
   @override
   void initState() {
@@ -167,7 +168,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
                 areaBackgroundColor: navyBlue, // from app_themes
                 setStateCallBack: _hideMessageArea),
                 
-          if (!_startMessageVisibilityStatus)
+          if (isContextAnalysisSessionDataSaved)
           ...[
             Divider(),
             ContextAnalysisDashboardPage()
