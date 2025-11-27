@@ -14,7 +14,7 @@ import 'package:journeyers/common_widgets/display_and_content/custom_dismissable
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
 
-typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
+typedef NewVisibilityStatusCallback = void Function();
 
 void main() async {  
   // debugPaintSizeEnabled = true;
@@ -73,10 +73,10 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
     _visibilityStatus = !(widget.startMessageAcknowledged);   
   }
  
-  void _hideMessageArea(bool newVisibilityStatus)
+  void _hideMessageArea()
   {
     setState(() {
-      _visibilityStatus = newVisibilityStatus;
+      _visibilityStatus = false;
     });
     saveStartMessageAcknowledgement();
   }
@@ -101,7 +101,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                 message1: 'This is your first context analysis.', 
                 message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
                 messagesColor: paleCyan, // from app_themes
-                actionText:'Please click the colored area to acknowledge.',
+                actionText:'Please click the message area to acknowledge.',
                 actionTextColor: paleCyan, // from app_themes,
                 areaBackgroundColor: navyBlue, // from app_themes
                 setStateCallBack: _hideMessageArea), 
