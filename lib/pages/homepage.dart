@@ -5,9 +5,17 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_dismissable_rectangular_area.dart'; 
+import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart'; 
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
+
+typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
+
 
 
 class MyHomePage extends StatefulWidget {
@@ -128,22 +136,41 @@ class ContextAnalysisPage extends StatefulWidget {
 
 class _ContextAnalysisPageState extends State<ContextAnalysisPage>  { 
 
+  late bool _startMessageVisibilityStatus = true;
+
   @override
   void initState() {
     super.initState();   
   }
 
-  @override
-  Widget build(BuildContext context) {
+  // TODO: to modify the signature
+    void _hideMessageArea(bool newVisibilityStatus)
+    {
+      setState(() {
+        _startMessageVisibilityStatus = false;
+      });
+      saveStartMessageAcknowledgement();
+    }
 
-    late bool _visibilityStatus = false;
+  @override
+  Widget build(BuildContext context) { 
 
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
          children: [
           ContextAnalysisNewSessionPage(),
-          if (_visibilityStatus)
+          if (_startMessageVisibilityStatus)
+            CustomDismissableRectangularArea(buildContext:context, 
+                message1: 'This is your first context analysis.', 
+                message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+                messagesColor: paleCyan, // from app_themes
+                actionText:'Please click the colored area to acknowledge.',
+                actionTextColor: paleCyan, // from app_themes,
+                areaBackgroundColor: navyBlue, // from app_themes
+                setStateCallBack: _hideMessageArea),
+                
+          if (!_startMessageVisibilityStatus)
           ...[
             Divider(),
             ContextAnalysisDashboardPage()
