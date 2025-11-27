@@ -65,13 +65,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>{
-  Set<String> _selectedValues = {"No value(s) selected yet"};
-
-  _updateSelectedValues(Set<String> newValues){
-    setState(() {
-      _selectedValues = newValues;     
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
