@@ -6,28 +6,34 @@ import 'app_themes.dart';
 import './pages/homepage.dart';
 import 'l10n/app_localizations.dart';
 
-void main() {
+void main() 
+{
   // To help debug the layout
   // debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget 
+{
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) 
+  {
+    return MaterialApp
+    (
       // To visualize the semantics tree
       // showSemanticsDebugger: true,
       theme: appTheme, 
-      localizationsDelegates: [
+      localizationsDelegates: 
+      [
         AppLocalizations.delegate,
 
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: 
+      [
         Locale('en'), // English
         Locale('fr'), // Spanish
       ],     

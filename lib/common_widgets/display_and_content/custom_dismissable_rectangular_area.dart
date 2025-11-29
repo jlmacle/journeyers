@@ -60,7 +60,8 @@ class CustomDismissableRectangularArea extends StatefulWidget {
   State<CustomDismissableRectangularArea> createState() => _CustomDismissableRectangularAreaState();
 }
 
-class _CustomDismissableRectangularAreaState extends State<CustomDismissableRectangularArea> {
+class _CustomDismissableRectangularAreaState extends State<CustomDismissableRectangularArea> 
+{
 
   FocusNode dismissableRectangularAreaFocusNode = FocusNode();
 

@@ -7,26 +7,30 @@ class ContextAnalysisDashboardPage extends StatefulWidget {
   State<ContextAnalysisDashboardPage> createState() => _ContextAnalysisDashboardPageState();
 }
 
-class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardPage> {
+class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardPage> 
+{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
 
     FocusNode contextAnalysisDashboardFocusNode = FocusNode();
 
-    return Expanded(
-      child: Center(      
-          child: Semantics
-          (        
-            header: true,
-            headingLevel: 2,
-            focusable: true,
-            child: Focus
-            (
-              focusNode: contextAnalysisDashboardFocusNode,
-              child: Center(child: Text('Context analysis dashboard'))
-            )
-          ),
+    return Expanded
+    (
+      child: Center
+      (      
+        child: Semantics
+        (        
+          header: true,
+          headingLevel: 2,
+          focusable: true,
+          child: Focus
+          (
+            focusNode: contextAnalysisDashboardFocusNode,
+            child: Center(child: Text('Context analysis dashboard'))
+          )
         ),
+      ),
     );
   }
 }

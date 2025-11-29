@@ -9,23 +9,28 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/lists_and_scrolling/custom_expansion_tile.dart';
 
-void main() {  
+void main() 
+{  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macOS
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget {
+class MyTestingApp extends StatelessWidget 
+{
   const MyTestingApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) 
+  {
+    return MaterialApp
+    (
       theme: appTheme, 
       home: Scaffold
       (
-          appBar: AppBar(
-          title: const Text('MyTestingApp'),
-        ),
+          appBar: AppBar
+          (
+            title: const Text('MyTestingApp'),
+          ),
         body: Center(child: CustomExpansionTile()),
       ),      
     );

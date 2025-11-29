@@ -16,7 +16,8 @@ import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_
 
 typedef NewVisibilityStatusCallback = void Function();
 
-void main() async {  
+void main() async 
+{  
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos 
 
@@ -26,7 +27,8 @@ void main() async {
   runApp(MyTestingApp(startMessageAcknowledged: startMessageAcknowledged));
 }
 
-class MyTestingApp extends StatelessWidget {
+class MyTestingApp extends StatelessWidget 
+{
   final bool startMessageAcknowledged; 
 
   const MyTestingApp
@@ -36,7 +38,8 @@ class MyTestingApp extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return MaterialApp
     (
       theme: appTheme,

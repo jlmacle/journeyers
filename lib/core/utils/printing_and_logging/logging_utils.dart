@@ -1,7 +1,8 @@
 import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 
-void setupLogging() {
+void setupLogging() 
+{
   Logger.root.level = Level.ALL; // Set the root log level
   Logger.root.onRecord.listen((record) {
   var time = record.time;

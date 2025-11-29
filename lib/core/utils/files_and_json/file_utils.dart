@@ -18,7 +18,8 @@ class FileUtils
   Future<void> appendText({required String filePath, required String text}) async
   {
     String errorMsg = 'Error appending text to file:';
-    try{
+    try
+    {
       File file = File(filePath);
       var sink = file.openWrite(mode: FileMode.append);
       sink.write(text);
@@ -33,7 +34,8 @@ class FileUtils
   Future<void> appendTextInFront({required String filePath, required String text}) async
   {
     String errorMsg = 'Error appending text in front of file:';
-    try{
+    try
+    {
       File file = File(filePath);
       String fileContent = file.readAsStringSync();
       String newContent = text + fileContent;
@@ -49,7 +51,8 @@ class FileUtils
   Future<void> createFileIfNecessaryAndAddContent({required String filePath, required String text}) async
   {
     String errorMsg = 'Error writitng text to file:';
-    try{
+    try
+    {
       File file = File(filePath);
       var sink = file.openWrite(mode: FileMode.write);
       sink.write(text);
@@ -74,7 +77,6 @@ class FileUtils
         if (fileName.endsWith(fileExtension)) fileList.add(entity);
       }
     }
-
     return fileList;
   }
 

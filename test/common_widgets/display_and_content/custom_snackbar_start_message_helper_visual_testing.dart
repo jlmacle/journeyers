@@ -12,16 +12,19 @@ import 'package:journeyers/common_widgets/display_and_content/custom_snackbar_st
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
 // Kept for illustration purposes
-void main() {  
+void main() 
+{  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget {
+class MyTestingApp extends StatelessWidget 
+{
   const MyTestingApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return MaterialApp
     (
       theme: appTheme,
@@ -34,7 +37,8 @@ class MyTestingApp extends StatelessWidget {
 }
 
 
-class MyTestingWidget extends StatefulWidget {
+class MyTestingWidget extends StatefulWidget 
+{
   const MyTestingWidget({super.key});  
 
   @override
@@ -45,7 +49,8 @@ class MyTestingWidget extends StatefulWidget {
 class _MyTestingWidgetState extends State<MyTestingWidget> 
 {
   // String eol = Platform.lineTerminator; // Throws an error if used with the web app
-  void _showStartMessage() async {
+  void _showStartMessage() async 
+  {
     if (!(await isStartSnackbarMessageAcknowledged())) 
     { 
       showCustomSnackbarStartMessage
@@ -62,29 +67,39 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
   }
 
   @override
-  Widget build(BuildContext context) {    
-    return Theme(
+  Widget build(BuildContext context) 
+  {    
+    return Theme
+    (
       data: appTheme,
-      child: Scaffold(      
-        appBar: AppBar(
+      child: Scaffold
+      (      
+        appBar: AppBar
+        (
           title: const Text('MyTestingApp'),
         ),
-        body: Center(
-          child: Column(
+        body: Center
+        (
+          child: Column
+          (
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
+            children: <Widget>
+            [
+              const Text
+              (
                 'Press the button to show the start message only once, if not resetting',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
-              ElevatedButton.icon(
+              ElevatedButton.icon
+              (
                 onPressed: _showStartMessage, 
                 label: const Text('Show start message'),
               ),
                const SizedBox(height: 20),
-              ElevatedButton.icon(
+              ElevatedButton.icon
+              (
                 onPressed: () async 
                 {
                   final prefs = await SharedPreferences.getInstance();

@@ -11,13 +11,15 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 
-void main() {  
+void main() 
+{  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
 
-class MyTestingApp extends StatefulWidget {
+class MyTestingApp extends StatefulWidget 
+{
 
   const MyTestingApp({super.key});
   @override
@@ -25,28 +27,34 @@ class MyTestingApp extends StatefulWidget {
 }
 
 
-class _MyTestingAppState extends State<MyTestingApp> {
+class _MyTestingAppState extends State<MyTestingApp> 
+{
   Locale? _currentLocale;
 
-   void _setLocale(Locale newLocale) {
-    setState(() {
+   void _setLocale(Locale newLocale) 
+   {
+    setState(() 
+    {
       _currentLocale = newLocale;
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return MaterialApp
     (
       theme: appTheme, 
 
-      localizationsDelegates: [
+      localizationsDelegates: 
+      [
         AppLocalizations.delegate, 
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: 
+      [
         Locale('en'), // English
         Locale('fr'), // Spanish
       ],    
@@ -58,7 +66,8 @@ class _MyTestingAppState extends State<MyTestingApp> {
 }
 //---------------------------------------------------
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget 
+{
   final void Function(Locale) setLocale;
 
   const HomePage
@@ -71,27 +80,37 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage>
+{
 
-  void _updateLocale(String newLanguageCode) {
-    setState(() {      
+  void _updateLocale(String newLanguageCode) 
+  {
+    setState(() 
+    {      
       widget.setLocale(Locale(newLanguageCode));
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     final appLocalization = AppLocalizations.of(context);
    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
+    return Scaffold
+    (
+      appBar: AppBar
+      (
+        title: Text
+        (
           appLocalization?.appTitle ?? 'Default app title txt', 
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [            
+      body: Center
+      (
+        child: Column
+        (
+          children:
+          [            
             CustomLanguageSwitcher(onLanguageChanged: _updateLocale), 
           ],
         ),

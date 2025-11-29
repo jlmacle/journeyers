@@ -12,13 +12,15 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_cascadin
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 
-void main() {  
+void main() 
+{  
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
 
-class MyTestingApp extends StatefulWidget {
+class MyTestingApp extends StatefulWidget 
+{
 
   const MyTestingApp({super.key});
   @override
@@ -26,22 +28,26 @@ class MyTestingApp extends StatefulWidget {
 }
 
 
-class _MyTestingAppState extends State<MyTestingApp> {
+class _MyTestingAppState extends State<MyTestingApp> 
+{
   Locale? _currentLocale;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return MaterialApp
     (
       theme: appTheme, 
 
-      localizationsDelegates: [
+      localizationsDelegates: 
+      [
         AppLocalizations.delegate, 
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: 
+      [
         Locale('en'), // English
         Locale('fr'), // Spanish
       ],    
@@ -53,7 +59,8 @@ class _MyTestingAppState extends State<MyTestingApp> {
 }
 //---------------------------------------------------
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget 
+{
 
   const HomePage
   ({
@@ -64,23 +71,32 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePageState extends State<HomePage>
+{
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     final appLocalization = AppLocalizations.of(context);  
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
+    return Scaffold
+    (
+      appBar: AppBar
+      (
+        title: Text
+        (
           appLocalization?.appTitle ?? 'Default app title txt', 
         ),
       ),
-      body: Padding(
+      body: Padding
+      (
         padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            children: [
+        child: Center
+        (
+          child: Column
+          (
+            children: 
+            [
                 CascadingCheckboxes(),
             ]
           ),

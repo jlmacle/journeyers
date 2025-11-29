@@ -11,24 +11,29 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 
-void main() {  
+void main() 
+{  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macOS
   // debugPaintSizeEnabled = true;
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget {
+class MyTestingApp extends StatelessWidget 
+{
   const MyTestingApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) 
+  {
+    return MaterialApp
+    (
       theme: appTheme, 
       home: Scaffold
       (
-          appBar: AppBar(
-          title: const Text('MyTestingApp'),
-        ),
+          appBar: AppBar
+          (
+            title: const Text('MyTestingApp'),
+          ),
         body: Center
         (
           child: Container
@@ -47,8 +52,8 @@ class MyTestingApp extends StatelessWidget {
             (
               width: 200,
               child: 
-                CustomText(text: "Custom text",color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
-              )
+              CustomText(text: "Custom text",color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
+            )
           ),
         ),
       ),      

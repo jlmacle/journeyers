@@ -28,8 +28,10 @@ void showCustomSnackbarStartMessage
     saveStartSnackbarMessageAcknowledgement();    
   }
 
-  scaffoldMessenger.showSnackBar(
-    SnackBar(
+  scaffoldMessenger.showSnackBar
+  (
+    SnackBar
+    (
       content: Text(
         message,
         style: TextStyle(color: messageColor),
@@ -39,7 +41,6 @@ void showCustomSnackbarStartMessage
       (
         label: actiontext, 
         onPressed: hideStartMessage
-
       )
     ),
   );

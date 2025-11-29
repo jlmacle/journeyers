@@ -16,7 +16,8 @@ typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
 
 
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget 
+{
   const MyHomePage({super.key});
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -28,13 +29,15 @@ class _MyHomePageState extends State<MyHomePage>
 
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
+  final List<Widget> _pages = 
+  [
     const ContextAnalysisPage(),
     const GroupProblemSolvingPage(),
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     final ThemeData appTheme = Theme.of(context);
 
     FocusNode appBarTitleFocusNode = FocusNode();
@@ -59,35 +62,40 @@ class _MyHomePageState extends State<MyHomePage>
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,           
         title: Semantics
-            (
-              focused: true,
-              focusable: true,
-              header:true,
-              headingLevel: 1,
-              container: true,
-              child: Focus(
-                focusNode: appBarTitleFocusNode,
-                child: Column
-                (
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[                    
-                    Text(
-                      AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',              
-                      style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
-                    ),
-                    Gap(5),
-                    Text(
-                      'What story will we leave$eol'
-                      'for our loved ones to tell?',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-              ),            
+          (
+            focused: true,
+            focusable: true,
+            header:true,
+            headingLevel: 1,
+            container: true,
+            child: Focus(
+              focusNode: appBarTitleFocusNode,
+              child: Column
+              (
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>
+                [                    
+                  Text
+                  (
+                    AppLocalizations.of(context)?.appTitle ?? 'Default app title txt',              
+                    style: TextStyle(fontSize: 22, fontFamily: 'Georgia',), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
+                  ),
+                  Gap(5),
+                  Text
+                  (
+                    'What story will we leave$eol'
+                    'for our loved ones to tell?',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),            
         ),
-        bottom: PreferredSize(
+        bottom: PreferredSize
+        (
           preferredSize: const Size.fromHeight(4.0), // the height of the border
-          child: Container(
+          child: Container
+          (
             color: Color(0xFFBF9D3E), 
             height: 4.0, 
           ),
@@ -109,11 +117,13 @@ class _MyHomePageState extends State<MyHomePage>
         },
         items: const 
         [
-          BottomNavigationBarItem(
+          BottomNavigationBarItem
+          (
             icon: Icon(Icons.task_alt),
             label: 'Context analysis',
           ),
-          BottomNavigationBarItem(
+          BottomNavigationBarItem
+          (
             icon: Icon(Icons.group),
             label: 'Group problem-solving',
           ),
@@ -125,20 +135,23 @@ class _MyHomePageState extends State<MyHomePage>
 
 //---------------------------------------------------
 
-class ContextAnalysisPage extends StatefulWidget {
+class ContextAnalysisPage extends StatefulWidget 
+{
   const ContextAnalysisPage({super.key});
 
   @override
   State<ContextAnalysisPage> createState() => _ContextAnalysisPageState();
 }
 
-class _ContextAnalysisPageState extends State<ContextAnalysisPage>  { 
+class _ContextAnalysisPageState extends State<ContextAnalysisPage>  
+{ 
 
   late bool _startMessageVisibilityStatus = true;
   bool isContextAnalysisSessionDataSaved = false;
 
   @override
-  void initState() {
+  void initState() 
+  {
     super.initState();   
   }
 
@@ -151,35 +164,42 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>  {
     }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) 
+  { 
 
-    return Scaffold(
-      body: Column(
+    return Scaffold
+    (
+      body: Column
+      (
         mainAxisAlignment: MainAxisAlignment.center,
-         children: [
-          ContextAnalysisNewSessionPage(),
-          if (_startMessageVisibilityStatus)
-            CustomDismissableRectangularArea(buildContext:context, 
-                message1: 'This is your first context analysis.', 
-                message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-                messagesColor: paleCyan, // from app_themes
-                actionText:'Please click the message area to acknowledge.',
-                actionTextColor: paleCyan, // from app_themes,
-                areaBackgroundColor: navyBlue, // from app_themes
-                setStateCallBack: _hideMessageArea),
-                
-          if (isContextAnalysisSessionDataSaved)
-          ...[
-            Divider(),
-            ContextAnalysisDashboardPage()
-          ]
-          // TextButton(
-          //   onPressed: () {
-          //     // This dumps the Semantics Tree's structure and properties to the console.
-          //     debugDumpSemanticsTree(); 
-          //   },
-          //     child: const Text('Dump Semantics'),
-          //   )
+        children: 
+        [
+        ContextAnalysisNewSessionPage(),
+        if (_startMessageVisibilityStatus)
+          CustomDismissableRectangularArea
+          (
+            buildContext:context, 
+            message1: 'This is your first context analysis.', 
+            message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+            messagesColor: paleCyan, // from app_themes
+            actionText:'Please click the message area to acknowledge.',
+            actionTextColor: paleCyan, // from app_themes,
+            areaBackgroundColor: navyBlue, // from app_themes
+            setStateCallBack: _hideMessageArea
+          ),
+              
+        if (isContextAnalysisSessionDataSaved)
+        ...[
+          Divider(),
+          ContextAnalysisDashboardPage()
+        ]
+        // TextButton(
+        //   onPressed: () {
+        //     // This dumps the Semantics Tree's structure and properties to the console.
+        //     debugDumpSemanticsTree(); 
+        //   },
+        //     child: const Text('Dump Semantics'),
+        //   )
         ],
       ),
     );
@@ -207,9 +227,11 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
 
     return Scaffold
     (
-      body: Column(
+      body: Column
+      (
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: 
+        [
           Semantics
           (        
             header: true,

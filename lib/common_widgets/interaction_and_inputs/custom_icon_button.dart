@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 /// A customizable icon button
 
-class CustomIconButton extends StatefulWidget {
+class CustomIconButton extends StatefulWidget 
+{
   /// The icon to use
   final Icon icon;
   /// The tool tip label for the icon
@@ -22,9 +23,11 @@ class CustomIconButton extends StatefulWidget {
   State<CustomIconButton> createState() => _CustomIconButtonState();
 }
 
-class _CustomIconButtonState extends State<CustomIconButton> {
+class _CustomIconButtonState extends State<CustomIconButton> 
+{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return IconButton
     (
       onPressed: widget.onPressedFunction, 
