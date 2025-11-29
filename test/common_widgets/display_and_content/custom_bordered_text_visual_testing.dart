@@ -37,8 +37,8 @@ class MyTestingApp extends StatelessWidget
         (
           child:  
           CustomBorderedText(
-            customTextObject: CustomText(text: "Custom bordered text", color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold, textAlign: TextAlign.center),
-            edgeInsetsGeometryObject: EdgeInsets.all(20), borderObject: Border.all(), borderRadiusObject: BorderRadius.circular(10))
+            customText: CustomText(text: "Custom bordered text", color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold, textAlign: TextAlign.center),
+            edgeInsetsGeometry: EdgeInsets.all(20), border: Border.all(), borderRadius: BorderRadius.circular(10))
         )
       )
     );
