@@ -4,27 +4,27 @@ import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 class CustomBorderedText extends StatelessWidget 
 {
   /// The CustomText object containing the text
-  final CustomText customTextObject;
+  final CustomText customText;
   /// The padding information encapsulated in an EdgeInsetsGeometry object
-  final EdgeInsetsGeometry edgeInsetsGeometryObject;
+  final EdgeInsetsGeometry edgeInsetsGeometry;
   /// The Border object used to pass the border information
-  final Border borderObject;
+  final Border border;
   /// The color of the border
   final Color borderColor;
   /// The width of the border
   final double borderWidth;
   /// The BorderRadius object used to pass the border radius information
-  final BorderRadius borderRadiusObject;
+  final BorderRadius borderRadius;
 
   const CustomBorderedText
   ({
     super.key,
-    required this.customTextObject,
-    required this.edgeInsetsGeometryObject,
-    required this.borderObject,
+    required this.customText,
+    required this.edgeInsetsGeometry,
+    required this.border,
     this.borderColor = Colors.black,
     this.borderWidth = 1,
-    required this.borderRadiusObject,
+    required this.borderRadius,
   });
 
   @override
@@ -32,13 +32,13 @@ class CustomBorderedText extends StatelessWidget
   {
     return Container
     (
-      padding: edgeInsetsGeometryObject,
+      padding: edgeInsetsGeometry,
       decoration: BoxDecoration
       (
-        border: borderObject,    
-        borderRadius: borderRadiusObject,         
+        border: border,    
+        borderRadius: borderRadius,         
       ), 
-      child: customTextObject      
+      child: customText      
     );
   }
 }
