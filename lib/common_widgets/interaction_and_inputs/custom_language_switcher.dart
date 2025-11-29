@@ -24,7 +24,8 @@ class CustomLanguageSwitcher extends StatefulWidget
   State<CustomLanguageSwitcher> createState() => _CustomLanguageSwitcherState();
 }
 
-class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> {
+class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> 
+{
 
   final List<String> _dropdownItems = [];
   late String _selectedValue;
@@ -44,7 +45,8 @@ class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> {
 
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) 
+  {    
     return Row
     (
       mainAxisAlignment: widget.languageSwitcherMainAxisAlignemnt,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomSegmentedButtonWithOptionalTextField extends StatefulWidget {
+class CustomSegmentedButtonWithOptionalTextField extends StatefulWidget 
+{
   /// The first option of the segmented button 
   final String textOption1;
   /// The second option of the segmented button 
@@ -30,7 +31,8 @@ class CustomSegmentedButtonWithOptionalTextField extends StatefulWidget {
   /// The callback function to notify the parent widget of selection changes
   final ValueChanged<Set<String>>? onSelectionChanged;
 
-  const CustomSegmentedButtonWithOptionalTextField({
+  const CustomSegmentedButtonWithOptionalTextField
+  ({
     super.key,
     required this.textOption1,
     required this.textOption2,
@@ -52,48 +54,60 @@ class CustomSegmentedButtonWithOptionalTextField extends StatefulWidget {
   State<CustomSegmentedButtonWithOptionalTextField> createState() => _CustomSegmentedButtonWithOptionalTextFieldState();
 }
 
-class _CustomSegmentedButtonWithOptionalTextFieldState extends State<CustomSegmentedButtonWithOptionalTextField> {
+class _CustomSegmentedButtonWithOptionalTextFieldState extends State<CustomSegmentedButtonWithOptionalTextField> 
+{
   Set<String> selection = {};
   
   @override
-  Widget build(BuildContext context) {
-    final TextStyle textStyle = TextStyle(
+  Widget build(BuildContext context) 
+  {
+    final TextStyle textStyle = TextStyle
+    (
       fontSize: widget.textOptionsfontSize,
       color: widget.textOptionsColor,
     );
 
-    return Column(
+    return Column
+    (
       children: [
-        SegmentedButton<String>(
+        SegmentedButton<String>
+        (
           multiSelectionEnabled: widget.multiSelectionEnabled,
           emptySelectionAllowed: widget.emptySelectionAllowed,
           segments: <ButtonSegment<String>>[
             ButtonSegment<String>(
               value: widget.textOption1,          
-              label: Text(
+              label: Text
+              (
                 widget.textOption1,
                 style: textStyle,
               ),
             ),
-            ButtonSegment<String>(
+            ButtonSegment<String>
+            (
               value: widget.textOption2,
-                label: Text(
-                widget.textOption2,
-                style: textStyle,
-              ),
+                label: Text
+                (
+                  widget.textOption2,
+                  style: textStyle,
+                ),
             ),
             if (widget.textOption3 != "undefined")
-              ButtonSegment<String>(
+              ButtonSegment<String>
+              (
                 value: widget.textOption3,          
-                label: Text(
+                label: Text
+                (
                   widget.textOption3,
                   style: textStyle,
                 ),
               ),
           ],
           selected: selection,
-          onSelectionChanged: (newSelection) {
-            setState(() {
+          onSelectionChanged: (newSelection) 
+          {
+            setState(() 
+            {
               selection = newSelection;
             });
             
@@ -104,9 +118,11 @@ class _CustomSegmentedButtonWithOptionalTextFieldState extends State<CustomSegme
        // if (selection.contains('No') | selection.contains("I don't know"))
         if (selection.any((item) => widget.textFieldFor.contains(item)))
 
-          Padding(
+          Padding
+          (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: TextField(             
+            child: TextField
+            (             
               decoration: InputDecoration(hintText: widget.textFieldPlaceholder),
               minLines: widget.textFieldMinLines,
               maxLines: widget.textFieldMaxLines,

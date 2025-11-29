@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 /// A widget with a chain of checkboxes appearing only if the previous checkbox has been checked.
 /// The widget can be used to limit on-screen cognitive complexity.
 
-class CascadingCheckboxes extends StatefulWidget {
+class CascadingCheckboxes extends StatefulWidget 
+{
   /// The label of the first checkbox
   final String firstCheckboxLabel;
   /// The label of the second checkbox
@@ -15,7 +16,8 @@ class CascadingCheckboxes extends StatefulWidget {
   /// The size of the SizedBox encapsulating the checkbox (allows for the text to be close to the checkbox)
   final double sizedBoxesWidth;
 
-  const CascadingCheckboxes({
+  const CascadingCheckboxes
+  ({
     super.key,
     this.firstCheckboxLabel = 'First checkbox label',
     this.secondCheckboxLabel = 'Second checkbox label',
@@ -65,7 +67,7 @@ class _CascadingCheckboxesState extends State<CascadingCheckboxes>
             ),
           ),
          if (_isFirstCheckboxChecked & !_isSecondCheckboxChecked & !_isThirdCheckboxChecked)
-         SizedBox
+          SizedBox
           (
             width: widget.sizedBoxesWidth,
             child: CheckboxListTile(

@@ -52,9 +52,11 @@ class CustomExpansionTile extends StatefulWidget
   State<CustomExpansionTile> createState() => _CustomExpansionTileState();
 }
 
-class _CustomExpansionTileState extends State<CustomExpansionTile> {
+class _CustomExpansionTileState extends State<CustomExpansionTile> 
+{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return ExpansionTile
     (
       title: Text
@@ -66,40 +68,41 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
       children: <Widget>
       [
         Padding
-        (padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal, vertical: widget.expandedContentPaddingVertical),
-        child: Column
         (
-          crossAxisAlignment: widget.expandedTextCrossAxisAlignment,
-          children: 
-          [
-            Text
-            (
-              widget.expandedAdditionalText,
-              style: appTheme.textTheme.bodyMedium,
-            ),
-
-            Divider(height: widget.dividerHeight),
-
-            // Action icons
-            Row
-            (
-              mainAxisAlignment : widget.listActionsIconsMainAxisAlignment,
-              children:               
-              widget.listActionsIconsData.map
+          padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal, vertical: widget.expandedContentPaddingVertical),
+          child: Column
+          (
+            crossAxisAlignment: widget.expandedTextCrossAxisAlignment,
+            children: 
+            [
+              Text
               (
-                (actionIconData) 
-                {
-                  final iconData = actionIconData[0] as IconData;
-                  final toolTipLabel = actionIconData[1] as String;
-                  final onPressedFunction = actionIconData[2] as VoidCallback?;
+                widget.expandedAdditionalText,
+                style: appTheme.textTheme.bodyMedium,
+              ),
 
-                  return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction ?? (){} );
-                }
+              Divider(height: widget.dividerHeight),
+
+              // Action icons
+              Row
+              (
+                mainAxisAlignment : widget.listActionsIconsMainAxisAlignment,
+                children:               
+                widget.listActionsIconsData.map
+                (
+                  (actionIconData) 
+                  {
+                    final iconData = actionIconData[0] as IconData;
+                    final toolTipLabel = actionIconData[1] as String;
+                    final onPressedFunction = actionIconData[2] as VoidCallback?;
+
+                    return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction ?? (){} );
+                  }
+                )
+                .toList(),              
               )
-              .toList(),              
-            )
-          ],
-        ),
+            ],
+          ),
         )
       ],
     );

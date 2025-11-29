@@ -14,7 +14,8 @@ class CustomText extends StatelessWidget {
   /// The text direction
   final TextDirection textDirection;
 
-  const CustomText({
+  const CustomText
+  ({
     super.key,
     required this.text,
     this.fontSize = 24,
@@ -25,7 +26,8 @@ class CustomText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return Text(
       text,
       textAlign: textAlign,
