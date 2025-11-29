@@ -13,6 +13,7 @@ import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 
 void main() {  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macOS
+  // debugPaintSizeEnabled = true;
   runApp(const MyTestingApp());
 }
 
@@ -42,7 +43,12 @@ class MyTestingApp extends StatelessWidget {
               ),    
               borderRadius: BorderRadius.circular(10) ,         
             ),            
-            child: CustomText(text: "Custom text",color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold,)
+            child: Container
+            (
+              width: 200,
+              child: 
+                CustomText(text: "Custom text",color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold, textAlign: TextAlign.center,)
+              )
           ),
         ),
       ),      
