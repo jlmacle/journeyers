@@ -66,9 +66,7 @@ class _HomePageState extends State<HomePage>
     appBar: AppBar
       (
         title: Semantics
-        (
-          focused: true,
-          focusable: true, 
+        (           
           child: Focus
           (
             focusNode: appBarTitleFocusNode,
