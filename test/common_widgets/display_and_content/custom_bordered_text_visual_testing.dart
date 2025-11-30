@@ -24,6 +24,8 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
+    FocusNode appBarTitleFocusNode = FocusNode();
+
     return MaterialApp
     (
       theme: appTheme, 
@@ -31,7 +33,16 @@ class MyTestingApp extends StatelessWidget
       (
         appBar: AppBar
         (
-          title: const Text('MyTestingApp'),
+          title: Semantics
+          (
+            focused: true,
+            focusable: true, 
+            child: Focus
+            (
+              focusNode: appBarTitleFocusNode,
+              child: const Text('MyTestingApp'),
+            )
+          ),
         ),
         body: Center
         (
