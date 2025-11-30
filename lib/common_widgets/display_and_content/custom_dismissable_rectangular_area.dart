@@ -76,7 +76,7 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
       child: Focus
       (
         focusNode: dismissableRectangularAreaFocusNode,
-        child: GestureDetector
+        child: InkWell
         (
           onTap:() {widget.setStateCallBack();},
           child: Container(
