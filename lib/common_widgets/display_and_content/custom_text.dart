@@ -3,36 +3,32 @@ import 'package:flutter/material.dart';
 class CustomText extends StatelessWidget {
   /// The text to display
   final String text;
-  /// The text font size 
-  final double fontSize;
-  /// The text alignment
-  final TextAlign textAlign;
-  /// The text color
-  final Color color;
-  /// The text font weight
-  final FontWeight fontWeight;
   /// The text direction
   final TextDirection textDirection;
+  /// The text style
+  final TextStyle textStyle;
+  /// The text alignment
+  final TextAlign textAlign;
+
 
   const CustomText
   ({
     super.key,
     required this.text,
-    this.fontSize = 24,
-    this.textAlign = TextAlign.center,
-    this.color = Colors.black,
-    this.fontWeight = FontWeight.bold,
     this.textDirection = TextDirection.ltr,
+    this.textStyle = const TextStyle(color:Colors.black, fontSize: 24,  fontWeight:FontWeight.bold),
+    this.textAlign = TextAlign.center,
   });
 
   @override
   Widget build(BuildContext context) 
   {
-    return Text(
-      text,
-      textAlign: textAlign,
+    return Text
+    (
+      text,      
       textDirection: textDirection, 
-      style: TextStyle(fontSize: fontSize, color: color, fontWeight: fontWeight),
+      style: textStyle,
+      textAlign: textAlign,
     );
   }
 }
