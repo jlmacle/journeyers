@@ -57,12 +57,17 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   @override
   Widget build(BuildContext context) 
   {
+    FocusNode expandedAdditionalTextFocusNode = FocusNode();
     return ExpansionTile
     (
-      title: Text
+      title: Focus
       (
-        widget.headerText,
-        style: TextStyle(fontWeight: widget.headerFontWeight),
+        focusNode: expandedAdditionalTextFocusNode,
+        child: Text
+        (
+          widget.headerText,
+          style: TextStyle(fontWeight: widget.headerFontWeight),
+        ),
       ),
       trailing: widget.actionIconToExpand,
       children: <Widget>
@@ -75,12 +80,15 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
             crossAxisAlignment: widget.expandedTextCrossAxisAlignment,
             children: 
             [
-              Text
+              Focus
               (
-                widget.expandedAdditionalText,
-                style: appTheme.textTheme.bodyMedium,
+                focusNode: expandedAdditionalTextFocusNode,
+                child: Text
+                (
+                  widget.expandedAdditionalText,
+                  style: appTheme.textTheme.bodyMedium,
+                ),
               ),
-
               Divider(height: widget.dividerHeight),
 
               // Action icons
