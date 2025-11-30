@@ -30,24 +30,19 @@ class CustomBorderedText extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode borderedTextFocusNode = FocusNode();
 
     return Semantics
     ( 
       focusable: true,            
-      child: Focus
+      child: Container
       (
-        focusNode: borderedTextFocusNode,
-        child: Container
+        padding: edgeInsetsGeometry,
+        decoration: BoxDecoration
         (
-          padding: edgeInsetsGeometry,
-          decoration: BoxDecoration
-          (
-            border: border,    
-            borderRadius: borderRadius,         
-          ), 
-          child: customText
-        ),
+          border: border,    
+          borderRadius: borderRadius,         
+        ), 
+        child: customText
       ),
     );
   }
