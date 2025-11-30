@@ -85,12 +85,25 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
   }
   
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) 
+  { 
+    FocusNode appBarTitleFocusNode = FocusNode();
+
     return Theme(
       data: appTheme,
       child: Scaffold(      
-        appBar: AppBar(
-          title: const Text('MyTestingApp'),
+        appBar: AppBar
+        (
+          title: Semantics
+          (
+            focused: true,
+            focusable: true, 
+            child: Focus
+            (
+              focusNode: appBarTitleFocusNode,
+              child: const Text('MyTestingApp'),
+            )
+          ),
         ),
         body: Center(
           child: Column(
