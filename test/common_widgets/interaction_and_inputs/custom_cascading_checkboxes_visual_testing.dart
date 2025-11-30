@@ -30,7 +30,6 @@ class MyTestingApp extends StatefulWidget
 
 class _MyTestingAppState extends State<MyTestingApp> 
 {
-  Locale? _currentLocale;
 
   @override
   Widget build(BuildContext context) 
@@ -38,21 +37,6 @@ class _MyTestingAppState extends State<MyTestingApp>
     return MaterialApp
     (
       theme: appTheme, 
-
-      localizationsDelegates: 
-      [
-        AppLocalizations.delegate, 
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: 
-      [
-        Locale('en'), // English
-        Locale('fr'), // Spanish
-      ],    
-      locale: _currentLocale, 
-
       home: HomePage()
       );
   }
@@ -77,15 +61,21 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) 
   {
-    final appLocalization = AppLocalizations.of(context);  
+    FocusNode appBarTitleFocusNode = FocusNode();
 
     return Scaffold
     (
-      appBar: AppBar
+    appBar: AppBar
       (
-        title: Text
+        title: Semantics
         (
-          appLocalization?.appTitle ?? 'Default app title txt', 
+          focused: true,
+          focusable: true, 
+          child: Focus
+          (
+            focusNode: appBarTitleFocusNode,
+            child: const Text('MyTestingApp'),
+          )
         ),
       ),
       body: Padding
