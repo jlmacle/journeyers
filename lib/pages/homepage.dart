@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage>
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,           
         title: Semantics
-          (
+        (
             focused: true,
             focusable: true,           
             container: true,
