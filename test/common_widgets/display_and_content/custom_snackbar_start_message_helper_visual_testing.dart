@@ -62,13 +62,15 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
         duration: Duration(hours: 24),
         actiontext: 'Acknowledged',
       );
-    }
-   
+    }   
   }
 
   @override
   Widget build(BuildContext context) 
-  {    
+  { 
+    FocusNode appBarTitleFocusNode = FocusNode();
+    FocusNode introductoryMessageFocusNode = FocusNode();
+
     return Theme
     (
       data: appTheme,
@@ -76,7 +78,16 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
       (      
         appBar: AppBar
         (
-          title: const Text('MyTestingApp'),
+          title: Semantics
+          (
+            focused: true,
+            focusable: true, 
+            child: Focus
+            (
+              focusNode: appBarTitleFocusNode,
+              child: const Text('MyTestingApp'),
+            )
+          ),
         ),
         body: Center
         (
@@ -85,11 +96,19 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>
             [
-              const Text
-              (
-                'Press the button to show the start message only once, if not resetting',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
+              Semantics
+              ( 
+                focusable: true,            
+                child: Focus
+                (
+                  focusNode: introductoryMessageFocusNode,
+                  child: Text
+                  (
+                    'Press the button to show the start message only once, if not resetting',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon
@@ -104,8 +123,9 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                 {
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('startSnackbarMessageAcknowledged', false);
+                  _showStartMessage();
                 }, 
-                label: const Text('Reset to be able to show the snackbar again'),
+                label: const Text('Reset to be able to show, and to show, the snackbar again'),
               ),
             ],
           ),
