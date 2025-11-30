@@ -18,6 +18,7 @@ final ThemeData appTheme = ThemeData
       backgroundColor: navyBlue,   
       // backgroundColor: Colors.white, // for constrast testing
       elevation: 0,
+      
             
       titleTextStyle: TextStyle
       (
@@ -27,22 +28,32 @@ final ThemeData appTheme = ThemeData
       ),
     ),
 
+    // https://api.flutter.dev/flutter/material/TextTheme-class.html
     textTheme: const TextTheme
     ( // doesn't apply to the appbar
+      // https://api.flutter.dev/flutter/material/TextTheme/displayLarge.html
       displayLarge: TextStyle(color: Colors.black),
+      // https://api.flutter.dev/flutter/material/TextTheme/displayMedium.html
       displayMedium: TextStyle(color: Colors.black),
+      // https://api.flutter.dev/flutter/material/TextTheme/displaySmall.html
       displaySmall: TextStyle(color: Colors.black),
-      headlineLarge: TextStyle(color: Colors.black),
-      headlineMedium: TextStyle(color: Colors.black),
-      headlineSmall: TextStyle(color: Colors.black),
-      titleLarge: TextStyle(color: Colors.black),
-      titleMedium: TextStyle(color: Colors.black),
-      titleSmall: TextStyle(color: Colors.black),
+      // https://api.flutter.dev/flutter/material/TextTheme/headlineLarge.html
+      headlineLarge: TextStyle(color: Colors.black, fontSize: 32),
+      // https://api.flutter.dev/flutter/material/TextTheme/headlineMedium.html
+      headlineMedium: TextStyle(color: Colors.black, fontSize: 28),
+      // https://api.flutter.dev/flutter/material/TextTheme/headlineSmall.html
+      headlineSmall: TextStyle(color: Colors.black, fontSize: 24),
+      // https://api.flutter.dev/flutter/material/TextTheme/titleLarge.html
+      titleLarge: TextStyle(color: Colors.black, fontSize: 22),
+      // https://api.flutter.dev/flutter/material/TextTheme/titleMedium.html
+      titleMedium: TextStyle(color: Colors.black, fontSize: 16),
+      // https://api.flutter.dev/flutter/material/TextTheme/titleSmall.html
+      titleSmall: TextStyle(color: Colors.black, fontSize: 14),
       bodyLarge: TextStyle(color: Colors.black),
       bodyMedium: TextStyle(color: Colors.black),
       bodySmall: TextStyle(color: Colors.black),
       labelLarge: TextStyle(color: Colors.black),
-      labelMedium: TextStyle(color: Colors.black),
+      labelMedium: TextStyle(color: Colors.black, fontSize: 12),
       labelSmall: TextStyle(color: Colors.black),
     ),
     
