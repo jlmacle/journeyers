@@ -54,7 +54,7 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  Set<String> _selectedValues = {"No value(s) selected yet"};
+  Set<String> _selectedValues = {"No value selected yet"};
 
   _updateSelectedValues(Set<String> newValues)
   {
@@ -68,6 +68,8 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) 
   {
     FocusNode appBarTitleFocusNode = FocusNode();
+    FocusNode introductoryMessageFocusNode = FocusNode();
+    FocusNode informationalMessageFocusNode = FocusNode();
 
     return Scaffold
     (
@@ -93,9 +95,27 @@ class _HomePageState extends State<HomePage>
           (
             children: 
             [         
-              Text('Only clicking on "I don\'t know" should reveal a text field.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),   
+              Semantics
+              ( 
+                focusable: true,            
+                child: Focus
+                (
+                  focusNode: introductoryMessageFocusNode,
+                  child: 
+                  Text('Only clicking on "I don\'t know" should reveal a text field.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                ),
+              ),              
               Gap(16),                    
-              Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}'),
+              Semantics
+              ( 
+                focusable: true,            
+                child: Focus
+                (
+                  focusNode: informationalMessageFocusNode,
+                  child: 
+                  Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}'),
+                ),
+              ),
               Gap(16),
               CustomSegmentedButtonWithOptionalTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, onSelectionChanged: _updateSelectedValues,),
             ]

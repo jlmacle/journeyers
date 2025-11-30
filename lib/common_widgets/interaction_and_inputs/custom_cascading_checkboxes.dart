@@ -39,30 +39,38 @@ class _CascadingCheckboxesState extends State<CascadingCheckboxes>
   @override
   Widget build(BuildContext context) 
   {
+    FocusNode secondCheckboxLabelFocusNode = FocusNode();
     return Column
     (
-      children: [        
+      children: 
+      [        
         if (!_isFirstCheckboxChecked & !_isSecondCheckboxChecked & !_isThirdCheckboxChecked)
           SizedBox
           (
             width: widget.sizedBoxesWidth,
-            child: CheckboxListTile(
+            child: CheckboxListTile
+            (
               title: Text
-                ( 
-                  widget.firstCheckboxLabel,
-                  textAlign: TextAlign.center,                  
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  
-                ),
+              ( 
+                widget.firstCheckboxLabel,
+                textAlign: TextAlign.center,                  
+                style: Theme.of(context).textTheme.headlineSmall,                
+              ),
               value: _isFirstCheckboxChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isFirstCheckboxChecked = value!;
-                  if (!_isFirstCheckboxChecked) {
-                    _isSecondCheckboxChecked = false;
-                    _isThirdCheckboxChecked = false;
+              onChanged: (bool? value) 
+              {
+                setState
+                (
+                  () 
+                  {
+                    _isFirstCheckboxChecked = value!;
+                    if (!_isFirstCheckboxChecked) 
+                    {
+                      _isSecondCheckboxChecked = false;
+                      _isThirdCheckboxChecked = false;
+                    }
                   }
-                });
+                );
               },
             ),
           ),
@@ -70,22 +78,35 @@ class _CascadingCheckboxesState extends State<CascadingCheckboxes>
           SizedBox
           (
             width: widget.sizedBoxesWidth,
-            child: CheckboxListTile(
-              title: Text
+            child: Focus
+            (
+              focusNode: secondCheckboxLabelFocusNode,
+              canRequestFocus: true,
+              autofocus: true,
+              child: CheckboxListTile
               (
-                widget.secondCheckboxLabel,
-                textAlign: TextAlign.center,                
-                style: Theme.of(context).textTheme.headlineSmall,
+                title: Text
+                (
+                  widget.secondCheckboxLabel,
+                  textAlign: TextAlign.center,                
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                value: _isSecondCheckboxChecked,
+                onChanged: (bool? value) 
+                {
+                  setState
+                  (
+                    () 
+                    {
+                      _isSecondCheckboxChecked = value!;
+                      if (!_isSecondCheckboxChecked) 
+                      {
+                        _isThirdCheckboxChecked = false;
+                      }
+                    }
+                  );
+                },
               ),
-              value: _isSecondCheckboxChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isSecondCheckboxChecked = value!;
-                  if (!_isSecondCheckboxChecked) {
-                    _isThirdCheckboxChecked = false;
-                  }
-                });
-              },
             ),
           ),
         if (_isFirstCheckboxChecked & _isSecondCheckboxChecked & !_isThirdCheckboxChecked)
