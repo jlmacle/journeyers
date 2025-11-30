@@ -5,12 +5,10 @@
 //Line for automated processing
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gap/gap.dart';
 
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_optional_text_field.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
 
 void main() 
 {  
