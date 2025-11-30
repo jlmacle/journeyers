@@ -10,25 +10,34 @@ class CustomText extends StatelessWidget {
   /// The text alignment
   final TextAlign textAlign;
 
-
   const CustomText
   ({
     super.key,
     required this.text,
     this.textDirection = TextDirection.ltr,
-    this.textStyle = const TextStyle(color:Colors.black, fontSize: 24,  fontWeight:FontWeight.bold),
+    this.textStyle = const TextStyle(color: Colors.black, fontSize: 24,  fontWeight: FontWeight.bold),
     this.textAlign = TextAlign.center,
   });
 
   @override
   Widget build(BuildContext context) 
   {
-    return Text
-    (
-      text,      
-      textDirection: textDirection, 
-      style: textStyle,
-      textAlign: textAlign,
+    FocusNode textFocusNode = FocusNode();
+
+    return Semantics
+    ( 
+      focusable: true,            
+      child: Focus
+      (
+        focusNode: textFocusNode,
+        child: Text
+        (
+          text,      
+          textDirection: textDirection, 
+          style: textStyle,
+          textAlign: textAlign,
+        )
+      ),
     );
   }
 }
