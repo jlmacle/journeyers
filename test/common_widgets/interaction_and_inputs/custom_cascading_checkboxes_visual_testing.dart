@@ -6,11 +6,9 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_cascading_checkboxes.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
 
 void main() 
 {  
