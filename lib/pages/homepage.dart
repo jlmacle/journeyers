@@ -64,9 +64,7 @@ class _MyHomePageState extends State<MyHomePage>
         title: Semantics
           (
             focused: true,
-            focusable: true,
-            header:true,
-            headingLevel: 1,
+            focusable: true,           
             container: true,
             child: Focus(
               focusNode: appBarTitleFocusNode,
