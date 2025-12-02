@@ -1,8 +1,10 @@
 //Line for automated processing
+// flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d chrome
 // flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d linux
 // flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d macos
 // flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d windows
 //Line for automated processing
+
 
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart'; // for debugPaintSizeEnabled
@@ -88,7 +90,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
   Widget build(BuildContext context) 
   { 
     FocusNode appBarTitleFocusNode = FocusNode();
-
+    
     return Theme(
       data: appTheme,
       child: Scaffold(      

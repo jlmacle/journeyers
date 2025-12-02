@@ -1,8 +1,10 @@
 //Line for automated processing
+// flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d chrome
 // flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d linux
 // flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d macos
 // flutter run -t ./test/common_widgets/display_and_content/custom_snackbar_start_message_helper_visual_testing.dart -d windows
 //Line for automated processing
+
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
