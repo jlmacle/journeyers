@@ -55,8 +55,8 @@ windows_data = {"chmod":":: Please note that Chrome must be started to have more
                 "output_file_name":f"{window_output_file_name}"}
 
 # used_data = linux_data
-used_data = macos_data
-# used_data = windows_data
+# used_data = macos_data
+used_data = windows_data
 
 
 

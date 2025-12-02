@@ -27,9 +27,8 @@ void main() async
   /// "A path is represented by a number of path components separated by a path separator which is a / on POSIX systems and can be a / or \ on Windows."
   /// https://hackage.haskell.org/package/path-0.9.6/docs/Path-Posix.html#:~:text=A%20path%20is%20represented%20by%20a%20number%20of%20path%20components%20separated%20by%20a%20path%20separator%20which%20is%20a%20/%20on%20POSIX%20systems%20and%20can%20be%20a%20/%20or%20%5C%20on%20Windows.
     
-  String filePath = "test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart";
-  // String filePath = r"qa_utils\test_semi_automation_utils\widgets_visual_testing_helper_generation_macos.dart";
-  // String filePath = "test/common_widgets/interaction_and_inputs/custom_language_switcher_visual_testing.dart";
+  String filePath =  r"test\common_widgets\interaction_and_inputs\custom_language_switcher_visual_testing.dart";
+  // String filePath = "test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart";
   String commentBegin = "// flutter run -t ";
   String commentEndLinux = " -d linux";
   String commentEndMacOS = " -d macos";
