@@ -122,5 +122,6 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 
 # To define the project's root directory (useful for scripts)
-qa_utils/test_semi_automation_utils/_qa_utils_config.json
+qa_utils/utils_semi_automated_testing/_qa_utils_config.json
 .DS_Store
+
