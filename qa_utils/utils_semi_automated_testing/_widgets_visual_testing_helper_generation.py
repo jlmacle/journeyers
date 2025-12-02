@@ -23,6 +23,7 @@ window_output_file_name = "2_widget_visual_testing_helper.bat"
 linux_output_file_name = "4_widget_visual_testing_helper.sh"
 macos_output_file_name = "6_widget_visual_testing_helper.zsh"
 
+system_adapted_data = {}
 
 linux_data = {"chmod":f"# To make the script executable: chmod u+x {linux_output_file_name}", "script_type":"# Bash",
               "after_comment":"",
@@ -54,11 +55,16 @@ windows_data = {"chmod":":: Please note that Chrome must be started to have more
                 "chrome_tab_begin":"%BROWSER% http://localhost:", "chrome_tab_end":"",
                 "output_file_name":f"{window_output_file_name}"}
 
-# used_data = linux_data
-# used_data = macos_data
-used_data = windows_data
 
-
+if sys.platform.startswith('linux'):
+    system_adapted_data = linux_data
+elif sys.platform.startswith('darwin'):
+    system_adapted_data = macos_data
+elif sys.platform.startswith('win'):
+    system_adapted_data = windows_data
+else:
+    print(f'Error: platform not correctly detected: {sys.platform}')
+    sys.exit()
 
 # Defines the relative path to the widgets directory
 widgets_dir_path = os.path.join("..", "..","test", "common_widgets")
@@ -77,12 +83,12 @@ def main():
     [print(item) for item in file_list]
     
     cmd_lines = (
-        f'{used_data["chmod"]}{eol}'
-        f'{used_data["script_type"]} file launching the widgets, testing the custom widgets, in Chrome tabs.{eol}'  
-        f'{used_data["after_comment"]}'               
+        f'{system_adapted_data["chmod"]}{eol}'
+        f'{system_adapted_data["script_type"]} file launching the widgets, testing the custom widgets, in Chrome tabs.{eol}'  
+        f'{system_adapted_data["after_comment"]}'               
         f'cd ../..{eol}'    
         f'echo "After launching the terminals, programm to wait for the web servers to be completely started before opening the browser tabs"{eol}'
-        f'{used_data["time_to_read_comment"]}{eol}{eol}'
+        f'{system_adapted_data["time_to_read_comment"]}{eol}{eol}'
     )
     
     init_port = 8090
@@ -115,29 +121,29 @@ def main():
         init_port += 1
         # The command snippet is enclosed in single quotes in osascript
         cmd_flutter_snippet = (
-            f"{used_data["before_flutter_command"]} {processed_comment} {used_data["after_flutter_command"]} {init_port}{used_data["after_web_ports"]}{eol}"
+            f"{system_adapted_data["before_flutter_command"]} {processed_comment} {system_adapted_data["after_flutter_command"]} {init_port}{system_adapted_data["after_web_ports"]}{eol}"
         )
         cmd_lines += cmd_flutter_snippet
 
     # 4. Add server startup timeout and Chrome commands
     cmd_lines += eol
-    cmd_lines += f"{used_data["comment_character"]} Waiting for the web servers to start{eol}"
-    cmd_lines += f"{used_data["time_for_servers_to_start"]} {eol}"
+    cmd_lines += f"{system_adapted_data["comment_character"]} Waiting for the web servers to start{eol}"
+    cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {eol}"
     
     # init_port holds the final, incremented port number
     start_port = 8091 
     for i in range(start_port, init_port + 1):
-        cmd_lines += f'{used_data["chrome_tab_begin"]}{i}{used_data["chrome_tab_end"]}{eol}'
+        cmd_lines += f'{system_adapted_data["chrome_tab_begin"]}{i}{system_adapted_data["chrome_tab_end"]}{eol}'
 
     # 5. Write the final script file
     print("before join")
     file_path_out = os.path.join("..", "..", "qa_utils", "automated_and_semi_automated_tests"
-                                 , f"{used_data["output_file_name"]}")
+                                 , f"{system_adapted_data["output_file_name"]}")
     create_file_if_necessary_and_add_content(file_path=file_path_out, text=cmd_lines)
     print()
     print(f"The file should have been created at {file_path_out}")
     print()
-    print(f"{used_data["chmod"]}")
+    print(f"{system_adapted_data["chmod"]}")
 
 if __name__ == "__main__":
     main()
