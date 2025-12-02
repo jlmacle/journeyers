@@ -4,9 +4,9 @@
 // The purpose of this code is to add programmatically the pattern of the 3 following lines to dart files that are not widgets, not covered by "flutter test",
 // yet are useful to run.
 
-// flutter run -t ./qa_utils/flutter_run_comments_util.dart -d linux
-// flutter run -t ./qa_utils/flutter_run_comments_util.dart -d macos
-// flutter run -t ./qa_utils/flutter_run_comments_util.dart -d windows
+// flutter run -t ./qa_utils/utils_manual_testing/flutter_run_comments_util.dart -d linux
+// flutter run -t ./qa_utils/utils_manual_testing/flutter_run_comments_util.dart -d macos
+// flutter run -t ./qa_utils/utils_manual_testing/flutter_run_comments_util.dart -d windows
 
 import 'dart:io';
 
