@@ -5,7 +5,6 @@ import json
 
 from py_utils.comment_content_extractor import first_comment_extraction
 from py_utils.file_utils import  get_files_in_directory, create_file_if_necessary_and_add_content
-sys.path.append(str(Path(__file__).parent.parent))
 
 eol = os.linesep 
 
