@@ -12,6 +12,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appTitle => 'Compagnons';
 
   @override
+  String get appSubTitle => 'Quelle histoire laisserons-nous à nos proches ?';
+
+  @override
   String get lang_fr => 'Français';
 
   @override
@@ -24,6 +27,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get appTitle => 'Compagnons';
+
+  @override
+  String get appSubTitle => 'Quelle histoire laisserons-nous à nos proches ?';
 
   @override
   String get lang_fr => 'Français';

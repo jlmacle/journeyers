@@ -1,5 +1,7 @@
 {
+    "@@locale":"fr_FR",
     "appTitle": "Compagnons",
+    "appSubTitle":"Quelle histoire laisserons-nous à nos proches ?",
     "lang_fr": "Français",
     "lang_en": "Anglais"
 }

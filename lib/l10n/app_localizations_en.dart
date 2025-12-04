@@ -12,6 +12,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Journeyers';
 
   @override
+  String get appSubTitle =>
+      'What story will we leave\nfor our loved ones to tell?';
+
+  @override
   String get lang_fr => 'French';
 
   @override
@@ -24,6 +28,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get appTitle => 'Journeyers';
+
+  @override
+  String get appSubTitle =>
+      'What story will we leave\nfor our loved ones to tell?';
 
   @override
   String get lang_fr => 'French';

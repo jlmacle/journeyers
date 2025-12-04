@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_dismissable_rectangular_area.dart'; 
+import 'package:journeyers/common_widgets/display_and_content/custom_dismissable_rectangular_area.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switcher.dart';
+import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart'; 
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart'; 
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
@@ -18,7 +21,15 @@ typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
 
 class MyHomePage extends StatefulWidget 
 {
-  const MyHomePage({super.key});
+  final void Function(Locale) setLocale; 
+
+  const MyHomePage
+  (
+    {
+      super.key,
+      required this.setLocale
+    }
+  );
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -27,13 +38,32 @@ class _MyHomePageState extends State<MyHomePage>
 {
   String? eol;  
 
-  int _currentIndex = 0;
+  int _currentIndex = 0;  
 
   final List<Widget> _pages = 
   [
     const ContextAnalysisPage(),
     const GroupProblemSolvingPage(),
   ];
+
+  /// A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
+  /// Parameters: - [languageName] 
+  void _updateLocale(String languageName) 
+  {
+    // The related to the language selected
+    String? localeLangCodeFromLangName = L10nLanguages.getLangCodeFromLangName(languageName);   
+    // The language code from the current locale
+    String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
+
+    printd("");
+    printd("localeLangCodeFromLangName: $localeLangCodeFromLangName");    
+    printd("localeLangCodeFromContext: $localeLangCodeFromContext");   
+         
+    if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
+    {
+      widget.setLocale(Locale(localeLangCodeFromLangName!)); 
+    } 
+  }
 
   @override
   Widget build(BuildContext context) 
@@ -81,8 +111,7 @@ class _MyHomePageState extends State<MyHomePage>
                   Gap(5),
                   Text
                   (
-                    'What story will we leave$eol'
-                    'for our loved ones to tell?',
+                    AppLocalizations.of(context)?.appSubTitle ?? 'Default app subtitle txt', 
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -100,7 +129,13 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       
-      body: _pages[_currentIndex], 
+      body: Column
+      (children: 
+      [
+        // CustomLanguageSwitcher(onLanguageChanged: _updateLocale),
+        Expanded(child:  _pages[_currentIndex])       
+      ]
+      ), 
 
       bottomNavigationBar: BottomNavigationBar 
       (

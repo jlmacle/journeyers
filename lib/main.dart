@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // https://docs.flutter.dev/ui/internationalization
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 // import 'package:flutter/rendering.dart'; // https://api.flutter.dev/flutter/rendering/
 
 import 'app_themes.dart';
@@ -13,9 +14,33 @@ void main()
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget 
+class MyApp extends StatefulWidget 
 {
   const MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> 
+{
+  Locale? _currentLocale = Locale('en'); // TODO: to get eventually the value from user preferences
+
+   void _setLocale(Locale newLocale) 
+  {
+    if (newLocale != _currentLocale)
+    {
+      setState
+      (
+        () 
+        {
+          printd("SetState: _currentLocale: $newLocale");
+          _currentLocale = newLocale;
+        }
+      );
+    }
+    
+  }
+
   @override
   Widget build(BuildContext context) 
   {
@@ -37,7 +62,10 @@ class MyApp extends StatelessWidget
         Locale('en'), // English
         Locale('fr'), // Spanish
       ],     
-      home: SafeArea(child: MyHomePage()),
+
+      locale: _currentLocale, // to be able to swap translated strings,
+
+      home: SafeArea(child: MyHomePage(setLocale: _setLocale)),
     );
   }
 }

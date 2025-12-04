@@ -106,6 +106,12 @@ abstract class AppLocalizations {
   /// **'Journeyers'**
   String get appTitle;
 
+  /// The title for the app
+  ///
+  /// In en, this message translates to:
+  /// **'What story will we leave\nfor our loved ones to tell?'**
+  String get appSubTitle;
+
   /// The name of the French language
   ///
   /// In en, this message translates to:
