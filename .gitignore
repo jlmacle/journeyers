@@ -90,6 +90,9 @@ unlinked_spec.ds
 # VSCode related
 .vscode/settings.json
 
+# IDE related
+.idea/
+
 # macOS
 **/Flutter/ephemeral/
 **/Pods/
