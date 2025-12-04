@@ -10,4 +10,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appTitle => 'Journeyers';
+
+  @override
+  String get lang_fr => 'French';
+
+  @override
+  String get lang_en => 'English';
+}
+
+/// The translations for English, as used in the United States (`en_US`).
+class AppLocalizationsEnUs extends AppLocalizationsEn {
+  AppLocalizationsEnUs() : super('en_US');
+
+  @override
+  String get appTitle => 'Journeyers';
+
+  @override
+  String get lang_fr => 'French';
+
+  @override
+  String get lang_en => 'English';
 }
