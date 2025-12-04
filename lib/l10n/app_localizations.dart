@@ -95,7 +95,9 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
+    Locale('en', 'US'),
     Locale('fr'),
+    Locale('fr', 'FR'),
   ];
 
   /// The title for the app
@@ -103,6 +105,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Journeyers'**
   String get appTitle;
+
+  /// The name of the French language
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get lang_fr;
+
+  /// The name of the English language
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get lang_en;
 }
 
 class _AppLocalizationsDelegate
@@ -123,6 +137,26 @@ class _AppLocalizationsDelegate
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+  // Lookup logic when language+country codes are specified.
+  switch (locale.languageCode) {
+    case 'en':
+      {
+        switch (locale.countryCode) {
+          case 'US':
+            return AppLocalizationsEnUs();
+        }
+        break;
+      }
+    case 'fr':
+      {
+        switch (locale.countryCode) {
+          case 'FR':
+            return AppLocalizationsFrFr();
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':

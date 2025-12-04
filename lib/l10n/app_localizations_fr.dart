@@ -10,4 +10,24 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get appTitle => 'Compagnons';
+
+  @override
+  String get lang_fr => 'Français';
+
+  @override
+  String get lang_en => 'Anglais';
+}
+
+/// The translations for French, as used in France (`fr_FR`).
+class AppLocalizationsFrFr extends AppLocalizationsFr {
+  AppLocalizationsFrFr() : super('fr_FR');
+
+  @override
+  String get appTitle => 'Compagnons';
+
+  @override
+  String get lang_fr => 'Français';
+
+  @override
+  String get lang_en => 'Anglais';
 }
