@@ -26,6 +26,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final int textFieldMinLines;
   /// The maxLines value for the text field 
   final int textFieldMaxLines;
+  /// The cross axis alignment for the segmented button, and the text field
+  final CrossAxisAlignment inputsCrossAxisAlignment;
   /// The callback function to notify the parent widget of selection changes
   final ValueChanged<Set<String>>? onSelectionChanged;
 
@@ -44,6 +46,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
+    this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
     this.onSelectionChanged, 
   });
 
@@ -66,6 +69,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
 
     return Column
     (
+      crossAxisAlignment: widget.inputsCrossAxisAlignment,
       children: [
         SegmentedButton<String>
         (
