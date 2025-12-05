@@ -89,32 +89,35 @@ class _HomePageState extends State<HomePage>
       ),
       body: Padding
       (
-        padding: const EdgeInsets.all(20.0),
-        child: Center
-        (
+        padding: const EdgeInsets.all(20.0),       
           child: Column
           (
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: 
-            [         
-              Semantics
-              ( 
-                focusable: true,            
-                child: Focus
-                (
-                  focusNode: introductoryMessageFocusNode,
-                  child: 
-                  Text('Clicking on any option should reveal a text field.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            [   
+              Center(
+                child: Semantics
+                ( 
+                  focusable: true,            
+                  child: Focus
+                  (
+                    focusNode: introductoryMessageFocusNode,
+                    child: 
+                    Text('Clicking on any option should reveal a text field.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  ),
                 ),
               ),              
               Gap(16),                    
-              Semantics
-              ( 
-                focusable: true,            
-                child: Focus
-                (
-                  focusNode: informationalMessageFocusNode,
-                  child: 
-                  Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}'),
+              Center(
+                child: Semantics
+                ( 
+                  focusable: true,            
+                  child: Focus
+                  (
+                    focusNode: informationalMessageFocusNode,
+                    child: 
+                    Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}'),
+                  ),
                 ),
               ),
               Gap(16),
@@ -122,7 +125,7 @@ class _HomePageState extends State<HomePage>
             ]
           ),
         ),
-      ),
+      
     );
   }
 }
