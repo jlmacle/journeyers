@@ -10,8 +10,6 @@ class CustomHeader extends StatelessWidget
   final String headerTitle;  
   /// The level of the header
   final int headerLevel;   
-  /// The direction of the header
-  final TextDirection headerDirection;
   /// The style of the header
   late TextStyle headerStyle;
   /// The alignment of the header
@@ -22,7 +20,6 @@ class CustomHeader extends StatelessWidget
     super.key, 
     required this.headerTitle, 
     required this.headerLevel, 
-    this.headerDirection = TextDirection.ltr, 
     this.headerAlign=TextAlign.center
   }): assert(headerLevel >= 1 && headerLevel <= 6, 'Heading level must be between 1 and 6.');
 
