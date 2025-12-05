@@ -50,7 +50,7 @@ class CustomHeader extends StatelessWidget
         headerStyle = appTheme.textTheme.labelMedium!;
     }
 
-    return Semantics
+    return MergeSemantics(child: Semantics
     (        
       header: true,
       headingLevel: headerLevel,
@@ -58,8 +58,8 @@ class CustomHeader extends StatelessWidget
       child: Focus
       (
         focusNode: groupProblemSolvingDashboardFocusNode,
-        child: Center(child: CustomText(text: headerTitle, textStyle: headerStyle)),
+        child: CustomText(text: headerTitle, textStyle: headerStyle),
       ),
-    );
+    ));
   }
 }
