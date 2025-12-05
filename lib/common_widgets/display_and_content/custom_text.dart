@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class CustomText extends StatelessWidget {
   /// The text to display
   final String text;
-  /// The text direction
-  final TextDirection textDirection;
   /// The text style
   final TextStyle textStyle;
   /// The text alignment
@@ -14,7 +12,6 @@ class CustomText extends StatelessWidget {
   ({
     super.key,
     required this.text,
-    this.textDirection = TextDirection.ltr,
     this.textStyle = const TextStyle(color: Colors.black, fontSize: 24,  fontWeight: FontWeight.bold),
     this.textAlign = TextAlign.center,
   });
@@ -33,7 +30,6 @@ class CustomText extends StatelessWidget {
         child: Text
         (
           text,      
-          textDirection: textDirection, 
           style: textStyle,
           textAlign: textAlign,
         )
