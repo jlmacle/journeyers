@@ -13,42 +13,41 @@ class CustomHeader extends StatelessWidget
   /// The direction of the header
   final TextDirection headerDirection;
   /// The style of the header
-  final TextStyle headerStyle;
+  late TextStyle headerStyle;
   /// The alignment of the header
   final TextAlign headerAlign;
 
-  const CustomHeader
+  CustomHeader
   ({
     super.key, 
     required this.headerTitle, 
     required this.headerLevel, 
     this.headerDirection = TextDirection.ltr, 
-    this.headerStyle = const TextStyle(color: Colors.black, fontSize: 24,  fontWeight: FontWeight.bold),
     this.headerAlign=TextAlign.center
   }): assert(headerLevel >= 1 && headerLevel <= 6, 'Heading level must be between 1 and 6.');
 
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
-    TextStyle? headerStyle;
+    FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();    
 
     switch(headerLevel)
     {
       case 1:
-        headerStyle = appTheme.textTheme.headlineLarge;
+        headerStyle = appTheme.textTheme.headlineLarge!;
       case 2:
-        headerStyle = appTheme.textTheme.headlineMedium;
+        headerStyle = appTheme.textTheme.headlineMedium!;
+        break;
       case 3:
-        headerStyle = appTheme.textTheme.headlineSmall;
+        headerStyle = appTheme.textTheme.headlineSmall!;
       case 4:
-        headerStyle = appTheme.textTheme.titleLarge;
+        headerStyle = appTheme.textTheme.titleLarge!;
       case 5:
-        headerStyle = appTheme.textTheme.titleMedium;
+        headerStyle = appTheme.textTheme.titleMedium!;
       case 6:
-        headerStyle = appTheme.textTheme.titleSmall;
+        headerStyle = appTheme.textTheme.titleSmall!;
       default:
-        headerStyle = appTheme.textTheme.labelMedium;
+        headerStyle = appTheme.textTheme.labelMedium!;
     }
 
     return Semantics
@@ -59,7 +58,7 @@ class CustomHeader extends StatelessWidget
       child: Focus
       (
         focusNode: groupProblemSolvingDashboardFocusNode,
-        child: Center(child: CustomText(text: headerTitle, textStyle: headerStyle!)),
+        child: Center(child: CustomText(text: headerTitle, textStyle: headerStyle)),
       ),
     );
   }
