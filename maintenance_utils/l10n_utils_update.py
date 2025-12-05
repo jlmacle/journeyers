@@ -1,4 +1,6 @@
 # The script is used to generate dynamically the l10n_utils.dart when new base locale files have been added to l10n.
+# "flutter run" updates the .lang_<lang_code> needed
+# TODO: to copy automatically, with a backup of the previous file + rollback script
 
 import os
 
