@@ -57,6 +57,8 @@ class _HomePageState extends State<HomePage>
 {
   Set<String> _selectedValues = {"No value selected yet"};
 
+  TextStyle msgsTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.w600);
+
   _updateSelectedValues(Set<String> newValues)
   {
     setState(() 
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage>
                   (
                     focusNode: introductoryMessageFocusNode,
                     child: 
-                    Text('Clicking on any option should reveal a text field.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text('Clicking on any option should reveal a text field.', style: msgsTextStyle),
                   ),
                 ),
               ),              
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage>
                   (
                     focusNode: informationalMessageFocusNode,
                     child: 
-                    Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}'),
+                    Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}', style: msgsTextStyle),
                   ),
                 ),
               ),
