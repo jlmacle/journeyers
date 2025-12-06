@@ -49,19 +49,28 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   });
 
   @override
-  State<CustomCheckBoxWithTextField> createState() => _CustomCheckBoxWithTextFieldState();
+  State<CustomCheckBoxWithTextField> createState() => CustomCheckBoxWithTextFieldState();
 }
 
-class _CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField> 
+class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField> 
 {
   bool? _isChecked;
-  String? _textFieldContent;
+  late TextEditingController _textFieldEditingController;
 
   @override
   void initState() {
     super.initState();    
     _isChecked = widget.isChecked; 
+    _textFieldEditingController =  TextEditingController(text:"");    
   }
+
+  /// Callback function to update the checkbox state
+  importCheckBoxState(bool importedValue){setState(() {_isChecked = importedValue;});}
+  Function(bool) get updateCheckBoxStateFunction => importCheckBoxState;
+
+  /// Callback function to update the text field state
+  importTextFieldState(String importedValue){setState(() {_textFieldEditingController.text = importedValue;});}
+  Function(String) get updateTextFieldStateFunction => importTextFieldState;
   
   @override
   Widget build(BuildContext context) 
@@ -89,11 +98,12 @@ class _CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextFiel
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
             child: TextField
-            (             
+            ( 
+              controller: _textFieldEditingController,
               decoration: InputDecoration(hintText: widget.textFieldPlaceholder),
               minLines: widget.textFieldMinLines,
               maxLines: widget.textFieldMaxLines,
-              onChanged: (value) => {setState(() {_textFieldContent= value; widget.onTextFieldChanged(_textFieldContent);})}
+              onChanged: (value) => {setState(() {widget.onTextFieldChanged(value);})}
             ),
           ),
       ],
