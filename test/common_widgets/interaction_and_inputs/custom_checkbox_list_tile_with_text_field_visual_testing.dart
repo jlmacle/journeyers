@@ -5,7 +5,6 @@
 // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field_visual_testing.dart -d windows
 //Line for automated processing
 
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
@@ -56,22 +55,23 @@ class HomePage extends StatefulWidget
 class _HomePageState extends State<HomePage>
 {
   bool? _isCheckboxChecked;
+  String? _textFieldContent;
 
   _setCheckboxState(bool value)
   {
     setState(() => _isCheckboxChecked = value);
   }
 
-  @override
-  void initState() {
-    super.initState();    
-    _isCheckboxChecked = false; 
+  _setTextFieldContent(String value)
+  {
+    setState(() => _textFieldContent = value);
   }
 
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode appBarTitleFocusNode = FocusNode();    
+    FocusNode appBarTitleFocusNode = FocusNode();   
+    TextStyle feedbackTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.normal);
 
     return Scaffold
     (
@@ -93,11 +93,15 @@ class _HomePageState extends State<HomePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", onChanged: _setCheckboxState),
+          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, onTextFieldChanged: _setTextFieldContent),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"Is the checkbox checked? $_isCheckboxChecked", textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),
+            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked ?? false}", textStyle: feedbackTextStyle),
+          ),
+           Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: CustomText(text:"You typed: ${_textFieldContent ?? 'No value entered in the text field'}", textStyle: feedbackTextStyle),
           )
         ]
       ),
