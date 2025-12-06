@@ -7,8 +7,8 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:gap/gap.dart';
@@ -100,26 +100,42 @@ class _HomePageState extends State<HomePage>
         type: FileType.custom,
         allowedExtensions: ['json'],
     );
-    if (result != null && result.files.single.path != null) 
-    {
-        final filePath = result.files.single.path!;
-        final file = File(filePath);
-        final jsonString = await file.readAsString();
+    String jsonString ="";
 
-        setState
-        (
-          () 
-          {
-            Map<String, dynamic> dataMap = jsonDecode(jsonString);
-            // updating the parent's internal
-            _isCheckboxChecked = dataMap["question1"]["isChecked"];
-            _textFieldContent = dataMap["question1"]["comments"];
-            // updating the widget's internal
-            customCheckboxWithTextFieldKey.currentState?.updateCheckBoxStateFunction(_isCheckboxChecked!);
-            customCheckboxWithTextFieldKey.currentState?.updateTextFieldStateFunction(_textFieldContent!);
-          }
-        );
+    if (kIsWeb) 
+    {
+        // For the web, path is null, file bytes are used directly
+        final fileBytes = result!.files.single.bytes;
+        if (fileBytes != null) 
+        {
+          jsonString = utf8.decode(fileBytes);
+        }
+    } 
+    else 
+    {
+        // For desktop/mobile, path is used
+        final filePath = result!.files.single.path;
+        if (filePath != null) 
+        {
+          final file = File(filePath);
+          jsonString = await file.readAsString();
+        }
     }
+
+    setState
+    (
+      () 
+      {
+        Map<String, dynamic> dataMap = jsonDecode(jsonString);
+        // updating the parent's internal
+        _isCheckboxChecked = dataMap["question1"]["isChecked"];
+        _textFieldContent = dataMap["question1"]["comments"];
+        // updating the widget's internal
+        customCheckboxWithTextFieldKey.currentState?.updateCheckBoxStateFunction(_isCheckboxChecked!);
+        customCheckboxWithTextFieldKey.currentState?.updateTextFieldStateFunction(_textFieldContent!);
+      }
+    );
+
     
   }
 
