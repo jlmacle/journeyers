@@ -23,10 +23,12 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final int textFieldMinLines;
   /// The maxLines value for the text field 
   final int textFieldMaxLines;
-  /// The cross axis alignment for the checkbox, and the text field
+  /// The cross axis alignment for the column with the checkbox and the text field
   final CrossAxisAlignment inputsCrossAxisAlignment;
   /// The callback function used to pass the checkbox state
-  final Function onChanged;
+  final Function onCheckboxChanged;
+  /// The callback function used to pass the text field state
+  final Function onTextFieldChanged;
 
   const CustomCheckBoxWithTextField
   ({
@@ -42,7 +44,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
     this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
-    required this.onChanged
+    required this.onCheckboxChanged,
+    required this.onTextFieldChanged
   });
 
   @override
@@ -52,6 +55,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
 class _CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField> 
 {
   bool? _isChecked;
+  String? _textFieldContent;
 
   @override
   void initState() {
@@ -78,7 +82,7 @@ class _CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextFiel
           title: CustomText(text: widget.text, textStyle: textStyle, textAlign: TextAlign.left),
           value: _isChecked, 
           controlAffinity: widget.controlAffinity,
-          onChanged: (value) => {setState((){_isChecked = value; widget.onChanged(_isChecked);})}
+          onChanged: (value) => {setState((){_isChecked = value; widget.onCheckboxChanged(_isChecked);})}
         ),        
         if (_isChecked!)
           Padding
@@ -89,8 +93,9 @@ class _CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextFiel
               decoration: InputDecoration(hintText: widget.textFieldPlaceholder),
               minLines: widget.textFieldMinLines,
               maxLines: widget.textFieldMaxLines,
+              onChanged: (value) => {setState(() {_textFieldContent= value; widget.onTextFieldChanged(_textFieldContent);})}
             ),
-          ),        
+          ),
       ],
     );
   }
