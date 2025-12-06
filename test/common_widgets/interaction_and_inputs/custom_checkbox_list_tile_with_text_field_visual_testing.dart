@@ -6,6 +6,7 @@
 //Line for automated processing
 
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
+
+final GlobalKey<CustomCheckBoxWithTextFieldState> customCheckboxWithTextFieldKey = GlobalKey();
 
 void main() 
 {  
@@ -80,14 +83,44 @@ class _HomePageState extends State<HomePage>
     String jsonString = jsonEncode(enteredData);
     final bytes = Uint8List.fromList(utf8.encode(jsonString));
 
-    await FilePicker.platform.saveFile(
-    dialogTitle: 'Save your data',
-    fileName: "data.json",
-    bytes: bytes, // necessary, at least on Windows
-    type: FileType.custom,
-    allowedExtensions: ['json'],
-  );
+    await FilePicker.platform.saveFile
+    (
+      dialogTitle: 'Data saving',
+      fileName: "data.json",
+      bytes: bytes, // necessary, at least on Windows
+      // type: FileType.custom,
+      allowedExtensions: ['json'],
+    );
+  }
 
+  importDataFromJsonFile() async
+  {
+    FilePickerResult? result = await FilePicker.platform.pickFiles
+    (
+        type: FileType.custom,
+        allowedExtensions: ['json'],
+    );
+    if (result != null && result.files.single.path != null) 
+    {
+        final filePath = result.files.single.path!;
+        final file = File(filePath);
+        final jsonString = await file.readAsString();
+
+        setState
+        (
+          () 
+          {
+            Map<String, dynamic> dataMap = jsonDecode(jsonString);
+            // updating the parent's internal
+            _isCheckboxChecked = dataMap["question1"]["isChecked"];
+            _textFieldContent = dataMap["question1"]["comments"];
+            // updating the widget's internal
+            customCheckboxWithTextFieldKey.currentState?.updateCheckBoxStateFunction(_isCheckboxChecked!);
+            customCheckboxWithTextFieldKey.currentState?.updateTextFieldStateFunction(_textFieldContent!);
+          }
+        );
+    }
+    
   }
 
   @override
@@ -116,7 +149,7 @@ class _HomePageState extends State<HomePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, onTextFieldChanged: _setTextFieldContent),
+          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, onTextFieldChanged: _setTextFieldContent, key: customCheckboxWithTextFieldKey),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
@@ -129,8 +162,14 @@ class _HomePageState extends State<HomePage>
           Gap(8),
           ElevatedButton
           (
-            child: CustomText(text: "Save your data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal) ),
+            child: CustomText(text: "Click to save the data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal) ),
             onPressed: transferDataToJsonFile,
+          ),
+          Gap(8),
+          ElevatedButton
+          (
+            child: CustomText(text: "Load previous data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal) ),
+            onPressed: importDataFromJsonFile,
           )
         ]
       ),
