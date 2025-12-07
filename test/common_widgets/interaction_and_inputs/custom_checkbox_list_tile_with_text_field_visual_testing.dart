@@ -180,14 +180,14 @@ class _HomePageState extends State<HomePage>
           Gap(8),
           ElevatedButton
           (
-            child: CustomText(text: "Click to save the data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal) ),
             onPressed: transferDataToJsonFile,
+            child: CustomText(text: "Click to save the data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
           ),
           Gap(8),
           ElevatedButton
           (
-            child: CustomText(text: "Load previous data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal) ),
             onPressed: importDataFromJsonFile,
+            child: CustomText(text: "Load previous data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
           )
         ]
       ),
