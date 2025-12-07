@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage>
             topPadding: 20,
             textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextHousehold), 
             textFieldEditingController: textFieldEditingController, 
-            textFieldOnChangedCallbackFunction: onChangedCallback
+            onTextFieldChanged: onChangedCallback
           
           ),
           Focus
