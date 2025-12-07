@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 
+// Colors
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
+
+// Gaps and dividers
 final double postAnalysisHeaderLevel2Gap = 20;
 final double preAndPostDividerGap = 15;
+final double level3AndSegmentedButtonGap = 15;
 final double betweenSubPointsDividerHeight = 25;
 
+// Text styles
 final TextStyle feedbackMessageStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.normal);
+
+// Input decorations
+const String pleaseDescribeTextHousehold = 'Please describe the past outcomes for the household, '
+                                            'if some seem to have been out of their comfort zone for too long, '
+                                            'and the more desirable outcomes for the household.'; 
+
+const String pleaseDescribeTextWorkplace = 'Please describe the past outcomes for the workplace, '
+                                            'if some seem to have been out of their comfort zone for too long, '
+                                            'and the more desirable outcomes for the workplace and household.';
+
+const String pleaseDevelopOrTakeNotes = 'Please develop or take some notes if relevant.';
+
+const String testTextFieldPlaceholder = "Please enter some text";
 
 
 final ThemeData appTheme = ThemeData
