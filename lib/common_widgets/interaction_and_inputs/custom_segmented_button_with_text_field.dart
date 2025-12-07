@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 
 class CustomSegmentedButtonWithTextField extends StatefulWidget 
 {
@@ -15,7 +16,13 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   // The font size for the text options
   final double textOptionsfontSize;
   /// The color of the text options
-  final Color textOptionsColor;  
+  final Color textOptionsColor;
+  /// The callback function to notify the parent widget of selection changes
+  final ValueChanged<Set<String>>? onSelectionChanged;
+  /// The callback function to notify the parent widget of selection changes
+  final ValueChanged<String>? onTextChanged;
+  /// The text field editing controller
+  final TextEditingController textFieldEditingController;
   /// The text of the text field place holder
   final String textFieldPlaceholder;
   /// The left and right padding value for the text field
@@ -28,8 +35,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final int textFieldMaxLines;
   /// The cross axis alignment for the segmented button, and the text field
   final CrossAxisAlignment inputsCrossAxisAlignment;
-  /// The callback function to notify the parent widget of selection changes
-  final ValueChanged<Set<String>>? onSelectionChanged;
+
 
   const CustomSegmentedButtonWithTextField
   ({
@@ -41,13 +47,16 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.emptySelectionAllowed = true,
     this.textOptionsfontSize = 24,
     this.textOptionsColor = Colors.black,
+    required this.onSelectionChanged,
+    required this.onTextChanged,
+    required this.textFieldEditingController,
     this.textFieldPlaceholder  = "Please develop or take some notes if relevant.",
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
     this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
-    this.onSelectionChanged, 
+     
   });
 
   @override
@@ -57,7 +66,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
 class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButtonWithTextField> 
 {
   Set<String> selection = {};
-  
+    
   @override
   Widget build(BuildContext context) 
   {
@@ -121,12 +130,10 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: TextField
-            (             
-              decoration: InputDecoration(hintText: widget.textFieldPlaceholder, ),
-              minLines: widget.textFieldMinLines,
-              maxLines: widget.textFieldMaxLines,
-            ),
+            child: CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: widget.textFieldPlaceholder), 
+            textFieldEditingController: widget.textFieldEditingController, textFieldOnChangedCallbackFunction: widget.onTextChanged,
+            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines)
+            
           ),
       ],
     );
