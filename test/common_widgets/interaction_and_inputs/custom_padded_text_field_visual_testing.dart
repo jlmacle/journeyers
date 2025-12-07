@@ -59,6 +59,14 @@ class _HomePageState extends State<HomePage>
                                       'and the more desirable outcomes for the household.'; 
 
   TextEditingController textFieldEditingController = TextEditingController();
+
+  @override
+  void dispose()
+  {
+    textFieldEditingController.dispose();
+    super.dispose();
+  }
+
   void onChangedCallback(String value)
   {
     setState(() {});
