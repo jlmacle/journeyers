@@ -9,6 +9,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final double textFontSize;
   /// The color of the text
   final Color textColor;  
+  /// The alignment for the text
+  final TextAlign textAlign;
   /// If the checkbox is checked to start with
   final bool isChecked;  
   /// Where the checkbox is located
@@ -23,8 +25,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final int textFieldMinLines;
   /// The maxLines value for the text field 
   final int textFieldMaxLines;
-  /// The cross axis alignment for the column with the checkbox and the text field
-  final CrossAxisAlignment inputsCrossAxisAlignment;
+
   /// The callback function used to pass the checkbox state
   final Function onCheckboxChanged;
   /// The callback function used to pass the text field state
@@ -36,14 +37,14 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     required this.text,    
     this.textFontSize = 24,
     this.textColor = Colors.black,
+    this.textAlign = TextAlign.right, 
+    this.controlAffinity = ListTileControlAffinity.trailing,
     this.isChecked = false,
-    this.controlAffinity = ListTileControlAffinity.leading,
     this.textFieldPlaceholder  = "Please develop or take some notes if relevant.",
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,
-    this.textFieldMaxLines = 10,
-    this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
+    this.textFieldMaxLines = 10,    
     required this.onCheckboxChanged,
     required this.onTextFieldChanged
   });
@@ -62,6 +63,13 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
     super.initState();    
     _isChecked = widget.isChecked; 
     _textFieldEditingController =  TextEditingController(text:"");    
+  }
+
+  @override
+  void dispose()
+  {
+    _textFieldEditingController.dispose();
+    super.dispose();
   }
 
   /// Callback function to update the checkbox state
@@ -83,12 +91,12 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
 
     return Column
     (
-      crossAxisAlignment: widget.inputsCrossAxisAlignment,
+      // crossAxisAlignment: widget.inputsCrossAxisAlignment,
       children: 
       [
         CheckboxListTile
         (
-          title: CustomText(text: widget.text, textStyle: textStyle, textAlign: TextAlign.left),
+          title: CustomText(text: widget.text, textStyle: textStyle, textAlign: widget.textAlign),
           value: _isChecked, 
           controlAffinity: widget.controlAffinity,
           onChanged: (value) => {setState((){_isChecked = value; widget.onCheckboxChanged(_isChecked);})}

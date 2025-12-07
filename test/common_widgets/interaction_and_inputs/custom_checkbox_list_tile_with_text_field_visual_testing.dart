@@ -11,6 +11,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+// import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
@@ -22,6 +23,7 @@ void main()
 {  
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
+  // debugPaintSizeEnabled = true;
 }
 
 
@@ -161,10 +163,10 @@ class _HomePageState extends State<HomePage>
       ),
       body: Column
       (
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, onTextFieldChanged: _setTextFieldContent, key: customCheckboxWithTextFieldKey),
+          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, onTextFieldChanged: _setTextFieldContent, 
+          key: customCheckboxWithTextFieldKey),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
