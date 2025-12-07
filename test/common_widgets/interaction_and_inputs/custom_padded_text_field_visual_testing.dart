@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage>
           Focus
           (
             focusNode: feedbackMsgFocusNode,
-            child: Text("You typed: ${textFieldEditingController.text}")
+            child: Text("You typed: ${textFieldEditingController.text}", style: feedbackMessageStyle)
             )          
         ],
       )

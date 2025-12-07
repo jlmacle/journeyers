@@ -143,7 +143,6 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) 
   {
     FocusNode appBarTitleFocusNode = FocusNode();   
-    TextStyle feedbackTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.normal);
 
     return Scaffold
     (
@@ -169,11 +168,11 @@ class _HomePageState extends State<HomePage>
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked ?? false}", textStyle: feedbackTextStyle),
+            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked ?? false}", textStyle: feedbackMessageStyle),
           ),
            Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"You typed: ${_textFieldContent ?? 'No value entered in the text field'}", textStyle: feedbackTextStyle),
+            child: CustomText(text:"You typed: ${_textFieldContent ?? 'No value entered in the text field'}", textStyle: feedbackMessageStyle),
           ),
           Gap(8),
           ElevatedButton
