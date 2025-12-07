@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-typedef OnTextFieldChangedCallback = void Function(String);
-
 class CustomPaddedTextField extends StatefulWidget 
 {
     /// The InputDecoration for the text field
@@ -13,7 +11,7 @@ class CustomPaddedTextField extends StatefulWidget
     /// The text field editing controller
     final TextEditingController textFieldEditingController;
     /// The callback function when the text field is modified
-    final OnTextFieldChangedCallback textFieldOnChangedCallbackFunction;
+    final ValueChanged<String>? textFieldOnChangedCallbackFunction;
     /// The left padding for the text field
     final double leftPadding;
     /// The right padding for the text field
