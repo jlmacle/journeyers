@@ -40,7 +40,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textAlign = TextAlign.left, 
     this.controlAffinity = ListTileControlAffinity.leading,
     this.isChecked = false,
-    this.textFieldPlaceholder  = "Please develop or take some notes if relevant.",
+    required this.textFieldPlaceholder,
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,

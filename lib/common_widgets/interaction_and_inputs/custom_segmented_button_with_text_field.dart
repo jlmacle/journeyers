@@ -50,7 +50,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     required this.onSelectionChanged,
     required this.onTextChanged,
     required this.textFieldEditingController,
-    this.textFieldPlaceholder  = "Please develop or take some notes if relevant.",
+    required this.textFieldPlaceholder,
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,

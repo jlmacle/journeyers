@@ -165,7 +165,8 @@ class _HomePageState extends State<HomePage>
       (
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, onTextFieldChanged: _setTextFieldContent, 
+          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, 
+          textFieldPlaceholder: testTextFieldPlaceholder, onTextFieldChanged: _setTextFieldContent, 
           key: customCheckboxWithTextFieldKey),
           Gap(8),
           Padding(
