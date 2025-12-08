@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_context_form_page.dart';
 
 class ContextAnalysisNewSessionPage extends StatefulWidget 
 {
@@ -17,19 +18,15 @@ class _ContextAnalysisNewSessionPageState extends State<ContextAnalysisNewSessio
 
     FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
 
-    return SizedBox
+    return Expanded
     (
-      height: 100,
-      child: Semantics
-      (        
-        header: true,
-        headingLevel: 2,
-        focusable: true,
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
         child: Focus
         (
           focusNode: contextAnalysisNewSessionFocusNode,
-          child: Center(child: Text('Context analysis new session'))
-        )
+          child: ContextAnalysisContextFormPage()
+        ),
       ),
     );
   }
