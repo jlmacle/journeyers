@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
@@ -99,18 +100,22 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   @override
   Widget build(BuildContext context) 
   {
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
+    double scrollbarThickness = 0;
 
+    // TODO: to modify for tablets
+    if (defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS) scrollbarThickness = 15;
+    
     return
     Scrollbar
     (
       thumbVisibility: true, // to keep the scrollbar visible
-      thickness: 15,
-      controller: _scrollController,
+      thickness: scrollbarThickness,
+      controller: scrollController,
       child:
       SingleChildScrollView
       (
-        controller: _scrollController,
+        controller: scrollController,
         child: Column
         (
           crossAxisAlignment: CrossAxisAlignment.start,
