@@ -93,7 +93,6 @@ class _MyHomePageState extends State<MyHomePage>
         backgroundColor: appTheme.appBarTheme.backgroundColor,           
         title: Semantics
         (
-            focused: true,
             focusable: true,           
             container: true,
             child: Focus(
@@ -200,6 +199,8 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   Widget build(BuildContext context) 
   { 
 
+    FocusNode dismissableMsgFocusNode = FocusNode();
+
     return Scaffold
     (
       body: Column
@@ -207,32 +208,42 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
         mainAxisAlignment: MainAxisAlignment.center,
         children: 
         [
-        ContextAnalysisNewSessionPage(),
-        if (_startMessageVisibilityStatus)
-          CustomDismissableRectangularArea
-          (
-            buildContext:context, 
-            message1: 'This is your first context analysis.', 
-            message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-            messagesColor: paleCyan, // from app_themes
-            actionText:'Please click the message area to acknowledge.',
-            actionTextColor: paleCyan, // from app_themes,
-            areaBackgroundColor: navyBlue, // from app_themes
-            setStateCallBack: _hideMessageArea
-          ),
-              
-        if (isContextAnalysisSessionDataSaved)
-        ...[
-          Divider(),
-          ContextAnalysisDashboardPage()
-        ]
-        // TextButton(
-        //   onPressed: () {
-        //     // This dumps the Semantics Tree's structure and properties to the console.
-        //     debugDumpSemanticsTree(); 
-        //   },
-        //     child: const Text('Dump Semantics'),
-        //   )
+          ContextAnalysisNewSessionPage(),
+          if (_startMessageVisibilityStatus)
+            Semantics
+            (
+              focusable: true,
+              focused: true,
+              child: Focus
+              (
+                focusNode: dismissableMsgFocusNode,
+                child: 
+                CustomDismissableRectangularArea
+                (
+                  buildContext:context, 
+                  message1: 'This is your first context analysis.', 
+                  message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+                  messagesColor: paleCyan, // from app_themes
+                  actionText:'Please click the message area to acknowledge.',
+                  actionTextColor: paleCyan, // from app_themes,
+                  areaBackgroundColor: navyBlue, // from app_themes
+                  setStateCallBack: _hideMessageArea
+                )
+              ),
+            ),
+                
+          if (isContextAnalysisSessionDataSaved)
+          ...[
+            Divider(),
+            ContextAnalysisDashboardPage()
+          ]
+          // TextButton(
+          //   onPressed: () {
+          //     // This dumps the Semantics Tree's structure and properties to the console.
+          //     debugDumpSemanticsTree(); 
+          //   },
+          //     child: const Text('Dump Semantics'),
+          //   )
         ],
       ),
     );

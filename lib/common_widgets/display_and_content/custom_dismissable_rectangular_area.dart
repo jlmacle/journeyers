@@ -68,11 +68,8 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
   @override
   Widget build(BuildContext context) 
   {
-    return Semantics
+    return MergeSemantics
     (        
-      header: true,
-      headingLevel: 2,
-      focusable: true,            
       child: Focus
       (
         focusNode: dismissableRectangularAreaFocusNode,
@@ -93,37 +90,65 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
               (
                 mainAxisAlignment: MainAxisAlignment.center, 
                 children: [
-                  Text
+                  Semantics
                   (
-                    widget.message1,
-                    textAlign: TextAlign.center,
-                    style: TextStyle
+                    header: true,
+                    headingLevel: 1,
+                    focusable: true,
+                    focused: true,
+                    child: Focus
                     (
-                      color: widget.messagesColor,
-                      fontWeight: widget.messagesFontWeight,  
-                                    
+                      child: Text
+                      (
+                        widget.message1,
+                        textAlign: TextAlign.center,
+                        style: TextStyle
+                        (
+                          color: widget.messagesColor,
+                          fontWeight: widget.messagesFontWeight,  
+                                        
+                        ),
+                      ),
                     ),
                   ),
-                  if (widget.message2 != "")       
-                    Text
+                  if (widget.message2 != "")    
+                    Semantics
                     (
-                      widget.message2,
-                      textAlign: TextAlign.center,
-                      style: TextStyle
-                      (
-                        color: widget.messagesColor,
-                        fontWeight: widget.messagesFontWeight,                  
+                      header: true,
+                      headingLevel: 1,
+                      focusable: true,
+                      child: Focus
+                      (   
+                        child: Text
+                        (
+                          widget.message2,
+                          textAlign: TextAlign.center,
+                          style: TextStyle
+                          (
+                            color: widget.messagesColor,
+                            fontWeight: widget.messagesFontWeight,                  
+                          ),
+                        ),
                       ),
                     ),
                     Gap(20),
-                    Text
+                    Semantics
                     (
-                      widget.actionText,
-                      textAlign: TextAlign.center,
-                      style: TextStyle
+                      header: true,
+                      headingLevel: 1,
+                      focusable: true,
+                      child: Focus
                       (
-                        color: widget.actionTextColor,
-                        fontWeight: widget.actionTextFontWeight,                  
+                        child: Text
+                        (
+                          widget.actionText,
+                          textAlign: TextAlign.center,
+                          style: TextStyle
+                          (
+                            color: widget.actionTextColor,
+                            fontWeight: widget.actionTextFontWeight,                  
+                          ),
+                        ),
                       ),
                     ),
                 ],
