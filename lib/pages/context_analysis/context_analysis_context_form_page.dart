@@ -1,8 +1,12 @@
+import 'dart:convert';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_header.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
@@ -16,6 +20,7 @@ class ContextAnalysisContextFormPage extends StatefulWidget {
 
 class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
 {
+  //*****************    State related code    **********************//
   // Example of data for checkbox with text field
   bool? _studiesHouseholdBalanceCheckbox;
   String? _studiesHouseholdBalanceTextFieldContent;
@@ -82,6 +87,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _otherIssueTextFieldState(String newValue){setState(() {});}
 
   _problemsTheGroupsAreTryingToSolveTextFieldState(String newValue){setState(() {});}
+
+
+  
 
 
   @override
@@ -174,34 +182,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
 
-            /**** ➡️ Sub-point  ****/
-            CustomHeader
-            (
-              headerTitle: 'A Decrease in Social Ability Issue?',
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
-            ),
-            Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField
-            (
-              textOption1: 'Yes',
-              textOption2: 'No',
-              textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              // textOptionsColor: Theme.of(context).colorScheme.onSurface,          
-              onSelectionChanged: (newSelection) {
-                setState(() {
-                  _currentSelectionSocialAbility = newSelection;
-                });
-              },
-              textFieldPlaceholder: pleaseDevelopOrTakeNotes,
-              onTextChanged: (String value){setState(() {});},
-              textFieldEditingController: _decreasedSocialAbilityTextController,
-            ),  
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
+           
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
@@ -261,7 +242,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,
-              // textOptionsColor: Theme.of(context).colorScheme.onSurface,          
+              // : Theme.of(context).colorScheme.onSurface,          
               onSelectionChanged: (newSelection) {
                 setState(() {
                   _currentSelectionSameProblems = newSelection;
@@ -290,8 +271,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption1: 'Yes',
               textOption2: 'No',
               textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              // textOptionsColor: Theme.of(context).colorScheme.onSurface,          
+              textOptionsfontSize: 16,         
               onSelectionChanged: (newSelection) {
                 setState(() {
                   _currentSelectionHarmonyHome = newSelection;
@@ -319,8 +299,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption1: 'Yes',
               textOption2: 'No',
               textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              // textOptionsColor: Theme.of(context).colorScheme.onSurface,          
+              textOptionsfontSize: 16,      
               onSelectionChanged: (newSelection) {
                 setState(() {
                   _currentSelectionAppreciabilityAtWork = newSelection;
@@ -357,8 +336,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               onTextChanged: (String value){setState(() {});},
               textFieldEditingController: _earningAbilityTextController,
             ),
-
-
+           
             // /* Debug section */
             // Gap(20),
             // Divider(thickness: 3),
