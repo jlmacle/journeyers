@@ -91,7 +91,6 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
 
     return Column
     (
-      // crossAxisAlignment: widget.inputsCrossAxisAlignment,
       children: 
       [
         CheckboxListTile
