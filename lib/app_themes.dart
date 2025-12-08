@@ -5,10 +5,12 @@ final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
 
 // Gaps and dividers
-final double postAnalysisHeaderLevel2Gap = 20;
-final double preAndPostDividerGap = 15;
+final double postHeaderLevel2Gap = 20;
+final double preAndPostLevel2DividerGap = 20;
+final double preAndPostLevel3DividerGap = 15;
 final double level3AndSegmentedButtonGap = 15;
-final double betweenSubPointsDividerHeight = 25;
+final double betweenLevel2DividerThickness = 3;
+final double betweenLevel3DividerThickness = 1;
 
 // Text styles
 final TextStyle feedbackMessageStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.normal);
@@ -20,9 +22,11 @@ const String pleaseDescribeTextHousehold = 'Please describe the past outcomes fo
 
 const String pleaseDescribeTextWorkplace = 'Please describe the past outcomes for the workplace, '
                                             'if some seem to have been out of their comfort zone for too long, '
-                                            'and the more desirable outcomes for the workplace and household.';
+                                            'and the more desirable outcomes for the workplace and for the household.';
 
-const String pleaseDevelopOrTakeNotes = 'Please develop or take some notes if relevant.';
+const String pleaseDevelopOrTakeNotes = 'Please develop.';
+
+const String pleaseDescribeTextGroups = 'Please describe the problem(s) that the groups/teams are trying to solve.';
 
 const String testTextFieldPlaceholder = "Please enter some text";
 
