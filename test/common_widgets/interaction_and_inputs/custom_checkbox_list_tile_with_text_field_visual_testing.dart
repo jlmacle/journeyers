@@ -180,6 +180,7 @@ class _HomePageState extends State<HomePage>
           Gap(8),
           ElevatedButton
           (
+            // TODO: transfer to CSV file
             onPressed: transferDataToJsonFile,
             child: CustomText(text: "Click to save the data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
           ),
