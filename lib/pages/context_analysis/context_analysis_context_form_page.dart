@@ -23,7 +23,9 @@ class ContextAnalysisContextFormPage extends StatefulWidget {
 
 class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
 {
-  Map<String, dynamic> _enteredData = {};
+ // Data structure
+  List<LinkedHashMap<String, dynamic>> _enteredData = [];
+
   //*****************    State related code    **********************//
   // Example of data for checkbox with text field
   bool? _studiesHouseholdBalanceCheckbox;
@@ -44,10 +46,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   bool? _remainingAppreciatedAtWorkCheckbox;  
   String? _remainingAppreciatedAtWorkTextFieldContent;
 
-  // Example of data for segmented button with text field
-  Set<String> _currentSelectionSocialAbility = {};
-  final TextEditingController _decreasedSocialAbilityTextController = TextEditingController();
-
   bool? _betterLegaciesCheckbox;  
   String? _betterLegaciesTextFieldContent;
  
@@ -55,6 +53,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
   final TextEditingController _problemsTheGroupsAreTryingToSolveTextController = TextEditingController();
 
+  // Example of data for segmented button with text field
   Set<String> _currentSelectionSameProblems = {};
   final TextEditingController _sameProblemsTextController = TextEditingController();
 
@@ -96,7 +95,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   @override
   void dispose() {
     // Disposal of all controllers
-    _decreasedSocialAbilityTextController.dispose();
     _otherIssueTextController.dispose();
     _problemsTheGroupsAreTryingToSolveTextController.dispose();
     _sameProblemsTextController.dispose();
@@ -104,6 +102,123 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     _appreciabilityAtWorkTextController.dispose();
     _earningAbilityTextController.dispose();
     super.dispose();
+  }
+
+  //*****************    Data structure related code    **********************//
+  void dataStructureBuild()
+  {
+    String checkbox = "checkbox";
+    String textfield = "textfield";
+    String segmentedButton = "segmentedButton";
+
+    //************************* Individual perspective ******************************/
+    //Individual level: balance issue
+    // level3TitleBalanceIssueItem1Data
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleBalanceItem1Data[checkbox] = _studiesHouseholdBalanceCheckbox;
+    level3TitleBalanceItem1Data[textfield] = _studiesHouseholdBalanceTextFieldContent;    
+    // level3TitleBalanceIssueItem2Data
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleBalanceItem2Data[checkbox] = _accessingIncomeHouseholdBalanceCheckbox;
+    level3TitleBalanceItem2Data[textfield] = _accessingIncomeHouseholdBalanceTextFieldContent;   
+    // level3TitleBalanceIssueItem3Data
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleBalanceItem3Data[checkbox] = _earningIncomeHouseholdBalanceCheckbox;
+    level3TitleBalanceItem3Data[textfield] = _earningIncomeHouseholdBalanceTextFieldContent;
+    // level3TitleBalanceIssueItem4Data
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleBalanceItem4Data[checkbox] = _helpingOthersHouseholdBalanceCheckbox;
+    level3TitleBalanceItem4Data[textfield] = _helpingOthersHouseholdBalanceTextFieldContent;
+    // level3TitleBalanceIssueData
+    LinkedHashMap<String, dynamic> level3TitleBalanceIssueData 
+    = LinkedHashMap<String, dynamic>.from({level3TitleBalanceIssueItem1:level3TitleBalanceItem1Data,level3TitleBalanceIssueItem2:level3TitleBalanceItem2Data, 
+                                           level3TitleBalanceIssueItem3:level3TitleBalanceItem3Data,level3TitleBalanceIssueItem4:level3TitleBalanceItem4Data});
+
+    //Individual level: workplace issue
+    // level3TitleWorkplaceIssueItem1Data
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleWorkplaceIssueItem1Data[checkbox] = _moreAppreciatedAtWorkCheckbox;
+    level3TitleWorkplaceIssueItem1Data[textfield] = _moreAppreciatedAtWorkTextFieldContent;
+    // level3TitleWorkplaceIssueItem2Data
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleWorkplaceIssueItem2Data[checkbox] = _remainingAppreciatedAtWorkCheckbox;
+    level3TitleWorkplaceIssueItem2Data[textfield] = _remainingAppreciatedAtWorkTextFieldContent; 
+    // level3TitleWorkplaceIssueData
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData 
+    = LinkedHashMap<String, dynamic>.from({level3TitleWorkplaceIssueItem1:level3TitleWorkplaceIssueItem1Data,level3TitleWorkplaceIssueItem2:level3TitleWorkplaceIssueItem2Data});
+
+    //Individual level: legacy issue
+    // level3TitleLegacyIssueItem1
+    LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    level3TitleLegacyIssueItem1Data[checkbox] = _betterLegaciesCheckbox;
+    level3TitleLegacyIssueItem1Data[textfield] = _betterLegaciesTextFieldContent;
+    // level3TitleWorkplaceIssueData
+    LinkedHashMap<String, dynamic> level3TitleLegacyIssueData 
+    = LinkedHashMap<String, dynamic>.from({level3TitleLegacyIssueItem1:level3TitleLegacyIssueItem1Data});
+
+    //Individual level: another issue
+    // level3TitleAnotherIssueItem1
+    LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({textfield:""});
+    level3TitleAnotherIssueItem1Data[textfield] = _otherIssueTextController.text;
+ 
+    // Adding to to the level2TitleIndividual level
+    // level2TitleIndividualData
+    // Different pattern for "level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data"
+    LinkedHashMap<String, dynamic> level2TitleIndividualData = 
+    LinkedHashMap<String, dynamic>.from(
+      {level2TitleIndividual:{level3TitleBalanceIssue:level3TitleBalanceIssueData, level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
+                              level3TitleLegacyIssue:level3TitleLegacyIssueData, level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data}});
+
+    //************************* Group/Team perspective ******************************/
+    //Group/team level: 
+    // level3TitleGroupsProblematicsItem1
+    LinkedHashMap<String, dynamic>  level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({textfield:""});
+    level3TitleGroupsProblematicsItem1Data[textfield] = _problemsTheGroupsAreTryingToSolveTextController.text;
+
+    // level3TitleSameProblemsItem1
+    LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    level3TitleSameProblemsItem1Data[segmentedButton] = _currentSelectionSameProblems.first;
+    level3TitleSameProblemsItem1Data[textfield] = _sameProblemsTextController.text;
+
+    // level3TitleHarmonyAtHomeItem1
+    LinkedHashMap<String, dynamic>  level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    level3TitleHarmonyAtHomeItems1Data[segmentedButton] = _currentSelectionHarmonyHome.first;
+    level3TitleHarmonyAtHomeItems1Data[textfield] = _harmonyHomeTextController.text;
+
+    // level3TitleAppreciabilityAtWorkItem1
+    LinkedHashMap<String, dynamic>  level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    level3TitleAppreciabilityAtWorkItem1Data[segmentedButton] = _currentSelectionAppreciabilityAtWork.first;
+    level3TitleAppreciabilityAtWorkItem1Data[textfield] = _appreciabilityAtWorkTextController.text;
+
+    // level3TitleIncomeEarningAbilityItem1
+    LinkedHashMap<String, dynamic>  level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    level3TitleIncomeEarningAbilityItem1Data[segmentedButton] = _currentSelectionEarningAbility.first;
+    level3TitleIncomeEarningAbilityItem1Data[textfield] = _earningAbilityTextController.text;
+
+
+
+    // Adding to to the level2TitleGroup level
+    // level2TitleGroupData
+    LinkedHashMap<String, dynamic> level2TitleGroupData = 
+    LinkedHashMap<String, dynamic>.from(
+      {level2TitleGroup:{level3TitleGroupsProblematics:level3TitleGroupsProblematicsItem1Data, level3TitleSameProblem:level3TitleSameProblemsItem1Data,
+      level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data, level3TitleAppreciabilityAtWork: level3TitleAppreciabilityAtWorkItem1Data,
+      level3TitleIncomeEarningAbility: level3TitleIncomeEarningAbilityItem1Data}});
+     
+
+
+    // Adding individual and group perspective to root level data
+    _enteredData = [level2TitleIndividualData, level2TitleGroupData];
+
+    
+  }
+
+  void updateDataStructure()
+  {
+    setState(() {
+      dataStructureBuild();
+    });
+    print(_enteredData);
   }
 
   
@@ -132,7 +247,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
-          [
+          [ ElevatedButton(onPressed: updateDataStructure, child: Text('Data structure update')),
+            Gap(20),
+            Divider(thickness: 3),
+            Gap(20),
+            //*********************/
             Center(
               child: CustomHeader
               (
@@ -158,13 +277,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(text: level3TitleBalanceItem1, textFieldPlaceholder: pleaseDescribeTextHousehold,  
+            CustomCheckBoxWithTextField(text: level3TitleBalanceIssueItem1, textFieldPlaceholder: pleaseDescribeTextHousehold,  
             onCheckboxChanged: _setStudiesHouseholdBalanceCheckboxState, onTextFieldChanged: _setStudiesHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: level3TitleBalanceItem2, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleBalanceIssueItem2, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setAccessingIncomeHouseholdBalanceCheckboxState, onTextFieldChanged: _setAccessingIncomeHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: level3TitleBalanceItem3, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleBalanceIssueItem3, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setEarningIncomeHouseholdBalanceCheckboxState, onTextFieldChanged: _setEarningIncomedHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: level3TitleBalanceItem4, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleBalanceIssueItem4, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setHelpingOthersdBalanceCheckboxState, onTextFieldChanged: _setHelpingOthersHouseholdBalanceTextFieldState),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
@@ -339,6 +458,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               onTextChanged: (String value){setState(() {});},
               textFieldEditingController: _earningAbilityTextController,
             ),
+
+           
+            
            
             // /* Debug section */
             // Gap(20),
