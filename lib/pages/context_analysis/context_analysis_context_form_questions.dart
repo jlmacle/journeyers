@@ -4,11 +4,11 @@
 String level2TitleIndividual = 'As an individual: What problem am I trying to solve?';
 
 // Header level 3 and sub items
-String  level3TitleBalanceIssue = 'A Balance Issue?';
-String level3TitleStudiesHouseholdBalanceItem1 = 'To balance studies and household life?';
-String level3TitleStudiesHouseholdBalanceItem2 = 'To balance accessing income and household life?';
-String level3TitleStudiesHouseholdBalanceItem3 = 'To balance earning an income and household life?';
-String level3TitleStudiesHouseholdBalanceItem4 = 'To balance helping others and household life?';
+String level3TitleBalanceIssue = 'A Balance Issue?';
+String level3TitleBalanceItem1 = 'To balance studies and household life?';
+String level3TitleBalanceItem2 = 'To balance accessing income and household life?';
+String level3TitleBalanceItem3 = 'To balance earning an income and household life?';
+String level3TitleBalanceItem4 = 'To balance helping others and household life?';
 
 // Header level 3 and sub items
 String  level3TitleWorkplaceIssue = 'A Workplace Issue?';

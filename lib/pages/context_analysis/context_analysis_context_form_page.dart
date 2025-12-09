@@ -23,6 +23,7 @@ class ContextAnalysisContextFormPage extends StatefulWidget {
 
 class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
 {
+  Map<String, dynamic> _enteredData = {};
   //*****************    State related code    **********************//
   // Example of data for checkbox with text field
   bool? _studiesHouseholdBalanceCheckbox;
@@ -105,6 +106,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     super.dispose();
   }
 
+  
   @override
   Widget build(BuildContext context) 
   {
@@ -156,13 +158,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem1, textFieldPlaceholder: pleaseDescribeTextHousehold,  
+            CustomCheckBoxWithTextField(text: level3TitleBalanceItem1, textFieldPlaceholder: pleaseDescribeTextHousehold,  
             onCheckboxChanged: _setStudiesHouseholdBalanceCheckboxState, onTextFieldChanged: _setStudiesHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem2, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleBalanceItem2, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setAccessingIncomeHouseholdBalanceCheckboxState, onTextFieldChanged: _setAccessingIncomeHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem3, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleBalanceItem3, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setEarningIncomeHouseholdBalanceCheckboxState, onTextFieldChanged: _setEarningIncomedHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem4, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleBalanceItem4, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setHelpingOthersdBalanceCheckboxState, onTextFieldChanged: _setHelpingOthersHouseholdBalanceTextFieldState),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
