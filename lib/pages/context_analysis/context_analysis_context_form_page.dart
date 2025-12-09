@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
@@ -10,8 +11,10 @@ import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
 
 class ContextAnalysisContextFormPage extends StatefulWidget {
+  
   const ContextAnalysisContextFormPage({super.key});
 
   @override
@@ -89,9 +92,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _problemsTheGroupsAreTryingToSolveTextFieldState(String newValue){setState(() {});}
 
 
-  
-
-
   @override
   void dispose() {
     // Disposal of all controllers
@@ -108,6 +108,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   @override
   Widget build(BuildContext context) 
   {
+   
     final ScrollController scrollController = ScrollController();
     double scrollbarThickness = 0;
 
@@ -142,7 +143,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child:CustomHeader
               (
-                headerTitle: 'As an individual:\nWhat problem am I trying to solve?',
+                headerTitle: level2TitleIndividual,
                 headerLevel: 2,
               ),
             ),
@@ -151,17 +152,17 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'A Balance Issue?',
+              headerTitle: level3TitleBalanceIssue,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(text: 'To balance studies and household life?', textFieldPlaceholder: pleaseDescribeTextHousehold,  
+            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem1, textFieldPlaceholder: pleaseDescribeTextHousehold,  
             onCheckboxChanged: _setStudiesHouseholdBalanceCheckboxState, onTextFieldChanged: _setStudiesHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: 'To balance accessing income and household life?', textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem2, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setAccessingIncomeHouseholdBalanceCheckboxState, onTextFieldChanged: _setAccessingIncomeHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: 'To balance earning an income and household life?', textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem3, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setEarningIncomeHouseholdBalanceCheckboxState, onTextFieldChanged: _setEarningIncomedHouseholdBalanceTextFieldState),
-            CustomCheckBoxWithTextField(text: 'To balance helping others and household life?', textFieldPlaceholder: pleaseDescribeTextHousehold, 
+            CustomCheckBoxWithTextField(text: level3TitleStudiesHouseholdBalanceItem4, textFieldPlaceholder: pleaseDescribeTextHousehold, 
             onCheckboxChanged: _setHelpingOthersdBalanceCheckboxState, onTextFieldChanged: _setHelpingOthersHouseholdBalanceTextFieldState),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
@@ -170,13 +171,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'A Workplace Issue?',
+              headerTitle: level3TitleWorkplaceIssue,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(text: 'To solve a need to be more appreciated at work?', textFieldPlaceholder: pleaseDescribeTextWorkplace,
+            CustomCheckBoxWithTextField(text: level3TitleWorkplaceIssueItem1, textFieldPlaceholder: pleaseDescribeTextWorkplace,
             onCheckboxChanged: _moreAppreciatedAtWorkCheckboxState, onTextFieldChanged: _moreAppreciatedAtWorkTextFieldState),
-            CustomCheckBoxWithTextField(text: 'To solve a need to remain appreciated at work?', textFieldPlaceholder: pleaseDescribeTextWorkplace,
+            CustomCheckBoxWithTextField(text: level3TitleWorkplaceIssueItem2, textFieldPlaceholder: pleaseDescribeTextWorkplace,
             onCheckboxChanged: _remainingAppreciatedAtWorkCheckboxState, onTextFieldChanged: _remainingAppreciatedAtWorkTextFieldState),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
@@ -186,11 +187,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'A Legacy Issue?',
+              headerTitle: level3TitleLegacyIssue,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(text: 'To have better legacies to leave to our children/others?', textFieldPlaceholder: pleaseDevelopOrTakeNotes,
+            CustomCheckBoxWithTextField(text: level3TitleLegacyIssueItem1, textFieldPlaceholder: pleaseDevelopOrTakeNotes,
             onCheckboxChanged: _betterLegaciesCheckboxState, onTextFieldChanged: _betterLegaciesTextFieldState),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
@@ -199,7 +200,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'Is the issue of another type?',
+              headerTitle: level3TitleAnotherIssue,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
@@ -214,7 +215,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child:CustomHeader
               (
-                headerTitle: 'As a member of groups/teams:\nWhat problem(s) are we trying to solve?',
+                headerTitle: level2TitleGroup,
                 headerLevel: 2,
               ),
             ),
@@ -222,7 +223,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
             CustomHeader
             (
-              headerTitle: 'What problem(s) are the groups/teams trying to solve?',
+              headerTitle: level3TitleGroupsProblematics,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
@@ -231,7 +232,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'Am I trying to solve the same problem(s) as my groups/teams?',
+              headerTitle: level3TitleSameProblem,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
@@ -261,7 +262,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'Is entering the group problem-solving process consistent with harmony at home?',
+              headerTitle: level3TitleHarmonyAtHome,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
@@ -289,7 +290,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'Is entering the group problem-solving process consistent with appreciability at work?',
+              headerTitle: level3TitleAppreciabilityAtWork,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
@@ -317,7 +318,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeader
             (
-              headerTitle: 'Is entering the group problem-solving process consistent with my income earning ability?',
+              headerTitle: level3TitleIncomeEarningAbility,
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
@@ -349,9 +350,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
             // Text("More Appreciated At Work: ${_moreAppreciatedAtWorkCheckbox ?? false}, text: ${_moreAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
             // Text("Remaining Appreciated At Work: ${_remainingAppreciatedAtWorkCheckbox ?? false}, text: ${_remainingAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
-            
-            // Text("Decreased Social Ability: ${ _currentSelectionSocialAbility.toString()}, text: ${_decreasedSocialAbilityTextController.text}"),
-
+           
             // Text("Better Legacies: ${_betterLegaciesCheckbox ?? false}, text: ${_betterLegaciesTextFieldContent ?? 'No value entered in the text field'}"),
             
             // Text("Other Issue: text: ${_otherIssueTextController.text}"),
