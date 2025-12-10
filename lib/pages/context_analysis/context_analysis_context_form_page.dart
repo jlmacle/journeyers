@@ -177,25 +177,27 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
     // level3TitleSameProblemsItem1
     LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
-    level3TitleSameProblemsItem1Data[segmentedButton] = _currentSelectionSameProblems.first;
+    if (_currentSelectionSameProblems.length == 1) {level3TitleSameProblemsItem1Data[segmentedButton] = _currentSelectionSameProblems.first;}
+    else {level3TitleSameProblemsItem1Data[segmentedButton] = "";}
     level3TitleSameProblemsItem1Data[textfield] = _sameProblemsTextController.text;
 
     // level3TitleHarmonyAtHomeItem1
     LinkedHashMap<String, dynamic>  level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
-    level3TitleHarmonyAtHomeItems1Data[segmentedButton] = _currentSelectionHarmonyHome.first;
+    if(_currentSelectionHarmonyHome.length == 1)  {level3TitleHarmonyAtHomeItems1Data[segmentedButton] = _currentSelectionHarmonyHome.first;}
+    else {level3TitleHarmonyAtHomeItems1Data[segmentedButton] = "";}
     level3TitleHarmonyAtHomeItems1Data[textfield] = _harmonyHomeTextController.text;
 
-    // level3TitleAppreciabilityAtWorkItem1
+    // // level3TitleAppreciabilityAtWorkItem1
     LinkedHashMap<String, dynamic>  level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
-    level3TitleAppreciabilityAtWorkItem1Data[segmentedButton] = _currentSelectionAppreciabilityAtWork.first;
+    if (_currentSelectionAppreciabilityAtWork.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[segmentedButton] = _currentSelectionAppreciabilityAtWork.first;}
+    else {level3TitleAppreciabilityAtWorkItem1Data[segmentedButton] = "";}
     level3TitleAppreciabilityAtWorkItem1Data[textfield] = _appreciabilityAtWorkTextController.text;
 
     // level3TitleIncomeEarningAbilityItem1
     LinkedHashMap<String, dynamic>  level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
-    level3TitleIncomeEarningAbilityItem1Data[segmentedButton] = _currentSelectionEarningAbility.first;
+    if(_currentSelectionEarningAbility.length == 1)  {level3TitleIncomeEarningAbilityItem1Data[segmentedButton] = _currentSelectionEarningAbility.first;}
+    else {level3TitleIncomeEarningAbilityItem1Data[segmentedButton] = "";}
     level3TitleIncomeEarningAbilityItem1Data[textfield] = _earningAbilityTextController.text;
-
-
 
     // Adding to to the level2TitleGroup level
     // level2TitleGroupData
@@ -205,8 +207,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data, level3TitleAppreciabilityAtWork: level3TitleAppreciabilityAtWorkItem1Data,
       level3TitleIncomeEarningAbility: level3TitleIncomeEarningAbilityItem1Data}});
      
-
-
     // Adding individual and group perspective to root level data
     _enteredData = [level2TitleIndividualData, level2TitleGroupData];
 
@@ -218,7 +218,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     setState(() {
       dataStructureBuild();
     });
-    print(_enteredData);
+    print(_enteredData);    
   }
 
   
