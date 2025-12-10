@@ -1,38 +1,41 @@
 
 import "dart:collection";
+import "dart:io";
 
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 
 // Labels used in the form data
-String inputTypeCheckboxWithTextField = "checkbox";
-String inputTypeTextField = "textField";
-String inputTypeSegmentedButton = "segmentedButton";
+String checkbox = "checkbox";
+String textField = "textField";
+String segmentedButton = "segmentedButton";
+String notes = "Notes:";
+
 
 // Mapping questions to input widgets to process data according to input widgets
 Map<String,String> mappingLabelsToInputItems 
 = {
   //*********** Individual perspective ***********/
   // balance issue
-  level3TitleBalanceIssueItem1:inputTypeCheckboxWithTextField, level3TitleBalanceIssueItem2:inputTypeCheckboxWithTextField,
-  level3TitleBalanceIssueItem3:inputTypeCheckboxWithTextField, level3TitleBalanceIssueItem4:inputTypeCheckboxWithTextField,
+  level3TitleBalanceIssueItem1:checkbox, level3TitleBalanceIssueItem2:checkbox,
+  level3TitleBalanceIssueItem3:checkbox, level3TitleBalanceIssueItem4:checkbox,
   // workplace issue
-  level3TitleWorkplaceIssueItem1:inputTypeCheckboxWithTextField, level3TitleWorkplaceIssueItem2:inputTypeCheckboxWithTextField,
+  level3TitleWorkplaceIssueItem1:checkbox, level3TitleWorkplaceIssueItem2:checkbox,
   // legacy issue
-  level3TitleLegacyIssueItem1:inputTypeCheckboxWithTextField,
+  level3TitleLegacyIssueItem1:checkbox,
   // another type
-  level3TitleAnotherIssue:inputTypeTextField,
+  level3TitleAnotherIssue:textField,
   //*********** Group/team perspective ***********/
   // group problematics
-  level3TitleGroupsProblematics:inputTypeTextField,
+  level3TitleGroupsProblematics:textField,
   // same problem?
-  level3TitleSameProblem:inputTypeSegmentedButton,
+  level3TitleSameProblem:segmentedButton,
   // harmony at home
-  level3TitleHarmonyAtHome:inputTypeSegmentedButton,
+  level3TitleHarmonyAtHome:segmentedButton,
   // appreciability at work
-  level3TitleAppreciabilityAtWork:inputTypeSegmentedButton,
+  level3TitleAppreciabilityAtWork:segmentedButton,
   // earning ability
-  level3TitleIncomeEarningAbility:inputTypeSegmentedButton
+  level3TitleIncomeEarningAbility:segmentedButton
  };
 
  // Defining the titles level 2
@@ -47,62 +50,52 @@ List<dynamic> preCSVData = [];
 
 //***************** Processing data according to input widgets: beginning  ***********************/
 
-// Method to convert information from {checkbox: false/true/null, textfield: "data"/null} to:
-// checkbox, false/true
-// textfield, "data"/""
+/// Method to convert information from {checkbox: false/true/null, textField: "data"/null} to:
+/// checkbox, false/true
+/// textField, "data"/""
 List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> checkBoxWithTextFieldtextData)
 {
   List<dynamic> checkboxPreCSVData = []; 
 
-  var dataCheckbox = checkBoxWithTextFieldtextData["checkbox"] ?? false;
-  var data1 = ["checkbox",dataCheckbox];
+  var dataCheckbox = "${checkBoxWithTextFieldtextData[checkbox]}";
+  var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-  var dataTextField = checkBoxWithTextFieldtextData["textfield"] ?? "";
-  var data2 = ["textfield",dataTextField];
+  var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
+  var data2 = [notes,dataTextField]; // "Notes:" in front of the text field data in the pre CSV
 
   checkboxPreCSVData.add(data1);
   checkboxPreCSVData.add(data2);
 
-  // print(checkBoxWithTextFieldtextData);
-  // printd(data1);
-  // printd(data2);
-  // printd(checkboxPreCSVData);
-
   return checkboxPreCSVData;
 }
 
-// Method to convert information from {segmentedButton: Yes/No/I don't know/null , textfield: "data"/null} to:
+// Method to convert information from {segmentedButton: Yes/No/I don't know/null , textField: "data"/null} to:
 // segmentedButton,Yes/No/I don't know/""
-// textfield, "data"/""
+// textField, "data"/""
 List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> segmentedButtonWithTextFieldData)
 {
   List<dynamic> segmentedButtonPreCSVData = []; 
 
-  var dataSegmentedButton = segmentedButtonWithTextFieldData["segmentedButton"] ?? false;
-  var data1 = ["segmentedButton",dataSegmentedButton];
+  var dataSegmentedButton = segmentedButtonWithTextFieldData[segmentedButton] ?? false;
+  var data1 = ["",dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
 
-  var dataTextField = segmentedButtonWithTextFieldData["textfield"] ?? "";
-  var data2 = ["textfield",dataTextField];
+  var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
+  var data2 = [notes,dataTextField]; // "Notes:" in front of the text field data in the pre CSV
 
   segmentedButtonPreCSVData.add(data1);
   segmentedButtonPreCSVData.add(data2);
 
-  // print(checkBoxWithTextFieldtextData);
-  // printd(data1);
-  // printd(data2);
-  // printd(checkboxPreCSVData);
-
   return segmentedButtonPreCSVData;
 }
 
-// Method to convert information from {textfield: "data"/null} to:
-// textfield, "data"/""
+// Method to convert information from {textField: "data"/null} to:
+// textField, "data"/""
 List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData)
 {
   List<dynamic> textFieldPreCSVData = []; 
 
-  var dataTextField = textFieldData["textfield"] ?? "";
-  var data = ["textfield",dataTextField];
+  var dataTextField = textFieldData[textField] ?? "";
+  var data = [notes,dataTextField]; // "Notes:" in front of the text field data in the pre CSV
 
   textFieldPreCSVData.add(data);
 
@@ -117,19 +110,19 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
 {
   treatmentAccordingToInputType(List<dynamic> preCSVData, String itemOrTitleLable, LinkedHashMap<String,dynamic> level2Or3DataAsLinkedHashMap)
   {
-    if (mappingLabelsToInputItems[itemOrTitleLable] == inputTypeCheckboxWithTextField)
+    if (mappingLabelsToInputItems[itemOrTitleLable] == checkbox)
         {
           var checkboxPreCSVData = checkBoxWithTextFieldDataToPreCSV(level2Or3DataAsLinkedHashMap[itemOrTitleLable]);
           preCSVData.add(checkboxPreCSVData[0]);
           preCSVData.add(checkboxPreCSVData[1]);
         }
-        else if (mappingLabelsToInputItems[itemOrTitleLable] == inputTypeSegmentedButton)
+        else if (mappingLabelsToInputItems[itemOrTitleLable] == segmentedButton)
         {
           var segmentedButtonPreCSVData = segmentedButtonWithTextFieldDataToPreCSV(level2Or3DataAsLinkedHashMap[itemOrTitleLable]);
           preCSVData.add(segmentedButtonPreCSVData[0]);
           preCSVData.add(segmentedButtonPreCSVData[1]);
         }
-        else if (mappingLabelsToInputItems[itemOrTitleLable] == inputTypeTextField)
+        else if (mappingLabelsToInputItems[itemOrTitleLable] == textField)
         {
           var textFieldpreCSVData = textFieldDataToPreCSV(level2Or3DataAsLinkedHashMap[itemOrTitleLable]);          
           preCSVData.add(textFieldpreCSVData[0]);
@@ -192,11 +185,138 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
 }
 
 // temporary method
-void printPreCSVDataToConsole(List<dynamic> data)
+void printPreCSVDataToConsole(List<dynamic> data) 
 {
   for (var item in data)
   {
-    print("${item[0]},${item[1]}");
+    var data = "${item[0]},${item[1]}";
+    print(data);
   }
+}
+
+void printToCSV(String fileName, List<dynamic> data) async
+{
+  File file = File("txt.csv");
+  var sink = file.openWrite(mode: FileMode.write); 
+
+  for (var item in data)
+  {
+    var data = "${item[0]},${item[1]}";
+    sink.write(data+ '\n');
+  }
+  
+  await sink.flush();
+  await sink.close();
+}
+
+
+/// Method to go from pre CSV data to CSV data (before using the data to print a CSV file)
+/// Removal of all ["Notes:",] 
+/// 
+/// 
+/// Addition of a ["",""] after a level 2 title
+/// Addition of a ["",""] after an existing last item of a level 3 title
+/// Addition of a ["",""] after a level 3 title without sub items
+
+/// 
+List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
+{
+  // List<dynamic> csvData = [];
+  print("");
+  print("Entering preCSVToCSVData");
+  print("preCSVData");
+  print(preCSVData);
+
+  // Analyzing the data for checkboxes with nulls and empty notes 
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {    
+    var indexedData = preCSVData[index];  
+    var indexData_1AsString = indexedData[1] as String;
+
+    // Removal of all [,null] (unchecked boxes)
+    if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() == "null"))  {preCSVData.removeAt(index);}
+    // Every checkbox is followed by a note
+    // The same index points now to the notes data
+    // Removal of all ["Notes:",]  
+    indexedData = preCSVData[index];  
+    indexData_1AsString = indexedData[1];
+    if (indexedData[0].contains(notes) && (indexData_1AsString.trim() == "")) {preCSVData.removeAt(index); }
+  }
+
+  // Getting the indexes for the titles level 3 with children before the next analysis
+  Map<String,int> titlesLevel3WithChildrenIndexes = {};
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {
+    var indexedData = preCSVData[index];
+    if(indexedData[1].trim() == level3TitleBalanceIssue){titlesLevel3WithChildrenIndexes[level3TitleBalanceIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleWorkplaceIssue){titlesLevel3WithChildrenIndexes[level3TitleWorkplaceIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleLegacyIssue){titlesLevel3WithChildrenIndexes[level3TitleLegacyIssue] = index;}
+  }
+
+  var level3TitleBalanceIssueChildren = [level3TitleBalanceIssueItem1, level3TitleBalanceIssueItem2, level3TitleBalanceIssueItem3, level3TitleBalanceIssueItem4];
+  var level3TitleWorkplaceIssueChildren = [level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2];
+  var level3TitleLegacyIssueChildren = [level3TitleLegacyIssueItem1];  
+  // Analyzing the data for checkboxes not null, and adding Xs before another processing to remove the checkboxes lines
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {  
+    var indexedData = preCSVData[index];  
+    var indexData_1AsString = indexedData[1] as String;
+    if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() != "null")) 
+    {
+      // Adding X in front of the question
+      // possible with this design of a question preceding a checkbox
+      var previousIndexData = preCSVData[index-1];
+      previousIndexData[0] = 'X';
+      var itemOrTitleLevel3 = previousIndexData[1];
+      // if the question was not a title level 3, adding an X to the parent title level 3, if none yet
+      if (level3TitleBalanceIssueChildren.contains(itemOrTitleLevel3))
+      {
+        var parentIndex = titlesLevel3WithChildrenIndexes[level3TitleBalanceIssue];
+        var parentData = preCSVData[parentIndex!];
+        parentData[0]= 'X';
+      }
+      else if (level3TitleWorkplaceIssueChildren.contains(itemOrTitleLevel3))
+      {
+        var parentIndex = titlesLevel3WithChildrenIndexes[level3TitleWorkplaceIssue];
+        var parentData = preCSVData[parentIndex!];
+        parentData[0]= 'X';
+      }
+      else if (level3TitleLegacyIssueChildren.contains(itemOrTitleLevel3))
+      {
+        var parentIndex = titlesLevel3WithChildrenIndexes[level3TitleLegacyIssue];
+        var parentData = preCSVData[parentIndex!];
+        parentData[0]= 'X';
+      }
+    }
+  } 
+
+  // Analyzing to remove the lines with checkbox
+  // These lines are at least 2 indexes apart
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {  
+    var indexedData = preCSVData[index];  
+    var indexData_1AsString = indexedData[1] as String;
+    if (indexedData[0].contains(checkbox)){preCSVData.removeAt(index);}
+  }
+
+  var titlesLevel3 = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue,
+                      level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
+                      level3TitleIncomeEarningAbility};
+
+      
+  
+  // TODO: Extra lines to add 
+
+
+  // Addition of a ["",""] after the level 2 title at index 0
+  // preCSVData.insert(1,["",""]);
+
+  print("");
+  print("Exiting preCSVToCSVData");
+  print("preCSVData");
+  print(preCSVData);
+
+
+  return preCSVData;
 }
 
