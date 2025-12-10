@@ -11,6 +11,7 @@ import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
 
 class ContextAnalysisContextFormPage extends StatefulWidget {
@@ -167,7 +168,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     LinkedHashMap<String, dynamic> level2TitleIndividualData = 
     LinkedHashMap<String, dynamic>.from(
       {level2TitleIndividual:{level3TitleBalanceIssue:level3TitleBalanceIssueData, level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
-                              level3TitleLegacyIssue:level3TitleLegacyIssueData, level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data}});
+                              level3TitleLegacyIssue:level3TitleLegacyIssueData, level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
 
     //************************* Group/Team perspective ******************************/
     //Group/team level: 
@@ -219,6 +220,12 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       dataStructureBuild();
     });
     print(_enteredData);    
+    print("");
+    print("");
+    
+    // testing dataToPreCSV 
+    var data = dataToPreCSV(_enteredData[0]);
+    printPreCSVDataToConsole(data);
   }
 
   
@@ -247,11 +254,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
-          [ ElevatedButton(onPressed: updateDataStructure, child: Text('Data structure update')),
-            Gap(20),
-            Divider(thickness: 3),
-            Gap(20),
-            //*********************/
+          [ 
+            //********** For debug ************//
+            // ElevatedButton(onPressed: updateDataStructure, child: Text('Data structure update')),
+            // Gap(20),
+            // Divider(thickness: 3),
+            // Gap(20),
+            //*********** Form ***********//
             Center(
               child: CustomHeader
               (
