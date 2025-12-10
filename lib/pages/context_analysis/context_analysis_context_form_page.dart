@@ -109,27 +109,27 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   void dataStructureBuild()
   {
     String checkbox = "checkbox";
-    String textfield = "textfield";
+    String textField = "textField";
     String segmentedButton = "segmentedButton";
 
     //************************* Individual perspective ******************************/
     //Individual level: balance issue
     // level3TitleBalanceIssueItem1Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleBalanceItem1Data[checkbox] = _studiesHouseholdBalanceCheckbox;
-    level3TitleBalanceItem1Data[textfield] = _studiesHouseholdBalanceTextFieldContent;    
+    level3TitleBalanceItem1Data[textField] = _studiesHouseholdBalanceTextFieldContent;    
     // level3TitleBalanceIssueItem2Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleBalanceItem2Data[checkbox] = _accessingIncomeHouseholdBalanceCheckbox;
-    level3TitleBalanceItem2Data[textfield] = _accessingIncomeHouseholdBalanceTextFieldContent;   
+    level3TitleBalanceItem2Data[textField] = _accessingIncomeHouseholdBalanceTextFieldContent;   
     // level3TitleBalanceIssueItem3Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleBalanceItem3Data[checkbox] = _earningIncomeHouseholdBalanceCheckbox;
-    level3TitleBalanceItem3Data[textfield] = _earningIncomeHouseholdBalanceTextFieldContent;
+    level3TitleBalanceItem3Data[textField] = _earningIncomeHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueItem4Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleBalanceItem4Data[checkbox] = _helpingOthersHouseholdBalanceCheckbox;
-    level3TitleBalanceItem4Data[textfield] = _helpingOthersHouseholdBalanceTextFieldContent;
+    level3TitleBalanceItem4Data[textField] = _helpingOthersHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueData
     LinkedHashMap<String, dynamic> level3TitleBalanceIssueData 
     = LinkedHashMap<String, dynamic>.from({level3TitleBalanceIssueItem1:level3TitleBalanceItem1Data,level3TitleBalanceIssueItem2:level3TitleBalanceItem2Data, 
@@ -137,30 +137,30 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
     //Individual level: workplace issue
     // level3TitleWorkplaceIssueItem1Data
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleWorkplaceIssueItem1Data[checkbox] = _moreAppreciatedAtWorkCheckbox;
-    level3TitleWorkplaceIssueItem1Data[textfield] = _moreAppreciatedAtWorkTextFieldContent;
+    level3TitleWorkplaceIssueItem1Data[textField] = _moreAppreciatedAtWorkTextFieldContent;
     // level3TitleWorkplaceIssueItem2Data
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleWorkplaceIssueItem2Data[checkbox] = _remainingAppreciatedAtWorkCheckbox;
-    level3TitleWorkplaceIssueItem2Data[textfield] = _remainingAppreciatedAtWorkTextFieldContent; 
+    level3TitleWorkplaceIssueItem2Data[textField] = _remainingAppreciatedAtWorkTextFieldContent; 
     // level3TitleWorkplaceIssueData
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData 
     = LinkedHashMap<String, dynamic>.from({level3TitleWorkplaceIssueItem1:level3TitleWorkplaceIssueItem1Data,level3TitleWorkplaceIssueItem2:level3TitleWorkplaceIssueItem2Data});
 
     //Individual level: legacy issue
     // level3TitleLegacyIssueItem1
-    LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:false,textfield:""});
+    LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({checkbox:"false",textField:""});
     level3TitleLegacyIssueItem1Data[checkbox] = _betterLegaciesCheckbox;
-    level3TitleLegacyIssueItem1Data[textfield] = _betterLegaciesTextFieldContent;
+    level3TitleLegacyIssueItem1Data[textField] = _betterLegaciesTextFieldContent;
     // level3TitleWorkplaceIssueData
     LinkedHashMap<String, dynamic> level3TitleLegacyIssueData 
     = LinkedHashMap<String, dynamic>.from({level3TitleLegacyIssueItem1:level3TitleLegacyIssueItem1Data});
 
     //Individual level: another issue
     // level3TitleAnotherIssueItem1
-    LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({textfield:""});
-    level3TitleAnotherIssueItem1Data[textfield] = _otherIssueTextController.text;
+    LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({textField:""});
+    level3TitleAnotherIssueItem1Data[textField] = _otherIssueTextController.text;
  
     // Adding to to the level2TitleIndividual level
     // level2TitleIndividualData
@@ -173,32 +173,32 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     //************************* Group/Team perspective ******************************/
     //Group/team level: 
     // level3TitleGroupsProblematicsItem1
-    LinkedHashMap<String, dynamic>  level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({textfield:""});
-    level3TitleGroupsProblematicsItem1Data[textfield] = _problemsTheGroupsAreTryingToSolveTextController.text;
+    LinkedHashMap<String, dynamic>  level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({textField:""});
+    level3TitleGroupsProblematicsItem1Data[textField] = _problemsTheGroupsAreTryingToSolveTextController.text;
 
     // level3TitleSameProblemsItem1
-    LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textField:""});
     if (_currentSelectionSameProblems.length == 1) {level3TitleSameProblemsItem1Data[segmentedButton] = _currentSelectionSameProblems.first;}
     else {level3TitleSameProblemsItem1Data[segmentedButton] = "";}
-    level3TitleSameProblemsItem1Data[textfield] = _sameProblemsTextController.text;
+    level3TitleSameProblemsItem1Data[textField] = _sameProblemsTextController.text;
 
     // level3TitleHarmonyAtHomeItem1
-    LinkedHashMap<String, dynamic>  level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    LinkedHashMap<String, dynamic>  level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textField:""});
     if(_currentSelectionHarmonyHome.length == 1)  {level3TitleHarmonyAtHomeItems1Data[segmentedButton] = _currentSelectionHarmonyHome.first;}
     else {level3TitleHarmonyAtHomeItems1Data[segmentedButton] = "";}
-    level3TitleHarmonyAtHomeItems1Data[textfield] = _harmonyHomeTextController.text;
+    level3TitleHarmonyAtHomeItems1Data[textField] = _harmonyHomeTextController.text;
 
     // // level3TitleAppreciabilityAtWorkItem1
-    LinkedHashMap<String, dynamic>  level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    LinkedHashMap<String, dynamic>  level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textField:""});
     if (_currentSelectionAppreciabilityAtWork.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[segmentedButton] = _currentSelectionAppreciabilityAtWork.first;}
     else {level3TitleAppreciabilityAtWorkItem1Data[segmentedButton] = "";}
-    level3TitleAppreciabilityAtWorkItem1Data[textfield] = _appreciabilityAtWorkTextController.text;
+    level3TitleAppreciabilityAtWorkItem1Data[textField] = _appreciabilityAtWorkTextController.text;
 
     // level3TitleIncomeEarningAbilityItem1
-    LinkedHashMap<String, dynamic>  level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textfield:""});
+    LinkedHashMap<String, dynamic>  level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({segmentedButton:"", textField:""});
     if(_currentSelectionEarningAbility.length == 1)  {level3TitleIncomeEarningAbilityItem1Data[segmentedButton] = _currentSelectionEarningAbility.first;}
     else {level3TitleIncomeEarningAbilityItem1Data[segmentedButton] = "";}
-    level3TitleIncomeEarningAbilityItem1Data[textfield] = _earningAbilityTextController.text;
+    level3TitleIncomeEarningAbilityItem1Data[textField] = _earningAbilityTextController.text;
 
     // Adding to to the level2TitleGroup level
     // level2TitleGroupData
@@ -219,13 +219,20 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     setState(() {
       dataStructureBuild();
     });
+    print("_enteredData");
     print(_enteredData);    
     print("");
     print("");
     
     // testing dataToPreCSV 
-    var data = dataToPreCSV(_enteredData[0]);
-    printPreCSVDataToConsole(data);
+    var preCSVData = dataToPreCSV(_enteredData[0]);
+    // printPreCSVDataToConsole(preCSVData);
+    print("");
+    print("preCSVData");
+    print(preCSVData);
+    print("");
+    print("");
+    printToCSV("", preCSVToCSVData(preCSVData));
   }
 
   
@@ -256,10 +263,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
           children: 
           [ 
             //********** For debug ************//
-            // ElevatedButton(onPressed: updateDataStructure, child: Text('Data structure update')),
-            // Gap(20),
-            // Divider(thickness: 3),
-            // Gap(20),
+            ElevatedButton(onPressed: updateDataStructure, child: Text('Data structure update')),
+            Gap(20),
+            Divider(thickness: 3),
+            Gap(20),
             //*********** Form ***********//
             Center(
               child: CustomHeader
@@ -476,15 +483,15 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             // Divider(thickness: 3),
             // Gap(20),
             // Text('Debug:'),
-            // Text("Studies / Household Balance: ${_studiesHouseholdBalanceCheckbox ?? false}, text: ${_studiesHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Accessing Income / Household Balance: ${_accessingIncomeHouseholdBalanceCheckbox ?? false}, text: ${_accessingIncomeHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Earning Income / Household Balance: ${_earningIncomeHouseholdBalanceCheckbox ?? false}, text: ${_earningIncomeHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Helping Others / Household Balance: ${_helpingOthersHouseholdBalanceCheckbox ?? false}, text: ${_helpingOthersHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("Studies / Household Balance: ${_studiesHouseholdBalanceCheckbox ?? "false"}, text: ${_studiesHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("Accessing Income / Household Balance: ${_accessingIncomeHouseholdBalanceCheckbox ?? "false"}, text: ${_accessingIncomeHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("Earning Income / Household Balance: ${_earningIncomeHouseholdBalanceCheckbox ?? "false"}, text: ${_earningIncomeHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("Helping Others / Household Balance: ${_helpingOthersHouseholdBalanceCheckbox ?? "false"}, text: ${_helpingOthersHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
 
-            // Text("More Appreciated At Work: ${_moreAppreciatedAtWorkCheckbox ?? false}, text: ${_moreAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Remaining Appreciated At Work: ${_remainingAppreciatedAtWorkCheckbox ?? false}, text: ${_remainingAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("More Appreciated At Work: ${_moreAppreciatedAtWorkCheckbox ?? "false"}, text: ${_moreAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("Remaining Appreciated At Work: ${_remainingAppreciatedAtWorkCheckbox ?? "false"}, text: ${_remainingAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
            
-            // Text("Better Legacies: ${_betterLegaciesCheckbox ?? false}, text: ${_betterLegaciesTextFieldContent ?? 'No value entered in the text field'}"),
+            // Text("Better Legacies: ${_betterLegaciesCheckbox ?? "false"}, text: ${_betterLegaciesTextFieldContent ?? 'No value entered in the text field'}"),
             
             // Text("Other Issue: text: ${_otherIssueTextController.text}"),
 
