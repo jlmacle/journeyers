@@ -59,6 +59,9 @@ List<dynamic> preCSVData = [];
 
 //***************** Methods processing data according to input widgets: beginning  ***********************//
 
+// String lineReturnsRemoval
+
+
 /// Method to convert information from {checkbox: false/true/null, textField: "data"/null} to:
 /// checkbox, false/true
 /// textField, "data"/""
@@ -66,7 +69,8 @@ List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> c
 {
   List<dynamic> checkboxPreCSVData = []; 
 
-  var dataCheckbox = checkBoxWithTextFieldtextData[checkbox] ?? false;
+  // checkbox data converted from bool to String
+  var dataCheckbox = "${checkBoxWithTextFieldtextData[checkbox]} ?? false";
   var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
   var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
@@ -231,7 +235,7 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 }
 
 
-/// Method to go from pre CSV data to CSV data (before using the data to print a CSV file)
+/// Method to go from pre-CSV data to CSV-friendly data (before using the data to print a CSV file)
 /// Removal of all ["Notes:",] 
 /// 
 /// 
@@ -241,11 +245,22 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 
 List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 {
+  printd("");
+  printd("");
+  printd("Entering preCSVToCSVData");
+  printd("");
+  printd("");
+
   // Analyzing the data for checkboxes with nulls and empty notes 
   for (var index = 0 ; index < preCSVData.length; index++)
   {    
     var indexedData = preCSVData[index];  
+    printd("");
+    printd("indexedData");
+    printd(indexedData);
+    printd("");
     var indexData_1AsString = indexedData[1] as String;
+    
 
     // Removal of all [checkbox,null] and [checkbox, false] (unchecked boxes)
     if 
@@ -308,7 +323,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     }
   } 
 
-  // Analyzing to remove the lines with checkbox
+  // Analyzing to remove the lines with checkboxes
   // These lines are at least 2 indexes apart
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
@@ -382,7 +397,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   // print(preCSVDataCopy);
 
 
-  preCSVData = preCSVDataCopy;
+  // preCSVData = preCSVDataCopy;
 
   return preCSVData;
 }
