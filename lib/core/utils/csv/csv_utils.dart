@@ -416,6 +416,32 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   }
 
 
+  //*************** Adding lines before every title level 3 ***************//
+  Set<String> titlesLevel3Processed = {};
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {  
+    var indexedData = preCSVData[index];  
+    var indexData_1AsString = indexedData[1] as String;
+    String indexData_1AsString_trimmed = indexData_1AsString.trim();
+
+    if 
+    (
+      // Found titles level 3 
+      (titlesLevel3ForTheIndividualPerspective.contains(indexData_1AsString_trimmed) ||
+      titlesLevel3ForTheTeamPerspective.contains(indexData_1AsString_trimmed))
+      &&
+      // and not yet processed 
+      !(titlesLevel3Processed.contains(indexData_1AsString_trimmed))
+    )
+    {
+      preCSVData.insert(index, ["",""]);
+      titlesLevel3Processed.add(indexData_1AsString_trimmed);
+    }
+
+  }
+
+
+
 
   return preCSVData;
 }
