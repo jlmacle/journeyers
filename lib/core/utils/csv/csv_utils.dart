@@ -37,7 +37,7 @@ Map<String,String> mappingLabelsToInputItems
   level3TitleIncomeEarningAbility:segmentedButton
  };
 
- Set<String> textFieldOnlyItems = {level3TitleAnotherIssue};
+ Set<String> textFieldOnlyItems = {level3TitleAnotherIssue, level3TitleGroupsProblematics};
 
 
 //************** Sets of the level 2, level 3 titles, and related sets *************//
@@ -364,7 +364,6 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
         // Adding X in front of the question
         // With the widget design of a question preceding a segmented button, (index -1) is the index of the question
         var previousIndexData = preCSVData[index-1];
-        print("previousIndexData: $previousIndexData");
         previousIndexData[0] = 'X';
       }
       
@@ -387,7 +386,8 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   }
 
 
-  //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been checked  ****************//
+  //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been answered  
+  //                and to remove the unanswered one                                                                                    ****************//
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
@@ -398,23 +398,22 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     {
       if (indexData_1AsString.trim() == textFieldOnlyItem)
       {
-        print("indexData_1AsString.trim() == textFieldOnlyItem");
         // Checking if the note at the next index has content
         int noteIndex = index + 1;
         // Adding the X in front of the question if the note has content
         List<String> noteData = preCSVData[noteIndex];
-        print("noteData: $noteData");
         if (noteData[1].trim() != "")
         {
           var questionData = preCSVData[index];
           questionData[0] = 'X';
         }
+        else // removing the note
+        {
+          preCSVData.removeAt(noteIndex);
+        }
       }
     }
   }
-
-  //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been checked  ****************//
-
 
 
 
