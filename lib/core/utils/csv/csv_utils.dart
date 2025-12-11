@@ -6,7 +6,7 @@ import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 
-// Labels used in the form data
+// Label used in the pre-CSV data
 String notes = "Notes:";
 
 
@@ -46,11 +46,15 @@ var titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
 Set<String>  titlesLevel3WithSubItems = {level3TitleBalanceIssue, level3TitleWorkplaceIssue,
                                           level3TitleLegacyIssue};
 
-// Set of the existing titles level 3
-Set<String> titlesLevel3 = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
-                      //, level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
-                      // level3TitleIncomeEarningAbility};
+// Sets of the children of the existing titles level 3 with sub items
+Set<String> titleLevel3BalanceIssueChildren = {level3TitleBalanceIssueItem1, level3TitleBalanceIssueItem2, level3TitleBalanceIssueItem3, level3TitleBalanceIssueItem4};
+Set<String> titleLevelWorkplaceIssueChildren = {level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2};
+Set<String> titleLevelLegacyIssueChildren = {level3TitleLegacyIssueItem1};  
 
+// Set of the existing titles level 3
+Set<String> titlesLevel3ForTheIndividualPerspective = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
+Set<String> titlesLevel3ForTheTeamPerspective = {level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
+                                                  level3TitleIncomeEarningAbility};
 
 //************** The data structure to return *************//
 // pre CSV data structure (before adding adding extra lines, removing or renaming keywords, ...)
@@ -243,8 +247,11 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 
 
 /// Method to go from pre-CSV data to CSV-friendly data (before using the data to print a CSV file)
+/// Eventual removal of all unchecked checkboxes, after processing of related data
 /// Removal of all ["Notes:",] 
+///
 /// 
+/// Addition of a ["",""] before all level 3 title
 /// 
 /// Addition of a ["",""] after a level 2 title
 /// Addition of a ["",""] after an existing last item of a level 3 title
@@ -252,13 +259,8 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 
 List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 {
-  printd("");
-  printd("");
-  printd("Entering preCSVToCSVData");
-  printd("");
-  printd("");
 
-  // Analyzing the data for checkboxes with nulls and empty notes 
+  //*************** Analyzing the data for checkboxes with nulls, and text fields with empty notes ****************//
   for (var index = 0 ; index < preCSVData.length; index++)
   {    
     var indexedData = preCSVData[index];  
@@ -269,12 +271,14 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     var indexData_1AsString = indexedData[1] as String;
     
 
-    // Removal of all [checkbox,null] and [checkbox, false] (unchecked boxes)
+    // Removal of all [checkbox,"null"] and [checkbox, "false"] (unchecked boxes)
     if 
     ( 
       (indexedData[0].contains(checkbox)) && 
       ( (indexData_1AsString.trim() == "null") || (indexData_1AsString.trim() == "false") )
-    )  {preCSVData.removeAt(index);}
+    )  
+    {preCSVData.removeAt(index);}
+
     // Every checkbox is followed by a note
     // The same index points now to the notes data
     // Removal of all ["Notes:",]  
@@ -283,19 +287,19 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     if (indexedData[0].contains(notes) && (indexData_1AsString.trim() == "")) {preCSVData.removeAt(index); }
   }
 
-  // Getting the indexes for the titles level 3 with children before the next analysis
-  Map<String,int> titlesLevel3WithChildrenIndexes = {};
+  //*************** Analyzing the data to add 'X's where checkboxes have been checked, 
+  //                and in front of the parent title level 3 if existant                ****************//
+
+  // Getting the indexes for the titles level 3 with children, before starting the analysis
+  Map<String,int> indexesOfTitlesLevel3WithChildren = {};
   for (var index = 0 ; index < preCSVData.length; index++)
   {
     var indexedData = preCSVData[index];
-    if(indexedData[1].trim() == level3TitleBalanceIssue){titlesLevel3WithChildrenIndexes[level3TitleBalanceIssue] = index;}
-    else if (indexedData[1].trim() == level3TitleWorkplaceIssue){titlesLevel3WithChildrenIndexes[level3TitleWorkplaceIssue] = index;}
-    else if (indexedData[1].trim() == level3TitleLegacyIssue){titlesLevel3WithChildrenIndexes[level3TitleLegacyIssue] = index;}
+    if(indexedData[1].trim() == level3TitleBalanceIssue){indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleWorkplaceIssue){indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleLegacyIssue){indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue] = index;}
   }
 
-  var level3TitleBalanceIssueChildren = [level3TitleBalanceIssueItem1, level3TitleBalanceIssueItem2, level3TitleBalanceIssueItem3, level3TitleBalanceIssueItem4];
-  var level3TitleWorkplaceIssueChildren = [level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2];
-  var level3TitleLegacyIssueChildren = [level3TitleLegacyIssueItem1];  
   // Analyzing the data for checkboxes not null, and adding Xs before another processing to remove the checkboxes lines
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
@@ -304,26 +308,27 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() != "null")) 
     {
       // Adding X in front of the question
-      // possible with this design of a question preceding a checkbox
+      // With the design of a question preceding a checkbox, (index -1) is the index of the question
       var previousIndexData = preCSVData[index-1];
       previousIndexData[0] = 'X';
+      
+      // If the question was not a title level 3, adding an X to the parent title level 3
       var itemOrTitleLevel3 = previousIndexData[1];
-      // if the question was not a title level 3, adding an X to the parent title level 3, if none yet
-      if (level3TitleBalanceIssueChildren.contains(itemOrTitleLevel3))
+      if (titleLevel3BalanceIssueChildren.contains(itemOrTitleLevel3))
       {
-        var parentIndex = titlesLevel3WithChildrenIndexes[level3TitleBalanceIssue];
+        var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue];
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
-      else if (level3TitleWorkplaceIssueChildren.contains(itemOrTitleLevel3))
+      else if (titleLevelWorkplaceIssueChildren.contains(itemOrTitleLevel3))
       {
-        var parentIndex = titlesLevel3WithChildrenIndexes[level3TitleWorkplaceIssue];
+        var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue];
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
-      else if (level3TitleLegacyIssueChildren.contains(itemOrTitleLevel3))
+      else if (titleLevelLegacyIssueChildren.contains(itemOrTitleLevel3))
       {
-        var parentIndex = titlesLevel3WithChildrenIndexes[level3TitleLegacyIssue];
+        var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue];
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
@@ -331,34 +336,43 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   } 
 
   // Analyzing to remove the lines with checkboxes
-  // These lines are at least 2 indexes apart
+  // These lines are at least 2 indexes apart. All the analysis is feasible in one loop, in spite of the removal effect on the indexes
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
     if (indexedData[0].contains(checkbox)){preCSVData.removeAt(index);}
   }
-
-  var titlesLevel3 = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
-                      //, level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
-                      // level3TitleIncomeEarningAbility};
-
-      
+     
   
   // Getting the indexes for the titles level 3 before the next analysis
-  Map<String,int> titlesLevel3Indexes = {};
+  Map<String,int> indexesForTitlesLevel3ForTheIndividualPerspective = {};
+  Map<String,int> indexesForTitlesLevel3ForTheGroupPerspective = {};
+
+  List<String> level2TitleData = preCSVData[0];
+  String level2Title = level2TitleData[1].trim();
+
   for (var index = 0 ; index < preCSVData.length; index++)
   {
     var indexedData = preCSVData[index];
-    if(indexedData[1].trim() == level3TitleBalanceIssue){titlesLevel3Indexes[level3TitleBalanceIssue] = index;}
-    else if (indexedData[1].trim() == level3TitleWorkplaceIssue){titlesLevel3Indexes[level3TitleWorkplaceIssue] = index;}
-    else if (indexedData[1].trim() == level3TitleLegacyIssue){titlesLevel3Indexes[level3TitleLegacyIssue] = index;}
-    else if (indexedData[1].trim() == level3TitleAnotherIssue){titlesLevel3Indexes[level3TitleAnotherIssue] = index;}
-    // else if (indexedData[1].trim() == level3TitleGroupsProblematics){titlesLevel3Indexes[level3TitleGroupsProblematics] = index;}
-    // else if (indexedData[1].trim() == level3TitleSameProblem){titlesLevel3Indexes[level3TitleSameProblem] = index;}
-    // else if (indexedData[1].trim() == level3TitleHarmonyAtHome){titlesLevel3Indexes[level3TitleHarmonyAtHome] = index;}
-    // else if (indexedData[1].trim() == level3TitleAppreciabilityAtWork){titlesLevel3Indexes[level3TitleAppreciabilityAtWork] = index;}
-    // else if (indexedData[1].trim() == level3TitleIncomeEarningAbility){titlesLevel3Indexes[level3TitleIncomeEarningAbility] = index;}
+    if(level2Title == level2TitleIndividual)
+    {
+      if(indexedData[1].trim() == level3TitleBalanceIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleBalanceIssue] = index;}
+      else if (indexedData[1].trim() == level3TitleWorkplaceIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleWorkplaceIssue] = index;}
+      else if (indexedData[1].trim() == level3TitleLegacyIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleLegacyIssue] = index;}
+      else if (indexedData[1].trim() == level3TitleAnotherIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleAnotherIssue] = index;}
+    }
+    else if(level2Title == level2TitleGroup)
+    {
+      if (indexedData[1].trim() == level3TitleGroupsProblematics){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleGroupsProblematics] = index;}
+      else if (indexedData[1].trim() == level3TitleSameProblem){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleSameProblem] = index;}
+      else if (indexedData[1].trim() == level3TitleHarmonyAtHome){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleHarmonyAtHome] = index;}
+      else if (indexedData[1].trim() == level3TitleAppreciabilityAtWork){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleAppreciabilityAtWork] = index;}
+      else if (indexedData[1].trim() == level3TitleIncomeEarningAbility){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleIncomeEarningAbility] = index;}
+    }
+    
   }
+
+
   // Using a copy of the structure to add the extra lines (still a work in progress)
   var preCSVDataCopy = [...preCSVData];
   // Doing one level at a time to avoid index issues
