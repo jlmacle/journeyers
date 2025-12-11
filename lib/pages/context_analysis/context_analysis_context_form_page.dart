@@ -12,6 +12,8 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/core/utils/csv/csv_utils.dart';
+import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
 
 class ContextAnalysisContextFormPage extends StatefulWidget {
@@ -108,9 +110,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   //*****************    Data structure related code    **********************//
   void dataStructureBuild()
   {
-    String checkbox = "checkbox";
-    String textField = "textField";
-    String segmentedButton = "segmentedButton";
 
     //************************* Individual perspective ******************************/
     //Individual level: balance issue
@@ -219,20 +218,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     setState(() {
       dataStructureBuild();
     });
-    print("_enteredData");
-    print(_enteredData);    
-    print("");
-    print("");
-    
+    printd("_enteredData");
+    printd(_enteredData);    
+    printd("");
+     
     // testing dataToPreCSV 
     var preCSVData = dataToPreCSV(_enteredData[0]);
     // printPreCSVDataToConsole(preCSVData);
-    print("");
-    print("preCSVData");
-    print(preCSVData);
-    print("");
-    print("");
-    printToCSV("", preCSVToCSVData(preCSVData));
+    // print("");
+    // print("preCSVData");
+    // print(preCSVData);
+    // print("");
+    // print("");
+    // testPrintToCSV("", preCSVToCSVData(preCSVData));
   }
 
   

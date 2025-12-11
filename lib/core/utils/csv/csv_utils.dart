@@ -2,20 +2,18 @@
 import "dart:collection";
 import "dart:io";
 
+import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 
 // Labels used in the form data
-String checkbox = "checkbox";
-String textField = "textField";
-String segmentedButton = "segmentedButton";
 String notes = "Notes:";
 
 
-// Mapping questions to input widgets to process data according to input widgets
+//************** Mapping questions to input widgets to process data according to input widgets *************//
 Map<String,String> mappingLabelsToInputItems 
 = {
-  //*********** Individual perspective ***********/
+  //** Individual perspective **/
   // balance issue
   level3TitleBalanceIssueItem1:checkbox, level3TitleBalanceIssueItem2:checkbox,
   level3TitleBalanceIssueItem3:checkbox, level3TitleBalanceIssueItem4:checkbox,
@@ -25,7 +23,8 @@ Map<String,String> mappingLabelsToInputItems
   level3TitleLegacyIssueItem1:checkbox,
   // another type
   level3TitleAnotherIssue:textField,
-  //*********** Group/team perspective ***********/
+
+  //** Group/team perspective **/
   // group problematics
   level3TitleGroupsProblematics:textField,
   // same problem?
@@ -38,17 +37,27 @@ Map<String,String> mappingLabelsToInputItems
   level3TitleIncomeEarningAbility:segmentedButton
  };
 
- // Defining the titles level 2
- var titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
 
- // Defining the level 3 titles with items 1,2,
- Set<String>  titlesLevel3WithSubItems = {level3TitleBalanceIssue, level3TitleWorkplaceIssue,
+//************** Sets of the level 2, level 3 titles, and related sets *************//
+// Set of the existing titles level 2
+var titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
+
+// Set of the existing titles level 3 with sub items
+Set<String>  titlesLevel3WithSubItems = {level3TitleBalanceIssue, level3TitleWorkplaceIssue,
                                           level3TitleLegacyIssue};
 
-// pre CSV data  structure (before adding adding extra lines, removing or renaming keywords, ...)
+// Set of the existing titles level 3
+Set<String> titlesLevel3 = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
+                      //, level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
+                      // level3TitleIncomeEarningAbility};
+
+
+//************** The data structure to return *************//
+// pre CSV data structure (before adding adding extra lines, removing or renaming keywords, ...)
 List<dynamic> preCSVData = [];
 
-//***************** Processing data according to input widgets: beginning  ***********************/
+
+//***************** Methods processing data according to input widgets: beginning  ***********************//
 
 /// Method to convert information from {checkbox: false/true/null, textField: "data"/null} to:
 /// checkbox, false/true
@@ -57,7 +66,7 @@ List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> c
 {
   List<dynamic> checkboxPreCSVData = []; 
 
-  var dataCheckbox = "${checkBoxWithTextFieldtextData[checkbox]}";
+  var dataCheckbox = checkBoxWithTextFieldtextData[checkbox] ?? false;
   var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
   var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
@@ -76,7 +85,7 @@ List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dyn
 {
   List<dynamic> segmentedButtonPreCSVData = []; 
 
-  var dataSegmentedButton = segmentedButtonWithTextFieldData[segmentedButton] ?? false;
+  var dataSegmentedButton = segmentedButtonWithTextFieldData[segmentedButton] ?? "";
   var data1 = ["",dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
 
   var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
@@ -102,99 +111,111 @@ List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData
   return textFieldPreCSVData;
 }
 
-//***************** Processing data according to input widgets: beginning  ***********************/
+//***************** Methods processing data according to input widgets: end  ***********************//
 
 
-// The data should be either the individual perspective data, or the group perspective data
+
+//***************** Method building a list of pair of data for the later CSV printing ***********************//
+
+
+/// Method processing the form data, and returning a list of pair of data, for the CSV printing.
+/// The data should be either the individual perspective data, or the group perspective data.
+/// The individual perspective data and the group perspective data are planned to be printed side by side.
 List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
 {
-  treatmentAccordingToInputType(List<dynamic> preCSVData, String itemOrTitleLable, LinkedHashMap<String,dynamic> level2Or3DataAsLinkedHashMap)
+  List<dynamic> preCSVData = [];
+
+  // Method adding to the 
+  treatmentAccordingToInputType(List<dynamic> preCSVData, String itemOrTitleLabel, LinkedHashMap<String,dynamic> titleLevel2Or3DataAsLinkedHashMap)
   {
-    if (mappingLabelsToInputItems[itemOrTitleLable] == checkbox)
+    if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox)
         {
-          var checkboxPreCSVData = checkBoxWithTextFieldDataToPreCSV(level2Or3DataAsLinkedHashMap[itemOrTitleLable]);
+          // checkBoxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
+          var checkboxPreCSVData = checkBoxWithTextFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);
           preCSVData.add(checkboxPreCSVData[0]);
           preCSVData.add(checkboxPreCSVData[1]);
         }
-        else if (mappingLabelsToInputItems[itemOrTitleLable] == segmentedButton)
+        // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[, Yes], [Notes:, a_note]]
+        else if (mappingLabelsToInputItems[itemOrTitleLabel] == segmentedButton)
         {
-          var segmentedButtonPreCSVData = segmentedButtonWithTextFieldDataToPreCSV(level2Or3DataAsLinkedHashMap[itemOrTitleLable]);
+          var segmentedButtonPreCSVData = segmentedButtonWithTextFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);
           preCSVData.add(segmentedButtonPreCSVData[0]);
           preCSVData.add(segmentedButtonPreCSVData[1]);
         }
-        else if (mappingLabelsToInputItems[itemOrTitleLable] == textField)
+        // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
+        else if (mappingLabelsToInputItems[itemOrTitleLabel] == textField)
         {
-          var textFieldpreCSVData = textFieldDataToPreCSV(level2Or3DataAsLinkedHashMap[itemOrTitleLable]);          
+          var textFieldpreCSVData = textFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);          
           preCSVData.add(textFieldpreCSVData[0]);
         }
         else
         {
-          printd("treatmentAccordingToInputType: no mapping found");
-          printd("level3Title: $itemOrTitleLable");
-          printd("mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLable]}");
+          printd("");
+          printd("Error: treatmentAccordingToInputType: no mapping found");
+          printd("Error: level3Title: $itemOrTitleLabel");
+          printd("Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
+          printd("");
         }
   }
 
-  List<dynamic> preCSVData = [];
-
-  // There is only one key, the level 2 title
+  // There is only one key in the entered data, one of the two level 2 titles
   var level2PreCSVData = ["",enteredData.keys.first];
-  // Adding the level 2 title  //***Successful***/
+  // Adding the level 2 title
   preCSVData.add(level2PreCSVData);
 
-  // The values have the level 3 labels as keys
-  for (var level2TitleData in enteredData.values)
-  {
-    var level2DataAsLinkedHashMap = level2TitleData as LinkedHashMap<String,dynamic>;
-    
-    // level 3 titles as keys of the level 2 data
-    for (var level3Title in level2DataAsLinkedHashMap.keys)
-    {      
-      var level3TitlePreCSVData = ["", level3Title];
-      // Adding the level 3 title  //***Successful***/
-      preCSVData.add(level3TitlePreCSVData);
+  // There is only one value for the title level 2 key
+  var level2TitleData = enteredData.values.first;
+  var level2DataAsLinkedHashMap = level2TitleData as LinkedHashMap<String,dynamic>;
+  
+  // level 3 titles as keys of the level 2 data
+  for (var level3Title in level2DataAsLinkedHashMap.keys)
+  {      
+    var level3TitlePreCSVData = ["", level3Title];
+    // Adding the level 3 title
+    preCSVData.add(level3TitlePreCSVData);
 
-      // Checking if sub-items exist before processing the level 3 title data
-      if(titlesLevel3WithSubItems.contains(level3Title))
+    // Checking if sub-items exist before processing the level 3 title data
+    if(titlesLevel3WithSubItems.contains(level3Title))
+    {
+      // Going through the sub items
+      var level3TitleItemsData  = level2DataAsLinkedHashMap[level3Title];
+      var level3TitleItemsDataAsLinkedList = level3TitleItemsData as LinkedHashMap<String, dynamic>;
+      for (var itemLabel in level3TitleItemsDataAsLinkedList.keys)
       {
-        // Going through the sub items
-        var level3TitleItemsData  = level2DataAsLinkedHashMap[level3Title];
-        var level3TitleItemsDataAsLinkedList = level3TitleItemsData as LinkedHashMap<String, dynamic>;
-        for (var itemLabel in level3TitleItemsDataAsLinkedList.keys)
-        {
-           // Adding the item label  
-          preCSVData.add(["", itemLabel]);
-
-          // Adding input data
-          treatmentAccordingToInputType(preCSVData, itemLabel, level3TitleItemsDataAsLinkedList);
-        }
-
-      }
-      // Checking the type of input item that the level 3 title refers to
-      else 
-      {
+          // Adding the item label  
+        preCSVData.add(["", itemLabel]);
         // Adding input data
-        treatmentAccordingToInputType(preCSVData, level3Title, level2DataAsLinkedHashMap);
+        treatmentAccordingToInputType(preCSVData, itemLabel, level3TitleItemsDataAsLinkedList);
       }
+
+    }
+    // Checking the type of input item that the level 3 title refers to
+    else 
+    {
+      // Adding input data
+      treatmentAccordingToInputType(preCSVData, level3Title, level2DataAsLinkedHashMap);
     }
   }
 
   printd("");
+  printd("preCSVData");
   printd(preCSVData);
+  // printPreCSVDataToConsole(preCSVData);
   return preCSVData;
 }
 
-// temporary method
+/// Method to have a vertical view of the list data
 void printPreCSVDataToConsole(List<dynamic> data) 
 {
   for (var item in data)
   {
     var data = "${item[0]},${item[1]}";
-    print(data);
+    printd(data);
   }
 }
 
-void printToCSV(String fileName, List<dynamic> data) async
+/// Method to test the printing of the individual perspective data, or the group perspective data, to CSV 
+void testPrintToCSV(String fileName, List<dynamic> data) async
 {
   File file = File("txt.csv");
   var sink = file.openWrite(mode: FileMode.write); 
@@ -202,7 +223,7 @@ void printToCSV(String fileName, List<dynamic> data) async
   for (var item in data)
   {
     var data = "${item[0]},${item[1]}";
-    sink.write(data+ '\n');
+    sink.write("$data\n");
   }
   
   await sink.flush();
@@ -218,23 +239,20 @@ void printToCSV(String fileName, List<dynamic> data) async
 /// Addition of a ["",""] after an existing last item of a level 3 title
 /// Addition of a ["",""] after a level 3 title without sub items
 
-/// 
 List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 {
-  // List<dynamic> csvData = [];
-  print("");
-  print("Entering preCSVToCSVData");
-  print("preCSVData");
-  print(preCSVData);
-
   // Analyzing the data for checkboxes with nulls and empty notes 
   for (var index = 0 ; index < preCSVData.length; index++)
   {    
     var indexedData = preCSVData[index];  
     var indexData_1AsString = indexedData[1] as String;
 
-    // Removal of all [,null] (unchecked boxes)
-    if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() == "null"))  {preCSVData.removeAt(index);}
+    // Removal of all [checkbox,null] and [checkbox, false] (unchecked boxes)
+    if 
+    ( 
+      (indexedData[0].contains(checkbox)) && 
+      ( /*(indexData_1AsString.trim() == "null") ||*/ (indexData_1AsString.trim() == "false") )
+    )  {preCSVData.removeAt(index);}
     // Every checkbox is followed by a note
     // The same index points now to the notes data
     // Removal of all ["Notes:",]  
@@ -295,27 +313,76 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
-    var indexData_1AsString = indexedData[1] as String;
     if (indexedData[0].contains(checkbox)){preCSVData.removeAt(index);}
   }
 
-  var titlesLevel3 = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue,
-                      level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
-                      level3TitleIncomeEarningAbility};
+  var titlesLevel3 = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
+                      //, level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
+                      // level3TitleIncomeEarningAbility};
 
       
   
-  // TODO: Extra lines to add 
-
+  // Getting the indexes for the titles level 3 before the next analysis
+  Map<String,int> titlesLevel3Indexes = {};
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {
+    var indexedData = preCSVData[index];
+    if(indexedData[1].trim() == level3TitleBalanceIssue){titlesLevel3Indexes[level3TitleBalanceIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleWorkplaceIssue){titlesLevel3Indexes[level3TitleWorkplaceIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleLegacyIssue){titlesLevel3Indexes[level3TitleLegacyIssue] = index;}
+    else if (indexedData[1].trim() == level3TitleAnotherIssue){titlesLevel3Indexes[level3TitleAnotherIssue] = index;}
+    // else if (indexedData[1].trim() == level3TitleGroupsProblematics){titlesLevel3Indexes[level3TitleGroupsProblematics] = index;}
+    // else if (indexedData[1].trim() == level3TitleSameProblem){titlesLevel3Indexes[level3TitleSameProblem] = index;}
+    // else if (indexedData[1].trim() == level3TitleHarmonyAtHome){titlesLevel3Indexes[level3TitleHarmonyAtHome] = index;}
+    // else if (indexedData[1].trim() == level3TitleAppreciabilityAtWork){titlesLevel3Indexes[level3TitleAppreciabilityAtWork] = index;}
+    // else if (indexedData[1].trim() == level3TitleIncomeEarningAbility){titlesLevel3Indexes[level3TitleIncomeEarningAbility] = index;}
+  }
+  // Using a copy of the structure to add the extra lines (still a work in progress)
+  var preCSVDataCopy = [...preCSVData];
+  // Doing one level at a time to avoid index issues
+  
+  // for (var titleLevel3 in titlesLevel3)
+  // {
+  //   for (var index = titlesLevel3Indexes[titleLevel3]!; index < preCSVData.length; index++)
+  //   { 
+  //     // print("preCSVData.length: ${preCSVData.length}");
+  //     // print("index: $index");
+  //     var indexedData = preCSVData[index];  
+  //     var indexData_1AsString = indexedData[1] as String;
+  //     // Searching for the level 3 title
+  //     if (titlesLevel3.contains(indexData_1AsString.trim()))
+  //     { 
+  //       preCSVDataCopy.insert(index, ["",""]);
+  //       // print(" \n ***********insert********* \n");
+  //       // Adding 1 to the other level 3 titles indexes
+  //       for (var titleLevel3 in titlesLevel3Indexes.keys)
+  //       {
+  //         var titleLevel3Index = titlesLevel3Indexes[titleLevel3];
+  //         titleLevel3Index = titleLevel3Index! + 1;
+  //       }
+  //       // Stopping the search to avoid indexes issues
+  //       break;
+  //     }
+  //     else{
+  //       // print("\n${indexData_1AsString.trim()} not in: $titlesLevel3\n");
+  //     }
+  //   }
+  // }
 
   // Addition of a ["",""] after the level 2 title at index 0
   // preCSVData.insert(1,["",""]);
 
-  print("");
-  print("Exiting preCSVToCSVData");
-  print("preCSVData");
-  print(preCSVData);
+  // print("");
+  // print("Exiting preCSVToCSVData");
+  // print("preCSVData");
+  // print(preCSVData);
 
+  // print("");
+  // print("preCSVDataCopy");
+  // print(preCSVDataCopy);
+
+
+  preCSVData = preCSVDataCopy;
 
   return preCSVData;
 }
