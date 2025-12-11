@@ -342,83 +342,8 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     var indexedData = preCSVData[index];  
     if (indexedData[0].contains(checkbox)){preCSVData.removeAt(index);}
   }
-     
+
   
-  // Getting the indexes for the titles level 3 before the next analysis
-  Map<String,int> indexesForTitlesLevel3ForTheIndividualPerspective = {};
-  Map<String,int> indexesForTitlesLevel3ForTheGroupPerspective = {};
-
-  List<String> level2TitleData = preCSVData[0];
-  String level2Title = level2TitleData[1].trim();
-
-  for (var index = 0 ; index < preCSVData.length; index++)
-  {
-    var indexedData = preCSVData[index];
-    if(level2Title == level2TitleIndividual)
-    {
-      if(indexedData[1].trim() == level3TitleBalanceIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleBalanceIssue] = index;}
-      else if (indexedData[1].trim() == level3TitleWorkplaceIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleWorkplaceIssue] = index;}
-      else if (indexedData[1].trim() == level3TitleLegacyIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleLegacyIssue] = index;}
-      else if (indexedData[1].trim() == level3TitleAnotherIssue){indexesForTitlesLevel3ForTheIndividualPerspective[level3TitleAnotherIssue] = index;}
-    }
-    else if(level2Title == level2TitleGroup)
-    {
-      if (indexedData[1].trim() == level3TitleGroupsProblematics){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleGroupsProblematics] = index;}
-      else if (indexedData[1].trim() == level3TitleSameProblem){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleSameProblem] = index;}
-      else if (indexedData[1].trim() == level3TitleHarmonyAtHome){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleHarmonyAtHome] = index;}
-      else if (indexedData[1].trim() == level3TitleAppreciabilityAtWork){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleAppreciabilityAtWork] = index;}
-      else if (indexedData[1].trim() == level3TitleIncomeEarningAbility){indexesForTitlesLevel3ForTheGroupPerspective[level3TitleIncomeEarningAbility] = index;}
-    }
-    
-  }
-
-
-  // Using a copy of the structure to add the extra lines (still a work in progress)
-  var preCSVDataCopy = [...preCSVData];
-  // Doing one level at a time to avoid index issues
-  
-  // for (var titleLevel3 in titlesLevel3)
-  // {
-  //   for (var index = titlesLevel3Indexes[titleLevel3]!; index < preCSVData.length; index++)
-  //   { 
-  //     // print("preCSVData.length: ${preCSVData.length}");
-  //     // print("index: $index");
-  //     var indexedData = preCSVData[index];  
-  //     var indexData_1AsString = indexedData[1] as String;
-  //     // Searching for the level 3 title
-  //     if (titlesLevel3.contains(indexData_1AsString.trim()))
-  //     { 
-  //       preCSVDataCopy.insert(index, ["",""]);
-  //       // print(" \n ***********insert********* \n");
-  //       // Adding 1 to the other level 3 titles indexes
-  //       for (var titleLevel3 in titlesLevel3Indexes.keys)
-  //       {
-  //         var titleLevel3Index = titlesLevel3Indexes[titleLevel3];
-  //         titleLevel3Index = titleLevel3Index! + 1;
-  //       }
-  //       // Stopping the search to avoid indexes issues
-  //       break;
-  //     }
-  //     else{
-  //       // print("\n${indexData_1AsString.trim()} not in: $titlesLevel3\n");
-  //     }
-  //   }
-  // }
-
-  // Addition of a ["",""] after the level 2 title at index 0
-  // preCSVData.insert(1,["",""]);
-
-  // print("");
-  // print("Exiting preCSVToCSVData");
-  // print("preCSVData");
-  // print(preCSVData);
-
-  // print("");
-  // print("preCSVDataCopy");
-  // print(preCSVDataCopy);
-
-
-  // preCSVData = preCSVDataCopy;
 
   return preCSVData;
 }
