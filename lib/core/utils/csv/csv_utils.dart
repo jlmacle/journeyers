@@ -37,6 +37,8 @@ Map<String,String> mappingLabelsToInputItems
   level3TitleIncomeEarningAbility:segmentedButton
  };
 
+ Set<String> textFieldOnlyItems = {level3TitleAnotherIssue};
+
 
 //************** Sets of the level 2, level 3 titles, and related sets *************//
 // Set of the existing titles level 2
@@ -101,7 +103,7 @@ List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dyn
   List<dynamic> segmentedButtonPreCSVData = []; 
 
   var dataSegmentedButton = segmentedButtonWithTextFieldData[segmentedButton] ?? "";
-  var data1 = ["",dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
+  var data1 = [segmentedButton,dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
 
   var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
   var data2 = [notes,lineReturnsRemoval(dataTextField)]; // "Notes:" in front of the text field data in the pre CSV
@@ -247,15 +249,16 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 
 
 /// Method to go from pre-CSV data to CSV-friendly data (before using the data to print a CSV file)
-/// Eventual removal of all unchecked checkboxes, after processing of related data
-/// Removal of all ["Notes:",] 
-///
+/// Xs added to queestions with a checked checkbox, and to their title level 3 parent if existant
+/// 
+/// Eventual removal of all unchecked checkboxes to keep the information more dense
+/// Eventual removal of all unanswered segmented buttons
+/// Eventual removal of all empty notes if not related to a checked checkbox, or an answered segmented button
+/// 
+/// Removal of "segmentedButton" from the data written
 /// 
 /// Addition of a ["",""] before all level 3 title
-/// 
-/// Addition of a ["",""] after a level 2 title
-/// Addition of a ["",""] after an existing last item of a level 3 title
-/// Addition of a ["",""] after a level 3 title without sub items
+
 
 List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 {
@@ -272,23 +275,22 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     
 
     // Removal of all [checkbox,"null"] and [checkbox, "false"] (unchecked boxes)
+    // Removal of all ["Notes:",]  if related to an unchecked checkbox
     if 
     ( 
       (indexedData[0].contains(checkbox)) && 
       ( (indexData_1AsString.trim() == "null") || (indexData_1AsString.trim() == "false") )
     )  
-    {preCSVData.removeAt(index);}
+    {
+      preCSVData.removeAt(index);
+      // The index now points to the following note
+      preCSVData.removeAt(index);
+    }
 
-    // Every checkbox is followed by a note
-    // The same index points now to the notes data
-    // Removal of all ["Notes:",]  
-    indexedData = preCSVData[index];  
-    indexData_1AsString = indexedData[1];
-    if (indexedData[0].contains(notes) && (indexData_1AsString.trim() == "")) {preCSVData.removeAt(index); }
   }
 
-  //*************** Analyzing the data to add 'X's where checkboxes have been checked, 
-  //                and in front of the parent title level 3 if existant                ****************//
+  //*************** Analyzing the data to add 'X's where questions with checkboxes have been checked, 
+  //                and in front of the parent title level 3 if existant                               ****************//
 
   // Getting the indexes for the titles level 3 with children, before starting the analysis
   Map<String,int> indexesOfTitlesLevel3WithChildren = {};
@@ -308,7 +310,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() != "null")) 
     {
       // Adding X in front of the question
-      // With the design of a question preceding a checkbox, (index -1) is the index of the question
+      // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
       var previousIndexData = preCSVData[index-1];
       previousIndexData[0] = 'X';
       
@@ -343,7 +345,78 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     if (indexedData[0].contains(checkbox)){preCSVData.removeAt(index);}
   }
 
-  
+
+  //*************** Analyzing the data to add 'X's in front of the questions where segmented buttons have been answered  
+  //                and in front of the parent title level 3 if existant                                                  ****************//
+
+  // Analyzing the data for segmented buttons not null, and adding Xs in front of the question
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {  
+    var indexedData = preCSVData[index]; 
+    var indexData_1AsString = indexedData[1] as String;
+
+    if ( indexedData[0].contains(segmentedButton) ) 
+    {      
+      if (indexData_1AsString.trim() != "")
+      {
+        // Removing segmentedButton from the data written
+        indexedData[0] = "";
+        // Adding X in front of the question
+        // With the widget design of a question preceding a segmented button, (index -1) is the index of the question
+        var previousIndexData = preCSVData[index-1];
+        print("previousIndexData: $previousIndexData");
+        previousIndexData[0] = 'X';
+      }
+      
+      // If the question was not a title level 3, should add an X to the parent title level 3
+      // Not for the current interface
+      
+    }
+  } 
+
+  // Removal of all non answered segmented buttons, with their notes.
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {  
+    var indexedData = preCSVData[index];  
+    if (indexedData[0].contains(segmentedButton))
+    {
+      preCSVData.removeAt(index);
+      // The index now points to the following note
+      preCSVData.removeAt(index);
+    }
+  }
+
+
+  //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been checked  ****************//
+  for (var index = 0 ; index < preCSVData.length; index++)
+  {  
+    var indexedData = preCSVData[index];  
+    var indexData_1AsString = indexedData[1] as String;
+
+    // Getting the labels that are text field only from textFieldOnlyItems
+    for (String textFieldOnlyItem in textFieldOnlyItems)
+    {
+      if (indexData_1AsString.trim() == textFieldOnlyItem)
+      {
+        print("indexData_1AsString.trim() == textFieldOnlyItem");
+        // Checking if the note at the next index has content
+        int noteIndex = index + 1;
+        // Adding the X in front of the question if the note has content
+        List<String> noteData = preCSVData[noteIndex];
+        print("noteData: $noteData");
+        if (noteData[1].trim() != "")
+        {
+          var questionData = preCSVData[index];
+          questionData[0] = 'X';
+        }
+      }
+    }
+  }
+
+  //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been checked  ****************//
+
+
+
 
   return preCSVData;
 }
