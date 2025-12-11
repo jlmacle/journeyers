@@ -224,13 +224,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
      
     // testing dataToPreCSV 
     var preCSVData = dataToPreCSV(_enteredData[0]);
-    // printPreCSVDataToConsole(preCSVData);
-    // print("");
-    // print("preCSVData");
-    // print(preCSVData);
-    // print("");
-    // print("");
-    // testPrintToCSV("", preCSVToCSVData(preCSVData));
+    testPrintToCSV("", preCSVToCSVData(preCSVData));
   }
 
   
