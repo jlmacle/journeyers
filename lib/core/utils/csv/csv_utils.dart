@@ -132,12 +132,12 @@ List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData
 
 
 
-//***************** Method building a list of pair of data for the later CSV printing ***********************//
+//***************** Method building a list of pair of data for the later saving to CSV ***********************//
 
 
-/// Method processing the form data, and returning a list of pair of data, for the CSV printing.
+/// Method processing the form data, and returning a list of pair of data, for the saving to CSV .
 /// The data should be either the individual perspective data, or the group perspective data.
-/// The individual perspective data and the group perspective data are planned to be printed side by side.
+/// The individual perspective data and the group perspective data are planned to be written side by side in the CSV file.
 List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
 {
   List<dynamic> preCSVData = [];
@@ -231,8 +231,8 @@ void printPreCSVDataToConsole(List<dynamic> data)
   }
 }
 
-/// Method to test the printing of the individual perspective data, or the group perspective data, to CSV 
-void testPrintToCSV(String fileName, List<dynamic> data) async
+/// Method to test the writing of the individual perspective data, or the group perspective data, to CSV 
+void testSaveToCSV(String fileName, List<dynamic> data) async
 {
   File file = File("txt.csv");
   var sink = file.openWrite(mode: FileMode.write); 
@@ -248,7 +248,7 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 }
 
 
-/// Method to go from pre-CSV data to CSV-friendly data (before using the data to print a CSV file)
+/// Method to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file)
 /// Xs added to queestions with a checked checkbox, and to their title level 3 parent if existant
 /// 
 /// Eventual removal of all unchecked checkboxes to keep the information more dense
