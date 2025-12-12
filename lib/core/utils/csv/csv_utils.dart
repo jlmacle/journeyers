@@ -1,7 +1,10 @@
 
 import "dart:collection";
+import "dart:convert";
 import "dart:io";
+import "dart:typed_data";
 
+import "package:file_picker/file_picker.dart";
 import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
@@ -50,8 +53,8 @@ Set<String>  titlesLevel3WithSubItems = {level3TitleBalanceIssue, level3TitleWor
 
 // Sets of the children of the existing titles level 3 with sub items
 Set<String> titleLevel3BalanceIssueChildren = {level3TitleBalanceIssueItem1, level3TitleBalanceIssueItem2, level3TitleBalanceIssueItem3, level3TitleBalanceIssueItem4};
-Set<String> titleLevelWorkplaceIssueChildren = {level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2};
-Set<String> titleLevelLegacyIssueChildren = {level3TitleLegacyIssueItem1};  
+Set<String> titleLevel3WorkplaceIssueChildren = {level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2};
+Set<String> titleLevel3LegacyIssueChildren = {level3TitleLegacyIssueItem1};  
 
 // Set of the existing titles level 3
 Set<String> titlesLevel3ForTheIndividualPerspective = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
@@ -221,33 +224,6 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
   return preCSVData;
 }
 
-/// Method to have a vertical view of the list data
-void printPreCSVDataToConsole(List<dynamic> data) 
-{
-  for (var item in data)
-  {
-    var data = "${item[0]},${item[1]}";
-    printd(data);
-  }
-}
-
-/// Method to test the writing of the individual perspective data, or the group perspective data, to CSV 
-void testSaveToCSV(String fileName, List<dynamic> data) async
-{
-  File file = File("txt.csv");
-  var sink = file.openWrite(mode: FileMode.write); 
-
-  for (var item in data)
-  {
-    var data = "${item[0]},${item[1]}";
-    sink.write("$data\n");
-  }
-  
-  await sink.flush();
-  await sink.close();
-}
-
-
 /// Method to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file)
 /// Xs added to queestions with a checked checkbox, and to their title level 3 parent if existant
 /// 
@@ -322,13 +298,13 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
-      else if (titleLevelWorkplaceIssueChildren.contains(itemOrTitleLevel3))
+      else if (titleLevel3WorkplaceIssueChildren.contains(itemOrTitleLevel3))
       {
         var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue];
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
-      else if (titleLevelLegacyIssueChildren.contains(itemOrTitleLevel3))
+      else if (titleLevel3LegacyIssueChildren.contains(itemOrTitleLevel3))
       {
         var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue];
         var parentData = preCSVData[parentIndex!];
@@ -439,10 +415,76 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     }
 
   }
-
-
-
-
   return preCSVData;
 }
 
+//*************** Printing and debugging methods ***************//
+
+/// Method to have a vertical view of the list data
+void printPreCSVDataToConsole(List<dynamic> data) 
+{
+  for (var item in data)
+  {
+    var data = "${item[0]},${item[1]}";
+    printd(data);
+  }
+}
+
+/// Method to test the writing of the individual perspective data, or the group perspective data, to CSV 
+void testPrintToCSV(String fileName, List<dynamic> data) async
+{
+  File file = File("txt.csv");
+  var sink = file.openWrite(mode: FileMode.write); 
+
+  for (var item in data)
+  {
+    var data = "${item[0]},${item[1]}";
+    sink.write("$data\n");
+  }
+  
+  await sink.flush();
+  await sink.close();
+}
+
+/// Method to print the CSV data to a file
+void printToCSV( List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDataTeamPerspective) async
+{
+  // Complementing the shortest list to have the same length for both list
+  if (csvDataIndividualPerspective.length < csvDataTeamPerspective.length)
+  {
+    for (var index = csvDataIndividualPerspective.length; index <= csvDataTeamPerspective.length -1; index++)
+    {
+      // Adding empty lines
+      csvDataIndividualPerspective.add(["",""]);
+    }
+  }
+  else if (csvDataIndividualPerspective.length > csvDataTeamPerspective.length)
+  {
+    for (var index = csvDataTeamPerspective.length; index <= csvDataIndividualPerspective.length -1; index++)
+    {
+      // Adding empty lines
+      csvDataTeamPerspective.add(["",""]);
+    }
+  }
+
+
+  String content = "";
+  // Building the content line by line
+  for (var index = 0; index < csvDataIndividualPerspective.length; index ++)
+  {
+    dynamic csvDataIndividualPerspectiveData = csvDataIndividualPerspective[index];
+    dynamic csvDataTeamPerspectiveData = csvDataTeamPerspective[index];
+
+    String line = "${csvDataIndividualPerspectiveData[0]},${csvDataIndividualPerspectiveData[1]},,${csvDataTeamPerspectiveData[0]}, ${csvDataTeamPerspectiveData[1]}\n";
+    content += line ;  
+  }
+
+  final bytes = Uint8List.fromList(utf8.encode(content));
+  await FilePicker.platform.saveFile
+  (
+    dialogTitle: 'Please enter a file name',
+    fileName: '.csv',
+    bytes: bytes, // necessary, at least on Windows
+    allowedExtensions: ['csv']
+  );
+}
