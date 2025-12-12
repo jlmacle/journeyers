@@ -217,10 +217,6 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
     }
   }
 
-  printd("");
-  printd("preCSVData");
-  printd(preCSVData);
-  // printPreCSVDataToConsole(preCSVData);
   return preCSVData;
 }
 
@@ -243,10 +239,6 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   for (var index = 0 ; index < preCSVData.length; index++)
   {    
     var indexedData = preCSVData[index];  
-    printd("");
-    printd("indexedData");
-    printd(indexedData);
-    printd("");
     var indexData_1AsString = indexedData[1] as String;
     
 
