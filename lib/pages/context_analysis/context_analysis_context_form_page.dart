@@ -213,18 +213,16 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     
   }
 
-  void updateDataStructure()
+  void print()
   {
     setState(() {
       dataStructureBuild();
     });
-    printd("_enteredData");
-    printd(_enteredData);    
-    printd("");
-     
-    // testing dataToPreCSV 
-    var preCSVData = dataToPreCSV(_enteredData[0]);
-    testPrintToCSV("", preCSVToCSVData(preCSVData));
+    var preCSVDataIndividualPerspective = dataToPreCSV(_enteredData[0]);
+    var preCSVDataTeamPerspective = dataToPreCSV(_enteredData[1]);
+    List<dynamic> csvDataIndividualPerspective = preCSVToCSVData(preCSVDataIndividualPerspective);
+    List<dynamic> csvDataTeamPerspective = preCSVToCSVData(preCSVDataTeamPerspective);
+    printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
   }
 
   
@@ -254,11 +252,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
           [ 
-            //********** For debug ************//
-            ElevatedButton(onPressed: updateDataStructure, child: Text('Data structure update')),
-            Gap(20),
-            Divider(thickness: 3),
-            Gap(20),
+           
             //*********** Form ***********//
             Center(
               child: CustomHeader
@@ -466,6 +460,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               onTextChanged: (String value){setState(() {});},
               textFieldEditingController: _earningAbilityTextController,
             ),
+             //********** Data saving ************//
+            Gap(20),
+            Center
+            (
+              child: ElevatedButton
+              (
+                onPressed: print, 
+                child: Text('Click to save your data\n(CSV, spreadsheet-compatible format)', style: dataSavingStyle, textAlign: TextAlign.center,)
+              )
+              ),
+            Gap(20),
+            Divider(thickness: 3),
+            
 
            
             
