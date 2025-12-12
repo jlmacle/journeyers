@@ -439,7 +439,8 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 }
 
 /// Method to print the CSV data to a file
-void printToCSV( List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDataTeamPerspective) async
+/// returns the file name
+Future<String?> printToCSV( List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDataTeamPerspective) async
 {
   // Complementing the shortest list to have the same length for both list
   if (csvDataIndividualPerspective.length < csvDataTeamPerspective.length)
@@ -472,11 +473,12 @@ void printToCSV( List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDa
   }
 
   final bytes = Uint8List.fromList(utf8.encode(content));
-  await FilePicker.platform.saveFile
+  return await FilePicker.platform.saveFile
   (
     dialogTitle: 'Please enter a file name',
     fileName: '.csv',
     bytes: bytes, // necessary, at least on Windows
     allowedExtensions: ['csv']
   );
+
 }
