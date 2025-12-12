@@ -14,6 +14,7 @@ import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_
 import 'package:journeyers/l10n/app_localizations.dart'; 
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
 
@@ -177,73 +178,97 @@ class ContextAnalysisPage extends StatefulWidget
 
 class _ContextAnalysisPageState extends State<ContextAnalysisPage>  
 { 
-
-  late bool _startMessageVisibilityStatus = true;
+  bool _preferencesLoading = true;
+  late bool? _isStartMessageAcknowledged;  
   bool isContextAnalysisSessionDataSaved = false;
+
+  _getPreferences() async{
+    _isStartMessageAcknowledged = await isStartMessageAcknowledged();
+    if (mounted)
+    {
+      setState(() {  
+        _preferencesLoading = false;
+      });
+    }
+
+  }
 
   @override
   void initState() 
-  {
-    super.initState();   
+  { 
+    super.initState();
+    _getPreferences();     
   }
 
     void _hideMessageArea()
     {
       setState(() {
-        _startMessageVisibilityStatus = false;
+        saveStartMessageAcknowledgement();
+        _isStartMessageAcknowledged = true;
       });
-      saveStartMessageAcknowledgement();
+      
     }
+
+  void resetAcknowledgement() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('startMessageAcknowledged', false);
+  }
 
   @override
   Widget build(BuildContext context) 
   { 
 
-    FocusNode dismissableMsgFocusNode = FocusNode();
+    FocusNode dismissableMsgFocusNode = FocusNode();    
 
     return Scaffold
     (
-      body: Column
+      body: 
+      Column
       (
         mainAxisAlignment: MainAxisAlignment.center,
         children: 
         [
-          ContextAnalysisNewSessionPage(),
-          if (_startMessageVisibilityStatus)
-            Semantics
-            (
-              focusable: true,
-              focused: true,
-              child: Focus
-              (
-                focusNode: dismissableMsgFocusNode,
-                child: 
-                CustomDismissableRectangularArea
-                (
-                  buildContext:context, 
-                  message1: 'This is your first context analysis.', 
-                  message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-                  messagesColor: paleCyan, // from app_themes
-                  actionText:'Please click the message area to acknowledge.',
-                  actionTextColor: paleCyan, // from app_themes,
-                  areaBackgroundColor: navyBlue, // from app_themes
-                  setStateCallBack: _hideMessageArea
-                )
-              ),
-            ),
-                
-          if (isContextAnalysisSessionDataSaved)
+        if (_preferencesLoading)
+          Center(child: CircularProgressIndicator())
+        else
           ...[
-            Divider(),
-            ContextAnalysisDashboardPage()
+            ContextAnalysisNewSessionPage(),
+            if (!(_isStartMessageAcknowledged!))
+              Semantics
+              (
+                focusable: true,
+                focused: true,
+                child: Focus
+                (
+                  focusNode: dismissableMsgFocusNode,
+                  child: 
+                  CustomDismissableRectangularArea
+                  (
+                    buildContext:context, 
+                    message1: 'This is your first context analysis.', 
+                    message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+                    messagesColor: paleCyan, // from app_themes
+                    actionText:'Please click the message area to acknowledge.',
+                    actionTextColor: paleCyan, // from app_themes,
+                    areaBackgroundColor: navyBlue, // from app_themes
+                    setStateCallBack: _hideMessageArea
+                  )
+                ),
+              ),                
+            if (isContextAnalysisSessionDataSaved)
+            ...[
+              Divider(),
+              ContextAnalysisDashboardPage()
+            ],
+            // ElevatedButton(onPressed: resetAcknowledgement, child: Text('Reset acknowledgement'))
           ]
-          // TextButton(
-          //   onPressed: () {
-          //     // This dumps the Semantics Tree's structure and properties to the console.
-          //     debugDumpSemanticsTree(); 
-          //   },
-          //     child: const Text('Dump Semantics'),
-          //   )
+        // TextButton(
+        //   onPressed: () {
+        //     // This dumps the Semantics Tree's structure and properties to the console.
+        //     debugDumpSemanticsTree(); 
+        //   },
+        //     child: const Text('Dump Semantics'),
+        //   )
         ],
       ),
     );
