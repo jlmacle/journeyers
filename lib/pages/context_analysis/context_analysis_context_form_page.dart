@@ -213,15 +213,18 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     
   }
 
-  void print()
+  void print2CSV()
   {
     setState(() {
+      // Building the data from the form
       dataStructureBuild();
     });
+    // Transforming the data into a CSV-friendly form
     var preCSVDataIndividualPerspective = dataToPreCSV(_enteredData[0]);
     var preCSVDataTeamPerspective = dataToPreCSV(_enteredData[1]);
     List<dynamic> csvDataIndividualPerspective = preCSVToCSVData(preCSVDataIndividualPerspective);
     List<dynamic> csvDataTeamPerspective = preCSVToCSVData(preCSVDataTeamPerspective);
+    // Printing to CSV
     printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
   }
 
@@ -466,7 +469,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child: ElevatedButton
               (
-                onPressed: print, 
+                onPressed: print2CSV, 
                 child: Text('Click to save your data in CSV, \nspreadsheet-compatible format', style: dataSavingStyle, textAlign: TextAlign.center,)
               )
               ),
