@@ -467,7 +467,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               child: ElevatedButton
               (
                 onPressed: print, 
-                child: Text('Click to save your data\n(CSV, spreadsheet-compatible format)', style: dataSavingStyle, textAlign: TextAlign.center,)
+                child: Text('Click to save your data in CSV, \nspreadsheet-compatible format', style: dataSavingStyle, textAlign: TextAlign.center,)
               )
               ),
             Gap(20),
