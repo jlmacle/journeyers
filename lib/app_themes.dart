@@ -14,6 +14,7 @@ final double betweenLevel3DividerThickness = 1;
 
 // Text styles
 final TextStyle feedbackMessageStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.normal);
+final TextStyle dataSavingStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.normal);
 
 // Input decorations
 const String pleaseDescribeTextHousehold = 'Please describe the past outcomes for the household, '
@@ -101,6 +102,34 @@ final ThemeData appTheme = ThemeData
       style:  ButtonStyle
       (
         foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+        backgroundColor:WidgetStateProperty.all<Color>(paleCyan),
+        surfaceTintColor: WidgetStateProperty.resolveWith<Color>
+        (
+          (Set<WidgetState> states) 
+          {
+            if (states.contains(WidgetState.hovered)) 
+            {
+              return paleCyan;
+            }
+            else if (states.contains(WidgetState.focused)) 
+            {
+              return paleCyan;
+            }
+            return paleCyan;  
+          }         
+        ),
+        overlayColor: WidgetStateProperty.resolveWith<Color?>
+        (
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.hovered)) {
+              return Colors.transparent; 
+            }
+            if (states.contains(WidgetState.pressed)) {
+              return Colors.transparent;
+            }
+            return null; 
+          },
+        ),
       )
     ),
     segmentedButtonTheme: SegmentedButtonThemeData
