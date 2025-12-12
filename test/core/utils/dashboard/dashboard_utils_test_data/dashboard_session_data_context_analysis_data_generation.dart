@@ -1,4 +1,4 @@
-// flutter run -t test\core\utils\process_utils_test_data\dashboard_session_data_context_analysis_data_generation.dart
+// flutter run -t test\core\utils\dashboard\dashboard_utils_test_data\dashboard_session_data_context_analysis_data_generation.dart
 
 import 'dart:convert';
 import 'dart:io';
@@ -9,7 +9,7 @@ import 'package:path/path.dart' as path;
 
 void main() async
 {
-  String filePath = path.join('test','core','utils','process_utils_test_data','dashboard_session_data_context_analysis.json');
+  String filePath = path.join('test','core','utils','dashboard', 'dashboard_utils_test_data','dashboard_session_data_context_analysis.json');
   var jsonFile = File(filePath);
 
   var now = DateTime.now();
@@ -29,7 +29,7 @@ void main() async
   var record2= {'title':title2, 'date':date2, 'tags':tags2};
 
   // Third record of data
-  var title3 = "Title session 2";
+  var title3 = "Title session 3";
   var date3 = formattedDate;
   List<String> tags3 = ["tag1", "tag3", "tag5"];
   var record3 = {'title':title3, 'date':date3, 'tags':tags3};
