@@ -184,13 +184,9 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
 
   _getPreferences() async{
     _isStartMessageAcknowledged = await isStartMessageAcknowledged();
-    if (mounted)
-    {
       setState(() {  
         _preferencesLoading = false;
       });
-    }
-
   }
 
   @override
