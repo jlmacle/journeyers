@@ -12,6 +12,7 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/core/utils/csv/csv_utils.dart';
+import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
@@ -26,6 +27,11 @@ class ContextAnalysisContextFormPage extends StatefulWidget {
 
 class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
 {
+  // Session title
+  String _analysisTitle = "";
+  // TextEditingController for the session title
+  TextEditingController analysisTitleController = TextEditingController();
+
  // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
 
@@ -213,7 +219,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     
   }
 
-  void print2CSV()
+  void print2CSV() async
   {
     setState(() {
       // Building the data from the form
@@ -225,7 +231,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     List<dynamic> csvDataIndividualPerspective = preCSVToCSVData(preCSVDataIndividualPerspective);
     List<dynamic> csvDataTeamPerspective = preCSVToCSVData(preCSVDataTeamPerspective);
     // Printing to CSV
-    printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
+    String? filePath = await printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
+    printd("filePath:$filePath");
+    // Saving the dashboard data if filePath not null
+    if (filePath != null) dashboardDataSaving(contextAnalysesData, _analysisTitle, filePath);
+
   }
 
   
@@ -464,13 +474,29 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textFieldEditingController: _earningAbilityTextController,
             ),
              //********** Data saving ************//
-            Gap(20),
+            Gap(preAndPostLevel3DividerGap),
+            Divider(thickness: betweenLevel3DividerThickness),
+            Gap(preAndPostLevel3DividerGap),
             Center
             (
-              child: ElevatedButton
-              (
-                onPressed: print2CSV, 
-                child: Text('Click to save your data in CSV, \nspreadsheet-compatible format', style: dataSavingStyle, textAlign: TextAlign.center,)
+              child: Container(
+                child: Column(
+                  children: [
+                    CustomPaddedTextField
+                    (  
+                      textAlignment: TextAlign.center,                    
+                      textFieldInputDecoration: InputDecoration(hintText: "Please enter a title for this analysis"),
+                      textFieldEditingController: analysisTitleController, // not used
+                      onTextFieldChanged: (value) => {setState(() {_analysisTitle = value;})},
+                      textFieldMaxLength: 150,
+                    ),
+                    ElevatedButton
+                    (
+                      onPressed: print2CSV, 
+                      child: Text('Click to save your data in CSV, \nspreadsheet-compatible format', style: dataSavingStyle, textAlign: TextAlign.center,)
+                    ),
+                  ],
+                ),
               )
               ),
             Gap(20),
