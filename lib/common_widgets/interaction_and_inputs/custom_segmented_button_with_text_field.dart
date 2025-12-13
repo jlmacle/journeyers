@@ -53,7 +53,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textOptionsfontSize = 24,
     this.textOptionsColor = Colors.black,
     required this.onSelectionChanged,
-    required this.onTextChanged,
+    this.onTextChanged,
     required this.textFieldEditingController,
     required this.textFieldPlaceholder,
     this.textFieldHorizontalPadding = 20.0,
@@ -137,9 +137,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: widget.textFieldPlaceholder), 
-            textFieldEditingController: widget.textFieldEditingController, onTextFieldChanged: widget.onTextChanged,
-            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)
+            child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder, textFieldEditingController: widget.textFieldEditingController, textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)
             
           ),
       ],
