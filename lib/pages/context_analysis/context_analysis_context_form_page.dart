@@ -32,6 +32,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   // TextEditingController for the session title
   TextEditingController analysisTitleController = TextEditingController();
 
+  String _errorMessageOtherIssue = "";
+  String _errorMessageProblemsTheGroupsAreTryingToSolve = "";
+
  // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
 
@@ -96,9 +99,41 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _betterLegaciesCheckboxState(bool newValue){setState(() { _betterLegaciesCheckbox = newValue;});}  
   _betterLegaciesTextFieldState(String newValue){setState(() {_betterLegaciesTextFieldContent = newValue;});}
 
-  _otherIssueTextFieldState(String newValue){setState(() {});}
+  _otherIssueTextFieldState(String newValue)
+  {
+    if (newValue.contains('"')) 
+    {
+      newValue = newValue.replaceAll('"', '');
+      _otherIssueTextController.text = newValue; 
+      setState(() {
+        _errorMessageOtherIssue = 'Double quotes are reserved for CSV-related use.';
+      });
+    } 
+    else 
+    {
+      setState(() {
+        _errorMessageOtherIssue = "";
+      });
+    }
+  }
 
-  _problemsTheGroupsAreTryingToSolveTextFieldState(String newValue){setState(() {});}
+  _problemsTheGroupsAreTryingToSolveTextFieldState(String newValue)
+  {
+    if (newValue.contains('"')) 
+    {
+      newValue = newValue.replaceAll('"', '');
+      _problemsTheGroupsAreTryingToSolveTextController.text = newValue; 
+      setState(() {
+        _errorMessageProblemsTheGroupsAreTryingToSolve = 'Double quotes are reserved for CSV-related use.';
+      });
+    } 
+    else 
+    {
+      setState(() {
+        _errorMessageProblemsTheGroupsAreTryingToSolve = "";
+      });
+    }
+  }
 
 
   @override
@@ -340,7 +375,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDevelopOrTakeNotes), textFieldEditingController: _otherIssueTextController, 
+            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDevelopOrTakeNotes, errorText: _errorMessageOtherIssue), textFieldEditingController: _otherIssueTextController, 
             onTextFieldChanged: _otherIssueTextFieldState, textFieldMaxLength: chars1Page, buildCounter: absentCounter),
 
             Gap(preAndPostLevel2DividerGap),
@@ -364,7 +399,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextGroups), textFieldEditingController: _problemsTheGroupsAreTryingToSolveTextController, 
+            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextGroups, errorText: _errorMessageProblemsTheGroupsAreTryingToSolve ), textFieldEditingController: _problemsTheGroupsAreTryingToSolveTextController, 
             onTextFieldChanged: _problemsTheGroupsAreTryingToSolveTextFieldState, textFieldMaxLength: chars1Page, buildCounter: absentCounter),
 
             /**** ➡️ Sub-point  ****/
