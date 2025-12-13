@@ -64,6 +64,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
 {
   bool? _isChecked;
   late TextEditingController _textFieldEditingController;
+  String _errorMessage = "";
 
   @override
   void initState() {
@@ -111,15 +112,32 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: TextField
+            child: TextField // TODO: Custom Text Field instead
             ( 
               controller: _textFieldEditingController,
-              decoration: InputDecoration(hintText: widget.textFieldPlaceholder),
+              decoration: InputDecoration(hintText: widget.textFieldPlaceholder, errorText: _errorMessage),
               minLines: widget.textFieldMinLines,
               maxLines: widget.textFieldMaxLines,
               maxLength: widget.textFieldMaxLength,
               buildCounter: widget.buildCounter,
-              onChanged: (value) => {setState(() {widget.onTextFieldChanged(value);})}
+              onChanged: (value) 
+              {                
+                if (value.contains('"')) 
+                {
+                  value = value.replaceAll('"', '');
+                  _textFieldEditingController.text = value; 
+                  setState(() {
+                    _errorMessage = 'Double quotes are reserved for CSV-related use.';
+                  });
+                } 
+                else 
+                {
+                  setState(() {
+                    _errorMessage = "";
+                  });
+                }
+                widget.onTextFieldChanged(value);
+              }
             ),
           ),
       ],
