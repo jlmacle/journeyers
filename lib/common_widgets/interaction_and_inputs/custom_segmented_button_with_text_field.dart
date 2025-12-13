@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
+import 'package:journeyers/core/utils/form/form_utils.dart';
 
 class CustomSegmentedButtonWithTextField extends StatefulWidget 
 {
@@ -33,6 +34,10 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final int textFieldMinLines;
   /// The maxLines value for the text field 
   final int textFieldMaxLines;
+  /// The maxLength for the text field
+  final int textFieldMaxLength; 
+  /// The counter for the text field
+  final InputCounterWidgetBuilder buildCounter;
   /// The cross axis alignment for the segmented button, and the text field
   final CrossAxisAlignment inputsCrossAxisAlignment;
 
@@ -55,6 +60,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
+    this.textFieldMaxLength = chars1Page, // a page as a reference
+    this.buildCounter = absentCounter,
     this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
      
   });
@@ -132,7 +139,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
             child: CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: widget.textFieldPlaceholder), 
             textFieldEditingController: widget.textFieldEditingController, onTextFieldChanged: widget.onTextChanged,
-            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines)
+            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)
             
           ),
       ],
