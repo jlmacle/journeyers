@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -29,7 +30,7 @@ Future<File> getSessionFile(String typeOfContextData) async {
 }
 
 /// Method used to store on file session data
-Future<void> saveSessionData(String typeOfContextData, String sessionContent) async {
+Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessionContent) async {
 
   final file = await getSessionFile(typeOfContextData);
   if (!file.existsSync()){printd("Error: saveSessionData: file doesn't exist: $file");}
@@ -55,6 +56,8 @@ Future<void> saveSessionData(String typeOfContextData, String sessionContent) as
     // Encoding the data to String
     updatedContent = jsonEncode(records);
   }
+
+  print("Session data to save: $updatedContent");
     
   await file.writeAsString(updatedContent);
   printd('Session saved to: ${file.path}');
@@ -80,9 +83,20 @@ void dashboardDataSaving(String typeOfContextData, String analysisTitle, String 
   // Building the session data
   Map<String,String> sessionData = {titleKey:analysisTitle, dateKey:formattedDate, filePathKey:filePath};  
   // Saving the session data
-  await saveSessionData(typeOfContextData, sessionData.toString());
+  await saveSessionData(typeOfContextData, sessionData);
 }
 
+/// Method used to retrieved all the session data stored
+Future<Map<String,dynamic>> sessionDataRetrieval(String typeOfContextData) async
+{ 
+  Map<String,dynamic> completeSessionData;
+  File sessionFile = await getSessionFile(typeOfContextData);
+  String fileContent = sessionFile.readAsStringSync();
+  completeSessionData = jsonDecode(fileContent) as Map<String,dynamic>;
+
+  return completeSessionData;
+}
+// completeSessionData 
 /// Method used to determine the rank of the new session data to be added to the dashboard data file.
 /// The method is useful to determine the file name for the session data to be saved.
 /// The method assumes a json file of `Map<String, dynamic>`.
