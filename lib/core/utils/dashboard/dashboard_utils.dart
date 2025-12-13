@@ -48,7 +48,7 @@ Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessio
     // if the file is not empty
     // Reading and decoding the records content
     String jsonContent = file.readAsStringSync();
-    Map<String,List<Map<String,String>>> records =  jsonDecode(jsonContent);
+    Map<String,dynamic> records =  jsonDecode(jsonContent);
     var recordsList = records[recordsKey];
     // Adding to the records
     recordsList?.add(sessionContent);
