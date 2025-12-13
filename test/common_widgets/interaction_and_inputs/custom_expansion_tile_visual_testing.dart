@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansion_tile.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 void main() 
 {  
@@ -43,7 +44,7 @@ class MyTestingApp extends StatelessWidget
             )
           ),
         ),
-        body: Center(child: CustomExpansionTile()),
+        body: Center(child: CustomExpansionTile(onEditPressed: (){printd('onEditPressed');}, onDeletePressed: (){printd('onDeletePressed');}, onSharePressed: (){printd('onSharePressed');})),
       ),      
     );
   }
