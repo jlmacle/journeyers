@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/core/utils/form/form_utils.dart';
 
 class CustomPaddedTextField extends StatefulWidget 
 {
@@ -12,6 +13,8 @@ class CustomPaddedTextField extends StatefulWidget
     final int textFieldMaxLines;
     /// The maxLength for the text field
     final int textFieldMaxLength; 
+    /// The counter for the text field
+    final InputCounterWidgetBuilder buildCounter;
     /// The text field editing controller
     final TextEditingController textFieldEditingController;
     /// The callback function when the text field is modified
@@ -25,6 +28,8 @@ class CustomPaddedTextField extends StatefulWidget
     /// The bottom padding for the text field
     final double bottomPadding;
      
+    
+
 
     CustomPaddedTextField
     ({
@@ -33,7 +38,8 @@ class CustomPaddedTextField extends StatefulWidget
         required this.textFieldInputDecoration,
         this.textFieldMinLines = 1,
         this.textFieldMaxLines = 10,  
-        this.textFieldMaxLength = 7330,// a page as a reference
+        this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
+        this.buildCounter = presentCounter,
         required this.textFieldEditingController,
         required this.onTextFieldChanged,
         this.leftPadding = 20,
@@ -62,6 +68,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
           minLines: widget.textFieldMinLines,
           maxLines: widget.textFieldMaxLines,
           maxLength: widget.textFieldMaxLength,
+          buildCounter: widget.buildCounter,
           onChanged: widget.onTextFieldChanged,
         ),
     );

@@ -340,7 +340,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDevelopOrTakeNotes), textFieldEditingController: _otherIssueTextController, onTextFieldChanged: _otherIssueTextFieldState),
+            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDevelopOrTakeNotes), textFieldEditingController: _otherIssueTextController, 
+            onTextFieldChanged: _otherIssueTextFieldState, textFieldMaxLength: chars1Page, buildCounter: absentCounter),
 
             Gap(preAndPostLevel2DividerGap),
             Divider(thickness: betweenLevel2DividerThickness),
@@ -363,7 +364,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextGroups), textFieldEditingController: _problemsTheGroupsAreTryingToSolveTextController, onTextFieldChanged: _problemsTheGroupsAreTryingToSolveTextFieldState),
+            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextGroups), textFieldEditingController: _problemsTheGroupsAreTryingToSolveTextController, 
+            onTextFieldChanged: _problemsTheGroupsAreTryingToSolveTextFieldState, textFieldMaxLength: chars1Page, buildCounter: absentCounter),
 
             /**** ➡️ Sub-point  ****/
             CustomHeader

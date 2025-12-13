@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
+import 'package:journeyers/core/utils/form/form_utils.dart';
 
 class CustomCheckBoxWithTextField extends StatefulWidget 
 {
@@ -25,6 +26,10 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final int textFieldMinLines;
   /// The maxLines value for the text field 
   final int textFieldMaxLines;
+  /// The maxLength for the text field
+  final int textFieldMaxLength; 
+  /// The counter for the text field
+  final InputCounterWidgetBuilder buildCounter;
 
   /// The callback function used to pass the checkbox state
   final Function onCheckboxChanged;
@@ -45,6 +50,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,    
+    this.textFieldMaxLength = chars1Page, // a page as a reference
+    this.buildCounter = absentCounter,
     required this.onCheckboxChanged,
     required this.onTextFieldChanged
   });
@@ -110,6 +117,8 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
               decoration: InputDecoration(hintText: widget.textFieldPlaceholder),
               minLines: widget.textFieldMinLines,
               maxLines: widget.textFieldMaxLines,
+              maxLength: widget.textFieldMaxLength,
+              buildCounter: widget.buildCounter,
               onChanged: (value) => {setState(() {widget.onTextFieldChanged(value);})}
             ),
           ),
