@@ -11,6 +11,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_context_form_
 
 // Label used in the pre-CSV data
 String notes = "Notes:";
+String quotesForCSV = '"';
 
 
 //************** Mapping questions to input widgets to process data according to input widgets *************//
@@ -90,7 +91,7 @@ List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> c
   var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
   var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
-  var data2 = [notes,lineReturnsRemoval(dataTextField)]; // "Notes:" in front of the text field data in the pre CSV
+  var data2 = [notes,quotesForCSV+lineReturnsRemoval(dataTextField)+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
 
   checkboxPreCSVData.add(data1);
   checkboxPreCSVData.add(data2);
@@ -109,7 +110,7 @@ List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dyn
   var data1 = [segmentedButton,dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
 
   var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
-  var data2 = [notes,lineReturnsRemoval(dataTextField)]; // "Notes:" in front of the text field data in the pre CSV
+  var data2 = [notes,quotesForCSV+lineReturnsRemoval(dataTextField)+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
 
   segmentedButtonPreCSVData.add(data1);
   segmentedButtonPreCSVData.add(data2);
@@ -124,7 +125,7 @@ List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData
   List<dynamic> textFieldPreCSVData = []; 
 
   var dataTextField = textFieldData[textField] ?? "";
-  var data = [notes,lineReturnsRemoval(dataTextField)]; // "Notes:" in front of the text field data in the pre CSV
+  var data = [notes,quotesForCSV+lineReturnsRemoval(dataTextField)+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
 
   textFieldPreCSVData.add(data);
 
@@ -370,7 +371,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
         int noteIndex = index + 1;
         // Adding the X in front of the question if the note has content
         List<String> noteData = preCSVData[noteIndex];
-        if (noteData[1].trim() != "")
+        if (noteData[1].trim() != '""')
         {
           var questionData = preCSVData[index];
           questionData[0] = 'X';
