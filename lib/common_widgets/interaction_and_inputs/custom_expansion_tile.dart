@@ -23,10 +23,20 @@ class CustomExpansionTile extends StatefulWidget
   final String expandedAdditionalText;
   /// The height of a divider under the additional text
   final double dividerHeight;
+  /// The callback function called to edit from the expansion tile
+  final VoidCallback onEditPressed;
+  /// The callback function called to delete from the expansion tile
+  final VoidCallback onDeletePressed;
+  /// The callback function called to share from the expansion tile
+  final VoidCallback onSharePressed;
   /// A list of  [iconData, toolTipLabel, callBackFunction] values
   final List<List<dynamic>> listActionsIconsData;
   /// The horizontal location of the icon(s)
   final MainAxisAlignment listActionsIconsMainAxisAlignment;
+
+  static const String editStr = 'Edit';
+  static const String deleteStr = 'Delete';
+  static const String shareStr = 'Share';
 
   const CustomExpansionTile
   ({
@@ -40,12 +50,17 @@ class CustomExpansionTile extends StatefulWidget
     this.expandedAdditionalText = "Default expanded additional text",
     this.listActionsIconsMainAxisAlignment = MainAxisAlignment.end,
     this.dividerHeight = 20.5,
+    required this.onEditPressed,
+    required this.onDeletePressed,
+    required this.onSharePressed,
     this.listActionsIconsData = const
     [
-      [Icons.edit, 'Edit', null],
-      [Icons.delete, 'Delete',null],
-      [Icons.share, 'Share', null],
+      [Icons.edit, editStr, null],
+      [Icons.delete, deleteStr,null],
+      [Icons.share, shareStr, null],
     ],
+    
+
   });
 
   @override
@@ -102,9 +117,22 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                   {
                     final iconData = actionIconData[0] as IconData;
                     final toolTipLabel = actionIconData[1] as String;
-                    final onPressedFunction = actionIconData[2] as VoidCallback?;
+                    final VoidCallback onPressedFunction;
+                    if (toolTipLabel == CustomExpansionTile.editStr) 
+                    {
+                      onPressedFunction = widget.onEditPressed;
+                    }
+                    else if (toolTipLabel == CustomExpansionTile.deleteStr)
+                    {
+                      onPressedFunction = widget.onDeletePressed;
+                    }
+                    else if (toolTipLabel == CustomExpansionTile.shareStr)
+                    {
+                      onPressedFunction = widget.onSharePressed;
+                    }
+                    else {onPressedFunction = (){};}
 
-                    return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction ?? (){} );
+                    return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction );
                   }
                 )
                 .toList(),              
