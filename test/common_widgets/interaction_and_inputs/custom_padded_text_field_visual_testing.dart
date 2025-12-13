@@ -101,10 +101,8 @@ class _HomePageState extends State<HomePage>
           CustomPaddedTextField
           (
             topPadding: 20,
-            textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextHousehold), 
-            textFieldEditingController: textFieldEditingController, 
-            onTextFieldChanged: onChangedCallback
-          
+            textFieldHintText: pleaseDescribeTextHousehold, 
+            textFieldEditingController: textFieldEditingController,           
           ),
           Focus
           (

@@ -375,8 +375,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDevelopOrTakeNotes, errorText: _errorMessageOtherIssue), textFieldEditingController: _otherIssueTextController, 
-            onTextFieldChanged: _otherIssueTextFieldState, textFieldMaxLength: chars1Page, buildCounter: absentCounter),
+            CustomPaddedTextField(textFieldHintText: pleaseDevelopOrTakeNotes, textFieldEditingController: _otherIssueTextController, 
+            textFieldMaxLength: chars1Page, buildCounter: absentCounter),
 
             Gap(preAndPostLevel2DividerGap),
             Divider(thickness: betweenLevel2DividerThickness),
@@ -399,8 +399,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headerLevel: 3,
               headerAlign: TextAlign.left,
             ),
-            CustomPaddedTextField(textFieldInputDecoration: InputDecoration(hintText: pleaseDescribeTextGroups, errorText: _errorMessageProblemsTheGroupsAreTryingToSolve ), textFieldEditingController: _problemsTheGroupsAreTryingToSolveTextController, 
-            onTextFieldChanged: _problemsTheGroupsAreTryingToSolveTextFieldState, textFieldMaxLength: chars1Page, buildCounter: absentCounter),
+            CustomPaddedTextField(textFieldHintText: pleaseDescribeTextGroups, textFieldEditingController: _problemsTheGroupsAreTryingToSolveTextController, 
+            textFieldMaxLength: chars1Page, buildCounter: absentCounter),
 
             /**** ➡️ Sub-point  ****/
             CustomHeader
@@ -522,9 +522,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     CustomPaddedTextField
                     (  
                       textAlignment: TextAlign.center,                    
-                      textFieldInputDecoration: InputDecoration(hintText: "Please enter a title for this analysis"),
+                      textFieldHintText: "Please enter a title for this analysis",
                       textFieldEditingController: analysisTitleController, // not used
-                      onTextFieldChanged: (value) => {setState(() {_analysisTitle = value;})},
                       textFieldMaxLength: 150,
                     ),
                     ElevatedButton

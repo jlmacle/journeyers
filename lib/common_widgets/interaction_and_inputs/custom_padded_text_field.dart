@@ -5,8 +5,8 @@ class CustomPaddedTextField extends StatefulWidget
 {
     /// Alignment for the text
     final TextAlign textAlignment;
-    /// The InputDecoration for the text field
-    final InputDecoration textFieldInputDecoration;
+    /// The hint text for the text field
+    final String textFieldHintText;
     /// The minLines value for the text field
     final int textFieldMinLines;
     /// The maxLines value for the text field
@@ -17,8 +17,6 @@ class CustomPaddedTextField extends StatefulWidget
     final InputCounterWidgetBuilder buildCounter;
     /// The text field editing controller
     final TextEditingController textFieldEditingController;
-    /// The callback function when the text field is modified
-    final ValueChanged<String>? onTextFieldChanged;
     /// The left padding for the text field
     final double leftPadding;
     /// The right padding for the text field
@@ -26,22 +24,19 @@ class CustomPaddedTextField extends StatefulWidget
     /// The top padding for the text field
     final double topPadding;
     /// The bottom padding for the text field
-    final double bottomPadding;
-     
-    
+    final double bottomPadding;   
 
 
     CustomPaddedTextField
     ({
         super.key,      
         this.textAlignment = TextAlign.left,
-        required this.textFieldInputDecoration,
+        required this.textFieldHintText,
         this.textFieldMinLines = 1,
         this.textFieldMaxLines = 10,  
         this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
         this.buildCounter = presentCounter,
         required this.textFieldEditingController,
-        required this.onTextFieldChanged,
         this.leftPadding = 20,
         this.rightPadding = 20,
         this.topPadding = 10,
@@ -54,6 +49,26 @@ class CustomPaddedTextField extends StatefulWidget
 
 class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> 
 {
+  String _errorMessageForDoubleQuotes = "";
+
+  void onTextFieldChanged(value) 
+  { 
+    if (value.contains('"')) 
+    {
+      value = value.replaceAll('"', '');
+      widget.textFieldEditingController.text = value; 
+      setState(() {
+        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use.';
+      });
+    } 
+    else 
+    {
+      setState(() {
+        _errorMessageForDoubleQuotes = "";
+      });
+    }    
+  }
+
   @override
   Widget build(BuildContext context) 
   {
@@ -64,12 +79,12 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         (
           textAlign: widget.textAlignment,
           controller: widget.textFieldEditingController,
-          decoration: widget.textFieldInputDecoration,
+          decoration: InputDecoration(hintText: widget.textFieldHintText, errorText: _errorMessageForDoubleQuotes),
           minLines: widget.textFieldMinLines,
           maxLines: widget.textFieldMaxLines,
           maxLength: widget.textFieldMaxLength,
           buildCounter: widget.buildCounter,
-          onChanged: widget.onTextFieldChanged,
+          onChanged: onTextFieldChanged,
         ),
     );
   }
