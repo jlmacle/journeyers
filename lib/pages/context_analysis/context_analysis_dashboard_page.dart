@@ -20,8 +20,9 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
   {
     completeSessionData =  await sessionDataRetrieval(contextAnalysesData); 
     setState(() {
-      _isDataLoading = false;
+      _isDataLoading = false;      
       listOfSessionData = completeSessionData?.values.first;
+  
     });   
   }
 
@@ -32,6 +33,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
     _sessionDataRetrieval();   
   }
 
+  
 
   @override
   Widget build(BuildContext context) 
@@ -58,8 +60,8 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
                   itemCount: listOfSessionData?.length,
                   itemBuilder : (content, index)
                   {
-                    Map<String,dynamic> sessionDataAsMap = listOfSessionData?[index];
-                    return CustomExpansionTile(headerText: "(${sessionDataAsMap[dateKey]}) ${sessionDataAsMap[titleKey]}",expandedAdditionalText:"");
+                    Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
+                    return CustomExpansionTile(headerText: "(${sessionDataAsMap?[dateKey]}) ${sessionDataAsMap?[titleKey]}",expandedAdditionalText:"", onEditPressed: (){}, onDeletePressed: (){}, onSharePressed: (){});
                   }
                 )
               ),

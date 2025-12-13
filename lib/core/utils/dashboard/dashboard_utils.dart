@@ -40,7 +40,7 @@ Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessio
   // if the file is empty
   if (file.readAsStringSync().trim() == "")
   {
-     Map<String,dynamic> records = {recordsKey:[sessionContent]};    
+     Map<String,List<Map<String,String>>> records = {recordsKey:[sessionContent]};    
      updatedContent = jsonEncode(records);
   }
   else
@@ -48,7 +48,7 @@ Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessio
     // if the file is not empty
     // Reading and decoding the records content
     String jsonContent = file.readAsStringSync();
-    Map<String, dynamic> records =  jsonDecode(jsonContent);
+    Map<String,List<Map<String,String>>> records =  jsonDecode(jsonContent);
     var recordsList = records[recordsKey];
     // Adding to the records
     recordsList?.add(sessionContent);
@@ -56,8 +56,6 @@ Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessio
     // Encoding the data to String
     updatedContent = jsonEncode(records);
   }
-
-  print("Session data to save: $updatedContent");
     
   await file.writeAsString(updatedContent);
   printd('Session saved to: ${file.path}');
@@ -92,35 +90,7 @@ Future<Map<String,dynamic>> sessionDataRetrieval(String typeOfContextData) async
   Map<String,dynamic> completeSessionData;
   File sessionFile = await getSessionFile(typeOfContextData);
   String fileContent = sessionFile.readAsStringSync();
-  completeSessionData = jsonDecode(fileContent) as Map<String,dynamic>;
+  completeSessionData = jsonDecode(fileContent);
 
   return completeSessionData;
-}
-// completeSessionData 
-/// Method used to determine the rank of the new session data to be added to the dashboard data file.
-/// The method is useful to determine the file name for the session data to be saved.
-/// The method assumes a json file of `Map<String, dynamic>`.
-int newFileNumberDetermination({required String pathToDashboardDataFile}) 
-{
-  var dashboardDataFile = File(pathToDashboardDataFile);
-  // does the file exist?
-  if(!dashboardDataFile.existsSync())
-  {
-    // file creation
-    dashboardDataFile.createSync();
-    dataRank = 1;
-  }
-  else
-  {
-    var dashboardDataFile = File(pathToDashboardDataFile);
-    var jsonString = dashboardDataFile.readAsStringSync();
-    Map<String,dynamic> dashboardData = jsonDecode(jsonString);
-    
-    var records = dashboardData["records"] as List;
-    var lineNbr = records.length;
-    dataRank = lineNbr+1;
-  }
-
-  return dataRank;
-
 }
