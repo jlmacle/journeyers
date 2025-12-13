@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansion_tile.dart';
+import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 
 class ContextAnalysisDashboardPage extends StatefulWidget {
   const ContextAnalysisDashboardPage({super.key});
@@ -9,28 +12,59 @@ class ContextAnalysisDashboardPage extends StatefulWidget {
 
 class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardPage> 
 {
+  bool _isDataLoading = true;
+  Map<String,dynamic>? completeSessionData;
+  List<dynamic>? listOfSessionData;
+
+  void  _sessionDataRetrieval() async
+  {
+    completeSessionData =  await sessionDataRetrieval(contextAnalysesData); 
+    setState(() {
+      _isDataLoading = false;
+      listOfSessionData = completeSessionData?.values.first;
+    });   
+  }
+
+  @override
+  void initState() 
+  { 
+    super.initState();
+    _sessionDataRetrieval();   
+  }
+
+
   @override
   Widget build(BuildContext context) 
   {
 
     FocusNode contextAnalysisDashboardFocusNode = FocusNode();
-
-    return Expanded
-    (
-      child: Center
-      (      
-        child: Semantics
-        (        
-          header: true,
-          headingLevel: 2,
-          focusable: true,
-          child: Focus
-          (
-            focusNode: contextAnalysisDashboardFocusNode,
-            child: Center(child: Text('Context analysis dashboard'))
-          )
-        ),
-      ),
-    );
+    
+    return 
+        _isDataLoading
+        ? Center(child: CircularProgressIndicator())
+        : Expanded
+        (
+            child: Semantics
+            (        
+              header: true,
+              headingLevel: 2,
+              focusable: true,
+              child: Focus
+              (
+                focusNode: contextAnalysisDashboardFocusNode,
+                
+                child: ListView.builder
+                (
+                  itemCount: listOfSessionData?.length,
+                  itemBuilder : (content, index)
+                  {
+                    Map<String,dynamic> sessionDataAsMap = listOfSessionData?[index];
+                    return CustomExpansionTile(headerText: "(${sessionDataAsMap[dateKey]}) ${sessionDataAsMap[titleKey]}",expandedAdditionalText:"");
+                  }
+                )
+              ),
+            ),
+        );
+    
   }
 }
