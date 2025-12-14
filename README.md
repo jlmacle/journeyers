@@ -4,6 +4,7 @@ Our appreciability in these teams, and therefore our quality of life, depends on
 
 This open source ed tech and assistive tech, proof-of-concept project (cross-platform, cross-cultural, accessible, offline-friendly app), is meant to support our problem-solving processes, and to help us reach lasting solutions.
 As of 12/06/25, most of the value is in the utils, custom widgets, and custom widgets testing files.
+The answers to the first set of questions is exportable to CSV.
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
