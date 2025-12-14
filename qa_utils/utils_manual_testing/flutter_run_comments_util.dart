@@ -32,8 +32,8 @@ void main() async
   if (defaultTargetPlatform == TargetPlatform.macOS) 
   {projectDir = envVars['JOURNEYERS_DIR']!;}
 
-  String filePath =  "test/pages/context_analysis_context_form_page_visual_testing.dart";
-  // String filePath = "./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart";
+  // String filePath =  "test/pages/context_analysis_context_form_page_visual_testing.dart";
+  String filePath = r"test\common_widgets\display_and_content\custom_dismissable_rectangular_area_visual_testing.dart";
   String commentBegin = "// flutter run -t ";
   String deviceFlag =  " -d ";
   String commentEndChrome = "chrome";
