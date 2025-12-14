@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp>
       supportedLocales: 
       [
         Locale('en'), // English
-        Locale('fr'), // Spanish
+        Locale('fr'), // French
       ],     
 
       locale: _currentLocale, // to be able to swap translated strings,
