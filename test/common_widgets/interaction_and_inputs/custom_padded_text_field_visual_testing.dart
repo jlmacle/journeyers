@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 
-typedef OnTextFieldChangedCallback = void Function(String);
-
 void main() 
 {  
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
@@ -58,20 +56,22 @@ class _HomePageState extends State<HomePage>
                                       'if some seem to have been out of their comfort zone for too long, '
                                       'and the more desirable outcomes for the household.'; 
 
-  TextEditingController textFieldEditingController = TextEditingController();
+  final TextEditingController _textFieldEditingController = TextEditingController();
+
+  void parentWidgetTextFieldValueCallBackFunction(String value)
+  {
+    setState(() 
+    {
+      _textFieldEditingController.text = value;
+    });
+  }
 
   @override
   void dispose()
   {
-    textFieldEditingController.dispose();
+    _textFieldEditingController.dispose();
     super.dispose();
   }
-
-  void onChangedCallback(String value)
-  {
-    setState(() {});
-  }
-
 
   @override
   Widget build(BuildContext context) 
@@ -102,12 +102,14 @@ class _HomePageState extends State<HomePage>
           (
             topPadding: 20,
             textFieldHintText: pleaseDescribeTextHousehold, 
-            textFieldEditingController: textFieldEditingController,           
+            textFieldEditingController: _textFieldEditingController,  
+            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,  
+ 
           ),
           Focus
           (
             focusNode: feedbackMsgFocusNode,
-            child: Text("You typed: ${textFieldEditingController.text}", style: feedbackMessageStyle)
+            child: Text("You typed: ${_textFieldEditingController.text}", style: feedbackMessageStyle)
             )          
         ],
       )
