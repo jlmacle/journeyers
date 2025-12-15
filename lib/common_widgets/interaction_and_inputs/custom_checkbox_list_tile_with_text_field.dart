@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
 class CustomCheckBoxWithTextField extends StatefulWidget 
@@ -30,11 +31,15 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final int textFieldMaxLength; 
   /// The counter for the text field
   final InputCounterWidgetBuilder buildCounter;
+  /// A callback function for the parent widget
+  final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
 
   /// The callback function used to pass the checkbox state
   final Function onCheckboxChanged;
   /// The callback function used to pass the text field state
   final Function onTextFieldChanged;
+
+  static void placeHolderFunction(String value) {}
 
   const CustomCheckBoxWithTextField
   ({
@@ -52,6 +57,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldMaxLines = 10,    
     this.textFieldMaxLength = chars1Page, // a page as a reference
     this.buildCounter = absentCounter,
+    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
     required this.onCheckboxChanged,
     required this.onTextFieldChanged
   });
@@ -64,7 +70,6 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
 {
   bool? _isChecked;
   late TextEditingController _textFieldEditingController;
-  String _errorMessage = "";
 
   @override
   void initState() {
@@ -112,32 +117,15 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: TextField // TODO: Custom Text Field instead
+            child: CustomPaddedTextField 
             ( 
-              controller: _textFieldEditingController,
-              decoration: InputDecoration(hintText: widget.textFieldPlaceholder, errorText: _errorMessage),
-              minLines: widget.textFieldMinLines,
-              maxLines: widget.textFieldMaxLines,
-              maxLength: widget.textFieldMaxLength,
+              textFieldEditingController: _textFieldEditingController,
+              textFieldHintText: widget.textFieldPlaceholder, 
+              textFieldMinLines: widget.textFieldMinLines,
+              textFieldMaxLines: widget.textFieldMaxLines,
+              textFieldMaxLength: widget.textFieldMaxLength,
               buildCounter: widget.buildCounter,
-              onChanged: (value) 
-              {                
-                if (value.contains('"')) 
-                {
-                  value = value.replaceAll('"', '');
-                  _textFieldEditingController.text = value; 
-                  setState(() {
-                    _errorMessage = 'Double quotes are reserved for CSV-related use.';
-                  });
-                } 
-                else 
-                {
-                  setState(() {
-                    _errorMessage = "";
-                  });
-                }
-                widget.onTextFieldChanged(value);
-              }
+              parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction              
             ),
           ),
       ],
