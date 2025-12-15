@@ -499,40 +499,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                 ),
               )
               ),
-            Gap(20),
-            Divider(thickness: 3),
-            
 
-           
-            
-           
-            // /* Debug section */
-            // Gap(20),
-            // Divider(thickness: 3),
-            // Gap(20),
-            // Text('Debug:'),
-            // Text("Studies / Household Balance: ${_studiesHouseholdBalanceCheckbox ?? "false"}, text: ${_studiesHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Accessing Income / Household Balance: ${_accessingIncomeHouseholdBalanceCheckbox ?? "false"}, text: ${_accessingIncomeHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Earning Income / Household Balance: ${_earningIncomeHouseholdBalanceCheckbox ?? "false"}, text: ${_earningIncomeHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Helping Others / Household Balance: ${_helpingOthersHouseholdBalanceCheckbox ?? "false"}, text: ${_helpingOthersHouseholdBalanceTextFieldContent ?? 'No value entered in the text field'}"),
-
-            // Text("More Appreciated At Work: ${_moreAppreciatedAtWorkCheckbox ?? "false"}, text: ${_moreAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
-            // Text("Remaining Appreciated At Work: ${_remainingAppreciatedAtWorkCheckbox ?? "false"}, text: ${_remainingAppreciatedAtWorkTextFieldContent ?? 'No value entered in the text field'}"),
-           
-            // Text("Better Legacies: ${_betterLegaciesCheckbox ?? "false"}, text: ${_betterLegaciesTextFieldContent ?? 'No value entered in the text field'}"),
-            
-            // Text("Other Issue: text: ${_otherIssueTextController.text}"),
-
-            // Text("Problems The Groups Are Trying To Solve: text: ${_problemsTheGroupsAreTryingToSolveTextController.text}"),
-
-            // Text("Same problems being solved?:  ${ _currentSelectionSameProblems.toString()}, text: ${_sameProblemsTextController.text}"),
-
-            // Text("Harmony home?:  ${ _currentSelectionHarmonyHome.toString()}, text: ${_harmonyHomeTextController.text}"),
-
-            // Text("Appreciability at work:  ${ _currentSelectionAppreciabilityAtWork.toString()}, text: ${_appreciabilityAtWorkTextController.text}"),
-
-            // Text("Earning ability:  ${ _currentSelectionEarningAbility.toString()}, text: ${_earningAbilityTextController.text}"),
-        
           ],
         ),
       )
