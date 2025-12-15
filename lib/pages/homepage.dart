@@ -13,10 +13,6 @@ import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 
 
-typedef NewVisibilityStatusCallback = void Function(bool newVisibilityStatus);
-
-
-
 class MyHomePage extends StatefulWidget 
 {
   final void Function(Locale) setLocale; 
