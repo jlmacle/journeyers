@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-typedef NewVisibilityStatusCallback = void Function();
-
 /// A customizable, dismissable, rectangular area widget, with a message to display, and a text related to the act of clicking on the widget.
 /// The rectangular area takes the width of the screen.
 
@@ -32,7 +30,7 @@ class CustomDismissableRectangularArea extends StatefulWidget {
 
   /// The function to call to have the rectangular area disappearing, or appearing, from the screen.
   /// The user can click anywhere on the rectangular area.
-  final NewVisibilityStatusCallback setStateCallBack;
+  final VoidCallback setStateCallBack;
 
   const CustomDismissableRectangularArea
   ({
