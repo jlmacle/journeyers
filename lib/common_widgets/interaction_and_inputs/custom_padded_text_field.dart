@@ -28,7 +28,7 @@ class CustomPaddedTextField extends StatefulWidget
     /// The bottom padding for the text field
     final double bottomPadding;   
 
-    static void _placeHolderFunction(String value) {}
+    static void placeHolderFunction(String value) {}
 
     CustomPaddedTextField
     ({
@@ -40,7 +40,7 @@ class CustomPaddedTextField extends StatefulWidget
         this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
         this.buildCounter = presentCounter,
         required this.textFieldEditingController,
-        this.parentWidgetTextFieldValueCallBackFunction = _placeHolderFunction,
+        this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
         this.leftPadding = 20,
         this.rightPadding = 20,
         this.topPadding = 10,
