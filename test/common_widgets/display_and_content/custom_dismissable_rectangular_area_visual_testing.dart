@@ -16,8 +16,6 @@ import 'package:journeyers/common_widgets/display_and_content/custom_dismissable
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
 
-typedef NewVisibilityStatusCallback = void Function();
-
 void main() async 
 {  
   // debugPaintSizeEnabled = true;
