@@ -7,7 +7,9 @@ This open source ed tech and assistive tech, proof-of-concept project <br>
 is meant to support our problem-solving processes, and to help us reach lasting solutions.<br>
 <br>
 As of 12/06/25, most of the value is in the utils, custom widgets, and custom widgets testing files.<br>
-The answers to the first set of questions is exportable to CSV.
+The answers to the first set of questions is exportable to CSV.<br>
+An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
+The accessibility needs to be finished.<br>
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
