@@ -68,6 +68,14 @@ class _HomePageState extends State<HomePage>
 
   Map <String,dynamic> enteredData = {"question1":{"isChecked":false,"comments":"undefined"}};
 
+   void parentWidgetTextFieldValueCallBackFunction(String value)
+  {
+    setState(() 
+    {
+     _textFieldContent = value;
+    });
+  }
+
   _setCheckboxState(bool value)
   {
     setState(() => _isCheckboxChecked = value);
@@ -167,7 +175,7 @@ class _HomePageState extends State<HomePage>
         [            
           CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, 
           textFieldPlaceholder: testTextFieldPlaceholder, onTextFieldChanged: _setTextFieldContent, 
-          key: customCheckboxWithTextFieldKey),
+          key: customCheckboxWithTextFieldKey, parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
