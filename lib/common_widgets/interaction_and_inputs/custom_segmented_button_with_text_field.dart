@@ -24,6 +24,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final ValueChanged<String>? onTextChanged;
   /// The text field editing controller
   final TextEditingController textFieldEditingController;
+  /// A callback function for the parent widget
+  final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
   /// The text of the text field place holder
   final String textFieldPlaceholder;
   /// The left and right padding value for the text field
@@ -41,6 +43,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   /// The cross axis alignment for the segmented button, and the text field
   final CrossAxisAlignment inputsCrossAxisAlignment;
 
+  static void placeHolderFunction(String value) {}
 
   const CustomSegmentedButtonWithTextField
   ({
@@ -55,6 +58,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     required this.onSelectionChanged,
     this.onTextChanged,
     required this.textFieldEditingController,
+    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
     required this.textFieldPlaceholder,
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
@@ -137,7 +141,9 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder, textFieldEditingController: widget.textFieldEditingController, textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)
+            child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder, textFieldEditingController: widget.textFieldEditingController, 
+            parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction,
+            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)
             
           ),
       ],

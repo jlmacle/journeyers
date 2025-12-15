@@ -57,6 +57,14 @@ class _HomePageState extends State<HomePage>
   final TextEditingController _textEditingController = TextEditingController(); 
   Set<String> _selectedValues = {"No value selected yet"};
 
+  void parentWidgetTextFieldValueCallBackFunction(String value)
+  {
+    setState(() 
+    {
+      _textEditingController.text = value;
+    });
+  }
+
   _selectedValuesUpdate(Set<String> newValues)
   {
     setState(() 
@@ -134,7 +142,7 @@ class _HomePageState extends State<HomePage>
               Gap(16),
               CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
               onSelectionChanged: _selectedValuesUpdate, textFieldPlaceholder: testTextFieldPlaceholder,
-              textFieldEditingController: _textEditingController, onTextChanged: _textValueUpdate),
+              textFieldEditingController: _textEditingController, onTextChanged: _textValueUpdate, parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction),
             ]
           ),
         ),      
