@@ -99,42 +99,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _betterLegaciesCheckboxState(bool newValue){setState(() { _betterLegaciesCheckbox = newValue;});}  
   _betterLegaciesTextFieldState(String newValue){setState(() {_betterLegaciesTextFieldContent = newValue;});}
 
-  _otherIssueTextFieldState(String newValue)
-  {
-    if (newValue.contains('"')) 
-    {
-      newValue = newValue.replaceAll('"', '');
-      _otherIssueTextController.text = newValue; 
-      setState(() {
-        _errorMessageOtherIssue = 'Double quotes are reserved for CSV-related use.';
-      });
-    } 
-    else 
-    {
-      setState(() {
-        _errorMessageOtherIssue = "";
-      });
-    }
-  }
-
-  _problemsTheGroupsAreTryingToSolveTextFieldState(String newValue)
-  {
-    if (newValue.contains('"')) 
-    {
-      newValue = newValue.replaceAll('"', '');
-      _problemsTheGroupsAreTryingToSolveTextController.text = newValue; 
-      setState(() {
-        _errorMessageProblemsTheGroupsAreTryingToSolve = 'Double quotes are reserved for CSV-related use.';
-      });
-    } 
-    else 
-    {
-      setState(() {
-        _errorMessageProblemsTheGroupsAreTryingToSolve = "";
-      });
-    }
-  }
-
 
   @override
   void dispose() {
