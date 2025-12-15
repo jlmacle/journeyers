@@ -20,21 +20,14 @@ void main() async
 {  
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos 
-
-  var userPreferences = await SharedPreferences.getInstance();
-  bool startMessageAcknowledged = userPreferences.getBool('startMessageAcknowledged') ?? false;
-
-  runApp(MyTestingApp(startMessageAcknowledged: startMessageAcknowledged));
+  runApp(MyTestingApp());
 }
 
 class MyTestingApp extends StatelessWidget 
 {
-  final bool startMessageAcknowledged; 
-
   const MyTestingApp
   ({
-    super.key,
-    required this.startMessageAcknowledged
+    super.key
   });
 
   @override
@@ -45,20 +38,18 @@ class MyTestingApp extends StatelessWidget
       theme: appTheme,
       home: ScaffoldMessenger
       (
-        child: MyTestingWidget(startMessageAcknowledged: startMessageAcknowledged)
+        child: MyTestingWidget()
       )
     );
   }
 }
 
 
-class MyTestingWidget extends StatefulWidget {
-  final bool startMessageAcknowledged;
-
+class MyTestingWidget extends StatefulWidget 
+{
   const MyTestingWidget
   ({
-    super.key,
-    required this.startMessageAcknowledged
+    super.key
   });  
 
   @override
@@ -67,18 +58,33 @@ class MyTestingWidget extends StatefulWidget {
 
 
 class _MyTestingWidgetState extends State<MyTestingWidget> 
-{
+{  
+  bool _isPreferenceLoaded = false;
+  late bool _startMessageAcknowledged;
   late bool _visibilityStatus; 
 
+  void preferenceLoading() async
+  {
+    var userPreferences = await SharedPreferences.getInstance();    
+    setState(() 
+    {
+      _startMessageAcknowledged = userPreferences.getBool('startMessageAcknowledged') ?? false;
+      _visibilityStatus = !(_startMessageAcknowledged); 
+      _isPreferenceLoaded = true;
+    });    
+  }
+
    @override
-  void initState() {
+  void initState() 
+  {
     super.initState();
-    _visibilityStatus = !(widget.startMessageAcknowledged);   
+    preferenceLoading();
   }
  
   void _hideMessageArea()
   {
-    setState(() {
+    setState(() 
+    {
       _visibilityStatus = false;
     });
     saveStartMessageAcknowledgement();
@@ -89,9 +95,11 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
   { 
     FocusNode appBarTitleFocusNode = FocusNode();
     
-    return Theme(
+    return Theme
+    (
       data: appTheme,
-      child: Scaffold(      
+      child: Scaffold
+      (      
         appBar: AppBar
         (
           title: Semantics
@@ -108,35 +116,43 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[            
-              Expanded(child: Container()),
-              Visibility
-              (
-                visible: _visibilityStatus,
-                child: CustomDismissableRectangularArea(buildContext:context, 
-                message1: 'This is your first context analysis.', 
-                message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-                messagesColor: paleCyan, // from app_themes
-                actionText:'Please click the message area to acknowledge.',
-                actionTextColor: paleCyan, // from app_themes,
-                areaBackgroundColor: navyBlue, // from app_themes
-                setStateCallBack: _hideMessageArea), 
-
-              ),
-              Gap(30),
-              ElevatedButton.icon(
-                onPressed: () async 
-                {
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.setBool('startMessageAcknowledged', false);
-                  // to rebuild and re-display the code
-                  setState(() {
-                    _visibilityStatus = true;
-                  });
-                }, 
-                label: const Text('Reset to display the message again'),
-              ),
-              Gap(20)              
+            children: <Widget>
+            [
+              if (!_isPreferenceLoaded) 
+                CircularProgressIndicator()    
+              else
+              ...[       
+                Expanded
+                (
+                  child: Container()
+                ),
+                Visibility
+                (
+                  visible: _visibilityStatus,
+                  child: CustomDismissableRectangularArea(buildContext:context, 
+                  message1: 'This is your first context analysis.', 
+                  message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+                  messagesColor: paleCyan, // from app_themes
+                  actionText:'Please click the message area to acknowledge.',
+                  actionTextColor: paleCyan, // from app_themes,
+                  areaBackgroundColor: navyBlue, // from app_themes
+                  setStateCallBack: _hideMessageArea), 
+                ),
+                Gap(30),
+                ElevatedButton.icon
+                (
+                  onPressed: () async 
+                  {
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool('startMessageAcknowledged', false);
+                    // to rebuild and re-display the code
+                    setState(() {
+                      _visibilityStatus = true;
+                    });
+                  }, 
+                  label: const Text('Reset to display the message again'),
+                ),
+              ],        
             ],
           ),
         ),
