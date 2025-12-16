@@ -69,21 +69,12 @@ List<dynamic> preCSVData = [];
 
 //***************** Methods processing data according to input widgets: beginning  ***********************//
 
-/// Method used to remove the line returns from text field data
-String lineReturnsRemoval(String textFieldData)
-{
-  String dataToReturn = "";
-  dataToReturn = textFieldData.replaceAll('\r', '');
-  dataToReturn = dataToReturn.replaceAll('\n', '');
-  return dataToReturn;
-}
-
-
 /// Method to convert information from {checkbox: false/true/null, textField: "data"/null} to:
 /// checkbox, false/true
 /// textField, "data"/""
 List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> checkBoxWithTextFieldtextData)
 {
+
   List<dynamic> checkboxPreCSVData = []; 
 
   // checkbox data converted from bool to String: values can be "null", "true" or "false"
@@ -91,7 +82,7 @@ List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> c
   var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
   var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
-  var data2 = [notes,quotesForCSV+lineReturnsRemoval(dataTextField)+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
+  var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
 
   checkboxPreCSVData.add(data1);
   checkboxPreCSVData.add(data2);
@@ -110,7 +101,7 @@ List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dyn
   var data1 = [segmentedButton,dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
 
   var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
-  var data2 = [notes,quotesForCSV+lineReturnsRemoval(dataTextField)+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
+  var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
 
   segmentedButtonPreCSVData.add(data1);
   segmentedButtonPreCSVData.add(data2);
@@ -125,7 +116,7 @@ List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData
   List<dynamic> textFieldPreCSVData = []; 
 
   var dataTextField = textFieldData[textField] ?? "";
-  var data = [notes,quotesForCSV+lineReturnsRemoval(dataTextField)+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
+  var data = [notes,quotesForCSV+dataTextField+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
 
   textFieldPreCSVData.add(data);
 
@@ -461,6 +452,8 @@ Future<String?> printToCSV( List<dynamic> csvDataIndividualPerspective, List<dyn
     }
   }
 
+  
+
 
   String content = "";
   // Building the content line by line
@@ -472,6 +465,9 @@ Future<String?> printToCSV( List<dynamic> csvDataIndividualPerspective, List<dyn
     String line = "${csvDataIndividualPerspectiveData[0]},${csvDataIndividualPerspectiveData[1]},,${csvDataTeamPerspectiveData[0]}, ${csvDataTeamPerspectiveData[1]}\n";
     content += line ;  
   }
+
+  print("csvDataIndividualPerspective:$csvDataIndividualPerspective");  
+  print("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
 
   final bytes = Uint8List.fromList(utf8.encode(content));
   return await FilePicker.platform.saveFile
