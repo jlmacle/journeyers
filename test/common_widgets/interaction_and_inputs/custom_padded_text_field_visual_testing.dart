@@ -41,7 +41,6 @@ class _MyTestingAppState extends State<MyTestingApp>
 
 class HomePage extends StatefulWidget 
 {
-
   const HomePage
   ({
     super.key,
@@ -57,29 +56,15 @@ class _HomePageState extends State<HomePage>
                                       'if some seem to have been out of their comfort zone for too long, '
                                       'and the more desirable outcomes for the household.'; 
 
-  final TextEditingController _textFieldEditingController = TextEditingController();
+  
+  String _textContent = "";
 
-  void parentWidgetTextFieldValueCallBackFunction(String value)
-  {
-    setState(() 
-    {
-      _textFieldEditingController.text = value;
-    });
-  }
-
-  @override
-  void dispose()
-  {
-    _textFieldEditingController.dispose();
-    super.dispose();
-  }
+  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode feedbackMsgFocusNode = FocusNode();  
 
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode appBarTitleFocusNode = FocusNode();
-    FocusNode feedbackMsgFocusNode = FocusNode();
-
     return Scaffold
     (
        appBar: AppBar
@@ -103,16 +88,14 @@ class _HomePageState extends State<HomePage>
           (
             topPadding: 20,
             textFieldHintText: pleaseDescribeTextHousehold, 
-            textFieldEditingController: _textFieldEditingController,  
-            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction, 
-            buildCounter: absentCounter
- 
+            parentWidgetTextFieldValueCallBackFunction: (String value){setState(() {_textContent = value;});}, 
+            buildCounter: absentCounter 
           ),
           Focus
           (
             focusNode: feedbackMsgFocusNode,
-            child: Text("You typed: ${_textFieldEditingController.text}", style: feedbackMessageStyle)
-            )          
+            child: Text("You typed: $_textContent", style: feedbackMessageStyle)
+          )          
         ],
       )
     );
