@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
+import 'package:journeyers/core/utils/form/form_utils.dart';
 
 void main() 
 {  
@@ -103,7 +104,8 @@ class _HomePageState extends State<HomePage>
             topPadding: 20,
             textFieldHintText: pleaseDescribeTextHousehold, 
             textFieldEditingController: _textFieldEditingController,  
-            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,  
+            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction, 
+            buildCounter: absentCounter
  
           ),
           Focus
