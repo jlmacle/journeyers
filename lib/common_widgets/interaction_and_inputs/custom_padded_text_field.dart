@@ -15,8 +15,8 @@ class CustomPaddedTextField extends StatefulWidget
     final int textFieldMaxLength; 
     /// The counter for the text field
     final InputCounterWidgetBuilder buildCounter;
-    /// The text field editing controller
-    final TextEditingController textFieldEditingController;
+    /// A callback function for the parent widget
+    final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
     /// The left padding for the text field
     final double leftPadding;
     /// The right padding for the text field
@@ -26,8 +26,9 @@ class CustomPaddedTextField extends StatefulWidget
     /// The bottom padding for the text field
     final double bottomPadding;   
 
+    static void placeHolderFunction(String value) {}
 
-    CustomPaddedTextField
+    const CustomPaddedTextField
     ({
         super.key,      
         this.textAlignment = TextAlign.left,
@@ -36,7 +37,7 @@ class CustomPaddedTextField extends StatefulWidget
         this.textFieldMaxLines = 10,  
         this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
         this.buildCounter = presentCounter,
-        required this.textFieldEditingController,
+        this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
         this.leftPadding = 20,
         this.rightPadding = 20,
         this.topPadding = 10,
@@ -49,25 +50,43 @@ class CustomPaddedTextField extends StatefulWidget
 
 class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> 
 {
+  // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
 
-  void onTextFieldChanged(value) 
+  TextEditingController textFieldEditingController = TextEditingController();
+  @override
+  void dispose()
+  {
+    textFieldEditingController.dispose();
+    super.dispose();
+  }
+
+  /// The method to call to modify the text field value if a " is found
+  /// and to modify the error message to display
+  void quoteCheck(value) 
   { 
     if (value.contains('"')) 
     {
-      value = value.replaceAll('"', '');
-      widget.textFieldEditingController.text = value; 
-      setState(() {
-        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use.';
+      value = value.replaceAll('"', '');     
+      setState(() {  
+        // Removes the quotes from the text field
+        textFieldEditingController.text = value;
+        // Updates the error message
+        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use.';    
+        // Updates the parental widget information on the text content
+        widget.parentWidgetTextFieldValueCallBackFunction(value);     
       });
     } 
     else 
     {
       setState(() {
+        textFieldEditingController.text = value;
         _errorMessageForDoubleQuotes = "";
+        widget.parentWidgetTextFieldValueCallBackFunction(value);   
       });
     }    
   }
+
 
   @override
   Widget build(BuildContext context) 
@@ -78,13 +97,13 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         child: TextField
         (
           textAlign: widget.textAlignment,
-          controller: widget.textFieldEditingController,
+          controller: textFieldEditingController,
           decoration: InputDecoration(hintText: widget.textFieldHintText, errorText: _errorMessageForDoubleQuotes),
           minLines: widget.textFieldMinLines,
           maxLines: widget.textFieldMaxLines,
           maxLength: widget.textFieldMaxLength,
           buildCounter: widget.buildCounter,
-          onChanged: onTextFieldChanged,
+          onChanged: (String newValue) {quoteCheck(newValue); }
         ),
     );
   }

@@ -8,8 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
-
-typedef OnTextFieldChangedCallback = void Function(String);
+import 'package:journeyers/core/utils/form/form_utils.dart';
 
 void main() 
 {  
@@ -42,7 +41,6 @@ class _MyTestingAppState extends State<MyTestingApp>
 
 class HomePage extends StatefulWidget 
 {
-
   const HomePage
   ({
     super.key,
@@ -58,27 +56,15 @@ class _HomePageState extends State<HomePage>
                                       'if some seem to have been out of their comfort zone for too long, '
                                       'and the more desirable outcomes for the household.'; 
 
-  TextEditingController textFieldEditingController = TextEditingController();
+  
+  String _textContent = "";
 
-  @override
-  void dispose()
-  {
-    textFieldEditingController.dispose();
-    super.dispose();
-  }
-
-  void onChangedCallback(String value)
-  {
-    setState(() {});
-  }
-
+  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode feedbackMsgFocusNode = FocusNode();  
 
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode appBarTitleFocusNode = FocusNode();
-    FocusNode feedbackMsgFocusNode = FocusNode();
-
     return Scaffold
     (
        appBar: AppBar
@@ -102,13 +88,14 @@ class _HomePageState extends State<HomePage>
           (
             topPadding: 20,
             textFieldHintText: pleaseDescribeTextHousehold, 
-            textFieldEditingController: textFieldEditingController,           
+            parentWidgetTextFieldValueCallBackFunction: (String value){setState(() {_textContent = value;});}, 
+            buildCounter: absentCounter 
           ),
           Focus
           (
             focusNode: feedbackMsgFocusNode,
-            child: Text("You typed: ${textFieldEditingController.text}", style: feedbackMessageStyle)
-            )          
+            child: Text("You typed: $_textContent", style: feedbackMessageStyle)
+          )          
         ],
       )
     );

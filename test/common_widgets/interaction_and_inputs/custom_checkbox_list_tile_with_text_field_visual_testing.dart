@@ -17,8 +17,6 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 
-final GlobalKey<CustomCheckBoxWithTextFieldState> customCheckboxWithTextFieldKey = GlobalKey();
-
 void main() 
 {  
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
@@ -44,7 +42,7 @@ class _MyTestingAppState extends State<MyTestingApp>
     (
       theme: appTheme, 
       home: HomePage()
-      );
+    );
   }
 }
 //---------------------------------------------------
@@ -63,20 +61,33 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  bool? _isCheckboxChecked;
+  bool _isCheckboxChecked = false;
   String? _textFieldContent;
 
   Map <String,dynamic> enteredData = {"question1":{"isChecked":false,"comments":"undefined"}};
 
-  _setCheckboxState(bool value)
+  void parentWidgetTextFieldValueCallBackFunction(String value)
   {
-    setState(() => _isCheckboxChecked = value);
+    setState
+    (
+      () 
+      {
+        _textFieldContent = value;
+      }
+    );
   }
 
-  _setTextFieldContent(String value)
+  void parentWidgetCheckboxValueCallBackFunction(bool? value)
   {
-    setState(() => _textFieldContent = value);
+    setState
+    (
+      () 
+      {
+        _isCheckboxChecked = value!;
+      }
+    );
   }
+
 
   transferDataToJsonFile() async 
   {
@@ -95,51 +106,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  importDataFromJsonFile() async
-  {
-    FilePickerResult? result = await FilePicker.platform.pickFiles
-    (
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-    );
-    String jsonString ="";
-
-    if (kIsWeb) 
-    {
-        // For the web, path is null, file bytes are used directly
-        final fileBytes = result!.files.single.bytes;
-        if (fileBytes != null) 
-        {
-          jsonString = utf8.decode(fileBytes);
-        }
-    } 
-    else 
-    {
-        // For desktop/mobile, path is used
-        final filePath = result!.files.single.path;
-        if (filePath != null) 
-        {
-          final file = File(filePath);
-          jsonString = await file.readAsString();
-        }
-    }
-
-    setState
-    (
-      () 
-      {
-        Map<String, dynamic> dataMap = jsonDecode(jsonString);
-        // updating the parent's internal
-        _isCheckboxChecked = dataMap["question1"]["isChecked"];
-        _textFieldContent = dataMap["question1"]["comments"];
-        // updating the widget's internal
-        customCheckboxWithTextFieldKey.currentState?.updateCheckBoxStateFunction(_isCheckboxChecked!);
-        customCheckboxWithTextFieldKey.currentState?.updateTextFieldStateFunction(_textFieldContent!);
-      }
-    );
-
-    
-  }
+  
 
   @override
   Widget build(BuildContext context) 
@@ -165,13 +132,17 @@ class _HomePageState extends State<HomePage>
       (
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, 
-          textFieldPlaceholder: testTextFieldPlaceholder, onTextFieldChanged: _setTextFieldContent, 
-          key: customCheckboxWithTextFieldKey),
+          CustomCheckBoxWithTextField
+          (
+            text: "Checkbox text", 
+            textFieldPlaceholder: testTextFieldPlaceholder,
+            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
+            parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction
+          ),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked ?? false}", textStyle: feedbackMessageStyle),
+            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked}", textStyle: feedbackMessageStyle),
           ),
            Padding(
             padding: const EdgeInsets.only(left: 20.0),
@@ -182,13 +153,7 @@ class _HomePageState extends State<HomePage>
           (
             onPressed: transferDataToJsonFile,
             child: CustomText(text: "Click to save the data (json for this demo)",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
-          ),
-          Gap(8),
-          ElevatedButton
-          (
-            onPressed: importDataFromJsonFile,
-            child: CustomText(text: "Load previous data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
-          )
+          ),         
         ]
       ),
     );

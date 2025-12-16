@@ -1,0 +1,4 @@
+In the context analysis form, the text fields max length is for about a page of text.
+Choice was made to have no counter display.
+Double quotes are supposed to be removed from the text fields, 
+to not interfere with the import of the context analysis CSV file in spreadsheet software.

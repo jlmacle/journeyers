@@ -54,20 +54,25 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  final TextEditingController _textEditingController = TextEditingController(); 
+  // final TextEditingController _textEditingController = TextEditingController(); 
   Set<String> _selectedValues = {"No value selected yet"};
+  String _textContent = "";
 
-  _selectedValuesUpdate(Set<String> newValues)
+  void parentWidgetTextFieldValueCallBackFunction(String value)
   {
     setState(() 
     {
-      _selectedValues = newValues;     
+     _textContent = value;
     });
   }
 
-  _textValueUpdate(String newValue)
+  void parentWidgetSegmentedButtonValueCallBackFunction( Set<String>? values)
   {
-    setState(() {});
+    setState(() 
+    {
+      // Only one value by configuration
+     _selectedValues = values!;
+    });
   }
 
   @override
@@ -125,7 +130,7 @@ class _HomePageState extends State<HomePage>
                       [
                         Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}', style: feedbackMessageStyle),
                         Gap(10),
-                        Text('You typed: ${_textEditingController.text}', style: feedbackMessageStyle),
+                        Text('You typed: $_textContent', style: feedbackMessageStyle),
                       ],
                     ),                    
                   ),
@@ -133,8 +138,9 @@ class _HomePageState extends State<HomePage>
               ),
               Gap(16),
               CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
-              onSelectionChanged: _selectedValuesUpdate, textFieldPlaceholder: testTextFieldPlaceholder,
-              textFieldEditingController: _textEditingController, onTextChanged: _textValueUpdate),
+              textFieldPlaceholder: testTextFieldPlaceholder,
+              parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
+              parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction)
             ]
           ),
         ),      

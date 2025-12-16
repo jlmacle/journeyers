@@ -18,13 +18,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final double textOptionsfontSize;
   /// The color of the text options
   final Color textOptionsColor;
-  /// The callback function to notify the parent widget of selection changes
-  final ValueChanged<Set<String>>? onSelectionChanged;
-  /// The callback function to notify the parent widget of selection changes
-  final ValueChanged<String>? onTextChanged;
-  /// The text field editing controller
-  final TextEditingController textFieldEditingController;
-  /// The text of the text field place holder
+  /// The hint text for the text field
   final String textFieldPlaceholder;
   /// The left and right padding value for the text field
   final double textFieldHorizontalPadding;
@@ -40,7 +34,13 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final InputCounterWidgetBuilder buildCounter;
   /// The cross axis alignment for the segmented button, and the text field
   final CrossAxisAlignment inputsCrossAxisAlignment;
+  /// A callback function for the parent widget
+  final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
+  /// A callback function for the parent widget
+  final ValueChanged<Set<String>> parentWidgetSegmentedButtonValueCallBackFunction;
 
+  static void placeHolderFunctionString(String value) {}
+  static void placeHolderFunctionSetString(Set<String>? values) {}
 
   const CustomSegmentedButtonWithTextField
   ({
@@ -52,9 +52,6 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.emptySelectionAllowed = true,
     this.textOptionsfontSize = 24,
     this.textOptionsColor = Colors.black,
-    required this.onSelectionChanged,
-    this.onTextChanged,
-    required this.textFieldEditingController,
     required this.textFieldPlaceholder,
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
@@ -63,7 +60,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldMaxLength = chars1Page, // a page as a reference
     this.buildCounter = absentCounter,
     this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
-     
+    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.parentWidgetSegmentedButtonValueCallBackFunction = placeHolderFunctionSetString     
   });
 
   @override
@@ -72,8 +70,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
 
 class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButtonWithTextField> 
 {
-  Set<String> selection = {};
-    
+  Set<String> _selection = {};
+
   @override
   Widget build(BuildContext context) 
   {
@@ -86,7 +84,8 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
     return Column
     (
       crossAxisAlignment: widget.inputsCrossAxisAlignment,
-      children: [
+      children: 
+      [
         SegmentedButton<String>
         (
           multiSelectionEnabled: widget.multiSelectionEnabled,
@@ -120,25 +119,23 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
                 ),
               ),
           ],
-          selected: selection,
+          selected: _selection,
           onSelectionChanged: (newSelection) 
           {
             setState(() 
             {
-              selection = newSelection;
-            });
-            
-            // external callback so the parent knows the new selection
-            widget.onSelectionChanged?.call(newSelection);
+              _selection = newSelection;
+            });            
+            widget.parentWidgetSegmentedButtonValueCallBackFunction(newSelection);
           },
         ),        
-        if (selection.isNotEmpty)
-
+        if (_selection.isNotEmpty)
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder, textFieldEditingController: widget.textFieldEditingController, textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)
-            
+            child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder,  
+            parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction, 
+            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)            
           ),
       ],
     );
