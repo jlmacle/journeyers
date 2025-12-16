@@ -93,11 +93,11 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           controlAffinity: widget.controlAffinity,
           onChanged: (bool? value)
           {
-            widget.parentWidgetCheckboxValueCallBackFunction; 
-            setState(() 
-                      {_isChecked = value!;            
-                      }
-                    );
+            widget.parentWidgetCheckboxValueCallBackFunction!(value); 
+            setState
+            (() 
+              {_isChecked = value!;}
+            );
           },
         ),        
         if (_isChecked)

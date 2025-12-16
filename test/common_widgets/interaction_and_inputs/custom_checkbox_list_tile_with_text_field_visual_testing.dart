@@ -61,7 +61,7 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  bool _isCheckboxChecked = false ;
+  bool _isCheckboxChecked = false;
   String? _textFieldContent;
 
   Map <String,dynamic> enteredData = {"question1":{"isChecked":false,"comments":"undefined"}};
@@ -173,10 +173,13 @@ class _HomePageState extends State<HomePage>
       (
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", 
-          textFieldPlaceholder: testTextFieldPlaceholder,
-          parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
-          parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction),
+          CustomCheckBoxWithTextField
+          (
+            text: "Checkbox text", 
+            textFieldPlaceholder: testTextFieldPlaceholder,
+            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
+            parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction
+          ),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
