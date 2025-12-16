@@ -106,48 +106,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  importDataFromJsonFile() async
-  {
-    FilePickerResult? result = await FilePicker.platform.pickFiles
-    (
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-    );
-    String jsonString ="";
-
-    if (kIsWeb) 
-    {
-        // For the web, path is null, file bytes are used directly
-        final fileBytes = result!.files.single.bytes;
-        if (fileBytes != null) 
-        {
-          jsonString = utf8.decode(fileBytes);
-        }
-    } 
-    else 
-    {
-        // For desktop/mobile, path is used
-        final filePath = result!.files.single.path;
-        if (filePath != null) 
-        {
-          final file = File(filePath);
-          jsonString = await file.readAsString();
-        }
-    }
-
-    setState
-    (
-      () 
-      {
-        Map<String, dynamic> dataMap = jsonDecode(jsonString);
-        // updating the parent's internal data
-        _isCheckboxChecked = dataMap["question1"]["isChecked"];
-        _textFieldContent = dataMap["question1"]["comments"];
-      }
-    );
-
-    
-  }
+  
 
   @override
   Widget build(BuildContext context) 
@@ -194,13 +153,7 @@ class _HomePageState extends State<HomePage>
           (
             onPressed: transferDataToJsonFile,
             child: CustomText(text: "Click to save the data (json for this demo)",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
-          ),
-          Gap(8),
-          ElevatedButton
-          (
-            onPressed: importDataFromJsonFile,
-            child: CustomText(text: "Load previous data",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
-          )
+          ),         
         ]
       ),
     );
