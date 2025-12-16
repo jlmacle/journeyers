@@ -17,7 +17,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final bool isChecked;  
   /// Where the checkbox is located
   final ListTileControlAffinity controlAffinity;
-  /// A placeholder for the text field
+  /// The hint text for the text field
   final String textFieldPlaceholder;
   /// The left and right padding value for the text field
   final double textFieldHorizontalPadding;
@@ -33,13 +33,11 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final InputCounterWidgetBuilder buildCounter;
   /// A callback function for the parent widget
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
+  /// A callback function for the parent widget
+  final ValueChanged<bool?> ?parentWidgetCheckboxValueCallBackFunction;
 
-  /// The callback function used to pass the checkbox state
-  final Function onCheckboxChanged;
-  /// The callback function used to pass the text field state
-  final Function onTextFieldChanged;
-
-  static void placeHolderFunction(String value) {}
+  static void placeHolderFunctionString(String value) {}
+  static void placeHolderFunctionBool(bool? value) {}
 
   const CustomCheckBoxWithTextField
   ({
@@ -57,9 +55,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldMaxLines = 10,    
     this.textFieldMaxLength = chars1Page, // a page as a reference
     this.buildCounter = absentCounter,
-    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
-    required this.onCheckboxChanged,
-    required this.onTextFieldChanged
+    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.parentWidgetCheckboxValueCallBackFunction = placeHolderFunctionBool,
   });
 
   @override
@@ -68,30 +65,13 @@ class CustomCheckBoxWithTextField extends StatefulWidget
 
 class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField> 
 {
-  bool? _isChecked;
-  late TextEditingController _textFieldEditingController;
+  bool _isChecked = false;
 
   @override
-  void initState() {
-    super.initState();    
-    _isChecked = widget.isChecked; 
-    _textFieldEditingController =  TextEditingController(text:"");    
-  }
-
-  @override
-  void dispose()
+  void initState() 
   {
-    _textFieldEditingController.dispose();
-    super.dispose();
+    super.initState(); 
   }
-
-  /// Callback function to update the checkbox state
-  importCheckBoxState(bool importedValue){setState(() {_isChecked = importedValue;});}
-  Function(bool) get updateCheckBoxStateFunction => importCheckBoxState;
-
-  /// Callback function to update the text field state
-  importTextFieldState(String importedValue){setState(() {_textFieldEditingController.text = importedValue;});}
-  Function(String) get updateTextFieldStateFunction => importTextFieldState;
   
   @override
   Widget build(BuildContext context) 
@@ -111,21 +91,27 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           title: CustomText(text: widget.text, textStyle: textStyle, textAlign: widget.textAlign),
           value: _isChecked, 
           controlAffinity: widget.controlAffinity,
-          onChanged: (value) => {setState((){_isChecked = value; widget.onCheckboxChanged(_isChecked);})}
+          onChanged: (bool? value)
+          {
+            widget.parentWidgetCheckboxValueCallBackFunction; 
+            setState(() 
+                      {_isChecked = value!;            
+                      }
+                    );
+          },
         ),        
-        if (_isChecked!)
+        if (_isChecked)
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
             child: CustomPaddedTextField 
             ( 
-              textFieldEditingController: _textFieldEditingController,
               textFieldHintText: widget.textFieldPlaceholder, 
               textFieldMinLines: widget.textFieldMinLines,
               textFieldMaxLines: widget.textFieldMaxLines,
               textFieldMaxLength: widget.textFieldMaxLength,
               buildCounter: widget.buildCounter,
-              parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction              
+              parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction           
             ),
           ),
       ],
