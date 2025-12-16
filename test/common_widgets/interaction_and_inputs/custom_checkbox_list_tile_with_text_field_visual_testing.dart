@@ -17,8 +17,6 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 
-final GlobalKey<CustomCheckBoxWithTextFieldState> customCheckboxWithTextFieldKey = GlobalKey();
-
 void main() 
 {  
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
@@ -44,7 +42,7 @@ class _MyTestingAppState extends State<MyTestingApp>
     (
       theme: appTheme, 
       home: HomePage()
-      );
+    );
   }
 }
 //---------------------------------------------------
@@ -63,28 +61,33 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage>
 {
-  bool? _isCheckboxChecked;
+  bool _isCheckboxChecked = false ;
   String? _textFieldContent;
 
   Map <String,dynamic> enteredData = {"question1":{"isChecked":false,"comments":"undefined"}};
 
-   void parentWidgetTextFieldValueCallBackFunction(String value)
+  void parentWidgetTextFieldValueCallBackFunction(String value)
   {
-    setState(() 
-    {
-     _textFieldContent = value;
-    });
+    setState
+    (
+      () 
+      {
+        _textFieldContent = value;
+      }
+    );
   }
 
-  _setCheckboxState(bool value)
+  void parentWidgetCheckboxValueCallBackFunction(bool? value)
   {
-    setState(() => _isCheckboxChecked = value);
+    setState
+    (
+      () 
+      {
+        _isCheckboxChecked = value!;
+      }
+    );
   }
 
-  _setTextFieldContent(String value)
-  {
-    setState(() => _textFieldContent = value);
-  }
 
   transferDataToJsonFile() async 
   {
@@ -137,12 +140,9 @@ class _HomePageState extends State<HomePage>
       () 
       {
         Map<String, dynamic> dataMap = jsonDecode(jsonString);
-        // updating the parent's internal
+        // updating the parent's internal data
         _isCheckboxChecked = dataMap["question1"]["isChecked"];
         _textFieldContent = dataMap["question1"]["comments"];
-        // updating the widget's internal
-        customCheckboxWithTextFieldKey.currentState?.updateCheckBoxStateFunction(_isCheckboxChecked!);
-        customCheckboxWithTextFieldKey.currentState?.updateTextFieldStateFunction(_textFieldContent!);
       }
     );
 
@@ -173,13 +173,14 @@ class _HomePageState extends State<HomePage>
       (
         children: 
         [            
-          CustomCheckBoxWithTextField(text: "Checkbox text", onCheckboxChanged: _setCheckboxState, 
-          textFieldPlaceholder: testTextFieldPlaceholder, onTextFieldChanged: _setTextFieldContent, 
-          key: customCheckboxWithTextFieldKey, parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction),
+          CustomCheckBoxWithTextField(text: "Checkbox text", 
+          textFieldPlaceholder: testTextFieldPlaceholder,
+          parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
+          parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked ?? false}", textStyle: feedbackMessageStyle),
+            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked}", textStyle: feedbackMessageStyle),
           ),
            Padding(
             padding: const EdgeInsets.only(left: 20.0),
