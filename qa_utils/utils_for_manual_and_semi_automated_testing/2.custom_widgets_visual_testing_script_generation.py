@@ -136,7 +136,7 @@ def main():
 
     # 5. Write the final script file
     print("before join")
-    file_path_out = os.path.join("..", "..", "qa_utils", "automated_and_semi_automated_tests"
+    file_path_out = os.path.join("..", "..", "qa_utils", "scripts_for_automated_and_semi_automated_testing"
                                  , f"{system_adapted_data["output_file_name"]}")
     create_file_if_necessary_and_add_content(file_path=file_path_out, text=cmd_lines)
     print()
