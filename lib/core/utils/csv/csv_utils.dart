@@ -9,7 +9,7 @@ import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 
-// Label used in the pre-CSV data
+// Used in the pre-CSV data
 String notes = "Notes:";
 String quotesForCSV = '"';
 
@@ -41,12 +41,14 @@ Map<String,String> mappingLabelsToInputItems
   level3TitleIncomeEarningAbility:segmentedButton
  };
 
- Set<String> textFieldOnlyItems = {level3TitleAnotherIssue, level3TitleGroupsProblematics};
-
-
 //************** Sets of the level 2, level 3 titles, and related sets *************//
 // Set of the existing titles level 2
 var titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
+
+// Set of the existing titles level 3
+Set<String> titlesLevel3ForTheIndividualPerspective = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
+Set<String> titlesLevel3ForTheTeamPerspective = {level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
+                                                  level3TitleIncomeEarningAbility};
 
 // Set of the existing titles level 3 with sub items
 Set<String>  titlesLevel3WithSubItems = {level3TitleBalanceIssue, level3TitleWorkplaceIssue,
@@ -57,10 +59,9 @@ Set<String> titleLevel3BalanceIssueChildren = {level3TitleBalanceIssueItem1, lev
 Set<String> titleLevel3WorkplaceIssueChildren = {level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2};
 Set<String> titleLevel3LegacyIssueChildren = {level3TitleLegacyIssueItem1};  
 
-// Set of the existing titles level 3
-Set<String> titlesLevel3ForTheIndividualPerspective = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
-Set<String> titlesLevel3ForTheTeamPerspective = {level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
-                                                  level3TitleIncomeEarningAbility};
+// Set of the text fields only items
+ Set<String> textFieldOnlyItems = {level3TitleAnotherIssue, level3TitleGroupsProblematics};
+
 
 //************** The data structure to return *************//
 // pre CSV data structure (before adding adding extra lines, removing or renaming keywords, ...)
@@ -69,20 +70,20 @@ List<dynamic> preCSVData = [];
 
 //***************** Methods processing data according to input widgets: beginning  ***********************//
 
-/// Method to convert information from {checkbox: false/true/null, textField: "data"/null} to:
-/// checkbox, false/true
-/// textField, "data"/""
+/// Method to convert information from {checkbox: false/true, textField: "data"/null} to:
+/// [checkbox,"false"/"true"]
+/// [Notes:,"data"/""]
 List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> checkBoxWithTextFieldtextData)
 {
 
   List<dynamic> checkboxPreCSVData = []; 
 
-  // checkbox data converted from bool to String: values can be "null", "true" or "false"
+  // checkbox data converted from bool to String: values can be "true" or "false"
   var dataCheckbox = "${checkBoxWithTextFieldtextData[checkbox]}";
   var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
   var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
-  var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
+  var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; // label in front of the text field data
 
   checkboxPreCSVData.add(data1);
   checkboxPreCSVData.add(data2);
@@ -90,18 +91,18 @@ List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> c
   return checkboxPreCSVData;
 }
 
-// Method to convert information from {segmentedButton: Yes/No/I don't know/null , textField: "data"/null} to:
-// segmentedButton,Yes/No/I don't know/""
-// textField, "data"/""
+// Method to convert information from {segmentedButton: "Yes"/"No"/"I don't know"/null , textField: "data"/null} to:
+// [segmentedButton,"Yes"/"No"/"I don't know"/""]
+// [Notes:,"data"/""]
 List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> segmentedButtonWithTextFieldData)
 {
   List<dynamic> segmentedButtonPreCSVData = []; 
 
   var dataSegmentedButton = segmentedButtonWithTextFieldData[segmentedButton] ?? "";
-  var data1 = [segmentedButton,dataSegmentedButton]; // No label in front of the checkbox data in the pre CSV
+  var data1 = [segmentedButton,dataSegmentedButton]; 
 
   var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
-  var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
+  var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; 
 
   segmentedButtonPreCSVData.add(data1);
   segmentedButtonPreCSVData.add(data2);
@@ -110,13 +111,13 @@ List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dyn
 }
 
 // Method to convert information from {textField: "data"/null} to:
-// textField, "data"/""
+// [Notes:,"data"/""]
 List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData)
 {
   List<dynamic> textFieldPreCSVData = []; 
 
   var dataTextField = textFieldData[textField] ?? "";
-  var data = [notes,quotesForCSV+dataTextField+quotesForCSV]; // "Notes:" in front of the text field data in the pre CSV
+  var data = [notes,quotesForCSV+dataTextField+quotesForCSV]; 
 
   textFieldPreCSVData.add(data);
 
@@ -133,11 +134,11 @@ List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData
 /// Method processing the form data, and returning a list of pair of data, for the saving to CSV .
 /// The data should be either the individual perspective data, or the group perspective data.
 /// The individual perspective data and the group perspective data are planned to be written side by side in the CSV file.
-List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
+List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
 {
   List<dynamic> preCSVData = [];
 
-  // Method adding to the 
+  // Method adding to the pre CSV data according to input type
   treatmentAccordingToInputType(List<dynamic> preCSVData, String itemOrTitleLabel, LinkedHashMap<String,dynamic> titleLevel2Or3DataAsLinkedHashMap)
   {
     if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox)
@@ -147,7 +148,7 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
           preCSVData.add(checkboxPreCSVData[0]);
           preCSVData.add(checkboxPreCSVData[1]);
         }
-        // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[, Yes], [Notes:, a_note]]
+        // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
         else if (mappingLabelsToInputItems[itemOrTitleLabel] == segmentedButton)
         {
           var segmentedButtonPreCSVData = segmentedButtonWithTextFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);
@@ -170,13 +171,13 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> enteredData)
         }
   }
 
-  // There is only one key in the entered data, one of the two level 2 titles
-  var level2PreCSVData = ["",enteredData.keys.first];
+  // There is only one key in the perspective data, one of the two level 2 titles
+  var level2TitlePreCSVData = ["",perspectiveData.keys.first];
   // Adding the level 2 title
-  preCSVData.add(level2PreCSVData);
+  preCSVData.add(level2TitlePreCSVData);
 
   // There is only one value for the title level 2 key
-  var level2TitleData = enteredData.values.first;
+  var level2TitleData = perspectiveData.values.first;
   var level2DataAsLinkedHashMap = level2TitleData as LinkedHashMap<String,dynamic>;
   
   // level 3 titles as keys of the level 2 data
