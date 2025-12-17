@@ -13,7 +13,7 @@
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switcher.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switch.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:flutter/material.dart';
 
