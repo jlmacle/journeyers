@@ -1,8 +1,8 @@
 //Line for automated processing
-// flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d chrome
-// flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d linux
-// flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d macos
-// flutter run -t ./test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart -d windows
+// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area_visual_testing.dart -d chrome
+// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area_visual_testing.dart -d linux
+// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area_visual_testing.dart -d macos
+// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area_visual_testing.dart -d windows
 //Line for automated processing
 
 
@@ -12,7 +12,7 @@ import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_dismissable_rectangular_area.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
 
