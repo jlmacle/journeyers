@@ -32,8 +32,7 @@ def main():
     # path on macOS: "test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
     # path on Lubuntu: "test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
 
-    # file_path = r"test\common_widgets\display_and_content\custom_dismissable_rectangular_area_visual_testing.dart"
-    file_path = "test/common_widgets/display_and_content/custom_dismissable_rectangular_area_visual_testing.dart"
+    file_path = "test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
     file_path = file_path.replace("\\", "/")
 
     comment_begin = "// flutter run -t "
