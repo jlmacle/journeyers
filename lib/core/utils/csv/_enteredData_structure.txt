@@ -1,0 +1,38 @@
+[
+    {
+        As an individual: What problem am I trying to solve?:
+        {
+            A Balance Issue?: 
+            {
+                To balance studies and household life?: {checkbox: false, textField: }, 
+                To balance accessing income and household life?: {checkbox: false, textField: }, 
+                To balance earning an income and household life?: {checkbox: false, textField: }, 
+                To balance helping others and household life?: {checkbox: false, textField: }
+            }, 
+            A Workplace Issue?: 
+            {
+                To solve a need to be more appreciated at work?: {checkbox: false, textField: }, 
+                To solve a need to remain appreciated at work?: {checkbox: false, textField: }
+            }, 
+            A Legacy Issue?: 
+            {
+                To have better legacies to leave to our children/others?: {checkbox: false, textField: }
+            }, 
+            Is the issue of another type?: {textField: }
+        }
+    },     
+    {
+        As a member of groups/teams: What problem(s) are we trying to solve?: 
+        {
+            What problem(s) are the groups/teams trying to solve?: {textField:}, 
+
+            Am I trying to solve the same problem(s) as my groups/teams?: {segmentedButton: , textField: },
+
+            Is entering the group problem-solving process consistent with harmony at home?: {segmentedButton: , textField: }, 
+
+            Is entering the group problem-solving process consistent with appreciability at work?: {segmentedButton: , textField: }, 
+
+            Is entering the group problem-solving process consistent with my income earning ability?: {segmentedButton: , textField: }
+        }
+    }
+]
