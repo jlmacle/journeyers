@@ -11,7 +11,7 @@ xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/cus
 xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area_visual_testing.dart -d web-server --web-port 8095" &
 xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d web-server --web-port 8096" &
 xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_padded_text_field_visual_testing.dart -d web-server --web-port 8097" &
-xterm -e "cd ./; flutter run -t ./test/common_widgets/display_and_content/custom_header_visual_testing.dart -d web-server --web-port 8098" &
+xterm -e "cd ./; flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d web-server --web-port 8098" &
 
 # Waiting for the web servers to start
 sleep 70 
