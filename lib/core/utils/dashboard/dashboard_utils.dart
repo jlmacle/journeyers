@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
 
@@ -7,7 +6,6 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 
-late int dataRank;
 String contextAnalysesData = "contextAnalysesData";
 String contextGroupProblemSolvingData = "contextGroupProblemSolvingData";
 String recordsKey = 'records';
