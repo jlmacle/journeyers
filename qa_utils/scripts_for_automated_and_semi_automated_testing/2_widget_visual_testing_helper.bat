@@ -14,7 +14,6 @@ start  flutter run -t ./test/common_widgets/interaction_and_inputs/custom_langua
 start  flutter run -t ./test/common_widgets/interaction_and_inputs/custom_padded_text_field_visual_testing.dart  -d web-server --web-port  8096
 start  flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart  -d web-server --web-port  8097
 start  flutter run -t ./test/common_widgets/interaction_and_inputs/custom_snackbar_start_message_helper_visual_testing.dart  -d web-server --web-port  8098
-
 :: Waiting for the web servers to start
 timeout /t 70 >nul 
 %BROWSER% http://localhost:8091
