@@ -26,6 +26,10 @@ void main()
       {
         await file.delete();
       }
+      // checking that the file has been deleted
+      var fileExists = file.existsSync();
+      expect(fileExists, isFalse);
+
       // using the library
       await fileUtils.appendText(filePath: testFilePath,text: contentToWrite);
 

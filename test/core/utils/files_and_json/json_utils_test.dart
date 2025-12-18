@@ -23,6 +23,7 @@ void main()
     setupLogging();
     final logger = Logger('MyTestingCode');    
     
+    // .list() produces a stream, not a list. toList() does.
     List<FileSystemEntity> updatedFilesfolderEntities = await updatedFilesfolder.list().toList();
     // Emptying the updated_files folder if non empty
     if (updatedFilesfolderEntities.isNotEmpty)
@@ -32,10 +33,20 @@ void main()
         if(entity is File)
         {
           logger.shout("Deleting: $entity");
-          try {await entity.delete();}
+          try {entity.deleteSync();}
           on Exception catch(e){logger.shout("");logger.shout("Issue at copying in $updatedFilesDirectoryPath");logger.shout(e);}
-        }        
-      }    
+        }               
+      }  
+      // testing for the folder to be empty  
+      int remainingFilesNbr = 0;
+      for(var entity in updatedFilesfolderEntities)
+      {
+        if(entity is File)
+        {
+          remainingFilesNbr++;
+        }
+      } 
+      expect(remainingFilesNbr, 0);
     }
     // Copying the files from the source folder into the updated_files folder
     String sourceFilesDirectoryPath = path.join('test','core','utils','files_and_json','json_utils_test_data','source_files');
