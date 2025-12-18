@@ -176,32 +176,34 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
   // Adding the level 2 title
   preCSVData.add(level2TitlePreCSVData);
 
-  // There is only one value for the title level 2 key
-  var level2TitleEnteredData = perspectiveData.values.first;
-  var perspectiveDataAsLinkedHashMap = level2TitleEnteredData as LinkedHashMap<String,dynamic>;
+  // There is only one value for the title level 2 key, a LinkedHashMap with the form data
+  var level2TitleDataValue = perspectiveData.values.first;
+  var perspectiveDataAsLinkedHashMap = level2TitleDataValue as LinkedHashMap<String,dynamic>;
   
-  // level 3 titles as keys of the level 2 data
+  // level 3 titles as keys
   for (var level3Title in perspectiveDataAsLinkedHashMap.keys)
   {      
     var level3TitlePreCSVData = ["", level3Title];
     // Adding the level 3 title
     preCSVData.add(level3TitlePreCSVData);
 
-    // Checking if sub-items exist before processing the level 3 title data
+    // 1. Checking if sub-items exist before starting the processing of the level 3 title data
     if(titlesLevel3WithSubItems.contains(level3Title))
     {
       // Going through the sub items
       var level3TitleItemsData  = perspectiveDataAsLinkedHashMap[level3Title];
-      var level3TitleItemsDataAsLinkedList = level3TitleItemsData as LinkedHashMap<String, dynamic>;
-      for (var itemLabel in level3TitleItemsDataAsLinkedList.keys)
+      // A LinkedHashMap as value
+      var level3TitleItemsDataAsLinkedHashMap = level3TitleItemsData as LinkedHashMap<String, dynamic>;
+      for (var itemLabel in level3TitleItemsDataAsLinkedHashMap.keys)
       {
           // Adding the item label  
         preCSVData.add(["", itemLabel]);
         // Adding input data
-        treatmentAccordingToInputType(preCSVData, itemLabel, level3TitleItemsDataAsLinkedList);
+        treatmentAccordingToInputType(preCSVData, itemLabel, level3TitleItemsDataAsLinkedHashMap);
       }
 
     }
+    // 2. No sub items for this level 3 title
     // Checking the type of input item that the level 3 title refers to
     else 
     {
@@ -209,38 +211,36 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
       treatmentAccordingToInputType(preCSVData, level3Title, perspectiveDataAsLinkedHashMap);
     }
   }
-
   return preCSVData;
 }
 
 /// Method to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file)
-/// Xs added to queestions with a checked checkbox, and to their title level 3 parent if existant
+/// Xs in front of the questions with a checked checkbox, 
+/// and for their title level 3 parent if existant
 /// 
-/// Eventual removal of all unchecked checkboxes to keep the information more dense
+/// Eventual removal of all checkboxes lines
 /// Eventual removal of all unanswered segmented buttons
 /// Eventual removal of all empty notes if not related to a checked checkbox, or an answered segmented button
 /// 
 /// Removal of "segmentedButton" from the data written
+/// "textfield was replaced with "Notes" during the pre-CSV processing
 /// 
-/// Addition of a ["",""] before all level 3 title
-
-
+/// Addition of a ["",""] before all level 3 titles
 List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 {
 
-  //*************** Analyzing the data for checkboxes with nulls, and text fields with empty notes ****************//
+  //*************** Analyzing the data for checkboxes with "false", and text fields with empty notes ****************//
   for (var index = 0 ; index < preCSVData.length; index++)
   {    
     var indexedData = preCSVData[index];  
-    var indexData_1AsString = indexedData[1] as String;
-    
+    var indexData_1AsString = indexedData[1] as String;    
 
-    // Removal of all [checkbox,"null"] and [checkbox, "false"] (unchecked boxes)
+    // Removal of all [checkbox, "false"] (unchecked boxes)
     // Removal of all ["Notes:",]  if related to an unchecked checkbox
     if 
     ( 
       (indexedData[0].contains(checkbox)) && 
-      ( (indexData_1AsString.trim() == "null") || (indexData_1AsString.trim() == "false") )
+      (indexData_1AsString.trim() == "false") 
     )  
     {
       preCSVData.removeAt(index);
@@ -250,7 +250,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 
   }
 
-  //*************** Analyzing the data to add 'X's where questions with checkboxes have been checked, 
+  //*************** Analyzing the data to replace "checkbox"s with 'X's where questions with checkboxes have been checked, 
   //                and in front of the parent title level 3 if existant                               ****************//
 
   // Getting the indexes for the titles level 3 with children, before starting the analysis
@@ -263,33 +263,34 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
     else if (indexedData[1].trim() == level3TitleLegacyIssue){indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue] = index;}
   }
 
-  // Analyzing the data for checkboxes not null, and adding Xs before another processing to remove the checkboxes lines
+  // Analyzing the data for checkboxes with "true" as value,
+  // and adding Xs before another processing to remove the checkboxes lines
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
     var indexData_1AsString = indexedData[1] as String;
-    if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() != "null")) 
+    if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() == "true")) 
     {
       // Adding X in front of the question
       // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
       var previousIndexData = preCSVData[index-1];
       previousIndexData[0] = 'X';
       
-      // If the question was not a title level 3, adding an X to the parent title level 3
-      var itemOrTitleLevel3 = previousIndexData[1];
-      if (titleLevel3BalanceIssueChildren.contains(itemOrTitleLevel3))
+      // Adding an X to the parent title level 3
+      var previousIndexData_1AsString = previousIndexData[1];
+      if (titleLevel3BalanceIssueChildren.contains(previousIndexData_1AsString))
       {
         var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue];
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
-      else if (titleLevel3WorkplaceIssueChildren.contains(itemOrTitleLevel3))
+      else if (titleLevel3WorkplaceIssueChildren.contains(previousIndexData_1AsString))
       {
         var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue];
         var parentData = preCSVData[parentIndex!];
         parentData[0]= 'X';
       }
-      else if (titleLevel3LegacyIssueChildren.contains(itemOrTitleLevel3))
+      else if (titleLevel3LegacyIssueChildren.contains(previousIndexData_1AsString))
       {
         var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue];
         var parentData = preCSVData[parentIndex!];
@@ -299,7 +300,8 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   } 
 
   // Analyzing to remove the lines with checkboxes
-  // These lines are at least 2 indexes apart. All the analysis is feasible in one loop, in spite of the removal effect on the indexes
+  // These lines are at least 2 indexes apart. 
+  // All the analysis is feasible in one loop, in spite of the removal effect on the indexes
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
@@ -338,6 +340,9 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
+    // segmentedButton has already been removed from the answered segmented buttons
+    // and replaced with ""
+    // Removing all remaining preCSVData lines with segmentedButton
     if (indexedData[0].contains(segmentedButton))
     {
       preCSVData.removeAt(index);
@@ -348,7 +353,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 
 
   //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been answered  
-  //                and to remove the unanswered one                                                                                    ****************//
+  //                and to remove the unanswered ones                                                                                   ****************//
   for (var index = 0 ; index < preCSVData.length; index++)
   {  
     var indexedData = preCSVData[index];  
@@ -363,7 +368,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
         int noteIndex = index + 1;
         // Adding the X in front of the question if the note has content
         List<String> noteData = preCSVData[noteIndex];
-        if (noteData[1].trim() != '""')
+        if (noteData[1].trim() != "")
         {
           var questionData = preCSVData[index];
           questionData[0] = 'X';
@@ -383,20 +388,20 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   {  
     var indexedData = preCSVData[index];  
     var indexData_1AsString = indexedData[1] as String;
-    String indexData_1AsString_trimmed = indexData_1AsString.trim();
+    String indexData_1AsStringTrimmed = indexData_1AsString.trim();
 
     if 
     (
       // Found titles level 3 
-      (titlesLevel3ForTheIndividualPerspective.contains(indexData_1AsString_trimmed) ||
-      titlesLevel3ForTheTeamPerspective.contains(indexData_1AsString_trimmed))
+      (titlesLevel3ForTheIndividualPerspective.contains(indexData_1AsStringTrimmed) ||
+      titlesLevel3ForTheTeamPerspective.contains(indexData_1AsStringTrimmed))
       &&
       // and not yet processed 
-      !(titlesLevel3Processed.contains(indexData_1AsString_trimmed))
+      !(titlesLevel3Processed.contains(indexData_1AsStringTrimmed))
     )
     {
       preCSVData.insert(index, ["",""]);
-      titlesLevel3Processed.add(indexData_1AsString_trimmed);
+      titlesLevel3Processed.add(indexData_1AsStringTrimmed);
     }
 
   }
@@ -405,20 +410,10 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
 
 //*************** Printing and debugging methods ***************//
 
-/// Method to have a vertical view of the list data
-void printPreCSVDataToConsole(List<dynamic> data) 
-{
-  for (var item in data)
-  {
-    var data = "${item[0]},${item[1]}";
-    printd(data);
-  }
-}
-
 /// Method to test the writing of the individual perspective data, or the group perspective data, to CSV 
-void testPrintToCSV(String fileName, List<dynamic> data) async
+void testPrintPreCSVData(List<dynamic> data) async
 {
-  File file = File("txt.csv");
+  File file = File("./testPrintToCSV.csv");
   var sink = file.openWrite(mode: FileMode.write); 
 
   for (var item in data)
@@ -433,9 +428,10 @@ void testPrintToCSV(String fileName, List<dynamic> data) async
 
 /// Method to print the CSV data to a file
 /// returns the file name
-Future<String?> printToCSV( List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDataTeamPerspective) async
+Future<String?> printToCSV(List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDataTeamPerspective) async
 {
-  // Complementing the shortest list to have the same length for both list
+  // Complementing the shortest list to have the same length for both lists
+  // before printing side to side
   if (csvDataIndividualPerspective.length < csvDataTeamPerspective.length)
   {
     for (var index = csvDataIndividualPerspective.length; index <= csvDataTeamPerspective.length -1; index++)
@@ -453,11 +449,8 @@ Future<String?> printToCSV( List<dynamic> csvDataIndividualPerspective, List<dyn
     }
   }
 
-  
-
-
   String content = "";
-  // Building the content line by line
+  // Building the content line by line (both lists have the same amount of lines)
   for (var index = 0; index < csvDataIndividualPerspective.length; index ++)
   {
     dynamic csvDataIndividualPerspectiveData = csvDataIndividualPerspective[index];
@@ -467,8 +460,11 @@ Future<String?> printToCSV( List<dynamic> csvDataIndividualPerspective, List<dyn
     content += line ;  
   }
 
-  print("csvDataIndividualPerspective:$csvDataIndividualPerspective");  
-  print("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
+  printd("");
+  printd("csvDataIndividualPerspective:$csvDataIndividualPerspective");
+  printd("");  
+  printd("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
+  printd("");
 
   final bytes = Uint8List.fromList(utf8.encode(content));
   return await FilePicker.platform.saveFile
