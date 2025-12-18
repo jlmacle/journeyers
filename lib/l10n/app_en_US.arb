@@ -5,7 +5,7 @@
   "appSubTitle": "What story will we leave\nfor our loved ones to tell?",
   "@appSubTitle": {"description": "The subtitle for the app"},
   "lang_fr": "French",
-  "@lang_fr": {"description": "The name of the French language"},
+  "@lang_fr": {"description": "The name of the French language in US English"},
   "lang_en": "English",
-  "@lang_en": {"description": "The name of the English language"}
+  "@lang_en": {"description": "The name of the English language in US English"}
 }
