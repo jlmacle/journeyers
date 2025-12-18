@@ -23,40 +23,37 @@ Future<File> getSessionFile(String typeOfContextData) async {
   else {printd("Error: Unexpected type of context data: $typeOfContextData");}
 
   File sessionFile = File('$path/$fileName');
-  if (!sessionFile.existsSync()) {sessionFile.createSync();}
+  if (!sessionFile.existsSync()) 
+  {
+    sessionFile.createSync();
+    // Adding an empty map to the file
+    Map<String,List<Map<String,String>>> records = {recordsKey:[]};    
+    String content = jsonEncode(records);
+    await sessionFile.writeAsString(content);
+    printd("Session file for $typeOfContextData created: $path/$fileName");
+  }
   return sessionFile;
 }
 
 /// Method used to store on file session data
-Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessionContent) async {
+Future<void> saveSessionData(String typeOfContextData, Map<String,String> sessionData) async {
 
   final file = await getSessionFile(typeOfContextData);
-  if (!file.existsSync()){printd("Error: saveSessionData: file doesn't exist: $file");}
+  // file created in getSessionFile if needed
   
   String updatedContent = "";
-
-  // if the file is empty
-  if (file.readAsStringSync().trim() == "")
-  {
-     Map<String,List<Map<String,String>>> records = {recordsKey:[sessionContent]};    
-     updatedContent = jsonEncode(records);
-  }
-  else
-  {
-    // if the file is not empty
-    // Reading and decoding the records content
-    String jsonContent = file.readAsStringSync();
-    Map<String,dynamic> records =  jsonDecode(jsonContent);
-    var recordsList = records[recordsKey];
-    // Adding to the records
-    recordsList?.add(sessionContent);
-    records[recordsKey] = recordsList!;
-    // Encoding the data to String
-    updatedContent = jsonEncode(records);
-  }
-    
+  // Reading and decoding the records content
+  String jsonContent = file.readAsStringSync();
+  Map<String,dynamic> records =  jsonDecode(jsonContent);
+  var recordsList = records[recordsKey];
+  // Adding to the records
+  recordsList.add(sessionData);
+  records[recordsKey] = recordsList;
+  // Encoding the data to String
+  updatedContent = jsonEncode(records);
+      
   await file.writeAsString(updatedContent);
-  printd('Session saved to: ${file.path}');
+  printd('Session data: $sessionData saved to: ${file.path}');
 }
 
 
@@ -77,6 +74,8 @@ void dashboardDataSaving(String typeOfContextData, String analysisTitle, String 
   // {"title":"Title session 3","date":"12/12/25"}]}
 
   // Building the session data
+  // In the context analysis form page, filePath is tested for not null
+  // if (filePath != null) dashboardDataSaving(contextAnalysesData, analysisTitle, filePath);
   Map<String,String> sessionData = {titleKey:analysisTitle, dateKey:formattedDate, filePathKey:filePath};  
   // Saving the session data
   await saveSessionData(typeOfContextData, sessionData);
