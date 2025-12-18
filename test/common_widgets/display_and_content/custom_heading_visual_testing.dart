@@ -11,7 +11,7 @@ import 'package:gap/gap.dart';
 // import 'package:flutter/rendering.dart'; // https://api.flutter.dev/flutter/rendering/
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_header.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_heading.dart';
 
 void main() 
 {  
@@ -52,17 +52,17 @@ class MyTestingApp extends StatelessWidget
             mainAxisAlignment: MainAxisAlignment.center,
             children: 
             [
-              CustomHeader(headerTitle: "Header 1", headerLevel:1),
+              CustomHeader(headingTitle: "Header 1", headingLevel:1),
               Gap(10),
-              CustomHeader(headerTitle: "Header 2", headerLevel:2),
+              CustomHeader(headingTitle: "Header 2", headingLevel:2),
               Gap(10),
-              CustomHeader(headerTitle: "Header 3", headerLevel:3),
+              CustomHeader(headingTitle: "Header 3", headingLevel:3),
               Gap(10),
-              CustomHeader(headerTitle: "Header 4", headerLevel:4),
+              CustomHeader(headingTitle: "Header 4", headingLevel:4),
               Gap(10),
-              CustomHeader(headerTitle: "Header 5", headerLevel:5),
+              CustomHeader(headingTitle: "Header 5", headingLevel:5),
               Gap(10),
-              CustomHeader(headerTitle: "Header 6", headerLevel:6),
+              CustomHeader(headingTitle: "Header 6", headingLevel:6),
               Gap(10),
             ]              
           ),
