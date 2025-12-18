@@ -177,11 +177,11 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
   preCSVData.add(level2TitlePreCSVData);
 
   // There is only one value for the title level 2 key
-  var level2TitleData = perspectiveData.values.first;
-  var level2DataAsLinkedHashMap = level2TitleData as LinkedHashMap<String,dynamic>;
+  var level2TitleEnteredData = perspectiveData.values.first;
+  var perspectiveDataAsLinkedHashMap = level2TitleEnteredData as LinkedHashMap<String,dynamic>;
   
   // level 3 titles as keys of the level 2 data
-  for (var level3Title in level2DataAsLinkedHashMap.keys)
+  for (var level3Title in perspectiveDataAsLinkedHashMap.keys)
   {      
     var level3TitlePreCSVData = ["", level3Title];
     // Adding the level 3 title
@@ -191,7 +191,7 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
     if(titlesLevel3WithSubItems.contains(level3Title))
     {
       // Going through the sub items
-      var level3TitleItemsData  = level2DataAsLinkedHashMap[level3Title];
+      var level3TitleItemsData  = perspectiveDataAsLinkedHashMap[level3Title];
       var level3TitleItemsDataAsLinkedList = level3TitleItemsData as LinkedHashMap<String, dynamic>;
       for (var itemLabel in level3TitleItemsDataAsLinkedList.keys)
       {
@@ -206,7 +206,7 @@ List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
     else 
     {
       // Adding input data
-      treatmentAccordingToInputType(preCSVData, level3Title, level2DataAsLinkedHashMap);
+      treatmentAccordingToInputType(preCSVData, level3Title, perspectiveDataAsLinkedHashMap);
     }
   }
 
