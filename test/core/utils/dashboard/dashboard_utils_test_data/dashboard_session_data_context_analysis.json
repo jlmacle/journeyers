@@ -1,1 +1,1 @@
-{"records":[{"title":"Title session 1","date":"12/12/25","tags":["tag1","tag2","tag3"]},{"title":"Title session 2","date":"12/12/25","tags":["tag1","tag2","tag4"]},{"title":"Title session 3","date":"12/12/25","tags":["tag1","tag3","tag5"]}]}
+{"records":[{"title":"Title session 1","date":"12/18/25","tags":["tag1","tag2","tag3"],"filePath":"filePath1"},{"title":"Title session 2","date":"12/18/25","tags":["tag1","tag2","tag4"],"filePath":"filePath2"},{"title":"Title session 3","date":"12/18/25","tags":["tag1","tag3","tag5"],"filePath":"filePath3"}]}

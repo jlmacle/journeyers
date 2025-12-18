@@ -1,4 +1,10 @@
-// flutter run -t test\core\utils\dashboard\dashboard_utils_test_data\dashboard_session_data_context_analysis_data_generation.dart
+//Line for automated processing
+// flutter run -t ./test/core/utils/dashboard/dashboard_utils_test_data/dashboard_session_data_context_analysis_data_generation.dart -d chrome
+// flutter run -t ./test/core/utils/dashboard/dashboard_utils_test_data/dashboard_session_data_context_analysis_data_generation.dart -d linux
+// flutter run -t ./test/core/utils/dashboard/dashboard_utils_test_data/dashboard_session_data_context_analysis_data_generation.dart -d macos
+// flutter run -t ./test/core/utils/dashboard/dashboard_utils_test_data/dashboard_session_data_context_analysis_data_generation.dart -d windows
+//Line for automated processing
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -20,19 +26,19 @@ void main() async
   var title1 = "Title session 1";
   var date1 = formattedDate;
   List<String> tags1 = ["tag1", "tag2", "tag3"];
-  var record1 = {'title':title1, 'date':date1 , 'tags':tags1};
+  var record1 = {'title':title1, 'date':date1 , 'tags':tags1, 'filePath':"filePath1"};
 
   // Second record of data
   var title2 = "Title session 2";
   var date2 = formattedDate;
   List<String> tags2 = ["tag1", "tag2", "tag4"];
-  var record2= {'title':title2, 'date':date2, 'tags':tags2};
+  var record2= {'title':title2, 'date':date2, 'tags':tags2, 'filePath':"filePath2"};
 
   // Third record of data
   var title3 = "Title session 3";
   var date3 = formattedDate;
   List<String> tags3 = ["tag1", "tag3", "tag5"];
-  var record3 = {'title':title3, 'date':date3, 'tags':tags3};
+  var record3 = {'title':title3, 'date':date3, 'tags':tags3, 'filePath':"filePath3"};
 
   List<Map> records = [record1,record2,record3];
 
