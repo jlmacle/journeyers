@@ -5,7 +5,6 @@ String textField = "textField";
 String segmentedButton = "segmentedButton";
 
 const int chars10Lines = 1560;
-
 const int chars1Page = 7330;
 
 // https://api.flutter.dev/flutter/material/InputCounterWidgetBuilder.html
