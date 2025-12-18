@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class L10nLanguages
 {  /// A method getting a list of all the language names, related to a locale, from the l10n data.
-  /// The method needs to be updated when adding a new language
+  /// The method can be updated with l10n_utils_update.py when adding a new language
   ///
   /// Parameters:
   ///   - [context]:  the build context
