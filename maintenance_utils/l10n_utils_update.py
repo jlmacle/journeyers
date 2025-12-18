@@ -44,7 +44,7 @@ def code_generation_for_method_1() -> str:
     # Generating method 1
 
     method_1_begin =spaces_2+"""/// A method getting a list of all the language names, related to a locale, from the l10n data.
-  /// The method can be updated with l10n_utils_update.py when adding a new language
+  /// The method can be updated with l10n_utils_update.py when adding a new base locale
   /// 
   /// Parameters:
   ///   - [context]:  the build context

@@ -112,13 +112,13 @@ abstract class AppLocalizations {
   /// **'What story will we leave\nfor our loved ones to tell?'**
   String get appSubTitle;
 
-  /// The name of the French language
+  /// The name of the French language in English
   ///
   /// In en, this message translates to:
   /// **'French'**
   String get lang_fr;
 
-  /// The name of the English language
+  /// The name of the English language in English
   ///
   /// In en, this message translates to:
   /// **'English'**
