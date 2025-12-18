@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
 
-class CustomHeader extends StatelessWidget 
+class CustomHeading extends StatelessWidget 
 {
-  /// The title of the header
+  /// The title of the heading
   final String headingTitle;  
-  /// The level of the header
+  /// The level of the heading
   final int headingLevel;   
-  /// The style of the header
+  /// The style of the heading
   late final TextStyle headingStyle;
-  /// The alignment of the header
+  /// The alignment of the heading
   final TextAlign headingAlign;
 
-  CustomHeader
+  CustomHeading
   ({
     super.key, 
     required this.headingTitle, 

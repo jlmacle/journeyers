@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_header.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_heading.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
@@ -281,29 +281,29 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
            
             //*********** Form ***********//
             Center(
-              child: CustomHeader
+              child: CustomHeading
               (
-                headerTitle: 'Context analysis',
-                headerLevel: 1,
+                headingTitle: 'Context analysis',
+                headingLevel: 1,
               ),
             ),
             Gap(40),
             Center
             (
-              child:CustomHeader
+              child:CustomHeading
               (
-                headerTitle: level2TitleIndividual,
-                headerLevel: 2,
+                headingTitle: level2TitleIndividual,
+                headingLevel: 2,
               ),
             ),
             Gap(postHeaderLevel2Gap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleBalanceIssue,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleBalanceIssue,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
@@ -335,11 +335,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleWorkplaceIssue,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleWorkplaceIssue,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
@@ -359,11 +359,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
            
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleLegacyIssue,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleLegacyIssue,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
@@ -376,11 +376,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleAnotherIssue,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleAnotherIssue,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             CustomPaddedTextField
             ( textFieldHintText: pleaseDevelopOrTakeNotes, 
@@ -394,19 +394,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** Beginning of the group-related analysis ****/
             Center
             (
-              child:CustomHeader
+              child:CustomHeading
               (
-                headerTitle: level2TitleGroup,
-                headerLevel: 2,
+                headingTitle: level2TitleGroup,
+                headingLevel: 2,
               ),
             ),
             Gap(postHeaderLevel2Gap),
 
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleGroupsProblematics,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleGroupsProblematics,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             CustomPaddedTextField
             (
@@ -416,11 +416,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleSameProblem,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleSameProblem,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
             CustomSegmentedButtonWithTextField
@@ -440,11 +440,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleHarmonyAtHome,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleHarmonyAtHome,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
             CustomSegmentedButtonWithTextField
@@ -463,11 +463,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleAppreciabilityAtWork,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleAppreciabilityAtWork,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
             CustomSegmentedButtonWithTextField
@@ -486,11 +486,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeader
+            CustomHeading
             (
-              headerTitle: level3TitleIncomeEarningAbility,
-              headerLevel: 3,
-              headerAlign: TextAlign.left,
+              headingTitle: level3TitleIncomeEarningAbility,
+              headingLevel: 3,
+              headingAlign: TextAlign.left,
             ),
             CustomSegmentedButtonWithTextField
             (

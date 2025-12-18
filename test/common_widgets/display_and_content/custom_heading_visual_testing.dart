@@ -1,8 +1,8 @@
 //Line for automated processing
-// flutter run -t ./test/common_widgets/display_and_content/custom_header_visual_testing.dart -d chrome
-// flutter run -t ./test/common_widgets/display_and_content/custom_header_visual_testing.dart -d linux
-// flutter run -t ./test/common_widgets/display_and_content/custom_header_visual_testing.dart -d macos
-// flutter run -t ./test/common_widgets/display_and_content/custom_header_visual_testing.dart -d windows
+// flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d chrome
+// flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d linux
+// flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d macos
+// flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d windows
 //Line for automated processing
 
 
@@ -52,17 +52,17 @@ class MyTestingApp extends StatelessWidget
             mainAxisAlignment: MainAxisAlignment.center,
             children: 
             [
-              CustomHeader(headingTitle: "Header 1", headingLevel:1),
+              CustomHeading(headingTitle: "Heading 1", headingLevel:1),
               Gap(10),
-              CustomHeader(headingTitle: "Header 2", headingLevel:2),
+              CustomHeading(headingTitle: "Heading 2", headingLevel:2),
               Gap(10),
-              CustomHeader(headingTitle: "Header 3", headingLevel:3),
+              CustomHeading(headingTitle: "Heading 3", headingLevel:3),
               Gap(10),
-              CustomHeader(headingTitle: "Header 4", headingLevel:4),
+              CustomHeading(headingTitle: "Heading 4", headingLevel:4),
               Gap(10),
-              CustomHeader(headingTitle: "Header 5", headingLevel:5),
+              CustomHeading(headingTitle: "Heading 5", headingLevel:5),
               Gap(10),
-              CustomHeader(headingTitle: "Header 6", headingLevel:6),
+              CustomHeading(headingTitle: "Heading 6", headingLevel:6),
               Gap(10),
             ]              
           ),
