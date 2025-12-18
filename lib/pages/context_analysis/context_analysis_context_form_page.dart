@@ -173,8 +173,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     // Different pattern for "level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data"
     LinkedHashMap<String, dynamic> level2TitleIndividualData = 
     LinkedHashMap<String, dynamic>.from(
-      {level2TitleIndividual:{level3TitleBalanceIssue:level3TitleBalanceIssueData, level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
-                              level3TitleLegacyIssue:level3TitleLegacyIssueData, level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
+      {level2TitleIndividual:{level3TitleBalanceIssue:level3TitleBalanceIssueData,level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
+                              level3TitleLegacyIssue:level3TitleLegacyIssueData,level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
 
     //************************* Group/Team perspective ******************************/
     //Group/team level: 
@@ -208,16 +208,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
     // Adding to to the level2TitleGroup level
     // level2TitleGroupData
-    LinkedHashMap<String, dynamic> level2TitleGroupData = 
+    LinkedHashMap<String, dynamic> level2TitleTeamData = 
     LinkedHashMap<String, dynamic>.from(
-      {level2TitleGroup:{level3TitleGroupsProblematics:level3TitleGroupsProblematicsItem1Data, level3TitleSameProblem:level3TitleSameProblemsItem1Data,
-      level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data, level3TitleAppreciabilityAtWork: level3TitleAppreciabilityAtWorkItem1Data,
-      level3TitleIncomeEarningAbility: level3TitleIncomeEarningAbilityItem1Data}});
+      {level2TitleGroup:{level3TitleGroupsProblematics:level3TitleGroupsProblematicsItem1Data,level3TitleSameProblem:level3TitleSameProblemsItem1Data,
+      level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data,level3TitleAppreciabilityAtWork:level3TitleAppreciabilityAtWorkItem1Data,
+      level3TitleIncomeEarningAbility:level3TitleIncomeEarningAbilityItem1Data}});
      
     // Adding individual and group perspective to root level data
-    _enteredData = [level2TitleIndividualData, level2TitleGroupData];
+    _enteredData = [level2TitleIndividualData, level2TitleTeamData];
 
-
+    printd("");
+    printd("_enteredData");
+    printd("$_enteredData");
+    printd("");
     
   }
 
@@ -230,6 +233,14 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     // Transforming the data into a CSV-friendly form
     var preCSVDataIndividualPerspective = dataToPreCSV(_enteredData[0]);
     var preCSVDataTeamPerspective = dataToPreCSV(_enteredData[1]);
+
+    printd("preCSVDataIndividualPerspective");
+    printd("$preCSVDataIndividualPerspective");
+    printd("");
+    printd("preCSVDataTeamPerspective");
+    printd("$preCSVDataTeamPerspective");
+    printd("");
+
     List<dynamic> csvDataIndividualPerspective = preCSVToCSVData(preCSVDataIndividualPerspective);
     List<dynamic> csvDataTeamPerspective = preCSVToCSVData(preCSVDataTeamPerspective);
     // Printing to CSV
