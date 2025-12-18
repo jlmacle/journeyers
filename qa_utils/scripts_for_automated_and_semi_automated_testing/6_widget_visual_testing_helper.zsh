@@ -4,7 +4,7 @@ cd ../..
 echo "After launching the terminals, programm to wait for the web servers to be completely started before opening the browser tabs"
 sleep 5
 
-osascript -e 'tell application "Terminal" to do script "cd ./; flutter run -t ./test/common_widgets/display_and_content/custom_header_visual_testing.dart -d web-server --web-port 8091"'
+osascript -e 'tell application "Terminal" to do script "cd ./; flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d web-server --web-port 8091"'
 osascript -e 'tell application "Terminal" to do script "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_snackbar_start_message_helper_visual_testing.dart -d web-server --web-port 8092"'
 osascript -e 'tell application "Terminal" to do script "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field_visual_testing.dart -d web-server --web-port 8093"'
 osascript -e 'tell application "Terminal" to do script "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area_visual_testing.dart -d web-server --web-port 8094"'
