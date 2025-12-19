@@ -12,7 +12,7 @@ import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_dismissible_rectangular_area.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
 
@@ -128,7 +128,7 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                 Visibility
                 (
                   visible: _visibilityStatus,
-                  child: CustomDismissableRectangularArea
+                  child: CustomDismissibleRectangularArea
                   (
                     message1: 'This is your first context analysis.', 
                     message2: 'The dashboard will be displayed after data from the context analysis has been saved.',

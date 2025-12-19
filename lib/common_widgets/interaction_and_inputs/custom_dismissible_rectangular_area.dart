@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 /// and a text related to the act of clicking on the widget.
 /// The rectangular area takes the width of the screen.
 
-class CustomDismissableRectangularArea extends StatefulWidget {
+class CustomDismissibleRectangularArea extends StatefulWidget {
   /// The first part of the message to display
   final String message1;
   /// The second part of the message to display
@@ -31,7 +31,7 @@ class CustomDismissableRectangularArea extends StatefulWidget {
   /// The user can click anywhere on the rectangular area.
   final VoidCallback parentWidgetAreaOnTapCallBackFunction;
 
-  const CustomDismissableRectangularArea
+  const CustomDismissibleRectangularArea
   ({
     super.key,
     required this.message1,
@@ -52,13 +52,13 @@ class CustomDismissableRectangularArea extends StatefulWidget {
   
 
   @override
-  State<CustomDismissableRectangularArea> createState() => _CustomDismissableRectangularAreaState();
+  State<CustomDismissibleRectangularArea> createState() => _CustomDismissibleRectangularAreaState();
 }
 
-class _CustomDismissableRectangularAreaState extends State<CustomDismissableRectangularArea> 
+class _CustomDismissibleRectangularAreaState extends State<CustomDismissibleRectangularArea> 
 {
 
-  FocusNode dismissableRectangularAreaFocusNode = FocusNode();
+  FocusNode dismissibleRectangularAreaFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) 
@@ -67,7 +67,7 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
     (        
       child: Focus
       (
-        focusNode: dismissableRectangularAreaFocusNode,
+        focusNode: dismissibleRectangularAreaFocusNode,
         child: InkWell
         (
           onTap:() {widget.parentWidgetAreaOnTapCallBackFunction();},
