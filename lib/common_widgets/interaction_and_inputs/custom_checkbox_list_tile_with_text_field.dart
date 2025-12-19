@@ -107,7 +107,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
               textFieldMinLines: widget.textFieldMinLines,
               textFieldMaxLines: widget.textFieldMaxLines,
               textFieldMaxLength: widget.textFieldMaxLength,
-              buildCounter: widget.textFieldCounter,
+              textFieldCounter: widget.textFieldCounter,
               parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction           
             ),
       ],

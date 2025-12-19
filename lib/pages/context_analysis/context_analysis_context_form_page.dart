@@ -384,7 +384,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ),
             CustomPaddedTextField
             ( textFieldHintText: pleaseDevelopOrTakeNotes, 
-              textFieldMaxLength: chars1Page, buildCounter: absentCounter,
+              textFieldMaxLength: chars1Page, textFieldCounter: absentCounter,
               parentWidgetTextFieldValueCallBackFunction: _setAnotherIssueTextFieldState),
 
             Gap(preAndPostLevel2DividerGap),
@@ -411,7 +411,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             CustomPaddedTextField
             (
               textFieldHintText: pleaseDescribeTextGroups, 
-              textFieldMaxLength: chars1Page, buildCounter: absentCounter,
+              textFieldMaxLength: chars1Page, textFieldCounter: absentCounter,
               parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextControllerTextFieldState
             ),
 

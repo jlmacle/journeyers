@@ -135,7 +135,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
             child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder,  
             parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction, 
-            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, buildCounter: widget.buildCounter)            
+            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, textFieldCounter: widget.buildCounter)            
           ),
       ],
     );
