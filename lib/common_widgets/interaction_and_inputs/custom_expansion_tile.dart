@@ -8,9 +8,9 @@ import '../interaction_and_inputs/custom_icon_button.dart';
 class CustomExpansionTile extends StatefulWidget 
 {
   /// The text to display when the tile is not expanded
-  final String headerText;
+  final String text;
   /// The font for the text to display when the tile is not expanded
-  final FontWeight headerFontWeight;
+  final FontWeight textFontWeight;
   /// The icon used to suggest that the tile is expandable
   final Icon actionIconToExpand;
   /// The horizontal padding for the expanded content
@@ -18,7 +18,7 @@ class CustomExpansionTile extends StatefulWidget
   /// The vertical padding for the expanded content
   final double expandedContentPaddingVertical;
   /// The horizontal location of the expanded content
-  final CrossAxisAlignment expandedTextCrossAxisAlignment;
+  final CrossAxisAlignment expandedContentCrossAxisAlignment;
   /// The text displayed in the expanded content
   final String expandedAdditionalText;
   /// The height of a divider under the additional text
@@ -41,12 +41,12 @@ class CustomExpansionTile extends StatefulWidget
   const CustomExpansionTile
   ({
     super.key,
-    this.headerText = "Default tile text",
-    this.headerFontWeight = FontWeight.w600,
+    this.text = "Default tile text",
+    this.textFontWeight = FontWeight.w600,
     this.actionIconToExpand = const Icon(Icons.expand_more),
     this.expandedContentPaddingHorizontal = 16.0,
     this.expandedContentPaddingVertical = 8.0,
-    this.expandedTextCrossAxisAlignment = CrossAxisAlignment.start,
+    this.expandedContentCrossAxisAlignment = CrossAxisAlignment.start,
     this.expandedAdditionalText = "Default expanded additional text",
     this.listActionsIconsMainAxisAlignment = MainAxisAlignment.end,
     this.dividerHeight = 20.5,
@@ -80,8 +80,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
         focusNode: expandedAdditionalTextFocusNode,
         child: Text
         (
-          widget.headerText,
-          style: TextStyle(fontWeight: widget.headerFontWeight),
+          widget.text,
+          style: TextStyle(fontWeight: widget.textFontWeight),
         ),
       ),
       trailing: widget.actionIconToExpand,
@@ -92,7 +92,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
           padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal, vertical: widget.expandedContentPaddingVertical),
           child: Column
           (
-            crossAxisAlignment: widget.expandedTextCrossAxisAlignment,
+            crossAxisAlignment: widget.expandedContentCrossAxisAlignment,
             children: 
             [
               Focus
