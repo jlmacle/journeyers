@@ -6,14 +6,14 @@ class CustomText extends StatelessWidget {
   /// The text style
   final TextStyle textStyle;
   /// The text alignment
-  final TextAlign textAlign;
+  final TextAlign textAlignment;
 
   const CustomText
   ({
     super.key,
     required this.text,
     this.textStyle = const TextStyle(color: Colors.black, fontSize: 24,  fontWeight: FontWeight.bold),
-    this.textAlign = TextAlign.center,
+    this.textAlignment = TextAlign.center,
   });
 
   @override
@@ -31,7 +31,7 @@ class CustomText extends StatelessWidget {
         (
           text,      
           style: textStyle,
-          textAlign: textAlign,
+          textAlign: textAlignment,
         )
       ),
     );
