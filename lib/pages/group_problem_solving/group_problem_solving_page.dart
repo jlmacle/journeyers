@@ -25,7 +25,6 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
         [
           Semantics
           (        
-            header: true,
             headingLevel: 2,
             focusable: true,            
             child: Focus
