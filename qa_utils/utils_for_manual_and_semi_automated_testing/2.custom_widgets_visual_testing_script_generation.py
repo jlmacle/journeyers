@@ -125,7 +125,6 @@ def main():
         cmd_lines += cmd_flutter_snippet
 
     # 4. Add server startup timeout and Chrome commands
-    cmd_lines += eol
     cmd_lines += f"{system_adapted_data["comment_character"]} Waiting for the web servers to start{eol}"
     cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {eol}"
     
