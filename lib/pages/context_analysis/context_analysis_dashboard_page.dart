@@ -67,7 +67,15 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
                   itemBuilder : (content, index)
                   {
                     Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
-                    return CustomExpansionTile(text: "(${sessionDataAsMap?[dateKey]}) ${sessionDataAsMap?[titleKey]}",expandedAdditionalText:"", onEditPressed: (){  onEditPressed(sessionDataAsMap?[filePathKey]);}, onDeletePressed: (){}, onSharePressed: (){});
+                    return 
+                    CustomExpansionTile
+                    (
+                      text: "(${sessionDataAsMap?[dateKey]}) ${sessionDataAsMap?[titleKey]}",
+                      expandedAdditionalText:"", 
+                      parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[filePathKey]);}, 
+                      parentWidgetOnDeletePressedCallBackFunction: (){}, 
+                      parentWidgetOnSharePressedCallBackFunction: (){}
+                      );
                   }
                 )
               ),

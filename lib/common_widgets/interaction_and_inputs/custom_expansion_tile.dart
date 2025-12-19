@@ -12,7 +12,7 @@ class CustomExpansionTile extends StatefulWidget
   /// The font for the text to display when the tile is not expanded
   final FontWeight textFontWeight;
   /// The icon used to suggest that the tile is expandable
-  final Icon actionIconToExpand;
+  final Icon actionIconSuggestingExpansion;
   /// The horizontal padding for the expanded content
   final double expandedContentPaddingHorizontal;
   /// The vertical padding for the expanded content
@@ -22,17 +22,17 @@ class CustomExpansionTile extends StatefulWidget
   /// The text displayed in the expanded content
   final String expandedAdditionalText;
   /// The height of a divider under the additional text
-  final double dividerHeight;
+  final double expandedContentDividerHeight;
   /// The callback function called to edit from the expansion tile
-  final VoidCallback onEditPressed;
+  final VoidCallback parentWidgetOnEditPressedCallBackFunction;
   /// The callback function called to delete from the expansion tile
-  final VoidCallback onDeletePressed;
+  final VoidCallback parentWidgetOnDeletePressedCallBackFunction;
   /// The callback function called to share from the expansion tile
-  final VoidCallback onSharePressed;
+  final VoidCallback parentWidgetOnSharePressedCallBackFunction;
   /// A list of  [iconData, toolTipLabel, callBackFunction] values
-  final List<List<dynamic>> listActionsIconsData;
+  final List<List<dynamic>> listActionIconsData;
   /// The horizontal location of the icon(s)
-  final MainAxisAlignment listActionsIconsMainAxisAlignment;
+  final MainAxisAlignment listActionIconsMainAxisAlignment;
 
   static const String editStr = 'Edit';
   static const String deleteStr = 'Delete';
@@ -43,24 +43,22 @@ class CustomExpansionTile extends StatefulWidget
     super.key,
     this.text = "Default tile text",
     this.textFontWeight = FontWeight.w600,
-    this.actionIconToExpand = const Icon(Icons.expand_more),
+    this.actionIconSuggestingExpansion = const Icon(Icons.expand_more),
     this.expandedContentPaddingHorizontal = 16.0,
     this.expandedContentPaddingVertical = 8.0,
     this.expandedContentCrossAxisAlignment = CrossAxisAlignment.start,
     this.expandedAdditionalText = "Default expanded additional text",
-    this.listActionsIconsMainAxisAlignment = MainAxisAlignment.end,
-    this.dividerHeight = 20.5,
-    required this.onEditPressed,
-    required this.onDeletePressed,
-    required this.onSharePressed,
-    this.listActionsIconsData = const
+    this.expandedContentDividerHeight = 20.5,
+    this.listActionIconsMainAxisAlignment = MainAxisAlignment.end,
+    this.listActionIconsData = const
     [
       [Icons.edit, editStr, null],
       [Icons.delete, deleteStr,null],
       [Icons.share, shareStr, null],
     ],
-    
-
+    required this.parentWidgetOnEditPressedCallBackFunction,
+    required this.parentWidgetOnDeletePressedCallBackFunction,
+    required this.parentWidgetOnSharePressedCallBackFunction,
   });
 
   @override
@@ -84,7 +82,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
           style: TextStyle(fontWeight: widget.textFontWeight),
         ),
       ),
-      trailing: widget.actionIconToExpand,
+      trailing: widget.actionIconSuggestingExpansion,
       children: <Widget>
       [
         Padding
@@ -104,14 +102,14 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                   style: appTheme.textTheme.bodyMedium,
                 ),
               ),
-              Divider(height: widget.dividerHeight),
+              Divider(height: widget.expandedContentDividerHeight),
 
               // Action icons
               Row
               (
-                mainAxisAlignment : widget.listActionsIconsMainAxisAlignment,
+                mainAxisAlignment : widget.listActionIconsMainAxisAlignment,
                 children:               
-                widget.listActionsIconsData.map
+                widget.listActionIconsData.map
                 (
                   (actionIconData) 
                   {
@@ -120,19 +118,19 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                     final VoidCallback onPressedFunction;
                     if (toolTipLabel == CustomExpansionTile.editStr) 
                     {
-                      onPressedFunction = widget.onEditPressed;
+                      onPressedFunction = widget.parentWidgetOnEditPressedCallBackFunction;
                     }
                     else if (toolTipLabel == CustomExpansionTile.deleteStr)
                     {
-                      onPressedFunction = widget.onDeletePressed;
+                      onPressedFunction = widget.parentWidgetOnDeletePressedCallBackFunction;
                     }
                     else if (toolTipLabel == CustomExpansionTile.shareStr)
                     {
-                      onPressedFunction = widget.onSharePressed;
+                      onPressedFunction = widget.parentWidgetOnSharePressedCallBackFunction;
                     }
                     else {onPressedFunction = (){};}
 
-                    return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction );
+                    return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, onPressedFunction: onPressedFunction);
                   }
                 )
                 .toList(),              
