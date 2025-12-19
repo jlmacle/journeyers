@@ -41,8 +41,6 @@ class CustomHeading extends StatelessWidget
         headingStyle = appTheme.textTheme.titleMedium!;
       case 6:
         headingStyle = appTheme.textTheme.titleSmall!;
-      default:
-        headingStyle = appTheme.textTheme.labelMedium!;
     }
 
     return MergeSemantics(child: Semantics
