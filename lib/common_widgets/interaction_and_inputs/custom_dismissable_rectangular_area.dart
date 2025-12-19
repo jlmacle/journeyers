@@ -90,7 +90,6 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
                 children: [
                   Semantics
                   (
-                    header: true,
                     headingLevel: 1,
                     focusable: true,
                     focused: true,
@@ -112,7 +111,6 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
                   if (widget.message2 != "")    
                     Semantics
                     (
-                      header: true,
                       headingLevel: 1,
                       focusable: true,
                       child: Focus
@@ -132,7 +130,6 @@ class _CustomDismissableRectangularAreaState extends State<CustomDismissableRect
                     Gap(20),
                     Semantics
                     (
-                      header: true,
                       headingLevel: 1,
                       focusable: true,
                       child: Focus
