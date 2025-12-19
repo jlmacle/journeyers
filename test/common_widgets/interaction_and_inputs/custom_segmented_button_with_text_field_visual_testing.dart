@@ -18,16 +18,10 @@ void main()
 }
 
 
-class MyTestingApp extends StatefulWidget 
+class MyTestingApp extends StatelessWidget 
 {
   const MyTestingApp({super.key});
-  @override
-  State<MyTestingApp> createState() => _MyTestingAppState();
-}
-
-
-class _MyTestingAppState extends State<MyTestingApp> 
-{
+  
   @override
   Widget build(BuildContext context) 
   {
