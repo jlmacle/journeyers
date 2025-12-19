@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 class ContextAnalysisDashboardPage extends StatefulWidget {
   const ContextAnalysisDashboardPage({super.key});
@@ -33,6 +34,12 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
     _sessionDataRetrieval();   
   }
 
+  void onEditPressed(String? csvFilePath)
+  {
+    printd("csvFilePath: $csvFilePath");
+
+  }
+   
   
 
   @override
@@ -48,7 +55,6 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
         (
             child: Semantics
             (        
-              header: true,
               headingLevel: 2,
               focusable: true,
               child: Focus
@@ -61,7 +67,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
                   itemBuilder : (content, index)
                   {
                     Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
-                    return CustomExpansionTile(headerText: "(${sessionDataAsMap?[dateKey]}) ${sessionDataAsMap?[titleKey]}",expandedAdditionalText:"", onEditPressed: (){}, onDeletePressed: (){}, onSharePressed: (){});
+                    return CustomExpansionTile(text: "(${sessionDataAsMap?[dateKey]}) ${sessionDataAsMap?[titleKey]}",expandedAdditionalText:"", onEditPressed: (){  onEditPressed(sessionDataAsMap?[filePathKey]);}, onDeletePressed: (){}, onSharePressed: (){});
                   }
                 )
               ),
