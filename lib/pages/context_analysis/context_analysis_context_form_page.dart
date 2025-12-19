@@ -307,26 +307,26 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleBalanceIssueItem1, textFieldPlaceholder: pleaseDescribeTextHousehold, 
+              checkboxText: level3TitleBalanceIssueItem1, textFieldHintText: pleaseDescribeTextHousehold, 
               parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleBalanceIssueItem2, 
-              textFieldPlaceholder: pleaseDescribeTextHousehold,
+              checkboxText: level3TitleBalanceIssueItem2, 
+              textFieldHintText: pleaseDescribeTextHousehold,
               parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleBalanceIssueItem3, textFieldPlaceholder: pleaseDescribeTextHousehold,
+              checkboxText: level3TitleBalanceIssueItem3, textFieldHintText: pleaseDescribeTextHousehold,
               parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleBalanceIssueItem4, textFieldPlaceholder: pleaseDescribeTextHousehold,
+              checkboxText: level3TitleBalanceIssueItem4, textFieldHintText: pleaseDescribeTextHousehold,
               parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState ,
               parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState
             ),
@@ -343,13 +343,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleWorkplaceIssueItem1, textFieldPlaceholder: pleaseDescribeTextWorkplace,
+              checkboxText: level3TitleWorkplaceIssueItem1, textFieldHintText: pleaseDescribeTextWorkplace,
               parentWidgetCheckboxValueCallBackFunction:  _setMoreAppreciatedAtWorkCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleWorkplaceIssueItem2, textFieldPlaceholder: pleaseDescribeTextWorkplace,
+              checkboxText: level3TitleWorkplaceIssueItem2, textFieldHintText: pleaseDescribeTextWorkplace,
               parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState ,
               parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState
             ),
@@ -367,7 +367,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ),
             CustomCheckBoxWithTextField
             (
-              text: level3TitleLegacyIssueItem1, textFieldPlaceholder: pleaseDevelopOrTakeNotes,
+              checkboxText: level3TitleLegacyIssueItem1, textFieldHintText: pleaseDevelopOrTakeNotes,
               parentWidgetCheckboxValueCallBackFunction:  _setBetterLegaciesCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState
             ),

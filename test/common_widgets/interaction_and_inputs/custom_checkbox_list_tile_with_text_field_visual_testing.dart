@@ -133,15 +133,15 @@ class _HomePageState extends State<HomePage>
         [            
           CustomCheckBoxWithTextField
           (
-            text: "Checkbox text", 
-            textFieldPlaceholder: testTextFieldPlaceholder,
+            checkboxText: "Checkbox text", 
+            textFieldHintText: testTextFieldPlaceholder,
             parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
             parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction
           ),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"Is the checkbox checked? ${_isCheckboxChecked}", textStyle: feedbackMessageStyle),
+            child: CustomText(text:"Is the checkbox checked? $_isCheckboxChecked", textStyle: feedbackMessageStyle),
           ),
            Padding(
             padding: const EdgeInsets.only(left: 20.0),

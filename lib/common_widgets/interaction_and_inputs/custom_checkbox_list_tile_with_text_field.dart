@@ -6,19 +6,19 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 class CustomCheckBoxWithTextField extends StatefulWidget 
 {
   /// The text of the checkbox 
-  final String text;
+  final String checkboxText;
   // The font size for the text 
-  final double textFontSize;
+  final double checkboxTextFontSize;
   /// The color of the text
-  final Color textColor;  
+  final Color checkboxTextColor;  
   /// The alignment for the text
-  final TextAlign textAlign;
+  final TextAlign checkboxTextAlignment;
   /// If the checkbox is checked to start with
   final bool isChecked;  
   /// Where the checkbox is located
-  final ListTileControlAffinity controlAffinity;
+  final ListTileControlAffinity checkboxPosition;
   /// The hint text for the text field
-  final String textFieldPlaceholder;
+  final String textFieldHintText;
   /// The left and right padding value for the text field
   final double textFieldHorizontalPadding;
   /// The bottom padding value for the text field
@@ -30,10 +30,10 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// The maxLength for the text field
   final int textFieldMaxLength; 
   /// The counter for the text field
-  final InputCounterWidgetBuilder buildCounter;
-  /// A callback function for the parent widget
+  final InputCounterWidgetBuilder textFieldCounter;
+  /// A text field-related callback function for the parent widget
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
-  /// A callback function for the parent widget
+  /// A checkbox-related callback function for the parent widget
   final ValueChanged<bool?> ?parentWidgetCheckboxValueCallBackFunction;
 
   static void placeHolderFunctionString(String value) {}
@@ -42,19 +42,19 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   const CustomCheckBoxWithTextField
   ({
     super.key,
-    required this.text,    
-    this.textFontSize = 24,
-    this.textColor = Colors.black,
-    this.textAlign = TextAlign.left, 
-    this.controlAffinity = ListTileControlAffinity.leading,
+    required this.checkboxText,    
+    this.checkboxTextFontSize = 24,
+    this.checkboxTextColor = Colors.black,
+    this.checkboxTextAlignment = TextAlign.left, 
+    this.checkboxPosition = ListTileControlAffinity.leading,
     this.isChecked = false,
-    required this.textFieldPlaceholder,
+    required this.textFieldHintText,
     this.textFieldHorizontalPadding = 20.0,
     this.textFieldBottomPadding = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,    
     this.textFieldMaxLength = chars1Page, // a page as a reference
-    this.buildCounter = absentCounter,
+    this.textFieldCounter = absentCounter,
     this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.parentWidgetCheckboxValueCallBackFunction = placeHolderFunctionBool,
   });
@@ -76,10 +76,10 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
   @override
   Widget build(BuildContext context) 
   {
-    final TextStyle textStyle = TextStyle
+    final TextStyle checkboxTextStyle = TextStyle
     (
-      fontSize: widget.textFontSize,
-      color: widget.textColor,
+      fontSize: widget.checkboxTextFontSize,
+      color: widget.checkboxTextColor,
     );
 
     return Column
@@ -88,9 +88,9 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
       [
         CheckboxListTile
         (
-          title: CustomText(text: widget.text, textStyle: textStyle, textAlign: widget.textAlign),
+          title: CustomText(text: widget.checkboxText, textStyle: checkboxTextStyle, textAlignment: widget.checkboxTextAlignment),
           value: _isChecked, 
-          controlAffinity: widget.controlAffinity,
+          controlAffinity: widget.checkboxPosition,
           onChanged: (bool? value)
           {
             widget.parentWidgetCheckboxValueCallBackFunction!(value); 
@@ -101,19 +101,15 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           },
         ),        
         if (_isChecked)
-          Padding
-          (
-            padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: CustomPaddedTextField 
+            CustomPaddedTextField 
             ( 
-              textFieldHintText: widget.textFieldPlaceholder, 
+              textFieldHintText: widget.textFieldHintText, 
               textFieldMinLines: widget.textFieldMinLines,
               textFieldMaxLines: widget.textFieldMaxLines,
               textFieldMaxLength: widget.textFieldMaxLength,
-              buildCounter: widget.buildCounter,
+              buildCounter: widget.textFieldCounter,
               parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction           
             ),
-          ),
       ],
     );
   }
