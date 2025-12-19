@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+
+/// A custom Intent that represents the "Area dismissed" action.
+/// Used with the keyboard events defined to dismiss the rectangular area
+class AreaDissmissedIntent extends Intent 
+{
+  const AreaDissmissedIntent();
+}
 
 /// A customizable, dismissable, rectangular area widget, with a message to display, 
 /// and a text related to the act of clicking on the widget.
 /// The rectangular area takes the width of the screen.
-
 class CustomDismissibleRectangularArea extends StatefulWidget {
   /// The first part of the message to display
   final String message1;
@@ -63,74 +70,84 @@ class _CustomDismissibleRectangularAreaState extends State<CustomDismissibleRect
   @override
   Widget build(BuildContext context) 
   {
+
     return MergeSemantics
     (        
-      child: Focus
+      child: Shortcuts
       (
-        focusNode: dismissibleRectangularAreaFocusNode,
-        child: InkWell
+        shortcuts: <ShortcutActivator, Intent>
+        {
+          // Keyboard shortcuts used to dismiss the rectangular area
+          LogicalKeySet(LogicalKeyboardKey.enter): const AreaDissmissedIntent(),
+          LogicalKeySet(LogicalKeyboardKey.space): const AreaDissmissedIntent()
+        },
+        child: Actions
         (
-          onTap:() {widget.parentWidgetAreaOnTapCallBackFunction();},
-          child: Container(
-            color: widget.areaBackgroundColor,
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: ConstrainedBox(
-              constraints: BoxConstraints
-              (
-                minHeight: widget.areaHeight,
-                maxHeight: double.infinity,
-                minWidth: double.infinity,
-              ),
-              child: Column
-              (
-                mainAxisAlignment: MainAxisAlignment.center, 
-                children: [
-                  Semantics
+          actions: <Type, Action<Intent>>
+          {
+            AreaDissmissedIntent: CallbackAction<AreaDissmissedIntent>
+            (
+              // Rectangular area dismissed when the related keyboard shortcuts are used
+              onInvoke: (intent) => widget.parentWidgetAreaOnTapCallBackFunction()
+            )
+          },        
+          child: Focus
+          (
+            focusNode: dismissibleRectangularAreaFocusNode,
+            canRequestFocus: true,
+            child: InkWell
+            (
+              onTap:() {widget.parentWidgetAreaOnTapCallBackFunction();},
+              child: Container(
+                color: widget.areaBackgroundColor,
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints
                   (
-                    headingLevel: 1,
-                    focusable: true,
-                    focused: true,
-                    child: Focus
-                    (
-                      child: Text
-                      (
-                        widget.message1,
-                        textAlign: TextAlign.center,
-                        style: TextStyle
-                        (
-                          color: widget.messagesColor,
-                          fontWeight: widget.messagesFontWeight,  
-                                        
-                        ),
-                      ),
-                    ),
+                    minHeight: widget.areaHeight,
+                    maxHeight: double.infinity,
+                    minWidth: double.infinity,
                   ),
-                  if (widget.message2 != "")    
-                    Semantics
-                    (
-                      headingLevel: 1,
-                      focusable: true,
-                      child: Focus
-                      (   
+                  child: Column
+                  (
+                    mainAxisAlignment: MainAxisAlignment.center, 
+                    children: 
+                    [
+                      Semantics
+                      (
+                        headingLevel: 1,
+                        focused: true,
                         child: Text
                         (
-                          widget.message2,
+                          widget.message1,
                           textAlign: TextAlign.center,
                           style: TextStyle
                           (
                             color: widget.messagesColor,
-                            fontWeight: widget.messagesFontWeight,                  
+                            fontWeight: widget.messagesFontWeight,  
+                                          
                           ),
                         ),
                       ),
-                    ),
-                    Gap(20),
-                    Semantics
-                    (
-                      headingLevel: 1,
-                      focusable: true,
-                      child: Focus
+                      if (widget.message2 != "")    
+                        Semantics
+                        (
+                          headingLevel: 1,
+                          child: Text
+                          (
+                            widget.message2,
+                            textAlign: TextAlign.center,
+                            style: TextStyle
+                            (
+                              color: widget.messagesColor,
+                              fontWeight: widget.messagesFontWeight,                  
+                            ),
+                          ),
+                        ),
+                      Gap(20),
+                      Semantics
                       (
+                        headingLevel: 1,
                         child: Text
                         (
                           widget.actionText,
@@ -142,13 +159,14 @@ class _CustomDismissibleRectangularAreaState extends State<CustomDismissibleRect
                           ),
                         ),
                       ),
-                    ),
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
         ),
-      )
+      ),
     );
   }
 }
