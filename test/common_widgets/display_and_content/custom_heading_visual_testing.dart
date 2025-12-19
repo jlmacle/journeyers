@@ -28,6 +28,12 @@ class MyTestingApp extends StatelessWidget
   Widget build(BuildContext context) 
   {
     FocusNode appBarTitleFocusNode = FocusNode();
+    FocusNode headingLevel1FocusNode = FocusNode();
+    FocusNode headingLevel2FocusNode = FocusNode();
+    FocusNode headingLevel3FocusNode = FocusNode();
+    FocusNode headingLevel4FocusNode = FocusNode();
+    FocusNode headingLevel5FocusNode = FocusNode();
+    FocusNode headingLevel6FocusNode = FocusNode();
 
     return MaterialApp
     (
@@ -35,16 +41,17 @@ class MyTestingApp extends StatelessWidget
       home: Scaffold
       (
         appBar: AppBar
+      (
+        title: Semantics
         (
-          title: Semantics
-          (            
-            child: Focus
-            (
-              focusNode: appBarTitleFocusNode,
-              child: const Text('MyTestingApp'),
-            )
-          ),
+          focusable: true, 
+          child: Focus
+          (
+            focusNode: appBarTitleFocusNode,
+            child: const Text('MyTestingApp'),
+          )
         ),
+      ),
         body: Center
         (
           child: Column
@@ -52,17 +59,90 @@ class MyTestingApp extends StatelessWidget
             mainAxisAlignment: MainAxisAlignment.center,
             children: 
             [
-              CustomHeading(headingTitle: "Heading 1", headingLevel:1),
+              // Without MergeSemantics, "group" is added to the reading of the headings, at least by Narrator
+              MergeSemantics(
+                child: Semantics
+                ( 
+                  focusable: true,
+                  headingLevel: 1,
+                  child: 
+                  Focus
+                  (
+                    focusNode: headingLevel1FocusNode,
+                    child: CustomHeading(headingTitle: "Heading 1", headingLevel:1)
+                  ),
+                ),
+              ),
               Gap(10),
-              CustomHeading(headingTitle: "Heading 2", headingLevel:2),
+              MergeSemantics(
+                child: Semantics
+                ( 
+                  focusable: true,
+                  headingLevel: 2,
+                  child: 
+                  Focus
+                  (
+                    focusNode: headingLevel2FocusNode,
+                    child: CustomHeading(headingTitle: "Heading 2", headingLevel:2),
+                  ),
+                ),
+              ),
               Gap(10),
-              CustomHeading(headingTitle: "Heading 3", headingLevel:3),
+              MergeSemantics(
+                child: Semantics
+                ( 
+                  focusable: true,
+                  headingLevel: 3,
+                  child: 
+                  Focus
+                  (
+                    focusNode: headingLevel3FocusNode,
+                    child: CustomHeading(headingTitle: "Heading 3", headingLevel:3),
+                  ),
+                ),
+              ),
               Gap(10),
-              CustomHeading(headingTitle: "Heading 4", headingLevel:4),
+              MergeSemantics(
+                child: Semantics
+                ( 
+                  focusable: true,
+                  headingLevel: 4,
+                  child: 
+                  Focus
+                  (
+                    focusNode: headingLevel4FocusNode,
+                    child: CustomHeading(headingTitle: "Heading 4", headingLevel:4),
+                  ),
+                ),       
+              ), 
               Gap(10),
-              CustomHeading(headingTitle: "Heading 5", headingLevel:5),
+              MergeSemantics(
+                child: Semantics
+                ( 
+                  focusable: true,
+                  headingLevel: 5,
+                  child: 
+                  Focus
+                  (
+                    focusNode: headingLevel5FocusNode,
+                    child: CustomHeading(headingTitle: "Heading 5", headingLevel:5),
+                  ),
+                ),
+              ),
               Gap(10),
-              CustomHeading(headingTitle: "Heading 6", headingLevel:6),
+              MergeSemantics(
+                child: Semantics
+                ( 
+                  focusable: true,
+                  headingLevel: 6,
+                  child: 
+                  Focus
+                  (
+                    focusNode: headingLevel6FocusNode,
+                    child: CustomHeading(headingTitle: "Heading 6", headingLevel:6),
+                  ),
+                ),
+              ),
               Gap(10),
             ]              
           ),

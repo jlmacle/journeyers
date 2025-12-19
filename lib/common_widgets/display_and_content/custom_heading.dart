@@ -24,8 +24,6 @@ class CustomHeading extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode headingFocusNode = FocusNode();    
-
     switch(headingLevel)
     {
       case 1:
@@ -43,16 +41,6 @@ class CustomHeading extends StatelessWidget
         headingStyle = appTheme.textTheme.titleSmall!;
     }
 
-    // Without MergeSemantics, "group" is added to the reading of the headings, at least by Narrator 
-    return MergeSemantics(child: Semantics
-    (        
-      headingLevel: headingLevel,
-      focusable: true,            
-      child: Focus
-      (
-        focusNode: headingFocusNode,
-        child: CustomText(text: headingTitle, textStyle: headingStyle),
-      ),
-    ));
+    return CustomText(text: headingTitle, textStyle: headingStyle);
   }
 }
