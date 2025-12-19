@@ -11,14 +11,14 @@ class CustomHeading extends StatelessWidget
   /// The style of the heading
   late final TextStyle headingStyle;
   /// The alignment of the heading
-  final TextAlign headingAlign;
+  final TextAlign headingAlignment;
 
   CustomHeading
   ({
     super.key, 
     required this.headingTitle, 
     required this.headingLevel, 
-    this.headingAlign = TextAlign.center
+    this.headingAlignment = TextAlign.center
   }): assert(headingLevel >= 1 && headingLevel <= 6, 'Heading level must be between 1 and 6.');
 
   @override
@@ -43,6 +43,7 @@ class CustomHeading extends StatelessWidget
         headingStyle = appTheme.textTheme.titleSmall!;
     }
 
+    // Without MergeSemantics, "group" is added to the reading of the headings, at least by Narrator 
     return MergeSemantics(child: Semantics
     (        
       headingLevel: headingLevel,

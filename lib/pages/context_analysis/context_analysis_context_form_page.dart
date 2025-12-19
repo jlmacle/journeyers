@@ -303,7 +303,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleBalanceIssue,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
@@ -339,7 +339,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleWorkplaceIssue,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
@@ -363,7 +363,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleLegacyIssue,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
@@ -380,7 +380,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleAnotherIssue,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             CustomPaddedTextField
             ( textFieldHintText: pleaseDevelopOrTakeNotes, 
@@ -406,7 +406,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleGroupsProblematics,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             CustomPaddedTextField
             (
@@ -420,7 +420,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleSameProblem,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
             CustomSegmentedButtonWithTextField
@@ -444,7 +444,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleHarmonyAtHome,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
             CustomSegmentedButtonWithTextField
@@ -467,7 +467,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleAppreciabilityAtWork,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
             CustomSegmentedButtonWithTextField
@@ -490,7 +490,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               headingTitle: level3TitleIncomeEarningAbility,
               headingLevel: 3,
-              headingAlign: TextAlign.left,
+              headingAlignment: TextAlign.left,
             ),
             CustomSegmentedButtonWithTextField
             (
