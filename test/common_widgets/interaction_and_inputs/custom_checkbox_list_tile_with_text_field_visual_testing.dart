@@ -94,12 +94,9 @@ class _HomePageState extends State<HomePage>
       dialogTitle: 'Data saving',
       fileName: "data.json",
       bytes: bytes, // necessary, at least on Windows
-      // type: FileType.custom,
       allowedExtensions: ['json'],
     );
   }
-
-  
 
   @override
   Widget build(BuildContext context) 
@@ -112,7 +109,6 @@ class _HomePageState extends State<HomePage>
       (
         title: Semantics
         (
-          focused: true,
           focusable: true, 
           child: Focus
           (
@@ -128,7 +124,7 @@ class _HomePageState extends State<HomePage>
           CustomCheckBoxWithTextField
           (
             checkboxText: "Checkbox text", 
-            textFieldHintText: testTextFieldPlaceholder,
+            textFieldHintText: textFieldHintText,
             parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
             parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction
           ),

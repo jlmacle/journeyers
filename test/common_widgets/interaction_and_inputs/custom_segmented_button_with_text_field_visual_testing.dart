@@ -82,7 +82,6 @@ class _HomePageState extends State<HomePage>
       (
         title: Semantics
         (
-          focused: true,
           focusable: true, 
           child: Focus
           (
@@ -132,7 +131,7 @@ class _HomePageState extends State<HomePage>
               ),
               Gap(16),
               CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
-              textFieldPlaceholder: testTextFieldPlaceholder,
+              textFieldPlaceholder: textFieldHintText,
               parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
               parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction)
             ]

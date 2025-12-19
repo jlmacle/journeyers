@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage>
       (
         title: Semantics
         (
-          focused: true,
           focusable: true, 
           child: Focus
           (

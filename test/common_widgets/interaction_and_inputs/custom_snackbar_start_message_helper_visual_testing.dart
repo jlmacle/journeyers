@@ -82,7 +82,6 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
         (
           title: Semantics
           (
-            focused: true,
             focusable: true, 
             child: Focus
             (

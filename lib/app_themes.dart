@@ -29,7 +29,7 @@ const String pleaseDevelopOrTakeNotes = 'Please develop.';
 
 const String pleaseDescribeTextGroups = 'Please describe the problem(s) that the groups/teams are trying to solve.';
 
-const String testTextFieldPlaceholder = "Please enter some text";
+const String textFieldHintText = "Please enter some text";
 
 
 final ThemeData appTheme = ThemeData

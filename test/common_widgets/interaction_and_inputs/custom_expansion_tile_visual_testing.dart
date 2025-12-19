@@ -35,7 +35,6 @@ class MyTestingApp extends StatelessWidget
         (
           title: Semantics
           (
-            focused: true,
             focusable: true, 
             child: Focus
             (
