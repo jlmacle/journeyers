@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage>
 {
   // final TextEditingController _textEditingController = TextEditingController(); 
   Set<String> _selectedValues = {"No value selected yet"};
-  String _textContent = "";
+  String? _textContent;
 
   void parentWidgetTextFieldValueCallBackFunction(String value)
   {
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage>
                       [
                         Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}', style: feedbackMessageStyle),
                         Gap(10),
-                        Text('You typed: $_textContent', style: feedbackMessageStyle),
+                        Text('You typed: ${_textContent ?? "No text typed yet"}', style: feedbackMessageStyle),
                       ],
                     ),                    
                   ),
