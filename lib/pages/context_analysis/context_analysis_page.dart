@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_dismissable_rectangular_area.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_dismissible_rectangular_area.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
@@ -76,7 +76,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
                 (
                   focusNode: dismissableMsgFocusNode,
                   child: 
-                  CustomDismissableRectangularArea
+                  CustomDismissibleRectangularArea
                   (
                     message1: 'This is your first context analysis.', 
                     message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
