@@ -43,7 +43,15 @@ class MyTestingApp extends StatelessWidget
             )
           ),
         ),
-        body: Center(child: CustomExpansionTile(onEditPressed: (){printd('onEditPressed');}, onDeletePressed: (){printd('onDeletePressed');}, onSharePressed: (){printd('onSharePressed');})),
+        body: Center
+        (
+          child: CustomExpansionTile
+          (
+            parentWidgetOnEditPressedCallBackFunction: (){printd('onEditPressed');},
+            parentWidgetOnDeletePressedCallBackFunction: (){printd('onDeletePressed');},
+            parentWidgetOnSharePressedCallBackFunction: (){printd('onSharePressed');}
+          )
+        ),
       ),      
     );
   }
