@@ -14,7 +14,7 @@ class CustomPaddedTextField extends StatefulWidget
     /// The maxLength for the text field
     final int textFieldMaxLength; 
     /// The counter for the text field
-    final InputCounterWidgetBuilder buildCounter;
+    final InputCounterWidgetBuilder textFieldCounter;
     /// A callback function for the parent widget
     final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
     /// The left padding for the text field
@@ -36,7 +36,7 @@ class CustomPaddedTextField extends StatefulWidget
         this.textFieldMinLines = 1,
         this.textFieldMaxLines = 10,  
         this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
-        this.buildCounter = presentCounter,
+        this.textFieldCounter = presentCounter,
         this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
         this.leftPadding = 20,
         this.rightPadding = 20,
@@ -102,7 +102,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
           minLines: widget.textFieldMinLines,
           maxLines: widget.textFieldMaxLines,
           maxLength: widget.textFieldMaxLength,
-          buildCounter: widget.buildCounter,
+          buildCounter: widget.textFieldCounter,
           onChanged: (String newValue) {quoteCheck(newValue); }
         ),
     );
