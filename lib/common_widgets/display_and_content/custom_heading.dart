@@ -47,7 +47,6 @@ class CustomHeading extends StatelessWidget
 
     return MergeSemantics(child: Semantics
     (        
-      header: true,
       headingLevel: headingLevel,
       focusable: true,            
       child: Focus
