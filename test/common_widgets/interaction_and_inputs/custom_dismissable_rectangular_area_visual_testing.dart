@@ -128,14 +128,16 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                 Visibility
                 (
                   visible: _visibilityStatus,
-                  child: CustomDismissableRectangularArea(buildContext:context, 
-                  message1: 'This is your first context analysis.', 
-                  message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-                  messagesColor: paleCyan, // from app_themes
-                  actionText:'Please click the message area to acknowledge.',
-                  actionTextColor: paleCyan, // from app_themes,
-                  areaBackgroundColor: navyBlue, // from app_themes
-                  setStateCallBack: _hideMessageArea), 
+                  child: CustomDismissableRectangularArea
+                  (
+                    message1: 'This is your first context analysis.', 
+                    message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+                    messagesColor: paleCyan, // from app_themes
+                    actionText:'Please click the message area to acknowledge.',
+                    actionTextColor: paleCyan, // from app_themes,
+                    areaBackgroundColor: navyBlue, // from app_themes
+                    parentWidgetAreaOnTapCallBackFunction: _hideMessageArea
+                  ), 
                 ),
                 Gap(30),
                 ElevatedButton.icon
