@@ -146,7 +146,6 @@ class _MyTestingWidgetState extends State<MyTestingWidget>
                   {
                     final prefs = await SharedPreferences.getInstance();
                     await prefs.setBool('startMessageAcknowledged', false);
-                    // to rebuild and re-display the code
                     setState(() {
                       _visibilityStatus = true;
                     });
