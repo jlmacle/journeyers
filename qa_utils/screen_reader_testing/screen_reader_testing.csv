@@ -1,0 +1,19 @@
+,Linux - App,macOS - App,Windows - App,Windows - App,Web app
+,Orca,VoiceOver,Narrator,NVDA,
+Testing widgets,,,,,
+,,,,,
+Content display,,,,,
+custom_heading_visual_testing.dart,,,,,
+,,,,,
+Interaction and inputs,,,,,
+custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),,
+custom_dismissible_rectangular_area_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
+custom_expansion_tile_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
+custom_language_switch_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
+custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab
+(need to add the echoing of the error message)",,
+custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
+(need to add the echoing of the error message)",,
+custom_snackbar_start_message_helper_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
+,,,,,
+App,,,,,
