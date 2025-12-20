@@ -117,6 +117,7 @@ class _CustomDismissibleRectangularAreaState extends State<CustomDismissibleRect
                       (
                         headingLevel: 1,
                         focused: true,
+                        focusable: true, // important for the dismissible area to have to focus first
                         child: Text
                         (
                           widget.message1,

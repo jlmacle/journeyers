@@ -68,26 +68,16 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
           ...[
             ContextAnalysisNewSessionPage(),
             if (!(_isStartMessageAcknowledged!))
-              Semantics
+              CustomDismissibleRectangularArea
               (
-                focusable: true,
-                focused: true,
-                child: Focus
-                (
-                  focusNode: dismissableMsgFocusNode,
-                  child: 
-                  CustomDismissibleRectangularArea
-                  (
-                    message1: 'This is your first context analysis.', 
-                    message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-                    messagesColor: paleCyan, // from app_themes
-                    actionText:'Please click the message area to acknowledge.',
-                    actionTextColor: paleCyan, // from app_themes,
-                    areaBackgroundColor: navyBlue, // from app_themes
-                    parentWidgetAreaOnTapCallBackFunction: _hideMessageArea
-                  )
-                ),
-              ),                
+                message1: 'This is your first context analysis.', 
+                message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
+                messagesColor: paleCyan, // from app_themes
+                actionText:'Please click the message area to acknowledge.',
+                actionTextColor: paleCyan, // from app_themes,
+                areaBackgroundColor: navyBlue, // from app_themes
+                parentWidgetAreaOnTapCallBackFunction: _hideMessageArea
+              ),
             if (isContextAnalysisSessionDataSaved)
             ...[
               Divider(),
