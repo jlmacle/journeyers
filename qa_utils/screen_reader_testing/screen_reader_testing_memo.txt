@@ -7,16 +7,16 @@ Web app: Enter key after "Enable accessibility", Narrator + F6
 
 Testing with Narrator:
 Ctrl + Windows + Enter: to start/stop Narrator
+Ctrl + Arrow: navigation through the page
+Narrator + space: to interact with a button, etc.
 Ctrl: to stop the reading
 Narrator + F1: commands list
 Narrator + F2: commands for current item 
-Tab/Shift Tab: tab navigation
 Narrator + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
-Narrator + space: scan on/scan off
 Narrator + F5: landmarks
 Narrator + F6: headings
 Narrator + F7: all links
-Ctrl + Arrow down: navigation through the page
+
 Narrator + Ctrl + F12: Toggle developer mode
 https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a
 
