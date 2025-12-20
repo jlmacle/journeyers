@@ -40,7 +40,7 @@ Alt + Shift + b: list of buttons
 Alt + Shift + m: list of landmarks 
 Alt + Shift + l: list of lists 
 Alt + Shift + i: list of list items 
-https://help.gnome.org//gnome-help/a11y-screen-reader.html
+https://www.a11yproject.com/posts/getting-started-with-orca/
 https://docs.oracle.com/cd/E53394_01/html/E54806/gliad.html
 
 
