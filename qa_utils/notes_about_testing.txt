@@ -11,3 +11,6 @@ a set of comments, useful during development, can be added to the visual testing
 The widget_visual_testing_helper files need to be run from their parent folder.
 Please note that Chrome must be started to have more than one tab launched, when testing on Windows.
 Your anti-virus might not appreciate the multiple tabs opening.
+
+An Xcode configuration update was needed to add read-write permission for user selected files.
+(Screen copy added)

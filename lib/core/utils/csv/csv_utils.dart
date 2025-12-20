@@ -472,6 +472,7 @@ Future<String?> printToCSV(List<dynamic> csvDataIndividualPerspective, List<dyna
     dialogTitle: 'Please enter a file name',
     fileName: '.csv',
     bytes: bytes, // necessary, at least on Windows
+    type: FileType.custom, // necessary, at least on macOS
     allowedExtensions: ['csv']
   );
 
