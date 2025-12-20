@@ -31,6 +31,7 @@ https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
 
 Testing with Orca:
 orca (terminal): to start Orca
+Tab/Shift Tab
 Orca Modifier + z: start/stop the structural navigation
 Alt + Shift + k: list of links 
 Alt + Shift + h: list of headings
