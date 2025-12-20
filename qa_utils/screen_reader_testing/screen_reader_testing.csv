@@ -1,4 +1,4 @@
-,Linux - App,macOS - App,Windows - App,Windows - App,Web app
+,Linux App,macOS App,Windows App,Windows App,Web app
 ,Orca,VoiceOver,Narrator,NVDA,
 Testing widgets,,,,,
 ,,,,,
@@ -6,14 +6,16 @@ Content display,,,,,
 custom_heading_visual_testing.dart,,,,,
 ,,,,,
 Interaction and inputs,,,,,
-custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),,
-custom_dismissible_rectangular_area_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
-custom_expansion_tile_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
-custom_language_switch_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
+custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),
+custom_dismissible_rectangular_area_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key (need to tab after message read for message to be dismissed),
+custom_expansion_tile_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,
+custom_language_switch_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,
 custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab
-(need to add the echoing of the error message)",,
+(need to add the echoing of the error message)","Tab/Shift Tab
+(need to add the echoing of the error message)",
 custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
-(need to add the echoing of the error message)",,
-custom_snackbar_start_message_helper_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,,
+(value selected not read. need to add the echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
+(value selected not read. need to add the echoing of the error message)",
+custom_snackbar_start_message_helper_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,
 ,,,,,
-App,,,,,
+App,,,Tab/Shift Tab + 'Space'/'Enter' key (an issue with the displayed message not being read first. scrolling not automatic with tabbing) ,"Tab/Shift Tab + 'Space'/'Enter' key (an issue with the displayed message, and focus back to title after the message is dismissed. scrolling not automatic with tabbing) ",
