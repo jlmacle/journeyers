@@ -8,7 +8,7 @@ custom_heading_visual_testing.dart,"Tab/Shift Tab
 ,,,,,,,
 Interaction and inputs,,,,,,,
 custom_checkbox_list_tile_with_text_field_visual_testing.dart,Tab/Shift Tab + 'Space'/'Enter' key (need to have app title and app bar title read/need to add the echoing of the error message),"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
-(need to have the hint text read/echoing of the error message)",Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),,,
+(need to have the hint text read/no echoing of the error message)",Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),,,
 custom_dismissible_rectangular_area_visual_testing.dart,"Tab/Shift Tab
 (need to have app title and app bar title read/need to have the dismissible area acknowledged by the screen reader)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate button/dismissible area)
 ",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key (need to tab after message read for message to be dismissed),,,
@@ -20,7 +20,7 @@ custom_language_switch_visual_testing.dart,"Tab/Shift Tab + 'Space'/'Enter' key
 (Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow)",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,,,
 custom_padded_text_field_visual_testing.dart,"Tab/Shift Tab 
 (need to have app title and app bar title read)","(Caps Lock + Right Arrow/Left arrow) 
-(need to have the hint text read/echoing of the error message)","Tab/Shift Tab
+(need to have the hint text read/no echoing of the error message)","Tab/Shift Tab
 (need to add the echoing of the error message)","Tab/Shift Tab
 (need to add the echoing of the error message)",,,
 custom_segmented_button_with_text_field_visual_testing.dart,"Tab/Shift Tab + 'Space'/'Enter' key
@@ -33,8 +33,8 @@ custom_snackbar_start_message_helper_visual_testing.dart,"Tab/Shift Tab
 ",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key, ,,
 ,,,,,,,
 App,"Tab/Shift Tab + 'Space'/'Enter' key 
-(need to have the dismissible area acknowledged by the screen reader/echoing of the error message/title)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
-(the dismissible message is not focused when the app starts/Hint texts and values selected not read/echoing of the error message) ",Tab/Shift Tab + 'Space'/'Enter' key (an issue with the displayed message not being read first/scrolling not automatic with tabbing/echoing of the error message) ,Tab/Shift Tab + 'Space'/'Enter' key (an issue with the displayed message/ focus back to title after the message is dismissed/scrolling not automatic with tabbing/echoing of the error message) ,"(2-finger swipe up or down) + (A finger dragged on the screen) + (double-tap to activate an element)
+(dialog text not read by the screen reader/no echoing of the error message/title)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
+(Hint texts and values selected not read/no echoing of the error message) ",Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,"(2-finger swipe up or down) + (A finger dragged on the screen) + (double-tap to activate an element)
 
 Noticed the selected segmented button being voiced as selected.
 Error-message for double quotes voiced.
