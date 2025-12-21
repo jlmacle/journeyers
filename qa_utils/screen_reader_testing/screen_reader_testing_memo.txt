@@ -44,7 +44,7 @@ https://www.a11yproject.com/posts/getting-started-with-orca/
 https://docs.oracle.com/cd/E53394_01/html/E54806/gliad.html
 
 
-Testing with VoiceOver:
+Testing with VoiceOver (macOS):
 ⌘+F5: to start/stop VoiceOver
 Ctrl: to stop the reading
 Escape: to close a menu or rotor, to stop an action, or to exit a mode
@@ -62,3 +62,13 @@ Caps Lock + Space bar: to activate an item (button clicked, for example)
 Caps Lock + Shift + n: to hear how to use the item 
 https://www.apple.com/uk/voiceover/info/guide/_1121.html
 https://support.apple.com/guide/voiceover/general-commands-cpvokys01/mac
+
+Testing with TalkBack:
+Down then right swipe/Up and right swipe: to open the TalkBack menu 
+Up then left: to go to the home screen
+2-finger swipe up or down: to scroll up or down	
+2-finger swipe left or right: scroll left or right
+Left then up: currently opened apps
+A finger dragged on the screen: to speak the item below the finger
+Double-tap: to activate an element
+https://support.google.com/accessibility/android/answer/6151827?sjid=7184261025714405298-EU
