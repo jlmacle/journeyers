@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_dismissible_rectangular_area.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ContextAnalysisPage extends StatefulWidget 
 {
@@ -17,15 +17,53 @@ class ContextAnalysisPage extends StatefulWidget
 class _ContextAnalysisPageState extends State<ContextAnalysisPage>  
 { 
   bool _preferencesLoading = true;
-  late bool? _isStartMessageAcknowledged;  
+  late bool? _isStartMessageAlreadyAcknowledged;  
   bool isContextAnalysisSessionDataSaved = false;
-
-  _getPreferences() async{
-    _isStartMessageAcknowledged = await isStartMessageAcknowledged();
-      setState(() {  
-        _preferencesLoading = false;
-      });
+  
+  _getPreferences() async
+  {
+    _isStartMessageAlreadyAcknowledged = await isStartMessageAcknowledged();
+    setState(() {_preferencesLoading = false;});
+    printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
+    if (_isStartMessageAlreadyAcknowledged == false && context.mounted)
+    {
+      showDialog
+      (
+      context: context,
+      builder: 
+        (BuildContext context) 
+        {
+          return AlertDialog
+          (
+            content: Focus
+            (
+              child:Text
+                ('This is your first context analysis.\n'
+                  'The dashboard will be displayed after data from the context analysis has been saved.',
+                  style: dialogStyle,
+                )
+            ),
+            actions: 
+            [
+              TextButton
+              (
+                onPressed: () 
+                {
+                  saveStartMessageAcknowledgement();  
+                  Navigator.pop(context);
+                },
+                child: const Text('Acknowledged'),
+              ),
+            ],
+          );
+        }
+      );
+    }
   }
+
+  //   }
+
+  // }
 
   @override
   void initState() 
@@ -34,25 +72,9 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
     _getPreferences();     
   }
 
-    void _hideMessageArea()
-    {
-      setState(() {
-        saveStartMessageAcknowledgement();
-        _isStartMessageAcknowledged = true;
-      });
-      
-    }
-
-  void resetAcknowledgement() async{
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('startMessageAcknowledged', false);
-  }
-
   @override
   Widget build(BuildContext context) 
   { 
-
-    FocusNode dismissableMsgFocusNode = FocusNode();    
 
     return Scaffold
     (
@@ -65,33 +87,17 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
         if (_preferencesLoading)
           Center(child: CircularProgressIndicator())
         else
-          ...[
-            ContextAnalysisNewSessionPage(),
-            if (!(_isStartMessageAcknowledged!))
-              CustomDismissibleRectangularArea
-              (
-                message1: 'This is your first context analysis.', 
-                message2: 'The dashboard will be displayed after data from the context analysis has been saved.',
-                messagesColor: paleCyan, // from app_themes
-                actionText:'Please click the message area to acknowledge.',
-                actionTextColor: paleCyan, // from app_themes,
-                areaBackgroundColor: navyBlue, // from app_themes
-                parentWidgetAreaOnTapCallBackFunction: _hideMessageArea
-              ),
+          ...
+          [            
+            ContextAnalysisNewSessionPage(),            
+            
             if (isContextAnalysisSessionDataSaved)
-            ...[
+            ...
+            [
               Divider(),
               ContextAnalysisDashboardPage()
             ],
-            // ElevatedButton(onPressed: resetAcknowledgement, child: Text('Reset acknowledgement'))
           ]
-        // TextButton(
-        //   onPressed: () {
-        //     // This dumps the Semantics Tree's structure and properties to the console.
-        //     debugDumpSemanticsTree(); 
-        //   },
-        //     child: const Text('Dump Semantics'),
-        //   )
         ],
       ),
     );
