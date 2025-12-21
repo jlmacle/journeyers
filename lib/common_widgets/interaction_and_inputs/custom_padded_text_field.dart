@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
 class CustomPaddedTextField extends StatefulWidget 
@@ -67,12 +68,20 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   { 
     if (value.contains('"')) 
     {
+      // TODO: to remove the different versions of double quotes
       value = value.replaceAll('"', '');     
       setState(() {  
         // Removes the quotes from the text field
         textFieldEditingController.text = value;
         // Updates the error message
-        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use.';    
+        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use.';         
+        // "The assertiveness level of the announcement is determined by assertiveness. 
+        // Currently, this is only supported by the web engine and has no effect on other platforms. 
+        // The default mode is Assertiveness.polite."
+        // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+        // TODO:  TextDirection.ltr: code to modify for l10n
+        // Doesn't seem effective yet. Left for later.
+        SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDoubleQuotes, TextDirection.ltr, assertiveness: Assertiveness.assertive);  
         // Updates the parental widget information on the text content
         widget.parentWidgetTextFieldValueCallBackFunction(value);     
       });
