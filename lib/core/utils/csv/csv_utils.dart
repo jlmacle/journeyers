@@ -368,7 +368,7 @@ List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
         int noteIndex = index + 1;
         // Adding the X in front of the question if the note has content
         List<String> noteData = preCSVData[noteIndex];
-        if (noteData[1].trim() != "")
+        if (noteData[1].trim() != '""')
         {
           var questionData = preCSVData[index];
           questionData[0] = 'X';
