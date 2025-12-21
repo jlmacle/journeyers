@@ -1,24 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-//                SNACKBAR (Kept for educational purposes)
-Future<void> saveStartSnackbarMessageAcknowledgement() async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('startSnackbarMessageAcknowledged', true);
-}
-
-Future<bool> isStartSnackbarMessageAcknowledged() async {
-  final prefs = await SharedPreferences.getInstance();
-  return prefs.getBool('startSnackbarMessageAcknowledged') ?? false;
-}
-
-
-//              CONTAINER
 Future<void> saveStartMessageAcknowledgement() async {
   final prefs = await SharedPreferences.getInstance();
-  await prefs.setBool('startMessageAcknowledged', true);
+  await prefs.setBool('isDialogStartMessageAcknowledged', true);
 }
 
 Future<bool> isStartMessageAcknowledged() async {
   final prefs = await SharedPreferences.getInstance();
-  return prefs.getBool('startMessageAcknowledged') ?? false;
+  return prefs.getBool('isDialogStartMessageAcknowledged') ?? false;
 }
