@@ -20,8 +20,10 @@ Tab/Shift Tab","Enable accessibility
 Tab/Shift Tab"
 ,,,,,,,,,,
 Interaction and inputs,,,,,,,,,,
-custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to have app title and app bar title voiced/need to add the echoing of the error message),,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
-(need to have the hint text voiced)",,Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),"Enable accessibility
+custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to have app title and app bar title voiced/no echoing of the error message),,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
+(need to have the hint text voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key 
+
+(no echoing of the error message)",Tab/Shift Tab + 'Space'/'Enter' key (no echoing of the error message),"Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
 Quotes-related error message is voiced.","Enable accessibility
@@ -46,8 +48,8 @@ Tab/Shift Tab + 'Space'/'Enter' key
 custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
 (need to have app title and app bar title voiced)",,"(Caps Lock + Right Arrow/Left arrow) 
 (need to have the hint text voiced)",,"Tab/Shift Tab
-(need to add the echoing of the error message)","Tab/Shift Tab
-(need to add the echoing of the error message)","Enable accessibility
+(no echoing of the error message)","Tab/Shift Tab
+(no echoing of the error message)","Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
 Quotes-related error message is voiced.","Enable accessibility
@@ -56,10 +58,10 @@ Tab/Shift Tab + 'Space'/'Enter' key
 Hint text is voiced
 Quotes-related error message is voiced."
 custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
-(value selected not voiced/need to add the echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
+(value selected not voiced/no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
 (need to have the hint text/value selected non voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key
-(value selected not voiced/need to add the echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
-(value selected not voiced/need to add the echoing of the error message)","Enable accessibility
+(value selected not voiced/no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
+(value selected not voiced/no echoing of the error message)","Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
 Value selected is voiced.
