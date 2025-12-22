@@ -1,39 +1,32 @@
-Current testing paths:
-Windows app: Narrator: Tab/Shift Tab
-Windows app: Nvda: Tab/Shift Tab
-macOS app: VoiceOver: Caps Lock + q, arrow
-Web app: Enter key after "Enable accessibility", Narrator + F6
-----------------------
-
 Testing with Narrator:
 Ctrl + Windows + Enter: to start/stop Narrator
 Ctrl + Arrow: navigation through the page
-Narrator + space: to interact with a button, etc.
 Ctrl: to stop the reading
-Narrator + R: to read from the position
-Narrator + F1: commands list
-Narrator + F2: commands for current item 
-Narrator + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
-Narrator + F5: landmarks
-Narrator + F6: headings
-Narrator + F7: all links
-
-Narrator + Ctrl + F12: Toggle developer mode
+Caps Lock + R: to read from the position
+Caps Lock + F1: commands list
+Caps Lock + F2: commands for current item 
+Caps Lock + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
+Caps Lock + F5: landmarks
+Caps Lock + F6: headings
+Caps Lock + F7: all links
+Caps Lock + Ctrl + F12: Toggle developer mode
 https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a
 
 
 Testing with NVDA:
 Ctrl + Alt + n: to start NVDA
-NVDA + F7: Links, headings, forms fields, buttons, landmarks 
+Ctrl: to stop the reading
+Caps Lock + F7: Links, headings, forms fields, buttons, landmarks 
 Tab: navigation through the page
-NVDA + q: exit NVDA
+Caps Lock + q: exit NVDA
 https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
 
 
 Testing with Orca:
 orca (terminal): to start Orca
 Tab/Shift Tab
-Orca Modifier (caps lock or insert) + z: start/stop the structural navigation
+Orca (Caps Lock or Insert) + s: to enable/disable speech
+Orca + z: start/stop the structural navigation
 Within the structural navigation:
     k/Shift + k: list of links 
     h/Shift + h: list of headings
