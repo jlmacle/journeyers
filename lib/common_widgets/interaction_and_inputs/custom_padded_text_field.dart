@@ -74,7 +74,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         // Removes the quotes from the text field
         textFieldEditingController.text = value;
         // Updates the error message
-        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use.';         
+        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use, and are for this reason removed from the text typed.';         
         // "The assertiveness level of the announcement is determined by assertiveness. 
         // Currently, this is only supported by the web engine and has no effect on other platforms. 
         // The default mode is Assertiveness.polite."
