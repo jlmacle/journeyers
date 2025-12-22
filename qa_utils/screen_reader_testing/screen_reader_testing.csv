@@ -7,7 +7,13 @@ Noticed the selected segmented button being voiced as selected.
 Error-message for double quotes voiced.
 No issue noticed.",,"Tab/Shift Tab + 'Space'/'Enter' key 
 (dialog text not read by the screen reader/no echoing of the error message/title)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
-(Hint texts and values selected not voiced) ",,Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,,
+(Hint texts and values selected not voiced) ",,"Tab/Shift Tab + 'Space'/'Enter' key 
+
+(scrolling not automatic with tabbing/
+no echoing of the error message) ","Tab/Shift Tab + 'Space'/'Enter' key 
+
+(scrolling not automatic with tabbing/
+no echoing of the error message) ",X,X
 ,,,,,,,,,,
 ,,,,,,,,,,
 ,,,,,,,,,,
@@ -23,52 +29,66 @@ Interaction and inputs,,,,,,,,,,
 custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to have app title and app bar title voiced/no echoing of the error message),,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
 (need to have the hint text voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key 
 
-(no echoing of the error message)",Tab/Shift Tab + 'Space'/'Enter' key (no echoing of the error message),"Enable accessibility
-Tab/Shift Tab + 'Space'/'Enter' key
+(no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key 
 
-Quotes-related error message is voiced.","Enable accessibility
-Tab/Shift Tab + 'Space'/'Enter' key
-
-Quotes-related error message is voiced."
-custom_expansion_tile_visual_testing.dart,,,"Tab/Shift Tab
-(need to have app title and app bar title voiced/need to have the icons tooltip labels voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
-(need to have the icons tooltip labels read)",,Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,"Enable accessibility
-
-Expansion tile doesn't expand when using 'Enter'/'Space' key","Enable accessibility
-Tab/Shift Tab + 'Space'/'Enter' key
-
-Expansion tile expands, tool tip labels are voiced"
-custom_language_switch_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
-(need to have app title and app bar title voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
-(Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate language)",,Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,"Enable accessibility
-Tab/Shift Tab + 'Space'/'Enter' key
-","Enable accessibility
-Tab/Shift Tab + 'Space'/'Enter' key
-"
-custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
-(need to have app title and app bar title voiced)",,"(Caps Lock + Right Arrow/Left arrow) 
-(need to have the hint text voiced)",,"Tab/Shift Tab
-(no echoing of the error message)","Tab/Shift Tab
 (no echoing of the error message)","Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
-Quotes-related error message is voiced.","Enable accessibility
+No issue noticed","Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
-Hint text is voiced
-Quotes-related error message is voiced."
+No issue noticed"
+custom_expansion_tile_visual_testing.dart,,,"Tab/Shift Tab
+(need to have app title and app bar title voiced/need to have the icons tooltip labels voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
+(need to have the icons tooltip labels read)",,"Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed.","Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed","Enable accessibility
+Tab/Shift Tab + 'Space'/'Enter' key
+
+(expansion tile doesn't expand when using 'Enter'/'Space' key)","Enable accessibility
+Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed"
+custom_language_switch_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
+(need to have app title and app bar title voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
+(Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate language)",,"Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed, beyond specifity of screen reader functionning","Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed","Enable accessibility
+Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed","Enable accessibility
+Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed"
+custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
+(need to have app title and app bar title voiced)",,"(Caps Lock + Right Arrow/Left arrow) 
+(need to have the hint text voiced)",,"Tab/Shift Tab
+
+(no echoing of the error message)","Tab/Shift Tab
+
+(no echoing of the error message)","Enable accessibility
+Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed.","Enable accessibility
+Tab/Shift Tab + 'Space'/'Enter' key
+
+No issue noticed"
 custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
 (value selected not voiced/no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
 (need to have the hint text/value selected non voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key
-(value selected not voiced/no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
-(value selected not voiced/no echoing of the error message)","Enable accessibility
+
+(value selected not voiced
+/no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
+
+(value selected not voiced/
+no echoing of the error message)","Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
-Value selected is voiced.
-Hint text is voiced.
-Quotes-related error message is voiced.","Enable accessibility
+No issue noticed","Enable accessibility
 Tab/Shift Tab + 'Space'/'Enter' key
 
-Value selected is voiced.
-Hint text is voiced.
-Quotes-related error message is voiced."
+No issue noticed"
