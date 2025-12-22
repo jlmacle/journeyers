@@ -51,7 +51,9 @@ Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
 custom_expansion_tile_visual_testing.dart,,,"Tab/Shift Tab
-(app title and app bar title not voiced/need to have the icons tooltip labels voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
+
+(app title and app bar title not voiced/
+icon buttons tooltip labels not voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
 
 (need to have the icons tooltip labels read)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
@@ -65,6 +67,7 @@ Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
 custom_language_switch_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
+
 (app title and app bar title not voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
 (Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate language)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
@@ -78,7 +81,9 @@ Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
 custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
-(app title and app bar title not voiced)",,"(Caps Lock + Right Arrow/Left arrow)
+
+(app title and app bar title not voiced/
+no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow)
  
 (hint text not voiced)",,"Tab/Shift Tab
 
@@ -92,7 +97,10 @@ Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
 custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
-(value selected not voiced/no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
+
+(app title and app bar title not voiced/
+value selected not voiced/
+no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
 
 (need to have the hint text/value selected non voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
