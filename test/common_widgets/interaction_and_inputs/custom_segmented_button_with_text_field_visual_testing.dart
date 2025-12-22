@@ -109,6 +109,11 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
               ),              
+              Gap(16),
+              CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
+              textFieldPlaceholder: textFieldHintText,
+              parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
+              parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction),
               Gap(16),                    
               Center(
                 child: Semantics
@@ -121,7 +126,7 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: 
                       [
-                        Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}', style: feedbackMessageStyle),
+                        Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}.', style: feedbackMessageStyle),
                         Gap(10),
                         Text('You typed: ${_textContent ?? "No text typed yet"}', style: feedbackMessageStyle),
                       ],
@@ -129,11 +134,6 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
               ),
-              Gap(16),
-              CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
-              textFieldPlaceholder: textFieldHintText,
-              parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
-              parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction)
             ]
           ),
         ),      
