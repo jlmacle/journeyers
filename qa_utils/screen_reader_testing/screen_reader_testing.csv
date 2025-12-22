@@ -97,7 +97,10 @@ No issue noticed"
 custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
 
 (app title and app bar title not voiced/
-no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow)
+no echoing of the error message)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title announced as clickable)","(Caps Lock + Right Arrow/Left arrow)
  
 (hint text not voiced)",,"Tab/Shift Tab
 
@@ -114,7 +117,10 @@ custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + '
 
 (app title and app bar title not voiced/
 value selected not voiced/
-no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
+no echoing of the error message)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) 
 
 (need to have the hint text/value selected non voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
