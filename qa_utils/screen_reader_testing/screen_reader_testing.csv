@@ -11,7 +11,8 @@ No issue noticed.",,"Tab/Shift Tab + 'Space'/'Enter' key
 scrolling not automatic with tabbing/
 no echoing of the error message) ",X,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
 
-(Hint texts and values selected not voiced) ",X,"Tab/Shift Tab + 'Space'/'Enter' key 
+(scrolling not automatic with tabbing/
+hint texts and values selected not voiced) ",X,"Tab/Shift Tab + 'Space'/'Enter' key 
 
 (scrolling not automatic with tabbing/
 no echoing of the error message) ","Tab/Shift Tab + 'Space'/'Enter' key 
@@ -47,7 +48,8 @@ Tab/Shift Tab
 
 (app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
 
-(hint text not voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key 
+(hint text not voiced/
+A click activates the button, Caps Lock + Space didn't do so)",,"Tab/Shift Tab + 'Space'/'Enter' key 
 
 (no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key 
 
