@@ -33,6 +33,7 @@ https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
 Testing with Orca:
 orca (terminal): to start Orca
 Tab/Shift Tab
+Orca Modifier + s: to enable/disable speech
 Orca Modifier (caps lock or insert) + z: start/stop the structural navigation
 Within the structural navigation:
     k/Shift + k: list of links 
