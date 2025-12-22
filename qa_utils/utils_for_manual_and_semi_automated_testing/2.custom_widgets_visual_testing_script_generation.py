@@ -14,10 +14,12 @@ time_for_servers_to_start = 70 # 70 for an Core i3, 8 GB
 
 # Getting the project's absolute path from the config file
 os_name = platform.system().lower()
+projet_root = "./"
+
 config_path = "./_qa_utils_config.json"
 with open(config_path, 'r') as file:
     config = json.load(file)
-projet_root = "./"
+    
 if os_name == "darwin":
     projet_root = config.get("projetRoot")
 
