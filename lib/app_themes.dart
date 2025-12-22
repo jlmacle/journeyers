@@ -15,7 +15,8 @@ final double betweenLevel3DividerThickness = 1;
 // Text styles
 final TextStyle feedbackMessageStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.normal);
 final TextStyle dataSavingStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.normal);
-final TextStyle dialogStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.normal);
+final TextStyle dialogStyle = TextStyle(color:Colors.black ,fontSize: 20, fontWeight: FontWeight.normal);
+final TextStyle dialogStyleAcknowledged =  TextStyle(color:Colors.purple.shade400, fontSize: 20);
 
 // Input decorations
 const String pleaseDescribeTextHousehold = 'Please describe the past outcomes for the household, '
