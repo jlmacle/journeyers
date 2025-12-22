@@ -10,6 +10,7 @@ Ctrl + Windows + Enter: to start/stop Narrator
 Ctrl + Arrow: navigation through the page
 Narrator + space: to interact with a button, etc.
 Ctrl: to stop the reading
+Narrator + R: to read from the position
 Narrator + F1: commands list
 Narrator + F2: commands for current item 
 Narrator + s (twice and quickly): summary of the page (at least, landmarks, links, headings)
