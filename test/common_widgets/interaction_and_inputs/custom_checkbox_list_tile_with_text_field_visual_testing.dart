@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage>
     await FilePicker.platform.saveFile
     (
       dialogTitle: 'Data saving',
+      type: FileType.custom,
       fileName: "data.json",
       bytes: bytes, // necessary, at least on Windows
       allowedExtensions: ['json'],
