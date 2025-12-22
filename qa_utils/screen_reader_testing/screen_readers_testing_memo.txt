@@ -1,10 +1,3 @@
-Current testing paths:
-Windows app: Narrator: Tab/Shift Tab
-Windows app: Nvda: Tab/Shift Tab
-macOS app: VoiceOver: Caps Lock + q, arrow
-Web app: Enter key after "Enable accessibility", Narrator + F6
-----------------------
-
 Testing with Narrator:
 Ctrl + Windows + Enter: to start/stop Narrator
 Ctrl + Arrow: navigation through the page
@@ -17,13 +10,13 @@ Narrator + s (twice and quickly): summary of the page (at least, landmarks, link
 Narrator + F5: landmarks
 Narrator + F6: headings
 Narrator + F7: all links
-
 Narrator + Ctrl + F12: Toggle developer mode
 https://support.microsoft.com/en-us/windows/appendix-b-narrator-keyboard-commands-and-touch-gestures-8bdab3f4-b3e9-4554-7f28-8b15bd37410a
 
 
 Testing with NVDA:
 Ctrl + Alt + n: to start NVDA
+Ctrl: to stop the reading
 NVDA + F7: Links, headings, forms fields, buttons, landmarks 
 Tab: navigation through the page
 NVDA + q: exit NVDA
