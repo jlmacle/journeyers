@@ -7,7 +7,7 @@ Noticed the selected segmented button being voiced as selected.
 Error-message for double quotes voiced.
 No issue noticed.",,"Tab/Shift Tab + 'Space'/'Enter' key 
 (dialog text not read by the screen reader/no echoing of the error message/title)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
-(Hint texts and values selected not read/no echoing of the error message) ",Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,
+(Hint texts and values selected not read) ",Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,Tab/Shift Tab + 'Space'/'Enter' key (scrolling not automatic with tabbing/no echoing of the error message) ,
 ,,,,,,,
 ,,,,,,,
 ,,,,,,,
@@ -19,20 +19,20 @@ custom_heading_visual_testing.dart,,,"Tab/Shift Tab
 ,,,,,,,
 Interaction and inputs,,,,,,,
 custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,Tab/Shift Tab + 'Space'/'Enter' key (need to have app title and app bar title read/need to add the echoing of the error message),"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
-(need to have the hint text read/no echoing of the error message)",Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),
+(need to have the hint text read)",Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),
 custom_expansion_tile_visual_testing.dart,,,"Tab/Shift Tab
 (need to have app title and app bar title read/need to have the icons tooltip labels read)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
 (need to have the icons tooltip labels read)",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,
 custom_language_switch_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
 (need to have app title and app bar title read)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
-(Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow)",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,
+(Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate language)",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,
 custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
 (need to have app title and app bar title read)","(Caps Lock + Right Arrow/Left arrow) 
-(need to have the hint text read/no echoing of the error message)","Tab/Shift Tab
+(need to have the hint text read)","Tab/Shift Tab
 (need to add the echoing of the error message)","Tab/Shift Tab
 (need to add the echoing of the error message)",
 custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
 (value selected not read/need to add the echoing of the error message)","(Caps Lock + Right Arrow/Left arrow) 
-(need to have the hint text/value selected non read/echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
+(need to have the hint text/value selected non read)","Tab/Shift Tab + 'Space'/'Enter' key
 (value selected not read/need to add the echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
 (value selected not read/need to add the echoing of the error message)",
