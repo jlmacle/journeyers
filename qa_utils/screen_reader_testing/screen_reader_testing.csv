@@ -124,7 +124,9 @@ Tab/Shift Tab
 
 (app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) 
 
-(need to have the hint text/value selected non voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key
+(hint text not voiced/
+value selected non voiced/
+a long push on the space bar seems necessary to de-select and select another option)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
 (value selected not voiced
 /no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
