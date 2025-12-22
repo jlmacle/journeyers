@@ -25,7 +25,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
     _isStartMessageAlreadyAcknowledged = await isStartMessageAcknowledged();
     setState(() {_preferencesLoading = false;});
     printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
-    if (_isStartMessageAlreadyAcknowledged == false && context.mounted)
+    if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted)
     {
       showDialog
       (
@@ -35,13 +35,29 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
         {
           return AlertDialog
           (
+            contentPadding: EdgeInsets.only(top:25),
             content: Focus
             (
-              child:Text
-                ('This is your first context analysis.\n'
-                  'The dashboard will be displayed after data from the context analysis has been saved.',
-                  style: dialogStyle,
-                )
+              child:
+              TextButton
+              (
+                onPressed:() 
+                {
+                  saveStartMessageAcknowledgement();  
+                  Navigator.pop(context);
+                },
+                child:
+                  RichText
+                  (
+                    text: TextSpan
+                    (
+                      text: 'This is your first context analysis.\n'
+                            'The dashboard will be displayed after data from the context analysis has been saved.\n'
+                            'Please click to acknowledge.\n\n',
+                      style: dialogStyle,
+                    ),
+                  )
+                ),
             ),
             actions: 
             [
@@ -52,7 +68,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
                   saveStartMessageAcknowledgement();  
                   Navigator.pop(context);
                 },
-                child: const Text('Acknowledged'),
+                child: Text('Acknowledged', style: dialogStyleAcknowledged)
               ),
             ],
           );
@@ -60,10 +76,6 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
       );
     }
   }
-
-  //   }
-
-  // }
 
   @override
   void initState() 
