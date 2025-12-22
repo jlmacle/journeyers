@@ -1,5 +1,5 @@
 ,Android App,iOS App,Linux App,Linux - Web app,macOS App,macOS - Web app,Windows App,Windows App,Web app - Windows,Web app - Windows
-,,,Orca,,VoiceOver,,Narrator,NVDA,Narrator,NVDA
+,,,Orca,Orca,VoiceOver,VoiceOver,Narrator,NVDA,Narrator,NVDA
 ,,,,,,,,,,
 App,"(2-finger swipe up or down) + (A finger dragged on the screen) + (double-tap to activate an element)
 
@@ -27,7 +27,12 @@ Content display,,,,,,,,,,
 custom_heading_visual_testing.dart,,,"Tab/Shift Tab 
 
 (app title and app bar title not voiced/
-heading level not voiced)",,Caps Lock + Right Arrow/Left arrow,,Tab/Shift Tab,Tab/Shift Tab,"Enable accessibility
+heading level not voiced)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title and headings announced as clickable)","Caps Lock + Right Arrow/Left arrow
+
+(heading level not announced)",,Tab/Shift Tab,Tab/Shift Tab,"Enable accessibility
 Tab/Shift Tab","Enable accessibility
 Tab/Shift Tab"
 ,,,,,,,,,,
@@ -37,7 +42,10 @@ custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,"Tab/Shift Tab +
 (app title and app bar title not voiced/
 box checked not voiced/
 no echoing of the error message/
-button text not voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
+button text not voiced)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
 
 (hint text not voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key 
 
@@ -53,7 +61,10 @@ No issue noticed"
 custom_expansion_tile_visual_testing.dart,,,"Tab/Shift Tab
 
 (app title and app bar title not voiced/
-icon buttons tooltip labels not voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
+icon buttons tooltip labels not voiced)","Enable accessibility
+Tab/Shift Tab
+
+(additional text not read on tab navigation, additional text findable with the down arrow/app bar title and additional text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
 
 (need to have the icons tooltip labels read)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
@@ -68,7 +79,10 @@ Tab/Shift Tab + 'Space'/'Enter' key
 No issue noticed"
 custom_language_switch_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
 
-(app title and app bar title not voiced)",,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
+(app title and app bar title not voiced)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
 (Caps Lock + Shift + Down Arrow) + (Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate language)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed, beyond specifity of screen reader functionning","Tab/Shift Tab + 'Space'/'Enter' key
@@ -83,7 +97,10 @@ No issue noticed"
 custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab 
 
 (app title and app bar title not voiced/
-no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow)
+no echoing of the error message)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title announced as clickable)","(Caps Lock + Right Arrow/Left arrow)
  
 (hint text not voiced)",,"Tab/Shift Tab
 
@@ -100,7 +117,10 @@ custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + '
 
 (app title and app bar title not voiced/
 value selected not voiced/
-no echoing of the error message)",,"(Caps Lock + Right Arrow/Left arrow) 
+no echoing of the error message)","Enable accessibility
+Tab/Shift Tab
+
+(app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) 
 
 (need to have the hint text/value selected non voiced)",,"Tab/Shift Tab + 'Space'/'Enter' key
 
