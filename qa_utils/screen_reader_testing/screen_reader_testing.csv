@@ -9,9 +9,6 @@ custom_heading_visual_testing.dart,"Tab/Shift Tab
 Interaction and inputs,,,,,,,
 custom_checkbox_list_tile_with_text_field_visual_testing.dart,Tab/Shift Tab + 'Space'/'Enter' key (need to have app title and app bar title read/need to add the echoing of the error message),"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
 (need to have the hint text read/no echoing of the error message)",Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),Tab/Shift Tab + 'Space'/'Enter' key (need to add the echoing of the error message),,,
-custom_dismissible_rectangular_area_visual_testing.dart,"Tab/Shift Tab
-(need to have app title and app bar title read/need to have the dismissible area acknowledged by the screen reader)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate button/dismissible area)
-",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key (need to tab after message read for message to be dismissed),,,
 custom_expansion_tile_visual_testing.dart,"Tab/Shift Tab
 (need to have app title and app bar title read/need to have the icons tooltip labels read)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
 (need to have the icons tooltip labels read)",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key,,,
@@ -28,9 +25,6 @@ custom_segmented_button_with_text_field_visual_testing.dart,"Tab/Shift Tab + 'Sp
 (need to have the hint text/value selected non read/echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
 (value selected not read/need to add the echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key
 (value selected not read/need to add the echoing of the error message)",,,
-custom_snackbar_start_message_helper_visual_testing.dart,"Tab/Shift Tab 
-(need to have app title and app bar title read/need to fix an issue with the snackbar dismissal)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate buttons)
-",Tab/Shift Tab + 'Space'/'Enter' key,Tab/Shift Tab + 'Space'/'Enter' key, ,,
 ,,,,,,,
 App,"Tab/Shift Tab + 'Space'/'Enter' key 
 (dialog text not read by the screen reader/no echoing of the error message/title)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
