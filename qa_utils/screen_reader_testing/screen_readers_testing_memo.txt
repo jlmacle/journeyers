@@ -33,16 +33,16 @@ https://www.nvaccess.org/files/nvda/documentation/keyCommands.html
 Testing with Orca:
 orca (terminal): to start Orca
 Tab/Shift Tab
-Orca Modifier + z: start/stop the structural navigation
-Alt + Shift + k: list of links 
-Alt + Shift + h: list of headings
-Alt + Shift + f: list of form fields
-Alt + Shift + b: list of buttons 
-Alt + Shift + m: list of landmarks 
-Alt + Shift + l: list of lists 
-Alt + Shift + i: list of list items 
-https://www.a11yproject.com/posts/getting-started-with-orca/
-https://docs.oracle.com/cd/E53394_01/html/E54806/gliad.html
+Orca Modifier (caps lock or insert) + z: start/stop the structural navigation
+Within the structural navigation:
+    k/Shift + k: list of links 
+    h/Shift + h: list of headings
+    f/Shift + f: list of form fields
+    b/Shift + b: list of buttons 
+    m/Shift + m: list of landmarks 
+    l/Shift + l: list of lists 
+    i/Shift + i: list of list items 
+https://help.gnome.org/orca/index.html
 
 
 Testing with VoiceOver (macOS):
