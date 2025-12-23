@@ -1,0 +1,2 @@
+dd.py runs dart doc and produces the output in the maintenance_utils/doc folder.
+The environment variable JOURNEYERS_DIR, pointing to the project root folder, is necessary.
