@@ -13,7 +13,7 @@ import 'package:file_picker/file_picker.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 
 void main() 
@@ -132,17 +132,17 @@ class _HomePageState extends State<HomePage>
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"Is the checkbox checked? $_isCheckboxChecked", textStyle: feedbackMessageStyle),
+            child: CustomFocusableText(text:"Is the checkbox checked? $_isCheckboxChecked", textStyle: feedbackMessageStyle),
           ),
            Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomText(text:"You typed: ${_textFieldContent ?? ""}", textStyle: feedbackMessageStyle),
+            child: CustomFocusableText(text:"You typed: ${_textFieldContent ?? ""}", textStyle: feedbackMessageStyle),
           ),
           Gap(8),
           ElevatedButton
           (
             onPressed: transferDataToJsonFile,
-            child: CustomText(text: "Click to save the data (json for this demo)",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
+            child: CustomFocusableText(text: "Click to save the data (json for this demo)",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
           ),         
         ]
       ),
