@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
+/// {@category Custom widgets}
+/// A customizable checkbox that displays a customizable text field when a value is selected.
 class CustomCheckBoxWithTextField extends StatefulWidget 
 {
   /// The text of the checkbox 
@@ -88,7 +90,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
       [
         CheckboxListTile
         (
-          title: CustomText(text: widget.checkboxText, textStyle: checkboxTextStyle, textAlignment: widget.checkboxTextAlignment),
+          title: CustomFocusableText(text: widget.checkboxText, textStyle: checkboxTextStyle, textAlignment: widget.checkboxTextAlignment),
           value: _isChecked, 
           controlAffinity: widget.checkboxPosition,
           onChanged: (bool? value)

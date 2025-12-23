@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../app_themes.dart';
 import '../interaction_and_inputs/custom_icon_button.dart';
 
-/// A customizable expansion tile
 
+/// {@category Custom widgets}
+/// A customizable expansion tile that displays a customizable text field when a value is selected.
 class CustomExpansionTile extends StatefulWidget 
 {
   /// The text to display when the tile is not expanded

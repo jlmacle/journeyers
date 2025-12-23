@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
+/// {@category Custom widgets}
+/// A customizable text field with customizable padding.
 class CustomPaddedTextField extends StatefulWidget 
 {
     /// Alignment for the text

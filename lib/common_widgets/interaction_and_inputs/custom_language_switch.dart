@@ -6,16 +6,16 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 typedef ItemSelectedCallback = void Function(String selectedValue);
 
-/// A customizable dropdown menu to select a language
-
-class CustomLanguageSwitcher extends StatefulWidget 
+/// {@category Custom widgets}
+/// A customizable dropdown menu to select a language.
+class CustomLanguageSwitch extends StatefulWidget 
 {
   /// The function to call when selecting a language value
   final ItemSelectedCallback onLanguageChanged;
   /// The horizontal localisation of the dropdown menu
   final MainAxisAlignment languageSwitcherMainAxisAlignemnt;
 
-  const CustomLanguageSwitcher
+  const CustomLanguageSwitch
   ({
     super.key,
     required this.onLanguageChanged, 
@@ -24,10 +24,10 @@ class CustomLanguageSwitcher extends StatefulWidget
   });
 
   @override
-  State<CustomLanguageSwitcher> createState() => _CustomLanguageSwitcherState();
+  State<CustomLanguageSwitch> createState() => _CustomLanguageSwitchState();
 }
 
-class _CustomLanguageSwitcherState extends State<CustomLanguageSwitcher> 
+class _CustomLanguageSwitchState extends State<CustomLanguageSwitch> 
 {
 
   List<String> _dropdownItems = [];

@@ -42,6 +42,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   static void placeHolderFunctionString(String value) {}
   static void placeHolderFunctionSetString(Set<String>? values) {}
 
+  /// {@category Custom widgets}
   const CustomSegmentedButtonWithTextField
   ({
     super.key,
@@ -90,9 +91,10 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
         (
           multiSelectionEnabled: widget.multiSelectionEnabled,
           emptySelectionAllowed: widget.emptySelectionAllowed,
+          
           segments: <ButtonSegment<String>>[
             ButtonSegment<String>(
-              value: widget.textOption1,          
+              value: widget.textOption1,      
               label: Text
               (
                 widget.textOption1,
@@ -102,11 +104,11 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             ButtonSegment<String>
             (
               value: widget.textOption2,
-                label: Text
-                (
-                  widget.textOption2,
-                  style: textStyle,
-                ),
+              label: Text
+              (
+                widget.textOption2,
+                style: textStyle,
+              ),
             ),
             if (widget.textOption3 != "undefined")
               ButtonSegment<String>
@@ -119,7 +121,6 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
                 ),
               ),
           ],
-          selected: _selection,
           onSelectionChanged: (newSelection) 
           {
             setState(() 
@@ -128,6 +129,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             });            
             widget.parentWidgetSegmentedButtonValueCallBackFunction(newSelection);
           },
+          selected: _selection,
         ),        
         if (_selection.isNotEmpty)
           Padding
