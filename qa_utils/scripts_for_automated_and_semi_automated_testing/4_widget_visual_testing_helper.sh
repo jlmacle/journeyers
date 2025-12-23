@@ -10,6 +10,7 @@ xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/cus
 xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d web-server --web-port 8094" &
 xterm -e "cd ./; flutter run -t ./test/common_widgets/interaction_and_inputs/custom_padded_text_field_visual_testing.dart -d web-server --web-port 8095" &
 xterm -e "cd ./; flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d web-server --web-port 8096" &
+xterm -e "cd ./; flutter run -t ./test/common_widgets/display_and_content/custom_focusable_text_visual_testing.dart -d web-server --web-port 8097" &
 # Waiting for the web servers to start
 sleep 70 
 open "http://localhost:8091"
@@ -18,3 +19,4 @@ open "http://localhost:8093"
 open "http://localhost:8094"
 open "http://localhost:8095"
 open "http://localhost:8096"
+open "http://localhost:8097"
