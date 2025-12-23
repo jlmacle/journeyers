@@ -1,14 +1,12 @@
 To display groups and tests labels:
 flutter test -r expanded
 
-Hot restart is valuable for the "flutter run -t" commands.
-
 flutter_run_comments_util.dart:
 By changing the relative path for "filePath", for example:
 String filePath =  r"test\common_widgets\interaction_and_inputs\custom_cascading_checkbox_visual_testing.dart";
 a set of comments, useful during development, can be added to the visual testing file of the relative path.
 
-The widget_visual_testing_helper files need to be run from their parent folder.
+The utils_for_manual_and_semi_automated_testing files need to be run from their parent folder.
 On macOS, _qa_utils_config.json needs to contain the project root directory,
 for example {"projetRoot":"/Users/dev/Desktop/journeyers"}
 Please note that Chrome must be started to have more than one tab launched, when testing on Windows.
@@ -16,3 +14,5 @@ Your anti-virus might not appreciate the multiple tabs opening.
 
 An Xcode configuration update was needed to add read-write permission for user selected files.
 (Screen copy added)
+To use the iOS simulator, having the github website opened (while logged in) might have been of help 
+to fix the "Failed to connect to github.com port 443 after 27847 ms: Couldn't connect to server" issue.
