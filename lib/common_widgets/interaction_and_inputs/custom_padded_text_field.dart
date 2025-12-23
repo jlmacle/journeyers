@@ -68,13 +68,13 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   { 
     if (value.contains('"')) 
     {
-      // TODO: to remove the different versions of double quotesQuotes
+      // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
       value = value.replaceAll('"', '');     
       setState(() {  
         // Removes the quotes from the text field
         textFieldEditingController.text = value;
         // Updates the error message
-        _errorMessageForDoubleQuotes = 'Double quotes are reserved for CSV-related use, and are for this reason removed from the text typed. With apologies.';         
+        _errorMessageForDoubleQuotes = 'Straight double quotes are reserved for CSV-related use, and are for this reason removed from the text typed. With apologies.';         
         // "The assertiveness level of the announcement is determined by assertiveness. 
         // Currently, this is only supported by the web engine and has no effect on other platforms. 
         // The default mode is Assertiveness.polite."
