@@ -128,3 +128,5 @@ app.*.symbols
 qa_utils/utils_semi_automated_testing/_qa_utils_config.json
 .DS_Store
 
+# Work on a documentation folder
+maintenance_utils/doc/
