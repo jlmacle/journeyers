@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_text.dart';
+import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
 
+/// {@category Custom widgets}
+/// A customizable heading (level 1 to 6).
 class CustomHeading extends StatelessWidget 
 {
   /// The title of the heading
@@ -41,6 +43,6 @@ class CustomHeading extends StatelessWidget
         headingStyle = appTheme.textTheme.titleSmall!;
     }
 
-    return CustomText(text: headingTitle, textStyle: headingStyle);
+    return CustomFocusableText(text: headingTitle, textStyle: headingStyle);
   }
 }
