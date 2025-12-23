@@ -28,6 +28,7 @@ Content display,,,,,,,,,,
 custom_focusable_text_visual_testing.dart,,,"Tab/Shift Tab
 
 (app title and app bar title not voiced)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (app bar title announced as clickable)",Caps Lock + Right Arrow/Left arrow,"Enable accessibility 
@@ -40,12 +41,15 @@ and without)","Tab/Shift Tab
 
 (tested with the Semantics/Focus code
 and without)","Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab"
 custom_heading_visual_testing.dart,,,"Tab/Shift Tab 
 
 (app title and app bar title not voiced/
 heading level not voiced)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (app bar title and headings announced as clickable)","Caps Lock + Right Arrow/Left arrow
@@ -55,7 +59,9 @@ Tab/Shift Tab
 
 Caps Lock + Right Arrow/Left arrow
 ",Tab/Shift Tab,Tab/Shift Tab,"Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab"
 ,,,,,,,,,,
 Interaction and inputs,,,,,,,,,,
@@ -65,6 +71,7 @@ custom_checkbox_list_tile_with_text_field_visual_testing.dart,,,"Tab/Shift Tab +
 box checked not voiced/
 no echoing of the error message/
 button text not voiced)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate the checkbox)
@@ -80,9 +87,11 @@ A long push on the space bar seems necessary to open the file saving dialog.","T
 (no echoing of the error message)","Tab/Shift Tab + 'Space'/'Enter' key 
 
 (no echoing of the error message)","Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
@@ -90,6 +99,7 @@ custom_expansion_tile_visual_testing.dart,,,"Tab/Shift Tab
 
 (app title and app bar title not voiced/
 icon buttons tooltip labels not voiced)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (additional text not read on tab navigation, additional text findable with the down arrow/app bar title and additional text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate/deactivate the expansion)
@@ -105,15 +115,19 @@ Tab/Shift Tab
 No issue noticed.","Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed","Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 (expansion tile doesn't expand when using 'Enter'/'Space' key)","Enable accessibility
+(tab from address bar)
+
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
 custom_language_switch_visual_testing.dart,,,"Tab/Shift Tab + 'Space'/'Enter' key
 
 (app title and app bar title not voiced)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (app bar title announced as clickable)","(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate switch) + 
@@ -128,9 +142,11 @@ Didn't have to use (Caps Lock + Shift + Down Arrow)","Tab/Shift Tab + 'Space'/'E
 No issue noticed, beyond specifity of screen reader functionning","Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed","Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
@@ -138,6 +154,7 @@ custom_padded_text_field_visual_testing.dart,,,"Tab/Shift Tab
 
 (app title and app bar title not voiced/
 no echoing of the error message)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (app bar title announced as clickable)","(Caps Lock + Right Arrow/Left arrow)
@@ -152,9 +169,11 @@ Tab/Shift Tab
 (no echoing of the error message)","Tab/Shift Tab
 
 (no echoing of the error message)","Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed.","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
@@ -163,6 +182,7 @@ custom_segmented_button_with_text_field_visual_testing.dart,,,"Tab/Shift Tab + '
 (app title and app bar title not voiced/
 value selected not voiced/
 no echoing of the error message)","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab
 
 (app bar title and informational text announced as clickable)","(Caps Lock + Right Arrow/Left arrow) 
@@ -181,9 +201,11 @@ No issue noticed","Tab/Shift Tab + 'Space'/'Enter' key
 
 (value selected not voiced/
 no echoing of the error message)","Enable accessibility
+(seems automatically voiced)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed","Enable accessibility
+(tab from address bar)
 Tab/Shift Tab + 'Space'/'Enter' key
 
 No issue noticed"
