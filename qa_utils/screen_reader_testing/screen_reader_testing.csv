@@ -25,13 +25,16 @@ no echoing of the error message) ",X,X
 Testing widgets,,,,,,,,,,
 ,,,,,,,,,,
 Content display,,,,,,,,,,
-custom_focusable_text_visual_testing.dart,,,,,,,"Tab/Shift Tab
+custom_focusable_text_visual_testing.dart,,,Tab/Shift Tab,"Enable accessibility
+Tab/Shift Tab",,,"Tab/Shift Tab
 
 (tested with the Semantics/Focus code
 and without)","Tab/Shift Tab
 
 (tested with the Semantics/Focus code
-and without)",Tab/Shift Tab,Tab/Shift Tab
+and without)","Enable accessibility
+Tab/Shift Tab","Enable accessibility
+Tab/Shift Tab"
 custom_heading_visual_testing.dart,,,"Tab/Shift Tab 
 
 (app title and app bar title not voiced/
