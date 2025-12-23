@@ -1,7 +1,0 @@
-dartdoc:
-  categories:
-    "Custom widgets":
-      markdown: doc/custom_widgets.md
-    "Utils":
-      markdown: doc/utils.md
-  categoryOrder: ["Custom widgets", "Utils"]
