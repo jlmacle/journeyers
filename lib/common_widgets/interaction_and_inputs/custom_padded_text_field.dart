@@ -6,29 +6,30 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 /// A customizable text field with customizable padding.
 class CustomPaddedTextField extends StatefulWidget 
 {
-    /// Alignment for the text
+    /// The alignment of the text.
     final TextAlign textAlignment;
-    /// The hint text for the text field
+    /// The hint text for the text field.
     final String textFieldHintText;
-    /// The minLines value for the text field
+    /// The minLines value for the text field.
     final int textFieldMinLines;
-    /// The maxLines value for the text field
+    /// The maxLines value for the text field.
     final int textFieldMaxLines;
-    /// The maxLength for the text field
+    /// The maxLength value for the text field.
     final int textFieldMaxLength; 
-    /// The counter for the text field
+    /// The counter for the text field.
     final InputCounterWidgetBuilder textFieldCounter;
     /// The callback function called when the text field value has changed.
     final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
-    /// The left padding for the text field
-    final double leftPadding;
-    /// The right padding for the text field
-    final double rightPadding;
-    /// The top padding for the text field
-    final double topPadding;
-    /// The bottom padding for the text field
-    final double bottomPadding;   
-
+    /// The left padding for the text field.
+    final double paddingLeft;
+    /// The right padding for the text field.
+    final double paddingRight;
+    /// The top padding for the text field.
+    final double paddingTop;
+    /// The bottom padding for the text field.
+    final double paddingBottom;   
+    
+    /// A placeholder void callback function with a String parameter.
     static void placeHolderFunction(String value) {}
 
     const CustomPaddedTextField
@@ -41,10 +42,10 @@ class CustomPaddedTextField extends StatefulWidget
         this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
         this.textFieldCounter = presentCounter,
         this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
-        this.leftPadding = 20,
-        this.rightPadding = 20,
-        this.topPadding = 10,
-        this.bottomPadding = 10
+        this.paddingLeft = 20,
+        this.paddingRight = 20,
+        this.paddingTop = 10,
+        this.paddingBottom = 10
     });
 
     @override
@@ -104,7 +105,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   {
     return Padding
     (
-        padding: EdgeInsets.only(left: widget.leftPadding, right: widget.rightPadding, bottom: widget.bottomPadding, top: widget.topPadding),
+        padding: EdgeInsets.only(left: widget.paddingLeft, right: widget.paddingRight, bottom: widget.paddingBottom, top: widget.paddingTop),
         child: TextField
         (
           textAlign: widget.textAlignment,
