@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
-
 String contextAnalysesData = "contextAnalysesData";
 String contextGroupProblemSolvingData = "contextGroupProblemSolvingData";
 String recordsKey = 'records';
@@ -13,7 +12,9 @@ String titleKey = 'title';
 String dateKey = 'date';
 String filePathKey = 'filePath';
 
-/// Method used to retrieve session data
+/// Method used to retrieve partial session data. 
+/// In the case of the context analyses, the partial data retrived has the format:
+/// {"records":[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}]} 
 Future<File> getSessionFile(String typeOfContextData) async {
   final directory = await getApplicationSupportDirectory();
   final path = directory.path;
