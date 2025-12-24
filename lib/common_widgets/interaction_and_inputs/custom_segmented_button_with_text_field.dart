@@ -3,7 +3,7 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_t
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
 /// {@category Custom widgets}
-/// A customizable segemented button that displays a customizable text field when a value is selected.
+/// A customizable segmented button that displays a customizable text field when a value is selected.
 class CustomSegmentedButtonWithTextField extends StatefulWidget 
 {
   /// The first option of the segmented button 
