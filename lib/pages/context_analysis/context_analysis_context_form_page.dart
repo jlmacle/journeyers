@@ -26,6 +26,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 {
   // Utility classes
   CSVUtils csvUtils = CSVUtils();
+  DashboardUtils dashboardUtils = DashboardUtils();
 
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
@@ -249,7 +250,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     String? filePath = await csvUtils.printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
     printd("filePath:$filePath");
     // Saving the dashboard data if filePath not null
-    if (filePath != null) dashboardDataSaving(contextAnalysesData, _analysisTitle, filePath);
+    if (filePath != null) dashboardUtils.saveDashboardData(DashboardUtils.dataContextAnalyses, _analysisTitle, filePath);
 
   }
 
