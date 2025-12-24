@@ -9,7 +9,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
 {
   /// The text of the checkbox. 
   final String checkboxText;
-  // The font size of the text.
+  /// The font size of the text.
   final double checkboxTextFontSize;
   /// The color of the text.
   final Color checkboxTextColor;  
