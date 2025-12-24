@@ -39,8 +39,8 @@ class CustomPaddedTextField extends StatefulWidget
         required this.textFieldHintText,
         this.textFieldMinLines = 1,
         this.textFieldMaxLines = 10,  
-        this.textFieldMaxLength = chars10Lines,// 10 lines as a reference
-        this.textFieldCounter = presentCounter,
+        this.textFieldMaxLength = FormUtils.chars10Lines,// 10 lines as a reference
+        this.textFieldCounter = FormUtils.presentCounter,
         this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
         this.paddingLeft = 20,
         this.paddingRight = 20,

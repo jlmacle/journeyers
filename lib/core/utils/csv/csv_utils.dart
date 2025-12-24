@@ -18,6 +18,8 @@ class CSVUtils
   /// Straight double quotes used to encapsulate the content of answered questions.
   String quotesForCSV = '"';
 
+  // Utility class
+  FormUtils fu = FormUtils();
 
   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -25,26 +27,26 @@ class CSVUtils
   = {
     //** Individual perspective **/
     // balance issue
-    level3TitleBalanceIssueItem1:checkbox, level3TitleBalanceIssueItem2:checkbox,
-    level3TitleBalanceIssueItem3:checkbox, level3TitleBalanceIssueItem4:checkbox,
+    level3TitleBalanceIssueItem1:FormUtils.checkbox, level3TitleBalanceIssueItem2:FormUtils.checkbox,
+    level3TitleBalanceIssueItem3:FormUtils.checkbox, level3TitleBalanceIssueItem4:FormUtils.checkbox,
     // workplace issue
-    level3TitleWorkplaceIssueItem1:checkbox, level3TitleWorkplaceIssueItem2:checkbox,
+    level3TitleWorkplaceIssueItem1:FormUtils.checkbox, level3TitleWorkplaceIssueItem2:FormUtils.checkbox,
     // legacy issue
-    level3TitleLegacyIssueItem1:checkbox,
+    level3TitleLegacyIssueItem1:FormUtils.checkbox,
     // another type
-    level3TitleAnotherIssue:textField,
+    level3TitleAnotherIssue:FormUtils.textField,
 
     //** Group/team perspective **/
     // group problematics
-    level3TitleGroupsProblematics:textField,
+    level3TitleGroupsProblematics:FormUtils.textField,
     // same problem?
-    level3TitleSameProblem:segmentedButton,
+    level3TitleSameProblem:FormUtils.segmentedButton,
     // harmony at home
-    level3TitleHarmonyAtHome:segmentedButton,
+    level3TitleHarmonyAtHome:FormUtils.segmentedButton,
     // appreciability at work
-    level3TitleAppreciabilityAtWork:segmentedButton,
+    level3TitleAppreciabilityAtWork:FormUtils.segmentedButton,
     // earning ability
-    level3TitleIncomeEarningAbility:segmentedButton
+    level3TitleIncomeEarningAbility:FormUtils.segmentedButton
   };
 
   //************** Sets of the level 2, level 3 titles, and related sets *************//
@@ -90,10 +92,10 @@ class CSVUtils
     List<dynamic> checkboxPreCSVData = []; 
 
     // checkbox data converted from bool to String: values can be "true" or "false"
-    var dataCheckbox = "${checkBoxWithTextFieldtextData[checkbox]}";
-    var data1 = [checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
+    var dataCheckbox = "${checkBoxWithTextFieldtextData[FormUtils.checkbox]}";
+    var data1 = [FormUtils.checkbox,dataCheckbox]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    var dataTextField = checkBoxWithTextFieldtextData[textField] ?? "";
+    var dataTextField = checkBoxWithTextFieldtextData[FormUtils.textField] ?? "";
     var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; // label in front of the text field data
 
     checkboxPreCSVData.add(data1);
@@ -109,10 +111,10 @@ class CSVUtils
   {
     List<dynamic> segmentedButtonPreCSVData = []; 
 
-    var dataSegmentedButton = segmentedButtonWithTextFieldData[segmentedButton] ?? "";
-    var data1 = [segmentedButton,dataSegmentedButton]; 
+    var dataSegmentedButton = segmentedButtonWithTextFieldData[FormUtils.segmentedButton] ?? "";
+    var data1 = [FormUtils.segmentedButton,dataSegmentedButton]; 
 
-    var dataTextField = segmentedButtonWithTextFieldData[textField] ?? "";
+    var dataTextField = segmentedButtonWithTextFieldData[FormUtils.textField] ?? "";
     var data2 = [notes,quotesForCSV+dataTextField+quotesForCSV]; 
 
     segmentedButtonPreCSVData.add(data1);
@@ -128,7 +130,7 @@ class CSVUtils
   {
     List<dynamic> textFieldPreCSVData = []; 
 
-    var dataTextField = textFieldData[textField] ?? "";
+    var dataTextField = textFieldData[FormUtils.textField] ?? "";
     var data = [notes,quotesForCSV+dataTextField+quotesForCSV]; 
 
     textFieldPreCSVData.add(data);
@@ -153,7 +155,7 @@ class CSVUtils
     /// Method adding to the pre-CSV data according to input type.
     treatmentAccordingToInputType(List<dynamic> preCSVData, String itemOrTitleLabel, LinkedHashMap<String,dynamic> titleLevel2Or3DataAsLinkedHashMap)
     {
-      if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox)
+      if (mappingLabelsToInputItems[itemOrTitleLabel] == FormUtils.checkbox)
           {
             // checkBoxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
             var checkboxPreCSVData = checkBoxWithTextFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);
@@ -161,14 +163,14 @@ class CSVUtils
             preCSVData.add(checkboxPreCSVData[1]);
           }
           // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
-          else if (mappingLabelsToInputItems[itemOrTitleLabel] == segmentedButton)
+          else if (mappingLabelsToInputItems[itemOrTitleLabel] == FormUtils.segmentedButton)
           {
             var segmentedButtonPreCSVData = segmentedButtonWithTextFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);
             preCSVData.add(segmentedButtonPreCSVData[0]);
             preCSVData.add(segmentedButtonPreCSVData[1]);
           }
           // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
-          else if (mappingLabelsToInputItems[itemOrTitleLabel] == textField)
+          else if (mappingLabelsToInputItems[itemOrTitleLabel] == FormUtils.textField)
           {
             var textFieldpreCSVData = textFieldDataToPreCSV(titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel]);          
             preCSVData.add(textFieldpreCSVData[0]);
@@ -236,7 +238,7 @@ class CSVUtils
   /// Eventual removal of all empty notes if not related to a checked checkbox, or an answered segmented button.
   /// 
   /// Removal of "segmentedButton" from the data written.
-  /// "textfield was replaced with "Notes" during the pre-CSV processing.
+  /// "textField was replaced with "Notes" during the pre-CSV processing.
   /// 
   /// Addition of a ["",""] before all level 3 titles.
   List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
@@ -252,7 +254,7 @@ class CSVUtils
       // Removal of all ["Notes:",]  if related to an unchecked checkbox
       if 
       ( 
-        (indexedData[0].contains(checkbox)) && 
+        (indexedData[0].contains(FormUtils.checkbox)) && 
         (indexData_1AsString.trim() == "false") 
       )  
       {
@@ -282,7 +284,7 @@ class CSVUtils
     {  
       var indexedData = preCSVData[index];  
       var indexData_1AsString = indexedData[1] as String;
-      if ( (indexedData[0].contains(checkbox)) && (indexData_1AsString.trim() == "true")) 
+      if ( (indexedData[0].contains(FormUtils.checkbox)) && (indexData_1AsString.trim() == "true")) 
       {
         // Adding X in front of the question
         // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
@@ -318,7 +320,7 @@ class CSVUtils
     for (var index = 0 ; index < preCSVData.length; index++)
     {  
       var indexedData = preCSVData[index];  
-      if (indexedData[0].contains(checkbox)){preCSVData.removeAt(index);}
+      if (indexedData[0].contains(FormUtils.checkbox)){preCSVData.removeAt(index);}
     }
 
 
@@ -331,7 +333,7 @@ class CSVUtils
       var indexedData = preCSVData[index]; 
       var indexData_1AsString = indexedData[1] as String;
 
-      if ( indexedData[0].contains(segmentedButton) ) 
+      if ( indexedData[0].contains(FormUtils.segmentedButton) ) 
       {      
         if (indexData_1AsString.trim() != "")
         {
@@ -356,7 +358,7 @@ class CSVUtils
       // segmentedButton has already been removed from the answered segmented buttons
       // and replaced with ""
       // Removing all remaining preCSVData lines with segmentedButton
-      if (indexedData[0].contains(segmentedButton))
+      if (indexedData[0].contains(FormUtils.segmentedButton))
       {
         preCSVData.removeAt(index);
         // The index now points to the following note

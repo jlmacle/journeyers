@@ -62,8 +62,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
-    this.textFieldMaxLength = chars1Page, // a page as a reference
-    this.textFieldCounter = absentCounter,
+    this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
+    this.textFieldCounter = FormUtils.absentCounter,
     this.customWidgetsCrossAxisAlignment = CrossAxisAlignment.start,
     this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.parentWidgetSegmentedButtonValueCallBackFunction = placeHolderFunctionSetString     
