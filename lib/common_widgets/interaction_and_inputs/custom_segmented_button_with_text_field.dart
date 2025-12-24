@@ -36,9 +36,9 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final InputCounterWidgetBuilder buildCounter;
   /// The cross axis alignment for the segmented button, and the text field
   final CrossAxisAlignment inputsCrossAxisAlignment;
-  /// A callback function for the parent widget
+  /// The callback function for the parent widget
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
-  /// A callback function for the parent widget
+  /// The callback function for the parent widget
   final ValueChanged<Set<String>> parentWidgetSegmentedButtonValueCallBackFunction;
 
   static void placeHolderFunctionString(String value) {}

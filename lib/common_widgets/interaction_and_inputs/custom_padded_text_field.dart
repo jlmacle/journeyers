@@ -18,7 +18,7 @@ class CustomPaddedTextField extends StatefulWidget
     final int textFieldMaxLength; 
     /// The counter for the text field
     final InputCounterWidgetBuilder textFieldCounter;
-    /// A callback function for the parent widget
+    /// The callback function called when the text field value has changed.
     final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
     /// The left padding for the text field
     final double leftPadding;

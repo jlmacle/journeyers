@@ -33,9 +33,9 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final int textFieldMaxLength; 
   /// The counter for the text field.
   final InputCounterWidgetBuilder textFieldCounter;
-  /// A text field-related callback function for the parent widget.
+  /// The text field-related callback function for the parent widget.
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
-  /// A checkbox-related callback function for the parent widget.
+  /// The checkbox-related callback function for the parent widget.
   final ValueChanged<bool?> ?parentWidgetCheckboxValueCallBackFunction;
 
   /// A placeholder void callback function with a String parameter

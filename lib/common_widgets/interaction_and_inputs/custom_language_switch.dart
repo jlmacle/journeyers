@@ -3,24 +3,21 @@ import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
-
-typedef ItemSelectedCallback = void Function(String selectedValue);
-
 /// {@category Custom widgets}
 /// A customizable dropdown menu to select a language.
 class CustomLanguageSwitch extends StatefulWidget 
 {
-  /// The function to call when selecting a language value
-  final ItemSelectedCallback onLanguageChanged;
-  /// The horizontal localisation of the dropdown menu
-  final MainAxisAlignment languageSwitcherMainAxisAlignemnt;
+  /// The callback function called when a language value is selected.
+  final ValueChanged<String> parentWidgetLanguageValueCallBackFunction;
+  /// The horizontal location of the dropdown menu.
+  final MainAxisAlignment languageSwitchMainAxisAlignemnt;
 
   const CustomLanguageSwitch
   ({
     super.key,
-    required this.onLanguageChanged, 
+    required this.parentWidgetLanguageValueCallBackFunction, 
     // By default, the language menu is on the right side of the screen 
-    this.languageSwitcherMainAxisAlignemnt = MainAxisAlignment.end,
+    this.languageSwitchMainAxisAlignemnt = MainAxisAlignment.end,
   });
 
   @override
@@ -48,7 +45,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
 
     return Row
     (
-      mainAxisAlignment: widget.languageSwitcherMainAxisAlignemnt,
+      mainAxisAlignment: widget.languageSwitchMainAxisAlignemnt,
       children: 
       [
         const Icon(Icons.language),
@@ -67,7 +64,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
             }).toList(),
             onChanged: (String? newValue) {
               if (newValue != null) {              
-                widget.onLanguageChanged(newValue); 
+                widget.parentWidgetLanguageValueCallBackFunction(newValue); 
               }
             }
           )
