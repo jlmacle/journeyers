@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class CustomFocusableText extends StatelessWidget {
   /// The text to display.
   final String text;
-  /// The text style.
+  /// The style of the text.
   final TextStyle textStyle;
-  /// The text alignment.
+  /// The alignment of the text.
   final TextAlign textAlignment;
 
   const CustomFocusableText
