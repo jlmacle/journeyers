@@ -7,38 +7,40 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 /// A customizable checkbox that displays a customizable text field when the box is checked.
 class CustomCheckBoxWithTextField extends StatefulWidget 
 {
-  /// The text of the checkbox 
+  /// The text of the checkbox. 
   final String checkboxText;
-  // The font size for the text 
+  // The font size of the text.
   final double checkboxTextFontSize;
-  /// The color of the text
+  /// The color of the text.
   final Color checkboxTextColor;  
-  /// The alignment for the text
+  /// The alignment of the text.
   final TextAlign checkboxTextAlignment;
-  /// If the checkbox is checked to start with
-  final bool isChecked;  
-  /// Where the checkbox is located
+  /// If the checkbox is checked to start with.
+  final bool checkboxIsChecked;  
+  /// Where the checkbox is located.
   final ListTileControlAffinity checkboxPosition;
-  /// The hint text for the text field
+  /// The hint text for the text field.
   final String textFieldHintText;
-  /// The left and right padding value for the text field
-  final double textFieldHorizontalPadding;
-  /// The bottom padding value for the text field
-  final double textFieldBottomPadding;
-  /// The minLines value for the text field 
+  /// The left and right padding value for the text field.
+  final double textFieldPaddingHorizontal;
+  /// The bottom padding value for the text field.
+  final double textFieldPaddingBottom;
+  /// The minLines value for the text field. 
   final int textFieldMinLines;
-  /// The maxLines value for the text field 
+  /// The maxLines value for the text field. 
   final int textFieldMaxLines;
-  /// The maxLength for the text field
+  /// The maxLength value for the text field.
   final int textFieldMaxLength; 
-  /// The counter for the text field
+  /// The counter for the text field.
   final InputCounterWidgetBuilder textFieldCounter;
-  /// A text field-related callback function for the parent widget
+  /// A text field-related callback function for the parent widget.
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
-  /// A checkbox-related callback function for the parent widget
+  /// A checkbox-related callback function for the parent widget.
   final ValueChanged<bool?> ?parentWidgetCheckboxValueCallBackFunction;
 
+  /// A placeholder void callback function with a String parameter
   static void placeHolderFunctionString(String value) {}
+  /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool? value) {}
 
   const CustomCheckBoxWithTextField
@@ -49,10 +51,10 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.checkboxTextColor = Colors.black,
     this.checkboxTextAlignment = TextAlign.left, 
     this.checkboxPosition = ListTileControlAffinity.leading,
-    this.isChecked = false,
+    this.checkboxIsChecked = false,
     required this.textFieldHintText,
-    this.textFieldHorizontalPadding = 20.0,
-    this.textFieldBottomPadding = 10.0,
+    this.textFieldPaddingHorizontal = 20.0,
+    this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,    
     this.textFieldMaxLength = chars1Page, // a page as a reference
