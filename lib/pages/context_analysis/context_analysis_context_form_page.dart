@@ -24,6 +24,8 @@ class ContextAnalysisContextFormPage extends StatefulWidget {
 
 class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
 {
+  // Utility classes
+  CSVUtils csvUtils = CSVUtils();
 
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
@@ -231,8 +233,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       dataStructureBuild();
     });
     // Transforming the data into a CSV-friendly form
-    var preCSVDataIndividualPerspective = dataToPreCSV(_enteredData[0]);
-    var preCSVDataTeamPerspective = dataToPreCSV(_enteredData[1]);
+    var preCSVDataIndividualPerspective = csvUtils.dataToPreCSV(_enteredData[0]);
+    var preCSVDataTeamPerspective = csvUtils.dataToPreCSV(_enteredData[1]);
 
     printd("preCSVDataIndividualPerspective");
     printd("$preCSVDataIndividualPerspective");
@@ -241,10 +243,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     printd("$preCSVDataTeamPerspective");
     printd("");
 
-    List<dynamic> csvDataIndividualPerspective = preCSVToCSVData(preCSVDataIndividualPerspective);
-    List<dynamic> csvDataTeamPerspective = preCSVToCSVData(preCSVDataTeamPerspective);
+    List<dynamic> csvDataIndividualPerspective = csvUtils.preCSVToCSVData(preCSVDataIndividualPerspective);
+    List<dynamic> csvDataTeamPerspective = csvUtils.preCSVToCSVData(preCSVDataTeamPerspective);
     // Printing to CSV
-    String? filePath = await printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
+    String? filePath = await csvUtils.printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
     printd("filePath:$filePath");
     // Saving the dashboard data if filePath not null
     if (filePath != null) dashboardDataSaving(contextAnalysesData, _analysisTitle, filePath);
@@ -271,7 +273,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       child:
       SingleChildScrollView
       (
-        controller: scrollController,
+        controller: scrollController,        
         child: Column
         (
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -429,7 +431,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16, 
-              textFieldPlaceholder: pleaseDevelopOrTakeNotes,
+              textFieldHintText: pleaseDevelopOrTakeNotes,
               parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
               parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
             ),
@@ -453,7 +455,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,         
-              textFieldPlaceholder: pleaseDevelopOrTakeNotes,
+              textFieldHintText: pleaseDevelopOrTakeNotes,
               parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
               parentWidgetTextFieldValueCallBackFunction:  _setHarmonyHomeTextFieldState,
             ),
@@ -476,7 +478,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,      
-              textFieldPlaceholder: pleaseDevelopOrTakeNotes,
+              textFieldHintText: pleaseDevelopOrTakeNotes,
               parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
               parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
             ),
@@ -498,7 +500,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,        
-              textFieldPlaceholder: pleaseDevelopOrTakeNotes,
+              textFieldHintText: pleaseDevelopOrTakeNotes,
               parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
               parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
             ),
