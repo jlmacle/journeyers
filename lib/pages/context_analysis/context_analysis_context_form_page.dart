@@ -216,7 +216,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data,level3TitleAppreciabilityAtWork:level3TitleAppreciabilityAtWorkItem1Data,
       level3TitleIncomeEarningAbility:level3TitleIncomeEarningAbilityItem1Data}});
      
-    // Adding individual and group perspective to root level data
+    // Adding individual and team perspective to root level data
     _enteredData = [level2TitleIndividualData, level2TitleTeamData];
 
     printd("");
@@ -393,7 +393,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Divider(thickness: betweenLevel2DividerThickness),
             Gap(preAndPostLevel2DividerGap),
 
-            /**** Beginning of the group-related analysis ****/
+            /**** Beginning of the team-related analysis ****/
             Center
             (
               child:CustomHeading
