@@ -422,24 +422,7 @@ class CSVUtils
     return preCSVData;
   }
 
-  //*************** Printing and debugging methods ***************//
-
-
-  /// Method used to test the writing of the individual perspective data, or the team perspective data, to CSV.
-  void testPrintPreCSVData(List<dynamic> data) async
-  {
-    File file = File("./testPrintToCSV.csv");
-    var sink = file.openWrite(mode: FileMode.write); 
-
-    for (var item in data)
-    {
-      var data = "${item[0]},${item[1]}";
-      sink.write("$data\n");
-    }
-    
-    await sink.flush();
-    await sink.close();
-  }
+  //*************** Printing methods ***************//
 
   /// Method used to print the individual perspective CSV data, or the team perspective CSV data, to a file.
   /// Returns the file name.
