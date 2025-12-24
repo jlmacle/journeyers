@@ -6,13 +6,13 @@ import 'package:journeyers/common_widgets/display_and_content/custom_focusable_t
 /// A customizable heading (level 1 to 6).
 class CustomHeading extends StatelessWidget 
 {
-  /// The title of the heading
+  /// The title of the heading.
   final String headingTitle;  
-  /// The level of the heading
+  /// The level of the heading.
   final int headingLevel;   
-  /// The style of the heading
+  /// The style of the heading.
   late final TextStyle headingStyle;
-  /// The alignment of the heading
+  /// The alignment of the heading.
   final TextAlign headingAlignment;
 
   CustomHeading

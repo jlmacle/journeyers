@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 /// {@category Custom widgets}
-/// A customizable focusable text
+/// A customizable focusable text.
 class CustomFocusableText extends StatelessWidget {
-  /// The text to display
+  /// The text to display.
   final String text;
-  /// The text style
+  /// The text style.
   final TextStyle textStyle;
-  /// The text alignment
+  /// The text alignment.
   final TextAlign textAlignment;
 
   const CustomFocusableText

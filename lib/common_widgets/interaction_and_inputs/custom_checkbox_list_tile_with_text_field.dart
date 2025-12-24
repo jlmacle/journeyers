@@ -4,7 +4,7 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_t
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
 /// {@category Custom widgets}
-/// A customizable checkbox that displays a customizable text field when a value is selected.
+/// A customizable checkbox that displays a customizable text field when the box is checked.
 class CustomCheckBoxWithTextField extends StatefulWidget 
 {
   /// The text of the checkbox 
