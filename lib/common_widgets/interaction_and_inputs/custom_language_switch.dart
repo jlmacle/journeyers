@@ -10,14 +10,14 @@ class CustomLanguageSwitch extends StatefulWidget
   /// The callback function called when a language value is selected.
   final ValueChanged<String> parentWidgetLanguageValueCallBackFunction;
   /// The horizontal location of the dropdown menu.
-  final MainAxisAlignment languageSwitchMainAxisAlignemnt;
+  final MainAxisAlignment languageSwitchMainAxisAlignment;
 
   const CustomLanguageSwitch
   ({
     super.key,
     required this.parentWidgetLanguageValueCallBackFunction, 
     // By default, the language menu is on the right side of the screen 
-    this.languageSwitchMainAxisAlignemnt = MainAxisAlignment.end,
+    this.languageSwitchMainAxisAlignment = MainAxisAlignment.end,
   });
 
   @override
@@ -45,7 +45,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
 
     return Row
     (
-      mainAxisAlignment: widget.languageSwitchMainAxisAlignemnt,
+      mainAxisAlignment: widget.languageSwitchMainAxisAlignment,
       children: 
       [
         const Icon(Icons.language),
