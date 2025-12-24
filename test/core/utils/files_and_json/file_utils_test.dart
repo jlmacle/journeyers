@@ -6,7 +6,7 @@ import "dart:io";
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-import 'package:journeyers/core/utils/files_and_json/file_utils.dart';
+import 'package:journeyers/core/utils/files/file_utils.dart';
 
 void main()
 {
