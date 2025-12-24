@@ -84,7 +84,7 @@ class CSVUtils
 
   /// Method extracting information from {checkbox: false/true, textField: "data"/null}
   /// and returning \[\[checkbox,"false"/"true"\],\[Notes:,"data"/""\]\].
-  /// Straight double quotes are refused and removed at text field input level.
+  /// Straight double quotes are refused during text field input and removed.
   List<dynamic> checkBoxWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> checkBoxWithTextFieldtextData)
   {
 
@@ -104,7 +104,8 @@ class CSVUtils
   }
 
   /// Method extracting information from {segmentedButton: "Yes"/"No"/"I don't know"/null , textField: "data"/null}
-  /// and returning \[\[segmentedButton,"Yes"/"No"/"I don't know"/""\],\[Notes:,"data"/""\]\]
+  /// and returning \[\[segmentedButton,"Yes"/"No"/"I don't know"/""\],\[Notes:,"data"/""\]\].
+  /// Straight double quotes are refused during text field input and removed.
   List<dynamic> segmentedButtonWithTextFieldDataToPreCSV(LinkedHashMap<String, dynamic> segmentedButtonWithTextFieldData)
   {
     List<dynamic> segmentedButtonPreCSVData = []; 
@@ -122,7 +123,8 @@ class CSVUtils
   }
 
   /// Method extracting information from {textField: "data"/null}
-  /// and returning \[\[Notes:,"data"/""\]\]
+  /// and returning \[\[Notes:,"data"/""\]\].
+  /// Straight double quotes are refused during text field input and removed.
   List<dynamic> textFieldDataToPreCSV(LinkedHashMap<String, dynamic> textFieldData)
   {
     List<dynamic> textFieldPreCSVData = []; 
@@ -142,14 +144,14 @@ class CSVUtils
   //***************** Method building a list of pair of data for the later saving to CSV ***********************//
 
 
-  /// Method processing the form data, and returning a list of pair of data, for the saving to CSV .
-  /// The data should be either the individual perspective data, or the group perspective data.
-  /// The individual perspective data and the group perspective data are planned to be written side by side in the CSV file.
+  /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
+  /// The data should be either the individual perspective data, or the team perspective data.
+  /// The individual perspective data and the team perspective data are planned to be written side by side in the CSV file.
   List<dynamic> dataToPreCSV(LinkedHashMap<String,dynamic> perspectiveData)
   {
     List<dynamic> preCSVData = [];
 
-    /// Method adding to the pre CSV data according to input type
+    /// Method adding to the pre-CSV data according to input type.
     treatmentAccordingToInputType(List<dynamic> preCSVData, String itemOrTitleLabel, LinkedHashMap<String,dynamic> titleLevel2Or3DataAsLinkedHashMap)
     {
       if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox)
@@ -225,18 +227,19 @@ class CSVUtils
     return preCSVData;
   }
 
-  /// Method to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file)
+  /// Method to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file).
+  /// 
   /// Xs in front of the questions with a checked checkbox, 
-  /// and for their title level 3 parent if existant
+  /// and for their title level 3 parent if existant.
   /// 
-  /// Eventual removal of all checkboxes lines
-  /// Eventual removal of all unanswered segmented buttons
-  /// Eventual removal of all empty notes if not related to a checked checkbox, or an answered segmented button
+  /// Eventual removal of all checkboxes lines.
+  /// Eventual removal of all unanswered segmented buttons.
+  /// Eventual removal of all empty notes if not related to a checked checkbox, or an answered segmented button.
   /// 
-  /// Removal of "segmentedButton" from the data written
-  /// "textfield was replaced with "Notes" during the pre-CSV processing
+  /// Removal of "segmentedButton" from the data written.
+  /// "textfield was replaced with "Notes" during the pre-CSV processing.
   /// 
-  /// Addition of a ["",""] before all level 3 titles
+  /// Addition of a ["",""] before all level 3 titles.
   List<dynamic> preCSVToCSVData(List<dynamic> preCSVData)
   {
 
@@ -421,7 +424,8 @@ class CSVUtils
 
   //*************** Printing and debugging methods ***************//
 
-  /// Method to test the writing of the individual perspective data, or the group perspective data, to CSV 
+
+  /// Method used to test the writing of the individual perspective data, or the team perspective data, to CSV.
   void testPrintPreCSVData(List<dynamic> data) async
   {
     File file = File("./testPrintToCSV.csv");
@@ -437,8 +441,8 @@ class CSVUtils
     await sink.close();
   }
 
-  /// Method to print the CSV data to a file.
-  /// returns the file name.
+  /// Method used to print the individual perspective CSV data, or the team perspective CSV data, to a file.
+  /// Returns the file name.
   Future<String?> printToCSV(List<dynamic> csvDataIndividualPerspective, List<dynamic> csvDataTeamPerspective) async
   {
     // Complementing the shortest list to have the same length for both lists
