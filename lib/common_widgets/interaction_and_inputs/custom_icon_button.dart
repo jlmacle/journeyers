@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 /// A customizable icon button.
 class CustomIconButton extends StatefulWidget 
 {
-  /// The icon to use
+  /// The icon to use.
   final Icon icon;
-  /// The tool tip label for the icon
+  /// The tooltip label for the icon.
   final String toolTipLabel;
-  /// The callback function to call when the icon button is pressed
-  final VoidCallback onPressedFunction;   // type alias: typedef VoidCallback = void Function();
+  /// The callback function called when the icon button is pressed.
+  final VoidCallback parentWidgetOnPressedCallBackFunction;   // type alias: typedef VoidCallback = void Function();
 
   const CustomIconButton
   ({
     super.key,
     required this.icon,
     required this.toolTipLabel,
-    required this.onPressedFunction,
+    required this.parentWidgetOnPressedCallBackFunction,
   });
 
   @override
@@ -30,7 +30,7 @@ class _CustomIconButtonState extends State<CustomIconButton>
   {
     return IconButton
     (
-      onPressed: widget.onPressedFunction, 
+      onPressed: widget.parentWidgetOnPressedCallBackFunction, 
       tooltip: widget.toolTipLabel,
       icon: widget.icon,
     );
