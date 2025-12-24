@@ -17,9 +17,12 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
   Map<String,dynamic>? completeSessionData;
   List<dynamic>? listOfSessionData;
 
+  // Utility classes
+  DashboardUtils dashboardUtils = DashboardUtils();
+
   void  _sessionDataRetrieval() async
   {
-    completeSessionData =  await sessionDataRetrieval(contextAnalysesData); 
+    completeSessionData =  await dashboardUtils.retrieveAllDashboardSessionData(DashboardUtils.dataContextAnalyses); 
     setState(() {
       _isDataLoading = false;      
       listOfSessionData = completeSessionData?.values.first;
@@ -70,9 +73,9 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
                     return 
                     CustomExpansionTile
                     (
-                      text: "(${sessionDataAsMap?[dateKey]}) ${sessionDataAsMap?[titleKey]}",
+                      text: "(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
                       expandedAdditionalText:"", 
-                      parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[filePathKey]);}, 
+                      parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);}, 
                       parentWidgetOnDeletePressedCallBackFunction: (){}, 
                       parentWidgetOnSharePressedCallBackFunction: (){}
                       );
