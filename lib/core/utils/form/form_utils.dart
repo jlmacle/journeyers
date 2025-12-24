@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// {@category Utils}
+/// A utility class related to the context analyses form, and to the group problem-solving form.
 class FormUtils
 {
   /// A util used to label checkbox data.
@@ -25,7 +27,7 @@ class FormUtils
     return null;
   }
 
-  // A counter displaying "currentLength/maxLength"
+  /// A counter displaying "currentLength/maxLength".
   static Widget? presentCounter(
     BuildContext context, {
     int? currentLength,
