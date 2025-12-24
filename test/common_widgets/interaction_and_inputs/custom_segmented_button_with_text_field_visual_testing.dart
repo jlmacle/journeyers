@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage>
               ),              
               Gap(16),
               CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
-              textFieldPlaceholder: textFieldHintText,
+              textFieldHintText: textFieldHintText,
               parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
               parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction),
               Gap(16),                    
