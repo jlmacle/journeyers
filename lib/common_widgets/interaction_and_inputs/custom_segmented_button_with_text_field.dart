@@ -6,42 +6,44 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 /// A customizable segmented button that displays a customizable text field when a value is selected.
 class CustomSegmentedButtonWithTextField extends StatefulWidget 
 {
-  /// The first option of the segmented button 
+  /// The first option of the segmented button.
   final String textOption1;
-  /// The second option of the segmented button 
+  /// The second option of the segmented button.
   final String textOption2;
-  /// The optional third option of the segmented button 
+  /// The optional third option of the segmented button.
   final String textOption3;
-  /// The boolean related to enabling multiselection
-  final bool multiSelectionEnabled;
-  /// The boolean related to allowing empty selection
-  final bool emptySelectionAllowed;
-  // The font size for the text options
+  /// The font size for the text options.
   final double textOptionsfontSize;
-  /// The color of the text options
+  /// The color of the text options.
   final Color textOptionsColor;
-  /// The hint text for the text field
-  final String textFieldPlaceholder;
-  /// The left and right padding value for the text field
-  final double textFieldHorizontalPadding;
-  /// The bottom padding value for the text field
-  final double textFieldBottomPadding;
-  /// The minLines value for the text field 
+  /// The boolean related to enabling multiselection.
+  final bool multiSelectionEnabled;
+  /// The boolean related to allowing an empty selection.
+  final bool emptySelectionAllowed;
+  /// The hint text for the text field.
+  final String textFieldHintText;
+  /// The left and right padding value for the text field.
+  final double textFieldPaddingHorizontal;
+  /// The bottom padding value for the text field.
+  final double textFieldPaddingBottom;
+  /// The minLines value for the text field.
   final int textFieldMinLines;
-  /// The maxLines value for the text field 
+  /// The maxLines value for the text field.
   final int textFieldMaxLines;
-  /// The maxLength for the text field
+  /// The maxLength value for the text field.
   final int textFieldMaxLength; 
-  /// The counter for the text field
-  final InputCounterWidgetBuilder buildCounter;
-  /// The cross axis alignment for the segmented button, and the text field
-  final CrossAxisAlignment inputsCrossAxisAlignment;
-  /// The callback function for the parent widget
+  /// The counter for the text field.
+  final InputCounterWidgetBuilder textFieldCounter;
+  /// The cross axis alignment for the segmented button, and the text field.
+  final CrossAxisAlignment customWidgetsCrossAxisAlignment;
+  /// The text field-related callback function for the parent widget.
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
-  /// The callback function for the parent widget
+  /// The segmented button-related callback function for the parent widget.
   final ValueChanged<Set<String>> parentWidgetSegmentedButtonValueCallBackFunction;
 
+  /// A placeholder void callback function with a String parameter.
   static void placeHolderFunctionString(String value) {}
+  /// A placeholder void callback function with a Set<String>? parameter.
   static void placeHolderFunctionSetString(Set<String>? values) {}
 
   /// {@category Custom widgets}
@@ -55,14 +57,14 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.emptySelectionAllowed = true,
     this.textOptionsfontSize = 24,
     this.textOptionsColor = Colors.black,
-    required this.textFieldPlaceholder,
-    this.textFieldHorizontalPadding = 20.0,
-    this.textFieldBottomPadding = 10.0,
+    required this.textFieldHintText,
+    this.textFieldPaddingHorizontal = 20.0,
+    this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = chars1Page, // a page as a reference
-    this.buildCounter = absentCounter,
-    this.inputsCrossAxisAlignment = CrossAxisAlignment.start,
+    this.textFieldCounter = absentCounter,
+    this.customWidgetsCrossAxisAlignment = CrossAxisAlignment.start,
     this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.parentWidgetSegmentedButtonValueCallBackFunction = placeHolderFunctionSetString     
   });
@@ -86,7 +88,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
 
     return Column
     (
-      crossAxisAlignment: widget.inputsCrossAxisAlignment,
+      crossAxisAlignment: widget.customWidgetsCrossAxisAlignment,
       children: 
       [
         SegmentedButton<String>
@@ -136,10 +138,10 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
         if (_selection.isNotEmpty)
           Padding
           (
-            padding: EdgeInsets.only(left: widget.textFieldHorizontalPadding, right: widget.textFieldHorizontalPadding, bottom: widget.textFieldBottomPadding),
-            child: CustomPaddedTextField(textFieldHintText: widget.textFieldPlaceholder,  
+            padding: EdgeInsets.only(left: widget.textFieldPaddingHorizontal, right: widget.textFieldPaddingHorizontal, bottom: widget.textFieldPaddingBottom),
+            child: CustomPaddedTextField(textFieldHintText: widget.textFieldHintText,  
             parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction, 
-            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, textFieldCounter: widget.buildCounter)            
+            textFieldMinLines:widget.textFieldMinLines, textFieldMaxLines:widget.textFieldMaxLines, textFieldCounter: widget.textFieldCounter)            
           ),
       ],
     );
