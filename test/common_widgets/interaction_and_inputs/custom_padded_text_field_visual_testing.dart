@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage>
             paddingTop: 20,
             textFieldHintText: pleaseDescribeTextHousehold, 
             parentWidgetTextFieldValueCallBackFunction: (String value){setState(() {_textContent = value;});}, 
-            textFieldCounter: absentCounter 
+            textFieldCounter: FormUtils.absentCounter 
           ),
           Focus
           (

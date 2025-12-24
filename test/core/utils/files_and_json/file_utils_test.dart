@@ -6,11 +6,11 @@ import "dart:io";
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-import 'package:journeyers/core/utils/files/file_utils.dart';
+import 'package:journeyers/core/utils/files/files_utils.dart';
 
 void main()
 {
-  var fileUtils = FileUtils();
+  var fu = FileUtils();
   var testFilePath = path.join("test","core","utils","files_and_json","file_utils_test_data","file.txt");
 
   group('File utils tests:', () 
@@ -31,7 +31,7 @@ void main()
       expect(fileExists, isFalse);
 
       // using the library
-      await fileUtils.appendText(filePath: testFilePath,text: contentToWrite);
+      await fu.appendText(filePath: testFilePath,text: contentToWrite);
 
       // testing if the content was written
       var testFile = File(testFilePath);

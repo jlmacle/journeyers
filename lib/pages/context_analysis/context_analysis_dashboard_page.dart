@@ -18,11 +18,11 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
   List<dynamic>? listOfSessionData;
 
   // Utility classes
-  DashboardUtils dashboardUtils = DashboardUtils();
+  DashboardUtils du = DashboardUtils();
 
   void  _sessionDataRetrieval() async
   {
-    completeSessionData =  await dashboardUtils.retrieveAllDashboardSessionData(DashboardUtils.dataContextAnalyses); 
+    completeSessionData =  await du.retrieveAllDashboardSessionData(DashboardUtils.dataContextAnalyses); 
     setState(() {
       _isDataLoading = false;      
       listOfSessionData = completeSessionData?.values.first;
