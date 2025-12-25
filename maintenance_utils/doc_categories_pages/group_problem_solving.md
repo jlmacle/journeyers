@@ -1,0 +1,1 @@
+Class related to a group problem-solving.

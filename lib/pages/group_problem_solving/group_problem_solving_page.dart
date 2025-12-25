@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// {@category Pages}
+/// {@category Group problem-solving}
+/// The root page for the group problem-solvings.
 class GroupProblemSolvingPage extends StatefulWidget 
 {
   const GroupProblemSolvingPage({super.key});
