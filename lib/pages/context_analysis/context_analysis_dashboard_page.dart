@@ -4,6 +4,9 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansio
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
+/// {@category Pages}
+/// {@category Context analysis}
+/// The page for the dashboard of the context analyses.
 class ContextAnalysisDashboardPage extends StatefulWidget {
   const ContextAnalysisDashboardPage({super.key});
 

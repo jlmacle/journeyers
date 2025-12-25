@@ -11,6 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils up = UserPreferencesUtils();
 
+/// {@category Pages}
+/// {@category Context analysis}
+/// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysisDashboardPage.
 class ContextAnalysisPage extends StatefulWidget 
 {
   const ContextAnalysisPage({super.key});

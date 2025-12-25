@@ -14,6 +14,9 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
 
+/// {@category Pages}
+/// {@category Context analysis}
+/// The form page for the context analysis.
 class ContextAnalysisContextFormPage extends StatefulWidget {
   
   const ContextAnalysisContextFormPage({super.key});
@@ -29,6 +32,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
+
+  // Question labels for the form
+  ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
 
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
@@ -143,8 +149,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     level3TitleBalanceItem4Data[FormUtils.textField] = _helpingOthersHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueData
     LinkedHashMap<String, dynamic> level3TitleBalanceIssueData 
-    = LinkedHashMap<String, dynamic>.from({level3TitleBalanceIssueItem1:level3TitleBalanceItem1Data,level3TitleBalanceIssueItem2:level3TitleBalanceItem2Data, 
-                                           level3TitleBalanceIssueItem3:level3TitleBalanceItem3Data,level3TitleBalanceIssueItem4:level3TitleBalanceItem4Data});
+    = LinkedHashMap<String, dynamic>.from({q.level3TitleBalanceIssueItem1:level3TitleBalanceItem1Data,q.level3TitleBalanceIssueItem2:level3TitleBalanceItem2Data, 
+                                           q.level3TitleBalanceIssueItem3:level3TitleBalanceItem3Data,q.level3TitleBalanceIssueItem4:level3TitleBalanceItem4Data});
 
     //Individual level: workplace issue
     // level3TitleWorkplaceIssueItem1Data
@@ -157,7 +163,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     level3TitleWorkplaceIssueItem2Data[FormUtils.textField] = _remainingAppreciatedAtWorkTextFieldContent; 
     // level3TitleWorkplaceIssueData
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData 
-    = LinkedHashMap<String, dynamic>.from({level3TitleWorkplaceIssueItem1:level3TitleWorkplaceIssueItem1Data,level3TitleWorkplaceIssueItem2:level3TitleWorkplaceIssueItem2Data});
+    = LinkedHashMap<String, dynamic>.from({q.level3TitleWorkplaceIssueItem1:level3TitleWorkplaceIssueItem1Data,q.level3TitleWorkplaceIssueItem2:level3TitleWorkplaceIssueItem2Data});
 
     //Individual level: legacy issue
     // level3TitleLegacyIssueItem1
@@ -166,7 +172,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     level3TitleLegacyIssueItem1Data[FormUtils.textField] = _betterLegaciesTextFieldContent;
     // level3TitleWorkplaceIssueData
     LinkedHashMap<String, dynamic> level3TitleLegacyIssueData 
-    = LinkedHashMap<String, dynamic>.from({level3TitleLegacyIssueItem1:level3TitleLegacyIssueItem1Data});
+    = LinkedHashMap<String, dynamic>.from({q.level3TitleLegacyIssueItem1:level3TitleLegacyIssueItem1Data});
 
     //Individual level: another issue
     // level3TitleAnotherIssueItem1
@@ -178,8 +184,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     // Different pattern for "level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data"
     LinkedHashMap<String, dynamic> level2TitleIndividualData = 
     LinkedHashMap<String, dynamic>.from(
-      {level2TitleIndividual:{level3TitleBalanceIssue:level3TitleBalanceIssueData,level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
-                              level3TitleLegacyIssue:level3TitleLegacyIssueData,level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
+      {q.level2TitleIndividual:{q.level3TitleBalanceIssue:level3TitleBalanceIssueData,q.level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
+                              q.level3TitleLegacyIssue:level3TitleLegacyIssueData,q.level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
 
     //************************* Group/Team perspective ******************************/
     //Group/team level: 
@@ -215,9 +221,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     // level2TitleGroupData
     LinkedHashMap<String, dynamic> level2TitleTeamData = 
     LinkedHashMap<String, dynamic>.from(
-      {level2TitleGroup:{level3TitleGroupsProblematics:level3TitleGroupsProblematicsItem1Data,level3TitleSameProblem:level3TitleSameProblemsItem1Data,
-      level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data,level3TitleAppreciabilityAtWork:level3TitleAppreciabilityAtWorkItem1Data,
-      level3TitleIncomeEarningAbility:level3TitleIncomeEarningAbilityItem1Data}});
+      {q.level2TitleGroup:{q.level3TitleGroupsProblematics:level3TitleGroupsProblematicsItem1Data,q.level3TitleSameProblem:level3TitleSameProblemsItem1Data,
+      q.level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data,q.level3TitleAppreciabilityAtWork:level3TitleAppreciabilityAtWorkItem1Data,
+      q.level3TitleIncomeEarningAbility:level3TitleIncomeEarningAbilityItem1Data}});
      
     // Adding individual and team perspective to root level data
     _enteredData = [level2TitleIndividualData, level2TitleTeamData];
@@ -297,7 +303,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child:CustomHeading
               (
-                headingTitle: level2TitleIndividual,
+                headingTitle: q.level2TitleIndividual,
                 headingLevel: 2,
               ),
             ),
@@ -306,32 +312,32 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleBalanceIssue,
+              headingTitle: q.level3TitleBalanceIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleBalanceIssueItem1, textFieldHintText: pleaseDescribeTextHousehold, 
+              checkboxText: q.level3TitleBalanceIssueItem1, textFieldHintText: pleaseDescribeTextHousehold, 
               parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleBalanceIssueItem2, 
+              checkboxText: q.level3TitleBalanceIssueItem2, 
               textFieldHintText: pleaseDescribeTextHousehold,
               parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleBalanceIssueItem3, textFieldHintText: pleaseDescribeTextHousehold,
+              checkboxText: q.level3TitleBalanceIssueItem3, textFieldHintText: pleaseDescribeTextHousehold,
               parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleBalanceIssueItem4, textFieldHintText: pleaseDescribeTextHousehold,
+              checkboxText: q.level3TitleBalanceIssueItem4, textFieldHintText: pleaseDescribeTextHousehold,
               parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState ,
               parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState
             ),
@@ -342,19 +348,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleWorkplaceIssue,
+              headingTitle: q.level3TitleWorkplaceIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleWorkplaceIssueItem1, textFieldHintText: pleaseDescribeTextWorkplace,
+              checkboxText: q.level3TitleWorkplaceIssueItem1, textFieldHintText: pleaseDescribeTextWorkplace,
               parentWidgetCheckboxValueCallBackFunction:  _setMoreAppreciatedAtWorkCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleWorkplaceIssueItem2, textFieldHintText: pleaseDescribeTextWorkplace,
+              checkboxText: q.level3TitleWorkplaceIssueItem2, textFieldHintText: pleaseDescribeTextWorkplace,
               parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState ,
               parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState
             ),
@@ -366,13 +372,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleLegacyIssue,
+              headingTitle: q.level3TitleLegacyIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
             CustomCheckBoxWithTextField
             (
-              checkboxText: level3TitleLegacyIssueItem1, textFieldHintText: pleaseDevelopOrTakeNotes,
+              checkboxText: q.level3TitleLegacyIssueItem1, textFieldHintText: pleaseDevelopOrTakeNotes,
               parentWidgetCheckboxValueCallBackFunction:  _setBetterLegaciesCheckboxState,
               parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState
             ),
@@ -383,7 +389,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleAnotherIssue,
+              headingTitle: q.level3TitleAnotherIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -401,7 +407,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child:CustomHeading
               (
-                headingTitle: level2TitleGroup,
+                headingTitle: q.level2TitleGroup,
                 headingLevel: 2,
               ),
             ),
@@ -409,7 +415,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
             CustomHeading
             (
-              headingTitle: level3TitleGroupsProblematics,
+              headingTitle: q.level3TitleGroupsProblematics,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -423,7 +429,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleSameProblem,
+              headingTitle: q.level3TitleSameProblem,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -447,7 +453,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleHarmonyAtHome,
+              headingTitle: q.level3TitleHarmonyAtHome,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -470,7 +476,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleAppreciabilityAtWork,
+              headingTitle: q.level3TitleAppreciabilityAtWork,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -493,7 +499,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: level3TitleIncomeEarningAbility,
+              headingTitle: q.level3TitleIncomeEarningAbility,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),

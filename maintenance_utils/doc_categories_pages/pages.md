@@ -1,0 +1,1 @@
+The classes involved in the main structure of the app.
