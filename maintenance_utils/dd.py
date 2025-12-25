@@ -3,7 +3,7 @@ import platform
 import subprocess
 
 root_folder = os.environ.get('JOURNEYERS_DIR')
-doc_folder = "maintenance_utils/doc"
+doc_folder = "maintenance_utils/doc_dart"
 os.chdir(root_folder)
 os.makedirs(doc_folder, exist_ok=True)
 
