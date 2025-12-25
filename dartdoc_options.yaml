@@ -1,7 +1,9 @@
 dartdoc:
   categories:
+    "L10n":
+      markdown: doc/l10n.md
     "Custom widgets":
       markdown: doc/custom_widgets.md
     "Utils":
       markdown: doc/utils.md
-  categoryOrder: ["Custom widgets", "Utils"]
+  categoryOrder: ["Custom widgets", "Utils", "L10n"]
