@@ -131,7 +131,7 @@ app.*.symbols
 qa_utils/utils_semi_automated_testing/_qa_utils_config.json
 
 # Documentation folder
-maintenance_utils/doc/
+maintenance_utils/doc_dart/
 
 # L10n log file for untranslated messages
 untranslated-messages-file.txt
