@@ -7,6 +7,9 @@ import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_pag
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Utility class
+PrintUtils pu = PrintUtils();
+
 class ContextAnalysisPage extends StatefulWidget 
 {
   const ContextAnalysisPage({super.key});
@@ -28,7 +31,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   {
     _isStartMessageAlreadyAcknowledged = await isStartMessageAcknowledged();
     setState(() {_preferencesLoading = false;});
-    printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
+    pu.printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
     if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted)
     {
       showDialog

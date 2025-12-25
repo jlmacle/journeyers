@@ -5,7 +5,6 @@
 // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
 //Line for automated processing
 
-
 // "When locales specify a script code or country code, 
 // a base locale (without the script code or country code) should exist as the fallback."
 // flutter gen-l10n
@@ -17,6 +16,8 @@ import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:flutter/material.dart';
 
+// Utility class
+final PrintUtils pu = PrintUtils();
 
 void main() 
 {  
@@ -45,7 +46,7 @@ class _MyTestingAppState extends State<MyTestingApp>
       (
         () 
         {
-          printd("SetState: _currentLocale: $newLocale");
+          pu.printd("SetState: _currentLocale: $newLocale");
           _currentLocale = newLocale;
         }
       );
@@ -96,9 +97,9 @@ class _HomePageState extends State<HomePage>
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
-    printd("");
-    printd("localeLangCodeFromLangName: $localeLangCodeFromLangName");    
-    printd("localeLangCodeFromContext: $localeLangCodeFromContext");   
+    pu.printd("");
+    pu.printd("localeLangCodeFromLangName: $localeLangCodeFromLangName");    
+    pu.printd("localeLangCodeFromContext: $localeLangCodeFromContext");   
          
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) widget.setLocale(Locale(localeLangCodeFromLangName!));  
   }

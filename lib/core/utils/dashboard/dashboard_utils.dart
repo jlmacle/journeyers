@@ -9,6 +9,9 @@ import 'package:path_provider/path_provider.dart';
 /// A utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
 class DashboardUtils {
 
+  // Utility class
+  PrintUtils pu = PrintUtils();
+
   /// String used to communicate the context of the context analyses.
   static String dataContextAnalyses = "contextAnalysesData";
   /// String used to communicate the context of the group problem-solvings.
@@ -29,7 +32,7 @@ class DashboardUtils {
     String fileName = "";
     if (typeOfContextData == dataContextAnalyses) {fileName = 'dashboard_session_data_context_analyses.json';}
     else if (typeOfContextData == dataGroupProblemSolvings) {fileName = 'dashboard_session_data_group_problem_solvings.json';}
-    else {printd("Error: Unexpected type of context data: $typeOfContextData");}
+    else {pu.printd("Error: Unexpected type of context data: $typeOfContextData");}
 
     File sessionFile = File('$path/$fileName');
     if (!sessionFile.existsSync()) 
@@ -39,7 +42,7 @@ class DashboardUtils {
       Map<String,List<Map<String,String>>> records = {keyRecords:[]};    
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      printd("Session file for $typeOfContextData created: $path/$fileName");
+      pu.printd("Session file for $typeOfContextData created: $path/$fileName");
     }
     return sessionFile;
   }
@@ -64,7 +67,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(records);
         
     await file.writeAsString(updatedContent);
-    printd('Session data: $sessionData saved to: ${file.path}');
+    pu.printd('Session data: $sessionData saved to: ${file.path}');
   }
 
 
@@ -76,8 +79,8 @@ class DashboardUtils {
     var formatter = DateFormat('MM/dd/yy');
     var formattedDate = formatter.format(now);
 
-    printd("formattedDate: $formattedDate");
-    printd("analysisTitle: $analysisTitle");
+    pu.printd("formattedDate: $formattedDate");
+    pu.printd("analysisTitle: $analysisTitle");
 
     // Session data storage sample:
     // {"records":[{"title":"Title session 1","date":"12/12/25"]},
