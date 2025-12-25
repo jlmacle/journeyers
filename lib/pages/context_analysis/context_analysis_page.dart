@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // Utility class
 PrintUtils pu = PrintUtils();
+UserPreferencesUtils up = UserPreferencesUtils();
 
 class ContextAnalysisPage extends StatefulWidget 
 {
@@ -29,7 +30,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   
   _getPreferences() async
   {
-    _isStartMessageAlreadyAcknowledged = await isStartMessageAcknowledged();
+    _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
     setState(() {_preferencesLoading = false;});
     pu.printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
     if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted)
@@ -50,7 +51,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
               (
                 onPressed:() 
                 {
-                  saveStartMessageAcknowledgement();  
+                  up.saveStartMessageAcknowledgement();  
                   Navigator.pop(context);
                 },
                 child:
@@ -72,7 +73,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
               (
                 onPressed: () 
                 {
-                  saveStartMessageAcknowledgement();  
+                  up.saveStartMessageAcknowledgement();  
                   Navigator.pop(context);
                 },
                 child: Text('Acknowledged', style: dialogStyleAcknowledged)
