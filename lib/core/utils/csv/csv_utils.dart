@@ -18,8 +18,9 @@ class CSVUtils
   /// Straight double quotes used to encapsulate the content of answered questions.
   String quotesForCSV = '"';
 
-  // Utility class
+  // Utility classes
   FormUtils fu = FormUtils();
+  PrintUtils pu = PrintUtils();
 
   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -177,11 +178,11 @@ class CSVUtils
           }
           else
           {
-            printd("");
-            printd("Error: treatmentAccordingToInputType: no mapping found");
-            printd("Error: level3Title: $itemOrTitleLabel");
-            printd("Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
-            printd("");
+            pu.printd("");
+            pu.printd("Error: treatmentAccordingToInputType: no mapping found");
+            pu.printd("Error: level3Title: $itemOrTitleLabel");
+            pu.printd("Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
+            pu.printd("");
           }
     }
 
@@ -459,11 +460,11 @@ class CSVUtils
       content += line ;  
     }
 
-    printd("");
-    printd("csvDataIndividualPerspective:$csvDataIndividualPerspective");
-    printd("");  
-    printd("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
-    printd("");
+    pu.printd("");
+    pu.printd("csvDataIndividualPerspective:$csvDataIndividualPerspective");
+    pu.printd("");  
+    pu.printd("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
+    pu.printd("");
 
     final bytes = Uint8List.fromList(utf8.encode(content));
     return await FilePicker.platform.saveFile

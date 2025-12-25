@@ -28,6 +28,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   CSVUtils cu = CSVUtils();
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
+  PrintUtils pu = PrintUtils();
 
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
@@ -221,10 +222,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     // Adding individual and team perspective to root level data
     _enteredData = [level2TitleIndividualData, level2TitleTeamData];
 
-    printd("");
-    printd("_enteredData");
-    printd("$_enteredData");
-    printd("");
+    pu.printd("");
+    pu.printd("_enteredData");
+    pu.printd("$_enteredData");
+    pu.printd("");
     
   }
 
@@ -238,18 +239,18 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     var preCSVDataIndividualPerspective = cu.dataToPreCSV(_enteredData[0]);
     var preCSVDataTeamPerspective = cu.dataToPreCSV(_enteredData[1]);
 
-    printd("preCSVDataIndividualPerspective");
-    printd("$preCSVDataIndividualPerspective");
-    printd("");
-    printd("preCSVDataTeamPerspective");
-    printd("$preCSVDataTeamPerspective");
-    printd("");
+    pu.printd("preCSVDataIndividualPerspective");
+    pu.printd("$preCSVDataIndividualPerspective");
+    pu.printd("");
+    pu.printd("preCSVDataTeamPerspective");
+    pu.printd("$preCSVDataTeamPerspective");
+    pu.printd("");
 
     List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVDataIndividualPerspective);
     List<dynamic> csvDataTeamPerspective = cu.preCSVToCSVData(preCSVDataTeamPerspective);
     // Printing to CSV
     String? filePath = await cu.printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
-    printd("filePath:$filePath");
+    pu.printd("filePath:$filePath");
     // Saving the dashboard data if filePath not null
     if (filePath != null) du.saveDashboardData(DashboardUtils.dataContextAnalyses, _analysisTitle, filePath);
 

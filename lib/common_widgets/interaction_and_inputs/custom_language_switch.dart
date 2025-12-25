@@ -26,13 +26,15 @@ class CustomLanguageSwitch extends StatefulWidget
 
 class _CustomLanguageSwitchState extends State<CustomLanguageSwitch> 
 {
+  // Utility class
+  PrintUtils pu = PrintUtils();
 
   List<String> _dropdownItems = [];
   late String _selectedValue;
 
   void getLanguages(context)
   {
-    printd("Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");      
+    pu.printd("Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");      
     _dropdownItems =  L10nLanguages.getLanguages(context);   
     _selectedValue = _dropdownItems.first;  
   }

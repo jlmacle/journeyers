@@ -12,6 +12,9 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
+// Utility class
+final PrintUtils pu = PrintUtils();
+
 void main() 
 {  
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macOS
@@ -47,9 +50,9 @@ class MyTestingApp extends StatelessWidget
         (
           child: CustomExpansionTile
           (
-            parentWidgetOnEditPressedCallBackFunction: (){printd('onEditPressed');},
-            parentWidgetOnDeletePressedCallBackFunction: (){printd('onDeletePressed');},
-            parentWidgetOnSharePressedCallBackFunction: (){printd('onSharePressed');}
+            parentWidgetOnEditPressedCallBackFunction: (){pu.printd('onEditPressed');},
+            parentWidgetOnDeletePressedCallBackFunction: (){pu.printd('onDeletePressed');},
+            parentWidgetOnSharePressedCallBackFunction: (){pu.printd('onSharePressed');}
           )
         ),
       ),      

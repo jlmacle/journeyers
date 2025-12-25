@@ -23,6 +23,9 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp> 
 {
+  // Utility class
+  PrintUtils pu = PrintUtils();
+
   Locale? _currentLocale = Locale('en'); // TODO: to get eventually the value from user preferences
 
    void _setLocale(Locale newLocale) 
@@ -33,7 +36,7 @@ class _MyAppState extends State<MyApp>
       (
         () 
         {
-          printd("SetState: _currentLocale: $newLocale");
+          pu.printd("SetState: _currentLocale: $newLocale");
           _currentLocale = newLocale;
         }
       );

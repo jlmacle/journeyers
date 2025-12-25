@@ -19,6 +19,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
 
   // Utility classes
   DashboardUtils du = DashboardUtils();
+  PrintUtils pu = PrintUtils();
 
   void  _sessionDataRetrieval() async
   {
@@ -39,7 +40,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
 
   void onEditPressed(String? csvFilePath)
   {
-    printd("csvFilePath: $csvFilePath");
+    pu.printd("csvFilePath: $csvFilePath");
 
   }
    
