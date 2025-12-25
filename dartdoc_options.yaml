@@ -10,7 +10,9 @@ dartdoc:
       markdown: maintenance_utils\doc_categories_pages\pages.md   
     "Context analysis":
       markdown: maintenance_utils\doc_categories_pages\context_analysis.md
-  categoryOrder: ["Custom widgets", "Utils", "Pages", "Context analysis"]
+    "Group problem-solving":
+      markdown: maintenance_utils\doc_categories_pages\group_problem_solving.md
+  categoryOrder: ["Custom widgets", "Utils", "Pages", "Context analysis", "Group problem-solving"]
   exclude:
     - main
     - l10n_utils_copy

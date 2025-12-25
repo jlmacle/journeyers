@@ -13,6 +13,7 @@ UserPreferencesUtils up = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
+/// The root page for the context analyses.
 /// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysisDashboardPage.
 class ContextAnalysisPage extends StatefulWidget 
 {
