@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_page.dart';
 
+/// {@category Pages}
+/// {@category Context analysis}
+/// The page for a new session of context analysis.
 class ContextAnalysisNewSessionPage extends StatefulWidget 
 {
   const ContextAnalysisNewSessionPage({super.key});

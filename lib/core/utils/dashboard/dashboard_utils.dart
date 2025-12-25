@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 class DashboardUtils {
 
   // Utility class
-  PrintUtils pu = PrintUtils();
+  final PrintUtils _pu = PrintUtils();
 
   /// String used to communicate the context of the context analyses.
   static String dataContextAnalyses = "contextAnalysesData";
@@ -32,7 +32,7 @@ class DashboardUtils {
     String fileName = "";
     if (typeOfContextData == dataContextAnalyses) {fileName = 'dashboard_session_data_context_analyses.json';}
     else if (typeOfContextData == dataGroupProblemSolvings) {fileName = 'dashboard_session_data_group_problem_solvings.json';}
-    else {pu.printd("Error: Unexpected type of context data: $typeOfContextData");}
+    else {_pu.printd("Error: Unexpected type of context data: $typeOfContextData");}
 
     File sessionFile = File('$path/$fileName');
     if (!sessionFile.existsSync()) 
@@ -42,7 +42,7 @@ class DashboardUtils {
       Map<String,List<Map<String,String>>> records = {keyRecords:[]};    
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      pu.printd("Session file for $typeOfContextData created: $path/$fileName");
+      _pu.printd("Session file for $typeOfContextData created: $path/$fileName");
     }
     return sessionFile;
   }
@@ -67,7 +67,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(records);
         
     await file.writeAsString(updatedContent);
-    pu.printd('Session data: $sessionData saved to: ${file.path}');
+    _pu.printd('Session data: $sessionData saved to: ${file.path}');
   }
 
 
@@ -79,8 +79,8 @@ class DashboardUtils {
     var formatter = DateFormat('MM/dd/yy');
     var formattedDate = formatter.format(now);
 
-    pu.printd("formattedDate: $formattedDate");
-    pu.printd("analysisTitle: $analysisTitle");
+    _pu.printd("formattedDate: $formattedDate");
+    _pu.printd("analysisTitle: $analysisTitle");
 
     // Session data storage sample:
     // {"records":[{"title":"Title session 1","date":"12/12/25"]},

@@ -19,67 +19,98 @@ class CSVUtils
   String quotesForCSV = '"';
 
   // Utility classes
-  FormUtils fu = FormUtils();
-  PrintUtils pu = PrintUtils();
+  final PrintUtils _pu = PrintUtils();
 
-  //************** Mapping questions to input widgets to process data according to input widgets *************//
+   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
-  Map<String,String> mappingLabelsToInputItems 
-  = {
-    //** Individual perspective **/
-    // balance issue
-    level3TitleBalanceIssueItem1:FormUtils.checkbox, level3TitleBalanceIssueItem2:FormUtils.checkbox,
-    level3TitleBalanceIssueItem3:FormUtils.checkbox, level3TitleBalanceIssueItem4:FormUtils.checkbox,
-    // workplace issue
-    level3TitleWorkplaceIssueItem1:FormUtils.checkbox, level3TitleWorkplaceIssueItem2:FormUtils.checkbox,
-    // legacy issue
-    level3TitleLegacyIssueItem1:FormUtils.checkbox,
-    // another type
-    level3TitleAnotherIssue:FormUtils.textField,
-
-    //** Group/team perspective **/
-    // group problematics
-    level3TitleGroupsProblematics:FormUtils.textField,
-    // same problem?
-    level3TitleSameProblem:FormUtils.segmentedButton,
-    // harmony at home
-    level3TitleHarmonyAtHome:FormUtils.segmentedButton,
-    // appreciability at work
-    level3TitleAppreciabilityAtWork:FormUtils.segmentedButton,
-    // earning ability
-    level3TitleIncomeEarningAbility:FormUtils.segmentedButton
-  };
-
+  Map<String,String> mappingLabelsToInputItems = {};
+  
   //************** Sets of the level 2, level 3 titles, and related sets *************//
   /// A set of the existing titles level 2.
-  var titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
+  Set<String> titlesLevel2 = {};
 
   // Sets of the existing titles level 3.
   /// A set of the titles level 3 related to an individual perspective.
-  Set<String> titlesLevel3ForTheIndividualPerspective = {level3TitleBalanceIssue, level3TitleWorkplaceIssue, level3TitleLegacyIssue, level3TitleAnotherIssue};
+  Set<String> titlesLevel3ForTheIndividualPerspective = {};
   /// A set of the titles level 3 related to a team perspective.
-  Set<String> titlesLevel3ForTheTeamPerspective = {level3TitleGroupsProblematics, level3TitleSameProblem, level3TitleHarmonyAtHome, level3TitleAppreciabilityAtWork, 
-                                                    level3TitleIncomeEarningAbility};
+  Set<String> titlesLevel3ForTheTeamPerspective = {};
 
   /// A set of the existing titles level 3 with sub items.
-  Set<String>  titlesLevel3WithSubItems = {level3TitleBalanceIssue, level3TitleWorkplaceIssue,
-                                            level3TitleLegacyIssue};
+  Set<String>  titlesLevel3WithSubItems = {};
 
   // Sets of the children of the existing titles level 3 with sub items
   /// A set of the children of the title level 3 related to balance issues.
-  Set<String> titleLevel3BalanceIssueChildren = {level3TitleBalanceIssueItem1, level3TitleBalanceIssueItem2, level3TitleBalanceIssueItem3, level3TitleBalanceIssueItem4};
+  Set<String> titleLevel3BalanceIssueChildren = {};
   /// A set of the children of the title level 3 related to workplace issues.
-  Set<String> titleLevel3WorkplaceIssueChildren = {level3TitleWorkplaceIssueItem1, level3TitleWorkplaceIssueItem2};
+  Set<String> titleLevel3WorkplaceIssueChildren = {};
   /// A set of the children of the title level 3 related to a legacy issue.
-  Set<String> titleLevel3LegacyIssueChildren = {level3TitleLegacyIssueItem1};  
+  Set<String> titleLevel3LegacyIssueChildren = {};  
 
-  // A set of the text fields only items
-  Set<String> textFieldOnlyItems = {level3TitleAnotherIssue, level3TitleGroupsProblematics};
+  /// A set of the text fields only items
+  Set<String> textFieldOnlyItems = {};
 
 
   //************** The data structure to return *************//
   /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
   List<dynamic> preCSVData = [];
+
+  final ContextAnalysisContextFormQuestions _q = ContextAnalysisContextFormQuestions();
+
+
+  CSVUtils()
+  {
+    // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
+    mappingLabelsToInputItems 
+  = {
+    //** Individual perspective **/
+    // balance issue
+    _q.level3TitleBalanceIssueItem1:FormUtils.checkbox, _q.level3TitleBalanceIssueItem2:FormUtils.checkbox,
+    _q.level3TitleBalanceIssueItem3:FormUtils.checkbox, _q.level3TitleBalanceIssueItem4:FormUtils.checkbox,
+    // workplace issue
+    _q.level3TitleWorkplaceIssueItem1:FormUtils.checkbox, _q.level3TitleWorkplaceIssueItem2:FormUtils.checkbox,
+    // legacy issue
+    _q.level3TitleLegacyIssueItem1:FormUtils.checkbox,
+    // another type
+    _q.level3TitleAnotherIssue:FormUtils.textField,
+
+    //** Group/team perspective **/
+    // group problematics
+    _q.level3TitleGroupsProblematics:FormUtils.textField,
+    // same problem?
+    _q.level3TitleSameProblem:FormUtils.segmentedButton,
+    // harmony at home
+    _q.level3TitleHarmonyAtHome:FormUtils.segmentedButton,
+    // appreciability at work
+    _q.level3TitleAppreciabilityAtWork:FormUtils.segmentedButton,
+    // earning ability
+    _q.level3TitleIncomeEarningAbility:FormUtils.segmentedButton
+  };
+
+    // A set of the existing titles level 2.
+    titlesLevel2 = {_q.level2TitleIndividual, _q.level2TitleGroup};
+
+    // A set of the titles level 3 related to an individual perspective.
+    titlesLevel3ForTheIndividualPerspective = {_q.level3TitleBalanceIssue, _q.level3TitleWorkplaceIssue, _q.level3TitleLegacyIssue, _q.level3TitleAnotherIssue};
+ 
+    // A set of the titles level 3 related to a team perspective.
+    titlesLevel3ForTheTeamPerspective = {_q.level3TitleGroupsProblematics, _q.level3TitleSameProblem, _q.level3TitleHarmonyAtHome, _q.level3TitleAppreciabilityAtWork, 
+                                                    _q.level3TitleIncomeEarningAbility};
+
+    /// A set of the existing titles level 3 with sub items.
+    titlesLevel3WithSubItems = {_q.level3TitleBalanceIssue, _q.level3TitleWorkplaceIssue,
+                                              _q.level3TitleLegacyIssue};
+
+    // Sets of the children of the existing titles level 3 with sub items
+    /// A set of the children of the title level 3 related to balance issues.
+    titleLevel3BalanceIssueChildren = {_q.level3TitleBalanceIssueItem1, _q.level3TitleBalanceIssueItem2, _q.level3TitleBalanceIssueItem3, _q.level3TitleBalanceIssueItem4};
+    /// A set of the children of the title level 3 related to workplace issues.
+    titleLevel3WorkplaceIssueChildren = {_q.level3TitleWorkplaceIssueItem1, _q.level3TitleWorkplaceIssueItem2};
+    /// A set of the children of the title level 3 related to a legacy issue.
+    titleLevel3LegacyIssueChildren = {_q.level3TitleLegacyIssueItem1};  
+
+    // A set of the text fields only items
+    textFieldOnlyItems = {_q.level3TitleAnotherIssue, _q.level3TitleGroupsProblematics};
+  }
 
 
   //***************** Methods processing data according to input widgets: beginning  ***********************//
@@ -178,11 +209,11 @@ class CSVUtils
           }
           else
           {
-            pu.printd("");
-            pu.printd("Error: treatmentAccordingToInputType: no mapping found");
-            pu.printd("Error: level3Title: $itemOrTitleLabel");
-            pu.printd("Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
-            pu.printd("");
+            _pu.printd("");
+            _pu.printd("Error: treatmentAccordingToInputType: no mapping found");
+            _pu.printd("Error: level3Title: $itemOrTitleLabel");
+            _pu.printd("Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
+            _pu.printd("");
           }
     }
 
@@ -274,9 +305,9 @@ class CSVUtils
     for (var index = 0 ; index < preCSVData.length; index++)
     {
       var indexedData = preCSVData[index];
-      if(indexedData[1].trim() == level3TitleBalanceIssue){indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue] = index;}
-      else if (indexedData[1].trim() == level3TitleWorkplaceIssue){indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue] = index;}
-      else if (indexedData[1].trim() == level3TitleLegacyIssue){indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue] = index;}
+      if(indexedData[1].trim() == _q.level3TitleBalanceIssue){indexesOfTitlesLevel3WithChildren[_q.level3TitleBalanceIssue] = index;}
+      else if (indexedData[1].trim() == _q.level3TitleWorkplaceIssue){indexesOfTitlesLevel3WithChildren[_q.level3TitleWorkplaceIssue] = index;}
+      else if (indexedData[1].trim() == _q.level3TitleLegacyIssue){indexesOfTitlesLevel3WithChildren[_q.level3TitleLegacyIssue] = index;}
     }
 
     // Analyzing the data for checkboxes with "true" as value,
@@ -296,19 +327,19 @@ class CSVUtils
         var previousIndexData_1AsString = previousIndexData[1];
         if (titleLevel3BalanceIssueChildren.contains(previousIndexData_1AsString))
         {
-          var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue];
+          var parentIndex = indexesOfTitlesLevel3WithChildren[_q.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0]= 'X';
         }
         else if (titleLevel3WorkplaceIssueChildren.contains(previousIndexData_1AsString))
         {
-          var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue];
+          var parentIndex = indexesOfTitlesLevel3WithChildren[_q.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0]= 'X';
         }
         else if (titleLevel3LegacyIssueChildren.contains(previousIndexData_1AsString))
         {
-          var parentIndex = indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue];
+          var parentIndex = indexesOfTitlesLevel3WithChildren[_q.level3TitleLegacyIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0]= 'X';
         }
@@ -460,11 +491,11 @@ class CSVUtils
       content += line ;  
     }
 
-    pu.printd("");
-    pu.printd("csvDataIndividualPerspective:$csvDataIndividualPerspective");
-    pu.printd("");  
-    pu.printd("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
-    pu.printd("");
+    _pu.printd("");
+    _pu.printd("csvDataIndividualPerspective:$csvDataIndividualPerspective");
+    _pu.printd("");  
+    _pu.printd("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
+    _pu.printd("");
 
     final bytes = Uint8List.fromList(utf8.encode(content));
     return await FilePicker.platform.saveFile
