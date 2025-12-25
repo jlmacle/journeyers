@@ -4,24 +4,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switch.dart';
 
 // import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switcher.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart'; 
 import 'package:journeyers/l10n/app_localizations.dart'; 
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 
-
+/// {@category Pages}
+/// The homepage for the app.
 class MyHomePage extends StatefulWidget 
 {
-  final void Function(Locale) setLocale; 
+
+  /// The language switch-related callback function for the parent widget.
+  final ValueChanged<Locale> parentWidgetOnLanguageSelectedCallBackFunction; 
 
   const MyHomePage
   (
     {
       super.key,
-      required this.setLocale
+      required this.parentWidgetOnLanguageSelectedCallBackFunction
     }
   );
   @override
@@ -40,8 +43,8 @@ class _MyHomePageState extends State<MyHomePage>
     const GroupProblemSolvingPage(),
   ];
 
-  /// A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
-  /// Parameters: - [languageName] 
+  // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
+  // TODO: to transfer the logic in the parent callback function
   void _updateLocale(String languageName) 
   {
     // The related to the language selected
@@ -55,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
          
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {
-      widget.setLocale(Locale(localeLangCodeFromLangName!)); 
+      widget.parentWidgetOnLanguageSelectedCallBackFunction(Locale(localeLangCodeFromLangName!)); 
     } 
   }
 
@@ -124,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage>
       body: Column
       (children: 
       [
-        // CustomLanguageSwitcher(onLanguageChanged: _updateLocale),
+        CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
         Expanded(child:  _pages[_currentIndex])       
       ]
       ), 

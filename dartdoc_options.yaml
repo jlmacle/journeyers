@@ -1,9 +1,15 @@
 dartdoc:
   categories:
     "L10n":
-      markdown: doc/l10n.md
+      markdown: maintenance_utils\doc_categories_pages\l10n.md
     "Custom widgets":
-      markdown: doc/custom_widgets.md
+      markdown: maintenance_utils\doc_categories_pages\custom_widgets.md
     "Utils":
-      markdown: doc/utils.md
-  categoryOrder: ["Custom widgets", "Utils", "L10n"]
+      markdown: maintenance_utils\doc_categories_pages\utils.md
+    "Pages":
+      markdown: maintenance_utils\doc_categories_pages\pages.md    
+  categoryOrder: ["Custom widgets", "Utils", "Pages"]
+  exclude:
+    - main
+    - l10n_utils_copy
+    - 'l10n_utils copy.dart'
