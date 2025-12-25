@@ -1,6 +1,6 @@
 # The script is used to generate dynamically the l10n_utils.dart (/lib/core/utils/l10n/) 
 # when new base locale files have been added to l10n.
-# "flutter run" updates the lang_langCode as needed.
+# "flutter run" updates the "lang_langCode" as needed.
 # TODO: previous file to backup automatically + rollback script
 
 import os
@@ -27,8 +27,19 @@ print(f"Base locales files paths: {base_locales_files_paths}")
 language_values_for_each_base_locales = get_language_values_for_each_base_locales(arbs_dir_path, base_locales_files_paths, language_codes)
 print(f"Language values in the different base locales: {language_values_for_each_base_locales}")
 
+# Spaces + begin/end of class
 spaces_2 = "  "
 spaces_4 = "    "
+class_begin = """
+import 'package:journeyers/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
+/// {@category Utils}
+/// A utility class related to localization.
+class L10nLanguages 
+{  
+"""
+class_end = "}"
 
 """
    Generates the code for the first method of l10n utils
@@ -43,17 +54,16 @@ def code_generation_for_method_1() -> str:
     print("Generating code for method 1")
     # Generating method 1
 
-    method_1_begin =spaces_2+"""/// A method getting a list of all the language names, related to a locale, from the l10n data.
-  /// The method can be updated with l10n_utils_update.py when adding a new base locale
-  /// 
-  /// Parameters:
-  ///   - [context]:  the build context
+    method_1_begin =spaces_2+"""
+  /// A method used to get a list of all the language names, related to a locale, from the l10n data.
+  /// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\].
+  /// When adding a new base locale, file and method can be updated using l10n_utils_update.py.
   static List<String> getLanguages(BuildContext context) 
   {
     List<String> languages = [];"""+eol
 
     method_1_add_begin = spaces_4+"languages.add(AppLocalizations.of(context)?.lang_"
-    method_1_add_middle = " ?? 'Default for "
+    method_1_add_middle = " ?? 'Default for \""
     method_1_add_end = "\" language');"
 
     method_1_end = spaces_4+"""languages.sort();
@@ -82,12 +92,11 @@ def code_generation_for_method_2() -> str:
     print("Generating code for method 2")
     code = ""
     method_2_begin =  """
-  /// A method getting a language code, being provided a language name, [langName]
-  /// Parameters: - [langName] 
+  /// A method used to get a language code, being provided a language name.
   static String? getLangCodeFromLangName(String langName)
   {
 
-    /// Code to generate automatically from the base locales l10n data: begin"""
+    // Code to generate automatically from the base locales l10n data: begin"""
     # List<String> frLanguage = ['French', 'Français']
     method_2_list_line_begin = """
     List<String> """
@@ -99,7 +108,7 @@ def code_generation_for_method_2() -> str:
     method_2_if_line_middle = "Language.contains(langName)) return '"
     method_2_if_line_end = "';"
     method_2_end =  """
-    /// Code to generate automatically from the base locales l10n data: end
+    // Code to generate automatically from the base locales l10n data: end
 
     return null;
   }"""
@@ -128,25 +137,18 @@ def code_generation_for_method_2() -> str:
     return code
 
 def main():    
-    
-    print('')
-    ## Generating code for l10n_utils.dart
-    code = ""
-    class_begin = """
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
-
-class L10nLanguages 
-{"""+eol
-    class_end = "}"
-    code += class_begin    
-    code += code_generation_for_method_1()
-    code += code_generation_for_method_2()
-    code += class_end
-    
-    print(code) 
-    with open('l10n_utils.dart', 'w', encoding="utf-8") as f:
-        f.write(code)
+  code = ""
+  print('')
+  ## Generating code for l10n_utils.dart
+  code += class_begin    
+  code += code_generation_for_method_1()
+  code +=  eol
+  code += code_generation_for_method_2()
+  code += class_end
+  
+  print(code) 
+  with open('l10n_utils.dart', 'w', encoding="utf-8") as f:
+      f.write(code)
 
 if __name__ == "__main__":
     main()
