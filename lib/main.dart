@@ -26,7 +26,9 @@ class _MyAppState extends State<MyApp>
   // Utility class
   PrintUtils pu = PrintUtils();
 
-  Locale? _currentLocale = Locale('en'); // TODO: to get eventually the value from user preferences
+  // Temporarily defining English as the locale
+  // TODO: to get eventually the value from user preferences
+  Locale? _currentLocale = Locale('en'); 
 
    void _setLocale(Locale newLocale) 
   {
@@ -41,7 +43,6 @@ class _MyAppState extends State<MyApp>
         }
       );
     }
-    
   }
 
   @override
@@ -68,7 +69,7 @@ class _MyAppState extends State<MyApp>
 
       locale: _currentLocale, // to be able to swap translated strings,
 
-      home: SafeArea(child: MyHomePage(setLocale: _setLocale)),
+      home: SafeArea(child: MyHomePage(parentWidgetOnLanguageSelectedCallBackFunction: _setLocale)),
     );
   }
 }
