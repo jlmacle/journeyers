@@ -11,7 +11,8 @@ class FileUtils
 {
   FileUtils()
   {
-    setupLogging();
+    LoggingUtils lu = LoggingUtils();
+    lu.setupLogging();
   }
  
   final _logger = Logger("file_utils.dart");
