@@ -130,8 +130,10 @@ app.*.symbols
 # To define the project's root directory (useful for scripts)
 qa_utils/utils_semi_automated_testing/_qa_utils_config.json
 
-# Documentation folder
+# Documentation folders
 maintenance_utils/doc_dart/
+maintenance_utils/doc_python/
 
 # L10n log file for untranslated messages
 untranslated-messages-file.txt
+
