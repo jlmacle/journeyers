@@ -1,6 +1,6 @@
 site_name: Python code
-site_dir: maintenance_utils\doc_python
-docs_dir: maintenance_utils\doc_python_md
+site_dir: maintenance_utils/doc_python
+docs_dir: maintenance_utils/doc_python_md
 extra_css: 
   - css/custom_mkdocstrings.css
 plugins:
