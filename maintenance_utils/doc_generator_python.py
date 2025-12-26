@@ -14,10 +14,17 @@ import os
 import platform
 import subprocess
 
-# Starting from the project root folder
-root_folder = os.environ.get('JOURNEYERS_DIR')
-os.chdir(root_folder)
 
+project_dir = os.environ.get('JOURNEYERS_DIR')
+
+# Starting from the project root folder to create the directory for the documentation if necessary
+doc_parent_folder = os.path.join(project_dir, 'maintenance_utils')
+os.chdir(doc_parent_folder)
+# Creating doc_python_md if not existant
+os.makedirs('doc_python', exist_ok=True)
+
+# Going to the project root folder before starting the command
+os.chdir(project_dir)
 os_name = platform.system().lower()
 print(f"os_name: {os_name}")
 # Running the 'mkdocs build -v'command
