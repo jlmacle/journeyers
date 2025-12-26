@@ -5,15 +5,15 @@ import json
 
 from py_utils.file_utils import get_files_in_directory
 
-"""
-    Extracts all the base locales file paths from the arb files directory 
+def get_base_locales_file_paths(arbs_dir_path: str) -> List[str]:
+    """
+    Extracts all the base locales file paths from the arb files directory. 
 
     Args:
         arbs_dir_path: Path to the arb files directory
     Returns:
         The list of base locales file paths.
-"""
-def get_base_locales_file_paths(arbs_dir_path: str) -> List[str]:
+    """
     file_list = get_files_in_directory(
         directory_path=arbs_dir_path, 
         file_extension=".arb", 
@@ -28,31 +28,31 @@ def get_base_locales_file_paths(arbs_dir_path: str) -> List[str]:
     
     return base_locales_files_paths
 
-"""
-    Extracts a language code from an arb base locale file path (therefore with no country code in the file name)
+
+def get_language_code_from_base_locale_file_path(base_locale_file_path: str) -> str:
+    """
+    Extracts a language code from an arb base locale file path (therefore with no country code in the file name).
 
     Args:
         base_locale_file_path: Path to the base locale arb file
     Returns:
         The language code.
-"""
-def get_language_code_from_base_locale_file_path(base_locale_file_path: str):
+    """
     if (os.path.basename(base_locale_file_path).count('_') == 2):
         print(f"Error: there shouldn't be two '_' in the base locale file path: {base_locale_file_path}")
         exit()
 
     return os.path.basename(base_locale_file_path).replace('.arb','').replace('app_','')
 
-
-"""
-     Extracts all the base locales language codes (en, fr, ...) from the arb files directory 
+def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
+    """
+     Extracts all the base locales language codes (en, fr, ...) from the arb files directory. 
 
     Args:
         arbs_dir_path: Path to the arb files directory
     Returns:
         The list of base locales language codes.
 """
-def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
     language_codes = []
     base_locales_file_paths = get_base_locales_file_paths(arbs_dir_path)
     for file_path in base_locales_file_paths:
@@ -61,8 +61,10 @@ def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
 
     return language_codes
 
-"""
-    Extracts all the values for the keys lang_<langCode> from all the base locales (lang_en.arb, lang_fr.arb, ...)
+
+def get_language_values_for_each_base_locales(arbs_dir_path: str, list_of_base_locales_paths: List[Path], list_of_language_codes: List[str]) ->  Dict[str, List[str]]:
+    """
+    Extracts all the values for the keys lang_<langCode> from all the base locales (lang_en.arb, lang_fr.arb, ...).
 
     Args:
         arbs_dir_path: Path to the arb files directory
@@ -72,8 +74,7 @@ def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
     Returns:
         A Dictionary with a language code as key, and a list of translations for the related language name.
         For example, the key 'en' has for values of the list: English, and the translation of 'English' in French for example.
-"""
-def get_language_values_for_each_base_locales(arbs_dir_path: str, list_of_base_locales_paths: List[Path], list_of_language_codes: List[str]) ->  Dict[str, List[str]]:
+    """
     languages_values = {}
     # InitialiZing the dictionary
     lang_codes = get_all_base_locales_language_codes(arbs_dir_path)
