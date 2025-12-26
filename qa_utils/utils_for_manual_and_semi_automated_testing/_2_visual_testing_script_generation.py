@@ -106,7 +106,6 @@ def main():
         )
         
         # 2. Cleaning the extracted line
-        # Removing '//' at the start (should happen if extraction is correct)
         processed_comment = processed_comment.strip()
         if processed_comment.startswith('//'):
             processed_comment = processed_comment[2:].strip()
