@@ -7,8 +7,8 @@ def first_comment_extraction(file_path: str, delimiter_line: str) -> str:
     Extracts the first comment between two delimiter lines from a file.
 
     Args:
-        file_path: Path to the file to read.
-        delimiter_line: The line that acts as a delimiter.
+        file_path: Path to the file to read
+        delimiter_line: The line that acts as a delimiter
 
     Returns:
         The extracted comment as a string.
