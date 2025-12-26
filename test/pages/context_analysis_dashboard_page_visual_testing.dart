@@ -1,9 +1,9 @@
-//Line for automated processing
+// Line for automated processing
 // flutter run -t ./test/pages/context_analysis_dashboard_page_visual_testing.dart -d chrome
 // flutter run -t ./test/pages/context_analysis_dashboard_page_visual_testing.dart -d linux
 // flutter run -t ./test/pages/context_analysis_dashboard_page_visual_testing.dart -d macos
 // flutter run -t ./test/pages/context_analysis_dashboard_page_visual_testing.dart -d windows
-//Line for automated processing
+// Line for automated processing
 
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
