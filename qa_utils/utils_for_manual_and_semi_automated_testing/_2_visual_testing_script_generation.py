@@ -1,3 +1,7 @@
+'''
+Script used to generate multi-platform scripts, 
+that launch the testing widgets in a web browser after starting a web server.
+'''
 import os
 import sys
 import platform
@@ -14,14 +18,9 @@ time_for_servers_to_start = 70 # 70 for an Core i3, 8 GB
 
 # Getting the project's absolute path from the config file
 os_name = platform.system().lower()
-projet_root = "./"
-
-config_path = "./_qa_utils_config.json"
-with open(config_path, 'r') as file:
-    config = json.load(file)
-    
+projet_root = "./" 
 if os_name == "darwin":
-    projet_root = config.get("projetRoot")
+    projet_root = os.environ.get('JOURNEYERS_DIR', '')
 
 # Data used to build to os-specific part
 window_output_file_name = "2_widget_visual_testing_helper.bat"
@@ -103,7 +102,7 @@ def main():
         # 1. Extracting the first comment line
         processed_comment = first_comment_extraction(
             file_path=file, 
-            delimiter_line="//Line for automated processing"
+            delimiter_line="// Line for automated processing"
         )
         
         # 2. Cleaning the extracted line

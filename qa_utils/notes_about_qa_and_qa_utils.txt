@@ -6,8 +6,6 @@ By changing the relative path for "filePath", for example:
 String filePath =  r"test\common_widgets\interaction_and_inputs\custom_cascading_checkbox_visual_testing.dart";
 a set of comments, useful during development, can be added to the visual testing file of the relative path.
 
-On macOS, _qa_utils_config.json needs to contain the project root directory,
-for example {"projetRoot":"/Users/dev/Desktop/journeyers"}
 Please note that Chrome must be started to have more than one tab launched, when testing on Windows.
 Your anti-virus might not appreciate the multiple tabs opening.
 
