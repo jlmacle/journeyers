@@ -52,7 +52,7 @@ macos_data = {"chmod":f"# To make the script executable: chmod u+x {macos_output
 
 windows_data = {"chmod":":: Please note that Chrome must be started to have more than one tab launched.", "script_type":":: Batch",
                 "after_comment":f'@echo off{eol}'
-                f'set BROWSER="C:\Program Files\Google\Chrome\Application\chrome.exe"{eol}',
+                fr'set BROWSER="C:\Program Files\Google\Chrome\Application\chrome.exe"{eol}',
                 "time_to_read_comment":"timeout /t 5 >nul",
                 "before_flutter_command":"start ", "after_flutter_command":" -d web-server --web-port ",
                 "after_web_ports":"","comment_character":"::",
