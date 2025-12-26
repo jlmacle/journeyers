@@ -1,3 +1,21 @@
+"""
+    [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
+
+    Script used to add this type of comments to the testing widgets:
+
+    // Line for automated processing
+
+    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d chrome
+    
+    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d linux
+    
+    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d macos
+    
+    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
+    
+    // Line for automated processing
+    """
+
 import os
 import logging
 from pathlib import Path
@@ -8,27 +26,13 @@ def setup_logging():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
 
-
-# To add this type of comments to testing widgets:
-# (Uses the environment variable JOURNEYERS_DIR to point to the project directory)
-
-# //Line for automated processing
-# // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d chrome
-# // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d linux
-# // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d macos
-# // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
-# //Line for automated processing
-
-"""
-    Prints 'Hello, World!' to the console.
-
-    This function is a simple example to demonstrate
-    how to document Python code using docstrings.
-    """
 def main():
+    
     setup_logging()
     logger = logging.getLogger("flutter_run_comment_helper")
+
     eol = "\n"
+
     project_dir = os.environ.get('JOURNEYERS_DIR', '')
     if not project_dir:
         logger.error("JOURNEYERS_DIR environment variable not set.")
@@ -41,6 +45,7 @@ def main():
 
     # raw string for path on Windows
     file_path = r"test\core\utils\dashboard\dashboard_utils_test_data\dashboard_session_data_context_analysis_data_generation.dart"
+   
     file_path = file_path.replace("\\", "/")
 
     comment_begin = "// flutter run -t "
@@ -50,7 +55,7 @@ def main():
     comment_end_macos = "macos"
     comment_end_windows = "windows"
 
-    delimiter_line = "//Line for automated processing"
+    delimiter_line = "// Line for automated processing"
 
     full_path = os.path.join(project_dir, file_path) if project_dir else file_path
     file = Path(full_path)
