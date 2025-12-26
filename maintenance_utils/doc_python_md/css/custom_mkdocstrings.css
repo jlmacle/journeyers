@@ -1,12 +1,16 @@
-/* Left padding and left border for the documnation data */
+/* Left padding and left border for the documentation data */
 .doc-contents {
     border-left: 2px solid #ccc;
     padding-left: 10px;
 }
 
+/* To indent the links */
+li:is([data-bs-level="2"]) a:not([href="#maintenance-utils"]):not([href="#qa-utils"]) {
+  text-indent: 20px;
+}
 
 /* For the modules names*/
-.doc-heading > code{
+.doc-heading > code {
     color: rgb(49, 165, 232);
     border: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -16,10 +20,8 @@
 .doc-heading > .highlight {
     background-color: rgb(233,250,252);
     color: rgb(10, 46, 80);
-
 }
 
-/* To indent the links */
-li:is([data-bs-level="2"]) a:not([href="#maintenance-utils"]):not([href="#qa-utils"]) {
-  text-indent: 20px;
+.doc-section-item td {
+    padding-right: 20px; 
 }
