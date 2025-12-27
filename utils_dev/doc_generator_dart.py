@@ -12,7 +12,7 @@ root_folder = os.environ.get('JOURNEYERS_DIR')
 os.chdir(root_folder)
 
 # Doc folder creation if needed
-doc_folder = "utils_maintenance/doc_dart"
+doc_folder = "utils_dev/doc_dart"
 # https://docs.python.org/3/library/os.html#os.makedirs
 # exist_ok=True to avoid an error when the folder already exists.
 os.makedirs(doc_folder, exist_ok=True)

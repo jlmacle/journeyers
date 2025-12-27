@@ -6,7 +6,7 @@ Addition of a new language to l10n:
   For example, if lang_en_US.arb exists, lang_en.arb should exist.
   When done, "flutter gen-l10n" should execute without error message.
 - If adding a new language to l10n, 
-the class l10n_utils.dart can be updated with l10n_utils_update.py (utils_maintenance).
+the class l10n_utils.dart can be updated with l10n_utils_update.py (utils_dev).
 
 -----------------------
 
