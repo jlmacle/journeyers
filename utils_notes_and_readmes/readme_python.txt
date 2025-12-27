@@ -1,6 +1,6 @@
 py_utils install:
 
-from the parent folder of setup.py, please run the following command to avoid import issues:
+From the parent folder of setup.py, please run the following command to avoid import issues:
 pip install -e . 
 
 You should get a "Successfully installed py_utils-0.1"
@@ -22,4 +22,4 @@ https://www.mkdocs.org/user-guide/configuration/
 https://mkdocstrings.github.io/python/usage/
 
 You will have to run the python documentation generation from the virtual environment 
-for mkdocs to be found.
+for mkdocs to be found, if installing the packages within the virtual environment.
