@@ -13,7 +13,7 @@ the class l10n_utils.dart can be updated with l10n_utils_update.py (utils_dev).
 iOS Applications and l10n:
 
 doc/l10n_app_localizations/AppLocalizations-class.html
-TODO: to add the Category tags in the classes before generating the Dart documentation.
+TODO: to add the L10n category tag in the classes before generating the Dart documentation.
 
 "iOS Applications
 
