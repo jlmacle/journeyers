@@ -1,13 +1,25 @@
 To display groups and tests labels:
+
 flutter test -r expanded
 
-flutter_run_comments_util.dart:
+-----------------------
+
+_1_flutter_run_comments_helper.dart:
+
 By changing the relative path for "filePath", for example:
 String filePath =  r"test\common_widgets\interaction_and_inputs\custom_cascading_checkbox_visual_testing.dart";
 a set of comments, useful during development, can be added to the visual testing file of the relative path.
 
+-----------------------
+
+_2_visual_testing_script_generation.py:
+
 Please note that Chrome must be started to have more than one tab launched, when testing on Windows.
 Your anti-virus might not appreciate the multiple tabs opening.
+
+-----------------------
+
+Journeyers app:
 
 An Xcode configuration update was needed to add read-write permission for user selected files.
 (Screen copy added)
