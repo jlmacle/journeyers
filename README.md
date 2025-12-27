@@ -9,11 +9,13 @@ is meant to support our problem-solving processes, and to help us reach lasting 
 As of 12/06/25, most of the value is in the utils, custom widgets, and custom widgets testing files.<br>
 The answers to the first set of questions is exportable to CSV.<br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
-The accessibility needs to be finished.<br>
+The Android app, in its current stage, seems accessible, nevertheless the accessibility needs to be finished.<br>
+([Flutter install](https://docs.flutter.dev/install))
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
 #GlobalSustainableQualityOfLife<br>
+#HouseholdFriendlyEdTech
 #SDG3
 <hr>
 Should we entrust the harmony of our households,<br>
