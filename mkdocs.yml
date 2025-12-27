@@ -1,6 +1,6 @@
 site_name: Python code
-site_dir: maintenance_utils/doc_python
-docs_dir: maintenance_utils/doc_python_md
+site_dir: utils_maintenance/doc_python
+docs_dir: utils_maintenance/doc_python_md
 extra_css: 
   - css/custom_mkdocstrings.css
 plugins:
@@ -8,9 +8,9 @@ plugins:
     handlers: 
         python:
           paths: 
-            - "maintenance_utils"          
-            - "qa_utils/utils_for_manual_and_semi_automated_testing" 
-            - "qa_utils/utils_for_manual_and_semi_automated_testing/py_utils"
+            - "utils_maintenance"          
+            - "utils_qa/utils_for_manual_and_semi_automated_testing" 
+            - "utils_qa/utils_for_manual_and_semi_automated_testing/py_utils"
           options:
             show_source: false
             show_root_heading: true

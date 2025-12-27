@@ -128,11 +128,11 @@ app.*.symbols
 .DS_Store
 
 # To define the project's root directory (useful for scripts)
-qa_utils/utils_semi_automated_testing/_qa_utils_config.json
+utils_qa/utils_semi_automated_testing/_utils_qa_config.json
 
 # Documentation folders
-maintenance_utils/doc_dart/
-maintenance_utils/doc_python/
+utils_maintenance/doc_dart/
+utils_maintenance/doc_python/
 
 # L10n log file for untranslated messages
 untranslated-messages-file.txt
