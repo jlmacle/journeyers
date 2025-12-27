@@ -15,7 +15,7 @@ The Android app, in its current stage, seems accessible, nevertheless the access
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
 #GlobalSustainableQualityOfLife<br>
-#HouseholdFriendlyEdTech<br>
+#HouseholdFriendlyOpenSourceEdTech<br>
 #SDG3
 <hr>
 Should we entrust the harmony of our households,<br>
