@@ -70,15 +70,17 @@ https://support.google.com/accessibility/android/answer/6151827?sjid=71842610257
 Testing with VoiceOver (iOS):
 Flat navigation: VoiceOver moves sequentially through each item on the screen when you use the move next and previous commands.
 (Settings  > Accessibility > VoiceOver > Navigation Style)
+Three-finger double tap: to mute or unmute VoiceOver
+One finger dragged up from the bottom edge of the screen 
+until a vibration is felt or two rising tones are heard, then finger lifted: to go back to the home page (locked screen for example)
 Three-finger swipe down: to scroll up one page
 Three-finger swipe up: to scroll down one page
-One finger dragged up from the bottom edge of the screen 
-until a vibration is felt or two rising tones are heard, then finger lifted: to go back to the home page
 One finger dragged up from the bottom edge of the screen
 until the second vibration is felt or three tones are heard, then finger lifted: to open the App Switcher
 Two-finger swipe up: to speak the entire screen from the top
 Two-finger swipe down: to speak the entire screen from the selected item
 Three-finger tap: to speak additional information, such as the position within a list or whether text is selected
 https://support.apple.com/guide/iphone/use-voiceover-gestures-iph3e2e2281/26/ios/26
+https://support.apple.com/guide/iphone/use-the-onscreen-keyboard-iph3e2e3d1d/ios
 
 
