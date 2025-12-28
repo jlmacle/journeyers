@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage>
       body: Column
       (children: 
       [
-        CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
+        // CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
         Expanded(child:  _pages[_currentIndex])       
       ]
       ), 
