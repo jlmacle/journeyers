@@ -20,8 +20,11 @@ Your anti-virus might not appreciate the multiple tabs opening.
 -----------------------
 
 Journeyers app:
-
 An Xcode configuration update was needed to add read-write permission for user selected files.
-(Screen copy added)
+("open macos/Runner.xcworkspace". Screen copy added)
+
+iOS simulator:
 To use the iOS simulator, having the github website opened (while logged in) might have been of help 
 to fix the "Failed to connect to github.com port 443 after 27847 ms: Couldn't connect to server" issue.
+
+
