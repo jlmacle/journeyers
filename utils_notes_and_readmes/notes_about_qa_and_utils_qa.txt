@@ -19,9 +19,10 @@ Your anti-virus might not appreciate the multiple tabs opening.
 
 -----------------------
 
-Journeyers app:
+Journeyers app (macOS):
 An Xcode configuration update was needed to add read-write permission for user selected files.
 ("open macos/Runner.xcworkspace". Screen copy added)
+
 
 iOS simulator:
 To use the iOS simulator, having the github website opened (while logged in) might have been of help 
