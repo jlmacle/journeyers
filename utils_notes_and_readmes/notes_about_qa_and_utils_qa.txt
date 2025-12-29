@@ -23,6 +23,10 @@ Journeyers app (macOS):
 An Xcode configuration update was needed to add read-write permission for user selected files.
 ("open macos/Runner.xcworkspace". Screen copy added)
 
+Journeyers app (iOS):
+"No valid code signing certificates were found" issue:
+Flutter explanations + "Apple Developer account", personal team account, signing certificate: development
+(open ios/Runner.xcworkspace)
 
 iOS simulator:
 To use the iOS simulator, having the github website opened (while logged in) might have been of help 
