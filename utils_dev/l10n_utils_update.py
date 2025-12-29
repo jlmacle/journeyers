@@ -54,21 +54,23 @@ def code_generation_for_method_1() -> str:
     # Generating method 1
 
     method_1_begin = (
-        spaces_2+'\n'
+  '\n'
   '/// A method used to get a list of all the language names, related to a locale, from the l10n data.\n'
   '/// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\].\n'
   '/// When adding a new base locale, file and method can be updated using l10n_utils_update.py.\n'
   'static List<String> getLanguages(BuildContext context) \n'
   '{\n'
   '  List<String> languages = [];\n'
+  f'{spaces_2}// Code to generate automatically from the base locales l10n data: begin\n'
     )
 
-    method_1_add_begin = spaces_2+"languages.add(AppLocalizations.of(context)?.lang_"
+    method_1_add_begin = f"{spaces_2}languages.add(AppLocalizations.of(context)?.lang_"
     method_1_add_middle = " ?? 'Default for \""
     method_1_add_end = "\" language');"
 
     method_1_end = (
-        spaces_2+ "languages.sort();\n"
+        f"{spaces_2}// Code to generate automatically from the base locales l10n data: end\n"
+        f"{spaces_2}languages.sort();\n"
         f"{spaces_2}return languages;\n"
   "}"
   )
@@ -102,7 +104,7 @@ def code_generation_for_method_2() -> str:
 
     # List<String> frLanguage = ['French', 'Français']
     method_2_list_line_begin = (
-    spaces_2 + "List<String> "
+    f"{spaces_2}List<String> "
     )
     method_2_list_line_variable_name_end = "Language = ["
     method_2_list_line_end = "];\n"
