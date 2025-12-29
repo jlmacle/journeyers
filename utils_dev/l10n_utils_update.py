@@ -31,15 +31,14 @@ print(f"Language translations for each language: {language_values_for_each_base_
 spaces_2 = "  "
 spaces_4 = "    "
 class_begin = (
-"import 'package:journeyers/l10n/app_localizations.dart';\n"
-"import 'package:flutter/material.dart';\n"
-"\n"
-"/// {@category Utils}\n"
-"/// A utility class related to localization.\n"
-"class L10nLanguages \n"
-"{  \n"
+  "import 'package:journeyers/l10n/app_localizations.dart'; \n"
+  "import 'package:flutter/material.dart'; \n"
+  "\n"
+  "/// {@category Utils} \n"
+  "/// A utility class related to localization. \n"
+  "class L10nLanguages \n"
+  "{  \n"
 )
-
 class_end = "}"
 
 
@@ -50,40 +49,39 @@ class_end = "}"
 #   Returns: 
 #           A string with the code.
 def code_generation_for_method_1() -> str:
-    code = ""
-    # Generating method 1
+  code = ""
 
-    method_1_begin = (
-  '\n'
-  '/// A method used to get a list of all the language names, related to a locale, from the l10n data.\n'
-  '/// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\].\n'
-  '/// When adding a new base locale, file and method can be updated using l10n_utils_update.py.\n'
-  'static List<String> getLanguages(BuildContext context) \n'
-  '{\n'
-  '  List<String> languages = [];\n'
-  f'{spaces_2}// Code to generate automatically from the base locales l10n data: begin\n'
-    )
-
-    method_1_add_begin = f"{spaces_2}languages.add(AppLocalizations.of(context)?.lang_"
-    method_1_add_middle = " ?? 'Default for \""
-    method_1_add_end = "\" language');"
-
-    method_1_end = (
-        f"{spaces_2}// Code to generate automatically from the base locales l10n data: end\n"
-        f"{spaces_2}languages.sort();\n"
-        f"{spaces_2}return languages;\n"
-  "}"
+  method_1_begin = (
+    '\n'
+    '/// A method used to get a list of all the language names, related to a locale, from the l10n data. \n'
+    '/// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\]. \n'
+    '/// When adding a new base locale, file and method can be updated using l10n_utils_update.py. \n'
+    '//  Note:  \[ and \] for dart doc \n'
+    'static List<String> getLanguages(BuildContext context) \n'
+    '{\n'
+    '  List<String> languages = []; \n'
+    f'{spaces_2}// Code to generate automatically from the base locales l10n data: begin \n'
   )
-    
 
-    code += method_1_begin
-    for lang_code in language_codes:
-        code += method_1_add_begin+lang_code + method_1_add_middle+lang_code + method_1_add_end + "\n"
-    code += method_1_end + "\n"
+  method_1_add_begin = f"{spaces_2}languages.add(AppLocalizations.of(context)?.lang_"
 
-    return code
+  method_1_add_middle = " ?? 'Default for \""
 
+  method_1_add_end = "\" language');"
 
+  method_1_end = (
+    f"{spaces_2}// Code to generate automatically from the base locales l10n data: end \n"
+    f"{spaces_2}languages.sort(); \n"
+    f"{spaces_2}return languages; \n"
+    "}"
+  )
+
+  code += method_1_begin
+  for lang_code in language_codes:
+      code += method_1_add_begin+lang_code + method_1_add_middle+lang_code + method_1_add_end + "\n"
+  code += method_1_end + "\n"
+
+  return code
 
 
   #  Generates the code for the second method of l10n utils
@@ -93,53 +91,53 @@ def code_generation_for_method_1() -> str:
   #   Returns:
   #       A string with the code.
 def code_generation_for_method_2() -> str:
-    code = ""
-    method_2_begin = (
-  "/// A method used to get a language code, being provided a language name.\n"
-  "static String? getLangCodeFromLangName(String langName)\n"
-  "{\n"
-  ""
-  "  // Code to generate automatically from the base locales l10n data: begin\n"
-    )
+  code = ""
+  method_2_begin = (
+    "/// A method used to get a language code, being provided a language name. \n"
+    "static String? getLangCodeFromLangName(String langName) \n"
+    "{ \n"
+    ""
+    "  // Code to generate automatically from the base locales l10n data: begin \n"
+  )
 
     # List<String> frLanguage = ['French', 'Français']
-    method_2_list_line_begin = (
+  method_2_list_line_begin = (
     f"{spaces_2}List<String> "
-    )
-    method_2_list_line_variable_name_end = "Language = ["
-    method_2_list_line_end = "];\n"
-    # if (frLanguage.contains(langName)) return 'fr';
-    method_2_if_line_begin = f"{spaces_2}if ("
-    method_2_if_line_middle = "Language.contains(langName)) return '"
-    method_2_if_line_end = "';\n"
-    method_2_end =  (
-    f"{spaces_2}// Code to generate automatically from the base locales l10n data: end\n"
-    f"{spaces_2}return null;\n"
-  "}"
-    )
+  )
+  method_2_list_line_variable_name_end = "Language = ["
+  method_2_list_line_end = "]; \n"
+  # if (frLanguage.contains(langName)) return 'fr';
+  method_2_if_line_begin = f"{spaces_2}if ("
+  method_2_if_line_middle = "Language.contains(langName)) return '"
+  method_2_if_line_end = "'; \n"
+  method_2_end =  (
+    f"{spaces_2}// Code to generate automatically from the base locales l10n data: end \n"
+    f"{spaces_2}return null; \n"
+    "}"
+  )
 
-    code += method_2_begin
-    code_list_part = ""
-    code_if_part = ""
-    for lang_code in language_codes:        
-        # List<String> enLanguage = ["English","Anglais"];
-        code_list_part += method_2_list_line_begin + lang_code+method_2_list_line_variable_name_end 
-        languages_for_specific_lang_code = get_language_translations_for_each_language(arbs_dir_path, base_locales_files_paths, language_codes)
-        code_language_part = ""
-        languages_values = languages_for_specific_lang_code[lang_code]
-        for language_value in languages_values:
-            code_language_part += '"'+language_value+'",'
-        code_language_part = code_language_part.rstrip(',')
-        code_language_part += method_2_list_line_end
-        code_list_part += code_language_part
+  code += method_2_begin
+  code_list_part = ""
+  code_if_part = ""
+  for lang_code in language_codes:        
+      # List<String> enLanguage = ["English","Anglais"];
+      code_list_part += method_2_list_line_begin + lang_code+method_2_list_line_variable_name_end 
+      languages_for_specific_lang_code = get_language_translations_for_each_language(arbs_dir_path, base_locales_files_paths, language_codes)
+      code_language_part = ""
+      languages_values = languages_for_specific_lang_code[lang_code]
+      for language_value in languages_values:
+          code_language_part += '"'+language_value+'",'
+      code_language_part = code_language_part.rstrip(',')
+      code_language_part += method_2_list_line_end
+      code_list_part += code_language_part
 
-        # if (enLanguage.contains(langName)) return 'en';
-        code_if_part += method_2_if_line_begin + lang_code + method_2_if_line_middle + lang_code + method_2_if_line_end
+      # if (enLanguage.contains(langName)) return 'en';
+      code_if_part += method_2_if_line_begin + lang_code + method_2_if_line_middle + lang_code + method_2_if_line_end
         
-    code += code_list_part
-    code += code_if_part
-    code += method_2_end+"\n"
-    return code
+  code += code_list_part
+  code += code_if_part
+  code += method_2_end+"\n"
+  return code
 
 def main():    
   code = ""
