@@ -2,7 +2,7 @@
 ---
 ## Maintenance utils
 
-This code helps with maintaining the documentation of the Dart and Python code.
+This code helps with producing the documentation of the Dart and Python code.
 
 ::: doc_generator_dart
 ::: doc_generator_python
