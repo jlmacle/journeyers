@@ -9,7 +9,7 @@ import os
 
 # Assuming that "pip install -e ." has been run in the parent folder of setup.py ("pip show py_utils" to confirm installation)
 # Imports potentially declared unresolved by the IDE, should be nevertheless successful at being found.
-from py_utils.arb_utils import get_base_locales_file_paths, get_all_base_locales_language_codes, get_language_values_for_each_base_locales 
+from py_utils.arb_utils import get_base_locales_file_paths, get_all_base_locales_language_codes, get_language_translations_for_each_language 
 
 # Defines the relative path to the arb files directory
 arbs_dir_path = os.path.join("..", "lib","l10n")
@@ -24,8 +24,8 @@ base_locales_files_paths = get_base_locales_file_paths(arbs_dir_path)
 print(f"Base locales files paths: {base_locales_files_paths}")
 
 # Getting the different ways the same language is called, from the base locales, to generate code for the getLangCodeFromLangName method
-language_values_for_each_base_locales = get_language_values_for_each_base_locales(arbs_dir_path, base_locales_files_paths, language_codes)
-print(f"Language values in the different base locales: {language_values_for_each_base_locales}")
+language_values_for_each_base_locales = get_language_translations_for_each_language(arbs_dir_path, base_locales_files_paths, language_codes)
+print(f"Language translations for each language: {language_values_for_each_base_locales}")
 
 # Spaces + begin/end of class
 spaces_2 = "  "
@@ -122,7 +122,7 @@ def code_generation_for_method_2() -> str:
     for lang_code in language_codes:        
         # List<String> enLanguage = ["English","Anglais"];
         code_list_part += method_2_list_line_begin + lang_code+method_2_list_line_variable_name_end 
-        languages_for_specific_lang_code = get_language_values_for_each_base_locales(arbs_dir_path, base_locales_files_paths, language_codes)
+        languages_for_specific_lang_code = get_language_translations_for_each_language(arbs_dir_path, base_locales_files_paths, language_codes)
         code_language_part = ""
         languages_values = languages_for_specific_lang_code[lang_code]
         for language_value in languages_values:

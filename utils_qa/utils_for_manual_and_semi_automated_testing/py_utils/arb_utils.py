@@ -62,7 +62,7 @@ def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
     return language_codes
 
 
-def get_language_values_for_each_base_locales(arbs_dir_path: str, list_of_base_locales_paths: List[Path], list_of_language_codes: List[str]) ->  Dict[str, List[str]]:
+def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base_locales_paths: List[Path], list_of_language_codes: List[str]) ->  Dict[str, List[str]]:
     """
     Extracts all the values for the keys lang_<langCode> from all the base locales (lang_en.arb, lang_fr.arb, ...).
 
