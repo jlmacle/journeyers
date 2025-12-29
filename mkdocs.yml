@@ -1,4 +1,4 @@
-site_name: Python code
+site_name: journeyers - Python docs
 site_dir: utils_dev/doc_python
 docs_dir: utils_dev/doc_python_md
 extra_css: 
