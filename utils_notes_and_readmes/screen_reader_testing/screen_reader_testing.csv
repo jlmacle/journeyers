@@ -9,8 +9,9 @@ No issue noticed.","
 (a finger swiped down/up to voice the element)
 + (double-tap to activate an element, for example checkbox or text field)
 + (double tap outside of the text field to dismiss the keyboard)
++ (three-finger swipe up/down to scroll up/down if necessary)
 
-Issue with a lack of automatic scrolling.","Tab/Shift Tab + Space/Enter key 
+Seems successful.","Tab/Shift Tab + Space/Enter key 
 
 (app title and app bar title not voiced/
 scrolling not automatic with tabbing/
