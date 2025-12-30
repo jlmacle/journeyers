@@ -17,7 +17,7 @@ def test_get_all_base_locales_language_codes():
     list_of_language_codes = get_all_base_locales_language_codes(arbs_dir_path)
     assert list_of_language_codes == expected
 
-def test_get_language_values_for_each_base_locales():
+def test_get_language_translations_for_each_language():
     list_of_base_locales_paths = get_base_locales_file_paths(arbs_dir_path)
     list_of_language_codes = get_all_base_locales_language_codes(arbs_dir_path)
     
