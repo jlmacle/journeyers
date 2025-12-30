@@ -20,7 +20,9 @@ print(f"os_name: {os_name}")
 if (os_name == 'windows'):
     result = subprocess.run(['mkdocs', 'build', '-v'],shell=True)
 else:
-    result = subprocess.run(['mkdocs', 'build', '-v'],text=True)
+# if FileNotFoundError: [Errno 2] No such file or directory: 'mkdocs' on Linux, 
+# maybe a virtual environment was used to install mkdocs, but not to run the script.
+    result = subprocess.run(['mkdocs', 'build', '-v'])
 
 print("Output:", result.stdout)
 print("Error:", result.stderr)
