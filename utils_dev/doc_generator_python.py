@@ -13,6 +13,8 @@ import subprocess
 root_folder = os.environ.get('JOURNEYERS_DIR')
 os.chdir(root_folder)
 
+# doc folder declared in configuration
+
 os_name = platform.system().lower()
 print(f"os_name: {os_name}")
 # Running the 'mkdocs build -v'command
