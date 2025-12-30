@@ -20,7 +20,7 @@ print(f"os_name: {os_name}")
 if (os_name == 'windows'):
     result = subprocess.run(['dart', 'doc', '-o', f'{doc_folder}'], shell=True)
 else:
-    result = subprocess.run(['dart', 'doc', '-o', f'{doc_folder}'], text=True)
+    result = subprocess.run(['dart', 'doc', '-o', f'{doc_folder}'])
 
 print("Output:", result.stdout)
 print("Error:", result.stderr)

@@ -1,17 +1,17 @@
 dartdoc:
   categories:
     "L10n":
-      markdown: utils_dev\doc_dart_categories_pages\l10n.md
+      markdown: utils_dev/doc_dart_categories_pages/l10n.md
     "Custom widgets":
-      markdown: utils_dev\doc_dart_categories_pages\custom_widgets.md
+      markdown: utils_dev/doc_dart_categories_pages/custom_widgets.md
     "Utils":
-      markdown: utils_dev\doc_dart_categories_pages\utils.md
+      markdown: utils_dev/doc_dart_categories_pages/utils.md
     "Pages":
-      markdown: utils_dev\doc_dart_categories_pages\pages.md   
+      markdown: utils_dev/doc_dart_categories_pages/pages.md   
     "Context analysis":
-      markdown: utils_dev\doc_dart_categories_pages\context_analysis.md
+      markdown: utils_dev/doc_dart_categories_pages/context_analysis.md
     "Group problem-solving":
-      markdown: utils_dev\doc_dart_categories_pages\group_problem_solving.md
+      markdown: utils_dev/doc_dart_categories_pages/group_problem_solving.md
   categoryOrder: ["Custom widgets", "Utils", "Pages", "Context analysis", "Group problem-solving"]
   exclude:
     - main
