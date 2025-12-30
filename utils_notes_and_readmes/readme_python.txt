@@ -26,3 +26,8 @@ https://mkdocstrings.github.io/python/usage/
 
 You will have to run the python documentation generation from the virtual environment 
 for mkdocs to be found, if installing the packages within the virtual environment.
+
+Also, if you use a virtual environment, please run the following command to avoid py_utils import issues,
+from the parent folder of setup.py (utils_qa/utils_for_manual_and_semi_automated_testing), 
+within the virtual environment:
+pip install -e . 
