@@ -1,10 +1,15 @@
-from pathlib import Path, WindowsPath
+import sys
+from pathlib import Path, WindowsPath, PosixPath
 from py_utils.arb_utils import *
 
 arbs_dir_path = Path('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data')
 
 def test_get_base_locales_file_paths():
-    expected = [WindowsPath('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en.arb'), WindowsPath('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr.arb')]
+    if sys.platform.startswith('win'):
+        expected = [WindowsPath('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en.arb'), WindowsPath('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr.arb')]
+    if sys.platform.startswith('linux'):
+        expected = [PosixPath('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en.arb'), PosixPath('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr.arb')]
+    
     list_of_base_locales_paths =  get_base_locales_file_paths(arbs_dir_path)
     assert list_of_base_locales_paths == expected
 
