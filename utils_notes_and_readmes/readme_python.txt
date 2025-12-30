@@ -17,9 +17,9 @@ https://docs.python.org/3/tutorial/venv.html
 On Linux, you might have to setup a virtual environment, for example:
 python3 -m venv journeyers (in the root directory, for convenience)
 
-On Linux/macOS, the following command gives access to the virtual environment:
-source journeyers/bin/activate
-
+The following command gives access to the virtual environment:
+source journeyers/bin/activate (Linux/macOS)
+journeyers\Scripts\activate (Windows)
 
 pip install mkdocs
 pip install "mkdocstrings[python]"
