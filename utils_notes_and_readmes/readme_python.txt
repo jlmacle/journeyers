@@ -15,8 +15,11 @@ Python virtual environment:
 https://docs.python.org/3/tutorial/venv.html
 
 On Linux, you might have to setup a virtual environment, for example:
-python3 -m venv journeyers
+python3 -m venv journeyers (in the root directory, for convenience)
+
+On Linux/macOS, the following command gives access to the virtual environment:
 source journeyers/bin/activate
+
 
 pip install mkdocs
 pip install "mkdocstrings[python]"
@@ -31,3 +34,6 @@ Also, if you use a virtual environment, please run the following command to avoi
 from the parent folder of setup.py (utils_qa/utils_for_manual_and_semi_automated_testing), 
 within the virtual environment:
 pip install -e . 
+
+You might have to install pytest in the virtual environment as well:
+pip install pytest
