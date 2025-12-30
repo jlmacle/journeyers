@@ -5,6 +5,9 @@ pip install -e .
 
 You should get a "Successfully installed py_utils-0.1"
 
+"pip show py_utils" helps to know which version of python is relevant to run pytest, 
+in case of pytest issue (for example: "python3.12.exe  -m pytest"). 
+
 -----------------------
 
 Python virtual environment:
