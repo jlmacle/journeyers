@@ -53,4 +53,7 @@ def test_with_absent_file_create_file_if_necessary_and_write_content():
     with open(file_path_str, "r", encoding="utf-8") as f:
         file_content = f.read()
     assert file_content == text_to_add
+
+    # removing the file
+    os.remove(file_path_str)
     
