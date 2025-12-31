@@ -5,6 +5,9 @@ from py_utils.file_utils import *
 # Getting the operating system name
 os_name = platform.system().lower()
 
+# Path to the folder of the files created (tests of file_create_file_if_necessary_and_write_content)
+files_folder_path = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/'
+
 def test_get_files_in_directory():
     directory_path = "utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data"
     file_extension = ".arb"
@@ -21,6 +24,9 @@ def test_get_files_in_directory():
 def test_with_existing_file_create_file_if_necessary_and_write_content():
     file_path_str = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/existing_file.txt'
     text_to_add = 'hello world'
+
+    # creating the files folder if absent
+    os.makedirs(files_folder_path, exist_ok=True)
 
     # creating an empty file
     open(file_path_str, "x")
@@ -49,8 +55,11 @@ def test_with_existing_file_create_file_if_necessary_and_write_content():
 
     
 def test_with_absent_file_create_file_if_necessary_and_write_content():
-    file_path_str = r'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/absent_file.txt'
+    file_path_str = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/absent_file.txt'
     text_to_add = 'hello world'
+
+    # creating the files folder if absent
+    os.makedirs(files_folder_path, exist_ok=True)
 
     # asserting the absence of the file
     assert Path(file_path_str).exists() == False
