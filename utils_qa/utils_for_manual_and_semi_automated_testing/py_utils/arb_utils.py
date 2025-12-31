@@ -22,9 +22,9 @@ def get_base_locales_file_paths(arbs_dir_path: str) -> List[str]:
     
     # Keeping only the base locales from the found files (lang_en.arb, lang_fr.arb, not app_en_US.arb)
     base_locales_files_paths = [
-            file_path for file_path in file_list
-            if os.path.basename(file_path).count('_') != 2
-        ]
+        file_path for file_path in file_list
+        if os.path.basename(file_path).count('_') != 2
+    ]
     
     return base_locales_files_paths
 
@@ -64,7 +64,9 @@ def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
 
 def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base_locales_paths: List[Path], list_of_language_codes: List[str]) ->  Dict[str, List[str]]:
     """
-    Extracts all the values for the keys lang_<langCode> from all the base locales (lang_en.arb, lang_fr.arb, ...).
+    Extracts all the translations for a given language from all the base locales files (lang_en.arb, lang_fr.arb, ...),
+    and returns a dictionary with the language codes as keys, and lists of translations as values.
+    For example: {'en': ['English', 'Anglais'], 'fr': ['French', 'Français']}
 
     Args:
         arbs_dir_path: Path to the arb files directory
@@ -76,7 +78,7 @@ def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base
         For example, the key 'en' has for values of the list: English, and the translation of 'English' in French for example.
     """
     languages_values = {}
-    # InitialiZing the dictionary
+    # Initializing the dictionary
     lang_codes = get_all_base_locales_language_codes(arbs_dir_path)
     for code in lang_codes:
         languages_values[code] = []    
