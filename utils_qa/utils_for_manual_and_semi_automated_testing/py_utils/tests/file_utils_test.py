@@ -1,6 +1,5 @@
 import platform
 from pathlib import WindowsPath, PosixPath
-
 from py_utils.file_utils import *
 
 # Getting the operating system name
