@@ -1,6 +1,13 @@
+import logging
 import os
 
 eol = os.linesep
+
+def setup_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
 
 def first_comment_extraction(file_path: str, delimiter_line: str) -> str:
     """
@@ -13,19 +20,25 @@ def first_comment_extraction(file_path: str, delimiter_line: str) -> str:
     Returns:
         The extracted comment as a string.
     """
+
+    setup_logging()
+    logger = logging.getLogger("comment_content_extractor")
+
     comment = ""
     nbr_delimiter_lines_found = 0
-    nbr_comment_found = 0
     with open(file_path, 'r') as file:
         lines = file.readlines()
         for line in lines:
+            # searching for the first delimiter line
             if delimiter_line in line:
                 nbr_delimiter_lines_found += 1
-                continue
-            if nbr_comment_found == 1 or nbr_delimiter_lines_found == 2:
-                break
+            # extracting the line if delimiter line found
             elif nbr_delimiter_lines_found == 1:
                 trimmed_comment_line = line.strip()
                 comment += f"{trimmed_comment_line}{eol}"
-                nbr_comment_found += 1
+                # exiting the loop
+                break
+        # if no comment extracted (could happen also with two delimiter lines in a row)
+        if comment == "":
+            logger.error(f"Empty comment found from {file_path}")
     return comment
