@@ -44,6 +44,7 @@ def get_language_code_from_base_locale_file_path(base_locale_file_path: str) -> 
 
     return os.path.basename(base_locale_file_path).replace('.arb','').replace('app_','')
 
+
 def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
     """
      Extracts all the base locales language codes (en, fr, ...) from the arb files directory. 
@@ -75,7 +76,7 @@ def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base
 
     Returns:
         A Dictionary with a language code as key, and a list of translations for the related language name.
-        For example, the key 'en' has for values of the list: English, and the translation of 'English' in French for example.
+        For example: {'en': ['English', 'Anglais'], 'fr': ['French', 'Français']}
     """
     languages_values = {}
     # Initializing the dictionary
