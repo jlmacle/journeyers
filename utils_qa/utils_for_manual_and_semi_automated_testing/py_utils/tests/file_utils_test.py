@@ -21,6 +21,14 @@ def test_get_files_in_directory():
 def test_create_file_if_necessary_and_write_content_existing_file():
     file_path_str = r'utils_qa\utils_for_manual_and_semi_automated_testing\py_utils\tests\file_utils_test_data\output_files\existing_file.txt'
     text_to_add = 'hello world'
+
+    # removing the file if existant
+    os.remove(file_path_str)
+
+    # asserting the absence of the file
+    assert Path(file_path_str).exists() == False
+
+    # creating the file and writing content
     create_file_if_necessary_and_write_content(file_path_str, text_to_add)
 
     #asserting the addition of the text
