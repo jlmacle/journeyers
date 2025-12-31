@@ -9,7 +9,7 @@ from pathlib import Path
 import json
 
 from py_utils.comment_content_extractor import first_comment_extraction
-from py_utils.file_utils import  get_files_in_directory, create_file_if_necessary_and_add_content
+from py_utils.file_utils import  get_files_in_directory, create_file_if_necessary_and_write_content
 
 eol = os.linesep 
 
@@ -140,7 +140,7 @@ def main():
     # 5. Write the final script file
     file_path_out = os.path.join("..", "..", "utils_qa", "scripts_for_automated_and_semi_automated_testing"
                                  , f"{system_adapted_data["output_file_name"]}")
-    create_file_if_necessary_and_add_content(file_path=file_path_out, text=cmd_lines)
+    create_file_if_necessary_and_write_content(file_path=file_path_out, text=cmd_lines)
     print()
     print(f"The file should have been created at {file_path_out}")
     print()
