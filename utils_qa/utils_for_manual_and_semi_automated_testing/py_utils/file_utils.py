@@ -27,7 +27,7 @@ def get_files_in_directory(directory_path: str, file_extension: str, search_is_r
         # Use glob for non-recursive search
         return list(target_dir.glob(f'*{file_extension}'))
 
-def create_file_if_necessary_and_add_content(file_path: str, text: str) -> None:
+def create_file_if_necessary_and_write_content(file_path: str, text: str) -> None:
     """
     Adds content to a file, creating the file if necessary.
 
