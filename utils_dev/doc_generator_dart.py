@@ -24,4 +24,4 @@ else:
 
 print("Output:", result.stdout)
 print("Error:", result.stderr)
-# TODO: to add the dart doc category to the l10n files if was removed by re-generation.
+# TODO: to add the dartdoc category to the l10n files if was removed by re-generation.

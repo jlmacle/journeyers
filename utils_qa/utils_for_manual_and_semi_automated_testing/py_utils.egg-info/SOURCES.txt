@@ -6,3 +6,6 @@ py_utils.egg-info/PKG-INFO
 py_utils.egg-info/SOURCES.txt
 py_utils.egg-info/dependency_links.txt
 py_utils.egg-info/top_level.txt
+py_utils/tests/arb_utils_test.py
+py_utils/tests/comment_content_extractor_test.py
+py_utils/tests/file_utils_test.py
