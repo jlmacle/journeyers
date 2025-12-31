@@ -2,7 +2,6 @@ from pathlib import Path
 from typing import List
 import os
 
-
 def get_files_in_directory(directory_path: str, file_extension: str, search_is_recursive: bool = True) -> List[Path]:
     """
     Extracts the files paths from a directory.
@@ -13,35 +12,35 @@ def get_files_in_directory(directory_path: str, file_extension: str, search_is_r
         search_is_recursive: A boolean to state if the search should be recursive.
 
     Returns:
-        A list of path names.
+        A list of Path objects.
     """
-    target_dir = Path(directory_path)
-    if not target_dir.is_dir():
+    path_to_potential_dir = Path(directory_path)
+    if not path_to_potential_dir.is_dir():
         print("No directory found")
         return []
 
     if search_is_recursive:
-        # Use rglob for recursive search
-        return list(target_dir.rglob(f'*{file_extension}'))
+        # rglob for recursive search
+        return list(path_to_potential_dir.rglob(f'*{file_extension}'))
     else:
-        # Use glob for non-recursive search
-        return list(target_dir.glob(f'*{file_extension}'))
+        # glob for non-recursive search
+        return list(path_to_potential_dir.glob(f'*{file_extension}'))
 
 def create_file_if_necessary_and_write_content(file_path: str, text: str) -> None:
     """
-    Adds content to a file, creating the file if necessary.
+    Writes content in a file, creating the file if necessary.
 
     Args:
         file_path: Path to the file
-        text: The text to add
+        text: The text to write
 
     Returns:
         None.
     """
-    target_file = Path(file_path)
+    path_to_file = Path(file_path)
     try:
-        with open(target_file, 'w', encoding='utf-8') as f:
+        with open(path_to_file, 'w', encoding='utf-8') as f:
             f.write(text)
     except IOError as e:
-        print(f"Error writing file {file_path}: {e}")
+        print(f"Error writing in file {file_path}: {e}")
 
