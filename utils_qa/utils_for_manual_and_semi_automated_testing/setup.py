@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="py_utils",
     version="0.1",
-    packages=["py_utils"],  # or find_packages() now that layout is standard
+    # https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/
 )
 
 # pip install -e .  (in the directory parent to setup.py) 
