@@ -7,7 +7,7 @@ import 'package:journeyers/common_widgets/display_and_content/custom_focusable_t
 class CustomHeading extends StatelessWidget 
 {
   /// The title of the heading.
-  final String headingTitle;  
+  final String headingText;  
   /// The level of the heading.
   final int headingLevel;   
   /// The style of the heading.
@@ -18,7 +18,7 @@ class CustomHeading extends StatelessWidget
   CustomHeading
   ({
     super.key, 
-    required this.headingTitle, 
+    required this.headingText, 
     required this.headingLevel, 
     this.headingAlignment = TextAlign.center
   }): assert(headingLevel >= 1 && headingLevel <= 6, 'Heading level must be between 1 and 6.');
@@ -43,6 +43,6 @@ class CustomHeading extends StatelessWidget
         headingStyle = appTheme.textTheme.titleSmall!;
     }
 
-    return CustomFocusableText(text: headingTitle, textStyle: headingStyle);
+    return CustomFocusableText(text: headingText, textStyle: headingStyle);
   }
 }

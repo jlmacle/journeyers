@@ -69,7 +69,7 @@ class MyTestingApp extends StatelessWidget
                   Focus
                   (
                     focusNode: headingLevel1FocusNode,
-                    child: CustomHeading(headingTitle: "A heading level 1", headingLevel:1)
+                    child: CustomHeading(headingText: "A heading level 1", headingLevel:1)
                   ),
                 ),
               ),
@@ -83,7 +83,7 @@ class MyTestingApp extends StatelessWidget
                   Focus
                   (
                     focusNode: headingLevel2FocusNode,
-                    child: CustomHeading(headingTitle: "A heading level 2", headingLevel:2),
+                    child: CustomHeading(headingText: "A heading level 2", headingLevel:2),
                   ),
                 ),
               ),
@@ -97,7 +97,7 @@ class MyTestingApp extends StatelessWidget
                   Focus
                   (
                     focusNode: headingLevel3FocusNode,
-                    child: CustomHeading(headingTitle: "A heading level 3", headingLevel:3),
+                    child: CustomHeading(headingText: "A heading level 3", headingLevel:3),
                   ),
                 ),
               ),
@@ -111,7 +111,7 @@ class MyTestingApp extends StatelessWidget
                   Focus
                   (
                     focusNode: headingLevel4FocusNode,
-                    child: CustomHeading(headingTitle: "A heading level 4", headingLevel:4),
+                    child: CustomHeading(headingText: "A heading level 4", headingLevel:4),
                   ),
                 ),       
               ), 
@@ -125,7 +125,7 @@ class MyTestingApp extends StatelessWidget
                   Focus
                   (
                     focusNode: headingLevel5FocusNode,
-                    child: CustomHeading(headingTitle: "A heading level 5", headingLevel:5),
+                    child: CustomHeading(headingText: "A heading level 5", headingLevel:5),
                   ),
                 ),
               ),
@@ -139,7 +139,7 @@ class MyTestingApp extends StatelessWidget
                   Focus
                   (
                     focusNode: headingLevel6FocusNode,
-                    child: CustomHeading(headingTitle: "A heading level 6", headingLevel:6),
+                    child: CustomHeading(headingText: "A heading level 6", headingLevel:6),
                   ),
                 ),
               ),

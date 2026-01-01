@@ -78,7 +78,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
                     CustomExpansionTile
                     (
                       text: "(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
-                      expandedAdditionalText:"", 
+                      expandedContentText:"", 
                       parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);}, 
                       parentWidgetOnDeletePressedCallBackFunction: (){}, 
                       parentWidgetOnSharePressedCallBackFunction: (){}
