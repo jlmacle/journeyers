@@ -10,7 +10,7 @@ class CustomExpansionTile extends StatefulWidget
 {
   /// The text to display when the tile is not expanded.
   final String text;
-  /// The font for the text to display when the tile is not expanded.
+  /// The font weight for the text to display when the tile is not expanded.
   final FontWeight textFontWeight;
   /// The icon used to suggest that the tile is expandable.
   final Icon actionIconSuggestingExpansion;
