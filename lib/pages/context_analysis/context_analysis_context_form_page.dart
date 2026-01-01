@@ -294,7 +294,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Center(
               child: CustomHeading
               (
-                headingTitle: 'Context analysis',
+                headingText: 'Context analysis',
                 headingLevel: 1,
               ),
             ),
@@ -303,7 +303,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child:CustomHeading
               (
-                headingTitle: q.level2TitleIndividual,
+                headingText: q.level2TitleIndividual,
                 headingLevel: 2,
               ),
             ),
@@ -312,7 +312,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleBalanceIssue,
+              headingText: q.level3TitleBalanceIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -348,7 +348,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleWorkplaceIssue,
+              headingText: q.level3TitleWorkplaceIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -372,7 +372,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleLegacyIssue,
+              headingText: q.level3TitleLegacyIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -389,7 +389,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleAnotherIssue,
+              headingText: q.level3TitleAnotherIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -407,7 +407,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               child:CustomHeading
               (
-                headingTitle: q.level2TitleGroup,
+                headingText: q.level2TitleGroup,
                 headingLevel: 2,
               ),
             ),
@@ -415,7 +415,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
             CustomHeading
             (
-              headingTitle: q.level3TitleGroupsProblematics,
+              headingText: q.level3TitleGroupsProblematics,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -429,7 +429,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleSameProblem,
+              headingText: q.level3TitleSameProblem,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -453,7 +453,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleHarmonyAtHome,
+              headingText: q.level3TitleHarmonyAtHome,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -476,7 +476,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleAppreciabilityAtWork,
+              headingText: q.level3TitleAppreciabilityAtWork,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
@@ -499,7 +499,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** ➡️ Sub-point  ****/
             CustomHeading
             (
-              headingTitle: q.level3TitleIncomeEarningAbility,
+              headingText: q.level3TitleIncomeEarningAbility,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
