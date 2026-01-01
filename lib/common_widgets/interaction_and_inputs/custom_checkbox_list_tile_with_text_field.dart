@@ -15,7 +15,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final Color checkboxTextColor;  
   /// The alignment of the text.
   final TextAlign checkboxTextAlignment;
-  /// If the checkbox is checked to start with.
+  /// If the checkbox is checked at start.
   final bool checkboxIsChecked;  
   /// Where the checkbox is located.
   final ListTileControlAffinity checkboxPosition;
