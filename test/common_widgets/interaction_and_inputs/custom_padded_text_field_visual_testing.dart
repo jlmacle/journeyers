@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage>
           Focus
           (
             focusNode: feedbackMsgFocusNode,
-            child: Text('You typed: ${_textContent ?? "No text typed yet"}', style: feedbackMessageStyle)
+            child: Text('You typed: ${_textContent ?? "No text typed yet."}', style: feedbackMessageStyle)
           )          
         ],
       )
