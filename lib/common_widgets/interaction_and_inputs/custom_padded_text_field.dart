@@ -3,7 +3,9 @@ import 'package:flutter/semantics.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
 /// {@category Custom widgets}
-/// A customizable text field with customizable padding.
+/// A customizable text field with customizable padding. 
+/// An error message is displayed if a straight double quote is entered in the text field.
+/// Also, the straight double quote is automatically removed from the text field.
 class CustomPaddedTextField extends StatefulWidget 
 {
     /// The alignment of the text.
@@ -18,7 +20,7 @@ class CustomPaddedTextField extends StatefulWidget
     final int textFieldMaxLength; 
     /// The counter for the text field.
     final InputCounterWidgetBuilder textFieldCounter;
-    /// The callback function called when the text field value has changed.
+    /// The text field-related callback function for the parent widget.
     final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
     /// The left padding for the text field.
     final double paddingLeft;
