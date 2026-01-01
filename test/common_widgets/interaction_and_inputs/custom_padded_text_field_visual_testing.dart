@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage>
                                       'and the more desirable outcomes for the household.'; 
 
   
-  String _textContent = "";
+  String? _textContent;
 
   FocusNode appBarTitleFocusNode = FocusNode();
   FocusNode feedbackMsgFocusNode = FocusNode();  
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage>
           Focus
           (
             focusNode: feedbackMsgFocusNode,
-            child: Text("You typed: $_textContent", style: feedbackMessageStyle)
+            child: Text('You typed: ${_textContent ?? "No text typed yet"}', style: feedbackMessageStyle)
           )          
         ],
       )
