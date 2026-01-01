@@ -21,7 +21,7 @@ class CustomExpansionTile extends StatefulWidget
   /// The horizontal location of the expanded content.
   final CrossAxisAlignment expandedContentCrossAxisAlignment;
   /// The text displayed in the expanded content.
-  final String expandedAdditionalText;
+  final String expandedContentText;
   /// The height of the divider under the additional text.
   final double expandedContentDividerHeight;
   /// The callback function called to edit from the expansion tile.
@@ -51,7 +51,7 @@ class CustomExpansionTile extends StatefulWidget
     this.expandedContentPaddingHorizontal = 16.0,
     this.expandedContentPaddingVertical = 8.0,
     this.expandedContentCrossAxisAlignment = CrossAxisAlignment.start,
-    this.expandedAdditionalText = "Default expanded additional text",
+    this.expandedContentText = "Default expanded additional text",
     this.expandedContentDividerHeight = 20.5,
     this.listActionIconsMainAxisAlignment = MainAxisAlignment.end,
     this.listActionIconsData = const
@@ -102,7 +102,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                 focusNode: expandedAdditionalTextFocusNode,
                 child: Text
                 (
-                  widget.expandedAdditionalText,
+                  widget.expandedContentText,
                   style: appTheme.textTheme.bodyMedium,
                 ),
               ),
