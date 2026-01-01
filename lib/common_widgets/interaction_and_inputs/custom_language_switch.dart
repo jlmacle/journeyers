@@ -3,6 +3,9 @@ import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
+ // Utility class
+  PrintUtils _pu = PrintUtils();
+
 /// {@category Custom widgets}
 /// A customizable dropdown menu to select a language.
 class CustomLanguageSwitch extends StatefulWidget 
@@ -22,20 +25,27 @@ class CustomLanguageSwitch extends StatefulWidget
 
   @override
   State<CustomLanguageSwitch> createState() => _CustomLanguageSwitchState();
+
+  /// Method used to get the language options in the current locale.
+  List<String> getLanguages(BuildContext context)
+  {
+    List<String> dropdownItems = [];
+    _pu.printd("Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");      
+    dropdownItems =  L10nLanguages.getLanguages(context);  
+ 
+    return dropdownItems;
+  }
 }
 
 class _CustomLanguageSwitchState extends State<CustomLanguageSwitch> 
 {
-  // Utility class
-  PrintUtils pu = PrintUtils();
-
   List<String> _dropdownItems = [];
   late String _selectedValue;
 
-  void getLanguages(context)
+  // Getting the language options in the current locale.
+  void getLanguages(BuildContext context)
   {
-    pu.printd("Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");      
-    _dropdownItems =  L10nLanguages.getLanguages(context);   
+    _dropdownItems =  widget.getLanguages(context);
     _selectedValue = _dropdownItems.first;  
   }
 
