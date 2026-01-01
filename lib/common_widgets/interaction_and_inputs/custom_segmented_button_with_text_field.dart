@@ -34,8 +34,6 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final int textFieldMaxLength; 
   /// The counter for the text field.
   final InputCounterWidgetBuilder textFieldCounter;
-  /// The cross axis alignment for the segmented button, and the text field.
-  final CrossAxisAlignment customWidgetsCrossAxisAlignment;
   /// The text field-related callback function for the parent widget.
   final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
   /// The segmented button-related callback function for the parent widget.
@@ -64,7 +62,6 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
     this.textFieldCounter = FormUtils.absentCounter,
-    this.customWidgetsCrossAxisAlignment = CrossAxisAlignment.start,
     this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.parentWidgetSegmentedButtonValueCallBackFunction = placeHolderFunctionSetString     
   });
@@ -88,7 +85,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
 
     return Column
     (
-      crossAxisAlignment: widget.customWidgetsCrossAxisAlignment,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: 
       [
         SegmentedButton<String>
