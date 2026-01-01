@@ -132,11 +132,11 @@ class _HomePageState extends State<HomePage>
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomFocusableText(text:"Is the checkbox checked? $_isCheckboxChecked", textStyle: feedbackMessageStyle),
+            child: CustomFocusableText(text:"Is the checkbox checked? $_isCheckboxChecked.", textStyle: feedbackMessageStyle),
           ),
            Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: CustomFocusableText(text:"You typed: ${_textFieldContent ?? ""}", textStyle: feedbackMessageStyle),
+            child: CustomFocusableText(text:'You typed: ${_textFieldContent ?? "No text typed yet."}', textStyle: feedbackMessageStyle),
           ),
           Gap(8),
           ElevatedButton
