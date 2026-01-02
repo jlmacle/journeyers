@@ -13,9 +13,9 @@ class DashboardUtils {
   final PrintUtils _pu = PrintUtils();
 
   /// String used to communicate the context of the context analyses.
-  static String dataContextAnalyses = "contextAnalysesData";
+  static String contextAnalysesContext = "contextAnalysesData";
   /// String used to communicate the context of the group problem-solvings.
-  static String dataGroupProblemSolvings = "groupProblemSolvingData";
+  static String groupProblemSolvingsContext = "groupProblemSolvingData";
   /// The root key for the session data stored for the dashboards.
   static String keyRecords = 'records';
   /// The key for the session data title.
@@ -26,12 +26,12 @@ class DashboardUtils {
   static String keyFilePath = 'filePath';
 
   /// Method used to retrieve the file with all the dashboard session data, either for the context analyses, or for the group problem-solvings. 
-  Future<File> getSessionFile(String typeOfContextData) async {
+  Future<File> getSessionFile({required String typeOfContextData}) async {
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
     String fileName = "";
-    if (typeOfContextData == dataContextAnalyses) {fileName = 'dashboard_session_data_context_analyses.json';}
-    else if (typeOfContextData == dataGroupProblemSolvings) {fileName = 'dashboard_session_data_group_problem_solvings.json';}
+    if (typeOfContextData == contextAnalysesContext) {fileName = 'dashboard_session_data_context_analyses.json';}
+    else if (typeOfContextData == groupProblemSolvingsContext) {fileName = 'dashboard_session_data_group_problem_solvings.json';}
     else {_pu.printd("Error: Unexpected type of context data: $typeOfContextData");}
 
     File sessionFile = File('$path/$fileName');
@@ -50,9 +50,9 @@ class DashboardUtils {
   /// Method used to save partial session data. 
   /// In the case of the context analyses, the partial data saved has the format:
   /// {"title":"analysis1","date":"12/19/25","filePath":"filePath1"}
-  Future<void> saveSessionDataUsefulForDashboard(String typeOfContextData, Map<String,String> sessionData) async {
+  Future<void> saveSessionDataUsefulForDashboard({required String typeOfContextData, required Map<String,String> sessionData}) async {
 
-    final file = await getSessionFile(typeOfContextData);
+    final file = await getSessionFile(typeOfContextData: typeOfContextData);
     // file created in getSessionFile if needed
     
     String updatedContent = "";
@@ -72,7 +72,7 @@ class DashboardUtils {
 
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving. 
-  void saveDashboardData(String typeOfContextData, String analysisTitle, String filePath) async
+  void saveDashboardData({required String typeOfContextData, required String analysisTitle, required String pathToCSVFile}) async
   {
     // Date 
     var now = DateTime.now();
@@ -90,19 +90,19 @@ class DashboardUtils {
     // Building the session data
     // In the context analysis form page, filePath is tested for not null
     // if (filePath != null) dashboardDataSaving(contextAnalysesData, analysisTitle, filePath);
-    Map<String,String> sessionData = {keyTitle:analysisTitle, keyDate:formattedDate, keyFilePath:filePath};  
+    Map<String,String> sessionData = {keyTitle:analysisTitle, keyDate:formattedDate, keyFilePath:pathToCSVFile};  
     // Saving the session data
-    await saveSessionDataUsefulForDashboard(typeOfContextData, sessionData);
+    await saveSessionDataUsefulForDashboard(typeOfContextData: typeOfContextData, sessionData: sessionData);
   }
 
   /// Method used to retrieved all the session data used for a dashboard.
   /// This data is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// In the case of the context analyses, the data retrieved has the format:
   /// {"records":\[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]} 
-  Future<Map<String,dynamic>> retrieveAllDashboardSessionData(String typeOfContextData) async
+  Future<Map<String,dynamic>> retrieveAllDashboardSessionData({required String typeOfContextData}) async
   { 
     Map<String,dynamic> completeSessionData;
-    File sessionFile = await getSessionFile(typeOfContextData);
+    File sessionFile = await getSessionFile(typeOfContextData: typeOfContextData);
     String fileContent = sessionFile.readAsStringSync();
     completeSessionData = jsonDecode(fileContent);
 
