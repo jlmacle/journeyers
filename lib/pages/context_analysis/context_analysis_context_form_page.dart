@@ -242,8 +242,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       dataStructureBuild();
     });
     // Transforming the data into a CSV-friendly form
-    var preCSVDataIndividualPerspective = cu.dataToPreCSV(_enteredData[0]);
-    var preCSVDataTeamPerspective = cu.dataToPreCSV(_enteredData[1]);
+    var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
+    var preCSVDataTeamPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
     pu.printd("preCSVDataIndividualPerspective");
     pu.printd("$preCSVDataIndividualPerspective");
@@ -252,10 +252,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     pu.printd("$preCSVDataTeamPerspective");
     pu.printd("");
 
-    List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVDataIndividualPerspective);
-    List<dynamic> csvDataTeamPerspective = cu.preCSVToCSVData(preCSVDataTeamPerspective);
+    List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
+    List<dynamic> csvDataTeamPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataTeamPerspective);
     // Printing to CSV
-    String? filePath = await cu.printToCSV(csvDataIndividualPerspective, csvDataTeamPerspective);
+    String? filePath = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataTeamPerspective: csvDataTeamPerspective);
     pu.printd("filePath:$filePath");
     // Saving the dashboard data if filePath not null
     if (filePath != null) du.saveDashboardData(DashboardUtils.dataContextAnalyses, _analysisTitle, filePath);
