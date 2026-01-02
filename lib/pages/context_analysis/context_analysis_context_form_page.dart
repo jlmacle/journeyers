@@ -237,10 +237,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
   void print2CSV() async
   {
-    setState(() {
-      // Building the data from the form
-      dataStructureBuild();
-    });
+    dataStructureBuild();
+
     // Transforming the data into a CSV-friendly form
     var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
     var preCSVDataTeamPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
