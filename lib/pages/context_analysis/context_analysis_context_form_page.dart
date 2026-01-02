@@ -40,41 +40,41 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
 
   //*****************    State related code    **********************//
-  bool _studiesHouseholdBalanceCheckbox = false;
+  bool _studiesHouseholdBalanceCheckboxValue = false;
   String _studiesHouseholdBalanceTextFieldContent = "";
 
-  bool _accessingIncomeHouseholdBalanceCheckbox = false; 
+  bool _accessingIncomeHouseholdBalanceCheckboxValue = false; 
   String _accessingIncomeHouseholdBalanceTextFieldContent = "";
 
-  bool _earningIncomeHouseholdBalanceCheckbox = false; 
+  bool _earningIncomeHouseholdBalanceCheckboxValue = false; 
   String _earningIncomeHouseholdBalanceTextFieldContent = "";
 
-  bool _helpingOthersHouseholdBalanceCheckbox = false;  
+  bool _helpingOthersHouseholdBalanceCheckboxValue = false;  
   String _helpingOthersHouseholdBalanceTextFieldContent = "";
 
-  bool _moreAppreciatedAtWorkCheckbox = false;
+  bool _moreAppreciatedAtWorkCheckboxValue = false;
   String _moreAppreciatedAtWorkTextFieldContent = "";
 
-  bool _remainingAppreciatedAtWorkCheckbox = false;  
+  bool _remainingAppreciatedAtWorkCheckboxValue = false;  
   String _remainingAppreciatedAtWorkTextFieldContent = "";
 
-  bool _betterLegaciesCheckbox = false;  
+  bool _betterLegaciesCheckboxValue = false;  
   String _betterLegaciesTextFieldContent = "";
 
   String _anotherIssueTextFieldContent = "";
 
   String _problemsTheGroupsAreTryingToSolveTextFieldContent = "";
  
-  Set<String> _sameProblemsCurrentSelection = {};
+  Set<String> _sameProblemsSegmentedButtonSelection = {};
   String _sameProblemsTextFieldContent = "";
 
-  Set<String> _harmonyHomeCurrentSelection = {};
+  Set<String> _harmonyHomeSegmentedButtonSelection = {};
   String _harmonyHomeTextFieldContent = "";
 
-  Set<String> _appreciabilityAtWorkCurrentSelection = {};
+  Set<String> _appreciabilityAtWorkSegmentedButtonSelection = {};
   String _appreciabilityAtWorkTextFieldContent = "";
 
-  Set<String> _earningAbilityCurrentSelection = {};
+  Set<String> _earningAbilitySegmentedButtonSelection = {};
   String _earningAbilityTextFieldContent = "";
 
   // Session title
@@ -82,25 +82,25 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
   // Callback methods from the form page
   // Individual perspective
-  _setStudiesHouseholdBalanceCheckboxState(bool? newValue){setState(() {  _studiesHouseholdBalanceCheckbox = newValue!;});}
+  _setStudiesHouseholdBalanceCheckboxState(bool? newValue){setState(() {  _studiesHouseholdBalanceCheckboxValue = newValue!;});}
   _setStudiesHouseholdBalanceTextFieldState(String newValue){setState(() {_studiesHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue){setState(() { _accessingIncomeHouseholdBalanceCheckbox = newValue!;});}  
+  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue){setState(() { _accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});}  
   _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue){setState(() {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue){setState(() { _earningIncomeHouseholdBalanceCheckbox = newValue!;});}  
+  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue){setState(() { _earningIncomeHouseholdBalanceCheckboxValue = newValue!;});}  
   _setEarningIncomedHouseholdBalanceTextFieldState(String newValue){setState(() {_earningIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setHelpingOthersdBalanceCheckboxState(bool? newValue){setState(() { _helpingOthersHouseholdBalanceCheckbox = newValue!;});}  
+  _setHelpingOthersdBalanceCheckboxState(bool? newValue){setState(() { _helpingOthersHouseholdBalanceCheckboxValue = newValue!;});}  
   _setHelpingOthersHouseholdBalanceTextFieldState(String newValue){setState(() {_helpingOthersHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue){setState(() { _moreAppreciatedAtWorkCheckbox = newValue!;});}  
+  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue){setState(() { _moreAppreciatedAtWorkCheckboxValue = newValue!;});}  
   _setMoreAppreciatedAtWorkTextFieldState(String newValue){setState(() {_moreAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue){setState(() { _remainingAppreciatedAtWorkCheckbox = newValue!;});}  
+  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue){setState(() { _remainingAppreciatedAtWorkCheckboxValue = newValue!;});}  
   _setRemainingAppreciatedAtWorkTextFieldState(String newValue){setState(() {_remainingAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setBetterLegaciesCheckboxState(bool? newValue){setState(() { _betterLegaciesCheckbox = newValue!;});}  
+  _setBetterLegaciesCheckboxState(bool? newValue){setState(() { _betterLegaciesCheckboxValue = newValue!;});}  
   _setBetterLegaciesTextFieldState(String newValue){setState(() {_betterLegaciesTextFieldContent = newValue;});}
 
   _setAnotherIssueTextFieldState(String newValue){setState(() {_anotherIssueTextFieldContent = newValue;});}
@@ -109,18 +109,18 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   // Team perspective
   _setProblemsTheGroupsAreTryingToSolveTextControllerTextFieldState(String newValue){setState(() {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;});}
 
-  _setSameProblemsSegmentedButtonState(Set<String>? values){setState(() {_sameProblemsCurrentSelection = values!;});}
+  _setSameProblemsSegmentedButtonState(Set<String>? values){setState(() {_sameProblemsSegmentedButtonSelection = values!;});}
   _setSameProblemsTextFieldState(String newValue){setState(() {_sameProblemsTextFieldContent = newValue;});}
 
 
-  _setHarmonyHomeSegmentedButtonState(Set<String>? values){setState(() {_harmonyHomeCurrentSelection = values!;});}
+  _setHarmonyHomeSegmentedButtonState(Set<String>? values){setState(() {_harmonyHomeSegmentedButtonSelection = values!;});}
   _setHarmonyHomeTextFieldState(String newValue){setState(() {_harmonyHomeTextFieldContent= newValue;});}
 
-  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values){setState(() {_appreciabilityAtWorkCurrentSelection = values!;});}
+  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values){setState(() {_appreciabilityAtWorkSegmentedButtonSelection = values!;});}
   _setAppreciabilityAtWorkTextFieldState(String newValue){setState(() {_appreciabilityAtWorkTextFieldContent= newValue;});}
 
 
-  _setEarningAbilitySegmentedButtonState(Set<String>? values){setState(() {_earningAbilityCurrentSelection = values!;});}
+  _setEarningAbilitySegmentedButtonState(Set<String>? values){setState(() {_earningAbilitySegmentedButtonSelection = values!;});}
   _setEarningAbilityTextFieldState(String newValue){setState(() {_earningAbilityTextFieldContent= newValue;});}
 
   _setAnalysisTitleTextFieldState(String newValue){setState(() {_analysisTitle= newValue;});}
@@ -133,19 +133,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     //Individual level: balance issue
     // level3TitleBalanceIssueItem1Data
     LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleBalanceItem1Data[FormUtils.checkbox] = _studiesHouseholdBalanceCheckbox;
+    level3TitleBalanceItem1Data[FormUtils.checkbox] = _studiesHouseholdBalanceCheckboxValue;
     level3TitleBalanceItem1Data[FormUtils.textField] = _studiesHouseholdBalanceTextFieldContent;    
     // level3TitleBalanceIssueItem2Data
     LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleBalanceItem2Data[FormUtils.checkbox] = _accessingIncomeHouseholdBalanceCheckbox;
+    level3TitleBalanceItem2Data[FormUtils.checkbox] = _accessingIncomeHouseholdBalanceCheckboxValue;
     level3TitleBalanceItem2Data[FormUtils.textField] = _accessingIncomeHouseholdBalanceTextFieldContent;   
     // level3TitleBalanceIssueItem3Data
     LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleBalanceItem3Data[FormUtils.checkbox] = _earningIncomeHouseholdBalanceCheckbox;
+    level3TitleBalanceItem3Data[FormUtils.checkbox] = _earningIncomeHouseholdBalanceCheckboxValue;
     level3TitleBalanceItem3Data[FormUtils.textField] = _earningIncomeHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueItem4Data
     LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleBalanceItem4Data[FormUtils.checkbox] = _helpingOthersHouseholdBalanceCheckbox;
+    level3TitleBalanceItem4Data[FormUtils.checkbox] = _helpingOthersHouseholdBalanceCheckboxValue;
     level3TitleBalanceItem4Data[FormUtils.textField] = _helpingOthersHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueData
     LinkedHashMap<String, dynamic> level3TitleBalanceIssueData 
@@ -155,11 +155,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     //Individual level: workplace issue
     // level3TitleWorkplaceIssueItem1Data
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] = _moreAppreciatedAtWorkCheckbox;
+    level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] = _moreAppreciatedAtWorkCheckboxValue;
     level3TitleWorkplaceIssueItem1Data[FormUtils.textField] = _moreAppreciatedAtWorkTextFieldContent;
     // level3TitleWorkplaceIssueItem2Data
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleWorkplaceIssueItem2Data[FormUtils.checkbox] = _remainingAppreciatedAtWorkCheckbox;
+    level3TitleWorkplaceIssueItem2Data[FormUtils.checkbox] = _remainingAppreciatedAtWorkCheckboxValue;
     level3TitleWorkplaceIssueItem2Data[FormUtils.textField] = _remainingAppreciatedAtWorkTextFieldContent; 
     // level3TitleWorkplaceIssueData
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData 
@@ -168,7 +168,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     //Individual level: legacy issue
     // level3TitleLegacyIssueItem1
     LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
-    level3TitleLegacyIssueItem1Data[FormUtils.checkbox] = _betterLegaciesCheckbox;
+    level3TitleLegacyIssueItem1Data[FormUtils.checkbox] = _betterLegaciesCheckboxValue;
     level3TitleLegacyIssueItem1Data[FormUtils.textField] = _betterLegaciesTextFieldContent;
     // level3TitleWorkplaceIssueData
     LinkedHashMap<String, dynamic> level3TitleLegacyIssueData 
@@ -195,25 +195,25 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
     // level3TitleSameProblemsItem1
     LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
-    if (_sameProblemsCurrentSelection.length == 1) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = _sameProblemsCurrentSelection.first;}
+    if (_sameProblemsSegmentedButtonSelection.length == 1) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = _sameProblemsSegmentedButtonSelection.first;}
     else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
     level3TitleSameProblemsItem1Data[FormUtils.textField] = _sameProblemsTextFieldContent;
 
     // level3TitleHarmonyAtHomeItem1
     LinkedHashMap<String, dynamic>  level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
-    if(_harmonyHomeCurrentSelection.length == 1)  {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = _harmonyHomeCurrentSelection.first;}
+    if(_harmonyHomeSegmentedButtonSelection.length == 1)  {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = _harmonyHomeSegmentedButtonSelection.first;}
     else {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";}
     level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] = _harmonyHomeTextFieldContent;
 
     // // level3TitleAppreciabilityAtWorkItem1
     LinkedHashMap<String, dynamic>  level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
-    if (_appreciabilityAtWorkCurrentSelection.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = _appreciabilityAtWorkCurrentSelection.first;}
+    if (_appreciabilityAtWorkSegmentedButtonSelection.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = _appreciabilityAtWorkSegmentedButtonSelection.first;}
     else {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";}
     level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] = _appreciabilityAtWorkTextFieldContent;
 
     // level3TitleIncomeEarningAbilityItem1
     LinkedHashMap<String, dynamic>  level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
-    if(_earningAbilityCurrentSelection.length == 1)  {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = _earningAbilityCurrentSelection.first;}
+    if(_earningAbilitySegmentedButtonSelection.length == 1)  {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = _earningAbilitySegmentedButtonSelection.first;}
     else {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = "";}
     level3TitleIncomeEarningAbilityItem1Data[FormUtils.textField] = _earningAbilityTextFieldContent;
 
