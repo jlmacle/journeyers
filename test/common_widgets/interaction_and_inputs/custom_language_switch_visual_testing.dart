@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage>
   void _updateLocale(String languageName) 
   {
     // The related to the language selected
-    String? localeLangCodeFromLangName = L10nLanguages.getLangCodeFromLangName(languageName);   
+    String? localeLangCodeFromLangName = L10nLanguages.getLangCodeFromLangName(languageName: languageName);   
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 

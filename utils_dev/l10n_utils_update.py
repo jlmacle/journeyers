@@ -57,13 +57,13 @@ def code_generation_for_method_1() -> str:
     '/// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\]. \n'
     '/// When adding a new base locale, file and method can be updated using l10n_utils_update.py. \n'
     '//  Note:  \\[ and \\] for dart doc \n'
-    'static List<String> getLanguages(BuildContext context) \n'
+    'static List<String> getLanguages({required BuildContext buildContext}) \n'
     '{\n'
     '  List<String> languages = []; \n'
     f'{spaces_2}// Code to generate automatically from the base locales l10n data: begin \n'
   )
 
-  method_1_add_begin = f"{spaces_2}languages.add(AppLocalizations.of(context)?.lang_"
+  method_1_add_begin = f"{spaces_2}languages.add(AppLocalizations.of(buildContext)?.lang_"
 
   method_1_add_middle = " ?? 'Default for \""
 
@@ -94,21 +94,21 @@ def code_generation_for_method_2() -> str:
   code = ""
   method_2_begin = (
     "/// A method used to get a language code, being provided a language name. \n"
-    "static String? getLangCodeFromLangName(String langName) \n"
+    "static String? getLangCodeFromLangName({required String languageName}) \n"
     "{ \n"
     ""
     "  // Code to generate automatically from the base locales l10n data: begin \n"
   )
 
-    # List<String> frLanguage = ['French', 'Français']
+  # List<String> frLanguage = ['French', 'Français']
   method_2_list_line_begin = (
     f"{spaces_2}List<String> "
   )
   method_2_list_line_variable_name_end = "Language = ["
   method_2_list_line_end = "]; \n"
-  # if (frLanguage.contains(langName)) return 'fr';
+  # if (frLanguage.contains(languageName)) return 'fr';
   method_2_if_line_begin = f"{spaces_2}if ("
-  method_2_if_line_middle = "Language.contains(langName)) return '"
+  method_2_if_line_middle = "Language.contains(languageName)) return '"
   method_2_if_line_end = "'; \n"
   method_2_end =  (
     f"{spaces_2}// Code to generate automatically from the base locales l10n data: end \n"
@@ -131,7 +131,7 @@ def code_generation_for_method_2() -> str:
       code_language_part += method_2_list_line_end
       code_list_part += code_language_part
 
-      # if (enLanguage.contains(langName)) return 'en';
+      # if (enLanguage.contains(languageName)) return 'en';
       code_if_part += method_2_if_line_begin + lang_code + method_2_if_line_middle + lang_code + method_2_if_line_end
         
   code += code_list_part
