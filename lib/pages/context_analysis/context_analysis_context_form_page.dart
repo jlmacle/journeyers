@@ -126,7 +126,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _setAnalysisTitleTextFieldState(String newValue){setState(() {_analysisTitle= newValue;});}
 
   //*****************    Data structure related code    **********************//
-  void dataStructureBuild()
+  void dataStructureBuilding()
   {
 
     //************************* Individual perspective ******************************/
@@ -237,7 +237,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
   void print2CSV() async
   {
-    dataStructureBuild();
+    dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
     var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
