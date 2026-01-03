@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_page.dart';
 
 /// {@category Pages}
@@ -23,7 +24,8 @@ class _ContextAnalysisNewSessionPageState extends State<ContextAnalysisNewSessio
 
     return Expanded
     (
-      child: Padding(
+      child: Padding
+      (
         padding: const EdgeInsets.all(15.0),
         child: Focus
         (
