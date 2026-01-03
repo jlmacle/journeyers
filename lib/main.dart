@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // https://docs.flutter.dev/ui/internationalization
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 // import 'package:flutter/rendering.dart'; // https://api.flutter.dev/flutter/rendering/
 
-import 'app_themes.dart';
-import './pages/homepage.dart';
-import 'l10n/app_localizations.dart';
+import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/l10n/app_localizations.dart';
+import 'package:journeyers/pages/homepage.dart';
 
 void main() 
 {
@@ -30,7 +30,8 @@ class _MyAppState extends State<MyApp>
   // TODO: to get eventually the value from user preferences
   Locale? _currentLocale = Locale('en'); 
 
-   void _setLocale(Locale newLocale) 
+
+  void _setLocale(Locale newLocale) 
   {
     if (newLocale != _currentLocale)
     {
@@ -69,6 +70,7 @@ class _MyAppState extends State<MyApp>
 
       locale: _currentLocale, // to be able to swap translated strings,
 
+      // https://api.flutter.dev/flutter/widgets/SafeArea-class.html
       home: SafeArea(child: MyHomePage(parentWidgetOnLanguageSelectedCallBackFunction: _setLocale)),
     );
   }
