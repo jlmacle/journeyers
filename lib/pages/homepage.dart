@@ -4,9 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switch.dart';
 
-// import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switcher.dart';
+import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switch.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart'; 
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
@@ -44,10 +43,9 @@ class _MyHomePageState extends State<MyHomePage>
   ];
 
   // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
-  // TODO: to transfer the logic in the parent callback function
   void _updateLocale(String languageName) 
   {
-    // The related to the language selected
+    // The locale related to the language selected
     String? localeLangCodeFromLangName = L10nLanguages.getLangCodeFromLangName(languageName: languageName);   
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
