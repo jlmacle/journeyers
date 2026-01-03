@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
@@ -29,8 +29,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
     completeSessionData =  await du.retrieveAllDashboardSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext); 
     setState(() {
       _isDataLoading = false;      
-      listOfSessionData = completeSessionData?.values.first;
-  
+      listOfSessionData = completeSessionData?.values.first;  
     });   
   }
 
@@ -44,9 +43,7 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
   void onEditPressed(String? csvFilePath)
   {
     pu.printd("csvFilePath: $csvFilePath");
-
   }
-   
   
 
   @override
@@ -56,38 +53,37 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
     FocusNode contextAnalysisDashboardFocusNode = FocusNode();
     
     return 
-        _isDataLoading
-        ? Center(child: CircularProgressIndicator())
-        : Expanded
-        (
-            child: Semantics
-            (        
-              headingLevel: 2,
-              focusable: true,
-              child: Focus
-              (
-                focusNode: contextAnalysisDashboardFocusNode,
-                
-                child: ListView.builder
+      _isDataLoading
+      ? Center(child: CircularProgressIndicator())
+      : Expanded
+      (
+        child: Semantics
+        (        
+          headingLevel: 2,
+          focusable: true,
+          child: Focus
+          (
+            focusNode: contextAnalysisDashboardFocusNode,
+            
+            child: ListView.builder
+            (
+              itemCount: listOfSessionData?.length,
+              itemBuilder : (content, index)
+              {
+                Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
+                return 
+                CustomExpansionTile
                 (
-                  itemCount: listOfSessionData?.length,
-                  itemBuilder : (content, index)
-                  {
-                    Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
-                    return 
-                    CustomExpansionTile
-                    (
-                      text: "(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
-                      expandedContentText:"", 
-                      parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);}, 
-                      parentWidgetOnDeletePressedCallBackFunction: (){}, 
-                      parentWidgetOnSharePressedCallBackFunction: (){}
-                      );
-                  }
-                )
-              ),
-            ),
-        );
-    
+                  text: "(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
+                  expandedContentText:"", 
+                  parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);}, 
+                  parentWidgetOnDeletePressedCallBackFunction: (){}, 
+                  parentWidgetOnSharePressedCallBackFunction: (){}
+                );
+              }
+            )
+          ),
+        ),
+      );   
   }
 }
