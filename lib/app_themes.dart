@@ -46,9 +46,7 @@ final ThemeData appTheme = ThemeData
     appBarTheme: AppBarTheme
     (
       backgroundColor: navyBlue,   
-      // backgroundColor: Colors.white, // for constrast testing
-      elevation: 0,
-      
+      elevation: 0,      
             
       titleTextStyle: TextStyle
       (
@@ -95,10 +93,10 @@ final ThemeData appTheme = ThemeData
         borderSide: BorderSide.none,
       ),          
       filled: true,          
-      fillColor:paleCyan,
-      
+      fillColor:paleCyan,      
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData
     (
       style:  ButtonStyle
@@ -134,6 +132,7 @@ final ThemeData appTheme = ThemeData
         ),
       )
     ),
+
     segmentedButtonTheme: SegmentedButtonThemeData
     (         
       style: ButtonStyle
@@ -151,6 +150,7 @@ final ThemeData appTheme = ThemeData
         ),
       ),
     ),
+
     checkboxTheme: CheckboxThemeData
     (
       fillColor: WidgetStateProperty.resolveWith<Color>(
@@ -164,6 +164,7 @@ final ThemeData appTheme = ThemeData
         }         
       )  
     ),
+    
     bannerTheme: MaterialBannerThemeData
     (
       backgroundColor: const Color.fromARGB(255, 13, 13, 49),
