@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Utility class
 PrintUtils pu = PrintUtils();
@@ -30,7 +31,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   bool isContextAnalysisSessionDataSaved = false;
 
   // to help reset the start message status
-  bool _resetStartMessage = true;
+  final bool _resetStartMessage = true;
   
   _getPreferences() async
   {
@@ -69,7 +70,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
                       style: dialogStyle,
                     ),
                   )
-                ),
+              ),
             ),
             actions: 
             [
@@ -115,22 +116,22 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
         mainAxisAlignment: MainAxisAlignment.center,
         children: 
         [
-        if (_resetStartMessage)
-          ElevatedButton(onPressed: resetStartMessage, child: Text('Reset the start message acknowledgement data', style: feedbackMessageStyle,)),
-        if (_preferencesLoading)
-          Center(child: CircularProgressIndicator())
-        else
-          ...
-          [            
-            ContextAnalysisNewSessionPage(),            
-            
-            if (isContextAnalysisSessionDataSaved)
+          if (_resetStartMessage)
+            ElevatedButton(onPressed: resetStartMessage, child: Text('Reset the start message acknowledgement data', style: feedbackMessageStyle,)),
+          if (_preferencesLoading)
+            Center(child: CircularProgressIndicator())
+          else
             ...
-            [
-              Divider(),
-              ContextAnalysisDashboardPage()
-            ],
-          ]
+            [            
+              ContextAnalysisNewSessionPage(),            
+              
+              if (isContextAnalysisSessionDataSaved)
+              ...
+              [
+                Divider(),
+                ContextAnalysisDashboardPage()
+              ],
+            ]
         ],
       ),
     );
