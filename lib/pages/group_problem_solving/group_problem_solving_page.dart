@@ -19,9 +19,11 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     
     FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
 
-    return Scaffold
+    return 
+    Scaffold
     (
-      body: Column
+      body: 
+      Column
       (
         mainAxisAlignment: MainAxisAlignment.center,
         children: 
@@ -30,7 +32,8 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
           (        
             headingLevel: 1,
             focusable: true,            
-            child: Focus
+            child: 
+            Focus
             (
               focusNode: groupProblemSolvingDashboardFocusNode,
               child: Center(child: Text("Group problem-solving dashboard")),

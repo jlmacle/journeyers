@@ -22,12 +22,15 @@ class _ContextAnalysisNewSessionPageState extends State<ContextAnalysisNewSessio
 
     FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
 
-    return Expanded
+    return 
+    Expanded
     (
-      child: Padding
+      child: 
+      Padding
       (
         padding: const EdgeInsets.all(15.0),
-        child: Focus
+        child: 
+        Focus
         (
           focusNode: contextAnalysisNewSessionFocusNode,
           child: ContextAnalysisContextFormPage()
