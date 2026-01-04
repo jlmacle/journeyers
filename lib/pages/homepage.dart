@@ -77,8 +77,7 @@ class _MyHomePageState extends State<MyHomePage>
     } 
     
     return Scaffold
-    (
-      
+    (      
       appBar: AppBar  
       (       
         centerTitle: true,
@@ -87,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
         title: Semantics
         (
             focusable: true,           
-            container: true,
+            // container: true, // kept (further screen reader testing needed)
             child: Focus(
               focusNode: appBarTitleFocusNode,
               child: Column
