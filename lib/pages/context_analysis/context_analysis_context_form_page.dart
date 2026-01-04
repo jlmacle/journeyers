@@ -525,57 +525,53 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Center
             (
               child: 
-              Container
+              Column
               (
-                child: 
-                Column
-                (
-                  children: 
-                  [
-                    CustomPaddedTextField
-                    (  
-                      textAlignment: TextAlign.center,                    
-                      textFieldHintText: "Please enter a title for this analysis",
-                      textFieldMaxLength: 150,
-                      parentWidgetTextFieldValueCallBackFunction: _setAnalysisTitleTextFieldState,
-                    ),
-                    ElevatedButton
-                    (
-                      onPressed: print2CSV, 
-                      child: Text('Click to save your data in CSV, \nspreadsheet-compatible format', style: dataSavingStyle, textAlign: TextAlign.center,)
-                    ),
-
-                    // Gap(20),
-                    // Divider(thickness: 3),               
+                children: 
+                [
+                  CustomPaddedTextField
+                  (  
+                    textAlignment: TextAlign.center,                    
+                    textFieldHintText: "Please enter a title for this analysis",
+                    textFieldMaxLength: 150,
+                    parentWidgetTextFieldValueCallBackFunction: _setAnalysisTitleTextFieldState,
+                  ),
+                  ElevatedButton
+                  (
+                    onPressed: print2CSV, 
+                    child: Text('Click to save your data in CSV, \nspreadsheet-compatible format', style: dataSavingStyle, textAlign: TextAlign.center,)
+                  ),
+              
+                  // Gap(20),
+                  // Divider(thickness: 3),               
+                
+                  /* Debug section */
+                  // Gap(20),
+                  // Divider(thickness: 3),
+                  // Gap(20),
+                  // Text('Debug:'),
+                  // Text("Studies / Household Balance: $_studiesHouseholdBalanceCheckbox, text: $_studiesHouseholdBalanceTextFieldContent"),
+                  // Text("Accessing Income / Household Balance: $_accessingIncomeHouseholdBalanceCheckbox, text: $_accessingIncomeHouseholdBalanceTextFieldContent"),
+                  // Text("Earning Income / Household Balance: $_earningIncomeHouseholdBalanceCheckbox, text: $_earningIncomeHouseholdBalanceTextFieldContent"),
+                  // Text("Helping Others / Household Balance: $_helpingOthersHouseholdBalanceCheckbox , text: $_helpingOthersHouseholdBalanceTextFieldContent"),
+              
+                  // Text("More Appreciated At Work: $_moreAppreciatedAtWorkCheckbox, text: $_moreAppreciatedAtWorkTextFieldContent"),
+                  // Text("Remaining Appreciated At Work: $_remainingAppreciatedAtWorkCheckbox, text: $_remainingAppreciatedAtWorkTextFieldContent"),
+                
+                  // Text("Better Legacies: $_betterLegaciesCheckbox, text: $_betterLegaciesTextFieldContent"),
                   
-                    /* Debug section */
-                    // Gap(20),
-                    // Divider(thickness: 3),
-                    // Gap(20),
-                    // Text('Debug:'),
-                    // Text("Studies / Household Balance: $_studiesHouseholdBalanceCheckbox, text: $_studiesHouseholdBalanceTextFieldContent"),
-                    // Text("Accessing Income / Household Balance: $_accessingIncomeHouseholdBalanceCheckbox, text: $_accessingIncomeHouseholdBalanceTextFieldContent"),
-                    // Text("Earning Income / Household Balance: $_earningIncomeHouseholdBalanceCheckbox, text: $_earningIncomeHouseholdBalanceTextFieldContent"),
-                    // Text("Helping Others / Household Balance: $_helpingOthersHouseholdBalanceCheckbox , text: $_helpingOthersHouseholdBalanceTextFieldContent"),
-
-                    // Text("More Appreciated At Work: $_moreAppreciatedAtWorkCheckbox, text: $_moreAppreciatedAtWorkTextFieldContent"),
-                    // Text("Remaining Appreciated At Work: $_remainingAppreciatedAtWorkCheckbox, text: $_remainingAppreciatedAtWorkTextFieldContent"),
-                  
-                    // Text("Better Legacies: $_betterLegaciesCheckbox, text: $_betterLegaciesTextFieldContent"),
-                    
-                    // Text("Other Issue: text: $_anotherIssueTextFieldContent"),
-
-                    // Text("Problems The Groups Are Trying To Solve: text: $_problemsTheGroupsAreTryingToSolveTextFieldContent"),
-
-                    // Text("Same problems being solved?:  $_sameProblemsCurrentSelection.toString(), text: $_sameProblemsTextFieldContent"),
-
-                    // Text("Harmony home?:  $_harmonyHomeCurrentSelection.toString(), text: $_harmonyHomeTextFieldContent"),
-
-                    // Text("Appreciability at work:  $_appreciabilityAtWorkCurrentSelection.toString(), text: $_appreciabilityAtWorkTextFieldContent"),
-
-                    // Text("Earning ability:  $_earningAbilityCurrentSelection.toString(), text: $_earningAbilityTextFieldContent"),
-                  ],
-                ),
+                  // Text("Other Issue: text: $_anotherIssueTextFieldContent"),
+              
+                  // Text("Problems The Groups Are Trying To Solve: text: $_problemsTheGroupsAreTryingToSolveTextFieldContent"),
+              
+                  // Text("Same problems being solved?:  $_sameProblemsCurrentSelection.toString(), text: $_sameProblemsTextFieldContent"),
+              
+                  // Text("Harmony home?:  $_harmonyHomeCurrentSelection.toString(), text: $_harmonyHomeTextFieldContent"),
+              
+                  // Text("Appreciability at work:  $_appreciabilityAtWorkCurrentSelection.toString(), text: $_appreciabilityAtWorkTextFieldContent"),
+              
+                  // Text("Earning ability:  $_earningAbilityCurrentSelection.toString(), text: $_earningAbilityTextFieldContent"),
+                ],
               )
             ),
           ],
