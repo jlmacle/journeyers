@@ -35,33 +35,42 @@ class MyTestingApp extends StatelessWidget
     FocusNode headingLevel5FocusNode = FocusNode();
     FocusNode headingLevel6FocusNode = FocusNode();
 
-    return MaterialApp
+    return 
+    MaterialApp
     (
       theme: appTheme, 
-      home: Scaffold
+      home: 
+      Scaffold
       (
-        appBar: AppBar
-      (
-        title: Semantics
+        appBar: 
+        AppBar
         (
-          focusable: true, 
-          child: Focus
+          title: 
+          Semantics
           (
-            focusNode: appBarTitleFocusNode,
-            child: const Text('MyTestingApp'),
-          )
+            focusable: true, 
+            child: 
+            Focus
+            (
+              focusNode: appBarTitleFocusNode,
+              child: const Text('MyTestingApp'),
+            )
+          ),
         ),
-      ),
-        body: Center
+        body: 
+        Center
         (
-          child: Column
+          child: 
+          Column
           (
             mainAxisAlignment: MainAxisAlignment.center,
             children: 
             [
               // Without MergeSemantics, "group" is added to the reading of the headings, at least by Narrator
-              MergeSemantics(
-                child: Semantics
+              MergeSemantics
+              (
+                child: 
+                Semantics
                 ( 
                   focusable: true,
                   headingLevel: 1,
@@ -74,8 +83,10 @@ class MyTestingApp extends StatelessWidget
                 ),
               ),
               Gap(10),
-              MergeSemantics(
-                child: Semantics
+              MergeSemantics
+              (
+                child: 
+                Semantics
                 ( 
                   focusable: true,
                   headingLevel: 2,
@@ -88,8 +99,10 @@ class MyTestingApp extends StatelessWidget
                 ),
               ),
               Gap(10),
-              MergeSemantics(
-                child: Semantics
+              MergeSemantics
+              (
+                child: 
+                Semantics
                 ( 
                   focusable: true,
                   headingLevel: 3,
@@ -102,8 +115,10 @@ class MyTestingApp extends StatelessWidget
                 ),
               ),
               Gap(10),
-              MergeSemantics(
-                child: Semantics
+              MergeSemantics
+              (
+                child: 
+                Semantics
                 ( 
                   focusable: true,
                   headingLevel: 4,
@@ -116,7 +131,8 @@ class MyTestingApp extends StatelessWidget
                 ),       
               ), 
               Gap(10),
-              MergeSemantics(
+              MergeSemantics
+              (
                 child: Semantics
                 ( 
                   focusable: true,
@@ -130,8 +146,10 @@ class MyTestingApp extends StatelessWidget
                 ),
               ),
               Gap(10),
-              MergeSemantics(
-                child: Semantics
+              MergeSemantics
+              (
+                child: 
+                Semantics
                 ( 
                   focusable: true,
                   headingLevel: 6,

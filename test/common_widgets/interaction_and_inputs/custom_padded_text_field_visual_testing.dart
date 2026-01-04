@@ -24,7 +24,8 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp
+    return 
+    MaterialApp
     (
       theme: appTheme, 
       home: HomePage()
@@ -50,7 +51,6 @@ class _HomePageState extends State<HomePage>
                                       'if some seem to have been out of their comfort zone for too long, '
                                       'and the more desirable outcomes for the household.'; 
 
-  
   String? _textContent;
 
   FocusNode appBarTitleFocusNode = FocusNode();
@@ -59,24 +59,31 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) 
   {
-    return Scaffold
+    return 
+    Scaffold
     (
-       appBar: AppBar
+      appBar: 
+      AppBar
       (
-        title: Semantics
+        title: 
+        Semantics
         (
           focusable: true, 
-          child: Focus
+          child: 
+          Focus
           (
             focusNode: appBarTitleFocusNode,
             child: const Text('MyTestingApp'),
           )
         ),
       ),
-      body: Column(
+      body: 
+      Column
+      (
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: 
+        [
           CustomPaddedTextField
           (
             paddingTop: 20,

@@ -29,26 +29,34 @@ class MyTestingApp extends StatelessWidget
   Widget build(BuildContext context) 
   {
     FocusNode appBarTitleFocusNode = FocusNode();
-    return MaterialApp
+
+    return 
+    MaterialApp
     (
       theme: appTheme, 
-      home: Scaffold
+      home: 
+      Scaffold
       (
-          appBar: AppBar
+        appBar: 
+        AppBar
         (
-          title: Semantics
+          title: 
+          Semantics
           (
             focusable: true, 
-            child: Focus
+            child: 
+            Focus
             (
               focusNode: appBarTitleFocusNode,
               child: const Text('MyTestingApp'),
             )
           ),
         ),
-        body: Center
+        body: 
+        Center
         (
-          child: CustomExpansionTile
+          child: 
+          CustomExpansionTile
           (
             parentWidgetOnEditPressedCallBackFunction: (){pu.printd('onEditPressed');},
             parentWidgetOnDeletePressedCallBackFunction: (){pu.printd('onDeletePressed');},

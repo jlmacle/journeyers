@@ -31,7 +31,8 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp
+    return 
+    MaterialApp
     (
       theme: appTheme, 
       home: HomePage()
@@ -104,21 +105,26 @@ class _HomePageState extends State<HomePage>
   {
     FocusNode appBarTitleFocusNode = FocusNode();   
 
-    return Scaffold
+    return 
+    Scaffold
     (
-       appBar: AppBar
+      appBar: 
+      AppBar
       (
-        title: Semantics
+        title: 
+        Semantics
         (
           focusable: true, 
-          child: Focus
+          child: 
+          Focus
           (
             focusNode: appBarTitleFocusNode,
             child: const Text('MyTestingApp'),
           )
         ),
       ),
-      body: Column
+      body: 
+      Column
       (
         children: 
         [            
@@ -130,11 +136,13 @@ class _HomePageState extends State<HomePage>
             parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction
           ),
           Gap(8),
-          Padding(
+          Padding
+          (
             padding: const EdgeInsets.only(left: 20.0),
             child: CustomFocusableText(text:"Is the checkbox checked? $_isCheckboxChecked.", textStyle: feedbackMessageStyle),
           ),
-           Padding(
+          Padding
+          (
             padding: const EdgeInsets.only(left: 20.0),
             child: CustomFocusableText(text:'You typed: ${_textFieldContent ?? "No text typed yet."}', textStyle: feedbackMessageStyle),
           ),
