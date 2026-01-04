@@ -52,7 +52,6 @@ def test_with_existing_file_create_file_if_necessary_and_write_content():
     # removing the file
     os.remove(file_path_str)
 
-
     
 def test_with_absent_file_create_file_if_necessary_and_write_content():
     file_path_str = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/absent_file.txt'
