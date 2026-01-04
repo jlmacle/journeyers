@@ -7,7 +7,8 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 /// {@category Pages}
 /// {@category Context analysis}
 /// The page for the dashboard of the context analyses.
-class ContextAnalysisDashboardPage extends StatefulWidget {
+class ContextAnalysisDashboardPage extends StatefulWidget 
+{
   const ContextAnalysisDashboardPage({super.key});
 
   @override
@@ -56,34 +57,37 @@ class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardP
       _isDataLoading
       ? Center(child: CircularProgressIndicator())
       : Expanded
-      (
-        child: Semantics
-        (        
-          headingLevel: 2,
-          focusable: true,
-          child: Focus
-          (
-            focusNode: contextAnalysisDashboardFocusNode,
-            
-            child: ListView.builder
+        (
+          child: 
+          Semantics
+          (        
+            headingLevel: 2,
+            focusable: true,
+            child: 
+            Focus
             (
-              itemCount: listOfSessionData?.length,
-              itemBuilder : (content, index)
-              {
-                Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
-                return 
-                CustomExpansionTile
-                (
-                  text: "(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
-                  expandedContentText:"", 
-                  parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);}, 
-                  parentWidgetOnDeletePressedCallBackFunction: (){}, 
-                  parentWidgetOnSharePressedCallBackFunction: (){}
-                );
-              }
-            )
+              focusNode: contextAnalysisDashboardFocusNode,
+              
+              child: 
+              ListView.builder
+              (
+                itemCount: listOfSessionData?.length,
+                itemBuilder : (content, index)
+                {
+                  Map<String,dynamic>? sessionDataAsMap = listOfSessionData?[index];
+                  return 
+                  CustomExpansionTile
+                  (
+                    text: "(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
+                    expandedContentText:"", 
+                    parentWidgetOnEditPressedCallBackFunction: (){onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);}, 
+                    parentWidgetOnDeletePressedCallBackFunction: (){}, 
+                    parentWidgetOnSharePressedCallBackFunction: (){}
+                  );
+                }
+              )
+            ),
           ),
-        ),
-      );   
+        );   
   }
 }
