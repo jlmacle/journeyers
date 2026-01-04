@@ -282,16 +282,18 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       SingleChildScrollView
       (
         controller: scrollController,        
-        child: Column
+        child: 
+        Column
         (
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
-          [ 
-           
+          [            
             //*********** Form ***********//
-            Center(
-              child: CustomHeading
+            Center
+            (
+              child: 
+              CustomHeading
               (
                 headingText: 'Context analysis',
                 headingLevel: 1,
@@ -300,7 +302,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Gap(40),
             Center
             (
-              child:CustomHeading
+              child:
+              CustomHeading
               (
                 headingText: q.level2TitleIndividual,
                 headingLevel: 2,
@@ -393,9 +396,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               headingAlignment: TextAlign.left,
             ),
             CustomPaddedTextField
-            ( textFieldHintText: pleaseDevelopOrTakeNotes, 
+            ( 
+              textFieldHintText: pleaseDevelopOrTakeNotes, 
               textFieldMaxLength: FormUtils.chars1Page, textFieldCounter: FormUtils.absentCounter,
-              parentWidgetTextFieldValueCallBackFunction: _setAnotherIssueTextFieldState),
+              parentWidgetTextFieldValueCallBackFunction: _setAnotherIssueTextFieldState
+            ),
 
             Gap(preAndPostLevel2DividerGap),
             Divider(thickness: betweenLevel2DividerThickness),
@@ -404,7 +409,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             /**** Beginning of the team-related analysis ****/
             Center
             (
-              child:CustomHeading
+              child:
+              CustomHeading
               (
                 headingText: q.level2TitleGroup,
                 headingLevel: 2,
@@ -444,7 +450,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
             ),
             
-
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
@@ -512,15 +517,21 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
               parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
             ),
+
              //********** Data saving ************//
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
             Center
             (
-              child: Container(
-                child: Column(
-                  children: [
+              child: 
+              Container
+              (
+                child: 
+                Column
+                (
+                  children: 
+                  [
                     CustomPaddedTextField
                     (  
                       textAlignment: TextAlign.center,                    
@@ -566,7 +577,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   ],
                 ),
               )
-              ),
+            ),
           ],
         ),
       )
