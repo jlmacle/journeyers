@@ -23,13 +23,16 @@ class CustomFocusableText extends StatelessWidget {
   {
     FocusNode textFocusNode = FocusNode();
 
-    return Semantics
+    return 
+    Semantics
     ( 
       focusable: true,            
-      child: Focus
+      child: 
+      Focus
       (
         focusNode: textFocusNode,
-        child: Text
+        child: 
+        Text
         (
           text,      
           style: textStyle,

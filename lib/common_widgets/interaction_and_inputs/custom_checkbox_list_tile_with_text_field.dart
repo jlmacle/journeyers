@@ -80,13 +80,15 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
   @override
   Widget build(BuildContext context) 
   {
-    final TextStyle checkboxTextStyle = TextStyle
+    final TextStyle checkboxTextStyle = 
+    TextStyle
     (
       fontSize: widget.checkboxTextFontSize,
       color: widget.checkboxTextColor,
     );
 
-    return Column
+    return 
+    Column
     (
       children: 
       [

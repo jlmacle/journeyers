@@ -75,12 +75,16 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   Widget build(BuildContext context) 
   {
     FocusNode expandedAdditionalTextFocusNode = FocusNode();
-    return ExpansionTile
+
+    return 
+    ExpansionTile
     (
-      title: Focus
+      title: 
+      Focus
       (
         focusNode: expandedAdditionalTextFocusNode,
-        child: Text
+        child: 
+        Text
         (
           widget.text,
           style: TextStyle(fontWeight: widget.textFontWeight),
@@ -92,7 +96,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
         Padding
         (
           padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal, vertical: widget.expandedContentPaddingVertical),
-          child: Column
+          child: 
+          Column
           (
             crossAxisAlignment: widget.expandedContentCrossAxisAlignment,
             children: 
@@ -100,7 +105,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
               Focus
               (
                 focusNode: expandedAdditionalTextFocusNode,
-                child: Text
+                child: 
+                Text
                 (
                   widget.expandedContentText,
                   style: appTheme.textTheme.bodyMedium,
@@ -112,32 +118,32 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
               Row
               (
                 mainAxisAlignment : widget.listActionIconsMainAxisAlignment,
-                children:               
-                widget.listActionIconsData.map
-                (
-                  (actionIconData) 
-                  {
-                    final iconData = actionIconData[0] as IconData;
-                    final toolTipLabel = actionIconData[1] as String;
-                    final VoidCallback onPressedFunction;
-                    if (toolTipLabel == CustomExpansionTile.toolTipEdit) 
+                children: //.toList()              
+                  widget.listActionIconsData.map
+                  (
+                    (actionIconData) 
                     {
-                      onPressedFunction = widget.parentWidgetOnEditPressedCallBackFunction;
-                    }
-                    else if (toolTipLabel == CustomExpansionTile.toolTipDelete)
-                    {
-                      onPressedFunction = widget.parentWidgetOnDeletePressedCallBackFunction;
-                    }
-                    else if (toolTipLabel == CustomExpansionTile.toolTipShare)
-                    {
-                      onPressedFunction = widget.parentWidgetOnSharePressedCallBackFunction;
-                    }
-                    else {onPressedFunction = (){};}
+                      final iconData = actionIconData[0] as IconData;
+                      final toolTipLabel = actionIconData[1] as String;
+                      final VoidCallback onPressedFunction;
+                      if (toolTipLabel == CustomExpansionTile.toolTipEdit) 
+                      {
+                        onPressedFunction = widget.parentWidgetOnEditPressedCallBackFunction;
+                      }
+                      else if (toolTipLabel == CustomExpansionTile.toolTipDelete)
+                      {
+                        onPressedFunction = widget.parentWidgetOnDeletePressedCallBackFunction;
+                      }
+                      else if (toolTipLabel == CustomExpansionTile.toolTipShare)
+                      {
+                        onPressedFunction = widget.parentWidgetOnSharePressedCallBackFunction;
+                      }
+                      else {onPressedFunction = (){};}
 
-                    return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, parentWidgetOnPressedCallBackFunction: onPressedFunction);
-                  }
-                )
-                .toList(),              
+                      return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, parentWidgetOnPressedCallBackFunction: onPressedFunction);
+                    }
+                  )
+                  .toList(),              
               )
             ],
           ),

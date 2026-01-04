@@ -58,8 +58,8 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
 {
   // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
-
   TextEditingController textFieldEditingController = TextEditingController();
+
   @override
   void dispose()
   {
@@ -105,10 +105,12 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   @override
   Widget build(BuildContext context) 
   {
-    return Padding
+    return 
+    Padding
     (
         padding: EdgeInsets.only(left: widget.paddingLeft, right: widget.paddingRight, bottom: widget.paddingBottom, top: widget.paddingTop),
-        child: TextField
+        child: 
+        TextField
         (
           textAlign: widget.textAlignment,
           controller: textFieldEditingController,
@@ -120,7 +122,6 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
           onChanged: (String newValue) {quoteCheck(newValue); },
           // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
           onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
-          
         ),
     );
   }
