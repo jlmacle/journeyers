@@ -77,13 +77,15 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
   @override
   Widget build(BuildContext context) 
   {
-    final TextStyle textStyle = TextStyle
+    final TextStyle textStyle = 
+    TextStyle
     (
       fontSize: widget.textOptionsfontSize,
       color: widget.textOptionsColor,
     );
 
-    return Column
+    return 
+    Column
     (
       crossAxisAlignment: CrossAxisAlignment.start,
       children: 
@@ -93,10 +95,14 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
           multiSelectionEnabled: widget.multiSelectionEnabled,
           emptySelectionAllowed: widget.emptySelectionAllowed,
           
-          segments: <ButtonSegment<String>>[
-            ButtonSegment<String>(
+          segments: 
+          <ButtonSegment<String>>
+          [
+            ButtonSegment<String>
+            (
               value: widget.textOption1,      
-              label: Text
+              label: 
+              Text
               (
                 widget.textOption1,
                 style: textStyle,
@@ -105,7 +111,8 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             ButtonSegment<String>
             (
               value: widget.textOption2,
-              label: Text
+              label: 
+              Text
               (
                 widget.textOption2,
                 style: textStyle,
@@ -115,7 +122,8 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
               ButtonSegment<String>
               (
                 value: widget.textOption3,          
-                label: Text
+                label: 
+                Text
                 (
                   widget.textOption3,
                   style: textStyle,

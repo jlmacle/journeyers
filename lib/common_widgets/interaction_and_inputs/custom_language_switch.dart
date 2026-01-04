@@ -3,8 +3,8 @@ import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
- // Utility class
-  PrintUtils _pu = PrintUtils();
+// Utility class
+PrintUtils _pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable dropdown menu to select a language.
@@ -55,7 +55,8 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
   {  
     getLanguages(context);
 
-    return Row
+    return 
+    Row
     (
       mainAxisAlignment: widget.languageSwitchMainAxisAlignment,
       children: 
@@ -63,18 +64,21 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
         const Icon(Icons.language),
         Semantics
         (
-          child: DropdownButton<String> 
+          child: 
+          DropdownButton<String> 
           (            
             value: _selectedValue,
             items: _dropdownItems.map((String value) 
             {
-              return DropdownMenuItem<String>
+              return 
+              DropdownMenuItem<String>
               (
                 value: value,
                 child: Text(value), 
               );
             }).toList(),
-            onChanged: (String? newValue) {
+            onChanged: (String? newValue) 
+            {
               if (newValue != null) {              
                 widget.parentWidgetLanguageValueCallBackFunction(newValue); 
               }
