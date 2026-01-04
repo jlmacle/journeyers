@@ -57,7 +57,8 @@ class _MyTestingAppState extends State<MyTestingApp>
   @override
   Widget build(BuildContext context) 
   {    
-    return MaterialApp
+    return 
+    MaterialApp
     (
       theme: appTheme, 
 
@@ -111,26 +112,33 @@ class _HomePageState extends State<HomePage>
     
     FocusNode appBarTitleFocusNode = FocusNode();
 
-    return Scaffold
+    return 
+    Scaffold
     (
-      appBar: AppBar
+      appBar: 
+      AppBar
       (
-        title: Semantics
+        title: 
+        Semantics
         (
           focusable: true, 
-          child: Focus
+          child: 
+          Focus
           (
             focusNode: appBarTitleFocusNode,
-            child: Text
+            child: 
+            Text
             (
               appLocalization?.appTitle ?? 'Default app title txt', 
             ),
           ),
         ),
       ),
-      body: Center
+      body: 
+      Center
       (
-        child: Column
+        child: 
+        Column
         (
           children:
           [            

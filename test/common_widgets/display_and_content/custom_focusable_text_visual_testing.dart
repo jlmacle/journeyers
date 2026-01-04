@@ -25,26 +25,34 @@ class MyTestingApp extends StatelessWidget
   Widget build(BuildContext context) 
   {
     FocusNode appBarTitleFocusNode = FocusNode();
-    return MaterialApp
+
+    return 
+    MaterialApp
     (
       theme: appTheme, 
-      home: Scaffold
+      home: 
+      Scaffold
       (
-          appBar: AppBar
-        (
-          title: Semantics
+          appBar: 
+          AppBar
           (
-            focusable: true, 
-            child: Focus
+            title: 
+            Semantics
             (
-              focusNode: appBarTitleFocusNode,
-              child: const Text('MyTestingApp'),
-            )
+              focusable: true, 
+              child: 
+              Focus
+              (
+                focusNode: appBarTitleFocusNode,
+                child: const Text('MyTestingApp'),
+              )
+            ),
           ),
-        ),
-        body: Center
+        body: 
+        Center
         (
-          child: CustomFocusableText
+          child: 
+          CustomFocusableText
           (
             text: 'You should be able to reach this text with the tab key'
           )
