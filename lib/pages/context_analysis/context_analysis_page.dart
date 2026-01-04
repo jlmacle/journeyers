@@ -46,10 +46,12 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
       builder: 
         (BuildContext context) 
         {
-          return AlertDialog
+          return 
+          AlertDialog
           (
             contentPadding: EdgeInsets.only(top:25),
-            content: Focus
+            content: 
+            Focus
             (
               child:
               TextButton
@@ -60,16 +62,17 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
                   Navigator.pop(context);
                 },
                 child:
-                  RichText
+                RichText
+                (
+                  text: 
+                  TextSpan
                   (
-                    text: TextSpan
-                    (
-                      text: 'This is your first context analysis.\n'
-                            'The dashboard will be displayed after data from the context analysis has been saved.\n'
-                            'Please click to acknowledge.\n\n',
-                      style: dialogStyle,
-                    ),
-                  )
+                    text: 'This is your first context analysis.\n'
+                          'The dashboard will be displayed after data from the context analysis has been saved.\n'
+                          'Please click to acknowledge.\n\n',
+                    style: dialogStyle,
+                  ),
+                )
               ),
             ),
             actions: 
@@ -108,7 +111,8 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   Widget build(BuildContext context) 
   { 
 
-    return Scaffold
+    return 
+    Scaffold
     (
       body: 
       Column
