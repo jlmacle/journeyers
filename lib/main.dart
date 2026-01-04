@@ -30,7 +30,6 @@ class _MyAppState extends State<MyApp>
   // TODO: to get eventually the value from user preferences
   Locale? _currentLocale = Locale('en'); 
 
-
   void _setLocale(Locale newLocale) 
   {
     if (newLocale != _currentLocale)
@@ -49,7 +48,8 @@ class _MyAppState extends State<MyApp>
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp
+    return 
+    MaterialApp
     (
       // To visualize the semantics tree
       // showSemanticsDebugger: true,
