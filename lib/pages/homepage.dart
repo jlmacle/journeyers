@@ -121,12 +121,13 @@ class _MyHomePageState extends State<MyHomePage>
       ),
       
       body: Column
-      (children: 
-      [
-        // Commented as not all translations are done
-        // CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
-        Expanded(child:  _pages[_currentIndex])       
-      ]
+      (
+        children: 
+        [
+          // Commented as not all translations are done
+          // CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
+          Expanded(child:  _pages[_currentIndex])       
+        ]
       ), 
 
       bottomNavigationBar: BottomNavigationBar 
