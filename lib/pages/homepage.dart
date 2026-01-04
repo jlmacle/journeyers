@@ -76,20 +76,26 @@ class _MyHomePageState extends State<MyHomePage>
       eol = Platform.lineTerminator; // The use of Platform is not portable on the web
     } 
     
-    return Scaffold
+    return 
+    Scaffold
     (      
-      appBar: AppBar  
+      appBar: 
+      AppBar  
       (       
         centerTitle: true,
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,           
-        title: Semantics
+        title: 
+        Semantics
         (
             focusable: true,           
             // container: true, // kept (further screen reader testing needed)
-            child: Focus(
+            child: 
+            Focus
+            (
               focusNode: appBarTitleFocusNode,
-              child: Column
+              child: 
+              Column
               (
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>
@@ -109,10 +115,12 @@ class _MyHomePageState extends State<MyHomePage>
               ),
             ),            
         ),
-        bottom: PreferredSize
+        bottom: 
+        PreferredSize
         (
           preferredSize: const Size.fromHeight(4.0), // the height of the border
-          child: Container
+          child: 
+          Container
           (
             color: Color(0xFFBF9D3E), 
             height: 4.0, 
@@ -120,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       
-      body: Column
+      body: 
+      Column
       (
         children: 
         [
@@ -130,7 +139,8 @@ class _MyHomePageState extends State<MyHomePage>
         ]
       ), 
 
-      bottomNavigationBar: BottomNavigationBar 
+      bottomNavigationBar: 
+      BottomNavigationBar 
       (
         backgroundColor: Colors.white,
         currentIndex: _currentIndex,
