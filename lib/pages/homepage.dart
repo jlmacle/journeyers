@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switch.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart'; 
@@ -64,8 +65,6 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) 
   {
-    final ThemeData appTheme = Theme.of(context);
-
     FocusNode appBarTitleFocusNode = FocusNode();
 
     if (kIsWeb) 
@@ -81,8 +80,7 @@ class _MyHomePageState extends State<MyHomePage>
     (
       
       appBar: AppBar  
-      (
-       
+      (       
         centerTitle: true,
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,           
