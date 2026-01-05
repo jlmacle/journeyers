@@ -33,7 +33,7 @@ class CSVUtils
   /// A set of the titles level 3 related to an individual perspective.
   Set<String> titlesLevel3ForTheIndividualPerspective = {};
   /// A set of the titles level 3 related to a team perspective.
-  Set<String> titlesLevel3ForTheTeamPerspective = {};
+  Set<String> titlesLevel3ForTheGroupPerspective = {};
 
   /// A set of the existing titles level 3 with sub items.
   Set<String>  titlesLevel3WithSubItems = {};
@@ -93,7 +93,7 @@ class CSVUtils
     titlesLevel3ForTheIndividualPerspective = {_q.level3TitleBalanceIssue, _q.level3TitleWorkplaceIssue, _q.level3TitleLegacyIssue, _q.level3TitleAnotherIssue};
  
     // A set of the titles level 3 related to a team perspective.
-    titlesLevel3ForTheTeamPerspective = {_q.level3TitleGroupsProblematics, _q.level3TitleSameProblem, _q.level3TitleHarmonyAtHome, _q.level3TitleAppreciabilityAtWork, 
+    titlesLevel3ForTheGroupPerspective = {_q.level3TitleGroupsProblematics, _q.level3TitleSameProblem, _q.level3TitleHarmonyAtHome, _q.level3TitleAppreciabilityAtWork, 
                                                     _q.level3TitleIncomeEarningAbility};
 
     /// A set of the existing titles level 3 with sub items.
@@ -441,7 +441,7 @@ class CSVUtils
       (
         // Found titles level 3 
         (titlesLevel3ForTheIndividualPerspective.contains(indexData_1AsStringTrimmed) ||
-        titlesLevel3ForTheTeamPerspective.contains(indexData_1AsStringTrimmed))
+        titlesLevel3ForTheGroupPerspective.contains(indexData_1AsStringTrimmed))
         &&
         // and not yet processed 
         !(titlesLevel3Processed.contains(indexData_1AsStringTrimmed))
@@ -459,24 +459,24 @@ class CSVUtils
 
   /// Method used to print the individual perspective CSV data, or the team perspective CSV data, to a file.
   /// Returns the file name.
-  Future<String?> printToCSV({required List<dynamic> csvDataIndividualPerspective, required List<dynamic> csvDataTeamPerspective}) async
+  Future<String?> printToCSV({required List<dynamic> csvDataIndividualPerspective, required List<dynamic> csvDataGroupPerspective}) async
   {
     // Complementing the shortest list to have the same length for both lists
     // before printing side to side
-    if (csvDataIndividualPerspective.length < csvDataTeamPerspective.length)
+    if (csvDataIndividualPerspective.length < csvDataGroupPerspective.length)
     {
-      for (var index = csvDataIndividualPerspective.length; index <= csvDataTeamPerspective.length -1; index++)
+      for (var index = csvDataIndividualPerspective.length; index <= csvDataGroupPerspective.length -1; index++)
       {
         // Adding empty lines
         csvDataIndividualPerspective.add(["",""]);
       }
     }
-    else if (csvDataIndividualPerspective.length > csvDataTeamPerspective.length)
+    else if (csvDataIndividualPerspective.length > csvDataGroupPerspective.length)
     {
-      for (var index = csvDataTeamPerspective.length; index <= csvDataIndividualPerspective.length -1; index++)
+      for (var index = csvDataGroupPerspective.length; index <= csvDataIndividualPerspective.length -1; index++)
       {
         // Adding empty lines
-        csvDataTeamPerspective.add(["",""]);
+        csvDataGroupPerspective.add(["",""]);
       }
     }
 
@@ -485,16 +485,16 @@ class CSVUtils
     for (var index = 0; index < csvDataIndividualPerspective.length; index ++)
     {
       dynamic csvDataIndividualPerspectiveData = csvDataIndividualPerspective[index];
-      dynamic csvDataTeamPerspectiveData = csvDataTeamPerspective[index];
+      dynamic csvDataGroupPerspectiveData = csvDataGroupPerspective[index];
 
-      String line = "${csvDataIndividualPerspectiveData[0]},${csvDataIndividualPerspectiveData[1]},,${csvDataTeamPerspectiveData[0]}, ${csvDataTeamPerspectiveData[1]}\n";
+      String line = "${csvDataIndividualPerspectiveData[0]},${csvDataIndividualPerspectiveData[1]},,${csvDataGroupPerspectiveData[0]}, ${csvDataGroupPerspectiveData[1]}\n";
       content += line ;  
     }
 
     _pu.printd("");
     _pu.printd("csvDataIndividualPerspective:$csvDataIndividualPerspective");
     _pu.printd("");  
-    _pu.printd("csvDataTeamPerspectiveData:$csvDataTeamPerspective");
+    _pu.printd("csvDataGroupPerspective:$csvDataGroupPerspective");
     _pu.printd("");
 
     final bytes = Uint8List.fromList(utf8.encode(content));
