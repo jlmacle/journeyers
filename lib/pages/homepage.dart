@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage>
     const GroupProblemSolvingPage(),
   ];
 
-  // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
+  // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale.
   // The logic cannot be moved in main.dart, as the context would be called without having being built yet.
   void _updateLocale(String languageName) 
   {

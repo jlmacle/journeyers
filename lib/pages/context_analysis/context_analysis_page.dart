@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_dashboard_page.dart';
+import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
 
 // Utility class
@@ -15,7 +15,7 @@ UserPreferencesUtils up = UserPreferencesUtils();
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analyses.
-/// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysisDashboardPage.
+/// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysesDashboardPage.
 class ContextAnalysisPage extends StatefulWidget 
 {
   const ContextAnalysisPage({super.key});
@@ -133,7 +133,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
               ...
               [
                 Divider(),
-                ContextAnalysisDashboardPage()
+                ContextAnalysesDashboardPage()
               ],
             ]
         ],

@@ -7,15 +7,15 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 /// {@category Pages}
 /// {@category Context analysis}
 /// The page for the dashboard of the context analyses.
-class ContextAnalysisDashboardPage extends StatefulWidget 
+class ContextAnalysesDashboardPage extends StatefulWidget 
 {
-  const ContextAnalysisDashboardPage({super.key});
+  const ContextAnalysesDashboardPage({super.key});
 
   @override
-  State<ContextAnalysisDashboardPage> createState() => _ContextAnalysisDashboardPageState();
+  State<ContextAnalysesDashboardPage> createState() => _ContextAnalysesDashboardPageState();
 }
 
-class _ContextAnalysisDashboardPageState extends State<ContextAnalysisDashboardPage> 
+class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardPage> 
 {
   bool _isDataLoading = true;
   Map<String,dynamic>? completeSessionData;
