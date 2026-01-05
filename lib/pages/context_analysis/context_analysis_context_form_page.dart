@@ -260,7 +260,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
     List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
-    String? pathToCSVFile = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataTeamPerspective: csvDataGroupPerspective);
+    String? pathToCSVFile = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataGroupPerspective: csvDataGroupPerspective);
     pu.printd("pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null) du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, pathToCSVFile: pathToCSVFile);
