@@ -190,29 +190,33 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                               q.level3TitleLegacyIssue:level3TitleLegacyIssueData,q.level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
 
     //************************* Groups/Teams perspective ******************************/
-    // Group/team level: 
+    // Groups/teams level: problematics the groups/teams are trying to solve
     // level3TitleGroupsProblematicsItem1
     LinkedHashMap<String, dynamic>  level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField:""});
     level3TitleGroupsProblematicsItem1Data[FormUtils.textField] = _problemsTheGroupsAreTryingToSolveTextFieldContent;
 
+    // Groups/teams level: trying to solve the same problems ?
     // level3TitleSameProblemsItem1
     LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
     if (_sameProblemsSegmentedButtonSelection.length == 1) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = _sameProblemsSegmentedButtonSelection.first;}
     else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
     level3TitleSameProblemsItem1Data[FormUtils.textField] = _sameProblemsTextFieldContent;
 
+    // Groups/teams level: harmony at home
     // level3TitleHarmonyAtHomeItem1
     LinkedHashMap<String, dynamic>  level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
     if(_harmonyHomeSegmentedButtonSelection.length == 1)  {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = _harmonyHomeSegmentedButtonSelection.first;}
     else {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";}
     level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] = _harmonyHomeTextFieldContent;
 
-    // // level3TitleAppreciabilityAtWorkItem1
+    // Groups/teams level: appreciability at work
+    // level3TitleAppreciabilityAtWorkItem1
     LinkedHashMap<String, dynamic>  level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
     if (_appreciabilityAtWorkSegmentedButtonSelection.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = _appreciabilityAtWorkSegmentedButtonSelection.first;}
     else {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";}
     level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] = _appreciabilityAtWorkTextFieldContent;
 
+    // Groups/teams level: income earning abillity
     // level3TitleIncomeEarningAbilityItem1
     LinkedHashMap<String, dynamic>  level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
     if(_earningAbilitySegmentedButtonSelection.length == 1)  {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = _earningAbilitySegmentedButtonSelection.first;}
