@@ -226,14 +226,14 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
     // Adding to the level2TitleGroup data
     // level2TitleGroupData
-    LinkedHashMap<String, dynamic> level2TitleTeamData = 
+    LinkedHashMap<String, dynamic> level2TitleGroupData = 
     LinkedHashMap<String, dynamic>.from(
       {q.level2TitleGroup:{q.level3TitleGroupsProblematics:level3TitleGroupsProblematicsItem1Data,q.level3TitleSameProblem:level3TitleSameProblemsItem1Data,
       q.level3TitleHarmonyAtHome:level3TitleHarmonyAtHomeItems1Data,q.level3TitleAppreciabilityAtWork:level3TitleAppreciabilityAtWorkItem1Data,
       q.level3TitleIncomeEarningAbility:level3TitleIncomeEarningAbilityItem1Data}});
      
     // Adding individual and team perspective to root level data
-    _enteredData = [level2TitleIndividualData, level2TitleTeamData];
+    _enteredData = [level2TitleIndividualData, level2TitleGroupData];
 
     pu.printd("");
     pu.printd("_enteredData");
