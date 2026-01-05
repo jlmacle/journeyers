@@ -5,21 +5,12 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 /// {@category Pages}
 /// {@category Context analysis}
 /// The page for a new session of context analysis.
-class ContextAnalysisNewSessionPage extends StatefulWidget 
-{
+
+class ContextAnalysisNewSessionPage extends StatelessWidget {
   const ContextAnalysisNewSessionPage({super.key});
 
   @override
-  State<ContextAnalysisNewSessionPage> createState() => _ContextAnalysisNewSessionPageState();
-}
-
-class _ContextAnalysisNewSessionPageState extends State<ContextAnalysisNewSessionPage> 
-{
-
-  @override
-  Widget build(BuildContext context) 
-  {
-
+  Widget build(BuildContext context) {
     FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
 
     return 
