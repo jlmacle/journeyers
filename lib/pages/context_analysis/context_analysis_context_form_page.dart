@@ -248,19 +248,19 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
     // Transforming the data into a CSV-friendly form
     var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
-    var preCSVDataTeamPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
+    var preCSVDataGroupPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
     pu.printd("preCSVDataIndividualPerspective");
     pu.printd("$preCSVDataIndividualPerspective");
     pu.printd("");
-    pu.printd("preCSVDataTeamPerspective");
-    pu.printd("$preCSVDataTeamPerspective");
+    pu.printd("preCSVDataGroupPerspective");
+    pu.printd("$preCSVDataGroupPerspective");
     pu.printd("");
 
     List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
-    List<dynamic> csvDataTeamPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataTeamPerspective);
+    List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
-    String? pathToCSVFile = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataTeamPerspective: csvDataTeamPerspective);
+    String? pathToCSVFile = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataTeamPerspective: csvDataGroupPerspective);
     pu.printd("pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null) du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, pathToCSVFile: pathToCSVFile);
