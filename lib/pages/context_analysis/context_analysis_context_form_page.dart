@@ -180,10 +180,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     // level3TitleAnotherIssueItem1
     LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField:""});
     level3TitleAnotherIssueItem1Data[FormUtils.textField] = _anotherIssueTextFieldContent;
+    // Different pattern for the text field only inputs (might modify later)
  
-    // Adding to the level2TitleIndividual level
+    // Adding to the level2TitleIndividual data
     // level2TitleIndividualData
-    // Different pattern for "level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data"
     LinkedHashMap<String, dynamic> level2TitleIndividualData = 
     LinkedHashMap<String, dynamic>.from(
       {q.level2TitleIndividual:{q.level3TitleBalanceIssue:level3TitleBalanceIssueData,q.level3TitleWorkplaceIssue:level3TitleWorkplaceIssueData,
