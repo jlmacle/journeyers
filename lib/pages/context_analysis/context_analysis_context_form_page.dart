@@ -129,9 +129,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   //*****************    Data structure related code    **********************//
   void dataStructureBuilding()
   {
+    // Using LinkedHashMaps for an insertion-ordered hash-table based (source code).
 
     //************************* Individual perspective ******************************/
-    //Individual level: balance issue
+    // Individual level: balance issue
     // level3TitleBalanceIssueItem1Data
     LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
     level3TitleBalanceItem1Data[FormUtils.checkbox] = _studiesHouseholdBalanceCheckboxValue;
@@ -153,7 +154,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     = LinkedHashMap<String, dynamic>.from({q.level3TitleBalanceIssueItem1:level3TitleBalanceItem1Data,q.level3TitleBalanceIssueItem2:level3TitleBalanceItem2Data, 
                                            q.level3TitleBalanceIssueItem3:level3TitleBalanceItem3Data,q.level3TitleBalanceIssueItem4:level3TitleBalanceItem4Data});
 
-    //Individual level: workplace issue
+    // Individual level: workplace issue
     // level3TitleWorkplaceIssueItem1Data
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
     level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] = _moreAppreciatedAtWorkCheckboxValue;
@@ -166,7 +167,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData 
     = LinkedHashMap<String, dynamic>.from({q.level3TitleWorkplaceIssueItem1:level3TitleWorkplaceIssueItem1Data,q.level3TitleWorkplaceIssueItem2:level3TitleWorkplaceIssueItem2Data});
 
-    //Individual level: legacy issue
+    // Individual level: legacy issue
     // level3TitleLegacyIssueItem1
     LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox:"false",FormUtils.textField:""});
     level3TitleLegacyIssueItem1Data[FormUtils.checkbox] = _betterLegaciesCheckboxValue;
@@ -175,12 +176,12 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     LinkedHashMap<String, dynamic> level3TitleLegacyIssueData 
     = LinkedHashMap<String, dynamic>.from({q.level3TitleLegacyIssueItem1:level3TitleLegacyIssueItem1Data});
 
-    //Individual level: another issue
+    // Individual level: another issue
     // level3TitleAnotherIssueItem1
     LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField:""});
     level3TitleAnotherIssueItem1Data[FormUtils.textField] = _anotherIssueTextFieldContent;
  
-    // Adding to to the level2TitleIndividual level
+    // Adding to the level2TitleIndividual level
     // level2TitleIndividualData
     // Different pattern for "level3TitleAnotherIssue:level3TitleLegacyIssueItem1Data"
     LinkedHashMap<String, dynamic> level2TitleIndividualData = 
@@ -189,7 +190,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                               q.level3TitleLegacyIssue:level3TitleLegacyIssueData,q.level3TitleAnotherIssue:level3TitleAnotherIssueItem1Data}});
 
     //************************* Groups/Teams perspective ******************************/
-    //Group/team level: 
+    // Group/team level: 
     // level3TitleGroupsProblematicsItem1
     LinkedHashMap<String, dynamic>  level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField:""});
     level3TitleGroupsProblematicsItem1Data[FormUtils.textField] = _problemsTheGroupsAreTryingToSolveTextFieldContent;
