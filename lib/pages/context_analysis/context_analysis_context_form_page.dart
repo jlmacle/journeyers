@@ -195,9 +195,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     LinkedHashMap<String, dynamic>  level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField:""});
     level3TitleGroupsProblematicsItem1Data[FormUtils.textField] = _problemsTheGroupsAreTryingToSolveTextFieldContent;
 
-    // Groups/teams level: trying to solve the same problems ?
+    // Groups/teams level: trying to solve the same problems?
     // level3TitleSameProblemsItem1
     LinkedHashMap<String, dynamic>  level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton:"", FormUtils.textField:""});
+      // CustomSegmentedButtonWithTextField: this.multiSelectionEnabled = false
     if (_sameProblemsSegmentedButtonSelection.length == 1) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = _sameProblemsSegmentedButtonSelection.first;}
     else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
     level3TitleSameProblemsItem1Data[FormUtils.textField] = _sameProblemsTextFieldContent;
