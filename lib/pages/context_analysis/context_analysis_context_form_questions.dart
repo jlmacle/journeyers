@@ -29,6 +29,7 @@ class ContextAnalysisContextFormQuestions
   String  level3TitleAnotherIssue = 'Is the issue of another type?';
 
   //*********** Perspective 2: group/team perspective *************//
+  
   // Header level 2
   String level2TitleGroup = 'As a member of groups/teams: What problem(s) are we trying to solve?';
 
