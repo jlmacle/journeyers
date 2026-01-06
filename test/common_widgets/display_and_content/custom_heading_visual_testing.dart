@@ -6,11 +6,12 @@
 // Line for automated processing
 
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 // import 'package:flutter/rendering.dart'; // https://api.flutter.dev/flutter/rendering/
 
+import 'package:gap/gap.dart';
+
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_heading.dart';
+import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
 
 void main() 
 {  

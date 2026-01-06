@@ -6,9 +6,11 @@
 // Line for automated processing
 
 import 'package:flutter/material.dart';
+
 import 'package:gap/gap.dart';
+
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 
 
 void main() 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
+
 import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 
 /// {@category Custom widgets}
 /// A customizable segmented button that displays a customizable text field when a value is selected.
