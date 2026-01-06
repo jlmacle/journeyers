@@ -14,55 +14,44 @@ import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_expansio
 // Utility class
 final PrintUtils pu = PrintUtils();
 
-void main() 
-{  
+void main() {
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macOS
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget 
-{
+class MyTestingApp extends StatelessWidget {
   const MyTestingApp({super.key});
 
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     FocusNode appBarTitleFocusNode = FocusNode();
 
-    return 
-    MaterialApp
-    (
-      theme: appTheme, 
-      home: 
-      Scaffold
-      (
-        appBar: 
-        AppBar
-        (
-          title: 
-          Semantics
-          (
-            focusable: true, 
-            child: 
-            Focus
-            (
+    return MaterialApp(
+      theme: appTheme,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Semantics(
+            focusable: true,
+            child: Focus(
               focusNode: appBarTitleFocusNode,
               child: const Text('MyTestingApp'),
-            )
+            ),
           ),
         ),
-        body: 
-        Center
-        (
-          child: 
-          CustomExpansionTile
-          (
-            parentWidgetOnEditPressedCallBackFunction: (){pu.printd('onEditPressed');},
-            parentWidgetOnDeletePressedCallBackFunction: (){pu.printd('onDeletePressed');},
-            parentWidgetOnSharePressedCallBackFunction: (){pu.printd('onSharePressed');}
-          )
+        body: Center(
+          child: CustomExpansionTile(
+            parentWidgetOnEditPressedCallBackFunction: () {
+              pu.printd('onEditPressed');
+            },
+            parentWidgetOnDeletePressedCallBackFunction: () {
+              pu.printd('onDeletePressed');
+            },
+            parentWidgetOnSharePressedCallBackFunction: () {
+              pu.printd('onSharePressed');
+            },
+          ),
         ),
-      ),      
+      ),
     );
   }
 }

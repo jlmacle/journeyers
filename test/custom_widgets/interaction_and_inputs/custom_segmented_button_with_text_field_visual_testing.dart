@@ -12,146 +12,115 @@ import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 
-
-void main() 
-{  
+void main() {
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
-
-class MyTestingApp extends StatelessWidget 
-{
+class MyTestingApp extends StatelessWidget {
   const MyTestingApp({super.key});
-  
+
   @override
-  Widget build(BuildContext context) 
-  {
-    return 
-    MaterialApp
-    (
-      theme: appTheme, 
-      home: HomePage()
-    );
+  Widget build(BuildContext context) {
+    return MaterialApp(theme: appTheme, home: HomePage());
   }
 }
 //---------------------------------------------------
 
-class HomePage extends StatefulWidget 
-{
-
-  const HomePage
-  ({
-    super.key,
-  });
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-{
+class _HomePageState extends State<HomePage> {
   Set<String> _selectedValues = {"No value selected yet"};
   String? _textContent;
 
-  void parentWidgetTextFieldValueCallBackFunction(String value)
-  {
-    setState(() 
-    {
-     _textContent = value;
+  void parentWidgetTextFieldValueCallBackFunction(String value) {
+    setState(() {
+      _textContent = value;
     });
   }
 
-  void parentWidgetSegmentedButtonValueCallBackFunction( Set<String>? values)
-  {
-    setState(() 
-    {
+  void parentWidgetSegmentedButtonValueCallBackFunction(Set<String>? values) {
+    setState(() {
       // Only one value by configuration
-     _selectedValues = values!;
+      _selectedValues = values!;
     });
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     FocusNode appBarTitleFocusNode = FocusNode();
     FocusNode introductoryMessageFocusNode = FocusNode();
     FocusNode informationalMessageFocusNode = FocusNode();
 
-    return 
-    Scaffold
-    (
-      appBar: 
-      AppBar
-      (
-        title: 
-        Semantics
-        (
-          focusable: true, 
-          child: 
-          Focus
-          (
+    return Scaffold(
+      appBar: AppBar(
+        title: Semantics(
+          focusable: true,
+          child: Focus(
             focusNode: appBarTitleFocusNode,
             child: const Text('MyTestingApp'),
-          )
+          ),
         ),
       ),
-      body: 
-      Padding
-      (
-        padding: const EdgeInsets.all(20.0),       
-        child: 
-        Column
-        (
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: 
-          [   
-            Center
-            (
-              child: 
-              Semantics
-              ( 
-                focusable: true,            
-                child: 
-                Focus
-                (
+          children: [
+            Center(
+              child: Semantics(
+                focusable: true,
+                child: Focus(
                   focusNode: introductoryMessageFocusNode,
-                  child: Text('Clicking on any option should reveal a text field.', style: feedbackMessageStyle),
-                ),
-              ),
-            ),              
-            Gap(16),
-            CustomSegmentedButtonWithTextField(textOption1: "Yes", textOption2: "No", textOption3: "I don't know",textOptionsfontSize: 20, 
-            textFieldHintText: textFieldHintText,
-            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
-            parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction),
-            Gap(16),                    
-            Center
-            (
-              child: 
-              Semantics
-              ( 
-                focusable: true,            
-                child: 
-                Focus
-                (
-                  focusNode: informationalMessageFocusNode,
-                  child: 
-                  Column
-                  (
-                    children: 
-                    [
-                      Text('You selected: ${ (_selectedValues.toString()).replaceAll('{',"").replaceAll('}',"")}.', style: feedbackMessageStyle),
-                      Gap(10),
-                      Text('You typed: ${_textContent ?? "No text typed yet."}', style: feedbackMessageStyle),
-                    ],
-                  ),                    
+                  child: Text(
+                    'Clicking on any option should reveal a text field.',
+                    style: feedbackMessageStyle,
+                  ),
                 ),
               ),
             ),
-          ]
+            Gap(16),
+            CustomSegmentedButtonWithTextField(
+              textOption1: "Yes",
+              textOption2: "No",
+              textOption3: "I don't know",
+              textOptionsfontSize: 20,
+              textFieldHintText: textFieldHintText,
+              parentWidgetTextFieldValueCallBackFunction:
+                  parentWidgetTextFieldValueCallBackFunction,
+              parentWidgetSegmentedButtonValueCallBackFunction:
+                  parentWidgetSegmentedButtonValueCallBackFunction,
+            ),
+            Gap(16),
+            Center(
+              child: Semantics(
+                focusable: true,
+                child: Focus(
+                  focusNode: informationalMessageFocusNode,
+                  child: Column(
+                    children: [
+                      Text(
+                        'You selected: ${(_selectedValues.toString()).replaceAll('{', "").replaceAll('}', "")}.',
+                        style: feedbackMessageStyle,
+                      ),
+                      Gap(10),
+                      Text(
+                        'You typed: ${_textContent ?? "No text typed yet."}',
+                        style: feedbackMessageStyle,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ),      
+      ),
     );
   }
 }

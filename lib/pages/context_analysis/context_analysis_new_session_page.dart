@@ -13,18 +13,12 @@ class ContextAnalysisNewSessionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
 
-    return 
-    Expanded
-    (
-      child: 
-      Padding
-      (
+    return Expanded(
+      child: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: 
-        Focus
-        (
+        child: Focus(
           focusNode: contextAnalysisNewSessionFocusNode,
-          child: ContextAnalysisContextFormPage()
+          child: ContextAnalysisContextFormPage(),
         ),
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 /// {@category Utils}
 /// A utility class related to user preferences.
 class UserPreferencesUtils {

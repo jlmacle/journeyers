@@ -16,126 +16,102 @@ UserPreferencesUtils up = UserPreferencesUtils();
 /// {@category Context analysis}
 /// The root page for the context analyses.
 /// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysesDashboardPage.
-class ContextAnalysisPage extends StatefulWidget 
-{
+class ContextAnalysisPage extends StatefulWidget {
   const ContextAnalysisPage({super.key});
 
   @override
   State<ContextAnalysisPage> createState() => _ContextAnalysisPageState();
 }
 
-class _ContextAnalysisPageState extends State<ContextAnalysisPage>  
-{ 
+class _ContextAnalysisPageState extends State<ContextAnalysisPage> {
   bool _preferencesLoading = true;
-  late bool? _isStartMessageAlreadyAcknowledged;  
+  late bool? _isStartMessageAlreadyAcknowledged;
   bool isContextAnalysisSessionDataSaved = false;
 
   // to help reset the start message status
   final bool _resetStartMessage = true;
-  
-  _getPreferences() async
-  {
+
+  _getPreferences() async {
     _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
-    setState(() {_preferencesLoading = false;});
-    pu.printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
-    if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted)
-    {
-      showDialog
-      (
-      context: context,
-      builder: 
-        (BuildContext context) 
-        {
-          return 
-          AlertDialog
-          (
-            contentPadding: EdgeInsets.only(top:25),
-            content: 
-            Focus
-            (
-              child:
-              TextButton
-              (
-                onPressed:() 
-                {
-                  up.saveStartMessageAcknowledgement();  
+    setState(() {
+      _preferencesLoading = false;
+    });
+    pu.printd(
+      "_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged",
+    );
+    if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            contentPadding: EdgeInsets.only(top: 25),
+            content: Focus(
+              child: TextButton(
+                onPressed: () {
+                  up.saveStartMessageAcknowledgement();
                   Navigator.pop(context);
                 },
-                child:
-                RichText
-                (
-                  text: 
-                  TextSpan
-                  (
-                    text: 'This is your first context analysis.\n'
-                          'The dashboard will be displayed after data from the context analysis has been saved.\n'
-                          'Please click to acknowledge.\n\n',
+                child: RichText(
+                  text: TextSpan(
+                    text:
+                        'This is your first context analysis.\n'
+                        'The dashboard will be displayed after data from the context analysis has been saved.\n'
+                        'Please click to acknowledge.\n\n',
                     style: dialogStyle,
                   ),
-                )
+                ),
               ),
             ),
-            actions: 
-            [
-              TextButton
-              (
-                onPressed: () 
-                {
-                  up.saveStartMessageAcknowledgement();  
+            actions: [
+              TextButton(
+                onPressed: () {
+                  up.saveStartMessageAcknowledgement();
                   Navigator.pop(context);
                 },
-                child: Text('Acknowledged', style: dialogStyleAcknowledged)
+                child: Text('Acknowledged', style: dialogStyleAcknowledged),
               ),
             ],
           );
-        }
+        },
       );
     }
   }
 
-  void resetStartMessage() async
-  {
+  void resetStartMessage() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isDialogStartMessageAcknowledged', false);
   }
 
-
   @override
-  void initState() 
-  { 
+  void initState() {
     super.initState();
-    _getPreferences();     
+    _getPreferences();
   }
 
   @override
-  Widget build(BuildContext context) 
-  { 
-
-    return 
-    Scaffold
-    (
-      body: 
-      Column
-      (
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: 
-        [
+        children: [
           if (_resetStartMessage)
-            ElevatedButton(onPressed: resetStartMessage, child: Text('Reset the start message acknowledgement data', style: feedbackMessageStyle,)),
+            ElevatedButton(
+              onPressed: resetStartMessage,
+              child: Text(
+                'Reset the start message acknowledgement data',
+                style: feedbackMessageStyle,
+              ),
+            ),
           if (_preferencesLoading)
             Center(child: CircularProgressIndicator())
-          else
-            ...
-            [            
-              ContextAnalysisNewSessionPage(),            
-              
-              if (isContextAnalysisSessionDataSaved)
-              ...
-              [
-                Divider(),
-                ContextAnalysesDashboardPage()
-              ],
-            ]
+          else ...[
+            ContextAnalysisNewSessionPage(),
+
+            if (isContextAnalysisSessionDataSaved) ...[
+              Divider(),
+              ContextAnalysesDashboardPage(),
+            ],
+          ],
         ],
       ),
     );

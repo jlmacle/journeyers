@@ -5,17 +5,21 @@
 // flutter run -t ./test/core/utils/dashboard/dashboard_utils_test_data/dashboard_session_data_context_analysis_data_generation.dart -d windows
 // Line for automated processing
 
-
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 
-
-void main() async
-{
-  String filePath = path.join('test','core','utils','dashboard', 'dashboard_utils_test_data','dashboard_session_data_context_analysis.json');
+void main() async {
+  String filePath = path.join(
+    'test',
+    'core',
+    'utils',
+    'dashboard',
+    'dashboard_utils_test_data',
+    'dashboard_session_data_context_analysis.json',
+  );
   var jsonFile = File(filePath);
 
   var now = DateTime.now();
@@ -26,23 +30,38 @@ void main() async
   var title1 = "Title session 1";
   var date1 = formattedDate;
   List<String> tags1 = ["tag1", "tag2", "tag3"];
-  var record1 = {'title':title1, 'date':date1 , 'tags':tags1, 'filePath':"filePath1"};
+  var record1 = {
+    'title': title1,
+    'date': date1,
+    'tags': tags1,
+    'filePath': "filePath1",
+  };
 
   // Second record of data
   var title2 = "Title session 2";
   var date2 = formattedDate;
   List<String> tags2 = ["tag1", "tag2", "tag4"];
-  var record2= {'title':title2, 'date':date2, 'tags':tags2, 'filePath':"filePath2"};
+  var record2 = {
+    'title': title2,
+    'date': date2,
+    'tags': tags2,
+    'filePath': "filePath2",
+  };
 
   // Third record of data
   var title3 = "Title session 3";
   var date3 = formattedDate;
   List<String> tags3 = ["tag1", "tag3", "tag5"];
-  var record3 = {'title':title3, 'date':date3, 'tags':tags3, 'filePath':"filePath3"};
+  var record3 = {
+    'title': title3,
+    'date': date3,
+    'tags': tags3,
+    'filePath': "filePath3",
+  };
 
-  List<Map> records = [record1,record2,record3];
+  List<Map> records = [record1, record2, record3];
 
-  var data = {'records':records};
+  var data = {'records': records};
   var jsonString = jsonEncode(data);
 
   await jsonFile.writeAsString(jsonString);

@@ -4,16 +4,14 @@ import 'package:logging/logging.dart';
 /// {@category Utils}
 /// A utility class related to logging.
 class LoggingUtils {
-
-/// Method used to setup logging, before declaring a logger.
-  void setupLogging() 
-  {
+  /// Method used to setup logging, before declaring a logger.
+  void setupLogging() {
     Logger.root.level = Level.ALL; // Set the root log level
     Logger.root.onRecord.listen((record) {
-    var time = record.time;
-    String formattedTime = DateFormat('HH:mm:ss').format(time);
-    // TODO: file-based logging and logging reset algorithm
-    print('${record.level.name}: $formattedTime: ${record.message}');
+      var time = record.time;
+      String formattedTime = DateFormat('HH:mm:ss').format(time);
+      // TODO: file-based logging and logging reset algorithm
+      print('${record.level.name}: $formattedTime: ${record.message}');
     });
   }
 }
