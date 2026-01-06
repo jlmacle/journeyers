@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
+import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_text.dart';
 
 void main() 
 {  

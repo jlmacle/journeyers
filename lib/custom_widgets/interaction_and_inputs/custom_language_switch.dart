@@ -1,6 +1,6 @@
-import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
-
 import 'package:flutter/material.dart';
+
+import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 // Utility class

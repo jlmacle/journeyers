@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
-import '../../app_themes.dart';
-import '../interaction_and_inputs/custom_icon_button.dart';
+import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_icon_button.dart';
 
 // Utility class
 PrintUtils pu = PrintUtils();

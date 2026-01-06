@@ -15,8 +15,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:gap/gap.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
+import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_text.dart';
+import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 
 void main() 
 {  

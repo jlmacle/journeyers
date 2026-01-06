@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 
 /// {@category Pages}
 /// {@category Context analysis}

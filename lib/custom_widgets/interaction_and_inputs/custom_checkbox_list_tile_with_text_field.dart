@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
-import 'package:journeyers/common_widgets/interaction_and_inputs/custom_padded_text_field.dart';
+
 import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_text.dart';
+import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 
 /// {@category Custom widgets}
 /// A customizable checkbox that displays a customizable text field when the box is checked.
