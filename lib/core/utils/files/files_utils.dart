@@ -33,7 +33,7 @@ class FileUtils
     catch(e) {_logger.shout('$errorMsg $e');}
   }
 
-  ///  Method used to add text at the beginning of a file.
+  /// Method used to add text at the beginning of a file.
   Future<void> addTextAtFileStart({required String filePath, required String text}) async
   {
     String errorMsg = 'Error appending text in front of file:';
