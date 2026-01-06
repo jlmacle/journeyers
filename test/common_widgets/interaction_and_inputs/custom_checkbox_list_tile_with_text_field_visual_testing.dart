@@ -9,9 +9,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 // import 'package:flutter/rendering.dart';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:gap/gap.dart';
+
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/display_and_content/custom_focusable_text.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage>
   bool _isCheckboxChecked = false;
   String? _textFieldContent;
 
-  Map <String,dynamic> enteredData = {"question1":{"isChecked":false,"comments":"undefined"}};
+  Map <String,dynamic> enteredData = {"question1":{"isChecked":false,"comments":""}};
 
   void parentWidgetTextFieldValueCallBackFunction(String value)
   {
@@ -81,7 +83,6 @@ class _HomePageState extends State<HomePage>
       }
     );
   }
-
 
   transferDataToJsonFile() async 
   {
@@ -150,7 +151,7 @@ class _HomePageState extends State<HomePage>
           ElevatedButton
           (
             onPressed: transferDataToJsonFile,
-            child: CustomFocusableText(text: "Click to save the data (json for this demo)",textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
+            child: CustomFocusableText(text: "Click to save the data (json for this demo)", textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal)),            
           ),         
         ]
       ),

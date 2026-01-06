@@ -5,7 +5,6 @@
 // flutter run -t ./test/common_widgets/display_and_content/custom_focusable_text_visual_testing.dart -d windows
 // Line for automated processing
 
-
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
