@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 import '../../app_themes.dart';
 import '../interaction_and_inputs/custom_icon_button.dart';
 
+// Utility class
+PrintUtils pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable expansion tile.
@@ -138,7 +141,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                       {
                         onPressedFunction = widget.parentWidgetOnSharePressedCallBackFunction;
                       }
-                      else {onPressedFunction = (){};}
+                      else {onPressedFunction = (){pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTipLabel");};}
 
                       return CustomIconButton(icon: Icon(iconData), toolTipLabel: toolTipLabel, parentWidgetOnPressedCallBackFunction: onPressedFunction);
                     }
