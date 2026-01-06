@@ -8,7 +8,7 @@
 import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
 import 'package:logging/logging.dart';
 
-void main(){
+void main() {
   LoggingUtils lu = LoggingUtils();
   lu.setupLogging();
   // The logger doesn't print without the previous lines
@@ -20,6 +20,4 @@ void main(){
   logger.severe('Message');
   logger.shout('Message');
   logger.warning('Message');
-
 }
-
