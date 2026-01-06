@@ -5,7 +5,6 @@
 // flutter run -t ./test/common_widgets/display_and_content/custom_heading_visual_testing.dart -d windows
 // Line for automated processing
 
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 // import 'package:flutter/rendering.dart'; // https://api.flutter.dev/flutter/rendering/
