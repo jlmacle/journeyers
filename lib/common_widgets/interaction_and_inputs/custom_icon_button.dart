@@ -9,8 +9,7 @@ class CustomIconButton extends StatefulWidget
   /// The tooltip label for the icon.
   final String toolTipLabel;
   /// The callback function called when the icon button is pressed.
-  final VoidCallback parentWidgetOnPressedCallBackFunction;   // type alias: typedef VoidCallback = void Function();
-
+  final VoidCallback parentWidgetOnPressedCallBackFunction;   
   const CustomIconButton
   ({
     super.key,
