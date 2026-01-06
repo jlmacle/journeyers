@@ -41,7 +41,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
 
   /// A placeholder void callback function with a String parameter.
   static void placeHolderFunctionString(String value) {}
-  /// A placeholder void callback function with a Set<String>? parameter.
+  /// A placeholder void callback function with a Set\<String\> parameter.
   static void placeHolderFunctionSetString(Set<String>? values) {}
 
   const CustomSegmentedButtonWithTextField
