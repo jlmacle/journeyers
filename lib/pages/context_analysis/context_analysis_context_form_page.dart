@@ -19,16 +19,16 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 /// {@category Pages}
 /// {@category Context analysis}
 /// The form page for the context analysis.
-class ContextAnalysisContextFormPage extends StatefulWidget {
+class ContextAnalysisContextFormPage extends StatefulWidget 
+{
   const ContextAnalysisContextFormPage({super.key});
 
   @override
-  State<ContextAnalysisContextFormPage> createState() =>
-      _ContextAnalysisContextFormPageState();
+  State<ContextAnalysisContextFormPage> createState() => _ContextAnalysisContextFormPageState();
 }
 
-class _ContextAnalysisContextFormPageState
-    extends State<ContextAnalysisContextFormPage> {
+class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
+{
   // Utility classes
   CSVUtils cu = CSVUtils();
   DashboardUtils du = DashboardUtils();
@@ -84,365 +84,180 @@ class _ContextAnalysisContextFormPageState
 
   // Callback methods from the form page
   // Individual perspective
-  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) {
-    setState(() {
-      _studiesHouseholdBalanceCheckboxValue = newValue!;
-    });
-  }
+  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});}
 
-  _setStudiesHouseholdBalanceTextFieldState(String newValue) {
-    setState(() {
-      _studiesHouseholdBalanceTextFieldContent = newValue;
-    });
-  }
+  _setStudiesHouseholdBalanceTextFieldState(String newValue) {setState(() {_studiesHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) {
-    setState(() {
-      _accessingIncomeHouseholdBalanceCheckboxValue = newValue!;
-    });
-  }
+  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});}
 
-  _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {
-    setState(() {
-      _accessingIncomeHouseholdBalanceTextFieldContent = newValue;
-    });
-  }
+  _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {setState(() {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) {
-    setState(() {
-      _earningIncomeHouseholdBalanceCheckboxValue = newValue!;
-    });
-  }
+  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_earningIncomeHouseholdBalanceCheckboxValue = newValue!;});}
 
-  _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {
-    setState(() {
-      _earningIncomeHouseholdBalanceTextFieldContent = newValue;
-    });
-  }
+  _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {setState(() {_earningIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setHelpingOthersdBalanceCheckboxState(bool? newValue) {
-    setState(() {
-      _helpingOthersHouseholdBalanceCheckboxValue = newValue!;
-    });
-  }
+  _setHelpingOthersdBalanceCheckboxState(bool? newValue) {setState(() {_helpingOthersHouseholdBalanceCheckboxValue = newValue!;});}
 
-  _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {
-    setState(() {
-      _helpingOthersHouseholdBalanceTextFieldContent = newValue;
-    });
-  }
+  _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {setState(() {_helpingOthersHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) {
-    setState(() {
-      _moreAppreciatedAtWorkCheckboxValue = newValue!;
-    });
-  }
+  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) {setState(() {_moreAppreciatedAtWorkCheckboxValue = newValue!;});}
 
-  _setMoreAppreciatedAtWorkTextFieldState(String newValue) {
-    setState(() {
-      _moreAppreciatedAtWorkTextFieldContent = newValue;
-    });
-  }
+  _setMoreAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_moreAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) {
-    setState(() {
-      _remainingAppreciatedAtWorkCheckboxValue = newValue!;
-    });
-  }
+  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) {setState(() {_remainingAppreciatedAtWorkCheckboxValue = newValue!;});}
 
-  _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {
-    setState(() {
-      _remainingAppreciatedAtWorkTextFieldContent = newValue;
-    });
-  }
+  _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_remainingAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setBetterLegaciesCheckboxState(bool? newValue) {
-    setState(() {
-      _betterLegaciesCheckboxValue = newValue!;
-    });
-  }
+  _setBetterLegaciesCheckboxState(bool? newValue) {setState(() {_betterLegaciesCheckboxValue = newValue!;});}
 
-  _setBetterLegaciesTextFieldState(String newValue) {
-    setState(() {
-      _betterLegaciesTextFieldContent = newValue;
-    });
-  }
+  _setBetterLegaciesTextFieldState(String newValue) {setState(() {_betterLegaciesTextFieldContent = newValue;});}
 
-  _setAnotherIssueTextFieldState(String newValue) {
-    setState(() {
-      _anotherIssueTextFieldContent = newValue;
-    });
-  }
+  _setAnotherIssueTextFieldState(String newValue) {setState(() {_anotherIssueTextFieldContent = newValue;});}
 
   // Groups/Teams perspective
-  _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {
-    setState(() {
-      _problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;
-    });
-  }
+  _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {setState(() {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;});}
 
-  _setSameProblemsSegmentedButtonState(Set<String>? values) {
-    setState(() {
-      _sameProblemsSegmentedButtonSelection = values!;
-    });
-  }
+  _setSameProblemsSegmentedButtonState(Set<String>? values) {setState(() {_sameProblemsSegmentedButtonSelection = values!;});}
 
-  _setSameProblemsTextFieldState(String newValue) {
-    setState(() {
-      _sameProblemsTextFieldContent = newValue;
-    });
-  }
+  _setSameProblemsTextFieldState(String newValue) {setState(() {_sameProblemsTextFieldContent = newValue;});}
 
-  _setHarmonyHomeSegmentedButtonState(Set<String>? values) {
-    setState(() {
-      _harmonyHomeSegmentedButtonSelection = values!;
-    });
-  }
+  _setHarmonyHomeSegmentedButtonState(Set<String>? values) {setState(() {_harmonyHomeSegmentedButtonSelection = values!;});}
 
-  _setHarmonyHomeTextFieldState(String newValue) {
-    setState(() {
-      _harmonyHomeTextFieldContent = newValue;
-    });
-  }
+  _setHarmonyHomeTextFieldState(String newValue) {setState(() {_harmonyHomeTextFieldContent = newValue;});}
 
-  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values) {
-    setState(() {
-      _appreciabilityAtWorkSegmentedButtonSelection = values!;
-    });
-  }
+  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values) {setState(() {_appreciabilityAtWorkSegmentedButtonSelection = values!;});}
 
-  _setAppreciabilityAtWorkTextFieldState(String newValue) {
-    setState(() {
-      _appreciabilityAtWorkTextFieldContent = newValue;
-    });
-  }
+  _setAppreciabilityAtWorkTextFieldState(String newValue) {setState(() {_appreciabilityAtWorkTextFieldContent = newValue;});}
 
-  _setEarningAbilitySegmentedButtonState(Set<String>? values) {
-    setState(() {
-      _earningAbilitySegmentedButtonSelection = values!;
-    });
-  }
+  _setEarningAbilitySegmentedButtonState(Set<String>? values) {setState(() {_earningAbilitySegmentedButtonSelection = values!;});}
 
-  _setEarningAbilityTextFieldState(String newValue) {
-    setState(() {
-      _earningAbilityTextFieldContent = newValue;
-    });
-  }
+  _setEarningAbilityTextFieldState(String newValue) {setState(() {_earningAbilityTextFieldContent = newValue;});}
 
-  _setAnalysisTitleTextFieldState(String newValue) {
-    setState(() {
-      _analysisTitle = newValue;
-    });
-  }
+  _setAnalysisTitleTextFieldState(String newValue) {setState(() {_analysisTitle = newValue;});}
 
   //*****************    Data structure related code    **********************//
-  void dataStructureBuilding() {
+  void dataStructureBuilding() 
+  {
     // Using LinkedHashMaps for an insertion-ordered hash-table based (source code).
 
     //************************* Individual perspective ******************************/
     // Individual level: balance issue
     // level3TitleBalanceIssueItem1Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleBalanceItem1Data[FormUtils.checkbox] =
-        _studiesHouseholdBalanceCheckboxValue;
-    level3TitleBalanceItem1Data[FormUtils.textField] =
-        _studiesHouseholdBalanceTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleBalanceItem1Data[FormUtils.checkbox] = _studiesHouseholdBalanceCheckboxValue;
+    level3TitleBalanceItem1Data[FormUtils.textField] = _studiesHouseholdBalanceTextFieldContent;    
     // level3TitleBalanceIssueItem2Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleBalanceItem2Data[FormUtils.checkbox] =
-        _accessingIncomeHouseholdBalanceCheckboxValue;
-    level3TitleBalanceItem2Data[FormUtils.textField] =
-        _accessingIncomeHouseholdBalanceTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleBalanceItem2Data[FormUtils.checkbox] = _accessingIncomeHouseholdBalanceCheckboxValue;
+    level3TitleBalanceItem2Data[FormUtils.textField] = _accessingIncomeHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueItem3Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleBalanceItem3Data[FormUtils.checkbox] =
-        _earningIncomeHouseholdBalanceCheckboxValue;
-    level3TitleBalanceItem3Data[FormUtils.textField] =
-        _earningIncomeHouseholdBalanceTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleBalanceItem3Data[FormUtils.checkbox] = _earningIncomeHouseholdBalanceCheckboxValue;
+    level3TitleBalanceItem3Data[FormUtils.textField] = _earningIncomeHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueItem4Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleBalanceItem4Data[FormUtils.checkbox] =
-        _helpingOthersHouseholdBalanceCheckboxValue;
-    level3TitleBalanceItem4Data[FormUtils.textField] =
-        _helpingOthersHouseholdBalanceTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleBalanceItem4Data[FormUtils.checkbox] = _helpingOthersHouseholdBalanceCheckboxValue;
+    level3TitleBalanceItem4Data[FormUtils.textField] = _helpingOthersHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueData
-    LinkedHashMap<String, dynamic> level3TitleBalanceIssueData =
-        LinkedHashMap<String, dynamic>.from({
-          q.level3TitleBalanceIssueItem1: level3TitleBalanceItem1Data,
-          q.level3TitleBalanceIssueItem2: level3TitleBalanceItem2Data,
-          q.level3TitleBalanceIssueItem3: level3TitleBalanceItem3Data,
-          q.level3TitleBalanceIssueItem4: level3TitleBalanceItem4Data,
-        });
+    LinkedHashMap<String, dynamic> level3TitleBalanceIssueData = LinkedHashMap<String, dynamic>.from
+    ({
+      q.level3TitleBalanceIssueItem1: level3TitleBalanceItem1Data,
+      q.level3TitleBalanceIssueItem2: level3TitleBalanceItem2Data,
+      q.level3TitleBalanceIssueItem3: level3TitleBalanceItem3Data,
+      q.level3TitleBalanceIssueItem4: level3TitleBalanceItem4Data,
+    });
 
     // Individual level: workplace issue
     // level3TitleWorkplaceIssueItem1Data
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] =
-        _moreAppreciatedAtWorkCheckboxValue;
-    level3TitleWorkplaceIssueItem1Data[FormUtils.textField] =
-        _moreAppreciatedAtWorkTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] = _moreAppreciatedAtWorkCheckboxValue;
+    level3TitleWorkplaceIssueItem1Data[FormUtils.textField] = _moreAppreciatedAtWorkTextFieldContent;
     // level3TitleWorkplaceIssueItem2Data
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleWorkplaceIssueItem2Data[FormUtils.checkbox] =
-        _remainingAppreciatedAtWorkCheckboxValue;
-    level3TitleWorkplaceIssueItem2Data[FormUtils.textField] =
-        _remainingAppreciatedAtWorkTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleWorkplaceIssueItem2Data[FormUtils.checkbox] = _remainingAppreciatedAtWorkCheckboxValue;
+    level3TitleWorkplaceIssueItem2Data[FormUtils.textField] = _remainingAppreciatedAtWorkTextFieldContent;
     // level3TitleWorkplaceIssueData
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData =
-        LinkedHashMap<String, dynamic>.from({
-          q.level3TitleWorkplaceIssueItem1: level3TitleWorkplaceIssueItem1Data,
-          q.level3TitleWorkplaceIssueItem2: level3TitleWorkplaceIssueItem2Data,
-        });
+    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData = LinkedHashMap<String, dynamic>.from
+    ({
+      q.level3TitleWorkplaceIssueItem1: level3TitleWorkplaceIssueItem1Data,
+      q.level3TitleWorkplaceIssueItem2: level3TitleWorkplaceIssueItem2Data,
+    });
 
     // Individual level: legacy issue
     // level3TitleLegacyIssueItem1
-    LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.checkbox: "false",
-          FormUtils.textField: "",
-        });
-    level3TitleLegacyIssueItem1Data[FormUtils.checkbox] =
-        _betterLegaciesCheckboxValue;
-    level3TitleLegacyIssueItem1Data[FormUtils.textField] =
-        _betterLegaciesTextFieldContent;
-    // level3TitleWorkplaceIssueData
-    LinkedHashMap<String, dynamic> level3TitleLegacyIssueData =
-        LinkedHashMap<String, dynamic>.from({
-          q.level3TitleLegacyIssueItem1: level3TitleLegacyIssueItem1Data,
-        });
+    LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    level3TitleLegacyIssueItem1Data[FormUtils.checkbox] = _betterLegaciesCheckboxValue;
+    level3TitleLegacyIssueItem1Data[FormUtils.textField] = _betterLegaciesTextFieldContent;
+    // level3TitleLegacyIssueData
+    LinkedHashMap<String, dynamic> level3TitleLegacyIssueData = LinkedHashMap<String, dynamic>.from({q.level3TitleLegacyIssueItem1: level3TitleLegacyIssueItem1Data});
 
     // Individual level: another issue
     // level3TitleAnotherIssueItem1
-    LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data =
-        LinkedHashMap<String, dynamic>.from({FormUtils.textField: ""});
-    level3TitleAnotherIssueItem1Data[FormUtils.textField] =
-        _anotherIssueTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField: ""});
+    level3TitleAnotherIssueItem1Data[FormUtils.textField] = _anotherIssueTextFieldContent;
     // Different pattern for the text field only inputs (might modify later)
 
     // Adding to the level2TitleIndividual data
     // level2TitleIndividualData
-    LinkedHashMap<String, dynamic> level2TitleIndividualData =
-        LinkedHashMap<String, dynamic>.from({
-          q.level2TitleIndividual: {
-            q.level3TitleBalanceIssue: level3TitleBalanceIssueData,
-            q.level3TitleWorkplaceIssue: level3TitleWorkplaceIssueData,
-            q.level3TitleLegacyIssue: level3TitleLegacyIssueData,
-            q.level3TitleAnotherIssue: level3TitleAnotherIssueItem1Data,
-          },
-        });
+    LinkedHashMap<String, dynamic> level2TitleIndividualData = LinkedHashMap<String, dynamic>.from
+    ({
+      q.level2TitleIndividual: 
+      {
+        q.level3TitleBalanceIssue: level3TitleBalanceIssueData,
+        q.level3TitleWorkplaceIssue: level3TitleWorkplaceIssueData,
+        q.level3TitleLegacyIssue: level3TitleLegacyIssueData,
+        q.level3TitleAnotherIssue: level3TitleAnotherIssueItem1Data,
+      },
+    });
 
     //************************* Groups/Teams perspective ******************************/
     // Groups/teams level: problematics the groups/teams are trying to solve
     // level3TitleGroupsProblematicsItem1
-    LinkedHashMap<String, dynamic> level3TitleGroupsProblematicsItem1Data =
-        LinkedHashMap<String, dynamic>.from({FormUtils.textField: ""});
-    level3TitleGroupsProblematicsItem1Data[FormUtils.textField] =
-        _problemsTheGroupsAreTryingToSolveTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField: ""});
+    level3TitleGroupsProblematicsItem1Data[FormUtils.textField] = _problemsTheGroupsAreTryingToSolveTextFieldContent;
 
     // Groups/teams level: trying to solve the same problems?
     // level3TitleSameProblemsItem1
-    LinkedHashMap<String, dynamic> level3TitleSameProblemsItem1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.segmentedButton: "",
-          FormUtils.textField: "",
-        });
+    LinkedHashMap<String, dynamic> level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
     // CustomSegmentedButtonWithTextField: this.multiSelectionEnabled = false
-    if (_sameProblemsSegmentedButtonSelection.length == 1) {
-      level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] =
-          _sameProblemsSegmentedButtonSelection.first;
-    } else {
-      level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";
-    }
-    level3TitleSameProblemsItem1Data[FormUtils.textField] =
-        _sameProblemsTextFieldContent;
+    if (_sameProblemsSegmentedButtonSelection.length == 1) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = _sameProblemsSegmentedButtonSelection.first;} 
+    else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
+    level3TitleSameProblemsItem1Data[FormUtils.textField] = _sameProblemsTextFieldContent;
 
     // Groups/teams level: harmony at home
     // level3TitleHarmonyAtHomeItem1
-    LinkedHashMap<String, dynamic> level3TitleHarmonyAtHomeItems1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.segmentedButton: "",
-          FormUtils.textField: "",
-        });
-    if (_harmonyHomeSegmentedButtonSelection.length == 1) {
-      level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] =
-          _harmonyHomeSegmentedButtonSelection.first;
-    } else {
-      level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";
-    }
-    level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] =
-        _harmonyHomeTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    if (_harmonyHomeSegmentedButtonSelection.length == 1) {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = _harmonyHomeSegmentedButtonSelection.first;} 
+    else {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";}
+    level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] = _harmonyHomeTextFieldContent;
 
     // Groups/teams level: appreciability at work
     // level3TitleAppreciabilityAtWorkItem1
-    LinkedHashMap<String, dynamic> level3TitleAppreciabilityAtWorkItem1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.segmentedButton: "",
-          FormUtils.textField: "",
-        });
-    if (_appreciabilityAtWorkSegmentedButtonSelection.length == 1) {
-      level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] =
-          _appreciabilityAtWorkSegmentedButtonSelection.first;
-    } else {
-      level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";
-    }
-    level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] =
-        _appreciabilityAtWorkTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    if (_appreciabilityAtWorkSegmentedButtonSelection.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = _appreciabilityAtWorkSegmentedButtonSelection.first;} 
+    else {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";}
+    level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] = _appreciabilityAtWorkTextFieldContent;
 
     // Groups/teams level: income earning abillity
     // level3TitleIncomeEarningAbilityItem1
-    LinkedHashMap<String, dynamic> level3TitleIncomeEarningAbilityItem1Data =
-        LinkedHashMap<String, dynamic>.from({
-          FormUtils.segmentedButton: "",
-          FormUtils.textField: "",
-        });
-    if (_earningAbilitySegmentedButtonSelection.length == 1) {
-      level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] =
-          _earningAbilitySegmentedButtonSelection.first;
-    } else {
-      level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = "";
-    }
-    level3TitleIncomeEarningAbilityItem1Data[FormUtils.textField] =
-        _earningAbilityTextFieldContent;
+    LinkedHashMap<String, dynamic> level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    if (_earningAbilitySegmentedButtonSelection.length == 1) {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = _earningAbilitySegmentedButtonSelection.first;} 
+    else {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = "";}
+    level3TitleIncomeEarningAbilityItem1Data[FormUtils.textField] = _earningAbilityTextFieldContent;
 
     // Adding to the level2TitleGroup data
     // level2TitleGroupData
-    LinkedHashMap<String, dynamic> level2TitleGroupData =
-        LinkedHashMap<String, dynamic>.from({
-          q.level2TitleGroup: {
-            q.level3TitleGroupsProblematics:
-                level3TitleGroupsProblematicsItem1Data,
-            q.level3TitleSameProblem: level3TitleSameProblemsItem1Data,
-            q.level3TitleHarmonyAtHome: level3TitleHarmonyAtHomeItems1Data,
-            q.level3TitleAppreciabilityAtWork:
-                level3TitleAppreciabilityAtWorkItem1Data,
-            q.level3TitleIncomeEarningAbility:
-                level3TitleIncomeEarningAbilityItem1Data,
-          },
-        });
+    LinkedHashMap<String, dynamic> level2TitleGroupData = LinkedHashMap<String, dynamic>.from
+    ({
+        q.level2TitleGroup: 
+        {
+          q.level3TitleGroupsProblematics: level3TitleGroupsProblematicsItem1Data,
+          q.level3TitleSameProblem: level3TitleSameProblemsItem1Data,
+          q.level3TitleHarmonyAtHome: level3TitleHarmonyAtHomeItems1Data,
+          q.level3TitleAppreciabilityAtWork: level3TitleAppreciabilityAtWorkItem1Data,
+          q.level3TitleIncomeEarningAbility: level3TitleIncomeEarningAbilityItem1Data,
+        },
+    });
 
     // Adding individual and team perspective to root level data
     _enteredData = [level2TitleIndividualData, level2TitleGroupData];
@@ -453,16 +268,13 @@ class _ContextAnalysisContextFormPageState
     pu.printd("");
   }
 
-  void print2CSV() async {
+  void print2CSV() async 
+  {
     dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
-    var preCSVDataIndividualPerspective = cu.dataToPreCSV(
-      perspectiveData: _enteredData[0],
-    );
-    var preCSVDataGroupPerspective = cu.dataToPreCSV(
-      perspectiveData: _enteredData[1],
-    );
+    var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
+    var preCSVDataGroupPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
     pu.printd("preCSVDataIndividualPerspective");
     pu.printd("$preCSVDataIndividualPerspective");
@@ -471,58 +283,61 @@ class _ContextAnalysisContextFormPageState
     pu.printd("$preCSVDataGroupPerspective");
     pu.printd("");
 
-    List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(
-      preCSVData: preCSVDataIndividualPerspective,
-    );
-    List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(
-      preCSVData: preCSVDataGroupPerspective,
-    );
+    List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
+    List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
-    String? pathToCSVFile = await cu.printToCSV(
-      csvDataIndividualPerspective: csvDataIndividualPerspective,
-      csvDataGroupPerspective: csvDataGroupPerspective,
-    );
+    String? pathToCSVFile = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataGroupPerspective: csvDataGroupPerspective);
     pu.printd("pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
-      du.saveDashboardData(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
-        analysisTitle: _analysisTitle,
-        pathToCSVFile: pathToCSVFile,
-      );
+    {
+      du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, pathToCSVFile: pathToCSVFile);
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     final ScrollController scrollController = ScrollController();
     double scrollbarThickness = 0;
 
     // TODO: to modify for tablets
-    if (defaultTargetPlatform == TargetPlatform.windows ||
-        defaultTargetPlatform == TargetPlatform.linux ||
-        defaultTargetPlatform == TargetPlatform.macOS)
-      scrollbarThickness = 15;
+    if (defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS)
+    {scrollbarThickness = 15;}
 
-    return Scrollbar(
+    return 
+    Scrollbar
+    (
       thumbVisibility: true, // to keep the scrollbar visible
       thickness: scrollbarThickness,
       controller: scrollController,
-      child: SingleChildScrollView(
+      child: 
+      SingleChildScrollView
+      (
         controller: scrollController,
-        child: Column(
+        child: 
+        Column
+        (
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+          children: 
+          [
             //*********** Form ***********//
-            Center(
-              child: CustomHeading(
+            Center
+            (
+              child: 
+              CustomHeading
+              (
                 headingText: 'Context analysis',
                 headingLevel: 1,
               ),
             ),
             Gap(40),
-            Center(
-              child: CustomHeading(
+            Center
+            (
+              child: 
+              CustomHeading
+              (
                 headingText: q.level2TitleIndividual,
                 headingLevel: 2,
               ),
@@ -530,103 +345,100 @@ class _ContextAnalysisContextFormPageState
             Gap(postHeaderLevel2Gap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleBalanceIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleBalanceIssueItem1,
               textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setStudiesHouseholdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setStudiesHouseholdBalanceTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleBalanceIssueItem2,
               textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setAccessingIncomeHouseholdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setAccessingIncomeHouseholdBalanceTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleBalanceIssueItem3,
               textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setEarningIncomeHouseholdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setEarningIncomedHouseholdBalanceTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleBalanceIssueItem4,
               textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setHelpingOthersdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setHelpingOthersHouseholdBalanceTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
             ),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleWorkplaceIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleWorkplaceIssueItem1,
               textFieldHintText: pleaseDescribeTextWorkplace,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setMoreAppreciatedAtWorkCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setMoreAppreciatedAtWorkTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleWorkplaceIssueItem2,
               textFieldHintText: pleaseDescribeTextWorkplace,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setRemainingAppreciatedAtWorkCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setRemainingAppreciatedAtWorkTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
             ),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleLegacyIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
-            CustomCheckBoxWithTextField(
+            CustomCheckBoxWithTextField
+            (
               checkboxText: q.level3TitleLegacyIssueItem1,
               textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetCheckboxValueCallBackFunction:
-                  _setBetterLegaciesCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setBetterLegaciesTextFieldState,
+              parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
+              parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
             ),
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleAnotherIssue,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
-            CustomPaddedTextField(
+            CustomPaddedTextField
+            (
               textFieldHintText: pleaseDevelopOrTakeNotes,
               textFieldMaxLength: FormUtils.chars1Page,
               textFieldCounter: FormUtils.absentCounter,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setAnotherIssueTextFieldState,
+              parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
             ),
 
             Gap(preAndPostLevel2DividerGap),
@@ -634,44 +446,48 @@ class _ContextAnalysisContextFormPageState
             Gap(preAndPostLevel2DividerGap),
 
             /**** Beginning of the team-related analysis ****/
-            Center(
-              child: CustomHeading(
+            Center
+            (
+              child: 
+              CustomHeading
+              (
                 headingText: q.level2TitleGroup,
                 headingLevel: 2,
               ),
             ),
             Gap(postHeaderLevel2Gap),
 
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleGroupsProblematics,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
-            CustomPaddedTextField(
+            CustomPaddedTextField
+            (
               textFieldHintText: pleaseDescribeTextGroups,
               textFieldMaxLength: FormUtils.chars1Page,
               textFieldCounter: FormUtils.absentCounter,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setProblemsTheGroupsAreTryingToSolveTextFieldState,
+              parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
             ),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleSameProblem,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField(
+            CustomSegmentedButtonWithTextField
+            (
               textOption1: 'Yes',
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,
               textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction:
-                  _setSameProblemsSegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setSameProblemsTextFieldState,
+              parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
+              parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
             ),
 
             Gap(preAndPostLevel3DividerGap),
@@ -679,22 +495,22 @@ class _ContextAnalysisContextFormPageState
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleHarmonyAtHome,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField(
+            CustomSegmentedButtonWithTextField
+            (
               textOption1: 'Yes',
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,
               textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction:
-                  _setHarmonyHomeSegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setHarmonyHomeTextFieldState,
+              parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
+              parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
             ),
 
             Gap(preAndPostLevel3DividerGap),
@@ -702,22 +518,22 @@ class _ContextAnalysisContextFormPageState
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleAppreciabilityAtWork,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
             Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField(
+            CustomSegmentedButtonWithTextField
+            (
               textOption1: 'Yes',
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,
               textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction:
-                  _setAppreciabilityAtWorkSegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setAppreciabilityAtWorkTextFieldState,
+              parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
+              parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
             ),
 
             Gap(preAndPostLevel3DividerGap),
@@ -725,40 +541,47 @@ class _ContextAnalysisContextFormPageState
             Gap(preAndPostLevel3DividerGap),
 
             /**** ➡️ Sub-point  ****/
-            CustomHeading(
+            CustomHeading
+            (
               headingText: q.level3TitleIncomeEarningAbility,
               headingLevel: 3,
               headingAlignment: TextAlign.left,
             ),
-            CustomSegmentedButtonWithTextField(
+            CustomSegmentedButtonWithTextField
+            (
               textOption1: 'Yes',
               textOption2: 'No',
               textOption3: "I don't know",
               textOptionsfontSize: 16,
               textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction:
-                  _setEarningAbilitySegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction:
-                  _setEarningAbilityTextFieldState,
+              parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
+              parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
             ),
 
             //********** Data saving ************//
             Gap(preAndPostLevel3DividerGap),
             Divider(thickness: betweenLevel3DividerThickness),
             Gap(preAndPostLevel3DividerGap),
-            Center(
-              child: Column(
-                children: [
-                  CustomPaddedTextField(
+            Center
+            (
+              child: 
+              Column
+              (
+                children: 
+                [
+                  CustomPaddedTextField
+                  (
                     textAlignment: TextAlign.center,
                     textFieldHintText: "Please enter a title for this analysis",
                     textFieldMaxLength: 150,
-                    parentWidgetTextFieldValueCallBackFunction:
-                        _setAnalysisTitleTextFieldState,
+                    parentWidgetTextFieldValueCallBackFunction: _setAnalysisTitleTextFieldState,
                   ),
-                  ElevatedButton(
+                  ElevatedButton
+                  (
                     onPressed: print2CSV,
-                    child: Text(
+                    child: 
+                    Text
+                    (
                       'Click to save your data in CSV, \nspreadsheet-compatible format',
                       style: dataSavingStyle,
                       textAlign: TextAlign.center,
