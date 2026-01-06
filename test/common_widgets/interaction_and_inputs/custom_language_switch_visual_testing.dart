@@ -9,12 +9,13 @@
 // a base locale (without the script code or country code) should exist as the fallback."
 // flutter gen-l10n
 
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/common_widgets/interaction_and_inputs/custom_language_switch.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
-import 'package:flutter/material.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/l10n/app_localizations.dart';
 
 // Utility class
 final PrintUtils pu = PrintUtils();
@@ -50,8 +51,7 @@ class _MyTestingAppState extends State<MyTestingApp>
           _currentLocale = newLocale;
         }
       );
-    }
-    
+    }    
   }
 
   @override
@@ -68,7 +68,7 @@ class _MyTestingAppState extends State<MyTestingApp>
       locale: _currentLocale, // to be able to swap translated strings
 
       home: HomePage(setLocale: _setLocale)
-      );
+    );
   }
 }
 //---------------------------------------------------

@@ -5,7 +5,6 @@
 // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_expansion_tile_visual_testing.dart -d windows
 // Line for automated processing
 
-
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
