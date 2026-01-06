@@ -6,17 +6,25 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 /// {@category Context analysis}
 /// The page for a new session of context analysis.
 
-class ContextAnalysisNewSessionPage extends StatelessWidget {
+class ContextAnalysisNewSessionPage extends StatelessWidget 
+{
   const ContextAnalysisNewSessionPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
 
-    return Expanded(
-      child: Padding(
+    return 
+    Expanded
+    (
+      child: 
+      Padding
+      (
         padding: const EdgeInsets.all(15.0),
-        child: Focus(
+        child: 
+        Focus
+        (
           focusNode: contextAnalysisNewSessionFocusNode,
           child: ContextAnalysisContextFormPage(),
         ),

@@ -7,19 +7,22 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/homepage.dart';
 
-void main() {
+void main() 
+{
   // To help debug the layout
   // debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatefulWidget 
+{
   const MyApp({super.key});
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> 
+{
   // Utility class
   PrintUtils pu = PrintUtils();
 
@@ -27,8 +30,10 @@ class _MyAppState extends State<MyApp> {
   // TODO: to get eventually the value from user preferences
   Locale? _currentLocale = Locale('en');
 
-  void _setLocale(Locale newLocale) {
-    if (newLocale != _currentLocale) {
+  void _setLocale(Locale newLocale) 
+  {
+    if (newLocale != _currentLocale) 
+    {
       setState(() {
         pu.printd("SetState: _currentLocale: $newLocale");
         _currentLocale = newLocale;
@@ -37,27 +42,36 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) 
+  {
+    return 
+    MaterialApp
+    (
       // To visualize the semantics tree
       // showSemanticsDebugger: true,
       theme: appTheme,
-      localizationsDelegates: [
+      localizationsDelegates: 
+      [
         AppLocalizations.delegate,
 
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: 
+      [
         Locale('en'), // English
         Locale('fr'), // French
       ],
 
       locale: _currentLocale, // to be able to swap translated strings,
       // https://api.flutter.dev/flutter/widgets/SafeArea-class.html
-      home: SafeArea(
-        child: MyHomePage(
+      home: 
+      SafeArea
+      (
+        child: 
+        MyHomePage
+        (
           parentWidgetOnLanguageSelectedCallBackFunction: _setLocale,
         ),
       ),
