@@ -1,8 +1,8 @@
 // Line for automated processing
-// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d chrome
-// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d linux
-// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d macos
-// flutter run -t ./test/common_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d windows
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d chrome
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d linux
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d macos
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d windows
 // Line for automated processing
 
 import 'package:flutter/material.dart';
