@@ -67,8 +67,8 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
     super.dispose();
   }
 
-  /// The method to call to modify the text field value if a " is found
-  /// and to modify the error message to display
+  // The method to call to modify the text field value if a " is found
+  // and to modify the error message to display
   void quoteCheck(value) 
   { 
     if (value.contains('"')) 
