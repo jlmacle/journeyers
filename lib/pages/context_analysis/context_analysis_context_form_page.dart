@@ -322,6 +322,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
           [
+            // TODO: to have the two perspectives folded to start with (expansion tile?)
             //*********** Form ***********//
             Center
             (
