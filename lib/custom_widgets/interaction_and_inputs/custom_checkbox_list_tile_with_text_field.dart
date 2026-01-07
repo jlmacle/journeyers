@@ -6,7 +6,8 @@ import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_t
 
 /// {@category Custom widgets}
 /// A customizable checkbox that displays a customizable text field when the box is checked.
-class CustomCheckBoxWithTextField extends StatefulWidget {
+class CustomCheckBoxWithTextField extends StatefulWidget 
+{
   /// The text of the checkbox.
   final String checkboxText;
 
@@ -58,7 +59,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget {
   /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool? value) {}
 
-  const CustomCheckBoxWithTextField({
+  const CustomCheckBoxWithTextField
+  ({
     super.key,
     required this.checkboxText,
     this.checkboxTextFontSize = 24,
@@ -78,45 +80,54 @@ class CustomCheckBoxWithTextField extends StatefulWidget {
   });
 
   @override
-  State<CustomCheckBoxWithTextField> createState() =>
-      CustomCheckBoxWithTextFieldState();
+  State<CustomCheckBoxWithTextField> createState() =>  CustomCheckBoxWithTextFieldState();
 }
 
-class CustomCheckBoxWithTextFieldState
-    extends State<CustomCheckBoxWithTextField> {
+class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField> 
+{
   bool _isChecked = false;
 
   @override
-  void initState() {
+  void initState() 
+  {
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    final TextStyle checkboxTextStyle = TextStyle(
-      fontSize: widget.checkboxTextFontSize,
-      color: widget.checkboxTextColor,
-    );
+  Widget build(BuildContext context) 
+  {
+    final TextStyle checkboxTextStyle = 
+                    TextStyle
+                    (
+                      fontSize: widget.checkboxTextFontSize,
+                      color: widget.checkboxTextColor,
+                    );
 
-    return Column(
-      children: [
-        CheckboxListTile(
-          title: CustomFocusableText(
+    return 
+    Column
+    (
+      children: 
+      [
+        CheckboxListTile
+        (
+          title: 
+          CustomFocusableText
+          (
             text: widget.checkboxText,
             textStyle: checkboxTextStyle,
             textAlignment: widget.checkboxTextAlignment,
           ),
           value: _isChecked,
           controlAffinity: widget.checkboxPosition,
-          onChanged: (bool? value) {
+          onChanged: (bool? value) 
+          {
             widget.parentWidgetCheckboxValueCallBackFunction!(value);
-            setState(() {
-              _isChecked = value!;
-            });
+            setState(() {_isChecked = value!;});
           },
         ),
         if (_isChecked)
-          CustomPaddedTextField(
+          CustomPaddedTextField
+          (
             textFieldHintText: widget.textFieldHintText,
             textFieldMinLines: widget.textFieldMinLines,
             textFieldMaxLines: widget.textFieldMaxLines,

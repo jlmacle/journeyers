@@ -7,7 +7,8 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 /// A customizable text field with customizable padding.
 /// An error message is displayed if a straight double quote is entered in the text field.
 /// Also, the straight double quote is automatically removed from the text field.
-class CustomPaddedTextField extends StatefulWidget {
+class CustomPaddedTextField extends StatefulWidget 
+{
   /// The alignment of the text.
   final TextAlign textAlignment;
 
@@ -44,7 +45,8 @@ class CustomPaddedTextField extends StatefulWidget {
   /// A placeholder void callback function with a String parameter.
   static void placeHolderFunction(String value) {}
 
-  const CustomPaddedTextField({
+  const CustomPaddedTextField
+  ({
     super.key,
     this.textAlignment = TextAlign.left,
     required this.textFieldHintText,
@@ -63,46 +65,48 @@ class CustomPaddedTextField extends StatefulWidget {
   State<CustomPaddedTextField> createState() => _CustomPaddedTextFieldState();
 }
 
-class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> {
+class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> 
+{
   // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
   TextEditingController textFieldEditingController = TextEditingController();
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     textFieldEditingController.dispose();
     super.dispose();
   }
 
   // The method to call to modify the text field value if a " is found
   // and to modify the error message to display
-  void quoteCheck(value) {
-    if (value.contains('"')) {
+  void quoteCheck(value) 
+  {
+    if (value.contains('"')) 
+    {
       // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
       value = value.replaceAll('"', '');
-      setState(() {
+      setState(() 
+      {
         // Removes the quotes from the text field
         textFieldEditingController.text = value;
         // Updates the error message
-        _errorMessageForDoubleQuotes =
-            'Straight double quotes are reserved for CSV-related use, and are for this reason removed from the text typed. With apologies.';
+        _errorMessageForDoubleQuotes = 'Straight double quotes are reserved for CSV-related use, and are for this reason removed from the text typed. With apologies.';
         // "The assertiveness level of the announcement is determined by assertiveness.
         // Currently, this is only supported by the web engine and has no effect on other platforms.
         // The default mode is Assertiveness.polite."
         // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
         // TODO:  TextDirection.ltr: code to modify for l10n
         // Doesn't seem effective yet. Left for later.
-        SemanticsService.sendAnnouncement(
-          View.of(context),
-          _errorMessageForDoubleQuotes,
-          TextDirection.ltr,
-          assertiveness: Assertiveness.assertive,
-        );
+        SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDoubleQuotes, TextDirection.ltr, assertiveness: Assertiveness.assertive);
         // Updates the parental widget information on the text content
         widget.parentWidgetTextFieldValueCallBackFunction(value);
       });
-    } else {
-      setState(() {
+    } 
+    else 
+    {
+      setState(() 
+      {
         textFieldEditingController.text = value;
         _errorMessageForDoubleQuotes = "";
         widget.parentWidgetTextFieldValueCallBackFunction(value);
@@ -111,18 +115,20 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: widget.paddingLeft,
-        right: widget.paddingRight,
-        bottom: widget.paddingBottom,
-        top: widget.paddingTop,
-      ),
-      child: TextField(
+  Widget build(BuildContext context) 
+  {
+    return 
+    Padding
+    (
+      padding: EdgeInsets.only(left: widget.paddingLeft, right: widget.paddingRight, bottom: widget.paddingBottom, top: widget.paddingTop),
+      child: 
+      TextField
+      (
         textAlign: widget.textAlignment,
         controller: textFieldEditingController,
-        decoration: InputDecoration(
+        decoration: 
+        InputDecoration
+        (
           hintText: widget.textFieldHintText,
           errorText: _errorMessageForDoubleQuotes,
         ),
@@ -130,12 +136,9 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> {
         maxLines: widget.textFieldMaxLines,
         maxLength: widget.textFieldMaxLength,
         buildCounter: widget.textFieldCounter,
-        onChanged: (String newValue) {
-          quoteCheck(newValue);
-        },
+        onChanged: (String newValue) {quoteCheck(newValue);},
         // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
-        onTapOutside: (PointerDownEvent event) =>
-            FocusManager.instance.primaryFocus?.unfocus(),
+        onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
       ),
     );
   }

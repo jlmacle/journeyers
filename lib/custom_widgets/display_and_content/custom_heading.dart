@@ -5,7 +5,8 @@ import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_t
 
 /// {@category Custom widgets}
 /// A customizable heading (level 1 to 6).
-class CustomHeading extends StatelessWidget {
+class CustomHeading extends StatelessWidget 
+{
   /// The title of the heading.
   final String headingText;
 
@@ -18,19 +19,19 @@ class CustomHeading extends StatelessWidget {
   /// The alignment of the heading.
   final TextAlign headingAlignment;
 
-  CustomHeading({
+  CustomHeading
+  ({
     super.key,
     required this.headingText,
     required this.headingLevel,
     this.headingAlignment = TextAlign.center,
-  }) : assert(
-         headingLevel >= 1 && headingLevel <= 6,
-         'Heading level must be between 1 and 6.',
-       );
+  }) : assert(headingLevel >= 1 && headingLevel <= 6,'Heading level must be between 1 and 6.');
 
   @override
-  Widget build(BuildContext context) {
-    switch (headingLevel) {
+  Widget build(BuildContext context) 
+  {
+    switch (headingLevel) 
+    {
       case 1:
         headingStyle = appTheme.textTheme.headlineLarge!;
       case 2:

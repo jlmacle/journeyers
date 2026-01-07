@@ -9,7 +9,8 @@ PrintUtils pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable expansion tile.
-class CustomExpansionTile extends StatefulWidget {
+class CustomExpansionTile extends StatefulWidget 
+{
   /// The text to display when the tile is not expanded.
   final String text;
 
@@ -58,7 +59,8 @@ class CustomExpansionTile extends StatefulWidget {
   /// The tooltip label for the "Share" icon.
   static const String toolTipShare = 'Share';
 
-  const CustomExpansionTile({
+  const CustomExpansionTile
+  ({
     super.key,
     this.text = "Default tile text",
     this.textFontWeight = FontWeight.w600,
@@ -69,7 +71,8 @@ class CustomExpansionTile extends StatefulWidget {
     this.expandedContentText = "Default expanded additional text",
     this.expandedContentDividerHeight = 20.5,
     this.listActionIconsMainAxisAlignment = MainAxisAlignment.end,
-    this.listActionIconsData = const [
+    this.listActionIconsData = const 
+    [
       [Icons.edit, toolTipEdit, null],
       [Icons.delete, toolTipDelete, null],
       [Icons.share, toolTipShare, null],
@@ -83,32 +86,46 @@ class CustomExpansionTile extends StatefulWidget {
   State<CustomExpansionTile> createState() => _CustomExpansionTileState();
 }
 
-class _CustomExpansionTileState extends State<CustomExpansionTile> {
+class _CustomExpansionTileState extends State<CustomExpansionTile> 
+{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     FocusNode expandedAdditionalTextFocusNode = FocusNode();
 
-    return ExpansionTile(
-      title: Focus(
+    return 
+    ExpansionTile
+    (
+      title: 
+      Focus
+      (
         focusNode: expandedAdditionalTextFocusNode,
-        child: Text(
+        child: 
+        Text
+        (
           widget.text,
           style: TextStyle(fontWeight: widget.textFontWeight),
         ),
       ),
       trailing: widget.actionIconSuggestingExpansion,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: widget.expandedContentPaddingHorizontal,
-            vertical: widget.expandedContentPaddingVertical,
+      children: <Widget>
+      [
+        Padding
+        (
+          padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal,vertical: widget.expandedContentPaddingVertical,
           ),
-          child: Column(
+          child: 
+          Column
+          (
             crossAxisAlignment: widget.expandedContentCrossAxisAlignment,
-            children: [
-              Focus(
+            children: 
+            [
+              Focus
+              (
                 focusNode: expandedAdditionalTextFocusNode,
-                child: Text(
+                child: 
+                Text
+                (
                   widget.expandedContentText,
                   style: appTheme.textTheme.bodyMedium,
                 ),
@@ -116,32 +133,23 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
               Divider(height: widget.expandedContentDividerHeight),
 
               // Action icons
-              Row(
+              Row
+              (
                 mainAxisAlignment: widget.listActionIconsMainAxisAlignment,
                 children: //.toList()
-                widget.listActionIconsData.map((actionIconData) {
+                widget.listActionIconsData.map((actionIconData) 
+                {
                   final iconData = actionIconData[0] as IconData;
                   final toolTipLabel = actionIconData[1] as String;
                   final VoidCallback onPressedFunction;
-                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {
-                    onPressedFunction =
-                        widget.parentWidgetOnEditPressedCallBackFunction;
-                  } else if (toolTipLabel ==
-                      CustomExpansionTile.toolTipDelete) {
-                    onPressedFunction =
-                        widget.parentWidgetOnDeletePressedCallBackFunction;
-                  } else if (toolTipLabel == CustomExpansionTile.toolTipShare) {
-                    onPressedFunction =
-                        widget.parentWidgetOnSharePressedCallBackFunction;
-                  } else {
-                    onPressedFunction = () {
-                      pu.printd(
-                        "Expansion tile: unexpected toolTipLabel value: $toolTipLabel",
-                      );
-                    };
-                  }
+                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.parentWidgetOnEditPressedCallBackFunction;} 
+                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.parentWidgetOnDeletePressedCallBackFunction;} 
+                  else if (toolTipLabel == CustomExpansionTile.toolTipShare) {onPressedFunction = widget.parentWidgetOnSharePressedCallBackFunction;} 
+                  else {onPressedFunction = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTipLabel");};}
 
-                  return CustomIconButton(
+                  return 
+                  CustomIconButton
+                  (
                     icon: Icon(iconData),
                     toolTipLabel: toolTipLabel,
                     parentWidgetOnPressedCallBackFunction: onPressedFunction,
