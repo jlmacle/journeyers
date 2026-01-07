@@ -5,7 +5,8 @@ import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_t
 
 /// {@category Custom widgets}
 /// A customizable segmented button that displays a customizable text field when a value is selected.
-class CustomSegmentedButtonWithTextField extends StatefulWidget {
+class CustomSegmentedButtonWithTextField extends StatefulWidget 
+{
   /// The first option of the segmented button.
   final String textOption1;
 
@@ -61,7 +62,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget {
   /// A placeholder void callback function with a Set\<String\> parameter.
   static void placeHolderFunctionSetString(Set<String>? values) {}
 
-  const CustomSegmentedButtonWithTextField({
+  const CustomSegmentedButtonWithTextField
+  ({
     super.key,
     required this.textOption1,
     required this.textOption2,
@@ -83,64 +85,70 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget {
   });
 
   @override
-  State<CustomSegmentedButtonWithTextField> createState() =>
-      _CustomSegmentedButtonWithTextFieldState();
+  State<CustomSegmentedButtonWithTextField> createState() => _CustomSegmentedButtonWithTextFieldState();
 }
 
-class _CustomSegmentedButtonWithTextFieldState
-    extends State<CustomSegmentedButtonWithTextField> {
+class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButtonWithTextField> 
+{
   Set<String> _selection = {};
 
   @override
-  Widget build(BuildContext context) {
-    final TextStyle textStyle = TextStyle(
-      fontSize: widget.textOptionsfontSize,
-      color: widget.textOptionsColor,
-    );
+  Widget build(BuildContext context) 
+  {
+    final TextStyle textStyle = 
+                    TextStyle
+                    (
+                      fontSize: widget.textOptionsfontSize,
+                      color: widget.textOptionsColor,
+                    );
 
-    return Column(
+    return 
+    Column
+    (
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SegmentedButton<String>(
+      children: 
+      [
+        SegmentedButton<String>
+        (
           multiSelectionEnabled: widget.multiSelectionEnabled,
           emptySelectionAllowed: widget.emptySelectionAllowed,
 
-          segments: <ButtonSegment<String>>[
-            ButtonSegment<String>(
+          segments: 
+          <ButtonSegment<String>>
+          [
+            ButtonSegment<String>
+            (
               value: widget.textOption1,
               label: Text(widget.textOption1, style: textStyle),
             ),
-            ButtonSegment<String>(
+            ButtonSegment<String>
+            (
               value: widget.textOption2,
               label: Text(widget.textOption2, style: textStyle),
             ),
             if (widget.textOption3 != "undefined")
-              ButtonSegment<String>(
+              ButtonSegment<String>
+              (
                 value: widget.textOption3,
                 label: Text(widget.textOption3, style: textStyle),
               ),
           ],
-          onSelectionChanged: (newSelection) {
-            setState(() {
-              _selection = newSelection;
-            });
-            widget.parentWidgetSegmentedButtonValueCallBackFunction(
-              newSelection,
-            );
+          onSelectionChanged: (newSelection) 
+          {
+            setState(() {_selection = newSelection;});
+            widget.parentWidgetSegmentedButtonValueCallBackFunction(newSelection);
           },
           selected: _selection,
         ),
         if (_selection.isNotEmpty)
-          Padding(
-            padding: EdgeInsets.only(
-              left: widget.textFieldPaddingHorizontal,
-              right: widget.textFieldPaddingHorizontal,
-              bottom: widget.textFieldPaddingBottom,
-            ),
-            child: CustomPaddedTextField(
+          Padding
+          (
+            padding: EdgeInsets.only(left: widget.textFieldPaddingHorizontal, right: widget.textFieldPaddingHorizontal, bottom: widget.textFieldPaddingBottom),
+            child: 
+            CustomPaddedTextField
+            (
               textFieldHintText: widget.textFieldHintText,
-              parentWidgetTextFieldValueCallBackFunction:
-                  widget.parentWidgetTextFieldValueCallBackFunction,
+              parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction,
               textFieldMinLines: widget.textFieldMinLines,
               textFieldMaxLines: widget.textFieldMaxLines,
               textFieldCounter: widget.textFieldCounter,
