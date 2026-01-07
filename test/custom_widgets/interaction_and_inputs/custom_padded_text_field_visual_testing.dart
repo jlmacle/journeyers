@@ -11,29 +11,34 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
 
-void main() {
+void main() 
+{
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget {
+class MyTestingApp extends StatelessWidget 
+{
   const MyTestingApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     return MaterialApp(theme: appTheme, home: HomePage());
   }
 }
 //---------------------------------------------------
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget 
+{
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> 
+{
   String pleaseDescribeTextHousehold =
       'Please describe the past outcomes for the household, '
       'if some seem to have been out of their comfort zone for too long, '
@@ -45,37 +50,47 @@ class _HomePageState extends State<HomePage> {
   FocusNode feedbackMsgFocusNode = FocusNode();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Semantics(
+  Widget build(BuildContext context) 
+  {
+    return 
+    Scaffold
+    (
+      appBar: 
+      AppBar
+      (
+        title: 
+        Semantics
+        (
           focusable: true,
-          child: Focus(
+          child: 
+          Focus
+          (
             focusNode: appBarTitleFocusNode,
             child: const Text('MyTestingApp'),
           ),
         ),
       ),
-      body: Column(
+      body: 
+      Column
+      (
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomPaddedTextField(
+        children: 
+        [
+          CustomPaddedTextField
+          (
             paddingTop: 20,
             textFieldHintText: pleaseDescribeTextHousehold,
-            parentWidgetTextFieldValueCallBackFunction: (String value) {
-              setState(() {
-                _textContent = value;
-              });
+            parentWidgetTextFieldValueCallBackFunction: (String value) 
+            {
+              setState(() {_textContent = value;});
             },
             textFieldCounter: FormUtils.absentCounter,
           ),
-          Focus(
+          Focus
+          (
             focusNode: feedbackMsgFocusNode,
-            child: Text(
-              'You typed: ${_textContent ?? "No text typed yet."}',
-              style: feedbackMessageStyle,
-            ),
+            child: Text('You typed: ${_textContent ?? "No text typed yet."}', style: feedbackMessageStyle),
           ),
         ],
       ),

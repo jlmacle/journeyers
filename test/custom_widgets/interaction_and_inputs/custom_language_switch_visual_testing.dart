@@ -20,25 +20,29 @@ import 'package:journeyers/l10n/app_localizations.dart';
 // Utility class
 final PrintUtils pu = PrintUtils();
 
-void main() {
+void main() 
+{
   WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatefulWidget {
+class MyTestingApp extends StatefulWidget 
+{
   const MyTestingApp({super.key});
   @override
   State<MyTestingApp> createState() => _MyTestingAppState();
 }
 
-class _MyTestingAppState extends State<MyTestingApp> {
-  Locale? _currentLocale = Locale(
-    'en',
-  ); // TODO: to get eventually the value from user preferences
+class _MyTestingAppState extends State<MyTestingApp> 
+{
+  Locale? _currentLocale = Locale('en'); // TODO: to get eventually the value from user preferences
 
-  void _setLocale(Locale newLocale) {
-    if (newLocale != _currentLocale) {
-      setState(() {
+  void _setLocale(Locale newLocale) 
+  {
+    if (newLocale != _currentLocale) 
+    {
+      setState(() 
+      {
         pu.printd("SetState: _currentLocale: $newLocale");
         _currentLocale = newLocale;
       });
@@ -46,8 +50,11 @@ class _MyTestingAppState extends State<MyTestingApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) 
+  {
+    return 
+    MaterialApp
+    (
       theme: appTheme,
 
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -61,7 +68,8 @@ class _MyTestingAppState extends State<MyTestingApp> {
 }
 //---------------------------------------------------
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget 
+{
   final void Function(Locale) setLocale;
 
   const HomePage({super.key, required this.setLocale});
@@ -70,48 +78,60 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> 
+{
   /// A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
   /// Parameters: - [languageName]
-  void _updateLocale(String languageName) {
+  void _updateLocale(String languageName) 
+  {
     // The related to the language selected
-    String? localeLangCodeFromLangName = L10nLanguages.getLangCodeFromLangName(
-      languageName: languageName,
-    );
+    String? localeLangCodeFromLangName = L10nLanguages.getLangCodeFromLangName(languageName: languageName);
     // The language code from the current locale
-    String? localeLangCodeFromContext = (Localizations.localeOf(
-      context,
-    )).languageCode;
+    String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
     pu.printd("");
     pu.printd("localeLangCodeFromLangName: $localeLangCodeFromLangName");
     pu.printd("localeLangCodeFromContext: $localeLangCodeFromContext");
 
-    if ((localeLangCodeFromLangName != localeLangCodeFromContext) &
-        (localeLangCodeFromLangName != null))
-      widget.setLocale(Locale(localeLangCodeFromLangName!));
+    if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null))
+      {widget.setLocale(Locale(localeLangCodeFromLangName!));}
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
     final appLocalization = AppLocalizations.of(context);
 
     FocusNode appBarTitleFocusNode = FocusNode();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Semantics(
+    return 
+    Scaffold
+    (
+      appBar: 
+      AppBar
+      (
+        title: 
+        Semantics
+        (
           focusable: true,
-          child: Focus(
+          child: 
+          Focus
+          (
             focusNode: appBarTitleFocusNode,
             child: Text(appLocalization?.appTitle ?? 'Default app title txt'),
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            CustomLanguageSwitch(
+      body: 
+      Center
+      (
+        child: 
+        Column
+        (
+          children: 
+          [
+            CustomLanguageSwitch
+            (
               parentWidgetLanguageValueCallBackFunction: _updateLocale,
             ),
           ],
