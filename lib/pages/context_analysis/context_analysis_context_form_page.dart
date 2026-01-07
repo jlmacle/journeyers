@@ -578,6 +578,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   ),
                   ElevatedButton
                   (
+                    // TODO: code to modify so that text fields values are retained when checkboxes are unchecked, 
+                    // and removed only at data saving time
                     onPressed: print2CSV,
                     child: 
                     Text
