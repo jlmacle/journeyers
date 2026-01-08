@@ -6,7 +6,7 @@ flutter test -r expanded
 
 In case of py_utils import issues: 
 
-python<version>.exe  -m pytest -vv
+python<version> -m pytest
 
 -----------------------
 
