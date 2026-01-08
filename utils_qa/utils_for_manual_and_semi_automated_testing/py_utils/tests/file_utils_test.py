@@ -6,7 +6,7 @@ from py_utils.file_utils import *
 os_name = platform.system().lower()
 
 # Path to the folder of the files created (tests of file_create_file_if_necessary_and_write_content)
-files_folder_path = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/'
+output_files_folder_path = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/'
 
 def test_get_files_in_directory():
     directory_path = "utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data"
@@ -26,7 +26,7 @@ def test_with_existing_file_create_file_if_necessary_and_write_content():
     text_to_add = 'hello world'
 
     # creating the files folder if absent
-    os.makedirs(files_folder_path, exist_ok=True)
+    os.makedirs(output_files_folder_path, exist_ok=True)
 
     # creating an empty file
     open(file_path_str, "x")
@@ -58,7 +58,7 @@ def test_with_absent_file_create_file_if_necessary_and_write_content():
     text_to_add = 'hello world'
 
     # creating the files folder if absent
-    os.makedirs(files_folder_path, exist_ok=True)
+    os.makedirs(output_files_folder_path, exist_ok=True)
 
     # asserting the absence of the file
     assert Path(file_path_str).exists() == False
@@ -74,4 +74,4 @@ def test_with_absent_file_create_file_if_necessary_and_write_content():
 
     # removing the file
     os.remove(file_path_str)
-    
+
