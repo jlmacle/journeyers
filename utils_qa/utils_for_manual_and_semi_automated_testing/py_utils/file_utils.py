@@ -44,6 +44,7 @@ def create_file_if_necessary_and_write_content(file_path: str, text: str) -> Non
     except IOError as e:
         print(f"Error writing in file {file_path}: {e}")
 
+
 def replace_string(file_path: str, string_old: str, string_new: str) -> None:
     path_to_file = Path(file_path)
     content = ""
@@ -55,7 +56,6 @@ def replace_string(file_path: str, string_old: str, string_new: str) -> None:
             content = content.replace(string_old, string_new)
         
         # writing new content in file
-        print(f"{content} to be written in {file_path}")
         create_file_if_necessary_and_write_content(file_path, content)
 
     except IOError as e:
