@@ -6,8 +6,8 @@ from py_utils.arb_utils import *
 arbs_dir_path = Path('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data')
 
 # Starting from the project root folder to allow running pytest from different folders
-root_folder = os.environ.get('JOURNEYERS_DIR')
-os.chdir(root_folder)
+project_folder = os.environ.get('JOURNEYERS_DIR')
+os.chdir(project_folder)
 
 # Getting the operating system name
 os_name = platform.system().lower()
