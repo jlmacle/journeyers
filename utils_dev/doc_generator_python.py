@@ -10,8 +10,8 @@ import platform
 import subprocess
 
 # Starting from the project root folder
-root_folder = os.environ.get('JOURNEYERS_DIR')
-os.chdir(root_folder)
+project_folder = os.environ.get('JOURNEYERS_DIR')
+os.chdir(project_folder)
 
 # doc folder declared in configuration
 
