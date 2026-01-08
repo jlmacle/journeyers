@@ -75,3 +75,26 @@ def test_with_absent_file_create_file_if_necessary_and_write_content():
     # removing the file
     os.remove(file_path_str)
 
+def test_replace_string():
+    # creating the output file folder if absent
+    os.makedirs(output_files_folder_path, exist_ok=True)
+
+    # testing if the output file already exists() to remove it and to start with a fresh file
+    file_path = Path("utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/input_files/string_replacement.txt")
+    if file_path.exists():
+        os.remove(file_path)
+    # adding the file with "string2" as content
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write("string2")
+
+    new_string = f"string1\nstring2"
+    # replacing the string in the file
+    replace_string(file_path, "string2", new_string)
+     
+    # getting the content from the file
+    result = ""
+    with open(file_path, "r", encoding="utf-8") as f:
+        result = f.read()
+
+    expected = new_string
+    assert (result == expected)
