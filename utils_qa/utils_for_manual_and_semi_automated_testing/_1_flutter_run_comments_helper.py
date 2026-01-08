@@ -5,17 +5,16 @@
 
     // Line for automated processing
 
-    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d chrome
+    // flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d chrome
     
-    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d linux
+    // flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d linux
     
-    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d macos
+    // flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d macos
     
-    // flutter run -t ./test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
+    // flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
     
     // Line for automated processing
     """
-
 
 import os
 import logging
@@ -40,9 +39,9 @@ def main():
         return
 
     # Relative file path
-    # path on Windows: "test\common_widgets\interaction_and_inputs\custom_checkbox_list_tile_with_text_field_visual_testing.dart"
-    # path on macOS: "test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
-    # path on Lubuntu: "test/common_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
+    # path on Windows: "test\custom_widgets\interaction_and_inputs\custom_checkbox_list_tile_with_text_field_visual_testing.dart"
+    # path on macOS: "test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
+    # path on Lubuntu: "test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
 
     # raw string for path on Windows
     file_path = r"test\core\utils\dashboard\dashboard_utils_test_data\dashboard_session_data_context_analysis_data_generation.dart"
