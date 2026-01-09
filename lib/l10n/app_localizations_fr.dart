@@ -4,8 +4,8 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// {@category L10n}
 /// The translations for French (`fr`).
+/// {@category L10n}
 class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
@@ -22,8 +22,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get lang_en => 'Anglais';
 }
 
-/// {@category L10n}
 /// The translations for French, as used in France (`fr_FR`).
+/// {@category L10n}
 class AppLocalizationsFrFr extends AppLocalizationsFr {
   AppLocalizationsFrFr() : super('fr_FR');
 

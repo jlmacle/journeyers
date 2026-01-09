@@ -10,7 +10,6 @@ import 'app_localizations_fr.dart';
 
 // ignore_for_file: type=lint
 
-/// {@category L10n}
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
 ///
@@ -62,6 +61,7 @@ import 'app_localizations_fr.dart';
 /// you wish to add from the pop-up menu in the Value field. This list should
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
+/// {@category L10n}
 abstract class AppLocalizations {
   AppLocalizations(String locale)
     : localeName = intl.Intl.canonicalizedLocale(locale.toString());
@@ -126,6 +126,7 @@ abstract class AppLocalizations {
   String get lang_en;
 }
 
+/// {@category L10n}
 class _AppLocalizationsDelegate
     extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
