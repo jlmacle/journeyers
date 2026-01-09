@@ -1,6 +1,5 @@
 '''
     [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
-    [You might need an alias to point to python.]
     
     Script used to generate the Dart/Flutter documentation.
 '''
