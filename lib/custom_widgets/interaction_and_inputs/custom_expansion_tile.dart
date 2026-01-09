@@ -97,17 +97,12 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
     ExpansionTile
     (
       title: 
-      // TODO: to check and remove unnecessary focuses
-      Focus
+      Text
       (
-        focusNode: expandedAdditionalTextFocusNode,
-        child: 
-        Text
-        (
-          widget.text,
-          style: TextStyle(fontWeight: widget.textFontWeight),
-        ),
+        widget.text,
+        style: TextStyle(fontWeight: widget.textFontWeight),
       ),
+
       trailing: widget.actionIconSuggestingExpansion,
       children: <Widget>
       [
