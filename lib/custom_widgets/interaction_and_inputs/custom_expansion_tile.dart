@@ -97,6 +97,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
     ExpansionTile
     (
       title: 
+      // TODO: to check and remove unnecessary focuses
       Focus
       (
         focusNode: expandedAdditionalTextFocusNode,
