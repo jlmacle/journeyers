@@ -2,6 +2,8 @@
     [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
     
     Script used to add the dartdoc "L10n" category to the app_localizations files.
+
+    Some data to update manually when new app_localizations files are generated.
 '''
 
 # file tested manually to avoid having to define another python package
@@ -35,14 +37,6 @@ def add_categories_to_both_classes(file_path:str) -> None:
     content = ""
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
-
-    # # Searching for the line // ignore_for_file: type=lint
-    # # to add /// {@category L10n}
-    # original_content = "// ignore_for_file: type=lint"
-    # new_content = (
-    #     "// ignore_for_file: type=lint\n"
-    #     "/// {@category L10n}"
-    # )
 
     # replacing original content with new content
     for str_to_find in list_of_str:

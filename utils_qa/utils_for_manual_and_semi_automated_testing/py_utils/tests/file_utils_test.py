@@ -79,7 +79,7 @@ def test_replace_string():
     # creating the output file folder if absent
     os.makedirs(output_files_folder_path, exist_ok=True)
 
-    # testing if the output file already exists() to remove it and to start with a fresh file
+    # testing if the output file already exists(), to remove it and to start with a fresh file
     file_path = Path("utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/input_files/string_replacement.txt")
     if file_path.exists():
         os.remove(file_path)
