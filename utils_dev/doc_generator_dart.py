@@ -7,13 +7,19 @@ import os
 import platform
 import subprocess
 
-# Starting from the project root folder
+doc_folder = "utils_dev/doc_dart"
 project_folder = os.environ.get('JOURNEYERS_DIR')
+l10n_category_update_script_folder = os.path.join(project_folder, 'utils_dev')
+
+# changing directory before running the script adding the L10n dartdoc category if necessary
+os.chdir(l10n_category_update_script_folder)
+result = subprocess.run(['python', 'l10n_category_update.py'])
+
+# changing directory before using dartdoc
 os.chdir(project_folder)
 
-doc_folder = "utils_dev/doc_dart"
-
 os_name = platform.system().lower()
+print()
 print(f"os_name: {os_name}")
 # Running the 'dart doc'command
 # shell=True to avoid 'FileNotFoundError: The system cannot find the file specified' on Windows.
@@ -24,4 +30,3 @@ else:
 
 print("Output:", result.stdout)
 print("Error:", result.stderr)
-# TODO: to add the dartdoc category to the l10n files if was removed by re-generation.
