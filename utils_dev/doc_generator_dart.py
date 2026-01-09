@@ -1,5 +1,6 @@
 '''
     [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
+    [You might need an alias to point to python.]
     
     Script used to generate the Dart/Flutter documentation.
 '''
@@ -13,7 +14,11 @@ l10n_category_update_script_folder = os.path.join(project_folder, 'utils_dev')
 
 # changing directory before running the script adding the L10n dartdoc category if necessary
 os.chdir(l10n_category_update_script_folder)
-result = subprocess.run(['python', 'l10n_category_update.py'])
+try:
+    result = subprocess.run(['python', 'l10n_category_update.py'])
+except FileNotFoundError:
+    result = subprocess.run(['python3', 'l10n_category_update.py'])
+    print("FileNotFoundError caught. python3 used in the command, instead of python.")
 
 # changing directory before using dartdoc
 os.chdir(project_folder)
