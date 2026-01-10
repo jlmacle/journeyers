@@ -32,7 +32,7 @@ system_adapted_data = {}
 linux_data = {"chmod":f"# To make the script executable: chmod u+x {linux_output_file_name}", "script_type":"# Bash",
               "after_comment":"",
               "time_to_read_comment":"sleep 5",
-              "terminal_command_beginning":f"xterm -e \"cd {projet_root};", "terminal_command_end":"-d web-server --web-port", 
+              "terminal_command_beginning":f"xterm -e \"cd {projet_root};", "terminal_command_endish":"-d web-server --web-port", 
               "after_web_ports":"\" &","comment_character":"#",
               "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
               "browser_begin":"open \"http://localhost:", "browser_end":"\"",
@@ -42,7 +42,7 @@ macos_data = {"chmod":f"# To make the script executable: chmod u+x {macos_output
               "after_comment":"",
               "time_to_read_comment":"sleep 5",
               "terminal_command_beginning":f"osascript -e 'tell application \"Terminal\" to do script \"cd {projet_root};", 
-              "terminal_command_end":"-d web-server --web-port", 
+              "terminal_command_endish":"-d web-server --web-port", 
               "after_web_ports":"\"'","comment_character":"#",
               "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
               "browser_begin":"open -a \"Google Chrome\" \"http://localhost:", "browser_end":"\"",
@@ -53,7 +53,7 @@ windows_data = {"chmod":":: Please note that Chrome must be started to have more
                 "after_comment":f'@echo off{eol}'
                 fr'set BROWSER="C:\Program Files\Google\Chrome\Application\chrome.exe"{eol}',
                 "time_to_read_comment":"timeout /t 5 >nul",
-                "terminal_command_beginning":"start ", "terminal_command_end":" -d web-server --web-port ",
+                "terminal_command_beginning":"start ", "terminal_command_endish":" -d web-server --web-port ",
                 "after_web_ports":"","comment_character":"::",
                 "time_for_servers_to_start":f"timeout /t {time_for_servers_to_start} >nul",
                 "browser_begin":"%BROWSER% http://localhost:", "browser_end":"",
@@ -123,7 +123,7 @@ def main():
         # 4. Building the terminal commands
         port_number += 1
         cmd_line = (
-            f"{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_end"]} {port_number}{system_adapted_data["after_web_ports"]}{eol}"
+            f"{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_endish"]} {port_number}{system_adapted_data["after_web_ports"]}{eol}"
         )
         cmd_lines += cmd_line
 
