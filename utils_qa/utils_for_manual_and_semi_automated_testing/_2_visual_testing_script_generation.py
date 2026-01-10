@@ -16,13 +16,13 @@ eol = os.linesep
 # Time allocated for the webservers to start
 time_for_servers_to_start = 70 # 70 for an Core i3, 8 GB
 
-# Getting the project's absolute path from the config file
+# Getting the project's absolute path from the environment variable if necessary
 os_name = platform.system().lower()
 projet_root = "./" 
 if os_name == "darwin":
     projet_root = os.environ.get('JOURNEYERS_DIR', '')
 
-# Data used to build to os-specific part
+# Data used to build the os-specific part
 window_output_file_name = "2_widget_visual_testing_helper.bat"
 linux_output_file_name = "4_widget_visual_testing_helper.sh"
 macos_output_file_name = "6_widget_visual_testing_helper.zsh"
@@ -70,7 +70,7 @@ else:
     print(f'Error: platform not correctly detected: {sys.platform}')
     sys.exit()
 
-# Defines the relative path to the widgets directory
+# Defining the relative path to the widgets directory
 widgets_dir_path = os.path.join("..", "..","test", "custom_widgets")
 
 def main():
@@ -120,26 +120,28 @@ def main():
             print()
             sys.exit(1)
             
-        # 4. Building the Flutter command
+        # 4. Building the terminal commands
         init_port += 1
-        # The command snippet is enclosed in single quotes in osascript
         cmd_flutter_snippet = (
             f"{system_adapted_data["before_flutter_command"]} {processed_comment} {system_adapted_data["after_flutter_command"]} {init_port}{system_adapted_data["after_web_ports"]}{eol}"
         )
         cmd_lines += cmd_flutter_snippet
 
-    # 4. Add server startup timeout and Chrome commands
+    # 4. Adding server startup timeout and browser commands
     cmd_lines += f"{system_adapted_data["comment_character"]} Waiting for the web servers to start{eol}"
     cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {eol}"
-    
-    # init_port holds the final, incremented port number
     start_port = 8091 
     for i in range(start_port, init_port + 1):
         cmd_lines += f'{system_adapted_data["chrome_tab_begin"]}{i}{system_adapted_data["chrome_tab_end"]}{eol}'
 
     # 5. Write the final script file
-    file_path_out = os.path.join("..", "..", "utils_qa", "scripts_for_automated_and_semi_automated_testing"
-                                 , f"{system_adapted_data["output_file_name"]}")
+    file_path_out = os.path.join(
+        "..", 
+        "..", 
+        "utils_qa", 
+        "scripts_for_automated_and_semi_automated_testing",
+        f"{system_adapted_data["output_file_name"]}"
+    )
     create_file_if_necessary_and_write_content(file_path=file_path_out, text=cmd_lines)
     print()
     print(f"The file should have been created at {file_path_out}")
