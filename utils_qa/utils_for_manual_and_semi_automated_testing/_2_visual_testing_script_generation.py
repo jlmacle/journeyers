@@ -95,7 +95,7 @@ def main():
         f'{system_adapted_data["time_to_read_comment"]}{eol}{eol}'
     )
     
-    init_port = 8090
+    port_number = 8090
     # Processing each file
     for file in file_list:       
         
@@ -121,9 +121,9 @@ def main():
             sys.exit(1)
             
         # 4. Building the terminal commands
-        init_port += 1
+        port_number += 1
         cmd_line = (
-            f"{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_end"]} {init_port}{system_adapted_data["after_web_ports"]}{eol}"
+            f"{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_end"]} {port_number}{system_adapted_data["after_web_ports"]}{eol}"
         )
         cmd_lines += cmd_line
 
@@ -132,7 +132,8 @@ def main():
     cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {eol}"
 
     start_port = 8091 
-    for i in range(start_port, init_port + 1):
+    last_port_number = port_number
+    for i in range(start_port, last_port_number + 1):
         cmd_lines += f'{system_adapted_data["browser_begin"]}{i}{system_adapted_data["browser_end"]}{eol}'
 
     # 5. Writing the final script file
