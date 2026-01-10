@@ -22,7 +22,7 @@ projet_root = "./"
 if os_name == "darwin":
     projet_root = os.environ.get('JOURNEYERS_DIR', '')
 
-# Data used to build the os-specific part
+# Data used to build the os-specific script parts
 window_output_file_name = "2_widget_visual_testing_helper.bat"
 linux_output_file_name = "4_widget_visual_testing_helper.sh"
 macos_output_file_name = "6_widget_visual_testing_helper.zsh"
@@ -32,20 +32,20 @@ system_adapted_data = {}
 linux_data = {"chmod":f"# To make the script executable: chmod u+x {linux_output_file_name}", "script_type":"# Bash",
               "after_comment":"",
               "time_to_read_comment":"sleep 5",
-              "before_flutter_command":f"xterm -e \"cd {projet_root};", "after_flutter_command":"-d web-server --web-port", 
+              "terminal_command_beginning":f"xterm -e \"cd {projet_root};", "terminal_command_end":"-d web-server --web-port", 
               "after_web_ports":"\" &","comment_character":"#",
               "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
-              "chrome_tab_begin":"open \"http://localhost:", "chrome_tab_end":"\"",
+              "browser_begin":"open \"http://localhost:", "browser_end":"\"",
               "output_file_name":f"{linux_output_file_name}"}
 
 macos_data = {"chmod":f"# To make the script executable: chmod u+x {macos_output_file_name}", "script_type":"# Zsh", 
               "after_comment":"",
               "time_to_read_comment":"sleep 5",
-              "before_flutter_command":f"osascript -e 'tell application \"Terminal\" to do script \"cd {projet_root};", 
-              "after_flutter_command":"-d web-server --web-port", 
+              "terminal_command_beginning":f"osascript -e 'tell application \"Terminal\" to do script \"cd {projet_root};", 
+              "terminal_command_end":"-d web-server --web-port", 
               "after_web_ports":"\"'","comment_character":"#",
               "time_for_servers_to_start":f"sleep {time_for_servers_to_start}",
-              "chrome_tab_begin":"open -a \"Google Chrome\" \"http://localhost:", "chrome_tab_end":"\"",
+              "browser_begin":"open -a \"Google Chrome\" \"http://localhost:", "browser_end":"\"",
               "output_file_name":f"{macos_output_file_name}"
               }
 
@@ -53,10 +53,10 @@ windows_data = {"chmod":":: Please note that Chrome must be started to have more
                 "after_comment":f'@echo off{eol}'
                 fr'set BROWSER="C:\Program Files\Google\Chrome\Application\chrome.exe"{eol}',
                 "time_to_read_comment":"timeout /t 5 >nul",
-                "before_flutter_command":"start ", "after_flutter_command":" -d web-server --web-port ",
+                "terminal_command_beginning":"start ", "terminal_command_end":" -d web-server --web-port ",
                 "after_web_ports":"","comment_character":"::",
                 "time_for_servers_to_start":f"timeout /t {time_for_servers_to_start} >nul",
-                "chrome_tab_begin":"%BROWSER% http://localhost:", "chrome_tab_end":"",
+                "browser_begin":"%BROWSER% http://localhost:", "browser_end":"",
                 "output_file_name":f"{window_output_file_name}"}
 
 
@@ -122,19 +122,20 @@ def main():
             
         # 4. Building the terminal commands
         init_port += 1
-        cmd_flutter_snippet = (
-            f"{system_adapted_data["before_flutter_command"]} {processed_comment} {system_adapted_data["after_flutter_command"]} {init_port}{system_adapted_data["after_web_ports"]}{eol}"
+        cmd_line = (
+            f"{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_end"]} {init_port}{system_adapted_data["after_web_ports"]}{eol}"
         )
-        cmd_lines += cmd_flutter_snippet
+        cmd_lines += cmd_line
 
     # 4. Adding server startup timeout and browser commands
     cmd_lines += f"{system_adapted_data["comment_character"]} Waiting for the web servers to start{eol}"
     cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {eol}"
+
     start_port = 8091 
     for i in range(start_port, init_port + 1):
-        cmd_lines += f'{system_adapted_data["chrome_tab_begin"]}{i}{system_adapted_data["chrome_tab_end"]}{eol}'
+        cmd_lines += f'{system_adapted_data["browser_begin"]}{i}{system_adapted_data["browser_end"]}{eol}'
 
-    # 5. Write the final script file
+    # 5. Writing the final script file
     file_path_out = os.path.join(
         "..", 
         "..", 
