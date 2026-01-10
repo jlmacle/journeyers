@@ -48,7 +48,7 @@ class_end = "}"
 #           None
 #   Returns: 
 #           A string with the code.
-def code_generation_for_method_1() -> str:
+def code_generation_for_method_get_languages() -> str:
   code = ""
 
   method_1_begin = (
@@ -90,7 +90,7 @@ def code_generation_for_method_1() -> str:
   #           None   
   #   Returns:
   #       A string with the code.
-def code_generation_for_method_2() -> str:
+def code_generation_for_method_get_lang_code_from_lang_name() -> str:
   code = ""
   method_2_begin = (
     "/// A method used to get a language code, being provided a language name. \n"
@@ -144,9 +144,9 @@ def main():
   print('')
   ## Generating code for l10n_utils.dart
   code += class_begin    
-  code += code_generation_for_method_1()
+  code += code_generation_for_method_get_languages()
   code +=  "\n"
-  code += code_generation_for_method_2()
+  code += code_generation_for_method_get_lang_code_from_lang_name()
   code += class_end
   
   print(code) 
