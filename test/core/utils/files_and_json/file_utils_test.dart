@@ -16,7 +16,7 @@ void main() {
     "utils",
     "files_and_json",
     "file_utils_test_data",
-    "file.txt",
+    "file.txt"
   );
 
   group('File utils tests:', () {
