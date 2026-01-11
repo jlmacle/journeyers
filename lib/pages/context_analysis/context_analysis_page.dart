@@ -31,7 +31,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   bool isContextAnalysisSessionDataSaved = false;
 
   // to help reset the start message status
-  final bool _resetStartMessage = true;
+  final bool _resetStartMessage = false;
 
   _getPreferences() async 
   {
