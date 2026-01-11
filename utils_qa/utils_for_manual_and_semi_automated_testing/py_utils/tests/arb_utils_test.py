@@ -1,6 +1,6 @@
 import platform, os
 from pathlib import Path, WindowsPath, PosixPath
-from py_utils.arb_utils import *
+from py_utils.arb_utils import get_base_locales_file_paths, get_language_code_from_base_locale_file_path, get_all_base_locales_language_codes, get_language_translations_for_each_language
 
 # Directory of the test arb files
 ARBS_DIR_PATH = Path('./utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data')
