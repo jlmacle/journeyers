@@ -1,7 +1,7 @@
 import logging
 import os
 
-eol = os.linesep
+EOL = os.linesep
 
 def setup_logging():
     logging.basicConfig(
@@ -35,7 +35,7 @@ def first_comment_extraction(file_path: str, delimiter_line: str) -> str:
             # extracting the line if delimiter line found
             elif nbr_delimiter_lines_found == 1:
                 trimmed_comment_line = line.strip()
-                comment += f"{trimmed_comment_line}{eol}"
+                comment += f"{trimmed_comment_line}{EOL}"
                 # exiting the loop
                 break
         # if no comment extracted (could happen also with two delimiter lines in a row)
