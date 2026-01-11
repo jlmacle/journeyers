@@ -4,23 +4,21 @@
     Script used to generate the Python documentation.
 '''
 
-
 import os
 import platform
 import subprocess
 
 # Starting from the project root folder
-project_folder = os.environ.get('JOURNEYERS_DIR')
-os.chdir(project_folder)
+PROJECT_FOLDER = os.environ.get('JOURNEYERS_DIR')
+os.chdir(PROJECT_FOLDER)
 
-# doc folder declared in configuration
-
-os_name = platform.system().lower()
-print(f"os_name: {os_name}")
+# OS name needed to have the code portable
+OS_NAME = platform.system().lower()
+print(f"OS_NAME: {OS_NAME}")
 # Running the 'mkdocs build -v'command
 # shell=True to avoid 'FileNotFoundError: The system cannot find the file specified' on Windows.
-if (os_name == 'windows'):
-    result = subprocess.run(['mkdocs', 'build', '-v'],shell=True)
+if (OS_NAME == 'windows'):
+    result = subprocess.run(['mkdocs', 'build', '-v'], shell=True)
 else:
 # if FileNotFoundError: [Errno 2] No such file or directory: 'mkdocs' on Linux, 
 # maybe a virtual environment was used to install mkdocs, but not to run the script.
