@@ -42,6 +42,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
 
   //*****************    State related code    **********************//
+  bool _isIndividualAreaPerspectiveExpanded = false;
+  bool _isGroupAreaPerspectiveExpanded = false;
+
   bool _studiesHouseholdBalanceCheckboxValue = false;
   String _studiesHouseholdBalanceTextFieldContent = "";
 
@@ -335,17 +338,22 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ),
             Gap(40),
 
+
+
+
             //************** ExpansionTile diplaying the individual perspective: beginning **************//
             Semantics
             (
               toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
               button: true, // with tooltip, useful for NVDA
               tooltip: "Zone to click to expand data",
+              expanded: _isIndividualAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
               child:
               ExpansionTile
               ( 
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 internalAddSemanticForOnTap: true, 
+                onExpansionChanged: (value) {setState(() {_isIndividualAreaPerspectiveExpanded = value;}); },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
                 title:             
                 CustomHeading
@@ -460,19 +468,22 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             Divider(thickness: betweenLevel2DividerThickness),
             Gap(preAndPostLevel2DividerGap),
 
+
+
             /**** Beginning of the team-related analysis ****/
             //************** ExpansionTile diplaying the group perspective: beginning **************//
             Semantics
             ( 
-              //TODO: function to modify the 'expanded' status when expanded/folded
               toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
               button: true, // with tooltip, useful for NVDA
               tooltip: "Zone to click to expand data",
+              expanded: _isGroupAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
               child:
               ExpansionTile
               ( 
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 internalAddSemanticForOnTap: true, 
+                onExpansionChanged: (value) {setState(() {_isGroupAreaPerspectiveExpanded = value;}); },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
                 title:              
                 CustomHeading
