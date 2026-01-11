@@ -129,9 +129,9 @@ def main():
     cmd_lines += f"{system_adapted_data["comment_character"]} Waiting for the web servers to start{EOL}"
     cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {EOL}"
 
-    START_PORT = 8091 
+    start_port = 8091 
     last_port_number = port_number
-    for i in range(START_PORT, last_port_number + 1):
+    for i in range(start_port, last_port_number + 1):
         cmd_lines += f'{system_adapted_data["browser_begin"]}{i}{system_adapted_data["browser_end"]}{EOL}'
 
     # 5. Writing the final script file
