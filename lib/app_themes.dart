@@ -13,6 +13,11 @@ final double betweenLevel2DividerThickness = 3;
 final double betweenLevel3DividerThickness = 1;
 
 // Text styles
+const TextStyle constStyle = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  color: Color(0xFF000000));
+
 final TextStyle feedbackMessageStyle = TextStyle
 (
   fontSize: 18,
