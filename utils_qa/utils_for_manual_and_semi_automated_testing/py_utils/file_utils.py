@@ -1,6 +1,5 @@
 from pathlib import Path
 from typing import List
-import os
 
 def get_files_in_directory(directory_path: str, file_extension: str, search_is_recursive: bool = True) -> List[Path]:
     """
