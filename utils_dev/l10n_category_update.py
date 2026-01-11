@@ -15,12 +15,14 @@ from py_utils.file_utils import get_files_in_directory, replace_string
 
 # Data to update manually when new app_localizations files are generated
 
-en_classes_str = ["class AppLocalizationsEn extends AppLocalizations {", "class AppLocalizationsEnUs extends AppLocalizationsEn {"]
-fr_classes_str = ["class AppLocalizationsFr extends AppLocalizations {", "class AppLocalizationsFrFr extends AppLocalizationsFr {"]
-no_lang_code_classes_str = ["abstract class AppLocalizations {", "class _AppLocalizationsDelegate"]
+EN_CLASSES_STR = ["class AppLocalizationsEn extends AppLocalizations {", "class AppLocalizationsEnUs extends AppLocalizationsEn {"]
+FR_CLASSES_STR = ["class AppLocalizationsFr extends AppLocalizations {", "class AppLocalizationsFrFr extends AppLocalizationsFr {"]
+NO_LANG_CODE_CLASSES_STR = ["abstract class AppLocalizations {", "class _AppLocalizationsDelegate"]
 
-association_dict = {"app_localizations_en.dart":en_classes_str, "app_localizations_fr.dart":fr_classes_str, 
-                   "app_localizations.dart": no_lang_code_classes_str}
+ASSOCIATION_DICT = {"app_localizations_en.dart":EN_CLASSES_STR, "app_localizations_fr.dart":FR_CLASSES_STR, 
+                   "app_localizations.dart": NO_LANG_CODE_CLASSES_STR}
+
+LINE_TO_ADD = "/// {@category L10n}"
 
 def add_categories_to_both_classes(file_path:str) -> None:
     print(f"\nAdding categories to both classes in: {file_path}")
@@ -29,7 +31,7 @@ def add_categories_to_both_classes(file_path:str) -> None:
     print(f"file_name: {file_name}")
 
     # getting the str to find
-    list_of_str = association_dict[file_name]
+    list_of_str = ASSOCIATION_DICT[file_name]
     print(f"list_of_str: {list_of_str}")
     print()
 
@@ -41,7 +43,7 @@ def add_categories_to_both_classes(file_path:str) -> None:
     # replacing original content with new content
     for str_to_find in list_of_str:
         original_content = str_to_find
-        new_content = "/// {@category L10n}" + "\n" + str_to_find
+        new_content = LINE_TO_ADD + "\n" + str_to_find
 
         content = content.replace(original_content, new_content)
         with open(file, "w", encoding="utf-8") as fw:
@@ -49,42 +51,40 @@ def add_categories_to_both_classes(file_path:str) -> None:
 
 
 # Building the path to the dart files
-project_folder = os.environ.get('JOURNEYERS_DIR')
-files_directory_path = Path(os.path.join(project_folder, "lib", "l10n"))
+PROJECT_FOLDER = os.environ.get('JOURNEYERS_DIR')
+FILES_DIRECTORY_PATH = Path(os.path.join(PROJECT_FOLDER, "lib", "l10n"))
 
 # Checking the validity of the path
-if (not files_directory_path.exists()):
-    print(f"{files_directory_path} doesn't exist.")
+if (not FILES_DIRECTORY_PATH.exists()):
+    print(f"{FILES_DIRECTORY_PATH} doesn't exist.")
     exit()
 
 # Searching for the app_localizations dart files in the l10n folder
-list_of_file_paths = get_files_in_directory(files_directory_path, ".dart", search_is_recursive=True)
-print(f"Files found: {list_of_file_paths}\n")
-
-line_to_add = "/// {@category L10n}"
+LIST_OF_FILE_PATHS = get_files_in_directory(FILES_DIRECTORY_PATH, ".dart", search_is_recursive=True)
+print(f"Files found: {LIST_OF_FILE_PATHS}\n")
 
 # Opening the files to add the categories in front of each class
-for file in list_of_file_paths:
+for file in LIST_OF_FILE_PATHS:
     with open(file, "r", encoding="utf-8") as f:
         content = f.read()
         
         # no categories found in the file. 
         # 2 should be present as 2 classes are present in each file as of 26/01/08 
-        if content.count(line_to_add) == 0:
+        if content.count(LINE_TO_ADD) == 0:
             add_categories_to_both_classes(file)
 
         # 1 occurrence of dartdoc category is present. 
         # removal of the line, and processing corresponding to "no categories found in file".
-        elif content.count(line_to_add) == 1:
-            replace_string(file, line_to_add, "")
+        elif content.count(LINE_TO_ADD) == 1:
+            replace_string(file, LINE_TO_ADD, "")
             add_categories_to_both_classes(file)
 
         # 2 categories already present.
-        elif content.count(line_to_add) == 2:
+        elif content.count(LINE_TO_ADD) == 2:
             print(f"\nCategories already present for the two classes of {file}")
 
         else:
-            print(f"Error: unexpected count for {line_to_add}: {content.count(line_to_add)}")
+            print(f"Error: unexpected count for {LINE_TO_ADD}: {content.count(LINE_TO_ADD)}")
         
 
 
