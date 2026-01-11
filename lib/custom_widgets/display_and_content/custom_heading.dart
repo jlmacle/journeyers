@@ -14,7 +14,7 @@ class CustomHeading extends StatelessWidget
   final int headingLevel;
 
   /// The style of the heading.
-  late final TextStyle headingStyle;
+  TextStyle headingStyle;
 
   /// The alignment of the heading.
   final TextAlign headingAlignment;
@@ -24,12 +24,11 @@ class CustomHeading extends StatelessWidget
     super.key,
     required this.headingText,
     required this.headingLevel,
+    this.headingStyle = constStyle,
     this.headingAlignment = TextAlign.center,
-  }) : assert(headingLevel >= 1 && headingLevel <= 6,'Heading level must be between 1 and 6.');
-
-  @override
-  Widget build(BuildContext context) 
+  })
   {
+    assert(headingLevel >= 1 && headingLevel <= 6,'Heading level must be between 1 and 6.');
     switch (headingLevel) 
     {
       case 1:
@@ -46,7 +45,12 @@ class CustomHeading extends StatelessWidget
       case 6:
         headingStyle = appTheme.textTheme.titleSmall!;
     }
+  }
+  
 
+  @override
+  Widget build(BuildContext context) 
+  {
     return CustomFocusableText(text: headingText, textStyle: headingStyle);
   }
 }
