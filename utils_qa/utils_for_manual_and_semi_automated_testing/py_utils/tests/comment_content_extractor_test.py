@@ -1,4 +1,3 @@
-import os
 
 from py_utils.comment_content_extractor import first_comment_extraction
 
