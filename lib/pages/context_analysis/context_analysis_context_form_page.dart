@@ -334,235 +334,264 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               ),
             ),
             Gap(40),
-            Center
+
+            //************** ExpansionTile diplaying the individual perspective: beginning **************//
+            Semantics
             (
-              child: 
-              CustomHeading
-              (
-                headingText: q.level2TitleIndividual,
-                headingLevel: 2,
+              toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
+              button: true, // with tooltip, useful for NVDA
+              tooltip: "Zone to click to expand data",
+              child:
+              ExpansionTile
+              ( 
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                internalAddSemanticForOnTap: true, 
+                // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+                title:             
+                CustomHeading
+                (
+                  headingText: q.level2TitleIndividual,
+                  headingLevel: 2,
+                ),
+                children: <Widget>
+                [
+                /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleBalanceIssue,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleBalanceIssueItem1,
+                    textFieldHintText: pleaseDescribeTextHousehold,
+                    parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleBalanceIssueItem2,
+                    textFieldHintText: pleaseDescribeTextHousehold,
+                    parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleBalanceIssueItem3,
+                    textFieldHintText: pleaseDescribeTextHousehold,
+                    parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleBalanceIssueItem4,
+                    textFieldHintText: pleaseDescribeTextHousehold,
+                    parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
+                  ),
+                  Gap(preAndPostLevel3DividerGap),
+                  Divider(thickness: betweenLevel3DividerThickness),
+                  Gap(preAndPostLevel3DividerGap),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleWorkplaceIssue,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleWorkplaceIssueItem1,
+                    textFieldHintText: pleaseDescribeTextWorkplace,
+                    parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleWorkplaceIssueItem2,
+                    textFieldHintText: pleaseDescribeTextWorkplace,
+                    parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
+                  ),
+                  Gap(preAndPostLevel3DividerGap),
+                  Divider(thickness: betweenLevel3DividerThickness),
+                  Gap(preAndPostLevel3DividerGap),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleLegacyIssue,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  CustomCheckBoxWithTextField
+                  (
+                    checkboxText: q.level3TitleLegacyIssueItem1,
+                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
+                    parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
+                  ),
+                  Gap(preAndPostLevel3DividerGap),
+                  Divider(thickness: betweenLevel3DividerThickness),
+                  Gap(preAndPostLevel3DividerGap),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleAnotherIssue,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  CustomPaddedTextField
+                  (
+                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldMaxLength: FormUtils.chars1Page,
+                    textFieldCounter: FormUtils.absentCounter,
+                    parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
+                  ),
+                ]
               ),
             ),
-            Gap(postHeaderLevel2Gap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleBalanceIssue,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleBalanceIssueItem1,
-              textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleBalanceIssueItem2,
-              textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleBalanceIssueItem3,
-              textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleBalanceIssueItem4,
-              textFieldHintText: pleaseDescribeTextHousehold,
-              parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
-            ),
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleWorkplaceIssue,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleWorkplaceIssueItem1,
-              textFieldHintText: pleaseDescribeTextWorkplace,
-              parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleWorkplaceIssueItem2,
-              textFieldHintText: pleaseDescribeTextWorkplace,
-              parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
-            ),
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleLegacyIssue,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            CustomCheckBoxWithTextField
-            (
-              checkboxText: q.level3TitleLegacyIssueItem1,
-              textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
-              parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
-            ),
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleAnotherIssue,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            CustomPaddedTextField
-            (
-              textFieldHintText: pleaseDevelopOrTakeNotes,
-              textFieldMaxLength: FormUtils.chars1Page,
-              textFieldCounter: FormUtils.absentCounter,
-              parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
-            ),
-
+            //************** ExpansionTile diplaying the individual perspective: end **************//
+            
             Gap(preAndPostLevel2DividerGap),
             Divider(thickness: betweenLevel2DividerThickness),
             Gap(preAndPostLevel2DividerGap),
 
             /**** Beginning of the team-related analysis ****/
-            Center
-            (
-              child: 
-              CustomHeading
-              (
-                headingText: q.level2TitleGroup,
-                headingLevel: 2,
+            //************** ExpansionTile diplaying the group perspective: beginning **************//
+            Semantics
+            ( 
+              //TODO: function to modify the 'expanded' status when expanded/folded
+              toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
+              button: true, // with tooltip, useful for NVDA
+              tooltip: "Zone to click to expand data",
+              child:
+              ExpansionTile
+              ( 
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                internalAddSemanticForOnTap: true, 
+                // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+                title:              
+                CustomHeading
+                (
+                  headingText: q.level2TitleGroup,
+                  headingLevel: 2,
+                ),
+                children: <Widget>
+                [
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleGroupsProblematics,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  CustomPaddedTextField
+                  (
+                    textFieldHintText: pleaseDescribeTextGroups,
+                    textFieldMaxLength: FormUtils.chars1Page,
+                    textFieldCounter: FormUtils.absentCounter,
+                    parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
+                  ),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleSameProblem,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  Gap(level3AndSegmentedButtonGap),
+                  CustomSegmentedButtonWithTextField
+                  (
+                    textOption1: 'Yes',
+                    textOption2: 'No',
+                    textOption3: "I don't know",
+                    textOptionsfontSize: 16,
+                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
+                    parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
+                  ),
+
+                  Gap(preAndPostLevel3DividerGap),
+                  Divider(thickness: betweenLevel3DividerThickness),
+                  Gap(preAndPostLevel3DividerGap),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleHarmonyAtHome,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  Gap(level3AndSegmentedButtonGap),
+                  CustomSegmentedButtonWithTextField
+                  (
+                    textOption1: 'Yes',
+                    textOption2: 'No',
+                    textOption3: "I don't know",
+                    textOptionsfontSize: 16,
+                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
+                    parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
+                  ),
+
+                  Gap(preAndPostLevel3DividerGap),
+                  Divider(thickness: betweenLevel3DividerThickness),
+                  Gap(preAndPostLevel3DividerGap),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleAppreciabilityAtWork,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  Gap(level3AndSegmentedButtonGap),
+                  CustomSegmentedButtonWithTextField
+                  (
+                    textOption1: 'Yes',
+                    textOption2: 'No',
+                    textOption3: "I don't know",
+                    textOptionsfontSize: 16,
+                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
+                    parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
+                  ),
+
+                  Gap(preAndPostLevel3DividerGap),
+                  Divider(thickness: betweenLevel3DividerThickness),
+                  Gap(preAndPostLevel3DividerGap),
+
+                  /**** ➡️ Sub-point  ****/
+                  CustomHeading
+                  (
+                    headingText: q.level3TitleIncomeEarningAbility,
+                    headingLevel: 3,
+                    headingAlignment: TextAlign.left,
+                  ),
+                  CustomSegmentedButtonWithTextField
+                  (
+                    textOption1: 'Yes',
+                    textOption2: 'No',
+                    textOption3: "I don't know",
+                    textOptionsfontSize: 16,
+                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
+                    parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
+                  ),
+                ]
               ),
             ),
-            Gap(postHeaderLevel2Gap),
+            //************** ExpansionTile diplaying the group perspective: end **************//
 
-            CustomHeading
-            (
-              headingText: q.level3TitleGroupsProblematics,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            CustomPaddedTextField
-            (
-              textFieldHintText: pleaseDescribeTextGroups,
-              textFieldMaxLength: FormUtils.chars1Page,
-              textFieldCounter: FormUtils.absentCounter,
-              parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
-            ),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleSameProblem,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField
-            (
-              textOption1: 'Yes',
-              textOption2: 'No',
-              textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
-            ),
-
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleHarmonyAtHome,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField
-            (
-              textOption1: 'Yes',
-              textOption2: 'No',
-              textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
-            ),
-
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleAppreciabilityAtWork,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            Gap(level3AndSegmentedButtonGap),
-            CustomSegmentedButtonWithTextField
-            (
-              textOption1: 'Yes',
-              textOption2: 'No',
-              textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
-            ),
-
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
-
-            /**** ➡️ Sub-point  ****/
-            CustomHeading
-            (
-              headingText: q.level3TitleIncomeEarningAbility,
-              headingLevel: 3,
-              headingAlignment: TextAlign.left,
-            ),
-            CustomSegmentedButtonWithTextField
-            (
-              textOption1: 'Yes',
-              textOption2: 'No',
-              textOption3: "I don't know",
-              textOptionsfontSize: 16,
-              textFieldHintText: pleaseDevelopOrTakeNotes,
-              parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
-              parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
-            ),
-
+            Gap(preAndPostLevel2DividerGap),
+            Divider(thickness: betweenLevel2DividerThickness),
+            Gap(preAndPostLevel2DividerGap),
+            
             //********** Data saving ************//
-            Gap(preAndPostLevel3DividerGap),
-            Divider(thickness: betweenLevel3DividerThickness),
-            Gap(preAndPostLevel3DividerGap),
             Center
             (
               child: 
