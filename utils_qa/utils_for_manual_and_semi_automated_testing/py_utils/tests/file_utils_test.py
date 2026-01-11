@@ -1,21 +1,21 @@
-import platform
+import platform, os
 from pathlib import WindowsPath, PosixPath
 from py_utils.file_utils import *
 
 # Getting the operating system name
-os_name = platform.system().lower()
+OS_NAME = platform.system().lower()
 
 # Path to the folder of the files created (tests of file_create_file_if_necessary_and_write_content)
-output_files_folder_path = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/'
+OUTPUT_FILES_FOLDER_PATH = 'utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/output_files/'
 
 def test_get_files_in_directory():
     directory_path = "utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data"
     file_extension = ".arb"
     expected = []
 
-    if os_name.startswith('windows'):
+    if OS_NAME.startswith('windows'):
         expected = [WindowsPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en.arb'), WindowsPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en_US.arb'), WindowsPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr.arb'), WindowsPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr_FR.arb')]
-    if os_name.startswith('linux') or os_name.startswith('darwin'):        
+    if OS_NAME.startswith('linux') or OS_NAME.startswith('darwin'):        
         expected = [PosixPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en.arb'), PosixPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_en_US.arb'), PosixPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr.arb'), PosixPath('utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/arb_utils_test_data/app_fr_FR.arb')]
 
     assert set(get_files_in_directory(directory_path=directory_path, file_extension=file_extension)) == set(expected)
@@ -26,7 +26,7 @@ def test_with_existing_file_create_file_if_necessary_and_write_content():
     text_to_add = 'hello world'
 
     # creating the files folder if absent
-    os.makedirs(output_files_folder_path, exist_ok=True)
+    os.makedirs(OUTPUT_FILES_FOLDER_PATH, exist_ok=True)
 
     # creating an empty file
     open(file_path_str, "x")
@@ -58,7 +58,7 @@ def test_with_absent_file_create_file_if_necessary_and_write_content():
     text_to_add = 'hello world'
 
     # creating the files folder if absent
-    os.makedirs(output_files_folder_path, exist_ok=True)
+    os.makedirs(OUTPUT_FILES_FOLDER_PATH, exist_ok=True)
 
     # asserting the absence of the file
     assert Path(file_path_str).exists() == False
@@ -77,7 +77,7 @@ def test_with_absent_file_create_file_if_necessary_and_write_content():
 
 def test_replace_string():
     # creating the output file folder if absent
-    os.makedirs(output_files_folder_path, exist_ok=True)
+    os.makedirs(OUTPUT_FILES_FOLDER_PATH, exist_ok=True)
 
     # testing if the output file already exists(), to remove it and to start with a fresh file
     file_path = Path("utils_qa/utils_for_manual_and_semi_automated_testing/py_utils/tests/file_utils_test_data/input_files/string_replacement.txt")
