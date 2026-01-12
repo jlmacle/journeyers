@@ -16,6 +16,7 @@ import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_t
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
 
+
 /// {@category Pages}
 /// {@category Context analysis}
 /// The form page for the context analysis.
@@ -355,6 +356,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) {setState(() {_isIndividualAreaPerspectiveExpanded = value;}); },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+                maintainState: true, // to keep the state of the children widget
                 title:             
                 CustomHeading
                 (
@@ -485,6 +487,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) {setState(() {_isGroupAreaPerspectiveExpanded = value;}); },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+                maintainState: true, // to keep the state of the children widget
                 title:              
                 CustomHeading
                 (
