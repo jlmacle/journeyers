@@ -16,11 +16,12 @@ No issue noticed.","
 (app title and app bar title not voiced/
 scrolling not automatic with tabbing/
 no echoing of the error message/
-the expansion tiles are not voiced as expanded) ",X,"(Caps Lock + Right Arrow/Left arrow) + (Caps Lock + Space to activate interactive items)
+the expansion tiles are not voiced as expanded) ",X,"(Caps Lock + Right Arrow/Left arrow) + 
+(Caps Lock + Shift + Down Arrow) before expanding the expansion tile + 
+(Caps Lock + Space to expand the tiles/to activate interactive items)
 
 (scrolling not automatic with tabbing/
-hint texts and values selected not voiced/
-Caps Lock + Space doesn't expand the expansion tiles) ",X,"Tab/Shift Tab + Space/Enter key 
+hint texts and values selected not voiced) ",X,"Tab/Shift Tab + Space/Enter key 
 
 (scrolling not automatic with tabbing/
 no echoing of the error message) ","Tab/Shift Tab + Space/Enter key 
