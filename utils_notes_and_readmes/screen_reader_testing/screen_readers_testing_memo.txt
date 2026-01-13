@@ -1,3 +1,6 @@
+You might have better results with your OS and flutter upgraded.
+
+
 Testing with Narrator:
 Ctrl + Windows + Enter: to start/stop Narrator
 Ctrl + Arrow: navigation through the page
@@ -73,7 +76,7 @@ Flat navigation: VoiceOver moves sequentially through each item on the screen wh
 Three-finger double tap: to mute or unmute VoiceOver
 One finger dragged up from the bottom edge of the screen 
 until a vibration is felt or two rising tones are heard, then finger lifted: to go back to the home page (locked screen for example)
-Three-finger swipe down: to scroll up one page
+fff down: to scroll up one page
 Three-finger swipe up: to scroll down one page
 One finger dragged up from the bottom edge of the screen
 until the second vibration is felt or three tones are heard, then finger lifted: to open the App Switcher
