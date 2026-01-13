@@ -150,7 +150,11 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         maxLines: widget.textFieldMaxLines,
         maxLength: widget.textFieldMaxLength,
         buildCounter: widget.textFieldCounter,
-        onChanged: (String newValue) {quoteCheck(newValue); if (widget.maintainState) widget.parentWidgetTextFieldValueCallBackFunction(newValue);},
+        onChanged: (String newValue) 
+        {
+          quoteCheck(newValue); // updates textFieldEditingController.text
+          if (widget.maintainState) widget.parentWidgetTextFieldValueCallBackFunction(textFieldEditingController.text);
+        },
         // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
         onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
       ),
