@@ -9,6 +9,11 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 /// Also, the straight double quote is automatically removed from the text field.
 class CustomPaddedTextField extends StatefulWidget 
 {
+  /// If the text field maintains state, when the checkbox is unchecked for example.
+  final bool maintainState;
+  /// The start value for the text field.
+  final String textFieldStartValue;
+
   /// The alignment of the text.
   final TextAlign textAlignment;
 
@@ -48,6 +53,8 @@ class CustomPaddedTextField extends StatefulWidget
   const CustomPaddedTextField
   ({
     super.key,
+    this.maintainState = true,
+    this.textFieldStartValue = "",
     this.textAlignment = TextAlign.left,
     required this.textFieldHintText,
     this.textFieldMinLines = 1,
@@ -70,6 +77,13 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
   TextEditingController textFieldEditingController = TextEditingController();
+
+  @override
+  void initState() 
+  {
+    super.initState();
+    textFieldEditingController.text = widget.textFieldStartValue;
+  }
 
   @override
   void dispose() 
@@ -136,7 +150,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         maxLines: widget.textFieldMaxLines,
         maxLength: widget.textFieldMaxLength,
         buildCounter: widget.textFieldCounter,
-        onChanged: (String newValue) {quoteCheck(newValue);},
+        onChanged: (String newValue) {quoteCheck(newValue); if (widget.maintainState) widget.parentWidgetTextFieldValueCallBackFunction(newValue);},
         // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
         onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
       ),

@@ -86,12 +86,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
 class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField> 
 {
   bool _isChecked = false;
-
-  @override
-  void initState() 
-  {
-    super.initState();
-  }
+  String _textFieldValue = "";
 
   @override
   Widget build(BuildContext context) 
@@ -128,13 +123,14 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
         if (_isChecked)
           CustomPaddedTextField
           (
+            textFieldStartValue: _textFieldValue,
             textFieldHintText: widget.textFieldHintText,
             textFieldMinLines: widget.textFieldMinLines,
             textFieldMaxLines: widget.textFieldMaxLines,
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
-            parentWidgetTextFieldValueCallBackFunction:
-                widget.parentWidgetTextFieldValueCallBackFunction,
+            parentWidgetTextFieldValueCallBackFunction: 
+              (String text) {widget.parentWidgetTextFieldValueCallBackFunction(text);setState(() {_textFieldValue = text;});},
           ),
       ],
     );

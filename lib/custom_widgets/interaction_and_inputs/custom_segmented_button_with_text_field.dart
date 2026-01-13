@@ -91,6 +91,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
 class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButtonWithTextField> 
 {
   Set<String> _selection = {};
+  String _textFieldValue = "";
 
   @override
   Widget build(BuildContext context) 
@@ -147,8 +148,10 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             child: 
             CustomPaddedTextField
             (
+              textFieldStartValue: _textFieldValue,
               textFieldHintText: widget.textFieldHintText,
-              parentWidgetTextFieldValueCallBackFunction: widget.parentWidgetTextFieldValueCallBackFunction,
+              parentWidgetTextFieldValueCallBackFunction: 
+                (String text) {widget.parentWidgetTextFieldValueCallBackFunction(text); setState(() {_textFieldValue = text;});},
               textFieldMinLines: widget.textFieldMinLines,
               textFieldMaxLines: widget.textFieldMaxLines,
               textFieldCounter: widget.textFieldCounter,
