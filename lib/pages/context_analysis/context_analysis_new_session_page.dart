@@ -30,7 +30,8 @@ class _ContextAnalysisNewSessionPageState extends State<ContextAnalysisNewSessio
   FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     contextAnalysisNewSessionFocusNode.dispose();
     super.dispose();
   } 

@@ -80,6 +80,8 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage> 
 {
+  FocusNode appBarTitleFocusNode = FocusNode();
+
   /// A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
   /// Parameters: - [languageName]
   void _updateLocale(String languageName) 
@@ -98,13 +100,16 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() 
+  {
+    appBarTitleFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    final appLocalization = AppLocalizations.of(context);
-
-    // TODO: to move the focus node + dispose method
-    FocusNode appBarTitleFocusNode = FocusNode();
-
+    final appLocalization = AppLocalizations.of(context);   
     return 
     Scaffold
     (

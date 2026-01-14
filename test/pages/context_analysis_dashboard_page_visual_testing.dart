@@ -40,7 +40,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   FocusNode appBarTitleFocusNode = FocusNode();
 
-  // TODO: dispose method
+  @override
+  void dispose() {
+    appBarTitleFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

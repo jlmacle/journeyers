@@ -16,7 +16,8 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     groupProblemSolvingDashboardFocusNode.dispose();
     super.dispose();
   }

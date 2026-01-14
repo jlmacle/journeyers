@@ -82,7 +82,8 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     appBarTitleFocusNode.dispose();
     super.dispose();
   }

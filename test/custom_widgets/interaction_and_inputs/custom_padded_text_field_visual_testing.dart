@@ -46,9 +46,16 @@ class _HomePageState extends State<HomePage>
 
   String? _textContent;
 
-  // TODO: dispose method
   FocusNode appBarTitleFocusNode = FocusNode();
   FocusNode feedbackMsgFocusNode = FocusNode();
+
+  @override
+  void dispose() 
+  {
+    appBarTitleFocusNode.dispose();
+    feedbackMsgFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) 
