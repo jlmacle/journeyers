@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 /// {@category Custom widgets}
 /// A customizable focusable text.
-class CustomFocusableText extends StatelessWidget 
+
+class CustomFocusableText extends StatefulWidget
 {
+
   /// The text to display.
   final String text;
 
@@ -28,10 +30,22 @@ class CustomFocusableText extends StatelessWidget
   });
 
   @override
+  _CustomFocusableTextState createState() => _CustomFocusableTextState();
+}
+
+class _CustomFocusableTextState extends State<CustomFocusableText> 
+{
+  FocusNode textFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    textFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    FocusNode textFocusNode = FocusNode();
-
     return 
     Semantics
     (
@@ -40,7 +54,7 @@ class CustomFocusableText extends StatelessWidget
       Focus
       (
         focusNode: textFocusNode,
-        child: Text(text, style: textStyle, textAlign: textAlignment),
+        child: Text(widget.text, style: widget.textStyle, textAlign: widget.textAlignment),
       ),
     );
   }

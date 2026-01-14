@@ -32,10 +32,12 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> 
 {
-  String? eol;
+  FocusNode appBarTitleFocusNode = FocusNode();
 
   int _currentIndex = 0;
   bool _areBottomNavigationItemsFocusable = true;
+
+  String? eol;
 
   List<Widget> get _pages => 
   [
@@ -71,9 +73,15 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
+  void dispose() {
+    appBarTitleFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    FocusNode appBarTitleFocusNode = FocusNode();
+    
 
     if (kIsWeb) 
     {

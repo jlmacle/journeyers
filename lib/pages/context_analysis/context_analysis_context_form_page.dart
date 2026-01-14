@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
 
@@ -24,7 +25,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 // Scrolling down the questions while tab navigating is an issue if the bottom bar items are not excluded from focus.
 // When an expansion tile is expanded, the bottom bar items are excluded from focus.
 // If the user reaches the "save data" button, the bottom bar items are restored as accessible to focus. 
-// If the user tab navigates from the "save data" button toward the analysis title, the bottom bar items are excluded again from focus.
+// If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
 class ContextAnalysisContextFormPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
@@ -51,8 +52,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   PrintUtils pu = PrintUtils();
 
   // Focus nodes and data related to reaching nodes
-  final FocusNode _saveDataButtonNode = FocusNode();
-  final FocusNode _analysisTitleNode = FocusNode();
+  final FocusNode _saveDataButtonFocusNode = FocusNode();
+  final FocusNode _analysisTitleFocusNode = FocusNode();
   bool movingThroughButton = false;
 
   // Question labels for the form
@@ -325,7 +326,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     super.initState();
 
     // Listeners to know when some elements receive focus
-    _saveDataButtonNode.addListener(
+    _saveDataButtonFocusNode.addListener(
       (){
         pu.printd("Button used to save data reached");
         // restoring focus capability to the bottom items
@@ -335,7 +336,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
       }
     );
 
-    _analysisTitleNode.addListener(
+    _analysisTitleFocusNode.addListener(
       (){
         pu.printd("Analysis title text field reached");
         if (movingThroughButton)
@@ -353,7 +354,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   @override
   void dispose()
   {
-    _saveDataButtonNode.dispose();
+    _saveDataButtonFocusNode.dispose();
+    _analysisTitleFocusNode.dispose();
     super.dispose();
   }
 
@@ -682,7 +684,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                 [
                   TextField
                   (
-                    focusNode: _analysisTitleNode,
+                    focusNode: _analysisTitleFocusNode,
                     textAlign: TextAlign.center,
                     style: dataSavingStyle, // TODO: to clean
                     decoration: InputDecoration
@@ -693,9 +695,22 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     maxLength: 150,
                     onChanged: _setAnalysisTitleTextFieldState,
                   ),
-                  ElevatedButton
+                  Focus(
+                    onKeyEvent: (FocusNode node, KeyEvent event)
+                    {
+                      if(event.logicalKey == LogicalKeyboardKey.tab
+                          && HardwareKeyboard.instance.isShiftPressed)
+                          {
+                            pu.printd("Shift-tab detected");
+                            widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
+                            return KeyEventResult.ignored;
+                          }
+
+                      return KeyEventResult.ignored;
+                    },
+                  child: ElevatedButton
                   (
-                    focusNode: _saveDataButtonNode,
+                    focusNode: _saveDataButtonFocusNode,
                     // and removed only at data saving time
                     onPressed: print2CSV,
                     // https://gemini.google.com/app/d67570647b3006af
@@ -707,6 +722,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                       style: dataSavingStyle,
                       textAlign: TextAlign.center,
                     ),
+                  ),
                   ),
 
                   // Gap(20),
