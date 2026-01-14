@@ -14,13 +14,15 @@ No issue noticed.","
 
 (app bar title not voiced/
 no echoing of the error message/
-the expansion tiles are not voiced as expanded) ",X,"(Caps Lock + Right Arrow/Left arrow) + 
+expansion tiles titles not voiced/
+the expansion tiles are not voiced as expanded/folded) ",X,"(Caps Lock + Right Arrow/Left arrow) + 
 (Caps Lock + Shift + Down Arrow) before expanding the expansion tile + 
 (Caps Lock + Space to expand the tiles/to activate interactive items)
 
 (hint texts and values selected not voiced) ",X,"Tab/Shift Tab + Space/Enter key 
 
-(no echoing of the error message) ","Tab/Shift Tab + Space/Enter key 
+(no echoing of the error message) 
+","Tab/Shift Tab + Space/Enter key 
 
 (no echoing of the error message) ",X,X
 ,,,,,,,,,,
