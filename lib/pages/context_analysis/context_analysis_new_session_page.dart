@@ -6,7 +6,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 /// {@category Context analysis}
 /// The page for a new session of context analysis.
 
-class ContextAnalysisNewSessionPage extends StatelessWidget 
+class ContextAnalysisNewSessionPage extends StatefulWidget
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
@@ -20,10 +20,24 @@ class ContextAnalysisNewSessionPage extends StatelessWidget
     });
 
   @override
+  State<ContextAnalysisNewSessionPage> createState() => _ContextAnalysisNewSessionPageState();
+
+}
+
+class _ContextAnalysisNewSessionPageState extends State<ContextAnalysisNewSessionPage>
+{
+
+  FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    contextAnalysisNewSessionFocusNode.dispose();
+    super.dispose();
+  } 
+
+  @override
   Widget build(BuildContext context) 
   {
-    FocusNode contextAnalysisNewSessionFocusNode = FocusNode();
-
     return 
     Expanded
     (
@@ -35,7 +49,7 @@ class ContextAnalysisNewSessionPage extends StatelessWidget
         Focus
         (
           focusNode: contextAnalysisNewSessionFocusNode,
-          child: ContextAnalysisContextFormPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+          child: ContextAnalysisContextFormPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
         ),
       ),
     );

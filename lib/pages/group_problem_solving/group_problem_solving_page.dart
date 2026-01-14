@@ -13,11 +13,17 @@ class GroupProblemSolvingPage extends StatefulWidget
 
 class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
 {
+  FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    groupProblemSolvingDashboardFocusNode.dispose();
+    super.dispose();
+  }
+    
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
-
     return 
     Scaffold
     (

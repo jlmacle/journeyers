@@ -17,6 +17,8 @@ class ContextAnalysesDashboardPage extends StatefulWidget
 
 class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardPage> 
 {
+  FocusNode contextAnalysisDashboardFocusNode = FocusNode();
+
   bool _isDataLoading = true;
   Map<String, dynamic>? completeSessionData;
   List<dynamic>? listOfSessionData;
@@ -41,6 +43,12 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     _sessionDataRetrieval();
   }
 
+  @override
+  void dispose() {
+    contextAnalysisDashboardFocusNode.dispose();
+    super.dispose();
+  }
+
   void onEditPressed(String? csvFilePath) 
   {
     pu.printd("csvFilePath: $csvFilePath");
@@ -49,8 +57,6 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   @override
   Widget build(BuildContext context) 
   {
-    FocusNode contextAnalysisDashboardFocusNode = FocusNode();
-
     return _isDataLoading
         ? Center(child: CircularProgressIndicator())
         : Expanded
