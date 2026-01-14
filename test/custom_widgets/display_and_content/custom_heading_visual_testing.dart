@@ -20,23 +20,39 @@ void main()
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget 
+class MyTestingApp extends StatefulWidget
 {
   const MyTestingApp({super.key});
 
   @override
+  State<MyTestingApp> createState() => _MyTestingAppState();
+}
+
+class _MyTestingAppState extends State<MyTestingApp>  
+{
+  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode headingLevel1FocusNode = FocusNode();
+  FocusNode headingLevel2FocusNode = FocusNode();
+  FocusNode headingLevel3FocusNode = FocusNode();
+  FocusNode headingLevel4FocusNode = FocusNode();
+  FocusNode headingLevel5FocusNode = FocusNode();
+  FocusNode headingLevel6FocusNode = FocusNode();
+
+  @override void dispose() 
+  {
+    appBarTitleFocusNode.dispose();
+    headingLevel1FocusNode.dispose();
+    headingLevel2FocusNode.dispose();
+    headingLevel3FocusNode.dispose();
+    headingLevel4FocusNode.dispose();
+    headingLevel5FocusNode.dispose();
+    headingLevel6FocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    // TODO: to move the focus nodes + dispose method with stateful widget
-
-    FocusNode appBarTitleFocusNode = FocusNode();
-    FocusNode headingLevel1FocusNode = FocusNode();
-    FocusNode headingLevel2FocusNode = FocusNode();
-    FocusNode headingLevel3FocusNode = FocusNode();
-    FocusNode headingLevel4FocusNode = FocusNode();
-    FocusNode headingLevel5FocusNode = FocusNode();
-    FocusNode headingLevel6FocusNode = FocusNode();
-
     return 
     MaterialApp
     (
