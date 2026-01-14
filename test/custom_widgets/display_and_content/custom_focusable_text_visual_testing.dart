@@ -16,16 +16,27 @@ void main()
   runApp(const MyTestingApp());
 }
 
-class MyTestingApp extends StatelessWidget 
+class MyTestingApp extends StatefulWidget
 {
   const MyTestingApp({super.key});
 
   @override
+  State<MyTestingApp> createState() => _MyTestingAppState();
+}
+
+class _MyTestingAppState extends State<MyTestingApp> 
+{
+  FocusNode appBarTitleFocusNode = FocusNode();
+
+  @override void dispose() 
+  {
+    appBarTitleFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    // TODO: to move the focus node + dispose method with stateful widget
-    FocusNode appBarTitleFocusNode = FocusNode();
-
     return 
     MaterialApp
     (
