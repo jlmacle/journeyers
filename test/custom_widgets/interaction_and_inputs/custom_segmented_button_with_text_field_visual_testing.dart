@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) 
   {
+    // TODO: to move the focus nodes + dispose method
     FocusNode appBarTitleFocusNode = FocusNode();
     FocusNode introductoryMessageFocusNode = FocusNode();
     FocusNode informationalMessageFocusNode = FocusNode();

@@ -23,6 +23,7 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
+    // TODO: to move the focus node + dispose method with stateful widget
     FocusNode appBarTitleFocusNode = FocusNode();
 
     return 

@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage>
   {
     final appLocalization = AppLocalizations.of(context);
 
+    // TODO: to move the focus node + dispose method
     FocusNode appBarTitleFocusNode = FocusNode();
 
     return 
