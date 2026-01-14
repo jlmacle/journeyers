@@ -47,6 +47,8 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage> 
 {
+  FocusNode appBarTitleFocusNode = FocusNode();
+
   bool _isCheckboxChecked = false;
   String? _textFieldContent;
 
@@ -80,11 +82,14 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() {
+    appBarTitleFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    // TODO: to move the focus node + dispose method
-    FocusNode appBarTitleFocusNode = FocusNode();
-
     return 
     Scaffold
     (
