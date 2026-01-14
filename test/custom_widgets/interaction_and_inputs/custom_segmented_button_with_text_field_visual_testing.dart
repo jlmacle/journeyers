@@ -40,6 +40,10 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage> 
 {
+  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode introductoryMessageFocusNode = FocusNode();
+  FocusNode informationalMessageFocusNode = FocusNode();
+
   Set<String> _selectedValues = {"No value selected yet"};
   String? _textContent;
 
@@ -54,13 +58,17 @@ class _HomePageState extends State<HomePage>
   }
 
   @override
+  void dispose() 
+  {
+    appBarTitleFocusNode.dispose();
+    introductoryMessageFocusNode.dispose();
+    informationalMessageFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
-    // TODO: to move the focus nodes + dispose method
-    FocusNode appBarTitleFocusNode = FocusNode();
-    FocusNode introductoryMessageFocusNode = FocusNode();
-    FocusNode informationalMessageFocusNode = FocusNode();
-
     return 
     Scaffold
     (

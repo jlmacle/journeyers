@@ -44,7 +44,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     contextAnalysisDashboardFocusNode.dispose();
     super.dispose();
   }

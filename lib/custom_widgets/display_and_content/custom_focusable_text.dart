@@ -38,7 +38,8 @@ class _CustomFocusableTextState extends State<CustomFocusableText>
   FocusNode textFocusNode = FocusNode();
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     textFocusNode.dispose();
     super.dispose();
   }

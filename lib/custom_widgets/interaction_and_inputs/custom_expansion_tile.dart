@@ -91,7 +91,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
   FocusNode expandedAdditionalTextFocusNode = FocusNode();
 
   @override
-  void dispose() {
+  void dispose() 
+  {
     expandedAdditionalTextFocusNode.dispose();
     super.dispose();
   }
