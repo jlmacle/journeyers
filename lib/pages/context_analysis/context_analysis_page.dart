@@ -18,7 +18,16 @@ UserPreferencesUtils up = UserPreferencesUtils();
 /// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysesDashboardPage.
 class ContextAnalysisPage extends StatefulWidget 
 {
-  const ContextAnalysisPage({super.key});
+  /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
+  final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
+
+  /// A placeholder void callback function with a bool parameter
+  static void placeHolderFunctionBool(bool value) {}
+
+  const ContextAnalysisPage({
+    super.key,
+    this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
+    });
 
   @override
   State<ContextAnalysisPage> createState() => _ContextAnalysisPageState();
@@ -133,7 +142,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
           if (_preferencesLoading)
             Center(child: CircularProgressIndicator())
           else ...[
-            ContextAnalysisNewSessionPage(),
+            ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
 
             if (isContextAnalysisSessionDataSaved) ...[
               Divider(),

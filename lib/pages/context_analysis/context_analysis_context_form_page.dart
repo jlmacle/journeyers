@@ -20,9 +20,23 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 /// {@category Pages}
 /// {@category Context analysis}
 /// The form page for the context analysis.
+
+// Scrolling down the questions while tab navigating is an issue if the bottom bar items are not excluded from focus.
+// When an expansion tile is expanded, the bottom bar items are excluded from focus.
+// If the user reaches the "save data" button, the bottom bar items are restored as accessible to focus. 
+// If the user tab navigates from the "save data" button toward the analysis title, the bottom bar items are excluded again from focus.
 class ContextAnalysisContextFormPage extends StatefulWidget 
 {
-  const ContextAnalysisContextFormPage({super.key});
+  /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
+  final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
+
+  /// A placeholder void callback function with a bool parameter
+  static void placeHolderFunctionBool(bool value) {}
+
+  const ContextAnalysisContextFormPage({
+    super.key,
+    this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
+    });
 
   @override
   State<ContextAnalysisContextFormPage> createState() => _ContextAnalysisContextFormPageState();
@@ -36,6 +50,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
 
+  // Focus nodes and data related to reaching nodes
+  final FocusNode _saveDataButtonNode = FocusNode();
+  final FocusNode _analysisTitleNode = FocusNode();
+  bool movingThroughButton = false;
+
   // Question labels for the form
   ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
 
@@ -43,6 +62,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
 
   //*****************    State related code    **********************//
+
   bool _isIndividualAreaPerspectiveExpanded = false;
   bool _isGroupAreaPerspectiveExpanded = false;
 
@@ -301,6 +321,43 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    // Listeners to know when some elements receive focus
+    _saveDataButtonNode.addListener(
+      (){
+        pu.printd("Button used to save data reached");
+        // restoring focus capability to the bottom items
+        widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(true);
+        // data helping to know if the user tab navigates back up
+        movingThroughButton = true;
+      }
+    );
+
+    _analysisTitleNode.addListener(
+      (){
+        pu.printd("Analysis title text field reached");
+        if (movingThroughButton)
+        {
+          pu.printd("Tab navigating up");
+          // removing focus capability to the bottom items
+          widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
+          movingThroughButton = false;
+        }
+      }
+    );
+    
+  }
+
+  @override
+  void dispose()
+  {
+    _saveDataButtonNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
     final ScrollController scrollController = ScrollController();
@@ -354,7 +411,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               ( 
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 internalAddSemanticForOnTap: true, 
-                onExpansionChanged: (value) {setState(() {_isIndividualAreaPerspectiveExpanded = value;}); },
+                onExpansionChanged: (value) 
+                {
+                  setState(() {_isIndividualAreaPerspectiveExpanded = value;});
+                  widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+                  },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
                 maintainState: true, // to keep the state of the children widget
                 title:             
@@ -485,7 +546,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               ( 
                 expandedCrossAxisAlignment: CrossAxisAlignment.start,
                 internalAddSemanticForOnTap: true, 
-                onExpansionChanged: (value) {setState(() {_isGroupAreaPerspectiveExpanded = value;}); },
+                onExpansionChanged: (value) 
+                {setState(() 
+                {
+                  _isGroupAreaPerspectiveExpanded = value;
+                  widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+                });
+                },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
                 maintainState: true, // to keep the state of the children widget
                 title:              
@@ -613,17 +680,26 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               (
                 children: 
                 [
-                  CustomPaddedTextField
+                  TextField
                   (
-                    textAlignment: TextAlign.center,
-                    textFieldHintText: "Please enter a title for this analysis",
-                    textFieldMaxLength: 150,
-                    parentWidgetTextFieldValueCallBackFunction: _setAnalysisTitleTextFieldState,
+                    focusNode: _analysisTitleNode,
+                    textAlign: TextAlign.center,
+                    style: dataSavingStyle, // TODO: to clean
+                    decoration: InputDecoration
+                    (
+                      hint: Text("Please enter a title for this analysis"),
+                      hintStyle: dataSavingStyle, // TODO: to clean
+                    ),
+                    maxLength: 150,
+                    onChanged: _setAnalysisTitleTextFieldState,
                   ),
                   ElevatedButton
                   (
+                    focusNode: _saveDataButtonNode,
                     // and removed only at data saving time
                     onPressed: print2CSV,
+                    // https://gemini.google.com/app/d67570647b3006af
+                    
                     child: 
                     Text
                     (

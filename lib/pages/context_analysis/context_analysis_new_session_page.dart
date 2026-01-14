@@ -8,7 +8,16 @@ import 'package:journeyers/pages/context_analysis/context_analysis_context_form_
 
 class ContextAnalysisNewSessionPage extends StatelessWidget 
 {
-  const ContextAnalysisNewSessionPage({super.key});
+  /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
+  final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
+
+  /// A placeholder void callback function with a bool parameter
+  static void placeHolderFunctionBool(bool value) {}
+
+  const ContextAnalysisNewSessionPage({
+    super.key,
+    this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
+    });
 
   @override
   Widget build(BuildContext context) 
@@ -26,7 +35,7 @@ class ContextAnalysisNewSessionPage extends StatelessWidget
         Focus
         (
           focusNode: contextAnalysisNewSessionFocusNode,
-          child: ContextAnalysisContextFormPage(),
+          child: ContextAnalysisContextFormPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
         ),
       ),
     );
