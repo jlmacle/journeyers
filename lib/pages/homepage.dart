@@ -35,10 +35,19 @@ class _MyHomePageState extends State<MyHomePage>
   String? eol;
 
   int _currentIndex = 0;
+  bool _areBottomNavigationItemsFocusable = true;
 
-  final List<Widget> _pages = 
+  List<Widget> get _pages => 
   [
-    const ContextAnalysisPage(),
+    ContextAnalysisPage
+    (
+      parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: 
+      (bool boolValue) 
+      {
+        setState(() {_areBottomNavigationItemsFocusable = boolValue;});
+        pu.printd("_areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
+      }
+      ),
     const GroupProblemSolvingPage(),
   ];
 
@@ -138,28 +147,36 @@ class _MyHomePageState extends State<MyHomePage>
         ],
       ),
 
+
       bottomNavigationBar: 
-      BottomNavigationBar
-      (
-        backgroundColor: Colors.white,
-        currentIndex: _currentIndex,
-        onTap: (index) 
-        {
-          setState(() {_currentIndex = index;});
-        },
-        items: const 
-        [
-          BottomNavigationBarItem
-          (
-            icon: Icon(Icons.task_alt),
-            label: 'Context analysis',
-          ),
-          BottomNavigationBarItem
-          (
-            icon: Icon(Icons.group),
-            label: 'Group problem-solving',
-          ),
-        ],
+      // Used to remove focus to the items when the expansion tiles are expanded (context analysis only as of 26/01/13)
+      // Goal: to be able to scroll down the questions using tab navigation only
+      ExcludeFocus(
+        excluding: !_areBottomNavigationItemsFocusable,
+        child: 
+        BottomNavigationBar
+        (
+          
+          backgroundColor: Colors.white,
+          currentIndex: _currentIndex,
+          onTap: (index) 
+          {
+            setState(() {_currentIndex = index;});
+          },
+          items: const 
+          [
+            BottomNavigationBarItem
+            (
+              icon: Icon(Icons.task_alt),
+              label: 'Context analysis',
+            ),
+            BottomNavigationBarItem
+            (
+              icon: Icon(Icons.group),
+              label: 'Group problem-solving',
+            ),
+          ],
+        ),
       ),
     );
   }
