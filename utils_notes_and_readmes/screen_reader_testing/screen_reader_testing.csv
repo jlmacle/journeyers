@@ -10,24 +10,19 @@ No issue noticed.","
 + (double-tap to activate an element, for example checkbox or text field)
 + (double tap outside of the text field to dismiss the keyboard)
 + (three-finger swipe up/down to scroll up/down if necessary)
-
-<After adding the expansion tiles, data is not kept any more when the expansion tile is re-folded. Likely the same for the other OSs>","Tab/Shift Tab + Space/Enter key 
+","Tab/Shift Tab + Space/Enter key 
 
 (app title and app bar title not voiced/
-scrolling not automatic with tabbing/
 no echoing of the error message/
 the expansion tiles are not voiced as expanded) ",X,"(Caps Lock + Right Arrow/Left arrow) + 
 (Caps Lock + Shift + Down Arrow) before expanding the expansion tile + 
 (Caps Lock + Space to expand the tiles/to activate interactive items)
 
-(scrolling not automatic with tabbing/
-hint texts and values selected not voiced) ",X,"Tab/Shift Tab + Space/Enter key 
+(hint texts and values selected not voiced) ",X,"Tab/Shift Tab + Space/Enter key 
 
-(scrolling not automatic with tabbing/
-no echoing of the error message) ","Tab/Shift Tab + Space/Enter key 
+(no echoing of the error message) ","Tab/Shift Tab + Space/Enter key 
 
-(scrolling not automatic with tabbing/
-no echoing of the error message) ",X,X
+(no echoing of the error message) ",X,X
 ,,,,,,,,,,
 ,,,,,,,,,,
 ,,,,,,,,,,
