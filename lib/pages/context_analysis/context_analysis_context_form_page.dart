@@ -406,7 +406,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             (
               toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
               button: true, // with tooltip, useful for NVDA
-              tooltip: "Zone to click to expand data",
+              // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
               label: "Zone to click to expand data", // for Orca
               expanded: _isIndividualAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
               child:
@@ -542,7 +542,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
             ( 
               toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
               button: true, // with tooltip, useful for NVDA
-              tooltip: "Zone to click to expand data",
+              // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
               label: "Zone to click to expand data", // for Orca
               expanded: _isGroupAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
               child:
