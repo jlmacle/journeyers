@@ -1,6 +1,6 @@
 # Journeyers
 Most of our lives are spent in teams: household, school, workplace.<br>
-Our appreciability in these teams, and therefore our quality of life, depends on our ability to problem-solve toward lasting solutions.
+Our appreciability in these teams, and therefore our quality of life, depends on our ability to group problem-solve toward lasting solutions.
 
 This open source ed tech and assistive tech, proof-of-concept project <br>
 (with a goal of being cross-platform, cross-cultural, accessible, and offline-friendly), <br>
