@@ -84,6 +84,7 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+ios/Runner.xcodeproj/project.pbxproj
 
 # VSCode related
 .vscode/settings.json
@@ -132,5 +133,6 @@ utils_dev/doc_python/
 
 # L10n log file for untranslated messages
 untranslated-messages-file.txt
+
 
 
