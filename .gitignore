@@ -7,8 +7,6 @@
 .buildlog/
 .history
 
-
-
 # Flutter repo-specific
 /bin/cache/
 /bin/internal/bootstrap.bat
@@ -86,6 +84,7 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_export_environment.sh
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+ios/Runner.xcodeproj/project.pbxproj
 
 # VSCode related
 .vscode/settings.json
@@ -99,6 +98,7 @@ unlinked_spec.ds
 **/macos/Flutter/GeneratedPluginRegistrant.swift
 **/macos/Flutter/ephemeral
 **/xcuserdata/
+macos/Runner.xcodeproj/project.pbxproj
 
 # Windows
 **/windows/flutter/generated_plugin_registrant.cc
@@ -127,13 +127,12 @@ app.*.symbols
 # macOS related file
 .DS_Store
 
-# To define the project's root directory (useful for scripts)
-utils_qa/utils_semi_automated_testing/_utils_qa_config.json
-
 # Documentation folders
 utils_dev/doc_dart/
 utils_dev/doc_python/
 
 # L10n log file for untranslated messages
 untranslated-messages-file.txt
+
+
 

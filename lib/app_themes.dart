@@ -5,7 +5,7 @@ final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
 
 // Gaps and dividers
-final double postHeaderLevel2Gap = 20;
+final double postHeadingLevel2Gap = 20;
 final double preAndPostLevel2DividerGap = 20;
 final double preAndPostLevel3DividerGap = 15;
 final double level3AndSegmentedButtonGap = 15;
