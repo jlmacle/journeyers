@@ -691,6 +691,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     style: dataSavingStyle, // TODO: to clean
                     decoration: InputDecoration
                     (
+                      // TODO: keywords to add to the description (household, workplace, studies, other)
                       hint: Text("Please enter a title for this analysis"),
                       hintStyle: dataSavingStyle, // TODO: to clean
                     ),
@@ -713,7 +714,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   child: ElevatedButton
                   (
                     focusNode: _saveDataButtonFocusNode,
-                    // and removed only at data saving time
                     onPressed: print2CSV,
                     // https://gemini.google.com/app/d67570647b3006af
                     
