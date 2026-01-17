@@ -699,6 +699,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     onChanged: _setAnalysisTitleTextFieldState,
                   ),
                   Focus(
+                    // to detect a shift-tab navigation toward the questions
                     onKeyEvent: (FocusNode node, KeyEvent event)
                     {
                       if(event.logicalKey == LogicalKeyboardKey.tab
@@ -711,20 +712,20 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
                       return KeyEventResult.ignored;
                     },
-                  child: ElevatedButton
-                  (
-                    focusNode: _saveDataButtonFocusNode,
-                    onPressed: print2CSV,
-                    // https://gemini.google.com/app/d67570647b3006af
-                    
-                    child: 
-                    Text
+                    child: ElevatedButton
                     (
-                      'Click to save your data in CSV, \nspreadsheet-compatible format',
-                      style: dataSavingStyle,
-                      textAlign: TextAlign.center,
+                      focusNode: _saveDataButtonFocusNode,
+                      onPressed: print2CSV,
+                      // https://gemini.google.com/app/d67570647b3006af
+                      
+                      child: 
+                      Text
+                      (
+                        'Click to save your data in CSV, \nspreadsheet-compatible format',
+                        style: dataSavingStyle,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
                   ),
 
                   // Gap(20),
