@@ -107,6 +107,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   // Session title
   String _analysisTitle = "";
 
+  // Controller for the file keywords
+  TextEditingController _keywordsController = TextEditingController();
+  final List<String> _keywords = [];
+
   // Callback methods from the form page
   // Individual perspective
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});}
@@ -356,7 +360,21 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   {
     _saveDataButtonFocusNode.dispose();
     _analysisTitleFocusNode.dispose();
+    _keywordsController.dispose();
     super.dispose();
+  }
+
+  void addKeyword(String value)
+  {
+    var trimmedValue = value.trim();
+    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue))
+    {
+      setState(() 
+      {
+        _keywords.add(trimmedValue);
+        _keywordsController.clear();
+      });
+    }
   }
 
   @override
@@ -684,6 +702,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               (
                 children: 
                 [
+                  // Text field for analysis title
                   TextField
                   (
                     focusNode: _analysisTitleFocusNode,
@@ -692,12 +711,46 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     decoration: InputDecoration
                     (
                       // TODO: keywords to add to the description (household, workplace, studies, other)
-                      hint: Text("Please enter a title for this analysis"),
+                      hint: Text("Please enter a title for this analysis."),
                       hintStyle: dataSavingStyle, // TODO: to clean
                     ),
                     maxLength: 150,
                     onChanged: _setAnalysisTitleTextFieldState,
                   ),
+
+                  // File tagging
+                  Text("Please enter keywords to describe the file (Enter key to add)."),
+                  Padding(
+                    padding: const EdgeInsets.only(left:20, right:20, top:20, bottom:10),
+                    child: TextField
+                    (
+                      controller: _keywordsController,
+                      decoration: InputDecoration(hint: Text('Please add the keyword here.')),
+                      onSubmitted: addKeyword,
+                    ),
+                  ),
+                  // Display of the keywords
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Wrap
+                    (
+                      spacing: 8.0,
+                      runSpacing: 4.0,
+                      children: 
+                      [
+                        ..._keywords.map
+                        (
+                          (tag) => InputChip
+                                  (
+                                    label: Text(tag),
+                                    onDeleted: () {setState( () {_keywords.remove(tag);});}
+                                  )
+                        )
+                      ],
+                    ),
+                  ),
+
+                  // Button to start the data saving process
                   Focus(
                     // to detect a shift-tab navigation toward the questions
                     onKeyEvent: (FocusNode node, KeyEvent event)
