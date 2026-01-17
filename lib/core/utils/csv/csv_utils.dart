@@ -32,7 +32,7 @@ class CSVUtils {
   /// A set of the titles level 3 related to an individual perspective.
   Set<String> titlesLevel3ForTheIndividualPerspective = {};
 
-  /// A set of the titles level 3 related to a team perspective.
+  /// A set of the titles level 3 related to a group/team perspective.
   Set<String> titlesLevel3ForTheGroupPerspective = {};
 
   /// A set of the existing titles level 3 with sub items.
@@ -99,7 +99,7 @@ class CSVUtils {
       _q.level3TitleAnotherIssue,
     };
 
-    // A set of the titles level 3 related to a team perspective.
+    // A set of the titles level 3 related to a group/team perspective.
     titlesLevel3ForTheGroupPerspective = {
       _q.level3TitleGroupsProblematics,
       _q.level3TitleSameProblem,
@@ -212,8 +212,8 @@ class CSVUtils {
   //***************** Method building a list of pair of data for the later saving to CSV ***********************//
 
   /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
-  /// The data should be either the individual perspective data, or the team perspective data.
-  /// The individual perspective data and the team perspective data are planned to be written side by side in the CSV file.
+  /// The data should be either the individual perspective data, or the group/team perspective data.
+  /// The individual perspective data and the group/team perspective data are planned to be written side by side in the CSV file.
   List<dynamic> dataToPreCSV({
     required LinkedHashMap<String, dynamic> perspectiveData,
   }) {
@@ -491,7 +491,7 @@ class CSVUtils {
 
   //*************** Printing methods ***************//
 
-  /// Method used to print the individual perspective CSV data, or the team perspective CSV data, to a file.
+  /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
     required List<dynamic> csvDataIndividualPerspective,
