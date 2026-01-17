@@ -702,17 +702,16 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               (
                 children: 
                 [
-                  // Text field for analysis title
+                  // Text field for the analysis title
                   TextField
                   (
                     focusNode: _analysisTitleFocusNode,
                     textAlign: TextAlign.center,
-                    style: dataSavingStyle, // TODO: to clean
+                    style: analysisTitleStyle,
                     decoration: InputDecoration
                     (
-                      // TODO: keywords to add to the description (household, workplace, studies, other)
                       hint: Text("Please enter a title for this analysis."),
-                      hintStyle: dataSavingStyle, // TODO: to clean
+                      hintStyle: analysisTitleStyle,
                     ),
                     maxLength: 150,
                     onChanged: _setAnalysisTitleTextFieldState,
@@ -720,6 +719,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
                   // File tagging
                   Text("Please enter keywords to describe the file (Enter key to add)."),
+                  // TODO: pre-defined keywords as well (household, workplace, studies)
                   Padding(
                     padding: const EdgeInsets.only(left:20, right:20, top:20, bottom:10),
                     child: TextField
