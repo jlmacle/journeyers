@@ -108,7 +108,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   String _analysisTitle = "";
 
   // Controller for the file keywords
-  TextEditingController _keywordsController = TextEditingController();
+  final TextEditingController _keywordsController = TextEditingController();
   final List<String> _keywords = [];
 
   // Callback methods from the form page
@@ -167,7 +167,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   //*****************    Data structure related code    **********************//
   void dataStructureBuilding() 
   {
-    // Using LinkedHashMaps for an insertion-ordered hash-table based (source code).
+    // Using LinkedHashMaps for an insertion-ordered hash table based.
 
     //************************* Individual perspective ******************************/
     // Individual level: balance issue
