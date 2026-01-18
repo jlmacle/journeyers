@@ -1,4 +1,4 @@
-package com.example.ujourneyers
+package dev.journeyers
 
 import io.flutter.embedding.android.FlutterActivity
 
