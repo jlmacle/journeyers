@@ -165,6 +165,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _setAnalysisTitleTextFieldState(String newValue) {setState(() {_analysisTitle = newValue;});}
 
   //*****************    Data structure related code    **********************//
+  
+  // Method used to store the data entered in the checkboxes, text fields and segmented buttons
   void dataStructureBuilding() 
   {
     // Using LinkedHashMaps for an insertion-ordered hash table based.
@@ -320,8 +322,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     pu.printd("pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
-    {
-      du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, pathToCSVFile: pathToCSVFile);
+    {      
+      du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
     }
   }
 
