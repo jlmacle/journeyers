@@ -30,6 +30,12 @@ final TextStyle dataSavingStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
+final TextStyle analysisTitleStyle = TextStyle
+(
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
 final TextStyle dialogStyle = TextStyle
 (
   color: Colors.black,
