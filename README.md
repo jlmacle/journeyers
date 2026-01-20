@@ -3,7 +3,7 @@ Most of our lives are spent in teams: household, school, workplace. . . .<br>
 Our appreciability in these teams, and therefore our quality of life, depends on our ability to group problem-solve toward lasting solutions.
 
 This open source ed tech and assistive tech, proof-of-concept project <br>
-(with a goal of being cross-platform, cross-cultural, accessible, and offline-friendly), <br>
+(with a goal of being cross-platform, multilingual, accessible, and offline-friendly), <br>
 is meant to support our group problem-solving processes, and to help us reach lasting solutions.<br>
 <br>
 Educational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
