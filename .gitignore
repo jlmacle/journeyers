@@ -88,6 +88,7 @@ ios/Runner.xcodeproj/project.pbxproj
 
 # VSCode related
 .vscode/settings.json
+.vscode/launch.json
 
 # IDE related
 .idea/
@@ -134,3 +135,4 @@ untranslated-messages-file.txt
 
 # Configuration files
 devtools_options.yaml
+
