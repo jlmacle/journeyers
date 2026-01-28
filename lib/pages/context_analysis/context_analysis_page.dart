@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_context_form_page.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -150,8 +151,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
                 padding: EdgeInsets.only(top:elevatedButtonPaddingTop, bottom: elevatedButtonPaddingBottom),
                 child: ElevatedButton
                 (
-                  // TODO: to complete
-                  onPressed: () {},
+                  onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
                   child: Text("Click to start a new context analysis"),
                 ),
               ),
