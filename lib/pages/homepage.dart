@@ -39,10 +39,13 @@ class _MyHomePageState extends State<MyHomePage>
 
   String? eol;
 
+  final GlobalKey<ContextAnalysisPageState> _contextAnalysisKey = GlobalKey();
+
   List<Widget> get _pages => 
   [
     ContextAnalysisPage
     (
+      key: _contextAnalysisKey,
       parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: 
       (bool boolValue) 
       {
@@ -70,6 +73,14 @@ class _MyHomePageState extends State<MyHomePage>
     {
       widget.parentWidgetOnLanguageSelectedCallBackFunction(Locale(localeLangCodeFromLangName!));
     }
+  }
+
+  void _handleContextAnalysisTap()
+  {
+    pu.printd("_handleContextAnalysisTap");
+    // re-pulling the preferences from the context analysis page
+    _contextAnalysisKey.currentState?.getPreferences();
+    
   }
 
   @override
@@ -171,6 +182,11 @@ class _MyHomePageState extends State<MyHomePage>
           onTap: (index) 
           {
             setState(() {_currentIndex = index;});
+            switch(index)
+            {
+              case 0:
+                _handleContextAnalysisTap();
+            }
           },
           items: const 
           [

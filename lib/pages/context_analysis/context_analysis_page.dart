@@ -31,10 +31,11 @@ class ContextAnalysisPage extends StatefulWidget
     });
 
   @override
-  State<ContextAnalysisPage> createState() => _ContextAnalysisPageState();
+  State<ContextAnalysisPage> createState() => ContextAnalysisPageState();
 }
 
-class _ContextAnalysisPageState extends State<ContextAnalysisPage> 
+// TODO: to re-make private later
+class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   bool _preferencesLoading = true;
   late bool? _isStartMessageAlreadyAcknowledged;
@@ -43,8 +44,10 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   // to help reset the start message status
   final bool _resetStartMessage = false;
 
-  _getPreferences() async 
+// TODO: to re-make private later
+  getPreferences() async 
   {
+    pu.printd("Entering getPreferences");
     _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
     _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
 
@@ -117,7 +120,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   void initState() 
   {
     super.initState();
-    _getPreferences();
+    getPreferences();
   }
 
   @override
