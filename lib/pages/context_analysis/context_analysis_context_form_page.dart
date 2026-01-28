@@ -11,6 +11,7 @@ import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
@@ -50,6 +51,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
+  UserPreferencesUtils upu = UserPreferencesUtils();
 
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
@@ -324,6 +326,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     if (pathToCSVFile != null)
     {      
       du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
+      upu.saveSessionDataHasBeenSaved();
     }
   }
 
@@ -720,7 +723,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   ),
 
                   // File tagging
-                  Text("Please enter keywords to describe the file (Enter key to add)."),
+                  Text("Please enter keywords to describe the file (+ Enter key)."),
                   // TODO: pre-defined keywords as well (household, workplace, studies)
                   Padding(
                     padding: const EdgeInsets.only(left:20, right:20, top:20, bottom:10),

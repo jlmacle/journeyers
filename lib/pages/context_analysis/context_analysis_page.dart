@@ -37,7 +37,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
 {
   bool _preferencesLoading = true;
   late bool? _isStartMessageAlreadyAcknowledged;
-  bool isContextAnalysisSessionDataSaved = false;
+  late bool _wasContextAnalysisSessionDataSaved;
 
   // to help reset the start message status
   final bool _resetStartMessage = false;
@@ -45,8 +45,11 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   _getPreferences() async 
   {
     _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
+    _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
+
     setState(() {_preferencesLoading = false;});
     pu.printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
+    pu.printd("_wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
 
     if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted) 
     {
@@ -142,12 +145,21 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
           if (_preferencesLoading)
             Center(child: CircularProgressIndicator())
           else ...[
-            ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
-
-            if (isContextAnalysisSessionDataSaved) ...[
+            if (_wasContextAnalysisSessionDataSaved) ...[
+              Padding(
+                padding: EdgeInsets.only(top:elevatedButtonPaddingTop, bottom: elevatedButtonPaddingBottom),
+                child: ElevatedButton
+                (
+                  // TODO: to complete
+                  onPressed: () {},
+                  child: Text("Click to start a new context analysis"),
+                ),
+              ),
               Divider(),
               ContextAnalysesDashboardPage(),
-            ],
+            ]
+            else ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+
           ],
         ],
       ),
