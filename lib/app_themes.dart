@@ -4,13 +4,17 @@ import 'package:flutter/material.dart';
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
 
-// Gaps and dividers
+// Gaps for the context analysis form
 final double postHeadingLevel2Gap = 20;
 final double preAndPostLevel2DividerGap = 20;
 final double preAndPostLevel3DividerGap = 15;
 final double level3AndSegmentedButtonGap = 15;
 final double betweenLevel2DividerThickness = 3;
 final double betweenLevel3DividerThickness = 1;
+
+// Elevated buttons padding
+final double elevatedButtonPaddingTop = 20;
+final double elevatedButtonPaddingBottom = 20;
 
 // Text styles
 const TextStyle constStyle = TextStyle(
