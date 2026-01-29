@@ -113,9 +113,16 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   final TextEditingController _keywordsController = TextEditingController();
   final List<String> _keywords = [];
 
+  // Global keys to change text decoration
+  final GlobalKey _balanceIssueCheckboxKey = GlobalKey();
+
   // Callback methods from the form page
   // Individual perspective
-  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});}
+  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});
+    pu.printd("text deco update");
+  }
 
   _setStudiesHouseholdBalanceTextFieldState(String newValue) {setState(() {_studiesHouseholdBalanceTextFieldContent = newValue;});}
 
@@ -460,6 +467,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   ),
                   CustomCheckBoxWithTextField
                   (
+                    key: _balanceIssueCheckboxKey,
                     checkboxText: q.level3TitleBalanceIssueItem1,
                     textFieldHintText: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
@@ -708,7 +716,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     style: analysisTitleStyle,
                     decoration: InputDecoration
                     (
-                      // TODO: to understand why the hint text is not centered while the hello world code proves feasibility
                       hint: Center(child: Text("Please enter a title for this analysis.")),
                       hintStyle: analysisTitleStyle,                    
                     ),
