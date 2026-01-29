@@ -77,10 +77,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   void _handleContextAnalysisTap()
   {
-    pu.printd("_handleContextAnalysisTap");
     // re-pulling the preferences from the context analysis page
-    _contextAnalysisKey.currentState?.getPreferences();
-    
+    _contextAnalysisKey.currentState?.getPreferences();    
   }
 
   @override
