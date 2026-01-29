@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
 
-// Gaps for the context analysis form
+// Gaps: gaps for the context analysis form
 final double postHeadingLevel2Gap = 20;
 final double preAndPostLevel2DividerGap = 20;
 final double preAndPostLevel3DividerGap = 15;
@@ -12,12 +12,12 @@ final double level3AndSegmentedButtonGap = 15;
 final double betweenLevel2DividerThickness = 3;
 final double betweenLevel3DividerThickness = 1;
 
-// Elevated buttons padding
+// Paddings: elevated buttons padding
 final double elevatedButtonPaddingTop = 20;
 final double elevatedButtonPaddingBottom = 20;
 
-// Text styles
-const TextStyle constStyle = TextStyle(
+// Text styles: generic text styles
+const TextStyle constStyleDefaultHeadingStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.normal,
   color: Color(0xFF000000));
@@ -28,12 +28,16 @@ final TextStyle feedbackMessageStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle elevatedButtonText = TextStyle
+final TextStyle elevatedButtonTextStyle = TextStyle
 (
   fontSize: 20,
   fontWeight: FontWeight.normal,
 );
 
+// Similar to a heading level 2
+final TextStyle customExpansionTileTextStyle = appTheme.textTheme.headlineMedium!;
+
+// Text styles: context analysis page related styles
 final TextStyle analysisTitleStyle = TextStyle
 (
   fontSize: 20,
@@ -47,30 +51,32 @@ final TextStyle dialogStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle dialogStyleAcknowledged = TextStyle
+final TextStyle dialogAcknowledgedStyle = TextStyle
 (
   color: Colors.purple.shade400,
   fontSize: 20,
 );
 
-// Input decorations
-const String pleaseDescribeTextHousehold =
+// Text field hints: context analysis page related text field hints
+const String pleaseDescribeTextHouseholdHint =
     'Please describe the past outcomes for the household, '
     'if some seem to have been out of their comfort zone for too long, '
     'and the more desirable outcomes for the household.';
 
-const String pleaseDescribeTextWorkplace =
+const String pleaseDescribeTextWorkplaceHint =
     'Please describe the past outcomes for the workplace, '
     'if some seem to have been out of their comfort zone for too long, '
     'and the more desirable outcomes for the workplace and for the household.';
 
-const String pleaseDevelopOrTakeNotes = 'Please develop.';
+const String pleaseDevelopOrTakeNotesHint = 'Please develop.';
 
-const String pleaseDescribeTextGroups =
+const String pleaseDescribeTextGroupsHint =
     'Please describe the problem(s) that the groups/teams are trying to solve.';
 
-const String textFieldHintText = "Please enter some text";
+const String textFieldHintTextHint = "Please enter some text";
 
+
+// ThemeData
 final ThemeData appTheme = ThemeData
 (
   scaffoldBackgroundColor:

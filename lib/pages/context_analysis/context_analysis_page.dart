@@ -101,7 +101,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                   up.saveStartMessageAcknowledgement();
                   Navigator.pop(context);
                 },
-                child: Text('Acknowledged', style: dialogStyleAcknowledged),
+                child: Text('Acknowledged', style: dialogAcknowledgedStyle),
               ),
             ],
           );
@@ -155,7 +155,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: ElevatedButton
                 (
                   onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
-                  child: Text("Click to start a new context analysis", style: elevatedButtonText),
+                  child: Text("Click to start a new context analysis", style: elevatedButtonTextStyle),
                 ),
               ),
               Divider(),

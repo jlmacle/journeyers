@@ -24,7 +24,7 @@ class CustomHeading extends StatelessWidget
     super.key,
     required this.headingText,
     required this.headingLevel,
-    this.headingStyle = constStyle,
+    this.headingStyle = constStyleDefaultHeadingStyle,
     this.headingAlignment = TextAlign.center,
   })
   {
