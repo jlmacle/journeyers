@@ -715,22 +715,24 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     style: analysisTitleStyle,
                     decoration: InputDecoration
                     (
+                      // TODO: to understand why the hint text is not centered while the hello world code proves feasibility
                       hint: Text("Please enter a title for this analysis."),
-                      hintStyle: analysisTitleStyle,
+                      hintStyle: analysisTitleStyle,                    
                     ),
                     maxLength: 150,
                     onChanged: _setAnalysisTitleTextFieldState,
                   ),
 
                   // File tagging
-                  Text("Please enter keywords to describe the file (+ Enter key)."),
-                  // TODO: pre-defined keywords as well (household, workplace, studies)
+                  Text("Please enter keywords to describe the file (+ Enter key).", textAlign: TextAlign.center),
+                  // TODO: to offer pre-defined keywords as well (household, workplace, studies)
                   Padding(
                     padding: const EdgeInsets.only(left:20, right:20, top:20, bottom:10),
                     child: TextField
                     (
                       controller: _keywordsController,
                       decoration: InputDecoration(hint: Text('Please add the keyword here.')),
+                      textAlign: TextAlign.center,
                       onSubmitted: addKeyword,
                     ),
                   ),
