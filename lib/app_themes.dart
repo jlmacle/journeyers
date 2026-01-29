@@ -22,10 +22,11 @@ const TextStyle constStyleDefaultHeadingStyle = TextStyle(
   fontWeight: FontWeight.normal,
   color: Color(0xFF000000));
 
-final TextStyle feedbackMessageStyle = TextStyle
+const TextStyle unselectedCheckboxTextStyle = TextStyle
 (
-  fontSize: 18,
-  fontWeight: FontWeight.normal,
+  fontSize: 24,
+  color: Colors.black,
+  decoration: TextDecoration.none
 );
 
 final TextStyle elevatedButtonTextStyle = TextStyle
@@ -34,8 +35,13 @@ final TextStyle elevatedButtonTextStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-// Similar to a heading level 2
-final TextStyle customExpansionTileTextStyle = appTheme.textTheme.headlineMedium!;
+final TextStyle customExpansionTileTextStyle = appTheme.textTheme.headlineMedium!; // Similar to a heading level 2
+
+final TextStyle feedbackMessageStyle = TextStyle
+(
+  fontSize: 18,
+  fontWeight: FontWeight.normal,
+);
 
 // Text styles: context analysis page related styles
 final TextStyle analysisTitleStyle = TextStyle
