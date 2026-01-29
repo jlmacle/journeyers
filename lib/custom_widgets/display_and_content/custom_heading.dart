@@ -51,6 +51,6 @@ class CustomHeading extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return CustomFocusableText(text: headingText, textStyle: headingStyle);
+    return CustomFocusableText(text: headingText, textStyle: headingStyle, textAlignment: headingAlignment);
   }
 }
