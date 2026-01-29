@@ -28,7 +28,7 @@ final TextStyle feedbackMessageStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle dataSavingStyle = TextStyle
+final TextStyle elevatedButtonText = TextStyle
 (
   fontSize: 20,
   fontWeight: FontWeight.normal,
