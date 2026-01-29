@@ -47,7 +47,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 // TODO: to re-make private later
   getPreferences() async 
   {
-    pu.printd("Entering getPreferences");
+    pu.printd("\nEntering getPreferences");
     _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
     _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
 
