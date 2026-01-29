@@ -34,7 +34,6 @@ class ContextAnalysisPage extends StatefulWidget
   State<ContextAnalysisPage> createState() => ContextAnalysisPageState();
 }
 
-// TODO: to re-make private later
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   bool _preferencesLoading = true;
@@ -44,7 +43,6 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   // to help reset the start message status
   final bool _resetStartMessage = false;
 
-// TODO: to re-make private later
   getPreferences() async 
   {
     pu.printd("\nEntering getPreferences");
