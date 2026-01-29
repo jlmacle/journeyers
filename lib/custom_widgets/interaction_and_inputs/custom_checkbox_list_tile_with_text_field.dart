@@ -15,9 +15,6 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// The style of the text.
   final TextStyle checkboxTextStyle;
 
-  /// The color of the text.
-  final Color checkboxTextColor;
-
   /// The alignment of the text.
   final TextAlign checkboxTextAlignment;
 
@@ -65,7 +62,6 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     super.key,
     required this.checkboxText,
     this.checkboxTextStyle = unselectedCheckboxTextStyle,
-    this.checkboxTextColor = Colors.black,
     this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
     this.checkboxIsChecked = false,
