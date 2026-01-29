@@ -106,14 +106,13 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
     return 
     Column
     (
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: 
       [
         SegmentedButton<String>
         (
           multiSelectionEnabled: widget.multiSelectionEnabled,
           emptySelectionAllowed: widget.emptySelectionAllowed,
-
           segments: 
           <ButtonSegment<String>>
           [

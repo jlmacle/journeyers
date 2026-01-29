@@ -55,7 +55,7 @@ class CustomPaddedTextField extends StatefulWidget
     super.key,
     this.maintainState = true,
     this.textFieldStartValue = "",
-    this.textAlignment = TextAlign.left,
+    this.textAlignment = TextAlign.center,
     required this.textFieldHintText,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,

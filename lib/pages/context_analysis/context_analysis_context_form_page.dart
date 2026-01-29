@@ -435,7 +435,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               child:
               ExpansionTile
               ( 
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                expandedCrossAxisAlignment: CrossAxisAlignment.center,
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) 
                 {
@@ -457,7 +457,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleBalanceIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomCheckBoxWithTextField
                   (
@@ -496,7 +495,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleWorkplaceIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomCheckBoxWithTextField
                   (
@@ -521,7 +519,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleLegacyIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomCheckBoxWithTextField
                   (
@@ -539,8 +536,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleAnotherIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
-                  ),
+                   ),
                   CustomPaddedTextField
                   (
                     textFieldHintText: pleaseDevelopOrTakeNotesHint,
@@ -571,7 +567,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               child:
               ExpansionTile
               ( 
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                expandedCrossAxisAlignment: CrossAxisAlignment.center,
+                expandedAlignment: Alignment.center,
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) 
                 {setState(() 
@@ -594,7 +591,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleGroupsProblematics,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomPaddedTextField
                   (
@@ -609,7 +605,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleSameProblem,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
@@ -632,7 +627,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleHarmonyAtHome,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
@@ -655,7 +649,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleAppreciabilityAtWork,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
@@ -668,7 +661,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
                   ),
-
+                  
                   Gap(preAndPostLevel3DividerGap),
                   Divider(thickness: betweenLevel3DividerThickness),
                   Gap(preAndPostLevel3DividerGap),
@@ -678,8 +671,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleIncomeEarningAbility,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
+                  Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
@@ -716,7 +709,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     decoration: InputDecoration
                     (
                       // TODO: to understand why the hint text is not centered while the hello world code proves feasibility
-                      hint: Text("Please enter a title for this analysis."),
+                      hint: Center(child: Text("Please enter a title for this analysis.")),
                       hintStyle: analysisTitleStyle,                    
                     ),
                     maxLength: 150,
@@ -731,7 +724,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     child: TextField
                     (
                       controller: _keywordsController,
-                      decoration: InputDecoration(hint: Text('Please add the keyword here.')),
+                      decoration: InputDecoration(hint: Center(child: Text('Please add the keyword here.'))),
                       textAlign: TextAlign.center,
                       onSubmitted: addKeyword,
                     ),

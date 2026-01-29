@@ -65,7 +65,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     required this.checkboxText,
     this.checkboxTextFontSize = 24,
     this.checkboxTextColor = Colors.black,
-    this.checkboxTextAlignment = TextAlign.left,
+    this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
     this.checkboxIsChecked = false,
     required this.textFieldHintText,
