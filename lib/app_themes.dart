@@ -131,7 +131,7 @@ final ThemeData appTheme = ThemeData
       fontWeight: FontWeight.bold,
     ),
     // https://api.flutter.dev/flutter/material/TextTheme/headlineSmall.html
-    headlineSmall: TextStyle(color: Colors.black, fontSize: 22),
+    headlineSmall: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
     // https://api.flutter.dev/flutter/material/TextTheme/titleLarge.html
     titleLarge: TextStyle(color: Colors.black, fontSize: 20),
     // https://api.flutter.dev/flutter/material/TextTheme/titleMedium.html
