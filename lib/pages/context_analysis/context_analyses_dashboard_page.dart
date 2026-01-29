@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_expansion_tile.dart';
@@ -83,7 +84,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     CustomExpansionTile
                     (
                       // TODO: code to complete
-                      text:"${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
+                      text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
+                      textStyle: customExpansionTileTextStyle,
                       expandedContentText: "",
                       parentWidgetOnEditPressedCallBackFunction: () {onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);},
                       parentWidgetOnDeletePressedCallBackFunction: () {},
