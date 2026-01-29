@@ -780,7 +780,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                       Text
                       (
                         'Click to save your data in CSV, \nspreadsheet-compatible format',
-                        style: dataSavingStyle,
+                        style: elevatedButtonText,
                         textAlign: TextAlign.center,
                       ),
                     ),
