@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/app_themes.dart';
 
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_text.dart';
@@ -11,8 +12,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// The text of the checkbox.
   final String checkboxText;
 
-  /// The font size of the text.
-  final double checkboxTextFontSize;
+  /// The style of the text.
+  final TextStyle checkboxTextStyle;
 
   /// The color of the text.
   final Color checkboxTextColor;
@@ -63,7 +64,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   ({
     super.key,
     required this.checkboxText,
-    this.checkboxTextFontSize = 24,
+    this.checkboxTextStyle = unselectedCheckboxTextStyle,
     this.checkboxTextColor = Colors.black,
     this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
@@ -91,12 +92,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
   @override
   Widget build(BuildContext context) 
   {
-    final TextStyle checkboxTextStyle = 
-                    TextStyle
-                    (
-                      fontSize: widget.checkboxTextFontSize,
-                      color: widget.checkboxTextColor,
-                    );
+    
 
     return 
     Column
@@ -109,7 +105,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           CustomFocusableText
           (
             text: widget.checkboxText,
-            textStyle: checkboxTextStyle,
+            textStyle: widget.checkboxTextStyle,
             textAlignment: widget.checkboxTextAlignment,
           ),
           value: _isChecked,
