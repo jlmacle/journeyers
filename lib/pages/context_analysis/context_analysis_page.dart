@@ -130,7 +130,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
       body: 
       Column
       (
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: 
         [
           if (_resetStartMessage)
@@ -156,7 +156,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                   child: Text("Click to start a new context analysis", style: elevatedButtonTextStyle),
                 ),
               ),
-              Divider(),
+              Divider(thickness: 3),
               ContextAnalysesDashboardPage(),
             ]
             else ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),

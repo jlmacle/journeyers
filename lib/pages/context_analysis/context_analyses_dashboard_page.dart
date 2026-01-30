@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 
 /// {@category Pages}
@@ -65,29 +66,34 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
             mainAxisAlignment: MainAxisAlignment.start,
             children: 
             [
-                ListView.builder
-                (
-                  shrinkWrap: true,
-                  itemCount: listOfSessionData?.length,
-                  itemBuilder: (content, index) 
-                  {
-                    Map<String, dynamic>? sessionDataAsMap = listOfSessionData?[index];
-                    return 
-                    CustomExpansionTile
-                    (
-                      // TODO: code to complete
-                      text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
-                      textStyle: customExpansionTileTextStyle,
-                      expandedContentText: "",
-                      parentWidgetOnEditPressedCallBackFunction: 
-                        () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
-                      parentWidgetOnDeletePressedCallBackFunction: 
-                        () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
-                      parentWidgetOnSharePressedCallBackFunction: 
-                        () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));},
-                    );
-                  },
-                ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 20),
+                child: CustomHeading(headingText: "Previous session data", headingLevel: 2),
+              ),
+
+              ListView.builder
+              (
+                shrinkWrap: true,
+                itemCount: listOfSessionData?.length,
+                itemBuilder: (content, index) 
+                {
+                  Map<String, dynamic>? sessionDataAsMap = listOfSessionData?[index];
+                  return 
+                  CustomExpansionTile
+                  (
+                    // TODO: code to complete
+                    text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
+                    textStyle: customExpansionTileTextStyle,
+                    expandedContentText: "",
+                    parentWidgetOnEditPressedCallBackFunction: 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
+                    parentWidgetOnDeletePressedCallBackFunction: 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
+                    parentWidgetOnSharePressedCallBackFunction: 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));},
+                  );
+                },
+              ),
             ],
           );
   }
