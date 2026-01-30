@@ -54,7 +54,12 @@ final TextStyle elevatedButtonTextStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle customExpansionTileTextStyle = appTheme.textTheme.headlineMedium!; // Similar to a heading level 2
+final TextStyle customExpansionTileTextStyle = TextStyle
+(
+  color: Colors.black,
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+);
 
 final TextStyle feedbackMessageStyle = TextStyle
 (
@@ -156,7 +161,7 @@ final ThemeData appTheme = ThemeData
     // https://api.flutter.dev/flutter/material/TextTheme/titleMedium.html
     titleMedium: TextStyle(color: Colors.black, fontSize: 18),
     // https://api.flutter.dev/flutter/material/TextTheme/titleSmall.html
-    titleSmall: TextStyle(color: Colors.black, fontSize: 16),
+    titleSmall: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
     bodyLarge: TextStyle(color: Colors.black),
     bodyMedium: TextStyle(color: Colors.black),
     bodySmall: TextStyle(color: Colors.black),
