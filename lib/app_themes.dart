@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO: to re-organize and clean
+
 // Colors
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
@@ -237,10 +239,25 @@ final ThemeData appTheme = ThemeData
     ),
   ),
 
+  // to remove the emerald green color from appearing
+  chipTheme: ChipThemeData
+  (
+    backgroundColor: paleCyan,
+    labelStyle: const TextStyle(color: Colors.black), 
+    surfaceTintColor: Colors.transparent, 
+    
+    selectedColor: paleCyan, 
+    checkmarkColor: Colors.black,
+    
+    brightness: Brightness.light, 
+  ),
+
   bannerTheme: MaterialBannerThemeData
   (
     backgroundColor: const Color.fromARGB(255, 13, 13, 49),
   ),
+
+
 
   useMaterial3: true,
 );
