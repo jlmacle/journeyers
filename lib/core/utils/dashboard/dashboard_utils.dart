@@ -17,9 +17,6 @@ class DashboardUtils {
   /// String used to communicate the context of the group problem-solvings.
   static String groupProblemSolvingsContext = "groupProblemSolvingData";
 
-  /// The root key for the session data stored for the dashboards.
-  static String keyRecords = 'records';
-
   /// The key for the session data title.
   static String keyTitle = 'title';
 
@@ -49,7 +46,7 @@ class DashboardUtils {
     if (!sessionFile.existsSync()) {
       sessionFile.createSync();
       // Adding an empty map to the file
-      Map<String, List<Map<String, String>>> records = {keyRecords: []};
+      List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
       _pu.printd(
@@ -74,13 +71,11 @@ class DashboardUtils {
     String updatedContent = "";
     // Reading and decoding the records content
     String jsonContent = file.readAsStringSync();
-    Map<String, dynamic> records = jsonDecode(jsonContent);
-    var recordsList = records[keyRecords];
+    List<dynamic> recordsList = jsonDecode(jsonContent);
     // Adding to the records
     recordsList.add(sessionData);
-    records[keyRecords] = recordsList;
     // Encoding the data to String
-    updatedContent = jsonEncode(records);
+    updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
     _pu.printd('Session data: $sessionData saved to: ${file.path}');
@@ -130,10 +125,10 @@ class DashboardUtils {
   /// This data is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// In the case of the context analyses, the data retrieved has the format:
   /// {"records":\[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]}
-  Future<Map<String, dynamic>> retrieveAllDashboardSessionData({
+  Future<List<dynamic>> retrieveAllDashboardSessionData({
     required String typeOfContextData,
   }) async {
-    Map<String, dynamic> completeSessionData;
+    List<dynamic> completeSessionData;
     File sessionFile = await getSessionFile(
       typeOfContextData: typeOfContextData,
     );

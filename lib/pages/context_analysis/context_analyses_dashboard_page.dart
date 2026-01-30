@@ -30,10 +30,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   void _sessionDataRetrieval() async 
   {
-    completeSessionData = await du.retrieveAllDashboardSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext);
+    listOfSessionData = await du.retrieveAllDashboardSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext);
     setState(() {
       _isDataLoading = false;
-      listOfSessionData = completeSessionData?.values.first;
     });
   }
 
