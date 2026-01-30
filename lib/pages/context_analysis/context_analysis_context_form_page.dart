@@ -114,43 +114,76 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   final List<String> _keywords = [];
 
   // Global keys to change text decoration
-  final GlobalKey _balanceIssueCheckboxKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
 
   // Callback methods from the form page
   // Individual perspective
+  // _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecoration();
+  //   _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecoration();
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
   {
     setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});
-    pu.printd("text deco update");
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();    
   }
 
   _setStudiesHouseholdBalanceTextFieldState(String newValue) {setState(() {_studiesHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});}
+  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {setState(() {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_earningIncomeHouseholdBalanceCheckboxValue = newValue!;});}
+  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_earningIncomeHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {setState(() {_earningIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setHelpingOthersdBalanceCheckboxState(bool? newValue) {setState(() {_helpingOthersHouseholdBalanceCheckboxValue = newValue!;});}
+  _setHelpingOthersdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_helpingOthersHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {setState(() {_helpingOthersHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) {setState(() {_moreAppreciatedAtWorkCheckboxValue = newValue!;});}
+  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) 
+  {
+    setState(() {_moreAppreciatedAtWorkCheckboxValue = newValue!;});
+    _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setMoreAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_moreAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) {setState(() {_remainingAppreciatedAtWorkCheckboxValue = newValue!;});}
+  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) 
+  {
+    setState(() {_remainingAppreciatedAtWorkCheckboxValue = newValue!;});
+    _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_remainingAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setBetterLegaciesCheckboxState(bool? newValue) {setState(() {_betterLegaciesCheckboxValue = newValue!;});}
+  _setBetterLegaciesCheckboxState(bool? newValue) 
+  {
+    setState(() {_betterLegaciesCheckboxValue = newValue!;});
+    _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setBetterLegaciesTextFieldState(String newValue) {setState(() {_betterLegaciesTextFieldContent = newValue;});}
 
-  _setAnotherIssueTextFieldState(String newValue) {setState(() {_anotherIssueTextFieldContent = newValue;});}
+  _setAnotherIssueTextFieldState(String newValue) 
+  {
+    setState(() {_anotherIssueTextFieldContent = newValue;});
+    _anotherIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfTextFieldUsed(newValue);
+  }
 
   // Groups/Teams perspective
   _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {setState(() {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;});}
@@ -462,12 +495,12 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                 /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _balanceIssueHeadingKey,
                     headingText: q.level3TitleBalanceIssue,
                     headingLevel: 3,
                   ),
                   CustomCheckBoxWithTextField
                   (
-                    key: _balanceIssueCheckboxKey,
                     checkboxText: q.level3TitleBalanceIssueItem1,
                     textFieldHintText: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
@@ -501,6 +534,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _workplaceIssueHeadingKey,
                     headingText: q.level3TitleWorkplaceIssue,
                     headingLevel: 3,
                   ),
@@ -525,6 +559,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _legacyIssueHeadingKey,
                     headingText: q.level3TitleLegacyIssue,
                     headingLevel: 3,
                   ),
@@ -542,6 +577,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _anotherIssueHeadingKey,
                     headingText: q.level3TitleAnotherIssue,
                     headingLevel: 3,
                    ),

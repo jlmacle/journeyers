@@ -63,7 +63,7 @@ class CustomExpansionTile extends StatefulWidget
   ({
     super.key,
     this.text = "Default tile text",
-    this.textStyle = constStyleDefaultHeadingStyle,
+    this.textStyle = defaultConstHeadingStyle,
     this.actionIconSuggestingExpansion = const Icon(Icons.expand_more),
     this.expandedContentPaddingHorizontal = 16.0,
     this.expandedContentPaddingVertical = 8.0,
