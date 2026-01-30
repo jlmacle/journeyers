@@ -24,6 +24,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   bool _isDataLoading = true;
   Map<String, dynamic>? completeSessionData;
   List<dynamic>? listOfSessionData;
+  List<dynamic>? _allSessions;
+  List<dynamic>? _filteredSessions;
+  List<String>? _usedKeywords;
+  List<String> _selectedKeywords = [];
 
   // Utility classes
   DashboardUtils du = DashboardUtils();
@@ -32,8 +36,48 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   void _sessionDataRetrieval() async 
   {
     listOfSessionData = await du.retrieveAllDashboardSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext);
+    _usedKeywords= await usedKeywords(listOfSessionData!);
+    _allSessions = listOfSessionData;
+    _filteredSessions = listOfSessionData;
+    print("_usedKeywords: $_usedKeywords");
     setState(() {
       _isDataLoading = false;
+    });
+  }
+
+  Future<List<String>> usedKeywords(List<dynamic> listOfSessionData) async 
+  {
+    List<String> usedKeywords = [];
+    Set<String> kwSet = {};
+    for(var sessionData in listOfSessionData)
+    {     
+      List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];   
+      kwSet.addAll(kws.cast<String>());     
+    }
+    usedKeywords = kwSet.toList();
+
+    return usedKeywords;
+  }
+
+  void _toggleFilter(String keyword)
+  {
+    setState(() {
+      if (_selectedKeywords.contains(keyword)) {_selectedKeywords.remove(keyword);} 
+      else {_selectedKeywords.add(keyword);}
+
+      if (_selectedKeywords.isEmpty) 
+        {_filteredSessions = _allSessions;} 
+      else 
+      {
+        _filteredSessions = _allSessions!.where
+        (
+          (session) 
+          {
+            final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>(); // List<dynamic> before casting
+            return _selectedKeywords.every( (k) => sessionKeywords.contains(k) );
+          }
+        ).toList();
+      }
     });
   }
 
@@ -70,14 +114,29 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 padding: const EdgeInsets.only(top: 20, bottom: 20),
                 child: CustomHeading(headingText: "Previous session data", headingLevel: 2),
               ),
-
+              Padding
+              (
+                padding: const EdgeInsets.all(12.0),
+                child: Wrap
+                (
+                  spacing: 8.0,
+                  children: _usedKeywords!.map((kw) 
+                  {
+                    return FilterChip(
+                      label: Text(kw),
+                      onSelected: (_) => _toggleFilter(kw),
+                      selected: _selectedKeywords.contains(kw),
+                    );
+                  }).toList(),
+                ),
+              ),
               ListView.builder
               (
                 shrinkWrap: true,
-                itemCount: listOfSessionData?.length,
+                itemCount: _filteredSessions?.length,
                 itemBuilder: (content, index) 
                 {
-                  Map<String, dynamic>? sessionDataAsMap = listOfSessionData?[index];
+                  Map<String, dynamic>? sessionDataAsMap = _filteredSessions?[index];
                   return 
                   CustomExpansionTile
                   (
