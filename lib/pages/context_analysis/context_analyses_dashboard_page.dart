@@ -86,9 +86,12 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                       text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
                       textStyle: customExpansionTileTextStyle,
                       expandedContentText: "",
-                      parentWidgetOnEditPressedCallBackFunction: () {onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);},
-                      parentWidgetOnDeletePressedCallBackFunction: () {},
-                      parentWidgetOnSharePressedCallBackFunction: () {},
+                      parentWidgetOnEditPressedCallBackFunction: 
+                        () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
+                      parentWidgetOnDeletePressedCallBackFunction: 
+                        () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
+                      parentWidgetOnSharePressedCallBackFunction: 
+                        () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));},
                     );
                   },
                 ),
