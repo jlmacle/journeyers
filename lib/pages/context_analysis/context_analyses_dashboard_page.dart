@@ -60,21 +60,14 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   {
     return _isDataLoading
         ? Center(child: CircularProgressIndicator())
-        : Expanded
+        : Column
         (
-            child: 
-            Semantics
-            (
-              headingLevel: 2,
-              focusable: true,
-              child: 
-              Focus
-              (
-                focusNode: contextAnalysisDashboardFocusNode,
-
-                child: 
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: 
+            [
                 ListView.builder
                 (
+                  shrinkWrap: true,
                   itemCount: listOfSessionData?.length,
                   itemBuilder: (content, index) 
                   {
@@ -95,8 +88,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     );
                   },
                 ),
-              ),
-            ),
+            ],
           );
   }
 }
