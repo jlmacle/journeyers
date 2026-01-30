@@ -17,10 +17,20 @@ final double elevatedButtonPaddingTop = 20;
 final double elevatedButtonPaddingBottom = 20;
 
 // Text styles: generic text styles
-const TextStyle constStyleDefaultHeadingStyle = TextStyle(
+const TextStyle defaultConstHeadingStyle = TextStyle
+(
   fontSize: 16,
   fontWeight: FontWeight.normal,
-  color: Color(0xFF000000));
+  color: Color(0xFF000000)
+);
+
+const TextStyle underlinedConstHeadingStyle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  color: Color(0xFF000000),
+  decoration: TextDecoration.underline
+);
 
 const TextStyle unselectedCheckboxTextStyle = TextStyle
 (
@@ -28,6 +38,15 @@ const TextStyle unselectedCheckboxTextStyle = TextStyle
   color: Colors.black,
   decoration: TextDecoration.none
 );
+
+const TextStyle selectedCheckboxTextStyle = TextStyle
+(
+  fontSize: 24,
+  color: Colors.black,
+  decoration: TextDecoration.underline
+);
+
+
 
 final TextStyle elevatedButtonTextStyle = TextStyle
 (
