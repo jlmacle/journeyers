@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 // TODO: to re-organize and clean
 
-// Colors
+//*********************  Colors  *********************//
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
 
+
+//*********************  Gaps  *********************//
 // Gaps: gaps for the context analysis form
 final double postHeadingLevel2Gap = 20;
 final double preAndPostLevel2DividerGap = 20;
@@ -14,9 +16,14 @@ final double level3AndSegmentedButtonGap = 15;
 final double betweenLevel2DividerThickness = 3;
 final double betweenLevel3DividerThickness = 1;
 
+
+//*********************  Padding  *********************//
 // Paddings: elevated buttons padding
 final double elevatedButtonPaddingTop = 20;
 final double elevatedButtonPaddingBottom = 20;
+
+
+//*********************  Text Styles  *********************//
 
 // Text styles: generic text styles
 const TextStyle defaultConstHeadingStyle = TextStyle
@@ -48,8 +55,6 @@ const TextStyle selectedCheckboxTextStyle = TextStyle
   decoration: TextDecoration.underline
 );
 
-
-
 final TextStyle elevatedButtonTextStyle = TextStyle
 (
   fontSize: 20,
@@ -68,6 +73,7 @@ final TextStyle feedbackMessageStyle = TextStyle
   fontSize: 18,
   fontWeight: FontWeight.normal,
 );
+
 
 // Text styles: context analysis page related styles
 final TextStyle analysisTitleStyle = TextStyle
@@ -89,6 +95,8 @@ final TextStyle dialogAcknowledgedStyle = TextStyle
   fontSize: 20,
 );
 
+
+//*********************  Text Field Hints  *********************//
 // Text field hints: context analysis page related text field hints
 const String pleaseDescribeTextHouseholdHint =
     'Please describe the past outcomes for the household, '
@@ -108,17 +116,15 @@ const String pleaseDescribeTextGroupsHint =
 const String textFieldHintTextHint = "Please enter some text";
 
 
+//*********************  ThemeData  *********************//
 // ThemeData
 final ThemeData appTheme = ThemeData
 (
   scaffoldBackgroundColor:
       Colors.white, // left appbar, text field, checkboxes not in white
 
-  colorScheme: ColorScheme.light
-  (
-    surface: Colors.white, // succeeded for text field, checkboxes
-  ),
 
+  //*********************  AppBarTheme  *********************//
   appBarTheme: AppBarTheme
   (
     backgroundColor: navyBlue,
@@ -132,6 +138,112 @@ final ThemeData appTheme = ThemeData
     ),
   ),
 
+
+  //*********************  BannerTheme  *********************//
+  bannerTheme: MaterialBannerThemeData
+  (
+    backgroundColor: const Color.fromARGB(255, 13, 13, 49),
+  ),
+
+
+  //*********************  CheckboxTheme  *********************//
+  checkboxTheme: CheckboxThemeData
+  (
+    fillColor: WidgetStateProperty.resolveWith<Color>
+    (
+      (Set<WidgetState> states) 
+      {
+        if (states.contains(WidgetState.selected)) 
+        {return navyBlue;}
+        return Colors.transparent;
+      }
+    ),
+  ),
+ 
+
+  //*********************  ChipTheme  *********************//
+  // to remove the emerald green color from appearing
+  chipTheme: ChipThemeData
+  (
+    backgroundColor: paleCyan,
+    labelStyle: const TextStyle(color: Colors.black), 
+    surfaceTintColor: Colors.transparent, 
+    
+    selectedColor: paleCyan, 
+    checkmarkColor: Colors.black,
+    
+    brightness: Brightness.light, 
+  ),
+
+
+  //*********************  ColorScheme  *********************//
+  colorScheme: ColorScheme.light
+  (
+    surface: Colors.white, // succeeded for text field, checkboxes
+  ),
+
+
+  //*********************  ElevatedButtonTheme  *********************//
+  elevatedButtonTheme: ElevatedButtonThemeData
+  (
+    style: ButtonStyle
+    (
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(paleCyan),
+      surfaceTintColor: WidgetStateProperty.resolveWith<Color>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return paleCyan;} 
+          else if (states.contains(WidgetState.focused)) {return paleCyan;}
+          return paleCyan;
+        }
+      ),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return Colors.transparent;}
+          if (states.contains(WidgetState.pressed)) {return Colors.transparent;}
+          return null;
+        }
+      ),
+    ),
+  ),
+
+
+  //*********************  InputDecorationTheme  *********************//
+  inputDecorationTheme: InputDecorationTheme
+  (
+    border: OutlineInputBorder
+    (
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
+    ),
+    filled: true,
+    fillColor: paleCyan,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+  ),
+  
+
+  //*********************  SegmentedButtonTheme  *********************//
+  segmentedButtonTheme: SegmentedButtonThemeData
+  (
+    style: ButtonStyle
+    (
+      backgroundColor: WidgetStateProperty.resolveWith<Color>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.selected)) {return paleCyan;}
+          return Colors.transparent;
+        }
+      ),
+    ),
+  ),
+
+
+  //*********************  TextTheme  *********************//
   // https://api.flutter.dev/flutter/material/TextTheme-class.html
   textTheme: const TextTheme
   (
@@ -171,93 +283,6 @@ final ThemeData appTheme = ThemeData
     labelMedium: TextStyle(color: Colors.black, fontSize: 12),
     labelSmall: TextStyle(color: Colors.black),
   ),
-
-  inputDecorationTheme: InputDecorationTheme
-  (
-    border: OutlineInputBorder
-    (
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
-    ),
-    filled: true,
-    fillColor: paleCyan,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-  ),
-
-  elevatedButtonTheme: ElevatedButtonThemeData
-  (
-    style: ButtonStyle
-    (
-      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
-      backgroundColor: WidgetStateProperty.all<Color>(paleCyan),
-      surfaceTintColor: WidgetStateProperty.resolveWith<Color>
-      (
-        (Set<WidgetState> states) 
-        {
-          if (states.contains(WidgetState.hovered)) {return paleCyan;} 
-          else if (states.contains(WidgetState.focused)) {return paleCyan;}
-          return paleCyan;
-        }
-      ),
-      overlayColor: WidgetStateProperty.resolveWith<Color?>
-      (
-        (Set<WidgetState> states) 
-        {
-          if (states.contains(WidgetState.hovered)) {return Colors.transparent;}
-          if (states.contains(WidgetState.pressed)) {return Colors.transparent;}
-          return null;
-        }
-      ),
-    ),
-  ),
-
-  segmentedButtonTheme: SegmentedButtonThemeData
-  (
-    style: ButtonStyle
-    (
-      backgroundColor: WidgetStateProperty.resolveWith<Color>
-      (
-        (Set<WidgetState> states) 
-        {
-          if (states.contains(WidgetState.selected)) {return paleCyan;}
-          return Colors.transparent;
-        }
-      ),
-    ),
-  ),
-
-  checkboxTheme: CheckboxThemeData
-  (
-    fillColor: WidgetStateProperty.resolveWith<Color>
-    (
-      (Set<WidgetState> states) 
-      {
-        if (states.contains(WidgetState.selected)) 
-        {return navyBlue;}
-        return Colors.transparent;
-      }
-    ),
-  ),
-
-  // to remove the emerald green color from appearing
-  chipTheme: ChipThemeData
-  (
-    backgroundColor: paleCyan,
-    labelStyle: const TextStyle(color: Colors.black), 
-    surfaceTintColor: Colors.transparent, 
-    
-    selectedColor: paleCyan, 
-    checkmarkColor: Colors.black,
-    
-    brightness: Brightness.light, 
-  ),
-
-  bannerTheme: MaterialBannerThemeData
-  (
-    backgroundColor: const Color.fromARGB(255, 13, 13, 49),
-  ),
-
-
 
   useMaterial3: true,
 );
