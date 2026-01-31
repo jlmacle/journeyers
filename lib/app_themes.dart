@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO: to re-organize and clean
+// TODO: to clean at some point, that probably can be simplified
 
 //*********************  Colors  *********************//
 final Color navyBlue = Color(0xFF0a2e50);
@@ -170,7 +170,17 @@ final ThemeData appTheme = ThemeData
     surfaceTintColor: Colors.transparent, 
     
     selectedColor: paleCyan, 
+    // secondarySelectedColor: paleCyan, 
+    selectedShadowColor: paleCyan,
     checkmarkColor: Colors.black,
+
+    // added to stop a green flash
+    color: WidgetStateProperty.resolveWith<Color?>((states) {
+    if (states.contains(WidgetState.selected)) {
+      return paleCyan; 
+    }
+    return paleCyan; 
+  }),
     
     brightness: Brightness.light, 
   ),
