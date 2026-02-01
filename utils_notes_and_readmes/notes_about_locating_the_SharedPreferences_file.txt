@@ -1,0 +1,8 @@
+Linux (Lubuntu):
+
+
+macOS:
+
+
+Windows:
+"C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\shared_preferences.json"

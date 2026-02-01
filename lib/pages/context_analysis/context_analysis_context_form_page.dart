@@ -11,6 +11,7 @@ import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
@@ -50,6 +51,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
+  UserPreferencesUtils upu = UserPreferencesUtils();
 
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
@@ -107,37 +109,81 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   // Session title
   String _analysisTitle = "";
 
+  // Controller for the file keywords
+  final TextEditingController _keywordsController = TextEditingController();
+  final List<String> _keywords = [];
+
+  // Global keys to change text decoration
+  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
+
   // Callback methods from the form page
   // Individual perspective
-  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});}
+  // _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecoration();
+  //   _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecoration();
+  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();    
+  }
 
   _setStudiesHouseholdBalanceTextFieldState(String newValue) {setState(() {_studiesHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});}
+  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {setState(() {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) {setState(() {_earningIncomeHouseholdBalanceCheckboxValue = newValue!;});}
+  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_earningIncomeHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {setState(() {_earningIncomeHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setHelpingOthersdBalanceCheckboxState(bool? newValue) {setState(() {_helpingOthersHouseholdBalanceCheckboxValue = newValue!;});}
+  _setHelpingOthersdBalanceCheckboxState(bool? newValue) 
+  {
+    setState(() {_helpingOthersHouseholdBalanceCheckboxValue = newValue!;});
+    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {setState(() {_helpingOthersHouseholdBalanceTextFieldContent = newValue;});}
 
-  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) {setState(() {_moreAppreciatedAtWorkCheckboxValue = newValue!;});}
+  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) 
+  {
+    setState(() {_moreAppreciatedAtWorkCheckboxValue = newValue!;});
+    _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setMoreAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_moreAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) {setState(() {_remainingAppreciatedAtWorkCheckboxValue = newValue!;});}
+  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) 
+  {
+    setState(() {_remainingAppreciatedAtWorkCheckboxValue = newValue!;});
+    _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_remainingAppreciatedAtWorkTextFieldContent = newValue;});}
 
-  _setBetterLegaciesCheckboxState(bool? newValue) {setState(() {_betterLegaciesCheckboxValue = newValue!;});}
+  _setBetterLegaciesCheckboxState(bool? newValue) 
+  {
+    setState(() {_betterLegaciesCheckboxValue = newValue!;});
+    _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
 
   _setBetterLegaciesTextFieldState(String newValue) {setState(() {_betterLegaciesTextFieldContent = newValue;});}
 
-  _setAnotherIssueTextFieldState(String newValue) {setState(() {_anotherIssueTextFieldContent = newValue;});}
+  _setAnotherIssueTextFieldState(String newValue) 
+  {
+    setState(() {_anotherIssueTextFieldContent = newValue;});
+    _anotherIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfTextFieldUsed(newValue);
+  }
 
   // Groups/Teams perspective
   _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {setState(() {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;});}
@@ -161,9 +207,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   _setAnalysisTitleTextFieldState(String newValue) {setState(() {_analysisTitle = newValue;});}
 
   //*****************    Data structure related code    **********************//
+  
+  // Method used to store the data entered in the checkboxes, text fields and segmented buttons
   void dataStructureBuilding() 
   {
-    // Using LinkedHashMaps for an insertion-ordered hash-table based (source code).
+    // Using LinkedHashMaps for an insertion-ordered hash table based.
 
     //************************* Individual perspective ******************************/
     // Individual level: balance issue
@@ -316,8 +364,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     pu.printd("pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
-    {
-      du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, pathToCSVFile: pathToCSVFile);
+    {      
+      du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
+      upu.saveSessionDataHasBeenSaved();
     }
   }
 
@@ -356,7 +405,21 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   {
     _saveDataButtonFocusNode.dispose();
     _analysisTitleFocusNode.dispose();
+    _keywordsController.dispose();
     super.dispose();
+  }
+
+  void addKeyword(String value)
+  {
+    var trimmedValue = value.trim();
+    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue))
+    {
+      setState(() 
+      {
+        _keywords.add(trimmedValue);
+        _keywordsController.clear();
+      });
+    }
   }
 
   @override
@@ -412,7 +475,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               child:
               ExpansionTile
               ( 
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                expandedCrossAxisAlignment: CrossAxisAlignment.center,
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) 
                 {
@@ -432,35 +495,35 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                 /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _balanceIssueHeadingKey,
                     headingText: q.level3TitleBalanceIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem1,
-                    textFieldHintText: pleaseDescribeTextHousehold,
+                    textFieldHintText: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem2,
-                    textFieldHintText: pleaseDescribeTextHousehold,
+                    textFieldHintText: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem3,
-                    textFieldHintText: pleaseDescribeTextHousehold,
+                    textFieldHintText: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem4,
-                    textFieldHintText: pleaseDescribeTextHousehold,
+                    textFieldHintText: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
                   ),
@@ -471,21 +534,21 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _workplaceIssueHeadingKey,
                     headingText: q.level3TitleWorkplaceIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleWorkplaceIssueItem1,
-                    textFieldHintText: pleaseDescribeTextWorkplace,
+                    textFieldHintText: pleaseDescribeTextWorkplaceHint,
                     parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleWorkplaceIssueItem2,
-                    textFieldHintText: pleaseDescribeTextWorkplace,
+                    textFieldHintText: pleaseDescribeTextWorkplaceHint,
                     parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
                   ),
@@ -496,14 +559,14 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _legacyIssueHeadingKey,
                     headingText: q.level3TitleLegacyIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleLegacyIssueItem1,
-                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
                     parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
                   ),
@@ -514,13 +577,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   /**** ➡️ Sub-point  ****/
                   CustomHeading
                   (
+                    key: _anotherIssueHeadingKey,
                     headingText: q.level3TitleAnotherIssue,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
-                  ),
+                   ),
                   CustomPaddedTextField
                   (
-                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
                     textFieldMaxLength: FormUtils.chars1Page,
                     textFieldCounter: FormUtils.absentCounter,
                     parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
@@ -548,7 +611,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               child:
               ExpansionTile
               ( 
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                expandedCrossAxisAlignment: CrossAxisAlignment.center,
+                expandedAlignment: Alignment.center,
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) 
                 {setState(() 
@@ -571,11 +635,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleGroupsProblematics,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   CustomPaddedTextField
                   (
-                    textFieldHintText: pleaseDescribeTextGroups,
+                    textFieldHintText: pleaseDescribeTextGroupsHint,
                     textFieldMaxLength: FormUtils.chars1Page,
                     textFieldCounter: FormUtils.absentCounter,
                     parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
@@ -586,7 +649,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleSameProblem,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
@@ -595,7 +657,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
                   ),
@@ -609,7 +671,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleHarmonyAtHome,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
@@ -618,7 +679,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
                   ),
@@ -632,7 +693,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleAppreciabilityAtWork,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
                   Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
@@ -641,11 +701,11 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
                   ),
-
+                  
                   Gap(preAndPostLevel3DividerGap),
                   Divider(thickness: betweenLevel3DividerThickness),
                   Gap(preAndPostLevel3DividerGap),
@@ -655,15 +715,15 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   (
                     headingText: q.level3TitleIncomeEarningAbility,
                     headingLevel: 3,
-                    headingAlignment: TextAlign.left,
                   ),
+                  Gap(level3AndSegmentedButtonGap),
                   CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotes,
+                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
                   ),
@@ -684,20 +744,58 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
               (
                 children: 
                 [
+                  // Text field for the analysis title
                   TextField
                   (
                     focusNode: _analysisTitleFocusNode,
                     textAlign: TextAlign.center,
-                    style: dataSavingStyle, // TODO: to clean
+                    style: analysisTitleStyle,
                     decoration: InputDecoration
                     (
-                      hint: Text("Please enter a title for this analysis"),
-                      hintStyle: dataSavingStyle, // TODO: to clean
+                      hint: Center(child: Text("Please enter a title for this analysis.")),
+                      hintStyle: analysisTitleStyle,                    
                     ),
                     maxLength: 150,
                     onChanged: _setAnalysisTitleTextFieldState,
                   ),
+
+                  // File tagging
+                  Text("Please enter keywords to describe the file (+ Enter key).", textAlign: TextAlign.center),
+                  // TODO: to offer pre-defined keywords as well (household, workplace, studies)
+                  Padding(
+                    padding: const EdgeInsets.only(left:20, right:20, top:20, bottom:10),
+                    child: TextField
+                    (
+                      controller: _keywordsController,
+                      decoration: InputDecoration(hint: Center(child: Text('Please add the keyword here.'))),
+                      textAlign: TextAlign.center,
+                      onSubmitted: addKeyword,
+                    ),
+                  ),
+                  // Display of the keywords
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Wrap
+                    (
+                      spacing: 8.0,
+                      runSpacing: 4.0,
+                      children: 
+                      [
+                        ..._keywords.map
+                        (
+                          (tag) => InputChip
+                                  (
+                                    label: Text(tag),
+                                    onDeleted: () {setState( () {_keywords.remove(tag);});}
+                                  )
+                        )
+                      ],
+                    ),
+                  ),
+
+                  // Button to start the data saving process
                   Focus(
+                    // to detect a shift-tab navigation toward the questions
                     onKeyEvent: (FocusNode node, KeyEvent event)
                     {
                       if(event.logicalKey == LogicalKeyboardKey.tab
@@ -710,21 +808,20 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
                       return KeyEventResult.ignored;
                     },
-                  child: ElevatedButton
-                  (
-                    focusNode: _saveDataButtonFocusNode,
-                    // and removed only at data saving time
-                    onPressed: print2CSV,
-                    // https://gemini.google.com/app/d67570647b3006af
-                    
-                    child: 
-                    Text
+                    child: ElevatedButton
                     (
-                      'Click to save your data in CSV, \nspreadsheet-compatible format',
-                      style: dataSavingStyle,
-                      textAlign: TextAlign.center,
+                      focusNode: _saveDataButtonFocusNode,
+                      onPressed: print2CSV,
+                      // https://gemini.google.com/app/d67570647b3006af
+                      
+                      child: 
+                      Text
+                      (
+                        'Click to save your data in CSV, \nspreadsheet-compatible format',
+                        style: elevatedButtonTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
                   ),
 
                   // Gap(20),

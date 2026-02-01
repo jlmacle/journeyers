@@ -14,8 +14,8 @@ class CustomExpansionTile extends StatefulWidget
   /// The text to display when the tile is not expanded.
   final String text;
 
-  /// The font weight for the text to display when the tile is not expanded.
-  final FontWeight textFontWeight;
+  /// The style for the text to display when the tile is not expanded.
+  final TextStyle textStyle;
 
   /// The icon used to suggest that the tile is expandable.
   final Icon actionIconSuggestingExpansion;
@@ -63,7 +63,7 @@ class CustomExpansionTile extends StatefulWidget
   ({
     super.key,
     this.text = "Default tile text",
-    this.textFontWeight = FontWeight.w600,
+    this.textStyle = defaultConstHeadingStyle,
     this.actionIconSuggestingExpansion = const Icon(Icons.expand_more),
     this.expandedContentPaddingHorizontal = 16.0,
     this.expandedContentPaddingVertical = 8.0,
@@ -107,9 +107,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
       Text
       (
         widget.text,
-        style: TextStyle(fontWeight: widget.textFontWeight),
+        style: widget.textStyle,
       ),
-
       trailing: widget.actionIconSuggestingExpansion,
       children: <Widget>
       [

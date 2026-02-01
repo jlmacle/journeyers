@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/app_themes.dart';
 
 import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_text.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
+
+// Utility class
+PrintUtils pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable checkbox that displays a customizable text field when the box is checked.
@@ -11,11 +16,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// The text of the checkbox.
   final String checkboxText;
 
-  /// The font size of the text.
-  final double checkboxTextFontSize;
-
-  /// The color of the text.
-  final Color checkboxTextColor;
+  /// The style of the text.
+  TextStyle checkboxTextStyle;
 
   /// The alignment of the text.
   final TextAlign checkboxTextAlignment;
@@ -59,13 +61,12 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool? value) {}
 
-  const CustomCheckBoxWithTextField
+  CustomCheckBoxWithTextField
   ({
     super.key,
     required this.checkboxText,
-    this.checkboxTextFontSize = 24,
-    this.checkboxTextColor = Colors.black,
-    this.checkboxTextAlignment = TextAlign.left,
+    this.checkboxTextStyle = unselectedCheckboxTextStyle,
+    this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
     this.checkboxIsChecked = false,
     required this.textFieldHintText,
@@ -87,17 +88,11 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
 {
   bool _isChecked = false;
   String _textFieldValue = "";
+  TextStyle _checkboxTextStyle = unselectedCheckboxTextStyle;
 
   @override
-  Widget build(BuildContext context) 
+  Widget build(BuildContext context)
   {
-    final TextStyle checkboxTextStyle = 
-                    TextStyle
-                    (
-                      fontSize: widget.checkboxTextFontSize,
-                      color: widget.checkboxTextColor,
-                    );
-
     return 
     Column
     (
@@ -109,7 +104,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           CustomFocusableText
           (
             text: widget.checkboxText,
-            textStyle: checkboxTextStyle,
+            textStyle: _checkboxTextStyle,
             textAlignment: widget.checkboxTextAlignment,
           ),
           value: _isChecked,
@@ -117,7 +112,12 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           onChanged: (bool? value) 
           {
             widget.parentWidgetCheckboxValueCallBackFunction!(value);
-            setState(() {_isChecked = value!;});
+            setState(() 
+            {
+              _isChecked = value!; 
+              if(value){_checkboxTextStyle = selectedCheckboxTextStyle;}
+              else {_checkboxTextStyle = unselectedCheckboxTextStyle;}
+            });
           },
         ),
         if (_isChecked)

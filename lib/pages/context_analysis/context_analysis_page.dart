@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_context_form_page.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,23 +31,27 @@ class ContextAnalysisPage extends StatefulWidget
     });
 
   @override
-  State<ContextAnalysisPage> createState() => _ContextAnalysisPageState();
+  State<ContextAnalysisPage> createState() => ContextAnalysisPageState();
 }
 
-class _ContextAnalysisPageState extends State<ContextAnalysisPage> 
+class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   bool _preferencesLoading = true;
   late bool? _isStartMessageAlreadyAcknowledged;
-  bool isContextAnalysisSessionDataSaved = false;
+  late bool _wasContextAnalysisSessionDataSaved;
 
   // to help reset the start message status
   final bool _resetStartMessage = false;
 
-  _getPreferences() async 
+  getPreferences() async 
   {
+    pu.printd("\nEntering getPreferences");
     _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
+    _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
+
     setState(() {_preferencesLoading = false;});
     pu.printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
+    pu.printd("_wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
 
     if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted) 
     {
@@ -94,7 +99,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
                   up.saveStartMessageAcknowledgement();
                   Navigator.pop(context);
                 },
-                child: Text('Acknowledged', style: dialogStyleAcknowledged),
+                child: Text('Acknowledged', style: dialogAcknowledgedStyle),
               ),
             ],
           );
@@ -113,7 +118,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
   void initState() 
   {
     super.initState();
-    _getPreferences();
+    getPreferences();
   }
 
   @override
@@ -125,7 +130,7 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
       body: 
       Column
       (
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: 
         [
           if (_resetStartMessage)
@@ -142,12 +147,20 @@ class _ContextAnalysisPageState extends State<ContextAnalysisPage>
           if (_preferencesLoading)
             Center(child: CircularProgressIndicator())
           else ...[
-            ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
-
-            if (isContextAnalysisSessionDataSaved) ...[
-              Divider(),
+            if (_wasContextAnalysisSessionDataSaved) ...[
+              Padding(
+                padding: EdgeInsets.only(top:elevatedButtonPaddingTop, bottom: elevatedButtonPaddingBottom),
+                child: ElevatedButton
+                (
+                  onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
+                  child: Text("Click to start a new context analysis", style: elevatedButtonTextStyle),
+                ),
+              ),
+              Divider(thickness: 3),
               ContextAnalysesDashboardPage(),
-            ],
+            ]
+            else ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+
           ],
         ],
       ),

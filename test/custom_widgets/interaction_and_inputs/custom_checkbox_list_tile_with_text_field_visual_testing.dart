@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage>
           CustomCheckBoxWithTextField
           (
             checkboxText: "Checkbox text",
-            textFieldHintText: textFieldHintText,
+            textFieldHintText: textFieldHintTextHint,
             parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
             parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction,
           ),
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage>
             child: CustomFocusableText
             (
               text: "Click to save the data (json for this demo)",
-              textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.normal),
+              textStyle: elevatedButtonTextStyle,
             ),
           ),
         ],

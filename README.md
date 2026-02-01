@@ -3,13 +3,14 @@ Most of our lives are spent in teams: household, school, workplace. . . .<br>
 Our appreciability in these teams, and therefore our quality of life, depends on our ability to group problem-solve toward lasting solutions.
 
 This open source ed tech and assistive tech, proof-of-concept project <br>
-(with a goal of being cross-platform, cross-cultural, accessible, and offline-friendly), <br>
+(with a goal of being cross-platform, multilingual, accessible, and offline-friendly), <br>
 is meant to support our group problem-solving processes, and to help us reach lasting solutions.<br>
 <br>
 Educational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
 The answers to the first set of questions is exportable to CSV.<br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
-The Android and iPhone apps, in their current stage, seem accessible. Additional effort needs to be done for the accessibility of the desktop apps.<br>
+The Android and iPhone apps, in their current stage, seem accessible (Android apk - [alpha version](https://drive.google.com/file/d/1wamXlk-OY9YgJBEDooJO9zugcmQAOJ2S/view?usp=sharing), and not the most recent code, as it still lacks user-friendliness). <br>
+Additional effort needs to be done for the accessibility of the desktop apps.<br>
 ([Flutter install](https://docs.flutter.dev/install))
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).

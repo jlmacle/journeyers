@@ -88,6 +88,7 @@ ios/Runner.xcodeproj/project.pbxproj
 
 # VSCode related
 .vscode/settings.json
+.vscode/launch.json
 
 # IDE related
 .idea/
@@ -99,6 +100,7 @@ ios/Runner.xcodeproj/project.pbxproj
 **/macos/Flutter/ephemeral
 **/xcuserdata/
 macos/Runner.xcodeproj/project.pbxproj
+.DS_Store
 
 # Windows
 **/windows/flutter/generated_plugin_registrant.cc
@@ -124,9 +126,6 @@ app.*.symbols
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
 
-# macOS related file
-.DS_Store
-
 # Documentation folders
 utils_dev/doc_dart/
 utils_dev/doc_python/
@@ -134,5 +133,6 @@ utils_dev/doc_python/
 # L10n log file for untranslated messages
 untranslated-messages-file.txt
 
-
+# Configuration files
+devtools_options.yaml
 

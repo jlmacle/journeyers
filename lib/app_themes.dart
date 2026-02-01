@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-// Colors
+// TODO: to clean at some point, that probably can be simplified
+
+//*********************  Colors  *********************//
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
 
-// Gaps and dividers
+
+//*********************  Gaps  *********************//
+// Gaps: gaps for the context analysis form
 final double postHeadingLevel2Gap = 20;
 final double preAndPostLevel2DividerGap = 20;
 final double preAndPostLevel3DividerGap = 15;
@@ -12,11 +16,57 @@ final double level3AndSegmentedButtonGap = 15;
 final double betweenLevel2DividerThickness = 3;
 final double betweenLevel3DividerThickness = 1;
 
-// Text styles
-const TextStyle constStyle = TextStyle(
+
+//*********************  Padding  *********************//
+// Paddings: elevated buttons padding
+final double elevatedButtonPaddingTop = 20;
+final double elevatedButtonPaddingBottom = 20;
+
+
+//*********************  Text Styles  *********************//
+
+// Text styles: generic text styles
+const TextStyle defaultConstHeadingStyle = TextStyle
+(
   fontSize: 16,
   fontWeight: FontWeight.normal,
-  color: Color(0xFF000000));
+  color: Color(0xFF000000)
+);
+
+const TextStyle underlinedConstHeadingStyle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  color: Color(0xFF000000),
+  decoration: TextDecoration.underline
+);
+
+const TextStyle unselectedCheckboxTextStyle = TextStyle
+(
+  fontSize: 24,
+  color: Colors.black,
+  decoration: TextDecoration.none
+);
+
+const TextStyle selectedCheckboxTextStyle = TextStyle
+(
+  fontSize: 24,
+  color: Colors.black,
+  decoration: TextDecoration.underline
+);
+
+final TextStyle elevatedButtonTextStyle = TextStyle
+(
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
+final TextStyle customExpansionTileTextStyle = TextStyle
+(
+  color: Colors.black,
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+);
 
 final TextStyle feedbackMessageStyle = TextStyle
 (
@@ -24,7 +74,9 @@ final TextStyle feedbackMessageStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle dataSavingStyle = TextStyle
+
+// Text styles: context analysis page related styles
+final TextStyle analysisTitleStyle = TextStyle
 (
   fontSize: 20,
   fontWeight: FontWeight.normal,
@@ -37,40 +89,42 @@ final TextStyle dialogStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle dialogStyleAcknowledged = TextStyle
+final TextStyle dialogAcknowledgedStyle = TextStyle
 (
   color: Colors.purple.shade400,
   fontSize: 20,
 );
 
-// Input decorations
-const String pleaseDescribeTextHousehold =
+
+//*********************  Text Field Hints  *********************//
+// Text field hints: context analysis page related text field hints
+const String pleaseDescribeTextHouseholdHint =
     'Please describe the past outcomes for the household, '
     'if some seem to have been out of their comfort zone for too long, '
     'and the more desirable outcomes for the household.';
 
-const String pleaseDescribeTextWorkplace =
+const String pleaseDescribeTextWorkplaceHint =
     'Please describe the past outcomes for the workplace, '
     'if some seem to have been out of their comfort zone for too long, '
     'and the more desirable outcomes for the workplace and for the household.';
 
-const String pleaseDevelopOrTakeNotes = 'Please develop.';
+const String pleaseDevelopOrTakeNotesHint = 'Please develop.';
 
-const String pleaseDescribeTextGroups =
+const String pleaseDescribeTextGroupsHint =
     'Please describe the problem(s) that the groups/teams are trying to solve.';
 
-const String textFieldHintText = "Please enter some text";
+const String textFieldHintTextHint = "Please enter some text";
 
+
+//*********************  ThemeData  *********************//
+// ThemeData
 final ThemeData appTheme = ThemeData
 (
   scaffoldBackgroundColor:
       Colors.white, // left appbar, text field, checkboxes not in white
 
-  colorScheme: ColorScheme.light
-  (
-    surface: Colors.white, // succeeded for text field, checkboxes
-  ),
 
+  //*********************  AppBarTheme  *********************//
   appBarTheme: AppBarTheme
   (
     backgroundColor: navyBlue,
@@ -84,58 +138,61 @@ final ThemeData appTheme = ThemeData
     ),
   ),
 
-  // https://api.flutter.dev/flutter/material/TextTheme-class.html
-  textTheme: const TextTheme
+
+  //*********************  BannerTheme  *********************//
+  bannerTheme: MaterialBannerThemeData
   (
-    // doesn't apply to the appbar
-    // https://api.flutter.dev/flutter/material/TextTheme/displayLarge.html
-    // displayLarge: TextStyle(color: Colors.black),
-    // https://api.flutter.dev/flutter/material/TextTheme/displayMedium.html
-    // displayMedium: TextStyle(color: Colors.black),
-    // https://api.flutter.dev/flutter/material/TextTheme/displaySmall.html
-    // displaySmall: TextStyle(color: Colors.black),
-    // https://api.flutter.dev/flutter/material/TextTheme/headlineLarge.html
-    headlineLarge: TextStyle
-    (
-      color: Colors.black,
-      fontSize: 24,
-      fontWeight: FontWeight.w900,
-    ),
-    // https://api.flutter.dev/flutter/material/TextTheme/headlineMedium.html
-    headlineMedium: TextStyle
-    (
-      color: Colors.black,
-      fontSize: 23,
-      fontWeight: FontWeight.bold,
-    ),
-    // https://api.flutter.dev/flutter/material/TextTheme/headlineSmall.html
-    headlineSmall: TextStyle(color: Colors.black, fontSize: 22),
-    // https://api.flutter.dev/flutter/material/TextTheme/titleLarge.html
-    titleLarge: TextStyle(color: Colors.black, fontSize: 20),
-    // https://api.flutter.dev/flutter/material/TextTheme/titleMedium.html
-    titleMedium: TextStyle(color: Colors.black, fontSize: 18),
-    // https://api.flutter.dev/flutter/material/TextTheme/titleSmall.html
-    titleSmall: TextStyle(color: Colors.black, fontSize: 16),
-    bodyLarge: TextStyle(color: Colors.black),
-    bodyMedium: TextStyle(color: Colors.black),
-    bodySmall: TextStyle(color: Colors.black),
-    labelLarge: TextStyle(color: Colors.black),
-    labelMedium: TextStyle(color: Colors.black, fontSize: 12),
-    labelSmall: TextStyle(color: Colors.black),
+    backgroundColor: const Color.fromARGB(255, 13, 13, 49),
   ),
 
-  inputDecorationTheme: InputDecorationTheme
+
+  //*********************  CheckboxTheme  *********************//
+  checkboxTheme: CheckboxThemeData
   (
-    border: OutlineInputBorder
+    fillColor: WidgetStateProperty.resolveWith<Color>
     (
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
+      (Set<WidgetState> states) 
+      {
+        if (states.contains(WidgetState.selected)) 
+        {return navyBlue;}
+        return Colors.transparent;
+      }
     ),
-    filled: true,
-    fillColor: paleCyan,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+  ),
+ 
+
+  //*********************  ChipTheme  *********************//
+  // to remove the emerald green color from appearing
+  chipTheme: ChipThemeData
+  (
+    backgroundColor: paleCyan,
+    labelStyle: const TextStyle(color: Colors.black), 
+    surfaceTintColor: Colors.transparent, 
+    
+    selectedColor: paleCyan, 
+    selectedShadowColor: paleCyan,
+    checkmarkColor: Colors.black,
+
+    // added to stop a green flash
+    color: WidgetStateProperty.resolveWith<Color?>((states) {
+    if (states.contains(WidgetState.selected)) {
+      return paleCyan; 
+    }
+    return paleCyan; 
+  }),
+    
+    brightness: Brightness.light, 
   ),
 
+
+  //*********************  ColorScheme  *********************//
+  colorScheme: ColorScheme.light
+  (
+    surface: Colors.white, // succeeded for text field, checkboxes
+  ),
+
+
+  //*********************  ElevatedButtonTheme  *********************//
   elevatedButtonTheme: ElevatedButtonThemeData
   (
     style: ButtonStyle
@@ -163,6 +220,22 @@ final ThemeData appTheme = ThemeData
     ),
   ),
 
+
+  //*********************  InputDecorationTheme  *********************//
+  inputDecorationTheme: InputDecorationTheme
+  (
+    border: OutlineInputBorder
+    (
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
+    ),
+    filled: true,
+    fillColor: paleCyan,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+  ),
+  
+
+  //*********************  SegmentedButtonTheme  *********************//
   segmentedButtonTheme: SegmentedButtonThemeData
   (
     style: ButtonStyle
@@ -178,22 +251,46 @@ final ThemeData appTheme = ThemeData
     ),
   ),
 
-  checkboxTheme: CheckboxThemeData
-  (
-    fillColor: WidgetStateProperty.resolveWith<Color>
-    (
-      (Set<WidgetState> states) 
-      {
-        if (states.contains(WidgetState.selected)) 
-        {return navyBlue;}
-        return Colors.transparent;
-      }
-    ),
-  ),
 
-  bannerTheme: MaterialBannerThemeData
+  //*********************  TextTheme  *********************//
+  // https://api.flutter.dev/flutter/material/TextTheme-class.html
+  textTheme: const TextTheme
   (
-    backgroundColor: const Color.fromARGB(255, 13, 13, 49),
+    // doesn't apply to the appbar
+    // https://api.flutter.dev/flutter/material/TextTheme/displayLarge.html
+    // displayLarge: TextStyle(color: Colors.black),
+    // https://api.flutter.dev/flutter/material/TextTheme/displayMedium.html
+    // displayMedium: TextStyle(color: Colors.black),
+    // https://api.flutter.dev/flutter/material/TextTheme/displaySmall.html
+    // displaySmall: TextStyle(color: Colors.black),
+    // https://api.flutter.dev/flutter/material/TextTheme/headlineLarge.html
+    headlineLarge: TextStyle
+    (
+      color: Colors.black,
+      fontSize: 24,
+      fontWeight: FontWeight.w900,
+    ),
+    // https://api.flutter.dev/flutter/material/TextTheme/headlineMedium.html
+    headlineMedium: TextStyle
+    (
+      color: Colors.black,
+      fontSize: 23,
+      fontWeight: FontWeight.bold,
+    ),
+    // https://api.flutter.dev/flutter/material/TextTheme/headlineSmall.html
+    headlineSmall: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
+    // https://api.flutter.dev/flutter/material/TextTheme/titleLarge.html
+    titleLarge: TextStyle(color: Colors.black, fontSize: 20),
+    // https://api.flutter.dev/flutter/material/TextTheme/titleMedium.html
+    titleMedium: TextStyle(color: Colors.black, fontSize: 18),
+    // https://api.flutter.dev/flutter/material/TextTheme/titleSmall.html
+    titleSmall: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
+    bodyLarge: TextStyle(color: Colors.black),
+    bodyMedium: TextStyle(color: Colors.black),
+    bodySmall: TextStyle(color: Colors.black),
+    labelLarge: TextStyle(color: Colors.black),
+    labelMedium: TextStyle(color: Colors.black, fontSize: 12),
+    labelSmall: TextStyle(color: Colors.black),
   ),
 
   useMaterial3: true,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
 import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_expansion_tile.dart';
 
 /// {@category Pages}
@@ -22,6 +24,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   bool _isDataLoading = true;
   Map<String, dynamic>? completeSessionData;
   List<dynamic>? listOfSessionData;
+  List<dynamic>? _allSessions;
+  List<dynamic>? _filteredSessions;
+  List<String>? _usedKeywords;
+  List<String> _selectedKeywords = [];
 
   // Utility classes
   DashboardUtils du = DashboardUtils();
@@ -29,10 +35,49 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   void _sessionDataRetrieval() async 
   {
-    completeSessionData = await du.retrieveAllDashboardSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext);
+    listOfSessionData = await du.retrieveAllDashboardSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext);
+    _usedKeywords= await usedKeywords(listOfSessionData!);
+    _allSessions = listOfSessionData;
+    _filteredSessions = listOfSessionData;
+    print("_usedKeywords: $_usedKeywords");
     setState(() {
       _isDataLoading = false;
-      listOfSessionData = completeSessionData?.values.first;
+    });
+  }
+
+  Future<List<String>> usedKeywords(List<dynamic> listOfSessionData) async 
+  {
+    List<String> usedKeywords = [];
+    Set<String> kwSet = {};
+    for(var sessionData in listOfSessionData)
+    {     
+      List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];   
+      kwSet.addAll(kws.cast<String>());     
+    }
+    usedKeywords = kwSet.toList();
+
+    return usedKeywords;
+  }
+
+  void _toggleFilter(String keyword)
+  {
+    setState(() {
+      if (_selectedKeywords.contains(keyword)) {_selectedKeywords.remove(keyword);} 
+      else {_selectedKeywords.add(keyword);}
+
+      if (_selectedKeywords.isEmpty) 
+        {_filteredSessions = _allSessions;} 
+      else 
+      {
+        _filteredSessions = _allSessions!.where
+        (
+          (session) 
+          {
+            final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>(); // List<dynamic> before casting
+            return _selectedKeywords.every( (k) => sessionKeywords.contains(k) );
+          }
+        ).toList();
+      }
     });
   }
 
@@ -60,38 +105,55 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   {
     return _isDataLoading
         ? Center(child: CircularProgressIndicator())
-        : Expanded
+        : Column
         (
-            child: 
-            Semantics
-            (
-              headingLevel: 2,
-              focusable: true,
-              child: 
-              Focus
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: 
+            [
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 20),
+                child: CustomHeading(headingText: "Previous session data", headingLevel: 2),
+              ),
+              Padding
               (
-                focusNode: contextAnalysisDashboardFocusNode,
-
-                child: 
-                ListView.builder
+                padding: const EdgeInsets.all(12.0),
+                child: Wrap
                 (
-                  itemCount: listOfSessionData?.length,
-                  itemBuilder: (content, index) 
+                  spacing: 8.0,
+                  children: _usedKeywords!.map((kw) 
                   {
-                    Map<String, dynamic>? sessionDataAsMap = listOfSessionData?[index];
-                    return 
-                    CustomExpansionTile
-                    (
-                      text:"(${sessionDataAsMap?[DashboardUtils.keyDate]}) ${sessionDataAsMap?[DashboardUtils.keyTitle]}",
-                      expandedContentText: "",
-                      parentWidgetOnEditPressedCallBackFunction: () {onEditPressed(sessionDataAsMap?[DashboardUtils.keyFilePath]);},
-                      parentWidgetOnDeletePressedCallBackFunction: () {},
-                      parentWidgetOnSharePressedCallBackFunction: () {},
+                    return FilterChip(
+                      label: Text(kw),
+                      onSelected: (_) => _toggleFilter(kw),
+                      selected: _selectedKeywords.contains(kw),
                     );
-                  },
+                  }).toList(),
                 ),
               ),
-            ),
+              ListView.builder
+              (
+                shrinkWrap: true,
+                itemCount: _filteredSessions?.length,
+                itemBuilder: (content, index) 
+                {
+                  Map<String, dynamic>? sessionDataAsMap = _filteredSessions?[index];
+                  return 
+                  CustomExpansionTile
+                  (
+                    // TODO: code to complete
+                    text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
+                    textStyle: customExpansionTileTextStyle,
+                    expandedContentText: "",
+                    parentWidgetOnEditPressedCallBackFunction: 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
+                    parentWidgetOnDeletePressedCallBackFunction: 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
+                    parentWidgetOnSharePressedCallBackFunction: 
+                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));},
+                  );
+                },
+              ),
+            ],
           );
   }
 }

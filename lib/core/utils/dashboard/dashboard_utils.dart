@@ -17,11 +17,11 @@ class DashboardUtils {
   /// String used to communicate the context of the group problem-solvings.
   static String groupProblemSolvingsContext = "groupProblemSolvingData";
 
-  /// The root key for the session data stored for the dashboards.
-  static String keyRecords = 'records';
-
   /// The key for the session data title.
   static String keyTitle = 'title';
+
+  /// The key for the file keywords
+  static String keyKeywords = 'keywords';
 
   /// The key for the session data date.
   static String keyDate = 'date';
@@ -46,7 +46,7 @@ class DashboardUtils {
     if (!sessionFile.existsSync()) {
       sessionFile.createSync();
       // Adding an empty map to the file
-      Map<String, List<Map<String, String>>> records = {keyRecords: []};
+      List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
       _pu.printd(
@@ -58,35 +58,38 @@ class DashboardUtils {
 
   /// Method used to save partial session data.
   /// In the case of the context analyses, the partial data saved has the format:
-  /// {"title":"analysis1","date":"12/19/25","filePath":"filePath1"}
-  Future<void> saveSessionDataUsefulForDashboard({
+  /// {"title":"analysis1","keywords":["keyword1","keyword2"], "date":"12/19/25","filePath":"filePath1"}
+  Future<void> saveSessionDataUsefulForDashboard
+  ({
     required String typeOfContextData,
-    required Map<String, String> sessionData,
-  }) async {
+    required Map<String, dynamic> sessionData,
+  }) async 
+  {
     final file = await getSessionFile(typeOfContextData: typeOfContextData);
     // file created in getSessionFile if needed
 
     String updatedContent = "";
     // Reading and decoding the records content
     String jsonContent = file.readAsStringSync();
-    Map<String, dynamic> records = jsonDecode(jsonContent);
-    var recordsList = records[keyRecords];
+    List<dynamic> recordsList = jsonDecode(jsonContent);
     // Adding to the records
     recordsList.add(sessionData);
-    records[keyRecords] = recordsList;
     // Encoding the data to String
-    updatedContent = jsonEncode(records);
+    updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
     _pu.printd('Session data: $sessionData saved to: ${file.path}');
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
-  void saveDashboardData({
+  void saveDashboardData
+  ({
     required String typeOfContextData,
     required String analysisTitle,
+    required List<String> keywords,
     required String pathToCSVFile,
-  }) async {
+  }) 
+  async {
     // Date
     var now = DateTime.now();
     var formatter = DateFormat('MM/dd/yy');
@@ -96,20 +99,23 @@ class DashboardUtils {
     _pu.printd("analysisTitle: $analysisTitle");
 
     // Session data storage sample:
-    // {"records":[{"title":"Title session 1","date":"12/12/25"]},
-    // {"title":"Title session 2","date":"12/12/25},
-    // {"title":"Title session 3","date":"12/12/25"}]}
+    // {"records":[{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
+    // {"title":"Title session 2","keywords":["keyword1","keyword3"], "date":"01/18/26","filePath":"filePath2"},
+    // {"title":"Title session 3","keywords":["keyword1","keyword4"], "date":"01/18/26","filePath":"filePath3"}]}
 
     // Building the session data
     // In the context analysis form page, filePath is tested for not null
     // if (filePath != null) dashboardDataSaving(contextAnalysesData, analysisTitle, filePath);
-    Map<String, String> sessionData = {
+    Map<String, dynamic> sessionData = 
+    {
       keyTitle: analysisTitle,
+      keyKeywords: keywords,
       keyDate: formattedDate,
       keyFilePath: pathToCSVFile,
     };
     // Saving the session data
-    await saveSessionDataUsefulForDashboard(
+    await saveSessionDataUsefulForDashboard
+    (
       typeOfContextData: typeOfContextData,
       sessionData: sessionData,
     );
@@ -119,10 +125,10 @@ class DashboardUtils {
   /// This data is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// In the case of the context analyses, the data retrieved has the format:
   /// {"records":\[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]}
-  Future<Map<String, dynamic>> retrieveAllDashboardSessionData({
+  Future<List<dynamic>> retrieveAllDashboardSessionData({
     required String typeOfContextData,
   }) async {
-    Map<String, dynamic> completeSessionData;
+    List<dynamic> completeSessionData;
     File sessionFile = await getSessionFile(
       typeOfContextData: typeOfContextData,
     );
