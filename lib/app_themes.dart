@@ -170,7 +170,6 @@ final ThemeData appTheme = ThemeData
     surfaceTintColor: Colors.transparent, 
     
     selectedColor: paleCyan, 
-    // secondarySelectedColor: paleCyan, 
     selectedShadowColor: paleCyan,
     checkmarkColor: Colors.black,
 
