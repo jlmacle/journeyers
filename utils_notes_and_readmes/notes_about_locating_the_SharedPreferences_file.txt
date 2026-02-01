@@ -1,5 +1,5 @@
 Linux (Lubuntu):
-
+/home/<user-name>/.local/share/dev.journeyers/shared_preferences.json
 
 macOS:
 /Users/<user-name>/Library/Containers/dev.journeyers/Data/Library/Preferences/dev.journeyers.plist
