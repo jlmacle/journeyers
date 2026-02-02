@@ -1,5 +1,6 @@
 import "dart:collection";
 import "dart:convert";
+import "dart:io";
 import "dart:typed_data";
 
 import "package:file_picker/file_picker.dart";
@@ -547,4 +548,103 @@ class CSVUtils {
       allowedExtensions: ['csv'],
     );
   }
+
+  //*****************  Methods retrieving the CSV data for edition or viewing: beginning  ***********************//
+  
+  // Method used to map a line of CSV to data
+  List<String> _csvLineToData(String line)
+  {
+    List<String> data = [];
+    bool inQuotes = false;
+    String itemData = "";
+
+    for (var index = 0; index < line.length ;  index++)
+    {
+      var char = line[index]; 
+
+      // reaching a ',' while not being inside quotes
+      // reaching the end of the itemData
+      if (char == "," && inQuotes == false)
+      {
+        data.add(itemData);
+        _pu.printd("itemData: $itemData");
+        // resetting itemData
+        itemData = "";
+      }
+      // adding to the itemData
+      else
+      {
+        itemData += char;
+        if (char == quotesForCSV) { inQuotes = !inQuotes; }
+      }      
+    }
+    // Adding the last item data (no ',' reachable for the last item with the current code)
+      data.add(itemData);
+
+    return data;
+  }
+  
+  /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
+  List<List<dynamic>> csvFileToPreviewPerspectiveData(String pathToCSVFile)
+  {
+    List<List<String>> perspectiveData = [];
+    // Some empty lines have been added for the csv formatting
+    List<List<String>> individualPerspective = [];
+    List<List<String>> groupPerspective = [];
+
+    // Checking if the CSV file exists
+    File csvFile = File(pathToCSVFile);
+    if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $pathToCSVFile");
+
+    // Loading the file content
+    List<String> csvLines = csvFile.readAsLinesSync();
+
+    // Mapping the data toward the individual and group perspectives
+    for(var line in csvLines)
+    {
+      List<String> lineData = _csvLineToData(line);
+      _pu.printd("");
+      _pu.printd("lineData: $lineData");
+
+      // 5 fields
+      // the first 2 fields are for the individual perspective
+      // the last 2 fields are for the group perspective
+      List<String> individualPerspectiveItem = [];
+      List<String> groupPerspectiveItem = [];
+
+      for (var index = 0; index < 5; index++)
+      {
+        if (index == 0 || index == 1)
+        {
+          individualPerspectiveItem.add(lineData[index].trim());
+          if (index == 1)
+          {
+            _pu.printd("");
+            individualPerspective.add(individualPerspectiveItem);
+            individualPerspectiveItem = [];
+          }
+        }
+        else if (index == 3 || index == 4)
+        {
+          groupPerspectiveItem.add(lineData[index].trim());
+          if (index == 4)
+          {
+            _pu.printd("");
+            _pu.printd("groupPerspectiveItem: $groupPerspectiveItem");
+            groupPerspective.add(groupPerspectiveItem);
+            groupPerspectiveItem = [];
+          }
+        }
+      }
+
+    }
+    _pu.printd("");
+    _pu.printd("\nindividualPerspective: $individualPerspective");
+    _pu.printd("\ngroupPerspective: $groupPerspective");
+
+
+    return perspectiveData;
+  }  
+  //*****************  Methods retrieving the CSV data for edition or viewing: end  ***********************//
+
 }
