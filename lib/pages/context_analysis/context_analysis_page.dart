@@ -157,9 +157,16 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 ),
               ),
               Divider(thickness: 3),
-              ContextAnalysesDashboardPage(),
+              Expanded
+              (
+                child: ContextAnalysesDashboardPage()
+              ),
             ]
-            else ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+            else 
+              Expanded
+              (
+                child: ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability)
+              ),
 
           ],
         ],

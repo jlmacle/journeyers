@@ -101,27 +101,31 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return _isDataLoading
-        ? Center(child: CircularProgressIndicator())
-        : Column
+Widget build(BuildContext context) 
+{
+  return _isDataLoading
+      ? Center(child: CircularProgressIndicator())
+      : ListView.builder  
         (
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: 
-            [
-              Padding(
+          // Adding heading and keywords filtering to item count
+          itemCount: _filteredSessions!= null ? _filteredSessions!.length + 2 : 2,
+          itemBuilder: (content, index) 
+          {
+            // Heading as first item
+            if (index == 0) {
+              return Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 20),
                 child: CustomHeading(headingText: "Previous session data", headingLevel: 2),
-              ),
-              Padding
-              (
+              );
+            }
+            
+            // Keywords as second item
+            if (index == 1) {
+              return Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Wrap
-                (
+                child: Wrap(
                   spacing: 8.0,
-                  children: _usedKeywords!.map((kw) 
-                  {
+                  children: _usedKeywords!.map((kw) {
                     return FilterChip(
                       label: Text(kw),
                       onSelected: (_) => _toggleFilter(kw),
@@ -129,31 +133,23 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     );
                   }).toList(),
                 ),
-              ),
-              ListView.builder
-              (
-                shrinkWrap: true,
-                itemCount: _filteredSessions?.length,
-                itemBuilder: (content, index) 
-                {
-                  Map<String, dynamic>? sessionDataAsMap = _filteredSessions?[index];
-                  return 
-                  CustomExpansionTile
-                  (
-                    // TODO: code to complete
-                    text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
-                    textStyle: customExpansionTileTextStyle,
-                    expandedContentText: "",
-                    parentWidgetOnEditPressedCallBackFunction: 
-                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
-                    parentWidgetOnDeletePressedCallBackFunction: 
-                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
-                    parentWidgetOnSharePressedCallBackFunction: 
-                      () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));},
-                  );
-                },
-              ),
-            ],
-          );
+              );
+            }
+            
+            // session data after the first two indexes
+            Map<String, dynamic>? sessionDataAsMap = _filteredSessions?[index - 2];
+            return CustomExpansionTile(
+              text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
+              textStyle: customExpansionTileTextStyle,
+              expandedContentText: "",
+              parentWidgetOnEditPressedCallBackFunction: 
+                () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
+              parentWidgetOnDeletePressedCallBackFunction: 
+                () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
+              parentWidgetOnSharePressedCallBackFunction: 
+                () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));},
+            );
+          },
+        );
   }
 }
