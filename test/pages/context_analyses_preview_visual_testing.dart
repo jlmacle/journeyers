@@ -215,19 +215,19 @@ class MyTestingAppPreview extends StatelessWidget
                                 (
                                   item['checked'] != null
                                   ? Icons.check_box
-                                  : null
+                                  : Icons.text_snippet
                                 ),
                                 title: Text
                                 (
                                   item['text'] != null 
                                   ? item['text']
                                   :(item['noteTextField'] != null && item['noteTextField'] != "")
-                                  ? "Note: ${item['noteTextField']}"
+                                  ? "Notes: ${item['noteTextField']}"
                                   : "",
                                   style: const TextStyle(fontWeight: FontWeight.normal),
                                 ),
                                 subtitle: (item['note'] != null)
-                                  ? Text("Note: ${item['note']}")
+                                  ? Text("Notes: ${item['note']}")
                                   : null,
                               ),
                           ],
@@ -266,15 +266,15 @@ class MyTestingAppPreview extends StatelessWidget
                       [
                         ListTile
                         (
-                          leading: Icon(null),
+                          leading: Icon(Icons.text_snippet),
                           title: Text                            
                           ( 
                             question["items"]["answer"] == null
                             ?
-                            'Note: ${question["items"]["note"] ?? ""}'
+                            'Notes: ${question["items"]["note"] ?? ""}'
                             :
                             'Answer: ${question["items"]["answer"] ?? ""}'
-                            '\nNote: ${question["items"]["note"] ?? ""}'
+                            '\nNotes: ${question["items"]["note"] ?? ""}'
                           ),
                         ),
                       ],
