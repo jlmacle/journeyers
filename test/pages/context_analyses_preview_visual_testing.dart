@@ -257,8 +257,6 @@ class MyTestingAppPreview extends StatelessWidget
                     (
                       // to remove the borders
                       shape: Border.all(color: Colors.transparent, width: 0),
-                      // tilePadding: EdgeInsets.only(left:16, top:0, bottom: 0),
-                      // childrenPadding: EdgeInsets.only(left:16, top:0, bottom: 0),
                       initiallyExpanded: true, 
                       title: Text
                       (
@@ -267,7 +265,6 @@ class MyTestingAppPreview extends StatelessWidget
                       ),
                       children: 
                       [
-
                         for (var item in question['items'])
                           ListTile
                           (
