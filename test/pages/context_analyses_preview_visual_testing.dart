@@ -30,7 +30,6 @@ class MyTestingApp extends StatelessWidget
   }
 }
 
-// TODO: to work more on the padding
 class MyTestingAppPreview extends StatelessWidget 
 {
   MyTestingAppPreview({super.key});
@@ -84,41 +83,41 @@ class MyTestingAppPreview extends StatelessWidget
     {
       "title": "What problem(s) are the groups/teams trying to solve?",
       "items": 
-      [
-        {"note": ""},           
-      ]
+      {
+        "note": "",           
+      }
     },
     {
       "title": "Am I trying to solve the same problem(s) as my groups/teams?",
       "items": 
-      [
-        {"answer": "Yes"},
-        {"note": "A note about if I'm trying to solve the same problem(s) as my groups/teams"},           
-      ]
+      {
+        "answer": "Yes",
+        "note": "A note about if I'm trying to solve the same problem(s) as my groups/teams",           
+      }
     },
     {
       "title": "Is entering the group problem-solving process consistent with harmony at home?",
       "items": 
-      [
-        {"answer": "Yes"},
-        {"note": "A note about the consistency of entering the group problem-solving process with harmony at home"},           
-      ]
+      {
+        "answer": "Yes",
+        "note": "A note about the consistency of entering the group problem-solving process with harmony at home",           
+      }
     },
     {
       "title": "Is entering the group problem-solving process consistent with appreciability at work?",
       "items": 
-      [
-        {"answer": "Yes"},
-        {"note": ""},           
-      ]
+      {
+        "answer": "Yes",
+        "note": "",           
+      }
     },        
     {
       "title": "Is entering the group problem-solving process consistent with my income earning ability?",
       "items": 
-      [
-        {"answer": ""},
-        {"note": ""},           
-      ]
+      {
+        "answer": "",
+        "note": "",           
+      }
     },
   ]
 };
@@ -256,7 +255,7 @@ class MyTestingAppPreview extends StatelessWidget
                     ExpansionTile
                     (
                       // to remove the borders
-                      shape: Border.all(color: Colors.transparent, width: 0),
+                      shape: Border.all(color: Colors.transparent, width: 0),                      
                       initiallyExpanded: true, 
                       title: Text
                       (
@@ -265,19 +264,19 @@ class MyTestingAppPreview extends StatelessWidget
                       ),
                       children: 
                       [
-                        for (var item in question['items'])
-                          ListTile
-                          (
-                            leading: Icon(null),
-                            title: Text
-                            (
-                              item['note'] != null 
-                              ? "Note: ${item['note']}"
-                              : item['answer'] != null 
-                              ? "Answer: ${item['answer']}"
-                              : "",
-                            ),
+                        ListTile
+                        (
+                          leading: Icon(null),
+                          title: Text                            
+                          ( 
+                            question["items"]["answer"] == null
+                            ?
+                            'Note: ${question["items"]["note"] ?? ""}'
+                            :
+                            'Answer: ${question["items"]["answer"] ?? ""}'
+                            '\nNote: ${question["items"]["note"] ?? ""}'
                           ),
+                        ),
                       ],
                     ),
                 ],
