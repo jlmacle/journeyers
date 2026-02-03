@@ -4,6 +4,7 @@
 // flutter run -t ./test/pages/context_analyses_preview_visual_testing.dart -d macos
 // flutter run -t ./test/pages/context_analyses_preview_visual_testing.dart -d windows
 // Line for automated processing
+
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -270,6 +271,7 @@ class MyTestingAppPreview extends StatelessWidget
                         for (var item in question['items'])
                           ListTile
                           (
+                            leading: Icon(null),
                             title: Text
                             (
                               item['note'] != null 
