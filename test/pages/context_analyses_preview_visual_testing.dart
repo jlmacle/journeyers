@@ -34,6 +34,10 @@ class MyTestingAppPreview extends StatelessWidget
 {
   MyTestingAppPreview({super.key});
 
+  TextStyle styleExpansionTileTitle = TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
+  TextStyle styleExpandedTitleSubTitle = TextStyle(fontSize: 16);
+  TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
+
   final Map<String, dynamic> sectionsIndividual = 
   {
     "title": "As an individual: What problem am I trying to solve?",
@@ -45,7 +49,7 @@ class MyTestingAppPreview extends StatelessWidget
         [
           {"text": "To balance studies and household life?", "note": "", "checked":"yes"},
           {"text": "To balance accessing income and household life?", "note": "", "checked":""},
-          {"text": "To balance earning an income and household life?", "note": "A note about balancing earning an income and household life", "checked":"yes"},
+          {"text": "To balance earning an income and household life?", "note": "notes about balancing earning an income and household life", "checked":"yes"},
           {"text": "To balance helping others and household life?", "note": "", "checked":""},
         ]
       },
@@ -62,13 +66,15 @@ class MyTestingAppPreview extends StatelessWidget
         "items": 
         [
           {"text": "To have better legacies to our children/others?", "note": "", "checked":"yes"},
+          // {"text": "To have better legacies to our children/others?", "note": "", "checked":""},
         ]
       },
       {
         "title": "Is the issue of another type?",
         "items": 
         [
-          {"noteTextField": "A note about the other type of issue"},
+          {"noteTextField": "notes about the other type of issue"},
+          // {"noteTextField": ""}
         ]
       }
     ]
@@ -92,7 +98,7 @@ class MyTestingAppPreview extends StatelessWidget
       "items": 
       {
         "answer": "Yes",
-        "note": "A note about if I'm trying to solve the same problem(s) as my groups/teams",           
+        "note": "notes about if I'm trying to solve the same problem(s) as my groups/teams",           
       }
     },
     {
@@ -100,7 +106,7 @@ class MyTestingAppPreview extends StatelessWidget
       "items": 
       {
         "answer": "Yes",
-        "note": "A note about the consistency of entering the group problem-solving process with harmony at home",           
+        "note": "notes about the consistency of entering the group problem-solving process with harmony at home",           
       }
     },
     {
@@ -147,7 +153,7 @@ class MyTestingAppPreview extends StatelessWidget
                     child: Text
                     (
                       sectionsIndividual['title'],
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      style: styleExpansionTileTitle
                     ),
                   ),
 
@@ -166,13 +172,13 @@ class MyTestingAppPreview extends StatelessWidget
                           (question['items'] as List).any((item) => item['noteTextField'] != null && item['noteTextField'] != "")
                       ).isEmpty
                     )
-                      const Padding
+                      Padding
                       (
                         padding: EdgeInsets.only(left:16, top:8, bottom:8),
                         child: Text
                         (
                           'No question checked and no data in the last text field.',
-                          style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black),
+                          style: styleDataAbsent
                         ),
                       )
                     else
@@ -196,7 +202,7 @@ class MyTestingAppPreview extends StatelessWidget
                           title: Text
                           (
                             question['title'],
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: styleExpansionTileTitle
                           ),
                           children: 
                           [
@@ -224,10 +230,10 @@ class MyTestingAppPreview extends StatelessWidget
                                   :(item['noteTextField'] != null && item['noteTextField'] != "")
                                   ? "Notes: ${item['noteTextField']}"
                                   : "",
-                                  style: const TextStyle(fontWeight: FontWeight.normal),
+                                  style: styleExpandedTitleSubTitle                              
                                 ),
                                 subtitle: (item['note'] != null)
-                                  ? Text("Notes: ${item['note']}")
+                                  ? Text("Notes: ${item['note']}", style: styleExpandedTitleSubTitle)
                                   : null,
                               ),
                           ],
