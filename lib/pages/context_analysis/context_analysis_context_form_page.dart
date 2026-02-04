@@ -12,11 +12,11 @@ import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
-import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
-import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_padded_text_field.dart';
-import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 
 /// {@category Pages}

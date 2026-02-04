@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
+import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 void main() 
 {
