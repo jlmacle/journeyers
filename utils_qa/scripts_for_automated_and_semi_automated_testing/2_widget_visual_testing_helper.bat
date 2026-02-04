@@ -13,7 +13,6 @@ echo "After launching the terminals, programm to wait for the web servers to be 
 timeout /t 5 >nul
 
 
-
 start  flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field_visual_testing.dart  -d web-server --web-port  8091
 
 start  flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_expansion_tile_visual_testing.dart  -d web-server --web-port  8092
