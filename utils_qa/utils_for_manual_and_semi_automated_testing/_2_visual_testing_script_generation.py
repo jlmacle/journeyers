@@ -69,7 +69,7 @@ else:
     sys.exit()
 
 # Defining the relative path to the widgets directory
-widgets_dir_path = os.path.join("..", "..","test", "custom_widgets")
+widgets_dir_path = os.path.join("..", "..","test", "widgets", "custom")
 
 def main():
     print('')   
