@@ -1,14 +1,19 @@
 // Line for automated processing
-// flutter run -t ./test/custom_widgets/display_and_content/custom_focusable_text_visual_testing.dart -d chrome
-// flutter run -t ./test/custom_widgets/display_and_content/custom_focusable_text_visual_testing.dart -d linux
-// flutter run -t ./test/custom_widgets/display_and_content/custom_focusable_text_visual_testing.dart -d macos
-// flutter run -t ./test/custom_widgets/display_and_content/custom_focusable_text_visual_testing.dart -d windows
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_expansion_tile_visual_testing.dart -d chrome
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_expansion_tile_visual_testing.dart -d linux
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_expansion_tile_visual_testing.dart -d macos
+// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_expansion_tile_visual_testing.dart -d windows
 // Line for automated processing
 
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/custom_widgets/display_and_content/custom_focusable_text.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_expansion_tile.dart';
+
+
+// Utility class
+final PrintUtils pu = PrintUtils();
 
 void main() 
 {
@@ -24,7 +29,7 @@ class MyTestingApp extends StatefulWidget
   State<MyTestingApp> createState() => _MyTestingAppState();
 }
 
-class _MyTestingAppState extends State<MyTestingApp> 
+class _MyTestingAppState extends State<MyTestingApp>  
 {
   FocusNode appBarTitleFocusNode = FocusNode();
 
@@ -63,9 +68,11 @@ class _MyTestingAppState extends State<MyTestingApp>
         Center
         (
           child: 
-          CustomFocusableText
+          CustomExpansionTile
           (
-            text: 'You should be able to reach this text with the tab key',
+            parentWidgetOnEditPressedCallBackFunction: () {pu.printd('onEditPressed');},
+            parentWidgetOnDeletePressedCallBackFunction: () {pu.printd('onDeletePressed');},
+            parentWidgetOnSharePressedCallBackFunction: () {pu.printd('onSharePressed');},
           ),
         ),
       ),

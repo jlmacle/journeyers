@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/custom_widgets/display_and_content/custom_heading.dart';
-import 'package:journeyers/custom_widgets/interaction_and_inputs/custom_expansion_tile.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_expansion_tile.dart';
+import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 /// {@category Pages}
 /// {@category Context analysis}
