@@ -121,13 +121,13 @@ def main():
         # 4. Building the terminal commands
         port_number += 1
         cmd_line = (
-            f"{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_endish"]} {port_number}{system_adapted_data["after_web_ports"]}{EOL}"
+            f'{system_adapted_data["terminal_command_beginning"]} {processed_comment} {system_adapted_data["terminal_command_endish"]} {port_number}{system_adapted_data["after_web_ports"]}{EOL}'
         )
         cmd_lines += cmd_line
 
     # 4. Adding server startup timeout and browser commands
-    cmd_lines += f"{system_adapted_data["comment_character"]} Waiting for the web servers to start{EOL}"
-    cmd_lines += f"{system_adapted_data["time_for_servers_to_start"]} {EOL}"
+    cmd_lines += f'{system_adapted_data["comment_character"]} Waiting for the web servers to start{EOL}'
+    cmd_lines += f'{system_adapted_data["time_for_servers_to_start"]} {EOL}'
 
     start_port = 8091 
     last_port_number = port_number
@@ -140,13 +140,13 @@ def main():
         "..", 
         "utils_qa", 
         "scripts_for_automated_and_semi_automated_testing",
-        f"{system_adapted_data["output_file_name"]}"
+        f'{system_adapted_data["output_file_name"]}'
     )
     create_file_if_necessary_and_write_content(file_path=file_path_out, text=cmd_lines)
     print()
     print(f"The file should have been created at {file_path_out}")
     print()
-    print(f"{system_adapted_data["chmod"]}")
+    print(f'{system_adapted_data["chmod"]}')
 
 if __name__ == "__main__":
     main()
