@@ -1,9 +1,10 @@
 // Line for automated processing
-// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d chrome
-// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d linux
-// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d macos
-// flutter run -t ./test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
+// flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_language_switch_visual_testing.dart -d chrome
+// flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_language_switch_visual_testing.dart -d linux
+// flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_language_switch_visual_testing.dart -d macos
+// flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_language_switch_visual_testing.dart -d windows
 // Line for automated processing
+
 
 // "When locales specify a script code or country code,
 // a base locale (without the script code or country code) should exist as the fallback."
