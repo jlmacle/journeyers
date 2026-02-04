@@ -11,6 +11,7 @@ osascript -e 'tell application "Terminal" to do script "cd /Users/dev/Desktop/jo
 osascript -e 'tell application "Terminal" to do script "cd /Users/dev/Desktop/journeyers/; flutter run -t ./test/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field_visual_testing.dart -d web-server --web-port 8095"'
 osascript -e 'tell application "Terminal" to do script "cd /Users/dev/Desktop/journeyers/; flutter run -t ./test/widgets/custom/text/custom_focusable_text_visual_testing.dart -d web-server --web-port 8096"'
 osascript -e 'tell application "Terminal" to do script "cd /Users/dev/Desktop/journeyers/; flutter run -t ./test/widgets/custom/text/custom_heading_visual_testing.dart -d web-server --web-port 8097"'
+
 # Waiting for the web servers to start
 sleep 70 
 open -a "Google Chrome" "http://localhost:8091"
