@@ -69,7 +69,7 @@ else:
     sys.exit()
 
 # Defining the relative path to the widgets directory
-widgets_dir_path = os.path.join("..", "..","test", "widgets", "custom")
+widgets_dir_path = os.path.join(os.environ.get('JOURNEYERS_DIR'),"test", "widgets", "custom")
 
 def main():
     print('')   
@@ -136,8 +136,7 @@ def main():
 
     # 5. Writing the final script file
     file_path_out = os.path.join(
-        "..", 
-        "..", 
+        os.environ.get('JOURNEYERS_DIR'), 
         "utils_qa", 
         "scripts_for_automated_and_semi_automated_testing",
         f'{system_adapted_data["output_file_name"]}'
