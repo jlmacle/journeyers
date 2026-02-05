@@ -585,9 +585,9 @@ class CSVUtils {
   }
   
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
-  List<List<dynamic>> csvFileToPreviewPerspectiveData(String pathToCSVFile)
+  Map<String,List<dynamic>> csvFileToPreviewPerspectiveData(String pathToCSVFile)
   {
-    List<List<String>> perspectiveData = [];
+    Map<String,List<dynamic>> perspectiveData = {};
     // Some empty lines have been added for the csv formatting
     List<List<String>> individualPerspective = [];
     List<List<String>> groupPerspective = [];
@@ -639,12 +639,39 @@ class CSVUtils {
 
     }
     _pu.printd("");
+    _pu.printd("Data before removing empty lines:");
     _pu.printd("\nindividualPerspective: $individualPerspective");
     _pu.printd("\ngroupPerspective: $groupPerspective");
 
+    // Removing empty lines
+    List<List<String>> individualPerspectiveWithoutEmptyLines = [];
+    List<List<String>> groupPerspectiveWithoutEmptyLines = [];
+
+    individualPerspectiveWithoutEmptyLines = 
+      individualPerspective.where
+      (
+        (data) => data.join().trim().isNotEmpty
+      ).toList();
+
+    groupPerspectiveWithoutEmptyLines = 
+      groupPerspective.where
+      (
+        (data) => data.join().trim().isNotEmpty
+      ).toList();
+
+    _pu.printd("");
+    _pu.printd("Data after removing empty lines:");
+    _pu.printd("\nindividualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
+    _pu.printd("\ngroupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
+
+    perspectiveData["individualPerspective"] = individualPerspectiveWithoutEmptyLines;
+    perspectiveData["groupPerspective"] = groupPerspectiveWithoutEmptyLines;
 
     return perspectiveData;
   }  
+
+  
+
   //*****************  Methods retrieving the CSV data for edition or viewing: end  ***********************//
 
 }
