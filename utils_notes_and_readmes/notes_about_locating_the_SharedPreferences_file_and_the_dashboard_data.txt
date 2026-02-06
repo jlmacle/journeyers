@@ -9,3 +9,6 @@ macOS:
 Windows:
 C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\shared_preferences.json
 C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\dashboard_session_data_context_analyses.json
+
+iOS:
+Application deletion (Settings > General > iPhone Storage)
