@@ -253,7 +253,9 @@ class CSVUtils {
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel],
         );
         preCSVData.add(textFieldpreCSVData[0]);
-      } else {
+      } 
+      else 
+      {
         _pu.printd("");
         _pu.printd("Error: treatmentAccordingToInputType: no mapping found");
         _pu.printd("Error: level3Title: $itemOrTitleLabel");
@@ -567,7 +569,6 @@ class CSVUtils {
       if (char == "," && inQuotes == false)
       {
         data.add(itemData);
-        _pu.printd("itemData: $itemData");
         // resetting itemData
         itemData = "";
       }
@@ -603,8 +604,6 @@ class CSVUtils {
     for(var line in csvLines)
     {
       List<String> lineData = _csvLineToData(line);
-      _pu.printd("");
-      _pu.printd("lineData: $lineData");
 
       // 5 fields
       // the first 2 fields are for the individual perspective
@@ -619,7 +618,6 @@ class CSVUtils {
           individualPerspectiveItem.add(lineData[index].trim());
           if (index == 1)
           {
-            _pu.printd("");
             individualPerspective.add(individualPerspectiveItem);
             individualPerspectiveItem = [];
           }
@@ -629,8 +627,6 @@ class CSVUtils {
           groupPerspectiveItem.add(lineData[index].trim());
           if (index == 4)
           {
-            _pu.printd("");
-            _pu.printd("groupPerspectiveItem: $groupPerspectiveItem");
             groupPerspective.add(groupPerspectiveItem);
             groupPerspectiveItem = [];
           }
@@ -638,10 +634,6 @@ class CSVUtils {
       }
 
     }
-    _pu.printd("");
-    _pu.printd("Data before removing empty lines:");
-    _pu.printd("\nindividualPerspective: $individualPerspective");
-    _pu.printd("\ngroupPerspective: $groupPerspective");
 
     // Removing empty lines
     List<List<String>> individualPerspectiveWithoutEmptyLines = [];
