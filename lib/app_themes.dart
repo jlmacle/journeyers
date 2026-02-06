@@ -68,6 +68,13 @@ final TextStyle customExpansionTileTextStyle = TextStyle
   fontWeight: FontWeight.w500,
 );
 
+final TextStyle styleExpansionTileTitle = TextStyle
+(
+  fontSize: 20, fontWeight: FontWeight.w500
+);
+
+final TextStyle styleExpandedTitleSubTitle = TextStyle(fontSize: 16);
+
 final TextStyle feedbackMessageStyle = TextStyle
 (
   fontSize: 18,
@@ -94,6 +101,9 @@ final TextStyle dialogAcknowledgedStyle = TextStyle
   color: Colors.purple.shade400,
   fontSize: 20,
 );
+
+// Text styles: dashboard page related styles
+final TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
 
 
 //*********************  Text Field Hints  *********************//
