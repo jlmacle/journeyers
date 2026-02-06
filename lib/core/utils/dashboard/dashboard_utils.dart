@@ -65,7 +65,7 @@ class DashboardUtils {
     required Map<String, dynamic> sessionData,
   }) async 
   {
-    final file = await getSessionFile(typeOfContextData: typeOfContextData);
+    File file = await getSessionFile(typeOfContextData: typeOfContextData);
     // file created in getSessionFile if needed
 
     String updatedContent = "";
@@ -82,7 +82,7 @@ class DashboardUtils {
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
-  void saveDashboardData
+  Future<void> saveDashboardData
   ({
     required String typeOfContextData,
     required String analysisTitle,
@@ -99,9 +99,9 @@ class DashboardUtils {
     _pu.printd("analysisTitle: $analysisTitle");
 
     // Session data storage sample:
-    // {"records":[{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
+    // [{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
     // {"title":"Title session 2","keywords":["keyword1","keyword3"], "date":"01/18/26","filePath":"filePath2"},
-    // {"title":"Title session 3","keywords":["keyword1","keyword4"], "date":"01/18/26","filePath":"filePath3"}]}
+    // {"title":"Title session 3","keywords":["keyword1","keyword4"], "date":"01/18/26","filePath":"filePath3"}]
 
     // Building the session data
     // In the context analysis form page, filePath is tested for not null
@@ -124,7 +124,7 @@ class DashboardUtils {
   /// Method used to retrieved all the session data used for a dashboard.
   /// This data is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// In the case of the context analyses, the data retrieved has the format:
-  /// {"records":\[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]}
+  /// \[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]
   Future<List<dynamic>> retrieveAllDashboardSessionData({
     required String typeOfContextData,
   }) async {
