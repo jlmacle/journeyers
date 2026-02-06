@@ -3,6 +3,7 @@ Linux (Lubuntu):
 
 macOS:
 /Users/<user-name>/Library/Containers/dev.journeyers/Data/Library/Preferences/dev.journeyers.plist
+/Users/<user-name>/Library/Containers/dev.journeyers/Data/Library/Application Support/dev.journeyers/dashboard_session_data_context_analyses.json
 
 Windows:
 C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\shared_preferences.json
