@@ -1,3 +1,5 @@
+package dev.journeyers
+
 import android.content.ContentUris
 import android.provider.MediaStore
 import io.flutter.embedding.android.FlutterActivity
