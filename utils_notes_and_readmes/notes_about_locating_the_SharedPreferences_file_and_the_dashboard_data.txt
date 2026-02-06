@@ -1,5 +1,6 @@
 Linux (Lubuntu):
 /home/<user-name>/.local/share/dev.journeyers/shared_preferences.json
+/home/<user-name>/.local/share/dev.journeyers/dashboard_session_data_context_analyses.json
 
 macOS:
 /Users/<user-name>/Library/Containers/dev.journeyers/Data/Library/Preferences/dev.journeyers.plist
