@@ -32,7 +32,6 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
   {
     super.initState();
     _fetchingData();
-    _isLoading = false;
   }
 
   Future<void> _fetchingData() async
@@ -249,7 +248,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                     padding: const EdgeInsets.all(16.0),
                     child: Text
                     (
-                      sectionsIndividual['title'],
+                      sectionsIndividual['title'] ?? "Untitled",
                       style: styleExpansionTileTitle
                     ),
                   ),
