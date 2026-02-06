@@ -9,3 +9,8 @@ macOS:
 Windows:
 C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\shared_preferences.json
 C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\dashboard_session_data_context_analyses.json
+
+Android:
+Android Studio + View > Tool Windows > Device File Explorer
+/data/data/dev.journeyers/files/dashboard_session_data_context_analyses.json
+/data/data/dev.journeyers/shared_prefs/FlutterSharedPreferences.xml
