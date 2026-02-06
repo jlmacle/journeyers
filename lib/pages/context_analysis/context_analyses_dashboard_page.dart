@@ -5,6 +5,7 @@ import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_expansion_tile.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
 /// {@category Pages}
 /// {@category Context analysis}
@@ -141,7 +142,7 @@ Widget build(BuildContext context)
             return CustomExpansionTile(
               text: "${sessionDataAsMap?[DashboardUtils.keyTitle]} (${sessionDataAsMap?[DashboardUtils.keyDate]}) ",
               textStyle: customExpansionTileTextStyle,
-              expandedContentText: "",
+              expandedContentWidget: ContextAnalysisPreviewWidget(pathToCsvData: sessionDataAsMap?[DashboardUtils.keyFilePath]),
               parentWidgetOnEditPressedCallBackFunction: 
                 () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},
               parentWidgetOnDeletePressedCallBackFunction: 
