@@ -13,6 +13,8 @@ import 'package:journeyers/pages/context_analysis/context_analysis_new_session_p
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils up = UserPreferencesUtils();
 
+// TODO: appearance of the UI
+
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analyses.
