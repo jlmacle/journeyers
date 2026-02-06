@@ -14,3 +14,6 @@ Android:
 Android Studio + View > Tool Windows > Device File Explorer
 /data/data/dev.journeyers/files/dashboard_session_data_context_analyses.json
 /data/data/dev.journeyers/shared_prefs/FlutterSharedPreferences.xml
+
+iOS:
+Application deletion (Settings > General > iPhone Storage)
