@@ -9,8 +9,7 @@ is meant to support our group problem-solving processes, and to help us reach la
 Educational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
 The answers to the first set of questions is exportable to CSV.<br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
-The Android and iPhone apps, in their current stage, seem accessible (Android apk - [alpha version](https://drive.google.com/file/d/1wamXlk-OY9YgJBEDooJO9zugcmQAOJ2S/view?usp=sharing), and not the most recent code, as it still lacks user-friendliness). <br>
-Additional effort needs to be done for the accessibility of the desktop apps.<br>
+Additional effort needs to be done for the accessibility.<br>
 ([Flutter install](https://docs.flutter.dev/install))
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
