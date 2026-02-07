@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage>
               textOption2: "No",
               textOption3: "I don't know",
               textOptionsfontSize: 20,
-              textFieldHintText: textFieldHintTextHint,
+              textFieldHint: textFieldHint,
               parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
               parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction,
             ),

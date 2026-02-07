@@ -123,7 +123,7 @@ const String pleaseDevelopOrTakeNotesHint = 'Please develop.';
 const String pleaseDescribeTextGroupsHint =
     'Please describe the problem(s) that the groups/teams are trying to solve.';
 
-const String textFieldHintTextHint = "Please enter some text";
+const String textFieldHint = 'Please enter some text';
 
 
 //*********************  ThemeData  *********************//

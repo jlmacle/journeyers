@@ -30,7 +30,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final ListTileControlAffinity checkboxPosition;
 
   /// The hint text for the text field.
-  final String textFieldHintText;
+  final String textFieldHint;
 
   /// The left and right padding value for the text field.
   final double textFieldPaddingHorizontal;
@@ -70,7 +70,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
     this.checkboxIsChecked = false,
-    required this.textFieldHintText,
+    required this.textFieldHint,
     this.textFieldPaddingHorizontal = 20.0,
     this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
@@ -125,7 +125,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           CustomPaddedTextField
           (
             textFieldStartValue: _textFieldValue,
-            textFieldHintText: widget.textFieldHintText,
+            textFieldHint: widget.textFieldHint,
             textFieldMinLines: widget.textFieldMinLines,
             textFieldMaxLines: widget.textFieldMaxLines,
             textFieldMaxLength: widget.textFieldMaxLength,

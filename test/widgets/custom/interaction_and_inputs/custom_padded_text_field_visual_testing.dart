@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage>
           CustomPaddedTextField
           (
             paddingTop: 20,
-            textFieldHintText: pleaseDescribeTextHousehold,
+            textFieldHint: pleaseDescribeTextHousehold,
             parentWidgetTextFieldValueCallBackFunction: (String value) 
             {
               setState(() {_textContent = value;});

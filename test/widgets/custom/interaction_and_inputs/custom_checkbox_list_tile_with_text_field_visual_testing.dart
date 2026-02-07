@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage>
           CustomCheckBoxWithTextField
           (
             checkboxText: "Checkbox text",
-            textFieldHintText: textFieldHintTextHint,
+            textFieldHint: textFieldHint,
             parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
             parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction,
           ),
