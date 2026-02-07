@@ -502,28 +502,28 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem1,
-                    textFieldHintText: pleaseDescribeTextHouseholdHint,
+                    textFieldHint: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem2,
-                    textFieldHintText: pleaseDescribeTextHouseholdHint,
+                    textFieldHint: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem3,
-                    textFieldHintText: pleaseDescribeTextHouseholdHint,
+                    textFieldHint: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleBalanceIssueItem4,
-                    textFieldHintText: pleaseDescribeTextHouseholdHint,
+                    textFieldHint: pleaseDescribeTextHouseholdHint,
                     parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
                   ),
@@ -541,14 +541,14 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleWorkplaceIssueItem1,
-                    textFieldHintText: pleaseDescribeTextWorkplaceHint,
+                    textFieldHint: pleaseDescribeTextWorkplaceHint,
                     parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
                   ),
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleWorkplaceIssueItem2,
-                    textFieldHintText: pleaseDescribeTextWorkplaceHint,
+                    textFieldHint: pleaseDescribeTextWorkplaceHint,
                     parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
                   ),
@@ -566,7 +566,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   CustomCheckBoxWithTextField
                   (
                     checkboxText: q.level3TitleLegacyIssueItem1,
-                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
+                    textFieldHint: pleaseDevelopOrTakeNotesHint,
                     parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
                     parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
                   ),
@@ -583,7 +583,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                    ),
                   CustomPaddedTextField
                   (
-                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
+                    textFieldHint: pleaseDevelopOrTakeNotesHint,
                     textFieldMaxLength: FormUtils.chars1Page,
                     textFieldCounter: FormUtils.absentCounter,
                     parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
@@ -638,7 +638,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                   ),
                   CustomPaddedTextField
                   (
-                    textFieldHintText: pleaseDescribeTextGroupsHint,
+                    textFieldHint: pleaseDescribeTextGroupsHint,
                     textFieldMaxLength: FormUtils.chars1Page,
                     textFieldCounter: FormUtils.absentCounter,
                     parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
@@ -657,7 +657,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
+                    textFieldHint: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
                   ),
@@ -679,7 +679,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
+                    textFieldHint: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
                   ),
@@ -701,7 +701,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
+                    textFieldHint: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
                   ),
@@ -723,7 +723,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
-                    textFieldHintText: pleaseDevelopOrTakeNotesHint,
+                    textFieldHint: pleaseDevelopOrTakeNotesHint,
                     parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
                     parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
                   ),

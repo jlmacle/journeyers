@@ -30,7 +30,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final bool emptySelectionAllowed;
 
   /// The hint text for the text field.
-  final String textFieldHintText;
+  final String textFieldHint;
 
   /// The left and right padding value for the text field.
   final double textFieldPaddingHorizontal;
@@ -73,7 +73,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.emptySelectionAllowed = true,
     this.textOptionsfontSize = 24,
     this.textOptionsColor = Colors.black,
-    required this.textFieldHintText,
+    required this.textFieldHint,
     this.textFieldPaddingHorizontal = 20.0,
     this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
@@ -149,7 +149,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             CustomPaddedTextField
             (
               textFieldStartValue: _textFieldValue,
-              textFieldHintText: widget.textFieldHintText,
+              textFieldHint: widget.textFieldHint,
               parentWidgetTextFieldValueCallBackFunction: 
                 (String text) {widget.parentWidgetTextFieldValueCallBackFunction(text); setState(() {_textFieldValue = text;});},
               textFieldMinLines: widget.textFieldMinLines,

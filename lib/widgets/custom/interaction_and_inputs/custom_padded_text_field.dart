@@ -18,7 +18,7 @@ class CustomPaddedTextField extends StatefulWidget
   final TextAlign textAlignment;
 
   /// The hint text for the text field.
-  final String textFieldHintText;
+  final String textFieldHint;
 
   /// The minLines value for the text field.
   final int textFieldMinLines;
@@ -56,7 +56,7 @@ class CustomPaddedTextField extends StatefulWidget
     this.maintainState = true,
     this.textFieldStartValue = "",
     this.textAlignment = TextAlign.center,
-    required this.textFieldHintText,
+    required this.textFieldHint,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars10Lines, // 10 lines as a reference
@@ -143,7 +143,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         decoration: 
         InputDecoration
         (
-          hintText: widget.textFieldHintText,
+          hintText: widget.textFieldHint,
           errorText: _errorMessageForDoubleQuotes,
         ),
         minLines: widget.textFieldMinLines,
