@@ -18,6 +18,21 @@ class UserPreferencesUtils
     return prefs.getBool('isDialogStartMessageAcknowledged') ?? false;
   }
 
+  /// Method used to record the path of the folder selected for application use.
+  Future<void> saveApplicationFolderPath(String folderPath) async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('applicationFolderPath', folderPath);
+  }
+
+  /// Method used to check if the application folder path has been saved.
+  Future<String> getApplicationFolderPath() async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('applicationFolderPath') ?? "";
+  }
+
+
   /// Method used to record that session data has been saved.
   Future<void> saveSessionDataHasBeenSaved() async 
   {
