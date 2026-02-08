@@ -164,11 +164,9 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: ContextAnalysesDashboardPage()
               ),
             ]
-            else 
-              Expanded
-              (
-                child: ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability)
-              ),
+            else              
+              ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability)
+              
 
           ],
         ],
