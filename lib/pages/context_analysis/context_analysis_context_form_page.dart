@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
   UserPreferencesUtils upu = UserPreferencesUtils();
+
+  // Preferences
+  String? _applicationFolderPath = null; 
+  bool _isApplicationFolderPathLoading = true;
 
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
@@ -118,6 +123,13 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
+
+  // method used to get the set preferences
+  void getApplicationFolderPathPref() async
+  {    
+    _applicationFolderPath = await upu.getApplicationFolderPath();    
+    setState(() {_isApplicationFolderPathLoading = false;});
+  }
 
   // Callback methods
   // Individual perspective
@@ -371,6 +383,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   @override
   void initState() {
     super.initState();
+    getApplicationFolderPathPref();
 
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
@@ -806,20 +819,29 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
                       return KeyEventResult.ignored;
                     },
-                    child: ElevatedButton
-                    (
-                      focusNode: _saveDataButtonFocusNode,
-                      onPressed: print2CSV,
-                      // https://gemini.google.com/app/d67570647b3006af
-                      
-                      child: 
-                      Text
+                    child: 
+                    _isApplicationFolderPathLoading
+                    ?
+                    Center(child: CircularProgressIndicator())
+                    :
+                      Platform.isAndroid || Platform.isIOS
+                      ?
+                      Dialog(child: Wrap(children:[Text("Feature being implemented for Android. \nTo be done for iOS")]))
+                      :
+                      ElevatedButton
                       (
-                        'Click to save your data in CSV, \nspreadsheet-compatible format',
-                        style: elevatedButtonTextStyle,
-                        textAlign: TextAlign.center,
+                        focusNode: _saveDataButtonFocusNode,
+                        onPressed: print2CSV,
+                        // https://gemini.google.com/app/d67570647b3006af
+                        
+                        child: 
+                        Text
+                        (
+                          'Click to save your data in CSV, \nspreadsheet-compatible format',
+                          style: elevatedButtonTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
                   ),
 
                   // Gap(20),
