@@ -119,10 +119,8 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
 
-  // Callback methods from the form page
+  // Callback methods
   // Individual perspective
-  // _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecoration();
-  //   _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecoration();
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
   {
     setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});
