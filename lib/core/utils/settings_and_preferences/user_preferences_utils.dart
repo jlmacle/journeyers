@@ -1,9 +1,17 @@
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:journeyers/app_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 /// {@category Utils}
 /// A utility class related to user preferences.
 class UserPreferencesUtils 
 {
+  static const platform = MethodChannel('dev.journeyers/iossaf'); 
+
   /// Method used to avoid stale values by reloading
   Future<void> reload() async
   {
@@ -35,8 +43,20 @@ class UserPreferencesUtils
   /// Method used to check if the application folder path has been saved.
   Future<String> getApplicationFolderPath() async 
   {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('applicationFolderPath') ?? "";
+    String? folderPathData;
+
+    if (Platform.isIOS)
+      {
+        folderPathData = await platform.invokeMethod('getStoredDirectory');
+        print("******* Platform.isIOS: folderPathData: $folderPathData    **********");
+      }
+    else
+    {
+      final prefs = await SharedPreferences.getInstance();
+      folderPathData = prefs.getString('applicationFolderPath') ?? "";
+    }
+    
+    return Future.value(folderPathData);    
   }
 
 
