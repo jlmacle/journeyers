@@ -7,7 +7,6 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_new_session_page.dart';
 
 // Utility class
 PrintUtils pu = PrintUtils();
@@ -44,6 +43,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 
   // to help reset the start message status
   final bool _resetStartMessage = false;
+
+  FocusNode contextAnalysisFormPageFocusNode = FocusNode();
 
   getPreferences() async 
   {
@@ -124,6 +125,13 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   }
 
   @override
+  void dispose() 
+  {
+    contextAnalysisFormPageFocusNode.dispose();
+    super.dispose();
+  } 
+
+  @override
   Widget build(BuildContext context) 
   {
     return 
@@ -148,7 +156,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
             ),
           if (_preferencesLoading)
             Center(child: CircularProgressIndicator())
-          else ...[
+          else ...
+          [
             if (_wasContextAnalysisSessionDataSaved) ...[
               Padding(
                 padding: EdgeInsets.only(top:elevatedButtonPaddingTop, bottom: elevatedButtonPaddingBottom),
@@ -164,10 +173,21 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: ContextAnalysesDashboardPage()
               ),
             ]
-            else              
-              ContextAnalysisNewSessionPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability)
-              
-
+            else
+            Expanded
+            (
+              child: 
+              Padding
+              (
+                padding: const EdgeInsets.all(15.0),
+                child: 
+                Focus
+                (
+                  focusNode: contextAnalysisFormPageFocusNode,
+                  child: ContextAnalysisContextFormPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+                ),
+              ),
+            )
           ],
         ],
       ),
