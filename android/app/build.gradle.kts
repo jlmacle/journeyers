@@ -42,3 +42,8 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // This allows MainActivity.kt to resolve 'androidx.documentfile.provider.DocumentFile'
+    implementation("androidx.documentfile:documentfile:1.0.1")
+}

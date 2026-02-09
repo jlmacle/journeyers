@@ -4,9 +4,13 @@ import "dart:io";
 import "dart:typed_data";
 
 import "package:file_picker/file_picker.dart";
+import "package:flutter/services.dart";
 import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
+import "package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
+import "package:path/path.dart" as path;
+import "package:shared_preferences/shared_preferences.dart";
 
 /// {@category Utils}
 /// A utility class related to CSV.
@@ -20,6 +24,7 @@ class CSVUtils {
 
   // Utility classes
   final PrintUtils _pu = PrintUtils();
+  final UserPreferencesUtils _upu = UserPreferencesUtils();
 
   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -58,6 +63,9 @@ class CSVUtils {
 
   final ContextAnalysisContextFormQuestions _q =
       ContextAnalysisContextFormQuestions();
+
+
+  var platform = MethodChannel('dev.journeyers/saf');
 
   CSVUtils() {
     // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -492,13 +500,34 @@ class CSVUtils {
     return preCSVData;
   }
 
-  //*************** Printing methods ***************//
+  //*************** Printing/Saving methods ***************//
+
+  Future<String> _saveFileOnAndroid(String fileName, Uint8List dataBytes) async 
+  {
+    String? filePath;
+    
+    // The selected application folder is in the Kotlin file
+    // TODO: to modify
+    final bool success = await platform.invokeMethod('saveFile', 
+    {
+      'fileName': "$fileName.csv",
+      'content': dataBytes,
+    });
+    String folderPath = await _upu.getApplicationFolderPath();
+    filePath = "$folderPath/$fileName.csv";
+
+    _pu.printd("_saveFileOnAndroid: success: $success");
+    _pu.printd("filePath: $filePath");
+
+    return filePath;
+  }
 
   /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
     required List<dynamic> csvDataIndividualPerspective,
     required List<dynamic> csvDataGroupPerspective,
+    String? fileName
   }) async {
     // Complementing the shortest list to have the same length for both lists
     // before printing side to side
@@ -541,14 +570,32 @@ class CSVUtils {
     _pu.printd("csvDataGroupPerspective:$csvDataGroupPerspective");
     _pu.printd("");
 
-    final bytes = Uint8List.fromList(utf8.encode(content));
-    return await FilePicker.platform.saveFile(
-      dialogTitle: 'Please enter a file name',
-      fileName: '.csv',
-      bytes: bytes, // necessary, at least on Windows
-      type: FileType.custom, // necessary, at least on macOS
-      allowedExtensions: ['csv'],
-    );
+
+    final dataBytes = Uint8List.fromList(utf8.encode(content));
+    String? filePath;
+
+    if (Platform.isAndroid)
+    {
+      filePath = await _saveFileOnAndroid(fileName!, dataBytes);
+      
+    }
+    else if (Platform.isIOS)
+    {
+      
+    }
+    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
+    {
+      filePath = await FilePicker.platform.saveFile
+      (
+        dialogTitle: 'Please enter a file name',
+        fileName: '.csv',
+        bytes: dataBytes, // necessary, at least on Windows
+        type: FileType.custom, // necessary, at least on macOS
+        allowedExtensions: ['csv'],
+      );
+    }
+    
+    return filePath;
   }
 
   //*****************  Methods retrieving the CSV data for edition or viewing: beginning  ***********************//
@@ -586,19 +633,37 @@ class CSVUtils {
   }
   
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
-  Map<String,List<dynamic>> csvFileToPreviewPerspectiveData(String pathToCSVFile)
+  Future<Map<String,List<dynamic>>> csvFileToPreviewPerspectiveData(String pathToCSVFile) async
   {
     Map<String,List<dynamic>> perspectiveData = {};
     // Some empty lines have been added for the csv formatting
     List<List<String>> individualPerspective = [];
     List<List<String>> groupPerspective = [];
 
-    // Checking if the CSV file exists
-    File csvFile = File(pathToCSVFile);
-    if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $pathToCSVFile");
+    List<String> csvLines = [""];
 
-    // Loading the file content
-    List<String> csvLines = csvFile.readAsLinesSync();
+    if (Platform.isAndroid)
+    {
+      String fileName = path.basename(pathToCSVFile);
+      _pu.printd("csvFileToPreviewPerspectiveData on Android");
+      final String content = await platform.invokeMethod('readFileContent', {
+        'fileName': "$fileName",
+      }); 
+      _pu.printd("content: $content");
+      csvLines = LineSplitter.split(content).toList();
+    }
+    else if (Platform.isIOS)
+    {
+      // TODO
+    }
+    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
+    {
+      // Checking if the CSV file exists
+      File csvFile = File(pathToCSVFile);
+      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $pathToCSVFile");
+      // Loading the file content
+      csvLines = csvFile.readAsLinesSync();
+    }
 
     // Mapping the data toward the individual and group perspectives
     for(var line in csvLines)
@@ -662,6 +727,79 @@ class CSVUtils {
     return perspectiveData;
   }  
 
+  /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
+  Map<String,List<dynamic>> csvFileToPreviewPerspectiveDataFromBytes(Uint8List bytes)
+  {
+    Map<String,List<dynamic>> perspectiveData = {};
+    // Some empty lines have been added for the csv formatting
+    List<List<String>> individualPerspective = [];
+    List<List<String>> groupPerspective = [];
+
+    // utf8.decode handles the byte-to-string conversion
+    String content = utf8.decode(bytes);
+    List<String> csvLines = const LineSplitter().convert(content);
+
+    // Mapping the data toward the individual and group perspectives
+    for(var line in csvLines)
+    {
+      List<String> lineData = _csvLineToData(line);
+
+      // 5 fields
+      // the first 2 fields are for the individual perspective
+      // the last 2 fields are for the group perspective
+      List<String> individualPerspectiveItem = [];
+      List<String> groupPerspectiveItem = [];
+
+      for (var index = 0; index < 5; index++)
+      {
+        if (index == 0 || index == 1)
+        {
+          individualPerspectiveItem.add(lineData[index].trim());
+          if (index == 1)
+          {
+            individualPerspective.add(individualPerspectiveItem);
+            individualPerspectiveItem = [];
+          }
+        }
+        else if (index == 3 || index == 4)
+        {
+          groupPerspectiveItem.add(lineData[index].trim());
+          if (index == 4)
+          {
+            groupPerspective.add(groupPerspectiveItem);
+            groupPerspectiveItem = [];
+          }
+        }
+      }
+
+    }
+
+    // Removing empty lines
+    List<List<String>> individualPerspectiveWithoutEmptyLines = [];
+    List<List<String>> groupPerspectiveWithoutEmptyLines = [];
+
+    individualPerspectiveWithoutEmptyLines = 
+      individualPerspective.where
+      (
+        (data) => data.join().trim().isNotEmpty
+      ).toList();
+
+    groupPerspectiveWithoutEmptyLines = 
+      groupPerspective.where
+      (
+        (data) => data.join().trim().isNotEmpty
+      ).toList();
+
+    _pu.printd("");
+    _pu.printd("Data after removing empty lines:");
+    _pu.printd("\nindividualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
+    _pu.printd("\ngroupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
+
+    perspectiveData["individualPerspective"] = individualPerspectiveWithoutEmptyLines;
+    perspectiveData["groupPerspective"] = groupPerspectiveWithoutEmptyLines;
+
+    return perspectiveData;
+  } 
   
 
   //*****************  Methods retrieving the CSV data for edition or viewing: end  ***********************//
