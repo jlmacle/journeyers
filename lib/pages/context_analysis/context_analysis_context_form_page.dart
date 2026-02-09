@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/csv/csv_utils.dart';
@@ -19,7 +20,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 /// {@category Pages}
@@ -54,20 +55,23 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
-  UserPreferencesUtils upu = UserPreferencesUtils();
-
-  // Focus nodes and data related to reaching nodes
-  final FocusNode _saveDataButtonFocusNode = FocusNode();
-  final FocusNode _analysisTitleFocusNode = FocusNode();
-  bool movingThroughButton = false;
+  UserPreferencesUtils upu = UserPreferencesUtils();  
 
   // Question labels for the form
   ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
 
-  // Data structure
-  List<LinkedHashMap<String, dynamic>> _enteredData = [];
+  // Android: storage access framework (reading/saving files)
+  static const platform = MethodChannel('dev.journeyers/saf');
 
-  //*****************    State related code    **********************//
+  //**************** GLOBALKEYS related data ****************/
+  // Global keys to change text decoration
+  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
+
+
+  //**************** FORMVALUES related data ****************/
 
   bool _isIndividualAreaPerspectiveExpanded = false;
   bool _isGroupAreaPerspectiveExpanded = false;
@@ -109,41 +113,34 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   Set<String> _earningAbilitySegmentedButtonSelection = {};
   String _earningAbilityTextFieldContent = "";
 
-  // Session title
-  String _analysisTitle = "";
 
-  // Controller for the file keywords
-  final TextEditingController _keywordsController = TextEditingController();
-  final List<String> _keywords = [];
-
-  // Global keys to change text decoration
-  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
-
-  static const platform = MethodChannel('dev.journeyers/saf');
-
-  // Preferences
-  bool _isApplicationFolderPathLoading = true;
-  String _applicationFolderPath = "";
-
+  //**************** TEXTFIELD related data ****************/
   String? _fileName;
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForDotInFileName = "";
 
-  // method used to get the set preferences
-  void getApplicationFolderPathPref() async
-  { 
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.reload(); // necessary to have access to the newly set preference
-    pu.printd("getApplicationFolderPathPref()");
-    String folderPathData = await upu.getApplicationFolderPath();
-    pu.printd("folderPathData: $folderPathData");
-    // Application folder path called from the Kotlin code    
-    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData;});
+    // Controller for the file keywords
+  final TextEditingController _keywordsController = TextEditingController();
+  final List<String> _keywords = [];
+  
+  // Method used to add keywords
+  void addKeyword(String value)
+  {
+    var trimmedValue = value.trim();
+    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue))
+    {
+      setState(() 
+      {
+        _keywords.add(trimmedValue);
+        _keywordsController.clear();
+      });
+    }
   }
 
+   // Session title
+  String _analysisTitle = "";
+
+  // Method used to avoid an extension in the file name
   void fileNameCheck(value) 
   {
     if (value.contains('.')) 
@@ -176,6 +173,44 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     }
   }
 
+  //**************** FOCUSNODES related data ****************/
+  // Focus nodes and data related to reaching nodes
+  final FocusNode _saveDataButtonFocusNode = FocusNode();
+  final FocusNode _analysisTitleFocusNode = FocusNode();
+  bool movingThroughButton = false;
+
+
+
+  @override
+  void dispose()
+  {
+    _saveDataButtonFocusNode.dispose();
+    _analysisTitleFocusNode.dispose();
+    _keywordsController.dispose();
+    _fileNameController.dispose();
+    super.dispose();
+  }
+
+ 
+
+  //**************** PREFERENCES related data ****************/
+  bool _isApplicationFolderPathLoading = true;
+  String _applicationFolderPath = "";  
+
+  // method used to get the set preferences
+  void getApplicationFolderPathPref() async
+  { 
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.reload(); // necessary to have access to the newly set preference
+    pu.printd("getApplicationFolderPathPref()");
+    String folderPathData = await upu.getApplicationFolderPath();
+    pu.printd("folderPathData: $folderPathData");
+    // Application folder path called from the Kotlin code    
+    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData;});
+  }
+
+  
+  //**************** CALLBACKMETHODS related data ****************/
   // Callback methods
   // Individual perspective
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
@@ -261,8 +296,9 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
 
   _setAnalysisTitleTextFieldState(String newValue) {setState(() {_analysisTitle = newValue;});}
 
-  //*****************    Data structure related code    **********************//
-  
+  //**************** DATASTRUCTURE related data ****************/
+  // Data structure
+  List<LinkedHashMap<String, dynamic>> _enteredData = [];
   // Method used to store the data entered in the checkboxes, text fields and segmented buttons
   void dataStructureBuilding() 
   {
@@ -397,6 +433,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     pu.printd("");
   }
 
+  // Method used to store the form data to CSV
   void print2CSV() async 
   {
     dataStructureBuilding();
@@ -459,28 +496,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     
   }
 
-  @override
-  void dispose()
-  {
-    _saveDataButtonFocusNode.dispose();
-    _analysisTitleFocusNode.dispose();
-    _keywordsController.dispose();
-    _fileNameController.dispose();
-    super.dispose();
-  }
-
-  void addKeyword(String value)
-  {
-    var trimmedValue = value.trim();
-    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue))
-    {
-      setState(() 
-      {
-        _keywords.add(trimmedValue);
-        _keywordsController.clear();
-      });
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) 
