@@ -106,6 +106,7 @@ Widget build(BuildContext context)
 {
   return _isDataLoading
       ? Center(child: CircularProgressIndicator())
+      // TODO: a list allowing deletion in bulk
       : ListView.builder  
         (
           // Adding heading and keywords filtering to item count
