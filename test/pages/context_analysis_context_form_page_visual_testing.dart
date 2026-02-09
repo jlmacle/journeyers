@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_context_form_page.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
 
 void main() {
   // WidgetsFlutterBinding.ensureInitialized(); // was not necessary on Windows, was necessary for macos
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Center(child: ContextAnalysisContextFormPage()),
+        child: Center(child: ContextAnalysisFormPage()),
       ),
     );
   }
