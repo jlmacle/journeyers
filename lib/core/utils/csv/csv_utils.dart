@@ -5,12 +5,13 @@ import "dart:typed_data";
 
 import "package:file_picker/file_picker.dart";
 import "package:flutter/services.dart";
+
 import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 import "package:path/path.dart" as path;
-import "package:shared_preferences/shared_preferences.dart";
+
 
 /// {@category Utils}
 /// A utility class related to CSV.
@@ -506,8 +507,6 @@ class CSVUtils {
   {
     String? filePath;
     
-    // The selected application folder is in the Kotlin file
-    // TODO: to modify
     final bool success = await platform.invokeMethod('saveFile', 
     {
       'fileName': "$fileName.csv",
@@ -576,12 +575,11 @@ class CSVUtils {
 
     if (Platform.isAndroid)
     {
-      filePath = await _saveFileOnAndroid(fileName!, dataBytes);
-      
+      filePath = await _saveFileOnAndroid(fileName!, dataBytes);      
     }
     else if (Platform.isIOS)
     {
-      
+      // TODO
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
@@ -646,10 +644,8 @@ class CSVUtils {
     {
       String fileName = path.basename(pathToCSVFile);
       _pu.printd("csvFileToPreviewPerspectiveData on Android");
-      final String content = await platform.invokeMethod('readFileContent', {
-        'fileName': "$fileName",
-      }); 
-      _pu.printd("content: $content");
+      final String content = await platform.invokeMethod
+      ('readFileContent', {'fileName': fileName}); 
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isIOS)
