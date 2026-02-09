@@ -67,6 +67,7 @@ class CSVUtils {
 
 
   var platform = MethodChannel('dev.journeyers/saf');
+  var platformIOS = MethodChannel('dev.journeyers/iossaf');
 
   CSVUtils() {
     // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -521,6 +522,24 @@ class CSVUtils {
     return filePath;
   }
 
+  Future<String> _saveFileOniOS(String fileName, Uint8List dataBytes) async 
+  {
+    String? filePath;
+    
+    final bool success = await platformIOS.invokeMethod('saveFile', 
+    {
+      'fileName': "$fileName.csv",
+      'content': dataBytes,
+    });
+    String folderPath = await _upu.getApplicationFolderPath();
+    filePath = "$folderPath/$fileName.csv";
+
+    _pu.printd("_saveFileOnAndroid: success: $success");
+    _pu.printd("filePath: $filePath");
+
+    return filePath;
+  }
+
   /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
@@ -579,7 +598,7 @@ class CSVUtils {
     }
     else if (Platform.isIOS)
     {
-      // TODO
+      filePath = await _saveFileOniOS(fileName!, dataBytes);
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
@@ -650,7 +669,11 @@ class CSVUtils {
     }
     else if (Platform.isIOS)
     {
-      // TODO
+      String fileName = path.basename(pathToCSVFile);
+      _pu.printd("csvFileToPreviewPerspectiveData on iOS");
+      final String content = await platformIOS.invokeMethod
+      ('readFileContent', {'fileName': fileName}); 
+      csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
