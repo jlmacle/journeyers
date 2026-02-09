@@ -895,70 +895,49 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                       return KeyEventResult.ignored;
                     },
                     child: 
+                    // ... inside the Focus widget in build()
                     _isApplicationFolderPathLoading
-                    ?
-                    Center(child: CircularProgressIndicator())
-                    :
-                      Platform.isAndroid  
-                      ?
-                        // is the application folder path preference set?
-                        // if not set
-                        _applicationFolderPath == ""
-                        ?
-                        ElevatedButton(
-
-                          onPressed: () async {
-                            // This 'await' will now pause until onActivityResult finishes in Kotlin
-                            final result = await platform.invokeMethod('openDirectory');
-                            
-                            if (result != null) {
-                              // Now the preference is guaranteed to be in SharedPreferences
-                              getApplicationFolderPathPref(); 
-                            }
-                          },
-                          child: const Text('Please click to select, or create, a folder for the application to use as accessible storage'),
-                        )
-                        // if path set, file name to enter
-                        :
-                        TextField
-                        (
-                          controller: _fileNameController,
-                          decoration: InputDecoration(hint: Center(child: Text('Please add the file name, without .csv, here.'))),
-                          textAlign: TextAlign.center,
-                          onChanged: (String newValue) 
-                          {
-                            fileNameCheck(newValue);                            
-                          },
-                          onSubmitted: (value) async
-                          {
-                            setState(() {_fileName = value;});
-                            // Saving data
-                            await print2CSV();
-                            // Updating wasSessionDataSaved
-                            await upu.reload();
-                            print("upu.wasSessionDataSaved() :${await upu.wasSessionDataSaved()}");
-                          },
-                        )
-                      :
-                        Platform.isIOS
-                        ?
-                        Dialog(child: Wrap(children:[Text("Feature being implemented for Android. \nTo be done for iOS")]))
-                        // Desktop platforms
-                        :
-                        ElevatedButton
-                        (
-                          focusNode: _saveDataButtonFocusNode,
-                          onPressed: print2CSV,
-                          // https://gemini.google.com/app/d67570647b3006af
-                          
-                          child: 
-                          Text
-                          (
-                            'Click to save your data in CSV, \nspreadsheet-compatible format',
-                            style: elevatedButtonTextStyle,
-                            textAlign: TextAlign.center,
+                    ? Center(child: CircularProgressIndicator())
+                    : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
+                        ? _applicationFolderPath == ""
+                            ? ElevatedButton(
+                                onPressed: () async {
+                                  // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
+                                  final result = await platform.invokeMethod('openDirectory');
+                                  
+                                  if (result != null) {
+                                    // Refresh local state with the new path/bookmark
+                                    getApplicationFolderPathPref(); 
+                                  }
+                                },
+                                child: Text(Platform.isIOS 
+                                    ? 'Please select a folder for app storage' 
+                                    : 'Please select or create a folder for app storage'),
+                              )
+                            : TextField(
+                                controller: _fileNameController,
+                                decoration: InputDecoration(
+                                    hint: Center(child: Text('Please add the file name, without .csv, here.'))),
+                                textAlign: TextAlign.center,
+                                onChanged: (String newValue) {
+                                  fileNameCheck(newValue);                            
+                                },
+                                onSubmitted: (value) async {
+                                  setState(() { _fileName = value; });
+                                  // Saving data - will use the security bookmark on iOS
+                                  await print2CSV();
+                                  await upu.reload();
+                                },
+                              )
+                        : ElevatedButton( // Desktop platforms
+                            focusNode: _saveDataButtonFocusNode,
+                            onPressed: print2CSV,
+                            child: Text(
+                              'Click to save your data in CSV, \nspreadsheet-compatible format',
+                              style: elevatedButtonTextStyle,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                        ),
                   ),
 
                   // Gap(20),
