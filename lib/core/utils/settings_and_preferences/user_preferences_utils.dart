@@ -4,6 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// A utility class related to user preferences.
 class UserPreferencesUtils 
 {
+  /// Method used to avoid stale values by reloading
+  Future<void> reload() async
+  {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.reload();
+  }
+
   /// Method used to record that the start message has been acknowledged.
   Future<void> saveStartMessageAcknowledgement() async 
   {

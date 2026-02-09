@@ -31,7 +31,7 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 // When an expansion tile is expanded, the bottom bar items are excluded from focus.
 // If the user reaches the "save data" button, the bottom bar items are restored as accessible to focus. 
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
-class ContextAnalysisContextFormPage extends StatefulWidget 
+class ContextAnalysisFormPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
@@ -39,16 +39,16 @@ class ContextAnalysisContextFormPage extends StatefulWidget
   /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool value) {}
 
-  const ContextAnalysisContextFormPage({
+  const ContextAnalysisFormPage({
     super.key,
     this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
     });
 
   @override
-  State<ContextAnalysisContextFormPage> createState() => _ContextAnalysisContextFormPageState();
+  State<ContextAnalysisFormPage> createState() => _ContextAnalysisFormPageState();
 }
 
-class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextFormPage> 
+class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
 {
   // Utility classes
   CSVUtils cu = CSVUtils();
@@ -434,7 +434,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   }
 
   // Method used to store the form data to CSV
-  void print2CSV() async 
+  Future<void> print2CSV() async 
   {
     dataStructureBuilding();
 
@@ -915,13 +915,25 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                           controller: _fileNameController,
                           decoration: InputDecoration(hint: Center(child: Text('Please add the file name, without .csv, here.'))),
                           textAlign: TextAlign.center,
-                          onChanged: (String newValue){fileNameCheck(newValue);setState(() {});},
-                          onSubmitted: (value){setState(() {_fileName = value;});print2CSV();},
+                          onChanged: (String newValue) 
+                          {
+                            fileNameCheck(newValue);                            
+                          },
+                          onSubmitted: (value) async
+                          {
+                            setState(() {_fileName = value;});
+                            // Saving data
+                            await print2CSV();
+                            // Updating wasSessionDataSaved
+                            await upu.reload();
+                            print("upu.wasSessionDataSaved() :${await upu.wasSessionDataSaved()}");
+                          },
                         )
                       :
                         Platform.isIOS
                         ?
                         Dialog(child: Wrap(children:[Text("Feature being implemented for Android. \nTo be done for iOS")]))
+                        // Desktop platforms
                         :
                         ElevatedButton
                         (
