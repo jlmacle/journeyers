@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
@@ -18,6 +19,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 /// {@category Pages}
@@ -53,10 +55,6 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
   UserPreferencesUtils upu = UserPreferencesUtils();
-
-  // Preferences
-  String? _applicationFolderPath = null; 
-  bool _isApplicationFolderPathLoading = true;
 
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
@@ -124,11 +122,58 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
   final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
 
+  static const platform = MethodChannel('dev.journeyers/saf');
+
+  // Preferences
+  bool _isApplicationFolderPathLoading = true;
+  String _applicationFolderPath = "";
+
+  String? _fileName;
+  final TextEditingController _fileNameController = TextEditingController();
+  String _errorMessageForDotInFileName = "";
+
   // method used to get the set preferences
   void getApplicationFolderPathPref() async
-  {    
-    _applicationFolderPath = await upu.getApplicationFolderPath();    
-    setState(() {_isApplicationFolderPathLoading = false;});
+  { 
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.reload(); // necessary to have access to the newly set preference
+    pu.printd("getApplicationFolderPathPref()");
+    String folderPathData = await upu.getApplicationFolderPath();
+    pu.printd("folderPathData: $folderPathData");
+    // Application folder path called from the Kotlin code    
+    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData;});
+  }
+
+  void fileNameCheck(value) 
+  {
+    if (value.contains('.')) 
+    {
+      // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
+      value = value.replaceAll('.', '');
+      setState(() 
+      {
+        // Removes the quotes from the text field
+        _fileNameController.text = value;
+        // Updates the error message
+        _errorMessageForDotInFileName = '. are removed, as no extension should be entered in the file name.';
+        // "The assertiveness level of the announcement is determined by assertiveness.
+        // Currently, this is only supported by the web engine and has no effect on other platforms.
+        // The default mode is Assertiveness.polite."
+        // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+        // TODO:  TextDirection.ltr: code to modify for l10n
+        // Doesn't seem effective yet. Left for later.
+        SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDotInFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
+
+      });
+    } 
+    else 
+    {
+      setState(() 
+      {
+        _fileNameController.text = value;
+        _errorMessageForDotInFileName = "";
+      });
+    }
   }
 
   // Callback methods
@@ -370,7 +415,10 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
     List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
-    String? pathToCSVFile = await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, csvDataGroupPerspective: csvDataGroupPerspective);
+    String? pathToCSVFile = 
+      await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
+                          csvDataGroupPerspective: csvDataGroupPerspective,
+                          fileName: _fileName);
     pu.printd("pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
@@ -417,6 +465,7 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
     _saveDataButtonFocusNode.dispose();
     _analysisTitleFocusNode.dispose();
     _keywordsController.dispose();
+    _fileNameController.dispose();
     super.dispose();
   }
 
@@ -824,24 +873,54 @@ class _ContextAnalysisContextFormPageState extends State<ContextAnalysisContextF
                     ?
                     Center(child: CircularProgressIndicator())
                     :
-                      Platform.isAndroid || Platform.isIOS
+                      Platform.isAndroid  
                       ?
-                      Dialog(child: Wrap(children:[Text("Feature being implemented for Android. \nTo be done for iOS")]))
-                      :
-                      ElevatedButton
-                      (
-                        focusNode: _saveDataButtonFocusNode,
-                        onPressed: print2CSV,
-                        // https://gemini.google.com/app/d67570647b3006af
-                        
-                        child: 
-                        Text
+                        // is the application folder path preference set?
+                        // if not set
+                        _applicationFolderPath == ""
+                        ?
+                        ElevatedButton(
+
+                          onPressed: () async {
+                            // This 'await' will now pause until onActivityResult finishes in Kotlin
+                            final result = await platform.invokeMethod('openDirectory');
+                            
+                            if (result != null) {
+                              // Now the preference is guaranteed to be in SharedPreferences
+                              getApplicationFolderPathPref(); 
+                            }
+                          },
+                          child: const Text('Please click to select, or create, a folder for the application to use as accessible storage'),
+                        )
+                        // if path set, file name to enter
+                        :
+                        TextField
                         (
-                          'Click to save your data in CSV, \nspreadsheet-compatible format',
-                          style: elevatedButtonTextStyle,
+                          controller: _fileNameController,
+                          decoration: InputDecoration(hint: Center(child: Text('Please add the file name, without .csv, here.'))),
                           textAlign: TextAlign.center,
+                          onChanged: (String newValue){fileNameCheck(newValue);setState(() {});},
+                          onSubmitted: (value){setState(() {_fileName = value;});print2CSV();},
+                        )
+                      :
+                        Platform.isIOS
+                        ?
+                        Dialog(child: Wrap(children:[Text("Feature being implemented for Android. \nTo be done for iOS")]))
+                        :
+                        ElevatedButton
+                        (
+                          focusNode: _saveDataButtonFocusNode,
+                          onPressed: print2CSV,
+                          // https://gemini.google.com/app/d67570647b3006af
+                          
+                          child: 
+                          Text
+                          (
+                            'Click to save your data in CSV, \nspreadsheet-compatible format',
+                            style: elevatedButtonTextStyle,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
                   ),
 
                   // Gap(20),
