@@ -117,6 +117,16 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     await prefs.setBool('isDialogStartMessageAcknowledged', false);
   }
 
+  // Method used to refresh the page from context form to dashboard, 
+  // after form data has been saved
+  void onDataSaved() 
+  {
+    pu.printd("*********** onDataSaved **************** ");
+    setState(() {
+      _wasContextAnalysisSessionDataSaved = true;
+    });
+}
+
   @override
   void initState() 
   {
@@ -184,7 +194,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisFormPage(parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+                  child: ContextAnalysisFormPage(parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
                 ),
               ),
             )

@@ -33,14 +33,21 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
 class ContextAnalysisFormPage extends StatefulWidget 
 {
+  /// A callback function called after data has been saved, and used to pass from context analysis form to dashboard
+  final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
+
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
 
   /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool value) {}
 
+  /// A placeholder void callback function 
+  static void placeHolderVoidCallback() {}
+
   const ContextAnalysisFormPage({
     super.key,
+    this.parentWidgetCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
     this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
     });
 
@@ -463,6 +470,9 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
       du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
       upu.saveSessionDataHasBeenSaved();
     }
+    
+    // Page refreshing for dashboard display
+    widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
   }
 
   @override
