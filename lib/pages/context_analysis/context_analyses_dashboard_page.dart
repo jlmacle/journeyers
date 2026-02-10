@@ -85,6 +85,23 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
   }
 
+  void _deleteSelectedSessions() {
+    setState(() {
+      _allSessions?.removeWhere((session) => 
+        _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath]));
+      
+      // Selection cleared after deletion
+      _selectedSessionsForDeletion.clear();
+      
+      // Filtered list refreshed
+      _applyFilters();
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Selected sessions deleted.")),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,18 +184,21 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column(
+          child: Column
+          (
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextButton.icon(
-                onPressed: () {
-                  setState(() {
-                    _isAscending = !_isAscending;
-                    _sortSessionsByDate();
-                  });
-                },
-                icon: Icon(_isAscending ? Icons.arrow_upward : Icons.arrow_downward, color: Colors.black),
-                label: const Text("Sort by Date", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),),
-              ),
+                  TextButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        _isAscending = !_isAscending;
+                        _sortSessionsByDate();
+                      });
+                    },
+                    icon: Icon(_isAscending ? Icons.arrow_upward : Icons.arrow_downward, color: Colors.black),
+                    label: const Text("Sort by Date", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
+                  ),                 
+                  
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
@@ -190,7 +210,6 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Wrap(
             spacing: 8.0,
-            runSpacing: 0.0, // Vertical spacing between lines of chips
             children: _usedKeywords!.map((kw) {
               return FilterChip(
                 label: Text(kw),
@@ -200,6 +219,16 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
             }).toList(),
           ),
         ),
+        // Bulk Deletion Button added here
+        if (_selectedSessionsForDeletion.isNotEmpty)
+          TextButton.icon(
+            onPressed: _deleteSelectedSessions,
+            icon: const Icon(Icons.delete_sweep, color: Colors.red),
+            label: Text(
+              "Delete (${_selectedSessionsForDeletion.length})",
+              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            ),
+          ),
         const Divider(),
       ],
     );
