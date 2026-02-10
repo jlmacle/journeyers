@@ -5,6 +5,7 @@ import "dart:typed_data";
 
 import "package:file_picker/file_picker.dart";
 import "package:flutter/services.dart";
+import "package:flutter/widgets.dart";
 
 import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
@@ -747,5 +748,97 @@ class CSVUtils {
   }   
 
   //*****************  Methods retrieving the CSV data for edition or viewing: end  ***********************//
+  
+  //*****************  Methods deleting CSV data: beginning  ***********************//
+  Future<void> deleteCsvFile(String pathToCsv) async
+  {
+    if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
+    {
+      deleteCsvFileOnDesktop(pathToCsv);
+    }
+    else if (Platform.isAndroid)
+    {
+      deleteCsvFileOnAndroid(pathToCsv);
+    }
+    else if (Platform.isIOS)
+    {
+      deleteCsvFileOnIOS(pathToCsv);
+    }
+    else 
+    {
+      throw Exception("Platform not taken into account");
+    }
+
+  }
+
+
+  Future<void> deleteCsvFileOnDesktop(String pathToCsv) async
+  {
+    try {
+      final file = File(pathToCsv);
+
+      // Checking if the file exists before attempting to delete
+      if (await file.exists()) {
+        await file.delete();
+        _pu.printd("File successfully deleted: $pathToCsv");
+      } else {
+        _pu.printd("Deletion skipped: File does not exist at $pathToCsv");
+      }
+    } on FileSystemException catch (e) {
+      // Specifically handling OS-level errors like permission issues
+      _pu.printd("FileSystemException: Could not delete file. ${e.message}");
+    } catch (e) {
+      // General error handling
+      _pu.printd("An unexpected error occurred while deleting the file: $e");
+    }
+  }
+
+
+Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async {
+  try {
+    // Extracting only the filename from the path if necessary, 
+    // as findFile() in Kotlin expects the name within the tree
+    final fileName = pathToCsv.split('/').last;
+
+    final bool success = await platform.invokeMethod('deleteFile', {
+      'fileName': fileName,
+    });
+
+    if (success) {
+      _pu.printd("File deleted successfully from Android SAF storage.");
+    } else {
+      _pu.printd("Failed to delete file: File not found or permission denied.");
+    }
+    return success;
+  } on PlatformException catch (e) {
+    _pu.printd("PlatformException during deletion: ${e.message}");
+    return false;
+  }
+}
+
+Future<bool> deleteCsvFileOnIOS(String pathToCsv) async {
+  try {
+    // Extracting only the filename from the path if necessary, 
+    // as findFile() in Kotlin expects the name within the tree
+    final fileName = pathToCsv.split('/').last;
+
+    final bool success = await platformIOS.invokeMethod('deleteFile', {
+      'fileName': fileName,
+    });
+
+    if (success) {
+      _pu.printd("File deleted successfully from iOS SAF storage.");
+    } else {
+      _pu.printd("Failed to delete file: File not found or permission denied.");
+    }
+    return success;
+  } on PlatformException catch (e) {
+    _pu.printd("PlatformException during deletion: ${e.message}");
+    return false;
+  }
+}
+
+  //*****************  Methods deleting CSV data: beginning  ***********************//
+
 
 }
