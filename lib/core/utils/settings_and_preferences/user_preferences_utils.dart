@@ -73,4 +73,12 @@ class UserPreferencesUtils
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool('wasSessionDataSaved') ?? false;
   }
+
+  /// Method used to reset to false if session data has been saved.
+  Future<bool> resetWasSessionDataSaved() async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool('wasSessionDataSaved', false);
+  }
+
 }
