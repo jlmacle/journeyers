@@ -362,7 +362,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                       title: Text
                       (
                         question['title'], 
-                        style: const TextStyle(fontWeight: FontWeight.bold)
+                        style: styleExpansionTileTitle
                       ),
                       children: 
                       [
