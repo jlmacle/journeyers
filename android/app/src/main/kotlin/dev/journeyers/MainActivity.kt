@@ -74,6 +74,12 @@ class MainActivity: FlutterActivity() {
                     val content = readFileFromStoredFolder(fileName)
                     if (content != null) result.success(content) else result.error("READ_FAIL", "File not found", null)
                 }
+                // deletes a file with the given name
+                "deleteFile" -> {
+                    val fileName = call.argument<String>("fileName") ?: ""
+                    val success = deleteFromStoredFolder(fileName)
+                    result.success(success)
+                }
                 // Handles unknown method calls
                 else -> result.notImplemented()
             }
@@ -160,6 +166,48 @@ class MainActivity: FlutterActivity() {
         } catch (e: Exception) { 
             // Returns null if any exception occurs during file read
             null 
+        }
+    }
+
+    private fun deleteFromStoredFolder(fileName: String): Boolean {
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val uriString = prefs.getString(KEY_URI, null) ?: return false
+        val treeUri = Uri.parse(uriString)
+
+        return try {
+            val rootDoc = DocumentFile.fromTreeUri(this, treeUri)
+            val file = rootDoc?.findFile(fileName)
+            
+            if (file != null && file.exists()) {
+                // 1. Capture the URI before deletion
+                val fileUri = file.uri 
+                
+                // 2. Perform the deletion
+                val deleted = file.delete() 
+
+                if (deleted) {
+                    // 3. Notify the ContentResolver that this specific URI has changed
+                    // This is more effective for SAF than MediaScanner
+                    contentResolver.notifyChange(fileUri, null)
+                    
+                    // 4. Optional: If you still want to trigger a MediaScan for the path
+                    // Note: This only works if the URI can be resolved to a physical path
+                    val path = fileUri.path 
+                    if (path != null) {
+                        android.media.MediaScannerConnection.scanFile(
+                            this, arrayOf(path), null
+                        ) { _, _ -> println("Refresh scan complete") }
+                    }
+                    true
+                } else {
+                    false
+                }
+            } else {
+                false
+            }
+        } catch (e: Exception) {
+            println("Error deleting file: ${e.message}")
+            false
         }
     }
 
