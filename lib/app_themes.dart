@@ -266,6 +266,23 @@ final ThemeData appTheme = ThemeData
     ),
   ),
 
+  //*********************  TextButton  *********************//
+  textButtonTheme: TextButtonThemeData( // TODO: code to clean
+    style: ButtonStyle(
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      surfaceTintColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.hovered) || 
+              states.contains(WidgetState.pressed)) {
+            return Colors.transparent;
+          }
+          return null;
+        },
+      ),
+    ),
+  ),
 
   //*********************  TextTheme  *********************//
   // https://api.flutter.dev/flutter/material/TextTheme-class.html
