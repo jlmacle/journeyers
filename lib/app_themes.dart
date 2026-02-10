@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 //*********************  Colors  *********************//
 final Color navyBlue = Color(0xFF0a2e50);
 final Color paleCyan = Color(0xFFE9FAFC);
-
+final Color appBarWhite = Color(0xFFf6f1e9);
 
 //*********************  Gaps  *********************//
 // Gaps: gaps for the context analysis form
