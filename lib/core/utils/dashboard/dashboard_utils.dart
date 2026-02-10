@@ -137,4 +137,36 @@ class DashboardUtils {
 
     return completeSessionData;
   }
+
+  /// Method used to delete a specific session from the dashboard data file.
+  /// It identifies the session by its unique file path.
+  Future<void> deleteSessionData({
+    required String typeOfContextData,
+    required String filePathToDelete,
+  }) async {
+    try {
+      // Retrieving the correct JSON file based on the context
+      File file = await getSessionFile(typeOfContextData: typeOfContextData);
+      
+      // Reading and decoding the existing records
+      String jsonContent = await file.readAsString();
+      List<dynamic> recordsList = jsonDecode(jsonContent);
+
+      // Removing the record where the filePath matches the target
+      int originalLength = recordsList.length;
+      recordsList.removeWhere((session) => session[keyFilePath] == filePathToDelete);
+
+      // If a record was removed, saving the updated list back to the file
+      if (recordsList.length < originalLength) {
+        String updatedContent = jsonEncode(recordsList);
+        await file.writeAsString(updatedContent);
+        _pu.printd('Session with path $filePathToDelete removed from dashboard index.');
+      } else {
+        _pu.printd('No session found with path $filePathToDelete in dashboard index.');
+      }
+    } catch (e) {
+      _pu.printd("Error deleting session data from dashboard index: $e");
+    }
+  }
+
 }
