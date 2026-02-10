@@ -48,6 +48,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 
   getPreferences() async 
   {
+    // up.resetWasSessionDataSaved();
+
     pu.printd("\nEntering getPreferences");
     _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
     _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
