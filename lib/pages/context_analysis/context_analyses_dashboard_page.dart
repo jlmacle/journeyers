@@ -123,7 +123,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                           children: [
                             Text(
                               "${session[DashboardUtils.keyTitle]}",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(fontWeight: FontWeight.bold), // TODO: style to export
                             ),
                             IconButton(
                               visualDensity: VisualDensity.compact,
@@ -132,7 +132,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                             ),
                             Text(
                               "(${session[DashboardUtils.keyDate]})",
-                              style: const TextStyle(fontSize: 14, color: Colors.grey),
+                              style: const TextStyle(fontSize: 14, color: Colors.grey), // TODO: style to export
                             ),
                           ],
                         ),
@@ -175,11 +175,11 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   });
                 },
                 icon: Icon(_isAscending ? Icons.arrow_upward : Icons.arrow_downward, color: Colors.black),
-                label: const Text("Sort by Date", style: TextStyle(color: Colors.black),),
+                label: const Text("Sort by Date", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),), // TODO: style to export
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: const Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.bold)),
+                child: const Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)), // TODO: style to export
               ),
               
             ],
