@@ -145,7 +145,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                             IconButton(icon: const Icon(Icons.style_rounded), onPressed: () {}),
                             IconButton(icon: const Icon(Icons.share), onPressed: () {}),
                             IconButton(
-                              icon: const Icon(Icons.delete_rounded, color: Colors.red),
+                              icon: const Icon(Icons.delete_rounded),
                               onPressed: () {},
                             ),
                           ],
