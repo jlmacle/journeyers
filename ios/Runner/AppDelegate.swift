@@ -52,6 +52,11 @@ import Flutter
                 } else {
                     result(FlutterError(code: "READ_FAIL", message: "File not found", details: nil))
                 }
+
+            case "deleteFile":
+                let args = call.arguments as? [String: Any]
+                let fileName = args?["fileName"] as? String ?? ""
+                result(self.deleteFromStoredFolder(fileName: fileName))
                 
             default:
                 result(FlutterMethodNotImplemented)
@@ -90,6 +95,25 @@ import Flutter
             let fileUrl = folderUrl.appendingPathComponent(fileName)
             return try? String(contentsOf: fileUrl, encoding: .utf8)
         }
+    }
+
+    private func deleteFromStoredFolder(fileName: String) -> Bool {
+        return accessFolder { (folderUrl: URL) -> Bool in
+            let fileUrl = folderUrl.appendingPathComponent(fileName)
+            let fileManager = FileManager.default
+            
+            // Check if file exists before attempting deletion
+            if fileManager.fileExists(atPath: fileUrl.path) {
+                do {
+                    try fileManager.removeItem(at: fileUrl)
+                    return true
+                } catch {
+                    print("iOS Deletion Error: \(error)")
+                    return false
+                }
+            }
+            return false
+        } ?? false
     }
 
     /// Helper to resolve the bookmark and manage security-scoped access.
