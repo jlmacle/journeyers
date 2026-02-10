@@ -145,7 +145,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   }
 
    // Session title
-  String _analysisTitle = "";
+  String? _analysisTitle;
 
   // Method used to avoid an extension in the file name
   void fileNameCheck(value) 

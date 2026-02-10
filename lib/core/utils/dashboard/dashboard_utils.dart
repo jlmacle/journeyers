@@ -85,7 +85,7 @@ class DashboardUtils {
   Future<void> saveDashboardData
   ({
     required String typeOfContextData,
-    required String analysisTitle,
+    required String? analysisTitle,
     required List<String> keywords,
     required String pathToCSVFile,
   }) 
@@ -108,7 +108,7 @@ class DashboardUtils {
     // if (filePath != null) dashboardDataSaving(contextAnalysesData, analysisTitle, filePath);
     Map<String, dynamic> sessionData = 
     {
-      keyTitle: analysisTitle,
+      keyTitle: analysisTitle ?? "Untitled",
       keyKeywords: keywords,
       keyDate: formattedDate,
       keyFilePath: pathToCSVFile,
