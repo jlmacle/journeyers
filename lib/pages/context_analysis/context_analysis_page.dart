@@ -169,11 +169,11 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
           [
             if (_wasContextAnalysisSessionDataSaved) ...[
               Padding(
-                padding: EdgeInsets.only(top:elevatedButtonPaddingTop, bottom: elevatedButtonPaddingBottom),
+                padding: EdgeInsets.all(elevatedButtonPadding),
                 child: ElevatedButton
                 (
                   onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
-                  child: Text("Please click to start a new context analysis", style: elevatedButtonTextStyle),
+                  child: Text("Please click\nto start a new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),
                 ),
               ),
               Divider(thickness: 3),
