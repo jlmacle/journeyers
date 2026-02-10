@@ -118,27 +118,30 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                             });
                           },
                         ),
-                       title: Row(
-                          mainAxisSize: MainAxisSize.min,
+                        title: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 8,
                           children: [
                             Text(
                               "${session[DashboardUtils.keyTitle]}",
-                              style: const TextStyle(fontWeight: FontWeight.bold), // TODO: style to export
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
                             IconButton(
                               visualDensity: VisualDensity.compact,
+                              padding: EdgeInsets.zero,
+                              constraints: const BoxConstraints(),
                               icon: const Icon(Icons.edit, size: 18),
-                              onPressed: () {}, // TODO
+                              onPressed: () {},
                             ),
                             Text(
                               "(${session[DashboardUtils.keyDate]})",
-                              style: const TextStyle(fontSize: 14, color: Colors.grey), // TODO: style to export
+                              style: const TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                           ],
                         ),
                         subtitle: Text("Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}"),
                         trailing: Wrap(
-                          spacing: -8, // Tighter grouping for icons
+                          spacing: -8, 
                           children: [
                             IconButton(icon: const Icon(Icons.find_in_page_rounded), onPressed: () {}),
                             IconButton(icon: const Icon(Icons.edit_document), onPressed: () {}),
@@ -165,7 +168,6 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton.icon(
                 onPressed: () {
@@ -175,21 +177,20 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   });
                 },
                 icon: Icon(_isAscending ? Icons.arrow_upward : Icons.arrow_downward, color: Colors.black),
-                label: const Text("Sort by Date", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),), // TODO: style to export
+                label: const Text("Sort by Date", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)), // TODO: style to export
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
               ),
-              
             ],
           ),
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Wrap(
             spacing: 8.0,
+            runSpacing: 0.0, // Vertical spacing between lines of chips
             children: _usedKeywords!.map((kw) {
               return FilterChip(
                 label: Text(kw),
@@ -202,11 +203,5 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         const Divider(),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    contextAnalysisDashboardFocusNode.dispose();
-    super.dispose();
   }
 }
