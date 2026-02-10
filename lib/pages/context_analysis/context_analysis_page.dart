@@ -173,7 +173,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: ElevatedButton
                 (
                   onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
-                  child: Text("Click to start a new context analysis", style: elevatedButtonTextStyle),
+                  child: Text("Please click to start a new context analysis", style: elevatedButtonTextStyle),
                 ),
               ),
               Divider(thickness: 3),
