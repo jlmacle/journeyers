@@ -175,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage>
         BottomNavigationBar
         (
           
-          backgroundColor: Colors.white,
+          backgroundColor: navyBlue,
           currentIndex: _currentIndex,
           onTap: (index) 
           {
