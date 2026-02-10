@@ -19,6 +19,7 @@ final double betweenLevel3DividerThickness = 1;
 
 //*********************  Padding  *********************//
 // Paddings: elevated buttons padding
+final double elevatedButtonPadding = 20;
 final double elevatedButtonPaddingTop = 20;
 final double elevatedButtonPaddingBottom = 20;
 
