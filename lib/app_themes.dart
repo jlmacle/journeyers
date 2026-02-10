@@ -156,6 +156,32 @@ final ThemeData appTheme = ThemeData
     backgroundColor: const Color.fromARGB(255, 13, 13, 49),
   ),
 
+  bottomNavigationBarTheme: BottomNavigationBarThemeData
+  (
+    selectedItemColor: Color(0xFFf6f1e9), // appbar white
+    unselectedItemColor: Color(0xFFf6f1e9), // appbar white
+
+    selectedIconTheme: IconThemeData(
+      color: Color(0xFFf6f1e9), // appbar white      // Changes the color of the active icon
+      size: 30.0,                 // Increases the icon size when selected
+      opacity: 1.0,               // Ensures the icon is fully opaque
+    ),
+    // Unselected theme for contrast
+    unselectedIconTheme: IconThemeData(
+      color: Colors.grey,
+      size: 24.0,
+      opacity: 0.8,
+    ),
+    selectedLabelStyle: TextStyle(
+      color: Color(0xFFf6f1e9), // appbar white // Color of the text when selected
+      fontSize: 14.0,
+      fontWeight: FontWeight.bold,
+    ),
+    unselectedLabelStyle: TextStyle(
+      color: Colors.grey,       // Color of the text when not selected
+      fontSize: 12.0,
+    ),
+  ),
 
   //*********************  CheckboxTheme  *********************//
   checkboxTheme: CheckboxThemeData
