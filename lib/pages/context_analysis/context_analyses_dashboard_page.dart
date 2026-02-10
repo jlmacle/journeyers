@@ -86,10 +86,24 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
   }
 
-  void _deleteSelectedSessions() {
-    setState(() {
-      _allSessions?.removeWhere((session) => 
-        _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath]));
+  void _deleteSelectedSessions() async
+  {
+    // Removing files and dashboard data
+    for (var index = 0; index < _selectedSessionsForDeletion.length; index++)
+    {
+      // Removing files
+      await cu.deleteCsvFile(_selectedSessionsForDeletion[index]);
+      // Removing ashboard data
+      await du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: _selectedSessionsForDeletion[index]);
+    }
+    
+    // Updating state data
+    setState(() 
+    {
+      _allSessions?.removeWhere
+      (
+        (session) => _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath])
+      );
       
       // Selection cleared after deletion
       _selectedSessionsForDeletion.clear();
