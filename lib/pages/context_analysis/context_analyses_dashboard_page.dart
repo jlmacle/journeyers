@@ -5,6 +5,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
 class ContextAnalysesDashboardPage extends StatefulWidget {
   const ContextAnalysesDashboardPage({super.key});
@@ -160,7 +161,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                         trailing: Wrap(
                           spacing: -8, 
                           children: [
-                            IconButton(icon: const Icon(Icons.find_in_page_rounded), onPressed: () {}),
+                            IconButton(icon: const Icon(Icons.find_in_page_rounded), onPressed: (){_showPreviewOverlay(context, session[DashboardUtils.keyFilePath]);}),
                             IconButton(icon: const Icon(Icons.edit_document), onPressed: () {}),
                             IconButton(icon: const Icon(Icons.style_rounded), onPressed: () {}),
                             IconButton(icon: const Icon(Icons.share), onPressed: () {}),
@@ -233,4 +234,54 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       ],
     );
   }
+
+  void _showPreviewOverlay(BuildContext context, String filePath) {
+  showGeneralDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierLabel: "Close Preview", // Accessibility label
+    barrierColor: appBarWhite, //TODO: potential cleaning
+    transitionDuration: const Duration(milliseconds: 300),
+    pageBuilder: (context, anim1, anim2) {
+      return Scaffold(
+        appBar: AppBar(
+          // Ensures the title is perfectly centered between the buttons
+          centerTitle: true, 
+          title: const Text("Session Preview"),
+          
+          // Left side: Edit Button
+          leading: IconButton(
+            icon: const Icon(Icons.edit),
+            color: appBarWhite,
+            onPressed: () {},
+            tooltip: "Edit session",
+          ),
+          
+          // Right side: Close Button
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close),
+              color: appBarWhite,
+              onPressed: () => Navigator.of(context).pop(),
+              tooltip: "Close preview",
+            ),
+          ],
+        ),
+        body: SafeArea(
+          // SingleChildScrollView ensures the content is scrollable 
+          // regardless of the widget's internal structure
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ContextAnalysisPreviewWidget(
+                pathToCsvData: filePath,
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
 }
