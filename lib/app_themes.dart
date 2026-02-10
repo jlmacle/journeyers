@@ -142,7 +142,7 @@ final ThemeData appTheme = ThemeData
 
     titleTextStyle: TextStyle
     (
-      color: Color(0xFFf6f1e9),
+      color: Color(0xFFf6f1e9), // appbar white
       fontSize: 22,
       fontWeight: FontWeight.bold,
     ),
@@ -175,20 +175,25 @@ final ThemeData appTheme = ThemeData
   // to remove the emerald green color from appearing
   chipTheme: ChipThemeData
   (
-    backgroundColor: paleCyan,
-    labelStyle: const TextStyle(color: Colors.black), 
+    backgroundColor: navyBlue,
+    labelStyle: TextStyle
+    (
+      color: Color(0xFFf6f1e9), // appbar white
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    ),
     surfaceTintColor: Colors.transparent, 
     
-    selectedColor: paleCyan, 
-    selectedShadowColor: paleCyan,
+    selectedColor: navyBlue, 
+    selectedShadowColor: navyBlue,
     checkmarkColor: Colors.black,
 
     // added to stop a green flash
     color: WidgetStateProperty.resolveWith<Color?>((states) {
     if (states.contains(WidgetState.selected)) {
-      return paleCyan; 
+      return navyBlue; 
     }
-    return paleCyan; 
+    return navyBlue; 
   }),
     
     brightness: Brightness.light, 
