@@ -371,7 +371,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           leading: IconButton(
             icon: const Icon(Icons.edit),
             color: appBarWhite,
-            onPressed: () {},
+            onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
             tooltip: "Edit session",
           ),
           
