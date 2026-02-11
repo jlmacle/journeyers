@@ -108,6 +108,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         
         // Filtered list refreshed
         _applyFilters();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Selected session deleted.")),
+    );
       });
 
   }
@@ -135,22 +139,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         // Filtered list refreshed
         _applyFilters();
       });
-    }
-    
-    // Updating state data
-    setState(() 
-    {
-      _allSessions?.removeWhere
-      (
-        (session) => _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath])
-      );
-      
-      // Selection cleared after deletion
-      _selectedSessionsForDeletion.clear();
-      
-      // Filtered list refreshed
-      _applyFilters();
-    });
+    }    
     
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text("Selected sessions deleted.")),
