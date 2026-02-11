@@ -126,7 +126,16 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     setState(() {
       _wasContextAnalysisSessionDataSaved = true;
     });
-}
+  }
+
+  // Method used to refresh the page from dashboard to context form, 
+  // after all session files have been deleted
+  void onAllSessionFilesDeleted() 
+  {
+    setState(() {
+      _wasContextAnalysisSessionDataSaved = false;
+    });
+  }
 
   @override
   void initState() 
@@ -181,7 +190,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               Divider(thickness: 3),
               Expanded
               (
-                child: ContextAnalysesDashboardPage()
+                child: ContextAnalysesDashboardPage(parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
               ),
             ]
             else
