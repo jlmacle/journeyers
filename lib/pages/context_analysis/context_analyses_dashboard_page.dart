@@ -176,12 +176,12 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                           spacing: -8, 
                           children: [
                             IconButton(icon: const Icon(Icons.find_in_page_rounded), onPressed: (){_showPreviewOverlay(context, session[DashboardUtils.keyFilePath]);}),
-                            IconButton(icon: const Icon(Icons.edit_document), onPressed: () {}),
-                            IconButton(icon: const Icon(Icons.style_rounded), onPressed: () {}),
-                            IconButton(icon: const Icon(Icons.share), onPressed: () {}),
+                            IconButton(icon: const Icon(Icons.edit_document), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},),
+                            IconButton(icon: const Icon(Icons.style_rounded), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Keywords edition not yet implemented.')));}),
+                            IconButton(icon: const Icon(Icons.share), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));}),
                             IconButton(
                               icon: const Icon(Icons.delete_rounded),
-                              onPressed: () {},
+                              onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
                             ),
                           ],
                         ),
