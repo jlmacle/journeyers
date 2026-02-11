@@ -86,7 +86,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
   }
 
-  void _deleteSelectedSession(String filePath) async
+  Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the file
     await cu.deleteCsvFile(filePath);
@@ -95,10 +95,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     // Updating state data
       setState(() 
       {
-        _allSessions?.removeWhere
-        (
-          (session) => _allSessions!.contains(filePath)
-        );
+        _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);
         
         // Removing from selection list
         _selectedSessionsForDeletion.removeWhere
@@ -116,7 +113,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   }
 
-  void _deleteSelectedSessions() async
+  Future<void> _deleteSelectedSessions() async
   {
     // Removing files and dashboard data
     for (var index = 0; index < _selectedSessionsForDeletion.length; index++)
@@ -210,7 +207,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                             IconButton(icon: const Icon(Icons.share), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));}),
                             IconButton(
                               icon: const Icon(Icons.delete_rounded),
-                              onPressed: () {_deleteSelectedSession(session[DashboardUtils.keyFilePath]);},
+                              onPressed: () async {await _deleteSelectedSession(session[DashboardUtils.keyFilePath]);},
                             ),
                           ],
                         ),
