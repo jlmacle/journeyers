@@ -86,6 +86,32 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
   }
 
+  void _deleteSelectedSession(String filePath) async
+  {
+    // Removing the file
+    await cu.deleteCsvFile(filePath);
+    // Removing dashboard data
+    await du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: filePath);
+    // Updating state data
+      setState(() 
+      {
+        _allSessions?.removeWhere
+        (
+          (session) => _allSessions!.contains(filePath)
+        );
+        
+        // Removing from selection list
+        _selectedSessionsForDeletion.removeWhere
+        (
+          (session) => _selectedSessionsForDeletion.contains(filePath)
+        );
+        
+        // Filtered list refreshed
+        _applyFilters();
+      });
+
+  }
+
   void _deleteSelectedSessions() async
   {
     // Removing files and dashboard data
@@ -93,8 +119,22 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     {
       // Removing files
       await cu.deleteCsvFile(_selectedSessionsForDeletion[index]);
-      // Removing ashboard data
+      // Removing dashboard data
       await du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: _selectedSessionsForDeletion[index]);
+      // Updating state data
+      setState(() 
+      {
+        _allSessions?.removeWhere
+        (
+          (session) => _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath])
+        );
+        
+        // Selection cleared after deletion
+        _selectedSessionsForDeletion.clear();
+        
+        // Filtered list refreshed
+        _applyFilters();
+      });
     }
     
     // Updating state data
@@ -181,7 +221,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                             IconButton(icon: const Icon(Icons.share), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));}),
                             IconButton(
                               icon: const Icon(Icons.delete_rounded),
-                              onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Delete not yet implemented.')));},
+                              onPressed: () {_deleteSelectedSession(session[DashboardUtils.keyFilePath]);},
                             ),
                           ],
                         ),
