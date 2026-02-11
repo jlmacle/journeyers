@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp>
     (
       // To visualize the semantics tree
       // showSemanticsDebugger: true,
+      debugShowCheckedModeBanner: false,
       theme: appTheme,
       localizationsDelegates: 
       [
