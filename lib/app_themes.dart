@@ -203,17 +203,17 @@ final ThemeData appTheme = ThemeData
   chipTheme: ChipThemeData
   (
     backgroundColor: navyBlue,
+  
     labelStyle: TextStyle
     (
       color: Color(0xFFf6f1e9), // appbar white
       fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
-    surfaceTintColor: Colors.transparent, 
-    
+    surfaceTintColor: Colors.transparent,     
     selectedColor: navyBlue, 
     selectedShadowColor: navyBlue,
-    checkmarkColor: Colors.black,
+    checkmarkColor: appBarWhite,
 
     // added to stop a green flash
     color: WidgetStateProperty.resolveWith<Color?>((states) {
