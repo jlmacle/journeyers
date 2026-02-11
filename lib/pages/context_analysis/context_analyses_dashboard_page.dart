@@ -147,41 +147,40 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   }
 
-  Future<void> _deleteSelectedSessions() async
-  {
-    // Removing files and dashboard data
-    for (var index = 0; index < _selectedSessionsForDeletion.length; index++)
-    {
-      // Removing files
-      await cu.deleteCsvFile(_selectedSessionsForDeletion[index]);
-      // Removing dashboard data
-      await du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: _selectedSessionsForDeletion[index]);
-      // Updating state data
-      setState(() 
-      {
-        _allSessions?.removeWhere
-        (
-          (session) => _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath])
-        );
+  Future<void> _deleteSelectedSessions() async {
+  // Create a fixed list to iterate over so clearing doesn't break the loop
+  final filesToDelete = List<String>.from(_selectedSessionsForDeletion);
 
-        // Refreshing if no session data left
-        if (_allSessions != null  && _allSessions!.isEmpty) {widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();}
-        
-        // Selection cleared after deletion
-        _selectedSessionsForDeletion.clear();
-
-        // Updating the keyword list
-        _refreshKeywords();
-        
-        // Filtered list refreshed
-        _applyFilters();
-      });
-    }    
+  for (String filePath in filesToDelete) {
+    // 1. Physical file deletion (Ensure 'cu' is defined or use 'du')
+    await cu.deleteCsvFile(filePath); 
     
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Selected sessions deleted.")),
+    // 2. Database/Dashboard metadata deletion
+    await du.deleteSessionData(
+      typeOfContextData: DashboardUtils.contextAnalysesContext, 
+      filePathToDelete: filePath
     );
   }
+
+  // 3. Update UI state ONCE after all physical operations are done
+  setState(() {
+    _allSessions?.removeWhere((session) => 
+      filesToDelete.contains(session[DashboardUtils.keyFilePath])
+    );
+
+    if (_allSessions != null && _allSessions!.isEmpty) {
+      widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
+    }
+    
+    _selectedSessionsForDeletion.clear();
+    _refreshKeywords();
+    _applyFilters();
+  });
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text("Selected sessions deleted.")),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
