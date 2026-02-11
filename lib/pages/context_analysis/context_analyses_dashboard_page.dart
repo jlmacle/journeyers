@@ -8,7 +8,18 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
 class ContextAnalysesDashboardPage extends StatefulWidget {
-  const ContextAnalysesDashboardPage({super.key});
+
+  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form
+  final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
+
+  /// A placeholder void callback function 
+  static void placeHolderVoidCallback() {}
+
+  const ContextAnalysesDashboardPage
+  ({
+    super.key,
+    this.parentWidgetCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
+  });
 
   @override
   State<ContextAnalysesDashboardPage> createState() => _ContextAnalysesDashboardPageState();
@@ -113,7 +124,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       setState(() 
       {
         _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);
-        
+
+        // Refreshing if no session data left
+        if (_allSessions != null  && _allSessions!.isEmpty) {widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();}
+                
         // Removing from selection list
         _selectedSessionsForDeletion.removeWhere
         (
@@ -149,6 +163,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         (
           (session) => _selectedSessionsForDeletion.contains(session[DashboardUtils.keyFilePath])
         );
+
+        // Refreshing if no session data left
+        if (_allSessions != null  && _allSessions!.isEmpty) {widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();}
         
         // Selection cleared after deletion
         _selectedSessionsForDeletion.clear();
