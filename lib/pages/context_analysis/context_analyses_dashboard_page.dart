@@ -34,7 +34,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     _sessionDataRetrieval();
   }
 
-  void _sessionDataRetrieval() async {
+  Future<void> _sessionDataRetrieval() async {
     final data = await du.retrieveAllDashboardSessionData(
       typeOfContextData: DashboardUtils.contextAnalysesContext,
     );
@@ -75,7 +75,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     });
   }
 
-  void _applyFilters() {
+  Future<void> _applyFilters() async
+  {
     if (_selectedKeywords.isEmpty) {
       _filteredSessions = List.from(_allSessions!);
     } else {
@@ -85,6 +86,22 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       }).toList();
     }
   }
+
+  void _refreshKeywords() {
+  if (_allSessions == null) return;
+  
+  Set<String> kwSet = {};
+  for (var sessionData in _allSessions!) {
+    List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
+    kwSet.addAll(kws.cast<String>());
+  }
+  
+  setState(() {
+    _usedKeywords = kwSet.toList();
+    // Removing selected filters if the keyword no longer exists
+    _selectedKeywords.removeWhere((kw) => !kwSet.contains(kw));
+  });
+}
 
   Future<void> _deleteSelectedSession(String filePath) async
   {
@@ -102,8 +119,11 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         (
           (session) => _selectedSessionsForDeletion.contains(filePath)
         );
+
+        // Updating the keyword list
+        _refreshKeywords();
         
-        // Filtered list refreshed
+        // Refreshing filtered list
         _applyFilters();
 
         ScaffoldMessenger.of(context).showSnackBar(
@@ -132,6 +152,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         
         // Selection cleared after deletion
         _selectedSessionsForDeletion.clear();
+
+        // Updating the keyword list
+        _refreshKeywords();
         
         // Filtered list refreshed
         _applyFilters();
