@@ -467,8 +467,8 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
     {      
-      du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
-      upu.saveSessionDataHasBeenSaved();
+      await du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
+      await upu.saveSessionDataHasBeenSaved();
     }
     
     // Page refreshing for dashboard display
