@@ -186,53 +186,108 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                       final String filePath = session[DashboardUtils.keyFilePath];
                       final bool isChecked = _selectedSessionsForDeletion.contains(filePath);
 
-                      return ListTile(
-                        leading: Checkbox(
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              if (value == true) {
-                                _selectedSessionsForDeletion.add(filePath);
-                              } else {
-                                _selectedSessionsForDeletion.remove(filePath);
-                              }
-                            });
-                          },
-                        ),
-                        title: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: 8,
-                          children: [
-                            Text(
-                              "${session[DashboardUtils.keyTitle]}",
-                              style: const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            IconButton(
-                              visualDensity: VisualDensity.compact,
-                              padding: EdgeInsets.zero,
-                              constraints: const BoxConstraints(),
-                              icon: const Icon(Icons.edit, size: 18),
-                              onPressed: () {},
-                            ),
-                            Text(
-                              "(${session[DashboardUtils.keyDate]})",
-                              style: const TextStyle(fontSize: 14, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        subtitle: Text("Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}"),
-                        trailing: Wrap(
-                          spacing: -8, 
-                          children: [
-                            IconButton(icon: const Icon(Icons.find_in_page_rounded), onPressed: (){_showPreviewOverlay(context, session[DashboardUtils.keyFilePath]);}),
-                            IconButton(icon: const Icon(Icons.edit_document), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Edit not yet implemented.')));},),
-                            IconButton(icon: const Icon(Icons.style_rounded), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Keywords edition not yet implemented.')));}),
-                            IconButton(icon: const Icon(Icons.share), onPressed: () {ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Share not yet implemented.')));}),
-                            IconButton(
-                              icon: const Icon(Icons.delete_rounded),
-                              onPressed: () async {await _deleteSelectedSession(session[DashboardUtils.keyFilePath]);},
-                            ),
-                          ],
+                      return Card(
+                        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Checkbox(
+                                    value: isChecked,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        if (value == true) {
+                                          _selectedSessionsForDeletion.add(filePath);
+                                        } else {
+                                          _selectedSessionsForDeletion.remove(filePath);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Wrap(
+                                          crossAxisAlignment: WrapCrossAlignment.center,
+                                          spacing: 8,
+                                          children: [
+                                            Text(
+                                              "${session[DashboardUtils.keyTitle]}",
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                            ),
+                                            Text(
+                                              "(${session[DashboardUtils.keyDate]})",
+                                              style: const TextStyle(fontSize: 14, color: Colors.grey),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          "Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}",
+                                          style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Divider(height: 20),
+                              // Action Bar: Split between Left and Right
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // Left Side Actions: Preview, Edit, Keywords
+                                  Wrap(
+                                    spacing: 4,
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(Icons.find_in_page_rounded),
+                                        onPressed: () => _showPreviewOverlay(context, filePath),
+                                        tooltip: "Preview",
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.edit_document),
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));
+                                        },
+                                        tooltip: "Edit Document",
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.style_rounded),
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Keywords edition not yet implemented.')));
+                                        },
+                                        tooltip: "Edit Keywords",
+                                      ),
+                                    ],
+                                  ),
+                                  // Right Side Actions: Share, Delete
+                                  Wrap(
+                                    spacing: 4,
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(Icons.share),
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Share not yet implemented.')));
+                                        },
+                                        tooltip: "Share",
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(Icons.delete_rounded),
+                                        onPressed: () async => await _deleteSelectedSession(filePath),
+                                        tooltip: "Delete",
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
