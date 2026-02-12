@@ -33,7 +33,7 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
 class ContextAnalysisFormPage extends StatefulWidget 
 {
-  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form
+  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
   final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.

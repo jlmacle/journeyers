@@ -4,13 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/files/files_utils.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
 class ContextAnalysesDashboardPage extends StatefulWidget {
 
-  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form
+  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
   final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
 
   /// A placeholder void callback function 
@@ -37,9 +36,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   final List<String> _selectedKeywords = [];
   final List<String> _selectedSessionsForDeletion = [];
 
-  DashboardUtils du = DashboardUtils();
-  PrintUtils pu = PrintUtils();
-  FileUtils fu = FileUtils();
+  DashboardUtils _du = DashboardUtils();
+  FileUtils _fu = FileUtils();
 
   @override
   void initState() {
@@ -48,10 +46,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
   Future<void> _sessionDataRetrieval() async {
-    final data = await du.retrieveAllDashboardSessionData(
+    final data = await _du.retrieveAllDashboardSessionData(
       typeOfContextData: DashboardUtils.contextAnalysesContext,
     );
-    _usedKeywords = await usedKeywords(data);
+    _usedKeywords = await _getUsedKeywords(data);
     _allSessions = data;
     _sortSessionsByDate();
     setState(() {
@@ -59,7 +57,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     });
   }
 
-  Future<List<String>> usedKeywords(List<dynamic> listOfSessionData) async {
+  Future<List<String>> _getUsedKeywords(List<dynamic> listOfSessionData) async {
     Set<String> kwSet = {};
     for (var sessionData in listOfSessionData) {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
@@ -119,9 +117,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the file
-    await fu.deleteCsvFile(filePath);
+    await _fu.deleteCsvFile(filePath);
     // Removing dashboard data
-    await du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: filePath);
+    await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: filePath);
     // Updating state data
       setState(() 
       {
@@ -155,10 +153,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   for (String filePath in filesToDelete) {
     // 1. Physical file deletion (Ensure 'cu' is defined or use 'du')
-    await fu.deleteCsvFile(filePath); 
+    await _fu.deleteCsvFile(filePath); 
     
     // 2. Database/Dashboard metadata deletion
-    await du.deleteSessionData(
+    await _du.deleteSessionData(
       typeOfContextData: DashboardUtils.contextAnalysesContext, 
       filePathToDelete: filePath
     );
@@ -316,6 +314,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     );
   }
 
+  // Method used to add sorting by date, filtering with keyword, and bulk deletion.
   Widget _buildFilterAndSortBar() {
     return Column(
       children: [
@@ -371,6 +370,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     );
   }
 
+  // Method used to display an overlay with a session data preview. 
   void _showPreviewOverlay(BuildContext context, String filePath) {
   showGeneralDialog(
     context: context,
@@ -381,7 +381,6 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     pageBuilder: (context, anim1, anim2) {
       return Scaffold(
         appBar: AppBar(
-          // Ensures the title is perfectly centered between the buttons
           centerTitle: true, 
           title: const Text("Session Preview"),
           
