@@ -146,6 +146,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         (
           hintText: widget.textFieldHint,
           errorText: _errorMessageForDoubleQuotes,
+          errorMaxLines: 3
         ),
         minLines: widget.textFieldMinLines,
         maxLines: widget.textFieldMaxLines,
