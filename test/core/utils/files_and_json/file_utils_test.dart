@@ -33,7 +33,7 @@ void main() {
       expect(fileExists, isFalse);
 
       // using the library
-      await fu.appendText(filePath: testFilePath, text: contentToWrite);
+      await fu.addTextAtFileEnd(filePath: testFilePath, text: contentToWrite);
 
       // testing if the content was written
       var testFile = File(testFilePath);
