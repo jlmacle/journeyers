@@ -83,33 +83,24 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: 
                 RichText
                 (
+                  textAlign: TextAlign.center,
                   text: 
                   TextSpan
                   (
                     text:
                         'This is your first context analysis.\n'
                         'The dashboard will be displayed after data from the context analysis has been saved.\n'
-                        'Please click to acknowledge.\n\n',
-                    style: dialogStyle,
+                        'Please click to acknowledge.\n',
+                    style: dialogStyle, 
                   ),
                 ),
               ),
             ),
-            actions: 
-            [
-              TextButton
-              (
-                onPressed: () 
-                {
-                  up.saveStartMessageAcknowledgement();
-                  Navigator.pop(context);
-                },
-                child: Text('Acknowledged', style: dialogAcknowledgedStyle),
-              ),
-            ],
           );
         },
       );
+
+
     }
   }
 

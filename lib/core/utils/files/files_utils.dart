@@ -169,6 +169,24 @@ class FileUtils
 
   //*****************  Methods used to save files: end  ***********************//
 
+  //*****************  Methods used to read files: beginning  ***********************//
+
+  /// Method used to read a text file on Android.
+  Future<String> readTextContentOnAndroid(String fileName) async
+  {
+    return await platformAndroid.invokeMethod
+        ('readFileContent', {'fileName': fileName}); 
+  }
+
+  /// Method used to read a text file on iOS.
+  Future<String> readTextContentOnIOS(String fileName) async
+  {
+    return await platformIOS.invokeMethod
+        ('readFileContent', {'fileName': fileName}); 
+  }
+
+
+  //*****************  Methods used to read files: end  ***********************//
   //*****************  Methods used to delete files: beginning  ***********************//
   /// Generic method used to delete a file 
   Future<void> deleteCsvFile(String pathToCsv) async

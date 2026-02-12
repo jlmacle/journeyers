@@ -14,7 +14,24 @@ import "package:path/path.dart" as path;
 
 /// {@category Utils}
 /// A utility class related to CSV.
-class CSVUtils {
+class CSVUtils 
+{
+  //******************** UTILS: beginning *******************//
+  // Utility classes
+  final PrintUtils _pu = PrintUtils();  
+  final FileUtils _fu = FileUtils();    
+  
+  // The questions used in the form
+  final ContextAnalysisContextFormQuestions _q =
+      ContextAnalysisContextFormQuestions();
+
+  /// Channel used for reading/writing files on Android
+  var _platformAndroid = MethodChannel('dev.journeyers/saf');
+  /// Channel used for communicating with iOS
+  var _platformIOS = MethodChannel('dev.journeyers/iossaf');
+
+  //******************** UTILS: end *******************//
+
   // Used in the pre-CSV data
   /// A label used in front of the content of answered questions.
   String notes = "Notes:";
@@ -22,9 +39,7 @@ class CSVUtils {
   /// Straight double quotes used to encapsulate the content of answered questions.
   String quotesForCSV = '"';
 
-  // Utility classes
-  final PrintUtils _pu = PrintUtils();  
-  final FileUtils _fu = FileUtils();
+
 
   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -61,13 +76,7 @@ class CSVUtils {
   /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
   List<dynamic> preCSVData = [];
 
-  final ContextAnalysisContextFormQuestions _q =
-      ContextAnalysisContextFormQuestions();
 
-  /// Channel used for communicating with Android
-  var _platform = MethodChannel('dev.journeyers/saf');
-  /// Channel used for communicating with iOS
-  var _platformIOS = MethodChannel('dev.journeyers/iossaf');
 
   CSVUtils() {
     // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -627,16 +636,14 @@ class CSVUtils {
     {
       String fileName = path.basename(pathToCSVFile);
       _pu.printd("csvFileToPreviewPerspectiveData on Android");
-      final String content = await _platform.invokeMethod
-      ('readFileContent', {'fileName': fileName}); 
+      final String content = await _fu.readTextContentOnAndroid(fileName);
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isIOS)
     {
       String fileName = path.basename(pathToCSVFile);
       _pu.printd("csvFileToPreviewPerspectiveData on iOS");
-      final String content = await _platformIOS.invokeMethod
-      ('readFileContent', {'fileName': fileName}); 
+      final String content = await _fu.readTextContentOnIOS(fileName);
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
