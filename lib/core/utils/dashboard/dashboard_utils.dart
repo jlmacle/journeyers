@@ -59,7 +59,7 @@ class DashboardUtils {
   /// Method used to save partial session data.
   /// In the case of the context analyses, the partial data saved has the format:
   /// {"title":"analysis1","keywords":["keyword1","keyword2"], "date":"12/19/25","filePath":"filePath1"}
-  Future<void> saveSessionDataUsefulForDashboard
+  Future<void> _saveSessionDataHelper
   ({
     required String typeOfContextData,
     required Map<String, dynamic> sessionData,
@@ -114,7 +114,7 @@ class DashboardUtils {
       keyFilePath: pathToCSVFile,
     };
     // Saving the session data
-    await saveSessionDataUsefulForDashboard
+    await _saveSessionDataHelper
     (
       typeOfContextData: typeOfContextData,
       sessionData: sessionData,
