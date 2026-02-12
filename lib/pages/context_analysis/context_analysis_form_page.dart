@@ -210,10 +210,10 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
     pu.printd("getApplicationFolderPathPref()");
-    String folderPathData = await upu.getApplicationFolderPath();
+    String? folderPathData = await upu.getApplicationFolderPath();
     pu.printd("folderPathData: $folderPathData");
     // Application folder path called from the Kotlin code    
-    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData;});
+    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData ?? "";});
   }
 
   

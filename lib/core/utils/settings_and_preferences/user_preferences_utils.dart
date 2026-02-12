@@ -41,7 +41,7 @@ class UserPreferencesUtils
   }
 
   /// Method used to check if the application folder path has been saved.
-  Future<String> getApplicationFolderPath() async 
+  Future<String?> getApplicationFolderPath() async 
   {
     String? folderPathData;
 

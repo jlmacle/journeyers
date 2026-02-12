@@ -138,7 +138,7 @@ class FileUtils
       'fileName': "$fileName.csv",
       'content': dataBytes,
     });
-    String folderPath = await _upu.getApplicationFolderPath();
+    String? folderPath = await _upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName.csv";
 
     _pu.printd("_saveFileOnAndroid: success: $success");
@@ -158,7 +158,7 @@ class FileUtils
       'fileName': "$fileName.csv",
       'content': dataBytes,
     });
-    String folderPath = await _upu.getApplicationFolderPath();
+    String? folderPath = await _upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName.csv";
 
     _pu.printd("_saveFileOnAndroid: success: $success");
