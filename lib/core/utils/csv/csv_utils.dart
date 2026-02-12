@@ -1,15 +1,13 @@
 import "dart:collection";
 import "dart:convert";
 import "dart:io";
-import "dart:typed_data";
 
 import "package:file_picker/file_picker.dart";
 import "package:flutter/services.dart";
-import "package:flutter/widgets.dart";
+import "package:journeyers/core/utils/files/files_utils.dart";
 
 import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
-import "package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 import "package:path/path.dart" as path;
 
@@ -25,8 +23,8 @@ class CSVUtils {
   String quotesForCSV = '"';
 
   // Utility classes
-  final PrintUtils _pu = PrintUtils();
-  final UserPreferencesUtils _upu = UserPreferencesUtils();
+  final PrintUtils _pu = PrintUtils();  
+  final FileUtils _fu = FileUtils();
 
   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -66,9 +64,10 @@ class CSVUtils {
   final ContextAnalysisContextFormQuestions _q =
       ContextAnalysisContextFormQuestions();
 
-
-  var platform = MethodChannel('dev.journeyers/saf');
-  var platformIOS = MethodChannel('dev.journeyers/iossaf');
+  /// Channel used for communicating with Android
+  var _platform = MethodChannel('dev.journeyers/saf');
+  /// Channel used for communicating with iOS
+  var _platformIOS = MethodChannel('dev.journeyers/iossaf');
 
   CSVUtils() {
     // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -325,7 +324,7 @@ class CSVUtils {
     return preCSVData;
   }
 
-  /// Method to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file).
+  /// Method used to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file).
   ///
   /// Xs in front of the questions with a checked checkbox,
   /// and for their title level 3 parent if existant.
@@ -505,42 +504,6 @@ class CSVUtils {
 
   //*************** Printing/Saving methods ***************//
 
-  Future<String> _saveFileOnAndroid(String fileName, Uint8List dataBytes) async 
-  {
-    String? filePath;
-    
-    final bool success = await platform.invokeMethod('saveFile', 
-    {
-      'fileName': "$fileName.csv",
-      'content': dataBytes,
-    });
-    String folderPath = await _upu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileName.csv";
-
-    _pu.printd("_saveFileOnAndroid: success: $success");
-    _pu.printd("filePath: $filePath");
-
-    return filePath;
-  }
-
-  Future<String> _saveFileOniOS(String fileName, Uint8List dataBytes) async 
-  {
-    String? filePath;
-    
-    final bool success = await platformIOS.invokeMethod('saveFile', 
-    {
-      'fileName': "$fileName.csv",
-      'content': dataBytes,
-    });
-    String folderPath = await _upu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileName.csv";
-
-    _pu.printd("_saveFileOnAndroid: success: $success");
-    _pu.printd("filePath: $filePath");
-
-    return filePath;
-  }
-
   /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
@@ -595,11 +558,11 @@ class CSVUtils {
 
     if (Platform.isAndroid)
     {
-      filePath = await _saveFileOnAndroid(fileName!, dataBytes);      
+      filePath = await _fu.saveFileOnAndroid(fileName!, dataBytes);      
     }
     else if (Platform.isIOS)
     {
-      filePath = await _saveFileOniOS(fileName!, dataBytes);
+      filePath = await _fu.saveFileOniOS(fileName!, dataBytes);
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
@@ -664,7 +627,7 @@ class CSVUtils {
     {
       String fileName = path.basename(pathToCSVFile);
       _pu.printd("csvFileToPreviewPerspectiveData on Android");
-      final String content = await platform.invokeMethod
+      final String content = await _platform.invokeMethod
       ('readFileContent', {'fileName': fileName}); 
       csvLines = LineSplitter.split(content).toList();
     }
@@ -672,7 +635,7 @@ class CSVUtils {
     {
       String fileName = path.basename(pathToCSVFile);
       _pu.printd("csvFileToPreviewPerspectiveData on iOS");
-      final String content = await platformIOS.invokeMethod
+      final String content = await _platformIOS.invokeMethod
       ('readFileContent', {'fileName': fileName}); 
       csvLines = LineSplitter.split(content).toList();
     }
@@ -748,97 +711,5 @@ class CSVUtils {
   }   
 
   //*****************  Methods retrieving the CSV data for edition or viewing: end  ***********************//
-  
-  //*****************  Methods deleting CSV data: beginning  ***********************//
-  Future<void> deleteCsvFile(String pathToCsv) async
-  {
-    if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
-    {
-      deleteCsvFileOnDesktop(pathToCsv);
-    }
-    else if (Platform.isAndroid)
-    {
-      deleteCsvFileOnAndroid(pathToCsv);
-    }
-    else if (Platform.isIOS)
-    {
-      deleteCsvFileOnIOS(pathToCsv);
-    }
-    else 
-    {
-      throw Exception("Platform not taken into account");
-    }
-
-  }
-
-
-  Future<void> deleteCsvFileOnDesktop(String pathToCsv) async
-  {
-    try {
-      final file = File(pathToCsv);
-
-      // Checking if the file exists before attempting to delete
-      if (await file.exists()) {
-        await file.delete();
-        _pu.printd("File successfully deleted: $pathToCsv");
-      } else {
-        _pu.printd("Deletion skipped: File does not exist at $pathToCsv");
-      }
-    } on FileSystemException catch (e) {
-      // Specifically handling OS-level errors like permission issues
-      _pu.printd("FileSystemException: Could not delete file. ${e.message}");
-    } catch (e) {
-      // General error handling
-      _pu.printd("An unexpected error occurred while deleting the file: $e");
-    }
-  }
-
-
-Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async {
-  try {
-    // Extracting only the filename from the path if necessary, 
-    // as findFile() in Kotlin expects the name within the tree
-    final fileName = pathToCsv.split('/').last;
-
-    final bool success = await platform.invokeMethod('deleteFile', {
-      'fileName': fileName,
-    });
-
-    if (success) {
-      _pu.printd("File deleted successfully from Android SAF storage.");
-    } else {
-      _pu.printd("Failed to delete file: File not found or permission denied.");
-    }
-    return success;
-  } on PlatformException catch (e) {
-    _pu.printd("PlatformException during deletion: ${e.message}");
-    return false;
-  }
-}
-
-Future<bool> deleteCsvFileOnIOS(String pathToCsv) async {
-  try {
-    // Extracting only the filename from the path if necessary, 
-    // as findFile() in Kotlin expects the name within the tree
-    final fileName = pathToCsv.split('/').last;
-
-    final bool success = await platformIOS.invokeMethod('deleteFile', {
-      'fileName': fileName,
-    });
-
-    if (success) {
-      _pu.printd("File deleted successfully from iOS SAF storage.");
-    } else {
-      _pu.printd("Failed to delete file: File not found or permission denied.");
-    }
-    return success;
-  } on PlatformException catch (e) {
-    _pu.printd("PlatformException during deletion: ${e.message}");
-    return false;
-  }
-}
-
-  //*****************  Methods deleting CSV data: beginning  ***********************//
-
 
 }

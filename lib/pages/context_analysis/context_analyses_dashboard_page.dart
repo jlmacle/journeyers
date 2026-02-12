@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
@@ -38,6 +39,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   DashboardUtils du = DashboardUtils();
   PrintUtils pu = PrintUtils();
+  FileUtils fu = FileUtils();
 
   @override
   void initState() {
@@ -117,7 +119,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the file
-    await cu.deleteCsvFile(filePath);
+    await fu.deleteCsvFile(filePath);
     // Removing dashboard data
     await du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: filePath);
     // Updating state data
@@ -153,7 +155,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   for (String filePath in filesToDelete) {
     // 1. Physical file deletion (Ensure 'cu' is defined or use 'du')
-    await cu.deleteCsvFile(filePath); 
+    await fu.deleteCsvFile(filePath); 
     
     // 2. Database/Dashboard metadata deletion
     await du.deleteSessionData(
