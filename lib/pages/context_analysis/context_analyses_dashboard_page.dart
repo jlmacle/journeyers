@@ -7,6 +7,9 @@ import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
+/// {@category Pages}
+/// {@category Context analysis}
+/// The page displaying a dashboard of the past context analyses.
 class ContextAnalysesDashboardPage extends StatefulWidget {
 
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
