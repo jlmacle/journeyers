@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/files/files_utils.dart';
+import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
@@ -39,8 +40,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   final List<String> _selectedKeywords = [];
   final List<String> _selectedSessionsForDeletion = [];
 
-  DashboardUtils _du = DashboardUtils();
-  FileUtils _fu = FileUtils();
+  final DashboardUtils _du = DashboardUtils();
+  final FileUtils _fu = FileUtils();
+  final UserPreferencesUtils _upu = UserPreferencesUtils();
 
   @override
   void initState() {
@@ -121,33 +123,39 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   {
     // Removing the file
     await _fu.deleteCsvFile(filePath);
+
     // Removing dashboard data
     await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: filePath);
+    
     // Updating state data
-      setState(() 
-      {
-        _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);
+    setState(() 
+    {
+      _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
+              
+      // Removing from selection list
+      _selectedSessionsForDeletion.removeWhere
+      (
+        (session) => _selectedSessionsForDeletion.contains(filePath)
+      );
 
-        // Refreshing if no session data left
-        if (_allSessions != null  && _allSessions!.isEmpty) {widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();}
-                
-        // Removing from selection list
-        _selectedSessionsForDeletion.removeWhere
-        (
-          (session) => _selectedSessionsForDeletion.contains(filePath)
-        );
+      // Updating the keyword list
+      _refreshKeywords();
+      
+      // Refreshing filtered list
+      _applyFilters();
 
-        // Updating the keyword list
-        _refreshKeywords();
-        
-        // Refreshing filtered list
-        _applyFilters();
+      ScaffoldMessenger.of(context).showSnackBar
+      (const SnackBar(content: Text("Selected session deleted.")));
+    });
 
-        ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Selected session deleted.")),
-    );
-      });
-
+    // Refreshing and resetting "wasSessionDataSaved" if no session data left
+    if (_allSessions != null  && _allSessions!.isEmpty) 
+    {
+      // reseting 
+      await _upu.resetWasSessionDataSaved();
+      // refreshing the page
+      widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
+    }
   }
 
   Future<void> _deleteSelectedSessions() async {
@@ -171,10 +179,6 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
 
-    if (_allSessions != null && _allSessions!.isEmpty) {
-      widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
-    }
-    
     _selectedSessionsForDeletion.clear();
     _refreshKeywords();
     _applyFilters();
@@ -183,6 +187,15 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   ScaffoldMessenger.of(context).showSnackBar(
     const SnackBar(content: Text("Selected sessions deleted.")),
   );
+
+  // Refreshing and resetting "wasSessionDataSaved" if no session data left
+  if (_allSessions != null  && _allSessions!.isEmpty) 
+  {
+    // reseting 
+    await _upu.resetWasSessionDataSaved();
+    // refreshing the page
+    widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
+  }
 }
 
   @override
