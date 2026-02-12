@@ -8,7 +8,9 @@ and with a goal of being multilingual, accessible, and offline-friendly), <br>
 is meant to support our group problem-solving processes, and to help us reach lasting solutions.<br>
 <br>
 Educational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
-The answers to the first set of questions is exportable to CSV, with a dashboard with incomplete functionnalities. ([apk - alpha release](https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk)) <br>
+The answers to the first set of questions is exportable to CSV. <br>
+The dashboard supports previewing, sorting by date, keyword filtering and deletion.<br>
+([apk - alpha release](https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk)) <br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
 ([Flutter install](https://docs.flutter.dev/install))
