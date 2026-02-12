@@ -99,7 +99,7 @@ final TextStyle dialogStyle = TextStyle
 
 final TextStyle dialogAcknowledgedStyle = TextStyle
 (
-  color: Colors.purple.shade400,
+  color: Colors.black,
   fontSize: 20,
 );
 
