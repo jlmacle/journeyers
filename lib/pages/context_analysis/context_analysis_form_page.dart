@@ -68,7 +68,9 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
 
   // Android: storage access framework (reading/saving files)
-  static const platform = MethodChannel('dev.journeyers/saf');
+  static const platformAndroid = MethodChannel('dev.journeyers/saf');
+  // Android: storage access framework (reading/saving files)
+  static const platformIOS = MethodChannel('dev.journeyers/iossaf');
 
   //**************** GLOBALKEYS related data ****************/
   // Global keys to change text decoration
@@ -903,7 +905,11 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                             ? ElevatedButton(
                                 onPressed: () async {
                                   // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
-                                  final result = await platform.invokeMethod('openDirectory');
+                                  String? result;
+                                  if (Platform.isAndroid)
+                                    {result = await platformAndroid.invokeMethod('openDirectory');}
+                                  else if (Platform.isIOS)
+                                    {result = await platformIOS.invokeMethod('openDirectory');}
                                   
                                   if (result != null) {
                                     // Refresh local state with the new path/bookmark
