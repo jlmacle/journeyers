@@ -47,26 +47,17 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     }
   }
 
-  //  The following structure, more complex to build, was producing an easier preview code
   Future<void> perspectiveDataToDataStructures(Map<String, List<dynamic>> perspectiveData) async
   {
     List<dynamic> individualPerspective = perspectiveData["individualPerspective"]!;
     List<dynamic> groupPerspective = perspectiveData["groupPerspective"]!;
 
-    // Building the structure related to the individual perspective
-    // [, As an individual: What problem am I trying to solve?], 
-    // [X, A Balance Issue?], 
-    // [X, To balance studies and household life?], 
-    // [Notes:, "studies/household"]
-    // [X, Is the issue of another type?], 
-    // [Notes:, "another, issue"]]
-    // To be noted that the last 'X' is not related to a checkbox, but to a choice in the CSV formatting.
     sectionsIndividual["questions"] = [];
     String currentTitleLevel2 = "";
     String currentTitleLevel3 = "";
     String currentTitleLevel3Item = "";
     bool checkedBox = false;
-          
+         
     // Data structure for the preview of the individual perspective 
     //  {
     //    questions: 
@@ -86,9 +77,18 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     //    title: As an individual: What problem am I trying to solve?
     //  }
 
+    // Building the structure related to the individual perspective
+    // [, As an individual: What problem am I trying to solve?], 
+    // [X, A Balance Issue?], 
+    // [X, To balance studies and household life?], 
+    // [Notes:, "about studies"]
+    // [X, Is the issue of another type?], 
+    // [Notes:, "another issue"]]
+    // To be noted that the last 'X' is not related to a checkbox, but to a choice in the CSV formatting.
+
     //****** The individual perspective is made of checkboxes displaying a text field when checked, ******//
-    //****** except for the last input item made of a text field.  
-    // The second value can be a title level 2, a title level 3, a title level 3 item, or a note, 
+    //****** except for the last input item made of a text field.                                   ******//
+    // The second value can be a title level 2, a title level 3, a title level 3 item, or a note
     for (var individualPerspectiveItem in individualPerspective)
     {
       String firstValue = individualPerspectiveItem[0];
@@ -179,20 +179,49 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
       }
     }
 
-    // Building the structure related to the group perspective
-    // [, As a member of groups/teams: What problem(s) are we trying to solve?], 
-    // [X, What problem(s) are the groups/teams trying to solve?], [Notes:, " "groups/teamsProblems"], 
-    // [X, Am I trying to solve the same problem(s) as my groups/teams?], 
-    // [, Yes], [Notes:, " "sameProblems"]
-
-    // The structure for items is different
-   
+    // Building the structure related to the group perspective  
     sectionsGroup["questions"] = [];
     currentTitleLevel2 = "";
     currentTitleLevel3 = "";
     currentTitleLevel3Item = "";
     bool previousSecondValueFromSegButton = false; 
 
+    // Data structure for the preview of the group perspective
+    // To note: the structure for the items is different. 
+    // {
+    //   questions: 
+    //   [
+    //      {
+    //        title: What problem(s) are the groups/teams trying to solve?, 
+    //        items: {notes: group problematics}
+    //      }, 
+    //      {
+    //        title: Am I trying to solve the same problem(s) as my groups/teams?, 
+    //        items: {segValue: Yes, notes: }
+    //      }, 
+    //      {
+    //        title: Is entering the group problem-solving process consistent with harmony at home?, 
+    //        items: {segValue: No, notes: }
+    //      }, 
+    //      {
+    //        title: Is entering the group problem-solving process consistent with appreciability at work?, 
+    //        items: {segValue: I don't know, notes: about appreciability at work}
+    //      }, 
+    //      {
+    //        title: Is entering the group problem-solving process consistent with my income earning ability?, 
+    //        items: {segValue: Yes, notes: }
+    //      }
+    //    ], 
+    //    title: As a member of groups/teams: What problem(s) are we trying to solve?
+    //  }
+
+    // [, As a member of groups/teams: What problem(s) are we trying to solve?], 
+    // [X, What problem(s) are the groups/teams trying to solve?], 
+    // [Notes:, "group problematics"], 
+    // [X, Am I trying to solve the same problem(s) as my groups/teams?], 
+    // [, Yes], 
+    // [Notes:, ""]
+    
     for (var groupPerspectiveItem in groupPerspective)
     {
       String firstValue = groupPerspectiveItem[0]; 
