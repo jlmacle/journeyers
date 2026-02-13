@@ -221,39 +221,49 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     // [X, Am I trying to solve the same problem(s) as my groups/teams?], 
     // [, Yes], 
     // [Notes:, ""]
+
+    //****** The group perspective is made of segmented buttons displaying a text field when an selection occurs,  ******//
+    //****** except for the first input item made of a text field.                                                 ******//
+    // The second value can be a title level 2, a title level 3, a segmented button value, or a note.
     
+    // For the preview of the group data, all fields are kept, even if empty.
     for (var groupPerspectiveItem in groupPerspective)
     {
       String firstValue = groupPerspectiveItem[0]; 
       String secondValue = groupPerspectiveItem[1]; 
 
+      // A title Level 2?: "As a member of groups/teams: What problem(s) are we trying to solve?", in the case of the group perspective.
       if (cu.titlesLevel2.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
-        // Adding the level 2 title 
+        // Adding the level 2 title, as value of the "title" key.
         sectionsGroup["title"] = secondValue;
+        // Useful to identify the text only text field
         previousSecondValueFromSegButton = false;        
       }
+      // A title level 3?: "What problem(s) are the groups/teams trying to solve?" for ex.
       else if (cu.titlesLevel3ForTheGroupPerspective.contains(secondValue)) 
       {
         sectionsGroup["questions"].add({"title": secondValue, "items":{}});
         currentTitleLevel3 = secondValue;
         previousSecondValueFromSegButton = false;
       }
-      // Segmented button 
+      // A segmented button ?
       else if (firstValue.trim() == "")
       {
         for (var map in sectionsGroup["questions"])
-        {
+        { 
+          // Looking for the right map in the values of "questions"
           if (map["title"] == currentTitleLevel3)
           {
+            // Adding the value linked to the segmented button, potentially "".
             map["items"]["segValue"] = secondValue;
             previousSecondValueFromSegButton = true;
             break;
           }
         }
       }
-      // a note either with a segmented button, or of a text field only
+      // A note either with a segmented button, or of a text field only
       else
       {
         // a note of a text field only
