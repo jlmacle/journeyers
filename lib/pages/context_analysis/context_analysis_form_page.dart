@@ -21,8 +21,6 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_t
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
-
-
 /// {@category Pages}
 /// {@category Context analysis}
 /// The form page for the context analysis.
@@ -57,7 +55,7 @@ class ContextAnalysisFormPage extends StatefulWidget
 
 class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
 {
-  // Utility classes
+  //**************** UTILITYCLASSES ****************/
   CSVUtils cu = CSVUtils();
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
@@ -128,7 +126,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForDotInFileName = "";
 
-    // Controller for the file keywords
+  // Controller for the file keywords
   final TextEditingController _keywordsController = TextEditingController();
   final List<String> _keywords = [];
   
