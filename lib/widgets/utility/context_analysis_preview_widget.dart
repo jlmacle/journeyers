@@ -104,7 +104,8 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
           // no sub items, that should be the text field only
           else if (map["title"] == currentLevel3Title && !cu.titlesLevel3WithSubItems.contains(currentLevel3Title))
           {
-            map["items"].add({"notesTextField":secondValue});
+            // Removing straight quotes
+            map["items"].add({"notesTextField":secondValue.replaceAll('"', '')});
           }
         }
       }
@@ -122,7 +123,8 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
               {
                 if (itemMap["text"] == currentLevel3TitleItem)
                 {
-                  itemMap["notes"] = secondValue;
+                  // Removing straight quotes
+                  itemMap["notes"] = secondValue.replaceAll('"', '');
                 }
               }
             }
@@ -136,7 +138,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
             if (map["title"] == currentLevel3Title)
             {
               // at this point, no item is set yet
-              map["items"].add({"notesTextField": secondValue});
+              map["items"].add({"notesTextField": secondValue.replaceAll('"', '')});
             }
           }          
         }
@@ -198,7 +200,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
           {
             if (map["title"] == currentLevel3Title)
             {
-              map["items"]["notes"] = secondValue;
+              map["items"]["notes"] = secondValue.replaceAll('"', '');
               previousSecondValueFromSegButton = false;
               break;
             }
@@ -211,7 +213,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
           {
             if (map["title"] == currentLevel3Title)
             {
-              map["items"]["notes"] = secondValue;
+              map["items"]["notes"] = secondValue.replaceAll('"', '');
               previousSecondValueFromSegButton = true;
               break;
             }
