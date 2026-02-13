@@ -146,17 +146,16 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   String? _fileName;
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForDotInFileName = "";
-  
+
   // Method used to avoid an extension in the file name
   void fileNameCheck(value) 
   {
     if (value.contains('.')) 
     {
-      // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
       value = value.replaceAll('.', '');
       setState(() 
       {
-        // Removes the quotes from the text field
+        // Removes the dots from the file name
         _fileNameController.text = value;
         // Updates the error message
         _errorMessageForDotInFileName = '. are removed, as no extension should be entered in the file name.';
@@ -167,7 +166,6 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
         // TODO:  TextDirection.ltr: code to modify for l10n
         // Doesn't seem effective yet. Left for later.
         SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDotInFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
-
       });
     } 
     else 
@@ -920,8 +918,12 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                               )
                             : TextField(
                                 controller: _fileNameController,
-                                decoration: InputDecoration(
-                                    hint: Center(child: Text('Please add the file name, without .csv, here.'))),
+                                decoration: InputDecoration
+                                (
+                                    hint: Center(child: Text('Please add the file name, without .csv, here.')),
+                                    errorText: _errorMessageForDotInFileName,
+                                    errorMaxLines: 3
+                                ),
                                 textAlign: TextAlign.center,
                                 onChanged: (String newValue) {
                                   fileNameCheck(newValue);                            
