@@ -55,31 +55,30 @@ class ContextAnalysisFormPage extends StatefulWidget
 
 class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
 {
-  //**************** UTILITYCLASSES ****************/
+  //**************** UTILITY CLASSES ****************//
   CSVUtils cu = CSVUtils();
   DashboardUtils du = DashboardUtils();
   FormUtils fu = FormUtils();
   PrintUtils pu = PrintUtils();
   UserPreferencesUtils upu = UserPreferencesUtils();  
 
-  // Question labels for the form
-  ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
-
+  //**************** SMARTPHONES CHANNELS ****************//
   // Android: storage access framework (reading/saving files)
   static const platformAndroid = MethodChannel('dev.journeyers/saf');
   // Android: storage access framework (reading/saving files)
   static const platformIOS = MethodChannel('dev.journeyers/iossaf');
 
-  //**************** GLOBALKEYS related data ****************/
+  //**************** GLOBAL KEYS related data ****************//
   // Global keys to change text decoration
   final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
 
+  //**************** FORM QUESTIONS ****************//
+  ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
 
-  //**************** FORMVALUES related data ****************/
-
+  //**************** FORM VALUES related data ****************//
   bool _isIndividualAreaPerspectiveExpanded = false;
   bool _isGroupAreaPerspectiveExpanded = false;
 
@@ -121,16 +120,15 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   String _earningAbilityTextFieldContent = "";
 
 
-  //**************** TEXTFIELD related data ****************/
-  String? _fileName;
-  final TextEditingController _fileNameController = TextEditingController();
-  String _errorMessageForDotInFileName = "";
+  //**************** TEXT FIELD related data, methods and text editing controllers ****************//
+  // SESSION TITLE
+  String? _analysisTitle;
 
-  // Controller for the file keywords
-  final TextEditingController _keywordsController = TextEditingController();
+  // KEYWORDS
   final List<String> _keywords = [];
-  
-  // Method used to add keywords
+  final TextEditingController _keywordsController = TextEditingController();
+    
+  // Method used to add keywords to the _keywords list
   void addKeyword(String value)
   {
     var trimmedValue = value.trim();
@@ -144,9 +142,11 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     }
   }
 
-   // Session title
-  String? _analysisTitle;
-
+  // FILE NAME
+  String? _fileName;
+  final TextEditingController _fileNameController = TextEditingController();
+  String _errorMessageForDotInFileName = "";
+  
   // Method used to avoid an extension in the file name
   void fileNameCheck(value) 
   {
