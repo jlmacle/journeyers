@@ -55,89 +55,123 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
 
     // Building the structure related to the individual perspective
     // [, As an individual: What problem am I trying to solve?], 
-    // [X, A Balance Issue?], [X, To balance studies and household life?], [Notes:, "studies/household"]
-    // [X, Is the issue of another type?], [Notes:, "another, issue"]]
+    // [X, A Balance Issue?], 
+    // [X, To balance studies and household life?], 
+    // [Notes:, "studies/household"]
+    // [X, Is the issue of another type?], 
+    // [Notes:, "another, issue"]]
+    // To be noted that the last 'X' is not related to a checkbox, but to a choice in the CSV formatting.
     sectionsIndividual["questions"] = [];
-    String currentLevel2Title = "";
-    String currentLevel3Title = "";
-    String currentLevel3TitleItem = "";
+    String currentTitleLevel2 = "";
+    String currentTitleLevel3 = "";
+    String currentTitleLevel3Item = "";
     bool checkedBox = false;
-    
+          
+    // Data structure for the preview of the individual perspective 
+    //  {
+    //    questions: 
+    //    [
+    //      {
+    //        title: A Balance Issue?, 
+    //        items: 
+    //        [
+    //          {text: To balance studies and household life?, checked: yes, notes: about studies}, 
+    //          {text: To balance accessing income and household life?, checked: , notes: }, 
+    //          {text: To balance earning an income and household life?, checked: , notes: }, 
+    //          {text: To balance helping others and household life?, checked: , notes: }
+    //        ]
+    //      }, 
+    //      ...,
+    //    ], 
+    //    title: As an individual: What problem am I trying to solve?
+    //  }
+
+    //****** The individual perspective is made of checkboxes displaying a text field when checked, ******//
+    //****** except for the last input item made of a text field.  
+    // The second value can be a title level 2, a title level 3, a title level 3 item, or a note, 
     for (var individualPerspectiveItem in individualPerspective)
     {
       String firstValue = individualPerspectiveItem[0];
       String secondValue = individualPerspectiveItem[1];    
-
+      
+      // A title Level 2?: "As an individual: What problem am I trying to solve?", in the case of the individual perspective.
       if (cu.titlesLevel2.contains(secondValue)) 
       {
-        sectionsIndividual["title"] = secondValue;
-        currentLevel2Title = secondValue;
-        // Adding the level 2 title 
+        currentTitleLevel2 = secondValue;
+        // Adding the level 2 title, as value of the "title" key.
         sectionsIndividual["title"] = secondValue;
       }
+      // A title level 3?: "A Balance Issue?" for ex.
       else if (cu.titlesLevel3ForTheIndividualPerspective.contains(secondValue)) 
       {
+        // Adding a new map to the list of the key "questions", with the title level 3 as value for the key "title",
+        // and an empty list for the key "items".
         sectionsIndividual["questions"].add({"title": secondValue, "items":[]});
-        currentLevel3Title = secondValue;                
+        currentTitleLevel3 = secondValue;                
       }
+      // A title level 3 item?: "To balance studies and household life?" for ex.
+      // Could be a checkbox or a text field.
       else if (cu.mappingLabelsToInputItems.keys.contains(secondValue))
       {
-        currentLevel3TitleItem = secondValue;
-        // checking if an 'X' is in front of the title level 3 that is also a checkbox
-        if (firstValue == 'X' && cu.mappingLabelsToInputItems[currentLevel3TitleItem] == FormUtils.checkbox) 
+        currentTitleLevel3Item = secondValue;
+        // Checking if an 'X' is in front of the title level 3, and if the item is also a checkbox
+        if (firstValue == 'X' && cu.mappingLabelsToInputItems[currentTitleLevel3Item] == FormUtils.checkbox) 
           {checkedBox = true;}
         else 
           {checkedBox = false;}
 
-        // Retrieving the map with the right level 3 title
+        // Retrieving the map with the same title level 3
         for (var map in sectionsIndividual["questions"])
         {
-          // the titles level 3 with sub items are also the ones with checkboxes and text fields
-          if (map["title"] == currentLevel3Title && cu.titlesLevel3WithSubItems.contains(currentLevel3Title))
+          // The titles level 3 with sub items are also the ones with checkboxes and text fields
+          if (map["title"] == currentTitleLevel3 && cu.titlesLevel3WithSubItems.contains(currentTitleLevel3))
           {
-            // Adding the items list the notes
+            // Adding a map to the items list, with data related to whether the checkbox is checked or not
+            // and an empty value for the "notes" key.
             if (checkedBox)
               {map["items"].add({"text":secondValue, "checked":"yes", "notes":""});}
             else
               {map["items"].add({"text":secondValue, "checked":"", "notes":""});}
           }
-          // no sub items, that should be the text field only
-          else if (map["title"] == currentLevel3Title && !cu.titlesLevel3WithSubItems.contains(currentLevel3Title))
+          // if no sub items, that should be the text field only
+          else if (map["title"] == currentTitleLevel3 && !cu.titlesLevel3WithSubItems.contains(currentTitleLevel3))
           {
-            // Removing straight quotes
-            map["items"].add({"notesTextField":secondValue.replaceAll('"', '')});
+            // Adding a map to the items list, with the notesTextField with an empty value.
+            map["items"].add({"notesTextField":""});
           }
         }
       }
-      // That should be a field with notes
+      // That should be a field with notes, either from a checkbox, or from a text field only
       else 
       {
-        // if sub items, then checkbox item with a note
-        if (cu.titlesLevel3WithSubItems.contains(currentLevel3Title))
+        // If the current title level 3 has sub items, then a note for a checkbox
+        if (cu.titlesLevel3WithSubItems.contains(currentTitleLevel3))
         {
           for(var map in sectionsIndividual["questions"])
           {
-            if (map["title"] == currentLevel3Title)
+            // Searching for the current title level 3
+            if (map["title"] == currentTitleLevel3)
             {
               for (var itemMap in map["items"])
               {
-                if (itemMap["text"] == currentLevel3TitleItem)
+                // Searching for the current title level 3 item
+                if (itemMap["text"] == currentTitleLevel3Item)
                 {
-                  // Removing straight quotes
+                  // Removing added straight quotes before adding the note content
                   itemMap["notes"] = secondValue.replaceAll('"', '');
                 }
               }
             }
           }
         }
-        // otherwise, a text field only
+        // Otherwise, a note for a text field only
         else
         {
           for(var map in sectionsIndividual["questions"])
           {
-            if (map["title"] == currentLevel3Title)
+            if (map["title"] == currentTitleLevel3)
             {
-              // at this point, no item is set yet
+              // At this point, no item is set yet + Removing added straight quotes
               map["items"].add({"notesTextField": secondValue.replaceAll('"', '')});
             }
           }          
@@ -149,14 +183,14 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     // [, As a member of groups/teams: What problem(s) are we trying to solve?], 
     // [X, What problem(s) are the groups/teams trying to solve?], [Notes:, " "groups/teamsProblems"], 
     // [X, Am I trying to solve the same problem(s) as my groups/teams?], 
-    //    [, Yes], [Notes:, " "sameProblems"]
+    // [, Yes], [Notes:, " "sameProblems"]
 
     // The structure for items is different
    
     sectionsGroup["questions"] = [];
-    currentLevel2Title = "";
-    currentLevel3Title = "";
-    currentLevel3TitleItem = "";
+    currentTitleLevel2 = "";
+    currentTitleLevel3 = "";
+    currentTitleLevel3Item = "";
     bool previousSecondValueFromSegButton = false; 
 
     for (var groupPerspectiveItem in groupPerspective)
@@ -166,7 +200,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
 
       if (cu.titlesLevel2.contains(secondValue)) 
       {
-        currentLevel2Title = secondValue;
+        currentTitleLevel2 = secondValue;
         // Adding the level 2 title 
         sectionsGroup["title"] = secondValue;
         previousSecondValueFromSegButton = false;        
@@ -174,7 +208,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
       else if (cu.titlesLevel3ForTheGroupPerspective.contains(secondValue)) 
       {
         sectionsGroup["questions"].add({"title": secondValue, "items":{}});
-        currentLevel3Title = secondValue;
+        currentTitleLevel3 = secondValue;
         previousSecondValueFromSegButton = false;
       }
       // Segmented button 
@@ -182,7 +216,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
       {
         for (var map in sectionsGroup["questions"])
         {
-          if (map["title"] == currentLevel3Title)
+          if (map["title"] == currentTitleLevel3)
           {
             map["items"]["segValue"] = secondValue;
             previousSecondValueFromSegButton = true;
@@ -198,8 +232,9 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
         {
           for (var map in sectionsGroup["questions"])
           {
-            if (map["title"] == currentLevel3Title)
+            if (map["title"] == currentTitleLevel3)
             {
+              // Removing added straight quotes
               map["items"]["notes"] = secondValue.replaceAll('"', '');
               previousSecondValueFromSegButton = false;
               break;
@@ -211,8 +246,9 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
         { 
           for (var map in sectionsGroup["questions"])
           {
-            if (map["title"] == currentLevel3Title)
+            if (map["title"] == currentTitleLevel3)
             {
+              // Removing added straight quotes
               map["items"]["notes"] = secondValue.replaceAll('"', '');
               previousSecondValueFromSegButton = true;
               break;
