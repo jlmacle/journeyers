@@ -100,10 +100,10 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
     {
       // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
       value = value.replaceAll('"', '');
-      value = value.replaceAll('\n', ''); 
+      value = value.replaceAll('\n', ' '); 
       setState(() 
       {
-        // Removes the quotes from the text field
+        // Removes the quotes or line returns from the text field
         textFieldEditingController.text = value;
         // Updates the error message
         _errorMessageForDoubleQuotes = 'Straight double quotes and line returns are removed from the text typed for CSV-export reasons. With apologies.';
