@@ -158,7 +158,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
         // Removes the dots from the file name
         _fileNameController.text = value;
         // Updates the error message
-        _errorMessageForDotInFileName = '. are removed, as no extension should be entered in the file name.';
+        _errorMessageForDotInFileName = 'Dots are removed, as no extension should be entered in the file name.';
         // "The assertiveness level of the announcement is determined by assertiveness.
         // Currently, this is only supported by the web engine and has no effect on other platforms.
         // The default mode is Assertiveness.polite."
@@ -172,7 +172,6 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     {
       setState(() 
       {
-        _fileNameController.text = value;
         _errorMessageForDotInFileName = "";
       });
     }
