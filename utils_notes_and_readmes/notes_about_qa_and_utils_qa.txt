@@ -1,7 +1,8 @@
 To display groups and tests labels:
-
 flutter test -r expanded
 
+For the integration tests
+flutter test integration_test
 -----------------------
 
 In case of py_utils import issues: 
