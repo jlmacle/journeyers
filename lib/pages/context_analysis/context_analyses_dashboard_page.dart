@@ -45,9 +45,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   Future<void> _sessionDataRetrieval() async 
   {
     final data = await _du.retrieveAllDashboardSessionData
-    (
-      typeOfContextData: DashboardUtils.contextAnalysesContext,
-    );
+      (typeOfContextData: DashboardUtils.contextAnalysesContext);
+      
     _usedKeywords = await _getUsedKeywords(data);
     _allSessions = data;
     _sortSessionsByDate();
