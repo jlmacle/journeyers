@@ -177,7 +177,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     }
   }
 
-  //**************** FOCUSNODES related data ****************/
+  //**************** FOCUS NODES related data and methods ****************//
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
   final FocusNode _analysisTitleFocusNode = FocusNode();
@@ -197,7 +197,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
  
 
-  //**************** PREFERENCES related data ****************/
+  //**************** PREFERENCES related data and methods ****************/
   bool _isApplicationFolderPathLoading = true;
   String _applicationFolderPath = "";  
 
@@ -214,7 +214,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   }
 
   
-  //**************** CALLBACKMETHODS related data ****************/
+  //**************** CALLBACK METHODS related to the form ****************/
   // Callback methods
   // Individual perspective
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
@@ -300,7 +300,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
   _setAnalysisTitleTextFieldState(String newValue) {setState(() {_analysisTitle = newValue;});}
 
-  //**************** DATASTRUCTURE related data ****************/
+  //**************** DATA STRUCTURE related data and methods ****************/
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
   // Method used to store the data entered in the checkboxes, text fields and segmented buttons

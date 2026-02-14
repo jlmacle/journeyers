@@ -32,14 +32,13 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> 
 {
-  FocusNode appBarTitleFocusNode = FocusNode();
+  //**************** GLOBAL KEYS related data ****************//
+  final GlobalKey<ContextAnalysisPageState> _contextAnalysisKey = GlobalKey();
 
+
+  //**************** BOTTOM NAVIGATION BAR related data and methods ****************//
   int _currentIndex = 0;
   bool _areBottomNavigationItemsFocusable = true;
-
-  String? eol;
-
-  final GlobalKey<ContextAnalysisPageState> _contextAnalysisKey = GlobalKey();
 
   List<Widget> get _pages => 
   [
@@ -55,6 +54,16 @@ class _MyHomePageState extends State<MyHomePage>
       ),
     const GroupProblemSolvingPage(),
   ];
+
+
+  
+
+  
+  
+
+   
+
+  
 
   // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale.
   // The logic cannot be moved in main.dart, as the context would be called without having being built yet.
@@ -81,12 +90,18 @@ class _MyHomePageState extends State<MyHomePage>
     _contextAnalysisKey.currentState?.getPreferences();    
   }
 
+  //**************** FOCUS NODE related data and methods ****************//
+  FocusNode appBarTitleFocusNode = FocusNode();
+
   @override
   void dispose() 
   {
     appBarTitleFocusNode.dispose();
     super.dispose();
   }
+
+  // TODO: cross-platform end of line
+  String? eol;
 
   @override
   Widget build(BuildContext context) 

@@ -42,7 +42,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   // to help reset the acknowledgment modal status
   final bool _resetInformationModal = false;
 
-  //**************** PREFERENCES related data ****************//
+  //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
   late bool? _isInformationModalAlreadyAcknowledged;
   late bool? _wasContextAnalysisSessionDataSaved;
@@ -124,7 +124,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     });
   }
 
-  //**************** FOCUS NODE related data ****************//
+  //**************** FOCUS NODE related data and methods ****************//
   FocusNode contextAnalysisFormPageFocusNode = FocusNode();
 
   @override

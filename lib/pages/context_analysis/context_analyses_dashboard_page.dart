@@ -37,7 +37,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   final FileUtils _fu = FileUtils();
   final UserPreferencesUtils _upu = UserPreferencesUtils();
 
-  //**************** PREFERENCES related data ****************/
+  //**************** PREFERENCES related data and methods ****************/
   bool _isDataLoading = true;
 
   // Method used to retrieve the session data, to get the list of used keywords, 
@@ -68,7 +68,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     return kwSet.toList();
   }
 
-  //**************** SORTING AND FILTERING related data ****************/
+  //**************** SORTING AND FILTERING related data and methods ****************/
   bool _isAscending = false; 
 
   List<dynamic>? _allSessions;
