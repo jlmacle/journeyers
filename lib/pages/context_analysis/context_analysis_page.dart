@@ -26,10 +26,11 @@ class ContextAnalysisPage extends StatefulWidget
   /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool value) {}
 
-  const ContextAnalysisPage({
+  const ContextAnalysisPage
+  ({
     super.key,
     this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
-    });
+  });
 
   @override
   State<ContextAnalysisPage> createState() => ContextAnalysisPageState();
@@ -37,14 +38,14 @@ class ContextAnalysisPage extends StatefulWidget
 
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
-  bool _preferencesLoading = true;
-  late bool? _isInformationModalAlreadyAcknowledged;
-  late bool _wasContextAnalysisSessionDataSaved;
-
+  //**************** USEFUL FOR DEBUG ****************//
   // to help reset the acknowledgment modal status
   final bool _resetInformationModal = false;
 
-  FocusNode contextAnalysisFormPageFocusNode = FocusNode();
+  //**************** PREFERENCES related data ****************//
+  bool _preferencesLoading = true;
+  late bool? _isInformationModalAlreadyAcknowledged;
+  late bool? _wasContextAnalysisSessionDataSaved;
 
   getPreferences() async 
   {
@@ -100,12 +101,10 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
           );
         },
       );
-
-
     }
   }
 
-
+  //**************** METHODS USED TO SWITCH BETWEEN FORM VIEW AND DASHBOARD VIEW  ****************//
 
   // Method used to refresh the page from context form to dashboard, 
   // after form data has been saved
@@ -125,12 +124,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     });
   }
 
-  @override
-  void initState() 
-  {
-    super.initState();
-    getPreferences();
-  }
+  //**************** FOCUS NODE related data ****************//
+  FocusNode contextAnalysisFormPageFocusNode = FocusNode();
 
   @override
   void dispose() 
@@ -138,6 +133,13 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     contextAnalysisFormPageFocusNode.dispose();
     super.dispose();
   } 
+
+  @override
+  void initState() 
+  {
+    super.initState();
+    getPreferences();
+  }  
 
   @override
   Widget build(BuildContext context) 
@@ -166,7 +168,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
             Center(child: CircularProgressIndicator())
           else ...
           [
-            if (_wasContextAnalysisSessionDataSaved) ...[
+            if (_wasContextAnalysisSessionDataSaved!) ...[
               Padding(
                 padding: EdgeInsets.all(elevatedButtonPadding),
                 child: ElevatedButton
