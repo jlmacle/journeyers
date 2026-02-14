@@ -83,10 +83,11 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: 
                 RichText
                 (
+                  key: const Key('information_modal'),
                   textAlign: TextAlign.center,
                   text: 
                   TextSpan
-                  (
+                  (                    
                     text:
                         'This is your first context analysis.\n'
                         'The dashboard will be displayed after data from the context analysis has been saved.\n'
