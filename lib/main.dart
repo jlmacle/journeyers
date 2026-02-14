@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp> 
 {
-  // Utility class
+  //**************** UTILITY CLASSES ****************/
   PrintUtils pu = PrintUtils();
 
   // Temporarily defining English as the locale
