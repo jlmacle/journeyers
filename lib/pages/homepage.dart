@@ -35,11 +35,11 @@ class _MyHomePageState extends State<MyHomePage>
   //**************** GLOBAL KEYS related data ****************//
   final GlobalKey<ContextAnalysisPageState> _contextAnalysisKey = GlobalKey();
 
-
   //**************** BOTTOM NAVIGATION BAR related data and methods ****************//
   int _currentIndex = 0;
   bool _areBottomNavigationItemsFocusable = true;
 
+  // Getter for the context analyses page and for the group problem solvings page
   List<Widget> get _pages => 
   [
     ContextAnalysisPage
@@ -55,16 +55,15 @@ class _MyHomePageState extends State<MyHomePage>
     const GroupProblemSolvingPage(),
   ];
 
-
-  
-
-  
-  
-
-   
-
-  
-
+  // TODO: to check if still relevant
+  // Method used to re-pull the preferences from the context analysis page
+  void _handleContextAnalysisTap()
+  {
+    // re-pulling the preferences from the context analysis page
+    _contextAnalysisKey.currentState?.getPreferences();    
+  }
+ 
+  //**************** LOCALE related method ****************//
   // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale.
   // The logic cannot be moved in main.dart, as the context would be called without having being built yet.
   void _updateLocale(String languageName) 
@@ -84,12 +83,6 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
-  void _handleContextAnalysisTap()
-  {
-    // re-pulling the preferences from the context analysis page
-    _contextAnalysisKey.currentState?.getPreferences();    
-  }
-
   //**************** FOCUS NODE related data and methods ****************//
   FocusNode appBarTitleFocusNode = FocusNode();
 
@@ -106,8 +99,6 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) 
   {
-    
-
     if (kIsWeb) 
     {
       eol = '\n';
@@ -116,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage>
     {
       eol = Platform.lineTerminator; // The use of Platform is not portable on the web
     }
-
+    
     return 
     Scaffold
     (
