@@ -8,7 +8,7 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
 
-// Utility class
+//**************** UTILITY CLASSES ****************/
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils up = UserPreferencesUtils();
 
@@ -38,11 +38,11 @@ class ContextAnalysisPage extends StatefulWidget
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   bool _preferencesLoading = true;
-  late bool? _isStartMessageAlreadyAcknowledged;
+  late bool? _isInformationModalAlreadyAcknowledged;
   late bool _wasContextAnalysisSessionDataSaved;
 
-  // to help reset the start message status
-  final bool _resetStartMessage = false;
+  // to help reset the acknowledgment modal status
+  final bool _resetInformationModal = false;
 
   FocusNode contextAnalysisFormPageFocusNode = FocusNode();
 
@@ -51,14 +51,14 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     // up.resetWasSessionDataSaved();
 
     pu.printd("\nEntering getPreferences");
-    _isStartMessageAlreadyAcknowledged = await up.isStartMessageAcknowledged();
+    _isInformationModalAlreadyAcknowledged = await up.isInformationModalAcknowledged();
     _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
 
     setState(() {_preferencesLoading = false;});
-    pu.printd("_isStartMessageAlreadyAcknowledged: $_isStartMessageAlreadyAcknowledged");
+    pu.printd("_isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
     pu.printd("_wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
 
-    if ((_isStartMessageAlreadyAcknowledged == false) && context.mounted) 
+    if ((_isInformationModalAlreadyAcknowledged == false) && context.mounted) 
     {
       showDialog
       (
@@ -77,7 +77,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               (
                 onPressed: () 
                 {
-                  up.saveStartMessageAcknowledgement();
+                  up.saveInformationModalAcknowledgement();
                   Navigator.pop(context);
                 },
                 child: 
@@ -104,11 +104,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     }
   }
 
-  void resetStartMessage() async 
-  {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDialogStartMessageAcknowledged', false);
-  }
+
 
   // Method used to refresh the page from context form to dashboard, 
   // after form data has been saved
@@ -154,14 +150,14 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
         mainAxisAlignment: MainAxisAlignment.start,
         children: 
         [
-          if (_resetStartMessage)
+          if (_resetInformationModal)
             ElevatedButton
             (
-              onPressed: resetStartMessage,
+              onPressed: up.resetInformationModalStatus,
               child: 
               Text
               (
-                'Reset the start message acknowledgement data',
+                'Reset the acknowledgment modal acknowledgement data',
                 style: feedbackMessageStyle,
               ),
             ),

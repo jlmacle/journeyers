@@ -10,8 +10,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// A utility class related to user preferences.
 class UserPreferencesUtils 
 {
-  static const platform = MethodChannel('dev.journeyers/iossaf'); 
+  static const _platformIOS = MethodChannel('dev.journeyers/iossaf'); 
+  // TODO: to complete for Android
 
+  
   /// Method used to avoid stale values by reloading
   Future<void> reload() async
   {
@@ -19,20 +21,29 @@ class UserPreferencesUtils
     prefs.reload();
   }
 
-  /// Method used to record that the start message has been acknowledged.
-  Future<void> saveStartMessageAcknowledgement() async 
+  //**************** ACKNOWLEDGMENT MODAL ****************/
+  /// Method used to record that the acknowledgment modal has been acknowledged.
+  Future<void> saveInformationModalAcknowledgement() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDialogStartMessageAcknowledged', true);
+    await prefs.setBool('isInformationModalAcknowledged', true);
   }
 
-  /// Method used to check if the start message has been acknowledged.
-  Future<bool> isStartMessageAcknowledged() async 
+  /// Method used to check if the acknowledgment modal has been acknowledged.
+  Future<bool> isInformationModalAcknowledged() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isDialogStartMessageAcknowledged') ?? false;
+    return prefs.getBool('isInformationModalAcknowledged') ?? false;
   }
 
+  /// Method used to reset the acknowledgment modal status
+  void resetInformationModalStatus() async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isInformationModalAcknowledged', false);
+  }
+
+  //**************** FOLDER SELECTED FOR APPLICATION USE ****************/
   /// Method used to record the path of the folder selected for application use.
   Future<void> saveApplicationFolderPath(String folderPath) async 
   {
@@ -47,7 +58,7 @@ class UserPreferencesUtils
 
     if (Platform.isIOS)
       {
-        folderPathData = await platform.invokeMethod('getStoredDirectory');
+        folderPathData = await _platformIOS.invokeMethod('getStoredDirectory');
         print("******* Platform.isIOS: folderPathData: $folderPathData    **********");
       }
     else
@@ -59,7 +70,7 @@ class UserPreferencesUtils
     return Future.value(folderPathData);    
   }
 
-
+  //**************** EXISTING SESSION DATA ? ****************/
   /// Method used to record that session data has been saved.
   Future<void> saveSessionDataHasBeenSaved() async 
   {
@@ -75,10 +86,9 @@ class UserPreferencesUtils
   }
 
   /// Method used to reset to false if session data has been saved.
-  Future<bool> resetWasSessionDataSaved() async 
+  Future<bool> resetWasSessionDataSavedStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setBool('wasSessionDataSaved', false);
   }
-
 }
