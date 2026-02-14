@@ -6,10 +6,10 @@ import 'package:integration_test/integration_test.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 
-//**************** UTILITY CLASSES ****************/
+//**************** UTILITY CLASSES ****************//
 UserPreferencesUtils up = UserPreferencesUtils();
 
-void main() 
+void main() async
 {
   // This initializes the bridge between the app and the test runner
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +36,9 @@ void main()
           // Testing the presence of the information modal status
           final modalWidget = find.byKey(const Key('information_modal'));
           expect(modalWidget, findsOneWidget);
+
+          // Dismissing the modal to avoid the modal appearing at the next "flutter run"
+          await tester.tap(modalWidget);
         }    
       );
     }
