@@ -11,7 +11,8 @@ import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart'
 /// {@category Pages}
 /// {@category Context analysis}
 /// The page displaying a dashboard of the past context analyses.
-class ContextAnalysesDashboardPage extends StatefulWidget {
+class ContextAnalysesDashboardPage extends StatefulWidget 
+{
 
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
   final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
@@ -29,10 +30,18 @@ class ContextAnalysesDashboardPage extends StatefulWidget {
   State<ContextAnalysesDashboardPage> createState() => _ContextAnalysesDashboardPageState();
 }
 
-class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardPage> {
-  FocusNode contextAnalysisDashboardFocusNode = FocusNode();
+class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardPage> 
+{
+  //**************** UTILITY CLASSES ****************/
+  final DashboardUtils _du = DashboardUtils();
+  final FileUtils _fu = FileUtils();
+  final UserPreferencesUtils _upu = UserPreferencesUtils();
 
+  //**************** PREFERENCES related data ****************/
   bool _isDataLoading = true;
+
+
+
   bool _isAscending = false; 
   List<dynamic>? _allSessions;
   List<dynamic>? _filteredSessions;
@@ -40,9 +49,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   final List<String> _selectedKeywords = [];
   final List<String> _selectedSessionsForDeletion = [];
 
-  final DashboardUtils _du = DashboardUtils();
-  final FileUtils _fu = FileUtils();
-  final UserPreferencesUtils _upu = UserPreferencesUtils();
+  
 
   @override
   void initState() {
@@ -152,7 +159,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // reseting 
-      await _upu.resetWasSessionDataSaved();
+      await _upu.resetWasSessionDataSavedStatus();
       // refreshing the page
       widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
     }
@@ -192,7 +199,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   if (_allSessions != null  && _allSessions!.isEmpty) 
   {
     // reseting 
-    await _upu.resetWasSessionDataSaved();
+    await _upu.resetWasSessionDataSavedStatus();
     // refreshing the page
     widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
   }
@@ -229,6 +236,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Checkbox(
+                                    key: ValueKey('checkbox_$index'),
                                     value: isChecked,
                                     onChanged: (bool? value) {
                                       setState(() {
@@ -374,6 +382,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         // Bulk Deletion Button added here
         if (_selectedSessionsForDeletion.isNotEmpty)
           TextButton.icon(
+            key: const Key('bulk_delete_button'),
             onPressed: _deleteSelectedSessions,
             icon: const Icon(Icons.delete_sweep, color: Colors.red),
             label: Text(
