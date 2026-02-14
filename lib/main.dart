@@ -26,10 +26,14 @@ class _MyAppState extends State<MyApp>
   //**************** UTILITY CLASSES ****************/
   PrintUtils pu = PrintUtils();
 
+
+  //**************** LOCALE related data and methods ****************/
+
   // Temporarily defining English as the locale
   // TODO: to get eventually the value from user preferences
   Locale? _currentLocale = Locale('en');
 
+  // Method used to set a new locale value
   void _setLocale(Locale newLocale) 
   {
     if (newLocale != _currentLocale) 
