@@ -40,25 +40,12 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   //**************** PREFERENCES related data ****************/
   bool _isDataLoading = true;
 
-
-
-  bool _isAscending = false; 
-  List<dynamic>? _allSessions;
-  List<dynamic>? _filteredSessions;
-  List<String>? _usedKeywords;
-  final List<String> _selectedKeywords = [];
-  final List<String> _selectedSessionsForDeletion = [];
-
-  
-
-  @override
-  void initState() {
-    super.initState();
-    _sessionDataRetrieval();
-  }
-
-  Future<void> _sessionDataRetrieval() async {
-    final data = await _du.retrieveAllDashboardSessionData(
+  // Method used to retrieve the session data, to get the list of used keywords, 
+  // and the list of all sessions available
+  Future<void> _sessionDataRetrieval() async 
+  {
+    final data = await _du.retrieveAllDashboardSessionData
+    (
       typeOfContextData: DashboardUtils.contextAnalysesContext,
     );
     _usedKeywords = await _getUsedKeywords(data);
@@ -69,63 +56,104 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     });
   }
 
-  Future<List<String>> _getUsedKeywords(List<dynamic> listOfSessionData) async {
+  // Method used to get the list of keywords present in a session data
+  Future<List<String>> _getUsedKeywords(List<dynamic> listOfSessionData) async 
+  {
     Set<String> kwSet = {};
-    for (var sessionData in listOfSessionData) {
+    for (var sessionData in listOfSessionData) 
+    {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
       kwSet.addAll(kws.cast<String>());
     }
     return kwSet.toList();
   }
 
-  void _sortSessionsByDate() {
-    _allSessions?.sort((a, b) {
+  //**************** SORTING AND FILTERING related data ****************/
+  bool _isAscending = false; 
+
+  List<dynamic>? _allSessions;
+  List<dynamic>? _filteredSessions;
+
+  List<String>? _usedKeywords;
+  final List<String> _selectedKeywords = [];
+
+  // Method used to sort session data by date
+  void _sortSessionsByDate() 
+  {
+    _allSessions?.sort((a, b) 
+    {
       DateTime dateA = DateFormat("MM/dd/yy").parse(a[DashboardUtils.keyDate]);
       DateTime dateB = DateFormat("MM/dd/yy").parse(b[DashboardUtils.keyDate]);
       return _isAscending ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
     });
     _applyFilters();
   }
+ 
+  // Method used to filter the session data by keywords
+  Future<void> _applyFilters() async
+  {
+    if (_selectedKeywords.isEmpty) 
+    {
+      _filteredSessions = _allSessions!;
+    } else 
+    {
+      _filteredSessions = _allSessions!.where
+      ( 
+        (session) 
+        {
+          final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>();
+          return _selectedKeywords.every((k) => sessionKeywords.contains(k));
+        }
+      ).toList();
+    }
+  }
 
-  void _toggleFilter(String keyword) {
-    setState(() {
-      if (_selectedKeywords.contains(keyword)) {
+  // Method used to add/remove the keyword from the filtering criteria
+  void _toggleFilter(String keyword) 
+  {
+    setState(() 
+    {
+      if (_selectedKeywords.contains(keyword)) 
+      {
         _selectedKeywords.remove(keyword);
-      } else {
+      } 
+      else 
+      {
         _selectedKeywords.add(keyword);
       }
       _applyFilters();
     });
   }
+ 
 
-  Future<void> _applyFilters() async
+  //**************** DELETION OF SESSION DATA ****************/
+
+  final List<String> _selectedSessionsForDeletion = [];
+
+  // Method used to refresh the keywords list after deletion of session data
+  void _refreshKeywords() 
   {
-    if (_selectedKeywords.isEmpty) {
-      _filteredSessions = List.from(_allSessions!);
-    } else {
-      _filteredSessions = _allSessions!.where((session) {
-        final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>();
-        return _selectedKeywords.every((k) => sessionKeywords.contains(k));
-      }).toList();
+    if (_allSessions == null) return;
+    
+    Set<String> kwSet = {};
+    for (var sessionData in _allSessions!) 
+    {
+      List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
+      kwSet.addAll(kws.cast<String>());
     }
+    
+    setState
+    (
+      () 
+      {
+      _usedKeywords = kwSet.toList();
+      // Removing selected filters if the keyword no longer exists
+      _selectedKeywords.removeWhere((kw) => !kwSet.contains(kw));
+      }
+    );
   }
 
-  void _refreshKeywords() {
-  if (_allSessions == null) return;
-  
-  Set<String> kwSet = {};
-  for (var sessionData in _allSessions!) {
-    List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
-    kwSet.addAll(kws.cast<String>());
-  }
-  
-  setState(() {
-    _usedKeywords = kwSet.toList();
-    // Removing selected filters if the keyword no longer exists
-    _selectedKeywords.removeWhere((kw) => !kwSet.contains(kw));
-  });
-}
-
+  // Method used to delete a single session data
   Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the file
@@ -148,9 +176,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       // Updating the keyword list
       _refreshKeywords();
       
-      // Refreshing filtered list
+      // Refreshing the filtered list
       _applyFilters();
 
+      // Displaying an informational message
       ScaffoldMessenger.of(context).showSnackBar
       (const SnackBar(content: Text("Selected session deleted.")));
     });
@@ -158,53 +187,72 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     // Refreshing and resetting "wasSessionDataSaved" if no session data left
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
-      // reseting 
+      // resetting "wasSessionDataSaved" to false
       await _upu.resetWasSessionDataSavedStatus();
       // refreshing the page
       widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
     }
   }
 
-  Future<void> _deleteSelectedSessions() async {
-  // Create a fixed list to iterate over so clearing doesn't break the loop
-  final filesToDelete = List<String>.from(_selectedSessionsForDeletion);
-
-  for (String filePath in filesToDelete) {
-    // 1. Physical file deletion (Ensure 'cu' is defined or use 'du')
-    await _fu.deleteCsvFile(filePath); 
-    
-    // 2. Database/Dashboard metadata deletion
-    await _du.deleteSessionData(
-      typeOfContextData: DashboardUtils.contextAnalysesContext, 
-      filePathToDelete: filePath
-    );
-  }
-
-  // 3. Update UI state ONCE after all physical operations are done
-  setState(() {
-    _allSessions?.removeWhere((session) => 
-      filesToDelete.contains(session[DashboardUtils.keyFilePath])
-    );
-
-    _selectedSessionsForDeletion.clear();
-    _refreshKeywords();
-    _applyFilters();
-  });
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text("Selected sessions deleted.")),
-  );
-
-  // Refreshing and resetting "wasSessionDataSaved" if no session data left
-  if (_allSessions != null  && _allSessions!.isEmpty) 
+  // Method used to delete several session data
+  Future<void> _deleteSelectedSessions() async 
   {
-    // reseting 
-    await _upu.resetWasSessionDataSavedStatus();
-    // refreshing the page
-    widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
-  }
-}
+    // Creating a fixed list to iterate over so clearing doesn't break the loop
+    final filesToDelete = List<String>.from(_selectedSessionsForDeletion);
 
+    for (String filePath in filesToDelete) 
+    {
+      // Removing the file
+      await _fu.deleteCsvFile(filePath); 
+      
+      // Removing dashboard data
+      await _du.deleteSessionData
+      (
+        typeOfContextData: DashboardUtils.contextAnalysesContext, 
+        filePathToDelete: filePath
+      );
+    }
+
+    // Updating UI state after all physical operations are done
+    setState(() 
+    {
+      _allSessions?.removeWhere
+      (
+        (session) => 
+        filesToDelete.contains(session[DashboardUtils.keyFilePath])
+      );
+
+      _selectedSessionsForDeletion.clear();
+
+      // Updating the keyword list
+      _refreshKeywords();
+
+      // Refreshing the filtered list
+      _applyFilters();
+    });
+
+    // Displaying an informational message
+    ScaffoldMessenger.of(context).showSnackBar
+    (const SnackBar(content: Text("Selected sessions deleted.")));
+
+    // Refreshing and resetting "wasSessionDataSaved" if no session data left
+    if (_allSessions != null  && _allSessions!.isEmpty) 
+    {
+      // resetting "wasSessionDataSaved" to false
+      await _upu.resetWasSessionDataSavedStatus();
+      // refreshing the page
+      widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
+    }
+  }
+
+  @override
+  void initState() 
+  {
+    super.initState();
+    _sessionDataRetrieval();
+  }
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
