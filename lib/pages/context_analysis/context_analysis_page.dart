@@ -180,7 +180,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               Divider(thickness: 3),
               Expanded
               (
-                child: ContextAnalysesDashboardPage(parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
+                child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
               ),
             ]
             else
@@ -194,7 +194,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisFormPage(parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+                  child: ContextAnalysisFormPage(key: const Key('form'), parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
                 ),
               ),
             )
