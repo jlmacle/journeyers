@@ -72,7 +72,7 @@ class UserPreferencesUtils
 
   //**************** EXISTING SESSION DATA ? ****************/
   /// Method used to record that session data has been saved.
-  Future<void> saveSessionDataHasBeenSaved() async 
+  Future<void> saveWasSessionDataSaved() async 
   {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('wasSessionDataSaved', true);
