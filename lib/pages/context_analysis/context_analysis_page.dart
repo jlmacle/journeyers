@@ -10,7 +10,7 @@ import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_pag
 
 //**************** UTILITY CLASSES ****************/
 PrintUtils pu = PrintUtils();
-UserPreferencesUtils up = UserPreferencesUtils();
+UserPreferencesUtils upu = UserPreferencesUtils();
 
 // TODO: appearance of the UI
 
@@ -52,8 +52,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     // up.resetWasSessionDataSaved();
 
     pu.printd("\nEntering getPreferences");
-    _isInformationModalAlreadyAcknowledged = await up.isInformationModalAcknowledged();
-    _wasContextAnalysisSessionDataSaved = await up.wasSessionDataSaved();
+    _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
+    _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved();
 
     setState(() {_preferencesLoading = false;});
     pu.printd("_isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
@@ -78,7 +78,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               (
                 onPressed: () 
                 {
-                  up.saveInformationModalAcknowledgement();
+                  upu.saveInformationModalAcknowledgement();
                   Navigator.pop(context);
                 },
                 child: 
@@ -156,7 +156,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
           if (_resetInformationModal)
             ElevatedButton
             (
-              onPressed: up.resetInformationModalStatus,
+              onPressed: upu.resetInformationModalStatus,
               child: 
               Text
               (
