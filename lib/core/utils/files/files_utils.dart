@@ -193,15 +193,15 @@ class FileUtils
   {
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
     {
-      deleteCsvFileOnDesktop(pathToCsv);
+      await deleteCsvFileOnDesktop(pathToCsv);
     }
     else if (Platform.isAndroid)
     {
-      deleteCsvFileOnAndroid(pathToCsv);
+      await deleteCsvFileOnAndroid(pathToCsv);
     }
     else if (Platform.isIOS)
     {
-      deleteCsvFileOnIOS(pathToCsv);
+      await deleteCsvFileOnIOS(pathToCsv);
     }
     else 
     {
