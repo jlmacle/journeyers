@@ -475,7 +475,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid || Platform.isIOS) {getApplicationFolderPathPref();}
+    getApplicationFolderPathPref();
 
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
