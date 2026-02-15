@@ -7,6 +7,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
@@ -27,8 +28,7 @@ void main() async
   (
     'Context analysis page tests\n', 
     () 
-    {
-      
+    {      
       testWidgets
       (
         skip:true,
@@ -100,32 +100,58 @@ void main() async
         'Files physical deletion needs to be visually confirmed.',
         (tester) async 
         { 
-          // Starting fresh with new copies of the test files
-          Directory sourceDir = Directory("./integration_test/test_files/source");
-          Directory copiesDir = Directory("./integration_test/test_files/copies");
+          // Accessing the support directory
+          Directory? appSupportDir;
+          appSupportDir =  await getApplicationSupportDirectory();
+          _pu.printd("");
+          _pu.printd("appSupportDir: $appSupportDir");
+          _pu.printd("");
 
-          if (!copiesDir.existsSync()) {;await copiesDir.create();}
+          // Creating the folder structure for the source files integration_test/test_files/source/
+          String relativePathToSourceDir = 'integration_test/test_files/source/';
+          Directory absolutePathToSourceDir = Directory(path.join(appSupportDir.path, relativePathToSourceDir));
+          await absolutePathToSourceDir.create(recursive: true);  
+
+          // Creating the folder structure for the copies integration_test/test_files/copies/
+          String relativePathToCopiesDir = 'integration_test/test_files/copies/';
+          Directory absolutePathToCopiesDir = Directory(path.join(appSupportDir.path, relativePathToCopiesDir));
+          await absolutePathToCopiesDir.create(recursive: true);
+
+          // Creating 3 files in the source folder
+          String fileName1 = "file.txt";
+          String fileName2 = "file2.txt";
+          String fileName3 = "file3.txt";
+
+          File file1 = File(path.join(absolutePathToSourceDir.path, fileName1));
+          File file2 = File(path.join(absolutePathToSourceDir.path, fileName2));
+          File file3 = File(path.join(absolutePathToSourceDir.path, fileName3));
+          if (!file1.existsSync()) {file1.createSync();}
+          if (!file2.existsSync()) {file2.createSync();}
+          if (!file3.existsSync()) {file3.createSync();}
+          
+          // print("absoluteSourceDir: $absolutePathToSourceDir");
+          // print("absoluteCopiesDir: $absolutePathToCopiesDir");
           
           // Emptying and recreating the copies folder
-          if (await copiesDir.exists()) 
+          if (await absolutePathToCopiesDir.exists()) 
           {
-            final entriesInCopiesDir = await copiesDir.list().toList();
+            final entriesInCopiesDir = await absolutePathToCopiesDir.list().toList();
             if (entriesInCopiesDir.isNotEmpty) 
             {
               // Deleting everything inside the copies folder and recreating the directory
-              await copiesDir.delete(recursive: true);
-              await copiesDir.create();
+              await absolutePathToCopiesDir.delete(recursive: true);
+              await absolutePathToCopiesDir.create();
             }
           }
-          else {throw Exception('$copiesDir does not exist.');}
+          else {throw Exception('$absolutePathToCopiesDir does not exist.');}
 
           // Copying the source files in the copies folder
-          await for (var entity in sourceDir.list(recursive: true)) 
+          await for (var entity in absolutePathToSourceDir.list(recursive: true)) 
           {
             if (entity is File) 
             {
-              final relativePath = path.relative(entity.path, from: sourceDir.path);
-              final newPath = path.join(copiesDir.path, relativePath);
+              final relativePath = path.relative(entity.path, from: absolutePathToSourceDir.path);
+              final newPath = path.join(absolutePathToCopiesDir.path, relativePath);
               
               // Ensuring sub-folders exist in the destination folder if doing recursive copy
               await Directory(path.dirname(newPath)).create(recursive: true);
@@ -149,7 +175,7 @@ void main() async
               typeOfContextData: DashboardUtils.contextAnalysesContext,
               analysisTitle: "Untitled -",
               keywords: [],
-              pathToCSVFile: "./integration_test/test_files/copies/file.txt"
+              pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
             );
             // data 2
             await _du.saveDashboardData
@@ -157,7 +183,7 @@ void main() async
               typeOfContextData: DashboardUtils.contextAnalysesContext,
               analysisTitle: "Untitled -",
               keywords: [],
-              pathToCSVFile: "./integration_test/test_files/copies/file2.txt"
+              pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
             );
             // data 3
             await _du.saveDashboardData
@@ -165,7 +191,7 @@ void main() async
               typeOfContextData: DashboardUtils.contextAnalysesContext,
               analysisTitle: "Untitled -",
               keywords: [],
-              pathToCSVFile: "./integration_test/test_files/copies/file3.txt"
+              pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
             );
 
             // Setting 'wasSessionDataSaved' to true
