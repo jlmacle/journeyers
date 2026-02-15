@@ -224,6 +224,7 @@ class FileUtils
       } else 
       {
         _pu.printd("Deletion skipped: File does not exist at $pathToCsv");
+        _pu.printd("Current working directory: ${Directory.current.path}");
       }
     } on FileSystemException 
     // Specifically handling OS-level errors like permission issues
