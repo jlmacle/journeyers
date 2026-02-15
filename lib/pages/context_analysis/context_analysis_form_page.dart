@@ -475,7 +475,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   @override
   void initState() {
     super.initState();
-    getApplicationFolderPathPref();
+    if (Platform.isAndroid || Platform.isIOS) {getApplicationFolderPathPref();}
 
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
@@ -892,7 +892,6 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                       return KeyEventResult.ignored;
                     },
                     child: 
-                    // ... inside the Focus widget in build()
                     _isApplicationFolderPathLoading
                     ? Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
@@ -907,7 +906,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                                     {result = await platformIOS.invokeMethod('openDirectory');}
                                   
                                   if (result != null) {
-                                    // Refresh local state with the new path/bookmark
+                                    // Refreshing local state with the new path/bookmark
                                     getApplicationFolderPathPref(); 
                                   }
                                 },
@@ -929,7 +928,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                                 },
                                 onSubmitted: (value) async {
                                   setState(() { _fileName = value; });
-                                  // Saving data - will use the security bookmark on iOS
+                                  // Saving data 
                                   await print2CSV();
                                   await upu.reload();
                                 },
