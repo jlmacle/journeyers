@@ -1,0 +1,14 @@
+Persist permissions
+"When your app opens a file for reading or writing, 
+the system gives your app a URI permission grant for that file, 
+which lasts until the user's device restarts. 
+Suppose, however, that your app is an image-editing app, 
+and you want users to be able to access the 5 images that they most recently edited, 
+directly from your app. If the user's device has restarted, 
+you'd have to send the user back to the system picker to find the files."
+https://developer.android.com/training/data-storage/shared/documents-files#persist-permissions
+
+"The ACTION_OPEN_DOCUMENT_TREE intent action, available on Android 5.0 (API level 21) and higher, 
+allows users to select a specific directory, 
+granting your app access to all of the files and sub-directories within that directory."
+https://developer.android.com/training/data-storage/shared/documents-files#use-cases
