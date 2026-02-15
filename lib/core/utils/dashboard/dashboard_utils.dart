@@ -169,4 +169,35 @@ class DashboardUtils {
     }
   }
 
+  /// Method used to restore session data from copied session data 
+  Future<void> restoreCopiedSessionData({required String typeOfContextData, required List<dynamic> savedData}) async
+  {
+    String fileName = "";
+    final directory = await getApplicationSupportDirectory();
+    final path = directory.path;
+
+    // Getting file name according to context
+    if (typeOfContextData == contextAnalysesContext) 
+    {
+      fileName = 'dashboard_session_data_context_analyses.json';
+    } else if (typeOfContextData == groupProblemSolvingsContext) 
+    {
+      fileName = 'dashboard_session_data_group_problem_solvings.json';
+    } 
+    else 
+    {
+      _pu.printd("Error: Unexpected type of context data: $typeOfContextData");
+    }
+
+    File sessionFile = File('$path/$fileName');
+    // Creating session file if doesn't exist
+    if (!sessionFile.existsSync()) {sessionFile.createSync();}
+
+    // Adding the data to the file
+    var savedContent = jsonEncode(savedData);
+    await sessionFile.writeAsString(savedContent);
+    _pu.printd("Session file for $typeOfContextData restored: $path/$fileName");
+
+  }
+
 }
