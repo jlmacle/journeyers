@@ -1,13 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
-import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
 
-import 'package:journeyers/core/utils/printing_and_logging/logging_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
+
 
 // Utility class
 final PrintUtils _pu = PrintUtils();
@@ -17,19 +16,11 @@ final UserPreferencesUtils _upu = UserPreferencesUtils();
 /// A utility class related to files.
 class FileUtils 
 {
-  FileUtils() 
-  {
-    LoggingUtils lu = LoggingUtils();
-    lu.setupLogging();
-  }
 
   /// Channel used for communicating with Android
   var platformAndroid = MethodChannel('dev.journeyers/saf');
   /// Channel used for communicating with IOS
   var platformIOS = MethodChannel('dev.journeyers/iossaf');
-
-  // A logger
-  final _logger = Logger("file_utils.dart");
 
   /// Method used to append text at the end of a file.
   Future<void> addTextAtFileEnd
@@ -48,8 +39,8 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {_logger.shout('$errorMsg ${e.message}');} 
-    catch (e) {_logger.shout('$errorMsg $e');}
+    catch (e) {_pu.printd('$errorMsg ${e.message}'); } 
+    catch (e) {_pu.printd('$errorMsg $e');}
   }
 
   /// Method used to add text at the beginning of a file.
@@ -71,8 +62,8 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {_logger.shout('$errorMsg ${e.message}');} 
-    catch (e) {_logger.shout('$errorMsg  $e');}
+    catch (e) {_pu.printd('$errorMsg ${e.message}');} 
+    catch (e) {_pu.printd('$errorMsg  $e');}
   }
 
   /// Method used to create a file if necessary, and to add content to it.
@@ -93,8 +84,8 @@ class FileUtils
       await sink.flush();
       await sink.close();
     } 
-    on FileSystemException catch (e) {_logger.shout('$errorMsg ${e.message}');} 
-    catch (e) {_logger.shout('$errorMsg $e');}
+    on FileSystemException catch (e) {_pu.printd('$errorMsg ${e.message}');} 
+    catch (e) {_pu.printd('$errorMsg $e');}
   }
 
   /// Method used to get all the files with a specific extension in a directory.
