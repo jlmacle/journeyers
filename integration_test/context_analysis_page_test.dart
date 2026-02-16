@@ -41,13 +41,12 @@ void main() async
 
           // Testing the presence of the information modal status
           final modalWidget = find.byKey(const Key('information_modal'));
-          // await tester.pump(const Duration(seconds: 3));
+          await tester.pumpAndSettle();
           expect(modalWidget, findsOneWidget);
 
           // Dismissing the modal to avoid the modal appearing at the next "flutter run"
           await tester.tap(modalWidget);
-          await tester.pumpAndSettle();
-          
+          await tester.pumpAndSettle();          
         }
       );
 
