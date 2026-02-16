@@ -34,3 +34,16 @@ Future<List<String>> getSessionsTitlesList({required WidgetTester tester, requir
   return sessionsTitlesList;
 }
 
+/// Method used to test if the test data titles are already present in the pre-test sessions titles
+bool isThereATestDataTitleDuplicated({
+  required List<String> listOfSessionTitles, 
+  required List<String> listOfTestDataTitles,
+}) {
+  return listOfTestDataTitles.any((String title) {
+    final int occurrences = listOfSessionTitles
+        .where((String s) => s == title)
+        .length;
+        
+    return occurrences >= 2;
+  });
+}
