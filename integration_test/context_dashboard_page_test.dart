@@ -26,11 +26,11 @@ void main() async
   late List<dynamic> currentSessionData;
   late List<dynamic> currentSessionDataCopy;
   late Directory? appSupportDir;
-  String testFile1Title = "Context analysis 1";
+  String testFile1Title = "Test-Context analysis 1";
   List<String> testFile1Keywords = [];
-  String testFile2Title = "Context analysis 2";
+  String testFile2Title = "Test-Context analysis 2";
   List<String> testFile2Keywords = ["kw1"];
-  String testFile3Title = "Context analysis 3";
+  String testFile3Title = "Test-Context analysis 3";
   List<String> testFile3Keywords = ["kw1","kw2"];
 
   group
@@ -148,6 +148,11 @@ void main() async
             typeOfContextData: DashboardUtils.contextAnalysesContext, 
             savedData: currentSessionDataCopy
           );
+
+          // PRE-TEST SESSION DATA PRESENT RESTORATION (set to true by the test)
+          if (currentSessionDataCopy.isEmpty) await _upu.saveWasSessionDataSaved(false);
+
+
         } 
         catch (e, stackTrace) 
         {
@@ -156,7 +161,6 @@ void main() async
         }
       });
 
-      
       testWidgets
       ( 
         // skip:true, 
