@@ -137,11 +137,19 @@ void main() async
       tearDown(() async 
       {
         // PRE-TEST SESSION DATA RESTORATION
-        await _du.restoreCopiedSessionData
-        (
-          typeOfContextData: DashboardUtils.contextAnalysesContext, 
-          savedData: currentSessionDataCopy
-        );
+        try 
+        {
+          await _du.restoreCopiedSessionData
+          (
+            typeOfContextData: DashboardUtils.contextAnalysesContext, 
+            savedData: currentSessionDataCopy
+          );
+        } 
+        catch (e, stackTrace) 
+        {
+          _pu.printd('Caught error: $e');
+          _pu.printd('Stack trace: $stackTrace');
+        }
       });
 
       
