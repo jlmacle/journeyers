@@ -266,6 +266,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 _buildFilterAndSortBar(),
                 Expanded(
                   child: ListView.builder(
+                    key: const Key('session_list'),
                     itemCount: _filteredSessions?.length ?? 0,
                     itemBuilder: (context, index) {
                       final session = _filteredSessions![index];
@@ -304,10 +305,12 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                           spacing: 8,
                                           children: [
                                             Text(
+                                              key: ValueKey('session_title_$index'),
                                               "${session[DashboardUtils.keyTitle]}",
                                               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                                             ),
                                             Text(
+                                              key: ValueKey('session_date_$index'),
                                               "(${session[DashboardUtils.keyDate]})",
                                               style: const TextStyle(fontSize: 14, color: Colors.grey),
                                             ),
@@ -315,6 +318,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
+                                          key: ValueKey('session_keywords_$index'),
                                           "Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}",
                                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                                         ),
