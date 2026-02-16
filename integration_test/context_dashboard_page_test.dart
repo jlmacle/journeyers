@@ -1,3 +1,4 @@
+import 'dart:developer' as dev;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -37,14 +38,12 @@ void main() async
     'Dashboard page tests\n', 
     () 
     { 
-
       setUp(() async 
       {
         // PRE-TEST SESSION DATA COPY
-        // Getting the current session data
+        // Getting the current session data to make a copy
         currentSessionData = await _du.retrieveAllDashboardSessionData
         (typeOfContextData: DashboardUtils.contextAnalysesContext);
-
         // Storing a copy of the session data to restore session data to pre-test environment
         currentSessionDataCopy = List.from(currentSessionData);
 
@@ -130,8 +129,13 @@ void main() async
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
         );
 
-        // Setting 'wasSessionDataSaved' to true,in case there was no session data
+        // UPDATING THE CURRENT SESSION DATA
+        currentSessionData = await _du.retrieveAllDashboardSessionData
+        (typeOfContextData: DashboardUtils.contextAnalysesContext);
+
+        // SETTING 'wasSessionDataSaved' TO TRUE, in case there was no session data to start with
         await _upu.saveWasSessionDataSaved(true);
+        
       });
 
       tearDown(() async 
@@ -198,7 +202,7 @@ void main() async
           await tester.tap(bulkDeleteButton);
           await tester.pumpAndSettle();
 
-          // await tester.pump(const Duration(seconds: 3));
+          // await tester.pump(const Duration(seconds: 5));
         }
       );
     }
