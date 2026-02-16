@@ -22,9 +22,15 @@ void main() async
 {
   // This initializes the bridge between the app and the test runner
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  late var currentSessionData;
-  late var currentSessionDataCopy;
+  late List<dynamic> currentSessionData;
+  late List<dynamic> currentSessionDataCopy;
   late Directory? appSupportDir;
+  String testFile1Title = "Context analysis 1";
+  List<String> testFile1Keywords = [];
+  String testFile2Title = "Context analysis 2";
+  List<String> testFile2Keywords = ["kw1"];
+  String testFile3Title = "Context analysis 3";
+  List<String> testFile3Keywords = ["kw1","kw2"];
 
   group
   (
@@ -103,24 +109,24 @@ void main() async
         await _du.saveDashboardData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
-          analysisTitle: "Context analysis 1",
-          keywords: [],
+          analysisTitle: testFile1Title,
+          keywords: testFile1Keywords,
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
         );
         // data 2
         await _du.saveDashboardData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
-          analysisTitle: "Context analysis 2",
-          keywords: ["kw1"],
+          analysisTitle: testFile2Title,
+          keywords: testFile2Keywords,
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
         );
         // data 3
         await _du.saveDashboardData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
-          analysisTitle: "Context analysis 3",
-          keywords: ["kw1","kw2"],
+          analysisTitle: testFile3Title,
+          keywords: testFile3Keywords,
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
         );
 
@@ -131,15 +137,17 @@ void main() async
       tearDown(() async 
       {
         // PRE-TEST SESSION DATA RESTORATION
-        _du.restoreCopiedSessionData
+        await _du.restoreCopiedSessionData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext, 
           savedData: currentSessionDataCopy
         );
       });
+
       
       testWidgets
       ( 
+        // skip:true, 
         // Testing the bulk deletion of session data
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
         'When the "Delete" text is clicked, the deleted sessions should be removed from the displayed session data.\n'
@@ -160,7 +168,7 @@ void main() async
             )
           );
           await tester.pumpAndSettle();
-          // The dashboard should load the added data          
+          // The dashboard should load the added data
 
           // Selecting the 3 added sessions for bulk deletion 
           final firstCheckboxFinder = find.byKey(const ValueKey('checkbox_0'));
