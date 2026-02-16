@@ -1,4 +1,3 @@
-import 'dart:developer' as dev;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -13,6 +12,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
+
+import 'externalized_code/integration_test_utils.dart';
 
 //**************** UTILITY CLASSES ****************//
 UserPreferencesUtils _upu = UserPreferencesUtils();
@@ -186,15 +187,37 @@ void main() async
           await tester.pumpAndSettle();
           // The dashboard should load the added data
 
-          // Selecting the 3 added sessions for bulk deletion 
+          // Getting the list of all session titles before deletion
+          _pu.printd("");
+          _pu.printd("Getting the list of all session titles before deletion");
+          List<String> sessionTitlesBeforeDeletion = await getSessionsTitlesList
+                                                    (tester: tester, sessionData: currentSessionData, keyRoot: 'session_title_');
+
+          // Scrolling back to the first checkbox
+          final listFinder = find.byKey(const Key('session_list'));
           final firstCheckboxFinder = find.byKey(const ValueKey('checkbox_0'));
+          await tester.scrollUntilVisible
+          (
+            firstCheckboxFinder, 
+            -200 , // getting back up the list
+            scrollable:find.descendant
+            (
+              of: listFinder,
+              matching: find.byType(Scrollable),
+            )
+          );
+          await tester.pumpAndSettle(); // important for the first checkbox to be checked
+
+          // Selecting the 3 added sessions for bulk deletion 
           await tester.tap(firstCheckboxFinder);
 
           final secondCheckboxFinder = find.byKey(const ValueKey('checkbox_1'));
           await tester.tap(secondCheckboxFinder);
+          await tester.pump(const Duration(seconds: 3));
 
           final thirdCheckboxFinder = find.byKey(const ValueKey('checkbox_2'));
           await tester.tap(thirdCheckboxFinder);
+          await tester.pump(const Duration(seconds: 3));
 
           final bulkDeleteButton = find.byKey(const Key('bulk_delete_button'));
           await tester.pumpAndSettle();
@@ -206,7 +229,28 @@ void main() async
           await tester.tap(bulkDeleteButton);
           await tester.pumpAndSettle();
 
-          // await tester.pump(const Duration(seconds: 5));
+          // Getting the refreshed session data after deletion
+          var sessionDataAfterDeletion = await _du.retrieveAllDashboardSessionData
+                                                  (typeOfContextData: DashboardUtils.contextAnalysesContext);
+          // Getting the list of all session titles after deletion
+          _pu.printd("");
+          _pu.printd("Getting the list of all session titles after deletion");
+          List<String> sessionTitlesAfterDeletion = await getSessionsTitlesList
+                                                    (tester: tester, sessionData: sessionDataAfterDeletion, keyRoot: 'session_title_');
+
+          // Comparing the two lists length
+          expect(sessionTitlesBeforeDeletion.length - sessionTitlesAfterDeletion.length, 3);
+
+          // Checking if the test titles remained in sessionTitlesAfterDeletion  
+          // (could be previous test data, if session restoration data was failed)
+
+          expect(
+            sessionTitlesAfterDeletion.contains(testFile1Title)
+            || sessionTitlesAfterDeletion.contains(testFile2Title)
+            || sessionTitlesAfterDeletion.contains(testFile3Title)
+            , false);
+
+          await tester.pump(const Duration(seconds: 5));
         }
       );
     }
