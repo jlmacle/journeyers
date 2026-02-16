@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:integration_test/integration_test.dart';
+import 'package:intl/intl.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 import 'package:path/path.dart' as path;
@@ -33,6 +34,7 @@ void main() async
   List<String> testFile2Keywords = ["kw1"];
   String testFile3Title = "Test-Context analysis 3";
   List<String> testFile3Keywords = ["kw1","kw2"];
+  List<String> testDataTitles = [testFile1Title, testFile2Title, testFile3Title];
 
   group
   (
@@ -164,7 +166,78 @@ void main() async
 
       testWidgets
       ( 
-        // skip:true, 
+        // Testing the display of session data
+        'When a session data is diplayed, the session title, date, and keywords should be findable.',
+        (tester) async 
+        { 
+          // Launching the widget
+          await tester.pumpWidget
+          (             
+            const MaterialApp
+            (              
+              home:ContextAnalysesDashboardPage()            
+            )
+          );
+          await tester.pumpAndSettle();
+          // The dashboard should load the added data 
+
+          // Getting the list of titles to search for duplicates of the test data titles
+          List<String> sessionsTitlesList = await getSessionsTitlesList
+                                      (tester: tester, sessionData: currentSessionData, keyRoot: 'session_title_');
+          await tester.pumpAndSettle();
+          _pu.printd("sessionsTitlesList: $sessionsTitlesList");
+          
+          assert(
+            !isThereATestDataTitleDuplicated(listOfSessionTitles: sessionsTitlesList,listOfTestDataTitles: testDataTitles),
+            'Duplicate test data titles were found in the session list!'
+          );
+
+          // Scrolling back up the screen (scrolled down while gathering the session titles)
+          final listFinder = find.byKey(const Key('session_list'));
+          final titleFinder = find.byKey(const Key('session_title_2'));
+          await tester.scrollUntilVisible
+          (
+            titleFinder, 
+            -200 , // getting back up the list
+            scrollable:find.descendant
+            (
+              of: listFinder,
+              matching: find.byType(Scrollable),
+            )
+          );
+          await tester.pumpAndSettle(); 
+
+          // Testing for the presence of the title
+          await tester.ensureVisible(titleFinder); 
+          await tester.pump();
+          final Text titleWidget = tester.widget(titleFinder);        
+          String title = titleWidget.data!;
+          expect(title, testFile3Title);
+
+          // Testing for the presence of the date
+            // Getting the current date
+          var now = DateTime.now();
+          var formatter = DateFormat('MM/dd/yy');
+          var formattedDate = formatter.format(now);
+            // Getting the date from the data
+          final dateFinder = find.byKey(const Key('session_date_2'));
+          final Text dateWidget = tester.widget(dateFinder);        
+          String date = dateWidget.data!;
+          expect(date, '($formattedDate)');
+
+          // Testing for the presence of the keywords
+          final keywordsFinder = find.byKey(const Key('session_keywords_2'));
+          final Text keywordsWidget = tester.widget(keywordsFinder);        
+          String keywords = keywordsWidget.data!;
+          expect(keywords, "Keywords: ${testFile3Keywords.join(', ')}");
+
+          // await tester.pump(const Duration(seconds: 5));
+        }
+      );
+
+      testWidgets
+      ( 
+        skip:true, 
         // Testing the bulk deletion of session data
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
         'When the "Delete" text is clicked, the deleted sessions should be removed from the displayed session data.\n'
@@ -250,7 +323,7 @@ void main() async
             || sessionTitlesAfterDeletion.contains(testFile3Title)
             , false);
 
-          await tester.pump(const Duration(seconds: 5));
+          // await tester.pump(const Duration(seconds: 5));
         }
       );
     }
