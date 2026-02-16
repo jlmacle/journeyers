@@ -150,7 +150,7 @@ void main() async
           );
 
           // PRE-TEST SESSION DATA PRESENT RESTORATION (set to true by the test)
-          if (currentSessionDataCopy.isEmpty) await _upu.saveWasSessionDataSaved(false);
+          if (currentSessionDataCopy.isEmpty) {await _upu.saveWasSessionDataSaved(false);}
 
 
         } 
