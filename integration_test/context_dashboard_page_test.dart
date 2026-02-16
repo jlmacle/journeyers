@@ -34,7 +34,6 @@ void main() async
         // Testing the bulk deletion of session data
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
         'When the "Delete" text is clicked, the deleted sessions should be removed from the displayed session data.\n'
-        'Also, the keywords displayed should be updated accordingly (TO FINISH).\n'
         'The session data stored should be consistent with the deletions.\n'
         'Files physical deletion needs to be visually confirmed.',
         (tester) async 
