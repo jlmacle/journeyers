@@ -22,13 +22,35 @@ void main() async
 {
   // This initializes the bridge between the app and the test runner
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  late var currentSessionData;
+  late var currentSessionDataCopy;
 
   group
   (
     'Dashboard page tests\n', 
     () 
-    {      
-      
+    { 
+      // Pre-test session data copy before every individual test
+      setUp(() async 
+      {
+        // Getting the current session data
+        currentSessionData = await _du.retrieveAllDashboardSessionData
+        (typeOfContextData: DashboardUtils.contextAnalysesContext);
+
+        // Storing a copy of the session data to restore session data to pre-test environment
+        currentSessionDataCopy = List.from(currentSessionData);
+      });
+
+      // Pre-test session data restoration after every individual test
+      tearDown(() async 
+      {
+        // Restoring the previous session data
+        _du.restoreCopiedSessionData
+        (
+          typeOfContextData: DashboardUtils.contextAnalysesContext, 
+          savedData: currentSessionDataCopy
+        );
+      });
       testWidgets
       ( 
         // Testing the bulk deletion of session data
@@ -93,98 +115,71 @@ void main() async
               await entity.copy(newPath);
             }
           }
+          
+          // Adding new data
+          // data 1
+          await _du.saveDashboardData
+          (
+            typeOfContextData: DashboardUtils.contextAnalysesContext,
+            analysisTitle: "Untitled -",
+            keywords: [],
+            pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
+          );
+          // data 2
+          await _du.saveDashboardData
+          (
+            typeOfContextData: DashboardUtils.contextAnalysesContext,
+            analysisTitle: "Untitled -",
+            keywords: [],
+            pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
+          );
+          // data 3
+          await _du.saveDashboardData
+          (
+            typeOfContextData: DashboardUtils.contextAnalysesContext,
+            analysisTitle: "Untitled -",
+            keywords: [],
+            pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
+          );
 
-          // Getting the session data
-          List<dynamic> sessionData = await _du.retrieveAllDashboardSessionData
-          (typeOfContextData: DashboardUtils.contextAnalysesContext);
+          // Setting 'wasSessionDataSaved' to true
+          await _upu.saveWasSessionDataSaved(true);
 
-          // Storing a copy of the session data to restore session data to pre-test environment
-          List<dynamic> sessionDataCopy = sessionData.toList();
-
-          try
-          {
-            // Adding new data
-            // data 1
-            await _du.saveDashboardData
+          // Launching the widget
+          await tester.pumpWidget
+          (             
+            const MaterialApp
             (
-              typeOfContextData: DashboardUtils.contextAnalysesContext,
-              analysisTitle: "Untitled -",
-              keywords: [],
-              pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
-            );
-            // data 2
-            await _du.saveDashboardData
-            (
-              typeOfContextData: DashboardUtils.contextAnalysesContext,
-              analysisTitle: "Untitled -",
-              keywords: [],
-              pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
-            );
-            // data 3
-            await _du.saveDashboardData
-            (
-              typeOfContextData: DashboardUtils.contextAnalysesContext,
-              analysisTitle: "Untitled -",
-              keywords: [],
-              pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
-            );
+              // Needed to avoid a 'No Material widget found.' exception
+              home: Scaffold
+              ( 
+                body: ContextAnalysesDashboardPage()
+              ),
+            )
+          );
+          await tester.pumpAndSettle();
+          // The dashboard should load the added data          
 
-            // Setting 'wasSessionDataSaved' to true
-            await _upu.saveWasSessionDataSaved(true);
+          // Selecting the 3 added sessions for bulk deletion 
+          final firstCheckboxFinder = find.byKey(const ValueKey('checkbox_0'));
+          await tester.tap(firstCheckboxFinder);
 
-            // Launching the widget
-            await tester.pumpWidget
-            (             
-              const MaterialApp
-              (
-                // Needed to avoid a 'No Material widget found.' exception
-                home: Scaffold
-                ( 
-                  body: ContextAnalysesDashboardPage()
-                ),
-              )
-            );
-            await tester.pumpAndSettle();
-            // The dashboard should load the added data          
+          final secondCheckboxFinder = find.byKey(const ValueKey('checkbox_1'));
+          await tester.tap(secondCheckboxFinder);
 
-            // Selecting the 3 added sessions for bulk deletion 
-            final firstCheckboxFinder = find.byKey(const ValueKey('checkbox_0'));
-            await tester.tap(firstCheckboxFinder);
+          final thirdCheckboxFinder = find.byKey(const ValueKey('checkbox_2'));
+          await tester.tap(thirdCheckboxFinder);
 
-            final secondCheckboxFinder = find.byKey(const ValueKey('checkbox_1'));
-            await tester.tap(secondCheckboxFinder);
+          final bulkDeleteButton = find.byKey(const Key('bulk_delete_button'));
+          await tester.pumpAndSettle();
 
-            final thirdCheckboxFinder = find.byKey(const ValueKey('checkbox_2'));
-            await tester.tap(thirdCheckboxFinder);
+          // Searching for 'Delete (3)'
+          expect(find.textContaining('Delete (3)'), findsOneWidget);
 
-            final bulkDeleteButton = find.byKey(const Key('bulk_delete_button'));
-            await tester.pumpAndSettle();
+          // Clicking on the bulk delete button
+          await tester.tap(bulkDeleteButton);
 
-            // Searching for 'Delete (3)'
-            expect(find.textContaining('Delete (3)'), findsOneWidget);
-
-            // Clicking on the bulk delete button
-            await tester.tap(bulkDeleteButton);
-
-            // await tester.pump(const Duration(seconds: 3));
-
-            // Restoring the previous session data
-            _du.restoreCopiedSessionData
-            (
-              typeOfContextData: DashboardUtils.contextAnalysesContext, 
-              savedData: sessionDataCopy
-            );
-          }
-          catch (e)
-          {
-            _pu.printd("An exception occured: $e");
-            _pu.printd("Restoring session data");
-            _du.restoreCopiedSessionData
-            (
-              typeOfContextData: DashboardUtils.contextAnalysesContext, 
-              savedData: sessionDataCopy
-            );
-          }
+          // await tester.pump(const Duration(seconds: 3));
         }
       );
     }
