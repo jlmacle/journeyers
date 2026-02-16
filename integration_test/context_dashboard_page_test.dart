@@ -31,9 +31,10 @@ void main() async
     'Dashboard page tests\n', 
     () 
     { 
-      // Pre-test session data copy before every individual test
+
       setUp(() async 
       {
+        // PRE-TEST SESSION DATA COPY
         // Getting the current session data
         currentSessionData = await _du.retrieveAllDashboardSessionData
         (typeOfContextData: DashboardUtils.contextAnalysesContext);
@@ -41,17 +42,95 @@ void main() async
         // Storing a copy of the session data to restore session data to pre-test environment
         currentSessionDataCopy = List.from(currentSessionData);
 
-        // Accessing the support directory
+        // ACCESSING THE APPLICATION SUPPORT DIRECTORY
         appSupportDir =  await getApplicationSupportDirectory();
         _pu.printd("");
         _pu.printd("appSupportDir: $appSupportDir");
         _pu.printd("");
+
+        // TEST FILES CREATION
+        // Creating the folder structure for the source files: integration_test/test_files/source/
+        String relativePathToSourceDir = 'integration_test/test_files/source/';
+        Directory absolutePathToSourceDir = Directory(path.join(appSupportDir!.path, relativePathToSourceDir));
+        await absolutePathToSourceDir.create(recursive: true);  
+
+        // Creating the folder structure for the copies: integration_test/test_files/copies/
+        String relativePathToCopiesDir = 'integration_test/test_files/copies/';
+        Directory absolutePathToCopiesDir = Directory(path.join(appSupportDir!.path, relativePathToCopiesDir));
+        await absolutePathToCopiesDir.create(recursive: true);
+
+        // Creating 3 files in the source folder
+        String fileName1 = "file.txt";
+        String fileName2 = "file2.txt";
+        String fileName3 = "file3.txt";
+
+        File file1 = File(path.join(absolutePathToSourceDir.path, fileName1));
+        File file2 = File(path.join(absolutePathToSourceDir.path, fileName2));
+        File file3 = File(path.join(absolutePathToSourceDir.path, fileName3));
+        if (!file1.existsSync()) {file1.createSync();}
+        if (!file2.existsSync()) {file2.createSync();}
+        if (!file3.existsSync()) {file3.createSync();}
+        
+        // Emptying and recreating the copies folder
+        if (await absolutePathToCopiesDir.exists()) 
+        {
+          final entriesInCopiesDir = await absolutePathToCopiesDir.list().toList();
+          if (entriesInCopiesDir.isNotEmpty) 
+          {
+            // Deleting everything inside the copies folder and recreating the directory
+            await absolutePathToCopiesDir.delete(recursive: true);
+            await absolutePathToCopiesDir.create();
+          }
+        }
+        else {throw Exception('$absolutePathToCopiesDir does not exist.');}
+
+        // Copying the source files in the copies folder
+        await for (var entity in absolutePathToSourceDir.list(recursive: true)) 
+        {
+          if (entity is File) 
+          {
+            final relativePath = path.relative(entity.path, from: absolutePathToSourceDir.path);
+            final newPath = path.join(absolutePathToCopiesDir.path, relativePath);
+            
+            // Ensuring sub-folders exist in the destination folder if doing recursive copy
+            await Directory(path.dirname(newPath)).create(recursive: true);
+            await entity.copy(newPath);
+          }
+        }
+          
+        // Adding new data
+        // data 1
+        await _du.saveDashboardData
+        (
+          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          analysisTitle: "Context analysis 1",
+          keywords: [],
+          pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
+        );
+        // data 2
+        await _du.saveDashboardData
+        (
+          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          analysisTitle: "Context analysis 2",
+          keywords: ["kw1"],
+          pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
+        );
+        // data 3
+        await _du.saveDashboardData
+        (
+          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          analysisTitle: "Context analysis 3",
+          keywords: ["kw1","kw2"],
+          pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
+        );
+
+        // Setting 'wasSessionDataSaved' to true,in case there was no session data
+        await _upu.saveWasSessionDataSaved(true);
       });
 
-      // Pre-test session data restoration after every individual test
       tearDown(() async 
       {
-        // Restoring the previous session data
+        // PRE-TEST SESSION DATA RESTORATION
         _du.restoreCopiedSessionData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext, 
@@ -67,85 +146,7 @@ void main() async
         'The session data stored should be consistent with the deletions.\n'
         'Files physical deletion needs to be visually confirmed.',
         (tester) async 
-        { 
-          // Creating the folder structure for the source files: integration_test/test_files/source/
-          String relativePathToSourceDir = 'integration_test/test_files/source/';
-          Directory absolutePathToSourceDir = Directory(path.join(appSupportDir!.path, relativePathToSourceDir));
-          await absolutePathToSourceDir.create(recursive: true);  
-
-          // Creating the folder structure for the copies: integration_test/test_files/copies/
-          String relativePathToCopiesDir = 'integration_test/test_files/copies/';
-          Directory absolutePathToCopiesDir = Directory(path.join(appSupportDir!.path, relativePathToCopiesDir));
-          await absolutePathToCopiesDir.create(recursive: true);
-
-          // Creating 3 files in the source folder
-          String fileName1 = "file.txt";
-          String fileName2 = "file2.txt";
-          String fileName3 = "file3.txt";
-
-          File file1 = File(path.join(absolutePathToSourceDir.path, fileName1));
-          File file2 = File(path.join(absolutePathToSourceDir.path, fileName2));
-          File file3 = File(path.join(absolutePathToSourceDir.path, fileName3));
-          if (!file1.existsSync()) {file1.createSync();}
-          if (!file2.existsSync()) {file2.createSync();}
-          if (!file3.existsSync()) {file3.createSync();}
-          
-          // Emptying and recreating the copies folder
-          if (await absolutePathToCopiesDir.exists()) 
-          {
-            final entriesInCopiesDir = await absolutePathToCopiesDir.list().toList();
-            if (entriesInCopiesDir.isNotEmpty) 
-            {
-              // Deleting everything inside the copies folder and recreating the directory
-              await absolutePathToCopiesDir.delete(recursive: true);
-              await absolutePathToCopiesDir.create();
-            }
-          }
-          else {throw Exception('$absolutePathToCopiesDir does not exist.');}
-
-          // Copying the source files in the copies folder
-          await for (var entity in absolutePathToSourceDir.list(recursive: true)) 
-          {
-            if (entity is File) 
-            {
-              final relativePath = path.relative(entity.path, from: absolutePathToSourceDir.path);
-              final newPath = path.join(absolutePathToCopiesDir.path, relativePath);
-              
-              // Ensuring sub-folders exist in the destination folder if doing recursive copy
-              await Directory(path.dirname(newPath)).create(recursive: true);
-              await entity.copy(newPath);
-            }
-          }
-          
-          // Adding new data
-          // data 1
-          await _du.saveDashboardData
-          (
-            typeOfContextData: DashboardUtils.contextAnalysesContext,
-            analysisTitle: "Untitled -",
-            keywords: [],
-            pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
-          );
-          // data 2
-          await _du.saveDashboardData
-          (
-            typeOfContextData: DashboardUtils.contextAnalysesContext,
-            analysisTitle: "Untitled -",
-            keywords: [],
-            pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
-          );
-          // data 3
-          await _du.saveDashboardData
-          (
-            typeOfContextData: DashboardUtils.contextAnalysesContext,
-            analysisTitle: "Untitled -",
-            keywords: [],
-            pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
-          );
-
-          // Setting 'wasSessionDataSaved' to true,in case there was no session data
-          await _upu.saveWasSessionDataSaved(true);
-
+        {
           // Launching the widget
           await tester.pumpWidget
           (             
