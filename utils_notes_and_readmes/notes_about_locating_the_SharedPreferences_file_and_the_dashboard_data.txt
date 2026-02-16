@@ -7,8 +7,8 @@ macOS:
 /Users/<user-name>/Library/Containers/dev.journeyers/Data/Library/Application Support/dev.journeyers/dashboard_session_data_context_analyses.json
 
 Windows:
-C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\shared_preferences.json
-C:\Users\<user-name>\AppData\Roaming\com.example\journeyers\dashboard_session_data_context_analyses.json
+C:\Users\<user-name>\AppData\Roaming\dev\journeyers\shared_preferences.json
+C:\Users\<user-name>\AppData\Roaming\dev\journeyers\dashboard_session_data_context_analyses.json
 
 Android:
 Android Studio + View > Tool Windows > Device File Explorer
