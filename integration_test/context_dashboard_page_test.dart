@@ -24,6 +24,7 @@ void main() async
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late var currentSessionData;
   late var currentSessionDataCopy;
+  late Directory? appSupportDir;
 
   group
   (
@@ -39,6 +40,12 @@ void main() async
 
         // Storing a copy of the session data to restore session data to pre-test environment
         currentSessionDataCopy = List.from(currentSessionData);
+
+        // Accessing the support directory
+        appSupportDir =  await getApplicationSupportDirectory();
+        _pu.printd("");
+        _pu.printd("appSupportDir: $appSupportDir");
+        _pu.printd("");
       });
 
       // Pre-test session data restoration after every individual test
@@ -51,6 +58,7 @@ void main() async
           savedData: currentSessionDataCopy
         );
       });
+      
       testWidgets
       ( 
         // Testing the bulk deletion of session data
@@ -60,21 +68,14 @@ void main() async
         'Files physical deletion needs to be visually confirmed.',
         (tester) async 
         { 
-          // Accessing the support directory
-          Directory? appSupportDir;
-          appSupportDir =  await getApplicationSupportDirectory();
-          _pu.printd("");
-          _pu.printd("appSupportDir: $appSupportDir");
-          _pu.printd("");
-
           // Creating the folder structure for the source files: integration_test/test_files/source/
           String relativePathToSourceDir = 'integration_test/test_files/source/';
-          Directory absolutePathToSourceDir = Directory(path.join(appSupportDir.path, relativePathToSourceDir));
+          Directory absolutePathToSourceDir = Directory(path.join(appSupportDir!.path, relativePathToSourceDir));
           await absolutePathToSourceDir.create(recursive: true);  
 
           // Creating the folder structure for the copies: integration_test/test_files/copies/
           String relativePathToCopiesDir = 'integration_test/test_files/copies/';
-          Directory absolutePathToCopiesDir = Directory(path.join(appSupportDir.path, relativePathToCopiesDir));
+          Directory absolutePathToCopiesDir = Directory(path.join(appSupportDir!.path, relativePathToCopiesDir));
           await absolutePathToCopiesDir.create(recursive: true);
 
           // Creating 3 files in the source folder
@@ -142,7 +143,7 @@ void main() async
             pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
           );
 
-          // Setting 'wasSessionDataSaved' to true
+          // Setting 'wasSessionDataSaved' to true,in case there was no session data
           await _upu.saveWasSessionDataSaved(true);
 
           // Launching the widget
