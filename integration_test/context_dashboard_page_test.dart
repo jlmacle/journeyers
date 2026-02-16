@@ -196,6 +196,7 @@ void main() async
 
           // Clicking on the bulk delete button
           await tester.tap(bulkDeleteButton);
+          await tester.pumpAndSettle();
 
           // await tester.pump(const Duration(seconds: 3));
         }
