@@ -73,7 +73,7 @@ class FileUtils
     required String text,
   }) async 
   {
-    String errorMsg = 'Error writitng text to file:';
+    String errorMsg = 'Error writing text to file:';
     try 
     {
       File file = File(filePath);
