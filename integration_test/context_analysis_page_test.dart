@@ -46,6 +46,8 @@ void main() async
 
           // Dismissing the modal to avoid the modal appearing at the next "flutter run"
           await tester.tap(modalWidget);
+          await tester.pumpAndSettle();
+          
         }
       );
 
