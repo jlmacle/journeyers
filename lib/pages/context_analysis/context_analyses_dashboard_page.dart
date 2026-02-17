@@ -81,13 +81,26 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   {
     _allSessions?.sort((a, b) 
     {
-      DateTime dateA = DateFormat('MMMM dd, yyyy').parse(a[DashboardUtils.keyDate]);
-      DateTime dateB = DateFormat('MMMM dd, yyyy').parse(b[DashboardUtils.keyDate]);
+      DateTime dateA = DateFormat('MMMM dd, yyyy').add_jm().parse(a[DashboardUtils.keyDate]);
+      DateTime dateB = DateFormat('MMMM dd, yyyy').add_jm().parse(b[DashboardUtils.keyDate]);
       return _isAscending ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
     });
     _applyFilters();
   }
  
+  // Method used to sort session data by title 
+  void _sortSessionsByTitle() {
+    _allSessions?.sort((a, b) {
+      String titleA = (a[DashboardUtils.keyTitle] ?? "").toString().toLowerCase();
+      String titleB = (b[DashboardUtils.keyTitle] ?? "").toString().toLowerCase();
+      
+      return _isAscending 
+          ? titleA.compareTo(titleB) 
+          : titleB.compareTo(titleA);
+    });
+    _applyFilters();
+  }
+
   // Method used to filter the session data by keywords
   Future<void> _applyFilters() async
   {
@@ -399,7 +412,39 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           child: Column
           (
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [                  
+            children: [
+              // Sorting by title
+              TextButton.icon(
+                onPressed: () {
+                  setState(() {
+                    _isAscending = !_isAscending;
+                    _sortSessionsByTitle(); // Calling the new title-based sort
+                  });
+                },
+                icon: Icon(
+                  _isAscending ? Icons.sort_by_alpha : Icons.sort_by_alpha, // You can use alpha icons for clarity
+                  color: Colors.black,
+                ),
+                label: Text(
+                  "Sort by Title (${_isAscending ? 'A-Z' : 'Z-A'})", 
+                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
+                ),
+              ),
+              // Sorting by date
+              TextButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        _isAscending = !_isAscending;
+                        _sortSessionsByDate();
+                      });
+                    },
+                    icon: Icon(
+                      _isAscending ? Icons.arrow_upward : Icons.arrow_downward, 
+                      color: Colors.black),
+                    label: const Text(
+                      "Sort by Date", 
+                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
+                  ),   
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
