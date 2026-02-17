@@ -81,8 +81,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   {
     _allSessions?.sort((a, b) 
     {
-      DateTime dateA = DateFormat("MM/dd/yy").parse(a[DashboardUtils.keyDate]);
-      DateTime dateB = DateFormat("MM/dd/yy").parse(b[DashboardUtils.keyDate]);
+      DateTime dateA = DateFormat('MMMM dd, yyyy').parse(a[DashboardUtils.keyDate]);
+      DateTime dateB = DateFormat('MMMM dd, yyyy').parse(b[DashboardUtils.keyDate]);
       return _isAscending ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
     });
     _applyFilters();

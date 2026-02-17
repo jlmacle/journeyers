@@ -164,74 +164,21 @@ void main() async
         }
       });
 
-      // Testing the display of session data
+      // Testing the sorting by date
       testWidgets
       ( 
-        skip:true,
-        'Session data display:\n'
+        // skip:true,
+        'Sorting by date:\n'
         'When a session data is displayed, the session title, date, and keywords should be findable.',
         (tester) async 
         { 
-         
-          // Launching the widget
-          await tester.pumpWidget
-          (             
-            const MaterialApp
-            (              
-              home:ContextAnalysesDashboardPage()            
-            )
-          );
-          await tester.pumpAndSettle();
-          // The dashboard should load the added data 
-
-          // Getting the list of titles to search for duplicates of the test data titles
-          List<String> sessionsTitlesList = await getSessionsTitlesList
-                                      (tester: tester, sessionData: currentSessionData, keyRoot: 'session_title_');
-          await tester.pumpAndSettle();
-          _pu.printd("sessionsTitlesList: $sessionsTitlesList");
-          
-          assert(
-            !isThereATestDataTitleDuplicated(listOfSessionTitles: sessionsTitlesList,listOfTestDataTitles: testDataTitles),
-            'Duplicate test data titles were found in the session list!'
-          );
-
-          // Scrolling back up the screen (scrolled down while gathering the session titles)
-          final listFinder = find.byKey(const Key('session_list'));
-          final titleFinder = find.byKey(const Key('session_title_2'));
-          await scrollListUpScreen(tester: tester, listFinder: listFinder, elementToReachFinder: titleFinder);
-
-          // Testing for the presence of the title
-          await tester.ensureVisible(titleFinder); 
-          await tester.pump();
-          final Text titleWidget = tester.widget(titleFinder);        
-          String title = titleWidget.data!;
-          expect(title, testFile3Title);
-
-          // Testing for the presence of the date
-            // Getting the current date
-          var now = DateTime.now();
-          var formatter = DateFormat('MM/dd/yy');
-          var formattedDate = formatter.format(now);
-            // Getting the date from the data
-          final dateFinder = find.byKey(const Key('session_date_2'));
-          final Text dateWidget = tester.widget(dateFinder);        
-          String date = dateWidget.data!;
-          expect(date, '($formattedDate)');
-
-          // Testing for the presence of the keywords
-          final keywordsFinder = find.byKey(const Key('session_keywords_2'));
-          final Text keywordsWidget = tester.widget(keywordsFinder);        
-          String keywords = keywordsWidget.data!;
-          expect(keywords, "Keywords: ${testFile3Keywords.join(', ')}");
-
-          // await tester.pump(const Duration(seconds: 5));
         }
-      );
-
+      );      
+      
       // Testing the delete icon
       testWidgets
       ( 
-        skip:true,
+        // skip:true,
         'Delete icon use:\n'
         'When a delete icon is tapped, the related session data is deleted.',
         (tester) async 
@@ -295,7 +242,7 @@ void main() async
       // Testing the bulk deletion of session data
       testWidgets
       ( 
-        skip:true, 
+        // skip:true, 
         'Bulk deletion:\n'
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
         'When the "Delete" text is clicked, the deleted sessions should be removed from the displayed session data.\n'

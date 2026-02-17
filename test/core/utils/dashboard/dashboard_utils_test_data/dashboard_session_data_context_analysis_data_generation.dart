@@ -23,7 +23,7 @@ void main() async {
   var jsonFile = File(filePath);
 
   var now = DateTime.now();
-  var formatter = DateFormat('MM/dd/yy');
+  var formatter = DateFormat('MMMM dd, yyyy');
   var formattedDate = formatter.format(now);
 
   // First record of data
