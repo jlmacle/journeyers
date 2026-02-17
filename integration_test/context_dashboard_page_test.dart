@@ -170,6 +170,7 @@ void main() async
         'When a session data is diplayed, the session title, date, and keywords should be findable.',
         (tester) async 
         { 
+         
           // Launching the widget
           await tester.pumpWidget
           (             
@@ -195,17 +196,7 @@ void main() async
           // Scrolling back up the screen (scrolled down while gathering the session titles)
           final listFinder = find.byKey(const Key('session_list'));
           final titleFinder = find.byKey(const Key('session_title_2'));
-          await tester.scrollUntilVisible
-          (
-            titleFinder, 
-            -200 , // getting back up the list
-            scrollable:find.descendant
-            (
-              of: listFinder,
-              matching: find.byType(Scrollable),
-            )
-          );
-          await tester.pumpAndSettle(); 
+          await scrollListUpScreen(tester: tester, listFinder: listFinder, elementToReachFinder: titleFinder);
 
           // Testing for the presence of the title
           await tester.ensureVisible(titleFinder); 
@@ -234,6 +225,8 @@ void main() async
           // await tester.pump(const Duration(seconds: 5));
         }
       );
+
+      
 
       testWidgets
       ( 
