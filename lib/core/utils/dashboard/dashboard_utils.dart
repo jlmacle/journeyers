@@ -134,6 +134,7 @@ class DashboardUtils {
     );
     String fileContent = sessionFile.readAsStringSync();
     completeSessionData = jsonDecode(fileContent);
+    completeSessionData = completeSessionData.reversed.toList();
 
     return completeSessionData;
   }
