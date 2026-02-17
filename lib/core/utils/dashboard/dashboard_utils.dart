@@ -92,7 +92,7 @@ class DashboardUtils {
   async {
     // Date
     var now = DateTime.now();
-    var formatter = DateFormat('MM/dd/yy');
+    var formatter = DateFormat('MMMM dd, yyyy');
     var formattedDate = formatter.format(now);
 
     _pu.printd("formattedDate: $formattedDate");
