@@ -166,7 +166,7 @@ void main() async
 
       testWidgets
       ( 
-        // skip:true,
+        skip:true,
         // Testing the display of session data
         'Session data display:\n'
         'When a session data is displayed, the session title, date, and keywords should be findable.',
@@ -228,10 +228,73 @@ void main() async
         }
       );
 
+      testWidgets
+      ( 
+        // skip:true,
+        // Testing the delete icon
+        'Delete icon use:\n'
+        'When a delete icon is tapped, the related session data is deleted.',
+        (tester) async 
+        { 
+          // Launching the widget
+          await tester.pumpWidget
+          (             
+            const MaterialApp
+            (              
+              home:ContextAnalysesDashboardPage()            
+            )
+          );
+          await tester.pumpAndSettle();
+          // The dashboard should load the added data 
+
+          // Getting the list of titles, to search for duplicates of the test data titles
+          List<String> sessionsTitlesList = await getSessionsTitlesList
+                                      (tester: tester, sessionData: currentSessionData, keyRoot: 'session_title_');
+          await tester.pumpAndSettle();
+          _pu.printd("sessionsTitlesList: $sessionsTitlesList");
+          
+          assert(
+            !isThereATestDataTitleDuplicated(listOfSessionTitles: sessionsTitlesList,listOfTestDataTitles: testDataTitles),
+            'Duplicate test data titles were found in the session list!'
+          );
+
+          // Scrolling back up the screen to the session to delete
+          // (scrolled down while gathering the session titles)
+          final listFinder = find.byKey(const Key('session_list'));
+          final deleteFinder = find.byKey(const Key('session_delete_2'));
+          await scrollListUpScreen(tester: tester, listFinder: listFinder, elementToReachFinder: deleteFinder);
+          
+          // Clicking on the delete icon
+          await tester.ensureVisible(deleteFinder); 
+          await tester.pump();
+          await tester.tap(deleteFinder);
+          await tester.pumpAndSettle(); 
+
+          // No duplicates where found. 
+          // Is the session title still in the session titles list?
+
+            // Getting the refreshed session data after deletion
+          var sessionDataAfterDeletion = await _du.retrieveAllDashboardSessionData
+                                                  (typeOfContextData: DashboardUtils.contextAnalysesContext);
+            // Getting the list of all session titles after deletion
+          _pu.printd("");
+          _pu.printd("Getting the list of all session titles after deletion");
+          final firstTitleFinder = find.byKey(const ValueKey('session_title_0'));
+            // Scrolling back up the screen to the first title to list
+          await scrollListUpScreen(tester: tester, listFinder: listFinder, elementToReachFinder: firstTitleFinder);
+          List<String> sessionTitlesAfterDeletion = await getSessionsTitlesList
+                                                    (tester: tester, sessionData: sessionDataAfterDeletion, keyRoot: 'session_title_');
+
+            // Testing for the absence of the test data title (file 3 for index 2)
+          expect(sessionTitlesAfterDeletion.contains(testFile3Title), false);
+
+          // await tester.pump(const Duration(seconds: 5));
+        }
+      );
       
       testWidgets
       ( 
-        // skip:true, 
+        skip:true, 
         // Testing the bulk deletion of session data
         'Bulk deletion:\n'
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
