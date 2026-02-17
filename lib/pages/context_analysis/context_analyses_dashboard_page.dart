@@ -369,6 +369,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                         tooltip: "Share",
                                       ),
                                       IconButton(
+                                        key: ValueKey('session_delete_$index'),
                                         icon: const Icon(Icons.delete_rounded),
                                         onPressed: () async => await _deleteSelectedSession(filePath),
                                         tooltip: "Delete",
