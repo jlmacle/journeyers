@@ -25,9 +25,11 @@ void main() async
     {      
       testWidgets
       (
-        skip:true,
+        // skip:true,
         // Testing the presence of the information modal for a newly installed app
-        'A newly installed app should display the information modal,\n before starting the first context analysis.', 
+        'Information modal:\n'
+        'A newly installed app should display the information modal,\n'
+        'before starting the first context analysis.', 
         (tester) async 
         {
           // Resetting the information modal status to have the modal displayed
@@ -52,9 +54,11 @@ void main() async
 
       testWidgets
       ( 
-        skip:true,
+        // skip:true,
         // Testing the presence of the context form, without the dashboard, when no session data is stored
-        'When no session data is stored, the context form should be displayed,\n without the dashboard.', 
+        'No session data stored:\n'
+        'When no session data is stored, the context form should be displayed,\n'
+        'without the dashboard.', 
         (tester) async 
         {  
           // Setting 'wasSessionDataSaved' to false
