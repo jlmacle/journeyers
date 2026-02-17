@@ -173,6 +173,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 padding: EdgeInsets.all(elevatedButtonPadding),
                 child: ElevatedButton
                 (
+                  key: const Key('analyses_new_session_button'),
                   onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
                   child: Text("Please click to start\na new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),
                 ),
