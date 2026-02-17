@@ -25,7 +25,7 @@ void main() async
     {      
       testWidgets
       (
-        // skip:true,
+        skip:true,
         // Testing the presence of the information modal for a newly installed app
         'Information modal:\n'
         'A newly installed app should display the information modal,\n'
@@ -54,7 +54,7 @@ void main() async
 
       testWidgets
       ( 
-        // skip:true,
+        skip:true,
         // Testing the presence of the context form, without the dashboard, when no session data is stored
         'No session data stored:\n'
         'When no session data is stored, the context form should be displayed,\n'
@@ -86,6 +86,24 @@ void main() async
             {await _upu.saveWasSessionDataSaved(false);}
           else
             {await _upu.saveWasSessionDataSaved(true);}
+        }
+      );
+    
+        testWidgets
+      ( 
+        // skip:true,
+        // Testing for the presence of the button starting a new context analysis
+        'Data stored: New context analysis button:\n'
+        'The dashboard page should have a button to start a new context analysis.',
+        (tester) async 
+        { 
+          // Launching the widget
+          await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+          await tester.pumpAndSettle();
+
+          // Testing for the presence of the button
+          final buttonWidget = find.byKey(const Key('analyses_new_session_button'));
+          expect(buttonWidget, findsOne);
         }
       );
     }
