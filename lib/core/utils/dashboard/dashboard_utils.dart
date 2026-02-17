@@ -92,7 +92,7 @@ class DashboardUtils {
   async {
     // Date
     var now = DateTime.now();
-    var formatter = DateFormat('MMMM dd, yyyy');
+    var formatter = DateFormat('MMMM dd, yyyy').add_jm();
     var formattedDate = formatter.format(now);
 
     _pu.printd("formattedDate: $formattedDate");
@@ -135,7 +135,10 @@ class DashboardUtils {
     String fileContent = sessionFile.readAsStringSync();
     completeSessionData = jsonDecode(fileContent);
     completeSessionData = completeSessionData.reversed.toList();
-
+    print("");
+    print("");
+    print("completeSessionData: $completeSessionData");
+    print("");
     return completeSessionData;
   }
 

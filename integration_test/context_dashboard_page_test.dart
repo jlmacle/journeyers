@@ -214,7 +214,7 @@ void main() async
           // Testing for the presence of the date
             // Getting the current date
           var now = DateTime.now();
-          var formatter = DateFormat('MMMM dd, yyyy');
+          var formatter = DateFormat('MMMM dd, yyyy').add_jm();
           var formattedDate = formatter.format(now);
             // Getting the date from the data
           final dateFinder = find.byKey(Key('session_date_$file3Index'));
