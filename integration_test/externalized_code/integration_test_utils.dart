@@ -47,3 +47,19 @@ bool isThereATestDataTitleDuplicated({
     return occurrences >= 2;
   });
 }
+
+/// Method used to scroll up the screen (-200 as default delta to go up the list)
+Future<int> scrollListUpScreen({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = 200}) async
+{
+  await tester.scrollUntilVisible
+  (
+    elementToReachFinder, 
+    -200 , // getting back up the list
+    scrollable:find.descendant
+    (
+      of: listFinder,
+      matching: find.byType(Scrollable),
+    )
+  );
+  return await tester.pumpAndSettle(); 
+}
