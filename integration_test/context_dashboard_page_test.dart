@@ -169,7 +169,7 @@ void main() async
         // skip:true,
         // Testing the display of session data
         'Session data display:\n'
-        'When a session data is diplayed, the session title, date, and keywords should be findable.',
+        'When a session data is displayed, the session title, date, and keywords should be findable.',
         (tester) async 
         { 
          
