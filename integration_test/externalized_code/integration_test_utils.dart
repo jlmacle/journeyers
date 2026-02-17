@@ -6,8 +6,25 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 PrintUtils _pu = PrintUtils();
 
+/// Method used to retrieve the index of a session data, knowing its title
+int? getSessionDataIndexFromTitle({required List<Map<String, dynamic>> sessionData, required String title})
+{
+  int? index;
+
+  int i = 0;
+  for (var dataMap in sessionData)
+  {
+    if (dataMap["title"] == title)
+    {
+      index = i;
+    }
+    else { i += 1;}
+  }
+  return index;
+}
+
 /// Method used to list all the sessions titles
-Future<List<String>> getSessionsTitlesList({required WidgetTester tester, required sessionData, required keyRoot}) async
+Future<List<String>> getSessionsTitlesList({required WidgetTester tester, required List<Map<String, dynamic>> sessionData, required String keyRoot}) async
 {
   List<String> sessionsTitlesList = [];
   String currentTitle = "";
