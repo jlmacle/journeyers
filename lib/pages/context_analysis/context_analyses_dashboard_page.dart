@@ -399,18 +399,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           child: Column
           (
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-                  TextButton.icon(
-                    onPressed: () {
-                      setState(() {
-                        _isAscending = !_isAscending;
-                        _sortSessionsByDate();
-                      });
-                    },
-                    icon: Icon(_isAscending ? Icons.arrow_upward : Icons.arrow_downward, color: Colors.black),
-                    label: const Text("Sort by Date", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
-                  ),                 
-                  
+            children: [                  
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
