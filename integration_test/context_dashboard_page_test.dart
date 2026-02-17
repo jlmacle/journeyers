@@ -166,8 +166,9 @@ void main() async
 
       testWidgets
       ( 
-        skip:true,
+        // skip:true,
         // Testing the display of session data
+        'Session data display:\n'
         'When a session data is diplayed, the session title, date, and keywords should be findable.',
         (tester) async 
         { 
@@ -232,6 +233,7 @@ void main() async
       ( 
         // skip:true, 
         // Testing the bulk deletion of session data
+        'Bulk deletion:\n'
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
         'When the "Delete" text is clicked, the deleted sessions should be removed from the displayed session data.\n'
         'The session data stored should be consistent with the deletions.\n'
