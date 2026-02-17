@@ -23,10 +23,10 @@ void main() async
     'Context analysis page tests\n', 
     () 
     {      
+      // Testing the presence of the information modal for a newly installed app
       testWidgets
       (
         skip:true,
-        // Testing the presence of the information modal for a newly installed app
         'Information modal:\n'
         'A newly installed app should display the information modal,\n'
         'before starting the first context analysis.', 
@@ -52,10 +52,10 @@ void main() async
         }
       );
 
+      // Testing the presence of the context form, without the dashboard, when no session data is stored
       testWidgets
       ( 
-        skip:true,
-        // Testing the presence of the context form, without the dashboard, when no session data is stored
+        skip:true,        
         'No session data stored:\n'
         'When no session data is stored, the context form should be displayed,\n'
         'without the dashboard.', 
@@ -89,10 +89,10 @@ void main() async
         }
       );
     
+        // Testing for the presence of the button starting a new context analysis
         testWidgets
       ( 
         // skip:true,
-        // Testing for the presence of the button starting a new context analysis
         'Data stored: New context analysis button:\n'
         'The dashboard page should have a button to start a new context analysis.',
         (tester) async 
