@@ -228,7 +228,6 @@ void main() async
       );
 
       
-
       testWidgets
       ( 
         // skip:true, 
@@ -263,17 +262,7 @@ void main() async
           // Scrolling back to the first checkbox
           final listFinder = find.byKey(const Key('session_list'));
           final firstCheckboxFinder = find.byKey(const ValueKey('checkbox_0'));
-          await tester.scrollUntilVisible
-          (
-            firstCheckboxFinder, 
-            -200 , // getting back up the list
-            scrollable:find.descendant
-            (
-              of: listFinder,
-              matching: find.byType(Scrollable),
-            )
-          );
-          await tester.pumpAndSettle(); // important for the first checkbox to be checked
+          await scrollListUpScreen(tester: tester, listFinder: listFinder, elementToReachFinder: firstCheckboxFinder);
 
           // Selecting the 3 added sessions for bulk deletion 
           await tester.tap(firstCheckboxFinder);
