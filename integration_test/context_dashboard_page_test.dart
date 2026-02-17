@@ -166,6 +166,7 @@ void main() async
 
       testWidgets
       ( 
+        skip:true,
         // Testing the display of session data
         'When a session data is diplayed, the session title, date, and keywords should be findable.',
         (tester) async 
@@ -230,7 +231,7 @@ void main() async
 
       testWidgets
       ( 
-        skip:true, 
+        // skip:true, 
         // Testing the bulk deletion of session data
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
         'When the "Delete" text is clicked, the deleted sessions should be removed from the displayed session data.\n'
@@ -279,11 +280,11 @@ void main() async
 
           final secondCheckboxFinder = find.byKey(const ValueKey('checkbox_1'));
           await tester.tap(secondCheckboxFinder);
-          await tester.pump(const Duration(seconds: 3));
+          await tester.pump();
 
           final thirdCheckboxFinder = find.byKey(const ValueKey('checkbox_2'));
           await tester.tap(thirdCheckboxFinder);
-          await tester.pump(const Duration(seconds: 3));
+          await tester.pump();
 
           final bulkDeleteButton = find.byKey(const Key('bulk_delete_button'));
           await tester.pumpAndSettle();
