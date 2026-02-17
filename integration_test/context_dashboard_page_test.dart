@@ -3,17 +3,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:integration_test/integration_test.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
 
+import 'package:integration_test/integration_test.dart';
 import 'externalized_code/integration_test_utils.dart';
+
+
 
 //**************** UTILITY CLASSES ****************//
 UserPreferencesUtils _upu = UserPreferencesUtils();
@@ -162,6 +164,73 @@ void main() async
           _pu.printd('Stack trace: $stackTrace');
         }
       });
+
+      // Testing the display of session data
+      testWidgets
+      ( 
+        // skip:true,
+        'Session data display:\n'
+        'When a session data is displayed, the session title, date, and keywords should be findable.',
+        (tester) async 
+        { 
+         
+          // Launching the widget
+          await tester.pumpWidget
+          (             
+            const MaterialApp
+            (              
+              home:ContextAnalysesDashboardPage()            
+            )
+          );
+          await tester.pumpAndSettle();
+          // The dashboard should load the added data 
+
+          // Getting the list of titles to search for duplicates of the test data titles
+          List<String> sessionsTitlesList = await getSessionsTitlesList
+                                      (tester: tester, sessionData: currentSessionData.cast<Map<String, dynamic>>(), keyRoot: 'session_title_');
+          await tester.pumpAndSettle();
+          _pu.printd("sessionsTitlesList: $sessionsTitlesList");
+          
+          assert(
+            !isThereATestDataTitleDuplicated(listOfSessionTitles: sessionsTitlesList,listOfTestDataTitles: testDataTitles),
+            'Duplicate test data titles were found in the session list!'
+          );
+
+          // Getting the index for file 3, used for the test
+          int file3Index = getSessionDataIndexFromTitle(sessionData: currentSessionData.cast<Map<String, dynamic>>(), title: testFile3Title)!;
+
+          // Scrolling back up the screen (scrolled down while gathering the session titles)
+          final listFinder = find.byKey(const Key('session_list'));
+          final titleFinder = find.byKey(Key('session_title_$file3Index'));
+          await scrollListUpScreen(tester: tester, listFinder: listFinder, elementToReachFinder: titleFinder);
+
+          // Testing for the presence of the title
+          await tester.ensureVisible(titleFinder); 
+          await tester.pump();
+          final Text titleWidget = tester.widget(titleFinder);        
+          String title = titleWidget.data!;
+          expect(title, testFile3Title);
+
+          // Testing for the presence of the date
+            // Getting the current date
+          var now = DateTime.now();
+          var formatter = DateFormat('MMMM dd, yyyy');
+          var formattedDate = formatter.format(now);
+            // Getting the date from the data
+          final dateFinder = find.byKey(Key('session_date_$file3Index'));
+          final Text dateWidget = tester.widget(dateFinder);        
+          String date = dateWidget.data!;
+          expect(date, '($formattedDate)');
+
+          // Testing for the presence of the keywords
+          final keywordsFinder = find.byKey(Key('session_keywords_$file3Index'));
+          final Text keywordsWidget = tester.widget(keywordsFinder);        
+          String keywords = keywordsWidget.data!;
+          expect(keywords, "Keywords: ${testFile3Keywords.join(', ')}");
+
+          // await tester.pump(const Duration(seconds: 5));
+        }
+      );
 
       // Testing the delete icon
       testWidgets
