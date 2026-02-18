@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
 
 //**************** UTILITY CLASSES ****************/
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils();
 
-// TODO: appearance of the UI
-
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analyses.
-/// The context analysis page embeds a ContextAnalysisNewSessionPage and a ContextAnalysesDashboardPage.
+/// The context analysis page embeds a ContextAnalysesDashboardPage and/or a ContextAnalysisFormPage.
 class ContextAnalysisPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
@@ -38,10 +34,6 @@ class ContextAnalysisPage extends StatefulWidget
 
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
-  //**************** USEFUL FOR DEBUG ****************//
-  // to help reset the acknowledgment modal status
-  final bool _resetInformationModal = false;
-
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
   late bool? _isInformationModalAlreadyAcknowledged;
@@ -49,8 +41,6 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 
   getPreferences() async 
   {
-    // up.resetWasSessionDataSaved();
-
     pu.printd("\nEntering getPreferences");
     _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
     _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved();
@@ -59,7 +49,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     pu.printd("_isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
     pu.printd("_wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
 
-    if ((_isInformationModalAlreadyAcknowledged == false) && context.mounted) 
+    if ((_isInformationModalAlreadyAcknowledged == false) && mounted) 
     {
       showDialog
       (
@@ -153,23 +143,16 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
         mainAxisAlignment: MainAxisAlignment.start,
         children: 
         [
-          if (_resetInformationModal)
-            ElevatedButton
-            (
-              onPressed: upu.resetInformationModalStatus,
-              child: 
-              Text
-              (
-                'Reset the acknowledgment modal acknowledgement data',
-                style: feedbackMessageStyle,
-              ),
-            ),
+          // Circular progress indicator while preferences are loading
           if (_preferencesLoading)
             Center(child: CircularProgressIndicator())
+          // When preferences are loaded
           else ...
           [
+            // Checking if context analysis session data has been stored
             if (_wasContextAnalysisSessionDataSaved!) ...
             [
+              // If so, a screen-wide rectangle, with an invite to start a new context analysis
               SizedBox
               (
                 width: double.infinity,
@@ -190,12 +173,14 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                   ),
               ),
               Divider(thickness: 3, height: 0),
+              // and the session data dashboard in the remaining space
               Expanded
               (
                 child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
               ),
             ]
             else
+            // if no context analysis session data has been stored, a context analysis form is displayed
             Expanded
             (
               child: 
