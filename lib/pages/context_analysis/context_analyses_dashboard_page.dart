@@ -91,8 +91,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   // Method used to sort session data by title 
   void _sortSessionsByTitle() {
     _allSessions?.sort((a, b) {
-      String titleA = (a[DashboardUtils.keyTitle] ?? "").toString().toLowerCase();
-      String titleB = (b[DashboardUtils.keyTitle] ?? "").toString().toLowerCase();
+      String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
+      String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
       
       return _isAscending 
           ? titleA.compareTo(titleB) 
@@ -413,25 +413,31 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           (
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Sorting by title
-              TextButton.icon(
-                onPressed: () {
-                  setState(() {
-                    _isAscending = !_isAscending;
-                    _sortSessionsByTitle(); // Calling the new title-based sort
-                  });
-                },
-                icon: Icon(
-                  _isAscending ? Icons.sort_by_alpha : Icons.sort_by_alpha, // You can use alpha icons for clarity
-                  color: Colors.black,
-                ),
-                label: Text(
-                  "Sort by Title (${_isAscending ? 'A-Z' : 'Z-A'})", 
-                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
-                ),
-              ),
-              // Sorting by date
-              TextButton.icon(
+            
+              Wrap(
+                spacing: 8.0,   // horizontal gap between buttons
+                runSpacing: 4.0, // vertical gap between wrapped lines
+                alignment: WrapAlignment.start,
+                children: [
+                  // Sorting by title
+                  TextButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        _isAscending = !_isAscending;
+                        _sortSessionsByTitle();
+                      });
+                    },
+                    icon: Icon(
+                      _isAscending ? Icons.sort_by_alpha : Icons.sort_by_alpha,
+                      color: Colors.black,
+                    ),
+                    label: Text(
+                      "Sort by Title (${_isAscending ? 'A-Z' : 'Z-A'})",
+                      style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                  ),
+                  // Sorting by date
+                  TextButton.icon(
                     onPressed: () {
                       setState(() {
                         _isAscending = !_isAscending;
@@ -439,12 +445,17 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                       });
                     },
                     icon: Icon(
-                      _isAscending ? Icons.arrow_upward : Icons.arrow_downward, 
-                      color: Colors.black),
+                      _isAscending ? Icons.arrow_upward : Icons.arrow_downward,
+                      color: Colors.black,
+                    ),
                     label: const Text(
-                      "Sort by Date", 
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
-                  ),   
+                      "Sort by Date",
+                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
+
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
