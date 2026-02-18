@@ -205,4 +205,9 @@ class DashboardUtils {
 
   }
 
+  /// Method used to save session data  
+  Future<void> saveSessionData({required String typeOfContextData, required List<dynamic> savedData}) async
+  {
+      await restoreCopiedSessionData(typeOfContextData: typeOfContextData, savedData: savedData);
+  }
 }
