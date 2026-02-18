@@ -257,6 +257,30 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
   }
 
+  //**************** EDITION OF SESSION DATA ****************/
+  final TextEditingController _titleController = TextEditingController();
+
+  Future<void> updateSessionTitle(String filePath, String newTitle) async 
+  {
+  // Updating the local UI state
+  setState(() {
+    // Finding the session in the session data, and updating its title
+    final sessionIndex = _allSessions?.indexWhere(
+      (s) => s[DashboardUtils.keyFilePath] == filePath
+    );
+
+    if (sessionIndex != null && sessionIndex != -1) {
+      _allSessions![sessionIndex][DashboardUtils.keyTitle] = newTitle;
+    }
+    
+    // Notifying success
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Title updated successfully"))
+    );
+  });
+}
+
+
   @override
   void initState() 
   {
@@ -316,12 +340,18 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                         Wrap(
                                           crossAxisAlignment: WrapCrossAlignment.center,
                                           spacing: 8,
-                                          children: [
-                                            Text(
-                                              key: ValueKey('session_title_$index'),
-                                              "${session[DashboardUtils.keyTitle]}",
-                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                                            ),
+                                          children: [                                            
+                                            GestureDetector
+                                            (
+                                              onTap: () => _showEditSheet
+                                              (session[DashboardUtils.keyTitle], session[DashboardUtils.keyFilePath]),
+                                              child: Text
+                                              (
+                                                key: ValueKey('session_title_$index'),
+                                                "${session[DashboardUtils.keyTitle]}",
+                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                              )
+                                            ),                                            
                                             Text(
                                               key: ValueKey('session_date_$index'),
                                               "(${session[DashboardUtils.keyDate]})",
@@ -351,7 +381,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                     children: [
                                       IconButton(
                                         icon: const Icon(Icons.find_in_page_rounded),
-                                        onPressed: () => _showPreviewOverlay(context, filePath),
+                                        onPressed: () {_showPreviewOverlay(context, filePath);},
                                         tooltip: "Preview",
                                       ),
                                       IconButton(
@@ -521,13 +551,78 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     );
   }
 
+
+void _showEditSheet(String title, String filePath) 
+{
+    _titleController.text = title; // Syncing current title to the field
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangle shape
+      isScrollControlled: true, // Allows sheet to push up with keyboard
+      builder: (context) => Padding
+      (
+        padding: EdgeInsets.only
+        (
+          bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
+          left: 20, right: 20, top: 20,
+        ),
+        child: Column
+        (
+          mainAxisSize: MainAxisSize.min,
+          children: 
+          [
+            TextField
+            (
+              controller: _titleController,
+              autofocus: true,
+              decoration: const InputDecoration
+              (
+                labelText: 'Edit Title', 
+                labelStyle: TextStyle(color: Colors.black)
+              ),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton
+            (
+              onPressed: () async 
+              {
+                // New title from the controller
+                final String newTitle = _titleController.text;
+
+                // Performing async work outside of setState
+                // Updating session data
+                await updateSessionTitle(filePath, newTitle); 
+                
+                // Storing the updated session data
+                await _du.saveSessionData
+                (
+                  typeOfContextData: DashboardUtils.contextAnalysesContext, 
+                  savedData: _allSessions!,
+                );
+
+                // Closing the modal sheet
+                if (mounted) Navigator.pop(context);
+              },
+              child: const Text
+              (
+                "Save",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
   // Method used to display an overlay with a session data preview. 
   void _showPreviewOverlay(BuildContext context, String filePath) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
     barrierLabel: "Close Preview", // Accessibility label
-    barrierColor: appBarWhite, //TODO: potential cleaning
+    barrierColor: appBarWhite, 
     transitionDuration: const Duration(milliseconds: 300),
     pageBuilder: (context, anim1, anim2) {
       return Scaffold(
