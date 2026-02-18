@@ -439,24 +439,30 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                       Icons.sort_by_alpha,
                       color: Colors.black,
                     ),
-                    label: Text(
+                    label: Text
+                    (
                       "Sort by Title (${_isAscending ? 'A-Z' : 'Z-A'})",
                       style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                     ),
                   ),
                   // Sorting by date
-                  TextButton.icon(
-                    onPressed: () {
-                      setState(() {
+                  TextButton.icon
+                  (
+                    onPressed: () 
+                    {
+                      setState(() 
+                      {
                         _isAscending = !_isAscending;
                         _sortSessionsByDate();
                       });
                     },
-                    icon: Icon(
+                    icon: Icon
+                    (
                       _isAscending ? Icons.arrow_upward : Icons.arrow_downward,
                       color: Colors.black,
                     ),
-                    label: const Text(
+                    label: const Text
+                    (
                       "Sort by Date",
                       style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                     ),
@@ -466,34 +472,49 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
               // Filtering by keywords
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
+                child: Text
+                (
+                  "Filter by Keywords:", 
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
+                ),
               ),
             ],
           ),
         ),
-        Padding(
+        Padding
+        (
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Wrap(
+          child: Wrap
+          (
             spacing: 8.0,
-            children: _usedKeywords!.map((kw) {
-              return FilterChip(
-                label: Text(kw),
-                onSelected: (_) => _toggleFilter(kw),
-                selected: _selectedKeywords.contains(kw),
-              );
-            }).toList(),
+            children: _usedKeywords!.map
+            (
+              (kw) 
+              {
+                return FilterChip
+                (
+                  label: Text(kw),
+                  onSelected: (_) => _toggleFilter(kw),
+                  selected: _selectedKeywords.contains(kw)
+                );
+              }
+            ).toList(),
           ),
         ),
         // Bulk Deletion Button added here
         if (_selectedSessionsForDeletion.isNotEmpty)
-          TextButton.icon(
+          TextButton.icon
+          (
             key: const Key('bulk_delete_button'),
             onPressed: _deleteSelectedSessions,
-            icon: const Icon(Icons.delete_sweep, color: Colors.red),
-            label: Text(
-              "Delete (${_selectedSessionsForDeletion.length})",
-              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
+            icon: const Icon
+            (
+              Icons.delete, color: Colors.red),
+              label: Text
+              (
+                "Delete (${_selectedSessionsForDeletion.length})",
+                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              ),
           ),
         const Divider(),
       ],
