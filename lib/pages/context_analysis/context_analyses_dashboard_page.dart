@@ -404,21 +404,28 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
   // Method used to add sorting by date, filtering with keyword, and bulk deletion.
-  Widget _buildFilterAndSortBar() {
-    return Column(
-      children: [
-        Padding(
+  Widget _buildFilterAndSortBar() 
+  {
+    return Column
+    (
+      children: 
+      [
+        Padding
+        (
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column
           (
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-            
-              Wrap(
+            children: 
+            [
+              // Sorting by date/title wrapped for small screens
+              Wrap
+              (
                 spacing: 8.0,   // horizontal gap between buttons
                 runSpacing: 4.0, // vertical gap between wrapped lines
                 alignment: WrapAlignment.start,
-                children: [
+                children: 
+                [
                   // Sorting by title
                   TextButton.icon(
                     onPressed: () {
@@ -427,8 +434,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                         _sortSessionsByTitle();
                       });
                     },
-                    icon: Icon(
-                      _isAscending ? Icons.sort_by_alpha : Icons.sort_by_alpha,
+                    icon: Icon
+                    (
+                      Icons.sort_by_alpha,
                       color: Colors.black,
                     ),
                     label: Text(
@@ -455,7 +463,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   ),
                 ],
               ),
-
+              // Filtering by keywords
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Filter by Keywords:", style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
