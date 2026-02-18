@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -262,23 +263,54 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   Future<void> updateSessionTitle(String filePath, String newTitle) async 
   {
-  // Updating the local UI state
-  setState(() {
-    // Finding the session in the session data, and updating its title
-    final sessionIndex = _allSessions?.indexWhere(
-      (s) => s[DashboardUtils.keyFilePath] == filePath
-    );
+    String? previousTitle;
+    // Updating the local UI state
+    setState(() {
+      // Finding the session in the session data, and updating its title
+      final sessionIndex = _allSessions?.indexWhere(
+        (s) => s[DashboardUtils.keyFilePath] == filePath
+      );
 
-    if (sessionIndex != null && sessionIndex != -1) {
-      _allSessions![sessionIndex][DashboardUtils.keyTitle] = newTitle;
-    }
-    
-    // Notifying success
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Title updated successfully"))
-    );
-  });
-}
+      if (sessionIndex != null && sessionIndex != -1) {
+        previousTitle = _allSessions![sessionIndex][DashboardUtils.keyTitle];
+        _allSessions![sessionIndex][DashboardUtils.keyTitle] = newTitle;
+      }
+      
+      // Notifying success
+      if (previousTitle!.trim() != newTitle.trim())
+      {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Title updated successfully"))
+        );
+      }
+    });
+  }
+
+  Future<void> updateSessionKeywords(String filePath, List<String> newKeywords) async 
+  {
+    List<dynamic>? previousKeywords;
+    setState(() {
+      final sessionIndex = _allSessions?.indexWhere(
+        (s) => s[DashboardUtils.keyFilePath] == filePath
+      );
+
+      if (sessionIndex != null && sessionIndex != -1) {
+        previousKeywords = _allSessions![sessionIndex][DashboardUtils.keyKeywords];
+        // Updating the list with the new keywords
+        _allSessions![sessionIndex][DashboardUtils.keyKeywords] = newKeywords;
+      }
+
+      _refreshKeywords(); // Updates the keywords list
+      _applyFilters();    // Refreshes the filtered view
+      
+      if ( ! previousKeywords!.equals(newKeywords) )
+      {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Keywords updated successfully"))
+        );
+      }
+    });
+  }
 
 
   @override
@@ -343,7 +375,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                           children: [                                            
                                             GestureDetector
                                             (
-                                              onTap: () => _showEditSheet
+                                              onTap: () => _showTitleEditSheet
                                               (session[DashboardUtils.keyTitle], session[DashboardUtils.keyFilePath]),
                                               child: Text
                                               (
@@ -360,10 +392,16 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                           ],
                                         ),
                                         const SizedBox(height: 4),
-                                        Text(
-                                          key: ValueKey('session_keywords_$index'),
-                                          "Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}",
-                                          style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                                        GestureDetector
+                                        (
+                                          onTap: () => _showKeywordsEditSheet
+                                          (session[DashboardUtils.keyKeywords], session[DashboardUtils.keyFilePath]),
+                                          child: Text
+                                          (
+                                            key: ValueKey('session_keywords_$index'),
+                                            "Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}",
+                                            style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -391,11 +429,13 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                         },
                                         tooltip: "Edit Document",
                                       ),
-                                      IconButton(
+                                      IconButton
+                                      (
                                         icon: const Icon(Icons.style_rounded),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Keywords edition not yet implemented.')));
-                                        },
+                                        onPressed: () => _showKeywordsEditSheet(
+                                          session[DashboardUtils.keyKeywords], 
+                                          filePath
+                                        ),
                                         tooltip: "Edit Keywords",
                                       ),
                                     ],
@@ -552,8 +592,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
 
-void _showEditSheet(String title, String filePath) 
-{
+  void _showTitleEditSheet(String title, String filePath) 
+  {
     _titleController.text = title; // Syncing current title to the field
     showModalBottomSheet(
       context: context,
@@ -615,6 +655,69 @@ void _showEditSheet(String title, String filePath)
       ),
     );
   }
+
+  void _showKeywordsEditSheet(List<dynamic> currentKeywords, String filePath) 
+  {
+  // Converting list to a comma-separated string for editing
+  _titleController.text = currentKeywords.join(', '); 
+  
+  showModalBottomSheet
+  (
+    context: context,
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    isScrollControlled: true,
+    builder: (context) => Padding
+    (
+      padding: EdgeInsets.only
+      (
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 20, right: 20, top: 20,
+      ),
+      child: Column
+      (
+        mainAxisSize: MainAxisSize.min,
+        children: 
+        [
+          TextField
+          (
+            controller: _titleController,
+            autofocus: true,
+            decoration: const InputDecoration
+            (
+              labelText: 'Keywords Edition (please separate with commas)', 
+              labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Please enter your keywords.',
+            ),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () async {
+              // Splitting string into list, trimming whitespaces, and removing empty entries
+              final List<String> newKeywords = _titleController.text
+                  .split(',')
+                  .map((e) => e.trim())
+                  .where((e) => e.isNotEmpty)
+                  .toList();
+
+              // Updating keywords
+              await updateSessionKeywords(filePath, newKeywords); 
+              
+              await _du.saveSessionData
+              (
+                typeOfContextData: DashboardUtils.contextAnalysesContext, 
+                savedData: _allSessions!,
+              );
+
+              if (mounted) Navigator.pop(context);
+            },
+            child: const Text("Save", style: TextStyle(color: Colors.black)),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    ),
+  );
+}
 
   // Method used to display an overlay with a session data preview. 
   void _showPreviewOverlay(BuildContext context, String filePath) {
