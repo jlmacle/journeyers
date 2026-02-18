@@ -168,17 +168,28 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
             Center(child: CircularProgressIndicator())
           else ...
           [
-            if (_wasContextAnalysisSessionDataSaved!) ...[
-              Padding(
-                padding: EdgeInsets.all(elevatedButtonPadding),
-                child: ElevatedButton
-                (
-                  key: const Key('analyses_new_session_button'),
-                  onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
-                  child: Text("Please click to start\na new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),
-                ),
+            if (_wasContextAnalysisSessionDataSaved!) ...
+            [
+              SizedBox
+              (
+                width: double.infinity,
+                child: 
+                  ElevatedButton
+                  (                    
+                    key: const Key('analyses_new_session_button'),
+                    onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
+                    style: ElevatedButton.styleFrom
+                    (
+                      padding: EdgeInsets.only(top: 10, bottom: 16),
+                      shape: RoundedRectangleBorder
+                      (
+                        borderRadius: BorderRadius.zero,
+                      ),
+                    ),
+                    child: Text("Please click to start\na new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
+                  ),
               ),
-              Divider(thickness: 3),
+              Divider(thickness: 3, height: 0),
               Expanded
               (
                 child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
