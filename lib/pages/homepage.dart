@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage>
               [
                 Text
                 (
-                  AppLocalizations.of(context)?.appTitle ?? 'Issue with the app title text',
+                  AppLocalizations.of(context)?.appTitle ?? 'Issue with the application title text',
                   style: 
                   TextStyle
                   (
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage>
                 Gap(5),
                 Text
                 (
-                  AppLocalizations.of(context)?.appSubTitle ?? 'Issue with the app subtitle text',
+                  AppLocalizations.of(context)?.appSubTitle ?? 'Issue with the application subtitle text',
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage>
         children: 
         [
           // Commented as not all translations are done
-          //CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
+           CustomLanguageSwitch(parentWidgetLanguageValueCallBackFunction: _updateLocale),
           Expanded(child: _pages[_currentIndex])
         ],
       ),
