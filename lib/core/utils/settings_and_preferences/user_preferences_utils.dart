@@ -37,7 +37,7 @@ class UserPreferencesUtils
   }
 
   /// Method used to reset the acknowledgment modal status
-  void resetInformationModalStatus() async 
+  Future<void> resetInformationModalStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('isInformationModalAcknowledged', false);

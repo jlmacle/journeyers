@@ -1,10 +1,13 @@
 {
     "@@locale":"fr",
     "appTitle": "Témoignages",
+    "@appTitle": {"description": "Le titre de l'application"},
     "appSubTitle":"Quelle histoire laisserons-nous à nos proches ?",
+    "@appSubTitle": {"description": "Le sous-titre de l'application"},
     "lang_fr": "Français",
-    "@lang_fr": {"description": "The name of the French language in French"},
+    "@lang_fr": {"description": "Le nom de la langue française en français"},
     "lang_en": "Anglais",
-    "@lang_en": {"description": "The name of the English language in French"},
-    "start_msg": "Ceci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer."
+    "@lang_en": {"description": "Le nom de la langue anglaise en français"},
+    "start_msg": "Ceci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.",
+    "@start_msg": {"description": "Le message qu'une application nouvellement installée devrait afficher"}
 }
