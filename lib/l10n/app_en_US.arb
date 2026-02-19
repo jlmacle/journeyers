@@ -7,5 +7,7 @@
   "lang_fr": "French",
   "@lang_fr": {"description": "The name of the French language in US English"},
   "lang_en": "English",
-  "@lang_en": {"description": "The name of the English language in US English"}
+  "@lang_en": {"description": "The name of the English language in US English"},
+  "start_msg": "This is your first context analysis.\nThe dashboard will be displayed after data from the context analysis has been saved.\nPlease click to acknowledge.\n",
+  "@start_msg": {"description": "The information message that a newly installed app should display."}
 }
