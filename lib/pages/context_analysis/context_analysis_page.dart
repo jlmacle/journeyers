@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
+import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
 
@@ -72,17 +73,14 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                   Navigator.pop(context);
                 },
                 child: 
-                RichText
+                Padding
                 (
-                  key: const Key('information_modal'),
-                  textAlign: TextAlign.center,
-                  text: 
-                  TextSpan
-                  (                    
-                    text:
-                        'This is your first context analysis.\n'
-                        'The dashboard will be displayed after data from the context analysis has been saved.\n'
-                        'Please click to acknowledge.\n',
+                  padding: const EdgeInsets.only(bottom: 24.0),
+                  child: Text
+                  (
+                    key: const Key('information_modal'),
+                    AppLocalizations.of(context)?.start_msg ?? 'Issue with the application start message',
+                    textAlign: TextAlign.center,                                          
                     style: dialogStyle, 
                   ),
                 ),
