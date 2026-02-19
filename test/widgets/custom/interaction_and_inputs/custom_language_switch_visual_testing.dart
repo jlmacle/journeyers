@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage>
           Focus
           (
             focusNode: appBarTitleFocusNode,
-            child: Text(appLocalization?.appTitle ?? 'Default app title txt'),
+            child: Text(appLocalization?.appTitle ?? 'Issue with the app title text'),
           ),
         ),
       ),
