@@ -69,7 +69,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
   //**************** SORTING AND FILTERING related data and methods ****************/
-  bool _isAscending = false; 
+  bool _isAscendingTitle = true; 
+  bool _isAscendingDate = true; 
 
   List<dynamic>? _allSessions;
   List<dynamic>? _filteredSessions;
@@ -84,7 +85,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     {
       DateTime dateA = DateFormat('MMMM dd, yyyy').add_jm().parse(a[DashboardUtils.keyDate]);
       DateTime dateB = DateFormat('MMMM dd, yyyy').add_jm().parse(b[DashboardUtils.keyDate]);
-      return _isAscending ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
+      return _isAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
     });
     _applyFilters();
   }
@@ -95,7 +96,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
       String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
       
-      return _isAscending 
+      return _isAscendingTitle 
           ? titleA.compareTo(titleB) 
           : titleB.compareTo(titleA);
     });
@@ -500,7 +501,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   TextButton.icon(
                     onPressed: () {
                       setState(() {
-                        _isAscending = !_isAscending;
+                        _isAscendingTitle = !_isAscendingTitle;
                         _sortSessionsByTitle();
                       });
                     },
@@ -511,7 +512,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     ),
                     label: Text
                     (
-                      "Sort by Title (${_isAscending ? 'A-Z' : 'Z-A'})",
+                      "Sort by Title (${_isAscendingTitle ? 'A-Z' : 'Z-A'})",
                       style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                     ),
                   ),
@@ -522,13 +523,13 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     {
                       setState(() 
                       {
-                        _isAscending = !_isAscending;
+                        _isAscendingDate = !_isAscendingDate;
                         _sortSessionsByDate();
                       });
                     },
                     icon: Icon
                     (
-                      _isAscending ? Icons.arrow_upward : Icons.arrow_downward,
+                      _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
                       color: Colors.black,
                     ),
                     label: const Text
