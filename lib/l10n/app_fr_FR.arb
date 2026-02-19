@@ -1,7 +1,8 @@
 {
     "@@locale":"fr_FR",
-    "appTitle": "Compagnons",
+    "appTitle": "Témoignages",
     "appSubTitle":"Quelle histoire laisserons-nous à nos proches ?",
     "lang_fr": "Français",
-    "lang_en": "Anglais"
+    "lang_en": "Anglais",
+    "start_msg": "Ceci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer."
 }
