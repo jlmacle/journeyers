@@ -32,6 +32,8 @@ class _MyAppState extends State<MyApp>
   // Temporarily defining English as the locale
   // TODO: to get eventually the value from user preferences
   Locale? _currentLocale = Locale('en');
+  // To get the locale from the platform
+  // Locale? _currentLocale = PlatformDispatcher.instance.locale;
 
   // Method used to set a new locale value
   void _setLocale(Locale newLocale) 
