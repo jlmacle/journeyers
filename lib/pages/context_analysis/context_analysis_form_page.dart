@@ -541,8 +541,64 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                 headingLevel: 1,
               ),
             ),
-            Gap(40),
+            // Title and keywords
+              // Text field for the analysis title
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom:16 ),
+              child: TextField
+              (
+                focusNode: _analysisTitleFocusNode,
+                textAlign: TextAlign.center,
+                style: analysisTitleStyle,
+                decoration: InputDecoration
+                (
+                  hint: Center(child: Text("Please enter a title for this analysis.")),
+                  hintStyle: analysisTitleStyle,                    
+                ),
+                maxLength: 150,
+                onChanged: _setAnalysisTitleTextFieldState,
+              ),
+            ),
 
+            // File tagging
+            Center(child: Text("Please enter keywords to describe the file.", textAlign: TextAlign.center)),
+            // TODO: to offer pre-defined keywords as well (household, workplace, studies)
+            Padding(
+              padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
+              child: TextField
+              (
+                controller: _keywordsController,
+                decoration: InputDecoration(hint: Center(child: Text('Please add the keyword here (+ Enter key).'))),
+                textAlign: TextAlign.center,
+                onSubmitted: addKeyword,
+              ),
+            ),
+            // Display of the keywords
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 0),
+                child: Wrap
+                (
+                  spacing: 8.0,
+                  runSpacing: 4.0,
+                  children: 
+                  [
+                    ..._keywords.map
+                    (
+                      (tag) => InputChip
+                              (
+                                label: Text(tag),
+                                onDeleted: () {setState( () {_keywords.remove(tag);});}, 
+                                deleteIconColor: appBarWhite,
+                              )
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Gap(preAndPostLevel2DividerGap),
+            Divider(thickness: betweenLevel2DividerThickness),
+            Gap(preAndPostLevel2DividerGap),
 
 
 
@@ -557,6 +613,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
               child:
               ExpansionTile
               ( 
+                tilePadding: EdgeInsets.only(top:0),
                 expandedCrossAxisAlignment: CrossAxisAlignment.center,
                 internalAddSemanticForOnTap: true, 
                 onExpansionChanged: (value) 
@@ -826,55 +883,6 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
               (
                 children: 
                 [
-                  // Text field for the analysis title
-                  TextField
-                  (
-                    focusNode: _analysisTitleFocusNode,
-                    textAlign: TextAlign.center,
-                    style: analysisTitleStyle,
-                    decoration: InputDecoration
-                    (
-                      hint: Center(child: Text("Please enter a title for this analysis.")),
-                      hintStyle: analysisTitleStyle,                    
-                    ),
-                    maxLength: 150,
-                    onChanged: _setAnalysisTitleTextFieldState,
-                  ),
-
-                  // File tagging
-                  Text("Please enter keywords to describe the file (+ Enter key).", textAlign: TextAlign.center),
-                  // TODO: to offer pre-defined keywords as well (household, workplace, studies)
-                  Padding(
-                    padding: const EdgeInsets.only(left:20, right:20, top:20, bottom:10),
-                    child: TextField
-                    (
-                      controller: _keywordsController,
-                      decoration: InputDecoration(hint: Center(child: Text('Please add the keyword here.'))),
-                      textAlign: TextAlign.center,
-                      onSubmitted: addKeyword,
-                    ),
-                  ),
-                  // Display of the keywords
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Wrap
-                    (
-                      spacing: 8.0,
-                      runSpacing: 4.0,
-                      children: 
-                      [
-                        ..._keywords.map
-                        (
-                          (tag) => InputChip
-                                  (
-                                    label: Text(tag),
-                                    onDeleted: () {setState( () {_keywords.remove(tag);});}
-                                  )
-                        )
-                      ],
-                    ),
-                  ),
-
                   // Button to start the data saving process
                   Focus(
                     // to detect a shift-tab navigation toward the questions
@@ -942,36 +950,6 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                             ),
                           ),
                   ),
-
-                  // Gap(20),
-                  // Divider(thickness: 3),
-
-                  /* Debug section */
-                  // Gap(20),
-                  // Divider(thickness: 3),
-                  // Gap(20),
-                  // Text('Debug:'),
-                  // Text("Studies / Household Balance: $_studiesHouseholdBalanceCheckbox, text: $_studiesHouseholdBalanceTextFieldContent"),
-                  // Text("Accessing Income / Household Balance: $_accessingIncomeHouseholdBalanceCheckbox, text: $_accessingIncomeHouseholdBalanceTextFieldContent"),
-                  // Text("Earning Income / Household Balance: $_earningIncomeHouseholdBalanceCheckbox, text: $_earningIncomeHouseholdBalanceTextFieldContent"),
-                  // Text("Helping Others / Household Balance: $_helpingOthersHouseholdBalanceCheckbox , text: $_helpingOthersHouseholdBalanceTextFieldContent"),
-
-                  // Text("More Appreciated At Work: $_moreAppreciatedAtWorkCheckbox, text: $_moreAppreciatedAtWorkTextFieldContent"),
-                  // Text("Remaining Appreciated At Work: $_remainingAppreciatedAtWorkCheckbox, text: $_remainingAppreciatedAtWorkTextFieldContent"),
-
-                  // Text("Better Legacies: $_betterLegaciesCheckbox, text: $_betterLegaciesTextFieldContent"),
-
-                  // Text("Other Issue: text: $_anotherIssueTextFieldContent"),
-
-                  // Text("Problems The Groups Are Trying To Solve: text: $_problemsTheGroupsAreTryingToSolveTextFieldContent"),
-
-                  // Text("Same problems being solved?:  $_sameProblemsCurrentSelection.toString(), text: $_sameProblemsTextFieldContent"),
-
-                  // Text("Harmony home?:  $_harmonyHomeCurrentSelection.toString(), text: $_harmonyHomeTextFieldContent"),
-
-                  // Text("Appreciability at work:  $_appreciabilityAtWorkCurrentSelection.toString(), text: $_appreciabilityAtWorkTextFieldContent"),
-
-                  // Text("Earning ability:  $_earningAbilityCurrentSelection.toString(), text: $_earningAbilityTextFieldContent"),
                 ],
               ),
             ),
