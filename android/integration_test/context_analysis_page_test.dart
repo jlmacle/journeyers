@@ -4,12 +4,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
+
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+// Mock class creation
+class MockPathProviderPlatform extends PathProviderPlatform 
+{
+  @override
+  Future<String?> getApplicationSupportPath() async => '.'; // Returns current directory
+}
 
 void main() async
 {
   // This initializes the bridge between the app and the test runner
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  // Mock class declaration before running tests
+  PathProviderPlatform.instance = MockPathProviderPlatform();
 
   group
   (
@@ -128,35 +140,30 @@ void main() async
         }
       );
     
-      // Testing for the presence of the button starting a new context analysis
       testWidgets
-      ( 
-        // skip:true,
+      (
         'Data stored: New context analysis button:\n'
         'The dashboard page should have a button to start a new context analysis.',
-        (tester) async 
+        (WidgetTester tester) async 
         { 
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
-            // Prevents the modal from blocking the UI
             'isInformationModalAcknowledged': true, 
             'wasSessionDataSaved': true,
           });
           
-          // Widget wrapped in a MaterialApp because the page uses Scaffold, 
-          // showDialog (Navigator), and AppLocalizations
+          // Wrap in MaterialApp to provide necessary context for Scaffold/Theme
           await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
 
-          // getPreferences is async and calls setState. 
-          // Need to pump and wait for the microtasks to finish.
+          // Wait for async preferences and the subsequent rebuild
           await tester.pumpAndSettle();
 
-          // Testing for the presence of the button
+          // Verification
           final buttonWidget = find.byKey(const Key('analyses_new_session_button'));
-          expect(buttonWidget, findsOne);
-          
-        }
+          // Note: use findsOneWidget instead of findsOne
+          expect(buttonWidget, findsOneWidget); 
+        },
       );
     }
   );
