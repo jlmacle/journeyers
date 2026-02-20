@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
@@ -15,15 +16,23 @@ import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_pag
 import 'package:integration_test/integration_test.dart';
 import 'externalized_code/integration_test_utils.dart';
 
-
-
 //**************** UTILITY CLASSES ****************//
 UserPreferencesUtils _upu = UserPreferencesUtils();
 DashboardUtils _du = DashboardUtils();
 PrintUtils _pu = PrintUtils();
 
+// Mock class creation
+class MockPathProviderPlatform extends PathProviderPlatform 
+{
+  @override
+  Future<String?> getApplicationSupportPath() async => '.'; // Returns current directory
+}
+
 void main() async
 {
+  // Mock class declaration before running tests
+  PathProviderPlatform.instance = MockPathProviderPlatform();
+
   // This initializes the bridge between the app and the test runner
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late List<dynamic> currentSessionData;
@@ -160,7 +169,7 @@ void main() async
         } 
         catch (e, stackTrace) 
         {
-          _pu.printd('Caught error: $e');
+          _pu.printd('Caught an error while restoring pre-test session data: $e');
           _pu.printd('Stack trace: $stackTrace');
         }
       });
@@ -168,7 +177,7 @@ void main() async
       // Testing the display of session data
       testWidgets
       ( 
-        skip:true,
+        // skip:true,
         // Code currently not functioning on my Windows computer
         'Session data display:\n'
         'When a session data is displayed, the session title, date, and keywords should be findable.',
@@ -236,7 +245,7 @@ void main() async
       // Testing the delete icon
       testWidgets
       ( 
-        skip:true,
+        // skip:true,
         // Code currently not functioning on my Windows computer
         'Delete icon use:\n'
         'When a delete icon is tapped, the related session data is deleted.',
@@ -306,7 +315,7 @@ void main() async
       // Testing the bulk deletion of session data
       testWidgets
       ( 
-        skip:true, 
+        // skip:true, 
         // Code currently not functioning on my Windows computer
         'Bulk deletion:\n'
         'When checkboxes are checked, the session data is marked for bulk deletion.\n'
