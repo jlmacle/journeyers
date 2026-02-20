@@ -3,9 +3,6 @@ flutter test -r expanded
 
 For the integration tests
 
-For desktop:
-flutter test .\integration_test\context_dashboard_page_test.dart -d windows
-
 For Android:
 Succeeded on Medium Phone API 36.0, failed on a Pixel 6 device 
 (02/19/26: Information modal, No session data stored, Data stored: New context analysis button,
