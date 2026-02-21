@@ -529,7 +529,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     },
                     icon: Icon
                     (
-                      _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
+                      _isAscendingDate ? Icons.arrow_downward : Icons.arrow_upward,
                       color: Colors.black,
                     ),
                     label: const Text
