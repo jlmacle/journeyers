@@ -452,7 +452,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                             ?
                             'Notes: ${question["items"]["notes"] ?? ""}'
                             :
-                            'Answer: ${question["items"]["segValue"] ?? ""}'
+                            'Answer(s): ${question["items"]["segValue"] ?? ""}'
                             '\nNotes: ${question["items"]["notes"] ?? ""}'
                           ),
                         ),

@@ -119,6 +119,14 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   Set<String> _earningAbilitySegmentedButtonSelection = {};
   String _earningAbilityTextFieldContent = "";
 
+  String segButtonValuesToString(Set<String> values)
+  {
+    String stringified = "";
+    stringified = values.join("/");
+
+    return stringified;
+  }
+
 
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
@@ -387,29 +395,29 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     // Groups/teams level: trying to solve the same problems?
     // level3TitleSameProblemsItem1
     LinkedHashMap<String, dynamic> level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    // CustomSegmentedButtonWithTextField: this.multiSelectionEnabled = false
-    if (_sameProblemsSegmentedButtonSelection.length == 1) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = _sameProblemsSegmentedButtonSelection.first;} 
+    // CustomSegmentedButtonWithTextField: this.multiSelectionEnabled = true
+    if (_sameProblemsSegmentedButtonSelection.isNotEmpty) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_sameProblemsSegmentedButtonSelection);} 
     else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
     if (_sameProblemsSegmentedButtonSelection.isNotEmpty) level3TitleSameProblemsItem1Data[FormUtils.textField] = _sameProblemsTextFieldContent;
 
     // Groups/teams level: harmony at home
     // level3TitleHarmonyAtHomeItem1
     LinkedHashMap<String, dynamic> level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    if (_harmonyHomeSegmentedButtonSelection.length == 1) {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = _harmonyHomeSegmentedButtonSelection.first;} 
+    if (_harmonyHomeSegmentedButtonSelection.isNotEmpty) {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = segButtonValuesToString(_harmonyHomeSegmentedButtonSelection);} 
     else {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";}
     if (_harmonyHomeSegmentedButtonSelection.isNotEmpty) level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] = _harmonyHomeTextFieldContent;
 
     // Groups/teams level: appreciability at work
     // level3TitleAppreciabilityAtWorkItem1
     LinkedHashMap<String, dynamic> level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    if (_appreciabilityAtWorkSegmentedButtonSelection.length == 1) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = _appreciabilityAtWorkSegmentedButtonSelection.first;} 
+    if (_appreciabilityAtWorkSegmentedButtonSelection.isNotEmpty) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_appreciabilityAtWorkSegmentedButtonSelection);} 
     else {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";}
     if (_appreciabilityAtWorkSegmentedButtonSelection.isNotEmpty) level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] = _appreciabilityAtWorkTextFieldContent;
 
     // Groups/teams level: income earning abillity
     // level3TitleIncomeEarningAbilityItem1
     LinkedHashMap<String, dynamic> level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    if (_earningAbilitySegmentedButtonSelection.length == 1) {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = _earningAbilitySegmentedButtonSelection.first;} 
+    if (_earningAbilitySegmentedButtonSelection.isNotEmpty) {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_earningAbilitySegmentedButtonSelection);} 
     else {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = "";}
     if (_earningAbilitySegmentedButtonSelection.isNotEmpty) level3TitleIncomeEarningAbilityItem1Data[FormUtils.textField] = _earningAbilityTextFieldContent;
 
