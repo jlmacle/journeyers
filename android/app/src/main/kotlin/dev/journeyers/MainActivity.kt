@@ -61,6 +61,11 @@ class MainActivity: FlutterActivity() {
                     val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                     result.success(prefs.getString(KEY_URI, null))
                 }
+                // Lists all the files in the directory
+                "listFiles" -> {
+                    val files = getAllFileNames()
+                    result.success(files)
+                }
                 // Saves a file with the given name and content to the stored directory
                 "saveFile" -> {
                     val name = call.argument<String>("fileName") ?: "file.csv"
@@ -83,6 +88,30 @@ class MainActivity: FlutterActivity() {
                 // Handles unknown method calls
                 else -> result.notImplemented()
             }
+        }
+    }
+
+    /**
+    * Retrieves a list of all file names within the stored directory
+    * @return A List of file names, or an empty list if the directory is empty or not found
+    */
+    private fun getAllFileNames(): List<String> {
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val uriString = prefs.getString(KEY_URI, null) ?: return emptyList()
+        val treeUri = Uri.parse(uriString)
+
+        return try {
+            // Gets the root document from the stored tree URI
+            val rootDoc = DocumentFile.fromTreeUri(this, treeUri)
+            
+            // listFiles() returns an array of DocumentFile objects in the directory
+            val files = rootDoc?.listFiles()
+            
+            // Filters out directories and maps to names
+            files?.filter { it.isFile }?.mapNotNull { it.name } ?: emptyList()
+        } catch (e: Exception) {
+            println("Error listing files: ${e.message}")
+            emptyList()
         }
     }
 
