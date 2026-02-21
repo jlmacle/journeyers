@@ -158,10 +158,16 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
   // Method used to avoid an extension in the file name
   // and to avoid the use of a previous file name
+  // (Android and iOS only)
   void fileNameCheck(value) async
   {
     // Getting the list of stored file names
-    List<Object?> result = await platformAndroid.invokeMethod('listFiles');
+    List<Object?> result;
+    if(Platform.isAndroid)
+    {result = await platformAndroid.invokeMethod('listFiles');}
+    else
+    {result = await platformIOS.invokeMethod('listFiles');}
+    
     List<String> fileNamesList = result.cast<String>();
     pu.printd("\n\nfileNamesList: $fileNamesList");
 
