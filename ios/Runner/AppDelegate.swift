@@ -36,6 +36,14 @@ import Flutter
                 } else {
                     result(nil)
                 }
+
+            case "listFiles":
+                // Returns a list of file names, or an empty list if none found
+                if let files = self.listFilesFromStoredFolder() {
+                    result(files)
+                } else {
+                    result([String]()) 
+                }
                 
             case "saveFile":
                 let args = call.arguments as? [String: Any]
@@ -67,7 +75,7 @@ import Flutter
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
-    // MARK: - Folder Operations
+    // Folder Operations
 
     private func showFolderPicker() {
         // UI for folder selection
@@ -75,6 +83,29 @@ import Flutter
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         window?.rootViewController?.present(documentPicker, animated: true)
+    }
+
+    private func listFilesFromStoredFolder() -> [String]? {
+        return accessFolder { (folderUrl: URL) -> [String] in
+            let fileManager = FileManager.default
+            do {
+                // Gets all items in the directory
+                let items = try fileManager.contentsOfDirectory(at: folderUrl, 
+                                                                includingPropertiesForKeys: [.isDirectoryKey], 
+                                                                options: .skipsHiddenFiles)
+                
+                // Filters out items that are directories
+                let fileNames = items.filter { url in
+                    let resourceValues = try? url.resourceValues(forKeys: [.isDirectoryKey])
+                    return !(resourceValues?.isDirectory ?? false)
+                }.map { $0.lastPathComponent }
+                
+                return fileNames
+            } catch {
+                print("iOS Listing Error: \(error)")
+                return []
+            }
+        }
     }
 
     private func saveToStoredFolder(fileName: String, content: Data) -> Bool {
