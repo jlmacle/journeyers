@@ -69,7 +69,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     required this.textOption1,
     required this.textOption2,
     this.textOption3 = "undefined",
-    this.multiSelectionEnabled = false,
+    this.multiSelectionEnabled = true,
     this.emptySelectionAllowed = true,
     this.textOptionsfontSize = 24,
     this.textOptionsColor = Colors.black,

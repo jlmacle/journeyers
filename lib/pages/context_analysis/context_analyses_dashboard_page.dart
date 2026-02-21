@@ -70,7 +70,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
   //**************** SORTING AND FILTERING related data and methods ****************/
   bool _isAscendingTitle = true; 
-  bool _isAscendingDate = true; 
+  bool _isAscendingDate = false; 
 
   List<dynamic>? _allSessions;
   List<dynamic>? _filteredSessions;
