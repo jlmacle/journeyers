@@ -31,4 +31,8 @@ or should we complete our education?<br><br>
 A potential resource:<br>
 United States Institute of Peace: "Win-Win Vs. Win-Lose"<br>
 https://lnkd.in/ee8hFarp
-# journeyers_releases
+<hr>
+<br> [A pre-view video](https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4). 
+<br>(The "Edit" and "Sharing" features are not yet implemented. Issues might remain with the other features.)
+
+![Dashboard screencopy](https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png)
