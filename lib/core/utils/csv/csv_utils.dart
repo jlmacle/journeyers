@@ -25,11 +25,6 @@ class CSVUtils
   final ContextAnalysisContextFormQuestions _q =
       ContextAnalysisContextFormQuestions();
 
-  /// Channel used for reading/writing files on Android
-  var _platformAndroid = MethodChannel('dev.journeyers/saf');
-  /// Channel used for communicating with iOS
-  var _platformIOS = MethodChannel('dev.journeyers/iossaf');
-
   //******************** UTILS: end *******************//
 
   // Used in the pre-CSV data
