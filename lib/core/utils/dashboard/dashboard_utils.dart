@@ -136,10 +136,10 @@ class DashboardUtils {
     String fileContent = sessionFile.readAsStringSync();
     completeSessionData = jsonDecode(fileContent);
     completeSessionData = completeSessionData.reversed.toList();
-    print("");
-    print("");
-    print("completeSessionData: $completeSessionData");
-    print("");
+    _pu.printd("");
+    _pu.printd("");
+    _pu.printd("completeSessionData: $completeSessionData");
+    _pu.printd("");
     return completeSessionData;
   }
 
