@@ -1,18 +1,9 @@
-import 'dart:io';
-
-import 'package:flutter/services.dart';
-import 'package:journeyers/app_themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 
 /// {@category Utils}
 /// A utility class related to user preferences.
 class UserPreferencesUtils 
 {
-  static const _platformIOS = MethodChannel('dev.journeyers/iossaf'); 
-  // TODO: to complete for Android
-
   
   /// Method used to avoid stale values by reloading
   Future<void> reload() async
