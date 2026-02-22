@@ -54,21 +54,10 @@ class UserPreferencesUtils
   /// Method used to check if the application folder path has been saved.
   Future<String?> getApplicationFolderPath() async 
   {
-    String? folderPathData;
-
-    if (Platform.isIOS)
-      {
-        folderPathData = await _platformIOS.invokeMethod('getStoredDirectory');
-        print("******* Platform.isIOS: folderPathData: $folderPathData    **********");
-      }
-    else
-    {
-      final prefs = await SharedPreferences.getInstance();
-      folderPathData = prefs.getString('applicationFolderPath') ?? "";
-    }
-    
-    return Future.value(folderPathData);    
+    final prefs =  await SharedPreferences.getInstance();
+    return prefs.getString('applicationFolderPath') ?? "";
   }
+
 
   //**************** EXISTING SESSION DATA ? ****************/
   /// Method used to record that session data has been saved.
