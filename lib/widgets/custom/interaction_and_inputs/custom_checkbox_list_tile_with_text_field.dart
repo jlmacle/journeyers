@@ -18,7 +18,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final String checkboxText;
 
   /// The style of the text.
-  TextStyle checkboxTextStyle;
+  final TextStyle checkboxTextStyle;
 
   /// The alignment of the text.
   final TextAlign checkboxTextAlignment;
