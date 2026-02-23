@@ -9,7 +9,7 @@ is meant to support our group problem-solving processes, and to help us reach la
 <br>
 Illustrational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
 The answers to the first set of questions is exportable to CSV. <br>
-The dashboard supports previewing, sorting by date, keyword filtering and deletion.<br>
+The dashboard supports previewing, sorting by title/date, keyword filtering and deletion.<br>
 ([apk - alpha release](https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk)) <br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
@@ -17,8 +17,7 @@ Additional effort needs to be done for the accessibility.<br>
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
-#GlobalSustainableQualityOfLife<br>
-#HouseholdFriendlyOpenSourceEdTech<br>
+#WinWin4SustainableQualityOfLife<br>
 #SDG3
 <hr>
 Should we entrust the harmony of our households,<br>
