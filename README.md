@@ -32,8 +32,8 @@ A potential resource:<br>
 United States Institute of Peace: "Win-Win Vs. Win-Lose"<br>
 https://lnkd.in/ee8hFarp
 <hr>
-<br> [A preview video](https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4)
-<br> (Link formatting issue. Click on the "Download raw file" icon to download the video.).
+<br> <a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">A preview video</a>
+<br> (Click on the "Download raw file" icon to download the video.)
 <br><em>The "Edit" and "Sharing" features are not yet implemented. Issues might remain with the other features</em>.
 
 ![Dashboard screencopy](https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png)
