@@ -77,6 +77,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
   TextEditingController textFieldEditingController = TextEditingController();
+  TextSelection? _currentTextSelection;
 
   @override
   void initState() 
@@ -94,15 +95,16 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
 
   // The method to call to modify the text field value if a " is found
   // and to modify the error message to display
-  void quoteCheck(value) 
+  void quoteAndLineReturnCheck(value) 
   {
     if (value.contains('"') || value.contains('\n')) 
     {
       // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
       value = value.replaceAll('"', '');
-      value = value.replaceAll('\n', ' '); 
+      value = value.replaceAll('\n', ''); 
       setState(() 
       {
+        
         // Removes the quotes or line returns from the text field
         textFieldEditingController.text = value;
         // Updates the error message
@@ -123,6 +125,8 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
       setState(() 
       {
         textFieldEditingController.text = value;
+        // To keep the cursor's position
+        textFieldEditingController.selection = _currentTextSelection!;
         _errorMessageForDoubleQuotes = "";
         widget.parentWidgetTextFieldValueCallBackFunction(value);
       });
@@ -154,7 +158,8 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         buildCounter: widget.textFieldCounter,
         onChanged: (String newValue) 
         {
-          quoteCheck(newValue); // updates textFieldEditingController.text
+          _currentTextSelection = textFieldEditingController.selection;          
+          quoteAndLineReturnCheck(newValue); // updates textFieldEditingController.text
           if (widget.maintainState) widget.parentWidgetTextFieldValueCallBackFunction(textFieldEditingController.text);
         },
         // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
