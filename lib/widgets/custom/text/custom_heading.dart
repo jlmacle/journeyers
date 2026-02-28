@@ -21,17 +21,13 @@ class CustomHeading extends StatefulWidget
   /// The alignment of the heading.
   final TextAlign headingAlignment;
 
-  CustomHeading
+  const CustomHeading
   ({
     super.key,
     required this.headingText,
     required this.headingLevel,
     this.headingAlignment = TextAlign.center,
-  })
-  {
-    assert(headingLevel >= 1 && headingLevel <= 6,'Heading level must be between 1 and 6.');
-    
-  }
+  });
   
   @override
   State<CustomHeading> createState() =>  CustomHeadingState();
@@ -72,7 +68,7 @@ class CustomHeadingState extends State<CustomHeading>
     _headerStyle = getTextStyle(widget.headingLevel);
     super.initState();
   }
-
+  
   // switches the heading decoration if a checkbox is checked
   void switchCustomHeadingDecorationIfCheckboxChecked()
   {
