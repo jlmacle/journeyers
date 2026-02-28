@@ -28,7 +28,7 @@ void main() async
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   late List<dynamic> currentSessionData;
   late List<Map<String, dynamic>> currentSessionDataCopy;
-  late Directory? appSupportDir;
+  Directory? appSupportDir;
   String testFile1Title = "Test-Context analysis 1";
   List<String> testFile1Keywords = [];
   String testFile2Title = "Test-Context analysis 2";

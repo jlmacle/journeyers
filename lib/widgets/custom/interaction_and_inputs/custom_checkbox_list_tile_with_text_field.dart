@@ -62,7 +62,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// A placeholder void callback function with a bool parameter
   static void placeHolderFunctionBool(bool? value) {}
 
-  CustomCheckBoxWithTextField
+  const CustomCheckBoxWithTextField
   ({
     super.key,
     required this.checkboxText,

@@ -37,14 +37,17 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 {
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
-  late bool? _isInformationModalAlreadyAcknowledged;
-  late bool? _wasContextAnalysisSessionDataSaved;
+  bool? _isInformationModalAlreadyAcknowledged;
+  bool? _wasContextAnalysisSessionDataSaved;
 
   getPreferences() async 
   {
     pu.printd("\nEntering getPreferences");
     _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
     _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved();
+
+
+
 
     setState(() {_preferencesLoading = false;});
     pu.printd("_isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
