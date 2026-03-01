@@ -154,6 +154,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   String? _fileName;
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForFileName = "";
+  bool _wasErrorMessageModified = false;
   bool _fileNameExists = false;
 
   // Method used to avoid an extension in the file name
@@ -174,22 +175,25 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     String completeFileName = "$value.csv";
     pu.printd("completeFileName: |$completeFileName|\n\n");
      
+    // if the file name exists already
     if (fileNamesList.contains(completeFileName))
     {
       setState(() 
       {
         // Updates the error message
-        _errorMessageForFileName = 'File name not available. Please use a different file name.';
-        _fileNameExists = true;
-        // "The assertiveness level of the announcement is determined by assertiveness.
-        // Currently, this is only supported by the web engine and has no effect on other platforms.
-        // The default mode is Assertiveness.polite."
-        // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
-        // TODO:  TextDirection.ltr: code to modify for l10n
-        // Doesn't seem effective yet. Left for later.
-        SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
+        _errorMessageForFileName = 'File name not available. Please use a different file name.';        
       });
+      _wasErrorMessageModified = true;
+      _fileNameExists = true;
+      // "The assertiveness level of the announcement is determined by assertiveness.
+      // Currently, this is only supported by the web engine and has no effect on other platforms.
+      // The default mode is Assertiveness.polite."
+      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+      // TODO:  TextDirection.ltr: code to modify for l10n
+      // Doesn't seem effective yet. Left for later.
+      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
     }
+    // if the file name contains .
     else if (value.contains('.')) 
     {
       value = value.replaceAll('.', '');
@@ -197,25 +201,36 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
       {
         // Removes the dots from the file name
         _fileNameController.text = value;
-        _fileNameExists = false;
         // Updates the error message
         _errorMessageForFileName = 'Dots are removed, as no extension should be entered in the file name.';
-        // "The assertiveness level of the announcement is determined by assertiveness.
-        // Currently, this is only supported by the web engine and has no effect on other platforms.
-        // The default mode is Assertiveness.polite."
-        // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
-        // TODO:  TextDirection.ltr: code to modify for l10n
-        // Doesn't seem effective yet. Left for later.
-        SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
       });
+      _fileNameExists = false;
+      _wasErrorMessageModified = true;
+      // "The assertiveness level of the announcement is determined by assertiveness.
+      // Currently, this is only supported by the web engine and has no effect on other platforms.
+      // The default mode is Assertiveness.polite."
+      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+      // TODO:  TextDirection.ltr: code to modify for l10n
+      // Doesn't seem effective yet. Left for later.
+      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
     }
+    // otherwise, the file name doesn't need modification
     else 
     {
-      setState(() 
+      if (_wasErrorMessageModified)
       {
-        _errorMessageForFileName = "";
+        setState(() 
+        {
+          _errorMessageForFileName = "";
+        });
         _fileNameExists = false;
-      });
+        _wasErrorMessageModified = false;
+      }
+      else 
+      {
+        _wasErrorMessageModified = false; 
+        _fileNameExists = false;
+      }
     }
   }
 
