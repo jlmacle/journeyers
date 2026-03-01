@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
 import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+
+//**************** UTILITY CLASS ****************//
+PrintUtils _pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
@@ -78,6 +82,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   String _errorMessageForDoubleQuotes = "";
   TextEditingController textFieldEditingController = TextEditingController();
   TextSelection? _currentTextSelection;
+  bool _wasCharacterReplacedAtPreviousTyping = false;
 
   @override
   void initState() 
@@ -93,18 +98,18 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
     super.dispose();
   }
 
-  // The method to call to modify the text field value if a " is found
+  // The method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display
   void quoteAndLineReturnCheck(value) 
   {
-    if (value.contains('"') || value.contains('\n')) 
+   if (value.contains('"') || value.contains('\n')) 
     {
       // DESIGN NOTES: after research, it seems that only straight double quote are used to delimit text when importing CSV files
       value = value.replaceAll('"', '');
       value = value.replaceAll('\n', ''); 
+      _wasCharacterReplacedAtPreviousTyping = true;
       setState(() 
-      {
-        
+      {        
         // Removes the quotes or line returns from the text field
         textFieldEditingController.text = value;
         // Updates the error message
@@ -114,22 +119,34 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         // The default mode is Assertiveness.polite."
         // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
         // TODO:  TextDirection.ltr: code to modify for l10n
-        // Doesn't seem effective yet. Left for later.
-        SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDoubleQuotes, TextDirection.ltr, assertiveness: Assertiveness.assertive);
-        // Updates the parental widget information on the text content
-        widget.parentWidgetTextFieldValueCallBackFunction(value);
+        // Doesn't seem effective yet. Left for later.        
       });
+      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDoubleQuotes, TextDirection.ltr, assertiveness: Assertiveness.assertive);
+      // Updates the parental widget information on the text content
+      widget.parentWidgetTextFieldValueCallBackFunction(value);
     } 
+    // Neither " nor \n
+    // Could be a character deletion
     else 
     {
-      setState(() 
+      if (_wasCharacterReplacedAtPreviousTyping)
       {
-        textFieldEditingController.text = value;
-        // To keep the cursor's position
-        textFieldEditingController.selection = _currentTextSelection!;
-        _errorMessageForDoubleQuotes = "";
+        setState(() 
+        {
+          // To keep the cursor's position when deleting characters
+          textFieldEditingController.selection = _currentTextSelection!;
+          _errorMessageForDoubleQuotes = "";        
+        });
         widget.parentWidgetTextFieldValueCallBackFunction(value);
-      });
+        _wasCharacterReplacedAtPreviousTyping = false;
+      }
+      else 
+      {
+        setState(() 
+        {
+          _wasCharacterReplacedAtPreviousTyping = false; 
+        });
+      }      
     }
   }
 
