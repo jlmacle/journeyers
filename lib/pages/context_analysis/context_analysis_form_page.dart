@@ -994,7 +994,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                                 ?
                                   (value){}
                                 : (value) async {
-                                  setState(() { _fileName = value.trim(); });
+                                  _fileName = value.trim(); 
                                   // Saving data 
                                   await print2CSV();
                                   await upu.reload();
