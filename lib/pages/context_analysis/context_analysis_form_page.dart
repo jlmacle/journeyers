@@ -275,86 +275,86 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   // Individual perspective
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
   {
-    setState(() {_studiesHouseholdBalanceCheckboxValue = newValue!;});
+    _studiesHouseholdBalanceCheckboxValue = newValue!;
     _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();    
   }
 
-  _setStudiesHouseholdBalanceTextFieldState(String newValue) {setState(() {_studiesHouseholdBalanceTextFieldContent = newValue;});}
+  _setStudiesHouseholdBalanceTextFieldState(String newValue) {_studiesHouseholdBalanceTextFieldContent = newValue;}
 
   _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) 
   {
-    setState(() {_accessingIncomeHouseholdBalanceCheckboxValue = newValue!;});
+    _accessingIncomeHouseholdBalanceCheckboxValue = newValue!;
     _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
-  _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {setState(() {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;});}
+  _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;}
 
   _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) 
   {
-    setState(() {_earningIncomeHouseholdBalanceCheckboxValue = newValue!;});
+    _earningIncomeHouseholdBalanceCheckboxValue = newValue!;
     _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
-  _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {setState(() {_earningIncomeHouseholdBalanceTextFieldContent = newValue;});}
+  _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {_earningIncomeHouseholdBalanceTextFieldContent = newValue;}
 
   _setHelpingOthersdBalanceCheckboxState(bool? newValue) 
   {
-    setState(() {_helpingOthersHouseholdBalanceCheckboxValue = newValue!;});
+    _helpingOthersHouseholdBalanceCheckboxValue = newValue!;
     _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
-  _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {setState(() {_helpingOthersHouseholdBalanceTextFieldContent = newValue;});}
+  _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {_helpingOthersHouseholdBalanceTextFieldContent = newValue;}
 
   _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) 
   {
-    setState(() {_moreAppreciatedAtWorkCheckboxValue = newValue!;});
+    _moreAppreciatedAtWorkCheckboxValue = newValue!;
     _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
-  _setMoreAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_moreAppreciatedAtWorkTextFieldContent = newValue;});}
+  _setMoreAppreciatedAtWorkTextFieldState(String newValue) {_moreAppreciatedAtWorkTextFieldContent = newValue;}
 
   _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) 
   {
-    setState(() {_remainingAppreciatedAtWorkCheckboxValue = newValue!;});
+    _remainingAppreciatedAtWorkCheckboxValue = newValue!;
     _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
-  _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {setState(() {_remainingAppreciatedAtWorkTextFieldContent = newValue;});}
+  _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {_remainingAppreciatedAtWorkTextFieldContent = newValue;}
 
   _setBetterLegaciesCheckboxState(bool? newValue) 
   {
-    setState(() {_betterLegaciesCheckboxValue = newValue!;});
+    _betterLegaciesCheckboxValue = newValue!;
     _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
-  _setBetterLegaciesTextFieldState(String newValue) {setState(() {_betterLegaciesTextFieldContent = newValue;});}
+  _setBetterLegaciesTextFieldState(String newValue) {_betterLegaciesTextFieldContent = newValue;}
 
   _setAnotherIssueTextFieldState(String newValue) 
   {
-    setState(() {_anotherIssueTextFieldContent = newValue;});
+    _anotherIssueTextFieldContent = newValue;
     _anotherIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfTextFieldUsed(newValue);
   }
 
   // Groups/Teams perspective
-  _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {setState(() {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;});}
+  _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;}
 
-  _setSameProblemsSegmentedButtonState(Set<String>? values) {setState(() {_sameProblemsSegmentedButtonSelection = values!;});}
+  _setSameProblemsSegmentedButtonState(Set<String>? values) {_sameProblemsSegmentedButtonSelection = values!;}
 
-  _setSameProblemsTextFieldState(String newValue) {setState(() {_sameProblemsTextFieldContent = newValue;});}
+  _setSameProblemsTextFieldState(String newValue) {_sameProblemsTextFieldContent = newValue;}
 
-  _setHarmonyHomeSegmentedButtonState(Set<String>? values) {setState(() {_harmonyHomeSegmentedButtonSelection = values!;});}
+  _setHarmonyHomeSegmentedButtonState(Set<String>? values) {_harmonyHomeSegmentedButtonSelection = values!;}
 
-  _setHarmonyHomeTextFieldState(String newValue) {setState(() {_harmonyHomeTextFieldContent = newValue;});}
+  _setHarmonyHomeTextFieldState(String newValue) {_harmonyHomeTextFieldContent = newValue;}
 
-  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values) {setState(() {_appreciabilityAtWorkSegmentedButtonSelection = values!;});}
+  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values) {_appreciabilityAtWorkSegmentedButtonSelection = values!;}
 
-  _setAppreciabilityAtWorkTextFieldState(String newValue) {setState(() {_appreciabilityAtWorkTextFieldContent = newValue;});}
+  _setAppreciabilityAtWorkTextFieldState(String newValue) {_appreciabilityAtWorkTextFieldContent = newValue;}
 
-  _setEarningAbilitySegmentedButtonState(Set<String>? values) {setState(() {_earningAbilitySegmentedButtonSelection = values!;});}
+  _setEarningAbilitySegmentedButtonState(Set<String>? values) {_earningAbilitySegmentedButtonSelection = values!;}
 
-  _setEarningAbilityTextFieldState(String newValue) {setState(() {_earningAbilityTextFieldContent = newValue;});}
+  _setEarningAbilityTextFieldState(String newValue) {_earningAbilityTextFieldContent = newValue;}
 
-  _setAnalysisTitleTextFieldState(String newValue) {setState(() {_analysisTitle = newValue;});}
+  _setAnalysisTitleTextFieldState(String newValue) {_analysisTitle = newValue;}
 
   //**************** DATA STRUCTURE related data and methods ****************/
   // Data structure
