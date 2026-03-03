@@ -65,6 +65,9 @@ class _MyAppState extends State<MyApp>
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      // "By default only the American English locale is supported. 
+      // Apps should configure this list to match the locales they support."
+      // https://api.flutter.dev/flutter/material/MaterialApp/supportedLocales.html
       supportedLocales: 
       [
         Locale('en'), // English
