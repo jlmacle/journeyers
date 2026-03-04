@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_desktop_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -849,17 +849,9 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                     ? Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? ContextAnalysisFileNameMobilePlatforms(parentWidgetCallbackFunctionOnEditingComplete: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,)
+                        ? ContextAnalysisFileNameMobilePlatforms(parentWidgetCallbackFunctionOnEditingComplete: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                         // Saving file for desktop platforms
-                        : ElevatedButton( 
-                            focusNode: _saveDataButtonFocusNode,
-                            onPressed: print2CSV,
-                            child: Text(
-                              'Click to save your data in CSV, \nspreadsheet-compatible format',
-                              style: elevatedButtonTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
+                        : ContextAnalysisFileNameDesktopPlatforms(contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                   ),
                 ],
               ),

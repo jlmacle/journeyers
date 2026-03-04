@@ -17,7 +17,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
-/// The title for the context analysis.
+/// Defining file name and saving file for the context analysis, on mobile platforms.
 class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
