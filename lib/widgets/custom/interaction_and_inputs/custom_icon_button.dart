@@ -1,43 +1,27 @@
 import 'package:flutter/material.dart';
 
-// TODO: to determine which stateful widgets could be stateless widgets instead
-
-/// {@category Custom widgets}
-/// A customizable icon button.
-class CustomIconButton extends StatefulWidget 
+class CustomIconButton extends StatelessWidget 
 {
-  /// The icon to use.
+
   final Icon icon;
-
-  /// The tooltip label for the icon.
   final String toolTipLabel;
-
-  /// The callback function called when the icon button is pressed.
-  final VoidCallback parentWidgetOnPressedCallBackFunction;
+  final VoidCallback onPressedFunction;  
 
   const CustomIconButton
   ({
     super.key,
     required this.icon,
     required this.toolTipLabel,
-    required this.parentWidgetOnPressedCallBackFunction,
+    required this.onPressedFunction,  
   });
 
   @override
-  State<CustomIconButton> createState() => _CustomIconButtonState();
-}
-
-class _CustomIconButtonState extends State<CustomIconButton> 
-{
-  @override
-  Widget build(BuildContext context) 
-  {
-    return 
-    IconButton
+  Widget build(BuildContext context) {
+    return IconButton
     (
-      onPressed: widget.parentWidgetOnPressedCallBackFunction,
-      tooltip: widget.toolTipLabel,
-      icon: widget.icon,
+      onPressed: onPressedFunction, 
+      tooltip: toolTipLabel,
+      icon: icon,
     );
   }
 }
