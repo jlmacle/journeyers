@@ -18,7 +18,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 /// {@category Pages}
 /// {@category Context analysis}
 /// The title for the context analysis.
-class ContextAnalysisFileName extends StatefulWidget 
+class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> parentWidgetCallbackFunctionOnEditingComplete;
@@ -26,7 +26,7 @@ class ContextAnalysisFileName extends StatefulWidget
   /// A global key for the context analysis form page
   final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
 
-  const ContextAnalysisFileName
+  const ContextAnalysisFileNameMobilePlatforms
   ({
     super.key,
     required this.parentWidgetCallbackFunctionOnEditingComplete,
@@ -34,10 +34,10 @@ class ContextAnalysisFileName extends StatefulWidget
   });
 
   @override
-  State<ContextAnalysisFileName> createState() => _ContextAnalysisFileNameState();
+  State<ContextAnalysisFileNameMobilePlatforms> createState() => _ContextAnalysisFileNameMobilePlatformsState();
 }
 
-class _ContextAnalysisFileNameState extends State<ContextAnalysisFileName> 
+class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysisFileNameMobilePlatforms> 
 {
   // FILE NAME
   String? _fileName;
