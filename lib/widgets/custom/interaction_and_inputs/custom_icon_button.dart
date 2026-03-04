@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// TODO: to determine which stateful widgets could be stateless widgets instead
+
 /// {@category Custom widgets}
 /// A customizable icon button.
 class CustomIconButton extends StatefulWidget 
