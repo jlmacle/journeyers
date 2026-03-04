@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,10 +52,10 @@ class ContextAnalysisFormPage extends StatefulWidget
     });
 
   @override
-  State<ContextAnalysisFormPage> createState() => _ContextAnalysisFormPageState();
+  State<ContextAnalysisFormPage> createState() => ContextAnalysisFormPageState();
 }
 
-class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
+class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
 {
   //**************** UTILITY CLASSES ****************//
   CSVUtils cu = CSVUtils();
@@ -63,13 +64,8 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   PrintUtils pu = PrintUtils();
   UserPreferencesUtils upu = UserPreferencesUtils();  
 
-  //**************** SMARTPHONES CHANNELS ****************//
-  // Android: storage access framework (reading/saving files)
-  static const platformAndroid = MethodChannel('dev.journeyers/saf');
-  // Android: storage access framework (reading/saving files)
-  static const platformIOS = MethodChannel('dev.journeyers/iossaf');
-
   //**************** GLOBAL KEYS related data ****************//
+
   // Global keys to change text decoration
   final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
   final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
@@ -158,88 +154,11 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
   // FILE NAME
   String? _fileName;
-  final TextEditingController _fileNameController = TextEditingController();
-  String _errorMessageForFileName = "";
-  bool _wasErrorMessageModified = false;
-  bool _fileNameExists = false;
-
-  // Method used to avoid an extension in the file name
-  // and to avoid the use of a previous file name
-  // (Android and iOS only)
-  void fileNameCheck(value) async
+  void analysisFileNameUpdate(String textEditingControllerValue)
   {
-    // Getting the list of stored file names
-    List<Object?> result;
-    if(Platform.isAndroid)
-    {result = await platformAndroid.invokeMethod('listFiles');}
-    else
-    {result = await platformIOS.invokeMethod('listFiles');}
-    
-    List<String> fileNamesList = result.cast<String>();
-    pu.printd("\n\nfileNamesList: $fileNamesList");
-
-    String completeFileName = "$value.csv";
-    pu.printd("completeFileName: |$completeFileName|\n\n");
-     
-    // if the file name exists already
-    if (fileNamesList.contains(completeFileName))
-    {
-      setState(() 
-      {
-        // Updates the error message
-        _errorMessageForFileName = 'File name not available. Please use a different file name.';        
-      });
-      _wasErrorMessageModified = true;
-      _fileNameExists = true;
-      // "The assertiveness level of the announcement is determined by assertiveness.
-      // Currently, this is only supported by the web engine and has no effect on other platforms.
-      // The default mode is Assertiveness.polite."
-      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
-      // TODO:  TextDirection.ltr: code to modify for l10n
-      // Doesn't seem effective yet. Left for later.
-      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
-    }
-    // if the file name contains .
-    else if (value.contains('.')) 
-    {
-      value = value.replaceAll('.', '');
-      setState(() 
-      {
-        // Removes the dots from the file name
-        _fileNameController.text = value;
-        // Updates the error message
-        _errorMessageForFileName = 'Dots are removed, as no extension should be entered in the file name.';
-      });
-      _fileNameExists = false;
-      _wasErrorMessageModified = true;
-      // "The assertiveness level of the announcement is determined by assertiveness.
-      // Currently, this is only supported by the web engine and has no effect on other platforms.
-      // The default mode is Assertiveness.polite."
-      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
-      // TODO:  TextDirection.ltr: code to modify for l10n
-      // Doesn't seem effective yet. Left for later.
-      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
-    }
-    // otherwise, the file name doesn't need modification
-    else 
-    {
-      if (_wasErrorMessageModified)
-      {
-        setState(() 
-        {
-          _errorMessageForFileName = "";
-        });
-        _fileNameExists = false;
-        _wasErrorMessageModified = false;
-      }
-      else 
-      {
-        _wasErrorMessageModified = false; 
-        _fileNameExists = false;
-      }
-    }
+    _fileName = textEditingControllerValue;
   }
-
+  
   //**************** FOCUS NODES related data and methods ****************//
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
@@ -250,10 +169,8 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   {
     _saveDataButtonFocusNode.dispose();
     _keywordsController.dispose();
-    _fileNameController.dispose();
     super.dispose();
   }
-
  
 
   //**************** PREFERENCES related data and methods ****************/
@@ -497,7 +414,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
   // Method used to store the form data to CSV
   Future<void> print2CSV() async 
-  {
+  { 
     dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
@@ -589,7 +506,6 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             // Title and keywords
               // Text field for the analysis title
             ContextAnalysisTitle(parentWidgetCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
-
             // File tagging
             Center(child: Text("Please enter keywords to describe the file.", textAlign: TextAlign.center)),
             // TODO: to offer pre-defined keywords as well (household, workplace, studies)
@@ -932,47 +848,9 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                     _isApplicationFolderPathLoading
                     ? Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
-                        ? _applicationFolderPath == ""
-                            ? ElevatedButton(
-                                onPressed: () async {
-                                  // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
-                                  String? result;
-                                  if (Platform.isAndroid)
-                                    {result = await platformAndroid.invokeMethod('openDirectory');}
-                                  else if (Platform.isIOS)
-                                    {result = await platformIOS.invokeMethod('openDirectory');}
-                                  
-                                  if (result != null) {
-                                    // Refreshing local state with the new path/bookmark
-                                    getApplicationFolderPathPref(); 
-                                  }
-                                },
-                                child: Text(Platform.isIOS 
-                                    ? 'Please select a folder for app storage' 
-                                    : 'Please select or create a folder for app storage'),
-                              )
-                            : TextField(
-                                controller: _fileNameController,
-                                decoration: InputDecoration
-                                (
-                                    hint: Center(child: Text('Please add the file name, without .csv, here.')),
-                                    errorText: _errorMessageForFileName,
-                                    errorMaxLines: 3
-                                ),
-                                textAlign: TextAlign.center,
-                                onChanged: (String newValue) {
-                                  fileNameCheck(newValue);                            
-                                },
-                                onSubmitted: _fileNameExists
-                                ?
-                                  (value){}
-                                : (value) async {
-                                  _fileName = value.trim(); 
-                                  // Saving data 
-                                  await print2CSV();
-                                  await upu.reload();
-                                },
-                              )
+                       
+                        ? ContextAnalysisFileName(parentWidgetCallbackFunctionOnEditingComplete: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,)
+                        
                         : ElevatedButton( // Desktop platforms
                             focusNode: _saveDataButtonFocusNode,
                             onPressed: print2CSV,

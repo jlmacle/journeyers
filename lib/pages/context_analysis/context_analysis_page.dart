@@ -35,6 +35,8 @@ class ContextAnalysisPage extends StatefulWidget
 
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
+  GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'form');
+
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
   bool? _isInformationModalAlreadyAcknowledged;
@@ -192,7 +194,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisFormPage(key: const Key('form'), parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+                  child: ContextAnalysisFormPage(key: contextAnalysisFormPageKey, parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
                 ),
               ),
             )
