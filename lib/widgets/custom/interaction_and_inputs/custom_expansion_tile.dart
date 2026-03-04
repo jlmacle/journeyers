@@ -150,7 +150,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                   (
                     icon: Icon(iconData),
                     toolTipLabel: toolTipLabel,
-                    parentWidgetOnPressedCallBackFunction: onPressedFunction,
+                    onPressedFunction: onPressedFunction,
                   );
                 }).toList(),
               ),
