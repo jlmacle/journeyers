@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -131,6 +132,11 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
   String? _analysisTitle;
+  void _analysisTitleUpdate(String textEditingControllerValue)
+  {
+    _analysisTitle = textEditingControllerValue;
+  }
+
 
   // KEYWORDS
   final List<String> _keywords = [];
@@ -237,16 +243,12 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   //**************** FOCUS NODES related data and methods ****************//
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
-  final FocusNode _analysisTitleFocusNode = FocusNode();
   bool movingThroughButton = false;
-
-
 
   @override
   void dispose()
   {
     _saveDataButtonFocusNode.dispose();
-    _analysisTitleFocusNode.dispose();
     _keywordsController.dispose();
     _fileNameController.dispose();
     super.dispose();
@@ -542,21 +544,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
         // data helping to know if the user tab navigates back up
         movingThroughButton = true;
       }
-    );
-
-    _analysisTitleFocusNode.addListener(
-      (){
-        pu.printd("Analysis title text field reached");
-        if (movingThroughButton)
-        {
-          pu.printd("Tab navigating up");
-          // removing focus capability to the bottom items
-          widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
-          movingThroughButton = false;
-        }
-      }
-    );
-    
+    );    
   }
 
   
@@ -600,22 +588,7 @@ class _ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             ),
             // Title and keywords
               // Text field for the analysis title
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom:16 ),
-              child: TextField
-              (
-                focusNode: _analysisTitleFocusNode,
-                textAlign: TextAlign.center,
-                style: analysisTitleStyle,
-                decoration: InputDecoration
-                (
-                  hint: Center(child: Text("Please enter a title for this analysis.")),
-                  hintStyle: analysisTitleStyle,                    
-                ),
-                maxLength: 150,
-                onChanged: _setAnalysisTitleTextFieldState,
-              ),
-            ),
+            ContextAnalysisTitle(parentWidgetCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
 
             // File tagging
             Center(child: Text("Please enter keywords to describe the file.", textAlign: TextAlign.center)),
