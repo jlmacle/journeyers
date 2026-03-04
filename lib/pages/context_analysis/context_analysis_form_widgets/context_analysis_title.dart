@@ -44,7 +44,7 @@ class _ContextAnalysisTitleState extends State<ContextAnalysisTitle>
           hintStyle: analysisTitleStyle,                    
         ),
         maxLength: 150,
-        onSubmitted: widget.parentWidgetCallbackFunctionOnEditingComplete,
+        onChanged: widget.parentWidgetCallbackFunctionOnEditingComplete,
       ),
     );
   }
