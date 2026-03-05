@@ -10,7 +10,7 @@ PrintUtils pu = PrintUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
-/// The title for the context analysis.
+/// A widget used for the title of the context analysis.
 class ContextAnalysisTitle extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
