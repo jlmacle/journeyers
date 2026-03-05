@@ -507,7 +507,14 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
               // Text field for the analysis title
             ContextAnalysisTitle(parentWidgetCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
             // File tagging
-            Center(child: Text("Please enter keywords to describe the file.", textAlign: TextAlign.center)),
+            Center
+            (
+              child: Text
+              (
+                "Please enter keywords to describe the file.", textAlign: TextAlign.center, 
+                style: analysisKeywordsText
+              )
+            ),
             // TODO: to offer pre-defined keywords as well (household, workplace, studies)
             Padding(
               padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
@@ -516,6 +523,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                 controller: _keywordsController,
                 decoration: InputDecoration(hint: Center(child: Text('Please add the keyword here (+ Enter key).'))),
                 textAlign: TextAlign.center,
+                style: analysisTextFieldStyle,
                 onSubmitted: addKeyword,
               ),
             ),
