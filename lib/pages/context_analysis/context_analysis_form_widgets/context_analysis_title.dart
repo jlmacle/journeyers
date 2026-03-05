@@ -37,11 +37,11 @@ class _ContextAnalysisTitleState extends State<ContextAnalysisTitle>
       child: TextField
       (
         textAlign: TextAlign.center,
-        style: analysisTitleStyle,
+        style: analysisTextFieldStyle,
         decoration: InputDecoration
         (
-          hint: Center(child: Text("Please enter a title for this analysis.")),
-          hintStyle: analysisTitleStyle,                    
+          hint: Center(child: Text("Please enter a title for this analysis.", style: analysisTextFieldHintStyle)),
+          hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,
         onChanged: widget.parentWidgetCallbackFunctionOnEditingComplete,
