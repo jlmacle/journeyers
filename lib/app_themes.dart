@@ -83,7 +83,7 @@ final TextStyle feedbackMessageStyle = TextStyle
 );
 
 // Text styles: context analysis page related styles
-const TextStyle analysisKeywordsText = TextStyle
+const TextStyle analysisKeywordsTextStyle = TextStyle
 (
   fontSize: 20,
   fontWeight: FontWeight.normal,
