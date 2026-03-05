@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
@@ -182,9 +183,10 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     )
   : TextField(
       controller: _fileNameController,
+      style: analysisTextFieldStyle,
       decoration: InputDecoration
       (
-          hint: Center(child: Text('Please add the file name, without .csv, here.')),
+          hint: Center(child: Text('Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
           errorText: _errorMessageForFileName,
           errorMaxLines: 3
       ),
