@@ -512,7 +512,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
               child: Text
               (
                 "Please enter keywords to describe the file.", textAlign: TextAlign.center, 
-                style: analysisKeywordsText
+                style: analysisKeywordsTextStyle
               )
             ),
             // TODO: to offer pre-defined keywords as well (household, workplace, studies)
@@ -521,7 +521,14 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
               child: TextField
               (
                 controller: _keywordsController,
-                decoration: InputDecoration(hint: Center(child: Text('Please add the keyword here (+ Enter key).'))),
+                decoration: InputDecoration
+                (
+                  hint: Center
+                  (
+                    child: 
+                    Text('Please add the keyword here (+ Enter key).', style: analysisTextFieldHintStyle)
+                  )
+                ),
                 textAlign: TextAlign.center,
                 style: analysisTextFieldStyle,
                 onSubmitted: addKeyword,
