@@ -17,7 +17,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
-/// Defining file name and saving file for the context analysis, on mobile platforms.
+/// A widget used for selecting a folder to save the files, defining file name, and saving file, for the context analysis, on mobile platforms.
 class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
