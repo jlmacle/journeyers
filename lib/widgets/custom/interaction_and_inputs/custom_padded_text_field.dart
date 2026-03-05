@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
@@ -160,6 +161,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
       child: 
       TextField
       (
+        style: analysisTextFieldStyle,
         textAlign: widget.textAlignment,
         controller: textFieldEditingController,
         decoration: 
