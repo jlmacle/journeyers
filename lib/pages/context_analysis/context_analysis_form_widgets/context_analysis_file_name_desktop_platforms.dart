@@ -40,7 +40,7 @@ class _ContextAnalysisFileNameDesktopPlatformsState extends State<ContextAnalysi
       onPressed: widget.contextAnalysisFormPageKey.currentState?.print2CSV,
       child: Text(
         'Click to save your data in CSV, \nspreadsheet-compatible format',
-        style: elevatedButtonTextStyle,
+        style: elevatedButtonSaveDataOnDesktopStyle,
         textAlign: TextAlign.center,
       ),
     );
