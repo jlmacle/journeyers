@@ -3,10 +3,6 @@ import 'package:flutter/semantics.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-
-//**************** UTILITY CLASS ****************//
-PrintUtils _pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
