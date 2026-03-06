@@ -6,8 +6,6 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 //**************** UTILITY CLASS ****************//
 PrintUtils pu = PrintUtils();
 
-// StatefulWidget necessary for overriding dispose() 
-
 /// {@category Pages}
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
