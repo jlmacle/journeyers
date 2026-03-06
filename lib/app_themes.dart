@@ -101,6 +101,12 @@ const TextStyle analysisTextFieldHintStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
+const TextStyle elevatedButtonSaveDataOnDesktopStyle = TextStyle
+(
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
 final TextStyle dialogStyle = TextStyle
 (
   color: Colors.black,
