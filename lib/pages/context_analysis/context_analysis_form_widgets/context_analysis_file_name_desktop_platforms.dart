@@ -9,8 +9,6 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dar
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils(); 
 
-// StatefulWidget necessary for overriding dispose() 
-
 /// {@category Pages}
 /// {@category Context analysis}
 /// Defining file name and saving file for the context analysis, on desktop platforms.
