@@ -35,7 +35,7 @@ class ContextAnalysisPage extends StatefulWidget
 
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
-  GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'form');
+  GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'formPage');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
