@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// {@category Custom widgets}
+/// A customizable icon button.
 class CustomIconButton extends StatelessWidget 
 {
 
