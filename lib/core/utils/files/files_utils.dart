@@ -211,11 +211,11 @@ class FileUtils
       if (await file.exists()) 
       {
         await file.delete();
-        _pu.printd("File successfully deleted: $pathToCsv");
+        _pu.printd("Session Data: File successfully deleted: $pathToCsv");
       } else 
       {
-        _pu.printd("Deletion skipped: File does not exist at $pathToCsv");
-        _pu.printd("Current working directory: ${Directory.current.path}");
+        _pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCsv");
+        _pu.printd("Session Data: Current working directory: ${Directory.current.path}");
       }
     } on FileSystemException 
     // Specifically handling OS-level errors like permission issues

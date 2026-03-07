@@ -78,7 +78,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    _pu.printd('Session data: $sessionData saved to: ${file.path}');
+    _pu.printd('Session data: new session metadata: $sessionData saved to: ${file.path}');
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
@@ -96,8 +96,8 @@ class DashboardUtils {
     var formatter = DateFormat('MMMM dd, yyyy').add_jm();
     var formattedDate = formatter.format(now);
 
-    _pu.printd("formattedDate: $formattedDate");
-    _pu.printd("analysisTitle: $analysisTitle");
+    _pu.printd("Session Data: formattedDate: $formattedDate");
+    _pu.printd("Session Data: analysisTitle: $analysisTitle");
 
     // Session data storage sample:
     // [{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
@@ -129,18 +129,17 @@ class DashboardUtils {
   Future<List<dynamic>> retrieveAllDashboardSessionData({
     required String typeOfContextData,
   }) async {
-    List<dynamic> completeSessionData;
+    List<dynamic> sessionData;
     File sessionFile = await getSessionFile(
       typeOfContextData: typeOfContextData,
     );
     String fileContent = sessionFile.readAsStringSync();
-    completeSessionData = jsonDecode(fileContent);
-    completeSessionData = completeSessionData.reversed.toList();
+    sessionData = jsonDecode(fileContent);
+    sessionData = sessionData.reversed.toList();
     _pu.printd("");
+    _pu.printd("Session Data: previousSessionData: $sessionData");
     _pu.printd("");
-    _pu.printd("completeSessionData: $completeSessionData");
-    _pu.printd("");
-    return completeSessionData;
+    return sessionData;
   }
 
   /// Method used to delete a specific session from the dashboard data file.
@@ -165,7 +164,7 @@ class DashboardUtils {
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        _pu.printd('Session with path $filePathToDelete removed from dashboard index.');
+        _pu.printd('Session Data: Session with path $filePathToDelete removed from dashboard index.');
       } else {
         _pu.printd('No session found with path $filePathToDelete in dashboard index.');
       }
