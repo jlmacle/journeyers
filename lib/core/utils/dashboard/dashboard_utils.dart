@@ -137,7 +137,7 @@ class DashboardUtils {
     sessionData = jsonDecode(fileContent);
     sessionData = sessionData.reversed.toList();
     _pu.printd("");
-    _pu.printd("Session Data: previousSessionData: $sessionData");
+    _pu.printd("Session Data: sessionData: $sessionData");
     _pu.printd("");
     return sessionData;
   }

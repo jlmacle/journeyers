@@ -36,7 +36,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
 
   Future<void> _fetchingData() async
   {
-    pu.printd("pathToCsvData:${widget.pathToCsvData}");
+    pu.printd("Preview Building: pathToCsvData:${widget.pathToCsvData}");
     Map<String, List<dynamic>> perspectiveData = await cu.csvFileToPreviewPerspectiveData(widget.pathToCsvData);
     await perspectiveDataToDataStructures(perspectiveData);
     
@@ -298,10 +298,10 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     }
     
     pu.printd("");
-    pu.printd("sectionsIndividual:");
+    pu.printd("Preview Building: sectionsIndividual:");
     pu.printd(sectionsIndividual);
     pu.printd("");
-    pu.printd("sectionsGroup:");
+    pu.printd("Preview Building: sectionsGroup:");
     pu.printd(sectionsGroup);
   }
 
