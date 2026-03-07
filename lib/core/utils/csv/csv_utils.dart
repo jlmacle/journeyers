@@ -701,10 +701,9 @@ class CSVUtils
         (data) => data.join().trim().isNotEmpty
       ).toList();
 
-    _pu.printd("");
-    _pu.printd("Data after removing empty lines:");
-    _pu.printd("\nindividualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
-    _pu.printd("\ngroupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
+    _pu.printd("Preview Building: Data after removing empty lines:");
+    _pu.printd("Preview Building: individualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
+    _pu.printd("Preview Building: groupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
 
     perspectiveData["individualPerspective"] = individualPerspectiveWithoutEmptyLines;
     perspectiveData["groupPerspective"] = groupPerspectiveWithoutEmptyLines;

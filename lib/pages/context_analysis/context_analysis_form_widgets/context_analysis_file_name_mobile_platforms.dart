@@ -81,10 +81,10 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     {result = await platformIOS.invokeMethod('listFiles');}
     
     List<String> fileNamesList = result.cast<String>();
-    pu.printd("\n\nfileNamesList: $fileNamesList");
+    pu.printd("Session Data: fileNamesList: $fileNamesList");
 
     String completeFileName = "$value.csv";
-    pu.printd("completeFileName: |$completeFileName|\n\n");
+    pu.printd("Session Data: completeFileName: |$completeFileName|");
      
     // if the file name exists already
     if (fileNamesList.contains(completeFileName))

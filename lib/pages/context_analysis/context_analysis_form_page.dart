@@ -183,7 +183,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
     String? folderPathData = await upu.getApplicationFolderPath();
-    if (Platform.isAndroid || Platform.isIOS)  {pu.printd("folderPathData: $folderPathData");}
+    if (Platform.isAndroid || Platform.isIOS)  {pu.printd("Session Data: folderPathData: $folderPathData");}
     // Application folder path called from the Kotlin code    
     setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData ?? "";});
   }
@@ -854,13 +854,13 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                       {
                         pu.printd("Shift-tab detected");
                         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
-                        pu.printd("_areBottomNavigationItemsFocusable: false");
+                        pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
                       }
                       else
                       {
                         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(true);
-                        pu.printd("_areBottomNavigationItemsFocusable: true");
+                        pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
                       } 
 
                       return KeyEventResult.ignored;
