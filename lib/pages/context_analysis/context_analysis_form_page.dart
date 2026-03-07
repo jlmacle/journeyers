@@ -407,7 +407,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     _enteredData = [level2TitleIndividualData, level2TitleGroupData];
 
     pu.printd("");
-    pu.printd("_enteredData");
+    pu.printd("Session Data: _enteredData");
     pu.printd("$_enteredData");
     pu.printd("");
   }
@@ -421,10 +421,10 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
     var preCSVDataGroupPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
-    pu.printd("preCSVDataIndividualPerspective");
+    pu.printd("CSV building: preCSVDataIndividualPerspective");
     pu.printd("$preCSVDataIndividualPerspective");
     pu.printd("");
-    pu.printd("preCSVDataGroupPerspective");
+    pu.printd("CSV building: preCSVDataGroupPerspective");
     pu.printd("$preCSVDataGroupPerspective");
     pu.printd("");
 
@@ -435,7 +435,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
       await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
                           csvDataGroupPerspective: csvDataGroupPerspective,
                           fileName: _fileName);
-    pu.printd("pathToCSVFile: $pathToCSVFile");
+    pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
     {      
