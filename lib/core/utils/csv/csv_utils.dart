@@ -7,6 +7,7 @@ import "package:flutter/services.dart";
 import "package:journeyers/core/utils/files/files_utils.dart";
 
 import "package:journeyers/core/utils/form/form_utils.dart";
+import "package:journeyers/core/utils/printing_and_logging/debug_constants.dart";
 import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart";
 import "package:path/path.dart" as path;
@@ -551,9 +552,9 @@ class CSVUtils
     }
 
     _pu.printd("");
-    _pu.printd("CSV building: csvDataIndividualPerspective:$csvDataIndividualPerspective");
+    if (csvBuildingDebug) _pu.printd("CSV Building: csvDataIndividualPerspective:$csvDataIndividualPerspective");
     _pu.printd("");
-    _pu.printd("CSV building: csvDataGroupPerspective:$csvDataGroupPerspective");
+    if (csvBuildingDebug) _pu.printd("CSV Building: csvDataGroupPerspective:$csvDataGroupPerspective");
     _pu.printd("");
 
 
@@ -701,9 +702,9 @@ class CSVUtils
         (data) => data.join().trim().isNotEmpty
       ).toList();
 
-    _pu.printd("Preview Building: Data after removing empty lines:");
-    _pu.printd("Preview Building: individualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
-    _pu.printd("Preview Building: groupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
+    if (previewBuildingDebug) _pu.printd("Preview Building: Data after removing empty lines:");
+    if (previewBuildingDebug) _pu.printd("Preview Building: individualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
+    if (previewBuildingDebug) _pu.printd("Preview Building: groupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
 
     perspectiveData["individualPerspective"] = individualPerspectiveWithoutEmptyLines;
     perspectiveData["groupPerspective"] = groupPerspectiveWithoutEmptyLines;

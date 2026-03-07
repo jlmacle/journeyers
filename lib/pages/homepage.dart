@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage>
       (bool boolValue) 
       {
         setState(() {_areBottomNavigationItemsFocusable = boolValue;});
-        pu.printd("_areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
+        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
       }
       ),
     const GroupProblemSolvingPage(),

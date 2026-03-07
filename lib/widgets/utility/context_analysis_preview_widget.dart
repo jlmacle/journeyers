@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 CSVUtils cu = CSVUtils();
@@ -36,7 +37,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
 
   Future<void> _fetchingData() async
   {
-    pu.printd("Preview Building: pathToCsvData:${widget.pathToCsvData}");
+    if (previewBuildingDebug) pu.printd("Preview Building: pathToCsvData:${widget.pathToCsvData}");
     Map<String, List<dynamic>> perspectiveData = await cu.csvFileToPreviewPerspectiveData(widget.pathToCsvData);
     await perspectiveDataToDataStructures(perspectiveData);
     
@@ -298,10 +299,10 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     }
     
     pu.printd("");
-    pu.printd("Preview Building: sectionsIndividual:");
+    if (previewBuildingDebug) pu.printd("Preview Building: sectionsIndividual:");
     pu.printd(sectionsIndividual);
     pu.printd("");
-    pu.printd("Preview Building: sectionsGroup:");
+    if (previewBuildingDebug) pu.printd("Preview Building: sectionsGroup:");
     pu.printd(sectionsGroup);
   }
 
