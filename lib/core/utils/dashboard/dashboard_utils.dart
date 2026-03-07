@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -96,8 +97,8 @@ class DashboardUtils {
     var formatter = DateFormat('MMMM dd, yyyy').add_jm();
     var formattedDate = formatter.format(now);
 
-    _pu.printd("Session Data: formattedDate: $formattedDate");
-    _pu.printd("Session Data: analysisTitle: $analysisTitle");
+    if (sessionDataDebug) _pu.printd("Session Data: formattedDate: $formattedDate");
+    if (sessionDataDebug) _pu.printd("Session Data: analysisTitle: $analysisTitle");
 
     // Session data storage sample:
     // [{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
@@ -137,7 +138,7 @@ class DashboardUtils {
     sessionData = jsonDecode(fileContent);
     sessionData = sessionData.reversed.toList();
     _pu.printd("");
-    _pu.printd("Session Data: sessionData: $sessionData");
+    if (sessionDataDebug) _pu.printd("Session Data: sessionData: $sessionData");
     _pu.printd("");
     return sessionData;
   }

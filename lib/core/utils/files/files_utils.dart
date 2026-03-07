@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 
 import 'package:path/path.dart' as path;
 
@@ -132,8 +133,8 @@ class FileUtils
     String? folderPath = await _upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName.csv";
 
-    _pu.printd("_saveFileOnAndroid: success: $success");
-    _pu.printd("filePath: $filePath");
+    if (sessionDataDebug) _pu.printd("Session Data: _saveFileOnAndroid: success: $success");
+    if (sessionDataDebug) _pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
   }
@@ -152,8 +153,8 @@ class FileUtils
     String? folderPath = await _upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName.csv";
 
-    _pu.printd("_saveFileOnAndroid: success: $success");
-    _pu.printd("filePath: $filePath");
+    if (sessionDataDebug) _pu.printd("Session Data: _saveFileOnAndroid: success: $success");
+    if (sessionDataDebug) _pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
   }
@@ -211,11 +212,11 @@ class FileUtils
       if (await file.exists()) 
       {
         await file.delete();
-        _pu.printd("Session Data: File successfully deleted: $pathToCsv");
+        if (sessionDataDebug) _pu.printd("Session Data: File successfully deleted: $pathToCsv");
       } else 
       {
-        _pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCsv");
-        _pu.printd("Session Data: Current working directory: ${Directory.current.path}");
+        if (sessionDataDebug) _pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCsv");
+        if (sessionDataDebug) _pu.printd("Session Data: Current working directory: ${Directory.current.path}");
       }
     } on FileSystemException 
     // Specifically handling OS-level errors like permission issues

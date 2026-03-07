@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_desktop_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
@@ -421,10 +422,10 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
     var preCSVDataGroupPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
-    pu.printd("CSV building: preCSVDataIndividualPerspective");
+    if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     pu.printd("$preCSVDataIndividualPerspective");
     pu.printd("");
-    pu.printd("CSV building: preCSVDataGroupPerspective");
+    if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataGroupPerspective");
     pu.printd("$preCSVDataGroupPerspective");
     pu.printd("");
 
@@ -854,13 +855,13 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                       {
                         pu.printd("Shift-tab detected");
                         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
-                        pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
+                        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
                       }
                       else
                       {
                         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(true);
-                        pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
+                        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
                       } 
 
                       return KeyEventResult.ignored;
