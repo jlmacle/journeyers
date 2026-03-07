@@ -44,10 +44,9 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 
   getPreferences() async 
   {
-    pu.printd("\nEntering getPreferences");
+    pu.printd("\nPreferences: getPreferences()");
     _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
     _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved();
-
 
 
 
