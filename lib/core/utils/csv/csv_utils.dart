@@ -631,7 +631,7 @@ class CSVUtils
     if (Platform.isAndroid)
     {
       String fileName = path.basename(pathToCSVFile);
-      _pu.printd("csvFileToPreviewPerspectiveData on Android");
+      if (previewBuildingDebug) _pu.printd("csvFileToPreviewPerspectiveData on Android");
       final String content = await _fu.readTextContentOnAndroid(fileName);
       csvLines = LineSplitter.split(content).toList();
     }
