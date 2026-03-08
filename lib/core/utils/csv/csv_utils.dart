@@ -638,7 +638,7 @@ class CSVUtils
     else if (Platform.isIOS)
     {
       String fileName = path.basename(pathToCSVFile);
-      _pu.printd("csvFileToPreviewPerspectiveData on iOS");
+      if (previewBuildingDebug) _pu.printd("csvFileToPreviewPerspectiveData on iOS");
       final String content = await _fu.readTextContentOnIOS(fileName);
       csvLines = LineSplitter.split(content).toList();
     }
