@@ -13,6 +13,9 @@ The dashboard supports previewing, sorting by title/date, keyword filtering and 
 ([apk - alpha release](https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk)) <br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
+
+Developing at "[Digital Public Goods](https://www.digitalpublicgoods.net/standard)" level is planned, <br>
+as part of the app development growth process.<br>
 ([Flutter install](https://docs.flutter.dev/install))
 
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
