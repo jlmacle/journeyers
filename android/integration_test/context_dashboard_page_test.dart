@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:intl/intl.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
@@ -54,7 +55,7 @@ void main() async
         // ACCESSING THE APPLICATION SUPPORT DIRECTORY
         appSupportDir =  await getApplicationSupportDirectory();
         _pu.printd("");
-        _pu.printd("appSupportDir: $appSupportDir");
+        if (mobileDebug) _pu.printd("Mobile: appSupportDir: $appSupportDir");
         _pu.printd("");
 
         // TEST FILES CREATION
