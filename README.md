@@ -21,6 +21,7 @@ as part of the app development growth process.<br>
 [More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
 
 #WinWin4SustainableQualityOfLife<br>
+#ProactiveComplementingOfOurEducationalSystemWithRelationalHomework
 #SDG3
 <hr>
 Should we entrust the harmony of our households,<br>
