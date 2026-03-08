@@ -271,13 +271,11 @@ class CSVUtils
       } 
       else 
       {
-        _pu.printd("");
-        _pu.printd("Error: treatmentAccordingToInputType: no mapping found");
-        _pu.printd("Error: level3Title: $itemOrTitleLabel");
-        _pu.printd(
-          "Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}",
-        );
-        _pu.printd("");
+        if (csvBuildingDebug) _pu.printd("CSV Building");
+        if (csvBuildingDebug) _pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
+        if (csvBuildingDebug) _pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
+        if (csvBuildingDebug) _pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
+        if (csvBuildingDebug) _pu.printd("CSV Building");
       }
     }
 
@@ -551,11 +549,11 @@ class CSVUtils
       content += line;
     }
 
-    _pu.printd("");
+    if (csvBuildingDebug) _pu.printd("CSV Building");
     if (csvBuildingDebug) _pu.printd("CSV Building: csvDataIndividualPerspective:$csvDataIndividualPerspective");
-    _pu.printd("");
+    if (csvBuildingDebug) _pu.printd("CSV Building");
     if (csvBuildingDebug) _pu.printd("CSV Building: csvDataGroupPerspective:$csvDataGroupPerspective");
-    _pu.printd("");
+    if (csvBuildingDebug) _pu.printd("CSV Building");
 
 
     final dataBytes = Uint8List.fromList(utf8.encode(content));
