@@ -42,7 +42,7 @@ class _MyAppState extends State<MyApp>
     if (newLocale != _currentLocale) 
     {
       setState(() {
-        if (preferencesDebug) pu.printd("preferencesDebug: _setLocale: _currentLocale: $newLocale");
+        if (preferencesDebug) pu.printd("Preferences: _setLocale: _currentLocale: $newLocale");
         _currentLocale = newLocale;
       });
     }
