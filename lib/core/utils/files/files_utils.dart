@@ -220,7 +220,7 @@ class FileUtils
       }
     } on FileSystemException 
     // Specifically handling OS-level errors like permission issues
-    catch (e) {_pu.printd("FileSystemException: Could not delete file. ${e.message}");} 
+    catch (e) {_pu.printd("Session Data: FileSystemException: Could not delete file. ${e.message}");} 
     // General error handling
     catch (e) {_pu.printd("An unexpected error occurred while deleting the file: $e");}
   }
