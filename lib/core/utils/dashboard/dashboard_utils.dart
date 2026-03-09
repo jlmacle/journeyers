@@ -50,9 +50,7 @@ class DashboardUtils {
       List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      _pu.printd(
-        "Session file for $typeOfContextData created: $path/$fileName",
-      );
+      if (sessionDataDebug) _pu.printd("Session data: Session file for $typeOfContextData created: $path/$fileName");
     }
     return sessionFile;
   }
@@ -79,7 +77,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    _pu.printd('Session data: new session metadata: $sessionData saved to: ${file.path}');
+    if (sessionDataDebug) _pu.printd('Session data: new session metadata: $sessionData saved to: ${file.path}');
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
