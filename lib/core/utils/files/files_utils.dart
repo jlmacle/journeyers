@@ -63,8 +63,8 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {_pu.printd('$errorMsg ${e.message}');} 
-    catch (e) {_pu.printd('$errorMsg  $e');}
+    catch (e) {_pu.printd("File Utils: $errorMsg ${e.message}");} 
+    catch (e) {_pu.printd("$errorMsg  $e");}
   }
 
   /// Method used to create a file if necessary, and to add content to it.
