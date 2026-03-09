@@ -189,7 +189,7 @@ class DashboardUtils {
     } 
     else 
     {
-      _pu.printd("Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) _pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
     }
 
     File sessionFile = File('$path/$fileName');
