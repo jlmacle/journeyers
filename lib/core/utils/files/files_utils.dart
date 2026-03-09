@@ -222,7 +222,7 @@ class FileUtils
     // Specifically handling OS-level errors like permission issues
     catch (e) {_pu.printd("Session Data: FileSystemException: Could not delete file. ${e.message}");} 
     // General error handling
-    catch (e) {_pu.printd("An unexpected error occurred while deleting the file: $e");}
+    catch (e) {_pu.printd("Session Data: An unexpected error occurred while deleting the file: $e");}
   }
 
 // Method used to delete a file on Android
