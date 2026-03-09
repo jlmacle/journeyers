@@ -137,7 +137,7 @@ class DashboardUtils {
     sessionData = sessionData.reversed.toList();
     if (sessionDataDebug) _pu.printd("Session Data");
     if (sessionDataDebug) _pu.printd("Session Data: sessionData: $sessionData");
-    _pu.printd("");
+    if (sessionDataDebug) _pu.printd("Session Data");
     return sessionData;
   }
 
