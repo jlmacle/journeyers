@@ -163,7 +163,7 @@ class DashboardUtils {
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        _pu.printd('Session Data: Session with path $filePathToDelete removed from dashboard index.');
+        if (sessionDataDebug) _pu.printd('Session Data: Session with path $filePathToDelete removed from dashboard index.');
       } else {
         _pu.printd('No session found with path $filePathToDelete in dashboard index.');
       }
