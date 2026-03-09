@@ -40,7 +40,7 @@ class DashboardUtils {
     } else if (typeOfContextData == groupProblemSolvingsContext) {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } else {
-      _pu.printd("Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) _pu.printd("Session data: Error: Unexpected type of context data: $typeOfContextData");
     }
 
     File sessionFile = File('$path/$fileName');
