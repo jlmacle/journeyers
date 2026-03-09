@@ -86,7 +86,7 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException catch (e) {_pu.printd("Files Utils: $errorMsg ${e.message}");} 
-    catch (e) {_pu.printd("Files Utils:$errorMsg $e");}
+    catch (e) {_pu.printd("Files Utils: $errorMsg $e");}
   }
 
   /// Method used to get all the files with a specific extension in a directory.
