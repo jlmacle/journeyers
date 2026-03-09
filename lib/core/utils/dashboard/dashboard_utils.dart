@@ -199,7 +199,7 @@ class DashboardUtils {
     // Adding the data to the file
     var savedContent = jsonEncode(savedData);
     await sessionFile.writeAsString(savedContent);
-    _pu.printd("Session file for $typeOfContextData restored: $path/$fileName");
+    if (sessionDataDebug) _pu.printd("Session Data: Session file for $typeOfContextData restored: $path/$fileName");
 
   }
 
