@@ -40,8 +40,8 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {_pu.printd('File Utils: $errorMsg ${e.message}'); } 
-    catch (e) {_pu.printd('$errorMsg $e');}
+    catch (e) {_pu.printd("File Utils: $errorMsg ${e.message}"); } 
+    catch (e) {_pu.printd("File Utils: $errorMsg $e");}
   }
 
   /// Method used to add text at the beginning of a file.
