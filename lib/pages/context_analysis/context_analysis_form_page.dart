@@ -423,10 +423,10 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     var preCSVDataGroupPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
-    pu.printd("$preCSVDataIndividualPerspective");
+    if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
     pu.printd("");
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataGroupPerspective");
-    pu.printd("$preCSVDataGroupPerspective");
+    if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
     pu.printd("");
 
     List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
