@@ -22,7 +22,6 @@ as part of the app development growth process.<br>
 
 #WinWin4SustainableQualityOfLife<br>
 #ProactiveComplementingOfOurEducationalSystemWithRelationalHomework<br>
-#SDG3
 <hr>
 Should we entrust the harmony of our households,<br>
 or our work/life balance,<br>
