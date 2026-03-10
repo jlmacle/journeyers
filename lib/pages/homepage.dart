@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     pu.printd("Preferences");
     pu.printd("Preferences: localeLangCodeFromLangName: $localeLangCodeFromLangName");
-    pu.printd("localeLangCodeFromContext: $localeLangCodeFromContext");
+    pu.printd("Preferences: localeLangCodeFromContext: $localeLangCodeFromContext");
 
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {
