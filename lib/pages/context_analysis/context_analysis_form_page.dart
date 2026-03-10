@@ -410,7 +410,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     if (sessionDataDebug) pu.printd("Session Data");
     if (sessionDataDebug) pu.printd("Session Data: _enteredData");
     if (sessionDataDebug) pu.printd("Session Data: $_enteredData");
-    pu.printd("");
+    if (sessionDataDebug) pu.printd("Session Data");
   }
 
   // Method used to store the form data to CSV
