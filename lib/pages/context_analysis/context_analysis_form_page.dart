@@ -407,7 +407,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     // Adding individual and team perspective to root level data
     _enteredData = [level2TitleIndividualData, level2TitleGroupData];
 
-    pu.printd("");
+    if (sessionDataDebug) pu.printd("Session Data");
     pu.printd("Session Data: _enteredData");
     pu.printd("$_enteredData");
     pu.printd("");
