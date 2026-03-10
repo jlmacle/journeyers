@@ -424,10 +424,10 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
-    pu.printd("");
+    if (csvBuildingDebug) pu.printd("CSV Building");
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
-    pu.printd("");
+    if (csvBuildingDebug) pu.printd("CSV Building");
 
     List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
     List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
@@ -853,7 +853,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                       if(event.logicalKey == LogicalKeyboardKey.tab
                           && HardwareKeyboard.instance.isShiftPressed)
                       {
-                        pu.printd("Shift-tab detected");
+                        if (accessibilityDebug) pu.printd("Shift-tab detected");
                         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
