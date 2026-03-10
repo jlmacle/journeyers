@@ -409,7 +409,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
     if (sessionDataDebug) pu.printd("Session Data");
     if (sessionDataDebug) pu.printd("Session Data: _enteredData");
-    pu.printd("$_enteredData");
+    if (sessionDataDebug) pu.printd("Session Data: $_enteredData");
     pu.printd("");
   }
 
