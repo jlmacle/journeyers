@@ -24,7 +24,7 @@ as part of the app development growth process.<br>
 #ProactiveComplementingOfOurEducationalSystemWithRelationalHomework<br>
 <hr>
 Should we entrust the harmony of our households,<br>
-or our work/life balance,<br>
+or our workplace relationships,<br>
 to lose-win decision-making patterns?<br>
 Should we entrust our lives<br>
 to our potentially incomplete education on the matter,<br>
