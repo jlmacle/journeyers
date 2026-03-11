@@ -456,7 +456,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
       (){
-        pu.printd("Button used to save data reached");
+        if (accessibilityDebug) pu.printd("Accessibility: Button used to save data reached");
         // restoring focus capability to the bottom items
         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(true);
         // data helping to know if the user tab navigates back up
