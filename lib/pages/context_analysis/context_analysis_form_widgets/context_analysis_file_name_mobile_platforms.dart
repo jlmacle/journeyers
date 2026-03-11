@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
@@ -63,7 +64,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
     String? folderPathData = await upu.getApplicationFolderPath();
-    if (Platform.isAndroid || Platform.isIOS)  {pu.printd("folderPathData: $folderPathData");}
+    if (Platform.isAndroid || Platform.isIOS)  {    if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");}
     // Application folder path called from the Kotlin code    
     setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData ?? "";});
   }
