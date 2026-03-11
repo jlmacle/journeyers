@@ -50,8 +50,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved();
 
     setState(() {_preferencesLoading = false;});
-    pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
-    pu.printd("Preferences: _wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
+    if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
+    if (preferencesDebug) pu.printd("Preferences: _wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
 
     if ((_isInformationModalAlreadyAcknowledged == false) && mounted) 
     {
