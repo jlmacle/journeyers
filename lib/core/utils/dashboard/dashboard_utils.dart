@@ -40,7 +40,7 @@ class DashboardUtils {
     } else if (typeOfContextData == groupProblemSolvingsContext) {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } else {
-      if (sessionDataDebug) _pu.printd("Session data: Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) _pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
     }
 
     File sessionFile = File('$path/$fileName');
@@ -50,7 +50,7 @@ class DashboardUtils {
       List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      if (sessionDataDebug) _pu.printd("Session data: Session file for $typeOfContextData created: $path/$fileName");
+      if (sessionDataDebug) _pu.printd("Session Data: Session file for $typeOfContextData created: $path/$fileName");
     }
     return sessionFile;
   }
@@ -77,7 +77,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    if (sessionDataDebug) _pu.printd('Session data: new session metadata: $sessionData saved to: ${file.path}');
+    if (sessionDataDebug) _pu.printd('Session Data: new session metadata: $sessionData saved to: ${file.path}');
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
