@@ -436,7 +436,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
       await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
                           csvDataGroupPerspective: csvDataGroupPerspective,
                           fileName: _fileName);
-    pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
+    if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
     // Saving the dashboard data if filePath not null
     if (pathToCSVFile != null)
     {      
