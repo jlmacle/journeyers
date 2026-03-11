@@ -853,7 +853,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                       if(event.logicalKey == LogicalKeyboardKey.tab
                           && HardwareKeyboard.instance.isShiftPressed)
                       {
-                        if (accessibilityDebug) pu.printd("Shift-tab detected");
+                        if (accessibilityDebug) pu.printd("Accessibility: Shift-tab detected");
                         widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
