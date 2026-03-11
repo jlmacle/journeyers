@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
@@ -44,7 +45,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 
   getPreferences() async 
   {
-    pu.printd("Preferences: getPreferences()");
+    if (preferencesDebug) pu.printd("Preferences: getPreferences()");
     _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
     _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved();
 
