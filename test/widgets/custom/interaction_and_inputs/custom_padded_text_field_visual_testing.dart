@@ -25,7 +25,7 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp(theme: appTheme, home: HomePage());
+    return MaterialApp(theme: appTheme, home: const HomePage());
   }
 }
 //---------------------------------------------------

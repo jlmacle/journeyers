@@ -42,7 +42,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
             Focus
             (
               focusNode: groupProblemSolvingDashboardFocusNode,
-              child: Center(child: Text("Group problem-solving dashboard")),
+              child: const Center(child: Text("Group problem-solving dashboard")),
             ),
           ),
         ],

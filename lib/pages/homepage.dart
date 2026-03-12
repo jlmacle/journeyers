@@ -137,17 +137,17 @@ class _MyHomePageState extends State<MyHomePage>
                 (
                   AppLocalizations.of(context)?.appTitle ?? 'Issue with the application title text',
                   style: 
-                  TextStyle
+                  const TextStyle
                   (
                     fontSize: 22,
                     fontFamily: 'Georgia',
                   ), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
                 ),
-                Gap(5),
+                const Gap(5),
                 Text
                 (
                   AppLocalizations.of(context)?.appSubTitle ?? 'Issue with the application subtitle text',
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ],
             ),
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage>
         PreferredSize
         (
           preferredSize: const Size.fromHeight(4.0), // the height of the border
-          child: Container(color: Color(0xFFBF9D3E), height: 4.0),
+          child: Container(color: const Color(0xFFBF9D3E), height: 4.0),
         ),
       ),
 

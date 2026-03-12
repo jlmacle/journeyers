@@ -36,7 +36,7 @@ class MyTestingApp extends StatefulWidget
 
 class _MyTestingAppState extends State<MyTestingApp> 
 {
-  Locale? _currentLocale = Locale('en'); // TODO: to get eventually the value from user preferences
+  Locale? _currentLocale = const Locale('en'); // TODO: to get eventually the value from user preferences
 
   void _setLocale(Locale newLocale) 
   {

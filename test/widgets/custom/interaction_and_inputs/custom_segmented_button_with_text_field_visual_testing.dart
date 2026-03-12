@@ -26,7 +26,7 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp(theme: appTheme, home: HomePage());
+    return MaterialApp(theme: appTheme, home: const HomePage());
   }
 }
 //---------------------------------------------------
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
             ),
-            Gap(16),
+            const Gap(16),
             CustomSegmentedButtonWithTextField
             (
               textOption1: "Yes",
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage>
               parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
               parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction,
             ),
-            Gap(16),
+            const Gap(16),
             Center
             (
               child: 
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage>
                     children: 
                     [
                       Text('You selected: ${(_selectedValues.toString()).replaceAll('{', "").replaceAll('}', "")}.', style: feedbackMessageStyle),
-                      Gap(10),
+                      const Gap(10),
                       Text('You typed: ${_textContent ?? "No text typed yet."}', style: feedbackMessageStyle),
                     ],
                   ),

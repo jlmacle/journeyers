@@ -328,8 +328,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 10),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, bottom: 10),
                   child: CustomHeading(headingText: "Previous session data", headingLevel: 2),
                 ),
                 _buildFilterAndSortBar(),
@@ -504,7 +504,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                         _sortSessionsByTitle();
                       });
                     },
-                    icon: Icon
+                    icon: const Icon
                     (
                       Icons.sort_by_alpha,
                       color: Colors.black,

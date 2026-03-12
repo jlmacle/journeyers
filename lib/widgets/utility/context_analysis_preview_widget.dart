@@ -303,14 +303,14 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     if (previewBuildingDebug) pu.printd(sectionsIndividual);
     if (previewBuildingDebug) pu.printd("Preview Building");
     if (previewBuildingDebug) pu.printd("Preview Building: sectionsGroup:");
-    pu.printd(sectionsGroup);
+    if (previewBuildingDebug) pu.printd(sectionsGroup);
   }
 
   @override
   Widget build(BuildContext context) 
   {
     return _isLoading
-      ?  Center(child:CircularProgressIndicator())
+      ?  const Center(child:CircularProgressIndicator())
       :  Column
         (
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -346,7 +346,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                           (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
                       ).isEmpty
                     )
-                      Padding
+                      const Padding
                       (
                         padding: EdgeInsets.only(left:16, top:8, bottom:8),
                         child: Text
@@ -415,7 +415,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                     ],
                 ],
               ),
-              Divider(thickness: 3, color: Colors.black),
+              const Divider(thickness: 3, color: Colors.black),
               Column
               (
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -427,7 +427,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                     child: Text
                     (
                       sectionsGroup['title'],
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                     ),
                   ),
                   // Questions and potential answers for the group perspective
@@ -446,7 +446,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
                       [
                         ListTile
                         (
-                          leading: Icon(Icons.text_snippet),
+                          leading: const Icon(Icons.text_snippet),
                           title: Text                            
                           ( 
                             question["items"]["segValue"] == null

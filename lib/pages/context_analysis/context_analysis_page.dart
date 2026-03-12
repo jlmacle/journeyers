@@ -63,7 +63,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
           return 
           AlertDialog
           (
-            contentPadding: EdgeInsets.only(top: 25),
+            contentPadding: const EdgeInsets.only(top: 25),
             content: 
             Focus
             (
@@ -146,7 +146,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
         [
           // Circular progress indicator while preferences are loading
           if (_preferencesLoading)
-            Center(child: CircularProgressIndicator())
+            const Center(child: CircularProgressIndicator())
           // When preferences are loaded
           else ...
           [
@@ -164,16 +164,16 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                     onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
                     style: ElevatedButton.styleFrom
                     (
-                      padding: EdgeInsets.only(top: 10, bottom: 16),
-                      shape: RoundedRectangleBorder
+                      padding: const EdgeInsets.only(top: 10, bottom: 16),
+                      shape: const RoundedRectangleBorder
                       (
                         borderRadius: BorderRadius.zero,
                       ),
                     ),
-                    child: Text("Please click to start\na new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
+                    child: const Text("Please click to start\na new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
                   ),
               ),
-              Divider(thickness: 3, height: 0),
+              const Divider(thickness: 3, height: 0),
               // and the session data dashboard in the remaining space
               Expanded
               (

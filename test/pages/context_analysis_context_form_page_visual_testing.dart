@@ -25,7 +25,7 @@ class MyTestingApp extends StatefulWidget {
 class _MyTestingAppState extends State<MyTestingApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: appTheme, home: HomePage());
+    return MaterialApp(theme: appTheme, home: const HomePage());
   }
 }
 //---------------------------------------------------
@@ -59,8 +59,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
+      body: const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Center(child: ContextAnalysisFormPage()),
       ),
     );
