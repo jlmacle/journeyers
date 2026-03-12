@@ -55,7 +55,7 @@ void main() async
         // ACCESSING THE APPLICATION SUPPORT DIRECTORY
         appSupportDir =  await getApplicationSupportDirectory();
         _pu.printd("");
-        if (mobileDebug) _pu.printd("Mobile: appSupportDir: $appSupportDir");
+        _pu.printd("Mobile: appSupportDir: $appSupportDir");
         _pu.printd("");
 
         // TEST FILES CREATION
