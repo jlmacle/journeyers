@@ -86,7 +86,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     if (sessionDataDebug) pu.printd("Session Data: fileNamesList: $fileNamesList");
 
     String completeFileName = "$value.csv";
-    pu.printd("Session Data: completeFileName: |$completeFileName|");
+    if (sessionDataDebug) pu.printd("Session Data: completeFileName: |$completeFileName|");
      
     // if the file name exists already
     if (fileNamesList.contains(completeFileName))
