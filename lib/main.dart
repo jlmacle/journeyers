@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp>
       // showSemanticsDebugger: true,
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      localizationsDelegates: 
+      localizationsDelegates: const
       [
         AppLocalizations.delegate,
 

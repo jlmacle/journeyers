@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // TODO: to clean at some point. That probably can be simplified.
 
 //*********************  Colors  *********************//
-const Color navyBlue = const Color(0xFF0a2e50);
+const Color navyBlue = Color(0xFF0a2e50);
 const Color paleCyan = Color(0xFFE9FAFC);
 const Color appBarWhite = Color(0xFFf6f1e9);
 

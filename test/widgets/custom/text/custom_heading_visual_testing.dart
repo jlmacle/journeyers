@@ -98,7 +98,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   (
                     focusNode: headingLevel1FocusNode,
                     child: 
-                    CustomHeading
+                    const CustomHeading
                     (
                       headingText: "A heading level 1",
                       headingLevel: 1,
@@ -106,7 +106,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               MergeSemantics
               (
                 child: 
@@ -119,7 +119,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   (
                     focusNode: headingLevel2FocusNode,
                     child: 
-                    CustomHeading
+                    const CustomHeading
                     (
                       headingText: "A heading level 2",
                       headingLevel: 2,
@@ -127,7 +127,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               MergeSemantics
               (
                 child: 
@@ -140,7 +140,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   (
                     focusNode: headingLevel3FocusNode,
                     child: 
-                    CustomHeading
+                    const CustomHeading
                     (
                       headingText: "A heading level 3",
                       headingLevel: 3,
@@ -148,7 +148,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               MergeSemantics
               (
                 child: 
@@ -161,7 +161,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   (
                     focusNode: headingLevel4FocusNode,
                     child: 
-                    CustomHeading
+                    const CustomHeading
                     (
                       headingText: "A heading level 4",
                       headingLevel: 4,
@@ -169,7 +169,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               MergeSemantics
               (
                 child: 
@@ -182,7 +182,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   (
                     focusNode: headingLevel5FocusNode,
                     child: 
-                    CustomHeading
+                    const CustomHeading
                     (
                       headingText: "A heading level 5",
                       headingLevel: 5,
@@ -190,7 +190,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               MergeSemantics
               (
                 child: 
@@ -203,7 +203,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   (
                     focusNode: headingLevel6FocusNode,
                     child: 
-                    CustomHeading
+                    const CustomHeading
                     (
                       headingText: "A heading level 6",
                       headingLevel: 6,
@@ -211,7 +211,7 @@ class _MyTestingAppState extends State<MyTestingApp>
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
             ],
           ),
         ),
