@@ -173,7 +173,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     await _fu.deleteCsvFile(filePath);
 
     // Removing dashboard data
-    await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathToDelete: filePath);
+    await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating state data
     setState(() 
@@ -222,7 +222,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       await _du.deleteSessionData
       (
         typeOfContextData: DashboardUtils.contextAnalysesContext, 
-        filePathToDelete: filePath
+        filePathRelatedToDataToDelete: filePath
       );
     }
 
