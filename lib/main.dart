@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp>
       // "By default only the American English locale is supported. 
       // Apps should configure this list to match the locales they support."
       // https://api.flutter.dev/flutter/material/MaterialApp/supportedLocales.html
-      supportedLocales: 
+      supportedLocales: const
       [
         Locale('en'), // English
         Locale('fr'), // French
