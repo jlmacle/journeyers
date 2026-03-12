@@ -300,7 +300,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
     
     if (previewBuildingDebug) pu.printd("Preview Building");
     if (previewBuildingDebug) pu.printd("Preview Building: sectionsIndividual:");
-    pu.printd(sectionsIndividual);
+    if (previewBuildingDebug) pu.printd(sectionsIndividual);
     if (previewBuildingDebug) pu.printd("Preview Building");
     if (previewBuildingDebug) pu.printd("Preview Building: sectionsGroup:");
     pu.printd(sectionsGroup);
