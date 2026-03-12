@@ -135,9 +135,7 @@ class DashboardUtils {
     String fileContent = sessionFile.readAsStringSync();
     sessionData = jsonDecode(fileContent);
     sessionData = sessionData.reversed.toList();
-    if (sessionDataDebug) _pu.printd("Session Data");
-    if (sessionDataDebug) _pu.printd("Session Data: sessionData: $sessionData");
-    if (sessionDataDebug) _pu.printd("Session Data");
+
     return sessionData;
   }
 
