@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 
 // Utility class
@@ -31,7 +32,7 @@ class CustomLanguageSwitch extends StatefulWidget
   List<String> getLanguages(BuildContext context) 
   {
     List<String> dropdownItems = [];
-    _pu.printd("Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");
+    if (preferencesDebug) _pu.printd("Preferences: Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");
     dropdownItems = L10nLanguages.getLanguages(buildContext: context);
     return dropdownItems;
   }
