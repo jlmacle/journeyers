@@ -83,7 +83,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     {result = await platformIOS.invokeMethod('listFiles');}
     
     List<String> fileNamesList = result.cast<String>();
-    pu.printd("Session Data: fileNamesList: $fileNamesList");
+    if (sessionDataDebug) pu.printd("Session Data: fileNamesList: $fileNamesList");
 
     String completeFileName = "$value.csv";
     pu.printd("Session Data: completeFileName: |$completeFileName|");
