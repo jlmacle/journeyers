@@ -33,7 +33,7 @@ class MyTestingApp extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
-    return MaterialApp(theme: appTheme, home: HomePage());
+    return MaterialApp(theme: appTheme, home: const HomePage());
   }
 }
 //---------------------------------------------------
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage>
             parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
             parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction,
           ),
-          Gap(8),
+          const Gap(8),
           Padding
           (
             padding: const EdgeInsets.only(left: 20.0),
@@ -142,11 +142,11 @@ class _HomePageState extends State<HomePage>
               textStyle: feedbackMessageStyle,
             ),
           ),
-          Gap(8),
+          const Gap(8),
           ElevatedButton
           (
             onPressed: transferDataToJsonFile,
-            child: CustomFocusableText
+            child: const CustomFocusableText
             (
               text: "Click to save the data (json for this demo)",
               textStyle: elevatedButtonTextStyle,

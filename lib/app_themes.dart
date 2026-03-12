@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 // TODO: to clean at some point. That probably can be simplified.
 
 //*********************  Colors  *********************//
-final Color navyBlue = Color(0xFF0a2e50);
-final Color paleCyan = Color(0xFFE9FAFC);
-final Color appBarWhite = Color(0xFFf6f1e9);
+const Color navyBlue = const Color(0xFF0a2e50);
+const Color paleCyan = Color(0xFFE9FAFC);
+const Color appBarWhite = Color(0xFFf6f1e9);
 
 //*********************  Gaps  *********************//
 // Gaps: gaps for the context analysis form
-final double postHeadingLevel2Gap = 20;
-final double preAndPostLevel2DividerGap = 20;
-final double preAndPostLevel3DividerGap = 15;
-final double level3AndSegmentedButtonGap = 15;
-final double betweenLevel2DividerThickness = 3;
-final double betweenLevel3DividerThickness = 1;
+const double postHeadingLevel2Gap = 20;
+const double preAndPostLevel2DividerGap = 20;
+const double preAndPostLevel3DividerGap = 15;
+const double level3AndSegmentedButtonGap = 15;
+const double betweenLevel2DividerThickness = 3;
+const double betweenLevel3DividerThickness = 1;
 
 
 //*********************  Padding  *********************//
 // Paddings: elevated buttons padding
-final double elevatedButtonPadding = 20;
-final double elevatedButtonPaddingTop = 20;
-final double elevatedButtonPaddingBottom = 20;
+const double elevatedButtonPadding = 20;
+const double elevatedButtonPaddingTop = 20;
+const double elevatedButtonPaddingBottom = 20;
 
 
 //*********************  Text Styles  *********************//
@@ -56,27 +56,27 @@ const TextStyle selectedCheckboxTextStyle = TextStyle
   decoration: TextDecoration.underline
 );
 
-final TextStyle elevatedButtonTextStyle = TextStyle
+const TextStyle elevatedButtonTextStyle = TextStyle
 (
   fontSize: 20,
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle customExpansionTileTextStyle = TextStyle
+const TextStyle customExpansionTileTextStyle = TextStyle
 (
   color: Colors.black,
   fontSize: 20,
   fontWeight: FontWeight.w500,
 );
 
-final TextStyle styleExpansionTileTitle = TextStyle
+const TextStyle styleExpansionTileTitle = TextStyle
 (
   fontSize: 20, fontWeight: FontWeight.w500
 );
 
-final TextStyle styleExpandedTitleSubTitle = TextStyle(fontSize: 16);
+TextStyle styleExpandedTitleSubTitle = const TextStyle(fontSize: 16);
 
-final TextStyle feedbackMessageStyle = TextStyle
+TextStyle feedbackMessageStyle = const TextStyle
 (
   fontSize: 18,
   fontWeight: FontWeight.normal,
@@ -107,21 +107,21 @@ const TextStyle elevatedButtonSaveDataOnDesktopStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle dialogStyle = TextStyle
+const TextStyle dialogStyle = TextStyle
 (
   color: Colors.black,
   fontSize: 20,
   fontWeight: FontWeight.normal,
 );
 
-final TextStyle dialogAcknowledgedStyle = TextStyle
+const TextStyle dialogAcknowledgedStyle = TextStyle
 (
   color: Colors.black,
   fontSize: 20,
 );
 
 // Text styles: dashboard page related styles
-final TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
+const TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
 
 
 //*********************  Text Field Hints  *********************//
@@ -146,14 +146,14 @@ const String textFieldHint = 'Please enter some text';
 
 //*********************  ThemeData  *********************//
 // ThemeData
-final ThemeData appTheme = ThemeData
+ThemeData appTheme = ThemeData
 (
   scaffoldBackgroundColor:
       Colors.white, // left appbar, text field, checkboxes not in white
 
 
   //*********************  AppBarTheme  *********************//
-  appBarTheme: AppBarTheme
+  appBarTheme: const AppBarTheme
   (
     backgroundColor: navyBlue,
     elevation: 0,
@@ -168,12 +168,12 @@ final ThemeData appTheme = ThemeData
 
 
   //*********************  BannerTheme  *********************//
-  bannerTheme: MaterialBannerThemeData
+  bannerTheme: const MaterialBannerThemeData
   (
-    backgroundColor: const Color.fromARGB(255, 13, 13, 49),
+    backgroundColor: Color.fromARGB(255, 13, 13, 49),
   ),
 
-  bottomNavigationBarTheme: BottomNavigationBarThemeData
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData
   (
     selectedItemColor: Color(0xFFf6f1e9), // appbar white
     unselectedItemColor: Color(0xFFf6f1e9), // appbar white
@@ -221,7 +221,7 @@ final ThemeData appTheme = ThemeData
   (
     backgroundColor: navyBlue,
   
-    labelStyle: TextStyle
+    labelStyle: const TextStyle
     (
       color: Color(0xFFf6f1e9), // appbar white
       fontSize: 16,
@@ -245,7 +245,7 @@ final ThemeData appTheme = ThemeData
 
 
   //*********************  ColorScheme  *********************//
-  colorScheme: ColorScheme.light
+  colorScheme: const ColorScheme.light
   (
     surface: Colors.white, // succeeded for text field, checkboxes
   ),

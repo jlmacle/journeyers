@@ -31,12 +31,12 @@ class _ContextAnalysisTitleState extends State<ContextAnalysisTitle>
   Widget build(BuildContext context) {
     return 
     Padding(
-      padding: EdgeInsets.only(top: 16.0, bottom:16 ),
+      padding: const EdgeInsets.only(top: 16.0, bottom:16 ),
       child: TextField
       (
         textAlign: TextAlign.center,
         style: analysisTextFieldStyle,
-        decoration: InputDecoration
+        decoration: const InputDecoration
         (
           hint: Center(child: Text("Please enter a title for this analysis.", style: analysisTextFieldHintStyle)),
           hintStyle: analysisTextFieldHintStyle,                    

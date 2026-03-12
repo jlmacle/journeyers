@@ -19,9 +19,9 @@ class FileUtils
 {
 
   /// Channel used for communicating with Android
-  var platformAndroid = MethodChannel('dev.journeyers/saf');
+  var platformAndroid = const MethodChannel('dev.journeyers/saf');
   /// Channel used for communicating with IOS
-  var platformIOS = MethodChannel('dev.journeyers/iossaf');
+  var platformIOS = const MethodChannel('dev.journeyers/iossaf');
 
   /// Method used to append text at the end of a file.
   Future<void> addTextAtFileEnd

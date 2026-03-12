@@ -24,7 +24,7 @@ class MyTestingApp extends StatefulWidget {
 class _MyTestingAppState extends State<MyTestingApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: appTheme, home: HomePage());
+    return MaterialApp(theme: appTheme, home: const HomePage());
   }
 }
 //---------------------------------------------------
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: SingleChildScrollView
+      body: const SingleChildScrollView
       (
         child: ContextAnalysisPreviewWidget(pathToCsvData: r"test\pages\csv_files\context_analysis.csv")
       ),

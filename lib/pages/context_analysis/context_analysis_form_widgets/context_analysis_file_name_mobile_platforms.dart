@@ -188,7 +188,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
       style: analysisTextFieldStyle,
       decoration: InputDecoration
       (
-          hint: Center(child: Text('Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
+          hint: const Center(child: Text('Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
           errorText: _errorMessageForFileName,
           errorMaxLines: 3
       ),

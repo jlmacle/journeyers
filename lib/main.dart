@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp>
 
   // Temporarily defining English as the locale
   // TODO: to get eventually the value from user preferences
-  Locale? _currentLocale = Locale('en');
+  Locale? _currentLocale = const Locale('en');
   // To get the locale from the platform
   // Locale? _currentLocale = PlatformDispatcher.instance.locale;
 
