@@ -145,7 +145,7 @@ class DashboardUtils {
   /// It identifies the session by its unique file path.
   Future<void> deleteSessionData({
     required String typeOfContextData,
-    required String filePathToDelete,
+    required String filePathRelatedToDataToDelete,
   }) async {
     try {
       // Retrieving the correct JSON file based on the context
@@ -157,18 +157,18 @@ class DashboardUtils {
 
       // Removing the record where the filePath matches the target
       int originalLength = recordsList.length;
-      recordsList.removeWhere((session) => session[keyFilePath] == filePathToDelete);
+      recordsList.removeWhere((session) => session[keyFilePath] == filePathRelatedToDataToDelete);
 
       // If a record was removed, saving the updated list back to the file
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        if (sessionDataDebug) _pu.printd("Session Data: Session with path $filePathToDelete removed from dashboard index.");
+        if (sessionDataDebug) _pu.printd("Session Data: Session data with path $filePathRelatedToDataToDelete removed from dashboard data.");
       } else {
-        if (sessionDataDebug) _pu.printd("Session Data: No session found with path $filePathToDelete in dashboard index.");
+        if (sessionDataDebug) _pu.printd("Session Data: No session data found with path $filePathRelatedToDataToDelete in dashboard data.");
       }
     } catch (e) {
-      if (sessionDataDebug) _pu.printd("Session Data: Error deleting session data from dashboard index: $e");
+      if (sessionDataDebug) _pu.printd("Session Data: Error deleting session data from dashboard data: $e");
     }
   }
 
