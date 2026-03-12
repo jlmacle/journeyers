@@ -61,7 +61,7 @@ class _MyTestingAppState extends State<MyTestingApp>
           ),
         ),
         body: 
-        Center
+        const Center
         (
           child: 
           CustomFocusableText
