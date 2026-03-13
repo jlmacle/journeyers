@@ -466,14 +466,13 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     );    
   }
 
-  
+  //**************** SCROLLCONTROLLER related data ****************//
+  final ScrollController scrollController = ScrollController();
+    double scrollbarThickness = 0;
 
   @override
   Widget build(BuildContext context) 
   {
-    final ScrollController scrollController = ScrollController();
-    double scrollbarThickness = 0;
-
     // TODO: to modify for tablets
     if (defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS)
     {scrollbarThickness = 15;}
