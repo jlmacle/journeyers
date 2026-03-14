@@ -35,8 +35,6 @@ class CSVUtils
   /// Straight double quotes used to encapsulate the content of answered questions.
   String quotesForCSV = '"';
 
-
-
   //************** Mapping questions to input widgets to process data according to input widgets *************//
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
   Map<String, String> mappingLabelsToInputItems = {};
@@ -71,8 +69,6 @@ class CSVUtils
   //************** The data structure to return *************//
   /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
   List<dynamic> preCSVData = [];
-
-
 
   CSVUtils() {
     // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -223,6 +219,7 @@ class CSVUtils
 
     textFieldPreCSVData.add(data);
 
+    print("textFieldPreCSVData: $textFieldPreCSVData");
     return textFieldPreCSVData;
   }
 
@@ -240,7 +237,7 @@ class CSVUtils
     List<dynamic> preCSVData = [];
 
     /// Method adding to the pre-CSV data according to input type.
-    treatmentAccordingToInputType(
+    Future<List<dynamic>> treatmentAccordingToInputType(
       List<dynamic> preCSVData,
       String itemOrTitleLabel,
       LinkedHashMap<String, dynamic> titleLevel2Or3DataAsLinkedHashMap,
@@ -283,6 +280,7 @@ class CSVUtils
         if (csvBuildingDebug) _pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
         if (csvBuildingDebug) _pu.printd("CSV Building");
       }
+      return preCSVData;
     }
 
     // There is only one key in the perspective data, one of the two level 2 titles
@@ -312,7 +310,7 @@ class CSVUtils
           // Adding the item label
           preCSVData.add(["", itemLabel]);
           // Adding input data
-          treatmentAccordingToInputType(
+          await treatmentAccordingToInputType(
             preCSVData,
             itemLabel,
             level3TitleItemsDataAsLinkedHashMap,
@@ -323,7 +321,7 @@ class CSVUtils
       // Checking the type of input item that the level 3 title refers to
       else {
         // Adding input data
-        treatmentAccordingToInputType(
+        await treatmentAccordingToInputType(
           preCSVData,
           level3Title,
           perspectiveDataAsLinkedHashMap,
