@@ -592,7 +592,7 @@ class CSVUtils
   //*****************  Methods retrieving the CSV data for edition or viewing: beginning  ***********************//
   
   // Method used to map a line of CSV to data
-  List<String> _csvLineToData(String line)
+  Future<List<String>> _csvLineToData(String line) async
   {
     List<String> data = [];
     bool inQuotes = false;
@@ -659,7 +659,7 @@ class CSVUtils
     // Mapping the data toward the individual and group perspectives
     for(var line in csvLines)
     {
-      List<String> lineData = _csvLineToData(line);
+      List<String> lineData = await _csvLineToData(line);
 
       // 5 fields
       // the first 2 fields are for the individual perspective
