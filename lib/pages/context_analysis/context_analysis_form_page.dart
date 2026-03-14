@@ -281,7 +281,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
   // Method used to store the data entered in the checkboxes, text fields and segmented buttons
-  void dataStructureBuilding() 
+  Future<void> dataStructureBuilding() async  
   {
     // Using LinkedHashMaps for an insertion-ordered hash table based.
 
@@ -417,7 +417,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   // Method used to store the form data to CSV
   Future<void> print2CSV() async 
   { 
-    dataStructureBuilding();
+    await dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
     var preCSVDataIndividualPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[0]);
