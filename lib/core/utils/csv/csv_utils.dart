@@ -231,9 +231,10 @@ class CSVUtils
   /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
   /// The data should be either the individual perspective data, or the group/team perspective data.
   /// The individual perspective data and the group/team perspective data are planned to be written side by side in the CSV file.
-  List<dynamic> dataToPreCSV({
+  Future<List<dynamic>> dataToPreCSV({
     required LinkedHashMap<String, dynamic> perspectiveData,
-  }) {
+  }) async 
+  {
     List<dynamic> preCSVData = [];
 
     /// Method adding to the pre-CSV data according to input type.

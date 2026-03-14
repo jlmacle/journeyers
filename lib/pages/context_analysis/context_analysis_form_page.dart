@@ -420,8 +420,8 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
-    var preCSVDataIndividualPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[0]);
-    var preCSVDataGroupPerspective = cu.dataToPreCSV(perspectiveData: _enteredData[1]);
+    var preCSVDataIndividualPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[0]);
+    var preCSVDataGroupPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
