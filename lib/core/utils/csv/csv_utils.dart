@@ -212,9 +212,10 @@ class CSVUtils
   /// Method extracting information from {textField: "data"/null}
   /// and returning \[\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  List<dynamic> textFieldDataToPreCSV({
+  Future<List<dynamic>> textFieldDataToPreCSV({
     required LinkedHashMap<String, dynamic> textFieldData,
-  }) {
+  }) async
+  {
     List<dynamic> textFieldPreCSVData = [];
 
     var dataTextField = textFieldData[FormUtils.textField] ?? "";
@@ -269,7 +270,7 @@ class CSVUtils
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
       else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
           FormUtils.textField) {
-        var textFieldpreCSVData = textFieldDataToPreCSV(
+        var textFieldpreCSVData = await textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel],
         );
         preCSVData.add(textFieldpreCSVData[0]);
