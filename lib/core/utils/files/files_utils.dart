@@ -91,13 +91,13 @@ class FileUtils
 
   /// Method used to get all the files with a specific extension in a directory.
   /// This method assumes a fileExtension parameter with the format ".fileExtension".
-  List<File> getFilesWithExtensionInDirectory
+  Future<List<File>> getFilesWithExtensionInDirectory
   ({
     required String directoryPath,
     required String fileExtension,
     required bool searchIsRecursive,
     bool followsLinks = false,
-  }) 
+  }) async
   {
     List<File> fileList = [];
     Directory fileDir = Directory(directoryPath);
