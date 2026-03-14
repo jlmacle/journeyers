@@ -49,7 +49,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       
     _usedKeywords = await _getUsedKeywords(data);
     _allSessions = data;
-    _sortSessionsByDate();
+    await _sortSessionsByDate();
     setState(() {
       _isDataLoading = false;
     });
@@ -78,7 +78,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   final List<String> _selectedKeywords = [];
 
   // Method used to sort session data by date
-  void _sortSessionsByDate() 
+  Future<void> _sortSessionsByDate() async
   {
     _allSessions?.sort((a, b) 
     {
@@ -86,11 +86,12 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       DateTime dateB = DateFormat('MMMM dd, yyyy').add_jm().parse(b[DashboardUtils.keyDate]);
       return _isAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
     });
-    _applyFilters();
+    await _applyFilters();
   }
  
   // Method used to sort session data by title 
-  void _sortSessionsByTitle() {
+  Future<void> _sortSessionsByTitle() async
+  {
     _allSessions?.sort((a, b) {
       String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
       String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
@@ -99,7 +100,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           ? titleA.compareTo(titleB) 
           : titleB.compareTo(titleA);
     });
-    _applyFilters();
+    await _applyFilters();
   }
 
   // Method used to filter the session data by keywords
@@ -122,9 +123,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
 
   // Method used to add/remove the keyword from the filtering criteria
-  void _toggleFilter(String keyword) 
+  Future<void> _toggleFilter(String keyword) async
   {
-    setState(() 
+    setState(() async
     {
       if (_selectedKeywords.contains(keyword)) 
       {
@@ -134,7 +135,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       {
         _selectedKeywords.add(keyword);
       }
-      _applyFilters();
+      await _applyFilters();
     });
   }
  
@@ -176,7 +177,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating state data
-    setState(() 
+    setState(() async
     {
       _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
               
@@ -190,7 +191,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       _refreshKeywords();
       
       // Refreshing the filtered list
-      _applyFilters();
+      await _applyFilters();
 
       // Displaying an informational message
       ScaffoldMessenger.of(context).showSnackBar
@@ -227,7 +228,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
 
     // Updating UI state after all physical operations are done
-    setState(() 
+    setState(() async
     {
       _allSessions?.removeWhere
       (
@@ -241,7 +242,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       _refreshKeywords();
 
       // Refreshing the filtered list
-      _applyFilters();
+      await _applyFilters();
     });
 
     // Displaying an informational message
@@ -289,7 +290,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   Future<void> updateSessionKeywords(String filePath, List<String> newKeywords) async 
   {
     List<dynamic>? previousKeywords;
-    setState(() {
+    setState(() async
+    {
       final sessionIndex = _allSessions?.indexWhere(
         (s) => s[DashboardUtils.keyFilePath] == filePath
       );
@@ -301,7 +303,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       }
 
       _refreshKeywords(); // Updates the keywords list
-      _applyFilters();    // Refreshes the filtered view
+      await _applyFilters();    // Refreshes the filtered view
       
       if ( ! previousKeywords!.equals(newKeywords) )
       {
@@ -499,9 +501,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   // Sorting by title
                   TextButton.icon(
                     onPressed: () {
-                      setState(() {
+                      setState(() async
+                      {
                         _isAscendingTitle = !_isAscendingTitle;
-                        _sortSessionsByTitle();
+                        await _sortSessionsByTitle();
                       });
                     },
                     icon: const Icon
@@ -520,10 +523,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   (
                     onPressed: () 
                     {
-                      setState(() 
+                      setState(() async
                       {
                         _isAscendingDate = !_isAscendingDate;
-                        _sortSessionsByDate();
+                        await _sortSessionsByDate();
                       });
                     },
                     icon: Icon
@@ -564,7 +567,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 return FilterChip
                 (
                   label: Text(kw),
-                  onSelected: (_) => _toggleFilter(kw),
+                  onSelected: (_) async => await _toggleFilter(kw),
                   selected: _selectedKeywords.contains(kw)
                 );
               }
