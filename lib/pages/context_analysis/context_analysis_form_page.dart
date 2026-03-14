@@ -275,8 +275,6 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
   _setEarningAbilityTextFieldState(String newValue) {_earningAbilityTextFieldContent = newValue;}
 
-  _setAnalysisTitleTextFieldState(String newValue) {_analysisTitle = newValue;}
-
   //**************** DATA STRUCTURE related data and methods ****************/
   // Data structure
   List<LinkedHashMap<String, dynamic>> _enteredData = [];
