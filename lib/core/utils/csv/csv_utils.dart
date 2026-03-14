@@ -189,9 +189,10 @@ class CSVUtils
   /// Method extracting information from {segmentedButton: "Yes"/"No"/"I don't know"/null , textField: "data"/null}
   /// and returning \[\[segmentedButton,"Yes"/"No"/"I don't know"/""\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  List<dynamic> segmentedButtonWithTextFieldDataToPreCSV({
+  Future<List<dynamic>> segmentedButtonWithTextFieldDataToPreCSV({
     required LinkedHashMap<String, dynamic> segmentedButtonWithTextFieldData,
-  }) {
+  }) async
+  {
     List<dynamic> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
@@ -258,7 +259,7 @@ class CSVUtils
       else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
           FormUtils.segmentedButton) {
         var segmentedButtonPreCSVData =
-            segmentedButtonWithTextFieldDataToPreCSV(
+            await segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
                   titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel],
             );
