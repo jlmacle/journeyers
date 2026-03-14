@@ -430,8 +430,8 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building");
 
-    List<dynamic> csvDataIndividualPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
-    List<dynamic> csvDataGroupPerspective = cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
+    List<dynamic> csvDataIndividualPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
+    List<dynamic> csvDataGroupPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
     String? pathToCSVFile = 
       await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 

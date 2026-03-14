@@ -346,7 +346,8 @@ class CSVUtils
   /// "textField was replaced with "Notes" during the pre-CSV processing.
   ///
   /// Addition of a ["",""] before all level 3 titles.
-  List<dynamic> preCSVToCSVData({required List<dynamic> preCSVData}) {
+  Future<List<dynamic>> preCSVToCSVData({required List<dynamic> preCSVData}) async
+  {
     //*************** Analyzing the data for checkboxes with "false", and text fields with empty notes ****************//
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
