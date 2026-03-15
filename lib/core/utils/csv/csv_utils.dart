@@ -612,7 +612,7 @@ class CSVUtils
       else
       {
         itemData += char;
-        if (char == quotesForCSV) { inQuotes = !inQuotes; }
+        if (char == quotesForCSV) inQuotes = !inQuotes;
       }      
     }
     // Adding the last item data (no ',' reachable for the last item with the current code)
