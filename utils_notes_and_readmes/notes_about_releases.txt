@@ -1,0 +1,11 @@
+The command 
+flutter run --release
+has produced apks functioning on Pixel 3,
+yet not starting on an LG K40.
+
+The command
+flutter build apk --split-per-abi
+has been able to produce the following apk:
+app-armeabi-v7a-release.apk
+that was able to start on the LG K40.
+(yet failing at the time of saving the form data - 26/03/15)
