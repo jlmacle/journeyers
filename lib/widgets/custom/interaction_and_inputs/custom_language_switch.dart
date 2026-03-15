@@ -74,7 +74,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
             }).toList(),
             onChanged: (String? newValue) 
             {
-              if (newValue != null) {widget.parentWidgetLanguageValueCallBackFunction(newValue);}
+              if (newValue != null) widget.parentWidgetLanguageValueCallBackFunction(newValue);
             },
           ),
         ),
