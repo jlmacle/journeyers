@@ -510,7 +510,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             (
               child: Text
               (
-                "Please enter keywords to describe the file.", textAlign: TextAlign.center, 
+                "Please enter keywords\nto describe the file.", textAlign: TextAlign.center, 
                 style: analysisKeywordsTextStyle
               )
             ),
@@ -525,7 +525,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                   hint: Center
                   (
                     child: 
-                    Text('Please add the keyword here (+ Enter key).', style: analysisTextFieldHintStyle)
+                    Text(textAlign: TextAlign.center, 'Please add the keyword here\n(+ Enter key).', style: analysisTextFieldHintStyle)
                   )
                 ),
                 textAlign: TextAlign.center,
