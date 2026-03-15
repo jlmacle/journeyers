@@ -125,18 +125,16 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   // Method used to add/remove the keyword from the filtering criteria
   Future<void> _toggleFilter(String keyword) async
   {
-    setState(() async
+     if (_selectedKeywords.contains(keyword)) 
     {
-      if (_selectedKeywords.contains(keyword)) 
-      {
-        _selectedKeywords.remove(keyword);
-      } 
-      else 
-      {
-        _selectedKeywords.add(keyword);
-      }
-      await _applyFilters();
-    });
+      _selectedKeywords.remove(keyword);
+    } 
+    else 
+    {
+      _selectedKeywords.add(keyword);
+    }
+    await _applyFilters();
+    setState(() {});
   }
  
 
@@ -177,9 +175,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating state data
-    setState(() async
-    {
-      _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
+    _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
               
       // Removing from selection list
       _selectedSessionsForDeletion.removeWhere
@@ -192,7 +188,8 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       
       // Refreshing the filtered list
       await _applyFilters();
-
+    setState(()
+    { 
       // Displaying an informational message
       ScaffoldMessenger.of(context).showSnackBar
       (const SnackBar(content: Text("Selected session deleted.")));
@@ -228,22 +225,20 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     }
 
     // Updating UI state after all physical operations are done
-    setState(() async
-    {
-      _allSessions?.removeWhere
-      (
-        (session) => 
-        filesToDelete.contains(session[DashboardUtils.keyFilePath])
-      );
+    _allSessions?.removeWhere
+    (
+      (session) => 
+      filesToDelete.contains(session[DashboardUtils.keyFilePath])
+    );
 
-      _selectedSessionsForDeletion.clear();
+    _selectedSessionsForDeletion.clear();
 
-      // Updating the keyword list
-      _refreshKeywords();
+    // Updating the keyword list
+    _refreshKeywords();
 
-      // Refreshing the filtered list
-      await _applyFilters();
-    });
+    // Refreshing the filtered list
+    await _applyFilters();
+    setState((){});
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -290,21 +285,33 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   Future<void> updateSessionKeywords(String filePath, List<String> newKeywords) async 
   {
     List<dynamic>? previousKeywords;
-    setState(() async
-    {
-      final sessionIndex = _allSessions?.indexWhere(
+
+    final sessionIndex = _allSessions?.indexWhere(
         (s) => s[DashboardUtils.keyFilePath] == filePath
       );
 
-      if (sessionIndex != null && sessionIndex != -1) {
-        previousKeywords = _allSessions![sessionIndex][DashboardUtils.keyKeywords];
-        // Updating the list with the new keywords
-        _allSessions![sessionIndex][DashboardUtils.keyKeywords] = newKeywords;
-      }
+    if (sessionIndex != null && sessionIndex != -1) {
+      previousKeywords = _allSessions![sessionIndex][DashboardUtils.keyKeywords];
+      // Updating the list with the new keywords
+      _allSessions![sessionIndex][DashboardUtils.keyKeywords] = 
+      newKeywords..sort
+                  (
+                    (a, b) 
+                    {
+                      // Different letters
+                      int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                      // Same letter
+                      if (comparison == 0) {return b.compareTo(a);}                                                
+                      return comparison;
+                    }
+                  );
+    }
 
-      _refreshKeywords(); // Updates the keywords list
-      await _applyFilters();    // Refreshes the filtered view
-      
+    _refreshKeywords(); // Updates the keywords list
+    await _applyFilters();    // Refreshes the filtered view
+
+    setState(()
+    {  
       if ( ! previousKeywords!.equals(newKeywords) )
       {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -401,7 +408,22 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                           child: Text
                                           (
                                             key: ValueKey('session_keywords_$index'),
-                                            "Keywords: ${session[DashboardUtils.keyKeywords].join(', ')}",
+                                            "Keywords: ${
+                                              (List.from(session[DashboardUtils.keyKeywords])
+                                                // Alphabetical order + 'a', before 'A'
+                                                ..sort
+                                                (
+                                                  (a, b) 
+                                                  {
+                                                    // Different letters
+                                                    int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                                                    // Same letter
+                                                    if (comparison == 0) {return b.compareTo(a);}                                                
+                                                    return comparison;
+                                                  }
+                                                )
+                                              )
+                                              .join(', ')}",
                                             style: TextStyle(color: Colors.grey[700], fontSize: 13),
                                           ),
                                         ),
@@ -500,12 +522,11 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 [
                   // Sorting by title
                   TextButton.icon(
-                    onPressed: () {
-                      setState(() async
-                      {
-                        _isAscendingTitle = !_isAscendingTitle;
-                        await _sortSessionsByTitle();
-                      });
+                    onPressed: () async 
+                    {
+                      _isAscendingTitle = !_isAscendingTitle;
+                      await _sortSessionsByTitle();
+                      setState((){});
                     },
                     icon: const Icon
                     (
@@ -521,13 +542,11 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                   // Sorting by date
                   TextButton.icon
                   (
-                    onPressed: () 
+                    onPressed: () async
                     {
-                      setState(() async
-                      {
-                        _isAscendingDate = !_isAscendingDate;
-                        await _sortSessionsByDate();
-                      });
+                      _isAscendingDate = !_isAscendingDate;
+                      await _sortSessionsByDate();
+                      setState((){});
                     },
                     icon: Icon
                     (
@@ -560,18 +579,31 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
           child: Wrap
           (
             spacing: 8.0,
-            children: _usedKeywords!.map
-            (
-              (kw) 
-              {
-                return FilterChip
-                (
-                  label: Text(kw),
-                  onSelected: (_) async => await _toggleFilter(kw),
-                  selected: _selectedKeywords.contains(kw)
-                );
-              }
-            ).toList(),
+            children: (
+                        _usedKeywords!.toList()
+                        ..sort
+                        (
+                          (a, b) 
+                          {
+                            // Different letters
+                            int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                            // Same letter
+                            if (comparison == 0) {return b.compareTo(a);}                                                
+                            return comparison;
+                          }
+                        )
+                      ).map
+                      (
+                        (kw) 
+                        {
+                          return FilterChip
+                          (
+                            label: Text(kw),
+                            onSelected: (_) async => await _toggleFilter(kw),
+                            selected: _selectedKeywords.contains(kw)
+                          );
+                        }
+                      ).toList(),
           ),
         ),
         // Bulk Deletion Button added here

@@ -179,16 +179,16 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
           getApplicationFolderPathPref(); 
         }
       },
-      child: Text(Platform.isIOS 
-          ? 'Please select a folder for app storage' 
-          : 'Please select or create a folder for app storage'),
+      child: Text(textAlign: TextAlign.center, Platform.isIOS 
+          ? 'Please select a folder\nfor app storage' 
+          : 'Please select or create a folder\nfor app storage'),
     )
   : TextField(
       controller: _fileNameController,
       style: analysisTextFieldStyle,
       decoration: InputDecoration
       (
-          hint: const Center(child: Text('Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
+          hint: const Center(child: Text(textAlign: TextAlign.center,'Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
           errorText: _errorMessageForFileName,
           errorMaxLines: 3
       ),
