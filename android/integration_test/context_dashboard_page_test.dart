@@ -77,7 +77,7 @@ void main() async
         File file1 = File(path.join(absolutePathToSourceDir.path, fileName1));
         File file2 = File(path.join(absolutePathToSourceDir.path, fileName2));
         File file3 = File(path.join(absolutePathToSourceDir.path, fileName3));
-        if (!file1.existsSync()) {file1.createSync();}
+        if (!file1.existsSync()) file1.createSync();
         if (!file2.existsSync()) {file2.createSync();}
         if (!file3.existsSync()) {file3.createSync();}
         
