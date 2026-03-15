@@ -79,7 +79,7 @@ void main() async
         File file3 = File(path.join(absolutePathToSourceDir.path, fileName3));
         if (!file1.existsSync()) file1.createSync();
         if (!file2.existsSync()) file2.createSync();
-        if (!file3.existsSync()) {file3.createSync();}
+        if (!file3.existsSync()) file3.createSync();
         
         // Emptying and recreating the copies folder
         if (await absolutePathToCopiesDir.exists()) 
