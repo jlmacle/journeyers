@@ -293,7 +293,18 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     if (sessionIndex != null && sessionIndex != -1) {
       previousKeywords = _allSessions![sessionIndex][DashboardUtils.keyKeywords];
       // Updating the list with the new keywords
-      _allSessions![sessionIndex][DashboardUtils.keyKeywords] = newKeywords;
+      _allSessions![sessionIndex][DashboardUtils.keyKeywords] = 
+      newKeywords..sort
+                  (
+                    (a, b) 
+                    {
+                      // Different letters
+                      int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                      // Same letter
+                      if (comparison == 0) {return b.compareTo(a);}                                                
+                      return comparison;
+                    }
+                  );
     }
 
     _refreshKeywords(); // Updates the keywords list
