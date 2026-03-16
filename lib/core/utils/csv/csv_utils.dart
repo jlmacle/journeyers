@@ -550,9 +550,9 @@ class CSVUtils
     String content = "";
     // Building the content line by line (both lists have the same amount of lines)
     for (var index = 0; index < csvDataIndividualPerspective.length; index++) {
-      dynamic csvDataIndividualPerspectiveData =
+      var csvDataIndividualPerspectiveData =
           csvDataIndividualPerspective[index];
-      dynamic csvDataGroupPerspectiveData = csvDataGroupPerspective[index];
+      var csvDataGroupPerspectiveData = csvDataGroupPerspective[index];
 
       String line =
           "${csvDataIndividualPerspectiveData[0]},${csvDataIndividualPerspectiveData[1]},,${csvDataGroupPerspectiveData[0]}, ${csvDataGroupPerspectiveData[1]}\n";
