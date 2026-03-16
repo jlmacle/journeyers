@@ -42,6 +42,3 @@ Journeyers app (iOS):
 Flutter explanations + "Apple Developer account", personal team account, signing certificate: development
 (open ios/Runner.xcworkspace)
 
-iOS simulator:
-To use the iOS simulator, having the github website opened (while logged in) might have been of help 
-to fix the "Failed to connect to github.com port 443 after 27847 ms: Couldn't connect to server" issue.
