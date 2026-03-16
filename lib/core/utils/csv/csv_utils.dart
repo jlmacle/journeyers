@@ -520,8 +520,8 @@ class CSVUtils
   /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
-    required List<dynamic> csvDataIndividualPerspective,
-    required List<dynamic> csvDataGroupPerspective,
+    required List<List<String>> csvDataIndividualPerspective,
+    required List<List<String>> csvDataGroupPerspective,
     String? fileName
   }) async {
     // Complementing the shortest list to have the same length for both lists
