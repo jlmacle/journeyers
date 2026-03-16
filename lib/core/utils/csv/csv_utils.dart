@@ -627,9 +627,9 @@ class CSVUtils
   }
   
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
-  Future<Map<String,List<dynamic>>> csvFileToPreviewPerspectiveData(String pathToCSVFile) async
+  Future<Map<String,List<Object>>> csvFileToPreviewPerspectiveData(String pathToCSVFile) async
   {
-    Map<String,List<dynamic>> perspectiveData = {};
+    Map<String,List<Object>> perspectiveData = {};
     // Some empty lines have been added for the csv formatting
     List<List<String>> individualPerspective = [];
     List<List<String>> groupPerspective = [];
