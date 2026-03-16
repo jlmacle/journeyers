@@ -157,11 +157,11 @@ class CSVUtils
   /// Method extracting information from {checkbox: false/true, textField: "data"/null}
   /// and returning \[\[checkbox,"false"/"true"\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<dynamic>> checkBoxWithTextFieldDataToPreCSV({
-    required LinkedHashMap<String, dynamic> checkBoxWithTextFieldData,
+  Future<List<Object>> checkBoxWithTextFieldDataToPreCSV({
+    required LinkedHashMap<String, Object> checkBoxWithTextFieldData,
   }) async 
   {
-    List<dynamic> checkboxPreCSVData = [];
+    List<Object> checkboxPreCSVData = [];
 
     // checkbox data converted from bool to String: values can be "true" or "false"
     var dataCheckbox = "${checkBoxWithTextFieldData[FormUtils.checkbox]}";
@@ -170,7 +170,7 @@ class CSVUtils
       dataCheckbox,
     ]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    var dataTextField = checkBoxWithTextFieldData[FormUtils.textField] ?? "";
+    String dataTextField = (checkBoxWithTextFieldData[FormUtils.textField] ?? "") as String;
     var data2 = [
       notes,
       quotesForCSV + dataTextField + quotesForCSV,
@@ -185,19 +185,19 @@ class CSVUtils
   /// Method extracting information from {segmentedButton: "Yes"/"No"/"I don't know"/null , textField: "data"/null}
   /// and returning \[\[segmentedButton,"Yes"/"No"/"I don't know"/""\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<dynamic>> segmentedButtonWithTextFieldDataToPreCSV({
-    required LinkedHashMap<String, dynamic> segmentedButtonWithTextFieldData,
+  Future<List<Object>> segmentedButtonWithTextFieldDataToPreCSV({
+    required LinkedHashMap<String, Object> segmentedButtonWithTextFieldData,
   }) async
   {
-    List<dynamic> segmentedButtonPreCSVData = [];
+    List<Object> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
         segmentedButtonWithTextFieldData[FormUtils.segmentedButton] ?? "";
     var data1 = [FormUtils.segmentedButton, dataSegmentedButton];
 
     var dataTextField =
-        segmentedButtonWithTextFieldData[FormUtils.textField] ?? "";
-    var data2 = [notes, quotesForCSV + dataTextField + quotesForCSV];
+        segmentedButtonWithTextFieldData[FormUtils.textField] as String;
+    List<String> data2 = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
     segmentedButtonPreCSVData.add(data2);
@@ -208,18 +208,17 @@ class CSVUtils
   /// Method extracting information from {textField: "data"/null}
   /// and returning \[\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<dynamic>> textFieldDataToPreCSV({
-    required LinkedHashMap<String, dynamic> textFieldData,
+  Future<List<List<String>>> textFieldDataToPreCSV({
+    required LinkedHashMap<String, Object?> textFieldData,
   }) async
   {
-    List<dynamic> textFieldPreCSVData = [];
+    List<List<String>> textFieldPreCSVData = [];
 
-    var dataTextField = textFieldData[FormUtils.textField] ?? "";
-    var data = [notes, quotesForCSV + dataTextField + quotesForCSV];
+    var dataTextField = textFieldData[FormUtils.textField] as String;
+    List<String> data = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     textFieldPreCSVData.add(data);
 
-    print("textFieldPreCSVData: $textFieldPreCSVData");
     return textFieldPreCSVData;
   }
 
@@ -230,24 +229,24 @@ class CSVUtils
   /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
   /// The data should be either the individual perspective data, or the group/team perspective data.
   /// The individual perspective data and the group/team perspective data are planned to be written side by side in the CSV file.
-  Future<List<dynamic>> dataToPreCSV({
-    required LinkedHashMap<String, dynamic> perspectiveData,
+  Future<List<Object>> dataToPreCSV({
+    required LinkedHashMap<String, Object> perspectiveData,
   }) async 
   {
-    List<dynamic> preCSVData = [];
+    List<Object> preCSVData = [];
 
     /// Method adding to the pre-CSV data according to input type.
-    Future<List<dynamic>> treatmentAccordingToInputType(
-      List<dynamic> preCSVData,
+    Future<List<Object>> treatmentAccordingToInputType(
+      List<Object> preCSVData,
       String itemOrTitleLabel,
-      LinkedHashMap<String, dynamic> titleLevel2Or3DataAsLinkedHashMap,
+      LinkedHashMap<String, Object?> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
       if (mappingLabelsToInputItems[itemOrTitleLabel] == FormUtils.checkbox) {
         // checkBoxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
         var checkboxPreCSVData = await checkBoxWithTextFieldDataToPreCSV(
           checkBoxWithTextFieldData:
-              titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel],
+              titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
         );
         
         preCSVData.add(checkboxPreCSVData[0]);
@@ -259,7 +258,7 @@ class CSVUtils
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
-                  titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel],
+                  titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
             );
         preCSVData.add(segmentedButtonPreCSVData[0]);
         preCSVData.add(segmentedButtonPreCSVData[1]);
@@ -268,7 +267,7 @@ class CSVUtils
       else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
           FormUtils.textField) {
         var textFieldpreCSVData = await textFieldDataToPreCSV(
-          textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel],
+          textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
         );
         preCSVData.add(textFieldpreCSVData[0]);
       } 
@@ -291,7 +290,7 @@ class CSVUtils
     // There is only one value for the title level 2 key, a LinkedHashMap with the form data
     var level2TitleDataValue = perspectiveData.values.first;
     var perspectiveDataAsLinkedHashMap =
-        level2TitleDataValue as LinkedHashMap<String, dynamic>;
+        level2TitleDataValue as LinkedHashMap<String, Object>;
 
     // level 3 titles as keys
     for (var level3Title in perspectiveDataAsLinkedHashMap.keys) {
@@ -305,7 +304,7 @@ class CSVUtils
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
         // A LinkedHashMap as value
         var level3TitleItemsDataAsLinkedHashMap =
-            level3TitleItemsData as LinkedHashMap<String, dynamic>;
+            level3TitleItemsData as LinkedHashMap<String, Object>;
         for (var itemLabel in level3TitleItemsDataAsLinkedHashMap.keys) {
           // Adding the item label
           preCSVData.add(["", itemLabel]);

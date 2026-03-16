@@ -277,7 +277,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
   //**************** DATA STRUCTURE related data and methods ****************/
   // Data structure
-  List<LinkedHashMap<String, dynamic>> _enteredData = [];
+  List<LinkedHashMap<String, Object>> _enteredData = [];
   // Method used to store the data entered in the checkboxes, text fields and segmented buttons
   Future<void> dataStructureBuilding() async  
   {
@@ -286,24 +286,24 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     //************************* Individual perspective ******************************/
     // Individual level: balance issue
     // level3TitleBalanceIssueItem1Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleBalanceItem1Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleBalanceItem1Data[FormUtils.checkbox] = _studiesHouseholdBalanceCheckboxValue;
     // Keeping the text field value only if the checkbox is checked
     if (_studiesHouseholdBalanceCheckboxValue) level3TitleBalanceItem1Data[FormUtils.textField] = _studiesHouseholdBalanceTextFieldContent;    
     // level3TitleBalanceIssueItem2Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem2Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleBalanceItem2Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleBalanceItem2Data[FormUtils.checkbox] = _accessingIncomeHouseholdBalanceCheckboxValue;
     if (_accessingIncomeHouseholdBalanceCheckboxValue) level3TitleBalanceItem2Data[FormUtils.textField] = _accessingIncomeHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueItem3Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem3Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleBalanceItem3Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleBalanceItem3Data[FormUtils.checkbox] = _earningIncomeHouseholdBalanceCheckboxValue;
     if (_earningIncomeHouseholdBalanceCheckboxValue) level3TitleBalanceItem3Data[FormUtils.textField] = _earningIncomeHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueItem4Data
-    LinkedHashMap<String, dynamic> level3TitleBalanceItem4Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleBalanceItem4Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleBalanceItem4Data[FormUtils.checkbox] = _helpingOthersHouseholdBalanceCheckboxValue;
     if (_helpingOthersHouseholdBalanceCheckboxValue) level3TitleBalanceItem4Data[FormUtils.textField] = _helpingOthersHouseholdBalanceTextFieldContent;
     // level3TitleBalanceIssueData
-    LinkedHashMap<String, dynamic> level3TitleBalanceIssueData = LinkedHashMap<String, dynamic>.from
+    LinkedHashMap<String, Object> level3TitleBalanceIssueData = LinkedHashMap<String, Object>.from
     ({
       q.level3TitleBalanceIssueItem1: level3TitleBalanceItem1Data,
       q.level3TitleBalanceIssueItem2: level3TitleBalanceItem2Data,
@@ -313,15 +313,15 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
     // Individual level: workplace issue
     // level3TitleWorkplaceIssueItem1Data
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] = _moreAppreciatedAtWorkCheckboxValue;
     if (_moreAppreciatedAtWorkCheckboxValue) level3TitleWorkplaceIssueItem1Data[FormUtils.textField] = _moreAppreciatedAtWorkTextFieldContent;
     // level3TitleWorkplaceIssueItem2Data
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleWorkplaceIssueItem2Data[FormUtils.checkbox] = _remainingAppreciatedAtWorkCheckboxValue;
     if (_remainingAppreciatedAtWorkCheckboxValue) level3TitleWorkplaceIssueItem2Data[FormUtils.textField] = _remainingAppreciatedAtWorkTextFieldContent;
     // level3TitleWorkplaceIssueData
-    LinkedHashMap<String, dynamic> level3TitleWorkplaceIssueData = LinkedHashMap<String, dynamic>.from
+    LinkedHashMap<String, Object> level3TitleWorkplaceIssueData = LinkedHashMap<String, Object>.from
     ({
       q.level3TitleWorkplaceIssueItem1: level3TitleWorkplaceIssueItem1Data,
       q.level3TitleWorkplaceIssueItem2: level3TitleWorkplaceIssueItem2Data,
@@ -329,21 +329,21 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
     // Individual level: legacy issue
     // level3TitleLegacyIssueItem1
-    LinkedHashMap<String, dynamic> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, Object>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
     level3TitleLegacyIssueItem1Data[FormUtils.checkbox] = _betterLegaciesCheckboxValue;
     if (_betterLegaciesCheckboxValue) level3TitleLegacyIssueItem1Data[FormUtils.textField] = _betterLegaciesTextFieldContent;
     // level3TitleLegacyIssueData
-    LinkedHashMap<String, dynamic> level3TitleLegacyIssueData = LinkedHashMap<String, dynamic>.from({q.level3TitleLegacyIssueItem1: level3TitleLegacyIssueItem1Data});
+    LinkedHashMap<String, Object> level3TitleLegacyIssueData = LinkedHashMap<String, Object>.from({q.level3TitleLegacyIssueItem1: level3TitleLegacyIssueItem1Data});
 
     // Individual level: another issue
     // level3TitleAnotherIssueItem1
-    LinkedHashMap<String, dynamic> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, Object>.from({FormUtils.textField: ""});
     level3TitleAnotherIssueItem1Data[FormUtils.textField] = _anotherIssueTextFieldContent;
     // Different pattern for the text field only inputs (might modify later)
 
     // Adding to the level2TitleIndividual data
     // level2TitleIndividualData
-    LinkedHashMap<String, dynamic> level2TitleIndividualData = LinkedHashMap<String, dynamic>.from
+    LinkedHashMap<String, Object> level2TitleIndividualData = LinkedHashMap<String, Object>.from
     ({
       q.level2TitleIndividual: 
       {
@@ -357,12 +357,12 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     //************************* Groups/Teams perspective ******************************/
     // Groups/teams level: problematics the groups/teams are trying to solve
     // level3TitleGroupsProblematicsItem1
-    LinkedHashMap<String, dynamic> level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, Object>.from({FormUtils.textField: ""});
     level3TitleGroupsProblematicsItem1Data[FormUtils.textField] = _problemsTheGroupsAreTryingToSolveTextFieldContent;
 
     // Groups/teams level: trying to solve the same problems?
     // level3TitleSameProblemsItem1
-    LinkedHashMap<String, dynamic> level3TitleSameProblemsItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleSameProblemsItem1Data = LinkedHashMap<String, Object>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
     // CustomSegmentedButtonWithTextField: this.multiSelectionEnabled = true
     if (_sameProblemsSegmentedButtonSelection.isNotEmpty) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_sameProblemsSegmentedButtonSelection);} 
     else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
@@ -370,28 +370,28 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
     // Groups/teams level: harmony at home
     // level3TitleHarmonyAtHomeItem1
-    LinkedHashMap<String, dynamic> level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, Object>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
     if (_harmonyHomeSegmentedButtonSelection.isNotEmpty) {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = segButtonValuesToString(_harmonyHomeSegmentedButtonSelection);} 
     else {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";}
     if (_harmonyHomeSegmentedButtonSelection.isNotEmpty) level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] = _harmonyHomeTextFieldContent;
 
     // Groups/teams level: appreciability at work
     // level3TitleAppreciabilityAtWorkItem1
-    LinkedHashMap<String, dynamic> level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, Object>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
     if (_appreciabilityAtWorkSegmentedButtonSelection.isNotEmpty) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_appreciabilityAtWorkSegmentedButtonSelection);} 
     else {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";}
     if (_appreciabilityAtWorkSegmentedButtonSelection.isNotEmpty) level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] = _appreciabilityAtWorkTextFieldContent;
 
     // Groups/teams level: income earning abillity
     // level3TitleIncomeEarningAbilityItem1
-    LinkedHashMap<String, dynamic> level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, dynamic>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
+    LinkedHashMap<String, Object> level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, Object>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
     if (_earningAbilitySegmentedButtonSelection.isNotEmpty) {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_earningAbilitySegmentedButtonSelection);} 
     else {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = "";}
     if (_earningAbilitySegmentedButtonSelection.isNotEmpty) level3TitleIncomeEarningAbilityItem1Data[FormUtils.textField] = _earningAbilityTextFieldContent;
 
     // Adding to the level2TitleGroup data
     // level2TitleGroupData
-    LinkedHashMap<String, dynamic> level2TitleGroupData = LinkedHashMap<String, dynamic>.from
+    LinkedHashMap<String, Object> level2TitleGroupData = LinkedHashMap<String, Object>.from
     ({
         q.level2TitleGroup: 
         {
