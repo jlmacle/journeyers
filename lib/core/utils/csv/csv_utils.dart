@@ -68,7 +68,7 @@ class CSVUtils
 
   //************** The data structure to return *************//
   /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
-  List<dynamic> preCSVData = [];
+  List<Object> preCSVData = [];
 
   CSVUtils() {
     // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
