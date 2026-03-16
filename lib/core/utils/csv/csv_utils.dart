@@ -345,6 +345,10 @@ class CSVUtils
   /// Addition of a ["",""] before all level 3 titles.
   Future<List<dynamic>> preCSVToCSVData({required List<dynamic> preCSVData}) async
   {
+    // List<LinkedHashMap<String, Object>> _enteredData = [];
+    // LinkedHashMap<String, Object> level2TitleIndividualData 
+    // LinkedHashMap<String, Object> level2TitleGroupData
+
     //*************** Analyzing the data for checkboxes with "false", and text fields with empty notes ****************//
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
