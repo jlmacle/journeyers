@@ -185,11 +185,11 @@ class CSVUtils
   /// Method extracting information from {segmentedButton: "Yes"/"No"/"I don't know"/null , textField: "data"/null}
   /// and returning \[\[segmentedButton,"Yes"/"No"/"I don't know"/""\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<Object>> segmentedButtonWithTextFieldDataToPreCSV({
-    required LinkedHashMap<String, Object> segmentedButtonWithTextFieldData,
+  Future<List<List<String>>> segmentedButtonWithTextFieldDataToPreCSV({
+    required LinkedHashMap<String, String> segmentedButtonWithTextFieldData,
   }) async
   {
-    List<Object> segmentedButtonPreCSVData = [];
+    List<List<String>> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
         segmentedButtonWithTextFieldData[FormUtils.segmentedButton] ?? "";
@@ -229,17 +229,17 @@ class CSVUtils
   /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
   /// The data should be either the individual perspective data, or the group/team perspective data.
   /// The individual perspective data and the group/team perspective data are planned to be written side by side in the CSV file.
-  Future<List<Object>> dataToPreCSV({
+  Future<List<List<String>>> dataToPreCSV({
     required LinkedHashMap<String, Object> perspectiveData,
   }) async 
   {
-    List<Object> preCSVData = [];
+    List<List<String>> preCSVData = [];
 
     /// Method adding to the pre-CSV data according to input type.
-    Future<List<Object>> treatmentAccordingToInputType(
-      List<Object> preCSVData,
+    Future<List<List<String>>> treatmentAccordingToInputType(
+      List<List<String>> preCSVData,
       String itemOrTitleLabel,
-      LinkedHashMap<String, Object?> titleLevel2Or3DataAsLinkedHashMap,
+      LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
       if (mappingLabelsToInputItems[itemOrTitleLabel] == FormUtils.checkbox) {
@@ -249,8 +249,8 @@ class CSVUtils
               titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
         );
         
-        preCSVData.add(checkboxPreCSVData[0]);
-        preCSVData.add(checkboxPreCSVData[1]);
+        preCSVData.add(checkboxPreCSVData[0] as List<String>);
+        preCSVData.add(checkboxPreCSVData[1] as List<String>);
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
       else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
@@ -258,7 +258,7 @@ class CSVUtils
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
-                  titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
+                  titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, String>,
             );
         preCSVData.add(segmentedButtonPreCSVData[0]);
         preCSVData.add(segmentedButtonPreCSVData[1]);
@@ -290,7 +290,7 @@ class CSVUtils
     // There is only one value for the title level 2 key, a LinkedHashMap with the form data
     var level2TitleDataValue = perspectiveData.values.first;
     var perspectiveDataAsLinkedHashMap =
-        level2TitleDataValue as LinkedHashMap<String, Object>;
+        level2TitleDataValue as LinkedHashMap<String, LinkedHashMap<String, Object> >;
 
     // level 3 titles as keys
     for (var level3Title in perspectiveDataAsLinkedHashMap.keys) {
@@ -304,7 +304,7 @@ class CSVUtils
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
         // A LinkedHashMap as value
         var level3TitleItemsDataAsLinkedHashMap =
-            level3TitleItemsData as LinkedHashMap<String, Object>;
+            level3TitleItemsData as LinkedHashMap<String, LinkedHashMap<String, Object>>;
         for (var itemLabel in level3TitleItemsDataAsLinkedHashMap.keys) {
           // Adding the item label
           preCSVData.add(["", itemLabel]);
@@ -343,16 +343,18 @@ class CSVUtils
   /// "textField was replaced with "Notes" during the pre-CSV processing.
   ///
   /// Addition of a ["",""] before all level 3 titles.
-  Future<List<dynamic>> preCSVToCSVData({required List<dynamic> preCSVData}) async
+  Future<List<List<String>>> preCSVToCSVData({required List<List<String>> preCSVData}) async
   {
     // List<LinkedHashMap<String, Object>> _enteredData = [];
-    // LinkedHashMap<String, Object> level2TitleIndividualData 
-    // LinkedHashMap<String, Object> level2TitleGroupData
+    // LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> level2TitleIndividualData 
+    // LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> level2TitleGroupData
+    // List<List<String>> csvDataIndividualPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
+    // List<List<String>> csvDataGroupPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
 
     //*************** Analyzing the data for checkboxes with "false", and text fields with empty notes ****************//
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      var indexData_1AsString = indexedData[1] as String;
+      var indexData_1AsString = indexedData[1];
 
       // Removal of all [checkbox, "false"] (unchecked boxes)
       // Removal of all ["Notes:",]  if related to an unchecked checkbox
@@ -384,7 +386,7 @@ class CSVUtils
     // and adding Xs before another processing to remove the checkboxes lines
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      var indexData_1AsString = indexedData[1] as String;
+      var indexData_1AsString = indexedData[1];
       if ((indexedData[0].contains(FormUtils.checkbox)) &&
           (indexData_1AsString.trim() == "true")) {
         // Adding X in front of the question
@@ -435,7 +437,7 @@ class CSVUtils
     // Analyzing the data for segmented buttons not null, and adding Xs in front of the question
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      var indexData_1AsString = indexedData[1] as String;
+      var indexData_1AsString = indexedData[1];
 
       if (indexedData[0].contains(FormUtils.segmentedButton)) {
         if (indexData_1AsString.trim() != "") {
@@ -469,7 +471,7 @@ class CSVUtils
     //                and to remove the unanswered ones                                                                                   ****************//
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      var indexData_1AsString = indexedData[1] as String;
+      var indexData_1AsString = indexedData[1];
 
       // Getting the labels that are text field only from textFieldOnlyItems
       for (String textFieldOnlyItem in textFieldOnlyItems) {
@@ -493,7 +495,7 @@ class CSVUtils
     Set<String> titlesLevel3Processed = {};
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      var indexData_1AsString = indexedData[1] as String;
+      var indexData_1AsString = indexedData[1];
       String indexData_1AsStringTrimmed = indexData_1AsString.trim();
 
       if (
