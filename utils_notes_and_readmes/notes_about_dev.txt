@@ -1,3 +1,9 @@
+Android phone usable to run the application during development:
+- "Build number" to access in settings
+- Build number tapped 7 times until a message says: "You are now a developer!"
+- "Developer options" to access in settings
+- "Developer options": USB debugging turned on 
+
 Persist permissions
 "When your app opens a file for reading or writing, 
 the system gives your app a URI permission grant for that file, 
