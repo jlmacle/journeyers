@@ -9,3 +9,6 @@ has been able to produce the following apk:
 app-armeabi-v7a-release.apk
 that was able to start on the LG K40.
 (yet failing at the time of saving the form data - 26/03/15)
+
+For a "universal" apk:
+flutter build apk --release
