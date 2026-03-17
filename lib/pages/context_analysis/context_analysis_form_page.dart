@@ -10,6 +10,7 @@ import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart'
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_desktop_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/keywords_declaration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -136,23 +137,12 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
 
 
   // KEYWORDS
-  final List<String> _keywords = [];
-  final TextEditingController _keywordsController = TextEditingController();
-    
-  // Method used to add keywords to the _keywords list
-  void addKeyword(String value)
+  List<String> _keywords = [];
+  void keywordsUpdate(List<String> kws)
   {
-    var trimmedValue = value.trim();
-    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue))
-    {
-      setState(() 
-      {
-        _keywords.add(trimmedValue);
-        _keywordsController.clear();
-      });
-    }
+    _keywords = kws;
   }
-
+  
   // FILE NAME
   String? _fileName;
   void analysisFileNameUpdate(String textEditingControllerValue)
@@ -169,7 +159,6 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   void dispose()
   {
     _saveDataButtonFocusNode.dispose();
-    _keywordsController.dispose();
     super.dispose();
   }
  
@@ -506,60 +495,13 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                 headingLevel: 1,
               ),
             ),
-            // Title and keywords
-              // Text field for the analysis title
+
+            // Text field for the analysis title
             ContextAnalysisTitle(parentWidgetCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
-            // File tagging
-            const Center
-            (
-              child: Text
-              (
-                "Please enter keywords\nto describe the file.", textAlign: TextAlign.center, 
-                style: analysisKeywordsTextStyle
-              )
-            ),
-            // TODO: to offer pre-defined keywords as well (household, workplace, studies)
-            Padding(
-              padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
-              child: TextField
-              (
-                controller: _keywordsController,
-                decoration: const InputDecoration
-                (
-                  hint: Center
-                  (
-                    child: 
-                    Text(textAlign: TextAlign.center, 'Please add the keyword here\n(+ Enter key).', style: analysisTextFieldHintStyle)
-                  )
-                ),
-                textAlign: TextAlign.center,
-                style: analysisTextFieldStyle,
-                onSubmitted: addKeyword,
-              ),
-            ),
-            // Display of the keywords
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 0),
-                child: Wrap
-                (
-                  spacing: 8.0,
-                  runSpacing: 4.0,
-                  children: 
-                  [
-                    ..._keywords.map
-                    (
-                      (tag) => InputChip
-                              (
-                                label: Text(tag),
-                                onDeleted: () {setState( () {_keywords.remove(tag);});}, 
-                                deleteIconColor: appBarWhite,
-                              )
-                    )
-                  ],
-                ),
-              ),
-            ),
+            
+            // Keywords
+            KeywordsDeclaration(formKeywordsUpdateCallbackFunction: keywordsUpdate),
+            
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
             const Gap(preAndPostLevel2DividerGap),
