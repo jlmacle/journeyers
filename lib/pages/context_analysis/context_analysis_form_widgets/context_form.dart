@@ -48,19 +48,22 @@ class ContextForm extends StatefulWidget
 
 class ContextFormState extends State<ContextForm> 
 {
-  // Placeholder data for what is entered in addition to the form data
-  String _fileName = "";
-  List<String> _keywords = [];
-  String _analysisTitle = "";
-  
+  //**************** ACCESSIBILITY related data ****************//
   // Data related to the folding/unfolding of the expansion tiles
   bool _isIndividualAreaPerspectiveExpanded = false;
   bool _isGroupAreaPerspectiveExpanded = false;
 
-  //**************** FORM QUESTIONS ****************//
+  //**************** SESSION METADATA ****************//
+  // Placeholder data for what is entered in addition to the form data
+  String _fileName = "";
+  List<String> _keywords = [];
+  String _analysisTitle = "";  
+  
+  //**************** FORM related data and methods ****************//
+  // Form questions
   ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
 
-  //**************** FORM VALUES related data ****************//
+  // Form values related data
   bool _studiesHouseholdBalanceCheckboxValue = false;
   String _studiesHouseholdBalanceTextFieldContent = "";
 
@@ -98,9 +101,7 @@ class ContextFormState extends State<ContextForm>
   Set<String> _earningAbilitySegmentedButtonSelection = {};
   String _earningAbilityTextFieldContent = "";
 
-  //**************** CALLBACK METHODS related to the form ****************/
-  // Callback methods
-  // Individual perspective
+  // Callback methods related to the form: Individual perspective
   _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
   {
     _studiesHouseholdBalanceCheckboxValue = newValue!;
@@ -163,7 +164,7 @@ class ContextFormState extends State<ContextForm>
     _anotherIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfTextFieldUsed(newValue);
   }
 
-  // Groups/Teams perspective
+  // Callback methods related to the form: Groups/Teams perspective
   _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;}
 
   _setSameProblemsSegmentedButtonState(Set<String>? values) {_sameProblemsSegmentedButtonSelection = values!;}
@@ -182,20 +183,25 @@ class ContextFormState extends State<ContextForm>
 
   _setEarningAbilityTextFieldState(String newValue) {_earningAbilityTextFieldContent = newValue;}
 
-  // Method used to transform the selection options data into a string
+  // Method used to transform the segmented buttons selections data into a string
   String segButtonValuesToString(Set<String> values)
   {
     String stringified = "";
     stringified = values.join("/");
 
     return stringified;
-  }
+  }   
 
-   
+  // Global keys to change text decoration
+  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
+  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
 
-  //**************** DATA STRUCTURE related data and methods ****************/
+  //**************** DATA STRUCTURE related data and methods ****************//
   // Data structure
   List<LinkedHashMap<String, Object>> _enteredData = [];
+
   // Method used to store the data entered in the checkboxes, text fields and segmented buttons
   Future<void> dataStructureBuilding() async  
   {
@@ -334,7 +340,7 @@ class ContextFormState extends State<ContextForm>
     if (sessionDataDebug) pu.printd("Session Data");
   }
 
-  // Method used to store the form data to CSV
+  // Method used to store the form data to CSV, and the session metadata in a file
   Future<void> saveDataAndMetadata() async 
   { 
     // Updating analysis title, keywords, and file name
@@ -376,13 +382,7 @@ class ContextFormState extends State<ContextForm>
     widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
   }
 
-    //**************** GLOBAL KEYS related data ****************//
-
-  // Global keys to change text decoration
-  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
+  
 
 
   @override
