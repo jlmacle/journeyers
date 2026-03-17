@@ -118,7 +118,7 @@ void main() async
           
         // Adding new data
         // data 1
-        await _du.saveDashboardData
+        await _du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
           analysisTitle: testFile1Title,
@@ -126,7 +126,7 @@ void main() async
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
         );
         // data 2
-        await _du.saveDashboardData
+        await _du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
           analysisTitle: testFile2Title,
@@ -134,7 +134,7 @@ void main() async
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
         );
         // data 3
-        await _du.saveDashboardData
+        await _du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
           analysisTitle: testFile3Title,

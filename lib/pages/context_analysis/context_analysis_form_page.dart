@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -6,23 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
-import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_desktop_platforms.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_mobile_platforms.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/keywords_declaration.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_desktop_platforms.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_file_name_mobile_platforms.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_form.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/keywords_declaration.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 /// {@category Pages}
@@ -66,90 +62,40 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   PrintUtils pu = PrintUtils();
   UserPreferencesUtils upu = UserPreferencesUtils();  
 
-  //**************** GLOBAL KEYS related data ****************//
-
-  // Global keys to change text decoration
-  final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
-  final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
-
-  //**************** FORM QUESTIONS ****************//
-  ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
-
-  //**************** FORM VALUES related data ****************//
-  bool _isIndividualAreaPerspectiveExpanded = false;
-  bool _isGroupAreaPerspectiveExpanded = false;
-
-  bool _studiesHouseholdBalanceCheckboxValue = false;
-  String _studiesHouseholdBalanceTextFieldContent = "";
-
-  bool _accessingIncomeHouseholdBalanceCheckboxValue = false;
-  String _accessingIncomeHouseholdBalanceTextFieldContent = "";
-
-  bool _earningIncomeHouseholdBalanceCheckboxValue = false;
-  String _earningIncomeHouseholdBalanceTextFieldContent = "";
-
-  bool _helpingOthersHouseholdBalanceCheckboxValue = false;
-  String _helpingOthersHouseholdBalanceTextFieldContent = "";
-
-  bool _moreAppreciatedAtWorkCheckboxValue = false;
-  String _moreAppreciatedAtWorkTextFieldContent = "";
-
-  bool _remainingAppreciatedAtWorkCheckboxValue = false;
-  String _remainingAppreciatedAtWorkTextFieldContent = "";
-
-  bool _betterLegaciesCheckboxValue = false;
-  String _betterLegaciesTextFieldContent = "";
-
-  String _anotherIssueTextFieldContent = "";
-
-  String _problemsTheGroupsAreTryingToSolveTextFieldContent = "";
-
-  Set<String> _sameProblemsSegmentedButtonSelection = {};
-  String _sameProblemsTextFieldContent = "";
-
-  Set<String> _harmonyHomeSegmentedButtonSelection = {};
-  String _harmonyHomeTextFieldContent = "";
-
-  Set<String> _appreciabilityAtWorkSegmentedButtonSelection = {};
-  String _appreciabilityAtWorkTextFieldContent = "";
-
-  Set<String> _earningAbilitySegmentedButtonSelection = {};
-  String _earningAbilityTextFieldContent = "";
-
-  String segButtonValuesToString(Set<String> values)
-  {
-    String stringified = "";
-    stringified = values.join("/");
-
-    return stringified;
-  }
-
+  // final GlobalKey<ContextAnalysisFormPageState> _contextAnalysisFormPageKey = GlobalKey(debugLabel: 'contextAnalysisPageKey');
 
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
-  String? _analysisTitle;
+  String analysisTitle = "";
   void _analysisTitleUpdate(String textEditingControllerValue)
   {
-    _analysisTitle = textEditingControllerValue;
+    analysisTitle = textEditingControllerValue;
   }
 
 
   // KEYWORDS
-  List<String> _keywords = [];
+  List<String> keywords = [];
   void keywordsUpdate(List<String> kws)
   {
-    _keywords = kws;
+    keywords = kws;
   }
   
   // FILE NAME
-  String? _fileName;
+  String fileName = "";
   void analysisFileNameUpdate(String textEditingControllerValue)
   {
-    _fileName = textEditingControllerValue;
+    fileName = textEditingControllerValue;
   }
   
+  // Global key for the context form
+  final GlobalKey<ContextFormState> _contextFormKey = GlobalKey(debugLabel:'form');
+  
+  // Method used to print the form data to CSV
+  Future<void> saveDataAndMetadata() async
+  {
+    await _contextFormKey.currentState?.saveDataAndMetadata();
+  }
+
   //**************** FOCUS NODES related data and methods ****************//
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = FocusNode();
@@ -180,266 +126,6 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   }
 
   
-  //**************** CALLBACK METHODS related to the form ****************/
-  // Callback methods
-  // Individual perspective
-  _setStudiesHouseholdBalanceCheckboxState(bool? newValue) 
-  {
-    _studiesHouseholdBalanceCheckboxValue = newValue!;
-    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();    
-  }
-
-  _setStudiesHouseholdBalanceTextFieldState(String newValue) {_studiesHouseholdBalanceTextFieldContent = newValue;}
-
-  _setAccessingIncomeHouseholdBalanceCheckboxState(bool? newValue) 
-  {
-    _accessingIncomeHouseholdBalanceCheckboxValue = newValue!;
-    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
-  }
-
-  _setAccessingIncomeHouseholdBalanceTextFieldState(String newValue) {_accessingIncomeHouseholdBalanceTextFieldContent = newValue;}
-
-  _setEarningIncomeHouseholdBalanceCheckboxState(bool? newValue) 
-  {
-    _earningIncomeHouseholdBalanceCheckboxValue = newValue!;
-    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
-  }
-
-  _setEarningIncomedHouseholdBalanceTextFieldState(String newValue) {_earningIncomeHouseholdBalanceTextFieldContent = newValue;}
-
-  _setHelpingOthersdBalanceCheckboxState(bool? newValue) 
-  {
-    _helpingOthersHouseholdBalanceCheckboxValue = newValue!;
-    _balanceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
-  }
-
-  _setHelpingOthersHouseholdBalanceTextFieldState(String newValue) {_helpingOthersHouseholdBalanceTextFieldContent = newValue;}
-
-  _setMoreAppreciatedAtWorkCheckboxState(bool? newValue) 
-  {
-    _moreAppreciatedAtWorkCheckboxValue = newValue!;
-    _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
-  }
-
-  _setMoreAppreciatedAtWorkTextFieldState(String newValue) {_moreAppreciatedAtWorkTextFieldContent = newValue;}
-
-  _setRemainingAppreciatedAtWorkCheckboxState(bool? newValue) 
-  {
-    _remainingAppreciatedAtWorkCheckboxValue = newValue!;
-    _workplaceIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
-  }
-
-  _setRemainingAppreciatedAtWorkTextFieldState(String newValue) {_remainingAppreciatedAtWorkTextFieldContent = newValue;}
-
-  _setBetterLegaciesCheckboxState(bool? newValue) 
-  {
-    _betterLegaciesCheckboxValue = newValue!;
-    _legacyIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfCheckboxChecked();
-  }
-
-  _setBetterLegaciesTextFieldState(String newValue) {_betterLegaciesTextFieldContent = newValue;}
-
-  _setAnotherIssueTextFieldState(String newValue) 
-  {
-    _anotherIssueTextFieldContent = newValue;
-    _anotherIssueHeadingKey.currentState?.switchCustomHeadingDecorationIfTextFieldUsed(newValue);
-  }
-
-  // Groups/Teams perspective
-  _setProblemsTheGroupsAreTryingToSolveTextFieldState(String newValue) {_problemsTheGroupsAreTryingToSolveTextFieldContent = newValue;}
-
-  _setSameProblemsSegmentedButtonState(Set<String>? values) {_sameProblemsSegmentedButtonSelection = values!;}
-
-  _setSameProblemsTextFieldState(String newValue) {_sameProblemsTextFieldContent = newValue;}
-
-  _setHarmonyHomeSegmentedButtonState(Set<String>? values) {_harmonyHomeSegmentedButtonSelection = values!;}
-
-  _setHarmonyHomeTextFieldState(String newValue) {_harmonyHomeTextFieldContent = newValue;}
-
-  _setAppreciabilityAtWorkSegmentedButtonState(Set<String>? values) {_appreciabilityAtWorkSegmentedButtonSelection = values!;}
-
-  _setAppreciabilityAtWorkTextFieldState(String newValue) {_appreciabilityAtWorkTextFieldContent = newValue;}
-
-  _setEarningAbilitySegmentedButtonState(Set<String>? values) {_earningAbilitySegmentedButtonSelection = values!;}
-
-  _setEarningAbilityTextFieldState(String newValue) {_earningAbilityTextFieldContent = newValue;}
-
-  //**************** DATA STRUCTURE related data and methods ****************/
-  // Data structure
-  List<LinkedHashMap<String, Object>> _enteredData = [];
-  // Method used to store the data entered in the checkboxes, text fields and segmented buttons
-  Future<void> dataStructureBuilding() async  
-  {
-    // Using LinkedHashMaps for an insertion-ordered hash table based.
-
-    //************************* Individual perspective ******************************/
-    // Individual level: balance issue
-    // level3TitleBalanceIssueItem1Data
-    LinkedHashMap<String, String> level3TitleBalanceItem1Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleBalanceItem1Data[FormUtils.checkbox] = "$_studiesHouseholdBalanceCheckboxValue";
-    // Keeping the text field value only if the checkbox is checked
-    if (_studiesHouseholdBalanceCheckboxValue) level3TitleBalanceItem1Data[FormUtils.textField] = _studiesHouseholdBalanceTextFieldContent;    
-    // level3TitleBalanceIssueItem2Data
-    LinkedHashMap<String, String> level3TitleBalanceItem2Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleBalanceItem2Data[FormUtils.checkbox] = "$_accessingIncomeHouseholdBalanceCheckboxValue";
-    if (_accessingIncomeHouseholdBalanceCheckboxValue) level3TitleBalanceItem2Data[FormUtils.textField] = _accessingIncomeHouseholdBalanceTextFieldContent;
-    // level3TitleBalanceIssueItem3Data
-    LinkedHashMap<String, String> level3TitleBalanceItem3Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleBalanceItem3Data[FormUtils.checkbox] = "$_earningIncomeHouseholdBalanceCheckboxValue";
-    if (_earningIncomeHouseholdBalanceCheckboxValue) level3TitleBalanceItem3Data[FormUtils.textField] = _earningIncomeHouseholdBalanceTextFieldContent;
-    // level3TitleBalanceIssueItem4Data
-    LinkedHashMap<String, String> level3TitleBalanceItem4Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleBalanceItem4Data[FormUtils.checkbox] = "$_helpingOthersHouseholdBalanceCheckboxValue";
-    if (_helpingOthersHouseholdBalanceCheckboxValue) level3TitleBalanceItem4Data[FormUtils.textField] = _helpingOthersHouseholdBalanceTextFieldContent;
-    // level3TitleBalanceIssueData
-    // Adding all the LinkedHashMap<String, String> together
-    LinkedHashMap<String, LinkedHashMap<String, String>> level3TitleBalanceIssueData = 
-    LinkedHashMap<String, LinkedHashMap<String, String>>.from
-    ({
-      q.level3TitleBalanceIssueItem1: level3TitleBalanceItem1Data,
-      q.level3TitleBalanceIssueItem2: level3TitleBalanceItem2Data,
-      q.level3TitleBalanceIssueItem3: level3TitleBalanceItem3Data,
-      q.level3TitleBalanceIssueItem4: level3TitleBalanceItem4Data,
-    });
-
-    // Individual level: workplace issue
-    // level3TitleWorkplaceIssueItem1Data
-    LinkedHashMap<String, String> level3TitleWorkplaceIssueItem1Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleWorkplaceIssueItem1Data[FormUtils.checkbox] = "$_moreAppreciatedAtWorkCheckboxValue";
-    if (_moreAppreciatedAtWorkCheckboxValue) level3TitleWorkplaceIssueItem1Data[FormUtils.textField] = _moreAppreciatedAtWorkTextFieldContent;
-    // level3TitleWorkplaceIssueItem2Data
-    LinkedHashMap<String, String> level3TitleWorkplaceIssueItem2Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleWorkplaceIssueItem2Data[FormUtils.checkbox] = "$_remainingAppreciatedAtWorkCheckboxValue";
-    if (_remainingAppreciatedAtWorkCheckboxValue) level3TitleWorkplaceIssueItem2Data[FormUtils.textField] = _remainingAppreciatedAtWorkTextFieldContent;
-    // level3TitleWorkplaceIssueData
-    LinkedHashMap<String, LinkedHashMap<String, String>> level3TitleWorkplaceIssueData = 
-    LinkedHashMap<String, LinkedHashMap<String, String>>.from
-    ({
-      q.level3TitleWorkplaceIssueItem1: level3TitleWorkplaceIssueItem1Data,
-      q.level3TitleWorkplaceIssueItem2: level3TitleWorkplaceIssueItem2Data,
-    });
-
-    // Individual level: legacy issue
-    // level3TitleLegacyIssueItem1
-    LinkedHashMap<String, String> level3TitleLegacyIssueItem1Data = LinkedHashMap<String, String>.from({FormUtils.checkbox: "false", FormUtils.textField: ""});
-    level3TitleLegacyIssueItem1Data[FormUtils.checkbox] = "$_betterLegaciesCheckboxValue";
-    if (_betterLegaciesCheckboxValue) level3TitleLegacyIssueItem1Data[FormUtils.textField] = _betterLegaciesTextFieldContent;
-    // level3TitleLegacyIssueData
-    LinkedHashMap<String, LinkedHashMap<String, String>> level3TitleLegacyIssueData = 
-    LinkedHashMap<String, LinkedHashMap<String, String>>.from({q.level3TitleLegacyIssueItem1: level3TitleLegacyIssueItem1Data});
-
-    // Individual level: another issue
-    // level3TitleAnotherIssueItem1
-    LinkedHashMap<String, String> level3TitleAnotherIssueItem1Data = LinkedHashMap<String, String>.from({FormUtils.textField: ""});
-    level3TitleAnotherIssueItem1Data[FormUtils.textField] = _anotherIssueTextFieldContent;
-    // Different pattern for the text field only inputs (might modify later)
-
-    // Adding to the level2TitleIndividual data
-    // level2TitleIndividualData
-    LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> level2TitleIndividualData = LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>>.from
-    ({
-      q.level2TitleIndividual: 
-      {
-        q.level3TitleBalanceIssue: level3TitleBalanceIssueData,
-        q.level3TitleWorkplaceIssue: level3TitleWorkplaceIssueData,
-        q.level3TitleLegacyIssue: level3TitleLegacyIssueData,
-        q.level3TitleAnotherIssue: level3TitleAnotherIssueItem1Data,
-      },
-    });
-
-    //************************* Groups/Teams perspective ******************************/
-    // Groups/teams level: problematics the groups/teams are trying to solve
-    // level3TitleGroupsProblematicsItem1
-    LinkedHashMap<String, String> level3TitleGroupsProblematicsItem1Data = LinkedHashMap<String, String>.from({FormUtils.textField: ""});
-    level3TitleGroupsProblematicsItem1Data[FormUtils.textField] = _problemsTheGroupsAreTryingToSolveTextFieldContent;
-
-    // Groups/teams level: trying to solve the same problems?
-    // level3TitleSameProblemsItem1
-    LinkedHashMap<String, String> level3TitleSameProblemsItem1Data = LinkedHashMap<String, String>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    // CustomSegmentedButtonWithTextField: this.multiSelectionEnabled = true
-    if (_sameProblemsSegmentedButtonSelection.isNotEmpty) {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_sameProblemsSegmentedButtonSelection);} 
-    else {level3TitleSameProblemsItem1Data[FormUtils.segmentedButton] = "";}
-    if (_sameProblemsSegmentedButtonSelection.isNotEmpty) level3TitleSameProblemsItem1Data[FormUtils.textField] = _sameProblemsTextFieldContent;
-
-    // Groups/teams level: harmony at home
-    // level3TitleHarmonyAtHomeItem1
-    LinkedHashMap<String, String> level3TitleHarmonyAtHomeItems1Data = LinkedHashMap<String, String>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    if (_harmonyHomeSegmentedButtonSelection.isNotEmpty) {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = segButtonValuesToString(_harmonyHomeSegmentedButtonSelection);} 
-    else {level3TitleHarmonyAtHomeItems1Data[FormUtils.segmentedButton] = "";}
-    if (_harmonyHomeSegmentedButtonSelection.isNotEmpty) level3TitleHarmonyAtHomeItems1Data[FormUtils.textField] = _harmonyHomeTextFieldContent;
-
-    // Groups/teams level: appreciability at work
-    // level3TitleAppreciabilityAtWorkItem1
-    LinkedHashMap<String, String> level3TitleAppreciabilityAtWorkItem1Data = LinkedHashMap<String, String>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    if (_appreciabilityAtWorkSegmentedButtonSelection.isNotEmpty) {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_appreciabilityAtWorkSegmentedButtonSelection);} 
-    else {level3TitleAppreciabilityAtWorkItem1Data[FormUtils.segmentedButton] = "";}
-    if (_appreciabilityAtWorkSegmentedButtonSelection.isNotEmpty) level3TitleAppreciabilityAtWorkItem1Data[FormUtils.textField] = _appreciabilityAtWorkTextFieldContent;
-
-    // Groups/teams level: income earning abillity
-    // level3TitleIncomeEarningAbilityItem1
-    LinkedHashMap<String, String> level3TitleIncomeEarningAbilityItem1Data = LinkedHashMap<String, String>.from({FormUtils.segmentedButton: "", FormUtils.textField: ""});
-    if (_earningAbilitySegmentedButtonSelection.isNotEmpty) {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = segButtonValuesToString(_earningAbilitySegmentedButtonSelection);} 
-    else {level3TitleIncomeEarningAbilityItem1Data[FormUtils.segmentedButton] = "";}
-    if (_earningAbilitySegmentedButtonSelection.isNotEmpty) level3TitleIncomeEarningAbilityItem1Data[FormUtils.textField] = _earningAbilityTextFieldContent;
-
-    // Adding to the level2TitleGroup data
-    // level2TitleGroupData
-    LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> level2TitleGroupData = LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>>.from
-    ({
-        q.level2TitleGroup: 
-        {
-          q.level3TitleGroupsProblematics: level3TitleGroupsProblematicsItem1Data,
-          q.level3TitleSameProblem: level3TitleSameProblemsItem1Data,
-          q.level3TitleHarmonyAtHome: level3TitleHarmonyAtHomeItems1Data,
-          q.level3TitleAppreciabilityAtWork: level3TitleAppreciabilityAtWorkItem1Data,
-          q.level3TitleIncomeEarningAbility: level3TitleIncomeEarningAbilityItem1Data,
-        },
-    });
-
-    // Adding individual and team perspective to root level data
-    _enteredData = [level2TitleIndividualData, level2TitleGroupData];
-
-    if (sessionDataDebug) pu.printd("Session Data");
-    if (sessionDataDebug) pu.printd("Session Data: _enteredData");
-    if (sessionDataDebug) pu.printd("Session Data: $_enteredData");
-    if (sessionDataDebug) pu.printd("Session Data");
-  }
-
-  // Method used to store the form data to CSV
-  Future<void> print2CSV() async 
-  { 
-    await dataStructureBuilding();
-
-    // Transforming the data into a CSV-friendly form
-    List<List<String>> preCSVDataIndividualPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[0]);
-    List<List<String>> preCSVDataGroupPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[1]);
-
-    if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
-    if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
-    if (csvBuildingDebug) pu.printd("CSV Building");
-    if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataGroupPerspective");
-    if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
-    if (csvBuildingDebug) pu.printd("CSV Building");
-
-    List<List<String>> csvDataIndividualPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
-    List<List<String>> csvDataGroupPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
-    // Printing to CSV
-    String? pathToCSVFile = 
-      await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
-                          csvDataGroupPerspective: csvDataGroupPerspective,
-                          fileName: _fileName);
-    if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
-    // Saving the dashboard data if filePath not null
-    if (pathToCSVFile != null)
-    {      
-      await du.saveDashboardData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
-      await upu.saveWasSessionDataSaved(true);
-    }
-    
-    // Page refreshing for dashboard display
-    widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -506,281 +192,14 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             const Divider(thickness: betweenLevel2DividerThickness),
             const Gap(preAndPostLevel2DividerGap),
 
-
-
-            //************** ExpansionTile diplaying the individual perspective: beginning **************//
-            Semantics
-            (
-              toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
-              button: true, // with tooltip, useful for NVDA
-              // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
-              label: "Zone to click to expand data", // for Orca
-              expanded: _isIndividualAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
-              child:
-              ExpansionTile
-              ( 
-                tilePadding: const EdgeInsets.only(top:0),
-                expandedCrossAxisAlignment: CrossAxisAlignment.center,
-                internalAddSemanticForOnTap: true, 
-                onExpansionChanged: (value) 
-                {
-                  setState(() {_isIndividualAreaPerspectiveExpanded = value;});
-                  widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
-                  },
-                // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
-                maintainState: true, // to keep the state of the children widget
-                title:             
-                CustomHeading
-                (
-                  headingText: q.level2TitleIndividual,
-                  headingLevel: 2,
-                ),
-                children: <Widget>
-                [
-                /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    key: _balanceIssueHeadingKey,
-                    headingText: q.level3TitleBalanceIssue,
-                    headingLevel: 3,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleBalanceIssueItem1,
-                    textFieldHint: pleaseDescribeTextHouseholdHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleBalanceIssueItem2,
-                    textFieldHint: pleaseDescribeTextHouseholdHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleBalanceIssueItem3,
-                    textFieldHint: pleaseDescribeTextHouseholdHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleBalanceIssueItem4,
-                    textFieldHint: pleaseDescribeTextHouseholdHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
-                  ),
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    key: _workplaceIssueHeadingKey,
-                    headingText: q.level3TitleWorkplaceIssue,
-                    headingLevel: 3,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleWorkplaceIssueItem1,
-                    textFieldHint: pleaseDescribeTextWorkplaceHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleWorkplaceIssueItem2,
-                    textFieldHint: pleaseDescribeTextWorkplaceHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
-                  ),
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    key: _legacyIssueHeadingKey,
-                    headingText: q.level3TitleLegacyIssue,
-                    headingLevel: 3,
-                  ),
-                  CustomCheckBoxWithTextField
-                  (
-                    checkboxText: q.level3TitleLegacyIssueItem1,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
-                    parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
-                  ),
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    key: _anotherIssueHeadingKey,
-                    headingText: q.level3TitleAnotherIssue,
-                    headingLevel: 3,
-                   ),
-                  CustomPaddedTextField
-                  (
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    textFieldMaxLength: FormUtils.chars1Page,
-                    textFieldCounter: FormUtils.absentCounter,
-                    parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
-                  ),
-                ]
-              ),
-            ),
-            //************** ExpansionTile diplaying the individual perspective: end **************//
-            
-            const Gap(preAndPostLevel2DividerGap),
-            const Divider(thickness: betweenLevel2DividerThickness),
-            const Gap(preAndPostLevel2DividerGap),
-
-
-
-            /**** Beginning of the team-related analysis ****/
-            //************** ExpansionTile diplaying the group perspective: beginning **************//
-            Semantics
-            ( 
-              toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
-              button: true, // with tooltip, useful for NVDA
-              // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
-              label: "Zone to click to expand data", // for Orca
-              expanded: _isGroupAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
-              child:
-              ExpansionTile
-              ( 
-                expandedCrossAxisAlignment: CrossAxisAlignment.center,
-                expandedAlignment: Alignment.center,
-                internalAddSemanticForOnTap: true, 
-                onExpansionChanged: (value) 
-                {setState(() 
-                {
-                  _isGroupAreaPerspectiveExpanded = value;
-                  widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
-                });
-                },
-                // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
-                maintainState: true, // to keep the state of the children widget
-                title:              
-                CustomHeading
-                (
-                  headingText: q.level2TitleGroup,
-                  headingLevel: 2,
-                ),
-                children: <Widget>
-                [
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleGroupsProblematics,
-                    headingLevel: 3,
-                  ),
-                  CustomPaddedTextField
-                  (
-                    textFieldHint: pleaseDescribeTextGroupsHint,
-                    textFieldMaxLength: FormUtils.chars1Page,
-                    textFieldCounter: FormUtils.absentCounter,
-                    parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
-                  ),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleSameProblem,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
-                  ),
-
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleHarmonyAtHome,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
-                  ),
-
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleAppreciabilityAtWork,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
-                  ),
-                  
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleIncomeEarningAbility,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
-                  ),
-                ]
-              ),
-            ),
-            //************** ExpansionTile diplaying the group perspective: end **************//
-
-            const Gap(preAndPostLevel2DividerGap),
-            const Divider(thickness: betweenLevel2DividerThickness),
-            const Gap(preAndPostLevel2DividerGap),
-            
+            // Form 
+            ContextForm(
+                        key: _contextFormKey,
+                        contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,
+                        parentWidgetCallbackFunctionForContextAnalysisPageRefresh: widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh,
+                        parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability
+                        ),                        
+                        
             //********** Data saving ************//
             Center
             (
