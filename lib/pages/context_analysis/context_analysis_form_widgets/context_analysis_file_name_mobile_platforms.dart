@@ -203,7 +203,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
         _fileName = value.trim(); 
         widget.contextAnalysisFormPageKey.currentState?.analysisFileNameUpdate(_fileName!);
         // Saving data 
-        await widget.contextAnalysisFormPageKey.currentState?.print2CSV();
+        await widget.contextAnalysisFormPageKey.currentState?.saveDataAndMetadata();
         await upu.reload();
       },
     );

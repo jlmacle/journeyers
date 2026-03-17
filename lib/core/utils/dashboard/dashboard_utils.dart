@@ -81,7 +81,7 @@ class DashboardUtils {
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
-  Future<void> saveDashboardData
+  Future<void> saveDashboardMetaData
   ({
     required String typeOfContextData,
     required String? analysisTitle,

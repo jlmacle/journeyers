@@ -34,8 +34,11 @@ class _ContextAnalysisFileNameDesktopPlatformsState extends State<ContextAnalysi
   Widget build(BuildContext context) {
     return 
     ElevatedButton
-    ( 
-      onPressed: widget.contextAnalysisFormPageKey.currentState?.print2CSV,
+    (       
+      onPressed: ()
+      {
+        widget.contextAnalysisFormPageKey.currentState?.saveDataAndMetadata();        
+      },
       child: const Text(
         'Click to save your data in CSV, \nspreadsheet-compatible format',
         style: elevatedButtonSaveDataOnDesktopStyle,
