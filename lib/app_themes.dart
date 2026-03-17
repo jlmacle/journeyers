@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO: to clean at some point. That probably can be simplified.
+// TODO: to clean at some point.
 
 //*********************  Colors  *********************//
 const Color navyBlue = Color(0xFF0a2e50);
