@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
@@ -56,12 +57,6 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   /// The checkbox-related callback function for the parent widget.
   final ValueChanged<bool?>? parentWidgetCheckboxValueCallBackFunction;
 
-  /// A placeholder void callback function with a String parameter
-  static void placeHolderFunctionString(String value) {}
-
-  /// A placeholder void callback function with a bool parameter
-  static void placeHolderFunctionBool(bool? value) {}
-
   const CustomCheckBoxWithTextField
   ({
     super.key,
@@ -78,7 +73,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
     this.textFieldCounter = FormUtils.absentCounter,
     this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
-    this.parentWidgetCheckboxValueCallBackFunction = placeHolderFunctionBool,
+    this.parentWidgetCheckboxValueCallBackFunction = placeHolderFunctionNullableBool,
   });
 
   @override
