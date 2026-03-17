@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 
 /// {@category Custom widgets}
@@ -48,9 +49,6 @@ class CustomPaddedTextField extends StatefulWidget
   /// The bottom padding for the text field.
   final double paddingBottom;
 
-  /// A placeholder void callback function with a String parameter.
-  static void placeHolderFunction(String value) {}
-
   const CustomPaddedTextField
   ({
     super.key,
@@ -62,7 +60,7 @@ class CustomPaddedTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars10Lines, // 10 lines as a reference
     this.textFieldCounter = FormUtils.presentCounter,
-    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunction,
+    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.paddingLeft = 20,
     this.paddingRight = 20,
     this.paddingTop = 10,
