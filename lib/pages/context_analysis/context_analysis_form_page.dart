@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
@@ -36,12 +37,6 @@ class ContextAnalysisFormPage extends StatefulWidget
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
-
-  /// A placeholder void callback function with a bool parameter
-  static void placeHolderFunctionBool(bool value) {}
-
-  /// A placeholder void callback function 
-  static void placeHolderVoidCallback() {}
 
   const ContextAnalysisFormPage({
     super.key,
