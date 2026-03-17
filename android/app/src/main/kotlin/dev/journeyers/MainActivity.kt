@@ -174,12 +174,12 @@ class MainActivity: FlutterActivity() {
                 val file = rootDoc?.findFile(fileName)
 
                 // Debug logging to assist with troubleshooting
-                println("uriString: $uriString")
-                println("fileName: $fileName")
+                // println("uriString: $uriString")
+                // println("fileName: $fileName")
                 
                 // 4. Checks if the file actually exists after findFile operation
                 if (file != null && file.exists()) {
-                    println("File found: ${file.name}")
+                    // println("File found: ${file.name}")
                 } else {
                     println("File not found or fileName is incorrect")
                 }
