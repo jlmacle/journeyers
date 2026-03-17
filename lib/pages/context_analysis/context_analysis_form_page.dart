@@ -176,10 +176,10 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             ),
 
             // Text field for the analysis title
-            ContextAnalysisTitle(parentCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
+            ContextAnalysisTitle(fileNameDefinedCallbackFunction: _analysisTitleUpdate),
             
             // Keywords
-            KeywordsDeclaration(formKeywordsUpdateCallbackFunction: keywordsUpdate),
+            KeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
             
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
