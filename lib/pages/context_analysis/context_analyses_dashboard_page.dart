@@ -10,6 +10,11 @@ import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
 
+//**************** UTILITY CLASSES ****************/
+final DashboardUtils _du = DashboardUtils();
+final FileUtils _fu = FileUtils();
+final UserPreferencesUtils _upu = UserPreferencesUtils();
+
 /// {@category Pages}
 /// {@category Context analysis}
 /// The page displaying a dashboard of the past context analyses.
@@ -30,10 +35,6 @@ class ContextAnalysesDashboardPage extends StatefulWidget
 
 class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardPage> 
 {
-  //**************** UTILITY CLASSES ****************/
-  final DashboardUtils _du = DashboardUtils();
-  final FileUtils _fu = FileUtils();
-  final UserPreferencesUtils _upu = UserPreferencesUtils();
 
   //**************** PREFERENCES related data and methods ****************/
   bool _isDataLoading = true;

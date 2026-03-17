@@ -22,6 +22,13 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/keywords_declaration.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
+//**************** UTILITY CLASSES ****************//
+CSVUtils cu = CSVUtils();
+DashboardUtils du = DashboardUtils();
+FormUtils fu = FormUtils();
+PrintUtils pu = PrintUtils();
+UserPreferencesUtils upu = UserPreferencesUtils();  
+
 /// {@category Pages}
 /// {@category Context analysis}
 /// The form page for the context analysis.
@@ -50,15 +57,6 @@ class ContextAnalysisFormPage extends StatefulWidget
 
 class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
 {
-  //**************** UTILITY CLASSES ****************//
-  CSVUtils cu = CSVUtils();
-  DashboardUtils du = DashboardUtils();
-  FormUtils fu = FormUtils();
-  PrintUtils pu = PrintUtils();
-  UserPreferencesUtils upu = UserPreferencesUtils();  
-
-  // final GlobalKey<ContextAnalysisFormPageState> _contextAnalysisFormPageKey = GlobalKey(debugLabel: 'contextAnalysisPageKey');
-
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
   String analysisTitle = "";

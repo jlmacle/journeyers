@@ -49,64 +49,55 @@ class _KeywordsDeclarationState extends State<KeywordsDeclaration>
     return Column
     (
       children: 
-      [
-        const Center
+      [                     
+        Padding
+        (
+          padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
+          child: TextField
+          (
+            controller: _keywordsController,
+            decoration: const InputDecoration
+            (
+              hint: Center
               (
-                child: Text
+                child: 
+                Text(textAlign: TextAlign.center, 'Please enter keywords\nto describe the analysis.\n(+ Enter key).', style: analysisTextFieldHintStyle)
+              )
+            ),
+            textAlign: TextAlign.center,
+            style: analysisTextFieldStyle,
+            onSubmitted: addKeyword,
+          ),
+        ),
+        // Display of the keywords
+        Center
+        (
+          child: Padding
+          (
+            padding: const EdgeInsets.only(bottom: 0),
+            child: Wrap
+            (
+              spacing: 8.0,
+              runSpacing: 4.0,
+              children: 
+              [
+                ..._keywords.map
                 (
-                  "Please enter keywords\nto describe the file.", textAlign: TextAlign.center, 
-                  style: analysisKeywordsTextStyle
+                  (tag) => InputChip
+                          (
+                            label: Text(tag),
+                            onDeleted: () 
+                            {
+                              setState( () {_keywords.remove(tag);});
+                              widget.formKeywordsUpdateCallbackFunction(_keywords);
+                            }, 
+                            deleteIconColor: appBarWhite,
+                          )
                 )
-              ),
-
-              Padding
-              (
-                padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
-                child: TextField
-                (
-                  controller: _keywordsController,
-                  decoration: const InputDecoration
-                  (
-                    hint: Center
-                    (
-                      child: 
-                      Text(textAlign: TextAlign.center, 'Please add the keyword here\n(+ Enter key).', style: analysisTextFieldHintStyle)
-                    )
-                  ),
-                  textAlign: TextAlign.center,
-                  style: analysisTextFieldStyle,
-                  onSubmitted: addKeyword,
-                ),
-              ),
-              // Display of the keywords
-              Center
-              (
-                child: Padding
-                (
-                  padding: const EdgeInsets.only(bottom: 0),
-                  child: Wrap
-                  (
-                    spacing: 8.0,
-                    runSpacing: 4.0,
-                    children: 
-                    [
-                      ..._keywords.map
-                      (
-                        (tag) => InputChip
-                                (
-                                  label: Text(tag),
-                                  onDeleted: () 
-                                  {
-                                    setState( () {_keywords.remove(tag);});
-                                    widget.formKeywordsUpdateCallbackFunction(_keywords);
-                                  }, 
-                                  deleteIconColor: appBarWhite,
-                                )
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              ],
+            ),
+          ),
+        ),
       ],
     ); 
     // TODO: to offer pre-defined keywords as well (household, workplace, studies)

@@ -8,6 +8,9 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/homepage.dart';
 
+//**************** UTILITY CLASSES ****************/
+PrintUtils pu = PrintUtils();
+
 void main() 
 {
   // To help debug the layout
@@ -24,9 +27,6 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp> 
 {
-  //**************** UTILITY CLASSES ****************/
-  PrintUtils pu = PrintUtils();
-
 
   //**************** LOCALE related data and methods ****************/
 

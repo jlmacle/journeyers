@@ -19,17 +19,17 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmente
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 //**************** UTILITY CLASSES ****************//
-  CSVUtils cu = CSVUtils();
-  DashboardUtils du = DashboardUtils();
-  FormUtils fu = FormUtils();
-  PrintUtils pu = PrintUtils();
-  UserPreferencesUtils upu = UserPreferencesUtils(); 
+CSVUtils cu = CSVUtils();
+DashboardUtils du = DashboardUtils();
+FormUtils fu = FormUtils();
+PrintUtils pu = PrintUtils();
+UserPreferencesUtils upu = UserPreferencesUtils(); 
 
 class ContextForm extends StatefulWidget 
 {
-  /// A global key for the context analysis form page
+  /// Global key for the context analysis form page
   final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
-  /// Callback function used to go from the context form to the dashboard
+  /// Callback function used to refresh the page from the context form to the dashboard
   final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
   /// Callback function used to switch the focusability of the bottom bar items
   final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
