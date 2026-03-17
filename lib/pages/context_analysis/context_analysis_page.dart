@@ -20,12 +20,12 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 class ContextAnalysisPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
-  final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
+  final ValueChanged<bool> parentCallbackFunctionForContextAnalysisPageToSetFocusability;
 
   const ContextAnalysisPage
   ({
     super.key,
-    this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
+    this.parentCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
   });
 
   @override
@@ -175,7 +175,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
-                child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
+                child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
               ),
             ]
             else
@@ -190,7 +190,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisFormPage(key: contextAnalysisFormPageKey, parentWidgetCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability),
+                  child: ContextAnalysisFormPage(key: contextAnalysisFormPageKey, parentCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability),
                 ),
               ),
             )

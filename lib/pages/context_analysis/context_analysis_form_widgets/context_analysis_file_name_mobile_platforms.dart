@@ -23,7 +23,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> parentWidgetCallbackFunctionOnEditingComplete;
+  final ValueChanged<String> parentCallbackFunctionOnEditingComplete;
 
   /// A global key for the context analysis form page
   final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
@@ -31,7 +31,7 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   const ContextAnalysisFileNameMobilePlatforms
   ({
     super.key,
-    required this.parentWidgetCallbackFunctionOnEditingComplete,
+    required this.parentCallbackFunctionOnEditingComplete,
     required this.contextAnalysisFormPageKey,
   });
 

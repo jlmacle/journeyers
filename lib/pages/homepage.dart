@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage>
     ContextAnalysisPage
     (
       key: _contextAnalysisKey,
-      parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: 
+      parentCallbackFunctionForContextAnalysisPageToSetFocusability: 
       (bool boolValue) 
       {
         setState(() {_areBottomNavigationItemsFocusable = boolValue;});

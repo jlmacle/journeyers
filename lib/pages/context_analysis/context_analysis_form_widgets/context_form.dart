@@ -30,16 +30,16 @@ class ContextForm extends StatefulWidget
   /// Global key for the context analysis form page
   final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
   /// Callback function used to refresh the page from the context form to the dashboard
-  final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
+  final VoidCallback parentCallbackFunctionForContextAnalysisPageRefresh;
   /// Callback function used to switch the focusability of the bottom bar items
-  final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
+  final ValueChanged<bool> parentCallbackFunctionForContextAnalysisPageToSetFocusability;
 
   const ContextForm
   ({
     super.key,
     required this.contextAnalysisFormPageKey,
-    required this.parentWidgetCallbackFunctionForContextAnalysisPageRefresh,
-    required this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability
+    required this.parentCallbackFunctionForContextAnalysisPageRefresh,
+    required this.parentCallbackFunctionForContextAnalysisPageToSetFocusability
   });
 
   @override
@@ -379,7 +379,7 @@ class ContextFormState extends State<ContextForm>
     }
     
     // Page refreshing for dashboard display
-    widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh();
+    widget.parentCallbackFunctionForContextAnalysisPageRefresh();
   }
 
   
@@ -408,7 +408,7 @@ class ContextFormState extends State<ContextForm>
               onExpansionChanged: (value) 
               {
                 setState(() {_isIndividualAreaPerspectiveExpanded = value;});
-                widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+                widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
                 },
               // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
               maintainState: true, // to keep the state of the children widget
@@ -545,7 +545,7 @@ class ContextFormState extends State<ContextForm>
                 {setState(() 
                 {
                   _isGroupAreaPerspectiveExpanded = value;
-                  widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+                  widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
                 });
                 },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
