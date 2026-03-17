@@ -40,15 +40,15 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 class ContextAnalysisFormPage extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
-  final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
+  final VoidCallback parentCallbackFunctionForContextAnalysisPageRefresh;
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
-  final ValueChanged<bool> parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability;
+  final ValueChanged<bool> parentCallbackFunctionForContextAnalysisPageToSetFocusability;
 
   const ContextAnalysisFormPage({
     super.key,
-    this.parentWidgetCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
-    this.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
+    this.parentCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
+    this.parentCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
     });
 
   @override
@@ -129,7 +129,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
       (){
         if (accessibilityDebug) pu.printd("Accessibility: Button used to save data reached");
         // restoring focus capability to the bottom items
-        widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(true);
+        widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(true);
         // data helping to know if the user tab navigates back up
         movingThroughButton = true;
       }
@@ -176,7 +176,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             ),
 
             // Text field for the analysis title
-            ContextAnalysisTitle(parentWidgetCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
+            ContextAnalysisTitle(parentCallbackFunctionOnEditingComplete: _analysisTitleUpdate),
             
             // Keywords
             KeywordsDeclaration(formKeywordsUpdateCallbackFunction: keywordsUpdate),
@@ -189,8 +189,8 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             ContextForm(
                         key: _contextFormKey,
                         contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,
-                        parentWidgetCallbackFunctionForContextAnalysisPageRefresh: widget.parentWidgetCallbackFunctionForContextAnalysisPageRefresh,
-                        parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability
+                        parentCallbackFunctionForContextAnalysisPageRefresh: widget.parentCallbackFunctionForContextAnalysisPageRefresh,
+                        parentCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability
                         ),                        
                         
             //********** Data saving ************//
@@ -210,13 +210,13 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                           && HardwareKeyboard.instance.isShiftPressed)
                       {
                         if (accessibilityDebug) pu.printd("Accessibility: Shift-tab detected");
-                        widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(false);
+                        widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(false);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
                       }
                       else
                       {
-                        widget.parentWidgetCallbackFunctionForContextAnalysisPageToSetFocusability(true);
+                        widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(true);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
                       } 
 
@@ -227,7 +227,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? ContextAnalysisFileNameMobilePlatforms(parentWidgetCallbackFunctionOnEditingComplete: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
+                        ? ContextAnalysisFileNameMobilePlatforms(parentCallbackFunctionOnEditingComplete: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                         // Saving file for desktop platforms
                         : ContextAnalysisFileNameDesktopPlatforms(contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                   ),
