@@ -26,9 +26,10 @@ as part of the app development growth process.<br>
 Should we entrust the harmony of our households,<br>
 or our workplace relationships,<br>
 to lose-win decision-making patterns?<br>
-Should we entrust our lives<br>
-to our potentially incomplete education on the matter,<br>
-or should we complete our education?<br><br>
+Should we entrust our lives <br>
+to our potentially incomplete education,<br>
+or should we complete our education <br>
+toward building on win-wins?<br><br>
 
 A potential resource:<br>
 United States Institute of Peace: "Win-Win Vs. Win-Lose"<br>
