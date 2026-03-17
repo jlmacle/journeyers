@@ -10,6 +10,9 @@ void placeHolderFunctionNullableBool(bool? value) {}
 /// A placeholder void callback function with a String parameter
 void placeHolderFunctionString(String value) {}
 
+/// A placeholder void callback function with a Set\<String\> parameter.
+void placeHolderFunctionSetString(Set<String>? values) {}
+
 
 
  

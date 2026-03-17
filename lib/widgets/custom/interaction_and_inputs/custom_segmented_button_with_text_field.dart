@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
@@ -56,12 +57,6 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   /// The segmented button-related callback function for the parent widget.
   final ValueChanged<Set<String>>
   parentWidgetSegmentedButtonValueCallBackFunction;
-
-  /// A placeholder void callback function with a String parameter.
-  static void placeHolderFunctionString(String value) {}
-
-  /// A placeholder void callback function with a Set\<String\> parameter.
-  static void placeHolderFunctionSetString(Set<String>? values) {}
 
   const CustomSegmentedButtonWithTextField
   ({
