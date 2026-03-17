@@ -1,7 +1,8 @@
 # Journeyers
 Most of our lives are spent in teams: household, school, workplace. . . <br>
-Our appreciability in these teams, and therefore our quality of life, depends on our ability to group problem-solve toward lasting solutions.
-
+Our appreciability in these teams, and therefore our quality of life, <br>
+depends on our ability to group problem-solve toward lasting solutions.<br>
+<br>
 This open source ed tech and assistive tech, proof-of-concept project <br>
 (built with Flutter, therefore cross-platform [Android, iPhone, Linux, macOS, Windows], <br>
 and with a goal of being multilingual, accessible, and offline-friendly), <br>
@@ -13,24 +14,24 @@ The dashboard supports previewing, sorting by title/date, keyword filtering and 
 ([apk - alpha release](https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk)) <br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
-
+<br>
 Developing at "[Digital Public Goods](https://www.digitalpublicgoods.net/standard)" level is planned, <br>
 as part of the app development growth process.<br>
-([Flutter install](https://docs.flutter.dev/install))
-
-[More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).
-
+([Flutter install](https://docs.flutter.dev/install))<br>
+<br>
+[More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).<br>
+<br>
 #WinWin4SustainableQualityOfLife<br>
 #ProactiveComplementingOfOurEducationalSystemWithRelationalHomework<br>
 <hr>
 Should we entrust the harmony of our households,<br>
 or our workplace relationships,<br>
-to lose-win decision-making patterns?<br>
+to lose-win decision-making patterns?<br><br>
 Should we entrust our lives <br>
 to our potentially incomplete education,<br>
 or should we complete our education <br>
-toward building on win-wins?<br><br>
-
+toward building on win-wins?<br>
+<br>
 A potential resource:<br>
 United States Institute of Peace: "Win-Win Vs. Win-Lose"<br>
 https://lnkd.in/ee8hFarp
