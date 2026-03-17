@@ -60,9 +60,9 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
   String analysisTitle = "";
-  void _analysisTitleUpdate(String textEditingControllerValue)
+  void _analysisTitleUpdate(String titleValue)
   {
-    analysisTitle = textEditingControllerValue;
+    analysisTitle = titleValue;
   }
 
 
