@@ -34,6 +34,7 @@ class _KeywordsDeclarationState extends State<KeywordsDeclaration>
         _keywordsController.clear();
       });
     }
+    widget.formKeywordsUpdateCallbackFunction(_keywords);
   }
 
   @override
@@ -94,7 +95,11 @@ class _KeywordsDeclarationState extends State<KeywordsDeclaration>
                         (tag) => InputChip
                                 (
                                   label: Text(tag),
-                                  onDeleted: () {setState( () {_keywords.remove(tag);});}, 
+                                  onDeleted: () 
+                                  {
+                                    setState( () {_keywords.remove(tag);});
+                                    widget.formKeywordsUpdateCallbackFunction(_keywords);
+                                  }, 
                                   deleteIconColor: appBarWhite,
                                 )
                       )
