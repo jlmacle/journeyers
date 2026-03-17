@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
@@ -16,9 +17,6 @@ class ContextAnalysesDashboardPage extends StatefulWidget
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
   final VoidCallback parentWidgetCallbackFunctionForContextAnalysisPageRefresh;
-
-  /// A placeholder void callback function 
-  static void placeHolderVoidCallback() {}
 
   const ContextAnalysesDashboardPage
   ({
