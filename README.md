@@ -13,15 +13,14 @@ is meant to support our group problem-solving processes, and to help us reach la
 Illustrational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
 The answers to the first set of questions is exportable to CSV. <br>
 The dashboard supports previewing, sorting by title/date, keyword filtering and deletion.<br>
-([apk - alpha release](https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk)) <br>
+(<a href="https://github.com/jlmacle/journeyers_releases/blob/main/app-release-260211.apk">apk - alpha release</a><br>
 An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
 <br>
-Developing at "[Digital Public Goods](https://www.digitalpublicgoods.net/standard)" level is planned, <br>
+Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods</a>" level is planned, <br>
 as part of the app development growth process.<br>
-([Flutter install](https://docs.flutter.dev/install))<br>
 <br>
-[More notes on the wiki](https://github.com/jlmacle/journeyers/wiki).<br>
+<a href="https://github.com/jlmacle/journeyers/wiki">More notes on the wiki</a><br>
 <br>
 #WinWin4SustainableQualityOfLife<br>
 #ProactiveComplementingOfOurEducationalSystemWithRelationalHomework<br>
