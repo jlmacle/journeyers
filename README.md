@@ -3,7 +3,7 @@ Most of our lives are spent in teams: household, school, workplace. . . <br>
 Our appreciability in these teams, and therefore our quality of life, <br>
 depends on our ability to group problem-solve toward lasting solutions.<br>
 <br>
-This open source ed tech and assistive tech, proof-of-concept project <br>
+This open source ed tech and assistive tech, proof of concept project <br>
 (built with Flutter, therefore cross-platform [Android, iPhone, Linux, macOS, Windows], <br>
 and with a goal of being multilingual, accessible, and offline-friendly), <br>
 is meant to support our group problem-solving processes, and to help us reach lasting solutions.<br>
