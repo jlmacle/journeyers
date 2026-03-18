@@ -1,6 +1,4 @@
 # Journeyers
-Please star if you think the project has some value.
-<hr>
 Most of our lives are spent in teams: household, school, workplace. . . <br>
 Our appreciability in these teams, and therefore our quality of life, <br>
 depends on our ability to group problem-solve toward lasting solutions.<br>
@@ -45,3 +43,6 @@ https://lnkd.in/ee8hFarp
 <p align="center">
 <img src="https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png" width="400">
 </p>
+<hr>
+Please star if you think the project has some value.
+
