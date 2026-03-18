@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 
-// TODO: to clean at some point.
-
 //*********************  COLORS  *********************//
 const Color navyBlue = Color(0xFF0a2e50);
 const Color paleCyan = Color(0xFFE9FAFC);
 const Color appBarWhite = Color(0xFFf6f1e9);
 
-//*********************  Gaps  *********************//
+//*********************  GAPS  *********************//
 // Gaps: gaps for the context analysis form
 const double postHeadingLevel2Gap = 20;
 const double preAndPostLevel2DividerGap = 20;
 const double preAndPostLevel3DividerGap = 15;
 const double level3AndSegmentedButtonGap = 15;
+
+//*********************  DIVIDERS THICKNESS  *********************//
 const double betweenLevel2DividerThickness = 3;
 const double betweenLevel3DividerThickness = 1;
 
-
-//*********************  Padding  *********************//
+//*********************  PADDING  *********************//
 // Paddings: elevated buttons padding
 const double elevatedButtonPadding = 20;
 const double elevatedButtonPaddingTop = 20;
 const double elevatedButtonPaddingBottom = 20;
 
+//*********************  TEXT STYLES  *********************//
 
-//*********************  Text Styles  *********************//
-
-// Text styles: generic text styles
+// Text styles: HEADINGS
 const TextStyle defaultConstHeadingStyle = TextStyle
 (
   fontSize: 16,
@@ -42,6 +40,7 @@ const TextStyle underlinedConstHeadingStyle = TextStyle
   decoration: TextDecoration.underline
 );
 
+// Text styles: CHECKBOXES
 const TextStyle unselectedCheckboxTextStyle = TextStyle
 (
   fontSize: 24,
@@ -56,12 +55,20 @@ const TextStyle selectedCheckboxTextStyle = TextStyle
   decoration: TextDecoration.underline
 );
 
+// Text styles: ELEVATED BUTTONS
 const TextStyle elevatedButtonTextStyle = TextStyle
 (
   fontSize: 20,
   fontWeight: FontWeight.normal,
 );
 
+const TextStyle elevatedButtonSaveDataOnDesktopStyle = TextStyle
+(
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
+// Text styles: EXPANSION TILES
 const TextStyle customExpansionTileTextStyle = TextStyle
 (
   color: Colors.black,
@@ -74,15 +81,31 @@ const TextStyle styleExpansionTileTitle = TextStyle
   fontSize: 20, fontWeight: FontWeight.w500
 );
 
+
 TextStyle styleExpandedTitleSubTitle = const TextStyle(fontSize: 16);
 
+// Text styles: CUSTOM WIDGETS TESTING
 TextStyle feedbackMessageStyle = const TextStyle
 (
   fontSize: 18,
   fontWeight: FontWeight.normal,
 );
 
-// Text styles: context analysis page related styles
+// Text styles: START MESSAGE RELATED STYLES
+const TextStyle dialogStyle = TextStyle
+(
+  color: Colors.black,
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
+const TextStyle dialogAcknowledgedStyle = TextStyle
+(
+  color: Colors.black,
+  fontSize: 20,
+);
+
+// Text styles: CONTEXT ANALYSIS PAGE RELATED STYLES
 const TextStyle analysisKeywordsTextStyle = TextStyle
 (
   fontSize: 17,
@@ -101,31 +124,9 @@ const TextStyle analysisTextFieldHintStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-const TextStyle elevatedButtonSaveDataOnDesktopStyle = TextStyle
-(
-  fontSize: 20,
-  fontWeight: FontWeight.normal,
-);
 
-const TextStyle dialogStyle = TextStyle
-(
-  color: Colors.black,
-  fontSize: 20,
-  fontWeight: FontWeight.normal,
-);
-
-const TextStyle dialogAcknowledgedStyle = TextStyle
-(
-  color: Colors.black,
-  fontSize: 20,
-);
-
-// Text styles: dashboard page related styles
-const TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
-
-
-//*********************  Text Field Hints  *********************//
-// Text field hints: context analysis page related text field hints
+//*********************  TEXT FIELD HINTS: 
+//*********************  CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS  *********************//
 const String pleaseDescribeTextHouseholdHint =
     'Please describe the past outcomes for the household, '
     'if some seem to have been out of their comfort zone for too long, '
@@ -144,15 +145,24 @@ const String pleaseDescribeTextGroupsHint =
 const String textFieldHint = 'Please enter some text';
 
 
-//*********************  ThemeData  *********************//
-// ThemeData
+// Text styles: DASHBOARD PAGE RELATED STYLES
+const TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
+
+//*********************  THEME DATA  *********************//
 ThemeData appTheme = ThemeData
 (
+  useMaterial3: true,
+
   scaffoldBackgroundColor:
       Colors.white, // left appbar, text field, checkboxes not in white
 
+  //*********************  COLOR SCHEME  *********************//
+  colorScheme: const ColorScheme.light
+  (
+    surface: Colors.white, // succeeded for text field, checkboxes
+  ),
 
-  //*********************  AppBarTheme  *********************//
+  //*********************  APPBAR THEME  *********************//
   appBarTheme: const AppBarTheme
   (
     backgroundColor: navyBlue,
@@ -167,12 +177,14 @@ ThemeData appTheme = ThemeData
   ),
 
 
-  //*********************  BannerTheme  *********************//
+  //*********************  BANNER THEME  *********************//
   bannerTheme: const MaterialBannerThemeData
   (
     backgroundColor: Color.fromARGB(255, 13, 13, 49),
   ),
 
+
+  //*********************  BOTTOM NAVIGATIONBAR THEME  *********************//
   bottomNavigationBarTheme: const BottomNavigationBarThemeData
   (
     selectedItemColor: Color(0xFFf6f1e9), // appbar white
@@ -200,135 +212,8 @@ ThemeData appTheme = ThemeData
     ),
   ),
 
-  //*********************  CheckboxTheme  *********************//
-  checkboxTheme: CheckboxThemeData
-  (
-    fillColor: WidgetStateProperty.resolveWith<Color>
-    (
-      (Set<WidgetState> states) 
-      {
-        if (states.contains(WidgetState.selected)) 
-        {return navyBlue;}
-        return Colors.transparent;
-      }
-    ),
-  ),
- 
-
-  //*********************  ChipTheme  *********************//
-  // to remove the emerald green color from appearing
-  chipTheme: ChipThemeData
-  (
-    backgroundColor: navyBlue,
   
-    labelStyle: const TextStyle
-    (
-      color: Color(0xFFf6f1e9), // appbar white
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    ),
-    surfaceTintColor: Colors.transparent,     
-    selectedColor: navyBlue, 
-    selectedShadowColor: navyBlue,
-    checkmarkColor: appBarWhite,
-
-    // added to stop a green flash
-    color: WidgetStateProperty.resolveWith<Color?>((states) {
-    if (states.contains(WidgetState.selected)) {
-      return navyBlue; 
-    }
-    return navyBlue; 
-  }),
-    
-    brightness: Brightness.light, 
-  ),
-
-
-  //*********************  ColorScheme  *********************//
-  colorScheme: const ColorScheme.light
-  (
-    surface: Colors.white, // succeeded for text field, checkboxes
-  ),
-
-
-  //*********************  ElevatedButtonTheme  *********************//
-  elevatedButtonTheme: ElevatedButtonThemeData
-  (
-    style: ButtonStyle
-    (
-      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
-      backgroundColor: WidgetStateProperty.all<Color>(paleCyan),
-      surfaceTintColor: WidgetStateProperty.resolveWith<Color>
-      (
-        (Set<WidgetState> states) 
-        {
-          if (states.contains(WidgetState.hovered)) {return paleCyan;} 
-          else if (states.contains(WidgetState.focused)) {return paleCyan;}
-          return paleCyan;
-        }
-      ),
-      overlayColor: WidgetStateProperty.resolveWith<Color?>
-      (
-        (Set<WidgetState> states) 
-        {
-          if (states.contains(WidgetState.hovered)) {return Colors.transparent;}
-          if (states.contains(WidgetState.pressed)) {return Colors.transparent;}
-          return null;
-        }
-      ),
-    ),
-  ),
-
-
-  //*********************  InputDecorationTheme  *********************//
-  inputDecorationTheme: InputDecorationTheme
-  (
-    border: OutlineInputBorder
-    (
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
-    ),
-    filled: true,
-    fillColor: paleCyan,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-  ),
-  
-
-  //*********************  SegmentedButtonTheme  *********************//
-  segmentedButtonTheme: SegmentedButtonThemeData
-  (
-    style: ButtonStyle
-    (
-      backgroundColor: WidgetStateProperty.resolveWith<Color>
-      (
-        (Set<WidgetState> states) 
-        {
-          if (states.contains(WidgetState.selected)) {return paleCyan;}
-          return Colors.transparent;
-        }
-      ),
-    ),
-  ),
-
-  //*********************  TextButton  *********************//
-  textButtonTheme: TextButtonThemeData( // TODO: code to clean
-    style: ButtonStyle(
-      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
-      backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
-      surfaceTintColor: WidgetStateProperty.all<Color>(Colors.white),
-      overlayColor: WidgetStateProperty.resolveWith<Color?>(
-        (Set<WidgetState> states) {
-          if (states.contains(WidgetState.hovered) || 
-              states.contains(WidgetState.pressed)) {
-            return Colors.transparent;
-          }
-          return null;
-        },
-      ),
-    ),
-  ),
-
-  //*********************  TextTheme  *********************//
+  //*********************  TEXT THEME  *********************//
   // https://api.flutter.dev/flutter/material/TextTheme-class.html
   textTheme: const TextTheme
   (
@@ -369,5 +254,123 @@ ThemeData appTheme = ThemeData
     labelSmall: TextStyle(color: Colors.black),
   ),
 
-  useMaterial3: true,
+  //*********************  INPUT DECORATION THEME  *********************//
+  inputDecorationTheme: InputDecorationTheme
+  (
+    border: OutlineInputBorder
+    (
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide.none,
+    ),
+    filled: true,
+    fillColor: paleCyan,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+  ),
+
+  //*********************  CHECKBOX THEME  *********************//
+  checkboxTheme: CheckboxThemeData
+  (
+    fillColor: WidgetStateProperty.resolveWith<Color>
+    (
+      (Set<WidgetState> states) 
+      {
+        if (states.contains(WidgetState.selected)) 
+        {return navyBlue;}
+        return Colors.transparent;
+      }
+    ),
+  ),
+ 
+
+  //*********************  ELEVATED BUTTON THEME  *********************//
+  elevatedButtonTheme: ElevatedButtonThemeData
+  (
+    style: ButtonStyle
+    (
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(paleCyan),
+      surfaceTintColor: WidgetStateProperty.resolveWith<Color>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return paleCyan;} 
+          else if (states.contains(WidgetState.focused)) {return paleCyan;}
+          return paleCyan;
+        }
+      ),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return Colors.transparent;}
+          if (states.contains(WidgetState.pressed)) {return Colors.transparent;}
+          return null;
+        }
+      ),
+    ),
+  ),
+
+  //*********************  SEGMENTED BUTTON THEME  *********************//
+  segmentedButtonTheme: SegmentedButtonThemeData
+  (
+    style: ButtonStyle
+    (
+      backgroundColor: WidgetStateProperty.resolveWith<Color>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.selected)) {return paleCyan;}
+          return Colors.transparent;
+        }
+      ),
+    ),
+  ),
+
+  //*********************  TEXT BUTTON THEME *********************//
+  textButtonTheme: TextButtonThemeData( // TODO: code to clean
+    style: ButtonStyle(
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+      surfaceTintColor: WidgetStateProperty.all<Color>(Colors.white),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.hovered) || 
+              states.contains(WidgetState.pressed)) {
+            return Colors.transparent;
+          }
+          return null;
+        },
+      ),
+    ),
+  ),
+
+
+  
+  //*********************  CHIP THEME  *********************//
+  // to remove the emerald green color from appearing
+  chipTheme: ChipThemeData
+  (
+    backgroundColor: navyBlue,
+  
+    labelStyle: const TextStyle
+    (
+      color: Color(0xFFf6f1e9), // appbar white
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    ),
+    surfaceTintColor: Colors.transparent,     
+    selectedColor: navyBlue, 
+    selectedShadowColor: navyBlue,
+    checkmarkColor: appBarWhite,
+
+    // added to stop a green flash
+    color: WidgetStateProperty.resolveWith<Color?>((states) {
+    if (states.contains(WidgetState.selected)) {
+      return navyBlue; 
+    }
+    return navyBlue; 
+  }),
+    
+    brightness: Brightness.light, 
+  ),  
 );
