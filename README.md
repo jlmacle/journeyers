@@ -12,7 +12,7 @@ Illustrational value should be findable in the utils, custom widgets, and custom
 The answers to the first set of questions is exportable to CSV. <br>
 The dashboard supports previewing, sorting by title/date, keyword filtering and deletion.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
-An English/French localization proof-of-concept is illustrated (unfinished and commented in homepage.dart).<br>
+An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
 <br>
 Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods</a>" level is planned, <br>
