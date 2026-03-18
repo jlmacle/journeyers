@@ -1,4 +1,6 @@
 # Journeyers
+Please star if you think the project has some value.
+<hr>
 Most of our lives are spent in teams: household, school, workplace. . . <br>
 Our appreciability in these teams, and therefore our quality of life, <br>
 depends on our ability to group problem-solve toward lasting solutions.<br>
