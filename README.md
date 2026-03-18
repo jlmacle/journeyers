@@ -23,6 +23,7 @@ as part of the app development growth process.<br>
 <br>
 #WinWin4SustainableQualityOfLife<br>
 #ProactiveComplementingOfOurEducationalSystemWithRelationalHomework<br>
+#OER<br>
 <hr>
 Should we entrust the harmony of our households,<br>
 or our workplace relationships,<br>
