@@ -66,7 +66,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     String? folderPathData = await upu.getApplicationFolderPath();
     if (Platform.isAndroid || Platform.isIOS)
       {if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");}
-    // Application folder path called from the Kotlin code    
+    // Application folder path called from the Kotlin/Swift code    
     setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData ?? "";});
   }
 
