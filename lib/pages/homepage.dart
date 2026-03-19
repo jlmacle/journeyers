@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage>
       parentCallbackFunctionForContextAnalysisPageToSetFocusability: 
       (bool boolValue) 
       {
+        // Switches the focusability of the bottom bar items
         setState(() {_areBottomNavigationItemsFocusable = boolValue;});
         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
       }
