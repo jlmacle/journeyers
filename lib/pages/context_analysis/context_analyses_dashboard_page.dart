@@ -310,16 +310,15 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
 
     _refreshKeywords(); // Updates the keywords list
     await _applyFilters();    // Refreshes the filtered view
-
-    setState(()
-    {  
-      if ( ! previousKeywords!.equals(newKeywords) )
-      {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Keywords updated successfully"))
-        );
-      }
-    });
+    
+    if ( ! previousKeywords!.equals(newKeywords) )
+    {
+      setState((){ }); 
+      ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Keywords updated successfully"))
+      );
+    }
+    
   }
 
 
