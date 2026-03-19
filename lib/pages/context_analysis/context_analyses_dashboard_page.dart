@@ -177,22 +177,24 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
               
       // Removing from selection list
-      _selectedSessionsForDeletion.removeWhere
-      (
-        (session) => _selectedSessionsForDeletion.contains(filePath)
-      );
+    _selectedSessionsForDeletion.removeWhere
+    (
+      (session) => _selectedSessionsForDeletion.contains(filePath)
+    );
 
-      // Updating the keyword list
-      _refreshKeywords();
-      
-      // Refreshing the filtered list
-      await _applyFilters();
+    // Updating the keyword list
+    _refreshKeywords();
+    
+    // Refreshing the filtered list
+    await _applyFilters();
+
+    // Re-building
     setState(()
-    { 
-      // Displaying an informational message
-      ScaffoldMessenger.of(context).showSnackBar
-      (const SnackBar(content: Text("Selected session deleted.")));
-    });
+    {});
+
+    // Displaying an informational message
+    ScaffoldMessenger.of(context).showSnackBar
+    (const SnackBar(content: Text("Selected session deleted.")));
 
     // Refreshing and resetting "wasSessionDataSaved" if no session data left
     if (_allSessions != null  && _allSessions!.isEmpty) 
