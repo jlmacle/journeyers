@@ -109,7 +109,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         textFieldEditingController.text = value;
         // Updates the error message
         _errorMessageForDoubleQuotes = 
-        'Straight double quotes and line returns\nare removed from the text typed for CSV-export reasons.\nWith apologies.';
+        'Straight double quotes\nand line returns\nare removed from the text typed\nfor CSV-export reasons.\nWith apologies.';
         // "The assertiveness level of the announcement is determined by assertiveness.
         // Currently, this is only supported by the web engine and has no effect on other platforms.
         // The default mode is Assertiveness.polite."
