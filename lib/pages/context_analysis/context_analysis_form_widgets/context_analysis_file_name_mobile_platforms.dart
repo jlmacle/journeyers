@@ -45,6 +45,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
   String? _fileName;
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForFileName = "";
+  final GlobalKey<_ContextAnalysisFileNameMobilePlatformsState> errorMessageKey = GlobalKey();
   bool _wasErrorMessageModified = false;
   bool _fileNameExists = false;
 
@@ -74,6 +75,19 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     });
   }
 
+  // Method used to scroll the error message into view
+  Future<void> _scrollForBetterErrorViewing() async
+  {
+    final context = errorMessageKey.currentContext;
+    if (context != null) {
+      await Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
   // Method used to avoid an extension in the file name
   // and to avoid the use of a previous file name
   // (Android and iOS only)
@@ -94,14 +108,20 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
      
     // if the file name exists already
     if (fileNamesList.contains(completeFileName))
-    {
-      setState(() 
-      {
-        // Updates the error message
-        _errorMessageForFileName = 'File name not available.\nPlease use a different file name.';        
-      });
+    { 
+      // Updates the error message
+      _errorMessageForFileName = 'File name not available.\nPlease use a different file name.';  
+     
       _wasErrorMessageModified = true;
       _fileNameExists = true;
+
+      setState((){});
+      // Without WidgetsBinding.instance.addPostFrameCallback((_),  the scrolling doesn't happen
+      WidgetsBinding.instance.addPostFrameCallback((_) 
+      {
+        _scrollForBetterErrorViewing();
+      });
+
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
       // The default mode is Assertiveness.polite."
@@ -187,13 +207,13 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
           ? 'Please select a folder\nfor app storage' 
           : 'Please select or create a folder\nfor app storage'),
     )
-  : TextField(
+  : TextField(      
       controller: _fileNameController,
       style: analysisTextFieldStyle,
       decoration: InputDecoration
       (
           hint: const Center(child: Text(textAlign: TextAlign.center,'Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
-          error: Center(child: Text(textAlign: TextAlign.center, _errorMessageForFileName , style: analysisTextFieldErrorStyle)),
+          error: Center(key: errorMessageKey, child: Text(textAlign: TextAlign.center, _errorMessageForFileName , style: analysisTextFieldErrorStyle)),
           errorMaxLines: 3
       ),
       textAlign: TextAlign.center,
