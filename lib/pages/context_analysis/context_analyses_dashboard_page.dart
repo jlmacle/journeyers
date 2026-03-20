@@ -330,166 +330,214 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   }
  
  
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20, bottom: 10),
-                  child: CustomHeading(headingText: "Previous session data", headingLevel: 2),
+          : CustomScrollView(
+              // Using a CustomScrollView to coordinate the fade effect
+              slivers: [
+                // Static heading (Scrolls away normally)
+                const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    child: CustomHeading(
+                        headingText: "Previous session data", headingLevel: 2),
+                  ),
                 ),
-                _buildFilterAndSortBar(),
-                Expanded(
-                  child: ListView.builder(
-                    key: const Key('session_list'),
-                    itemCount: _filteredSessions?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      final session = _filteredSessions![index];
-                      final String filePath = session[DashboardUtils.keyFilePath];
-                      final bool isChecked = _selectedSessionsForDeletion.contains(filePath);
 
-                      return Card(
-                        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Checkbox(
-                                    key: ValueKey('checkbox_$index'),
-                                    value: isChecked,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        if (value == true) {
-                                          _selectedSessionsForDeletion.add(filePath);
-                                        } else {
-                                          _selectedSessionsForDeletion.remove(filePath);
-                                        }
-                                      });
-                                    },
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Wrap(
-                                          crossAxisAlignment: WrapCrossAlignment.center,
-                                          spacing: 8,
-                                          children: [                                            
-                                            GestureDetector
-                                            (
-                                              onTap: () => _showTitleEditSheet
-                                              (session[DashboardUtils.keyTitle], session[DashboardUtils.keyFilePath]),
-                                              child: Text
-                                              (
-                                                key: ValueKey('session_title_$index'),
-                                                "${session[DashboardUtils.keyTitle]}",
-                                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                                              )
-                                            ),                                            
-                                            Text(
-                                              key: ValueKey('session_date_$index'),
-                                              "(${session[DashboardUtils.keyDate]})",
-                                              style: const TextStyle(fontSize: 14, color: Colors.grey),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 4),
-                                        GestureDetector
-                                        (
-                                          onTap: () => _showKeywordsEditSheet
-                                          (session[DashboardUtils.keyKeywords], session[DashboardUtils.keyFilePath]),
-                                          child: Text
-                                          (
-                                            key: ValueKey('session_keywords_$index'),
-                                            "Keywords: ${
-                                              (List.from(session[DashboardUtils.keyKeywords])
-                                                // Alphabetical order + 'a', before 'A'
-                                                ..sort
-                                                (
-                                                  (a, b) 
-                                                  {
-                                                    // Different letters
-                                                    int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
-                                                    // Same letter
-                                                    if (comparison == 0) {return b.compareTo(a);}                                                
-                                                    return comparison;
-                                                  }
-                                                )
-                                              )
-                                              .join(', ')}",
-                                            style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                // Fading filtering, sorting and deletion area (TODO: cleanup: deletion)
+                SliverAppBar(
+                  // Size of the sort, filtering, deletion area
+                  expandedHeight: 155,
+                  collapsedHeight: 0,
+                  toolbarHeight: 0,
+                  pinned: false,
+                  floating: false,
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.pin, 
+                    background: _buildFilterAndSortBar(),
+                  ),
+                ),
+
+                // Session List
+                SliverPadding(
+                  padding: const EdgeInsets.only(bottom: 0),
+                  sliver: SliverList(
+                    key: const Key('session_list'),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final session = _filteredSessions![index];
+                        final String filePath = session[DashboardUtils.keyFilePath];
+                        final bool isChecked =
+                            _selectedSessionsForDeletion.contains(filePath);
+
+                        return Card(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Checkbox(
+                                      key: ValueKey('checkbox_$index'),
+                                      value: isChecked,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          if (value == true) {
+                                            _selectedSessionsForDeletion
+                                                .add(filePath);
+                                          } else {
+                                            _selectedSessionsForDeletion
+                                                .remove(filePath);
+                                          }
+                                        });
+                                      },
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Wrap(
+                                            crossAxisAlignment:
+                                                WrapCrossAlignment.center,
+                                            spacing: 8,
+                                            children: [
+                                              GestureDetector(
+                                                  onTap: () => _showTitleEditSheet(
+                                                      session[DashboardUtils
+                                                          .keyTitle],
+                                                      session[DashboardUtils
+                                                          .keyFilePath]),
+                                                  child: Text(
+                                                    key: ValueKey(
+                                                        'session_title_$index'),
+                                                    "${session[DashboardUtils.keyTitle]}",
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16),
+                                                  )),
+                                              Text(
+                                                key: ValueKey(
+                                                    'session_date_$index'),
+                                                "(${session[DashboardUtils.keyDate]})",
+                                                style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.grey),
+                                              ),
+                                            ],
                                           ),
+                                          const SizedBox(height: 4),
+                                          GestureDetector(
+                                            onTap: () => _showKeywordsEditSheet(
+                                                session[DashboardUtils
+                                                    .keyKeywords],
+                                                session[DashboardUtils
+                                                    .keyFilePath]),
+                                            child: Text(
+                                              key: ValueKey(
+                                                  'session_keywords_$index'),
+                                              "Keywords: ${(List.from(session[DashboardUtils.keyKeywords])..sort((a, b) {
+                                                  int comparison = a
+                                                      .toLowerCase()
+                                                      .compareTo(
+                                                          b.toLowerCase());
+                                                  if (comparison == 0) {
+                                                    return b.compareTo(a);
+                                                  }
+                                                  return comparison;
+                                                })).join(', ')}",
+                                              style: TextStyle(
+                                                  color: Colors.grey[700],
+                                                  fontSize: 13),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Divider(height: 20),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Wrap(
+                                      spacing: 4,
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(
+                                              Icons.find_in_page_rounded),
+                                          onPressed: () {
+                                            _showPreviewOverlay(
+                                                context, filePath);
+                                          },
+                                          tooltip: "Preview",
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.edit_document),
+                                          onPressed: () {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        'Edit not yet implemented.')));
+                                          },
+                                          tooltip: "Edit Document",
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.style_rounded),
+                                          onPressed: () =>
+                                              _showKeywordsEditSheet(
+                                                  session[DashboardUtils
+                                                      .keyKeywords],
+                                                  filePath),
+                                          tooltip: "Edit Keywords",
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const Divider(height: 20),
-                              // Action Bar: Split between Left and Right
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Left Side Actions: Preview, Edit, Keywords
-                                  Wrap(
-                                    spacing: 4,
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.find_in_page_rounded),
-                                        onPressed: () {_showPreviewOverlay(context, filePath);},
-                                        tooltip: "Preview",
-                                      ),
-                                      IconButton(
-                                        icon: const Icon(Icons.edit_document),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));
-                                        },
-                                        tooltip: "Edit Document",
-                                      ),
-                                      IconButton
-                                      (
-                                        icon: const Icon(Icons.style_rounded),
-                                        onPressed: () => _showKeywordsEditSheet(
-                                          session[DashboardUtils.keyKeywords], 
-                                          filePath
+                                    Wrap(
+                                      spacing: 4,
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(Icons.share),
+                                          onPressed: () {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        'Share not yet implemented.')));
+                                          },
+                                          tooltip: "Share",
                                         ),
-                                        tooltip: "Edit Keywords",
-                                      ),
-                                    ],
-                                  ),
-                                  // Right Side Actions: Share, Delete
-                                  Wrap(
-                                    spacing: 4,
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.share),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Share not yet implemented.')));
-                                        },
-                                        tooltip: "Share",
-                                      ),
-                                      IconButton(
-                                        key: ValueKey('session_delete_$index'),
-                                        icon: const Icon(Icons.delete_rounded),
-                                        onPressed: () async => await _deleteSelectedSession(filePath),
-                                        tooltip: "Delete",
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        IconButton(
+                                          key: ValueKey(
+                                              'session_delete_$index'),
+                                          icon:
+                                              const Icon(Icons.delete_rounded),
+                                          onPressed: () async =>
+                                              await _deleteSelectedSession(
+                                                  filePath),
+                                          tooltip: "Delete",
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                      childCount: _filteredSessions?.length ?? 0,
+                    ),
                   ),
                 ),
               ],
@@ -502,6 +550,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   {
     return Column
     (
+      
       children: 
       [
         Padding
@@ -575,7 +624,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
         ),
         Padding
         (
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.only(left: 12.0, right:12, bottom: 12),
           child: Wrap
           (
             spacing: 8.0,
@@ -621,11 +670,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
           ),
-        const Divider(),
+        const Divider(height: 1),
       ],
     );
   }
-
 
   void _showTitleEditSheet(String title, String filePath) 
   {
