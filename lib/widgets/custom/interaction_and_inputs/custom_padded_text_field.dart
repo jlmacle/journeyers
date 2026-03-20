@@ -110,13 +110,14 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         // Updates the error message
         _errorMessageForDoubleQuotes = 
         'Straight double quotes\nand line returns\nare removed from the text typed\nfor CSV-export reasons.\nWith apologies.';
-        // "The assertiveness level of the announcement is determined by assertiveness.
-        // Currently, this is only supported by the web engine and has no effect on other platforms.
-        // The default mode is Assertiveness.polite."
-        // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
-        // TODO:  TextDirection.ltr: code to modify for l10n
-        // Doesn't seem effective yet. Left for later.        
+       
       });
+      // "The assertiveness level of the announcement is determined by assertiveness.
+      // Currently, this is only supported by the web engine and has no effect on other platforms.
+      // The default mode is Assertiveness.polite."
+      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+      // TODO:  TextDirection.ltr: code to modify for l10n
+      // Doesn't seem effective yet. Left for later. 
       SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDoubleQuotes, TextDirection.ltr, assertiveness: Assertiveness.assertive);
       // Updates the parental widget information on the text content
       widget.parentWidgetTextFieldValueCallBackFunction(value);
