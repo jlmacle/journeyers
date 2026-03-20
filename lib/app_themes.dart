@@ -124,6 +124,12 @@ const TextStyle analysisTextFieldHintStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
+const TextStyle analysisTextFieldErrorStyle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+
 
 //*********************  TEXT FIELD HINTS: 
 //*********************  CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS  *********************//

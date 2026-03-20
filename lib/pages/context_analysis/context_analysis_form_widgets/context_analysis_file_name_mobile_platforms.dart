@@ -98,7 +98,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
       setState(() 
       {
         // Updates the error message
-        _errorMessageForFileName = 'File name not available. Please use a different file name.';        
+        _errorMessageForFileName = 'File name not available.\nPlease use a different file name.';        
       });
       _wasErrorMessageModified = true;
       _fileNameExists = true;
@@ -193,7 +193,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
       decoration: InputDecoration
       (
           hint: const Center(child: Text(textAlign: TextAlign.center,'Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
-          errorText: _errorMessageForFileName,
+          error: Center(child: Text(textAlign: TextAlign.center, _errorMessageForFileName , style: analysisTextFieldErrorStyle)),
           errorMaxLines: 3
       ),
       textAlign: TextAlign.center,
