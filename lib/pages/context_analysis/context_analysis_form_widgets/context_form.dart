@@ -284,7 +284,7 @@ class ContextFormState extends State<ContextForm>
                     headingText: q.level3TitleGroupsProblematics,
                     headingLevel: 3,
                   ),
-                  CustomPaddedTextField
+                  const CustomPaddedTextField
                   (
                     textFieldHint: pleaseDescribeTextGroupsHint,
                     textFieldMaxLength: FormUtils.chars1Page,
@@ -299,7 +299,7 @@ class ContextFormState extends State<ContextForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  const CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
@@ -321,7 +321,7 @@ class ContextFormState extends State<ContextForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  const CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
@@ -343,7 +343,7 @@ class ContextFormState extends State<ContextForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  const CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
@@ -365,7 +365,7 @@ class ContextFormState extends State<ContextForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  const CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
