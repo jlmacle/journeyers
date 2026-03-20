@@ -115,7 +115,11 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
     if (Platform.isAndroid || Platform.isIOS)  
       {if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");}
     // Application folder path called from the Kotlin code    
-    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData ?? "";});
+    setState(() 
+    {
+      _isApplicationFolderPathLoading = false; 
+      _applicationFolderPath = folderPathData ?? "";
+    });
   }
 
   
