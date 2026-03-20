@@ -75,9 +75,23 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
 {
   // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
+  final GlobalKey<_CustomPaddedTextFieldState> textFieldBeforeErrorMessageKey = GlobalKey();
   TextEditingController textFieldEditingController = TextEditingController();
   TextSelection? _currentTextSelection;
   bool _wasCharacterReplacedAtPreviousTyping = false;
+
+  // Method used to scroll the error message into view
+  void _scrollForBetterErrorViewing() 
+  {
+    final context = textFieldBeforeErrorMessageKey.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   void initState() 
@@ -110,7 +124,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         // Updates the error message
         _errorMessageForDoubleQuotes = 
         'Straight double quotes\nand line returns\nare removed from the text typed\nfor CSV-export reasons.\nWith apologies.';
-       
+        _scrollForBetterErrorViewing();
       });
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
@@ -157,6 +171,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
       child: 
       TextField
       (
+        key: textFieldBeforeErrorMessageKey,
         style: analysisTextFieldStyle,
         textAlign: widget.textAlignment,
         controller: textFieldEditingController,
