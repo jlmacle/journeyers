@@ -81,11 +81,11 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   bool _wasCharacterReplacedAtPreviousTyping = false;
 
   // Method used to scroll the error message into view
-  void _scrollForBetterErrorViewing() 
+  Future<void> _scrollForBetterErrorViewing() async
   {
     final context = textFieldBeforeErrorMessageKey.currentContext;
     if (context != null) {
-      Scrollable.ensureVisible(
+      await Scrollable.ensureVisible(
         context,
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
@@ -109,7 +109,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
 
   // The method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display
-  void quoteAndLineReturnCheck(value) 
+  void quoteAndLineReturnCheck(value) async
   {
    if (value.contains('"') || value.contains('\n')) 
     {
@@ -117,15 +117,14 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
       value = value.replaceAll('"', '');
       value = value.replaceAll('\n', ''); 
       _wasCharacterReplacedAtPreviousTyping = true;
-      setState(() 
-      {        
-        // Removes the quotes or line returns from the text field
-        textFieldEditingController.text = value;
-        // Updates the error message
-        _errorMessageForDoubleQuotes = 
-        'Straight double quotes\nand line returns\nare removed from the text typed\nfor CSV-export reasons.\nWith apologies.';
-        _scrollForBetterErrorViewing();
-      });
+      // Removes the quotes or line returns from the text field
+      textFieldEditingController.text = value;
+      // Updates the error message
+      _errorMessageForDoubleQuotes = 
+      'Straight double quotes\nand line returns\nare removed from the text typed\nfor CSV-export reasons.\nWith apologies.';
+      // Scrolling for better error message viewing
+      await _scrollForBetterErrorViewing();
+      setState(() {});
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
       // The default mode is Assertiveness.polite."
