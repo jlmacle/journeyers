@@ -350,7 +350,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 // Fading filtering, sorting and deletion area (TODO: cleanup: deletion)
                 SliverAppBar(
                   // Size of the sort, filtering, deletion area
-                  expandedHeight: 155,
+                  expandedHeight: 200,
                   collapsedHeight: 0,
                   toolbarHeight: 0,
                   pinned: false,
