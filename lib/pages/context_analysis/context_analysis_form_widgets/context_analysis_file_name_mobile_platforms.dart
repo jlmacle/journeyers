@@ -67,7 +67,11 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
     if (Platform.isAndroid || Platform.isIOS)
       {if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");}
     // Application folder path called from the Kotlin/Swift code    
-    setState(() {_isApplicationFolderPathLoading = false; _applicationFolderPath = folderPathData ?? "";});
+    setState(() 
+    {
+      _isApplicationFolderPathLoading = false; 
+      _applicationFolderPath = folderPathData ?? "";
+    });
   }
 
   // Method used to avoid an extension in the file name
