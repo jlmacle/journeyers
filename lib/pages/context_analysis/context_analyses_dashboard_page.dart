@@ -479,7 +479,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                                               Icons.find_in_page_rounded),
                                           onPressed: () {
                                             _showPreviewOverlay(
-                                                context, filePath);
+                                                context, session, filePath);
                                           },
                                           tooltip: "Preview",
                                         ),
@@ -802,8 +802,11 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   );
 }
 
-  // Method used to display an overlay with a session data preview. 
-  void _showPreviewOverlay(BuildContext context, String filePath) {
+
+// Method used to display an overlay with a session data preview. 
+void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, String filePath) {
+  String title = "${session[DashboardUtils.keyTitle]}";
+
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
@@ -812,10 +815,15 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     transitionDuration: const Duration(milliseconds: 300),
     pageBuilder: (context, anim1, anim2) {
       return Scaffold(
-        appBar: AppBar(
+        appBar:AppBar
+        (
           centerTitle: true, 
-          title: const Text("Session Preview"),
-          
+          title: 
+          Text
+          (
+            textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
+            softWrap:true, title, style: analysisPreviewTitleStyle
+          ),
           // Left side: Edit Button
           leading: IconButton(
             icon: const Icon(Icons.edit),
