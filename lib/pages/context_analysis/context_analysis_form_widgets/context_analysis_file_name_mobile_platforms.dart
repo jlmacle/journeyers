@@ -128,7 +128,8 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
       // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
       // TODO:  TextDirection.ltr: code to modify for l10n
       // Doesn't seem effective yet. Left for later.
-      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
+      SemanticsService.sendAnnouncement
+      (View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
     }
     // if the file name contains .
     else if (value.contains('.')) 
@@ -139,8 +140,15 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
         // Removes the dots from the file name
         _fileNameController.text = value;
         // Updates the error message
-        _errorMessageForFileName = 'Dots are removed, as no extension should be entered in the file name.';
+        _errorMessageForFileName = 'Dots are removed,\nas no extension should be entered\nin the file name.';
       });
+
+      // Without WidgetsBinding.instance.addPostFrameCallback((_),  the scrolling doesn't happen
+      WidgetsBinding.instance.addPostFrameCallback((_) 
+      {
+        _scrollForBetterErrorViewing();
+      });
+
       _fileNameExists = false;
       _wasErrorMessageModified = true;
       // "The assertiveness level of the announcement is determined by assertiveness.
@@ -149,7 +157,8 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
       // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
       // TODO:  TextDirection.ltr: code to modify for l10n
       // Doesn't seem effective yet. Left for later.
-      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
+      SemanticsService.sendAnnouncement
+      (View.of(context), _errorMessageForFileName, TextDirection.ltr, assertiveness: Assertiveness.assertive);
     }
     // otherwise, the file name doesn't need modification
     else 
