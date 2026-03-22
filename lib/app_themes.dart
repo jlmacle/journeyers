@@ -130,6 +130,12 @@ const TextStyle analysisTextFieldErrorStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
+const TextStyle analysisPreviewTitleStyle = TextStyle
+(
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
 
 //*********************  TEXT FIELD HINTS: 
 //*********************  CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS  *********************//
