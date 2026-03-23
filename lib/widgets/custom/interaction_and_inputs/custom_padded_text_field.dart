@@ -35,7 +35,7 @@ class CustomPaddedTextField extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
+  final ValueChanged<String> parentTextFieldValueCallBackFunction;
 
   /// The left padding for the text field.
   final double paddingLeft;
@@ -60,7 +60,7 @@ class CustomPaddedTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars10Lines, // 10 lines as a reference
     this.textFieldCounter = FormUtils.presentCounter,
-    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.paddingLeft = 20,
     this.paddingRight = 20,
     this.paddingTop = 10,
@@ -137,7 +137,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         TextDirection.ltr, assertiveness: Assertiveness.assertive
       );
       // Updates the parental widget information on the text content
-      widget.parentWidgetTextFieldValueCallBackFunction(value);
+      widget.parentTextFieldValueCallBackFunction(value);
     } 
     // Neither " nor \n
     // Could be a character deletion
@@ -151,7 +151,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
           textFieldEditingController.selection = _currentTextSelection!;
           _errorMessageForDoubleQuotes = "";        
         });
-        widget.parentWidgetTextFieldValueCallBackFunction(value);
+        widget.parentTextFieldValueCallBackFunction(value);
         _wasCharacterReplacedAtPreviousTyping = false;
       }
       else 
@@ -193,7 +193,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         {
           _currentTextSelection = textFieldEditingController.selection;          
           quoteAndLineReturnCheck(newValue); // updates textFieldEditingController.text
-          if (widget.maintainState) widget.parentWidgetTextFieldValueCallBackFunction(textFieldEditingController.text);
+          if (widget.maintainState) widget.parentTextFieldValueCallBackFunction(textFieldEditingController.text);
         },
         // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
         onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),

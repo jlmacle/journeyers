@@ -52,10 +52,10 @@ class CustomCheckBoxWithTextField extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
+  final ValueChanged<String> parentTextFieldValueCallBackFunction;
 
   /// The checkbox-related callback function for the parent widget.
-  final ValueChanged<bool?>? parentWidgetCheckboxValueCallBackFunction;
+  final ValueChanged<bool?>? parentCheckboxValueCallBackFunction;
 
   const CustomCheckBoxWithTextField
   ({
@@ -72,8 +72,8 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
     this.textFieldCounter = FormUtils.absentCounter,
-    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
-    this.parentWidgetCheckboxValueCallBackFunction = placeHolderFunctionNullableBool,
+    this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.parentCheckboxValueCallBackFunction = placeHolderFunctionNullableBool,
   });
 
   @override
@@ -107,7 +107,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
           controlAffinity: widget.checkboxPosition,
           onChanged: (bool? value) 
           {
-            widget.parentWidgetCheckboxValueCallBackFunction!(value);
+            widget.parentCheckboxValueCallBackFunction!(value);
             setState(() 
             {
               _isChecked = value!; 
@@ -125,10 +125,10 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
             textFieldMaxLines: widget.textFieldMaxLines,
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
-            parentWidgetTextFieldValueCallBackFunction: 
+            parentTextFieldValueCallBackFunction: 
               (String text) 
               {
-                widget.parentWidgetTextFieldValueCallBackFunction(text);
+                widget.parentTextFieldValueCallBackFunction(text);
                 setState(() {_textFieldValue = text;});
               },
           ),

@@ -55,12 +55,12 @@ class _HomePageState extends State<HomePage>
 
   Map<String, dynamic> enteredData = {"question1": {"isChecked": false, "comments": ""}};
 
-  void parentWidgetTextFieldValueCallBackFunction(String value) 
+  void parentTextFieldValueCallBackFunction(String value) 
   {
     setState(() {_textFieldContent = value;});
   }
 
-  void parentWidgetCheckboxValueCallBackFunction(bool? value) 
+  void parentCheckboxValueCallBackFunction(bool? value) 
   {
     setState(() {_isCheckboxChecked = value!;});
   }
@@ -119,8 +119,8 @@ class _HomePageState extends State<HomePage>
           (
             checkboxText: "Checkbox text",
             textFieldHint: textFieldHint,
-            parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
-            parentWidgetCheckboxValueCallBackFunction: parentWidgetCheckboxValueCallBackFunction,
+            parentTextFieldValueCallBackFunction: parentTextFieldValueCallBackFunction,
+            parentCheckboxValueCallBackFunction: parentCheckboxValueCallBackFunction,
           ),
           const Gap(8),
           Padding

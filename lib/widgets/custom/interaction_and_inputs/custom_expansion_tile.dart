@@ -36,13 +36,13 @@ class CustomExpansionTile extends StatefulWidget
   final double expandedContentDividerHeight;
 
   /// The callback function called to edit from the expansion tile.
-  final VoidCallback parentWidgetOnEditPressedCallBackFunction;
+  final VoidCallback parentOnEditPressedCallBackFunction;
 
   /// The callback function called to delete from the expansion tile.
-  final VoidCallback parentWidgetOnDeletePressedCallBackFunction;
+  final VoidCallback parentOnDeletePressedCallBackFunction;
 
   /// The callback function called to share from the expansion tile.
-  final VoidCallback parentWidgetOnSharePressedCallBackFunction;
+  final VoidCallback parentOnSharePressedCallBackFunction;
 
   /// A list of  [iconData, toolTipLabel, callBackFunction] values for the action icon(s).
   final List<List<dynamic>> listActionIconsData;
@@ -77,9 +77,9 @@ class CustomExpansionTile extends StatefulWidget
       [Icons.delete, toolTipDelete, null],
       [Icons.share, toolTipShare, null],
     ],
-    required this.parentWidgetOnEditPressedCallBackFunction,
-    required this.parentWidgetOnDeletePressedCallBackFunction,
-    required this.parentWidgetOnSharePressedCallBackFunction,
+    required this.parentOnEditPressedCallBackFunction,
+    required this.parentOnDeletePressedCallBackFunction,
+    required this.parentOnSharePressedCallBackFunction,
   });
 
   @override
@@ -140,9 +140,9 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                   final iconData = actionIconData[0] as IconData;
                   final toolTipLabel = actionIconData[1] as String;
                   final VoidCallback onPressedFunction;
-                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.parentWidgetOnEditPressedCallBackFunction;} 
-                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.parentWidgetOnDeletePressedCallBackFunction;} 
-                  else if (toolTipLabel == CustomExpansionTile.toolTipShare) {onPressedFunction = widget.parentWidgetOnSharePressedCallBackFunction;} 
+                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.parentOnEditPressedCallBackFunction;} 
+                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.parentOnDeletePressedCallBackFunction;} 
+                  else if (toolTipLabel == CustomExpansionTile.toolTipShare) {onPressedFunction = widget.parentOnSharePressedCallBackFunction;} 
                   else {onPressedFunction = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTipLabel");};}
 
                   return 
