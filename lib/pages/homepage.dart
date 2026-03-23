@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage>
     ContextAnalysisPage
     (
       key: _contextAnalysisKey,
-      parentCallbackFunctionForContextAnalysisPageToSetFocusability: 
+      parentCallbackFunctionToSetFocusOnBottomBarItems: 
       (bool boolValue) 
       {
         // Switches the focusability of the bottom bar items
