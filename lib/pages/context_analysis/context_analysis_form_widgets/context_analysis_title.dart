@@ -12,12 +12,12 @@ PrintUtils pu = PrintUtils();
 class ContextAnalysisTitle extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> fileNameDefinedCallbackFunction;
+  final ValueChanged<String> analysisTitleUpdatedCallbackFunction;
 
   const ContextAnalysisTitle
   ({
     super.key,
-    required this.fileNameDefinedCallbackFunction
+    required this.analysisTitleUpdatedCallbackFunction
   });
 
   @override
@@ -42,7 +42,7 @@ class _ContextAnalysisTitleState extends State<ContextAnalysisTitle>
           hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,
-        onChanged: widget.fileNameDefinedCallbackFunction,
+        onChanged: widget.analysisTitleUpdatedCallbackFunction,
       ),
     );
   }
