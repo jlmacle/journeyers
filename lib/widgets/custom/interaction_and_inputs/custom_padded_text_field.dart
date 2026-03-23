@@ -131,7 +131,11 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
       // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
       // TODO:  TextDirection.ltr: code to modify for l10n
       // Doesn't seem effective yet. Left for later. 
-      SemanticsService.sendAnnouncement(View.of(context), _errorMessageForDoubleQuotes, TextDirection.ltr, assertiveness: Assertiveness.assertive);
+      SemanticsService.sendAnnouncement
+      (
+        View.of(context), _errorMessageForDoubleQuotes, 
+        TextDirection.ltr, assertiveness: Assertiveness.assertive
+      );
       // Updates the parental widget information on the text content
       widget.parentWidgetTextFieldValueCallBackFunction(value);
     } 
