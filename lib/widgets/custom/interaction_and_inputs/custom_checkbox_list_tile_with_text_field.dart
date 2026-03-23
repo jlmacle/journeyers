@@ -126,7 +126,11 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
             parentWidgetTextFieldValueCallBackFunction: 
-              (String text) {widget.parentWidgetTextFieldValueCallBackFunction(text);setState(() {_textFieldValue = text;});},
+              (String text) 
+              {
+                widget.parentWidgetTextFieldValueCallBackFunction(text);
+                setState(() {_textFieldValue = text;});
+              },
           ),
       ],
     );
