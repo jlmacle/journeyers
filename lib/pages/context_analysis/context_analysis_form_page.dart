@@ -180,7 +180,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             ),
 
             // Text field for the analysis title
-            ContextAnalysisTitle(fileNameDefinedCallbackFunction: _analysisTitleUpdate),
+            ContextAnalysisTitle(analysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
             
             // Keywords
             KeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
