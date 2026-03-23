@@ -146,7 +146,11 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
               textFieldStartValue: _textFieldValue,
               textFieldHint: widget.textFieldHint,
               parentWidgetTextFieldValueCallBackFunction: 
-                (String text) {widget.parentWidgetTextFieldValueCallBackFunction(text); setState(() {_textFieldValue = text;});},
+                (String text)
+                {
+                  widget.parentWidgetTextFieldValueCallBackFunction(text); 
+                  setState(() {_textFieldValue = text;});
+                },
               textFieldMinLines: widget.textFieldMinLines,
               textFieldMaxLines: widget.textFieldMaxLines,
               textFieldCounter: widget.textFieldCounter,
