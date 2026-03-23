@@ -12,7 +12,7 @@ PrintUtils _pu = PrintUtils();
 class CustomLanguageSwitch extends StatefulWidget 
 {
   /// The callback function called when a language value is selected.
-  final ValueChanged<String> parentWidgetLanguageValueCallBackFunction;
+  final ValueChanged<String> parentLanguageValueCallBackFunction;
 
   /// The horizontal location of the dropdown menu.
   final MainAxisAlignment languageSwitchMainAxisAlignment;
@@ -20,7 +20,7 @@ class CustomLanguageSwitch extends StatefulWidget
   const CustomLanguageSwitch
   ({
     super.key,
-    required this.parentWidgetLanguageValueCallBackFunction,
+    required this.parentLanguageValueCallBackFunction,
     // By default, the language menu is on the right side of the screen
     this.languageSwitchMainAxisAlignment = MainAxisAlignment.end,
   });
@@ -74,7 +74,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
             }).toList(),
             onChanged: (String? newValue) 
             {
-              if (newValue != null) widget.parentWidgetLanguageValueCallBackFunction(newValue);
+              if (newValue != null) widget.parentLanguageValueCallBackFunction(newValue);
             },
           ),
         ),

@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage>
           [
             CustomLanguageSwitch
             (
-              parentWidgetLanguageValueCallBackFunction: _updateLocale,
+              parentLanguageValueCallBackFunction: _updateLocale,
             ),
           ],
         ),

@@ -48,12 +48,12 @@ class _HomePageState extends State<HomePage>
   Set<String> _selectedValues = {"No value selected yet"};
   String? _textContent;
 
-  void parentWidgetTextFieldValueCallBackFunction(String value) 
+  void parentTextFieldValueCallBackFunction(String value) 
   {
     setState(() {_textContent = value;});
   }
 
-  void parentWidgetSegmentedButtonValueCallBackFunction(Set<String>? values) 
+  void parentSegmentedButtonValueCallBackFunction(Set<String>? values) 
   {
     setState(() {_selectedValues = values!;}); // Only one value by configuration
   }
@@ -120,8 +120,8 @@ class _HomePageState extends State<HomePage>
               textOption3: "I don't know",
               textOptionsfontSize: 20,
               textFieldHint: textFieldHint,
-              parentWidgetTextFieldValueCallBackFunction: parentWidgetTextFieldValueCallBackFunction,
-              parentWidgetSegmentedButtonValueCallBackFunction: parentWidgetSegmentedButtonValueCallBackFunction,
+              parentTextFieldValueCallBackFunction: parentTextFieldValueCallBackFunction,
+              parentSegmentedButtonValueCallBackFunction: parentSegmentedButtonValueCallBackFunction,
             ),
             const Gap(16),
             Center

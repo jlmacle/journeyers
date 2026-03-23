@@ -152,29 +152,29 @@ class ContextFormState extends State<ContextForm>
                 (
                   checkboxText: q.level3TitleBalanceIssueItem1,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem2,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem3,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem4,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
                 ),
                 const Gap(preAndPostLevel3DividerGap),
                 const Divider(thickness: betweenLevel3DividerThickness),
@@ -191,15 +191,15 @@ class ContextFormState extends State<ContextForm>
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem1,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem2,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
                 ),
                 const Gap(preAndPostLevel3DividerGap),
                 const Divider(thickness: betweenLevel3DividerThickness),
@@ -216,8 +216,8 @@ class ContextFormState extends State<ContextForm>
                 (
                   checkboxText: q.level3TitleLegacyIssueItem1,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
-                  parentWidgetCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
-                  parentWidgetTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
+                  parentCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
+                  parentTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
                 ),
                 const Gap(preAndPostLevel3DividerGap),
                 const Divider(thickness: betweenLevel3DividerThickness),
@@ -235,7 +235,7 @@ class ContextFormState extends State<ContextForm>
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
                   textFieldMaxLength: FormUtils.chars1Page,
                   textFieldCounter: FormUtils.absentCounter,
-                  parentWidgetTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
+                  parentTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
                 ),
               ]
             ),
@@ -289,7 +289,7 @@ class ContextFormState extends State<ContextForm>
                     textFieldHint: pleaseDescribeTextGroupsHint,
                     textFieldMaxLength: FormUtils.chars1Page,
                     textFieldCounter: FormUtils.absentCounter,
-                    parentWidgetTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
+                    parentTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
                   ),
 
                   /**** ➡️ Sub-point  ****/
@@ -306,8 +306,8 @@ class ContextFormState extends State<ContextForm>
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
+                    parentTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
                   ),
 
                   const Gap(preAndPostLevel3DividerGap),
@@ -328,8 +328,8 @@ class ContextFormState extends State<ContextForm>
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
+                    parentTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
                   ),
 
                   const Gap(preAndPostLevel3DividerGap),
@@ -350,8 +350,8 @@ class ContextFormState extends State<ContextForm>
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
+                    parentTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
                   ),
                   
                   const Gap(preAndPostLevel3DividerGap),
@@ -372,8 +372,8 @@ class ContextFormState extends State<ContextForm>
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentWidgetSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
-                    parentWidgetTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
+                    parentTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
                   ),
                 ]
               ),

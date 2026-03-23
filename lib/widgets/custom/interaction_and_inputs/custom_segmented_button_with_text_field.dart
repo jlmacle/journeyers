@@ -52,11 +52,11 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> parentWidgetTextFieldValueCallBackFunction;
+  final ValueChanged<String> parentTextFieldValueCallBackFunction;
 
   /// The segmented button-related callback function for the parent widget.
   final ValueChanged<Set<String>>
-  parentWidgetSegmentedButtonValueCallBackFunction;
+  parentSegmentedButtonValueCallBackFunction;
 
   const CustomSegmentedButtonWithTextField
   ({
@@ -75,8 +75,8 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
     this.textFieldCounter = FormUtils.absentCounter,
-    this.parentWidgetTextFieldValueCallBackFunction = placeHolderFunctionString,
-    this.parentWidgetSegmentedButtonValueCallBackFunction =
+    this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.parentSegmentedButtonValueCallBackFunction =
         placeHolderFunctionSetString,
   });
 
@@ -132,7 +132,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
           onSelectionChanged: (newSelection) 
           {
             setState(() {_selection = newSelection;});
-            widget.parentWidgetSegmentedButtonValueCallBackFunction(newSelection);
+            widget.parentSegmentedButtonValueCallBackFunction(newSelection);
           },
           selected: _selection,
         ),
@@ -145,10 +145,10 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             (
               textFieldStartValue: _textFieldValue,
               textFieldHint: widget.textFieldHint,
-              parentWidgetTextFieldValueCallBackFunction: 
+              parentTextFieldValueCallBackFunction: 
                 (String text)
                 {
-                  widget.parentWidgetTextFieldValueCallBackFunction(text); 
+                  widget.parentTextFieldValueCallBackFunction(text); 
                   setState(() {_textFieldValue = text;});
                 },
               textFieldMinLines: widget.textFieldMinLines,
