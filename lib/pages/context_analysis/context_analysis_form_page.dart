@@ -43,12 +43,12 @@ class ContextAnalysisFormPage extends StatefulWidget
   final VoidCallback parentCallbackFunctionForContextAnalysisPageRefresh;
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
-  final ValueChanged<bool> parentCallbackFunctionForContextAnalysisPageToSetFocusability;
+  final ValueChanged<bool> parentCallbackFunctionToSetFocusOnBottomBarItems;
 
   const ContextAnalysisFormPage({
     super.key,
     this.parentCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
-    this.parentCallbackFunctionForContextAnalysisPageToSetFocusability = placeHolderFunctionBool
+    this.parentCallbackFunctionToSetFocusOnBottomBarItems = placeHolderFunctionBool
     });
 
   @override
@@ -133,7 +133,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
       (){
         if (accessibilityDebug) pu.printd("Accessibility: Button used to save data reached");
         // restoring focus capability to the bottom items
-        widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(true);
+        widget.parentCallbackFunctionToSetFocusOnBottomBarItems(true);
         // data helping to know if the user tab navigates back up
         movingThroughButton = true;
       }
@@ -194,7 +194,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                         key: _contextFormKey,
                         contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,
                         parentCallbackFunctionForContextAnalysisPageRefresh: widget.parentCallbackFunctionForContextAnalysisPageRefresh,
-                        parentCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability
+                        parentCallbackFunctionForContextAnalysisPageToSetFocusability: widget.parentCallbackFunctionToSetFocusOnBottomBarItems
                         ),                        
                         
             //********** Data saving ************//
@@ -214,13 +214,13 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                           && HardwareKeyboard.instance.isShiftPressed)
                       {
                         if (accessibilityDebug) pu.printd("Accessibility: Shift-tab detected");
-                        widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(false);
+                        widget.parentCallbackFunctionToSetFocusOnBottomBarItems(false);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
                       }
                       else
                       {
-                        widget.parentCallbackFunctionForContextAnalysisPageToSetFocusability(true);
+                        widget.parentCallbackFunctionToSetFocusOnBottomBarItems(true);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
                       } 
 
