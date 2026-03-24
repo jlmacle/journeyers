@@ -21,12 +21,12 @@ final UserPreferencesUtils _upu = UserPreferencesUtils();
 class ContextAnalysesDashboardPage extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
-  final VoidCallback parentCallbackFunctionForContextAnalysisPageRefresh;
+  final VoidCallback parentCallbackFunctionToRefreshTheContextAnalysisPage;
 
   const ContextAnalysesDashboardPage
   ({
     super.key,
-    this.parentCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
+    this.parentCallbackFunctionToRefreshTheContextAnalysisPage = placeHolderVoidCallback,
   });
 
   @override
@@ -202,7 +202,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       // resetting "wasSessionDataSaved" to false
       await _upu.resetWasSessionDataSavedStatus();
       // refreshing the page
-      widget.parentCallbackFunctionForContextAnalysisPageRefresh();
+      widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
     }
   }
 
@@ -251,7 +251,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       // resetting "wasSessionDataSaved" to false
       await _upu.resetWasSessionDataSavedStatus();
       // refreshing the page
-      widget.parentCallbackFunctionForContextAnalysisPageRefresh();
+      widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
     }
   }
 
