@@ -25,6 +25,9 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> parentCallbackFunctionOnFileNameSubmitted;
 
+  /// A callback function called to save context analysis data and metadata.
+  final VoidCallback parentCallbackFunctionOnSavingAndMetadata; 
+
   /// A global key for the context analysis form page
   final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
 
@@ -32,6 +35,7 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   ({
     super.key,
     required this.parentCallbackFunctionOnFileNameSubmitted,
+    required this.parentCallbackFunctionOnSavingAndMetadata,
     required this.contextAnalysisFormPageKey,
   });
 
@@ -236,8 +240,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
         _fileName = value.trim(); 
         widget.parentCallbackFunctionOnFileNameSubmitted(_fileName!);
         // Saving data 
-        // TODO: callback function
-        await widget.contextAnalysisFormPageKey.currentState?.saveDataAndMetadata();
+        widget.parentCallbackFunctionOnSavingAndMetadata();
         await upu.reload();
       },
     );
