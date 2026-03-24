@@ -22,7 +22,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> parentCallbackFunctionOnFileNameSubmitted;
+  final ValueChanged<String> fileNameSubmittedCallbackFunction;
 
   /// A callback function called to save context analysis data and metadata.
   final VoidCallback parentCallbackFunctionOnSavingDataAndMetadata; 
@@ -30,7 +30,7 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   const ContextAnalysisFileNameMobilePlatforms
   ({
     super.key,
-    required this.parentCallbackFunctionOnFileNameSubmitted,
+    required this.fileNameSubmittedCallbackFunction,
     required this.parentCallbackFunctionOnSavingDataAndMetadata,
   });
 
@@ -233,7 +233,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
         (value){}
       : (value) async {
         _fileName = value.trim(); 
-        widget.parentCallbackFunctionOnFileNameSubmitted(_fileName!);
+        widget.fileNameSubmittedCallbackFunction(_fileName!);
         // Saving data 
         widget.parentCallbackFunctionOnSavingDataAndMetadata();
         await upu.reload();
