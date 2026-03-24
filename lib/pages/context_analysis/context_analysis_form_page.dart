@@ -40,14 +40,14 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 class ContextAnalysisFormPage extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
-  final VoidCallback parentCallbackFunctionForContextAnalysisPageRefresh;
+  final VoidCallback parentCallbackFunctionToRefreshTheContextAnalysisPage;
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const ContextAnalysisFormPage({
     super.key,
-    this.parentCallbackFunctionForContextAnalysisPageRefresh = placeHolderVoidCallback,
+    this.parentCallbackFunctionToRefreshTheContextAnalysisPage = placeHolderVoidCallback,
     this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
     });
 
@@ -193,7 +193,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             ContextForm(
                         key: _contextFormKey,
                         contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,
-                        parentCallbackFunctionForContextAnalysisPageRefresh: widget.parentCallbackFunctionForContextAnalysisPageRefresh,
+                        parentCallbackFunctionToRefreshTheContextAnalysisPage: widget.parentCallbackFunctionToRefreshTheContextAnalysisPage,
                         parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
                         ),                        
                         
