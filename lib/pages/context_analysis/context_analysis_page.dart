@@ -20,12 +20,12 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 class ContextAnalysisPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
-  final ValueChanged<bool> parentCallbackFunctionToSetFocusOnBottomBarItems;
+  final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const ContextAnalysisPage
   ({
     super.key,
-    this.parentCallbackFunctionToSetFocusOnBottomBarItems = placeHolderFunctionBool
+    this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
   });
 
   @override
@@ -190,7 +190,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisFormPage(key: contextAnalysisFormPageKey, parentCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentCallbackFunctionToSetFocusOnBottomBarItems: widget.parentCallbackFunctionToSetFocusOnBottomBarItems),
+                  child: ContextAnalysisFormPage(key: contextAnalysisFormPageKey, parentCallbackFunctionForContextAnalysisPageRefresh: onDataSaved, parentCallbackFunctionToSetFocusOnBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
