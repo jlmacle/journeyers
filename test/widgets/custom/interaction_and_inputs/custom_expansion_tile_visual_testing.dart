@@ -73,7 +73,7 @@ class _MyTestingAppState extends State<MyTestingApp>
           (
             editPressedCallBackFunction: () {pu.printd('onEditPressed');},
             deletePressedCallBackFunction: () {pu.printd('onDeletePressed');},
-            onSharePressedCallBackFunction: () {pu.printd('onSharePressed');},
+            sharePressedCallBackFunction: () {pu.printd('onSharePressed');},
           ),
         ),
       ),
