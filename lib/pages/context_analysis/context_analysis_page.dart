@@ -175,7 +175,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
-                child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentCallbackFunctionForContextAnalysisPageRefresh: onAllSessionFilesDeleted)
+                child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentCallbackFunctionToRefreshTheContextAnalysisPage: onAllSessionFilesDeleted)
               ),
             ]
             else
