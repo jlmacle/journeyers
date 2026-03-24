@@ -39,7 +39,7 @@ class CustomExpansionTile extends StatefulWidget
   final VoidCallback editPressedCallBackFunction;
 
   /// The callback function called to delete from the expansion tile.
-  final VoidCallback onDeletePressedCallBackFunction;
+  final VoidCallback deletePressedCallBackFunction;
 
   /// The callback function called to share from the expansion tile.
   final VoidCallback onSharePressedCallBackFunction;
@@ -78,7 +78,7 @@ class CustomExpansionTile extends StatefulWidget
       [Icons.share, toolTipShare, null],
     ],
     required this.editPressedCallBackFunction,
-    required this.onDeletePressedCallBackFunction,
+    required this.deletePressedCallBackFunction,
     required this.onSharePressedCallBackFunction,
   });
 
@@ -141,7 +141,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                   final toolTipLabel = actionIconData[1] as String;
                   final VoidCallback onPressedFunction;
                   if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.editPressedCallBackFunction;} 
-                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.onDeletePressedCallBackFunction;} 
+                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.deletePressedCallBackFunction;} 
                   else if (toolTipLabel == CustomExpansionTile.toolTipShare) {onPressedFunction = widget.onSharePressedCallBackFunction;} 
                   else {onPressedFunction = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTipLabel");};}
 
