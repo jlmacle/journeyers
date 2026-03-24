@@ -72,7 +72,7 @@ class _MyTestingAppState extends State<MyTestingApp>
           CustomExpansionTile
           (
             editPressedCallBackFunction: () {pu.printd('onEditPressed');},
-            onDeletePressedCallBackFunction: () {pu.printd('onDeletePressed');},
+            deletePressedCallBackFunction: () {pu.printd('onDeletePressed');},
             onSharePressedCallBackFunction: () {pu.printd('onSharePressed');},
           ),
         ),
