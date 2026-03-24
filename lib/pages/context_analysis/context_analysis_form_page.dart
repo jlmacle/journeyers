@@ -231,7 +231,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? ContextAnalysisFileNameMobilePlatforms(parentCallbackFunctionOnEditingComplete: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
+                        ? ContextAnalysisFileNameMobilePlatforms(parentCallbackFunctionOnFileNameSubmitted: analysisFileNameUpdate, contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                         // Saving file for desktop platforms
                         : ContextAnalysisFileNameDesktopPlatforms(contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                   ),
