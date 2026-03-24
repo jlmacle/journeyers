@@ -25,13 +25,13 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   final ValueChanged<String> fileNameSubmittedCallbackFunction;
 
   /// A callback function called to save context analysis data and metadata.
-  final VoidCallback parentCallbackFunctionOnSavingDataAndMetadata; 
+  final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
 
   const ContextAnalysisFileNameMobilePlatforms
   ({
     super.key,
     required this.fileNameSubmittedCallbackFunction,
-    required this.parentCallbackFunctionOnSavingDataAndMetadata,
+    required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
   @override
@@ -235,7 +235,7 @@ class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysis
         _fileName = value.trim(); 
         widget.fileNameSubmittedCallbackFunction(_fileName!);
         // Saving data 
-        widget.parentCallbackFunctionOnSavingDataAndMetadata();
+        widget.parentCallbackFunctionToSaveDataAndMetadata();
         await upu.reload();
       },
     );
