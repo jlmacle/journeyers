@@ -34,14 +34,14 @@ class ContextForm extends StatefulWidget
   /// Callback function used to refresh the page from the context form to the dashboard
   final VoidCallback parentCallbackFunctionForContextAnalysisPageRefresh;
   /// Callback function used to switch the focusability of the bottom bar items
-  final ValueChanged<bool> parentCallbackFunctionToSetFocusOnBottomBarItems;
+  final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const ContextForm
   ({
     super.key,
     required this.contextAnalysisFormPageKey,
     required this.parentCallbackFunctionForContextAnalysisPageRefresh,
-    required this.parentCallbackFunctionToSetFocusOnBottomBarItems
+    required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
   });
 
   @override
@@ -129,7 +129,7 @@ class ContextFormState extends State<ContextForm>
               onExpansionChanged: (value) 
               {
                 setState(() {_isIndividualAreaPerspectiveExpanded = value;});
-                widget.parentCallbackFunctionToSetFocusOnBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+                widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
                 },
               // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
               maintainState: true, // to keep the state of the children widget
@@ -266,7 +266,7 @@ class ContextFormState extends State<ContextForm>
                 {setState(() 
                 {
                   _isGroupAreaPerspectiveExpanded = value;
-                  widget.parentCallbackFunctionToSetFocusOnBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+                  widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
                 });
                 },
                 // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
