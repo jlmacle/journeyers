@@ -28,15 +28,11 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   /// A callback function called to save context analysis data and metadata.
   final VoidCallback parentCallbackFunctionOnSavingAndMetadata; 
 
-  /// A global key for the context analysis form page
-  final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
-
   const ContextAnalysisFileNameMobilePlatforms
   ({
     super.key,
     required this.parentCallbackFunctionOnFileNameSubmitted,
     required this.parentCallbackFunctionOnSavingAndMetadata,
-    required this.contextAnalysisFormPageKey,
   });
 
   @override
