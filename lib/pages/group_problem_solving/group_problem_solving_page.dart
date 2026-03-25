@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 
 /// {@category Pages}
 /// {@category Group problem-solving}
@@ -19,6 +20,11 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   // List of stakeholders identifiers
   final List<String> _identifiersCol1 = [];
   final List<String> _identifiersCol2 = [];
+
+  // List of stakeholders identifiers' colors
+  final List<Color> _identifiersColors1 = [];
+  final List<Color> _identifiersColors2 = [];
+
   // Mode for modifying a stakeholder identifier
   bool _isModificationMode = false;
   // Mode for editing a stakeholder identifier
@@ -27,14 +33,32 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   bool _isDeleteMode = false;
   // Bool used to suggest editing at start of adding identifiers
   bool _hasBeenEdited = false;
+  // Bool used to store if a swipe left of right has happened
+  bool? wasARightSwipe;
+  // Callback function used to update the wasARightSwipe field
+  final ValueChanged<bool> onSwipe = placeHolderFunctionBool;
 
   void addToIdentifiers()
   {
     // There should be as much identifiers in the first column,
     // as in the second.
+
+    // Adding to col 1
     int totalIndexes = _identifiersCol1.length+_identifiersCol2.length;
-    if (_identifiersCol1.length <= _identifiersCol2.length) {_identifiersCol1.add("$totalIndexes");}
-    else {_identifiersCol2.add("$totalIndexes");}
+    if (_identifiersCol1.length <= _identifiersCol2.length) 
+    {
+      _identifiersCol1.add("$totalIndexes");
+      // All identifiers are green by default
+      _identifiersColors1.add(greenShade900);
+    }
+    else 
+    {
+      _identifiersCol2.add("$totalIndexes");
+      // All identifiers are green by default
+      _identifiersColors2.add(greenShade900);
+    }
+
+    
   }
 
   // Function used to add a stakeholder identifier
@@ -78,6 +102,44 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
       },
     );
   }
+
+  // Method used to update if a swipe happened
+  void swipeStateUpdate(bool isSwipeRight)
+  {
+    setState(() {wasARightSwipe = isSwipeRight;});  
+  }
+
+  // Function used to change a stakeholder identifier's color
+  void _changeIdentifierColor({required int index, required int column, required Color currentColor}) 
+  { 
+    final colors = [greenShade900, orangeShade900, redShade900];
+    int colorIndex = colors.indexOf(currentColor);
+    Color? newColor;
+
+    // Finding the right color
+    if (wasARightSwipe!)
+    {
+      // Going up in indexes
+        // if index out of range
+      if ((colorIndex + 1) == 3) {newColor = greenShade900;}
+      else {newColor = colors[colorIndex + 1];}      
+    }
+    else
+      // Left swipe
+    {
+      // if index out of range
+      if (colorIndex == 0) {newColor = redShade900;}
+      else {newColor = colors[colorIndex - 1];}
+    }
+
+    // Updating the lists
+   if (column == 1){_identifiersColors1[index] = newColor;}
+   else {_identifiersColors2[index] = newColor;}
+
+    // Updating state data
+    setState(() {});
+  }
+
 
   @override
   void dispose() 
@@ -156,39 +218,51 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   }
 
 
-  List<Widget> buildIdentifiersList({int? column, List<String>? identifiers})
+  List<Widget> buildIdentifiersList
+  ({
+    required int column, required List<String> identifiers, 
+    required List<Color> identifiersColors})
   {
-    return identifiers!.asMap().entries
+    return identifiers.asMap().entries
         // To apply the identifiers to the right column
         // Odd ones in the first column
         // Even ones in the second column
         // .where((entry) => entry.key % 2 == remainder)
         .map((entry) => _IdentifierWidget(
               value: entry.value,
+              color: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key],
               isEditMode: _isEditMode,
               isDeleteMode: _isDeleteMode,
               editionHappened: _hasBeenEdited,
               onDelete: () => _removeIdentifier(index: entry.key, column: column),
               onEdit: () => _editIdentifier(index: entry.key, column: column),
+              onSwipe: (bool value)
+              {
+                swipeStateUpdate(value);
+                _changeIdentifierColor(index: entry.key, column: column, currentColor: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key]);
+              },
             ))
         .toList();
   }
 
   // Method used to build the stakeholders' identifiers
-  List<Widget> _whichIdentifiersListToBuild({int? column}) 
+  List<Widget> _whichIdentifiersListToBuild({required int column}) 
   {
     if (column==1)
-    {return buildIdentifiersList(column: column, identifiers: _identifiersCol1);}
+    {return buildIdentifiersList(column: column, identifiers: _identifiersCol1, identifiersColors: _identifiersColors1);}
     else 
-    {return buildIdentifiersList(column: column, identifiers: _identifiersCol2);}
+    {return buildIdentifiersList(column: column, identifiers: _identifiersCol2, identifiersColors: _identifiersColors2);}
   }
 }
+
 
 // Class for the stakeholders' identifiers
 class _IdentifierWidget extends StatelessWidget 
 {
   // The value for the identifier.
   final String value;
+  // The color for the identifier.
+  final Color color;
   // If the identifier's value is in edition mode or not.
   final bool isEditMode;
   // If the identifier is in deletion mode or not.
@@ -199,45 +273,64 @@ class _IdentifierWidget extends StatelessWidget
   final VoidCallback onDelete;
   // A callback function called to edit the identifier.
   final VoidCallback onEdit;
+  // A callback function called to update if a swipe happened, and which type of swipe, left or right.
+  final ValueChanged<bool> onSwipe;
 
   const _IdentifierWidget
   ({
     required this.value, 
+    required this.color,
     required this.isEditMode, 
     required this.isDeleteMode,
     required this.editionHappened,
     required this.onDelete, 
-    required this.onEdit
+    required this.onEdit,
+    required this.onSwipe,
   });
+
+  
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 12),
-          width: 70, height: 70,
-          // green shade 900
-          decoration: const BoxDecoration(color: Color(0xFF1B5E20), shape: BoxShape.circle),
-          child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: appBarWhite))),
-        ),
-        if (isDeleteMode) ...[
-          Positioned(
-            right: 0, top: 0,
-            // TODO: size/placement according to platform
-            // red shade 900
-            child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
+    return 
+    GestureDetector(
+    onHorizontalDragEnd: (details) {
+      if (details.primaryVelocity! > 0) {
+        // Right swipe
+        onSwipe(true);
+      } else if (details.primaryVelocity! < 0) {
+        // Left swipe
+        onSwipe(false);
+      }
+    },
+    child:    
+      Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 12),
+            width: 70, height: 70,
+            // green shade 900
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: appBarWhite))),
           ),
+          if (isDeleteMode) ...[
+            Positioned(
+              right: 0, top: 0,
+              // TODO: size/placement according to platform
+              // red shade 900
+              child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
+            ),
+          ],
+          if (isEditMode) ...[
+            Positioned(
+              left: 20, top: 15,
+              // TODO: to do without the icon
+              child: IconButton(icon: const Icon(Icons.edit, size: 35, color: Colors.transparent), onPressed: onEdit),
+            ),
+          ]
         ],
-        if (isEditMode) ...[
-          Positioned(
-            left: 20, top: 15,
-            // TODO: to do without the icon
-            child: IconButton(icon: const Icon(Icons.edit, size: 35, color: Colors.transparent), onPressed: onEdit),
-          ),
-        ]
-      ],
+      )
     );
   }
 }
