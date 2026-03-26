@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 const Color navyBlue = Color(0xFF0a2e50);
 const Color paleCyan = Color(0xFFE9FAFC);
 const Color appBarWhite = Color(0xFFf6f1e9);
+const Color black = Colors.black;
+const Color green = Colors.green;
 const Color greenShade900  =  Color(0xFF1B5E20);
+const Color orange = Colors.orange;
 const Color orangeShade900  = Color(0xFFE65100);
+const Color red = Colors.red;
 const Color redShade900  =  Color(0xFFB71C1C); 
 
 //*********************  GAPS  *********************//
