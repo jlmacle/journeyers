@@ -113,7 +113,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   // Function used to change a stakeholder identifier's color
   void _changeIdentifierColor({required int index, required int column, required Color currentColor}) 
   { 
-    final colors = [greenShade900, orangeShade900, redShade900];
+    final colors = [greenShade900, orange, red];
     int colorIndex = colors.indexOf(currentColor);
     Color? newColor;
 
@@ -129,7 +129,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
       // Left swipe
     {
       // if index out of range
-      if (colorIndex == 0) {newColor = redShade900;}
+      if (colorIndex == 0) {newColor = red;}
       else {newColor = colors[colorIndex - 1];}
     }
 
