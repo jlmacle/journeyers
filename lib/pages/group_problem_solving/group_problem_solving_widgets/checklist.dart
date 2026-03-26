@@ -18,13 +18,20 @@ class _ChecklistState extends State<Checklist> {
     "Do we need to further the context analysis?": false,
   };
 
+  // Helper method to check if all items are completed
+  bool get _isAllChecked => _checklistItems.values.every((element) => element == true);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _showChecklistOverlay(context),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: orangeShade900, width: 2.0),
+          // Logic: If all checked, color is white; otherwise, orangeShade900
+          border: Border.all(
+            color: _isAllChecked ? Colors.white : orangeShade900, 
+            width: 5.0,
+          ),
         ),
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: const Row(
@@ -80,14 +87,13 @@ class _ChecklistState extends State<Checklist> {
                     return CheckboxListTile(
                       title: Text(key),
                       value: isChecked,
-                      // Turns the checkbox itself green when checked
                       activeColor: Colors.green,
-                      // Turns the entire tile background green when checked
                       tileColor: isChecked ? const Color(0xFFE8F5E9) : null,
                       onChanged: (bool? value) {
                         setLocalState(() {
                           _checklistItems[key] = value ?? false;
                         });
+                        // Triggers a rebuild of the main widget to update the border color
                         setState(() {}); 
                       },
                     );
