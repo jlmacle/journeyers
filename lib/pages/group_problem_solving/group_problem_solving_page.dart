@@ -361,8 +361,12 @@ class _IdentifierWidget extends StatelessWidget
           Container(
             margin: const EdgeInsets.symmetric(vertical: 12),
             width: 70, height: 70,
-            // green shade 900
-            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            decoration: 
+            BoxDecoration
+            (
+              color: Colors.white, shape: BoxShape.circle, 
+              border: BoxBorder.all(width: 5, color: color), 
+            ),
             child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: appBarWhite))),
           ),
           if (isDeleteMode) ...[
