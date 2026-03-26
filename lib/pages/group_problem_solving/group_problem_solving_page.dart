@@ -155,6 +155,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
       children: [
         // The problem to be solved 
         const ProblemToSolve(),
+        const Divider(),
         // The row with the stakeholder identifiers and the main content
         Expanded(
           child:
