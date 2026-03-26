@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/checklist.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/problem_to_solve.dart';
 
 /// {@category Pages}
 /// {@category Group problem-solving}
@@ -56,9 +59,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
       _identifiersCol2.add("$totalIndexes");
       // All identifiers are green by default
       _identifiersColors2.add(greenShade900);
-    }
-
-    
+    }    
   }
 
   // Function used to add a stakeholder identifier
@@ -132,7 +133,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
       else {newColor = colors[colorIndex - 1];}
     }
 
-    // Updating the lists
+    // Updating the lists of colors
    if (column == 1){_identifiersColors1[index] = newColor;}
    else {_identifiersColors2[index] = newColor;}
 
@@ -150,54 +151,105 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     
  @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(   
       children: [
-        // COLUMN 1: 'Add' Button, 'Clear One' button + Identifier widgets
+        // The problem to be solved 
+        const ProblemToSolve(),
+        // The row with the stakeholder identifiers and the main content
         Expanded(
-          child: ListView(
-            children: [
-              _buildHeaderButton("➕", Colors.white, _addIdentifier),
-              // In 'Edit' mode, a button to delete, or edit, an identifier
-              if (_isModificationMode)
-                // Red and orange shade 900
-                _buildHeaderButton(_isDeleteMode ? "Edit" : "Clear One",_isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;})),
-              ..._whichIdentifiersListToBuild(column: 1),
-            ],
-          ),
-        ),
-        
-        // CENTER: Main Content
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: Colors.grey[200],
-            child: const Center(child: Text("Main Scrollable Area")),
-          ),
-        ),
-
-        // COLUMN 2: ✏️/'Done' button,  'Clear All' button + Identifier widgets
-        Expanded(
-          child: ListView(
-            children: [
-              _buildHeaderButton(
-                _isModificationMode ? "Done" : "✏️", 
-                _isModificationMode ? Colors.orange : Colors.white, 
-                _isModificationMode 
-                  ? () =>
-                    setState(() 
-                    {                      
-                      _isEditMode = false;
-                      _isDeleteMode = false;
-                      _isModificationMode = !_isModificationMode;                      
-                    })
-                    
-                  : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;})
+          child:
+          Row(
+            children: 
+            [
+              // COLUMN 1: 'Add' Button, 'Clear One' button + Identifier widgets
+              Expanded(
+                child: ListView
+                (
+                  children: 
+                  [
+                    _buildHeaderButton("➕", Colors.white, _addIdentifier),
+                    // In 'Edit' mode, a button to delete, or edit, an identifier
+                    if (_isModificationMode)
+                      // Red and orange shade 900
+                      _buildHeaderButton(_isDeleteMode ? "Edit" : "Clear One",_isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;})),
+                    ..._whichIdentifiersListToBuild(column: 1),
+                  ],
+                ),
               ),
               
-              if (_isModificationMode)
-                // red shade 900
-                _buildHeaderButton("Clear All", const Color(0xFFB71C1C), _clearAllIdentifiers),
-              ..._whichIdentifiersListToBuild(column: 2),
+              // CENTER: Main Content
+              Expanded
+              (
+                flex: 2,
+                child: 
+                CustomScrollView
+                (
+                  // Using a CustomScrollView to coordinate the fade effect of the checklist and solutions
+                  slivers: 
+                  [
+                    // Checklist
+                    const SliverToBoxAdapter
+                    (
+                      child: Padding
+                      (
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        child: 
+                        Checklist(),
+                      )                        
+                    ),  
+
+                    // Previously entered solutions
+                    SliverToBoxAdapter
+                    (
+                      child: Padding
+                      (
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: 
+                        Column
+                        (
+                          children: 
+                          [
+                            const Center(child: Text("List of solutions", style:problemSolvingSolutionsTitle)),
+                            ...List<Widget>.generate
+                            (
+                            30,
+                            (i) => Text('Solution $i')
+                            ),
+                          ]
+                        )                        
+                      )                        
+                    ),
+                  ]
+                )
+              ),
+
+          
+              // COLUMN 2: ✏️/'Done' button,  'Clear All' button + Identifier widgets
+              Expanded(
+                child: ListView(
+                  children: [
+                    _buildHeaderButton(
+                      _isModificationMode ? "Done" : "✏️", 
+                      _isModificationMode ? Colors.orange : Colors.white, 
+                      _isModificationMode 
+                        ? () =>
+                          setState(() 
+                          {                      
+                            _isEditMode = false;
+                            _isDeleteMode = false;
+                            _isModificationMode = !_isModificationMode;                      
+                          })
+                          
+                        : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;})
+                    ),
+                    
+                    if (_isModificationMode)
+                      // red shade 900
+                      _buildHeaderButton("Clear All", const Color(0xFFB71C1C), _clearAllIdentifiers),
+                    ..._whichIdentifiersListToBuild(column: 2),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -227,7 +279,6 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
         // To apply the identifiers to the right column
         // Odd ones in the first column
         // Even ones in the second column
-        // .where((entry) => entry.key % 2 == remainder)
         .map((entry) => _IdentifierWidget(
               value: entry.value,
               color: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key],
