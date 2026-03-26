@@ -230,7 +230,7 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                   children: [
                     _buildHeaderButton(
                       _isModificationMode ? "Done" : "✏️", 
-                      _isModificationMode ? Colors.orange : Colors.white, 
+                      _isModificationMode ? orangeShade900 : Colors.white, 
                       _isModificationMode 
                         ? () =>
                           setState(() 
