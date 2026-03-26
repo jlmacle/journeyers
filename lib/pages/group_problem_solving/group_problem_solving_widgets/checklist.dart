@@ -63,11 +63,19 @@ class _ChecklistState extends State<Checklist> {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true, 
+            automaticallyImplyLeading : false,
             title: 
-            const Text
+            const Padding
             (
-              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-              softWrap:true, title, style: problemSolvingChecklistMessage
+              padding: EdgeInsets.all(16.0), 
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                maxLines: 20,
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                style: problemSolvingChecklistMessage,
+              ),
             ),
             actions: [
               IconButton(
