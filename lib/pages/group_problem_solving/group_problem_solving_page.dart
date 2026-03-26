@@ -4,6 +4,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/problem_to_solve.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/solutions_list.dart';
 
 /// {@category Pages}
 /// {@category Group problem-solving}
@@ -19,6 +20,10 @@ class GroupProblemSolvingPage extends StatefulWidget
 class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
 {
   FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
+  final TextEditingController _solutionController = TextEditingController();
+  
+  // List to store the solutions entered by the user
+  final List<String> _solutions = [];
 
   // List of stakeholders identifiers
   final List<String> _identifiersCol1 = [];
@@ -141,11 +146,23 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     setState(() {});
   }
 
+  // Method to handle adding a solution to the list
+  void _submitSolution() {
+    if (_solutionController.text.trim().isNotEmpty) {
+      setState(() {
+        // Adding new solutions to the top of the list
+        _solutions.insert(0, _solutionController.text.trim());
+        _solutionController.clear();
+      });
+    }
+  }
+
 
   @override
   void dispose() 
   {
     groupProblemSolvingDashboardFocusNode.dispose();
+    _solutionController.dispose();
     super.dispose();
   }
     
@@ -153,79 +170,57 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   Widget build(BuildContext context) {
     return Column(   
       children: [
-        // The problem to be solved 
+        // 1. TOP: The problem to be solved (Full Width)
         const ProblemToSolve(),
         const Divider(),
-        // The row with the stakeholder identifiers and the main content
+
+        // 2. CENTER: The row with identifiers and scrollable content
         Expanded(
           child:
           Row(
             children: 
             [
-              // COLUMN 1: 'Add' Button, 'Clear One' button + Identifier widgets
+              // LEFT COLUMN
               Expanded(
                 child: ListView
                 (
                   children: 
                   [
                     _buildHeaderButton("➕", Colors.white, _addIdentifier),
-                    // In 'Edit' mode, a button to delete, or edit, an identifier
                     if (_isModificationMode)
-                      // Red and orange shade 900
                       _buildHeaderButton(_isDeleteMode ? "Edit" : "Clear One",_isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;})),
                     ..._whichIdentifiersListToBuild(column: 1),
                   ],
                 ),
               ),
               
-              // CENTER: Main Content
+              // CENTER CONTENT
               Expanded
               (
                 flex: 2,
                 child: 
                 CustomScrollView
                 (
-                  // Using a CustomScrollView to coordinate the fade effect of the checklist and solutions
                   slivers: 
                   [
-                    // Checklist
                     const SliverToBoxAdapter
                     (
                       child: Padding
                       (
                         padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: 
-                        Checklist(),
+                        child: Checklist(),
                       )                        
                     ),  
 
-                    // Previously entered solutions
-                    SliverToBoxAdapter
-                    (
-                      child: Padding
-                      (
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: 
-                        Column
-                        (
-                          children: 
-                          [
-                            const Center(child: Text("List of solutions", style:problemSolvingSolutionsTitle)),
-                            ...List<Widget>.generate
-                            (
-                            30,
-                            (i) => Text('Solution $i')
-                            ),
-                          ]
-                        )                        
-                      )                        
+                    // Solutions List component
+                    SliverToBoxAdapter(
+                      child: SolutionsList(solutions: _solutions),
                     ),
                   ]
                 )
               ),
 
-          
-              // COLUMN 2: ✏️/'Done' button,  'Clear All' button + Identifier widgets
+              // RIGHT COLUMN
               Expanded(
                 child: ListView(
                   children: [
@@ -233,23 +228,45 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                       _isModificationMode ? "Done" : "✏️", 
                       _isModificationMode ? orangeShade900 : Colors.white, 
                       _isModificationMode 
-                        ? () =>
-                          setState(() 
-                          {                      
+                        ? () => setState(() {                      
                             _isEditMode = false;
                             _isDeleteMode = false;
                             _isModificationMode = !_isModificationMode;                      
                           })
-                          
                         : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;})
                     ),
-                    
                     if (_isModificationMode)
-                      // red shade 900
                       _buildHeaderButton("Clear All", const Color(0xFFB71C1C), _clearAllIdentifiers),
                     ..._whichIdentifiersListToBuild(column: 2),
                   ],
                 ),
+              ),
+            ],
+          ),
+        ),
+
+        // 3. BOTTOM: Full Width Solution Input Field
+        const Divider(height: 1),
+        Container(
+          color: Theme.of(context).cardColor,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _solutionController,
+                  decoration: const InputDecoration(
+                    hintText: "Type a solution...",
+                    border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  ),
+                  onSubmitted: (_) => _submitSolution(),
+                ),
+              ),
+              const SizedBox(width: 8),
+              IconButton(
+                icon: const Icon(Icons.send, color: Colors.blue),
+                onPressed: _submitSolution,
               ),
             ],
           ),
@@ -270,16 +287,12 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     );
   }
 
-
   List<Widget> buildIdentifiersList
   ({
     required int column, required List<String> identifiers, 
     required List<Color> identifiersColors})
   {
     return identifiers.asMap().entries
-        // To apply the identifiers to the right column
-        // Odd ones in the first column
-        // Even ones in the second column
         .map((entry) => _IdentifierWidget(
               value: entry.value,
               color: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key],
@@ -297,7 +310,6 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
         .toList();
   }
 
-  // Method used to build the stakeholders' identifiers
   List<Widget> _whichIdentifiersListToBuild({required int column}) 
   {
     if (column==1)
@@ -307,25 +319,16 @@ class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   }
 }
 
-
 // Class for the stakeholders' identifiers
 class _IdentifierWidget extends StatelessWidget 
 {
-  // The value for the identifier.
   final String value;
-  // The color for the identifier.
   final Color color;
-  // If the identifier's value is in edition mode or not.
   final bool isEditMode;
-  // If the identifier is in deletion mode or not.
   final bool isDeleteMode;
-  // If an identifier has been already edited 
   final bool editionHappened;
-  // A callback function called to delete the identifier.
   final VoidCallback onDelete;
-  // A callback function called to edit the identifier.
   final VoidCallback onEdit;
-  // A callback function called to update if a swipe happened, and which type of swipe, left or right.
   final ValueChanged<bool> onSwipe;
 
   const _IdentifierWidget
@@ -340,18 +343,14 @@ class _IdentifierWidget extends StatelessWidget
     required this.onSwipe,
   });
 
-  
-
   @override
   Widget build(BuildContext context) {
     return 
     GestureDetector(
     onHorizontalDragEnd: (details) {
       if (details.primaryVelocity! > 0) {
-        // Right swipe
         onSwipe(true);
       } else if (details.primaryVelocity! < 0) {
-        // Left swipe
         onSwipe(false);
       }
     },
@@ -366,22 +365,19 @@ class _IdentifierWidget extends StatelessWidget
             BoxDecoration
             (
               color: Colors.white, shape: BoxShape.circle, 
-              border: BoxBorder.all(width: 5, color: color), 
+              border: Border.all(width: 5, color: color), // Fixed BoxBorder.all to Border.all
             ),
             child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: black))),
           ),
           if (isDeleteMode) ...[
             Positioned(
               right: 0, top: 0,
-              // TODO: size/placement according to platform
-              // red shade 900
               child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
             ),
           ],
           if (isEditMode) ...[
             Positioned(
               left: 20, top: 15,
-              // TODO: to do without the icon
               child: IconButton(icon: const Icon(Icons.edit, size: 35, color: Colors.transparent), onPressed: onEdit),
             ),
           ]
