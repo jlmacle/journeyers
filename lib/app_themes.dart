@@ -159,6 +159,25 @@ const String pleaseDescribeTextGroupsHint =
 
 const String textFieldHint = 'Please enter some text';
 
+// Text styles: GROUP PROBLEM-SOLVING PAGE RELATED STYLES
+const TextStyle problemSolvingChecklistTitle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  // backgroundColor: appBarWhite,
+);
+
+const TextStyle problemSolvingChecklistMessage = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+
+const TextStyle problemSolvingSolutionsTitle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
 
 // Text styles: DASHBOARD PAGE RELATED STYLES
 const TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
