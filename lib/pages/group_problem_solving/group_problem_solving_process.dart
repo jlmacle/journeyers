@@ -54,6 +54,12 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   // List to store the solutions entered by the user
   final List<String> _solutions = [];
 
+  // List to store the keywords entered by the user
+  final List<String> _currentKeywords = []; // Add this at the top with other variables
+
+  // TextEditingController for the title
+  final TextEditingController _problemTitleController = TextEditingController();
+
   // List of stakeholders identifiers
   final List<String> _identifiersCol1 = [];
   final List<String> _identifiersCol2 = [];
@@ -222,6 +228,10 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     return;
   }
 
+  String sessionTitle = _problemTitleController.text.trim().isNotEmpty 
+      ? _problemTitleController.text.trim() 
+      : "Problem Solving Session";
+
   // Format solutions for the text file
   String fileContent = "Group Problem Solving Solutions\n";
   fileContent += "Date: ${DateTime.now()}\n";
@@ -253,12 +263,10 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
 
     // Save Metadata to Dashboard if file was saved successfully
     if (filePath != null) {
-      // Note: In your actual app, you'd likely get the 'title' from a 
-      // controller in the ProblemToSolve widget. Using a placeholder here.
       await du.saveDashboardMetaData(
         typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
-        title: "Problem Solving Session", 
-        keywords: [], // Pass keywords from your Keywords widget if available
+        title: sessionTitle, 
+        keywords: _currentKeywords, 
         pathToCSVFile: filePath,
       );
 
@@ -287,6 +295,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   {
     groupProblemSolvingDashboardFocusNode.dispose();
     _solutionController.dispose();
+    _problemTitleController.dispose();
     super.dispose();
   }
     
@@ -344,7 +353,16 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
                       child: Padding
                       (
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Keywords(keywordsUpdatedCallbackFunction: (_) {}),
+                        child: Keywords
+                        (
+                          keywordsUpdatedCallbackFunction: (newKeywords) 
+                          {
+                            setState(() {
+                              _currentKeywords.clear();
+                              _currentKeywords.addAll(newKeywords);
+                            });
+                          }
+                        ),
                       )                        
                     ),  
                     const SliverToBoxAdapter
@@ -523,7 +541,7 @@ class _IdentifierWidget extends StatelessWidget
             BoxDecoration
             (
               color: Colors.white, shape: BoxShape.circle, 
-              border: Border.all(width: 5, color: color), // Fixed BoxBorder.all to Border.all
+              border: Border.all(width: 5, color: color), 
             ),
             child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: black))),
           ),
