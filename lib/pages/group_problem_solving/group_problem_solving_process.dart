@@ -80,6 +80,8 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   // Callback function used to update the wasARightSwipe field
   final ValueChanged<bool> onSwipe = placeHolderFunctionBool;
 
+  String fileExtension = ".txt";
+
   void addToIdentifiers()
   {
     // There should be as much identifiers in the first column,
@@ -239,10 +241,9 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     fileContent += "${i + 1}. ${_solutions[i]}\n";
   }
 
-  String fileExtension = ".txt";
+  
 
   Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));
-  String fileName = "Solutions_${DateTime.now().millisecondsSinceEpoch}";
   String? filePath;
 
   try {
@@ -442,7 +443,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
               ? const Center(child: CircularProgressIndicator())
               : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                   // Defining file name and saving file for mobile platforms 
-                  ? FileNameMobilePlatforms(fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                  ? FileNameMobilePlatforms(fileExtension: fileExtension,  fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   // Saving file for desktop platforms
                   : FileNameDesktopPlatforms(contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
             ],

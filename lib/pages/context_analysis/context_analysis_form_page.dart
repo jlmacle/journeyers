@@ -75,6 +75,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
   
   // FILE NAME
   String fileName = "";
+  String fileExtension = ".csv";
   void analysisFileNameUpdate(String textEditingControllerValue)
   {
     fileName = textEditingControllerValue;
@@ -231,7 +232,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? FileNameMobilePlatforms(fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        ? FileNameMobilePlatforms(fileExtension: fileExtension, fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                         // Saving file for desktop platforms
                         : FileNameDesktopPlatforms(contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
                   ),
