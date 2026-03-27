@@ -158,12 +158,6 @@ class _MyHomePageState extends State<MyHomePage>
             ),
           ),
         ),
-        bottom: 
-        PreferredSize
-        (
-          preferredSize: const Size.fromHeight(4.0), // the height of the border
-          child: Container(color: const Color(0xFFBF9D3E), height: 4.0),
-        ),
       ),
 
       body: 
