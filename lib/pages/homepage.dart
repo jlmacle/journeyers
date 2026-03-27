@@ -9,9 +9,11 @@ import 'package:gap/gap.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language_switch.dart';
 
 /// {@category Pages}
@@ -33,6 +35,8 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> 
 {
+  PrintUtils _pu = PrintUtils();
+
   //**************** GLOBAL KEYS related data ****************//
   final GlobalKey<ContextAnalysisPageState> _contextAnalysisKey = GlobalKey();
 
@@ -51,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage>
       {
         // Switches the focusability of the bottom bar items
         setState(() {_areBottomNavigationItemsFocusable = boolValue;});
-        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
+        if (accessibilityDebug) _pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
       }
       ),
     const GroupProblemSolvingPage(),
@@ -75,9 +79,9 @@ class _MyHomePageState extends State<MyHomePage>
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
-    if (preferencesDebug) pu.printd("Preferences");
-    if (preferencesDebug) pu.printd("Preferences: localeLangCodeFromLangName: $localeLangCodeFromLangName");
-    if (preferencesDebug) pu.printd("Preferences: localeLangCodeFromContext: $localeLangCodeFromContext");
+    if (preferencesDebug) _pu.printd("Preferences");
+    if (preferencesDebug) _pu.printd("Preferences: localeLangCodeFromLangName: $localeLangCodeFromLangName");
+    if (preferencesDebug) _pu.printd("Preferences: localeLangCodeFromContext: $localeLangCodeFromContext");
 
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {
