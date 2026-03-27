@@ -84,7 +84,7 @@ class DashboardUtils {
   Future<void> saveDashboardMetaData
   ({
     required String typeOfContextData,
-    required String? analysisTitle,
+    required String? title,
     required List<String> keywords,
     required String pathToCSVFile,
   }) 
@@ -96,7 +96,7 @@ class DashboardUtils {
     var formattedDate = formatter.format(now);
 
     if (sessionDataDebug) _pu.printd("Session Data: formattedDate: $formattedDate");
-    if (sessionDataDebug) _pu.printd("Session Data: analysisTitle: $analysisTitle");
+    if (sessionDataDebug) _pu.printd("Session Data: analysisTitle: $title");
 
     // Session data storage sample:
     // [{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
@@ -108,7 +108,7 @@ class DashboardUtils {
     // if (filePath != null) dashboardDataSaving(contextAnalysesData, analysisTitle, filePath);
     Map<String, dynamic> sessionData = 
     {
-      keyTitle: analysisTitle ?? "Untitled",
+      keyTitle: title ?? "Untitled",
       keyKeywords: keywords,
       keyDate: formattedDate,
       keyFilePath: pathToCSVFile,

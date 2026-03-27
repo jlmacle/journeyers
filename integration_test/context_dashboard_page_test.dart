@@ -121,7 +121,7 @@ void main() async
         await _du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
-          analysisTitle: testFile1Title,
+          title: testFile1Title,
           keywords: testFile1Keywords,
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
         );
@@ -129,7 +129,7 @@ void main() async
         await _du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
-          analysisTitle: testFile2Title,
+          title: testFile2Title,
           keywords: testFile2Keywords,
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
         );
@@ -137,7 +137,7 @@ void main() async
         await _du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.contextAnalysesContext,
-          analysisTitle: testFile3Title,
+          title: testFile3Title,
           keywords: testFile3Keywords,
           pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
         );
