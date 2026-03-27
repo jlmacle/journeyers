@@ -44,12 +44,12 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
             
             // Widget 2: The Centered Text
             // Expanded fills the middle gap so Center can work effectively
-            const Expanded(
+            Expanded(
               child: Center(
                 child: Text(
-                  'Problem to solve',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
+                _controller.text, 
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               ),
             ),
             
