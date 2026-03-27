@@ -86,7 +86,7 @@ class DashboardUtils {
     required String typeOfContextData,
     required String? title,
     required List<String> keywords,
-    required String pathToCSVFile,
+    required String pathToFile,
   }) 
   async {
     // Date
@@ -111,7 +111,7 @@ class DashboardUtils {
       keyTitle: title ?? "Untitled",
       keyKeywords: keywords,
       keyDate: formattedDate,
-      keyFilePath: pathToCSVFile,
+      keyFilePath: pathToFile,
     };
     // Saving the session data
     await _saveSessionDataHelper
