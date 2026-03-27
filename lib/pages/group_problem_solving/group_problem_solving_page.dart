@@ -1,388 +1,152 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/checklist.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/problem_to_solve.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/solutions_list.dart';
+import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
+import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_dashboard_page.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
+
+//**************** UTILITY CLASSES ****************/
+PrintUtils _pu = PrintUtils();
+UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
-/// {@category Group problem-solving}
-/// The root page for the group problem-solvings.
+/// {@category Group Problem Solving}
+/// The root page for the group problem-solving sessions.
+/// The group problem-solving page embeds a GroupProblemSolvingDashboardPage widget and/or a GroupProblemSolvingProcess widget.
 class GroupProblemSolvingPage extends StatefulWidget 
 {
-  const GroupProblemSolvingPage({super.key});
+  const GroupProblemSolvingPage
+  ({
+    super.key
+  });
 
   @override
-  State<GroupProblemSolvingPage> createState() => _GroupProblemSolvingPageState();
+  State<GroupProblemSolvingPage> createState() => GroupProblemSolvingPageState();
 }
 
-class _GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
+class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
 {
-  FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
-  final TextEditingController _solutionController = TextEditingController();
-  
-  // List to store the solutions entered by the user
-  final List<String> _solutions = [];
+  GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'groupProblemSolvingPage');
 
-  // List of stakeholders identifiers
-  final List<String> _identifiersCol1 = [];
-  final List<String> _identifiersCol2 = [];
+  //**************** PREFERENCES related data and methods ****************//
+  bool _preferencesLoading = true;
+  bool? _wasGroupProblemSolvingSessionDataSaved;
 
-  // List of stakeholders identifiers' colors
-  final List<Color> _identifiersColors1 = [];
-  final List<Color> _identifiersColors2 = [];
-
-  // Mode for modifying a stakeholder identifier
-  bool _isModificationMode = false;
-  // Mode for editing a stakeholder identifier
-  bool _isEditMode = false;
-  // Mode for deleting a stakeholder identifier
-  bool _isDeleteMode = false;
-  // Bool used to suggest editing at start of adding identifiers
-  bool _hasBeenEdited = false;
-  // Bool used to store if a swipe left of right has happened
-  bool? wasARightSwipe;
-  // Callback function used to update the wasARightSwipe field
-  final ValueChanged<bool> onSwipe = placeHolderFunctionBool;
-
-  void addToIdentifiers()
+  getPreferences() async 
   {
-    // There should be as much identifiers in the first column,
-    // as in the second.
+    if (preferencesDebug) _pu.printd("Preferences: getPreferences()");
+    _wasGroupProblemSolvingSessionDataSaved = await upu.wasGroupProblemSolvingSessionDataSaved();
 
-    // Adding to col 1
-    int totalIndexes = _identifiersCol1.length+_identifiersCol2.length;
-    if (_identifiersCol1.length <= _identifiersCol2.length) 
-    {
-      _identifiersCol1.add("$totalIndexes");
-      // All identifiers are green by default
-      _identifiersColors1.add(greenShade900);
-    }
-    else 
-    {
-      _identifiersCol2.add("$totalIndexes");
-      // All identifiers are green by default
-      _identifiersColors2.add(greenShade900);
-    }    
+    setState(() {_preferencesLoading = false;});
+    if (preferencesDebug) _pu.printd("Preferences: _wasGroupProblemSolvingSessionDataSaved: $_wasGroupProblemSolvingSessionDataSaved");
   }
 
-  // Function used to add a stakeholder identifier
-  void _addIdentifier() => setState(() => addToIdentifiers());
-  
-  // Function used to remove a stakeholder identifier
-  void _removeIdentifier({int? index, int? column}) 
-      => setState(() 
-                  {
-                    if (column==1) {_identifiersCol1.removeAt(index!);}
-                    else {_identifiersCol2.removeAt(index!);}
-                  });
+  //**************** METHODS USED TO SWITCH BETWEEN PROCESS VIEW AND DASHBOARD VIEW  ****************//
 
-  // Function used to delete all stakeholder identifiers
-  void _clearAllIdentifiers() => setState(() {_identifiersCol1.clear(); _identifiersCol2.clear();});
-
-  // Function used to edit a stakeholder identifier
-  void _editIdentifier({int? index, int? column}) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        final controller = TextEditingController();
-        return AlertDialog(
-          title: const Text("Edit Value"),
-          content: TextField(controller: controller, keyboardType: TextInputType.name),
-          actions: [
-            TextButton(
-              onPressed: () {
-                if (!_hasBeenEdited) _hasBeenEdited = true;
-                setState(() 
-                          { 
-                            if (column==1) {_identifiersCol1[index!] = controller.text;}
-                            else {_identifiersCol2[index!] = controller.text;}
-                          });
-                Navigator.pop(context);
-              },
-              child: const Text("Save"),
-            )
-          ],
-        );
-      },
-    );
-  }
-
-  // Method used to update if a swipe happened
-  void swipeStateUpdate(bool isSwipeRight)
+  // Method used to refresh the page from process page to dashboard, 
+  // after process data has been saved
+  void onDataSaved() 
   {
-    setState(() {wasARightSwipe = isSwipeRight;});  
+    setState(() {
+      _wasGroupProblemSolvingSessionDataSaved = true;
+    });
   }
 
-  // Function used to change a stakeholder identifier's color
-  void _changeIdentifierColor({required int index, required int column, required Color currentColor}) 
-  { 
-    final colors = [greenShade900, orange, red];
-    int colorIndex = colors.indexOf(currentColor);
-    Color? newColor;
-
-    // Finding the right color
-    if (wasARightSwipe!)
-    {
-      // Going up in indexes
-        // if index out of range
-      if ((colorIndex + 1) == 3) {newColor = greenShade900;}
-      else {newColor = colors[colorIndex + 1];}      
-    }
-    else
-      // Left swipe
-    {
-      // if index out of range
-      if (colorIndex == 0) {newColor = red;}
-      else {newColor = colors[colorIndex - 1];}
-    }
-
-    // Updating the lists of colors
-   if (column == 1){_identifiersColors1[index] = newColor;}
-   else {_identifiersColors2[index] = newColor;}
-
-    // Updating state data
-    setState(() {});
+  // Method used to refresh the page from dashboard to process page, 
+  // after all session files have been deleted
+  void onAllSessionFilesDeleted() 
+  {
+    setState(() {
+      _wasGroupProblemSolvingSessionDataSaved = false;
+    });
   }
 
-  // Method to handle adding a solution to the list
-  void _submitSolution() {
-    if (_solutionController.text.trim().isNotEmpty) {
-      setState(() {
-        // Adding new solutions to the top of the list
-        _solutions.insert(0, _solutionController.text.trim());
-        _solutionController.clear();
-      });
-    }
-  }
-
+  //**************** FOCUS NODE related data and methods ****************//
+  FocusNode groupProblemSolvingPageFocusNode = FocusNode();
 
   @override
   void dispose() 
   {
-    groupProblemSolvingDashboardFocusNode.dispose();
-    _solutionController.dispose();
+    groupProblemSolvingPageFocusNode.dispose();
     super.dispose();
-  }
-    
- @override
-  Widget build(BuildContext context) {
-    return Column(   
-      children: [
-        // 1. TOP: The problem to be solved (Full Width)
-        const ProblemToSolve(),
-        const Divider(),
-
-        // 2. CENTER: The row with identifiers and scrollable content
-        Expanded(
-          child:
-          Row(
-            children: 
-            [
-              // LEFT COLUMN
-              Expanded(
-                child: ListView
-                (
-                  children: 
-                  [
-                    _buildHeaderButton("➕", Colors.white, _addIdentifier),
-                    if (_isModificationMode)
-                      _buildHeaderButton(_isDeleteMode ? "Edit" : "Clear One",_isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;})),
-                    ..._whichIdentifiersListToBuild(column: 1),
-                  ],
-                ),
-              ),
-              
-              // CENTER CONTENT
-              Expanded
-              (
-                flex: 2,
-                child: 
-                CustomScrollView
-                (
-                  slivers: 
-                  [
-                    const SliverToBoxAdapter
-                    (
-                      child: Padding
-                      (
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Checklist(),
-                      )                        
-                    ),  
-
-                    // Solutions List component
-                    SliverToBoxAdapter(
-                      child: SolutionsList(solutions: _solutions),
-                    ),
-                  ]
-                )
-              ),
-
-              // RIGHT COLUMN
-              Expanded(
-                child: ListView(
-                  children: [
-                    _buildHeaderButton(
-                      _isModificationMode ? "Done" : "✏️", 
-                      _isModificationMode ? orangeShade900 : Colors.white, 
-                      _isModificationMode 
-                        ? () => setState(() {                      
-                            _isEditMode = false;
-                            _isDeleteMode = false;
-                            _isModificationMode = !_isModificationMode;                      
-                          })
-                        : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;})
-                    ),
-                    if (_isModificationMode)
-                      _buildHeaderButton("Clear All", const Color(0xFFB71C1C), _clearAllIdentifiers),
-                    ..._whichIdentifiersListToBuild(column: 2),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        // 3. BOTTOM: Full Width Solution Input Field
-        const Divider(height: 1),
-        Container(
-          color: Theme.of(context).cardColor,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _solutionController,
-                  decoration: const InputDecoration(
-                    hintText: "Type a solution...",
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  ),
-                  onSubmitted: (_) => _submitSolution(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              IconButton(
-                icon: const Icon(Icons.send, color: Colors.blue),
-                onPressed: _submitSolution,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Method used to build the header buttons
-  Widget _buildHeaderButton(String text, Color color, VoidCallback onPressed) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: appBarWhite),
-        onPressed: onPressed,
-        child: Text(text),
-      ),
-    );
-  }
-
-  List<Widget> buildIdentifiersList
-  ({
-    required int column, required List<String> identifiers, 
-    required List<Color> identifiersColors})
-  {
-    return identifiers.asMap().entries
-        .map((entry) => _IdentifierWidget(
-              value: entry.value,
-              color: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key],
-              isEditMode: _isEditMode,
-              isDeleteMode: _isDeleteMode,
-              editionHappened: _hasBeenEdited,
-              onDelete: () => _removeIdentifier(index: entry.key, column: column),
-              onEdit: () => _editIdentifier(index: entry.key, column: column),
-              onSwipe: (bool value)
-              {
-                swipeStateUpdate(value);
-                _changeIdentifierColor(index: entry.key, column: column, currentColor: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key]);
-              },
-            ))
-        .toList();
-  }
-
-  List<Widget> _whichIdentifiersListToBuild({required int column}) 
-  {
-    if (column==1)
-    {return buildIdentifiersList(column: column, identifiers: _identifiersCol1, identifiersColors: _identifiersColors1);}
-    else 
-    {return buildIdentifiersList(column: column, identifiers: _identifiersCol2, identifiersColors: _identifiersColors2);}
-  }
-}
-
-// Class for the stakeholders' identifiers
-class _IdentifierWidget extends StatelessWidget 
-{
-  final String value;
-  final Color color;
-  final bool isEditMode;
-  final bool isDeleteMode;
-  final bool editionHappened;
-  final VoidCallback onDelete;
-  final VoidCallback onEdit;
-  final ValueChanged<bool> onSwipe;
-
-  const _IdentifierWidget
-  ({
-    required this.value, 
-    required this.color,
-    required this.isEditMode, 
-    required this.isDeleteMode,
-    required this.editionHappened,
-    required this.onDelete, 
-    required this.onEdit,
-    required this.onSwipe,
-  });
+  } 
 
   @override
-  Widget build(BuildContext context) {
+  void initState() 
+  {
+    super.initState();
+    getPreferences();
+  }  
+
+  @override
+  Widget build(BuildContext context) 
+  {
     return 
-    GestureDetector(
-    onHorizontalDragEnd: (details) {
-      if (details.primaryVelocity! > 0) {
-        onSwipe(true);
-      } else if (details.primaryVelocity! < 0) {
-        onSwipe(false);
-      }
-    },
-    child:    
-      Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 12),
-            width: 70, height: 70,
-            decoration: 
-            BoxDecoration
+    Scaffold
+    (
+      body: 
+      Column
+      (
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: 
+        [
+          // Circular progress indicator while preferences are loading
+          if (_preferencesLoading)
+            const Center(child: CircularProgressIndicator())
+          // When preferences are loaded
+          else ...
+          [
+            // Checking if group problem-solving session data has been stored
+            if (_wasGroupProblemSolvingSessionDataSaved!) ...
+            [
+              // If so, a screen-wide rectangle, with an invite to start a new group problem-solving
+              SizedBox
+              (
+                width: double.infinity,
+                child: 
+                  ElevatedButton
+                  (                    
+                    key: const Key('problem_solving_new_session_button'),
+                    onPressed: () { setState(() { _wasGroupProblemSolvingSessionDataSaved = false;});},
+                    style: ElevatedButton.styleFrom
+                    (
+                      padding: const EdgeInsets.only(top: 10, bottom: 16),
+                      shape: const RoundedRectangleBorder
+                      (
+                        borderRadius: BorderRadius.zero,
+                      ),
+                    ),
+                    child: const Text("Please click to start\na new group problem-solving session", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
+                  ),
+              ),
+              const Divider(thickness: 3, height: 0),
+              // and the session data dashboard in the remaining space
+              Expanded
+              (
+                child: GroupProblemSolvingDashboardPage(key: const Key('problem_solving_dashboard'), parentCallbackFunctionToRefreshTheGroupProblemSolvingPage: onAllSessionFilesDeleted)
+              ),
+            ]
+            else
+            // if no group problem-solving session data has been stored, the group problem-solving process is displayed
+            Expanded
             (
-              color: Colors.white, shape: BoxShape.circle, 
-              border: Border.all(width: 5, color: color), // Fixed BoxBorder.all to Border.all
-            ),
-            child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: black))),
-          ),
-          if (isDeleteMode) ...[
-            Positioned(
-              right: 0, top: 0,
-              child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
-            ),
+              child: 
+              Padding
+              (
+                padding: const EdgeInsets.all(15.0),
+                child: 
+                Focus
+                (
+                  focusNode: groupProblemSolvingPageFocusNode,
+                  child: GroupProblemSolvingProcess(key: groupProblemSolvingPageKey, parentCallbackFunctionToRefreshTheGroupProblemSolvingPage: onDataSaved),
+                ),
+              ),
+            )
           ],
-          if (isEditMode) ...[
-            Positioned(
-              left: 20, top: 15,
-              child: IconButton(icon: const Icon(Icons.edit, size: 35, color: Colors.transparent), onPressed: onEdit),
-            ),
-          ]
         ],
-      )
+      ),
     );
   }
 }
