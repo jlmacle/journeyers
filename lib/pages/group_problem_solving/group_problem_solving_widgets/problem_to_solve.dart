@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 
 class ProblemToSolve extends StatefulWidget {
-  const ProblemToSolve({super.key});
+  final TextEditingController problemTitleController;
+  const ProblemToSolve
+  ({
+    super.key,
+    required this.problemTitleController
+  });
 
   @override
   State<ProblemToSolve> createState() => _ProblemToSolveState();
 }
 
 class _ProblemToSolveState extends State<ProblemToSolve> {
-  final TextEditingController _controller = TextEditingController(text: 'Problem to solve');
   bool _isEditing = false;
-
-  @override
-  void dispose() {
-    _controller.dispose(); 
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
       child: Center(
         child: _isEditing 
           ? TextField(
-              controller: _controller,
+              controller: widget.problemTitleController,
               autofocus: true,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
@@ -47,7 +45,7 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
             Expanded(
               child: Center(
                 child: Text(
-                _controller.text, 
+                (widget.problemTitleController.text.trim() == "") ? "Problem To Solve": widget.problemTitleController.text.trim(), 
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               ),
