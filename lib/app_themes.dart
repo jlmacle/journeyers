@@ -321,6 +321,21 @@ ThemeData appTheme = ThemeData
     (
       borderRadius: BorderRadius.circular(12),
     ),
+    enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black, width: 1.0),
+      ),
+    // Border when the user clicks/taps the field
+    focusedBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.black, width: 2.0),
+    ),
+    // Border when an error is present
+    errorBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.black, width: 1.0),
+    ),
+    // Border when an error is present AND the field is focused
+    focusedErrorBorder: const OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.black, width: 2.0),
+    ),
     filled: true,
     fillColor: white,
     focusColor: black,
