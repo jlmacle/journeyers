@@ -304,7 +304,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     return Column(   
       children: [
         // 1. TOP: The problem to be solved (Full Width)
-        const ProblemToSolve(),
+        ProblemToSolve(problemTitleController: _problemTitleController),
         const Divider(),
 
         // 2. CENTER: The row with identifiers and scrollable content
