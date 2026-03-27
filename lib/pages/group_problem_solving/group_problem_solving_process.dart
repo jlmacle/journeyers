@@ -13,7 +13,7 @@ import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart'
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
-import 'package:journeyers/widgets/utility/desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/file_name_desktop_platforms.dart';
 import 'package:journeyers/widgets/utility/file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/keywords.dart';
