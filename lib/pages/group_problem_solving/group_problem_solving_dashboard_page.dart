@@ -8,7 +8,7 @@ import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-import 'package:journeyers/widgets/utility/group_problem_solving_preview_widget.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
 
 //**************** UTILITY CLASSES ****************/
 final DashboardUtils _du = DashboardUtils();

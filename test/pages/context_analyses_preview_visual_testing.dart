@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/widgets/utility/context_analysis_preview_widget.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 
 void main() 
 {

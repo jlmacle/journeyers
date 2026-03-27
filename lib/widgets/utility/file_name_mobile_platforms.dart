@@ -19,7 +19,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 /// {@category Pages}
 /// {@category Context analysis}
 /// A widget used for selecting a folder to save the files, defining file name, and saving file, for the context analysis, on mobile platforms.
-class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget 
+class FileNameMobilePlatforms extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> fileNameSubmittedCallbackFunction;
@@ -27,7 +27,7 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   /// A callback function called to save context analysis data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
 
-  const ContextAnalysisFileNameMobilePlatforms
+  const FileNameMobilePlatforms
   ({
     super.key,
     required this.fileNameSubmittedCallbackFunction,
@@ -35,16 +35,16 @@ class ContextAnalysisFileNameMobilePlatforms extends StatefulWidget
   });
 
   @override
-  State<ContextAnalysisFileNameMobilePlatforms> createState() => _ContextAnalysisFileNameMobilePlatformsState();
+  State<FileNameMobilePlatforms> createState() => _FileNameMobilePlatformsState();
 }
 
-class _ContextAnalysisFileNameMobilePlatformsState extends State<ContextAnalysisFileNameMobilePlatforms> 
+class _FileNameMobilePlatformsState extends State<FileNameMobilePlatforms> 
 {
   // FILE NAME
   String? _fileName;
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForFileName = "";
-  final GlobalKey<_ContextAnalysisFileNameMobilePlatformsState> errorMessageKey = GlobalKey();
+  final GlobalKey<_FileNameMobilePlatformsState> errorMessageKey = GlobalKey();
   bool _wasErrorMessageModified = false;
   bool _fileNameExists = false;
 
