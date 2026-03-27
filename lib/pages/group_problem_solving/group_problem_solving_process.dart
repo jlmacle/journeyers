@@ -262,9 +262,13 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
         pathToCSVFile: filePath,
       );
 
+      widget.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage();
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Session saved successfully!")),
       );
+
+
     }
   } catch (e) {
     pu.printd("Save Error: $e");
