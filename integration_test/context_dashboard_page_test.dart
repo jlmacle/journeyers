@@ -123,7 +123,7 @@ void main() async
           typeOfContextData: DashboardUtils.contextAnalysesContext,
           title: testFile1Title,
           keywords: testFile1Keywords,
-          pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName1)
+          pathToFile: path.join(absolutePathToCopiesDir.path,fileName1)
         );
         // data 2
         await _du.saveDashboardMetaData
@@ -131,7 +131,7 @@ void main() async
           typeOfContextData: DashboardUtils.contextAnalysesContext,
           title: testFile2Title,
           keywords: testFile2Keywords,
-          pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName2)
+          pathToFile: path.join(absolutePathToCopiesDir.path,fileName2)
         );
         // data 3
         await _du.saveDashboardMetaData
@@ -139,7 +139,7 @@ void main() async
           typeOfContextData: DashboardUtils.contextAnalysesContext,
           title: testFile3Title,
           keywords: testFile3Keywords,
-          pathToCSVFile: path.join(absolutePathToCopiesDir.path,fileName3)
+          pathToFile: path.join(absolutePathToCopiesDir.path,fileName3)
         );
 
         // UPDATING THE CURRENT SESSION DATA

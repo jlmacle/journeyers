@@ -6,7 +6,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/files/files_utils.dart';
@@ -240,6 +239,8 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     fileContent += "${i + 1}. ${_solutions[i]}\n";
   }
 
+  String fileExtension = ".txt";
+
   Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));
   String fileName = "Solutions_${DateTime.now().millisecondsSinceEpoch}";
   String? filePath;
@@ -247,14 +248,14 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   try {
     // Platform-specific file saving
     if (Platform.isAndroid) {
-      filePath = await fu.saveFileOnAndroid(fileName, dataBytes);
+      filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
     } else if (Platform.isIOS) {
-      filePath = await fu.saveFileOniOS(fileName, dataBytes);
+      filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
     } else {
       // Desktop implementation using FilePicker
       filePath = await FilePicker.platform.saveFile(
         dialogTitle: 'Please enter a file name',
-        fileName: '$fileName.txt', // Saving as .txt as requested
+        fileName: '$fileName$fileExtension', 
         bytes: dataBytes,
         type: FileType.custom,
         allowedExtensions: ['txt'],
@@ -267,7 +268,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
         typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
         title: sessionTitle, 
         keywords: _currentKeywords, 
-        pathToCSVFile: filePath,
+        pathToFile: filePath,
       );
 
       await upu.saveWasGroupProblemSolvingSessionDataSaved(true);
@@ -413,8 +414,8 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
                 child: TextField(
                   controller: _solutionController,
                   decoration: const InputDecoration(
-                    hintText: "Type a solution...",
-                    border: OutlineInputBorder(),
+                    hintText: "Please type a solution.",
+                    // border: OutlineInputBorder(),
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   onSubmitted: (_) => _submitSolution(),
