@@ -50,7 +50,8 @@ class UserPreferencesUtils
   }
 
 
-  //**************** EXISTING SESSION DATA ? ****************/
+  //**************** EXISTING ANALYSIS SESSION DATA ? ****************/
+  // TODO with context
   /// Method used to record that session data has been saved.
   Future<void> saveWasSessionDataSaved(bool value) async 
   {
@@ -70,5 +71,27 @@ class UserPreferencesUtils
   {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setBool('wasSessionDataSaved', false);
+  }
+
+
+  /// Method used to record that session data has been saved.
+  Future<void> saveWasGroupProblemSolvingSessionDataSaved(bool value) async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
+  }
+
+  /// Method used to check if session data has been saved.
+  Future<bool> wasGroupProblemSolvingSessionDataSaved() async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('wasGroupProblemSolvingSessionDataSaved') ?? false;
+  }
+
+  /// Method used to reset to false if session data has been saved.
+  Future<bool> resetWasGroupProblemSolvingSessionDataSavedStatus() async 
+  {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.setBool('wasGroupProblemSolvingSessionDataSaved', false);
   }
 }
