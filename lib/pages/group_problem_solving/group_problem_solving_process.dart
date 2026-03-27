@@ -262,6 +262,8 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
         pathToCSVFile: filePath,
       );
 
+      await upu.saveWasGroupProblemSolvingSessionDataSaved(true);
+
       widget.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage();
 
       ScaffoldMessenger.of(context).showSnackBar(
