@@ -143,6 +143,12 @@ const TextStyle analysisPreviewTitleStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
+const TextStyle groupProblemSolvingPreviewTitleStyle = TextStyle
+(
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+);
+
 
 //*********************  TEXT FIELD HINTS: 
 //*********************  CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS  *********************//
