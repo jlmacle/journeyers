@@ -21,6 +21,9 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 /// A widget used for selecting a folder to save the files, defining file name, and saving file, for the context analysis, on mobile platforms.
 class FileNameMobilePlatforms extends StatefulWidget 
 {
+  /// The file extension starting with .
+  final String fileExtension;
+
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> fileNameSubmittedCallbackFunction;
 
@@ -30,6 +33,7 @@ class FileNameMobilePlatforms extends StatefulWidget
   const FileNameMobilePlatforms
   ({
     super.key,
+    required this.fileExtension,
     required this.fileNameSubmittedCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
@@ -102,7 +106,7 @@ class _FileNameMobilePlatformsState extends State<FileNameMobilePlatforms>
     List<String> fileNamesList = result.cast<String>();
     if (sessionDataDebug) pu.printd("Session Data: fileNamesList: $fileNamesList");
 
-    String completeFileName = "$value.csv";
+    String completeFileName = "$value${widget.fileExtension}";
     if (sessionDataDebug) pu.printd("Session Data: completeFileName: |$completeFileName|");
      
     // if the file name exists already
@@ -220,7 +224,7 @@ class _FileNameMobilePlatformsState extends State<FileNameMobilePlatforms>
       style: analysisTextFieldStyle,
       decoration: InputDecoration
       (
-          hint: const Center(child: Text(textAlign: TextAlign.center,'Please add the file name, without .csv, here.', style: analysisTextFieldHintStyle)),
+          hint: Center(child: Text(textAlign: TextAlign.center,'Please add the file name, without ${widget.fileExtension}, here.', style: analysisTextFieldHintStyle)),
           error: Center(key: errorMessageKey, child: Text(textAlign: TextAlign.center, _errorMessageForFileName , style: analysisTextFieldErrorStyle)),
           errorMaxLines: 3
       ),

@@ -132,8 +132,8 @@ class MainActivity: FlutterActivity() {
         return try {
             // Gets the root document from the stored tree URI
             val rootDoc = DocumentFile.fromTreeUri(this, treeUri)
-            // Creates a new CSV file in the directory
-            val newFile = rootDoc?.createFile("text/csv", fileName)
+            // Creates a new file in the directory
+            val newFile = rootDoc?.createFile("application/octet-stream", fileName)
 
             // Writes content to the file and returns success status
             newFile?.uri?.let { fileUri ->
