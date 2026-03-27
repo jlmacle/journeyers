@@ -12,22 +12,22 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 /// {@category Pages}
 /// {@category Context analysis}
 /// Defining file name and saving file for the context analysis, on desktop platforms.
-class ContextAnalysisFileNameDesktopPlatforms extends StatefulWidget 
+class FileNameDesktopPlatforms extends StatefulWidget 
 {
   /// A global key for the context analysis form page
   final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
 
-  const ContextAnalysisFileNameDesktopPlatforms
+  const FileNameDesktopPlatforms
   ({
     super.key,
     required this.contextAnalysisFormPageKey,
   });
 
   @override
-  State<ContextAnalysisFileNameDesktopPlatforms> createState() => _ContextAnalysisFileNameDesktopPlatformsState();
+  State<FileNameDesktopPlatforms> createState() => _FileNameDesktopPlatformsState();
 }
 
-class _ContextAnalysisFileNameDesktopPlatformsState extends State<ContextAnalysisFileNameDesktopPlatforms> 
+class _FileNameDesktopPlatformsState extends State<FileNameDesktopPlatforms> 
 {
 
   @override
