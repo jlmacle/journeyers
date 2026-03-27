@@ -365,7 +365,10 @@ class _GroupProblemSolvingDashboardPageState extends State<GroupProblemSolvingDa
                     background: _buildFilterAndSortBar(),
                   ),
                 ),
-
+                const SliverToBoxAdapter
+                (
+                  child: Divider()                       
+                ), 
                 // Session List
                 SliverPadding(
                   padding: const EdgeInsets.only(bottom: 0),
@@ -673,7 +676,7 @@ class _GroupProblemSolvingDashboardPageState extends State<GroupProblemSolvingDa
                 style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
           ),
-        const Divider(height: 1),
+        
       ],
     );
   }

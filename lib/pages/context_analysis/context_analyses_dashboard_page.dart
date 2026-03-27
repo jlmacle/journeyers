@@ -339,6 +339,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)
+                // TODO: the sliver code to clean eventually
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -362,7 +363,10 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                     background: _buildFilterAndSortBar(),
                   ),
                 ),
-
+                const SliverToBoxAdapter
+                (
+                  child: Divider()                       
+                ), 
                 // Session List
                 SliverPadding(
                   padding: const EdgeInsets.only(bottom: 0),
@@ -670,7 +674,6 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
               ),
           ),
-        const Divider(height: 1),
       ],
     );
   }
