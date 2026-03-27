@@ -95,7 +95,7 @@ class ContextFormState extends State<ContextForm>
     // Saving the dashboard metadata if filePath not null
     if (pathToCSVFile != null)
     {      
-      await du.saveDashboardMetaData(typeOfContextData: DashboardUtils.contextAnalysesContext, analysisTitle: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
+      await du.saveDashboardMetaData(typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, keywords: _keywords, pathToCSVFile: pathToCSVFile);
       await upu.saveWasSessionDataSaved(true);
     }
     
