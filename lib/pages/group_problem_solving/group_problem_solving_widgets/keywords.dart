@@ -110,60 +110,60 @@ class _KeywordsState extends State<Keywords>
               builder: (BuildContext context, StateSetter setLocalState) {
                 return 
                 Column
-    (
-      children: 
-      [                     
-        Padding
-        (
-          padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
-          child: TextField
-          (
-            controller: _keywordsController,
-            decoration: const InputDecoration
-            (
-              hint: Center
-              (
-                child: 
-                Text(textAlign: TextAlign.center, 'Please enter the keywords here. \n(+ Enter key).', style: analysisTextFieldHintStyle)
-              )
-            ),
-            textAlign: TextAlign.center,
-            style: analysisTextFieldStyle,
-            onSubmitted: (value) => addKeyword(value, setLocalState),
-          ),
-        ),
-        // Display of the keywords
-        Center
-        (
-          child: Padding
-          (
-            padding: const EdgeInsets.only(bottom: 0),
-            child: Wrap
-            (
-              spacing: 8.0,
-              runSpacing: 4.0,
-              children: 
-              [
-                ..._keywords.map
                 (
-                  (tag) => InputChip
+                  children: 
+                  [                     
+                    Padding
+                    (
+                      padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
+                      child: TextField
+                      (
+                        controller: _keywordsController,
+                        decoration: const InputDecoration
+                        (
+                          hint: Center
                           (
-                            label: Text(tag),
-                            onDeleted: () 
-                            {
-                              setState( () {_keywords.remove(tag);});
-                              setLocalState(() {});
-                              widget.keywordsUpdatedCallbackFunction(_keywords);
-                            }, 
-                            deleteIconColor: appBarWhite,
+                            child: 
+                            Text(textAlign: TextAlign.center, 'Please enter the keywords here. \n(+ Enter key).', style: analysisTextFieldHintStyle)
                           )
-                )
-              ],
-            ),
-          ),
-        ),
-      ],
-    ); 
+                        ),
+                        textAlign: TextAlign.center,
+                        style: analysisTextFieldStyle,
+                        onSubmitted: (value) => addKeyword(value, setLocalState),
+                      ),
+                    ),
+                    // Display of the keywords
+                    Center
+                    (
+                      child: Padding
+                      (
+                        padding: const EdgeInsets.only(bottom: 0),
+                        child: Wrap
+                        (
+                          spacing: 8.0,
+                          runSpacing: 4.0,
+                          children: 
+                          [
+                            ..._keywords.map
+                            (
+                              (tag) => InputChip
+                                      (
+                                        label: Text(tag),
+                                        onDeleted: () 
+                                        {
+                                          setState( () {_keywords.remove(tag);});
+                                          setLocalState(() {});
+                                          widget.keywordsUpdatedCallbackFunction(_keywords);
+                                        }, 
+                                        deleteIconColor: appBarWhite,
+                                      )
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ); 
               },
             ),
           ),
