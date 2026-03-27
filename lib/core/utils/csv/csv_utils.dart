@@ -524,6 +524,7 @@ class CSVUtils
     required List<List<String>> csvDataGroupPerspective,
     String? fileName
   }) async {
+    String fileExtension = ".csv";
     // Complementing the shortest list to have the same length for both lists
     // before printing side to side
     if (csvDataIndividualPerspective.length < csvDataGroupPerspective.length) {
@@ -571,11 +572,11 @@ class CSVUtils
 
     if (Platform.isAndroid)
     {
-      filePath = await _fu.saveFileOnAndroid(fileName!, dataBytes);      
+      filePath = await _fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes);      
     }
     else if (Platform.isIOS)
     {
-      filePath = await _fu.saveFileOniOS(fileName!, dataBytes);
+      filePath = await _fu.saveFileOniOS(fileName!, fileExtension, dataBytes);
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {

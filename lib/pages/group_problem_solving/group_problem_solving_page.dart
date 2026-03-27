@@ -106,22 +106,31 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
               (
                 width: double.infinity,
                 child: 
-                  ElevatedButton
-                  (                    
-                    key: const Key('problem_solving_new_session_button'),
-                    onPressed: () { setState(() { _wasGroupProblemSolvingSessionDataSaved = false;});},
-                    style: ElevatedButton.styleFrom
-                    (
-                      padding: const EdgeInsets.only(top: 10, bottom: 16),
-                      shape: const RoundedRectangleBorder
-                      (
-                        borderRadius: BorderRadius.zero,
+                  Container(
+                    decoration: BoxDecoration(
+                      // Logic: If all checked, color is white; otherwise, orangeShade900
+                      border: Border.all(
+                        color:  blueShade900, 
+                        width: 5.0,
                       ),
                     ),
-                    child: const Text("Please click to start\na new group problem-solving session", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
+                    child: ElevatedButton
+                    (                    
+                      key: const Key('problem_solving_new_session_button'),
+                      onPressed: () { setState(() { _wasGroupProblemSolvingSessionDataSaved = false;});},
+                      style: ElevatedButton.styleFrom
+                      (
+                        backgroundColor: white,
+                        padding: const EdgeInsets.only(top: 10, bottom: 16),
+                        shape: const RoundedRectangleBorder
+                        (
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      child: const Text("Please click to start\na new group problem-solving session", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
+                    ),
                   ),
               ),
-              const Divider(thickness: 3, height: 0),
               // and the session data dashboard in the remaining space
               Expanded
               (

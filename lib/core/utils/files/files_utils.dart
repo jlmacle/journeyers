@@ -121,17 +121,17 @@ class FileUtils
 
   /// Method used to save a file on Android.
   /// The actual code assumes in a folder pre-selected by the user (handled by MainActivity.kt).
-  Future<String> saveFileOnAndroid(String fileName, Uint8List dataBytes) async 
+  Future<String> saveFileOnAndroid(String fileName, String fileExtension, Uint8List dataBytes) async 
   {
     String? filePath;
     
     final bool success = await platformAndroid.invokeMethod('saveFile', 
     {
-      'fileName': "$fileName.csv",
+      'fileName': "$fileName$fileExtension",
       'content': dataBytes,
     });
     String? folderPath = await _upu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileName.csv";
+    filePath = "$folderPath/$fileName$fileExtension";
 
     if (sessionDataDebug) _pu.printd("Session Data: _saveFileOnAndroid: success: $success");
     if (sessionDataDebug) _pu.printd("Session Data: filePath: $filePath");
@@ -141,17 +141,17 @@ class FileUtils
 
   /// Method used to save a file on iOS.
   /// The actual code assumes in a folder pre-selected by the user (handled by AppDelegate.swift).
-  Future<String> saveFileOniOS(String fileName, Uint8List dataBytes) async 
+  Future<String> saveFileOniOS(String fileName, String fileExtension, Uint8List dataBytes) async 
   {
     String? filePath;
     
     final bool success = await platformIOS.invokeMethod('saveFile', 
     {
-      'fileName': "$fileName.csv",
+      'fileName': "$fileName$fileExtension",
       'content': dataBytes,
     });
     String? folderPath = await _upu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileName.csv";
+    filePath = "$folderPath/$fileName$fileExtension";
 
     if (sessionDataDebug) _pu.printd("Session Data: _saveFileOnAndroid: success: $success");
     if (sessionDataDebug) _pu.printd("Session Data: filePath: $filePath");
