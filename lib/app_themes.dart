@@ -183,6 +183,19 @@ const TextStyle problemSolvingSolutionsTitle = TextStyle
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle problemSolvingKeywordsTitle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  // backgroundColor: appBarWhite,
+);
+
+const TextStyle problemSolvingKeywordsMessage = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+
 // Text styles: DASHBOARD PAGE RELATED STYLES
 const TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
 
