@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 
-class Keywords extends StatefulWidget {
+class Keywords extends StatefulWidget 
+{
+  /// The keywords associated to the session data.
+  final List<String> currentKeywords;
+
   /// A callback function called to update the keywords describing a session.
-  final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;
+  final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;  
 
   const Keywords
   ({
     super.key,
+    required this.currentKeywords,
     required this.keywordsUpdatedCallbackFunction
   });
 
@@ -18,27 +23,47 @@ class Keywords extends StatefulWidget {
 
 class _KeywordsState extends State<Keywords> 
 {
-   final List<String> _keywords = [];
+  // Initializes with the passed keywords instead of an empty list
+  late List<String> _keywords;
   final TextEditingController _keywordsController = TextEditingController();
     
   // Method used to add keywords to the _keywords list
-  void addKeyword(String value, [StateSetter? localSetState]) {
-  var trimmedValue = value.trim();
-  if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue)) {
-    // Updates the underlying data
-    setState(() {
-      _keywords.add(trimmedValue);
-      _keywordsController.clear();
-    });
-    
-    // Redraws the Dialog/Overlay
-    if (localSetState != null) {
-      localSetState(() {});
+  void addKeyword(String value, [StateSetter? localSetState]) 
+  {
+    var trimmedValue = value.trim();
+    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue)) {
+      // Updates the underlying data
+      setState(() {
+        _keywords.add(trimmedValue);
+        _keywordsController.clear();
+      });
+      
+      // Redraws the Dialog/Overlay
+      if (localSetState != null) {
+        localSetState(() {});
+      }
+      
+      widget.keywordsUpdatedCallbackFunction(_keywords);
     }
-    
-    widget.keywordsUpdatedCallbackFunction(_keywords);
   }
-}
+
+  @override
+  void initState() {
+    super.initState();
+    _keywords = List.from(widget.currentKeywords); // Syncs at start
+  }
+
+  @override
+  void didUpdateWidget(Keywords oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Checks if the pointer or the content of the list has changed
+    if (widget.currentKeywords != oldWidget.currentKeywords) {
+      setState(() {
+        // Creates a fresh copy from the new parent data
+        _keywords = List<String>.from(widget.currentKeywords);
+      });
+    }
+  }
 
   @override
   void dispose()
