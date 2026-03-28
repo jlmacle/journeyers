@@ -13,10 +13,10 @@ class DashboardUtils {
   final PrintUtils _pu = PrintUtils();
 
   /// String used to communicate the context of the context analyses.
-  static String contextAnalysesContext = "contextAnalysesData";
+  static const String contextAnalysesContext = "contextAnalysesData";
 
   /// String used to communicate the context of the group problem-solvings.
-  static String groupProblemSolvingsContext = "groupProblemSolvingData";
+  static const String groupProblemSolvingsContext = "groupProblemSolvingData";
 
   /// The key for the session data title.
   static String keyTitle = 'title';

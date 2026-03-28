@@ -136,7 +136,7 @@ void main() async
         (typeOfContextData: DashboardUtils.contextAnalysesContext);
 
         // SETTING 'wasSessionDataSaved' TO TRUE, in case there was no session data to start with
-        await _upu.saveWasSessionDataSaved(true);
+        await _upu.saveWasSessionDataSaved(value: true, context: DashboardUtils.contextAnalysesContext);
         
       });
 
@@ -152,7 +152,7 @@ void main() async
           );
 
           // PRE-TEST SESSION DATA PRESENT RESTORATION (set to true by the test)
-          if (currentSessionDataCopy.isEmpty) {await _upu.saveWasSessionDataSaved(false);}
+          if (currentSessionDataCopy.isEmpty) {await _upu.saveWasSessionDataSaved(value: false, context: DashboardUtils.contextAnalysesContext);}
 
 
         } 

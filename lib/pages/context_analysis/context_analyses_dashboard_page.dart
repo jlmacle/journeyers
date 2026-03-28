@@ -201,7 +201,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasSessionDataSavedStatus();
+      await _upu.resetWasSessionDataSavedStatus(context: DashboardUtils.contextAnalysesContext);
       // refreshing the page
       widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
     }
@@ -250,7 +250,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasSessionDataSavedStatus();
+      await _upu.resetWasSessionDataSavedStatus(context: DashboardUtils.contextAnalysesContext);
       // refreshing the page
       widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
     }
