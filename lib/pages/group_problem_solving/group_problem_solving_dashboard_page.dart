@@ -202,7 +202,7 @@ class _GroupProblemSolvingDashboardPageState extends State<GroupProblemSolvingDa
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasGroupProblemSolvingSessionDataSavedStatus();
+      await _upu.resetWasSessionDataSavedStatus(context: DashboardUtils.groupProblemSolvingsContext);
       // refreshing the page
       widget.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage();
     }
@@ -251,7 +251,7 @@ class _GroupProblemSolvingDashboardPageState extends State<GroupProblemSolvingDa
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasGroupProblemSolvingSessionDataSavedStatus();
+      await _upu.resetWasSessionDataSavedStatus(context: DashboardUtils.groupProblemSolvingsContext);
       // refreshing the page
       widget.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage();
     }

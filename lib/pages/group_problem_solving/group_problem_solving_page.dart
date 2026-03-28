@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
@@ -37,7 +38,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   getPreferences() async 
   {
     if (preferencesDebug) _pu.printd("Preferences: getPreferences()");
-    _wasGroupProblemSolvingSessionDataSaved = await upu.wasGroupProblemSolvingSessionDataSaved();
+    _wasGroupProblemSolvingSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.groupProblemSolvingsContext);
 
     setState(() {_preferencesLoading = false;});
     if (preferencesDebug) _pu.printd("Preferences: _wasGroupProblemSolvingSessionDataSaved: $_wasGroupProblemSolvingSessionDataSaved");

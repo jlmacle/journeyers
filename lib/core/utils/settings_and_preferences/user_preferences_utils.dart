@@ -1,3 +1,4 @@
+import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@category Utils}
@@ -51,47 +52,54 @@ class UserPreferencesUtils
 
 
   //**************** EXISTING ANALYSIS SESSION DATA ? ****************/
-  // TODO with context
   /// Method used to record that session data has been saved.
-  Future<void> saveWasSessionDataSaved(bool value) async 
+  Future<void> saveWasSessionDataSaved({required bool value, required String context}) async 
   {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('wasSessionDataSaved', value);
+    switch (context)
+    {
+      case (DashboardUtils.contextAnalysesContext):
+      {
+        await prefs.setBool('wasSessionDataSaved', value);
+      }
+      case (DashboardUtils.groupProblemSolvingsContext):
+      {
+        await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
+      }
+    }   
   }
 
   /// Method used to check if session data has been saved.
-  Future<bool> wasSessionDataSaved() async 
+  Future<bool?> wasSessionDataSaved({required String context}) async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('wasSessionDataSaved') ?? false;
+    switch (context)
+    {
+      case (DashboardUtils.contextAnalysesContext):
+      {
+        return prefs.getBool('wasSessionDataSaved') ?? false;
+      }
+      case (DashboardUtils.groupProblemSolvingsContext):
+      {
+        return prefs.getBool('wasGroupProblemSolvingSessionDataSaved') ?? false;
+      }      
+    }     
   }
 
   /// Method used to reset to false if session data has been saved.
-  Future<bool> resetWasSessionDataSavedStatus() async 
+  Future<void> resetWasSessionDataSavedStatus({required String context}) async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.setBool('wasSessionDataSaved', false);
-  }
-
-
-  /// Method used to record that session data has been saved.
-  Future<void> saveWasGroupProblemSolvingSessionDataSaved(bool value) async 
-  {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
-  }
-
-  /// Method used to check if session data has been saved.
-  Future<bool> wasGroupProblemSolvingSessionDataSaved() async 
-  {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('wasGroupProblemSolvingSessionDataSaved') ?? false;
-  }
-
-  /// Method used to reset to false if session data has been saved.
-  Future<bool> resetWasGroupProblemSolvingSessionDataSavedStatus() async 
-  {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.setBool('wasGroupProblemSolvingSessionDataSaved', false);
+    switch (context)
+    {
+      case (DashboardUtils.contextAnalysesContext):
+      {
+        await prefs.setBool('wasSessionDataSaved', false);
+      }
+      case (DashboardUtils.groupProblemSolvingsContext):
+      {
+        await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', false);
+      }
+    }
   }
 }
