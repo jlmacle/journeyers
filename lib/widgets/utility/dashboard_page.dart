@@ -819,7 +819,8 @@ class _DashboardPageState extends State<DashboardPage>
 
 // Method used to display an overlay with a session data preview. 
 void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, String filePath) {
-  String title = "${session[DashboardUtils.keyTitle]}";
+  String title = session[DashboardUtils.keyTitle];
+  if (title.contains(" (gps)")) {title = session[DashboardUtils.keyTitle].replaceAll(" (gps)", "");}
 
   showGeneralDialog(
     context: context,
@@ -839,11 +840,22 @@ void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, Stri
             softWrap:true, title, style: previewTitleStyle
           ),
           // Left side: Edit Button
-          leading: IconButton(
-            icon: const Icon(Icons.edit),
-            color: appBarWhite,
-            onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
-            tooltip: "Edit session",
+          leadingWidth: 100,
+          leading: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.edit),
+                color: appBarWhite,
+                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
+                tooltip: "Edit session",
+              ),
+              IconButton(
+                icon: const Icon(Icons.share),
+                color: appBarWhite,
+                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Share not yet implemented.')));},
+                tooltip: "Share session",
+              ),
+            ],
           ),
           
           // Right side: Close Button
