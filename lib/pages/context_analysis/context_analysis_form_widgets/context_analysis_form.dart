@@ -11,14 +11,14 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_context_form_questions.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
-part 'context_form_ext.dart';
+part 'context_analysis_form_ext.dart';
 
 //**************** UTILITY CLASSES ****************//
 CSVUtils cu = CSVUtils();
@@ -27,7 +27,9 @@ FormUtils fu = FormUtils();
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils(); 
 
-class ContextForm extends StatefulWidget 
+/// {@category Context analysis}
+/// Form used in the context analysis.
+class ContextAnalysisForm extends StatefulWidget 
 {
   /// Global key for the context analysis form page
   final GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey;
@@ -36,7 +38,7 @@ class ContextForm extends StatefulWidget
   /// Callback function used to switch the focusability of the bottom bar items
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
-  const ContextForm
+  const ContextAnalysisForm
   ({
     super.key,
     required this.contextAnalysisFormPageKey,
@@ -45,10 +47,10 @@ class ContextForm extends StatefulWidget
   });
 
   @override
-  State<ContextForm> createState() => ContextFormState();
+  State<ContextAnalysisForm> createState() => ContextAnalysisFormState();
 }
 
-class ContextFormState extends State<ContextForm> 
+class ContextAnalysisFormState extends State<ContextAnalysisForm> 
 {
   //**************** ACCESSIBILITY related data ****************//
   // Data related to the folding/unfolding of the expansion tiles

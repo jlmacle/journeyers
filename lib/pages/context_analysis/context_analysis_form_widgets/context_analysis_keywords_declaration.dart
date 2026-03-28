@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 
-class KeywordsDeclaration extends StatefulWidget 
+/// {@category Context analysis}
+/// A widget used for keywords declaration in the context analysis process.
+class ContextAnalysisKeywordsDeclaration extends StatefulWidget 
 {
   /// A callback function called to update the keywords describing a session.
   final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;
 
-  const KeywordsDeclaration
+  const ContextAnalysisKeywordsDeclaration
   ({
     super.key,
     required this.keywordsUpdatedCallbackFunction
   });
 
   @override
-  State<KeywordsDeclaration> createState() => _KeywordsDeclarationState();
+  State<ContextAnalysisKeywordsDeclaration> createState() => _ContextAnalysisKeywordsDeclarationState();
 }
 
-class _KeywordsDeclarationState extends State<KeywordsDeclaration> 
+class _ContextAnalysisKeywordsDeclarationState extends State<ContextAnalysisKeywordsDeclaration> 
 {
 
   final List<String> _keywords = [];

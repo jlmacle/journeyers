@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'dart:io';
 
+import 'package:journeyers/core/utils/files/files_utils.dart';
+
+/// {@category Group problem-solving}
+/// A preview widget used for the group problem-solving dashboard.
 class GroupProblemSolvingPreviewWidget extends StatefulWidget {
   final String pathToStoredData;
 
@@ -17,6 +23,9 @@ class GroupProblemSolvingPreviewWidget extends StatefulWidget {
 
 class _GroupProblemSolvingPreviewWidgetState
     extends State<GroupProblemSolvingPreviewWidget> {
+    // Utility classes
+  final FileUtils fu = FileUtils();   
+
   bool _isLoading = true;
   String _title = "";
   String _dateString = "";
@@ -30,23 +39,34 @@ class _GroupProblemSolvingPreviewWidgetState
 
   Future<void> _fetchingData() async {
     try {
-      final file = File(widget.pathToStoredData);
-      if (await file.exists()) {
-        List<String> lines = await file.readAsLines();
-
-        if (lines.length >= 2) {
-          _title = lines[1];
-          // Extract date from the second line: "Date: MMMM dd, yyyy h:mm a"
-          _dateString = lines[2].replaceFirst("Date: ", "");
-          
-          // Solutions start after the "---" separator (index 3 onwards)
-          // We strip the "1. ", "2. " numbering prefix
-          _solutions = lines
-              .skip(4)
-              .where((line) => line.trim().isNotEmpty)
-              .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
-              .toList();
+      List<String> lines = [];
+      if (Platform.isAndroid || Platform.isIOS)
+      {
+        String content = await fu.readTextContentOnMobile(pathToData: widget.pathToStoredData);
+        lines = LineSplitter.split(content).toList();
+      }
+      else
+      {
+        final file = File(widget.pathToStoredData);
+        if (await file.exists()) 
+        {
+          lines = await file.readAsLines();
         }
+      }
+
+      if (lines.length >= 2) {
+        _title = lines[1];
+        // Extract date from the second line: "Date: MMMM dd, yyyy h:mm a"
+        _dateString = lines[2].replaceFirst("Date: ", "");
+        
+        // Solutions start after the "---" separator (index 3 onwards)
+        // We strip the "1. ", "2. " numbering prefix
+        _solutions = lines
+            .skip(4)
+            .where((line) => line.trim().isNotEmpty)
+            .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
+            .toList();         
+        
       }
     } catch (e) {
       debugPrint("Error reading preview data: $e");

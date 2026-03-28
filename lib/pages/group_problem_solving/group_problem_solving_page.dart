@@ -7,7 +7,7 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
-import 'package:journeyers/widgets/utility/dashboard_page.dart';
+import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 //**************** UTILITY CLASSES ****************/
 PrintUtils _pu = PrintUtils();
@@ -137,7 +137,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
               Expanded
               (
                 child: 
-                DashboardPage
+                SessionsDashboardPage
                 (
                   key: const Key('problem_solving_dashboard'),
                   dashboardContext: DashboardUtils.groupProblemSolvingsContext,

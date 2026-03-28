@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
-import 'package:journeyers/widgets/utility/file_name_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -16,10 +16,10 @@ import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/widgets/utility/file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_form.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/keywords_declaration.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_keywords_declaration.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 //**************** UTILITY CLASSES ****************//
@@ -29,7 +29,6 @@ FormUtils fu = FormUtils();
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils();  
 
-/// {@category Pages}
 /// {@category Context analysis}
 /// The process for the context analyses.
 
@@ -82,7 +81,7 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
   }
   
   // Global key for the context form
-  final GlobalKey<ContextFormState> _contextFormKey = GlobalKey(debugLabel:'form');
+  final GlobalKey<ContextAnalysisFormState> _contextFormKey = GlobalKey(debugLabel:'form');
   
   // Method used to print the form data to CSV
   Future<void> saveDataAndMetadata() async
@@ -184,14 +183,14 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
             ContextAnalysisTitle(analysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
             
             // Keywords
-            KeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
+            ContextAnalysisKeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
             
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
             const Gap(preAndPostLevel2DividerGap),
 
             // Form 
-            ContextForm(
+            ContextAnalysisForm(
                         key: _contextFormKey,
                         contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisProcessState>,
                         parentCallbackFunctionToRefreshTheContextAnalysisPage: widget.parentCallbackFunctionToRefreshTheContextAnalysisPage,
@@ -232,9 +231,9 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? FileNameMobilePlatforms(fileExtension: fileExtension, fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        ? SessionFileNameMobilePlatforms(fileExtension: fileExtension, fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                         // Saving file for desktop platforms
-                        : FileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   ),
                 ],
               ),

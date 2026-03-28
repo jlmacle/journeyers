@@ -1,4 +1,5 @@
-part of 'context_form.dart';
+part of 'context_analysis_form.dart';
+
 //**************** FORM RELATED DATA AND METHODS ****************//
 
 // Global keys to change text decoration when a checkbox is checked
@@ -8,7 +9,7 @@ final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey = GlobalKey();
 final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey = GlobalKey();
 
 // Form questions
-ContextAnalysisContextFormQuestions q = ContextAnalysisContextFormQuestions();
+ContextAnalysisFormQuestions q = ContextAnalysisFormQuestions();
 
 // Form values related data
 bool _studiesHouseholdBalanceCheckboxValue = false;

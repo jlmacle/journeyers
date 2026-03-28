@@ -6,7 +6,6 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 //**************** UTILITY CLASS ****************//
 PrintUtils pu = PrintUtils();
 
-/// {@category Pages}
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
 class ContextAnalysisTitle extends StatefulWidget 

@@ -9,7 +9,7 @@ import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
-import 'package:journeyers/widgets/utility/dashboard_page.dart';
+import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 //**************** UTILITY CLASSES ****************/
 PrintUtils pu = PrintUtils();
@@ -17,8 +17,8 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
-/// The root page for the context analyses.
-/// The context analysis page embeds a ContextAnalysesDashboardPage and/or a ContextAnalysisFormPage.
+/// The root page for the context analysis sessions.
+/// The context analysis page embeds a DashboardPage and/or a ContextAnalysisFormPage.
 class ContextAnalysisPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
@@ -187,7 +187,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
-                child: DashboardPage
+                child: SessionsDashboardPage
                 (
                   key: const Key('analyses_dashboard'), 
                   dashboardContext: DashboardUtils.contextAnalysesContext,
