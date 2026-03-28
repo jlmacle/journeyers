@@ -331,8 +331,8 @@ ThemeData appTheme = ThemeData
     ),
     filled: true,
     fillColor: white,
-    focusColor: black,
-    hoverColor: black,
+    focusColor: white,
+    hoverColor: white,
     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
   ),
 
