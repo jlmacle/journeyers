@@ -51,6 +51,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   // TITLE
   // TextEditingController for entering a new title
   final TextEditingController _problemTitleController = TextEditingController();
+  final String titleSuffix = " (gps)";
 
   // List to store the keywords entered by the user
   List<String> _currentKeywords = []; 
@@ -128,7 +129,21 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
         final controller = TextEditingController();
         return AlertDialog(
           title: const Text("Edit Value"),
-          content: TextField(controller: controller, keyboardType: TextInputType.name),
+          content: TextField
+          (
+            controller: controller, 
+            keyboardType: TextInputType.name,
+            onSubmitted: (_) 
+                        {
+                            if (!_hasBeenEdited) _hasBeenEdited = true;
+                            setState(() 
+                                      { 
+                                        if (column==1) {_identifiersCol1[index!] = controller.text;}
+                                        else {_identifiersCol2[index!] = controller.text;}
+                                      });
+                            Navigator.pop(context);
+                          },
+            ),
           actions: [
             TextButton(
               onPressed: () {
@@ -233,7 +248,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   }
 
   String sessionTitle = _problemTitleController.text.trim().isNotEmpty 
-      ? _problemTitleController.text.trim() 
+      ? "${_problemTitleController.text.trim()}$titleSuffix"
       : "Problem Solving Session";
 
   // Format solutions for the text file
@@ -302,7 +317,7 @@ Future<void> _loadHistory() async {
 
 void _handleSessionSelection(Map<String, dynamic> session) {
   setState(() {
-    _problemTitleController.text = session['title'] ?? "";
+    _problemTitleController.text = "${session['title']}";
     
     if (session['keywords'] != null) {
       // Creates a NEW list instance instead of .clear() and .addAll()
@@ -493,7 +508,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: appBarWhite),
         onPressed: onPressed,
-        child: Text(text),
+        child: Text(text, style: const TextStyle(fontSize: 12)),
       ),
     );
   }
@@ -513,6 +528,11 @@ void _handleSessionSelection(Map<String, dynamic> session) {
               onDelete: () => _removeIdentifier(index: entry.key, column: column),
               onEdit: () => _editIdentifier(index: entry.key, column: column),
               onSwipe: (bool value)
+              {
+                swipeStateUpdate(value);
+                _changeIdentifierColor(index: entry.key, column: column, currentColor: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key]);
+              },
+              onClick: (bool value)
               {
                 swipeStateUpdate(value);
                 _changeIdentifierColor(index: entry.key, column: column, currentColor: (column==1) ? _identifiersColors1[entry.key] : _identifiersColors2[entry.key]);
@@ -541,6 +561,7 @@ class _IdentifierWidget extends StatelessWidget
   final VoidCallback onDelete;
   final VoidCallback onEdit;
   final ValueChanged<bool> onSwipe;
+  final ValueChanged<bool> onClick;
 
   const _IdentifierWidget
   ({
@@ -552,6 +573,7 @@ class _IdentifierWidget extends StatelessWidget
     required this.onDelete, 
     required this.onEdit,
     required this.onSwipe,
+    required this.onClick,
   });
 
   @override
@@ -569,6 +591,7 @@ class _IdentifierWidget extends StatelessWidget
       Stack(
         alignment: Alignment.center,
         children: [
+          // The Circle
           Container(
             margin: const EdgeInsets.symmetric(vertical: 12),
             width: 70, height: 70,
@@ -578,20 +601,28 @@ class _IdentifierWidget extends StatelessWidget
               color: Colors.white, shape: BoxShape.circle, 
               border: Border.all(width: 5, color: color), 
             ),
-            child: Center(child: Text(editionHappened ? value : '✏️$value', style: const TextStyle(color: black))),
-          ),
+            child: 
+              InkWell(
+                onTap: 
+                    isEditMode ? onEdit 
+                              : isDeleteMode ? onDelete
+                              // Color swapping if neither edit nor delete mode
+                              :  () {onSwipe(true);}, 
+                customBorder: const CircleBorder(), // Keeps the ripple effect circular
+                child: Center(
+                  child: Text(
+                    editionHappened ? value : '✏️$value',
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
           if (isDeleteMode) ...[
             Positioned(
               right: 0, top: 0,
               child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
             ),
           ],
-          if (isEditMode) ...[
-            Positioned(
-              left: 20, top: 15,
-              child: IconButton(icon: const Icon(Icons.edit, size: 35, color: Colors.transparent), onPressed: onEdit),
-            ),
-          ]
         ],
       )
     );
