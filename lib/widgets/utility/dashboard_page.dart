@@ -7,7 +7,6 @@ import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 
@@ -18,23 +17,34 @@ final UserPreferencesUtils _upu = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
-/// The page displaying a dashboard of the past context analyses.
-class ContextAnalysesDashboardPage extends StatefulWidget 
+/// A widget displaying a dashboard of the past session data.
+/// Assumption concerning the session data structure:
+/// [{"title":"aTitle","keywords":[kw,kw2],"date":"March 20, 2026 5:51 AM","filePath":"C:\\Users\\username\\Documents\\a.csv"},
+/// {"title":"aTitle2","keywords":[kw,kw3],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.csv"}]
+class DashboardPage extends StatefulWidget 
 {
-  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
-  final VoidCallback parentCallbackFunctionToRefreshTheContextAnalysisPage;
+  /// The context for the dashboard (context analyses, group problem-solving sessions)
+  final String dashboardContext;
 
-  const ContextAnalysesDashboardPage
+  /// The widget used for the preview
+  final Widget Function({required String pathToData}) previewWidget;
+
+  /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
+  final VoidCallback parentCallbackFunctionToRefreshTheParentPage;
+
+  const DashboardPage
   ({
     super.key,
-    this.parentCallbackFunctionToRefreshTheContextAnalysisPage = placeHolderVoidCallback,
+    required this.dashboardContext,
+    required this.previewWidget,
+    this.parentCallbackFunctionToRefreshTheParentPage = placeHolderVoidCallback,
   });
 
   @override
-  State<ContextAnalysesDashboardPage> createState() => _ContextAnalysesDashboardPageState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardPage> 
+class _DashboardPageState extends State<DashboardPage> 
 {
 
   //**************** PREFERENCES related data and methods ****************/
@@ -45,7 +55,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
   Future<void> _sessionDataRetrieval() async 
   {
     final data = await _du.retrieveAllDashboardSessionData
-      (typeOfContextData: DashboardUtils.contextAnalysesContext);
+      (typeOfContextData: widget.dashboardContext);
       
     _usedKeywords = await _getUsedKeywords(data);
     _allSessions = data;
@@ -172,7 +182,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     await _fu.deleteCsvFile(filePath);
 
     // Removing dashboard data
-    await _du.deleteSessionData(typeOfContextData: DashboardUtils.contextAnalysesContext, filePathRelatedToDataToDelete: filePath);
+    await _du.deleteSessionData(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating state data
     _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
@@ -201,9 +211,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasSessionDataSavedStatus(context: DashboardUtils.contextAnalysesContext);
+      await _upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
-      widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
+      widget.parentCallbackFunctionToRefreshTheParentPage();
     }
   }
 
@@ -221,7 +231,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
       // Removing dashboard data
       await _du.deleteSessionData
       (
-        typeOfContextData: DashboardUtils.contextAnalysesContext, 
+        typeOfContextData: widget.dashboardContext, 
         filePathRelatedToDataToDelete: filePath
       );
     }
@@ -250,9 +260,9 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasSessionDataSavedStatus(context: DashboardUtils.contextAnalysesContext);
+      await _upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
-      widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
+      widget.parentCallbackFunctionToRefreshTheParentPage();
     }
   }
 
@@ -723,7 +733,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
                 // Storing the updated session data
                 await _du.saveSessionData
                 (
-                  typeOfContextData: DashboardUtils.contextAnalysesContext, 
+                  typeOfContextData: widget.dashboardContext, 
                   savedData: _allSessions!,
                 );
 
@@ -791,7 +801,7 @@ class _ContextAnalysesDashboardPageState extends State<ContextAnalysesDashboardP
               
               await _du.saveSessionData
               (
-                typeOfContextData: DashboardUtils.contextAnalysesContext, 
+                typeOfContextData: widget.dashboardContext, 
                 savedData: _allSessions!,
               );
 
@@ -826,7 +836,7 @@ void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, Stri
           Text
           (
             textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-            softWrap:true, title, style: analysisPreviewTitleStyle
+            softWrap:true, title, style: previewTitleStyle
           ),
           // Left side: Edit Button
           leading: IconButton(
@@ -853,8 +863,8 @@ void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, Stri
             physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ContextAnalysisPreviewWidget(
-                pathToCsvData: filePath,
+              child: widget.previewWidget(
+                pathToData: filePath,
               ),
             ),
           ),

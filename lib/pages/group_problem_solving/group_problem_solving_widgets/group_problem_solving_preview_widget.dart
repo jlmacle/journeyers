@@ -6,20 +6,20 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 CSVUtils cu = CSVUtils();
 PrintUtils pu = PrintUtils();
 
-class GroupProblemSolvingWidget extends StatefulWidget 
+class GroupProblemSolvingPreviewWidget extends StatefulWidget 
 {
   final String pathToStoredData;
 
-  const GroupProblemSolvingWidget({
+  const GroupProblemSolvingPreviewWidget({
     super.key, 
     required this.pathToStoredData
   });
 
   @override
-  State<GroupProblemSolvingWidget> createState() => _GroupProblemSolvingWidgetState();
+  State<GroupProblemSolvingPreviewWidget> createState() => _GroupProblemSolvingPreviewWidgetState();
 }
 
-class _GroupProblemSolvingWidgetState extends State<GroupProblemSolvingWidget> 
+class _GroupProblemSolvingPreviewWidgetState extends State<GroupProblemSolvingPreviewWidget> 
 {
   bool _isLoading = true;
 

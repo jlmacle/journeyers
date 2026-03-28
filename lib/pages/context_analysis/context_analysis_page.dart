@@ -7,8 +7,9 @@ import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart'
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/context_analysis/context_analyses_dashboard_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
+import 'package:journeyers/widgets/utility/dashboard_page.dart';
 
 //**************** UTILITY CLASSES ****************/
 PrintUtils pu = PrintUtils();
@@ -186,7 +187,15 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
-                child: ContextAnalysesDashboardPage(key: const Key('analyses_dashboard'), parentCallbackFunctionToRefreshTheContextAnalysisPage: onAllSessionFilesDeleted)
+                child: DashboardPage
+                (
+                  key: const Key('analyses_dashboard'), 
+                  dashboardContext: DashboardUtils.contextAnalysesContext,
+                  previewWidget: 
+                  ({required String pathToData}) 
+                  { return ContextAnalysisPreviewWidget(pathToStoredData: pathToData);},  
+                  parentCallbackFunctionToRefreshTheParentPage: onAllSessionFilesDeleted
+                )
               ),
             ]
             else

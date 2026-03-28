@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: const SingleChildScrollView
       (
-        child: ContextAnalysisPreviewWidget(pathToCsvData: r"test\pages\csv_files\context_analysis.csv")
+        child: ContextAnalysisPreviewWidget(pathToStoredData: r"test\pages\csv_files\context_analysis.csv")
       ),
     );
   }

@@ -11,11 +11,11 @@ PrintUtils pu = PrintUtils();
 
 class ContextAnalysisPreviewWidget extends StatefulWidget 
 {
-  final String pathToCsvData;
+  final String pathToStoredData;
 
   const ContextAnalysisPreviewWidget({
     super.key, 
-    required this.pathToCsvData
+    required this.pathToStoredData
   });
 
   @override
@@ -37,8 +37,8 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
 
   Future<void> _fetchingData() async
   {
-    if (previewBuildingDebug) pu.printd("Preview Building: pathToCsvData:${widget.pathToCsvData}");
-    Map<String, List<dynamic>> perspectiveData = await cu.csvFileToPreviewPerspectiveData(widget.pathToCsvData);
+    if (previewBuildingDebug) pu.printd("Preview Building: pathToCsvData:${widget.pathToStoredData}");
+    Map<String, List<dynamic>> perspectiveData = await cu.csvFileToPreviewPerspectiveData(widget.pathToStoredData);
     await perspectiveDataToDataStructures(perspectiveData);
     
     if (mounted) {
