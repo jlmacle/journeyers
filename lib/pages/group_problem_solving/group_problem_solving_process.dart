@@ -15,7 +15,6 @@ import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
 import 'package:journeyers/widgets/utility/file_name_desktop_platforms.dart';
 import 'package:journeyers/widgets/utility/file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/checklist.dart';
@@ -30,8 +29,8 @@ PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils(); 
 
 /// {@category Pages}
-/// {@category Group Problem Solving}
-/// The root page for the group problem-solvings.
+/// {@category Group problem-solving}
+/// The process for the group problem-solvings.
 class GroupProblemSolvingProcess extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
@@ -52,7 +51,6 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   // TITLE
   // TextEditingController for entering a new title
   final TextEditingController _problemTitleController = TextEditingController();
-  final String titleSuffix = " (gps)";
 
   // List to store the keywords entered by the user
   List<String> _currentKeywords = []; 
@@ -249,7 +247,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   }
 
   String sessionTitle = _problemTitleController.text.trim().isNotEmpty 
-      ? "${_problemTitleController.text.trim()}$titleSuffix"
+      ? _problemTitleController.text.trim()
       : "Problem Solving Session";
 
   // Format solutions for the text file

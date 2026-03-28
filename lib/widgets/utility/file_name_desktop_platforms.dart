@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
 
 //**************** UTILITY CLASS ****************//
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils(); 
 
-/// {@category Pages}
-/// {@category Context analysis}
-/// Defining file name and saving file for the context analysis, on desktop platforms.
+/// {@category Utility widgets}
+/// A widget used for choosing a file name, and saving a session file, on desktop platforms.
 class FileNameDesktopPlatforms extends StatefulWidget 
 {
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata;

@@ -7,7 +7,7 @@ import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart'
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_page.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
 
@@ -36,7 +36,7 @@ class ContextAnalysisPage extends StatefulWidget
 
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
-  GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'formPage');
+  GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'formPage');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
@@ -210,7 +210,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisFormPage(key: contextAnalysisFormPageKey, parentCallbackFunctionToRefreshTheContextAnalysisPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: ContextAnalysisProcess(key: contextAnalysisFormPageKey, parentCallbackFunctionToRefreshTheContextAnalysisPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )

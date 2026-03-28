@@ -41,7 +41,7 @@ class CustomExpansionTile extends StatefulWidget
   /// The callback function called to delete from the expansion tile.
   final VoidCallback deletePressedCallBackFunction;
 
-  /// A list of  [iconData, toolTipLabel, callBackFunction] values for the action icon(s).
+  /// A list of \[iconData, toolTipLabel, callBackFunction\] values for the action icon(s).
   final List<List<dynamic>> listActionIconsData;
 
   /// The horizontal location of the icon(s).

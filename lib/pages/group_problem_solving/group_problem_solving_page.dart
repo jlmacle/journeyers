@@ -14,7 +14,7 @@ PrintUtils _pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
-/// {@category Group Problem Solving}
+/// {@category Group problem-solving}
 /// The root page for the group problem-solving sessions.
 /// The group problem-solving page embeds a DashboardPage widget and/or a GroupProblemSolvingProcess widget.
 class GroupProblemSolvingPage extends StatefulWidget 

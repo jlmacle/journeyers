@@ -342,7 +342,7 @@ class CSVUtils
   /// Removal of "segmentedButton" from the data written.
   /// "textField was replaced with "Notes" during the pre-CSV processing.
   ///
-  /// Addition of a ["",""] before all level 3 titles.
+  /// Addition of a \["",""\] before all level 3 titles.
   Future<List<List<String>>> preCSVToCSVData({required List<List<String>> preCSVData}) async
   {
     // List<LinkedHashMap<String, Object>> _enteredData = [];
