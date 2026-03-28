@@ -18,9 +18,8 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 // StatefulWidget necessary for overriding dispose() 
 
-/// {@category Pages}
-/// {@category Context analysis}
-/// A widget used for selecting a folder to save the files, defining file name, and saving file, for the context analysis, on mobile platforms.
+/// {@category Utility widgets}
+/// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
 class FileNameMobilePlatforms extends StatefulWidget 
 {
   /// The file extension starting with .

@@ -31,13 +31,13 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Context analysis}
-/// The form page for the context analysis.
+/// The process for the context analyses.
 
 // Scrolling down the questions while tab navigating is an issue if the bottom bar items are not excluded from focus.
 // When an expansion tile is expanded, the bottom bar items are excluded from focus.
 // If the user reaches the "save data" button, the bottom bar items are restored as accessible to focus. 
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
-class ContextAnalysisFormPage extends StatefulWidget 
+class ContextAnalysisProcess extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
   final VoidCallback parentCallbackFunctionToRefreshTheContextAnalysisPage;
@@ -45,17 +45,17 @@ class ContextAnalysisFormPage extends StatefulWidget
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
-  const ContextAnalysisFormPage({
+  const ContextAnalysisProcess({
     super.key,
     this.parentCallbackFunctionToRefreshTheContextAnalysisPage = placeHolderVoidCallback,
     this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
     });
 
   @override
-  State<ContextAnalysisFormPage> createState() => ContextAnalysisFormPageState();
+  State<ContextAnalysisProcess> createState() => ContextAnalysisProcessState();
 }
 
-class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage> 
+class ContextAnalysisProcessState extends State<ContextAnalysisProcess> 
 {
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
@@ -193,7 +193,7 @@ class ContextAnalysisFormPageState extends State<ContextAnalysisFormPage>
             // Form 
             ContextForm(
                         key: _contextFormKey,
-                        contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>,
+                        contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisProcessState>,
                         parentCallbackFunctionToRefreshTheContextAnalysisPage: widget.parentCallbackFunctionToRefreshTheContextAnalysisPage,
                         parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
                         ),                        

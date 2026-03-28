@@ -75,7 +75,7 @@ class _GroupProblemSolvingPreviewWidgetState
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Solutions for ${_title.replaceAll(' (gps)','')} \n$_dateString",
+            "Solutions for $_title\n$_dateString",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),

@@ -15,12 +15,11 @@ final DashboardUtils _du = DashboardUtils();
 final FileUtils _fu = FileUtils();
 final UserPreferencesUtils _upu = UserPreferencesUtils();
 
-/// {@category Pages}
-/// {@category Context analysis}
-/// A widget displaying a dashboard of the past session data.
+/// {@category Utility widgets}
+/// A widget displaying a dashboard of session data.
 /// Assumption concerning the session data structure:
-/// [{"title":"aTitle","keywords":[kw,kw2],"date":"March 20, 2026 5:51 AM","filePath":"C:\\Users\\username\\Documents\\a.csv"},
-/// {"title":"aTitle2","keywords":[kw,kw3],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.csv"}]
+/// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 5:51 AM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
+/// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.ext"}\]
 class DashboardPage extends StatefulWidget 
 {
   /// The context for the dashboard (context analyses, group problem-solving sessions)
@@ -386,6 +385,7 @@ class _DashboardPageState extends State<DashboardPage>
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final session = _filteredSessions![index];
+                        String sessionTitle = session[DashboardUtils.keyTitle];
                         final String filePath = session[DashboardUtils.keyFilePath];
                         final bool isChecked =
                             _selectedSessionsForDeletion.contains(filePath);
@@ -432,10 +432,10 @@ class _DashboardPageState extends State<DashboardPage>
                                                           .keyTitle],
                                                       session[DashboardUtils
                                                           .keyFilePath]),
-                                                  child: Text(
-                                                    key: ValueKey(
-                                                        'session_title_$index'),
-                                                    "${session[DashboardUtils.keyTitle]}",
+                                                  child: 
+                                                  Text(
+                                                    key: ValueKey('session_title_$index'),
+                                                    (widget.dashboardContext == DashboardUtils.groupProblemSolvingsContext) ? "$sessionTitle (gps)" : sessionTitle,
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -820,8 +820,7 @@ class _DashboardPageState extends State<DashboardPage>
 // Method used to display an overlay with a session data preview. 
 void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, String filePath) {
   String title = session[DashboardUtils.keyTitle];
-  if (title.contains(" (gps)")) {title = session[DashboardUtils.keyTitle].replaceAll(" (gps)", "");}
-
+  
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
