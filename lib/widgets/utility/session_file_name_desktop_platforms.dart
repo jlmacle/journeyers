@@ -10,20 +10,20 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Utility widgets}
 /// A widget used for choosing a file name, and saving a session file, on desktop platforms.
-class FileNameDesktopPlatforms extends StatefulWidget 
+class SessionFileNameDesktopPlatforms extends StatefulWidget 
 {
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata;
-  const FileNameDesktopPlatforms
+  const SessionFileNameDesktopPlatforms
   ({
     super.key,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
   @override
-  State<FileNameDesktopPlatforms> createState() => _FileNameDesktopPlatformsState();
+  State<SessionFileNameDesktopPlatforms> createState() => _SessionFileNameDesktopPlatformsState();
 }
 
-class _FileNameDesktopPlatformsState extends State<FileNameDesktopPlatforms> 
+class _SessionFileNameDesktopPlatformsState extends State<SessionFileNameDesktopPlatforms> 
 {
 
   @override

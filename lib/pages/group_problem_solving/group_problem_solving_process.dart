@@ -15,12 +15,12 @@ import 'package:journeyers/core/utils/files/files_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/widgets/utility/file_name_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/file_name_mobile_platforms.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/checklist.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/keywords.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/problem_to_solve.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/solutions_list.dart';
+import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_checklist.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_keywords.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_problem_to_solve.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_solutions_list.dart';
 
 //**************** UTILITY CLASSES ****************//
 DashboardUtils du = DashboardUtils();
@@ -28,9 +28,8 @@ FileUtils fu = FileUtils();
 PrintUtils pu = PrintUtils();
 UserPreferencesUtils upu = UserPreferencesUtils(); 
 
-/// {@category Pages}
 /// {@category Group problem-solving}
-/// The process for the group problem-solvings.
+/// The process for a group problem-solving.
 class GroupProblemSolvingProcess extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
@@ -352,7 +351,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
     return Column(   
       children: [
         // 1. TOP: The problem to be solved (Full Width)
-        ProblemToSolve(
+        GroupProblemSolvingProblemToSolve(
           problemTitleController: _problemTitleController,
           previousSessions: _history,
           onSessionSelected: _handleSessionSelection,
@@ -393,7 +392,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       child: Padding
                       (
                         padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: Checklist(),
+                        child: GroupProblemSolvingChecklist(),
                       )                        
                     ), 
                     const SliverToBoxAdapter
@@ -405,7 +404,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       child: Padding
                       (
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: Keywords
+                        child: GroupProblemSolvingKeywords
                         (
                           currentKeywords: _currentKeywords,
                           keywordsUpdatedCallbackFunction: (newKeywords) 
@@ -424,7 +423,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     ), 
                     // Solutions List component
                     SliverToBoxAdapter(
-                      child: SolutionsList(solutions: _solutions),
+                      child: GroupProblemSolvingSolutionsList(solutions: _solutions),
                     ),
                   ]
                 )
@@ -494,9 +493,9 @@ void _handleSessionSelection(Map<String, dynamic> session) {
               ? const Center(child: CircularProgressIndicator())
               : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                   // Defining file name and saving file for mobile platforms 
-                  ? FileNameMobilePlatforms(fileExtension: fileExtension,  fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                  ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   // Saving file for desktop platforms
-                  : FileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                  : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
             ],
           ),
         ),

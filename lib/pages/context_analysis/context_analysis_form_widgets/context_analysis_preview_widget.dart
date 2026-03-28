@@ -9,6 +9,8 @@ import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 CSVUtils cu = CSVUtils();
 PrintUtils pu = PrintUtils();
 
+/// {@category Context analysis}
+/// A preview widget used in the context analysis dashboard.
 class ContextAnalysisPreviewWidget extends StatefulWidget 
 {
   final String pathToStoredData;

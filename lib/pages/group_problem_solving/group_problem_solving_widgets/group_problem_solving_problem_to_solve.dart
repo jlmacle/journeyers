@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 
-class ProblemToSolve extends StatefulWidget {
+/// {@category Group problem-solving}
+/// A widget used to define the problem to solve, or to retrieve a title from previous context analyses.
+class GroupProblemSolvingProblemToSolve extends StatefulWidget {
   /// A TextEditingController for the session title.
   final TextEditingController problemTitleController;
   /// The data from the previous context analyses sessions.
@@ -10,7 +12,7 @@ class ProblemToSolve extends StatefulWidget {
   // A callback function for when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
 
-  const ProblemToSolve({
+  const GroupProblemSolvingProblemToSolve({
     super.key,
     required this.problemTitleController,
     required this.previousSessions,
@@ -18,10 +20,10 @@ class ProblemToSolve extends StatefulWidget {
   });
 
   @override
-  State<ProblemToSolve> createState() => _ProblemToSolveState();
+  State<GroupProblemSolvingProblemToSolve> createState() => _GroupProblemSolvingProblemToSolveState();
 }
 
-class _ProblemToSolveState extends State<ProblemToSolve> {
+class _GroupProblemSolvingProblemToSolveState extends State<GroupProblemSolvingProblemToSolve> {
   bool _isEditing = false;
 
   @override

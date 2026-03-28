@@ -20,7 +20,7 @@ final UserPreferencesUtils _upu = UserPreferencesUtils();
 /// Assumption concerning the session data structure:
 /// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 5:51 AM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
 /// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.ext"}\]
-class DashboardPage extends StatefulWidget 
+class SessionsDashboardPage extends StatefulWidget 
 {
   /// The context for the dashboard (context analyses, group problem-solving sessions)
   final String dashboardContext;
@@ -31,7 +31,7 @@ class DashboardPage extends StatefulWidget
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
   final VoidCallback parentCallbackFunctionToRefreshTheParentPage;
 
-  const DashboardPage
+  const SessionsDashboardPage
   ({
     super.key,
     required this.dashboardContext,
@@ -40,10 +40,10 @@ class DashboardPage extends StatefulWidget
   });
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<SessionsDashboardPage> createState() => _SessionsDashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> 
+class _SessionsDashboardPageState extends State<SessionsDashboardPage> 
 {
 
   //**************** PREFERENCES related data and methods ****************/

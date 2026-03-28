@@ -20,7 +20,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Utility widgets}
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
-class FileNameMobilePlatforms extends StatefulWidget 
+class SessionFileNameMobilePlatforms extends StatefulWidget 
 {
   /// The file extension starting with .
   final String fileExtension;
@@ -31,7 +31,7 @@ class FileNameMobilePlatforms extends StatefulWidget
   /// A callback function called to save context analysis data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
 
-  const FileNameMobilePlatforms
+  const SessionFileNameMobilePlatforms
   ({
     super.key,
     required this.fileExtension,
@@ -40,16 +40,16 @@ class FileNameMobilePlatforms extends StatefulWidget
   });
 
   @override
-  State<FileNameMobilePlatforms> createState() => _FileNameMobilePlatformsState();
+  State<SessionFileNameMobilePlatforms> createState() => _SessionFileNameMobilePlatformsState();
 }
 
-class _FileNameMobilePlatformsState extends State<FileNameMobilePlatforms> 
+class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePlatforms> 
 {
   // FILE NAME
   String? _fileName;
   final TextEditingController _fileNameController = TextEditingController();
   String _errorMessageForFileName = "";
-  final GlobalKey<_FileNameMobilePlatformsState> errorMessageKey = GlobalKey();
+  final GlobalKey<_SessionFileNameMobilePlatformsState> errorMessageKey = GlobalKey();
   bool _wasErrorMessageModified = false;
   bool _fileNameExists = false;
 

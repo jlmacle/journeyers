@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 
-class Checklist extends StatefulWidget {
-  const Checklist({super.key});
+/// {@category Group problem-solving}
+/// A checklist widget used for the group problem-solving process.
+class GroupProblemSolvingChecklist extends StatefulWidget {
+  const GroupProblemSolvingChecklist({super.key});
 
   @override
-  State<Checklist> createState() => _ChecklistState();
+  State<GroupProblemSolvingChecklist> createState() => _GroupProblemSolvingChecklistState();
 }
 
-class _ChecklistState extends State<Checklist> {
+class _GroupProblemSolvingChecklistState extends State<GroupProblemSolvingChecklist> {
   final Map<String, bool> _checklistItems = {
     "Is the context analysis done?": false,
     "Is the group open to use the app for group problem-solving?": false,
