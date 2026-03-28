@@ -45,10 +45,12 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
               // Suggestions List from previous context analyses session data
               if (widget.previousSessions.isNotEmpty)
                 Container(
-                  constraints: const BoxConstraints(maxHeight: 200),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: widget.previousSessions.map((session) {
+                  // Limiting the suggestion area height to avoid an overflow
+                  constraints: const BoxConstraints(maxHeight: 200), 
+                  child: ListView.builder(
+                    itemCount: widget.previousSessions.length,
+                    itemBuilder: (context, index) {
+                      final session = widget.previousSessions[index];
                       return ListTile(
                         title: Text(session['title']),
                         subtitle: Text("Date: ${session['date']}"),
@@ -57,7 +59,7 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
                           setState(() => _isEditing = false);
                         },
                       );
-                    }).toList(),
+                    },
                   ),
                 ),
             ],

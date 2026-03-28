@@ -14,13 +14,11 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 /// Defining file name and saving file for the context analysis, on desktop platforms.
 class FileNameDesktopPlatforms extends StatefulWidget 
 {
-  /// A global key for the context analysis form page
-  final GlobalKey<ContextAnalysisFormPageState> contextAnalysisFormPageKey;
-
+  final VoidCallback parentCallbackFunctionToSaveDataAndMetadata;
   const FileNameDesktopPlatforms
   ({
     super.key,
-    required this.contextAnalysisFormPageKey,
+    required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
   @override
@@ -37,7 +35,7 @@ class _FileNameDesktopPlatformsState extends State<FileNameDesktopPlatforms>
     (       
       onPressed: ()
       {
-        widget.contextAnalysisFormPageKey.currentState?.saveDataAndMetadata();        
+        widget.parentCallbackFunctionToSaveDataAndMetadata();        
       },
       child: const Text(
         'Click to save your data in CSV, \nspreadsheet-compatible format',
