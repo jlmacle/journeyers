@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
@@ -19,7 +21,6 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_wid
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/keywords.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/problem_to_solve.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/solutions_list.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 //**************** UTILITY CLASSES ****************//
 DashboardUtils du = DashboardUtils();
@@ -47,18 +48,20 @@ class GroupProblemSolvingProcess extends StatefulWidget
 
 class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess> 
 {
-  FocusNode groupProblemSolvingDashboardFocusNode = FocusNode();
-  final TextEditingController _solutionController = TextEditingController();
+  // TITLE
+  // TextEditingController for entering a new title
+  final TextEditingController _problemTitleController = TextEditingController();
+
+  // List to store the keywords entered by the user
+  List<String> _currentKeywords = []; 
+  List<Map<String, dynamic>> _history = [];
   
   // List to store the solutions entered by the user
   final List<String> _solutions = [];
 
-  // List to store the keywords entered by the user
-  final List<String> _currentKeywords = []; // Add this at the top with other variables
-
-  // TextEditingController for the title
-  final TextEditingController _problemTitleController = TextEditingController();
-
+  // TextEditingController for entering a new solution
+  final TextEditingController _solutionController = TextEditingController();
+  
   // List of stakeholders identifiers
   final List<String> _identifiersCol1 = [];
   final List<String> _identifiersCol2 = [];
@@ -286,16 +289,41 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     pu.printd("Save Error: $e");
   }
 }
+
+Future<void> _loadHistory() async {
+  final data = await du.retrieveAllDashboardSessionData(
+    typeOfContextData: DashboardUtils.contextAnalysesContext
+  );
+  setState(() {
+    _history = List<Map<String, dynamic>>.from(data);
+  });
+}
+
+
+void _handleSessionSelection(Map<String, dynamic> session) {
+  setState(() {
+    _problemTitleController.text = session['title'] ?? "";
+    
+    if (session['keywords'] != null) {
+      // Creates a NEW list instance instead of .clear() and .addAll()
+      // This changes the reference, triggering didUpdateWidget correctly
+      _currentKeywords = List<String>.from(session['keywords']);
+    } else {
+      _currentKeywords = [];
+    }
+  });
+}
+
   @override
   void initState() {
     super.initState();
+     _loadHistory();
     getApplicationFolderPathPref();
   }
 
   @override
   void dispose() 
   {
-    groupProblemSolvingDashboardFocusNode.dispose();
     _solutionController.dispose();
     _problemTitleController.dispose();
     super.dispose();
@@ -306,7 +334,11 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     return Column(   
       children: [
         // 1. TOP: The problem to be solved (Full Width)
-        ProblemToSolve(problemTitleController: _problemTitleController),
+        ProblemToSolve(
+          problemTitleController: _problemTitleController,
+          previousSessions: _history,
+          onSessionSelected: _handleSessionSelection,
+        ),
         const Divider(),
 
         // 2. CENTER: The row with identifiers and scrollable content
@@ -357,6 +389,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Keywords
                         (
+                          currentKeywords: _currentKeywords,
                           keywordsUpdatedCallbackFunction: (newKeywords) 
                           {
                             setState(() {
