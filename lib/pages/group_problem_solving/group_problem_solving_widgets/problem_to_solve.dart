@@ -46,7 +46,8 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
               if (widget.previousSessions.isNotEmpty)
                 Container(
                   // Limiting the suggestion area height to avoid an overflow
-                  constraints: const BoxConstraints(maxHeight: 200), 
+                  // TODO: different maxHeight according to platform
+                  constraints: const BoxConstraints(maxHeight: 150), 
                   child: ListView.builder(
                     itemCount: widget.previousSessions.length,
                     itemBuilder: (context, index) {
