@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -252,13 +253,17 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
       : "Problem Solving Session";
 
   // Format solutions for the text file
+  var now = DateTime.now();
+  //.add_jm() to add this hour:minutes format: 5:08 PM
+  var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+  var formattedDate = formatter.format(now);
   String fileContent = "Group Problem Solving Solutions\n";
-  fileContent += "Date: ${DateTime.now()}\n";
+  fileContent += "$sessionTitle\n";
+  fileContent += "Date: $formattedDate\n";
   fileContent += "----------------------------\n";
   for (var i = 0; i < _solutions.length; i++) {
     fileContent += "${i + 1}. ${_solutions[i]}\n";
   }
-
   
 
   Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));

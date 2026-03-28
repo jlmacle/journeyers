@@ -1,63 +1,97 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/core/utils/csv/csv_utils.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'dart:io';
 
-CSVUtils cu = CSVUtils();
-PrintUtils pu = PrintUtils();
-
-class GroupProblemSolvingPreviewWidget extends StatefulWidget 
-{
+class GroupProblemSolvingPreviewWidget extends StatefulWidget {
   final String pathToStoredData;
 
   const GroupProblemSolvingPreviewWidget({
-    super.key, 
-    required this.pathToStoredData
+    super.key,
+    required this.pathToStoredData,
   });
 
   @override
-  State<GroupProblemSolvingPreviewWidget> createState() => _GroupProblemSolvingPreviewWidgetState();
+  State<GroupProblemSolvingPreviewWidget> createState() =>
+      _GroupProblemSolvingPreviewWidgetState();
 }
 
-class _GroupProblemSolvingPreviewWidgetState extends State<GroupProblemSolvingPreviewWidget> 
-{
+class _GroupProblemSolvingPreviewWidgetState
+    extends State<GroupProblemSolvingPreviewWidget> {
   bool _isLoading = true;
+  String _title = "";
+  String _dateString = "";
+  List<String> _solutions = [];
 
-  
   @override
-  void initState() 
-  {
+  void initState() {
     super.initState();
     _fetchingData();
   }
 
-  Future<void> _fetchingData() async
-  {
-    // to complete
-    
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
+  Future<void> _fetchingData() async {
+    try {
+      final file = File(widget.pathToStoredData);
+      if (await file.exists()) {
+        List<String> lines = await file.readAsLines();
+
+        if (lines.length >= 2) {
+          _title = lines[1];
+          // Extract date from the second line: "Date: MMMM dd, yyyy h:mm a"
+          _dateString = lines[2].replaceFirst("Date: ", "");
+          
+          // Solutions start after the "---" separator (index 3 onwards)
+          // We strip the "1. ", "2. " numbering prefix
+          _solutions = lines
+              .skip(4)
+              .where((line) => line.trim().isNotEmpty)
+              .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
+              .toList();
+        }
+      }
+    } catch (e) {
+      debugPrint("Error reading preview data: $e");
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
-  
-
-
   @override
-  Widget build(BuildContext context) 
-  {
-    return _isLoading
-      ?  const Center(child:CircularProgressIndicator())
-      :  Column
-        (
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: 
-          [
-              Text('To complete')
-              
-          ],
-        );
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_solutions.isEmpty) {
+      return const Center(child: Text("No solutions found."));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Solutions for ${_title.replaceAll(' (gps)','')} \n$_dateString",
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ),
+        const Divider(),
+        ..._solutions.map((solution) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.arrow_forward, size: 18),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(solution)),
+                ],
+              ),
+            )),
+      ],
+    );
   }
 }
