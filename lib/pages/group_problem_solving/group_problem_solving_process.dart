@@ -478,7 +478,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                   // Defining file name and saving file for mobile platforms 
                   ? FileNameMobilePlatforms(fileExtension: fileExtension,  fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   // Saving file for desktop platforms
-                  : FileNameDesktopPlatforms(contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisFormPageState>)
+                  : FileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
             ],
           ),
         ),
