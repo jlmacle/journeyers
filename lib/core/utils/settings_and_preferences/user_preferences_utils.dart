@@ -82,7 +82,9 @@ class UserPreferencesUtils
       case (DashboardUtils.groupProblemSolvingsContext):
       {
         return prefs.getBool('wasGroupProblemSolvingSessionDataSaved') ?? false;
-      }      
+      }   
+      default:
+        return null;
     }     
   }
 
