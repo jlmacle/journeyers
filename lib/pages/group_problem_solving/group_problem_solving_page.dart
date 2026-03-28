@@ -5,8 +5,9 @@ import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_dashboard_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
+import 'package:journeyers/widgets/utility/dashboard_page.dart';
 
 //**************** UTILITY CLASSES ****************/
 PrintUtils _pu = PrintUtils();
@@ -15,7 +16,7 @@ UserPreferencesUtils upu = UserPreferencesUtils();
 /// {@category Pages}
 /// {@category Group Problem Solving}
 /// The root page for the group problem-solving sessions.
-/// The group problem-solving page embeds a GroupProblemSolvingDashboardPage widget and/or a GroupProblemSolvingProcess widget.
+/// The group problem-solving page embeds a DashboardPage widget and/or a GroupProblemSolvingProcess widget.
 class GroupProblemSolvingPage extends StatefulWidget 
 {
   const GroupProblemSolvingPage
@@ -135,7 +136,16 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
-                child: GroupProblemSolvingDashboardPage(key: const Key('problem_solving_dashboard'), parentCallbackFunctionToRefreshTheGroupProblemSolvingPage: onAllSessionFilesDeleted)
+                child: 
+                DashboardPage
+                (
+                  key: const Key('problem_solving_dashboard'),
+                  dashboardContext: DashboardUtils.groupProblemSolvingsContext,
+                  previewWidget: 
+                    ({required String pathToData}) 
+                    { return GroupProblemSolvingPreviewWidget(pathToStoredData: pathToData);},
+                  parentCallbackFunctionToRefreshTheParentPage: onAllSessionFilesDeleted
+                )
               ),
             ]
             else
