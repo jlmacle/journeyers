@@ -63,33 +63,38 @@ class _ProblemToSolveState extends State<ProblemToSolve> {
             ],
           )
           : 
-          Flex(
-          direction: Axis.horizontal, 
-          children: [
-            // Widget 1: Left side
-            Container(width: 50),
-            
-            // Widget 2: The Centered Text
-            // Expanded fills the middle gap so Center can work effectively
-            Expanded(
-              child: Center(
-                child: Text(
-                (widget.problemTitleController.text.trim() == "") ? "Problem To Solve": widget.problemTitleController.text.trim(), 
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          GestureDetector(
+            // TODO: to expand to cross-platform
+            onTap: () => setState(() => _isEditing = true),
+            child:
+            Flex(
+            direction: Axis.horizontal, 
+            children: [
+              // Widget 1: Left side
+              Container(width: 50),
+              
+              // Widget 2: The Centered Text
+              // Expanded fills the middle gap so Center can work effectively
+              Expanded(
+                child: Center(
+                  child: Text(
+                  (widget.problemTitleController.text.trim() == "") ? "Problem To Solve": widget.problemTitleController.text.trim(), 
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                ),
               ),
+              
+              // Widget 3: Right side
+              Container(
+                width: 50,
+                child: GestureDetector
+                (
+                  child: const Text("✏️"),
+                  onTap: () => setState(() => _isEditing = true),
+                ),
               ),
-            ),
-            
-            // Widget 3: Right side
-            Container(
-              width: 50,
-              child: GestureDetector
-              (
-                child: const Text("✏️"),
-                onTap: () => setState(() => _isEditing = true),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
   }
