@@ -9,25 +9,14 @@ import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.d
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/csv/csv_utils.dart';
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
-import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_keywords_declaration.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-
-//**************** UTILITY CLASSES ****************//
-CSVUtils cu = CSVUtils();
-DashboardUtils du = DashboardUtils();
-FormUtils fu = FormUtils();
-PrintUtils pu = PrintUtils();
-UserPreferencesUtils upu = UserPreferencesUtils();  
 
 /// {@category Context analysis}
 /// The process for the context analyses.

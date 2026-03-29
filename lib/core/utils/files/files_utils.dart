@@ -4,14 +4,8 @@ import 'package:flutter/services.dart';
 
 import 'package:path/path.dart' as path;
 
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
-
-
-// Utility class
-final PrintUtils _pu = PrintUtils();
-final UserPreferencesUtils _upu = UserPreferencesUtils();
 
 /// {@category Utils}
 /// A utility class related to files.
@@ -40,8 +34,8 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {_pu.printd("Files Utils: $errorMsg ${e.message}"); } 
-    catch (e) {_pu.printd("Files Utils: $errorMsg $e");}
+    catch (e) {pu.printd("Files Utils: $errorMsg ${e.message}"); } 
+    catch (e) {pu.printd("Files Utils: $errorMsg $e");}
   }
 
   /// Method used to add text at the beginning of a file.
@@ -63,8 +57,8 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {_pu.printd("Files Utils: $errorMsg ${e.message}");} 
-    catch (e) {_pu.printd("Files Utils: $errorMsg  $e");}
+    catch (e) {pu.printd("Files Utils: $errorMsg ${e.message}");} 
+    catch (e) {pu.printd("Files Utils: $errorMsg  $e");}
   }
 
   /// Method used to create a file if necessary, and to add content to it.
@@ -85,8 +79,8 @@ class FileUtils
       await sink.flush();
       await sink.close();
     } 
-    on FileSystemException catch (e) {_pu.printd("Files Utils: $errorMsg ${e.message}");} 
-    catch (e) {_pu.printd("Files Utils: $errorMsg $e");}
+    on FileSystemException catch (e) {pu.printd("Files Utils: $errorMsg ${e.message}");} 
+    catch (e) {pu.printd("Files Utils: $errorMsg $e");}
   }
 
   /// Method used to get all the files with a specific extension in a directory.
@@ -130,11 +124,11 @@ class FileUtils
       'fileName': "$fileName$fileExtension",
       'content': dataBytes,
     });
-    String? folderPath = await _upu.getApplicationFolderPath();
+    String? folderPath = await upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
-    if (sessionDataDebug) _pu.printd("Session Data: _saveFileOnAndroid: success: $success");
-    if (sessionDataDebug) _pu.printd("Session Data: filePath: $filePath");
+    if (sessionDataDebug) pu.printd("Session Data: _saveFileOnAndroid: success: $success");
+    if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
   }
@@ -150,11 +144,11 @@ class FileUtils
       'fileName': "$fileName$fileExtension",
       'content': dataBytes,
     });
-    String? folderPath = await _upu.getApplicationFolderPath();
+    String? folderPath = await upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
-    if (sessionDataDebug) _pu.printd("Session Data: _saveFileOnAndroid: success: $success");
-    if (sessionDataDebug) _pu.printd("Session Data: filePath: $filePath");
+    if (sessionDataDebug) pu.printd("Session Data: _saveFileOnAndroid: success: $success");
+    if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
   }
@@ -231,17 +225,17 @@ class FileUtils
       if (await file.exists()) 
       {
         await file.delete();
-        if (sessionDataDebug) _pu.printd("Session Data: File successfully deleted: $pathToCsv");
+        if (sessionDataDebug) pu.printd("Session Data: File successfully deleted: $pathToCsv");
       } else 
       {
-        if (sessionDataDebug) _pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCsv");
-        if (sessionDataDebug) _pu.printd("Session Data: Current working directory: ${Directory.current.path}");
+        if (sessionDataDebug) pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCsv");
+        if (sessionDataDebug) pu.printd("Session Data: Current working directory: ${Directory.current.path}");
       }
     } on FileSystemException 
     // Specifically handling OS-level errors like permission issues
-    catch (e) {_pu.printd("Session Data: FileSystemException: Could not delete file. ${e.message}");} 
+    catch (e) {pu.printd("Session Data: FileSystemException: Could not delete file. ${e.message}");} 
     // General error handling
-    catch (e) {_pu.printd("Session Data: An unexpected error occurred while deleting the file: $e");}
+    catch (e) {pu.printd("Session Data: An unexpected error occurred while deleting the file: $e");}
   }
 
 // Method used to delete a file on Android
@@ -256,15 +250,15 @@ Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async
     final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
 
     if (success) 
-    {if (sessionDataDebug) _pu.printd("Session Data: File deleted successfully from Android SAF storage.");} 
+    {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from Android SAF storage.");} 
     else 
-    {_pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
+    {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
     return success;
   } 
   on PlatformException 
   catch (e) 
   {
-    _pu.printd("Session Data: PlatformException during deletion: ${e.message}");
+    pu.printd("Session Data: PlatformException during deletion: ${e.message}");
     return false;
   }
 }
@@ -281,16 +275,16 @@ Future<bool> deleteCsvFileOnIOS(String pathToCsv) async
     final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
 
     if (success) 
-    {if (sessionDataDebug) _pu.printd("Session Data: File deleted successfully from iOS SAF storage.");} 
+    {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from iOS SAF storage.");} 
     else 
-    {_pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
+    {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
     return success;
 
   } 
   on PlatformException 
   catch (e) 
   {
-    _pu.printd("Session Data: PlatformException during deletion: ${e.message}");
+    pu.printd("Session Data: PlatformException during deletion: ${e.message}");
     return false;
   }
 }

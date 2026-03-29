@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'dart:io';
 
-import 'package:journeyers/core/utils/files/files_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
+
+
+
 
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.
@@ -23,8 +26,6 @@ class GroupProblemSolvingPreviewWidget extends StatefulWidget {
 
 class _GroupProblemSolvingPreviewWidgetState
     extends State<GroupProblemSolvingPreviewWidget> {
-    // Utility classes
-  final FileUtils fu = FileUtils();   
 
   bool _isLoading = true;
   String _title = "";

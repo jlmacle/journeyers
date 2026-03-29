@@ -2,15 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// {@category Utils}
 /// A utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
 class DashboardUtils {
-  // Utility class
-  final PrintUtils _pu = PrintUtils();
 
   /// String used to communicate the context of the context analyses.
   static const String contextAnalysesContext = "contextAnalysesData";
@@ -40,7 +38,7 @@ class DashboardUtils {
     } else if (typeOfContextData == groupProblemSolvingsContext) {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } else {
-      if (sessionDataDebug) _pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
     }
 
     File sessionFile = File('$path/$fileName');
@@ -50,7 +48,7 @@ class DashboardUtils {
       List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      if (sessionDataDebug) _pu.printd("Session Data: Session file for $typeOfContextData created: $path/$fileName");
+      if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData created: $path/$fileName");
     }
     return sessionFile;
   }
@@ -77,7 +75,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    if (sessionDataDebug) _pu.printd('Session Data: new session metadata: $sessionData saved to: ${file.path}');
+    if (sessionDataDebug) pu.printd('Session Data: new session metadata: $sessionData saved to: ${file.path}');
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
@@ -95,8 +93,8 @@ class DashboardUtils {
     var formatter = DateFormat('MMMM dd, yyyy').add_jm();
     var formattedDate = formatter.format(now);
 
-    if (sessionDataDebug) _pu.printd("Session Data: formattedDate: $formattedDate");
-    if (sessionDataDebug) _pu.printd("Session Data: analysisTitle: $title");
+    if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
+    if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
 
     // Session data storage sample:
     // [{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
@@ -161,12 +159,12 @@ class DashboardUtils {
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        if (sessionDataDebug) _pu.printd("Session Data: Session data with path $filePathRelatedToDataToDelete removed from dashboard data.");
+        if (sessionDataDebug) pu.printd("Session Data: Session data with path $filePathRelatedToDataToDelete removed from dashboard data.");
       } else {
-        if (sessionDataDebug) _pu.printd("Session Data: No session data found with path $filePathRelatedToDataToDelete in dashboard data.");
+        if (sessionDataDebug) pu.printd("Session Data: No session data found with path $filePathRelatedToDataToDelete in dashboard data.");
       }
     } catch (e) {
-      if (sessionDataDebug) _pu.printd("Session Data: Error deleting session data from dashboard data: $e");
+      if (sessionDataDebug) pu.printd("Session Data: Error deleting session data from dashboard data: $e");
     }
   }
 
@@ -187,7 +185,7 @@ class DashboardUtils {
     } 
     else 
     {
-      if (sessionDataDebug) _pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
     }
 
     File sessionFile = File('$path/$fileName');
@@ -197,7 +195,7 @@ class DashboardUtils {
     // Adding the data to the file
     var savedContent = jsonEncode(savedData);
     await sessionFile.writeAsString(savedContent);
-    if (sessionDataDebug) _pu.printd("Session Data: Session file for $typeOfContextData restored: $path/$fileName");
+    if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $path/$fileName");
 
   }
 

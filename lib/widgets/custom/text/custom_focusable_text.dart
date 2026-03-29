@@ -30,7 +30,7 @@ class CustomFocusableText extends StatefulWidget
   });
 
   @override
-  _CustomFocusableTextState createState() => _CustomFocusableTextState();
+  State<CustomFocusableText> createState() => _CustomFocusableTextState();
 }
 
 class _CustomFocusableTextState extends State<CustomFocusableText> 
