@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-
-// Utility class
-PrintUtils _pu = PrintUtils();
 
 /// {@category Custom widgets}
 /// A customizable dropdown menu to select a language.
@@ -32,7 +30,7 @@ class CustomLanguageSwitch extends StatefulWidget
   List<String> getLanguages(BuildContext context) 
   {
     List<String> dropdownItems = [];
-    if (preferencesDebug) _pu.printd("Preferences: Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");
+    if (preferencesDebug) pu.printd("Preferences: Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");
     dropdownItems = L10nLanguages.getLanguages(buildContext: context);
     return dropdownItems;
   }
@@ -60,13 +58,19 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
     (
       mainAxisAlignment: widget.languageSwitchMainAxisAlignment,
       children: 
-      [
-        const Icon(Icons.language),
+      [        
         Semantics
         (
           child: 
           DropdownMenu<String>
           (
+            leadingIcon: const Icon(Icons.language),
+            inputDecorationTheme: appTheme.inputDecorationTheme.copyWith
+            (
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none
+            ),
             initialSelection: _selectedValue,
             dropdownMenuEntries: _dropdownItems.map((String value) 
             {

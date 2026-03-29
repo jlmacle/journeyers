@@ -5,10 +5,9 @@ import "dart:io";
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 
-import 'package:journeyers/core/utils/files/files_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 
 void main() {
-  var fu = FileUtils();
   var testFilePath = path.join(
     "test",
     "core",

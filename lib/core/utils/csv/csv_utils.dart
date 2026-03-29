@@ -4,11 +4,10 @@ import "dart:io";
 
 import "package:file_picker/file_picker.dart";
 import "package:flutter/services.dart";
-import "package:journeyers/core/utils/files/files_utils.dart";
+import "package:journeyers/core/utils/dev/util_files.dart";
 
 import "package:journeyers/core/utils/form/form_utils.dart";
 import "package:journeyers/core/utils/printing_and_logging/debug_constants.dart";
-import "package:journeyers/core/utils/printing_and_logging/print_utils.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart";
 import "package:path/path.dart" as path;
 
@@ -18,10 +17,7 @@ import "package:path/path.dart" as path;
 class CSVUtils 
 {
   //******************** UTILS: beginning *******************//
-  // Utility classes
-  final PrintUtils _pu = PrintUtils();  
-  final FileUtils _fu = FileUtils();    
-  
+
   // The questions used in the form
   final ContextAnalysisFormQuestions _q =
       ContextAnalysisFormQuestions();
@@ -273,11 +269,11 @@ class CSVUtils
       } 
       else 
       {
-        if (csvBuildingDebug) _pu.printd("CSV Building");
-        if (csvBuildingDebug) _pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
-        if (csvBuildingDebug) _pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
-        if (csvBuildingDebug) _pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
-        if (csvBuildingDebug) _pu.printd("CSV Building");
+        if (csvBuildingDebug) pu.printd("CSV Building");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
+        if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
     }
@@ -560,11 +556,11 @@ class CSVUtils
       content += line;
     }
 
-    if (csvBuildingDebug) _pu.printd("CSV Building");
-    if (csvBuildingDebug) _pu.printd("CSV Building: csvDataIndividualPerspective:$csvDataIndividualPerspective");
-    if (csvBuildingDebug) _pu.printd("CSV Building");
-    if (csvBuildingDebug) _pu.printd("CSV Building: csvDataGroupPerspective:$csvDataGroupPerspective");
-    if (csvBuildingDebug) _pu.printd("CSV Building");
+    if (csvBuildingDebug) pu.printd("CSV Building");
+    if (csvBuildingDebug) pu.printd("CSV Building: csvDataIndividualPerspective:$csvDataIndividualPerspective");
+    if (csvBuildingDebug) pu.printd("CSV Building");
+    if (csvBuildingDebug) pu.printd("CSV Building: csvDataGroupPerspective:$csvDataGroupPerspective");
+    if (csvBuildingDebug) pu.printd("CSV Building");
 
 
     final dataBytes = Uint8List.fromList(utf8.encode(content));
@@ -572,11 +568,11 @@ class CSVUtils
 
     if (Platform.isAndroid)
     {
-      filePath = await _fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes);      
+      filePath = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes);      
     }
     else if (Platform.isIOS)
     {
-      filePath = await _fu.saveFileOniOS(fileName!, fileExtension, dataBytes);
+      filePath = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes);
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
@@ -640,15 +636,15 @@ class CSVUtils
     if (Platform.isAndroid)
     {
       String fileName = path.basename(pathToCSVFile);
-      if (previewBuildingDebug) _pu.printd("Preview Building:  csvFileToPreviewPerspectiveData on Android");
-      final String content = await _fu.readTextContentOnAndroid(fileName: fileName);
+      if (previewBuildingDebug) pu.printd("Preview Building:  csvFileToPreviewPerspectiveData on Android");
+      final String content = await fu.readTextContentOnAndroid(fileName: fileName);
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isIOS)
     {
       String fileName = path.basename(pathToCSVFile);
-      if (previewBuildingDebug) _pu.printd("Preview Building: csvFileToPreviewPerspectiveData on iOS");
-      final String content = await _fu.readTextContentOnIOS(fileName: fileName);
+      if (previewBuildingDebug) pu.printd("Preview Building: csvFileToPreviewPerspectiveData on iOS");
+      final String content = await fu.readTextContentOnIOS(fileName: fileName);
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
@@ -711,9 +707,9 @@ class CSVUtils
         (data) => data.join().trim().isNotEmpty
       ).toList();
 
-    if (previewBuildingDebug) _pu.printd("Preview Building: Data after removing empty lines:");
-    if (previewBuildingDebug) _pu.printd("Preview Building: individualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
-    if (previewBuildingDebug) _pu.printd("Preview Building: groupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
+    if (previewBuildingDebug) pu.printd("Preview Building: Data after removing empty lines:");
+    if (previewBuildingDebug) pu.printd("Preview Building: individualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
+    if (previewBuildingDebug) pu.printd("Preview Building: groupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
 
     perspectiveData["individualPerspective"] = individualPerspectiveWithoutEmptyLines;
     perspectiveData["groupPerspective"] = groupPerspectiveWithoutEmptyLines;

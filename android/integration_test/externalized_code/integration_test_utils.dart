@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-
-PrintUtils _pu = PrintUtils();
+import 'package:journeyers/core/utils/dev/util_files.dart';
 
 /// Method used to retrieve the index of a session data, knowing its title
 int? getSessionDataIndexFromTitle({required List<Map<String, dynamic>> sessionData, required String title})
@@ -46,7 +44,7 @@ Future<List<String>> getSessionsTitlesList({required WidgetTester tester, requir
     //Accessing the widget properties
     currentTitle = titleWidget.data!;
     sessionsTitlesList.add(currentTitle);
-    _pu.printd('Title: ${titleWidget.data}');
+    pu.printd('Title: ${titleWidget.data}');
   }
   return sessionsTitlesList;
 }

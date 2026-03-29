@@ -9,12 +9,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_expansion_tile.dart';
 
-
-// Utility class
-final PrintUtils pu = PrintUtils();
 
 void main() 
 {

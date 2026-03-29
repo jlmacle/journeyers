@@ -3,18 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 
-
-//**************** UTILITY CLASS ****************//
-PrintUtils pu = PrintUtils();
-UserPreferencesUtils upu = UserPreferencesUtils(); 
 
 // StatefulWidget necessary for overriding dispose() 
 

@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
-
-//**************** UTILITY CLASSES ****************/
-PrintUtils _pu = PrintUtils();
-UserPreferencesUtils upu = UserPreferencesUtils();
 
 /// {@category Pages}
 /// {@category Group problem-solving}
@@ -38,11 +33,11 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
 
   getPreferences() async 
   {
-    if (preferencesDebug) _pu.printd("Preferences: getPreferences()");
+    if (preferencesDebug) pu.printd("Preferences: getPreferences()");
     _wasGroupProblemSolvingSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.groupProblemSolvingsContext);
 
     setState(() {_preferencesLoading = false;});
-    if (preferencesDebug) _pu.printd("Preferences: _wasGroupProblemSolvingSessionDataSaved: $_wasGroupProblemSolvingSessionDataSaved");
+    if (preferencesDebug) pu.printd("Preferences: _wasGroupProblemSolvingSessionDataSaved: $_wasGroupProblemSolvingSessionDataSaved");
   }
 
   //**************** METHODS USED TO SWITCH BETWEEN PROCESS VIEW AND DASHBOARD VIEW  ****************//

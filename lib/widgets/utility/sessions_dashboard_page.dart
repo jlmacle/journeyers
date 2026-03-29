@@ -5,15 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
-import 'package:journeyers/core/utils/files/files_utils.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
-
-//**************** UTILITY CLASSES ****************/
-final DashboardUtils _du = DashboardUtils();
-final FileUtils _fu = FileUtils();
-final UserPreferencesUtils _upu = UserPreferencesUtils();
 
 /// {@category Utility widgets}
 /// A widget displaying a dashboard of session data.
@@ -52,7 +46,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
   // and the list of all sessions available
   Future<void> _sessionDataRetrieval() async 
   {
-    final data = await _du.retrieveAllDashboardSessionData
+    final data = await du.retrieveAllDashboardSessionData
       (typeOfContextData: widget.dashboardContext);
       
     _usedKeywords = await _getUsedKeywords(data);
@@ -177,10 +171,10 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
   Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the file
-    await _fu.deleteCsvFile(filePath);
+    await fu.deleteCsvFile(filePath);
 
     // Removing dashboard data
-    await _du.deleteSessionData(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    await du.deleteSessionData(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating state data
     _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
@@ -209,7 +203,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
       widget.parentCallbackFunctionToRefreshTheParentPage();
     }
@@ -224,10 +218,10 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     for (String filePath in filesToDelete) 
     {
       // Removing the file
-      await _fu.deleteCsvFile(filePath); 
+      await fu.deleteCsvFile(filePath); 
       
       // Removing dashboard data
-      await _du.deleteSessionData
+      await du.deleteSessionData
       (
         typeOfContextData: widget.dashboardContext, 
         filePathRelatedToDataToDelete: filePath
@@ -258,7 +252,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetting "wasSessionDataSaved" to false
-      await _upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
       widget.parentCallbackFunctionToRefreshTheParentPage();
     }
@@ -720,7 +714,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                 await updateSessionTitle(filePath, newTitle); 
                 
                 // Storing the updated session data
-                await _du.saveSessionData
+                await du.saveSessionData
                 (
                   typeOfContextData: widget.dashboardContext, 
                   savedData: _allSessions!,
@@ -788,7 +782,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
               // Updating keywords
               await updateSessionKeywords(filePath, newKeywords); 
               
-              await _du.saveSessionData
+              await du.saveSessionData
               (
                 typeOfContextData: widget.dashboardContext, 
                 savedData: _allSessions!,

@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/csv/csv_utils.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/form/form_utils.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/core/utils/printing_and_logging/print_utils.dart';
-import 'package:journeyers/core/utils/settings_and_preferences/user_preferences_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
@@ -19,13 +17,6 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmente
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 part 'context_analysis_form_ext.dart';
-
-//**************** UTILITY CLASSES ****************//
-CSVUtils cu = CSVUtils();
-DashboardUtils du = DashboardUtils();
-FormUtils fu = FormUtils();
-PrintUtils pu = PrintUtils();
-UserPreferencesUtils upu = UserPreferencesUtils(); 
 
 /// {@category Context analysis}
 /// Form used in the context analysis.
