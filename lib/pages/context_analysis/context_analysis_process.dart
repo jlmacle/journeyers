@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
-import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_keywords_declaration.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
 
 /// {@category Context analysis}
 /// The process for the context analyses.
