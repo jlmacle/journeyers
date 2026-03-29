@@ -1,5 +1,6 @@
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 
 /// {@category Utils}
 /// A utility class related to user preferences.
