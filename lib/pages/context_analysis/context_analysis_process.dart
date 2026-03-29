@@ -75,9 +75,9 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
   // FILE NAME
   String fileName = "";
   String fileExtension = ".csv";
-  void analysisFileNameUpdate(String textEditingControllerValue)
+  void analysisFileNameUpdate(String value)
   {
-    fileName = textEditingControllerValue;
+    fileName = value;
   }
   
   // Global key for the context form
@@ -104,7 +104,6 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
 
   //**************** PREFERENCES related data and methods ****************/
   bool _isApplicationFolderPathLoading = true;
-  String _applicationFolderPath = "";  
 
   // method used to get the set preferences
   void getApplicationFolderPathPref() async
@@ -118,7 +117,6 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
     setState(() 
     {
       _isApplicationFolderPathLoading = false; 
-      _applicationFolderPath = folderPathData ?? "";
     });
   }
 
