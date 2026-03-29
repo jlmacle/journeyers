@@ -53,9 +53,6 @@ class CustomExpansionTile extends StatefulWidget
   /// The tooltip label for the "Delete" icon.
   static const String toolTipDelete = 'Delete';
 
-  /// The tooltip label for the "Share" icon.
-  static const String toolTipShare = 'Share';
-
   const CustomExpansionTile
   ({
     super.key,

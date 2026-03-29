@@ -45,7 +45,6 @@ class SessionsDashboardPage extends StatefulWidget
 
 class _SessionsDashboardPageState extends State<SessionsDashboardPage> 
 {
-
   //**************** PREFERENCES related data and methods ****************/
   bool _isDataLoading = true;
 
@@ -521,17 +520,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                                     ),
                                     Wrap(
                                       spacing: 4,
-                                      children: [
-                                        IconButton(
-                                          icon: const Icon(Icons.share),
-                                          onPressed: () {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    content: Text(
-                                                        'Share not yet implemented.')));
-                                          },
-                                          tooltip: "Share",
-                                        ),
+                                      children: [                                        
                                         IconButton(
                                           key: ValueKey(
                                               'session_delete_$index'),
