@@ -65,14 +65,14 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
         Semantics
         (
           child: 
-          DropdownButton<String>
+          DropdownMenu<String>
           (
-            value: _selectedValue,
-            items: _dropdownItems.map((String value) 
+            initialSelection: _selectedValue,
+            dropdownMenuEntries: _dropdownItems.map((String value) 
             {
-              return DropdownMenuItem<String>(value: value, child: Text(value));
+              return DropdownMenuEntry<String>(value: value, label: value);
             }).toList(),
-            onChanged: (String? newValue) 
+            onSelected: (String? newValue) 
             {
               if (newValue != null) widget.parentLanguageValueCallBackFunction(newValue);
             },
