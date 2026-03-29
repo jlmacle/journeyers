@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_new_solution.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -57,9 +58,6 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   
   // List to store the solutions entered by the user
   final List<String> _solutions = [];
-
-  // TextEditingController for entering a new solution
-  final TextEditingController _solutionController = TextEditingController();
   
   // List of stakeholders identifiers
   final List<String> _identifiersCol1 = [];
@@ -198,16 +196,6 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
     setState(() {});
   }
 
-  // Method to handle adding a solution to the list
-  void _submitSolution() {
-    if (_solutionController.text.trim().isNotEmpty) {
-      setState(() {
-        // Adding new solutions to the top of the list
-        _solutions.insert(0, _solutionController.text.trim());
-        _solutionController.clear();
-      });
-    }
-  }
 
   //**************** PREFERENCES related data and methods ****************/
   bool _isApplicationFolderPathLoading = true;
@@ -331,6 +319,13 @@ void _handleSessionSelection(Map<String, dynamic> session) {
   });
 }
 
+  // Method used to add a solution to the list of solutions
+  void addSolutionToList(String value)
+  {
+    _solutions.add(value);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -341,7 +336,6 @@ void _handleSessionSelection(Map<String, dynamic> session) {
   @override
   void dispose() 
   {
-    _solutionController.dispose();
     _problemTitleController.dispose();
     super.dispose();
   }
@@ -456,30 +450,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 
         // 3. BOTTOM: Full Width Solution Input Field
         const Divider(height: 1),
-        Container(
-          color: Theme.of(context).cardColor,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _solutionController,
-                  decoration: const InputDecoration(
-                    hintText: "Please type a solution.",
-                    // border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  ),
-                  onSubmitted: (_) => _submitSolution(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              IconButton(
-                icon: const Icon(Icons.send, color: navyBlue),
-                onPressed: _submitSolution,
-              ),
-            ],
-          ),
-        ),
+        GroupProblemSolvingNewSolution(solutionAddedCallbackFunction: addSolutionToList),
+        
         //********** Data saving ************//
         Center
         (
