@@ -823,9 +823,6 @@ void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, Stri
   
   showGeneralDialog(
     context: context,
-    barrierDismissible: true,
-    barrierLabel: "Close Preview", // Accessibility label
-    barrierColor: appBarWhite, 
     transitionDuration: const Duration(milliseconds: 300),
     pageBuilder: (context, anim1, anim2) {
       return Scaffold(

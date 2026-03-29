@@ -58,9 +58,6 @@ class _GroupProblemSolvingChecklistState extends State<GroupProblemSolvingCheckl
 
     showGeneralDialog(
       context: context,
-      barrierDismissible: true,
-      barrierLabel: "Close Preview",
-      barrierColor: Colors.black54,
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (context, anim1, anim2) {
         return Scaffold(
