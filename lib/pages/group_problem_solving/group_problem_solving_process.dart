@@ -12,14 +12,15 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
-import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_keywords.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_new_solution.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_problem_to_solve.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_solutions_list.dart';
+import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
+
 
 /// {@category Group problem-solving}
 /// The process for a group problem-solving.

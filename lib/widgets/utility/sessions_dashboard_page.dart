@@ -1,5 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+
+import 'package:collection/collection.dart';
 import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
