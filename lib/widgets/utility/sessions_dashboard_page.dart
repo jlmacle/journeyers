@@ -8,6 +8,7 @@ import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dart';
 
 
 /// {@category Utility widgets}
@@ -345,11 +346,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                 // Static heading (Scrolls away normally)
                 // TODO: the sliver code to clean eventually
                 const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: CustomHeading(
-                        headingText: "Previous session data", headingLevel: 2),
-                  ),
+                  child: DashboardTitle(title: "Previous session data")
                 ),
 
                 // Fading filtering, sorting and deletion area (TODO: cleanup: deletion)
