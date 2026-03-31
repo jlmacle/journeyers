@@ -33,7 +33,7 @@ class ContextAnalysisPage extends StatefulWidget
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'formPage');
+  GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'form-page');
   GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywords_ContextAnalysisPage');
 
   //**************** PREFERENCES related data and methods ****************//
@@ -172,7 +172,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                     ),
                     child: ElevatedButton
                     (                    
-                      key: const Key('analyses_new_session_button'),
+                      key: const Key('analyses-new-session-button'),
                       onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
                       style: ElevatedButton.styleFrom
                       (

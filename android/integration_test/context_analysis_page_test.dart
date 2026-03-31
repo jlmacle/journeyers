@@ -134,7 +134,7 @@ void main() async
           expect(dashboardWidget, findsNothing);
 
           // Testing that the context form is present 
-          final formWidget = find.byKey(const Key('formPage'));
+          final formWidget = find.byKey(const Key('form-page'));
           // await tester.pump(const Duration(seconds: 3));
           expect(formWidget, findsOne);
         }
@@ -160,7 +160,7 @@ void main() async
           await tester.pumpAndSettle();
 
           // Verification
-          final buttonWidget = find.byKey(const Key('analyses_new_session_button'));
+          final buttonWidget = find.byKey(const Key('analyses-new-session-button'));
           // Note: use findsOneWidget instead of findsOne
           expect(buttonWidget, findsOneWidget); 
         },
