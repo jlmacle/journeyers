@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
@@ -10,7 +11,7 @@ import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 /// A widget handling bulk deletion of session data.
 class DashboardDeletionByBulk extends StatefulWidget 
 {
-  /// The context for the dashboard (context analyses, group problem-solving sessions).
+  /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// Bool used to store if some sessions are selected for deletion.
@@ -35,8 +36,8 @@ class DashboardDeletionByBulk extends StatefulWidget
     required this.areSessionsForDeletion,
     required this.allSessions,
     required this.filteredSessions,
-    this.sessionsSelectedForDeletion,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList
+    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
+    this.sessionsSelectedForDeletion    
   });
 
   @override
@@ -47,7 +48,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingPageState> groupProblemSolvingPageKey = GlobalKey();
-  GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: "Sessions dashboard page");  
+  GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: "sessionsDashboardPage");  
   GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywords = GlobalKey();
 
   //**************** BULK DELETION OF SESSION DATA ****************/
@@ -62,7 +63,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       // Removing the file
       await fu.deleteCsvFile(filePath); 
       
-      // Removing dashboard data from the stored data
+      // Removing the metadata from the stored metadata
       await du.deleteSessionData
       (
         typeOfContextData: widget.dashboardContext, 
@@ -70,49 +71,51 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       );
     }
 
-    // To update the UI after all physical operations are done
+    // Updating the filtered sessions list
     widget.filteredSessions?.removeWhere
     (
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
 
-    // To keep the _allSessions list updated
+    // Updating the _allSessions list
     widget.allSessions?.removeWhere
     (
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
 
-    // To clear the list of the selected sessions
+    // Clearing the list of the selected sessions
     widget.sessionsSelectedForDeletion!.clear();
 
-    // Updating the keyword list
+    // Updating the keywords list
     dashboardSortingByKeywords.currentState?.refreshKeywordsAfterSessionDeletion();
 
-    // Refreshing the filtered list
+    // Re-applying the keywords filtering
     await dashboardSortingByKeywords.currentState?.applyFilteringByKeywords();    
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
-    // NO SESSION DATA LEFT
-    // Refreshing and resetting "wasSessionDataSaved" if no session data left
-    if (widget.allSessions != null  && widget.allSessions!.isEmpty) 
+    // REFRESHING THE UI
+
+    // 1. IF NO SESSION DATA LEFT
+    // Refreshing and applying resetWasSessionDataSavedStatus
+    if (widget.allSessions!.isEmpty) 
     {
-      // resetting "wasSessionDataSaved" to false
+      // resetWasSessionDataSavedStatus to false
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
-      // refreshing the page
+      // refreshing the page, to re-start in the process page
       groupProblemSolvingPageKey.currentState?.onAllSessionFilesDeleted();
     }
-    // SOME SESSION DATA LEFT AND TO REFRESH
+    // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
     else
     {
-      // To update the keywords
+      // Updating the keywords UI
       dashboardSortingByKeywords.currentState?.setState((){});
 
-      // to update
+      // Updating the sessions list UI
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
     }
   }
