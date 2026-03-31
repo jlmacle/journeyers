@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:collection/collection.dart';
-import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
-import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import 'package:journeyers/core/utils/sorting/sorting_utils.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_config.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dart';
 
 
@@ -18,46 +21,101 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dar
 /// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.ext"}\]
 class SessionsDashboardPage extends StatefulWidget 
 {
-  /// The context for the dashboard (context analyses, group problem-solving sessions)
+  /// The context for the dashboard (context analyses, group problem-solving sessions).
   final String dashboardContext;
 
-  /// The widget used for the preview
+  /// The widget used for the preview.
   final Widget Function({required String pathToData}) previewWidget;
 
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
-  final VoidCallback parentCallbackFunctionToRefreshTheParentPage;
+  final VoidCallback parentCallbackFunctionWhenAllSessionFilesAreDeleted;
+
+  /// A global key linked to the DashboardSortingByKeywords widget
+  final GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey;
 
   const SessionsDashboardPage
   ({
     super.key,
     required this.dashboardContext,
     required this.previewWidget,
-    this.parentCallbackFunctionToRefreshTheParentPage = placeHolderVoidCallback,
+    this.parentCallbackFunctionWhenAllSessionFilesAreDeleted = placeHolderVoidCallback,
+    required this.dashboardSortingByKeywordsKey
   });
 
   @override
-  State<SessionsDashboardPage> createState() => _SessionsDashboardPageState();
+  State<SessionsDashboardPage> createState() => SessionsDashboardPageState();
 }
 
-class _SessionsDashboardPageState extends State<SessionsDashboardPage> 
+class SessionsDashboardPageState extends State<SessionsDashboardPage> 
 {
-  //**************** PREFERENCES related data and methods ****************/
+  //**************** GLOBAL KEYS ****************//
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey();
+
+  // Method used to refresh the dashboard page
+  void refreshDashboard()
+  {
+    setState(() {
+      
+    });
+  }
+
+  
+  //**************** PREFERENCES and DATA RETRIEVAL related data and methods ****************/
+  // Starting by loading data
   bool _isDataLoading = true;
+
+  // All the sessions available
+  List<dynamic>? _allSessions;
+
+  // _filteredSessions is what is used by build()
+  List<dynamic>? _filteredSessions;
 
   // Method used to retrieve the session data, to get the list of used keywords, 
   // and the list of all sessions available
-  Future<void> _sessionDataRetrieval() async 
+  Future<void> getStoredSessionData() async 
   {
-    final data = await du.retrieveAllDashboardSessionData
-      (typeOfContextData: widget.dashboardContext);
-      
-    _usedKeywords = await _getUsedKeywords(data);
-    _allSessions = data;
-    await _sortSessionsByDate();
+    // Retrieving data from file
+    final retrievedSessionData = 
+      await du.retrieveAllDashboardSessionData
+                (typeOfContextData: widget.dashboardContext);
+    
+    // Getting the used keywords from the retrieved data
+    _usedKeywords = await _getUsedKeywords(retrievedSessionData);
+
+    // When getting the stored data, _allSessions = retrievedSessionData
+    _allSessions = retrievedSessionData;
+
+    // _filteredSessions is used in build, and is populated with the content of retrievedSessionData
+    _filteredSessions!.clear();
+    _filteredSessions!.addAll(retrievedSessionData);
+
+    // Data is not sorted by date by default, and needs sorting
+    sortByDateAddJm(list: _filteredSessions!, dateFormat: dateFormatForSorting, byAscendingDate: false);
+    
+    // Re-build to display the sessions
     setState(() {
       _isDataLoading = false;
     });
   }
+
+  // Previous session data retrieval; _allSessions and _filteredSessions are initialized
+  @override
+  void initState() 
+  {
+    super.initState();
+    _allSessions = [];
+    _filteredSessions = [];
+    // Circular indicator until data is retrieved
+    getStoredSessionData();
+  }
+
+  //**************** SORTING AND FILTERING related data and methods ****************/
+
+  // All the keywords available
+  List<String> _usedKeywords = [];
+
+  // All the selected keywords
+  final List<String> _selectedKeywords = [];
 
   // Method used to get the list of keywords present in a session data
   Future<List<String>> _getUsedKeywords(List<dynamic> listOfSessionData) async 
@@ -71,201 +129,70 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     return kwSet.toList();
   }
 
-  //**************** SORTING AND FILTERING related data and methods ****************/
-  bool _isAscendingTitle = true; 
-  bool _isAscendingDate = false; 
-
-  List<dynamic>? _allSessions;
-  List<dynamic>? _filteredSessions;
-
-  List<String>? _usedKeywords;
-  final List<String> _selectedKeywords = [];
-
-  // Method used to sort session data by date
-  Future<void> _sortSessionsByDate() async
-  {
-    _allSessions?.sort((a, b) 
-    {
-      DateTime dateA = DateFormat('MMMM dd, yyyy').add_jm().parse(a[DashboardUtils.keyDate]);
-      DateTime dateB = DateFormat('MMMM dd, yyyy').add_jm().parse(b[DashboardUtils.keyDate]);
-      return _isAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
-    });
-    await _applyFilters();
-  }
- 
-  // Method used to sort session data by title 
-  Future<void> _sortSessionsByTitle() async
-  {
-    _allSessions?.sort((a, b) {
-      String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
-      String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
-      
-      return _isAscendingTitle 
-          ? titleA.compareTo(titleB) 
-          : titleB.compareTo(titleA);
-    });
-    await _applyFilters();
-  }
-
-  // Method used to filter the session data by keywords
-  Future<void> _applyFilters() async
-  {
-    if (_selectedKeywords.isEmpty) 
-    {
-      _filteredSessions = _allSessions!;
-    } else 
-    {
-      _filteredSessions = _allSessions!.where
-      ( 
-        (session) 
-        {
-          final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>();
-          return _selectedKeywords.every((k) => sessionKeywords.contains(k));
-        }
-      ).toList();
-    }
-  }
-
-  // Method used to add/remove the keyword from the filtering criteria
-  Future<void> _toggleFilter(String keyword) async
-  {
-     if (_selectedKeywords.contains(keyword)) 
-    {
-      _selectedKeywords.remove(keyword);
-    } 
-    else 
-    {
-      _selectedKeywords.add(keyword);
-    }
-    await _applyFilters();
-    setState(() {});
-  }
- 
-
-  //**************** DELETION OF SESSION DATA ****************/
-
-  final List<String> _selectedSessionsForDeletion = [];
-
   // Method used to refresh the keywords list after deletion of session data
   void _refreshKeywords() 
   {
-    if (_allSessions == null) return;
-    
-    Set<String> kwSet = {};
-    for (var sessionData in _allSessions!) 
-    {
-      List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
-      kwSet.addAll(kws.cast<String>());
-    }
-    
-    setState
-    (
-      () 
-      {
-      _usedKeywords = kwSet.toList();
-      // Removing selected filters if the keyword no longer exists
-      _selectedKeywords.removeWhere((kw) => !kwSet.contains(kw));
-      }
-    );
+    dashboardSortingByKeywordsKey.currentState?.refreshKeywords();
   }
+    
+  //**************** DELETION OF SINGLE SESSION DATA related data and methods ****************/
 
-  // Method used to delete a single session data
+  List<String> _sessionsSelectedForDeletion = [];  
+
+  // Method used to delete a single session data from the session list action icons
   Future<void> _deleteSelectedSession(String filePath) async
   {
-    // Removing the file
+    // Removing the stored file
     await fu.deleteCsvFile(filePath);
 
-    // Removing dashboard data
+    // Removing the related stored dashboard data
     await du.deleteSessionData(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
     
-    // Updating state data
-    _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);      
+    // Updating the _allSessions list
+    _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
+
+    // Updating the _filteredSessions list used by the UI
+    _filteredSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
               
-      // Removing from selection list
-    _selectedSessionsForDeletion.removeWhere
+    // Updating the sessions selected for bulk deletion
+    _sessionsSelectedForDeletion.removeWhere
     (
-      (session) => _selectedSessionsForDeletion.contains(filePath)
+      (session) => _sessionsSelectedForDeletion.contains(filePath)
     );
 
-    // Updating the keyword list
-    _refreshKeywords();
+    // Updating the keywords list
+    dashboardSortingByKeywordsKey.currentState?.refreshKeywords();
+
+    // Re-applying the relevant filters
+    await dashboardSortingByKeywordsKey.currentState?.applyFilters();
     
-    // Refreshing the filtered list
-    await _applyFilters();
-
-    // Re-building
-    setState(()
-    {});
-
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected session deleted.")));
 
-    // Refreshing and resetting "wasSessionDataSaved" if no session data left
+    // Refreshing and resetWasSessionDataSavedStatus if no session data left
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
-      // resetting "wasSessionDataSaved" to false
+      // resetWasSessionDataSavedStatus
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
-      widget.parentCallbackFunctionToRefreshTheParentPage();
+      widget.parentCallbackFunctionWhenAllSessionFilesAreDeleted();
     }
-  }
-
-  // Method used to delete several session data
-  Future<void> _deleteSelectedSessions() async 
-  {
-    // Creating a fixed list to iterate over so clearing doesn't break the loop
-    final filesToDelete = List<String>.from(_selectedSessionsForDeletion);
-
-    for (String filePath in filesToDelete) 
+    else
     {
-      // Removing the file
-      await fu.deleteCsvFile(filePath); 
-      
-      // Removing dashboard data
-      await du.deleteSessionData
-      (
-        typeOfContextData: widget.dashboardContext, 
-        filePathRelatedToDataToDelete: filePath
-      );
-    }
-
-    // Updating UI state after all physical operations are done
-    _allSessions?.removeWhere
-    (
-      (session) => 
-      filesToDelete.contains(session[DashboardUtils.keyFilePath])
-    );
-
-    _selectedSessionsForDeletion.clear();
-
-    // Updating the keyword list
-    _refreshKeywords();
-
-    // Refreshing the filtered list
-    await _applyFilters();
-    setState((){});
-
-    // Displaying an informational message
-    ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected sessions deleted.")));
-
-    // Refreshing and resetting "wasSessionDataSaved" if no session data left
-    if (_allSessions != null  && _allSessions!.isEmpty) 
-    {
-      // resetting "wasSessionDataSaved" to false
-      await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
-      widget.parentCallbackFunctionToRefreshTheParentPage();
+      setState(() {});
     }
   }
 
   //**************** EDITION OF SESSION DATA ****************/
   final TextEditingController _titleController = TextEditingController();
 
+  // Method used to update the session title
   Future<void> updateSessionTitle(String filePath, String newTitle) async 
   {
     String? previousTitle;
+
     // Updating the local UI state
     setState(() {
       // Finding the session in the session data, and updating its title
@@ -288,6 +215,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     });
   }
 
+  // Method used to update the session keywords
   Future<void> updateSessionKeywords(String filePath, List<String> newKeywords) async 
   {
     List<dynamic>? previousKeywords;
@@ -313,8 +241,8 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                   );
     }
 
-    _refreshKeywords(); // Updates the keywords list
-    await _applyFilters();    // Refreshes the filtered view
+    _refreshKeywords();
+     // Updates the keywords list
     
     if ( ! previousKeywords!.equals(newKeywords) )
     {
@@ -326,15 +254,13 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     
   }
 
-
-  @override
-  void initState() 
+  //**************** METHODS USED TO REFRESH VIEWS  ****************//
+  // Re-building of the widget
+  void updateState()
   {
-    super.initState();
-    _sessionDataRetrieval();
+    setState(() {});
   }
- 
- 
+
 @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,10 +271,13 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
               slivers: [
                 // Static heading (Scrolls away normally)
                 // TODO: the sliver code to clean eventually
+
+                // DASHBOARD TITLE
                 const SliverToBoxAdapter(
                   child: DashboardTitle(title: "Previous session data")
                 ),
 
+                // DASHBOARD FILTERING FEATURES
                 // Fading filtering, sorting and deletion area (TODO: cleanup: deletion)
                 SliverAppBar(
                   // Size of the sort, filtering, deletion area
@@ -361,9 +290,32 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                   backgroundColor: Colors.transparent,
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin, 
-                    background: _buildFilterAndSortBar(),
+                    background: DashboardFilteringFeature
+                    (
+                      dashboardContext: widget.dashboardContext, 
+                      allSessions: _allSessions, filteredSessions: _filteredSessions,
+                      usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
+                      parentCallbackFunctionToRefreshTheSessionsList: updateState,
+                      dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey
+                    ),
                   ),
                 ),
+
+                // BULK DELETION
+                SliverToBoxAdapter(
+                  child: DashboardDeletionByBulk
+                  (
+                    dashboardContext: widget.dashboardContext,
+                    allSessions: _allSessions,
+                    filteredSessions: _filteredSessions,
+                    areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
+                    sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
+                    dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard
+
+                    
+                  )
+                ),
+
                 const SliverToBoxAdapter
                 (
                   child: Divider()                       
@@ -379,7 +331,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                         String sessionTitle = session[DashboardUtils.keyTitle];
                         final String filePath = session[DashboardUtils.keyFilePath];
                         final bool isChecked =
-                            _selectedSessionsForDeletion.contains(filePath);
+                            _sessionsSelectedForDeletion.contains(filePath);
 
                         return Card(
                           margin: const EdgeInsets.symmetric(
@@ -398,10 +350,10 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
                                       onChanged: (bool? value) {
                                         setState(() {
                                           if (value == true) {
-                                            _selectedSessionsForDeletion
+                                            _sessionsSelectedForDeletion
                                                 .add(filePath);
                                           } else {
-                                            _selectedSessionsForDeletion
+                                            _sessionsSelectedForDeletion
                                                 .remove(filePath);
                                           }
                                         });
@@ -541,135 +493,7 @@ class _SessionsDashboardPageState extends State<SessionsDashboardPage>
     );
   }
 
-  // Method used to add sorting by date, filtering with keyword, and bulk deletion.
-  Widget _buildFilterAndSortBar() 
-  {
-    return Column
-    (
-      
-      children: 
-      [
-        Padding
-        (
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column
-          (
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: 
-            [
-              // Sorting by date/title wrapped for small screens
-              Wrap
-              (
-                spacing: 8.0,   // horizontal gap between buttons
-                runSpacing: 4.0, // vertical gap between wrapped lines
-                alignment: WrapAlignment.start,
-                children: 
-                [
-                  // Sorting by title
-                  TextButton.icon(
-                    onPressed: () async 
-                    {
-                      _isAscendingTitle = !_isAscendingTitle;
-                      await _sortSessionsByTitle();
-                      setState((){});
-                    },
-                    icon: const Icon
-                    (
-                      Icons.sort_by_alpha,
-                      color: Colors.black,
-                    ),
-                    label: Text
-                    (
-                      "Sort by Title (${_isAscendingTitle ? 'A-Z' : 'Z-A'})",
-                      style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                  ),
-                  // Sorting by date
-                  TextButton.icon
-                  (
-                    onPressed: () async
-                    {
-                      _isAscendingDate = !_isAscendingDate;
-                      await _sortSessionsByDate();
-                      setState((){});
-                    },
-                    icon: Icon
-                    (
-                      _isAscendingDate ? Icons.arrow_downward : Icons.arrow_upward,
-                      color: Colors.black,
-                    ),
-                    label: const Text
-                    (
-                      "Sort by Date",
-                      style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                    ),
-                  ),
-                ],
-              ),
-              // Filtering by keywords
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text
-                (
-                  "Filter by Keywords:", 
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding
-        (
-          padding: const EdgeInsets.only(left: 12.0, right:12, bottom: 12),
-          child: Wrap
-          (
-            spacing: 8.0,
-            children: (
-                        _usedKeywords!.toList()
-                        ..sort
-                        (
-                          (a, b) 
-                          {
-                            // Different letters
-                            int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
-                            // Same letter
-                            if (comparison == 0) {return b.compareTo(a);}                                                
-                            return comparison;
-                          }
-                        )
-                      ).map
-                      (
-                        (kw) 
-                        {
-                          return FilterChip
-                          (
-                            label: Text(kw),
-                            onSelected: (_) async => await _toggleFilter(kw),
-                            selected: _selectedKeywords.contains(kw)
-                          );
-                        }
-                      ).toList(),
-          ),
-        ),
-        // Bulk Deletion Button added here
-        if (_selectedSessionsForDeletion.isNotEmpty)
-          TextButton.icon
-          (
-            key: const Key('bulk_delete_button'),
-            onPressed: _deleteSelectedSessions,
-            icon: const Icon
-            (
-              Icons.delete, color: Colors.red),
-              label: Text
-              (
-                "Delete (${_selectedSessionsForDeletion.length})",
-                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-              ),
-          ),
-      ],
-    );
-  }
-
+  
   void _showTitleEditSheet(String title, String filePath) 
   {
     _titleController.text = title; // Syncing current title to the field

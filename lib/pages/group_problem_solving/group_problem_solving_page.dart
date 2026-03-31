@@ -6,6 +6,7 @@ import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 /// {@category Pages}
@@ -25,7 +26,9 @@ class GroupProblemSolvingPage extends StatefulWidget
 
 class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
 {
+  //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'groupProblemSolvingPage');
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywordsKey_GroupProblemSolvingPage');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
@@ -40,9 +43,9 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     if (preferencesDebug) pu.printd("Preferences: _wasGroupProblemSolvingSessionDataSaved: $_wasGroupProblemSolvingSessionDataSaved");
   }
 
-  //**************** METHODS USED TO SWITCH BETWEEN PROCESS VIEW AND DASHBOARD VIEW  ****************//
+  //**************** METHODS USED TO REFRESH VIEWS  ****************//
 
-  // Method used to refresh the page from process page to dashboard, 
+  // Method used to refresh the page from group problem-solving process page to dashboard, 
   // after process data has been saved
   void onDataSaved() 
   {
@@ -51,7 +54,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     });
   }
 
-  // Method used to refresh the page from dashboard to process page, 
+  // Method used to refresh the page from dashboard to group problem-solving process page, 
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
   {
@@ -60,7 +63,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
     });
   }
 
-  //**************** FOCUS NODE related data and methods ****************//
+    //**************** FOCUS NODE related data and methods ****************//
   FocusNode groupProblemSolvingPageFocusNode = FocusNode();
 
   @override
@@ -136,10 +139,11 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                 (
                   key: const Key('problem_solving_dashboard'),
                   dashboardContext: DashboardUtils.groupProblemSolvingsContext,
+                  dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
                   previewWidget: 
                     ({required String pathToData}) 
                     { return GroupProblemSolvingPreviewWidget(pathToStoredData: pathToData);},
-                  parentCallbackFunctionToRefreshTheParentPage: onAllSessionFilesDeleted
+                  parentCallbackFunctionWhenAllSessionFilesAreDeleted: onAllSessionFilesDeleted                  
                 )
               ),
             ]
