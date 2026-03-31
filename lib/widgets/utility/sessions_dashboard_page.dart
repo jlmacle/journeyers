@@ -130,9 +130,9 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void _refreshKeywords() 
+  void refreshKeywordsAfterSessionDeletion() 
   {
-    dashboardSortingByKeywordsKey.currentState?.refreshKeywords();
+    dashboardSortingByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
   }
     
   //**************** DELETION OF SINGLE SESSION DATA related data and methods ****************/
@@ -161,10 +161,10 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     );
 
     // Updating the keywords list
-    dashboardSortingByKeywordsKey.currentState?.refreshKeywords();
+    dashboardSortingByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await dashboardSortingByKeywordsKey.currentState?.applyFilters();
+    await dashboardSortingByKeywordsKey.currentState?.applyFilteringByKeywords();
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -241,7 +241,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                   );
     }
 
-    _refreshKeywords();
+    refreshKeywordsAfterSessionDeletion();
      // Updates the keywords list
     
     if ( ! previousKeywords!.equals(newKeywords) )
