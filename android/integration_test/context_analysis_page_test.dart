@@ -160,7 +160,7 @@ void main() async
           await tester.pumpAndSettle();
 
           // Verification
-          final buttonWidget = find.byKey(const Key('analyses_new_session_button'));
+          final buttonWidget = find.byKey(const Key('analyses-new-session-button'));
           // Note: use findsOneWidget instead of findsOne
           expect(buttonWidget, findsOneWidget); 
         },

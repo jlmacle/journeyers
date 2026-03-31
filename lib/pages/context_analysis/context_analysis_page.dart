@@ -172,7 +172,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                     ),
                     child: ElevatedButton
                     (                    
-                      key: const Key('analyses_new_session_button'),
+                      key: const Key('analyses-new-session-button'),
                       onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
                       style: ElevatedButton.styleFrom
                       (
