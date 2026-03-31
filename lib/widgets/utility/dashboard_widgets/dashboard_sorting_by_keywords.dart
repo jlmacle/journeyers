@@ -36,10 +36,9 @@ class DashboardSortingByKeywords extends StatefulWidget
 }
 
 class DashboardSortingByKeywordsState extends State<DashboardSortingByKeywords> 
-{
-  
+{  
   // Method used to filter the session data by keywords
-  Future<void> applyFilters() async
+  Future<void> applyFilteringByKeywords() async
   {
     if (widget.selectedKeywords.isEmpty) 
     {
@@ -58,16 +57,18 @@ class DashboardSortingByKeywordsState extends State<DashboardSortingByKeywords>
           return widget.selectedKeywords.every((k) => sessionKeywords.contains(k));
         }
       ).toList();
+      
       // Working with the list while keeping the same reference
       widget.filteredSessions!.clear();
       widget.filteredSessions!.addAll(sortingResults);
     }
 
+    // Refreshing the sessions list
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
   }
 
-  // Method used to add/remove the keyword from the filtering criteria
-  Future<void> _toggleFilter(String keyword) async
+  // Method used to add/remove a keyword from the filtering criteria
+  Future<void> _toggleKeywordSelection(String keyword) async
   {
      if (widget.selectedKeywords.contains(keyword)) 
     {
@@ -78,30 +79,34 @@ class DashboardSortingByKeywordsState extends State<DashboardSortingByKeywords>
       widget.selectedKeywords.add(keyword);
     }
 
-    await applyFilters();
+    // Applying the filtering by keywords
+    await applyFilteringByKeywords();
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void refreshKeywords() 
+  void refreshKeywordsAfterSessionDeletion() 
   {
+    // if no sessions left, nothing to do
     if (widget.allSessions == null) return;
     
-    Set<String> kwSet = {};
+    // Re-building the keywords' list from the remaining session data
+    List<String> remainingKws = [];
     for (var sessionData in widget.allSessions!) 
     {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
-      kwSet.addAll(kws.cast<String>());
+      remainingKws.addAll(kws.cast<String>());
     }
     
+    // Refreshing the used keywords' list, the selection of keywords, 
+    // and the DashboardSortingByKeywords widget
     setState
     (
       () 
       {
-
-      widget.usedKeywords.clear();
-      widget.usedKeywords.addAll(kwSet.toList());
-      // Removing selected filters if the keyword no longer exists
-      widget.selectedKeywords.removeWhere((kw) => !kwSet.contains(kw));
+        widget.usedKeywords.clear();
+        widget.usedKeywords.addAll(remainingKws);
+        // Removing selected filters if the keyword no longer exists
+        widget.selectedKeywords.removeWhere((kw) => !remainingKws.contains(kw));
       }
     );
   }
@@ -136,7 +141,7 @@ class DashboardSortingByKeywordsState extends State<DashboardSortingByKeywords>
                 return FilterChip
                 (
                   label: Text(kw),
-                  onSelected: (_) async => await _toggleFilter(kw),
+                  onSelected: (_) async => await _toggleKeywordSelection(kw),
                   selected: widget.selectedKeywords.contains(kw)
                 );
               }
