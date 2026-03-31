@@ -322,7 +322,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                 SliverPadding(
                   padding: const EdgeInsets.only(bottom: 0),
                   sliver: SliverList(
-                    key: const Key('session_list'),
+                    key: const Key('dashboard-sessions-list'),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final session = _filteredSessions![index];
