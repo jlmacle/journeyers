@@ -137,7 +137,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                 child: 
                 SessionsDashboardPage
                 (
-                  key: const Key('problem_solving_dashboard'),
+                  key: const Key('group-problem-solvings-dashboard'),
                   dashboardContext: DashboardUtils.groupProblemSolvingsContext,
                   dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
                   previewWidget: 
