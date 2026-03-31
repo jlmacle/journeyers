@@ -66,7 +66,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   final TextEditingController _problemTitleController = TextEditingController();
 
   //**************** STAKEHOLDER IDENTIFIERS related data ****************//
-  GlobalKey<GroupProblemSolvingGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "groupMoods1");
+  GlobalKey<GroupProblemSolvingGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
   GlobalKey<GroupProblemSolvingGroupMoodsState> groupMoods2Key = GlobalKey(debugLabel: "groupMoods2");
 
   // Mode for modifying a stakeholder identifier
