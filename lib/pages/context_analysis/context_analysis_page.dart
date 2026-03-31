@@ -79,7 +79,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: Text
                   (
-                    key: const Key('information_modal'),
+                    key: const Key('information-modal'),
                     AppLocalizations.of(context)?.start_msg ?? 'Issue with the application start message',
                     textAlign: TextAlign.center,                                          
                     style: dialogStyle, 

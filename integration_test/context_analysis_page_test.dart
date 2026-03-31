@@ -60,7 +60,7 @@ void main() async
           await tester.pumpAndSettle();
 
           // Verifying the modal is present
-          final modalTextFinder = find.byKey(const Key('information_modal'));
+          final modalTextFinder = find.byKey(const Key('information-modal'));
           expect(modalTextFinder, findsOneWidget);
 
           // Verifying the modal's behavior
@@ -101,7 +101,7 @@ void main() async
         await tester.pumpAndSettle();
 
         // Verifying the modal is absent
-        final modalTextFinder = find.byKey(const Key('information_modal'));
+        final modalTextFinder = find.byKey(const Key('information-modal'));
         expect(modalTextFinder, findsNothing);
       }
     );
