@@ -25,13 +25,13 @@ class DashboardFilteringByTitle extends StatefulWidget
 
 class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle> 
 {
-  // bool 
   bool _isAscendingTitle = true;   
 
   // Method used to sort session data by title 
   Future<void> _sortSessionsByTitle() async
   {
-    widget.filteredSessionsToSort?.sort((a, b) {
+    widget.filteredSessionsToSort?.sort((a, b) 
+    {
       String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
       String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
       
@@ -50,11 +50,12 @@ class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle>
       onPressed: () async 
       {
         _isAscendingTitle = !_isAscendingTitle;
-
-        await _sortSessionsByTitle();
-        // Updating the Filtering by title UI
+        // Updating the widget UI
         setState((){});
-        // Updating the sessions list
+        
+        // Sorting
+        await _sortSessionsByTitle();        
+        // Updating the sessions list UI
         widget.dashboardCallbackFunctionToRefreshTheSessionsList();
       },
       icon: const Icon
@@ -65,6 +66,7 @@ class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle>
       label: Text
       (
         "Sort by Title (${_isAscendingTitle ? 'A-Z' : 'Z-A'})",
+        // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
     );
