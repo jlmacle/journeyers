@@ -34,7 +34,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'form-page');
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywords_ContextAnalysisPage');
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'analyses-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
