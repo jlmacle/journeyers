@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_title.dart';
@@ -45,28 +46,6 @@ class DashboardFilteringFeature extends StatefulWidget
 
 class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature> 
 {  
-  final List<String> _selectedSessionsForDeletion = [];
-
-  // Method used to delete several session data
-  Future<void> _deleteSelectedSessions() async 
-  {
-    // Creating a fixed list to iterate over so clearing doesn't break the loop
-    final filesToDelete = List<String>.from(_selectedSessionsForDeletion);
-
-    for (String filePath in filesToDelete) 
-    {
-      // Removing the file
-      await fu.deleteCsvFile(filePath); 
-      
-      // Removing dashboard data
-      await du.deleteSessionData
-      (
-        typeOfContextData: widget.dashboardContext, 
-        filePathRelatedToDataToDelete: filePath
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column
@@ -102,11 +81,10 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                 ],
-              ),
-              // Filtering by keywords
+              ),              
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text
+                child: Text // TODO: to move
                 (
                   "Filter by Keywords:", 
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
@@ -115,6 +93,7 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
             ],
           ),
         ),
+        // Filtering by keywords
         DashboardSortingByKeywords
         (
           key: widget.dashboardSortingByKeywordsKey,
@@ -123,22 +102,7 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
           usedKeywords: widget.usedKeywords,
           selectedKeywords: widget.selectedKeywords,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
-          ),
-        // Bulk Deletion Button added here
-        if (_selectedSessionsForDeletion.isNotEmpty)
-          TextButton.icon
-          (
-            key: const Key('bulk_delete_button'),
-            onPressed: _deleteSelectedSessions,
-            icon: const Icon
-            (
-              Icons.delete, color: Colors.red),
-              label: Text
-              (
-                "Delete (${_selectedSessionsForDeletion.length})",
-                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-              ),
-          ),
+        ),        
       ],
     );
   }
