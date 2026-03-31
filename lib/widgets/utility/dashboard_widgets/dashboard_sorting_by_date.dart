@@ -10,7 +10,7 @@ class DashboardSortingByDate extends StatefulWidget
   /// List storing the sessions to sort.
   final List<dynamic>? sessionsToSort;
 
-  /// Callback function used to refresh the sessions' list.
+  /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
   const DashboardSortingByDate
@@ -31,7 +31,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   // Method used to sort session data by date
   Future<void> _sortSessionsByDate() async
   {
-    sortByDateAddJm(list: widget.sessionsToSort!, dateFormat:dateFormatForSorting, byAscendingDate: _isAscendingDate);
+    sortByDateAddJm(list: widget.sessionsToSort!, dateFormat: dateFormatForSorting, byAscendingDate: _isAscendingDate);
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
   }
 
@@ -42,8 +42,10 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
     (
       onPressed: () async
       {
-        _isAscendingDate = !_isAscendingDate;        
+        _isAscendingDate = !_isAscendingDate;   
+        // Updating the widget     
         setState((){});
+        // Sorting and updating the sessions list
         await _sortSessionsByDate();
       },
       icon: Icon
