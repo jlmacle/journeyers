@@ -28,7 +28,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywords_GroupProblemSolvingPage');
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solvings-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
