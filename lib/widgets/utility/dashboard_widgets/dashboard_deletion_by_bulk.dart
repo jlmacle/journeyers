@@ -48,7 +48,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingPageState> groupProblemSolvingPageKey = GlobalKey();
-  GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: "sessionsDashboardPage");  
+  GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: 'sessions-dashboard-page');  
   GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywords = GlobalKey();
 
   //**************** BULK DELETION OF SESSION DATA ****************/
