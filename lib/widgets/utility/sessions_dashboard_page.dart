@@ -343,7 +343,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Checkbox(
-                                      key: ValueKey('checkbox_$index'),
+                                      key: ValueKey('checkbox-$index'),
                                       value: isChecked,
                                       onChanged: (bool? value) {
                                         setState(() {
@@ -375,7 +375,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                                                           .keyFilePath]),
                                                   child: 
                                                   Text(
-                                                    key: ValueKey('session_title_$index'),
+                                                    key: ValueKey('session-title-$index'),
                                                     (widget.dashboardContext == DashboardUtils.groupProblemSolvingsContext) ? "$sessionTitle (gps)" : sessionTitle,
                                                     style: const TextStyle(
                                                         fontWeight:
@@ -384,7 +384,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                                                   )),
                                               Text(
                                                 key: ValueKey(
-                                                    'session_date_$index'),
+                                                    'session-date-$index'),
                                                 "(${session[DashboardUtils.keyDate]})",
                                                 style: const TextStyle(
                                                     fontSize: 14,
@@ -401,7 +401,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                                                     .keyFilePath]),
                                             child: Text(
                                               key: ValueKey(
-                                                  'session_keywords_$index'),
+                                                  'session-keywords-$index'),
                                               "Keywords: ${(List.from(session[DashboardUtils.keyKeywords])..sort((a, b) {
                                                   int comparison = a
                                                       .toLowerCase()
@@ -465,7 +465,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                                       children: [                                        
                                         IconButton(
                                           key: ValueKey(
-                                              'session_delete_$index'),
+                                              'session-delete-$index'),
                                           icon:
                                               const Icon(Icons.delete_rounded),
                                           onPressed: () async =>
