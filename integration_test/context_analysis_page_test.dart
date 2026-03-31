@@ -130,7 +130,7 @@ void main() async
           await tester.pumpAndSettle();
 
           // Testing that the dashboard is not present
-          final dashboardWidget = find.byKey(const Key('analyses_dashboard'));
+          final dashboardWidget = find.byKey(const Key('analyses-dashboard'));
           expect(dashboardWidget, findsNothing);
 
           // Testing that the context form is present 

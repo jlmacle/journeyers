@@ -193,7 +193,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               (
                 child: SessionsDashboardPage
                 (
-                  key: const Key('analyses_dashboard'), 
+                  key: const Key('analyses-dashboard'), 
                   dashboardContext: DashboardUtils.contextAnalysesContext,
                   dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
                   previewWidget: 
