@@ -8,6 +8,7 @@ import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart'
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 /// {@category Pages}
@@ -31,7 +32,9 @@ class ContextAnalysisPage extends StatefulWidget
 
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
+  //**************** GLOBAL KEYS ****************//
   GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'formPage');
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywordsKey_ContextAnalysisPage');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
@@ -90,7 +93,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     }
   }
 
-  //**************** METHODS USED TO SWITCH BETWEEN FORM VIEW AND DASHBOARD VIEW  ****************//
+  //**************** METHODS USED TO REFRESH VIEWS  ****************//
 
   // Method used to refresh the page from context form to dashboard, 
   // after form data has been saved
@@ -101,13 +104,19 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
     });
   }
 
-  // Method used to refresh the page from dashboard to context form, 
+   // Method used to refresh the page from dashboard to context form, 
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
   {
     setState(() {
       _wasContextAnalysisSessionDataSaved = false;
     });
+  }
+
+   // Method used to refresh the page
+  void onPageToRefresh()
+  {
+    setState(() {});
   }
 
   //**************** FOCUS NODE related data and methods ****************//
@@ -186,10 +195,12 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 (
                   key: const Key('analyses_dashboard'), 
                   dashboardContext: DashboardUtils.contextAnalysesContext,
+                  dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
                   previewWidget: 
                   ({required String pathToData}) 
                   { return ContextAnalysisPreviewWidget(pathToStoredData: pathToData);},  
-                  parentCallbackFunctionToRefreshTheParentPage: onAllSessionFilesDeleted
+                  parentCallbackFunctionWhenAllSessionFilesAreDeleted: onAllSessionFilesDeleted,
+                  
                 )
               ),
             ]
