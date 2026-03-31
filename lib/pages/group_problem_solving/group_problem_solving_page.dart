@@ -27,7 +27,7 @@ class GroupProblemSolvingPage extends StatefulWidget
 class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'groupProblemSolvingPage');
+  GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
   GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywords_GroupProblemSolvingPage');
 
   //**************** PREFERENCES related data and methods ****************//
