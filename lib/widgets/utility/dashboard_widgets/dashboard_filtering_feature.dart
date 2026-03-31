@@ -6,7 +6,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_b
 
 class DashboardFilteringFeature extends StatefulWidget 
 {
-  /// The context for the dashboard (context analyses, group problem-solving sessions).
+  /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// List storing all available session data.

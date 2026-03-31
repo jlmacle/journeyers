@@ -21,7 +21,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dar
 /// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.ext"}\]
 class SessionsDashboardPage extends StatefulWidget 
 {
-  /// The context for the dashboard (context analyses, group problem-solving sessions).
+  /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// The widget used for the preview.
@@ -310,9 +310,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                     filteredSessions: _filteredSessions,
                     areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
                     sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard
-
-                    
+                    dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard                    
                   )
                 ),
 
