@@ -116,7 +116,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                     ),
                     child: ElevatedButton
                     (                    
-                      key: const Key('problem_solving_new_session_button'),
+                      key: const Key('group-problem-solvings-new-session-button'),
                       onPressed: () { setState(() { _wasGroupProblemSolvingSessionDataSaved = false;});},
                       style: ElevatedButton.styleFrom
                       (
