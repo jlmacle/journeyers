@@ -134,7 +134,7 @@ void main() async
           expect(dashboardWidget, findsNothing);
 
           // Testing that the context form is present 
-          final formWidget = find.byKey(const Key('formPage'));
+          final formWidget = find.byKey(const Key('form-page'));
           // await tester.pump(const Duration(seconds: 3));
           expect(formWidget, findsOne);
         }

@@ -33,7 +33,7 @@ class ContextAnalysisPage extends StatefulWidget
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'formPage');
+  GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'form-page');
   GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'dashboardSortingByKeywords_ContextAnalysisPage');
 
   //**************** PREFERENCES related data and methods ****************//
