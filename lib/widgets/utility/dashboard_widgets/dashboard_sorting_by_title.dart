@@ -9,7 +9,7 @@ class DashboardFilteringByTitle extends StatefulWidget
   /// List storing the sessions to sort.
   final List<dynamic>? filteredSessionsToSort;
 
-  /// Callback function used to refresh the sessions' list.
+  /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
   const DashboardFilteringByTitle
@@ -25,6 +25,7 @@ class DashboardFilteringByTitle extends StatefulWidget
 
 class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle> 
 {
+  // bool 
   bool _isAscendingTitle = true;   
 
   // Method used to sort session data by title 
