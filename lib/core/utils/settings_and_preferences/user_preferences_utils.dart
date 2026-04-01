@@ -37,13 +37,7 @@ class UserPreferencesUtils
   }
 
   //**************** FOLDER SELECTED FOR APPLICATION USE ****************/
-  /// Method used to record the path of the folder selected for application use.
-  Future<void> saveApplicationFolderPath(String folderPath) async 
-  {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('applicationFolderPath', folderPath);
-  }
-
+  
   /// Method used to check if the application folder path has been saved.
   Future<String?> getApplicationFolderPath() async 
   {
