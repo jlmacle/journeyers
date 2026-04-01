@@ -6,7 +6,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
-import 'package:journeyers/core/utils/sorting/sorting_utils.dart';
+import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
@@ -90,7 +90,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     _filteredSessions!.addAll(retrievedSessionData);
 
     // Data is not sorted by date by default, and needs sorting
-    sortByDateAddJm(list: _filteredSessions!, dateFormat: dateFormatForSorting, byAscendingDate: false);
+    sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: dateFormatForSorting, byAscendingDate: false);
     
     // Re-build to display the sessions
     setState(() {
