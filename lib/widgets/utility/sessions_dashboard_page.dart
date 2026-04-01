@@ -90,7 +90,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     _filteredSessions!.addAll(retrievedSessionData);
 
     // Data is not sorted by date by default, and needs sorting
-    sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: dateFormatForSorting, byAscendingDate: false);
+    await sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: dateFormatForSorting, byAscendingDate: false);
     
     // Re-build to display the sessions
     setState(() {
