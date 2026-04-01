@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_title.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
@@ -94,15 +93,19 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
           ),
         ),
         // Filtering by keywords
-        DashboardSortingByKeywords
-        (
-          key: widget.dashboardSortingByKeywordsKey,
-          allSessions: widget.allSessions, 
-          filteredSessions: widget.filteredSessions, 
-          usedKeywords: widget.usedKeywords,
-          selectedKeywords: widget.selectedKeywords,
-          dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
-        ),        
+        Flexible(
+          child: SingleChildScrollView(
+            child: DashboardSortingByKeywords
+            (
+              key: widget.dashboardSortingByKeywordsKey,
+              allSessions: widget.allSessions, 
+              filteredSessions: widget.filteredSessions, 
+              usedKeywords: widget.usedKeywords,
+              selectedKeywords: widget.selectedKeywords,
+              dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+            ),
+          ),
+        ),      
       ],
     );
   }
