@@ -8,7 +8,7 @@ import Flutter
     // Class-level constants
     private let CHANNEL = "dev.journeyers/iossaf"
     private let KEY_BOOKMARK = "dev.journeyers.folderBookmarkiOS"
-    private let KEY_PATH = "flutter.applicationFolderPath" // Unique for binary data
+    private let KEY_PATH = "flutter.applicationFolderPath" 
     private let KEY_URI = "flutter.applicationFolderPath"
     private let DEBUG: Bool = true
     
@@ -66,7 +66,7 @@ import Flutter
                     if DEBUG {print("readFileContent")}
                     let args = call.arguments as? [String: Any]
                     let fileName = args?["fileName"] as? String ?? ""
-                    // Explicitly handling the optional String? returned by the helper
+                    // Explicitly handles the optional String? returned by the helper
                     if let content = self.readFileFromStoredFolder(fileName: fileName) {
                         result(content)
                     } else {
@@ -152,7 +152,7 @@ import Flutter
 
     private func readFileFromStoredFolder(fileName: String) -> String? {
         if DEBUG {print("readFileFromStoredFolder")}
-        // Correctly typed closure to resolve 'nil' compatibility error
+        
         return accessFolder { (folderUrl: URL) -> String? in
             let fileUrl = folderUrl.appendingPathComponent(fileName)
             return try? String(contentsOf: fileUrl, encoding: .utf8)
@@ -165,7 +165,7 @@ import Flutter
             let fileUrl = folderUrl.appendingPathComponent(fileName)
             let fileManager = FileManager.default
             
-            // Check if file exists before attempting deletion
+            // Checks if file exists before attempting deletion
             if fileManager.fileExists(atPath: fileUrl.path) {
                 do {
                     try fileManager.removeItem(at: fileUrl)
@@ -224,14 +224,14 @@ extension AppDelegate: UIDocumentPickerDelegate {
         }
 
         do {
-            // 1. Creates the security bookmark for persistent access (Internal Use)
+            // Creates the security bookmark for persistent access (Internal Use)
             let bookmarkData = try selectedUrl.bookmarkData(options: .suitableForBookmarkFile, 
                                                            includingResourceValuesForKeys: nil, 
                                                            relativeTo: nil)
-            // Saving the binary data to the bookmark key
+            // Saves the binary data to the bookmark key
             UserDefaults.standard.set(bookmarkData, forKey: KEY_BOOKMARK)
         
-            // Save the STRING path for Flutter
+            // Saves the STRING path for Flutter
             UserDefaults.standard.set(selectedUrl.path, forKey: KEY_PATH)
         
             pendingResult?(selectedUrl.path)
