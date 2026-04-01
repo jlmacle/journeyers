@@ -30,10 +30,10 @@ class UserPreferencesUtils
   }
 
   /// Method used to reset the acknowledgment modal status
-  Future<void> resetInformationModalStatus() async 
+  Future<bool> resetInformationModalStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isInformationModalAcknowledged', false);
+    return await prefs.setBool('isInformationModalAcknowledged', false);
   }
 
   //**************** FOLDER SELECTED FOR APPLICATION USE ****************/
