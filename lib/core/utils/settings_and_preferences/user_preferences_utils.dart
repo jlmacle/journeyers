@@ -16,10 +16,10 @@ class UserPreferencesUtils
 
   //**************** ACKNOWLEDGMENT MODAL ****************/
   /// Method used to record that the acknowledgment modal has been acknowledged.
-  Future<void> saveInformationModalAcknowledgement() async 
+  Future<bool> saveInformationModalAcknowledgement() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isInformationModalAcknowledged', true);
+    return await prefs.setBool('isInformationModalAcknowledged', true);
   }
 
   /// Method used to check if the acknowledgment modal has been acknowledged.
