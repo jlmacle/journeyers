@@ -1,3 +1,5 @@
+Android:
+
 Android phone usable to run the application during development:
 - "Build number" to access in settings
 - Build number tapped 7 times until a message says: "You are now a developer!"
@@ -18,3 +20,17 @@ https://developer.android.com/training/data-storage/shared/documents-files#persi
 allows users to select a specific directory, 
 granting your app access to all of the files and sub-directories within that directory."
 https://developer.android.com/training/data-storage/shared/documents-files#use-cases
+
+
+iOS:
+
+NSURL
+"A bookmark provides a persistent reference to a file-system resource."
+https://developer.apple.com/documentation/foundation/nsurl#1663783
+
+bookmarkData(options:includingResourceValuesForKeys:relativeTo:)
+https://developer.apple.com/documentation/foundation/nsurl/bookmarkdata(options:includingresourcevaluesforkeys:relativeto:)#Working-with-Bookmark-Data
+"This method returns bookmark data
+that can later be resolved into a URL object for a file
+even if the user moves or renames it
+(if the volume format on which the file resides supports doing so)."
