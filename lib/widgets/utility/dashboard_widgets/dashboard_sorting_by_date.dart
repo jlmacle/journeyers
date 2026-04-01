@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/core/utils/sorting/sorting_utils.dart';
+import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_config.dart';
 
 /// {@category Utility widgets}
@@ -31,7 +31,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   // Method used to sort session data by date
   Future<void> _sortSessionsByDate() async
   {
-    sortByDateAddJm(list: widget.sessionsToSort!, dateFormat: dateFormatForSorting, byAscendingDate: _isAscendingDate);
+    sortSessionByDateAddJm(list: widget.sessionsToSort!, dateFormat: dateFormatForSorting, byAscendingDate: _isAscendingDate);
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
   }
 

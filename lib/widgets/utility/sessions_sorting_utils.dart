@@ -5,8 +5,12 @@ import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
 
 /// {@category Utils}
 /// A utility related to sorting.
-// Method used to sort by date
-List<dynamic> sortByDateAddJm
+
+// Method used to sort sessions by date
+// The list parameter is assumed to be a list of sessions, 
+// with a key DashboardUtils.keyDate for the date values
+// https://api.flutter.dev/flutter/package-intl_intl/DateFormat-class.html 
+List<dynamic> sortSessionByDateAddJm
 ({required List<dynamic> list, required String dateFormat, required bool byAscendingDate})
 {
   list.sort((a, b) 
@@ -18,3 +22,5 @@ List<dynamic> sortByDateAddJm
 
   return list;   
 }
+
+
