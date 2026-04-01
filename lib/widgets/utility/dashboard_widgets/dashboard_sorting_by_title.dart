@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
 
 /// {@category Utility widgets}
 /// A widget handling the sorting by title of session data.
@@ -30,15 +30,7 @@ class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle>
   // Method used to sort session data by title 
   Future<void> _sortSessionsByTitle() async
   {
-    widget.filteredSessionsToSort?.sort((a, b) 
-    {
-      String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
-      String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
-      
-      return _isAscendingTitle 
-          ? titleA.compareTo(titleB) 
-          : titleB.compareTo(titleA);
-    });
+    await sortByTitle(list: widget.filteredSessionsToSort!, byAscendingTitle: _isAscendingTitle);
   }
 
 
