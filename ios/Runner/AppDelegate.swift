@@ -180,11 +180,18 @@ extension AppDelegate: UIDocumentPickerDelegate {
         }
 
         do {
-            // Persistence: bookmark allows folder access after app restarts
+            // 1. Create the security bookmark for persistent access (Internal Use)
             let bookmarkData = try selectedUrl.bookmarkData(options: .minimalBookmark, 
                                                            includingResourceValuesForKeys: nil, 
                                                            relativeTo: nil)
             UserDefaults.standard.set(bookmarkData, forKey: KEY_URI)
+            
+            // 2. Save the Path String for Flutter's SharedPreferences
+            // Flutter's shared_preferences plugin prefixes keys with "flutter."
+            let flutterKey = "flutter.applicationFolderPath"
+            UserDefaults.standard.set(selectedUrl.path, forKey: flutterKey)
+            
+            // Return path to the immediate Flutter caller
             pendingResult?(selectedUrl.path)
         } catch {
             pendingResult?(FlutterError(code: "BOOKMARK_ERR", message: error.localizedDescription, details: nil))
