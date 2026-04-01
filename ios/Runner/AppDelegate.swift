@@ -7,6 +7,8 @@ import Flutter
     
     // Class-level constants
     private let CHANNEL = "dev.journeyers/iossaf"
+    private let KEY_BOOKMARK = "dev.journeyers.folderBookmarkiOS"
+    private let KEY_PATH = "flutter.applicationFolderPath" // Unique for binary data
     private let KEY_URI = "flutter.applicationFolderPath"
     private let DEBUG: Bool = true
     
@@ -181,11 +183,11 @@ import Flutter
     /// Uses generics (T) to work for both saving (Bool) and reading (String).
     private func accessFolder<T>(action: (URL) -> T?) -> T? {
         if DEBUG {print("accessFolder")}
-        guard let bookmarkData = UserDefaults.standard.data(forKey: KEY_URI) else 
+        guard let bookmarkData = UserDefaults.standard.data(forKey: KEY_BOOKMARK) else 
         { 
-            print("Issue with UserDefaults.standard.data(forKey: KEY_URI)")
-            return nil 
-        }
+        print("Issue: No binary bookmark found for key \(KEY_BOOKMARK)")
+        return nil 
+    }
         var isStale = false
         do {
             // Options is empty set [] for iOS security-scoped bookmarks
@@ -226,14 +228,12 @@ extension AppDelegate: UIDocumentPickerDelegate {
             let bookmarkData = try selectedUrl.bookmarkData(options: .suitableForBookmarkFile, 
                                                            includingResourceValuesForKeys: nil, 
                                                            relativeTo: nil)
-            UserDefaults.standard.set(bookmarkData, forKey: KEY_URI)
-            
-            // 2. Saves the Path String for Flutter's SharedPreferences
-            // Flutter's shared_preferences plugin prefixes keys with "flutter."
-            let flutterKey = "flutter.applicationFolderPath"
-            UserDefaults.standard.set(selectedUrl.path, forKey: flutterKey)
-            
-            // Return path to the immediate Flutter caller
+            // Saving the binary data to the bookmark key
+            UserDefaults.standard.set(bookmarkData, forKey: KEY_BOOKMARK)
+        
+            // Save the STRING path for Flutter
+            UserDefaults.standard.set(selectedUrl.path, forKey: KEY_PATH)
+        
             pendingResult?(selectedUrl.path)
         } catch {
             pendingResult?(FlutterError(code: "BOOKMARK_ERR", message: error.localizedDescription, details: nil))
