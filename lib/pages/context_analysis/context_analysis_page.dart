@@ -68,9 +68,9 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               child: 
               TextButton
               (
-                onPressed: () 
+                onPressed: () async
                 {
-                  upu.saveInformationModalAcknowledgement();
+                  await upu.saveInformationModalAcknowledgement();
                   Navigator.pop(context);
                 },
                 child: 
