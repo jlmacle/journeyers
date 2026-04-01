@@ -31,7 +31,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   // Method used to sort session data by date
   Future<void> _sortSessionsByDate() async
   {
-    sortSessionByDateAddJm(list: widget.sessionsToSort!, dateFormat: dateFormatForSorting, byAscendingDate: _isAscendingDate);
+    await sortSessionByDateAddJm(list: widget.sessionsToSort!, dateFormat: dateFormatForSorting, byAscendingDate: _isAscendingDate);
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
   }
 
