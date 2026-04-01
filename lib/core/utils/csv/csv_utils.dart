@@ -644,8 +644,14 @@ class CSVUtils
     {
       String fileName = path.basename(pathToCSVFile);
       if (previewBuildingDebug) pu.printd("Preview Building: csvFileToPreviewPerspectiveData on iOS");
-      final String content = await fu.readTextContentOnIOS(fileName: fileName);
-      csvLines = LineSplitter.split(content).toList();
+      final String content;
+      try
+      {
+        content = await fu.readTextContentOnIOS(fileName: fileName);
+        csvLines = LineSplitter.split(content).toList();
+      }
+      on PlatformException
+      catch(e) {pu.printd("CSV Utils: ${e.message}"); }
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
