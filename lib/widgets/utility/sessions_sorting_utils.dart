@@ -23,4 +23,21 @@ List<dynamic> sortSessionByDateAddJm
   return list;   
 }
 
+// Method used to sort by title
+// The list parameter is assumed to be a list of sessions,
+// with a key DashboardUtils.keyTitle for the title values
+List<dynamic> sortByTitle
+({required List<dynamic> list, required bool byAscendingTitle})
+{
+  list.sort((a, b) 
+  {
+    String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
+    String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
+    
+    return byAscendingTitle 
+        ? titleA.compareTo(titleB) 
+        : titleB.compareTo(titleA);
+  });
 
+  return list;
+}
