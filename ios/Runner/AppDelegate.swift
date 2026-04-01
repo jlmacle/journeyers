@@ -9,7 +9,6 @@ import Flutter
     private let CHANNEL = "dev.journeyers/iossaf"
     private let KEY_BOOKMARK = "dev.journeyers.folderBookmarkiOS"
     private let KEY_PATH = "flutter.applicationFolderPath" 
-    private let KEY_URI = "flutter.applicationFolderPath"
     private let DEBUG: Bool = true
     
     // Stores the result callback for Flutter communication
@@ -36,7 +35,7 @@ import Flutter
                     
                 case "getStoredDirectory":
                 if DEBUG {print("getStoredDirectory")}
-                    if let bookmarkData = UserDefaults.standard.data(forKey: self.KEY_URI) {
+                    if let bookmarkData = UserDefaults.standard.data(forKey: self.KEY_PATH) {
                         var isStale = false
                         let url = try? URL(resolvingBookmarkData: bookmarkData, options: [], relativeTo: nil, bookmarkDataIsStale: &isStale)
                         result(url?.path)
@@ -56,7 +55,7 @@ import Flutter
                 case "saveFile":
                     if DEBUG {print("saveFile")}
                     let args = call.arguments as? [String: Any]
-                    let fileName = args?["fileName"] as? String ?? "file.csv"
+                    let fileName = args?["fileName"] as? String ?? "file.txt"
                     let content = (args?["content"] as? FlutterStandardTypedData)?.data ?? Data()
                     if DEBUG {print("fileName: \(fileName)")}
                     if DEBUG {print("content: \(content)")}
