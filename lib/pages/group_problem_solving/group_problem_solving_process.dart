@@ -225,9 +225,13 @@ void _handleSessionSelection(Map<String, dynamic> session) {
     _problemTitleController.dispose();
     super.dispose();
   }
+  
     
  @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.sizeOf(context);
+    final double screenWidthInInches = size.width / 160;
+
     return Column(   
       children: [
         // 1. TOP: The problem to be solved (Full Width)
@@ -250,9 +254,20 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                 (
                   children: 
                   [
-                    _buildHeaderButton("➕", Colors.white, (){groupMoods1Key.currentState?.addToIdentifiers();}),
+                    _buildHeaderButton
+                    (
+                      text: "➕", color: Colors.white, 
+                      onPressed: (){groupMoods1Key.currentState?.addToIdentifiers();},
+                      screenWidthInInches: screenWidthInInches
+                    ),
                     if (_isModificationMode)
-                      _buildHeaderButton(_isDeleteMode ? "Clear One" : "Edit", _isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;})),
+                      _buildHeaderButton
+                      (
+                        text:  _isDeleteMode ? "Clear\nOne" : "Edit",
+                        color: _isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), 
+                        onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
+                        screenWidthInInches: screenWidthInInches
+                      ),
                     // ..._whichIdentifiersListToBuild(column: 1),
                     Expanded
                     (
@@ -324,19 +339,26 @@ void _handleSessionSelection(Map<String, dynamic> session) {
               Expanded(
                 child: Column(
                   children: [
-                    _buildHeaderButton(
-                      _isModificationMode ? "Done" : "✏️", 
-                      _isModificationMode ? orangeShade900 : Colors.white, 
-                      _isModificationMode 
+                    _buildHeaderButton
+                    (
+                      text: _isModificationMode ? "Done" : "✏️", 
+                      color: _isModificationMode ? orangeShade900 : Colors.white, 
+                      onPressed:_isModificationMode 
                         ? () => setState(() {                      
                             _isEditMode = false;
                             _isDeleteMode = false;
                             _isModificationMode = !_isModificationMode;                      
                           })
-                        : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;})
+                        : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;}),
+                        screenWidthInInches: screenWidthInInches
                     ),
                     if (_isModificationMode)
-                      _buildHeaderButton("Clear All", const Color(0xFFB71C1C), () {groupMoods1Key.currentState?.clearAllIdentifiers();}),
+                      _buildHeaderButton
+                      (
+                        text: "Clear\nAll", color:  const Color(0xFFB71C1C),
+                        onPressed: () {groupMoods1Key.currentState?.clearAllIdentifiers();},
+                        screenWidthInInches: screenWidthInInches
+                      ),
                     // ..._whichIdentifiersListToBuild(column: 2),
                     Expanded
                     (
@@ -384,13 +406,16 @@ void _handleSessionSelection(Map<String, dynamic> session) {
   }
 
   // Method used to build the header buttons
-  Widget _buildHeaderButton(String text, Color color, VoidCallback onPressed) {
+  Widget _buildHeaderButton
+  ({required String text, required Color color, 
+  required VoidCallback onPressed, required double screenWidthInInches}) 
+  {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: appBarWhite),
+        style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: appBarWhite, padding: (screenWidthInInches <2.7) ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
         onPressed: onPressed,
-        child: Text(text, style: const TextStyle(fontSize: 12)),
+        child: Center(child: Text(text, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center)),
       ),
     );
   }

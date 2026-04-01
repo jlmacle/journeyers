@@ -24,7 +24,6 @@ class FileUtils
     required String text,
   }) async 
   {
-    String errorMsg = 'Error appending text to file:';
     try 
     {
       File file = File(filePath);
@@ -34,8 +33,7 @@ class FileUtils
       await sink.close();
     } 
     on FileSystemException 
-    catch (e) {pu.printd("Files Utils: $errorMsg ${e.message}"); } 
-    catch (e) {pu.printd("Files Utils: $errorMsg $e");}
+    catch (e) {pu.printd("Files Utils: ${e.message}");}
   }
 
   /// Method used to add text at the beginning of a file.
@@ -147,7 +145,6 @@ class FileUtils
     String? folderPath = await upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
-    if (sessionDataDebug) pu.printd("Session Data: _saveFileOnAndroid: success: $success");
     if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
