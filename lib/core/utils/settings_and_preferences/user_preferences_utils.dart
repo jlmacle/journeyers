@@ -37,7 +37,8 @@ class UserPreferencesUtils
   }
 
   //**************** FOLDER SELECTED FOR APPLICATION USE ****************/
-  
+  // The setter is in the Kotlin/Swift code
+
   /// Method used to check if the application folder path has been saved.
   Future<String?> getApplicationFolderPath() async 
   {
