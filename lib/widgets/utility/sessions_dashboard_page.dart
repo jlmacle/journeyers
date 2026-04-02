@@ -184,7 +184,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
   }
 
   //**************** EDITION OF SESSION DATA ****************/
-  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _titleController = .new();
 
   // Method used to update the session title
   Future<void> updateSessionTitle(String filePath, String newTitle) async 
