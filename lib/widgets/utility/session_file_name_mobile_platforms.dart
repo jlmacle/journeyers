@@ -42,7 +42,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
 {
   // FILE NAME
   String? _fileName;
-  final TextEditingController _fileNameController = TextEditingController();
+  final TextEditingController _fileNameController = .new();
   String _errorMessageForFileName = "";
   final GlobalKey<_SessionFileNameMobilePlatformsState> errorMessageKey = GlobalKey();
   bool _wasErrorMessageModified = false;
