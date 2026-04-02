@@ -33,7 +33,7 @@ class ContextAnalysisPage extends StatefulWidget
 class ContextAnalysisPageState extends State<ContextAnalysisPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey = GlobalKey(debugLabel:'form-page');
+  GlobalKey<ContextAnalysisProcessState> contextAnalysisProcessKey = GlobalKey(debugLabel:'context-analysis-process');
   GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'analyses-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
@@ -216,7 +216,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 Focus
                 (
                   focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisProcess(key: contextAnalysisFormPageKey, parentCallbackFunctionToRefreshTheContextAnalysisPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: ContextAnalysisProcess(key: contextAnalysisProcessKey, parentCallbackFunctionToRefreshTheContextAnalysisPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
