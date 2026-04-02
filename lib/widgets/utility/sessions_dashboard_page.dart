@@ -49,7 +49,7 @@ class SessionsDashboardPage extends StatefulWidget
 class SessionsDashboardPageState extends State<SessionsDashboardPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey();
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
   void refreshDashboard()
