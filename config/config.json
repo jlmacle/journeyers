@@ -1,0 +1,13 @@
+{
+    "directories":
+    {
+        "dashboard_data_directory":"lib/data/dashboard_data"
+    },
+    "dashboards":
+    {
+        "context_analysis":
+        {
+            "dashboard_data_file_name":"dashboard_data_context_analysis.json"
+        }
+    }
+}

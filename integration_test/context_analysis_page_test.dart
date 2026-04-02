@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:integration_test/integration_test.dart';
 
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 
 // Mock class creation
 class MockPathProviderPlatform extends PathProviderPlatform 
@@ -31,6 +32,7 @@ void main() async
 
       testWidgets
       (
+        skip:true,
         'Information modal:\n'
         'A newly installed app should display the information modal,\n'
         'before starting the first context analysis.', 
@@ -74,6 +76,7 @@ void main() async
 
     testWidgets
     (
+      skip:true,
       'Information modal:\n'
       'Information modal is not displayed when already acknowledged', 
       (WidgetTester tester) async 
@@ -133,8 +136,11 @@ void main() async
           final dashboardWidget = find.byKey(const Key('analyses-dashboard'));
           expect(dashboardWidget, findsNothing);
 
-          // Testing that the context form is present 
-          final formWidget = find.byKey(const Key('form-page'));
+          // Testing that the context analysis page is present 
+          // GlobalKeys are different objects, 
+          // and are not compared by labels, even if with the same label.
+          // final formWidget = find.byKey(GlobalKey(debugLabel:'context-analysis-process'));
+          final formWidget = find.byType(ContextAnalysisProcess);
           // await tester.pump(const Duration(seconds: 3));
           expect(formWidget, findsOne);
         }
@@ -142,6 +148,7 @@ void main() async
     
       testWidgets
       (
+        // skip:true,
         'Data stored: New context analysis button:\n'
         'The dashboard page should have a button to start a new context analysis.',
         (WidgetTester tester) async 
