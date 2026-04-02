@@ -49,18 +49,18 @@ class UserPreferencesUtils
 
   //**************** EXISTING ANALYSIS SESSION DATA ? ****************/
   /// Method used to record that session data has been saved.
-  Future<void> saveWasSessionDataSaved({required bool value, required String context}) async 
+  Future<bool> saveWasSessionDataSaved({required bool value, required String context}) async 
   {
     final prefs = await SharedPreferences.getInstance();
     switch (context)
     {
       case (DashboardUtils.contextAnalysesContext):
       {
-        await prefs.setBool('wasSessionDataSaved', value);
+        return await prefs.setBool('wasSessionDataSaved', value);
       }
       case (DashboardUtils.groupProblemSolvingsContext):
       {
-        await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
+        return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
       }
     }   
   }
