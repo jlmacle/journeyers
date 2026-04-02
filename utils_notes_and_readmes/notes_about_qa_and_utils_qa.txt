@@ -5,7 +5,7 @@ For the integration tests
 flutter test .\integration_test\context_analysis_page_test.dart -r github  
 
 For Android:
-path-to-journeyers\android> + Phone plugged 
+path-to-journeyers\android> + Phone plugged  + screen unlocked
 flutter test .\integration_test\context_analysis_page_test.dart -r github
 
 For iOS:
