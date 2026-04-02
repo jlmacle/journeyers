@@ -63,7 +63,7 @@ bool isThereATestDataTitleDuplicated({
   });
 }
 
-/// Method used to scroll up the screen (-200 as default delta to go up the list)
+/// Method used to scroll up the screen (-200 as default delta value to go up the list)
 Future<int> scrollListUpScreen({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = -200}) async
 {
   await tester.scrollUntilVisible
