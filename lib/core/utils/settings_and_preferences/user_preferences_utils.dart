@@ -62,6 +62,7 @@ class UserPreferencesUtils
       {
         return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
       }
+      default: return false;
     }   
   }
 
@@ -85,19 +86,20 @@ class UserPreferencesUtils
   }
 
   /// Method used to reset to false if session data has been saved.
-  Future<void> resetWasSessionDataSavedStatus({required String context}) async 
+  Future<bool> resetWasSessionDataSavedStatus({required String context}) async 
   {
     final prefs = await SharedPreferences.getInstance();
     switch (context)
     {
       case (DashboardUtils.contextAnalysesContext):
       {
-        await prefs.setBool('wasSessionDataSaved', false);
+        return await prefs.setBool('wasSessionDataSaved', false);
       }
       case (DashboardUtils.groupProblemSolvingsContext):
       {
-        await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', false);
+        return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', false);
       }
+      default: return false;
     }
   }
 }
