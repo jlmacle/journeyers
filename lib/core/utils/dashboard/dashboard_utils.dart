@@ -30,7 +30,8 @@ class DashboardUtils {
   /// The key for the session data file path.
   static String keyFilePath = 'filePath';
 
-  /// Method used to retrieve the file with all the dashboard session data, either for the context analyses, or for the group problem-solvings.
+  /// Method used to retrieve the file with all the dashboard session data, 
+  /// either for the context analyses, or for the group problem-solvings.
   Future<File> getSessionFile({required String typeOfContextData}) async {
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
@@ -133,7 +134,8 @@ class DashboardUtils {
       typeOfContextData: typeOfContextData,
     );
     String fileContent = sessionFile.readAsStringSync();
-    sessionData = jsonDecode(fileContent);
+    // Empty list if null, at least for testing purposes
+    sessionData = jsonDecode(fileContent) ?? [];
     sessionData = sessionData.reversed.toList();
 
     return sessionData;
