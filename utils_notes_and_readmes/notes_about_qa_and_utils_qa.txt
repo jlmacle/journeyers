@@ -5,10 +5,6 @@ For the integration tests
 flutter test .\integration_test\context_analysis_page_test.dart -r github  
 
 For Android:
-Succeeded on Medium Phone API 36.0, failed on a Pixel 6 device 
-(02/19/26: Information modal, No session data stored, Data stored: New context analysis button,
-Session data display, Delete icon use , Bulk deletion)
-
 path-to-journeyers\journeyers\android> + Phone plugged for debug
 flutter test .\integration_test\context_analysis_page_test.dart -r github
 -----------------------
