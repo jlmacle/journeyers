@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,14 +10,15 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
+import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 
-
-// Mock class creation
-class MockPathProviderPlatform extends PathProviderPlatform 
-{
+class MockPathProviderPlatform extends PathProviderPlatform {
   @override
-  Future<String?> getApplicationSupportPath() async => '.'; // Returns current directory
+  Future<String?> getApplicationSupportPath() async {
+    // This points to a system-valid temporary folder with write access
+    return Directory.systemTemp.path;
+  }
 }
 
 void main() async
@@ -82,7 +84,7 @@ void main() async
 
           // Verifying the presence of the context analysis form
           final contextAnalysisFormFinder = find.byType(ContextAnalysisProcess);
-          expect(contextAnalysisFormFinder, findsOne);
+          expect(contextAnalysisFormFinder, findsOneWidget);
       }
     );
 
@@ -121,7 +123,7 @@ void main() async
 
         // Verifying the presence of the context analysis form
         final contextAnalysisFormFinder = find.byType(ContextAnalysisProcess);
-        expect(contextAnalysisFormFinder, findsOne);
+        expect(contextAnalysisFormFinder, findsOneWidget);
       }
     );
 
@@ -157,14 +159,44 @@ void main() async
           // and are not compared by labels, even if with the same label.
           // final formWidget = find.byKey(GlobalKey(debugLabel:'context-analysis-process'));
           final contextAnalysisFormFinder = find.byType(ContextAnalysisProcess);
-          expect(contextAnalysisFormFinder, findsOne);
+          expect(contextAnalysisFormFinder, findsOneWidget);
 
           // Verifying the dashboard absent
           final dashboardFinder = find.byType(SessionsDashboardPage);
-          expect(dashboardFinder, findsNothing);
-          
+          expect(dashboardFinder, findsNothing);          
         }
       );
     }
+  );
+
+  // 'Data stored: New context analysis button:\n'
+  // 'The dashboard page should have a button to start a new context analysis.',
+  testWidgets
+  (
+    // skip:true, 
+    'Data stored: New context analysis button:\n'
+    'The dashboard page should have a button to start a new context analysis.',
+    (WidgetTester tester) async 
+    { 
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues
+      ({
+        'isInformationModalAcknowledged': true, 
+        'wasSessionDataSaved': true,
+      });
+      
+      await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+
+      // Waits for async preferences and the rebuild
+      await tester.pumpAndSettle();
+
+      // Verifying the new analysis button present
+      final buttonWidget = find.byKey(const Key('analyses-new-session-button'));
+      expect(buttonWidget, findsOneWidget); 
+
+      // Verifying the dashboard present  
+      final dashboardFinder = find.byType(SessionsDashboardPage);
+      expect(dashboardFinder, findsOneWidget);  
+    },
   );
 }
