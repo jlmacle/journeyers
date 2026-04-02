@@ -183,7 +183,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
 
 // Method used to load the context analyses metadata
 Future<void> _loadHistory() async {
-  final data = await du.retrieveAllDashboardSessionData(
+  final data = await du.retrieveAllDashboardMetadata(
     typeOfContextData: DashboardUtils.contextAnalysesContext
   );
   setState(() {
