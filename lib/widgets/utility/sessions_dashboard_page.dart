@@ -25,13 +25,13 @@ class SessionsDashboardPage extends StatefulWidget
   final String dashboardContext;
 
   /// The widget used for the preview.
-  final Widget Function({required String pathToData}) previewWidget;
+  final Widget Function({required String pathToData})? previewWidget;
 
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
   final VoidCallback parentCallbackFunctionWhenAllSessionFilesAreDeleted;
 
   /// A global key linked to the DashboardSortingByKeywords widget
-  final GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey;
+  final GlobalKey<DashboardSortingByKeywordsState>? dashboardSortingByKeywordsKey;
 
   const SessionsDashboardPage
   ({
@@ -74,7 +74,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
   {
     // Retrieving data from file
     final retrievedSessionData = 
-      await du.retrieveAllDashboardSessionData
+      await du.retrieveAllDashboardMetadata
                 (typeOfContextData: widget.dashboardContext);
     
     // Getting the used keywords from the retrieved data
@@ -672,7 +672,7 @@ void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, Stri
             physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: widget.previewWidget(
+              child: widget.previewWidget!(
                 pathToData: filePath,
               ),
             ),

@@ -126,7 +126,7 @@ class DashboardUtils {
   /// This data is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// In the case of the context analyses, the data retrieved has the format:
   /// \[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]
-  Future<List<dynamic>> retrieveAllDashboardSessionData({
+  Future<List<dynamic>> retrieveAllDashboardMetadata({
     required String typeOfContextData,
   }) async {
     List<dynamic> sessionData;
