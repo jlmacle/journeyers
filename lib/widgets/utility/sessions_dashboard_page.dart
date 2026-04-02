@@ -54,9 +54,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
   // Method used to refresh the dashboard page
   void refreshDashboard()
   {
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   
