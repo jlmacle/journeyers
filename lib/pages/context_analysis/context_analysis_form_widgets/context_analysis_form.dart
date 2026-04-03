@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
@@ -87,8 +88,15 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
 
     // Saving the dashboard metadata if filePath not null
     if (pathToCSVFile != null)
-    {      
-      await du.saveDashboardMetaData(typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, keywords: _keywords, pathToFile: pathToCSVFile);
+    { 
+      // Date
+      var now = DateTime.now();
+      //.add_jm() to add this hour:minutes format: 5:08 PM
+      var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+      var formattedDate = formatter.format(now);   
+      await du.saveDashboardMetaData
+      (typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, 
+      keywords: _keywords, formattedDate: formattedDate, pathToFile: pathToCSVFile);
       await upu.saveWasSessionDataSaved(value: true, context: DashboardUtils.contextAnalysesContext);
     }
     

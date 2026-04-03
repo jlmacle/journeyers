@@ -177,12 +177,13 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
             const Gap(preAndPostLevel2DividerGap),
 
             // Form 
-            ContextAnalysisForm(
-                        key: _contextFormKey,
-                        contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisProcessState>,
-                        parentCallbackFunctionToRefreshTheContextAnalysisPage: widget.parentCallbackFunctionToRefreshTheContextAnalysisPage,
-                        parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
-                        ),                        
+            ContextAnalysisForm
+            (
+              key: _contextFormKey,
+              contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisProcessState>,
+              parentCallbackFunctionToRefreshTheContextAnalysisPage: widget.parentCallbackFunctionToRefreshTheContextAnalysisPage,
+              parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
+            ),                        
                         
             //********** Data saving ************//
             Center

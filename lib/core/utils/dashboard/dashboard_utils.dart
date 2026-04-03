@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/debug_constants.dart';
@@ -88,15 +87,10 @@ class DashboardUtils {
     required String typeOfContextData,
     required String? title,
     required List<String> keywords,
+    required String formattedDate,
     required String pathToFile,
   }) 
   async {
-    // Date
-    var now = DateTime.now();
-    //.add_jm() to add this hour:minutes format: 5:08 PM
-    var formatter = DateFormat('MMMM dd, yyyy').add_jm();
-    var formattedDate = formatter.format(now);
-
     if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
     if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
 
