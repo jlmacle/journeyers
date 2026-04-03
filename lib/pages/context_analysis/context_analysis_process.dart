@@ -147,6 +147,7 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
       child: 
       SingleChildScrollView
       (
+        key: const Key('context-analysis-process-scrollview'),
         controller: scrollController,
         child: 
         Column

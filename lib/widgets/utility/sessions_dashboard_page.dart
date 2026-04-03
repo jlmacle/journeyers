@@ -265,6 +265,8 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
+            // Key used for automated testing, to scroll up the screen 
+            key: const Key('sessions-list-scrollview'),
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)
@@ -316,11 +318,11 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                 (
                   child: Divider()                       
                 ), 
+                
                 // Session List
                 SliverPadding(
                   padding: const EdgeInsets.only(bottom: 0),
                   sliver: SliverList(
-                    key: const Key('dashboard-sessions-list'),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final session = _filteredSessions![index];

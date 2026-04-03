@@ -28,7 +28,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solvings-dashboard-sorting-by-keywords');
+  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solving-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
@@ -116,7 +116,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                     ),
                     child: ElevatedButton
                     (                    
-                      key: const Key('group-problem-solvings-new-session-button'),
+                      key: const Key('group-problem-solving-new-session-button'),
                       onPressed: () { setState(() { _wasGroupProblemSolvingSessionDataSaved = false;});},
                       style: ElevatedButton.styleFrom
                       (
@@ -137,7 +137,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                 child: 
                 SessionsDashboardPage
                 (
-                  key: const Key('group-problem-solvings-dashboard'),
+                  key: const Key('group-problem-solving-dashboard'),
                   dashboardContext: DashboardUtils.groupProblemSolvingsContext,
                   dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
                   previewWidget: 
