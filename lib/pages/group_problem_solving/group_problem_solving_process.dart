@@ -63,7 +63,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
 
   // TITLE for the group problem-solving process
   // TextEditingController for entering a new title
-  final TextEditingController _problemTitleController = TextEditingController();
+  final TextEditingController _problemTitleController = .new();
 
   //**************** STAKEHOLDER IDENTIFIERS related data ****************//
   GlobalKey<GroupProblemSolvingGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
