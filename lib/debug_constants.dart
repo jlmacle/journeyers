@@ -4,3 +4,4 @@ const mobileDebug = true;
 const preferencesDebug = true;
 const previewBuildingDebug = false;
 const sessionDataDebug = true;
+const testingDebug = true;

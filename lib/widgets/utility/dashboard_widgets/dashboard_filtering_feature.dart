@@ -95,6 +95,7 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
         // Filtering by keywords
         Flexible(
           child: SingleChildScrollView(
+            key: const Key('dashboard-scrollview'),
             child: DashboardSortingByKeywords
             (
               key: widget.dashboardSortingByKeywordsKey,

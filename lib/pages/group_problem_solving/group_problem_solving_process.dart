@@ -297,6 +297,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                 child: 
                 CustomScrollView
                 (
+                  key: const Key('group-problem-solving-process-scrollview'),
                   slivers: 
                   [
                     const SliverToBoxAdapter
