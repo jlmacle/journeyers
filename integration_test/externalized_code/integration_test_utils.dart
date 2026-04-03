@@ -4,24 +4,22 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/core/utils/dev/util_files.dart';
 
-/// Method used to retrieve the index of a session data, knowing its title
+/// Method used to retrieve the index of a session data, knowing its title.
 int? getSessionDataIndexFromTitle({required List<Map<String, dynamic>> sessionData, required String title})
 {
-  int? index;
-
-  int i = 0;
+  int index = 0;
   for (var dataMap in sessionData)
   {
     if (dataMap["title"] == title)
     {
-      index = i;
+      return index;
     }
-    else { i += 1;}
+    else { index += 1;}
   }
   return index;
 }
 
-/// Method used to list all the sessions titles
+/// Method used to list all the sessions titles.
 Future<List<String>> getSessionsTitlesList({required WidgetTester tester, required List<Map<String, dynamic>> sessionData, required String keyRoot}) async
 {
   List<String> sessionsTitlesList = [];
@@ -31,7 +29,7 @@ Future<List<String>> getSessionsTitlesList({required WidgetTester tester, requir
   {
     // Getting the finder
     final titleFinder = find.byKey(ValueKey('$keyRoot$index'));
-      // To have all the elements visible, therefore all the titles accessed
+    // To have all the elements visible, therefore all the titles accessed
     await tester.ensureVisible(titleFinder); 
     await tester.pump();
     
