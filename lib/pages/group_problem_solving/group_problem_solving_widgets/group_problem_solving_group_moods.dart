@@ -117,7 +117,7 @@ class GroupProblemSolvingGroupMoodsState extends State<GroupProblemSolvingGroupM
     showDialog(
       context: context,
       builder: (context) {
-        final controller = TextEditingController();
+        final TextEditingController controller = .new();
         return AlertDialog(
           title: const Text("Edit Value"),
           content: TextField
