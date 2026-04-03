@@ -160,11 +160,17 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
       // Save Metadata to Dashboard if file was saved successfully
       if (filePath != null) 
       {
+        // Date
+        var now = DateTime.now();
+        //.add_jm() to add this hour:minutes format: 5:08 PM
+        var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+        var formattedDate = formatter.format(now);   
         await du.saveDashboardMetaData
         (
           typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
           title: sessionTitle, 
           keywords: _currentKeywords, 
+          formattedDate: formattedDate,
           pathToFile: filePath,
         );
 
