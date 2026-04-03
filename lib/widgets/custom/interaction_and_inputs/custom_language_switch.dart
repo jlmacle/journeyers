@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
 import 'package:journeyers/core/utils/l10n/l10n_utils.dart';
-import 'package:journeyers/core/utils/printing_and_logging/debug_constants.dart';
 
 /// {@category Custom widgets}
 /// A customizable dropdown menu to select a language.
