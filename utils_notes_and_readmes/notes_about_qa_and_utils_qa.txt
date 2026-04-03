@@ -11,6 +11,7 @@ flutter test .\integration_test\context_analysis_page_test.dart -r github
 For iOS:
 path-to-journeyers/ios + iPhone plugged 
 flutter test ./integration_test/context_analysis_page_test.dart -r github
+flutter test ./integration_test/context_analysis_dashboard_page_test.dart -r github
 -----------------------
 
 In case of py_utils import issues: 
