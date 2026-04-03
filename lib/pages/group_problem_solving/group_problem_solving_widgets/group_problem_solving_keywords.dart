@@ -28,7 +28,7 @@ class _GroupProblemSolvingKeywordsState extends State<GroupProblemSolvingKeyword
 {
   // Initializes with the passed keywords instead of an empty list
   late List<String> _keywords;
-  final TextEditingController _keywordsController = TextEditingController();
+  final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list
   void addKeyword(String value, [StateSetter? localSetState]) 
