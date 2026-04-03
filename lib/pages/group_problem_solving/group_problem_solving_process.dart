@@ -307,6 +307,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                         child: GroupProblemSolvingChecklist(),
                       )                        
                     ), 
+                    // TODO: to store and retrieve previous stakeholder teams
                     const SliverToBoxAdapter
                     (
                       child: Divider()                       
