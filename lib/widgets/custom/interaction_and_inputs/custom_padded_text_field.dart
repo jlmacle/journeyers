@@ -76,7 +76,7 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   // The variable to update when a double quote has been found
   String _errorMessageForDoubleQuotes = "";
   final GlobalKey<_CustomPaddedTextFieldState> textFieldBeforeErrorMessageKey = GlobalKey();
-  TextEditingController textFieldEditingController = TextEditingController();
+  TextEditingController textFieldEditingController = .new();
   TextSelection? _currentTextSelection;
   bool _wasCharacterReplacedAtPreviousTyping = false;
 
