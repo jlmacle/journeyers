@@ -22,7 +22,7 @@ class GroupProblemSolvingNewSolution extends StatefulWidget
 class _GroupProblemSolvingNewSolutionState extends State<GroupProblemSolvingNewSolution> 
 {
   // TextEditingController for entering a new solution
-  final TextEditingController _solutionController = TextEditingController();
+  final TextEditingController _solutionController = .new();
 
   // Method to handle adding a solution to the list
   void _submitSolution() {
