@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/core/utils/dev/util_files.dart';
 
 /// Method used to retrieve the index of a session data, knowing its title.
@@ -12,6 +13,7 @@ int? getSessionDataIndexFromTitle({required List<Map<String, dynamic>> sessionDa
   {
     if (dataMap["title"] == title)
     {
+      if (testingDebug) pu.printd("Testing Debug: getSessionDataIndexFromTitle: title: $title, index: $index");
       return index;
     }
     else { index += 1;}
@@ -22,6 +24,8 @@ int? getSessionDataIndexFromTitle({required List<Map<String, dynamic>> sessionDa
 /// Method used to list all the sessions titles.
 Future<List<String>> getSessionsTitlesList({required WidgetTester tester, required List<Map<String, dynamic>> sessionData, required String keyRoot}) async
 {
+  if (testingDebug) pu.printd("Testing Debug: getSessionsTitlesList");
+
   List<String> sessionsTitlesList = [];
   String currentTitle = "";
 
@@ -42,7 +46,7 @@ Future<List<String>> getSessionsTitlesList({required WidgetTester tester, requir
     //Accessing the widget properties
     currentTitle = titleWidget.data!;
     sessionsTitlesList.add(currentTitle);
-    pu.printd('Title: ${titleWidget.data}');
+    if (testingDebug) pu.printd('Testing Debug: Title: ${titleWidget.data}');
   }
   return sessionsTitlesList;
 }
@@ -61,18 +65,25 @@ bool isThereATestDataTitleDuplicated({
   });
 }
 
-/// Method used to scroll up the screen (-200 as default delta value to go up the list)
-Future<int> scrollListUpScreen({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = -200}) async
+/// Method used to scroll up the screen (-200 as default delta value to go up the list).
+/// The method assumes that the first descendant is the right one.
+Future<int> scrollListUpScrollableByFirstDescendant({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = -200}) async
 {
+  if (testingDebug) pu.printd('Testing Debug: scrollListUpScreen');
+
+  var scrollablesFinder = find.descendant
+  (
+    of: listFinder,
+    matching: find.byType(Scrollable),
+  );
+
+  if (testingDebug) pu.printd("Testing Debug: Scrollable count: ${scrollablesFinder.evaluate().length}");
+
   await tester.scrollUntilVisible
   (
     elementToReachFinder, 
     -200 , // getting back up the list
-    scrollable:find.descendant
-    (
-      of: listFinder,
-      matching: find.byType(Scrollable),
-    )
+    scrollable: scrollablesFinder.first
   );
   return await tester.pumpAndSettle(); 
 }
