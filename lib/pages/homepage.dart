@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   //**************** FOCUS NODE related data and methods ****************//
-  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
 
   @override
   void dispose() 
