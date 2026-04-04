@@ -1,29 +1,26 @@
 To display groups and tests labels:
 flutter test -r expanded
 
-For the integration tests (Desktop)
-flutter test ./integration_test/
-or
-flutter test ./integration_test/_all_tests.dart  -r github
-(instead of "flutter test ./integration_test/" in case of:
-"Error waiting for a debug connection: The log reader stopped unexpectedly, or never started.")
+-----------------------
 
-or individually:
+For the integration tests (Desktop/Android/iOS)
+(Android phone plugged  + screen unlocked/iPhone plugged)
+
+flutter test ./integration_test/ -r github
+(or
+flutter test ./integration_test/_all_tests.dart  -r github
+in case of:
+"Error waiting for a debug connection: The log reader stopped unexpectedly, or never started."
+or 
+"The Dart VM Service was not discovered after 60 seconds. This is taking much longer than expected...")
+
+Individual tests:
 flutter test ./integration_test/context_analysis_page_test.dart -r github 
 flutter test ./integration_test/context_analysis_dashboard_page_test.dart -r github 
 
-For Android:
-path-to-journeyers\android> + Phone plugged  + screen unlocked
-flutter test .\integration_test\context_analysis_page_test.dart -r github
-flutter test .\integration_test\context_analysis_dashboard_page_test.dart -r github
-
-For iOS:
-path-to-journeyers/ios + iPhone plugged 
-flutter test ./integration_test/context_analysis_page_test.dart -r github
-flutter test ./integration_test/context_analysis_dashboard_page_test.dart -r github
 -----------------------
 
-In case of py_utils import issues: 
+In case of py_utils import issues, when running pytest: 
 
 python<version> -m pytest
 
