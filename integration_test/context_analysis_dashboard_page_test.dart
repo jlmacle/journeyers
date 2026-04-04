@@ -259,7 +259,7 @@ void main() async
           await tester.pumpAndSettle();
           if (testingDebug) pu.printd("Testing Debug: sessionsTitlesList: $sessionsTitlesList");
           // Pausing for debug
-          if (testingDebug) pu.printd("Testing Debug: after getSessionsTitlesList: waiting: $testingDebugDelay s");
+          if (testingDebug) pu.printd("Testing Debug: After getSessionsTitlesList: waiting: $testingDebugDelay s");
           if (testingDebug) await tester.pump(const Duration(seconds: testingDebugDelay));
           
           assert(
@@ -270,7 +270,7 @@ void main() async
           // Getting the index for file 1, used for the test
           int file1Index = getSessionDataIndexFromTitle(sessionData: currentSessionData!.cast<Map<String, dynamic>>(), title: testFile1Title)!;
           // Pausing for debug
-          if (testingDebug) pu.printd("Testing Debug: after getSessionDataIndexFromTitle: waiting: $testingDebugDelay s");
+          if (testingDebug) pu.printd("Testing Debug: After getSessionDataIndexFromTitle: waiting: $testingDebugDelay s");
           if (testingDebug) await tester.pump(const Duration(seconds: testingDebugDelay));
 
           // Scrolling back up the screen (in case scrolled down while gathering the session titles)
