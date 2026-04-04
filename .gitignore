@@ -127,8 +127,8 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 
 # Documentation folders
-utils_dev/doc_dart/
-utils_dev/doc_python/
+utils_doc/__doc_dart/
+utils_doc/__doc_python/
 
 # L10n log file for untranslated messages
 untranslated-messages-file.txt

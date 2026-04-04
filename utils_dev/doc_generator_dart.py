@@ -7,7 +7,7 @@ import os
 import platform
 import subprocess
 
-DOC_FOLDER = "utils_dev/doc_dart"
+DOC_FOLDER = "utils_doc/__doc_dart"
 PROJECT_FOLDER = os.environ.get('JOURNEYERS_DIR')
 L10N_CATEGORY_UPDATE_SCRIPT_FOLDER = os.path.join(PROJECT_FOLDER, 'utils_dev')
 

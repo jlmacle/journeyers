@@ -1,6 +1,6 @@
 site_name: journeyers - Python docs
-site_dir: utils_dev/doc_python
-docs_dir: utils_dev/doc_python_md
+site_dir: utils_doc/__doc_python
+docs_dir: utils_doc/_doc_python_md
 extra_css: 
   - css/custom_mkdocstrings.css
 plugins:
