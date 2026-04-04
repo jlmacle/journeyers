@@ -71,18 +71,22 @@ void main() async
       // Runs once before all tests
       setUpAll(() async 
       {
-        // PRE-TEST SESSION METADATA COPY
-        // Getting the pre-test session metadata to make a copy
+        // PRE-TEST SESSION TMP METADATA COPY: an empty list.
+        // On Windows, for example, 
+        // "C:\Users\user-name\AppData\Local\Temp\dashboard_session_data_context_analyses.json" is re-built
+        // in the same Temp directory during each test.
+        // If the data is not restored to empty list, the test metadata keeps being added to the file at each test.
+        // Getting the pre-test session tmp metadata to make a copy
         currentSessionData = await du.retrieveAllDashboardMetadata
         (typeOfContextData: DashboardUtils.contextAnalysesContext);
         // Storing a copy of the session metadata to restore session metadata to pre-test environment
         currentSessionDataCopy = List.from(currentSessionData!);
-        // Getting the pre-test information modal status
-        preTestInformationModalStatus = await upu.isInformationModalAcknowledged();
-        // Getting the pre-test status of potentially saved data
-        preTestWasDataSavedStatus = await upu.wasSessionDataSaved(context: DashboardUtils.contextAnalysesContext);
-
+        
         // ACCESSING THE APPLICATION SUPPORT DIRECTORY
+        // getApplicationSupportDirectory is used by getSessionFile to retrieve the user metadata.
+        // This time getApplicationSupportDirectory points to the tmp directory, 
+        // and for this reason, getSessionFile creates a new metadata file if needed.
+        // There is no need to backup user metadata.
         appSupportDir =  await getApplicationSupportDirectory();
         pu.printd("");
         pu.printd("appSupportDir: $appSupportDir");
@@ -111,7 +115,8 @@ void main() async
         ({
           // To avoid the information modal's appearance
           'isInformationModalAcknowledged': true,
-          // To have the context analysis page, with the dashboard
+          // To have the context analysis page, with the dashboard.
+          // Data and metadata added during setup().
           'wasSessionDataSaved': true
         });               
       });
@@ -200,22 +205,11 @@ void main() async
         // PRE-TEST SESSION METADATA RESTORATION
         try 
         {
+          // Restores []
           await du.restoreCopiedSessionData
           (
             typeOfContextData: DashboardUtils.contextAnalysesContext, 
             savedData: currentSessionDataCopy!
-          );
-
-          // PRE-TEST wasSessionDataSaved STATUS RESTORATION          
-          await upu.saveWasSessionDataSaved
-          (
-            context: DashboardUtils.contextAnalysesContext, value:preTestWasDataSavedStatus!
-          );
-
-          // PRE-TEST information modal STATUS RESTORATION          
-          await upu.saveWasSessionDataSaved
-          (
-            context: DashboardUtils.contextAnalysesContext, value:preTestInformationModalStatus!
           );
          
         } 
