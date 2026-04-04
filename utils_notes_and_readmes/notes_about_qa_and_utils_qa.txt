@@ -1,7 +1,14 @@
 To display groups and tests labels:
 flutter test -r expanded
 
-For the integration tests
+For the integration tests (Desktop)
+flutter test ./integration_test/
+or
+flutter test ./integration_test/_all_tests.dart  -r github
+(instead of "flutter test ./integration_test/" in case of:
+"Error waiting for a debug connection: The log reader stopped unexpectedly, or never started.")
+
+or individually:
 flutter test ./integration_test/context_analysis_page_test.dart -r github 
 flutter test ./integration_test/context_analysis_dashboard_page_test.dart -r github 
 
