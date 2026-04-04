@@ -120,7 +120,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   }
 
   //**************** FOCUS NODE related data and methods ****************//
-  FocusNode contextAnalysisFormPageFocusNode = FocusNode();
+  FocusNode contextAnalysisFormPageFocusNode = .new();
 
   @override
   void dispose() 
