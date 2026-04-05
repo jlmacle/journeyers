@@ -15,7 +15,7 @@ Python virtual environment:
 https://docs.python.org/3/tutorial/venv.html
 
 On Linux, you might have to setup a virtual environment, for example:
-python3 -m venv journeyers (in the root directory, for convenience)
+python3 -m venv journeyers (in the root directory, for example)
 
 The following command gives access to the virtual environment:
 source journeyers/bin/activate (Linux/macOS)
