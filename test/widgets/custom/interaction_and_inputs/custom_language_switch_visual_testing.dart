@@ -79,7 +79,7 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage> 
 {
-  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
 
   /// A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale
   /// Parameters: - [languageName]
