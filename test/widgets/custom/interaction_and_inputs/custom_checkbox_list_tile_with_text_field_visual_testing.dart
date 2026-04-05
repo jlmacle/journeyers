@@ -47,7 +47,7 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage> 
 {
-  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
 
   bool _isCheckboxChecked = false;
   String? _textFieldContent;
