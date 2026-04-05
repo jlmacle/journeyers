@@ -80,7 +80,7 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
 
   //**************** FOCUS NODES related data and methods ****************//
   // Focus nodes and data related to reaching nodes
-  final FocusNode _saveDataButtonFocusNode = FocusNode();
+  final FocusNode _saveDataButtonFocusNode = .new();
   bool movingThroughButton = false;
 
   @override
