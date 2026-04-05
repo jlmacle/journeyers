@@ -64,7 +64,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   }
 
     //**************** FOCUS NODE related data and methods ****************//
-  FocusNode groupProblemSolvingPageFocusNode = FocusNode();
+  FocusNode groupProblemSolvingPageFocusNode = .new();
 
   @override
   void dispose() 
