@@ -38,7 +38,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
 
   @override
   void dispose() 
