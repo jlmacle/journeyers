@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 /// {@category Pages}
@@ -34,7 +34,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<ContextAnalysisProcessState> contextAnalysisProcessKey = GlobalKey(debugLabel:'context-analysis-process');
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'analyses-dashboard-sorting-by-keywords');
+  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'analyses-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
@@ -195,7 +195,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 (
                   key: const Key('analyses-dashboard'), 
                   dashboardContext: DashboardUtils.contextAnalysesContext,
-                  dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
+                  dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
                   previewWidget: 
                   ({required String pathToData}) 
                   { return ContextAnalysisPreviewWidget(pathToStoredData: pathToData);},  

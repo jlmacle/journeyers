@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
 /// {@category Utility widgets}
 /// A widget handling the sorting by keywords of session data.
-class DashboardSortingByKeywords extends StatefulWidget 
+class DashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List storing all available session data.
   final List<dynamic>? allSessions;
@@ -21,7 +21,7 @@ class DashboardSortingByKeywords extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardSortingByKeywords
+  const DashboardFilteringByKeywords
   ({
     super.key,
     required this.allSessions,
@@ -32,10 +32,10 @@ class DashboardSortingByKeywords extends StatefulWidget
   });
 
   @override
-  State<DashboardSortingByKeywords> createState() => DashboardSortingByKeywordsState();
+  State<DashboardFilteringByKeywords> createState() => DashboardFilteringByKeywordsState();
 }
 
-class DashboardSortingByKeywordsState extends State<DashboardSortingByKeywords> 
+class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywords> 
 {  
   // Method used to filter the session data by keywords
   Future<void> applyFilteringByKeywords() async
@@ -98,7 +98,7 @@ class DashboardSortingByKeywordsState extends State<DashboardSortingByKeywords>
     }
     
     // Refreshing the used keywords' list, the selection of keywords, 
-    // and the DashboardSortingByKeywords widget
+    // and the DashboardFilteringByKeywords widget
     setState
     (
       () 

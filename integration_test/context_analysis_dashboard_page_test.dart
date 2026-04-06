@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
@@ -239,7 +239,7 @@ void main() async
                 dashboardContext: DashboardUtils.contextAnalysesContext,
                 previewWidget: null,
                 parentCallbackFunctionWhenAllSessionFilesAreDeleted: (){},
-                dashboardSortingByKeywordsKey: null,
+                dashboardFilteringByKeywordsKey: null,
               )            
             )
           );

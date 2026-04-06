@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_title.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 
 class DashboardFilteringFeature extends StatefulWidget 
 {
@@ -25,7 +25,7 @@ class DashboardFilteringFeature extends StatefulWidget
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
 
   /// Global key used to identify the widget handling the sorting by keywords.
-  final GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey;
+  final GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
 
   const DashboardFilteringFeature
   ({
@@ -36,7 +36,7 @@ class DashboardFilteringFeature extends StatefulWidget
     required this.usedKeywords,
     required this.selectedKeywords,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
-    required this.dashboardSortingByKeywordsKey
+    required this.dashboardFilteringByKeywordsKey
   });
 
   @override
@@ -96,9 +96,9 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
         Flexible(
           child: SingleChildScrollView(
             key: const Key('dashboard-scrollview'),
-            child: DashboardSortingByKeywords
+            child: DashboardFilteringByKeywords
             (
-              key: widget.dashboardSortingByKeywordsKey,
+              key: widget.dashboardFilteringByKeywordsKey,
               allSessions: widget.allSessions, 
               filteredSessions: widget.filteredSessions, 
               usedKeywords: widget.usedKeywords,

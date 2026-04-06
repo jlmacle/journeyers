@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 /// {@category Utility widgets}
@@ -49,7 +49,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingPageState> groupProblemSolvingPageKey = GlobalKey();
   GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: 'sessions-dashboard-page');  
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywords = GlobalKey();
+  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywords = GlobalKey();
 
   //**************** BULK DELETION OF SESSION DATA ****************/
   // Method used to delete several session data
@@ -89,10 +89,10 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     widget.sessionsSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    dashboardSortingByKeywords.currentState?.refreshKeywordsAfterSessionDeletion();
+    dashboardFilteringByKeywords.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await dashboardSortingByKeywords.currentState?.applyFilteringByKeywords();    
+    await dashboardFilteringByKeywords.currentState?.applyFilteringByKeywords();    
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -113,7 +113,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     else
     {
       // Updating the keywords UI
-      dashboardSortingByKeywords.currentState?.setState((){});
+      dashboardFilteringByKeywords.currentState?.setState((){});
 
       // Updating the sessions list UI
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
