@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage>
 
   String? _textContent;
 
-  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
   FocusNode feedbackMsgFocusNode = FocusNode();
 
   @override
