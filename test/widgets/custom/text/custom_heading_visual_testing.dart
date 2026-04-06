@@ -30,8 +30,8 @@ class MyTestingApp extends StatefulWidget
 
 class _MyTestingAppState extends State<MyTestingApp>  
 {
-  FocusNode appBarTitleFocusNode = FocusNode();
-  FocusNode headingLevel1FocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
+  FocusNode headingLevel1FocusNode = .new();
   FocusNode headingLevel2FocusNode = FocusNode();
   FocusNode headingLevel3FocusNode = FocusNode();
   FocusNode headingLevel4FocusNode = FocusNode();
