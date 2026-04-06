@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage>
 {
   FocusNode appBarTitleFocusNode = .new();
   FocusNode introductoryMessageFocusNode = .new();
-  FocusNode informationalMessageFocusNode = FocusNode();
+  FocusNode informationalMessageFocusNode = .new();
 
   Set<String> _selectedValues = {"No value selected yet"};
   String? _textContent;
