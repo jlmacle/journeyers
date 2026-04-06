@@ -27,7 +27,7 @@ class MyTestingApp extends StatefulWidget
 
 class _MyTestingAppState extends State<MyTestingApp> 
 {
-  FocusNode appBarTitleFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
 
   @override void dispose() 
   {
