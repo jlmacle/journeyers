@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
 
 /// {@category Utility widgets}
 /// A widget handling the sorting by keywords of session data.

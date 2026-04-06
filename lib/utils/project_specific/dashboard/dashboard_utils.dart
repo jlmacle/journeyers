@@ -4,12 +4,11 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 
-
-/// {@category Utils}
-/// A utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
+/// {@category Utils - Project specific}
+/// A project-specific utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
 class DashboardUtils {
 
   /// String used to communicate the context of the context analyses.
@@ -32,7 +31,7 @@ class DashboardUtils {
 
   /// Method used to retrieve the file with all the dashboard session data, 
   /// either for the context analyses, or for the group problem-solvings.
-  Future<File> getSessionFile({required String typeOfContextData}) async {
+  Future<File> getSessionMetadataFile({required String typeOfContextData}) async {
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
     String fileName = "";
@@ -59,13 +58,13 @@ class DashboardUtils {
   /// Method used to save partial session data.
   /// In the case of the context analyses, the partial data saved has the format:
   /// {"title":"analysis1","keywords":["keyword1","keyword2"], "date":"12/19/25","filePath":"filePath1"}
-  Future<void> _saveSessionDataHelper
+  Future<void> _saveSessionMetadataHelper
   ({
     required String typeOfContextData,
     required Map<String, dynamic> sessionData,
   }) async 
   {
-    File file = await getSessionFile(typeOfContextData: typeOfContextData);
+    File file = await getSessionMetadataFile(typeOfContextData: typeOfContextData);
     // file created in getSessionFile if needed
 
     String updatedContent = "";
@@ -82,7 +81,7 @@ class DashboardUtils {
   }
 
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
-  Future<void> saveDashboardMetaData
+  Future<void> saveDashboardMetadata
   ({
     required String typeOfContextData,
     required String? title,
@@ -110,7 +109,7 @@ class DashboardUtils {
       keyFilePath: pathToFile,
     };
     // Saving the session data
-    await _saveSessionDataHelper
+    await _saveSessionMetadataHelper
     (
       typeOfContextData: typeOfContextData,
       sessionData: sessionData,
@@ -125,7 +124,7 @@ class DashboardUtils {
     required String typeOfContextData,
   }) async {
     List<dynamic> sessionData;
-    File sessionFile = await getSessionFile(
+    File sessionFile = await getSessionMetadataFile(
       typeOfContextData: typeOfContextData,
     );
     String fileContent = sessionFile.readAsStringSync();
@@ -138,13 +137,13 @@ class DashboardUtils {
 
   /// Method used to delete a specific session from the dashboard data file.
   /// It identifies the session by its unique file path.
-  Future<void> deleteSessionData({
+  Future<void> deleteSpecificSessionMetadata({
     required String typeOfContextData,
     required String filePathRelatedToDataToDelete,
   }) async {
     try {
       // Retrieving the correct JSON file based on the context
-      File file = await getSessionFile(typeOfContextData: typeOfContextData);
+      File file = await getSessionMetadataFile(typeOfContextData: typeOfContextData);
       
       // Reading and decoding the existing records
       String jsonContent = await file.readAsString();
@@ -167,8 +166,8 @@ class DashboardUtils {
     }
   }
 
-  /// Method used to restore session data from copied session data 
-  Future<void> restoreCopiedSessionData({required String typeOfContextData, required List<dynamic> savedData}) async
+  /// Method used to save all session data.  
+  Future<void> saveAllSessionsMetadata({required String typeOfContextData, required List<dynamic> allSessionsMetadata}) async
   {
     String fileName = "";
     final directory = await getApplicationSupportDirectory();
@@ -192,15 +191,9 @@ class DashboardUtils {
     if (!sessionFile.existsSync()) {sessionFile.createSync();}
 
     // Adding the data to the file
-    var savedContent = jsonEncode(savedData);
+    var savedContent = jsonEncode(allSessionsMetadata);
     await sessionFile.writeAsString(savedContent);
     if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $path/$fileName");
 
-  }
-
-  /// Method used to save session data  
-  Future<void> saveSessionData({required String typeOfContextData, required List<dynamic> savedData}) async
-  {
-      await restoreCopiedSessionData(typeOfContextData: typeOfContextData, savedData: savedData);
   }
 }

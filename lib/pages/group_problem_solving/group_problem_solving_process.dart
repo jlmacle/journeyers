@@ -10,8 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_keywords.dart';
@@ -165,7 +165,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
         //.add_jm() to add this hour:minutes format: 5:08 PM
         var formatter = DateFormat('MMMM dd, yyyy').add_jm();
         var formattedDate = formatter.format(now);   
-        await du.saveDashboardMetaData
+        await du.saveDashboardMetadata
         (
           typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
           title: sessionTitle, 

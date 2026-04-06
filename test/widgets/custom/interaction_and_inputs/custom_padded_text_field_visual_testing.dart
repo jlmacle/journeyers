@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 
 void main() 
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage>
             {
               setState(() {_textContent = value;});
             },
-            textFieldCounter: FormUtils.absentCounter,
+            textFieldCounter: TextFieldUtils.absentCounter,
           ),
           Focus
           (

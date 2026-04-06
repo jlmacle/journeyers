@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.

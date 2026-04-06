@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
-import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/form/form_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_focusable_text.dart';
 
@@ -67,7 +68,7 @@ class CustomCheckBoxWithTextField extends StatefulWidget
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
-    this.textFieldCounter = FormUtils.absentCounter,
+    this.textFieldCounter = TextFieldUtils.absentCounter,
     this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.parentCheckboxValueCallBackFunction = placeHolderFunctionNullableBool,
   });

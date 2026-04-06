@@ -5,14 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 
-/// {@category Utils}
-/// A utility class related to files.
+/// {@category Utils - Generic}
+/// A generic utility class related to files.
 class FileUtils 
 {
-
   /// Channel used for communicating with Android
   var platformAndroid = const MethodChannel('dev.journeyers/saf');
   /// Channel used for communicating with IOS

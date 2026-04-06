@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 /// Method used to retrieve the index of a session data, knowing its title.
 int? getSessionDataIndexFromTitle({required List<Map<String, dynamic>> sessionData, required String title})

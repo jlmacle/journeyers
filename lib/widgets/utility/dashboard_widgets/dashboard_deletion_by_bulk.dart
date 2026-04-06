@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
@@ -64,7 +64,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       await fu.deleteCsvFile(filePath); 
       
       // Removing the metadata from the stored metadata
-      await du.deleteSessionData
+      await du.deleteSpecificSessionMetadata
       (
         typeOfContextData: widget.dashboardContext, 
         filePathRelatedToDataToDelete: filePath

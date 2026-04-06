@@ -1,12 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
 
-/// {@category Utils}
-/// A utility class related to user preferences.
-class UserPreferencesUtils 
-{
-  
+/// {@category Utils - Project specific}
+/// A project-specific utility class related to user preferences.
+class RunTimeDataUtils 
+{  
   /// Method used to avoid stale values by reloading
   Future<void> reload() async
   {

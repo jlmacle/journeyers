@@ -7,11 +7,12 @@ import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
-import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
+import 'package:journeyers/utils/project_specific/form/form_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
@@ -94,7 +95,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
       //.add_jm() to add this hour:minutes format: 5:08 PM
       var formatter = DateFormat('MMMM dd, yyyy').add_jm();
       var formattedDate = formatter.format(now);   
-      await du.saveDashboardMetaData
+      await du.saveDashboardMetadata
       (typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, 
       keywords: _keywords, formattedDate: formattedDate, pathToFile: pathToCSVFile);
       await upu.saveWasSessionDataSaved(value: true, context: DashboardUtils.contextAnalysesContext);
@@ -235,7 +236,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                 (
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
                   textFieldMaxLength: FormUtils.chars1Page,
-                  textFieldCounter: FormUtils.absentCounter,
+                  textFieldCounter: TextFieldUtils.absentCounter,
                   parentTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
                 ),
               ]
@@ -289,7 +290,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   (
                     textFieldHint: pleaseDescribeTextGroupsHint,
                     textFieldMaxLength: FormUtils.chars1Page,
-                    textFieldCounter: FormUtils.absentCounter,
+                    textFieldCounter: TextFieldUtils.absentCounter,
                     parentTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
                   ),
 

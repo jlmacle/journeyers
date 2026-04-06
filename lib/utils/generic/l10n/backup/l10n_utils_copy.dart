@@ -1,8 +1,8 @@
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
-/// {@category Utils}
-/// A utility class related to localization.
+/// {@category Utils - Generic}
+/// A generic utility class related to localization.
 class L10nLanguages {
   /// A method used to get a list of all the language names, related to a locale, from the l10n data.
   /// For example, \["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\].
