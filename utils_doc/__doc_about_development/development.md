@@ -39,7 +39,7 @@ You should get a "Successfully installed py_utils-0.1".
 # Utils
 
 ## Doc generation
-Two python files are used to generate the [Dart code documentation](../../utils_doc/__doc_dart/), <br>
+Two python files, located in [utils_dev](../../utils_dev), are used to generate the [Dart code documentation](../../utils_doc/__doc_dart/), <br>
 and the [Python code documentation](../../utils_doc/__doc_python):
 - [doc_generator_dart.py](../../utils_dev/doc_generator_dart.py)
 - [doc_generator_python.py](../../utils_dev/doc_generator_python.py)
