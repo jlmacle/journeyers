@@ -19,7 +19,7 @@ The following command gives access to the virtual environment: <br>
 
 ### py_utils
 Assuming the Python virtual environment activated,<br>
-and the terminal pointing to the folder "utils_for_manual_and_semi_automated_testing",<br>
+and the terminal pointing to the folder [utils_qa/utils_for_manual_and_semi_automated_testing](../../utils_qa/utils_for_manual_and_semi_automated_testing),<br>
 the following command should install py_utils.
 
 <code>pip install -e .</code>
