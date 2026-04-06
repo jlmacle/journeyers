@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_config.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dart';
 
@@ -30,8 +30,8 @@ class SessionsDashboardPage extends StatefulWidget
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
   final VoidCallback parentCallbackFunctionWhenAllSessionFilesAreDeleted;
 
-  /// A global key linked to the DashboardSortingByKeywords widget
-  final GlobalKey<DashboardSortingByKeywordsState>? dashboardSortingByKeywordsKey;
+  /// A global key linked to the DashboardFilteringByKeywords widget
+  final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
   const SessionsDashboardPage
   ({
@@ -39,7 +39,7 @@ class SessionsDashboardPage extends StatefulWidget
     required this.dashboardContext,
     required this.previewWidget,
     this.parentCallbackFunctionWhenAllSessionFilesAreDeleted = placeHolderVoidCallback,
-    required this.dashboardSortingByKeywordsKey
+    required this.dashboardFilteringByKeywordsKey
   });
 
   @override
@@ -49,7 +49,7 @@ class SessionsDashboardPage extends StatefulWidget
 class SessionsDashboardPageState extends State<SessionsDashboardPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = .new();
+  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
   void refreshDashboard()
@@ -130,7 +130,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
   // Method used to refresh the keywords list after deletion of session data
   void refreshKeywordsAfterSessionDeletion() 
   {
-    dashboardSortingByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
   }
     
   //**************** DELETION OF SINGLE SESSION DATA related data and methods ****************/
@@ -159,10 +159,10 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     );
 
     // Updating the keywords list
-    dashboardSortingByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await dashboardSortingByKeywordsKey.currentState?.applyFilteringByKeywords();
+    await dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -296,7 +296,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                       allSessions: _allSessions, filteredSessions: _filteredSessions,
                       usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
                       parentCallbackFunctionToRefreshTheSessionsList: updateState,
-                      dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey
+                      dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
                     ),
                   ),
                 ),

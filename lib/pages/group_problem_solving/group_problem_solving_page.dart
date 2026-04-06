@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 /// {@category Pages}
@@ -28,7 +28,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
-  GlobalKey<DashboardSortingByKeywordsState> dashboardSortingByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solving-dashboard-sorting-by-keywords');
+  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solving-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
@@ -139,7 +139,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                 (
                   key: const Key('group-problem-solving-dashboard'),
                   dashboardContext: DashboardUtils.groupProblemSolvingsContext,
-                  dashboardSortingByKeywordsKey: dashboardSortingByKeywordsKey,
+                  dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
                   previewWidget: 
                     ({required String pathToData}) 
                     { return GroupProblemSolvingPreviewWidget(pathToStoredData: pathToData);},
