@@ -10,7 +10,7 @@ import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_config.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date_config.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dart';
 
 
