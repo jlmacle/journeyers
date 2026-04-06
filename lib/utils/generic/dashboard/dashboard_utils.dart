@@ -7,7 +7,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 
-/// {@category Utils - Project specific}
+/// {@category Utils - Generic}
 /// A project-specific utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
 class DashboardUtils {
 
