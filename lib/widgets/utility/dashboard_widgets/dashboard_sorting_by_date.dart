@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_config.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date_config.dart';
 
 /// {@category Utility widgets}
 /// A widget handling the sorting by date of session data.
