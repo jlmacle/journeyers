@@ -32,7 +32,7 @@ class _MyTestingAppState extends State<MyTestingApp>
 {
   FocusNode appBarTitleFocusNode = .new();
   FocusNode headingLevel1FocusNode = .new();
-  FocusNode headingLevel2FocusNode = FocusNode();
+  FocusNode headingLevel2FocusNode = .new();
   FocusNode headingLevel3FocusNode = FocusNode();
   FocusNode headingLevel4FocusNode = FocusNode();
   FocusNode headingLevel5FocusNode = FocusNode();
