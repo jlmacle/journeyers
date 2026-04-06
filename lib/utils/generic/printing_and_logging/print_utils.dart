@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-/// {@category Utils}
-/// A utility class related to printing.
+/// {@category Utils - Generic}
+/// A generic utility class related to printing.
 class PrintUtils {
   /// A method used to print debug information.
   void printd(Object object) {

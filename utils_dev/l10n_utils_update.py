@@ -34,8 +34,8 @@ CLASS_BEGIN = (
   "import 'package:journeyers/l10n/app_localizations.dart'; \n"
   "import 'package:flutter/material.dart'; \n"
   "\n"
-  "/// {@category Utils} \n"
-  "/// A utility class related to localization. \n"
+  "/// {@category Utils - Generic} \n"
+  "/// A generic utility class related to localization. \n"
   "class L10nLanguages \n"
   "{  \n"
 )

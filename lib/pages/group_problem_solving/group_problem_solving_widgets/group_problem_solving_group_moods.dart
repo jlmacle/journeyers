@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
-import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
@@ -144,7 +144,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     await fu.deleteCsvFile(filePath);
 
     // Removing the related stored dashboard data
-    await du.deleteSessionData(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    await du.deleteSpecificSessionMetadata(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating the _allSessions list
     _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
@@ -534,10 +534,10 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                 await updateSessionTitle(filePath, newTitle); 
                 
                 // Storing the updated session data
-                await du.saveSessionData
+                await du.saveAllSessionsMetadata
                 (
                   typeOfContextData: widget.dashboardContext, 
-                  savedData: _allSessions!,
+                  allSessionsMetadata: _allSessions!,
                 );
 
                 // Closing the modal sheet
@@ -602,10 +602,10 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
               // Updating keywords
               await updateSessionKeywords(filePath, newKeywords); 
               
-              await du.saveSessionData
+              await du.saveAllSessionsMetadata
               (
                 typeOfContextData: widget.dashboardContext, 
-                savedData: _allSessions!,
+                allSessionsMetadata: _allSessions!,
               );
 
               if (mounted) Navigator.pop(context);

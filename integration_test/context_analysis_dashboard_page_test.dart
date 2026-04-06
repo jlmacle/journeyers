@@ -12,8 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dashboard/dashboard_utils.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 import 'externalized_code/integration_test_utils.dart';
@@ -37,8 +37,6 @@ void main() async
   // Session data and its copy
   List<dynamic>? currentSessionData;
   List<dynamic>? currentSessionDataCopy;
-  bool? preTestInformationModalStatus;
-  bool? preTestWasDataSavedStatus;
 
   // Directory with permission to write
   Directory? appSupportDir;
@@ -84,7 +82,7 @@ void main() async
         
         // ACCESSING THE APPLICATION SUPPORT DIRECTORY
         // getApplicationSupportDirectory is used by getSessionFile to retrieve the user metadata.
-        // This time getApplicationSupportDirectory points to the tmp directory, 
+        // During the test, getApplicationSupportDirectory points to the tmp directory, 
         // and for this reason, getSessionFile creates a new metadata file if needed.
         // There is no need to backup user metadata.
         appSupportDir =  await getApplicationSupportDirectory();
@@ -159,7 +157,7 @@ void main() async
           var formatter = DateFormat('MMMM dd, yyyy').add_jm();
           var formattedDate = formatter.format(dateFile1);
 
-          await du.saveDashboardMetaData
+          await du.saveDashboardMetadata
           (
             typeOfContextData: DashboardUtils.contextAnalysesContext,
             title: testFile1Title,
@@ -172,7 +170,7 @@ void main() async
           var dateFile2 = dateFile1.add(const Duration(seconds: 90));
           formattedDate = formatter.format(dateFile2);
 
-          await du.saveDashboardMetaData
+          await du.saveDashboardMetadata
           (
             typeOfContextData: DashboardUtils.contextAnalysesContext,
             title: testFile2Title,
@@ -185,7 +183,7 @@ void main() async
           var dateFile3 = dateFile2.add(const Duration(seconds: 90));
           formattedDate = formatter.format(dateFile3);
 
-          await du.saveDashboardMetaData
+          await du.saveDashboardMetadata
           (
             typeOfContextData: DashboardUtils.contextAnalysesContext,
             title: testFile3Title,
@@ -206,10 +204,10 @@ void main() async
         try 
         {
           // Restores []
-          await du.restoreCopiedSessionData
+          await du.saveAllSessionsMetadata
           (
             typeOfContextData: DashboardUtils.contextAnalysesContext, 
-            savedData: currentSessionDataCopy!
+            allSessionsMetadata: currentSessionDataCopy!
           );
          
         } 

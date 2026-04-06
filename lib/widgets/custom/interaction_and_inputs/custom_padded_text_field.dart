@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/core/utils/dev/placeholder_functions.dart';
-import 'package:journeyers/core/utils/form/form_utils.dart';
+import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/form/form_utils.dart';
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
@@ -59,7 +60,7 @@ class CustomPaddedTextField extends StatefulWidget
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = FormUtils.chars10Lines, // 10 lines as a reference
-    this.textFieldCounter = FormUtils.presentCounter,
+    this.textFieldCounter = TextFieldUtils.presentCounter,
     this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.paddingLeft = 20,
     this.paddingRight = 20,

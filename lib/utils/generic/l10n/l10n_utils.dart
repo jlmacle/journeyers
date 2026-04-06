@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/l10n/app_localizations.dart'; 
 
-/// {@category Utils} 
-/// A utility class related to localization. 
+/// {@category Utils - Generic} 
+/// A generic utility class related to localization. 
 class L10nLanguages 
 {  
 

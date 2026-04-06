@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/core/utils/dev/util_files.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 
 // StatefulWidget necessary for overriding dispose() 
