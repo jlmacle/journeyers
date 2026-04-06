@@ -41,8 +41,8 @@ class HomePage extends StatefulWidget
 
 class _HomePageState extends State<HomePage> 
 {
-  FocusNode appBarTitleFocusNode = FocusNode();
-  FocusNode introductoryMessageFocusNode = FocusNode();
+  FocusNode appBarTitleFocusNode = .new();
+  FocusNode introductoryMessageFocusNode = .new();
   FocusNode informationalMessageFocusNode = FocusNode();
 
   Set<String> _selectedValues = {"No value selected yet"};
