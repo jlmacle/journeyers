@@ -1,8 +1,8 @@
 // Line for automated processing
-// flutter run -t ./test/widgets/custom/text/custom_focusable_text_visual_testing.dart -d chrome
-// flutter run -t ./test/widgets/custom/text/custom_focusable_text_visual_testing.dart -d linux
-// flutter run -t ./test/widgets/custom/text/custom_focusable_text_visual_testing.dart -d macos
-// flutter run -t ./test/widgets/custom/text/custom_focusable_text_visual_testing.dart -d windows
+// flutter run -t ./test/screen_reading/custom/text/custom_focusable_text_visual_testing.dart -d chrome
+// flutter run -t ./test/screen_reading/custom/text/custom_focusable_text_visual_testing.dart -d linux
+// flutter run -t ./test/screen_reading/custom/text/custom_focusable_text_visual_testing.dart -d macos
+// flutter run -t ./test/screen_reading/custom/text/custom_focusable_text_visual_testing.dart -d windows
 // Line for automated processing
 
 
