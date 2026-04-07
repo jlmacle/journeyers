@@ -8,9 +8,7 @@ plugins:
     handlers: 
         python:
           paths: 
-            - "utils_dev"          
-            - "utils_qa/utils_for_manual_and_semi_automated_testing" 
-            - "utils_qa/utils_for_manual_and_semi_automated_testing/py_utils"
+            - "utils_Python"          
           options:
             show_source: false
             show_root_heading: true

@@ -153,7 +153,7 @@ def main():
   
   # Building the path to save the data
   PROJECT_FOLDER = os.environ.get('JOURNEYERS_DIR')
-  file_path = os.path.join(PROJECT_FOLDER,'utils_dev','l10n_utils.dart')
+  file_path = os.path.join(PROJECT_FOLDER,'lib', 'utils', 'generic', 'l10n', 'l10n_utils.dart')
   # Saving the data 
   with open(file_path, 'w', encoding="utf-8") as f:
       f.write(code)
