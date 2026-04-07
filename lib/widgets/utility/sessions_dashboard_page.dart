@@ -135,7 +135,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     
   //**************** DELETION OF SINGLE SESSION DATA related data and methods ****************/
 
-  List<String> _sessionsSelectedForDeletion = [];  
+  final List<String> _sessionsSelectedForDeletion = [];  
 
   // Method used to delete a single session data from the session list action icons
   Future<void> _deleteSelectedSession(String filePath) async
