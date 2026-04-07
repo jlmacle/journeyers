@@ -44,7 +44,7 @@ def main():
     # path on Lubuntu: "test/custom_widgets/interaction_and_inputs/custom_language_switch_visual_testing.dart"
 
     # raw string for path on Windows
-    file_path = r"lib\widgets\custom\text\custom_focusable_text.dart"
+    file_path = r"test\screen_reading\custom\text\custom_heading_visual_testing.dart"
    
     file_path = file_path.replace("\\", "/")
 
