@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
+import 'package:journeyers/utils/project_specific/session_sorting/session_sorting_utils.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date_config.dart';
 
 /// {@category Utility widgets}
