@@ -44,6 +44,11 @@ and the [Python code documentation](../../utils_doc/__doc_python):
 - [doc_generator_dart.py](../../utils_dev/doc_generator_dart.py)
 - [doc_generator_python.py](../../utils_dev/doc_generator_python.py)
 
+
+### Troubleshooting "TypeError: expected str, bytes or os.PathLike object, not NoneType"
+
+The value of the environment variable <code>JOURNEYERS_DIR</code> needs to be the project root folder.<br> 
+
 ### Troubleshooting "ModuleNotFoundError: No module named 'py_utils'"
 
 If running "python ./doc_generator_dart.py" returns "ModuleNotFoundError: No module named 'py_utils'",<br>
