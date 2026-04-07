@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/widgets/utility/sessions_sorting_utils.dart';
+import 'package:journeyers/utils/project_specific/session_sorting/session_sorting_utils.dart';
 
 /// {@category Utility widgets}
 /// A widget handling the sorting by title of session data.
