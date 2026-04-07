@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart'; 
-
 import 'package:journeyers/l10n/app_localizations.dart'; 
+import 'package:flutter/material.dart'; 
 
 /// {@category Utils - Generic} 
 /// A generic utility class related to localization. 
@@ -15,8 +14,8 @@ static List<String> getLanguages({required BuildContext buildContext})
 {
   List<String> languages = []; 
   // Code to generate automatically from the base locales l10n data: begin 
-  languages.add(AppLocalizations.of(buildContext)?.lang_en ?? 'Issue with displaying "en" language');
-  languages.add(AppLocalizations.of(buildContext)?.lang_fr ?? 'Issue with displaying "fr" language');
+  languages.add(AppLocalizations.of(buildContext)?.lang_en ?? 'Default for "en" language');
+  languages.add(AppLocalizations.of(buildContext)?.lang_fr ?? 'Default for "fr" language');
   // Code to generate automatically from the base locales l10n data: end 
   languages.sort(); 
   return languages; 

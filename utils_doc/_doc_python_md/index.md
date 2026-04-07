@@ -11,11 +11,11 @@ This code helps with producing the documentation of the Dart and Python code.
 ---
 ## Utils QA 
 
-This code helps with the testing of the custom widgets.
+This code helps with the screen reading testing of the custom widgets.
 
-::: _1_flutter_run_comments_helper
+::: flutter_run_comments_helper
 
-::: _2_visual_testing_script_generation
+::: screen_reader_testing_script_gen
 
 
 ### Py_utils package

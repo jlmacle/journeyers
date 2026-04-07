@@ -1,3 +1,10 @@
+// Line for automated processing
+// flutter run -t ./lib/widgets/custom/text/custom_focusable_text.dart -d chrome
+// flutter run -t ./lib/widgets/custom/text/custom_focusable_text.dart -d linux
+// flutter run -t ./lib/widgets/custom/text/custom_focusable_text.dart -d macos
+// flutter run -t ./lib/widgets/custom/text/custom_focusable_text.dart -d windows
+// Line for automated processing
+
 import 'package:flutter/material.dart';
 
 /// {@category Custom widgets}

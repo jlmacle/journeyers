@@ -9,7 +9,7 @@ import subprocess
 
 DOC_FOLDER = "utils_doc/__doc_dart"
 PROJECT_FOLDER = os.environ.get('JOURNEYERS_DIR')
-L10N_CATEGORY_UPDATE_SCRIPT_FOLDER = os.path.join(PROJECT_FOLDER, 'utils_dev')
+L10N_CATEGORY_UPDATE_SCRIPT_FOLDER = os.path.join(PROJECT_FOLDER, 'utils_Python')
 
 # changing directory before running the script adding the L10n dartdoc category if necessary
 os.chdir(L10N_CATEGORY_UPDATE_SCRIPT_FOLDER)
