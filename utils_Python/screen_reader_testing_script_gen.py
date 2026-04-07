@@ -21,9 +21,9 @@ if OS_NAME == "darwin":
     projet_root = os.environ.get('JOURNEYERS_DIR', '')
 
 # Data used to build the os-specific script parts
-WINDOW_OUTPUT_FILE_NAME = "2_widget_visual_testing_helper.bat"
-LINUX_OUTPUT_FILE_NAME = "4_widget_visual_testing_helper.sh"
-MACOS_OUTPUT_FILE_NAME = "6_widget_visual_testing_helper.zsh"
+WINDOW_OUTPUT_FILE_NAME = "1_widget_visual_testing_helper.bat"
+LINUX_OUTPUT_FILE_NAME = "2_widget_visual_testing_helper.sh"
+MACOS_OUTPUT_FILE_NAME = "3_widget_visual_testing_helper.zsh"
 
 system_adapted_data = {}
 
