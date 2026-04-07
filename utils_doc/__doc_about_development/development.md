@@ -97,4 +97,4 @@ Testing is developped in the following files:
 
 The topic is developped in this file:
 
-- [releases.md](utils_doc/__doc_about_releases/releases.md)
+- [releases.md](../../utils_doc/__doc_about_releases/releases.md)
