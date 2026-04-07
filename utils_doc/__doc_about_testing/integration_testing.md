@@ -1,0 +1,1 @@
+The integration tests are located in [/integration_test](../../integration_test).
