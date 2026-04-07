@@ -137,6 +137,8 @@ def main():
     # 5. Writing the final script file
     file_path_out = os.path.join(
         os.environ.get('JOURNEYERS_DIR'), 
+        "utils_Python", 
+        "___scripts_for_screen_reader_testing",
         f'{system_adapted_data["output_file_name"]}'
     )
     create_file_if_necessary_and_write_content(file_path=file_path_out, text=cmd_lines)
