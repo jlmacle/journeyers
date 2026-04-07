@@ -69,7 +69,7 @@ class _GroupProblemSolvingProblemToSolveState extends State<GroupProblemSolvingP
           )
           : 
           GestureDetector(
-            // TODO: to expand to cross-platform
+            // TODO: to expand to clicking
             onTap: () => setState(() => _isEditing = true),
             child:
             Flex(
