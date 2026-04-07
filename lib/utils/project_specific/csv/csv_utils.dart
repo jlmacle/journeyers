@@ -9,7 +9,7 @@ import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_export.dart";
-import "package:journeyers/utils/project_specific/form/form_utils.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart";
 
 /// {@category Utils - Project specific}
@@ -71,29 +71,29 @@ class CSVUtils
     mappingLabelsToInputItems = {
       //** Individual perspective **/
       // balance issue
-      _q.level3TitleBalanceIssueItem1: FormUtils.checkbox,
-      _q.level3TitleBalanceIssueItem2: FormUtils.checkbox,
-      _q.level3TitleBalanceIssueItem3: FormUtils.checkbox,
-      _q.level3TitleBalanceIssueItem4: FormUtils.checkbox,
+      _q.level3TitleBalanceIssueItem1: checkbox,
+      _q.level3TitleBalanceIssueItem2: checkbox,
+      _q.level3TitleBalanceIssueItem3: checkbox,
+      _q.level3TitleBalanceIssueItem4: checkbox,
       // workplace issue
-      _q.level3TitleWorkplaceIssueItem1: FormUtils.checkbox,
-      _q.level3TitleWorkplaceIssueItem2: FormUtils.checkbox,
+      _q.level3TitleWorkplaceIssueItem1: checkbox,
+      _q.level3TitleWorkplaceIssueItem2: checkbox,
       // legacy issue
-      _q.level3TitleLegacyIssueItem1: FormUtils.checkbox,
+      _q.level3TitleLegacyIssueItem1: checkbox,
       // another type
-      _q.level3TitleAnotherIssue: FormUtils.textField,
+      _q.level3TitleAnotherIssue: textField,
 
       //** Group/team perspective **/
       // group problematics
-      _q.level3TitleGroupsProblematics: FormUtils.textField,
+      _q.level3TitleGroupsProblematics: textField,
       // same problem?
-      _q.level3TitleSameProblem: FormUtils.segmentedButton,
+      _q.level3TitleSameProblem: segmentedButton,
       // harmony at home
-      _q.level3TitleHarmonyAtHome: FormUtils.segmentedButton,
+      _q.level3TitleHarmonyAtHome: segmentedButton,
       // appreciability at work
-      _q.level3TitleAppreciabilityAtWork: FormUtils.segmentedButton,
+      _q.level3TitleAppreciabilityAtWork: segmentedButton,
       // earning ability
-      _q.level3TitleIncomeEarningAbility: FormUtils.segmentedButton,
+      _q.level3TitleIncomeEarningAbility: segmentedButton,
     };
 
     // A set of the existing titles level 2.
@@ -160,13 +160,13 @@ class CSVUtils
     List<Object> checkboxPreCSVData = [];
 
     // checkbox data converted from bool to String: values can be "true" or "false"
-    var dataCheckbox = "${checkBoxWithTextFieldData[FormUtils.checkbox]}";
+    var dataCheckbox = "${checkBoxWithTextFieldData[checkbox]}";
     var data1 = [
-      FormUtils.checkbox,
+      checkbox,
       dataCheckbox,
     ]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    String dataTextField = (checkBoxWithTextFieldData[FormUtils.textField] ?? "") as String;
+    String dataTextField = (checkBoxWithTextFieldData[textField] ?? "") as String;
     var data2 = [
       notes,
       quotesForCSV + dataTextField + quotesForCSV,
@@ -188,11 +188,11 @@ class CSVUtils
     List<List<String>> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
-        segmentedButtonWithTextFieldData[FormUtils.segmentedButton] ?? "";
-    var data1 = [FormUtils.segmentedButton, dataSegmentedButton];
+        segmentedButtonWithTextFieldData[segmentedButton] ?? "";
+    var data1 = [segmentedButton, dataSegmentedButton];
 
     var dataTextField =
-        segmentedButtonWithTextFieldData[FormUtils.textField] as String;
+        segmentedButtonWithTextFieldData[textField] as String;
     List<String> data2 = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
@@ -210,7 +210,7 @@ class CSVUtils
   {
     List<List<String>> textFieldPreCSVData = [];
 
-    var dataTextField = textFieldData[FormUtils.textField] as String;
+    var dataTextField = textFieldData[textField] as String;
     List<String> data = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     textFieldPreCSVData.add(data);
@@ -238,7 +238,7 @@ class CSVUtils
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      if (mappingLabelsToInputItems[itemOrTitleLabel] == FormUtils.checkbox) {
+      if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox) {
         // checkBoxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
         var checkboxPreCSVData = await checkBoxWithTextFieldDataToPreCSV(
           checkBoxWithTextFieldData:
@@ -250,7 +250,7 @@ class CSVUtils
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
       else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
-          FormUtils.segmentedButton) {
+          segmentedButton) {
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
@@ -261,7 +261,7 @@ class CSVUtils
       }
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
       else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
-          FormUtils.textField) {
+          textField) {
         var textFieldpreCSVData = await textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
         );
@@ -354,7 +354,7 @@ class CSVUtils
 
       // Removal of all [checkbox, "false"] (unchecked boxes)
       // Removal of all ["Notes:",]  if related to an unchecked checkbox
-      if ((indexedData[0].contains(FormUtils.checkbox)) &&
+      if ((indexedData[0].contains(checkbox)) &&
           (indexData_1AsString.trim() == "false")) {
         preCSVData.removeAt(index);
         // The index now points to the following note
@@ -383,7 +383,7 @@ class CSVUtils
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
-      if ((indexedData[0].contains(FormUtils.checkbox)) &&
+      if ((indexedData[0].contains(checkbox)) &&
           (indexData_1AsString.trim() == "true")) {
         // Adding X in front of the question
         // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
@@ -422,7 +422,7 @@ class CSVUtils
     // All the analysis is feasible in one loop, in spite of the removal effect on the indexes
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[0].contains(FormUtils.checkbox)) {
+      if (indexedData[0].contains(checkbox)) {
         preCSVData.removeAt(index);
       }
     }
@@ -435,7 +435,7 @@ class CSVUtils
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
 
-      if (indexedData[0].contains(FormUtils.segmentedButton)) {
+      if (indexedData[0].contains(segmentedButton)) {
         if (indexData_1AsString.trim() != "") {
           // Removing segmentedButton from the data written
           indexedData[0] = "";
@@ -456,7 +456,7 @@ class CSVUtils
       // segmentedButton has already been removed from the answered segmented buttons
       // and replaced with ""
       // Removing all remaining preCSVData lines with segmentedButton
-      if (indexedData[0].contains(FormUtils.segmentedButton)) {
+      if (indexedData[0].contains(segmentedButton)) {
         preCSVData.removeAt(index);
         // The index now points to the following note
         preCSVData.removeAt(index);

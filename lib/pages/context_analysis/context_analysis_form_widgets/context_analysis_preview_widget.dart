@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
-import 'package:journeyers/utils/project_specific/form/form_utils.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart';
 
 
 /// {@category Context analysis}
@@ -115,7 +115,7 @@ class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWid
       {
         currentTitleLevel3Item = secondValue;
         // Checking if an 'X' is in front of the title level 3, and if the item is also a checkbox
-        if (firstValue == 'X' && cu.mappingLabelsToInputItems[currentTitleLevel3Item] == FormUtils.checkbox) 
+        if (firstValue == 'X' && cu.mappingLabelsToInputItems[currentTitleLevel3Item] == checkbox) 
           {checkedBox = true;}
         else 
           {checkedBox = false;}

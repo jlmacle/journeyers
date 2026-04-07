@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/form/form_utils.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_text_field.dart';
 
 
@@ -74,7 +74,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
     this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
-    this.textFieldMaxLength = FormUtils.chars1Page, // a page as a reference
+    this.textFieldMaxLength = chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.absentCounter,
     this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
     this.parentSegmentedButtonValueCallBackFunction =
