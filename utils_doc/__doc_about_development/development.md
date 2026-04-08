@@ -4,6 +4,13 @@
 [Assuming the Flutter installation being finished](https://docs.flutter.dev/install), you should be able to start the code using:<br>
 <code>flutter run</code>
 
+### Troubleshooting "ERROR: Target dart_build failed: Error: Failed to find any of [ld.lld, ld] in LocalDirectory: '/usr/lib/llvm-20/bin'"
+
+Run <code>whereis ld</code>.<br>
+If you get <code>/usr/bin/ld</code>,<br>
+creating a symbolic link with the following command should solve the issue:<br>
+<code>sudo ln -s /usr/bin/ld /usr/lib/llvm-20/bin/ld</code>
+
 ## Python code 
 ### Python virtual environment
 Installing a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) seems the most cross-platform way to run the Python code.
