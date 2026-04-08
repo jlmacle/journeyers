@@ -7,7 +7,7 @@
 ### Python virtual environment
 Installing a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) seems the most cross-platform way to run the Python code.
 
-You might choose to run the following command, in the [utils_Python](../../utils_Python) directory:<br>
+Run the following command, in the [utils_Python](../../utils_Python) directory:<br>
 <code>python -m venv pyEnv</code><br>
 
 
@@ -18,14 +18,24 @@ The following command gives access to the virtual environment: <br>
 
 ### py_utils
 Assuming the Python virtual environment activated,<br>
-and the terminal pointing to the folder [utils_qa/utils_for_manual_and_semi_automated_testing](../../utils_qa/utils_for_manual_and_semi_automated_testing),<br>
+and the terminal pointing to the folder [utils_Python](../../utils_Python),<br>
 the following command should install py_utils.
 
 <code>pip install -e .</code>
 
 You should get a "Successfully installed py_utils-0.1".
-
 <br>
+
+### JOURNEYERS_DIR environment variable
+
+The value of the environment variable <code>JOURNEYERS_DIR</code> needs to be the project root folder.<br> 
+
+### mkdocs installation
+Within the Python virtual environment activated, run the following commands:<br>
+<code>pip install mkdocs</code><br>
+<code>pip install "mkdocstrings[python]"</code><br>
+<code>pip install mkdocs-material</code><br>
+
 
 # Documentation
 
