@@ -104,6 +104,10 @@ Within the Python virtual environment activated, run the following commands:<br>
 <code>pip install "mkdocstrings[python]"</code><br>
 <code>pip install mkdocs-material</code><br>
 
+### Troubleshooting "Error reading page 'index.md': Syntax error: (unicode error) 'unicodeescape' codec can't decode bytes in position ...-...: truncated \uXXXX escape (a_Python_file.py, line ...)"
+If running "python .\doc_generator_python.py" returns the error, <br>
+you can fix the issue(s) by replacing '\\' by '/' in the Python file(s) that is/are creating an issue.
+
 <br>
 
 # The code
