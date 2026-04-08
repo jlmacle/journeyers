@@ -40,6 +40,8 @@ run the following commands:<br>
 
 
 # Documentation
+## Documentation about the project
+Documentation about the project can be found in [utils_doc](../../utils_doc).
 
 ## Dart code
 The Dart code documentation is located in [utils_doc/__doc_dart](../../utils_doc/__doc_dart).
