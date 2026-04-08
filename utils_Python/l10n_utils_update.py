@@ -1,5 +1,6 @@
 '''
-The script is used to generate dynamically the l10n_utils.dart (/lib/core/utils/l10n/) 
+The script is used to generate dynamically the l10n_utils.dart 
+(lib\utils\generic\l10n\l10n_utils.dart) 
 when new base locale files have been added to l10n.
 "flutter run" updates the "lang_langCode" as needed.
 '''
