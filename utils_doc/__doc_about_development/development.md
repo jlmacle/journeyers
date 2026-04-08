@@ -31,7 +31,9 @@ You should get a "Successfully installed py_utils-0.1".
 The value of the environment variable <code>JOURNEYERS_DIR</code> needs to be the project root folder.<br> 
 
 ### mkdocs installation
-Within the Python virtual environment activated, run the following commands:<br>
+Assuming the Python virtual environment activated,<br>
+and the terminal pointing to the folder [utils_Python](../../utils_Python),<br>
+run the following commands:<br>
 <code>pip install mkdocs</code><br>
 <code>pip install "mkdocstrings[python]"</code><br>
 <code>pip install mkdocs-material</code><br>
