@@ -1,7 +1,8 @@
 # Installation
 
 ## Flutter
-[Official installation instructions](https://docs.flutter.dev/install).
+[Assuming the Flutter installation being finished](https://docs.flutter.dev/install), you should be able to start the code using:<br>
+<code>flutter run</code>
 
 ## Python code 
 ### Python virtual environment
