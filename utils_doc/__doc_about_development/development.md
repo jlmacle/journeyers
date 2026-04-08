@@ -24,8 +24,11 @@ the following command should install py_utils.
 <code>pip install -e .</code>
 
 You should get a "Successfully installed py_utils-0.1".
-
 <br>
+
+### JOURNEYERS_DIR environment variable
+
+The value of the environment variable <code>JOURNEYERS_DIR</code> needs to be the project root folder.<br> 
 
 # Documentation
 
