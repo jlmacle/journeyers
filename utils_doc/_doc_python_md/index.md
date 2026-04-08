@@ -5,17 +5,16 @@
 This code helps with producing the documentation of the Dart and Python code.
 
 ::: doc_generator_dart
+
 ::: doc_generator_python
-::: l10n_utils_update
+
 
 ---
-## Utils QA 
+## Utils L10n 
 
-This code helps with the screen reading testing of the custom widgets.
+This code helps with generating Dart classes used in L10n.
 
-::: flutter_run_comments_helper
-
-::: screen_reader_testing_script_gen
+::: l10n_utils_update
 
 
 ### Py_utils package
