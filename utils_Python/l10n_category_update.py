@@ -2,8 +2,6 @@
     [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
     
     Script used to add the dartdoc "L10n" category to the app_localizations files.
-
-    Some data to update manually when new app_localizations files are generated.
 '''
 
 # file tested manually to avoid having to define another python package
