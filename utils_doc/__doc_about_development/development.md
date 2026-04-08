@@ -11,6 +11,14 @@ If you get <code>/usr/bin/ld</code>,<br>
 creating a symbolic link with the following command should solve the issue:<br>
 <code>sudo ln -s /usr/bin/ld /usr/lib/llvm-20/bin/ld</code>
 
+---
+
+__Please note__:<br>
+The links to folders are kept for the operating systems where they bring value.<br>
+With apologies for the cases where those links are not yet functioning.
+
+---
+
 ## Python code 
 ### Python virtual environment
 Installing a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) seems the most cross-platform way to run the Python code.
