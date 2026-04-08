@@ -136,6 +136,5 @@ untranslated-messages-file.txt
 # Configuration files
 devtools_options.yaml
 
-# Python virtual environments
+# Python virtual environment
 journeyers/
-utils_Python/pyEnv/

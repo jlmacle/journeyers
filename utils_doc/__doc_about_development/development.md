@@ -5,6 +5,12 @@
 <code>flutter run</code><br>
 (Instructions planned for mobile platforms)
 
+In case that would not be done automatically,<br>
+the path to "flutter/bin" needs to be set in the PATH environment variable.<br>
+If <code>flutter run</code> doesn't function after updating the PATH variable,<br>
+login out, and re-login in, might be the most cross-platform way to solve the issue.
+
+
 ### Troubleshooting "ERROR: Target dart_build failed: Error: Failed to find any of [ld.lld, ld] in LocalDirectory: '/usr/lib/llvm-20/bin'"
 
 Run <code>whereis ld</code>.<br>
