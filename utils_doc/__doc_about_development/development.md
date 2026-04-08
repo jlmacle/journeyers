@@ -63,10 +63,10 @@ The Python code documentation is located in [utils_doc/__doc_python](../../utils
 # Utils
 
 ## Doc generation
-Two python files, located in [utils_dev](../../utils_dev), are used to generate the [Dart code documentation](../../utils_doc/__doc_dart/), <br>
+Two python files, located in [utils_Python](../../utils_Python), are used to generate the [Dart code documentation](../../utils_doc/__doc_dart/), <br>
 and the [Python code documentation](../../utils_doc/__doc_python):
-- [doc_generator_dart.py](../../utils_dev/doc_generator_dart.py)
-- [doc_generator_python.py](../../utils_dev/doc_generator_python.py)
+- [doc_generator_dart.py](../../utils_Python/doc_generator_dart.py)
+- [doc_generator_python.py](../../utils_Python/doc_generator_python.py)
 
 
 ### Troubleshooting "TypeError: expected str, bytes or os.PathLike object, not NoneType"
