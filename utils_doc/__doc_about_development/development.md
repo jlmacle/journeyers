@@ -1,8 +1,9 @@
 # Installation
 
 ## Flutter
-[Assuming the Flutter installation being finished](https://docs.flutter.dev/install), you should be able to start the code using:<br>
-<code>flutter run</code>
+[Assuming the Flutter installation being finished](https://docs.flutter.dev/install), you should be able to start the code, on desktop, using:<br>
+<code>flutter run</code><br>
+(Instructions planned for mobile platforms)
 
 ### Troubleshooting "ERROR: Target dart_build failed: Error: Failed to find any of [ld.lld, ld] in LocalDirectory: '/usr/lib/llvm-20/bin'"
 
