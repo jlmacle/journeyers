@@ -4,7 +4,7 @@
 
 This code helps with producing the documentation of the Dart and Python code.
 
-:: l10n_category_update
+::: l10n_category_update
 
 ::: doc_generator_dart
 
