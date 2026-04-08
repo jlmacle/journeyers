@@ -42,8 +42,11 @@ run the following commands:<br>
 # Documentation
 
 ## Dart code
+The Dart code documentation is located in [utils_doc/__doc_dart](../../utils_doc/__doc_dart).
 
 ## Python code
+The Python code documentation is located in [utils_doc/__doc_python](../../utils_doc/__doc_python).
+
 
 <br>
 
