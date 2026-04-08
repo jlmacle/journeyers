@@ -8,7 +8,7 @@
 Installing a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) seems the most cross-platform way to run the Python code.
 
 You might choose to run the following command, in the root directory:<br>
-<code>python -m venv journeyers</code><br>
+<code>python -m venv pyEnv</code><br>
 
 
 
