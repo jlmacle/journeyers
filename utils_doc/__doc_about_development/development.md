@@ -20,8 +20,8 @@ Run the following command, in the [utils_Python](../../utils_Python) directory:<
 
 
 The following command gives access to the virtual environment: <br>
-<code>source pyEnv/bin/activate (Linux/macOS)</code><br>
-<code>pyEnv/Scripts/activate (Windows)</code><br>
+<code>source pyEnv/bin/activate</code> (Linux/macOS)<br>
+<code>pyEnv/Scripts/activate</code> (Windows)<br>
 
 
 ### py_utils
