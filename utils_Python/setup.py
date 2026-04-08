@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="py_utils",
     version="0.1",
+    packages=["py_utils"],
     # https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/
 )
 
