@@ -4,6 +4,13 @@
 [Assuming the Flutter installation being finished](https://docs.flutter.dev/install), you should be able to start the code using:<br>
 <code>flutter run</code>
 
+### Troubleshooting "ERROR: Target dart_build failed: Error: Failed to find any of [ld.lld, ld] in LocalDirectory: '/usr/lib/llvm-20/bin'"
+
+Run <code>whereis ld</code>.<br>
+If you get <code>/usr/bin/ld</code>,<br>
+creating a symbolic link with the following command should solve the issue:<br>
+<code>sudo ln -s /usr/bin/ld /usr/lib/llvm-20/bin/ld</code>
+
 ## Python code 
 ### Python virtual environment
 Installing a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) seems the most cross-platform way to run the Python code.
@@ -56,10 +63,10 @@ The Python code documentation is located in [utils_doc/__doc_python](../../utils
 # Utils
 
 ## Doc generation
-Two python files, located in [utils_dev](../../utils_dev), are used to generate the [Dart code documentation](../../utils_doc/__doc_dart/), <br>
+Two python files, located in [utils_Python](../../utils_Python), are used to generate the [Dart code documentation](../../utils_doc/__doc_dart/), <br>
 and the [Python code documentation](../../utils_doc/__doc_python):
-- [doc_generator_dart.py](../../utils_dev/doc_generator_dart.py)
-- [doc_generator_python.py](../../utils_dev/doc_generator_python.py)
+- [doc_generator_dart.py](../../utils_Python/doc_generator_dart.py)
+- [doc_generator_python.py](../../utils_Python/doc_generator_python.py)
 
 
 ### Troubleshooting "TypeError: expected str, bytes or os.PathLike object, not NoneType"
