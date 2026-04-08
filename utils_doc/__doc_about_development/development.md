@@ -7,7 +7,7 @@
 ### Python virtual environment
 Installing a [Python virtual environment](https://docs.python.org/3/tutorial/venv.html) seems the most cross-platform way to run the Python code.
 
-You might choose to run the following command, in the [utils_Python](../../utils_Python) directory:<br>
+Run the following command, in the [utils_Python](../../utils_Python) directory:<br>
 <code>python -m venv pyEnv</code><br>
 
 
