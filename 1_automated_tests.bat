@@ -1,2 +1,2 @@
-flutter test -r expanded
+flutter test -r github
 
