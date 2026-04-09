@@ -1,0 +1,29 @@
+Addition of a new language to l10n:
+
+- Potentially useful extension: ARB Editor (Google)
+- "When locales specify a script code or country code, a base locale 
+(without the script code or country code) should exist as the fallback."
+  For example, if lang_en_US.arb exists, lang_en.arb should exist.
+  When done, "flutter gen-l10n" should execute without error message.
+- If adding a new language to l10n, 
+the class l10n_utils.dart can be updated with l10n_utils_update.py (utils_dev).
+
+-----------------------
+
+iOS Applications and l10n:
+
+doc/l10n_app_localizations/AppLocalizations-class.html
+TODO: to add the L10n category tag in the classes before generating the Dart documentation.
+
+"iOS Applications
+
+iOS applications define key application metadata, including supported locales, 
+in an Info.plist file that is built into the application bundle. 
+To configure the locales supported by your app, you’ll need to edit this file.
+First, open your project’s ios/Runner.xcworkspace Xcode workspace file. 
+Then, in the Project Navigator, open the Info.plist file under the Runner project’s Runner folder.
+Next, select the Information Property List item, select Add Item from the Editor menu, 
+then select Localizations from the pop-up menu.
+Select and expand the newly-created Localizations item then, for each locale your application supports, 
+add a new item and select the locale you wish to add from the pop-up menu in the Value field. 
+This list should be consistent with the languages listed in the AppLocalizations.supportedLocales property."
