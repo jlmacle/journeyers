@@ -1,5 +1,9 @@
 # Installation
 
+__Note:__<br>
+Please keep in mind that Journeyers is in alpha version,<br>
+and that bugs and [todos](./_todos.md) remain.
+
 ## Flutter
 [Assuming the Flutter installation being finished](https://docs.flutter.dev/install), you should be able to start the code, on desktop, using:<br>
 <code>flutter run</code><br>
