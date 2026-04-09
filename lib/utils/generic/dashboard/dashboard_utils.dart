@@ -170,14 +170,15 @@ class DashboardUtils {
   Future<void> saveAllSessionsMetadata({required String typeOfContextData, required List<dynamic> allSessionsMetadata}) async
   {
     String fileName = "";
-    final directory = await getApplicationSupportDirectory();
-    final path = directory.path;
+    final applicationSupportDirectory = await getApplicationSupportDirectory();
+    final pathToApplicationSupportDirectory = applicationSupportDirectory.path;
 
     // Getting file name according to context
     if (typeOfContextData == contextAnalysesContext) 
     {
       fileName = 'dashboard_session_data_context_analyses.json';
-    } else if (typeOfContextData == groupProblemSolvingsContext) 
+    } 
+    else if (typeOfContextData == groupProblemSolvingsContext) 
     {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } 
@@ -186,14 +187,14 @@ class DashboardUtils {
       if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
     }
 
-    File sessionFile = File('$path/$fileName');
+    File sessionFile = File('$pathToApplicationSupportDirectory/$fileName');
     // Creating session file if doesn't exist
     if (!sessionFile.existsSync()) {sessionFile.createSync();}
 
     // Adding the data to the file
     var savedContent = jsonEncode(allSessionsMetadata);
     await sessionFile.writeAsString(savedContent);
-    if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $path/$fileName");
+    if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $pathToApplicationSupportDirectory/$fileName");
 
   }
 }
