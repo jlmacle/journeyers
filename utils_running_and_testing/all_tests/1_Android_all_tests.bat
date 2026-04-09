@@ -1,0 +1,1 @@
+../integration_tests/1_Android_integration_tests.bat
