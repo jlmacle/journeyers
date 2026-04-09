@@ -18,22 +18,6 @@ Individual tests:
 flutter test ./integration_test/context_analysis_page_test.dart -r github 
 flutter test ./integration_test/context_analysis_dashboard_page_test.dart -r github 
 
-
------------------------
-
-flutter_run_comments_helper.py:
-
-By changing the relative path for "filePath", for example:
-String filePath =  r"test\custom_widgets\interaction_and_inputs\custom_cascading_checkbox_visual_testing.dart";
-a set of comments, useful during development, can be added to the visual testing file of the relative path.
-
------------------------
-
-screen_reader_testing_script_gen.py:
-
-Please note that Chrome must be started to have more than one tab launched, when testing on Windows.
-Your anti-virus might not appreciate the multiple tabs opening.
-
 -----------------------
 
 Journeyers app (macOS):
