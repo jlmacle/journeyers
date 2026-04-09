@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_testing_data.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
@@ -44,21 +45,6 @@ void main() async
   Directory? absolutePathToSourceDir;
   // Copy directory for the test files
   Directory? absolutePathToCopiesDir;
-
-  // Metadata and file names for the test files
-  String testFile1Title = "Test-Context analysis 1";
-  List<String> testFile1Keywords = [];
-  String fileName1 = "file1.txt";
-
-  String testFile2Title = "Test-Context analysis 2";
-  List<String> testFile2Keywords = ["kw1"];
-  String fileName2 = "file2.txt";
-
-  String testFile3Title = "Test-Context analysis 3";
-  List<String> testFile3Keywords = ["kw1","kw2"];
-  List<String> testDataTitles = [testFile1Title, testFile2Title, testFile3Title];
-  String fileName3 = "file3.txt";
-      
         
 
   group
@@ -101,9 +87,9 @@ void main() async
         absolutePathToCopiesDir = Directory(path.join(appSupportDir!.path, relativePathToCopiesDir));
         await absolutePathToCopiesDir!.create(recursive: true);       
 
-        File file1 = File(path.join(absolutePathToSourceDir!.path, fileName1));
-        File file2 = File(path.join(absolutePathToSourceDir!.path, fileName2));
-        File file3 = File(path.join(absolutePathToSourceDir!.path, fileName3));
+        File file1 = File(path.join(absolutePathToSourceDir!.path, testFile1Name));
+        File file2 = File(path.join(absolutePathToSourceDir!.path, testFile2Name));
+        File file3 = File(path.join(absolutePathToSourceDir!.path, testFile3Name));
         if (!file1.existsSync()) {file1.createSync();}
         if (!file2.existsSync()) {file2.createSync();}
         if (!file3.existsSync()) {file3.createSync();} 
@@ -163,7 +149,7 @@ void main() async
             title: testFile1Title,
             keywords: testFile1Keywords,
             formattedDate: formattedDate,
-            pathToFile: path.join(absolutePathToCopiesDir!.path,fileName1)
+            pathToFile: path.join(absolutePathToCopiesDir!.path,testFile1Name)
           );
 
           // Creating metadata for file 2
@@ -176,7 +162,7 @@ void main() async
             title: testFile2Title,
             keywords: testFile2Keywords,
             formattedDate: formattedDate,
-            pathToFile: path.join(absolutePathToCopiesDir!.path,fileName2)
+            pathToFile: path.join(absolutePathToCopiesDir!.path,testFile2Name)
           );
 
           // Creating metadata for file 3
@@ -189,7 +175,7 @@ void main() async
             title: testFile3Title,
             keywords: testFile3Keywords,
             formattedDate: formattedDate,
-            pathToFile: path.join(absolutePathToCopiesDir!.path,fileName3)
+            pathToFile: path.join(absolutePathToCopiesDir!.path,testFile3Name)
           );
 
           // Retrieving the current session metadata (incl. the test files metadata)
