@@ -32,8 +32,9 @@ print(f"Language translations for each language: {LANGUAGE_VALUES_FOR_EACH_BASE_
 INDENT_LEVEL_1 = "  "
 INDENT_LEVEL_2 = "    "
 CLASS_BEGIN = (
-  "import 'package:journeyers/l10n/app_localizations.dart'; \n"
   "import 'package:flutter/material.dart'; \n"
+  "\n"
+  "import 'package:journeyers/l10n/app_localizations.dart'; \n"
   "\n"
   "/// {@category Utils - Generic} \n"
   "/// A generic utility class related to localization. \n"
