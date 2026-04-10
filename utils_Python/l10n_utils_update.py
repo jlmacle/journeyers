@@ -37,7 +37,7 @@ CLASS_BEGIN = (
   "\n"
   "/// {@category Utils - Generic} \n"
   "/// A generic utility class related to localization. \n"
-  "class L10nLanguages \n"
+  "class L10nUtils \n"
   "{  \n"
 )
 CLASS_END = "}"
