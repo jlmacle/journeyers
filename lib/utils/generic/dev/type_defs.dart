@@ -1,0 +1,1 @@
+typedef StringValidator = bool Function(String);
