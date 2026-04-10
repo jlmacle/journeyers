@@ -1,4 +1,4 @@
-# chmod u+x 4_macOS_all_tests.zsh
+# chmod u+x 3_units_and_widgets_tests.zsh
 
 if [ -z "${JOURNEYERS_DIR}" ]; then
     echo "---------------------------------------------------------"
@@ -8,16 +8,8 @@ if [ -z "${JOURNEYERS_DIR}" ]; then
 fi
 
 echo "---------------------------------------------"  
-echo "All tests."
+echo "Unit and widget tests."
 echo "---------------------------------------------"
 
-# Unit and widget tests
 cd $JOURNEYERS_DIR
-cd ./utils_running_and_testing/units_and_widgets_tests
-./3_units_and_widgets_tests.zsh 
-
-# Integration tests
-cd $JOURNEYERS_DIR
-cd ./utils_running_and_testing/integration_tests
-./4_macOS_integration_tests.zsh
-
+flutter test -r github && echo
