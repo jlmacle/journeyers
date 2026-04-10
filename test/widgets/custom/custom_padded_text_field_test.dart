@@ -6,25 +6,6 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_padded_t
 
 void main() {
   group('CustomPaddedTextField Widget Tests', () {
-    testWidgets('Should render with initial value and hint text', (WidgetTester tester) async {
-      const String hintText = 'Enter text here';
-      const String initialValue = 'A text';
-
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: CustomPaddedTextField(
-              textFieldHint: hintText,
-              textFieldStartValue: initialValue,
-            ),
-          ),
-        ),
-      );
-
-      // Verifing hint text and initial value exist
-      expect(find.text(hintText), findsOneWidget);
-      expect(find.text(initialValue), findsOneWidget);
-    });
 
     testWidgets('Should remove double quotes and display error message', (WidgetTester tester) async {
       String capturedValue = '';

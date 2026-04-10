@@ -1,9 +1,15 @@
 # chmod u+x 2_iOS_all_tests.zsh
 
+if [ -z "${JOURNEYERS_DIR}" ]; then
+    echo "---------------------------------------------------------"
+    echo "JOURNEYERS_DIR must be set to the project root directory."
+    echo "---------------------------------------------------------"
+    exit 1
+fi
+
 echo "---------------------------------------------"  
 echo "All tests."
 echo "---------------------------------------------"
-echo "JOURNEYERS_DIR must be set to the project root directory"
 
 # Integration tests
 cd $JOURNEYERS_DIR
