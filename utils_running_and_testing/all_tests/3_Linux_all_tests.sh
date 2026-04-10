@@ -14,7 +14,7 @@ fi
 # Unit and widget tests
 cd $JOURNEYERS_DIR
 cd ./utils_running_and_testing/units_and_widgets_tests
-./2_units_and_widgets_tests.sh 
+./1_Linux_units_and_widgets_tests.sh
 
 # Integration tests
 cd $JOURNEYERS_DIR
