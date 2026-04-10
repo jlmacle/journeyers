@@ -31,7 +31,7 @@ class CustomLanguageSwitch extends StatefulWidget
   {
     List<String> dropdownItems = [];
     if (preferencesDebug) pu.printd("Preferences: Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");
-    dropdownItems = L10nLanguages.getLanguages(buildContext: context);
+    dropdownItems = L10nUtils.getLanguages(buildContext: context);
     return dropdownItems;
   }
 }

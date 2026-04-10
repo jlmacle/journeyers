@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 /// {@category Utils - Generic} 
 /// A generic utility class related to localization. 
-class L10nLanguages 
+class L10nUtils 
 {  
 
 /// A method used to get a list of all the language names, related to a locale, from the l10n data. 
