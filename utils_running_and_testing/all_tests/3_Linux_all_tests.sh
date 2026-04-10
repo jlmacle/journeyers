@@ -3,7 +3,13 @@
 echo "---------------------------------------------"  
 echo "All tests."
 echo "---------------------------------------------"
-echo "JOURNEYERS_DIR must be set to the project root directory"
+
+if [ -z "${JOURNEYERS_DIR}" ]; then
+    echo "---------------------------------------------------------"
+    echo "JOURNEYERS_DIR must be set to the project root directory."
+    echo "---------------------------------------------------------"
+    exit 1
+fi
 
 # Unit and widget tests
 cd $JOURNEYERS_DIR
