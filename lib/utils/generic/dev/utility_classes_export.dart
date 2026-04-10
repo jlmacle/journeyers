@@ -5,8 +5,8 @@ import 'package:journeyers/utils/generic/runtime_data/runtime_data_utils.dart';
 import 'package:journeyers/utils/project_specific/csv/csv_utils.dart';
 
 //**************** UTILITY CLASSES ****************//
-final CSVUtils cu = CSVUtils();
-final DashboardUtils du = DashboardUtils();
+final CSVUtils cu = .new();
+final DashboardUtils du = .new();
 final FileUtils fu = FileUtils();
 final PrintUtils pu = PrintUtils();
 final RunTimeDataUtils upu = RunTimeDataUtils();
