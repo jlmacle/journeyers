@@ -14,9 +14,9 @@ in case of:
 or 
 "The Dart VM Service was not discovered after 60 seconds. This is taking much longer than expected...")
 
-Individual tests:
+Individual test:
 flutter test ./integration_test/context_analysis_page_test.dart -r github 
-flutter test ./integration_test/context_analysis_dashboard_page_test.dart -r github 
+
 
 -----------------------
 
