@@ -13,8 +13,9 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process.dart'
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
 
-class MockPathProviderPlatform extends PathProviderPlatform {
+class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
   @override
+  // Test folder for I/O operations
   Future<String?> getApplicationSupportPath() async {
     // This points to a system-valid temporary folder with write access
     return Directory.systemTemp.path;
@@ -26,8 +27,7 @@ void main() async
   // This initializes the bridge between the app and the test runner
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  // Mock class declaration before running tests
-  PathProviderPlatform.instance = MockPathProviderPlatform();
+  PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting();
 
   group
   (
@@ -47,7 +47,6 @@ void main() async
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
-          // 'isInformationModalAcknowledged' set to false to trigger the modal
           SharedPreferences.setMockInitialValues
           ({
 

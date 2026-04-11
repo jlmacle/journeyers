@@ -10,8 +10,8 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
 // To be completed
 
-class MockPathProviderPlatform extends  PathProviderPlatform {
-  MockPathProviderPlatform(this._path);
+class PathProviderPlatformRedirectForTesting extends  PathProviderPlatform {
+  PathProviderPlatformRedirectForTesting(this._path);
 
   final String _path;
 
@@ -36,7 +36,7 @@ void main() {
 
   setUp(() async {
     tempDir = await Directory.systemTemp.createTemp('dashboard_utils_test_');
-    PathProviderPlatform.instance = MockPathProviderPlatform(tempDir!.path);
+    PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(tempDir!.path);
     sut = DashboardUtils();
   });
 
