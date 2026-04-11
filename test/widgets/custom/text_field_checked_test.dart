@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/text_field_checked.dart';
 
 
@@ -126,6 +127,33 @@ void main() {
               blockingFunctionsErrorMessagesMapping: {
                 isEmpty: errorMsgIsEmpty,
               },
+            ),
+          ),
+        ),
+      );
+
+      // Entering valid text
+      await tester.enterText(find.byType(TextField), textNonEmpty);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump();
+
+      expect(submittedValue, equals(textNonEmpty));
+    });
+
+    testWidgets('Should call valueSubmittedCallbackFunction if the map has no blocking functions', (WidgetTester tester) async {
+      String submittedValue = "";
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TextFieldChecked(
+              textFieldStyle: analysisTextFieldStyle,
+              textFieldHint: textFieldHint,
+              textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageKey: errorKey,
+              errorMessageStyle: analysisTextFieldErrorStyle,
+              valueSubmittedCallbackFunction: (val) => submittedValue = val,
+              blockingFunctionsErrorMessagesMapping: Map<StringValidator, String>(),
             ),
           ),
         ),
