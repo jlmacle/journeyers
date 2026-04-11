@@ -4,13 +4,13 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/text_field_checked.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_checked.dart';
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
 /// An error message is displayed if a straight double quote is entered in the text field.
 /// Also, the straight double quote is automatically removed from the text field.
-class CustomPaddedTextField extends StatefulWidget 
+class TextFieldCheckedAndPadded extends StatefulWidget 
 {
   /// If the text field maintains state, when the CustomCheckBoxWithTextField instance is unchecked for example.
   final bool maintainState;
@@ -61,7 +61,7 @@ class CustomPaddedTextField extends StatefulWidget
   /// The bottom padding for the text field.
   final double paddingBottom;
 
-  const CustomPaddedTextField
+  const TextFieldCheckedAndPadded
   ({
     super.key,
     this.maintainState = true,
@@ -83,16 +83,13 @@ class CustomPaddedTextField extends StatefulWidget
   });
 
   @override
-  State<CustomPaddedTextField> createState() => _CustomPaddedTextFieldState();
+  State<TextFieldCheckedAndPadded> createState() => _TextFieldCheckedAndPaddedState();
 }
 
-class _CustomPaddedTextFieldState extends State<CustomPaddedTextField> 
+class _TextFieldCheckedAndPaddedState extends State<TextFieldCheckedAndPadded> 
 {
-  // The variable to update when a double quote has been found
-  String _errorMessageForDoubleQuotes = "";
-  final GlobalKey<_CustomPaddedTextFieldState> textFieldBeforeErrorMessageKey = GlobalKey();
+  final GlobalKey<_TextFieldCheckedAndPaddedState> textFieldBeforeErrorMessageKey = GlobalKey();
   TextEditingController textFieldEditingController = .new();
-  bool _wasCharacterReplacedAtPreviousTyping = false;
 
   @override
   void initState() 
