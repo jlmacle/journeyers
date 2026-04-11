@@ -234,7 +234,11 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   ),
                 const CustomPaddedTextField
                 (
+                  blockingFunctionsErrorMessagesMapping: TextFieldUtils.quoteAndLineReturnValidatorsErrorsMap,
+                  textFieldStyle: analysisTextFieldStyle,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
+                  textFieldHintStyle: analysisTextFieldHintStyle,
+                  errorMessageStyle: analysisTextFieldErrorStyle,
                   textFieldMaxLength: chars1Page,
                   textFieldCounter: TextFieldUtils.absentCounter,
                   parentTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
@@ -289,6 +293,10 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   const CustomPaddedTextField
                   (
                     textFieldHint: pleaseDescribeTextGroupsHint,
+                    blockingFunctionsErrorMessagesMapping: TextFieldUtils.quoteAndLineReturnValidatorsErrorsMap,
+                    textFieldStyle: analysisTextFieldStyle,
+                    textFieldHintStyle: analysisTextFieldHintStyle,
+                    errorMessageStyle: analysisTextFieldErrorStyle,
                     textFieldMaxLength: chars1Page,
                     textFieldCounter: TextFieldUtils.absentCounter,
                     parentTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
