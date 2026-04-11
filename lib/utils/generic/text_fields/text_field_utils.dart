@@ -27,28 +27,26 @@ class TextFieldUtils
     return Text('$currentLength/$maxLength');
   }
 
+  /// A String for the type of quote to be removed 
+  static String quoteChar = '"';
+
   /// A String validator searching for straight quotes.
-  static bool containsStraightQuote(String value) => value.contains('"');
+  static bool containsStraightQuote(String value) => value.contains(quoteChar);
 
   /// An error message displayed if containsStraightQuote returns true.
-  static String containsStraightQuoteError = 
-  'Straight double quotes\nand line returns\nare removed from the text typed'
-  '\nfor CSV-export reasons.\nWith apologies.';
+  static const String containsStraightQuoteError = 
+  'Straight double quotes\n'
+  'are removed from the text typed\n'
+  'for CSV-export reasons.\nWith apologies.';
 
   /// A String validator searching for line returns.
   static bool containsLineReturn(String value) => value.contains('\n');
 
-  /// An error message displayed if containsLineReturn returns true.
-  static String containsLineReturnError = 
-  'Straight double quotes\nand line returns\nare removed from the text typed'
-  '\nfor CSV-export reasons.\nWith apologies.';
-
   /// A map with functions as keys, and error messages as values.
   /// The functions return true on a valid input,
   /// and false on an invalid input.
-  static Map<StringValidator, String> quoteAndLineReturnValidatorsErrorsMap = 
+  static const Map<StringValidator, String> quoteAndLineReturnValidatorsErrorsMap = 
   {
-    containsStraightQuote : containsStraightQuoteError,
-    containsLineReturn    : containsLineReturnError
+    containsStraightQuote : containsStraightQuoteError
   };
 }
