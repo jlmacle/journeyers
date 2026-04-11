@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
@@ -144,8 +145,12 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             child: 
             CustomPaddedTextField
             (
+              blockingFunctionsErrorMessagesMapping: TextFieldUtils.quoteAndLineReturnValidatorsErrorsMap,
               textFieldStartValue: _textFieldValue,
+              textFieldStyle: analysisTextFieldStyle,
               textFieldHint: widget.textFieldHint,
+              textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageStyle: analysisTextFieldErrorStyle,
               parentTextFieldValueCallBackFunction: 
                 (String text)
                 {
@@ -153,7 +158,6 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
                   setState(() {_textFieldValue = text;});
                 },
               textFieldMinLines: widget.textFieldMinLines,
-              textFieldMaxLines: widget.textFieldMaxLines,
               textFieldCounter: widget.textFieldCounter,
             ),
           ),

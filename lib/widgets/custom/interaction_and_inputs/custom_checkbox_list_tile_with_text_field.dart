@@ -116,10 +116,13 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
         if (_isChecked)
           CustomPaddedTextField
           (
+            blockingFunctionsErrorMessagesMapping: TextFieldUtils.quoteAndLineReturnValidatorsErrorsMap,
             textFieldStartValue: _textFieldValue,
+            textFieldStyle: analysisTextFieldStyle,
             textFieldHint: widget.textFieldHint,
+            textFieldHintStyle: analysisTextFieldHintStyle,
+            errorMessageStyle: analysisTextFieldErrorStyle,
             textFieldMinLines: widget.textFieldMinLines,
-            textFieldMaxLines: widget.textFieldMaxLines,
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
             parentTextFieldValueCallBackFunction: 

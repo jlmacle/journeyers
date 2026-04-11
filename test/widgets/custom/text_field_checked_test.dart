@@ -23,10 +23,10 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextFieldChecked(
+              errorMessageKey: errorKey,
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
-              errorMessageKey: errorKey,
               errorMessageStyle: analysisTextFieldErrorStyle,
               valueSubmittedCallbackFunction: (_) {},
               blockingFunctionsErrorMessagesMapping: const {},
