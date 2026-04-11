@@ -49,7 +49,7 @@ class TextFieldChecked extends StatefulWidget
     required this.textFieldStyle,
     required this.textFieldHint,
     required this.textFieldHintStyle,
-    required this.errorMessageKey,
+    this.errorMessageKey = const Key('error_msg_key_default'),
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
