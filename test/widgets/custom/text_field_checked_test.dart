@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/text_field_checked.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_checked.dart';
 
 
 void main() {
