@@ -94,9 +94,6 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
   final GlobalKey<_CustomPaddedTextFieldState> textFieldBeforeErrorMessageKey = GlobalKey();
   TextEditingController textFieldEditingController = .new();
   bool _wasCharacterReplacedAtPreviousTyping = false;
-  // TODO: To make optional
-  Key errorKey = const Key('error_msg_key');
-
 
   @override
   void initState() 
@@ -127,7 +124,6 @@ class _CustomPaddedTextFieldState extends State<CustomPaddedTextField>
         textFieldStyle: widget.textFieldStyle,
         textFieldHint: widget.textFieldHint,
         textFieldHintStyle: widget.textFieldHintStyle,
-        errorMessageKey: errorKey,
         errorMessageStyle: widget.errorMessageStyle,      
         textFieldMinLines: widget.textFieldMinLines,
         textFieldMaxLength: widget.textFieldMaxLength,
