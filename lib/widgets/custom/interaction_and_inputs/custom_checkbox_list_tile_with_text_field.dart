@@ -117,7 +117,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
         if (_isChecked)
           TextFieldCheckedAndPadded
           (
-            blockingFunctionsErrorMessagesMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMap,
+            blockingFunctionsErrorMessagesMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA,
             textFieldStartValue: _textFieldValue,
             textFieldStyle: analysisTextFieldStyle,
             textFieldHint: widget.textFieldHint,

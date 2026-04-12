@@ -9,7 +9,7 @@ class TextFieldUtils
   //*********************  MAP WITH STRING SANITIZER BUNDLES AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
   
   /// A map with String sanitizer bundles as keys, and error messages as values.
-  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap = 
+  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapForCA = 
   {
     tfu_gen.TextFieldUtils.containsAStraightQuote : tfu_gen.TextFieldUtils.containsAStraightQuoteError,
     tfu_gen.TextFieldUtils.containsADot : tfu_gen.TextFieldUtils.containsADotError

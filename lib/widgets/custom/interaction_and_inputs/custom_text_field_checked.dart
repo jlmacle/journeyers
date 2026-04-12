@@ -102,7 +102,7 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
 
     // Yes, because a blocking function returned true
     List<Function> sanitizingFunctionsReturnedTrueList = [];
-    if (tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMap
+    if (tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
         .keys
         .any
         (
