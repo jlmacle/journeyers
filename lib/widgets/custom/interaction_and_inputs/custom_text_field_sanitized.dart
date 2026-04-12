@@ -96,7 +96,7 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
 
   // The method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display.
-  Future<void> userInputHandling(value) async
+  Future<void> userInputSanitizing(value) async
   {
     // Does the user input needs sanitization and does the submit needs to be blocked?
 
@@ -190,6 +190,7 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
     }
   }
 
+  // Method used for the onChanged named parameter
   onChanged(String newValue) async
   {
     // By default, submit is not blocked
@@ -198,16 +199,16 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
     if (textFieldDebugging) pu.printd("Text Field: onChanged: submitIsBlocked: $submitIsBlocked");
 
     // Checking the characters, and resetting the error message if relevant
-    await userInputHandling(newValue);
+    await userInputSanitizing(newValue);
   }
 
+  // Method used for the onSubmitted named parameter
   onSubmitted(String newValue)
   {
     if (textFieldDebugging) pu.printd("Text Field: onSubmitted: submitIsBlocked: $submitIsBlocked");
     if (!submitIsBlocked) {
       widget.valueSubmittedCallbackFunction(newValue);
     }
-
   }
 
   @override
