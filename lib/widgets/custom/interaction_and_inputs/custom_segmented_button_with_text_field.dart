@@ -4,6 +4,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_checked_and_padded.dart';
 
 
@@ -145,7 +146,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             child: 
             TextFieldCheckedAndPadded
             (
-              blockingFunctionsErrorMessagesMapping: TextFieldUtils.stringSanitizerBundlesErrorsMap,
+              blockingFunctionsErrorMessagesMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMap,
               textFieldStartValue: _textFieldValue,
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: widget.textFieldHint,

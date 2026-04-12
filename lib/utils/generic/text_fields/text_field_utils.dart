@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-
 /// {@category Utils - Generic}
 /// A generic utility class related to text fields.
 class TextFieldUtils
@@ -70,16 +68,5 @@ class TextFieldUtils
   'Dots are removed,\n'
   'as no extension should be entered\n'
   'in the file name.';
- 
-
-  //*********************  MAP WITH STRING SANITIZER BUNDLES AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
-  
-  /// A map with String sanitizer bundles as keys, and error messages as values.
-  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap = 
-  {
-    containsAStraightQuote : containsAStraightQuoteError,
-    containsADot : containsADotError
-  };  
-
   
 }
