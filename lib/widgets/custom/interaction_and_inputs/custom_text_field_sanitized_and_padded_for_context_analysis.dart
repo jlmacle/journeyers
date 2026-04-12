@@ -4,13 +4,13 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_checked.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized.dart';
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
 /// An error message is displayed if a straight double quote is entered in the text field.
 /// Also, the straight double quote is automatically removed from the text field.
-class TextFieldCheckedAndPadded extends StatefulWidget 
+class TextFieldSanitizedAndPaddedForCA extends StatefulWidget 
 {
   /// If the text field maintains state, when the CustomCheckBoxWithTextField instance is unchecked for example.
   final bool maintainState;
@@ -61,7 +61,7 @@ class TextFieldCheckedAndPadded extends StatefulWidget
   /// The bottom padding for the text field.
   final double paddingBottom;
 
-  const TextFieldCheckedAndPadded
+  const TextFieldSanitizedAndPaddedForCA
   ({
     super.key,
     this.maintainState = true,
@@ -83,12 +83,12 @@ class TextFieldCheckedAndPadded extends StatefulWidget
   });
 
   @override
-  State<TextFieldCheckedAndPadded> createState() => _TextFieldCheckedAndPaddedState();
+  State<TextFieldSanitizedAndPaddedForCA> createState() => _TextFieldSanitizedAndPaddedForCAState();
 }
 
-class _TextFieldCheckedAndPaddedState extends State<TextFieldCheckedAndPadded> 
+class _TextFieldSanitizedAndPaddedForCAState extends State<TextFieldSanitizedAndPaddedForCA> 
 {
-  final GlobalKey<_TextFieldCheckedAndPaddedState> textFieldBeforeErrorMessageKey = GlobalKey();
+  final GlobalKey<_TextFieldSanitizedAndPaddedForCAState> textFieldBeforeErrorMessageKey = GlobalKey();
   TextEditingController textFieldEditingController = .new();
 
   @override
@@ -113,7 +113,7 @@ class _TextFieldCheckedAndPaddedState extends State<TextFieldCheckedAndPadded>
     (
       padding: EdgeInsets.only(left: widget.paddingLeft, right: widget.paddingRight, bottom: widget.paddingBottom, top: widget.paddingTop),
       child: 
-      TextFieldChecked
+      TextFieldSanitized
       (
         key: textFieldBeforeErrorMessageKey,
         stringSanitizerBundlesErrorsMap: widget.stringSanitizerBundlesErrorsMap,
