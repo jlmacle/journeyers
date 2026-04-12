@@ -24,7 +24,7 @@ Text field counters utils.
 
 <br>
 
-# Project specific utils
+# Project-specific utils
 ## CSV utils
 Code used to export the context analysis data to CSV, or to import data from CSV.
 

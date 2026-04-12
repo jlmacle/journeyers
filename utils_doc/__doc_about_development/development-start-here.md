@@ -119,7 +119,7 @@ you can fix the issue(s) by replacing '\\' by '/' in the Python file(s) that is/
 ### Generic utils
 [lib/utils/generic](../../lib/utils/generic) contains non project-specific utils.
 
-### Project specific utils
+### Project-specific utils
 [lib/utils/project_specific](../../lib/utils/project_specific) contains project-specific utils.
 
 <br>

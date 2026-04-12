@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
-/// {@category Utils - Project specific}
+/// {@category Utils - Project-specific}
 /// A project-specific utility class related to user preferences.
 class RunTimeDataUtils 
 {  
