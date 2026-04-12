@@ -42,7 +42,7 @@ class TextFieldChecked extends StatefulWidget
 
   /// A map with functions as keys, and error messages as values.
   /// The functions return true on a valid input, and false on an invalid input.
-  final Map<StringSanitizerBundle, String> blockingFunctionsErrorMessagesMapping;
+  final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap;
 
   const TextFieldChecked
   ({
@@ -56,7 +56,7 @@ class TextFieldChecked extends StatefulWidget
     this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.presentCounter,
     required this.valueSubmittedCallbackFunction,
-    required this.blockingFunctionsErrorMessagesMapping    
+    required this.stringSanitizerBundlesErrorsMap    
   });
 
   @override

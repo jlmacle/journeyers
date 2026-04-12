@@ -146,7 +146,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
             child: 
             TextFieldCheckedAndPadded
             (
-              blockingFunctionsErrorMessagesMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA,
+              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA,
               textFieldStartValue: _textFieldValue,
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: widget.textFieldHint,

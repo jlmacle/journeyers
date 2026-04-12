@@ -24,7 +24,7 @@ void main() {
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageStyle: analysisTextFieldErrorStyle,
               valueSubmittedCallbackFunction: (_) {},
-              blockingFunctionsErrorMessagesMapping: const {},
+              stringSanitizerBundlesErrorsMap: const {},
             ),
           ),
         ),
@@ -51,7 +51,7 @@ void main() {
               errorMessageKey: errorKey,
               errorMessageStyle: analysisTextFieldErrorStyle,
               valueSubmittedCallbackFunction: (_) {},
-              blockingFunctionsErrorMessagesMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
+              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
             ),
           ),
         ),
@@ -79,7 +79,7 @@ void main() {
               errorMessageKey: errorKey,
               errorMessageStyle: analysisTextFieldErrorStyle,
               valueSubmittedCallbackFunction: (val) => submittedValue = val,
-              blockingFunctionsErrorMessagesMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
+              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
             ),
           ),
         ),
