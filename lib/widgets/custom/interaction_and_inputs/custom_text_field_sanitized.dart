@@ -11,7 +11,7 @@ import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.d
 /// {@category Custom widgets}
 /// A text field that checks the entered value with different functions,
 /// and prevents the value from being submitted, in any of the functions returns true.
-class TextFieldChecked extends StatefulWidget 
+class TextFieldSanitized extends StatefulWidget 
 {
   /// The style for the text field.
   final TextStyle textFieldStyle;
@@ -44,7 +44,7 @@ class TextFieldChecked extends StatefulWidget
   /// The functions return true on a valid input, and false on an invalid input.
   final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap;
 
-  const TextFieldChecked
+  const TextFieldSanitized
   ({
     super.key,
     required this.textFieldStyle,
@@ -60,15 +60,15 @@ class TextFieldChecked extends StatefulWidget
   });
 
   @override
-  State<TextFieldChecked> createState() => _TextFieldCheckedState();
+  State<TextFieldSanitized> createState() => _TextFieldSanitizedState();
 }
 
-class _TextFieldCheckedState extends State<TextFieldChecked> 
+class _TextFieldSanitizedState extends State<TextFieldSanitized> 
 {
   bool submitIsBlocked = false;  
 
   // Useful for automatic scrolling
-  final GlobalKey<_TextFieldCheckedState> textFieldKey = GlobalKey();
+  final GlobalKey<_TextFieldSanitizedState> textFieldKey = GlobalKey();
 
   TextEditingController textFieldEditingController = .new();
   String _errorMessageForDoubleQuotes = "";
@@ -112,14 +112,16 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
             // Getting the info from the record
             bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
             // Adding the sanitizing function to the list for later sanitizing
-            if (shouldStringBeSanitized) sanitizingFunctionsReturnedTrueList.add(recordResult.sanitizingFunction);
+            if (shouldStringBeSanitized) 
+            {
+              sanitizingFunctionsReturnedTrueList.add(recordResult.sanitizingFunction);
+              if (textFieldDebugging) pu.printd("Text Field: Added to sanitizingFunctionsReturnedTrueList: ${stringSanitizerBundle.toString()}");
+            }
             return shouldStringBeSanitized;
           }
         )
         ) 
     {
-      // TO MODIFY
-      if (textFieldDebugging) pu.printd("Text Field: Straight quote or a found.");
 
       // Blocking the submit
       submitIsBlocked = true;
