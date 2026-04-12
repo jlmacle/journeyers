@@ -70,7 +70,6 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
   final GlobalKey<_TextFieldCheckedState> textFieldKey = GlobalKey();
 
   TextEditingController textFieldEditingController = .new();
-  bool _wasCharacterReplacedAtPreviousTyping = false;
   String _errorMessageForDoubleQuotes = "";
 
   @override
@@ -96,33 +95,38 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
 
   // The method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display.
-  Future<void> quoteAndLineReturnCheck(value) async
+  Future<void> userInputHandling(value) async
   {
-    // Case where a quote is found
+    // Does the user input needs sanitization and does the submit needs to be blocked?
+
+    // Yes, because a blocking function returned true
     if (TextFieldUtils.containsStraightQuote(value)) 
     {
       if (textFieldDebugging) pu.printd("Text Field: Straight quote or line return found.");
 
+      // Blocking the submit
+      submitIsBlocked = true;
+      if (textFieldDebugging) pu.printd("Text Field: submitIsBlocked: $submitIsBlocked");
+
+      // Sanitizing the input
       // DESIGN NOTES: after research, 
       // it seems that only straight double quote are used to delimit text when importing CSV files
       var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, '');
-
       if (textFieldDebugging) pu.printd("Text Field: cleanedValue: $cleanedValue");
-
-      _wasCharacterReplacedAtPreviousTyping = true;
    
       setState(() 
       {
-        // Updates the text editing controller's text
+        // Updating the text editing controller's text with the sanitized input
         textFieldEditingController.text = cleanedValue;
 
-        // Updates the error message
+        // Letting the user know that the input was sanitized
       _errorMessageForDoubleQuotes = TextFieldUtils.containsStraightQuoteError;  
       });       
 
-      // Scrolling for better error message viewing
+      // Scrolling for better error message communication to the user
       await _scrollForBetterErrorViewing();
 
+      // Screen reader voicing
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
       // The default mode is Assertiveness.polite."
@@ -134,43 +138,28 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
         View.of(context), _errorMessageForDoubleQuotes, 
         TextDirection.ltr, assertiveness: Assertiveness.assertive
       );
-      // Updates the parental widget information on the text content
-      if (!submitIsBlocked) {
-        widget.valueSubmittedCallbackFunction(cleanedValue);
-      }
-    
+
+      // Updating the parental widget information with the sanitized value
+      // Un-related to onSubmit
+      widget.valueSubmittedCallbackFunction(cleanedValue);
+
+      // Unblocking the submit
+      submitIsBlocked = false;
     } 
-    // Case where no quote was found. 
-    // Sub-cases: a previous character deletion, or not
+
+    // No, because no blocking function returned true
     else 
     {
-      // A previous character deletion
-      if (_wasCharacterReplacedAtPreviousTyping)
+      if (textFieldDebugging) pu.printd("Text Field: No sanitizing needed: value: $value");
+
+      // Removing the error message
+      setState(() 
       {
-        // Updating the error message and the UI 
-        setState(() 
-        {
-          _errorMessageForDoubleQuotes = "";        
-        });
+        _errorMessageForDoubleQuotes = "";        
+      });
 
-        // Parental state variable updated
-        if (!submitIsBlocked) {
-          widget.valueSubmittedCallbackFunction(value);
-        }       
-
-        // Case where no quote was found.
-        _wasCharacterReplacedAtPreviousTyping = false;
-      }
-
-      // No previous character deletion
-      else 
-      {
-        _wasCharacterReplacedAtPreviousTyping = false; 
-        if (!submitIsBlocked) {
-          widget.valueSubmittedCallbackFunction(value);
-        }
-
-      }      
+      // Updating the parental widget information with the value
+      widget.valueSubmittedCallbackFunction(value);
     }
   }
 
@@ -180,24 +169,9 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
     submitIsBlocked = false;
 
     if (textFieldDebugging) pu.printd("Text Field: onChanged: submitIsBlocked: $submitIsBlocked");
-    // Blocking the submit function is necessary
-    for (final blockingFunction in widget.blockingFunctionsErrorMessagesMapping.keys)
-    {
-      if (blockingFunction(newValue))
-      {        
-        // Blocking the submit
-        submitIsBlocked = true;
-
-        // Rendering the error message
-        setState(() {
-          _errorMessageForDoubleQuotes = widget.blockingFunctionsErrorMessagesMapping[blockingFunction]!;
-        });
-      }
-    }
-    if (textFieldDebugging) pu.printd("Text Field: after String validators: submitIsBlocked: $submitIsBlocked");
-
+    
     // Checking the characters, and resetting the error message if relevant
-    await quoteAndLineReturnCheck(newValue);
+    await userInputHandling(newValue);
   }
 
   onSubmitted(String newValue)
