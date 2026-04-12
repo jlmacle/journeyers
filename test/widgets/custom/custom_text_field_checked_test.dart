@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_checked.dart';
 
 
 void main() {
   const errorKey = Key('error_msg_key');
-  const errorMsgIsEmpty = 'Text should not be empty';
-  const textNonEmpty = 'Non empty text';
-
-  // Blocking functions examples
-  bool isEmpty(String value) => value.isEmpty; // Returns true (blocked) if empty
-
+  const textWithQuote = '"Tomorrow';
+  const textValid = 'Yesterday';
+  
   group('TextFieldChecked Tests', () {
     testWidgets('Should display no initial error', (WidgetTester tester) async {
       await tester.pumpWidget(
@@ -41,6 +39,31 @@ void main() {
       expect(errorTextWidget.data, equals(""));
     });
 
+    testWidgets('Should show error message when a sanitizing function returns true', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TextFieldChecked(
+              textFieldStyle: analysisTextFieldStyle,
+              textFieldHint: textFieldHint,
+              textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageKey: errorKey,
+              errorMessageStyle: analysisTextFieldErrorStyle,
+              valueSubmittedCallbackFunction: (_) {},
+              blockingFunctionsErrorMessagesMapping: TextFieldUtils.stringSanitizerBundlesErrorsMap
+            ),
+          ),
+        ),
+      );
+
+      // Entering 1 character to trigger "containsStraightQuote"
+      await tester.enterText(find.byType(TextField), textWithQuote);
+      await tester.pumpAndSettle();
+
+      // Verifying error message is rendered
+      expect(find.text(TextFieldUtils.containsAStraightQuoteError), findsOneWidget);
+    });
+
 
     testWidgets('Should call valueSubmittedCallbackFunction if input is valid', (WidgetTester tester) async {
       String submittedValue = "";
@@ -55,20 +78,18 @@ void main() {
               errorMessageKey: errorKey,
               errorMessageStyle: analysisTextFieldErrorStyle,
               valueSubmittedCallbackFunction: (val) => submittedValue = val,
-              blockingFunctionsErrorMessagesMapping: {
-                isEmpty: errorMsgIsEmpty,
-              },
+              blockingFunctionsErrorMessagesMapping: TextFieldUtils.stringSanitizerBundlesErrorsMap
             ),
           ),
         ),
       );
 
       // Entering valid text
-      await tester.enterText(find.byType(TextField), textNonEmpty);
+      await tester.enterText(find.byType(TextField), textValid);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
-      expect(submittedValue, equals(textNonEmpty));
+      expect(submittedValue, equals(textValid));
     });
 
   });

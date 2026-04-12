@@ -6,6 +6,8 @@ import 'package:journeyers/utils/generic/dev/type_defs.dart';
 /// A generic utility class related to text fields.
 class TextFieldUtils
  {
+  //*********************  COUNTERS  *********************//
+
   // https://api.flutter.dev/flutter/material/InputCounterWidgetBuilder.html
   /// A counter displaying no data.
   static Widget? absentCounter(
@@ -27,26 +29,57 @@ class TextFieldUtils
     return Text('$currentLength/$maxLength');
   }
 
+//*********************  CHARS TO BE REMOVED  *********************//
+
   /// A String for the type of quote to be removed 
   static String quoteChar = '"';
 
-  /// A String validator searching for straight quotes.
-  static bool containsStraightQuote(String value) => value.contains(quoteChar);
+//*********************  STRING SANITIZER BUNDLES AND ERROR MESSAGES *********************//
+  /// A StringSanitizerBundle sanitizing straight quotes.
+  static 
+  ({
+    bool shouldStringBeSanitized, 
+    dynamic Function(dynamic) sanitizingFunction
+  }) 
+  containsAStraightQuote(String value) => 
+  (
+    shouldStringBeSanitized: value.contains(quoteChar), 
+    sanitizingFunction: (value) => value.replaceAll(quoteChar, '')
+  );
 
   /// An error message displayed if containsStraightQuote returns true.
-  static const String containsStraightQuoteError = 
+  static const String containsAStraightQuoteError = 
   'Straight double quotes\n'
   'are removed from the text typed\n'
   'for CSV-export reasons.\nWith apologies.';
 
-  /// A String validator searching for line returns.
-  static bool containsLineReturn(String value) => value.contains('\n');
+  /// A StringSanitizerBundle sanitizing dots.
+  static 
+  ({
+    bool shouldStringBeSanitized, 
+    dynamic Function(dynamic) sanitizingFunction
+  }) 
+  containsADot(String value) => 
+  (
+    shouldStringBeSanitized: value.contains('.'), 
+    sanitizingFunction: (value) => value.replaceAll('.', '')
+  );
 
-  /// A map with functions as keys, and error messages as values.
-  /// The functions return true on a valid input,
-  /// and false on an invalid input.
-  static const Map<StringValidator, String> quoteAndLineReturnValidatorsErrorsMap = 
+  /// An error message displayed if containsADot returns true.
+  static const String containsADotError = 
+  'Dots are removed,\n'
+  'as no extension should be entered\n'
+  'in the file name.';
+ 
+
+  //*********************  MAP WITH STRING SANITIZER BUNDLES AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
+  
+  /// A map with String sanitizer bundles as keys, and error messages as values.
+  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap = 
   {
-    containsStraightQuote : containsStraightQuoteError
-  };
+    containsAStraightQuote : containsAStraightQuoteError,
+    containsADot : containsADotError
+  };  
+
+  
 }

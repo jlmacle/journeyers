@@ -234,7 +234,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   ),
                 const TextFieldCheckedAndPadded
                 (
-                  blockingFunctionsErrorMessagesMapping: TextFieldUtils.quoteAndLineReturnValidatorsErrorsMap,
+                  blockingFunctionsErrorMessagesMapping: TextFieldUtils.stringSanitizerBundlesErrorsMap,
                   textFieldStyle: analysisTextFieldStyle,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
                   textFieldHintStyle: analysisTextFieldHintStyle,
@@ -293,7 +293,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   const TextFieldCheckedAndPadded
                   (
                     textFieldHint: pleaseDescribeTextGroupsHint,
-                    blockingFunctionsErrorMessagesMapping: TextFieldUtils.quoteAndLineReturnValidatorsErrorsMap,
+                    blockingFunctionsErrorMessagesMapping: TextFieldUtils.stringSanitizerBundlesErrorsMap,
                     textFieldStyle: analysisTextFieldStyle,
                     textFieldHintStyle: analysisTextFieldHintStyle,
                     errorMessageStyle: analysisTextFieldErrorStyle,
