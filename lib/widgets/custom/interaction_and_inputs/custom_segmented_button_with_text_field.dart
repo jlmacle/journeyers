@@ -151,7 +151,7 @@ class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButt
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: widget.textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
-              errorMessageStyle: analysisTextFieldErrorStyle,
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
               parentTextFieldValueCallBackFunction: 
                 (String text)
                 {

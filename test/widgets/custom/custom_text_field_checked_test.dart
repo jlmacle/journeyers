@@ -22,7 +22,7 @@ void main() {
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
-              errorMessageStyle: analysisTextFieldErrorStyle,
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
               valueSubmittedCallbackFunction: (_) {},
               stringSanitizerBundlesErrorsMap: const {},
             ),
@@ -49,7 +49,7 @@ void main() {
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageKey: errorKey,
-              errorMessageStyle: analysisTextFieldErrorStyle,
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
               valueSubmittedCallbackFunction: (_) {},
               stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
             ),
@@ -77,7 +77,7 @@ void main() {
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageKey: errorKey,
-              errorMessageStyle: analysisTextFieldErrorStyle,
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
               valueSubmittedCallbackFunction: (val) => submittedValue = val,
               stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
             ),

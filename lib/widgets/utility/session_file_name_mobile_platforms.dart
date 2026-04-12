@@ -221,7 +221,8 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
       decoration: InputDecoration
       (
           hint: Center(child: Text(textAlign: TextAlign.center,'Please add the file name, without ${widget.fileExtension}, here.', style: analysisTextFieldHintStyle)),
-          error: Center(key: errorMessageKey, child: Text(textAlign: TextAlign.center, _errorMessageForFileName , style: analysisTextFieldErrorStyle)),
+          // TODO: to clean
+          error: Center(key: errorMessageKey, child: Text(textAlign: TextAlign.center, _errorMessageForFileName , style: analysisTextFieldErrorMessageStyle)),
           errorMaxLines: 3
       ),
       textAlign: TextAlign.center,

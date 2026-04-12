@@ -122,7 +122,7 @@ class CustomCheckBoxWithTextFieldState extends State<CustomCheckBoxWithTextField
             textFieldStyle: analysisTextFieldStyle,
             textFieldHint: widget.textFieldHint,
             textFieldHintStyle: analysisTextFieldHintStyle,
-            errorMessageStyle: analysisTextFieldErrorStyle,
+            errorMessageStyle: analysisTextFieldErrorMessageStyle,
             textFieldMinLines: widget.textFieldMinLines,
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
