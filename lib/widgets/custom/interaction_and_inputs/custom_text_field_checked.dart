@@ -6,6 +6,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
 
 /// {@category Custom widgets}
 /// A text field that checks the entered value with different functions,
@@ -101,7 +102,7 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
 
     // Yes, because a blocking function returned true
     List<Function> sanitizingFunctionsReturnedTrueList = [];
-    if (TextFieldUtils.stringSanitizerBundlesErrorsMap
+    if (tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMap
         .keys
         .any
         (
