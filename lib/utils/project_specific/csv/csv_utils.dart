@@ -12,7 +12,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_export.dart";
 
-/// {@category Utils - Project specific}
+/// {@category Utils - Project-specific}
 /// A project-specific utility class related to CSV.
 class CSVUtils 
 {
