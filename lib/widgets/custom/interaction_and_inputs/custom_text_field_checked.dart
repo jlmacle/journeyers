@@ -41,7 +41,7 @@ class TextFieldChecked extends StatefulWidget
 
   /// A map with functions as keys, and error messages as values.
   /// The functions return true on a valid input, and false on an invalid input.
-  final Map<StringValidator, String> blockingFunctionsErrorMessagesMapping;
+  final Map<StringSanitizerBundle, String> blockingFunctionsErrorMessagesMapping;
 
   const TextFieldChecked
   ({
@@ -100,9 +100,25 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
     // Does the user input needs sanitization and does the submit needs to be blocked?
 
     // Yes, because a blocking function returned true
-    if (TextFieldUtils.containsStraightQuote(value)) 
+    List<Function> sanitizingFunctionsReturnedTrueList = [];
+    if (TextFieldUtils.stringSanitizerBundlesErrorsMap
+        .keys
+        .any
+        (
+          (stringSanitizerBundle)
+          {
+            var recordResult = stringSanitizerBundle(value);
+            // Getting the info from the record
+            bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
+            // Adding the sanitizing function to the list for later sanitizing
+            if (shouldStringBeSanitized) sanitizingFunctionsReturnedTrueList.add(recordResult.sanitizingFunction);
+            return shouldStringBeSanitized;
+          }
+        )
+        ) 
     {
-      if (textFieldDebugging) pu.printd("Text Field: Straight quote or line return found.");
+      // TO MODIFY
+      if (textFieldDebugging) pu.printd("Text Field: Straight quote or a found.");
 
       // Blocking the submit
       submitIsBlocked = true;
@@ -111,7 +127,15 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
       // Sanitizing the input
       // DESIGN NOTES: after research, 
       // it seems that only straight double quote are used to delimit text when importing CSV files
-      var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, '');
+      // var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, '');
+      // Going through the list of sanitizing functions
+      var cleanedValue = value;
+      for (final sanitizingFunction in sanitizingFunctionsReturnedTrueList)
+      {
+          // Looping the cleaning
+          cleanedValue = sanitizingFunction(cleanedValue);
+      }
+
       if (textFieldDebugging) pu.printd("Text Field: cleanedValue: $cleanedValue");
    
       setState(() 
@@ -120,7 +144,7 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
         textFieldEditingController.text = cleanedValue;
 
         // Letting the user know that the input was sanitized
-      _errorMessageForDoubleQuotes = TextFieldUtils.containsStraightQuoteError;  
+      _errorMessageForDoubleQuotes = TextFieldUtils.containsAStraightQuoteError;  
       });       
 
       // Scrolling for better error message communication to the user
@@ -169,7 +193,7 @@ class _TextFieldCheckedState extends State<TextFieldChecked>
     submitIsBlocked = false;
 
     if (textFieldDebugging) pu.printd("Text Field: onChanged: submitIsBlocked: $submitIsBlocked");
-    
+
     // Checking the characters, and resetting the error message if relevant
     await userInputHandling(newValue);
   }

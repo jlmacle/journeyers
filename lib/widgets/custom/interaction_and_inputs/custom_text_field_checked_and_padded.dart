@@ -44,7 +44,7 @@ class TextFieldCheckedAndPadded extends StatefulWidget
 
   /// A map with functions as keys, and error messages as values.
   /// The functions return true on a valid input, and false on an invalid input.
-  final Map<StringValidator, String> blockingFunctionsErrorMessagesMapping;
+  final Map<StringSanitizerBundle, String> blockingFunctionsErrorMessagesMapping;
 
   /// The text field-related callback function for the parent widget.
   final ValueChanged<String> parentTextFieldValueCallBackFunction;
