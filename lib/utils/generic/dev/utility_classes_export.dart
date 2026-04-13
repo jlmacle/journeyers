@@ -9,4 +9,4 @@ final CSVUtils cu = .new();
 final DashboardUtils du = .new();
 final FileUtils fu = .new();
 final PrintUtils pu = .new();
-final RunTimeDataUtils upu = RunTimeDataUtils();
+final RunTimeDataUtils upu = .new();
