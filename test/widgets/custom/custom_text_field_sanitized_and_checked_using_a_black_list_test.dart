@@ -68,7 +68,6 @@ void main() {
       expect(find.text(TextFieldUtils.containsAStraightQuoteError), findsOneWidget);
     });
 
-
     testWidgets('Should call valueSubmittedCallbackFunction if input is valid', (WidgetTester tester) async {
       String submittedValue = "";
 
