@@ -8,5 +8,5 @@ import 'package:journeyers/utils/project_specific/csv/csv_utils.dart';
 final CSVUtils cu = .new();
 final DashboardUtils du = .new();
 final FileUtils fu = .new();
-final PrintUtils pu = PrintUtils();
+final PrintUtils pu = .new();
 final RunTimeDataUtils upu = RunTimeDataUtils();
