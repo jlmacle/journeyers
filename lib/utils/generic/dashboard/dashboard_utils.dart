@@ -219,8 +219,7 @@ class DashboardUtils {
     {result = await _platformIOS.invokeMethod('listFiles');}    
 
     List<String> retrievedFileNames = result.cast<String>();
-    // Verifying that the lists are different
-    if(retrievedFileNames. )
+
 
     // Updating currentListOfStoredFileNames
     currentListOfStoredFileNames = retrievedFileNames;
