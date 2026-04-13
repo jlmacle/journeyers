@@ -8,6 +8,6 @@ typedef StringSanitizerBundle =
 }) 
 Function(String);
 
-/// An async function that returns a true if a String should be blocked,
+/// An async function that returns true if a String should be blocked.
 typedef BlacklistingFunction = 
 bool Function(String value);
