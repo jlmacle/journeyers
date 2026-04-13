@@ -77,6 +77,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
   TextEditingController textFieldEditingController = .new();
   String _errorMessage = "";
+  // A field used to store if sanitizing was done
+  // Need to have a sanitizing error message displayed for long enough before blacklisting check.
   bool wasStringSanitized = false;
 
   @override
