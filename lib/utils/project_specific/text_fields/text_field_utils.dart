@@ -28,6 +28,4 @@ class TextFieldUtils
   {
     tfu_gen.TextFieldUtils.fileNameAlreadyUsed : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
   }; 
-
-
 }
