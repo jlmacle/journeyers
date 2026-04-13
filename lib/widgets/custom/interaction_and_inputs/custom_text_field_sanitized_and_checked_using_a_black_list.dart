@@ -122,6 +122,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
             // Adding the sanitizing function to the list for later sanitizing
             if (shouldStringBeSanitized) 
             {
+              // Storing to add a delay, for the error message to be displayed long enough to be read
               wasStringSanitized = true; 
 
               bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
