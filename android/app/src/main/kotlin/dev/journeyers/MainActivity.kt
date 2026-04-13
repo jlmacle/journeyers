@@ -13,6 +13,8 @@ package dev.journeyers
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.provider.DocumentsContract
+import android.util.Log
 import androidx.documentfile.provider.DocumentFile
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -27,6 +29,9 @@ import java.io.InputStreamReader
 class MainActivity: FlutterActivity() {
     // Method channel identifier used for communication between Flutter and native code
     private val CHANNEL = "dev.journeyers/saf"
+
+    // Log tag
+    private val TAG = "MainActivity"
     
     // SharedPreferences key for storing user preferences
     private val PREFS_NAME = "FlutterSharedPreferences"
@@ -101,16 +106,62 @@ class MainActivity: FlutterActivity() {
         val treeUri = Uri.parse(uriString)
 
         return try {
-            // Gets the root document from the stored tree URI
-            val rootDoc = DocumentFile.fromTreeUri(this, treeUri)
-            
-            // listFiles() returns an array of DocumentFile objects in the directory
-            val files = rootDoc?.listFiles()
-            
-            // Filters out directories and maps to names
-            files?.filter { it.isFile }?.mapNotNull { it.name } ?: emptyList()
+            // Builds the children URI directly from the tree document ID.
+            // This bypasses DocumentFile entirely and goes straight to the
+            // ContentResolver, giving us access to COLUMN_DOCUMENT_ID which
+            // the ExternalStorageProvider never sanitises for trash state.
+            val rootDocumentId = DocumentsContract.getTreeDocumentId(treeUri)
+            val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
+                treeUri,
+                rootDocumentId
+            )
+
+            val projection = arrayOf(
+                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                DocumentsContract.Document.COLUMN_MIME_TYPE
+            )
+
+            val names = mutableListOf<String>()
+
+            contentResolver.query(
+                childrenUri,
+                projection,
+                null,
+                null,
+                null
+            )?.use { cursor ->
+                val nameCol = cursor.getColumnIndexOrThrow(
+                    DocumentsContract.Document.COLUMN_DISPLAY_NAME
+                )
+                val idCol = cursor.getColumnIndexOrThrow(
+                    DocumentsContract.Document.COLUMN_DOCUMENT_ID
+                )
+                val mimeCol = cursor.getColumnIndexOrThrow(
+                    DocumentsContract.Document.COLUMN_MIME_TYPE
+                )
+
+                while (cursor.moveToNext()) {
+                    // Skips directories — MIME_TYPE_DIR is the SAF constant
+                    // for folder entries and must never appear in the result.
+                    val mime = cursor.getString(mimeCol)
+                    if (mime == DocumentsContract.Document.MIME_TYPE_DIR) continue
+
+                    // The document ID encodes the physical path on disk.
+                    // ExternalStorageProvider prefixes trashed files with
+                    // ".trashed-{timestamp}-" at the filesystem level but
+                    // strips that prefix from COLUMN_DISPLAY_NAME, so we
+                    // must inspect the ID to detect the real state.
+                    val documentId = cursor.getString(idCol)
+                    if (documentId.contains(".trashed", ignoreCase = true)) continue
+
+                    names.add(cursor.getString(nameCol))
+                }
+            }
+
+            names
         } catch (e: Exception) {
-            println("Error listing files: ${e.message}")
+            Log.e(TAG, "Error listing files: ${e.message}", e)
             emptyList()
         }
     }
