@@ -10,7 +10,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 
 /// {@category Utils - Generic}
-/// A project-specific utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
+/// A generic utility class related to the context analyses dashboard, and to the group problem-solvings dashboard.
 class DashboardUtils {
 
   /// String used to communicate the context of the context analyses.
@@ -218,9 +218,14 @@ class DashboardUtils {
     else
     {result = await _platformIOS.invokeMethod('listFiles');}    
 
-    List<String> storedFileNames = result.cast<String>();
-    if (sessionDataDebug) pu.printd("Session Data: storedFileNames: $storedFileNames");
+    List<String> retrievedFileNames = result.cast<String>();
+    // Verifying that the lists are different
+    if(retrievedFileNames. )
 
-    return storedFileNames;
+    // Updating currentListOfStoredFileNames
+    currentListOfStoredFileNames = retrievedFileNames;
+    if (sessionDataDebug) pu.printd("Session Data: storedFileNames: $retrievedFileNames");
+
+    return retrievedFileNames;
   }
 }
