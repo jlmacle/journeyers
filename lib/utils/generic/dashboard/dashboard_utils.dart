@@ -219,7 +219,13 @@ class DashboardUtils {
     {result = await _platformIOS.invokeMethod('listFiles');}    
 
     List<String> retrievedFileNames = result.cast<String>();
-
+    // Verifying that the lists are different, while not empty
+    if (cu.areListsEqualSets(currentListOfStoredFileNames, retrievedFileNames) && currentListOfStoredFileNames.isNotEmpty)
+    {
+      pu.printd("Error: retrievedFileNames and currentListOfStoredFileNames have the same elements.");
+      pu.printd("Error: currentListOfStoredFileNames: $currentListOfStoredFileNames");
+      pu.printd("Error: retrievedFileNames: $retrievedFileNames");
+    }
 
     // Updating currentListOfStoredFileNames
     currentListOfStoredFileNames = retrievedFileNames;
