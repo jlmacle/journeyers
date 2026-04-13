@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
@@ -101,5 +100,4 @@ class TextFieldUtils
   {
     TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.textBlacklistedError
   };
-
 }
