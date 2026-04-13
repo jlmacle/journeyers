@@ -5,7 +5,9 @@ class CollectionsUtils
   /// Method used to test that two lists have identical sets of elements
   bool areListsEqualSets(List list1, List list2) 
   {
-    return Set.from(list1).difference(Set.from(list2)).isEmpty;
+    final set1 = Set.from(list1);
+    final set2 = Set.from(list2);
+    return set1.difference(set2).isEmpty && set2.difference(set1).isEmpty;
   }
 
 }
