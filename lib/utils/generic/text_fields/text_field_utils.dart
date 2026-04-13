@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/type_defs.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+
 /// {@category Utils - Generic}
 /// A generic utility class related to text fields.
 class TextFieldUtils
@@ -69,4 +73,33 @@ class TextFieldUtils
   'as no extension should be entered\n'
   'in the file name.';
   
+  //*********************  BLACKLIST FUNCTIONS AND ERROR MESSAGES *********************//
+
+  /// Method checking if a file name is already used.
+  static bool fileNameAlreadyUsed(String value) 
+  {
+    List<String> currentListOfStoredFileNames = du.currentListOfStoredFileNames;
+    return currentListOfStoredFileNames.contains(value);
+  }
+
+  /// An error message displayed if a file name is already used.
+  static const String fileNameAlreadyUsedError = 
+  'File name not available.\n'
+  'Please use a different file name.';
+
+  /// Simple blacklisting function returning true.
+  static bool simpleBlackistingFunction(String value) 
+  {
+    return true;
+  }
+
+  /// An error message displayed for the simple blacklisting function returning true.
+  static const String textBlacklistedError = "Text is blacklisted";
+
+  //*********************  MAP WITH BLACKLIST FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) *********************//
+  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction = 
+  {
+    TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.textBlacklistedError
+  };
+
 }

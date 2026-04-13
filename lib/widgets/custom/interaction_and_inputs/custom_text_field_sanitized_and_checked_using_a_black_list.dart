@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -6,12 +8,11 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
 
 /// {@category Custom widgets}
 /// A text field that checks the entered value with different functions,
 /// and prevents the value from being submitted, in any of the functions returns true.
-class TextFieldSanitized extends StatefulWidget 
+class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget 
 {
   /// The style for the text field.
   final TextStyle textFieldStyle;
@@ -42,9 +43,12 @@ class TextFieldSanitized extends StatefulWidget
 
   /// A map with functions as keys, and error messages as values.
   /// The functions return true on a valid input, and false on an invalid input.
-  final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap;
+  final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapping;
 
-  const TextFieldSanitized
+  /// A map with blacklisting functions as keys, and error messages as values.
+  final Map<BlacklistingFunction,String> blacklistingFunctionsErrorsMapping;
+
+  const TextFieldSanitizedAndCheckedUsingABlackList
   ({
     super.key,
     required this.textFieldStyle,
@@ -56,22 +60,24 @@ class TextFieldSanitized extends StatefulWidget
     this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.presentCounter,
     required this.valueSubmittedCallbackFunction,
-    required this.stringSanitizerBundlesErrorsMap    
+    required this.stringSanitizerBundlesErrorsMapping,
+    required this.blacklistingFunctionsErrorsMapping  
   });
 
   @override
-  State<TextFieldSanitized> createState() => _TextFieldSanitizedState();
+  State<TextFieldSanitizedAndCheckedUsingABlackList> createState() => _TextFieldSanitizedAndCheckedUsingABlackListState();
 }
 
-class _TextFieldSanitizedState extends State<TextFieldSanitized> 
+class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldSanitizedAndCheckedUsingABlackList> 
 {
   bool submitIsBlocked = false;  
 
   // Useful for automatic scrolling
-  final GlobalKey<_TextFieldSanitizedState> textFieldKey = GlobalKey();
+  final GlobalKey<_TextFieldSanitizedAndCheckedUsingABlackListState> textFieldKey = GlobalKey();
 
   TextEditingController textFieldEditingController = .new();
-  String _errorMessageForDoubleQuotes = "";
+  String _errorMessage = "";
+  bool wasStringSanitized = false;
 
   @override
   void dispose() 
@@ -94,35 +100,38 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
     }
   }
 
-  // The method to call to modify the text field value if a " or line return is found
+  // Method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display.
-  Future<void> userInputSanitizing(value) async
+  Future<void> userInputSanitizing(String text) async
   {
     // Does the user input needs sanitization and does the submit needs to be blocked?
 
     // Yes, because a blocking function returned true
-    List<Function> sanitizingFunctionsReturnedTrueList = [];
-    if (tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
+    StringSanitizerBundle? bundleWithSanitizingFunctionThatReturnedTrue;
+    if (widget.stringSanitizerBundlesErrorsMapping
         .keys
         .any
         (
           (stringSanitizerBundle)
           {
-            var recordResult = stringSanitizerBundle(value);
+            var recordResult = stringSanitizerBundle(text);
             // Getting the info from the record
             bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
             // Adding the sanitizing function to the list for later sanitizing
             if (shouldStringBeSanitized) 
             {
-              sanitizingFunctionsReturnedTrueList.add(recordResult.sanitizingFunction);
-              if (textFieldDebugging) pu.printd("Text Field: Added to sanitizingFunctionsReturnedTrueList: ${stringSanitizerBundle.toString()}");
+              wasStringSanitized = true; 
+
+              bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
+              if (textFieldDebugging) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: $bundleWithSanitizingFunctionThatReturnedTrue");
             }
             return shouldStringBeSanitized;
           }
         )
         ) 
     {
-
+      if (textFieldDebugging) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
+      
       // Blocking the submit
       submitIsBlocked = true;
       if (textFieldDebugging) pu.printd("Text Field: submitIsBlocked: $submitIsBlocked");
@@ -132,12 +141,8 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
       // it seems that only straight double quote are used to delimit text when importing CSV files
       // var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, '');
       // Going through the list of sanitizing functions
-      var cleanedValue = value;
-      for (final sanitizingFunction in sanitizingFunctionsReturnedTrueList)
-      {
-          // Looping the cleaning
-          cleanedValue = sanitizingFunction(cleanedValue);
-      }
+      var cleanedValue = text;
+      cleanedValue = bundleWithSanitizingFunctionThatReturnedTrue!(cleanedValue).sanitizingFunction(text);
 
       if (textFieldDebugging) pu.printd("Text Field: cleanedValue: $cleanedValue");
    
@@ -147,8 +152,8 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
         textFieldEditingController.text = cleanedValue;
 
         // Letting the user know that the input was sanitized
-      _errorMessageForDoubleQuotes = TextFieldUtils.containsAStraightQuoteError;  
-      });       
+        _errorMessage = widget.stringSanitizerBundlesErrorsMapping[bundleWithSanitizingFunctionThatReturnedTrue]!;  
+      });    
 
       // Scrolling for better error message communication to the user
       await _scrollForBetterErrorViewing();
@@ -162,7 +167,7 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
       // Doesn't seem effective yet. Left for later. 
       SemanticsService.sendAnnouncement
       (
-        View.of(context), _errorMessageForDoubleQuotes, 
+        View.of(context), _errorMessage, 
         TextDirection.ltr, assertiveness: Assertiveness.assertive
       );
 
@@ -177,16 +182,91 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
     // No, because no blocking function returned true
     else 
     {
-      if (textFieldDebugging) pu.printd("Text Field: No sanitizing needed: value: $value");
+      wasStringSanitized = false; 
+
+      if (textFieldDebugging) pu.printd("Text Field: No sanitizing needed: value: $text");
 
       // Removing the error message
       setState(() 
       {
-        _errorMessageForDoubleQuotes = "";        
+        _errorMessage = "";        
       });
 
       // Updating the parental widget information with the value
-      widget.valueSubmittedCallbackFunction(value);
+      widget.valueSubmittedCallbackFunction(text);
+    }
+  }
+
+
+  Future<void> userInputBlacklistCheck(String text) async
+  {
+    // Does the user input needs to be blacklisted and does the submit needs to be blocked?
+
+    // Yes, because a blacklisting function returned true
+    List<Function> blacklistingFunctionsReturnedTrueList = [];
+    if (widget.blacklistingFunctionsErrorsMapping
+        .keys
+        .any
+        (
+          (blacklistingFunction)
+          {
+            bool shouldStringBeBlocked = blacklistingFunction(text);
+            // Adding the sanitizing function to the list for later sanitizing
+            if (shouldStringBeBlocked) 
+            {
+              blacklistingFunctionsReturnedTrueList.add(blacklistingFunction);
+              if (textFieldDebugging) pu.printd("Text Field: Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}");
+            }
+            return shouldStringBeBlocked;
+          }
+        )
+        ) 
+    {
+      if (textFieldDebugging) pu.printd("Text Field: blacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}");
+      
+      // Blocking the submit
+      submitIsBlocked = true;
+      if (textFieldDebugging) pu.printd("Text Field: submitIsBlocked: $submitIsBlocked");
+   
+      setState(() 
+      {
+        // Letting the user know that the input was blocked
+        _errorMessage = widget.blacklistingFunctionsErrorsMapping[blacklistingFunctionsReturnedTrueList[0]]!;  
+      });       
+
+      // Scrolling for better error message communication to the user
+      await _scrollForBetterErrorViewing();
+
+      // Screen reader voicing
+      // "The assertiveness level of the announcement is determined by assertiveness.
+      // Currently, this is only supported by the web engine and has no effect on other platforms.
+      // The default mode is Assertiveness.polite."
+      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+      // TODO:  TextDirection.ltr: code to modify for l10n
+      // Doesn't seem effective yet. Left for later. 
+      SemanticsService.sendAnnouncement
+      (
+        View.of(context), _errorMessage, 
+        TextDirection.ltr, assertiveness: Assertiveness.assertive
+      );
+
+      // Keeping the input blocked until new onChanged check
+      // No need to update the parental widget
+    } 
+
+    // No, because no blacklisting function returned true
+    else 
+    {
+      if (textFieldDebugging) pu.printd("Text Field: No blacklisting needed: value: $text");
+
+      // Removing the error message
+      setState(() 
+      {
+        _errorMessage = "";        
+      });
+
+      // Updating the parental widget information with the value
+      widget.valueSubmittedCallbackFunction(text);
     }
   }
 
@@ -198,8 +278,12 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
 
     if (textFieldDebugging) pu.printd("Text Field: onChanged: submitIsBlocked: $submitIsBlocked");
 
-    // Checking the characters, and resetting the error message if relevant
+    // Sanitizing the text, and resetting the error message if relevant
     await userInputSanitizing(newValue);
+
+    // Checking if the text is part of a blacklist
+    // await userInputBlacklistCheck(newValue);
+
   }
 
   // Method used for the onSubmitted named parameter
@@ -248,7 +332,7 @@ class _TextFieldSanitizedState extends State<TextFieldSanitized>
             child: Text
             (
               textAlign: TextAlign.center, 
-              _errorMessageForDoubleQuotes, 
+              _errorMessage, 
               style: widget.errorMessageStyle
             )
           ),

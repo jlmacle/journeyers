@@ -4,12 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj; 
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
 
 
 void main() {
   const errorKey = Key('error_msg_key');
   const textWithQuote = '"Tomorrow';
+  const fileNameBlacklisted = "a.csv";
   const textValid = 'Yesterday';
   
   group('TextFieldChecked Tests', () {
@@ -17,14 +18,15 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: TextFieldSanitized(
+            body: TextFieldSanitizedAndCheckedUsingABlackList(
               errorMessageKey: errorKey,
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               valueSubmittedCallbackFunction: (_) {},
-              stringSanitizerBundlesErrorsMap: const {},
+              stringSanitizerBundlesErrorsMapping: const {},
+              blacklistingFunctionsErrorsMapping:  const {},
             ),
           ),
         ),
@@ -44,20 +46,21 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: TextFieldSanitized(
+            body: TextFieldSanitizedAndCheckedUsingABlackList(
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageKey: errorKey,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               valueSubmittedCallbackFunction: (_) {},
-              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
+              stringSanitizerBundlesErrorsMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
+             blacklistingFunctionsErrorsMapping: const {},
             ),
           ),
         ),
       );
 
-      // Entering 1 character to trigger "containsStraightQuote"
+      // Entering text to trigger "containsStraightQuote"
       await tester.enterText(find.byType(TextField), textWithQuote);
       await tester.pumpAndSettle();
 
@@ -72,14 +75,15 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: TextFieldSanitized(
+            body: TextFieldSanitizedAndCheckedUsingABlackList(
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageKey: errorKey,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               valueSubmittedCallbackFunction: (val) => submittedValue = val,
-              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA
+              stringSanitizerBundlesErrorsMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
+              blacklistingFunctionsErrorsMapping: const{},
             ),
           ),
         ),

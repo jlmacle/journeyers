@@ -4,7 +4,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
@@ -113,10 +113,10 @@ class _TextFieldSanitizedAndPaddedForCAState extends State<TextFieldSanitizedAnd
     (
       padding: EdgeInsets.only(left: widget.paddingLeft, right: widget.paddingRight, bottom: widget.paddingBottom, top: widget.paddingTop),
       child: 
-      TextFieldSanitized
+      TextFieldSanitizedAndCheckedUsingABlackList
       (
         key: textFieldBeforeErrorMessageKey,
-        stringSanitizerBundlesErrorsMap: widget.stringSanitizerBundlesErrorsMap,
+        stringSanitizerBundlesErrorsMapping: widget.stringSanitizerBundlesErrorsMap,
         textFieldStyle: widget.textFieldStyle,
         textFieldHint: widget.textFieldHint,
         textFieldHintStyle: widget.textFieldHintStyle,
@@ -124,7 +124,8 @@ class _TextFieldSanitizedAndPaddedForCAState extends State<TextFieldSanitizedAnd
         textFieldMinLines: widget.textFieldMinLines,
         textFieldMaxLength: widget.textFieldMaxLength,
         textFieldCounter: widget.textFieldCounter,
-        valueSubmittedCallbackFunction: widget.parentTextFieldValueCallBackFunction        
+        valueSubmittedCallbackFunction: widget.parentTextFieldValueCallBackFunction,
+        blacklistingFunctionsErrorsMapping: const {},    
       ),
     );
   }

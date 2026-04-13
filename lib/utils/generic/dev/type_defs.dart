@@ -7,3 +7,7 @@ typedef StringSanitizerBundle =
   dynamic Function(dynamic) sanitizingFunction
 }) 
 Function(String);
+
+/// An async function that returns a true if a String should be blocked,
+typedef BlacklistingFunction = 
+bool Function(String value);

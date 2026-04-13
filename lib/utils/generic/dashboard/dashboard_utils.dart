@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+
 import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/debug_constants.dart';
@@ -18,16 +20,25 @@ class DashboardUtils {
   static const String groupProblemSolvingsContext = "groupProblemSolvingData";
 
   /// The key for the session data title.
-  static String keyTitle = 'title';
+  static const String keyTitle = 'title';
 
   /// The key for the file keywords
-  static String keyKeywords = 'keywords';
+  static const String keyKeywords = 'keywords';
 
   /// The key for the session data date.
-  static String keyDate = 'date';
+  static const String keyDate = 'date';
 
   /// The key for the session data file path.
-  static String keyFilePath = 'filePath';
+  static const String keyFilePath = 'filePath';
+
+  /// The current list of stored file names (for the mobile applications).
+  List<String> currentListOfStoredFileNames = [];  
+
+  //**************** SMARTPHONES CHANNELS ****************//
+  // Android: storage access framework (reading/saving files)
+  static const _platformAndroid = MethodChannel('dev.journeyers/saf');
+  // Android: storage access framework (reading/saving files)
+  static const _platformIOS = MethodChannel('dev.journeyers/iossaf');
 
   /// Method used to retrieve the file with all the dashboard session data, 
   /// either for the context analyses, or for the group problem-solvings.
@@ -195,6 +206,21 @@ class DashboardUtils {
     var savedContent = jsonEncode(allSessionsMetadata);
     await sessionFile.writeAsString(savedContent);
     if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $pathToApplicationSupportDirectory/$fileName");
+  }
 
+  /// Method used to retrieved all the file names, from the user application folder.
+  Future<List<String>> getStoredFileNamesOnMobile() async
+  {
+    // Getting the list of stored file names
+    List<Object?> result;
+    if(Platform.isAndroid)
+    {result = await _platformAndroid.invokeMethod('listFiles');}
+    else
+    {result = await _platformIOS.invokeMethod('listFiles');}    
+
+    List<String> storedFileNames = result.cast<String>();
+    if (sessionDataDebug) pu.printd("Session Data: storedFileNames: $storedFileNames");
+
+    return storedFileNames;
   }
 }
