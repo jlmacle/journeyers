@@ -181,6 +181,9 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
       // refreshing the page
       setState(() {});
     }
+
+    // Updating the file names list
+    List<String> storedFileNames = await du.getStoredFileNamesOnMobile();
   }
 
   //**************** EDITION OF SESSION DATA ****************/

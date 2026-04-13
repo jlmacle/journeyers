@@ -235,7 +235,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   ),
                 const TextFieldSanitizedAndPaddedForCA
                 (
-                  stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA,
+                  stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
                   textFieldStyle: analysisTextFieldStyle,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
                   textFieldHintStyle: analysisTextFieldHintStyle,
@@ -294,7 +294,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   const TextFieldSanitizedAndPaddedForCA
                   (
                     textFieldHint: pleaseDescribeTextGroupsHint,
-                    stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMapForCA,
+                    stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
                     textFieldStyle: analysisTextFieldStyle,
                     textFieldHintStyle: analysisTextFieldHintStyle,
                     errorMessageStyle: analysisTextFieldErrorMessageStyle,

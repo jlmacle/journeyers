@@ -118,6 +118,9 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       // Updating the sessions list UI
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
     }
+
+    // Updating the file names list
+    List<String> storedFileNames = await du.getStoredFileNamesOnMobile();
   }
   
   @override

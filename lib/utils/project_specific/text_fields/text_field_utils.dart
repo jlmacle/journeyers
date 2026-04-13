@@ -9,15 +9,25 @@ class TextFieldUtils
   
   /// A map with String sanitizer bundles as keys, and error messages as values,
   /// for the context analysis text fields.
-  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapForCA = 
+  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMappingForCA = 
   {
     tfu_gen.TextFieldUtils.containsAStraightQuote : tfu_gen.TextFieldUtils.containsAStraightQuoteError,
   };  
 
   /// A map with String sanitizer bundles as keys, and error messages as values,
   /// for the file names used on mobile platforms.
-  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapForFileNames = 
+  static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMappingForFileNames = 
   {
     tfu_gen.TextFieldUtils.containsADot : tfu_gen.TextFieldUtils.containsADotError
   }; 
+
+  //*********************  MAP WITH BLACKLIST FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
+
+  /// A map with blacklisting functions as keys, and error messages as values.
+  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForFileNames = 
+  {
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsed : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
+  }; 
+
+
 }
