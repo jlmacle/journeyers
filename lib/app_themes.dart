@@ -115,6 +115,26 @@ const TextStyle dialogAcknowledgedStyle = TextStyle
   fontSize: 20,
 );
 
+// Text styles: STYLES COMMON TO CONTEXT ANALYSES AND GROUP PROBLEM-SOLVINGS
+const TextStyle commonTextFieldStyle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+
+const TextStyle commonTextFieldHintStyle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+
+const TextStyle commonTextFieldErrorMessageStyle = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+
+
 // Text styles: CONTEXT ANALYSIS PAGE RELATED STYLES
 const TextStyle analysisKeywordsTextStyle = TextStyle
 (
