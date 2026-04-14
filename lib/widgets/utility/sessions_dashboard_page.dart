@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
@@ -183,7 +184,8 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
     }
 
     // Updating the file names list
-    List<String> storedFileNames = await du.getStoredFileNamesOnMobile();
+    await du.getStoredFileNamesOnMobile();
+    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
   }
 
   //**************** EDITION OF SESSION DATA ****************/
