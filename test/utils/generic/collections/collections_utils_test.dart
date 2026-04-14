@@ -25,6 +25,14 @@ void main() {
       expect(cu.areListsEqualSets([1, 2, 3], []), isFalse);
     });
 
+    test('returns false for different sets (3)', () {
+      expect(cu.areListsEqualSets([] , [1, 2, 3]), isFalse);
+    });
+
+    test('returns false for different sets (4)', () {
+      expect(cu.areListsEqualSets([1, 2] , [1, 2, 3]), isFalse);
+    });
+
     test('returns true for empty lists', () {
       expect(cu.areListsEqualSets([], []), isTrue);
     });
