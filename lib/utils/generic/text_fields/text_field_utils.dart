@@ -33,9 +33,13 @@ class TextFieldUtils
 
 //*********************  CHARS AND FILE EXTENSIONS  *********************//
 
-  /// A String for the type of quote to be removed 
-  static const String quoteChar = '"';
+  /// An externalization for the type of quote to be removed.
+  static const String charQuote = '"';
+  /// An externalization for dot.
+  static const String charDot = '.';
+  /// An externalization for ".csv".
   static const String extensionCSV = ".csv";
+  /// An externalization for ".txt".
   static const String extentionTXT = ".txt";
 
 //*********************  STRING SANITIZER BUNDLES AND ERROR MESSAGES *********************//
@@ -47,8 +51,8 @@ class TextFieldUtils
   }) 
   containsAStraightQuote(String value) => 
   (
-    shouldStringBeSanitized: value.contains(quoteChar), 
-    sanitizingFunction: (value) => value.replaceAll(quoteChar, '')
+    shouldStringBeSanitized: value.contains(charQuote), 
+    sanitizingFunction: (value) => value.replaceAll(charQuote, '')
   );
 
   /// An error message displayed if containsAStraightQuote returns true.
@@ -65,8 +69,8 @@ class TextFieldUtils
   }) 
   containsADot(String value) => 
   (
-    shouldStringBeSanitized: value.contains('.'), 
-    sanitizingFunction: (value) => value.replaceAll('.', '')
+    shouldStringBeSanitized: value.contains(charDot), 
+    sanitizingFunction: (value) => value.replaceAll(charDot, '')
   );
 
   /// An error message displayed if containsADot returns true.
