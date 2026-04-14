@@ -50,9 +50,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
-    String? folderPathData = await upu.getApplicationFolderPath();
-    if (Platform.isAndroid || Platform.isIOS)  
-      {if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");}
+        
     // Application folder path called from the Kotlin code    
     setState(() 
     {
@@ -146,14 +144,14 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
       if (Platform.isAndroid) 
       {
         filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
-        // Updating the file names list
+        // Updating the file names list: saveFileOnAndroid
         await du.getStoredFileNamesOnMobile();
         if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
       } 
       else if (Platform.isIOS) 
       {
         filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
-        // Updating the file names list
+        // Updating the file names list: saveFileOniOS
         await du.getStoredFileNamesOnMobile();
         if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
       } 
@@ -167,7 +165,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
           type: FileType.custom,
           allowedExtensions: ['txt'],
         );
-        // Updating the file names list
+        // Updating the file names list: FilePicker.platform.saveFile
         await du.getStoredFileNamesOnMobile();
         if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
       }

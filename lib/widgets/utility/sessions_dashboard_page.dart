@@ -183,7 +183,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
       setState(() {});
     }
 
-    // Updating the file names list
+    // Updating the file names list: _deleteSelectedSession
     await du.getStoredFileNamesOnMobile();
     if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
   }
