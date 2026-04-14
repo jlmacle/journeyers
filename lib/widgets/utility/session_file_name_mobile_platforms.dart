@@ -109,10 +109,10 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     : TextFieldSanitizedAndCheckedUsingABlackList
     (
       textFieldCounter: tfu_gen.TextFieldUtils.absentCounter,
-      textFieldStyle: analysisTextFieldStyle, 
+      textFieldStyle: commonTextFieldStyle , 
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 
-      textFieldHintStyle: analysisTextFieldHintStyle, 
-      errorMessageStyle: analysisTextFieldErrorMessageStyle, 
+      textFieldHintStyle: commonTextFieldHintStyle, 
+      errorMessageStyle: commonTextFieldErrorMessageStyle, 
       valueSubmittedCallbackFunction: widget.fileNameSubmittedCallbackFunction, 
       additionalOnSubmittedInstructions: 
         (String newValue) async
