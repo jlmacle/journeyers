@@ -102,7 +102,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
       await du.saveDashboardMetadata
       (typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, 
       keywords: _keywords, formattedDate: formattedDate, pathToFile: pathToCSVFile);
-      await upu.saveWasSessionDataSaved(value: true, context: DashboardUtils.contextAnalysesContext);
+      await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.contextAnalysesContext);
     }
     
     // Page refreshing for dashboard display

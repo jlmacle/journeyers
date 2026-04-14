@@ -189,7 +189,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
           pathToFile: filePath,
         );
 
-        await upu.saveWasSessionDataSaved(value: true, context: DashboardUtils.groupProblemSolvingsContext);
+        await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.groupProblemSolvingsContext);
 
         widget.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage();
 
