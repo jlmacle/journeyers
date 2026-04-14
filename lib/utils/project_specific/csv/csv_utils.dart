@@ -5,6 +5,7 @@ import "dart:io";
 import "package:flutter/services.dart";
 
 import "package:file_picker/file_picker.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
@@ -520,7 +521,7 @@ class CSVUtils
     required List<List<String>> csvDataGroupPerspective,
     String? fileName
   }) async {
-    String fileExtension = ".csv";
+    String fileExtension = TextFieldUtils.extensionCSV;
     // Complementing the shortest list to have the same length for both lists
     // before printing side to side
     if (csvDataIndividualPerspective.length < csvDataGroupPerspective.length) {

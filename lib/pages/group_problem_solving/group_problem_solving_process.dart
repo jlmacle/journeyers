@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -101,7 +102,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   
   //**************** FILE SAVING related data ****************//
   String fileName = "";
-  String fileExtension = ".txt";
+  String fileExtension = TextFieldUtils.extentionTXT;
 
   // Method used to update the file name value
   void processFileNameUpdate(String value)
@@ -142,11 +143,22 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
 
     try {
       // Platform-specific file saving
-      if (Platform.isAndroid) {
+      if (Platform.isAndroid) 
+      {
         filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
-      } else if (Platform.isIOS) {
+        // Updating the file names list
+        await du.getStoredFileNamesOnMobile();
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+      } 
+      else if (Platform.isIOS) 
+      {
         filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
-      } else {
+        // Updating the file names list
+        await du.getStoredFileNamesOnMobile();
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+      } 
+      else 
+      {
         // Desktop implementation using FilePicker
         filePath = await FilePicker.platform.saveFile(
           dialogTitle: 'Please enter a file name',
@@ -155,6 +167,9 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
           type: FileType.custom,
           allowedExtensions: ['txt'],
         );
+        // Updating the file names list
+        await du.getStoredFileNamesOnMobile();
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
       }
 
       // Save Metadata to Dashboard if file was saved successfully

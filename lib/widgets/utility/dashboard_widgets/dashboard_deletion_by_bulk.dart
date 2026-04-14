@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
@@ -120,7 +121,8 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     }
 
     // Updating the file names list
-    List<String> storedFileNames = await du.getStoredFileNamesOnMobile();
+    await du.getStoredFileNamesOnMobile();
+    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
   }
   
   @override

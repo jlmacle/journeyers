@@ -9,9 +9,10 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 
 void main() {
   const errorKey = Key('error_msg_key');
-  const textWithQuote = '"Tomorrow';
+  const textWithQuote = 'Perse"verance';
+  const textWithDot = '.Legacy';
   const fileNameBlacklisted = "a.csv";
-  const textValid = 'Yesterday';
+  const textValid = 'Context analysis';
   
   group('TextFieldChecked Tests', () {
     testWidgets('Should display no initial error', (WidgetTester tester) async {
@@ -42,7 +43,7 @@ void main() {
       expect(errorTextWidget.data, equals(""));
     });
 
-    testWidgets('Should show error message when a sanitizing function returns true', (WidgetTester tester) async {
+    testWidgets('Should show error message when a sanitizing function (containsAStraightQuote) returns true', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -67,6 +68,60 @@ void main() {
       // Verifying error message is rendered
       expect(find.text(TextFieldUtils.containsAStraightQuoteError), findsOneWidget);
     });
+
+    testWidgets('Should show error message when a sanitizing function (containsADot) returns true', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStyle: analysisTextFieldStyle,
+              textFieldHint: textFieldHint,
+              textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageKey: errorKey,
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
+              valueSubmittedCallbackFunction: (_) {},
+              stringSanitizerBundlesErrorsMapping: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForFileNames,
+              blacklistingFunctionsErrorsMapping: const {},
+            ),
+          ),
+        ),
+      );
+
+      // Entering text to trigger "containsADotError"
+      await tester.enterText(find.byType(TextField), textWithDot);
+      await tester.pumpAndSettle();
+
+      // Verifying error message is rendered
+      expect(find.text(TextFieldUtils.containsADotError), findsOneWidget);
+    });
+
+
+     testWidgets('Should show error message when a blacklist check is positive', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStyle: analysisTextFieldStyle,
+              textFieldHint: textFieldHint,
+              textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageKey: errorKey,
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
+              valueSubmittedCallbackFunction: (_) {},
+              stringSanitizerBundlesErrorsMapping: const {},
+              blacklistingFunctionsErrorsMapping: TextFieldUtils.blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction,
+            ),
+          ),
+        ),
+      );
+
+      // Entering the text to search in the blacklist
+      await tester.enterText(find.byType(TextField), fileNameBlacklisted);
+      await tester.pumpAndSettle();
+
+      // Verifying error message is rendered
+      expect(find.text(TextFieldUtils.textBlacklistedError), findsOneWidget);
+    });
+
 
     testWidgets('Should call valueSubmittedCallbackFunction if input is valid', (WidgetTester tester) async {
       String submittedValue = "";

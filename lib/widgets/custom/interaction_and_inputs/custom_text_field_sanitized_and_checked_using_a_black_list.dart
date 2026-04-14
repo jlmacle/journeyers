@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart';
+import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
@@ -41,6 +42,12 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// A callback function called when submitting the value.
   final ValueChanged<String> valueSubmittedCallbackFunction;
 
+  /// Additional instructions to insert in the onChanged method.
+  final ValueChanged<String> additionalOnChangedInstructions;
+
+  /// Additional instructions to insert in the onSubmit method.
+  final ValueChanged<String> additionalOnSubmittedInstructions;
+
   /// A map with functions as keys, and error messages as values.
   /// The functions return true on a valid input, and false on an invalid input.
   final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapping;
@@ -60,6 +67,8 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.presentCounter,
     required this.valueSubmittedCallbackFunction,
+    this.additionalOnChangedInstructions = placeHolderFunctionString,
+    this.additionalOnSubmittedInstructions = placeHolderFunctionString,
     required this.stringSanitizerBundlesErrorsMapping,
     required this.blacklistingFunctionsErrorsMapping  
   });
@@ -77,14 +86,23 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
   TextEditingController textFieldEditingController = .new();
   String _errorMessage = "";
+  Timer? stringSanitizedErrorTimer;
   // A field used to store if sanitizing was done
   // Need to have a sanitizing error message displayed for long enough before blacklisting check.
   bool wasStringSanitized = false;
 
   @override
+  void initState() {
+    // Cancelling the time if the user modified the input
+    stringSanitizedErrorTimer?.cancel();
+    super.initState();
+  }
+
+  @override
   void dispose() 
   {
     textFieldEditingController.dispose();
+    stringSanitizedErrorTimer?.cancel();
     super.dispose();
   }
 
@@ -185,6 +203,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     // No, because no blocking function returned true
     else 
     {
+      // Re-setting the variable
       wasStringSanitized = false; 
 
       if (textFieldDebugging) pu.printd("Text Field: No sanitizing needed: value: $text");
@@ -199,7 +218,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       widget.valueSubmittedCallbackFunction(text);
     }
   }
-
 
   Future<void> userInputBlacklistCheck(String text) async
   {
@@ -262,12 +280,26 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     {
       if (textFieldDebugging) pu.printd("Text Field: No blacklisting needed: value: $text");
 
-      // Removing the error message
-      setState(() 
+      // Removing the error message, after delay if string was sanitized
+      if (wasStringSanitized) 
       {
-        _errorMessage = "";        
-      });
-
+        if (textFieldDebugging) pu.printd("wasStringSanitized: $wasStringSanitized: Timer started");
+        stringSanitizedErrorTimer = Timer
+        (
+          const Duration(
+            seconds:5), 
+            ()
+            {
+              setState(() { _errorMessage = "";});
+            }
+        );
+      }
+      // Otherwise, resetting the error message
+      else
+      {
+        setState(() {_errorMessage = "";});
+      }
+      
       // Updating the parental widget information with the value
       widget.valueSubmittedCallbackFunction(text);
     }
@@ -285,17 +317,25 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     await userInputSanitizing(newValue);
 
     // Checking if the text is part of a blacklist
-    // await userInputBlacklistCheck(newValue);
+    await userInputBlacklistCheck(newValue);
 
+    // Additional onChanged instructions 
+    widget.additionalOnChangedInstructions(newValue);
   }
 
   // Method used for the onSubmitted named parameter
   onSubmitted(String newValue)
   {
+    // Additional onSubmitted instructions 
+    widget.additionalOnSubmittedInstructions(newValue);
+
     if (textFieldDebugging) pu.printd("Text Field: onSubmitted: submitIsBlocked: $submitIsBlocked");
+    // Data submission if not blocked
     if (!submitIsBlocked) {
       widget.valueSubmittedCallbackFunction(newValue);
     }
+
+    
   }
 
   @override
