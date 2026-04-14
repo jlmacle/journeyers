@@ -11,14 +11,14 @@ class TextFieldUtils
   /// for the context analysis text fields.
   static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMappingForCA = 
   {
-    tfu_gen.TextFieldUtils.containsAStraightQuote : tfu_gen.TextFieldUtils.containsAStraightQuoteError,
+    tfu_gen.TextFieldUtils.containsAStraightQuote : tfu_gen.TextFieldUtils.errorContainsAStraightQuote,
   };  
 
   /// A map with String sanitizer bundles as keys, and error messages as values,
   /// for the file names used on mobile platforms.
   static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMappingForFileNames = 
   {
-    tfu_gen.TextFieldUtils.containsADot : tfu_gen.TextFieldUtils.containsADotError
+    tfu_gen.TextFieldUtils.containsADot : tfu_gen.TextFieldUtils.errorContainsADot
   }; 
 
   //*********************  MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
@@ -26,12 +26,12 @@ class TextFieldUtils
   /// A map with blacklisting functions for CSV files as keys, and error messages as values.
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForCSVFileNames = 
   {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsedCSV : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsedCSV : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
   }; 
 
    /// A map with blacklisting functions for TXT files as keys, and error messages as values.
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForTXTFileNames = 
   {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsedTXT : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsedTXT : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
   }; 
 }

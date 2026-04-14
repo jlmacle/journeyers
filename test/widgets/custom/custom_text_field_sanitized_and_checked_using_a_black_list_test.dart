@@ -66,7 +66,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verifying error message is rendered
-      expect(find.text(TextFieldUtils.containsAStraightQuoteError), findsOneWidget);
+      expect(find.text(TextFieldUtils.errorContainsAStraightQuote), findsOneWidget);
     });
 
     testWidgets('Should show error message when a sanitizing function (containsADot) returns true', (WidgetTester tester) async {
@@ -92,7 +92,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verifying error message is rendered
-      expect(find.text(TextFieldUtils.containsADotError), findsOneWidget);
+      expect(find.text(TextFieldUtils.errorContainsADot), findsOneWidget);
     });
 
 
@@ -119,7 +119,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verifying error message is rendered
-      expect(find.text(TextFieldUtils.textBlacklistedError), findsOneWidget);
+      expect(find.text(TextFieldUtils.errorTextBlacklisted), findsOneWidget);
     });
 
 
