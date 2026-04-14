@@ -86,7 +86,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
       await csvu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
                           csvDataGroupPerspective: csvDataGroupPerspective,
                           fileName: _fileName);
-    // Updating the file names list
+    // Updating the file names list: after printToCSV
     await du.getStoredFileNamesOnMobile();
     if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
     if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");

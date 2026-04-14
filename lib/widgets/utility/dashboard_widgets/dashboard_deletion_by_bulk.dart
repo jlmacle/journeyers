@@ -120,7 +120,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
     }
 
-    // Updating the file names list
+    // Updating the file names list: _deleteSelectedSessions
     await du.getStoredFileNamesOnMobile();
     if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
   }
