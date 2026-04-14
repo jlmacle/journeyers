@@ -158,29 +158,29 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                 (
                   checkboxText: q.level3TitleBalanceIssueItem1,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: _setStudiesHouseholdBalanceCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setStudiesHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_studiesBalance, v),
+                  parentTextFieldValueCallBackFunction: (v) { _studiesBalance.text = v; },
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem2,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: _setAccessingIncomeHouseholdBalanceCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setAccessingIncomeHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_accessingIncomeBalance, v),
+                  parentTextFieldValueCallBackFunction: (v) { _accessingIncomeBalance.text = v; },
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem3,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: _setEarningIncomeHouseholdBalanceCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setEarningIncomedHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_earningIncomeBalance, v),
+                  parentTextFieldValueCallBackFunction: (v) { _earningIncomeBalance.text = v; },
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem4,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: _setHelpingOthersdBalanceCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setHelpingOthersHouseholdBalanceTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_helpingOthersBalance, v),
+                  parentTextFieldValueCallBackFunction: (v) { _helpingOthersBalance.text = v; },
                 ),
                 const Gap(preAndPostLevel3DividerGap),
                 const Divider(thickness: betweenLevel3DividerThickness),
@@ -197,15 +197,15 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem1,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
-                  parentCheckboxValueCallBackFunction: _setMoreAppreciatedAtWorkCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setMoreAppreciatedAtWorkTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onWorkplaceCheckbox(_moreAppreciatedAtWork, v),
+                  parentTextFieldValueCallBackFunction: (v) { _moreAppreciatedAtWork.text = v; },
                 ),
                 CustomCheckBoxWithTextField
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem2,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
-                  parentCheckboxValueCallBackFunction: _setRemainingAppreciatedAtWorkCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setRemainingAppreciatedAtWorkTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onWorkplaceCheckbox(_remainingAppreciatedAtWork, v),
+                  parentTextFieldValueCallBackFunction: (v) { _remainingAppreciatedAtWork.text = v; },
                 ),
                 const Gap(preAndPostLevel3DividerGap),
                 const Divider(thickness: betweenLevel3DividerThickness),
@@ -222,8 +222,8 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                 (
                   checkboxText: q.level3TitleLegacyIssueItem1,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
-                  parentCheckboxValueCallBackFunction: _setBetterLegaciesCheckboxState,
-                  parentTextFieldValueCallBackFunction: _setBetterLegaciesTextFieldState,
+                  parentCheckboxValueCallBackFunction: (v) => _onLegacyCheckbox(_betterLegacies, v),
+                  parentTextFieldValueCallBackFunction: (v) { _betterLegacies.text = v; },
                 ),
                 const Gap(preAndPostLevel3DividerGap),
                 const Divider(thickness: betweenLevel3DividerThickness),
@@ -245,7 +245,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   errorMessageStyle: analysisTextFieldErrorMessageStyle,
                   textFieldMaxLength: chars1Page,
                   textFieldCounter: TextFieldUtils.absentCounter,
-                  parentTextFieldValueCallBackFunction:_setAnotherIssueTextFieldState,
+                  parentTextFieldValueCallBackFunction: _onAnotherIssueText,
                 ),
               ]
             ),
@@ -294,7 +294,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingText: q.level3TitleGroupsProblematics,
                     headingLevel: 3,
                   ),
-                  const TextFieldSanitizedAndPaddedForCA
+                  TextFieldSanitizedAndPaddedForCA
                   (
                     textFieldHint: pleaseDescribeTextGroupsHint,
                     stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
@@ -303,7 +303,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     errorMessageStyle: analysisTextFieldErrorMessageStyle,
                     textFieldMaxLength: chars1Page,
                     textFieldCounter: TextFieldUtils.absentCounter,
-                    parentTextFieldValueCallBackFunction: _setProblemsTheGroupsAreTryingToSolveTextFieldState,
+                    parentTextFieldValueCallBackFunction: (v) { _groupsProblemsText = v; },
                   ),
 
                   /**** ➡️ Sub-point  ****/
@@ -313,15 +313,15 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  const CustomSegmentedButtonWithTextField
+                  CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: _setSameProblemsSegmentedButtonState,
-                    parentTextFieldValueCallBackFunction: _setSameProblemsTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_sameProblems, v),
+                    parentTextFieldValueCallBackFunction: (v) { _sameProblems.text = v; },
                   ),
 
                   const Gap(preAndPostLevel3DividerGap),
@@ -335,15 +335,15 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  const CustomSegmentedButtonWithTextField
+                  CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: _setHarmonyHomeSegmentedButtonState,
-                    parentTextFieldValueCallBackFunction: _setHarmonyHomeTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_harmonyHome, v),
+                    parentTextFieldValueCallBackFunction: (v) { _harmonyHome.text = v; },
                   ),
 
                   const Gap(preAndPostLevel3DividerGap),
@@ -357,15 +357,15 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  const CustomSegmentedButtonWithTextField
+                  CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: _setAppreciabilityAtWorkSegmentedButtonState,
-                    parentTextFieldValueCallBackFunction: _setAppreciabilityAtWorkTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_appreciabilityAtWork, v),
+                    parentTextFieldValueCallBackFunction: (v) { _appreciabilityAtWork.text = v; },
                   ),
                   
                   const Gap(preAndPostLevel3DividerGap),
@@ -379,15 +379,15 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  const CustomSegmentedButtonWithTextField
+                  CustomSegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
                     textOption3: "I don't know",
                     textOptionsfontSize: 16,
                     textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: _setEarningAbilitySegmentedButtonState,
-                    parentTextFieldValueCallBackFunction: _setEarningAbilityTextFieldState,
+                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_earningAbility, v),
+                    parentTextFieldValueCallBackFunction: (v) { _earningAbility.text = v; },
                   ),
                 ]
               ),
