@@ -56,7 +56,7 @@ class TextFieldUtils
   );
 
   /// An error message displayed if containsAStraightQuote returns true.
-  static const String containsAStraightQuoteError = 
+  static const String errorContainsAStraightQuote = 
   'Straight double quotes\n'
   'are removed from the text typed\n'
   'for CSV-export reasons.\nWith apologies.';
@@ -74,7 +74,7 @@ class TextFieldUtils
   );
 
   /// An error message displayed if containsADot returns true.
-  static const String containsADotError = 
+  static const String errorContainsADot = 
   'Dots are removed,\n'
   'as no extension should be entered\n'
   'in the file name.';
@@ -109,7 +109,7 @@ class TextFieldUtils
   }
 
   /// An error message displayed if a file name is already used.
-  static const String fileNameAlreadyUsedError = 
+  static const String errorFileNameAlreadyUsed = 
   'File name not available.\n'
   'Please use a different file name.';
 
@@ -120,11 +120,11 @@ class TextFieldUtils
   }
 
   /// An error message displayed for the simple blacklisting function returning true.
-  static const String textBlacklistedError = "This text is part of a blacklist.";
+  static const String errorTextBlacklisted = "This text is part of a blacklist.";
 
   //*********************  MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) *********************//
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction = 
   {
-    TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.textBlacklistedError
+    TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.errorTextBlacklisted
   };
 }
