@@ -10,6 +10,8 @@ if not defined JOURNEYERS_DIR (
 echo ----------------------------------------------  
 echo Integration tests.
 echo The Android phone screen needs to be unlocked.
+echo Please note:
+echo The integration tests process removes the app.
 echo ----------------------------------------------
 
 
