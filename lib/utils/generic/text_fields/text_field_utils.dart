@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/debug_constants.dart';
 
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
@@ -30,10 +31,12 @@ class TextFieldUtils
     return Text('$currentLength/$maxLength');
   }
 
-//*********************  CHARS TO BE REMOVED  *********************//
+//*********************  CHARS AND FILE EXTENSIONS  *********************//
 
   /// A String for the type of quote to be removed 
-  static String quoteChar = '"';
+  static const String quoteChar = '"';
+  static const String extensionCSV = ".csv";
+  static const String extentionTXT = ".txt";
 
 //*********************  STRING SANITIZER BUNDLES AND ERROR MESSAGES *********************//
   /// A StringSanitizerBundle sanitizing straight quotes.
@@ -48,7 +51,7 @@ class TextFieldUtils
     sanitizingFunction: (value) => value.replaceAll(quoteChar, '')
   );
 
-  /// An error message displayed if containsStraightQuote returns true.
+  /// An error message displayed if containsAStraightQuote returns true.
   static const String containsAStraightQuoteError = 
   'Straight double quotes\n'
   'are removed from the text typed\n'
@@ -74,11 +77,31 @@ class TextFieldUtils
   
   //*********************  BLACKLIST FUNCTIONS AND ERROR MESSAGES *********************//
 
-  /// Method checking if a file name is already used.
-  static bool fileNameAlreadyUsed(String value) 
+  /// Method checking if a file name is already used, assuming knowledge of its extension.
+  static bool fileNameAlreadyUsed(String value, String fileExtension) 
   {
     List<String> currentListOfStoredFileNames = du.currentListOfStoredFileNames;
-    return currentListOfStoredFileNames.contains(value);
+    currentListOfStoredFileNames = currentListOfStoredFileNames.where
+    (
+      (fileName) => fileName.contains(fileExtension)
+    ).toList();
+
+    if (textFieldDebugging) pu.printd("Text Field: currentListOfStoredFileNames for extension $fileExtension: $currentListOfStoredFileNames");
+    var valueWithExtension = "$value$fileExtension";
+    if (textFieldDebugging) pu.printd("Text Field: valueWithExtension: $valueWithExtension");
+    return currentListOfStoredFileNames.contains(valueWithExtension);
+  }
+
+  /// Method checking if a CSV file name is already used.
+  static bool fileNameAlreadyUsedCSV(String value) 
+  {
+    return fileNameAlreadyUsed(value, extensionCSV);
+  }
+
+  /// Method checking if a TXT file name is already used.
+  static bool fileNameAlreadyUsedTXT(String value) 
+  {
+    return fileNameAlreadyUsed(value, extentionTXT);
   }
 
   /// An error message displayed if a file name is already used.
@@ -93,9 +116,9 @@ class TextFieldUtils
   }
 
   /// An error message displayed for the simple blacklisting function returning true.
-  static const String textBlacklistedError = "Text is blacklisted";
+  static const String textBlacklistedError = "This text is part of a blacklist.";
 
-  //*********************  MAP WITH BLACKLIST FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) *********************//
+  //*********************  MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) *********************//
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction = 
   {
     TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.textBlacklistedError

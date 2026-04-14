@@ -21,11 +21,17 @@ class TextFieldUtils
     tfu_gen.TextFieldUtils.containsADot : tfu_gen.TextFieldUtils.containsADotError
   }; 
 
-  //*********************  MAP WITH BLACKLIST FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
+  //*********************  MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES *********************//
 
-  /// A map with blacklisting functions as keys, and error messages as values.
-  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForFileNames = 
+  /// A map with blacklisting functions for CSV files as keys, and error messages as values.
+  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForCSVFileNames = 
   {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsed : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsedCSV : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
+  }; 
+
+   /// A map with blacklisting functions for TXT files as keys, and error messages as values.
+  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForTXTFileNames = 
+  {
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsedTXT : tfu_gen.TextFieldUtils.fileNameAlreadyUsedError
   }; 
 }
