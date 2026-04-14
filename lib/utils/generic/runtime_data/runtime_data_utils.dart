@@ -15,14 +15,14 @@ class RunTimeDataUtils
 
   //**************** ACKNOWLEDGMENT MODAL ****************/
   /// Method used to record that the acknowledgment modal has been acknowledged.
-  Future<bool> saveInformationModalAcknowledgement() async 
+  Future<bool> saveInformationModalAcknowledgement({required bool wasAcknowledged}) async 
   {
     final prefs = await SharedPreferences.getInstance();
     return await prefs.setBool('isInformationModalAcknowledged', true);
   }
 
   /// Method used to check if the acknowledgment modal has been acknowledged.
-  Future<bool> isInformationModalAcknowledged() async 
+  Future<bool?> isInformationModalAcknowledged() async 
   {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool('isInformationModalAcknowledged') ?? false;
@@ -36,7 +36,7 @@ class RunTimeDataUtils
   }
 
   //**************** FOLDER SELECTED FOR APPLICATION USE ****************/
-  // The setter is in the Kotlin/Swift code
+  // The setter is also in the Kotlin/Swift code
 
   /// Method used to check if the application folder path has been saved.
   Future<String?> getApplicationFolderPath() async 
@@ -45,21 +45,27 @@ class RunTimeDataUtils
     return prefs.getString('applicationFolderPath') ?? "";
   }
 
+  /// Method used to check if the application folder path has been saved.
+  Future<bool> setApplicationFolderPath({required String path}) async 
+  {
+    final prefs =  await SharedPreferences.getInstance();
+    return prefs.setString('applicationFolderPath', path);
+  }
 
   //**************** EXISTING ANALYSIS SESSION DATA ? ****************/
   /// Method used to record that session data has been saved.
-  Future<bool> saveWasSessionDataSaved({required bool value, required String context}) async 
+  Future<bool> saveWasSessionDataSaved({required bool wasDataSaved, required String context}) async 
   {
     final prefs = await SharedPreferences.getInstance();
     switch (context)
     {
       case (DashboardUtils.contextAnalysesContext):
       {
-        return await prefs.setBool('wasSessionDataSaved', value);
+        return await prefs.setBool('wasSessionDataSaved', wasDataSaved);
       }
       case (DashboardUtils.groupProblemSolvingsContext):
       {
-        return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', value);
+        return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', wasDataSaved);
       }
       default: return false;
     }   

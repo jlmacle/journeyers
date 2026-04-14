@@ -70,7 +70,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
               (
                 onPressed: () async
                 {
-                  await upu.saveInformationModalAcknowledgement();
+                  await upu.saveInformationModalAcknowledgement(wasAcknowledged: true);
                   Navigator.pop(context);
                 },
                 child: 
