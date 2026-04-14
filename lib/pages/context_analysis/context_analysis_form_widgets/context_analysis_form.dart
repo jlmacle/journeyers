@@ -69,8 +69,8 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
     await dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
-    List<List<String>> preCSVDataIndividualPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[0]);
-    List<List<String>> preCSVDataGroupPerspective = await cu.dataToPreCSV(perspectiveData: _enteredData[1]);
+    List<List<String>> preCSVDataIndividualPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData[0]);
+    List<List<String>> preCSVDataGroupPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData[1]);
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
@@ -79,13 +79,16 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building");
 
-    List<List<String>> csvDataIndividualPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
-    List<List<String>> csvDataGroupPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
+    List<List<String>> csvDataIndividualPerspective = await csvu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
+    List<List<String>> csvDataGroupPerspective = await csvu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
     String? pathToCSVFile = 
-      await cu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
+      await csvu.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 
                           csvDataGroupPerspective: csvDataGroupPerspective,
                           fileName: _fileName);
+    // Updating the file names list
+    await du.getStoredFileNamesOnMobile();
+    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
     if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
 
     // Saving the dashboard metadata if filePath not null
