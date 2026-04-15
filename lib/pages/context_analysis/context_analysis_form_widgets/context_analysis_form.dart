@@ -61,7 +61,8 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
   Future<void> saveDataAndMetadata() async 
   { 
     // Updating analysis title, keywords, and file name
-    _analysisTitle = widget.contextAnalysisFormPageKey.currentState!.analysisTitle;
+    _analysisTitle = widget.contextAnalysisFormPageKey.currentState!.analysisTitle.trim() == "" 
+                      ? "Untitled" : widget.contextAnalysisFormPageKey.currentState!.analysisTitle.trim();
     _keywords = widget.contextAnalysisFormPageKey.currentState!.keywords;
     _fileName = widget.contextAnalysisFormPageKey.currentState!.fileName;
 
