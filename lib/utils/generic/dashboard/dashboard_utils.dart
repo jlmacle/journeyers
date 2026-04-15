@@ -229,7 +229,6 @@ class DashboardUtils {
 
     // Updating currentListOfStoredFileNames
     currentListOfStoredFileNames = retrievedFileNames;
-    if (sessionDataDebug) pu.printd("Session Data: storedFileNames: $retrievedFileNames");
 
     return retrievedFileNames;
   }
