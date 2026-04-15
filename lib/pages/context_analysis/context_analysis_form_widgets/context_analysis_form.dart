@@ -14,7 +14,7 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj; 
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_with_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
@@ -155,28 +155,28 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   headingText: q.level3TitleBalanceIssue,
                   headingLevel: 3,
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem1,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
                   parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_studiesBalance, v),
                   parentTextFieldValueCallBackFunction: (v) { _studiesBalance.text = v; },
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem2,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
                   parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_accessingIncomeBalance, v),
                   parentTextFieldValueCallBackFunction: (v) { _accessingIncomeBalance.text = v; },
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem3,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
                   parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_earningIncomeBalance, v),
                   parentTextFieldValueCallBackFunction: (v) { _earningIncomeBalance.text = v; },
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem4,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
@@ -194,14 +194,14 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   headingText: q.level3TitleWorkplaceIssue,
                   headingLevel: 3,
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem1,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
                   parentCheckboxValueCallBackFunction: (v) => _onWorkplaceCheckbox(_moreAppreciatedAtWork, v),
                   parentTextFieldValueCallBackFunction: (v) { _moreAppreciatedAtWork.text = v; },
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem2,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
@@ -219,7 +219,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   headingText: q.level3TitleLegacyIssue,
                   headingLevel: 3,
                 ),
-                CustomCheckBoxWithTextField
+                CustomCheckboxWithTextField
                 (
                   checkboxText: q.level3TitleLegacyIssueItem1,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
