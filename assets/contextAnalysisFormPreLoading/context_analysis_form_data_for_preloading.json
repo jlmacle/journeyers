@@ -1,0 +1,30 @@
+{
+  "individual": 
+  {
+    "balance": 
+    {
+      "studies":         { "checked": false,  "text": "" },
+      "accessingIncome": { "checked": false,  "text": "" },
+      "earningIncome":   { "checked": true,   "text": "Trying to work extra hours to make more income, while bringing sufficient support home." },
+      "helpingOthers":   { "checked": false,  "text": "" }
+    },
+    "workplace": 
+    {
+      "moreAppreciated":      { "checked": false,  "text": "" },
+      "remainingAppreciated": { "checked": true,   "text": "My boss doesn't seem to value my intent to work extra, and he looked annoyed a few times." }
+    },
+    "legacy": 
+    {
+      "betterLegacies": { "checked": false, "text": "" }
+    },
+    "anotherIssue": ""
+  },
+  "groups": 
+  {
+    "problemsText": "At home, everyone needs rest to be reliable at work, and to study effectively. Also, more income is needed for what we budgeted. At work, we need to be reliable, and reach the set metrics.",
+    "sameProblems":          { "selection": "Yes,No",       "text": "Yes. More income seems needed. No. More absent and not reliable enough at home. The extra work got me late on my main professional tasks." },
+    "harmonyAtHome":         { "selection": "Yes",          "text": "Working extra hours got me tired, and I was more grumpy at home. We got more than good memories from that." },
+    "appreciabilityAtWork":  { "selection": "Yes",          "text": "My boss doesn't seem to value my intent to work extra, and he looked annoyed a few times." },
+    "earningAbility":        { "selection": "Yes",          "text": "Being more tired, I don't perform as well as I used to do." }
+  }
+}
