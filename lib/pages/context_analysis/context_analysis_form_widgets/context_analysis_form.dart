@@ -72,8 +72,8 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
     await dataStructureBuilding();
 
     // Transforming the data into a CSV-friendly form
-    List<List<String>> preCSVDataIndividualPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData[0]);
-    List<List<String>> preCSVDataGroupPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData[1]);
+    List<List<String>> preCSVDataIndividualPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData["individualPerspective"] as LinkedHashMap<String, Object>);
+    List<List<String>> preCSVDataGroupPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData["groupPerspective"] as LinkedHashMap<String, Object>);
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
