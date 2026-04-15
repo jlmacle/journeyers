@@ -13,7 +13,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_list_tile_with_text_field.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_with_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 
@@ -372,7 +372,7 @@ void main() async
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
-          expect(find.byType(CustomCheckBoxWithTextField), findsNWidgets(7));
+          expect(find.byType(CustomCheckboxWithTextField), findsNWidgets(7));
         },
       );
 
@@ -421,7 +421,7 @@ void main() async
           await expandIndividualTile(tester);
 
           final firstCustomCheckbox = find.descendant(
-            of:       find.byType(CustomCheckBoxWithTextField).first,
+            of:       find.byType(CustomCheckboxWithTextField).first,
             matching: find.byType(Checkbox),
           );
           await tester.ensureVisible(firstCustomCheckbox);
@@ -443,7 +443,7 @@ void main() async
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
-          final firstCustomCheckbox = find.byType(CustomCheckBoxWithTextField).first;
+          final firstCustomCheckbox = find.byType(CustomCheckboxWithTextField).first;
           await tester.ensureVisible(firstCustomCheckbox);
 
           // Checking the checkbox to reveal the note field
@@ -452,7 +452,7 @@ void main() async
 
           // Verifying the checkbox checked          
           // Returns false: 
-          // expect(tester.widget<CustomCheckBoxWithTextField>(firstCustomCheckbox).checkboxIsChecked, isTrue);
+          // expect(tester.widget<CustomCheckboxWithTextField>(firstCustomCheckbox).checkboxIsChecked, isTrue);
           var firstCheckbox = find.descendant(of: firstCustomCheckbox, matching: find.byType(Checkbox));
           expect(tester.widget<Checkbox>(firstCheckbox).value, isTrue);
           
@@ -646,7 +646,7 @@ void main() async
 
           // Checking the first balance checkbox
           final firstCustomCheckbox = find.descendant(
-            of:       find.byType(CustomCheckBoxWithTextField).first,
+            of:       find.byType(CustomCheckboxWithTextField).first,
             matching: find.byType(Checkbox)
           );
           await tester.ensureVisible(firstCustomCheckbox);

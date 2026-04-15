@@ -12,7 +12,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 /// Also, the straight double quote is automatically removed from the text field.
 class TextFieldSanitizedAndPaddedForCA extends StatefulWidget 
 {
-  /// If the text field maintains state, when the CustomCheckBoxWithTextField instance is unchecked for example.
+  /// If the text field maintains state, when the CustomCheckboxWithTextField instance is unchecked for example.
   final bool maintainState;
 
   /// The start value for the text field.

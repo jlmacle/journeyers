@@ -154,20 +154,20 @@ class CSVUtils
   /// Method extracting information from {checkbox: false/true, textField: "data"/null}
   /// and returning \[\[checkbox,"false"/"true"\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<Object>> checkBoxWithTextFieldDataToPreCSV({
-    required LinkedHashMap<String, Object> checkBoxWithTextFieldData,
+  Future<List<Object>> checkboxWithTextFieldDataToPreCSV({
+    required LinkedHashMap<String, Object> checkboxWithTextFieldData,
   }) async 
   {
     List<Object> checkboxPreCSVData = [];
 
     // checkbox data converted from bool to String: values can be "true" or "false"
-    var dataCheckbox = "${checkBoxWithTextFieldData[checkbox]}";
+    var dataCheckbox = "${checkboxWithTextFieldData[checkbox]}";
     var data1 = [
       checkbox,
       dataCheckbox,
     ]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    String dataTextField = (checkBoxWithTextFieldData[textField] ?? "") as String;
+    String dataTextField = (checkboxWithTextFieldData[textField] ?? "") as String;
     var data2 = [
       notes,
       quotesForCSV + dataTextField + quotesForCSV,
@@ -240,9 +240,9 @@ class CSVUtils
     ) async
     {
       if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox) {
-        // checkBoxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
-        var checkboxPreCSVData = await checkBoxWithTextFieldDataToPreCSV(
-          checkBoxWithTextFieldData:
+        // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
+        var checkboxPreCSVData = await checkboxWithTextFieldDataToPreCSV(
+          checkboxWithTextFieldData:
               titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
         );
         
