@@ -217,10 +217,10 @@ class MainActivity: FlutterActivity() {
                 // Gets the root DocumentFile from the tree URI
                 val rootDoc = DocumentFile.fromTreeUri(this, uri)
                 
-                // 2. Uses safe calls or null checks for rootDoc
+                // Uses safe calls or null checks for rootDoc
                 val uriString: String? = rootDoc?.uri?.toString()
                 
-                // 3. Finding a file is an expensive operation; ensures rootDoc exists first
+                // Finding a file is an expensive operation; ensures rootDoc exists first
                 // Searches for the file with the specified name in the directory
                 val file = rootDoc?.findFile(fileName)
 
@@ -228,7 +228,7 @@ class MainActivity: FlutterActivity() {
                 // println("uriString: $uriString")
                 // println("fileName: $fileName")
                 
-                // 4. Checks if the file actually exists after findFile operation
+                // Checks if the file actually exists after findFile operation
                 if (file != null && file.exists()) {
                     // println("File found: ${file.name}")
                 } else {
@@ -259,18 +259,18 @@ class MainActivity: FlutterActivity() {
             val file = rootDoc?.findFile(fileName)
             
             if (file != null && file.exists()) {
-                // 1. Capture the URI before deletion
+                // Captures the URI before deletion
                 val fileUri = file.uri 
                 
-                // 2. Perform the deletion
+                // Performs the deletion
                 val deleted = file.delete() 
 
                 if (deleted) {
-                    // 3. Notify the ContentResolver that this specific URI has changed
+                    // Notifies the ContentResolver that this specific URI has changed
                     // This is more effective for SAF than MediaScanner
                     contentResolver.notifyChange(fileUri, null)
                     
-                    // 4. Optional: If you still want to trigger a MediaScan for the path
+                    // To trigger a MediaScan for the path
                     // Note: This only works if the URI can be resolved to a physical path
                     val path = fileUri.path 
                     if (path != null) {
