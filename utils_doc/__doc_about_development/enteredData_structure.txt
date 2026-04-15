@@ -1,4 +1,4 @@
-[
+{   individualPerspective:
     {
         As an individual: What problem am I trying to solve?:
         {
@@ -20,7 +20,8 @@
             }, 
             Is the issue of another type?: {textField: }
         }
-    },     
+    },
+    groupPerspective:     
     {
         As a member of groups/teams: What problem(s) are we trying to solve?: 
         {
@@ -35,4 +36,4 @@
             Is entering the group problem-solving process consistent with my income earning ability?: {segmentedButton: , textField: }
         }
     }
-]
+}
