@@ -92,7 +92,7 @@ LinkedHashMap<String, String> _segmentedDataToMap(DTOCustomSegmentedButtonWithTe
 
 // ─── Data Structure Building ──────────────────────────────────────────────────
 
-List<LinkedHashMap<String, Object>> _enteredData = [];
+LinkedHashMap<String, Object> _enteredData = LinkedHashMap<String, Object>.from({});
 
 Future<void> dataStructureBuilding() async {
   // Individual perspective
@@ -128,7 +128,7 @@ Future<void> dataStructureBuilding() async {
     }),
   });
 
-  _enteredData = [individualData, groupData];
+  _enteredData.addAll({"individualPerspective": individualData, "groupPerspective": groupData});
 
   if (sessionDataDebug) {
     pu.printd('Session Data');
