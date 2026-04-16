@@ -219,19 +219,19 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to update the session keywords
-  Future<void> updateSessionKeywords(String filePath, List<String> newKeywords) async 
+  Future<void> updateSessionKeywords(String filePath, Set<String> newKeywords) async 
   {
-    List<dynamic>? previousKeywords;
+    Set<dynamic>? previousKeywords;
 
     final sessionIndex = _allSessions?.indexWhere(
         (s) => s[DashboardUtils.keyFilePath] == filePath
       );
 
     if (sessionIndex != null && sessionIndex != -1) {
-      previousKeywords = _allSessions![sessionIndex][DashboardUtils.keyKeywords];
+      previousKeywords = Set.from(_allSessions![sessionIndex][DashboardUtils.keyKeywords]);
       // Updating the list with the new keywords
       _allSessions![sessionIndex][DashboardUtils.keyKeywords] = 
-      newKeywords..sort
+      newKeywords.toList()..sort
                   (
                     (a, b) 
                     {
@@ -247,7 +247,7 @@ class DashboardPageState extends State<DashboardPage>
     refreshKeywordsAfterSessionDeletion();
      // Updates the keywords list
     
-    if ( ! previousKeywords!.equals(newKeywords) )
+    if ( ! previousKeywords!.toList().equals(newKeywords.toList()) )
     {
       setState((){ }); 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -598,11 +598,11 @@ class DashboardPageState extends State<DashboardPage>
           ElevatedButton(
             onPressed: () async {
               // Splitting string into list, trimming whitespaces, and removing empty entries
-              final List<String> newKeywords = _titleController.text
+              final Set<String> newKeywords = _titleController.text
                   .split(',')
                   .map((e) => e.trim())
                   .where((e) => e.isNotEmpty)
-                  .toList();
+                  .toSet();
 
               // Updating keywords
               await updateSessionKeywords(filePath, newKeywords); 
