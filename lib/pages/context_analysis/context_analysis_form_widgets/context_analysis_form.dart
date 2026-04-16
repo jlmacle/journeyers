@@ -15,6 +15,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/dto/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/utils/project_specific/dto/dto_custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj; 
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_with_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
@@ -153,7 +154,7 @@ class CAFormState extends State<CAForm>
               /**** ➡️ Sub-point  ****/
                 CustomHeading
                 (
-                  key: _balanceIssueHeadingKey,
+                  key: balanceIssueHeadingKey,
                   headingText: q.level3TitleBalanceIssue,
                   headingLevel: 3,
                 ),
@@ -192,7 +193,7 @@ class CAFormState extends State<CAForm>
                 /**** ➡️ Sub-point  ****/
                 CustomHeading
                 (
-                  key: _workplaceIssueHeadingKey,
+                  key: workplaceIssueHeadingKey,
                   headingText: q.level3TitleWorkplaceIssue,
                   headingLevel: 3,
                 ),
@@ -217,7 +218,7 @@ class CAFormState extends State<CAForm>
                 /**** ➡️ Sub-point  ****/
                 CustomHeading
                 (
-                  key: _legacyIssueHeadingKey,
+                  key: legacyIssueHeadingKey,
                   headingText: q.level3TitleLegacyIssue,
                   headingLevel: 3,
                 ),
@@ -235,7 +236,7 @@ class CAFormState extends State<CAForm>
                 /**** ➡️ Sub-point  ****/
                 CustomHeading
                 (
-                  key: _anotherIssueHeadingKey,
+                  key: anotherIssueHeadingKey,
                   headingText: q.level3TitleAnotherIssue,
                   headingLevel: 3,
                   ),

@@ -1,12 +1,5 @@
 part of 'context_analysis_form.dart';
 
-// ─── Heading Keys ─────────────────────────────────────────────────────────────
-
-final GlobalKey<CustomHeadingState> _balanceIssueHeadingKey   = GlobalKey();
-final GlobalKey<CustomHeadingState> _workplaceIssueHeadingKey = GlobalKey();
-final GlobalKey<CustomHeadingState> _legacyIssueHeadingKey    = GlobalKey();
-final GlobalKey<CustomHeadingState> _anotherIssueHeadingKey   = GlobalKey();
-
 // ─── Form Questions ───────────────────────────────────────────────────────────
 
 final CAFormQuestions q = CAFormQuestions();
@@ -42,25 +35,25 @@ final _earningAbility       = DTOSegmentedButtonWithTextField();
 
 void _onBalanceCheckbox(DTOCheckboxWithTextField data, bool? value) {
   data.checked = value!;
-  _balanceIssueHeadingKey.currentState
+  balanceIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfCheckboxChecked();
 }
 
 void _onWorkplaceCheckbox(DTOCheckboxWithTextField data, bool? value) {
   data.checked = value!;
-  _workplaceIssueHeadingKey.currentState
+  workplaceIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfCheckboxChecked();
 }
 
 void _onLegacyCheckbox(DTOCheckboxWithTextField data, bool? value) {
   data.checked = value!;
-  _legacyIssueHeadingKey.currentState
+  legacyIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfCheckboxChecked();
 }
 
 void _onAnotherIssueText(String value) {
   _anotherIssueText = value;
-  _anotherIssueHeadingKey.currentState
+  anotherIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfTextFieldUsed(value);
 }
 
