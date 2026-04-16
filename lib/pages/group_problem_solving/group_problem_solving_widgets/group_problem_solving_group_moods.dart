@@ -5,7 +5,7 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.
-class GroupProblemSolvingGroupMoods extends StatefulWidget 
+class GPSGroupMoods extends StatefulWidget 
 {
   /// The number of the column (1 for the left side of the UI, 2 for the right side)
   final int columnNumber;
@@ -34,7 +34,7 @@ class GroupProblemSolvingGroupMoods extends StatefulWidget
   // Mode for deleting a stakeholder identifier
   final bool isDeleteMode;
 
-  const GroupProblemSolvingGroupMoods
+  const GPSGroupMoods
   ({
     super.key,
     required this.columnNumber,
@@ -49,10 +49,10 @@ class GroupProblemSolvingGroupMoods extends StatefulWidget
   });
 
   @override
-  State<GroupProblemSolvingGroupMoods> createState() => GroupProblemSolvingGroupMoodsState();
+  State<GPSGroupMoods> createState() => GPSGroupMoodsState();
 }
 
-class GroupProblemSolvingGroupMoodsState extends State<GroupProblemSolvingGroupMoods> 
+class GPSGroupMoodsState extends State<GPSGroupMoods> 
 {
   // Bool used to suggest editing at start of adding identifiers
   bool _hasBeenEdited = false;

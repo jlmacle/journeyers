@@ -12,35 +12,35 @@ import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 /// {@category Pages}
 /// {@category Group problem-solving}
 /// The root page for the group problem-solving sessions.
-/// The group problem-solving page embeds a DashboardPage widget and/or a GroupProblemSolvingProcess widget.
-class GroupProblemSolvingPage extends StatefulWidget 
+/// The group problem-solving page embeds a DashboardPage widget and/or a GPSProcess widget.
+class GPSPage extends StatefulWidget 
 {
-  const GroupProblemSolvingPage
+  const GPSPage
   ({
     super.key
   });
 
   @override
-  State<GroupProblemSolvingPage> createState() => GroupProblemSolvingPageState();
+  State<GPSPage> createState() => GPSPageState();
 }
 
-class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage> 
+class GPSPageState extends State<GPSPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<GroupProblemSolvingProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
+  GlobalKey<GPSProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solving-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
-  bool? _wasGroupProblemSolvingSessionDataSaved;
+  bool? _wasGPSSessionDataSaved;
 
   getPreferences() async 
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
-    _wasGroupProblemSolvingSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.groupProblemSolvingsContext);
+    _wasGPSSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.groupProblemSolvingsContext);
 
     setState(() {_preferencesLoading = false;});
-    if (preferencesDebug) pu.printd("Preferences: _wasGroupProblemSolvingSessionDataSaved: $_wasGroupProblemSolvingSessionDataSaved");
+    if (preferencesDebug) pu.printd("Preferences: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");
   }
 
   //**************** METHODS USED TO REFRESH VIEWS  ****************//
@@ -50,7 +50,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   void onDataSaved() 
   {
     setState(() {
-      _wasGroupProblemSolvingSessionDataSaved = true;
+      _wasGPSSessionDataSaved = true;
     });
   }
 
@@ -59,7 +59,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
   void onAllSessionFilesDeleted() 
   {
     setState(() {
-      _wasGroupProblemSolvingSessionDataSaved = false;
+      _wasGPSSessionDataSaved = false;
     });
   }
 
@@ -99,7 +99,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
           else ...
           [
             // Checking if group problem-solving session data has been stored
-            if (_wasGroupProblemSolvingSessionDataSaved!) ...
+            if (_wasGPSSessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new group problem-solving
               SizedBox
@@ -117,7 +117,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                     child: ElevatedButton
                     (                    
                       key: const Key('group-problem-solving-new-session-button'),
-                      onPressed: () { setState(() { _wasGroupProblemSolvingSessionDataSaved = false;});},
+                      onPressed: () { setState(() { _wasGPSSessionDataSaved = false;});},
                       style: ElevatedButton.styleFrom
                       (
                         backgroundColor: white,
@@ -142,7 +142,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
                   previewWidget: 
                     ({required String pathToData}) 
-                    { return GroupProblemSolvingPreviewWidget(pathToStoredData: pathToData);},
+                    { return GPSPreviewWidget(pathToStoredData: pathToData);},
                   parentCallbackFunctionWhenAllSessionFilesAreDeleted: onAllSessionFilesDeleted                  
                 )
               ),
@@ -159,7 +159,7 @@ class GroupProblemSolvingPageState extends State<GroupProblemSolvingPage>
                 Focus
                 (
                   focusNode: groupProblemSolvingPageFocusNode,
-                  child: GroupProblemSolvingProcess(key: groupProblemSolvingPageKey, parentCallbackFunctionToRefreshTheGroupProblemSolvingPage: onDataSaved),
+                  child: GPSProcess(key: groupProblemSolvingPageKey, parentCallbackFunctionToRefreshTheGPSPage: onDataSaved),
                 ),
               ),
             )

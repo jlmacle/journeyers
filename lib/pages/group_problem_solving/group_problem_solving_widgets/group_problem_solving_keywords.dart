@@ -4,7 +4,7 @@ import 'package:journeyers/app_themes.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to declare keywords, or to retrieve keywords, from previous context analyses.
-class GroupProblemSolvingKeywords extends StatefulWidget 
+class GPSKeywords extends StatefulWidget 
 {
   /// The keywords associated to the session data.
   final List<String> currentKeywords;
@@ -12,7 +12,7 @@ class GroupProblemSolvingKeywords extends StatefulWidget
   /// A callback function called to update the keywords describing a session.
   final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;  
 
-  const GroupProblemSolvingKeywords
+  const GPSKeywords
   ({
     super.key,
     required this.currentKeywords,
@@ -21,10 +21,10 @@ class GroupProblemSolvingKeywords extends StatefulWidget
 
 
   @override
-  State<GroupProblemSolvingKeywords> createState() => _GroupProblemSolvingKeywordsState();
+  State<GPSKeywords> createState() => _GPSKeywordsState();
 }
 
-class _GroupProblemSolvingKeywordsState extends State<GroupProblemSolvingKeywords> 
+class _GPSKeywordsState extends State<GPSKeywords> 
 {
   // Initializes with the passed keywords instead of an empty list
   late List<String> _keywords;
@@ -57,7 +57,7 @@ class _GroupProblemSolvingKeywordsState extends State<GroupProblemSolvingKeyword
   }
 
   @override
-  void didUpdateWidget(GroupProblemSolvingKeywords oldWidget) {
+  void didUpdateWidget(GPSKeywords oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Checks if the pointer or the content of the list has changed
     if (widget.currentKeywords != oldWidget.currentKeywords) {

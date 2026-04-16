@@ -4,22 +4,22 @@ import 'package:journeyers/app_themes.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to add a new solution to the list.
-class GroupProblemSolvingNewSolution extends StatefulWidget 
+class GPSNewSolution extends StatefulWidget 
 {
   /// A callback function used to update the list of solutions.
   final ValueChanged<String> solutionAddedCallbackFunction;
 
-  const GroupProblemSolvingNewSolution
+  const GPSNewSolution
   ({
     super.key,
     required this.solutionAddedCallbackFunction
   });
 
   @override
-  State<GroupProblemSolvingNewSolution> createState() => _GroupProblemSolvingNewSolutionState();
+  State<GPSNewSolution> createState() => _GPSNewSolutionState();
 }
 
-class _GroupProblemSolvingNewSolutionState extends State<GroupProblemSolvingNewSolution> 
+class _GPSNewSolutionState extends State<GPSNewSolution> 
 {
   // TextEditingController for entering a new solution
   final TextEditingController _solutionController = .new();

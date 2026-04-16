@@ -7,21 +7,21 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.
-class GroupProblemSolvingPreviewWidget extends StatefulWidget {
+class GPSPreviewWidget extends StatefulWidget {
   final String pathToStoredData;
 
-  const GroupProblemSolvingPreviewWidget({
+  const GPSPreviewWidget({
     super.key,
     required this.pathToStoredData,
   });
 
   @override
-  State<GroupProblemSolvingPreviewWidget> createState() =>
-      _GroupProblemSolvingPreviewWidgetState();
+  State<GPSPreviewWidget> createState() =>
+      _GPSPreviewWidgetState();
 }
 
-class _GroupProblemSolvingPreviewWidgetState
-    extends State<GroupProblemSolvingPreviewWidget> {
+class _GPSPreviewWidgetState
+    extends State<GPSPreviewWidget> {
 
   bool _isLoading = true;
   String _title = "";
