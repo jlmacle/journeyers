@@ -6,6 +6,7 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 
@@ -27,10 +28,7 @@ class GPSPage extends StatefulWidget
 
 class GPSPageState extends State<GPSPage> 
 {
-  //**************** GLOBAL KEYS ****************//
-  GlobalKey<GPSProcessState> gpsPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
-  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solving-dashboard-sorting-by-keywords');
-
+  
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
   bool? _wasGPSSessionDataSaved;
@@ -142,7 +140,7 @@ class GPSPageState extends State<GPSPage>
                 (
                   key: const Key('group-problem-solving-dashboard'),
                   dashboardContext: DashboardUtils.gpsContext,
-                  dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
+                  dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyGPS,
                   previewWidget: 
                     ({required String pathToData}) 
                     { return GPSPreviewWidget(pathToStoredData: pathToData);},

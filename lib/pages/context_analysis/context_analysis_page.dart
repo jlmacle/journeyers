@@ -8,8 +8,8 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 
 
 /// {@category Pages}
@@ -32,11 +32,7 @@ class CAPage extends StatefulWidget
 }
 
 class CAPageState extends State<CAPage> 
-{
-  //**************** GLOBAL KEYS ****************//
-  GlobalKey<CAProcessState> caProcessKey = GlobalKey(debugLabel:'context-analysis-process');
-  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'analyses-dashboard-sorting-by-keywords');
-
+{  
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
   bool? _isInformationModalAlreadyAcknowledged;
@@ -198,7 +194,7 @@ class CAPageState extends State<CAPage>
                 (
                   key: const Key('analyses-dashboard'), 
                   dashboardContext: DashboardUtils.contextAnalysesContext,
-                  dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
+                  dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   previewWidget: 
                   ({required String pathToData}) 
                   { return CAPreviewWidget(pathToStoredData: pathToData);},  
