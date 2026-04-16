@@ -173,7 +173,7 @@ class DashboardUtils {
         if (sessionDataDebug) pu.printd("Session Data: No session data found with path $filePathRelatedToDataToDelete in dashboard data.");
       }
     } catch (e) {
-      if (sessionDataDebug) pu.printd("Session Data: Error deleting session data from dashboard data: $e");
+      if (sessionDataDebug) pu.printd("Session Data: Error deleting session metadata from dashboard data: $e");
     }
   }
 
