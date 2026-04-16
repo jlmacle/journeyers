@@ -8,7 +8,6 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
 
 
 /// {@category Pages}
