@@ -17,7 +17,7 @@ class DashboardUtils {
   static const String contextAnalysesContext = "contextAnalysesData";
 
   /// String used to communicate the context of the group problem-solvings.
-  static const String groupProblemSolvingsContext = "groupProblemSolvingData";
+  static const String gpsContext = "gpsData";
 
   /// The key for the session data title.
   static const String keyTitle = 'title';
@@ -48,7 +48,7 @@ class DashboardUtils {
     String fileName = "";
     if (typeOfContextData == contextAnalysesContext) {
       fileName = 'dashboard_session_data_context_analyses.json';
-    } else if (typeOfContextData == groupProblemSolvingsContext) {
+    } else if (typeOfContextData == gpsContext) {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } else {
       if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
@@ -189,7 +189,7 @@ class DashboardUtils {
     {
       fileName = 'dashboard_session_data_context_analyses.json';
     } 
-    else if (typeOfContextData == groupProblemSolvingsContext) 
+    else if (typeOfContextData == gpsContext) 
     {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } 

@@ -63,7 +63,7 @@ class RunTimeDataUtils
       {
         return await prefs.setBool('wasSessionDataSaved', wasDataSaved);
       }
-      case (DashboardUtils.groupProblemSolvingsContext):
+      case (DashboardUtils.gpsContext):
       {
         return await prefs.setBool('wasGPSSessionDataSaved', wasDataSaved);
       }
@@ -81,7 +81,7 @@ class RunTimeDataUtils
       {
         return prefs.getBool('wasSessionDataSaved') ?? false;
       }
-      case (DashboardUtils.groupProblemSolvingsContext):
+      case (DashboardUtils.gpsContext):
       {
         return prefs.getBool('wasGPSSessionDataSaved') ?? false;
       }   
@@ -100,7 +100,7 @@ class RunTimeDataUtils
       {
         return await prefs.setBool('wasSessionDataSaved', false);
       }
-      case (DashboardUtils.groupProblemSolvingsContext):
+      case (DashboardUtils.gpsContext):
       {
         return await prefs.setBool('wasGPSSessionDataSaved', false);
       }
