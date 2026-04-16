@@ -91,7 +91,7 @@ class GPSProcessState extends State<GPSProcess>
 
   //**************** KEYWORDS related data ****************//
   // List to store the keywords entered by the user
-  List<String> _currentKeywords = []; 
+  Set<String> _currentKeywords = {}; 
   List<Map<String, dynamic>> _history = [];
   
   //**************** SOLUTIONS related data ****************//
@@ -182,7 +182,7 @@ class GPSProcessState extends State<GPSProcess>
         (
           typeOfContextData: DashboardUtils.gpsContext,
           title: sessionTitle, 
-          keywords: _currentKeywords, 
+          keywords: _currentKeywords.toList(), 
           formattedDate: formattedDate,
           pathToFile: filePath,
         );
@@ -217,9 +217,9 @@ void _handleSessionSelection(Map<String, dynamic> session) {
     if (session['keywords'] != null) {
       // Creates a NEW list instance instead of .clear() and .addAll()
       // This changes the reference, triggering didUpdateWidget correctly
-      _currentKeywords = List<String>.from(session['keywords']);
+      _currentKeywords = Set<String>.from(session['keywords']);
     } else {
-      _currentKeywords = [];
+      _currentKeywords = {};
     }
   });
 }
