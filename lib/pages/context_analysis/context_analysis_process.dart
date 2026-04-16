@@ -75,7 +75,7 @@ class CAProcessState extends State<CAProcess>
   // Method used to print the form data to CSV
   Future<void> saveDataAndMetadata() async
   {
-    await contextFormKey.currentState?.saveDataAndMetadata();
+    await contextFormKeyCA.currentState?.saveDataAndMetadata();
   }
 
   //**************** FOCUS NODES related data and methods ****************//
@@ -179,7 +179,7 @@ class CAProcessState extends State<CAProcess>
             // Form 
             CAForm
             (
-              key: contextFormKey,
+              key: contextFormKeyCA,
               caFormPageKey: widget.key as GlobalKey<CAProcessState>,
               parentCallbackFunctionToRefreshTheCAPage: widget.parentCallbackFunctionToRefreshTheCAPage,
               parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
