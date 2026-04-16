@@ -4,9 +4,9 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
+
 
 /// {@category Utility widgets}
 /// A widget handling bulk deletion of session data.
@@ -48,10 +48,7 @@ class DashboardDeletionByBulk extends StatefulWidget
 class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<GPSPageState> caPageKey = GlobalKey();
-  GlobalKey<GPSPageState> gpsPageKey = GlobalKey();
-  GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: 'sessions-dashboard-page');  
-  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywords = GlobalKey();
+  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey();
 
   //**************** BULK DELETION OF SESSION DATA ****************/
   // Method used to delete several session data
@@ -86,21 +83,23 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
+    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allSessions: ${widget.allSessions}");
 
     // Clearing the list of the selected sessions
     widget.sessionsSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    dashboardFilteringByKeywords.currentState?.refreshKeywordsAfterSessionDeletion();
+    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await dashboardFilteringByKeywords.currentState?.applyFilteringByKeywords();    
+    await dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();    
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
+    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty: ${widget.allSessions!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
@@ -108,6 +107,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     {
       // resetWasSessionDataSavedStatus to false
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+
       // refreshing the page, to re-start in the process page
       if (widget.dashboardContext == DashboardUtils.contextAnalysesContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
       else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.onAllSessionFilesDeleted();}
@@ -118,7 +118,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     {
 
       // Updating the keywords UI
-      dashboardFilteringByKeywords.currentState?.setState((){});
+      dashboardFilteringByKeywordsKey.currentState?.setState((){});
 
       // Updating the sessions list UI
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
@@ -137,11 +137,11 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
           TextButton.icon(
             key: const Key('bulk-delete-button'),
             onPressed: _deleteSelectedSessions,
-            icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion)? Colors.red: white),
+            icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: white),
             label: Text(
               "Delete (${widget.sessionsSelectedForDeletion?.length ?? 0})",
               style: TextStyle(
-                color: (widget.areSessionsForDeletion)? Colors.red: white, 
+                color: (widget.areSessionsForDeletion == true)? Colors.red: white, 
                 fontWeight: FontWeight.bold,
               ),
             ),

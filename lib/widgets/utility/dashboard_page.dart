@@ -20,7 +20,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dar
 /// Assumption concerning the session data structure:
 /// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 5:51 AM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
 /// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.ext"}\]
-class SessionsDashboardPage extends StatefulWidget 
+class DashboardPage extends StatefulWidget 
 {
   /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -34,7 +34,7 @@ class SessionsDashboardPage extends StatefulWidget
   /// A global key linked to the DashboardFilteringByKeywords widget
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
-  const SessionsDashboardPage
+  const DashboardPage
   ({
     super.key,
     required this.dashboardContext,
@@ -44,10 +44,10 @@ class SessionsDashboardPage extends StatefulWidget
   });
 
   @override
-  State<SessionsDashboardPage> createState() => SessionsDashboardPageState();
+  State<DashboardPage> createState() => DashboardPageState();
 }
 
-class SessionsDashboardPageState extends State<SessionsDashboardPage> 
+class DashboardPageState extends State<DashboardPage> 
 {
   //**************** GLOBAL KEYS ****************//
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();

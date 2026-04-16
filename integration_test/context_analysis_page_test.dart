@@ -15,7 +15,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_with_text_field.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
-import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
+import 'package:journeyers/widgets/utility/dashboard_page.dart';
 
 
 // ─── Test infrastructure ──────────────────────────────────────────────────────
@@ -169,7 +169,7 @@ void main() async
           expect(modalTextFinder, findsNothing);
 
           // Verifying the dashboard absent
-          final dashboardFinder = find.byType(SessionsDashboardPage);
+          final dashboardFinder = find.byType(DashboardPage);
           expect(dashboardFinder, findsNothing);
 
           // Verifying the presence of the context analysis form
@@ -209,7 +209,7 @@ void main() async
           expect(modalTextFinder, findsNothing);
 
           // Verifying the dashboard absent
-          final dashboardFinder = find.byType(SessionsDashboardPage);
+          final dashboardFinder = find.byType(DashboardPage);
           expect(dashboardFinder, findsNothing);
 
           // Verifying the presence of the context analysis form
@@ -252,7 +252,7 @@ void main() async
           expect(caFormFinder, findsOneWidget);
 
           // Verifying the dashboard absent
-          final dashboardFinder = find.byType(SessionsDashboardPage);
+          final dashboardFinder = find.byType(DashboardPage);
           expect(dashboardFinder, findsNothing);          
         }
       );
@@ -283,7 +283,7 @@ void main() async
           expect(buttonWidget, findsOneWidget); 
 
           // Verifying the dashboard present  
-          final dashboardFinder = find.byType(SessionsDashboardPage);
+          final dashboardFinder = find.byType(DashboardPage);
           expect(dashboardFinder, findsOneWidget);  
         },
       );
