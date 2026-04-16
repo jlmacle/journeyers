@@ -14,17 +14,17 @@ final ContextAnalysisFormQuestions q = ContextAnalysisFormQuestions();
 // ─── Form State: Individual Perspective ──────────────────────────────────────
 
 // Balance issue
-final _studiesBalance         = DTOCustomCheckboxWithTextField();
-final _accessingIncomeBalance = DTOCustomCheckboxWithTextField();
-final _earningIncomeBalance   = DTOCustomCheckboxWithTextField();
-final _helpingOthersBalance   = DTOCustomCheckboxWithTextField();
+final _studiesBalance         = DTOCheckboxWithTextField();
+final _accessingIncomeBalance = DTOCheckboxWithTextField();
+final _earningIncomeBalance   = DTOCheckboxWithTextField();
+final _helpingOthersBalance   = DTOCheckboxWithTextField();
 
 // Workplace issue
-final _moreAppreciatedAtWork      = DTOCustomCheckboxWithTextField();
-final _remainingAppreciatedAtWork = DTOCustomCheckboxWithTextField();
+final _moreAppreciatedAtWork      = DTOCheckboxWithTextField();
+final _remainingAppreciatedAtWork = DTOCheckboxWithTextField();
 
 // Legacy issue
-final _betterLegacies = DTOCustomCheckboxWithTextField();
+final _betterLegacies = DTOCheckboxWithTextField();
 
 // Another issue (text field only)
 String _anotherIssueText = '';
@@ -33,26 +33,26 @@ String _anotherIssueText = '';
 
 String _groupsProblemsText = '';
 
-final _sameProblems         = DTOCustomSegmentedButtonWithTextField();
-final _harmonyHome          = DTOCustomSegmentedButtonWithTextField();
-final _appreciabilityAtWork = DTOCustomSegmentedButtonWithTextField();
-final _earningAbility       = DTOCustomSegmentedButtonWithTextField();
+final _sameProblems         = DTOSegmentedButtonWithTextField();
+final _harmonyHome          = DTOSegmentedButtonWithTextField();
+final _appreciabilityAtWork = DTOSegmentedButtonWithTextField();
+final _earningAbility       = DTOSegmentedButtonWithTextField();
 
 // ─── Callbacks: Individual Perspective ───────────────────────────────────────
 
-void _onBalanceCheckbox(DTOCustomCheckboxWithTextField data, bool? value) {
+void _onBalanceCheckbox(DTOCheckboxWithTextField data, bool? value) {
   data.checked = value!;
   _balanceIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfCheckboxChecked();
 }
 
-void _onWorkplaceCheckbox(DTOCustomCheckboxWithTextField data, bool? value) {
+void _onWorkplaceCheckbox(DTOCheckboxWithTextField data, bool? value) {
   data.checked = value!;
   _workplaceIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfCheckboxChecked();
 }
 
-void _onLegacyCheckbox(DTOCustomCheckboxWithTextField data, bool? value) {
+void _onLegacyCheckbox(DTOCheckboxWithTextField data, bool? value) {
   data.checked = value!;
   _legacyIssueHeadingKey.currentState
       ?.switchCustomHeadingDecorationIfCheckboxChecked();
@@ -66,7 +66,7 @@ void _onAnotherIssueText(String value) {
 
 // ─── Callbacks: Groups/Teams Perspective ─────────────────────────────────────
 
-void _onSegmentedButton(DTOCustomSegmentedButtonWithTextField data, Set<String>? values) =>
+void _onSegmentedButton(DTOSegmentedButtonWithTextField data, Set<String>? values) =>
     data.selection = values ?? {};
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -74,17 +74,17 @@ void _onSegmentedButton(DTOCustomSegmentedButtonWithTextField data, Set<String>?
 /// Serialises a segmented-button selection to a slash-separated string.
 String _segmentedToString(Set<String> values) => values.join('/');
 
-/// Converts a [DTOCustomCheckboxWithTextField] to the standard LinkedHashMap wire format.
+/// Converts a [DTOCheckboxWithTextField] to the standard LinkedHashMap wire format.
 /// The text value is omitted (left empty) when the checkbox is unchecked.
-LinkedHashMap<String, String> _checkboxDataToMap(DTOCustomCheckboxWithTextField f) =>
+LinkedHashMap<String, String> _checkboxDataToMap(DTOCheckboxWithTextField f) =>
     LinkedHashMap<String, String>.from({
       checkbox:  '${f.checked}',
       textField: f.checked ? f.text : '',
     });
 
-/// Converts a [DTOCustomSegmentedButtonWithTextField] to the standard LinkedHashMap wire format.
+/// Converts a [DTOSegmentedButtonWithTextField] to the standard LinkedHashMap wire format.
 /// Both values are omitted (left empty) when nothing is selected.
-LinkedHashMap<String, String> _segmentedDataToMap(DTOCustomSegmentedButtonWithTextField f) =>
+LinkedHashMap<String, String> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) =>
     LinkedHashMap<String, String>.from({
       segmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
       textField:       f.selection.isNotEmpty ? f.text : '',

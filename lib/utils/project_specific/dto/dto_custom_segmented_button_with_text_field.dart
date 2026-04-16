@@ -1,7 +1,7 @@
 /// {@category Utils - Project-specific}
-/// A DTO for the CustomSegmentedButtonWithTextField widget.
-class DTOCustomSegmentedButtonWithTextField {
+/// A DTO for the SegmentedButtonWithTextField widget.
+class DTOSegmentedButtonWithTextField {
    Set<String> selection;
   String text;
-  DTOCustomSegmentedButtonWithTextField() : selection = {}, text = '';
+  DTOSegmentedButtonWithTextField() : selection = {}, text = '';
 }

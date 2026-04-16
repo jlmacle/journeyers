@@ -157,28 +157,28 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   headingText: q.level3TitleBalanceIssue,
                   headingLevel: 3,
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem1,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
                   parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_studiesBalance, v),
                   parentTextFieldValueCallBackFunction: (v) { _studiesBalance.text = v; },
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem2,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
                   parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_accessingIncomeBalance, v),
                   parentTextFieldValueCallBackFunction: (v) { _accessingIncomeBalance.text = v; },
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem3,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
                   parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_earningIncomeBalance, v),
                   parentTextFieldValueCallBackFunction: (v) { _earningIncomeBalance.text = v; },
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleBalanceIssueItem4,
                   textFieldHint: pleaseDescribeTextHouseholdHint,
@@ -196,14 +196,14 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   headingText: q.level3TitleWorkplaceIssue,
                   headingLevel: 3,
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem1,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
                   parentCheckboxValueCallBackFunction: (v) => _onWorkplaceCheckbox(_moreAppreciatedAtWork, v),
                   parentTextFieldValueCallBackFunction: (v) { _moreAppreciatedAtWork.text = v; },
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleWorkplaceIssueItem2,
                   textFieldHint: pleaseDescribeTextWorkplaceHint,
@@ -221,7 +221,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                   headingText: q.level3TitleLegacyIssue,
                   headingLevel: 3,
                 ),
-                CustomCheckboxWithTextField
+                CheckboxWithTextField
                 (
                   checkboxText: q.level3TitleLegacyIssueItem1,
                   textFieldHint: pleaseDevelopOrTakeNotesHint,
@@ -316,7 +316,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  SegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
@@ -338,7 +338,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  SegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
@@ -360,7 +360,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  SegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
@@ -382,7 +382,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
                     headingLevel: 3,
                   ),
                   const Gap(level3AndSegmentedButtonGap),
-                  CustomSegmentedButtonWithTextField
+                  SegmentedButtonWithTextField
                   (
                     textOption1: 'Yes',
                     textOption2: 'No',
