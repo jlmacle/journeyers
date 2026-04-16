@@ -101,10 +101,6 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
     
-    // Retrieving the current list of file names: while CircularProgressIndicator is on-screen
-    await du.getStoredFileNamesOnMobile();
-    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
-    
     // Updating _isApplicationFolderPathLoading and re-build
     setState(() 
     {
