@@ -28,8 +28,6 @@ part 'context_analysis_form_ext.dart';
 /// Form used in the context analysis.
 class CAForm extends StatefulWidget 
 {
-  /// Global key for the context analysis form page
-  final GlobalKey<CAProcessState> caProcessKey;
   /// Callback function used to refresh the page from the context form to the dashboard
   final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
   /// Callback function used to switch the focusability of the bottom bar items
@@ -38,7 +36,6 @@ class CAForm extends StatefulWidget
   const CAForm
   ({
     super.key,
-    required this.caProcessKey,
     required this.parentCallbackFunctionToRefreshTheCAPage,
     required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
   });
@@ -64,10 +61,10 @@ class CAFormState extends State<CAForm>
   Future<void> saveDataAndMetadata() async 
   { 
     // Updating analysis title, keywords, and file name
-    _analysisTitle = widget.caProcessKey.currentState!.analysisTitle.trim() == "" 
-                      ? "Untitled" : widget.caProcessKey.currentState!.analysisTitle.trim();
-    _keywords = widget.caProcessKey.currentState!.keywords;
-    _fileName = widget.caProcessKey.currentState!.fileName;
+    _analysisTitle = caProcessKey.currentState!.analysisTitle.trim() == "" 
+                      ? "Untitled" : caProcessKey.currentState!.analysisTitle.trim();
+    _keywords = caProcessKey.currentState!.keywords;
+    _fileName = caProcessKey.currentState!.fileName;
 
     // Building the data structure
     await dataStructureBuilding();
