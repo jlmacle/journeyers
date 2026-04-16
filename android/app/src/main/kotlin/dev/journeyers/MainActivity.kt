@@ -13,6 +13,7 @@ package dev.journeyers
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.DocumentsContract
 import android.util.Log
 import androidx.documentfile.provider.DocumentFile
@@ -84,7 +85,7 @@ class MainActivity: FlutterActivity() {
                     val content = readFileFromStoredFolder(fileName)
                     if (content != null) result.success(content) else result.error("READ_FAIL", "File not found", null)
                 }
-                // deletes a file with the given name
+                // Deletes a file with the given name
                 "deleteFile" -> {
                     val fileName = call.argument<String>("fileName") ?: ""
                     val success = deleteFromStoredFolder(fileName)
@@ -212,7 +213,7 @@ class MainActivity: FlutterActivity() {
 
         return try 
         {
-            // 1. Ensures the treeUri is not null and context is valid
+            // Ensures the treeUri is not null and context is valid
             treeUri?.let { uri ->
                 // Gets the root DocumentFile from the tree URI
                 val rootDoc = DocumentFile.fromTreeUri(this, uri)
@@ -230,7 +231,6 @@ class MainActivity: FlutterActivity() {
                 
                 // Checks if the file actually exists after findFile operation
                 if (file != null && file.exists()) {
-                    // println("File found: ${file.name}")
                 } else {
                     println("File not found or fileName is incorrect")
                 }
@@ -249,45 +249,43 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    private fun deleteFromStoredFolder(fileName: String): Boolean {
+    private fun deleteFromStoredFolder(fileName: String): Boolean 
+    {
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val uriString = prefs.getString(KEY_URI, null) ?: return false
         val treeUri = Uri.parse(uriString)
 
-        return try {
+        try 
+        {
             val rootDoc = DocumentFile.fromTreeUri(this, treeUri)
             val file = rootDoc?.findFile(fileName)
             
-            if (file != null && file.exists()) {
-                // Captures the URI before deletion
+            if (file != null && file.exists()) 
+            {
                 val fileUri = file.uri 
-                
-                // Performs the deletion
                 val deleted = file.delete() 
 
-                if (deleted) {
-                    // Notifies the ContentResolver that this specific URI has changed
-                    // This is more effective for SAF than MediaScanner
-                    contentResolver.notifyChange(fileUri, null)
-                    
-                    // To trigger a MediaScan for the path
-                    // Note: This only works if the URI can be resolved to a physical path
-                    val path = fileUri.path 
-                    if (path != null) {
-                        android.media.MediaScannerConnection.scanFile(
-                            this, arrayOf(path), null
-                        ) { _, _ -> println("Refresh scan complete") }
-                    }
-                    true
-                } else {
-                    false
+                if (deleted) 
+                {
+                    // Notifies the ContentResolver
+                    contentResolver.notifyChange(fileUri, null)                    
+                    return true // Returns true if deletion and notification were handled
+                } 
+                else 
+                {
+                    println("Error: file.delete() failed")
+                    return false
                 }
-            } else {
-                false
+            } else 
+            {
+                println("Error: the file doesn't exist")
+                return false
             }
-        } catch (e: Exception) {
-            println("Error deleting file: ${e.message}")
-            false
+        } 
+        catch (e: Exception) 
+        {
+            Log.e(TAG, "Error deleting file: ${e.message}")
+            return false
         }
     }
 
