@@ -211,6 +211,7 @@ class DashboardUtils {
   /// Method used to retrieved all the file names, from the user application folder.
   Future<List<String>> getStoredFileNamesOnMobile() async
   {
+    if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile: \n currentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
     // Getting the list of stored file names
     List<Object?> result;
     if(Platform.isAndroid)
@@ -223,7 +224,6 @@ class DashboardUtils {
     if (cu.areListsEqualSets(currentListOfStoredFileNames, retrievedFileNames) && currentListOfStoredFileNames.isNotEmpty)
     {
       pu.printd("Error: retrievedFileNames and currentListOfStoredFileNames have the same elements.");
-      pu.printd("Error: currentListOfStoredFileNames: $currentListOfStoredFileNames");
       pu.printd("Error: retrievedFileNames: $retrievedFileNames");
     }
 
