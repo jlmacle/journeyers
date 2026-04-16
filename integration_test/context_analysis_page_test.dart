@@ -372,7 +372,7 @@ void main() async
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
-          expect(find.byType(CustomCheckboxWithTextField), findsNWidgets(7));
+          expect(find.byType(CheckboxWithTextField), findsNWidgets(7));
         },
       );
 
@@ -421,7 +421,7 @@ void main() async
           await expandIndividualTile(tester);
 
           final firstCustomCheckbox = find.descendant(
-            of:       find.byType(CustomCheckboxWithTextField).first,
+            of:       find.byType(CheckboxWithTextField).first,
             matching: find.byType(Checkbox),
           );
           await tester.ensureVisible(firstCustomCheckbox);
@@ -443,7 +443,7 @@ void main() async
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
-          final firstCustomCheckbox = find.byType(CustomCheckboxWithTextField).first;
+          final firstCustomCheckbox = find.byType(CheckboxWithTextField).first;
           await tester.ensureVisible(firstCustomCheckbox);
 
           // Checking the checkbox to reveal the note field
@@ -452,7 +452,7 @@ void main() async
 
           // Verifying the checkbox checked          
           // Returns false: 
-          // expect(tester.widget<CustomCheckboxWithTextField>(firstCustomCheckbox).checkboxIsChecked, isTrue);
+          // expect(tester.widget<CheckboxWithTextField>(firstCustomCheckbox).checkboxIsChecked, isTrue);
           var firstCheckbox = find.descendant(of: firstCustomCheckbox, matching: find.byType(Checkbox));
           expect(tester.widget<Checkbox>(firstCheckbox).value, isTrue);
           
@@ -532,7 +532,7 @@ void main() async
           await pumpFormPage(tester);
           await expandGroupTile(tester);
 
-          expect(find.byType(CustomSegmentedButtonWithTextField), findsNWidgets(4));
+          expect(find.byType(SegmentedButtonWithTextField), findsNWidgets(4));
         },
       );
 
@@ -549,7 +549,7 @@ void main() async
           await expandGroupTile(tester);
 
           final firstCustomSegmentedButton =
-              find.byType(CustomSegmentedButtonWithTextField).first;
+              find.byType(SegmentedButtonWithTextField).first;
           await tester.ensureVisible(firstCustomSegmentedButton);
 
           // No TextField inside the segmented button widget before any selection
@@ -582,7 +582,7 @@ void main() async
           await expandGroupTile(tester);
 
           final firstCustomSegmentedButton =
-              find.byType(CustomSegmentedButtonWithTextField).first;
+              find.byType(SegmentedButtonWithTextField).first;
           await tester.ensureVisible(firstCustomSegmentedButton);
 
           // Making a selection to reveal the note field
@@ -646,7 +646,7 @@ void main() async
 
           // Checking the first balance checkbox
           final firstCustomCheckbox = find.descendant(
-            of:       find.byType(CustomCheckboxWithTextField).first,
+            of:       find.byType(CheckboxWithTextField).first,
             matching: find.byType(Checkbox)
           );
           await tester.ensureVisible(firstCustomCheckbox);

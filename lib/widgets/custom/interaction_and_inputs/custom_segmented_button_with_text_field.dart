@@ -10,7 +10,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 
 /// {@category Custom widgets}
 /// A customizable segmented button that displays a customizable text field when a value is selected.
-class CustomSegmentedButtonWithTextField extends StatefulWidget 
+class SegmentedButtonWithTextField extends StatefulWidget 
 {
   /// The first option of the segmented button.
   final String textOption1;
@@ -61,7 +61,7 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   final ValueChanged<Set<String>>
   parentSegmentedButtonValueCallBackFunction;
 
-  const CustomSegmentedButtonWithTextField
+  const SegmentedButtonWithTextField
   ({
     super.key,
     required this.textOption1,
@@ -84,10 +84,10 @@ class CustomSegmentedButtonWithTextField extends StatefulWidget
   });
 
   @override
-  State<CustomSegmentedButtonWithTextField> createState() => _CustomSegmentedButtonWithTextFieldState();
+  State<SegmentedButtonWithTextField> createState() => _SegmentedButtonWithTextFieldState();
 }
 
-class _CustomSegmentedButtonWithTextFieldState extends State<CustomSegmentedButtonWithTextField> 
+class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextField> 
 {
   Set<String> _selection = {};
   String _textFieldValue = "";

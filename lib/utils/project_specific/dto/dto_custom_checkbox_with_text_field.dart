@@ -1,7 +1,7 @@
 /// {@category Utils - Project-specific}
-/// A DTO for the CustomCheckboxWithTextField widget.
-class DTOCustomCheckboxWithTextField {
+/// A DTO for the CheckboxWithTextField widget.
+class DTOCheckboxWithTextField {
   bool checked;
   String text;
-  DTOCustomCheckboxWithTextField() : checked = false, text = '';
+  DTOCheckboxWithTextField() : checked = false, text = '';
 }

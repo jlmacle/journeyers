@@ -11,7 +11,7 @@ import 'package:journeyers/widgets/custom/text/custom_focusable_text.dart';
 
 /// {@category Custom widgets}
 /// A customizable checkbox that displays a customizable text field when the box is checked.
-class CustomCheckboxWithTextField extends StatefulWidget 
+class CheckboxWithTextField extends StatefulWidget 
 {
   /// The text of the checkbox.
   final String checkboxText;
@@ -55,7 +55,7 @@ class CustomCheckboxWithTextField extends StatefulWidget
   /// The checkbox-related callback function for the parent widget.
   final ValueChanged<bool?>? parentCheckboxValueCallBackFunction;
 
-  const CustomCheckboxWithTextField
+  const CheckboxWithTextField
   ({
     super.key,
     required this.checkboxText,
@@ -75,10 +75,10 @@ class CustomCheckboxWithTextField extends StatefulWidget
   });
 
   @override
-  State<CustomCheckboxWithTextField> createState() =>  CustomCheckboxWithTextFieldState();
+  State<CheckboxWithTextField> createState() =>  CheckboxWithTextFieldState();
 }
 
-class CustomCheckboxWithTextFieldState extends State<CustomCheckboxWithTextField> 
+class CheckboxWithTextFieldState extends State<CheckboxWithTextField> 
 {
   bool _isChecked = false;
   String _textFieldValue = "";
