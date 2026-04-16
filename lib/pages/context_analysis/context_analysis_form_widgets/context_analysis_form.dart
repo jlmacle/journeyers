@@ -91,7 +91,7 @@ class CAFormState extends State<CAForm>
                           fileName: _fileName);
     // Updating the file names list: after printToCSV
     await du.getStoredFileNamesOnMobile();
-    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
     if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
 
     // Saving the dashboard metadata if filePath not null
