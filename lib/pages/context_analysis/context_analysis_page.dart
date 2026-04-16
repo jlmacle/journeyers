@@ -14,42 +14,42 @@ import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analysis sessions.
-/// The context analysis page embeds a DashboardPage and/or a ContextAnalysisFormPage.
-class ContextAnalysisPage extends StatefulWidget 
+/// The context analysis page embeds a DashboardPage and/or a CAFormPage.
+class CAPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
-  const ContextAnalysisPage
+  const CAPage
   ({
     super.key,
     this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
   });
 
   @override
-  State<ContextAnalysisPage> createState() => ContextAnalysisPageState();
+  State<CAPage> createState() => CAPageState();
 }
 
-class ContextAnalysisPageState extends State<ContextAnalysisPage> 
+class CAPageState extends State<CAPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<ContextAnalysisProcessState> contextAnalysisProcessKey = GlobalKey(debugLabel:'context-analysis-process');
+  GlobalKey<CAProcessState> caProcessKey = GlobalKey(debugLabel:'context-analysis-process');
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'analyses-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
   bool _preferencesLoading = true;
   bool? _isInformationModalAlreadyAcknowledged;
-  bool? _wasContextAnalysisSessionDataSaved;
+  bool? _wasCASessionDataSaved;
 
   getPreferences() async 
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
     _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
-    _wasContextAnalysisSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.contextAnalysesContext);
+    _wasCASessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.contextAnalysesContext);
 
     setState(() {_preferencesLoading = false;});
     if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
-    if (preferencesDebug) pu.printd("Preferences: _wasContextAnalysisSessionDataSaved: $_wasContextAnalysisSessionDataSaved");
+    if (preferencesDebug) pu.printd("Preferences: _wasCASessionDataSaved: $_wasCASessionDataSaved");
 
     if ((_isInformationModalAlreadyAcknowledged == false) && mounted) 
     {
@@ -100,7 +100,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   void onDataSaved() 
   {
     setState(() {
-      _wasContextAnalysisSessionDataSaved = true;
+      _wasCASessionDataSaved = true;
     });
   }
 
@@ -109,7 +109,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   void onAllSessionFilesDeleted() 
   {
     setState(() {
-      _wasContextAnalysisSessionDataSaved = false;
+      _wasCASessionDataSaved = false;
     });
   }
 
@@ -120,12 +120,12 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
   }
 
   //**************** FOCUS NODE related data and methods ****************//
-  FocusNode contextAnalysisFormPageFocusNode = .new();
+  FocusNode caFormPageFocusNode = .new();
 
   @override
   void dispose() 
   {
-    contextAnalysisFormPageFocusNode.dispose();
+    caFormPageFocusNode.dispose();
     super.dispose();
   } 
 
@@ -155,7 +155,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
           else ...
           [
             // Checking if context analysis session data has been stored
-            if (_wasContextAnalysisSessionDataSaved!) ...
+            if (_wasCASessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new context analysis
               SizedBox
@@ -173,7 +173,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                     child: ElevatedButton
                     (                    
                       key: const Key('analyses-new-session-button'),
-                      onPressed: () { setState(() { _wasContextAnalysisSessionDataSaved = false;});},
+                      onPressed: () { setState(() { _wasCASessionDataSaved = false;});},
                       style: ElevatedButton.styleFrom
                       (
                         backgroundColor: white,
@@ -198,7 +198,7 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
                   previewWidget: 
                   ({required String pathToData}) 
-                  { return ContextAnalysisPreviewWidget(pathToStoredData: pathToData);},  
+                  { return CAPreviewWidget(pathToStoredData: pathToData);},  
                   parentCallbackFunctionWhenAllSessionFilesAreDeleted: onAllSessionFilesDeleted,
                   
                 )
@@ -215,8 +215,8 @@ class ContextAnalysisPageState extends State<ContextAnalysisPage>
                 child: 
                 Focus
                 (
-                  focusNode: contextAnalysisFormPageFocusNode,
-                  child: ContextAnalysisProcess(key: contextAnalysisProcessKey, parentCallbackFunctionToRefreshTheContextAnalysisPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  focusNode: caFormPageFocusNode,
+                  child: CAProcess(key: caProcessKey, parentCallbackFunctionToRefreshTheCAPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )

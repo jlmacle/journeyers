@@ -26,25 +26,25 @@ import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.da
 // When an expansion tile is expanded, the bottom bar items are excluded from focus.
 // If the user reaches the "save data" button, the bottom bar items are restored as accessible to focus. 
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
-class ContextAnalysisProcess extends StatefulWidget 
+class CAProcess extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
-  final VoidCallback parentCallbackFunctionToRefreshTheContextAnalysisPage;
+  final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
-  const ContextAnalysisProcess({
+  const CAProcess({
     super.key,
-    this.parentCallbackFunctionToRefreshTheContextAnalysisPage = placeHolderVoidCallback,
+    this.parentCallbackFunctionToRefreshTheCAPage = placeHolderVoidCallback,
     this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
     });
 
   @override
-  State<ContextAnalysisProcess> createState() => ContextAnalysisProcessState();
+  State<CAProcess> createState() => CAProcessState();
 }
 
-class ContextAnalysisProcessState extends State<ContextAnalysisProcess> 
+class CAProcessState extends State<CAProcess> 
 {
   //**************** TEXT FIELD related data, methods and text editing controllers ****************//
   // SESSION TITLE
@@ -71,7 +71,7 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
   }
   
   // Global key for the context form
-  final GlobalKey<ContextAnalysisFormState> _contextFormKey = GlobalKey(debugLabel:'form');
+  final GlobalKey<CAFormState> _contextFormKey = GlobalKey(debugLabel:'form');
   
   // Method used to print the form data to CSV
   Future<void> saveDataAndMetadata() async
@@ -168,21 +168,21 @@ class ContextAnalysisProcessState extends State<ContextAnalysisProcess>
             ),
 
             // Text field for the analysis title
-            ContextAnalysisTitle(analysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
+            CATitle(analysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
             
             // Keywords
-            ContextAnalysisKeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
+            CAKeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
             
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
             const Gap(preAndPostLevel2DividerGap),
 
             // Form 
-            ContextAnalysisForm
+            CAForm
             (
               key: _contextFormKey,
-              contextAnalysisFormPageKey: widget.key as GlobalKey<ContextAnalysisProcessState>,
-              parentCallbackFunctionToRefreshTheContextAnalysisPage: widget.parentCallbackFunctionToRefreshTheContextAnalysisPage,
+              caFormPageKey: widget.key as GlobalKey<CAProcessState>,
+              parentCallbackFunctionToRefreshTheCAPage: widget.parentCallbackFunctionToRefreshTheCAPage,
               parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
             ),                        
                         

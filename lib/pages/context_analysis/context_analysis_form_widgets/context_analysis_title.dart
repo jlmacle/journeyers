@@ -4,22 +4,22 @@ import 'package:journeyers/app_themes.dart';
 
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
-class ContextAnalysisTitle extends StatefulWidget 
+class CATitle extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> analysisTitleUpdatedCallbackFunction;
 
-  const ContextAnalysisTitle
+  const CATitle
   ({
     super.key,
     required this.analysisTitleUpdatedCallbackFunction
   });
 
   @override
-  State<ContextAnalysisTitle> createState() => _ContextAnalysisTitleState();
+  State<CATitle> createState() => _CATitleState();
 }
 
-class _ContextAnalysisTitleState extends State<ContextAnalysisTitle> 
+class _CATitleState extends State<CATitle> 
 {
 
   @override
