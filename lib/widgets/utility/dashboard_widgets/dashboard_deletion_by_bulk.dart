@@ -48,6 +48,7 @@ class DashboardDeletionByBulk extends StatefulWidget
 class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
   //**************** GLOBAL KEYS ****************//
+  GlobalKey<GPSPageState> caPageKey = GlobalKey();
   GlobalKey<GPSPageState> gpsPageKey = GlobalKey();
   GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: 'sessions-dashboard-page');  
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywords = GlobalKey();
@@ -108,11 +109,14 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       // resetWasSessionDataSavedStatus to false
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page, to re-start in the process page
-      gpsPageKey.currentState?.onAllSessionFilesDeleted();
+      if (widget.dashboardContext == DashboardUtils.contextAnalysesContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
+      else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.onAllSessionFilesDeleted();}
+      else {pu.printd("Error: Unexpected context: ${widget.dashboardContext}");}
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
     else
     {
+
       // Updating the keywords UI
       dashboardFilteringByKeywords.currentState?.setState((){});
 
