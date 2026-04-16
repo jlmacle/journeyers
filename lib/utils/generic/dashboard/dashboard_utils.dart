@@ -168,9 +168,9 @@ class DashboardUtils {
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        if (sessionDataDebug) pu.printd("Session Data: Session data with path $filePathRelatedToDataToDelete removed from dashboard data.");
+        if (sessionDataDebug) pu.printd("Session Data: Session metadata with path $filePathRelatedToDataToDelete removed from dashboard data.");
       } else {
-        if (sessionDataDebug) pu.printd("Session Data: No session data found with path $filePathRelatedToDataToDelete in dashboard data.");
+        if (sessionDataDebug) pu.printd("Session Data: No session metadata found with path $filePathRelatedToDataToDelete in dashboard data.");
       }
     } catch (e) {
       if (sessionDataDebug) pu.printd("Session Data: Error deleting session metadata from dashboard data: $e");
