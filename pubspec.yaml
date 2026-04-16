@@ -73,7 +73,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/contextAnalysisFormPreLoading/context_analysis_form_data_for_preloading.json
+    - assets/caFormPreLoading/context_analysis_form_data_for_preloading.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

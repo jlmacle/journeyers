@@ -4,22 +4,22 @@ import 'package:journeyers/app_themes.dart';
 
 /// {@category Context analysis}
 /// A widget used for keywords declaration in the context analysis process.
-class ContextAnalysisKeywordsDeclaration extends StatefulWidget 
+class CAKeywordsDeclaration extends StatefulWidget 
 {
   /// A callback function called to update the keywords describing a session.
   final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;
 
-  const ContextAnalysisKeywordsDeclaration
+  const CAKeywordsDeclaration
   ({
     super.key,
     required this.keywordsUpdatedCallbackFunction
   });
 
   @override
-  State<ContextAnalysisKeywordsDeclaration> createState() => _ContextAnalysisKeywordsDeclarationState();
+  State<CAKeywordsDeclaration> createState() => _CAKeywordsDeclarationState();
 }
 
-class _ContextAnalysisKeywordsDeclarationState extends State<ContextAnalysisKeywordsDeclaration> 
+class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> 
 {
 
   final List<String> _keywords = [];

@@ -8,20 +8,20 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 /// {@category Context analysis}
 /// A preview widget used in the context analysis dashboard.
-class ContextAnalysisPreviewWidget extends StatefulWidget 
+class CAPreviewWidget extends StatefulWidget 
 {
   final String pathToStoredData;
 
-  const ContextAnalysisPreviewWidget({
+  const CAPreviewWidget({
     super.key, 
     required this.pathToStoredData
   });
 
   @override
-  State<ContextAnalysisPreviewWidget> createState() => _ContextAnalysisPreviewWidgetState();
+  State<CAPreviewWidget> createState() => _CAPreviewWidgetState();
 }
 
-class _ContextAnalysisPreviewWidgetState extends State<ContextAnalysisPreviewWidget> 
+class _CAPreviewWidgetState extends State<CAPreviewWidget> 
 {
   bool _isLoading = true;
   final Map<String, dynamic> sectionsIndividual = {};

@@ -47,20 +47,20 @@ Future<void> pumpFormPage(WidgetTester tester) async {
     'isInformationModalAcknowledged': true,
     'wasSessionDataSaved': false,
   });
-  await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+  await tester.pumpWidget(const MaterialApp(home: CAPage()));
   await tester.pumpAndSettle();
 }
 
 /// Expands the individual perspective ExpansionTile by tapping its title text.
 Future<void> expandIndividualTile(WidgetTester tester) async {
-  final q = ContextAnalysisFormQuestions();
+  final q = CAFormQuestions();
   await tester.tap(find.text(q.level2TitleIndividual));
   await tester.pumpAndSettle();
 }
 
 /// Expands the group/teams perspective ExpansionTile by tapping its title text.
 Future<void> expandGroupTile(WidgetTester tester) async {
-  final q = ContextAnalysisFormQuestions();
+  final q = CAFormQuestions();
   await tester.tap(find.text(q.level2TitleGroup));
   await tester.pumpAndSettle();
 }
@@ -149,7 +149,7 @@ void main() async
 
           // Widget wrapped in a MaterialApp because the page uses Scaffold, 
           // showDialog (Navigator), and AppLocalizations
-          await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+          await tester.pumpWidget(const MaterialApp(home: CAPage()));
 
           // getPreferences is async and calls setState. 
           // Need to pump and wait for the microtasks to finish.
@@ -173,8 +173,8 @@ void main() async
           expect(dashboardFinder, findsNothing);
 
           // Verifying the presence of the context analysis form
-          final contextAnalysisFormFinder = find.byType(ContextAnalysisProcess);
-          expect(contextAnalysisFormFinder, findsOneWidget);
+          final caFormFinder = find.byType(CAProcess);
+          expect(caFormFinder, findsOneWidget);
         }
       );
 
@@ -198,7 +198,7 @@ void main() async
 
           // Widget wrapped in a MaterialApp because the page uses Scaffold, 
           // showDialog (Navigator), and AppLocalizations
-          await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+          await tester.pumpWidget(const MaterialApp(home: CAPage()));
 
           // getPreferences is async and calls setState. 
           // Need to pump and wait for the microtasks to finish.
@@ -213,8 +213,8 @@ void main() async
           expect(dashboardFinder, findsNothing);
 
           // Verifying the presence of the context analysis form
-          final contextAnalysisFormFinder = find.byType(ContextAnalysisProcess);
-          expect(contextAnalysisFormFinder, findsOneWidget);
+          final caFormFinder = find.byType(CAProcess);
+          expect(caFormFinder, findsOneWidget);
         }
       );
 
@@ -238,7 +238,7 @@ void main() async
           
           // Widget wrapped in a MaterialApp because the page uses Scaffold, 
           // showDialog (Navigator), and AppLocalizations
-          await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+          await tester.pumpWidget(const MaterialApp(home: CAPage()));
 
           // getPreferences is async and calls setState. 
           // Need to pump and wait for the microtasks to finish.
@@ -248,8 +248,8 @@ void main() async
           // GlobalKeys are different objects, 
           // and are not compared by labels, even if with the same label.
           // final formWidget = find.byKey(GlobalKey(debugLabel:'context-analysis-process'));
-          final contextAnalysisFormFinder = find.byType(ContextAnalysisProcess);
-          expect(contextAnalysisFormFinder, findsOneWidget);
+          final caFormFinder = find.byType(CAProcess);
+          expect(caFormFinder, findsOneWidget);
 
           // Verifying the dashboard absent
           final dashboardFinder = find.byType(SessionsDashboardPage);
@@ -273,7 +273,7 @@ void main() async
             'wasSessionDataSaved': true,
           });
           
-          await tester.pumpWidget(const MaterialApp(home: ContextAnalysisPage()));
+          await tester.pumpWidget(const MaterialApp(home: CAPage()));
 
           // Waiting for async preferences and rebuild
           await tester.pumpAndSettle();
@@ -321,7 +321,7 @@ void main() async
         'Individual and group tiles carry the correct heading text',
         (tester) async
         {
-          final q = ContextAnalysisFormQuestions();
+          final q = CAFormQuestions();
           await pumpFormPage(tester);
 
           // TODO: using keys
@@ -349,7 +349,7 @@ void main() async
         'Expanding the tile reveals all four level-3 section headings',
         (tester) async
         {
-          final q = ContextAnalysisFormQuestions();
+          final q = CAFormQuestions();
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
@@ -383,7 +383,7 @@ void main() async
         'Balance issue: all four item labels are present after expansion',
         (tester) async
         {
-          final q = ContextAnalysisFormQuestions();
+          final q = CAFormQuestions();
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
@@ -401,7 +401,7 @@ void main() async
         'Workplace issue: both item labels are present after expansion',
         (tester) async
         {
-          final q = ContextAnalysisFormQuestions();
+          final q = CAFormQuestions();
           await pumpFormPage(tester);
           await expandIndividualTile(tester);
 
@@ -508,7 +508,7 @@ void main() async
         'Expanding the tile reveals all five level-3 section headings',
         (tester) async
         {
-          final q = ContextAnalysisFormQuestions();
+          final q = CAFormQuestions();
           await pumpFormPage(tester);
           await expandGroupTile(tester);
 
@@ -656,7 +656,7 @@ void main() async
 
           // Collapsing the tile then re-expand it
           // maintainState: true keeps widget state alive between collapses
-          final q = ContextAnalysisFormQuestions();
+          final q = CAFormQuestions();
           await tester.tap(find.text(q.level2TitleIndividual), warnIfMissed: false);
           await tester.pumpAndSettle();
           await tester.tap(find.text(q.level2TitleIndividual), warnIfMissed: false);

@@ -25,28 +25,28 @@ part 'context_analysis_form_ext.dart';
 
 /// {@category Context analysis}
 /// Form used in the context analysis.
-class ContextAnalysisForm extends StatefulWidget 
+class CAForm extends StatefulWidget 
 {
   /// Global key for the context analysis form page
-  final GlobalKey<ContextAnalysisProcessState> contextAnalysisFormPageKey;
+  final GlobalKey<CAProcessState> caFormPageKey;
   /// Callback function used to refresh the page from the context form to the dashboard
-  final VoidCallback parentCallbackFunctionToRefreshTheContextAnalysisPage;
+  final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
   /// Callback function used to switch the focusability of the bottom bar items
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
-  const ContextAnalysisForm
+  const CAForm
   ({
     super.key,
-    required this.contextAnalysisFormPageKey,
-    required this.parentCallbackFunctionToRefreshTheContextAnalysisPage,
+    required this.caFormPageKey,
+    required this.parentCallbackFunctionToRefreshTheCAPage,
     required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
   });
 
   @override
-  State<ContextAnalysisForm> createState() => ContextAnalysisFormState();
+  State<CAForm> createState() => CAFormState();
 }
 
-class ContextAnalysisFormState extends State<ContextAnalysisForm> 
+class CAFormState extends State<CAForm> 
 {
   //**************** ACCESSIBILITY related data ****************//
   // Data related to the folding/unfolding of the expansion tiles
@@ -63,10 +63,10 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
   Future<void> saveDataAndMetadata() async 
   { 
     // Updating analysis title, keywords, and file name
-    _analysisTitle = widget.contextAnalysisFormPageKey.currentState!.analysisTitle.trim() == "" 
-                      ? "Untitled" : widget.contextAnalysisFormPageKey.currentState!.analysisTitle.trim();
-    _keywords = widget.contextAnalysisFormPageKey.currentState!.keywords;
-    _fileName = widget.contextAnalysisFormPageKey.currentState!.fileName;
+    _analysisTitle = widget.caFormPageKey.currentState!.analysisTitle.trim() == "" 
+                      ? "Untitled" : widget.caFormPageKey.currentState!.analysisTitle.trim();
+    _keywords = widget.caFormPageKey.currentState!.keywords;
+    _fileName = widget.caFormPageKey.currentState!.fileName;
 
     // Building the data structure
     await dataStructureBuilding();
@@ -109,7 +109,7 @@ class ContextAnalysisFormState extends State<ContextAnalysisForm>
     }
     
     // Page refreshing for dashboard display
-    widget.parentCallbackFunctionToRefreshTheContextAnalysisPage();
+    widget.parentCallbackFunctionToRefreshTheCAPage();
   }
 
   

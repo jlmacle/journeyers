@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget
 class _MyHomePageState extends State<MyHomePage> 
 {
   //**************** GLOBAL KEYS related data ****************//
-  final GlobalKey<ContextAnalysisPageState> _contextAnalysisKey = GlobalKey();
+  final GlobalKey<CAPageState> _caPageKey = GlobalKey();
 
   //**************** BOTTOM NAVIGATION BAR related data and methods ****************//
   int _currentIndex = 0;
@@ -43,9 +43,9 @@ class _MyHomePageState extends State<MyHomePage>
   // Getter for the context analyses page and for the group problem solvings page
   List<Widget> get _pages => 
   [
-    ContextAnalysisPage
+    CAPage
     (
-      key: _contextAnalysisKey,
+      key: _caPageKey,
       parentCallbackFunctionToSetFocusabilityOfBottomBarItems: 
       (bool boolValue) 
       {
@@ -59,10 +59,10 @@ class _MyHomePageState extends State<MyHomePage>
 
   // TODO: to check if still relevant
   // Method used to re-pull the preferences from the context analysis page
-  void _handleContextAnalysisTap()
+  void _handleCATap()
   {
     // re-pulling the preferences from the context analysis page
-    _contextAnalysisKey.currentState?.getPreferences();    
+    _caPageKey.currentState?.getPreferences();    
   }
  
   //**************** LOCALE related method ****************//
@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage>
             switch(index)
             {
               case 0:
-                _handleContextAnalysisTap();
+                _handleCATap();
             }
           },
           items: const 
