@@ -185,7 +185,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
 
     // Updating the file names list: _deleteSelectedSession
     await du.getStoredFileNamesOnMobile();
-    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
   }
 
   //**************** EDITION OF SESSION DATA ****************/

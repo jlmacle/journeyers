@@ -146,14 +146,14 @@ class GPSProcessState extends State<GPSProcess>
         filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
         // Updating the file names list: saveFileOnAndroid
         await du.getStoredFileNamesOnMobile();
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
       } 
       else if (Platform.isIOS) 
       {
         filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
         // Updating the file names list: saveFileOniOS
         await du.getStoredFileNamesOnMobile();
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
       } 
       else 
       {
@@ -167,7 +167,7 @@ class GPSProcessState extends State<GPSProcess>
         );
         // Updating the file names list: FilePicker.platform.saveFile
         await du.getStoredFileNamesOnMobile();
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: ${du.currentListOfStoredFileNames}");
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
       }
 
       // Save Metadata to Dashboard if file was saved successfully
