@@ -381,7 +381,7 @@ class SessionsDashboardPageState extends State<SessionsDashboardPage>
                                                   child: 
                                                   Text(
                                                     key: ValueKey('session-title-$index'),
-                                                    (widget.dashboardContext == DashboardUtils.groupProblemSolvingsContext) ? "$sessionTitle (gps)" : sessionTitle,
+                                                    (widget.dashboardContext == DashboardUtils.gpsContext) ? "$sessionTitle (gps)" : sessionTitle,
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,

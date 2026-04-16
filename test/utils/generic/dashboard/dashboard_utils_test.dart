@@ -168,7 +168,7 @@ void main() {
           pathToFile: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
+          typeOfContextData: DashboardUtils.gpsContext,
           title: 'GPS Session',
           keywords: [],
           formattedDate: aDate,
@@ -179,7 +179,7 @@ void main() {
           typeOfContextData: DashboardUtils.contextAnalysesContext,
         );
         final gpsFile = await sut!.getSessionMetadataFile(
-          typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
+          typeOfContextData: DashboardUtils.gpsContext,
         );
 
         expect(_readRecords(caFile), hasLength(1));

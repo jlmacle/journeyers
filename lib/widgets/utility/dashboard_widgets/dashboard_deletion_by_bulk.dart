@@ -48,7 +48,7 @@ class DashboardDeletionByBulk extends StatefulWidget
 class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<GPSPageState> groupProblemSolvingPageKey = GlobalKey();
+  GlobalKey<GPSPageState> gpsPageKey = GlobalKey();
   GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: 'sessions-dashboard-page');  
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywords = GlobalKey();
 
@@ -108,7 +108,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       // resetWasSessionDataSavedStatus to false
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page, to re-start in the process page
-      groupProblemSolvingPageKey.currentState?.onAllSessionFilesDeleted();
+      gpsPageKey.currentState?.onAllSessionFilesDeleted();
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
     else

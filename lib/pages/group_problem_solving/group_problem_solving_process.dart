@@ -180,14 +180,14 @@ class GPSProcessState extends State<GPSProcess>
         var formattedDate = formatter.format(now);   
         await du.saveDashboardMetadata
         (
-          typeOfContextData: DashboardUtils.groupProblemSolvingsContext,
+          typeOfContextData: DashboardUtils.gpsContext,
           title: sessionTitle, 
           keywords: _currentKeywords, 
           formattedDate: formattedDate,
           pathToFile: filePath,
         );
 
-        await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.groupProblemSolvingsContext);
+        await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.gpsContext);
 
         widget.parentCallbackFunctionToRefreshTheGPSPage();
 

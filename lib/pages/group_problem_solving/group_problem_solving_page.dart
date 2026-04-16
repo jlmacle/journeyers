@@ -27,7 +27,7 @@ class GPSPage extends StatefulWidget
 class GPSPageState extends State<GPSPage> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<GPSProcessState> groupProblemSolvingPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
+  GlobalKey<GPSProcessState> gpsPageKey = GlobalKey(debugLabel:'group-problem-solving-page');
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey(debugLabel: 'group-problem-solving-dashboard-sorting-by-keywords');
 
   //**************** PREFERENCES related data and methods ****************//
@@ -37,7 +37,7 @@ class GPSPageState extends State<GPSPage>
   getPreferences() async 
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
-    _wasGPSSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.groupProblemSolvingsContext);
+    _wasGPSSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
     setState(() {_preferencesLoading = false;});
     if (preferencesDebug) pu.printd("Preferences: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");
@@ -64,12 +64,12 @@ class GPSPageState extends State<GPSPage>
   }
 
     //**************** FOCUS NODE related data and methods ****************//
-  FocusNode groupProblemSolvingPageFocusNode = .new();
+  FocusNode gpsPageFocusNode = .new();
 
   @override
   void dispose() 
   {
-    groupProblemSolvingPageFocusNode.dispose();
+    gpsPageFocusNode.dispose();
     super.dispose();
   } 
 
@@ -138,7 +138,7 @@ class GPSPageState extends State<GPSPage>
                 SessionsDashboardPage
                 (
                   key: const Key('group-problem-solving-dashboard'),
-                  dashboardContext: DashboardUtils.groupProblemSolvingsContext,
+                  dashboardContext: DashboardUtils.gpsContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey,
                   previewWidget: 
                     ({required String pathToData}) 
@@ -158,8 +158,8 @@ class GPSPageState extends State<GPSPage>
                 child: 
                 Focus
                 (
-                  focusNode: groupProblemSolvingPageFocusNode,
-                  child: GPSProcess(key: groupProblemSolvingPageKey, parentCallbackFunctionToRefreshTheGPSPage: onDataSaved),
+                  focusNode: gpsPageFocusNode,
+                  child: GPSProcess(key: gpsPageKey, parentCallbackFunctionToRefreshTheGPSPage: onDataSaved),
                 ),
               ),
             )
