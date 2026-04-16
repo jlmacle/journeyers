@@ -6,8 +6,9 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
+import 'package:journeyers/widgets/utility/dashboard_page.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
+
 
 /// {@category Pages}
 /// {@category Group problem-solving}
@@ -58,6 +59,8 @@ class GPSPageState extends State<GPSPage>
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
   {
+    if (sessionDataDebug) pu.printd("Session Data: GPS page: onAllSessionFilesDeleted");
+
     setState(() {
       _wasGPSSessionDataSaved = false;
     });
@@ -135,7 +138,7 @@ class GPSPageState extends State<GPSPage>
               Expanded
               (
                 child: 
-                SessionsDashboardPage
+                DashboardPage
                 (
                   key: const Key('group-problem-solving-dashboard'),
                   dashboardContext: DashboardUtils.gpsContext,

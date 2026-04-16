@@ -8,8 +8,9 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
+import 'package:journeyers/widgets/utility/dashboard_page.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/sessions_dashboard_page.dart';
+
 
 /// {@category Pages}
 /// {@category Context analysis}
@@ -108,6 +109,8 @@ class CAPageState extends State<CAPage>
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
   {
+    if (sessionDataDebug) pu.printd("Session Data: CA page: onAllSessionFilesDeleted");
+
     setState(() {
       _wasCASessionDataSaved = false;
     });
@@ -191,7 +194,7 @@ class CAPageState extends State<CAPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
-                child: SessionsDashboardPage
+                child: DashboardPage
                 (
                   key: const Key('analyses-dashboard'), 
                   dashboardContext: DashboardUtils.contextAnalysesContext,

@@ -8,11 +8,12 @@ import 'package:gap/gap.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
-import 'package:journeyers/utils/generic/l10n/l10n_utils.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/l10n/l10n_utils.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 
 /// {@category Pages}
 /// The homepage for the app.
@@ -33,8 +34,6 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> 
 {
-  //**************** GLOBAL KEYS related data ****************//
-  final GlobalKey<CAPageState> _caPageKey = GlobalKey();
 
   //**************** BOTTOM NAVIGATION BAR related data and methods ****************//
   int _currentIndex = 0;
@@ -45,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage>
   [
     CAPage
     (
-      key: _caPageKey,
+      key: caPageKey,
       parentCallbackFunctionToSetFocusabilityOfBottomBarItems: 
       (bool boolValue) 
       {
@@ -53,8 +52,11 @@ class _MyHomePageState extends State<MyHomePage>
         setState(() {_areBottomNavigationItemsFocusable = boolValue;});
         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
       }
-      ),
-    const GPSPage(),
+    ),
+    GPSPage
+    (
+      key: gpsPageKey
+    ),
   ];
 
   // TODO: to check if still relevant
@@ -62,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage>
   void _handleCATap()
   {
     // re-pulling the preferences from the context analysis page
-    _caPageKey.currentState?.getPreferences();    
+    caPageKey.currentState?.getPreferences();    
   }
  
   //**************** LOCALE related method ****************//
