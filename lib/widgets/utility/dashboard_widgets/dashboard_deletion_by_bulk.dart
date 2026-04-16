@@ -48,7 +48,7 @@ class DashboardDeletionByBulk extends StatefulWidget
 class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
   //**************** GLOBAL KEYS ****************//
-  GlobalKey<GroupProblemSolvingPageState> groupProblemSolvingPageKey = GlobalKey();
+  GlobalKey<GPSPageState> groupProblemSolvingPageKey = GlobalKey();
   GlobalKey<SessionsDashboardPageState> sessionsDashboardPageStateKey = GlobalKey(debugLabel: 'sessions-dashboard-page');  
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywords = GlobalKey();
 

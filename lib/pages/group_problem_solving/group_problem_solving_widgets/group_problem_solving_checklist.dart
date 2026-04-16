@@ -4,14 +4,14 @@ import 'package:journeyers/app_themes.dart';
 
 /// {@category Group problem-solving}
 /// A checklist widget used for the group problem-solving process.
-class GroupProblemSolvingChecklist extends StatefulWidget {
-  const GroupProblemSolvingChecklist({super.key});
+class GPSChecklist extends StatefulWidget {
+  const GPSChecklist({super.key});
 
   @override
-  State<GroupProblemSolvingChecklist> createState() => _GroupProblemSolvingChecklistState();
+  State<GPSChecklist> createState() => _GPSChecklistState();
 }
 
-class _GroupProblemSolvingChecklistState extends State<GroupProblemSolvingChecklist> {
+class _GPSChecklistState extends State<GPSChecklist> {
   final Map<String, bool> _checklistItems = {
     "Is the context analysis done?": false,
     "Is the group open to use the app for group problem-solving?": false,

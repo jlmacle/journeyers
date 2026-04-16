@@ -25,22 +25,22 @@ import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.da
 
 /// {@category Group problem-solving}
 /// The process for a group problem-solving.
-class GroupProblemSolvingProcess extends StatefulWidget 
+class GPSProcess extends StatefulWidget 
 {
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
-  final VoidCallback parentCallbackFunctionToRefreshTheGroupProblemSolvingPage;
+  final VoidCallback parentCallbackFunctionToRefreshTheGPSPage;
 
-  const GroupProblemSolvingProcess
+  const GPSProcess
   ({
     super.key,
-    required this.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage
+    required this.parentCallbackFunctionToRefreshTheGPSPage
   });
 
   @override
-  State<GroupProblemSolvingProcess> createState() => GroupProblemSolvingProcessState();
+  State<GPSProcess> createState() => GPSProcessState();
 }
 
-class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess> 
+class GPSProcessState extends State<GPSProcess> 
 {
   //**************** PREFERENCES related data and methods ****************/
   bool _isApplicationFolderPathLoading = true;
@@ -65,8 +65,8 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
   final TextEditingController _problemTitleController = .new();
 
   //**************** STAKEHOLDER IDENTIFIERS related data ****************//
-  GlobalKey<GroupProblemSolvingGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
-  GlobalKey<GroupProblemSolvingGroupMoodsState> groupMoods2Key = GlobalKey(debugLabel: "group-moods-2");
+  GlobalKey<GPSGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
+  GlobalKey<GPSGroupMoodsState> groupMoods2Key = GlobalKey(debugLabel: "group-moods-2");
 
   // Mode for modifying a stakeholder identifier
   bool _isModificationMode = false;
@@ -189,7 +189,7 @@ class GroupProblemSolvingProcessState extends State<GroupProblemSolvingProcess>
 
         await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.groupProblemSolvingsContext);
 
-        widget.parentCallbackFunctionToRefreshTheGroupProblemSolvingPage();
+        widget.parentCallbackFunctionToRefreshTheGPSPage();
 
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Session saved successfully!")),
@@ -254,7 +254,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
     return Column(   
       children: [
         // 1. TOP: The problem to be solved (Full Width)
-        GroupProblemSolvingProblemToSolve(
+        GPSProblemToSolve(
           problemTitleController: _problemTitleController,
           previousSessions: _history,
           onSessionSelected: _handleSessionSelection,
@@ -290,7 +290,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     // ..._whichIdentifiersListToBuild(column: 1),
                     Expanded
                     (
-                      child:GroupProblemSolvingGroupMoods
+                      child:GPSGroupMoods
                       (
                         key: groupMoods1Key,
                         groupMoods1Key: groupMoods1Key, groupMoods2Key: groupMoods2Key,
@@ -318,7 +318,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       child: Padding
                       (
                         padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: GroupProblemSolvingChecklist(),
+                        child: GPSChecklist(),
                       )                        
                     ), 
                     // TODO: to store and retrieve previous stakeholder teams
@@ -331,7 +331,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       child: Padding
                       (
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: GroupProblemSolvingKeywords
+                        child: GPSKeywords
                         (
                           currentKeywords: _currentKeywords,
                           keywordsUpdatedCallbackFunction: (newKeywords) 
@@ -350,7 +350,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     ), 
                     // Solutions List component
                     SliverToBoxAdapter(
-                      child: GroupProblemSolvingSolutionsList(solutions: _solutions),
+                      child: GPSSolutionsList(solutions: _solutions),
                     ),
                   ]
                 )
@@ -383,7 +383,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     // ..._whichIdentifiersListToBuild(column: 2),
                     Expanded
                     (
-                      child: GroupProblemSolvingGroupMoods
+                      child: GPSGroupMoods
                       (
                         key: groupMoods2Key,
                         groupMoods1Key: groupMoods1Key,groupMoods2Key: groupMoods2Key,
@@ -401,7 +401,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 
         // 3. BOTTOM: Full Width Solution Input Field
         const Divider(height: 1),
-        GroupProblemSolvingNewSolution(solutionAddedCallbackFunction: addSolutionToList),
+        GPSNewSolution(solutionAddedCallbackFunction: addSolutionToList),
         
         //********** Data saving ************//
         Center

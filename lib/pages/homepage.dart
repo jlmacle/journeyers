@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage>
         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
       }
       ),
-    const GroupProblemSolvingPage(),
+    const GPSPage(),
   ];
 
   // TODO: to check if still relevant

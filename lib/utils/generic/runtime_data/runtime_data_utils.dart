@@ -65,7 +65,7 @@ class RunTimeDataUtils
       }
       case (DashboardUtils.groupProblemSolvingsContext):
       {
-        return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', wasDataSaved);
+        return await prefs.setBool('wasGPSSessionDataSaved', wasDataSaved);
       }
       default: return false;
     }   
@@ -83,7 +83,7 @@ class RunTimeDataUtils
       }
       case (DashboardUtils.groupProblemSolvingsContext):
       {
-        return prefs.getBool('wasGroupProblemSolvingSessionDataSaved') ?? false;
+        return prefs.getBool('wasGPSSessionDataSaved') ?? false;
       }   
       default:
         return null;
@@ -102,7 +102,7 @@ class RunTimeDataUtils
       }
       case (DashboardUtils.groupProblemSolvingsContext):
       {
-        return await prefs.setBool('wasGroupProblemSolvingSessionDataSaved', false);
+        return await prefs.setBool('wasGPSSessionDataSaved', false);
       }
       default: return false;
     }
