@@ -7,7 +7,7 @@ import 'package:journeyers/app_themes.dart';
 class CAKeywordsDeclaration extends StatefulWidget 
 {
   /// A callback function called to update the keywords describing a session.
-  final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;
+  final ValueChanged<Set<String>> keywordsUpdatedCallbackFunction;
 
   const CAKeywordsDeclaration
   ({
@@ -22,7 +22,7 @@ class CAKeywordsDeclaration extends StatefulWidget
 class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> 
 {
 
-  final List<String> _keywords = [];
+  final Set<String> _keywords = {};
   final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list

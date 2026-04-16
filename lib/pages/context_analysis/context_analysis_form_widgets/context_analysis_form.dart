@@ -54,7 +54,7 @@ class CAFormState extends State<CAForm>
   //**************** SESSION METADATA ****************//
   // Placeholder data for what is entered in addition to the form data
   String _fileName = "";
-  List<String> _keywords = [];
+  Set<String> _keywords = {};
   String _analysisTitle = "";  
   
   // Method used to store the form data to CSV, and the session metadata in a file
@@ -102,7 +102,7 @@ class CAFormState extends State<CAForm>
       var formattedDate = formatter.format(now);   
       await du.saveDashboardMetadata
       (typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, 
-      keywords: _keywords, formattedDate: formattedDate, pathToFile: pathToCSVFile);
+      keywords: _keywords.toList(), formattedDate: formattedDate, pathToFile: pathToCSVFile);
       await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.contextAnalysesContext);
     }
     
