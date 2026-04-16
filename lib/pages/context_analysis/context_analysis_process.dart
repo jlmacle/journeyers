@@ -12,6 +12,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_keywords_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
@@ -70,13 +71,11 @@ class CAProcessState extends State<CAProcess>
     fileName = value;
   }
   
-  // Global key for the context form
-  final GlobalKey<CAFormState> _contextFormKey = GlobalKey(debugLabel:'form');
   
   // Method used to print the form data to CSV
   Future<void> saveDataAndMetadata() async
   {
-    await _contextFormKey.currentState?.saveDataAndMetadata();
+    await contextFormKey.currentState?.saveDataAndMetadata();
   }
 
   //**************** FOCUS NODES related data and methods ****************//
@@ -180,7 +179,7 @@ class CAProcessState extends State<CAProcess>
             // Form 
             CAForm
             (
-              key: _contextFormKey,
+              key: contextFormKey,
               caFormPageKey: widget.key as GlobalKey<CAProcessState>,
               parentCallbackFunctionToRefreshTheCAPage: widget.parentCallbackFunctionToRefreshTheCAPage,
               parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
