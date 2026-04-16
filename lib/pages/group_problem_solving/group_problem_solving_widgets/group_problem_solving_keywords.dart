@@ -7,10 +7,10 @@ import 'package:journeyers/app_themes.dart';
 class GPSKeywords extends StatefulWidget 
 {
   /// The keywords associated to the session data.
-  final List<String> currentKeywords;
+  final Set<String> currentKeywords;
 
   /// A callback function called to update the keywords describing a session.
-  final ValueChanged<List<String>> keywordsUpdatedCallbackFunction;  
+  final ValueChanged<Set<String>> keywordsUpdatedCallbackFunction;  
 
   const GPSKeywords
   ({
@@ -27,7 +27,7 @@ class GPSKeywords extends StatefulWidget
 class _GPSKeywordsState extends State<GPSKeywords> 
 {
   // Initializes with the passed keywords instead of an empty list
-  late List<String> _keywords;
+  late Set<String> _keywords;
   final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list
@@ -53,7 +53,7 @@ class _GPSKeywordsState extends State<GPSKeywords>
   @override
   void initState() {
     super.initState();
-    _keywords = List.from(widget.currentKeywords); // Syncs at start
+    _keywords = Set.from(widget.currentKeywords); // Syncs at start
   }
 
   @override
@@ -63,7 +63,7 @@ class _GPSKeywordsState extends State<GPSKeywords>
     if (widget.currentKeywords != oldWidget.currentKeywords) {
       setState(() {
         // Creates a fresh copy from the new parent data
-        _keywords = List<String>.from(widget.currentKeywords);
+        _keywords = Set<String>.from(widget.currentKeywords);
       });
     }
   }

@@ -57,8 +57,8 @@ class CAProcessState extends State<CAProcess>
 
 
   // KEYWORDS
-  List<String> keywords = [];
-  void keywordsUpdate(List<String> kws)
+  Set<String> keywords = {};
+  void keywordsUpdate(Set<String> kws)
   {
     keywords = kws;
   }
