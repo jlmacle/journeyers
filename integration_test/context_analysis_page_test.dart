@@ -124,7 +124,7 @@ void main() async
 
   group
   (
-    'Context analysis page-level tests: \n', 
+    'Context analysis page-level tests:\n', 
     () 
     {         
       // 'Information modal:\n'
@@ -133,7 +133,7 @@ void main() async
       testWidgets
       (
         // skip: true,
-        'Information modal: \n'
+        'Information modal:\n'
         'A newly installed app should display the information modal,\n'
         'before starting the first context analysis.', 
         (WidgetTester tester) async 
@@ -178,12 +178,12 @@ void main() async
         }
       );
 
-      // 'Information modal: \n'
+      // 'Information modal:\n'
       // 'Information modal is not displayed when already acknowledged.', 
       testWidgets
       (
         // skip: true, 
-        'Information modal: \n'
+        'Information modal:\n'
         'Information modal is not displayed when already acknowledged', 
         (WidgetTester tester) async 
         {
@@ -218,13 +218,13 @@ void main() async
         }
       );
 
-      // 'No session data stored: \n'
+      // 'No session data stored:\n'
       // 'When no session data is stored, the context analysis page should be displayed,\n'
       // 'without the dashboard.', 
       testWidgets
       ( 
         // skip: true,        
-        'No session data stored: \n'
+        'No session data stored:\n'
         'When no session data is stored, the context analysis page should be displayed,\n'
         'without the dashboard.', 
         (tester) async 
@@ -257,12 +257,12 @@ void main() async
         }
       );
     
-      // 'Data stored: New context analysis button: \n'
+      // 'Data stored: New context analysis button:\n'
       // 'The dashboard page should have a button to start a new context analysis.',
       testWidgets
       (
         // skip: true, 
-        'Data stored: New context analysis button: \n'
+        'Data stored: New context analysis button:\n'
         'The dashboard page should have a button to start a new context analysis.',
         (WidgetTester tester) async 
         { 
@@ -297,7 +297,7 @@ void main() async
 
   group
   (
-    'Form: Structure\n',
+    'Form: Structure:\n',
     ()
     {
       // 'Both perspective expansion tiles are present'
@@ -339,7 +339,7 @@ void main() async
 
   group
   (
-    'Form: Individual perspective\n',
+    'Form: Individual perspective:\n',
     ()
     {
       // 'Expanding the tile reveals all four level-3 section headings'
@@ -430,12 +430,12 @@ void main() async
         },
       );
 
-      // 'Balancing studies and household life: \n'
+      // 'Balancing studies and household life:\n'
       // 'the note text field accepts and retains input after checkbox unselection'
       testWidgets
       (
         // skip: true,
-        'Balancing studies and household life: \n'
+        'Balancing studies and household life:\n'
         'the note text field accepts and retains input after checkbox unselection',
         (tester) async
         {
@@ -498,7 +498,7 @@ void main() async
 
   group
   (
-    'Form: Group/Teams perspective\n',
+    'Form: Group/Teams perspective:\n',
     ()
     {
       // 'Expanding the tile reveals all five level-3 section headings',
@@ -632,9 +632,10 @@ void main() async
 
   group
   (
-    'Form: Cross-section interactions\n',
+    'Form: Cross-section interactions:\n',
     ()
     {
+      // 'Form state is preserved across tile collapse and re-expansion'
       testWidgets
       (
         // skip: true,

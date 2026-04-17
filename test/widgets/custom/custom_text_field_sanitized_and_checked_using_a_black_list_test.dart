@@ -14,7 +14,7 @@ void main() {
   const fileNameBlacklisted = "a.csv";
   const textValid = 'Context analysis';
   
-  group('TextFieldChecked Tests', () {
+  group('TextFieldChecked Tests:\n', () {
     testWidgets('Should display no initial error', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
