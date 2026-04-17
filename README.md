@@ -8,8 +8,7 @@ This open source ed tech and assistive tech, proof of concept project <br>
 and with a goal of being multilingual, accessible, and offline-friendly), <br>
 is meant to support our group problem-solving processes, and to help us reach lasting solutions.<br>
 <br>
-Illustrational value should be findable in the utils, custom widgets, and custom widgets testing files.<br>
-The answers to the first set of questions is exportable to CSV. <br>
+Illustrational value should be findable in the utils, widgets, and testing files.<br>
 The dashboard supports previewing, sorting by title/date, keyword filtering and deletion.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
 An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
