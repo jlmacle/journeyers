@@ -8,6 +8,7 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
@@ -279,7 +280,7 @@ class DashboardPageState extends State<DashboardPage>
 
                 // DASHBOARD TITLE
                 const SliverToBoxAdapter(
-                  child: DashboardTitle(title: "Previous session data")
+                  child: DashboardTitle(title: dashboardTitle)
                 ),
 
                 // DASHBOARD FILTERING FEATURES
