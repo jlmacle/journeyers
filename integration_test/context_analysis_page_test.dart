@@ -449,8 +449,7 @@ void main() async
           await tester.tap(firstCustomCheckbox);
           await tester.pumpAndSettle();
 
-          // Verifying the checkbox checked          
-          // Returns false: 
+          // Verifying the checkbox checked returns true
           // expect(tester.widget<CheckboxWithTextField>(firstCustomCheckbox).checkboxIsChecked, isTrue);
           var firstCheckbox = find.descendant(of: firstCustomCheckbox, matching: find.byType(Checkbox));
           expect(tester.widget<Checkbox>(firstCheckbox).value, isTrue);
