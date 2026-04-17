@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 //*********************  COLORS  *********************//
+const Color transparent = Colors.transparent;
 const Color navyBlue = Color(0xFF0a2e50);
 const Color paleCyan = Color(0xFFE9FAFC);
 const Color appBarWhite = Color(0xFFf6f1e9);
