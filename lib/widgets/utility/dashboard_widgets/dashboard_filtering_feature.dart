@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_title.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
@@ -68,7 +70,7 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
                 children: 
                 [
                   // Sorting by title
-                  DashboardFilteringByTitle
+                  DashboardSortingByTitle
                   (
                     filteredSessionsToSort: widget.filteredSessions,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
@@ -85,7 +87,7 @@ class _DashboardFilteringFeatureState extends State<DashboardFilteringFeature>
                 padding: EdgeInsets.all(8.0),
                 child: Text // TODO: to move
                 (
-                  "Filter by Keywords:", 
+                  filterByKeywordsLabel, 
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
                 ),
               ),
