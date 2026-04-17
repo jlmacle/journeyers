@@ -137,11 +137,11 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
           TextButton.icon(
             key: const Key('bulk-delete-button'),
             onPressed: _deleteSelectedSessions,
-            icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: white),
+            icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
             label: Text(
               "Delete (${widget.sessionsSelectedForDeletion?.length ?? 0})",
               style: TextStyle(
-                color: (widget.areSessionsForDeletion == true)? Colors.red: white, 
+                color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,
               ),
             ),
