@@ -27,17 +27,17 @@ class GPSKeywords extends StatefulWidget
 class _GPSKeywordsState extends State<GPSKeywords> 
 {
   // Initializes with the passed keywords instead of an empty list
-  late Set<String> _keywords;
+  Set<String>? _keywords;
   final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list
   void addKeyword(String value, [StateSetter? localSetState]) 
   {
     var trimmedValue = value.trim();
-    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue)) {
+    if (trimmedValue.isNotEmpty && !_keywords!.contains(trimmedValue)) {
       // Updates the underlying data
       setState(() {
-        _keywords.add(trimmedValue);
+        _keywords!.add(trimmedValue);
         _keywordsController.clear();
       });
       
@@ -46,7 +46,7 @@ class _GPSKeywordsState extends State<GPSKeywords>
         localSetState(() {});
       }
       
-      widget.keywordsUpdatedCallbackFunction(_keywords);
+      widget.keywordsUpdatedCallbackFunction(_keywords!);
     }
   }
 
@@ -169,16 +169,16 @@ class _GPSKeywordsState extends State<GPSKeywords>
                           runSpacing: 4.0,
                           children: 
                           [
-                            ..._keywords.map
+                            ..._keywords!.map
                             (
                               (tag) => InputChip
                                       (
                                         label: Text(tag),
                                         onDeleted: () 
                                         {
-                                          setState( () {_keywords.remove(tag);});
+                                          setState( () {_keywords!.remove(tag);});
                                           setLocalState(() {});
-                                          widget.keywordsUpdatedCallbackFunction(_keywords);
+                                          widget.keywordsUpdatedCallbackFunction(_keywords!);
                                         }, 
                                         deleteIconColor: appBarWhite,
                                       )

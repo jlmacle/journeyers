@@ -40,8 +40,8 @@ class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
   }
 }
 
-/// Pumps the app in its standard form-visible state:
-/// modal already acknowledged, no prior session data saved.
+// Initializes the shared preferences with values for testing.
+// If the singleton instance has been initialized already, it is nullified.
 Future<void> pumpFormPage(WidgetTester tester) async {
   SharedPreferences.setMockInitialValues({
     'isInformationModalAcknowledged': true,
@@ -51,14 +51,14 @@ Future<void> pumpFormPage(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
-/// Expands the individual perspective ExpansionTile by tapping its title text.
+// Expands the individual perspective ExpansionTile by tapping its title text.
 Future<void> expandIndividualTile(WidgetTester tester) async {
   final q = CAFormQuestions();
   await tester.tap(find.text(q.level2TitleIndividual));
   await tester.pumpAndSettle();
 }
 
-/// Expands the group/teams perspective ExpansionTile by tapping its title text.
+// Expands the group/teams perspective ExpansionTile by tapping its title text.
 Future<void> expandGroupTile(WidgetTester tester) async {
   final q = CAFormQuestions();
   await tester.tap(find.text(q.level2TitleGroup));
@@ -78,9 +78,8 @@ void main() async
   // class that extends [PathProviderPlatform] when they register themselves."
   PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting();
 
-  // Test bindings that are used by tests that mock message handlers for plugins
-  // should mix in this binding to enable the use of the
-  // [TestDefaultBinaryMessenger] APIs.
+  // To set "a callback for intercepting method calls sent to the
+  // platform on the given channel."
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
     .setMockMethodCallHandler
     (

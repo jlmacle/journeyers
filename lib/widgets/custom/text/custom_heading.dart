@@ -33,7 +33,7 @@ class CustomHeadingState extends State<CustomHeading>
 {
   bool _headingStyleUnderlined = false;
   
-  late TextStyle _headerStyle;
+  TextStyle? _headerStyle;
 
   TextStyle getTextStyle(int headingLevel)
   {
@@ -69,14 +69,14 @@ class CustomHeadingState extends State<CustomHeading>
   {
     if (!_headingStyleUnderlined) {
       setState(() {
-        _headerStyle = _headerStyle.copyWith(decoration: TextDecoration.underline);
+        _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.underline);
       });
       
       _headingStyleUnderlined = true;
     }
     else{
       setState(() {
-        _headerStyle = _headerStyle.copyWith(decoration: TextDecoration.none);
+        _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.none);
       });
       _headingStyleUnderlined = false;
     }
@@ -87,14 +87,14 @@ class CustomHeadingState extends State<CustomHeading>
   {
     if (!_headingStyleUnderlined && value.trim() != "") {
       setState(() {
-        _headerStyle = _headerStyle.copyWith(decoration: TextDecoration.underline);
+        _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.underline);
       });
       
       _headingStyleUnderlined = true;
     }
     else if (_headingStyleUnderlined && value.trim() == "") {
       setState(() {
-        _headerStyle = _headerStyle.copyWith(decoration: TextDecoration.none);
+        _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.none);
       });
       _headingStyleUnderlined = false;
     }
@@ -105,6 +105,6 @@ class CustomHeadingState extends State<CustomHeading>
   {
 
 
-    return CustomFocusableText(text: widget.headingText, textStyle: _headerStyle, textAlignment: widget.headingAlignment);
+    return CustomFocusableText(text: widget.headingText, textStyle: _headerStyle!, textAlignment: widget.headingAlignment);
   }
 }
