@@ -46,8 +46,9 @@ void main() {
 
       // Checks for the children and pre-defined labels 
       // sorting by Title
-      // expect(find.byType(DashboardSortingByTitle), findsOneWidget);
-      // expect(find.text(sortByTitleLabel), findsOneWidget);
+      expect(find.byType(DashboardSortingByTitle), findsOneWidget);
+      // String interpolation used for the text
+      expect(find.textContaining(sortByTitleLabel), findsOneWidget);
 
       // sorting by Date
       expect(find.byType(DashboardSortingByDate), findsOneWidget);
