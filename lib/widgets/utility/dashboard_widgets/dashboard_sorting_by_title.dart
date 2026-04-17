@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
+import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
 
 /// {@category Utility widgets}
 /// A widget handling the sorting by title of session data.
-class DashboardFilteringByTitle extends StatefulWidget 
+class DashboardSortingByTitle extends StatefulWidget 
 {
   /// List storing the sessions to sort.
   final List<dynamic>? filteredSessionsToSort;
@@ -12,7 +13,7 @@ class DashboardFilteringByTitle extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardFilteringByTitle
+  const DashboardSortingByTitle
   ({
     super.key,
     required this.filteredSessionsToSort,
@@ -20,10 +21,10 @@ class DashboardFilteringByTitle extends StatefulWidget
   });
 
   @override
-  State<DashboardFilteringByTitle> createState() => _DashboardFilteringByTitleState();
+  State<DashboardSortingByTitle> createState() => _DashboardSortingByTitleState();
 }
 
-class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle> 
+class _DashboardSortingByTitleState extends State<DashboardSortingByTitle> 
 {
   bool _isAscendingTitle = true;   
 
@@ -57,7 +58,7 @@ class _DashboardFilteringByTitleState extends State<DashboardFilteringByTitle>
       ),
       label: Text
       (
-        "Sort by Title (${_isAscendingTitle ? 'A-Z' : 'Z-A'})",
+        "$sortByTitleLabel (${_isAscendingTitle ? 'A-Z' : 'Z-A'})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
