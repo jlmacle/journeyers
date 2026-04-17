@@ -574,7 +574,8 @@ void main() async
       testWidgets
       (
         // skip: true,
-        'Same problems: the note text field accepts and retains input after segmented button unselection',
+        'Same problems: the note text field accepts and retains input,\n'
+        'after segmented button deselection, and reselection',
         (tester) async
         {
           const testNote = 'Everyone is dealing with overtime stress';
