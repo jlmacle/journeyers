@@ -39,7 +39,7 @@ class CustomLanguageSwitch extends StatefulWidget
 class _CustomLanguageSwitchState extends State<CustomLanguageSwitch> 
 {
   List<String> _dropdownItems = [];
-  late String _selectedValue;
+  String? _selectedValue;
 
   // Getting the language options in the current locale.
   void getLanguages(BuildContext context) 

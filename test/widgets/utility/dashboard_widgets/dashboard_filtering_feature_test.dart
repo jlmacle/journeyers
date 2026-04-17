@@ -10,11 +10,11 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering
 
 void main() {
   group('DashboardFilteringFeature Widget Tests:\n', () {
-    late GlobalKey<DashboardFilteringByKeywordsState> testKey;
-    late List<String> usedKeywords;
-    late List<String> selectedKeywords;
-    late List<dynamic> allSessions;
-    late List<dynamic> filteredSessions;
+    GlobalKey<DashboardFilteringByKeywordsState>? testKey;
+    List<String>? usedKeywords;
+    List<String>? selectedKeywords;
+    List<dynamic>? allSessions;
+    List<dynamic>? filteredSessions;
 
     setUp(() {
       testKey = GlobalKey<DashboardFilteringByKeywordsState>();
@@ -32,10 +32,10 @@ void main() {
             dashboardContext: DashboardUtils.contextAnalysesContext,
             allSessions: allSessions,
             filteredSessions: filteredSessions,
-            usedKeywords: usedKeywords,
-            selectedKeywords: selectedKeywords,
+            usedKeywords: usedKeywords!,
+            selectedKeywords: selectedKeywords!,
             parentCallbackFunctionToRefreshTheSessionsList: () {},
-            dashboardFilteringByKeywordsKey: testKey,
+            dashboardFilteringByKeywordsKey: testKey!,
           ),
         ),
       );
