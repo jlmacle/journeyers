@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 /// {@category Utility widgets}
@@ -19,8 +20,10 @@ class DashboardTitle extends StatelessWidget
     Padding
     (
       padding: const EdgeInsets.only(top: 10, bottom: 10),
-      child: CustomHeading(
-          headingText: title, headingLevel: 2),
+      child: CustomHeading
+      (
+          headingText: title, headingLevel: 2
+      ),
     );
   }
 }
