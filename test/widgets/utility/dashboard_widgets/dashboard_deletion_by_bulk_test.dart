@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
 
 
 void main() {

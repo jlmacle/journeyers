@@ -5,7 +5,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
 
 // Pages
 final GlobalKey<CAPageState> caPageKey = GlobalKey<CAPageState>();
