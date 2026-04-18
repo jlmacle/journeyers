@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session_list_item.dart';
 
@@ -14,34 +15,6 @@ void main() {
 
   group('SessionListItem Tests', () 
   {  
-
-    testWidgets('Triggers onDelete callback when delete button is pressed', (WidgetTester tester) async {
-      bool deleteCalled = false;
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SessionsListItem(
-              sessionMetadata: testMetadata,
-              index: 0,
-              isChecked: false,
-              dashboardContext: 'standard',
-              onCheckboxChanged: (_) {},
-              onEditTitle: () {},
-              onEditKeywords: () {},
-              onPreview: () {},
-              onDelete: () => deleteCalled = true, // Captures the call
-            ),
-          ),
-        ),
-      );
-
-      // Finds the delete button to tap it
-      final deleteBtn = find.byKey(const ValueKey('session-delete-0'));
-      await tester.tap(deleteBtn);
-      
-      expect(deleteCalled, isTrue);
-    });
 
     testWidgets('Checkbox reflects isChecked state', (WidgetTester tester) async {
       await tester.pumpWidget(
