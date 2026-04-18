@@ -6,16 +6,16 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 /// {@category Dashboard}
 /// A widget handling a session data.
 class SessionsListItem extends StatelessWidget {
-  ///
+  /// The session metadata.
   final Map<String, dynamic> sessionMetadata;
 
-  ///
+  /// The index within the list.
   final int index;
 
   /// Bool to indicate if the checkbox is checked.
   final bool isChecked;
 
-  ///
+  /// The context of the dashboard.
   final String dashboardContext;
 
   /// A callback function called when the checkbox is checked.
