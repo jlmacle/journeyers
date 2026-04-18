@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
 /// {@category Utility widgets}
+/// {@category Dashboard}
 /// A widget handling the sorting by keywords of session data.
 class DashboardFilteringByKeywords extends StatefulWidget 
 {
@@ -90,7 +91,7 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
     if (widget.allSessions == null) return;
     
     // Re-building the keywords' list from the remaining session data
-    List<String> remainingKws = [];
+    Set<String> remainingKws = {};
     for (var sessionData in widget.allSessions!) 
     {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];

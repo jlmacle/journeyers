@@ -10,17 +10,19 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_and_sorting_feature.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_session_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date_config.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dart';
 
 
 /// {@category Utility widgets}
+/// {@category Dashboard}
 /// A widget displaying a dashboard of session data.
 /// Assumption concerning the session data structure:
-/// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 5:51 AM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
-/// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 AM","filePath":"C:\\Users\\username\\a2.ext"}\]
+/// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 4:51 PM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
+/// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 PM","filePath":"C:\\Users\\username\\Documents\\a2.ext"}\]
 class DashboardPage extends StatefulWidget 
 {
   /// The context for the dashboard (context analyses or group problem-solving sessions).
@@ -296,7 +298,7 @@ class DashboardPageState extends State<DashboardPage>
                   backgroundColor: Colors.transparent,
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin, 
-                    background: DashboardFilteringFeature
+                    background: DashboardSortingAndFilteringFeature
                     (
                       dashboardContext: widget.dashboardContext, 
                       allSessions: _allSessions, filteredSessions: _filteredSessions,
@@ -320,172 +322,46 @@ class DashboardPageState extends State<DashboardPage>
                   )
                 ),
 
+                // Divider
                 const SliverToBoxAdapter
                 (
                   child: Divider()                       
                 ), 
                 
                 // Session List
-                SliverPadding(
+                SliverPadding
+                (
                   padding: const EdgeInsets.only(bottom: 0),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final session = _filteredSessions![index];
-                        String sessionTitle = session[DashboardUtils.keyTitle];
                         final String filePath = session[DashboardUtils.keyFilePath];
-                        final bool isChecked =
-                            _sessionsSelectedForDeletion.contains(filePath);
-
-                        return Card(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 6),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Checkbox(
-                                      key: ValueKey('checkbox-$index'),
-                                      value: isChecked,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          if (value == true) {
-                                            _sessionsSelectedForDeletion
-                                                .add(filePath);
-                                          } else {
-                                            _sessionsSelectedForDeletion
-                                                .remove(filePath);
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Wrap(
-                                            crossAxisAlignment:
-                                                WrapCrossAlignment.center,
-                                            spacing: 8,
-                                            children: [
-                                              GestureDetector(
-                                                  onTap: () => _showTitleEditSheet(
-                                                      session[DashboardUtils
-                                                          .keyTitle],
-                                                      session[DashboardUtils
-                                                          .keyFilePath]),
-                                                  child: 
-                                                  Text(
-                                                    key: ValueKey('session-title-$index'),
-                                                    (widget.dashboardContext == DashboardUtils.gpsContext) ? "$sessionTitle (gps)" : sessionTitle,
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16),
-                                                  )),
-                                              Text(
-                                                key: ValueKey(
-                                                    'session-date-$index'),
-                                                "(${session[DashboardUtils.keyDate]})",
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.grey),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 4),
-                                          GestureDetector(
-                                            onTap: () => _showKeywordsEditSheet(
-                                                session[DashboardUtils
-                                                    .keyKeywords],
-                                                session[DashboardUtils
-                                                    .keyFilePath]),
-                                            child: Text(
-                                              key: ValueKey(
-                                                  'session-keywords-$index'),
-                                              "Keywords: ${(List.from(session[DashboardUtils.keyKeywords])..sort((a, b) {
-                                                  int comparison = a
-                                                      .toLowerCase()
-                                                      .compareTo(
-                                                          b.toLowerCase());
-                                                  if (comparison == 0) {
-                                                    return b.compareTo(a);
-                                                  }
-                                                  return comparison;
-                                                })).join(', ')}",
-                                              style: TextStyle(
-                                                  color: Colors.grey[700],
-                                                  fontSize: 13),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(height: 20),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Wrap(
-                                      spacing: 4,
-                                      children: [
-                                        IconButton(
-                                          icon: const Icon(
-                                              Icons.find_in_page_rounded),
-                                          onPressed: () {
-                                            _showPreviewOverlay(
-                                                context, session, filePath);
-                                          },
-                                          tooltip: "Preview",
-                                        ),
-                                        IconButton(
-                                          icon: const Icon(Icons.edit_document),
-                                          onPressed: () {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    content: Text(
-                                                        'Edit not yet implemented.')));
-                                          },
-                                          tooltip: "Edit Document",
-                                        ),
-                                        IconButton(
-                                          icon: const Icon(Icons.style_rounded),
-                                          onPressed: () =>
-                                              _showKeywordsEditSheet(
-                                                  session[DashboardUtils
-                                                      .keyKeywords],
-                                                  filePath),
-                                          tooltip: "Edit Keywords",
-                                        ),
-                                      ],
-                                    ),
-                                    Wrap(
-                                      spacing: 4,
-                                      children: [                                        
-                                        IconButton(
-                                          key: ValueKey(
-                                              'session-delete-$index'),
-                                          icon:
-                                              const Icon(Icons.delete_rounded),
-                                          onPressed: () async =>
-                                              await _deleteSelectedSession(
-                                                  filePath),
-                                          tooltip: "Delete",
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                        
+                        return SessionsListItem(
+                          sessionMetadata: session,
+                          index: index,
+                          dashboardContext: widget.dashboardContext,
+                          isChecked: _sessionsSelectedForDeletion.contains(filePath),
+                          onCheckboxChanged: (bool? value) {
+                            setState(() {
+                              if (value == true) {
+                                _sessionsSelectedForDeletion.add(filePath);
+                              } else {
+                                _sessionsSelectedForDeletion.remove(filePath);
+                              }
+                            });
+                          },
+                          onEditTitle: () => _showTitleEditSheet(
+                            session[DashboardUtils.keyTitle],
+                            filePath,
                           ),
+                          onEditKeywords: () => _showKeywordsEditSheet(
+                            session[DashboardUtils.keyKeywords],
+                            filePath,
+                          ),
+                          onPreview: () => _showPreviewOverlay(context, session, filePath),
+                          onDelete: () async => await _deleteSelectedSession(filePath),
                         );
                       },
                       childCount: _filteredSessions?.length ?? 0,

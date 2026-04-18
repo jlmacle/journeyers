@@ -9,6 +9,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering
 
 
 /// {@category Utility widgets}
+/// {@category Dashboard}
 /// A widget handling bulk deletion of session data.
 class DashboardDeletionByBulk extends StatefulWidget 
 {

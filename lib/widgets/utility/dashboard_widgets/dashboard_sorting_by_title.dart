@@ -4,6 +4,7 @@ import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
 
 /// {@category Utility widgets}
+/// {@category Dashboard}
 /// A widget handling the sorting by title of session data.
 class DashboardSortingByTitle extends StatefulWidget 
 {
