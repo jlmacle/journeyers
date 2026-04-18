@@ -9,12 +9,12 @@ import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_and_sorting_feature.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_session_list_item.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date_config.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_title.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/2bi_dashboard_sorting_by_date_config.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session_list_item.dart';
 
 
 /// {@category Utility widgets}
