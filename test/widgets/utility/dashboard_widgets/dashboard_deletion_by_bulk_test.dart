@@ -7,8 +7,8 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_deletion_
 
 
 void main() {
-  // Test data
-  final sessions = [
+  // Test metadata
+  final sessionsMetadata = [
     {DashboardUtils.keyTitle: 'Session 1', DashboardUtils.keyFilePath: 'path/1'},
     {DashboardUtils.keyTitle: 'Session 2',  DashboardUtils.keyFilePath: 'path/2', },
   ];
@@ -18,8 +18,8 @@ void main() {
   List<dynamic>? sessionsSelected;
 
   setUp(() {
-    allSessions = List.from(sessions);
-    filteredSessions = List.from(sessions);
+    allSessions = List.from(sessionsMetadata);
+    filteredSessions = List.from(sessionsMetadata);
     sessionsSelected = ['path/1']; // Session selected by default
   });
 
