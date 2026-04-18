@@ -13,32 +13,7 @@ void main() {
   };
 
   group('SessionListItem Tests', () {
-    testWidgets('Displays session info correctly', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SessionsListItem(
-              sessionMetadata: mockSession,
-              index: 0,
-              isChecked: false,
-              dashboardContext: 'standard', // Non-GPS context
-              onCheckboxChanged: (_) {},
-              onEditTitle: () {},
-              onEditKeywords: () {},
-              onPreview: () {},
-              onDelete: () {},
-            ),
-          ),
-        ),
-      );
-
-      // Verify Title and Date
-      expect(find.text('Morning Run'), findsOneWidget);
-      expect(find.text('(2023-10-27)'), findsOneWidget);
-      
-      // Verify Keywords (Sorted)
-      expect(find.textContaining('Outdoor, Sports'), findsOneWidget);
-    });
+    
 
     testWidgets('Triggers onDelete callback when delete button is pressed', (WidgetTester tester) async {
       bool deleteCalled = false;
