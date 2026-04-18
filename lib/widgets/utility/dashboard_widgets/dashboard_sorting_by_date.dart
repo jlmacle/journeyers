@@ -5,6 +5,7 @@ import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.da
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date_config.dart';
 
 /// {@category Utility widgets}
+/// {@category Dashboard}
 /// A widget handling the sorting by date of session data.
 class DashboardSortingByDate extends StatefulWidget 
 {

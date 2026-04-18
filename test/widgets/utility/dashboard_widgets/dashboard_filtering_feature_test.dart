@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
 
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_feature.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_and_sorting_feature.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_date.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_sorting_by_title.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_filtering_by_keywords.dart';
@@ -28,7 +28,7 @@ void main() {
     Widget createWidgetUnderTest() {
       return MaterialApp(
         home: Scaffold(
-          body: DashboardFilteringFeature(
+          body: DashboardSortingAndFilteringFeature(
             dashboardContext: DashboardUtils.contextAnalysesContext,
             allSessions: allSessions,
             filteredSessions: filteredSessions,
