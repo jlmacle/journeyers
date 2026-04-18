@@ -5,15 +5,15 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session
 
 void main() {
   // Data for the test
-  final mockSession = {
-    'title': 'Morning Run',
-    'date': '2023-10-27',
-    'filePath': '/path/to/file.gps',
-    'keywords': ['Sports', 'Outdoor'],
+  final testMetadata = {
+    'title': 'Legacy',
+    'date': 'March 20, 2026 4:51 PM',
+    'filePath': '/path/to/file.csv',
+    'keywords': ['Kw', 'Kw2'],
   };
 
-  group('SessionListItem Tests', () {
-    
+  group('SessionListItem Tests', () 
+  {  
 
     testWidgets('Triggers onDelete callback when delete button is pressed', (WidgetTester tester) async {
       bool deleteCalled = false;
@@ -22,7 +22,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SessionsListItem(
-              sessionMetadata: mockSession,
+              sessionMetadata: testMetadata,
               index: 0,
               isChecked: false,
               dashboardContext: 'standard',
@@ -30,13 +30,13 @@ void main() {
               onEditTitle: () {},
               onEditKeywords: () {},
               onPreview: () {},
-              onDelete: () => deleteCalled = true, // Capture the call
+              onDelete: () => deleteCalled = true, // Captures the call
             ),
           ),
         ),
       );
 
-      // Find the delete button by Key and tap it
+      // Finds the delete button to tap it
       final deleteBtn = find.byKey(const ValueKey('session-delete-0'));
       await tester.tap(deleteBtn);
       
@@ -48,7 +48,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: SessionsListItem(
-              sessionMetadata: mockSession,
+              sessionMetadata: testMetadata,
               index: 0,
               isChecked: true, // Set to true
               dashboardContext: 'standard',
