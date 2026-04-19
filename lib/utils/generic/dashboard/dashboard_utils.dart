@@ -14,21 +14,21 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 class DashboardUtils {
 
   /// String used to communicate the context of the context analyses.
-  static const String contextAnalysesContext = "contextAnalysesData";
+  static const String contextAnalysesContext = "caContext";
 
   /// String used to communicate the context of the group problem-solvings.
-  static const String gpsContext = "gpsData";
+  static const String gpsContext = "gpsContext";
 
-  /// The key for the session data title.
+  /// The key for the session title.
   static const String keyTitle = 'title';
 
-  /// The key for the file keywords
+  /// The key for the session keywords
   static const String keyKeywords = 'keywords';
 
-  /// The key for the session data date.
+  /// The key for the session date.
   static const String keyDate = 'date';
 
-  /// The key for the session data file path.
+  /// The key for the session file path.
   static const String keyFilePath = 'filePath';
 
   /// The current list of stored file names (for the mobile applications).
@@ -66,31 +66,6 @@ class DashboardUtils {
     return sessionFile;
   }
 
-  /// Method used to save partial session data.
-  /// In the case of the context analyses, the partial data saved has the format:
-  /// {"title":"analysis1","keywords":["keyword1","keyword2"], "date":"12/19/25","filePath":"filePath1"}
-  Future<void> _saveSessionMetadataHelper
-  ({
-    required String typeOfContextData,
-    required Map<String, dynamic> sessionData,
-  }) async 
-  {
-    File file = await getSessionMetadataFile(typeOfContextData: typeOfContextData);
-    // file created in getSessionFile if needed
-
-    String updatedContent = "";
-    // Reading and decoding the records content
-    String jsonContent = file.readAsStringSync();
-    List<dynamic> recordsList = jsonDecode(jsonContent);
-    // Adding to the records
-    recordsList.add(sessionData);
-    // Encoding the data to String
-    updatedContent = jsonEncode(recordsList);
-
-    await file.writeAsString(updatedContent);
-    if (sessionDataDebug) pu.printd('Session Data: new session metadata: $sessionData saved to: ${file.path}');
-  }
-
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
   Future<void> saveDashboardMetadata
   ({
@@ -104,14 +79,6 @@ class DashboardUtils {
     if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
     if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
 
-    // Session data storage sample:
-    // [{"title":"Title session 1","keywords":["keyword1","keyword2"], "date":"01/18/26","filePath":"filePath1"},
-    // {"title":"Title session 2","keywords":["keyword1","keyword3"], "date":"01/18/26","filePath":"filePath2"},
-    // {"title":"Title session 3","keywords":["keyword1","keyword4"], "date":"01/18/26","filePath":"filePath3"}]
-
-    // Building the session data
-    // In the context analysis form page, filePath is tested for not null
-    // if (filePath != null) dashboardDataSaving(contextAnalysesData, analysisTitle, filePath);
     Map<String, dynamic> sessionData = 
     {
       keyTitle: title ?? "Untitled",
@@ -119,18 +86,30 @@ class DashboardUtils {
       keyDate: formattedDate,
       keyFilePath: pathToFile,
     };
-    // Saving the session data
-    await _saveSessionMetadataHelper
-    (
-      typeOfContextData: typeOfContextData,
-      sessionData: sessionData,
-    );
+
+    // Saving the session metadata (file created in getSessionFile if needed)
+    File file = await getSessionMetadataFile(typeOfContextData: typeOfContextData);
+  
+    String updatedContent = "";
+
+    // Reading and decoding the records content
+    String jsonContent = file.readAsStringSync();
+    List<dynamic> recordsList = jsonDecode(jsonContent);
+
+    // Adding to the records
+    recordsList.add(sessionData);
+
+    // Encoding the metadata to String
+    updatedContent = jsonEncode(recordsList);
+
+    await file.writeAsString(updatedContent);
+    if (sessionDataDebug) pu.printd('Session Data: new session metadata: $sessionData saved to: ${file.path}'); 
   }
 
-  /// Method used to retrieved all the session data used for a dashboard.
-  /// This data is used in the context analyses dashboard, or in the group problem-solvings dashboard.
-  /// In the case of the context analyses, the data retrieved has the format:
-  /// \[{"title":"analysis1","date":"12/19/25","filePath":"filePath1"},{"title":"analysis2","date":"12/20/25","filePath":"filePath2"}\]
+  /// Method used to retrieved all the session metadata used for a dashboard.
+  /// This metadata is used in the context analyses dashboard, or in the group problem-solvings dashboard.
+  /// In the case of the context analyses, the metadata retrieved has the format:
+  /// \[{"title":"analysis1","date":"March 20, 2026 4:51 PM","filePath":"filePath1"},{"title":"analysis2","date":"March 20, 2026 5:31 PM","filePath":"filePath2"}\]
   Future<List<dynamic>> retrieveAllDashboardMetadata({
     required String typeOfContextData,
   }) async {
@@ -146,7 +125,7 @@ class DashboardUtils {
     return sessionData;
   }
 
-  /// Method used to delete a specific session from the dashboard data file.
+  /// Method used to delete a specific session from the dashboard metadata file.
   /// It identifies the session by its unique file path.
   Future<void> deleteSpecificSessionMetadata({
     required String typeOfContextData,
@@ -168,16 +147,16 @@ class DashboardUtils {
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        if (sessionDataDebug) pu.printd("Session Data: Session metadata with path $filePathRelatedToDataToDelete removed from dashboard data.");
+        if (sessionDataDebug) pu.printd("Session Data: Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");
       } else {
-        if (sessionDataDebug) pu.printd("Session Data: No session metadata found with path $filePathRelatedToDataToDelete in dashboard data.");
+        if (sessionDataDebug) pu.printd("Session Data: No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");
       }
     } catch (e) {
       if (sessionDataDebug) pu.printd("Session Data: Error deleting session metadata from dashboard data: $e");
     }
   }
 
-  /// Method used to save all session data.  
+  /// Method used to save all session metadata.  
   Future<void> saveAllSessionsMetadata({required String typeOfContextData, required List<dynamic> allSessionsMetadata}) async
   {
     String fileName = "";
@@ -202,7 +181,7 @@ class DashboardUtils {
     // Creating session file if doesn't exist
     if (!sessionFile.existsSync()) {sessionFile.createSync();}
 
-    // Adding the data to the file
+    // Adding the metadata to the file
     var savedContent = jsonEncode(allSessionsMetadata);
     await sessionFile.writeAsString(savedContent);
     if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $pathToApplicationSupportDirectory/$fileName");
