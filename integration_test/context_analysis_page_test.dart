@@ -224,7 +224,7 @@ void main() async
       ( 
         // skip: true,        
         'No session data stored:\n'
-        'When no session data is stored, the context analysis page should be displayed,\n'
+        'When no session data is stored, the context analysis process page should be displayed,\n'
         'without the dashboard.', 
         (tester) async 
         {  
@@ -243,7 +243,7 @@ void main() async
           // Need to pump and wait for the microtasks to finish.
           await tester.pumpAndSettle();
 
-          // Testing that the context analysis page is present 
+          // Testing that the context analysis process page is present 
           // GlobalKeys are different objects, 
           // and are not compared by labels, even if with the same label.
           // final formWidget = find.byKey(GlobalKey(debugLabel:'context-analysis-process'));
