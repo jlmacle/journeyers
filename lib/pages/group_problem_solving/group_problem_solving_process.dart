@@ -203,7 +203,7 @@ class GPSProcessState extends State<GPSProcess>
 // Method used to load the context analyses metadata
 Future<void> _loadHistory() async {
   final data = await du.retrieveAllDashboardMetadata(
-    typeOfContextData: DashboardUtils.contextAnalysesContext
+    typeOfContextData: DashboardUtils.caContext
   );
   setState(() {
     _history = List<Map<String, dynamic>>.from(data);

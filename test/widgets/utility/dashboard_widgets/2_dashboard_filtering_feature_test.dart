@@ -29,7 +29,7 @@ void main() {
       return MaterialApp(
         home: Scaffold(
           body: DashboardSortingAndFilteringFeature(
-            dashboardContext: DashboardUtils.contextAnalysesContext,
+            dashboardContext: DashboardUtils.caContext,
             allSessions: allSessions,
             filteredSessions: filteredSessions,
             usedKeywords: usedKeywords!,

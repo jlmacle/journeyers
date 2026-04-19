@@ -50,7 +50,7 @@ void main() {
 
     test('creates the file when it does not yet exist', () async {
       final file = await sut!.getSessionMetadataFile(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       expect(file.existsSync(), isTrue);
     });
@@ -58,7 +58,7 @@ void main() {
     test('initialises a newly created file with an empty JSON array',
       () async {
         final file = await sut!.getSessionMetadataFile(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
         );
 
         final records = _readRecords(file);
@@ -72,7 +72,7 @@ void main() {
   group('saveDashboardMetadata', () {
     test('persists the title correctly', () async {
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: testFile1Title,
         keywords: testFile1Keywords,
         formattedDate: aDate,
@@ -80,7 +80,7 @@ void main() {
       );
 
       final file = await sut!.getSessionMetadataFile(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       final records = _readRecords(file);
 
@@ -89,7 +89,7 @@ void main() {
 
     test('uses "Untitled" when title is null', () async {
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: null,
         keywords: [],
         formattedDate: aDate,
@@ -97,7 +97,7 @@ void main() {
       );
 
       final file = await sut!.getSessionMetadataFile(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       final records = _readRecords(file);
 
@@ -106,7 +106,7 @@ void main() {
 
     test('persists the keywords list correctly', () async {
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: aTitle,
         keywords: keywords,
         formattedDate: aDate,
@@ -114,7 +114,7 @@ void main() {
       );
 
       final file = await sut!.getSessionMetadataFile(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       final records = _readRecords(file);
 
@@ -126,7 +126,7 @@ void main() {
 
     test('persists the date correctly', () async {
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: aTitle,
         keywords: keywords,
         formattedDate: aDate,
@@ -134,7 +134,7 @@ void main() {
       );
 
       final file = await sut!.getSessionMetadataFile(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       final records = _readRecords(file);
 
@@ -143,7 +143,7 @@ void main() {
 
     test('persists the file path correctly', () async {
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: aTitle,
         keywords: [],
         formattedDate: aDate,
@@ -151,7 +151,7 @@ void main() {
       );
 
       final file = await sut!.getSessionMetadataFile(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       final records = _readRecords(file);
 
@@ -161,7 +161,7 @@ void main() {
     test('stores records for the two contexts in separate files',
       () async {
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           title: 'CA Session',
           keywords: [],
           formattedDate: aDate,
@@ -176,7 +176,7 @@ void main() {
         );
 
         final caFile = await sut!.getSessionMetadataFile(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
         );
         final gpsFile = await sut!.getSessionMetadataFile(
           typeOfContextData: DashboardUtils.gpsContext,
@@ -205,7 +205,7 @@ void main() {
       final titles = ['Oldest', 'Middle', 'Newest'];
       for (final t in titles) {
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           title: t,
           keywords: [],
           formattedDate: aDate,
@@ -214,7 +214,7 @@ void main() {
       }
 
       final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
 
       expect(result.first[DashboardUtils.keyTitle], 'Newest');
@@ -223,7 +223,7 @@ void main() {
 
     test('returned records contain all expected keys', () async {
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: aTitle,
         keywords: [],
         formattedDate: aDate,
@@ -231,7 +231,7 @@ void main() {
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
       final record = result.first as Map<String, dynamic>;
 
@@ -249,14 +249,14 @@ void main() {
       const fileToDelete = '/file/to/delete';
 
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: 'Title: File to keep',
         keywords: [],
         formattedDate: aDate,
         pathToFile: '/file/to/keep',
       );
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: testFile2Title,
         keywords: [],
         formattedDate: aDate,
@@ -264,12 +264,12 @@ void main() {
       );
 
       await sut!.deleteSpecificSessionMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         filePathRelatedToDataToDelete: fileToDelete,
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
 
       expect(result, hasLength(1));
@@ -279,7 +279,7 @@ void main() {
     test('does not alter other records when one is deleted', () async {
       for (var i = 1; i <= 4; i++) {
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           title: 'Session $i',
           keywords: [],
           formattedDate: aDate,
@@ -288,12 +288,12 @@ void main() {
       }
 
       await sut!.deleteSpecificSessionMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         filePathRelatedToDataToDelete: '/files/session_2.json',
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
 
       expect(result, hasLength(3));
@@ -308,7 +308,7 @@ void main() {
         () async {
       const onlyPath = 'only/file';
       await sut!.saveDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         title: 'Only one file',
         keywords: [],
         formattedDate: aDate,
@@ -316,12 +316,12 @@ void main() {
       );
 
       await sut!.deleteSpecificSessionMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         filePathRelatedToDataToDelete: onlyPath,
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
 
       expect(result, isEmpty);
@@ -337,12 +337,12 @@ void main() {
         () async {
 
       await sut!.saveAllSessionsMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
         allSessionsMetadata: [],
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfContextData: DashboardUtils.contextAnalysesContext,
+        typeOfContextData: DashboardUtils.caContext,
       );
 
       expect(result, isEmpty);
@@ -362,7 +362,7 @@ void main() {
         const expectedPath = '/round/trip';
 
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           title: expectedTitle,
           keywords: expectedKeywords,
           formattedDate: expectedDate,
@@ -370,7 +370,7 @@ void main() {
         );
 
         final result = await sut!.retrieveAllDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
         );
         final record = result.first as Map<String, dynamic>;
 
@@ -390,14 +390,14 @@ void main() {
 
         // 2 files added
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           title: testFile1Title,
           keywords: [],
           formattedDate: aDate,
           pathToFile: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           title: testFile2Title,
           keywords: [],
           formattedDate: aDate,
@@ -406,13 +406,13 @@ void main() {
 
         // 1 file deleted
         await sut!.deleteSpecificSessionMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
           filePathRelatedToDataToDelete: fileToDelete,
         );
 
         // Metadata retrieval
         final result = await sut!.retrieveAllDashboardMetadata(
-          typeOfContextData: DashboardUtils.contextAnalysesContext,
+          typeOfContextData: DashboardUtils.caContext,
         );
 
         expect(result, hasLength(1));

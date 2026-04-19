@@ -100,9 +100,9 @@ class CAFormState extends State<CAForm>
       var formatter = DateFormat('MMMM dd, yyyy').add_jm();
       var formattedDate = formatter.format(now);   
       await du.saveDashboardMetadata
-      (typeOfContextData: DashboardUtils.contextAnalysesContext, title: _analysisTitle, 
+      (typeOfContextData: DashboardUtils.caContext, title: _analysisTitle, 
       keywords: _keywords.toList(), formattedDate: formattedDate, pathToFile: pathToCSVFile);
-      await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.contextAnalysesContext);
+      await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.caContext);
     }
     
     // Page refreshing for dashboard display
