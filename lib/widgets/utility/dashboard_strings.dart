@@ -6,6 +6,6 @@ const String sortByDateLabel = "Sort by Date";
 const String sortByTitleLabel = "Sort by Title";
 
 // Tooltips
-const String previewTooltip = "Preview";
+const String previewTooltipLabel = "Preview";
 
 
