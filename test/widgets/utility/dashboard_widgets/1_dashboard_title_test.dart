@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:journeyers/utils/project_specific/dashboard/dashboard_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
 
 void main() {
