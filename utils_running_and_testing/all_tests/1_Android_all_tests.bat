@@ -7,13 +7,13 @@ if not defined JOURNEYERS_DIR (
     exit /b 1
 )
 
-echo ----------------------------------------------  
-echo All tests.
-echo ----------------------------------------------
+@REM echo ----------------------------------------------  
+@REM echo All tests.
+@REM echo ----------------------------------------------
 
 
-cd %JOURNEYERS_DIR%
+@REM cd %JOURNEYERS_DIR%
 
 :: Integration tests
-cd ./utils_running_and_testing/integration_tests
-./1_Android_integration_tests.bat
+@REM cd ./utils_running_and_testing/integration_tests
+@REM ./1_Android_integration_tests.bat

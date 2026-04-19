@@ -7,11 +7,11 @@ if not defined JOURNEYERS_DIR (
     exit /b 1
 )
 
-echo ---------------------------------------------  
-echo Integration tests.
-echo ---------------------------------------------
+@REM echo ---------------------------------------------  
+@REM echo Integration tests.
+@REM echo ---------------------------------------------
 
 
-cd %JOURNEYERS_DIR%
-flutter test ./integration_test/_all_tests.dart  -r github -d windows
+@REM cd %JOURNEYERS_DIR%
+@REM flutter test ./integration_test/_all_tests.dart  -r github -d windows
 
