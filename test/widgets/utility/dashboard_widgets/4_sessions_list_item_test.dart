@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import 'package:journeyers/widgets/utility/dashboard_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
 void main() {
@@ -27,7 +28,7 @@ void main() {
               sessionMetadata: testMetadata,
               index: 0,
               isChecked: false,
-              dashboardContext: DashboardUtils.contextAnalysesContext, 
+              dashboardContext: DashboardUtils.caContext, 
               onCheckboxChanged: (_) {},
               onEditTitle: () {},
               onEditKeywords: () {},
@@ -48,6 +49,29 @@ void main() {
       
       // Verifies keywords
       expect(find.text('Keywords: Kw, Kw2'), findsOneWidget);
+    });
+
+    testWidgets('Finds the preview tooltip label (icon with a different label)', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SessionsListItem(
+              sessionMetadata: testMetadata,
+              index: 0,
+              isChecked: false,
+              dashboardContext: DashboardUtils.caContext, 
+              onCheckboxChanged: (_) {},
+              onEditTitle: () {},
+              onEditKeywords: () {},
+              onPreview: () {},
+              onDelete: () {},
+            ),
+          ),
+        ),
+      );
+
+      // Verifies preview tooltip present
+      expect(find.byTooltip(previewTooltipLabel), findsOneWidget);      
     });
   });
 }
