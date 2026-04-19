@@ -59,7 +59,7 @@ class RunTimeDataUtils
     final prefs = await SharedPreferences.getInstance();
     switch (context)
     {
-      case (DashboardUtils.contextAnalysesContext):
+      case (DashboardUtils.caContext):
       {
         return await prefs.setBool('wasSessionDataSaved', wasDataSaved);
       }
@@ -77,7 +77,7 @@ class RunTimeDataUtils
     final prefs = await SharedPreferences.getInstance();
     switch (context)
     {
-      case (DashboardUtils.contextAnalysesContext):
+      case (DashboardUtils.caContext):
       {
         return prefs.getBool('wasSessionDataSaved') ?? false;
       }
@@ -96,7 +96,7 @@ class RunTimeDataUtils
     final prefs = await SharedPreferences.getInstance();
     switch (context)
     {
-      case (DashboardUtils.contextAnalysesContext):
+      case (DashboardUtils.caContext):
       {
         return await prefs.setBool('wasSessionDataSaved', false);
       }

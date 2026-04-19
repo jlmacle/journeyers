@@ -25,7 +25,7 @@ void main() {
 
   Widget createWidgetUnderTest({
     bool areSessionsForDeletion = true,
-    String context = DashboardUtils.contextAnalysesContext,
+    String context = DashboardUtils.caContext,
   }) {
     return MaterialApp(
       home: Scaffold(

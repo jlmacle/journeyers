@@ -110,7 +110,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
 
       // refreshing the page, to re-start in the process page
-      if (widget.dashboardContext == DashboardUtils.contextAnalysesContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
+      if (widget.dashboardContext == DashboardUtils.caContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
       else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.onAllSessionFilesDeleted();}
       else {pu.printd("Error: Unexpected context: ${widget.dashboardContext}");}
     }

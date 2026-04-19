@@ -42,7 +42,7 @@ class CAPageState extends State<CAPage>
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
     _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
-    _wasCASessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.contextAnalysesContext);
+    _wasCASessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.caContext);
 
     setState(() {_preferencesLoading = false;});
     if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
@@ -193,7 +193,7 @@ class CAPageState extends State<CAPage>
                 child: DashboardPage
                 (
                   key: const Key('analyses-dashboard'), 
-                  dashboardContext: DashboardUtils.contextAnalysesContext,
+                  dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   previewWidget: 
                   ({required String pathToData}) 

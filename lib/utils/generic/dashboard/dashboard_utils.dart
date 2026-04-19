@@ -14,10 +14,10 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 class DashboardUtils {
 
   /// String used to communicate the context of the context analyses.
-  static const String contextAnalysesContext = "caContext";
+  static const String caContext = "Context for the context analyses";
 
   /// String used to communicate the context of the group problem-solvings.
-  static const String gpsContext = "gpsContext";
+  static const String gpsContext = "Context for the group problem-solvings";
 
   /// The key for the session title.
   static const String keyTitle = 'title';
@@ -46,7 +46,7 @@ class DashboardUtils {
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
     String fileName = "";
-    if (typeOfContextData == contextAnalysesContext) {
+    if (typeOfContextData == caContext) {
       fileName = 'dashboard_session_data_context_analyses.json';
     } else if (typeOfContextData == gpsContext) {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
@@ -164,7 +164,7 @@ class DashboardUtils {
     final pathToApplicationSupportDirectory = applicationSupportDirectory.path;
 
     // Getting file name according to context
-    if (typeOfContextData == contextAnalysesContext) 
+    if (typeOfContextData == caContext) 
     {
       fileName = 'dashboard_session_data_context_analyses.json';
     } 
