@@ -14,7 +14,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/2_dashboard_filteri
 import 'package:journeyers/widgets/utility/dashboard_widgets/2bi_dashboard_sorting_by_date_config.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session_list_item.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
 
 /// {@category Utility widgets}
