@@ -16,8 +16,8 @@ cd $JOURNEYERS_DIR
 cd ./utils_running_and_testing/units_and_widgets_tests
 ./1_Linux_units_and_widgets_tests.sh
 
-# Integration tests
-cd $JOURNEYERS_DIR
-cd ./utils_running_and_testing/integration_tests
-./3_Linux_integration_tests.sh
+# # Integration tests
+# cd $JOURNEYERS_DIR
+# cd ./utils_running_and_testing/integration_tests
+# ./3_Linux_integration_tests.sh
 

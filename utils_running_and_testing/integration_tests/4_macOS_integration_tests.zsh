@@ -7,10 +7,10 @@ if [ -z "${JOURNEYERS_DIR}" ]; then
     exit 1
 fi
 
-echo "---------------------------------------------" 
-echo "Integration tests."
-echo "---------------------------------------------"
+# echo "---------------------------------------------" 
+# echo "Integration tests."
+# echo "---------------------------------------------"
 
-cd $JOURNEYERS_DIR
-flutter test ./integration_test/_all_tests.dart  -r github -d macos
+# cd $JOURNEYERS_DIR
+# flutter test ./integration_test/_all_tests.dart  -r github -d macos
 

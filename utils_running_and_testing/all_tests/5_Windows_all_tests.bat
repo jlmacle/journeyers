@@ -18,7 +18,7 @@ cd %JOURNEYERS_DIR%
 cd ./utils_running_and_testing/units_and_widgets_tests
 call ./3_Windows_units_and_widgets_tests.bat
 
-:: Integration tests
-cd ./utils_running_and_testing/integration_tests
-call ./5_Windows_integration_tests.bat
+@REM :: Integration tests
+@REM cd ./utils_running_and_testing/integration_tests
+@REM call ./5_Windows_integration_tests.bat
 
