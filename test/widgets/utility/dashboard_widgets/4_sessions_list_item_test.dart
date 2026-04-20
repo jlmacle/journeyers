@@ -125,5 +125,29 @@ void main() {
       expect(find.byTooltip(keywordsTooltipLabel), findsOneWidget);      
     });
 
+    // 'Finds the delete tooltip label'
+    testWidgets('Finds the delete tooltip label', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SessionsListItem(
+              sessionMetadata: testMetadata,
+              index: 0,
+              isChecked: false,
+              dashboardContext: DashboardUtils.caContext, 
+              onCheckboxChanged: (_) {},
+              onEditTitle: () {},
+              onEditKeywords: () {},
+              onPreview: () {},
+              onDelete: () {},
+            ),
+          ),
+        ),
+      );
+
+      // Verifies delete tooltip present
+      expect(find.byTooltip(deleteTooltipLabel), findsOneWidget);      
+    });
+
   });  
 }
