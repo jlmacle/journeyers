@@ -227,13 +227,17 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: 
-              (dashboardContext == DashboardUtils.caContext)
-              ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
-              : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
-              ),
+              (sessionMetadata[DashboardUtils.keyFilePath] != null)
+              ?
+                (dashboardContext == DashboardUtils.caContext)
+                ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
+                : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
+              :
+                const Text('Null file path'),
             ),
           ),
-        );
+        )
+      );
     }
   );
 }
