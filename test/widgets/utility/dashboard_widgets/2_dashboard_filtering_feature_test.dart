@@ -45,12 +45,12 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest());
 
       // Checks for the children and pre-defined labels 
-      // sorting by Title
+      // sorting by title
       expect(find.byType(DashboardSortingByTitle), findsOneWidget);
       // String interpolation used for the text
       expect(find.textContaining(sortByTitleLabel), findsOneWidget);
 
-      // sorting by Date
+      // sorting by date
       expect(find.byType(DashboardSortingByDate), findsOneWidget);
       expect(find.text(sortByDateLabel), findsOneWidget);
 
