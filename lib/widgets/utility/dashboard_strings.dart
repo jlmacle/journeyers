@@ -8,5 +8,6 @@ const String sortByTitleLabel = "Sort by Title";
 // Tooltips
 const String previewTooltipLabel = "Preview";
 const String editTooltipLabel = "Edit Document";
+const String keywordsTooltipLabel = "Edit Keywords";
 
 

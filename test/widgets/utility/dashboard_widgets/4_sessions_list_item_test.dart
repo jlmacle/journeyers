@@ -18,8 +18,10 @@ void main() {
     'keywords': keywords,
   };
 
+  // 'SessionsListItem Tests'
   group('SessionsListItem Tests', () 
   {  
+    // 'Displays session info correctly (Title, date, keywords)'
     testWidgets('Displays session info correctly (Title, date, keywords)', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -51,6 +53,7 @@ void main() {
       expect(find.text('Keywords: Kw, Kw2'), findsOneWidget);
     });
 
+    // 'Finds the preview tooltip label'
     testWidgets('Finds the preview tooltip label', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -74,6 +77,7 @@ void main() {
       expect(find.byTooltip(previewTooltipLabel), findsOneWidget);      
     });
 
+    // 'Finds the edit tooltip label'
     testWidgets('Finds the edit tooltip label', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -95,6 +99,30 @@ void main() {
 
       // Verifies edit tooltip present
       expect(find.byTooltip(editTooltipLabel), findsOneWidget);      
+    });
+
+    // 'Finds the keywords tooltip label'
+    testWidgets('Finds the keywords tooltip label', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SessionsListItem(
+              sessionMetadata: testMetadata,
+              index: 0,
+              isChecked: false,
+              dashboardContext: DashboardUtils.caContext, 
+              onCheckboxChanged: (_) {},
+              onEditTitle: () {},
+              onEditKeywords: () {},
+              onPreview: () {},
+              onDelete: () {},
+            ),
+          ),
+        ),
+      );
+
+      // Verifies keywords tooltip present
+      expect(find.byTooltip(keywordsTooltipLabel), findsOneWidget);      
     });
 
   });  
