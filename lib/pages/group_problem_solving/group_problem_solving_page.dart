@@ -5,7 +5,6 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
 
@@ -140,9 +139,6 @@ class GPSPageState extends State<GPSPage>
                   key: const Key('group-problem-solving-dashboard'),
                   dashboardContext: DashboardUtils.gpsContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyGPS,
-                  previewWidget: 
-                    ({required String pathToData}) 
-                    { return GPSPreviewWidget(pathToStoredData: pathToData);},
                   parentCallbackFunctionWhenAllSessionFilesAreDeleted: onAllSessionFilesDeleted                  
                 )
               ),
