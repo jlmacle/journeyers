@@ -51,7 +51,7 @@ void main() {
       expect(find.text('Keywords: Kw, Kw2'), findsOneWidget);
     });
 
-    testWidgets('Finds the preview tooltip label (icon with a different label)', (WidgetTester tester) async {
+    testWidgets('Finds the preview tooltip label', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -73,5 +73,29 @@ void main() {
       // Verifies preview tooltip present
       expect(find.byTooltip(previewTooltipLabel), findsOneWidget);      
     });
-  });
+
+    testWidgets('Finds the edit tooltip label', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SessionsListItem(
+              sessionMetadata: testMetadata,
+              index: 0,
+              isChecked: false,
+              dashboardContext: DashboardUtils.caContext, 
+              onCheckboxChanged: (_) {},
+              onEditTitle: () {},
+              onEditKeywords: () {},
+              onPreview: () {},
+              onDelete: () {},
+            ),
+          ),
+        ),
+      );
+
+      // Verifies edit tooltip present
+      expect(find.byTooltip(editTooltipLabel), findsOneWidget);      
+    });
+
+  });  
 }
