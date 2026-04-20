@@ -11,3 +11,5 @@ const String editTooltipLabel = "Edit Document";
 const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete";
 
+// Placeholder messages
+const String placeholderForEdit = 'Edit not yet implemented.';

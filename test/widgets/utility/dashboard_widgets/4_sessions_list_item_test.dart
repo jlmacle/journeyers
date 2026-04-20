@@ -207,7 +207,7 @@ void main() {
         await tester.pumpAndSettle();
        
         // Verifies placeholder message
-        expect(find.text('Edit not yet implemented.'), findsOneWidget);
+        expect(find.text(placeholderForEdit), findsOneWidget);
       });
     });  
   
