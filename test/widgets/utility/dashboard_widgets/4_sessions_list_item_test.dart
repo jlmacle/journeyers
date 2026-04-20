@@ -14,7 +14,7 @@ void main() {
   final testMetadata = {
     'title': title,
     'date': date,
-    'filePath': '/path/to/file.csv',
+    'filePath': null,
     'keywords': keywords,
   };
 
@@ -34,7 +34,6 @@ void main() {
               onCheckboxChanged: (_) {},
               onEditTitle: () {},
               onEditKeywords: () {},
-              onPreview: () {},
               onDelete: () {},
             ),
           ),
@@ -66,7 +65,6 @@ void main() {
               onCheckboxChanged: (_) {},
               onEditTitle: () {},
               onEditKeywords: () {},
-              onPreview: () {},
               onDelete: () {},
             ),
           ),
@@ -90,7 +88,6 @@ void main() {
               onCheckboxChanged: (_) {},
               onEditTitle: () {},
               onEditKeywords: () {},
-              onPreview: () {},
               onDelete: () {},
             ),
           ),
@@ -114,7 +111,6 @@ void main() {
               onCheckboxChanged: (_) {},
               onEditTitle: () {},
               onEditKeywords: () {},
-              onPreview: () {},
               onDelete: () {},
             ),
           ),
@@ -138,7 +134,6 @@ void main() {
               onCheckboxChanged: (_) {},
               onEditTitle: () {},
               onEditKeywords: () {},
-              onPreview: () {},
               onDelete: () {},
             ),
           ),
@@ -148,6 +143,31 @@ void main() {
       // Verifies delete tooltip present
       expect(find.byTooltip(deleteTooltipLabel), findsOneWidget);      
     });
+    
+    testWidgets('Opens the preview', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SessionsListItem(
+              sessionMetadata: testMetadata,
+              index: 0,
+              isChecked: false,
+              dashboardContext: DashboardUtils.caContext, 
+              onCheckboxChanged: (_) {},
+              onEditTitle: () {},
+              onEditKeywords: () {},
+              onDelete: () {},
+            ),
+          ),
+        ),
+      );
 
+      // Preview tooltip 
+      var previewTooltipFinder = find.byTooltip(previewTooltipLabel);
+      await tester.tap(previewTooltipFinder);
+      await tester.pumpAndSettle();
+      // Verifies text for absent file path
+      expect(find.text('Null file path'), findsOneWidget);
+    });
   });  
 }
