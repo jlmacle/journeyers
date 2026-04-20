@@ -21,6 +21,7 @@ void main() {
   // 'SessionsListItem Tests'
   group('SessionsListItem Tests', () 
   {  
+    // 'Info and tooltips Tests'
     group('Info and tooltips Tests', () 
     { 
       // 'Displays session info correctly (Title, date, keywords)'
@@ -147,8 +148,10 @@ void main() {
       });
     });
     
+    // 'Preview Tests'
     group('Preview Tests', () 
     { 
+      // 'Opens the preview'
       testWidgets('Opens the preview', (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -174,6 +177,40 @@ void main() {
         // Verifies text for absent file path
         expect(find.text('Null file path'), findsOneWidget);
       });
+    });
+
+    // 'Edit Tests'
+    group('Edit Tests', () 
+    { 
+      // 'Shows the placeholder message'
+      testWidgets('Shows the placeholder message', (WidgetTester tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SessionsListItem(
+                sessionMetadata: testMetadata,
+                index: 0,
+                isChecked: false,
+                dashboardContext: DashboardUtils.caContext, 
+                onCheckboxChanged: (_) {},
+                onEditTitle: () {},
+                onEditKeywords: () {},
+                onDelete: () {},
+              ),
+            ),
+          ),
+        );
+
+        // Preview tooltip 
+        var editTooltipFinder = find.byTooltip(editTooltipLabel);
+        await tester.tap(editTooltipFinder);
+        await tester.pumpAndSettle();
+       
+        // Verifies placeholder message
+        expect(find.text('Edit not yet implemented.'), findsOneWidget);
+      });
     });  
-  });
+  
+  
+  }); 
 }
