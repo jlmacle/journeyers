@@ -57,7 +57,6 @@ void main() {
         var textDeleteFinder = find.byType(Text).first;
         Text textDelete = tester.widget(textDeleteFinder);
         expect(textDelete.style?.color, transparent);
-
       });
     });
 
@@ -76,6 +75,5 @@ void main() {
       var iconDeleteFinder = find.byIcon(Icons.delete).first;
       Icon deleteIcon = tester.widget(iconDeleteFinder);
       expect(deleteIcon.color, red);
-
     });     
 }
