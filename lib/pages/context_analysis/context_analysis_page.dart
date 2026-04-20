@@ -6,7 +6,6 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
@@ -195,9 +194,6 @@ class CAPageState extends State<CAPage>
                   key: const Key('analyses-dashboard'), 
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
-                  previewWidget: 
-                  ({required String pathToData}) 
-                  { return CAPreviewWidget(pathToStoredData: pathToData);},  
                   parentCallbackFunctionWhenAllSessionFilesAreDeleted: onAllSessionFilesDeleted,
                   
                 )

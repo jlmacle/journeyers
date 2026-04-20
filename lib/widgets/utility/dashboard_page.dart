@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:collection/collection.dart';
 
-import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
@@ -28,9 +27,6 @@ class DashboardPage extends StatefulWidget
   /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// The widget used for the preview.
-  final Widget Function({required String pathToData})? previewWidget;
-
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
   final VoidCallback parentCallbackFunctionWhenAllSessionFilesAreDeleted;
 
@@ -41,7 +37,6 @@ class DashboardPage extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    required this.previewWidget,
     this.parentCallbackFunctionWhenAllSessionFilesAreDeleted = placeHolderVoidCallback,
     required this.dashboardFilteringByKeywordsKey
   });
@@ -360,7 +355,6 @@ class DashboardPageState extends State<DashboardPage>
                             session[DashboardUtils.keyKeywords],
                             filePath,
                           ),
-                          onPreview: () => _showPreviewOverlay(context, session, filePath),
                           onDelete: () async => await _deleteSelectedSession(filePath),
                         );
                       },
@@ -501,69 +495,4 @@ class DashboardPageState extends State<DashboardPage>
   );
 }
 
-
-// Method used to display an overlay with a session data preview. 
-void _showPreviewOverlay(BuildContext context, Map<String,dynamic> session, String filePath) {
-  String title = session[DashboardUtils.keyTitle];
-  
-  showGeneralDialog(
-    context: context,
-    transitionDuration: const Duration(milliseconds: 300),
-    pageBuilder: (context, anim1, anim2) {
-      return Scaffold(
-        appBar:AppBar
-        (
-          centerTitle: true, 
-          title: 
-          Text
-          (
-            textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-            softWrap:true, title, style: previewTitleStyle
-          ),
-          // Left side: Edit Button
-          leadingWidth: 100,
-          leading: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.edit),
-                color: appBarWhite,
-                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
-                tooltip: "Edit session",
-              ),
-              IconButton(
-                icon: const Icon(Icons.share),
-                color: appBarWhite,
-                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Share not yet implemented.')));},
-                tooltip: "Share session",
-              ),
-            ],
-          ),
-          
-          // Right side: Close Button
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.close),
-              color: appBarWhite,
-              onPressed: () => Navigator.of(context).pop(),
-              tooltip: "Close preview",
-            ),
-          ],
-        ),
-        body: SafeArea(
-          // SingleChildScrollView ensures the content is scrollable 
-          // regardless of the widget's internal structure
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: widget.previewWidget!(
-                pathToData: filePath,
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-  );
-}
 }

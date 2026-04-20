@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
 /// {@category Utility widgets}
@@ -27,9 +30,6 @@ class SessionsListItem extends StatelessWidget {
   /// A callback function called when the keywords are being edited.
   final VoidCallback onEditKeywords;
 
-  /// A callback function called when the preview is requested.
-  final VoidCallback onPreview;
-
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDelete;
 
@@ -42,7 +42,6 @@ class SessionsListItem extends StatelessWidget {
     required this.onCheckboxChanged,
     required this.onEditTitle,
     required this.onEditKeywords,
-    required this.onPreview,
     required this.onDelete,
   });
 
@@ -132,7 +131,7 @@ class SessionsListItem extends StatelessWidget {
                     // To preview the session data
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
-                      onPressed: onPreview,
+                      onPressed: () => _showPreviewOverlay(context, dashboardContext, sessionMetadata),
                       tooltip: "Preview",
                     ),
                     // To edit the session file data
@@ -167,4 +166,74 @@ class SessionsListItem extends StatelessWidget {
       ),
     );
   }
+}
+
+// Method used to display an overlay with a session data preview. 
+void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata) 
+{
+  String title = sessionMetadata[DashboardUtils.keyTitle];
+  
+  showGeneralDialog
+  (
+    context: context,
+    transitionDuration: const Duration(milliseconds: 300),
+    pageBuilder: (context, anim1, anim2) 
+    {
+      return Scaffold
+      (
+        appBar:AppBar
+        (
+          centerTitle: true, 
+          title: 
+          Text
+          (
+            textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
+            softWrap:true, title, style: previewTitleStyle
+          ),
+          // Left side: Edit Button
+          leadingWidth: 100,
+          leading: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.edit),
+                color: appBarWhite,
+                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
+                tooltip: "Edit session",
+              ),
+              IconButton(
+                icon: const Icon(Icons.share),
+                color: appBarWhite,
+                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Share not yet implemented.')));},
+                tooltip: "Share session",
+              ),
+            ],
+          ),
+          
+          // Right side: Close Button
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.close),
+              color: appBarWhite,
+              onPressed: () => Navigator.of(context).pop(),
+              tooltip: "Close preview",
+            ),
+          ],
+        ),
+        body: SafeArea(
+          // SingleChildScrollView ensures the content is scrollable 
+          // regardless of the widget's internal structure
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: 
+              (dashboardContext == DashboardUtils.caContext)
+              ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
+              : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
+              ),
+            ),
+          ),
+        );
+    }
+  );
 }
