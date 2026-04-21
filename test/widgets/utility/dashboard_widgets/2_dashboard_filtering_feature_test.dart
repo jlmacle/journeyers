@@ -41,7 +41,7 @@ void main() {
       );
     }
 
-    testWidgets('renders all sub-components and title text', (WidgetTester tester) async {
+    testWidgets('Renders all sub-components labels and title text', (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
 
       // Checks for the children and pre-defined labels 
@@ -59,7 +59,7 @@ void main() {
       expect(find.text(filterByKeywordsLabel), findsOneWidget);     
     });
 
-    testWidgets('wraps sorting widgets inside a Wrap widget', (WidgetTester tester) async {
+    testWidgets('Wraps sorting widgets inside a Wrap widget', (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
 
       // Checks for Wrap widget

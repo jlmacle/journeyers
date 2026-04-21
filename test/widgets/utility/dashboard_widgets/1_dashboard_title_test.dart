@@ -10,7 +10,7 @@ void main() {
     const String testTitle = dashboardTitle;
 
     // 'should render the correct title text'
-    testWidgets('should render the correct title text', 
+    testWidgets('Should render the correct title text', 
     (WidgetTester tester) async 
     {
       // Building the widget
