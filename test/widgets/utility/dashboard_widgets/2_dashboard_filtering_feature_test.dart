@@ -9,7 +9,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/2a_dashboard_sortin
 import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
 
 void main() {
-  group('DashboardFilteringFeature Widget Tests:\n', () {
+  group('DashboardFilteringFeature Widget Tests: \n', () {
     GlobalKey<DashboardFilteringByKeywordsState>? testKey;
     List<String>? usedKeywords;
     List<String>? selectedKeywords;
