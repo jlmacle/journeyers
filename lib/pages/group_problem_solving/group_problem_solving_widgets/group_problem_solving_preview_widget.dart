@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 
 /// {@category Group problem-solving}
@@ -35,8 +36,15 @@ class _GPSPreviewWidgetState
   }
 
   Future<void> _fetchingData() async {
+    List<String> lines;
     try {
-      List<String> lines = [];
+      if (pathsForTestFiles.contains(widget.pathToStoredData)) 
+      {
+        _solutions = [testDataMessage];
+        return;
+      }
+
+      lines = [];
       if (Platform.isAndroid || Platform.isIOS)
       {
         String content = await fu.readTextContentOnMobile(pathToData: widget.pathToStoredData);
