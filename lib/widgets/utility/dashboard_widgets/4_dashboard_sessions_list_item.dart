@@ -7,7 +7,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_wid
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
-import 'package:journeyers/widgets/utility/dashboard_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}

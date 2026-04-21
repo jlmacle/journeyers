@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
-import 'package:journeyers/widgets/utility/dashboard_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
