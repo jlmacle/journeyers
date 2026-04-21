@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/externalized_strings.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 import 'package:journeyers/widgets/utility/dashboard_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
 void main() {
+  final CAFormQuestions q = CAFormQuestions();
+
   var title = 'Legacy';
   var date = 'March 20, 2026 4:51 PM';
   var keywords = ['Kw', 'Kw2'];
 
   // Data for the test
-  final testMetadataWithNullFilePath = {
+  final testMetadata = {
     'title': title,
     'date': date,
-    'filePath': null,
+    'filePath': pathForTestFile1,
     'keywords': keywords,
   };
 
@@ -30,7 +34,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -61,7 +65,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -84,7 +88,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -107,7 +111,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -130,7 +134,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -157,7 +161,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -174,8 +178,8 @@ void main() {
         var previewTooltipFinder = find.byTooltip(previewTooltipLabel);
         await tester.tap(previewTooltipFinder);
         await tester.pumpAndSettle();
-        // Verifies text for absent file path
-        expect(find.text('Null file path'), findsOneWidget);
+        // Verifies title level 2 present
+        expect(find.text(q.level2TitleIndividual), findsOneWidget);
       });
     });
 
@@ -188,7 +192,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -220,7 +224,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
@@ -248,7 +252,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadataWithNullFilePath,
+                sessionMetadata: testMetadata,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
