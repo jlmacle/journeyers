@@ -11,7 +11,7 @@ void main() {
   var keywords = ['Kw', 'Kw2'];
 
   // Data for the test
-  final testMetadata = {
+  final testMetadataWithNullFilePath = {
     'title': title,
     'date': date,
     'filePath': null,
@@ -19,10 +19,10 @@ void main() {
   };
 
   // 'SessionsListItem Tests'
-  group('SessionsListItem Tests', () 
+  group('SessionsListItem Tests: \n', () 
   {  
     // 'Info and tooltips Tests'
-    group('Info and tooltips Tests', () 
+    group('Info and tooltips Tests: \n', () 
     { 
       // 'Displays session info correctly (Title, date, keywords)'
       testWidgets('Displays session info correctly (Title, date, keywords)', (WidgetTester tester) async {
@@ -30,13 +30,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -61,13 +61,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -84,13 +84,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -107,13 +107,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -130,13 +130,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -149,7 +149,7 @@ void main() {
     });
     
     // 'Preview Tests'
-    group('Preview Tests', () 
+    group('Preview Tests: \n', () 
     { 
       // 'Opens the preview'
       testWidgets('Opens the preview', (WidgetTester tester) async {
@@ -157,13 +157,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -180,7 +180,7 @@ void main() {
     });
 
     // 'Edit Tests'
-    group('Edit Tests', () 
+    group('Edit Tests: \n', () 
     { 
       // 'Shows the placeholder message'
       testWidgets('Shows the placeholder message', (WidgetTester tester) async {
@@ -188,13 +188,13 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: SessionsListItem(
-                sessionMetadata: testMetadata,
+                sessionMetadata: testMetadataWithNullFilePath,
                 index: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChanged: (_) {},
                 onEditTitle: () {},
-                onEditKeywords: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDelete: () {},
               ),
             ),
@@ -211,7 +211,7 @@ void main() {
       });
     });  
   
-
+    
   
   }); 
 }
