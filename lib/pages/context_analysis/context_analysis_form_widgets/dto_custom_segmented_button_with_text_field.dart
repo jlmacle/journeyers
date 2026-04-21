@@ -1,4 +1,4 @@
-/// {@category Utils - Project-specific}
+/// {@category Context analysis}
 /// A DTO for the SegmentedButtonWithTextField widget.
 class DTOSegmentedButtonWithTextField {
    Set<String> selection;

@@ -1,4 +1,4 @@
-/// {@category Utils - Project-specific}
+/// {@category Context analysis}
 /// A DTO for the CheckboxWithTextField widget.
 class DTOCheckboxWithTextField {
   bool checked;
