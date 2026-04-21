@@ -41,7 +41,7 @@ void main() {
     );
   }
 
-  group('DashboardDeletionByBulk UI Tests', () {
+  group('DashboardDeletionByBulk UI Tests: \n', () {
 
     testWidgets('Empty selection color is transparent', (WidgetTester tester) async 
     {
@@ -58,22 +58,22 @@ void main() {
         Text textDelete = tester.widget(textDeleteFinder);
         expect(textDelete.style?.color, transparent);
       });
+
+      testWidgets('Non empty selection has "Delete (n)" in label, and color is red', (WidgetTester tester) async {
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        var textDeleteFinder = find.byType(Text).first;
+        Text textDelete = tester.widget(textDeleteFinder);
+
+        // Checks if the label displays the correct count from sessionsSelected
+        expect(textDelete.data, 'Delete (1)');
+        // Checks if the label is red
+        expect(textDelete.style?.color, red);
+        
+        // Checks the delete icon is red
+        var iconDeleteFinder = find.byIcon(Icons.delete).first;
+        Icon deleteIcon = tester.widget(iconDeleteFinder);
+        expect(deleteIcon.color, red);
+      });
     });
-
-    testWidgets('Non empty selection has "Delete (n)" in label, and color is red', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      var textDeleteFinder = find.byType(Text).first;
-      Text textDelete = tester.widget(textDeleteFinder);
-
-      // Checks if the label displays the correct count from sessionsSelected
-      expect(textDelete.data, 'Delete (1)');
-      // Checks if the label is red
-      expect(textDelete.style?.color, red);
-      
-      // Checks the delete icon is red
-      var iconDeleteFinder = find.byIcon(Icons.delete).first;
-      Icon deleteIcon = tester.widget(iconDeleteFinder);
-      expect(deleteIcon.color, red);
-    });     
-}
+  }
