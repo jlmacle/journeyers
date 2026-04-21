@@ -10,7 +10,7 @@ const String keywordsLabel = "Keywords:";
 
 // Tooltips
 const String previewTooltipLabel = "Preview";
-const String editTooltipLabel = "Edit Document";
+const String editTooltipLabel = "Edit session data";
 const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete";
 
