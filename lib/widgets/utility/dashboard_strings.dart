@@ -14,5 +14,8 @@ const String editTooltipLabel = "Edit Document";
 const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete";
 
+// Text field labels
+const String keywordsTextFieldLabel = 'Keywords Edition (please separate with commas)';
+
 // Placeholder messages
 const String placeholderForEdit = 'Edit not yet implemented.';
