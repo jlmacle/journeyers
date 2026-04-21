@@ -240,6 +240,34 @@ void main() {
         // Verifies text field label present
         expect(find.text(keywordsTextFieldLabel), findsOneWidget);
       });
+
+
+    // 'Opens the keywords edition overlay by clicking on the keywords data'
+      testWidgets('Opens the keywords edition overlay by clicking on the keywords data', (WidgetTester tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SessionsListItem(
+                sessionMetadata: testMetadataWithNullFilePath,
+                index: 0,
+                isChecked: false,
+                dashboardContext: DashboardUtils.caContext, 
+                onCheckboxChanged: (_) {},
+                onEditTitle: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
+                onDelete: () {},
+              ),
+            ),
+          ),
+        );
+
+        // Keywords data 
+        var keywordsDataFinder = find.byKey(const ValueKey('session-keywords-0'));
+        await tester.tap(keywordsDataFinder);
+        await tester.pumpAndSettle();
+        // Verifies text field label present
+        expect(find.text(keywordsTextFieldLabel), findsOneWidget);
+      });
     });
   
   }); 
