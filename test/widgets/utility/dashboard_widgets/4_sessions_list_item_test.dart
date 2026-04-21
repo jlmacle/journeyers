@@ -182,7 +182,33 @@ void main() {
         expect(find.text(q.level2TitleIndividual), findsOneWidget);
       });
 
-      
+      // 'Opens the GPS preview'
+      testWidgets('Opens the GPS preview', (WidgetTester tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SessionsListItem(
+                sessionMetadata: testMetadata,
+                index: 0,
+                isChecked: false,
+                dashboardContext: DashboardUtils.gpsContext, 
+                onCheckboxChanged: (_) {},
+                onEditTitle: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
+                onDelete: () {},
+              ),
+            ),
+          ),
+        );
+
+        // Preview tooltip 
+        var previewTooltipFinder = find.byTooltip(previewTooltipLabel);
+        await tester.tap(previewTooltipFinder);
+        await tester.pumpAndSettle();
+        // Verifies text
+        expect(find.textContaining(testDataMessage), findsOneWidget);
+      });
+    
     });
 
     // 'Edit Tests'
