@@ -157,7 +157,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
                       onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata),
-                      tooltip: "Preview",
+                      tooltip: previewTooltipLabel,
                     ),
                     // To edit the session file data
                     IconButton(
@@ -167,7 +167,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           const SnackBar(content: Text('Edit not yet implemented.')),
                         );
                       },
-                      tooltip: "Edit Document",
+                      tooltip: editTooltipLabel,
                     ),
                     // To edit the keywords
                     IconButton(
@@ -182,7 +182,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                         kwsEditController: kwsEditController,
                         onKeywordsUpdated: widget.onEditKeywords 
                       ),
-                      tooltip: "Edit Keywords",
+                      tooltip: keywordsTooltipLabel,
                     ),
                   ],
                 ),
@@ -191,7 +191,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                   key: ValueKey('session-delete-${widget.index}'),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDelete,
-                  tooltip: "Delete",
+                  tooltip: deleteTooltipLabel,
                 ),
               ],
             ),
@@ -233,7 +233,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                 icon: const Icon(Icons.edit),
                 color: appBarWhite,
                 onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
-                tooltip: "Edit session",
+                tooltip: editTooltipLabel,
               ),
               IconButton(
                 icon: const Icon(Icons.share),
