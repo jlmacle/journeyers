@@ -211,7 +211,36 @@ void main() {
       });
     });  
   
-    
+    // 'Keywords Tests'
+    group('Keywords Tests: \n', () 
+    {
+      // 'Opens the keywords edition overlay by clicking on the icon'
+      testWidgets('Opens the keywords edition overlay by clicking on the icon', (WidgetTester tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SessionsListItem(
+                sessionMetadata: testMetadataWithNullFilePath,
+                index: 0,
+                isChecked: false,
+                dashboardContext: DashboardUtils.caContext, 
+                onCheckboxChanged: (_) {},
+                onEditTitle: () {},
+                onEditKeywords: ({required String? filePath, required Set<String> updatedKeywords}) async {},
+                onDelete: () {},
+              ),
+            ),
+          ),
+        );
+
+        // Keywords tooltip 
+        var keywordsTooltipFinder = find.byTooltip(keywordsTooltipLabel);
+        await tester.tap(keywordsTooltipFinder);
+        await tester.pumpAndSettle();
+        // Verifies text field label present
+        expect(find.text(keywordsTextFieldLabel), findsOneWidget);
+      });
+    });
   
   }); 
 }
