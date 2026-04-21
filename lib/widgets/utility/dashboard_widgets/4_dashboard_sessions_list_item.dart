@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_preview_widget.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/type_defs.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling a session data.
-class SessionsListItem extends StatelessWidget {
+class SessionsListItem extends StatefulWidget 
+{
   /// The session metadata.
   final Map<String, dynamic> sessionMetadata;
 
@@ -28,7 +29,7 @@ class SessionsListItem extends StatelessWidget {
   final VoidCallback onEditTitle;
 
   /// A callback function called when the keywords are being edited.
-  final VoidCallback onEditKeywords;
+  final FunctionSetStringAndString onEditKeywords;
 
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDelete;
@@ -46,18 +47,32 @@ class SessionsListItem extends StatelessWidget {
   });
 
   @override
+  State<SessionsListItem> createState() => _SessionsListItemState();
+}
+
+class _SessionsListItemState extends State<SessionsListItem> 
+{
+  TextEditingController kwsEditController = .new();
+  
+  @override void dispose() 
+  {
+    kwsEditController.dispose();
+    super.dispose();
+  }
+  
+  @override
   Widget build(BuildContext context) 
   {
     // Gets the title
-    final String sessionTitle = sessionMetadata[DashboardUtils.keyTitle];
+    final String sessionTitle = widget.sessionMetadata[DashboardUtils.keyTitle];
     // Modifies the title according to context (ca or gps)
-    final String displayTitle = (dashboardContext == DashboardUtils.gpsContext)
+    final String displayTitle = (widget.dashboardContext == DashboardUtils.gpsContext)
         ? "$sessionTitle (gps)"
         : sessionTitle;
 
     // Sorting keywords for display
     final Set<String> sortedKeywords = 
-    Set<String>.from(sessionMetadata[DashboardUtils.keyKeywords])
+    Set<String>.from(widget.sessionMetadata[DashboardUtils.keyKeywords])
     ..toList().sort((a, b) 
     {
         int comparison = a.toLowerCase().compareTo(b.toLowerCase());
@@ -76,9 +91,9 @@ class SessionsListItem extends StatelessWidget {
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: ValueKey('checkbox-$index'),
-                  value: isChecked,
-                  onChanged: onCheckboxChanged,
+                  key: ValueKey('checkbox-${widget.index}'),
+                  value: widget.isChecked,
+                  onChanged: widget.onCheckboxChanged,
                 ),
                 Expanded(
                   child: Column(
@@ -90,18 +105,18 @@ class SessionsListItem extends StatelessWidget {
                         children: [
                           // For the edition of the title
                           GestureDetector(
-                            onTap: onEditTitle,
+                            onTap: widget.onEditTitle,
                             child: Text(
                               displayTitle,
-                              key: ValueKey('session-title-$index'),
+                              key: ValueKey('session-title-${widget.index}'),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                           ),
                           // The session date
                           Text(
-                            "(${sessionMetadata[DashboardUtils.keyDate]})",
-                            key: ValueKey('session-date-$index'),
+                            "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
+                            key: ValueKey('session-date-${widget.index}'),
                             style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
@@ -109,10 +124,18 @@ class SessionsListItem extends StatelessWidget {
                       const SizedBox(height: 4),
                       // For the edition of the keywords
                       GestureDetector(
-                        onTap: onEditKeywords,
+                        onTap: () => _showKeywordsEditSheet(
+                          context: context,
+                          dashboardContext: widget.dashboardContext,                          
+                          currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
+                          filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
+                          onEditKeywords: widget.onEditKeywords,
+                          kwsEditController: kwsEditController,
+                          onKeywordsUpdated: widget.onEditKeywords
+                          ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
-                          key: ValueKey('session-keywords-$index'),
+                          key: ValueKey('session-keywords-${widget.index}'),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -131,7 +154,7 @@ class SessionsListItem extends StatelessWidget {
                     // To preview the session data
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
-                      onPressed: () => _showPreviewOverlay(context, dashboardContext, sessionMetadata),
+                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata),
                       tooltip: "Preview",
                     ),
                     // To edit the session file data
@@ -147,16 +170,25 @@ class SessionsListItem extends StatelessWidget {
                     // To edit the keywords
                     IconButton(
                       icon: const Icon(Icons.style_rounded),
-                      onPressed: onEditKeywords,
+                      onPressed:  () => _showKeywordsEditSheet
+                      (
+                        context: context,
+                        dashboardContext: widget.dashboardContext,
+                        currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
+                        filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
+                        onEditKeywords: widget.onEditKeywords,
+                        kwsEditController: kwsEditController,
+                        onKeywordsUpdated: widget.onEditKeywords 
+                      ),
                       tooltip: "Edit Keywords",
                     ),
                   ],
                 ),
                 // To delete session metadata and file
                 IconButton(
-                  key: ValueKey('session-delete-$index'),
+                  key: ValueKey('session-delete-${widget.index}'),
                   icon: const Icon(Icons.delete_rounded),
-                  onPressed: onDelete,
+                  onPressed: widget.onDelete,
                   tooltip: "Delete",
                 ),
               ],
@@ -167,6 +199,7 @@ class SessionsListItem extends StatelessWidget {
     );
   }
 }
+
 
 // Method used to display an overlay with a session data preview. 
 void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata) 
@@ -241,3 +274,69 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
     }
   );
 }
+
+void _showKeywordsEditSheet
+({
+  required BuildContext context, required String dashboardContext, 
+  required List<dynamic> currentKeywords, required String? filePath, 
+  required FunctionSetStringAndString onEditKeywords,
+  required TextEditingController kwsEditController,
+  required FunctionSetStringAndString onKeywordsUpdated
+}) {
+  // Converting list to a comma-separated string for editing
+  kwsEditController.text = currentKeywords.join(', '); 
+  
+  showModalBottomSheet
+  (
+    context: context,
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    isScrollControlled: true,
+    builder: (context) => Padding
+    (
+      padding: EdgeInsets.only
+      (
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 20, right: 20, top: 20,
+      ),
+      child: Column
+      (
+        mainAxisSize: MainAxisSize.min,
+        children: 
+        [
+          TextField
+          (
+            controller: kwsEditController,
+            autofocus: true,
+            decoration: const InputDecoration
+            (
+              labelText: 'Keywords Edition (please separate with commas)', 
+              labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Please enter your keywords.',
+            ),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () async {
+              // Splitting string into list, trimming whitespaces, and removing empty entries
+              final Set<String> updatedKeywords = kwsEditController.text
+                  .split(',')
+                  .map((e) => e.trim())
+                  .where((e) => e.isNotEmpty)
+                  .toSet();
+
+              // Calling the parent callback for state 
+              await onKeywordsUpdated(filePath: filePath, updatedKeywords: updatedKeywords);
+
+              if (!context.mounted) return;
+              Navigator.of(context).pop();
+            },
+            child: const Text("Save", style: TextStyle(color: Colors.black)),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    ),
+  );
+
+}
+

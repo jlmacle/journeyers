@@ -132,6 +132,22 @@ class DashboardPageState extends State<DashboardPage>
     dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
   }
     
+  // Method used after keywords update
+  Future<void> updateKeywords({required Set<String> updatedKeywords, required String? filePath}) async
+  {
+    // To accomodate widget testing
+    if (filePath != null)
+    {
+      await updateSessionKeywords(filePath, updatedKeywords); 
+              
+      await du.saveAllSessionsMetadata
+      (
+        typeOfContextData: widget.dashboardContext, 
+        allSessionsMetadata: _allSessions!,
+      );
+    }    
+  }
+
   //**************** DELETION OF SINGLE SESSION DATA related data and methods ****************/
 
   final List<String> _sessionsSelectedForDeletion = [];  
@@ -351,10 +367,7 @@ class DashboardPageState extends State<DashboardPage>
                             session[DashboardUtils.keyTitle],
                             filePath,
                           ),
-                          onEditKeywords: () => _showKeywordsEditSheet(
-                            session[DashboardUtils.keyKeywords],
-                            filePath,
-                          ),
+                          onEditKeywords: updateKeywords,
                           onDelete: () async => await _deleteSelectedSession(filePath),
                         );
                       },
@@ -431,68 +444,5 @@ class DashboardPageState extends State<DashboardPage>
       ),
     );
   }
-
-  void _showKeywordsEditSheet(List<dynamic> currentKeywords, String filePath) 
-  {
-  // Converting list to a comma-separated string for editing
-  _titleController.text = currentKeywords.join(', '); 
-  
-  showModalBottomSheet
-  (
-    context: context,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    isScrollControlled: true,
-    builder: (context) => Padding
-    (
-      padding: EdgeInsets.only
-      (
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 20, right: 20, top: 20,
-      ),
-      child: Column
-      (
-        mainAxisSize: MainAxisSize.min,
-        children: 
-        [
-          TextField
-          (
-            controller: _titleController,
-            autofocus: true,
-            decoration: const InputDecoration
-            (
-              labelText: 'Keywords Edition (please separate with commas)', 
-              labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Please enter your keywords.',
-            ),
-          ),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () async {
-              // Splitting string into list, trimming whitespaces, and removing empty entries
-              final Set<String> newKeywords = _titleController.text
-                  .split(',')
-                  .map((e) => e.trim())
-                  .where((e) => e.isNotEmpty)
-                  .toSet();
-
-              // Updating keywords
-              await updateSessionKeywords(filePath, newKeywords); 
-              
-              await du.saveAllSessionsMetadata
-              (
-                typeOfContextData: widget.dashboardContext, 
-                allSessionsMetadata: _allSessions!,
-              );
-
-              if (mounted) Navigator.pop(context);
-            },
-            child: const Text("Save", style: TextStyle(color: Colors.black)),
-          ),
-          const SizedBox(height: 20),
-        ],
-      ),
-    ),
-  );
-}
 
 }

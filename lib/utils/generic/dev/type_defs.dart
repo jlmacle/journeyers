@@ -8,6 +8,10 @@ typedef StringSanitizerBundle =
 }) 
 Function(String);
 
-/// An async function that returns true if a String should be blocked.
+/// A function that returns true if a String should be blocked.
 typedef BlacklistingFunction = 
 bool Function(String value);
+
+/// An async function with a Set<String> parameter, and a String parameter.
+typedef FunctionSetStringAndString = 
+Future<void> Function({required String? filePath, required Set<String> updatedKeywords});
