@@ -5,13 +5,14 @@ import "dart:io";
 import "package:flutter/services.dart";
 
 import "package:file_picker/file_picker.dart";
-import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_consts.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart";
+import "package:journeyers/utils/generic/dev/externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_export.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 
 /// {@category Utils - Project-specific}
 /// A project-specific utility class related to CSV.
@@ -627,6 +628,27 @@ class CSVUtils
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
   Future<Map<String,List<Object>>> csvFileToPreviewPerspectiveData(String pathToCSVFile) async
   {
+    // Checking if the path is a path for a test (TODO: to cleanup/dto)
+    if (pathsForTestFiles.contains(pathToCSVFile)) {
+      return 
+      {
+        "individualPerspective":
+        [["", "As an individual: What problem am I trying to solve?"], ["", "A Balance Issue?"], 
+      ["", "To balance studies and household life?"], ["", "To balance accessing income and household life?"], 
+      ["", "To balance earning an income and household life?"], ["", "To balance helping others and household life?"], 
+      ["", "A Workplace Issue?"], ["", "To solve a need to be more appreciated at work?"], 
+      ["", "To solve a need to remain appreciated at work?"], ["", "A Legacy Issue?"], 
+      ["", "To have better legacies to leave to our children/others?"], ["", "Is the issue of another type?"]], 
+      "groupPerspective":
+      [["", "As a member of groups/teams: What problem(s) are we trying to solve?"], 
+      ["X", "What problem(s) are the groups/teams trying to solve?"], ["Notes:", "b1"], 
+      ["X", "Am I trying to solve the same problem(s) as my groups/teams?"], ["", "Yes/No"], 
+      ["Notes:", "b2"], ["", "Is entering the group problem-solving process consistent with harmony at home?"], 
+      ["", "Is entering the group problem-solving process consistent with appreciability at work?"], 
+      ["", "Is entering the group problem-solving process consistent with my income earning ability?"]]
+      };
+    }
+
     Map<String,List<Object>> perspectiveData = {};
     // Some empty lines have been added for the csv formatting
     List<List<String>> individualPerspective = [];
