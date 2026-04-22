@@ -44,13 +44,13 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
   final TextEditingController _fileNameController = .new();
   final GlobalKey<_SessionFileNameMobilePlatformsState> errorMessageKey = .new();
 
-  //**************** SMARTPHONES CHANNELS ****************//
+  // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
   static const platformAndroid = MethodChannel('dev.journeyers/saf');
   // Android: storage access framework (reading/saving files)
   static const platformIOS = MethodChannel('dev.journeyers/iossaf');
 
-  //**************** PREFERENCES related data and methods ****************/
+  // ─── PREFERENCES related data and methods ───────────────────────────────────────
   String _applicationFolderPath = "";  
 
   // method used to get the set folder path for the application

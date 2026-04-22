@@ -148,7 +148,6 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // ─── DELETION OF SINGLE SESSION DATA related data and methods ───────────────────────────────────────
-
   final List<String> _sessionsSelectedForDeletion = [];  
 
   // Method used to delete a single session data from the session list action icons
