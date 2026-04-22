@@ -42,7 +42,7 @@ class GPSProcess extends StatefulWidget
 
 class GPSProcessState extends State<GPSProcess> 
 {
-  //**************** PREFERENCES related data and methods ****************/
+  // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _isApplicationFolderPathLoading = true;
 
   // method used to get the set preferences
@@ -58,13 +58,13 @@ class GPSProcessState extends State<GPSProcess>
     });
   }
 
-  //**************** TITLE related data ****************//
+  // ─── TITLE related data ───────────────────────────────────────
 
   // TITLE for the group problem-solving process
   // TextEditingController for entering a new title
   final TextEditingController _problemTitleController = .new();
 
-  //**************** STAKEHOLDER IDENTIFIERS related data ****************//
+  // ─── STAKEHOLDER IDENTIFIERS related data ───────────────────────────────────────
   GlobalKey<GPSGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
   GlobalKey<GPSGroupMoodsState> groupMoods2Key = GlobalKey(debugLabel: "group-moods-2");
 
@@ -89,16 +89,16 @@ class GPSProcessState extends State<GPSProcess>
   // The list of stakeholders identifiers' colors for the second column
   final List<Color> _identifiersColors2 = [];  
 
-  //**************** KEYWORDS related data ****************//
+  // ─── KEYWORDS related data ───────────────────────────────────────
   // List to store the keywords entered by the user
   Set<String> _currentKeywords = {}; 
   List<Map<String, dynamic>> _history = [];
   
-  //**************** SOLUTIONS related data ****************//
+  // ─── SOLUTIONS related data ───────────────────────────────────────
   // List to store the solutions entered by the user
   final List<String> _solutions = [];
   
-  //**************** FILE SAVING related data ****************//
+  // ─── FILE SAVING related data ───────────────────────────────────────
   String fileName = "";
   String fileExtension = TextFieldUtils.extentionTXT;
 
