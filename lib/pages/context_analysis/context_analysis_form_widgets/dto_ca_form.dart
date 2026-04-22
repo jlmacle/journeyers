@@ -83,35 +83,56 @@ class DTOCaForm
 
   Future<LinkedHashMap<String, Object> > dataStructureBuilding() async {
   final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
-    // Individual perspective
-    final individualData = LinkedHashMap<String, Object>.from({
-      q.level2TitleIndividual: LinkedHashMap<String, LinkedHashMap<String, Object>>.from({
-        q.level3TitleBalanceIssue: LinkedHashMap<String, LinkedHashMap<String, Object>>.from({
+
+  // Individual perspective
+  final individualData = LinkedHashMap<String, Object>.from
+  ({
+      q.level2TitleIndividual: 
+      LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+      ({
+        q.level3TitleBalanceIssue: 
+        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+        ({
           q.level3TitleBalanceIssueItem1: _checkboxDataToMap(studiesBalance),
           q.level3TitleBalanceIssueItem2: _checkboxDataToMap(accessingIncomeBalance),
           q.level3TitleBalanceIssueItem3: _checkboxDataToMap(earningIncomeBalance),
           q.level3TitleBalanceIssueItem4: _checkboxDataToMap(helpingOthersBalance),
         }),
-        q.level3TitleWorkplaceIssue: LinkedHashMap<String, LinkedHashMap<String, Object>>.from({
+
+        q.level3TitleWorkplaceIssue: 
+        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+        ({
           q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(moreAppreciatedAtWork),
           q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(remainingAppreciatedAtWork),
         }),
-        q.level3TitleLegacyIssue: LinkedHashMap<String, LinkedHashMap<String, Object>>.from({
+
+        q.level3TitleLegacyIssue: 
+        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+        ({
           q.level3TitleLegacyIssueItem1: _checkboxDataToMap(betterLegacies),
         }),
-        q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from({
+        
+        q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
+        ({
           textField: anotherIssueStr,
         }),
       }),
     });
 
     // Groups/teams perspective
-    final groupData = LinkedHashMap<String, Object>.from({
-      q.level2TitleGroup: LinkedHashMap<String, LinkedHashMap<String, Object>>.from({
-        q.level3TitleGroupsProblematics:   LinkedHashMap<String, Object>.from({textField: groupsProblemsStr}),
+  final groupData = LinkedHashMap<String, Object>.from
+    ({
+      q.level2TitleGroup: 
+      LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+      ({
+        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupsProblemsStr}),
+
         q.level3TitleSameProblem:          _segmentedDataToMap(sameProblems),
+
         q.level3TitleHarmonyAtHome:        _segmentedDataToMap(harmonyHome),
+
         q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(appreciabilityAtWork),
+
         q.level3TitleIncomeEarningAbility: _segmentedDataToMap(earningAbility),
       }),
     });
@@ -120,7 +141,7 @@ class DTOCaForm
 
     if (sessionDataDebug) {
       pu.printd('Session Data');
-      pu.printd('Session Data: _enteredData');
+      pu.printd('Session Data: enteredData');
       pu.printd('Session Data: $enteredData');
       pu.printd('Session Data');
     }
