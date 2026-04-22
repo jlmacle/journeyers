@@ -10,6 +10,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_ca_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
@@ -22,20 +23,23 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
-part 'context_analysis_form_ext.dart';
 
 /// {@category Context analysis}
 /// Form used in the context analysis.
 class CAForm extends StatefulWidget 
 {
+  /// The DTO object related to the form.
+  final DTOCaForm dtoCAForm;
+
   /// Callback function used to refresh the page from the context form to the dashboard
   final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
   /// Callback function used to switch the focusability of the bottom bar items
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
-  const CAForm
+  const CAForm.fromDTO
   ({
     super.key,
+    required this.dtoCAForm,
     required this.parentCallbackFunctionToRefreshTheCAPage,
     required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
   });
@@ -46,16 +50,51 @@ class CAForm extends StatefulWidget
 
 class CAFormState extends State<CAForm> 
 {
-  //**************** ACCESSIBILITY related data ****************//
+  final CAFormQuestions q = CAFormQuestions();
+
+  // ─── ACCESSIBILITY related data ───────────────────────────────────────
   // Data related to the folding/unfolding of the expansion tiles
   bool _isIndividualAreaPerspectiveExpanded = false;
   bool _isGroupAreaPerspectiveExpanded = false;
 
-  //**************** SESSION METADATA ****************//
+  // ─── SESSION METADATA ───────────────────────────────────────
   // Placeholder data for what is entered in addition to the form data
   String _fileName = "";
   Set<String> _keywords = {};
   String _analysisTitle = "";  
+
+  // ─── Methods related to updating DTO and item/heading styling ──────────────────────────────────────────────────
+  // Method used to update the DTO, and the item and heading styling (balance issue)
+  void _onBalanceItemChecked(DTOCheckboxWithTextField data, bool? value) {
+    data.checked = value!;
+    balanceIssueHeadingKey.currentState
+        ?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
+
+  // Method used to update the DTO, and the item and heading styling (workplace issue)
+  void _onWorkplaceItemChecked(DTOCheckboxWithTextField data, bool? value) {
+    data.checked = value!;
+    workplaceIssueHeadingKey.currentState
+        ?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
+
+  // Method used to update the DTO, and the item and heading styling (legacy issue)
+    void _onLegacyItemChecked(DTOCheckboxWithTextField data, bool? value) {
+    data.checked = value!;
+    legacyIssueHeadingKey.currentState
+        ?.switchCustomHeadingDecorationIfCheckboxChecked();
+  }
+
+  // Method used to update the DTO, and the item styling (another issue)
+  void _onAnotherIssueStr(String value) {
+    widget.dtoCAForm.anotherIssueStr = value;
+    anotherIssueHeadingKey.currentState
+        ?.switchCustomHeadingDecorationIfTextFieldUsed(value);
+  }
+
+  // Method used to update the DTO (segmented buttons)
+  void _onSegmentedButtonSelection(DTOSegmentedButtonWithTextField data, Set<String>? values) =>
+    data.selection = values ?? {};
   
   // Method used to store the form data to CSV, and the session metadata in a file
   Future<void> saveDataAndMetadata() async 
@@ -67,11 +106,12 @@ class CAFormState extends State<CAForm>
     _fileName = caProcessKey.currentState!.fileName;
 
     // Building the data structure
-    await dataStructureBuilding();
+    final LinkedHashMap<String, Object> enteredData = await widget.dtoCAForm.dataStructureBuilding();
 
+    // TODO:  logic to move to the DTO
     // Transforming the data into a CSV-friendly form
-    List<List<String>> preCSVDataIndividualPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData["individualPerspective"] as LinkedHashMap<String, Object>);
-    List<List<String>> preCSVDataGroupPerspective = await csvu.dataToPreCSV(perspectiveData: _enteredData["groupPerspective"] as LinkedHashMap<String, Object>);
+    List<List<String>> preCSVDataIndividualPerspective = await csvu.dataToPreCSV(perspectiveData: enteredData["individualPerspective"] as LinkedHashMap<String, Object>);
+    List<List<String>> preCSVDataGroupPerspective = await csvu.dataToPreCSV(perspectiveData: enteredData["groupPerspective"] as LinkedHashMap<String, Object>);
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
@@ -117,285 +157,323 @@ class CAFormState extends State<CAForm>
     (
       children: 
       [
-        //************** ExpansionTile diplaying the individual perspective: beginning **************//
-          Semantics
-          (
-            toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
-            button: true, // with tooltip, useful for NVDA
-            // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
-            label: "Zone to click to expand data", // for Orca
-            expanded: _isIndividualAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
-            child:
-            ExpansionTile
-            ( 
-              tilePadding: const EdgeInsets.only(top:0),
-              expandedCrossAxisAlignment: CrossAxisAlignment.center,
-              internalAddSemanticForOnTap: true, 
-              onExpansionChanged: (value) 
-              {
-                setState(() {_isIndividualAreaPerspectiveExpanded = value;});
-                widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
-                },
-              // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
-              maintainState: true, // to keep the state of the children widget
-              title:             
+        // ─── EXPANSION TILE DIPLAYING THE INDIVIDUAL PERSPECTIVE: beginning ───────────────────────────────────────
+        Semantics
+        (
+          toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
+          button: true, // with tooltip, useful for NVDA
+          // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
+          label: "Zone to click to expand data", // for Orca
+          expanded: _isIndividualAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
+          child:
+          ExpansionTile
+          ( 
+            tilePadding: const EdgeInsets.only(top:0),
+            expandedCrossAxisAlignment: CrossAxisAlignment.center,
+            internalAddSemanticForOnTap: true, 
+            onExpansionChanged: (value) 
+            {
+              setState(() {_isIndividualAreaPerspectiveExpanded = value;});
+              widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+              },
+            // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+            maintainState: true, // to keep the state of the children widget
+            title:             
+            CustomHeading
+            (
+              headingText: q.level2TitleIndividual,
+              headingLevel: 2,
+            ),
+            children: <Widget>
+            [
+              /**** ➡️ Sub-point  ****/
+              // Balance issue questions
               CustomHeading
               (
-                headingText: q.level2TitleIndividual,
-                headingLevel: 2,
+                key: balanceIssueHeadingKey,
+                headingText: q.level3TitleBalanceIssue,
+                headingLevel: 3,
               ),
-              children: <Widget>
-              [
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleBalanceIssueItem1,
+                // Initializing the checkbox value with the DTO's value
+                checkboxIsChecked: widget.dtoCAForm.studiesBalance.checked,
+                // Initializing the text field value with the DTO's value
+                textFieldStartValue: widget.dtoCAForm.studiesBalance.text,
+                textFieldHint: pleaseDescribeTextHouseholdHint,
+                // Updating DTO and UI (heading and item styling)
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.studiesBalance, v),
+                // Updating DTO
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.studiesBalance.text = v;},
+              ),
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleBalanceIssueItem2,
+                checkboxIsChecked: widget.dtoCAForm.accessingIncomeBalance.checked,
+                textFieldStartValue: widget.dtoCAForm.accessingIncomeBalance.text,
+                textFieldHint: pleaseDescribeTextHouseholdHint,
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.accessingIncomeBalance, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.accessingIncomeBalance.text = v;},
+              ),
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleBalanceIssueItem3,
+                checkboxIsChecked: widget.dtoCAForm.earningIncomeBalance.checked,
+                textFieldStartValue: widget.dtoCAForm.earningIncomeBalance.text,
+                textFieldHint: pleaseDescribeTextHouseholdHint,
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.earningIncomeBalance, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.earningIncomeBalance.text = v;},
+              ),
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleBalanceIssueItem4,
+                checkboxIsChecked: widget.dtoCAForm.helpingOthersBalance.checked,
+                textFieldStartValue: widget.dtoCAForm.helpingOthersBalance.text,
+                textFieldHint: pleaseDescribeTextHouseholdHint,
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.helpingOthersBalance, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.helpingOthersBalance.text = v;},
+              ),
+              const Gap(preAndPostLevel3DividerGap),
+              const Divider(thickness: betweenLevel3DividerThickness),
+              const Gap(preAndPostLevel3DividerGap),
+
               /**** ➡️ Sub-point  ****/
-                CustomHeading
-                (
-                  key: balanceIssueHeadingKey,
-                  headingText: q.level3TitleBalanceIssue,
-                  headingLevel: 3,
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleBalanceIssueItem1,
-                  textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_studiesBalance, v),
-                  parentTextFieldValueCallBackFunction: (v) { _studiesBalance.text = v; },
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleBalanceIssueItem2,
-                  textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_accessingIncomeBalance, v),
-                  parentTextFieldValueCallBackFunction: (v) { _accessingIncomeBalance.text = v; },
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleBalanceIssueItem3,
-                  textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_earningIncomeBalance, v),
-                  parentTextFieldValueCallBackFunction: (v) { _earningIncomeBalance.text = v; },
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleBalanceIssueItem4,
-                  textFieldHint: pleaseDescribeTextHouseholdHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onBalanceCheckbox(_helpingOthersBalance, v),
-                  parentTextFieldValueCallBackFunction: (v) { _helpingOthersBalance.text = v; },
-                ),
-                const Gap(preAndPostLevel3DividerGap),
-                const Divider(thickness: betweenLevel3DividerThickness),
-                const Gap(preAndPostLevel3DividerGap),
-
-                /**** ➡️ Sub-point  ****/
-                CustomHeading
-                (
-                  key: workplaceIssueHeadingKey,
-                  headingText: q.level3TitleWorkplaceIssue,
-                  headingLevel: 3,
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleWorkplaceIssueItem1,
-                  textFieldHint: pleaseDescribeTextWorkplaceHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onWorkplaceCheckbox(_moreAppreciatedAtWork, v),
-                  parentTextFieldValueCallBackFunction: (v) { _moreAppreciatedAtWork.text = v; },
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleWorkplaceIssueItem2,
-                  textFieldHint: pleaseDescribeTextWorkplaceHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onWorkplaceCheckbox(_remainingAppreciatedAtWork, v),
-                  parentTextFieldValueCallBackFunction: (v) { _remainingAppreciatedAtWork.text = v; },
-                ),
-                const Gap(preAndPostLevel3DividerGap),
-                const Divider(thickness: betweenLevel3DividerThickness),
-                const Gap(preAndPostLevel3DividerGap),
-
-                /**** ➡️ Sub-point  ****/
-                CustomHeading
-                (
-                  key: legacyIssueHeadingKey,
-                  headingText: q.level3TitleLegacyIssue,
-                  headingLevel: 3,
-                ),
-                CheckboxWithTextField
-                (
-                  checkboxText: q.level3TitleLegacyIssueItem1,
-                  textFieldHint: pleaseDevelopOrTakeNotesHint,
-                  parentCheckboxValueCallBackFunction: (v) => _onLegacyCheckbox(_betterLegacies, v),
-                  parentTextFieldValueCallBackFunction: (v) { _betterLegacies.text = v; },
-                ),
-                const Gap(preAndPostLevel3DividerGap),
-                const Divider(thickness: betweenLevel3DividerThickness),
-                const Gap(preAndPostLevel3DividerGap),
-
-                /**** ➡️ Sub-point  ****/
-                CustomHeading
-                (
-                  key: anotherIssueHeadingKey,
-                  headingText: q.level3TitleAnotherIssue,
-                  headingLevel: 3,
-                  ),
-                const TextFieldSanitizedAndPaddedForCA
-                (
-                  stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
-                  textFieldStyle: analysisTextFieldStyle,
-                  textFieldHint: pleaseDevelopOrTakeNotesHint,
-                  textFieldHintStyle: analysisTextFieldHintStyle,
-                  errorMessageStyle: analysisTextFieldErrorMessageStyle,
-                  textFieldMaxLength: chars1Page,
-                  textFieldCounter: TextFieldUtils.absentCounter,
-                  parentTextFieldValueCallBackFunction: _onAnotherIssueText,
-                ),
-              ]
-            ),
-          ),
-
-            const Gap(preAndPostLevel2DividerGap),
-            const Divider(thickness: betweenLevel2DividerThickness),
-            const Gap(preAndPostLevel2DividerGap),
-
-
-
-            /**** Beginning of the team-related analysis ****/
-            //************** ExpansionTile diplaying the group perspective: beginning **************//
-            Semantics
-            ( 
-              toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
-              button: true, // with tooltip, useful for NVDA
-              // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
-              label: "Zone to click to expand data", // for Orca
-              expanded: _isGroupAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
-              child:
-              ExpansionTile
-              ( 
-                expandedCrossAxisAlignment: CrossAxisAlignment.center,
-                expandedAlignment: Alignment.center,
-                internalAddSemanticForOnTap: true, 
-                onExpansionChanged: (value) 
-                {setState(() 
-                {
-                  _isGroupAreaPerspectiveExpanded = value;
-                  widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
-                });
-                },
-                // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
-                maintainState: true, // to keep the state of the children widget
-                title:              
-                CustomHeading
-                (
-                  headingText: q.level2TitleGroup,
-                  headingLevel: 2,
-                ),
-                children: <Widget>
-                [
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleGroupsProblematics,
-                    headingLevel: 3,
-                  ),
-                  TextFieldSanitizedAndPaddedForCA
-                  (
-                    textFieldHint: pleaseDescribeTextGroupsHint,
-                    stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
-                    textFieldStyle: analysisTextFieldStyle,
-                    textFieldHintStyle: analysisTextFieldHintStyle,
-                    errorMessageStyle: analysisTextFieldErrorMessageStyle,
-                    textFieldMaxLength: chars1Page,
-                    textFieldCounter: TextFieldUtils.absentCounter,
-                    parentTextFieldValueCallBackFunction: (v) { _groupsProblemsText = v; },
-                  ),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleSameProblem,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  SegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_sameProblems, v),
-                    parentTextFieldValueCallBackFunction: (v) { _sameProblems.text = v; },
-                  ),
-
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleHarmonyAtHome,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  SegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_harmonyHome, v),
-                    parentTextFieldValueCallBackFunction: (v) { _harmonyHome.text = v; },
-                  ),
-
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleAppreciabilityAtWork,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  SegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_appreciabilityAtWork, v),
-                    parentTextFieldValueCallBackFunction: (v) { _appreciabilityAtWork.text = v; },
-                  ),
-                  
-                  const Gap(preAndPostLevel3DividerGap),
-                  const Divider(thickness: betweenLevel3DividerThickness),
-                  const Gap(preAndPostLevel3DividerGap),
-
-                  /**** ➡️ Sub-point  ****/
-                  CustomHeading
-                  (
-                    headingText: q.level3TitleIncomeEarningAbility,
-                    headingLevel: 3,
-                  ),
-                  const Gap(level3AndSegmentedButtonGap),
-                  SegmentedButtonWithTextField
-                  (
-                    textOption1: 'Yes',
-                    textOption2: 'No',
-                    textOption3: "I don't know",
-                    textOptionsfontSize: 16,
-                    textFieldHint: pleaseDevelopOrTakeNotesHint,
-                    parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButton(_earningAbility, v),
-                    parentTextFieldValueCallBackFunction: (v) { _earningAbility.text = v; },
-                  ),
-                ]
+              // Workplace issue questions
+              CustomHeading
+              (
+                key: workplaceIssueHeadingKey,
+                headingText: q.level3TitleWorkplaceIssue,
+                headingLevel: 3,
               ),
-            ),
-            //************** ExpansionTile diplaying the group perspective: end **************//
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleWorkplaceIssueItem1,
+                checkboxIsChecked: widget.dtoCAForm.moreAppreciatedAtWork.checked,
+                textFieldStartValue: widget.dtoCAForm.moreAppreciatedAtWork.text,
+                textFieldHint: pleaseDescribeTextWorkplaceHint,
+                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.moreAppreciatedAtWork, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.moreAppreciatedAtWork.text = v;},
+              ),
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleWorkplaceIssueItem2,
+                checkboxIsChecked: widget.dtoCAForm.remainingAppreciatedAtWork.checked,
+                textFieldStartValue: widget.dtoCAForm.remainingAppreciatedAtWork.text,
+                textFieldHint: pleaseDescribeTextWorkplaceHint,
+                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.remainingAppreciatedAtWork, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.remainingAppreciatedAtWork.text = v;},
+              ),
+              const Gap(preAndPostLevel3DividerGap),
+              const Divider(thickness: betweenLevel3DividerThickness),
+              const Gap(preAndPostLevel3DividerGap),
 
-            const Gap(preAndPostLevel2DividerGap),
-            const Divider(thickness: betweenLevel2DividerThickness),
-            const Gap(preAndPostLevel2DividerGap),
+              /**** ➡️ Sub-point  ****/
+              // Legacy issue question
+              CustomHeading
+              (
+                key: legacyIssueHeadingKey,
+                headingText: q.level3TitleLegacyIssue,
+                headingLevel: 3,
+              ),
+              CheckboxWithTextField
+              (
+                checkboxText: q.level3TitleLegacyIssueItem1,
+                checkboxIsChecked: widget.dtoCAForm.betterLegacies.checked,
+                textFieldStartValue: widget.dtoCAForm.betterLegacies.text,
+                textFieldHint: pleaseDevelopOrTakeNotesHint,
+                onCheckboxValueChanged: (v) => _onLegacyItemChecked(widget.dtoCAForm.betterLegacies, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.betterLegacies.text = v;},
+              ),
+              const Gap(preAndPostLevel3DividerGap),
+              const Divider(thickness: betweenLevel3DividerThickness),
+              const Gap(preAndPostLevel3DividerGap),
+
+              /**** ➡️ Sub-point  ****/
+              // Another issue question
+              CustomHeading
+              (
+                key: anotherIssueHeadingKey,
+                headingText: q.level3TitleAnotherIssue,
+                headingLevel: 3,
+                ),
+              TextFieldSanitizedAndPaddedForCA
+              (
+                stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
+                textFieldStyle: analysisTextFieldStyle,
+                textFieldStartValue:widget.dtoCAForm.anotherIssueStr,
+                textFieldHint: pleaseDevelopOrTakeNotesHint,
+                textFieldHintStyle: analysisTextFieldHintStyle,
+                errorMessageStyle: analysisTextFieldErrorMessageStyle,
+                textFieldMaxLength: chars1Page,
+                textFieldCounter: TextFieldUtils.absentCounter,
+                onTextFieldValueSubmittedCallbackFunction: _onAnotherIssueStr, 
+              ),
+            ]
+          ),
+        ),
+        // ─── EXPANSION TILE DIPLAYING THE INDIVIDUAL PERSPECTIVE: end ───────────────────────────────────────
+
+        const Gap(preAndPostLevel2DividerGap),
+        const Divider(thickness: betweenLevel2DividerThickness),
+        const Gap(preAndPostLevel2DividerGap),
+
+
+        // ─── BEGINNING OF THE TEAM-RELATED ANALYSIS ───────────────────────────────────────
+        // ─── EXPANSION TILE DIPLAYING THE GROUP PERSPECTIVE : beginning ───────────────────────────────────────
+        Semantics
+        ( 
+          toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
+          button: true, // with tooltip, useful for NVDA
+          // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
+          label: "Zone to click to expand data", // for Orca
+          expanded: _isGroupAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
+          child:
+          ExpansionTile
+          ( 
+            expandedCrossAxisAlignment: CrossAxisAlignment.center,
+            expandedAlignment: Alignment.center,
+            internalAddSemanticForOnTap: true, 
+            onExpansionChanged: (value) 
+            {setState(() 
+            {
+              _isGroupAreaPerspectiveExpanded = value;
+              widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+            });
+            },
+            // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+            maintainState: true, // to keep the state of the children widget
+            title:              
+            CustomHeading
+            (
+              headingText: q.level2TitleGroup,
+              headingLevel: 2,
+            ),
+            children: <Widget>
+            [
+              /**** ➡️ Sub-point  ****/
+              // Question about the group problems
+              CustomHeading
+              (
+                headingText: q.level3TitleGroupsProblematics,
+                headingLevel: 3,
+              ),
+              TextFieldSanitizedAndPaddedForCA
+              (
+                textFieldStartValue: widget.dtoCAForm.groupsProblemsStr,
+                textFieldHint: pleaseDescribeTextGroupsHint,
+                stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
+                textFieldStyle: analysisTextFieldStyle,
+                textFieldHintStyle: analysisTextFieldHintStyle,
+                errorMessageStyle: analysisTextFieldErrorMessageStyle,
+                textFieldMaxLength: chars1Page,
+                textFieldCounter: TextFieldUtils.absentCounter,
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupsProblemsStr = v;},
+              ),
+
+              /**** ➡️ Sub-point  ****/
+              // Question about the same problems
+              CustomHeading
+              (
+                headingText: q.level3TitleSameProblem,
+                headingLevel: 3,
+              ),
+              const Gap(level3AndSegmentedButtonGap),
+              SegmentedButtonWithTextField
+              (
+                segButtonTextOption1: 'Yes',
+                segButtonTextOption2: 'No',
+                segButtonTextOption3: "I don't know",
+                segButtonTextOptionsfontSize: 16,
+                segButtonStartValue: widget.dtoCAForm.sameProblems.selection,
+                textFieldStartValue: widget.dtoCAForm.sameProblems.text,
+                textFieldHint: pleaseDevelopOrTakeNotesHint,
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.sameProblems, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.sameProblems.text = v;},
+              ),
+
+              const Gap(preAndPostLevel3DividerGap),
+              const Divider(thickness: betweenLevel3DividerThickness),
+              const Gap(preAndPostLevel3DividerGap),
+
+              /**** ➡️ Sub-point  ****/
+              // Question about harmony at home
+              CustomHeading
+              (
+                headingText: q.level3TitleHarmonyAtHome,
+                headingLevel: 3,
+              ),
+              const Gap(level3AndSegmentedButtonGap),
+              SegmentedButtonWithTextField
+              (
+                segButtonTextOption1: 'Yes',
+                segButtonTextOption2: 'No',
+                segButtonTextOption3: "I don't know",
+                segButtonTextOptionsfontSize: 16,
+                segButtonStartValue: widget.dtoCAForm.harmonyHome.selection,
+                textFieldStartValue: widget.dtoCAForm.harmonyHome.text,
+                textFieldHint: pleaseDevelopOrTakeNotesHint,
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.harmonyHome, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.harmonyHome.text = v;},
+              ),
+
+              const Gap(preAndPostLevel3DividerGap),
+              const Divider(thickness: betweenLevel3DividerThickness),
+              const Gap(preAndPostLevel3DividerGap),
+
+              /**** ➡️ Sub-point  ****/
+              // Question about appreciability at work
+              CustomHeading
+              (
+                headingText: q.level3TitleAppreciabilityAtWork,
+                headingLevel: 3,
+              ),
+              const Gap(level3AndSegmentedButtonGap),
+              SegmentedButtonWithTextField
+              (
+                segButtonTextOption1: 'Yes',
+                segButtonTextOption2: 'No',
+                segButtonTextOption3: "I don't know",
+                segButtonTextOptionsfontSize: 16,
+                segButtonStartValue: widget.dtoCAForm.appreciabilityAtWork.selection,
+                textFieldStartValue: widget.dtoCAForm.appreciabilityAtWork.text,
+                textFieldHint: pleaseDevelopOrTakeNotesHint,
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.appreciabilityAtWork, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.appreciabilityAtWork.text = v;},
+              ),
+              
+              const Gap(preAndPostLevel3DividerGap),
+              const Divider(thickness: betweenLevel3DividerThickness),
+              const Gap(preAndPostLevel3DividerGap),
+
+              /**** ➡️ Sub-point  ****/
+              // Question about the earning ability
+              CustomHeading
+              (
+                headingText: q.level3TitleIncomeEarningAbility,
+                headingLevel: 3,
+              ),
+              const Gap(level3AndSegmentedButtonGap),
+              SegmentedButtonWithTextField
+              (
+                segButtonTextOption1: 'Yes',
+                segButtonTextOption2: 'No',
+                segButtonTextOption3: "I don't know",
+                segButtonTextOptionsfontSize: 16,
+                segButtonStartValue: widget.dtoCAForm.earningAbility.selection,
+                textFieldStartValue: widget.dtoCAForm.earningAbility.text,
+                textFieldHint: pleaseDevelopOrTakeNotesHint,
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.earningAbility, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.earningAbility.text = v;},
+              ),
+            ]
+          ),
+        ),
+        // ─── EXPANSION TILE DIPLAYING THE GROUP PERSPECTIVE: end ───────────────────────────────────────
+
+        const Gap(preAndPostLevel2DividerGap),
+        const Divider(thickness: betweenLevel2DividerThickness),
+        const Gap(preAndPostLevel2DividerGap),
      ],
     );
   }

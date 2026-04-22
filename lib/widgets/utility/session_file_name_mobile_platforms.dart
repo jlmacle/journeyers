@@ -113,7 +113,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
-      valueSubmittedCallbackFunction: widget.fileNameSubmittedCallbackFunction, 
+      onTextFieldValueSubmittedCallbackFunction: widget.fileNameSubmittedCallbackFunction, 
       additionalOnSubmittedInstructions: 
         (String newValue) async
         {

@@ -40,7 +40,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// A callback function called when submitting the value.
-  final ValueChanged<String> valueSubmittedCallbackFunction;
+  final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
   /// Additional instructions to insert in the onChanged method.
   final ValueChanged<String> additionalOnChangedInstructions;
@@ -66,7 +66,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.presentCounter,
-    required this.valueSubmittedCallbackFunction,
+    required this.onTextFieldValueSubmittedCallbackFunction,
     this.additionalOnChangedInstructions = placeHolderFunctionString,
     this.additionalOnSubmittedInstructions = placeHolderFunctionString,
     required this.stringSanitizerBundlesErrorsMapping,
@@ -194,7 +194,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
       // Updating the parental widget information with the sanitized value
       // Un-related to onSubmit
-      widget.valueSubmittedCallbackFunction(cleanedValue);
+      widget.onTextFieldValueSubmittedCallbackFunction(cleanedValue);
 
       // Unblocking the submit
       submitIsBlocked = false;
@@ -215,7 +215,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       });
 
       // Updating the parental widget information with the value
-      widget.valueSubmittedCallbackFunction(text);
+      widget.onTextFieldValueSubmittedCallbackFunction(text);
     }
   }
 
@@ -301,12 +301,12 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       }
       
       // Updating the parental widget information with the value
-      widget.valueSubmittedCallbackFunction(text);
+      widget.onTextFieldValueSubmittedCallbackFunction(text);
     }
   }
 
   // Method used for the onChanged named parameter
-  onChanged(String newValue) async
+  onTextFieldValueChanged(String newValue) async
   {
     // By default, submit is not blocked
     submitIsBlocked = false;
@@ -324,7 +324,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   }
 
   // Method used for the onSubmitted named parameter
-  onSubmitted(String newValue)
+  onTextFieldValueSubmitted(String newValue)
   {
     // Additional onSubmitted instructions 
     widget.additionalOnSubmittedInstructions(newValue);
@@ -332,7 +332,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     if (textFieldDebugging) pu.printd("Text Field: onSubmitted: submitIsBlocked: $submitIsBlocked");
     // Data submission if not blocked
     if (!submitIsBlocked) {
-      widget.valueSubmittedCallbackFunction(newValue);
+      widget.onTextFieldValueSubmittedCallbackFunction(newValue);
     }
 
     
@@ -381,8 +381,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
           ),
           errorMaxLines: 3
       ),
-      onChanged: onChanged,
-      onSubmitted: (!submitIsBlocked) ?  onSubmitted : null,  
+      onChanged: onTextFieldValueChanged,
+      onSubmitted: (!submitIsBlocked) ?  onTextFieldValueSubmitted : null,  
       // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
       onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
     );

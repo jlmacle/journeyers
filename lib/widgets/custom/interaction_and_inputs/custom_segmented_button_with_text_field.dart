@@ -13,25 +13,31 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 class SegmentedButtonWithTextField extends StatefulWidget 
 {
   /// The first option of the segmented button.
-  final String textOption1;
+  final String segButtonTextOption1;
 
   /// The second option of the segmented button.
-  final String textOption2;
+  final String segButtonTextOption2;
 
   /// The optional third option of the segmented button.
-  final String textOption3;
+  final String segButtonTextOption3;
 
   /// The font size for the text options.
-  final double textOptionsfontSize;
+  final double segButtonTextOptionsfontSize;
 
   /// The color of the text options.
-  final Color textOptionsColor;
+  final Color segButtonTextOptionsColor;
 
   /// The boolean related to enabling multiselection.
-  final bool multiSelectionEnabled;
+  final bool segButtonMultiSelectionEnabled;
 
   /// The boolean related to allowing an empty selection.
-  final bool emptySelectionAllowed;
+  final bool segButtonEmptySelectionAllowed;
+
+  /// The start value for the segmented button.
+  final Set<String> segButtonStartValue;
+
+  /// The start value for the text field.
+  final String textFieldStartValue;
 
   /// The hint text for the text field.
   final String textFieldHint;
@@ -64,13 +70,15 @@ class SegmentedButtonWithTextField extends StatefulWidget
   const SegmentedButtonWithTextField
   ({
     super.key,
-    required this.textOption1,
-    required this.textOption2,
-    this.textOption3 = "undefined",
-    this.multiSelectionEnabled = true,
-    this.emptySelectionAllowed = true,
-    this.textOptionsfontSize = 24,
-    this.textOptionsColor = Colors.black,
+    required this.segButtonTextOption1,
+    required this.segButtonTextOption2,
+    this.segButtonTextOption3 = "undefined",
+    this.segButtonMultiSelectionEnabled = true,
+    this.segButtonEmptySelectionAllowed = true,
+    this.segButtonTextOptionsfontSize = 24,
+    this.segButtonTextOptionsColor = Colors.black,
+    this.segButtonStartValue = const {},
+    this.textFieldStartValue = "",
     required this.textFieldHint,
     this.textFieldPaddingHorizontal = 20.0,
     this.textFieldPaddingBottom = 10.0,
@@ -89,8 +97,14 @@ class SegmentedButtonWithTextField extends StatefulWidget
 
 class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextField> 
 {
-  Set<String> _selection = {};
+  Set<String>? _selection;
   String _textFieldValue = "";
+
+  @override
+  void initState() {
+    _selection = widget.segButtonStartValue;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) 
@@ -98,8 +112,8 @@ class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextFi
     final TextStyle textStyle = 
                     TextStyle
                     (
-                      fontSize: widget.textOptionsfontSize,
-                      color: widget.textOptionsColor,
+                      fontSize: widget.segButtonTextOptionsfontSize,
+                      color: widget.segButtonTextOptionsColor,
                     );
 
     return 
@@ -110,26 +124,26 @@ class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextFi
       [
         SegmentedButton<String>
         (
-          multiSelectionEnabled: widget.multiSelectionEnabled,
-          emptySelectionAllowed: widget.emptySelectionAllowed,
+          multiSelectionEnabled: widget.segButtonMultiSelectionEnabled,
+          emptySelectionAllowed: widget.segButtonEmptySelectionAllowed,
           segments: 
           <ButtonSegment<String>>
           [
             ButtonSegment<String>
             (
-              value: widget.textOption1,
-              label: Text(widget.textOption1, style: textStyle),
+              value: widget.segButtonTextOption1,
+              label: Text(widget.segButtonTextOption1, style: textStyle),
             ),
             ButtonSegment<String>
             (
-              value: widget.textOption2,
-              label: Text(widget.textOption2, style: textStyle),
+              value: widget.segButtonTextOption2,
+              label: Text(widget.segButtonTextOption2, style: textStyle),
             ),
-            if (widget.textOption3 != "undefined")
+            if (widget.segButtonTextOption3 != "undefined")
               ButtonSegment<String>
               (
-                value: widget.textOption3,
-                label: Text(widget.textOption3, style: textStyle),
+                value: widget.segButtonTextOption3,
+                label: Text(widget.segButtonTextOption3, style: textStyle),
               ),
           ],
           onSelectionChanged: (newSelection) 
@@ -137,9 +151,9 @@ class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextFi
             setState(() {_selection = newSelection;});
             widget.parentSegmentedButtonValueCallBackFunction(newSelection);
           },
-          selected: _selection,
+          selected: _selection!,
         ),
-        if (_selection.isNotEmpty)
+        if (_selection!.isNotEmpty)
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldPaddingHorizontal, right: widget.textFieldPaddingHorizontal, bottom: widget.textFieldPaddingBottom),
@@ -152,7 +166,7 @@ class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextFi
               textFieldHint: widget.textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
-              parentTextFieldValueCallBackFunction: 
+              onTextFieldValueSubmittedCallbackFunction: 
                 (String text)
                 {
                   widget.parentTextFieldValueCallBackFunction(text); 
