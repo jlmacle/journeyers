@@ -47,7 +47,7 @@ class CAProcess extends StatefulWidget
 
 class CAProcessState extends State<CAProcess> 
 {
-  //**************** TEXT FIELD related data, methods and text editing controllers ****************//
+  // ─── TEXT FIELD related data, methods and text editing controllers ───────────────────────────────────────
   // SESSION TITLE
   String analysisTitle = "";
   void _analysisTitleUpdate(String titleValue)
@@ -78,7 +78,7 @@ class CAProcessState extends State<CAProcess>
     await formKeyCA.currentState?.saveDataAndMetadata();
   }
 
-  //**************** FOCUS NODES related data and methods ****************//
+  // ─── FOCUS NODE related data and methods ───────────────────────────────────────
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = .new();
   bool movingThroughButton = false;
@@ -90,8 +90,7 @@ class CAProcessState extends State<CAProcess>
     super.dispose();
   }
  
-
-  //**************** PREFERENCES related data and methods ****************/
+  // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _isApplicationFolderPathLoading = true;
 
   // method used to get the set preferences
@@ -126,7 +125,7 @@ class CAProcessState extends State<CAProcess>
     );    
   }
 
-  //**************** SCROLLCONTROLLER related data ****************//
+  // ─── SCROLLCONTROLLER related data ───────────────────────────────────────
   final ScrollController scrollController = ScrollController();
     double scrollbarThickness = 0;
 
@@ -155,7 +154,7 @@ class CAProcessState extends State<CAProcess>
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
           [
-            //*********** Form ***********//
+            // ─── FORM ───────────────────────────────────────
             const Center
             (
               child: 
@@ -183,8 +182,8 @@ class CAProcessState extends State<CAProcess>
               parentCallbackFunctionToRefreshTheCAPage: widget.parentCallbackFunctionToRefreshTheCAPage,
               parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
             ),                        
-                        
-            //********** Data saving ************//
+
+            // ─── DATA SAVING ───────────────────────────────────────          
             Center
             (
               child: 
