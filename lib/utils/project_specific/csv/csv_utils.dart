@@ -18,13 +18,11 @@ import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 /// A project-specific utility class related to CSV.
 class CSVUtils 
 {
-  //******************** UTILS: beginning *******************//
-
+  // ─── UTILS: beginning ───────────────────────────────────────
   // The questions used in the form
   final CAFormQuestions _q =
       CAFormQuestions();
-
-  //******************** UTILS: end *******************//
+  // ─── UTILS: end ───────────────────────────────────────
 
   // Used in the pre-CSV data
   /// A label used in front of the content of answered questions.
@@ -33,11 +31,11 @@ class CSVUtils
   /// Straight double quotes used to encapsulate the content of answered questions.
   String quotesForCSV = '"';
 
-  //************** Mapping questions to input widgets to process data according to input widgets *************//
+  // ─── MAPPING QUESTIONS TO INPUT WIDGETS TO PROCESS DATA ACCORDING TO INPUT WIDGETS ───────────────────────────────────────
   /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
   Map<String, String> mappingLabelsToInputItems = {};
 
-  //************** Sets of the level 2, level 3 titles, and related sets *************//
+  // ─── SETS OF THE LEVEL 2, LEVEL 3 TITLES, AND RELATED SETS ───────────────────────────────────────
   /// A set of the existing titles level 2.
   Set<String> titlesLevel2 = {};
 
@@ -64,7 +62,7 @@ class CSVUtils
   /// A set of the text fields only items
   Set<String> textFieldOnlyItems = {};
 
-  //************** The data structure to return *************//
+  // ─── THE DATA STRUCTURE TO RETURN ───────────────────────────────────────
   /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
   List<Object> preCSVData = [];
 
@@ -150,8 +148,8 @@ class CSVUtils
     };
   }
 
-  //***************** Methods processing data according to input widgets: beginning  ***********************//
-
+  // ─── METHODS PROCESSING DATA ACCORDING TO INPUT WIDGETS : beginning ───────────────────────────────────────
+  
   /// Method extracting information from {checkbox: false/true, textField: "data"/null}
   /// and returning \[\[checkbox,"false"/"true"\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
@@ -219,11 +217,11 @@ class CSVUtils
 
     return textFieldPreCSVData;
   }
+  // ─── METHODS PROCESSING DATA ACCORDING TO INPUT WIDGETS : end ───────────────────────────────────────
 
-  //***************** Methods processing data according to input widgets: end  ***********************//
 
-  //***************** Method building a list of pair of data for the later saving to CSV ***********************//
-
+  // ─── METHOD BUILDING A LIST OF PAIR OF DATA FOR THE LATER SAVING TO CSV ───────────────────────────────────────
+ 
   /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
   /// The data should be either the individual perspective data, or the group/team perspective data.
   /// The individual perspective data and the group/team perspective data are planned to be written side by side in the CSV file.
@@ -349,7 +347,7 @@ class CSVUtils
     // List<List<String>> csvDataIndividualPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
     // List<List<String>> csvDataGroupPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
 
-    //*************** Analyzing the data for checkboxes with "false", and text fields with empty notes ****************//
+    // ─── ANALYZING THE DATA FOR CHECKBOXES WITH "FALSE", AND TEXT FIELDS WITH EMPTY NOTES ───────────────────────────────────────
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
@@ -364,8 +362,9 @@ class CSVUtils
       }
     }
 
-    //*************** Analyzing the data to replace "checkbox"s with 'X's where questions with checkboxes have been checked,
-    //                and in front of the parent title level 3 if existant                               ****************//
+    // ─── ANALYZING THE DATA TO REPLACE "CHECKBOX"S WITH 'X'S  ───────────────────────────────────────
+    // ─── WHERE QUESTIONS WITH CHECKBOXES HAVE BEEN CHECKED, ───────────────────────────────────────
+    // ─── AND IN FRONT OF THE PARENT TITLE LEVEL 3 IF EXISTANT ───────────────────────────────────────
 
     // Getting the indexes for the titles level 3 with children, before starting the analysis
     Map<String, int> indexesOfTitlesLevel3WithChildren = {};
@@ -429,9 +428,10 @@ class CSVUtils
       }
     }
 
-    //*************** Analyzing the data to add 'X's in front of the questions where segmented buttons have been answered
-    //                and in front of the parent title level 3 if existant                                                  ****************//
-
+    // ─── ANALYZING THE DATA TO ADD 'X'S ───────────────────────────────────────
+    // ─── IN FRONT OF THE QUESTIONS WHERE SEGMENTED BUTTONS HAVE BEEN ANSWERED ───────────────────────────────────────
+    // ─── AND IN FRONT OF THE PARENT TITLE LEVEL 3 IF EXISTANT ───────────────────────────────────────
+    
     // Analyzing the data for segmented buttons not null, and adding Xs in front of the question
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
@@ -465,8 +465,8 @@ class CSVUtils
       }
     }
 
-    //*************** Analyzing the data to add 'X's where text field widgets (with no checkbox or segmented buttons) have been answered
-    //                and to remove the unanswered ones                                                                                   ****************//
+    // ─── ANALYZING THE DATA TO ADD 'X'S  ───────────────────────────────────────
+    // ─── WHERE TEXT FIELD WIDGETS (WITH NO CHECKBOX OR SEGMENTED BUTTONS) HAVE BEEN ANSWERED ───────────────────────────────────────
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
@@ -489,7 +489,7 @@ class CSVUtils
       }
     }
 
-    //*************** Adding lines before every title level 3 ***************//
+    // ─── ADDING LINES BEFORE EVERY TITLE LEVEL 3 ───────────────────────────────────────
     Set<String> titlesLevel3Processed = {};
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
@@ -513,7 +513,7 @@ class CSVUtils
     return preCSVData;
   }
 
-  //*************** Printing/Saving methods ***************//
+  // ─── PRINTING/SAVING METHODS ───────────────────────────────────────
 
   /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
   /// Returns the file name.
@@ -591,7 +591,7 @@ class CSVUtils
     return filePath;
   }
 
-  //*****************  Methods retrieving the CSV data for edition or viewing: beginning  ***********************//
+  // ─── METHODS RETRIEVING THE CSV DATA FOR EDITION OR VIEWING : beginning ───────────────────────────────────────
   
   // Method used to map a line of CSV to data
   Future<List<String>> _csvLineToData(String line) async
@@ -744,8 +744,7 @@ class CSVUtils
     perspectiveData["groupPerspective"] = groupPerspectiveWithoutEmptyLines;
 
     return perspectiveData;
-  }   
-
-  //*****************  Methods retrieving the CSV data for edition or viewing: end  ***********************//
+  }
+  // ─── METHODS RETRIEVING THE CSV DATA FOR EDITION OR VIEWING : end ───────────────────────────────────────
 
 }
