@@ -48,10 +48,10 @@ class DashboardDeletionByBulk extends StatefulWidget
 
 class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
-  //**************** GLOBAL KEYS ****************//
+  // ─── GLOBAL KEYS ───────────────────────────────────────
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey();
 
-  //**************** BULK DELETION OF SESSION DATA ****************/
+  // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several session data
   Future<void> _deleteSelectedSessions() async 
   {
