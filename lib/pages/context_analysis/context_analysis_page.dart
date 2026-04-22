@@ -32,7 +32,7 @@ class CAPage extends StatefulWidget
 
 class CAPageState extends State<CAPage> 
 {  
-  //**************** PREFERENCES related data and methods ****************//
+  // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _preferencesLoading = true;
   bool? _isInformationModalAlreadyAcknowledged;
   bool? _wasCASessionDataSaved;
@@ -89,7 +89,7 @@ class CAPageState extends State<CAPage>
     }
   }
 
-  //**************** METHODS USED TO REFRESH VIEWS  ****************//
+  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
 
   // Method used to refresh the page from context form to dashboard, 
   // after form data has been saved
@@ -117,7 +117,7 @@ class CAPageState extends State<CAPage>
     setState(() {});
   }
 
-  //**************** FOCUS NODE related data and methods ****************//
+  // ─── FOCUS NODE related data and methods ───────────────────────────────────────
   FocusNode caFormPageFocusNode = .new();
 
   @override
