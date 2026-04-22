@@ -34,8 +34,7 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage> 
 {
-
-  //**************** BOTTOM NAVIGATION BAR related data and methods ****************//
+  // ─── BOTTOM NAVIGATION BAR related data and methods ───────────────────────────────────────
   int _currentIndex = 0;
   bool _areBottomNavigationItemsFocusable = true;
 
@@ -67,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage>
     caPageKey.currentState?.getPreferences();    
   }
  
-  //**************** LOCALE related method ****************//
+  // ─── LOCALE related method ───────────────────────────────────────
   // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale.
   // The logic cannot be moved in main.dart, as the context would be called without having being built yet.
   void _updateLocale(String languageName) 
@@ -87,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
-  //**************** FOCUS NODE related data and methods ****************//
+  // ─── FOCUS NODE related data and methods ───────────────────────────────────────
   FocusNode appBarTitleFocusNode = .new();
 
   @override
