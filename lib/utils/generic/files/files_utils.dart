@@ -109,8 +109,7 @@ class FileUtils
     return fileList;
   }
 
-  //*****************  Methods used to save files: beginning  ***********************//
-
+  // ─── METHODS USED TO SAVE FILES : beginning ───────────────────────────────────────
   /// Method used to save a file on Android.
   /// The actual code assumes in a folder pre-selected by the user (handled by MainActivity.kt).
   Future<String> saveFileOnAndroid(String fileName, String fileExtension, Uint8List dataBytes) async 
@@ -149,11 +148,9 @@ class FileUtils
 
     return filePath;
   }
+  // ─── METHODS USED TO SAVE FILES : end ───────────────────────────────────────
 
-  //*****************  Methods used to save files: end  ***********************//
-
-  //*****************  Methods used to read files: beginning  ***********************//
-
+  // ─── METHODS USED TO READ FILES : beginning ───────────────────────────────────────
   /// Method used to read a text file on Android.
   Future<String> readTextContentOnAndroid({required String fileName}) async
   {
@@ -186,10 +183,9 @@ class FileUtils
     }
 
   }
+  // ─── METHODS USED TO READ FILES : end ───────────────────────────────────────
 
-
-  //*****************  Methods used to read files: end  ***********************//
-  //*****************  Methods used to delete files: beginning  ***********************//
+  // ─── METHODS USED TO DELETE FILES : beginning  ───────────────────────────────────────
   /// Generic method used to delete a file 
   Future<void> deleteCsvFile(String pathToCsv) async
   {
@@ -235,57 +231,55 @@ class FileUtils
     catch (e) {pu.printd("Session Data: An unexpected error occurred while deleting the file: $e");}
   }
 
-// Method used to delete a file on Android
-Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async 
-{
-  try 
+  // Method used to delete a file on Android
+  Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async 
   {
-    // Extracting only the filename from the path if necessary, 
-    // as findFile() in Kotlin expects the name within the tree
-    final fileName = pathToCsv.split('/').last;
+    try 
+    {
+      // Extracting only the filename from the path if necessary, 
+      // as findFile() in Kotlin expects the name within the tree
+      final fileName = pathToCsv.split('/').last;
 
-    final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
+      final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
 
-    if (success) 
-    {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from Android SAF storage.");} 
-    else 
-    {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
-    return success;
-  } 
-  on PlatformException 
-  catch (e) 
-  {
-    pu.printd("Session Data: PlatformException during deletion: ${e.message}");
-    return false;
+      if (success) 
+      {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from Android SAF storage.");} 
+      else 
+      {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
+      return success;
+    } 
+    on PlatformException 
+    catch (e) 
+    {
+      pu.printd("Session Data: PlatformException during deletion: ${e.message}");
+      return false;
+    }
   }
-}
 
-// Method used to delete a file on iOS
-Future<bool> deleteCsvFileOnIOS(String pathToCsv) async 
-{
-  try 
+  // Method used to delete a file on iOS
+  Future<bool> deleteCsvFileOnIOS(String pathToCsv) async 
   {
-    // Extracting only the filename from the path if necessary, 
-    // as findFile() in Kotlin expects the name within the tree
-    final fileName = pathToCsv.split('/').last;
+    try 
+    {
+      // Extracting only the filename from the path if necessary, 
+      // as findFile() in Kotlin expects the name within the tree
+      final fileName = pathToCsv.split('/').last;
 
-    final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
+      final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
 
-    if (success) 
-    {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from iOS SAF storage.");} 
-    else 
-    {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
-    return success;
+      if (success) 
+      {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from iOS SAF storage.");} 
+      else 
+      {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
+      return success;
 
-  } 
-  on PlatformException 
-  catch (e) 
-  {
-    pu.printd("Session Data: PlatformException during deletion: ${e.message}");
-    return false;
+    } 
+    on PlatformException 
+    catch (e) 
+    {
+      pu.printd("Session Data: PlatformException during deletion: ${e.message}");
+      return false;
+    }
   }
-}
-
-//*****************  Methods used to delete files: end  ***********************//
-
+// ─── METHODS USED TO DELETE FILES : end ───────────────────────────────────────
 }
