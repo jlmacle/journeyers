@@ -8,7 +8,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
 /// A generic utility class related to text fields.
 class TextFieldUtils
  {
-  //*********************  COUNTERS  *********************//
+  // ─── COUNTERS ───────────────────────────────────────
 
   // https://api.flutter.dev/flutter/material/InputCounterWidgetBuilder.html
   /// A counter displaying no data.
@@ -31,18 +31,24 @@ class TextFieldUtils
     return Text('$currentLength/$maxLength');
   }
 
-//*********************  CHARS AND FILE EXTENSIONS  *********************//
+  // ─── CHARS AND FILE EXTENSIONS ───────────────────────────────────────
 
   /// An externalization for the type of quote to be removed.
   static const String charQuote = '"';
+
   /// An externalization for dot.
   static const String charDot = '.';
+
+  /// An externalization for a line return.
+  static const String charLR = '\n';
+
   /// An externalization for ".csv".
   static const String extensionCSV = ".csv";
+
   /// An externalization for ".txt".
   static const String extentionTXT = ".txt";
 
-//*********************  STRING SANITIZER BUNDLES AND ERROR MESSAGES *********************//
+  // ─── STRING SANITIZER BUNDLES AND ERROR MESSAGES ───────────────────────────────────────
   /// A StringSanitizerBundle sanitizing straight quotes.
   static 
   ({
@@ -79,7 +85,7 @@ class TextFieldUtils
   'as no extension should be entered\n'
   'in the file name.';
   
-  //*********************  BLACKLIST FUNCTIONS AND ERROR MESSAGES *********************//
+  // ─── BLACKLIST FUNCTIONS AND ERROR MESSAGES ───────────────────────────────────────
 
   /// Method checking if a file name is already used, assuming knowledge of its extension.
   static bool fileNameAlreadyUsed(String value, String fileExtension) 
@@ -122,7 +128,7 @@ class TextFieldUtils
   /// An error message displayed for the simple blacklisting function returning true.
   static const String errorTextBlacklisted = "This text is part of a blacklist.";
 
-  //*********************  MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) *********************//
+  // ─── MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) ───────────────────────────────────────
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction = 
   {
     TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.errorTextBlacklisted
