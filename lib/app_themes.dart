@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-//*********************  COLORS  *********************//
+// ─── COLORS ───────────────────────────────────────
 const Color transparent = Colors.transparent;
 const Color navyBlue = Color(0xFF0a2e50);
 const Color paleCyan = Color(0xFFE9FAFC);
@@ -16,24 +16,24 @@ const Color redShade900  =  Color(0xFFB71C1C);
 const Color blue = Colors.blue;
 const Color blueShade900  =  Color(0xFF0D47A1); 
 
-//*********************  GAPS  *********************//
+// ─── GAPS ───────────────────────────────────────
 // Gaps: gaps for the context analysis form
 const double postHeadingLevel2Gap = 20;
 const double preAndPostLevel2DividerGap = 20;
 const double preAndPostLevel3DividerGap = 15;
 const double level3AndSegmentedButtonGap = 15;
 
-//*********************  DIVIDERS THICKNESS  *********************//
+// ─── DIVIDERS THICKNESS ───────────────────────────────────────
 const double betweenLevel2DividerThickness = 3;
 const double betweenLevel3DividerThickness = 1;
 
-//*********************  PADDING  *********************//
+// ─── PADDING ───────────────────────────────────────
 // Paddings: elevated buttons padding
 const double elevatedButtonPadding = 20;
 const double elevatedButtonPaddingTop = 20;
 const double elevatedButtonPaddingBottom = 20;
 
-//*********************  TEXT STYLES  *********************//
+// ─── TEXT STYLES ───────────────────────────────────────
 
 // Text styles: HEADINGS
 const TextStyle defaultConstHeadingStyle = TextStyle
@@ -167,8 +167,9 @@ const TextStyle previewTitleStyle = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-//*********************  TEXT FIELD HINTS: 
-//*********************  CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS  *********************//
+// ─── TEXT FIELD HINTS: ───────────────────────────────────────
+// ─── CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS ───────────────────────────────────────
+
 const String pleaseDescribeTextHouseholdHint =
     'Please describe the past outcomes for the household, '
     'if some seem to have been out of their comfort zone for too long, '
@@ -222,7 +223,7 @@ const TextStyle problemSolvingKeywordsMessage = TextStyle
 // Text styles: DASHBOARD PAGE RELATED STYLES
 const TextStyle styleDataAbsent = TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black);
 
-//*********************  THEME DATA  *********************//
+// ─── THEME DATA ───────────────────────────────────────
 ThemeData appTheme = ThemeData
 (
   useMaterial3: true,
@@ -230,13 +231,13 @@ ThemeData appTheme = ThemeData
   scaffoldBackgroundColor:
       Colors.white, // left appbar, text field, checkboxes not in white
 
-  //*********************  COLOR SCHEME  *********************//
+// ─── COLOR SCHEME ───────────────────────────────────────
   colorScheme: const ColorScheme.light
   (
     surface: Colors.white, // succeeded for text field, checkboxes
   ),
 
-  //*********************  APPBAR THEME  *********************//
+// ─── APPBAR THEME ───────────────────────────────────────
   appBarTheme: const AppBarTheme
   (
     backgroundColor: navyBlue,
@@ -250,15 +251,13 @@ ThemeData appTheme = ThemeData
     ),
   ),
 
-
-  //*********************  BANNER THEME  *********************//
+// ─── BANNER THEME ───────────────────────────────────────
   bannerTheme: const MaterialBannerThemeData
   (
     backgroundColor: Color.fromARGB(255, 13, 13, 49),
   ),
 
-
-  //*********************  BOTTOM NAVIGATIONBAR THEME  *********************//
+// ─── BOTTOM NAVIGATIONBAR THEME ───────────────────────────────────────
   bottomNavigationBarTheme: const BottomNavigationBarThemeData
   (
     selectedItemColor: Color(0xFFf6f1e9), // appbar white
@@ -286,8 +285,7 @@ ThemeData appTheme = ThemeData
     ),
   ),
 
-  
-  //*********************  TEXT THEME  *********************//
+  // ─── TEXT THEME ───────────────────────────────────────
   // https://api.flutter.dev/flutter/material/TextTheme-class.html
   textTheme: const TextTheme
   (
@@ -328,7 +326,7 @@ ThemeData appTheme = ThemeData
     labelSmall: TextStyle(color: Colors.black),
   ),
 
-  //*********************  INPUT DECORATION THEME  *********************//
+// ─── INPUT DECORATION THEME ───────────────────────────────────────
   inputDecorationTheme: InputDecorationTheme
   (
     border: OutlineInputBorder
@@ -357,7 +355,7 @@ ThemeData appTheme = ThemeData
     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
   ),
 
-  //*********************  CHECKBOX THEME  *********************//
+// ─── CHECKBOX THEME ───────────────────────────────────────
   checkboxTheme: CheckboxThemeData
   (
     fillColor: WidgetStateProperty.resolveWith<Color>
@@ -371,8 +369,7 @@ ThemeData appTheme = ThemeData
     ),
   ),
  
-
-  //*********************  ELEVATED BUTTON THEME  *********************//
+// ─── ELEVATED BUTTON THEME ───────────────────────────────────────
   elevatedButtonTheme: ElevatedButtonThemeData
   (
     style: ButtonStyle
@@ -400,7 +397,7 @@ ThemeData appTheme = ThemeData
     ),
   ),
 
-  //*********************  SEGMENTED BUTTON THEME  *********************//
+// ─── SEGMENTED BUTTON THEME ───────────────────────────────────────
   segmentedButtonTheme: SegmentedButtonThemeData
   (
     style: ButtonStyle
@@ -416,7 +413,7 @@ ThemeData appTheme = ThemeData
     ),
   ),
 
-  //*********************  TEXT BUTTON THEME *********************//
+// ─── TEXT BUTTON THEME ───────────────────────────────────────
   textButtonTheme: TextButtonThemeData( // TODO: code to clean
     style: ButtonStyle(
       foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
@@ -435,8 +432,7 @@ ThemeData appTheme = ThemeData
   ),
 
 
-  
-  //*********************  CHIP THEME  *********************//
+  // ─── CHIP THEME ───────────────────────────────────────
   // to remove the emerald green color from appearing
   chipTheme: ChipThemeData
   (
