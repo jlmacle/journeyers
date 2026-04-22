@@ -60,7 +60,8 @@ class GPSPageState extends State<GPSPage>
       _wasGPSSessionDataSaved = false;
     });
   }
-    // ─── FOCUS NODE related data and methods ───────────────────────────────────────
+  
+  // ─── FOCUS NODE related data and methods ───────────────────────────────────────
   FocusNode gpsPageFocusNode = .new();
 
   @override
