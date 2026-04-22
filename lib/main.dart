@@ -23,8 +23,7 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp> 
 {
-
-  //**************** LOCALE related data and methods ****************/
+  // ─── LOCALE related data and methods ───────────────────────────────────────
 
   // Temporarily defining English as the locale
   // TODO: to get eventually the value from user preferences
