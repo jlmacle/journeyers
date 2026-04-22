@@ -47,7 +47,7 @@ class TextFieldSanitizedAndPaddedForCA extends StatefulWidget
   final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> parentTextFieldValueCallBackFunction;
+  final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
   /// The left padding for the text field.
   final double paddingLeft;
@@ -75,7 +75,7 @@ class TextFieldSanitizedAndPaddedForCA extends StatefulWidget
     this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.presentCounter,
     required this.stringSanitizerBundlesErrorsMap,
-    this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
     this.paddingLeft = 20,
     this.paddingRight = 20,
     this.paddingTop = 10,
@@ -124,7 +124,7 @@ class _TextFieldSanitizedAndPaddedForCAState extends State<TextFieldSanitizedAnd
         textFieldMinLines: widget.textFieldMinLines,
         textFieldMaxLength: widget.textFieldMaxLength,
         textFieldCounter: widget.textFieldCounter,
-        valueSubmittedCallbackFunction: widget.parentTextFieldValueCallBackFunction,
+        onTextFieldValueSubmittedCallbackFunction: widget.onTextFieldValueSubmittedCallbackFunction,
         blacklistingFunctionsErrorsMapping: const {},    
       ),
     );

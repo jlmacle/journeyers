@@ -28,6 +28,9 @@ class CheckboxWithTextField extends StatefulWidget
   /// Where the checkbox is located.
   final ListTileControlAffinity checkboxPosition;
 
+  /// The start value for the text field.
+  final String textFieldStartValue;
+
   /// The hint text for the text field.
   final String textFieldHint;
 
@@ -50,10 +53,10 @@ class CheckboxWithTextField extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> parentTextFieldValueCallBackFunction;
+  final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
   /// The checkbox-related callback function for the parent widget.
-  final ValueChanged<bool?>? parentCheckboxValueCallBackFunction;
+  final ValueChanged<bool?>? onCheckboxValueChanged;
 
   const CheckboxWithTextField
   ({
@@ -63,6 +66,7 @@ class CheckboxWithTextField extends StatefulWidget
     this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
     this.checkboxIsChecked = false,
+    this.textFieldStartValue = "",
     required this.textFieldHint,
     this.textFieldPaddingHorizontal = 20.0,
     this.textFieldPaddingBottom = 10.0,
@@ -70,8 +74,8 @@ class CheckboxWithTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.absentCounter,
-    this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
-    this.parentCheckboxValueCallBackFunction = placeHolderFunctionNullableBool,
+    this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
+    this.onCheckboxValueChanged = placeHolderFunctionNullableBool,
   });
 
   @override
@@ -80,9 +84,15 @@ class CheckboxWithTextField extends StatefulWidget
 
 class CheckboxWithTextFieldState extends State<CheckboxWithTextField> 
 {
-  bool _isChecked = false;
+  bool? _isChecked;
   String _textFieldValue = "";
   TextStyle _checkboxTextStyle = unselectedCheckboxTextStyle;
+
+  @override
+  void initState() {
+    _isChecked = widget.checkboxIsChecked;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context)
@@ -105,7 +115,7 @@ class CheckboxWithTextFieldState extends State<CheckboxWithTextField>
           controlAffinity: widget.checkboxPosition,
           onChanged: (bool? value) 
           {
-            widget.parentCheckboxValueCallBackFunction!(value);
+            widget.onCheckboxValueChanged!(value);
             setState(() 
             {
               _isChecked = value!; 
@@ -114,7 +124,7 @@ class CheckboxWithTextFieldState extends State<CheckboxWithTextField>
             });
           },
         ),
-        if (_isChecked)
+        if (_isChecked!)
           TextFieldSanitizedAndPaddedForCA
           (
             stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
@@ -126,10 +136,10 @@ class CheckboxWithTextFieldState extends State<CheckboxWithTextField>
             textFieldMinLines: widget.textFieldMinLines,
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
-            parentTextFieldValueCallBackFunction: 
+            onTextFieldValueSubmittedCallbackFunction: 
               (String text) 
               {
-                widget.parentTextFieldValueCallBackFunction(text);
+                widget.onTextFieldValueSubmittedCallbackFunction(text);
                 setState(() {_textFieldValue = text;});
               },
           ),
