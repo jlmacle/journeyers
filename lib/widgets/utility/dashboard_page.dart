@@ -47,7 +47,7 @@ class DashboardPage extends StatefulWidget
 
 class DashboardPageState extends State<DashboardPage> 
 {
-  //**************** GLOBAL KEYS ****************//
+  // ─── GLOBAL KEYS ───────────────────────────────────────
   GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
@@ -56,8 +56,7 @@ class DashboardPageState extends State<DashboardPage>
     setState(() {});
   }
 
-  
-  //**************** PREFERENCES and DATA RETRIEVAL related data and methods ****************/
+  // ─── PREFERENCES and DATA RETRIEVAL related data and methods ───────────────────────────────────────
   // Starting by loading data
   bool _isDataLoading = true;
 
@@ -106,8 +105,7 @@ class DashboardPageState extends State<DashboardPage>
     getStoredSessionData();
   }
 
-  //**************** SORTING AND FILTERING related data and methods ****************/
-
+  // ─── SORTING AND FILTERING related data and methods ───────────────────────────────────────
   // All the keywords available
   List<String> _usedKeywords = [];
 
@@ -149,7 +147,7 @@ class DashboardPageState extends State<DashboardPage>
     }    
   }
 
-  //**************** DELETION OF SINGLE SESSION DATA related data and methods ****************/
+  // ─── DELETION OF SINGLE SESSION DATA related data and methods ───────────────────────────────────────
 
   final List<String> _sessionsSelectedForDeletion = [];  
 
@@ -203,7 +201,7 @@ class DashboardPageState extends State<DashboardPage>
     if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
   }
 
-  //**************** EDITION OF SESSION DATA ****************/
+  // ─── EDITION OF SESSION DATA ───────────────────────────────────────
   final TextEditingController _titleController = .new();
 
   // Method used to update the session title
@@ -272,7 +270,7 @@ class DashboardPageState extends State<DashboardPage>
     
   }
 
-  //**************** METHODS USED TO REFRESH VIEWS  ****************//
+  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
   // Re-building of the widget
   void updateState()
   {
