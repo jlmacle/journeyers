@@ -13,7 +13,7 @@ class RunTimeDataUtils
     prefs.reload();
   }
 
-  //**************** ACKNOWLEDGMENT MODAL ****************/
+  // ─── ACKNOWLEDGMENT MODAL ───────────────────────────────────────
   /// Method used to record that the acknowledgment modal has been acknowledged.
   Future<bool> saveInformationModalAcknowledgement({required bool wasAcknowledged}) async 
   {
@@ -35,7 +35,7 @@ class RunTimeDataUtils
     return await prefs.setBool('isInformationModalAcknowledged', false);
   }
 
-  //**************** FOLDER SELECTED FOR APPLICATION USE ****************/
+  // ─── FOLDER SELECTED FOR APPLICATION USE ───────────────────────────────────────
   // The setter is also in the Kotlin/Swift code
 
   /// Method used to check if the application folder path has been saved.
@@ -52,7 +52,7 @@ class RunTimeDataUtils
     return prefs.setString('applicationFolderPath', path);
   }
 
-  //**************** EXISTING ANALYSIS SESSION DATA ? ****************/
+  // ─── EXISTING ANALYSIS SESSION DATA ? ───────────────────────────────────────
   /// Method used to record that session data has been saved.
   Future<bool> saveWasSessionDataSaved({required bool wasDataSaved, required String context}) async 
   {
