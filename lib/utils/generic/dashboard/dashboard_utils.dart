@@ -34,7 +34,7 @@ class DashboardUtils {
   /// The current list of stored file names (for the mobile applications).
   List<String> currentListOfStoredFileNames = [];  
 
-  //**************** SMARTPHONES CHANNELS ****************//
+  // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
   static const _platformAndroid = MethodChannel('dev.journeyers/saf');
   // Android: storage access framework (reading/saving files)
