@@ -4,7 +4,7 @@
 
 class CAFormQuestions 
 {
-  //*********** Perspective 1: individual perspective *************//
+  // ─── PERSPECTIVE 1: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
 
   // Heading level 2
   String level2TitleIndividual = 'As an individual: What problem am I trying to solve?';
@@ -28,8 +28,8 @@ class CAFormQuestions
   // Heading level 3 without sub items
   String level3TitleAnotherIssue = 'Is the issue of another type?';
 
-  //*********** Perspective 2: group/team perspective *************//
-
+  // ─── PERSPECTIVE 2: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
+  
   // Heading level 2
   String level2TitleGroup = 'As a member of groups/teams: What problem(s) are we trying to solve?';
 
