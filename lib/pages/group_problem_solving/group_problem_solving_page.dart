@@ -26,8 +26,7 @@ class GPSPage extends StatefulWidget
 
 class GPSPageState extends State<GPSPage> 
 {
-  
-  //**************** PREFERENCES related data and methods ****************//
+  // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _preferencesLoading = true;
   bool? _wasGPSSessionDataSaved;
 
@@ -40,7 +39,7 @@ class GPSPageState extends State<GPSPage>
     if (preferencesDebug) pu.printd("Preferences: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");
   }
 
-  //**************** METHODS USED TO REFRESH VIEWS  ****************//
+  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
 
   // Method used to refresh the page from group problem-solving process page to dashboard, 
   // after process data has been saved
@@ -61,8 +60,7 @@ class GPSPageState extends State<GPSPage>
       _wasGPSSessionDataSaved = false;
     });
   }
-
-    //**************** FOCUS NODE related data and methods ****************//
+    // ─── FOCUS NODE related data and methods ───────────────────────────────────────
   FocusNode gpsPageFocusNode = .new();
 
   @override
