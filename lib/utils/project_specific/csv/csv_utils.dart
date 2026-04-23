@@ -48,6 +48,7 @@ class CSVUtils
     return data;
   }
   
+  // TODO: to clean
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
   Future<Map<String,List<Object>>> caCSVFileToPreviewPerspectiveData(String pathToCSVFile) async
   {
@@ -82,14 +83,14 @@ class CSVUtils
     if (Platform.isAndroid)
     {
       String fileName = path.basename(pathToCSVFile);
-      if (previewBuildingDebug) pu.printd("Preview Building: csvFileToPreviewPerspectiveData on Android");
+      if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on Android");
       final String content = await fu.readTextContentOnAndroid(fileName: fileName);
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isIOS)
     {
       String fileName = path.basename(pathToCSVFile);
-      if (previewBuildingDebug) pu.printd("Preview Building: csvFileToPreviewPerspectiveData on iOS");
+      if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on iOS");
       final String content;
       try
       {

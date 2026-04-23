@@ -1,10 +1,9 @@
-
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 
 /// {@category Utils - Project-specific}
 /// A project-specific utility class related to the context analysis form.
-class CaFormUtils 
+class CAFormUtils 
 {
   /// The questions used in the form.
   final CAFormQuestions q = CAFormQuestions();
