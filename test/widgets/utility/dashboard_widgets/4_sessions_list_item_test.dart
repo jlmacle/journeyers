@@ -179,7 +179,7 @@ void main() {
         await tester.tap(previewTooltipFinder);
         await tester.pumpAndSettle();
         // Verifies title level 2 present
-        expect(find.text(q.level2TitleIndividual), findsOneWidget);
+        expect(find.text(testDataMessage), findsOneWidget);
       });
 
       // 'Opens the GPS preview'

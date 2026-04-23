@@ -49,7 +49,7 @@ class CSVUtils
   }
   
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
-  Future<Map<String,List<Object>>> csvFileToPreviewPerspectiveData(String pathToCSVFile) async
+  Future<Map<String,List<Object>>> caCSVFileToPreviewPerspectiveData(String pathToCSVFile) async
   {
     // Checking if the path is a path for a test (TODO: to cleanup/dto)
     if (pathsForTestFiles.contains(pathToCSVFile)) {
