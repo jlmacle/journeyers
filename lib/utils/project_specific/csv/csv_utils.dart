@@ -6,19 +6,14 @@ import "package:flutter/services.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
 import "package:journeyers/utils/generic/dev/externalized_test_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
 
 /// {@category Utils - Project-specific}
 /// A project-specific utility class related to CSV.
 class CSVUtils 
 {
-
-  // ─── THE DATA STRUCTURE TO RETURN ───────────────────────────────────────
-  /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
-  List<Object> preCSVData = [];
-
   // ─── METHODS RETRIEVING THE CSV DATA FOR EDITION OR VIEWING : beginning ───────────────────────────────────────
   
   // Method used to map a line of CSV to data
@@ -44,7 +39,7 @@ class CSVUtils
       else
       {
         itemData += char;
-        if (char == cafu.quotesForCSV) inQuotes = !inQuotes;
+        if (char == quotesForCSV) inQuotes = !inQuotes;
       }      
     }
     // Adding the last item data (no ',' reachable for the last item with the current code)
@@ -174,5 +169,4 @@ class CSVUtils
     return perspectiveData;
   }
   // ─── METHODS RETRIEVING THE CSV DATA FOR EDITION OR VIEWING : end ───────────────────────────────────────
-
 }

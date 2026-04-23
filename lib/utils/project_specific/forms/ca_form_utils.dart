@@ -8,10 +8,6 @@ class CaFormUtils
 {
   /// The questions used in the form.
   final CAFormQuestions q = CAFormQuestions();
-
-  // TODO: to clean
-  /// Straight double quotes used to encapsulate the content of answered questions.
-  String quotesForCSV = '"';
     
   /// A mapping of question labels with the type of input items 
   /// (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -30,13 +26,13 @@ class CaFormUtils
   Set<String> titlesLevel3WithSubItems = {};
 
   /// A set of the children of the titles level 3 related to balance issues.
-  Set<String> titleLevel3BalanceIssueChildren = {};
+  Set<String> childrenOfTitleLevel3BalanceIssue = {};
 
   /// A set of the children of the titles level 3 related to workplace issues.
-  Set<String> titleLevel3WorkplaceIssueChildren = {};
+  Set<String> childrenTitleLevel3WorkplaceIssue = {};
 
   /// A set of the children of the titles level 3 related to a legacy issue.
-  Set<String> titleLevel3LegacyIssueChildren = {};
+  Set<String> childrenTitleLevel3LegacyIssue = {};
 
   /// A set of the text fields only items.
   Set<String> textFieldOnlyItems = {};
@@ -101,7 +97,7 @@ class CaFormUtils
 
     // Sets of the children of the existing titles level 3 with sub items
     /// A set of the children of the title level 3 related to balance issues.
-    titleLevel3BalanceIssueChildren = {
+    childrenOfTitleLevel3BalanceIssue = {
       q.level3TitleBalanceIssueItem1,
       q.level3TitleBalanceIssueItem2,
       q.level3TitleBalanceIssueItem3,
@@ -109,13 +105,13 @@ class CaFormUtils
     };
 
     /// A set of the children of the title level 3 related to workplace issues.
-    titleLevel3WorkplaceIssueChildren = {
+    childrenTitleLevel3WorkplaceIssue = {
       q.level3TitleWorkplaceIssueItem1,
       q.level3TitleWorkplaceIssueItem2,
     };
 
     /// A set of the children of the title level 3 related to a legacy issue.
-    titleLevel3LegacyIssueChildren = {q.level3TitleLegacyIssueItem1};
+    childrenTitleLevel3LegacyIssue = {q.level3TitleLegacyIssueItem1};
 
     // A set of the text fields only items
     textFieldOnlyItems = {
