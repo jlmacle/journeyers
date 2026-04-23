@@ -14,22 +14,22 @@ class DTOCaForm
 {
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : beginning ───────────────────────────────────────
   /// The DTOCheckboxWithTextField instance for the question related to the balance between studies and household life.
-  var indivStudiesBalance              = DTOCheckboxWithTextField();
+  var indivBalanceStudiesHousehold              = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between accessing income and household life.
-  var indivAccessingIncomeBalance      = DTOCheckboxWithTextField();
+  var indivBalanceAccessingIncomeHousehold      = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between earning income and household life.
-  var indivEarningIncomeBalance        = DTOCheckboxWithTextField();
+  var indivBalanceEarningIncomeHousehold        = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between helping others and household life.
-  var indivHelpingOthersBalance        = DTOCheckboxWithTextField();
+  var indivBalanceHelpingOthersHouseholds        = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the need to be more appreciated at work.
-  var indivMoreAppreciatedAtWork       = DTOCheckboxWithTextField();
+  var indivAtWorkMoreAppreciated       = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to need to remain appreciated at work.
-  var indivRemainingAppreciatedAtWork  = DTOCheckboxWithTextField();
+  var indivAtWorkRemainingAppreciated  = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the legacies we leave to our children/others.
   var indivBetterLegacies              = DTOCheckboxWithTextField();
@@ -93,17 +93,17 @@ class DTOCaForm
         q.level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivStudiesBalance),
-          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivAccessingIncomeBalance),
-          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivEarningIncomeBalance),
-          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivHelpingOthersBalance),
+          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
+          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
+          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
+          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
         }),
 
         q.level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivMoreAppreciatedAtWork),
-          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivRemainingAppreciatedAtWork),
+          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
+          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
         }),
 
         q.level3TitleLegacyIssue: 

@@ -198,41 +198,41 @@ class CAFormState extends State<CAForm>
               (
                 checkboxText: q.level3TitleBalanceIssueItem1,
                 // Initializing the checkbox value with the DTO's value
-                checkboxIsChecked: widget.dtoCAForm.indivStudiesBalance.checked,
+                checkboxIsChecked: widget.dtoCAForm.indivBalanceStudiesHousehold.checked,
                 // Initializing the text field value with the DTO's value
-                textFieldStartValue: widget.dtoCAForm.indivStudiesBalance.text,
+                textFieldStartValue: widget.dtoCAForm.indivBalanceStudiesHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 // Updating DTO and UI (heading and item styling)
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivStudiesBalance, v),
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
                 // Updating DTO
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivStudiesBalance.text = v;},
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceStudiesHousehold.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem2,
-                checkboxIsChecked: widget.dtoCAForm.indivAccessingIncomeBalance.checked,
-                textFieldStartValue: widget.dtoCAForm.indivAccessingIncomeBalance.text,
+                checkboxIsChecked: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.checked,
+                textFieldStartValue: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivAccessingIncomeBalance, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAccessingIncomeBalance.text = v;},
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem3,
-                checkboxIsChecked: widget.dtoCAForm.indivEarningIncomeBalance.checked,
-                textFieldStartValue: widget.dtoCAForm.indivEarningIncomeBalance.text,
+                checkboxIsChecked: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.checked,
+                textFieldStartValue: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivEarningIncomeBalance, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivEarningIncomeBalance.text = v;},
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem4,
-                checkboxIsChecked: widget.dtoCAForm.indivHelpingOthersBalance.checked,
-                textFieldStartValue: widget.dtoCAForm.indivHelpingOthersBalance.text,
+                checkboxIsChecked: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
+                textFieldStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivHelpingOthersBalance, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivHelpingOthersBalance.text = v;},
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text = v;},
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -249,20 +249,20 @@ class CAFormState extends State<CAForm>
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleWorkplaceIssueItem1,
-                checkboxIsChecked: widget.dtoCAForm.indivMoreAppreciatedAtWork.checked,
-                textFieldStartValue: widget.dtoCAForm.indivMoreAppreciatedAtWork.text,
+                checkboxIsChecked: widget.dtoCAForm.indivAtWorkMoreAppreciated.checked,
+                textFieldStartValue: widget.dtoCAForm.indivAtWorkMoreAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivMoreAppreciatedAtWork, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivMoreAppreciatedAtWork.text = v;},
+                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkMoreAppreciated, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAtWorkMoreAppreciated.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleWorkplaceIssueItem2,
-                checkboxIsChecked: widget.dtoCAForm.indivRemainingAppreciatedAtWork.checked,
-                textFieldStartValue: widget.dtoCAForm.indivRemainingAppreciatedAtWork.text,
+                checkboxIsChecked: widget.dtoCAForm.indivAtWorkRemainingAppreciated.checked,
+                textFieldStartValue: widget.dtoCAForm.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivRemainingAppreciatedAtWork, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivRemainingAppreciatedAtWork.text = v;},
+                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAtWorkRemainingAppreciated.text = v;},
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
