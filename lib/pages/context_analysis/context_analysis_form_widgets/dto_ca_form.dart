@@ -80,7 +80,7 @@ class DTOCaForm
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
   final CAFormQuestions _q = CAFormQuestions();
 
-  /// Method used to gather into a LinkedHashMap the form data.
+  /// Method used to gather the form data into a LinkedHashMap.
   Future<LinkedHashMap<String, Object> > dataStructureBuilding() async {
   final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
 
