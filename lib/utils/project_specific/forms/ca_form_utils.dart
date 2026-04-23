@@ -14,8 +14,11 @@ class CaFormUtils
   String quotesForCSV = '"';
     
   /// A mapping of question labels with the type of input items 
-  // (text field, checkbox with text field, segmented button with text field) used to answer.
+  /// (text field, checkbox with text field, segmented button with text field) used to answer.
   Map<String, String> mappingLabelsToInputItems = {};
+
+  /// A set of the existing titles level 2.
+  Set<String> titlesLevel2 = {};
 
   /// A set of the titles level 3 related to an individual perspective.
   Set<String> titlesLevel3ForTheIndividualPerspective = {};
@@ -68,6 +71,9 @@ class CaFormUtils
       // earning ability
       q.level3TitleIncomeEarningAbility: segmentedButton,
     };
+
+    // A set of the existing titles level 2.
+    titlesLevel2 = {q.level2TitleIndividual, q.level2TitleGroup};
 
     // A set of the titles level 3 related to an individual perspective.
     titlesLevel3ForTheIndividualPerspective = {
