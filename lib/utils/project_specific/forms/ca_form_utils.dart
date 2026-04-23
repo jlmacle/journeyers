@@ -26,13 +26,13 @@ class CaFormUtils
   /// A set of the existing titles level 3 with sub items.
   Set<String> titlesLevel3WithSubItems = {};
 
-  /// A set of the children of the title level 3 related to balance issues.
+  /// A set of the children of the titles level 3 related to balance issues.
   Set<String> titleLevel3BalanceIssueChildren = {};
 
-  /// A set of the children of the title level 3 related to workplace issues.
+  /// A set of the children of the titles level 3 related to workplace issues.
   Set<String> titleLevel3WorkplaceIssueChildren = {};
 
-  /// A set of the children of the title level 3 related to a legacy issue.
+  /// A set of the children of the titles level 3 related to a legacy issue.
   Set<String> titleLevel3LegacyIssueChildren = {};
 
   /// A set of the text fields only items.
