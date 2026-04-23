@@ -13,12 +13,13 @@ class GPSChecklist extends StatefulWidget {
 
 class _GPSChecklistState extends State<GPSChecklist> {
   final Map<String, bool> _checklistItems = {
-    "Is the context analysis done?": false,
-    "Is the group open to use the app for group problem-solving?": false,
+    "Is our context analysis done?": false,
+    "Is the group open to using the app for group problem-solving?": false,
     "Is the group emotionally ready to problem-solve?": false,
-    "Should we use indirect communication to group problem-solve?": false,
-    "Do we agree on the problem needed to be solved?": false,
-    "Do we need to further the context analysis?": false,
+    "Did we agree on what to do if emotions become problematic?": false,
+    "Do we agree on the problem that needs to be solved?": false,
+    "Did we agree on the order in which to offer the solutions?":false,
+    "Do we need to further our context analysis?": false,
   };
 
   // Helper method to check if all items are completed
