@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart'; // https://do
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/homepage.dart';
 

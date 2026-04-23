@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/debug_constants.dart';
 
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Utils - Generic}
 /// A generic utility class related to text fields.

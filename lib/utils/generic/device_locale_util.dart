@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 void printDeviceLocale() {
   final locale = ui.PlatformDispatcher.instance.locale;

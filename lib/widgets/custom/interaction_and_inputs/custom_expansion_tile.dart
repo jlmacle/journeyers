@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_icon_button.dart';
 
 /// {@category Custom widgets}

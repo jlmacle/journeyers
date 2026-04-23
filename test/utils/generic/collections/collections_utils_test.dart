@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
 void main() {
