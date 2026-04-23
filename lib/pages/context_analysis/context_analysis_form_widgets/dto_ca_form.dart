@@ -409,21 +409,21 @@ class DTOCaForm
 
         // Adding an X to the parent title level 3
         var previousIndexData_1AsString = previousIndexData[1];
-        if (cafu.titleLevel3BalanceIssueChildren.contains(
+        if (cafu.childrenOfTitleLevel3BalanceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (cafu.titleLevel3WorkplaceIssueChildren.contains(
+        } else if (cafu.childrenTitleLevel3WorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (cafu.titleLevel3LegacyIssueChildren.contains(
+        } else if (cafu.childrenTitleLevel3LegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =

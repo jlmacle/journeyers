@@ -7,6 +7,9 @@ const String textField = "textField";
 /// A util used to label segmented button data.
 const String segmentedButton = "segmentedButton";
 
+/// Straight double quotes used to encapsulate the content of answered questions.
+String quotesForCSV = '"';
+
 /// A number of characters used to represent 10 lines of text field input on a computer.
 const int chars10Lines = 1560;
 

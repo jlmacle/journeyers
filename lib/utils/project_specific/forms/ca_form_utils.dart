@@ -8,10 +8,6 @@ class CaFormUtils
 {
   /// The questions used in the form.
   final CAFormQuestions q = CAFormQuestions();
-
-  // TODO: to clean
-  /// Straight double quotes used to encapsulate the content of answered questions.
-  String quotesForCSV = '"';
     
   /// A mapping of question labels with the type of input items 
   /// (text field, checkbox with text field, segmented button with text field) used to answer.
