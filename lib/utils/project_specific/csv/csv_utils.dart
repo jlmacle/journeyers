@@ -6,57 +6,14 @@ import "package:flutter/services.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart";
 import "package:journeyers/utils/generic/dev/externalized_test_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
 
 /// {@category Utils - Project-specific}
 /// A project-specific utility class related to CSV.
 class CSVUtils 
 {
-  // ─── UTILS: beginning ───────────────────────────────────────
-  // The questions used in the form
-  final CAFormQuestions _q =
-      CAFormQuestions();
-  // ─── UTILS: end ───────────────────────────────────────
-
-  /// A label used in front of the content of answered questions.
-  String notes = "Notes:";
-
-  /// Straight double quotes used to encapsulate the content of answered questions.
-  String quotesForCSV = '"';
-
-  // ─── MAPPING QUESTIONS TO INPUT WIDGETS TO PROCESS DATA ACCORDING TO INPUT WIDGETS ───────────────────────────────────────
-  /// A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
-  Map<String, String> mappingLabelsToInputItems = {};
-
-  // ─── SETS OF THE LEVEL 2, LEVEL 3 TITLES, AND RELATED SETS ───────────────────────────────────────
-  /// A set of the existing titles level 2.
-  Set<String> titlesLevel2 = {};
-
-  // Sets of the existing titles level 3.
-  /// A set of the titles level 3 related to an individual perspective.
-  Set<String> titlesLevel3ForTheIndividualPerspective = {};
-
-  /// A set of the titles level 3 related to a group/team perspective.
-  Set<String> titlesLevel3ForTheGroupPerspective = {};
-
-  /// A set of the existing titles level 3 with sub items.
-  Set<String> titlesLevel3WithSubItems = {};
-
-  // Sets of the children of the existing titles level 3 with sub items
-  /// A set of the children of the title level 3 related to balance issues.
-  Set<String> titleLevel3BalanceIssueChildren = {};
-
-  /// A set of the children of the title level 3 related to workplace issues.
-  Set<String> titleLevel3WorkplaceIssueChildren = {};
-
-  /// A set of the children of the title level 3 related to a legacy issue.
-  Set<String> titleLevel3LegacyIssueChildren = {};
-
-  /// A set of the text fields only items
-  Set<String> textFieldOnlyItems = {};
 
   // ─── THE DATA STRUCTURE TO RETURN ───────────────────────────────────────
   /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
@@ -87,7 +44,7 @@ class CSVUtils
       else
       {
         itemData += char;
-        if (char == quotesForCSV) inQuotes = !inQuotes;
+        if (char == cafu.quotesForCSV) inQuotes = !inQuotes;
       }      
     }
     // Adding the last item data (no ',' reachable for the last item with the current code)
