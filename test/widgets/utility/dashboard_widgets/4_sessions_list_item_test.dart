@@ -16,10 +16,10 @@ void main() {
 
   // Data for the test
   final testMetadata = {
-    'title': title,
-    'date': date,
-    'filePath': pathForTestFile1,
-    'keywords': keywords,
+    DashboardUtils.keyTitle: title,
+    DashboardUtils.keyDate: date,
+    DashboardUtils.keyFilePath: pathForTestFile1,
+    DashboardUtils.keyKeywords: keywords,
   };
 
   // 'SessionsListItem Tests'
