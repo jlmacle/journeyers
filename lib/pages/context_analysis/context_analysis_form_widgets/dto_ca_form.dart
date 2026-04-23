@@ -416,14 +416,14 @@ class DTOCaForm
               indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (cafu.childrenTitleLevel3WorkplaceIssue.contains(
+        } else if (cafu.childrenOfTitleLevel3WorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (cafu.childrenTitleLevel3LegacyIssue.contains(
+        } else if (cafu.childrenOfTitleLevel3LegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
