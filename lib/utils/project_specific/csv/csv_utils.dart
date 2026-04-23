@@ -14,11 +14,6 @@ import "package:journeyers/utils/project_specific/dev/utility_classes_import.dar
 /// A project-specific utility class related to CSV.
 class CSVUtils 
 {
-
-  // ─── THE DATA STRUCTURE TO RETURN ───────────────────────────────────────
-  /// The pre-CSV data structure (before adding extra lines, removing or renaming keywords, ...)
-  List<Object> preCSVData = [];
-
   // ─── METHODS RETRIEVING THE CSV DATA FOR EDITION OR VIEWING : beginning ───────────────────────────────────────
   
   // Method used to map a line of CSV to data
@@ -174,5 +169,4 @@ class CSVUtils
     return perspectiveData;
   }
   // ─── METHODS RETRIEVING THE CSV DATA FOR EDITION OR VIEWING : end ───────────────────────────────────────
-
 }
