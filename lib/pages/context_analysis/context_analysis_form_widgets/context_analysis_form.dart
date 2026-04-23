@@ -87,7 +87,7 @@ class CAFormState extends State<CAForm>
 
   // Method used to update the DTO, and the item styling (another issue)
   void _onAnotherIssueStr(String value) {
-    widget.dtoCAForm.anotherIssueStr = value;
+    widget.dtoCAForm.indivAnotherIssueStr = value;
     anotherIssueHeadingKey.currentState
         ?.switchCustomHeadingDecorationIfTextFieldUsed(value);
   }
@@ -198,41 +198,41 @@ class CAFormState extends State<CAForm>
               (
                 checkboxText: q.level3TitleBalanceIssueItem1,
                 // Initializing the checkbox value with the DTO's value
-                checkboxIsChecked: widget.dtoCAForm.studiesBalance.checked,
+                checkboxIsChecked: widget.dtoCAForm.indivStudiesBalance.checked,
                 // Initializing the text field value with the DTO's value
-                textFieldStartValue: widget.dtoCAForm.studiesBalance.text,
+                textFieldStartValue: widget.dtoCAForm.indivStudiesBalance.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 // Updating DTO and UI (heading and item styling)
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.studiesBalance, v),
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivStudiesBalance, v),
                 // Updating DTO
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.studiesBalance.text = v;},
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivStudiesBalance.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem2,
-                checkboxIsChecked: widget.dtoCAForm.accessingIncomeBalance.checked,
-                textFieldStartValue: widget.dtoCAForm.accessingIncomeBalance.text,
+                checkboxIsChecked: widget.dtoCAForm.indivAccessingIncomeBalance.checked,
+                textFieldStartValue: widget.dtoCAForm.indivAccessingIncomeBalance.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.accessingIncomeBalance, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.accessingIncomeBalance.text = v;},
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivAccessingIncomeBalance, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAccessingIncomeBalance.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem3,
-                checkboxIsChecked: widget.dtoCAForm.earningIncomeBalance.checked,
-                textFieldStartValue: widget.dtoCAForm.earningIncomeBalance.text,
+                checkboxIsChecked: widget.dtoCAForm.indivEarningIncomeBalance.checked,
+                textFieldStartValue: widget.dtoCAForm.indivEarningIncomeBalance.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.earningIncomeBalance, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.earningIncomeBalance.text = v;},
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivEarningIncomeBalance, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivEarningIncomeBalance.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem4,
-                checkboxIsChecked: widget.dtoCAForm.helpingOthersBalance.checked,
-                textFieldStartValue: widget.dtoCAForm.helpingOthersBalance.text,
+                checkboxIsChecked: widget.dtoCAForm.indivHelpingOthersBalance.checked,
+                textFieldStartValue: widget.dtoCAForm.indivHelpingOthersBalance.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.helpingOthersBalance, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.helpingOthersBalance.text = v;},
+                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivHelpingOthersBalance, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivHelpingOthersBalance.text = v;},
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -249,20 +249,20 @@ class CAFormState extends State<CAForm>
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleWorkplaceIssueItem1,
-                checkboxIsChecked: widget.dtoCAForm.moreAppreciatedAtWork.checked,
-                textFieldStartValue: widget.dtoCAForm.moreAppreciatedAtWork.text,
+                checkboxIsChecked: widget.dtoCAForm.indivMoreAppreciatedAtWork.checked,
+                textFieldStartValue: widget.dtoCAForm.indivMoreAppreciatedAtWork.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.moreAppreciatedAtWork, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.moreAppreciatedAtWork.text = v;},
+                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivMoreAppreciatedAtWork, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivMoreAppreciatedAtWork.text = v;},
               ),
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleWorkplaceIssueItem2,
-                checkboxIsChecked: widget.dtoCAForm.remainingAppreciatedAtWork.checked,
-                textFieldStartValue: widget.dtoCAForm.remainingAppreciatedAtWork.text,
+                checkboxIsChecked: widget.dtoCAForm.indivRemainingAppreciatedAtWork.checked,
+                textFieldStartValue: widget.dtoCAForm.indivRemainingAppreciatedAtWork.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.remainingAppreciatedAtWork, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.remainingAppreciatedAtWork.text = v;},
+                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivRemainingAppreciatedAtWork, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivRemainingAppreciatedAtWork.text = v;},
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -279,11 +279,11 @@ class CAFormState extends State<CAForm>
               CheckboxWithTextField
               (
                 checkboxText: q.level3TitleLegacyIssueItem1,
-                checkboxIsChecked: widget.dtoCAForm.betterLegacies.checked,
-                textFieldStartValue: widget.dtoCAForm.betterLegacies.text,
+                checkboxIsChecked: widget.dtoCAForm.indivBetterLegacies.checked,
+                textFieldStartValue: widget.dtoCAForm.indivBetterLegacies.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                onCheckboxValueChanged: (v) => _onLegacyItemChecked(widget.dtoCAForm.betterLegacies, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.betterLegacies.text = v;},
+                onCheckboxValueChanged: (v) => _onLegacyItemChecked(widget.dtoCAForm.indivBetterLegacies, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBetterLegacies.text = v;},
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -301,7 +301,7 @@ class CAFormState extends State<CAForm>
               (
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
-                textFieldStartValue:widget.dtoCAForm.anotherIssueStr,
+                textFieldStartValue:widget.dtoCAForm.indivAnotherIssueStr,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
@@ -360,7 +360,7 @@ class CAFormState extends State<CAForm>
               ),
               TextFieldSanitizedAndPaddedForCA
               (
-                textFieldStartValue: widget.dtoCAForm.groupsProblemsStr,
+                textFieldStartValue: widget.dtoCAForm.groupProblemsStr,
                 textFieldHint: pleaseDescribeTextGroupsHint,
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
@@ -368,7 +368,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: chars1Page,
                 textFieldCounter: TextFieldUtils.absentCounter,
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupsProblemsStr = v;},
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupProblemsStr = v;},
               ),
 
               /**** ➡️ Sub-point  ****/
@@ -385,11 +385,11 @@ class CAFormState extends State<CAForm>
                 segButtonTextOption2: 'No',
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
-                segButtonStartValue: widget.dtoCAForm.sameProblems.selection,
-                textFieldStartValue: widget.dtoCAForm.sameProblems.text,
+                segButtonStartValue: widget.dtoCAForm.groupSameProblems.selection,
+                textFieldStartValue: widget.dtoCAForm.groupSameProblems.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.sameProblems, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.sameProblems.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblems, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupSameProblems.text = v;},
               ),
 
               const Gap(preAndPostLevel3DividerGap),
@@ -410,11 +410,11 @@ class CAFormState extends State<CAForm>
                 segButtonTextOption2: 'No',
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
-                segButtonStartValue: widget.dtoCAForm.harmonyHome.selection,
-                textFieldStartValue: widget.dtoCAForm.harmonyHome.text,
+                segButtonStartValue: widget.dtoCAForm.groupHarmonyHome.selection,
+                textFieldStartValue: widget.dtoCAForm.groupHarmonyHome.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.harmonyHome, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.harmonyHome.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupHarmonyHome, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupHarmonyHome.text = v;},
               ),
 
               const Gap(preAndPostLevel3DividerGap),
@@ -435,11 +435,11 @@ class CAFormState extends State<CAForm>
                 segButtonTextOption2: 'No',
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
-                segButtonStartValue: widget.dtoCAForm.appreciabilityAtWork.selection,
-                textFieldStartValue: widget.dtoCAForm.appreciabilityAtWork.text,
+                segButtonStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.selection,
+                textFieldStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.appreciabilityAtWork, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.appreciabilityAtWork.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupAppreciabilityAtWork, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupAppreciabilityAtWork.text = v;},
               ),
               
               const Gap(preAndPostLevel3DividerGap),
@@ -460,11 +460,11 @@ class CAFormState extends State<CAForm>
                 segButtonTextOption2: 'No',
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
-                segButtonStartValue: widget.dtoCAForm.earningAbility.selection,
-                textFieldStartValue: widget.dtoCAForm.earningAbility.text,
+                segButtonStartValue: widget.dtoCAForm.groupEarningAbility.selection,
+                textFieldStartValue: widget.dtoCAForm.groupEarningAbility.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.earningAbility, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.earningAbility.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupEarningAbility, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupEarningAbility.text = v;},
               ),
             ]
           ),

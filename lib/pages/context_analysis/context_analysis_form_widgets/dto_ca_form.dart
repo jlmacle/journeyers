@@ -14,46 +14,46 @@ class DTOCaForm
 {
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : beginning ───────────────────────────────────────
   /// The DTOCheckboxWithTextField instance for the question related to the balance between studies and household life.
-  var studiesBalance              = DTOCheckboxWithTextField();
+  var indivStudiesBalance              = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between accessing income and household life.
-  var accessingIncomeBalance      = DTOCheckboxWithTextField();
+  var indivAccessingIncomeBalance      = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between earning income and household life.
-  var earningIncomeBalance        = DTOCheckboxWithTextField();
+  var indivEarningIncomeBalance        = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between helping others and household life.
-  var helpingOthersBalance        = DTOCheckboxWithTextField();
+  var indivHelpingOthersBalance        = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the need to be more appreciated at work.
-  var moreAppreciatedAtWork       = DTOCheckboxWithTextField();
+  var indivMoreAppreciatedAtWork       = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to need to remain appreciated at work.
-  var remainingAppreciatedAtWork  = DTOCheckboxWithTextField();
+  var indivRemainingAppreciatedAtWork  = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the legacies we leave to our children/others.
-  var betterLegacies              = DTOCheckboxWithTextField();
+  var indivBetterLegacies              = DTOCheckboxWithTextField();
 
-  // The String for the question related to an issue of another type.
-  String anotherIssueStr = '';
+  /// The String for the question related to an issue of another type.
+  String indivAnotherIssueStr = '';
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : end ───────────────────────────────────────
 
 
   // ─── FIELDS: GROUP PERSPECTIVE : beginning ───────────────────────────────────────
-  // The String for the question related to an issue of another type.
-  String groupsProblemsStr = '';
+  /// The String for the question related to the problems that the group/teams are trying to solve.
+  String groupProblemsStr = '';
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to solving the same problem(s) as our groups/teams.
-  var sameProblems                = DTOSegmentedButtonWithTextField();
+  var groupSameProblems                = DTOSegmentedButtonWithTextField();
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to a group problem-solving process consistent with harmony at home.
-  var harmonyHome                 = DTOSegmentedButtonWithTextField();
+  var groupHarmonyHome                 = DTOSegmentedButtonWithTextField();
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to a group problem-solving process consistent with appreciability at work.
-  var appreciabilityAtWork        = DTOSegmentedButtonWithTextField();
+  var groupAppreciabilityAtWork        = DTOSegmentedButtonWithTextField();
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to a group problem-solving process consistent with our income earning ability.
-  var earningAbility              = DTOSegmentedButtonWithTextField();
+  var groupEarningAbility              = DTOSegmentedButtonWithTextField();
   // ─── FIELDS: GROUP PERSPECTIVE : end ───────────────────────────────────────
 
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
@@ -93,28 +93,28 @@ class DTOCaForm
         q.level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(studiesBalance),
-          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(accessingIncomeBalance),
-          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(earningIncomeBalance),
-          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(helpingOthersBalance),
+          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivStudiesBalance),
+          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivAccessingIncomeBalance),
+          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivEarningIncomeBalance),
+          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivHelpingOthersBalance),
         }),
 
         q.level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(moreAppreciatedAtWork),
-          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(remainingAppreciatedAtWork),
+          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivMoreAppreciatedAtWork),
+          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivRemainingAppreciatedAtWork),
         }),
 
         q.level3TitleLegacyIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleLegacyIssueItem1: _checkboxDataToMap(betterLegacies),
+          q.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
         }),
         
         q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
         ({
-          textField: anotherIssueStr,
+          textField: indivAnotherIssueStr,
         }),
       }),
     });
@@ -125,15 +125,15 @@ class DTOCaForm
       q.level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupsProblemsStr}),
+        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsStr}),
 
-        q.level3TitleSameProblem:          _segmentedDataToMap(sameProblems),
+        q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblems),
 
-        q.level3TitleHarmonyAtHome:        _segmentedDataToMap(harmonyHome),
+        q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
 
-        q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(appreciabilityAtWork),
+        q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
 
-        q.level3TitleIncomeEarningAbility: _segmentedDataToMap(earningAbility),
+        q.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
       }),
     });
 
