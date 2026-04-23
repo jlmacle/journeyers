@@ -78,41 +78,41 @@ class DTOCaForm
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
 
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
-  /// Method used to gather into a LinkedHashMap the form data.
-  final CAFormQuestions q = CAFormQuestions();
+  final CAFormQuestions _q = CAFormQuestions();
 
+  /// Method used to gather into a LinkedHashMap the form data.
   Future<LinkedHashMap<String, Object> > dataStructureBuilding() async {
   final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
 
   // Individual perspective
   final individualData = LinkedHashMap<String, Object>.from
   ({
-      q.level2TitleIndividual: 
+      _q.level2TitleIndividual: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        q.level3TitleBalanceIssue: 
+        _q.level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
-          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
-          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
+          _q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
+          _q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
+          _q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
+          _q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
         }),
 
-        q.level3TitleWorkplaceIssue: 
+        _q.level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
-          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
+          _q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
+          _q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
         }),
 
-        q.level3TitleLegacyIssue: 
+        _q.level3TitleLegacyIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
+          _q.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
         }),
         
-        q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
+        _q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
         ({
           textField: indivAnotherIssueStr,
         }),
@@ -122,18 +122,18 @@ class DTOCaForm
     // Groups/teams perspective
   final groupData = LinkedHashMap<String, Object>.from
     ({
-      q.level2TitleGroup: 
+      _q.level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
+        _q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
 
-        q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
+        _q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
 
-        q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
+        _q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
 
-        q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
+        _q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
 
-        q.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
+        _q.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
       }),
     });
 
