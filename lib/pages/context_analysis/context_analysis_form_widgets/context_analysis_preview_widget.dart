@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
+import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
@@ -39,7 +40,19 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
   Future<void> _fetchingData() async
   {
     if (previewBuildingDebug) pu.printd("Preview Building: pathToCsvData:${widget.pathToStoredData}");
-    Map<String, List<dynamic>> perspectiveData = await csvu.csvFileToPreviewPerspectiveData(widget.pathToStoredData);
+
+    if (pathsForTestFiles.contains(widget.pathToStoredData)) 
+    {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+      return;
+    }
+        
+    
+    Map<String, List<dynamic>> perspectiveData = await csvu.caCSVFileToPreviewPerspectiveData(widget.pathToStoredData);
     await perspectiveDataToDataStructures(perspectiveData);
     
     if (mounted) {
@@ -312,157 +325,159 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
   {
     return _isLoading
       ?  const Center(child:CircularProgressIndicator())
-      :  Column
-        (
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: 
-          [
-              Column
-              (
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: 
-                [
-                  Padding
-                  (
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text
-                    (
-                      sectionsIndividual['title'] ?? "Untitled",
-                      style: styleExpansionTileTitle
-                    ),
-                  ),
-
-                  // Questions and potential answers for the individual perspective
-                  ...
+      : (pathsForTestFiles.contains(widget.pathToStoredData)) 
+        ? const Text(testDataMessage)
+        :  Column
+          (
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: 
+            [
+                Column
+                (
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: 
                   [
-                    // "questions": list of maps with "title" and "items" as keys
-                    // If no checkbox checked and no value for the text field only, a message to display
-                    if 
+                    Padding
                     (
-                      sectionsIndividual['questions'].where
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text
                       (
-                        (question) => 
-                          (question['items'] as List).any((item) => item['checked'] == "yes") 
-                          ||
-                          (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
-                      ).isEmpty
-                    )
-                      const Padding
-                      (
-                        padding: EdgeInsets.only(left:16, top:8, bottom:8),
-                        child: Text
-                        (
-                          'No question checked and no data in the last text field.',
-                          style: styleDataAbsent
-                        ),
-                      )
-                    else
-                      // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
-                      for 
-                      (
-                        var question in sectionsIndividual['questions'].where
-                        (
-                          (question) => 
-                            (question['items'] as List).any((item) => item['checked'] == 'yes') 
-                            ||
-                            (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
-                        )
-                     
-                      )
-                        ExpansionTile
-                        (
-                          // to remove the borders
-                          shape: Border.all(color: Colors.transparent, width: 0),
-                          initiallyExpanded: true,
-                          title: Text
-                          (
-                            question['title'],
-                            style: styleExpansionTileTitle
-                          ),
-                          children: 
-                          [
-                            // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
-                            for 
-                            (var item in (question['items'] as List).where
-                              (
-                                (item) => item['checked'] == 'yes' 
-                                ||
-                                item['notesTextField'] != null && item['notesTextField'] != ""                          
-                              )
-                            )
-                              ListTile
-                              (
-                                leading: Icon
-                                (
-                                  item['checked'] != null
-                                  ? Icons.check_box
-                                  : Icons.text_snippet
-                                ),
-                                title: Text
-                                (
-                                  item['text'] != null 
-                                  ? item['text']
-                                  :(item['notesTextField'] != null && item['notesTextField'] != "")
-                                  ? "Notes: ${item['notesTextField']}"
-                                  : "",
-                                  style: styleExpandedTitleSubTitle                              
-                                ),
-                                subtitle: (item['notes'] != null)
-                                  ? Text("Notes: ${item['notes']}", style: styleExpandedTitleSubTitle)
-                                  : null,
-                              ),
-                          ],
-                        ),
-                    ],
-                ],
-              ),
-              const Divider(thickness: 3, color: Colors.black),
-              Column
-              (
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: 
-                [
-                  Padding
-                  (
-                    padding: const EdgeInsets.only(left: 16, top: 8, bottom:8),
-                    child: Text
-                    (
-                      sectionsGroup['title'],
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  // Questions and potential answers for the group perspective
-                  for (var question in sectionsGroup['questions'])
-                    ExpansionTile
-                    (
-                      // to remove the borders
-                      shape: Border.all(color: Colors.transparent, width: 0),                      
-                      initiallyExpanded: true, 
-                      title: Text
-                      (
-                        question['title'], 
+                        sectionsIndividual['title'] ?? "Untitled",
                         style: styleExpansionTileTitle
                       ),
-                      children: 
-                      [
-                        ListTile
-                        (
-                          leading: const Icon(Icons.text_snippet),
-                          title: Text                            
-                          ( 
-                            question["items"]["segValue"] == null
-                            ?
-                            'Notes: ${question["items"]["notes"] ?? ""}'
-                            :
-                            'Answer(s): ${question["items"]["segValue"] ?? ""}'
-                            '\nNotes: ${question["items"]["notes"] ?? ""}'
-                          ),
-                        ),
-                      ],
                     ),
-                ],
-              ),
-          ],
-        );
+
+                    // Questions and potential answers for the individual perspective
+                    ...
+                    [
+                      // "questions": list of maps with "title" and "items" as keys
+                      // If no checkbox checked and no value for the text field only, a message to display
+                      if 
+                      (
+                        sectionsIndividual['questions'].where
+                        (
+                          (question) => 
+                            (question['items'] as List).any((item) => item['checked'] == "yes") 
+                            ||
+                            (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
+                        ).isEmpty
+                      )
+                        const Padding
+                        (
+                          padding: EdgeInsets.only(left:16, top:8, bottom:8),
+                          child: Text
+                          (
+                            'No question checked and no data in the last text field.',
+                            style: styleDataAbsent
+                          ),
+                        )
+                      else
+                        // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
+                        for 
+                        (
+                          var question in sectionsIndividual['questions'].where
+                          (
+                            (question) => 
+                              (question['items'] as List).any((item) => item['checked'] == 'yes') 
+                              ||
+                              (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
+                          )
+                      
+                        )
+                          ExpansionTile
+                          (
+                            // to remove the borders
+                            shape: Border.all(color: Colors.transparent, width: 0),
+                            initiallyExpanded: true,
+                            title: Text
+                            (
+                              question['title'],
+                              style: styleExpansionTileTitle
+                            ),
+                            children: 
+                            [
+                              // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
+                              for 
+                              (var item in (question['items'] as List).where
+                                (
+                                  (item) => item['checked'] == 'yes' 
+                                  ||
+                                  item['notesTextField'] != null && item['notesTextField'] != ""                          
+                                )
+                              )
+                                ListTile
+                                (
+                                  leading: Icon
+                                  (
+                                    item['checked'] != null
+                                    ? Icons.check_box
+                                    : Icons.text_snippet
+                                  ),
+                                  title: Text
+                                  (
+                                    item['text'] != null 
+                                    ? item['text']
+                                    :(item['notesTextField'] != null && item['notesTextField'] != "")
+                                    ? "Notes: ${item['notesTextField']}"
+                                    : "",
+                                    style: styleExpandedTitleSubTitle                              
+                                  ),
+                                  subtitle: (item['notes'] != null)
+                                    ? Text("Notes: ${item['notes']}", style: styleExpandedTitleSubTitle)
+                                    : null,
+                                ),
+                            ],
+                          ),
+                      ],
+                  ],
+                ),
+                const Divider(thickness: 3, color: Colors.black),
+                Column
+                (
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: 
+                  [
+                    Padding
+                    (
+                      padding: const EdgeInsets.only(left: 16, top: 8, bottom:8),
+                      child: Text
+                      (
+                        sectionsGroup['title'],
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    // Questions and potential answers for the group perspective
+                    for (var question in sectionsGroup['questions'])
+                      ExpansionTile
+                      (
+                        // to remove the borders
+                        shape: Border.all(color: Colors.transparent, width: 0),                      
+                        initiallyExpanded: true, 
+                        title: Text
+                        (
+                          question['title'], 
+                          style: styleExpansionTileTitle
+                        ),
+                        children: 
+                        [
+                          ListTile
+                          (
+                            leading: const Icon(Icons.text_snippet),
+                            title: Text                            
+                            ( 
+                              question["items"]["segValue"] == null
+                              ?
+                              'Notes: ${question["items"]["notes"] ?? ""}'
+                              :
+                              'Answer(s): ${question["items"]["segValue"] ?? ""}'
+                              '\nNotes: ${question["items"]["notes"] ?? ""}'
+                            ),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+            ],
+          );
+    }
   }
-}
