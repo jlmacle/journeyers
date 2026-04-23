@@ -2,10 +2,16 @@
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 
+/// {@category Utils - Project-specific}
+/// A project-specific utility class related to the context analysis form.
 class CaFormUtils 
 {
-  // The questions used in the form
+  /// The questions used in the form.
   final CAFormQuestions q = CAFormQuestions();
+
+  // TODO: to clean
+  /// Straight double quotes used to encapsulate the content of answered questions.
+  String quotesForCSV = '"';
     
   /// A mapping of question labels with the type of input items 
   // (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -20,17 +26,16 @@ class CaFormUtils
   /// A set of the existing titles level 3 with sub items.
   Set<String> titlesLevel3WithSubItems = {};
 
-  /// Sets of the children of the existing titles level 3 with sub items
-  /// A set of the children of the title level 3 related to balance issues.
+  /// A set of the children of the titles level 3 related to balance issues.
   Set<String> titleLevel3BalanceIssueChildren = {};
 
-  /// A set of the children of the title level 3 related to workplace issues.
+  /// A set of the children of the titles level 3 related to workplace issues.
   Set<String> titleLevel3WorkplaceIssueChildren = {};
 
-  /// A set of the children of the title level 3 related to a legacy issue.
+  /// A set of the children of the titles level 3 related to a legacy issue.
   Set<String> titleLevel3LegacyIssueChildren = {};
 
-  /// A set of the text fields only items
+  /// A set of the text fields only items.
   Set<String> textFieldOnlyItems = {};
 
   CAFormUtils()
