@@ -41,10 +41,10 @@ class DTOCaForm
 
   // ─── FIELDS: GROUP PERSPECTIVE : beginning ───────────────────────────────────────
   /// The String for the question related to the problems that the group/teams are trying to solve.
-  String groupProblemsStr = '';
+  String groupProblemsToSolveStr = '';
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to solving the same problem(s) as our groups/teams.
-  var groupSameProblems                = DTOSegmentedButtonWithTextField();
+  var groupSameProblemsToSolve                = DTOSegmentedButtonWithTextField();
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to a group problem-solving process consistent with harmony at home.
   var groupHarmonyHome                 = DTOSegmentedButtonWithTextField();
@@ -125,9 +125,9 @@ class DTOCaForm
       q.level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsStr}),
+        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
 
-        q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblems),
+        q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
 
         q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
 

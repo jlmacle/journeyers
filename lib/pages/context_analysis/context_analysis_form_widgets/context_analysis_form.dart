@@ -360,7 +360,7 @@ class CAFormState extends State<CAForm>
               ),
               TextFieldSanitizedAndPaddedForCA
               (
-                textFieldStartValue: widget.dtoCAForm.groupProblemsStr,
+                textFieldStartValue: widget.dtoCAForm.groupProblemsToSolveStr,
                 textFieldHint: pleaseDescribeTextGroupsHint,
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
@@ -368,7 +368,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: chars1Page,
                 textFieldCounter: TextFieldUtils.absentCounter,
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupProblemsStr = v;},
+                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupProblemsToSolveStr = v;},
               ),
 
               /**** ➡️ Sub-point  ****/
@@ -385,11 +385,11 @@ class CAFormState extends State<CAForm>
                 segButtonTextOption2: 'No',
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
-                segButtonStartValue: widget.dtoCAForm.groupSameProblems.selection,
-                textFieldStartValue: widget.dtoCAForm.groupSameProblems.text,
+                segButtonStartValue: widget.dtoCAForm.groupSameProblemsToSolve.selection,
+                textFieldStartValue: widget.dtoCAForm.groupSameProblemsToSolve.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblems, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupSameProblems.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblemsToSolve, v),
+                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupSameProblemsToSolve.text = v;},
               ),
 
               const Gap(preAndPostLevel3DividerGap),
