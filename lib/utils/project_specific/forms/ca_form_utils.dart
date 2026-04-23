@@ -12,7 +12,7 @@ class CAFormUtils
   /// (text field, checkbox with text field, segmented button with text field) used to answer.
   Map<String, String> mappingLabelsToInputItems = {};
 
-  /// A set of the existing titles level 2.
+  /// A set of the titles level 2.
   Set<String> titlesLevel2 = {};
 
   /// A set of the titles level 3 related to an individual perspective.
@@ -21,7 +21,7 @@ class CAFormUtils
   /// A set of the titles level 3 related to a group/team perspective.
   Set<String> titlesLevel3ForTheGroupPerspective = {};
 
-  /// A set of the existing titles level 3 with sub items.
+  /// A set of the titles level 3 with sub items.
   Set<String> titlesLevel3WithSubItems = {};
 
   /// A set of the children of the titles level 3 related to balance issues.
@@ -67,7 +67,7 @@ class CAFormUtils
       q.level3TitleIncomeEarningAbility: segmentedButton,
     };
 
-    // A set of the existing titles level 2.
+    // A set of the titles level 2.
     titlesLevel2 = {q.level2TitleIndividual, q.level2TitleGroup};
 
     // A set of the titles level 3 related to an individual perspective.
@@ -87,14 +87,14 @@ class CAFormUtils
       q.level3TitleIncomeEarningAbility,
     };
 
-    /// A set of the existing titles level 3 with sub items.
+    /// A set of the titles level 3 with sub items.
     titlesLevel3WithSubItems = {
       q.level3TitleBalanceIssue,
       q.level3TitleWorkplaceIssue,
       q.level3TitleLegacyIssue,
     };
 
-    // Sets of the children of the existing titles level 3 with sub items
+    // Sets of the children of the titles level 3 with sub items
     /// A set of the children of the title level 3 related to balance issues.
     childrenOfTitleLevel3BalanceIssue = {
       q.level3TitleBalanceIssueItem1,
