@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.

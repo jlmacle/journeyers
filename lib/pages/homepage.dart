@@ -11,7 +11,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_export.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/l10n/l10n_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 
