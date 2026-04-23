@@ -28,10 +28,10 @@ class CAFormUtils
   Set<String> childrenOfTitleLevel3BalanceIssue = {};
 
   /// A set of the children of the titles level 3 related to workplace issues.
-  Set<String> childrenTitleLevel3WorkplaceIssue = {};
+  Set<String> childrenOfTitleLevel3WorkplaceIssue = {};
 
   /// A set of the children of the titles level 3 related to a legacy issue.
-  Set<String> childrenTitleLevel3LegacyIssue = {};
+  Set<String> childrenOfTitleLevel3LegacyIssue = {};
 
   /// A set of the text fields only items.
   Set<String> textFieldOnlyItems = {};
@@ -104,13 +104,13 @@ class CAFormUtils
     };
 
     /// A set of the children of the title level 3 related to workplace issues.
-    childrenTitleLevel3WorkplaceIssue = {
+    childrenOfTitleLevel3WorkplaceIssue = {
       q.level3TitleWorkplaceIssueItem1,
       q.level3TitleWorkplaceIssueItem2,
     };
 
     /// A set of the children of the title level 3 related to a legacy issue.
-    childrenTitleLevel3LegacyIssue = {q.level3TitleLegacyIssueItem1};
+    childrenOfTitleLevel3LegacyIssue = {q.level3TitleLegacyIssueItem1};
 
     // A set of the text fields only items
     textFieldOnlyItems = {
