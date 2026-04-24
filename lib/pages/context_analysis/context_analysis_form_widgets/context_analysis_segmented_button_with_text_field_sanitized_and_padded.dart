@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
 
 
-/// {@category Custom widgets}
-/// A customizable segmented button that displays a customizable text field when a value is selected.
-class SegmentedButtonWithTextField extends StatefulWidget 
+/// {@category Context analysis}
+/// A segmented button that displays a text field when a value is selected.
+/// The text field has string sanitization, and removes straight quotes, for CSV export reason. 
+class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget 
 {
   /// The first option of the segmented button.
   final String segButtonTextOption1;
@@ -67,7 +68,7 @@ class SegmentedButtonWithTextField extends StatefulWidget
   final ValueChanged<Set<String>>
   parentSegmentedButtonValueCallBackFunction;
 
-  const SegmentedButtonWithTextField
+  const CASegmentedButtonWithSanitizedAndPaddedTextField
   ({
     super.key,
     required this.segButtonTextOption1,
@@ -92,10 +93,10 @@ class SegmentedButtonWithTextField extends StatefulWidget
   });
 
   @override
-  State<SegmentedButtonWithTextField> createState() => _SegmentedButtonWithTextFieldState();
+  State<CASegmentedButtonWithSanitizedAndPaddedTextField> createState() => _CASegmentedButtonWithSanitizedAndPaddedTextFieldState();
 }
 
-class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextField> 
+class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASegmentedButtonWithSanitizedAndPaddedTextField> 
 {
   Set<String>? _selection;
   String _textFieldValue = "";

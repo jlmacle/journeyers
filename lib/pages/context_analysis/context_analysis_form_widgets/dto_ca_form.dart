@@ -16,7 +16,7 @@ import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dar
 
 /// {@category Context analysis}
 /// A DTO for the context analysis form widget.
-class DTOCaForm 
+class DTOCAForm 
 {
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : beginning ───────────────────────────────────────
   /// The DTOCheckboxWithTextField instance for the question related to the balance between studies and household life.

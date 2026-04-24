@@ -5,13 +5,14 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/widgets/custom/text/custom_focusable_text.dart';
 
 
-/// {@category Custom widgets}
-/// A customizable checkbox that displays a customizable text field when the box is checked.
-class CheckboxWithTextField extends StatefulWidget 
+/// {@category Context analysis}
+/// A checkbox that displays a text field when the box is checked.
+/// The text field has string sanitization, and removes straight quotes, for CSV export reason.
+class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget 
 {
   /// The text of the checkbox.
   final String checkboxText;
@@ -58,7 +59,7 @@ class CheckboxWithTextField extends StatefulWidget
   /// The checkbox-related callback function for the parent widget.
   final ValueChanged<bool?>? onCheckboxValueChanged;
 
-  const CheckboxWithTextField
+  const CACheckboxWithSanitizedAndPaddedTextField
   ({
     super.key,
     required this.checkboxText,
@@ -79,10 +80,10 @@ class CheckboxWithTextField extends StatefulWidget
   });
 
   @override
-  State<CheckboxWithTextField> createState() =>  CheckboxWithTextFieldState();
+  State<CACheckboxWithSanitizedAndPaddedTextField> createState() =>  CACheckboxWithSanitizedAndPaddedTextFieldState();
 }
 
-class CheckboxWithTextFieldState extends State<CheckboxWithTextField> 
+class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWithSanitizedAndPaddedTextField> 
 {
   bool? _isChecked;
   String _textFieldValue = "";
