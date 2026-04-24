@@ -1,5 +1,4 @@
 /// {@category Context analysis}
-/// Consts strings and ints used in the context analysis, and externalized.
 
 
 /// Straight double quotes used to encapsulate the content of answered questions.
