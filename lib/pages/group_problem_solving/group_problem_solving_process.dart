@@ -334,7 +334,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                         child: GPSKeywords
                         (
                           currentKeywords: _currentKeywords,
-                          keywordsUpdatedCallbackFunction: (newKeywords) 
+                          onKeywordsUpdatedCallbackFunction: (newKeywords) 
                           {
                             setState(() {
                               _currentKeywords.clear();
@@ -401,7 +401,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 
         // 3. BOTTOM: Full Width Solution Input Field
         const Divider(height: 1),
-        GPSNewSolution(solutionAddedCallbackFunction: addSolutionToList),
+        GPSNewSolution(onSolutionAddedCallbackFunction: addSolutionToList),
         
         //********** Data saving ************//
         Center
@@ -416,7 +416,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
               ? const Center(child: CircularProgressIndicator())
               : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                   // Defining file name and saving file for mobile platforms 
-                  ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  fileNameSubmittedCallbackFunction: processFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                  ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  onFileNameSubmittedCallbackFunction: processFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   // Saving file for desktop platforms
                   : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
             ],

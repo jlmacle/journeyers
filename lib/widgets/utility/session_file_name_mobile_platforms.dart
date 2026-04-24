@@ -23,7 +23,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   final String fileExtension;
 
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> fileNameSubmittedCallbackFunction;
+  final ValueChanged<String> onFileNameSubmittedCallbackFunction;
 
   /// A callback function called to save context analysis data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
@@ -32,7 +32,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   ({
     super.key,
     required this.fileExtension,
-    required this.fileNameSubmittedCallbackFunction,
+    required this.onFileNameSubmittedCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
@@ -127,7 +127,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
-      onTextFieldValueSubmittedCallbackFunction: widget.fileNameSubmittedCallbackFunction, 
+      onTextFieldValueSubmittedCallbackFunction: widget.onFileNameSubmittedCallbackFunction, 
       additionalOnSubmittedInstructions: 
         (String newValue) async
         {

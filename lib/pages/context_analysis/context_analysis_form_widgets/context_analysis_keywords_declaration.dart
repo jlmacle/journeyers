@@ -7,12 +7,12 @@ import 'package:journeyers/app_themes.dart';
 class CAKeywordsDeclaration extends StatefulWidget 
 {
   /// A callback function called to update the keywords describing a session.
-  final ValueChanged<Set<String>> keywordsUpdatedCallbackFunction;
+  final ValueChanged<Set<String>> onKeywordsUpdatedCallbackFunction;
 
   const CAKeywordsDeclaration
   ({
     super.key,
-    required this.keywordsUpdatedCallbackFunction
+    required this.onKeywordsUpdatedCallbackFunction
   });
 
   @override
@@ -37,7 +37,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
         _keywordsController.clear();
       });
     }
-    widget.keywordsUpdatedCallbackFunction(_keywords);
+    widget.onKeywordsUpdatedCallbackFunction(_keywords);
   }
 
   @override
@@ -92,7 +92,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                             onDeleted: () 
                             {
                               setState( () {_keywords.remove(tag);});
-                              widget.keywordsUpdatedCallbackFunction(_keywords);
+                              widget.onKeywordsUpdatedCallbackFunction(_keywords);
                             }, 
                             deleteIconColor: appBarWhite,
                           )
