@@ -11,7 +11,6 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_and_ints.dart';
 import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
 
 /// {@category Context analysis}
@@ -150,14 +149,14 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       String secondValue = individualPerspectiveItem[1];    
       
       // A title Level 2?: "As an individual: What problem am I trying to solve?", in the case of the individual perspective.
-      if (cafu.titlesLevel2.contains(secondValue)) 
+      if (titlesLevel2.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
         sectionsIndividual["title"] = secondValue;
       }
       // A title level 3?: "A Balance Issue?" for ex.
-      else if (cafu.titlesLevel3ForTheIndividualPerspective.contains(secondValue)) 
+      else if (titlesLevel3ForTheIndividualPerspective.contains(secondValue)) 
       {
         // Adding a new map to the list of the key "questions", with the title level 3 as value for the key "title",
         // and an empty list for the key "items".
@@ -166,11 +165,11 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       }
       // A title level 3 item?: "To balance studies and household life?" for ex.
       // Could be a checkbox or a text field.
-      else if (cafu.mappingLabelsToInputItems.keys.contains(secondValue))
+      else if (mappingLabelsToInputItems.keys.contains(secondValue))
       {
         currentTitleLevel3Item = secondValue;
         // Checking if an 'X' is in front of the title level 3, and if the item is also a checkbox
-        if (firstValue == 'X' && cafu.mappingLabelsToInputItems[currentTitleLevel3Item] == checkbox) 
+        if (firstValue == 'X' && mappingLabelsToInputItems[currentTitleLevel3Item] == checkbox) 
           {checkedBox = true;}
         else 
           {checkedBox = false;}
@@ -179,7 +178,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
         for (var map in sectionsIndividual["questions"])
         {
           // The titles level 3 with sub items are also the ones with checkboxes and text fields
-          if (map["title"] == currentTitleLevel3 && cafu.titlesLevel3WithSubItems.contains(currentTitleLevel3))
+          if (map["title"] == currentTitleLevel3 && titlesLevel3WithSubItems.contains(currentTitleLevel3))
           {
             // Adding a map to the items list, with data related to whether the checkbox is checked or not
             // and an empty value for the "notes" key.
@@ -189,7 +188,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
               {map["items"].add({"text":secondValue, "checked":"", "notes":""});}
           }
           // if no sub items, that should be the text field only
-          else if (map["title"] == currentTitleLevel3 && !cafu.titlesLevel3WithSubItems.contains(currentTitleLevel3))
+          else if (map["title"] == currentTitleLevel3 && !titlesLevel3WithSubItems.contains(currentTitleLevel3))
           {
             // Adding a map to the items list, with the notesTextField with an empty value.
             map["items"].add({"notesTextField":""});
@@ -200,7 +199,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       else 
       {
         // If the current title level 3 has sub items, then a note for a checkbox
-        if (cafu.titlesLevel3WithSubItems.contains(currentTitleLevel3))
+        if (titlesLevel3WithSubItems.contains(currentTitleLevel3))
         {
           for(var map in sectionsIndividual["questions"])
           {
@@ -288,7 +287,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       String secondValue = groupPerspectiveItem[1]; 
 
       // A title Level 2?: "As a member of groups/teams: What problem(s) are we trying to solve?", in the case of the group perspective.
-      if (cafu.titlesLevel2.contains(secondValue)) 
+      if (titlesLevel2.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
@@ -297,7 +296,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
         previousSecondValueFromSegButton = false;        
       }
       // A title level 3?: "What problem(s) are the groups/teams trying to solve?" for ex.
-      else if (cafu.titlesLevel3ForTheGroupPerspective.contains(secondValue)) 
+      else if (titlesLevel3ForTheGroupPerspective.contains(secondValue)) 
       {
         sectionsGroup["questions"].add({"title": secondValue, "items":{}});
         currentTitleLevel3 = secondValue;

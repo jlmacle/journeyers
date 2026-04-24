@@ -12,7 +12,6 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
 /// {@category Context analysis}
 /// A DTO for the context analysis form widget.
@@ -91,32 +90,32 @@ class DTOCAForm
   // Individual perspective
   final individualData = LinkedHashMap<String, Object>.from
   ({
-      cafu.q.level2TitleIndividual: 
+      q.level2TitleIndividual: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        cafu.q.level3TitleBalanceIssue: 
+        q.level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          cafu.q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
-          cafu.q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
-          cafu.q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          cafu.q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
+          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
+          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
+          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
+          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
         }),
 
-        cafu.q.level3TitleWorkplaceIssue: 
+        q.level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          cafu.q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
-          cafu.q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
+          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
+          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
         }),
 
-        cafu.q.level3TitleLegacyIssue: 
+        q.level3TitleLegacyIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          cafu.q.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
+          q.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
         }),
         
-        cafu.q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
+        q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
         ({
           textField: indivAnotherIssueStr,
         }),
@@ -126,18 +125,18 @@ class DTOCAForm
     // Groups/teams perspective
   final groupData = LinkedHashMap<String, Object>.from
     ({
-      cafu.q.level2TitleGroup: 
+      q.level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        cafu.q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
+        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
 
-        cafu.q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
+        q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
 
-        cafu.q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
+        q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
 
-        cafu.q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
+        q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
 
-        cafu.q.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
+        q.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
       }),
     });
 
@@ -254,7 +253,7 @@ class DTOCAForm
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      if (cafu.mappingLabelsToInputItems[itemOrTitleLabel] == checkbox) {
+      if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox) {
         // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
         var checkboxPreCSVData = await checkboxWithTextFieldDataToPreCSV(
           checkboxWithTextFieldData:
@@ -265,7 +264,7 @@ class DTOCAForm
         preCSVData.add(checkboxPreCSVData[1] as List<String>);
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
-      else if (cafu.mappingLabelsToInputItems[itemOrTitleLabel] ==
+      else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
           segmentedButton) {
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
@@ -276,7 +275,7 @@ class DTOCAForm
         preCSVData.add(segmentedButtonPreCSVData[1]);
       }
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
-      else if (cafu.mappingLabelsToInputItems[itemOrTitleLabel] ==
+      else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
           textField) {
         var textFieldpreCSVData = await textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
@@ -288,7 +287,7 @@ class DTOCAForm
         if (csvBuildingDebug) pu.printd("CSV Building");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
-        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${cafu.mappingLabelsToInputItems[itemOrTitleLabel]}");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
         if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
@@ -311,7 +310,7 @@ class DTOCAForm
       preCSVData.add(level3TitlePreCSVData);
 
       // 1. Checking if sub-items exist before starting the processing of the level 3 title data
-      if (cafu.titlesLevel3WithSubItems.contains(level3Title)) {
+      if (titlesLevel3WithSubItems.contains(level3Title)) {
         // Going through the sub items
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
         // A LinkedHashMap as value
@@ -386,12 +385,12 @@ class DTOCAForm
     Map<String, int> indexesOfTitlesLevel3WithChildren = {};
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[1].trim() == cafu.q.level3TitleBalanceIssue) {
-        indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleBalanceIssue] = index;
-      } else if (indexedData[1].trim() == cafu.q.level3TitleWorkplaceIssue) {
-        indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleWorkplaceIssue] = index;
-      } else if (indexedData[1].trim() == cafu.q.level3TitleLegacyIssue) {
-        indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleLegacyIssue] = index;
+      if (indexedData[1].trim() == q.level3TitleBalanceIssue) {
+        indexesOfTitlesLevel3WithChildren[q.level3TitleBalanceIssue] = index;
+      } else if (indexedData[1].trim() == q.level3TitleWorkplaceIssue) {
+        indexesOfTitlesLevel3WithChildren[q.level3TitleWorkplaceIssue] = index;
+      } else if (indexedData[1].trim() == q.level3TitleLegacyIssue) {
+        indexesOfTitlesLevel3WithChildren[q.level3TitleLegacyIssue] = index;
       }
     }
 
@@ -409,25 +408,25 @@ class DTOCAForm
 
         // Adding an X to the parent title level 3
         var previousIndexData_1AsString = previousIndexData[1];
-        if (cafu.childrenOfTitleLevel3BalanceIssue.contains(
+        if (childrenOfTitleLevel3BalanceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleBalanceIssue];
+              indexesOfTitlesLevel3WithChildren[q.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (cafu.childrenOfTitleLevel3WorkplaceIssue.contains(
+        } else if (childrenOfTitleLevel3WorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleWorkplaceIssue];
+              indexesOfTitlesLevel3WithChildren[q.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (cafu.childrenOfTitleLevel3LegacyIssue.contains(
+        } else if (childrenOfTitleLevel3LegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[cafu.q.level3TitleLegacyIssue];
+              indexesOfTitlesLevel3WithChildren[q.level3TitleLegacyIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
         }
@@ -488,7 +487,7 @@ class DTOCAForm
       var indexData_1AsString = indexedData[1];
 
       // Getting the labels that are text field only from textFieldOnlyItems
-      for (String textFieldOnlyItem in cafu.textFieldOnlyItems) {
+      for (String textFieldOnlyItem in textFieldOnlyItems) {
         if (indexData_1AsString.trim() == textFieldOnlyItem) {
           // Checking if the note at the next index has content
           int noteIndex = index + 1;
@@ -514,10 +513,10 @@ class DTOCAForm
 
       if (
       // Found titles level 3
-      (cafu.titlesLevel3ForTheIndividualPerspective.contains(
+      (titlesLevel3ForTheIndividualPerspective.contains(
                 indexData_1AsStringTrimmed,
               ) ||
-              cafu.titlesLevel3ForTheGroupPerspective.contains(
+              titlesLevel3ForTheGroupPerspective.contains(
                 indexData_1AsStringTrimmed,
               )) &&
           // and not yet processed
