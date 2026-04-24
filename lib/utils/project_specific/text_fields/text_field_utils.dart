@@ -21,7 +21,6 @@ class TextFieldUtils
     tfu_gen.TextFieldUtils.containsADot : tfu_gen.TextFieldUtils.errorContainsADot
   }; 
 
-  // ─── MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES ───────────────────────────────────────
-  
+ 
   
 }
