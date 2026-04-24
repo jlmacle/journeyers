@@ -125,7 +125,7 @@ class CheckboxWithTextFieldState extends State<CheckboxWithTextField>
           },
         ),
         if (_isChecked!)
-          TextFieldSanitizedAndPaddedForCA
+          CATextFieldSanitizedAndPadded
           (
             stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
             textFieldStartValue: _textFieldValue,
