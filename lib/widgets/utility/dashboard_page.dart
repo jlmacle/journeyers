@@ -18,8 +18,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
-/// A widget displaying a dashboard of session data.
-/// Assumption concerning the session data structure:
+/// A widget displaying a dashboard of session data, with assumption concerning the session data structure:
 /// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 4:51 PM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
 /// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 PM","filePath":"C:\\Users\\username\\Documents\\a2.ext"}\]
 class DashboardPage extends StatefulWidget 
