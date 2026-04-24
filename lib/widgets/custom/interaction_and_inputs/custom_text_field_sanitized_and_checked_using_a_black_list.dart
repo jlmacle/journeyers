@@ -39,17 +39,16 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// The counter for the text field.
   final InputCounterWidgetBuilder textFieldCounter;
 
-  /// A callback function called when submitting the value.
+  /// A callback function called when submitting the text field value.
   final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
   /// Additional instructions to insert in the onChanged method.
   final ValueChanged<String> additionalOnChangedInstructions;
 
-  /// Additional instructions to insert in the onSubmit method.
+  /// Additional instructions to insert in the onSubmitted method.
   final ValueChanged<String> additionalOnSubmittedInstructions;
 
-  /// A map with functions as keys, and error messages as values.
-  /// The functions return true on a valid input, and false on an invalid input.
+  /// A map with String sanitizer bundles as keys, and error messages as values.
   final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapping;
 
   /// A map with blacklisting functions as keys, and error messages as values.
