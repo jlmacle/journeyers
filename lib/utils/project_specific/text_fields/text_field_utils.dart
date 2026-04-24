@@ -3,7 +3,7 @@ import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart' as t
 
 /// {@category Utils - Project-specific}
 /// A project-specific utility class related to text fields.
-class TextFieldUtils
+class TextFieldstringSanitizerBundlesErrorsMappings
  { 
   // ─── MAP WITH STRING SANITIZER BUNDLES AS KEYS, AND ERROR MESSAGES AS VALUES ───────────────────────────────────────
  

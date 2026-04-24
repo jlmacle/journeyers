@@ -128,7 +128,7 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
         if (_isChecked!)
           CATextFieldSanitizedAndPadded
           (
-            stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
+            stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldstringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
             textFieldStartValue: _textFieldValue,
             textFieldStyle: analysisTextFieldStyle,
             textFieldHint: widget.textFieldHint,
