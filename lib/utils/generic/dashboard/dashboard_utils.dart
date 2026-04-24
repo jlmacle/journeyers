@@ -10,7 +10,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
 /// {@category Utils - Generic}
-/// A generic utility class used for the context analyses dashboard, and for the group problem-solvings dashboard (more to do on the genericity).
+/// A generic utility class used for the context analyses dashboard, and for the group problem-solvings dashboard (more to do on genericity).
 class DashboardUtils {
 
   /// String used to communicate the context of the context analyses.
