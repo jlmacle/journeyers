@@ -23,15 +23,5 @@ class TextFieldUtils
 
   // ─── MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES ───────────────────────────────────────
   
-  /// A map with (CSV files) blacklisting functions as keys, and error messages as values.
-  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForCSVFileNames = 
-  {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsedCSV : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
-  }; 
-
-   /// A map with (TXT files) blacklisting functions as keys, and error messages as values.
-  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForTXTFileNames = 
-  {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsedTXT : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
-  }; 
+  
 }

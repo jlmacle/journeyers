@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart' as tfu_gen;
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart';
@@ -42,6 +43,19 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
 class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePlatforms> 
 {
   final TextEditingController _fileNameController = .new();
+  
+  /// A map with (CSV files) blacklisting functions as keys, and error messages as values.
+  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForCSVFileNames = 
+  {
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsedCSV : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
+  }; 
+
+   /// A map with (TXT files) blacklisting functions as keys, and error messages as values.
+  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForTXTFileNames = 
+  {
+    tfu_gen.TextFieldUtils.fileNameAlreadyUsedTXT : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
+  }; 
+  
   final GlobalKey<_SessionFileNameMobilePlatformsState> errorMessageKey = .new();
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
@@ -126,9 +140,9 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
       stringSanitizerBundlesErrorsMapping: TextFieldUtils.stringSanitizerBundlesErrorsMappingForFileNames,
       blacklistingFunctionsErrorsMapping: 
       (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV) 
-        ? TextFieldUtils.blacklistingFunctionsErrorsMappingForCSVFileNames
+        ? blacklistingFunctionsErrorsMappingForCSVFileNames
         // otherwise .txt
-        : TextFieldUtils.blacklistingFunctionsErrorsMappingForTXTFileNames
+        : blacklistingFunctionsErrorsMappingForTXTFileNames
     );
   }
 }
