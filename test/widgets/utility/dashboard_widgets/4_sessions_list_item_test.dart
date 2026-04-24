@@ -121,7 +121,6 @@ void main() {
             ),
           ),
         );
-
         // Verifies keywords tooltip present
         expect(find.byTooltip(keywordsTooltipLabel), findsOneWidget);      
       });
