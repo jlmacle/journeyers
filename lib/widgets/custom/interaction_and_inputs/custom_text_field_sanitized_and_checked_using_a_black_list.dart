@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc_constants.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -64,7 +64,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.errorMessageKey = const Key('error_msg_key_default'),
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
-    this.textFieldMaxLength = chars10Lines, // 10 lines as a reference
+    this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.presentCounter,
     required this.onTextFieldValueSubmittedCallbackFunction,
     this.additionalOnChangedInstructions = placeHolderFunctionString,

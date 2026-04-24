@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc_constants.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
@@ -73,7 +73,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldPaddingBottom = 10.0,
     this.textFieldMinLines = 1,
     this.textFieldMaxLines = 10,
-    this.textFieldMaxLength = chars1Page, // a page as a reference
+    this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.absentCounter,
     this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
     this.onCheckboxValueChanged = placeHolderFunctionNullableBool,

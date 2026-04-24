@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_ca_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_segmented_button_with_text_field.dart';
@@ -304,7 +304,7 @@ class CAFormState extends State<CAForm>
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
-                textFieldMaxLength: chars1Page,
+                textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.absentCounter,
                 onTextFieldValueSubmittedCallbackFunction: _onAnotherIssueStr, 
               ),
@@ -365,7 +365,7 @@ class CAFormState extends State<CAForm>
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
-                textFieldMaxLength: chars1Page,
+                textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.absentCounter,
                 onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupProblemsToSolveStr = v;},
               ),
