@@ -123,7 +123,7 @@ void main() {
     });
 
 
-    testWidgets('Should call valueSubmittedCallbackFunction if input is valid', (WidgetTester tester) async {
+    testWidgets('Should call onTextFieldValueSubmittedCallbackFunction if input is valid', (WidgetTester tester) async {
       String submittedValue = "";
 
       await tester.pumpWidget(
