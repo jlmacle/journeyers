@@ -1,4 +1,4 @@
-// ─── PERSPECTIVE 1: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
+// ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
 
   // Heading level 2
   /// As an individual: What problem am I trying to solve?
@@ -34,7 +34,7 @@
   /// Is the issue of another type?
   const String level3TitleAnotherIssue = 'Is the issue of another type?';
 
-  // ─── PERSPECTIVE 2: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
+  // ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
   
   // Heading level 2
   /// As a member of groups/teams: What problem(s) are we trying to solve?
