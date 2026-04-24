@@ -92,7 +92,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       else
       {
         itemData += char;
-        if (char == quotesForCSV) inQuotes = !inQuotes;
+        if (char == CAFormTextFieldMiscConstants.quotesForCSV) inQuotes = !inQuotes;
       }      
     }
     // Adding the last item data (no ',' reachable for the last item with the current code)
