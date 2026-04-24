@@ -7,7 +7,7 @@ import 'package:journeyers/widgets/custom/text/custom_focusable_text.dart';
 /// A customizable heading (level 1 to 6).
 class CustomHeading extends StatefulWidget 
 {
-  /// The title of the heading.
+  /// The text of the heading.
   final String headingText;
 
   /// The level of the heading.
