@@ -6,7 +6,8 @@ import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
 
-/// {@category Custom widgets}
+
+/// {@category Context analysis}
 /// A customizable text field with customizable padding.
 /// The text field has string sanitization ability. 
 class CATextFieldSanitizedAndPadded extends StatefulWidget 
