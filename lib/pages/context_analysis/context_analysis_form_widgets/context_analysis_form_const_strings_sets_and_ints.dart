@@ -1,6 +1,5 @@
 // ─── USED IN THE CA FORM ───────────────────────────────────────
 // ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
-
 // Heading level 2
 /// As an individual: What problem am I trying to solve?
 const String level2TitleIndividual = 'As an individual: What problem am I trying to solve?';
@@ -38,7 +37,6 @@ const String level3TitleAnotherIssue = 'Is the issue of another type?';
 
 
 // ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
-
 // Heading level 2
 /// As a member of groups/teams: What problem(s) are we trying to solve?
 const String level2TitleGroup = 'As a member of groups/teams: What problem(s) are we trying to solve?';
@@ -77,6 +75,7 @@ const String segmentedButton = "segmentedButton";
 
 /// Straight double quotes used to encapsulate the content of answered questions.
 const String quotesForCSV = '"';
+
 
 
 // ─── USED IN THE CA TEXT FIELDS ───────────────────────────────────────
