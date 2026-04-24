@@ -7,12 +7,12 @@ import 'package:journeyers/app_themes.dart';
 class GPSNewSolution extends StatefulWidget 
 {
   /// A callback function used to update the list of solutions.
-  final ValueChanged<String> solutionAddedCallbackFunction;
+  final ValueChanged<String> onSolutionAddedCallbackFunction;
 
   const GPSNewSolution
   ({
     super.key,
-    required this.solutionAddedCallbackFunction
+    required this.onSolutionAddedCallbackFunction
   });
 
   @override
@@ -28,7 +28,7 @@ class _GPSNewSolutionState extends State<GPSNewSolution>
   void _submitSolution() {
     if (_solutionController.text.trim().isNotEmpty) {
       // Adding the new solution to the list
-      widget.solutionAddedCallbackFunction(_solutionController.text.trim());
+      widget.onSolutionAddedCallbackFunction(_solutionController.text.trim());
       _solutionController.clear();
     }
   }

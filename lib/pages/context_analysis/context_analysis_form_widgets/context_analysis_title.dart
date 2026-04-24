@@ -7,12 +7,12 @@ import 'package:journeyers/app_themes.dart';
 class CATitle extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> analysisTitleUpdatedCallbackFunction;
+  final ValueChanged<String> onAnalysisTitleUpdatedCallbackFunction;
 
   const CATitle
   ({
     super.key,
-    required this.analysisTitleUpdatedCallbackFunction
+    required this.onAnalysisTitleUpdatedCallbackFunction
   });
 
   @override
@@ -37,7 +37,7 @@ class _CATitleState extends State<CATitle>
           hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,
-        onChanged: widget.analysisTitleUpdatedCallbackFunction,
+        onChanged: widget.onAnalysisTitleUpdatedCallbackFunction,
       ),
     );
   }

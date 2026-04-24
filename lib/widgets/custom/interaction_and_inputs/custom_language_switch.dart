@@ -10,7 +10,7 @@ import 'package:journeyers/utils/generic/l10n/l10n_utils.dart';
 class CustomLanguageSwitch extends StatefulWidget 
 {
   /// The callback function called when a language value is selected.
-  final ValueChanged<String> parentLanguageValueCallBackFunction;
+  final ValueChanged<String> onLanguageSelectedCallBackFunction;
 
   /// The horizontal location of the dropdown menu.
   final MainAxisAlignment languageSwitchMainAxisAlignment;
@@ -18,7 +18,7 @@ class CustomLanguageSwitch extends StatefulWidget
   const CustomLanguageSwitch
   ({
     super.key,
-    required this.parentLanguageValueCallBackFunction,
+    required this.onLanguageSelectedCallBackFunction,
     // By default, the language menu is on the right side of the screen
     this.languageSwitchMainAxisAlignment = MainAxisAlignment.end,
   });
@@ -78,7 +78,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
             }).toList(),
             onSelected: (String? newValue) 
             {
-              if (newValue != null) widget.parentLanguageValueCallBackFunction(newValue);
+              if (newValue != null) widget.onLanguageSelectedCallBackFunction(newValue);
             },
           ),
         ),

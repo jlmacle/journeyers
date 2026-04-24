@@ -167,10 +167,10 @@ class CAProcessState extends State<CAProcess>
             ),
 
             // Text field for the analysis title
-            CATitle(analysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
+            CATitle(onAnalysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
             
             // Keywords
-            CAKeywordsDeclaration(keywordsUpdatedCallbackFunction: keywordsUpdate),
+            CAKeywordsDeclaration(onKeywordsUpdatedCallbackFunction: keywordsUpdate),
             
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
@@ -219,7 +219,7 @@ class CAProcessState extends State<CAProcess>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? SessionFileNameMobilePlatforms(fileExtension: fileExtension, fileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        ? SessionFileNameMobilePlatforms(fileExtension: fileExtension, onFileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                         // Saving file for desktop platforms
                         : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   ),

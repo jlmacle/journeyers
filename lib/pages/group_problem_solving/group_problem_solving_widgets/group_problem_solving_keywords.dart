@@ -10,13 +10,13 @@ class GPSKeywords extends StatefulWidget
   final Set<String> currentKeywords;
 
   /// A callback function called to update the keywords describing a session.
-  final ValueChanged<Set<String>> keywordsUpdatedCallbackFunction;  
+  final ValueChanged<Set<String>> onKeywordsUpdatedCallbackFunction;  
 
   const GPSKeywords
   ({
     super.key,
     required this.currentKeywords,
-    required this.keywordsUpdatedCallbackFunction
+    required this.onKeywordsUpdatedCallbackFunction
   });
 
 
@@ -46,7 +46,7 @@ class _GPSKeywordsState extends State<GPSKeywords>
         localSetState(() {});
       }
       
-      widget.keywordsUpdatedCallbackFunction(_keywords!);
+      widget.onKeywordsUpdatedCallbackFunction(_keywords!);
     }
   }
 
@@ -178,7 +178,7 @@ class _GPSKeywordsState extends State<GPSKeywords>
                                         {
                                           setState( () {_keywords!.remove(tag);});
                                           setLocalState(() {});
-                                          widget.keywordsUpdatedCallbackFunction(_keywords!);
+                                          widget.onKeywordsUpdatedCallbackFunction(_keywords!);
                                         }, 
                                         deleteIconColor: appBarWhite,
                                       )
