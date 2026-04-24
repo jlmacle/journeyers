@@ -90,32 +90,32 @@ class DTOCAForm
   // Individual perspective
   final individualData = LinkedHashMap<String, Object>.from
   ({
-      q.level2TitleIndividual: 
+      level2TitleIndividual: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        q.level3TitleBalanceIssue: 
+        level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
-          q.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
-          q.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          q.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
+          level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
+          level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
+          level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
+          level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
         }),
 
-        q.level3TitleWorkplaceIssue: 
+        level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
-          q.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
+          level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
+          level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
         }),
 
-        q.level3TitleLegacyIssue: 
+        level3TitleLegacyIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          q.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
+          level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
         }),
         
-        q.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
+        level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
         ({
           textField: indivAnotherIssueStr,
         }),
@@ -125,18 +125,18 @@ class DTOCAForm
     // Groups/teams perspective
   final groupData = LinkedHashMap<String, Object>.from
     ({
-      q.level2TitleGroup: 
+      level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        q.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
+        level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
 
-        q.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
+        level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
 
-        q.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
+        level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
 
-        q.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
+        level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
 
-        q.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
+        level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
       }),
     });
 
@@ -385,12 +385,12 @@ class DTOCAForm
     Map<String, int> indexesOfTitlesLevel3WithChildren = {};
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[1].trim() == q.level3TitleBalanceIssue) {
-        indexesOfTitlesLevel3WithChildren[q.level3TitleBalanceIssue] = index;
-      } else if (indexedData[1].trim() == q.level3TitleWorkplaceIssue) {
-        indexesOfTitlesLevel3WithChildren[q.level3TitleWorkplaceIssue] = index;
-      } else if (indexedData[1].trim() == q.level3TitleLegacyIssue) {
-        indexesOfTitlesLevel3WithChildren[q.level3TitleLegacyIssue] = index;
+      if (indexedData[1].trim() == level3TitleBalanceIssue) {
+        indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue] = index;
+      } else if (indexedData[1].trim() == level3TitleWorkplaceIssue) {
+        indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue] = index;
+      } else if (indexedData[1].trim() == level3TitleLegacyIssue) {
+        indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue] = index;
       }
     }
 
@@ -412,21 +412,21 @@ class DTOCAForm
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[q.level3TitleBalanceIssue];
+              indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
         } else if (childrenOfTitleLevel3WorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[q.level3TitleWorkplaceIssue];
+              indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
         } else if (childrenOfTitleLevel3LegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[q.level3TitleLegacyIssue];
+              indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
         }
