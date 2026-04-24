@@ -43,7 +43,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
 class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePlatforms> 
 {
   final TextEditingController _fileNameController = .new();
-  
+
   /// A map with (CSV files) blacklisting functions as keys, and error messages as values.
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForCSVFileNames = 
   {
@@ -137,7 +137,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
             await upu.reload();
           }
         },
-      stringSanitizerBundlesErrorsMapping: TextFieldUtils.stringSanitizerBundlesErrorsMappingForFileNames,
+      stringSanitizerBundlesErrorsMapping: TextFieldstringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForFileNames,
       blacklistingFunctionsErrorsMapping: 
       (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV) 
         ? blacklistingFunctionsErrorsMappingForCSVFileNames
