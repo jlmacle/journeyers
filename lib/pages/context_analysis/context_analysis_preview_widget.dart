@@ -3,15 +3,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_text_field_misc_constants.dart';
-import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
 import 'package:path/path.dart' as path;
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/_context_analysis_form_text_field_misc_constants.dart';
 import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
 
 /// {@category Context analysis}
@@ -97,7 +97,6 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
     }
     // Adding the last item data (no ',' reachable for the last item with the current code)
     data.add(itemData);
-    print("data: $data");
 
     return data;
   }
