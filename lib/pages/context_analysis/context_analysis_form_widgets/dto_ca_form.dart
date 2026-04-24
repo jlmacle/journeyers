@@ -7,11 +7,11 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_sets_maps_and_ints.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
 /// {@category Context analysis}
 /// A DTO for the context analysis form widget.
@@ -66,16 +66,16 @@ class DTOCAForm
   // The text value is omitted (left empty) when the checkbox is unchecked.
   LinkedHashMap<String, String> _checkboxDataToMap(DTOCheckboxWithTextField f) =>
       LinkedHashMap<String, String>.from({
-        checkbox:  '${f.checked}',
-        textField: f.checked ? f.text : '',
+        qf.keyCheckbox:  '${f.checked}',
+        qf.keyTextField: f.checked ? f.text : '',
       });
 
   // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
   // Both values are omitted (left empty) when nothing is selected.
   LinkedHashMap<String, String> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) =>
       LinkedHashMap<String, String>.from({
-        segmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
-        textField:       f.selection.isNotEmpty ? f.text : '',
+        qf.keySegmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
+        qf.keyTextField:       f.selection.isNotEmpty ? f.text : '',
         });
 
   // Serialises a segmented-button selection to a slash-separated string.
@@ -90,34 +90,34 @@ class DTOCAForm
   // Individual perspective
   final individualData = LinkedHashMap<String, Object>.from
   ({
-      level2TitleIndividual: 
+      qf.level2TitleIndividual: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        level3TitleBalanceIssue: 
+        qf.level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
-          level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
-          level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
+          qf.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
+          qf.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
+          qf.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
+          qf.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
         }),
 
-        level3TitleWorkplaceIssue: 
+        qf.level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
-          level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
+          qf.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
+          qf.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
         }),
 
-        level3TitleLegacyIssue: 
+        qf.level3TitleLegacyIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
+          qf.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
         }),
         
-        level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
+        qf.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
         ({
-          textField: indivAnotherIssueStr,
+          qf.keyTextField: indivAnotherIssueStr,
         }),
       }),
     });
@@ -125,18 +125,18 @@ class DTOCAForm
     // Groups/teams perspective
   final groupData = LinkedHashMap<String, Object>.from
     ({
-      level2TitleGroup: 
+      qf.level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({textField: groupProblemsToSolveStr}),
+        qf.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({qf.keyTextField: groupProblemsToSolveStr}),
 
-        level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
+        qf.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
 
-        level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
+        qf.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
 
-        level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
+        qf.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
 
-        level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
+        qf.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
       }),
     });
 
@@ -164,13 +164,13 @@ class DTOCAForm
     List<Object> checkboxPreCSVData = [];
 
     // checkbox data converted from bool to String: values can be "true" or "false"
-    var dataCheckbox = "${checkboxWithTextFieldData[checkbox]}";
+    var dataCheckbox = "${checkboxWithTextFieldData[qf.keyCheckbox]}";
     var data1 = [
-      checkbox,
+      qf.keyCheckbox,
       dataCheckbox,
     ]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    String dataTextField = (checkboxWithTextFieldData[textField] ?? "") as String;
+    String dataTextField = (checkboxWithTextFieldData[qf.keyTextField] ?? "") as String;
     var data2 = [
       notes,
       quotesForCSV + dataTextField + quotesForCSV,
@@ -206,11 +206,11 @@ class DTOCAForm
     List<List<String>> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
-        segmentedButtonWithTextFieldData[segmentedButton] ?? "";
-    var data1 = [segmentedButton, dataSegmentedButton];
+        segmentedButtonWithTextFieldData[qf.keySegmentedButton] ?? "";
+    var data1 = [qf.keySegmentedButton, dataSegmentedButton];
 
     var dataTextField =
-        segmentedButtonWithTextFieldData[textField] as String;
+        segmentedButtonWithTextFieldData[qf.keyTextField] as String;
     List<String> data2 = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
@@ -228,7 +228,7 @@ class DTOCAForm
   {
     List<List<String>> textFieldPreCSVData = [];
 
-    var dataTextField = textFieldData[textField] as String;
+    var dataTextField = textFieldData[qf.keyTextField] as String;
     List<String> data = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     textFieldPreCSVData.add(data);
@@ -253,7 +253,7 @@ class DTOCAForm
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      if (mappingLabelsToInputItems[itemOrTitleLabel] == checkbox) {
+      if (qf.mappingLabelsToInputItems[itemOrTitleLabel] == qf.keyCheckbox) {
         // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
         var checkboxPreCSVData = await checkboxWithTextFieldDataToPreCSV(
           checkboxWithTextFieldData:
@@ -264,8 +264,8 @@ class DTOCAForm
         preCSVData.add(checkboxPreCSVData[1] as List<String>);
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
-      else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
-          segmentedButton) {
+      else if (qf.mappingLabelsToInputItems[itemOrTitleLabel] ==
+          qf.keySegmentedButton) {
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
@@ -275,8 +275,8 @@ class DTOCAForm
         preCSVData.add(segmentedButtonPreCSVData[1]);
       }
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
-      else if (mappingLabelsToInputItems[itemOrTitleLabel] ==
-          textField) {
+      else if (qf.mappingLabelsToInputItems[itemOrTitleLabel] ==
+          qf.keyTextField) {
         var textFieldpreCSVData = await textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
         );
@@ -287,7 +287,7 @@ class DTOCAForm
         if (csvBuildingDebug) pu.printd("CSV Building");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
-        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${mappingLabelsToInputItems[itemOrTitleLabel]}");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${qf.mappingLabelsToInputItems[itemOrTitleLabel]}");
         if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
@@ -310,7 +310,7 @@ class DTOCAForm
       preCSVData.add(level3TitlePreCSVData);
 
       // 1. Checking if sub-items exist before starting the processing of the level 3 title data
-      if (titlesLevel3WithSubItems.contains(level3Title)) {
+      if (qf.titlesLevel3WithSubItems.contains(level3Title)) {
         // Going through the sub items
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
         // A LinkedHashMap as value
@@ -369,7 +369,7 @@ class DTOCAForm
 
       // Removal of all [checkbox, "false"] (unchecked boxes)
       // Removal of all ["Notes:",]  if related to an unchecked checkbox
-      if ((indexedData[0].contains(checkbox)) &&
+      if ((indexedData[0].contains(qf.keyCheckbox)) &&
           (indexData_1AsString.trim() == "false")) {
         preCSVData.removeAt(index);
         // The index now points to the following note
@@ -385,12 +385,12 @@ class DTOCAForm
     Map<String, int> indexesOfTitlesLevel3WithChildren = {};
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[1].trim() == level3TitleBalanceIssue) {
-        indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue] = index;
-      } else if (indexedData[1].trim() == level3TitleWorkplaceIssue) {
-        indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue] = index;
-      } else if (indexedData[1].trim() == level3TitleLegacyIssue) {
-        indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue] = index;
+      if (indexedData[1].trim() == qf.level3TitleBalanceIssue) {
+        indexesOfTitlesLevel3WithChildren[qf.level3TitleBalanceIssue] = index;
+      } else if (indexedData[1].trim() == qf.level3TitleWorkplaceIssue) {
+        indexesOfTitlesLevel3WithChildren[qf.level3TitleWorkplaceIssue] = index;
+      } else if (indexedData[1].trim() == qf.level3TitleLegacyIssue) {
+        indexesOfTitlesLevel3WithChildren[qf.level3TitleLegacyIssue] = index;
       }
     }
 
@@ -399,7 +399,7 @@ class DTOCAForm
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
-      if ((indexedData[0].contains(checkbox)) &&
+      if ((indexedData[0].contains(qf.keyCheckbox)) &&
           (indexData_1AsString.trim() == "true")) {
         // Adding X in front of the question
         // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
@@ -408,25 +408,25 @@ class DTOCAForm
 
         // Adding an X to the parent title level 3
         var previousIndexData_1AsString = previousIndexData[1];
-        if (childrenOfTitleLevel3BalanceIssue.contains(
+        if (qf.childrenOfTitleLevel3BalanceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[level3TitleBalanceIssue];
+              indexesOfTitlesLevel3WithChildren[qf.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (childrenOfTitleLevel3WorkplaceIssue.contains(
+        } else if (qf.childrenOfTitleLevel3WorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[level3TitleWorkplaceIssue];
+              indexesOfTitlesLevel3WithChildren[qf.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (childrenOfTitleLevel3LegacyIssue.contains(
+        } else if (qf.childrenOfTitleLevel3LegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[level3TitleLegacyIssue];
+              indexesOfTitlesLevel3WithChildren[qf.level3TitleLegacyIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
         }
@@ -438,7 +438,7 @@ class DTOCAForm
     // All the analysis is feasible in one loop, in spite of the removal effect on the indexes
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[0].contains(checkbox)) {
+      if (indexedData[0].contains(qf.keyCheckbox)) {
         preCSVData.removeAt(index);
       }
     }
@@ -452,7 +452,7 @@ class DTOCAForm
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
 
-      if (indexedData[0].contains(segmentedButton)) {
+      if (indexedData[0].contains(qf.keySegmentedButton)) {
         if (indexData_1AsString.trim() != "") {
           // Removing segmentedButton from the data written
           indexedData[0] = "";
@@ -473,7 +473,7 @@ class DTOCAForm
       // segmentedButton has already been removed from the answered segmented buttons
       // and replaced with ""
       // Removing all remaining preCSVData lines with segmentedButton
-      if (indexedData[0].contains(segmentedButton)) {
+      if (indexedData[0].contains(qf.keySegmentedButton)) {
         preCSVData.removeAt(index);
         // The index now points to the following note
         preCSVData.removeAt(index);
@@ -487,7 +487,7 @@ class DTOCAForm
       var indexData_1AsString = indexedData[1];
 
       // Getting the labels that are text field only from textFieldOnlyItems
-      for (String textFieldOnlyItem in textFieldOnlyItems) {
+      for (String textFieldOnlyItem in qf.textFieldOnlyItems) {
         if (indexData_1AsString.trim() == textFieldOnlyItem) {
           // Checking if the note at the next index has content
           int noteIndex = index + 1;
@@ -513,10 +513,10 @@ class DTOCAForm
 
       if (
       // Found titles level 3
-      (titlesLevel3ForTheIndividualPerspective.contains(
+      (qf.titlesLevel3ForTheIndividualPerspective.contains(
                 indexData_1AsStringTrimmed,
               ) ||
-              titlesLevel3ForTheGroupPerspective.contains(
+              qf.titlesLevel3ForTheGroupPerspective.contains(
                 indexData_1AsStringTrimmed,
               )) &&
           // and not yet processed
