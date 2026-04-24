@@ -12,7 +12,8 @@ Illustrational value should be findable in the utils, widgets, and testing files
 The dashboard supports previewing, sorting by title/date, keyword filtering and deletion.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
 An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
-Additional effort needs to be done for the accessibility.<br>
+At the time of writing, more features are planned, <br>
+and additional effort needs to be done for the accessibility.<br>
 <br>
 Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods</a>" level is planned, <br>
 as part of the app development growth process.<br>
