@@ -8,9 +8,8 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 
 /// {@category Custom widgets}
 /// A customizable text field with customizable padding.
-/// An error message is displayed if a straight double quote is entered in the text field.
-/// Also, the straight double quote is automatically removed from the text field.
-class TextFieldSanitizedAndPaddedForCA extends StatefulWidget 
+/// The text field has string sanitization ability. 
+class CATextFieldSanitizedAndPadded extends StatefulWidget 
 {
   /// If the text field maintains state, when the CheckboxWithTextField instance is unchecked for example.
   final bool maintainState;
@@ -61,7 +60,7 @@ class TextFieldSanitizedAndPaddedForCA extends StatefulWidget
   /// The bottom padding for the text field.
   final double paddingBottom;
 
-  const TextFieldSanitizedAndPaddedForCA
+  const CATextFieldSanitizedAndPadded
   ({
     super.key,
     this.maintainState = true,
@@ -83,12 +82,12 @@ class TextFieldSanitizedAndPaddedForCA extends StatefulWidget
   });
 
   @override
-  State<TextFieldSanitizedAndPaddedForCA> createState() => _TextFieldSanitizedAndPaddedForCAState();
+  State<CATextFieldSanitizedAndPadded> createState() => _CATextFieldSanitizedAndPaddedState();
 }
 
-class _TextFieldSanitizedAndPaddedForCAState extends State<TextFieldSanitizedAndPaddedForCA> 
+class _CATextFieldSanitizedAndPaddedState extends State<CATextFieldSanitizedAndPadded> 
 {
-  final GlobalKey<_TextFieldSanitizedAndPaddedForCAState> textFieldBeforeErrorMessageKey = GlobalKey();
+  final GlobalKey<_CATextFieldSanitizedAndPaddedState> textFieldBeforeErrorMessageKey = GlobalKey();
   TextEditingController textFieldEditingController = .new();
 
   @override

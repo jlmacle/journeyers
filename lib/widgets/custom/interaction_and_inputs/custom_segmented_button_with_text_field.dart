@@ -158,7 +158,7 @@ class _SegmentedButtonWithTextFieldState extends State<SegmentedButtonWithTextFi
           (
             padding: EdgeInsets.only(left: widget.textFieldPaddingHorizontal, right: widget.textFieldPaddingHorizontal, bottom: widget.textFieldPaddingBottom),
             child: 
-            TextFieldSanitizedAndPaddedForCA
+            CATextFieldSanitizedAndPadded
             (
               stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
               textFieldStartValue: _textFieldValue,

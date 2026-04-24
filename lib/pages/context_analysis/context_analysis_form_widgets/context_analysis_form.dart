@@ -19,8 +19,8 @@ import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj; 
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_with_text_field.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 
@@ -297,7 +297,7 @@ class CAFormState extends State<CAForm>
                 headingText: q.level3TitleAnotherIssue,
                 headingLevel: 3,
                 ),
-              TextFieldSanitizedAndPaddedForCA
+              CATextFieldSanitizedAndPadded
               (
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldUtils.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
@@ -358,7 +358,7 @@ class CAFormState extends State<CAForm>
                 headingText: q.level3TitleGroupsProblematics,
                 headingLevel: 3,
               ),
-              TextFieldSanitizedAndPaddedForCA
+              CATextFieldSanitizedAndPadded
               (
                 textFieldStartValue: widget.dtoCAForm.groupProblemsToSolveStr,
                 textFieldHint: pleaseDescribeTextGroupsHint,
