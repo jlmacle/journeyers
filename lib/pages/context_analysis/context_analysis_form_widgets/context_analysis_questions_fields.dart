@@ -1,6 +1,6 @@
 /// {@category Context analysis}
 
-
+/// A class with fields related to the questions of the context analysis.
 class CAQuestionsFields
 {
   // ─── USED IN THE CA FORM ───────────────────────────────────────
@@ -81,32 +81,32 @@ class CAQuestionsFields
 
 
   // ─── USED IN THE CA FORM DTO AND IN THE CA PREVIEW WIDGET ───────────────────────────────────────
-  // A mapping of question labels with the type of input items 
-  // (text field, checkbox with text field, segmented button with text field) used to answer.
+  /// A mapping of question labels with the type of input items 
+  /// (text field, checkbox with text field, segmented button with text field) used to answer.
   Map<String, String> mappingLabelsToInputItems = {};
 
-  // A set of the titles level 2.
+  /// A set of the titles level 2.
   Set<String> titlesLevel2 = {};
 
-  // A set of the titles level 3 related to an individual perspective.
+  /// A set of the titles level 3 related to an individual perspective.
   Set<String> titlesLevel3ForTheIndividualPerspective = {};
 
-  // A set of the titles level 3 related to a group/team perspective.
+  /// A set of the titles level 3 related to a group/team perspective.
   Set<String> titlesLevel3ForTheGroupPerspective = {};
 
-  // A set of the titles level 3 with sub items.
+  /// A set of the titles level 3 with sub items.
   Set<String> titlesLevel3WithSubItems = {};
 
-  // A set of the children of the title level 3 related to balance issues.
+  /// A set of the children of the title level 3 related to balance issues.
   Set<String> childrenOfTitleLevel3BalanceIssue = {};
 
-  // A set of the children of the title level 3 related to workplace issues.
+  /// A set of the children of the title level 3 related to workplace issues.
   Set<String> childrenOfTitleLevel3WorkplaceIssue = {};
 
-  // A set of the children of the title level 3 related to a legacy issue.
+  /// A set of the children of the title level 3 related to a legacy issue.
   Set<String> childrenOfTitleLevel3LegacyIssue = {};
 
-  // A set of the text fields only items
+  /// A set of the text fields only items
   Set<String> textFieldOnlyItems = {};
 
   CAQuestionsFields()
