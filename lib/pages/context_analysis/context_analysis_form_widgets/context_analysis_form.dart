@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_const_strings_sets_and_ints.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_form_questions.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_ca_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_segmented_button_with_text_field.dart';
@@ -50,7 +49,6 @@ class CAForm extends StatefulWidget
 
 class CAFormState extends State<CAForm> 
 {
-  final CAFormQuestions q = CAFormQuestions();
 
   // ─── ACCESSIBILITY related data ───────────────────────────────────────
   // Data related to the folding/unfolding of the expansion tiles
@@ -181,7 +179,7 @@ class CAFormState extends State<CAForm>
             title:             
             CustomHeading
             (
-              headingText: q.level2TitleIndividual,
+              headingText: level2TitleIndividual,
               headingLevel: 2,
             ),
             children: <Widget>
@@ -191,12 +189,12 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: balanceIssueHeadingKey,
-                headingText: q.level3TitleBalanceIssue,
+                headingText: level3TitleBalanceIssue,
                 headingLevel: 3,
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleBalanceIssueItem1,
+                checkboxText: level3TitleBalanceIssueItem1,
                 // Initializing the checkbox value with the DTO's value
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceStudiesHousehold.checked,
                 // Initializing the text field value with the DTO's value
@@ -209,7 +207,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleBalanceIssueItem2,
+                checkboxText: level3TitleBalanceIssueItem2,
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
@@ -218,7 +216,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleBalanceIssueItem3,
+                checkboxText: level3TitleBalanceIssueItem3,
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
@@ -227,7 +225,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleBalanceIssueItem4,
+                checkboxText: level3TitleBalanceIssueItem4,
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
@@ -243,12 +241,12 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: workplaceIssueHeadingKey,
-                headingText: q.level3TitleWorkplaceIssue,
+                headingText: level3TitleWorkplaceIssue,
                 headingLevel: 3,
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleWorkplaceIssueItem1,
+                checkboxText: level3TitleWorkplaceIssueItem1,
                 checkboxIsChecked: widget.dtoCAForm.indivAtWorkMoreAppreciated.checked,
                 textFieldStartValue: widget.dtoCAForm.indivAtWorkMoreAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
@@ -257,7 +255,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleWorkplaceIssueItem2,
+                checkboxText: level3TitleWorkplaceIssueItem2,
                 checkboxIsChecked: widget.dtoCAForm.indivAtWorkRemainingAppreciated.checked,
                 textFieldStartValue: widget.dtoCAForm.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
@@ -273,12 +271,12 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: legacyIssueHeadingKey,
-                headingText: q.level3TitleLegacyIssue,
+                headingText: level3TitleLegacyIssue,
                 headingLevel: 3,
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: q.level3TitleLegacyIssueItem1,
+                checkboxText: level3TitleLegacyIssueItem1,
                 checkboxIsChecked: widget.dtoCAForm.indivBetterLegacies.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBetterLegacies.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
@@ -294,7 +292,7 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: anotherIssueHeadingKey,
-                headingText: q.level3TitleAnotherIssue,
+                headingText: level3TitleAnotherIssue,
                 headingLevel: 3,
                 ),
               CATextFieldSanitizedAndPadded
@@ -346,7 +344,7 @@ class CAFormState extends State<CAForm>
             title:              
             CustomHeading
             (
-              headingText: q.level2TitleGroup,
+              headingText: level2TitleGroup,
               headingLevel: 2,
             ),
             children: <Widget>
@@ -355,7 +353,7 @@ class CAFormState extends State<CAForm>
               // Question about the group problems
               CustomHeading
               (
-                headingText: q.level3TitleGroupsProblematics,
+                headingText: level3TitleGroupsProblematics,
                 headingLevel: 3,
               ),
               CATextFieldSanitizedAndPadded
@@ -375,7 +373,7 @@ class CAFormState extends State<CAForm>
               // Question about the same problems
               CustomHeading
               (
-                headingText: q.level3TitleSameProblem,
+                headingText: level3TitleSameProblem,
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
@@ -400,7 +398,7 @@ class CAFormState extends State<CAForm>
               // Question about harmony at home
               CustomHeading
               (
-                headingText: q.level3TitleHarmonyAtHome,
+                headingText: level3TitleHarmonyAtHome,
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
@@ -425,7 +423,7 @@ class CAFormState extends State<CAForm>
               // Question about appreciability at work
               CustomHeading
               (
-                headingText: q.level3TitleAppreciabilityAtWork,
+                headingText: level3TitleAppreciabilityAtWork,
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
@@ -450,7 +448,7 @@ class CAFormState extends State<CAForm>
               // Question about the earning ability
               CustomHeading
               (
-                headingText: q.level3TitleIncomeEarningAbility,
+                headingText: level3TitleIncomeEarningAbility,
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
