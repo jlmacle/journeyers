@@ -1,66 +1,68 @@
 // ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
 
-  // Heading level 2
-  /// As an individual: What problem am I trying to solve?
-  const String level2TitleIndividual = 'As an individual: What problem am I trying to solve?';
+// Heading level 2
+/// As an individual: What problem am I trying to solve?
+const String level2TitleIndividual = 'As an individual: What problem am I trying to solve?';
 
-  // Heading level 3 and sub items
-  /// A Balance Issue?
-  const String level3TitleBalanceIssue = 'A Balance Issue?';
-  /// To balance studies and household life?
-  const String level3TitleBalanceIssueItem1 = 'To balance studies and household life?';
-  /// To balance accessing income and household life?
-  const String level3TitleBalanceIssueItem2 = 'To balance accessing income and household life?';
-  /// To balance earning an income and household life?
-  const String level3TitleBalanceIssueItem3 = 'To balance earning an income and household life?';
-  /// To balance helping others and household life?
-  const String level3TitleBalanceIssueItem4 = 'To balance helping others and household life?';
+// Heading level 3 and sub items
+/// A Balance Issue?
+const String level3TitleBalanceIssue = 'A Balance Issue?';
+/// To balance studies and household life?
+const String level3TitleBalanceIssueItem1 = 'To balance studies and household life?';
+/// To balance accessing income and household life?
+const String level3TitleBalanceIssueItem2 = 'To balance accessing income and household life?';
+/// To balance earning an income and household life?
+const String level3TitleBalanceIssueItem3 = 'To balance earning an income and household life?';
+/// To balance helping others and household life?
+const String level3TitleBalanceIssueItem4 = 'To balance helping others and household life?';
 
-  // Heading level 3 and sub items
-  /// A Workplace Issue?
-  const String level3TitleWorkplaceIssue = 'A Workplace Issue?';
-  /// To solve a need to be more appreciated at work?
-  const String level3TitleWorkplaceIssueItem1 = 'To solve a need to be more appreciated at work?';
-  /// To solve a need to remain appreciated at work?
-  const String level3TitleWorkplaceIssueItem2 = 'To solve a need to remain appreciated at work?';
+// Heading level 3 and sub items
+/// A Workplace Issue?
+const String level3TitleWorkplaceIssue = 'A Workplace Issue?';
+/// To solve a need to be more appreciated at work?
+const String level3TitleWorkplaceIssueItem1 = 'To solve a need to be more appreciated at work?';
+/// To solve a need to remain appreciated at work?
+const String level3TitleWorkplaceIssueItem2 = 'To solve a need to remain appreciated at work?';
 
-  // Heading level 3 and sub items
-  /// A Legacy Issue?
-  const String level3TitleLegacyIssue = 'A Legacy Issue?';
-  /// To have better legacies to leave to our children/others?
-  const String level3TitleLegacyIssueItem1 = 'To have better legacies to leave to our children/others?';
+// Heading level 3 and sub items
+/// A Legacy Issue?
+const String level3TitleLegacyIssue = 'A Legacy Issue?';
+/// To have better legacies to leave to our children/others?
+const String level3TitleLegacyIssueItem1 = 'To have better legacies to leave to our children/others?';
 
-  // Heading level 3 without sub items
-  /// Is the issue of another type?
-  const String level3TitleAnotherIssue = 'Is the issue of another type?';
+// Heading level 3 without sub items
+/// Is the issue of another type?
+const String level3TitleAnotherIssue = 'Is the issue of another type?';
 
-  // ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
-  
-  // Heading level 2
-  /// As a member of groups/teams: What problem(s) are we trying to solve?
-  const String level2TitleGroup = 'As a member of groups/teams: What problem(s) are we trying to solve?';
+// ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
 
-  // Heading level 3 without sub items
-  /// What problem(s) are the groups/teams trying to solve?
-  const String level3TitleGroupsProblematics = 'What problem(s) are the groups/teams trying to solve?';
+// Heading level 2
+/// As a member of groups/teams: What problem(s) are we trying to solve?
+const String level2TitleGroup = 'As a member of groups/teams: What problem(s) are we trying to solve?';
 
-  // Heading level 3 without sub items
-  /// Am I trying to solve the same problem(s) as my groups/teams?
-  const String level3TitleSameProblem = 'Am I trying to solve the same problem(s) as my groups/teams?';
+// Heading level 3 without sub items
+/// What problem(s) are the groups/teams trying to solve?
+const String level3TitleGroupsProblematics = 'What problem(s) are the groups/teams trying to solve?';
 
-  // Heading level 3 without sub items
-  /// Is entering the group problem-solving process consistent with harmony at home?
-  const String level3TitleHarmonyAtHome = 'Is entering the group problem-solving process consistent with harmony at home?';
+// Heading level 3 without sub items
+/// Am I trying to solve the same problem(s) as my groups/teams?
+const String level3TitleSameProblem = 'Am I trying to solve the same problem(s) as my groups/teams?';
 
-  // Heading level 3 without sub items
-  /// Is entering the group problem-solving process consistent with appreciability at work?
-  const String level3TitleAppreciabilityAtWork = 'Is entering the group problem-solving process consistent with appreciability at work?';
+// Heading level 3 without sub items
+/// Is entering the group problem-solving process consistent with harmony at home?
+const String level3TitleHarmonyAtHome = 'Is entering the group problem-solving process consistent with harmony at home?';
 
-  // Heading level 3 without sub items
-  /// Is entering the group problem-solving process consistent with my income earning ability?
-  const String level3TitleIncomeEarningAbility = 'Is entering the group problem-solving process consistent with my income earning ability?';
+// Heading level 3 without sub items
+/// Is entering the group problem-solving process consistent with appreciability at work?
+const String level3TitleAppreciabilityAtWork = 'Is entering the group problem-solving process consistent with appreciability at work?';
 
-// ─── USED IN THE CA FORM DTO ───────────────────────────────────────
+// Heading level 3 without sub items
+/// Is entering the group problem-solving process consistent with my income earning ability?
+const String level3TitleIncomeEarningAbility = 'Is entering the group problem-solving process consistent with my income earning ability?';
+
+
+
+// ─── USED IN THE CA FORM DTO AND/OR THIS FILE ───────────────────────────────────────
 /// A util used to label checkbox data.
 const String checkbox = "checkbox";
 
@@ -82,7 +84,7 @@ const int chars10Lines = 1560;
 /// A number of characters used to represent 1 page of text field input on a computer.
 const int chars1Page = 7330; 
 
-// ─── USED IN THE CA TEXT FIELDS ───────────────────────────────────────
+
 
 
 
