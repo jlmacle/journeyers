@@ -4,7 +4,7 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
-/// A widget handling the sorting by keywords of session data.
+/// A widget handling the filtering by keywords of session data.
 class DashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List storing all available session data.
