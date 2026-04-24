@@ -80,7 +80,6 @@ const String quotesForCSV = '"';
 
 
 // ─── USED IN THE CA TEXT FIELDS ───────────────────────────────────────
-
 /// A number of characters used to represent 10 lines of text field input on a computer.
 const int chars10Lines = 1560;
 
@@ -90,7 +89,6 @@ const int chars1Page = 7330;
 
 
 // ─── USED IN THE CA FORM DTO AND IN THE CA PREVIEW WIDGET ───────────────────────────────────────
-
 /// A mapping of question labels with the type of input items 
 /// (text field, checkbox with text field, segmented button with text field) used to answer.
 const Map<String, String> mappingLabelsToInputItems = 
@@ -142,33 +140,33 @@ const Set<String> titlesLevel3ForTheGroupPerspective = {
   level3TitleIncomeEarningAbility,
 };
 
-  /// A set of the titles level 3 with sub items.
-  const Set<String> titlesLevel3WithSubItems = {
-    level3TitleBalanceIssue,
-    level3TitleWorkplaceIssue,
-    level3TitleLegacyIssue,
-  };
+/// A set of the titles level 3 with sub items.
+const Set<String> titlesLevel3WithSubItems = {
+  level3TitleBalanceIssue,
+  level3TitleWorkplaceIssue,
+  level3TitleLegacyIssue,
+};
 
-  // Sets of the children of the titles level 3 with sub items
-  /// A set of the children of the title level 3 related to balance issues.
-  const  Set<String> childrenOfTitleLevel3BalanceIssue = {
-    level3TitleBalanceIssueItem1,
-    level3TitleBalanceIssueItem2,
-    level3TitleBalanceIssueItem3,
-    level3TitleBalanceIssueItem4,
-  };
+// Sets of the children of the titles level 3 with sub items
+/// A set of the children of the title level 3 related to balance issues.
+const  Set<String> childrenOfTitleLevel3BalanceIssue = {
+  level3TitleBalanceIssueItem1,
+  level3TitleBalanceIssueItem2,
+  level3TitleBalanceIssueItem3,
+  level3TitleBalanceIssueItem4,
+};
 
-  /// A set of the children of the title level 3 related to workplace issues.
-  const  Set<String> childrenOfTitleLevel3WorkplaceIssue = {
-    level3TitleWorkplaceIssueItem1,
-    level3TitleWorkplaceIssueItem2,
-  };
+/// A set of the children of the title level 3 related to workplace issues.
+const  Set<String> childrenOfTitleLevel3WorkplaceIssue = {
+  level3TitleWorkplaceIssueItem1,
+  level3TitleWorkplaceIssueItem2,
+};
 
-  /// A set of the children of the title level 3 related to a legacy issue.
-  const Set<String> childrenOfTitleLevel3LegacyIssue = {level3TitleLegacyIssueItem1};
+/// A set of the children of the title level 3 related to a legacy issue.
+const Set<String> childrenOfTitleLevel3LegacyIssue = {level3TitleLegacyIssueItem1};
 
-  // A set of the text fields only items
-  const  Set<String> textFieldOnlyItems = {
-    level3TitleAnotherIssue,
-    level3TitleGroupsProblematics,
-  };
+// A set of the text fields only items
+const  Set<String> textFieldOnlyItems = {
+  level3TitleAnotherIssue,
+  level3TitleGroupsProblematics,
+};
