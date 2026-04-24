@@ -18,9 +18,9 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj; 
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_checkbox_with_text_field.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_segmented_button_with_text_field.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_padded_for_context_analysis.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_checkbox_with_text_field_sanitized_and_padded.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_segmented_button_with_text_field_sanitized_and_padded.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 
@@ -29,7 +29,7 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 class CAForm extends StatefulWidget 
 {
   /// The DTO object related to the form.
-  final DTOCaForm dtoCAForm;
+  final DTOCAForm dtoCAForm;
 
   /// Callback function used to refresh the page from the context form to the dashboard.
   final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
@@ -194,7 +194,7 @@ class CAFormState extends State<CAForm>
                 headingText: q.level3TitleBalanceIssue,
                 headingLevel: 3,
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem1,
                 // Initializing the checkbox value with the DTO's value
@@ -207,7 +207,7 @@ class CAFormState extends State<CAForm>
                 // Updating DTO
                 onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceStudiesHousehold.text = v;},
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem2,
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.checked,
@@ -216,7 +216,7 @@ class CAFormState extends State<CAForm>
                 onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text = v;},
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem3,
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.checked,
@@ -225,7 +225,7 @@ class CAFormState extends State<CAForm>
                 onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text = v;},
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleBalanceIssueItem4,
                 checkboxIsChecked: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
@@ -246,7 +246,7 @@ class CAFormState extends State<CAForm>
                 headingText: q.level3TitleWorkplaceIssue,
                 headingLevel: 3,
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleWorkplaceIssueItem1,
                 checkboxIsChecked: widget.dtoCAForm.indivAtWorkMoreAppreciated.checked,
@@ -255,7 +255,7 @@ class CAFormState extends State<CAForm>
                 onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkMoreAppreciated, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAtWorkMoreAppreciated.text = v;},
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleWorkplaceIssueItem2,
                 checkboxIsChecked: widget.dtoCAForm.indivAtWorkRemainingAppreciated.checked,
@@ -276,7 +276,7 @@ class CAFormState extends State<CAForm>
                 headingText: q.level3TitleLegacyIssue,
                 headingLevel: 3,
               ),
-              CheckboxWithTextField
+              CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: q.level3TitleLegacyIssueItem1,
                 checkboxIsChecked: widget.dtoCAForm.indivBetterLegacies.checked,
@@ -379,7 +379,7 @@ class CAFormState extends State<CAForm>
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
-              SegmentedButtonWithTextField
+              CASegmentedButtonWithSanitizedAndPaddedTextField
               (
                 segButtonTextOption1: 'Yes',
                 segButtonTextOption2: 'No',
@@ -404,7 +404,7 @@ class CAFormState extends State<CAForm>
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
-              SegmentedButtonWithTextField
+              CASegmentedButtonWithSanitizedAndPaddedTextField
               (
                 segButtonTextOption1: 'Yes',
                 segButtonTextOption2: 'No',
@@ -429,7 +429,7 @@ class CAFormState extends State<CAForm>
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
-              SegmentedButtonWithTextField
+              CASegmentedButtonWithSanitizedAndPaddedTextField
               (
                 segButtonTextOption1: 'Yes',
                 segButtonTextOption2: 'No',
@@ -454,7 +454,7 @@ class CAFormState extends State<CAForm>
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
-              SegmentedButtonWithTextField
+              CASegmentedButtonWithSanitizedAndPaddedTextField
               (
                 segButtonTextOption1: 'Yes',
                 segButtonTextOption2: 'No',
