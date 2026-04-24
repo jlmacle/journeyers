@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 class CustomIconButton extends StatelessWidget 
 {
 
+  /// The icon of the button.
   final Icon icon;
+  /// The tooltip label for the icon.
   final String toolTipLabel;
+  /// The callback function called when the button is pressed.
   final VoidCallback onPressedFunction;  
 
   const CustomIconButton
