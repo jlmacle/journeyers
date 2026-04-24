@@ -1,3 +1,4 @@
+// ─── USED IN THE CA FORM ───────────────────────────────────────
 // ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
 
 // Heading level 2
@@ -33,6 +34,8 @@ const String level3TitleLegacyIssueItem1 = 'To have better legacies to leave to 
 // Heading level 3 without sub items
 /// Is the issue of another type?
 const String level3TitleAnotherIssue = 'Is the issue of another type?';
+
+
 
 // ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
 
@@ -86,7 +89,7 @@ const int chars1Page = 7330;
 
 
 
-
+// ─── USED IN THE CA FORM DTO AND IN THE CA PREVIEW WIDGET ───────────────────────────────────────
 
 /// A mapping of question labels with the type of input items 
 /// (text field, checkbox with text field, segmented button with text field) used to answer.
