@@ -27,7 +27,7 @@ class DashboardPage extends StatefulWidget
   final String dashboardContext;
 
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
-  final VoidCallback parentCallbackFunctionWhenAllSessionFilesAreDeleted;
+  final VoidCallback onAllSessionFilesDeletedCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
@@ -36,7 +36,7 @@ class DashboardPage extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    this.parentCallbackFunctionWhenAllSessionFilesAreDeleted = placeHolderVoidCallback,
+    this.onAllSessionFilesDeletedCallbackFunction = placeHolderVoidCallback,
     required this.dashboardFilteringByKeywordsKey
   });
 
@@ -186,7 +186,7 @@ class DashboardPageState extends State<DashboardPage>
       // resetWasSessionDataSavedStatus
       await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
-      widget.parentCallbackFunctionWhenAllSessionFilesAreDeleted();
+      widget.onAllSessionFilesDeletedCallbackFunction();
     }
     else
     {
