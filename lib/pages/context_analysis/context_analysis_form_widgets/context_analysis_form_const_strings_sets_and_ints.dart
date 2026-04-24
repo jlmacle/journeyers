@@ -76,7 +76,7 @@ const String textField = "textField";
 const String segmentedButton = "segmentedButton";
 
 /// Straight double quotes used to encapsulate the content of answered questions.
-String quotesForCSV = '"';
+const String quotesForCSV = '"';
 
 
 // ─── USED IN THE CA TEXT FIELDS ───────────────────────────────────────
@@ -93,7 +93,7 @@ const int chars1Page = 7330;
 
 /// A mapping of question labels with the type of input items 
 /// (text field, checkbox with text field, segmented button with text field) used to answer.
-Map<String, String> mappingLabelsToInputItems = 
+const Map<String, String> mappingLabelsToInputItems = 
 {
   //** Individual perspective **/
   // balance issue
@@ -123,10 +123,10 @@ Map<String, String> mappingLabelsToInputItems =
 };
 
 /// A set of the titles level 2.
-Set<String> titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
+const Set<String> titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
 
 // A set of the titles level 3 related to an individual perspective.
-Set<String> titlesLevel3ForTheIndividualPerspective = {
+const Set<String> titlesLevel3ForTheIndividualPerspective = {
     level3TitleBalanceIssue,
     level3TitleWorkplaceIssue,
     level3TitleLegacyIssue,
@@ -134,7 +134,7 @@ Set<String> titlesLevel3ForTheIndividualPerspective = {
   };
 
 // A set of the titles level 3 related to a group/team perspective.
-  Set<String> titlesLevel3ForTheGroupPerspective = {
+const Set<String> titlesLevel3ForTheGroupPerspective = {
   level3TitleGroupsProblematics,
   level3TitleSameProblem,
   level3TitleHarmonyAtHome,
@@ -143,7 +143,7 @@ Set<String> titlesLevel3ForTheIndividualPerspective = {
 };
 
   /// A set of the titles level 3 with sub items.
-  Set<String> titlesLevel3WithSubItems = {
+  const Set<String> titlesLevel3WithSubItems = {
     level3TitleBalanceIssue,
     level3TitleWorkplaceIssue,
     level3TitleLegacyIssue,
@@ -151,7 +151,7 @@ Set<String> titlesLevel3ForTheIndividualPerspective = {
 
   // Sets of the children of the titles level 3 with sub items
   /// A set of the children of the title level 3 related to balance issues.
-   Set<String> childrenOfTitleLevel3BalanceIssue = {
+  const  Set<String> childrenOfTitleLevel3BalanceIssue = {
     level3TitleBalanceIssueItem1,
     level3TitleBalanceIssueItem2,
     level3TitleBalanceIssueItem3,
@@ -159,16 +159,16 @@ Set<String> titlesLevel3ForTheIndividualPerspective = {
   };
 
   /// A set of the children of the title level 3 related to workplace issues.
-   Set<String> childrenOfTitleLevel3WorkplaceIssue = {
+  const  Set<String> childrenOfTitleLevel3WorkplaceIssue = {
     level3TitleWorkplaceIssueItem1,
     level3TitleWorkplaceIssueItem2,
   };
 
   /// A set of the children of the title level 3 related to a legacy issue.
-  Set<String> childrenOfTitleLevel3LegacyIssue = {level3TitleLegacyIssueItem1};
+  const Set<String> childrenOfTitleLevel3LegacyIssue = {level3TitleLegacyIssueItem1};
 
   // A set of the text fields only items
-   Set<String> textFieldOnlyItems = {
+  const  Set<String> textFieldOnlyItems = {
     level3TitleAnotherIssue,
     level3TitleGroupsProblematics,
   };
