@@ -192,10 +192,10 @@ class DashboardUtils {
   {
     if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile: \n currentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
     // Getting the list of stored file names
-    List<Object?> result;
+    List<Object?> result = [];
     if(Platform.isAndroid)
     {result = await _platformAndroid.invokeMethod('listFiles');}
-    else
+    else if(Platform.isIOS)
     {result = await _platformIOS.invokeMethod('listFiles');}    
 
     List<String> retrievedFileNames = result.cast<String>();
