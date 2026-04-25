@@ -29,7 +29,7 @@ class DashboardPage extends StatefulWidget
   /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
   final VoidCallback onAllSessionFilesDeletedCallbackFunction;
 
-  /// A global key linked to the DashboardFilteringByKeywords widget
+  /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
   const DashboardPage
