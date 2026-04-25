@@ -49,7 +49,7 @@ class _GPSProblemToSolveState extends State<GPSProblemToSolve> {
                 Container(
                   // Limiting the suggestion area height to avoid an overflow
                   // TODO: different maxHeight according to platform
-                  constraints: const BoxConstraints(maxHeight: 150), 
+                  constraints: const BoxConstraints(maxHeight: 85), 
                   child: ListView.builder(
                     itemCount: widget.previousSessions.length,
                     itemBuilder: (context, index) {
