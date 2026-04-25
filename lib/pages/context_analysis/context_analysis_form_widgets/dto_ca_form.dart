@@ -64,15 +64,16 @@ class DTOCAForm
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
   // Converts a [DTOCheckboxWithTextField] to the standard [LinkedHashMap] wire format.
   // The text value is omitted (left empty) when the checkbox is unchecked.
-  LinkedHashMap<String, String> _checkboxDataToMap(DTOCheckboxWithTextField f) =>
-      LinkedHashMap<String, String>.from({
+  Future<LinkedHashMap<String, String>> _checkboxDataToMap(DTOCheckboxWithTextField f) async
+
+    =>  LinkedHashMap<String, String>.from({
         qf.keyCheckbox:  '${f.checked}',
         qf.keyTextField: f.checked ? f.text : '',
       });
 
   // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
   // Both values are omitted (left empty) when nothing is selected.
-  LinkedHashMap<String, String> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) =>
+  Future<LinkedHashMap<String, String>> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) async =>
       LinkedHashMap<String, String>.from({
         qf.keySegmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
         qf.keyTextField:       f.selection.isNotEmpty ? f.text : '',
@@ -96,23 +97,23 @@ class DTOCAForm
         qf.level3TitleBalanceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          qf.level3TitleBalanceIssueItem1: _checkboxDataToMap(indivBalanceStudiesHousehold),
-          qf.level3TitleBalanceIssueItem2: _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
-          qf.level3TitleBalanceIssueItem3: _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          qf.level3TitleBalanceIssueItem4: _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
+          qf.level3TitleBalanceIssueItem1:  await _checkboxDataToMap(indivBalanceStudiesHousehold),
+          qf.level3TitleBalanceIssueItem2:  await _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
+          qf.level3TitleBalanceIssueItem3:  await _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
+          qf.level3TitleBalanceIssueItem4:  await _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
         }),
 
         qf.level3TitleWorkplaceIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          qf.level3TitleWorkplaceIssueItem1: _checkboxDataToMap(indivAtWorkMoreAppreciated),
-          qf.level3TitleWorkplaceIssueItem2: _checkboxDataToMap(indivAtWorkRemainingAppreciated),
+          qf.level3TitleWorkplaceIssueItem1:  await _checkboxDataToMap(indivAtWorkMoreAppreciated),
+          qf.level3TitleWorkplaceIssueItem2:  await _checkboxDataToMap(indivAtWorkRemainingAppreciated),
         }),
 
         qf.level3TitleLegacyIssue: 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          qf.level3TitleLegacyIssueItem1: _checkboxDataToMap(indivBetterLegacies),
+          qf.level3TitleLegacyIssueItem1:  await _checkboxDataToMap(indivBetterLegacies),
         }),
         
         qf.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
@@ -130,13 +131,13 @@ class DTOCAForm
       ({
         qf.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({qf.keyTextField: groupProblemsToSolveStr}),
 
-        qf.level3TitleSameProblem:          _segmentedDataToMap(groupSameProblemsToSolve),
+        qf.level3TitleSameProblem:          await _segmentedDataToMap(groupSameProblemsToSolve),
 
-        qf.level3TitleHarmonyAtHome:        _segmentedDataToMap(groupHarmonyHome),
+        qf.level3TitleHarmonyAtHome:        await _segmentedDataToMap(groupHarmonyHome),
 
-        qf.level3TitleAppreciabilityAtWork: _segmentedDataToMap(groupAppreciabilityAtWork),
+        qf.level3TitleAppreciabilityAtWork: await _segmentedDataToMap(groupAppreciabilityAtWork),
 
-        qf.level3TitleIncomeEarningAbility: _segmentedDataToMap(groupEarningAbility),
+        qf.level3TitleIncomeEarningAbility: await _segmentedDataToMap(groupEarningAbility),
       }),
     });
 
