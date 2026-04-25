@@ -26,7 +26,7 @@ class SessionsListItem extends StatefulWidget
   /// The context of the dashboard.
   final String dashboardContext;
 
-  /// A callback function called when the checkbox is checked.
+  /// A callback function called when the checkbox is checked/unchecked.
   final ValueChanged<bool?> onCheckboxChanged;
 
   /// A callback function called when the title is being edited.
