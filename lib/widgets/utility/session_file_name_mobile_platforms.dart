@@ -19,7 +19,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
 class SessionFileNameMobilePlatforms extends StatefulWidget 
 {
-  /// The file extension starting with .
+  /// The file extension when saving the session data ('.' included)
   final String fileExtension;
 
   /// A callback function called after editing the title is complete.
