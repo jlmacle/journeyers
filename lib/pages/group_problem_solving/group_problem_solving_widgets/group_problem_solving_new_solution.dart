@@ -31,6 +31,7 @@ class _GPSNewSolutionState extends State<GPSNewSolution>
       widget.onSolutionAddedCallbackFunction(_solutionController.text.trim());
       _solutionController.clear();
     }
+    FocusScope.of(context).unfocus();
   }
 
   @override

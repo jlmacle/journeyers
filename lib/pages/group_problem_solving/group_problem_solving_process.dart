@@ -282,8 +282,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     if (_isModificationMode)
                       _buildHeaderButton
                       (
-                        text:  _isDeleteMode ? "Clear\nOne" : "Edit",
-                        color: _isDeleteMode ? const Color(0xFFB71C1C) : const Color(0xFFE65100), 
+                        text:  _isDeleteMode ? "Edit" : "Clear\nOne",
+                        color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
                         onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
                         screenWidthInInches: screenWidthInInches
                       ),
