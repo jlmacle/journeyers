@@ -22,7 +22,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   /// The file extension when saving the session data ('.' included)
   final String fileExtension;
 
-  /// A callback function called after editing the title is complete.
+  /// A callback function called when the file name is submitted.
   final ValueChanged<String> onFileNameSubmittedCallbackFunction;
 
   /// A callback function called to save context analysis data and metadata.
