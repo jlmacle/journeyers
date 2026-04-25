@@ -13,7 +13,7 @@ class DashboardFilteringByKeywords extends StatefulWidget
   /// List storing all filtered session data.
   final List<dynamic>? filteredSessions;
 
-  /// List storing the keywords used in the session data.
+  /// List storing the keywords used by the sessions.
   final List<String> usedKeywords;
 
   /// List storing the selected keywords.
