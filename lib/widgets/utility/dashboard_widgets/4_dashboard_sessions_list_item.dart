@@ -32,8 +32,8 @@ class SessionsListItem extends StatefulWidget
   /// A callback function called when the title is being edited.
   final VoidCallback onEditTitle;
 
-  /// A callback function called when the keywords are being edited.
-  final FunctionSetStringAndString onEditKeywords;
+  /// A callback function called when the keywords are updated.
+  final FunctionSetStringAndString onKeywordsUpdated;
 
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDelete;
@@ -46,7 +46,7 @@ class SessionsListItem extends StatefulWidget
     required this.dashboardContext,
     required this.onCheckboxChanged,
     required this.onEditTitle,
-    required this.onEditKeywords,
+    required this.onKeywordsUpdated,
     required this.onDelete,
   });
 
@@ -133,9 +133,8 @@ class _SessionsListItemState extends State<SessionsListItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                           filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                          onEditKeywords: widget.onEditKeywords,
                           kwsEditController: kwsEditController,
-                          onKeywordsUpdated: widget.onEditKeywords
+                          onKeywordsUpdated: widget.onKeywordsUpdated
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
@@ -180,9 +179,8 @@ class _SessionsListItemState extends State<SessionsListItem>
                         dashboardContext: widget.dashboardContext,
                         currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                         filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                        onEditKeywords: widget.onEditKeywords,
                         kwsEditController: kwsEditController,
-                        onKeywordsUpdated: widget.onEditKeywords 
+                        onKeywordsUpdated: widget.onKeywordsUpdated 
                       ),
                       tooltip: keywordsTooltipLabel,
                     ),
@@ -283,7 +281,6 @@ void _showKeywordsEditSheet
 ({
   required BuildContext context, required String dashboardContext, 
   required List<dynamic> currentKeywords, required String? filePath, 
-  required FunctionSetStringAndString onEditKeywords,
   required TextEditingController kwsEditController,
   required FunctionSetStringAndString onKeywordsUpdated
 }) {
