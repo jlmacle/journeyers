@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:collection/collection.dart';
@@ -195,7 +197,7 @@ class DashboardPageState extends State<DashboardPage>
     }
 
     // Updating the file names list: _deleteSelectedSession
-    await du.getStoredFileNamesOnMobile();
+    if(Platform.isAndroid || Platform.isIOS) await du.getStoredFileNamesOnMobile();
     if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
   }
 

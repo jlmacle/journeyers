@@ -165,8 +165,6 @@ class GPSProcessState extends State<GPSProcess>
           type: FileType.custom,
           allowedExtensions: ['txt'],
         );
-        // Updating the file names list: FilePicker.platform.saveFile
-        await du.getStoredFileNamesOnMobile();
         if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
       }
 
