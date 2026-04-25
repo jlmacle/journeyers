@@ -7,6 +7,7 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 /// A widget used for the title of the dashboard.
 class DashboardTitle extends StatelessWidget 
 {
+  /// The title for the dashboard.
   final String title;
 
   const DashboardTitle
