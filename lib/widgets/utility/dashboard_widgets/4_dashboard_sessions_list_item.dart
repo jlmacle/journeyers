@@ -134,7 +134,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                           filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
                           kwsEditController: kwsEditController,
-                          onKeywordsUpdated: widget.onKeywordsUpdated
+                          onEditKeywords: widget.onKeywordsUpdated
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
@@ -180,7 +180,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                         currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                         filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
                         kwsEditController: kwsEditController,
-                        onKeywordsUpdated: widget.onKeywordsUpdated 
+                        onEditKeywords: widget.onKeywordsUpdated 
                       ),
                       tooltip: keywordsTooltipLabel,
                     ),
@@ -282,7 +282,7 @@ void _showKeywordsEditSheet
   required BuildContext context, required String dashboardContext, 
   required List<dynamic> currentKeywords, required String? filePath, 
   required TextEditingController kwsEditController,
-  required FunctionSetStringAndString onKeywordsUpdated
+  required FunctionSetStringAndString onEditKeywords
 }) {
   // Converting list to a comma-separated string for editing
   kwsEditController.text = currentKeywords.join(', '); 
@@ -327,7 +327,7 @@ void _showKeywordsEditSheet
 
               if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
               // Calling the parent callback for state 
-              await onKeywordsUpdated(filePath: filePath, updatedKeywords: updatedKeywords);
+              await onEditKeywords(filePath: filePath, updatedKeywords: updatedKeywords);
 
               if (!context.mounted) return;
               Navigator.of(context).pop();
