@@ -40,7 +40,7 @@ class DashboardUtils {
   // Android: storage access framework (reading/saving files)
   static const _platformIOS = MethodChannel('dev.journeyers/iossaf');
 
-  /// Method used to retrieve the file with all the dashboard session data, 
+  /// Method used to retrieve the file with all the dashboard session metadata, 
   /// either for the context analyses, or for the group problem-solvings.
   Future<File> getSessionMetadataFile({required String typeOfDashboardContext}) async {
     final directory = await getApplicationSupportDirectory();
