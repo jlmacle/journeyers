@@ -25,7 +25,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   /// A callback function called when the file name is submitted.
   final ValueChanged<String> onFileNameSubmittedCallbackFunction;
 
-  /// A callback function called to save context analysis data and metadata.
+  /// A callback function called to save session data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
 
   const SessionFileNameMobilePlatforms
