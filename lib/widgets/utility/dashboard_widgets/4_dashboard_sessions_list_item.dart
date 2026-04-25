@@ -29,7 +29,7 @@ class SessionsListItem extends StatefulWidget
   /// A callback function called when the checkbox is checked/unchecked.
   final ValueChanged<bool?> onCheckboxChanged;
 
-  /// A callback function called when the title is being edited.
+  /// A callback function called when the title is updated.
   final VoidCallback onEditTitle;
 
   /// A callback function called when the keywords are updated.
