@@ -5,12 +5,12 @@ import 'package:collection/collection.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
+import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2bi_dashboard_sorting_by_date_config.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
@@ -85,7 +85,7 @@ class DashboardPageState extends State<DashboardPage>
     _filteredSessions!.addAll(retrievedSessionData);
 
     // Data is not sorted by date by default, and needs sorting
-    await sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: dateFormatForSorting, byAscendingDate: false);
+    await sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
     
     // Re-build to display the sessions
     setState(() {
