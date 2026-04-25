@@ -28,7 +28,7 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
 
-  /// Global key used to identify the widget handling the sorting by keywords.
+  /// Global key used to identify the widget handling the filtering by keywords.
   final GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
 
   const DashboardSortingAndFilteringFeature
