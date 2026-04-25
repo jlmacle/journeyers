@@ -72,7 +72,7 @@ class DashboardPageState extends State<DashboardPage>
     // Retrieving data from file
     final retrievedSessionData = 
       await du.retrieveAllDashboardMetadata
-                (typeOfContextData: widget.dashboardContext);
+                (typeOfDashboardContext: widget.dashboardContext);
     
     // Getting the used keywords from the retrieved data
     _usedKeywords = await _getUsedKeywords(retrievedSessionData);
@@ -140,7 +140,7 @@ class DashboardPageState extends State<DashboardPage>
               
       await du.saveAllSessionsMetadata
       (
-        typeOfContextData: widget.dashboardContext, 
+        typeOfDashboardContext: widget.dashboardContext, 
         allSessionsMetadata: _allSessions!,
       );
     }    
@@ -156,7 +156,7 @@ class DashboardPageState extends State<DashboardPage>
     await fu.deleteCsvFile(filePath);
 
     // Removing the related stored dashboard data
-    await du.deleteSpecificSessionMetadata(typeOfContextData: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
     
     // Updating the _allSessions list
     _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
@@ -422,7 +422,7 @@ class DashboardPageState extends State<DashboardPage>
                 // Storing the updated session data
                 await du.saveAllSessionsMetadata
                 (
-                  typeOfContextData: widget.dashboardContext, 
+                  typeOfDashboardContext: widget.dashboardContext, 
                   allSessionsMetadata: _allSessions!,
                 );
 

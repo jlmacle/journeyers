@@ -180,7 +180,7 @@ class GPSProcessState extends State<GPSProcess>
         var formattedDate = formatter.format(now);   
         await du.saveDashboardMetadata
         (
-          typeOfContextData: DashboardUtils.gpsContext,
+          typeOfDashboardContext: DashboardUtils.gpsContext,
           title: sessionTitle, 
           keywords: _currentKeywords.toList(), 
           formattedDate: formattedDate,
@@ -203,7 +203,7 @@ class GPSProcessState extends State<GPSProcess>
 // Method used to load the context analyses metadata
 Future<void> _loadHistory() async {
   final data = await du.retrieveAllDashboardMetadata(
-    typeOfContextData: DashboardUtils.caContext
+    typeOfDashboardContext: DashboardUtils.caContext
   );
   setState(() {
     _history = List<Map<String, dynamic>>.from(data);

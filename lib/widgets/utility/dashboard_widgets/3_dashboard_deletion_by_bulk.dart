@@ -66,7 +66,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       // Removing the metadata from the stored metadata
       await du.deleteSpecificSessionMetadata
       (
-        typeOfContextData: widget.dashboardContext, 
+        typeOfDashboardContext: widget.dashboardContext, 
         filePathRelatedToDataToDelete: filePath
       );
     }

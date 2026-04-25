@@ -42,16 +42,16 @@ class DashboardUtils {
 
   /// Method used to retrieve the file with all the dashboard session data, 
   /// either for the context analyses, or for the group problem-solvings.
-  Future<File> getSessionMetadataFile({required String typeOfContextData}) async {
+  Future<File> getSessionMetadataFile({required String typeOfDashboardContext}) async {
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
     String fileName = "";
-    if (typeOfContextData == caContext) {
+    if (typeOfDashboardContext == caContext) {
       fileName = 'dashboard_session_data_context_analyses.json';
-    } else if (typeOfContextData == gpsContext) {
+    } else if (typeOfDashboardContext == gpsContext) {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } else {
-      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
     }
 
     File sessionFile = File('$path/$fileName');
@@ -61,7 +61,7 @@ class DashboardUtils {
       List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData created: $path/$fileName");
+      if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfDashboardContext created: $path/$fileName");
     }
     return sessionFile;
   }
@@ -69,7 +69,7 @@ class DashboardUtils {
   /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
   Future<void> saveDashboardMetadata
   ({
-    required String typeOfContextData,
+    required String typeOfDashboardContext,
     required String? title,
     required List<String> keywords,
     required String formattedDate,
@@ -88,7 +88,7 @@ class DashboardUtils {
     };
 
     // Saving the session metadata (file created in getSessionFile if needed)
-    File file = await getSessionMetadataFile(typeOfContextData: typeOfContextData);
+    File file = await getSessionMetadataFile(typeOfDashboardContext: typeOfDashboardContext);
   
     String updatedContent = "";
 
@@ -111,11 +111,11 @@ class DashboardUtils {
   /// In the case of the context analyses, the metadata retrieved has the format:
   /// \[{"title":"analysis1","date":"March 20, 2026 4:51 PM","filePath":"filePath1"},{"title":"analysis2","date":"March 20, 2026 5:31 PM","filePath":"filePath2"}\]
   Future<List<dynamic>> retrieveAllDashboardMetadata({
-    required String typeOfContextData,
+    required String typeOfDashboardContext,
   }) async {
     List<dynamic> sessionData;
     File sessionFile = await getSessionMetadataFile(
-      typeOfContextData: typeOfContextData,
+      typeOfDashboardContext: typeOfDashboardContext,
     );
     String fileContent = sessionFile.readAsStringSync();
     // Empty list if null, at least for testing purposes
@@ -128,12 +128,12 @@ class DashboardUtils {
   /// Method used to delete a specific session from the dashboard metadata file.
   /// It identifies the session by its unique file path.
   Future<void> deleteSpecificSessionMetadata({
-    required String typeOfContextData,
+    required String typeOfDashboardContext,
     required String filePathRelatedToDataToDelete,
   }) async {
     try {
       // Retrieving the correct JSON file based on the context
-      File file = await getSessionMetadataFile(typeOfContextData: typeOfContextData);
+      File file = await getSessionMetadataFile(typeOfDashboardContext: typeOfDashboardContext);
       
       // Reading and decoding the existing records
       String jsonContent = await file.readAsString();
@@ -157,24 +157,24 @@ class DashboardUtils {
   }
 
   /// Method used to save all session metadata.  
-  Future<void> saveAllSessionsMetadata({required String typeOfContextData, required List<dynamic> allSessionsMetadata}) async
+  Future<void> saveAllSessionsMetadata({required String typeOfDashboardContext, required List<dynamic> allSessionsMetadata}) async
   {
     String fileName = "";
     final applicationSupportDirectory = await getApplicationSupportDirectory();
     final pathToApplicationSupportDirectory = applicationSupportDirectory.path;
 
     // Getting file name according to context
-    if (typeOfContextData == caContext) 
+    if (typeOfDashboardContext == caContext) 
     {
       fileName = 'dashboard_session_data_context_analyses.json';
     } 
-    else if (typeOfContextData == gpsContext) 
+    else if (typeOfDashboardContext == gpsContext) 
     {
       fileName = 'dashboard_session_data_group_problem_solvings.json';
     } 
     else 
     {
-      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of context data: $typeOfContextData");
+      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
     }
 
     File sessionFile = File('$pathToApplicationSupportDirectory/$fileName');
@@ -184,7 +184,7 @@ class DashboardUtils {
     // Adding the metadata to the file
     var savedContent = jsonEncode(allSessionsMetadata);
     await sessionFile.writeAsString(savedContent);
-    if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfContextData restored: $pathToApplicationSupportDirectory/$fileName");
+    if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName");
   }
 
   /// Method used to retrieved all the file names, from the user application folder.
