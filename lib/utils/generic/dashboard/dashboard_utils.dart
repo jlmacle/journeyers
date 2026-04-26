@@ -156,7 +156,7 @@ class DashboardUtils {
     }
   }
 
-  /// Method used to save all session metadata.  
+  /// Method used to save all sessions metadata.  
   Future<void> saveAllSessionsMetadata({required String typeOfDashboardContext, required List<dynamic> allSessionsMetadata}) async
   {
     String fileName = "";
