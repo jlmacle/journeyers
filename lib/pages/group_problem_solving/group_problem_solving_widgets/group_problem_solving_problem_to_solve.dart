@@ -33,16 +33,20 @@ class _GPSProblemToSolveState extends State<GPSProblemToSolve> {
       child: _isEditing 
         ? Column(
             children: [
-              TextField(
+              TextField
+              (
                 controller: widget.problemTitleController,
                 autofocus: true,
-                decoration: InputDecoration(
+                decoration: InputDecoration
+                (
                   hintText: "Enter title or select below",
-                  suffixIcon: IconButton(
+                  suffixIcon: IconButton
+                  (
                     icon: const Icon(Icons.check, color: greenShade900),
                     onPressed: () => setState(() => _isEditing = false),
                   ),
                 ),
+                onSubmitted: (_) => setState(() => _isEditing = false),
               ),
               // Suggestions List from previous context analyses session data
               if (widget.previousSessions.isNotEmpty)
