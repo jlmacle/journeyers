@@ -124,7 +124,7 @@ class FileUtils
     String? folderPath = await upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
-    if (sessionDataDebug) pu.printd("Session Data: _saveFileOnAndroid: success: $success");
+    if (sessionDataDebug) pu.printd("Session Data: saveFileOnAndroid: success: $success");
     if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
@@ -144,6 +144,7 @@ class FileUtils
     String? folderPath = await upu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
+    if (sessionDataDebug) pu.printd("Session Data: saveFileOniOS: success: $success");
     if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
 
     return filePath;
