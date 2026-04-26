@@ -12,9 +12,9 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// A generic utility class related to files.
 class FileUtils 
 {
-  /// Channel used for communicating with Android
+  /// Channel used for communicating with Android.
   var platformAndroid = const MethodChannel('dev.journeyers/saf');
-  /// Channel used for communicating with IOS
+  /// Channel used for communicating with IOS.
   var platformIOS = const MethodChannel('dev.journeyers/iossaf');
 
   /// Method used to append text at the end of a file.
