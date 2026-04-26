@@ -108,8 +108,8 @@ class DashboardUtils {
 
   /// Method used to retrieved all the session metadata used for a dashboard.
   /// This metadata is used in the context analyses dashboard, or in the group problem-solvings dashboard.
-  /// In the case of the context analyses, the metadata retrieved has the format:
-  /// \[{"title":"analysis1","date":"March 20, 2026 4:51 PM","filePath":"filePath1"},{"title":"analysis2","date":"March 20, 2026 5:31 PM","filePath":"filePath2"}\]
+  /// The metadata retrieved has the format:
+  /// \[{"title":"title1","date":"March 20, 2026 4:51 PM","filePath":"filePath1"},{"title":"title2","date":"March 20, 2026 5:31 PM","filePath":"filePath2"}\]
   Future<List<dynamic>> retrieveAllDashboardMetadata({
     required String typeOfDashboardContext,
   }) async {
