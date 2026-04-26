@@ -187,7 +187,7 @@ class DashboardUtils {
     if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName");
   }
 
-  /// Method used to retrieved all the file names, from the user application folder.
+  /// Method used to retrieved all the file names, from the user application folder (mobile applications).
   Future<List<String>> getStoredFileNamesOnMobile() async
   {
     if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile: \n currentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
