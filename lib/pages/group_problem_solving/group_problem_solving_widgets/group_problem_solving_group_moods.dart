@@ -318,7 +318,7 @@ class _IdentifierWidget extends StatelessWidget
             ),
           if (isDeleteMode) ...[
             Positioned(
-              right: (Platform.isAndroid || Platform.isIOS) ? 0 : 120, top: 0,
+              right: (Platform.isAndroid || Platform.isIOS) ? 0 : 100, top: 0,
               child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
             ),
           ],
