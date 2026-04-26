@@ -24,7 +24,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
   final TextAlign checkboxTextAlignment;
 
   /// If the checkbox is checked at start.
-  final bool checkboxIsChecked;
+  final bool checkboxStartValue;
 
   /// Where the checkbox is located.
   final ListTileControlAffinity checkboxPosition;
@@ -66,7 +66,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
     this.checkboxTextStyle = unselectedCheckboxTextStyle,
     this.checkboxTextAlignment = TextAlign.center,
     this.checkboxPosition = ListTileControlAffinity.leading,
-    this.checkboxIsChecked = false,
+    this.checkboxStartValue = false,
     this.textFieldStartValue = "",
     required this.textFieldHint,
     this.textFieldPaddingHorizontal = 20.0,
@@ -91,7 +91,7 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
 
   @override
   void initState() {
-    _isChecked = widget.checkboxIsChecked;
+    _isChecked = widget.checkboxStartValue;
     super.initState();
   }
 
