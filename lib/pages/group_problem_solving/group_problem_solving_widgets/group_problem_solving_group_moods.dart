@@ -56,6 +56,8 @@ class GPSGroupMoods extends StatefulWidget
 
 class GPSGroupMoodsState extends State<GPSGroupMoods> 
 {
+  // TODO: import of previous teams
+
   // Bool used to suggest editing at start of adding identifiers
   bool _hasBeenEdited = false;
   
