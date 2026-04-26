@@ -66,7 +66,7 @@ class DashboardUtils {
     return sessionFile;
   }
 
-  /// Method used to save dashboard data, either for a context analysis, or for a group problem-solving.
+  /// Method used to save dashboard metadata, either for a context analysis, or for a group problem-solving.
   Future<void> saveDashboardMetadata
   ({
     required String typeOfDashboardContext,
