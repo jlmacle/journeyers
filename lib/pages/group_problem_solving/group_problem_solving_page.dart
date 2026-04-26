@@ -154,7 +154,7 @@ class GPSPageState extends State<GPSPage>
                 Focus
                 (
                   focusNode: gpsPageFocusNode,
-                  child: GPSProcess(key: gpsPageKey, parentCallbackFunctionToRefreshTheGPSPage: onDataSaved),
+                  child: GPSProcess(key: gpsProcessKey, parentCallbackFunctionToRefreshTheGPSPage: onDataSaved),
                 ),
               ),
             )
