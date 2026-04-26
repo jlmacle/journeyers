@@ -408,6 +408,26 @@ class DashboardPageState extends State<DashboardPage>
                 labelText: 'Edit Title', 
                 labelStyle: TextStyle(color: Colors.black)
               ),
+              // Duplicated code to clean
+              onSubmitted: (_) async 
+              {
+                // New title from the controller
+                final String newTitle = _titleController.text;
+
+                // Performing async work outside of setState
+                // Updating session data
+                await updateSessionTitle(filePath, newTitle); 
+                
+                // Storing the updated session data
+                await du.saveAllSessionsMetadata
+                (
+                  typeOfDashboardContext: widget.dashboardContext, 
+                  allSessionsMetadata: _allSessions!,
+                );
+
+                // Closing the modal sheet
+                if (mounted) Navigator.pop(context);
+              },
             ),
             const SizedBox(height: 10),
             ElevatedButton
