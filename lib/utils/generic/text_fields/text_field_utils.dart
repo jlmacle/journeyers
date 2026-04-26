@@ -49,7 +49,7 @@ class TextFieldUtils
   static const String extentionTXT = ".txt";
 
   // ─── STRING SANITIZER BUNDLES AND ERROR MESSAGES ───────────────────────────────────────
-  /// A StringSanitizerBundle sanitizing straight quotes.
+  /// A [StringSanitizerBundle] sanitizing straight quotes.
   static 
   ({
     bool shouldStringBeSanitized, 
@@ -67,7 +67,7 @@ class TextFieldUtils
   'are removed from the text typed\n'
   'for CSV-export reasons.\nWith apologies.';
 
-  /// A StringSanitizerBundle sanitizing dots.
+  /// A [StringSanitizerBundle] sanitizing dots.
   static 
   ({
     bool shouldStringBeSanitized, 
