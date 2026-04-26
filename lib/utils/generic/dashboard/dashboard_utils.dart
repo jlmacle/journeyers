@@ -22,7 +22,7 @@ class DashboardUtils {
   /// The key for the session title.
   static const String keyTitle = 'title';
 
-  /// The key for the session keywords
+  /// The key for the session keywords.
   static const String keyKeywords = 'keywords';
 
   /// The key for the session date.
