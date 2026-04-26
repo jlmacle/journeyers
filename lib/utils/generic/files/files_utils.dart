@@ -187,7 +187,7 @@ class FileUtils
   // ─── METHODS USED TO READ FILES : end ───────────────────────────────────────
 
   // ─── METHODS USED TO DELETE FILES : beginning  ───────────────────────────────────────
-  /// Generic method used to delete a file 
+  /// Generic method used to delete a file.
   Future<void> deleteCsvFile(String pathToCsv) async
   {
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
@@ -208,7 +208,7 @@ class FileUtils
     }
   }
 
-  // Method used to delete a file on desktop
+  /// Method used to delete a file on desktop.
   Future<void> deleteCsvFileOnDesktop(String pathToCsv) async
   {
     try 
@@ -232,7 +232,7 @@ class FileUtils
     catch (e) {pu.printd("Session Data: An unexpected error occurred while deleting the file: $e");}
   }
 
-  // Method used to delete a file on Android
+  /// Method used to delete a file on Android.
   Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async 
   {
     try 
@@ -257,7 +257,7 @@ class FileUtils
     }
   }
 
-  // Method used to delete a file on iOS
+  /// Method used to delete a file on iOS.
   Future<bool> deleteCsvFileOnIOS(String pathToCsv) async 
   {
     try 
