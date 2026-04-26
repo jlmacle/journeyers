@@ -111,7 +111,7 @@ class FileUtils
 
   // ─── METHODS USED TO SAVE FILES : beginning ───────────────────────────────────────
   /// Method used to save a file on Android.
-  /// The actual code assumes in a folder pre-selected by the user (handled by MainActivity.kt).
+  /// The actual code assumes a folder pre-selected by the user (handled by MainActivity.kt).
   Future<String> saveFileOnAndroid(String fileName, String fileExtension, Uint8List dataBytes) async 
   {
     String? filePath;
@@ -131,7 +131,7 @@ class FileUtils
   }
 
   /// Method used to save a file on iOS.
-  /// The actual code assumes in a folder pre-selected by the user (handled by AppDelegate.swift).
+  /// The actual code assumes a folder pre-selected by the user (handled by AppDelegate.swift).
   Future<String> saveFileOniOS(String fileName, String fileExtension, Uint8List dataBytes) async 
   {
     String? filePath;
@@ -166,7 +166,7 @@ class FileUtils
         ('readFileContent', {'fileName': fileName}); 
   }
 
-  /// Method used to read a text file on mobile
+  /// Method used to read a text file on mobile.
   Future<String> readTextContentOnMobile({required String pathToData}) async
   {
     String fileName = path.basename(pathToData);
