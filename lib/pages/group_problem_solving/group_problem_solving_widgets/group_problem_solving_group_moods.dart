@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -316,7 +318,7 @@ class _IdentifierWidget extends StatelessWidget
             ),
           if (isDeleteMode) ...[
             Positioned(
-              right: 0, top: 0,
+              right: (Platform.isAndroid || Platform.isIOS) ? 0 : 120, top: 0,
               child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
             ),
           ],
