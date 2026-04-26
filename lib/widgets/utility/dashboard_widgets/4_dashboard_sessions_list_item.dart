@@ -33,7 +33,7 @@ class SessionsListItem extends StatefulWidget
   final VoidCallback onEditTitle;
 
   /// A callback function called when the keywords are updated.
-  final FunctionSetStringAndString onKeywordsUpdated;
+  final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDelete;
@@ -46,7 +46,7 @@ class SessionsListItem extends StatefulWidget
     required this.dashboardContext,
     required this.onCheckboxChanged,
     required this.onEditTitle,
-    required this.onKeywordsUpdated,
+    required this.onKeywordsUpdatedCallbackFunction,
     required this.onDelete,
   });
 
@@ -57,6 +57,25 @@ class SessionsListItem extends StatefulWidget
 class _SessionsListItemState extends State<SessionsListItem> 
 {
   TextEditingController kwsEditController = .new();
+
+
+  // To clean
+  void onKeywordsUpdated(String? filePath) async
+  {
+    // Splitting string into list, trimming whitespaces, and removing empty entries
+    final Set<String> updatedKeywords = kwsEditController.text
+        .split(',')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toSet();
+
+    if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
+    // Calling the parent callback for state 
+    await widget.onKeywordsUpdatedCallbackFunction(filePath: filePath, updatedKeywords: updatedKeywords);
+
+    if (!context.mounted) return;
+    Navigator.of(context).pop();
+  }
   
   @override void dispose() 
   {
@@ -128,13 +147,15 @@ class _SessionsListItemState extends State<SessionsListItem>
                       const SizedBox(height: 4),
                       // For the edition of the keywords
                       GestureDetector(
-                        onTap: () => _showKeywordsEditSheet(
+                        onTap: () => _showKeywordsEditSheet
+                        (
                           context: context,
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                           filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
                           kwsEditController: kwsEditController,
-                          onKeywordsUpdated: widget.onKeywordsUpdated
+                          onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
+                          onKeywordsUpdated: onKeywordsUpdated
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
@@ -180,7 +201,8 @@ class _SessionsListItemState extends State<SessionsListItem>
                         currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                         filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
                         kwsEditController: kwsEditController,
-                        onKeywordsUpdated: widget.onKeywordsUpdated 
+                        onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
+                        onKeywordsUpdated: onKeywordsUpdated
                       ),
                       tooltip: keywordsTooltipLabel,
                     ),
@@ -282,7 +304,9 @@ void _showKeywordsEditSheet
   required BuildContext context, required String dashboardContext, 
   required List<dynamic> currentKeywords, required String? filePath, 
   required TextEditingController kwsEditController,
-  required FunctionSetStringAndString onKeywordsUpdated
+  required FunctionSetStringAndString onKeywordsUpdatedCallbackFunction,
+  required ValueChanged<String?> onKeywordsUpdated
+
 }) {
   // Converting list to a comma-separated string for editing
   kwsEditController.text = currentKeywords.join(', '); 
@@ -314,24 +338,11 @@ void _showKeywordsEditSheet
               labelStyle: TextStyle(color: Colors.black),
               hintText: 'Please enter your keywords.',
             ),
-          ),
+            onSubmitted: (_) async => onKeywordsUpdated(filePath)
+          ),       
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: () async {
-              // Splitting string into list, trimming whitespaces, and removing empty entries
-              final Set<String> updatedKeywords = kwsEditController.text
-                  .split(',')
-                  .map((e) => e.trim())
-                  .where((e) => e.isNotEmpty)
-                  .toSet();
-
-              if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
-              // Calling the parent callback for state 
-              await onKeywordsUpdated(filePath: filePath, updatedKeywords: updatedKeywords);
-
-              if (!context.mounted) return;
-              Navigator.of(context).pop();
-            },
+            onPressed: () async =>  onKeywordsUpdated(filePath),
             child: const Text("Save", style: TextStyle(color: Colors.black)),
           ),
           const SizedBox(height: 20),

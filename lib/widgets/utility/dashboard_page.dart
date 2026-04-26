@@ -366,7 +366,7 @@ class DashboardPageState extends State<DashboardPage>
                             session[DashboardUtils.keyTitle],
                             filePath,
                           ),
-                          onKeywordsUpdated: updateKeywords,
+                          onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onDelete: () async => await _deleteSelectedSession(filePath),
                         );
                       },
