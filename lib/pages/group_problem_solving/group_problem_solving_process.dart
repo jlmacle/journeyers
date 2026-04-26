@@ -164,8 +164,7 @@ class GPSProcessState extends State<GPSProcess>
           bytes: dataBytes,
           type: FileType.custom,
           allowedExtensions: ['txt'],
-        );
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
+        );       
       }
 
       // Save Metadata to Dashboard if file was saved successfully

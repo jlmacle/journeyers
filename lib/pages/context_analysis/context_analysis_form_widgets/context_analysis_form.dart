@@ -146,10 +146,13 @@ class CAFormState extends State<CAForm>
                           csvDataGroupPerspective: csvDataGroupPerspective,
                           fileName: _fileName);
     // Updating the file names list: after printToCSV
-    if(Platform.isAndroid || Platform.isIOS) await du.getStoredFileNamesOnMobile();
-    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
-    if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
-
+    if(Platform.isAndroid || Platform.isIOS) 
+    {
+      await du.getStoredFileNamesOnMobile();
+      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
+      if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
+    }
+    
     // Saving the dashboard metadata if filePath not null
     if (pathToCSVFile != null)
     { 

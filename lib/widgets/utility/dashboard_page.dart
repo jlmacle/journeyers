@@ -197,9 +197,13 @@ class DashboardPageState extends State<DashboardPage>
     }
 
     // Updating the file names list: _deleteSelectedSession
-    if(Platform.isAndroid || Platform.isIOS) await du.getStoredFileNamesOnMobile();
-    if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
-  }
+    if(Platform.isAndroid || Platform.isIOS)
+    {
+      await du.getStoredFileNamesOnMobile();
+      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
+    }
+    
+     }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
   final TextEditingController _titleController = .new();
