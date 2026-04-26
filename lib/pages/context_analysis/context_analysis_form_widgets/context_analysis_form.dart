@@ -63,38 +63,56 @@ class CAFormState extends State<CAForm>
   Set<String> _keywords = {};
   String _analysisTitle = "";  
 
+  // Method used to update a DTOCheckboxWithTextField text 
+  Future<void> _onDTOCheckboxWithTextFieldTextUpdate(DTOCheckboxWithTextField data, String text) async 
+  => data.text = text;
+
+  // Method used to update a DTOSegmentedButtonWithTextField text 
+  Future<void> _onDTOSegmentedButtonWithTextFieldTextUpdate(DTOSegmentedButtonWithTextField data, String text) async 
+  => data.text = text;
+  
   // ─── Methods related to updating DTO and item/heading styling ──────────────────────────────────────────────────
   // Method used to update the DTO, and the item and heading styling (balance issue)
-  void _onBalanceItemChecked(DTOCheckboxWithTextField data, bool? value) {
+  Future<void> _onBalanceItemChecked(DTOCheckboxWithTextField data, bool? value) async
+  {
     data.checked = value!;
     balanceIssueHeadingKey.currentState
         ?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
   // Method used to update the DTO, and the item and heading styling (workplace issue)
-  void _onWorkplaceItemChecked(DTOCheckboxWithTextField data, bool? value) {
+  Future<void> _onWorkplaceItemChecked(DTOCheckboxWithTextField data, bool? value) async
+  {
     data.checked = value!;
     workplaceIssueHeadingKey.currentState
         ?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
   // Method used to update the DTO, and the item and heading styling (legacy issue)
-    void _onLegacyItemChecked(DTOCheckboxWithTextField data, bool? value) {
+  Future<void> _onLegacyItemChecked(DTOCheckboxWithTextField data, bool? value) async 
+  {
     data.checked = value!;
     legacyIssueHeadingKey.currentState
         ?.switchCustomHeadingDecorationIfCheckboxChecked();
   }
 
+  // Method used to update the DTO (segmented buttons)
+  Future<void> _onSegmentedButtonSelection(DTOSegmentedButtonWithTextField data, Set<String>? values) async
+   => data.selection = values ?? {};
+
   // Method used to update the DTO, and the item styling (another issue)
-  void _onAnotherIssueStr(String value) {
+  Future<void> _onAnotherIssueFilledStr(String value) async 
+  {
     widget.dtoCAForm.indivAnotherIssueStr = value;
     anotherIssueHeadingKey.currentState
         ?.switchCustomHeadingDecorationIfTextFieldUsed(value);
   }
 
-  // Method used to update the DTO (segmented buttons)
-  void _onSegmentedButtonSelection(DTOSegmentedButtonWithTextField data, Set<String>? values) =>
-    data.selection = values ?? {};
+  // Method used to update the DTO ( group problems to solve)
+  Future<void> _onGroupProblemsToSolveFilledStr(String value) async 
+  {
+    widget.dtoCAForm.groupProblemsToSolveStr = value;
+  }
   
   // Method used to store the form data to CSV, and the session metadata in a file
   Future<void> saveDataAndMetadata() async 
@@ -198,41 +216,41 @@ class CAFormState extends State<CAForm>
               (
                 checkboxText: qf.level3TitleBalanceIssueItem1,
                 // Initializing the checkbox value with the DTO's value
-                checkboxIsChecked: widget.dtoCAForm.indivBalanceStudiesHousehold.checked,
+                checkboxStartValue:  widget.dtoCAForm.indivBalanceStudiesHousehold.checked,
                 // Initializing the text field value with the DTO's value
                 textFieldStartValue: widget.dtoCAForm.indivBalanceStudiesHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 // Updating DTO and UI (heading and item styling)
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
+                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
                 // Updating DTO
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceStudiesHousehold.text = v;},
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleBalanceIssueItem2,
-                checkboxIsChecked: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.checked,
+                checkboxStartValue: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text = v;},
+                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleBalanceIssueItem3,
-                checkboxIsChecked: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.checked,
+                checkboxStartValue: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text = v;},
+                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleBalanceIssueItem4,
-                checkboxIsChecked: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
+                checkboxStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) => _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text = v;},
+                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -249,20 +267,20 @@ class CAFormState extends State<CAForm>
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleWorkplaceIssueItem1,
-                checkboxIsChecked: widget.dtoCAForm.indivAtWorkMoreAppreciated.checked,
+                checkboxStartValue: widget.dtoCAForm.indivAtWorkMoreAppreciated.checked,
                 textFieldStartValue: widget.dtoCAForm.indivAtWorkMoreAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkMoreAppreciated, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAtWorkMoreAppreciated.text = v;},
+                onCheckboxValueChanged: (v) async  => await _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkMoreAppreciated, v),
+                onTextFieldValueSubmittedCallbackFunction:  (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivAtWorkMoreAppreciated , v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleWorkplaceIssueItem2,
-                checkboxIsChecked: widget.dtoCAForm.indivAtWorkRemainingAppreciated.checked,
+                checkboxStartValue: widget.dtoCAForm.indivAtWorkRemainingAppreciated.checked,
                 textFieldStartValue: widget.dtoCAForm.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) => _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivAtWorkRemainingAppreciated.text = v;},
+                onCheckboxValueChanged: (v) async => await _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -279,11 +297,11 @@ class CAFormState extends State<CAForm>
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleLegacyIssueItem1,
-                checkboxIsChecked: widget.dtoCAForm.indivBetterLegacies.checked,
+                checkboxStartValue: widget.dtoCAForm.indivBetterLegacies.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBetterLegacies.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                onCheckboxValueChanged: (v) => _onLegacyItemChecked(widget.dtoCAForm.indivBetterLegacies, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.indivBetterLegacies.text = v;},
+                onCheckboxValueChanged: (v) async => await _onLegacyItemChecked(widget.dtoCAForm.indivBetterLegacies, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBetterLegacies, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -307,7 +325,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.absentCounter,
-                onTextFieldValueSubmittedCallbackFunction: _onAnotherIssueStr, 
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onAnotherIssueFilledStr(v), 
               ),
             ]
           ),
@@ -368,7 +386,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.absentCounter,
-                onTextFieldValueSubmittedCallbackFunction: (v) {widget.dtoCAForm.groupProblemsToSolveStr = v;},
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilledStr(v),
               ),
 
               /**** ➡️ Sub-point  ****/
@@ -388,8 +406,8 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupSameProblemsToSolve.selection,
                 textFieldStartValue: widget.dtoCAForm.groupSameProblemsToSolve.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblemsToSolve, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupSameProblemsToSolve.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblemsToSolve, v),
+                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupSameProblemsToSolve, v),
               ),
 
               const Gap(preAndPostLevel3DividerGap),
@@ -413,8 +431,8 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupHarmonyHome.selection,
                 textFieldStartValue: widget.dtoCAForm.groupHarmonyHome.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupHarmonyHome, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupHarmonyHome.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupHarmonyHome, v),
+                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupHarmonyHome, v),
               ),
 
               const Gap(preAndPostLevel3DividerGap),
@@ -438,8 +456,8 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.selection,
                 textFieldStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupAppreciabilityAtWork, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupAppreciabilityAtWork.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupAppreciabilityAtWork, v),
+                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupAppreciabilityAtWork, v),
               ),
               
               const Gap(preAndPostLevel3DividerGap),
@@ -463,8 +481,8 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupEarningAbility.selection,
                 textFieldStartValue: widget.dtoCAForm.groupEarningAbility.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) => _onSegmentedButtonSelection(widget.dtoCAForm.groupEarningAbility, v),
-                parentTextFieldValueCallBackFunction: (v) {widget.dtoCAForm.groupEarningAbility.text = v;},
+                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupEarningAbility, v),
+                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupEarningAbility, v),
               ),
             ]
           ),
