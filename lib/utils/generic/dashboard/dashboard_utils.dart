@@ -13,10 +13,10 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// A generic utility class used for the context analyses dashboard, and for the group problem-solvings dashboard (more to do on genericity).
 class DashboardUtils {
 
-  /// String used to communicate the context of the context analyses.
+  /// String used to communicate a dashboard of context analyses.
   static const String caContext = "Context for the context analyses";
 
-  /// String used to communicate the context of the group problem-solvings.
+  /// String used to communicate a dashboard of group problem-solvings.
   static const String gpsContext = "Context for the group problem-solvings";
 
   /// The key for the session title.
