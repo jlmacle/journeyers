@@ -38,14 +38,14 @@ class RunTimeDataUtils
   // ─── FOLDER SELECTED FOR APPLICATION USE ───────────────────────────────────────
   // The setter is also in the Kotlin/Swift code
 
-  /// Method used to check if the application folder path has been saved.
+  /// Method used to retrieve the path to the application folder selected by the user (mobile applications).
   Future<String?> getApplicationFolderPath() async 
   {
     final prefs =  await SharedPreferences.getInstance();
     return prefs.getString('applicationFolderPath') ?? "";
   }
 
-  /// Method used to check if the application folder path has been saved.
+  /// Method used to save the path to the application folder selected by the user (mobile applications).
   Future<bool> setApplicationFolderPath({required String path}) async 
   {
     final prefs =  await SharedPreferences.getInstance();

@@ -73,7 +73,7 @@ class CATextFieldSanitizedAndPadded extends StatefulWidget
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars10Lines, // 10 lines as a reference
-    this.textFieldCounter = TextFieldUtils.presentCounter,
+    this.textFieldCounter = TextFieldUtils.counterPresent,
     required this.stringSanitizerBundlesErrorsMap,
     this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
     this.paddingLeft = 20,
