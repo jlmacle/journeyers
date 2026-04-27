@@ -108,7 +108,7 @@ void main() {
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               onTextFieldValueSubmittedCallbackFunction: (_) {},
               stringSanitizerBundlesErrorsMapping: const {},
-              blacklistingFunctionsErrorsMapping: TextFieldUtils.blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction,
+              blacklistingFunctionsErrorsMapping: TextFieldUtils.simpleBlacklistingFunctionErrorMapping,
             ),
           ),
         ),
