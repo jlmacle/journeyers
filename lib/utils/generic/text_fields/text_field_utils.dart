@@ -84,9 +84,9 @@ class TextFieldUtils
   'Dots are removed,\n'
   'as no extension should be entered\n'
   'in the file name.';
-  
-  // ─── BLACKLIST FUNCTIONS AND ERROR MESSAGES ───────────────────────────────────────
 
+  // ─── BLACKLISTING FUNCTIONS AND ERROR MESSAGES ───────────────────────────────────────
+  
   /// Method checking if a file name is already used, assuming knowledge of its extension.
   /// This method assumes a fileExtension parameter with the format ".fileExtension".
   static bool fileNameAlreadyUsed(String value, String fileExtension) 
@@ -129,8 +129,9 @@ class TextFieldUtils
   /// An error message displayed for the simple blacklisting function returning true.
   static const String errorTextBlacklisted = "This text is part of a blacklist.";
 
-  // ─── MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) ───────────────────────────────────────
-  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction = 
+  // ─── MAP WITH A BLACKLISTING FUNCTION AS KEY, AND AN ERROR MESSAGE AS VALUE (for automated testing) ───────────────────────────────────────
+  /// Map with a blacklisting function as key, and an error message as value (for automated testing).
+  static const Map<BlacklistingFunction, String> simpleBlacklistingFunctionErrorMapping = 
   {
     TextFieldUtils.simpleBlacklistingFunction : TextFieldUtils.errorTextBlacklisted
   };
