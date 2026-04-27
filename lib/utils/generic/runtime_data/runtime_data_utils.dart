@@ -13,26 +13,26 @@ class RunTimeDataUtils
     prefs.reload();
   }
 
-  // ─── ACKNOWLEDGMENT MODAL ───────────────────────────────────────
-  /// Method used to record that the acknowledgment modal has been acknowledged.
-  Future<bool> saveInformationModalAcknowledgement({required bool wasAcknowledged}) async 
+  // ─── FIRST-RUN MODAL ───────────────────────────────────────
+  /// Method used to record that the first-run modal has been acknowledged.
+  Future<bool> saveFirstRunModalAcknowledgement({required bool wasAcknowledged}) async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return await prefs.setBool('isInformationModalAcknowledged', true);
+    return await prefs.setBool('wasFirstRunModalAcknowledged', true);
   }
 
-  /// Method used to check if the information modal has been acknowledged.
-  Future<bool?> isInformationModalAcknowledged() async 
+  /// Method used to check if the first-run modal has been acknowledged.
+  Future<bool?> wasFirstRunModalAcknowledged() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isInformationModalAcknowledged') ?? false;
+    return prefs.getBool('wasFirstRunModalAcknowledged') ?? false;
   }
 
-  /// Method used to reset the acknowledgment modal status
-  Future<bool> resetInformationModalStatus() async 
+  /// Method used to reset the first-run modal status
+  Future<bool> resetFirstRunModalStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return await prefs.setBool('isInformationModalAcknowledged', false);
+    return await prefs.setBool('wasFirstRunModalAcknowledged', false);
   }
 
   // ─── FOLDER SELECTED FOR APPLICATION USE ───────────────────────────────────────
@@ -46,7 +46,7 @@ class RunTimeDataUtils
   }
 
   /// Method used to save the path to the application folder selected by the user (mobile applications).
-  Future<bool> setApplicationFolderPath({required String path}) async 
+  Future<bool> saveApplicationFolderPath({required String path}) async 
   {
     final prefs =  await SharedPreferences.getInstance();
     return prefs.setString('applicationFolderPath', path);
