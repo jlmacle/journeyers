@@ -33,7 +33,7 @@ class CAProcess extends StatefulWidget
   /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
 
-  /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
+  /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const CAProcess({
