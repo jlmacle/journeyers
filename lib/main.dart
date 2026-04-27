@@ -78,7 +78,7 @@ class _MyAppState extends State<MyApp>
         child: 
         MyHomePage
         (
-          parentOnLanguageSelectedCallBackFunction: _setLocale,
+          onLanguageSelectedCallBackFunction: _setLocale,
         ),
       ),
     );

@@ -21,12 +21,12 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language
 class MyHomePage extends StatefulWidget 
 {
   /// The language switch-related callback function for the parent widget.
-  final ValueChanged<Locale> parentOnLanguageSelectedCallBackFunction;
+  final ValueChanged<Locale> onLanguageSelectedCallBackFunction;
 
   const MyHomePage
   ({
     super.key,
-    required this.parentOnLanguageSelectedCallBackFunction,
+    required this.onLanguageSelectedCallBackFunction,
   });
 
   @override
@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {
-      widget.parentOnLanguageSelectedCallBackFunction(Locale(localeLangCodeFromLangName!));
+      widget.onLanguageSelectedCallBackFunction(Locale(localeLangCodeFromLangName!));
     }
   }
 
