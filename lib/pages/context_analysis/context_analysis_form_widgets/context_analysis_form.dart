@@ -32,7 +32,7 @@ class CAForm extends StatefulWidget
   /// The DTO object related to the form.
   final DTOCAForm dtoCAForm;
 
-  /// Callback function used to refresh the page from the context form to the dashboard.
+  /// Callback function used to refresh the page from the context analysis process to the dashboard.
   final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
   /// Callback function used to switch the focusability of the bottom bar items.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
