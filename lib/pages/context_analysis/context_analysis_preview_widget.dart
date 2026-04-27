@@ -169,7 +169,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       {
         currentTitleLevel3Item = secondValue;
         // Checking if an 'X' is in front of the title level 3, and if the item is also a checkbox
-        if (firstValue == 'X' && qf.questionsToInputItemsMapping[currentTitleLevel3Item] == qf.keyCheckbox) 
+        if (firstValue == 'X' && qf.questionsToInputItemsMapping[currentTitleLevel3Item] == qf.labelCheckbox) 
           {checkedBox = true;}
         else 
           {checkedBox = false;}
