@@ -224,7 +224,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: widget.dtoCAForm.indivBalanceStudiesHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 // Updating DTO and UI (heading and item styling)
-                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
                 // Updating DTO
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceStudiesHousehold, v),
               ),
@@ -234,7 +234,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceAccessingIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -243,7 +243,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceEarningIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceEarningIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -252,7 +252,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChanged: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
@@ -273,7 +273,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: widget.dtoCAForm.indivAtWorkMoreAppreciated.checked,
                 textFieldStartValue: widget.dtoCAForm.indivAtWorkMoreAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) async  => await _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkMoreAppreciated, v),
+                onCheckboxValueChangedCallbackFunction: (v) async  => await _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkMoreAppreciated, v),
                 onTextFieldValueSubmittedCallbackFunction:  (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivAtWorkMoreAppreciated , v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -282,7 +282,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: widget.dtoCAForm.indivAtWorkRemainingAppreciated.checked,
                 textFieldStartValue: widget.dtoCAForm.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
-                onCheckboxValueChanged: (v) async => await _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onWorkplaceItemChecked(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivAtWorkRemainingAppreciated, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
@@ -303,7 +303,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: widget.dtoCAForm.indivBetterLegacies.checked,
                 textFieldStartValue: widget.dtoCAForm.indivBetterLegacies.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                onCheckboxValueChanged: (v) async => await _onLegacyItemChecked(widget.dtoCAForm.indivBetterLegacies, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onLegacyItemChecked(widget.dtoCAForm.indivBetterLegacies, v),
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBetterLegacies, v),
               ),
               const Gap(preAndPostLevel3DividerGap),

@@ -57,7 +57,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
   final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
   /// The checkbox-related callback function for the parent widget.
-  final ValueChanged<bool?>? onCheckboxValueChanged;
+  final ValueChanged<bool?>? onCheckboxValueChangedCallbackFunction;
 
   const CACheckboxWithSanitizedAndPaddedTextField
   ({
@@ -76,7 +76,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.counterAbsent,
     this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
-    this.onCheckboxValueChanged = placeHolderFunctionNullableBool,
+    this.onCheckboxValueChangedCallbackFunction = placeHolderFunctionNullableBool,
   });
 
   @override
@@ -116,7 +116,7 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
           controlAffinity: widget.checkboxPosition,
           onChanged: (bool? value) 
           {
-            widget.onCheckboxValueChanged!(value);
+            widget.onCheckboxValueChangedCallbackFunction!(value);
             setState(() 
             {
               _isChecked = value!; 
