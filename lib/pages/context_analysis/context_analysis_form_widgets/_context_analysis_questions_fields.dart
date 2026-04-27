@@ -111,8 +111,8 @@ class CAQuestionsFields
 
   CAQuestionsFields()
   {
-    /// A mapping of question labels with the type of input items 
-    /// (text field, checkbox with text field, segmented button with text field) used to answer.
+    /// A mapping of question labels with the type of input items used to answer the questions
+    /// (text field, checkbox with text field, segmented button with text field).
     questionsToInputItemsMapping = 
     {
       //** Individual perspective **/
