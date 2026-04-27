@@ -64,7 +64,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars10Lines, // 10 lines as a reference
-    this.textFieldCounter = TextFieldUtils.presentCounter,
+    this.textFieldCounter = TextFieldUtils.counterPresent,
     required this.onTextFieldValueSubmittedCallbackFunction,
     this.additionalOnChangedInstructions = placeHolderFunctionString,
     this.additionalOnSubmittedInstructions = placeHolderFunctionString,
