@@ -1,5 +1,5 @@
 /// A function that returns a record,
-/// with a boolean (true if a String should be sanitized),
+/// with a boolean (true if a string should be sanitized),
 /// and with a function to sanitize the string.
 typedef StringSanitizerBundle = 
 ({
@@ -8,7 +8,7 @@ typedef StringSanitizerBundle =
 }) 
 Function(String);
 
-/// A function that returns true if a String should be blocked.
+/// A function that returns true if a string should be blocked.
 typedef BlacklistingFunction = 
 bool Function(String value);
 
