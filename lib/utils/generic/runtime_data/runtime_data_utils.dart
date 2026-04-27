@@ -21,7 +21,7 @@ class RunTimeDataUtils
     return await prefs.setBool('isInformationModalAcknowledged', true);
   }
 
-  /// Method used to check if the acknowledgment modal has been acknowledged.
+  /// Method used to check if the information modal has been acknowledged.
   Future<bool?> isInformationModalAcknowledged() async 
   {
     final prefs = await SharedPreferences.getInstance();
