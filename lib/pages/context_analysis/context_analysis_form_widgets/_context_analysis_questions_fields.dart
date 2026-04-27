@@ -106,7 +106,7 @@ class CAQuestionsFields
   /// A set of the children of the title level 3 related to a legacy issue.
   Set<String> childrenOfLevel3TitleLegacyIssue = {};
 
-  /// A set of the text fields only items
+  /// A set of the text fields only items.
   Set<String> textFieldOnlyItems = {};
 
   CAQuestionsFields()
