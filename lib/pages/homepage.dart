@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage>
         children: 
         [
           // Commented as not all translations are done
-          CustomLanguageSwitch(onLanguageSelectedCallBackFunction: _updateLocale),
+          // CustomLanguageSwitch(onLanguageSelectedCallBackFunction: _updateLocale),
           Expanded(child: _pages[_currentIndex])
         ],
       ),
