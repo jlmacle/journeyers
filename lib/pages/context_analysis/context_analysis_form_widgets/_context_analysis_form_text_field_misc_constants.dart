@@ -2,7 +2,8 @@
 /// A class with constants related to the context analysis text fields.
 class CAFormTextFieldMiscConstants 
 {
-  /// Straight double quotes used to encapsulate the content of answered questions.
+  /// Straight double quotes used to encapsulate the content of answered questions, 
+  /// and sanitized from the context analysis text fields.
   static const String quotesForCSV = '"';
 
 
