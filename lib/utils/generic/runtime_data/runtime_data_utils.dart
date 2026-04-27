@@ -28,7 +28,7 @@ class RunTimeDataUtils
     return prefs.getBool('wasFirstRunModalAcknowledged') ?? false;
   }
 
-  /// Method used to reset the first-run modal status.
+  /// Method used to reset to false if the first-run modal has been acknowledged.
   Future<bool> resetFirstRunModalStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
