@@ -130,7 +130,7 @@ class TextFieldUtils
   static const String errorTextBlacklisted = "This text is part of a blacklist.";
 
   // ─── MAP WITH A BLACKLISTING FUNCTION AS KEY, AND AN ERROR MESSAGE AS VALUE (for automated testing) ───────────────────────────────────────
-  /// Map with a blacklisting function as key, and an error message as value (for automated testing).
+  /// Map with a simple blacklisting function as key, and an error message as value (for automated testing).
   static const Map<BlacklistingFunction, String> simpleBlacklistingFunctionErrorMapping = 
   {
     TextFieldUtils.simpleBlacklistingFunction : TextFieldUtils.errorTextBlacklisted
