@@ -6,7 +6,7 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 /// A project-specific utility class related to user preferences.
 class RunTimeDataUtils 
 {  
-  /// Method used to avoid stale values by reloading
+  /// Method used to avoid stale values by reloading.
   Future<void> reload() async
   {
     final prefs = await SharedPreferences.getInstance();
@@ -28,7 +28,7 @@ class RunTimeDataUtils
     return prefs.getBool('wasFirstRunModalAcknowledged') ?? false;
   }
 
-  /// Method used to reset the first-run modal status
+  /// Method used to reset the first-run modal status.
   Future<bool> resetFirstRunModalStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
