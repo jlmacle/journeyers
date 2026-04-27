@@ -327,7 +327,7 @@ class CAFormState extends State<CAForm>
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
-                textFieldCounter: TextFieldUtils.absentCounter,
+                textFieldCounter: TextFieldUtils.counterAbsent,
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onAnotherIssueFilledStr(v), 
               ),
             ]
@@ -388,7 +388,7 @@ class CAFormState extends State<CAForm>
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
-                textFieldCounter: TextFieldUtils.absentCounter,
+                textFieldCounter: TextFieldUtils.counterAbsent,
                 onTextFieldValueSubmittedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilledStr(v),
               ),
 

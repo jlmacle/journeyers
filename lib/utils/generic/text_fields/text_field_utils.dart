@@ -12,7 +12,7 @@ class TextFieldUtils
 
   // https://api.flutter.dev/flutter/material/InputCounterWidgetBuilder.html
   /// A counter displaying no data.
-  static Widget? absentCounter(
+  static Widget? counterAbsent(
     BuildContext context, {
     int? currentLength,
     int? maxLength,
@@ -22,7 +22,7 @@ class TextFieldUtils
   }
 
   /// A counter displaying "currentLength/maxLength".
-  static Widget? presentCounter(
+  static Widget? counterPresent(
     BuildContext context, {
     int? currentLength,
     int? maxLength,
