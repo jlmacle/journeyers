@@ -83,28 +83,28 @@ class CAQuestionsFields
   // ─── USED IN THE CA FORM DTO AND IN THE CA PREVIEW WIDGET ───────────────────────────────────────
   /// A mapping of question labels with the type of input items 
   /// (text field, checkbox with text field, segmented button with text field) used to answer.
-  Map<String, String> mappingLabelsToInputItems = {};
+  Map<String, String> questionsToInputItemsMapping = {};
 
   /// A set of the titles level 2.
-  Set<String> titlesLevel2 = {};
+  Set<String> level2Titles = {};
 
   /// A set of the titles level 3 related to an individual perspective.
-  Set<String> titlesLevel3ForTheIndividualPerspective = {};
+  Set<String> level3TitlesIndividual = {};
 
   /// A set of the titles level 3 related to a group/team perspective.
-  Set<String> titlesLevel3ForTheGroupPerspective = {};
+  Set<String> level3TitlesGroup = {};
 
   /// A set of the titles level 3 with sub items.
-  Set<String> titlesLevel3WithSubItems = {};
+  Set<String> level3TitlesWithSubItems = {};
 
   /// A set of the children of the title level 3 related to balance issues.
-  Set<String> childrenOfTitleLevel3BalanceIssue = {};
+  Set<String> childrenOfLevel3TitleBalanceIssue = {};
 
   /// A set of the children of the title level 3 related to workplace issues.
-  Set<String> childrenOfTitleLevel3WorkplaceIssue = {};
+  Set<String> childrenOfLevel3TitleWorkplaceIssue = {};
 
   /// A set of the children of the title level 3 related to a legacy issue.
-  Set<String> childrenOfTitleLevel3LegacyIssue = {};
+  Set<String> childrenOfLevel3TitleLegacyIssue = {};
 
   /// A set of the text fields only items
   Set<String> textFieldOnlyItems = {};
@@ -113,7 +113,7 @@ class CAQuestionsFields
   {
     /// A mapping of question labels with the type of input items 
     /// (text field, checkbox with text field, segmented button with text field) used to answer.
-    mappingLabelsToInputItems = 
+    questionsToInputItemsMapping = 
     {
       //** Individual perspective **/
       // balance issue
@@ -143,10 +143,10 @@ class CAQuestionsFields
     };
 
     /// A set of the titles level 2.
-    titlesLevel2 = {level2TitleIndividual, level2TitleGroup};
+    level2Titles = {level2TitleIndividual, level2TitleGroup};
 
     /// A set of the titles level 3 related to an individual perspective.
-    titlesLevel3ForTheIndividualPerspective = {
+    level3TitlesIndividual = {
         level3TitleBalanceIssue,
         level3TitleWorkplaceIssue,
         level3TitleLegacyIssue,
@@ -154,7 +154,7 @@ class CAQuestionsFields
       };
 
     /// A set of the titles level 3 related to a group/team perspective.
-    titlesLevel3ForTheGroupPerspective = {
+    level3TitlesGroup = {
       level3TitleGroupsProblematics,
       level3TitleSameProblem,
       level3TitleHarmonyAtHome,
@@ -163,7 +163,7 @@ class CAQuestionsFields
     };
 
     /// A set of the titles level 3 with sub items.
-    titlesLevel3WithSubItems = {
+    level3TitlesWithSubItems = {
       level3TitleBalanceIssue,
       level3TitleWorkplaceIssue,
       level3TitleLegacyIssue,
@@ -172,7 +172,7 @@ class CAQuestionsFields
     // Sets of the children of the titles level 3 with sub items
 
     /// A set of the children of the title level 3 related to balance issues.
-    childrenOfTitleLevel3BalanceIssue = {
+    childrenOfLevel3TitleBalanceIssue = {
       level3TitleBalanceIssueItem1,
       level3TitleBalanceIssueItem2,
       level3TitleBalanceIssueItem3,
@@ -180,13 +180,13 @@ class CAQuestionsFields
     };
 
     /// A set of the children of the title level 3 related to workplace issues.
-    childrenOfTitleLevel3WorkplaceIssue = {
+    childrenOfLevel3TitleWorkplaceIssue = {
       level3TitleWorkplaceIssueItem1,
       level3TitleWorkplaceIssueItem2,
     };
 
     /// A set of the children of the title level 3 related to a legacy issue.
-    childrenOfTitleLevel3LegacyIssue = {level3TitleLegacyIssueItem1};
+    childrenOfLevel3TitleLegacyIssue = {level3TitleLegacyIssueItem1};
 
     /// A set of the text fields only items
     textFieldOnlyItems = {
