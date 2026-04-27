@@ -8,7 +8,8 @@ class L10nUtils
 {  
 
 /// A method used to get a list of all the language names, related to a locale, from the l10n data. 
-/// For example, \["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\]. 
+/// For example, \["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\],
+/// for English as a locale. 
 /// When adding a new base locale, file and method can be updated using l10n_utils_update.py. 
 //  Note:  \[ and \] for dart doc 
 static List<String> getLanguages({required BuildContext buildContext}) 

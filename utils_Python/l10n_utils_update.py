@@ -56,7 +56,8 @@ def code_generation_for_method_get_languages() -> str:
   method_1_begin = (
     '\n'
     '/// A method used to get a list of all the language names, related to a locale, from the l10n data. \n'
-    '/// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\]. \n'
+    '/// For example, \\["Arabic", "Chinese", "English", "French", "Hindi", "Portuguese", "Spanish"\\],\n'
+    '/// for English as a locale. \n'
     '/// When adding a new base locale, file and method can be updated using l10n_utils_update.py. \n'
     '//  Note:  \\[ and \\] for dart doc \n'
     'static List<String> getLanguages({required BuildContext buildContext}) \n'
