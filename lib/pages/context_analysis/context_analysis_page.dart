@@ -14,7 +14,7 @@ import 'package:journeyers/widgets/utility/dashboard_page.dart';
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analysis sessions.
-/// The context analyses page embeds a DashboardPage and/or a CAFormPage.
+/// The context analyses page embeds a DashboardPage and/or a CAProcess widgets.
 class CAPage extends StatefulWidget 
 {
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
@@ -200,7 +200,7 @@ class CAPageState extends State<CAPage>
               ),
             ]
             else
-            // if no context analysis session data has been stored, a context analysis form is displayed
+            // if no context analysis data has been stored, the context analysis process is displayed
             Expanded
             (
               child: 
