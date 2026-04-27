@@ -88,6 +88,7 @@ class TextFieldUtils
   // ─── BLACKLIST FUNCTIONS AND ERROR MESSAGES ───────────────────────────────────────
 
   /// Method checking if a file name is already used, assuming knowledge of its extension.
+  /// This method assumes a fileExtension parameter with the format ".fileExtension".
   static bool fileNameAlreadyUsed(String value, String fileExtension) 
   {
     List<String> currentListOfStoredFileNames = du.currentListOfStoredFileNames;
