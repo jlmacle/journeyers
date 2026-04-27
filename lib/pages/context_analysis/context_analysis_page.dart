@@ -14,10 +14,10 @@ import 'package:journeyers/widgets/utility/dashboard_page.dart';
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analysis sessions.
-/// The context analyses page embeds a DashboardPage and/or a CAProcess widgets.
+/// The context analyses page embeds a DashboardPage and/or a CAProcess widget(s).
 class CAPage extends StatefulWidget 
 {
-  /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
+  /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const CAPage
