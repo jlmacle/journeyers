@@ -137,7 +137,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
             await upu.reload();
           }
         },
-      stringSanitizerBundlesErrorsMapping: TextFieldstringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForFileNames,
+      stringSanitizerBundlesErrorsMapping: TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForFileNames,
       blacklistingFunctionsErrorsMapping: 
       (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV) 
         ? blacklistingFunctionsErrorsMappingForCSVFileNames

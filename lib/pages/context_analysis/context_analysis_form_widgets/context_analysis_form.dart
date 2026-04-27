@@ -320,7 +320,7 @@ class CAFormState extends State<CAForm>
                 ),
               CATextFieldSanitizedAndPadded
               (
-                stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldstringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
+                stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldStartValue:widget.dtoCAForm.indivAnotherIssueStr,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
@@ -383,7 +383,7 @@ class CAFormState extends State<CAForm>
               (
                 textFieldStartValue: widget.dtoCAForm.groupProblemsToSolveStr,
                 textFieldHint: pleaseDescribeTextGroupsHint,
-                stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldstringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
+                stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,

@@ -161,7 +161,7 @@ class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASeg
             child: 
             CATextFieldSanitizedAndPadded
             (
-              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldstringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
+              stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
               textFieldStartValue: _textFieldValue,
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: widget.textFieldHint,
