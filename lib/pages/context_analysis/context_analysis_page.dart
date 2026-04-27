@@ -40,7 +40,7 @@ class CAPageState extends State<CAPage>
   getPreferences() async 
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
-    _isInformationModalAlreadyAcknowledged = await upu.isInformationModalAcknowledged();
+    _isInformationModalAlreadyAcknowledged = await upu.wasFirstRunModalAcknowledged();
     _wasCASessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.caContext);
 
     setState(() {_preferencesLoading = false;});
@@ -66,7 +66,7 @@ class CAPageState extends State<CAPage>
               (
                 onPressed: () async
                 {
-                  await upu.saveInformationModalAcknowledgement(wasAcknowledged: true);
+                  await upu.saveFirstRunModalAcknowledgement(wasAcknowledged: true);
                   Navigator.pop(context);
                 },
                 child: 
