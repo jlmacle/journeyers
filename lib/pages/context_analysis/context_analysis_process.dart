@@ -30,7 +30,7 @@ import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.da
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
 class CAProcess extends StatefulWidget 
 {
-  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
+  /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
 
   /// An "expansion tile expanded/folded"-related callback function for the parent widget, to enhance the tab navigation.
