@@ -153,30 +153,30 @@ class FileUtils
 
   // ─── METHODS USED TO READ FILES : beginning ───────────────────────────────────────
   /// Method used to read a text file on Android.
-  Future<String> readTextContentOnAndroid({required String fileName}) async
+  Future<String> readTextFileOnAndroid({required String fileName}) async
   {
     return await platformAndroid.invokeMethod
         ('readFileContent', {'fileName': fileName}); 
   }
 
   /// Method used to read a text file on iOS.
-  Future<String> readTextContentOnIOS({required String fileName}) async
+  Future<String> readTextFileOnIOS({required String fileName}) async
   {
     return await platformIOS.invokeMethod
         ('readFileContent', {'fileName': fileName}); 
   }
 
   /// Method used to read a text file on mobile.
-  Future<String> readTextContentOnMobile({required String pathToData}) async
+  Future<String> readTextFileOnMobile({required String pathToData}) async
   {
     String fileName = path.basename(pathToData);
     if (Platform.isIOS)
     {
-      return await readTextContentOnIOS(fileName: fileName);
+      return await readTextFileOnIOS(fileName: fileName);
     }
     else if (Platform.isAndroid)
     {
-      return await readTextContentOnAndroid(fileName: fileName);
+      return await readTextFileOnAndroid(fileName: fileName);
     }
     else 
     {

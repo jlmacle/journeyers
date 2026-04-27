@@ -394,7 +394,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
     {
       String fileName = path.basename(pathToCSVFile);
       if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on Android");
-      final String content = await fu.readTextContentOnAndroid(fileName: fileName);
+      final String content = await fu.readTextFileOnAndroid(fileName: fileName);
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isIOS)
@@ -404,7 +404,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       final String content;
       try
       {
-        content = await fu.readTextContentOnIOS(fileName: fileName);
+        content = await fu.readTextFileOnIOS(fileName: fileName);
         csvLines = LineSplitter.split(content).toList();
       }
       on PlatformException

@@ -47,7 +47,7 @@ class _GPSPreviewWidgetState
       lines = [];
       if (Platform.isAndroid || Platform.isIOS)
       {
-        String content = await fu.readTextContentOnMobile(pathToData: widget.pathToStoredData);
+        String content = await fu.readTextFileOnMobile(pathToData: widget.pathToStoredData);
         lines = LineSplitter.split(content).toList();
       }
       else
