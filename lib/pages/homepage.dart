@@ -14,6 +14,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pag
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/l10n/l10n_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language_switch.dart';
 
 /// {@category Pages}
 /// The homepage for the app.
@@ -164,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage>
         children: 
         [
           // Commented as not all translations are done
-          // CustomLanguageSwitch(parentLanguageValueCallBackFunction: _updateLocale),
+          CustomLanguageSwitch(onLanguageSelectedCallBackFunction: _updateLocale),
           Expanded(child: _pages[_currentIndex])
         ],
       ),
