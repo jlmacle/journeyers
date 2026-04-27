@@ -254,7 +254,7 @@ class DTOCAForm
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      if (qf.mappingLabelsToInputItems[itemOrTitleLabel] == qf.keyCheckbox) {
+      if (qf.questionsToInputItemsMapping[itemOrTitleLabel] == qf.keyCheckbox) {
         // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
         var checkboxPreCSVData = await checkboxWithTextFieldDataToPreCSV(
           checkboxWithTextFieldData:
@@ -265,7 +265,7 @@ class DTOCAForm
         preCSVData.add(checkboxPreCSVData[1] as List<String>);
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
-      else if (qf.mappingLabelsToInputItems[itemOrTitleLabel] ==
+      else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
           qf.keySegmentedButton) {
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
@@ -276,7 +276,7 @@ class DTOCAForm
         preCSVData.add(segmentedButtonPreCSVData[1]);
       }
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
-      else if (qf.mappingLabelsToInputItems[itemOrTitleLabel] ==
+      else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
           qf.keyTextField) {
         var textFieldpreCSVData = await textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
@@ -288,7 +288,7 @@ class DTOCAForm
         if (csvBuildingDebug) pu.printd("CSV Building");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
-        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${qf.mappingLabelsToInputItems[itemOrTitleLabel]}");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${qf.questionsToInputItemsMapping[itemOrTitleLabel]}");
         if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
@@ -311,7 +311,7 @@ class DTOCAForm
       preCSVData.add(level3TitlePreCSVData);
 
       // 1. Checking if sub-items exist before starting the processing of the level 3 title data
-      if (qf.titlesLevel3WithSubItems.contains(level3Title)) {
+      if (qf.level3TitlesWithSubItems.contains(level3Title)) {
         // Going through the sub items
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
         // A LinkedHashMap as value
@@ -409,21 +409,21 @@ class DTOCAForm
 
         // Adding an X to the parent title level 3
         var previousIndexData_1AsString = previousIndexData[1];
-        if (qf.childrenOfTitleLevel3BalanceIssue.contains(
+        if (qf.childrenOfLevel3TitleBalanceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[qf.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (qf.childrenOfTitleLevel3WorkplaceIssue.contains(
+        } else if (qf.childrenOfLevel3TitleWorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[qf.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = 'X';
-        } else if (qf.childrenOfTitleLevel3LegacyIssue.contains(
+        } else if (qf.childrenOfLevel3TitleLegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
@@ -514,10 +514,10 @@ class DTOCAForm
 
       if (
       // Found titles level 3
-      (qf.titlesLevel3ForTheIndividualPerspective.contains(
+      (qf.level3TitlesIndividual.contains(
                 indexData_1AsStringTrimmed,
               ) ||
-              qf.titlesLevel3ForTheGroupPerspective.contains(
+              qf.level3TitlesGroup.contains(
                 indexData_1AsStringTrimmed,
               )) &&
           // and not yet processed
