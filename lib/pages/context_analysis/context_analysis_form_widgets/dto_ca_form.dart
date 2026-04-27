@@ -67,16 +67,16 @@ class DTOCAForm
   Future<LinkedHashMap<String, String>> _checkboxDataToMap(DTOCheckboxWithTextField f) async
 
     =>  LinkedHashMap<String, String>.from({
-        qf.keyCheckbox:  '${f.checked}',
-        qf.keyTextField: f.checked ? f.text : '',
+        qf.labelCheckbox:  '${f.checked}',
+        qf.labelTextField: f.checked ? f.text : '',
       });
 
   // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
   // Both values are omitted (left empty) when nothing is selected.
   Future<LinkedHashMap<String, String>> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) async =>
       LinkedHashMap<String, String>.from({
-        qf.keySegmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
-        qf.keyTextField:       f.selection.isNotEmpty ? f.text : '',
+        qf.labelSegmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
+        qf.labelTextField:       f.selection.isNotEmpty ? f.text : '',
         });
 
   // Serialises a segmented-button selection to a slash-separated string.
@@ -118,7 +118,7 @@ class DTOCAForm
         
         qf.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
         ({
-          qf.keyTextField: indivAnotherIssueStr,
+          qf.labelTextField: indivAnotherIssueStr,
         }),
       }),
     });
@@ -129,7 +129,7 @@ class DTOCAForm
       qf.level2TitleGroup: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        qf.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({qf.keyTextField: groupProblemsToSolveStr}),
+        qf.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({qf.labelTextField: groupProblemsToSolveStr}),
 
         qf.level3TitleSameProblem:          await _segmentedDataToMap(groupSameProblemsToSolve),
 
@@ -165,13 +165,13 @@ class DTOCAForm
     List<Object> checkboxPreCSVData = [];
 
     // checkbox data converted from bool to String: values can be "true" or "false"
-    var dataCheckbox = "${checkboxWithTextFieldData[qf.keyCheckbox]}";
+    var dataCheckbox = "${checkboxWithTextFieldData[qf.labelCheckbox]}";
     var data1 = [
-      qf.keyCheckbox,
+      qf.labelCheckbox,
       dataCheckbox,
     ]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    String dataTextField = (checkboxWithTextFieldData[qf.keyTextField] ?? "") as String;
+    String dataTextField = (checkboxWithTextFieldData[qf.labelTextField] ?? "") as String;
     var data2 = [
       notes,
       quotesForCSV + dataTextField + quotesForCSV,
@@ -207,11 +207,11 @@ class DTOCAForm
     List<List<String>> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
-        segmentedButtonWithTextFieldData[qf.keySegmentedButton] ?? "";
-    var data1 = [qf.keySegmentedButton, dataSegmentedButton];
+        segmentedButtonWithTextFieldData[qf.labelSegmentedButton] ?? "";
+    var data1 = [qf.labelSegmentedButton, dataSegmentedButton];
 
     var dataTextField =
-        segmentedButtonWithTextFieldData[qf.keyTextField] as String;
+        segmentedButtonWithTextFieldData[qf.labelTextField] as String;
     List<String> data2 = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
@@ -229,7 +229,7 @@ class DTOCAForm
   {
     List<List<String>> textFieldPreCSVData = [];
 
-    var dataTextField = textFieldData[qf.keyTextField] as String;
+    var dataTextField = textFieldData[qf.labelTextField] as String;
     List<String> data = [notes, quotesForCSV + dataTextField + quotesForCSV];
 
     textFieldPreCSVData.add(data);
@@ -254,7 +254,7 @@ class DTOCAForm
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      if (qf.questionsToInputItemsMapping[itemOrTitleLabel] == qf.keyCheckbox) {
+      if (qf.questionsToInputItemsMapping[itemOrTitleLabel] == qf.labelCheckbox) {
         // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
         var checkboxPreCSVData = await checkboxWithTextFieldDataToPreCSV(
           checkboxWithTextFieldData:
@@ -266,7 +266,7 @@ class DTOCAForm
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
       else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
-          qf.keySegmentedButton) {
+          qf.labelSegmentedButton) {
         var segmentedButtonPreCSVData =
             await segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
@@ -277,7 +277,7 @@ class DTOCAForm
       }
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
       else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
-          qf.keyTextField) {
+          qf.labelTextField) {
         var textFieldpreCSVData = await textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
         );
@@ -370,7 +370,7 @@ class DTOCAForm
 
       // Removal of all [checkbox, "false"] (unchecked boxes)
       // Removal of all ["Notes:",]  if related to an unchecked checkbox
-      if ((indexedData[0].contains(qf.keyCheckbox)) &&
+      if ((indexedData[0].contains(qf.labelCheckbox)) &&
           (indexData_1AsString.trim() == "false")) {
         preCSVData.removeAt(index);
         // The index now points to the following note
@@ -400,7 +400,7 @@ class DTOCAForm
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
-      if ((indexedData[0].contains(qf.keyCheckbox)) &&
+      if ((indexedData[0].contains(qf.labelCheckbox)) &&
           (indexData_1AsString.trim() == "true")) {
         // Adding X in front of the question
         // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
@@ -439,7 +439,7 @@ class DTOCAForm
     // All the analysis is feasible in one loop, in spite of the removal effect on the indexes
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[0].contains(qf.keyCheckbox)) {
+      if (indexedData[0].contains(qf.labelCheckbox)) {
         preCSVData.removeAt(index);
       }
     }
@@ -453,7 +453,7 @@ class DTOCAForm
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
 
-      if (indexedData[0].contains(qf.keySegmentedButton)) {
+      if (indexedData[0].contains(qf.labelSegmentedButton)) {
         if (indexData_1AsString.trim() != "") {
           // Removing segmentedButton from the data written
           indexedData[0] = "";
@@ -474,7 +474,7 @@ class DTOCAForm
       // segmentedButton has already been removed from the answered segmented buttons
       // and replaced with ""
       // Removing all remaining preCSVData lines with segmentedButton
-      if (indexedData[0].contains(qf.keySegmentedButton)) {
+      if (indexedData[0].contains(qf.labelSegmentedButton)) {
         preCSVData.removeAt(index);
         // The index now points to the following note
         preCSVData.removeAt(index);

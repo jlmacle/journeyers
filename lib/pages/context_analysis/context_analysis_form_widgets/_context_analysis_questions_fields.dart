@@ -70,13 +70,13 @@ class CAQuestionsFields
 
   // ─── USED IN THE CA FORM DTO AND/OR THIS FILE ───────────────────────────────────────
   /// A util used to label checkbox data.
-  String keyCheckbox = "checkbox";
+  String labelCheckbox = "checkbox";
 
   /// A util used to label text field data.
-  String keyTextField = "textField";
+  String labelTextField = "textField";
 
   /// A util used to label segmented button data.
-  String keySegmentedButton = "segmentedButton";
+  String labelSegmentedButton = "segmentedButton";
 
 
 
@@ -117,29 +117,29 @@ class CAQuestionsFields
     {
       //** Individual perspective **/
       // balance issue
-      level3TitleBalanceIssueItem1: keyCheckbox,
-      level3TitleBalanceIssueItem2: keyCheckbox,
-      level3TitleBalanceIssueItem3: keyCheckbox,
-      level3TitleBalanceIssueItem4: keyCheckbox,
+      level3TitleBalanceIssueItem1: labelCheckbox,
+      level3TitleBalanceIssueItem2: labelCheckbox,
+      level3TitleBalanceIssueItem3: labelCheckbox,
+      level3TitleBalanceIssueItem4: labelCheckbox,
       // workplace issue
-      level3TitleWorkplaceIssueItem1: keyCheckbox,
-      level3TitleWorkplaceIssueItem2: keyCheckbox,
+      level3TitleWorkplaceIssueItem1: labelCheckbox,
+      level3TitleWorkplaceIssueItem2: labelCheckbox,
       // legacy issue
-      level3TitleLegacyIssueItem1: keyCheckbox,
+      level3TitleLegacyIssueItem1: labelCheckbox,
       // another type
-      level3TitleAnotherIssue: keyTextField,
+      level3TitleAnotherIssue: labelTextField,
 
       //** Group/team perspective **/
       // group problematics
-      level3TitleGroupsProblematics: keyTextField,
+      level3TitleGroupsProblematics: labelTextField,
       // same problem?
-      level3TitleSameProblem: keySegmentedButton,
+      level3TitleSameProblem: labelSegmentedButton,
       // harmony at home
-      level3TitleHarmonyAtHome: keySegmentedButton,
+      level3TitleHarmonyAtHome: labelSegmentedButton,
       // appreciability at work
-      level3TitleAppreciabilityAtWork: keySegmentedButton,
+      level3TitleAppreciabilityAtWork: labelSegmentedButton,
       // earning ability
-      level3TitleIncomeEarningAbility: keySegmentedButton,
+      level3TitleIncomeEarningAbility: labelSegmentedButton,
     };
 
     /// A set of the titles level 2.
