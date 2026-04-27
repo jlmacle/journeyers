@@ -121,7 +121,7 @@ class TextFieldUtils
   'Please use a different file name.';
 
   /// Simple blacklisting function returning true.
-  static bool simpleBlackistingFunction(String value) 
+  static bool simpleBlacklistingFunction(String value) 
   {
     return true;
   }
@@ -132,6 +132,6 @@ class TextFieldUtils
   // ─── MAP WITH BLACKLISTING FUNCTIONS AS KEYS, AND ERROR MESSAGES AS VALUES (for automated testing) ───────────────────────────────────────
   static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForSimpleBlacklistingFunction = 
   {
-    TextFieldUtils.simpleBlackistingFunction : TextFieldUtils.errorTextBlacklisted
+    TextFieldUtils.simpleBlacklistingFunction : TextFieldUtils.errorTextBlacklisted
   };
 }
