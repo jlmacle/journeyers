@@ -63,7 +63,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     for (String filePath in filesToDelete) 
     {
       // Removing the file
-      await fu.deleteCsvFile(filePath); 
+      await fu.deleteCSVFile(filePath); 
       
       // Removing the metadata from the stored metadata
       await du.deleteSpecificSessionMetadata

@@ -155,7 +155,7 @@ class DashboardPageState extends State<DashboardPage>
   Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the stored file
-    await fu.deleteCsvFile(filePath);
+    await fu.deleteCSVFile(filePath);
 
     // Removing the related stored dashboard data
     await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);

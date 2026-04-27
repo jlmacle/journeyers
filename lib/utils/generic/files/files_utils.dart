@@ -188,19 +188,19 @@ class FileUtils
 
   // ─── METHODS USED TO DELETE FILES : beginning  ───────────────────────────────────────
   /// Generic method used to delete a file.
-  Future<void> deleteCsvFile(String pathToCsv) async
+  Future<void> deleteCSVFile(String pathToCSV) async
   {
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
     {
-      await deleteCsvFileOnDesktop(pathToCsv);
+      await deleteCSVFileOnDesktop(pathToCSV);
     }
     else if (Platform.isAndroid)
     {
-      await deleteCsvFileOnAndroid(pathToCsv);
+      await deleteCSVFileOnAndroid(pathToCSV);
     }
     else if (Platform.isIOS)
     {
-      await deleteCsvFileOnIOS(pathToCsv);
+      await deleteCSVFileOnIOS(pathToCSV);
     }
     else 
     {
@@ -209,20 +209,20 @@ class FileUtils
   }
 
   /// Method used to delete a file on desktop.
-  Future<void> deleteCsvFileOnDesktop(String pathToCsv) async
+  Future<void> deleteCSVFileOnDesktop(String pathToCSV) async
   {
     try 
     {
-      final file = File(pathToCsv);
+      final file = File(pathToCSV);
 
       // Checking if the file exists before attempting to delete
       if (await file.exists()) 
       {
         await file.delete();
-        if (sessionDataDebug) pu.printd("Session Data: File successfully deleted: $pathToCsv");
+        if (sessionDataDebug) pu.printd("Session Data: File successfully deleted: $pathToCSV");
       } else 
       {
-        if (sessionDataDebug) pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCsv");
+        if (sessionDataDebug) pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCSV");
         if (sessionDataDebug) pu.printd("Session Data: Current working directory: ${Directory.current.path}");
       }
     } on FileSystemException 
@@ -233,13 +233,13 @@ class FileUtils
   }
 
   /// Method used to delete a file on Android.
-  Future<bool> deleteCsvFileOnAndroid(String pathToCsv) async 
+  Future<bool> deleteCSVFileOnAndroid(String pathToCSV) async 
   {
     try 
     {
       // Extracting only the filename from the path if necessary, 
       // as findFile() in Kotlin expects the name within the tree
-      final fileName = pathToCsv.split('/').last;
+      final fileName = pathToCSV.split('/').last;
 
       final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
 
@@ -258,13 +258,13 @@ class FileUtils
   }
 
   /// Method used to delete a file on iOS.
-  Future<bool> deleteCsvFileOnIOS(String pathToCsv) async 
+  Future<bool> deleteCSVFileOnIOS(String pathToCSV) async 
   {
     try 
     {
       // Extracting only the filename from the path if necessary, 
       // as findFile() in Kotlin expects the name within the tree
-      final fileName = pathToCsv.split('/').last;
+      final fileName = pathToCSV.split('/').last;
 
       final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
 
