@@ -9,6 +9,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.
 class GPSPreviewWidget extends StatefulWidget {
+  /// The path to a stored group problem-solving session data.
   final String pathToStoredData;
 
   const GPSPreviewWidget({

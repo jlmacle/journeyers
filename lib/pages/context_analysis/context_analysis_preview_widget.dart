@@ -18,7 +18,7 @@ import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dar
 /// A preview widget used in the context analysis dashboard.
 class CAPreviewWidget extends StatefulWidget 
 {
-  /// The path to the stored context analysis data.
+  /// The path to a stored context analysis session data.
   final String pathToStoredData;
 
   const CAPreviewWidget({
