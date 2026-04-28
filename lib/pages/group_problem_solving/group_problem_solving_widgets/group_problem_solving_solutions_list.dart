@@ -5,6 +5,7 @@ import 'package:journeyers/app_themes.dart'; // Ensure this matches your path
 /// {@category Group problem-solving}
 /// A widget used to list the solutions found during a group problem-solving process.
 class GPSSolutionsList extends StatelessWidget {
+  /// The solutions for the group problem-solving process.
   final List<String> solutions;
 
   const GPSSolutionsList({super.key, required this.solutions});
