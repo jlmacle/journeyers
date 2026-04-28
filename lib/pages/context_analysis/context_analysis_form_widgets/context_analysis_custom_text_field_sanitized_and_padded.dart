@@ -12,7 +12,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 /// The text field has string sanitization ability. 
 class CATextFieldSanitizedAndPadded extends StatefulWidget 
 {
-  /// If the text field maintains state, when the CheckboxWithTextField instance is unchecked for example.
+  /// If the text field maintains state, when a checkbox with filled text field is unchecked for example.
   final bool maintainState;
 
   /// The start value for the text field.
