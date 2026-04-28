@@ -192,7 +192,7 @@ class DTOCAForm
 
 
   /// Method extracting information from {labelSegmentedButton: "Yes"/"No"/"I don't know" , labelTextField: data/""}
-  /// and returning \[\[labelSegmentedButton,"Yes"/"No"/"I don't know"/""\],\[labelNotes,"data"/""\]\].
+  /// and returning \[\[labelSegmentedButton,"Yes"/"No"/"I don't know"/""\],\[labelNotes,data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
   Future<List<List<String>>> segmentedButtonWithTextFieldDataToPreCSV({
     required LinkedHashMap<String, String> segmentedButtonWithTextFieldData,
@@ -215,7 +215,7 @@ class DTOCAForm
   }
 
   /// Method extracting information from {labelTextField: data/""}
-  /// and returning \[\[labelNotes,"data"/""\]\].
+  /// and returning \[\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
   Future<List<List<String>>> textFieldDataToPreCSV({
     required LinkedHashMap<String, Object?> textFieldData,
