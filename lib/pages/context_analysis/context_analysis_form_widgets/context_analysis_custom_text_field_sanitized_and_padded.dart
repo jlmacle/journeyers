@@ -21,7 +21,7 @@ class CATextFieldSanitizedAndPadded extends StatefulWidget
   /// The alignment of the text.
   final TextAlign textAlignment;
 
-  // The text style for the text field.
+  /// The text style for the text field.
   final TextStyle textFieldStyle;
 
   /// The hint text for the text field.
