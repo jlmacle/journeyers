@@ -25,7 +25,7 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
   /// The font size for the text options.
   final double segButtonTextOptionsfontSize;
 
-  /// The color of the text options.
+  /// The color of the options text.
   final Color segButtonTextOptionsColor;
 
   /// The boolean related to enabling multiselection.
