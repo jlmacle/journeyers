@@ -66,7 +66,7 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
 
   /// The segmented button-related callback function for the parent widget.
   final ValueChanged<Set<String>>
-  parentSegmentedButtonValueCallBackFunction;
+  onSegmentedButtonOptionsSelectedCallbackFunction;
 
   const CASegmentedButtonWithSanitizedAndPaddedTextField
   ({
@@ -88,7 +88,7 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.counterAbsent,
     this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
-    this.parentSegmentedButtonValueCallBackFunction =
+    this.onSegmentedButtonOptionsSelectedCallbackFunction =
         placeHolderFunctionSetString,
   });
 
@@ -150,7 +150,7 @@ class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASeg
           onSelectionChanged: (newSelection) 
           {
             setState(() {_selection = newSelection;});
-            widget.parentSegmentedButtonValueCallBackFunction(newSelection);
+            widget.onSegmentedButtonOptionsSelectedCallbackFunction(newSelection);
           },
           selected: _selection!,
         ),

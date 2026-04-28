@@ -409,7 +409,7 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupSameProblemsToSolve.selection,
                 textFieldStartValue: widget.dtoCAForm.groupSameProblemsToSolve.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblemsToSolve, v),
+                onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblemsToSolve, v),
                 parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupSameProblemsToSolve, v),
               ),
 
@@ -434,7 +434,7 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupHarmonyHome.selection,
                 textFieldStartValue: widget.dtoCAForm.groupHarmonyHome.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupHarmonyHome, v),
+                onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupHarmonyHome, v),
                 parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupHarmonyHome, v),
               ),
 
@@ -459,7 +459,7 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.selection,
                 textFieldStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupAppreciabilityAtWork, v),
+                onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupAppreciabilityAtWork, v),
                 parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupAppreciabilityAtWork, v),
               ),
               
@@ -484,7 +484,7 @@ class CAFormState extends State<CAForm>
                 segButtonStartValue: widget.dtoCAForm.groupEarningAbility.selection,
                 textFieldStartValue: widget.dtoCAForm.groupEarningAbility.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
-                parentSegmentedButtonValueCallBackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupEarningAbility, v),
+                onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupEarningAbility, v),
                 parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupEarningAbility, v),
               ),
             ]
