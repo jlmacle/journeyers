@@ -410,7 +410,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: widget.dtoCAForm.groupSameProblemsToSolve.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupSameProblemsToSolve, v),
-                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupSameProblemsToSolve, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupSameProblemsToSolve, v),
               ),
 
               const Gap(preAndPostLevel3DividerGap),
@@ -435,7 +435,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: widget.dtoCAForm.groupHarmonyHome.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupHarmonyHome, v),
-                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupHarmonyHome, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupHarmonyHome, v),
               ),
 
               const Gap(preAndPostLevel3DividerGap),
@@ -460,7 +460,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: widget.dtoCAForm.groupAppreciabilityAtWork.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupAppreciabilityAtWork, v),
-                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupAppreciabilityAtWork, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupAppreciabilityAtWork, v),
               ),
               
               const Gap(preAndPostLevel3DividerGap),
@@ -485,7 +485,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: widget.dtoCAForm.groupEarningAbility.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async => await _onSegmentedButtonSelection(widget.dtoCAForm.groupEarningAbility, v),
-                parentTextFieldValueCallBackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupEarningAbility, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOSegmentedButtonWithTextFieldTextUpdate(widget.dtoCAForm.groupEarningAbility, v),
               ),
             ]
           ),
