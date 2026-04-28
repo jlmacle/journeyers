@@ -32,10 +32,10 @@ class CustomExpansionTile extends StatefulWidget
   /// The height of the divider under the additional text.
   final double expandedContentDividerHeight;
 
-  /// The callback function called to edit from the expansion tile.
+  /// A callback function called to edit from the expansion tile.
   final VoidCallback onEditPressedCallbackFunction;
 
-  /// The callback function called to delete from the expansion tile.
+  /// A callback function called to delete from the expansion tile.
   final VoidCallback onDeletePressedCallbackFunction;
 
   /// A list of \[iconData, toolTipLabel, callBackFunction\] values for the action icon(s).
