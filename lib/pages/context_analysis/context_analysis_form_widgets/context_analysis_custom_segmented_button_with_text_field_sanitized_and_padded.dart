@@ -62,7 +62,7 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> parentTextFieldValueCallBackFunction;
+  final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
   /// The segmented button-related callback function for the parent widget.
   final ValueChanged<Set<String>>
@@ -87,7 +87,7 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.counterAbsent,
-    this.parentTextFieldValueCallBackFunction = placeHolderFunctionString,
+    this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
     this.onSegmentedButtonOptionsSelectedCallbackFunction =
         placeHolderFunctionSetString,
   });
@@ -170,7 +170,7 @@ class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASeg
               onTextFieldValueSubmittedCallbackFunction: 
                 (String text)
                 {
-                  widget.parentTextFieldValueCallBackFunction(text); 
+                  widget.onTextFieldValueSubmittedCallbackFunction(text); 
                   setState(() {_textFieldValue = text;});
                 },
               textFieldMinLines: widget.textFieldMinLines,
