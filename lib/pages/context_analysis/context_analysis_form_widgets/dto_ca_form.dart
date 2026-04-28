@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/_context_analysis_form_text_field_misc_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -174,7 +175,7 @@ class DTOCAForm
     String dataTextField = (checkboxWithTextFieldData[qf.labelTextField] ?? "") as String;
     var data2 = [
       notes,
-      quotesForCSV + dataTextField + quotesForCSV,
+      CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV,
     ]; // label in front of the text field data
 
     checkboxPreCSVData.add(data1);
@@ -188,10 +189,6 @@ class DTOCAForm
   // Used in the pre-CSV data
   // A label used in front of the content of answered questions.
   String notes = "Notes:";
-
-  // Straight double quotes used to encapsulate the content of answered questions.
-  String quotesForCSV = '"';
-
 
 
   // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
@@ -212,7 +209,7 @@ class DTOCAForm
 
     var dataTextField =
         segmentedButtonWithTextFieldData[qf.labelTextField] as String;
-    List<String> data2 = [notes, quotesForCSV + dataTextField + quotesForCSV];
+    List<String> data2 = [notes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
     segmentedButtonPreCSVData.add(data2);
@@ -230,7 +227,7 @@ class DTOCAForm
     List<List<String>> textFieldPreCSVData = [];
 
     var dataTextField = textFieldData[qf.labelTextField] as String;
-    List<String> data = [notes, quotesForCSV + dataTextField + quotesForCSV];
+    List<String> data = [notes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
 
     textFieldPreCSVData.add(data);
 
