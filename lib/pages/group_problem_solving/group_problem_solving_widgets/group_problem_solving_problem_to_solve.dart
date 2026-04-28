@@ -9,7 +9,7 @@ class GPSProblemToSolve extends StatefulWidget {
   final TextEditingController problemTitleController;
   /// The data from the previous context analyses sessions.
   final List<Map<String, dynamic>> previousSessions;
-  // A callback function for when a previous context analysis session data is selected.
+  // A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
 
   const GPSProblemToSolve({
