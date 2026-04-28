@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 
 /// {@category Group problem-solving}
-/// A widget used to define the problem to solve, or to retrieve a title from previous context analyses.
+/// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
 class GPSProblemToSolve extends StatefulWidget {
   /// A TextEditingController for the session title.
   final TextEditingController problemTitleController;
   /// The data from the previous context analyses sessions.
   final List<Map<String, dynamic>> previousSessions;
-  // A callback function used when a previous context analysis session data is selected.
+  /// A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
 
   const GPSProblemToSolve({
