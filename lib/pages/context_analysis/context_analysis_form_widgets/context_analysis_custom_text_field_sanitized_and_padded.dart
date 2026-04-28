@@ -42,9 +42,8 @@ class CATextFieldSanitizedAndPadded extends StatefulWidget
   /// The counter for the text field.
   final InputCounterWidgetBuilder textFieldCounter;
 
-  /// A map with functions as keys, and error messages as values.
-  /// The functions return true on a valid input, and false on an invalid input.
-  final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap;
+  /// A map with [StringSanitizerBundle]s as keys, and error messages as values.
+   final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMap;
 
   /// The text field-related callback function for the parent widget.
   final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
