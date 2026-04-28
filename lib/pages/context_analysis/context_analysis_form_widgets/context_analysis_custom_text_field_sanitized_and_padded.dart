@@ -8,7 +8,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 
 
 /// {@category Context analysis}
-/// A customizable text field with customizable padding.
+/// A text field with customizable padding.
 /// The text field has string sanitization ability. 
 class CATextFieldSanitizedAndPadded extends StatefulWidget 
 {
