@@ -33,7 +33,7 @@ class DTOCAForm
   /// The DTOCheckboxWithTextField instance for the question related to the need to be more appreciated at work.
   var indivAtWorkMoreAppreciated       = DTOCheckboxWithTextField();
 
-  /// The DTOCheckboxWithTextField instance for the question related to need to remain appreciated at work.
+  /// The DTOCheckboxWithTextField instance for the question related to the need to remain appreciated at work.
   var indivAtWorkRemainingAppreciated  = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the legacies we leave to our children/others.
