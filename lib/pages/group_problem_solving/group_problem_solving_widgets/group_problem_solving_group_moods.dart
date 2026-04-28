@@ -9,7 +9,7 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 /// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.
 class GPSGroupMoods extends StatefulWidget 
 {
-  /// The number of the column (1 for the left side of the UI, 2 for the right side)
+  /// The number of the column where the GPSGroupMoods instance is located (1 for the left side of the UI, 2 for the right side)
   final int columnNumber;
 
   /// The key for the first group moods widget
