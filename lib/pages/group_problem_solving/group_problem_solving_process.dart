@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_keywords.dart';
@@ -284,7 +284,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                         onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
                         screenWidthInInches: screenWidthInInches
                       ),
-                    // ..._whichIdentifiersListToBuild(column: 1),
+                    // GPSGroupMoods widget (column 1)
                     Expanded
                     (
                       child:GPSGroupMoods
@@ -377,7 +377,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                         onPressed: () {groupMoods1Key.currentState?.clearAllIdentifiers();},
                         screenWidthInInches: screenWidthInInches
                       ),
-                    // ..._whichIdentifiersListToBuild(column: 2),
+                    // GPSGroupMoods widget (column 2)
                     Expanded
                     (
                       child: GPSGroupMoods
