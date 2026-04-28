@@ -22,7 +22,7 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
   /// The optional third option of the segmented button.
   final String segButtonTextOption3;
 
-  /// The font size for the text options.
+  /// The font size for the options text.
   final double segButtonTextOptionsfontSize;
 
   /// The color of the options text.
