@@ -39,13 +39,13 @@ class DTOCAForm
   /// The DTOCheckboxWithTextField instance for the question related to the legacies we leave to our children/others.
   var indivBetterLegacies              = DTOCheckboxWithTextField();
 
-  /// The String for the question related to an issue of another type.
+  /// The string for the question related to an issue of another type.
   String indivAnotherIssueStr = '';
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : end ───────────────────────────────────────
 
 
   // ─── FIELDS: GROUP PERSPECTIVE : beginning ───────────────────────────────────────
-  /// The String for the question related to the problems that the groups/teams are trying to solve.
+  /// The string for the question related to the problems that the groups/teams are trying to solve.
   String groupProblemsToSolveStr = '';
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to solving the same problem(s) as our groups/teams.
