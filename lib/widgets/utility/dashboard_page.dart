@@ -28,7 +28,7 @@ class DashboardPage extends StatefulWidget
   /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// A callback function called after all session files have been deleted, and used to pass from dashboard to new session process.
+  /// A callback function called after the end of the process, and used to pass from new session process to dashboard.  
   final VoidCallback onAllSessionFilesDeletedCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.

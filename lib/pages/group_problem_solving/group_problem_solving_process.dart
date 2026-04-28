@@ -27,7 +27,7 @@ import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.da
 /// The process for a group problem-solving.
 class GPSProcess extends StatefulWidget 
 {
-  /// A callback function called after all session files have been deleted, and used to pass from dashboard to context analysis form.
+  /// A callback function called after the end of the process, and used to pass from new session process to dashboard.
   final VoidCallback parentCallbackFunctionToRefreshTheGPSPage;
 
   const GPSProcess
