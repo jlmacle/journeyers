@@ -9,7 +9,7 @@ class GPSKeywords extends StatefulWidget
   /// The keywords associated to the session data.
   final Set<String> currentKeywords;
 
-  /// A callback function called to update the keywords describing a session.
+  /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> onKeywordsUpdatedCallbackFunction;  
 
   const GPSKeywords

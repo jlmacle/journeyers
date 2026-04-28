@@ -6,7 +6,7 @@ import 'package:journeyers/app_themes.dart';
 /// A widget used for keywords declaration in the context analysis process.
 class CAKeywordsDeclaration extends StatefulWidget 
 {
-  /// A callback function called to update the keywords describing a session.
+  /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> onKeywordsUpdatedCallbackFunction;
 
   const CAKeywordsDeclaration
