@@ -45,7 +45,7 @@ class DTOCAForm
 
 
   // ─── FIELDS: GROUP PERSPECTIVE : beginning ───────────────────────────────────────
-  /// The String for the question related to the problems that the group/teams are trying to solve.
+  /// The String for the question related to the problems that the groups/teams are trying to solve.
   String groupProblemsToSolveStr = '';
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to solving the same problem(s) as our groups/teams.
