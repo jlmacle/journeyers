@@ -9,31 +9,31 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 /// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.
 class GPSGroupMoods extends StatefulWidget 
 {
-  /// The number of the column where the GPSGroupMoods instance is located (1 for the left side of the UI, 2 for the right side)
+  /// The number of the column where the GPSGroupMoods instance is located (1 for the left side of the UI, 2 for the right side).
   final int columnNumber;
 
-  /// The key for the first group moods widget
+  /// The key for the first group moods widget.
   final GlobalKey groupMoods1Key;
 
-  /// The key for the first group moods widget
+  /// The key for the first group moods widget.
   final GlobalKey groupMoods2Key;
 
-  // The list of stakeholders identifiers for the first column
+  /// The list of stakeholders identifiers for the first column.
   final List<String> identifiersCol1;
 
-  // The list of stakeholders identifiers for the second column
+  /// The list of stakeholders identifiers for the second column.
   final List<String> identifiersCol2;
 
-  // The list of stakeholders identifiers' colors for the first column
+  /// The list of stakeholders identifiers' colors for the first column.
   final List<Color> identifiersColors1;
 
-  // The list of stakeholders identifiers' colors for the second column
+  /// The list of stakeholders identifiers' colors for the second column.
   final List<Color> identifiersColors2;
 
-  // Mode for editing a stakeholder identifier
+  /// Mode for editing a stakeholder identifier.
   final bool isEditMode;
 
-  // Mode for deleting a stakeholder identifier
+  /// Mode for deleting a stakeholder identifier.
   final bool isDeleteMode;
 
   const GPSGroupMoods
