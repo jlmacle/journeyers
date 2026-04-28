@@ -525,7 +525,7 @@ class DTOCAForm
 
   // ─── PRINTING/SAVING METHODS ───────────────────────────────────────
 
-  /// Method used to print the individual perspective CSV data, or the group/team perspective CSV data, to a file.
+  /// Method used to print the individual perspective CSV data, and the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
     required List<List<String>> csvDataIndividualPerspective,
