@@ -336,7 +336,7 @@ class DTOCAForm
     return preCSVData;
   }
 
-     /// Method used to go from pre-CSV data to CSV-friendly data (before saving the data in a CSV file).
+  /// Method used to go from pre-CSV data to CSV data.
   ///
   /// Xs in front of the questions with a checked checkbox,
   /// and for their title level 3 parent if existant.
