@@ -13,10 +13,10 @@ class GPSGroupMoods extends StatefulWidget
   final int columnNumber;
 
   /// The key for the first group moods widget.
-  final GlobalKey groupMoods1Key;
+  final GlobalKey groupMoodsKey1;
 
   /// The key for the first group moods widget.
-  final GlobalKey groupMoods2Key;
+  final GlobalKey groupMoodsKey2;
 
   /// The list of stakeholders identifiers for the first column.
   final List<String> identifiersCol1;
@@ -40,8 +40,8 @@ class GPSGroupMoods extends StatefulWidget
   ({
     super.key,
     required this.columnNumber,
-    required this.groupMoods1Key,
-    required this.groupMoods2Key,
+    required this.groupMoodsKey1,
+    required this.groupMoodsKey2,
     required this.identifiersCol1,
     required this.identifiersCol2,
     required this.identifiersColors1,
@@ -87,14 +87,14 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
       widget.identifiersCol1.add("$totalIndexes");
       // All identifiers are green by default
       widget.identifiersColors1.add(greenShade900);
-      widget.groupMoods1Key.currentState?.setState(() {});
+      widget.groupMoodsKey1.currentState?.setState(() {});
     }
     else 
     {
       widget.identifiersCol2.add("$totalIndexes");
       // All identifiers are green by default
       widget.identifiersColors2.add(greenShade900);
-      widget.groupMoods2Key.currentState?.setState(() {});
+      widget.groupMoodsKey2.currentState?.setState(() {});
     }    
   }
 
@@ -111,8 +111,8 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   {
     widget.identifiersCol1.clear();
     widget.identifiersCol2.clear();
-    widget.groupMoods1Key.currentState?.setState(() {});
-    widget.groupMoods2Key.currentState?.setState(() {});
+    widget.groupMoodsKey1.currentState?.setState(() {});
+    widget.groupMoodsKey2.currentState?.setState(() {});
 
   }
 
