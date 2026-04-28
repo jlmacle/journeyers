@@ -156,7 +156,7 @@ class DTOCAForm
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : end ───────────────────────────────────────
 
 
-    /// Method extracting information from {checkbox: false/true, textField: "data"/null}
+  /// Method extracting information from {checkbox: false/true, textField: "data"/null}
   /// and returning \[\[checkbox,"false"/"true"\],\[Notes:,"data"/""\]\].
   /// Straight double quotes are refused during text field input and removed.
   Future<List<Object>> checkboxWithTextFieldDataToPreCSV({
@@ -174,7 +174,7 @@ class DTOCAForm
 
     String dataTextField = (checkboxWithTextFieldData[qf.labelTextField] ?? "") as String;
     var data2 = [
-      notes,
+      labelNotes,
       CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV,
     ]; // label in front of the text field data
 
@@ -186,13 +186,10 @@ class DTOCAForm
 
 
 
-  // Used in the pre-CSV data
-  // A label used in front of the content of answered questions.
-  String notes = "Notes:";
+  // Used in the pre-CSV and CSV data
+  /// A label used in front of the content of the answered questions, in the pre-CSV data and in the CSV file.
+  String labelNotes = "Notes:";
 
-
-  // A mapping of question labels with the type of input items (text field, checkbox with text field, segmented button with text field) used to answer.
-  
 
   /// Method extracting information from {segmentedButton: "Yes"/"No"/"I don't know"/null , textField: "data"/null}
   /// and returning \[\[segmentedButton,"Yes"/"No"/"I don't know"/""\],\[Notes:,"data"/""\]\].
@@ -209,7 +206,7 @@ class DTOCAForm
 
     var dataTextField =
         segmentedButtonWithTextFieldData[qf.labelTextField] as String;
-    List<String> data2 = [notes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
+    List<String> data2 = [labelNotes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
     segmentedButtonPreCSVData.add(data2);
@@ -227,7 +224,7 @@ class DTOCAForm
     List<List<String>> textFieldPreCSVData = [];
 
     var dataTextField = textFieldData[qf.labelTextField] as String;
-    List<String> data = [notes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
+    List<String> data = [labelNotes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
 
     textFieldPreCSVData.add(data);
 
