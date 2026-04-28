@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 
 /// {@category Group problem-solving}
-/// A widget used to declare keywords, or to retrieve keywords, from previous context analyses.
+/// A widget used to declare keywords, or to retrieve keywords from previous context analyses.
 class GPSKeywords extends StatefulWidget 
 {
   /// The keywords associated to the session data.
