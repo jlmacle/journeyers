@@ -249,11 +249,11 @@ class CAFormState extends State<CAForm>
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleBalanceIssueItem4,
-                checkboxStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.checked,
-                textFieldStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHouseholds.text,
+                checkboxStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHousehold.checked,
+                textFieldStartValue: widget.dtoCAForm.indivBalanceHelpingOthersHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceHelpingOthersHouseholds, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(widget.dtoCAForm.indivBalanceHelpingOthersHousehold, v),
+                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(widget.dtoCAForm.indivBalanceHelpingOthersHousehold, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),

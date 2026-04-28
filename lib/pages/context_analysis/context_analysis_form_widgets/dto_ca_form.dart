@@ -28,7 +28,7 @@ class DTOCAForm
   var indivBalanceEarningIncomeHousehold        = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the balance between helping others and household life.
-  var indivBalanceHelpingOthersHouseholds        = DTOCheckboxWithTextField();
+  var indivBalanceHelpingOthersHousehold        = DTOCheckboxWithTextField();
 
   /// The DTOCheckboxWithTextField instance for the question related to the need to be more appreciated at work.
   var indivAtWorkMoreAppreciated       = DTOCheckboxWithTextField();
@@ -100,7 +100,7 @@ class DTOCAForm
           qf.level3TitleBalanceIssueItem1:  await _checkboxDataToMap(indivBalanceStudiesHousehold),
           qf.level3TitleBalanceIssueItem2:  await _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
           qf.level3TitleBalanceIssueItem3:  await _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          qf.level3TitleBalanceIssueItem4:  await _checkboxDataToMap(indivBalanceHelpingOthersHouseholds),
+          qf.level3TitleBalanceIssueItem4:  await _checkboxDataToMap(indivBalanceHelpingOthersHousehold),
         }),
 
         qf.level3TitleWorkplaceIssue: 
