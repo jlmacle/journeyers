@@ -12,10 +12,10 @@ class GPSGroupMoods extends StatefulWidget
   /// The number of the column where the GPSGroupMoods instance is located (1 for the left side of the UI, 2 for the right side).
   final int columnNumber;
 
-  /// The key for the first group moods widget.
+  /// The key for the first GPSGroupMoods widget.
   final GlobalKey groupMoodsKey1;
 
-  /// The key for the first group moods widget.
+  /// The key for the second GPSGroupMoods widget.
   final GlobalKey groupMoodsKey2;
 
   /// The list of stakeholders identifiers for the first column.
