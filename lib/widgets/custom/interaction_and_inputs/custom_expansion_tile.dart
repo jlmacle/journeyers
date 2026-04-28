@@ -33,10 +33,10 @@ class CustomExpansionTile extends StatefulWidget
   final double expandedContentDividerHeight;
 
   /// The callback function called to edit from the expansion tile.
-  final VoidCallback editPressedCallBackFunction;
+  final VoidCallback onEditPressedCallBackFunction;
 
   /// The callback function called to delete from the expansion tile.
-  final VoidCallback deletePressedCallBackFunction;
+  final VoidCallback onDeletePressedCallBackFunction;
 
   /// A list of \[iconData, toolTipLabel, callBackFunction\] values for the action icon(s).
   final List<List<dynamic>> listActionIconsData;
@@ -67,8 +67,8 @@ class CustomExpansionTile extends StatefulWidget
       [Icons.edit, toolTipEdit, null],
       [Icons.delete, toolTipDelete, null],
     ],
-    required this.editPressedCallBackFunction,
-    required this.deletePressedCallBackFunction,
+    required this.onEditPressedCallBackFunction,
+    required this.onDeletePressedCallBackFunction,
   });
 
   @override
@@ -129,8 +129,8 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                   final iconData = actionIconData[0] as IconData;
                   final toolTipLabel = actionIconData[1] as String;
                   final VoidCallback onPressedFunction;
-                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.editPressedCallBackFunction;} 
-                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.deletePressedCallBackFunction;} 
+                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.onEditPressedCallBackFunction;} 
+                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.onDeletePressedCallBackFunction;} 
                   else {onPressedFunction = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTipLabel");};}
 
                   return 
