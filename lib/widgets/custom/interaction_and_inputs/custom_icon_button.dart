@@ -10,21 +10,21 @@ class CustomIconButton extends StatelessWidget
   /// The tooltip label for the icon.
   final String toolTipLabel;
   /// The callback function called when the button is pressed.
-  final VoidCallback onPressedFunction;  
+  final VoidCallback onPressedCallbackFunction;  
 
   const CustomIconButton
   ({
     super.key,
     required this.icon,
     required this.toolTipLabel,
-    required this.onPressedFunction,  
+    required this.onPressedCallbackFunction,  
   });
 
   @override
   Widget build(BuildContext context) {
     return IconButton
     (
-      onPressed: onPressedFunction, 
+      onPressed: onPressedCallbackFunction, 
       tooltip: toolTipLabel,
       icon: icon,
     );
