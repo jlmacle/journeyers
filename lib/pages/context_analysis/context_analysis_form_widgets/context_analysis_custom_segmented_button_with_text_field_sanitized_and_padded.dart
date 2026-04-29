@@ -153,9 +153,9 @@ class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASeg
             setState(() {_selection = newSelection;});
             widget.onSegmentedButtonOptionsSelectedCallbackFunction(newSelection);
           },
-          selected: _selection!,
+          selected: _selection,
         ),
-        if (_selection!.isNotEmpty)
+        if (_selection.isNotEmpty)
           Padding
           (
             padding: EdgeInsets.only(left: widget.textFieldPaddingHorizontal, right: widget.textFieldPaddingHorizontal, bottom: widget.textFieldPaddingBottom),
