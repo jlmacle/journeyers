@@ -23,6 +23,4 @@ This code helps with generating a Dart class used in L10n.
 
 ::: py_utils.arb_utils
 
-::: py_utils.comment_content_extractor
-
 ::: py_utils.file_utils
