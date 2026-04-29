@@ -36,7 +36,7 @@ class SessionsListItem extends StatefulWidget
   final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the delete icon is interacted with.
-  final VoidCallback onDelete;
+  final VoidCallback onDeleteCallbackFunction;
 
   const SessionsListItem({
     super.key,
@@ -47,7 +47,7 @@ class SessionsListItem extends StatefulWidget
     required this.onCheckboxChangedCallbackFunction,
     required this.onEditTitleCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
-    required this.onDelete,
+    required this.onDeleteCallbackFunction,
   });
 
   @override
@@ -212,7 +212,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 IconButton(
                   key: ValueKey('session-delete-${widget.index}'),
                   icon: const Icon(Icons.delete_rounded),
-                  onPressed: widget.onDelete,
+                  onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
                 ),
               ],
