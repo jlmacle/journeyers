@@ -3,7 +3,7 @@ from typing import List
 
 def get_files_in_directory(directory_path: str, file_extension: str, search_is_recursive: bool = True) -> List[Path]:
     """
-    Extracts the files paths from a directory.
+    For files with a specific extension, in a specific directory, extracts the files paths.
 
     Args:
         directory_path: Path to the directory
