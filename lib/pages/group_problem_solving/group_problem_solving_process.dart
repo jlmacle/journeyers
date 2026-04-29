@@ -19,8 +19,8 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_wid
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_new_solution.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_problem_to_solve.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_widgets/group_problem_solving_solutions_list.dart';
-import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
 
 /// {@category Group problem-solving}
