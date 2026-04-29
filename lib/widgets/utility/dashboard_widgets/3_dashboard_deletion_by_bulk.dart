@@ -18,7 +18,7 @@ class DashboardDeletionByBulk extends StatefulWidget
   /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// Bool used to store if some sessions are selected for deletion.
+  /// Boolean used to store if some sessions are selected for deletion.
   final bool areSessionsForDeletion; 
 
   /// List containing all available session data.
