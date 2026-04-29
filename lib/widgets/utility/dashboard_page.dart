@@ -21,14 +21,16 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget displaying a dashboard of session data, with assumption concerning the session data structure:
-/// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 4:51 PM","filePath":"C:\\Users\\username\\Documents\\a.ext"},
-/// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 PM","filePath":"C:\\Users\\username\\Documents\\a2.ext"}\]
+/// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 4:51 PM","filePath":"path/a.ext"},
+/// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 PM","filePath":"path/a2.ext"}\].
+/// For the context analyses, the extension is "CSV". 
+/// For the group problem-solvings, the extension is "TXT".
 class DashboardPage extends StatefulWidget 
 {
   /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// A callback function called after the end of the process, and used to pass from new session process to dashboard.  
+  /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
   final VoidCallback onAllSessionFilesDeletedCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
