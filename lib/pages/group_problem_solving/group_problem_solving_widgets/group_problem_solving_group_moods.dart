@@ -58,10 +58,10 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 {
   // TODO: import of previous teams
 
-  // Bool used to suggest editing at start of adding identifiers
+  // Boolean used to suggest editing at start of adding identifiers
   bool _hasBeenEdited = false;
   
-  // Bool used to store if a swipe left of right has happened
+  // Boolean used to store if a swipe left of right has happened
   bool? wasARightSwipe;
   
   // Callback function used to update the wasARightSwipe field
