@@ -104,6 +104,7 @@ class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASeg
   @override
   void initState() {
     _selection = widget.segButtonStartValue;
+    _textFieldValue = widget.textFieldStartValue;
     super.initState();
   }
 
