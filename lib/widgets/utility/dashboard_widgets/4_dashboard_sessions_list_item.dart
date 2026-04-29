@@ -23,7 +23,7 @@ class SessionsListItem extends StatefulWidget
   /// Bool to indicate if the checkbox is checked.
   final bool isChecked;
 
-  /// The context of the dashboard.
+  /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// A callback function called when the checkbox is checked/unchecked.
