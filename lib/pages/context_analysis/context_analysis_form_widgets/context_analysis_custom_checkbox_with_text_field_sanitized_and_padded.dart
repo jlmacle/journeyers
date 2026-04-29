@@ -85,8 +85,8 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
 
 class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWithSanitizedAndPaddedTextField> 
 {
-  bool? _isChecked;
-  String _textFieldValue = "";
+  late bool _isChecked;
+  late String _textFieldValue;
   TextStyle _checkboxTextStyle = unselectedCheckboxTextStyle;
 
   @override
