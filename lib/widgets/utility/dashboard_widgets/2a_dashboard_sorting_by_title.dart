@@ -8,7 +8,7 @@ import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 /// A widget handling the sorting by title of session data.
 class DashboardSortingByTitle extends StatefulWidget 
 {
-  /// List storing the sessions to sort.
+  /// List containing the sessions to sort.
   final List<dynamic>? filteredSessionsToSort;
 
   /// Callback function used to refresh the sessions displayed.
