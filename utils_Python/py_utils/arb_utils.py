@@ -68,7 +68,6 @@ def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base
     Extracts all the translations for a given language from all the base locales files (lang_en.arb, lang_fr.arb, ...),
     and returns a dictionary with the language codes as keys, and lists of translations as values.
     For example: {'en': ['English', 'Anglais'], 'fr': ['French', 'Français']}.
-    Used later on to get language codes from language names.
 
     Args:
         arbs_dir_path: Path to the arb files directory
