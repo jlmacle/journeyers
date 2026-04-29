@@ -92,6 +92,7 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
   @override
   void initState() {
     _isChecked = widget.checkboxStartValue;
+    _textFieldValue = widget.textFieldStartValue;
     super.initState();
   }
 
