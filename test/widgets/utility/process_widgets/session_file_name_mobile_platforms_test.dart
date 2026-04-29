@@ -24,7 +24,7 @@ void main()
                 // Setting to false to have the process page
                 'wasSessionDataSaved': false,
                 // Setting to false to have the folder picker
-                'applicationFolderPath': false
+                'applicationFolderPath': ""
             });
 
             // Loading the widget
@@ -45,7 +45,5 @@ void main()
             expect(find.byType(ElevatedButton), findsOneWidget);            
         }
         );
-
-
     });
 }
