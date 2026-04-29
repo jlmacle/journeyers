@@ -373,7 +373,7 @@ class DashboardPageState extends State<DashboardPage>
                             filePath,
                           ),
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
-                          onDelete: () async => await _deleteSelectedSession(filePath),
+                          onDeleteCallbackFunction: () async => await _deleteSelectedSession(filePath),
                         );
                       },
                       childCount: _filteredSessions?.length ?? 0,
