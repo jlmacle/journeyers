@@ -1,7 +1,7 @@
 '''
     [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
     
-    Script used to generate the Dart/Flutter documentation.
+    Script used to generate the Dart/Flutter documentation of the project.
 '''
 import os
 import platform

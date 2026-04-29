@@ -1,7 +1,7 @@
 '''
     [Uses the environment variable JOURNEYERS_DIR to point to the project directory.]
     
-    Script used to generate the Python documentation.
+    Script used to generate the Python documentation of the project.
 '''
 
 import os
