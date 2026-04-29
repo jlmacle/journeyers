@@ -18,8 +18,8 @@ import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/context_analysis_title.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_form_widgets/dto_ca_form.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-import 'package:journeyers/widgets/utility/session_file_name_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
 /// {@category Context analysis}
 /// The process for the context analyses.
