@@ -359,7 +359,7 @@ class DashboardPageState extends State<DashboardPage>
                           index: index,
                           dashboardContext: widget.dashboardContext,
                           isChecked: _sessionsSelectedForDeletion.contains(filePath),
-                          onCheckboxChanged: (bool? value) {
+                          onCheckboxChangedCallbackFunction: (bool? value) {
                             setState(() {
                               if (value == true) {
                                 _sessionsSelectedForDeletion.add(filePath);
@@ -368,7 +368,7 @@ class DashboardPageState extends State<DashboardPage>
                               }
                             });
                           },
-                          onEditTitle: () => _showTitleEditSheet(
+                          onEditTitleCallbackFunction: () => _showTitleEditSheet(
                             session[DashboardUtils.keyTitle],
                             filePath,
                           ),

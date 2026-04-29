@@ -27,10 +27,10 @@ class SessionsListItem extends StatefulWidget
   final String dashboardContext;
 
   /// A callback function called when the checkbox is checked/unchecked.
-  final ValueChanged<bool?> onCheckboxChanged;
+  final ValueChanged<bool?> onCheckboxChangedCallbackFunction;
 
   /// A callback function called when the title is updated.
-  final VoidCallback onEditTitle;
+  final VoidCallback onEditTitleCallbackFunction;
 
   /// A callback function called when the keywords are updated.
   final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
@@ -44,8 +44,8 @@ class SessionsListItem extends StatefulWidget
     required this.index,
     required this.isChecked,
     required this.dashboardContext,
-    required this.onCheckboxChanged,
-    required this.onEditTitle,
+    required this.onCheckboxChangedCallbackFunction,
+    required this.onEditTitleCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onDelete,
   });
@@ -116,7 +116,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 Checkbox(
                   key: ValueKey('checkbox-${widget.index}'),
                   value: widget.isChecked,
-                  onChanged: widget.onCheckboxChanged,
+                  onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
                 Expanded(
                   child: Column(
@@ -128,7 +128,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                         children: [
                           // For the edition of the title
                           GestureDetector(
-                            onTap: widget.onEditTitle,
+                            onTap: widget.onEditTitleCallbackFunction,
                             child: Text(
                               displayTitle,
                               key: ValueKey('session-title-${widget.index}'),
