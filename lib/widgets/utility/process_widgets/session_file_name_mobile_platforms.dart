@@ -77,7 +77,6 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     String? folderPathData = await upu.getApplicationFolderPath();
 
     if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");
-    // Application folder path called from the Kotlin/Swift code    
     setState(() 
     {
       _applicationFolderPath = folderPathData ?? "";
