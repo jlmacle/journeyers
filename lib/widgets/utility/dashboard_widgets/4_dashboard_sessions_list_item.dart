@@ -20,7 +20,7 @@ class SessionsListItem extends StatefulWidget
   /// The index within the list.
   final int index;
 
-  /// Bool to indicate if the checkbox is checked.
+  /// Boolean to indicate if the checkbox is checked.
   final bool isChecked;
 
   /// The context of the dashboard (context analyses or group problem-solving sessions).
