@@ -98,8 +98,8 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
 
 class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASegmentedButtonWithSanitizedAndPaddedTextField> 
 {
-  Set<String>? _selection;
-  String _textFieldValue = "";
+  late Set<String> _selection;
+  late String _textFieldValue;
 
   @override
   void initState() {
