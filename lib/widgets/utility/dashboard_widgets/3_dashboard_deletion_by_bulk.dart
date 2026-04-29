@@ -15,7 +15,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filter
 /// A widget handling bulk deletion of session data.
 class DashboardDeletionByBulk extends StatefulWidget 
 {
-  /// The context for the dashboard (context analyses or group problem-solving sessions).
+  /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// Boolean used to store if some sessions are selected for deletion.

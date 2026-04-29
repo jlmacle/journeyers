@@ -27,7 +27,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session
 /// For the group problem-solvings, the extension is "TXT".
 class DashboardPage extends StatefulWidget 
 {
-  /// The context for the dashboard (context analyses or group problem-solving sessions).
+  /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
