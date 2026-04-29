@@ -13,16 +13,16 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   /// The context for the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// List storing all available session data.
+  /// List containing all available session data.
   final List<dynamic>? allSessions;
 
-  /// List storing all filtered session data.
+  /// List containing all filtered session data.
   final List<dynamic>? filteredSessions;
 
-  /// List storing the keywords used by the sessions.
+  /// List containing the keywords used by the sessions.
   final List<String> usedKeywords;
 
-  /// List storing the selected keywords.
+  /// List containing the selected keywords.
   final List<String> selectedKeywords;
 
   /// Callback function used to refresh the sessions displayed.

@@ -21,13 +21,13 @@ class DashboardDeletionByBulk extends StatefulWidget
   /// Bool used to store if some sessions are selected for deletion.
   final bool areSessionsForDeletion; 
 
-  /// List storing all available session data.
+  /// List containing all available session data.
   final List<dynamic>? allSessions;
 
-  /// List storing all filtered session data.
+  /// List containing all filtered session data.
   final List<dynamic>? filteredSessions;
 
-  /// List storing the sessions selected for deletion.
+  /// List containing the sessions selected for deletion.
   final List<dynamic>? sessionsSelectedForDeletion;
 
   /// Callback function used to refresh the sessions displayed.
