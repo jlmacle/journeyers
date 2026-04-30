@@ -17,6 +17,9 @@ or
 Individual test:
 flutter test ./integration_test/context_analysis_page_test.dart -r github 
 
+-----------------------
+
+For the integration tests: iOS: An Internet connection is needed to verify the Developer App Certificate.
 
 -----------------------
 
