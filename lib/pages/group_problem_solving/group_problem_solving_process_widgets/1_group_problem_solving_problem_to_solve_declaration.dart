@@ -4,7 +4,7 @@ import 'package:journeyers/app_themes.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
-class GPSProblemToSolve extends StatefulWidget {
+class GPSProblemToSolveDeclaration extends StatefulWidget {
   /// A TextEditingController for the session title.
   final TextEditingController problemTitleController;
   /// The data from the previous context analyses sessions.
@@ -12,7 +12,7 @@ class GPSProblemToSolve extends StatefulWidget {
   /// A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
 
-  const GPSProblemToSolve({
+  const GPSProblemToSolveDeclaration({
     super.key,
     required this.problemTitleController,
     required this.previousSessions,
@@ -20,10 +20,10 @@ class GPSProblemToSolve extends StatefulWidget {
   });
 
   @override
-  State<GPSProblemToSolve> createState() => _GPSProblemToSolveState();
+  State<GPSProblemToSolveDeclaration> createState() => _GPSProblemToSolveDeclarationState();
 }
 
-class _GPSProblemToSolveState extends State<GPSProblemToSolve> {
+class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclaration> {
   bool _isEditing = false;
 
   @override
