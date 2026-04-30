@@ -86,16 +86,17 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
               [
                 ..._keywords.map
                 (
-                  (tag) => InputChip
-                          (
-                            label: Text(tag),
-                            onDeleted: () 
-                            {
-                              setState( () {_keywords.remove(tag);});
-                              widget.onKeywordsUpdatedCallbackFunction(_keywords);
-                            }, 
-                            deleteIconColor: appBarWhite,
-                          )
+                  (tag) => 
+                  InputChip
+                  (
+                    label: Text(tag),
+                    onDeleted: () 
+                    {
+                      setState( () {_keywords.remove(tag);});
+                      widget.onKeywordsUpdatedCallbackFunction(_keywords);
+                    }, 
+                    deleteIconColor: appBarWhite,
+                  )
                 )
               ],
             ),
