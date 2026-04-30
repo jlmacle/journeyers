@@ -34,7 +34,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
         style: analysisTextFieldStyle,
         decoration: const InputDecoration
         (
-          hint: Center(child: Text(CAFormTextFieldMiscConstants.caTitleHintText, style: analysisTextFieldHintStyle)),
+          hint: Center(child: Text(CAFormTextFieldMiscConstants.caTitleDeclarationHintText, style: analysisTextFieldHintStyle)),
           hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,
