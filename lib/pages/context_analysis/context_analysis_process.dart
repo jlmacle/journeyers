@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
@@ -167,7 +167,7 @@ class CAProcessState extends State<CAProcess>
             ),
 
             // Text field for the analysis title
-            CATitle(onAnalysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
+            CATitleDeclaration(onAnalysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
             
             // Keywords
             CAKeywordsDeclaration(onKeywordsUpdatedCallbackFunction: keywordsUpdate),

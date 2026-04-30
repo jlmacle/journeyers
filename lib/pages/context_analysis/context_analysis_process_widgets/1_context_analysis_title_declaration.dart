@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_text_field_misc_constants.dart';
 
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
-class CATitle extends StatefulWidget 
+class CATitleDeclaration extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> onAnalysisTitleUpdatedCallbackFunction;
 
-  const CATitle
+  const CATitleDeclaration
   ({
     super.key,
     required this.onAnalysisTitleUpdatedCallbackFunction
   });
 
   @override
-  State<CATitle> createState() => _CATitleState();
+  State<CATitleDeclaration> createState() => _CATitleDeclarationState();
 }
 
-class _CATitleState extends State<CATitle> 
+class _CATitleDeclarationState extends State<CATitleDeclaration> 
 {
 
   @override
@@ -33,7 +34,7 @@ class _CATitleState extends State<CATitle>
         style: analysisTextFieldStyle,
         decoration: const InputDecoration
         (
-          hint: Center(child: Text("Please enter a title for this analysis.", style: analysisTextFieldHintStyle)),
+          hint: Center(child: Text(CAFormTextFieldMiscConstants.caTitleHintText, style: analysisTextFieldHintStyle)),
           hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,

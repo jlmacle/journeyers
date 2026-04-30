@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
@@ -251,7 +251,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
     return Column(   
       children: [
         // 1. TOP: The problem to be solved (Full Width)
-        GPSProblemToSolve(
+        GPSProblemToSolveDeclaration(
           problemTitleController: _problemTitleController,
           previousSessions: _history,
           onSessionSelected: _handleSessionSelection,
@@ -328,7 +328,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       child: Padding
                       (
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: GPSKeywords
+                        child: GPSKeywordsDeclaration
                         (
                           currentKeywords: _currentKeywords,
                           onKeywordsUpdatedCallbackFunction: (newKeywords) 
