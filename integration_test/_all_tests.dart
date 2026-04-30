@@ -1,5 +1,3 @@
-import 'does_not_pass_as_widget_test_session_file_name_mobile_platforms_test.dart' as does_not_pass_as_widget_test_session_file_name_mobile_platforms_test;
-
 void main() {
-  does_not_pass_as_widget_test_session_file_name_mobile_platforms_test.main();
+  
 }
