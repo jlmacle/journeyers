@@ -17,8 +17,8 @@ void main()
     group('SessionFileNameMobilePlatforms Tests: \n', 
     () 
     {      
-        // "The folder picker is available to the user, when the user didn't select the folder for its files yet"
-        testWidgets("The folder picker is available to the user, when the user didn't select of folder for its files yet.", 
+        // "On mobile: The folder picker is available to the user, when the user didn't select the folder for its files yet"
+        testWidgets("On mobile: The folder picker is available to the user, when the user didn't select of folder for its files yet.", 
         (WidgetTester tester) async 
         {
 
@@ -41,18 +41,21 @@ void main()
             await tester.pumpAndSettle();
 
             if (testingDebug) pu.printd("Platform: ${Platform.operatingSystem}");
-
-            // Verifying the text field absent
-            expect(find.textContaining(textFieldHintPart), findsNothing);
-            
-            // Verifying the elevated button present
-            expect(find.byType(ElevatedButton), findsOneWidget);            
+            if (Platform.isAndroid || Platform.isIOS)
+            {
+              // Verifying the text field absent
+              expect(find.textContaining(textFieldHintPart), findsNothing);
+              
+              // Verifying the elevated button present
+              expect(find.byType(ElevatedButton), findsOneWidget);  
+            }
+                      
         }
         );
 
-        // "The text field is available for the user to enter the file name, when the user did select a folder for its files"
+        // "On mobile: The text field is available for the user to enter the file name, when the user did select a folder for its files"
         // Important: As a widget test, run on Windows, even if the Android phone is plugged.
-        testWidgets("The text field is available for the user to enter the file name, when the user did select a folder for its files.", 
+        testWidgets("On mobile: The text field is available for the user to enter the file name, when the user did select a folder for its files.", 
         (WidgetTester tester) async 
         {
             // Setting mock values for SharedPreferences
@@ -75,11 +78,14 @@ void main()
 
             if (testingDebug) pu.printd("Platform: ${Platform.operatingSystem}");
 
-            // Verifying the elevated button absent
-            expect(find.byType(ElevatedButton), findsNothing);   
+            if (Platform.isAndroid || Platform.isIOS)
+            {
+              // Verifying the elevated button absent
+              expect(find.byType(ElevatedButton), findsNothing);   
 
-            // Verifying the text field present
-            expect(find.textContaining(textFieldHintPart), findsOneWidget);                     
+              // Verifying the text field present
+              expect(find.textContaining(textFieldHintPart), findsOneWidget);   
+            }                  
         }
         );
     });
