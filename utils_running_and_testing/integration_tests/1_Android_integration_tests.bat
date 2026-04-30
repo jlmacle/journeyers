@@ -16,5 +16,5 @@ echo ----------------------------------------------
 
 
 cd %JOURNEYERS_DIR%
-flutter test ./integration_test/ -r github
+flutter test ./integration_test/_all_tests.dart -r github
 
