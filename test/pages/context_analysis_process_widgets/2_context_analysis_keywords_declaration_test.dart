@@ -41,6 +41,44 @@ void main()
         expect(inputChipTextWidget.data, kw);
       }
       );
+
+
+      // 'A keyword added twice, is displayed once: \n'
+      testWidgets('A keyword added twice, is displayed once: \n', 
+      (WidgetTester tester) async 
+      {
+        const String kw = "kw";
+
+        // Building the widget
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: CAKeywordsDeclaration
+              (
+                onKeywordsUpdatedCallbackFunction: (_){}
+              )
+            ),
+          ),
+        );
+
+        // Adding a keyword twice with the text field
+        await tester.enterText(find.byType(TextField), kw);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        await tester.enterText(find.byType(TextField), kw);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        // Verifying the presence of a single InputChip Text
+        var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
+        expect(inputChipTextFinder, findsOneWidget);
+
+        // Verifying the text on the InputChip Text
+        var inputChipTextWidget = tester.widget<Text>(inputChipTextFinder);
+        expect(inputChipTextWidget.data, kw);
+      }
+      );
   });
 
 
