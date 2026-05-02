@@ -79,6 +79,54 @@ void main()
         expect(inputChipTextWidget.data, kw);
       }
       );
+  
+      // 'Keywords are added in alphabetical order: \n'
+      testWidgets('Keywords are added in alphabetical order: \n', 
+      (WidgetTester tester) async 
+      {
+        // Building the widget
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: CAKeywordsDeclaration
+              (
+                onKeywordsUpdatedCallbackFunction: (_){}
+              )
+            ),
+          ),
+        );
+
+        // Adding the keywords with the text fields: B, A, C
+        await tester.enterText(find.byType(TextField), 'B');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        await tester.enterText(find.byType(TextField), 'A');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+        await tester.enterText(find.byType(TextField), 'C');
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+
+
+        // Verifying the presence of 3 InputChip Text
+        var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
+        expect(inputChipTextFinder, findsNWidgets(3));
+
+        // Verifying their order
+        const expectedOrder = ['A', 'B', 'C'];
+        int index = 0;
+        for (Element inputChipTextFound in inputChipTextFinder.evaluate())
+        {
+            // Accessing the widget from the element
+            var inputChipTextWidget = inputChipTextFound.widget as Text;
+            expect (inputChipTextWidget.data, expectedOrder[index]);
+            index++;
+        }
+
+      }
+      );
   });
 
 
