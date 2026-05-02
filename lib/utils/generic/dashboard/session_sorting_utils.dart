@@ -3,13 +3,11 @@ import 'package:intl/intl.dart';
 
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 
-/// {@category Utils}
-/// A utility related to sorting.
-
-// Method used to sort sessions by date
-// The list parameter is assumed to be a list of sessions, 
-// with a key DashboardUtils.keyDate for the date values
-// https://api.flutter.dev/flutter/package-intl_intl/DateFormat-class.html 
+/// {@category Utils - Generic}
+/// Method used to sort sessions by date
+/// The list parameter is assumed to be a list of sessions, 
+/// with a key DashboardUtils.keyDate for the date values.
+/// https://api.flutter.dev/flutter/package-intl_intl/DateFormat-class.html 
 Future<List<dynamic>> sortSessionByDateAddJm
 ({required List<dynamic> list, required String dateFormat, required bool byAscendingDate}) async 
 {
@@ -23,21 +21,37 @@ Future<List<dynamic>> sortSessionByDateAddJm
   return list;   
 }
 
-// Method used to sort by title
-// The list parameter is assumed to be a list of sessions,
-// with a key DashboardUtils.keyTitle for the title values
-Future<List<dynamic>> sortByTitle
+/// {@category Utils - Generic}
+/// Method used to sort by title
+/// The list parameter is assumed to be a list of sessions,
+/// with a key DashboardUtils.keyTitle for the title values.
+Future<void> sortByTitle
 ({required List<dynamic> list, required bool byAscendingTitle}) async 
 {
-  list.sort((a, b) 
+  if (byAscendingTitle) 
   {
-    String titleA = (a[DashboardUtils.keyTitle]).toString().toLowerCase();
-    String titleB = (b[DashboardUtils.keyTitle]).toString().toLowerCase();
-    
-    return byAscendingTitle 
-        ? titleA.compareTo(titleB) 
-        : titleB.compareTo(titleA);
-  });
+    list.sort(
+      (sessionItemA, sessionItemB)
+      {
+        // The goal is to compare the titles, not the sessions 
+        var titleA = sessionItemA[DashboardUtils.keyTitle].toString();
+        var titleB = sessionItemB[DashboardUtils.keyTitle].toString();      
+        return titleA.compareTo(titleB);
+      }
+    );
+  }
 
-  return list;
+  else 
+  {
+    list.sort(
+      // (b,a) => a.compareTo(b) to reverse the alphabetical order
+      (sessionItemB, sessionItemA)
+      {
+        // The goal is to compare the titles, not the sessions 
+        var titleA = sessionItemA[DashboardUtils.keyTitle].toString();
+        var titleB = sessionItemB[DashboardUtils.keyTitle].toString();
+        return titleA.compareTo(titleB);
+      }
+    );
+  }
 }
