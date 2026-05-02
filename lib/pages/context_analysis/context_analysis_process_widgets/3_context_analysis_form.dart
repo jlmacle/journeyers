@@ -134,7 +134,6 @@ class CAFormState extends State<CAForm>
     // Building the data structure
     final LinkedHashMap<String, Object> enteredData = await _dtoCAForm!.dataStructureBuilding();
 
-    // TODO:  logic to move to the DTO
     // Transforming the data into a CSV-friendly form
     List<List<String>> preCSVDataIndividualPerspective = await _dtoCAForm!.dataToPreCSV(perspectiveData: enteredData["individualPerspective"] as LinkedHashMap<String, Object>);
     List<List<String>> preCSVDataGroupPerspective = await _dtoCAForm!.dataToPreCSV(perspectiveData: enteredData["groupPerspective"] as LinkedHashMap<String, Object>);
