@@ -110,7 +110,7 @@ void main()
         await tester.pump();
 
 
-        // Verifying the presence of 3 InputChip Text
+        // Verifying the presence of 3 InputChip Texts
         var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
         expect(inputChipTextFinder, findsNWidgets(3));
 
@@ -124,7 +124,36 @@ void main()
             expect (inputChipTextWidget.data, expectedOrder[index]);
             index++;
         }
+      }
+      );
 
+      // '20 keywords can be added to the context analysis, without having an exception: \n'
+      testWidgets('20 keywords can be added to the context analysis, without having an exception: \n', 
+      (WidgetTester tester) async 
+      {
+        // Building the widget
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: CAKeywordsDeclaration
+              (
+                onKeywordsUpdatedCallbackFunction: (_){}
+              )
+            ),
+          ),
+        );
+
+        // Adding 20 keywords
+        for (var index=1; index <= 20; index++)
+        {
+          await tester.enterText(find.byType(TextField), 'Household$index');
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
+        }        
+
+        // Verifying the presence of 20 InputChip Texts
+        var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
+        expect(inputChipTextFinder, findsNWidgets(20));
       }
       );
   });
