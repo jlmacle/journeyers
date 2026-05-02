@@ -22,22 +22,29 @@ class CAKeywordsDeclaration extends StatefulWidget
 class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> 
 {
 
-  final Set<String> _keywords = {};
+  final Set<String> _keywordsSet = {};
+  List<String> _keywordsListSorted = [];
   final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list
   void addKeyword(String value)
   {
     var trimmedValue = value.trim();
-    if (trimmedValue.isNotEmpty && !_keywords.contains(trimmedValue))
+
+    if (trimmedValue.isNotEmpty && !_keywordsSet.contains(trimmedValue))
     {
-      setState(() 
-      {
-        _keywords.add(trimmedValue);
-        _keywordsController.clear();
-      });
+      // Adding the value to the set to avoid duplication
+      _keywordsSet.add(trimmedValue);
+
+      // Sorting the list created from the set by alphabetical order
+      _keywordsListSorted = _keywordsSet.toList();
+      _keywordsListSorted.sort();
+
+      _keywordsController.clear();
+      
+      setState(() {});
     }
-    widget.onKeywordsUpdatedCallbackFunction(_keywords);
+    widget.onKeywordsUpdatedCallbackFunction(_keywordsSet);
   }
 
   @override
@@ -84,7 +91,8 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
               runSpacing: 4.0,
               children: 
               [
-                ..._keywords.map
+                // List used to build the input chips
+                ..._keywordsListSorted.map
                 (
                   (tag) => 
                   InputChip
@@ -92,8 +100,9 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                     label: Text(tag),
                     onDeleted: () 
                     {
-                      setState( () {_keywords.remove(tag);});
-                      widget.onKeywordsUpdatedCallbackFunction(_keywords);
+                      // Removal from the reference set
+                      setState( () {_keywordsSet.remove(tag);});
+                      widget.onKeywordsUpdatedCallbackFunction(_keywordsSet);
                     }, 
                     deleteIconColor: appBarWhite,
                   )
