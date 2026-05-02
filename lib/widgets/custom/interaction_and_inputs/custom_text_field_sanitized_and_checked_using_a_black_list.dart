@@ -39,6 +39,9 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// The counter for the text field.
   final InputCounterWidgetBuilder textFieldCounter;
 
+  /// The callback function called when the text field value is changed.
+  final ValueChanged<String> onTextFieldValueChangedCallbackFunction;
+
   /// The callback function called when submitting the text field value.
   final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
 
@@ -65,7 +68,8 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.counterPresent,
-    required this.onTextFieldValueSubmittedCallbackFunction,
+    this.onTextFieldValueChangedCallbackFunction = placeHolderFunctionString,
+    this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
     this.additionalOnChangedInstructions = placeHolderFunctionString,
     this.additionalOnSubmittedInstructions = placeHolderFunctionString,
     required this.stringSanitizerBundlesErrorsMapping,
@@ -193,7 +197,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
       // Updating the parental widget information with the sanitized value
       // Un-related to onSubmit
-      widget.onTextFieldValueSubmittedCallbackFunction(cleanedValue);
+      widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
 
       // Unblocking the submit
       submitIsBlocked = false;
@@ -214,7 +218,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       });
 
       // Updating the parental widget information with the value
-      widget.onTextFieldValueSubmittedCallbackFunction(text);
+      widget.onTextFieldValueChangedCallbackFunction(text);
     }
   }
 
@@ -300,7 +304,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       }
       
       // Updating the parental widget information with the value
-      widget.onTextFieldValueSubmittedCallbackFunction(text);
+      widget.onTextFieldValueChangedCallbackFunction(text);
     }
   }
 
@@ -331,7 +335,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     if (textFieldDebugging) pu.printd("Text Field: onSubmitted: submitIsBlocked: $submitIsBlocked");
     // Data submission if not blocked
     if (!submitIsBlocked) {
-      widget.onTextFieldValueSubmittedCallbackFunction(newValue);
+      widget.onTextFieldValueChangedCallbackFunction(newValue);
     }
 
     

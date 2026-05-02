@@ -234,7 +234,7 @@ class CAFormState extends State<CAForm>
                 // Updating DTO and UI (heading and item styling)
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceStudiesHousehold, v),
                 // Updating DTO
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceStudiesHousehold, v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceStudiesHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
@@ -243,7 +243,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
@@ -252,7 +252,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivBalanceEarningIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
@@ -261,7 +261,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -282,7 +282,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivAtWorkMoreAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
                 onCheckboxValueChangedCallbackFunction: (v) async  => await _onWorkplaceItemChecked(_dtoCAForm!.indivAtWorkMoreAppreciated, v),
-                onTextFieldValueSubmittedCallbackFunction:  (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivAtWorkMoreAppreciated , v),
+                onTextFieldValueChangedCallbackFunction:  (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivAtWorkMoreAppreciated , v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
@@ -291,7 +291,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: pleaseDescribeTextWorkplaceHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onWorkplaceItemChecked(_dtoCAForm!.indivAtWorkRemainingAppreciated, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivAtWorkRemainingAppreciated, v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivAtWorkRemainingAppreciated, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -312,7 +312,7 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivBetterLegacies.text,
                 textFieldHint: pleaseDevelopOrTakeNotesHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onLegacyItemChecked(_dtoCAForm!.indivBetterLegacies, v),
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBetterLegacies, v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldTextUpdate(_dtoCAForm!.indivBetterLegacies, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
               const Divider(thickness: betweenLevel3DividerThickness),
@@ -336,7 +336,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.counterAbsent,
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onAnotherIssueFilledStr(v), 
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onAnotherIssueFilledStr(v), 
               ),
             ]
           ),
@@ -397,7 +397,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.counterAbsent,
-                onTextFieldValueSubmittedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilledStr(v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilledStr(v),
               ),
 
               /**** ➡️ Sub-point  ****/

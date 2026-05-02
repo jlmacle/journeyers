@@ -54,7 +54,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
   final InputCounterWidgetBuilder textFieldCounter;
 
   /// The text field-related callback function for the parent widget.
-  final ValueChanged<String> onTextFieldValueSubmittedCallbackFunction;
+  final ValueChanged<String> onTextFieldValueChangedCallbackFunction;
 
   /// The checkbox-related callback function for the parent widget.
   final ValueChanged<bool?>? onCheckboxValueChangedCallbackFunction;
@@ -75,7 +75,7 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = CAFormTextFieldMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.counterAbsent,
-    this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
+    this.onTextFieldValueChangedCallbackFunction = placeHolderFunctionString,
     this.onCheckboxValueChangedCallbackFunction = placeHolderFunctionNullableBool,
   });
 
@@ -138,10 +138,10 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
             textFieldMinLines: widget.textFieldMinLines,
             textFieldMaxLength: widget.textFieldMaxLength,
             textFieldCounter: widget.textFieldCounter,
-            onTextFieldValueSubmittedCallbackFunction: 
+            onTextFieldValueChangedCallbackFunction: 
               (String text) 
               {
-                widget.onTextFieldValueSubmittedCallbackFunction(text);
+                widget.onTextFieldValueChangedCallbackFunction(text);
                 setState(() {_textFieldValue = text;});
               },
           ),
