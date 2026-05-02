@@ -168,7 +168,7 @@ class _CASegmentedButtonWithSanitizedAndPaddedTextFieldState extends State<CASeg
               textFieldHint: widget.textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
-              onTextFieldValueSubmittedCallbackFunction: 
+              onTextFieldValueChangedCallbackFunction: 
                 (String text)
                 {
                   widget.onTextFieldValueSubmittedCallbackFunction(text); 
