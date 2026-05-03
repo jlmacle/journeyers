@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // https://docs.flutter.dev/ui/internationalization
 
 import 'package:journeyers/app_themes.dart';
@@ -7,10 +10,21 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/homepage.dart';
 
-void main() 
+void main() async
 {
   // To help debug the layout
   // debugPaintSizeEnabled = true;
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Keeping the app in portrait up mode for usability
+  if (Platform.isAndroid || Platform.isIOS)
+  {
+    await SystemChrome.setPreferredOrientations
+    ([
+      DeviceOrientation.portraitUp,   // Normal upright portrait
+    ]);
+  }
+  
   runApp(const MyApp());
 }
 
@@ -23,6 +37,13 @@ class MyApp extends StatefulWidget
 
 class _MyAppState extends State<MyApp> 
 {
+
+  @override
+  void initState() {
+    // Getting the stored file names at start
+    du.getStoredFileNamesOnMobile();
+    super.initState();
+  }
   // ─── LOCALE related data and methods ───────────────────────────────────────
 
   // Temporarily defining English as the locale

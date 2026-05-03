@@ -54,22 +54,26 @@ class CAProcessState extends State<CAProcess>
   void _analysisTitleUpdate(String titleValue)
   {
     analysisTitle = titleValue;
+    if (sessionDataDebug) pu.printd("Session Data: CA Process: _analysisTitleUpdate: analysisTitle: $analysisTitle");
   }
 
 
   // KEYWORDS
-  Set<String> keywords = {};
-  void keywordsUpdate(Set<String> kws)
-  {
-    keywords = kws;
+  Set<String> analysisKeywords = {};
+  void _analysisKeywordsUpdate(Set<String> kws)
+  {    
+    analysisKeywords = kws;
+    if (sessionDataDebug) pu.printd("Session Data: CA Process: _analysisKeywordsUpdate: analysisKeywords: $analysisKeywords");
   }
   
   // FILE NAME
-  String fileName = "";
+  String analysisFileName = "";
   String fileExtension = TextFieldUtils.extensionCSV;
-  void analysisFileNameUpdate(String value)
-  {
-    fileName = value;
+
+  void _analysisFileNameUpdate(String value)
+  {   
+    analysisFileName = value;
+    if (sessionDataDebug) pu.printd("Session Data: CA Process: _analysisFileNameUpdate: analysisFileName: $analysisFileName");
   }
   
   
@@ -167,10 +171,10 @@ class CAProcessState extends State<CAProcess>
             ),
 
             // Text field for the analysis title
-            CATitleDeclaration(onAnalysisTitleUpdatedCallbackFunction: _analysisTitleUpdate),
+            CATitleDeclaration(onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)),
             
             // Keywords
-            CAKeywordsDeclaration(onKeywordsUpdatedCallbackFunction: keywordsUpdate),
+            CAKeywordsDeclaration(onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)),
             
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
@@ -219,7 +223,10 @@ class CAProcessState extends State<CAProcess>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? SessionFileNameMobilePlatforms(fileExtension: fileExtension, onFileNameSubmittedCallbackFunction: analysisFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        ? SessionFileNameMobilePlatforms
+                        (fileExtension: fileExtension, 
+                        onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
+                        parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                         // Saving file for desktop platforms
                         : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   ),

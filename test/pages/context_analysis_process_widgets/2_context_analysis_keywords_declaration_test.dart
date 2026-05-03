@@ -21,7 +21,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
-                onKeywordsUpdatedCallbackFunction: (_){}
+                onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
           ),
@@ -55,7 +55,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
-                onKeywordsUpdatedCallbackFunction: (_){}
+                onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
           ),
@@ -90,7 +90,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
-                onKeywordsUpdatedCallbackFunction: (_){}
+                onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
           ),
@@ -137,7 +137,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
-                onKeywordsUpdatedCallbackFunction: (_){}
+                onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
           ),
