@@ -20,7 +20,7 @@ void main() {
           home: Scaffold(
             body: CATitleDeclaration
             (
-              onAnalysisTitleUpdatedCallbackFunction: (_){},
+              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
             )
           ),
         ),

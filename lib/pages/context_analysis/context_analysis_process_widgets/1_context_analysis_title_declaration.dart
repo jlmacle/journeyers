@@ -8,12 +8,12 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 class CATitleDeclaration extends StatefulWidget 
 {
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> onAnalysisTitleUpdatedCallbackFunction;
+  final ValueChanged<String> onAnalysisTitleUpdatedProcessCallbackFunction;
 
   const CATitleDeclaration
   ({
     super.key,
-    required this.onAnalysisTitleUpdatedCallbackFunction
+    required this.onAnalysisTitleUpdatedProcessCallbackFunction
   });
 
   @override
@@ -38,7 +38,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
           hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,
-        onChanged: widget.onAnalysisTitleUpdatedCallbackFunction,
+        onChanged: widget.onAnalysisTitleUpdatedProcessCallbackFunction,
       ),
     );
   }

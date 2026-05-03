@@ -329,13 +329,14 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   // Method used for the onSubmitted named parameter
   onTextFieldValueSubmitted(String newValue)
   {
-    // Additional onSubmitted instructions 
+    // Additional onSubmitted instructions (before potentially saving data and exiting the process page)
     widget.additionalOnSubmittedInstructions(newValue);
 
-    if (textFieldDebugging) pu.printd("Text Field: onSubmitted: submitIsBlocked: $submitIsBlocked");
+    if (textFieldDebugging) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $submitIsBlocked and newValue: $newValue ");
     // Data submission if not blocked
     if (!submitIsBlocked) {
-      widget.onTextFieldValueChangedCallbackFunction(newValue);
+      widget.onTextFieldValueSubmittedCallbackFunction(newValue);
+      if (textFieldDebugging) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: submit unblocked: widget.onTextFieldValueChangedCallbackFunction(newValue): newValue: $newValue");
     }
 
     
@@ -385,7 +386,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
           errorMaxLines: 3
       ),
       onChanged: onTextFieldValueChanged,
-      onSubmitted: (!submitIsBlocked) ?  onTextFieldValueSubmitted : null,  
+      onSubmitted: (!submitIsBlocked) ? (value) => onTextFieldValueSubmitted(value) : null,  
       // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
       onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
     );

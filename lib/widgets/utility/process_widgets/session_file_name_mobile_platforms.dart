@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart' as tfu_gen;
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart';
@@ -24,7 +23,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   final String fileExtension;
 
   /// The callback function called when the file name is submitted.
-  final ValueChanged<String> onFileNameSubmittedCallbackFunction;
+  final ValueChanged<String> onFileNameSubmittedProcessCallbackFunction;
 
   /// A callback function called to save session data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
@@ -33,7 +32,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   ({
     super.key,
     required this.fileExtension,
-    required this.onFileNameSubmittedCallbackFunction,
+    required this.onFileNameSubmittedProcessCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
@@ -43,19 +42,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
 
 class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePlatforms> 
 {
-  final TextEditingController _fileNameController = .new();
-
-  /// A map with (CSV files) blacklisting functions as keys, and error messages as values.
-  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForCSVFileNames = 
-  {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsedCSV : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
-  }; 
-
-   /// A map with (TXT files) blacklisting functions as keys, and error messages as values.
-  static const Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMappingForTXTFileNames = 
-  {
-    tfu_gen.TextFieldUtils.fileNameAlreadyUsedTXT : tfu_gen.TextFieldUtils.errorFileNameAlreadyUsed
-  }; 
+  final TextEditingController _fileNameController = .new();  
   
   final GlobalKey<_SessionFileNameMobilePlatformsState> errorMessageKey = .new();
 
@@ -131,22 +118,22 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
-      onTextFieldValueSubmittedCallbackFunction: widget.onFileNameSubmittedCallbackFunction, 
-      additionalOnSubmittedInstructions: 
-        (String newValue) async
-        {
-          if (newValue.isNotEmpty)
-          { // Saving data 
-            widget.parentCallbackFunctionToSaveDataAndMetadata();
-            await upu.reload();
-          }
-        },
+      onTextFieldValueSubmittedCallbackFunction: (value) async
+      { widget.onFileNameSubmittedProcessCallbackFunction(value);
+      
+        if (value.isNotEmpty)
+        { // Saving data 
+          widget.parentCallbackFunctionToSaveDataAndMetadata();
+          await upu.reload();
+        }
+      }, 
+     
       stringSanitizerBundlesErrorsMapping: TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForFileNames,
       blacklistingFunctionsErrorsMapping: 
       (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV) 
-        ? blacklistingFunctionsErrorsMappingForCSVFileNames
+        ? TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForCSVFileNames
         // otherwise .txt
-        : blacklistingFunctionsErrorsMappingForTXTFileNames
+        : TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForTXTFileNames
     );
   }
 }

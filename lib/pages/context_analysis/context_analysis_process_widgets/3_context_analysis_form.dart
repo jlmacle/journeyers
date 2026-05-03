@@ -128,8 +128,8 @@ class CAFormState extends State<CAForm>
     // Updating analysis title, keywords, and file name
     _analysisTitle = caProcessKey.currentState!.analysisTitle.trim() == "" 
                       ? "Untitled" : caProcessKey.currentState!.analysisTitle.trim();
-    _keywords = caProcessKey.currentState!.keywords;
-    _fileName = caProcessKey.currentState!.fileName;
+    _keywords = caProcessKey.currentState!.analysisKeywords;
+    _fileName = caProcessKey.currentState!.analysisFileName;
 
     // Building the data structure
     final LinkedHashMap<String, Object> enteredData = await _dtoCAForm!.dataStructureBuilding();

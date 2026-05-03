@@ -413,7 +413,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
               ? const Center(child: CircularProgressIndicator())
               : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                   // Defining file name and saving file for mobile platforms 
-                  ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  onFileNameSubmittedCallbackFunction: processFileNameUpdate, parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                  ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  onFileNameSubmittedProcessCallbackFunction: (value) => processFileNameUpdate (value), parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   // Saving file for desktop platforms
                   : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
             ],
