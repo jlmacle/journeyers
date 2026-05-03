@@ -162,7 +162,6 @@ class CAPageState extends State<CAPage>
                 child: 
                   Container(
                     decoration: BoxDecoration(
-                      // Logic: If all checked, color is white; otherwise, orangeShade900
                       border: Border.all(
                         color:  blueShade900, 
                         width: 5.0,
