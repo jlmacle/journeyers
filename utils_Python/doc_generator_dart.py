@@ -24,7 +24,7 @@ os.chdir(PROJECT_FOLDER)
 
 OS_NAME = platform.system().lower()
 print()
-print(f"OS_NAME: {OS_NAME}")
+print(f"OS NAME: {OS_NAME}")
 # Running the 'dart doc'command
 # shell=True to avoid 'FileNotFoundError: The system cannot find the file specified' on Windows.
 if (OS_NAME == 'windows'):
