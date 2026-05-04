@@ -1,3 +1,6 @@
+// ignore: library_prefixes
+import 'session_file_name_mobile_platforms_As_a_widget_test_runs_on_Windows_even_if_Android_is_specified_as_device_test.dart' as session_file_name_mobile_platforms_As_a_widget_test_runs_on_Windows_even_if_Android_is_specified_as_device_test;
+
 void main() {
-  
+  session_file_name_mobile_platforms_As_a_widget_test_runs_on_Windows_even_if_Android_is_specified_as_device_test.main();
 }
