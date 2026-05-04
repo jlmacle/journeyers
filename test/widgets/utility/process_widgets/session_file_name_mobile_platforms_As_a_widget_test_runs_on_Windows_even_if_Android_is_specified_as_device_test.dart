@@ -18,6 +18,7 @@ void main()
     () 
     {      
         // "On mobile: The folder picker is available to the user, when the user didn't select the folder for its files yet"
+        // Important: As a widget test, runs on Windows, even if Android is selected as a device.
         testWidgets("On mobile: The folder picker is available to the user, when the user didn't select of folder for its files yet.", 
         (WidgetTester tester) async 
         {
@@ -54,7 +55,7 @@ void main()
         );
 
         // "On mobile: The text field is available for the user to enter the file name, when the user did select a folder for its files"
-        // Important: As a widget test, run on Windows, even if the Android phone is plugged.
+        // Important: As a widget test, runs on Windows, even if Android is selected as a device.
         testWidgets("On mobile: The text field is available for the user to enter the file name, when the user did select a folder for its files.", 
         (WidgetTester tester) async 
         {
@@ -88,5 +89,6 @@ void main()
             }                  
         }
         );
+
     });
 }
