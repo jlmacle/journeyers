@@ -156,7 +156,7 @@ class CAFormState extends State<CAForm>
     if(Platform.isAndroid || Platform.isIOS) 
     {
       await du.getStoredFileNamesOnMobile();
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
+      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
       if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
     }
     

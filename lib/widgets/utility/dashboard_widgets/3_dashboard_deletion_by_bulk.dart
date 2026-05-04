@@ -131,7 +131,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     if(Platform.isAndroid || Platform.isIOS) 
     {
       await du.getStoredFileNamesOnMobile();
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames: (after retrieval) ${du.currentListOfStoredFileNames}");
+      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
     }    
   }
   
