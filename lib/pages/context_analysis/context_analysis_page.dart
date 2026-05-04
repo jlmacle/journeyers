@@ -9,6 +9,7 @@ import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
+import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 
 
 /// {@category Pages}
@@ -156,35 +157,13 @@ class CAPageState extends State<CAPage>
             if (_wasCASessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new context analysis
-              SizedBox
-              (
-                width: double.infinity,
-                child: 
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color:  blueShade900, 
-                        width: 5.0,
-                      ),
-                    ),
-                    child: ElevatedButton
-                    (                    
-                      key: const Key('analyses-new-session-button'),
-                      onPressed: () { setState(() { _wasCASessionDataSaved = false;});},
-                      style: ElevatedButton.styleFrom
-                      (
-                        backgroundColor: white,
-                        padding: const EdgeInsets.only(top: 10, bottom: 16),
-                        shape: const RoundedRectangleBorder
-                        (
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        
-                      ),
-                      child: const Text("Please click to start\na new context analysis", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
-                    ),
-                  ),
+              NewProcessButton
+              ( 
+                dashboardContext: DashboardUtils.caContext, 
+                buttonText: "Please click to start\na new context analysis",
+                onNewProcessButtonPressedProcessPageCallbackFunction: () {setState(() { _wasCASessionDataSaved = false;});},
               ),
+
               // and the session data dashboard in the remaining space
               Expanded
               (

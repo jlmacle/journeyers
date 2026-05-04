@@ -14,10 +14,10 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 class DashboardUtils {
 
   /// String used to communicate a dashboard of context analyses.
-  static const String caContext = "Context for the context analyses";
+  static const String caContext = "context-analysis";
 
   /// String used to communicate a dashboard of group problem-solvings.
-  static const String gpsContext = "Context for the group problem-solvings";
+  static const String gpsContext = "group-problem-solving";
 
   /// The key for the session title.
   static const String keyTitle = 'title';

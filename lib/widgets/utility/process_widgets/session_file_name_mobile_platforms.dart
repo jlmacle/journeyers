@@ -13,9 +13,8 @@ import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.d
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
 import 'package:journeyers/widgets/utility/process_widgets/process_const_strings.dart';
 
-// StatefulWidget necessary for overriding dispose() 
-
 /// {@category Utility widgets}
+/// {@category Process}
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
 class SessionFileNameMobilePlatforms extends StatefulWidget 
 {
