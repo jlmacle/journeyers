@@ -35,20 +35,20 @@ class CAPageState extends State<CAPage>
 {  
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _preferencesLoading = true;
-  bool? _isInformationModalAlreadyAcknowledged;
+  bool? _wasFirstRunModalAcknowledged;
   bool? _wasCASessionDataSaved;
 
   getPreferences() async 
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
-    _isInformationModalAlreadyAcknowledged = await upu.wasFirstRunModalAcknowledged();
+    _wasFirstRunModalAcknowledged = await upu.wasFirstRunModalAcknowledged();
     _wasCASessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.caContext);
 
     setState(() {_preferencesLoading = false;});
-    if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_isInformationModalAlreadyAcknowledged");
+    if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_wasFirstRunModalAcknowledged");
     if (preferencesDebug) pu.printd("Preferences: _wasCASessionDataSaved: $_wasCASessionDataSaved");
 
-    if ((_isInformationModalAlreadyAcknowledged == false) && mounted) 
+    if ((_wasFirstRunModalAcknowledged == false) && mounted) 
     {
       showDialog
       (
