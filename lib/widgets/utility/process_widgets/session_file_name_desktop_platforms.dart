@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 
 /// {@category Utility widgets}
+/// {@category Process}
 /// A widget used for choosing a file name, and saving a session file, on desktop platforms.
 class SessionFileNameDesktopPlatforms extends StatefulWidget 
 {

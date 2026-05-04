@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
+import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 
 
 /// {@category Pages}
@@ -100,34 +100,13 @@ class GPSPageState extends State<GPSPage>
             if (_wasGPSSessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new group problem-solving
-              SizedBox
-              (
-                width: double.infinity,
-                child: 
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color:  blueShade900, 
-                        width: 5.0,
-                      ),
-                    ),
-                    child: ElevatedButton
-                    (                    
-                      key: const Key('group-problem-solving-new-session-button'),
-                      onPressed: () { setState(() { _wasGPSSessionDataSaved = false;});},
-                      style: ElevatedButton.styleFrom
-                      (
-                        backgroundColor: white,
-                        padding: const EdgeInsets.only(top: 10, bottom: 16),
-                        shape: const RoundedRectangleBorder
-                        (
-                          borderRadius: BorderRadius.zero,
-                        ),
-                      ),
-                      child: const Text("Please click to start\na new group problem-solving session", textAlign:TextAlign.center ,style: elevatedButtonTextStyle),  
-                    ),
-                  ),
+              NewProcessButton
+              ( 
+                dashboardContext: DashboardUtils.gpsContext, 
+                buttonText: "Please click to start\na new group problem-solving session",
+                onNewProcessButtonPressedProcessPageCallbackFunction: () {setState(() { _wasGPSSessionDataSaved = false;});},
               ),
+              
               // and the session data dashboard in the remaining space
               Expanded
               (
