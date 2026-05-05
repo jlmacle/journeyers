@@ -18,22 +18,22 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language
 
 /// {@category Pages}
 /// The homepage for the app.
-class MyHomePage extends StatefulWidget 
+class HomePage extends StatefulWidget 
 {
   /// The language switch-related callback function for the parent widget.
   final ValueChanged<Locale> onLanguageSelectedCallbackFunction;
 
-  const MyHomePage
+  const HomePage
   ({
     super.key,
     required this.onLanguageSelectedCallbackFunction,
   });
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> 
+class _HomePageState extends State<HomePage> 
 {
   // ─── BOTTOM NAVIGATION BAR related data and methods ───────────────────────────────────────
   int _currentIndex = 0;

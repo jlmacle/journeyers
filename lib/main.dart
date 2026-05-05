@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp>
       SafeArea
       (
         child: 
-        MyHomePage
+        HomePage
         (
           onLanguageSelectedCallbackFunction: _setLocale,
         ),
