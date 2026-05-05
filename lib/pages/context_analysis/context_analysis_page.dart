@@ -19,12 +19,12 @@ import 'package:journeyers/widgets/utility/process_widgets/new_process_button.da
 class CAPage extends StatefulWidget 
 {
   /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
-  final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
+  final ValueChanged<bool> homepageCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const CAPage
   ({
     super.key,
-    this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
+    this.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
   });
 
   @override
@@ -189,7 +189,7 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: caFormPageFocusNode,
-                  child: CAProcess(key: caProcessKey, parentCallbackFunctionToRefreshTheCAPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess(key: caProcessKey, parentCallbackFunctionToRefreshTheCAPage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )

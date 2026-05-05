@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage>
     CAPage
     (
       key: caPageKey,
-      parentCallbackFunctionToSetFocusabilityOfBottomBarItems: 
+      homepageCallbackFunctionToSetFocusabilityOfBottomBarItems: 
       (bool boolValue) 
       {
         // Switches the focusability of the bottom bar items
