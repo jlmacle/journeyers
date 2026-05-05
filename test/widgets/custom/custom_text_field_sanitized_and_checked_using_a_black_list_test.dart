@@ -20,6 +20,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStartValue: "",
               errorMessageKey: errorKey,
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
@@ -48,6 +49,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStartValue: "",
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
@@ -74,6 +76,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStartValue: "",
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
@@ -101,6 +104,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStartValue: "",
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
@@ -130,6 +134,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStartValue: "",
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,

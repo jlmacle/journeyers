@@ -2,7 +2,8 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
+
+import 'package:flutter/services.dart';
 
 import 'package:file_picker/file_picker.dart';
 
@@ -18,6 +19,11 @@ import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dar
 /// A DTO for the context analysis form widget.
 class DTOCAForm 
 {
+  /// Default unnamed constructor.
+  /// Required because adding [DTOCAForm.fromJson] suppresses
+  /// Dart's implicit default constructor.
+  DTOCAForm();
+
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : beginning ───────────────────────────────────────
   /// The DTOCheckboxWithTextField instance for the question related to the balance between studies and household life.
   var indivBalanceStudiesHousehold              = DTOCheckboxWithTextField();
@@ -601,5 +607,83 @@ class DTOCAForm
     return filePath;
   }
 
+  // ─── fromJson CONSTRUCTOR and helper methods ─────────────────────────────────────────────────────
+
+  /// Populates a [DTOCAForm] from preloaded JSON data.
+  factory DTOCAForm.fromJson(Map<String, dynamic> json) {
+    final dto = DTOCAForm();
+
+    // ── INDIVIDUAL PERSPECTIVE ──────────────────────────────────────────────
+    final individual = json['individual'] as Map<String, dynamic>;
+
+    // Balance sub-section
+    final balance = individual['balance'] as Map<String, dynamic>;
+    dto.indivBalanceStudiesHousehold         = _checkboxFromJson(balance['studies']        as Map<String, dynamic>);
+    dto.indivBalanceAccessingIncomeHousehold = _checkboxFromJson(balance['accessingIncome'] as Map<String, dynamic>);
+    dto.indivBalanceEarningIncomeHousehold   = _checkboxFromJson(balance['earningIncome']   as Map<String, dynamic>);
+    dto.indivBalanceHelpingOthersHousehold   = _checkboxFromJson(balance['helpingOthers']   as Map<String, dynamic>);
+
+    // Workplace sub-section
+    final workplace = individual['workplace'] as Map<String, dynamic>;
+    dto.indivAtWorkMoreAppreciated      = _checkboxFromJson(workplace['moreAppreciated']      as Map<String, dynamic>);
+    dto.indivAtWorkRemainingAppreciated = _checkboxFromJson(workplace['remainingAppreciated'] as Map<String, dynamic>);
+
+    // Legacy sub-section
+    final legacy = individual['legacy'] as Map<String, dynamic>;
+    dto.indivBetterLegacies = _checkboxFromJson(legacy['betterLegacies'] as Map<String, dynamic>);
+
+    // Plain text field
+    dto.indivAnotherIssueStr = individual['anotherIssue'] as String? ?? '';
+
+    // ── GROUP / TEAM PERSPECTIVE ────────────────────────────────────────────
+    final groups = json['groups'] as Map<String, dynamic>;
+
+    dto.groupProblemsToSolveStr   = groups['problemsText']        as String? ?? '';
+    dto.groupSameProblemsToSolve  = _segmentedFromJson(groups['sameProblems']         as Map<String, dynamic>);
+    dto.groupHarmonyHome          = _segmentedFromJson(groups['harmonyAtHome']         as Map<String, dynamic>);
+    dto.groupAppreciabilityAtWork = _segmentedFromJson(groups['appreciabilityAtWork']  as Map<String, dynamic>);
+    dto.groupEarningAbility       = _segmentedFromJson(groups['earningAbility']        as Map<String, dynamic>);
+
+    return dto;
+  }
+
+  // ── PRIVATE JSON HELPERS ──────────────────────────────────────────────────
+
+  // Builds a [DTOCheckboxWithTextField] from a JSON map of the shape
+  // `{ "checked": bool, "text": String }`.
+  static DTOCheckboxWithTextField _checkboxFromJson(Map<String, dynamic> map) {
+    final field = DTOCheckboxWithTextField();
+    field.checked = map['checked'] as bool?   ?? false;
+    field.text    = map['text']    as String? ?? '';
+    return field;
+  }
+
+  // Builds a [DTOSegmentedButtonWithTextField] from a JSON map of the shape
+  // `{ "selection": String, "text": String }`.
+  //
+  // The `selection` value is a comma-separated string (e.g. `"Yes,No"`).
+  // Each token is trimmed before being added to the [Set].
+  // An empty or absent `selection` string produces an empty [Set],
+  // which matches the default state of a DTOSegmentedButtonWithTextField.
+  static DTOSegmentedButtonWithTextField _segmentedFromJson(Map<String, dynamic> map) {
+    final field = DTOSegmentedButtonWithTextField();
+    final raw   = map['selection'] as String? ?? '';
+    field.selection = raw.isNotEmpty
+        ? raw.split(',').map((token) => token.trim()).toSet()
+        : <String>{};
+    field.text = map['text'] as String? ?? '';
+    return field;
+  }
+
+  /// Reads the JSON file at [assetPath] and returns its decoded
+  /// contents as a Map\<String, dynamic\>.
+  /// [assetPath] must be declared in the `assets` section of `pubspec.yaml`.
+  static Future<Map<String, dynamic>> jsonDataMapFromAsset(String assetPath) async {
+    // Retrieves a string from the asset bundle.
+    final rawData = await rootBundle.loadString(assetPath);
+    Map<String, dynamic> decodedData = jsonDecode(rawData) as Map<String, dynamic>;
+    if (preloadingDebug) pu.printd("DTO Pre-loading: DTOCAForm: jsonDataMapFromAsset: $decodedData");
+    return decodedData;
+  }
 
 }

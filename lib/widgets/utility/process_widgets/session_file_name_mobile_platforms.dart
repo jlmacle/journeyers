@@ -112,6 +112,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     )
     : TextFieldSanitizedAndCheckedUsingABlackList
     (
+      textFieldStartValue: "",
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 

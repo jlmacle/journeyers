@@ -15,6 +15,9 @@ import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 /// and prevents the value from being submitted, in any of the functions returns true.
 class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget 
 {
+  /// The start value for the text field.
+  final String textFieldStartValue;
+
   /// The style for the text field.
   final TextStyle textFieldStyle;
 
@@ -60,6 +63,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   const TextFieldSanitizedAndCheckedUsingABlackList
   ({
     super.key,
+    required this.textFieldStartValue,
     required this.textFieldStyle,
     required this.textFieldHint,
     required this.textFieldHintStyle,
@@ -96,6 +100,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
   @override
   void initState() {
+    // Starting the text field with a potential start value
+    textFieldEditingController.text = widget.textFieldStartValue;
     // Cancelling the time if the user modified the input
     stringSanitizedErrorTimer?.cancel();
     super.initState();
