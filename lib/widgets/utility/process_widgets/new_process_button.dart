@@ -14,14 +14,14 @@ class NewProcessButton extends StatelessWidget
   final String buttonText;
 
   /// A callback function called after pressing the button to start a new process.
-  final VoidCallback onNewProcessButtonPressedProcessPageCallbackFunction;
+  final VoidCallback onNewProcessButtonPressedCAPageCallbackFunction;
 
   const NewProcessButton
   ({
     super.key, 
     required this.dashboardContext, 
     required this.buttonText,
-    required this.onNewProcessButtonPressedProcessPageCallbackFunction
+    required this.onNewProcessButtonPressedCAPageCallbackFunction
   });
 
   @override
@@ -46,7 +46,7 @@ class NewProcessButton extends StatelessWidget
             // Key for the button                   
             key: Key('$dashboardContext-new-session-button'),
             // Sets _wasGPSSessionDataSaved to false to display the process page
-            onPressed: () => onNewProcessButtonPressedProcessPageCallbackFunction(),
+            onPressed: () => onNewProcessButtonPressedCAPageCallbackFunction(),
             style: ElevatedButton.styleFrom
             (
               backgroundColor: white,
