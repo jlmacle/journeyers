@@ -184,7 +184,7 @@ class GPSProcessState extends State<GPSProcess>
           pathToFile: filePath,
         );
 
-        await upu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.gpsContext);
+        await rtdu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.gpsContext);
 
         widget.parentCallbackFunctionToRefreshTheGPSPage();
 

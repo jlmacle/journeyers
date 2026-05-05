@@ -60,9 +60,9 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
 
-    String? folderPathData = await upu.getApplicationFolderPath();
+    String? folderPathData = await rtdu.getApplicationFolderPath();
 
-    if (sessionDataDebug) pu.printd("Session Data: folderPathData: $folderPathData");
+    if (sessionDataDebug) pu.printd("Session Data: Path to the application folder selected by the user: $folderPathData");
     setState(() 
     {
       _applicationFolderPath = folderPathData ?? "";
@@ -123,7 +123,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
         if (value.isNotEmpty)
         { // Saving data 
           widget.parentCallbackFunctionToSaveDataAndMetadata();
-          await upu.reload();
+          await rtdu.reload();
         }
       }, 
      

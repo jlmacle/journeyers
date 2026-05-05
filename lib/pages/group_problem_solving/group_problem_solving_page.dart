@@ -33,7 +33,7 @@ class GPSPageState extends State<GPSPage>
   getPreferences() async 
   {
     if (preferencesDebug) pu.printd("Preferences: getPreferences()");
-    _wasGPSSessionDataSaved = await upu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
+    _wasGPSSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
     setState(() {_preferencesLoading = false;});
     if (preferencesDebug) pu.printd("Preferences: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");

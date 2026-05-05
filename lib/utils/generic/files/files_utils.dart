@@ -121,7 +121,7 @@ class FileUtils
       'fileName': "$fileName$fileExtension",
       'content': dataBytes,
     });
-    String? folderPath = await upu.getApplicationFolderPath();
+    String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
     if (sessionDataDebug) pu.printd("Session Data: saveFileOnAndroid: success: $success");
@@ -141,7 +141,7 @@ class FileUtils
       'fileName': "$fileName$fileExtension",
       'content': dataBytes,
     });
-    String? folderPath = await upu.getApplicationFolderPath();
+    String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
 
     if (sessionDataDebug) pu.printd("Session Data: saveFileOniOS: success: $success");
