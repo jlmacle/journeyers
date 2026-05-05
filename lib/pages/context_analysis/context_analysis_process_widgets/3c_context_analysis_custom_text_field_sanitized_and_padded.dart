@@ -116,6 +116,7 @@ class _CATextFieldSanitizedAndPaddedState extends State<CATextFieldSanitizedAndP
       (
         key: textFieldBeforeErrorMessageKey,
         stringSanitizerBundlesErrorsMapping: widget.stringSanitizerBundlesErrorsMap,
+        textFieldStartValue: widget.textFieldStartValue,
         textFieldStyle: widget.textFieldStyle,
         textFieldHint: widget.textFieldHint,
         textFieldHintStyle: widget.textFieldHintStyle,

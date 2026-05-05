@@ -48,6 +48,40 @@ class CAProcess extends StatefulWidget
 
 class CAProcessState extends State<CAProcess> 
 {
+  // ─── DTO related data ───────────────────────────────────────
+  // The DTO for the CA form
+  DTOCAForm? _dtoCAForm;
+  // Boolean to wait on the data loading
+  bool _isDTOAssetLoading = true;
+
+  // Method used to load the DTO's data using a json file
+  Future<void> _loadDTO({required String dtoAssetPathToJson}) async 
+  {
+    if (sessionDataDebug) pu.printd("Session Data: CA Process: path to DTO asset if preloading: $dtoAssetPathToJson");
+    if (dtoAssetPathToJson == "") 
+    {
+      // Default constructor
+      _dtoCAForm = DTOCAForm(); 
+      // To switch from circular indicator to process widgets
+      setState(() {_isDTOAssetLoading = false;});      
+    }
+    else
+    {
+      // Getting the data map from the Json file
+      final jsonMap = await DTOCAForm.jsonDataMapFromAsset(dtoAssetPathToJson);
+      setState(
+        () 
+        { 
+          // Loading the DTO data from the data map
+          _dtoCAForm = DTOCAForm.fromJson(jsonMap);
+          // To switch from circular indicator to process widgets
+          _isDTOAssetLoading = false;
+        }
+      );
+    }
+    
+  }
+
   // ─── TEXT FIELD related data, methods and text editing controllers ───────────────────────────────────────
   // SESSION TITLE
   String analysisTitle = "";
@@ -118,6 +152,10 @@ class CAProcessState extends State<CAProcess>
     // Retrieving the application folder
     getApplicationFolderPathPref(); 
 
+    // Loading the DTO
+    _loadDTO(dtoAssetPathToJson: '');
+    // _loadDTO(dtoAssetPath: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');
+
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
       (){
@@ -142,6 +180,11 @@ class CAProcessState extends State<CAProcess>
     {scrollbarThickness = 15;}
 
     return 
+    _isDTOAssetLoading
+    // Circular indicator if asset is loading
+    ? const CircularProgressIndicator()
+    // else loading process widgets
+    :
     Scrollbar
     (
       thumbVisibility: true, // to keep the scrollbar visible
@@ -159,7 +202,7 @@ class CAProcessState extends State<CAProcess>
           mainAxisAlignment: MainAxisAlignment.start,
           children: 
           [
-            // ─── FORM ───────────────────────────────────────
+            // ─── Process widgets ───────────────────────────────────────
             const Center
             (
               child: 
@@ -184,7 +227,7 @@ class CAProcessState extends State<CAProcess>
             CAForm.fromDTO
             (
               key: formKeyCA,
-              dtoCAForm: DTOCAForm(),
+              dtoCAForm: _dtoCAForm!,
               parentCallbackFunctionToRefreshTheCAPage: widget.caPageCallbackFunctionToRefreshThePage,
               parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
             ),                        
