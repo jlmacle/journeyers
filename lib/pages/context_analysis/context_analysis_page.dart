@@ -161,7 +161,7 @@ class CAPageState extends State<CAPage>
               ( 
                 dashboardContext: DashboardUtils.caContext, 
                 buttonText: "Please click to start\na new context analysis",
-                onNewProcessButtonPressedProcessPageCallbackFunction: () {setState(() { _wasCASessionDataSaved = false;});},
+                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _wasCASessionDataSaved = false;});},
               ),
 
               // and the session data dashboard in the remaining space
