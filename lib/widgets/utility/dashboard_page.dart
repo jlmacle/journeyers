@@ -31,7 +31,7 @@ class DashboardPage extends StatefulWidget
   final String dashboardContext;
 
   /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
-  final VoidCallback onAllSessionFilesDeletedCallbackFunction;
+  final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
@@ -40,7 +40,7 @@ class DashboardPage extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    this.onAllSessionFilesDeletedCallbackFunction = placeHolderVoidCallback,
+    this.onAllSessionFilesDeletedContextPageCallbackFunction = placeHolderVoidCallback,
     required this.dashboardFilteringByKeywordsKey
   });
 
@@ -190,7 +190,7 @@ class DashboardPageState extends State<DashboardPage>
       // resetWasSessionDataSavedStatus
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
-      widget.onAllSessionFilesDeletedCallbackFunction();
+      widget.onAllSessionFilesDeletedContextPageCallbackFunction();
     }
     else
     {
