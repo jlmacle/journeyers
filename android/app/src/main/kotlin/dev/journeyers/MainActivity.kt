@@ -5,8 +5,8 @@
  * and native Android code for performing Storage Access Framework (SAF) operations.
  * It provides functionality to:
  * - Open and store document tree permissions
- * - Save files to designated storage folders
- * - Read files from designated storage folders
+ * - Save files
+ * - Read files
  */
 package dev.journeyers
 
@@ -65,13 +65,39 @@ class MainActivity: FlutterActivity() {
                 // Retrieves the previously stored directory URI from SharedPreferences
                 "getStoredDirectory" -> {
                     val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                    result.success(prefs.getString(KEY_URI, null))
+                    val applicationFolder = prefs.getString(KEY_URI, null)
+                    println("Kotlin: applicationFolder: $applicationFolder")
+                    result.success(applicationFolder)
+                    //result.success(prefs.getString(KEY_URI, null))
                 }
-                // Lists all the files in the directory
+                // Lists all the files in the directory (application directory retrieved by Kotlin)
                 "listFiles" -> {
                     val files = getAllFileNames()
                     result.success(files)
                 }
+
+                // Was meant to list all the files in the directory.
+                // Doesn't function with a regular POSIX path
+                // Left for educational purposes.
+                "listFilesWithFolderParameter" -> {
+                    val uriString = call.argument<String>("treeUri")
+                    if (uriString == null) {
+                        result.error("MISSING_ARG", "treeUri is required", null)
+                    } else {
+                        val uri = Uri.parse(uriString)
+                        // Guard: SAF tree URIs must use the content:// scheme
+                        if (uri.scheme != "content") {
+                            result.error(
+                                "INVALID_URI",
+                                "Expected a SAF content:// tree URI, got: $uriString",
+                                null
+                            )
+                        } else {
+                            result.success(getFileNamesInDirectory(uri))
+                        }
+                    }
+                }
+
                 // Saves a file with the given name and content to the stored directory
                 "saveFile" -> {
                     val name = call.argument<String>("fileName") ?: "file.csv"
@@ -98,14 +124,42 @@ class MainActivity: FlutterActivity() {
     }
 
     /**
-    * Retrieves a list of all file names within the stored directory
+    * Retrieves a list of all file names within the stored directory.
+    * Delegates to [getFileNamesInDirectory] using the URI persisted in SharedPreferences.
+    *
     * @return A List of file names, or an empty list if the directory is empty or not found
     */
     private fun getAllFileNames(): List<String> {
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val uriString = prefs.getString(KEY_URI, null) ?: return emptyList()
-        val treeUri = Uri.parse(uriString)
+        val applicationFolder = prefs.getString(KEY_URI, null)
+        println("Kotlin: applicationFolder: $applicationFolder")
+        val uriString = applicationFolder ?: return emptyList()
 
+        return getFileNamesInDirectory(Uri.parse(uriString))
+    }
+
+    /**
+     * Retrieves a list of all file names within the given SAF tree directory URI.
+     *
+     * This method bypasses [DocumentFile] entirely and queries the [ContentResolver]
+     * directly, which gives access to [DocumentsContract.Document.COLUMN_DOCUMENT_ID].
+     * That column is necessary because [android.provider.MediaStore.ExternalStorageProvider]
+     * never sanitises the trash state in [DocumentsContract.Document.COLUMN_DISPLAY_NAME],
+     * so inspecting the document ID is the only reliable way to skip trashed entries.
+     *
+     * The [treeUri] must be a tree URI (i.e. one whose authority was granted via
+     * [Intent.ACTION_OPEN_DOCUMENT_TREE] and whose persistent permission was taken with
+     * [android.content.ContentResolver.takePersistableUriPermission]). Passing a
+     * single-document URI will cause [DocumentsContract.getTreeDocumentId] to throw.
+     *
+     * @param treeUri A tree URI for the directory whose direct children should be listed.
+     *                Subdirectory contents are not traversed — only the immediate children
+     *                of this node are returned.
+     * @return A [List] of display names for every non-directory, non-trashed file found
+     *         directly under [treeUri], or an empty list if the directory is empty,
+     *         inaccessible, or an exception occurs.
+     */
+    private fun getFileNamesInDirectory(treeUri: Uri): List<String> {
         return try {
             // Builds the children URI directly from the tree document ID.
             // This bypasses DocumentFile entirely and goes straight to the
@@ -162,7 +216,7 @@ class MainActivity: FlutterActivity() {
 
             names
         } catch (e: Exception) {
-            Log.e(TAG, "Error listing files: ${e.message}", e)
+            Log.e(TAG, "Error listing files in directory $treeUri: ${e.message}", e)
             emptyList()
         }
     }
