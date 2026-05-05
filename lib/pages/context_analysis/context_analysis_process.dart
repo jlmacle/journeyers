@@ -31,14 +31,14 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 class CAProcess extends StatefulWidget 
 {
   /// A callback function called to refresh the context analysis page after the process.
-  final VoidCallback parentCallbackFunctionToRefreshTheCAPage;
+  final VoidCallback caPageCallbackFunctionToRefreshThePage;
 
   /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
   final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const CAProcess({
     super.key,
-    this.parentCallbackFunctionToRefreshTheCAPage = placeHolderVoidCallback,
+    this.caPageCallbackFunctionToRefreshThePage = placeHolderVoidCallback,
     this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
     });
 
@@ -185,7 +185,7 @@ class CAProcessState extends State<CAProcess>
             (
               key: formKeyCA,
               dtoCAForm: DTOCAForm(),
-              parentCallbackFunctionToRefreshTheCAPage: widget.parentCallbackFunctionToRefreshTheCAPage,
+              parentCallbackFunctionToRefreshTheCAPage: widget.caPageCallbackFunctionToRefreshThePage,
               parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
             ),                        
 
