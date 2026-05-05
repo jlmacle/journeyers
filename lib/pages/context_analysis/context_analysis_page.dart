@@ -172,7 +172,7 @@ class CAPageState extends State<CAPage>
                   key: const Key('analyses-dashboard'), 
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
-                  onAllSessionFilesDeletedCallbackFunction: onAllSessionFilesDeleted,
+                  onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
                   
                 )
               ),
