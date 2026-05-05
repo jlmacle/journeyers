@@ -188,7 +188,7 @@ class DashboardPageState extends State<DashboardPage>
     if (_allSessions != null  && _allSessions!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus
-      await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
       // refreshing the page
       widget.onAllSessionFilesDeletedCallbackFunction();
     }

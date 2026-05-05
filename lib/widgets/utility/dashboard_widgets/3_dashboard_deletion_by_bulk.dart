@@ -109,7 +109,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     if (widget.allSessions!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus to false
-      await upu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
 
       // refreshing the page, to re-start in the process page
       if (widget.dashboardContext == DashboardUtils.caContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
