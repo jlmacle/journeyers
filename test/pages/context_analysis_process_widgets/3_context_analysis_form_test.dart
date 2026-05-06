@@ -38,7 +38,7 @@ void main()
   // Method used to pump the CAProcess widget
   Future<void> pumpCAProcess(WidgetTester tester) async
   {
-    return await tester.pumpWidget(
+    await tester.pumpWidget(
         const MaterialApp
         (
           home: Scaffold
@@ -47,6 +47,11 @@ void main()
           ),
         )
     );
+
+    // Waiting to pass the circular indicator
+    await tester.pump(const Duration(seconds: 2));
+
+    return;
   }
 
 
@@ -122,10 +127,7 @@ void main()
           {
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
-
-            // Waiting to pass the circular indicator
-            await tester.pump(const Duration(seconds: 2));
-            
+  
             // Opening the individual perspective expansion tile
             await tester.tap(find.text(q.level2TitleIndividual));
 
@@ -172,9 +174,6 @@ void main()
           {
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
-
-            // Waiting to pass the circular indicator
-            await tester.pump(const Duration(seconds: 2));
             
             // Opening the individual perspective expansion tile
             await tester.tap(find.text(q.level2TitleIndividual));
