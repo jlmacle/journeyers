@@ -49,8 +49,8 @@ void main()
   }
 
 
-  // Method used to find the expansion tiles
-  Finder getTheExpansionTilesFinder()
+  // Method used to find the Text widgets within the expansion tiles
+  Finder getFinderForTextsWithinTheExpansionTiles()
   {
     return  
     find.descendant
@@ -93,13 +93,13 @@ void main()
           {
             await pumpCAForm(tester);
 
-            // Verifying that the first expansion tile text is correct
-            var firstExpansionTileTextFinder = getTheExpansionTilesFinder().first;
+            // Verifying that the first expansion tile title is correct
+            var firstExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().first;
             Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);        
             expect( firstExpansionTileTextWidget.data, q.level2TitleIndividual);
 
-            // Verifying that the second expansion tile text is correct
-            var secondExpansionTileTextFinder = getTheExpansionTilesFinder().last;
+            // Verifying that the second expansion tile title is correct
+            var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
             expect(secondExpansionTileTextWidget.data, q.level2TitleGroup);
           },
