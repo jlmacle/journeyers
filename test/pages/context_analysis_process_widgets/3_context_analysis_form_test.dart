@@ -47,7 +47,7 @@ void main()
     // 'Form: Structure: \n'
     group
     (
-      'Form: Structure: \n',
+      'Form: Structure: Root structure: \n',
       ()
       {
         // 'Two perspective expansion tiles are present'
@@ -84,7 +84,12 @@ void main()
           },
         ); 
 
-
+      });
+      group
+    (
+      'Form: Structure: Individual perspective: \n',
+      ()
+      {
         // 'Expanding the tile with the individual perspective reveals all four level-3 section headings'
         testWidgets
         (
@@ -111,7 +116,7 @@ void main()
 
             // Waiting for the expansion tile to be unfolded before searching descendants
             await tester.pump(const Duration(seconds: 2));
-            
+
             // pumpAndSettle timed out exception if pumpAndSettle is used
             // await tester.pumpAndSettle();
 
@@ -141,7 +146,7 @@ void main()
           },
         );      
       }
-    );
+    );    
   });
 
 }
