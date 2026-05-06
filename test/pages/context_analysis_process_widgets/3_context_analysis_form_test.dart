@@ -67,6 +67,19 @@ void main()
     // await tester.pumpAndSettle();
   }
 
+  // Method used to open the expansion tile with the group/team perspective
+  Future<void> openGroupExpansionTile(WidgetTester tester) async
+  {
+    // Opening the group/team perspective expansion tile
+    await tester.tap(find.text(q.level2TitleGroup));
+
+    // Waiting for the expansion tile to be unfolded before searching descendants
+    await tester.pump(const Duration(seconds: 2));
+
+    // pumpAndSettle timed out exception if pumpAndSettle is used
+    // await tester.pumpAndSettle();
+  }
+
   // Method used to find the Text widgets within the expansion tiles
   Finder getFinderForTextsWithinTheExpansionTiles()
   {
@@ -214,13 +227,7 @@ void main()
             await pumpCAProcess(tester);            
 
             // Opening the group/team perspective expansion tile
-            await tester.tap(find.text(q.level2TitleGroup));
-
-            // Waiting for the expansion tile to be unfolded before searching descendants
-            await tester.pump(const Duration(seconds: 2));
-
-            // pumpAndSettle timed out exception if pumpAndSettle is used
-            // await tester.pumpAndSettle();
+            await openGroupExpansionTile(tester);
 
             // Searching the custom headings text for the second expansion tile
             var customHeadingTextFinders = find.descendant
