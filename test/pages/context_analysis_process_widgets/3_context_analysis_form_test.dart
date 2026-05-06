@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 void main() 
 {
@@ -78,7 +82,64 @@ void main()
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
             expect(secondExpansionTileTextWidget.data, q.level2TitleGroup);
           },
-        );        
+        ); 
+
+
+        // 'Expanding the tile with the individual perspective reveals all four level-3 section headings'
+        testWidgets
+        (
+          'Expanding the tile with the individual perspective reveals all four level-3 section headings',
+          (tester) async
+          {
+            final q = CAQuestionsFields();
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await tester.pumpWidget
+            (
+              const MaterialApp
+              (
+                home: Scaffold
+                (
+                  body: CAProcess()
+                ),
+              )
+            );
+            // Waiting to pass the circular indicator
+            await tester.pump(const Duration(seconds: 2));
+            
+            // Opening the individual perspective expansion tile
+            await tester.tap(find.text(q.level2TitleIndividual));
+
+            // Waiting for the expansion tile to be unfolded before searching descendants
+            await tester.pump(const Duration(seconds: 2));
+            
+            // pumpAndSettle timed out exception if pumpAndSettle is used
+            // await tester.pumpAndSettle();
+
+            // Searching the custom headings text for the first expansion tile
+            var customHeadingTextFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile).first, 
+              matching: find.descendant
+              (
+                of: find.byType(CustomHeading),
+                matching: find.byType(Text)
+              )
+            );
+
+            // Debug data
+            for (var textElement in customHeadingTextFinders.evaluate())
+            {
+              Text textWidget = textElement.widget as Text;
+              if (testingDebug) pu.printd("Custom heading text: ${textWidget.data}");
+            }
+
+            // Verifying the level 3 titles present
+            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, q.level3TitleBalanceIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, q.level3TitleWorkplaceIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, q.level3TitleLegacyIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, q.level3TitleAnotherIssue);
+          },
+        );      
       }
     );
   });
