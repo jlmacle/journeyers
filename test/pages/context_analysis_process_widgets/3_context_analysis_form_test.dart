@@ -12,6 +12,9 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 void main() 
 {
+  // Labels of the level 2 and 3 titles
+  final q = CAQuestionsFields();
+
   // ─── HELPER FUNCTIONS ───────────────────────────────────────
 
   // Method used to pump the CAForm widget
@@ -88,7 +91,6 @@ void main()
           'Individual and group tiles carry the correct heading text',
           (tester) async
           {
-            final q = CAQuestionsFields();
             await pumpCAForm(tester);
 
             // Verifying that the first expansion tile text is correct
@@ -115,7 +117,6 @@ void main()
           'Expanding the tile with the individual perspective reveals all four level-3 section headings',
           (tester) async
           {
-            final q = CAQuestionsFields();
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
 
@@ -172,7 +173,6 @@ void main()
           'Expanding the tile with the group/teams perspective reveals all five level-3 section headings',
           (tester) async
           {
-            final q = CAQuestionsFields();
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);            
 
