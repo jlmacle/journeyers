@@ -54,6 +54,18 @@ void main()
     return;
   }
 
+  // Method used to open the expansion tile with the individual perspective
+  Future<void> openIndividualExpansionTile(WidgetTester tester) async
+  {
+    // Opening the individual perspective expansion tile
+    await tester.tap(find.text(q.level2TitleIndividual));
+
+    // Waiting for the expansion tile to be unfolded before searching descendants
+    await tester.pump(const Duration(seconds: 2));
+
+    // pumpAndSettle timed out exception if pumpAndSettle is used
+    // await tester.pumpAndSettle();
+  }
 
   // Method used to find the Text widgets within the expansion tiles
   Finder getFinderForTextsWithinTheExpansionTiles()
@@ -129,13 +141,7 @@ void main()
             await pumpCAProcess(tester);
   
             // Opening the individual perspective expansion tile
-            await tester.tap(find.text(q.level2TitleIndividual));
-
-            // Waiting for the expansion tile to be unfolded before searching descendants
-            await tester.pump(const Duration(seconds: 2));
-
-            // pumpAndSettle timed out exception if pumpAndSettle is used
-            // await tester.pumpAndSettle();
+            await openIndividualExpansionTile(tester);           
 
             // Searching the custom headings text for the first expansion tile
             var customHeadingTextFinders = find.descendant
@@ -176,13 +182,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await tester.tap(find.text(q.level2TitleIndividual));
-
-            // Waiting for the expansion tile to be unfolded before searching descendants
-            await tester.pump(const Duration(seconds: 2));
-
-            // pumpAndSettle timed out exception if pumpAndSettle is used
-            // await tester.pumpAndSettle();
+            await openIndividualExpansionTile(tester);
 
             // Getting the first expansion tile
             var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
