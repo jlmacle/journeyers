@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -213,5 +214,40 @@ void main()
           },
         );
       }
+    );
+
+    // 'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
+    // '4 balance + 2 workplace + 1 legacy = 7'
+    testWidgets
+    (
+      'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
+      '4 balance + 2 workplace + 1 legacy = 7',
+      (tester) async
+      {
+        // Pumping the widget within the CA process to allow for the tile expansion
+        await pumpCAProcess(tester);
+
+        // Waiting to pass the circular indicator
+        await tester.pump(const Duration(seconds: 2));
+        
+        // Opening the individual perspective expansion tile
+        await tester.tap(find.text(q.level2TitleIndividual));
+
+        // Waiting for the expansion tile to be unfolded before searching descendants
+        await tester.pump(const Duration(seconds: 2));
+
+        // pumpAndSettle timed out exception if pumpAndSettle is used
+        // await tester.pumpAndSettle();
+
+        // Getting the first expansion tile
+        var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
+
+        // Searching 7 custom checkbox widgets
+        expect
+        (
+          find.descendant(of: individualExpansionTileFinder, matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)), 
+          findsNWidgets(7)
+        );
+      },
     );
 }
