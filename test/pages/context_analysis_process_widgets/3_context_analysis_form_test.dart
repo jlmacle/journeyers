@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -11,7 +12,9 @@ import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 void main() 
 {
-  // Method used to pump the widget
+  // ─── HELPER FUNCTIONS ───────────────────────────────────────
+
+  // Method used to pump the CAForm widget
   Future<void> pumpCAForm(WidgetTester tester) async
   {
     return await tester.pumpWidget(
@@ -28,6 +31,21 @@ void main()
     );
   }
 
+  // Method used to pump the CAProcess widget
+  Future<void> pumpCAProcess(WidgetTester tester) async
+  {
+    return await tester.pumpWidget(
+        const MaterialApp
+        (
+          home: Scaffold
+          (
+            body: CAProcess()
+          ),
+        )
+    );
+  }
+
+
   // Method used to find the expansion tiles
   Finder getTheExpansionTilesFinder()
   {
@@ -39,6 +57,7 @@ void main()
     );
   }
   
+  // ─── TESTS ───────────────────────────────────────
 
   // 'CAForm Tests: \n'
   group('CAForm Tests: \n', 
@@ -98,16 +117,8 @@ void main()
           {
             final q = CAQuestionsFields();
             // Pumping the widget within the CA process to allow for the tile expansion
-            await tester.pumpWidget
-            (
-              const MaterialApp
-              (
-                home: Scaffold
-                (
-                  body: CAProcess()
-                ),
-              )
-            );
+            await pumpCAProcess(tester);
+
             // Waiting to pass the circular indicator
             await tester.pump(const Duration(seconds: 2));
             
@@ -163,16 +174,7 @@ void main()
           {
             final q = CAQuestionsFields();
             // Pumping the widget within the CA process to allow for the tile expansion
-            await tester.pumpWidget
-            (
-              const MaterialApp
-              (
-                home: Scaffold
-                (
-                  body: CAProcess()
-                ),
-              )
-            );
+            await pumpCAProcess(tester);            
 
             // Opening the group/team perspective expansion tile
             await tester.tap(find.text(q.level2TitleGroup));
