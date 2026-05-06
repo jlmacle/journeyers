@@ -85,7 +85,7 @@ void main()
         ); 
 
       });
-      group
+    group
     (
       'Form: Structure: Individual perspective: \n',
       ()
@@ -123,7 +123,8 @@ void main()
             // Searching the custom headings text for the first expansion tile
             var customHeadingTextFinders = find.descendant
             (
-              of: find.byType(ExpansionTile).first, 
+              of: find.byType(ExpansionTile)
+                  .first, 
               matching: find.descendant
               (
                 of: find.byType(CustomHeading),
@@ -149,4 +150,66 @@ void main()
     );    
   });
 
+    group
+    (
+      'Form: Structure: Group/Teams perspective: \n',
+      ()
+      {
+        // 'Expanding the tile with the group/teams perspective reveals all five level-3 section headings',
+        testWidgets
+        (
+          'Expanding the tile with the group/teams perspective reveals all five level-3 section headings',
+          (tester) async
+          {
+            final q = CAQuestionsFields();
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await tester.pumpWidget
+            (
+              const MaterialApp
+              (
+                home: Scaffold
+                (
+                  body: CAProcess()
+                ),
+              )
+            );
+
+            // Opening the group/team perspective expansion tile
+            await tester.tap(find.text(q.level2TitleGroup));
+
+            // Waiting for the expansion tile to be unfolded before searching descendants
+            await tester.pump(const Duration(seconds: 2));
+
+            // pumpAndSettle timed out exception if pumpAndSettle is used
+            // await tester.pumpAndSettle();
+
+            // Searching the custom headings text for the second expansion tile
+            var customHeadingTextFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .last, 
+              matching: find.descendant
+              (
+                of: find.byType(CustomHeading),
+                matching: find.byType(Text)
+              )
+            );
+
+            // Debug data
+            for (var textElement in customHeadingTextFinders.evaluate())
+            {
+              Text textWidget = textElement.widget as Text;
+              if (testingDebug) pu.printd("Custom heading text: ${textWidget.data}");
+            }
+
+            // Verifying the level 3 titles present
+            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, q.level3TitleGroupsProblematics);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, q.level3TitleSameProblem);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, q.level3TitleHarmonyAtHome);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, q.level3TitleAppreciabilityAtWork);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, q.level3TitleIncomeEarningAbility);
+          },
+        );
+      }
+    );
 }
