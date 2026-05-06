@@ -208,6 +208,41 @@ void main()
             );
           },
         );
+      
+        // 'Balance issue: all four item labels are correct',
+        testWidgets
+        (          
+          'Balance issue: all four item labels are correct',
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+            
+            // Opening the individual perspective expansion tile
+            await openIndividualExpansionTile(tester);
+
+            // Searching the Text widgets for the first expansion tile
+            var textFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .first, 
+              matching: find.byType(Text)
+            );
+
+            // Debug data
+            for (var textElement in textFinders.evaluate())
+            {
+              Text textWidget = textElement.widget as Text;
+              if (testingDebug) pu.printd("Text: ${textWidget.data}");
+            }
+
+            // Verifying the level 3 titles present
+            expect(tester.widget<Text>(textFinders.at(2)).data, q.level3TitleBalanceIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(3)).data, q.level3TitleBalanceIssueItem2);
+            expect(tester.widget<Text>(textFinders.at(4)).data, q.level3TitleBalanceIssueItem3);
+            expect(tester.widget<Text>(textFinders.at(5)).data, q.level3TitleBalanceIssueItem4);
+          },
+        );
       }
     );    
 
