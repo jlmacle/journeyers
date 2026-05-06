@@ -107,6 +107,8 @@ void main()
         ); 
 
       });
+
+    // 'Form: Structure: Individual perspective: \n'
     group
     (
       'Form: Structure: Individual perspective: \n',
@@ -159,46 +161,45 @@ void main()
             expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, q.level3TitleAnotherIssue);
           },
         );      
+      
+        // 'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
+        // '4 balance + 2 workplace + 1 legacy = 7'
+        testWidgets
+        (
+          'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
+          '4 balance + 2 workplace + 1 legacy = 7',
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+
+            // Waiting to pass the circular indicator
+            await tester.pump(const Duration(seconds: 2));
+            
+            // Opening the individual perspective expansion tile
+            await tester.tap(find.text(q.level2TitleIndividual));
+
+            // Waiting for the expansion tile to be unfolded before searching descendants
+            await tester.pump(const Duration(seconds: 2));
+
+            // pumpAndSettle timed out exception if pumpAndSettle is used
+            // await tester.pumpAndSettle();
+
+            // Getting the first expansion tile
+            var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
+
+            // Searching 7 custom checkbox widgets
+            expect
+            (
+              find.descendant(of: individualExpansionTileFinder, matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)), 
+              findsNWidgets(7)
+            );
+          },
+        );
       }
     );    
 
-    // 'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
-    // '4 balance + 2 workplace + 1 legacy = 7'
-    testWidgets
-    (
-      'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
-      '4 balance + 2 workplace + 1 legacy = 7',
-      (tester) async
-      {
-        // Pumping the widget within the CA process to allow for the tile expansion
-        await pumpCAProcess(tester);
-
-        // Waiting to pass the circular indicator
-        await tester.pump(const Duration(seconds: 2));
-        
-        // Opening the individual perspective expansion tile
-        await tester.tap(find.text(q.level2TitleIndividual));
-
-        // Waiting for the expansion tile to be unfolded before searching descendants
-        await tester.pump(const Duration(seconds: 2));
-
-        // pumpAndSettle timed out exception if pumpAndSettle is used
-        // await tester.pumpAndSettle();
-
-        // Getting the first expansion tile
-        var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
-
-        // Searching 7 custom checkbox widgets
-        expect
-        (
-          find.descendant(of: individualExpansionTileFinder, matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)), 
-          findsNWidgets(7)
-        );
-      },
-    );
-
-  });
-
+    // 'Form: Structure: Group/Teams perspective: \n'
     group
     (
       'Form: Structure: Group/Teams perspective: \n',
@@ -250,7 +251,8 @@ void main()
           },
         );
       }
-    );
+    );       
+  });
 
-    
+     
 }
