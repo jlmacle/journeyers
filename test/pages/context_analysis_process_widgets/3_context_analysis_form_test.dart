@@ -141,6 +141,7 @@ void main()
 
       });
 
+    // ─── INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
     // 'Form: Structure: Individual perspective: \n'
     group
     (
@@ -238,6 +239,7 @@ void main()
           },
         );
       
+        // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
         // 'Balance issue: all four item labels are correct after expansion',
         testWidgets
         (          
@@ -273,6 +275,7 @@ void main()
           },
         );
       
+        // ─── INDIVIDUAL PERSPECTIVE: WORKPLACE SECTION ───────────────────────────────────────
         // 'Workplace issue: both item labels are correct after expansion',
         testWidgets
         (
@@ -307,6 +310,7 @@ void main()
           },
         );
 
+        // ─── INDIVIDUAL PERSPECTIVE: LEGACY SECTION ───────────────────────────────────────
         // 'Legacy issue: the item label is present after expansion',
         testWidgets
         (
@@ -340,6 +344,7 @@ void main()
           },
         );
       
+        // ─── INDIVIDUAL PERSPECTIVE: ANOTHER ISSUE SECTION ───────────────────────────────────────
         // 'Another issue: the hint text is present after expansion',
         testWidgets
         (
@@ -376,6 +381,7 @@ void main()
       }
     );    
 
+    // ─── GROUP/TEAMS PERSPECTIVE ───────────────────────────────────────
     // 'Form: Structure: Group/Teams perspective: \n'
     group
     (
