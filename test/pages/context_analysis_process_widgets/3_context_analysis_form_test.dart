@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
@@ -335,6 +336,39 @@ void main()
 
             // Verifying the level 3 title present
             expect(tester.widget<Text>(textFinders.at(10)).data, q.level3TitleLegacyIssueItem1);
+          },
+        );
+      
+        // 'Another issue: the hint text is present after expansion',
+        testWidgets
+        (
+          
+          'Another issue: the hint text is present after expansion',
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+            
+            // Opening the individual perspective expansion tile
+            await openIndividualExpansionTile(tester);
+
+            // Searching the Text widgets for the first expansion tile
+            var textFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .first, 
+              matching: find.byType(Text)
+            );
+
+            // Debug data
+            for (var textElement in textFinders.evaluate())
+            {
+              Text textWidget = textElement.widget as Text;
+              if (testingDebug) pu.printd("Text: ${textWidget.data}");
+            }
+
+            // Verifying the level 3 title present
+            expect(tester.widget<Text>(textFinders.at(12)).data, pleaseDevelopHint);
           },
         );
       
