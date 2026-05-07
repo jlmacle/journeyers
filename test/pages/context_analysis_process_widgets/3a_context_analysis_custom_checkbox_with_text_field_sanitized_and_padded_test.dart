@@ -51,6 +51,29 @@ void main()
             expect(find.byType(TextField), findsNothing);
           }
         );
+
+        // 'If the checkbox is checked, the textfield is present'
+        testWidgets(
+          'If the checkbox is checked, the textfield is present', 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget 
+            await pumpCACheckboxWithSanitizedAndPaddedTextField(tester);
+
+            // Searching for the Checkbox widget
+            final checkboxFinder = find.descendant(
+              of:       find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+              matching: find.byType(Checkbox),
+            );
+
+            // Checking the checkbox
+            await tester.tap(checkboxFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the text field present
+            expect(find.byType(TextField), findsOne);
+          }
+        );
     });
 
   });
