@@ -180,7 +180,7 @@ const String pleaseDescribeTextWorkplaceHint =
     'if some seem to have been out of their comfort zone for too long, '
     'and the more desirable outcomes for the workplace and for the household.';
 
-const String pleaseDevelopOrTakeNotesHint = 'Please develop.';
+const String pleaseDevelopHint = 'Please develop.';
 
 const String pleaseDescribeTextGroupsHint =
     'Please describe the problem(s) that the groups/teams are trying to solve.';
