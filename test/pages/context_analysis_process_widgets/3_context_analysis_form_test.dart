@@ -209,10 +209,10 @@ void main()
           },
         );
       
-        // 'Balance issue: all four item labels are correct',
+        // 'Balance issue: all four item labels are correct after expansion',
         testWidgets
         (          
-          'Balance issue: all four item labels are correct',
+          'Balance issue: all four item labels are correct after expansion',
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -243,6 +243,41 @@ void main()
             expect(tester.widget<Text>(textFinders.at(5)).data, q.level3TitleBalanceIssueItem4);
           },
         );
+      
+        // 'Workplace issue: both item labels are correct after expansion',
+        testWidgets
+        (
+          
+          'Workplace issue: both item labels are correct after expansion',
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+            
+            // Opening the individual perspective expansion tile
+            await openIndividualExpansionTile(tester);
+
+            // Searching the Text widgets for the first expansion tile
+            var textFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .first, 
+              matching: find.byType(Text)
+            );
+
+            // Debug data
+            for (var textElement in textFinders.evaluate())
+            {
+              Text textWidget = textElement.widget as Text;
+              if (testingDebug) pu.printd("Text: ${textWidget.data}");
+            }
+
+            // Verifying the level 3 titles present
+            expect(tester.widget<Text>(textFinders.at(7)).data, q.level3TitleWorkplaceIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(8)).data, q.level3TitleWorkplaceIssueItem2);
+          },
+        );
+      
       }
     );    
 
