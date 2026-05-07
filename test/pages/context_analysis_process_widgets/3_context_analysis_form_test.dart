@@ -277,6 +277,39 @@ void main()
             expect(tester.widget<Text>(textFinders.at(8)).data, q.level3TitleWorkplaceIssueItem2);
           },
         );
+
+        // 'Legacy issue: the item label is present after expansion',
+        testWidgets
+        (
+          
+          'Legacy issue: the item label is present after expansion',
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+            
+            // Opening the individual perspective expansion tile
+            await openIndividualExpansionTile(tester);
+
+            // Searching the Text widgets for the first expansion tile
+            var textFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .first, 
+              matching: find.byType(Text)
+            );
+
+            // Debug data
+            for (var textElement in textFinders.evaluate())
+            {
+              Text textWidget = textElement.widget as Text;
+              if (testingDebug) pu.printd("Text: ${textWidget.data}");
+            }
+
+            // Verifying the level 3 title present
+            expect(tester.widget<Text>(textFinders.at(10)).data, q.level3TitleLegacyIssueItem1);
+          },
+        );
       
       }
     );    
