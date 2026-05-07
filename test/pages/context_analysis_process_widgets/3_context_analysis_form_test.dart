@@ -147,10 +147,10 @@ void main()
       'Form: Structure: Individual perspective: \n',
       ()
       {
-        // 'Expanding the tile with the individual perspective reveals all four level-3 section headings'
+        // 'Expanding the tile with the individual perspective reveals all four level-3 section questions'
         testWidgets
         (
-          'Expanding the tile with the individual perspective reveals all four level-3 section headings',
+          'Expanding the tile with the individual perspective reveals all four level-3 section questions',
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -382,10 +382,10 @@ void main()
       'Form: Structure: Group/Teams perspective: \n',
       ()
       {
-        // 'Expanding the tile with the group/teams perspective reveals all five level-3 section headings',
+        // 'Expanding the tile with the group/teams perspective reveals all five level-3 questions',
         testWidgets
         (
-          'Expanding the tile with the group/teams perspective reveals all five level-3 section headings',
+          'Expanding the tile with the group/teams perspective reveals all five level-3 questions',
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
