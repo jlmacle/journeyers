@@ -100,7 +100,7 @@ void main()
   group('CAForm Tests: \n', 
   () 
   {  
-    // 'Form: Structure: \n'
+    // 'Form: Structure: Root structure: \n'
     group
     (
       'Form: Structure: Root structure: \n',
@@ -112,6 +112,7 @@ void main()
           'Two perspective expansion tiles are present',
           (tester) async
           {
+            // Pumping the CAForm widget
             await pumpCAForm(tester);
 
             // One tile for the individual perspective, one for the group/team perspective
@@ -125,6 +126,7 @@ void main()
           'Individual and group tiles carry the correct heading text',
           (tester) async
           {
+            // Pumping the CAForm widget
             await pumpCAForm(tester);
 
             // Verifying that the first expansion tile title is correct
@@ -462,7 +464,7 @@ void main()
           '4',
           (tester) async
           {
-           // Pumping the widget within the CA process to allow for the tile expansion
+            // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
             
             // Opening the group/team perspective expansion tile
@@ -481,7 +483,40 @@ void main()
         );
       
       }
-    );       
+    ); 
+
+    // 
+    group('Form: Start values: \n', 
+    () 
+    { 
+        // 'At start, all checkboxes are unchecked'
+        testWidgets('At start, all checkboxes are unchecked', 
+        (WidgetTester tester) async {
+
+          // Pumping the widget within the CA process to allow for the tile expansion
+          await pumpCAProcess(tester);
+
+          // Opening the individual perspective expansion tile
+          await openIndividualExpansionTile(tester);   
+
+          // Searching the checkboxes present in the sub-tree
+          var checkboxFinder = find.descendant
+          (
+            of: find.byType(ExpansionTile)
+                .first, 
+            matching: find.byType(Checkbox)                            
+          );
+
+          // Verifying all checkboxes unchecked
+          for(var checkboxElement in checkboxFinder.evaluate())
+          {
+            Checkbox checkboxWidget = checkboxElement.widget as Checkbox;
+            expect(checkboxWidget.value, false);
+          }
+            
+        }
+        );
+    });      
   });
 
      
