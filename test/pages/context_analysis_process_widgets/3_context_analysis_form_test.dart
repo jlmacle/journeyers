@@ -420,6 +420,33 @@ void main()
             expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, q.level3TitleIncomeEarningAbility);
           },
         );
+      
+        // 'Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n'
+        // '1 problems the groups/teams are trying to solve = 1'
+        testWidgets
+        (
+          'Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n'
+          '1 problems the groups/teams are trying to solve = 1',
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+            
+            // Opening the group/team perspective expansion tile
+            await openGroupExpansionTile(tester);
+
+            // Getting the second expansion tile
+            var individualExpansionTileFinder =  find.byType(ExpansionTile).last;
+
+            // Searching 1 custom text field widget
+            expect
+            (
+              find.descendant(of: individualExpansionTileFinder, matching: find.byType(CATextFieldSanitizedAndPadded)), 
+              findsNWidgets(1)
+            );
+          },
+        );
+      
       }
     );       
   });
