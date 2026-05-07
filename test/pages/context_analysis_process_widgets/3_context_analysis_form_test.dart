@@ -7,6 +7,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
@@ -436,13 +437,39 @@ void main()
             await openGroupExpansionTile(tester);
 
             // Getting the second expansion tile
-            var individualExpansionTileFinder =  find.byType(ExpansionTile).last;
+            var groupExpansionTileFinder =  find.byType(ExpansionTile).last;
 
             // Searching 1 custom text field widget
             expect
             (
-              find.descendant(of: individualExpansionTileFinder, matching: find.byType(CATextFieldSanitizedAndPadded)), 
+              find.descendant(of: groupExpansionTileFinder, matching: find.byType(CATextFieldSanitizedAndPadded)), 
               findsNWidgets(1)
+            );
+          },
+        );
+      
+        // 'Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n'
+        // '4'
+        testWidgets
+        (
+          'Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n'
+          '4',
+          (tester) async
+          {
+           // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+            
+            // Opening the group/team perspective expansion tile
+            await openGroupExpansionTile(tester);
+
+            // Getting the second expansion tile
+            var groupExpansionTileFinder =  find.byType(ExpansionTile).last;
+
+            // Searching 4 custom segmented button widgets
+            expect
+            (
+              find.descendant(of: groupExpansionTileFinder, matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField)), 
+              findsNWidgets(4)
             );
           },
         );
