@@ -489,8 +489,8 @@ void main()
     group('Form: Start values: \n', 
     () 
     { 
-        // 'At start, all checkboxes are unchecked'
-        testWidgets('At start, all checkboxes are unchecked', 
+        // 'At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked'
+        testWidgets('At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked', 
         (WidgetTester tester) async {
 
           // Pumping the widget within the CA process to allow for the tile expansion
@@ -516,6 +516,34 @@ void main()
             
         }
         );
+    
+        // 'At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons'
+        testWidgets('At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons', 
+        (WidgetTester tester) async {
+
+          // Pumping the widget within the CA process to allow for the tile expansion
+          await pumpCAProcess(tester);
+
+          // Opening the group/teams perspective expansion tile
+          await openGroupExpansionTile(tester);   
+
+          // Searching the segmented buttons present in the sub-tree
+          var segButtonFinder = find.descendant
+          (
+            of: find.byType(ExpansionTile)
+                .last, 
+            matching: find.byType(SegmentedButton)                            
+          );
+
+          // Verifying all segmented buttons without selection
+          for(var segButtonElement in segButtonFinder.evaluate())
+          {
+            SegmentedButton segButtonWidget = segButtonElement.widget as SegmentedButton;
+            expect(segButtonWidget.selected, {});
+          }     
+        }
+        );
+ 
     });      
   });
 
