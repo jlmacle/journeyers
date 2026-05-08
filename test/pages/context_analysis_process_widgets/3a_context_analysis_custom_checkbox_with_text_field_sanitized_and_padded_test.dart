@@ -30,9 +30,9 @@ void main()
     group('Presence/Absence of the text field: \n', 
     () 
     { 
-        // 'If the checkbox is unchecked, the textfield is absent'
+        // 'At start, the checkbox is unchecked, and the textfield is absent'
         testWidgets(
-          'If the checkbox is unchecked, the textfield is absent', 
+          'At start, the checkbox is unchecked, and the textfield is absent', 
           (WidgetTester tester) async 
           {
             // Pumping the widget 
