@@ -32,7 +32,7 @@ void main()
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for modal to appear,
-              'isInformationModalAcknowledged': false,
+              'wasFirstRunModalAcknowledged': false,
               // and to have the context analysis page, without the dashboard.
               'wasSessionDataSaved': false
             });
@@ -63,11 +63,50 @@ void main()
             expect(dashboardFinder, findsNothing);
 
             // Verifying the presence of the context analysis process page
-            final caFormFinder = find.byType(CAProcess);
-            expect(caFormFinder, findsOneWidget);
+            final caProcessFinder = find.byType(CAProcess);
+            expect(caProcessFinder, findsOneWidget);
           }
         );
         });
+
+        // 'First-run modal: \n'
+        // 'The first-run modal is not displayed when already acknowledged.', 
+        testWidgets
+        (          
+          'First-run modal: \n'
+          'The first-run modal is not displayed when already acknowledged', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // To not have the modal at startup
+              'wasFirstRunModalAcknowledged': true,
+              // To have the context analysis page, without the dashboard
+              'wasSessionDataSaved': false,
+            });
+
+            // Widget wrapped in a MaterialApp because the page uses Scaffold, 
+            // showDialog (Navigator), and AppLocalizations
+            await tester.pumpWidget(const MaterialApp(home: CAPage()));
+
+            // getPreferences is async and calls setState. 
+            // Need to pump and wait for the microtasks to finish.
+            await tester.pumpAndSettle();
+
+            // Verifying the modal absent
+            final modalTextFinder = find.byType(AlertDialog);
+            expect(modalTextFinder, findsNothing);
+
+            // Verifying the dashboard absent
+            final dashboardFinder = find.byType(DashboardPage);
+            expect(dashboardFinder, findsNothing);
+
+            // Verifying the presence of the context analysis process page
+            final caProcessFinder = find.byType(CAProcess);
+            expect(caProcessFinder, findsOneWidget);
+          }
+        );
 
     });
 }
