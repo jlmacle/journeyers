@@ -108,5 +108,41 @@ void main()
           }
         );
 
+        // 'No session data stored: \n'
+        // 'When no session data is stored, the context analysis process page should be displayed,\n'
+        // 'without the dashboard.', 
+        testWidgets
+        ( 
+                  
+          'No session data stored: \n'
+          'When no session data is stored, the context analysis process page should be displayed,\n'
+          'without the dashboard.', 
+          (tester) async 
+          {  
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({            
+              'wasFirstRunModalAcknowledged': true,
+              'wasSessionDataSaved': false,
+            });
+            
+            // Widget wrapped in a MaterialApp because the page uses Scaffold, 
+            // showDialog (Navigator), and AppLocalizations
+            await tester.pumpWidget(const MaterialApp(home: CAPage()));
+
+            // getPreferences is async and calls setState. 
+            // Need to pump and wait for the microtasks to finish.
+            await tester.pumpAndSettle();
+
+            // Verifying the presence of the context analysis process page
+            final caProcessFinder = find.byType(CAProcess);
+            expect(caProcessFinder, findsOneWidget);
+
+            // Verifying the dashboard absent
+            final dashboardFinder = find.byType(DashboardPage);
+            expect(dashboardFinder, findsNothing);          
+          }
+        );
+
     });
 }
