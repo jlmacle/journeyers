@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
+import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 
 
 void main() 
@@ -66,8 +67,7 @@ void main()
             final caProcessFinder = find.byType(CAProcess);
             expect(caProcessFinder, findsOneWidget);
           }
-        );
-        });
+        );        
 
         // 'First-run modal: \n'
         // 'The first-run modal is not displayed when already acknowledged.', 
@@ -144,5 +144,39 @@ void main()
           }
         );
 
+        // 'Data stored: New context analysis button: \n'
+        // 'The context analysis page should have a button to start a new context analysis.',
+        testWidgets
+        (
+          
+          'Data stored: New context analysis button: \n'
+          'The context analysis page should have a button to start a new context analysis.',
+          (WidgetTester tester) async 
+          { 
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              'wasFirstRunModalAcknowledged': true, 
+              'wasSessionDataSaved': true,
+            });
+            
+            // Pumping the widget
+            await tester.pumpWidget(const MaterialApp(home: CAPage()));
+            // Waiting for the preferences to be loaded
+            await tester.pump(const Duration(seconds: 2));
+
+            // pumpAndSettle timed out exception if pumpAndSettle is used
+            // await tester.pumpAndSettle();
+
+            // Verifying the new process button present
+            final buttonWidget = find.byType(NewProcessButton);
+            expect(buttonWidget, findsOneWidget); 
+
+            // Verifying the dashboard present  
+            final dashboardFinder = find.byType(DashboardPage);
+            expect(dashboardFinder, findsOneWidget);  
+          },
+        );
+      });
     });
 }
