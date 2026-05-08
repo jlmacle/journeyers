@@ -39,10 +39,7 @@ void main()
             await pumpCACheckboxWithSanitizedAndPaddedTextField(tester);
 
             // Searching for the Checkbox widget
-            final checkboxFinder = find.descendant(
-              of:       find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-              matching: find.byType(Checkbox),
-            );
+            final checkboxFinder = find.byType(Checkbox);
 
             // Verifying the checkbox unchecked
             expect(tester.widget<Checkbox>(checkboxFinder).value, false);
@@ -61,10 +58,7 @@ void main()
             await pumpCACheckboxWithSanitizedAndPaddedTextField(tester);
 
             // Searching for the Checkbox widget
-            final checkboxFinder = find.descendant(
-              of:       find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-              matching: find.byType(Checkbox),
-            );
+            final checkboxFinder = find.byType(Checkbox);
 
             // Checking the checkbox
             await tester.tap(checkboxFinder);
@@ -91,20 +85,14 @@ void main()
             await pumpCACheckboxWithSanitizedAndPaddedTextField(tester);
 
             // Searching for the Checkbox widget
-            final checkboxFinder = find.descendant(
-              of:       find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-              matching: find.byType(Checkbox),
-            );
+            final checkboxFinder = find.byType(Checkbox);
 
             // Checking the checkbox
             await tester.tap(checkboxFinder);
             await tester.pumpAndSettle();
 
             // Searching for the text field
-            final textFieldFinder = find.descendant(
-              of:       find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-              matching: find.byType(TextField),
-            );
+            final textFieldFinder = find.byType(TextField);
 
             // Adding text to the text field, without any tester.testTextInput.receiveAction
             await tester.enterText(textFieldFinder, someText);
