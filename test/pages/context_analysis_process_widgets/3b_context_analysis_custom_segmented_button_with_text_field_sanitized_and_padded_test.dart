@@ -74,5 +74,49 @@ void main()
           }
         );       
     });    
+ 
+    // 'Text field state maintained: \n'
+    group('Text field state maintained: \n', 
+    () 
+    { 
+      // 'Text maintained if text was present, and selections are unselected/re-selected: \n'
+        testWidgets(
+          'Text maintained if text was present, and selections are unselected/re-selected: \n', 
+          (WidgetTester tester) async 
+          {
+            var someText = 'someText';
+
+            // Pumping the widget 
+            await pumpCASegmentedButtonWithSanitizedAndPaddedTextField(tester);
+
+            // Selecting the first option
+            await tester.tap(find.text(segButtonTextOption1));
+            await tester.pumpAndSettle();
+
+            // Searching the text field
+            final textFieldFinder = find.byType(TextField);
+
+            // Adding text to the text field, without any tester.testTextInput.receiveAction
+            await tester.enterText(textFieldFinder, someText);
+
+            // Unselecting the first option
+            await tester.tap(find.text(segButtonTextOption1));
+            await tester.pumpAndSettle();
+
+            // Verifying the text field absent
+            expect(textFieldFinder, findsNothing);
+
+            // Re-selecting the first option
+            await tester.tap(find.text(segButtonTextOption1));
+            await tester.pumpAndSettle();
+
+            // Verifying the text field present
+            expect(find.byType(TextField), findsOne);
+
+            // Verifying the text present
+            expect(find.text(someText), findsOne);          
+          }
+        );
+      });
   });
 }
