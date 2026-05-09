@@ -17,3 +17,18 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
   }
+
+  // Method used to open the expansion tile with the group/team perspective
+  Future<void> openGroupExpansionTile(WidgetTester tester) async
+  {
+    // Opening the group/team perspective expansion tile
+    await tester.tap(find.text(q.level2TitleGroup));
+
+    // Waiting for the expansion tile to be unfolded before searching descendants
+    await tester.pump(const Duration(seconds: 2));
+
+    // pumpAndSettle timed out exception if pumpAndSettle is used
+    // await tester.pumpAndSettle();
+  }
+
+  
