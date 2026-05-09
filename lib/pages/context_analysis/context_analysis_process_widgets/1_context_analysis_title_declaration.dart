@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_text_field_misc_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
@@ -34,7 +34,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
         style: analysisTextFieldStyle,
         decoration: const InputDecoration
         (
-          hint: Center(child: Text(CAFormTextFieldMiscConstants.caTitleDeclarationHintText, style: analysisTextFieldHintStyle)),
+          hint: Center(child: Text(CAFormMiscConstants.caTitleDeclarationHintText, style: analysisTextFieldHintStyle)),
           hintStyle: analysisTextFieldHintStyle,                    
         ),
         maxLength: 150,

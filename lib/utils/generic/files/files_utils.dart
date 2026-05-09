@@ -149,6 +149,25 @@ class FileUtils
 
     return filePath;
   }
+
+  /// Method used to save a file using writeAsBytes.
+  Future<String> saveFileUsingWriteAsBytes(String filePath, String fileExtension, Uint8List dataBytes) async 
+  {
+    File file = File(filePath);
+    try {
+
+      await file.writeAsBytes(dataBytes);
+
+      if (sessionDataDebug) pu.printd('File written successfully to ${file.path}');
+ 
+      } catch (e) 
+      {
+        pu.printd('saveFileUsingWriteAsBytes: Error writing file as bytes: $e');
+      }
+
+    return filePath;
+  }
+ 
   // ─── METHODS USED TO SAVE FILES : end ───────────────────────────────────────
 
   // ─── METHODS USED TO READ FILES : beginning ───────────────────────────────────────
