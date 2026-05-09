@@ -205,6 +205,171 @@ void main() {
           // await tester.pump(const Duration(seconds: 2));
         }
       },
-    );    
+    );
+  
+    // Code to finish: for illustration
+    // 'Assuming an already selected path to the user session data folder,'
+    // 'session data entered during the context analysis is found on the preview'
+    testWidgets(
+      'Assuming an already selected path to the user session data folder,'
+      'session data entered during the context analysis is found on the preview',
+      (WidgetTester tester) async {
+
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the context analysis page, with the dashboard.
+          'wasSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        // Pumping the CAPage
+        //
+        // pumpWidget renders the first frame.
+        // pumpAndSettle drives the event loop until there are no more pending frames,
+        // letting the async getPreferences() call complete 
+        // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+        //
+        // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+        await tester.pumpWidget(buildTestableCAPage());
+        await tester.pumpAndSettle();
+
+        // Verifying the NewProcessButton present
+        expect(
+          find.byType(NewProcessButton),
+          findsOneWidget,
+          reason: 'NewProcessButton should be visible when CA session data is already saved.',
+        );
+
+        // Tapping NewProcessButton
+        await tester.tap(find.byType(NewProcessButton));
+        // pumpAndSettle waits for CAProcess (and its _loadDTO / initState async work)
+        // to settle before searching for children widgets.
+        await tester.pumpAndSettle();
+
+        // Verifying CAProcess displayed
+        expect(
+          find.byType(CAProcess),
+          findsOneWidget,
+          reason: 'CAProcess should be visible after tapping NewProcessButton.',
+        );
+
+        // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+        // Searching the TextField inside CATitleDeclaration
+        Finder titleTextField = find.descendant(
+          of: find.byType(CATitleDeclaration),
+          matching: find.byType(TextField),
+        );
+
+        expect(
+          titleTextField,
+          findsOneWidget,
+          reason: 'A TextField should exist inside CATitleDeclaration.',
+        );
+
+        // Entering a title
+        await tester.enterText(titleTextField, testAnalysisTitle2);
+
+        // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+        // Searching the TextField inside CAKeywordsDeclaration
+        Finder keywordsTextField = find.descendant(
+          of: find.byType(CAKeywordsDeclaration),
+          matching: find.byType(TextField),
+        );
+
+        // Entering a keyword
+        await tester.enterText(keywordsTextField, kw1);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        // Necessary for kw2 to be added
+        await tester.tap(keywordsTextField);
+
+        // Entering another keyword 
+        await tester.enterText(keywordsTextField, kw2);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        
+        // ── FORM SECTION ─────────────────────────────────────────────────────────────
+        int itemIndex = 0;
+
+        // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
+        // Opening the individual perspective expansion tile
+        await openIndividualExpansionTile(tester);   
+
+        // 1. Searching for all custom checkboxes
+        var checkboxFinder = find.descendant(
+          of: find.byType(ExpansionTile).first, 
+          matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+        );
+
+        // Getting the total number of custom checkboxes
+        int totalCheckboxes = checkboxFinder.evaluate().length;
+        if (testingDebug) pu.printd("totalCheckboxes: $totalCheckboxes");
+
+        // Adding text to every text field under custom checkbox
+        for (int i = 0; i < totalCheckboxes; i++) {
+          itemIndex++;
+          // Searching the custom checkboxes by index
+          var currentCheckbox = find.descendant(
+            of: find.byType(ExpansionTile).first,
+            matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+          ).at(i);
+
+          await tester.ensureVisible(currentCheckbox);
+          await tester.tap(currentCheckbox);
+          await tester.pump();
+
+          // Find the text field relative to the current fresh checkbox
+          var textFieldFinder = find.descendant(
+            of: currentCheckbox, 
+            matching: find.byType(TextField),
+          );
+          
+          // Adding text        
+          await tester.enterText(textFieldFinder, "Text $itemIndex");
+          await tester.pumpAndSettle();
+        }
+
+        // To complete  
+
+
+        // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+        Finder fileNameWidgetFinder;
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+
+          // Path to folder already declared 
+          // Scrolling to make the text field visible for small screens
+          await tester.ensureVisible(fileNameWidgetFinder);
+
+          // Entering a file name
+          await tester.enterText(fileNameWidgetFinder, fileName2WithoutExtension);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pumpAndSettle();
+
+          // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
+
+          // Searching for the title
+          expect(find.text(testAnalysisTitle2), findsOne);
+
+          // Searching for the keywords
+          expect(find.text(kw1), findsOne);
+          expect(find.text(kw2), findsOne);
+
+          // Opening the preview
+          var previewFinder = find.byTooltip(previewTooltipLabel);
+          await tester.tap(previewFinder);
+          await tester.pump();
+
+          await tester.pump(const Duration(seconds: 5));
+        }
+      },
+    );
   });
+
 }
