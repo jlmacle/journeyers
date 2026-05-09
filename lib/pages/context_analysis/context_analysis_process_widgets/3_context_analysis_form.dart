@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_text_field_misc_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
@@ -333,7 +333,7 @@ class CAFormState extends State<CAForm>
                 textFieldHint: pleaseDevelopHint,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
-                textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
+                textFieldMaxLength: CAFormMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.counterAbsent,
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onAnotherIssueFilledStr(v), 
               ),
@@ -394,7 +394,7 @@ class CAFormState extends State<CAForm>
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
-                textFieldMaxLength: CAFormTextFieldMiscConstants.chars1Page,
+                textFieldMaxLength: CAFormMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.counterAbsent,
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilledStr(v),
               ),

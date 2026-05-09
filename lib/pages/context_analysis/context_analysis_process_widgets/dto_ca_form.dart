@@ -6,9 +6,10 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart' as path;
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_text_field_misc_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -181,7 +182,7 @@ class DTOCAForm
     String dataTextField = (checkboxWithTextFieldData[qf.labelTextField] ?? "") as String;
     var data2 = [
       labelNotes,
-      CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV,
+      CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV,
     ]; // label in front of the text field data
 
     checkboxPreCSVData.add(data1);
@@ -212,7 +213,7 @@ class DTOCAForm
 
     var dataTextField =
         segmentedButtonWithTextFieldData[qf.labelTextField] as String;
-    List<String> data2 = [labelNotes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
+    List<String> data2 = [labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
     segmentedButtonPreCSVData.add(data2);
@@ -230,7 +231,7 @@ class DTOCAForm
     List<List<String>> textFieldPreCSVData = [];
 
     var dataTextField = textFieldData[qf.labelTextField] as String;
-    List<String> data = [labelNotes, CAFormTextFieldMiscConstants.quotesForCSV + dataTextField + CAFormTextFieldMiscConstants.quotesForCSV];
+    List<String> data = [labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
 
     textFieldPreCSVData.add(data);
 
@@ -586,11 +587,29 @@ class DTOCAForm
 
     if (Platform.isAndroid)
     {
-      filePath = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes);      
+      // Outside of testing: using SAF to save the file
+      if (!testingDebug) { filePath = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes); }
+      
+      // otherwise: using tmp files for testing
+      else 
+      { 
+        var applicationFolderPath = await rtdu.getApplicationFolderPath();
+        filePath = path.join(applicationFolderPath!, fileName!);
+        fu.saveFileUsingWriteAsBytes(filePath, fileExtension, dataBytes);        
+      }          
     }
     else if (Platform.isIOS)
     {
-      filePath = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes);
+      // Outside of testing: using the Swift code
+      if (!testingDebug) { filePath = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes); }
+      
+      // otherwise: using tmp files for testing
+      else 
+      { 
+        var applicationFolderPath = await rtdu.getApplicationFolderPath();
+        filePath = path.join(applicationFolderPath!, fileName!);
+        fu.saveFileUsingWriteAsBytes(filePath, fileExtension, dataBytes);        
+      } 
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {

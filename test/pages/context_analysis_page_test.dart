@@ -32,7 +32,7 @@ void main()
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
-              // Setting value for modal to appear,
+              // Setting value for first-run modal to be present,
               'wasFirstRunModalAcknowledged': false,
               // and to have the context analysis page, without the dashboard.
               'wasSessionDataSaved': false

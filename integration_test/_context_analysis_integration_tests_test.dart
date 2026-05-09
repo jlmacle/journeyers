@@ -7,13 +7,19 @@ import 'package:integration_test/integration_test.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
+
+import '../test/helper_functions/externalized_testing_code.dart';
 
 // Used define a folder value for getApplicationSupportPath (PathProvider) 
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
@@ -52,22 +58,26 @@ void main() {
 
   // The test title text
   const String testAnalysisTitle = 'Integration-test CA session title';
+  const String testAnalysisTitle2 = "$testAnalysisTitle (2)";
 
   // A keyword
   const String kw1 = 'Household';
   // Another keyword
   const String kw2 = 'Workplace';
 
-  // A file name
-  const String fileName1 = 'file1.csv';
+  // File names
+  const String fileName1WithoutExtension = 'file1';
+  const String fileName2WithoutExtension = 'file2';
 
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
   
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp('dashboard_utils_test_');
+    testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
+    // To use the alternative saving/reading file paths
+    testingDebug = true;
   });
 
   tearDown(() async {
@@ -179,7 +189,7 @@ void main() {
           await tester.ensureVisible(fileNameWidgetFinder);
 
           // Entering a file name
-          await tester.enterText(fileNameWidgetFinder, fileName1);
+          await tester.enterText(fileNameWidgetFinder, fileName1WithoutExtension);
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pumpAndSettle();
 
@@ -195,6 +205,6 @@ void main() {
           // await tester.pump(const Duration(seconds: 2));
         }
       },
-    );
+    );    
   });
 }

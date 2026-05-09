@@ -8,7 +8,7 @@ import 'package:path/path.dart' as path;
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_text_field_misc_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
@@ -92,7 +92,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       else
       {
         itemData += char;
-        if (char == CAFormTextFieldMiscConstants.quotesForCSV) inQuotes = !inQuotes;
+        if (char == CAFormMiscConstants.quotesForCSV) inQuotes = !inQuotes;
       }      
     }
     // Adding the last item data (no ',' reachable for the last item with the current code)
@@ -394,7 +394,15 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
     {
       String fileName = path.basename(pathToCSVFile);
       if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on Android");
-      final String content = await fu.readTextFileOnAndroid(fileName: fileName);
+      final String content;
+      // Outside of testing: reading file using SAF
+      if (!testingDebug) { content= await fu.readTextFileOnAndroid(fileName: fileName); }
+      // While testing
+      else 
+      { 
+        if (testingDebug) pu.printd("caCSVFileToPreviewPerspectiveData: Reading $fileName from tmp folder");
+        content = await File(pathToCSVFile).readAsString();
+      }
       csvLines = LineSplitter.split(content).toList();
     }
     else if (Platform.isIOS)
@@ -404,7 +412,14 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       final String content;
       try
       {
-        content = await fu.readTextFileOnIOS(fileName: fileName);
+        // Outside of testing
+        if (!testingDebug) { content = await fu.readTextFileOnIOS(fileName: fileName); }
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("caCSVFileToPreviewPerspectiveData: Reading $fileName from tmp folder");
+          content = await File(pathToCSVFile).readAsString();
+        }
         csvLines = LineSplitter.split(content).toList();
       }
       on PlatformException
