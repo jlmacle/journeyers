@@ -146,9 +146,18 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
       // if a selection exists in the segmented button, tapping the segmented button, and entering the text, if any.
       if (segmentedButtonValues[index].isNotEmpty)
       {
-        await tester.ensureVisible(currentSegButton);
-        await tester.tap(currentSegButton);
-        await tester.pump();
+        // Looping through each string in the Set for this specific SegmentedButton
+        for (String optionToSelect in segmentedButtonValues[index]) {
+          // Finding the specific segment by its text label
+          var optionFinder = find.descendant(
+            of: currentSegButton,
+            matching: find.text(optionToSelect),
+          );
+
+          await tester.ensureVisible(optionFinder);
+          await tester.tap(optionFinder);
+          await tester.pump();
+        }
 
         // Find the text field relative to the current fresh checkbox
         var textFieldFinder = find.descendant(
