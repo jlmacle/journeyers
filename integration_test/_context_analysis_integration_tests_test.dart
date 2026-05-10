@@ -77,7 +77,7 @@ void main() {
     testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To use the alternative saving/reading file paths
-    testingDebug = true;
+    runningTests = true;
   });
 
   tearDown(() async {
@@ -334,6 +334,8 @@ void main() {
           var previewFinder = find.byTooltip(previewTooltipLabel);
           await tester.tap(previewFinder);
           await tester.pump();
+
+
 
           await tester.pump(const Duration(seconds: 3));
         }

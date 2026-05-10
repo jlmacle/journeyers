@@ -588,7 +588,7 @@ class DTOCAForm
     if (Platform.isAndroid)
     {
       // Outside of testing: using SAF to save the file
-      if (!testingDebug) { filePath = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes); }
+      if (!runningTests) { filePath = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes); }
       
       // otherwise: using tmp files for testing
       else 
@@ -601,7 +601,7 @@ class DTOCAForm
     else if (Platform.isIOS)
     {
       // Outside of testing: using the Swift code
-      if (!testingDebug) { filePath = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes); }
+      if (!runningTests) { filePath = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes); }
       
       // otherwise: using tmp files for testing
       else 

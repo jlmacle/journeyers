@@ -396,7 +396,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on Android");
       final String content;
       // Outside of testing: reading file using SAF
-      if (!testingDebug) { content= await fu.readTextFileOnAndroid(fileName: fileName); }
+      if (!runningTests) { content= await fu.readTextFileOnAndroid(fileName: fileName); }
       // While testing
       else 
       { 
@@ -413,7 +413,7 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       try
       {
         // Outside of testing
-        if (!testingDebug) { content = await fu.readTextFileOnIOS(fileName: fileName); }
+        if (!runningTests) { content = await fu.readTextFileOnIOS(fileName: fileName); }
         // While testing
         else 
         { 

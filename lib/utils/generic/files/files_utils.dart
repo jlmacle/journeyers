@@ -158,7 +158,7 @@ class FileUtils
 
       await file.writeAsBytes(dataBytes);
 
-      if (sessionDataDebug) pu.printd('File written successfully to ${file.path}');
+      if (runningTests) pu.printd('File written successfully to ${file.path}');
  
       } catch (e) 
       {
