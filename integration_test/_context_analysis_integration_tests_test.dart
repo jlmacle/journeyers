@@ -294,49 +294,18 @@ void main() {
         await tester.pumpAndSettle();
         
         // ── FORM SECTION ─────────────────────────────────────────────────────────────
-        int itemIndex = 0;
+        List<bool> checkboxValues = List.filled(7, true);
+        List<String> checkboxTextFielValues = List.generate(7, (i) => "a${i+1}");
+        String indivAnotherIssueStrValue = "a8";
 
-        // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
-        // Opening the individual perspective expansion tile
-        await openIndividualExpansionTile(tester);   
-
-        // 1. Searching for all custom checkboxes
-        var checkboxFinder = find.descendant(
-          of: find.byType(ExpansionTile).first, 
-          matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-        );
-
-        // Getting the total number of custom checkboxes
-        int totalCheckboxes = checkboxFinder.evaluate().length;
-        if (testingDebug) pu.printd("totalCheckboxes: $totalCheckboxes");
-
-        // Adding text to every text field under custom checkbox
-        for (int i = 0; i < totalCheckboxes; i++) {
-          itemIndex++;
-          // Searching the custom checkboxes by index
-          var currentCheckbox = find.descendant(
-            of: find.byType(ExpansionTile).first,
-            matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-          ).at(i);
-
-          await tester.ensureVisible(currentCheckbox);
-          await tester.tap(currentCheckbox);
-          await tester.pump();
-
-          // Find the text field relative to the current fresh checkbox
-          var textFieldFinder = find.descendant(
-            of: currentCheckbox, 
-            matching: find.byType(TextField),
-          );
-          
-          // Adding text        
-          await tester.enterText(textFieldFinder, "Text $itemIndex");
-          await tester.pumpAndSettle();
-        }
-
-        // To complete  
-
-
+        String groupProblemsToSolveStrValue = "b1";
+        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes,No"},{"No,I don't know"},{"Yes,I don't know"},{"Yes,No,I don't know"}];
+        List<String> segmentedButtonTextFieldValues = List.generate(7, (i) => "b${i+2}");
+         
+        await fillCAForm(tester, checkboxValues, checkboxTextFielValues, 
+                        indivAnotherIssueStrValue, 
+                        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+  
         // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
         Finder fileNameWidgetFinder;
         if (Platform.isAndroid || Platform.isIOS)
@@ -366,7 +335,7 @@ void main() {
           await tester.tap(previewFinder);
           await tester.pump();
 
-          await tester.pump(const Duration(seconds: 5));
+          await tester.pump(const Duration(seconds: 3));
         }
       },
     );
