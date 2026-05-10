@@ -330,13 +330,11 @@ void main() {
           expect(find.text(kw1), findsOne);
           expect(find.text(kw2), findsOne);
 
-          // Opening the preview
-          var previewFinder = find.byTooltip(previewTooltipLabel);
-          await tester.tap(previewFinder);
-          await tester.pump();
-
-
-
+          // testing the preview
+          await testPreview(tester, checkboxValues, checkboxTextFielValues, 
+                        indivAnotherIssueStrValue, 
+                        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+  
           await tester.pump(const Duration(seconds: 3));
         }
       },
