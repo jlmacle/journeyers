@@ -185,12 +185,107 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
     // Opening the preview
     var previewFinder = find.byTooltip(previewTooltipLabel);
     await tester.tap(previewFinder);
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
+
+    //Searching for the expansion tiles
+    var  tiles = find.descendant
+    (
+      of: find.byType(CAPreviewWidget), 
+      matching: find.byType(ExpansionTile)
+    );
+
+    // Getting the total number of tiles
+    int totalTiles = tiles.evaluate().length;
+    if (testingDebug) pu.printd("Number of preview tiles (individual perspective): $totalTiles");
+
+    for (int index = 0; index < totalTiles; index++) 
+    {     
+      // Searching the tiles by index
+      var currentTile = find.descendant(
+        of: find.byType(CAPreviewWidget),
+        matching: find.byType(ExpansionTile),
+      ).at(index);
+
+      // 1 <= index <= 4: individual perspective
+      // "Notes:" is present only for checkboxes checked (in the list tiles subtitles) and textfieldonly item filled.
+      // The list tiles titles for the checkboxes have the item label, or the textfieldonly item data.
+      // 5 <= index <= 9: group/teams perspective
+      // "Notes:" is present for all tiles, in the list tile title, with the data
+
+      // Getting the tile title
+      ExpansionTile tileWidget = tester.widget<ExpansionTile>(currentTile);
+      Text tileTitleWidget = tileWidget.title as Text;
+      if (testingDebug) pu.printd("Tile title: ${tileTitleWidget.data}");
+      
+      // Getting all the list tiles for the tile
+      var listTile = find.descendant
+      (
+        of: currentTile, 
+        matching: find.byType(ListTile)
+      );
+
+      // Getting the total number of tiles
+      int totalListTiles = listTile.evaluate().length;
+      if (testingDebug) pu.printd("Number of list tiles for: ${tileTitleWidget.data}: $totalListTiles (the expansion tile is included)");
+
+      // Accessing each list tile by index (extra value with the tile itself)
+      for (int index = 1; index < totalListTiles; index++) 
+      {    
+        // Searching the tiles by index
+        var currentListTile = find.descendant(
+          of: currentTile, 
+          matching: find.byType(ListTile)
+        ).at(index);
+
+        
+        // Getting the list tile title
+        ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
+        Text listTileTitle = listTileWidget.title as Text;
+        String listTileTitleData = listTileTitle.data!;
+        if (testingDebug) pu.printd("List tiles title for ${tileTitleWidget.data}: $listTileTitleData");
+
+        // Indidvidual perspective
+        var indivIndexes = List.generate(4, (i)=> i);
+        var groupIndexes = List.generate(5, (i)=> i+5);
+
+        print("indivIndexes: $indivIndexes");
+        print("groupIndexes: $groupIndexes");
+
+        if (indivIndexes.contains(index))
+        {
+          // Getting the list tile subtitle
+          Text listTileSubTitle = listTileWidget.subtitle as Text;
+          String listTileSubTitleData = listTileSubTitle.data!;
+          if (testingDebug) pu.printd("List tiles subtitle for ${tileTitleWidget.data}: $listTileSubTitleData");
+
+          // Verifying the subtitles
+          expect(listTileSubTitleData, "Notes: ${checkboxTextFielValues[index-1]}");
+
+        }
+        else if (groupIndexes.contains(index))
+        {
+          // Verifying the titles
+          expect(listTileTitleData, "Notes: ${segmentedButtonTextFieldValues[index-1]}");
+        }
+
+        // To be finished
+        
+        
+
 
     
-    // To complete
+      }
 
-    // ── PREVIEW : Group/Teams perspective ─────────────────────────────────────────────────────────────
+   
+
+
+
+
+      
+
+    }
+    
+    
 
 
 
