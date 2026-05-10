@@ -159,7 +159,7 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
           await tester.pump();
         }
 
-        // Find the text field relative to the current fresh checkbox
+        // Finding the text field relative to the current checkbox
         var textFieldFinder = find.descendant(
           of: currentSegButton, 
           matching: find.byType(TextField)
