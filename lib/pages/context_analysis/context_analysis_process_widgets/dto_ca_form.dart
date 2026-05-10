@@ -594,7 +594,7 @@ class DTOCAForm
       else 
       { 
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, fileName!);
+        filePath = path.join(applicationFolderPath!, "$fileName$fileExtension");
         fu.saveFileUsingWriteAsBytes(filePath, fileExtension, dataBytes);        
       }          
     }
