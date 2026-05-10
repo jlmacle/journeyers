@@ -299,7 +299,7 @@ void main() {
         String indivAnotherIssueStrValue = "a8";
 
         String groupProblemsToSolveStrValue = "b1";
-        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes,No"},{"No,I don't know"},{"Yes,I don't know"},{"Yes,No,I don't know"}];
+        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"},{"No","I don't know"},{"Yes","I don't know"},{"Yes","No","I don't know"}];
         List<String> segmentedButtonTextFieldValues = List.generate(7, (i) => "b${i+2}");
          
         await fillCAForm(tester, checkboxValues, checkboxTextFielValues, 
