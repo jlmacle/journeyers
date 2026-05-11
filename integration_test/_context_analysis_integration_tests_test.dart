@@ -117,25 +117,11 @@ void main() {
         await tester.pumpWidget(buildTestableCAPage());
         await tester.pumpAndSettle();
 
-        // Verifying the NewProcessButton present
-        expect(
-          find.byType(NewProcessButton),
-          findsOneWidget,
-          reason: 'NewProcessButton should be visible when CA session data is already saved.',
-        );
+        // Verifying that the new process button functions
+        await checkNewCAProcessButtonFunctions(tester);
 
-        // Tapping NewProcessButton
-        await tester.tap(find.byType(NewProcessButton));
-        // pumpAndSettle waits for CAProcess (and its _loadDTO / initState async work)
-        // to settle before searching for children widgets.
-        await tester.pumpAndSettle();
-
-        // Verifying CAProcess displayed
-        expect(
-          find.byType(CAProcess),
-          findsOneWidget,
-          reason: 'CAProcess should be visible after tapping NewProcessButton.',
-        );
+        // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
 
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
         // Searching the TextField inside CATitleDeclaration
