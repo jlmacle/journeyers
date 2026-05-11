@@ -53,7 +53,7 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
   Future<void> fillCAForm
   (
     WidgetTester tester,
-    List<bool> checkboxValues, List<String> checkboxTextFielValues, String indivAnotherIssueStrValue, 
+    List<bool> checkboxValues, List<String> checkboxTextFieldValues, String indivAnotherIssueStrValue, 
     String groupProblemsToSolveStrValue, List<Set<String>> segmentedButtonValues, List<String> segmentedButtonTextFieldValues
   ) async
   {
@@ -94,7 +94,7 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         );
 
         // Adding text        
-        await tester.enterText(textFieldFinder, checkboxTextFielValues[index]);
+        await tester.enterText(textFieldFinder, checkboxTextFieldValues[index]);
         await tester.pumpAndSettle();
       }
     }
@@ -174,111 +174,138 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
     }
   }
 
+  // ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
+
+  // Serialises a segmented-button selection to a slash-separated string.
+  String _segmentedButtonToString(Set<String> values) => values.join('/');
+
   // Method used to test a preview.
   Future<void> testPreview
-  (
-    WidgetTester tester,
-    List<bool> checkboxValues, List<String> checkboxTextFielValues, String indivAnotherIssueStrValue, 
-    String groupProblemsToSolveStrValue, List<Set<String>> segmentedButtonValues, List<String> segmentedButtonTextFieldValues
-  ) async
+  (WidgetTester tester, List<String> individualStringValues, 
+  List<Set<String>> segmentedButtonValues, List<String> groupStringValues) async
   {
+    if (testingDebug) pu.printd("individualStringValues: $individualStringValues");
+    if (testingDebug) pu.printd("groupStringValues: $groupStringValues");
+
     // Opening the preview
     var previewFinder = find.byTooltip(previewTooltipLabel);
     await tester.tap(previewFinder);
     await tester.pump(const Duration(seconds: 2));
 
     //Searching for the expansion tiles
-    var  tiles = find.descendant
+    var  expansionTilesFinder = find.descendant
     (
       of: find.byType(CAPreviewWidget), 
       matching: find.byType(ExpansionTile)
     );
 
-    // Getting the total number of tiles
-    int totalTiles = tiles.evaluate().length;
-    if (testingDebug) pu.printd("Number of preview tiles (individual perspective): $totalTiles");
+    // Getting the total number of expansion tiles
+    int totalExpansionTiles = expansionTilesFinder.evaluate().length;
+    if (testingDebug) pu.printd("Number of expansion tiles: $totalExpansionTiles");
+    // Should be 9: 4 for the individual perspective, 5 for the group/teams perspective
 
-    for (int index = 0; index < totalTiles; index++) 
-    {     
-      // Searching the tiles by index
-      var currentTile = find.descendant(
+    // Tile indexes for the individual perspective
+    var indivIndexes = List.generate(4, (i)=> i);
+    // Tile indexes for the group/teams perspective
+    var groupIndexes = List.generate(5, (i)=> i+4);
+
+    if (testingDebug) pu.printd("indivIndexes: $indivIndexes");
+    if (testingDebug) pu.printd("groupIndexes: $groupIndexes");
+    
+    // To have the index of the data for each perspective
+    int previewListTileDataIndex = -1;
+
+    // Accessing the expansion tiles by index
+    for (int expansionTileIndex = 0; expansionTileIndex < totalExpansionTiles; expansionTileIndex++) 
+    {  
+      // Searching the expansion tile by index
+      var currentExpansionTileFinder = find.descendant(
         of: find.byType(CAPreviewWidget),
         matching: find.byType(ExpansionTile),
-      ).at(index);
+      ).at(expansionTileIndex);
 
-      // 1 <= index <= 4: individual perspective
+      // 0 <= index <= 3: individual perspective
       // "Notes:" is present only for checkboxes checked (in the list tiles subtitles) and textfieldonly item filled.
       // The list tiles titles for the checkboxes have the item label, or the textfieldonly item data.
-      // 5 <= index <= 9: group/teams perspective
+      // 4 <= index <= 8: group/teams perspective
       // "Notes:" is present for all tiles, in the list tile title, with the data
 
-      // Getting the tile title
-      ExpansionTile tileWidget = tester.widget<ExpansionTile>(currentTile);
-      Text tileTitleWidget = tileWidget.title as Text;
-      if (testingDebug) pu.printd("Tile title: ${tileTitleWidget.data}");
+      // Getting the expansion tile title
+      ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(currentExpansionTileFinder);
+      Text expansionTileTitleWidget = expansionTileWidget.title as Text;
+      if (testingDebug) pu.printd("Expansion tile title: ${expansionTileTitleWidget.data}");
       
-      // Getting all the list tiles for the tile
-      var listTile = find.descendant
+      // Getting all the list tiles for the expansion tile
+      var listTilesFinder = find.descendant
       (
-        of: currentTile, 
+        of: currentExpansionTileFinder, 
         matching: find.byType(ListTile)
       );
 
-      // Getting the total number of tiles
-      int totalListTiles = listTile.evaluate().length;
-      if (testingDebug) pu.printd("Number of list tiles for: ${tileTitleWidget.data}: $totalListTiles (the expansion tile is included)");
-
-
-      var indivIndexes = List.generate(4, (i)=> i);
-      var groupIndexes = List.generate(5, (i)=> i+5);
-
-      if (testingDebug) pu.printd("indivIndexes: $indivIndexes");
-      if (testingDebug) pu.printd("groupIndexes: $groupIndexes");
+      // Getting the total number of list tiles
+      int totalListTiles = listTilesFinder.evaluate().length;
+      if (testingDebug) {
+        pu.printd("Number of list tiles for: ${expansionTileTitleWidget.data}: $totalListTiles "
+                  "\n (The expansion tile is included. The first index is skipped.)");
+      }
       
-      // Accessing each list tile by index (extra value with the tile itself)
-      for (int index = 1; index < totalListTiles; index++) 
-      {    
+      // Accessing each list tile by index (skipping the expansion tile itself)
+      for (int listTileIndex = 1; listTileIndex < totalListTiles; listTileIndex++) 
+      {  
+        // Resetting at the first group/teams expansion tile
+        if ( expansionTileIndex == 4) { previewListTileDataIndex = 0; }
+        else {previewListTileDataIndex++;}
+
         // Searching the tiles by index
         var currentListTile = find.descendant(
-          of: currentTile, 
+          of: currentExpansionTileFinder, 
           matching: find.byType(ListTile)
-        ).at(index);
-
+        ).at(listTileIndex);
         
         // Getting the list tile title
         ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
         Text listTileTitle = listTileWidget.title as Text;
         String listTileTitleData = listTileTitle.data!;
-        if (testingDebug) pu.printd("List tiles title for ${tileTitleWidget.data}: $listTileTitleData");
+        if (testingDebug) pu.printd("List tiles title for: ${expansionTileTitleWidget.data}: $listTileTitleData");
 
-
-        if (indivIndexes.contains(index))
+        if (indivIndexes.contains(expansionTileIndex))
         {
-          // Getting the list tile subtitle
-          Text listTileSubTitle = listTileWidget.subtitle as Text;
-          String listTileSubTitleData = listTileSubTitle.data!;
-          if (testingDebug) pu.printd("List tiles subtitle for ${tileTitleWidget.data}: $listTileSubTitleData");
-
-          // Verifying the subtitles
-          expect(listTileSubTitleData, "Notes: ${checkboxTextFielValues[index-1]}");
+          // For a text field only, the notes are in the title
+          if (expansionTileIndex == 3  && listTileIndex == 1)
+          {
+            expect(listTileTitleData, "Notes: ${individualStringValues[previewListTileDataIndex]}");
+          }
+          // Otherwise the notes are in the subtitle
+          else{
+            // Getting the list tile subtitle
+            Text listTileSubTitle = listTileWidget.subtitle as Text;
+            String listTileSubTitleData = listTileSubTitle.data!;
+            if (testingDebug) pu.printd("List tiles subtitle for ${expansionTileTitleWidget.data}: $listTileSubTitleData");
+            
+            expect(listTileSubTitleData, "Notes: ${individualStringValues[previewListTileDataIndex]}");
+          }          
 
         }
-        else if (groupIndexes.contains(index))
+        else if (groupIndexes.contains(expansionTileIndex))
         {
-          // Verifying the titles
-          expect(listTileTitleData, "Notes: ${segmentedButtonTextFieldValues[index-1]}");
+          // For a text field only, the notes are in the title
+          if (expansionTileIndex == 4  && listTileIndex == 1)
+          {
+            expect(listTileTitleData, "Notes: ${groupStringValues[previewListTileDataIndex]}");
+          }
+          // Otherwise the notes are in the title with the segmented button answers
+          else{
+            if (testingDebug) pu.printd("List tiles title for ${expansionTileTitleWidget.data}: $listTileTitleData");
+
+            var segButtonAnswersWithNotes = "Answer(s): ${_segmentedButtonToString(segmentedButtonValues[previewListTileDataIndex-1])}\n"
+                                            "Notes: ${groupStringValues[previewListTileDataIndex]}";
+            expect(listTileTitleData, segButtonAnswersWithNotes);
+          }             
         }
 
-
-        // To be finished
-        
-        
-
-
-    
       }
 
-   
+  
 
 
 

@@ -295,16 +295,17 @@ void main() {
         
         // ── FORM SECTION ─────────────────────────────────────────────────────────────
         List<bool> checkboxValues = List.filled(7, true);
-        List<String> checkboxTextFielValues = List.generate(7, (i) => "a${i+1}");
+        List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
         String indivAnotherIssueStrValue = "a8";
+        List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
 
         String groupProblemsToSolveStrValue = "b1";
-        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"},{"No","I don't know"},{"Yes","I don't know"},{"Yes","No","I don't know"}];
-        List<String> segmentedButtonTextFieldValues = List.generate(7, (i) => "b${i+2}");
-         
-        await fillCAForm(tester, checkboxValues, checkboxTextFielValues, 
-                        indivAnotherIssueStrValue, 
-                        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"}];
+        List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+        await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
   
         // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
         Finder fileNameWidgetFinder;
@@ -331,9 +332,7 @@ void main() {
           expect(find.text(kw2), findsOne);
 
           // testing the preview
-          await testPreview(tester, checkboxValues, checkboxTextFielValues, 
-                        indivAnotherIssueStrValue, 
-                        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+          await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
   
           await tester.pump(const Duration(seconds: 3));
         }
