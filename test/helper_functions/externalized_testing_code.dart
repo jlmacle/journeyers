@@ -206,6 +206,14 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
     int totalExpansionTiles = expansionTilesFinder.evaluate().length;
     if (testingDebug) pu.printd("Number of expansion tiles: $totalExpansionTiles");
     // Should be 9: 4 for the individual perspective, 5 for the group/teams perspective
+
+    // Expansion tile indexes for the individual perspective
+    var indivIndexes = List.generate(4, (i)=> i);
+    // Expansion tile indexes for the group/teams perspective
+    var groupIndexes = List.generate(5, (i)=> i+4);
+
+    if (testingDebug) pu.printd("Expansion tile indexes for the individual perspective: $indivIndexes");
+    if (testingDebug) pu.printd("Expansion tile indexes for the group/teams perspective: $groupIndexes");
     
     // To have the index of the data for each perspective
     // Reset for the group/teams perspective
@@ -220,13 +228,11 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         matching: find.byType(ExpansionTile),
       ).at(expansionTileIndex);
 
-      // 0 <= index <= 3: individual perspective
-      // 4 <= index <= 8: group/teams perspective
-
       // Getting the expansion tile title
       ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(currentExpansionTileFinder);
       Text expansionTileTitleWidget = expansionTileWidget.title as Text;
-      if (testingDebug) pu.printd("Expansion tile title: ${expansionTileTitleWidget.data}");
+      String expansionTileTitle = expansionTileTitleWidget.data!;
+      if (testingDebug) pu.printd("Expansion tile title: $expansionTileTitle");
       
       // Getting all the list tiles for the expansion tile
       var listTilesFinder = find.descendant
@@ -235,14 +241,15 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         matching: find.byType(ListTile)
       );
 
-      // Getting the total number of list tiles
+      // Getting the total number of list tiles for this expansion tile
       int totalListTiles = listTilesFinder.evaluate().length;
       if (testingDebug) {
-        pu.printd("Number of list tiles for: ${expansionTileTitleWidget.data}: $totalListTiles "
-                  "\n (The expansion tile is included. The first index is skipped.)");
+        pu.printd("Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
+                  "(The expansion tile is included. The first index is skipped.)");
       }
       
-      // Accessing each list tile by index (skipping the expansion tile itself)
+      // Accessing each list tile by index 
+      // Index starting at 1 to skip the expansion tile
       for (int listTileIndex = 1; listTileIndex < totalListTiles; listTileIndex++) 
       {  
         // Resetting at the first group/teams expansion tile
@@ -257,33 +264,27 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         
         // Getting the list tile title
         ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
-        Text listTileTitle = listTileWidget.title as Text;
-        String listTileTitleData = listTileTitle.data!;
-        if (testingDebug) pu.printd("List tiles title for: ${expansionTileTitleWidget.data}: $listTileTitleData");
+        Text listTileTitleWidget = listTileWidget.title as Text;
+        String listTileTitle = listTileTitleWidget.data!;
+        if (testingDebug) pu.printd("List tiles title for: $expansionTileTitle: $listTileTitle");
 
-        // Expansion tile indexes for the individual perspective
-        var indivIndexes = List.generate(4, (i)=> i);
-        // Expansion tile indexes for the group/teams perspective
-        var groupIndexes = List.generate(5, (i)=> i+4);
-
-        if (testingDebug) pu.printd("indivIndexes: $indivIndexes");
-        if (testingDebug) pu.printd("groupIndexes: $groupIndexes");
-
+        // 0 <= index <= 3: individual perspective
+        // 4 <= index <= 8: group/teams perspective
         if (indivIndexes.contains(expansionTileIndex))
         {
           // For a text field only, the notes are in the title
           if (expansionTileIndex == 3  && listTileIndex == 1)
           {
-            expect(listTileTitleData, "Notes: ${individualStringValues[previewListTileDataIndex]}");
+            expect(listTileTitle, "Notes: ${individualStringValues[previewListTileDataIndex]}");
           }
-          // Otherwise the notes are in the subtitle
+          // Otherwise the notes are in the subtitle, for the individual perspective
           else{
             // Getting the list tile subtitle
-            Text listTileSubTitle = listTileWidget.subtitle as Text;
-            String listTileSubTitleData = listTileSubTitle.data!;
-            if (testingDebug) pu.printd("List tiles subtitle for ${expansionTileTitleWidget.data}: $listTileSubTitleData");
+            Text listTileSubTitleWidget = listTileWidget.subtitle as Text;
+            String listTileSubTitle = listTileSubTitleWidget.data!;
+            if (testingDebug) pu.printd("List tiles subtitle for $expansionTileTitle: $listTileSubTitle");
             
-            expect(listTileSubTitleData, "Notes: ${individualStringValues[previewListTileDataIndex]}");
+            expect(listTileSubTitle, "Notes: ${individualStringValues[previewListTileDataIndex]}");
           }          
 
         }
@@ -292,15 +293,15 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
           // For a text field only, the notes are in the title
           if (expansionTileIndex == 4  && listTileIndex == 1)
           {
-            expect(listTileTitleData, "Notes: ${groupStringValues[previewListTileDataIndex]}");
+            expect(listTileTitle, "Notes: ${groupStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the title with the segmented button answers
           else{
-            if (testingDebug) pu.printd("List tiles title for ${expansionTileTitleWidget.data}: $listTileTitleData");
+            if (testingDebug) pu.printd("List tiles title for $expansionTileTitle: $listTileTitle");
 
             var segButtonAnswersWithNotes = "Answer(s): ${_segmentedButtonToString(segmentedButtonValues[previewListTileDataIndex-1])}\n"
                                             "Notes: ${groupStringValues[previewListTileDataIndex]}";
-            expect(listTileTitleData, segButtonAnswersWithNotes);
+            expect(listTileTitle, segButtonAnswersWithNotes);
           }             
         }
 
