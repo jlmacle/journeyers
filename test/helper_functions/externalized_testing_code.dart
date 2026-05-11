@@ -3,20 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
   
 // Labels of the level 2 and 3 titles
 final q = CAQuestionsFields();
 
 // ─── EXPANSION TILES ───────────────────────────────────────────────────────────────
 
-// Method used to open the expansion tile with the individual perspective
-Future<void> openIndividualExpansionTile(WidgetTester tester) async
+  // Method used to open the expansion tile with the individual perspective
+  Future<void> openIndividualExpansionTile(WidgetTester tester) async
   {
     var tileFinder = find.text(q.level2TitleIndividual);
     await tester.ensureVisible(tileFinder);
@@ -48,7 +50,30 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
   }
 
   // ─── FORM FILING ───────────────────────────────────────────────────────────────
-  
+  // Method used to check that the new process button functions
+  Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
+  {
+    // Verifying the NewProcessButton present
+    expect(
+      find.byType(NewProcessButton),
+      findsOneWidget,
+      reason: 'NewProcessButton should be visible when CA session data is already saved.',
+    );
+
+    // Tapping NewProcessButton
+    await tester.tap(find.byType(NewProcessButton));
+    // pumpAndSettle waits for CAProcess (and its _loadDTO / initState async work)
+    // to settle before searching for children widgets.
+    await tester.pumpAndSettle();
+
+    // Verifying CAProcess displayed
+    expect(
+      find.byType(CAProcess),
+      findsOneWidget,
+      reason: 'CAProcess should be visible after tapping NewProcessButton.',
+    );
+  }
+ 
   // Method used to fill a context analyis form.
   Future<void> fillCAForm
   (
