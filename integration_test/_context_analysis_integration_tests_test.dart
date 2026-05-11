@@ -294,16 +294,18 @@ void main() {
         await tester.pumpAndSettle();
         
         // ── FORM SECTION ─────────────────────────────────────────────────────────────
+        // Individual perspective testing values
         List<bool> checkboxValues = List.filled(7, true);
+        // a1 to a7
         List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
-        String indivAnotherIssueStrValue = "a8";
-        List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
+        String indivAnotherIssueStrValue = "a8";        
 
+        // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "b1";
         List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"}];
+        // b2 to b5
         List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
-        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
-
+        
         await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
         groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
   
@@ -331,7 +333,11 @@ void main() {
           expect(find.text(kw1), findsOne);
           expect(find.text(kw2), findsOne);
 
-          // testing the preview
+          // ── TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+          // Putting all string values together, to retrieve them by index
+          List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
+          List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
           await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
   
           await tester.pump(const Duration(seconds: 3));
