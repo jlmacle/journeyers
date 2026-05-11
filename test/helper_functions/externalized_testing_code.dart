@@ -228,6 +228,13 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
       int totalListTiles = listTile.evaluate().length;
       if (testingDebug) pu.printd("Number of list tiles for: ${tileTitleWidget.data}: $totalListTiles (the expansion tile is included)");
 
+
+      var indivIndexes = List.generate(4, (i)=> i);
+      var groupIndexes = List.generate(5, (i)=> i+5);
+
+      if (testingDebug) pu.printd("indivIndexes: $indivIndexes");
+      if (testingDebug) pu.printd("groupIndexes: $groupIndexes");
+      
       // Accessing each list tile by index (extra value with the tile itself)
       for (int index = 1; index < totalListTiles; index++) 
       {    
@@ -244,12 +251,6 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         String listTileTitleData = listTileTitle.data!;
         if (testingDebug) pu.printd("List tiles title for ${tileTitleWidget.data}: $listTileTitleData");
 
-        // Indidvidual perspective
-        var indivIndexes = List.generate(4, (i)=> i);
-        var groupIndexes = List.generate(5, (i)=> i+5);
-
-        print("indivIndexes: $indivIndexes");
-        print("groupIndexes: $groupIndexes");
 
         if (indivIndexes.contains(index))
         {
@@ -267,6 +268,7 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
           // Verifying the titles
           expect(listTileTitleData, "Notes: ${segmentedButtonTextFieldValues[index-1]}");
         }
+
 
         // To be finished
         
