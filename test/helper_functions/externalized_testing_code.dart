@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
@@ -49,7 +50,7 @@ final q = CAQuestionsFields();
     // await tester.pumpAndSettle();
   }
 
-  // ─── FORM FILING ───────────────────────────────────────────────────────────────
+  // ─── CA FORM FILING ───────────────────────────────────────────────────────────────
   // Method used to check that the new process button functions
   Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
   {
@@ -74,6 +75,25 @@ final q = CAQuestionsFields();
     );
   }
  
+  // Method used to enter a title in the CA process
+  Future<void> enterCAProcessTitle (WidgetTester tester, String aTitle) async
+  {
+    // Searching the TextField inside CATitleDeclaration
+    Finder titleTextField = find.descendant(
+      of: find.byType(CATitleDeclaration),
+      matching: find.byType(TextField),
+    );
+
+    expect(
+      titleTextField,
+      findsOneWidget,
+      reason: 'A TextField should exist inside CATitleDeclaration.',
+    );
+
+    // Entering a title
+    await tester.enterText(titleTextField, aTitle);
+  }
+  
   // Method used to fill a context analyis form.
   Future<void> fillCAForm
   (
