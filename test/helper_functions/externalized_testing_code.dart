@@ -187,8 +187,8 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
   ) async
   {
 
-    if (testingDebug) pu.printd("Individual String Values: $individualStringValues");
-    if (testingDebug) pu.printd("Group String Values: $groupStringValues");
+    if (testingDebug) pu.printd("Individual perspective values: $individualStringValues");
+    if (testingDebug) pu.printd("Group/teams perspective values: $groupStringValues");
 
     // Opening the preview
     var previewFinder = find.byTooltip(previewTooltipLabel);
@@ -206,16 +206,9 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
     int totalExpansionTiles = expansionTilesFinder.evaluate().length;
     if (testingDebug) pu.printd("Number of expansion tiles: $totalExpansionTiles");
     // Should be 9: 4 for the individual perspective, 5 for the group/teams perspective
-
-    // Tile indexes for the individual perspective
-    var indivIndexes = List.generate(4, (i)=> i);
-    // Tile indexes for the group/teams perspective
-    var groupIndexes = List.generate(5, (i)=> i+4);
-
-    if (testingDebug) pu.printd("indivIndexes: $indivIndexes");
-    if (testingDebug) pu.printd("groupIndexes: $groupIndexes");
     
     // To have the index of the data for each perspective
+    // Reset for the group/teams perspective
     int previewListTileDataIndex = -1;
 
     // Accessing the expansion tiles by index
@@ -228,10 +221,7 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
       ).at(expansionTileIndex);
 
       // 0 <= index <= 3: individual perspective
-      // "Notes:" is present only for checkboxes checked (in the list tiles subtitles) and textfieldonly item filled.
-      // The list tiles titles for the checkboxes have the item label, or the textfieldonly item data.
       // 4 <= index <= 8: group/teams perspective
-      // "Notes:" is present for all tiles, in the list tile title, with the data
 
       // Getting the expansion tile title
       ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(currentExpansionTileFinder);
@@ -270,6 +260,14 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         Text listTileTitle = listTileWidget.title as Text;
         String listTileTitleData = listTileTitle.data!;
         if (testingDebug) pu.printd("List tiles title for: ${expansionTileTitleWidget.data}: $listTileTitleData");
+
+        // Expansion tile indexes for the individual perspective
+        var indivIndexes = List.generate(4, (i)=> i);
+        // Expansion tile indexes for the group/teams perspective
+        var groupIndexes = List.generate(5, (i)=> i+4);
+
+        if (testingDebug) pu.printd("indivIndexes: $indivIndexes");
+        if (testingDebug) pu.printd("groupIndexes: $groupIndexes");
 
         if (indivIndexes.contains(expansionTileIndex))
         {
