@@ -315,12 +315,20 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
           }
           // Otherwise the notes are in the title with the segmented button answers
           else{
-            var segButtonAnswersWithNotes = "Answer(s): ${_segmentedButtonToString(segmentedButtonValues[previewListTileDataIndex-1])}\n"
+            var segButtonValue = segmentedButtonValues[previewListTileDataIndex-1];
+             
+            if(segButtonValue.isNotEmpty)
+            {
+              var segButtonAnswersWithNotes = "Answer(s): ${_segmentedButtonToString(segButtonValue)}\n"
                                             "Notes: ${groupStringValues[previewListTileDataIndex]}";
-            expect(listTileTitle, segButtonAnswersWithNotes);
+              expect(listTileTitle, segButtonAnswersWithNotes);
+            }
+            else
+            {
+              expect(listTileTitle,  "Notes: ");
+            }
           }             
         }
-
       }
 
   
