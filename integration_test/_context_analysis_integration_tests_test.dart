@@ -207,12 +207,13 @@ void main() {
       },
     );
   
-    // Code to finish: for illustration
     // 'Assuming an already selected path to the user session data folder,'
     // 'session data entered during the context analysis is found on the preview'
+    // '(all fields filled)'
     testWidgets(
       'Assuming an already selected path to the user session data folder,'
-      'session data entered during the context analysis is found on the preview',
+      'session data entered during the context analysis is found on the preview'
+      '(all fields filled)',
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
