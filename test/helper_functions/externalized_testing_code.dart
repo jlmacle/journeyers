@@ -181,11 +181,14 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
 
   // Method used to test a preview.
   Future<void> testPreview
-  (WidgetTester tester, List<String> individualStringValues, 
-  List<Set<String>> segmentedButtonValues, List<String> groupStringValues) async
+  (
+    WidgetTester tester, List<String> individualStringValues, 
+    List<Set<String>> segmentedButtonValues, List<String> groupStringValues
+  ) async
   {
-    if (testingDebug) pu.printd("individualStringValues: $individualStringValues");
-    if (testingDebug) pu.printd("groupStringValues: $groupStringValues");
+
+    if (testingDebug) pu.printd("Individual String Values: $individualStringValues");
+    if (testingDebug) pu.printd("Group String Values: $groupStringValues");
 
     // Opening the preview
     var previewFinder = find.byTooltip(previewTooltipLabel);
