@@ -190,6 +190,11 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
     if (testingDebug) pu.printd("Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Group/teams perspective values: $groupStringValues");
 
+    // The total number of expansion tile for the individual perspective
+    int totalIndivExpansionTiles = 0;
+    // Data with the form questions
+    CAQuestionsFields q = .new();
+
     // Opening the preview
     var previewFinder = find.byTooltip(previewTooltipLabel);
     await tester.tap(previewFinder);
@@ -247,13 +252,23 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         pu.printd("Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
                   "(The expansion tile is included. The first index is skipped.)");
       }
+
+      if (q.level3TitlesIndividual.contains(expansionTileTitle)) 
+      {        
+        totalIndivExpansionTiles++;
+      }
       
       // Accessing each list tile by index 
       // Index starting at 1 to skip the expansion tile
       for (int listTileIndex = 1; listTileIndex < totalListTiles; listTileIndex++) 
       {  
+        // No expansion tile if the checkbox is not checked
         // Resetting at the first group/teams expansion tile
-        if ( expansionTileIndex == 4) { previewListTileDataIndex = 0; }
+        if ( expansionTileIndex == totalIndivExpansionTiles ) 
+        { 
+          if (testingDebug) {pu.printd("Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex");}
+          previewListTileDataIndex = 0; 
+        }
         else {previewListTileDataIndex++;}
 
         // Searching the tiles by index
@@ -267,18 +282,19 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
         Text listTileTitleWidget = listTileWidget.title as Text;
         String listTileTitle = listTileTitleWidget.data!;
         if (testingDebug) pu.printd("List tiles title for: $expansionTileTitle: $listTileTitle");
+        if (testingDebug) pu.printd("expansionTileIndex: $expansionTileIndex, listTileIndex: $listTileIndex");
 
-        // 0 <= index <= 3: individual perspective
-        // 4 <= index <= 8: group/teams perspective
-        if (indivIndexes.contains(expansionTileIndex))
+        // Testing if the expansion tile is related to the individual perspective
+        if (q.level3TitlesIndividual.contains(expansionTileTitle))
         {
+          // The last individual perspective expansion tile is for a text field only data
           // For a text field only, the notes are in the title
-          if (expansionTileIndex == 3  && listTileIndex == 1)
+          if (expansionTileTitle == q.level3TitleAnotherIssue  && listTileIndex == 1)
           {
             expect(listTileTitle, "Notes: ${individualStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the subtitle, for the individual perspective
-          else{
+          else {
             // Getting the list tile subtitle
             Text listTileSubTitleWidget = listTileWidget.subtitle as Text;
             String listTileSubTitle = listTileSubTitleWidget.data!;
@@ -288,10 +304,12 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
           }          
 
         }
-        else if (groupIndexes.contains(expansionTileIndex))
+        // Group/teams expansion tiles
+        else
         {
+          // The first group/teams perspective expansion tile is for a text field only data
           // For a text field only, the notes are in the title
-          if (expansionTileIndex == 4  && listTileIndex == 1)
+          if (expansionTileTitle == q.level3TitleGroupsProblematics  && listTileIndex == 1)
           {
             expect(listTileTitle, "Notes: ${groupStringValues[previewListTileDataIndex]}");
           }
