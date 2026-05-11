@@ -770,4 +770,147 @@ void main() {
         }
       },
     );
+
+    // 'Assuming an already selected path to the user session data folder,'
+    // 'session data entered during the context analysis is found on the preview'
+    // '(not all fields filled: a text field only item empty: group/teams perspective)'
+    testWidgets(
+    'Assuming an already selected path to the user session data folder,'
+    'session data entered during the context analysis is found on the preview'
+    '(not all fields filled: a text field only item empty: group/teams perspective)',
+    (WidgetTester tester) async {
+
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues
+      ({
+        // Setting value for the first-run modal to be absent,
+        'wasFirstRunModalAcknowledged': true,
+        // and to have the context analysis page, with the dashboard.
+        'wasSessionDataSaved': true,
+        // Temporary test dir as application folder path
+        'applicationFolderPath': testTmpDir!.path
+      });
+
+      // Pumping the CAPage
+      //
+      // pumpWidget renders the first frame.
+      // pumpAndSettle drives the event loop until there are no more pending frames,
+      // letting the async getPreferences() call complete 
+      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+      //
+      // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+      await tester.pumpWidget(buildTestableCAPage());
+      await tester.pumpAndSettle();
+
+      // Verifying the NewProcessButton present
+      expect(
+        find.byType(NewProcessButton),
+        findsOneWidget,
+        reason: 'NewProcessButton should be visible when CA session data is already saved.',
+      );
+
+      // Tapping NewProcessButton
+      await tester.tap(find.byType(NewProcessButton));
+      // pumpAndSettle waits for CAProcess (and its _loadDTO / initState async work)
+      // to settle before searching for children widgets.
+      await tester.pumpAndSettle();
+
+      // Verifying CAProcess displayed
+      expect(
+        find.byType(CAProcess),
+        findsOneWidget,
+        reason: 'CAProcess should be visible after tapping NewProcessButton.',
+      );
+
+      // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+      // Searching the TextField inside CATitleDeclaration
+      Finder titleTextField = find.descendant(
+        of: find.byType(CATitleDeclaration),
+        matching: find.byType(TextField),
+      );
+
+      expect(
+        titleTextField,
+        findsOneWidget,
+        reason: 'A TextField should exist inside CATitleDeclaration.',
+      );
+
+      // Entering a title
+      await tester.enterText(titleTextField, testAnalysisTitle2);
+
+      // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+      // Searching the TextField inside CAKeywordsDeclaration
+      Finder keywordsTextField = find.descendant(
+        of: find.byType(CAKeywordsDeclaration),
+        matching: find.byType(TextField),
+      );
+
+      // Entering a keyword
+      await tester.enterText(keywordsTextField, kw1);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Necessary for kw2 to be added
+      await tester.tap(keywordsTextField);
+
+      // Entering another keyword 
+      await tester.enterText(keywordsTextField, kw2);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      
+      // ── FORM SECTION ─────────────────────────────────────────────────────────────
+      // Individual perspective testing values
+      List<bool> checkboxTrueValues = List.filled(6, true);
+      // 7 values are necessary
+      List<bool> checkboxValues = [...checkboxTrueValues, false];
+      // a1 to a6
+      List<String> checkboxTextFieldValues = List.generate(6, (i) => "a${i+1}");
+      String indivAnotherIssueStrValue = "a8";        
+
+      // Group/teams perspective testing values
+      String groupProblemsToSolveStrValue = "";
+      // 4 values are necessary
+      List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes"}];
+      // b2 to b5
+      List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+      
+      await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+      groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+
+      // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+      Finder fileNameWidgetFinder;
+      if (Platform.isAndroid || Platform.isIOS)
+      {
+        fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+
+        // Path to folder already declared 
+        // Scrolling to make the text field visible for small screens
+        await tester.ensureVisible(fileNameWidgetFinder);
+
+        // Entering a file name
+        await tester.enterText(fileNameWidgetFinder, fileName2WithoutExtension);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
+
+        // Searching for the title
+        expect(find.text(testAnalysisTitle2), findsOne);
+
+        // Searching for the keywords
+        expect(find.text(kw1), findsOne);
+        expect(find.text(kw2), findsOne);
+
+        // ── TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // Putting all string values together, to retrieve them by index
+        List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+        await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
+
+        await tester.pump(const Duration(seconds: 3));
+      }
+    },
+  ); 
+
 }
