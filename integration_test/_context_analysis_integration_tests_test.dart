@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
@@ -210,20 +209,7 @@ void main() {
         await checkNewCAProcessButtonFunctions(tester);
 
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-        // Searching the TextField inside CATitleDeclaration
-        Finder titleTextField = find.descendant(
-          of: find.byType(CATitleDeclaration),
-          matching: find.byType(TextField),
-        );
-
-        expect(
-          titleTextField,
-          findsOneWidget,
-          reason: 'A TextField should exist inside CATitleDeclaration.',
-        );
-
-        // Entering a title
-        await tester.enterText(titleTextField, testAnalysisTitle2);
+        await enterCAProcessTitle(tester, testAnalysisTitle2);
 
         // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
         // Searching the TextField inside CAKeywordsDeclaration
@@ -334,20 +320,7 @@ void main() {
         await checkNewCAProcessButtonFunctions(tester);
 
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-        // Searching the TextField inside CATitleDeclaration
-        Finder titleTextField = find.descendant(
-          of: find.byType(CATitleDeclaration),
-          matching: find.byType(TextField),
-        );
-
-        expect(
-          titleTextField,
-          findsOneWidget,
-          reason: 'A TextField should exist inside CATitleDeclaration.',
-        );
-
-        // Entering a title
-        await tester.enterText(titleTextField, testAnalysisTitle2);
+        await enterCAProcessTitle(tester, testAnalysisTitle2);
 
         // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
         // Searching the TextField inside CAKeywordsDeclaration
@@ -460,20 +433,7 @@ void main() {
       await checkNewCAProcessButtonFunctions(tester);
 
       // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-      // Searching the TextField inside CATitleDeclaration
-      Finder titleTextField = find.descendant(
-        of: find.byType(CATitleDeclaration),
-        matching: find.byType(TextField),
-      );
-
-      expect(
-        titleTextField,
-        findsOneWidget,
-        reason: 'A TextField should exist inside CATitleDeclaration.',
-      );
-
-      // Entering a title
-      await tester.enterText(titleTextField, testAnalysisTitle2);
+      await enterCAProcessTitle(tester, testAnalysisTitle2);
 
       // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
       // Searching the TextField inside CAKeywordsDeclaration
@@ -585,20 +545,7 @@ void main() {
         await checkNewCAProcessButtonFunctions(tester);
 
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-        // Searching the TextField inside CATitleDeclaration
-        Finder titleTextField = find.descendant(
-          of: find.byType(CATitleDeclaration),
-          matching: find.byType(TextField),
-        );
-
-        expect(
-          titleTextField,
-          findsOneWidget,
-          reason: 'A TextField should exist inside CATitleDeclaration.',
-        );
-
-        // Entering a title
-        await tester.enterText(titleTextField, testAnalysisTitle2);
+        await enterCAProcessTitle(tester, testAnalysisTitle2);
 
         // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
         // Searching the TextField inside CAKeywordsDeclaration
@@ -709,20 +656,7 @@ void main() {
       await checkNewCAProcessButtonFunctions(tester);
 
       // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-      // Searching the TextField inside CATitleDeclaration
-      Finder titleTextField = find.descendant(
-        of: find.byType(CATitleDeclaration),
-        matching: find.byType(TextField),
-      );
-
-      expect(
-        titleTextField,
-        findsOneWidget,
-        reason: 'A TextField should exist inside CATitleDeclaration.',
-      );
-
-      // Entering a title
-      await tester.enterText(titleTextField, testAnalysisTitle2);
+      await enterCAProcessTitle(tester, testAnalysisTitle2);
 
       // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
       // Searching the TextField inside CAKeywordsDeclaration
