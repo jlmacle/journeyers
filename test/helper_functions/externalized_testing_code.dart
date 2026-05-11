@@ -232,7 +232,7 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
       ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(currentExpansionTileFinder);
       Text expansionTileTitleWidget = expansionTileWidget.title as Text;
       String expansionTileTitle = expansionTileTitleWidget.data!;
-      if (testingDebug) pu.printd("Expansion tile title: $expansionTileTitle");
+      if (testingDebug) pu.printd("\n Expansion tile title: $expansionTileTitle");
       
       // Getting all the list tiles for the expansion tile
       var listTilesFinder = find.descendant
@@ -297,8 +297,6 @@ Future<void> openIndividualExpansionTile(WidgetTester tester) async
           }
           // Otherwise the notes are in the title with the segmented button answers
           else{
-            if (testingDebug) pu.printd("List tiles title for $expansionTileTitle: $listTileTitle");
-
             var segButtonAnswersWithNotes = "Answer(s): ${_segmentedButtonToString(segmentedButtonValues[previewListTileDataIndex-1])}\n"
                                             "Notes: ${groupStringValues[previewListTileDataIndex]}";
             expect(listTileTitle, segButtonAnswersWithNotes);
