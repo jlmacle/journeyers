@@ -280,7 +280,7 @@ void main() {
 
           await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
   
-          await tester.pump(const Duration(seconds: 3));
+          // await tester.pump(const Duration(seconds: 2));
         }
       },
     );
@@ -392,7 +392,7 @@ void main() {
 
           await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
   
-          await tester.pump(const Duration(seconds: 3));
+          // await tester.pump(const Duration(seconds: 2));
         }
       },
     );
@@ -505,7 +505,7 @@ void main() {
 
         await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
 
-        await tester.pump(const Duration(seconds: 3));
+        // await tester.pump(const Duration(seconds: 2));
       }
     },
   );
@@ -616,7 +616,7 @@ void main() {
 
           await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
   
-          await tester.pump(const Duration(seconds: 3));
+          // await tester.pump(const Duration(seconds: 2));
         }
       },
     );
@@ -728,7 +728,7 @@ void main() {
 
         await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
 
-        await tester.pump(const Duration(seconds: 3));
+        // await tester.pump(const Duration(seconds: 2));
       }
     },
   ); 
@@ -841,7 +841,117 @@ void main() {
 
         await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
 
-        await tester.pump(const Duration(seconds: 5));
+        // await tester.pump(const Duration(seconds: 2));
+      }
+    },
+  ); 
+
+    // 'Assuming an already selected path to the user session data folder,'
+    // 'session data entered during the context analysis is found on the preview'
+    // '(not all fields filled: several unselected segmented buttons)'
+    testWidgets(
+    'Assuming an already selected path to the user session data folder,'
+    'session data entered during the context analysis is found on the preview'
+    '(not all fields filled: several unselected segmented buttons)',
+    (WidgetTester tester) async {
+
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues
+      ({
+        // Setting value for the first-run modal to be absent,
+        'wasFirstRunModalAcknowledged': true,
+        // and to have the context analysis page, with the dashboard.
+        'wasSessionDataSaved': true,
+        // Temporary test dir as application folder path
+        'applicationFolderPath': testTmpDir!.path
+      });
+
+      // Pumping the CAPage
+      //
+      // pumpWidget renders the first frame.
+      // pumpAndSettle drives the event loop until there are no more pending frames,
+      // letting the async getPreferences() call complete 
+      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+      //
+      // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+      await tester.pumpWidget(buildTestableCAPage());
+      await tester.pumpAndSettle();
+
+      // Verifying that the new process button functions
+      await checkNewCAProcessButtonFunctions(tester);
+
+      // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+      await enterCAProcessTitle(tester, testAnalysisTitle2);
+
+      // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+      // Searching the TextField inside CAKeywordsDeclaration
+      Finder keywordsTextField = find.descendant(
+        of: find.byType(CAKeywordsDeclaration),
+        matching: find.byType(TextField),
+      );
+
+      // Entering a keyword
+      await tester.enterText(keywordsTextField, kw1);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Necessary for kw2 to be added
+      await tester.tap(keywordsTextField);
+
+      // Entering another keyword 
+      await tester.enterText(keywordsTextField, kw2);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      
+      // ── FORM SECTION ─────────────────────────────────────────────────────────────
+      // Individual perspective testing values
+      // 7 values are necessary
+      List<bool> checkboxValues = List.generate(7, (i) => true);
+      List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${(i+1)}");      
+      String indivAnotherIssueStrValue = "a8";        
+
+      // Group/teams perspective testing values
+      String groupProblemsToSolveStrValue = "b1";
+      // 4 values are necessary
+      List<Set<String>> segmentedButtonValues = [{"Yes"},{},{"I don't know"},{}];
+      List<String> segmentedButtonTextFieldValues = ["b2", "", "b4",""];
+      
+      await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+      groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+
+      // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+      Finder fileNameWidgetFinder;
+      if (Platform.isAndroid || Platform.isIOS)
+      {
+        fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+
+        // Path to folder already declared 
+        // Scrolling to make the text field visible for small screens
+        await tester.ensureVisible(fileNameWidgetFinder);
+
+        // Entering a file name
+        await tester.enterText(fileNameWidgetFinder, fileName2WithoutExtension);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
+
+        // Searching for the title
+        expect(find.text(testAnalysisTitle2), findsOne);
+
+        // Searching for the keywords
+        expect(find.text(kw1), findsOne);
+        expect(find.text(kw2), findsOne);
+
+        // ── TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // Putting all non-empty string values together, to retrieve them by index
+        List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
+  
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+        await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
+
+        // await tester.pump(const Duration(seconds: 2));
       }
     },
   ); 
