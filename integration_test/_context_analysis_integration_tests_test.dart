@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:integration_test/integration_test.dart';
@@ -42,10 +43,19 @@ Widget buildTestableCAPage() {
 
 // ─── Test suite ───────────────────────────────────────────────────────────────
 
-void main() {
+void main() async {
   // Required by the integration_test package.
   // https://docs.flutter.dev/testing/integration-tests#project-setup
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  // Keeping the app in portrait up mode 
+  if (Platform.isAndroid || Platform.isIOS)
+  {
+    await SystemChrome.setPreferredOrientations
+    ([
+      DeviceOrientation.portraitUp,   // Normal upright portrait
+    ]);
+  }
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
