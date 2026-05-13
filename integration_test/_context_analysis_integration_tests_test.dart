@@ -59,6 +59,8 @@ void main() {
   // Another keyword
   const String kw2 = 'Workplace';
 
+  const List<String> kwsList = [kw1, kw2];
+
   // File names
   const String fileName1WithoutExtension = 'file1';
   const String fileName2WithoutExtension = 'file2';
@@ -124,24 +126,7 @@ void main() {
         await enterCAProcessTitle(tester, testAnalysisTitle);
 
         // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-        // Searching the TextField inside CAKeywordsDeclaration
-        Finder keywordsTextField = find.descendant(
-          of: find.byType(CAKeywordsDeclaration),
-          matching: find.byType(TextField),
-        );
-
-        // Entering a keyword
-        await tester.enterText(keywordsTextField, kw1);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
-
-        // Necessary for kw2 to be added
-        await tester.tap(keywordsTextField);
-
-        // Entering another keyword 
-        await tester.enterText(keywordsTextField, kw2);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+        await enterCAProcessKeywords(tester, kwsList);
         
         // ── FORM SECTION: left blank in this test ─────────────────────────────────────────────────────────────
 
