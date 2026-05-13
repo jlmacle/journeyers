@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
 import '../test/helper_functions/externalized_testing_code.dart';
@@ -860,24 +859,7 @@ void main() {
       await enterCAProcessTitle(tester, testAnalysisTitle2);
 
       // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-      // Searching the TextField inside CAKeywordsDeclaration
-      Finder keywordsTextField = find.descendant(
-        of: find.byType(CAKeywordsDeclaration),
-        matching: find.byType(TextField),
-      );
-
-      // Entering a keyword
-      await tester.enterText(keywordsTextField, kw1);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-
-      // Necessary for kw2 to be added
-      await tester.tap(keywordsTextField);
-
-      // Entering another keyword 
-      await tester.enterText(keywordsTextField, kw2);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
+      await enterCAProcessKeywords(tester, kwsList);
       
       // ── FORM SECTION ─────────────────────────────────────────────────────────────
       // Individual perspective testing values
