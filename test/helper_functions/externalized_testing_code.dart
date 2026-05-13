@@ -5,6 +5,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
@@ -94,6 +95,30 @@ final q = CAQuestionsFields();
     await tester.enterText(titleTextField, aTitle);
   }
   
+  // Method used to enter keywords in the CA process
+  Future<void> enterCAProcessKeywords (WidgetTester tester, List<String> keywordsList) async
+  {
+    // Searching the TextField inside CAKeywordsDeclaration
+    Finder keywordsTextField = find.descendant(
+      of: find.byType(CAKeywordsDeclaration),
+      matching: find.byType(TextField),
+    );
+
+    for (var kw in keywordsList)
+    {
+      // Entering the keyword
+      await tester.enterText(keywordsTextField, kw);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Necessary for the next keyword to be added
+      await tester.tap(keywordsTextField);
+      
+      await tester.pumpAndSettle();
+    }
+  }
+        
+
   // Method used to fill a context analyis form.
   Future<void> fillCAForm
   (
