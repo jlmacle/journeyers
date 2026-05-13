@@ -86,11 +86,11 @@ void main() {
 
   // 'Context Analysis Integration Tests: Mobile: \n'
   group('Context Analysis Integration Tests: Mobile: \n', () {
-    // 'Assuming an already selected path to the user session data folder,'
-    // 'the metadata entered during the context analysis is found on the dashboard'
+    // 'Metadata entered is found on the dashboard \n'
+    // '(assuming an already selected path to the user session data folder)',
     testWidgets(
-      'Assuming an already selected path to the user session data folder,'
-      'the metadata entered during the context analysis is found on the dashboard',
+      'Metadata entered is found on the dashboard \n'
+      '(assuming an already selected path to the user session data folder)',
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
