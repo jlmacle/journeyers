@@ -197,24 +197,7 @@ void main() {
         await enterCAProcessTitle(tester, testAnalysisTitle2);
 
         // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-        // Searching the TextField inside CAKeywordsDeclaration
-        Finder keywordsTextField = find.descendant(
-          of: find.byType(CAKeywordsDeclaration),
-          matching: find.byType(TextField),
-        );
-
-        // Entering a keyword
-        await tester.enterText(keywordsTextField, kw1);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
-
-        // Necessary for kw2 to be added
-        await tester.tap(keywordsTextField);
-
-        // Entering another keyword 
-        await tester.enterText(keywordsTextField, kw2);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+        await enterCAProcessKeywords(tester, kwsList);
         
         // ── FORM SECTION ─────────────────────────────────────────────────────────────
         // Individual perspective testing values
