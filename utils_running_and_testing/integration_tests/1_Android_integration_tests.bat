@@ -16,5 +16,15 @@ echo ----------------------------------------------
 
 
 cd %JOURNEYERS_DIR%
-flutter test ./integration_test/_all_tests.dart -r github
+call flutter test ./integration_test/_all_tests.dart -r github
+
+:: Re-installing the application removed during integration testing
+echo ---------------------------------------------------------------- 
+echo Re-installing the application removed during integration testing
+echo ----------------------------------------------------------------
+
+echo q | flutter run
+
+echo.
+echo Application successfully installed and stopped.
 
