@@ -399,8 +399,7 @@ Future<void> main() async {
         await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
         groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
 
-        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
-      
+        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────      
         // Entering the file name and submitting data
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
@@ -450,50 +449,50 @@ Future<void> main() async {
         'applicationFolderPath': testTmpDir!.path
       });
 
-      // Pumping the CAPage
-      //
-      // pumpWidget renders the first frame.
-      // pumpAndSettle drives the event loop until there are no more pending frames,
-      // letting the async getPreferences() call complete 
-      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-      //
-      // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
-      await tester.pumpWidget(buildTestableCAPage());
-      await tester.pumpAndSettle();
-
-      // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────
-      // Verifying that the new process button functions
-      await checkNewCAProcessButtonFunctions(tester);
-
-      // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────
-
-      // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-      await enterCAProcessTitle(tester, testAnalysisTitle2);
-
-      // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-      await enterCAProcessKeywords(tester, kwsList);
-      
-      // ── FORM SECTION ─────────────────────────────────────────────────────────────
-      // Individual perspective testing values
-      // 7 values are necessary
-      List<bool> checkboxValues = [true, false, false, false, true, true, true];
-      List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
-      String indivAnotherIssueStrValue = "a8";        
-
-      // Group/teams perspective testing values
-      String groupProblemsToSolveStrValue = "";
-      // 4 values are necessary
-      List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
-      List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
-      
-      await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
-      groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
-
-      // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
       if (Platform.isAndroid || Platform.isIOS)
       {
+        // Pumping the CAPage
+        //
+        // pumpWidget renders the first frame.
+        // pumpAndSettle drives the event loop until there are no more pending frames,
+        // letting the async getPreferences() call complete 
+        // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+        //
+        // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+        await tester.pumpWidget(buildTestableCAPage());
+        await tester.pumpAndSettle();
+
+        // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+        // Verifying that the new process button functions
+        await checkNewCAProcessButtonFunctions(tester);
+
+        // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+
+        // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+        await enterCAProcessTitle(tester, testAnalysisTitle2);
+
+        // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+        await enterCAProcessKeywords(tester, kwsList);
+        
+        // ── FORM SECTION ─────────────────────────────────────────────────────────────
+        // Individual perspective testing values
+        // 7 values are necessary
+        List<bool> checkboxValues = [true, false, false, false, true, true, true];
+        List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
+        String indivAnotherIssueStrValue = "a8";        
+
+        // Group/teams perspective testing values
+        String groupProblemsToSolveStrValue = "";
+        // 4 values are necessary
+        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
+        List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
+        
+        await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+
+        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────      
         // Entering the file name and submitting data
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
