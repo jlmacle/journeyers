@@ -112,47 +112,47 @@ Future<void> main() async {
           'applicationFolderPath': testTmpDir!.path
         });
 
-      if (Platform.isAndroid || Platform.isIOS)
-      {
-        // Pumping the CAPage
-        //
-        // pumpWidget renders the first frame.
-        // pumpAndSettle drives the event loop until there are no more pending frames,
-        // letting the async getPreferences() call complete 
-        // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-        //
-        // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
-        await tester.pumpWidget(buildTestableCAPage());
-        await tester.pumpAndSettle();
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the CAPage
+          //
+          // pumpWidget renders the first frame.
+          // pumpAndSettle drives the event loop until there are no more pending frames,
+          // letting the async getPreferences() call complete 
+          // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+          //
+          // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+          await tester.pumpWidget(buildTestableCAPage());
+          await tester.pumpAndSettle();
 
-        // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────
-        // Verifying that the new process button functions
-        await checkNewCAProcessButtonFunctions(tester);
-
-
-        // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────
-
-        // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-        await enterCAProcessTitle(tester, testAnalysisTitle);
-
-        // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-        await enterCAProcessKeywords(tester, kwsList);
-        
-        // ── FORM SECTION: left blank in this test ─────────────────────────────────────────────────────────────
-
-        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
-        // Entering the file name and submitting data
-        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────
+          // Verifying that the new process button functions
+          await checkNewCAProcessButtonFunctions(tester);
 
 
-        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────
-        await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
+          // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────
 
-        // await tester.pump(const Duration(seconds: 2));
-      }
+          // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+          await enterCAProcessTitle(tester, testAnalysisTitle);
+
+          // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+          await enterCAProcessKeywords(tester, kwsList);
+          
+          // ── FORM SECTION: left blank in this test ─────────────────────────────────────────────────────────────
+
+          // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
+          // Entering the file name and submitting data
+          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+
+
+          // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────
+          await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
+
+          // await tester.pump(const Duration(seconds: 2));
+        }
     });
   
     // 'Session data entered is found on the preview: '
@@ -310,7 +310,8 @@ Future<void> main() async {
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
 
-        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
+        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
         // Searching for the title
         expect(find.text(testAnalysisTitle2), findsOne);
 
@@ -319,6 +320,7 @@ Future<void> main() async {
         expect(find.text(kw2), findsOne);
 
         // ── 4. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
           [...checkboxTextFieldValues, indivAnotherIssueStrValue]
@@ -354,53 +356,56 @@ Future<void> main() async {
         'applicationFolderPath': testTmpDir!.path
       });
 
-      // Pumping the CAPage
-      //
-      // pumpWidget renders the first frame.
-      // pumpAndSettle drives the event loop until there are no more pending frames,
-      // letting the async getPreferences() call complete 
-      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-      //
-      // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
-      await tester.pumpWidget(buildTestableCAPage());
-      await tester.pumpAndSettle();
-
-      // Verifying that the new process button functions
-      await checkNewCAProcessButtonFunctions(tester);
-
-      // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────
-
-      // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-      await enterCAProcessTitle(tester, testAnalysisTitle2);
-
-      // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-      await enterCAProcessKeywords(tester, kwsList);
-      
-      // ── FORM SECTION ─────────────────────────────────────────────────────────────
-      // Individual perspective testing values
-      // 7 values are necessary
-      List<bool> checkboxValues = [false, true, false, false, true, true, false];
-      List<String> checkboxTextFieldValues = ["", "a2",  "", "", "a5", "a6", ""];       
-      String indivAnotherIssueStrValue = "";        
-
-      // Group/teams perspective testing values
-      String groupProblemsToSolveStrValue = "b1";
-      // 4 values are necessary
-      List<Set<String>> segmentedButtonValues = [{},{"No"},{},{"I don't know"}];
-      List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
-      
-      await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
-      groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
-
-      // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
       if (Platform.isAndroid || Platform.isIOS)
       {
+        // Pumping the CAPage
+        //
+        // pumpWidget renders the first frame.
+        // pumpAndSettle drives the event loop until there are no more pending frames,
+        // letting the async getPreferences() call complete 
+        // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+        //
+        // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+        await tester.pumpWidget(buildTestableCAPage());
+        await tester.pumpAndSettle();
+
+        // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+        // Verifying that the new process button functions
+        await checkNewCAProcessButtonFunctions(tester);
+
+        // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+
+        // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+        await enterCAProcessTitle(tester, testAnalysisTitle2);
+
+        // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+        await enterCAProcessKeywords(tester, kwsList);
+        
+        // ── FORM SECTION ─────────────────────────────────────────────────────────────
+        // Individual perspective testing values
+        // 7 values are necessary
+        List<bool> checkboxValues = [false, true, false, false, true, true, false];
+        List<String> checkboxTextFieldValues = ["", "a2",  "", "", "a5", "a6", ""];       
+        String indivAnotherIssueStrValue = "";        
+
+        // Group/teams perspective testing values
+        String groupProblemsToSolveStrValue = "b1";
+        // 4 values are necessary
+        List<Set<String>> segmentedButtonValues = [{},{"No"},{},{"I don't know"}];
+        List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
+        
+        await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+
+        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
+      
         // Entering the file name and submitting data
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
-
+        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
         // Searching for the title
         expect(find.text(testAnalysisTitle2), findsOne);
 
@@ -408,7 +413,8 @@ Future<void> main() async {
         expect(find.text(kw1), findsOne);
         expect(find.text(kw2), findsOne);
 
-        // ── TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ── 4. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
           [...checkboxTextFieldValues, indivAnotherIssueStrValue]
@@ -455,10 +461,12 @@ Future<void> main() async {
       await tester.pumpWidget(buildTestableCAPage());
       await tester.pumpAndSettle();
 
+      // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
+      // ───────────────────────────────────────────────────────────────────────────────────
       // Verifying that the new process button functions
       await checkNewCAProcessButtonFunctions(tester);
 
-      // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+      // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
       // ───────────────────────────────────────────────────────────────────────────────────
 
       // ── TITLE SECTION ─────────────────────────────────────────────────────────────
@@ -489,8 +497,8 @@ Future<void> main() async {
         // Entering the file name and submitting data
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
-
+        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
         // Searching for the title
         expect(find.text(testAnalysisTitle2), findsOne);
 
@@ -498,7 +506,8 @@ Future<void> main() async {
         expect(find.text(kw1), findsOne);
         expect(find.text(kw2), findsOne);
 
-        // ── TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ── 4. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
           [...checkboxTextFieldValues, indivAnotherIssueStrValue]
