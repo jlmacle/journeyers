@@ -13,6 +13,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
   
 // Labels of the level 2 and 3 titles
 final q = CAQuestionsFields();
@@ -116,8 +117,7 @@ final q = CAQuestionsFields();
       
       await tester.pumpAndSettle();
     }
-  }
-        
+  }      
 
   // Method used to fill a context analyis form.
   Future<void> fillCAForm
@@ -242,6 +242,22 @@ final q = CAQuestionsFields();
         await tester.pumpAndSettle();
       }    
     }
+  }
+
+  // Method used to enter a file name on mobile device
+  // (Assuming an already selected path to the user session data folder)
+  Future<void> enterFileNameOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
+  {
+    Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+
+    // Path to folder already declared 
+    // Scrolling to make the text field visible for small screens
+    await tester.ensureVisible(fileNameWidgetFinder);
+
+    // Entering a file name
+    await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();  
   }
 
   // ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
