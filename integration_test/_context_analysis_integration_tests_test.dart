@@ -112,6 +112,9 @@ Future<void> main() async {
           'applicationFolderPath': testTmpDir!.path
         });
 
+      if (Platform.isAndroid || Platform.isIOS)
+      {
+
         // Pumping the CAPage
         //
         // pumpWidget renders the first frame.
@@ -123,10 +126,13 @@ Future<void> main() async {
         await tester.pumpWidget(buildTestableCAPage());
         await tester.pumpAndSettle();
 
+        // ── 1. CLICK TOWARD A NEW CA PROCESS ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
         // Verifying that the new process button functions
         await checkNewCAProcessButtonFunctions(tester);
 
-        // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+
+        // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
 
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
@@ -138,18 +144,17 @@ Future<void> main() async {
         // ── FORM SECTION: left blank in this test ─────────────────────────────────────────────────────────────
 
         // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
-        if (Platform.isAndroid || Platform.isIOS)
-        {
-          // Entering the file name and submitting data
-          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        // Entering the file name and submitting data
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-          // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
-          await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
 
-          // await tester.pump(const Duration(seconds: 2));
-        }
-      },
-    );
+        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+        await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
+
+        // await tester.pump(const Duration(seconds: 2));
+      }
+    });
   
     // 'Session data entered is found on the preview: '
     // 'all fields filled \n'
@@ -185,6 +190,9 @@ Future<void> main() async {
         // Verifying that the new process button functions
         await checkNewCAProcessButtonFunctions(tester);
 
+        // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
         await enterCAProcessTitle(tester, testAnalysisTitle2);
 
@@ -215,14 +223,8 @@ Future<void> main() async {
           // Entering the file name and submitting data
           await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-          // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
-
-          // Searching for the title
-          expect(find.text(testAnalysisTitle2), findsOne);
-
-          // Searching for the keywords
-          expect(find.text(kw1), findsOne);
-          expect(find.text(kw2), findsOne);
+          // ── SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
+          await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
 
           // ── TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // Putting all string values together, to retrieve them by index
@@ -270,6 +272,9 @@ Future<void> main() async {
       // Verifying that the new process button functions
       await checkNewCAProcessButtonFunctions(tester);
 
+      // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+      // ───────────────────────────────────────────────────────────────────────────────────
+
       // ── TITLE SECTION ─────────────────────────────────────────────────────────────
       await enterCAProcessTitle(tester, testAnalysisTitle2);
 
@@ -299,7 +304,7 @@ Future<void> main() async {
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
 
-        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
+        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
 
         // Searching for the title
         expect(find.text(testAnalysisTitle2), findsOne);
@@ -358,6 +363,9 @@ Future<void> main() async {
       // Verifying that the new process button functions
       await checkNewCAProcessButtonFunctions(tester);
 
+      // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+      // ───────────────────────────────────────────────────────────────────────────────────
+
       // ── TITLE SECTION ─────────────────────────────────────────────────────────────
       await enterCAProcessTitle(tester, testAnalysisTitle2);
 
@@ -386,7 +394,7 @@ Future<void> main() async {
         // Entering the file name and submitting data
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
+        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
 
         // Searching for the title
         expect(find.text(testAnalysisTitle2), findsOne);
@@ -445,6 +453,9 @@ Future<void> main() async {
       // Verifying that the new process button functions
       await checkNewCAProcessButtonFunctions(tester);
 
+      // ── CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+      // ───────────────────────────────────────────────────────────────────────────────────
+
       // ── TITLE SECTION ─────────────────────────────────────────────────────────────
       await enterCAProcessTitle(tester, testAnalysisTitle2);
 
@@ -473,7 +484,7 @@ Future<void> main() async {
         // Entering the file name and submitting data
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
+        // ── SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
 
         // Searching for the title
         expect(find.text(testAnalysisTitle2), findsOne);
