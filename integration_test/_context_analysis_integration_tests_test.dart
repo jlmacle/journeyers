@@ -139,7 +139,7 @@ void main() async {
         
         // ── FORM SECTION: left blank in this test ─────────────────────────────────────────────────────────────
 
-        // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Entering the file name and submitting data
@@ -217,7 +217,7 @@ void main() async {
         await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
         groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
   
-        // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Entering the file name and submitting data
@@ -300,7 +300,7 @@ void main() async {
       await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
       groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
 
-      // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+      // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
@@ -388,7 +388,7 @@ void main() async {
       await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
       groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
 
-      // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+      // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
 
       if (Platform.isAndroid || Platform.isIOS)
       {
@@ -476,7 +476,7 @@ void main() async {
       await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
       groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
 
-      // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
+      // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
       Finder fileNameWidgetFinder;
       if (Platform.isAndroid || Platform.isIOS)
       {
