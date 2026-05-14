@@ -43,7 +43,7 @@ Widget buildTestableCAPage() {
 
 // ─── Test suite ───────────────────────────────────────────────────────────────
 
-void main() async {
+Future<void> main() async {
   // Required by the integration_test package.
   // https://docs.flutter.dev/testing/integration-tests#project-setup
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
