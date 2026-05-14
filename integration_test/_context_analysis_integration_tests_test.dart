@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -72,7 +71,6 @@ Future<void> main() async {
 
   // File names
   const String fileName1WithoutExtension = 'file1';
-  const String fileName2WithoutExtension = 'file2';
 
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
@@ -143,7 +141,7 @@ Future<void> main() async {
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Entering the file name and submitting data
-          await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
@@ -221,7 +219,7 @@ Future<void> main() async {
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Entering the file name and submitting data
-          await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
@@ -304,7 +302,7 @@ Future<void> main() async {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
-        await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
 
         // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
@@ -392,7 +390,7 @@ Future<void> main() async {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
-        await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
         // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
@@ -479,7 +477,7 @@ Future<void> main() async {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
-        await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
         // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
