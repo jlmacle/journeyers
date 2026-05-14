@@ -141,7 +141,7 @@ Future<void> main() async {
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Entering the file name and submitting data
-          await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
@@ -219,7 +219,7 @@ Future<void> main() async {
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Entering the file name and submitting data
-          await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
@@ -302,7 +302,7 @@ Future<void> main() async {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
-        await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
 
         // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
@@ -390,7 +390,7 @@ Future<void> main() async {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
-        await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
         // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
@@ -477,7 +477,7 @@ Future<void> main() async {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Entering the file name and submitting data
-        await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
         // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 

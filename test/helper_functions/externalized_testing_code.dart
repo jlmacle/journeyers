@@ -244,9 +244,9 @@ final q = CAQuestionsFields();
     }
   }
 
-  // Method used to enter a file name on mobile device
+  // Method used to enter a file name and to submit the CA process data on mobile device
   // (Assuming an already selected path to the user session data folder)
-  Future<void> enterFileNameOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
+  Future<void> enterFileNameAndSubmitCADataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
   {
     Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
 
