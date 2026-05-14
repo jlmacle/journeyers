@@ -260,6 +260,22 @@ final q = CAQuestionsFields();
     await tester.pumpAndSettle();  
   }
 
+  // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
+
+  // Method used to search a title and keywords on the dashboard
+  Future<void> searchTitleAndKeywords({required String title, required List<String> kws}) async
+  {
+    // Searching for the title
+    expect(find.text(title), findsOne);
+
+    // Searching for the keywords
+    for (var kw in kws)
+    {
+      expect(find.text(kw), findsOne);
+    }
+
+  }
+
   // ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
 
   // Serialises a segmented-button selection to a slash-separated string.
