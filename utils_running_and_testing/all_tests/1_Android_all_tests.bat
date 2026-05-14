@@ -8,7 +8,7 @@ if not defined JOURNEYERS_DIR (
 )
 
 echo ----------------------------------------------  
-echo All tests.
+echo All tests (Integration tests).
 echo ----------------------------------------------
 
 

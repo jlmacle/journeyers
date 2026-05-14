@@ -7,9 +7,9 @@ if [ -z "${JOURNEYERS_DIR}" ]; then
     exit 1
 fi
 
-echo "---------------------------------------------"  
-echo "All tests."
-echo "---------------------------------------------"
+echo "----------------------------------------------"  
+echo "All tests (Integration tests)."
+echo "----------------------------------------------"
 
 # Integration tests
 cd $JOURNEYERS_DIR

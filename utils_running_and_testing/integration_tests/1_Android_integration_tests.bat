@@ -19,9 +19,9 @@ cd %JOURNEYERS_DIR%
 call flutter test ./integration_test/_all_tests.dart -r github
 
 :: Re-installing the application removed during integration testing
-echo ---------------------------------------------------------------- 
-echo Re-installing the application removed during integration testing
-echo ----------------------------------------------------------------
+echo ----------------------------------------------------------------- 
+echo Re-installing the application removed during integration testing.
+echo -----------------------------------------------------------------
 
 echo q | flutter run
 
