@@ -114,7 +114,6 @@ Future<void> main() async {
 
       if (Platform.isAndroid || Platform.isIOS)
       {
-
         // Pumping the CAPage
         //
         // pumpWidget renders the first frame.
@@ -126,13 +125,13 @@ Future<void> main() async {
         await tester.pumpWidget(buildTestableCAPage());
         await tester.pumpAndSettle();
 
-        // ── 1. CLICK TOWARD A NEW CA PROCESS ─────────────────────────────────────────────────────────────
+        // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
         // Verifying that the new process button functions
         await checkNewCAProcessButtonFunctions(tester);
 
 
-        // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
+        // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
 
         // ── TITLE SECTION ─────────────────────────────────────────────────────────────
@@ -148,7 +147,7 @@ Future<void> main() async {
         await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
 
-        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ─────────────────────────────────────────────────────────────
+        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
         await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
 
