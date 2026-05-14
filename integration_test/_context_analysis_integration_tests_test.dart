@@ -142,7 +142,7 @@ void main() async {
         // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
         if (Platform.isAndroid || Platform.isIOS)
         {
-          // Entering the file name
+          // Entering the file name and submitting data
           await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
@@ -218,19 +218,10 @@ void main() async {
         groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
   
         // ── SUBMIT BUTTON SECTION ─────────────────────────────────────────────────────────────
-        Finder fileNameWidgetFinder;
         if (Platform.isAndroid || Platform.isIOS)
         {
-          fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
-
-          // Path to folder already declared 
-          // Scrolling to make the text field visible for small screens
-          await tester.ensureVisible(fileNameWidgetFinder);
-
-          // Entering a file name
-          await tester.enterText(fileNameWidgetFinder, fileName2WithoutExtension);
-          await tester.testTextInput.receiveAction(TextInputAction.done);
-          await tester.pumpAndSettle();
+          // Entering the file name and submitting data
+          await enterFileNameOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
 
