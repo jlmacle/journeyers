@@ -144,13 +144,7 @@ Future<void> main() async {
           await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── SEARCHING FOR THE METADATA ON THE DASHBOARD SECTION ─────────────────────────────────────────────────────────────
-
-          // Searching for the title
-          expect(find.text(testAnalysisTitle), findsOne);
-
-          // Searching for the keywords
-          expect(find.text(kw1), findsOne);
-          expect(find.text(kw2), findsOne);
+          await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
 
           // await tester.pump(const Duration(seconds: 2));
         }
