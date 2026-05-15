@@ -96,10 +96,12 @@ Future<void> main() async {
   // 'Context Analysis Integration Tests: Mobile: \n'
   group('Context Analysis Integration Tests: Mobile: \n', () 
   {
-    // 'Metadata entered is found on the dashboard \n'
+    // 'Session data entered is found: '
+    // 'CA form skipped \n'
     // '(assuming an already selected path to the user session data folder)',
     testWidgets(
-      'Metadata entered is found on the dashboard \n'
+      'Session data entered is found: '
+      'CA form skipped \n'
       '(assuming an already selected path to the user session data folder)',
       (WidgetTester tester) async {
 
@@ -127,29 +129,21 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableCAPage());
           await tester.pumpAndSettle();
 
-          // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────────────
-          // Verifying that the new process button functions
-          await checkNewCAProcessButtonFunctions(tester);
+          // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+
+            // formToFill: false to skip the form filling
+            await enterNewCAProcessData
+            (
+              tester: tester, 
+              formToFill: false,
+              title: testAnalysisTitle,
+              kwsList: kwsList,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
 
 
-          // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────────────
-
-          // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-          await enterCAProcessTitle(tester, testAnalysisTitle);
-
-          // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-          await enterCAProcessKeywords(tester, kwsList);
-          
-          // ── FORM SECTION: left blank in this test ─────────────────────────────────────────────────────────────
-
-          // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
-          // Entering the file name and submitting data
-          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
-
-
-          // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords
           await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
