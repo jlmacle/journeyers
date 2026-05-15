@@ -591,29 +591,12 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            // Individual perspective testing values
-            // 7 values are necessary
-            List<bool> checkboxValues = [true, false, false, false, true, true, true];
-            List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
-            String indivAnotherIssueStrValue = "a8";        
-
-            // Group/teams perspective testing values
-            String groupProblemsToSolveStrValue = "";
-            // 4 values are necessary
-            List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
-            List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
-            
             await enterNewCAProcessData
             (
+              formToFill: false,
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,
-              checkboxValues: checkboxValues,
-              checkboxTextFieldValues: checkboxTextFieldValues,
-              indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-              segmentedButtonValues: segmentedButtonValues,
-              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              kwsList: kwsList,              
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -641,6 +624,7 @@ Future<void> main() async {
           }
         }      
       );
+      
     });
   });
 }
