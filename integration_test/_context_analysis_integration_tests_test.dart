@@ -208,14 +208,11 @@ Future<void> main() async {
             tester: tester, 
             title: testAnalysisTitle2,
             kwsList: kwsList,
-            // All checkboxes checked
             checkboxValues: checkboxValues,
-            // a1 to a7
             checkboxTextFieldValues: checkboxTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
             segmentedButtonValues: segmentedButtonValues,
-            // b2 to b5
             segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
             fileNameWithoutExtension: fileName1WithoutExtension
           );
