@@ -160,7 +160,70 @@ Future<void> main() async {
   
     group('Preview Tests: Mobile: \n', () 
     {
-      
+      // 'Session data entered is found on the preview: '
+      // 'all fields empty \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Session data entered is found on the preview: '
+        'all fields empty \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+
+            // All CA form fields empty in the default parameter values
+            await enterNewCAProcessData
+            (
+              tester: tester, 
+              title: testAnalysisTitle2,
+              kwsList: kwsList,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────
+            // Searching for the title and keywords
+            await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+
+            // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────
+            // Default parameter values for empty CA form fields
+            await testPreview(tester: tester);
+
+            // await tester.pump(const Duration(seconds: 2));
+
+          }
+        }
+      );
+
+      // 'Session data entered is found on the preview: '
+      // 'all fields filled \n'
+      // '(assuming an already selected path to the user session data folder)',
       testWidgets(
         'Session data entered is found on the preview: '
         'all fields filled \n'
