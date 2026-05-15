@@ -327,10 +327,12 @@ final q = CAQuestionsFields();
 
   // Method used to test a preview.
   Future<void> testPreview
-  (
-    WidgetTester tester, List<String> individualStringValues, 
-    List<Set<String>> segmentedButtonValues, List<String> groupStringValues
-  ) async
+  ({
+    required WidgetTester tester, 
+    List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
+    List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}, {}], 
+    List<String> groupStringValues = const ["", "", "", "", ""]
+  }) async
   {
 
     if (testingDebug) pu.printd("Individual perspective values: $individualStringValues");
