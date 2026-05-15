@@ -213,7 +213,7 @@ Future<void> main() async {
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             // Default parameter values for empty CA form fields
-            await testPreview(tester: tester);
+            await testCAPreview(tester: tester);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -296,7 +296,7 @@ Future<void> main() async {
             List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
             List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-            await testPreview(tester: tester, individualStringValues: individualStringValues, 
+            await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
             segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
             // await tester.pump(const Duration(seconds: 2));
@@ -381,7 +381,7 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testPreview(tester: tester, individualStringValues: individualStringValues, 
+          await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
           segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -466,7 +466,7 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testPreview(tester: tester, individualStringValues: individualStringValues, 
+          await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
           segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -551,7 +551,7 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testPreview(tester: tester, individualStringValues: individualStringValues, 
+          await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
           segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));

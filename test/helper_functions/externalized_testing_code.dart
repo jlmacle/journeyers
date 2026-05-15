@@ -326,7 +326,7 @@ final q = CAQuestionsFields();
   String _segmentedButtonToString(Set<String> values) => values.join('/');
 
   // Method used to test a preview.
-  Future<void> testPreview
+  Future<void> testCAPreview
   ({
     required WidgetTester tester, 
     List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
