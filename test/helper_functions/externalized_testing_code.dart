@@ -266,6 +266,7 @@ final q = CAQuestionsFields();
   Future<void> enterNewCAProcessData 
   ({
     required WidgetTester tester, 
+    bool formToFill = true,
     required String title,
     required List<String> kwsList,
     List<bool> checkboxValues = const [false, false, false, false, false, false, false], List<String> checkboxTextFieldValues = const [], String indivAnotherIssueStrValue = "", 
@@ -288,9 +289,12 @@ final q = CAQuestionsFields();
     // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
     await enterCAProcessKeywords(tester, kwsList);
     
-    // ── FORM SECTION ─────────────────────────────────────────────────────────────
-    await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
-    groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+    if (formToFill)
+    {
+      // ── FORM SECTION ─────────────────────────────────────────────────────────────
+      await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+      groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+    }
 
     // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
     // Entering the file name and submitting data
@@ -326,7 +330,7 @@ final q = CAQuestionsFields();
   String _segmentedButtonToString(Set<String> values) => values.join('/');
 
   // Method used to test a preview.
-  Future<void> testPreview
+  Future<void> testCAPreview
   ({
     required WidgetTester tester, 
     List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
