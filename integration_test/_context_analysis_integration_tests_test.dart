@@ -402,11 +402,7 @@ Future<void> main() async {
         // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
         // Searching for the title
-        expect(find.text(testAnalysisTitle2), findsOne);
-
-        // Searching for the keywords
-        expect(find.text(kw1), findsOne);
-        expect(find.text(kw2), findsOne);
+        await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
         // ── 4. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
