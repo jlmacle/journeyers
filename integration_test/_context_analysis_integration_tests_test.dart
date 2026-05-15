@@ -188,23 +188,8 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableCAPage());
           await tester.pumpAndSettle();
 
-          // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────────────
-          // Verifying that the new process button functions
-          await checkNewCAProcessButtonFunctions(tester);
-
-
-          // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────────────
-
-          // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-          await enterCAProcessTitle(tester, testAnalysisTitle2);
-
-          // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-          await enterCAProcessKeywords(tester, kwsList);
-          
-          // ── FORM SECTION ─────────────────────────────────────────────────────────────
-          // Individual perspective testing values
+          // ── 1. ENTERING NEW CA PROCESS DATA ───────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
           // 7 values are necessary
           List<bool> checkboxValues = List.filled(7, true);
           // a1 to a7
@@ -217,26 +202,36 @@ Future<void> main() async {
           List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"}];
           // b2 to b5
           List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
-          
-          await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
-          groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
-    
-          // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
-          // Entering the file name and submitting data
-          await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
-          // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          await enterNewCAProcessData
+          (
+            tester: tester, 
+            title: testAnalysisTitle2,
+            kwsList: kwsList,
+            // All checkboxes checked
+            checkboxValues: checkboxValues,
+            // a1 to a7
+            checkboxTextFieldValues: checkboxTextFieldValues,
+            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+            segmentedButtonValues: segmentedButtonValues,
+            // b2 to b5
+            segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
+
+          // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
-          // ── 4. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+          // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
           // Putting all string values together, to retrieve them by index
           List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
           await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
-  
+
           // await tester.pump(const Duration(seconds: 2));
         }
       },
