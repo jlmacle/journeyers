@@ -52,7 +52,7 @@ final q = CAQuestionsFields();
     // await tester.pumpAndSettle();
   }
 
-  // ─── CA FORM FILING ───────────────────────────────────────────────────────────────
+  // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
   // Method used to check that the new process button functions
   Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
   {
@@ -258,6 +258,41 @@ final q = CAQuestionsFields();
     await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();  
+  }
+  
+  // Method used to enter new CA process data
+  Future<void> enterNewCAProcessData 
+  ({
+    required WidgetTester tester, 
+    required String title,
+    required List<String> kwsList,
+    required List<bool> checkboxValues, required List<String> checkboxTextFieldValues, required String indivAnotherIssueStrValue, 
+    required String groupProblemsToSolveStrValue, required List<Set<String>> segmentedButtonValues, required List<String> segmentedButtonTextFieldValues,
+    required String fileNameWithoutExtension
+  }) async
+  {
+    // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────────────────────────
+    // Verifying that the new process button functions
+    await checkNewCAProcessButtonFunctions(tester);
+
+
+    // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────────────────────────
+
+    // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+    await enterCAProcessTitle(tester, title);
+
+    // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+    await enterCAProcessKeywords(tester, kwsList);
+    
+    // ── FORM SECTION ─────────────────────────────────────────────────────────────
+    await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+    groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+
+    // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
+    // Entering the file name and submitting data
+    await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
   }
 
   // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
