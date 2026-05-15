@@ -160,9 +160,7 @@ Future<void> main() async {
   
     group('Preview Tests: Mobile: \n', () 
     {
-      // 'Session data entered is found on the preview: '
-      // 'all fields filled \n'
-      // '(assuming an already selected path to the user session data folder)',
+      
       testWidgets(
         'Session data entered is found on the preview: '
         'all fields filled \n'
@@ -235,7 +233,8 @@ Future<void> main() async {
             List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
             List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-            await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
+            await testPreview(tester: tester, individualStringValues: individualStringValues, 
+            segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
             // await tester.pump(const Duration(seconds: 2));
           }
@@ -319,7 +318,8 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
+          await testPreview(tester: tester, individualStringValues: individualStringValues, 
+          segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
         }
@@ -403,7 +403,8 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
+          await testPreview(tester: tester, individualStringValues: individualStringValues, 
+          segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
         }
@@ -487,7 +488,8 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testPreview(tester, individualStringValues, segmentedButtonValues, groupStringValues);
+          await testPreview(tester: tester, individualStringValues: individualStringValues, 
+          segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
         }
