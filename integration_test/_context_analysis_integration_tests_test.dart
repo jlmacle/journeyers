@@ -353,21 +353,9 @@ Future<void> main() async {
         await tester.pumpWidget(buildTestableCAPage());
         await tester.pumpAndSettle();
 
-        // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────
-        // Verifying that the new process button functions
-        await checkNewCAProcessButtonFunctions(tester);
-
-        // ── 2. CA PROCESS FILLING ─────────────────────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────
-
-        // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-        await enterCAProcessTitle(tester, testAnalysisTitle2);
-
-        // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-        await enterCAProcessKeywords(tester, kwsList);
+        // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────
         
-        // ── FORM SECTION ─────────────────────────────────────────────────────────────
         // Individual perspective testing values
         // 7 values are necessary
         List<bool> checkboxValues = [false, true, false, false, true, true, false];
@@ -379,20 +367,27 @@ Future<void> main() async {
         // 4 values are necessary
         List<Set<String>> segmentedButtonValues = [{},{"No"},{},{"I don't know"}];
         List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
+
+        await enterNewCAProcessData
+        (
+          tester: tester, 
+          title: testAnalysisTitle2,
+          kwsList: kwsList,
+          checkboxValues: checkboxValues,
+          checkboxTextFieldValues: checkboxTextFieldValues,
+          indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+          groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+          segmentedButtonValues: segmentedButtonValues,
+          segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+          fileNameWithoutExtension: fileName1WithoutExtension
+        );
         
-        await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
-        groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
-
-        // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────      
-        // Entering the file name and submitting data
-        await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
-
-        // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+        // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
         // Searching for the title
         await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
-        // ── 4. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
