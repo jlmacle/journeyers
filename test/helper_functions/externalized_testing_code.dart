@@ -261,14 +261,16 @@ final q = CAQuestionsFields();
   }
   
   // Method used to enter new CA process data
+  // 7 values are necessary in checkboxValues
+  // 4 values are necessary in segmentedButtonValues
   Future<void> enterNewCAProcessData 
   ({
     required WidgetTester tester, 
     required String title,
     required List<String> kwsList,
-    required List<bool> checkboxValues, required List<String> checkboxTextFieldValues, required String indivAnotherIssueStrValue, 
-    required String groupProblemsToSolveStrValue, required List<Set<String>> segmentedButtonValues, required List<String> segmentedButtonTextFieldValues,
-    required String fileNameWithoutExtension
+    List<bool> checkboxValues = const [false, false, false, false, false, false, false], List<String> checkboxTextFieldValues = const [], String indivAnotherIssueStrValue = "", 
+    String groupProblemsToSolveStrValue = "", List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}], List<String> segmentedButtonTextFieldValues = const [],
+    String fileNameWithoutExtension = ""
   }) async
   {
     // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
