@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
+import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -492,7 +493,95 @@ Future<void> main() async {
         }
       },
     ); 
+    
     });
 
+    group('Deletion Tests: Mobile: \n', ()
+    {
+      // 'Deletion: Single deletion with icon \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Deletion: Single deletion with icon \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            // Individual perspective testing values
+            // 7 values are necessary
+            List<bool> checkboxValues = [true, false, false, false, true, true, true];
+            List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
+            String indivAnotherIssueStrValue = "a8";        
+
+            // Group/teams perspective testing values
+            String groupProblemsToSolveStrValue = "";
+            // 4 values are necessary
+            List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
+            List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
+            
+            await enterNewCAProcessData
+            (
+              tester: tester, 
+              title: testAnalysisTitle2,
+              kwsList: kwsList,
+              checkboxValues: checkboxValues,
+              checkboxTextFieldValues: checkboxTextFieldValues,
+              indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+              segmentedButtonValues: segmentedButtonValues,
+              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────
+            // Searching for the finder with the title
+            Finder sesssionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
+            expect(sesssionListItemFinder, findsOne);
+
+            // ── 3. TESTING THE DELETION ─────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────
+            
+            // Searching for the tooltip 
+            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+
+            // Tapping the icon
+            await tester.tap(deleteIconFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the sessions list item absent
+            sesssionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
+            expect(sesssionListItemFinder, findsNothing);
+      
+            // await tester.pump(const Duration(seconds: 2));
+          }
+        }      
+      );
+    });
   });
 }

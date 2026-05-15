@@ -311,6 +311,13 @@ final q = CAQuestionsFields();
 
   }
 
+  // Method used to find a sessions list item by title
+  Future<Finder> getSessionListItemFinderByTitle(WidgetTester tester, String title) async 
+  {
+    Finder sessionListItemFinder = find.text(title);
+    return sessionListItemFinder;
+  }
+
   // ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
 
   // Serialises a segmented-button selection to a slash-separated string.
