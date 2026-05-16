@@ -602,7 +602,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,              
+              kwsList: [],              
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
