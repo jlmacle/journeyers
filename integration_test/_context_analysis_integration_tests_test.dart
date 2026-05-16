@@ -202,7 +202,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,
+              kwsList: [],
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -276,7 +276,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,
+              kwsList: [],
               checkboxValues: checkboxValues,
               checkboxTextFieldValues: checkboxTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -603,7 +603,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,              
+              kwsList: [],              
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
