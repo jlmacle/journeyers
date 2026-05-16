@@ -11,7 +11,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -60,8 +63,10 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // The test title text
-  const String testAnalysisTitle = 'Integration-test CA session title';
-  const String testAnalysisTitle2 = "$testAnalysisTitle (2)";
+  const String testAnalysisTitleRoot = 'Integration-test CA session title';
+  const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
+  const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
+  const String testAnalysisTitle3 = '$testAnalysisTitleRoot (3)';
 
   // A keyword
   const String kw1 = 'Household';
@@ -72,6 +77,8 @@ Future<void> main() async {
 
   // File names
   const String fileName1WithoutExtension = 'file1';
+  const String fileName2WithoutExtension = 'file2';
+  const String fileName3WithoutExtension = 'file3';
 
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
@@ -137,7 +144,7 @@ Future<void> main() async {
             (
               tester: tester, 
               formToFill: false,
-              title: testAnalysisTitle,
+              title: testAnalysisTitle1,
               kwsList: kwsList,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
@@ -146,7 +153,7 @@ Future<void> main() async {
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords
-          await searchTitleAndKeywords(title: testAnalysisTitle, kws: kwsList);
+          await searchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList);
 
           // await tester.pump(const Duration(seconds: 2));
         }
@@ -603,10 +610,10 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the finder with the title
-            Finder sesssionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
-            expect(sesssionListItemFinder, findsOne);
+            Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
+            expect(sessionListItemFinder, findsOne);
 
-            // ── 3. TESTING THE DELETION ─────────────────────────────────────────────────────────────
+            // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             
             // Searching for the tooltip 
@@ -617,8 +624,112 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Verifying the sessions list item absent
-            sesssionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
-            expect(sesssionListItemFinder, findsNothing);
+            sessionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
+            expect(sessionListItemFinder, findsNothing);
+      
+            // await tester.pump(const Duration(seconds: 2));
+          }
+        }      
+      );
+
+      // 'Deletion: Bulk deletion \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Deletion: Bulk deletion \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+             await enterNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester, 
+              title: testAnalysisTitle1,
+              kwsList: kwsList,              
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            await enterNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester, 
+              title: testAnalysisTitle2,
+              kwsList: kwsList,              
+              fileNameWithoutExtension: fileName2WithoutExtension
+            );
+
+             await enterNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester, 
+              title: testAnalysisTitle3,
+              kwsList: kwsList,              
+              fileNameWithoutExtension: fileName3WithoutExtension
+            );
+
+            // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
+            // Finding and tapping the checkboxes for title 1 and title 2
+            var checkbox1Finder = find.descendant
+            (
+              of: find.ancestor(of: find.text(testAnalysisTitle1), matching: find.byType(SessionsListItem)), 
+              matching: find.byType(Checkbox)
+            );
+            await tester.tap(checkbox1Finder);
+            await tester.pumpAndSettle();
+
+           var checkbox2Finder = find.descendant
+            (
+                of: find.ancestor(of: find.text(testAnalysisTitle2), matching: find.byType(SessionsListItem)), 
+                matching: find.byType(Checkbox)
+            );
+            await tester.tap(checkbox2Finder);
+            await tester.pumpAndSettle();
+
+            // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────────────────
+            // Searching the widget
+            var bulkDeletionFinder = find.textContaining('Delete');
+            expect(bulkDeletionFinder, findsOne);
+            await tester.tap(bulkDeletionFinder);
+            await tester.pumpAndSettle();
+
+            // ── 4. TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────       
+            // Checking the number of list items left 
+            var sessionsListItemsFinder = find.byType(SessionsListItem);
+            expect(sessionsListItemsFinder, findsOne);
+
+            // Verifying title 3 remains
+            var textFinder = find.text(testAnalysisTitle3);
+            Text textWidget = tester.widget(textFinder);
+            expect(textWidget.data, testAnalysisTitle3);
+
       
             // await tester.pump(const Duration(seconds: 2));
           }
