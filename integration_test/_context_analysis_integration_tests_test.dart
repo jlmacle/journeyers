@@ -276,7 +276,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,
+              kwsList: [],
               checkboxValues: checkboxValues,
               checkboxTextFieldValues: checkboxTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
