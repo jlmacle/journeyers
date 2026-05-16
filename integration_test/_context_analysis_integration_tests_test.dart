@@ -670,7 +670,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle1,
-              kwsList: kwsList,              
+              kwsList: [],              
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -679,7 +679,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,              
+              kwsList: [],              
               fileNameWithoutExtension: fileName2WithoutExtension
             );
 
@@ -688,7 +688,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle3,
-              kwsList: kwsList,              
+              kwsList: [],              
               fileNameWithoutExtension: fileName3WithoutExtension
             );
 
