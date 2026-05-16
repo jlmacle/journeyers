@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
@@ -202,7 +201,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: [],
+              kwsList: kwsList,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -276,7 +275,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: [],
+              kwsList: kwsList,
               checkboxValues: checkboxValues,
               checkboxTextFieldValues: checkboxTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -603,7 +602,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: [],              
+              kwsList: kwsList,              
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -671,7 +670,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle1,
-              kwsList: [],              
+              kwsList: kwsList,              
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -680,7 +679,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: [],              
+              kwsList: kwsList,              
               fileNameWithoutExtension: fileName2WithoutExtension
             );
 
@@ -689,7 +688,7 @@ Future<void> main() async {
               formToFill: false,
               tester: tester, 
               title: testAnalysisTitle3,
-              kwsList: [],              
+              kwsList: kwsList,              
               fileNameWithoutExtension: fileName3WithoutExtension
             );
 
