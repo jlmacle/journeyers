@@ -202,7 +202,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testAnalysisTitle2,
-              kwsList: kwsList,
+              kwsList: [],
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
