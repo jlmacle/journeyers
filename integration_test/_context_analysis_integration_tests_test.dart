@@ -80,6 +80,7 @@ Future<void> main() async {
   const String fileName1WithoutExtension = 'file1';
   const String fileName2WithoutExtension = 'file2';
   const String fileName3WithoutExtension = 'file3';
+  const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
 
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
@@ -667,31 +668,13 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-             await enterNewCAProcessData
+            await addSeveralCAProcessData
             (
               formToFill: false,
-              tester: tester, 
-              title: testAnalysisTitle1,
-              kwsList: [],              
-              fileNameWithoutExtension: fileName1WithoutExtension
-            );
-
-            await enterNewCAProcessData
-            (
-              formToFill: false,
-              tester: tester, 
-              title: testAnalysisTitle2,
-              kwsList: [],              
-              fileNameWithoutExtension: fileName2WithoutExtension
-            );
-
-             await enterNewCAProcessData
-            (
-              formToFill: false,
-              tester: tester, 
-              title: testAnalysisTitle3,
-              kwsList: [],              
-              fileNameWithoutExtension: fileName3WithoutExtension
+              tester: tester,
+              titlesList: titlesList,
+              kwsLists: [[], [], []],
+              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
 
             // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
@@ -740,7 +723,7 @@ Future<void> main() async {
 
     group('Sorting and filtering: Mobile: \n', ()
     {
-       // 'Sorting by title \n'
+      // 'Sorting by title \n'
       // '(assuming an already selected path to the user session data folder)',
       testWidgets(
         'Sorting by title \n'
