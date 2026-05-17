@@ -302,7 +302,7 @@ final q = CAQuestionsFields();
 
   // Method used to add session data
   // The method assumes all lists have the same number of elements
-  Future<void> addSeveralCAProcessData
+  Future<void> enterSeveralTimesNewCAProcessData
   ({
     required bool formToFill,
     required WidgetTester tester,
