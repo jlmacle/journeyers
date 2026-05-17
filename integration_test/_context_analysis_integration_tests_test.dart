@@ -70,9 +70,8 @@ Future<void> main() async {
   const List<String> titlesList = [testAnalysisTitle3, testAnalysisTitle1, testAnalysisTitle2];
   const List<String> titlesListSorted = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
 
-  // A keyword
+  // Keywords
   const String kw1 = 'Household';
-  // Another keyword
   const String kw2 = 'Workplace';
 
   const List<String> kwsList = [kw1, kw2];
