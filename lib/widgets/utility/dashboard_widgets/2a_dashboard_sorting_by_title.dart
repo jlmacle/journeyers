@@ -60,7 +60,7 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
       ),
       label: Text
       (
-        "$sortByTitleLabel (${_isAscendingTitle ? 'A-Z' : 'Z-A'})",
+        "$sortByTitleLabel (${_isAscendingTitle ? 'Z-A' : 'A-Z'})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
