@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
@@ -66,6 +67,7 @@ Future<void> main() async {
   const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
   const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
   const String testAnalysisTitle3 = '$testAnalysisTitleRoot (3)';
+  const List<String> titlesList = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
 
   // A keyword
   const String kw1 = 'Household';
@@ -733,8 +735,129 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 2));
           }
         }      
+      );      
+    });
+
+    group('Sorting and filtering: Mobile: \n', ()
+    {
+       // 'Sorting by title \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Sorting by title \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+             await enterNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester, 
+              title: testAnalysisTitle1,
+              kwsList: [],              
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            await enterNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester, 
+              title: testAnalysisTitle2,
+              kwsList: [],              
+              fileNameWithoutExtension: fileName2WithoutExtension
+            );
+
+             await enterNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester, 
+              title: testAnalysisTitle3,
+              kwsList: [],              
+              fileNameWithoutExtension: fileName3WithoutExtension
+            );
+          }
+
+          // ── 2. SORTING BY TITLE ──────────────────────────────────
+          // ────────────────────────────────────────────────────────
+          // Triggering the sort
+          var sortByTitleFinder = find.textContaining(sortByTitleLabel);
+          await tester.tap(sortByTitleFinder);
+          await tester.pumpAndSettle();
+
+          // Searching the titles    
+          var  titlesFinder = find.descendant
+          (
+            of: find.byType(SessionsListItem), 
+            matching: find.descendant
+            (
+              of: find.byType(Wrap), 
+              matching: find.descendant
+              (
+                of: find.byType(GestureDetector),
+                matching: find.byType(Text)
+              )
+            )
+          ); 
+
+          var totalTitles = titlesFinder.evaluate().length;
+          if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+
+          // Verifying the alphabetical order
+          for (var index = 0; index < totalTitles; index++)
+          {
+            expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList[index]);
+          }
+
+          // Re-triggering the sort
+          await tester.tap(sortByTitleFinder);
+          await tester.pump(const Duration(seconds: 2));
+
+          titlesFinder = find.descendant
+          (
+            of: find.byType(SessionsListItem), 
+            matching: find.descendant
+            (
+              of: find.byType(Wrap), 
+              matching: find.descendant
+              (
+                of: find.byType(GestureDetector),
+                matching: find.byType(Text)
+              )
+            )
+          ); 
+
+          // Verifying the alphabetical order 
+          for (var index = 0; index < totalTitles; index++)
+          {
+            expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList.reversed.toList()[index]);
+          }
+        }
       );
-      
     });
   });
 }
