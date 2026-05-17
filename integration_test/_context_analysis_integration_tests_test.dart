@@ -67,7 +67,8 @@ Future<void> main() async {
   const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
   const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
   const String testAnalysisTitle3 = '$testAnalysisTitleRoot (3)';
-  const List<String> titlesList = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
+  const List<String> titlesList = [testAnalysisTitle3, testAnalysisTitle1, testAnalysisTitle2];
+  const List<String> titlesListSorted = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
 
   // A keyword
   const String kw1 = 'Household';
@@ -766,6 +767,7 @@ Future<void> main() async {
               kwsLists: [[], [], []],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
+            await tester.pump(const Duration(seconds: 2));
           
             // ── 2. SORTING BY TITLE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
@@ -773,6 +775,7 @@ Future<void> main() async {
             var sortByTitleFinder = find.textContaining(sortByTitleLabel);
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
 
             // Searching the titles          
             var titlesFinder = find.byWidgetPredicate
@@ -792,12 +795,13 @@ Future<void> main() async {
             // Verifying the alphabetical order
             for (var index = 0; index < totalTitles; index++)
             {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList[index]);
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesListSorted[index]);
             }
 
             // Re-triggering the sort
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
 
             titlesFinder = find.byWidgetPredicate
             (
@@ -813,7 +817,7 @@ Future<void> main() async {
             // Verifying the alphabetical order 
             for (var index = 0; index < totalTitles; index++)
             {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList.reversed.toList()[index]);
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesListSorted.reversed.toList()[index]);
             }
           }          
         }
@@ -861,6 +865,7 @@ Future<void> main() async {
               kwsLists: [[], [], []],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
+            await tester.pump(const Duration(seconds: 2));
           
             // ── 2. SORTING BY DATE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
@@ -868,6 +873,7 @@ Future<void> main() async {
             var sortByDateFinder = find.textContaining(sortByDateLabel);
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
 
             // Searching the dates          
             var datesFinder = find.byWidgetPredicate
@@ -887,12 +893,13 @@ Future<void> main() async {
             // Verifying the alphabetical order
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesList[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesListSorted[index]})");
             }
 
             // Re-triggering the sort
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
 
             datesFinder = find.byWidgetPredicate
             (
@@ -908,7 +915,7 @@ Future<void> main() async {
             // Verifying the alphabetical order 
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesList.reversed.toList()[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesListSorted.reversed.toList()[index]})");
             }
           }
         });    
