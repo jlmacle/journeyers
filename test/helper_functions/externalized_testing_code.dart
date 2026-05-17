@@ -19,7 +19,6 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 final q = CAQuestionsFields();
 
 // ─── EXPANSION TILES ───────────────────────────────────────────────────────────────
-
   // Method used to open the expansion tile with the individual perspective
   Future<void> openIndividualExpansionTile(WidgetTester tester) async
   {
@@ -52,7 +51,7 @@ final q = CAQuestionsFields();
     // await tester.pumpAndSettle();
   }
 
-  // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
+// ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
   // Method used to check that the new process button functions
   Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
   {
@@ -301,8 +300,33 @@ final q = CAQuestionsFields();
     await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
   }
 
-  // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
+  // Method used to add session data
+  // The method assumes all lists have the same number of elements
+  Future<void> addSeveralCAProcessData
+  ({
+    required bool formToFill,
+    required WidgetTester tester,
+    required List<String> titlesList,
+    required List<List<String>> kwsLists,
+    required List<String> fileNamesWithoutExtensionList
+  }) async
+  {
+    int listsLength = titlesList.length;
+    for (var index = 0; index < listsLength; index++)
+    {
+      await enterNewCAProcessData
+      (
+        formToFill: false,
+        tester: tester, 
+        title: titlesList[index],
+        kwsList: kwsLists[index],              
+        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
+      );
+    }
+  }
 
+
+// ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
   // Method used to search a title and keywords on the dashboard
   Future<void> searchTitleAndKeywords({required String title, required List<String> kws}) async
   {
@@ -324,7 +348,7 @@ final q = CAQuestionsFields();
     return sessionListItemFinder;
   }
 
-  // ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
+// ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
 
   // Serialises a segmented-button selection to a slash-separated string.
   String _segmentedButtonToString(Set<String> values) => values.join('/');
