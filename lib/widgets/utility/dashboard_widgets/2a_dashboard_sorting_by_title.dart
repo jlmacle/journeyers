@@ -27,7 +27,8 @@ class DashboardSortingByTitle extends StatefulWidget
 
 class _DashboardSortingByTitleState extends State<DashboardSortingByTitle> 
 {
-  bool _isAscendingTitle = true;   
+  // Random alphabetical order by default
+  bool _isAscendingTitle = false;   
 
   // Method used to sort session data by title 
   Future<void> _sortSessionsByTitle() async
