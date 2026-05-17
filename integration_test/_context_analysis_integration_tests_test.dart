@@ -809,20 +809,17 @@ Future<void> main() async {
           await tester.tap(sortByTitleFinder);
           await tester.pumpAndSettle();
 
-          // Searching the titles    
-          var  titlesFinder = find.descendant
+          // Searching the titles          
+          var titlesFinder = find.byWidgetPredicate
           (
-            of: find.byType(SessionsListItem), 
-            matching: find.descendant
-            (
-              of: find.byType(Wrap), 
-              matching: find.descendant
-              (
-                of: find.byType(GestureDetector),
-                matching: find.byType(Text)
-              )
-            )
-          ); 
+            (widget) 
+            {
+              if (widget.key is ValueKey<String>) {
+                return (widget.key as ValueKey<String>).value.contains('session-title-');
+              }
+              return false;
+            }
+          );          
 
           var totalTitles = titlesFinder.evaluate().length;
           if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
@@ -837,19 +834,16 @@ Future<void> main() async {
           await tester.tap(sortByTitleFinder);
           await tester.pumpAndSettle();
 
-          titlesFinder = find.descendant
+          titlesFinder = find.byWidgetPredicate
           (
-            of: find.byType(SessionsListItem), 
-            matching: find.descendant
-            (
-              of: find.byType(Wrap), 
-              matching: find.descendant
-              (
-                of: find.byType(GestureDetector),
-                matching: find.byType(Text)
-              )
-            )
-          ); 
+            (widget) 
+            {
+              if (widget.key is ValueKey<String>) {
+                return (widget.key as ValueKey<String>).value.contains('session-title-');
+              }
+              return false;
+            }
+          );          
 
           // Verifying the alphabetical order 
           for (var index = 0; index < totalTitles; index++)
