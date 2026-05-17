@@ -835,7 +835,7 @@ Future<void> main() async {
 
           // Re-triggering the sort
           await tester.tap(sortByTitleFinder);
-          await tester.pump(const Duration(seconds: 2));
+          await tester.pumpAndSettle();
 
           titlesFinder = find.descendant
           (
