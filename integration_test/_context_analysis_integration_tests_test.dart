@@ -774,7 +774,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-             await enterNewCAProcessData
+            await enterNewCAProcessData
             (
               formToFill: false,
               tester: tester, 
@@ -792,7 +792,7 @@ Future<void> main() async {
               fileNameWithoutExtension: fileName2WithoutExtension
             );
 
-             await enterNewCAProcessData
+            await enterNewCAProcessData
             (
               formToFill: false,
               tester: tester, 
@@ -800,56 +800,56 @@ Future<void> main() async {
               kwsList: [],              
               fileNameWithoutExtension: fileName3WithoutExtension
             );
-          }
+          
+            // ── 2. SORTING BY TITLE ──────────────────────────────────
+            // ────────────────────────────────────────────────────────
+            // Triggering the sort
+            var sortByTitleFinder = find.textContaining(sortByTitleLabel);
+            await tester.tap(sortByTitleFinder);
+            await tester.pumpAndSettle();
 
-          // ── 2. SORTING BY TITLE ──────────────────────────────────
-          // ────────────────────────────────────────────────────────
-          // Triggering the sort
-          var sortByTitleFinder = find.textContaining(sortByTitleLabel);
-          await tester.tap(sortByTitleFinder);
-          await tester.pumpAndSettle();
-
-          // Searching the titles          
-          var titlesFinder = find.byWidgetPredicate
-          (
-            (widget) 
-            {
-              if (widget.key is ValueKey<String>) {
-                return (widget.key as ValueKey<String>).value.contains('session-title-');
+            // Searching the titles          
+            var titlesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('session-title-');
+                }
+                return false;
               }
-              return false;
-            }
-          );          
+            );          
 
-          var totalTitles = titlesFinder.evaluate().length;
-          if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+            var totalTitles = titlesFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
 
-          // Verifying the alphabetical order
-          for (var index = 0; index < totalTitles; index++)
-          {
-            expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList[index]);
-          }
-
-          // Re-triggering the sort
-          await tester.tap(sortByTitleFinder);
-          await tester.pumpAndSettle();
-
-          titlesFinder = find.byWidgetPredicate
-          (
-            (widget) 
+            // Verifying the alphabetical order
+            for (var index = 0; index < totalTitles; index++)
             {
-              if (widget.key is ValueKey<String>) {
-                return (widget.key as ValueKey<String>).value.contains('session-title-');
-              }
-              return false;
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList[index]);
             }
-          );          
 
-          // Verifying the alphabetical order 
-          for (var index = 0; index < totalTitles; index++)
-          {
-            expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList.reversed.toList()[index]);
-          }
+            // Re-triggering the sort
+            await tester.tap(sortByTitleFinder);
+            await tester.pumpAndSettle();
+
+            titlesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('session-title-');
+                }
+                return false;
+              }
+            );          
+
+            // Verifying the alphabetical order 
+            for (var index = 0; index < totalTitles; index++)
+            {
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesList.reversed.toList()[index]);
+            }
+          }          
         }
       );
     });
