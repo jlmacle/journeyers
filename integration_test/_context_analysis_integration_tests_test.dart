@@ -668,7 +668,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await addSeveralCAProcessData
+            await enterSeveralTimesNewCAProcessData
             (
               formToFill: false,
               tester: tester,
@@ -757,31 +757,13 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterNewCAProcessData
+            await enterSeveralTimesNewCAProcessData
             (
               formToFill: false,
-              tester: tester, 
-              title: testAnalysisTitle1,
-              kwsList: [],              
-              fileNameWithoutExtension: fileName1WithoutExtension
-            );
-
-            await enterNewCAProcessData
-            (
-              formToFill: false,
-              tester: tester, 
-              title: testAnalysisTitle2,
-              kwsList: [],              
-              fileNameWithoutExtension: fileName2WithoutExtension
-            );
-
-            await enterNewCAProcessData
-            (
-              formToFill: false,
-              tester: tester, 
-              title: testAnalysisTitle3,
-              kwsList: [],              
-              fileNameWithoutExtension: fileName3WithoutExtension
+              tester: tester,
+              titlesList: titlesList,
+              kwsLists: [[], [], []],
+              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
           
             // ── 2. SORTING BY TITLE ──────────────────────────────────
