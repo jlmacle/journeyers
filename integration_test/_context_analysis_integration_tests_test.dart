@@ -89,8 +89,9 @@ Future<void> main() async {
     // Creating a temporary folder to store the files to save
     testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
-    // To use the alternative saving/reading file paths
+    // To use the alternative saving/reading file paths or to intercept the way the date is saved
     runningTests = true;
+    dateIndex = 0;
   });
 
   tearDown(() async {
@@ -817,6 +818,100 @@ Future<void> main() async {
           }          
         }
       );
+         
+      // 'Sorting by date \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Sorting by date \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            await enterSeveralTimesNewCAProcessData
+            (
+              formToFill: false,
+              tester: tester,
+              titlesList: titlesList,
+              kwsLists: [[], [], []],
+              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+            );
+          
+            // ── 2. SORTING BY DATE ──────────────────────────────────
+            // ────────────────────────────────────────────────────────
+            // Triggering the sort
+            var sortByDateFinder = find.textContaining(sortByDateLabel);
+            await tester.tap(sortByDateFinder);
+            await tester.pumpAndSettle();
+
+            // Searching the dates          
+            var datesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                }
+                return false;
+              }
+            );          
+
+            var totalDates = datesFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalDates: $totalDates');
+
+            // Verifying the alphabetical order
+            for (var index = 0; index < totalDates; index++)
+            {
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesList[index]})");
+            }
+
+            // Re-triggering the sort
+            await tester.tap(sortByDateFinder);
+            await tester.pumpAndSettle();
+
+            datesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                }
+                return false;
+              }
+            );          
+
+            // Verifying the alphabetical order 
+            for (var index = 0; index < totalDates; index++)
+            {
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesList.reversed.toList()[index]})");
+            }
+          }
+        });    
     });
   });
 }

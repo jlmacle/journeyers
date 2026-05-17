@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'package:path_provider/path_provider.dart';
@@ -78,6 +79,13 @@ class DashboardUtils {
   async {
     if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
     if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
+
+    // Date value interception for testing purposes
+    if (kDebugMode && runningTests)
+    {
+      formattedDate = constDatesList[dateIndex];
+      dateIndex++;
+    }
 
     Map<String, dynamic> sessionData = 
     {
