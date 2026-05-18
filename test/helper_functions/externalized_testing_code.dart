@@ -341,7 +341,7 @@ final q = CAQuestionsFields();
 
   }
 
-  // Method used to find a sessions list item by title
+  // Method used to get the finder of a sessions list item by title
   Future<Finder> getSessionListItemFinderByTitle(WidgetTester tester, String title) async 
   {
     Finder sessionListItemFinder = find.text(title);
@@ -363,6 +363,26 @@ final q = CAQuestionsFields();
     );  
 
     return titlesFinder;
+  }
+
+  // Method used to get the finder of a keyword FilterChip
+  Future<Finder> getKwFilterChip(WidgetTester tester, String kw) async
+  {
+    var filterChipFinder = find.byWidgetPredicate
+    (
+      (widget) 
+      {
+        if (widget is FilterChip) {
+          final label = widget.label;
+          if (label is Text) {
+            return (label.data ?? '').contains(kw);
+          }
+        }
+        return false;
+      }      
+    );  
+
+    return filterChipFinder;
   }
   
 

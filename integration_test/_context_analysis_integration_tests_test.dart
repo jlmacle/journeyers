@@ -68,13 +68,29 @@ Future<void> main() async {
   const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
   const String testAnalysisTitle3 = '$testAnalysisTitleRoot (3)';
   const List<String> titlesList = [testAnalysisTitle3, testAnalysisTitle1, testAnalysisTitle2];
+  const List<String> titlesMaintenance = ["Maintenance topic 1", "Maintenance topic 2", "Maintenance topic 3"];
+  const List<String> titlesCompanionship = ["Companionship and Logistics topic", "Companionship and Studies topic"];
+  const List<String> titlesWorkplace = ["Workplace and Communication topic"];
+  List<String> titlesListKwsSorting = 
+                      [
+                        titlesMaintenance[0], titlesCompanionship[0], titlesWorkplace[0],
+                        titlesCompanionship[1], titlesMaintenance[1], titlesMaintenance[2]
+                      ];
   const List<String> titlesListSorted = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
 
   // Keywords
-  const String kw1 = 'Companionship';
-  const String kw2 = 'Workplace';
-
-  const List<String> kwsList = [kw1, kw2];
+  const String kwCompanionship = 'Companionship';
+  const String kwWorkplace = 'Workplace';
+  const String kwStudies = 'Studies';  
+  const String kwCommunication = 'Communication';
+  const String kwMaintenance = 'Maintenance';
+  const String kwLogistics = 'Logistics';
+  const List<String> kwsList = [kwCompanionship, kwWorkplace];
+  const List<List<String>> kwsListsKwsSorting = 
+                    [
+                      [kwMaintenance], [kwCompanionship, kwLogistics], [kwWorkplace, kwCommunication],
+                      [kwCompanionship, kwStudies], [kwMaintenance], [kwMaintenance],
+                    ];
 
   // File names
   const String fileName1WithoutExtension = 'file1';
@@ -875,7 +891,7 @@ Future<void> main() async {
             // Verifying the alphabetical order
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesListSorted[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted[index]})");
             }
 
             // Re-triggering the sort
@@ -897,10 +913,110 @@ Future<void> main() async {
             // Verifying the alphabetical order 
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constDatesListSorted.reversed.toList()[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted.reversed.toList()[index]})");
             }
           }
-        });    
+        });
+
+      // 'Filtering by keywords \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+          'Filtering by keywords \n'
+          '(assuming an already selected path to the user session data folder)',
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the context analysis page, with the dashboard.
+              'wasSessionDataSaved': true,
+              // Temporary test dir as application folder path
+              'applicationFolderPath': testTmpDir!.path
+            });
+
+            if (Platform.isAndroid || Platform.isIOS)
+            {
+              // Pumping the CAPage
+              //
+              // pumpWidget renders the first frame.
+              // pumpAndSettle drives the event loop until there are no more pending frames,
+              // letting the async getPreferences() call complete 
+              // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+              //
+              // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+              await tester.pumpWidget(buildTestableCAPage());
+              await tester.pumpAndSettle();
+
+              // ── 1. ENTERING NEW CA PROCESS DATA (6 times) ──────────────────────────────────
+              // ───────────────────────────────────────────────────────────────────────────────
+              
+              await enterSeveralTimesNewCAProcessData
+              (
+                formToFill: false,
+                tester: tester,
+                titlesList: titlesListKwsSorting,
+                kwsLists: kwsListsKwsSorting,
+                fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
+              );
+              await tester.pump(const Duration(seconds: 4));
+            
+              // ── 2. FILTERING BY KEYWORDS ────────────────────────────
+              // ────────────────────────────────────────────────────────
+
+              // 1. Filtering by kwMaintenance
+              var kwMaintenanceFinder = await getKwFilterChip(tester, kwMaintenance);
+              await tester.tap(kwMaintenanceFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              var titlesFinder = await getAllSessionsTitles(tester);
+              var totalTitles = titlesFinder.evaluate().length;
+
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwMaintenance: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesMaintenance.reversed.toList()[index]);
+              }
+
+              // 2. Filtering by kwCompanionship
+              var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+              await tester.tap(kwCompanionshipFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              titlesFinder = await getAllSessionsTitles(tester);
+              totalTitles = titlesFinder.evaluate().length;
+
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
+              }
+
+              // 3. Filtering by kwWorkplace
+              var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+              await tester.tap(kwWorkplaceFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              titlesFinder = await getAllSessionsTitles(tester);
+              totalTitles = titlesFinder.evaluate().length;
+
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
+              }
+              
+
+              await tester.pump(const Duration(seconds: 2));
+            }
+          });     
     });
   });
 }
