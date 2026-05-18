@@ -53,6 +53,28 @@ void main()
             expect(find.byType(TextField), findsOne);
           }
           );
+      
+          // 'Clicking on the edit emoji reveals a text field'
+          testWidgets('Clicking on the edit emoji reveals a text field', 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpGPSProblemToSolveDeclaration(tester);
+
+            // Verifying the text field absent
+            expect(find.byType(TextField), findsNothing);
+
+            // Getting the edit emoji
+            var emojiFinder = find.text("✏️");
+
+            // Clicking on the emoji
+            await tester.tap(emojiFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the text field present
+            expect(find.byType(TextField), findsOne);
+          }
+          );      
       });
 
     });
