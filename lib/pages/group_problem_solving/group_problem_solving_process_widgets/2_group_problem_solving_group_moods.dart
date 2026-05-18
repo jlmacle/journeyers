@@ -202,7 +202,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
     required List<Color> identifiersColors})
   {
     return identifiers.asMap().entries
-        .map((entry) => _IdentifierWidget(
+        .map((entry) => IdentifierWidget(
               value: entry.value,
               color: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
               isEditMode: widget.isEditMode,
@@ -252,7 +252,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 }
 
 // Class for the stakeholders' identifiers
-class _IdentifierWidget extends StatelessWidget 
+class IdentifierWidget extends StatelessWidget 
 {
   final String value;
   final Color color;
@@ -264,7 +264,7 @@ class _IdentifierWidget extends StatelessWidget
   final ValueChanged<bool> onSwipe;
   final ValueChanged<bool> onClick;
 
-  const _IdentifierWidget
+  const IdentifierWidget
   ({
     required this.value, 
     required this.color,
@@ -281,51 +281,51 @@ class _IdentifierWidget extends StatelessWidget
   Widget build(BuildContext context) {
     return 
     GestureDetector(
-    onHorizontalDragEnd: (details) {
-      if (details.primaryVelocity! > 0) {
-        onSwipe(true);
-      } else if (details.primaryVelocity! < 0) {
-        onSwipe(false);
-      }
-    },
-    child:    
-      Stack(
-        alignment: Alignment.center,
-        children: [
-          // The Circle
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 12),
-            width: 70, height: 70,
-            decoration: 
-            BoxDecoration
-            (
-              color: Colors.white, shape: BoxShape.circle, 
-              border: Border.all(width: 5, color: color), 
-            ),
-            child: 
-              InkWell(
-                onTap: 
-                    isEditMode ? onEdit 
-                              : isDeleteMode ? onDelete
-                              // Color swapping if neither edit nor delete mode
-                              :  () {onSwipe(true);}, 
-                customBorder: const CircleBorder(), // Keeps the ripple effect circular
-                child: Center(
-                  child: Text(
-                    editionHappened ? value : '✏️$value',
-                    style: const TextStyle(color: Colors.black),
+      onHorizontalDragEnd: (details) {
+        if (details.primaryVelocity! > 0) {
+          onSwipe(true);
+        } else if (details.primaryVelocity! < 0) {
+          onSwipe(false);
+        }
+      },
+      child:    
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            // The Circle
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              width: 70, height: 70,
+              decoration: 
+              BoxDecoration
+              (
+                color: Colors.white, shape: BoxShape.circle, 
+                border: Border.all(width: 5, color: color), 
+              ),
+              child: 
+                InkWell(
+                  onTap: 
+                      isEditMode ? onEdit 
+                                : isDeleteMode ? onDelete
+                                // Color swapping if neither edit nor delete mode
+                                :  () {onSwipe(true);}, 
+                  customBorder: const CircleBorder(), 
+                  child: Center(
+                    child: Text(
+                      editionHappened ? value : '✏️$value',
+                      style: const TextStyle(color: Colors.black),
+                    ),
                   ),
                 ),
               ),
-            ),
-          if (isDeleteMode) ...[
-            Positioned(
-              right: (Platform.isAndroid || Platform.isIOS) ? 0 : 100, top: 0,
-              child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
-            ),
+            if (isDeleteMode) ...[
+              Positioned(
+                right: (Platform.isAndroid || Platform.isIOS) ? 0 : 100, top: 0,
+                child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
+              ),
+            ],
           ],
-        ],
-      )
+        )
     );
   }
 }
