@@ -348,6 +348,24 @@ final q = CAQuestionsFields();
     return sessionListItemFinder;
   }
 
+  // Method used to get the finder of the sessions titles
+  Future<Finder> getAllSessionsTitles(WidgetTester tester) async
+  {
+    var titlesFinder = find.byWidgetPredicate
+    (
+      (widget) 
+      {
+        if (widget.key is ValueKey<String>) {
+          return (widget.key as ValueKey<String>).value.contains('session-title-');
+        }
+        return false;
+      }
+    );  
+
+    return titlesFinder;
+  }
+  
+
 // ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
 
   // Serialises a segmented-button selection to a slash-separated string.
