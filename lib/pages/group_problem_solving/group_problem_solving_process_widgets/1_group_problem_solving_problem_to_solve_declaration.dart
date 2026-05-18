@@ -73,7 +73,6 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
           )
           : 
           GestureDetector(
-            // TODO: to expand to clicking
             onTap: () => setState(() => _isEditing = true),
             child:
             Flex(
