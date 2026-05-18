@@ -71,7 +71,7 @@ Future<void> main() async {
   const List<String> titlesListSorted = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
 
   // Keywords
-  const String kw1 = 'Household';
+  const String kw1 = 'Companionship';
   const String kw2 = 'Workplace';
 
   const List<String> kwsList = [kw1, kw2];
@@ -766,7 +766,7 @@ Future<void> main() async {
               kwsLists: [[], [], []],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
           
             // ── 2. SORTING BY TITLE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
@@ -774,19 +774,10 @@ Future<void> main() async {
             var sortByTitleFinder = find.textContaining(sortByTitleLabel);
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             // Searching the titles          
-            var titlesFinder = find.byWidgetPredicate
-            (
-              (widget) 
-              {
-                if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('session-title-');
-                }
-                return false;
-              }
-            );          
+            var titlesFinder = await getAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
             if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
@@ -800,18 +791,10 @@ Future<void> main() async {
             // Re-triggering the sort
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
-            titlesFinder = find.byWidgetPredicate
-            (
-              (widget) 
-              {
-                if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('session-title-');
-                }
-                return false;
-              }
-            );          
+            // Re-searching the titles  
+            titlesFinder = await getAllSessionsTitles(tester); 
 
             // Verifying the alphabetical order 
             for (var index = 0; index < totalTitles; index++)
@@ -864,7 +847,7 @@ Future<void> main() async {
               kwsLists: [[], [], []],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
           
             // ── 2. SORTING BY DATE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
@@ -872,7 +855,7 @@ Future<void> main() async {
             var sortByDateFinder = find.textContaining(sortByDateLabel);
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             // Searching the dates          
             var datesFinder = find.byWidgetPredicate
@@ -898,7 +881,7 @@ Future<void> main() async {
             // Re-triggering the sort
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             datesFinder = find.byWidgetPredicate
             (
