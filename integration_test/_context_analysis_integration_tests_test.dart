@@ -980,6 +980,9 @@ Future<void> main() async {
               {
                 expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesMaintenance.reversed.toList()[index]);
               }
+              // Un-selecting the keyword
+              await tester.tap(kwMaintenanceFinder);
+              await tester.pumpAndSettle();
 
               // 2. Filtering by kwCompanionship
               var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
@@ -996,6 +999,10 @@ Future<void> main() async {
               {
                 expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
               }
+
+              // Un-selecting the keyword
+              await tester.tap(kwCompanionshipFinder);
+              await tester.pumpAndSettle();
 
               // 3. Filtering by kwWorkplace
               var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
