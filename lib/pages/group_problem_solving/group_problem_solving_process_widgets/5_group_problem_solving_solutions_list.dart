@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/app_themes.dart'; // Ensure this matches your path
+import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_misc_constants.dart'; // Ensure this matches your path
 
 /// {@category Group problem-solving}
 /// A widget used to list the solutions found during a group problem-solving process.
@@ -21,7 +22,7 @@ class GPSSolutionsList extends StatelessWidget {
         if (solutions.isEmpty)
           const Padding(
             padding: EdgeInsets.all(20.0),
-            child: Text("No solutions added yet.", style: TextStyle(fontStyle: FontStyle.italic)),
+            child: Text(solutionsListPlaceholder, style: TextStyle(fontStyle: FontStyle.italic)),
           ),
         ...solutions.map((solution) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
