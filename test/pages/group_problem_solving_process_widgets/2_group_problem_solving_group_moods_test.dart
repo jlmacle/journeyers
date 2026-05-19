@@ -84,5 +84,19 @@ void main()
 
         expect(deleteIconFinder, findsNothing);
       });      
+    
+      // 'The edit emoji is present at addition of the identifier'
+      testWidgets('The edit emoji is present at addition of the identifier', 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpIdentifierWidget(tester);
+
+        // Searching the emoji 
+        var emojiFinder = find.textContaining('✏️');
+
+        expect(emojiFinder, findsOne);
+      });
+    
     });
 }
