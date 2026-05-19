@@ -72,5 +72,14 @@ void main()
         });          
       });
 
+      // 'The delete icon is absent at addition of the identifier'
+      testWidgets('The delete icon is absent at addition of the identifier', 
+      (WidgetTester tester) async 
+      {
+        // Searching the delete icon 
+        var deleteIconFinder = find.byType(Icon);
+
+        expect(deleteIconFinder, findsNothing);
+      });
     });
 }
