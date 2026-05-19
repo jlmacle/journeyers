@@ -16,7 +16,7 @@ class GPSSolutionsList extends StatelessWidget {
     return Column(
       children: [
         const Center(
-          child: Text("List of solutions", style: problemSolvingSolutionsTitle),
+          child: Text(solutionsListTitle, style: problemSolvingSolutionsTitle),
         ),
         const SizedBox(height: 10),
         if (solutions.isEmpty)

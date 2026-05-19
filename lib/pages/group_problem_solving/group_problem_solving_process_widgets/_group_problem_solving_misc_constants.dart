@@ -5,4 +5,5 @@ const checkListTitle = "Checklist";
 const keywordsDeclarationTitle = "Keywords";
 
 // GPSSolutionsList
+const solutionsListTitle = "List of solutions";
 const solutionsListPlaceholder = "No solutions added yet.";
