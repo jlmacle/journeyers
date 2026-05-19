@@ -36,41 +36,40 @@ void main()
       group("Stakeholder identifiers' colors: \n", 
       () 
       { 
-          // 'The default circle color is green'
-          testWidgets('The default circle color is green', 
-          (WidgetTester tester) async 
-          {
-            // Pumping the widget
-            await pumpIdentifierWidget(tester);
+        // 'The default circle color is green'
+        testWidgets('The default circle color is green', 
+        (WidgetTester tester) async 
+        {
+          // Pumping the widget
+          await pumpIdentifierWidget(tester);
 
-            // Verifying the default circle color is green
-            var containerFinder = find.byType(Container);
+          // Verifying the default circle color is green
+          var containerFinder = find.byType(Container);
 
-            Container container = tester.widget<Container>(containerFinder);
-            var boxDecoration = container.decoration as BoxDecoration;
-            var border = boxDecoration.border as Border;
+          Container container = tester.widget<Container>(containerFinder);
+          var boxDecoration = container.decoration as BoxDecoration;
+          var border = boxDecoration.border as Border;
 
-            expect(
-              border.top.color,
-              green,
-            );
-
-            expect(
-              border.bottom.color,
-              green,
-            );
-
-            expect(
-              border.right.color,
-              green,
-            );
-
-            expect(
-              border.left.color,
-              green,
-            );
-          }
+          expect(
+            border.top.color,
+            green,
           );
+
+          expect(
+            border.bottom.color,
+            green,
+          );
+
+          expect(
+            border.right.color,
+            green,
+          );
+
+          expect(
+            border.left.color,
+            green,
+          );
+        });          
       });
 
     });
