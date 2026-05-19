@@ -266,8 +266,9 @@ class IdentifierWidget extends StatelessWidget
 
   const IdentifierWidget
   ({
+    super.key, 
     required this.value, 
-    required this.color,
+    this.color = green,
     required this.isEditMode, 
     required this.isDeleteMode,
     required this.editionHappened,
