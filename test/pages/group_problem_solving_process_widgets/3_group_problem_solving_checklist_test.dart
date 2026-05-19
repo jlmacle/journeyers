@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_misc_constants.dart';
 
 void main() 
 {
@@ -62,7 +63,19 @@ void main()
           orangeShade,
         );
       });          
+      });
+
+      // 'The title is present'
+      testWidgets('The title is present', 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSChecklist(tester);
+
+        // Verifying the title present
+        expect(find.text(checkListTitle), findsOne);        
+      });          
+    
     });
   
-  });
 }
