@@ -38,6 +38,17 @@ void main()
 
         // Verifying the title present
         expect(find.text(solutionsListTitle), findsOne);        
+      });    
+
+      // 'The placeholder is present'
+      testWidgets('The placeholder is present', 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSSolutionsList(tester);
+
+        // Verifying the placeholder present
+        expect(find.text(solutionsListPlaceholder), findsOne);        
       });          
     
     });
