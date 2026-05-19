@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   // TODO: import of previous teams
 
   // Boolean used to suggest editing at start of adding identifiers
-  bool _hasBeenEdited = false;
+  bool hasBeenEdited = false;
   
   // Boolean used to store if a swipe left of right has happened
   bool? wasARightSwipe;
@@ -99,7 +100,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   }
 
   // Function used to remove a stakeholder identifier
-  void _removeIdentifier({int? index}) 
+  void removeIdentifier({int? index}) 
       => setState(() 
                   {
                     if (widget.columnNumber == 1) {widget.identifiersCol1.removeAt(index!);}
@@ -117,7 +118,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   }
 
   // Function used to edit a stakeholder identifier
-  void _editIdentifier({int? index}) {
+  void editIdentifier({int? index}) {
     showDialog(
       context: context,
       builder: (context) {
@@ -130,7 +131,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
             keyboardType: TextInputType.name,
             onSubmitted: (_) 
                         {
-                            if (!_hasBeenEdited) _hasBeenEdited = true;
+                            if (!hasBeenEdited) hasBeenEdited = true;
                             setState(() 
                                       { 
                                         if (widget.columnNumber == 1) {widget.identifiersCol1[index!] = controller.text;}
@@ -142,7 +143,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
           actions: [
             TextButton(
               onPressed: () {
-                if (!_hasBeenEdited) _hasBeenEdited = true;
+                if (!hasBeenEdited) hasBeenEdited = true;
                 setState(() 
                           { 
                             if (widget.columnNumber == 1) {widget.identifiersCol1[index!] = controller.text;}
@@ -165,7 +166,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   }
 
   // Function used to change a stakeholder identifier's color
-  void _changeIdentifierColor({required int index, required Color currentColor}) 
+  void changeIdentifierColor({required int index, required Color currentColor}) 
   { 
     final colors = [greenShade900, orange, red];
     int colorIndex = colors.indexOf(currentColor);
@@ -207,25 +208,25 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
               color: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
               isEditMode: widget.isEditMode,
               isDeleteMode: widget.isDeleteMode,
-              editionHappened: _hasBeenEdited,
-              onDelete: () => _removeIdentifier(index: entry.key),
-              onEdit: () => _editIdentifier(index: entry.key),
+              editionHappened: hasBeenEdited,
+              onDelete: () => removeIdentifier(index: entry.key),
+              onEdit: () => editIdentifier(index: entry.key),
               onSwipe: (bool value)
               {
                 swipeStateUpdate(value);
-                _changeIdentifierColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
+                changeIdentifierColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
               },
               onClick: (bool value)
               {
                 swipeStateUpdate(value);
-                _changeIdentifierColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
+                changeIdentifierColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
               },
             ))
         .toList();
   }
 
   // Method used to decide which list of identifiers to build
-  List<Widget> _whichIdentifiersListToBuild() 
+  List<Widget> whichIdentifiersListToBuild() 
   {
     if (widget.columnNumber == 1)
     {return buildIdentifiersList(identifiers: widget.identifiersCol1, identifiersColors: widget.identifiersColors1);}
@@ -244,7 +245,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
         // shrinkWrap: true, // Allows the list to be as small as its children
         children: 
         [          
-          ..._whichIdentifiersListToBuild()
+          ...whichIdentifiersListToBuild()
         ],
       // ),
     );
