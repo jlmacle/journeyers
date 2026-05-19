@@ -32,8 +32,8 @@ void main()
     group('GPSGroupMoods Tests: \n', 
     () 
     {  
-      // "Stakeholder identifiers' colors: \n"
-      group("Stakeholder identifiers' colors: \n", 
+      // "Stakeholder identifiers' default aspect: \n"
+      group("Stakeholder identifiers' default aspect: \n", 
       () 
       { 
         // 'The default circle color is green'
