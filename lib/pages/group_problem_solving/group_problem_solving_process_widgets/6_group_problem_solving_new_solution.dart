@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_misc_constants.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to add a new solution to the list.
@@ -53,7 +54,7 @@ class _GPSNewSolutionState extends State<GPSNewSolution>
                 child: TextField(
                   controller: _solutionController,
                   decoration: const InputDecoration(
-                    hintText: "Please type a solution.",
+                    hintText: newSolutionTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   onSubmitted: (_) => _submitSolution(),
