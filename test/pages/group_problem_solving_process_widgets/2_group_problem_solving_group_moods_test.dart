@@ -76,10 +76,13 @@ void main()
       testWidgets('The delete icon is absent at addition of the identifier', 
       (WidgetTester tester) async 
       {
+        // Pumping the widget
+        await pumpIdentifierWidget(tester);
+
         // Searching the delete icon 
         var deleteIconFinder = find.byType(Icon);
 
         expect(deleteIconFinder, findsNothing);
-      });
+      });      
     });
 }
