@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_misc_constants.dart';
 
 /// {@category Group problem-solving}
 /// A checklist widget used for the group problem-solving process.
@@ -47,7 +48,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
               child: Icon(Icons.checklist_rounded),
             ),
             Center(
-              child: Text("Checklist", style: problemSolvingChecklistTitle),
+              child: Text(checkListTitle, style: problemSolvingChecklistTitle),
             )
           ],
         ),
