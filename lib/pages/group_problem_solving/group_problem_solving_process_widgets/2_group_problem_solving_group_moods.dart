@@ -215,7 +215,6 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   {
     return identifiers.asMap().entries
         .map((entry) => IdentifierWidget(
-              identifierValue: entry.value,
               color: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
               isEditMode: widget.isEditMode,
               isDeleteMode: widget.isDeleteMode,
@@ -273,7 +272,7 @@ class IdentifierWidget extends StatelessWidget
   const IdentifierWidget
   ({
     super.key, 
-    required this.identifierValue, 
+    this.identifierValue = editEmoji, 
     this.color = green,
     required this.isEditMode, 
     required this.isDeleteMode,

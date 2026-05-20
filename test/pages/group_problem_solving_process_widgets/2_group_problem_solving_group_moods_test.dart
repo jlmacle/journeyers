@@ -15,7 +15,6 @@ void main()
           home: Scaffold(
             body: IdentifierWidget
             (
-                identifierValue: "Name", 
                 isEditMode: false, 
                 isDeleteMode: false,
                 onDelete:() {}, 
