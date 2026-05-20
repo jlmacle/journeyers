@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/dev/type_defs.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.
@@ -38,6 +39,9 @@ class GPSGroupMoods extends StatefulWidget
   /// Mode for deleting a stakeholder identifier.
   final bool isDeleteMode;
 
+  /// A callback function called to refresh the process page.
+  final FutureVoidCallback gpsProcessCallbackFunctionToRefreshThePage;
+
   const GPSGroupMoods
   ({
     super.key,
@@ -49,7 +53,8 @@ class GPSGroupMoods extends StatefulWidget
     required this.identifiersColors1,
     required this.identifiersColors2,
     required this.isEditMode,
-    required this.isDeleteMode
+    required this.isDeleteMode,
+    required this.gpsProcessCallbackFunctionToRefreshThePage
   });
 
   @override
@@ -60,9 +65,6 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 {
   // TODO: import of previous teams
 
-  // Boolean used to suggest editing at start of adding identifiers
-  bool hasBeenEdited = false;
-  
   // Boolean used to store if a swipe left of right has happened
   bool? wasARightSwipe;
   
@@ -130,14 +132,21 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
           (
             controller: controller, 
             keyboardType: TextInputType.name,
-            onSubmitted: (_) 
+            onSubmitted: (_) async
                         {
-                            if (!hasBeenEdited) hasBeenEdited = true;
+                            // Updating the identifier                            
                             setState(() 
                                       { 
-                                        if (widget.columnNumber == 1) {widget.identifiersCol1[index!] = controller.text;}
+                                        if (widget.columnNumber == 1) 
+                                        {
+                                          widget.identifiersCol1[index!] = controller.text;
+                                        }
                                         else {widget.identifiersCol2[index!] = controller.text;}
                                       });
+                            // Refreshing the process page to update the other column
+                            if (!hasBeenEdited) await widget.gpsProcessCallbackFunctionToRefreshThePage();
+                            // Setting hasBeenEdited to true if relevant
+                            if (!hasBeenEdited) hasBeenEdited = true;
                             Navigator.pop(context);
                           },
             ),
