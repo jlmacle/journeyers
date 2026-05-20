@@ -21,6 +21,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
     "Did we agree on what to do if emotions become problematic?": false,
     "Do we agree on the problem that needs to be solved?": false,
     "Did we agree on the order in which to offer the solutions?":false,
+    "Can we find reasons why presenting or receiving solutions in a neutral tone could be important?":false,
     "Do we need to further our context analysis?": false,
   };
 
