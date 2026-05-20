@@ -143,10 +143,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
                                         }
                                         else {widget.identifiersCol2[index!] = controller.text;}
                                       });
-                            // Refreshing the process page to update the other column
-                            if (!hasBeenEdited) await widget.gpsProcessCallbackFunctionToRefreshThePage();
-                            // Setting hasBeenEdited to true if relevant
-                            if (!hasBeenEdited) hasBeenEdited = true;
+
                             Navigator.pop(context);
                           },
             ),
@@ -162,10 +159,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
                             }
                             else {widget.identifiersCol2[index!] = controller.text;}
                           });
-                // Refreshing the process page to update the other column
-                if (!hasBeenEdited) await widget.gpsProcessCallbackFunctionToRefreshThePage();
-                // Setting hasBeenEdited to true if relevant
-                if (!hasBeenEdited) hasBeenEdited = true;
+
                 Navigator.pop(context);
               },
               child: const Text("Save"),
@@ -221,11 +215,10 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   {
     return identifiers.asMap().entries
         .map((entry) => IdentifierWidget(
-              value: entry.value,
+              identifierValue: entry.value,
               color: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
               isEditMode: widget.isEditMode,
               isDeleteMode: widget.isDeleteMode,
-              editionHappened: hasBeenEdited,
               onDelete: () => removeIdentifier(index: entry.key),
               onEdit: () => editIdentifier(index: entry.key),
               onSwipe: (bool value)
@@ -268,11 +261,10 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 // Class for the stakeholders' identifiers
 class IdentifierWidget extends StatelessWidget 
 {
-  final String value;
+  final String identifierValue;
   final Color color;
   final bool isEditMode;
   final bool isDeleteMode;
-  final bool editionHappened;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
   final ValueChanged<bool> onSwipe;
@@ -281,11 +273,10 @@ class IdentifierWidget extends StatelessWidget
   const IdentifierWidget
   ({
     super.key, 
-    required this.value, 
+    required this.identifierValue, 
     this.color = green,
     required this.isEditMode, 
     required this.isDeleteMode,
-    required this.editionHappened,
     required this.onDelete, 
     required this.onEdit,
     required this.onSwipe,
@@ -327,7 +318,8 @@ class IdentifierWidget extends StatelessWidget
                   customBorder: const CircleBorder(), 
                   child: Center(
                     child: Text(
-                      editionHappened ? value : '$editEmoji$value',
+                      // Testing if identifierValue is an int
+                      int.tryParse(identifierValue) != null ? editEmoji :  identifierValue,
                       style: const TextStyle(color: Colors.black),
                     ),
                   ),
