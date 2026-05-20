@@ -1,7 +1,6 @@
 // GPSGroupMoods
 const editEmoji = "✏️";
 const addEmoji = "➕";
-bool hasBeenEdited = false;
 
 // GPSChecklist
 const checkListTitle = "Checklist";
