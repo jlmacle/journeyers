@@ -16,6 +16,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_solution.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
@@ -359,7 +360,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                   children: [
                     _buildHeaderButton
                     (
-                      text: _isModificationMode ? "Done" : "✏️", 
+                      text: _isModificationMode ? "Done" : editEmoji, 
                       color: _isModificationMode ? orangeShade900 : Colors.white, 
                       onPressed:_isModificationMode 
                         ? () => setState(() {                      
