@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 
 /// {@category Group problem-solving}
@@ -237,9 +238,6 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   @override
   Widget build(BuildContext context) {
     return 
-    // Expanded
-    // (
-      // child: 
       ListView
       (
         // shrinkWrap: true, // Allows the list to be as small as its children
@@ -247,7 +245,6 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
         [          
           ...whichIdentifiersListToBuild()
         ],
-      // ),
     );
   }
 }
@@ -314,7 +311,7 @@ class IdentifierWidget extends StatelessWidget
                   customBorder: const CircleBorder(), 
                   child: Center(
                     child: Text(
-                      editionHappened ? value : '✏️$value',
+                      editionHappened ? value : '$editEmoji$value',
                       style: const TextStyle(color: Colors.black),
                     ),
                   ),

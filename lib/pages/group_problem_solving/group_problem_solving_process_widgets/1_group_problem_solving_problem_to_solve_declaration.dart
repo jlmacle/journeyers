@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
@@ -97,7 +98,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 width: 50,
                 child: GestureDetector
                 (
-                  child: const Text("✏️"),
+                  child: const Text(editEmoji),
                   onTap: () => setState(() => _isEditing = true),
                 ),
               ),

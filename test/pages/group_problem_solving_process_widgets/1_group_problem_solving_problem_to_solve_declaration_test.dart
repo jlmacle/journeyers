@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
 void main() 
 {
@@ -65,7 +66,7 @@ void main()
             expect(find.byType(TextField), findsNothing);
 
             // Getting the edit emoji
-            var emojiFinder = find.text("✏️");
+            var emojiFinder = find.text(editEmoji);
 
             // Clicking on the emoji
             await tester.tap(emojiFinder);

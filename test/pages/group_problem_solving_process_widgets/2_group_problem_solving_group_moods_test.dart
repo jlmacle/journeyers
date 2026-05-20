@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
 void main() 
 {
@@ -93,7 +94,7 @@ void main()
         await pumpIdentifierWidget(tester);
 
         // Searching the emoji 
-        var emojiFinder = find.textContaining('✏️');
+        var emojiFinder = find.textContaining(editEmoji);
 
         expect(emojiFinder, findsOne);
       });
