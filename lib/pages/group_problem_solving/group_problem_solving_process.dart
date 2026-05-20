@@ -273,7 +273,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                   [
                     _buildHeaderButton
                     (
-                      text: "➕", color: Colors.white, 
+                      text: addEmoji, color: Colors.white, 
                       onPressed: (){groupMoods1Key.currentState?.addToIdentifiers();},
                       screenWidthInInches: screenWidthInInches
                     ),
