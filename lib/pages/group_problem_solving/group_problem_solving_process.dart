@@ -294,7 +294,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                         groupMoodsKey1: groupMoods1Key, groupMoodsKey2: groupMoods2Key,
                         columnNumber:1, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
                         identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
-                        isEditMode: _isEditMode, isDeleteMode: _isDeleteMode
+                        isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
+                        gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
                       )
                     )
                   ],
@@ -387,7 +388,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                         groupMoodsKey1: groupMoods1Key,groupMoodsKey2: groupMoods2Key,
                         columnNumber: 2, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
                         identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
-                        isEditMode: _isEditMode, isDeleteMode: _isDeleteMode
+                        isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
+                        gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
                       )
                     )
                   ],
