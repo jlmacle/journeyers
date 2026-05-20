@@ -152,13 +152,20 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
             ),
           actions: [
             TextButton(
-              onPressed: () {
-                if (!hasBeenEdited) hasBeenEdited = true;
+              onPressed: () async {
+                // Updating the identifier                            
                 setState(() 
                           { 
-                            if (widget.columnNumber == 1) {widget.identifiersCol1[index!] = controller.text;}
+                            if (widget.columnNumber == 1) 
+                            {
+                              widget.identifiersCol1[index!] = controller.text;
+                            }
                             else {widget.identifiersCol2[index!] = controller.text;}
                           });
+                // Refreshing the process page to update the other column
+                if (!hasBeenEdited) await widget.gpsProcessCallbackFunctionToRefreshThePage();
+                // Setting hasBeenEdited to true if relevant
+                if (!hasBeenEdited) hasBeenEdited = true;
                 Navigator.pop(context);
               },
               child: const Text("Save"),
