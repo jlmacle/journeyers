@@ -6,6 +6,8 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
+import '../../helper_functions/externalized_testing_code.dart';
+
 void main() 
 {
   Future<void> pumpIdentifierWidget(WidgetTester tester) async
@@ -42,32 +44,8 @@ void main()
           // Pumping the widget
           await pumpIdentifierWidget(tester);
 
-          // Verifying the default circle color is green
-          var containerFinder = find.byType(Container);
-
-          Container container = tester.widget<Container>(containerFinder);
-          var boxDecoration = container.decoration as BoxDecoration;
-          var border = boxDecoration.border as Border;
-
-          expect(
-            border.top.color,
-            green,
-          );
-
-          expect(
-            border.bottom.color,
-            green,
-          );
-
-          expect(
-            border.right.color,
-            green,
-          );
-
-          expect(
-            border.left.color,
-            green,
-          );
+          // Verifying the color 
+          await testIdentifierColor(tester, green);
         });          
       });
 
