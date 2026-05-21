@@ -14,3 +14,6 @@ const solutionsListPlaceholder = "No solutions added yet.";
 
 // GPSNewSolution
 const newSolutionTextFieldHint = "Please type a solution.";
+
+// GPSProcess
+const editIdentifierLabel = "Edit Value";
