@@ -375,7 +375,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     if (_isModificationMode)
                       _buildHeaderButton
                       (
-                        text: "Clear\nAll", color:  const Color(0xFFB71C1C),
+                        text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
                         onPressed: () {groupMoods1Key.currentState?.clearAllIdentifiers();},
                         screenWidthInInches: screenWidthInInches
                       ),
