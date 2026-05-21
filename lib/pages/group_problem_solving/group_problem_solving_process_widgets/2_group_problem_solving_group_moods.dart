@@ -134,7 +134,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
       builder: (context) {
         final TextEditingController controller = .new();
         return AlertDialog(
-          title: const Text("Edit Value"),
+          title: const Text(editIdentifierLabel),
           content: TextField
           (
             controller: controller, 
