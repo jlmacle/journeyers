@@ -111,5 +111,52 @@ void main()
         );
       });    
     });
+
+      // 'Stakeholder identifiers can be deleted: single deletion'
+      testWidgets('Stakeholder identifiers can be deleted: single deletion', 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSProcess(tester);
+
+        //  Adding an identifier
+        var identifierWidgetFinder = await addIdentifier(tester);     
+
+        // Entering edit mode
+        await enterEditMode(tester);
+
+        // Searching single deletion mode
+        var singleDeletionFinder = find.descendant
+                        (
+                          of: find.byType(ElevatedButton),
+                          matching: find.text(singleDeletionLabel)
+                        );
+        // Tapping single deletion mode
+        await tester.tap(singleDeletionFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        // Searching the delete icon on the identifier
+        var deleteFinder = find.descendant
+        (
+          of: identifierWidgetFinder, 
+          matching: find.byType(Icon)
+        );
+
+        // Tapping the delete icon
+        await tester.tap(deleteFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        // Verifying the identifier absent
+        expect
+        (
+          find.byType(IdentifierWidget), findsNothing
+        );
+
+      });          
+   
   });
 }
