@@ -17,3 +17,4 @@ const newSolutionTextFieldHint = "Please type a solution.";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";
+const singleDeletionLabel = "Clear\nOne";
