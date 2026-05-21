@@ -158,5 +158,39 @@ void main()
 
       });          
    
+      // 'Stakeholder identifiers can be deleted: bulk deletion'
+      testWidgets('Stakeholder identifiers can be deleted: bulk deletion', 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSProcess(tester);
+
+        //  Adding two identifiers
+        await addIdentifier(tester); 
+        await addIdentifier(tester);     
+
+        // Entering edit mode
+        await enterEditMode(tester);
+
+        // Searching bulk deletion mode
+        var bulkDeletionFinder = find.descendant
+                        (
+                          of: find.byType(ElevatedButton),
+                          matching: find.text(bulkDeletionLabel)
+                        );
+        // Tapping bulk deletion mode
+        await tester.tap(bulkDeletionFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));   
+
+        // Verifying the identifiers absent
+        expect
+        (
+          find.byType(IdentifierWidget), findsNothing
+        );
+
+      });          
+   
   });
 }
