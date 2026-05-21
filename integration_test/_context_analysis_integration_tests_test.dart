@@ -15,7 +15,6 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
-
 import '../test/helper_functions/externalized_testing_code.dart';
 
 // Used define a folder value for getApplicationSupportPath (PathProvider) 

@@ -8,6 +8,8 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
+import '../../helper_functions/externalized_testing_code.dart';
+
 void main() 
 {
   Future<void> pumpGPSProcess(WidgetTester tester) async
@@ -65,34 +67,11 @@ void main()
         // Pumping the widget
         await pumpGPSProcess(tester);
 
-        // Finding the add emoji    
-        var emojiFinder = find.text(addEmoji);
-
         // Adding an identifier
-        // Tapping to add
-        await tester.tap(emojiFinder);
-        // pumpAndSettle timed out
-        // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
-        // Verifying the identifier present
-        var identifierWidgetFinder = find.byType(IdentifierWidget);
-        expect(identifierWidgetFinder, findsOne);
+        var identifierWidgetFinder = await addIdentifier(tester);
 
-        // Searching the edit button
-        var editButtonFinder = find.descendant
-                              (
-                                of: find.byType(ElevatedButton),
-                                matching: find.text(editEmoji)
-                              );
-        
-        var totalButton = editButtonFinder.evaluate().length;
-        if (testingDebug) pu.printd('Testing Debug: totalButton: $totalButton');
-
-        // Tapping the edit button
-        await tester.tap(editButtonFinder);
-        // pumpAndSettle timed out
-        // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        // Entering edit mode
+        await enterEditMode(tester);
         
         // Tapping the identifier for edition
         await tester.tap(identifierWidgetFinder);
@@ -130,8 +109,7 @@ void main()
           ),
           findsOne
         );
-      });          
-    
+      });    
     });
   });
 }
