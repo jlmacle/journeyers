@@ -334,7 +334,15 @@ final q = CAQuestionsFields();
 Future<void> testIdentifierColor(WidgetTester tester, Color color) async
 {
   // Verifying the default circle color
-  var containerFinder = find.byType(Container);
+
+  var containerFinder = find.descendant
+  (
+    of: find.byType(IdentifierWidget), 
+    matching: find.byType(Container)
+  );
+
+  var totalContainers = containerFinder.evaluate().length;
+  if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
 
   Container container = tester.widget<Container>(containerFinder);
   var boxDecoration = container.decoration as BoxDecoration;
