@@ -243,22 +243,6 @@ final q = CAQuestionsFields();
     }
   }
 
-  // Method used to enter a file name and to submit the CA process data on mobile device
-  // (Assuming an already selected path to the user session data folder)
-  Future<void> enterFileNameAndSubmitCADataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
-  {
-    Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
-
-    // Path to folder already declared 
-    // Scrolling to make the text field visible for small screens
-    await tester.ensureVisible(fileNameWidgetFinder);
-
-    // Entering a file name
-    await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();  
-  }
-  
   // Method used to enter new CA process data
   // 7 values are necessary in checkboxValues
   // 4 values are necessary in segmentedButtonValues
@@ -297,7 +281,7 @@ final q = CAQuestionsFields();
 
     // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
     // Entering the file name and submitting data
-    await enterFileNameAndSubmitCADataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
+    await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
   }
 
   // Method used to add session data
@@ -325,6 +309,23 @@ final q = CAQuestionsFields();
     }
   }
 
+// ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
+
+// Method used to enter a file name and to submit the CA process data on mobile device
+// (Assuming an already selected path to the user session data folder)
+Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
+{
+  Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+
+  // Path to folder already declared 
+  // Scrolling to make the text field visible for small screens
+  await tester.ensureVisible(fileNameWidgetFinder);
+
+  // Entering a file name
+  await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();  
+}  
 
 // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
   // Method used to search a title and keywords on the dashboard
