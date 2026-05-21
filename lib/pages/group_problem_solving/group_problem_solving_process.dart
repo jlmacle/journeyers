@@ -280,7 +280,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     if (_isModificationMode)
                       _buildHeaderButton
                       (
-                        text:  _isDeleteMode ? "Edit" : "Clear\nOne",
+                        text:  _isDeleteMode ? "Edit" : singleDeletionLabel,
                         color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
                         onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
                         screenWidthInInches: screenWidthInInches
