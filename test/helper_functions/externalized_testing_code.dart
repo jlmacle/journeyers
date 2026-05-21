@@ -10,6 +10,8 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
@@ -308,6 +310,46 @@ final q = CAQuestionsFields();
       );
     }
   }
+
+// ─── GPS PROCESS ───────────────────────────────────────────────────────────────
+
+// Method used to add an identifier
+ Future<Finder> addIdentifier(WidgetTester tester) async
+ {
+  // Finding the add emoji    
+  var emojiFinder = find.text(addEmoji);
+  // Tapping to add an identifier
+  await tester.tap(emojiFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
+  // Verifying the identifier present
+  var identifierWidgetFinder = find.byType(IdentifierWidget);
+  expect(identifierWidgetFinder, findsOne);
+
+  return identifierWidgetFinder;
+
+ }
+
+// Method used to enter edit mode
+Future<void> enterEditMode(WidgetTester tester) async
+{
+  // Searching the edit button
+  var editButtonFinder = find.descendant
+                        (
+                          of: find.byType(ElevatedButton),
+                          matching: find.text(editEmoji)
+                        );
+  
+  var totalButton = editButtonFinder.evaluate().length;
+  if (testingDebug) pu.printd('Testing Debug: totalButton: $totalButton');
+
+  // Tapping the edit button
+  await tester.tap(editButtonFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
+}
 
 // ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
 
