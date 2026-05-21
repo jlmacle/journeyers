@@ -106,8 +106,15 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   void removeIdentifier({int? index}) 
       => setState(() 
                   {
-                    if (widget.columnNumber == 1) {widget.identifiersCol1.removeAt(index!);}
-                    else {widget.identifiersCol2.removeAt(index!);}
+                    if (widget.columnNumber == 1) 
+                    {
+                      widget.identifiersCol1.removeAt(index!);
+                      widget.identifiersColors1.removeAt(index);
+                    }
+                    else {
+                      widget.identifiersCol2.removeAt(index!);
+                      widget.identifiersColors2.removeAt(index);
+                    }
                   });
 
   // Function used to delete all stakeholder identifiers
@@ -215,6 +222,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   {
     return identifiers.asMap().entries
         .map((entry) => IdentifierWidget(
+              identifierValue: entry.value,
               color: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
               isEditMode: widget.isEditMode,
               isDeleteMode: widget.isDeleteMode,
