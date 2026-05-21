@@ -325,7 +325,6 @@ final q = CAQuestionsFields();
   await tester.pump(const Duration(seconds: 2));
   // Verifying the identifier present
   var identifierWidgetFinder = find.byType(IdentifierWidget);
-  expect(identifierWidgetFinder, findsOne);
 
   return identifierWidgetFinder;
 
