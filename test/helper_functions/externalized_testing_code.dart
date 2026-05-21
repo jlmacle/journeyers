@@ -330,6 +330,37 @@ final q = CAQuestionsFields();
 
  }
 
+// Method used to test the color of an identifier
+Future<void> testIdentifierColor(WidgetTester tester, Color color) async
+{
+  // Verifying the default circle color
+  var containerFinder = find.byType(Container);
+
+  Container container = tester.widget<Container>(containerFinder);
+  var boxDecoration = container.decoration as BoxDecoration;
+  var border = boxDecoration.border as Border;
+
+  expect(
+    border.top.color,
+    color,
+  );
+
+  expect(
+    border.bottom.color,
+    color,
+  );
+
+  expect(
+    border.right.color,
+    color,
+  );
+
+  expect(
+    border.left.color,
+    color,
+  );
+}
+
 // Method used to enter edit mode
 Future<void> enterEditMode(WidgetTester tester) async
 {
