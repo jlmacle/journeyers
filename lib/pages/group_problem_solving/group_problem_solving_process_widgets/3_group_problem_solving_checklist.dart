@@ -12,21 +12,10 @@ class GPSChecklist extends StatefulWidget {
   State<GPSChecklist> createState() => _GPSChecklistState();
 }
 
-class _GPSChecklistState extends State<GPSChecklist> {
-  final Map<String, bool> _checklistItems = {
-    "Can we get feedback about people’s emotions?": false,
-    "Is our context analysis done?": false,
-    "Is the group open to using the app for group problem-solving?": false,    
-    "Is the group emotionally ready to problem-solve?": false,    
-    "Did we agree on what to do if emotions become problematic?": false,
-    "Do we agree on the problem that needs to be solved?": false,
-    "Did we agree on the order in which to offer the ideas?":false,
-    "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?":false,
-    "Do we need to further our context analysis?": false,
-  };
+class _GPSChecklistState extends State<GPSChecklist> {  
 
   // Helper method to check if all items are completed
-  bool get _isAllChecked => _checklistItems.values.every((element) => element == true);
+  bool get _isAllChecked => checklistItems.values.every((element) => element == true);
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +84,8 @@ class _GPSChecklistState extends State<GPSChecklist> {
             child: StatefulBuilder(
               builder: (BuildContext context, StateSetter setLocalState) {
                 return ListView(
-                  children: _checklistItems.keys.map((String key) {
-                    bool isChecked = _checklistItems[key] ?? false;
+                  children: checklistItems.keys.map((String key) {
+                    bool isChecked = checklistItems[key] ?? false;
 
                     return CheckboxListTile(
                       title: Text(key),
@@ -105,7 +94,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
                       tileColor: isChecked ? const Color(0xFFE8F5E9) : null,
                       onChanged: (bool? value) {
                         setLocalState(() {
-                          _checklistItems[key] = value ?? false;
+                          checklistItems[key] = value ?? false;
                         });
                         // Triggers a rebuild of the main widget to update the border color
                         setState(() {}); 
