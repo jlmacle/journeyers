@@ -40,7 +40,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 autofocus: true,
                 decoration: InputDecoration
                 (
-                  hintText: "Enter title or select below",
+                  hintText: gpstitleTextFieldHint,
                   suffixIcon: IconButton
                   (
                     icon: const Icon(Icons.check, color: greenShade900),
@@ -87,7 +87,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               Expanded(
                 child: Center(
                   child: Text(
-                  (widget.problemTitleController.text.trim() == "") ? "Problem To Solve": widget.problemTitleController.text.trim(), 
+                  (widget.problemTitleController.text.trim() == "") ? gpsTitlePlaceholder: widget.problemTitleController.text.trim(), 
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 ),

@@ -44,7 +44,7 @@ void main()
             expect(find.byType(TextField), findsNothing);
 
             // Getting the default title
-            var titleFinder = find.text("Problem To Solve");
+            var titleFinder = find.text(gpsTitlePlaceholder);
 
             // Clicking on the default title
             await tester.tap(titleFinder);
