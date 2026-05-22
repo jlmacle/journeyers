@@ -7,6 +7,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -298,6 +299,50 @@ void main()
       // Verifying the rectangle color is transparent
       await testChecklistTitleBorderColor(tester, Colors.transparent);
     });
+  });
+
+  // 'List of Solutions Tests: \n'
+  group('List of Solutions Tests: \n', 
+  () 
+  { 
+    // '50 solutions added are found in the list of solutions'
+    testWidgets('50 solutions added are found in the list of solutions', 
+    (WidgetTester tester) async 
+    {
+      var someText = "someText";
+
+      // Pumping the widget
+      await pumpGPSProcess(tester);
+
+      // Searching the text field used to add solutions
+      var newSolutionTextFieldFinder = find.ancestor
+      (
+        of: find.text(newSolutionTextFieldHint), 
+        matching: find.byType(TextField)
+      );
+
+      for (var i = 0; i < 50; i++)
+      {
+        // Adding some text
+        await tester.enterText(newSolutionTextFieldFinder,"$someText$i");
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 1));        
+
+        // Verifying the text present
+        var textFinder = find.descendant
+        (
+          of: find.byType(GPSSolutionsList), 
+          matching: find.text("$someText$i")
+        );
+        expect(textFinder.evaluate().length, 1);
+      }
+
+      // Verifying the placeholder text absent
+      expect(find.text(solutionsListPlaceholder), findsNothing);
+    });
+
   });
 
 }
