@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
@@ -191,6 +192,44 @@ void main()
         );
 
       });          
+   
+      // "Stakeholder identifiers' colors can be changed from green, to orange, to red, to green by tapping"
+      testWidgets("Stakeholder identifiers' colors can be changed from green, to orange, to red, to green by tapping", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSProcess(tester);
+
+        //  Adding an identifier
+        var identifierFinder = await addIdentifier(tester); 
+   
+        // Tapping the identifier
+        await tester.tap(identifierFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2)); 
+
+        // Verifying the color
+        await testIdentifierColor(tester, orange);
+
+        // Tapping the identifier
+        await tester.tap(identifierFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2)); 
+
+        // Verifying the color
+        await testIdentifierColor(tester, red);
+
+        // Tapping the identifier
+        await tester.tap(identifierFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2)); 
+
+        // Verifying the color
+        await testIdentifierColor(tester, greenShade900);
+      });         
    
   });
 }
