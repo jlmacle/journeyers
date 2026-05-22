@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:journeyers/app_themes.dart';
 
 // GPSGroupMoods
@@ -19,6 +21,7 @@ Map<String, bool> checklistItems = {
     "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?":false,
     "Do we need to further our context analysis?": false,
   };
+const checklistItemCheckedColor = Colors.green;
 
 // GPSKeywordsDeclaration
 const keywordsDeclarationTitle = "Keywords";
