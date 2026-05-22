@@ -8,7 +8,7 @@ const identifierColors = [greenShade900, orange, red];
 // GPSChecklist
 const checkListTitle = "Checklist";
 const rectangleColor = orangeShade900;
-const Map<String, bool> checklistItems = {
+Map<String, bool> checklistItems = {
     "Can we get feedback about people’s emotions?": false,
     "Is our context analysis done?": false,
     "Is the group open to using the app for group problem-solving?": false,    
