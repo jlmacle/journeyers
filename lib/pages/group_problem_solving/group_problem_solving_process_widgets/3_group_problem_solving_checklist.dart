@@ -36,7 +36,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
         decoration: BoxDecoration(
           // Logic: If all checked, color is white; otherwise, orangeShade900
           border: Border.all(
-            color: _isAllChecked ? Colors.white : orangeShade900, 
+            color: _isAllChecked ? Colors.transparent : orangeShade900, 
             width: 5.0,
           ),
         ),
