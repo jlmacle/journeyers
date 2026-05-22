@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
@@ -35,6 +36,22 @@ void main()
       const MaterialApp(
         home: Scaffold(
           body: GPSChecklist(),
+        ),
+      ),
+    );
+  }
+
+  Future<void> pumpGPSProblemToSolveDeclaration(WidgetTester tester) async
+  {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: GPSProblemToSolveDeclaration
+          (
+            onSessionSelected:(_) {},
+            previousSessions: const [],
+            problemTitleController: TextEditingController(),
+          ),
         ),
       ),
     );
@@ -244,6 +261,47 @@ void main()
         await testIdentifierColor(tester, greenShade900);
       });         
    
+  });
+
+  // 'Session Title Tests: \n'
+  group('Session Title Tests: \n', 
+  () 
+  {  
+    // 'A title can be added by clicking on the placeholder title'
+    testWidgets('A title can be added by clicking on the placeholder title', 
+    (WidgetTester tester) async 
+    {
+      var aTitle = "aTitle";
+
+      // Pumping the widget
+      await pumpGPSProblemToSolveDeclaration(tester);
+
+      // Searching the placeholder title
+      var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+
+      // Tapping
+      await tester.tap(placeholderTitleFinder);
+      await tester.pumpAndSettle();
+
+      // Searching the text field
+      var textFieldFinder = find.ancestor
+      (
+        of: find.text(gpstitleTextFieldHint), 
+        matching: find.byType(TextField)
+      );
+
+      // Entering a title
+      await tester.enterText(textFieldFinder, aTitle);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Verifying the placeholder title absent
+      expect(find.text(gpsTitlePlaceholder), findsNothing);
+
+      // Verifying the title present
+      expect(find.text(aTitle), findsOne);
+    }
+    );
   });
 
   // 'Checklist Tests: \n'
