@@ -75,6 +75,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
+                tooltip: closeChecklistTooltipLabel,
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
               ),
