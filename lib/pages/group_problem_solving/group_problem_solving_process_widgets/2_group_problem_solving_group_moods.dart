@@ -186,8 +186,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   // Function used to change a stakeholder identifier's color
   void changeIdentifierColor({required int index, required Color currentColor}) 
   { 
-    final colors = [greenShade900, orange, red];
-    int colorIndex = colors.indexOf(currentColor);
+    int colorIndex = identifierColors.indexOf(currentColor);
     Color? newColor;
 
     // Finding the right color
@@ -196,14 +195,14 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
       // Going up in indexes
         // if index out of range
       if ((colorIndex + 1) == 3) {newColor = greenShade900;}
-      else {newColor = colors[colorIndex + 1];}      
+      else {newColor = identifierColors[colorIndex + 1];}      
     }
     else
       // Left swipe
     {
       // if index out of range
       if (colorIndex == 0) {newColor = red;}
-      else {newColor = colors[colorIndex - 1];}
+      else {newColor = identifierColors[colorIndex - 1];}
     }
 
     // Updating the lists of colors

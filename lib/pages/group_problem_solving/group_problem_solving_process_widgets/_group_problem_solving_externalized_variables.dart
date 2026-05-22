@@ -1,6 +1,9 @@
+import 'package:journeyers/app_themes.dart';
+
 // GPSGroupMoods
 const editEmoji = "✏️";
 const addEmoji = "➕";
+final identifierColors = [greenShade900, orange, red];
 
 // GPSChecklist
 const checkListTitle = "Checklist";
