@@ -34,3 +34,18 @@ https://developer.apple.com/documentation/foundation/nsurl/bookmarkdata(options:
 that can later be resolved into a URL object for a file
 even if the user moves or renames it
 (if the volume format on which the file resides supports doing so)."
+
+------------------------------------------------
+A potential priority for the companionship: to maintain a household organization favoring companionship 
+
+A potential priority for the workplace appreciability: to maintain a household organization favoring workplace appreciability 
+
+
+Some themes: 
+- communication, attitude, decision-making, planning 
+- maintenance, logistics 
+- companionship, workplace appreciability, legacy
+
+
+Prevention/remediation:
+We might have an issue with/We surely will have an issue with/We have an issue with
