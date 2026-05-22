@@ -126,6 +126,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
+                tooltip: closeKeywordsDeclarationTooltipLabel,
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
               ),

@@ -8,6 +8,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -400,6 +401,79 @@ void main()
       await testChecklistTitleBorderColor(tester, Colors.transparent);
     });
   });
+
+  // 'List of Keywords Tests: \n'
+  group('List of Keywords Tests: \n', 
+  () 
+  { 
+    // 'A keyword can be added'
+    testWidgets('A keyword can be added', 
+    (WidgetTester tester) async 
+    {
+      var aKw = "kw";
+
+      // Pumping the widget
+      await pumpGPSProcess(tester);
+
+      // Searching the keywords declaration title
+      var keywordsDeclarationTitleFinder = find.descendant
+                                    (
+                                      of: find.byType(GPSKeywordsDeclaration), 
+                                      matching: find.text(keywordsDeclarationTitle)
+                                    );
+
+      // Tapping on it
+      await tester.tap(keywordsDeclarationTitleFinder);
+      // pumpAndSettle timed out
+      // await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1)); 
+
+      // Verifying the keyword absent
+      expect(find.text(aKw), findsNothing);
+
+      // Searching the text field
+      var textfieldFinder = find.descendant
+                            (
+                              of: find.byType(StatefulBuilder), 
+                              matching: find.byType(TextField)
+                            );
+      
+      // Entering the keyword
+      await tester.enterText(textfieldFinder, aKw);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      // pumpAndSettle timed out
+      // await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1)); 
+
+      // Verifying the keyword present
+      expect(find.text(aKw), findsOne);
+
+      // Searching the tooltip to close the overlay
+      var closingIcon = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+
+      // Closing the overlay
+      await tester.tap(closingIcon);
+      // pumpAndSettle timed out
+      // await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 2)); 
+
+      // Verifying the overlay absent
+      expect
+      (
+        find.descendant
+        (
+          of: find.byType(GPSKeywordsDeclaration), 
+          matching: find.byType(StatefulBuilder)
+        )        , 
+        findsNothing
+      );
+
+      // Verifying the GPS process present
+      expect(find.byType(GPSProcess), findsOne);
+
+    });
+  }
+  );
 
   // 'List of Solutions Tests: \n'
   group('List of Solutions Tests: \n', 
