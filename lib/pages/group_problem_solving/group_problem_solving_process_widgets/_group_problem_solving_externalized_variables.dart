@@ -8,6 +8,17 @@ const identifierColors = [greenShade900, orange, red];
 // GPSChecklist
 const checkListTitle = "Checklist";
 const rectangleColor = orangeShade900;
+const Map<String, bool> checklistItems = {
+    "Can we get feedback about people’s emotions?": false,
+    "Is our context analysis done?": false,
+    "Is the group open to using the app for group problem-solving?": false,    
+    "Is the group emotionally ready to problem-solve?": false,    
+    "Did we agree on what to do if emotions become problematic?": false,
+    "Do we agree on the problem that needs to be solved?": false,
+    "Did we agree on the order in which to offer the ideas?":false,
+    "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?":false,
+    "Do we need to further our context analysis?": false,
+  };
 
 // GPSKeywordsDeclaration
 const keywordsDeclarationTitle = "Keywords";
