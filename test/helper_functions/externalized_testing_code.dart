@@ -11,6 +11,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
@@ -333,8 +334,7 @@ final q = CAQuestionsFields();
 // Method used to test the color of an identifier
 Future<void> testIdentifierColor(WidgetTester tester, Color color) async
 {
-  // Verifying the default circle color
-
+  // Searching the container
   var containerFinder = find.descendant
   (
     of: find.byType(IdentifierWidget), 
@@ -348,6 +348,7 @@ Future<void> testIdentifierColor(WidgetTester tester, Color color) async
   var boxDecoration = container.decoration as BoxDecoration;
   var border = boxDecoration.border as Border;
 
+  // Verifying the default circle color
   expect(
     border.top.color,
     color,
@@ -387,6 +388,45 @@ Future<void> enterEditMode(WidgetTester tester) async
   // pumpAndSettle timed out
   // await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 2));
+}
+
+// Method used to test the color of the checklist title border
+Future<void> testChecklistTitleBorderColor(WidgetTester tester, Color color) async
+{
+  // Searching the container
+  var containerFinder = find.descendant
+  (
+    of: find.byType(GPSChecklist), 
+    matching: find.byType(Container)
+  );
+
+  var totalContainers = containerFinder.evaluate().length;
+  if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
+
+  Container container = tester.widget<Container>(containerFinder);
+  var boxDecoration = container.decoration as BoxDecoration;
+  var border = boxDecoration.border as Border;
+
+  // Verifying the color
+  expect(
+    border.top.color,
+    color,
+  );
+
+  expect(
+    border.bottom.color,
+    color,
+  );
+
+  expect(
+    border.right.color,
+    color,
+  );
+
+  expect(
+    border.left.color,
+    color,
+  );
 }
 
 // ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
