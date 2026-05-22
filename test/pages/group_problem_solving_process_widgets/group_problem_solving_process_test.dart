@@ -302,6 +302,48 @@ void main()
       expect(find.text(aTitle), findsOne);
     }
     );
+  
+    // 'A title can be added by clicking on the edit emoji'
+    testWidgets('A title can be added by clicking on the edit emoji', 
+    (WidgetTester tester) async 
+    {
+      var aTitle = "aTitle";
+
+      // Pumping the widget
+      await pumpGPSProblemToSolveDeclaration(tester);
+
+      // Searching the edit emoji
+      var editEmojiFinder = find.descendant
+      (
+        of: find.byType(GPSProblemToSolveDeclaration),
+        matching: find.text(editEmoji)
+      );
+
+      // Tapping
+      await tester.tap(editEmojiFinder);
+      await tester.pumpAndSettle();
+
+      // Searching the text field
+      var textFieldFinder = find.ancestor
+      (
+        of: find.text(gpstitleTextFieldHint), 
+        matching: find.byType(TextField)
+      );
+
+      // Entering a title
+      await tester.enterText(textFieldFinder, aTitle);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Verifying the placeholder title absent
+      expect(find.text(gpsTitlePlaceholder), findsNothing);
+
+      // Verifying the title present
+      expect(find.text(aTitle), findsOne);
+    }
+    );
+  
+  
   });
 
   // 'Checklist Tests: \n'
