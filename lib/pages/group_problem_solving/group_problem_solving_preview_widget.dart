@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -26,7 +27,7 @@ class _GPSPreviewWidgetState
     extends State<GPSPreviewWidget> {
 
   bool _isLoading = true;
-  String _title = "";
+  String _sessionTitle = "";
   String _dateString = "";
   List<String> _solutions = [];
 
@@ -61,7 +62,7 @@ class _GPSPreviewWidgetState
       }
 
       if (lines.length >= 2) {
-        _title = lines[1];
+        _sessionTitle = lines[1];
         // Extract date from the second line: "Date: MMMM dd, yyyy h:mm a"
         _dateString = lines[2].replaceFirst("Date: ", "");
         
@@ -101,13 +102,14 @@ class _GPSPreviewWidgetState
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Solutions for $_title\n$_dateString",
+            "$gpsPreviewTitlePrefix$_sessionTitle\n$_dateString",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),
         const Divider(),
         ..._solutions.map((solution) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              // Rows with the solutions texts
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
