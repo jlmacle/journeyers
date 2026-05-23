@@ -17,7 +17,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
-// Used define a folder value for getApplicationSupportPath (PathProvider) 
+// Used to define a folder value for getApplicationSupportPath (PathProvider) 
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
   PathProviderPlatformRedirectForTesting(this._path);
 
