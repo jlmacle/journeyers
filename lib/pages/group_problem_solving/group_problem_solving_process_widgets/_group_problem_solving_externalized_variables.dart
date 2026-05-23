@@ -43,6 +43,3 @@ const newSolutionTextFieldHint = "Please type a solution.";
 const editIdentifierLabel = "Edit Value";
 const singleDeletionLabel = "Clear\nOne";
 const bulkDeletionLabel = "Clear\nAll";
-
-// GPSPreviewWidget
-const gpsPreviewTitlePrefix = "Solutions listed for: "; 

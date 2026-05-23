@@ -102,7 +102,7 @@ class _GPSPreviewWidgetState
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "$gpsPreviewTitlePrefix$_sessionTitle\n$_dateString",
+            _dateString,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),
