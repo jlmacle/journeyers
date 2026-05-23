@@ -40,7 +40,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 autofocus: true,
                 decoration: InputDecoration
                 (
-                  hintText: gpstitleTextFieldHint,
+                  hintText: gpsTitleTextFieldHint,
                   suffixIcon: IconButton
                   (
                     icon: const Icon(Icons.check, color: greenShade900),

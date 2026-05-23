@@ -9,7 +9,7 @@ const identifierColors = [greenShade900, orange, red];
 
 // GPSProblemToSolveDeclaration
 const gpsTitlePlaceholder = "Problem To Solve";
-const gpstitleTextFieldHint = "Enter title or select below";
+const gpsTitleTextFieldHint = "Enter title or select below";
 
 // GPSChecklist
 const checkListTitle = "Checklist";
