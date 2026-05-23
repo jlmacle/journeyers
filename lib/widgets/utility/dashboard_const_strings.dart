@@ -7,6 +7,7 @@ const String sortByTitleLabel = "Sort by Title";
 
 // ─── SESSIONS ITEM ───────────────────────────────────────
 const String keywordsLabel = "Keywords:";
+const String gpsTitleSuffix = " (gps)";
 
 // Tooltips
 const String previewTooltipLabel = "Preview";
