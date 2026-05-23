@@ -10,11 +10,14 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
   
@@ -55,7 +58,7 @@ final q = CAQuestionsFields();
   }
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
-  // Method used to check that the new process button functions
+  // Method used to check that the new CA process button functions
   Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
   {
     // Verifying the NewProcessButton present
@@ -313,6 +316,172 @@ final q = CAQuestionsFields();
   }
 
 // ─── GPS PROCESS ───────────────────────────────────────────────────────────────
+// Method used to check that the new GPS process button functions
+  Future<void> checkNewGPSProcessButtonFunctions(WidgetTester tester) async
+  {
+    // Verifying the NewProcessButton present
+    expect(
+      find.byType(NewProcessButton),
+      findsOneWidget,
+      reason: 'NewProcessButton should be visible when GPS session data is already saved.',
+    );
+
+    // Tapping NewProcessButton
+    await tester.tap(find.byType(NewProcessButton));
+    await tester.pumpAndSettle();
+
+    // Verifying GPSProcess displayed
+    expect(
+      find.byType(GPSProcess),
+      findsOneWidget,
+      reason: 'GPSProcess should be visible after tapping NewProcessButton.',
+    );
+  }
+
+// Method used to enter a title in the GPS process
+  Future<void> enterGPSProcessTitle (WidgetTester tester, String aTitle) async
+  {
+    // Searching the placeholder title
+    var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+
+    // Tapping on it
+    await tester.tap(placeholderTitleFinder);
+    await tester.pumpAndSettle();
+
+    // Searching the text field
+    var textFieldFinder = find.ancestor
+    (
+      of: find.text(gpsTitleTextFieldHint), 
+      matching: find.byType(TextField)
+    );
+
+    expect(
+      textFieldFinder,
+      findsOneWidget,
+    );
+
+    // Entering the title
+    await tester.enterText(textFieldFinder, aTitle);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+// Method used to enter keywords in the GPS process
+  Future<void> enterGPSProcessKeywords (WidgetTester tester, List<String> keywordsList) async
+  {
+    // Searching the keywords declaration title
+    var keywordsDeclarationTitleFinder = find.descendant
+                                  (
+                                    of: find.byType(GPSKeywordsDeclaration), 
+                                    matching: find.text(keywordsDeclarationTitle)
+                                  );
+
+    // Tapping on it to open the overlay
+    await tester.tap(keywordsDeclarationTitleFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2)); 
+
+    // The overlay should have opened
+    // Searching the text field
+    var textfieldFinder = find.descendant
+                          (
+                            of: find.byType(StatefulBuilder), 
+                            matching: find.byType(TextField)
+                          );   
+
+    for (var kw in keywordsList)
+    {
+      // Entering the keyword
+      await tester.enterText(textfieldFinder, kw);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump(const Duration(seconds: 2)); 
+
+      // Necessary for the next keyword to be added
+      await tester.tap(textfieldFinder);         
+    }
+
+    // Searching the tooltip to close the overlay
+    var closingIconFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+
+    // Closing the overlay
+    await tester.tap(closingIconFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2)); 
+
+    // Verifying the overlay absent
+    expect
+    (
+      find.descendant
+      (
+        of: find.byType(GPSKeywordsDeclaration), 
+        matching: find.byType(StatefulBuilder)
+      )        , 
+      findsNothing
+    );
+  }      
+
+// Method used to enter solutions
+  Future<void> enterSolutions
+  (
+    WidgetTester tester,
+    List<String> solutionsList
+  ) async
+  {
+    // Searching the text field used to add solutions
+    var newSolutionTextFieldFinder = find.ancestor
+    (
+      of: find.text(newSolutionTextFieldHint), 
+      matching: find.byType(TextField)
+    );
+
+    // Adding the solutions
+    for (var solution in solutionsList)
+    {
+      await tester.enterText(newSolutionTextFieldFinder, solution);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      // pumpAndSettle timed out
+      // await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1));  
+
+      await tester.tap(newSolutionTextFieldFinder); 
+    }
+      
+  }
+
+// Method used to enter new GPS process data
+Future<void> enterNewGPSProcessData 
+({
+  required WidgetTester tester, 
+  required String title,
+  required List<String> kwsList,
+  required List<String> solutionsList,
+  required String fileNameWithoutExtension
+}) async
+{
+  // ── 1. CLICK TOWARD A NEW GPS PROCESS ───────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────────────
+  // Verifying that the new process button functions
+  await checkNewGPSProcessButtonFunctions(tester);
+
+
+  // ── 2. GPS PROCESS FILLING ──────────────────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────────────
+
+  // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+  await enterGPSProcessTitle(tester, title);
+
+  // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+  await enterGPSProcessKeywords(tester, kwsList);
+  
+  // ── SOLUTIONS SECTION ─────────────────────────────────────────────────────────────
+  await enterSolutions(tester, solutionsList);
+  
+  // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
+  // Entering the file name and submitting data
+  await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
+}
 
 // Method used to add an identifier
  Future<Finder> addIdentifier(WidgetTester tester) async
@@ -449,8 +618,9 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
 
 // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
   // Method used to search a title and keywords on the dashboard
-  Future<void> searchTitleAndKeywords({required String title, required List<String> kws}) async
+  Future<void> searchTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
   {
+    if (titleSuffix != null) title = "$title$titleSuffix";
     // Searching for the title
     expect(find.text(title), findsOne);
 
@@ -512,7 +682,7 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
   // Serialises a segmented-button selection to a slash-separated string.
   String _segmentedButtonToString(Set<String> values) => values.join('/');
 
-  // Method used to test a preview.
+  // Method used to test a CA preview.
   Future<void> testCAPreview
   ({
     required WidgetTester tester, 
@@ -665,18 +835,43 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
           }             
         }
       }
+    }  
+  }
 
-  
+  // Method used to test a GPS preview.
+  Future<void> testGPSPreview
+  ({
+    required WidgetTester tester, 
+    required String title,
+    required List<String> solutionsList
+  }) async
+  {
+    // Searching the preview tooltip for the session
+    var listItemFinder = find.ancestor
+                        (
+                          of: find.text("$title$gpsTitleSuffix"), 
+                          matching: find.byType(SessionsListItem)
+                        );
 
+    var previewTooltipFinder = find.descendant
+    (
+      of: listItemFinder,       
+      matching: find.byTooltip(previewTooltipLabel)
+    );
 
+    // Opening the preview
+    await tester.tap(previewTooltipFinder);
+    await tester.pumpAndSettle();
 
+    // Searching for the title
+    var titleInAppBarFinder = find.descendant
+    (
+      of: find.byType(AppBar), 
+      matching: find.text(title)
+    );
 
-      
+    // Verifying the title present
+    expect (titleInAppBarFinder, findsOne);
 
-    }
-    
-    
-
-
-
+    // To finish. Code valuable as is.
   }
