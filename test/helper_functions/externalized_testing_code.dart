@@ -873,5 +873,10 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
     // Verifying the title present
     expect (titleInAppBarFinder, findsOne);
 
-    // To finish. Code valuable as is.
+    // TODO: To finish. Code valuable as is.
+    // Verifying the solutions present
+    for (var solution in solutionsList)
+    {
+      expect(find.text(solution), findsOne);
+    }
   }
