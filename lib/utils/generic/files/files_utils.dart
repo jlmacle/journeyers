@@ -151,38 +151,38 @@ class FileUtils
   }
 
   /// Method used to save a file using writeAsBytes.
-  Future<String> saveFileUsingWriteAsBytes(String filePath, String fileExtension, Uint8List dataBytes) async 
+  Future<String> saveFileUsingWriteAsBytes({required String filePathWithExtension, required Uint8List dataBytes}) async 
   {
-    File file = File(filePath);
+    File file = File(filePathWithExtension);
     try {
 
       await file.writeAsBytes(dataBytes);
 
-      if (runningTests) pu.printd('File written successfully to ${file.path}');
+      if (runningTests) pu.printd('File written successfully to ${file.path} on ${Platform.operatingSystem}');
  
       } catch (e) 
       {
         pu.printd('saveFileUsingWriteAsBytes: Error writing file as bytes: $e');
       }
 
-    return filePath;
+    return filePathWithExtension;
   }
  
   // ─── METHODS USED TO SAVE FILES : end ───────────────────────────────────────
 
   // ─── METHODS USED TO READ FILES : beginning ───────────────────────────────────────
   /// Method used to read a text file on Android.
-  Future<String> readTextFileOnAndroid({required String fileName}) async
+  Future<String> readTextFileOnAndroid({required String fileNameWithExtension}) async
   {
     return await platformAndroid.invokeMethod
-        ('readFileContent', {'fileName': fileName}); 
+        ('readFileContent', {'fileName': fileNameWithExtension}); 
   }
 
   /// Method used to read a text file on iOS.
-  Future<String> readTextFileOnIOS({required String fileName}) async
+  Future<String> readTextFileOnIOS({required String fileNameWithExtension}) async
   {
     return await platformIOS.invokeMethod
-        ('readFileContent', {'fileName': fileName}); 
+        ('readFileContent', {'fileName': fileNameWithExtension}); 
   }
 
   /// Method used to read a text file on mobile.
@@ -191,11 +191,11 @@ class FileUtils
     String fileName = path.basename(pathToData);
     if (Platform.isIOS)
     {
-      return await readTextFileOnIOS(fileName: fileName);
+      return await readTextFileOnIOS(fileNameWithExtension: fileName);
     }
     else if (Platform.isAndroid)
     {
-      return await readTextFileOnAndroid(fileName: fileName);
+      return await readTextFileOnAndroid(fileNameWithExtension: fileName);
     }
     else 
     {

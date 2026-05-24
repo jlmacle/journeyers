@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:path/path.dart' as path;
+
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/externalized_test_strings.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -23,6 +25,7 @@ class GPSPreviewWidget extends StatefulWidget {
       _GPSPreviewWidgetState();
 }
 
+// TODO: to clean
 class _GPSPreviewWidgetState
     extends State<GPSPreviewWidget> {
 
@@ -38,7 +41,8 @@ class _GPSPreviewWidgetState
   }
 
   Future<void> _fetchingData() async {
-    List<String> lines;
+    List<String> txtLines = [];
+
     try {
       if (pathsForTestFiles.contains(widget.pathToStoredData)) 
       {
@@ -46,29 +50,65 @@ class _GPSPreviewWidgetState
         return;
       }
 
-      lines = [];
-      if (Platform.isAndroid || Platform.isIOS)
+      String fileNameWithExtension = path.basename(widget.pathToStoredData);
+      final String content;
+      // Retrieving the TXT content
+      if (Platform.isAndroid)
       {
-        String content = await fu.readTextFileOnMobile(pathToData: widget.pathToStoredData);
-        lines = LineSplitter.split(content).toList();
-      }
-      else
-      {
-        final file = File(widget.pathToStoredData);
-        if (await file.exists()) 
+        if (previewBuildingDebug) pu.printd("Preview Building: GPS: on Android");
+
+        try
         {
-          lines = await file.readAsLines();
+          // Outside of testing: reading file using SAF
+          if (!runningTests) { content= await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension); }
+          // While testing
+          else 
+          { 
+            if (testingDebug) pu.printd("Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
+            content = await File(widget.pathToStoredData).readAsString();
+          }
+          txtLines = LineSplitter.split(content).toList();
         }
+        on Exception
+        catch(e) {pu.printd("Preview Building: Exception: GPS: on Android: $e");}
+      }
+      else if (Platform.isIOS)
+      {
+        
+        if (previewBuildingDebug) pu.printd("Preview Building: GPS: on iOS");
+        try
+        {
+          // Outside of testing
+          if (!runningTests) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+          // While testing
+          else 
+          { 
+            if (testingDebug) pu.printd("Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
+            content = await File(widget.pathToStoredData).readAsString();
+          }
+          txtLines = LineSplitter.split(content).toList();
+        }
+        on Exception
+        catch(e) {pu.printd("Preview Building: Exception: GPS: on iOS: $e"); }
+      }
+      else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
+      {
+        // Checking if the CSV file exists
+        File csvFile = File(widget.pathToStoredData);
+        if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: ${widget.pathToStoredData} (${Platform.operatingSystem})");
+        // Loading the file content
+        txtLines = csvFile.readAsLinesSync();
       }
 
-      if (lines.length >= 2) {
-        _sessionTitle = lines[1];
-        // Extract date from the second line: "Date: MMMM dd, yyyy h:mm a"
-        _dateString = lines[2].replaceFirst("Date: ", "");
+      // Building the preview
+      if (txtLines.length >= 2) {
+        _sessionTitle = txtLines[1];
+        // Extracting date from the second line: "Date: MMMM dd, yyyy h:mm a"
+        _dateString = txtLines[2].replaceFirst("Date: ", "");
         
         // Solutions start after the "---" separator (index 3 onwards)
         // We strip the "1. ", "2. " numbering prefix
-        _solutions = lines
+        _solutions = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
             .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))

@@ -152,7 +152,7 @@ Future<void> main() async {
 
             await tester.pump(const Duration(seconds: 3));
 
-            const solutionsList = ['solution'];
+            const solutionsList = ['solution1', 'solution2'];
 
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────

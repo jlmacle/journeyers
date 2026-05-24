@@ -389,47 +389,51 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
     List<List<String>> groupPerspective = [];
 
     List<String> csvLines = [""];
+    String fileNameWithExtension = path.basename(pathToCSVFile);
+    final String content;
 
     if (Platform.isAndroid)
     {
-      String fileName = path.basename(pathToCSVFile);
+      
       if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on Android");
-      final String content;
-      // Outside of testing: reading file using SAF
-      if (!runningTests) { content= await fu.readTextFileOnAndroid(fileName: fileName); }
-      // While testing
-      else 
-      { 
-        if (testingDebug) pu.printd("caCSVFileToPreviewPerspectiveData: Reading $fileName from tmp folder");
-        content = await File(pathToCSVFile).readAsString();
-      }
-      csvLines = LineSplitter.split(content).toList();
-    }
-    else if (Platform.isIOS)
-    {
-      String fileName = path.basename(pathToCSVFile);
-      if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on iOS");
-      final String content;
       try
       {
-        // Outside of testing
-        if (!runningTests) { content = await fu.readTextFileOnIOS(fileName: fileName); }
+        // Outside of testing: reading file using SAF
+        if (!runningTests) { content = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension); }
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("caCSVFileToPreviewPerspectiveData: Reading $fileName from tmp folder");
+          if (testingDebug) pu.printd("caCSVFileToPreviewPerspectiveData: Reading $fileNameWithExtension from tmp folder");
           content = await File(pathToCSVFile).readAsString();
         }
         csvLines = LineSplitter.split(content).toList();
       }
-      on PlatformException
-      catch(e) {pu.printd("CSV Utils: ${e.message}"); }
+      on Exception
+      catch(e) {pu.printd("Preview Building: Exception: CA on Android: $e"); }
+    }
+    else if (Platform.isIOS)
+    {
+      if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on iOS");
+      try
+      {
+        // Outside of testing
+        if (!runningTests) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("caCSVFileToPreviewPerspectiveData: Reading $fileNameWithExtension from tmp folder");
+          content = await File(pathToCSVFile).readAsString();
+        }
+        csvLines = LineSplitter.split(content).toList();
+      }
+      on Exception
+      catch(e) {pu.printd("Preview Building: Exception: CA on iOS: $e"); }
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
       // Checking if the CSV file exists
       File csvFile = File(pathToCSVFile);
-      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $pathToCSVFile");
+      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $pathToCSVFile (${Platform.operatingSystem})");
       // Loading the file content
       csvLines = csvFile.readAsLinesSync();
     }
