@@ -1,0 +1,259 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:integration_test/integration_test.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/l10n/app_localizations.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:journeyers/pages/homepage.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+
+import '../test/helper_functions/externalized_testing_code.dart';
+
+// Used to define a folder value for getApplicationSupportPath (PathProvider) 
+class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
+  PathProviderPlatformRedirectForTesting(this._path);
+
+  final String _path;
+
+  @override
+  Future<String?> getApplicationSupportPath() async => _path;
+}
+
+
+// ─── Test suite ───────────────────────────────────────────────────────────────
+
+Future<void> main() async {
+  // Required by the integration_test package.
+  // https://docs.flutter.dev/testing/integration-tests#project-setup
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  // Keeping the app in portrait up mode 
+  if (Platform.isAndroid || Platform.isIOS)
+  {
+    await SystemChrome.setPreferredOrientations
+    ([
+      DeviceOrientation.portraitUp,   // Normal upright portrait
+    ]);
+  }
+
+  // ── Constants ─────────────────────────────────────────────────────────────
+
+  // Titles
+  const String testAnalysisTitleRoot = 'Integration-test CA session title';
+  const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
+  
+  // Keywords
+  const String kwCompanionship = 'Companionship';
+  const String kwWorkplace = 'Workplace';
+  const List<String> kwsList = [kwCompanionship, kwWorkplace];
+
+  // Solutions
+  const solutionsList1 = ['solution1', 'solution2'];
+
+  // File names
+  const String fileName1WithoutExtension = 'file1';
+ 
+  // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
+  Directory? testTmpDir;
+  
+  setUp(() async {
+    // Creating a temporary folder to store the files to save
+    testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
+    PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
+    // To use the alternative saving/reading file paths or to intercept the way the date is saved
+    runningTests = true;
+    dateIndex = 0;
+  });
+
+  tearDown(() async {
+    if (testTmpDir!.existsSync()) {
+      // Deleting the temporary folder created to store the saved files
+      await testTmpDir!.delete(recursive: true);
+    }
+  });
+
+  // ── Test cases ─────────────────────────────────────────────────────────────
+
+  group('Application Tests: Mobile: \n', () 
+  {
+    // 'Session data entered in the context analysis is available for the group problem-solving'
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
+      'Session data entered in the context analysis is available for the group problem-solving'
+      '(assuming an already selected path to the user session data folder)',
+      (WidgetTester tester) async {
+
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // to have the context analysis page, with the dashboard,
+          'wasSessionDataSaved': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the widget
+          await tester.pumpWidget(
+            MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: HomePage( onLanguageSelectedMainCallbackFunction: (_){})
+            )
+          );
+          await tester.pumpAndSettle();
+
+          // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+
+          // formToFill: false to skip the form filling
+          await enterNewCAProcessData
+          (
+            tester: tester, 
+            formToFill: false,
+            title: testAnalysisTitle1,
+            kwsList: kwsList,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
+
+          await tester.pump(const Duration(seconds: 2));
+
+          // ── 2. CLICKIKNG TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+
+          var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
+          if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
+
+          await tester.tap(bottomItemGPSFinder);
+          await tester.pumpAndSettle();
+
+
+          // ── 3. SEARCHING FOR THE CA SESSION DATA IN THE GPS PROCESS  ──────────────────
+          // ──────────────────────────────────────────────────────────────────────────────
+
+          // Verifying the GPS page present
+          expect(find.byType(GPSPage), findsOne);
+
+          // Clicking on the GPS new session button
+          await checkNewGPSProcessButtonFunctions(tester);
+
+          // Searching the placeholder title
+          var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+
+          // Tapping on it
+          await tester.tap(placeholderTitleFinder);
+          await tester.pumpAndSettle();
+          // await tester.pump(const Duration(seconds: 4));
+
+          // Searching for the list tile with the CA data
+          var listTileFinder = find.byType(ListTile);
+
+          var totalListTile = listTileFinder.evaluate().length;
+          if (testingDebug) pu.printd('Testing Debug: totalListTile: $totalListTile');
+
+          // Tapping on the list tile
+          await tester.tap(listTileFinder);
+          await tester.pumpAndSettle();
+          await tester.pump(const Duration(seconds: 2));
+
+          // Searching the keywords declaration title
+          var keywordsDeclarationTitleFinder = find.descendant
+                                        (
+                                          of: find.byType(GPSKeywordsDeclaration), 
+                                          matching: find.text(keywordsDeclarationTitle)
+                                        );
+
+          // Tapping on it to open the overlay
+          await tester.tap(keywordsDeclarationTitleFinder);
+          // pumpAndSettle timed out
+          // await tester.pumpAndSettle();
+          await tester.pump(const Duration(seconds: 2)); 
+
+          // Verifying that the keywords have been imported
+          var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
+          expect(inputChipTextFinder, findsNWidgets(2));
+
+          expect(find.text(kwCompanionship), findsOne);
+          expect(find.text(kwWorkplace), findsOne);
+          
+          // Searching the tooltip to close the overlay
+          var closingIconFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+
+          // Closing the overlay
+          await tester.tap(closingIconFinder);
+          // pumpAndSettle timed out
+          // await tester.pumpAndSettle();
+          await tester.pump(const Duration(seconds: 2)); 
+
+          // Verifying the overlay absent
+          expect
+          (
+            find.descendant
+            (
+              of: find.byType(GPSKeywordsDeclaration), 
+              matching: find.byType(StatefulBuilder)
+            )        , 
+            findsNothing
+          );
+
+          // ── 4. ADDING ADDITIONAL GPS DATA  ──
+          // ────────────────────────────────────          
+
+          // Adding solutions
+          // Searching the text field used to add solutions
+          var newSolutionTextFieldFinder = find.ancestor
+          (
+            of: find.text(newSolutionTextFieldHint), 
+            matching: find.byType(TextField)
+          );
+
+          // Adding the solutions
+          for (var solution in solutionsList1)
+          {
+            await tester.enterText(newSolutionTextFieldFinder, solution);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 1));  
+
+            await tester.tap(newSolutionTextFieldFinder); 
+          }
+
+          // Submitting the GPS data
+          await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+
+          // ── 5. VERIFYING THE CA DATA ON THE GPS PAGE  ───
+          // ────────────────────────────────────────────────
+
+          // Verifying the GPS page present
+          expect(find.byType(GPSPage), findsOne);
+
+          // Searching for the title imported from the CA 
+          expect(find.text("$testAnalysisTitle1$gpsTitleSuffix"), findsOne);
+
+          // Searching for the keywords imported from the CA 
+          expect(find.text(kwCompanionship), findsOne);
+          expect(find.text(kwWorkplace), findsOne);
+
+          // await tester.pump(const Duration(seconds: 2));
+        }
+    });
+        
+  });
+}
