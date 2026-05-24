@@ -633,8 +633,9 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
   }
 
   // Method used to get the finder of a sessions list item by title
-  Future<Finder> getSessionListItemFinderByTitle(WidgetTester tester, String title) async 
+  Future<Finder> getSessionListItemFinderByTitle({required WidgetTester tester, required String title, String? titleSuffix}) async 
   {
+    if (titleSuffix != null) title = "$title$titleSuffix";
     Finder sessionListItemFinder = find.text(title);
     return sessionListItemFinder;
   }
