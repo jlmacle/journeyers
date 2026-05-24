@@ -700,6 +700,7 @@ Future<void> main() async {
               of: find.ancestor(of: find.text(testAnalysisTitle1), matching: find.byType(SessionsListItem)), 
               matching: find.byType(Checkbox)
             );
+            await tester.ensureVisible(checkbox1Finder);
             await tester.tap(checkbox1Finder);
             await tester.pumpAndSettle();
 
@@ -708,6 +709,7 @@ Future<void> main() async {
                 of: find.ancestor(of: find.text(testAnalysisTitle2), matching: find.byType(SessionsListItem)), 
                 matching: find.byType(Checkbox)
             );
+            await tester.ensureVisible(checkbox2Finder);
             await tester.tap(checkbox2Finder);
             await tester.pumpAndSettle();
 
@@ -716,6 +718,7 @@ Future<void> main() async {
             // Searching the widget
             var bulkDeletionFinder = find.textContaining('Delete');
             expect(bulkDeletionFinder, findsOne);
+            await tester.ensureVisible(bulkDeletionFinder);
             await tester.tap(bulkDeletionFinder);
             await tester.pumpAndSettle();
 
