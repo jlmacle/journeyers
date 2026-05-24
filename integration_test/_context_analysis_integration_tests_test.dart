@@ -729,7 +729,6 @@ Future<void> main() async {
             var textFinder = find.text(testAnalysisTitle3);
             Text textWidget = tester.widget(textFinder);
             expect(textWidget.data, testAnalysisTitle3);
-
       
             // await tester.pump(const Duration(seconds: 2));
           }

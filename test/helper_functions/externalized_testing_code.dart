@@ -290,7 +290,7 @@ final q = CAQuestionsFields();
     await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
   }
 
-  // Method used to add session data
+  // Method used to add several times context analysis data
   // The method assumes all lists have the same number of elements
   Future<void> enterSeveralTimesNewCAProcessData
   ({
@@ -482,6 +482,31 @@ Future<void> enterNewGPSProcessData
   // Entering the file name and submitting data
   await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
 }
+
+  // Method used to add several times group problem-solving data
+  // The method assumes all lists have the same number of elements
+  Future<void> enterSeveralTimesNewGPSProcessData
+  ({
+    required WidgetTester tester,
+    required List<String> titlesList,
+    required List<List<String>> kwsLists,
+    required List<List<String>> solutionsList,
+    required List<String> fileNamesWithoutExtensionList
+  }) async
+  {
+    int listsLength = titlesList.length;
+    for (var index = 0; index < listsLength; index++)
+    {
+      await enterNewGPSProcessData 
+      (
+        tester: tester, 
+        title: titlesList[index],
+        kwsList: kwsLists[index], 
+        solutionsList: solutionsList[index],
+        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
+      );
+    }
+  }
 
 // Method used to add an identifier
  Future<Finder> addIdentifier(WidgetTester tester) async
