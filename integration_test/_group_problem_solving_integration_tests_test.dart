@@ -436,7 +436,103 @@ Future<void> main() async {
           }          
         }
       );
+      
+      // 'Sorting by date \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Sorting by date \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
 
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            await enterSeveralTimesNewGPSProcessData
+            (
+              tester: tester,
+              titlesList: titlesList,
+              kwsLists: [[], [], []],
+              solutionsList: [solutionsList1, solutionsList1, solutionsList1],
+              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+            );
+            // await tester.pump(const Duration(seconds: 2));
+          
+            // ── 2. SORTING BY DATE ──────────────────────────────────
+            // ────────────────────────────────────────────────────────
+            // Triggering the sort
+            var sortByDateFinder = find.textContaining(sortByDateLabel);
+            await tester.tap(sortByDateFinder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+            // Searching the dates          
+            var datesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                }
+                return false;
+              }
+            );          
+
+            var totalDates = datesFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalDates: $totalDates');
+
+            // Verifying the alphabetical order
+            for (var index = 0; index < totalDates; index++)
+            {
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted[index]})");
+            }
+
+            // Re-triggering the sort
+            await tester.tap(sortByDateFinder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+            datesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                }
+                return false;
+              }
+            );          
+
+            // Verifying the alphabetical order 
+            for (var index = 0; index < totalDates; index++)
+            {
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted.reversed.toList()[index]})");
+            }
+          }
+        });
     });
   
 
