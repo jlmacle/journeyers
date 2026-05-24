@@ -625,7 +625,7 @@ Future<void> main() async {
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
-            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+            // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the finder with the title
             Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
