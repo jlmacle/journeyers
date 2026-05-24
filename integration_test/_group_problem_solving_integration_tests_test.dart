@@ -533,6 +533,114 @@ Future<void> main() async {
             }
           }
         });
+    
+      // 'Filtering by keywords \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+          'Filtering by keywords \n'
+          '(assuming an already selected path to the user session data folder)',
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+              // Temporary test dir as application folder path
+              'applicationFolderPath': testTmpDir!.path
+            });
+
+            if (Platform.isAndroid || Platform.isIOS)
+            {
+              // Pumping the GPSPage
+              //
+              // pumpWidget renders the first frame.
+              // pumpAndSettle drives the event loop until there are no more pending frames,
+              // letting the async getPreferences() call complete 
+              // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+              //
+              // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+              await tester.pumpWidget(buildTestableGPSPage());
+              await tester.pumpAndSettle();
+
+              // ── 1. ENTERING NEW GPS PROCESS DATA (6 times) ──────────────────────────────────
+              // ───────────────────────────────────────────────────────────────────────────────
+              
+              await enterSeveralTimesNewGPSProcessData
+              (
+                tester: tester,
+                titlesList: titlesListKwsSorting,
+                kwsLists: kwsListsKwsSorting,
+                solutionsList: [solutionsList1, solutionsList1, solutionsList1, solutionsList1, solutionsList1, solutionsList1],
+                fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
+              );
+              await tester.pump(const Duration(seconds: 4));
+            
+              // ── 2. FILTERING BY KEYWORDS ────────────────────────────
+              // ────────────────────────────────────────────────────────
+
+              // 1. Filtering by kwMaintenance
+              var kwMaintenanceFinder = await getKwFilterChip(tester, kwMaintenance);
+              await tester.tap(kwMaintenanceFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              var titlesFinder = await getAllSessionsTitles(tester);
+              var totalTitles = titlesFinder.evaluate().length;
+
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwMaintenance: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesMaintenance.reversed.toList()[index]}$gpsTitleSuffix");
+              }
+              // Un-selecting the keyword
+              await tester.tap(kwMaintenanceFinder);
+              await tester.pumpAndSettle();
+
+              // 2. Filtering by kwCompanionship
+              var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+              await tester.tap(kwCompanionshipFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              titlesFinder = await getAllSessionsTitles(tester);
+              totalTitles = titlesFinder.evaluate().length;
+
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesCompanionship.reversed.toList()[index]}$gpsTitleSuffix");
+              }
+
+              // Un-selecting the keyword
+              await tester.tap(kwCompanionshipFinder);
+              await tester.pumpAndSettle();
+
+              // 3. Filtering by kwWorkplace
+              var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+              await tester.tap(kwWorkplaceFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              titlesFinder = await getAllSessionsTitles(tester);
+              totalTitles = titlesFinder.evaluate().length;
+
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesWorkplace.reversed.toList()[index]}$gpsTitleSuffix");
+              }
+              
+
+              await tester.pump(const Duration(seconds: 2));
+            }
+          });     
+    
     });
   
 
