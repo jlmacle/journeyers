@@ -628,7 +628,7 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the finder with the title
-            Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
+            Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
             expect(sessionListItemFinder, findsOne);
 
             // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
@@ -642,7 +642,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Verifying the sessions list item absent
-            sessionListItemFinder = await getSessionListItemFinderByTitle(tester, testAnalysisTitle2);
+            sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
             expect(sessionListItemFinder, findsNothing);
       
             // await tester.pump(const Duration(seconds: 2));

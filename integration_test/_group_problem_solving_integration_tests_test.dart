@@ -89,6 +89,9 @@ Future<void> main() async {
                       [kwCompanionship, kwStudies], [kwMaintenance], [kwMaintenance],
                     ];
 
+  // Solutions
+  const solutionsList = ['solution1', 'solution2'];
+
   // File names
   const String fileName1WithoutExtension = 'file1';
   const String fileName2WithoutExtension = 'file2';
@@ -152,8 +155,6 @@ Future<void> main() async {
 
             await tester.pump(const Duration(seconds: 3));
 
-            const solutionsList = ['solution1', 'solution2'];
-
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
 
@@ -168,7 +169,7 @@ Future<void> main() async {
 
             // await tester.pump(const Duration(seconds: 5));
 
-            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+            // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the title and keywords
             await searchTitleAndKeywords(title: testGPSTitle1, kws: kwsList, titleSuffix: gpsTitleSuffix);
@@ -185,5 +186,78 @@ Future<void> main() async {
       );
 
     });
+
+    group('Deletion Tests: Mobile: \n', ()
+    {
+      // 'Deletion: Single deletion with icon \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Deletion: Single deletion with icon \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            await enterNewGPSProcessData
+            (
+              tester: tester, 
+              title: testGPSTitle1,
+              kwsList: kwsList,
+              solutionsList: solutionsList,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────
+            // Searching for the finder with the title
+            Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            expect(sessionListItemFinder, findsOne);
+
+            // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────
+            
+            // Searching for the tooltip 
+            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+
+            // Tapping the icon
+            await tester.tap(deleteIconFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the sessions list item absent
+            sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            expect(sessionListItemFinder, findsNothing);
+      
+            // await tester.pump(const Duration(seconds: 2));
+          }
+        }      
+      );
+  });
+  
+
 });
 }
