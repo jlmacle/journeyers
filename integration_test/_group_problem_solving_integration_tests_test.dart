@@ -12,8 +12,11 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
+// TODO: to clean
 import '../test/helper_functions/externalized_testing_code.dart';
+import 'externalized_code/integration_test_utils.dart';
 
 // Used to define a folder value for getApplicationSupportPath (PathProvider) 
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
@@ -90,7 +93,7 @@ Future<void> main() async {
                     ];
 
   // Solutions
-  const solutionsList = ['solution1', 'solution2'];
+  const solutionsList1 = ['solution1', 'solution2'];
 
   // File names
   const String fileName1WithoutExtension = 'file1';
@@ -163,7 +166,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: kwsList,
-              solutionsList: solutionsList,
+              solutionsList: solutionsList1,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -177,7 +180,7 @@ Future<void> main() async {
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             await tester.pump(const Duration(seconds: 2));
-            await testGPSPreview(tester: tester, title: testGPSTitle1, solutionsList: solutionsList);
+            await testGPSPreview(tester: tester, title: testGPSTitle1, solutionsList: solutionsList1);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -228,7 +231,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: kwsList,
-              solutionsList: solutionsList,
+              solutionsList: solutionsList1,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -256,7 +259,99 @@ Future<void> main() async {
           }
         }      
       );
-  });
+
+      // 'Deletion: Bulk deletion \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Deletion: Bulk deletion \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            await enterSeveralTimesNewGPSProcessData
+            (
+              tester: tester,
+              titlesList: titlesList,
+              kwsLists: [[], [], []],
+              solutionsList: [solutionsList1, solutionsList1, solutionsList1],
+              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+            );
+
+            // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
+            // Finding and tapping the checkboxes for title 1 and title 2
+            var checkbox1Finder = find.descendant
+            (
+              of: find.ancestor(of: find.text("$testGPSTitle1$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
+              matching: find.byType(Checkbox)
+            );
+            // Needed more than ensureVisible
+            await scrollListUpScrollableByFirstDescendant(tester: tester, listFinder: find.byType(CustomScrollView), elementToReachFinder: checkbox1Finder);
+            await tester.tap(checkbox1Finder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+           var checkbox2Finder = find.descendant
+            (
+                of: find.ancestor(of: find.text("$testGPSTitle2$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
+                matching: find.byType(Checkbox)
+            );
+            await tester.ensureVisible(checkbox2Finder);
+            await tester.tap(checkbox2Finder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────────────────
+            // Searching the widget
+            var bulkDeletionFinder = find.textContaining('Delete');
+            expect(bulkDeletionFinder, findsOne);
+            await tester.ensureVisible(bulkDeletionFinder);
+            await tester.tap(bulkDeletionFinder);
+            await tester.pumpAndSettle();
+
+            // ── 4. TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────       
+            // Checking the number of list items left 
+            var sessionsListItemsFinder = find.byType(SessionsListItem);
+            expect(sessionsListItemsFinder, findsOne);
+
+            // Verifying title 3 remains
+            var title3WithSuffix = "$testGPSTitle3$gpsTitleSuffix";
+            var textFinder = find.text(title3WithSuffix);
+            Text textWidget = tester.widget(textFinder);
+            expect(textWidget.data, title3WithSuffix);
+
+            // await tester.pump(const Duration(seconds: 2));
+          }
+        }      
+      );      
+    });
   
 
 });
