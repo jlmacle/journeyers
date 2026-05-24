@@ -583,37 +583,37 @@ class DTOCAForm
 
 
     final dataBytes = Uint8List.fromList(utf8.encode(content));
-    String? filePath;
+    String? filePathWithExtension;
 
     if (Platform.isAndroid)
     {
       // Outside of testing: using SAF to save the file
-      if (!runningTests) { filePath = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes); }
+      if (!runningTests) { filePathWithExtension = await fu.saveFileOnAndroid(fileName!, fileExtension, dataBytes); }
       
       // otherwise: using tmp files for testing
       else 
       { 
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, "$fileName$fileExtension");
-        fu.saveFileUsingWriteAsBytes(filePath, fileExtension, dataBytes);        
+        filePathWithExtension = path.join(applicationFolderPath!, "$fileName$fileExtension");
+        fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePathWithExtension,dataBytes: dataBytes);        
       }          
     }
     else if (Platform.isIOS)
     {
       // Outside of testing: using the Swift code
-      if (!runningTests) { filePath = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes); }
+      if (!runningTests) { filePathWithExtension = await fu.saveFileOniOS(fileName!, fileExtension, dataBytes); }
       
       // otherwise: using tmp files for testing
       else 
       { 
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, fileName!);
-        fu.saveFileUsingWriteAsBytes(filePath, fileExtension, dataBytes);        
+        filePathWithExtension = path.join(applicationFolderPath!, fileName!);
+        fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePathWithExtension, dataBytes: dataBytes);        
       } 
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
-      filePath = await FilePicker.platform.saveFile
+      filePathWithExtension = await FilePicker.platform.saveFile
       (
         dialogTitle: 'Please enter a file name',
         fileName: '.csv',
@@ -623,7 +623,7 @@ class DTOCAForm
       );
     }
     
-    return filePath;
+    return filePathWithExtension;
   }
 
   // ─── fromJson CONSTRUCTOR and helper methods ─────────────────────────────────────────────────────

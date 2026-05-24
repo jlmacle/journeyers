@@ -874,5 +874,9 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
     expect (titleInAppBarFinder, findsOne);
 
     // TODO: To finish. Code valuable as is.
-    
+    // Verifying the solutions present
+    for (var solution in solutionsList)
+    {
+      expect(find.text(solution), findsOne);
+    }
   }

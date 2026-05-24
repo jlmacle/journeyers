@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/app_themes.dart';
@@ -23,7 +24,7 @@ import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_desktop_platforms.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
-
+// TODO: to clean
 /// {@category Group problem-solving}
 /// The process for a group problem-solving.
 class GPSProcess extends StatefulWidget 
@@ -144,17 +145,38 @@ class GPSProcessState extends State<GPSProcess>
       // Platform-specific file saving
       if (Platform.isAndroid) 
       {
-        filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
-        // Updating the file names list: saveFileOnAndroid
-        await du.getStoredFileNamesOnMobile();
+        // Outside of testing: using SAF to save the file
+        if (!runningTests) {
+          filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
+          // Updating the file names list: saveFileOnAndroid
+          await du.getStoredFileNamesOnMobile();
+          if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+     
+        }
+        else {
+          // otherwise: using tmp files for testing
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileName$fileExtension");
+          fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
+        }
+
         if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
       } 
       else if (Platform.isIOS) 
       {
-        filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
-        // Updating the file names list: saveFileOniOS
-        await du.getStoredFileNamesOnMobile();
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+        // Outside of testing
+        if (!runningTests) {
+          filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
+          // Updating the file names list: saveFileOniOS
+          await du.getStoredFileNamesOnMobile();
+          if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+        }
+        else {
+          // otherwise: using tmp files for testing
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileName$fileExtension");
+          fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
+        }
       } 
       else 
       {
