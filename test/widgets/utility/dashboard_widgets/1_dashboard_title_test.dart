@@ -5,7 +5,7 @@ import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
 
 void main() {
-  // 'DashboardTitle Widget Tests: \n'
+
   group('DashboardTitle Widget Tests: \n', () 
   {
     const String testTitle = dashboardTitle;
