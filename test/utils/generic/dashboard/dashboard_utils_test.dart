@@ -45,7 +45,6 @@ void main() {
   });
 
 
-  // getSessionMetadataFile
   group('getSessionMetadataFile', () {
 
     test('creates the file when it does not yet exist', () async {
@@ -68,7 +67,6 @@ void main() {
   });
 
 
-  // saveDashboardMetadata  (exercises _saveSessionMetadataHelper indirectly)
   group('saveDashboardMetadata', () {
     test('persists the title correctly', () async {
       await sut!.saveDashboardMetadata(
@@ -198,7 +196,6 @@ void main() {
   });
 
 
-  // retrieveAllDashboardMetadata
   group('retrieveAllDashboardMetadata –', () {  
     test('returns records in reverse insertion order (most recent first)',
         () async {
@@ -243,7 +240,6 @@ void main() {
   });
 
 
-  // deleteSpecificSessionMetadata
   group('deleteSpecificSessionMetadata', () {
     test('removes the record whose file path matches the target', () async {
       const fileToDelete = '/file/to/delete';
@@ -330,7 +326,6 @@ void main() {
     
   });
 
-  // saveAllSessionsMetadata
   group('saveAllSessionsMetadata –', () {
 
     test('can save an empty list',
@@ -351,7 +346,6 @@ void main() {
   });
 
 
-  // Round-trip integration
   group('Round-trip', () {
     test('data saved via saveDashboardMetadata is faithfully recovered '
         'via retrieveAllDashboardMetadata',
