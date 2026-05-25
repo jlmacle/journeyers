@@ -64,7 +64,7 @@ class _GPSPreviewWidgetState
           // While testing
           else 
           { 
-            if (testingDebug) pu.printd("Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
+            if (testingDebug) pu.printd("Testing Debug: Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
             content = await File(widget.pathToStoredData).readAsString();
           }
           txtLines = LineSplitter.split(content).toList();
@@ -83,7 +83,7 @@ class _GPSPreviewWidgetState
           // While testing
           else 
           { 
-            if (testingDebug) pu.printd("Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
+            if (testingDebug) pu.printd("Testing Debug: Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
             content = await File(widget.pathToStoredData).readAsString();
           }
           txtLines = LineSplitter.split(content).toList();
