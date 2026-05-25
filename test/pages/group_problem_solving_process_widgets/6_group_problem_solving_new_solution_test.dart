@@ -21,11 +21,9 @@ void main()
     );
   }
 
-  // 'GPSNewSolution Tests: \n'
   group('GPSNewSolution Tests: \n', 
   () 
   {  
-    // "GPSNewSolution default aspect: \n"
     group("GPSNewSolution default aspect: \n", 
     () 
     {      

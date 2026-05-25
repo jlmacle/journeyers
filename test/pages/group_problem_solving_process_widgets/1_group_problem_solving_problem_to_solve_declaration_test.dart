@@ -25,11 +25,9 @@ void main()
       );
     }
 
-    // 'GPSProblemToSolveDeclaration Tests: \n'
     group('GPSProblemToSolveDeclaration Tests: \n', 
     () 
     {  
-      // 'Click to Text Field: \n'
       group('Click to Text Field: \n', 
       () 
       { 

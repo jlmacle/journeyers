@@ -21,11 +21,9 @@ void main()
     );
   }
 
-  // 'GPSSolutionsList Tests: \n'
   group('GPSSolutionsList Tests: \n', 
   () 
   {  
-    // "GPSSolutionsList default aspect: \n"
     group("GPSSolutionsList default aspect: \n", 
     () 
     {
