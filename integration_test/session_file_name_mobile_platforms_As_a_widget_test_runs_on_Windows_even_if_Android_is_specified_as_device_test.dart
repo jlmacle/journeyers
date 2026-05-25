@@ -14,7 +14,6 @@ void main()
 {
   const String textFieldHintPart = "Please add the file name";
 
-    // 'SessionFileNameMobilePlatforms Tests'
     group('SessionFileNameMobilePlatforms Tests: \n', 
     () 
     {      
