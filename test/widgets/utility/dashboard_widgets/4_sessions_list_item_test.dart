@@ -20,10 +20,8 @@ void main() {
     DashboardUtils.keyKeywords: keywords,
   };
 
-  // 'SessionsListItem Tests'
   group('SessionsListItem Tests: \n', () 
   {  
-    // 'Info and tooltips Tests'
     group('Info and tooltips Tests: \n', () 
     { 
       // 'Displays session info correctly (Title, date, keywords)'
@@ -149,7 +147,6 @@ void main() {
       });
     });
     
-    // 'Preview Tests'
     group('Preview Tests: \n', () 
     { 
       // 'Opens the CA preview'
@@ -208,7 +205,6 @@ void main() {
     
     });
 
-    // 'Edit Tests'
     group('Edit Tests: \n', () 
     { 
       // 'Shows the placeholder message'
@@ -240,7 +236,6 @@ void main() {
       });
     });  
   
-    // 'Keywords Tests'
     group('Keywords Tests: \n', () 
     {
       // 'Opens the keywords edition overlay by clicking on the icon'
