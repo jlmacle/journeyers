@@ -58,11 +58,9 @@ void main()
     );
   }
 
-  // 'GPSProcess Tests: \n'
   group('GPSProcess Tests: \n', 
   () 
   {  
-    // "Stakeholder identifiers: \n"
     group("Stakeholder identifiers: \n", 
     () 
     {      
@@ -264,7 +262,6 @@ void main()
    
   });
 
-  // 'Session Title Tests: \n'
   group('Session Title Tests: \n', 
   () 
   {  
@@ -347,7 +344,6 @@ void main()
   
   });
 
-  // 'Checklist Tests: \n'
   group('Checklist Tests: \n', 
   () 
   {  
@@ -402,7 +398,6 @@ void main()
     });
   });
 
-  // 'List of Keywords Tests: \n'
   group('List of Keywords Tests: \n', 
   () 
   { 
@@ -475,7 +470,7 @@ void main()
   }
   );
 
-  // 'List of Solutions Tests: \n'
+
   group('List of Solutions Tests: \n', 
   () 
   { 
