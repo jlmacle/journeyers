@@ -11,11 +11,9 @@ import 'package:journeyers/widgets/utility/process_widgets/new_process_button.da
 
 void main() 
 {
-    // 
     group('CAPage Tests: \n', 
     () 
     {  
-      // 'CAPage: Runtime behavior\n'
       group('CAPage: Runtime behavior\n', 
       () 
       { 
