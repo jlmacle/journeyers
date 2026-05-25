@@ -124,7 +124,6 @@ Future<void> main() async {
 
   // ── Test cases ─────────────────────────────────────────────────────────────
 
-  // 'Group Problem-Solving Integration Tests: Mobile: \n'
   group('Group Problem-Solving Integration Tests: Mobile: \n', () 
   {
     group('Preview Tests: Mobile: \n', () 
@@ -643,7 +642,6 @@ Future<void> main() async {
           });     
     
     });
-  
 
 });
 }
