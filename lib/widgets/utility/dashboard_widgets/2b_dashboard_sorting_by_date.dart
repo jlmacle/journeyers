@@ -52,7 +52,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
       },
       icon: Icon
       (
-        _isAscendingDate ? Icons.arrow_downward : Icons.arrow_upward,
+        _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
         color: Colors.black,
       ),
       label: const Text
