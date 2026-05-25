@@ -41,10 +41,12 @@ class _MyAppState extends State<MyApp>
 
   @override
   void initState() {
+    super.initState();
+
     // Getting the stored file names at start
     if (sessionDataDebug) pu.printd("Session Data: Main.dart: currentListOfStoredFileNames (before retrieval)");
     du.getStoredFileNamesOnMobile();
-    super.initState();
+    
   }
   // ─── LOCALE related data and methods ───────────────────────────────────────
 
