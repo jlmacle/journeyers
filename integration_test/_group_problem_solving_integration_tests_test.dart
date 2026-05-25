@@ -64,7 +64,7 @@ Future<void> main() async {
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
-  // Test title texts
+  // Titles
   const String testGPSTitleRoot = 'Integration-test GPS session title';
   const String testGPSTitle1 = '$testGPSTitleRoot (1)';
   const String testGPSTitle2 = '$testGPSTitleRoot (2)';
