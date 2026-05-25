@@ -22,11 +22,9 @@ void main()
   }
 
  
-  // 'CACheckboxWithSanitizedAndPaddedTextField Tests: \n'
   group('CACheckboxWithSanitizedAndPaddedTextField Tests: \n', 
   () 
   {  
-    // 'Presence/Absence of the text field: \n'
     group('Presence/Absence of the text field: \n', 
     () 
     { 
@@ -70,7 +68,6 @@ void main()
         );
     });
 
-    // 'Text field state maintained: \n'
     group('Text field state maintained: \n', 
     () 
     { 
