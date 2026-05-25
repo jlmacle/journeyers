@@ -52,18 +52,19 @@ Future<void> main() async {
   // https://docs.flutter.dev/testing/integration-tests#project-setup
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  // Keeping the app in portrait up mode 
+  // On mobile: keeping the app in portrait mode for usability
   if (Platform.isAndroid || Platform.isIOS)
   {
     await SystemChrome.setPreferredOrientations
     ([
-      DeviceOrientation.portraitUp,   // Normal upright portrait
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown   
     ]);
   }
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
-  // Test title texts
+  // Titles
   const String testGPSTitleRoot = 'Integration-test GPS session title';
   const String testGPSTitle1 = '$testGPSTitleRoot (1)';
   const String testGPSTitle2 = '$testGPSTitleRoot (2)';

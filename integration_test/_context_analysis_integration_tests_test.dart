@@ -50,18 +50,19 @@ Future<void> main() async {
   // https://docs.flutter.dev/testing/integration-tests#project-setup
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  // Keeping the app in portrait up mode 
+  // On mobile: keeping the app in portrait mode for usability 
   if (Platform.isAndroid || Platform.isIOS)
   {
     await SystemChrome.setPreferredOrientations
     ([
-      DeviceOrientation.portraitUp,   // Normal upright portrait
+      DeviceOrientation.portraitUp,   
+      DeviceOrientation.portraitDown
     ]);
   }
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
-  // The test title text
+  // Titles
   const String testAnalysisTitleRoot = 'Integration-test CA session title';
   const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
   const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
