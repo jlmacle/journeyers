@@ -62,7 +62,7 @@ Future<void> main() async {
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
-  // The test title text
+  // Titles
   const String testAnalysisTitleRoot = 'Integration-test CA session title';
   const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
   const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
