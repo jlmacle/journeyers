@@ -29,11 +29,9 @@ void main()
       );
     }
 
-    // 'GPSGroupMoods Tests: \n'
     group('GPSGroupMoods Tests: \n', 
     () 
     {  
-      // "Stakeholder identifiers' default aspect: \n"
       group("Stakeholder identifiers' default aspect: \n", 
       () 
       { 

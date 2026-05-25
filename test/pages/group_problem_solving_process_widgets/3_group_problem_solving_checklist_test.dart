@@ -20,11 +20,9 @@ void main()
     );
   }
 
-  // 'GPSChecklist Tests: \n'
   group('GPSChecklist Tests: \n', 
   () 
   {  
-    // "GPSChecklist default aspect: \n"
     group("GPSChecklist default aspect: \n", 
     () 
     { 

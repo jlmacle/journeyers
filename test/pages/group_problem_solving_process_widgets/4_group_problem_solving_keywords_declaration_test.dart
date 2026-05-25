@@ -22,11 +22,9 @@ void main()
     );
   }
 
-  // 'GPSKeywordsDeclaration Tests: \n'
   group('GPSKeywordsDeclaration Tests: \n', 
   () 
   {  
-    // "GPSKeywordsDeclaration default aspect: \n"
     group("GPSKeywordsDeclaration default aspect: \n", 
     () 
     {
