@@ -89,7 +89,7 @@ class _GPSPreviewWidgetState
           txtLines = LineSplitter.split(content).toList();
         }
         on Exception
-        catch(e) {pu.printd("Preview Building: Exception: GPS: on iOS: $e"); }
+        catch(e) {pu.printd("Preview Building: Exception: GPS: on iOS: $e");}
       }
       else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
       {
