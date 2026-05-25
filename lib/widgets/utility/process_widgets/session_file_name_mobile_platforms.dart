@@ -100,6 +100,9 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
         if (result != null) {
           // Refreshing local state with the new path/bookmark
           getApplicationFolderPathPref(); 
+
+        // Retrieving the stored file names once the path to the folder is defined
+        await du.getStoredFileNamesOnMobile();  
         }
       },
       child: Text
