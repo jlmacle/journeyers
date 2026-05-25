@@ -97,20 +97,15 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
           ),
         ),
         // Filtering by keywords
-        Flexible(
-          child: SingleChildScrollView(
-            key: const Key('dashboard-scrollview'),
-            child: DashboardFilteringByKeywords
-            (
-              key: widget.dashboardFilteringByKeywordsKey,
-              allSessions: widget.allSessions, 
-              filteredSessions: widget.filteredSessions, 
-              usedKeywords: widget.usedKeywords,
-              selectedKeywords: widget.selectedKeywords,
-              dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
-            ),
-          ),
-        ),      
+        DashboardFilteringByKeywords
+        (
+          key: widget.dashboardFilteringByKeywordsKey,
+          allSessions: widget.allSessions, 
+          filteredSessions: widget.filteredSessions, 
+          usedKeywords: widget.usedKeywords,
+          selectedKeywords: widget.selectedKeywords,
+          dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+        ),  
       ],
     );
   }

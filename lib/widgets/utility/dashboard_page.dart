@@ -302,26 +302,15 @@ class DashboardPageState extends State<DashboardPage>
                 ),
 
                 // DASHBOARD FILTERING FEATURES
-                // Fading filtering, sorting and deletion area (TODO: cleanup: deletion)
-                SliverAppBar(
-                  // Size of the sort, filtering, deletion area
-                  expandedHeight: 200,
-                  collapsedHeight: 0,
-                  toolbarHeight: 0,
-                  pinned: false,
-                  floating: false,
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  flexibleSpace: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.pin, 
-                    background: DashboardSortingAndFilteringFeature
-                    (
-                      dashboardContext: widget.dashboardContext, 
-                      allSessions: _allSessions, filteredSessions: _filteredSessions,
-                      usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
-                      parentCallbackFunctionToRefreshTheSessionsList: updateState,
-                      dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
-                    ),
+                SliverToBoxAdapter 
+                (
+                  child: DashboardSortingAndFilteringFeature
+                  (
+                    dashboardContext: widget.dashboardContext, 
+                    allSessions: _allSessions, filteredSessions: _filteredSessions,
+                    usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
+                    parentCallbackFunctionToRefreshTheSessionsList: updateState,
+                    dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
                   ),
                 ),
 

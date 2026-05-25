@@ -72,14 +72,5 @@ void main() {
         findsOneWidget,
       );
     });
-
-
-    testWidgets('Scrollview is present with correct key', (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      final scrollviewFinder = find.byKey(const Key('dashboard-scrollview'));
-      expect(scrollviewFinder, findsOneWidget);
-      expect(find.byType(SingleChildScrollView), findsOneWidget);
-    });
   });
 }
