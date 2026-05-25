@@ -16,12 +16,13 @@ void main() async
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Keeping the app in portrait up mode for usability
+  // On mobile: keeping the app in portrait mode for usability
   if (Platform.isAndroid || Platform.isIOS)
   {
     await SystemChrome.setPreferredOrientations
     ([
-      DeviceOrientation.portraitUp,   // Normal upright portrait
+      DeviceOrientation.portraitUp,   
+      DeviceOrientation.portraitDown
     ]);
   }
   
