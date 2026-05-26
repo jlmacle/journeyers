@@ -24,7 +24,6 @@ GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKeyGPS 
 final GlobalKey<CAFormState> formKeyCA = GlobalKey(debugLabel:'context-analysis-form');
 
 // CA Headings
-
 final GlobalKey<CustomHeadingState> balanceIssueHeadingKey   = GlobalKey();
 final GlobalKey<CustomHeadingState> workplaceIssueHeadingKey = GlobalKey();
 final GlobalKey<CustomHeadingState> legacyIssueHeadingKey    = GlobalKey();
