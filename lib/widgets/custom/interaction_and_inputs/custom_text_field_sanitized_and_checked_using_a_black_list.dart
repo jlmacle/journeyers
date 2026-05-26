@@ -27,9 +27,6 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// The style for the hint text.
   final TextStyle textFieldHintStyle;
 
-  /// A key for the error message.
-  final Key errorMessageKey;
-
   /// The style for the error message.
   final TextStyle errorMessageStyle;
 
@@ -67,7 +64,6 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     required this.textFieldStyle,
     required this.textFieldHint,
     required this.textFieldHintStyle,
-    this.errorMessageKey = const Key('error_msg_key_default'),
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = CAFormMiscConstants.chars10Lines, // 10 lines as a reference
@@ -89,7 +85,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   bool submitIsBlocked = false;  
 
   // Useful for automatic scrolling
-  final GlobalKey<_TextFieldSanitizedAndCheckedUsingABlackListState> textFieldKey = GlobalKey();
+  GlobalKey errorMessageKey =
+    GlobalKey(debugLabel: 'file-name-error-msg');
 
   TextEditingController textFieldEditingController = .new();
   String _errorMessage = "";
@@ -118,7 +115,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   // Method used to scroll the text field and error message into view
   Future<void> _scrollForBetterErrorViewing() async
   {
-    final context = textFieldKey.currentContext;
+    final context = errorMessageKey.currentContext;
 
     if (context != null) {
       await Scrollable.ensureVisible(
@@ -264,6 +261,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
         _errorMessage = widget.blacklistingFunctionsErrorsMapping[blacklistingFunctionsReturnedTrueList[0]]!;  
       });       
 
+      // An intent to fix an intermittent scrolling for the CA process file name error message
+      await Future.delayed(const Duration(milliseconds: 500));
       // Scrolling for better error message communication to the user
       await _scrollForBetterErrorViewing();
 
@@ -344,7 +343,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       widget.onTextFieldValueSubmittedCallbackFunction(newValue);
       if (textFieldDebugging) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: submit unblocked: widget.onTextFieldValueChangedCallbackFunction(newValue): newValue: $newValue");
     }
-
     
   }
 
@@ -353,7 +351,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   {
     return TextField
     (
-      key: textFieldKey,
       controller: textFieldEditingController,
       // https://api.flutter.dev/flutter/services/TextInputType/text-constant.html
       keyboardType: TextInputType.text,
@@ -381,7 +378,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
           ),
           error: Center
           (
-            key: widget.errorMessageKey,
+            key: errorMessageKey,
             child: Text
             (
               textAlign: TextAlign.center, 
