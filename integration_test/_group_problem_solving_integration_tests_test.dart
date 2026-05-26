@@ -156,7 +156,6 @@ Future<void> main() async {
             // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
-
             await tester.pump(const Duration(seconds: 3));
 
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
