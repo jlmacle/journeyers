@@ -3,13 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
 
 
 void main() {
-  GlobalKey errorKey = errorMessageKey;
   const textWithQuote = 'Perse"verance';
   const textWithDot = '.Legacy';
   const fileNameBlacklisted = "a.csv";
@@ -17,6 +15,7 @@ void main() {
   
   group('TextFieldChecked Tests:\n', () {
     testWidgets('Should display no initial error', (WidgetTester tester) async {
+      GlobalKey errorMessageKey1 = GlobalKey(debugLabel: 'error-msg-1');
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -25,6 +24,7 @@ void main() {
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageFieldKey : errorMessageKey1,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               onTextFieldValueChangedCallbackFunction: (_) {},
               stringSanitizerBundlesErrorsMapping: const {},
@@ -37,7 +37,7 @@ void main() {
       // Verifying that the error message starts empty
       final errorMessageFinder = find.descendant
       (
-        of: find.byKey(errorKey), // Finds the Center widget by Key
+        of: find.byKey(errorMessageKey1), // Finds the Center widget by Key
         matching: find.byType(Text), // Finds the error message Text widget inside it
       );
       final errorTextWidget = tester.widget<Text>(errorMessageFinder);
@@ -98,6 +98,7 @@ void main() {
 
 
      testWidgets('Should show error message when a blacklist check is positive', (WidgetTester tester) async {
+      GlobalKey errorMessageKey2 = GlobalKey(debugLabel: 'error-msg-2');
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -106,6 +107,7 @@ void main() {
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageFieldKey: errorMessageKey2,
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               onTextFieldValueChangedCallbackFunction: (_) {},
               stringSanitizerBundlesErrorsMapping: const {},
