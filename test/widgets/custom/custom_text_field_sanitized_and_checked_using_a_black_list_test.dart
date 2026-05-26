@@ -95,9 +95,8 @@ void main() {
       // Verifying error message is rendered
       expect(find.text(TextFieldUtils.errorContainsADot), findsOneWidget);
     });
-
-
-     testWidgets('Should show error message when a blacklist check is positive', (WidgetTester tester) async {
+    
+    testWidgets('Should show error message when a blacklist check is positive', (WidgetTester tester) async {
       GlobalKey errorMessageKey2 = GlobalKey(debugLabel: 'error-msg-2');
       await tester.pumpWidget(
         MaterialApp(
@@ -120,7 +119,7 @@ void main() {
       // Entering the text to search in the blacklist
       await tester.enterText(find.byType(TextField), fileNameBlacklisted);
       await tester.pumpAndSettle();
-      await Future.delayed(const Duration(milliseconds: 500));
+      await tester.pump(const Duration(milliseconds: 500));
 
       // Verifying error message is rendered
       expect(find.text(TextFieldUtils.errorTextBlacklisted), findsOneWidget);
