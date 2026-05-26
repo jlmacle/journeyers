@@ -1,14 +1,8 @@
-To display groups and tests labels:
-flutter test -r expanded
-
------------------------
-
 For the integration tests (Android: 05/04/26)
 
 session_file_name_mobile_platforms_As_a_widget_test_runs_on_Windows_even_if_Android_is_specified_as_device_test.dart
 Important: As a widget test, runs on Windows, even if Android is selected as a device.
 -----------------------
-
 
 For the integration tests (Desktop/Android/iOS)
 (Android phone plugged  + screen unlocked/iPhone plugged)
@@ -29,6 +23,7 @@ flutter test ./integration_test/context_analysis_page_test.dart -r github
 For the integration tests: iOS: An Internet connection is needed to verify the Developer App Certificate.
 
 -----------------------
+For the widgets tests:
 
 Journeyers app (macOS):
 An Xcode configuration update was needed to add read-write permission for user selected files.
@@ -38,4 +33,17 @@ Journeyers app (iOS):
 "No valid code signing certificates were found" issue:
 Flutter explanations + "Apple Developer account", personal team account, signing certificate: development
 (open ios/Runner.xcworkspace)
+
+--- 
+Solution for:
+The following _Exception was thrown running a test:
+Exception: Asset 'shaders/ink_sparkle.frag' manifest could not be decoded: INVALID_ARGUMENT:
+Unsupported runtime stages format version. Expected 2, got 1.
+
+"flutter clean" might solve the issue.
+
+---
+
+To display groups and tests labels:
+flutter test -r expanded
 
