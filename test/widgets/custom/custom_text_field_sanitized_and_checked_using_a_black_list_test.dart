@@ -3,12 +3,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
 
 
 void main() {
-  const errorKey = Key('error_msg_key');
+  GlobalKey errorKey = errorMessageKey;
   const textWithQuote = 'Perse"verance';
   const textWithDot = '.Legacy';
   const fileNameBlacklisted = "a.csv";
@@ -117,6 +118,7 @@ void main() {
       // Entering the text to search in the blacklist
       await tester.enterText(find.byType(TextField), fileNameBlacklisted);
       await tester.pumpAndSettle();
+      await Future.delayed(const Duration(milliseconds: 500));
 
       // Verifying error message is rendered
       expect(find.text(TextFieldUtils.errorTextBlacklisted), findsOneWidget);

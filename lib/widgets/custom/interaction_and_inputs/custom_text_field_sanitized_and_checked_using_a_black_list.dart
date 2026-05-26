@@ -9,6 +9,7 @@ import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 
 /// {@category Custom widgets}
 /// A text field that checks the entered value with different functions,
@@ -82,12 +83,8 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
 
 class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldSanitizedAndCheckedUsingABlackList> 
 {
-  bool submitIsBlocked = false;  
-
-  // Useful for automatic scrolling
-  GlobalKey errorMessageKey =
-    GlobalKey(debugLabel: 'file-name-error-msg');
-
+  bool submitIsBlocked = false;
+  
   TextEditingController textFieldEditingController = .new();
   String _errorMessage = "";
   Timer? stringSanitizedErrorTimer;
