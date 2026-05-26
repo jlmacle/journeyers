@@ -267,9 +267,11 @@ class CAProcessState extends State<CAProcess>
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameMobilePlatforms
-                        (fileExtension: fileExtension, 
-                        onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
-                        parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        (
+                          fileExtension: fileExtension, 
+                          onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
+                          parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata,
+                        )
                         // Saving file for desktop platforms
                         : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
                   ),
