@@ -428,21 +428,15 @@ void _handleSessionSelection(Map<String, dynamic> session) {
         //********** Data saving ************//
         Center
         (
-          child: 
-          Column
-          (
-            children: 
-            [
-              // Button to start the data saving process                     
-              _isApplicationFolderPathLoading
-              ? const Center(child: CircularProgressIndicator())
-              : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
-                  // Defining file name and saving file for mobile platforms 
-                  ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  onFileNameSubmittedProcessCallbackFunction: (value) => processFileNameUpdate (value), parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
-                  // Saving file for desktop platforms
-                  : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
-            ],
-          ),
+          child:         
+            // Button to start the data saving process                     
+            _isApplicationFolderPathLoading
+            ? const Center(child: CircularProgressIndicator())
+            : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
+                // Defining file name and saving file for mobile platforms 
+                ? SessionFileNameMobilePlatforms(fileExtension: fileExtension,  onFileNameSubmittedProcessCallbackFunction: (value) => processFileNameUpdate (value), parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                // Saving file for desktop platforms
+                : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
         ),
       ]
     );
