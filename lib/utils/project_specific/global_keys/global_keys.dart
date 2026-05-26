@@ -15,9 +15,6 @@ final GlobalKey<GPSPageState> gpsPageKey = GlobalKey<GPSPageState>(debugLabel:'g
 // Process pages
 GlobalKey<CAProcessState> caProcessKey = GlobalKey(debugLabel:'context-analysis-process');
 GlobalKey<GPSProcessState> gpsProcessKey = GlobalKey(debugLabel:'group-problem-solving-process');
-// Useful for automatic scrolling
-GlobalKey errorMessageKey = GlobalKey(debugLabel: 'file-name-error-msg');
-
 
 // Dashbooard widgets
 GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKeyCA = GlobalKey(debugLabel: 'context-analyses-dashboard-sorting-by-keywords');

@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -61,6 +62,9 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// A map with blacklisting functions as keys, and error messages as values.
   final Map<BlacklistingFunction,String> blacklistingFunctionsErrorsMapping;
 
+  /// The context of the text field
+  final String? textFieldContext;
+
   const TextFieldSanitizedAndCheckedUsingABlackList
   ({
     super.key,
@@ -78,7 +82,9 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.additionalOnChangedInstructions = placeHolderFunctionString,
     this.additionalOnSubmittedInstructions = placeHolderFunctionString,
     required this.stringSanitizerBundlesErrorsMapping,
-    required this.blacklistingFunctionsErrorsMapping  
+    required this.blacklistingFunctionsErrorsMapping,
+    this.textFieldContext
+    
   });
 
   @override
@@ -88,6 +94,12 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
 class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldSanitizedAndCheckedUsingABlackList> 
 {
   bool submitIsBlocked = false;
+
+  // Useful for automatic scrolling
+  GlobalKey errorMessageKeyCA = GlobalKey(debugLabel: 'context-analysis-file-name-error-msg');
+  GlobalKey errorMessageKeyGPS = GlobalKey(debugLabel: 'group-problem-solving-file-name-error-msg');
+  GlobalKey errorMessageKeyGeneric = GlobalKey(debugLabel: 'generic-file-name-error-msg');
+  late GlobalKey errorMessageKey;
   
   TextEditingController textFieldEditingController = .new();
   String _errorMessage = "";
@@ -350,6 +362,21 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   @override
   Widget build(BuildContext context) 
   {
+    switch (widget.textFieldContext) 
+    {
+      case null:
+      {
+        errorMessageKey = errorMessageKeyGeneric;
+      }      
+      case DashboardUtils.caContext:
+      {
+        errorMessageKey = errorMessageKeyCA;
+      }
+      case DashboardUtils.gpsContext:
+      {
+        errorMessageKey = errorMessageKeyGPS;
+      }
+    }
     return TextField
     (
       controller: textFieldEditingController,
