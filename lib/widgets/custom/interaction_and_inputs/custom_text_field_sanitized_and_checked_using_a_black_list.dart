@@ -28,6 +28,9 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// The style for the hint text.
   final TextStyle textFieldHintStyle;
 
+  /// A GlobalKey for the error message
+  final GlobalKey? errorMessageFieldKey;
+
   /// The style for the error message.
   final TextStyle errorMessageStyle;
 
@@ -65,6 +68,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     required this.textFieldStyle,
     required this.textFieldHint,
     required this.textFieldHintStyle,
+    this.errorMessageFieldKey,
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
     this.textFieldMaxLength = CAFormMiscConstants.chars10Lines, // 10 lines as a reference
@@ -375,7 +379,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
           ),
           error: Center
           (
-            key: errorMessageKey,
+            key: widget.errorMessageFieldKey ?? errorMessageKey,
             child: Text
             (
               textAlign: TextAlign.center, 
