@@ -173,6 +173,9 @@ Future<void> main() async {
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords
+          
+          // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2)); 
           await searchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -229,6 +232,9 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the title and keywords
+            
+            // To avoid intermittent test failures
+            await tester.pump(const Duration(seconds: 2)); 
             await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
@@ -309,6 +315,9 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the title and keywords
+            
+            // To avoid intermittent test failures
+            await tester.pump(const Duration(seconds: 2));
             await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
@@ -390,6 +399,9 @@ Future<void> main() async {
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords
+          
+          // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2));
           await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
@@ -475,6 +487,9 @@ Future<void> main() async {
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords
+          
+          // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2));
           await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
@@ -560,6 +575,9 @@ Future<void> main() async {
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords
+          
+          // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2));
           await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
           
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────

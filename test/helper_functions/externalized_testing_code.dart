@@ -61,6 +61,9 @@ final q = CAQuestionsFields();
   // Method used to check that the new CA process button functions
   Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
   {
+    // To avoid intermittent test failures
+    await tester.pump(const Duration(seconds: 2)); 
+
     // Verifying the NewProcessButton present
     expect(
       find.byType(NewProcessButton),
