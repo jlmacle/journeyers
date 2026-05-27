@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:share_plus/share_plus.dart';
+
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
@@ -8,6 +10,9 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+
+// Used to store a temporary file path used for session data sharing.
+String tmpFilePath = "";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
@@ -58,7 +63,6 @@ class _SessionsListItemState extends State<SessionsListItem>
 {
   TextEditingController kwsEditController = .new();
 
-
   // To clean
   void onKeywordsUpdated(String? filePath) async
   {
@@ -76,7 +80,15 @@ class _SessionsListItemState extends State<SessionsListItem>
     if (!context.mounted) return;
     Navigator.of(context).pop();
   }
-  
+
+  // Method used to update the temporary file path used for session data sharing
+  void updateTmpFilePath(String tmpFilePathFromPreview)
+  {    
+    tmpFilePath = tmpFilePathFromPreview;
+
+    if (sessionDataDebug) pu.printd("Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
+  }
+
   @override void dispose() 
   {
     kwsEditController.dispose();
@@ -178,7 +190,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     // To preview the session data
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
-                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata),
+                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, updateTmpFilePath),
                       tooltip: previewTooltipLabel,
                     ),
                     // To edit the session file data
@@ -226,10 +238,9 @@ class _SessionsListItemState extends State<SessionsListItem>
 
 
 // Method used to display an overlay with a session data preview. 
-void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata) 
+void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) 
 {
   String title = sessionMetadata[DashboardUtils.keyTitle];
-  
   showGeneralDialog
   (
     context: context,
@@ -267,7 +278,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
               IconButton(
                 icon: const Icon(Icons.share),
                 color: appBarWhite,
-                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Share not yet implemented.')));},
+                onPressed: () 
+                {shareSession(context, sessionMetadata, tmpFilePath);},
                 tooltip: "Share session",
               ),
             ],
@@ -294,8 +306,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
               (sessionMetadata[DashboardUtils.keyFilePath] != null)
               ?
                 (dashboardContext == DashboardUtils.caContext)
-                ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
-                : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath])
+                ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
+                : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
               :
                 const Text('Null file path'),
             ),
@@ -304,6 +316,32 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
       );
     }
   );
+}
+
+// Triggers the platform's native share sheet for a session.
+// Shares both the raw session file (CSV / TXT) and some metadata.
+Future<void> shareSession(
+  BuildContext context,
+  Map<String, dynamic> sessionMetadata,
+  String tmpFilePath
+) async
+{
+  final String title     = sessionMetadata[DashboardUtils.keyTitle]    ?? '';
+  final String date      = sessionMetadata[DashboardUtils.keyDate]     ?? '';
+  final List<dynamic> keywords = sessionMetadata[DashboardUtils.keyKeywords] ?? [];
+
+  final String shareText =
+      'Session: $title\n'
+      'Date: $date\n'
+      'Keywords: ${keywords.join(', ')}';
+
+  final ShareParams params = ShareParams(
+          subject: title,
+          text: shareText,
+          files: [XFile(tmpFilePath)],
+        );
+
+  await SharePlus.instance.share(params);
 }
 
 void _showKeywordsEditSheet

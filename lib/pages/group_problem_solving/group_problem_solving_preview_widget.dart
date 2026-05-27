@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
@@ -15,9 +16,13 @@ class GPSPreviewWidget extends StatefulWidget {
   /// The path to a stored group problem-solving session data.
   final String pathToStoredData;
 
+  /// Callback function used to update the temporary file path used for sharing a session data.
+  final ValueChanged<String> gpsPreviewCallbackFunctionToUpdateTmpFilePath;
+
   const GPSPreviewWidget({
     super.key,
     required this.pathToStoredData,
+    required this.gpsPreviewCallbackFunctionToUpdateTmpFilePath
   });
 
   @override
@@ -99,6 +104,16 @@ class _GPSPreviewWidgetState
         // Loading the file content
         txtLines = csvFile.readAsLinesSync();
       }
+      
+      // To clean
+      // Writing the content in a temporary file for data sharing
+      Directory testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_preview_temp');
+      String tmpFilePathWithExtension = path.join(testTmpDir.path, widget.pathToStoredData.split("/").last);
+      var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));
+      String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
+      if (sessionDataDebug) pu.printd("Session Data: GPSPreview: _fetchingData: saveFileUsingWriteAsBytes: tmpFilePath: $tmpFilePath");
+      // Updating the value for the session list item
+      widget.gpsPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);   
 
       // Building the preview
       if (txtLines.length >= 2) {
