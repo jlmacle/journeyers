@@ -130,10 +130,10 @@ Future<void> main() async {
   {
     group('Preview Tests: Mobile: \n', () 
     {
-      // 'Session data entered is found on the preview '
+      // 'Session data entered is found on the preview'
       // '(assuming an already selected path to the user session data folder)',
       testWidgets(
-        'Session data entered is found on the preview '
+        'Session data entered is found on the preview'
         '(assuming an already selected path to the user session data folder)',
         (WidgetTester tester) async {
 
@@ -189,7 +189,6 @@ Future<void> main() async {
           }
         }
       );
-
     });
 
     group('Deletion Tests: Mobile: \n', ()
