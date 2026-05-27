@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
@@ -20,9 +21,13 @@ class CAPreviewWidget extends StatefulWidget
   /// The path to a stored context analysis session data.
   final String pathToStoredData;
 
+  /// Callback function used to update the temporary file path used for sharing a session data.
+  final ValueChanged<String> caPreviewCallbackFunctionToUpdateTmpFilePath;
+
   const CAPreviewWidget({
     super.key, 
-    required this.pathToStoredData
+    required this.pathToStoredData,
+    required this.caPreviewCallbackFunctionToUpdateTmpFilePath
   });
 
   @override
@@ -436,6 +441,16 @@ class _CAPreviewWidgetState extends State<CAPreviewWidget>
       // Loading the file content
       csvLines = csvFile.readAsLinesSync();
     }
+
+    // To clean
+    // Writing the content in a temporary file for data sharing
+    Directory testTmpDir = await Directory.systemTemp.createTemp('context_analysis_preview_temp');
+    String tmpFilePathWithExtension = path.join(testTmpDir.path, pathToCSVFile.split("/").last);
+    var dataBytes = Uint8List.fromList(utf8.encode(csvLines.toString()));
+    String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
+    if (sessionDataDebug) pu.printd("Session Data: CAPreview: caCSVFileToPreviewPerspectiveData: saveFileUsingWriteAsBytes: tmpFilePath: $tmpFilePath");
+    // Updating the value for the session list item
+    widget.caPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);    
 
     // Mapping the data toward the individual and group perspectives
     for(var line in csvLines)
