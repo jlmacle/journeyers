@@ -4,10 +4,10 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
 /// {@category Group problem-solving}
-/// A widget used to add a new solution to the list.
+/// A widget used to add a new idea to the list.
 class GPSNewSolution extends StatefulWidget 
 {
-  /// A callback function used to update the list of solutions.
+  /// A callback function used to update the list of ideas.
   final ValueChanged<String> onSolutionAddedCallbackFunction;
 
   const GPSNewSolution
@@ -22,23 +22,25 @@ class GPSNewSolution extends StatefulWidget
 
 class _GPSNewSolutionState extends State<GPSNewSolution> 
 {
-  // TextEditingController for entering a new solution
-  final TextEditingController _solutionController = .new();
+  // TextEditingController for entering a new idea
+  final TextEditingController _ideaController = .new();
+  // FocusNode used to keep the focus on the new idea field after an idea has been entered
+  final FocusNode _ideaFocusNode = FocusNode();
 
-  // Method to handle adding a solution to the list
+  // Method to handle adding an idea to the list
   void _submitSolution() {
-    if (_solutionController.text.trim().isNotEmpty) {
-      // Adding the new solution to the list
-      widget.onSolutionAddedCallbackFunction(_solutionController.text.trim());
-      _solutionController.clear();
+    if (_ideaController.text.trim().isNotEmpty) {
+      // Adding the new idea to the list
+      widget.onSolutionAddedCallbackFunction(_ideaController.text.trim());
+      _ideaController.clear();
     }
-    FocusScope.of(context).unfocus();
+    _ideaFocusNode.unfocus();
   }
 
   @override
   void dispose() 
   {
-    _solutionController.dispose();
+    _ideaController.dispose();
     super.dispose();
   }
 
@@ -52,9 +54,10 @@ class _GPSNewSolutionState extends State<GPSNewSolution>
             children: [
               Expanded(
                 child: TextField(
-                  controller: _solutionController,
+                  focusNode: _ideaFocusNode,
+                  controller: _ideaController,
                   decoration: const InputDecoration(
-                    hintText: newSolutionTextFieldHint,
+                    hintText: newIdeaTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
                   onSubmitted: (_) => _submitSolution(),

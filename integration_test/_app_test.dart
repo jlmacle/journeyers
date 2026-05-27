@@ -58,8 +58,8 @@ Future<void> main() async {
   const String kwWorkplace = 'Workplace';
   const List<String> kwsList = [kwCompanionship, kwWorkplace];
 
-  // Solutions
-  const solutionsList1 = ['solution1', 'solution2'];
+  // Ideas
+  const ideasList1 = ['idea1', 'idea2'];
 
   // File names
   const String fileName1WithoutExtension = 'file1';
@@ -218,18 +218,18 @@ Future<void> main() async {
           // ── 4. ADDING ADDITIONAL GPS DATA  ──
           // ────────────────────────────────────          
 
-          // Adding solutions
-          // Searching the text field used to add solutions
+          // Adding ideas
+          // Searching the text field used to add ideas
           var newSolutionTextFieldFinder = find.ancestor
           (
-            of: find.text(newSolutionTextFieldHint), 
+            of: find.text(newIdeaTextFieldHint), 
             matching: find.byType(TextField)
           );
 
-          // Adding the solutions
-          for (var solution in solutionsList1)
+          // Adding the ideas
+          for (var idea in ideasList1)
           {
-            await tester.enterText(newSolutionTextFieldFinder, solution);
+            await tester.enterText(newSolutionTextFieldFinder, idea);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();

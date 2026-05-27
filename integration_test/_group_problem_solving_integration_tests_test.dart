@@ -94,8 +94,8 @@ Future<void> main() async {
                       [kwCompanionship, kwStudies], [kwMaintenance], [kwMaintenance],
                     ];
 
-  // Solutions
-  const solutionsList1 = ['solution1', 'solution2'];
+  // Ideas
+  const ideasList1 = ['idea1', 'idea2'];
 
   // File names
   const String fileName1WithoutExtension = 'file1';
@@ -168,7 +168,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: kwsList,
-              solutionsList: solutionsList1,
+              ideasList: ideasList1,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -182,7 +182,7 @@ Future<void> main() async {
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             await tester.pump(const Duration(seconds: 2));
-            await testGPSPreview(tester: tester, title: testGPSTitle1, solutionsList: solutionsList1);
+            await testGPSPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -232,7 +232,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: kwsList,
-              solutionsList: solutionsList1,
+              ideasList: ideasList1,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -300,7 +300,7 @@ Future<void> main() async {
               tester: tester,
               titlesList: titlesList,
               kwsLists: [[], [], []],
-              solutionsList: [solutionsList1, solutionsList1, solutionsList1],
+              ideasList: [ideasList1, ideasList1, ideasList1],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
 
@@ -395,7 +395,7 @@ Future<void> main() async {
               tester: tester,
               titlesList: titlesList,
               kwsLists: [[], [], []],
-              solutionsList: [solutionsList1, solutionsList1, solutionsList1],
+              ideasList: [ideasList1, ideasList1, ideasList1],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
             // await tester.pump(const Duration(seconds: 2));
@@ -476,7 +476,7 @@ Future<void> main() async {
               tester: tester,
               titlesList: titlesList,
               kwsLists: [[], [], []],
-              solutionsList: [solutionsList1, solutionsList1, solutionsList1],
+              ideasList: [ideasList1, ideasList1, ideasList1],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
             // await tester.pump(const Duration(seconds: 2));
@@ -573,7 +573,7 @@ Future<void> main() async {
                 tester: tester,
                 titlesList: titlesListKwsSorting,
                 kwsLists: kwsListsKwsSorting,
-                solutionsList: [solutionsList1, solutionsList1, solutionsList1, solutionsList1, solutionsList1, solutionsList1],
+                ideasList: [ideasList1, ideasList1, ideasList1, ideasList1, ideasList1, ideasList1],
                 fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
               );
               await tester.pump(const Duration(seconds: 4));

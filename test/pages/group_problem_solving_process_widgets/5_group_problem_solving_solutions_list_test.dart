@@ -2,29 +2,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
 void main() 
 {
-  Future<void> pumpGPSSolutionsList(WidgetTester tester) async
+  Future<void> pumpGPSIdeasList(WidgetTester tester) async
   {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
-          body: GPSSolutionsList
+          body: GPSIdeasList
           (
-            solutions: [],
+            ideas: [],
           ),
         ),
       ),
     );
   }
 
-  group('GPSSolutionsList Tests: \n', 
+  group('GPSIdeasList Tests: \n', 
   () 
   {  
-    group("GPSSolutionsList default aspect: \n", 
+    group("GPSIdeasList default aspect: \n", 
     () 
     {
       // 'The title is present'
@@ -32,10 +32,10 @@ void main()
       (WidgetTester tester) async 
       {
         // Pumping the widget
-        await pumpGPSSolutionsList(tester);
+        await pumpGPSIdeasList(tester);
 
         // Verifying the title present
-        expect(find.text(solutionsListTitle), findsOne);        
+        expect(find.text(ideasListTitle), findsOne);        
       });    
 
       // 'The placeholder is present'
@@ -43,10 +43,10 @@ void main()
       (WidgetTester tester) async 
       {
         // Pumping the widget
-        await pumpGPSSolutionsList(tester);
+        await pumpGPSIdeasList(tester);
 
         // Verifying the placeholder present
-        expect(find.text(solutionsListPlaceholder), findsOne);        
+        expect(find.text(ideasListPlaceholder), findsOne);        
       });          
     
     });
