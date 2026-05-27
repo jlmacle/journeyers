@@ -147,7 +147,7 @@ final q = CAQuestionsFields();
 
     // Getting the total number of custom checkboxes
     int totalCheckboxes = checkboxFinder.evaluate().length;
-    if (testingDebug) pu.printd("Number of custom checkboxes: $totalCheckboxes");
+    if (testingDebug) pu.printd("Testing Debug: Number of custom checkboxes: $totalCheckboxes");
 
     // Adding text to every text field under a custom checkbox
     for (int index = 0; index < totalCheckboxes; index++) 
@@ -213,7 +213,7 @@ final q = CAQuestionsFields();
 
     // Getting the total number of custom segmented buttons
     int totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-    if (testingDebug) pu.printd("Number of custom segmented buttons: $totalSegmentedButtons");
+    if (testingDebug) pu.printd("Testing Debug: Number of custom segmented buttons: $totalSegmentedButtons");
 
      for (int index = 0; index < totalSegmentedButtons; index++) 
     {
@@ -721,8 +721,8 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
   }) async
   {
 
-    if (testingDebug) pu.printd("Individual perspective values: $individualStringValues");
-    if (testingDebug) pu.printd("Group/teams perspective values: $groupStringValues");
+    if (testingDebug) pu.printd("Testing Debug: Individual perspective values: $individualStringValues");
+    if (testingDebug) pu.printd("Testing Debug: Group/teams perspective values: $groupStringValues");
 
     // The total number of expansion tile for the individual perspective
     int totalIndivExpansionTiles = 0;
@@ -743,7 +743,7 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
 
     // Getting the total number of expansion tiles
     int totalExpansionTiles = expansionTilesFinder.evaluate().length;
-    if (testingDebug) pu.printd("Number of expansion tiles: $totalExpansionTiles");
+    if (testingDebug) pu.printd("Testing Debug: Number of expansion tiles: $totalExpansionTiles");
     // Should be 9: 4 for the individual perspective, 5 for the group/teams perspective
 
     // Expansion tile indexes for the individual perspective
@@ -751,8 +751,8 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
     // Expansion tile indexes for the group/teams perspective
     var groupIndexes = List.generate(5, (i)=> i+4);
 
-    if (testingDebug) pu.printd("Expansion tile indexes for the individual perspective: $indivIndexes");
-    if (testingDebug) pu.printd("Expansion tile indexes for the group/teams perspective: $groupIndexes");
+    if (testingDebug) pu.printd("Testing Debug: Expansion tile indexes for the individual perspective: $indivIndexes");
+    if (testingDebug) pu.printd("Testing Debug: Expansion tile indexes for the group/teams perspective: $groupIndexes");
     
     // To have the index of the data for each perspective
     // Reset for the group/teams perspective
@@ -771,7 +771,7 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
       ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(currentExpansionTileFinder);
       Text expansionTileTitleWidget = expansionTileWidget.title as Text;
       String expansionTileTitle = expansionTileTitleWidget.data!;
-      if (testingDebug) pu.printd("\n Expansion tile title: $expansionTileTitle");
+      if (testingDebug) pu.printd("Testing Debug: \n Expansion tile title: $expansionTileTitle");
       
       // Getting all the list tiles for the expansion tile
       var listTilesFinder = find.descendant
@@ -815,8 +815,8 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
         ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
         Text listTileTitleWidget = listTileWidget.title as Text;
         String listTileTitle = listTileTitleWidget.data!;
-        if (testingDebug) pu.printd("List tiles title for: $expansionTileTitle: $listTileTitle");
-        if (testingDebug) pu.printd("expansionTileIndex: $expansionTileIndex, listTileIndex: $listTileIndex");
+        if (testingDebug) pu.printd("Testing Debug: List tiles title for: $expansionTileTitle: $listTileTitle");
+        if (testingDebug) pu.printd("Testing Debug: expansionTileIndex: $expansionTileIndex, listTileIndex: $listTileIndex");
 
         // Testing if the expansion tile is related to the individual perspective
         if (q.level3TitlesIndividual.contains(expansionTileTitle))
@@ -832,7 +832,7 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
             // Getting the list tile subtitle
             Text listTileSubTitleWidget = listTileWidget.subtitle as Text;
             String listTileSubTitle = listTileSubTitleWidget.data!;
-            if (testingDebug) pu.printd("List tiles subtitle for $expansionTileTitle: $listTileSubTitle");
+            if (testingDebug) pu.printd("Testing Debug: List tiles subtitle for $expansionTileTitle: $listTileSubTitle");
             
             expect(listTileSubTitle, "Notes: ${individualStringValues[previewListTileDataIndex]}");
           }          
