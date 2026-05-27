@@ -251,12 +251,19 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
           leadingWidth: 100,
           leading: Row(
             children: [
-              IconButton(
-                icon: const Icon(Icons.edit),
-                color: appBarWhite,
-                onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
-                tooltip: editTooltipLabel,
-              ),
+              // Edit only for personal data
+              // Group-data is kept read-only
+              dashboardContext == DashboardUtils.caContext 
+                ?
+                IconButton
+                (
+                  icon: const Icon(Icons.edit),
+                  color: appBarWhite,
+                  onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
+                  tooltip: editTooltipLabel,
+                )
+                :
+                const SizedBox(height: 0, width: 0),
               IconButton(
                 icon: const Icon(Icons.share),
                 color: appBarWhite,
