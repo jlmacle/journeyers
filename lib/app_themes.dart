@@ -201,7 +201,7 @@ const TextStyle problemSolvingChecklistMessage = TextStyle
   fontWeight: FontWeight.normal,
 );
 
-const TextStyle problemSolvingSolutionsTitle = TextStyle
+const TextStyle problemSolvingIdeasTitle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.bold,

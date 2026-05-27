@@ -32,7 +32,7 @@ class _GPSPreviewWidgetState
   bool _isLoading = true;
   String _sessionTitle = "";
   String _dateString = "";
-  List<String> _solutions = [];
+  List<String> _ideas = [];
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _GPSPreviewWidgetState
     try {
       if (pathsForTestFiles.contains(widget.pathToStoredData)) 
       {
-        _solutions = [testDataMessage];
+        _ideas = [testDataMessage];
         return;
       }
 
@@ -106,9 +106,9 @@ class _GPSPreviewWidgetState
         // Extracting date from the second line: "Date: MMMM dd, yyyy h:mm a"
         _dateString = txtLines[2].replaceFirst("Date: ", "");
         
-        // Solutions start after the "---" separator (index 3 onwards)
+        // Ideas start after the "---" separator (index 3 onwards)
         // We strip the "1. ", "2. " numbering prefix
-        _solutions = txtLines
+        _ideas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
             .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
@@ -132,8 +132,8 @@ class _GPSPreviewWidgetState
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (_solutions.isEmpty) {
-      return const Center(child: Text("No solutions found."));
+    if (_ideas.isEmpty) {
+      return const Center(child: Text("No ideas found."));
     }
 
     return Column(
@@ -147,15 +147,15 @@ class _GPSPreviewWidgetState
           ),
         ),
         const Divider(),
-        ..._solutions.map((solution) => Padding(
+        ..._ideas.map((idea) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              // Rows with the solutions texts
+              // Rows with the ideas texts
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Icon(Icons.arrow_forward, size: 18),
                   const SizedBox(width: 8),
-                  Expanded(child: Text(solution)),
+                  Expanded(child: Text(idea)),
                 ],
               ),
             )),

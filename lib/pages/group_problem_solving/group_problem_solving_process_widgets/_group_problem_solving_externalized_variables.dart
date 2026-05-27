@@ -32,12 +32,12 @@ const closeChecklistTooltipLabel = "Close checklist";
 const keywordsDeclarationTitle = "Keywords";
 const closeKeywordsDeclarationTooltipLabel = "Close keywords declaration";
 
-// GPSSolutionsList
-const solutionsListTitle = "List of solutions";
-const solutionsListPlaceholder = "No solutions added yet.";
+// GPSIdeasList
+const ideasListTitle = "List of ideas";
+const ideasListPlaceholder = "No ideas added yet.";
 
-// GPSNewSolution
-const newSolutionTextFieldHint = "Please type a solution.";
+// GPSNewIdea
+const newIdeaTextFieldHint = "Please type to enter an idea.";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";

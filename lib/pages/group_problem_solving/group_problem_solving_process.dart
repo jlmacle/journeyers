@@ -15,8 +15,8 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_solution.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -97,8 +97,8 @@ class GPSProcessState extends State<GPSProcess>
   List<Map<String, dynamic>> _history = [];
   
   // ─── SOLUTIONS related data ───────────────────────────────────────
-  // List to store the solutions entered by the user
-  final List<String> _solutions = [];
+  // List to store the ideas entered by the user
+  final List<String> _ideas = [];
   
   // ─── FILE SAVING related data ───────────────────────────────────────
   String fileName = "";
@@ -113,10 +113,10 @@ class GPSProcessState extends State<GPSProcess>
   // Method used to save data and metadata
   Future<void> saveDataAndMetadata() async 
   {
-    if (_solutions.isEmpty) 
+    if (_ideas.isEmpty) 
     {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("No solutions to save!")),
+        const SnackBar(content: Text("No ideas to save!")),
       );
       return;
     }
@@ -125,17 +125,17 @@ class GPSProcessState extends State<GPSProcess>
         ? _problemTitleController.text.trim()
         : "Problem Solving Session";
 
-    // Format solutions for the text file
+    // Format ideas for the text file
     var now = DateTime.now();
     //.add_jm() to add this hour:minutes format: 5:08 PM
     var formatter = DateFormat('MMMM dd, yyyy').add_jm();
     var formattedDate = formatter.format(now);
-    String fileContent = "Group Problem Solving Solutions\n";
+    String fileContent = "Group Problem Solving Ideas\n";
     fileContent += "$sessionTitle\n";
     fileContent += "Date: $formattedDate\n";
     fileContent += "----------------------------\n";
-    for (var i = 0; i < _solutions.length; i++) {
-      fileContent += "${i + 1}. ${_solutions[i]}\n";
+    for (var i = 0; i < _ideas.length; i++) {
+      fileContent += "${i + 1}. ${_ideas[i]}\n";
     }
     
     Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));
@@ -244,10 +244,10 @@ void _handleSessionSelection(Map<String, dynamic> session) {
   });
 }
 
-  // Method used to add a solution to the list of solutions
+  // Method used to add an idea to the list of ideas
   void addSolutionToList(String value)
   {
-    _solutions.add(value);
+    _ideas.add(value);
     setState(() {});
   }
 
@@ -369,9 +369,9 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     (
                       child: Divider()                       
                     ), 
-                    // Solutions List component
+                    // Ideas List component
                     SliverToBoxAdapter(
-                      child: GPSSolutionsList(solutions: _solutions),
+                      child: GPSIdeasList(ideas: _ideas),
                     ),
                   ]
                 )

@@ -422,24 +422,24 @@ final q = CAQuestionsFields();
     );
   }      
 
-// Method used to enter solutions
-  Future<void> enterSolutions
+// Method used to enter ideas
+  Future<void> enterIdeas
   (
     WidgetTester tester,
-    List<String> solutionsList
+    List<String> ideasList
   ) async
   {
-    // Searching the text field used to add solutions
+    // Searching the text field used to add ideas
     var newSolutionTextFieldFinder = find.ancestor
     (
-      of: find.text(newSolutionTextFieldHint), 
+      of: find.text(newIdeaTextFieldHint), 
       matching: find.byType(TextField)
     );
 
-    // Adding the solutions
-    for (var solution in solutionsList)
+    // Adding the ideas
+    for (var idea in ideasList)
     {
-      await tester.enterText(newSolutionTextFieldFinder, solution);
+      await tester.enterText(newSolutionTextFieldFinder, idea);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       // pumpAndSettle timed out
       // await tester.pumpAndSettle();
@@ -456,7 +456,7 @@ Future<void> enterNewGPSProcessData
   required WidgetTester tester, 
   required String title,
   required List<String> kwsList,
-  required List<String> solutionsList,
+  required List<String> ideasList,
   required String fileNameWithoutExtension
 }) async
 {
@@ -476,7 +476,7 @@ Future<void> enterNewGPSProcessData
   await enterGPSProcessKeywords(tester, kwsList);
   
   // ── SOLUTIONS SECTION ─────────────────────────────────────────────────────────────
-  await enterSolutions(tester, solutionsList);
+  await enterIdeas(tester, ideasList);
   
   // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
   // Entering the file name and submitting data
@@ -490,7 +490,7 @@ Future<void> enterNewGPSProcessData
     required WidgetTester tester,
     required List<String> titlesList,
     required List<List<String>> kwsLists,
-    required List<List<String>> solutionsList,
+    required List<List<String>> ideasList,
     required List<String> fileNamesWithoutExtensionList
   }) async
   {
@@ -502,7 +502,7 @@ Future<void> enterNewGPSProcessData
         tester: tester, 
         title: titlesList[index],
         kwsList: kwsLists[index], 
-        solutionsList: solutionsList[index],
+        ideasList: ideasList[index],
         fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
       );
     }
@@ -869,7 +869,7 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
   ({
     required WidgetTester tester, 
     required String title,
-    required List<String> solutionsList
+    required List<String> ideasList
   }) async
   {
     // Searching the preview tooltip for the session
@@ -900,9 +900,9 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
     expect (titleInAppBarFinder, findsOne);
 
     // TODO: To finish. Code valuable as is.
-    // Verifying the solutions present
-    for (var solution in solutionsList)
+    // Verifying the ideas present
+    for (var idea in ideasList)
     {
-      expect(find.text(solution), findsOne);
+      expect(find.text(idea), findsOne);
     }
   }

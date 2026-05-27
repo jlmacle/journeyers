@@ -9,7 +9,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_solutions_list.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -471,11 +471,11 @@ void main()
   );
 
 
-  group('List of Solutions Tests: \n', 
+  group('List of Ideas Tests: \n', 
   () 
   { 
-    // '50 solutions added are found in the list of solutions'
-    testWidgets('50 solutions added are found in the list of solutions', 
+    // '50 ideas added are found in the list of ideas'
+    testWidgets('50 ideas added are found in the list of ideas', 
     (WidgetTester tester) async 
     {
       var someText = "someText";
@@ -483,10 +483,10 @@ void main()
       // Pumping the widget
       await pumpGPSProcess(tester);
 
-      // Searching the text field used to add solutions
+      // Searching the text field used to add ideas
       var newSolutionTextFieldFinder = find.ancestor
       (
-        of: find.text(newSolutionTextFieldHint), 
+        of: find.text(newIdeaTextFieldHint), 
         matching: find.byType(TextField)
       );
 
@@ -502,14 +502,14 @@ void main()
         // Verifying the text present
         var textFinder = find.descendant
         (
-          of: find.byType(GPSSolutionsList), 
+          of: find.byType(GPSIdeasList), 
           matching: find.text("$someText$i")
         );
         expect(textFinder.evaluate().length, 1);
       }
 
       // Verifying the placeholder text absent
-      expect(find.text(solutionsListPlaceholder), findsNothing);
+      expect(find.text(ideasListPlaceholder), findsNothing);
     });
 
   });
