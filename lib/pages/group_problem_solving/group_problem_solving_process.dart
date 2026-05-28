@@ -437,6 +437,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                 ? SessionFileNameMobilePlatforms
                 (
                   fileExtension: fileExtension, 
+                  editedFileName: "",
                   onFileNameSubmittedProcessCallbackFunction: (value) => processFileNameUpdate (value), 
                   parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata,
                 )

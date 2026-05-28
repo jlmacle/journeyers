@@ -19,7 +19,8 @@ void main() {
           home: Scaffold(
             body: CATitleDeclaration
             (
-              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
+              editedTitle: "",
+              on_analysisTitleUpdatedProcessCallbackFunction: (_){},
             )
           ),
         ),

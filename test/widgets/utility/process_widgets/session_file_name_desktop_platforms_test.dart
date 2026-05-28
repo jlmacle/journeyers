@@ -31,11 +31,15 @@ void main()
           // Loading the widget
           await tester.pumpWidget
           (
-              const MaterialApp(
+            MaterialApp(
               home: Scaffold(
-              body: CAProcess(),
+                body: CAProcess
+                (
+                  caPageCallbackFunctionToRefreshThePage: (){},
+                  parentCallbackFunctionToSetFocusabilityOfBottomBarItems: (_){},              
+                )
               ),
-          )
+            )
           );
           await tester.pumpAndSettle();
 

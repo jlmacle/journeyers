@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
 class CATitleDeclaration extends StatefulWidget 
 {
+
+  /// A boolean used to state if the title is autofocused.
+  final bool autofocus;
+
+  /// A title value used at editing time.
+  final String editedTitle;
+  
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> onAnalysisTitleUpdatedProcessCallbackFunction;
+  final ValueChanged<String> on_analysisTitleUpdatedProcessCallbackFunction;
 
   const CATitleDeclaration
   ({
     super.key,
-    required this.onAnalysisTitleUpdatedProcessCallbackFunction
+    this.autofocus = false,
+    required this.editedTitle,
+    required this.on_analysisTitleUpdatedProcessCallbackFunction
   });
 
   @override
@@ -28,18 +38,19 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
     return 
     Padding(
       padding: const EdgeInsets.only(top: 16.0, bottom:16 ),
-      child: TextField
+      child: CATextFieldSanitizedAndPadded
       (
-        textAlign: TextAlign.center,
-        style: analysisTextFieldStyle,
-        decoration: const InputDecoration
-        (
-          hint: Center(child: Text(CAFormMiscConstants.caTitleDeclarationHintText, style: analysisTextFieldHintStyle)),
-          hintStyle: analysisTextFieldHintStyle,                    
-        ),
-        maxLength: 150,
-        onChanged: widget.onAnalysisTitleUpdatedProcessCallbackFunction,
-      ),
+        autofocus: widget.autofocus,
+        textFieldStartValue: widget.editedTitle,
+        textFieldStyle: analysisTextFieldStyle, 
+        textFieldHint: CAFormMiscConstants.caTitleDeclarationHintText, 
+        textFieldHintStyle: analysisTextFieldHintStyle, 
+        errorMessageStyle: analysisTextFieldErrorMessageStyle, 
+        stringSanitizerBundlesErrorsMap: const {},
+        textFieldMaxLength: 150,
+        onTextFieldValueChangedCallbackFunction : widget.on_analysisTitleUpdatedProcessCallbackFunction,
+        
+      )
     );
   }
 }

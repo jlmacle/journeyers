@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
@@ -32,7 +33,16 @@ class CAPage extends StatefulWidget
 }
 
 class CAPageState extends State<CAPage> 
-{  
+{ 
+  // The DTOCAForm value at initState
+  DTOCAForm? _dtoOnInitState;
+ 
+  // Edition-related fields
+  // Value for the edited file name (without extension)
+  String _editedFileNameWithoutExtension = "";
+  // Value for the edited title
+  String _editedTitle = "";
+
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _preferencesLoading = true;
   bool? _wasFirstRunModalAcknowledged;
@@ -112,6 +122,22 @@ class CAPageState extends State<CAPage>
     });
   }
 
+  // Method used to edit a session data
+  void onEditSessionData({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle})
+  {
+    if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
+
+    setState(() {
+      // To have the CAProcess widget loaded with the edited values
+      _wasCASessionDataSaved = false;
+
+      // Loading the CA Process with edited values
+      _dtoOnInitState = dtoForEdition;
+      _editedFileNameWithoutExtension = editedFileNameWithoutExtension;
+      _editedTitle  = editedTitle;
+    });
+  }
+
    // Method used to refresh the page
   void onPageToRefresh()
   {
@@ -173,7 +199,7 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  
+                  onEditSessionDataCallbackFunction: onEditSessionData,
                 )
               ),
             ]
@@ -189,7 +215,7 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: caFormPageFocusNode,
-                  child: CAProcess(key: caProcessKey, caPageCallbackFunctionToRefreshThePage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess(key: caProcessKey, dtoOnInitState: _dtoOnInitState, editedFileName: _editedFileNameWithoutExtension, editedTitle: _editedTitle , caPageCallbackFunctionToRefreshThePage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
