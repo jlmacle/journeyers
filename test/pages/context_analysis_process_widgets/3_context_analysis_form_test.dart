@@ -44,11 +44,15 @@ void main()
   Future<void> pumpCAProcess(WidgetTester tester) async
   {
     await tester.pumpWidget(
-        const MaterialApp
+        MaterialApp
         (
           home: Scaffold
           (
-            body: CAProcess()
+            body: CAProcess
+            (
+              caPageCallbackFunctionToRefreshThePage: (){},
+              parentCallbackFunctionToSetFocusabilityOfBottomBarItems: (_){},              
+            )
           ),
         )
     );

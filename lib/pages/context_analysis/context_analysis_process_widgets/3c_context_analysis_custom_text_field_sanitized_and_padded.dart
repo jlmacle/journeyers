@@ -12,6 +12,9 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_fie
 /// The text field has string sanitization ability. 
 class CATextFieldSanitizedAndPadded extends StatefulWidget 
 {
+  /// A boolean used to state if the title is autofocused.
+  final bool autofocus;
+
   /// If the text field maintains state, when a checkbox with filled text field is unchecked for example.
   final bool maintainState;
 
@@ -63,6 +66,7 @@ class CATextFieldSanitizedAndPadded extends StatefulWidget
   const CATextFieldSanitizedAndPadded
   ({
     super.key,
+    this.autofocus = false,
     this.maintainState = true,
     this.textFieldStartValue = "",
     this.textAlignment = TextAlign.center,
@@ -114,6 +118,7 @@ class _CATextFieldSanitizedAndPaddedState extends State<CATextFieldSanitizedAndP
       child: 
       TextFieldSanitizedAndCheckedUsingABlackList
       (
+        autofocus: widget.autofocus,
         key: textFieldBeforeErrorMessageKey,
         stringSanitizerBundlesErrorsMapping: widget.stringSanitizerBundlesErrorsMap,
         textFieldStartValue: widget.textFieldStartValue,

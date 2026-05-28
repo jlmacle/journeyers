@@ -37,6 +37,9 @@ class SessionsListItem extends StatefulWidget
   /// A callback function called when the title is updated.
   final VoidCallback onEditTitleCallbackFunction;
 
+  // A callback function called when editing the session data.
+  final VoidCallback onEditSessionCallbackFunction;
+
   /// A callback function called when the keywords are updated.
   final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
 
@@ -51,6 +54,7 @@ class SessionsListItem extends StatefulWidget
     required this.dashboardContext,
     required this.onCheckboxChangedCallbackFunction,
     required this.onEditTitleCallbackFunction,
+    required this.onEditSessionCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onDeleteCallbackFunction,
   });
@@ -196,11 +200,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     // To edit the session file data
                     IconButton(
                       icon: const Icon(Icons.edit_document),
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Edit not yet implemented.')),
-                        );
-                      },
+                      onPressed: widget.onEditSessionCallbackFunction,                      
                       tooltip: editTooltipLabel,
                     ),
                     // To edit the keywords

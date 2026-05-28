@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
-import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
@@ -33,6 +34,9 @@ class DashboardPage extends StatefulWidget
   /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
+  /// A callback function called when session data is edited.
+  final FunctionDTOCAFormAnd2Strings onEditSessionDataCallbackFunction;
+
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
@@ -40,7 +44,8 @@ class DashboardPage extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    this.onAllSessionFilesDeletedContextPageCallbackFunction = placeHolderVoidCallback,
+    required this.onAllSessionFilesDeletedContextPageCallbackFunction,
+    required this.onEditSessionDataCallbackFunction,
     required this.dashboardFilteringByKeywordsKey
   });
 
@@ -210,6 +215,12 @@ class DashboardPageState extends State<DashboardPage>
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
   final TextEditingController _titleController = .new();
 
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
+  }
+
   // Method used to update the session title
   Future<void> updateSessionTitle(String filePath, String newTitle) async 
   {
@@ -361,6 +372,7 @@ class DashboardPageState extends State<DashboardPage>
                             session[DashboardUtils.keyTitle],
                             filePath,
                           ),
+                          onEditSessionCallbackFunction: () => _editSessionData(filePath),
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(filePath),
                         );
@@ -457,6 +469,74 @@ class DashboardPageState extends State<DashboardPage>
         ),
       ),
     );
+  }
+
+
+  Future<void> _editSessionData(String filePath) async {
+    // to clean
+    String csvContent = "";
+    String fileNameWithExtension = filePath.split('/').last;
+    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+
+    // Getting the title
+    List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.caContext);
+    var session = sessionDataRetrieved.where((session) => session[DashboardUtils.keyFilePath] == filePath).first as Map<String,dynamic>;
+    var title = session[DashboardUtils.keyTitle];
+
+    if (Platform.isAndroid)
+    {      
+      if (editDebug) pu.printd("Editing: _editSessionData on Android");
+      try
+      {
+        // Outside of testing: reading file using SAF
+        if (!runningTests) { csvContent = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension);}
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("Testing Debug: _editSessionData: Reading $fileNameWithExtension from tmp folder");
+          csvContent = await File(filePath).readAsString();
+        }
+      }
+      on Exception
+      catch(e) {pu.printd("Editing: Exception: CA on Android: $e"); }
+    }
+    else if (Platform.isIOS)
+    {
+      if (previewBuildingDebug) pu.printd("Editing: _editSessionData on iOS");
+      try
+      {
+        // Outside of testing
+        if (!runningTests) { csvContent = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("Editing: _editSessionData: Reading $fileNameWithExtension from tmp folder");
+          csvContent = await File(filePath).readAsString();
+        }
+      }
+      on Exception
+      catch(e) {pu.printd("Editing: Exception: CA on iOS: $e"); }
+    }
+    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
+    {
+      // Checking if the CSV file exists
+      File csvFile = File(filePath);
+      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
+      csvContent = csvFile.readAsStringSync();
+    }
+
+    // Loading the data from the CSV into a DTO
+    DTOCAForm dtoForEdition = DTOCAForm.fromCSV(csvContent);
+
+    // Building the edited versions of title and file name
+    String editedFileNameWithoutExtension = "$fileNameWithoutExtension-edited";
+    String editedTitle = "$title-for-edition";
+
+    if (editDebug) dtoForEdition.printToConsole();
+    if (editDebug) pu.printd("Editing: _editSessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: _editSessionData: editedTitle: $editedTitle");
+    widget.onEditSessionDataCallbackFunction(dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
+    
   }
 
 }

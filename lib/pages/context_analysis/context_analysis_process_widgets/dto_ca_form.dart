@@ -626,7 +626,7 @@ class DTOCAForm
     return filePathWithExtension;
   }
 
-  // ─── fromJson CONSTRUCTOR and helper methods ─────────────────────────────────────────────────────
+  // ─── CONSTRUCTORS and helper methods ─────────────────────────────────────────────────────
 
   /// Populates a [DTOCAForm] from preloaded JSON data.
   factory DTOCAForm.fromJson(Map<String, dynamic> json) {
@@ -666,6 +666,175 @@ class DTOCAForm
     return dto;
   }
 
+
+  // ─── fromCSV CONSTRUCTOR and helper methods ───────────────────────────────────────────────────────
+
+/// Populates a [DTOCAForm] from a CSV string.
+///
+/// The CSV format pairs the individual perspective (cols 0–1) with the
+/// group/team perspective (cols 3–4) on every row.  The two perspectives
+/// are extracted independently and mapped back to DTO fields.
+factory DTOCAForm.fromCSV(String csvContent) {
+  final dto = DTOCAForm();
+
+  // Normalising line endings and discarding blank lines.
+  final lines = csvContent
+      .split('\n')
+      .map((l) => l.endsWith('\r') ? l.substring(0, l.length - 1) : l)
+      .where((l) => l.isNotEmpty)
+      .toList();
+
+  // Each CSV row packs the individual perspective in cols 0-1 and the
+  // group/team perspective in cols 3-4.
+  final List<(String, String)> indivRows = [];
+  final List<(String, String)> groupRows = [];
+
+  for (final line in lines) {
+    final cols = _splitCsvLine(line);
+    while (cols.length < 5) cols.add('');
+    indivRows.add((cols[0].trim(), cols[1].trim()));
+    groupRows.add((cols[3].trim(), cols[4].trim()));
+  }
+
+  _parseIndividualFromRows(dto, indivRows);
+  _parseGroupFromRows(dto, groupRows);
+
+  return dto;
+}
+
+// Parses a single CSV line, respecting double-quoted fields.
+static List<String> _splitCsvLine(String line) {
+  final result = <String>[];
+  final sb = StringBuffer();
+  bool inQuotes = false;
+
+  for (final ch in line.split('')) {
+    if (ch == '"') {
+      inQuotes = !inQuotes;
+      sb.write(ch);
+    } else if (ch == ',' && !inQuotes) {
+      result.add(sb.toString());
+      sb.clear();
+    } else {
+      sb.write(ch);
+    }
+  }
+  result.add(sb.toString());
+  return result;
+}
+
+// Strips the surrounding straight double quotes.
+static String _stripNoteQuotes(String s) {
+  if (s.length >= 2 && s.startsWith('"') && s.endsWith('"')) {
+    return s.substring(1, s.length - 1);
+  }
+  return s;
+}
+
+
+static void _parseIndividualFromRows(
+    DTOCAForm dto, List<(String, String)> rows) {
+  for (int i = 0; i < rows.length; i++) {
+    final (marker, content) = rows[i];
+
+    
+    String readNotes() {
+      if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
+        i++;
+        return _stripNoteQuotes(rows[i].$2);
+      }
+      return '';
+    }
+
+    if (content == qf.level3TitleBalanceIssueItem1) {
+      dto.indivBalanceStudiesHousehold.checked = marker == 'X';
+      if (marker == 'X') dto.indivBalanceStudiesHousehold.text = readNotes();
+    } else if (content == qf.level3TitleBalanceIssueItem2) {
+      dto.indivBalanceAccessingIncomeHousehold.checked = marker == 'X';
+      if (marker == 'X') dto.indivBalanceAccessingIncomeHousehold.text = readNotes();
+    } else if (content == qf.level3TitleBalanceIssueItem3) {
+      dto.indivBalanceEarningIncomeHousehold.checked = marker == 'X';
+      if (marker == 'X') dto.indivBalanceEarningIncomeHousehold.text = readNotes();
+    } else if (content == qf.level3TitleBalanceIssueItem4) {
+      dto.indivBalanceHelpingOthersHousehold.checked = marker == 'X';
+      if (marker == 'X') dto.indivBalanceHelpingOthersHousehold.text = readNotes();
+    } else if (content == qf.level3TitleWorkplaceIssueItem1) {
+      dto.indivAtWorkMoreAppreciated.checked = marker == 'X';
+      if (marker == 'X') dto.indivAtWorkMoreAppreciated.text = readNotes();
+    } else if (content == qf.level3TitleWorkplaceIssueItem2) {
+      dto.indivAtWorkRemainingAppreciated.checked = marker == 'X';
+      if (marker == 'X') dto.indivAtWorkRemainingAppreciated.text = readNotes();
+    } else if (content == qf.level3TitleLegacyIssueItem1) {
+      dto.indivBetterLegacies.checked = marker == 'X';
+      if (marker == 'X') dto.indivBetterLegacies.text = readNotes();
+    } else if (content == qf.level3TitleAnotherIssue) {
+      if (marker == 'X') dto.indivAnotherIssueStr = readNotes();
+    }
+
+  }
+}
+
+static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
+  for (int i = 0; i < rows.length; i++) {
+    final (marker, content) = rows[i];
+
+    String readSelection() {
+      if (i + 1 < rows.length) {
+        final nextContent = rows[i + 1].$2.trim();
+        if (rows[i + 1].$1 == '' &&
+            nextContent.isNotEmpty &&
+            !qf.level2Titles.contains(nextContent) &&
+            !qf.level3TitlesGroup.contains(nextContent)) {
+          i++;
+          return nextContent;
+        }
+      }
+      return '';
+    }
+
+
+    String readNotes() {
+      if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
+        i++;
+        return _stripNoteQuotes(rows[i].$2);
+      }
+      return '';
+    }
+
+    if (content == qf.level3TitleGroupsProblematics) {
+      if (marker == 'X') dto.groupProblemsToSolveStr = readNotes();
+    } else if (content == qf.level3TitleSameProblem) {
+      if (marker == 'X') {
+        final sel = readSelection();
+        dto.groupSameProblemsToSolve.selection =
+            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+        dto.groupSameProblemsToSolve.text = readNotes();
+      }
+    } else if (content == qf.level3TitleHarmonyAtHome) {
+      if (marker == 'X') {
+        final sel = readSelection();
+        dto.groupHarmonyHome.selection =
+            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+        dto.groupHarmonyHome.text = readNotes();
+      }
+    } else if (content == qf.level3TitleAppreciabilityAtWork) {
+      if (marker == 'X') {
+        final sel = readSelection();
+        dto.groupAppreciabilityAtWork.selection =
+            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+        dto.groupAppreciabilityAtWork.text = readNotes();
+      }
+    } else if (content == qf.level3TitleIncomeEarningAbility) {
+      if (marker == 'X') {
+        final sel = readSelection();
+        dto.groupEarningAbility.selection =
+            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+        dto.groupEarningAbility.text = readNotes();
+      }
+    }
+
+  }
+}
   // ── PRIVATE JSON HELPERS ──────────────────────────────────────────────────
 
   // Builds a [DTOCheckboxWithTextField] from a JSON map of the shape
@@ -704,5 +873,37 @@ class DTOCAForm
     if (preloadingDebug) pu.printd("DTO Pre-loading: DTOCAForm: jsonDataMapFromAsset: $decodedData");
     return decodedData;
   }
+
+  // ─── PRINTING/SAVING METHODS ───────────────────────────────────────
+
+/// Prints all DTO field values to the console for debugging purposes.
+///
+/// Uses [pu.printd] to remain consistent with the rest of the class.
+/// Output is wrapped in a visible banner so it is easy to locate in
+/// the log stream.
+void printToConsole() {
+  pu.printd('─── DTOCAForm ──────────────────────────────────────────────');
+
+  // ── Individual perspective ──────────────────────────────────────
+  pu.printd('  ── Individual perspective ──');
+  pu.printd('  indivBalanceStudiesHousehold        : checked=${indivBalanceStudiesHousehold.checked},       text="${indivBalanceStudiesHousehold.text}"');
+  pu.printd('  indivBalanceAccessingIncomeHousehold: checked=${indivBalanceAccessingIncomeHousehold.checked}, text="${indivBalanceAccessingIncomeHousehold.text}"');
+  pu.printd('  indivBalanceEarningIncomeHousehold  : checked=${indivBalanceEarningIncomeHousehold.checked},   text="${indivBalanceEarningIncomeHousehold.text}"');
+  pu.printd('  indivBalanceHelpingOthersHousehold  : checked=${indivBalanceHelpingOthersHousehold.checked},   text="${indivBalanceHelpingOthersHousehold.text}"');
+  pu.printd('  indivAtWorkMoreAppreciated          : checked=${indivAtWorkMoreAppreciated.checked},           text="${indivAtWorkMoreAppreciated.text}"');
+  pu.printd('  indivAtWorkRemainingAppreciated     : checked=${indivAtWorkRemainingAppreciated.checked},      text="${indivAtWorkRemainingAppreciated.text}"');
+  pu.printd('  indivBetterLegacies                 : checked=${indivBetterLegacies.checked},                 text="${indivBetterLegacies.text}"');
+  pu.printd('  indivAnotherIssueStr                : "$indivAnotherIssueStr"');
+
+  // ── Group / team perspective ────────────────────────────────────
+  pu.printd('  ── Group/team perspective ──');
+  pu.printd('  groupProblemsToSolveStr   : "$groupProblemsToSolveStr"');
+  pu.printd('  groupSameProblemsToSolve  : selection=${groupSameProblemsToSolve.selection},    text="${groupSameProblemsToSolve.text}"');
+  pu.printd('  groupHarmonyHome          : selection=${groupHarmonyHome.selection},            text="${groupHarmonyHome.text}"');
+  pu.printd('  groupAppreciabilityAtWork : selection=${groupAppreciabilityAtWork.selection},   text="${groupAppreciabilityAtWork.text}"');
+  pu.printd('  groupEarningAbility       : selection=${groupEarningAbility.selection},         text="${groupEarningAbility.text}"');
+
+  pu.printd('────────────────────────────────────────────────────────────');
+}
 
 }

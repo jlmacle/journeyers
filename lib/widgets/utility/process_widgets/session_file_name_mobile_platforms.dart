@@ -18,6 +18,9 @@ import 'package:journeyers/widgets/utility/process_widgets/process_const_strings
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
 class SessionFileNameMobilePlatforms extends StatefulWidget 
 {
+  /// A file name value used at editing time.
+  final String editedFileName;
+
   /// The file extension when saving the session data ('.' included)
   final String fileExtension;
 
@@ -30,6 +33,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   const SessionFileNameMobilePlatforms
   ({
     super.key,
+    required this.editedFileName,
     required this.fileExtension,
     required this.onFileNameSubmittedProcessCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
@@ -74,6 +78,10 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     super.initState();
     if (sessionDataDebug) pu.printd("Session Data: file extensions: ${widget.fileExtension}");
     getApplicationFolderPathPref();
+
+    // Edited file name value if relevant
+    if (editDebug) pu.printd("Editing: SessionFileNameMobilePlatforms: initState: widget.editedFileName: ${widget.editedFileName}");
+    _fileNameController.text = widget.editedFileName;
   }
 
   @override
@@ -115,7 +123,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     )
     : TextFieldSanitizedAndCheckedUsingABlackList
     (
-      textFieldStartValue: "",
+      textFieldStartValue: widget.editedFileName,
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 

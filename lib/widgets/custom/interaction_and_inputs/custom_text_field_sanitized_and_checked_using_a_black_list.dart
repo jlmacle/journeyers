@@ -16,6 +16,9 @@ import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 /// and prevents the value from being submitted, in any of the functions returns true.
 class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget 
 {
+  /// A boolean used to state if the title is autofocused.
+  final bool autofocus;
+
   /// The start value for the text field.
   final String textFieldStartValue;
 
@@ -67,6 +70,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   const TextFieldSanitizedAndCheckedUsingABlackList
   ({
     super.key,
+    this.autofocus = false,
     required this.textFieldStartValue,
     required this.textFieldStyle,
     required this.textFieldHint,
@@ -92,6 +96,16 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
 
 class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldSanitizedAndCheckedUsingABlackList> 
 {
+  // to clean
+  final FocusNode _focusNode = .new();
+
+  void _onFocusChange() {
+    if (_focusNode.hasFocus) {
+      // Callback function to update the process data
+      widget.onTextFieldValueChangedCallbackFunction(textFieldEditingController.text);
+    } 
+  }
+
   bool submitIsBlocked = false;
 
   // Useful for automatic scrolling
@@ -113,6 +127,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     textFieldEditingController.text = widget.textFieldStartValue;
     // Cancelling the time if the user modified the input
     stringSanitizedErrorTimer?.cancel();
+    // To save the title when the focus leaves the title field
+    _focusNode.addListener(_onFocusChange);
     super.initState();
   }
 
@@ -120,6 +136,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   void dispose() 
   {
     textFieldEditingController.dispose();
+    _focusNode.dispose();
     stringSanitizedErrorTimer?.cancel();
     super.dispose();
   }
@@ -378,7 +395,9 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     }
     return TextField
     (
+      autofocus: widget.autofocus,
       controller: textFieldEditingController,
+      focusNode: _focusNode,
       // https://api.flutter.dev/flutter/services/TextInputType/text-constant.html
       keyboardType: TextInputType.text,
       minLines: widget.textFieldMinLines,

@@ -13,7 +13,6 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
@@ -30,6 +29,15 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
 class CAProcess extends StatefulWidget 
 {
+  /// A DTOCAForm instance used at initState time.
+  final DTOCAForm? dtoOnInitState;
+
+  /// A file name value used at editing time.
+  final String editedFileName;
+
+  /// A title value used at editing time.
+  final String editedTitle;
+
   /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback caPageCallbackFunctionToRefreshThePage;
 
@@ -38,8 +46,11 @@ class CAProcess extends StatefulWidget
 
   const CAProcess({
     super.key,
-    this.caPageCallbackFunctionToRefreshThePage = placeHolderVoidCallback,
-    this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
+    this.dtoOnInitState,
+    this.editedFileName = "",
+    this.editedTitle = "",
+    required this.caPageCallbackFunctionToRefreshThePage,
+    required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
     });
 
   @override
@@ -58,10 +69,11 @@ class CAProcessState extends State<CAProcess>
   Future<void> _loadDTO({required String dtoAssetPathToJson}) async 
   {
     if (sessionDataDebug) pu.printd("Session Data: CA Process: path to DTO asset if preloading: $dtoAssetPathToJson");
+    
     if (dtoAssetPathToJson == "") 
     {
-      // Default constructor
-      _dtoCAForm = DTOCAForm(); 
+      // widget.dtoOnInitState is nullable
+      _dtoCAForm = widget.dtoOnInitState ?? DTOCAForm();
       // To switch from circular indicator to process widgets
       setState(() {_isDTOAssetLoading = false;});      
     }
@@ -152,9 +164,9 @@ class CAProcessState extends State<CAProcess>
     // Retrieving the application folder
     getApplicationFolderPathPref(); 
 
-    // Loading the DTO
+    // (code to clean)
     _loadDTO(dtoAssetPathToJson: '');
-    // _loadDTO(dtoAssetPath: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');
+    //_loadDTO(dtoAssetPathToJson: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');
 
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
@@ -214,7 +226,12 @@ class CAProcessState extends State<CAProcess>
             ),
 
             // Text field for the analysis title
-            CATitleDeclaration(onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)),
+            CATitleDeclaration
+            (
+              autofocus: true,
+              editedTitle: widget.editedTitle,
+              on_analysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
+            ),
             
             // Keywords
             CAKeywordsDeclaration(onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)),
@@ -268,6 +285,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameMobilePlatforms
                         (
+                          editedFileName: widget.editedFileName,
                           fileExtension: fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata,
