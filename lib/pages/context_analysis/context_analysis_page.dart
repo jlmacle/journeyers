@@ -42,6 +42,8 @@ class CAPageState extends State<CAPage>
   String _editedFileNameWithoutExtension = "";
   // Value for the edited title
   String _editedTitle = "";
+  // Edition in progress
+  bool _sessionDataEdition = false;
 
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _preferencesLoading = true;
@@ -123,7 +125,7 @@ class CAPageState extends State<CAPage>
   }
 
   // Method used to edit a session data
-  void onEditSessionData({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle})
+  void onEditSessionData({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle})
   {
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
@@ -135,6 +137,7 @@ class CAPageState extends State<CAPage>
       _dtoOnInitState = dtoForEdition;
       _editedFileNameWithoutExtension = editedFileNameWithoutExtension;
       _editedTitle  = editedTitle;
+      _sessionDataEdition = sessionDataEdition;
     });
   }
 
@@ -215,7 +218,7 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: caFormPageFocusNode,
-                  child: CAProcess(key: caProcessKey, dtoOnInitState: _dtoOnInitState, editedFileName: _editedFileNameWithoutExtension, editedTitle: _editedTitle , caPageCallbackFunctionToRefreshThePage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess(key: caProcessKey, sessionDataEdition: _sessionDataEdition,  dtoOnInitState: _dtoOnInitState, editedFileName: _editedFileNameWithoutExtension, editedTitle: _editedTitle , caPageCallbackFunctionToRefreshThePage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )

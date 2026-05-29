@@ -12,18 +12,22 @@ class CATitleDeclaration extends StatefulWidget
   /// A boolean used to state if the title is autofocused.
   final bool autofocus;
 
+  /// A boolean used to state if an edition is in progress.
+  final bool sessionDataEdition;
+
   /// A title value used at editing time.
   final String editedTitle;
   
   /// A callback function called after editing the title is complete.
-  final ValueChanged<String> on_analysisTitleUpdatedProcessCallbackFunction;
+  final ValueChanged<String> onAnalysisTitleUpdatedProcessCallbackFunction;
 
   const CATitleDeclaration
   ({
     super.key,
+    this.sessionDataEdition = false,
     this.autofocus = false,
     required this.editedTitle,
-    required this.on_analysisTitleUpdatedProcessCallbackFunction
+    required this.onAnalysisTitleUpdatedProcessCallbackFunction
   });
 
   @override
@@ -48,7 +52,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
         errorMessageStyle: analysisTextFieldErrorMessageStyle, 
         stringSanitizerBundlesErrorsMap: const {},
         textFieldMaxLength: 150,
-        onTextFieldValueChangedCallbackFunction : widget.on_analysisTitleUpdatedProcessCallbackFunction,
+        onTextFieldValueChangedCallbackFunction : widget.onAnalysisTitleUpdatedProcessCallbackFunction,
         
       )
     );
