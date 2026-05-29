@@ -20,7 +20,7 @@ void main() {
             body: CATitleDeclaration
             (
               editedTitle: "",
-              on_analysisTitleUpdatedProcessCallbackFunction: (_){},
+              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
             )
           ),
         ),

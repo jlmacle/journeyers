@@ -29,6 +29,9 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 // If the user tab navigates from the "save data" button toward the analysis title with a "shift+tab", the bottom bar items are excluded again from focus.
 class CAProcess extends StatefulWidget 
 {
+  /// A boolean used to state if an edition is in progress.
+  final bool sessionDataEdition;
+
   /// A DTOCAForm instance used at initState time.
   final DTOCAForm? dtoOnInitState;
 
@@ -46,6 +49,7 @@ class CAProcess extends StatefulWidget
 
   const CAProcess({
     super.key,
+    this.sessionDataEdition = false,
     this.dtoOnInitState,
     this.editedFileName = "",
     this.editedTitle = "",
@@ -228,9 +232,9 @@ class CAProcessState extends State<CAProcess>
             // Text field for the analysis title
             CATitleDeclaration
             (
-              autofocus: true,
+              autofocus: widget.sessionDataEdition,
               editedTitle: widget.editedTitle,
-              on_analysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
+              onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
             ),
             
             // Keywords

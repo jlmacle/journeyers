@@ -35,7 +35,7 @@ class DashboardPage extends StatefulWidget
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A callback function called when session data is edited.
-  final FunctionDTOCAFormAnd2Strings onEditSessionDataCallbackFunction;
+  final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
@@ -535,7 +535,7 @@ class DashboardPageState extends State<DashboardPage>
     if (editDebug) dtoForEdition.printToConsole();
     if (editDebug) pu.printd("Editing: _editSessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
     if (editDebug) pu.printd("Editing: _editSessionData: editedTitle: $editedTitle");
-    widget.onEditSessionDataCallbackFunction(dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
+    widget.onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
     
   }
 

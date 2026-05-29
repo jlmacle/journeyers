@@ -27,6 +27,6 @@ typedef FutureVoidCallback =
 Future<void> Function();
 
 /// {@category Utils - Generic}
-/// A function with a DTOCAForm parameter, and 2 String parameters, and returning void.
-typedef FunctionDTOCAFormAnd2Strings = 
-void Function({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle});
+/// A function with a DTOCAForm parameter, 2 String parameters, a bool parameter, and returning void.
+typedef FunctionDTOCAForm2StringsAndBool = 
+void Function({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle});
