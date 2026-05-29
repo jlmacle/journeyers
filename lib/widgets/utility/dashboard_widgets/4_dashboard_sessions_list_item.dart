@@ -10,6 +10,7 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
 
 // Used to store a temporary file path used for session data sharing.
 String tmpFilePath = "";
@@ -38,7 +39,10 @@ class SessionsListItem extends StatefulWidget
   final VoidCallback onEditTitleCallbackFunction;
 
   // A callback function called when editing the session data.
-  final VoidCallback onEditSessionCallbackFunction;
+  final VoidCallback onEditPressedCallbackFunction;
+
+  /// A callback function called when session data is edited.
+  final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
 
   /// A callback function called when the keywords are updated.
   final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
@@ -54,7 +58,8 @@ class SessionsListItem extends StatefulWidget
     required this.dashboardContext,
     required this.onCheckboxChangedCallbackFunction,
     required this.onEditTitleCallbackFunction,
-    required this.onEditSessionCallbackFunction,
+    required this.onEditPressedCallbackFunction,
+    required this.onEditSessionDataCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onDeleteCallbackFunction,
   });
@@ -92,6 +97,94 @@ class _SessionsListItemState extends State<SessionsListItem>
 
     if (sessionDataDebug) pu.printd("Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
   }
+
+  // Method used to display an overlay with a session data preview. 
+  void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) 
+  {
+    String title = sessionMetadata[DashboardUtils.keyTitle];
+    showGeneralDialog
+    (
+      context: context,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, anim1, anim2) 
+      {
+        return Scaffold
+        (
+          appBar:AppBar
+          (
+            centerTitle: true, 
+            title: 
+            Text
+            (
+              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
+              softWrap:true, title, style: previewTitleStyle
+            ),
+            // Left side: Edit Button
+            leadingWidth: 100,
+            leading: Row(
+              children: [
+                // Edit only for personal data
+                // Group-data is kept read-only
+                dashboardContext == DashboardUtils.caContext 
+                  ?
+                  IconButton
+                  (
+                    icon: const Icon(Icons.edit),
+                    color: appBarWhite,
+                    onPressed: ()
+                    {                      
+                      // Starts the session data editing
+                      editCASessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                      // Closes the modal preview overlay
+                      Navigator.of(context).pop();
+                    },
+                    tooltip: editTooltipLabel,
+                  )
+                  :
+                  const SizedBox(height: 0, width: 0),
+                IconButton(
+                  icon: const Icon(Icons.share),
+                  color: appBarWhite,
+                  onPressed: () 
+                  {shareSession(context, sessionMetadata, tmpFilePath);},
+                  tooltip: "Share session",
+                ),
+              ],
+            ),
+            
+            // Right side: Close Button
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.close),
+                color: appBarWhite,
+                onPressed: () => Navigator.of(context).pop(),
+                tooltip: "Close preview",
+              ),
+            ],
+          ),
+          body: SafeArea(
+            // SingleChildScrollView ensures the content is scrollable 
+            // regardless of the widget's internal structure
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: 
+                (sessionMetadata[DashboardUtils.keyFilePath] != null)
+                ?
+                  (dashboardContext == DashboardUtils.caContext)
+                  ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
+                  : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
+                :
+                  const Text('Null file path'),
+              ),
+            ),
+          )
+        );
+      }
+    );
+  }
+
 
   @override void dispose() 
   {
@@ -200,7 +293,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     // To edit the session file data
                     IconButton(
                       icon: const Icon(Icons.edit_document),
-                      onPressed: widget.onEditSessionCallbackFunction,                      
+                      onPressed: widget.onEditPressedCallbackFunction,                      
                       tooltip: editTooltipLabel,
                     ),
                     // To edit the keywords
@@ -236,87 +329,6 @@ class _SessionsListItemState extends State<SessionsListItem>
   }
 }
 
-
-// Method used to display an overlay with a session data preview. 
-void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) 
-{
-  String title = sessionMetadata[DashboardUtils.keyTitle];
-  showGeneralDialog
-  (
-    context: context,
-    transitionDuration: const Duration(milliseconds: 300),
-    pageBuilder: (context, anim1, anim2) 
-    {
-      return Scaffold
-      (
-        appBar:AppBar
-        (
-          centerTitle: true, 
-          title: 
-          Text
-          (
-            textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-            softWrap:true, title, style: previewTitleStyle
-          ),
-          // Left side: Edit Button
-          leadingWidth: 100,
-          leading: Row(
-            children: [
-              // Edit only for personal data
-              // Group-data is kept read-only
-              dashboardContext == DashboardUtils.caContext 
-                ?
-                IconButton
-                (
-                  icon: const Icon(Icons.edit),
-                  color: appBarWhite,
-                  onPressed: () {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Edit not yet implemented.')));},
-                  tooltip: editTooltipLabel,
-                )
-                :
-                const SizedBox(height: 0, width: 0),
-              IconButton(
-                icon: const Icon(Icons.share),
-                color: appBarWhite,
-                onPressed: () 
-                {shareSession(context, sessionMetadata, tmpFilePath);},
-                tooltip: "Share session",
-              ),
-            ],
-          ),
-          
-          // Right side: Close Button
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.close),
-              color: appBarWhite,
-              onPressed: () => Navigator.of(context).pop(),
-              tooltip: "Close preview",
-            ),
-          ],
-        ),
-        body: SafeArea(
-          // SingleChildScrollView ensures the content is scrollable 
-          // regardless of the widget's internal structure
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: 
-              (sessionMetadata[DashboardUtils.keyFilePath] != null)
-              ?
-                (dashboardContext == DashboardUtils.caContext)
-                ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
-                : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
-              :
-                const Text('Null file path'),
-            ),
-          ),
-        )
-      );
-    }
-  );
-}
 
 // Triggers the platform's native share sheet for a session.
 // Shares both the raw session file (CSV / TXT) and some metadata.

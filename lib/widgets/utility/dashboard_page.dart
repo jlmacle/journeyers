@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
@@ -372,7 +373,8 @@ class DashboardPageState extends State<DashboardPage>
                             session[DashboardUtils.keyTitle],
                             filePath,
                           ),
-                          onEditSessionCallbackFunction: () => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
+                          onEditPressedCallbackFunction: () => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
+                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(filePath),
                         );
