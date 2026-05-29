@@ -123,8 +123,7 @@ class _SessionsListItemState extends State<SessionsListItem>
             leadingWidth: 100,
             leading: Row(
               children: [
-                // Edit only for personal data
-                // Group-data is kept read-only
+                // Group data is kept read-only
                 dashboardContext == DashboardUtils.caContext 
                   ?
                   IconButton
@@ -291,11 +290,17 @@ class _SessionsListItemState extends State<SessionsListItem>
                       tooltip: previewTooltipLabel,
                     ),
                     // To edit the session file data
+                    // Group data is kept read-only
+                    widget.dashboardContext == DashboardUtils.caContext 
+                    ?
                     IconButton(
                       icon: const Icon(Icons.edit_document),
                       onPressed: widget.onEditPressedCallbackFunction,                      
                       tooltip: editTooltipLabel,
-                    ),
+                    )
+                    :
+                    const SizedBox(height: 0, width: 0)
+                    ,
                     // To edit the keywords
                     IconButton(
                       icon: const Icon(Icons.style_rounded),
