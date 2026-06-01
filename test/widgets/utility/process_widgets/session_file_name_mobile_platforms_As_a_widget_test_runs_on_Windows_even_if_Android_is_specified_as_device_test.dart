@@ -84,7 +84,7 @@ void main()
             );
             await tester.pumpAndSettle();
 
-            if (testingDebug) pu.printd("Platform: ${Platform.operatingSystem}");
+            if (testingDebug) pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
 
             if (Platform.isAndroid || Platform.isIOS)
             {
