@@ -39,7 +39,6 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
   var _editedIndex = -1;
   var _tecNewParticipant = TextEditingController();
   var _tecEdition = TextEditingController();
-  var _textToEdit = ""; 
 
   // Data related to saving the group list
   // True once the current in-memory list has been persisted.
@@ -325,7 +324,6 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                           {
                             _isEdited = true; 
                             _editedIndex = index; 
-                            _textToEdit = _newGroupList[index];
                             _tecEdition.text = _newGroupList[index];
                           });
                         },
