@@ -35,7 +35,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
   late final List<String> _newGroupList;
 
   // Data used to edit the name of a participant after addition to the list
-  var _edition = false;
+  var _isEdited = false;
   var _editedIndex = -1;
   var _tecNewParticipant = TextEditingController();
   var _tecEdition = TextEditingController();
@@ -87,8 +87,6 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
     
     _newGroupList = List<String>.from(widget.initialNames);
 
-    // Loading the edited text field value
-    _textToEdit = _tecEdition.text;    
   }
 
   // ── actions ────────────────────────────────────────────────────────────────
@@ -288,7 +286,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                   itemCount: _newGroupList.length,
                   itemBuilder: (_, index) {
                     return 
-                     _edition && (index == _editedIndex)
+                     _isEdited && (index == _editedIndex)
                       ?
                       TextField
                       (
@@ -303,7 +301,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                           (value) => setState(() 
                           {
                             _newGroupList[index] = value; 
-                            _edition = false;
+                            _isEdited = false;
                             _tecEdition.clear();
                           }),
                         
@@ -321,8 +319,16 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                           _newGroupList[index],
                           style: theme.textTheme.titleMedium,
                         ),
-                        onTap: () {
-                          setState(() {_edition = true; _editedIndex = index;});},
+                        onTap: () 
+                        {
+                          setState(() 
+                          {
+                            _isEdited = true; 
+                            _editedIndex = index; 
+                            _textToEdit = _newGroupList[index];
+                            _tecEdition.text = _newGroupList[index];
+                          });
+                        },
                       );                     
                     },
                 ),
