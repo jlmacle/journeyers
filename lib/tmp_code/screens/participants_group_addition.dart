@@ -26,10 +26,10 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
 
 
   // Data related to retrieving the lists of participants groups
-  final _participantsListsStorage = ParticipantsGroupsListsAsMapsStorage();
+  final _participantsListsStorage = ParticipantsGroupsListsStorage();
   bool _loading = true;
   String? _errorLoading;
-  List<List<String>>? _groupLists = [];
+  List<List<String>>? _listOfListsOfNames = [];
   
   // To store the new group data
   late final List<String> _newGroupList;
@@ -56,18 +56,18 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
     super.dispose();
   }
   
-  // Used to load the saved data
-  Future<void> _loadGroupsLists() async {
+  // Used to load the lists of names, within a list
+  Future<void> _loadListOfListsOfNames() async {
     setState(() {
       _loading = true;
       _errorLoading = null;
     });
     try {
-      List<List<String>> groupsLists = await _participantsListsStorage.groupsLists();      
+      List<List<String>> listOfListsOfNames = await _participantsListsStorage.listOfListsOfNames();      
       setState(() {
-        _groupLists = groupsLists;
+        _listOfListsOfNames = listOfListsOfNames;
         _loading = false;
-        print("_loadGroupsLists: _groupLists: $_groupLists");
+        print("_loadListOfListsOfNames: _listOfListsOfNames: $_listOfListsOfNames");
       });
     } catch (e) {
       setState(() {
@@ -82,7 +82,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
   void initState() {
     super.initState();
     // Loading the previous lists of participants
-    _loadGroupsLists();
+    _loadListOfListsOfNames();
     
     _newGroupList = List<String>.from(widget.initialNames);
 
@@ -99,7 +99,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
     setState(() => _saving = true);
     try {
 
-      await _participantsListsStorage.save(label, List.from(_newGroupList)..sort());      
+      await _participantsListsStorage.saveListData(label, List.from(_newGroupList)..sort());      
 
       setState(() {
         _isSaved = true;
@@ -142,7 +142,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                 return;
               }
               // Warn if the label already exists, and prevents the saving of data.
-              final alreadyExists = await _participantsListsStorage.exists(label);
+              final alreadyExists = await _participantsListsStorage.existsAsync(label);
               if (!ctx.mounted) return;
               if (alreadyExists) {
                 setDialogState(
@@ -191,11 +191,11 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
   // ── build ──────────────────────────────────────────────────────────────────
 
   bool get canSave =>
-      !_isReadOnly && _newGroupList.isNotEmpty && !listOfListsContainsList(_groupLists!, _newGroupList)  && !_isSaved && !_saving;
+      !_isReadOnly && _newGroupList.isNotEmpty && !listOfListsContainsList(_listOfListsOfNames!, _newGroupList)  && !_isSaved && !_saving;
 
   bool listOfListsContainsList(List<List<String>> listOfLists, List<String> list)
   {
-    bool val = _groupLists!.any((list) => listEquals(list, _newGroupList));
+    bool val = _listOfListsOfNames!.any((list) => listEquals(list, _newGroupList));
     return val;
   }
 
