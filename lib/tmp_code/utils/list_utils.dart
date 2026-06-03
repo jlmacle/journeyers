@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../list_logic/typedefs.dart';
+
+import 'typedefs.dart';
 
 // Method used to build an item of a list. 
 // A function parameter produces each list item.
@@ -9,7 +10,7 @@ Widget _buildListItem
   required FunctionDynamicToWidget listItemBuilder
 })
  {
-  return listItemBuilder(listItem: listItem);
+  return listItemBuilder(dynamicParam: listItem);
  }
 
 // Method used to build a list of items. 

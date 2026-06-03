@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import '../custom_generic_widgets/editable_text.dart';
 
-import '../list_logic/list_logic.dart';
 import '../models/participants_groups_lists_storage.dart';
 import 'participants_group_addition.dart';
 
-/// Displays all saved lists data.
+/// Displays all saved list labels.
+///
+/// Tapping a label loads the corresponding numbers and pushes a read-only
+/// [ParticipantsGroupAddition] for that list.
 class ParticipantsGroupsListing extends StatefulWidget {
   const ParticipantsGroupsListing({super.key});
 
@@ -13,31 +16,43 @@ class ParticipantsGroupsListing extends StatefulWidget {
 }
 
 class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
-  final _store = ParticipantsGroupsListsAsMapsStorage();
+  final _store = ParticipantsGroupsListsStorage();
 
   // Tracks whether we are currently loading data from disk.
   bool _loading = true;
 
   // Null means an error occurred; empty list means no saved lists yet.
-  Map<String, List<String>>? _savedListsData; 
+ List<dynamic>? _dataStructure; 
   List<String>? _labels;
   String? _error;
 
+  // For edition 
+  var _isEdited = false;
+  var _tecEdition = TextEditingController();
+
+  @override
+  void dispose() {
+    _tecEdition.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
-    super.initState();    
+    super.initState();  
+
+    // Loading the labels specifically, and also the stored data  
     _loadLabelsAndData();
     
   }
 
   Future<void> _loadLabelsAndData() async {
-    _savedListsData = await _store.retrieveAllGroupsData();
+    _dataStructure = await _store.loadDataStructure();
     setState(() {
       _loading = true;
       _error = null;
     });
     try {
-      final labels = await _store.sortedLabels();
+      final labels = await _store.sortedLabels(dataStructure: _dataStructure);
       setState(() {
         _labels = labels;
         _loading = false;
@@ -52,7 +67,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
 
   Future<void> _openList(String label) async {
     try {
-      final numbers = await _store.load(label);
+      final numbers = await _store.loadNamesByListLabelSync(label: label, dataStructure: _dataStructure!);
       if (!mounted) return;
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
@@ -62,7 +77,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
           ),
         ),
       );
-      // Refresh in case the user navigated back.
+      // Refresh in case the user navigated back (no-op here, but good practice).
       await _loadLabelsAndData();
     } catch (e) {
       if (!mounted) return;
@@ -74,7 +89,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
 
   // ── build ──────────────────────────────────────────────────────────────────
 
-  Widget _buildListCard(String listTitle, List<String> listItems) {
+  Widget _buildListCard(String listLabel, List<String> listItems) {
   return ListTile( 
     title: Card
     (
@@ -84,17 +99,21 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(listTitle, style: const TextStyle(fontWeight: FontWeight.bold)),
+            // Editable list label
+            EditableListText(text: listLabel, listItemIndex: -1),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              children: listItems.map((item) => Chip(label: Text(item))).toList(),
+              children: listItems.map
+              (
+                (listItem) 
+                  => Chip(label: EditableListText(text: listItem, listItemIndex:-1,))
+              ).toList(),
             ),
           ],
         ),
-      ),
+      ),      
     ),
-    trailing: const Icon(Icons.edit),
   );
 }
 
@@ -118,17 +137,18 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
           ),
         ],
       ),
-      body: _buildBody(),
+      body: _buildList(),
     );
   }
 
-  Widget _buildBody() {
-    
-
+  // Method used to build the list displayed
+  Widget _buildList() 
+  {
+    // During data loading
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
-
+    // In caase of error during the loading of the list data
     if (_error != null) {
       return Center(
         child: Padding(
@@ -141,8 +161,8 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
       );
     }
 
+    // In case of empty list
     final labels = _labels!;
-
     if (labels.isEmpty) {
       return Center(
         child: Column(
@@ -168,6 +188,20 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
       );
     }
 
-    return buildList(listAsAMap: _savedListsData!, listItemBuilder: _listItemBuilder);
+    // return buildList(listAsAMap: _savedListsData!, listItemBuilder: _listItemBuilder);
+
+    return ListView.separated(
+      shrinkWrap: true,
+      // physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      itemCount: labels.length,
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      itemBuilder: (context, index) {
+        final label = labels[index];
+        // print("savedListsData![label]!: ${_savedListsData![label]!}");
+        return _buildListCard(label, _store.loadNamesByListLabelSync(label: label, dataStructure : _dataStructure!));
+        // return _buildListCard(label, ["jkkjkj"]);
+      },
+    );
   }
 }
