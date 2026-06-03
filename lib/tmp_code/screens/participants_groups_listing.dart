@@ -100,6 +100,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Editable list label
+            // parentCallbackFunctionToUpdateTheListItemValue to add
             EditableListText(text: listLabel, listItemIndex: -1),
             const SizedBox(height: 8),
             Wrap(
@@ -107,6 +108,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
               children: listItems.map
               (
                 (listItem) 
+                // parentCallbackFunctionToUpdateTheListItemValue to add
                   => Chip(label: EditableListText(text: listItem, listItemIndex:-1,))
               ).toList(),
             ),
