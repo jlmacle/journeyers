@@ -14,7 +14,7 @@ import '../utils/alphabet_utils.dart';
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class ParticipantsGroupsListsStorage {
-  static const _fileName = 'journeyers_gps_participants_groups_lists4.json';
+  static const _fileName = 'journeyers_gps_participants_groups_lists10.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -178,22 +178,37 @@ class ParticipantsGroupsListsStorage {
   {
     print("label: $label");
     print("dataStructure: $dataStructure");
+
     bool labelExists = existsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
       throw ArgumentError('No list found for label "$label".');
     }
 
-    // Getting the list of names
     // Lists-level loop
     for (var indexLists = 0; indexLists < dataStructure.length; indexLists++)
     {
-      var listData = dataStructure[indexLists] as Map<String, dynamic>;  
-      // Retrieving the data for a specific list    
-      var listDataValues = listData.values.first;
-      // Retrieving the label for a specific list  
-      var listLabel = listDataValues[itemLabelKey];
-      // Retrieving the names for a specific list  
-      List<dynamic> names = listDataValues[subItemsListDataKey];      
+      var names = [];
+      // Retrieving the data for the current list  
+      var currentListData = dataStructure[indexLists] as Map<String, dynamic>;  
+      // Retrieving the data values for the current list
+      var currentListDataValues = currentListData.values.first;
+      // Retrieving the label for the current list  
+      var listLabel = currentListDataValues[itemLabelKey];
+      // Retrieving the sub-items data
+      List<dynamic> subItemsData = currentListDataValues[subItemsListDataKey];
+      // Retrieving the names for the current list  
+      for (var indexSubItems = 0; indexSubItems < subItemsData.length; indexSubItems++)
+      {
+        // Retrieving the data for the current sub-item 
+        var currentSubItemData = subItemsData[indexSubItems];
+        // Retrieving the data values for the current sub-item 
+        var currentSubItemDataValues = currentSubItemData.values.first;
+        // Retrieving the name for the current sub-item 
+        var name  = currentSubItemDataValues[itemLabelKey];
+        // Adding the name to the list
+        names.add(name);
+      }
+
       print("names: $names");
       if (listLabel == label) return List.from(names);   
     }
@@ -204,27 +219,34 @@ class ParticipantsGroupsListsStorage {
   /// Returns a list made of all the lists of names.
   Future<List<List<String>>> listOfListsOfNames() async {
 
+    // Loading the data
     var data = await loadDataStructure();
+    print("data: $data");
+
     List<List<String>> listOfListsOfNames =[];
 
     // Lists-level loop
     for (var indexLists = 0; indexLists < data.length; indexLists++)
     {
-      var listData = data[indexLists] as Map<String, dynamic>;      
-      var listDataValues = listData.values.first;
-      var subItemsListData = listDataValues[subItemsListDataKey];
-      
+      var currentListData = data[indexLists] as Map<String, dynamic>;      
+      var currentListDataValues = currentListData.values.first;
+      var currentSubItemsListData = currentListDataValues[subItemsListDataKey];
+
       List<String> namesList = [];
       
-      // Names-level loop
-      for (var indexNames = 0; indexNames < data.length; indexNames++)
+      // Sub-items-level loop
+      for (var indexSubItems = 0; indexSubItems < currentSubItemsListData.length; indexSubItems++)
       {
-        var nameData = data[indexLists] as Map<String, dynamic>;      
-        var nameDataValues = nameData.values.first;
-        var nameLabel = nameDataValues[itemLabelKey] as String;
-        namesList.add(nameLabel);
+        // Retrieving the data for the current sub-item 
+        var currentSubItemData = currentSubItemsListData[indexSubItems];
+        // Retrieving the data values for the current sub-item 
+        var currentSubItemDataValues = currentSubItemData.values.first;
+        // Retrieving the name for the current sub-item 
+        var name  = currentSubItemDataValues[itemLabelKey];
+        // Adding the name to the list
+        namesList.add(name);
       }
-      // Adding the list with names
+      // Adding to the list
       listOfListsOfNames.add(namesList);
     }
     print("listOfListsOfNames(): listOfListsOfNames: $listOfListsOfNames");
@@ -258,14 +280,14 @@ class ParticipantsGroupsListsStorage {
   String getNextKey({required String key})
   {
 
-    print(alphabetToIndexMap);
+    //print(alphabetToIndexMap);
 
     String nextKey = "";
     int digitPart = int.parse( key[key.length -1] );
     String alphabetPart = key.substring(0, key.length-1);
 
-    print("digitPart: $digitPart");
-    print("alphabetPart: $alphabetPart");
+    //print("digitPart: $digitPart");
+    //print("alphabetPart: $alphabetPart");
 
     // Case 1: 0 <= digitPart <= 8
     switch (List.generate(8, (i) => i).contains(digitPart))
@@ -296,7 +318,7 @@ class ParticipantsGroupsListsStorage {
         // determining the root part of alphabetPart
         if (alphabetPart != alphabetPartLastLetter) alphabetPartRoot = alphabetPart.substring(0, alphabetPart.length - 1);
 
-        print("alphabetPartRoot: $alphabetPartRoot");
+        //print("alphabetPartRoot: $alphabetPartRoot");
         
         // Case 2: digitPart = 9 and  a <= alphabetPartLastLetter <= y
         switch(alphabetListMinusZ.contains(alphabetPartLastLetter))
@@ -336,7 +358,7 @@ class ParticipantsGroupsListsStorage {
             String nextAlphabetPart = _nextAlphabetPart(alphabetPart);
             nextKey = "${nextAlphabetPart}${nextDigitPart}";
             // nextKey = "${nextAlphabetPartRoot}${nextLetterAfterAlphabetPartLastLetter}${nextDigitPart}";
-            print("nextKey: $nextKey");
+            //print("nextKey: $nextKey");
           }
         }
       }
@@ -350,26 +372,67 @@ class ParticipantsGroupsListsStorage {
   /// Saves [names] under [label], overwriting any previous entry.
   /// The key used is a sequence of letters followed by a digit (0 to 9)
   Future<void> saveListData(String label, List<String> names) async {
+    print("saveListData");
+
     List<dynamic> data = await loadDataStructure();
 
+    print("data: $data");
+
     // Key building
-    String key;
+    String listKey;
     String lastKeyInData;
     // Case: structure is empty
-    if (data.isEmpty) { key = "a0"; }
+    if (data.isEmpty) 
+    { 
+      print("Empty list set");
+      listKey = "a0"; 
+      print("new key: $listKey");
+    }
     // Case: structure is not empty
-    else {
+    else 
+    {
+      // Getting the last list data
       Map<String, dynamic> lastListData = data[data.length - 1];
-      lastKeyInData = lastListData.keys.first;
-      key = getNextKey(key: lastKeyInData);
-      }
+
+      // Getting the list of sub-items
+      var lastListDataValues = lastListData.values.first;
+      List<dynamic> subItemsListData = lastListDataValues[subItemsListDataKey];
+
+      // Getting the last sub-item
+      var lastSubItemData = subItemsListData[subItemsListData.length - 1];
+
+      // Getting the last sub-item key
+      var lastKeyInData = lastSubItemData.keys.first;
+
+      listKey = getNextKey(key: lastKeyInData);
+      print("new list key: $listKey");
+    }
+  
+    //List of sub-items data building
+    List<dynamic> subItemsDataList = [];
+    var key = listKey;
      
+    // Building the items data
+    for (var nameIndex = 0; nameIndex < names.length; nameIndex++)
+    {
+      // building the key from the previously used key
+      key = getNextKey(key: key);
+      print("item key: $key");
+      Map<String, dynamic> itemDataMap = {itemLabelKey: names[nameIndex], subItemsListDataKey: null, displayFunctionKey: null};
+
+      subItemsDataList.add({key: itemDataMap});
+    }
     
+    print("subItemsDataList: $subItemsDataList");
+
     // Building the list data
-    var listData=  {"itemLabel": label, subItemsListDataKey: names, "displayFunction": null};
-    var listItem = {key: listData};
+    var listDataMap=  {itemLabelKey: label, subItemsListDataKey: subItemsDataList, displayFunctionKey: null};
+    var listItemData = {listKey: listDataMap};
+
+    print("listItemData: $listItemData");
+
     // Adding the list (verified previously as unique)
-    data.add(listItem);
+    data.add(listItemData);
     // Saving the data
     var f = await _getFile();
     await f.writeAsString(jsonEncode(data));
