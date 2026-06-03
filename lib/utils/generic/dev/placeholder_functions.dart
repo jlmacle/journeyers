@@ -13,6 +13,6 @@ void placeHolderFunctionString(String value) {}
 /// A placeholder void callback function with a Set\<String\> parameter.
 void placeHolderFunctionSetString(Set<String>? values) {}
 
-
-
+/// A placeholder FunctionStringAndInt function
+void placeHolderFunctionStringAndInt({required String stringParam, required int intParam}) {}
  
