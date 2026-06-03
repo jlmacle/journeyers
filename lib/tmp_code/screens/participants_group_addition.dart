@@ -320,6 +320,7 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                         ),
                         onTap: () 
                         {
+                          // deletion to add
                           setState(() 
                           {
                             _isEdited = true; 

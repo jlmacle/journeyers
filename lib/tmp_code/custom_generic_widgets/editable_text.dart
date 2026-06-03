@@ -93,12 +93,16 @@ class _EditableListTextState extends State<EditableListText>
     (
       child:
         Text(widget.text, style: widget.textStyle),
-        onTap: () =>
+        onTap: () 
+            {
+              print("GestureDetector: onTap");
+
               setState(() 
               {
                 _isEdited = true;
                 _tecEdition.text = widget.text;
-              })
+              });
+            }
     );
   }
 }
