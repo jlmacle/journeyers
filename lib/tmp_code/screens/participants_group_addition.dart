@@ -22,8 +22,8 @@ class ParticipantsGroupAddition extends StatefulWidget {
 }
 
 class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
-  bool get _isReadOnly => widget.loadedLabel != null;
 
+  bool get _isReadOnly => widget.loadedLabel != null;
 
   // Data related to retrieving the lists of participants groups
   final _participantsListsStorage = ParticipantsGroupsListsStorage();
@@ -39,6 +39,10 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
   var _editedIndex = -1;
   var _tecNewParticipant = TextEditingController();
   var _tecEdition = TextEditingController();
+
+  // Data related to deleting names from the new list
+  List<String> namesSelectedForDeletion = [];
+
 
   // Data related to saving the group list
   // True once the current in-memory list has been persisted.
@@ -313,7 +317,16 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                         children: 
                         [
                           // Checkbox for list item deletion
-                          Checkbox(value: false, onChanged: (_){}),
+                          Checkbox
+                          (
+                            value: false, 
+                            onChanged: 
+                              (_)
+                              {
+                                namesSelectedForDeletion.add(_newGroupList[index]);
+                                print("Selected for deletion: $namesSelectedForDeletion");
+                              }
+                          ),
                           // List tile for reading/to start edition 
                             // Expanded for constraints
                           Expanded(
@@ -324,12 +337,12 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                             leading: Text(
                               '${index + 1}.',
                               style: theme.textTheme.bodySmall,
-                            ),
-                            trailing: const Icon(Icons.edit),
+                            ),                            
                             title: Text(
                               _newGroupList[index],
                               style: theme.textTheme.titleMedium,
                             ),
+                            trailing: const Icon(Icons.edit),
                             onTap: () 
                             {
                               setState(() 
