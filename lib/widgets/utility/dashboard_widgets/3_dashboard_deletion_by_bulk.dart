@@ -102,7 +102,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty: ${widget.allSessions!.isEmpty}");
+    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty?: ${widget.allSessions!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
