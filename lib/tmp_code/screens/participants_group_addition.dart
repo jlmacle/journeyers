@@ -277,16 +277,18 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                   ),
                 )
               :      
-              // List of added names
-              
-                ListView.builder
-                (                  
-                  padding: const EdgeInsets.only(bottom: 96),
-                  itemCount: _newGroupList.length,
-                  itemBuilder: (_, index) {
-                    return 
-                     _isEdited && (index == _editedIndex)
+              // List of added names              
+              ListView.builder
+              (                  
+                padding: const EdgeInsets.only(bottom: 96),
+                itemCount: _newGroupList.length,
+                itemBuilder: (_, index) 
+                {
+                  return 
+                    // Text field (edition mode), or ListTile (reading mode)
+                    _isEdited && (index == _editedIndex)                        
                       ?
+                      // Text field (edition mode)
                       TextField
                       (
                         controller: _tecEdition,
@@ -305,58 +307,71 @@ class _ParticipantsGroupAdditionState extends State<ParticipantsGroupAddition> {
                           }),
                         
                       )
-
-                      : ListTile(
-                        key: Key('participantName$index'),
-                        dense: true,
-                        leading: Text(
-                          '${index + 1}.',
-                          style: theme.textTheme.bodySmall,
-                        ),
-                        trailing: const Icon(Icons.edit),
-                        title: Text(
-                          _newGroupList[index],
-                          style: theme.textTheme.titleMedium,
-                        ),
-                        onTap: () 
-                        {
-                          // deletion to add
-                          setState(() 
-                          {
-                            _isEdited = true; 
-                            _editedIndex = index; 
-                            _tecEdition.text = _newGroupList[index];
-                          });
-                        },
-                      );                     
-                    },
-                ),
+                      // ListTile (reading mode)
+                      : 
+                      Row(
+                        children: 
+                        [
+                          // Checkbox for list item deletion
+                          Checkbox(value: false, onChanged: (_){}),
+                          // List tile for reading/to start edition 
+                            // Expanded for constraints
+                          Expanded(
+                            child: ListTile
+                            (
+                            key: Key('participantName$index'),
+                            dense: true,
+                            leading: Text(
+                              '${index + 1}.',
+                              style: theme.textTheme.bodySmall,
+                            ),
+                            trailing: const Icon(Icons.edit),
+                            title: Text(
+                              _newGroupList[index],
+                              style: theme.textTheme.titleMedium,
+                            ),
+                            onTap: () 
+                            {
+                              setState(() 
+                              {
+                                _isEdited = true; 
+                                _editedIndex = index; 
+                                _tecEdition.text = _newGroupList[index];
+                              });
+                            },
+                                                    ),
+                          )
+                        ],
+                      )
+                    ;
+                },
               ),
-
-                TextField
+            ),
+            // TextField used to add a new participant name
+            TextField
+            (
+              controller: _tecNewParticipant,
+              textAlign: TextAlign.left,
+              decoration: const InputDecoration
+              (
+                hint: Text
                 (
-                  controller: _tecNewParticipant,
                   textAlign: TextAlign.left,
-                  decoration: const InputDecoration
-                  (
-                    hint: Text
-                    (
-                      textAlign: TextAlign.left,
-                      "Please add a participant's name here"                        
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
-                  ),
-                  onSubmitted: (value)
-                  {
-                    setState(() {
-                      _newGroupList.add(value.trim());
-                    });
-                    _tecNewParticipant.clear();
-                    print("_identifiers: $_newGroupList");
-                  },
+                  "Please add a participant's name here"                        
                 ),
-            ]
-          )
+                contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+              ),
+              onSubmitted: (value)
+              {
+                setState(() {
+                  _newGroupList.add(value.trim());
+                });
+                _tecNewParticipant.clear();
+                print("_identifiers: $_newGroupList");
+              },
+            ),
+          ]
+        )
       )
       ;
   }
