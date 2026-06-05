@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class TextListItemDeletionByBulk extends StatefulWidget 
 {
   /// Boolean used to store if some text items are selected for deletion.
-  final bool areSomeTextItemsForDeletion; 
+  final bool areSomeTextItemsSelectedForDeletion; 
 
   /// List containing the entered texts.
   final List<String>? newTextItemsList;
@@ -21,7 +21,7 @@ class TextListItemDeletionByBulk extends StatefulWidget
   const TextListItemDeletionByBulk
   ({
     super.key,
-    required this.areSomeTextItemsForDeletion,
+    required this.areSomeTextItemsSelectedForDeletion,
     required this.newTextItemsList,
     required this.indexesOfTextItemsSelectedForDeletion,
     required this.callbackFunctionToRefreshTheTextItemsList,
@@ -74,11 +74,11 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
           TextButton.icon(
             key: const Key('bulk-delete-button'),
             onPressed: _deleteSelectedTextItems,
-            icon: Icon(Icons.delete, color: (widget.areSomeTextItemsForDeletion == true)? Colors.red: Colors.transparent),
+            icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
             label: Text(
               "Delete (${widget.indexesOfTextItemsSelectedForDeletion.length})",
               style: TextStyle(
-                color: (widget.areSomeTextItemsForDeletion == true)? Colors.red: Colors.transparent, 
+                color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent, 
                 fontWeight: FontWeight.bold,
               ),
             ),
