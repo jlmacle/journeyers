@@ -29,7 +29,7 @@ class EditableTextListItem extends StatefulWidget {
   /// The bottom padding for the text field.
   final double paddingBottom;
 
-  /// Callback function used to update the list item value
+  /// Callback function used to update the list item value.
   final FunctionStringAndInt parentCallbackFunctionToUpdateTheListItemValue;
 
   const EditableTextListItem

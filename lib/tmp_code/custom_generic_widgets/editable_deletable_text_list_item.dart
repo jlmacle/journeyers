@@ -31,11 +31,11 @@ class EditableDeletableTextListItem extends StatefulWidget {
   /// A callback function called when the checkbox is checked/unchecked.
   final FunctionNullableBoolAndInt onCheckboxChangedCallbackFunction;
 
-  /// Callback function used to update the list item value
+  /// Callback function used to update the list item value.
   final FunctionStringAndInt parentCallbackFunctionToUpdateTheListItemValue;
 
-  /// Callback function used to update the indexes of the items selected for deletion.
-  final ValueChanged<int> parentCallbackFunctionToUpdateTheIndexesOfTextItemsSelectedForDeletion;
+  /// Callback function used to update the list of items selected for deletion.
+  final ValueChanged<int> parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion;
 
   /// {@category Utils - Generic}
   /// {@category Lists}
@@ -51,7 +51,7 @@ class EditableDeletableTextListItem extends StatefulWidget {
     this.paddingRight = 16,
     required this.onCheckboxChangedCallbackFunction,
     required this.parentCallbackFunctionToUpdateTheListItemValue,
-    required this.parentCallbackFunctionToUpdateTheIndexesOfTextItemsSelectedForDeletion,
+    required this.parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion,
     required this.themeData
   });
 

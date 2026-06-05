@@ -403,7 +403,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                                                                   print("_indexesOfTextItemsSelectedForDeletion: $_indexesOfTextItemsSelectedForDeletion");
                                                                 }, 
                             parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
-                            parentCallbackFunctionToUpdateTheIndexesOfTextItemsSelectedForDeletion: (index){_indexesOfTextItemsSelectedForDeletion.add(index);}, 
+                            parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_indexesOfTextItemsSelectedForDeletion.add(index);}, 
                             themeData: Theme.of(context),                          
                           )
                           // Row(
