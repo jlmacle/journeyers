@@ -321,7 +321,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
             [
               TextListItemDeletionByBulk
               (
-                areSomeTextItemsForDeletion: _areSomeTextItemsForDeletion,
+                areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
                 newTextItemsList: _newTextItemsList,
                 indexesOfTextItemsSelectedForDeletion: _indexesOfTextItemsSelectedForDeletion,
                 callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
