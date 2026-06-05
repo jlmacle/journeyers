@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 /// A widget handling bulk deletion of text items in a list.
 class TextListItemDeletionByBulk extends StatefulWidget 
 {
-  /// Boolean used to store if some sessions are selected for deletion.
+  /// Boolean used to store if some text items are selected for deletion.
   final bool areSomeTextItemsForDeletion; 
 
   /// List containing the entered texts.
   final List<String>? newTextItemsList;
 
-  /// List containing the sessions selected for deletion.
-  final List<dynamic>? indexesOfTextItemsSelectedForDeletion;
+  /// List containing the indexes of the text items selected for deletion.
+  final List<int> indexesOfTextItemsSelectedForDeletion;
 
-  /// Callback function used to refresh the sessions displayed.
+  /// Callback function used to refresh the text items displayed.
   final VoidCallback callbackFunctionToRefreshTheTextItemsList;
 
   const TextListItemDeletionByBulk
@@ -43,7 +43,7 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
     List<String> updatedNewTextsList = widget.newTextItemsList!
     // to compare ints with ints
     .asMap().entries
-    .where((entry) => !widget.indexesOfTextItemsSelectedForDeletion!.contains(entry.key))
+    .where((entry) => !widget.indexesOfTextItemsSelectedForDeletion.contains(entry.key))
     // to get the strings
     .map((entry) => entry.value)
     .toList();
@@ -56,7 +56,7 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
     widget.callbackFunctionToRefreshTheTextItemsList(); // setState
 
     // Clearing indexesOfTextItemsSelectedForDeletion 
-    widget.indexesOfTextItemsSelectedForDeletion!.clear();
+    widget.indexesOfTextItemsSelectedForDeletion.clear();
     
     print("Deletion by bulk: after deletion:  widget.newTextItemsList: ${widget.newTextItemsList}");
 
@@ -76,7 +76,7 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
             onPressed: _deleteSelectedTextItems,
             icon: Icon(Icons.delete, color: (widget.areSomeTextItemsForDeletion == true)? Colors.red: Colors.transparent),
             label: Text(
-              "Delete (${widget.indexesOfTextItemsSelectedForDeletion?.length ?? 0})",
+              "Delete (${widget.indexesOfTextItemsSelectedForDeletion.length})",
               style: TextStyle(
                 color: (widget.areSomeTextItemsForDeletion == true)? Colors.red: Colors.transparent, 
                 fontWeight: FontWeight.bold,
