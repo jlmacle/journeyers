@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import '../custom_generic_widgets/editable_text.dart';
+import '../models/text_lists_storage_externalized_strings.dart';
 
-import '../models/participants_groups_lists_storage.dart';
-import 'participants_group_addition.dart';
+import '../models/text_lists_storage.dart';
+import 'addition_to_text_lists.dart';
 
 /// Displays all saved list labels.
 ///
 /// Tapping a label loads the corresponding numbers and pushes a read-only
-/// [ParticipantsGroupAddition] for that list.
-class ParticipantsGroupsListing extends StatefulWidget {
-  const ParticipantsGroupsListing({super.key});
+/// [AdditionToTextLists] for that list.
+class TextListsDisplay extends StatefulWidget {
+  const TextListsDisplay({super.key});
 
   @override
-  State<ParticipantsGroupsListing> createState() => _ParticipantsGroupsListingState();
+  State<TextListsDisplay> createState() => _TextListsDisplayState();
 }
 
-class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
-  final _store = ParticipantsGroupsListsStorage();
+class _TextListsDisplayState extends State<TextListsDisplay> {
+  final _store = TextListsStorage();
 
   // Tracks whether we are currently loading data from disk.
   bool _loading = true;
@@ -67,13 +68,17 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
 
   Future<void> _openList(String label) async {
     try {
-      final numbers = await _store.loadNamesByListLabelSync(label: label, dataStructure: _dataStructure!);
+      final texts = _store.loadTextsByListLabelSync(label: label, dataStructure: _dataStructure!);
       if (!mounted) return;
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
-          builder: (_) => ParticipantsGroupAddition(
-            initialNames: numbers,
+          builder: (_) => AdditionToTextLists(
+            initialTextValues: texts,
             loadedLabel: label,
+            listLabelHintText: listLabelHintText,
+            listPlaceholder: listPlaceholder,
+            invitationToEnterTextPlaceholder: invitationToEnterTextPlaceholder,
+            themeData: Theme.of(context),
           ),
         ),
       );
@@ -119,7 +124,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
   );
 }
 
-  Widget _listItemBuilder({required dynamic listItem})
+Widget _listItemBuilder({required dynamic listItem})
   {
     print("listItem: $listItem");
     var listItemAsMap = listItem as Map<String, dynamic>;
@@ -150,7 +155,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
-    // In caase of error during the loading of the list data
+    // In case of error during the loading of the list data
     if (_error != null) {
       return Center(
         child: Padding(
@@ -201,7 +206,7 @@ class _ParticipantsGroupsListingState extends State<ParticipantsGroupsListing> {
       itemBuilder: (context, index) {
         final label = labels[index];
         // print("savedListsData![label]!: ${_savedListsData![label]!}");
-        return _buildListCard(label, _store.loadNamesByListLabelSync(label: label, dataStructure : _dataStructure!));
+        return _buildListCard(label, _store.loadTextsByListLabelSync(label: label, dataStructure : _dataStructure!));
         // return _buildListCard(label, ["jkkjkj"]);
       },
     );

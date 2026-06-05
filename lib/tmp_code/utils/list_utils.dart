@@ -15,7 +15,7 @@ Widget _buildListItem
 
 // Method used to build a list of items. 
 // The items can have sub-items.
-// The list is a map with labels as keys, and dynamic values.
+
 Widget buildList
 ({
   required Map<String, dynamic> listAsAMap, 

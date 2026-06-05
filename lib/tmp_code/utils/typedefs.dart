@@ -9,3 +9,8 @@ Widget Function({required dynamic dynamicParam});
 /// A function with a String parameter, an int parameter, and returning void.
 typedef FunctionStringAndInt = 
 void Function({required String stringParam, required int intParam});
+
+/// {@category Utils - Generic}
+/// A function with a bool? parameter, and an int parameter.
+typedef FunctionNullableBoolAndInt = 
+void Function({required bool? boolParam, required int intParam});
