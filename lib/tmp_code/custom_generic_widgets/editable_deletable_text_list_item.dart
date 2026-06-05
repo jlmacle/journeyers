@@ -97,7 +97,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
                   );
                   
                   
-                  // _textsSelectedForDeletion.add(_newTextsList[index]);
+                  // _textsSelectedForDeletion.add(_enteredTextItemsList[index]);
                   // print("Selected for deletion: $_textsSelectedForDeletion");
                 }
             ),
