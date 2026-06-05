@@ -50,13 +50,15 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
 
     print("_deleteSelectedSessions:  updatedNewTextsList: $updatedNewTextsList");
 
+    // Clearing indexesOfTextItemsSelectedForDeletion 
+    widget.indexesOfTextItemsSelectedForDeletion.clear();
+
     // Updating _enteredTextItemsList
     widget.enteredTextItemsList.clear();
     widget.enteredTextItemsList.addAll(updatedNewTextsList);
-    widget.callbackFunctionToRefreshTheTextItemsList(); // setState
 
-    // Clearing indexesOfTextItemsSelectedForDeletion 
-    widget.indexesOfTextItemsSelectedForDeletion.clear();
+    // Updating the UI
+    widget.callbackFunctionToRefreshTheTextItemsList(); // setState    
     
     print("Deletion by bulk: after deletion:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
 

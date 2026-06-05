@@ -18,7 +18,7 @@ class TextListsDisplay extends StatefulWidget {
 }
 
 class _TextListsDisplayState extends State<TextListsDisplay> {
-  final _store = TextListsStorage();
+  final _store = TextListsDB();
 
   // Tracks whether we are currently loading data from disk.
   bool _loading = true;

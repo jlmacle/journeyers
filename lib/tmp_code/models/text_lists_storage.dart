@@ -13,7 +13,7 @@ import '../utils/alphabet_utils.dart';
 /// { "key": { "itemText": "participantListLabel", "subItemsListData": , "displayFunction": } }
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
-class TextListsStorage {
+class TextListsDB {
   static const _fileName = 'journeyers_gps_participants_groups_lists11.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────

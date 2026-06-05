@@ -47,27 +47,53 @@ class AdditionToTextLists extends StatefulWidget
 class _AdditionToTextListsState extends State<AdditionToTextLists> {
 
   // bool: a list has been loaded
-  bool get _listIsLoaded => widget.loadedLabel != null;
+  bool get _listHasBeenLoaded => widget.loadedLabel != null;
 
   // Data related to retrieving the list of grouped texts
-  final _textListsStorage = TextListsStorage();
-  bool _loading = true;
-  String? _errorLoading;
+  final _textListsDB = TextListsDB();
+  bool _loadingDB = true;
+  String? _errorLoadingDB;
   List<List<String>>? _listOfPreviousGroupedTexts = [];
+
+  // Used to load the list of grouped texts
+  Future<void> _loadListOfPreviousGroupedTexts() async {
+    setState(() {
+      _loadingDB = true;
+      _errorLoadingDB = null;
+    });
+    try {
+
+      List<List<String>> listOfGroupedTexts = await _textListsDB.listOfGroupedTexts(); 
+
+      setState(() {
+        _listOfPreviousGroupedTexts = listOfGroupedTexts;
+        _loadingDB = false;
+        print("_loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
+      });
+    } catch (e) {
+      setState(() {
+        print(e);
+        _errorLoadingDB = e.toString();
+        _loadingDB = false;
+      });
+    }
+  }
+
   
+  // Data used to adding a text to the list
+  var _tecNewText = TextEditingController();
   // To store the new grouped texts data
   late final List<String> _enteredTextItemsList;
 
   // Data used to edit a text after addition to the list
   var _isEdited = false;
   var _editedIndex = -1;
-  var _tecNewText = TextEditingController();
-  var _tecEdition = TextEditingController();
+  var _tecTextEdition = TextEditingController();
 
   // Data related to deleting texts from the new list
-  List<String> textsSelectedForDeletion = [];
-  bool _areSomeTextItemsForDeletion = false;
-  List<int> _indexesOfTextItemsSelectedForDeletion = [];
+  List<String> _textsSelectedForDeletion = [];
+  List<int> _textsSelectedForDeletionIndexes = [];
+  bool _areSomeTextItemsForDeletion = false;  
 
   // Data related to saving the added texts in a list
   // True once the current list has been persisted.
@@ -77,87 +103,22 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
   // For entering the list label
   var _tecListLabel = TextEditingController();
 
-  // Disposing of the TextEditingController instances
-  @override
-  void dispose() {
-    _tecNewText.dispose();
-    _tecEdition.dispose();
-    _tecListLabel.dispose();
-    super.dispose();
-  }
-  
-  // Used to load the list of grouped texts
-  Future<void> _loadListOfGroupedTexts() async {
-    setState(() {
-      _loading = true;
-      _errorLoading = null;
-    });
-    try {
-      List<List<String>> listOfGroupedTexts = await _textListsStorage.listOfGroupedTexts();      
-      setState(() {
-        _listOfPreviousGroupedTexts = listOfGroupedTexts;
-        _loading = false;
-        print("_loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
-      });
-    } catch (e) {
-      setState(() {
-        print(e);
-        _errorLoading = e.toString();
-        _loading = false;
-      });
-    }
+  // Method used to verify if the newly entered texts have been already saved in a list
+  bool listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
+  {
+    bool val = _listOfPreviousGroupedTexts!.any((list) => listEquals(list, _enteredTextItemsList));
+    return val;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // Loading the previous lists of grouped texts
-    _loadListOfGroupedTexts();
-    
-    _enteredTextItemsList = List<String>.from(widget.initialTextValues);
-
-  }
-
-  // ── actions ────────────────────────────────────────────────────────────────
-
-  // Method used to save the grouped texts in a list
-  Future<void> _saveGroupTextsList() async {
-
-    // Opening a dialog to enter the list label
-    final listLabel = await _showListLabelDialog();
-
-    if (listLabel == null) return; // for user cancellation
-
-    setState(() => _saving = true);
-
-    try {
-      // List.from(_enteredTextItemsList)..sort() : 
-      // to sort at saving time, without re-ordering the texts on-screen
-      await _textListsStorage.saveListData(listLabel, List.from(_enteredTextItemsList)..sort());      
-
-      setState(() {
-        _isSaved = true;
-        _saving = false;
-      });
-
-      if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar
-      (
-        SnackBar(content: Text('Saved as "$listLabel"')),
-      );
-    } catch (e) 
-    {
-      setState(() => _saving = false);
-
-      if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar
-      (
-        SnackBar(content: Text('Save failed: $e')),
-      );
-    }
-  }
+  bool get canSave =>
+      // list has not been loaded from existant list
+      !_listHasBeenLoaded 
+      // at least one text has been added
+      && _enteredTextItemsList.isNotEmpty 
+      // added texts are not matching a saved list content
+      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
+      // the new list hasn't been saved yet
+      && !_isSaved ;
 
   /// Shows a dialog that asks for a list label.
   /// Requires for the label to not be used already.
@@ -178,7 +139,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                 return;
               }
               // Warn if the label already exists, and prevents the saving of data.
-              final listLabelAlreadyExists = await _textListsStorage.listLabelExistsAsync(label);
+              final listLabelAlreadyExists = await _textListsDB.listLabelExistsAsync(label);
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
@@ -225,23 +186,62 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     );
   }
 
-  // ── build ──────────────────────────────────────────────────────────────────
+  // Method used to save the grouped texts in a list
+  Future<void> _saveGroupedTextsList() async {
 
-  bool get canSave =>
-      // list has not been loaded from existant list
-      !_listIsLoaded 
-      // at least one text has been added
-      && _enteredTextItemsList.isNotEmpty 
-      // added texts are not matching a saved list content
-      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
-      // the new list hasn't been saved yet
-      && !_isSaved ;
+    // Opening a dialog to enter the list label
+    final listLabel = await _showListLabelDialog();
 
-  // Method used to verify 
-  bool listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
-  {
-    bool val = _listOfPreviousGroupedTexts!.any((list) => listEquals(list, _enteredTextItemsList));
-    return val;
+    if (listLabel == null) return; // for user cancellation
+
+    setState(() => _saving = true);
+
+    try {
+      // List.from(_enteredTextItemsList)..sort() : 
+      // to sort at saving time, without re-ordering the texts on-screen
+      await _textListsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort());      
+
+      setState(() {
+        _isSaved = true;
+        _saving = false;
+      });
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar
+      (
+        SnackBar(content: Text('Saved as "$listLabel"')),
+      );
+    } catch (e) 
+    {
+      setState(() => _saving = false);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar
+      (
+        SnackBar(content: Text('Save failed: $e')),
+      );
+    }
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    // Loading the previous lists of grouped texts
+    _loadListOfPreviousGroupedTexts();
+    
+    _enteredTextItemsList = List<String>.from(widget.initialTextValues);
+  }
+
+  // Disposing of the TextEditingController instances
+  @override
+  void dispose() {
+    _tecNewText.dispose();
+    _tecTextEdition.dispose();
+    _tecListLabel.dispose();
+    super.dispose();
   }
 
   void onUpdateTheListItemValue({required String stringParam, required int intParam})
@@ -255,16 +255,16 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
   @override
   Widget build(BuildContext context) {
 
-    if (_loading) {
+    if (_loadingDB) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (_errorLoading != null) {
+    if (_errorLoadingDB != null) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Text(
-            'Error loading the lists:\n$_errorLoading',
+            'Error loading the lists:\n$_errorLoadingDB',
             textAlign: TextAlign.center,
           ),
         ),
@@ -272,11 +272,11 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     }
 
     return 
-      _loading
+      _loadingDB
       ? const Center(child: CircularProgressIndicator())
       : Scaffold(
         appBar: AppBar(
-          title: Text(_listIsLoaded ? widget.loadedLabel! : 'New list'),
+          title: Text(_listHasBeenLoaded ? widget.loadedLabel! : 'New list'),
           actions: [
             // If data can be saved
             if (canSave) 
@@ -296,7 +296,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                   : IconButton(
                       tooltip: 'Save list',
                       icon: const Icon(Icons.save_outlined),
-                      onPressed: _saveGroupTextsList,
+                      onPressed: _saveGroupedTextsList,
                     ),
             ]
             else 
@@ -323,7 +323,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
               (
                 areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
                 enteredTextItemsList: _enteredTextItemsList,
-                indexesOfTextItemsSelectedForDeletion: _indexesOfTextItemsSelectedForDeletion,
+                indexesOfTextItemsSelectedForDeletion: _textsSelectedForDeletionIndexes,
                 callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
               ),
               // List of added texts or placeholder message
@@ -354,7 +354,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           // Text field (edition mode)
                           TextField
                           (
-                            controller: _tecEdition,
+                            controller: _tecTextEdition,
                             autofocus: true,
                             decoration: const InputDecoration
                             (                    
@@ -366,7 +366,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                               {
                                 _enteredTextItemsList[index] = value; 
                                 _isEdited = false;
-                                _tecEdition.clear();
+                                _tecTextEdition.clear();
                               }),
                             
                           )
@@ -382,9 +382,9 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                                                                   print("index: $intParam");                                                               
                                                                   if(boolParam!) 
                                                                   {                                                                    
-                                                                    // adding the index to _indexesOfTextItemsSelectedForDeletion
-                                                                    _indexesOfTextItemsSelectedForDeletion.add(index);
-                                                                    _indexesOfTextItemsSelectedForDeletion.sort();
+                                                                    // adding the index to _textsSelectedForDeletionIndexes
+                                                                    _textsSelectedForDeletionIndexes.add(index);
+                                                                    _textsSelectedForDeletionIndexes.sort();
                                                                     _areSomeTextItemsForDeletion = true;
 
                                                                     // setState // to do later at bulk widget level
@@ -393,17 +393,17 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                                                                     });
                                                                   }
                                                                   else{
-                                                                     _indexesOfTextItemsSelectedForDeletion.remove(index);
-                                                                     if (_indexesOfTextItemsSelectedForDeletion.isEmpty) _areSomeTextItemsForDeletion = false;
+                                                                     _textsSelectedForDeletionIndexes.remove(index);
+                                                                     if (_textsSelectedForDeletionIndexes.isEmpty) _areSomeTextItemsForDeletion = false;
                                                                     // setState // to do later at bulk widget level
                                                                     setState(() {
                                                                       
                                                                     });
                                                                   }
-                                                                  print("_indexesOfTextItemsSelectedForDeletion: $_indexesOfTextItemsSelectedForDeletion");
+                                                                  print("_textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
                                                                 }, 
                             parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
-                            parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_indexesOfTextItemsSelectedForDeletion.add(index);}, 
+                            parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
                             themeData: Theme.of(context),                          
                           )
                           // Row(
@@ -416,8 +416,8 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           //       onChanged: 
                           //         (_)
                           //         {
-                          //           textsSelectedForDeletion.add(_enteredTextItemsList[index]);
-                          //           print("Selected for deletion: $textsSelectedForDeletion");
+                          //           _textsSelectedForDeletion.add(_enteredTextItemsList[index]);
+                          //           print("Selected for deletion: $_textsSelectedForDeletion");
                           //         }
                           //     ),
                           //     // List tile for reading/to start edition 
