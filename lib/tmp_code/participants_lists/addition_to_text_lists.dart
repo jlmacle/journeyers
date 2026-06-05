@@ -56,7 +56,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
   List<List<String>>? _listOfPreviousGroupedTexts = [];
   
   // To store the new grouped texts data
-  late final List<String> _newTextItemsList;
+  late final List<String> _enteredTextItemsList;
 
   // Data used to edit a text after addition to the list
   var _isEdited = false;
@@ -114,7 +114,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     // Loading the previous lists of grouped texts
     _loadListOfGroupedTexts();
     
-    _newTextItemsList = List<String>.from(widget.initialTextValues);
+    _enteredTextItemsList = List<String>.from(widget.initialTextValues);
 
   }
 
@@ -133,7 +133,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     try {
       // List.from(_newTextsList)..sort() : 
       // to sort at saving time, without re-ordering the texts on-screen
-      await _textListsStorage.saveListData(listLabel, List.from(_newTextItemsList)..sort());      
+      await _textListsStorage.saveListData(listLabel, List.from(_enteredTextItemsList)..sort());      
 
       setState(() {
         _isSaved = true;
@@ -231,23 +231,23 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
       // list has not been loaded from existant list
       !_listIsLoaded 
       // at least one text has been added
-      && _newTextItemsList.isNotEmpty 
+      && _enteredTextItemsList.isNotEmpty 
       // added texts are not matching a saved list content
-      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _newTextItemsList)  
+      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
       // the new list hasn't been saved yet
       && !_isSaved ;
 
   // Method used to verify 
   bool listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
   {
-    bool val = _listOfPreviousGroupedTexts!.any((list) => listEquals(list, _newTextItemsList));
+    bool val = _listOfPreviousGroupedTexts!.any((list) => listEquals(list, _enteredTextItemsList));
     return val;
   }
 
   void onUpdateTheListItemValue({required String stringParam, required int intParam})
   {
     setState(() {
-      _newTextItemsList[intParam] = stringParam;
+      _enteredTextItemsList[intParam] = stringParam;
     });  
   }
 
@@ -304,7 +304,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
             ...
             [
               // to avoid 'List already saved' at new list declaration
-              if (_newTextItemsList.isNotEmpty)
+              if (_enteredTextItemsList.isNotEmpty)
                 const Padding(
                   padding: EdgeInsets.only(right: 8.0),
                   child: Text('List already saved', ),
@@ -322,14 +322,14 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
               TextListItemDeletionByBulk
               (
                 areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
-                newTextItemsList: _newTextItemsList,
+                enteredTextItemsList: _enteredTextItemsList,
                 indexesOfTextItemsSelectedForDeletion: _indexesOfTextItemsSelectedForDeletion,
                 callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
               ),
               // List of added texts or placeholder message
               Expanded(
                 child: 
-                  _newTextItemsList.isEmpty
+                  _enteredTextItemsList.isEmpty
                   // Placeholder message if empty list
                   ? Center(
                       child: Text(
@@ -344,7 +344,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                   ListView.builder
                   (                  
                     padding: const EdgeInsets.only(bottom: 96),
-                    itemCount: _newTextItemsList.length,
+                    itemCount: _enteredTextItemsList.length,
                     itemBuilder: (_, index) 
                     {
                       return 
@@ -364,7 +364,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                             onSubmitted: 
                               (value) => setState(() 
                               {
-                                _newTextItemsList[index] = value; 
+                                _enteredTextItemsList[index] = value; 
                                 _isEdited = false;
                                 _tecEdition.clear();
                               }),
@@ -375,7 +375,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           EditableDeletableTextListItem
                           (
                             itemIndex: index, 
-                            itemText: _newTextItemsList[index], 
+                            itemText: _enteredTextItemsList[index], 
                             onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
                                                                 { 
                                                                   print("value: $boolParam");   
@@ -470,10 +470,10 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                 onSubmitted: (value)
                 {
                   setState(() {
-                    _newTextItemsList.add(value.trim());
+                    _enteredTextItemsList.add(value.trim());
                   });
                   _tecNewText.clear();
-                  print("_newTextsList: $_newTextItemsList");
+                  print("_enteredTextItemsList: $_enteredTextItemsList");
                 },
               ),
             ]

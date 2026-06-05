@@ -10,7 +10,7 @@ class TextListItemDeletionByBulk extends StatefulWidget
   final bool areSomeTextItemsSelectedForDeletion; 
 
   /// List containing the entered texts.
-  final List<String>? newTextItemsList;
+  final List<String> enteredTextItemsList;
 
   /// List containing the indexes of the text items selected for deletion.
   final List<int> indexesOfTextItemsSelectedForDeletion;
@@ -22,7 +22,7 @@ class TextListItemDeletionByBulk extends StatefulWidget
   ({
     super.key,
     required this.areSomeTextItemsSelectedForDeletion,
-    required this.newTextItemsList,
+    required this.enteredTextItemsList,
     required this.indexesOfTextItemsSelectedForDeletion,
     required this.callbackFunctionToRefreshTheTextItemsList,
   });
@@ -38,9 +38,9 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
   Future<void> _deleteSelectedTextItems() async 
   {
     print("_deleteSelectedSessions:  widget.indexesOfTextItemsSelectedForDeletion: ${widget.indexesOfTextItemsSelectedForDeletion}");
-    print("_deleteSelectedSessions:  newTextItemsList: ${widget.newTextItemsList}");
+    print("_deleteSelectedSessions:  enteredTextItemsList: ${widget.enteredTextItemsList}");
     // Creating a new list to update _newTextsList
-    List<String> updatedNewTextsList = widget.newTextItemsList!
+    List<String> updatedNewTextsList = widget.enteredTextItemsList
     // to compare ints with ints
     .asMap().entries
     .where((entry) => !widget.indexesOfTextItemsSelectedForDeletion.contains(entry.key))
@@ -51,14 +51,14 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
     print("_deleteSelectedSessions:  updatedNewTextsList: $updatedNewTextsList");
 
     // Updating _newTextsList
-    widget.newTextItemsList!.clear();
-    widget.newTextItemsList!.addAll(updatedNewTextsList);
+    widget.enteredTextItemsList.clear();
+    widget.enteredTextItemsList.addAll(updatedNewTextsList);
     widget.callbackFunctionToRefreshTheTextItemsList(); // setState
 
     // Clearing indexesOfTextItemsSelectedForDeletion 
     widget.indexesOfTextItemsSelectedForDeletion.clear();
     
-    print("Deletion by bulk: after deletion:  widget.newTextItemsList: ${widget.newTextItemsList}");
+    print("Deletion by bulk: after deletion:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
