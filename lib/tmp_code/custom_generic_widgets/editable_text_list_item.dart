@@ -5,7 +5,7 @@ import '../utils/placeholder_functions.dart';
 
 /// {@category Utils - Generic}
 /// {@category Lists}
-/// A widget used to edit text in a list.
+/// A widget used to edit text items in a list.
 class EditableTextListItem extends StatefulWidget {
 
   /// The text to display.
