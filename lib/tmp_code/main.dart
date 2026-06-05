@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/participants_group_declaration.dart';
+import 'participants_lists/load_text_list_or_new_text_list.dart';
 
 void main() => runApp(const ParticipantListsApp());
 
@@ -16,7 +16,7 @@ class ParticipantListsApp extends StatelessWidget {
         colorSchemeSeed: Colors.indigo,
         useMaterial3: true,
       ),
-      home: const ParticipantsGroupDeclaration(),
+      home: const LoadTextListOrNewTextList(),
     );
   }
 }

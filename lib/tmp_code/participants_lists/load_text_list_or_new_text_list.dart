@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import '../models/text_lists_storage_externalized_strings.dart';
 
-import 'participants_group_addition.dart';
-import 'participants_groups_listing.dart';
+import 'addition_to_text_lists.dart';
+import 'text_lists_display.dart';
 
 
 /// ParticipantsGroupDeclaration offers two choices:
 ///   • Loading a list of previous groups of participants
 ///   • Adding a new group of participants
-class ParticipantsGroupDeclaration extends StatelessWidget {
-  const ParticipantsGroupDeclaration({super.key});
+class LoadTextListOrNewTextList extends StatelessWidget {
+  const LoadTextListOrNewTextList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class ParticipantsGroupDeclaration extends StatelessWidget {
                 FilledButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const ParticipantsGroupsListing(),
+                      builder: (_) => const TextListsDisplay(),
                     ),
                   ),
                   icon: const Icon(Icons.folder_open_outlined),
@@ -60,7 +61,13 @@ class ParticipantsGroupDeclaration extends StatelessWidget {
                 OutlinedButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const ParticipantsGroupAddition(),
+                      builder: (_) => AdditionToTextLists
+                                        (
+                                          listLabelHintText: listLabelHintText,
+                                          listPlaceholder: listPlaceholder,
+                                          invitationToEnterTextPlaceholder: invitationToEnterTextPlaceholder,
+                                          themeData: Theme.of(context),
+                                        ),
                     ),
                   ),
                   icon: const Icon(Icons.add_circle_outline),

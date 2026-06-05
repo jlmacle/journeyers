@@ -3,18 +3,18 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
-import '../models/participants_groups_lists_storage_externalized_strings.dart';
+import 'text_lists_storage_externalized_strings.dart';
 import '../utils/alphabet_utils.dart';
 
 
 // new category to consider
 /// {@category Utils - Generic}
 /// Persists a list of participants list data with the pattern:
-/// { "key": { "itemLabel": "participantListLabel", "subItemsListData": , "displayFunction": } }
+/// { "key": { "itemText": "participantListLabel", "subItemsListData": , "displayFunction": } }
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
-class ParticipantsGroupsListsStorage {
-  static const _fileName = 'journeyers_gps_participants_groups_lists10.json';
+class TextListsStorage {
+  static const _fileName = 'journeyers_gps_participants_groups_lists11.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -150,80 +150,80 @@ class ParticipantsGroupsListsStorage {
 
   // To clean: Code duplication
   /// Returns `true` when [label] already exists in the list of participants lists labels (async).
-  Future<bool> existsAsync(String label) async {
+  Future<bool> listLabelExistsAsync(String label) async {
     var data = await loadDataStructure();
     for (var index = 0; index < data.length; index++)
     {
       var listData = data[index] as Map<String, dynamic>;
       var listDataValues = listData.values.first;
-      if (listDataValues[itemLabelKey] == label) return true;
+      if (listDataValues[itemTextKey] == label) return true;
     }
     return false; 
   }
 
-  /// Returns `true` when [label] already exists in the list of participants lists labels (sync).
-  bool existsSync({required String label, required List<dynamic> dataStructure}) {
+  /// Returns `true` when [label] already exists in the list of grouped texts (sync).
+  bool listLabelExistsSync({required String label, required List<dynamic> dataStructure}) {
     for (var index = 0; index < dataStructure.length; index++)
     {
       var listData = dataStructure[index] as Map<String, dynamic>;
       var listDataValues = listData.values.first;
       print("listData.values.first: ${listData.values.first}");
-      if (listDataValues[itemLabelKey] == label) return true;
+      if (listDataValues[itemTextKey] == label) return true;
     }
     return false; 
   }
 
-  /// Loads the participants names for [label]. Throws [ArgumentError] when absent.
-  List<String> loadNamesByListLabelSync({required String label, required List<dynamic> dataStructure}) 
+  /// Loads the texts for [label]. Throws [ArgumentError] when absent.
+  List<String> loadTextsByListLabelSync({required String label, required List<dynamic> dataStructure})
   {
     print("label: $label");
     print("dataStructure: $dataStructure");
 
-    bool labelExists = existsSync(label: label, dataStructure: dataStructure);
+    bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
-      throw ArgumentError('No list found for label "$label".');
+      throw ArgumentError('No list found for label: "$label".');
     }
 
     // Lists-level loop
     for (var indexLists = 0; indexLists < dataStructure.length; indexLists++)
     {
-      var names = [];
+      var texts = [];
       // Retrieving the data for the current list  
       var currentListData = dataStructure[indexLists] as Map<String, dynamic>;  
       // Retrieving the data values for the current list
       var currentListDataValues = currentListData.values.first;
       // Retrieving the label for the current list  
-      var listLabel = currentListDataValues[itemLabelKey];
+      var listLabel = currentListDataValues[itemTextKey];
       // Retrieving the sub-items data
       List<dynamic> subItemsData = currentListDataValues[subItemsListDataKey];
-      // Retrieving the names for the current list  
+      // Retrieving the texts for the current list  
       for (var indexSubItems = 0; indexSubItems < subItemsData.length; indexSubItems++)
       {
         // Retrieving the data for the current sub-item 
         var currentSubItemData = subItemsData[indexSubItems];
         // Retrieving the data values for the current sub-item 
         var currentSubItemDataValues = currentSubItemData.values.first;
-        // Retrieving the name for the current sub-item 
-        var name  = currentSubItemDataValues[itemLabelKey];
-        // Adding the name to the list
-        names.add(name);
+        // Retrieving the text for the current sub-item 
+        var text = currentSubItemDataValues[itemTextKey];
+        // Adding the  text  to the list
+        texts.add(text);
       }
 
-      print("names: $names");
-      if (listLabel == label) return List.from(names);   
+      print("texts: $texts");
+      if (listLabel == label) return List.from(texts);   
     }
 
     return [];
   }
 
-  /// Returns a list made of all the lists of names.
-  Future<List<List<String>>> listOfListsOfNames() async {
+  /// Returns a list made of all the lists of texts.
+  Future<List<List<String>>> listOfGroupedTexts() async {
 
     // Loading the data
     var data = await loadDataStructure();
     print("data: $data");
 
-    List<List<String>> listOfListsOfNames =[];
+    List<List<String>> listOfGroupedTexts =[];
 
     // Lists-level loop
     for (var indexLists = 0; indexLists < data.length; indexLists++)
@@ -232,7 +232,7 @@ class ParticipantsGroupsListsStorage {
       var currentListDataValues = currentListData.values.first;
       var currentSubItemsListData = currentListDataValues[subItemsListDataKey];
 
-      List<String> namesList = [];
+      List<String> textsList = [];
       
       // Sub-items-level loop
       for (var indexSubItems = 0; indexSubItems < currentSubItemsListData.length; indexSubItems++)
@@ -241,16 +241,16 @@ class ParticipantsGroupsListsStorage {
         var currentSubItemData = currentSubItemsListData[indexSubItems];
         // Retrieving the data values for the current sub-item 
         var currentSubItemDataValues = currentSubItemData.values.first;
-        // Retrieving the name for the current sub-item 
-        var name  = currentSubItemDataValues[itemLabelKey];
-        // Adding the name to the list
-        namesList.add(name);
+        // Retrieving the text for the current sub-item 
+        var text = currentSubItemDataValues[itemTextKey];
+        // Adding the  text  to the list
+        textsList.add(text);
       }
       // Adding to the list
-      listOfListsOfNames.add(namesList);
+      listOfGroupedTexts.add(textsList);
     }
-    print("listOfListsOfNames(): listOfListsOfNames: $listOfListsOfNames");
-    return listOfListsOfNames;
+    print("listOfGroupedTexts(): listOfGroupedTexts: $listOfGroupedTexts");
+    return listOfGroupedTexts;
   }
 
   /// Returns all saved group labels, sorted alphabetically.
@@ -264,14 +264,14 @@ class ParticipantsGroupsListsStorage {
     {
       var listData = data[indexLists] as Map<String, dynamic>;      
       var listDataValues = listData.values.first;
-      var listLabel = listDataValues[itemLabelKey];
+      var listLabel = listDataValues[itemTextKey];
       labels.add(listLabel);
     }
 
     return labels;
   }
 
-  // Method used to build a list label key
+  // Method used to build a list/item text key
   // Keys have an alphabet part and a digit part: e.g. aa3
   // Simplified memo:
   // Case 1: 0 <= digitPart <= 8: nextGenKey: determining next digit
@@ -369,9 +369,9 @@ class ParticipantsGroupsListsStorage {
   }
 
 
-  /// Saves [names] under [label], overwriting any previous entry.
+  /// Saves [texts] under [label], overwriting any previous entry.
   /// The key used is a sequence of letters followed by a digit (0 to 9)
-  Future<void> saveListData(String label, List<String> names) async {
+  Future<void> saveListData(String label, List<String> texts) async {
     print("saveListData");
 
     List<dynamic> data = await loadDataStructure();
@@ -413,12 +413,12 @@ class ParticipantsGroupsListsStorage {
     var key = listKey;
      
     // Building the items data
-    for (var nameIndex = 0; nameIndex < names.length; nameIndex++)
+    for (var textIndex = 0; textIndex < texts.length; textIndex++)
     {
       // building the key from the previously used key
       key = getNextKey(key: key);
       print("item key: $key");
-      Map<String, dynamic> itemDataMap = {itemLabelKey: names[nameIndex], subItemsListDataKey: null, displayFunctionKey: null};
+      Map<String, dynamic> itemDataMap = {itemTextKey: texts[textIndex], subItemsListDataKey: null, displayFunctionKey: null};
 
       subItemsDataList.add({key: itemDataMap});
     }
@@ -426,7 +426,7 @@ class ParticipantsGroupsListsStorage {
     print("subItemsDataList: $subItemsDataList");
 
     // Building the list data
-    var listDataMap=  {itemLabelKey: label, subItemsListDataKey: subItemsDataList, displayFunctionKey: null};
+    var listDataMap=  {itemTextKey: label, subItemsListDataKey: subItemsDataList, displayFunctionKey: null};
     var listItemData = {listKey: listDataMap};
 
     print("listItemData: $listItemData");
@@ -445,12 +445,7 @@ class ParticipantsGroupsListsStorage {
     await f.writeAsString(jsonEncode(listStructure));
   }
 
-  // Method used to save only the list labels tree structure
-  Future<void> savePreviousFormatList(Map<String, dynamic> listStructure) async 
-  {
-    var f = await _getFile();
-    await f.writeAsString(jsonEncode(listStructure));
-  }
+
 
   
 }
