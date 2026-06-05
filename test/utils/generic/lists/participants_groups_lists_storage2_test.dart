@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'package:journeyers/tmp_code/models/text_lists_storage.dart';
 
 void main() {
-  TextListsStorage storage = TextListsStorage();
+  TextListsDB storage = TextListsDB();
 
   group('getNextKey', () {
     // 'Next key after "a1"'
