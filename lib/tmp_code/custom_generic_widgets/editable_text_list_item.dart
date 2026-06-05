@@ -8,14 +8,14 @@ import '../utils/placeholder_functions.dart';
 /// A widget used to edit text items in a list.
 class EditableTextListItem extends StatefulWidget {
 
-  /// The text to display.
-  final String text;
+  /// The index of the list item.
+  final int itemIndex;
+
+  /// The item text.
+  final String itemText;
 
   /// The style for the text to display.
-  final TextStyle textStyle;
-
-  /// The index of the list item in the tree structure.
-  final int listItemIndex;
+  final TextStyle itemTextStyle;  
 
   /// The left padding for the text field.
   final double paddingLeft;
@@ -34,9 +34,9 @@ class EditableTextListItem extends StatefulWidget {
 
   const EditableTextListItem
   ({
-    required this.text,
-    required this.listItemIndex,
-    this.textStyle = const TextStyle(fontWeight: FontWeight.bold), 
+    required this.itemText,
+    required this.itemIndex,
+    this.itemTextStyle = const TextStyle(fontWeight: FontWeight.bold), 
     this.paddingBottom = 8,
     this.paddingTop = 8,
     this.paddingLeft = 16,
@@ -83,7 +83,7 @@ class _EditableTextListItemState extends State<EditableTextListItem>
         {
           _isEdited = false;
           _tecEdition.clear();
-          widget.parentCallbackFunctionToUpdateTheListItemValue(stringParam: value, intParam: widget.listItemIndex);
+          widget.parentCallbackFunctionToUpdateTheListItemValue(stringParam: value, intParam: widget.itemIndex);
         }),
       
     )
@@ -92,7 +92,7 @@ class _EditableTextListItemState extends State<EditableTextListItem>
     GestureDetector
     (
       child:
-        Text(widget.text, style: widget.textStyle),
+        Text(widget.itemText, style: widget.itemTextStyle),
         onTap: () 
             {
               print("GestureDetector: onTap");
@@ -100,7 +100,7 @@ class _EditableTextListItemState extends State<EditableTextListItem>
               setState(() 
               {
                 _isEdited = true;
-                _tecEdition.text = widget.text;
+                _tecEdition.text = widget.itemText;
               });
             }
     );

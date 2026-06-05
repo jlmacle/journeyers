@@ -107,7 +107,7 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
           children: [
             // Editable list label
             // parentCallbackFunctionToUpdateTheListItemValue to add
-            EditableTextListItem(text: listLabel, listItemIndex: -1),
+            EditableTextListItem(itemText: listLabel, itemIndex: -1),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -115,7 +115,7 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
               (
                 (listItem) 
                 // parentCallbackFunctionToUpdateTheListItemValue to add
-                  => Chip(label: EditableTextListItem(text: listItem, listItemIndex:-1,))
+                  => Chip(label: EditableTextListItem(itemText: listItem, itemIndex:-1,))
               ).toList(),
             ),
           ],
