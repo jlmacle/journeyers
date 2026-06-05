@@ -131,7 +131,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     setState(() => _saving = true);
 
     try {
-      // List.from(_newTextsList)..sort() : 
+      // List.from(_enteredTextItemsList)..sort() : 
       // to sort at saving time, without re-ordering the texts on-screen
       await _textListsStorage.saveListData(listLabel, List.from(_enteredTextItemsList)..sort());      
 
@@ -416,7 +416,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           //       onChanged: 
                           //         (_)
                           //         {
-                          //           textsSelectedForDeletion.add(_newTextsList[index]);
+                          //           textsSelectedForDeletion.add(_enteredTextItemsList[index]);
                           //           print("Selected for deletion: $textsSelectedForDeletion");
                           //         }
                           //     ),
@@ -432,7 +432,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           //         style: widget.themeData.textTheme.bodySmall,
                           //       ),                            
                           //       title: Text(
-                          //         _newTextsList[index],
+                          //         _enteredTextItemsList[index],
                           //         style: widget.themeData.textTheme.titleMedium,
                           //       ),
                           //       trailing: const Icon(Icons.edit),
@@ -442,7 +442,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           //         {
                           //           _isEdited = true; 
                           //           _editedIndex = index; 
-                          //           _tecEdition.text = _newTextsList[index];
+                          //           _tecEdition.text = _enteredTextItemsList[index];
                           //         });
                           //       },
                           //                               ),

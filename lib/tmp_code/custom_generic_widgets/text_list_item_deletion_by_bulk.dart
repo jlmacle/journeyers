@@ -38,8 +38,8 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
   Future<void> _deleteSelectedTextItems() async 
   {
     print("_deleteSelectedSessions:  widget.indexesOfTextItemsSelectedForDeletion: ${widget.indexesOfTextItemsSelectedForDeletion}");
-    print("_deleteSelectedSessions:  enteredTextItemsList: ${widget.enteredTextItemsList}");
-    // Creating a new list to update _newTextsList
+    print("_deleteSelectedSessions:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
+    // Creating a new list to update _enteredTextItemsList
     List<String> updatedNewTextsList = widget.enteredTextItemsList
     // to compare ints with ints
     .asMap().entries
@@ -50,7 +50,7 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
 
     print("_deleteSelectedSessions:  updatedNewTextsList: $updatedNewTextsList");
 
-    // Updating _newTextsList
+    // Updating _enteredTextItemsList
     widget.enteredTextItemsList.clear();
     widget.enteredTextItemsList.addAll(updatedNewTextsList);
     widget.callbackFunctionToRefreshTheTextItemsList(); // setState
