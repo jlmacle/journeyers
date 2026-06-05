@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../utils/typedefs.dart';
+import '../utils/placeholder_functions.dart';
 
+/// {@category Utils - Generic}
+/// {@category Lists}
+/// A widget used to edit text in a list.
 class EditableTextListItem extends StatefulWidget {
 
-  /// The item index within the list.
-  final int itemIndex;
+  /// The text to display.
+  final String text;
 
-  /// The item text.
-  final String itemText;
+  /// The style for the text to display.
+  final TextStyle textStyle;
 
-  /// The theme data used.
-  final ThemeData themeData;
+  /// The index of the list item in the tree structure.
+  final int listItemIndex;
 
   /// The left padding for the text field.
   final double paddingLeft;
@@ -25,130 +29,80 @@ class EditableTextListItem extends StatefulWidget {
   /// The bottom padding for the text field.
   final double paddingBottom;
 
-  /// A callback function called when the checkbox is checked/unchecked.
-  final FunctionNullableBoolAndInt onCheckboxChangedCallbackFunction;
-
   /// Callback function used to update the list item value
   final FunctionStringAndInt parentCallbackFunctionToUpdateTheListItemValue;
 
-  /// Callback function used to update the indexes of the items selected for deletion.
-  final ValueChanged<int> parentCallbackFunctionToUpdateTheIndexesOfTextItemsSelectedForDeletion;
-
   const EditableTextListItem
   ({
-    super.key,
-    required this.itemIndex,
-    required this.itemText,
+    required this.text,
+    required this.listItemIndex,
+    this.textStyle = const TextStyle(fontWeight: FontWeight.bold), 
     this.paddingBottom = 8,
     this.paddingTop = 8,
     this.paddingLeft = 16,
     this.paddingRight = 16,
-    required this.onCheckboxChangedCallbackFunction,
-    required this.parentCallbackFunctionToUpdateTheListItemValue,
-    required this.parentCallbackFunctionToUpdateTheIndexesOfTextItemsSelectedForDeletion,
-    required this.themeData
+    this.parentCallbackFunctionToUpdateTheListItemValue = placeHolderFunctionStringAndInt,
+    super.key
   });
 
   @override
   State<EditableTextListItem> createState() => _EditableTextListItemState();
 }
 
-class _EditableTextListItemState extends State<EditableTextListItem> {
-
-  // for the checkbox state
-  bool _isChecked = false;
-
-  bool _isEdited = false;
-
+class _EditableTextListItemState extends State<EditableTextListItem> 
+{
+  var _isEdited = false;
   var _tecEdition = TextEditingController();
-  
+
+  @override
+  void dispose() {
+    _tecEdition.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return 
-    Row(
-      children: 
-      [
-        if (!_isEdited)
-          // Not an edition mode: checkbox + text + edit icon
-          ...
-          [
-            // Checkbox for list item deletion
-            Checkbox
-            (
-              value: _isChecked, 
-              onChanged: 
-                (value)
-                {
-                  // Updating the checkbox state
-                  setState(() {_isChecked = !_isChecked;});
+    _isEdited
+    ?
+    // Text field if edition mode
+    TextField
+    (
+      controller: _tecEdition,
+      decoration: InputDecoration
+      (                    
+        contentPadding: EdgeInsets.only
+        (
+          bottom: widget.paddingBottom, top: widget.paddingTop,
+          left: widget.paddingLeft, right: widget.paddingRight
+        ),
+      ),
+      textAlign: TextAlign.left,
+      onSubmitted: 
+        (value) => setState(() 
+        {
+          _isEdited = false;
+          _tecEdition.clear();
+          widget.parentCallbackFunctionToUpdateTheListItemValue(stringParam: value, intParam: widget.listItemIndex);
+        }),
+      
+    )
+    :
+    // Text with gesture detection outside of edition mode
+    GestureDetector
+    (
+      child:
+        Text(widget.text, style: widget.textStyle),
+        onTap: () 
+            {
+              print("GestureDetector: onTap");
 
-                  // Adding the item index to the selection to delete
-                  widget.onCheckboxChangedCallbackFunction
-                  (
-                    boolParam: value,
-                    intParam: widget.itemIndex
-                  );
-                  
-                  
-                  // _textsSelectedForDeletion.add(_newTextsList[index]);
-                  // print("Selected for deletion: $_textsSelectedForDeletion");
-                }
-            ),
-            // List tile for reading/to start edition 
-            // Expanded for constraints
-            Expanded(
-              child: ListTile
-              (
-                key: Key('text${widget.itemIndex}'),
-                dense: true,
-                leading: Text(
-                  '${widget.itemIndex + 1}.',
-                  style: widget.themeData.textTheme.bodySmall,
-                ),                            
-                title: Text(
-                  widget.itemText,
-                  style: widget.themeData.textTheme.titleMedium,
-                ),
-                trailing: const Icon(Icons.edit),
-                onTap: () 
-                {
-                  setState(() 
-                  {
-                    _isEdited = true; 
-                    _tecEdition.text = widget.itemText;
-                  });
-                },
-              ),
-            )
-          ]
-          // edition mode
-          else
-          Expanded(
-            child: TextField
-            (
-              controller: _tecEdition,
-              autofocus: true,
-              decoration: InputDecoration
-              (                    
-                contentPadding: EdgeInsets.only
-                (
-                  bottom: widget.paddingBottom, top: widget.paddingTop,
-                  left: widget.paddingLeft, right: widget.paddingRight
-                ),
-              ),
-              textAlign: TextAlign.left,
-              onSubmitted: 
-                (value) => setState(() 
-                {
-                  _isEdited = false;
-                  _tecEdition.clear();
-                  widget.parentCallbackFunctionToUpdateTheListItemValue(stringParam: value, intParam: widget.itemIndex);
-                }),
-              
-            ),
-          )   
-        ],
-      );
+              setState(() 
+              {
+                _isEdited = true;
+                _tecEdition.text = widget.text;
+              });
+            }
+    );
   }
 }

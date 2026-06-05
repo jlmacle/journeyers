@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../custom_generic_widgets/editable_text_list_item.dart';
+
+import '../custom_generic_widgets/editable_deletable_text_list_item.dart';
 import '../custom_generic_widgets/text_list_item_deletion_by_bulk.dart';
 import '../models/text_lists_storage_externalized_strings.dart';
 
@@ -371,7 +372,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           )
                           // ListTile (reading mode)
                           : 
-                          EditableTextListItem
+                          EditableDeletableTextListItem
                           (
                             itemIndex: index, 
                             itemText: _newTextItemsList[index], 
