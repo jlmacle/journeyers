@@ -374,6 +374,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
                           : 
                           EditableDeletableTextListItem
                           (
+                            key: ValueKey(_enteredTextItemsList[index]),
                             itemIndex: index, 
                             itemText: _enteredTextItemsList[index], 
                             onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
