@@ -7,7 +7,7 @@ import '../utils/typedefs.dart';
 /// A widget used to edit and delete text items in a list.
 class EditableDeletableTextListItem extends StatefulWidget {
 
-  /// The item index within the list.
+  /// The index of the list item.
   final int itemIndex;
 
   /// The item text.
