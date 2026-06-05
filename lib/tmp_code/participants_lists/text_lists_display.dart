@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../custom_generic_widgets/editable_text.dart';
+
+import '../custom_generic_widgets/editable_text_list_item.dart';
 import '../models/text_lists_storage_externalized_strings.dart';
 
 import '../models/text_lists_storage.dart';
@@ -106,7 +107,7 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
           children: [
             // Editable list label
             // parentCallbackFunctionToUpdateTheListItemValue to add
-            EditableListText(text: listLabel, listItemIndex: -1),
+            EditableTextListItem(text: listLabel, listItemIndex: -1),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -114,7 +115,7 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
               (
                 (listItem) 
                 // parentCallbackFunctionToUpdateTheListItemValue to add
-                  => Chip(label: EditableListText(text: listItem, listItemIndex:-1,))
+                  => Chip(label: EditableTextListItem(text: listItem, listItemIndex:-1,))
               ).toList(),
             ),
           ],

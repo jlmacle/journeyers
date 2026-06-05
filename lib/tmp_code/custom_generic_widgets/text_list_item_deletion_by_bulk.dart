@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-/// {@category Utility widgets}
+/// {@category Utils - Generic}
 /// {@category Lists}
 /// A widget handling bulk deletion of text items in a list.
 class TextListItemDeletionByBulk extends StatefulWidget 
