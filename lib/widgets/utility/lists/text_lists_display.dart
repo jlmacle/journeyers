@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../custom_generic_widgets/editable_text_list_item.dart';
-import '../models/text_lists_storage_externalized_strings.dart';
+import '../../custom/interaction_and_inputs/editable_text_list_item.dart';
+import 'models/text_lists_storage_externalized_strings.dart';
 
-import '../models/text_lists_storage.dart';
+import 'models/text_lists_storage.dart';
 import 'addition_to_text_lists.dart';
 
 /// Displays all saved list labels.
@@ -106,7 +106,6 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Editable list label
-            // parentCallbackFunctionToUpdateTheListItemValue to add
             EditableTextListItem(itemText: listLabel, itemIndex: -1),
             const SizedBox(height: 8),
             Wrap(

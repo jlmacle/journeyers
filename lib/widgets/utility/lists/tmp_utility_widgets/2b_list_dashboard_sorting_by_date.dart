@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling the sorting by date of session data.
-class DashboardSortingByDate extends StatefulWidget 
+class ListDashboardSortingByDate extends StatefulWidget 
 {
   /// List containing the sessions to sort.
   final List<dynamic>? sessionsToSort;
@@ -15,7 +15,7 @@ class DashboardSortingByDate extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardSortingByDate
+  const ListDashboardSortingByDate
   ({
     super.key,
     required this.sessionsToSort,
@@ -23,10 +23,10 @@ class DashboardSortingByDate extends StatefulWidget
   });
 
   @override
-  State<DashboardSortingByDate> createState() => DashboardSortingByDateState();
+  State<ListDashboardSortingByDate> createState() => ListDashboardSortingByDateState();
 }
 
-class DashboardSortingByDateState extends State<DashboardSortingByDate> 
+class ListDashboardSortingByDateState extends State<ListDashboardSortingByDate> 
 {
   bool _isAscendingDate = false;   
 

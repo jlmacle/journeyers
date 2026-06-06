@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:share_plus/share_plus.dart';
-
-import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/typedefs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
-// Used to store a temporary file path used for session data sharing.
-String tmpFilePath = "";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling a session data.
-class SessionsListItem extends StatefulWidget 
+class ListOfListsItem extends StatefulWidget 
 {
   /// The session metadata.
-  final Map<String, dynamic> sessionMetadata;
+  final Map<String, dynamic> listData;
 
   /// The index within the list.
   final int index;
@@ -45,14 +39,14 @@ class SessionsListItem extends StatefulWidget
   final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
 
   /// A callback function called when the keywords are updated.
-  final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
+  final FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDeleteCallbackFunction;
 
-  const SessionsListItem({
+  const ListOfListsItem({
     super.key,
-    required this.sessionMetadata,
+    required this.listData,
     required this.index,
     required this.isChecked,
     required this.dashboardContext,
@@ -65,15 +59,15 @@ class SessionsListItem extends StatefulWidget
   });
 
   @override
-  State<SessionsListItem> createState() => _SessionsListItemState();
+  State<ListOfListsItem> createState() => _ListOfListsItemState();
 }
 
-class _SessionsListItemState extends State<SessionsListItem> 
+class _ListOfListsItemState extends State<ListOfListsItem> 
 {
   TextEditingController kwsEditController = .new();
 
   // To clean
-  void onKeywordsUpdated(String? filePath) async
+  Future<void> onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedKeywords = kwsEditController.text
@@ -83,108 +77,14 @@ class _SessionsListItemState extends State<SessionsListItem>
         .toSet();
 
     if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
-    // Calling the parent callback function for state update
-    await widget.onKeywordsUpdatedCallbackFunction(filePath: filePath, updatedKeywords: updatedKeywords);
+    // Calling the parent callback for state 
+    await widget.onKeywordsUpdatedCallbackFunction(listKey: listKey, updatedKeywords: updatedKeywords, listData: listData);
 
     if (!context.mounted) return;
     Navigator.of(context).pop();
   }
 
-  // Method used to update the temporary file path used for session data sharing
-  void updateTmpFilePath(String tmpFilePathFromPreview)
-  {    
-    tmpFilePath = tmpFilePathFromPreview;
-
-    if (sessionDataDebug) pu.printd("Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
-  }
-
-  // Method used to display an overlay with a session data preview. 
-  void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) 
-  {
-    String title = sessionMetadata[DashboardUtils.keyTitle];
-    showGeneralDialog
-    (
-      context: context,
-      transitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, anim1, anim2) 
-      {
-        return Scaffold
-        (
-          appBar:AppBar
-          (
-            centerTitle: true, 
-            title: 
-            Text
-            (
-              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-              softWrap:true, title, style: previewTitleStyle
-            ),
-            // Left side: Edit Button
-            leadingWidth: 100,
-            leading: Row(
-              children: [
-                // Group data is kept read-only
-                dashboardContext == DashboardUtils.caContext 
-                  ?
-                  IconButton
-                  (
-                    icon: const Icon(Icons.edit),
-                    color: appBarWhite,
-                    onPressed: ()
-                    {                      
-                      // Starts the session data editing
-                      editCASessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
-                      // Closes the modal preview overlay
-                      Navigator.of(context).pop();
-                    },
-                    tooltip: editTooltipLabel,
-                  )
-                  :
-                  const SizedBox(height: 0, width: 0),
-                IconButton(
-                  icon: const Icon(Icons.share),
-                  color: appBarWhite,
-                  onPressed: () 
-                  {shareSession(context, sessionMetadata, tmpFilePath);},
-                  tooltip: "Share session",
-                ),
-              ],
-            ),
-            
-            // Right side: Close Button
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.close),
-                color: appBarWhite,
-                onPressed: () => Navigator.of(context).pop(),
-                tooltip: "Close preview",
-              ),
-            ],
-          ),
-          body: SafeArea(
-            // SingleChildScrollView ensures the content is scrollable 
-            // regardless of the widget's internal structure
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: 
-                (sessionMetadata[DashboardUtils.keyFilePath] != null)
-                ?
-                  (dashboardContext == DashboardUtils.caContext)
-                  ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
-                  : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
-                :
-                  const Text('Null file path'),
-              ),
-            ),
-          )
-        );
-      }
-    );
-  }
-
-
+ 
   @override void dispose() 
   {
     kwsEditController.dispose();
@@ -195,7 +95,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   Widget build(BuildContext context) 
   {
     // Gets the title
-    final String sessionTitle = widget.sessionMetadata[DashboardUtils.keyTitle];
+    final String sessionTitle = widget.listData[itemTextKey];
     // Modifies the title according to context (ca or gps)
     final String displayTitle = (widget.dashboardContext == DashboardUtils.gpsContext)
         ? "$sessionTitle$gpsTitleSuffix"
@@ -203,7 +103,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
     // Sorting keywords for display
     final Set<String> sortedKeywords = 
-    Set<String>.from(widget.sessionMetadata[DashboardUtils.keyKeywords])
+    Set<String>.from(widget.listData[itemKeywordsKey])
     ..toList().sort((a, b) 
     {
         int comparison = a.toLowerCase().compareTo(b.toLowerCase());
@@ -244,12 +144,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                           ),
-                          // The session date
-                          Text(
-                            "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
-                            key: ValueKey('session-date-${widget.index}'),
-                            style: const TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
+                          
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -259,11 +154,12 @@ class _SessionsListItemState extends State<SessionsListItem>
                         (
                           context: context,
                           dashboardContext: widget.dashboardContext,                          
-                          currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
-                          filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
+                          currentKeywords: widget.listData[itemKeywordsKey],
+                          listKey: widget.listData[itemKey],
                           kwsEditController: kwsEditController,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                          onKeywordsUpdated: onKeywordsUpdated
+                          onKeywordsUpdated: onKeywordsUpdated,
+                          listData: widget.listData
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
@@ -282,25 +178,7 @@ class _SessionsListItemState extends State<SessionsListItem>
               children: [
                 Wrap(
                   spacing: 4,
-                  children: [
-                    // To preview the session data
-                    IconButton(
-                      icon: const Icon(Icons.find_in_page_rounded),
-                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, updateTmpFilePath),
-                      tooltip: previewTooltipLabel,
-                    ),
-                    // To edit the session file data
-                    // Group data is kept read-only
-                    widget.dashboardContext == DashboardUtils.caContext 
-                    ?
-                    IconButton(
-                      icon: const Icon(Icons.edit_document),
-                      onPressed: widget.onEditPressedCallbackFunction,                      
-                      tooltip: editTooltipLabel,
-                    )
-                    :
-                    const SizedBox(height: 0, width: 0)
-                    ,
+                  children: [                    
                     // To edit the keywords
                     IconButton(
                       icon: const Icon(Icons.style_rounded),
@@ -308,11 +186,12 @@ class _SessionsListItemState extends State<SessionsListItem>
                       (
                         context: context,
                         dashboardContext: widget.dashboardContext,
-                        currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
-                        filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
+                        currentKeywords: widget.listData[itemKeywordsKey],
+                        listKey: widget.listData[itemKey],
                         kwsEditController: kwsEditController,
                         onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                        onKeywordsUpdated: onKeywordsUpdated
+                        onKeywordsUpdated: onKeywordsUpdated,
+                        listData: widget.listData
                       ),
                       tooltip: keywordsTooltipLabel,
                     ),
@@ -334,40 +213,15 @@ class _SessionsListItemState extends State<SessionsListItem>
   }
 }
 
-
-// Triggers the platform's native share sheet for a session.
-// Shares both the raw session file (CSV / TXT) and some metadata.
-Future<void> shareSession(
-  BuildContext context,
-  Map<String, dynamic> sessionMetadata,
-  String tmpFilePath
-) async
-{
-  final String title     = sessionMetadata[DashboardUtils.keyTitle]    ?? '';
-  final String date      = sessionMetadata[DashboardUtils.keyDate]     ?? '';
-  final List<dynamic> keywords = sessionMetadata[DashboardUtils.keyKeywords] ?? [];
-
-  final String shareText =
-      'Session: $title\n'
-      'Date: $date\n'
-      'Keywords: ${keywords.join(', ')}';
-
-  final ShareParams params = ShareParams(
-          subject: title,
-          text: shareText,
-          files: [XFile(tmpFilePath)],
-        );
-
-  await SharePlus.instance.share(params);
-}
-
 void _showKeywordsEditSheet
 ({
   required BuildContext context, required String dashboardContext, 
-  required List<dynamic> currentKeywords, required String? filePath, 
+  required List<dynamic> currentKeywords, required String? listKey, 
   required TextEditingController kwsEditController,
-  required FunctionSetStringAndString onKeywordsUpdatedCallbackFunction,
-  required ValueChanged<String?> onKeywordsUpdated
+  required FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction,
+  required FunctionStringAndMapStringDynamic onKeywordsUpdated,
+  required Map<String, dynamic> listData
+
 
 }) {
   // Converting list to a comma-separated string for editing
@@ -400,11 +254,11 @@ void _showKeywordsEditSheet
               labelStyle: TextStyle(color: Colors.black),
               hintText: 'Please enter your keywords.',
             ),
-            onSubmitted: (_) async => onKeywordsUpdated(filePath)
+            onSubmitted: (_) async => onKeywordsUpdated(listKey: listKey, listData: listData)
           ),       
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: () async =>  onKeywordsUpdated(filePath),
+            onPressed: () async =>  onKeywordsUpdated(listKey: listKey, listData: listData),
             child: const Text("Save", style: TextStyle(color: Colors.black)),
           ),
           const SizedBox(height: 20),

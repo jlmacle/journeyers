@@ -1,6 +1,7 @@
 const accessibilityDebug = false;
 const csvBuildingDebug = false;
 const editDebug = true;
+const listDebug = true;
 const mobileDebug = false;
 const preferencesDebug = false;
 const preloadingDebug = false;

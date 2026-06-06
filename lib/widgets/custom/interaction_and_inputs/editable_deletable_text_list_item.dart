@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/typedefs.dart';
+import '../../utility/lists/tmp_utility_widgets/typedefs.dart';
 
 /// {@category Utils - Generic}
 /// {@category Lists}

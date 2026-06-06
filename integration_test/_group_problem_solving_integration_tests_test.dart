@@ -12,7 +12,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
 // TODO: to clean

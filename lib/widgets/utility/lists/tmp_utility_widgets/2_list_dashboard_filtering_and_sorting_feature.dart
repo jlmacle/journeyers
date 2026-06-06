@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2a_dashboard_sorting_by_title.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2b_dashboard_sorting_by_date.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2a_list_dashboard_sorting_by_title.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2b_list_dashboard_sorting_by_date.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling sorting and filtering of session data.
-class DashboardSortingAndFilteringFeature extends StatefulWidget 
+class ListDashboardSortingAndFilteringFeature extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -29,9 +29,9 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
 
   /// Global key used to identify the widget handling the filtering by keywords.
-  final GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
+  final GlobalKey<ListDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
 
-  const DashboardSortingAndFilteringFeature
+  const ListDashboardSortingAndFilteringFeature
   ({
     super.key,
     required this.dashboardContext,
@@ -44,10 +44,10 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   });
 
   @override
-  State<DashboardSortingAndFilteringFeature> createState() => _DashboardSortingAndFilteringFeatureState();
+  State<ListDashboardSortingAndFilteringFeature> createState() => _ListDashboardSortingAndFilteringFeatureState();
 }
 
-class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAndFilteringFeature> 
+class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardSortingAndFilteringFeature> 
 {  
   @override
   Widget build(BuildContext context) {
@@ -72,17 +72,17 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                 children: 
                 [
                   // Sorting by title
-                  DashboardSortingByTitle
+                  ListDashboardSortingByTitle
                   (
                     filteredSessionsToSort: widget.filteredSessions,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                   // Sorting by date
-                  DashboardSortingByDate
-                  (
-                    sessionsToSort: widget.filteredSessions,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
-                  ),
+                  // ListDashboardSortingByDate
+                  // (
+                  //   sessionsToSort: widget.filteredSessions,
+                  //   dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+                  // ),
                 ],
               ),              
               const Padding(
@@ -97,7 +97,7 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
           ),
         ),
         // Filtering by keywords
-        DashboardFilteringByKeywords
+        ListDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
           allSessions: widget.allSessions, 

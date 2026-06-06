@@ -6,28 +6,22 @@ import 'package:collection/collection.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/1_list_dashboard_title.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2_list_dashboard_filtering_and_sorting_feature.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/3_list_dashboard_deletion_by_bulk.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_dashboard_sessions_list_item.dart';
 
 
-/// {@category Utility widgets}
-/// {@category Dashboard}
-/// A widget displaying a dashboard of session data, with assumption concerning the session data structure:
-/// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 4:51 PM","filePath":"path/a.ext"},
-/// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 PM","filePath":"path/a2.ext"}\].
-/// For the context analyses, the extension is "CSV". 
-/// For the group problem-solvings, the extension is "TXT".
-class DashboardPage extends StatefulWidget 
+
+class TextListsDisplay extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -39,9 +33,9 @@ class DashboardPage extends StatefulWidget
   final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
-  final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
+  final GlobalKey<ListDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
-  const DashboardPage
+  const TextListsDisplay
   ({
     super.key,
     required this.dashboardContext,
@@ -51,13 +45,16 @@ class DashboardPage extends StatefulWidget
   });
 
   @override
-  State<DashboardPage> createState() => DashboardPageState();
+  State<TextListsDisplay> createState() => TextListsDisplayState();
 }
 
-class DashboardPageState extends State<DashboardPage> 
+class TextListsDisplayState extends State<TextListsDisplay> 
 {
+  // The DB
+  final _textListsDB = TextListsDB();
+
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();
+  GlobalKey<ListDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
   void refreshDashboard()
@@ -66,38 +63,55 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // ─── PREFERENCES and DATA RETRIEVAL related data and methods ───────────────────────────────────────
+  // List data from the DB
+  late List<dynamic> listData;
+  
   // Starting by loading data
   bool _isDataLoading = true;
 
   // All the sessions available
-  List<dynamic>? _allSessions;
+  List<dynamic> _allListsData = [];
 
   // _filteredSessions is what is used by build()
-  List<dynamic>? _filteredSessions;
+  List<dynamic> _filteredListsData = [];
 
   // Method used to retrieve the session data, to get the list of used keywords, 
   // and the list of all sessions available
-  Future<void> getStoredSessionData() async 
+  Future<void> getStoredListsData() async 
   {
-    // Retrieving data from file
-    final retrievedSessionData = 
-      await du.retrieveAllDashboardMetadata
-                (typeOfDashboardContext: widget.dashboardContext);
+    // Retrieving data 
+    listData = await _textListsDB.loadDataStructure();
+
+    // Getting the list labels
+    final labels = await _textListsDB.sortedLabels(dataStructure: this.listData);
+    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredSessionData: labels: $labels");
+
+    // Building _allListsData
+    // Reverse sorting to have the most recent label first
+    for (var label in labels.reversed)
+    {
+      // var texts = _textListsDB.loadTextsByListLabelSync(label: label, dataStructure: dataStructure);
+      var listData = _textListsDB.loadListDataByListLabelSync(label: label, dataStructure: this.listData);
+      // _allListsData.add({keyLabel:label, keyTexts:texts});
+      _allListsData.add(listData);
+    }
+
+    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredSessionData: _allListsData: $_allListsData");
     
     // Getting the used keywords from the retrieved data
-    _usedKeywords = await _getUsedKeywords(retrievedSessionData);
+    _usedKeywords = await _getUsedKeywords(_allListsData);
 
     // When getting the stored data, _allSessions = retrievedSessionData
-    _allSessions = retrievedSessionData;
+    // _allSessions = retrievedSessionData;
 
     // _filteredSessions is used in build, and is populated with the content of retrievedSessionData
-    _filteredSessions!.clear();
-    _filteredSessions!.addAll(retrievedSessionData);
+    _filteredListsData.clear();
+    _filteredListsData.addAll(_allListsData);
 
     // Data is not sorted by date by default, and needs sorting
-    await sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
+    // await sortSessionByDateAddJm(list: _filteredListsData, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
     
-    // Re-build to display the sessions
+    // Re-build to display the lists data
     setState(() {
       _isDataLoading = false;
     });
@@ -108,10 +122,10 @@ class DashboardPageState extends State<DashboardPage>
   void initState() 
   {
     super.initState();
-    _allSessions = [];
-    _filteredSessions = [];
+    _allListsData = [];
+    _filteredListsData = [];
     // Circular indicator until data is retrieved
-    getStoredSessionData();
+    getStoredListsData();
   }
 
   // ─── SORTING AND FILTERING related data and methods ───────────────────────────────────────
@@ -122,12 +136,15 @@ class DashboardPageState extends State<DashboardPage>
   final List<String> _selectedKeywords = [];
 
   // Method used to get the list of keywords present in a session data
-  Future<List<String>> _getUsedKeywords(List<dynamic> listOfSessionData) async 
+  Future<List<String>> _getUsedKeywords(List<dynamic> listOfListData) async 
   {
+    print("listOfListData: $listOfListData");
+
     Set<String> kwSet = {};
-    for (var sessionData in listOfSessionData) 
+    for (var listData in listOfListData) 
     {
-      List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
+      print("listData: $listData");
+      List<dynamic> kws = listData[itemKeywordsKey];
       kwSet.addAll(kws.cast<String>());
     }
     return kwSet.toList();
@@ -140,44 +157,36 @@ class DashboardPageState extends State<DashboardPage>
   }
     
   // Method used after keywords update
-  Future<void> updateKeywords({required Set<String> updatedKeywords, required String? filePath}) async
+  Future<void> updateKeywords({required Set<String> updatedKeywords, required String? listKey, required Map<String, dynamic> listData}) async
   {
-    if (sessionDataDebug) pu.printd("Session Data: updateKeywords: updatedKeywords: $updatedKeywords");
+    if (listDebug) pu.printd("Session Data: updateKeywords: updatedKeywords: $updatedKeywords");
     // To accomodate widget testing
-    if (filePath != null)
+    if (listKey != null)
     {
-      await updateSessionKeywords(filePath, updatedKeywords); 
-              
-      await du.saveAllSessionsMetadata
-      (
-        typeOfDashboardContext: widget.dashboardContext, 
-        allSessionsMetadata: _allSessions!,
-      );
+      await updateListsKeywords(listKey, updatedKeywords, listData); 
+            
     }    
   }
 
   // ─── DELETION OF SINGLE SESSION DATA related data and methods ───────────────────────────────────────
-  final List<String> _sessionsSelectedForDeletion = [];  
+  final List<String> _listDataSelectedForDeletion = [];  
 
   // Method used to delete a single session data from the session list action icons
-  Future<void> _deleteSelectedSession(String filePath) async
+  Future<void> _deleteSelectedSession(String listKey) async
   {
-    // Removing the stored file
-    await fu.deleteCSVFile(filePath);
+    // Removing the related stored list data
+    // await 
 
-    // Removing the related stored dashboard data
-    await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
-    
     // Updating the _allSessions list
-    _allSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
+    _allListsData.removeWhere((listData) => listData[keyUniqueKey] == listKey); 
 
     // Updating the _filteredSessions list used by the UI
-    _filteredSessions?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
+    _filteredListsData.removeWhere((listData) => listData[keyUniqueKey] == listKey);     
               
     // Updating the sessions selected for bulk deletion
-    _sessionsSelectedForDeletion.removeWhere
+    _listDataSelectedForDeletion.removeWhere
     (
-      (session) => _sessionsSelectedForDeletion.contains(filePath)
+      (listData) => _listDataSelectedForDeletion.contains(listKey)
     );
 
     // Updating the keywords list
@@ -191,7 +200,7 @@ class DashboardPageState extends State<DashboardPage>
     (const SnackBar(content: Text("Selected session deleted.")));
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
-    if (_allSessions != null  && _allSessions!.isEmpty) 
+    if (_allListsData.isEmpty) 
     {
       // resetWasSessionDataSavedStatus
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
@@ -208,7 +217,7 @@ class DashboardPageState extends State<DashboardPage>
     if(Platform.isAndroid || Platform.isIOS)
     {
       await du.getStoredFileNamesOnMobile();
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+      if (listDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
     }
     
      }
@@ -223,68 +232,43 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to update the session title
-  Future<void> updateSessionTitle(String filePath, String newTitle) async 
+  Future<void> updateListLabel(String listKey, String newLabel, Map<String, dynamic> listData) async 
   {
-    String? previousTitle;
+    print("updateListLabel: _allListsData: $_allListsData");
+    print("updateListLabel: listData: $listData");
+
+    // Updating listData withe new label
+    listData[itemTextKey] = newLabel;
+
+    // Updating the storage
+    await _textListsDB.updateListData(listKey, listData);
 
     // Updating the local UI state
     setState(() {
-      // Finding the session in the session data, and updating its title
-      final sessionIndex = _allSessions?.indexWhere(
-        (s) => s[DashboardUtils.keyFilePath] == filePath
-      );
-
-      if (sessionIndex != null && sessionIndex != -1) {
-        previousTitle = _allSessions![sessionIndex][DashboardUtils.keyTitle];
-        _allSessions![sessionIndex][DashboardUtils.keyTitle] = newTitle;
-      }
-      
-      // Notifying success
-      if (previousTitle!.trim() != newTitle.trim())
-      {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Title updated successfully"))
+          const SnackBar(content: Text("Label updated successfully"))
         );
-      }
     });
   }
 
   // Method used to update the session keywords
-  Future<void> updateSessionKeywords(String filePath, Set<String> newKeywords) async 
+  Future<void> updateListsKeywords(String listKey, Set<String> newKeywords, Map<String, dynamic> listData) async 
   {
-    Set<dynamic>? previousKeywords;
+    print("updateListLabel: _allListsData: $_allListsData");
+    print("updateListLabel: listData: $listData");
 
-    final sessionIndex = _allSessions?.indexWhere(
-        (s) => s[DashboardUtils.keyFilePath] == filePath
-      );
+    // Updating listData withe new keywords
+    listData[itemKeywordsKey] = newKeywords.toList();
 
-    if (sessionIndex != null && sessionIndex != -1) {
-      previousKeywords = Set.from(_allSessions![sessionIndex][DashboardUtils.keyKeywords]);
-      // Updating the list with the new keywords
-      _allSessions![sessionIndex][DashboardUtils.keyKeywords] = 
-      newKeywords.toList()..sort
-                  (
-                    (a, b) 
-                    {
-                      // Different letters
-                      int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
-                      // Same letter
-                      if (comparison == 0) {return b.compareTo(a);}                                                
-                      return comparison;
-                    }
-                  );
-    }
+    // Updating the storage
+    await _textListsDB.updateListData(listKey, listData);
 
-    refreshKeywordsAfterSessionDeletion();
-     // Updates the keywords list
-    
-    if ( ! previousKeywords!.toList().equals(newKeywords.toList()) )
-    {
-      setState((){ }); 
-      ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Keywords updated successfully"))
-      );
-    }
+    // Updating the local UI state
+    setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Keywords updated successfully"))
+        );
+    });
     
   }
 
@@ -297,12 +281,17 @@ class DashboardPageState extends State<DashboardPage>
 
 @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    SafeArea
+    (
+      child: 
+    Scaffold
+    (
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
             // Key used for automated testing, to scroll up the screen 
-            key: const Key('sessions-list-scrollview'),
+            key: const Key('list-of-lists-scrollview'),
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)
@@ -310,16 +299,16 @@ class DashboardPageState extends State<DashboardPage>
 
                 // DASHBOARD TITLE
                 const SliverToBoxAdapter(
-                  child: DashboardTitle(title: dashboardTitle)
+                  child: ListDashboardTitle(title: dashboardTitle)
                 ),
 
                 // DASHBOARD FILTERING FEATURES
                 SliverToBoxAdapter 
                 (
-                  child: DashboardSortingAndFilteringFeature
+                  child: ListDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    allSessions: _allSessions, filteredSessions: _filteredSessions,
+                    allSessions: _allListsData, filteredSessions: _filteredListsData,
                     usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
                     parentCallbackFunctionToRefreshTheSessionsList: updateState,
                     dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
@@ -328,13 +317,13 @@ class DashboardPageState extends State<DashboardPage>
 
                 // BULK DELETION
                 SliverToBoxAdapter(
-                  child: DashboardDeletionByBulk
+                  child: ListDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    allSessions: _allSessions,
-                    filteredSessions: _filteredSessions,
-                    areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
-                    sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
+                    allSessions: _allListsData,
+                    filteredSessions: _filteredListsData,
+                    areSessionsForDeletion: _listDataSelectedForDeletion.isNotEmpty,
+                    sessionsSelectedForDeletion: _listDataSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard                    
                   )
                 ),
@@ -352,44 +341,47 @@ class DashboardPageState extends State<DashboardPage>
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final session = _filteredSessions![index];
-                        final String filePath = session[DashboardUtils.keyFilePath];
-                        
-                        return SessionsListItem(
-                          sessionMetadata: session,
+                        final listData = _filteredListsData[index];
+                        print("SliverList: listData: $listData");
+
+                        return ListOfListsItem(
+                          listData: listData,
                           index: index,
                           dashboardContext: widget.dashboardContext,
-                          isChecked: _sessionsSelectedForDeletion.contains(filePath),
+                          isChecked: _listDataSelectedForDeletion.contains(listData[itemKey]),
                           onCheckboxChangedCallbackFunction: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                _sessionsSelectedForDeletion.add(filePath);
+                                _listDataSelectedForDeletion.add(listData[itemKey]);
                               } else {
-                                _sessionsSelectedForDeletion.remove(filePath);
+                                _listDataSelectedForDeletion.remove(listData[itemKey]);
                               }
                             });
                           },
                           onEditTitleCallbackFunction: () => _showTitleEditSheet(
-                            session[DashboardUtils.keyTitle],
-                            filePath,
+                            listData[itemTextKey],
+                            listData[itemKey],
+                            index
                           ),
-                          onEditPressedCallbackFunction: () => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
-                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
+                          onEditPressedCallbackFunction: () {},
+                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) {},
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
-                          onDeleteCallbackFunction: () async => await _deleteSelectedSession(filePath),
+                          onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),
                         );
                       },
-                      childCount: _filteredSessions?.length ?? 0,
+                      childCount: _filteredListsData.length,
                     ),
                   ),
                 ),
               ],
             ),
+    )
     );
+  
   }
 
   
-  void _showTitleEditSheet(String title, String filePath) 
+  void _showTitleEditSheet(String title, String listKey, int listIndex) 
   {
     _titleController.text = title; // Syncing current title to the field
     showModalBottomSheet(
@@ -425,13 +417,13 @@ class DashboardPageState extends State<DashboardPage>
 
                 // Performing async work outside of setState
                 // Updating session data
-                await updateSessionTitle(filePath, newTitle); 
+                await updateListLabel(listKey, newTitle, _allListsData[listIndex]); 
                 
                 // Storing the updated session data
                 await du.saveAllSessionsMetadata
                 (
                   typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _allSessions!,
+                  allSessionsMetadata: _allListsData,
                 );
 
                 // Closing the modal sheet
@@ -448,15 +440,8 @@ class DashboardPageState extends State<DashboardPage>
 
                 // Performing async work outside of setState
                 // Updating session data
-                await updateSessionTitle(filePath, newTitle); 
+                await updateListLabel(listKey, newTitle, _allListsData[listIndex]); 
                 
-                // Storing the updated session data
-                await du.saveAllSessionsMetadata
-                (
-                  typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _allSessions!,
-                );
-
                 // Closing the modal sheet
                 if (mounted) Navigator.pop(context);
               },

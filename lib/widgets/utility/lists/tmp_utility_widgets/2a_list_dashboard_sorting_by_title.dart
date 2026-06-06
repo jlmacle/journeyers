@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
+
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling the sorting by title of session data.
-class DashboardSortingByTitle extends StatefulWidget 
+class ListDashboardSortingByTitle extends StatefulWidget 
 {
   /// List containing the filtered sessions to sort.
   final List<dynamic>? filteredSessionsToSort;
@@ -14,7 +15,7 @@ class DashboardSortingByTitle extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardSortingByTitle
+  const ListDashboardSortingByTitle
   ({
     super.key,
     required this.filteredSessionsToSort,
@@ -22,10 +23,10 @@ class DashboardSortingByTitle extends StatefulWidget
   });
 
   @override
-  State<DashboardSortingByTitle> createState() => _DashboardSortingByTitleState();
+  State<ListDashboardSortingByTitle> createState() => _ListDashboardSortingByTitleState();
 }
 
-class _DashboardSortingByTitleState extends State<DashboardSortingByTitle> 
+class _ListDashboardSortingByTitleState extends State<ListDashboardSortingByTitle> 
 {
   // Random alphabetical order by default
   bool _isAscendingTitle = false;   
