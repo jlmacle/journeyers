@@ -1,20 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'text_lists_storage_externalized_strings.dart';
-import '../utils/alphabet_utils.dart';
+import '../../../../utils/generic/alphabet/alphabet_utils.dart';
 
 
 // new category to consider
 /// {@category Utils - Generic}
 /// Persists a list of participants list data with the pattern:
-/// { "key": { "itemText": "participantListLabel", "subItemsListData": , "displayFunction": } }
+/// { "key": { "itemText": "participantListLabel", "itemTextKey": "a0" , 
+///             "itemTextKeywords": ["Household", "Workplace"]  ,
+///             "subItemsListData": subItemsListData , "displayFunction": displayFunction} }
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class TextListsDB {
-  static const _fileName = 'journeyers_gps_participants_groups_lists11.json';
+  static const _fileName = 'journeyers_gps_participants_groups_lists18.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -23,7 +26,6 @@ class TextListsDB {
     var dir = await getApplicationSupportDirectory();
     return File('${dir.path}/$_fileName');
   }
-
 
   // Method used to find the next alphabet "number", by switching/adding alphabetical "digits".
   // e.g.: 
@@ -167,7 +169,7 @@ class TextListsDB {
     {
       var listData = dataStructure[index] as Map<String, dynamic>;
       var listDataValues = listData.values.first;
-      print("listData.values.first: ${listData.values.first}");
+      // print("listData.values.first: ${listData.values.first}");
       if (listDataValues[itemTextKey] == label) return true;
     }
     return false; 
@@ -176,8 +178,8 @@ class TextListsDB {
   /// Loads the texts for [label]. Throws [ArgumentError] when absent.
   List<String> loadTextsByListLabelSync({required String label, required List<dynamic> dataStructure})
   {
-    print("label: $label");
-    print("dataStructure: $dataStructure");
+    // print("label: $label");
+    // print("dataStructure: $dataStructure");
 
     bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
@@ -209,12 +211,80 @@ class TextListsDB {
         texts.add(text);
       }
 
-      print("texts: $texts");
+      // print("texts: $texts");
       if (listLabel == label) return List.from(texts);   
     }
 
     return [];
   }
+
+  /// Loads the data for [label]: 
+  ///   The unique key
+  ///   The texts
+  ///   The keywords if any
+  /// Throws [ArgumentError] when absent.
+  Map<String, dynamic> loadListDataByListLabelSync({required String label, required List<dynamic> dataStructure})
+  {
+
+    print("dataStructure: $dataStructure");
+
+    Map<String, dynamic> listData = {};
+
+    bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
+    if (!labelExists) {
+      throw ArgumentError('No list found for label: "$label".');
+    }
+
+    // Lists-level loop
+    for (var indexLists = 0; indexLists < dataStructure.length; indexLists++)
+    {
+      // var listUniqueKey = "";
+      // var listTexts = [];
+      // var listKeywords = [];
+      
+      // Retrieving the data for the current list  
+      var currentListData = dataStructure[indexLists] as Map<String, dynamic>;  
+      // Retrieving the data values for the current list
+      var currentListDataValues = currentListData.values.first;
+      // Retrieving the label for the current list  
+      var listLabel = currentListDataValues[itemTextKey];
+
+      if (listLabel == label) return currentListDataValues;  
+
+      
+      
+      // // Retrieving the unique key for the current list
+      // listUniqueKey = currentListDataValues[itemKey];
+      // // Retrieving the keywords for the current list
+      // listKeywords = currentListDataValues[itemKeywordsKey];
+
+      // Retrieving the sub-items data
+      // List<dynamic> subItemsData = currentListDataValues[subItemsListDataKey];
+      // Retrieving the texts for the current list  
+      // for (var indexSubItems = 0; indexSubItems < subItemsData.length; indexSubItems++)
+      // {
+      //   // Retrieving the data for the current sub-item 
+      //   var currentSubItemData = subItemsData[indexSubItems];
+      //   // Retrieving the data values for the current sub-item 
+      //   var currentSubItemDataValues = currentSubItemData.values.first;
+      //   // Retrieving the text for the current sub-item 
+      //   var text = currentSubItemDataValues[itemTextKey];
+      //   // Adding the  text  to the list
+      //   listTexts.add(text);
+      // }
+
+      // listData[keyLabel] = label;
+      // listData[keyUniqueKey] = listUniqueKey;
+      // listData[keyTexts] = listTexts;
+      // listData[keyKeywords] = listKeywords;
+
+      // print("texts: $texts");
+       
+    }
+
+    return {};
+  }
+
 
   /// Returns a list made of all the lists of texts.
   Future<List<List<String>>> listOfGroupedTexts() async {
@@ -368,10 +438,9 @@ class TextListsDB {
     return nextKey;
   }
 
-
   /// Saves [texts] under [label], overwriting any previous entry.
   /// The key used is a sequence of letters followed by a digit (0 to 9)
-  Future<void> saveListData(String label, List<String> texts) async {
+  Future<void> saveListData(String label, List<String> texts, List<String> keywords) async {
     print("saveListData");
 
     List<dynamic> data = await loadDataStructure();
@@ -418,7 +487,7 @@ class TextListsDB {
       // building the key from the previously used key
       key = getNextKey(key: key);
       print("item key: $key");
-      Map<String, dynamic> itemDataMap = {itemTextKey: texts[textIndex], subItemsListDataKey: null, displayFunctionKey: null};
+      Map<String, dynamic> itemDataMap = {itemKey: key, itemTextKey: texts[textIndex], subItemsListDataKey: null, displayFunctionKey: null};
 
       subItemsDataList.add({key: itemDataMap});
     }
@@ -426,13 +495,57 @@ class TextListsDB {
     print("subItemsDataList: $subItemsDataList");
 
     // Building the list data
-    var listDataMap=  {itemTextKey: label, subItemsListDataKey: subItemsDataList, displayFunctionKey: null};
-    var listItemData = {listKey: listDataMap};
+    var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: ["Household", "Workplace"],  subItemsListDataKey: subItemsDataList, displayFunctionKey: null};
+    var listData = {listKey: listDataMap};
 
-    print("listItemData: $listItemData");
+    print("List data: $listData");
 
     // Adding the list (verified previously as unique)
-    data.add(listItemData);
+    data.add(listData);
+    // Saving the data
+    var f = await _getFile();
+    await f.writeAsString(jsonEncode(data));
+  }
+
+  /// Updates a list data
+  Future<void> updateListData(String listKey, Map<String, dynamic> listData) async {
+
+    print("updateListData: ");
+    print("listData: $listData");
+
+    List<dynamic> data = await loadDataStructure();
+
+    // Map<String, dynamic> updatedData = 
+    //                       { 
+    //                         itemKey: listData[itemKey]!,
+    //                         itemTextKey: listData[itemTextKey]!,
+    //                         itemKeywordsKey: listData[itemKeywordsKey]!,
+    //                         subItemsListDataKey: listData[subItemsListDataKey]!,
+    //                         // displayFunctionKey added later                          
+    //                       };
+
+    /// { "key": { "itemText": "participantListLabel", "itemTextKey": "a0" , 
+    /// "itemTextKeywords": ["Household", "Workplace"]  ,
+    /// "subItemsListData": subItemsListData , "displayFunction": displayFunction} }
+
+    for (var index = 0; index < data.length; index++)
+    {
+      var currentListData = data[index] as Map<String, dynamic>;
+      var currentListDataKeys = currentListData.keys.first;
+      if (currentListDataKeys == listKey) 
+      {
+        // Adding the display function data
+        // updatedData[displayFunctionKey] =  listData.values.first[displayFunctionKey];
+
+        // Updating the list data by index and key
+        data[index][listKey] = listData;
+        print("data[index][listKey]: ${data[index][listKey]}");
+
+      }
+    }
+
+    print("data (updated): $data"); 
+
     // Saving the data
     var f = await _getFile();
     await f.writeAsString(jsonEncode(data));

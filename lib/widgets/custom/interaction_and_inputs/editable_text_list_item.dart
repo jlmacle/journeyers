@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utils/typedefs.dart';
-import '../utils/placeholder_functions.dart';
+import '../../utility/lists/tmp_utility_widgets/typedefs.dart';
+import '../../../utils/generic/dev/placeholder_functions.dart';
 
 /// {@category Utils - Generic}
 /// {@category Lists}

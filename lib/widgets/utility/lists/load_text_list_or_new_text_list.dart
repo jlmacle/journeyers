@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 
-import '../models/text_lists_storage_externalized_strings.dart';
+import 'models/text_lists_storage_externalized_strings.dart';
 
 import 'addition_to_text_lists.dart';
-import 'text_lists_display.dart';
+import 'text_lists_display2.dart';
+// import 'text_lists_display.dart';
 
 
 /// ParticipantsGroupDeclaration offers two choices:
@@ -47,7 +49,16 @@ class LoadTextListOrNewTextList extends StatelessWidget {
                 FilledButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const TextListsDisplay(),
+                      builder: (_) => TextListsDisplay
+                                      (
+                                        dashboardContext: '', 
+                                        onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
+                                        onEditSessionDataCallbackFunction: ({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle}) {}, 
+                                        dashboardFilteringByKeywordsKey: null,
+                                    ),
+                      //  builder: (_) => TextListsDisplay
+                      //                 (
+                      //               ),
                     ),
                   ),
                   icon: const Icon(Icons.folder_open_outlined),

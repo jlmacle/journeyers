@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_generic_widgets/editable_deletable_text_list_item.dart';
-import '../custom_generic_widgets/text_list_item_deletion_by_bulk.dart';
-import '../models/text_lists_storage_externalized_strings.dart';
+import '../../custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
+import 'tmp_utility_widgets/text_list_item_deletion_by_bulk.dart';
+import 'models/text_lists_storage_externalized_strings.dart';
 
-import '../models/text_lists_storage.dart';
+import 'models/text_lists_storage.dart';
 
 /// Class used to add a text list to a set of text lists.
 /// A new list can be saved only if its content is not identical to a previous list content.
@@ -199,7 +199,8 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     try {
       // List.from(_enteredTextItemsList)..sort() : 
       // to sort at saving time, without re-ordering the texts on-screen
-      await _textListsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort());      
+      List<String> keywordsPlaceholder = [];
+      await _textListsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), keywordsPlaceholder);      
 
       setState(() {
         _isSaved = true;
