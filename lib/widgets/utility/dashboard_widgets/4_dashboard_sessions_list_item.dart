@@ -9,7 +9,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pre
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
 
 // Used to store a temporary file path used for session data sharing.
@@ -83,7 +83,7 @@ class _SessionsListItemState extends State<SessionsListItem>
         .toSet();
 
     if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
-    // Calling the parent callback for state 
+    // Calling the parent callback function for state update
     await widget.onKeywordsUpdatedCallbackFunction(filePath: filePath, updatedKeywords: updatedKeywords);
 
     if (!context.mounted) return;
