@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
-/// A widget handling the filtering by keywords of session data.
+/// A widget handling the filtering by keywords of lists.
 class ListDashboardFilteringByKeywords extends StatefulWidget 
 {
-  /// List containing all available session data.
-  final List<dynamic>? allSessions;
+  /// List containing all available lists data.
+  final List<dynamic>? allLists;
 
-  /// List containing all filtered session data.
-  final List<dynamic>? filteredSessions;
+  /// List containing all filtered lists data.
+  final List<dynamic>? filteredLists;
 
-  /// List containing the keywords used by the sessions.
+  /// List containing the keywords used by the lists.
   final List<String> usedKeywords;
 
   /// List containing the selected keywords.
@@ -26,8 +25,8 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
   const ListDashboardFilteringByKeywords
   ({
     super.key,
-    required this.allSessions,
-    required this.filteredSessions,
+    required this.allLists,
+    required this.filteredLists,
     required this.usedKeywords,
     required this.selectedKeywords,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
@@ -39,30 +38,30 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
 
 class ListDashboardFilteringByKeywordsState extends State<ListDashboardFilteringByKeywords> 
 {  
-  // Method used to filter the session data by keywords
+  // Method used to filter the lists by keywords
   Future<void> applyFilteringByKeywords() async
   {
     if (widget.selectedKeywords.isEmpty) 
     {
       // Working with the list while keeping the same reference
-      widget.filteredSessions!.clear();
-      widget.filteredSessions!.addAll(widget.allSessions!);
+      widget.filteredLists!.clear();
+      widget.filteredLists!.addAll(widget.allLists!);
     } 
     else 
     {
       List <dynamic> sortingResults =
-      widget.allSessions!.where
+      widget.allLists!.where
       ( 
         (session) 
         {
-          final sessionKeywords = session[keyKeywords].cast<String>();
+          final sessionKeywords = session[itemKeywordsKey].cast<String>();
           return widget.selectedKeywords.every((k) => sessionKeywords.contains(k));
         }
       ).toList();
       
       // Working with the list while keeping the same reference
-      widget.filteredSessions!.clear();
-      widget.filteredSessions!.addAll(sortingResults);
+      widget.filteredLists!.clear();
+      widget.filteredLists!.addAll(sortingResults);
     }
 
     // Refreshing the sessions list
@@ -88,14 +87,14 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
   // Method used to refresh the keywords list after deletion of session data
   void refreshKeywordsAfterSessionDeletion() 
   {
-    // if no sessions left, nothing to do
-    if (widget.allSessions == null) return;
+    // if no lists left, nothing to do
+    if (widget.allLists == null) return;
     
-    // Re-building the keywords' list from the remaining session data
+    // Re-building the keywords' list from the remaining lists data
     Set<String> remainingKws = {};
-    for (var sessionData in widget.allSessions!) 
+    for (var currentListData in widget.allLists!) 
     {
-      List<dynamic> kws = sessionData[keyKeywords];
+      List<dynamic> kws = currentListData[itemKeywordsKey];
       remainingKws.addAll(kws.cast<String>());
     }
     

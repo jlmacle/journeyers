@@ -5,12 +5,12 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashbo
 
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
+/// {@category List}
 /// A widget handling the sorting by title of session data.
 class ListDashboardSortingByTitle extends StatefulWidget 
 {
-  /// List containing the filtered sessions to sort.
-  final List<dynamic>? filteredSessionsToSort;
+  /// List containing the filtered lists to sort.
+  final List<dynamic>? filteredListsToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -18,7 +18,7 @@ class ListDashboardSortingByTitle extends StatefulWidget
   const ListDashboardSortingByTitle
   ({
     super.key,
-    required this.filteredSessionsToSort,
+    required this.filteredListsToSort,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList
   });
 
@@ -34,7 +34,7 @@ class _ListDashboardSortingByTitleState extends State<ListDashboardSortingByTitl
   // Method used to sort session data by title 
   Future<void> _sortSessionsByTitle() async
   {
-    await sortByTitle(list: widget.filteredSessionsToSort!, byAscendingTitle: _isAscendingTitle);
+    await sortByTitle(list: widget.filteredListsToSort!, byAscendingTitle: _isAscendingTitle);
   }
 
 

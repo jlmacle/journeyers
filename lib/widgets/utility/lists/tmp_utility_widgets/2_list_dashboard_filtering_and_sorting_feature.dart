@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2a_list_dashboard_sorting_by_title.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2b_list_dashboard_sorting_by_date.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
@@ -13,11 +12,11 @@ class ListDashboardSortingAndFilteringFeature extends StatefulWidget
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// List containing all available session data.
-  final List<dynamic>? allSessions;
+  /// List containing all available lists data.
+  final List<dynamic>? allLists;
 
-  /// List containing all filtered session data.
-  final List<dynamic>? filteredSessions;
+  /// List containing all filtered lists data.
+  final List<dynamic>? filteredLists;
 
   /// List containing the keywords used by the sessions.
   final List<String> usedKeywords;
@@ -35,8 +34,8 @@ class ListDashboardSortingAndFilteringFeature extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    required this.allSessions,
-    required this.filteredSessions,
+    required this.allLists,
+    required this.filteredLists,
     required this.usedKeywords,
     required this.selectedKeywords,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
@@ -74,15 +73,9 @@ class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardS
                   // Sorting by title
                   ListDashboardSortingByTitle
                   (
-                    filteredSessionsToSort: widget.filteredSessions,
+                    filteredListsToSort: widget.filteredLists,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
-                  // Sorting by date
-                  // ListDashboardSortingByDate
-                  // (
-                  //   sessionsToSort: widget.filteredSessions,
-                  //   dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
-                  // ),
                 ],
               ),              
               const Padding(
@@ -100,8 +93,8 @@ class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardS
         ListDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          allSessions: widget.allSessions, 
-          filteredSessions: widget.filteredSessions, 
+          allLists: widget.allLists, 
+          filteredLists: widget.filteredLists, 
           usedKeywords: widget.usedKeywords,
           selectedKeywords: widget.selectedKeywords,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
