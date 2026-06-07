@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'package:collection/collection.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
-import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
@@ -287,6 +284,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
       child: 
     Scaffold
     (
+      appBar: AppBar(),
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
