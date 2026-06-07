@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/typedefs.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
