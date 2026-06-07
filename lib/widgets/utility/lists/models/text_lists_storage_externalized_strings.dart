@@ -1,7 +1,7 @@
 const String itemKey = "itemKey";
 const String itemTextKey = "itemText";
 const String itemKeywordsKey = "itemKeywords";
-const String subItemsListDataKey = "subItemsListData";
+const String subItemsDataListKey = "subItemsDataList";
 const String displayFunctionKey = "displayFunction";
 
 const String listLabelHintText = "e.g. Our household members";

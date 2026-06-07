@@ -18,7 +18,7 @@ class TextListsDisplay extends StatefulWidget {
 }
 
 class _TextListsDisplayState extends State<TextListsDisplay> {
-  final _store = TextListsDB();
+  final _textListsDB = TextListsDB();
 
   // Tracks whether we are currently loading data from disk.
   bool _loading = true;
@@ -48,13 +48,13 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
   }
 
   Future<void> _loadLabelsAndData() async {
-    _dataStructure = await _store.loadDataStructure();
+    _dataStructure = await _textListsDB.loadDataStructure();
     setState(() {
       _loading = true;
       _error = null;
     });
     try {
-      final labels = await _store.sortedLabels(dataStructure: _dataStructure);
+      final labels = await _textListsDB.sortedLabels(dataStructure: _dataStructure);
       setState(() {
         _labels = labels;
         _loading = false;
@@ -69,7 +69,7 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
 
   Future<void> _openList(String label) async {
     try {
-      final texts = _store.loadTextsByListLabelSync(label: label, dataStructure: _dataStructure!);
+      final texts = _textListsDB.loadTextsByListLabelSync(label: label, dataStructure: _dataStructure!);
       if (!mounted) return;
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
@@ -205,9 +205,7 @@ Widget _listItemBuilder({required dynamic listItem})
       separatorBuilder: (_, __) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final label = labels[index];
-        // print("savedListsData![label]!: ${_savedListsData![label]!}");
-        return _buildListCard(label, _store.loadTextsByListLabelSync(label: label, dataStructure : _dataStructure!));
-        // return _buildListCard(label, ["jkkjkj"]);
+        return _buildListCard(label, _textListsDB.loadTextsByListLabelSync(label: label, dataStructure : _dataStructure!));
       },
     );
   }

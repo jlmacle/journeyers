@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -90,16 +89,33 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     kwsEditController.dispose();
     super.dispose();
   }
+
+  // Method used to get the participants' list
+  List<String> getParticipants(Map<String, dynamic> listData)
+  {
+    print("getParticipants: listData: $listData");
+
+    List<String> participants = [];
+
+    // Retrieving the text for each sub-item
+    var subItemsDataList = listData[subItemsDataListKey];
+    print("subItemsDataList: $subItemsDataList");
+    for (var subItemDataIndex = 0; subItemDataIndex < subItemsDataList.length; subItemDataIndex++)
+    {
+      Map<String, dynamic> subItemsData = subItemsDataList[subItemDataIndex]
+                                        .values.first as Map<String, dynamic>;
+      var name = subItemsData[itemTextKey];
+      participants.add(name);
+    }    
+
+    return participants;
+  }
   
   @override
   Widget build(BuildContext context) 
   {
     // Gets the title
-    final String sessionTitle = widget.listData[itemTextKey];
-    // Modifies the title according to context (ca or gps)
-    final String displayTitle = (widget.dashboardContext == DashboardUtils.gpsContext)
-        ? "$sessionTitle$gpsTitleSuffix"
-        : sessionTitle;
+    final String displayTitle = widget.listData[itemTextKey];
 
     // Sorting keywords for display
     final Set<String> sortedKeywords = 
@@ -118,7 +134,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
@@ -146,6 +162,43 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           ),
                           
                         ],
+                      ),
+                      const SizedBox(height: 4),
+                      // For the edition of the participants
+                      GestureDetector(
+                        onTap: () =>  
+                          ScaffoldMessenger.of(context).showSnackBar
+                          (
+                            const SnackBar(content: Text("Edition of participants to be implemented")),
+                          ),
+                            child: Wrap
+                            (
+                              spacing: 8.0,
+                              children: 
+                              (
+                                getParticipants(widget.listData)
+                                ..sort
+                                (
+                                  (a, b) 
+                                  {
+                                    // Different letters
+                                    int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                                    // Same letter
+                                    if (comparison == 0) {return b.compareTo(a);}                                                
+                                    return comparison;
+                                  }
+                                )
+                              ).map
+                              (
+                                (kw) 
+                                {
+                                  return Chip
+                                  (
+                                    label: Text(kw)
+                                  );
+                                }
+                              ).toList(),
+                            ),
                       ),
                       const SizedBox(height: 4),
                       // For the edition of the keywords

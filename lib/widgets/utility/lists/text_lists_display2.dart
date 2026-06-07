@@ -80,7 +80,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
 
     // Getting the list labels
     final labels = await _textListsDB.sortedLabels(dataStructure: listData);
-    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredSessionData: labels: $labels");
+    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
@@ -90,7 +90,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
       _allListsData.add(listData);
     }
 
-    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredSessionData: _allListsData: $_allListsData");
+    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredListsData: _allListsData: $_allListsData");
     
     // Getting the used keywords from the retrieved data
     _usedKeywords = await _getUsedKeywords(_allListsData);
