@@ -1,48 +1,46 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
+/// {@category List}
 /// A widget handling bulk deletion of session data.
 class ListDashboardDeletionByBulk extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// Boolean used to store if some sessions are selected for deletion.
-  final bool areSessionsForDeletion; 
+  /// Boolean used to store if some lists are selected for deletion.
+  final bool areListsForDeletion; 
 
-  /// List containing all available session data.
-  final List<dynamic>? allSessions;
+  /// List containing all available lists.
+  final List<dynamic>? allLists;
 
-  /// List containing all filtered session data.
-  final List<dynamic>? filteredSessions;
+  /// List containing all filtered lists.
+  final List<dynamic>? filteredLists;
 
-  /// List containing the sessions selected for deletion.
-  final List<dynamic>? sessionsSelectedForDeletion;
+  /// List containing the keys of lists selected for deletion.
+  final List<dynamic>? keysOfListsSelectedForDeletion;
 
-  /// Callback function used to refresh the sessions displayed.
+  /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
   const ListDashboardDeletionByBulk
   ({
     super.key,
     required this.dashboardContext,
-    required this.areSessionsForDeletion,
-    required this.allSessions,
-    required this.filteredSessions,
+    required this.areListsForDeletion,
+    required this.allLists,
+    required this.filteredLists,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
-    this.sessionsSelectedForDeletion    
+    this.keysOfListsSelectedForDeletion    
   });
 
   @override
@@ -51,42 +49,40 @@ class ListDashboardDeletionByBulk extends StatefulWidget
 
 class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBulk> 
 {
+  final _textListsDB = TextListsDB();
+
   // ─── GLOBAL KEYS ───────────────────────────────────────
   GlobalKey<ListDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
-  // Method used to delete several session data
-  Future<void> _deleteSelectedSessions() async 
+  // Method used to delete several lists data
+  Future<void> _deleteSelectedLists() async 
   {
     // Creating a fixed list to iterate over so clearing doesn't break the loop
-    final filesToDelete = List<String>.from(widget.sessionsSelectedForDeletion!);
+    final keysOfListsSelectedForDeletion = List<String>.from(widget.keysOfListsSelectedForDeletion!);
 
-    for (String filePath in filesToDelete) 
-    {
-      // Removing the file
-      await fu.deleteCSVFile(filePath); 
-      
-      // Removing the list data from the stored data
-      // await 
-    }
+    print("keysOfListsSelectedForDeletion: $keysOfListsSelectedForDeletion");
+
+    // Updating the DB
+    await _textListsDB.removeListData(keysOfListsSelectedForDeletion);    
 
     // Updating the filtered sessions list
-    widget.filteredSessions?.removeWhere
+    widget.filteredLists?.removeWhere
     (
       (session) => 
-      filesToDelete.contains(session[keyUniqueKey])
+      keysOfListsSelectedForDeletion.contains(session[itemKey])
     );
 
-    // Updating the _allSessions list
-    widget.allSessions?.removeWhere
+    // Updating the _allLists list
+    widget.allLists?.removeWhere
     (
       (session) => 
-      filesToDelete.contains(session[keyUniqueKey])
+      keysOfListsSelectedForDeletion.contains(session[itemKey])
     );
-    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allSessions: ${widget.allSessions}");
+    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allLists: ${widget.allLists}");
 
     // Clearing the list of the selected sessions
-    widget.sessionsSelectedForDeletion!.clear();
+    widget.keysOfListsSelectedForDeletion!.clear();
 
     // Updating the keywords list
     dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
@@ -99,19 +95,16 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty?: ${widget.allSessions!.isEmpty}");
+    if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.allLists!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.allSessions!.isEmpty) 
+    if (widget.allLists!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus to false
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
 
-      // refreshing the page, to re-start in the process page
-      if (widget.dashboardContext == DashboardUtils.caContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
-      else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.onAllSessionFilesDeleted();}
-      else {pu.printd("Error: Unexpected context: ${widget.dashboardContext}");}
+      widget.dashboardCallbackFunctionToRefreshTheSessionsList();
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
     else
@@ -124,12 +117,6 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
     }
 
-    // Updating the file names list: _deleteSelectedSessions
-    if(Platform.isAndroid || Platform.isIOS) 
-    {
-      await du.getStoredFileNamesOnMobile();
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
-    }    
   }
   
   @override
@@ -139,12 +126,12 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
         child:        
           TextButton.icon(
             key: const Key('bulk-delete-button'),
-            onPressed: _deleteSelectedSessions,
-            icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
+            onPressed: _deleteSelectedLists,
+            icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(
-              "Delete (${widget.sessionsSelectedForDeletion?.length ?? 0})",
+              "Delete (${widget.keysOfListsSelectedForDeletion?.length ?? 0})",
               style: TextStyle(
-                color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
+                color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,
               ),
             ),

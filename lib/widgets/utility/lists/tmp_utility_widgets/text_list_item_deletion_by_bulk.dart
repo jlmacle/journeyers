@@ -35,10 +35,10 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
 {
   // ─── BULK DELETION OF LIST ITEMS ───────────────────────────────────────
   // Method used to delete several list items
-  Future<void> _deleteSelectedTextItems() async 
+  Future<void> _deleteSelectedLists() async 
   {
-    print("_deleteSelectedSessions:  widget.indexesOfTextItemsSelectedForDeletion: ${widget.indexesOfTextItemsSelectedForDeletion}");
-    print("_deleteSelectedSessions:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
+    print("_deleteSelectedLists:  widget.indexesOfTextItemsSelectedForDeletion: ${widget.indexesOfTextItemsSelectedForDeletion}");
+    print("_deleteSelectedLists:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
     // Creating a new list to update _enteredTextItemsList
     List<String> updatedNewTextsList = widget.enteredTextItemsList
     // to compare ints with ints
@@ -48,7 +48,7 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
     .map((entry) => entry.value)
     .toList();
 
-    print("_deleteSelectedSessions:  updatedNewTextsList: $updatedNewTextsList");
+    print("_deleteSelectedLists:  updatedNewTextsList: $updatedNewTextsList");
 
     // Clearing indexesOfTextItemsSelectedForDeletion 
     widget.indexesOfTextItemsSelectedForDeletion.clear();
@@ -75,7 +75,7 @@ class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk>
         child:        
           TextButton.icon(
             key: const Key('bulk-delete-button'),
-            onPressed: _deleteSelectedTextItems,
+            onPressed: _deleteSelectedLists,
             icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
             label: Text(
               "Delete (${widget.indexesOfTextItemsSelectedForDeletion.length})",

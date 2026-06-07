@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'text_lists_storage_externalized_strings.dart';
@@ -249,36 +248,8 @@ class TextListsDB {
       // Retrieving the label for the current list  
       var listLabel = currentListDataValues[itemTextKey];
 
-      if (listLabel == label) return currentListDataValues;  
+      if (listLabel == label) return currentListDataValues;
 
-      
-      
-      // // Retrieving the unique key for the current list
-      // listUniqueKey = currentListDataValues[itemKey];
-      // // Retrieving the keywords for the current list
-      // listKeywords = currentListDataValues[itemKeywordsKey];
-
-      // Retrieving the sub-items data
-      // List<dynamic> subItemsData = currentListDataValues[subItemsListDataKey];
-      // Retrieving the texts for the current list  
-      // for (var indexSubItems = 0; indexSubItems < subItemsData.length; indexSubItems++)
-      // {
-      //   // Retrieving the data for the current sub-item 
-      //   var currentSubItemData = subItemsData[indexSubItems];
-      //   // Retrieving the data values for the current sub-item 
-      //   var currentSubItemDataValues = currentSubItemData.values.first;
-      //   // Retrieving the text for the current sub-item 
-      //   var text = currentSubItemDataValues[itemTextKey];
-      //   // Adding the  text  to the list
-      //   listTexts.add(text);
-      // }
-
-      // listData[keyLabel] = label;
-      // listData[keyUniqueKey] = listUniqueKey;
-      // listData[keyTexts] = listTexts;
-      // listData[keyKeywords] = listKeywords;
-
-      // print("texts: $texts");
        
     }
 
@@ -507,7 +478,7 @@ class TextListsDB {
     await f.writeAsString(jsonEncode(data));
   }
 
-  /// Updates a list data
+  /// Updates a list data.
   Future<void> updateListData(String listKey, Map<String, dynamic> listData) async {
 
     print("updateListData: ");
@@ -515,27 +486,12 @@ class TextListsDB {
 
     List<dynamic> data = await loadDataStructure();
 
-    // Map<String, dynamic> updatedData = 
-    //                       { 
-    //                         itemKey: listData[itemKey]!,
-    //                         itemTextKey: listData[itemTextKey]!,
-    //                         itemKeywordsKey: listData[itemKeywordsKey]!,
-    //                         subItemsListDataKey: listData[subItemsListDataKey]!,
-    //                         // displayFunctionKey added later                          
-    //                       };
-
-    /// { "key": { "itemText": "participantListLabel", "itemTextKey": "a0" , 
-    /// "itemTextKeywords": ["Household", "Workplace"]  ,
-    /// "subItemsListData": subItemsListData , "displayFunction": displayFunction} }
-
     for (var index = 0; index < data.length; index++)
     {
       var currentListData = data[index] as Map<String, dynamic>;
       var currentListDataKeys = currentListData.keys.first;
       if (currentListDataKeys == listKey) 
       {
-        // Adding the display function data
-        // updatedData[displayFunctionKey] =  listData.values.first[displayFunctionKey];
 
         // Updating the list data by index and key
         data[index][listKey] = listData;
@@ -550,6 +506,32 @@ class TextListsDB {
     var f = await _getFile();
     await f.writeAsString(jsonEncode(data));
   }
+
+  /// Removes a list data.
+  Future<void> removeListData(List<String> listKeys) async {
+
+    print("removeListData: ");
+
+    List<dynamic> data = await loadDataStructure();
+
+    for (var index = 0; index < data.length; index++)
+    {
+      var currentListData = data[index] as Map<String, dynamic>;
+      var currentListDataKey = currentListData.keys.first;
+      if (listKeys.contains(currentListDataKey)) 
+      {
+        // Removing the list data
+        data.removeAt(index);
+      }
+    }
+
+    print("data (updated): $data"); 
+
+    // Saving the data
+    var f = await _getFile();
+    await f.writeAsString(jsonEncode(data));
+  }
+
 
   // Method used to save only the list labels tree structure
   Future<void> saveTreeStructureOnly(List<dynamic> listStructure) async 

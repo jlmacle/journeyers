@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -69,7 +68,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // All the sessions available
   List<dynamic> _allListsData = [];
 
-  // _filteredSessions is what is used by build()
+  // _filteredLists is what is used by build()
   List<dynamic> _filteredListsData = [];
 
   // Method used to retrieve the session data, to get the list of used keywords, 
@@ -80,16 +79,14 @@ class TextListsDisplayState extends State<TextListsDisplay>
     listData = await _textListsDB.loadDataStructure();
 
     // Getting the list labels
-    final labels = await _textListsDB.sortedLabels(dataStructure: this.listData);
+    final labels = await _textListsDB.sortedLabels(dataStructure: listData);
     if (listDebug) pu.printd("Participants Lists: Lists display: getStoredSessionData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
     for (var label in labels.reversed)
     {
-      // var texts = _textListsDB.loadTextsByListLabelSync(label: label, dataStructure: dataStructure);
       var listData = _textListsDB.loadListDataByListLabelSync(label: label, dataStructure: this.listData);
-      // _allListsData.add({keyLabel:label, keyTexts:texts});
       _allListsData.add(listData);
     }
 
@@ -98,10 +95,8 @@ class TextListsDisplayState extends State<TextListsDisplay>
     // Getting the used keywords from the retrieved data
     _usedKeywords = await _getUsedKeywords(_allListsData);
 
-    // When getting the stored data, _allSessions = retrievedSessionData
-    // _allSessions = retrievedSessionData;
 
-    // _filteredSessions is used in build, and is populated with the content of retrievedSessionData
+    // _filteredLists is used in build
     _filteredListsData.clear();
     _filteredListsData.addAll(_allListsData);
 
@@ -114,7 +109,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
     });
   }
 
-  // Previous session data retrieval; _allSessions and _filteredSessions are initialized
+  // Previous data retrieval; _allLists and _filteredLists are initialized
   @override
   void initState() 
   {
@@ -165,25 +160,25 @@ class TextListsDisplayState extends State<TextListsDisplay>
     }    
   }
 
-  // ─── DELETION OF SINGLE SESSION DATA related data and methods ───────────────────────────────────────
-  final List<String> _listDataSelectedForDeletion = [];  
+  // ─── DELETION OF SINGLE LIST related data and methods ───────────────────────────────────────
+  final List<String> _keysOfListsSelectedForDeletion = [];  
 
   // Method used to delete a single session data from the session list action icons
   Future<void> _deleteSelectedSession(String listKey) async
   {
-    // Removing the related stored list data
-    // await 
+    // Updating the DB
+    await _textListsDB.removeListData([listKey]);
 
-    // Updating the _allSessions list
-    _allListsData.removeWhere((listData) => listData[keyUniqueKey] == listKey); 
+    // Updating the _allListsData list
+    _allListsData.removeWhere((listData) => listData[itemKey] == listKey); 
 
-    // Updating the _filteredSessions list used by the UI
-    _filteredListsData.removeWhere((listData) => listData[keyUniqueKey] == listKey);     
+    // Updating the _filteredListsData list used by the UI
+    _filteredListsData.removeWhere((listData) => listData[itemKey] == listKey);     
               
-    // Updating the sessions selected for bulk deletion
-    _listDataSelectedForDeletion.removeWhere
+    // Updating the keys of the lists selected for bulk deletion
+    _keysOfListsSelectedForDeletion.removeWhere
     (
-      (listData) => _listDataSelectedForDeletion.contains(listKey)
+      (_) => _keysOfListsSelectedForDeletion.contains(listKey)
     );
 
     // Updating the keywords list
@@ -208,13 +203,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
     {
       // refreshing the page
       setState(() {});
-    }
-
-    // Updating the file names list: _deleteSelectedSession
-    if(Platform.isAndroid || Platform.isIOS)
-    {
-      await du.getStoredFileNamesOnMobile();
-      if (listDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
     }
     
      }
@@ -306,7 +294,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                   child: ListDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    allSessions: _allListsData, filteredSessions: _filteredListsData,
+                    allLists: _allListsData, filteredLists: _filteredListsData,
                     usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
                     parentCallbackFunctionToRefreshTheSessionsList: updateState,
                     dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
@@ -318,10 +306,10 @@ class TextListsDisplayState extends State<TextListsDisplay>
                   child: ListDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    allSessions: _allListsData,
-                    filteredSessions: _filteredListsData,
-                    areSessionsForDeletion: _listDataSelectedForDeletion.isNotEmpty,
-                    sessionsSelectedForDeletion: _listDataSelectedForDeletion,
+                    allLists: _allListsData,
+                    filteredLists: _filteredListsData,
+                    areListsForDeletion: _keysOfListsSelectedForDeletion.isNotEmpty,
+                    keysOfListsSelectedForDeletion: _keysOfListsSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard                    
                   )
                 ),
@@ -346,13 +334,13 @@ class TextListsDisplayState extends State<TextListsDisplay>
                           listData: listData,
                           index: index,
                           dashboardContext: widget.dashboardContext,
-                          isChecked: _listDataSelectedForDeletion.contains(listData[itemKey]),
+                          isChecked: _keysOfListsSelectedForDeletion.contains(listData[itemKey]),
                           onCheckboxChangedCallbackFunction: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                _listDataSelectedForDeletion.add(listData[itemKey]);
+                                _keysOfListsSelectedForDeletion.add(listData[itemKey]);
                               } else {
-                                _listDataSelectedForDeletion.remove(listData[itemKey]);
+                                _keysOfListsSelectedForDeletion.remove(listData[itemKey]);
                               }
                             });
                           },
@@ -416,13 +404,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
                 // Performing async work outside of setState
                 // Updating session data
                 await updateListLabel(listKey, newTitle, _allListsData[listIndex]); 
-                
-                // Storing the updated session data
-                await du.saveAllSessionsMetadata
-                (
-                  typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _allListsData,
-                );
 
                 // Closing the modal sheet
                 if (mounted) Navigator.pop(context);
