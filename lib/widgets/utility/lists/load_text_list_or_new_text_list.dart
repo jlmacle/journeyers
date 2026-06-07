@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-
 import 'models/text_lists_storage_externalized_strings.dart';
-
-import 'addition_to_text_lists.dart';
+import 'new_text_list.dart';
 import 'text_lists_display2.dart';
 // import 'text_lists_display.dart';
 
@@ -73,7 +72,7 @@ class LoadTextListOrNewTextList extends StatelessWidget {
                 OutlinedButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => AdditionToTextLists
+                      builder: (_) => NewTextList
                                         (
                                           listLabelHintText: listLabelHintText,
                                           listPlaceholder: listPlaceholder,

@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart';
 import '../../custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
-import 'tmp_utility_widgets/text_list_item_deletion_by_bulk.dart';
+import 'tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 import 'models/text_lists_storage_externalized_strings.dart';
-
 import 'models/text_lists_storage.dart';
 
 /// Class used to add a text list to a set of text lists.
 /// A new list can be saved only if its content is not identical to a previous list content.
 /// The widget can be used to load a list for edition.
-class AdditionToTextLists extends StatefulWidget 
+class NewTextList extends StatefulWidget 
 {
   /// Pre-populated content (from a loaded list).
   final List<String> initialTextValues;
@@ -30,7 +30,7 @@ class AdditionToTextLists extends StatefulWidget
   /// The theme data used.
   final ThemeData themeData;
 
-  const AdditionToTextLists({
+  const NewTextList({
     super.key,
     this.initialTextValues = const [],
     this.loadedLabel,
@@ -41,10 +41,10 @@ class AdditionToTextLists extends StatefulWidget
   });  
 
   @override
-  State<AdditionToTextLists> createState() => _AdditionToTextListsState();
+  State<NewTextList> createState() => _NewTextListState();
 }
 
-class _AdditionToTextListsState extends State<AdditionToTextLists> {
+class _NewTextListState extends State<NewTextList> {
 
   // bool: a list has been loaded
   bool get _listHasBeenLoaded => widget.loadedLabel != null;
@@ -84,6 +84,9 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
   var _tecNewText = TextEditingController();
   // To store the new grouped texts data
   late final List<String> _enteredTextItemsList;
+
+  // Used for entered keywords
+  List<String> _newKeywords = [];
 
   // Data used to edit a text after addition to the list
   var _isEdited = false;
@@ -199,8 +202,7 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
     try {
       // List.from(_enteredTextItemsList)..sort() : 
       // to sort at saving time, without re-ordering the texts on-screen
-      List<String> keywordsPlaceholder = [];
-      await _textListsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), keywordsPlaceholder);      
+      await _textListsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), _newKeywords);      
 
       setState(() {
         _isSaved = true;
@@ -320,7 +322,19 @@ class _AdditionToTextListsState extends State<AdditionToTextLists> {
           (
             children: 
             [
-              TextListItemDeletionByBulk
+              // padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        // child: 
+              NewTextListKeywordsDeclaration
+              (
+                currentKeywords: {},
+                onKeywordsUpdatedCallbackFunction: (newKeywords) 
+                {
+                  print("newKeywords: $newKeywords");
+                  _newKeywords = newKeywords.toList()..sort();
+                }
+              ),
+              // Deletion by bulk widget
+              NewTextListDeletionByBulk
               (
                 areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
                 enteredTextItemsList: _enteredTextItemsList,

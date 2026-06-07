@@ -16,7 +16,7 @@ import '../../../../utils/generic/alphabet/alphabet_utils.dart';
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class TextListsDB {
-  static const _fileName = 'journeyers_gps_participants_groups_lists18.json';
+  static const _fileName = 'journeyers_gps_participants_groups_lists19.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -196,7 +196,7 @@ class TextListsDB {
       // Retrieving the label for the current list  
       var listLabel = currentListDataValues[itemTextKey];
       // Retrieving the sub-items data
-      List<dynamic> subItemsData = currentListDataValues[subItemsListDataKey];
+      List<dynamic> subItemsData = currentListDataValues[subItemsDataListKey];
       // Retrieving the texts for the current list  
       for (var indexSubItems = 0; indexSubItems < subItemsData.length; indexSubItems++)
       {
@@ -271,7 +271,7 @@ class TextListsDB {
     {
       var currentListData = data[indexLists] as Map<String, dynamic>;      
       var currentListDataValues = currentListData.values.first;
-      var currentSubItemsListData = currentListDataValues[subItemsListDataKey];
+      var currentSubItemsListData = currentListDataValues[subItemsDataListKey];
 
       List<String> textsList = [];
       
@@ -436,7 +436,7 @@ class TextListsDB {
 
       // Getting the list of sub-items
       var lastListDataValues = lastListData.values.first;
-      List<dynamic> subItemsListData = lastListDataValues[subItemsListDataKey];
+      List<dynamic> subItemsListData = lastListDataValues[subItemsDataListKey];
 
       // Getting the last sub-item
       var lastSubItemData = subItemsListData[subItemsListData.length - 1];
@@ -458,7 +458,7 @@ class TextListsDB {
       // building the key from the previously used key
       key = getNextKey(key: key);
       print("item key: $key");
-      Map<String, dynamic> itemDataMap = {itemKey: key, itemTextKey: texts[textIndex], subItemsListDataKey: null, displayFunctionKey: null};
+      Map<String, dynamic> itemDataMap = {itemKey: key, itemTextKey: texts[textIndex], subItemsDataListKey: null, displayFunctionKey: null};
 
       subItemsDataList.add({key: itemDataMap});
     }
@@ -466,7 +466,7 @@ class TextListsDB {
     print("subItemsDataList: $subItemsDataList");
 
     // Building the list data
-    var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: ["Household", "Workplace"],  subItemsListDataKey: subItemsDataList, displayFunctionKey: null};
+    var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: keywords, subItemsDataListKey: subItemsDataList, displayFunctionKey: null};
     var listData = {listKey: listDataMap};
 
     print("List data: $listData");
@@ -531,18 +531,6 @@ class TextListsDB {
     var f = await _getFile();
     await f.writeAsString(jsonEncode(data));
   }
-
-
-  // Method used to save only the list labels tree structure
-  Future<void> saveTreeStructureOnly(List<dynamic> listStructure) async 
-  {
-    var f = await _getFile();
-    await f.writeAsString(jsonEncode(listStructure));
-  }
-
-
-
-  
 }
 
 
