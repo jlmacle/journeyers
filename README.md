@@ -14,6 +14,7 @@ The dashboard supports previewing, sorting by title/date, keyword filtering and 
 An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
 At the time of writing, more features are planned, <br>
 and additional effort needs to be done for the accessibility.<br>
+Please note that the code needs cleaning.<br>
 <br>
 Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods</a>" level is planned, <br>
 as part of the app development growth process.<br>
