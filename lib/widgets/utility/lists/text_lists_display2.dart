@@ -155,8 +155,8 @@ class TextListsDisplayState extends State<TextListsDisplay>
     // To accomodate widget testing
     if (listKey != null)
     {
-      await updateListsKeywords(listKey, updatedKeywords, listData); 
-            
+      // Updating the DB
+      await updateListsKeywords(listKey, updatedKeywords, listData);            
     }    
   }
 
@@ -248,13 +248,15 @@ class TextListsDisplayState extends State<TextListsDisplay>
     // Updating the storage
     await _textListsDB.updateListData(listKey, listData);
 
+    // TODO: To clean/name modification
+    refreshKeywordsAfterSessionDeletion();
+
     // Updating the local UI state
     setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Keywords updated successfully"))
         );
     });
-    
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
