@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// {@category Utils - Generic}
 /// {@category Lists}
 /// A widget handling bulk deletion of text items in a list.
-class TextListItemDeletionByBulk extends StatefulWidget 
+class NewTextListDeletionByBulk extends StatefulWidget 
 {
   /// Boolean used to store if some text items are selected for deletion.
   final bool areSomeTextItemsSelectedForDeletion; 
@@ -18,7 +18,7 @@ class TextListItemDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the text items displayed.
   final VoidCallback callbackFunctionToRefreshTheTextItemsList;
 
-  const TextListItemDeletionByBulk
+  const NewTextListDeletionByBulk
   ({
     super.key,
     required this.areSomeTextItemsSelectedForDeletion,
@@ -28,10 +28,10 @@ class TextListItemDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<TextListItemDeletionByBulk> createState() => TextListItemDeletionByBulkState();
+  State<NewTextListDeletionByBulk> createState() => NewTextListDeletionByBulkState();
 }
 
-class TextListItemDeletionByBulkState extends State<TextListItemDeletionByBulk> 
+class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk> 
 {
   // ─── BULK DELETION OF LIST ITEMS ───────────────────────────────────────
   // Method used to delete several list items

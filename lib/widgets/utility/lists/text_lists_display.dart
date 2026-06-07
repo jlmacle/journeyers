@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../custom/interaction_and_inputs/editable_text_list_item.dart';
 import 'models/text_lists_storage_externalized_strings.dart';
-
 import 'models/text_lists_storage.dart';
-import 'addition_to_text_lists.dart';
+import 'new_text_list.dart';
 
 /// Displays all saved list labels.
 ///
 /// Tapping a label loads the corresponding numbers and pushes a read-only
-/// [AdditionToTextLists] for that list.
+/// [NewTextList] for that list.
 class TextListsDisplay extends StatefulWidget {
   const TextListsDisplay({super.key});
 
@@ -73,7 +72,7 @@ class _TextListsDisplayState extends State<TextListsDisplay> {
       if (!mounted) return;
       await Navigator.of(context).push(
         MaterialPageRoute<void>(
-          builder: (_) => AdditionToTextLists(
+          builder: (_) => NewTextList(
             initialTextValues: texts,
             loadedLabel: label,
             listLabelHintText: listLabelHintText,
