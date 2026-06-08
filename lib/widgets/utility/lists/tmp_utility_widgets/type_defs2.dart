@@ -22,7 +22,7 @@ Future<void> Function({required String? listKey, required Set<String> updatedKey
 
 /// An async function with a Set\<String\> parameter, a Map\<String, dynamic\> parameter, and a String parameter.
 typedef FunctionSetStringMapStringDynamicAndString = 
-Future<void> Function({required String? listKey, required Set<String> updatedKeywords, required Map<String, dynamic> listData});
+Future<void> Function({required String? listKey, required Set<String> updatedItems, required Map<String, dynamic> listData});
 
 /// An async function with a String parameter, and a Map\<String, dynamic\> parameter.
 typedef FunctionStringAndMapStringDynamic = 

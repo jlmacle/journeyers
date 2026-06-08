@@ -20,6 +20,7 @@ const String deleteTooltipLabel = "Delete";
 
 // Text field labels
 const String keywordsTextFieldLabel = 'Keywords Edition (please separate with commas)';
+const String participantsTextFieldLabel = 'Participants Edition (please separate with commas)';
 
 // Placeholder messages
 const String placeholderForEdit = 'Edit not yet implemented.';
