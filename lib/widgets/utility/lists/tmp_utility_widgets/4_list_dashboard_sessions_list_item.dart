@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
@@ -40,6 +41,9 @@ class ListOfListsItem extends StatefulWidget
   /// A callback function called when the keywords are updated.
   final FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction;
 
+  /// A callback function called when the participants are updated.
+  final FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction;
+
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDeleteCallbackFunction;
 
@@ -54,6 +58,7 @@ class ListOfListsItem extends StatefulWidget
     required this.onEditPressedCallbackFunction,
     required this.onEditSessionDataCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
+    required this.onParticipantsUpdatedCallbackFunction,
     required this.onDeleteCallbackFunction,
   });
 
@@ -63,7 +68,11 @@ class ListOfListsItem extends StatefulWidget
 
 class _ListOfListsItemState extends State<ListOfListsItem> 
 {
+  var _textListsDB = TextListsDB();
+  List<String> _currentParticipants = [];
+
   TextEditingController kwsEditController = .new();
+  TextEditingController participantsEditController = .new();
 
   // To clean
   Future<void> onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
@@ -77,16 +86,46 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 
     if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
     // Calling the parent callback for state 
-    await widget.onKeywordsUpdatedCallbackFunction(listKey: listKey, updatedKeywords: updatedKeywords, listData: listData);
+    await widget.onKeywordsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedKeywords, listData: listData);
 
     if (!context.mounted) return;
     Navigator.of(context).pop();
   }
 
+  // To clean
+  Future<void> onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
+  {
+    // Splitting string into list, trimming whitespaces, and removing empty entries
+    final Set<String> updatedParticipants = participantsEditController.text
+        .split(',')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toSet();
+
+    if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedParticipants: $updatedParticipants");
+    // Calling the parent callback for state 
+    await widget.onParticipantsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedParticipants, listData: listData);
+
+    if (!context.mounted) return;
+    Navigator.of(context).pop();
+  }
+
+ @override
+  void initState() {
+    List<Map<String, dynamic>> subItemsDataList =
+    ((widget.listData[subItemsDataListKey]) as List)
+        .cast<Map<String, dynamic>>();
+    print("initState: subItemsDataList: $subItemsDataList");
+    Map<String, String> namesKeysMap = _textListsDB.getNamesKeys(subItemsDataList);
+    _currentParticipants =  namesKeysMap.keys.toList();
+    print("initState: _currentParticipants: $_currentParticipants");
+    super.initState();
+  }
  
   @override void dispose() 
   {
     kwsEditController.dispose();
+    participantsEditController.dispose();
     super.dispose();
   }
 
@@ -166,10 +205,17 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                       const SizedBox(height: 4),
                       // For the edition of the participants
                       GestureDetector(
-                        onTap: () =>  
-                          ScaffoldMessenger.of(context).showSnackBar
-                          (
-                            const SnackBar(content: Text("Edition of participants to be implemented")),
+                        onTap:  
+                          () => _showParticipantsEditSheet
+                        (
+                          context: context,
+                          dashboardContext: widget.dashboardContext,                          
+                          currentParticipants: _currentParticipants,
+                          listKey: widget.listData[itemKey],
+                          participantsEditController: participantsEditController,
+                          onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
+                          onParticipantsUpdated: onParticipantsUpdated,
+                          listData: widget.listData
                           ),
                             child: Wrap
                             (
@@ -322,3 +368,59 @@ void _showKeywordsEditSheet
 
 }
 
+
+void _showParticipantsEditSheet
+({
+  required BuildContext context, required String dashboardContext, 
+  required List<dynamic> currentParticipants, required String? listKey, 
+  required TextEditingController participantsEditController,
+  required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
+  required FunctionStringAndMapStringDynamic onParticipantsUpdated,
+  required Map<String, dynamic> listData
+
+
+}) {
+  // Converting list to a comma-separated string for editing
+  participantsEditController.text = currentParticipants.join(', '); 
+  
+  showModalBottomSheet
+  (
+    context: context,
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    isScrollControlled: true,
+    builder: (context) => Padding
+    (
+      padding: EdgeInsets.only
+      (
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 20, right: 20, top: 20,
+      ),
+      child: Column
+      (
+        mainAxisSize: MainAxisSize.min,
+        children: 
+        [
+          TextField
+          (
+            controller: participantsEditController,
+            autofocus: true,
+            decoration: const InputDecoration
+            (
+              labelText: participantsTextFieldLabel, 
+              labelStyle: TextStyle(color: Colors.black),
+              hintText: 'Please enter the participants.',
+            ),
+            onSubmitted: (_) async => onParticipantsUpdated(listKey: listKey, listData: listData)
+          ),       
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () async =>  onParticipantsUpdated(listKey: listKey, listData: listData),
+            child: const Text("Save", style: TextStyle(color: Colors.black)),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    ),
+  );
+
+}

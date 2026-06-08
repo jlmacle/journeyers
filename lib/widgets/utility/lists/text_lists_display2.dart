@@ -80,7 +80,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
 
     // Getting the list labels
     final labels = await _textListsDB.sortedLabels(dataStructure: listData);
-    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredListsData: labels: $labels");
+    if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
@@ -90,7 +90,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
       _allListsData.add(listData);
     }
 
-    if (listDebug) pu.printd("Participants Lists: Lists display: getStoredListsData: _allListsData: $_allListsData");
+    if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_allListsData");
     
     // Getting the used keywords from the retrieved data
     _usedKeywords = await _getUsedKeywords(_allListsData);
@@ -147,19 +147,78 @@ class TextListsDisplayState extends State<TextListsDisplay>
   {
     dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
   }
+
+  // Method used to update the list keywords
+  Future<void> updateListsKeywords(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
+  {
+    print("updateListsKeywords: updatedKeywords; $updatedKeywords");
+    print("updateListsKeywords: listData: $listData");
+
+    // Updating listData with the new keywords
+    listData[itemKeywordsKey] = updatedKeywords.toList();
+
+    // Updating the storage
+    await _textListsDB.updateListData(listKey, listData);
+
+    // TODO: To clean/name modification
+    refreshKeywordsAfterSessionDeletion();
+
+    // Updating the local UI state
+    setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Keywords updated successfully"))
+        );
+    });
+  }
     
   // Method used after keywords update
-  Future<void> updateKeywords({required Set<String> updatedKeywords, required String? listKey, required Map<String, dynamic> listData}) async
+  Future<void> updateKeywords({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
   {
-    if (listDebug) pu.printd("Session Data: updateKeywords: updatedKeywords: $updatedKeywords");
+    if (listDebug) pu.printd("List debug: updateKeywords: updatedKeywords: $updatedItems");
     // To accomodate widget testing
     if (listKey != null)
     {
       // Updating the DB
-      await updateListsKeywords(listKey, updatedKeywords, listData);            
+      await updateListsKeywords(listKey, updatedItems, listData);            
     }    
   }
 
+  // Method used to update the list participants
+  Future<void> updateListParticipants(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
+  {
+    print("updateParticipants: updatedParticipants: $updatedParticipants");
+    print("updateParticipants: listData: $listData");
+
+    // Updating listData with the new participants
+    listData[subItemsDataListKey] = await _textListsDB.updateParticipants(updatedParticipants, listData);    
+
+    // Updating the storage
+    await _textListsDB.updateListData(listKey, listData);
+
+    // TODO: To clean/name modification
+    refreshKeywordsAfterSessionDeletion();
+
+    // Updating the local UI state
+    setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Keywords updated successfully"))
+        );
+    });
+  }
+
+  // Method used after participants update
+  Future<void> updateParticipants({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
+  {
+    if (listDebug) pu.printd("List debug: updateParticipants: updatedParticipants: $updatedItems");
+    // To accomodate widget testing
+    if (listKey != null)
+    {
+      // Updating the DB
+      await updateListParticipants(listKey, updatedItems, listData);            
+    }    
+  }
+
+  
   // ─── DELETION OF SINGLE LIST related data and methods ───────────────────────────────────────
   final List<String> _keysOfListsSelectedForDeletion = [];  
 
@@ -236,30 +295,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
     });
   }
 
-  // Method used to update the session keywords
-  Future<void> updateListsKeywords(String listKey, Set<String> newKeywords, Map<String, dynamic> listData) async 
-  {
-    print("updateListLabel: _allListsData: $_allListsData");
-    print("updateListLabel: listData: $listData");
-
-    // Updating listData withe new keywords
-    listData[itemKeywordsKey] = newKeywords.toList();
-
-    // Updating the storage
-    await _textListsDB.updateListData(listKey, listData);
-
-    // TODO: To clean/name modification
-    refreshKeywordsAfterSessionDeletion();
-
-    // Updating the local UI state
-    setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Keywords updated successfully"))
-        );
-    });
-  }
-
-  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
+    // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
   // Re-building of the widget
   void updateState()
   {
@@ -354,6 +390,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                           onEditPressedCallbackFunction: () {},
                           onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) {},
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
+                          onParticipantsUpdatedCallbackFunction: updateParticipants,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),
                         );
                       },

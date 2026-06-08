@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
+import 'package:journeyers/utils/project_specific/dev/sort_utils.dart';
 import 'text_lists_storage_externalized_strings.dart';
 import '../../../../utils/generic/alphabet/alphabet_utils.dart';
 
@@ -16,7 +17,7 @@ import '../../../../utils/generic/alphabet/alphabet_utils.dart';
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class TextListsDB {
-  static const _fileName = 'journeyers_gps_participants_groups_lists19.json';
+  static const _fileName = 'journeyers_gps_participants_groups_lists21.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -409,6 +410,114 @@ class TextListsDB {
     return nextKey;
   }
 
+  /// Method used to get the longest key in a list of keys.
+  List<String> getLongestKeys(List<String> keys)
+  {
+    int longestKeyLength = 0;
+
+    Set<String> longestKeysSet = Set.from(keys);
+
+    // Keys should be unique
+    if (keys.length != Set.from(keys).length) throw Exception('Keys should be unique: keysUsed: $keys');
+
+    // Searching for max longestKeyLength
+    for (var keyIndex = 0; keyIndex < keys.length; keyIndex++)
+    {
+      // Is the key longer than longestKeyLength
+      if ( longestKeyLength <= keys[keyIndex].length )
+      {
+        // New reference length
+        longestKeyLength = keys[keyIndex].length;
+      }
+      else
+      {
+        // Removing the key from longestKeysSet
+        print("Removing: ${keys[keyIndex]}: longestKeyLength: $longestKeyLength");
+        longestKeysSet.remove(keys[keyIndex]);
+      }
+    }
+
+    print("longestKeysSet after first loop: $longestKeysSet");
+
+    // Removing all values smaller than longestKeyLength
+    List<String> longestKeysList = longestKeysSet.toList();
+    for (var keyIndex = 0; keyIndex < longestKeysList.length; keyIndex++)
+    {
+      // Is the key longer than longestKeyLength
+      if ( longestKeyLength > longestKeysList[keyIndex].length )
+      {
+        print("Removing: ${longestKeysList[keyIndex]}");
+        // Removing the key from longestKeysSet
+        longestKeysSet.remove(longestKeysList[keyIndex]);
+        
+      }
+    }
+
+    return longestKeysSet.toList();
+  }
+
+  /// Method used to get the last key used in the list
+  Future<String> getLastKey() async
+  {
+    String lastKey = "";
+
+    // Getting the data
+    List<dynamic> dataList = await loadDataStructure();
+
+    // Searching all the keys used
+    List<String> keysUsed = [];
+    for (var currentListIndex = 0; currentListIndex < dataList.length; currentListIndex++)
+    {
+      // Adding the list keys
+      keysUsed.add(dataList[currentListIndex].keys.first);
+
+      // Searching for the subitems keys
+      Map<String, dynamic> currentListData =  dataList[currentListIndex].values.first;
+      List<dynamic> subItemsDataList = currentListData[subItemsDataListKey];
+      for (var subItemsDataIndex = 0; subItemsDataIndex < subItemsDataList.length; subItemsDataIndex++)
+      {
+        // Adding the subitems keys
+         keysUsed.add((subItemsDataList[subItemsDataIndex]).keys.first);
+      }
+    }
+
+    // Keeping only the longest keys
+    List<String> longestKeys = getLongestKeys(keysUsed);
+
+    // Getting the biggest key from the longest keys
+    lastKey = getBiggestKey(longestKeys);
+
+    return lastKey;
+  }
+
+  /// Method used to get a map "key-list index" from a list, or from a sub-items list.
+  Map<String, int> getListKeyIndexMap(List<dynamic> list)
+  {
+    Map<String, int> map = {};
+
+    for (var listIndex = 0; listIndex < list.length; listIndex++)
+    {
+      map[(list[listIndex]).keys.first] = listIndex;
+    }
+
+
+    return map;
+  }
+
+  // Method used to build a map names/keys from a subItemsDataList
+  Map<String, String> getNamesKeys(List<dynamic> subItemsDataList)
+  {
+    // Getting a map names/keys from the stored subItemsDataList
+    Map<String, String> actualNamesKeysMap = {};
+    for (var currentsubItemIndex = 0; currentsubItemIndex < subItemsDataList.length; currentsubItemIndex++)
+    {
+      var currentsubItemValues = (subItemsDataList[currentsubItemIndex]).values.first;
+      actualNamesKeysMap[currentsubItemValues[itemTextKey]] = currentsubItemValues[itemKey];
+    }
+    return actualNamesKeysMap;
+  }
+  
+
   /// Saves [texts] under [label], overwriting any previous entry.
   /// The key used is a sequence of letters followed by a digit (0 to 9)
   Future<void> saveListData(String label, List<String> texts, List<String> keywords) async {
@@ -476,6 +585,79 @@ class TextListsDB {
     // Saving the data
     var f = await _getFile();
     await f.writeAsString(jsonEncode(data));
+  }
+
+  /// Method used to add, or remove, one or several participants of the list.
+  Future<List<dynamic>> updateParticipants(Set<String> updatedParticipants, Map<String, dynamic> listData) async
+  {
+    var newKey = "";
+
+    print("updateParticipants: updatedParticipants: $updatedParticipants");
+    List<String> updatedParticipantsList = updatedParticipants.toList();
+    var subItemsDataList = listData[subItemsDataListKey];
+    print("updateParticipants (before): subItemsDataList: $subItemsDataList");
+
+    // Getting a map names/keys from the stored subItemsDataList
+    Map<String, String> actualNamesKeysMap = getNamesKeys(subItemsDataList);
+
+    print("updateParticipants: actualNamesKeysMap: $actualNamesKeysMap");
+
+    // Verifying if some participants are to be removed from the subItemsDataList
+    List<String> actualParticipants = actualNamesKeysMap.keys.toList();
+    Map<String, int> keyActualIndexMap  = getListKeyIndexMap(subItemsDataList);
+
+    print("updateParticipants: actualParticipants: $actualParticipants");
+    for (String actualParticipant in actualParticipants)
+    {
+      if (!updatedParticipantsList.contains(actualParticipant))
+      {
+        print("updateParticipants: participant removal: $actualParticipant not in $updatedParticipantsList");
+        // removing from subItemsDataList
+        String? keyForRemoval = actualNamesKeysMap[actualParticipant];
+        var indexForRemoval = keyActualIndexMap[keyForRemoval!];
+        subItemsDataList.removeAt(indexForRemoval);
+
+
+        // Todo: data structure
+        // updating the index map
+        keyActualIndexMap  = getListKeyIndexMap(subItemsDataList);
+      }
+    }
+
+    // Verifying if some participants are to be added to the subItemsDataList
+    // Getting actualParticipantsList from updated subItemsDataList
+    actualNamesKeysMap = getNamesKeys(subItemsDataList);
+    var actualParticipantsList = actualNamesKeysMap.keys.toList();
+    print("updateParticipants: updatedParticipants: $updatedParticipants");
+    for (String updatedParticipant in updatedParticipants)
+    {
+      if (!actualParticipantsList.contains(updatedParticipant))
+      {
+        print("updateParticipants: participant addition: $updatedParticipant not in $actualParticipantsList");
+        
+        // Sub-item data needs to be added
+        Map<String, dynamic> subItemData = {};
+
+        // Getting the key value
+        if (newKey == "") 
+        { 
+          var lastKey = await getLastKey(); 
+           newKey = getNextKey(key: lastKey);
+        }
+        else { newKey = getNextKey(key: newKey); }
+
+        subItemData[itemKey] = newKey;
+        subItemData[itemTextKey] = updatedParticipant;
+        subItemData[subItemsDataListKey] = null;
+        subItemData[displayFunctionKey] = null;
+
+        // adding subItemData to subItemsDataList
+        subItemsDataList.add({newKey: subItemData});
+      }
+    }
+
+    print("updateParticipants (after): subItemsDataList: $subItemsDataList");
+    return subItemsDataList;
   }
 
   /// Updates a list data.
