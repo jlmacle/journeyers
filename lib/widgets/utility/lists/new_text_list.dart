@@ -30,6 +30,9 @@ class NewTextList extends StatefulWidget
   /// The theme data used.
   final ThemeData themeData;
 
+  /// A callback function called when the participants list is loaded.
+  final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
+
   const NewTextList({
     super.key,
     this.initialTextValues = const [],
@@ -37,7 +40,8 @@ class NewTextList extends StatefulWidget
     required this.listLabelHintText,
     required this.listPlaceholder,
     required this.invitationToEnterTextPlaceholder,
-    required this.themeData
+    required this.themeData, 
+    required this.onParticipantsLoadedCallbackFunction
   });  
 
   @override
@@ -150,6 +154,16 @@ class _NewTextListState extends State<NewTextList> {
                 );
                 return;
               }
+              // Loading the list
+              widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);
+              print("widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);");
+              print("_enteredTextItemsList: $_enteredTextItemsList");
+
+              // To close the dialog
+              Navigator.of(ctx).pop(label);
+              // To close the new list widget
+              Navigator.of(ctx).pop(label);
+              // To close the list loading/creation menu
               Navigator.of(ctx).pop(label);
             }
 

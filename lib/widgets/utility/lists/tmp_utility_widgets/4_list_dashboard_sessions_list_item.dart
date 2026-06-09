@@ -44,6 +44,9 @@ class ListOfListsItem extends StatefulWidget
   /// A callback function called when the participants are updated.
   final FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction;
 
+  /// A callback function called when the participants list is loaded.
+  final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
+
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDeleteCallbackFunction;
 
@@ -59,6 +62,7 @@ class ListOfListsItem extends StatefulWidget
     required this.onEditSessionDataCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onParticipantsUpdatedCallbackFunction,
+    required this.onParticipantsLoadedCallbackFunction,
     required this.onDeleteCallbackFunction,
   });
 
@@ -296,7 +300,14 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                   children: [
                     ElevatedButton(
                       child: const Text('Please click to load'),
-                      onPressed: () {},
+                      onPressed: () 
+                      {
+                        widget.onParticipantsLoadedCallbackFunction(_currentParticipants);
+                        // To close the lists display
+                        Navigator.pop(context);
+                        // To close the list loading/creation menu
+                        Navigator.pop(context);
+                      },
                     ),
                   ],
                 ),
