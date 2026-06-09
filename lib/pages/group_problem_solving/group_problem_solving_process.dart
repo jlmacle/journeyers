@@ -183,7 +183,7 @@ class GPSProcessState extends State<GPSProcess>
       {
         // Desktop implementation using FilePicker
         filePath = await FilePicker.platform.saveFile(
-          dialogTitle: 'Please enter a file name',
+          dialogTitle: 'Please enter a file name.',
           fileName: '$fileName$fileExtension', 
           bytes: dataBytes,
           type: FileType.custom,
@@ -302,7 +302,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       //   () => Navigator.of(context).push
                       //   (
                       //     MaterialPageRoute<void>(
-                      //       builder: (_) => LoadTextListOrNewTextList()
+                      //       builder: (_) => const NewTextListOrLoadingPage()
                       //       ),
                       //   ),
 

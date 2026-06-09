@@ -104,7 +104,7 @@ class GPSPageState extends State<GPSPage>
               NewProcessButton
               ( 
                 dashboardContext: DashboardUtils.gpsContext, 
-                buttonText: "Please click to start\na new group problem-solving session",
+                buttonText: "Please click to start\na new group problem-solving session.",
                 onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _wasGPSSessionDataSaved = false;});},
               ),
               

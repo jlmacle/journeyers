@@ -275,6 +275,8 @@ class _NewTextListState extends State<NewTextList> {
     }
 
     return 
+    SafeArea
+    (child: 
       _loadingDB
       ? const Center(child: CircularProgressIndicator())
       : Scaffold(
@@ -427,79 +429,40 @@ class _NewTextListState extends State<NewTextList> {
                             parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
                             parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
                             themeData: Theme.of(context),                          
-                          )
-                          // Row(
-                          //   children: 
-                          //   [
-                          //     // Checkbox for list item deletion
-                          //     Checkbox
-                          //     (
-                          //       value: false, 
-                          //       onChanged: 
-                          //         (_)
-                          //         {
-                          //           _textsSelectedForDeletion.add(_enteredTextItemsList[index]);
-                          //           print("Selected for deletion: $_textsSelectedForDeletion");
-                          //         }
-                          //     ),
-                          //     // List tile for reading/to start edition 
-                          //     // Expanded for constraints
-                          //     Expanded(
-                          //       child: ListTile
-                          //       (
-                          //       key: Key('text$index'),
-                          //       dense: true,
-                          //       leading: Text(
-                          //         '${index + 1}.',
-                          //         style: widget.themeData.textTheme.bodySmall,
-                          //       ),                            
-                          //       title: Text(
-                          //         _enteredTextItemsList[index],
-                          //         style: widget.themeData.textTheme.titleMedium,
-                          //       ),
-                          //       trailing: const Icon(Icons.edit),
-                          //       onTap: () 
-                          //       {
-                          //         setState(() 
-                          //         {
-                          //           _isEdited = true; 
-                          //           _editedIndex = index; 
-                          //           _tecEdition.text = _enteredTextItemsList[index];
-                          //         });
-                          //       },
-                          //                               ),
-                          //     )
-                          //   ],
-                          // )
+                          )                          
                         ;
                     },
                   ),
                 ),
               // TextField used to add a new text
-              TextField
-              (
-                controller: _tecNewText,
-                textAlign: TextAlign.left,
-                decoration: const InputDecoration
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField
                 (
-                  hint: Text
-                  ( 
-                    invitationToEnterTextPlaceholder,
-                    textAlign: TextAlign.left,                                          
+                  controller: _tecNewText,
+                  textAlign: TextAlign.left,
+                  decoration: const InputDecoration
+                  (
+                    hint: Text
+                    ( 
+                      invitationToEnterTextPlaceholder,
+                      textAlign: TextAlign.left,                                          
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
                   ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                  onSubmitted: (value)
+                  {
+                    setState(() {
+                      _enteredTextItemsList.add(value.trim());
+                    });
+                    _tecNewText.clear();
+                    print("_enteredTextItemsList: $_enteredTextItemsList");
+                  },
                 ),
-                onSubmitted: (value)
-                {
-                  setState(() {
-                    _enteredTextItemsList.add(value.trim());
-                  });
-                  _tecNewText.clear();
-                  print("_enteredTextItemsList: $_enteredTextItemsList");
-                },
               ),
             ]
         )
-      );
+      )
+    );
   }
 }

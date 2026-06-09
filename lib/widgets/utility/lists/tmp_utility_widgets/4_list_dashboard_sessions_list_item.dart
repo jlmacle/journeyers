@@ -351,7 +351,7 @@ void _showKeywordsEditSheet
             (
               labelText: keywordsTextFieldLabel, 
               labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Please enter your keywords.',
+              hintText: 'Please enter keywords.',
             ),
             onSubmitted: (_) async => onKeywordsUpdated(listKey: listKey, listData: listData)
           ),       
