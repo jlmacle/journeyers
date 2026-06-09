@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
 // ─── COLORS ───────────────────────────────────────
@@ -243,6 +244,17 @@ ThemeData appTheme = ThemeData
   (
     backgroundColor: navyBlue,
     elevation: 0,
+
+    // For where the battery icon is
+    systemOverlayStyle: SystemUiOverlayStyle
+    (
+      statusBarColor: navyBlue,
+      systemNavigationBarColor: black,
+      systemNavigationBarIconBrightness: Brightness.light,
+      systemStatusBarContrastEnforced: true,
+      statusBarIconBrightness: Brightness.light, 
+      statusBarBrightness: Brightness.light,      
+    ),
 
     titleTextStyle: TextStyle
     (

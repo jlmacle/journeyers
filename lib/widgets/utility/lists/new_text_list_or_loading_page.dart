@@ -18,6 +18,11 @@ class NewTextListOrLoadingPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar
+              (
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
       body: SafeArea(
         child: Center(
           child: Padding(
