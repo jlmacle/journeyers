@@ -11,8 +11,16 @@ import 'text_lists_display2.dart';
 /// ParticipantsGroupDeclaration offers two choices:
 ///   • Loading a list of previous groups of participants
 ///   • Adding a new group of participants
-class NewTextListOrLoadingPage extends StatelessWidget {
-  const NewTextListOrLoadingPage({super.key});
+class NewTextListOrLoadingPage extends StatelessWidget 
+{
+  /// A callback function called when the participants list is loaded.
+  final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
+
+  const NewTextListOrLoadingPage
+  ({
+    super.key,
+    required this.onParticipantsLoadedCallbackFunction   
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +66,7 @@ class NewTextListOrLoadingPage extends StatelessWidget {
                                         dashboardContext: '', 
                                         onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
                                         onEditSessionDataCallbackFunction: ({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle}) {}, 
+                                        onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
                                         dashboardFilteringByKeywordsKey: null,
                                     ),
                       //  builder: (_) => TextListsDisplay
@@ -83,6 +92,7 @@ class NewTextListOrLoadingPage extends StatelessWidget {
                                           listPlaceholder: listPlaceholder,
                                           invitationToEnterTextPlaceholder: invitationToEnterTextPlaceholder,
                                           themeData: Theme.of(context),
+                                          onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
                                         ),
                     ),
                   ),

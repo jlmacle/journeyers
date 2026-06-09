@@ -28,6 +28,9 @@ class TextListsDisplay extends StatefulWidget
   /// A callback function called when session data is edited.
   final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
 
+  /// A callback function called when the participants list is loaded.
+  final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
+
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<ListDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
@@ -37,6 +40,7 @@ class TextListsDisplay extends StatefulWidget
     required this.dashboardContext,
     required this.onAllSessionFilesDeletedContextPageCallbackFunction,
     required this.onEditSessionDataCallbackFunction,
+    required this.onParticipantsLoadedCallbackFunction,
     required this.dashboardFilteringByKeywordsKey
   });
 
@@ -396,6 +400,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onParticipantsUpdatedCallbackFunction: updateParticipants,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),
+                          onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
                         );
                       },
                       childCount: _filteredListsData.length,

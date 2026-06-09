@@ -81,10 +81,10 @@ class GPSProcessState extends State<GPSProcess>
   bool _isDeleteMode = false;
 
   // The list of stakeholders identifiers for the first column
-  final List<String> _identifiersCol1 = [];
+  List<String> _identifiersCol1 = [];
 
   // The list of stakeholders identifiers for the second column
-  final List<String> _identifiersCol2 = [];
+  List<String> _identifiersCol2 = [];
 
   // The list of stakeholders identifiers' colors for the first column
   final List<Color> _identifiersColors1 = [];
@@ -302,7 +302,33 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       //   () => Navigator.of(context).push
                       //   (
                       //     MaterialPageRoute<void>(
-                      //       builder: (_) => const NewTextListOrLoadingPage()
+                      //       builder: (_) => NewTextListOrLoadingPage
+                      //       (
+                      //         onParticipantsLoadedCallbackFunction:
+                      //         (participants)
+                      //         {
+                      //           print("onParticipantsLoadedCallbackFunction : participants :$participants");
+                      //           setState(() {
+                      //             for (var index = 0; index < participants.length; index++)
+                      //             {
+                      //               if (index%2 == 0) 
+                      //               {
+                      //                 _identifiersCol1.add(participants[index]);
+                      //                 _identifiersColors1.add(greenShade900);
+                                    
+                      //               }
+                      //               else 
+                      //               {
+                      //                 _identifiersCol2.add(participants[index]);
+                      //                 _identifiersColors2.add(greenShade900);
+                      //               }
+                      //             }
+                      //             print("onParticipantsLoadedCallbackFunction : _identifiersCol1 :$_identifiersCol1");
+                      //             print("onParticipantsLoadedCallbackFunction : _identifiersCol2 :$_identifiersCol2");
+                      //           });
+                                
+                      //         } ,
+                      //       ) 
                       //       ),
                       //   ),
 
