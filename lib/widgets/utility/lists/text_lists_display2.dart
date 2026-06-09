@@ -278,7 +278,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used to update the session title
   Future<void> updateListLabel(String listKey, String newLabel, Map<String, dynamic> listData) async 
   {
-    print("updateListLabel: _allListsData: $_allListsData");
     print("updateListLabel: listData: $listData");
 
     // Updating listData withe new label

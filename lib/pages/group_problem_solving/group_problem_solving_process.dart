@@ -21,6 +21,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import 'package:journeyers/widgets/utility/lists/load_text_list_or_new_text_list.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_desktop_platforms.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
@@ -297,6 +298,14 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     (
                       text: addEmoji, color: Colors.white, 
                       onPressed: (){groupMoods1Key.currentState?.addToIdentifiers();},
+                      // onPressed: 
+                      //   () => Navigator.of(context).push
+                      //   (
+                      //     MaterialPageRoute<void>(
+                      //       builder: (_) => LoadTextListOrNewTextList()
+                      //       ),
+                      //   ),
+
                       screenWidthInInches: screenWidthInInches
                     ),
                     if (_isModificationMode)
