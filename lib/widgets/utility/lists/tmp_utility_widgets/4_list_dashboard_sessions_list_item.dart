@@ -71,14 +71,14 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   var _textListsDB = TextListsDB();
   List<String> _currentParticipants = [];
 
-  TextEditingController kwsEditController = .new();
-  TextEditingController participantsEditController = .new();
+  TextEditingController kwsEditTec = .new();
+  TextEditingController participantsEditTec = .new();
 
   // To clean
   Future<void> onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = kwsEditController.text
+    final Set<String> updatedKeywords = kwsEditTec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -96,7 +96,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   Future<void> onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedParticipants = participantsEditController.text
+    final Set<String> updatedParticipants = participantsEditTec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -124,8 +124,8 @@ class _ListOfListsItemState extends State<ListOfListsItem>
  
   @override void dispose() 
   {
-    kwsEditController.dispose();
-    participantsEditController.dispose();
+    kwsEditTec.dispose();
+    participantsEditTec.dispose();
     super.dispose();
   }
 
@@ -212,7 +212,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentParticipants: _currentParticipants,
                           listKey: widget.listData[itemKey],
-                          participantsEditController: participantsEditController,
+                          participantsTec: participantsEditTec,
                           onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
                           onParticipantsUpdated: onParticipantsUpdated,
                           listData: widget.listData
@@ -255,7 +255,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.listData[itemKeywordsKey],
                           listKey: widget.listData[itemKey],
-                          kwsEditController: kwsEditController,
+                          kwsEditController: kwsEditTec,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                           onKeywordsUpdated: onKeywordsUpdated,
                           listData: widget.listData
@@ -287,7 +287,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                         dashboardContext: widget.dashboardContext,
                         currentKeywords: widget.listData[itemKeywordsKey],
                         listKey: widget.listData[itemKey],
-                        kwsEditController: kwsEditController,
+                        kwsEditController: kwsEditTec,
                         onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                         onKeywordsUpdated: onKeywordsUpdated,
                         listData: widget.listData
@@ -369,58 +369,79 @@ void _showKeywordsEditSheet
 }
 
 
-void _showParticipantsEditSheet
-({
-  required BuildContext context, required String dashboardContext, 
-  required List<dynamic> currentParticipants, required String? listKey, 
-  required TextEditingController participantsEditController,
+void _showParticipantsEditSheet({
+  required BuildContext context,
+  required String dashboardContext,
+  required List<dynamic> currentParticipants,
+  required String? listKey,
+  required TextEditingController participantsTec,
   required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
   required FunctionStringAndMapStringDynamic onParticipantsUpdated,
-  required Map<String, dynamic> listData
-
-
+  required Map<String, dynamic> listData,
 }) {
-  // Converting list to a comma-separated string for editing
-  participantsEditController.text = currentParticipants.join(', '); 
-  
-  showModalBottomSheet
-  (
+  participantsTec.text = currentParticipants.join(', ');
+
+  showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     isScrollControlled: true,
-    builder: (context) => Padding
-    (
-      padding: EdgeInsets.only
-      (
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 20, right: 20, top: 20,
-      ),
-      child: Column
-      (
-        mainAxisSize: MainAxisSize.min,
-        children: 
-        [
-          TextField
-          (
-            controller: participantsEditController,
-            autofocus: true,
-            decoration: const InputDecoration
-            (
-              labelText: participantsTextFieldLabel, 
-              labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Please enter the participants.',
-            ),
-            onSubmitted: (_) async => onParticipantsUpdated(listKey: listKey, listData: listData)
-          ),       
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () async =>  onParticipantsUpdated(listKey: listKey, listData: listData),
-            child: const Text("Save", style: TextStyle(color: Colors.black)),
-          ),
-          const SizedBox(height: 20),
-        ],
-      ),
-    ),
-  );
+    builder: (context) {
+      String? errorText; 
+      // StatefulBuilder gives a local setState scoped to this sheet
+      return StatefulBuilder(
+        builder: (context, setState) {
+          
 
+          Future<void> onConfirm() async {
+            final participants = participantsTec.text.trim();
+
+            if (participants.isEmpty) {
+              setState(() {
+                errorText = 'Participants field cannot be empty.';
+              });
+              return;
+            }
+
+            setState(() {
+              // Clearing error on valid input
+              errorText = null; 
+            });
+
+            await onParticipantsUpdated(listKey: listKey, listData: listData);
+          }
+
+          return Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: participantsTec,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: participantsTextFieldLabel,
+                    labelStyle: const TextStyle(color: Colors.black),
+                    hintText: 'Please enter the participants.',
+                    errorText: errorText,
+                  ),
+                  onSubmitted: (_) async => await onConfirm(),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () async => await onConfirm(),
+                  child: const Text("Save", style: TextStyle(color: Colors.black)),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        },
+      );
+    },
+  );
 }
