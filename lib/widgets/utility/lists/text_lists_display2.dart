@@ -309,7 +309,11 @@ class TextListsDisplayState extends State<TextListsDisplay>
       child: 
     Scaffold
     (
-      appBar: AppBar(),
+      appBar: AppBar
+              (
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
