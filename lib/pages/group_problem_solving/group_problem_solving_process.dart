@@ -297,40 +297,46 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     _buildHeaderButton
                     (
                       text: addEmoji, color: Colors.white, 
-                      onPressed: (){groupMoods1Key.currentState?.addToIdentifiers();},
-                      // onPressed: 
-                      //   () => Navigator.of(context).push
-                      //   (
-                      //     MaterialPageRoute<void>(
-                      //       builder: (_) => NewTextListOrLoadingPage
-                      //       (
-                      //         onParticipantsLoadedCallbackFunction:
-                      //         (participants)
-                      //         {
-                      //           print("onParticipantsLoadedCallbackFunction : participants :$participants");
-                      //           setState(() {
-                      //             for (var index = 0; index < participants.length; index++)
-                      //             {
-                      //               if (index%2 == 0) 
-                      //               {
-                      //                 _identifiersCol1.add(participants[index]);
-                      //                 _identifiersColors1.add(greenShade900);
+                      // onPressed: (){groupMoods1Key.currentState?.addToIdentifiers();},
+                      onPressed: 
+                        () => Navigator.of(context).push
+                        (
+                          MaterialPageRoute<void>(
+                            builder: (_) => NewTextListOrLoadingPage
+                            (
+                              onParticipantsLoadedCallbackFunction:
+                              (participants)
+                              {
+                                // Re-setting previous data
+                                _identifiersCol1.clear();
+                                _identifiersColors1.clear();
+                                _identifiersCol2.clear();
+                                _identifiersColors2.clear();
+
+                                print("onParticipantsLoadedCallbackFunction : participants :$participants");
+                                setState(() {
+                                  for (var index = 0; index < participants.length; index++)
+                                  {
+                                    if (index%2 == 0) 
+                                    {
+                                      _identifiersCol1.add(participants[index]);
+                                      _identifiersColors1.add(greenShade900);
                                     
-                      //               }
-                      //               else 
-                      //               {
-                      //                 _identifiersCol2.add(participants[index]);
-                      //                 _identifiersColors2.add(greenShade900);
-                      //               }
-                      //             }
-                      //             print("onParticipantsLoadedCallbackFunction : _identifiersCol1 :$_identifiersCol1");
-                      //             print("onParticipantsLoadedCallbackFunction : _identifiersCol2 :$_identifiersCol2");
-                      //           });
+                                    }
+                                    else 
+                                    {
+                                      _identifiersCol2.add(participants[index]);
+                                      _identifiersColors2.add(greenShade900);
+                                    }
+                                  }
+                                  print("onParticipantsLoadedCallbackFunction : _identifiersCol1 :$_identifiersCol1");
+                                  print("onParticipantsLoadedCallbackFunction : _identifiersCol2 :$_identifiersCol2");
+                                });
                                 
-                      //         } ,
-                      //       ) 
-                      //       ),
-                      //   ),
+                              } ,
+                            ) 
+                            ),
+                        ),
 
                       screenWidthInInches: screenWidthInInches
                     ),
