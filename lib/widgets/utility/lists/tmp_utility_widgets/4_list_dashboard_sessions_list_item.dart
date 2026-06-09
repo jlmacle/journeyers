@@ -275,28 +275,33 @@ class _ListOfListsItemState extends State<ListOfListsItem>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Left icon — pinned to row start
+                IconButton(
+                  icon: const Icon(Icons.style_rounded),
+                  onPressed: () => _showKeywordsEditSheet(
+                    context: context,
+                    dashboardContext: widget.dashboardContext,
+                    currentKeywords: widget.listData[itemKeywordsKey],
+                    listKey: widget.listData[itemKey],
+                    kwsEditController: kwsEditTec,
+                    onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
+                    onKeywordsUpdated: onKeywordsUpdated,
+                    listData: widget.listData,
+                  ),
+                  tooltip: keywordsTooltipLabel,
+                ),
+
+                // Center content — wraps if needed
                 Wrap(
-                  spacing: 4,
-                  children: [                    
-                    // To edit the keywords
-                    IconButton(
-                      icon: const Icon(Icons.style_rounded),
-                      onPressed:  () => _showKeywordsEditSheet
-                      (
-                        context: context,
-                        dashboardContext: widget.dashboardContext,
-                        currentKeywords: widget.listData[itemKeywordsKey],
-                        listKey: widget.listData[itemKey],
-                        kwsEditController: kwsEditTec,
-                        onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                        onKeywordsUpdated: onKeywordsUpdated,
-                        listData: widget.listData
-                      ),
-                      tooltip: keywordsTooltipLabel,
+                  children: [
+                    ElevatedButton(
+                      child: const Text('Please click to load'),
+                      onPressed: () {},
                     ),
                   ],
                 ),
-                // To delete session metadata and file
+
+                // Right icon — pinned to row end
                 IconButton(
                   key: ValueKey('session-delete-${widget.index}'),
                   icon: const Icon(Icons.delete_rounded),

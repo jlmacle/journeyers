@@ -121,6 +121,7 @@ class _HomePageState extends State<HomePage>
         centerTitle: true,
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,
+        systemOverlayStyle: appTheme.appBarTheme.systemOverlayStyle,
         title: 
         Semantics
         (
@@ -160,14 +161,18 @@ class _HomePageState extends State<HomePage>
       ),
 
       body: 
-      Column
+      SafeArea
       (
-        children: 
-        [
-          // Commented as not all translations are done
-          // CustomLanguageSwitch(onLanguageSelectedHomePageCallbackFunction: _updateLocale),
-          Expanded(child: _pages[_currentIndex])
-        ],
+        child:
+          Column
+          (
+            children: 
+            [
+              // Commented as not all translations are done
+              // CustomLanguageSwitch(onLanguageSelectedHomePageCallbackFunction: _updateLocale),
+              Expanded(child: _pages[_currentIndex])
+            ],
+          ),
       ),
 
 
