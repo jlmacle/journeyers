@@ -71,7 +71,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
               hint: Center
               (
                 child: 
-                Text(textAlign: TextAlign.center, 'Please enter keywords\nto describe the analysis.\n(+ Enter key).', style: analysisTextFieldHintStyle)
+                Text(textAlign: TextAlign.center, 'Please enter keywords\nto describe the analysis.\n(+ Enter key)', style: analysisTextFieldHintStyle)
               )
             ),
             textAlign: TextAlign.center,

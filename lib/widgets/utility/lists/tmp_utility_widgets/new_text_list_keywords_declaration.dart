@@ -151,7 +151,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                           hint: Center
                           (
                             child: 
-                            Text(textAlign: TextAlign.center, 'Please enter the keywords here. \n(+ Enter key).', style: analysisTextFieldHintStyle)
+                            Text(textAlign: TextAlign.center, 'Please enter the keywords here.\n(+ Enter key)', style: analysisTextFieldHintStyle)
                           )
                         ),
                         textAlign: TextAlign.center,

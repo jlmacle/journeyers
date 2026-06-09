@@ -186,7 +186,7 @@ const String pleaseDevelopHint = 'Please develop.';
 const String pleaseDescribeTextGroupsHint =
     'Please describe the problem(s) that the groups/teams are trying to solve.';
 
-const String textFieldHint = 'Please enter some text';
+const String textFieldHint = 'Please enter some text.';
 
 // Text styles: GROUP PROBLEM-SOLVING PAGE RELATED STYLES
 const TextStyle problemSolvingChecklistTitle = TextStyle

@@ -615,7 +615,7 @@ class DTOCAForm
     {
       filePathWithExtension = await FilePicker.platform.saveFile
       (
-        dialogTitle: 'Please enter a file name',
+        dialogTitle: 'Please enter a file name.',
         fileName: '.csv',
         bytes: dataBytes, // necessary, at least on Windows
         type: FileType.custom, // necessary, at least on macOS
