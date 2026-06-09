@@ -275,193 +275,194 @@ class _NewTextListState extends State<NewTextList> {
     }
 
     return 
-    SafeArea
-    (child: 
-      _loadingDB
-      ? const Center(child: CircularProgressIndicator())
-      : Scaffold(
-        appBar: AppBar(
-          title: Text
-                (
-                  _listHasBeenLoaded ? widget.loadedLabel! : 'New list', 
-                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
-                ),          
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          actions: [
-            // If data can be saved
-            if (canSave) 
-            ...
-            [
-              _saving
-                  // Currently saving data
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                    )
-                  // Potentially saving data
-                  : IconButton(
-                      tooltip: 'Save list',
-                      icon: const Icon(Icons.save_outlined),
-                      onPressed: _saveGroupedTextsList,
-                    ),
-            ]
-            else 
-            // Otherwise
-            ...
-            [
-              // to avoid 'List already saved' at new list declaration
-              if (_enteredTextItemsList.isNotEmpty)
-                const Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Text('List already saved', ),
-                )
-            ]            
-          ],
-        ),
-
-        // ── Texts display ──────────────────────────────────────────────────
-        body: 
-          Column
-          (
-            children: 
-            [
-              // padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        // child: 
-              NewTextListKeywordsDeclaration
+    _loadingDB
+    ? const Center(child: CircularProgressIndicator())
+    : Scaffold(
+      appBar: AppBar(
+        title: Text
               (
-                currentKeywords: {},
-                onKeywordsUpdatedCallbackFunction: (newKeywords) 
-                {
-                  print("newKeywords: $newKeywords");
-                  _newKeywords = newKeywords.toList()..sort();
-                }
-              ),
-              // Deletion by bulk widget
-              NewTextListDeletionByBulk
-              (
-                areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
-                enteredTextItemsList: _enteredTextItemsList,
-                indexesOfTextItemsSelectedForDeletion: _textsSelectedForDeletionIndexes,
-                callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
-              ),
-              // List of added texts or placeholder message
-              Expanded(
-                child: 
-                  _enteredTextItemsList.isEmpty
-                  // Placeholder message if empty list
-                  ? Center(
-                      child: Text(
-                        widget.listPlaceholder,
-                        textAlign: TextAlign.center,
-                        style: widget.themeData.textTheme.bodyLarge
-                      ),
-                    )
-                  :
-                        
-                  // List of added texts otherwise             
-                  ListView.builder
-                  (                  
-                    padding: const EdgeInsets.only(bottom: 96),
-                    itemCount: _enteredTextItemsList.length,
-                    itemBuilder: (_, index) 
-                    {
-                      return 
-                        // Text field (edition mode), or ListTile (reading mode)
-                        _isEdited && (index == _editedIndex)                        
-                          ?
-                          // Text field (edition mode)
-                          TextField
-                          (
-                            controller: _tecTextEdition,
-                            autofocus: true,
-                            decoration: const InputDecoration
-                            (                    
-                              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            ),
-                            textAlign: TextAlign.left,
-                            onSubmitted: 
-                              (value) => setState(() 
-                              {
-                                _enteredTextItemsList[index] = value; 
-                                _isEdited = false;
-                                _tecTextEdition.clear();
-                              }),
-                            
-                          )
-                          // ListTile (reading mode)
-                          : 
-                          EditableDeletableTextListItem
-                          (
-                            key: ValueKey(_enteredTextItemsList[index]),
-                            itemIndex: index, 
-                            itemText: _enteredTextItemsList[index], 
-                            onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
-                                                                { 
-                                                                  print("value: $boolParam");   
-                                                                  print("index: $intParam");                                                               
-                                                                  if(boolParam!) 
-                                                                  {                                                                    
-                                                                    // adding the index to _textsSelectedForDeletionIndexes
-                                                                    _textsSelectedForDeletionIndexes.add(index);
-                                                                    _textsSelectedForDeletionIndexes.sort();
-                                                                    _areSomeTextItemsForDeletion = true;
-
-                                                                    // setState // to do later at bulk widget level
-                                                                    setState(() {
-                                                                      
-                                                                    });
-                                                                  }
-                                                                  else{
-                                                                     _textsSelectedForDeletionIndexes.remove(index);
-                                                                     if (_textsSelectedForDeletionIndexes.isEmpty) _areSomeTextItemsForDeletion = false;
-                                                                    // setState // to do later at bulk widget level
-                                                                    setState(() {
-                                                                      
-                                                                    });
-                                                                  }
-                                                                  print("_textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
-                                                                }, 
-                            parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
-                            parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
-                            themeData: Theme.of(context),                          
-                          )                          
-                        ;
-                    },
-                  ),
-                ),
-              // TextField used to add a new text
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField
-                (
-                  controller: _tecNewText,
-                  textAlign: TextAlign.left,
-                  decoration: const InputDecoration
-                  (
-                    hint: Text
-                    ( 
-                      invitationToEnterTextPlaceholder,
-                      textAlign: TextAlign.left,                                          
+                _listHasBeenLoaded ? widget.loadedLabel! : 'New list', 
+                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
+              ),          
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        actions: [
+          // If data can be saved
+          if (canSave) 
+          ...
+          [
+            _saving
+                // Currently saving data
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
                     ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                  )
+                // Potentially saving data
+                : IconButton(
+                    tooltip: 'Save list',
+                    icon: const Icon(Icons.save_outlined),
+                    onPressed: _saveGroupedTextsList,
                   ),
-                  onSubmitted: (value)
+          ]
+          else 
+          // Otherwise
+          ...
+          [
+            // to avoid 'List already saved' at new list declaration
+            if (_enteredTextItemsList.isNotEmpty)
+              const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Text('List already saved', ),
+              )
+          ]            
+        ],
+      ),
+    
+      // ── Texts display ──────────────────────────────────────────────────
+      body:
+      SafeArea
+      (
+        child: 
+        Column
+        (
+          children: 
+          [
+            // padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      // child: 
+            NewTextListKeywordsDeclaration
+            (
+              currentKeywords: {},
+              onKeywordsUpdatedCallbackFunction: (newKeywords) 
+              {
+                print("newKeywords: $newKeywords");
+                _newKeywords = newKeywords.toList()..sort();
+              }
+            ),
+            // Deletion by bulk widget
+            NewTextListDeletionByBulk
+            (
+              areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
+              enteredTextItemsList: _enteredTextItemsList,
+              indexesOfTextItemsSelectedForDeletion: _textsSelectedForDeletionIndexes,
+              callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
+            ),
+            // List of added texts or placeholder message
+            Expanded(
+              child: 
+                _enteredTextItemsList.isEmpty
+                // Placeholder message if empty list
+                ? Center(
+                    child: Text(
+                      widget.listPlaceholder,
+                      textAlign: TextAlign.center,
+                      style: widget.themeData.textTheme.bodyLarge
+                    ),
+                  )
+                :
+                      
+                // List of added texts otherwise             
+                ListView.builder
+                (                  
+                  padding: const EdgeInsets.only(bottom: 96),
+                  itemCount: _enteredTextItemsList.length,
+                  itemBuilder: (_, index) 
                   {
-                    setState(() {
-                      _enteredTextItemsList.add(value.trim());
-                    });
-                    _tecNewText.clear();
-                    print("_enteredTextItemsList: $_enteredTextItemsList");
+                    return 
+                      // Text field (edition mode), or ListTile (reading mode)
+                      _isEdited && (index == _editedIndex)                        
+                        ?
+                        // Text field (edition mode)
+                        TextField
+                        (
+                          controller: _tecTextEdition,
+                          autofocus: true,
+                          decoration: const InputDecoration
+                          (                    
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
+                          textAlign: TextAlign.left,
+                          onSubmitted: 
+                            (value) => setState(() 
+                            {
+                              _enteredTextItemsList[index] = value; 
+                              _isEdited = false;
+                              _tecTextEdition.clear();
+                            }),
+                          
+                        )
+                        // ListTile (reading mode)
+                        : 
+                        EditableDeletableTextListItem
+                        (
+                          key: ValueKey(_enteredTextItemsList[index]),
+                          itemIndex: index, 
+                          itemText: _enteredTextItemsList[index], 
+                          onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
+                                                              { 
+                                                                print("value: $boolParam");   
+                                                                print("index: $intParam");                                                               
+                                                                if(boolParam!) 
+                                                                {                                                                    
+                                                                  // adding the index to _textsSelectedForDeletionIndexes
+                                                                  _textsSelectedForDeletionIndexes.add(index);
+                                                                  _textsSelectedForDeletionIndexes.sort();
+                                                                  _areSomeTextItemsForDeletion = true;
+    
+                                                                  // setState // to do later at bulk widget level
+                                                                  setState(() {
+                                                                    
+                                                                  });
+                                                                }
+                                                                else{
+                                                                   _textsSelectedForDeletionIndexes.remove(index);
+                                                                   if (_textsSelectedForDeletionIndexes.isEmpty) _areSomeTextItemsForDeletion = false;
+                                                                  // setState // to do later at bulk widget level
+                                                                  setState(() {
+                                                                    
+                                                                  });
+                                                                }
+                                                                print("_textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
+                                                              }, 
+                          parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
+                          parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
+                          themeData: Theme.of(context),                          
+                        )                          
+                      ;
                   },
                 ),
               ),
-            ]
-        )
+            // TextField used to add a new text
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField
+              (
+                controller: _tecNewText,
+                textAlign: TextAlign.left,
+                decoration: const InputDecoration
+                (
+                  hint: Text
+                  ( 
+                    invitationToEnterTextPlaceholder,
+                    textAlign: TextAlign.left,                                          
+                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                ),
+                onSubmitted: (value)
+                {
+                  setState(() {
+                    _enteredTextItemsList.add(value.trim());
+                  });
+                  _tecNewText.clear();
+                  print("_enteredTextItemsList: $_enteredTextItemsList");
+                },
+              ),
+            ),
+          ]
+      )
       )
     );
   }

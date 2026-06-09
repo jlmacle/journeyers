@@ -304,9 +304,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
 @override
   Widget build(BuildContext context) {
     return 
-    SafeArea
-    (
-      child: 
     Scaffold
     (
       appBar: AppBar
@@ -314,7 +311,11 @@ class TextListsDisplayState extends State<TextListsDisplay>
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
               ),
-      body: _isDataLoading
+      body: 
+      SafeArea
+      (
+        child: 
+      _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
             // Key used for automated testing, to scroll up the screen 
@@ -323,12 +324,12 @@ class TextListsDisplayState extends State<TextListsDisplay>
               slivers: [
                 // Static heading (Scrolls away normally)
                 // TODO: the sliver code to clean eventually
-
+    
                 // DASHBOARD TITLE
                 const SliverToBoxAdapter(
                   child: ListDashboardTitle(title: dashboardTitle)
                 ),
-
+    
                 // DASHBOARD FILTERING FEATURES
                 SliverToBoxAdapter 
                 (
@@ -341,7 +342,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                     dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
                   ),
                 ),
-
+    
                 // BULK DELETION
                 SliverToBoxAdapter(
                   child: ListDashboardDeletionByBulk
@@ -354,7 +355,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                     dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard                    
                   )
                 ),
-
+    
                 // Divider
                 const SliverToBoxAdapter
                 (
@@ -370,7 +371,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                       (context, index) {
                         final listData = _filteredListsData[index];
                         print("SliverList: listData: $listData");
-
+    
                         return ListOfListsItem(
                           listData: listData,
                           index: index,
@@ -403,7 +404,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                 ),
               ],
             ),
-    )
+          )
     );
   
   }
