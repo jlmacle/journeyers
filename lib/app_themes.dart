@@ -370,6 +370,7 @@ ThemeData appTheme = ThemeData
     ),
   ),
  
+ 
 // ─── ELEVATED BUTTON THEME ───────────────────────────────────────
   elevatedButtonTheme: ElevatedButtonThemeData
   (
@@ -397,6 +398,63 @@ ThemeData appTheme = ThemeData
       ),
     ),
   ),
+
+// ─── FILLED BUTTON THEME ───────────────────────────────────────
+  filledButtonTheme: FilledButtonThemeData
+  (
+    style: ButtonStyle
+    (
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(paleCyan),
+      surfaceTintColor: WidgetStateProperty.resolveWith<Color>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return paleCyan;} 
+          else if (states.contains(WidgetState.focused)) {return paleCyan;}
+          return paleCyan;
+        }
+      ),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return Colors.transparent;}
+          if (states.contains(WidgetState.pressed)) {return Colors.transparent;}
+          return null;
+        }
+      ),
+    ),
+  ),
+
+// ─── OUTLINED BUTTON THEME ───────────────────────────────────────  
+  outlinedButtonTheme: OutlinedButtonThemeData
+  (
+    style: ButtonStyle
+    (
+      foregroundColor: WidgetStateProperty.all<Color>(Colors.black),
+      backgroundColor: WidgetStateProperty.all<Color>(paleCyan),
+      surfaceTintColor: WidgetStateProperty.resolveWith<Color>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return paleCyan;} 
+          else if (states.contains(WidgetState.focused)) {return paleCyan;}
+          return paleCyan;
+        }
+      ),
+      overlayColor: WidgetStateProperty.resolveWith<Color?>
+      (
+        (Set<WidgetState> states) 
+        {
+          if (states.contains(WidgetState.hovered)) {return Colors.transparent;}
+          if (states.contains(WidgetState.pressed)) {return Colors.transparent;}
+          return null;
+        }
+      ),
+    ),
+  ),
+
 
 // ─── SEGMENTED BUTTON THEME ───────────────────────────────────────
   segmentedButtonTheme: SegmentedButtonThemeData
