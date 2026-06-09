@@ -279,7 +279,13 @@ class _NewTextListState extends State<NewTextList> {
       ? const Center(child: CircularProgressIndicator())
       : Scaffold(
         appBar: AppBar(
-          title: Text(_listHasBeenLoaded ? widget.loadedLabel! : 'New list'),
+          title: Text
+                (
+                  _listHasBeenLoaded ? widget.loadedLabel! : 'New list', 
+                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
+                ),          
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
           actions: [
             // If data can be saved
             if (canSave) 
