@@ -14,7 +14,7 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/1_list_dash
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2_list_dashboard_filtering_and_sorting_feature.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/3_list_dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_dashboard_sessions_list_item.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
 
 
 

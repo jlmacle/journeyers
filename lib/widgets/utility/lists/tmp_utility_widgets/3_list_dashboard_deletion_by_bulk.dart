@@ -10,7 +10,7 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_das
 
 
 /// {@category Utility widgets}
-/// {@category List}
+/// {@category Lists}
 /// A widget handling bulk deletion of session data.
 class ListDashboardDeletionByBulk extends StatefulWidget 
 {
