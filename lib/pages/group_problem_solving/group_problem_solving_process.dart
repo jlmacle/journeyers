@@ -49,7 +49,7 @@ class GPSProcessState extends State<GPSProcess>
   bool _isApplicationFolderPathLoading = true;
 
   // method used to get the set preferences
-  void getApplicationFolderPathPref() async
+  void _getApplicationFolderPathPref() async
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
@@ -68,8 +68,8 @@ class GPSProcessState extends State<GPSProcess>
   final TextEditingController _problemTitleController = .new();
 
   // ─── STAKEHOLDER IDENTIFIERS related data ───────────────────────────────────────
-  GlobalKey<GPSGroupMoodsState> groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
-  GlobalKey<GPSGroupMoodsState> groupMoods2Key = GlobalKey(debugLabel: "group-moods-2");
+  final GlobalKey<GPSGroupMoodsState> _groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
+  final GlobalKey<GPSGroupMoodsState> _groupMoods2Key = GlobalKey(debugLabel: "group-moods-2");
 
   // Mode for modifying a stakeholder identifier
   bool _isModificationMode = false;
@@ -95,24 +95,24 @@ class GPSProcessState extends State<GPSProcess>
   // ─── KEYWORDS related data ───────────────────────────────────────
   // List to store the keywords entered by the user
   Set<String> _currentKeywords = {}; 
-  List<Map<String, dynamic>> _history = [];
+  List<Map<String, dynamic>> _caMetadata = [];
   
   // ─── SOLUTIONS related data ───────────────────────────────────────
   // List to store the ideas entered by the user
   final List<String> _ideas = [];
   
   // ─── FILE SAVING related data ───────────────────────────────────────
-  String fileName = "";
-  String fileExtension = TextFieldUtils.extentionTXT;
+  String _fileName = "";
+  final String _fileExtension = TextFieldUtils.extentionTXT;
 
   // Method used to update the file name value
-  void processFileNameUpdate(String value)
+  void _processFileNameUpdate(String value)
   {
-    fileName = value;
+    _fileName = value;
   }
   
   // Method used to save data and metadata
-  Future<void> saveDataAndMetadata() async 
+  Future<void> _saveDataAndMetadata() async 
   {
     if (_ideas.isEmpty) 
     {
@@ -148,7 +148,7 @@ class GPSProcessState extends State<GPSProcess>
       {
         // Outside of testing: using SAF to save the file
         if (!runningTests) {
-          filePath = await fu.saveFileOnAndroid(fileName, fileExtension, dataBytes);
+          filePath = await fu.saveFileOnAndroid(_fileName, _fileExtension, dataBytes);
           // Updating the file names list: saveFileOnAndroid
           await du.getStoredFileNamesOnMobile();
           if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
@@ -157,7 +157,7 @@ class GPSProcessState extends State<GPSProcess>
         else {
           // otherwise: using tmp files for testing
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "$fileName$fileExtension");
+          filePath = path.join(applicationFolderPath!, "$_fileName$_fileExtension");
           fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
 
@@ -167,7 +167,7 @@ class GPSProcessState extends State<GPSProcess>
       {
         // Outside of testing
         if (!runningTests) {
-          filePath = await fu.saveFileOniOS(fileName, fileExtension, dataBytes);
+          filePath = await fu.saveFileOniOS(_fileName, _fileExtension, dataBytes);
           // Updating the file names list: saveFileOniOS
           await du.getStoredFileNamesOnMobile();
           if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
@@ -175,7 +175,7 @@ class GPSProcessState extends State<GPSProcess>
         else {
           // otherwise: using tmp files for testing
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "$fileName$fileExtension");
+          filePath = path.join(applicationFolderPath!, "$_fileName$_fileExtension");
           fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
       } 
@@ -184,7 +184,7 @@ class GPSProcessState extends State<GPSProcess>
         // Desktop implementation using FilePicker
         filePath = await FilePicker.platform.saveFile(
           dialogTitle: 'Please enter a file name.',
-          fileName: '$fileName$fileExtension', 
+          fileName: '$_fileName$_fileExtension', 
           bytes: dataBytes,
           type: FileType.custom,
           allowedExtensions: ['txt'],
@@ -222,12 +222,12 @@ class GPSProcessState extends State<GPSProcess>
   }
 
 // Method used to load the context analyses metadata
-Future<void> _loadHistory() async {
+Future<void> _loadCAMetadata() async {
   final data = await du.retrieveAllDashboardMetadata(
     typeOfDashboardContext: DashboardUtils.caContext
   );
   setState(() {
-    _history = List<Map<String, dynamic>>.from(data);
+    _caMetadata = List<Map<String, dynamic>>.from(data);
   });
 }
 
@@ -246,7 +246,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 }
 
   // Method used to add an idea to the list of ideas
-  void addSolutionToList(String value)
+  void _addSolutionToList(String value)
   {
     _ideas.add(value);
     setState(() {});
@@ -255,8 +255,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
   @override
   void initState() {
     super.initState();
-     _loadHistory();
-    getApplicationFolderPathPref();
+     _loadCAMetadata();
+    _getApplicationFolderPathPref();
   }
 
   @override
@@ -277,7 +277,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
         // 1. TOP: The problem to be solved (Full Width)
         GPSProblemToSolveDeclaration(
           problemTitleController: _problemTitleController,
-          previousSessions: _history,
+          previousSessions: _caMetadata,
           onSessionSelected: _handleSessionSelection,
         ),
         const Divider(),
@@ -353,8 +353,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     (
                       child:GPSGroupMoods
                       (
-                        key: groupMoods1Key,
-                        groupMoodsKey1: groupMoods1Key, groupMoodsKey2: groupMoods2Key,
+                        key: _groupMoods1Key,
+                        groupMoodsKey1: _groupMoods1Key, groupMoodsKey2: _groupMoods2Key,
                         columnNumber:1, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
                         identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
                         isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
@@ -439,7 +439,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       _buildHeaderButton
                       (
                         text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
-                        onPressed: () {groupMoods1Key.currentState?.clearAllIdentifiers();},
+                        onPressed: () {_groupMoods1Key.currentState?.clearAllIdentifiers();},
                         screenWidthInInches: screenWidthInInches
                       ),
                     // GPSGroupMoods widget (column 2)
@@ -447,8 +447,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     (
                       child: GPSGroupMoods
                       (
-                        key: groupMoods2Key,
-                        groupMoodsKey1: groupMoods1Key,groupMoodsKey2: groupMoods2Key,
+                        key: _groupMoods2Key,
+                        groupMoodsKey1: _groupMoods1Key,groupMoodsKey2: _groupMoods2Key,
                         columnNumber: 2, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
                         identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
                         isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
@@ -464,7 +464,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 
         // 3. BOTTOM: Full Width Solution Input Field
         const Divider(height: 1),
-        GPSNewSolution(onSolutionAddedCallbackFunction: addSolutionToList),
+        GPSNewSolution(onSolutionAddedCallbackFunction: _addSolutionToList),
         
         //********** Data saving ************//
         Center
@@ -477,13 +477,13 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                 // Defining file name and saving file for mobile platforms 
                 ? SessionFileNameMobilePlatforms
                 (
-                  fileExtension: fileExtension, 
+                  fileExtension: _fileExtension, 
                   editedFileName: "",
-                  onFileNameSubmittedProcessCallbackFunction: (value) => processFileNameUpdate (value), 
-                  parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata,
+                  onFileNameSubmittedProcessCallbackFunction: (value) => _processFileNameUpdate (value), 
+                  parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
                 )
                 // Saving file for desktop platforms
-                : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)
         ),
       ]
     );
