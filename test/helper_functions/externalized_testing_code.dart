@@ -609,21 +609,26 @@ Future<void> testChecklistTitleBorderColor(WidgetTester tester, Color color) asy
     border.top.color,
     color,
   );
+  print("passed: testChecklistTitleBorderColor: top");
 
   expect(
     border.bottom.color,
     color,
   );
+  print("passed: testChecklistTitleBorderColor: bottom");
 
   expect(
     border.right.color,
     color,
   );
+  print("passed: testChecklistTitleBorderColor: right");
 
   expect(
     border.left.color,
     color,
   );
+  print("passed: testChecklistTitleBorderColor: left");
+  
 }
 
 // ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
