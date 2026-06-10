@@ -133,6 +133,14 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
       context: context,
       builder: (context) {
         final TextEditingController controller = .new();
+        if (widget.columnNumber == 1) 
+        {
+          controller.text = widget.identifiersCol1[index!];
+        }
+        else 
+        {
+          controller.text = widget.identifiersCol2[index!];
+        }
         return AlertDialog(
           title: const Text(editIdentifierLabel),
           content: TextField
