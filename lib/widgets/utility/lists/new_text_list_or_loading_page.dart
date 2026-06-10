@@ -97,7 +97,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                     ),
                   ),
                   icon: const Icon(Icons.add_circle_outline),
-                  label: const Text('To add a new group?', textAlign: TextAlign.center),
+                  label: const Text(newParticipantsGroupLabel, textAlign: TextAlign.center),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
