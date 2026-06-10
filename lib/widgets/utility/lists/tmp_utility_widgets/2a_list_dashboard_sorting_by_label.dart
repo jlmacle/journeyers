@@ -5,7 +5,7 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashbo
 
 
 /// {@category Utility widgets}
-/// {@category List}
+/// {@category Lists}
 /// A widget handling the sorting by title of session data.
 class ListDashboardSortingByLabel extends StatefulWidget 
 {

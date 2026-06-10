@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
@@ -10,8 +11,8 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashbo
 
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
-/// A widget handling a session data.
+/// {@category Lists}
+/// A widget handling a list data.
 class ListOfListsItem extends StatefulWidget 
 {
   /// The session metadata.
@@ -245,9 +246,19 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                               (
                                 (kw) 
                                 {
-                                  return Chip
-                                  (
-                                    label: Text(kw)
+                                  return                  
+                                  Container(
+                                    decoration: BoxDecoration
+                                    (
+                                      color: Colors.transparent,  
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: black), 
+                                    ),
+                                    padding: const EdgeInsets.all(8),
+                                    child: Text
+                                    (
+                                      kw,                                      
+                                    ),
                                   );
                                 }
                               ).toList(),
