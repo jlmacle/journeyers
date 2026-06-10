@@ -138,6 +138,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
           content: TextField
           (
             controller: controller, 
+            autofocus: true,
             keyboardType: TextInputType.name,
             onSubmitted: (_) async
                         {
