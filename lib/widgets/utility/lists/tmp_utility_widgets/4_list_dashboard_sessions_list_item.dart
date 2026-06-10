@@ -106,6 +106,9 @@ class _ListOfListsItemState extends State<ListOfListsItem>
         .where((e) => e.isNotEmpty)
         .toSet();
 
+    // Updating _currentParticipants for list loading
+    _currentParticipants = updatedParticipants.toList();
+
     if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedParticipants: $updatedParticipants");
     // Calling the parent callback for state 
     await widget.onParticipantsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedParticipants, listData: listData);
@@ -302,6 +305,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                       child: const Text('Please click to load'),
                       onPressed: () 
                       {
+                        if (listDebug) pu.printd("List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_currentParticipants");
                         widget.onParticipantsLoadedCallbackFunction(_currentParticipants);
                         // To close the lists display
                         Navigator.pop(context);
