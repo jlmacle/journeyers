@@ -8,6 +8,7 @@ import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/1_list_dashboard_title.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2_list_dashboard_filtering_and_sorting_feature.dart';
@@ -366,9 +367,34 @@ class TextListsDisplayState extends State<TextListsDisplay>
                   child: Divider()                       
                 ), 
                 
-                // Session List
-                SliverPadding
-                (
+                if (_filteredListsData.isEmpty)
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: FilledButton.icon(
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => NewTextList
+                                              (
+                                                listLabelHintText: listLabelHintText,
+                                                listPlaceholder: listPlaceholder,
+                                                invitationToEnterTextPlaceholder: invitationToEnterTextPlaceholder,
+                                                themeData: Theme.of(context),
+                                                onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
+                                              ),
+                          ),
+                        ),
+                        label: const Text('Please tap to add a list.', textAlign: TextAlign.center),
+                        style: FilledButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 90),
+                        ),
+                      ),
+                    ),
+                  )
+                else
+                // List of lists
+                  SliverPadding
+                  (
                   padding: const EdgeInsets.only(bottom: 0),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
