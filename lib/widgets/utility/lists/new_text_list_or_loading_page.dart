@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'models/text_lists_storage_externalized_strings.dart';
-import 'new_text_list.dart';
-import 'text_lists_display2.dart';
-// import 'text_lists_display.dart';
+import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list.dart';
+import 'package:journeyers/widgets/utility/lists/text_lists_display.dart';
 
 
 /// ParticipantsGroupDeclaration offers two choices:
@@ -49,7 +49,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'What would you like to do?',
+                  optionsIntroductionLabel,
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.bodyMedium?.copyWith(
                     color: appTheme.colorScheme.onSurface.withOpacity(0.8),

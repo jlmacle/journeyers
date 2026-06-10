@@ -155,9 +155,9 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
                                       { 
                                         if (widget.columnNumber == 1) 
                                         {
-                                          widget.identifiersCol1[index!] = controller.text;
+                                          widget.identifiersCol1[index] = controller.text;
                                         }
-                                        else {widget.identifiersCol2[index!] = controller.text;}
+                                        else {widget.identifiersCol2[index] = controller.text;}
                                       });
 
                             Navigator.pop(context);
@@ -171,9 +171,9 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
                           { 
                             if (widget.columnNumber == 1) 
                             {
-                              widget.identifiersCol1[index!] = controller.text;
+                              widget.identifiersCol1[index] = controller.text;
                             }
-                            else {widget.identifiersCol2[index!] = controller.text;}
+                            else {widget.identifiersCol2[index] = controller.text;}
                           });
 
                 Navigator.pop(context);
