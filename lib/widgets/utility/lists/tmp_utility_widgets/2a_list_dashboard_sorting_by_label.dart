@@ -7,7 +7,7 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashbo
 /// {@category Utility widgets}
 /// {@category List}
 /// A widget handling the sorting by title of session data.
-class ListDashboardSortingByTitle extends StatefulWidget 
+class ListDashboardSortingByLabel extends StatefulWidget 
 {
   /// List containing the filtered lists to sort.
   final List<dynamic>? filteredListsToSort;
@@ -15,7 +15,7 @@ class ListDashboardSortingByTitle extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ListDashboardSortingByTitle
+  const ListDashboardSortingByLabel
   ({
     super.key,
     required this.filteredListsToSort,
@@ -23,18 +23,18 @@ class ListDashboardSortingByTitle extends StatefulWidget
   });
 
   @override
-  State<ListDashboardSortingByTitle> createState() => _ListDashboardSortingByTitleState();
+  State<ListDashboardSortingByLabel> createState() => _ListDashboardSortingByLabelState();
 }
 
-class _ListDashboardSortingByTitleState extends State<ListDashboardSortingByTitle> 
+class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabel> 
 {
   // Random alphabetical order by default
   bool _isAscendingTitle = false;   
 
   // Method used to sort session data by title 
-  Future<void> _sortSessionsByTitle() async
+  Future<void> _sortListsByLabel() async
   {
-    await sortByTitle(list: widget.filteredListsToSort!, byAscendingTitle: _isAscendingTitle);
+    await sortListsByLabel(list: widget.filteredListsToSort!, byAscendingLabel: _isAscendingTitle);
   }
 
 
@@ -50,7 +50,7 @@ class _ListDashboardSortingByTitleState extends State<ListDashboardSortingByTitl
         setState((){});
         
         // Sorting
-        await _sortSessionsByTitle();        
+        await _sortListsByLabel();        
         // Updating the sessions list UI
         widget.dashboardCallbackFunctionToRefreshTheSessionsList();
       },
