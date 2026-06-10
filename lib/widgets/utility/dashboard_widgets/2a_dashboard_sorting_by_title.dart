@@ -33,7 +33,7 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
   // Method used to sort session data by title 
   Future<void> _sortSessionsByTitle() async
   {
-    await sortByTitle(list: widget.filteredSessionsToSort!, byAscendingTitle: _isAscendingTitle);
+    await sortDashboardSessionsByTitle(list: widget.filteredSessionsToSort!, byAscendingTitle: _isAscendingTitle);
   }
 
 

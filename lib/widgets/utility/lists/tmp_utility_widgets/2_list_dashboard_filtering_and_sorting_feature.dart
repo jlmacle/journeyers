@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2a_list_dashboard_sorting_by_title.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2a_list_dashboard_sorting_by_label.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
@@ -71,7 +71,7 @@ class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardS
                 children: 
                 [
                   // Sorting by title
-                  ListDashboardSortingByTitle
+                  ListDashboardSortingByLabel
                   (
                     filteredListsToSort: widget.filteredLists,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
