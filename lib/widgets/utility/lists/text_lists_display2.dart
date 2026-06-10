@@ -214,7 +214,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used after participants update
   Future<void> updateParticipants({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
   {
-    if (listDebug) pu.printd("List debug: updateParticipants: updatedParticipants: $updatedItems");
+    if (listDebug) pu.printd("List debug: Lists display: updateParticipants: updatedItems: $updatedItems");
     // To accomodate widget testing
     if (listKey != null)
     {
@@ -253,7 +253,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected session deleted.")));
+    (const SnackBar(content: Text("Selected list deleted.")));
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
     if (_allListsData.isEmpty) 
