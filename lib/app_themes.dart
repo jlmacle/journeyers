@@ -244,6 +244,8 @@ ThemeData appTheme = ThemeData
   (
     backgroundColor: navyBlue,
     elevation: 0,
+    // to avoid a tint (during a scroll up e.g.)
+    surfaceTintColor: Colors.transparent,
 
     // For where the battery icon is
     systemOverlayStyle: SystemUiOverlayStyle
