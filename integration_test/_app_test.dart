@@ -111,7 +111,7 @@ Future<void> main() async {
 
         if (Platform.isAndroid || Platform.isIOS)
         {
-          // Pumping the widget
+          // Pumping the app
           await tester.pumpWidget(
             MaterialApp(
               localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -136,7 +136,7 @@ Future<void> main() async {
 
           await tester.pump(const Duration(seconds: 2));
 
-          // ── 2. CLICKIKNG TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+          // ── 2. CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
           var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
 
