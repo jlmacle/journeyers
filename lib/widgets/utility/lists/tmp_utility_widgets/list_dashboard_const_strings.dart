@@ -1,7 +1,7 @@
 // ─── DISPLAY DATA ───────────────────────────────────────
 // ────────────────────────────────────────────────────────
 
-const String dashboardTitle = "Stored participants lists";
+const String listsDashboardTitle = "Stored participants lists";
 
 // ─── SORTING AND FILTERING ───────────────────────────────────────
 const String filterByKeywordsLabel = "Filter by Keywords";

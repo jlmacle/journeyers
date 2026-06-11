@@ -332,7 +332,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
     
                 // DASHBOARD TITLE
                 const SliverToBoxAdapter(
-                  child: ListDashboardTitle(title: dashboardTitle)
+                  child: ListDashboardTitle(title: listsDashboardTitle)
                 ),
     
                 // DASHBOARD FILTERING FEATURES
