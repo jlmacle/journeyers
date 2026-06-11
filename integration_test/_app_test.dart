@@ -18,7 +18,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart' hide deleteTooltipLabel;
 
 
 import '../test/helper_functions/externalized_testing_code.dart';
@@ -398,7 +398,7 @@ Future<void> main() async {
         // ── LOADING PARTICIPANTS   ─────────────────────────────────
         // ───────────────────────────────────────────────────────────
 
-        // Finding the add emoji    
+        // Searching the add emoji    
         var addEmojiFinder = find.text(addEmoji);
 
         // Verifying the add emoji present
@@ -546,10 +546,7 @@ Future<void> main() async {
         // Verifying transition to GPS process page absent
         expect(find.text(checkListTitle), findsNothing);
       });  
-
             
-    });
-  
-    
+    });   
   });
 }
