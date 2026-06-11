@@ -12,7 +12,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 void main() 
 {
-  const String textFieldHintPart = "Please add the file name.";
+  const String textFieldHintPart = "Please add the";
 
     group('SessionFileNameMobilePlatforms Tests: \n', 
     () 
