@@ -16,6 +16,9 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
+
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -350,7 +353,7 @@ Future<void> main() async {
 
           // Verifying the names on the GPS process
 
-          // Verifying the GPS page present
+          // Verifying the GPS process page present
           expect(find.text(checkListTitle), findsOne);
 
           // Verifying the names present
@@ -411,6 +414,110 @@ Future<void> main() async {
         await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
       });
 
-    
+    // 'Participants can be loaded from an existing list'
+    testWidgets('Participants can be loaded from an existing list', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // to have the context analysis page, with the dashboard,
+          'wasSessionDataSaved': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────────
+        var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+
+        var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
+        if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
+
+        await tester.tap(bottomItemGPSFinder);
+        await tester.pumpAndSettle();
+
+        // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────
+        // Verifying the GPS page present
+        expect(find.byType(GPSPage), findsOne);
+
+        // Clicking on the GPS new session button
+        await checkNewGPSProcessButtonFunctions(tester);
+
+        // Searching the placeholder title
+        var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+        expect(placeholderTitleFinder, findsOne);
+
+        // ── ADDING PARTICIPANTS   ──────────────────────────────────
+        // ───────────────────────────────────────────────────────────
+        List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+        [
+          {listName1:names1}
+        ];
+        await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+      
+        // ── LOADING PARTICIPANTS   ─────────────────────────────────
+        // ───────────────────────────────────────────────────────────
+
+        // Finding the add emoji    
+        var addEmojiFinder = find.text(addEmoji);
+
+        // Verifying the add emoji present
+        expect(addEmojiFinder, findsOne);
+
+        // Tapping to reach the page with the loading/new group options
+        await tester.tap(addEmojiFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 5));
+
+        // Verifying the options page present
+        var optionsPageFinder = find.text(optionsIntroductionLabel);
+        expect(optionsPageFinder, findsOne);
+
+        // Searching the loading button
+        var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+        await tester.ensureVisible(loadingAListOptionFinder);
+        expect(loadingAListOptionFinder, findsOne);
+
+        // Tapping on it
+        await tester.tap(loadingAListOptionFinder);
+        await tester.pumpAndSettle();
+
+        // Verifying the lists dashboard title present
+        var listDashboardTitleFinder = find.text(listsDashboardTitle);
+        expect(listDashboardTitleFinder, findsOne);
+
+        // Searching for a loading button
+        var loadingButtonFinder = find.descendant
+        (
+          of: find.byType(ElevatedButton), 
+          matching: find.text(loadingButtonLabel)
+        );
+        expect(listDashboardTitleFinder, findsOne);
+
+        // Tapping on it
+        await tester.tap(loadingButtonFinder);
+        await tester.pumpAndSettle();
+
+        // Verifying the names on the GPS process
+
+        // Verifying the GPS process present
+        expect(find.text(checkListTitle), findsOne);
+
+        // Verifying the names present
+        for (var name in names1)
+        {
+          expect(find.text(name), findsOne);    
+        }  
+    });  
   });
 }
