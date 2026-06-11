@@ -281,10 +281,93 @@ Future<void> main() async {
     var listName1 = "List1";
     var listName2 = "List2";
 
-    // "Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
-    testWidgets("Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
-      (WidgetTester tester) async 
-      {
+    group('Participants Loading: \n', () 
+    {
+      // "Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
+      testWidgets("Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
+        (WidgetTester tester) async 
+        {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // to have the context analysis page, with the dashboard,
+              'wasSessionDataSaved': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+              // Temporary test dir as application folder path
+              'applicationFolderPath': testTmpDir!.path
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────
+            var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+
+            var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
+
+            await tester.tap(bottomItemGPSFinder);
+            await tester.pumpAndSettle();
+
+            // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────
+            // Verifying the GPS page present
+            expect(find.byType(GPSPage), findsOne);
+
+            // Clicking on the GPS new session button
+            await checkNewGPSProcessButtonFunctions(tester);
+
+            // Searching the placeholder title
+            var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+            expect(placeholderTitleFinder, findsOne);
+
+            // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────
+            // Adding the names
+            await addParticipantsFromGPSprocessPage(tester, names1);   
+
+            // Verifying the names present
+            expect(find.text(name1), findsOne);    
+            expect(find.text(name2), findsOne);  
+
+            // Searching the 'Save' icon
+            var saveListIconFinder = find.byIcon(Icons.save_outlined);
+            expect(saveListIconFinder, findsOne);
+
+            // Tapping on it
+            await tester.tap(saveListIconFinder);
+            await tester.pumpAndSettle();
+
+            // Searching the text field to add the list name
+            var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+            expect(listNameSavingTextFieldFinder, findsOne);
+
+            // Adding a list name
+            await tester.ensureVisible(listNameSavingTextFieldFinder);
+            await tester.tap(listNameSavingTextFieldFinder);
+            await tester.enterText(listNameSavingTextFieldFinder, listName1);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // Verifying the names on the GPS process
+
+            // Verifying the GPS process page present
+            expect(find.text(checkListTitle), findsOne);
+
+            // Verifying the names present
+            expect(find.text(name1), findsOne);    
+            expect(find.text(name2), findsOne);  
+          });
+    
+      // Had a multi-list issue at manual testing time
+      // "Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
+      testWidgets("Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
+        (WidgetTester tester) async 
+        {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
@@ -323,99 +406,18 @@ Future<void> main() async {
           var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
           expect(placeholderTitleFinder, findsOne);
 
-          // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
+          // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────────
-          // Adding the names
-          await addParticipantsFromGPSprocessPage(tester, names1);   
-
-          // Verifying the names present
-          expect(find.text(name1), findsOne);    
-          expect(find.text(name2), findsOne);  
-
-          // Searching the 'Save' icon
-          var saveListIconFinder = find.byIcon(Icons.save_outlined);
-          expect(saveListIconFinder, findsOne);
-
-          // Tapping on it
-          await tester.tap(saveListIconFinder);
-          await tester.pumpAndSettle();
-
-          // Searching the text field to add the list name
-          var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
-          expect(listNameSavingTextFieldFinder, findsOne);
-
-          // Adding a list name
-          await tester.ensureVisible(listNameSavingTextFieldFinder);
-          await tester.tap(listNameSavingTextFieldFinder);
-          await tester.enterText(listNameSavingTextFieldFinder, listName1);
-          await tester.testTextInput.receiveAction(TextInputAction.done);
-          await tester.pumpAndSettle();
-
-          // Verifying the names on the GPS process
-
-          // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
-
-          // Verifying the names present
-          expect(find.text(name1), findsOne);    
-          expect(find.text(name2), findsOne);  
-        });
-  
-    // Had a multi-list issue at manual testing time
-    // "Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
-    testWidgets("Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
-      (WidgetTester tester) async 
-      {
-        // Setting mock values for SharedPreferences
-        SharedPreferences.setMockInitialValues
-        ({
-          // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
-          // to have the context analysis page, with the dashboard,
-          'wasSessionDataSaved': true,
-          // and to have the group problem-solving page, with the dashboard.
-          'wasGPSSessionDataSaved': true,
-          // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+          [
+            {listName1:names1},
+            {listName2:names2}
+          ];
+          await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
         });
 
-        // Pumping the app
-        await pumpApp(tester);
-
-        // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-        // ────────────────────────────────────────────────────────────────────────────
-        var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-
-        var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
-        if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
-
-        await tester.tap(bottomItemGPSFinder);
-        await tester.pumpAndSettle();
-
-        // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────
-        // Verifying the GPS page present
-        expect(find.byType(GPSPage), findsOne);
-
-        // Clicking on the GPS new session button
-        await checkNewGPSProcessButtonFunctions(tester);
-
-        // Searching the placeholder title
-        var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
-        expect(placeholderTitleFinder, findsOne);
-
-        // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
-        // ────────────────────────────────────────────────────────────────────────────
-        List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
-        [
-          {listName1:names1},
-          {listName2:names2}
-        ];
-        await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
-      });
-
-    // 'Participants can be loaded from an existing list'
-    testWidgets('Participants can be loaded from an existing list', 
+      // 'Participants can be loaded from an existing list'
+      testWidgets('Participants can be loaded from an existing list', 
       (WidgetTester tester) async 
       {
         // Setting mock values for SharedPreferences
@@ -504,6 +506,8 @@ Future<void> main() async {
         );
         expect(listDashboardTitleFinder, findsOne);
 
+        await tester.pump(const Duration(seconds: 2));
+
         // Tapping on it
         await tester.tap(loadingButtonFinder);
         await tester.pumpAndSettle();
@@ -519,5 +523,6 @@ Future<void> main() async {
           expect(find.text(name), findsOne);    
         }  
     });  
+    });
   });
 }
