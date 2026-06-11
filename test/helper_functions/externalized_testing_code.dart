@@ -533,7 +533,7 @@ Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
   expect(optionsPageFinder, findsOne);
 
   // Searching the new group button
-  var newParticipantsGroupFinder = find.text(newParticipantsGroupLabel);
+  var newParticipantsGroupFinder = find.text(newParticipantsGroupOptionLabel);
   await tester.ensureVisible(newParticipantsGroupFinder);
   expect(newParticipantsGroupFinder, findsOne);
 
@@ -613,9 +613,9 @@ Future<void> addParticipantsListsFromGPSprocessPage
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
 
-    // Verifying the names on the GPS process
+    // Verifying the names on the GPS process page
 
-    // Verifying the GPS page present
+    // Verifying the GPS process page present
     expect(find.text(checkListTitle), findsOne);
 
     // Verifying the names present

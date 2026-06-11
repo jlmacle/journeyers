@@ -75,7 +75,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                     ),
                   ),
                   icon: const Icon(Icons.folder_open_outlined),
-                  label: const Text(loadingAListLabel, textAlign: TextAlign.center),
+                  label: const Text(loadingAListOptionLabel, textAlign: TextAlign.center),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -97,7 +97,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                     ),
                   ),
                   icon: const Icon(Icons.add_circle_outline),
-                  label: const Text(newParticipantsGroupLabel, textAlign: TextAlign.center),
+                  label: const Text(newParticipantsGroupOptionLabel, textAlign: TextAlign.center),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
