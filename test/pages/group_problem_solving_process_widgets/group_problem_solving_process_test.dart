@@ -194,7 +194,7 @@ void main()
     //   // Verifying the default rectangle color is orange
     //   await testChecklistTitleBorderColor(tester, rectangleColor);
 
-    //   // Finding the checklist
+    //   // Searching the checklist
     //   var checklistFinder = find.byType(GPSChecklist);
 
     //   // Tapping the checklist

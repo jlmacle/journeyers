@@ -714,7 +714,7 @@ Future<void> main() async {
             );
 
             // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
-            // Finding and tapping the checkboxes for title 1 and title 2
+            // Searching and tapping the checkboxes for title 1 and title 2
             var checkbox1Finder = find.descendant
             (
               of: find.ancestor(of: find.text(testAnalysisTitle1), matching: find.byType(SessionsListItem)), 

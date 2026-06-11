@@ -167,7 +167,7 @@ final q = CAQuestionsFields();
         await tester.tap(currentCheckbox);
         await tester.pump();
 
-        // Finding the text field related to the current checkbox
+        // Searching the text field related to the current checkbox
         var textFieldFinder = find.descendant(
           of: currentCheckbox, 
           matching: find.byType(TextField),
@@ -230,7 +230,7 @@ final q = CAQuestionsFields();
       {
         // Looping through each string in the Set for this specific SegmentedButton
         for (String optionToSelect in segmentedButtonValues[index]) {
-          // Finding the specific segment by its text label
+          // Searching the specific segment by its text label
           var optionFinder = find.descendant(
             of: currentSegButton,
             matching: find.text(optionToSelect),
@@ -241,7 +241,7 @@ final q = CAQuestionsFields();
           await tester.pump();
         }
 
-        // Finding the text field related to the current checkbox
+        // Searching the text field related to the current checkbox
         var textFieldFinder = find.descendant(
           of: currentSegButton, 
           matching: find.byType(TextField)
@@ -542,7 +542,7 @@ Future<void> gpsProcessPageFromHomePage(WidgetTester tester) async
 // Method used to go from GPS process page to new list page
 Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
 {
-  // Finding the add emoji    
+  // Searching the add emoji    
   var addEmojiFinder = find.text(addEmoji);
 
   // Verifying the add emoji present
