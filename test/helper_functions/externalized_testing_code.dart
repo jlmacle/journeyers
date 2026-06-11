@@ -613,9 +613,9 @@ Future<void> addParticipantsListsFromGPSprocessPage
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
 
-    // Verifying the names on the GPS process
+    // Verifying the names on the GPS process page
 
-    // Verifying the GPS page present
+    // Verifying the GPS process page present
     expect(find.text(checkListTitle), findsOne);
 
     // Verifying the names present
