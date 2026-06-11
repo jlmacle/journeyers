@@ -10,6 +10,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
@@ -346,7 +347,7 @@ final q = CAQuestionsFields();
   Future<void> enterGPSProcessTitle (WidgetTester tester, String aTitle) async
   {
     // Searching the placeholder title
-    var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
 
     // Tapping on it
     await tester.tap(placeholderTitleFinder);
@@ -355,7 +356,7 @@ final q = CAQuestionsFields();
     // Searching the text field
     var textFieldFinder = find.ancestor
     (
-      of: find.text(gpsTitleTextFieldHint), 
+      of: find.text(gpsProcessTitleTextFieldHint), 
       matching: find.byType(TextField)
     );
 
@@ -513,6 +514,30 @@ Future<void> enterNewGPSProcessData
   }
 
 // ─── PARTICIPANTS LISTS RELATED METHODS ───────────────────────────────────────────────────────────────
+
+// Method used to go from the home page to the GPS process page
+Future<void> gpsProcessPageFromHomePage(WidgetTester tester) async
+{
+  
+  // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────
+  var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+  await tester.tap(bottomItemGPSFinder);
+  await tester.pumpAndSettle();
+
+  // Verifying the GPS page present
+  expect(find.byType(GPSPage), findsOne);
+
+  // ── STARTING A NEW GPS PROCESS ────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
+
+  // Clicking on the GPS new process button
+  await checkNewGPSProcessButtonFunctions(tester);
+
+  // Searching the placeholder title
+  var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+  expect(placeholderTitleFinder, findsOne);
+}
 
 // Method used to go from GPS process page to new list page
 Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async

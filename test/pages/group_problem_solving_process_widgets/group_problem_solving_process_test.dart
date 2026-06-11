@@ -111,7 +111,7 @@ void main()
       await pumpGPSProblemToSolveDeclaration(tester);
 
       // Searching the placeholder title
-      var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+      var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
 
       // Tapping
       await tester.tap(placeholderTitleFinder);
@@ -120,7 +120,7 @@ void main()
       // Searching the text field
       var textFieldFinder = find.ancestor
       (
-        of: find.text(gpsTitleTextFieldHint), 
+        of: find.text(gpsProcessTitleTextFieldHint), 
         matching: find.byType(TextField)
       );
 
@@ -130,7 +130,7 @@ void main()
       await tester.pumpAndSettle();
 
       // Verifying the placeholder title absent
-      expect(find.text(gpsTitlePlaceholder), findsNothing);
+      expect(find.text(gpsProcessTitlePlaceholder), findsNothing);
 
       // Verifying the title present
       expect(find.text(aTitle), findsOne);
@@ -160,7 +160,7 @@ void main()
       // Searching the text field
       var textFieldFinder = find.ancestor
       (
-        of: find.text(gpsTitleTextFieldHint), 
+        of: find.text(gpsProcessTitleTextFieldHint), 
         matching: find.byType(TextField)
       );
 
@@ -170,7 +170,7 @@ void main()
       await tester.pumpAndSettle();
 
       // Verifying the placeholder title absent
-      expect(find.text(gpsTitlePlaceholder), findsNothing);
+      expect(find.text(gpsProcessTitlePlaceholder), findsNothing);
 
       // Verifying the title present
       expect(find.text(aTitle), findsOne);
