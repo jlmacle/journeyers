@@ -533,7 +533,7 @@ Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
   expect(optionsPageFinder, findsOne);
 
   // Searching the new group button
-  var newParticipantsGroupFinder = find.text(newParticipantsGroupLabel);
+  var newParticipantsGroupFinder = find.text(newParticipantsGroupOptionLabel);
   await tester.ensureVisible(newParticipantsGroupFinder);
   expect(newParticipantsGroupFinder, findsOne);
 
