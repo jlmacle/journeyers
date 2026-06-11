@@ -15,6 +15,9 @@ const String keywordsLabel = "Keywords:";
 const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete";
 
+// Buttons
+const String loadingLabel = 'Please click to load';
+
 // Text field labels
 const String keywordsTextFieldLabel = 'Keywords Edition (please separate with commas)';
 const String participantsTextFieldLabel = 'Participants Edition (please separate with commas)';
