@@ -2,18 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
-import '../../helper_functions/externalized_testing_code.dart';
 
 void main() 
 {
@@ -61,14 +56,33 @@ void main()
   group('GPSProcess Tests: \n', 
   () 
   {  
-    group("Stakeholder identifiers: \n", 
+    group("Participants Tests: \n", 
     () 
     {      
-      // 'Stakeholder identifiers can be added'
-      // to be updated
-      
+      // 'Participants can be added' (failing as a widget test)
+      // testWidgets('Participants can be added', 
+      // (WidgetTester tester) async 
+      // {
+      //   var name1 = "Bob";
+      //   var name2 = "Alice";
+      //   List<String> names = [name1, name2];
+      //   var list1 = "list1";
 
-      });          
+      //   // Pumping the widget
+      //   await pumpGPSProcess(tester);
+      //   // pumpAndSettle timed out
+      //   // await tester.pumpAndSettle();
+      //   await tester.pump(const Duration(seconds: 10));
+
+      //   // Adding the participants
+      //   List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+      //   [
+      //     {list1:names},
+      //   ];
+      //   await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+      // });    
+    });
+            
     
       // 'Stakeholder identifiers can be edited'
       // to be updated
