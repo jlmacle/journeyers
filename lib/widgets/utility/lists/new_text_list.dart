@@ -151,7 +151,7 @@ class _NewTextListState extends State<NewTextList> {
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
-                  () => errorText = '"$label" already exists. Please choose another.',
+                  () => errorText = '${label}${listAlreadySavedErrorEndPart}',
                 );
                 return;
               }
@@ -332,7 +332,7 @@ class _NewTextListState extends State<NewTextList> {
             if (_enteredTextItemsList.isNotEmpty)
               const Padding(
                 padding: EdgeInsets.only(right: 8.0),
-                child: Text('List already saved', ),
+                child: Text(listAlreadySavedErrorEndPart),
               )
           ]            
         ],
