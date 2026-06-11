@@ -259,4 +259,99 @@ Future<void> main() async {
     });
         
   });
+
+  group('Participants Tests: \n', () 
+  {
+    // "Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
+    testWidgets("Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // to have the context analysis page, with the dashboard,
+            'wasSessionDataSaved': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          var name1 = "Bob";
+          var name2 = "Alice";
+          List<String> names = [name1, name2];
+          var listName = "List1";
+
+          // Pumping the app
+          await tester.pumpWidget(
+            MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: HomePage( onLanguageSelectedMainCallbackFunction: (_){})
+            )
+          );
+          await tester.pumpAndSettle();
+
+          // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+          // ────────────────────────────────────────────────────────────────────────────
+          var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+
+          var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
+          if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
+
+          await tester.tap(bottomItemGPSFinder);
+          await tester.pumpAndSettle();
+
+          // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────
+          // Verifying the GPS page present
+          expect(find.byType(GPSPage), findsOne);
+
+          // Clicking on the GPS new session button
+          await checkNewGPSProcessButtonFunctions(tester);
+
+          // Searching the placeholder title
+          var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+          expect(placeholderTitleFinder, findsOne);
+
+          // ── CLICKING TO DISPLAY THE PARTICPANTS PAGE  ──────────────────────────────────────
+          // ────────────────────────────────────────────────────────────────────────────
+          // Adding the names
+          await addParticipants(tester, names);   
+
+          // Verifying the names present
+          expect(find.text(name1), findsOne);    
+          expect(find.text(name2), findsOne);  
+
+          // Searching the 'Save' icon
+          var saveListIconFinder = find.byIcon(Icons.save_outlined);
+          expect(saveListIconFinder, findsOne);
+
+          // Tapping on it
+          await tester.tap(saveListIconFinder);
+          await tester.pumpAndSettle();
+
+          // Searching the text field to add the list name
+          var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+          expect(listNameSavingTextFieldFinder, findsOne);
+
+          // Adding a list name
+          await tester.ensureVisible(listNameSavingTextFieldFinder);
+          await tester.tap(listNameSavingTextFieldFinder);
+          await tester.enterText(listNameSavingTextFieldFinder, listName);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pumpAndSettle();
+
+          // Verifying the names on the GPS process
+
+          // Verifying the GPS page present
+          expect(find.text(checkListTitle), findsOne);
+
+          // Verifying the names present
+          expect(find.text(name1), findsOne);    
+          expect(find.text(name2), findsOne);  
+        });
+  });
 }
