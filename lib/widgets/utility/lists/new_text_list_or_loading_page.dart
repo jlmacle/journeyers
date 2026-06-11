@@ -75,7 +75,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                     ),
                   ),
                   icon: const Icon(Icons.folder_open_outlined),
-                  label: const Text('To load the list\nof previous groups?', textAlign: TextAlign.center),
+                  label: const Text(loadingAListLabel, textAlign: TextAlign.center),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
