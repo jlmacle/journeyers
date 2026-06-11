@@ -17,6 +17,7 @@ import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
 
@@ -147,7 +148,7 @@ Future<void> main() async {
           await tester.pump(const Duration(seconds: 2));      
 
           // ── 2. REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────
           // Reaching the GPS process page from the home page
           await gpsProcessPageFromHomePage(tester);          
 
@@ -452,6 +453,103 @@ Future<void> main() async {
         }  
     });  
     });
+
+    group('Participants List Saving:\n', () 
+    {
+      // 'Participants lists names must be unique
+      testWidgets('Participants lists names must be unique', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // to have the context analysis page, with the dashboard,
+          'wasSessionDataSaved': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── ADDING PARTICIPANTS   ──────────────────────────────────
+        // ───────────────────────────────────────────────────────────
+        List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+        [
+          {listName1:names1}
+        ];
+        await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);      
+    
+        // ── ADDING MORE PARTICIPANTS TO SAVE UNDER THE SAME LIST NAME ────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────────────────────────────
+        // Loading the new list page from the GPS process page
+        await newListPageFromGPSprocessPage(tester);
+        
+        // Searching for the new participant text field
+        // Searching by placeholder text is not robust enough
+        var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+        expect(newParticipantTextFieldFinder, findsOne);
+        await tester.ensureVisible(newParticipantTextFieldFinder); 
+        await tester.pumpAndSettle(); 
+        await tester.tap(newParticipantTextFieldFinder);
+        await tester.pumpAndSettle();
+
+        // Adding the names
+        for (var name in names2)
+        {   
+          // Adding the name
+          await tester.enterText(newParticipantTextFieldFinder, name);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pumpAndSettle();
+          // Necessary for the next name to be added
+          await tester.tap(newParticipantTextFieldFinder);
+        }
+
+        // Verifying the names present
+        for (var name in names2)
+        {
+          expect(find.text(name), findsOne);    
+        }      
+
+        // Searching the 'Save' icon
+        var saveListIconFinder = find.byIcon(Icons.save_outlined);
+        expect(saveListIconFinder, findsOne);
+
+        // Tapping on it
+        await tester.tap(saveListIconFinder);
+        await tester.pumpAndSettle();
+
+        // Searching the text field to add the same list name
+        var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+        expect(listNameSavingTextFieldFinder, findsOne);
+
+        // Adding the same list name
+        await tester.ensureVisible(listNameSavingTextFieldFinder);
+        await tester.tap(listNameSavingTextFieldFinder);
+        await tester.enterText(listNameSavingTextFieldFinder, listName1);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        // Searching for the error message
+        var listAlreadySavedErrorFinder = find.textContaining(listAlreadySavedErrorEndPart);
+        expect(listAlreadySavedErrorFinder, findsOne);
+
+        // Verifying transition to GPS process page absent
+        expect(find.text(checkListTitle), findsNothing);
+      });  
+
+            
+    });
+  
     
   });
 }
