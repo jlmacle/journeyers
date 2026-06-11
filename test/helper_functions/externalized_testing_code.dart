@@ -512,9 +512,9 @@ Future<void> enterNewGPSProcessData
     }
   }
 
-// Method used to add participants
-Future<void> addParticipants(WidgetTester tester, List<String> participantsNames) async
-{ 
+// Method used to go from GPS process page to new list page
+Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
+{
   // Finding the add emoji    
   var addEmojiFinder = find.text(addEmoji);
 
@@ -541,7 +541,14 @@ Future<void> addParticipants(WidgetTester tester, List<String> participantsNames
   await tester.tap(newParticipantsGroupFinder);
   await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 2));
+}
 
+// Method used to add participants
+Future<void> addParticipants(WidgetTester tester, List<String> participantsNames) async
+{ 
+  // Loading the new list page from the GPS process page
+  await newListPageFromGPSprocessPage(tester);
+  
   // Searching for the new participant text field
   // Searching by placeholder text is not robust enough
   var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
@@ -560,6 +567,62 @@ Future<void> addParticipants(WidgetTester tester, List<String> participantsNames
     await tester.pumpAndSettle();
     // Necessary for the next name to be added
     await tester.tap(newParticipantTextFieldFinder);
+  }
+}
+
+// Method used to add participants lists
+// [
+//   {listName1:[name1,name2]},
+//   {listName2:[name3,name4]}
+// ];
+Future<void> addParticipantsLists
+({
+  required WidgetTester tester, 
+  required List< Map<String,List<String>> > listNamesParticipantsNamesMapList
+}) async
+{
+  for (var map in listNamesParticipantsNamesMapList)
+  {
+    List<String> names = map.values.first;
+
+    await addParticipants(tester, names);
+
+    // Verifying the names present
+    for (var name in names)
+    {
+      expect(find.text(name), findsOne);    
+    }      
+
+    // Searching the 'Save' icon
+    var saveListIconFinder = find.byIcon(Icons.save_outlined);
+    expect(saveListIconFinder, findsOne);
+
+    // Tapping on it
+    await tester.tap(saveListIconFinder);
+    await tester.pumpAndSettle();
+
+    // Searching the text field to add the list name
+    var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+    expect(listNameSavingTextFieldFinder, findsOne);
+
+    // Adding the list name
+    var listName = map.keys.first;
+    await tester.ensureVisible(listNameSavingTextFieldFinder);
+    await tester.tap(listNameSavingTextFieldFinder);
+    await tester.enterText(listNameSavingTextFieldFinder, listName);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+
+    // Verifying the names on the GPS process
+
+    // Verifying the GPS page present
+    expect(find.text(checkListTitle), findsOne);
+
+    // Verifying the names present
+    for (var name in names)
+    {
+      expect(find.text(name), findsOne);    
+    } 
   }
 }
 
