@@ -313,7 +313,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                 Wrap(
                   children: [
                     ElevatedButton(
-                      child: const Text(loadingLabel),
+                      child: const Text(loadingButtonLabel),
                       onPressed: () 
                       {
                         if (listDebug) pu.printd("List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_currentParticipants");
