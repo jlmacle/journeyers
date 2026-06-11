@@ -42,7 +42,7 @@ void main()
             expect(find.byType(TextField), findsNothing);
 
             // Getting the default title
-            var titleFinder = find.text(gpsTitlePlaceholder);
+            var titleFinder = find.text(gpsProcessTitlePlaceholder);
 
             // Clicking on the default title
             await tester.tap(titleFinder);
