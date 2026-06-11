@@ -512,6 +512,8 @@ Future<void> enterNewGPSProcessData
     }
   }
 
+// ─── PARTICIPANTS LISTS RELATED METHODS ───────────────────────────────────────────────────────────────
+
 // Method used to go from GPS process page to new list page
 Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
 {
