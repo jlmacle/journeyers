@@ -18,6 +18,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
   
@@ -511,22 +512,56 @@ Future<void> enterNewGPSProcessData
     }
   }
 
-// Method used to add an identifier
- Future<Finder> addIdentifier(WidgetTester tester) async
- {
+// Method used to add participants
+Future<void> addParticipants(WidgetTester tester, List<String> participantsNames) async
+{ 
   // Finding the add emoji    
-  var emojiFinder = find.text(addEmoji);
-  // Tapping to add an identifier
-  await tester.tap(emojiFinder);
+  var addEmojiFinder = find.text(addEmoji);
+
+  // Verifying the add emoji present
+  expect(addEmojiFinder, findsOne);
+
+  // Tapping to reach the page with the loading/new group options
+  await tester.tap(addEmojiFinder);
+
   // pumpAndSettle timed out
   // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 5));
+
+  // Verifying the options page present
+  var optionsPageFinder = find.text(optionsIntroductionLabel);
+  expect(optionsPageFinder, findsOne);
+
+  // Searching the new group button
+  var newParticipantsGroupFinder = find.text(newParticipantsGroupLabel);
+  await tester.ensureVisible(newParticipantsGroupFinder);
+  expect(newParticipantsGroupFinder, findsOne);
+
+  // Tapping on it
+  await tester.tap(newParticipantsGroupFinder);
+  await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 2));
-  // Verifying the identifier present
-  var identifierWidgetFinder = find.byType(IdentifierWidget);
 
-  return identifierWidgetFinder;
+  // Searching for the new participant text field
+  // Searching by placeholder text is not robust enough
+  var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+  expect(newParticipantTextFieldFinder, findsOne);
+  await tester.ensureVisible(newParticipantTextFieldFinder); 
+  await tester.pumpAndSettle(); 
+  await tester.tap(newParticipantTextFieldFinder);
+  await tester.pumpAndSettle();
 
- }
+  // Adding the names
+  for (var name in participantsNames)
+  {   
+    // Adding the name
+    await tester.enterText(newParticipantTextFieldFinder, name);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+    // Necessary for the next name to be added
+    await tester.tap(newParticipantTextFieldFinder);
+  }
+}
 
 // Method used to test the color of an identifier
 Future<void> testIdentifierColor(WidgetTester tester, Color color) async
