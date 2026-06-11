@@ -544,7 +544,7 @@ Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
 }
 
 // Method used to add participants
-Future<void> addParticipants(WidgetTester tester, List<String> participantsNames) async
+Future<void> addParticipantsFromGPSprocessPage(WidgetTester tester, List<String> participantsNames) async
 { 
   // Loading the new list page from the GPS process page
   await newListPageFromGPSprocessPage(tester);
@@ -575,7 +575,7 @@ Future<void> addParticipants(WidgetTester tester, List<String> participantsNames
 //   {listName1:[name1,name2]},
 //   {listName2:[name3,name4]}
 // ];
-Future<void> addParticipantsLists
+Future<void> addParticipantsListsFromGPSprocessPage
 ({
   required WidgetTester tester, 
   required List< Map<String,List<String>> > listNamesParticipantsNamesMapList
@@ -585,7 +585,7 @@ Future<void> addParticipantsLists
   {
     List<String> names = map.values.first;
 
-    await addParticipants(tester, names);
+    await addParticipantsFromGPSprocessPage(tester, names);
 
     // Verifying the names present
     for (var name in names)
