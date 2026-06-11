@@ -47,6 +47,20 @@ Future<void> main() async {
     ]);
   }
 
+  // ── App pumping ─────────────────────────────────────────────────────────────
+  Future<void> pumpApp(WidgetTester tester) async
+  {
+    // Pumping the app
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: HomePage(onLanguageSelectedMainCallbackFunction: (_){})
+      )
+    );
+    await tester.pumpAndSettle();
+  }
+
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
@@ -112,14 +126,7 @@ Future<void> main() async {
         if (Platform.isAndroid || Platform.isIOS)
         {
           // Pumping the app
-          await tester.pumpWidget(
-            MaterialApp(
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              home: HomePage( onLanguageSelectedMainCallbackFunction: (_){})
-            )
-          );
-          await tester.pumpAndSettle();
+          await pumpApp(tester);
 
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -273,8 +280,8 @@ Future<void> main() async {
 
     // "Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
     testWidgets("Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
-        (WidgetTester tester) async 
-        {
+      (WidgetTester tester) async 
+      {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
@@ -289,14 +296,7 @@ Future<void> main() async {
           });
 
           // Pumping the app
-          await tester.pumpWidget(
-            MaterialApp(
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              home: HomePage( onLanguageSelectedMainCallbackFunction: (_){})
-            )
-          );
-          await tester.pumpAndSettle();
+          await pumpApp(tester);
 
           // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────────
@@ -361,62 +361,56 @@ Future<void> main() async {
     // Had a multi-list issue at manual testing time
     // "Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
     testWidgets("Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
-        (WidgetTester tester) async 
-        {
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
-            // to have the context analysis page, with the dashboard,
-            'wasSessionDataSaved': true,
-            // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
-            // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
-          });
-
-          // Pumping the app
-          await tester.pumpWidget(
-            MaterialApp(
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              home: HomePage( onLanguageSelectedMainCallbackFunction: (_){})
-            )
-          );
-          await tester.pumpAndSettle();
-
-          // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-          // ────────────────────────────────────────────────────────────────────────────
-          var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-
-          var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
-          if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
-
-          await tester.tap(bottomItemGPSFinder);
-          await tester.pumpAndSettle();
-
-          // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────
-          // Verifying the GPS page present
-          expect(find.byType(GPSPage), findsOne);
-
-          // Clicking on the GPS new session button
-          await checkNewGPSProcessButtonFunctions(tester);
-
-          // Searching the placeholder title
-          var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
-          expect(placeholderTitleFinder, findsOne);
-
-          // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
-          // ────────────────────────────────────────────────────────────────────────────
-          List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
-          [
-            {listName1:names1},
-            {listName2:names2}
-          ];
-          await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // to have the context analysis page, with the dashboard,
+          'wasSessionDataSaved': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
         });
-  
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────────
+        var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+
+        var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
+        if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
+
+        await tester.tap(bottomItemGPSFinder);
+        await tester.pumpAndSettle();
+
+        // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────
+        // Verifying the GPS page present
+        expect(find.byType(GPSPage), findsOne);
+
+        // Clicking on the GPS new session button
+        await checkNewGPSProcessButtonFunctions(tester);
+
+        // Searching the placeholder title
+        var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+        expect(placeholderTitleFinder, findsOne);
+
+        // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────────
+        List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+        [
+          {listName1:names1},
+          {listName2:names2}
+        ];
+        await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+      });
+
+    
   });
 }
