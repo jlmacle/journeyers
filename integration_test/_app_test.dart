@@ -144,36 +144,21 @@ Future<void> main() async {
             fileNameWithoutExtension: fileName1WithoutExtension
           );
 
-          await tester.pump(const Duration(seconds: 2));
+          await tester.pump(const Duration(seconds: 2));      
 
-          // ── 2. CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+          // ── 2. REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-          var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-
-          var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
-          if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
-
-          await tester.tap(bottomItemGPSFinder);
-          await tester.pumpAndSettle();
-
+          // Reaching the GPS process page from the home page
+          await gpsProcessPageFromHomePage(tester);          
 
           // ── 3. SEARCHING FOR THE CA SESSION DATA IN THE GPS PROCESS  ──────────────────
-          // ──────────────────────────────────────────────────────────────────────────────
-
-          // Verifying the GPS page present
-          expect(find.byType(GPSPage), findsOne);
-
-          // Clicking on the GPS new session button
-          await checkNewGPSProcessButtonFunctions(tester);
-
+          // ──────────────────────────────────────────────────────────────────────────────          
           // Searching the placeholder title
-          var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
+          var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
 
           // Tapping on it
           await tester.tap(placeholderTitleFinder);
           await tester.pumpAndSettle();
-          // await tester.pump(const Duration(seconds: 4));
-
           // Searching for the list tile with the CA data
           var listTileFinder = find.byType(ListTile);
 
@@ -303,27 +288,8 @@ Future<void> main() async {
             // Pumping the app
             await pumpApp(tester);
 
-            // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────────
-            var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-
-            var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
-
-            await tester.tap(bottomItemGPSFinder);
-            await tester.pumpAndSettle();
-
-            // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────
-            // Verifying the GPS page present
-            expect(find.byType(GPSPage), findsOne);
-
-            // Clicking on the GPS new session button
-            await checkNewGPSProcessButtonFunctions(tester);
-
-            // Searching the placeholder title
-            var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
-            expect(placeholderTitleFinder, findsOne);
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
 
             // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────
@@ -384,27 +350,8 @@ Future<void> main() async {
           // Pumping the app
           await pumpApp(tester);
 
-          // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-          // ────────────────────────────────────────────────────────────────────────────
-          var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-
-          var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
-          if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
-
-          await tester.tap(bottomItemGPSFinder);
-          await tester.pumpAndSettle();
-
-          // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────
-          // Verifying the GPS page present
-          expect(find.byType(GPSPage), findsOne);
-
-          // Clicking on the GPS new session button
-          await checkNewGPSProcessButtonFunctions(tester);
-
-          // Searching the placeholder title
-          var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
-          expect(placeholderTitleFinder, findsOne);
+          // Reaching the GPS process page from the home page
+          await gpsProcessPageFromHomePage(tester);
 
           // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────────
@@ -436,27 +383,8 @@ Future<void> main() async {
         // Pumping the app
         await pumpApp(tester);
 
-        // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-        // ────────────────────────────────────────────────────────────────────────────
-        var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-
-        var totalBottomItemGPS = bottomItemGPSFinder.evaluate().length;
-        if (testingDebug) pu.printd('Testing Debug: totalBottomItemGPS: $totalBottomItemGPS');
-
-        await tester.tap(bottomItemGPSFinder);
-        await tester.pumpAndSettle();
-
-        // ── STARTING A NEW GPS PROCESS SESSION  ────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────
-        // Verifying the GPS page present
-        expect(find.byType(GPSPage), findsOne);
-
-        // Clicking on the GPS new session button
-        await checkNewGPSProcessButtonFunctions(tester);
-
-        // Searching the placeholder title
-        var placeholderTitleFinder = find.text(gpsTitlePlaceholder);
-        expect(placeholderTitleFinder, findsOne);
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
 
         // ── ADDING PARTICIPANTS   ──────────────────────────────────
         // ───────────────────────────────────────────────────────────
@@ -524,5 +452,6 @@ Future<void> main() async {
         }  
     });  
     });
+    
   });
 }
