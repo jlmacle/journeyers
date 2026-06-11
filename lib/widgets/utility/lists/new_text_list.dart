@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart';
-import '../../custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
-import 'tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
-import 'models/text_lists_storage_externalized_strings.dart';
-import 'models/text_lists_storage.dart';
+
 
 /// Class used to add a text list to a set of text lists.
 /// A new list can be saved only if its content is not identical to a previous list content.
@@ -170,6 +171,7 @@ class _NewTextListState extends State<NewTextList> {
             return AlertDialog(
               title: const Text('Save list'),
               content: TextField(
+                key: const ValueKey('saveListField'),
                 controller: _tecListLabel,
                 autofocus: true,
                 textInputAction: TextInputAction.done,
@@ -454,6 +456,7 @@ class _NewTextListState extends State<NewTextList> {
               padding: const EdgeInsets.all(8.0),
               child: TextField
               (
+                key: const ValueKey('participantNameField'),
                 controller: _tecNewText,
                 textAlign: TextAlign.left,
                 decoration: const InputDecoration
