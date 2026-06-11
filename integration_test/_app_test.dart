@@ -323,7 +323,7 @@ Future<void> main() async {
           // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────────
           // Adding the names
-          await addParticipants(tester, names1);   
+          await addParticipantsFromGPSprocessPage(tester, names1);   
 
           // Verifying the names present
           expect(find.text(name1), findsOne);    
@@ -415,7 +415,7 @@ Future<void> main() async {
             {listName1:names1},
             {listName2:names2}
           ];
-          await addParticipantsLists(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+          await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
         });
   
   });
