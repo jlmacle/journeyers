@@ -9,6 +9,6 @@ void main() async {
   custom_text_field_sanitized_and_checked_using_a_black_list_Mobile_part_of_the_test.main();
   await context_analysis_integration_tests_test.main();
   // To help with intermittent failures
-  await Future.delayed(const Duration(seconds: 5)); 
+  await Future.delayed(const Duration(seconds: 10)); 
   await group_problem_solving_integration_tests_test.main();
 }
