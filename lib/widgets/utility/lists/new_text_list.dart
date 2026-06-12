@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart';
 
 
@@ -347,8 +346,6 @@ class _NewTextListState extends State<NewTextList> {
         (
           children: 
           [
-            // padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      // child: 
             NewTextListKeywordsDeclaration
             (
               currentKeywords: {},
@@ -357,14 +354,6 @@ class _NewTextListState extends State<NewTextList> {
                 print("newKeywords: $newKeywords");
                 _newKeywords = newKeywords.toList()..sort();
               }
-            ),
-            // Deletion by bulk widget
-            NewTextListDeletionByBulk
-            (
-              areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
-              enteredTextItemsList: _enteredTextItemsList,
-              indexesOfTextItemsSelectedForDeletion: _textsSelectedForDeletionIndexes,
-              callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
             ),
             // List of added texts or placeholder message
             Expanded(
