@@ -18,8 +18,8 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart' hide deleteTooltipLabel;
-
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -264,8 +264,10 @@ Future<void> main() async {
     var name4 = "Jane";
     List<String> names1 = [name1, name2];
     List<String> names2 = [name3, name4];
+    List<String> names3 = [name1, name4];
     var listName1 = "List1";
     var listName2 = "List2";
+    var listName3 = "List3";
 
     group('Participants Loading: \n', () 
     {
@@ -600,6 +602,83 @@ Future<void> main() async {
             expect(sessionListItemFinder, findsNothing);
           }      
         );         
+      
+        // 'Deletion: Bulk deletion \n'
+        testWidgets(
+          'Deletion: Bulk deletion \n',
+          (WidgetTester tester) async {
+
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING 3 LISTS OF PARTICIPANTS   ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────
+            List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+            [
+              {listName1:names1},
+              {listName2:names2},
+              {listName3:names3},
+            ];
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+
+            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────
+            await listLoadingDashboardFromGPSprocessPage(tester);
+
+            // ── SEARCHING FOR THE ITEMS with listName1 and listName2 TO CHECK ON THE DASHBOARD  ─
+            // ────────────────────────────────────────────────────────────────────────────────────
+            var checkbox1Finder = find.descendant
+            (
+              of: find.ancestor(of: find.text(listName1), matching: find.byType(ListOfListsItem)), 
+              matching: find.byType(Checkbox)
+            );
+            await tester.ensureVisible(checkbox1Finder);
+            await tester.tap(checkbox1Finder);
+            await tester.pumpAndSettle();
+
+           var checkbox2Finder = find.descendant
+            (
+                of: find.ancestor(of: find.text(listName2), matching: find.byType(ListOfListsItem)), 
+                matching: find.byType(Checkbox)
+            );
+            await tester.ensureVisible(checkbox2Finder);
+            await tester.tap(checkbox2Finder);
+            await tester.pumpAndSettle();
+
+            // ── BULK DELETION ────────────────────────────────────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────────────            
+            // Searching the widget
+            var bulkDeletionFinder = find.textContaining('Delete');
+            expect(bulkDeletionFinder, findsOne);
+            await tester.ensureVisible(bulkDeletionFinder);
+            await tester.tap(bulkDeletionFinder);
+            await tester.pumpAndSettle();
+
+            // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────       
+            // Checking the number of list items left 
+            var sessionsListItemsFinder = find.byType(ListOfListsItem);
+            expect(sessionsListItemsFinder, findsOne);
+            // Verifying listName3 remains
+            var textFinder = find.text(listName3);
+            Text textWidget = tester.widget(textFinder);
+            expect(textWidget.data, listName3);            
+          }      
+        );
       });
     
     });
