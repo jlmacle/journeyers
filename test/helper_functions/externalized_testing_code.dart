@@ -20,6 +20,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
   
@@ -569,6 +570,40 @@ Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
   await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 2));
 }
+
+// Method used to go from GPS process page to list loading dashboard
+Future<void> listLoadingDashboardFromGPSprocessPage(WidgetTester tester) async
+{
+  // Searching the add emoji    
+  var addEmojiFinder = find.text(addEmoji);
+
+  // Verifying the add emoji present
+  expect(addEmojiFinder, findsOne);
+
+  // Tapping to reach the page with the loading/new group options
+  await tester.tap(addEmojiFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 5));
+
+  // Verifying the options page present
+  var optionsPageFinder = find.text(optionsIntroductionLabel);
+  expect(optionsPageFinder, findsOne);
+
+  // Searching the list loading option button
+  var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+  await tester.ensureVisible(loadingAListOptionFinder);
+  expect(loadingAListOptionFinder, findsOne);
+
+  // Tapping on it
+  await tester.tap(loadingAListOptionFinder);
+  await tester.pumpAndSettle();
+
+  // Verifying the lists dashboard title present
+  var listDashboardTitleFinder = find.text(listsDashboardTitle);
+  expect(listDashboardTitleFinder, findsOne);
+}
+
 
 // Method used to add participants
 Future<void> addParticipantsFromGPSprocessPage(WidgetTester tester, List<String> participantsNames) async
