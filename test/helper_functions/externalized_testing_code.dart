@@ -606,10 +606,45 @@ Future<void> listLoadingDashboardFromGPSprocessPage(WidgetTester tester) async
 
 
 // Method used to add participants
-Future<void> addParticipantsFromGPSprocessPage(WidgetTester tester, List<String> participantsNames) async
+Future<void> addParticipantsFromGPSprocessPage
+(
+  WidgetTester tester, List<String> participantsNames, List<String> keywords
+) async
 { 
   // Loading the new list page from the GPS process page
   await newListPageFromGPSprocessPage(tester);
+
+  if (keywords.isNotEmpty)
+  {
+    // Searching for the keywords declaration title
+    var keywordsTitleFinder = find.text(keywordsDeclarationTitle);
+    await tester.tap(keywordsTitleFinder);
+    await tester.pumpAndSettle();
+
+    // Searching for the new keyword text field
+    var newKeywordTextFieldFinder = find.byKey(const ValueKey('keywordField'));
+    expect(newKeywordTextFieldFinder, findsOne);
+    await tester.ensureVisible(newKeywordTextFieldFinder); 
+    await tester.pumpAndSettle(); 
+    await tester.tap(newKeywordTextFieldFinder);
+    await tester.pumpAndSettle();  
+
+    // Adding the keywords
+    for (var keyword in keywords)
+    {   
+      // Adding the keyword
+      await tester.enterText(newKeywordTextFieldFinder, keyword);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      // Necessary for the next keyword to be added
+      await tester.tap(newKeywordTextFieldFinder);
+    }
+
+    // Closing the overlay
+    var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+    await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
+    await tester.pumpAndSettle();
+  }
   
   // Searching for the new participant text field
   // Searching by placeholder text is not robust enough
@@ -634,20 +669,21 @@ Future<void> addParticipantsFromGPSprocessPage(WidgetTester tester, List<String>
 
 // Method used to add participants lists
 // [
-//   {listName1:[name1,name2]},
-//   {listName2:[name3,name4]}
+//   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
+//   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
 // ];
 Future<void> addParticipantsListsFromGPSprocessPage
 ({
   required WidgetTester tester, 
-  required List< Map<String,List<String>> > listNamesParticipantsNamesMapList
+  required List< Map<String,Map<String, dynamic>> > listDataMapsList
 }) async
 {
-  for (var map in listNamesParticipantsNamesMapList)
+  for (var map in listDataMapsList)
   {
-    List<String> names = map.values.first;
+    List<String> names = (map.values.first)["names"];
+    List<String> keywords = (map.values.first)["keywords"];
 
-    await addParticipantsFromGPSprocessPage(tester, names);
+    await addParticipantsFromGPSprocessPage(tester, names, keywords);
 
     // Verifying the names present
     for (var name in names)
@@ -657,6 +693,7 @@ Future<void> addParticipantsListsFromGPSprocessPage
 
     // Searching the 'Save' icon
     var saveListIconFinder = find.byIcon(Icons.save_outlined);
+    await tester.pump(const Duration(seconds: 3));
     expect(saveListIconFinder, findsOne);
 
     // Tapping on it
