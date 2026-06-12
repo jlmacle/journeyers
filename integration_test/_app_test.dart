@@ -454,7 +454,7 @@ Future<void> main() async {
     });  
     });
 
-    group('Participants List Saving:\n', () 
+    group('Participants List Saving: \n', () 
     {
       // 'Participants lists names must be unique
       testWidgets('Participants lists names must be unique', 
@@ -545,8 +545,91 @@ Future<void> main() async {
 
         // Verifying transition to GPS process page absent
         expect(find.text(checkListTitle), findsNothing);
-      });  
-            
-    });   
+      });            
+    }); 
+
+     group('Participants Lists: \n', () 
+    {
+      group('Deletion Tests: \n', ()
+      {
+        // 'Deletion: Single deletion with icon \n'
+        testWidgets(
+          'Deletion: Single deletion with icon \n',
+          (WidgetTester tester) async {
+
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING A LIST OF PARTICIPANTS   ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────
+            List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+            [
+              {listName1:names1},
+            ];
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+
+            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────
+            // Searching the add emoji    
+            var addEmojiFinder = find.text(addEmoji);
+
+            // Verifying the add emoji present
+            expect(addEmojiFinder, findsOne);
+
+            // Tapping to reach the page with the loading/new group options
+            await tester.tap(addEmojiFinder);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 5));
+
+            // Verifying the options page present
+            var optionsPageFinder = find.text(optionsIntroductionLabel);
+            expect(optionsPageFinder, findsOne);
+
+            // Searching the list loading option button
+            var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+            await tester.ensureVisible(loadingAListOptionFinder);
+            expect(loadingAListOptionFinder, findsOne);
+
+            // Tapping on it
+            await tester.tap(loadingAListOptionFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the lists dashboard title present
+            var listDashboardTitleFinder = find.text(listsDashboardTitle);
+            expect(listDashboardTitleFinder, findsOne);
+
+            // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────            
+            // Searching for the tooltip 
+            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+
+            // Tapping the icon
+            await tester.tap(deleteIconFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the list item absent
+            var sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: listName1);
+            expect(sessionListItemFinder, findsNothing);
+          }      
+        );         
+      });
+    
+    });
+    
   });
 }
