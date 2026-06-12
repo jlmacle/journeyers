@@ -263,15 +263,16 @@ Future<void> main() async {
     var name3 = "Ben";
     var name4 = "Jane";
     List<String> names1 = [name1, name2];
-    List<String> names2 = [name3, name4];
-    List<String> names3 = [name1, name4];
-    var listName1 = "List1";
-    var listName2 = "List2";
-    var listName3 = "List3";
-    var listLabelsSorted = [listName1, listName2, listName3];
-    var keyword1 = "Companionship";
-    var keyword2 = "Workplace";
-    var keywords1 = [keyword1, keyword2];
+    List<String> names2 = [name2, name4];
+    List<String> names3 = [name1, name3];
+    var list1 = "List1";
+    var list2 = "List2";
+    var list3 = "List3";
+    var listLabelsSorted = [list1, list2, list3];
+    var keywords1 = [kwCompanionship];
+    var keywords2 = [kwWorkplace];
+    var titlesCompanionship = [list1];
+    var titlesWorkplace = [list2, list3];
 
     group('Participants Loading: \n', () 
     {
@@ -322,7 +323,7 @@ Future<void> main() async {
             // Adding a list name
             await tester.ensureVisible(listNameSavingTextFieldFinder);
             await tester.tap(listNameSavingTextFieldFinder);
-            await tester.enterText(listNameSavingTextFieldFinder, listName1);
+            await tester.enterText(listNameSavingTextFieldFinder, list1);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
@@ -364,8 +365,8 @@ Future<void> main() async {
           // ────────────────────────────────────────────────────────────────────────────
           List< Map<String,Map<String, dynamic>> > listDataMapsList =
           [
-            {listName1:{"names":names1,"keywords":[]}},
-            {listName2:{"names":names2,"keywords":[]}},
+            {list1:{"names":names1,"keywords":[]}},
+            {list2:{"names":names2,"keywords":[]}},
           ];
           await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
         });
@@ -397,7 +398,7 @@ Future<void> main() async {
         // ───────────────────────────────────────────────────────────
         List< Map<String,Map<String, dynamic>> > listDataMapsList =
         [
-          {listName1:{"names":names1,"keywords":[]}},
+          {list1:{"names":names1,"keywords":[]}},
         ];
         await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
       
@@ -491,7 +492,7 @@ Future<void> main() async {
         // ───────────────────────────────────────────────────────────
         List< Map<String,Map<String, dynamic>> > listDataMapsList =
         [
-          {listName1:{"names":names1,"keywords":[]}},            
+          {list1:{"names":names1,"keywords":[]}},            
         ];
         await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
     
@@ -541,7 +542,7 @@ Future<void> main() async {
         // Adding the same list name
         await tester.ensureVisible(listNameSavingTextFieldFinder);
         await tester.tap(listNameSavingTextFieldFinder);
-        await tester.enterText(listNameSavingTextFieldFinder, listName1);
+        await tester.enterText(listNameSavingTextFieldFinder, list1);
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pumpAndSettle();
 
@@ -584,7 +585,7 @@ Future<void> main() async {
             // ────────────────────────────────────────────────────────────────────────────
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName1:{"names":names1,"keywords":[]}},
+              {list1:{"names":names1,"keywords":[]}},
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
@@ -602,7 +603,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Verifying the list item absent
-            var sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: listName1);
+            var sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: list1);
             expect(sessionListItemFinder, findsNothing);
           }      
         );         
@@ -633,9 +634,9 @@ Future<void> main() async {
             // ────────────────────────────────────────────────────────────────────────────
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName1:{"names":names1,"keywords":[]}},
-              {listName2:{"names":names2,"keywords":[]}},
-              {listName3:{"names":names3,"keywords":[]}},
+              {list1:{"names":names1,"keywords":[]}},
+              {list2:{"names":names2,"keywords":[]}},
+              {list3:{"names":names3,"keywords":[]}},
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
@@ -647,7 +648,7 @@ Future<void> main() async {
             // ────────────────────────────────────────────────────────────────────────────────────
             var checkbox1Finder = find.descendant
             (
-              of: find.ancestor(of: find.text(listName1), matching: find.byType(ListOfListsItem)), 
+              of: find.ancestor(of: find.text(list1), matching: find.byType(ListOfListsItem)), 
               matching: find.byType(Checkbox)
             );
             await tester.ensureVisible(checkbox1Finder);
@@ -656,7 +657,7 @@ Future<void> main() async {
 
            var checkbox2Finder = find.descendant
             (
-                of: find.ancestor(of: find.text(listName2), matching: find.byType(ListOfListsItem)), 
+                of: find.ancestor(of: find.text(list2), matching: find.byType(ListOfListsItem)), 
                 matching: find.byType(Checkbox)
             );
             await tester.ensureVisible(checkbox2Finder);
@@ -678,9 +679,9 @@ Future<void> main() async {
             var sessionsListItemsFinder = find.byType(ListOfListsItem);
             expect(sessionsListItemsFinder, findsOne);
             // Verifying listName3 remains
-            var textFinder = find.text(listName3);
+            var textFinder = find.text(list3);
             Text textWidget = tester.widget(textFinder);
-            expect(textWidget.data, listName3);            
+            expect(textWidget.data, list3);            
           }      
         );
       });
@@ -714,9 +715,9 @@ Future<void> main() async {
             // ────────────────────────────────────────────────────────────────────────────
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName3:{"names":names3,"keywords":[]}},
-              {listName1:{"names":names1,"keywords":[]}},
-              {listName2:{"names":names2,"keywords":[]}},                          
+              {list3:{"names":names3,"keywords":[]}},
+              {list1:{"names":names1,"keywords":[]}},
+              {list2:{"names":names2,"keywords":[]}},                          
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
@@ -759,6 +760,81 @@ Future<void> main() async {
           }
         );        
       });
+
+      // 'Filtering by keywords \n'
+      testWidgets(
+        'Filtering by keywords \n',
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+          });
+
+          // Pumping the app
+          await pumpApp(tester);
+
+          // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+          // ────────────────────────────────────────────────────────────────────────
+          // Reaching the GPS process page from the home page
+          await gpsProcessPageFromHomePage(tester);
+
+          // ── ADDING 3 LISTS OF PARTICIPANTS ──────────────────────────────────
+          // ────────────────────────────────────────────────────────────────────
+          List< Map<String,Map<String, dynamic>> > listDataMapsList =
+          [            
+            {list1:{"names":names1,"keywords":keywords1}},
+            {list2:{"names":names2,"keywords":keywords2}},
+            {list3:{"names":names3,"keywords":keywords2}},                          
+          ];
+          await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+
+          // ── REACHING THE LISTS PAGE   ──────────────────────────────────
+          // ───────────────────────────────────────────────────────────────
+          await listLoadingDashboardFromGPSprocessPage(tester);
+        
+          // ── FILTERING BY KEYWORDS ────────────────────────────
+          // ─────────────────────────────────────────────────────
+          // 1. Filtering by kwCompanionship
+          var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+          await tester.tap(kwCompanionshipFinder);
+          await tester.pumpAndSettle();
+
+          // Verifying the titles present
+          var titlesFinder = await getAllSessionsTitles(tester);
+          var totalTitles = titlesFinder.evaluate().length;
+          if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
+
+          for (var index = 0; index < totalTitles; index++)
+          {
+            expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
+          }
+          // Un-selecting the keyword
+          await tester.tap(kwCompanionshipFinder);
+          await tester.pumpAndSettle();
+
+          // 2. Filtering by kwWorkplace
+          var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+          await tester.tap(kwWorkplaceFinder);
+          await tester.pumpAndSettle();
+
+          // Verifying the titles present
+          titlesFinder = await getAllSessionsTitles(tester);
+          totalTitles = titlesFinder.evaluate().length;
+          if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+
+          for (var index = 0; index < totalTitles; index++)
+          {
+            expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
+          }         
+
+          await tester.pump(const Duration(seconds: 2));
+
+        });      
     });
     
   });
