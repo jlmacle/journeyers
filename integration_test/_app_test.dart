@@ -15,11 +15,11 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix;
 import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart' hide deleteTooltipLabel;
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -268,6 +268,7 @@ Future<void> main() async {
     var listName1 = "List1";
     var listName2 = "List2";
     var listName3 = "List3";
+    var listLabelsSorted = [listName1, listName2, listName3];
 
     group('Participants Loading: \n', () 
     {
@@ -678,6 +679,81 @@ Future<void> main() async {
             Text textWidget = tester.widget(textFinder);
             expect(textWidget.data, listName3);            
           }      
+        );
+      });
+    
+    
+      group('Sorting and Filtering Tests: \n', ()
+      {
+        // 'Sorting by list label \n'
+        testWidgets(
+          'Sorting by list label \n',
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING 3 LISTS OF PARTICIPANTS (non alphabetical order)  ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────
+            List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+            [
+              {listName3:names3},
+              {listName1:names1},
+              {listName2:names2},              
+            ];
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+
+            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────
+            await listLoadingDashboardFromGPSprocessPage(tester);
+            
+            // ── SORTING BY LABEL ──────────────────────────────────
+            // ────────────────────────────────────────────────────────
+            // Triggering the sort
+            var sortByTitleFinder = find.textContaining(sortByTitleLabel);
+            await tester.tap(sortByTitleFinder);
+            await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
+
+            // Searching the list labels          
+            var titlesFinder = await getAllSessionsTitles(tester);
+            var totalTitles = titlesFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+
+            // Verifying the alphabetical order
+            for (var index = 0; index < totalTitles; index++)
+            {
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted[index]);
+            }
+
+            // Re-triggering the sort
+            await tester.tap(sortByTitleFinder);
+            await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
+
+            // Re-searching the labels  
+            titlesFinder = await getAllSessionsTitles(tester); 
+
+            // Verifying the alphabetical order 
+            for (var index = 0; index < totalTitles; index++)
+            {
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted.reversed.toList()[index]);
+            }       
+          }
         );
       });
     
