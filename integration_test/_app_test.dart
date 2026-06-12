@@ -635,7 +635,7 @@ Future<void> main() async {
             [
               {listName1:{"names":names1,"keywords":keywords1}},
               {listName2:{"names":names2,"keywords":keywords1}},
-              {listName3:{"names":names2,"keywords":keywords1}},
+              {listName3:{"names":names3,"keywords":keywords1}},
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
@@ -714,9 +714,9 @@ Future<void> main() async {
             // ────────────────────────────────────────────────────────────────────────────
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName3:{"names":names2,"keywords":[]}},
-              {listName1:{"names":names1,"keywords":[]}},
-              {listName2:{"names":names2,"keywords":[]}},                          
+              {listName3:{"names":names3,"keywords":keywords1}},
+              {listName1:{"names":names1,"keywords":keywords1}},
+              {listName2:{"names":names2,"keywords":keywords1}},                          
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
