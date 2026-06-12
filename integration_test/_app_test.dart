@@ -553,6 +553,74 @@ Future<void> main() async {
         // Verifying transition to GPS process page absent
         expect(find.text(checkListTitle), findsNothing);
       });            
+    
+      // 'List content must be unique'
+      testWidgets('List content must be unique', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── ADDING PARTICIPANTS   ──────────────────────────────────
+        // ───────────────────────────────────────────────────────────
+        List< Map<String,Map<String, dynamic>> > listDataMapsList =
+        [
+          {list1:{"names":names1,"keywords":[]}},            
+        ];
+        await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+    
+        // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────────────────────────────────
+        // Loading the new list page from the GPS process page
+        await newListPageFromGPSprocessPage(tester);
+        
+        // Searching for the new participant text field
+        // Searching by placeholder text is not robust enough
+        var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+        expect(newParticipantTextFieldFinder, findsOne);
+        await tester.ensureVisible(newParticipantTextFieldFinder); 
+        await tester.pumpAndSettle(); 
+        await tester.tap(newParticipantTextFieldFinder);
+        await tester.pumpAndSettle();
+
+        // Adding the same names
+        for (var name in names1)
+        {   
+          // Adding the name
+          await tester.enterText(newParticipantTextFieldFinder, name);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pumpAndSettle();
+          // Necessary for the next name to be added
+          await tester.tap(newParticipantTextFieldFinder);
+        }
+
+        // Verifying the names present
+        for (var name in names1)
+        {
+          expect(find.text(name), findsOne);    
+        }      
+
+        await tester.pump(const Duration(seconds: 5));
+
+        // Verifying the 'Save' icon absent
+        var saveListIconFinder = find.byIcon(Icons.save_outlined);
+        expect(saveListIconFinder, findsNothing);        
+      });            
+    
     }); 
 
      group('Participants Lists: \n', () 
