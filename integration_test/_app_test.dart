@@ -584,34 +584,7 @@ Future<void> main() async {
 
             // ── REACHING THE LISTS PAGE   ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────
-            // Searching the add emoji    
-            var addEmojiFinder = find.text(addEmoji);
-
-            // Verifying the add emoji present
-            expect(addEmojiFinder, findsOne);
-
-            // Tapping to reach the page with the loading/new group options
-            await tester.tap(addEmojiFinder);
-            // pumpAndSettle timed out
-            // await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 5));
-
-            // Verifying the options page present
-            var optionsPageFinder = find.text(optionsIntroductionLabel);
-            expect(optionsPageFinder, findsOne);
-
-            // Searching the list loading option button
-            var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
-            await tester.ensureVisible(loadingAListOptionFinder);
-            expect(loadingAListOptionFinder, findsOne);
-
-            // Tapping on it
-            await tester.tap(loadingAListOptionFinder);
-            await tester.pumpAndSettle();
-
-            // Verifying the lists dashboard title present
-            var listDashboardTitleFinder = find.text(listsDashboardTitle);
-            expect(listDashboardTitleFinder, findsOne);
+            await listLoadingDashboardFromGPSprocessPage(tester);
 
             // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────            
