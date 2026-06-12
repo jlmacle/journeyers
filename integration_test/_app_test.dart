@@ -269,6 +269,9 @@ Future<void> main() async {
     var listName2 = "List2";
     var listName3 = "List3";
     var listLabelsSorted = [listName1, listName2, listName3];
+    var keyword1 = "Companionship";
+    var keyword2 = "Workplace";
+    var keywords1 = [keyword1, keyword2];
 
     group('Participants Loading: \n', () 
     {
@@ -298,7 +301,7 @@ Future<void> main() async {
             // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────
             // Adding the names
-            await addParticipantsFromGPSprocessPage(tester, names1);   
+            await addParticipantsFromGPSprocessPage(tester, names1, keywords1);   
 
             // Verifying the names present
             expect(find.text(name1), findsOne);    
@@ -359,12 +362,12 @@ Future<void> main() async {
 
           // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────────
-          List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+          List< Map<String,Map<String, dynamic>> > listDataMapsList =
           [
-            {listName1:names1},
-            {listName2:names2}
+            {listName1:{"names":names1,"keywords":[]}},
+            {listName2:{"names":names2,"keywords":[]}},
           ];
-          await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+          await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
         });
 
       // 'Participants can be loaded from an existing list'
@@ -392,11 +395,11 @@ Future<void> main() async {
 
         // ── ADDING PARTICIPANTS   ──────────────────────────────────
         // ───────────────────────────────────────────────────────────
-        List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+        List< Map<String,Map<String, dynamic>> > listDataMapsList =
         [
-          {listName1:names1}
+          {listName1:{"names":names1,"keywords":[]}},
         ];
-        await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+        await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
       
         // ── LOADING PARTICIPANTS   ─────────────────────────────────
         // ───────────────────────────────────────────────────────────
@@ -486,11 +489,11 @@ Future<void> main() async {
 
         // ── ADDING PARTICIPANTS   ──────────────────────────────────
         // ───────────────────────────────────────────────────────────
-        List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+        List< Map<String,Map<String, dynamic>> > listDataMapsList =
         [
-          {listName1:names1}
+          {listName1:{"names":names1,"keywords":[]}},            
         ];
-        await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);      
+        await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
     
         // ── ADDING MORE PARTICIPANTS TO SAVE UNDER THE SAME LIST NAME ────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -579,11 +582,11 @@ Future<void> main() async {
 
             // ── ADDING A LIST OF PARTICIPANTS   ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────
-            List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+            List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName1:names1},
+              {listName1:{"names":names1,"keywords":keywords1}},
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
             // ── REACHING THE LISTS PAGE   ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────
@@ -628,13 +631,13 @@ Future<void> main() async {
 
             // ── ADDING 3 LISTS OF PARTICIPANTS   ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────
-            List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+            List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName1:names1},
-              {listName2:names2},
-              {listName3:names3},
+              {listName1:{"names":names1,"keywords":keywords1}},
+              {listName2:{"names":names2,"keywords":keywords1}},
+              {listName3:{"names":names2,"keywords":keywords1}},
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
             // ── REACHING THE LISTS PAGE   ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────
@@ -709,13 +712,13 @@ Future<void> main() async {
 
             // ── ADDING 3 LISTS OF PARTICIPANTS (non alphabetical order)  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────
-            List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
+            List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {listName3:names3},
-              {listName1:names1},
-              {listName2:names2},              
+              {listName3:{"names":names2,"keywords":[]}},
+              {listName1:{"names":names1,"keywords":[]}},
+              {listName2:{"names":names2,"keywords":[]}},                          
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
             // ── REACHING THE LISTS PAGE   ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────
@@ -754,9 +757,8 @@ Future<void> main() async {
               expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted.reversed.toList()[index]);
             }       
           }
-        );
+        );        
       });
-    
     });
     
   });
