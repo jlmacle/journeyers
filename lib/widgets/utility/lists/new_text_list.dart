@@ -123,7 +123,7 @@ class _NewTextListState extends State<NewTextList> {
       // at least one text has been added
       && _enteredTextItemsList.isNotEmpty 
       // added texts are not matching a saved list content
-      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
+      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList..sort())  
       // the new list hasn't been saved yet
       && !_isSaved ;
 
