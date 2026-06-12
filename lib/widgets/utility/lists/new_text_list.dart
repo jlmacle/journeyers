@@ -328,11 +328,12 @@ class _NewTextListState extends State<NewTextList> {
           // Otherwise
           ...
           [
-            // to avoid 'List already saved' at new list declaration
+            // To avoid saving twice the same data, at new list declaration
+            // TODO: to move at saving time            
             if (_enteredTextItemsList.isNotEmpty)
               const Padding(
                 padding: EdgeInsets.only(right: 8.0),
-                child: Text(listAlreadySavedErrorEndPart),
+                child: Text(contentAlreadySavedError),
               )
           ]            
         ],
