@@ -608,7 +608,7 @@ Future<void> listLoadingDashboardFromGPSprocessPage(WidgetTester tester) async
 // Method used to add participants
 Future<void> addParticipantsFromGPSprocessPage
 (
-  WidgetTester tester, List<String> participantsNames, List<String> keywords
+  WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
 ) async
 { 
   // Loading the new list page from the GPS process page
@@ -681,7 +681,7 @@ Future<void> addParticipantsListsFromGPSprocessPage
   for (var map in listDataMapsList)
   {
     List<String> names = (map.values.first)["names"];
-    List<String> keywords = (map.values.first)["keywords"];
+    List<dynamic> keywords = (map.values.first)["keywords"];
 
     await addParticipantsFromGPSprocessPage(tester, names, keywords);
 
