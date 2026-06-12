@@ -13,7 +13,7 @@ const String gpsTitleSuffix = " (gps)";
 const String previewTooltipLabel = "Preview";
 const String editTooltipLabel = "Edit session data";
 const String keywordsTooltipLabel = "Edit Keywords";
-const String deleteTooltipLabel = "Delete";
+const String deleteTooltipLabel = "Delete selected items";
 
 // Text field labels
 const String keywordsTextFieldLabel = 'Keywords Edition (please separate with commas)';
