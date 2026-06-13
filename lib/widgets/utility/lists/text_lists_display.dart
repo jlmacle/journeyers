@@ -462,6 +462,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
           [
             TextField
             (
+              key: const ValueKey('listEditField'),
               controller: _titleController,
               autofocus: true,
               decoration: const InputDecoration
