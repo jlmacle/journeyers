@@ -9,5 +9,6 @@ const String invitationToEnterTextPlaceholder = "Please add a participant's name
 
 const String listLabelHintText = "e.g. Our household members";
 const String listAlreadySavedErrorEndPart = ' already exists. Please choose another.';
-const String contentAlreadySavedError = 'List already saved';
+const String contentAlreadySavedError = 'List already saved.';
+const String emptyLabelError = 'Label cannot be empty.';
 
