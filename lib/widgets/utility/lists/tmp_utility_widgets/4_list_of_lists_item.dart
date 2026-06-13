@@ -249,6 +249,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             {
                               return                  
                               Container(
+                                key: ValueKey('session-participants-container-${widget.index}-${participant}'),
                                 decoration: BoxDecoration
                                 (
                                   color: Colors.transparent,  
@@ -453,6 +454,7 @@ void _showParticipantsEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
+                  key: const ValueKey('participantsEditField'),
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
