@@ -143,7 +143,7 @@ class _NewTextListState extends State<NewTextList> {
             Future<void> onConfirm() async {
               final label = _tecListLabel.text.trim();
               if (label.isEmpty) {
-                setDialogState(() => errorText = 'Label cannot be empty.');
+                setDialogState(() => errorText = emptyLabelError);
                 return;
               }
               // Warn if the label already exists, and prevents the saving of data.
