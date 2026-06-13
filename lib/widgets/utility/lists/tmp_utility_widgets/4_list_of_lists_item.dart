@@ -430,7 +430,7 @@ void _showParticipantsEditSheet({
 
             if (participants.isEmpty) {
               setState(() {
-                errorText = 'Participants field cannot be empty.';
+                errorText = emptyParticipantsListError;
               });
               return;
             }
