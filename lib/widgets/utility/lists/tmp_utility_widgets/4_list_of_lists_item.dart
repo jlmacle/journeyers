@@ -468,7 +468,7 @@ void _showParticipantsEditSheet({
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async => await onConfirm(),
-                  child: const Text("Save", style: TextStyle(color: Colors.black)),
+                  child: const Text(saveButtonLabel, style: TextStyle(color: Colors.black)),
                 ),
                 const SizedBox(height: 20),
               ],

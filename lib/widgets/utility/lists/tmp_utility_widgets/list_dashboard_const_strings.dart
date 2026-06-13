@@ -17,6 +17,7 @@ const String deleteTooltipLabel = "Delete";
 
 // Buttons
 const String loadingButtonLabel = 'Please click to load';
+const String saveButtonLabel = 'Save';
 
 // Text field labels
 const String keywordsTextFieldLabel = 'Keywords Edition (please separate with commas)';
