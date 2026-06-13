@@ -1000,9 +1000,9 @@ Future<void> main() async {
     
         group('Edition Tests: \n', ()
         {
-          // 'The list label can be edited \n'
+          // 'The list label can be edited (non empty label) \n'
           testWidgets(
-            'The list label can be edited \n',
+            'The list label can be edited (non empty label) \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -1037,32 +1037,99 @@ Future<void> main() async {
               // ── EDITING THE LABEL   ────────────────────────
               // ───────────────────────────────────────────────
               // Searching for the label        
-              var titlesFinder = await getAllSessionsTitles(tester);
-              var totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+              var labelsFinder = await getAllSessionsTitles(tester);
+              var totalLabels = labelsFinder.evaluate().length;
+              if (testingDebug) pu.printd('Testing Debug: totalLabels: $totalLabels');
 
               // Verifying the label present
-              expect((tester.widget<Text>(titlesFinder.first).data), listLabel1);
+              expect((tester.widget<Text>(labelsFinder.first).data), listLabel1);
 
               // Tapping to edit the label
-              await tester.tap(titlesFinder);
+              await tester.tap(labelsFinder);
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var newParticipantTextFieldFinder = find.byKey(const ValueKey('listEditField'));
-              expect(newParticipantTextFieldFinder, findsOne);
-              await tester.ensureVisible(newParticipantTextFieldFinder); 
+              var newLabelTextFieldFinder = find.byKey(const ValueKey('listEditField'));
+              expect(newLabelTextFieldFinder, findsOne);
+              await tester.ensureVisible(newLabelTextFieldFinder); 
               await tester.pumpAndSettle(); 
-              await tester.tap(newParticipantTextFieldFinder);
+              await tester.tap(newLabelTextFieldFinder);
               await tester.pumpAndSettle();
  
               // Adding the edited label
-              await tester.enterText(newParticipantTextFieldFinder, "${listLabel1}-edited");
+              await tester.enterText(newLabelTextFieldFinder, "${listLabel1}-edited");
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();              
 
               // Verifying the edited label present
               expect(find.text("${listLabel1}-edited"), findsOne);                   
+
+            });
+
+          // 'The list label can be edited (empty label) \n'
+          testWidgets(
+            'The list label can be edited (empty label) \n',
+            (WidgetTester tester) async 
+            {
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
+
+              // Pumping the app
+              await pumpApp(tester);
+
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
+
+              // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel1:{"names":names1,"keywords":[]}},            
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
+
+              // ── EDITING THE LABEL   ─────────────────
+              // ────────────────────────────────────────
+              // Searching for the label         
+              var labelFinder = await getAllSessionsTitles(tester);
+
+              // Tapping to edit the label
+              await tester.tap(labelFinder);
+              await tester.pumpAndSettle();
+
+              // Searching the text field to edit the label
+              var listEditTextFieldFinder = find.byKey(const ValueKey('listEditField'));
+              expect(listEditTextFieldFinder, findsOne);
+              await tester.ensureVisible(listEditTextFieldFinder); 
+              await tester.pumpAndSettle(); 
+              await tester.tap(listEditTextFieldFinder);
+              await tester.pumpAndSettle();
+ 
+              // Adding the empty label
+              await tester.enterText(listEditTextFieldFinder, "");
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle(); 
+
+              // Clicking on the 'Save' button
+              await tester.pump(const Duration(seconds: 5));  
+              var saveButtonFinder = find.text(saveButtonLabel); 
+              await tester.tap(saveButtonFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying error message present
+              expect(find.text(emptyLabelEditError), findsOne);
 
             });
         
