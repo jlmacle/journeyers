@@ -575,7 +575,7 @@ class TextListsDB {
     print("subItemsDataList: $subItemsDataList");
 
     // Building the list data
-    var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: keywords, subItemsDataListKey: subItemsDataList, displayFunctionKey: null};
+    var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: keywords..sort(), subItemsDataListKey: subItemsDataList, displayFunctionKey: null};
     var listData = {listKey: listDataMap};
 
     print("List data: $listData");

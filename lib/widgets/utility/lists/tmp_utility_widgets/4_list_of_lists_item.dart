@@ -165,13 +165,8 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     final String displayTitle = widget.listData[itemTextKey];
 
     // Sorting keywords for display
-    final Set<String> sortedKeywords = 
-    Set<String>.from(widget.listData[itemKeywordsKey])
-    ..toList().sort((a, b) 
-    {
-        int comparison = a.toLowerCase().compareTo(b.toLowerCase());
-        return comparison == 0 ? b.compareTo(a) : comparison;
-    });
+    final List<String> sortedKeywords = 
+    List<String>.from(widget.listData[itemKeywordsKey])..sort();
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -357,7 +352,7 @@ void _showKeywordsEditSheet
 
 }) {
   // Converting list to a comma-separated string for editing
-  kwsEditController.text = currentKeywords.join(', '); 
+  kwsEditController.text = (currentKeywords..sort()).join(', '); 
   
   showModalBottomSheet
   (
@@ -378,6 +373,7 @@ void _showKeywordsEditSheet
         [
           TextField
           (
+            key: const ValueKey('keywordsEditField'),
             controller: kwsEditController,
             autofocus: true,
             decoration: const InputDecoration
