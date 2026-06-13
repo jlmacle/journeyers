@@ -256,6 +256,7 @@ Future<void> main() async {
         
   });
 
+  // TODO: to move in the GPS integration tests
   group('Participants Tests: \n', () 
   {
     var name1 = "Bob";
