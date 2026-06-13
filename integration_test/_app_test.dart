@@ -1048,7 +1048,7 @@ Future<void> main() async {
               await tester.tap(titlesFinder);
               await tester.pumpAndSettle();
 
-              // Seaching the text field to edit the label
+              // Searching the text field to edit the label
               var newParticipantTextFieldFinder = find.byKey(const ValueKey('listEditField'));
               expect(newParticipantTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantTextFieldFinder); 
@@ -1100,7 +1100,7 @@ Future<void> main() async {
               // ───────────────────────────────────────────────────────────────
               await listLoadingDashboardFromGPSprocessPage(tester);
 
-              // ── EDITING THE LABEL   ────────────────────────
+              // ── EDITING THE PARTICIPANTS  ──────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
               var participantsContainersFinder = await getParticipantsContainers(tester);
@@ -1111,20 +1111,20 @@ Future<void> main() async {
               var aParticipant = 
                 find.descendant(of: participantsContainersFinder, matching: find.byType(Text));
 
-              // Tapping to edit the label
+              // Tapping to edit the participants
               await tester.tap(aParticipant.first);
               await tester.pumpAndSettle();
 
-              // Seaching the text field to edit the participants
-              var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
-              expect(newParticipantTextFieldFinder, findsOne);
-              await tester.ensureVisible(newParticipantTextFieldFinder); 
+              // Searching the text field to edit the participants
+              var newParticipantsTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
+              expect(newParticipantsTextFieldFinder, findsOne);
+              await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
-              await tester.tap(newParticipantTextFieldFinder);
+              await tester.tap(newParticipantsTextFieldFinder);
               await tester.pumpAndSettle();
  
               // Adding the edited participant data (comma-separated values)
-              await tester.enterText(newParticipantTextFieldFinder, "Bob,Benny,Alicia");
+              await tester.enterText(newParticipantsTextFieldFinder, "Bob,Benny,Alicia");
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();              
 
@@ -1181,7 +1181,7 @@ Future<void> main() async {
               // ───────────────────────────────────────────────────────────────
               await listLoadingDashboardFromGPSprocessPage(tester);
 
-              // ── EDITING THE LABEL   ────────────────────────
+              // ── EDITING THE PARTICIPANTS   ─────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
               var participantsContainersFinder = await getParticipantsContainers(tester);
@@ -1192,20 +1192,20 @@ Future<void> main() async {
               var aParticipant = 
                 find.descendant(of: participantsContainersFinder, matching: find.byType(Text));
 
-              // Tapping to edit the label
+              // Tapping to edit the participants
               await tester.tap(aParticipant.first);
               await tester.pumpAndSettle();
 
-              // Seaching the text field to edit the participants
-              var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
-              expect(newParticipantTextFieldFinder, findsOne);
-              await tester.ensureVisible(newParticipantTextFieldFinder); 
+              // Searching the text field to edit the participants
+              var newParticipantsTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
+              expect(newParticipantsTextFieldFinder, findsOne);
+              await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
-              await tester.tap(newParticipantTextFieldFinder);
+              await tester.tap(newParticipantsTextFieldFinder);
               await tester.pumpAndSettle();
  
               // Adding the empty edited participant data
-              await tester.enterText(newParticipantTextFieldFinder, "");
+              await tester.enterText(newParticipantsTextFieldFinder, "");
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle(); 
 
@@ -1219,6 +1219,67 @@ Future<void> main() async {
               expect(find.text(emptyParticipantsListError), findsOne);
             });
         
+          // 'The keywords can be edited \n'
+          testWidgets(
+            'The keywords can be edited \n',
+            (WidgetTester tester) async 
+            {
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
+
+              // Pumping the app
+              await pumpApp(tester);
+
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
+
+              // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel1:{"names":names1,"keywords":[kwCompanionship]}},            
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
+
+              // ── EDITING THE KEYWORDS   ─────────────────────
+              // ───────────────────────────────────────────────
+              // Searching for the keywords        
+              var keywordsDataFinder = await getParticipantsKeywords(tester);
+
+              // Tapping to edit the label
+              await tester.tap(keywordsDataFinder.first);
+              await tester.pumpAndSettle();
+
+              // Searching the text field to edit the keywords
+              var newKeywordsTextFieldFinder = find.byKey(const ValueKey('keywordsEditField'));
+              expect(newKeywordsTextFieldFinder, findsOne);
+              await tester.ensureVisible(newKeywordsTextFieldFinder); 
+              await tester.pumpAndSettle(); 
+              await tester.tap(newKeywordsTextFieldFinder);
+              await tester.pumpAndSettle();
+ 
+              // Adding the edited keywords data (comma-separated values)
+              await tester.enterText(newKeywordsTextFieldFinder, "${kwWorkplace},${kwCompanionship}");
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle();              
+
+              // Verifying data
+              var newKeywordsDataFinder = await getParticipantsKeywords(tester);
+              var editedAndSortedKeywordsData ="Keywords: $kwCompanionship, $kwWorkplace";
+              expect((tester.widget<Text>(newKeywordsDataFinder).data), editedAndSortedKeywordsData);
+            });
         
         });
     });
