@@ -25,4 +25,4 @@ const String participantsTextFieldLabel = 'Participants Edition (please separate
 
 // Error messages
 const String emptyParticipantsListError = 'Participants list cannot be empty.';
-
+const String emptyLabelEditError = 'Label cannot be empty.';
