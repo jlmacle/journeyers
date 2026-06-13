@@ -265,14 +265,14 @@ Future<void> main() async {
     List<String> names1 = [name1, name2];
     List<String> names2 = [name2, name4];
     List<String> names3 = [name1, name3];
-    var list1 = "List1";
-    var list2 = "List2";
-    var list3 = "List3";
-    var listLabelsSorted = [list1, list2, list3];
+    var listLabel1 = "List1";
+    var listLabel2 = "List2";
+    var listLabel3 = "List3";
+    var listLabelsSorted = [listLabel1, listLabel2, listLabel3];
     var keywords1 = [kwCompanionship];
     var keywords2 = [kwWorkplace];
-    var titlesCompanionship = [list1];
-    var titlesWorkplace = [list2, list3];
+    var titlesCompanionship = [listLabel1];
+    var titlesWorkplace = [listLabel2, listLabel3];
 
     group('New Participants List Tests: \n', () 
     {
@@ -306,11 +306,11 @@ Future<void> main() async {
             // Reaching the GPS process page from the home page
             await gpsProcessPageFromHomePage(tester);
 
-            // ── ADDING PARTICIPANTS   ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────
+            // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────────
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {list1:{"names":names1,"keywords":[]}},            
+              {listLabel1:{"names":names1,"keywords":[]}},            
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
         
@@ -360,7 +360,7 @@ Future<void> main() async {
             // Adding the same list name
             await tester.ensureVisible(listNameSavingTextFieldFinder);
             await tester.tap(listNameSavingTextFieldFinder);
-            await tester.enterText(listNameSavingTextFieldFinder, list1);
+            await tester.enterText(listNameSavingTextFieldFinder, listLabel1);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
@@ -393,8 +393,8 @@ Future<void> main() async {
             // Reaching the GPS process page from the home page
             await gpsProcessPageFromHomePage(tester);
 
-            // ── ADDING PARTICIPANTS ──────────────────────────────────────────────────────────────────────
-            // ─────────────────────────────────────────────────────────────────────────────────────────────
+            // ── ADDING PARTICIPANTS, KEYWORDS and ATTEMPTING TO SAVE THE LIST  ──────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
             await newListPageFromGPSprocessPage(tester);
             
@@ -475,11 +475,11 @@ Future<void> main() async {
             // Reaching the GPS process page from the home page
             await gpsProcessPageFromHomePage(tester);
 
-            // ── ADDING PARTICIPANTS   ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────
+            // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────────
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
-              {list1:{"names":names1,"keywords":[]}},            
+              {listLabel1:{"names":names1,"keywords":[]}},            
             ];
             await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
         
@@ -572,7 +572,7 @@ Future<void> main() async {
                 // Adding a list name
                 await tester.ensureVisible(listNameSavingTextFieldFinder);
                 await tester.tap(listNameSavingTextFieldFinder);
-                await tester.enterText(listNameSavingTextFieldFinder, list1);
+                await tester.enterText(listNameSavingTextFieldFinder, listLabel1);
                 await tester.testTextInput.receiveAction(TextInputAction.done);
                 await tester.pumpAndSettle();
 
@@ -614,8 +614,8 @@ Future<void> main() async {
               // ────────────────────────────────────────────────────────────────────────────
               List< Map<String,Map<String, dynamic>> > listDataMapsList =
               [
-                {list1:{"names":names1,"keywords":[]}},
-                {list2:{"names":names2,"keywords":[]}},
+                {listLabel1:{"names":names1,"keywords":[]}},
+                {listLabel2:{"names":names2,"keywords":[]}},
               ];
               await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
             });
@@ -639,12 +639,8 @@ Future<void> main() async {
           ({
             // Setting value for the first-run modal to be absent,
             'wasFirstRunModalAcknowledged': true,
-            // to have the context analysis page, with the dashboard,
-            'wasSessionDataSaved': true,
             // and to have the group problem-solving page, with the dashboard.
             'wasGPSSessionDataSaved': true,
-            // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
           });
 
           // Pumping the app
@@ -653,11 +649,11 @@ Future<void> main() async {
           // Reaching the GPS process page from the home page
           await gpsProcessPageFromHomePage(tester);
 
-          // ── ADDING PARTICIPANTS   ──────────────────────────────────
-          // ───────────────────────────────────────────────────────────
+          // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────────────────────
           List< Map<String,Map<String, dynamic>> > listDataMapsList =
           [
-            {list1:{"names":names1,"keywords":[]}},
+            {listLabel1:{"names":names1,"keywords":[]}},
           ];
           await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
         
@@ -722,284 +718,353 @@ Future<void> main() async {
 
       group('Participants Dashboard Tests: \n', () 
       {    
-      group('Deletion Tests: \n', ()
-      {
-        // 'Deletion: Single deletion with icon \n'
-        testWidgets(
-          'Deletion: Single deletion with icon \n',
-          (WidgetTester tester) async {
+        group('Deletion Tests: \n', ()
+        {
+          // 'Deletion: Single deletion with icon \n'
+          testWidgets(
+            'Deletion: Single deletion with icon \n',
+            (WidgetTester tester) async {
 
-            // Setting mock values for SharedPreferences
-            SharedPreferences.setMockInitialValues
-            ({
-              // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
-              // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
-            });
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
 
-            // Pumping the app
-            await pumpApp(tester);
+              // Pumping the app
+              await pumpApp(tester);
 
-            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────
-            // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
 
-            // ── ADDING A LIST OF PARTICIPANTS   ──────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────────
-            List< Map<String,Map<String, dynamic>> > listDataMapsList =
-            [
-              {list1:{"names":names1,"keywords":[]}},
-            ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              // ── ADDING A LIST OF PARTICIPANTS   ──────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel1:{"names":names1,"keywords":[]}},
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
-            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────
-            await listLoadingDashboardFromGPSprocessPage(tester);
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
 
-            // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────────────────            
-            // Searching for the tooltip 
-            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+              // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────────────            
+              // Searching for the tooltip 
+              var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
 
-            // Tapping the icon
-            await tester.tap(deleteIconFinder);
-            await tester.pumpAndSettle();
+              // Tapping the icon
+              await tester.tap(deleteIconFinder);
+              await tester.pumpAndSettle();
 
-            // Verifying the list item absent
-            var sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: list1);
-            expect(sessionListItemFinder, findsNothing);
-          }      
-        );         
-      
-        // 'Deletion: Bulk deletion \n'
-        testWidgets(
-          'Deletion: Bulk deletion \n',
-          (WidgetTester tester) async {
+              // Verifying the list item absent
+              var sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: listLabel1);
+              expect(sessionListItemFinder, findsNothing);
+            }      
+          );         
+        
+          // 'Deletion: Bulk deletion \n'
+          testWidgets(
+            'Deletion: Bulk deletion \n',
+            (WidgetTester tester) async {
 
-            // Setting mock values for SharedPreferences
-            SharedPreferences.setMockInitialValues
-            ({
-              // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
-              // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
-            });
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
 
-            // Pumping the app
-            await pumpApp(tester);
+              // Pumping the app
+              await pumpApp(tester);
 
-            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────
-            // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
 
-            // ── ADDING 3 LISTS OF PARTICIPANTS   ──────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────────
-            List< Map<String,Map<String, dynamic>> > listDataMapsList =
-            [
-              {list1:{"names":names1,"keywords":[]}},
-              {list2:{"names":names2,"keywords":[]}},
-              {list3:{"names":names3,"keywords":[]}},
-            ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              // ── ADDING 3 LISTS OF PARTICIPANTS   ──────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel1:{"names":names1,"keywords":[]}},
+                {listLabel2:{"names":names2,"keywords":[]}},
+                {listLabel3:{"names":names3,"keywords":[]}},
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
 
-            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────
-            await listLoadingDashboardFromGPSprocessPage(tester);
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
 
-            // ── SEARCHING FOR THE ITEMS with listName1 and listName2 TO CHECK ON THE DASHBOARD  ─
-            // ────────────────────────────────────────────────────────────────────────────────────
-            var checkbox1Finder = find.descendant
-            (
-              of: find.ancestor(of: find.text(list1), matching: find.byType(ListOfListsItem)), 
-              matching: find.byType(Checkbox)
-            );
-            await tester.ensureVisible(checkbox1Finder);
-            await tester.tap(checkbox1Finder);
-            await tester.pumpAndSettle();
-
-           var checkbox2Finder = find.descendant
-            (
-                of: find.ancestor(of: find.text(list2), matching: find.byType(ListOfListsItem)), 
+              // ── SEARCHING FOR THE ITEMS with listName1 and listName2 TO CHECK ON THE DASHBOARD  ─
+              // ────────────────────────────────────────────────────────────────────────────────────
+              var checkbox1Finder = find.descendant
+              (
+                of: find.ancestor(of: find.text(listLabel1), matching: find.byType(ListOfListsItem)), 
                 matching: find.byType(Checkbox)
-            );
-            await tester.ensureVisible(checkbox2Finder);
-            await tester.tap(checkbox2Finder);
-            await tester.pumpAndSettle();
+              );
+              await tester.ensureVisible(checkbox1Finder);
+              await tester.tap(checkbox1Finder);
+              await tester.pumpAndSettle();
 
-            // ── BULK DELETION ────────────────────────────────────────────────────────────
-            // ─────────────────────────────────────────────────────────────────────────────            
-            // Searching the widget
-            var bulkDeletionFinder = find.textContaining('Delete');
-            expect(bulkDeletionFinder, findsOne);
-            await tester.ensureVisible(bulkDeletionFinder);
-            await tester.tap(bulkDeletionFinder);
-            await tester.pumpAndSettle();
+            var checkbox2Finder = find.descendant
+              (
+                  of: find.ancestor(of: find.text(listLabel2), matching: find.byType(ListOfListsItem)), 
+                  matching: find.byType(Checkbox)
+              );
+              await tester.ensureVisible(checkbox2Finder);
+              await tester.tap(checkbox2Finder);
+              await tester.pumpAndSettle();
 
-            // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────────       
-            // Checking the number of list items left 
-            var sessionsListItemsFinder = find.byType(ListOfListsItem);
-            expect(sessionsListItemsFinder, findsOne);
-            // Verifying listName3 remains
-            var textFinder = find.text(list3);
-            Text textWidget = tester.widget(textFinder);
-            expect(textWidget.data, list3);            
-          }      
-        );
-      });    
-    
-      group('Sorting and Filtering Tests: \n', ()
-      {
-        // 'Sorting by list label \n'
-        testWidgets(
-          'Sorting by list label \n',
-          (WidgetTester tester) async 
-          {
-            // Setting mock values for SharedPreferences
-            SharedPreferences.setMockInitialValues
-            ({
-              // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
-              // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
-            });
+              // ── BULK DELETION ────────────────────────────────────────────────────────────
+              // ─────────────────────────────────────────────────────────────────────────────            
+              // Searching the widget
+              var bulkDeletionFinder = find.textContaining('Delete');
+              expect(bulkDeletionFinder, findsOne);
+              await tester.ensureVisible(bulkDeletionFinder);
+              await tester.tap(bulkDeletionFinder);
+              await tester.pumpAndSettle();
 
-            // Pumping the app
-            await pumpApp(tester);
+              // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
+              // ───────────────────────────────────────────────────────────────────────────────────────       
+              // Checking the number of list items left 
+              var sessionsListItemsFinder = find.byType(ListOfListsItem);
+              expect(sessionsListItemsFinder, findsOne);
+              // Verifying listName3 remains
+              var textFinder = find.text(listLabel3);
+              Text textWidget = tester.widget(textFinder);
+              expect(textWidget.data, listLabel3);            
+            }      
+          );
+        });    
+      
+        group('Sorting and Filtering Tests: \n', ()
+        {
+          // 'Sorting by list label \n'
+          testWidgets(
+            'Sorting by list label \n',
+            (WidgetTester tester) async 
+            {
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
 
-            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────
-            // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+              // Pumping the app
+              await pumpApp(tester);
 
-            // ── ADDING 3 LISTS OF PARTICIPANTS (non alphabetical order)  ──────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────────
-            List< Map<String,Map<String, dynamic>> > listDataMapsList =
-            [
-              {list3:{"names":names3,"keywords":[]}},
-              {list1:{"names":names1,"keywords":[]}},
-              {list2:{"names":names2,"keywords":[]}},                          
-            ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
 
-            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────
-            await listLoadingDashboardFromGPSprocessPage(tester);
+              // ── ADDING 3 LISTS OF PARTICIPANTS (non alphabetical order)  ──────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel3:{"names":names3,"keywords":[]}},
+                {listLabel1:{"names":names1,"keywords":[]}},
+                {listLabel2:{"names":names2,"keywords":[]}},                          
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
+              
+              // ── SORTING BY LABEL ──────────────────────────────────
+              // ────────────────────────────────────────────────────────
+              // Triggering the sort
+              var sortByTitleFinder = find.textContaining(sortByTitleLabel);
+              await tester.tap(sortByTitleFinder);
+              await tester.pumpAndSettle();
+              await tester.pump(const Duration(seconds: 2));
+
+              // Searching the list labels          
+              var titlesFinder = await getAllSessionsTitles(tester);
+              var totalTitles = titlesFinder.evaluate().length;
+              if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+
+              // Verifying the alphabetical order
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted[index]);
+              }
+
+              // Re-triggering the sort
+              await tester.tap(sortByTitleFinder);
+              await tester.pumpAndSettle();
+              await tester.pump(const Duration(seconds: 2));
+
+              // Re-searching the labels  
+              titlesFinder = await getAllSessionsTitles(tester); 
+
+              // Verifying the alphabetical order 
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted.reversed.toList()[index]);
+              }       
+            }
+          );        
+        
+          // 'Filtering by keywords \n'
+          testWidgets(
+            'Filtering by keywords \n',
+            (WidgetTester tester) async 
+            {
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
+
+              // Pumping the app
+              await pumpApp(tester);
+
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
+
+              // ── ADDING 3 LISTS OF PARTICIPANTS ──────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [            
+                {listLabel1:{"names":names1,"keywords":keywords1}},
+                {listLabel2:{"names":names2,"keywords":keywords2}},
+                {listLabel3:{"names":names3,"keywords":keywords2}},                          
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
             
-            // ── SORTING BY LABEL ──────────────────────────────────
-            // ────────────────────────────────────────────────────────
-            // Triggering the sort
-            var sortByTitleFinder = find.textContaining(sortByTitleLabel);
-            await tester.tap(sortByTitleFinder);
-            await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+              // ── FILTERING BY KEYWORDS ────────────────────────────
+              // ─────────────────────────────────────────────────────
+              // 1. Filtering by kwCompanionship
+              var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+              await tester.tap(kwCompanionshipFinder);
+              await tester.pumpAndSettle();
 
-            // Searching the list labels          
-            var titlesFinder = await getAllSessionsTitles(tester);
-            var totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+              // Verifying the titles present
+              var titlesFinder = await getAllSessionsTitles(tester);
+              var totalTitles = titlesFinder.evaluate().length;
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
 
-            // Verifying the alphabetical order
-            for (var index = 0; index < totalTitles; index++)
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
+              }
+              // Un-selecting the keyword
+              await tester.tap(kwCompanionshipFinder);
+              await tester.pumpAndSettle();
+
+              // 2. Filtering by kwWorkplace
+              var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+              await tester.tap(kwWorkplaceFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying the titles present
+              titlesFinder = await getAllSessionsTitles(tester);
+              totalTitles = titlesFinder.evaluate().length;
+              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+
+              for (var index = 0; index < totalTitles; index++)
+              {
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
+              }         
+
+              await tester.pump(const Duration(seconds: 2));
+
+            });      
+        
+        });
+    
+        group('Edition Tests: \n', ()
+        {
+          // 'The list label can be edited \n'
+          testWidgets(
+            'The list label can be edited \n',
+            (WidgetTester tester) async 
             {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted[index]);
-            }
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
 
-            // Re-triggering the sort
-            await tester.tap(sortByTitleFinder);
-            await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+              // Pumping the app
+              await pumpApp(tester);
 
-            // Re-searching the labels  
-            titlesFinder = await getAllSessionsTitles(tester); 
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
 
-            // Verifying the alphabetical order 
-            for (var index = 0; index < totalTitles; index++)
-            {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), listLabelsSorted.reversed.toList()[index]);
-            }       
-          }
-        );        
-      
-        // 'Filtering by keywords \n'
-        testWidgets(
-          'Filtering by keywords \n',
-          (WidgetTester tester) async 
-          {
-            // Setting mock values for SharedPreferences
-            SharedPreferences.setMockInitialValues
-            ({
-              // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
-              // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel1:{"names":names1,"keywords":[]}},            
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
+
+              // ── EDITING THE LABEL   ────────────────────────
+              // ───────────────────────────────────────────────
+              // Searching for the label        
+              var titlesFinder = await getAllSessionsTitles(tester);
+              var totalTitles = titlesFinder.evaluate().length;
+              if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+
+              // Verifying the label present
+              expect((tester.widget<Text>(titlesFinder.first).data), listLabel1);
+
+              // Tapping to edit the label
+              await tester.tap(titlesFinder);
+              await tester.pumpAndSettle();
+
+              // Seaching the text field to edit the label
+              var newParticipantTextFieldFinder = find.byKey(const ValueKey('listEditField'));
+              expect(newParticipantTextFieldFinder, findsOne);
+              await tester.ensureVisible(newParticipantTextFieldFinder); 
+              await tester.pumpAndSettle(); 
+              await tester.tap(newParticipantTextFieldFinder);
+              await tester.pumpAndSettle();
+ 
+              // Adding the edited label
+              await tester.enterText(newParticipantTextFieldFinder, "${listLabel1}-edited");
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle();              
+
+              // Verifying the edited label present
+              expect(find.text("${listLabel1}-edited"), findsOne);                   
+
             });
-
-            // Pumping the app
-            await pumpApp(tester);
-
-            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────────
-            // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
-
-            // ── ADDING 3 LISTS OF PARTICIPANTS ──────────────────────────────────
-            // ────────────────────────────────────────────────────────────────────
-            List< Map<String,Map<String, dynamic>> > listDataMapsList =
-            [            
-              {list1:{"names":names1,"keywords":keywords1}},
-              {list2:{"names":names2,"keywords":keywords2}},
-              {list3:{"names":names3,"keywords":keywords2}},                          
-            ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
-
-            // ── REACHING THE LISTS PAGE   ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────
-            await listLoadingDashboardFromGPSprocessPage(tester);
-          
-            // ── FILTERING BY KEYWORDS ────────────────────────────
-            // ─────────────────────────────────────────────────────
-            // 1. Filtering by kwCompanionship
-            var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
-            await tester.tap(kwCompanionshipFinder);
-            await tester.pumpAndSettle();
-
-            // Verifying the titles present
-            var titlesFinder = await getAllSessionsTitles(tester);
-            var totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
-
-            for (var index = 0; index < totalTitles; index++)
-            {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
-            }
-            // Un-selecting the keyword
-            await tester.tap(kwCompanionshipFinder);
-            await tester.pumpAndSettle();
-
-            // 2. Filtering by kwWorkplace
-            var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
-            await tester.tap(kwWorkplaceFinder);
-            await tester.pumpAndSettle();
-
-            // Verifying the titles present
-            titlesFinder = await getAllSessionsTitles(tester);
-            totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
-
-            for (var index = 0; index < totalTitles; index++)
-            {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
-            }         
-
-            await tester.pump(const Duration(seconds: 2));
-
-          });      
-      
-      });
+        });
     });
   });
 
