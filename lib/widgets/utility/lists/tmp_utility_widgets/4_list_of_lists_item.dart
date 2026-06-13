@@ -418,8 +418,7 @@ void _showParticipantsEditSheet({
       String? errorText; 
       // StatefulBuilder gives a local setState scoped to this sheet
       return StatefulBuilder(
-        builder: (context, setState) {
-          
+        builder: (context, setState) {          
 
           Future<void> onConfirm() async {
             final participants = participantsTec.text.trim();

@@ -444,71 +444,77 @@ class TextListsDisplayState extends State<TextListsDisplay>
   void _showTitleEditSheet(String title, String listKey, int listIndex) 
   {
     _titleController.text = title; // Syncing current title to the field
+
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangle shape
       isScrollControlled: true, // Allows sheet to push up with keyboard
-      builder: (context) => Padding
-      (
-        padding: EdgeInsets.only
-        (
-          bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
-          left: 20, right: 20, top: 20,
-        ),
-        child: Column
-        (
-          mainAxisSize: MainAxisSize.min,
-          children: 
-          [
-            TextField
+
+      builder: (context) 
+      {
+        String? errorText; 
+        // StatefulBuilder gives a local setState scoped to this sheet
+        return StatefulBuilder(
+          builder: (context, setState) {          
+
+            Future<void> onConfirm() async {              
+              final label = _titleController.text.trim();
+
+              if (label.isEmpty) {
+                setState(() {
+                  errorText = emptyLabelEditError;
+                });
+                return;
+              }
+
+              setState(() {
+                // Clearing error on valid input
+                errorText = null; 
+              });            
+            }
+
+          return Padding
+          (
+            padding: EdgeInsets.only
             (
-              key: const ValueKey('listEditField'),
-              controller: _titleController,
-              autofocus: true,
-              decoration: const InputDecoration
-              (
-                labelText: 'Edit Title', 
-                labelStyle: TextStyle(color: Colors.black)
-              ),
-              // Duplicated code to clean
-              onSubmitted: (_) async 
-              {
-                // New title from the controller
-                final String newTitle = _titleController.text;
-
-                // Performing async work outside of setState
-                // Updating session data
-                await updateListLabel(listKey, newTitle, _allListsData[listIndex]); 
-
-                // Closing the modal sheet
-                if (mounted) Navigator.pop(context);
-              },
+              bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
+              left: 20, right: 20, top: 20,
             ),
-            const SizedBox(height: 10),
-            ElevatedButton
+            child: Column
             (
-              onPressed: () async 
-              {
-                // New title from the controller
-                final String newTitle = _titleController.text;
-
-                // Performing async work outside of setState
-                // Updating session data
-                await updateListLabel(listKey, newTitle, _allListsData[listIndex]); 
-                
-                // Closing the modal sheet
-                if (mounted) Navigator.pop(context);
-              },
-              child: const Text
-              (
-                "Save",
-                style: TextStyle(color: Colors.black),
-              ),
+              mainAxisSize: MainAxisSize.min,
+              children: 
+              [
+                TextField
+                (
+                  key: const ValueKey('listEditField'),
+                  controller: _titleController,
+                  autofocus: true,
+                  decoration: InputDecoration
+                  (
+                    labelText: 'Edit Title', 
+                    labelStyle: const TextStyle(color: Colors.black),
+                    errorText: errorText,
+                  ),
+                  // Duplicated code to clean
+                  onSubmitted: (_) async => await onConfirm(),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton
+                (
+                  onPressed: () async => await onConfirm(),
+                  child: const Text
+                  (
+                    "Save",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
-    );
-  }
-}
+          );
+        }
+        );
+      },
+  );
+}}
