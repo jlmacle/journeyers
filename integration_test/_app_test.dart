@@ -1147,6 +1147,78 @@ Future<void> main() async {
 
             });
         
+          // 'The participants can be edited (empty participants list) \n'
+          testWidgets(
+            'The participants can be edited (empty participants list) \n',
+            (WidgetTester tester) async 
+            {
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
+
+              // Pumping the app
+              await pumpApp(tester);
+
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              // Reaching the GPS process page from the home page
+              await gpsProcessPageFromHomePage(tester);
+
+              // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────────────────
+              List< Map<String,Map<String, dynamic>> > listDataMapsList =
+              [
+                {listLabel1:{"names":names1,"keywords":[]}},            
+              ];
+              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+
+              // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
+              // ───────────────────────────────────────────────────────────────
+              await listLoadingDashboardFromGPSprocessPage(tester);
+
+              // ── EDITING THE LABEL   ────────────────────────
+              // ───────────────────────────────────────────────
+              // Searching for the participants containers        
+              var participantsContainersFinder = await getParticipantsContainers(tester);
+              var totalNames = participantsContainersFinder.evaluate().length;
+              if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
+
+              // Searching for text within the container
+              var aParticipant = 
+                find.descendant(of: participantsContainersFinder, matching: find.byType(Text));
+
+              // Tapping to edit the label
+              await tester.tap(aParticipant.first);
+              await tester.pumpAndSettle();
+
+              // Seaching the text field to edit the participants
+              var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
+              expect(newParticipantTextFieldFinder, findsOne);
+              await tester.ensureVisible(newParticipantTextFieldFinder); 
+              await tester.pumpAndSettle(); 
+              await tester.tap(newParticipantTextFieldFinder);
+              await tester.pumpAndSettle();
+ 
+              // Adding the empty edited participant data
+              await tester.enterText(newParticipantTextFieldFinder, "");
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle(); 
+
+              // Clicking on the 'Save' button
+              await tester.pump(const Duration(seconds: 5));  
+              var saveButtonFinder = find.text(saveButtonLabel); 
+              await tester.tap(saveButtonFinder);
+              await tester.pumpAndSettle();
+
+              // Verifying error message present
+              expect(find.text(emptyParticipantsListError), findsOne);
+            });
+        
         
         });
     });
