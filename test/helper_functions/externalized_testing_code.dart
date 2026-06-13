@@ -725,6 +725,23 @@ Future<void> addParticipantsListsFromGPSprocessPage
   }
 }
 
+// Method used to get the finder of the participants containers
+Future<Finder> getParticipantsContainers(WidgetTester tester) async
+{
+  var participantsContainersFinder = find.byWidgetPredicate
+  (
+    (widget) 
+    {
+      if (widget.key is ValueKey<String>) {
+        return (widget.key as ValueKey<String>).value.contains('session-participants-container-');
+      }
+      return false;
+    }
+  );  
+
+  return participantsContainersFinder;
+} 
+
 // Method used to test the color of an identifier
 Future<void> testIdentifierColor(WidgetTester tester, Color color) async
 {
