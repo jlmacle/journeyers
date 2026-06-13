@@ -212,57 +212,58 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                       ),
                       const SizedBox(height: 4),
                       // For the edition of the participants
-                      GestureDetector(
+                      GestureDetector
+                      (
                         onTap:  
                           () => _showParticipantsEditSheet
-                        (
-                          context: context,
-                          dashboardContext: widget.dashboardContext,                          
-                          currentParticipants: _currentParticipants,
-                          listKey: widget.listData[itemKey],
-                          participantsTec: participantsEditTec,
-                          onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
-                          onParticipantsUpdated: onParticipantsUpdated,
-                          listData: widget.listData
-                          ),
-                            child: Wrap
-                            (
-                              spacing: 8.0,
-                              children: 
-                              (
-                                getParticipants(widget.listData)
-                                ..sort
                                 (
-                                  (a, b) 
-                                  {
-                                    // Different letters
-                                    int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
-                                    // Same letter
-                                    if (comparison == 0) {return b.compareTo(a);}                                                
-                                    return comparison;
-                                  }
-                                )
-                              ).map
-                              (
-                                (kw) 
-                                {
-                                  return                  
-                                  Container(
-                                    decoration: BoxDecoration
-                                    (
-                                      color: Colors.transparent,  
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: black), 
-                                    ),
-                                    padding: const EdgeInsets.all(8),
-                                    child: Text
-                                    (
-                                      kw,                                      
-                                    ),
-                                  );
-                                }
-                              ).toList(),
-                            ),
+                                  context: context,
+                                  dashboardContext: widget.dashboardContext,                          
+                                  currentParticipants: _currentParticipants,
+                                  listKey: widget.listData[itemKey],
+                                  participantsTec: participantsEditTec,
+                                  onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
+                                  onParticipantsUpdated: onParticipantsUpdated,
+                                  listData: widget.listData
+                                ),
+                        child: Wrap
+                        (
+                          spacing: 8.0,
+                          children: 
+                          (
+                            getParticipants(widget.listData)
+                            ..sort
+                            (
+                              (a, b) 
+                              {
+                                // Different letters
+                                int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                                // Same letter
+                                if (comparison == 0) {return b.compareTo(a);}                                                
+                                return comparison;
+                              }
+                            )
+                          ).map
+                          (
+                            (participant) 
+                            {
+                              return                  
+                              Container(
+                                decoration: BoxDecoration
+                                (
+                                  color: Colors.transparent,  
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: black), 
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                child: Text
+                                (
+                                  participant,                                      
+                                ),
+                              );
+                            }
+                          ).toList(),
+                        ),
                       ),
                       const SizedBox(height: 4),
                       // For the edition of the keywords
