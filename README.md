@@ -19,6 +19,8 @@ Please note that the code needs cleaning.<br>
 Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods</a>" level is planned, <br>
 as part of the app development growth process.<br>
 <br>
+Adapting the software to a different set of questions is feasible, and is planned to be made easier.<br>
+<br>
 <a href="https://github.com/jlmacle/journeyers/wiki">More notes on the wiki</a><br>
 <br>
 #OER<br>
