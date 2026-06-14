@@ -41,7 +41,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
               children: [
                 // ── title ──────────────────────────────────────────────────
                 Text(
-                  'Participants lists',
+                  participantsListsTitle,
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  optionsIntroductionLabel,
+                  participantsListsSubTitle,
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.bodyMedium?.copyWith(
                     color: appTheme.colorScheme.onSurface.withOpacity(0.8),
