@@ -808,9 +808,9 @@ Future<void> main() async {
       
         group('New Participants List Saving: \n', () 
         {
-          // "Participants can be added, keywords added, the data saved in a list, 
+          // "1. Participants can be added, keywords added, the data saved in a list, 
           // and the participants' names are loaded in the GPS process page"
-          testWidgets("Participants can be added, keywords added, the data saved in a list, "
+          testWidgets("1. Participants can be added, keywords added, the data saved in a list, "
                       "and the participants' names are loaded in the GPS process page", 
             (WidgetTester tester) async 
             {
@@ -819,12 +819,8 @@ Future<void> main() async {
                 ({
                   // Setting value for the first-run modal to be absent,
                   'wasFirstRunModalAcknowledged': true,
-                  // to have the context analysis page, with the dashboard,
-                  'wasSessionDataSaved': true,
                   // and to have the group problem-solving page, with the dashboard.
                   'wasGPSSessionDataSaved': true,
-                  // Temporary test dir as application folder path
-                  'applicationFolderPath': testTmpDir!.path
                 });
 
                 // Pumping the app
@@ -867,6 +863,69 @@ Future<void> main() async {
                 // Verifying the names present
                 expect(find.text(name1), findsOne);    
                 expect(find.text(name2), findsOne);  
+              });
+        
+          // A case that failed at manual testing
+          // "2. Participants can be added, keywords added, the data saved in a list, 
+          // and the participants' names are loaded in the GPS process page"
+          testWidgets("2. Participants can be added, keywords added, the data saved in a list, "
+                      "and the participants' names are loaded in the GPS process page", 
+            (WidgetTester tester) async 
+            {
+                // Setting mock values for SharedPreferences
+                SharedPreferences.setMockInitialValues
+                ({
+                  // Setting value for the first-run modal to be absent,
+                  'wasFirstRunModalAcknowledged': true,
+                  // and to have the group problem-solving page, with the dashboard.
+                  'wasGPSSessionDataSaved': true,
+                });
+
+                // Pumping the app
+                await pumpApp(tester);
+
+                // Reaching the GPS process page from the home page
+                await gpsProcessPageFromHomePage(tester);
+
+                // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
+                // ────────────────────────────────────────────────────────────────────────────
+                // Adding the names
+                var names = ["Bob", "Alice", "Benny", "Lily"];
+                await addParticipantsFromGPSprocessPage(tester, names, [kwCompanionship]);   
+
+                // Verifying the names present
+                for (var name in names)
+                {
+                  expect(find.text(name), findsOne);  
+                }                  
+
+                // Searching the 'Save' icon
+                var saveListIconFinder = find.byIcon(Icons.save_outlined);
+                expect(saveListIconFinder, findsOne);
+
+                // Tapping on it
+                await tester.tap(saveListIconFinder);
+                await tester.pumpAndSettle();
+
+                // Searching the text field to add the list name
+                var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+                expect(listNameSavingTextFieldFinder, findsOne);
+
+                // Adding a list name
+                await tester.ensureVisible(listNameSavingTextFieldFinder);
+                await tester.tap(listNameSavingTextFieldFinder);
+                await tester.enterText(listNameSavingTextFieldFinder, "Our household");
+                await tester.testTextInput.receiveAction(TextInputAction.done);
+                await tester.pumpAndSettle();
+
+                // Verifying the GPS process page present
+                expect(find.text(checkListTitle), findsOne);
+
+                // Verifying the names present
+                for (var name in names)
+                {
+                  expect(find.text(name), findsOne);  
+                }   
               });
         
           // Had a multi-list issue at manual testing time
