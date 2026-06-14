@@ -716,6 +716,94 @@ Future<void> main() async {
             expect(saveListIconFinder, findsNothing);        
           });            
         
+          // 'Names are displayed in the order added (names in alphabetical order)'
+          testWidgets('Names are displayed in the order added (names in alphabetical order)', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────────
+            var names = ['a', 'b', 'c'];
+            List< Map<String,Map<String, dynamic>> > listDataMapsList =
+            [
+              {listLabel1:{"names":names,"keywords":[]}},            
+            ];
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+        
+            // ── VERIFYING THE ORDER  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────
+            var listItemsFinder = await getNewListTextItems(tester);
+
+            var totalItems = listItemsFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalItems: $totalItems');
+
+            for (var itemIndex = 0; itemIndex < totalItems; itemIndex++)
+            {
+              expect(tester.widget<Text>(listItemsFinder.at(itemIndex)), names[itemIndex]);
+            }
+                 
+          });            
+        
+          // 'Names are displayed in the order added (names not in alphabetical order)'
+          testWidgets('Names are displayed in the order added (names not in alphabetical order)', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────────
+            var names = ['c', 'b', 'a'];
+            List< Map<String,Map<String, dynamic>> > listDataMapsList =
+            [
+              {listLabel1:{"names":names,"keywords":[]}},            
+            ];
+            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+        
+            // ── VERIFYING THE ORDER  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────
+            var listItemsFinder = await getNewListTextItems(tester);
+
+            var totalItems = listItemsFinder.evaluate().length;
+            if (testingDebug) pu.printd('Testing Debug: totalItems: $totalItems');
+
+            for (var itemIndex = 0; itemIndex < totalItems; itemIndex++)
+            {
+              expect(tester.widget<Text>(listItemsFinder.at(itemIndex)), names[itemIndex]);
+            }
+                 
+          });            
+         
         }); 
       
         group('New Participants List Saving: \n', () 
@@ -1550,7 +1638,7 @@ Future<void> main() async {
               // ── EDITING THE PARTICIPANTS  ──────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await getParticipantsContainers(tester);
+              var participantsContainersFinder = await getParticipantsContainersOnDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
 
@@ -1576,7 +1664,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();              
 
               // Verifying data in the participants container
-              participantsContainersFinder = await getParticipantsContainers(tester);
+              participantsContainersFinder = await getParticipantsContainersOnDashboard(tester);
               var participantsFinder = find.descendant
                                       (
                                         of: participantsContainersFinder, 
@@ -1631,7 +1719,7 @@ Future<void> main() async {
               // ── EDITING THE PARTICIPANTS   ─────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await getParticipantsContainers(tester);
+              var participantsContainersFinder = await getParticipantsContainersOnDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
 
@@ -1703,7 +1791,7 @@ Future<void> main() async {
               // ── EDITING THE KEYWORDS   ─────────────────────
               // ───────────────────────────────────────────────
               // Searching for the keywords        
-              var keywordsDataFinder = await getParticipantsKeywords(tester);
+              var keywordsDataFinder = await getParticipantsKeywordsOnDashboard(tester);
 
               // Tapping to edit the label
               await tester.tap(keywordsDataFinder.first);
@@ -1723,7 +1811,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();              
 
               // Verifying data
-              var newKeywordsDataFinder = await getParticipantsKeywords(tester);
+              var newKeywordsDataFinder = await getParticipantsKeywordsOnDashboard(tester);
               var editedAndSortedKeywordsData ="Keywords: $kwCompanionship, $kwWorkplace";
               expect((tester.widget<Text>(newKeywordsDataFinder).data), editedAndSortedKeywordsData);
             });

@@ -741,8 +741,24 @@ Future<void> addParticipantsListsFromGPSprocessPage
   }
 }
 
+// Method used to get the finder of a new list text items
+Future<Finder> getNewListTextItems(WidgetTester tester) async
+{
+  var listItemsFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains('text-item-');
+                }
+                return false;
+              }
+            );  
+  return listItemsFinder;
+}
+
 // Method used to get the finder of the participants containers
-Future<Finder> getParticipantsContainers(WidgetTester tester) async
+Future<Finder> getParticipantsContainersOnDashboard(WidgetTester tester) async
 {
   var participantsContainersFinder = find.byWidgetPredicate
   (
@@ -759,7 +775,7 @@ Future<Finder> getParticipantsContainers(WidgetTester tester) async
 } 
 
 // Method used to get the finder of the keywords
-Future<Finder> getParticipantsKeywords(WidgetTester tester) async
+Future<Finder> getParticipantsKeywordsOnDashboard(WidgetTester tester) async
 {
   var participantsContainersFinder = find.byWidgetPredicate
   (
