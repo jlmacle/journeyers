@@ -440,7 +440,7 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── ADDING MORE PARTICIPANTS TO SAVE UNDER THE SAME LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -609,7 +609,7 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -676,7 +676,7 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -744,7 +744,7 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── VERIFYING THE ORDER  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────
@@ -788,7 +788,7 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── VERIFYING THE ORDER  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────
@@ -961,7 +961,7 @@ Future<void> main() async {
                 {listLabel1:{"names":names1,"keywords":[]}},
                 {listLabel2:{"names":names2,"keywords":[]}},
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
             });
 
         });         
@@ -1124,7 +1124,7 @@ Future<void> main() async {
           [
             {listLabel1:{"names":names1,"keywords":[]}},
           ];
-          await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+          await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
         
           // ── LOADING PARTICIPANTS   ─────────────────────────────────
           // ───────────────────────────────────────────────────────────
@@ -1276,7 +1276,7 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1327,7 +1327,7 @@ Future<void> main() async {
                 {listLabel2:{"names":names2,"keywords":[]}},
                 {listLabel3:{"names":names3,"keywords":[]}},
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1407,7 +1407,7 @@ Future<void> main() async {
                 {listLabel1:{"names":names1,"keywords":[]}},
                 {listLabel2:{"names":names2,"keywords":[]}},                          
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1478,7 +1478,7 @@ Future<void> main() async {
                 {listLabel2:{"names":names2,"keywords":keywords2}},
                 {listLabel3:{"names":names3,"keywords":keywords2}},                          
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1555,7 +1555,7 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1621,7 +1621,7 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1688,7 +1688,7 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1769,7 +1769,7 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
@@ -1841,7 +1841,7 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[kwCompanionship]}},            
               ];
-              await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);      
+              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
