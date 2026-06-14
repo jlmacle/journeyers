@@ -540,7 +540,23 @@ Future<void> gpsProcessPageFromHomePage(WidgetTester tester) async
   expect(placeholderTitleFinder, findsOne);
 }
 
-// Method used to go from GPS process page to new list page
+// Method used to go from the GPS process page to the participants lists options page
+Future<void> participantsListsOptionsPageFromGPSprocessPage(WidgetTester tester) async
+{
+  // Searching the add emoji    
+  var addEmojiFinder = find.text(addEmoji);
+
+  // Verifying the add emoji present
+  expect(addEmojiFinder, findsOne);
+
+  // Tapping to reach the page with the loading/new group options
+  await tester.tap(addEmojiFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
+}
+
+// Method used to go from the GPS process page to new list page
 Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
 {
   // Searching the add emoji    
