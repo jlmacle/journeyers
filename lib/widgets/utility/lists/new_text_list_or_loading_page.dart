@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/list_dashboard.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list.dart';
-import 'package:journeyers/widgets/utility/lists/text_lists_display.dart';
 
 
 /// ParticipantsGroupDeclaration offers two choices:
