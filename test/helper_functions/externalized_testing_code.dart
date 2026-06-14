@@ -557,7 +557,7 @@ Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
   await tester.pump(const Duration(seconds: 5));
 
   // Verifying the options page present
-  var optionsPageFinder = find.text(optionsIntroductionLabel);
+  var optionsPageFinder = find.text(participantsListsSubTitle);
   expect(optionsPageFinder, findsOne);
 
   // Searching the new group button
@@ -587,7 +587,7 @@ Future<void> listLoadingDashboardFromGPSprocessPage(WidgetTester tester) async
   await tester.pump(const Duration(seconds: 5));
 
   // Verifying the options page present
-  var optionsPageFinder = find.text(optionsIntroductionLabel);
+  var optionsPageFinder = find.text(participantsListsSubTitle);
   expect(optionsPageFinder, findsOne);
 
   // Searching the list loading option button
