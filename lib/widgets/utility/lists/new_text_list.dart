@@ -157,8 +157,8 @@ class _NewTextListState extends State<NewTextList> {
               }
               // Loading the list
               widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);
-              print("widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);");
-              print("_enteredTextItemsList: $_enteredTextItemsList");
+              // print("widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);");
+              // print("_enteredTextItemsList: $_enteredTextItemsList");
 
               // To close the dialog
               Navigator.of(ctx).pop(label);
@@ -418,8 +418,8 @@ class _NewTextListState extends State<NewTextList> {
                           itemText: _enteredTextItemsList[index], 
                           onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
                                                               { 
-                                                                print("value: $boolParam");   
-                                                                print("index: $intParam");                                                               
+                                                                // print("value: $boolParam");   
+                                                                // print("index: $intParam");                                                               
                                                                 if(boolParam!) 
                                                                 {                                                                    
                                                                   // adding the index to _textsSelectedForDeletionIndexes

@@ -136,7 +136,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used to get the list of keywords present in a session data
   Future<List<String>> _getUsedKeywords(List<dynamic> listOfListData) async 
   {
-    print("listOfListData: $listOfListData");
+    // print("listOfListData: $listOfListData");
 
     Set<String> kwSet = {};
     for (var listData in listOfListData) 
@@ -401,7 +401,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final listData = _filteredListsData[index];
-                        print("SliverList: listData: $listData");
     
                         return ListOfListsItem(
                           listData: listData,

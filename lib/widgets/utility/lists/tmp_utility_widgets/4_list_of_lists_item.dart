@@ -123,10 +123,10 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     List<Map<String, dynamic>> subItemsDataList =
     ((widget.listData[subItemsDataListKey]) as List)
         .cast<Map<String, dynamic>>();
-    print("initState: subItemsDataList: $subItemsDataList");
+    // print("initState: subItemsDataList: $subItemsDataList");
     Map<String, String> namesKeysMap = _textListsDB.getNamesKeys(subItemsDataList);
     _currentParticipants =  namesKeysMap.keys.toList();
-    print("initState: _currentParticipants: $_currentParticipants");
+    // print("initState: _currentParticipants: $_currentParticipants");
     super.initState();
   }
  
@@ -140,13 +140,13 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   // Method used to get the participants' list
   List<String> getParticipants(Map<String, dynamic> listData)
   {
-    print("getParticipants: listData: $listData");
+    // print("getParticipants: listData: $listData");
 
     List<String> participants = [];
 
     // Retrieving the text for each sub-item
     var subItemsDataList = listData[subItemsDataListKey];
-    print("subItemsDataList: $subItemsDataList");
+    // print("subItemsDataList: $subItemsDataList");
     for (var subItemDataIndex = 0; subItemDataIndex < subItemsDataList.length; subItemDataIndex++)
     {
       Map<String, dynamic> subItemsData = subItemsDataList[subItemDataIndex]
