@@ -41,7 +41,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
               children: [
                 // ── title ──────────────────────────────────────────────────
                 Text(
-                  'Participants list',
+                  'Participants lists',
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
