@@ -746,8 +746,76 @@ Future<void> main() async {
               await addParticipantsListsFromGPSprocessPage(tester: tester, listDataMapsList: listDataMapsList);
             });
 
-        });     
-      
+        });         
+      });
+
+      group('New Participants List Editing: \n', () 
+      {
+        // 'Participants names can be edited'
+        testWidgets('Participants names can be edited', 
+        (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING A PARTICIPANT ──────────────────────────────────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────────────────────
+            // Loading the new list page from the GPS process page
+            await newListPageFromGPSprocessPage(tester);
+
+            // Searching for the new participant text field
+            // Searching by placeholder text is not robust enough
+            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            await tester.ensureVisible(newParticipantTextFieldFinder); 
+            await tester.pumpAndSettle(); 
+            await tester.tap(newParticipantTextFieldFinder);
+            await tester.pumpAndSettle();
+            
+            // Adding the name
+            await tester.enterText(newParticipantTextFieldFinder, name1);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // Tapping the name for edition
+            var name = find.text(name1);
+            await tester.tap(name);
+            await tester.pumpAndSettle();
+
+            // Editing the name
+            const tfKeyLabel = 'new-participant-tf-0';
+            var editionTfFinder = find.byKey(const ValueKey(tfKeyLabel));
+            await tester.ensureVisible(editionTfFinder); 
+            await tester.pumpAndSettle(); 
+            await tester.tap(editionTfFinder);
+            await tester.pumpAndSettle();
+
+            var editedName = '$name1-edited';
+            await tester.enterText(editionTfFinder, editedName);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // Verifying the text field absent
+            expect(find.byKey(const ValueKey(tfKeyLabel)), findsNothing);
+            
+            // Verifying the edited name present
+            expect(find.text(editedName), findsOne);
+
+          });
+        
       });
 
     });  
