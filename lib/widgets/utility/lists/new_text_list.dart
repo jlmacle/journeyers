@@ -393,7 +393,6 @@ class _NewTextListState extends State<NewTextList> {
                         // Text field (edition mode)
                         TextField
                         (
-                          key: ValueKey('new-participant-tf-$index'),
                           controller: _tecTextEdition,
                           autofocus: true,
                           decoration: const InputDecoration
