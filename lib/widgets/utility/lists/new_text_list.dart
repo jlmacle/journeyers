@@ -114,7 +114,9 @@ class _NewTextListState extends State<NewTextList> {
   // Method used to verify if the newly entered texts have been already saved in a list
   bool listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
   {
-    bool val = _listOfPreviousGroupedTexts!.any((list) => listEquals(list, _enteredTextItemsList));
+    var listOfPreviousGroupedTextsCopy = List.from(listOfPreviousGroupedTexts);
+    var newListDataCopy = List.from(newListData);
+    bool val = listOfPreviousGroupedTextsCopy.any((list) => listEquals(list..sort(), newListDataCopy..sort()));
     return val;
   }
 
@@ -124,7 +126,7 @@ class _NewTextListState extends State<NewTextList> {
       // at least one text has been added
       && _enteredTextItemsList.isNotEmpty 
       // added texts are not matching a saved list content
-      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList..sort())  
+      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
       // the new list hasn't been saved yet
       && !_isSaved ;
 
