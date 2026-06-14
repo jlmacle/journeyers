@@ -313,7 +313,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                                 _identifiersCol2.clear();
                                 _identifiersColors2.clear();
 
-                                print("onParticipantsLoadedCallbackFunction : participants :$participants");
+                                // print("onParticipantsLoadedCallbackFunction : participants :$participants");
                                 setState(() {
                                   for (var index = 0; index < participants.length; index++)
                                   {
@@ -329,8 +329,8 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                                       _identifiersColors2.add(greenShade900);
                                     }
                                   }
-                                  print("onParticipantsLoadedCallbackFunction : _identifiersCol1 :$_identifiersCol1");
-                                  print("onParticipantsLoadedCallbackFunction : _identifiersCol2 :$_identifiersCol2");
+                                  // print("onParticipantsLoadedCallbackFunction : _identifiersCol1 :$_identifiersCol1");
+                                  // print("onParticipantsLoadedCallbackFunction : _identifiersCol2 :$_identifiersCol2");
                                 });
                                 
                               } ,

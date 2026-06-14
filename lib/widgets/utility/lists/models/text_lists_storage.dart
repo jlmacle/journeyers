@@ -101,7 +101,7 @@ class TextListsDB {
             zEndSequenceCount++;
             nextAlphabetPart = 'a' + nextAlphabetPart;
            
-            print("nextAlphabetPart: $nextAlphabetPart");
+            // print("nextAlphabetPart: $nextAlphabetPart");
             // remains one extra 'a' to add if alphabetPart made only of 'z's
           }
 
@@ -120,9 +120,9 @@ class TextListsDB {
            
             nextAlphabetPart = _nextAlphabetPart(alphabetPartWithoutZSequence) + nextAlphabetPart;
 
-            print("alphabetPart: $alphabetPart");
-            print("zCount: $zEndSequenceCount");
-            print("alphabetPartWithoutZSequence: $alphabetPartWithoutZSequence");
+            // print("alphabetPart: $alphabetPart");
+            // print("zCount: $zEndSequenceCount");
+            // print("alphabetPartWithoutZSequence: $alphabetPartWithoutZSequence");
 
             return nextAlphabetPart;
           }
@@ -226,7 +226,7 @@ class TextListsDB {
   Map<String, dynamic> loadListDataByListLabelSync({required String label, required List<dynamic> dataStructure})
   {
 
-    print("dataStructure: $dataStructure");
+    // print("dataStructure: $dataStructure");
 
     Map<String, dynamic> listData = {};
 
@@ -263,7 +263,7 @@ class TextListsDB {
 
     // Loading the data
     var data = await loadDataStructure();
-    print("data: $data");
+    // print("data: $data");
 
     List<List<String>> listOfGroupedTexts =[];
 
@@ -291,7 +291,7 @@ class TextListsDB {
       // Adding to the list
       listOfGroupedTexts.add(textsList);
     }
-    print("listOfGroupedTexts(): listOfGroupedTexts: $listOfGroupedTexts");
+    // print("listOfGroupedTexts(): listOfGroupedTexts: $listOfGroupedTexts");
     return listOfGroupedTexts;
   }
 
@@ -432,12 +432,12 @@ class TextListsDB {
       else
       {
         // Removing the key from longestKeysSet
-        print("Removing: ${keys[keyIndex]}: longestKeyLength: $longestKeyLength");
+        // print("Removing: ${keys[keyIndex]}: longestKeyLength: $longestKeyLength");
         longestKeysSet.remove(keys[keyIndex]);
       }
     }
 
-    print("longestKeysSet after first loop: $longestKeysSet");
+    // print("longestKeysSet after first loop: $longestKeysSet");
 
     // Removing all values smaller than longestKeyLength
     List<String> longestKeysList = longestKeysSet.toList();
@@ -446,7 +446,7 @@ class TextListsDB {
       // Is the key longer than longestKeyLength
       if ( longestKeyLength > longestKeysList[keyIndex].length )
       {
-        print("Removing: ${longestKeysList[keyIndex]}");
+        // print("Removing: ${longestKeysList[keyIndex]}");
         // Removing the key from longestKeysSet
         longestKeysSet.remove(longestKeysList[keyIndex]);
         
@@ -521,11 +521,11 @@ class TextListsDB {
   /// Saves [texts] under [label], overwriting any previous entry.
   /// The key used is a sequence of letters followed by a digit (0 to 9)
   Future<void> saveListData(String label, List<String> texts, List<String> keywords) async {
-    print("saveListData");
+    // print("saveListData");
 
     List<dynamic> data = await loadDataStructure();
 
-    print("data: $data");
+    // print("data: $data");
 
     // Key building
     String listKey;
@@ -533,9 +533,9 @@ class TextListsDB {
     // Case: structure is empty
     if (data.isEmpty) 
     { 
-      print("Empty list set");
+      // print("Empty list set");
       listKey = "a0"; 
-      print("new key: $listKey");
+      // print("new key: $listKey");
     }
     // Case: structure is not empty
     else 
@@ -554,7 +554,7 @@ class TextListsDB {
       var lastKeyInData = lastSubItemData.keys.first;
 
       listKey = getNextKey(key: lastKeyInData);
-      print("new list key: $listKey");
+      // print("new list key: $listKey");
     }
   
     //List of sub-items data building
@@ -566,19 +566,19 @@ class TextListsDB {
     {
       // building the key from the previously used key
       key = getNextKey(key: key);
-      print("item key: $key");
+      // print("item key: $key");
       Map<String, dynamic> itemDataMap = {itemKey: key, itemTextKey: texts[textIndex], subItemsDataListKey: null, displayFunctionKey: null};
 
       subItemsDataList.add({key: itemDataMap});
     }
     
-    print("subItemsDataList: $subItemsDataList");
+    // print("subItemsDataList: $subItemsDataList");
 
     // Building the list data
     var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: keywords..sort(), subItemsDataListKey: subItemsDataList, displayFunctionKey: null};
     var listData = {listKey: listDataMap};
 
-    print("List data: $listData");
+    // print("List data: $listData");
 
     // Adding the list (verified previously as unique)
     data.add(listData);
@@ -663,8 +663,8 @@ class TextListsDB {
   /// Updates a list data.
   Future<void> updateListData(String listKey, Map<String, dynamic> listData) async {
 
-    print("updateListData: ");
-    print("listData: $listData");
+    // print("updateListData: ");
+    // print("listData: $listData");
 
     List<dynamic> data = await loadDataStructure();
 
@@ -677,12 +677,12 @@ class TextListsDB {
 
         // Updating the list data by index and key
         data[index][listKey] = listData;
-        print("data[index][listKey]: ${data[index][listKey]}");
+        // print("data[index][listKey]: ${data[index][listKey]}");
 
       }
     }
 
-    print("data (updated): $data"); 
+    // print("data (updated): $data"); 
 
     // Saving the data
     var f = await _getFile();

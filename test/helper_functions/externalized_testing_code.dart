@@ -841,25 +841,25 @@ Future<void> testChecklistTitleBorderColor(WidgetTester tester, Color color) asy
     border.top.color,
     color,
   );
-  print("passed: testChecklistTitleBorderColor: top");
+  // print("passed: testChecklistTitleBorderColor: top");
 
   expect(
     border.bottom.color,
     color,
   );
-  print("passed: testChecklistTitleBorderColor: bottom");
+  // print("passed: testChecklistTitleBorderColor: bottom");
 
   expect(
     border.right.color,
     color,
   );
-  print("passed: testChecklistTitleBorderColor: right");
+  // print("passed: testChecklistTitleBorderColor: right");
 
   expect(
     border.left.color,
     color,
   );
-  print("passed: testChecklistTitleBorderColor: left");
+  // print("passed: testChecklistTitleBorderColor: left");
   
 }
 

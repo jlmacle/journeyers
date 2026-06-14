@@ -95,8 +95,6 @@ class _EditableTextListItemState extends State<EditableTextListItem>
         Text(widget.itemText, style: widget.itemTextStyle),
         onTap: () 
             {
-              print("GestureDetector: onTap");
-
               setState(() 
               {
                 _isEdited = true;
