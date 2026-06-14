@@ -274,6 +274,71 @@ Future<void> main() async {
     var keywords2 = [kwWorkplace];
     var titlesCompanionship = [listLabel1];
     var titlesWorkplace = [listLabel2, listLabel3];
+    group('Participants Lists Options Page: \n', () 
+    {
+      // 'Participants Lists Options Page: correct title'
+      testWidgets('Participants Lists Options Page: correct title', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
+        // ───────────────────────────────────────────────────────────
+        await participantsListsOptionsPageFromGPSprocessPage(tester);
+
+        // Verifying the correct title present
+        var optionsPageFinder = find.text('Participants lists');
+        expect(optionsPageFinder, findsOne);
+
+        });            
+    
+      // 'Participants Lists Options Page: correct subtitle'
+      testWidgets('Participants Lists Options Page: correct subtitle', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
+        // ───────────────────────────────────────────────────────────
+        await participantsListsOptionsPageFromGPSprocessPage(tester);
+
+        // Verifying the correct subtitle present
+        var optionsPageFinder = find.text('What would you like to do?');
+        expect(optionsPageFinder, findsOne);
+
+        });            
+    
+    });
 
     group('New Participants List Tests: \n', () 
     {
@@ -672,7 +737,7 @@ Future<void> main() async {
           await tester.pump(const Duration(seconds: 5));
 
           // Verifying the options page present
-          var optionsPageFinder = find.text(optionsIntroductionLabel);
+          var optionsPageFinder = find.text(participantsListsSubTitle);
           expect(optionsPageFinder, findsOne);
 
           // Searching the loading button
@@ -752,7 +817,7 @@ Future<void> main() async {
           await tester.pump(const Duration(seconds: 5));
 
           // Verifying the options page present
-          var optionsPageFinder = find.text(optionsIntroductionLabel);
+          var optionsPageFinder = find.text(participantsListsSubTitle);
           expect(optionsPageFinder, findsOne);
 
           // Searching the loading button
