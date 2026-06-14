@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart';
 
@@ -297,7 +297,7 @@ class _NewTextListState extends State<NewTextList> {
       appBar: AppBar(
         title: Text
               (
-                _listHasBeenLoaded ? widget.loadedLabel! : 'New list', 
+                _listHasBeenLoaded ? widget.loadedLabel! : newListAppBarTitle, 
                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
               ),          
         backgroundColor: Colors.white,

@@ -19,8 +19,8 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
-import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
   

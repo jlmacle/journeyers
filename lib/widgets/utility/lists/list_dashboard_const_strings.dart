@@ -16,6 +16,7 @@ const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete";
 
 // Buttons
+const String newListButton = 'Please tap to add a list.';
 const String loadingButtonLabel = 'Please click to load';
 const String saveButtonLabel = 'Save';
 
