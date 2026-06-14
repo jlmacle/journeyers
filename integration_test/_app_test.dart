@@ -369,6 +369,37 @@ Future<void> main() async {
 
         });            
     
+      // 'Participants Lists Options Page: correct option 2 label'
+      testWidgets('Participants Lists Options Page: correct option 2 label', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
+        // ───────────────────────────────────────────────────────────
+        await participantsListsOptionsPageFromGPSprocessPage(tester);
+
+        // Verifying the correct option 2 label
+        var textFinder = find.text('To add a new group?');
+        expect(textFinder, findsOne);
+
+        });            
+    
     });
 
     group('New Participants List Tests: \n', () 
