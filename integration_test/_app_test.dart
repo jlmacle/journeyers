@@ -816,6 +816,63 @@ Future<void> main() async {
 
           });
         
+        // 'Participants names can be deleted'
+        testWidgets('Participants names can be deleted', 
+        (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── ADDING A PARTICIPANT ──────────────────────────────────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────────────────────
+            // Loading the new list page from the GPS process page
+            await newListPageFromGPSprocessPage(tester);
+
+            // Searching for the new participant text field
+            // Searching by placeholder text is not robust enough
+            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            await tester.ensureVisible(newParticipantTextFieldFinder); 
+            await tester.pumpAndSettle(); 
+            await tester.tap(newParticipantTextFieldFinder);
+            await tester.pumpAndSettle();
+            
+            // Adding the name
+            await tester.enterText(newParticipantTextFieldFinder, name1);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // Checking the checkbox
+            const checkboxKeyLabel = 'new-participant-checkbox-0';
+            var deletionCheckboxFinder = find.byKey(const ValueKey(checkboxKeyLabel));
+            await tester.ensureVisible(deletionCheckboxFinder); 
+            await tester.pumpAndSettle(); 
+            await tester.tap(deletionCheckboxFinder);
+            await tester.pumpAndSettle();
+
+            // Tapping the deletion label
+            var bulkDeletionFinder = find.textContaining('Delete');
+            await tester.tap(bulkDeletionFinder);
+            await tester.pumpAndSettle();
+            
+            // Verifying the edited name absent
+            expect(find.text(name1), findsNothing);
+
+          });
+        
       });
 
     });  
