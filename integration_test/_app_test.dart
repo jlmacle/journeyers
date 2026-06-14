@@ -16,10 +16,10 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix;
-import 'package:journeyers/widgets/utility/lists/list_process_loading_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/list_dashboard_const_strings.dart';
 
 import '../test/helper_functions/externalized_testing_code.dart';
 
@@ -577,8 +577,6 @@ Future<void> main() async {
                 await tester.testTextInput.receiveAction(TextInputAction.done);
                 await tester.pumpAndSettle();
 
-                // Verifying the names on the GPS process
-
                 // Verifying the GPS process page present
                 expect(find.text(checkListTitle), findsOne);
 
@@ -704,8 +702,6 @@ Future<void> main() async {
           await tester.tap(loadingButtonFinder);
           await tester.pumpAndSettle();
 
-          // Verifying the names on the GPS process
-
           // Verifying the GPS process present
           expect(find.text(checkListTitle), findsOne);
 
@@ -714,11 +710,72 @@ Future<void> main() async {
           {
             expect(find.text(name), findsOne);    
           }  
-      });  
+      });      
+         
       });
 
       group('Participants Dashboard Tests: \n', () 
       {    
+        // 'Empty dashboard: button toward adding a new list'
+        testWidgets('Empty dashboard: button toward adding a new list', 
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+          });
+
+          // Pumping the app
+          await pumpApp(tester);
+
+          // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+          // ────────────────────────────────────────────────────────────────────────
+          // Reaching the GPS process page from the home page
+          await gpsProcessPageFromHomePage(tester);
+
+          // ── LOADING PARTICIPANTS   ─────────────────────────────────
+          // ───────────────────────────────────────────────────────────
+          // Searching the add emoji    
+          var addEmojiFinder = find.text(addEmoji);
+
+          // Verifying the add emoji present
+          expect(addEmojiFinder, findsOne);
+
+          // Tapping to reach the page with the loading/new group options
+          await tester.tap(addEmojiFinder);
+          // pumpAndSettle timed out
+          // await tester.pumpAndSettle();
+          await tester.pump(const Duration(seconds: 5));
+
+          // Verifying the options page present
+          var optionsPageFinder = find.text(optionsIntroductionLabel);
+          expect(optionsPageFinder, findsOne);
+
+          // Searching the loading button
+          var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+          await tester.ensureVisible(loadingAListOptionFinder);
+          expect(loadingAListOptionFinder, findsOne);
+
+          // Tapping on it
+          await tester.tap(loadingAListOptionFinder);
+          await tester.pumpAndSettle();
+
+          // Verifying the list items absent
+          expect(find.byType(ListOfListsItem), findsNothing);
+
+          // Verifying the new list button present
+          var newListButtonFinder = find.text(newListButton);
+          await tester.tap(newListButtonFinder);
+          await tester.pumpAndSettle();
+
+          // Verifying the New List Page present
+          expect (find.text(newListAppBarTitle), findsOne);
+      });  
+
         group('Deletion Tests: \n', ()
         {
           // 'Deletion: Single deletion with icon \n'
