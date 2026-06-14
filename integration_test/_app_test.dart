@@ -653,8 +653,10 @@ Future<void> main() async {
       
         group('New Participants List Saving: \n', () 
         {
-          // "Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
-          testWidgets("Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
+          // "Participants can be added, keywords added, the data saved in a list, 
+          // and the participants' names are loaded in the GPS process page"
+          testWidgets("Participants can be added, keywords added, the data saved in a list, "
+                      "and the participants' names are loaded in the GPS process page", 
             (WidgetTester tester) async 
             {
                 // Setting mock values for SharedPreferences
@@ -713,8 +715,10 @@ Future<void> main() async {
               });
         
           // Had a multi-list issue at manual testing time
-          // "Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page"
-          testWidgets("Multi-list: Participants can be added, saved in a list, and the participants' names are loaded in the GPS process page", 
+          // "Multi-list: Participants can be added, keywords added, the data saved in a list, 
+          //  and the participants' names are loaded in the GPS process page"
+          testWidgets("Multi-list: Participants can be added, keywords added, the data saved in a list, "
+                      " and the participants' names are loaded in the GPS process page", 
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
