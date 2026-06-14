@@ -688,7 +688,7 @@ Future<void> addParticipantsFromGPSprocessPage
 //   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
 //   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
 // ];
-Future<void> addParticipantsListsFromGPSprocessPage
+Future<void> addParticipantsListsFromGPSprocessPageAndVerifyListLoaded
 ({
   required WidgetTester tester, 
   required List< Map<String,Map<String, dynamic>> > listDataMapsList
