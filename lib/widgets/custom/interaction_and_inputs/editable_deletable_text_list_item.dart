@@ -81,7 +81,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
             // Checkbox for list item deletion
             Checkbox
             (
-              key: ValueKey('new-participant-checkbox-${widget.itemIndex}'),
+              key: ValueKey('editable-deletable-checkbox-${widget.itemIndex}'),
               value: _isChecked, 
               onChanged: 
                 (value)

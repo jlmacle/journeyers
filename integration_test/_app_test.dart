@@ -1074,7 +1074,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Checking the checkbox
-            const checkboxKeyLabel = 'new-participant-checkbox-0';
+            const checkboxKeyLabel = 'editable-deletable-checkbox-0';
             var deletionCheckboxFinder = find.byKey(const ValueKey(checkboxKeyLabel));
             await tester.ensureVisible(deletionCheckboxFinder); 
             await tester.pumpAndSettle(); 
@@ -2095,6 +2095,68 @@ Future<void> main() async {
 
             // Verifing the edited idea on the GPS process page
             expect(find.text(ideaEdited), findsOne);
+
+            await tester.pump(const Duration(seconds: 2)); 
+          });
+      
+        // 'Ideas can be deleted in the overlay'
+        testWidgets('Ideas can be deleted in the overlay', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── REACHING THE OVERLAY  ──────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────
+            await ideasOverlayFromGPSprocessPage(tester);
+
+            // ── ADDING AN IDEA  ──────────────────────────────────────
+            // ─────────────────────────────────────────────────────────
+            await addIdeaFromOverlay(tester, idea1);
+
+            // ── DELETING THE IDEA  ────────────────────────────────────
+            // ─────────────────────────────────────────────────────────
+            // Searching the checkbox
+            var checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-0'));
+            await tester.ensureVisible(checkboxFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the checkbox for deletion
+            await tester.tap(checkboxFinder);
+            await tester.pumpAndSettle();
+            
+            // Clicking on the Delete message
+            var deleteFinder = find.textContaining('Delete');
+            await tester.ensureVisible(deleteFinder);
+            await tester.tap(deleteFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the value removed from the overlay
+            expect(find.text(idea1), findsNothing);
+
+            // Closing the overlay
+            var overlayClosingTooltipFinder = find.byTooltip(overlayClosingTooltip);
+            await tester.tap(overlayClosingTooltipFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the GPS process page present
+            expect(find.text(checkListTitle), findsOne);
+
+            // Verifying the value removed from the GPS process page
+            expect(find.text(idea1), findsNothing);
 
             await tester.pump(const Duration(seconds: 2)); 
           });
