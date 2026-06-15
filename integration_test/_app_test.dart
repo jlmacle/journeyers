@@ -216,7 +216,7 @@ Future<void> main() async {
 
           // Adding ideas
           // Searching the text field used to add ideas
-          var newSolutionTextFieldFinder = find.ancestor
+          var newIdeaTextFieldFinder = find.ancestor
           (
             of: find.text(newIdeaTextFieldHint), 
             matching: find.byType(TextField)
@@ -225,13 +225,13 @@ Future<void> main() async {
           // Adding the ideas
           for (var idea in ideasList1)
           {
-            await tester.enterText(newSolutionTextFieldFinder, idea);
+            await tester.enterText(newIdeaTextFieldFinder, idea);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 1));  
 
-            await tester.tap(newSolutionTextFieldFinder); 
+            await tester.tap(newIdeaTextFieldFinder); 
           }
 
           // Submitting the GPS data
@@ -1919,6 +1919,56 @@ Future<void> main() async {
         expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
       });
     
+    // 'The overlay can be opened clicking on the ideas'
+    testWidgets('The overlay can be opened clicking on the ideas', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── ADDING AN IDEA  ──────────────────────────────────────
+        // ─────────────────────────────────────────────────────────
+        // Searching the text field used to add ideas
+        var newIdeaTextFieldFinder = find.ancestor
+        (
+          of: find.text(newIdeaTextFieldHint), 
+          matching: find.byType(TextField)
+        );
+
+        // Adding the idea
+        await tester.enterText(newIdeaTextFieldFinder, "An idea");
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 1));  
+
+        // ── OVERLAY  ───────────────────────────────────
+        // ───────────────────────────────────────────────
+        // Tapping on the idea
+        var ideaFinder = find.byKey(const ValueKey('idea-0'));
+        await tester.tap(ideaFinder);
+        await tester.pumpAndSettle();
+
+        // Verifying the overlay present
+        expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
+
+        await tester.pump(const Duration(seconds: 1)); 
+      });
+   
   });
   });
 
