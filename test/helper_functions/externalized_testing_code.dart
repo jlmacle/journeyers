@@ -911,6 +911,22 @@ Future<void> ideasOverlayFromGPSprocessPage(WidgetTester tester) async
   expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
 }
 
+// Method used to add an idea using the overlay
+Future<void> addIdeaFromOverlay(WidgetTester tester, String idea) async
+{
+  // Searching the text field used to add ideas
+  var newIdeaTextFieldFinder = find.byKey(const ValueKey('ideaOverlayField'));
+  // Adding the idea
+  await tester.ensureVisible(newIdeaTextFieldFinder);
+  await tester.tap(newIdeaTextFieldFinder);
+  await tester.pumpAndSettle(); 
+  await tester.enterText(newIdeaTextFieldFinder, idea);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));  
+}
+
 
 // ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
 
