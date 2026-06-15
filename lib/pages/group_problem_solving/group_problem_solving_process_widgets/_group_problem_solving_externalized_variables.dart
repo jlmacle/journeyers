@@ -37,7 +37,7 @@ const ideasListTitle = "List of ideas";
 const ideasListPlaceholder = "No ideas added yet.";
 
 // GPSNewIdea
-const newIdeaTextFieldHint = "Please type to enter an idea.";
+const newIdeaTextFieldHint = "Please enter an idea.";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";

@@ -78,20 +78,24 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
               child: Text(ideasListPlaceholder, style: TextStyle(fontStyle: FontStyle.italic)),
             ),
           
-          ...widget.ideas.map
-          (
-            (idea) => 
-            Padding
-            (
-                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-                child: Card(
-                  child: ListTile(
-                    leading: const Icon(Icons.edit),
-                    title: Text(idea),
+          ...widget.ideas.asMap().entries.map(
+          (entry) {
+            final index = entry.key;
+            final idea = entry.value;
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+              child: Card(
+                child: ListTile(
+                  leading: const Icon(Icons.edit),
+                  title: Text(
+                    key: ValueKey('idea-$index'), // Use the index in the key
+                    idea,
                   ),
                 ),
-            )
-          ),
+              ),
+            );
+          },
+        ),
         ],
       )
 

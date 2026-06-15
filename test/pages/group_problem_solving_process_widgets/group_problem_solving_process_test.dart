@@ -323,7 +323,7 @@ void main()
       await pumpGPSProcess(tester);
 
       // Searching the text field used to add ideas
-      var newSolutionTextFieldFinder = find.ancestor
+      var newIdeaTextFieldFinder = find.ancestor
       (
         of: find.text(newIdeaTextFieldHint), 
         matching: find.byType(TextField)
@@ -332,7 +332,7 @@ void main()
       for (var i = 0; i < 50; i++)
       {
         // Adding some text
-        await tester.enterText(newSolutionTextFieldFinder,"$someText$i");
+        await tester.enterText(newIdeaTextFieldFinder,"$someText$i");
         await tester.testTextInput.receiveAction(TextInputAction.done);
         // pumpAndSettle timed out
         // await tester.pumpAndSettle();
