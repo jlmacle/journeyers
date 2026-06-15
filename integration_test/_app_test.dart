@@ -1881,4 +1881,45 @@ Future<void> main() async {
 
 
     });
+
+  group('Ideas Tests: \n', () 
+  {
+    group('Ideas Overlay Tests: \n', () 
+  {
+    // 'The overlay can be opened clicking on the ideas area title'
+    testWidgets('The overlay can be opened clicking on the ideas area title', 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+        });
+
+        // Pumping the app
+        await pumpApp(tester);
+
+        // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsProcessPageFromHomePage(tester);
+
+        // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
+        // ────────────────────────────────────────────────────────────────────────
+        var ideasListTitleFinder = find.text(ideasListTitle);
+        await tester.tap(ideasListTitleFinder);
+        await tester.pumpAndSettle();
+
+        // ── OVERLAY  ───────────────────────────────────
+        // ───────────────────────────────────────────────
+        // Verifying the overlay present
+        expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
+      });
+    
+  });
+  });
+
 }
