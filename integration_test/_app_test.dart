@@ -1014,7 +1014,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Editing the name
-            const tfKeyLabel = 'new-participant-tf-0';
+            const tfKeyLabel = 'editable-deletable-tf-0';
             var editionTfFinder = find.byKey(const ValueKey(tfKeyLabel));
             await tester.ensureVisible(editionTfFinder); 
             await tester.pumpAndSettle(); 
@@ -1975,6 +1975,8 @@ Future<void> main() async {
 
       group('Ideas Overlay Editing Tests: \n', () 
       {
+        var idea1 = "idea1";
+
         // 'Ideas can be added in the overlay'
         testWidgets('Ideas can be added in the overlay', 
           (WidgetTester tester) async 
@@ -2025,6 +2027,78 @@ Future<void> main() async {
 
             await tester.pump(const Duration(seconds: 5)); 
           });
+      
+        // 'Ideas can be edited in the overlay'
+        testWidgets('Ideas can be edited in the overlay', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── REACHING THE OVERLAY  ──────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────
+            await ideasOverlayFromGPSprocessPage(tester);
+
+            // ── ADDING AN IDEA  ──────────────────────────────────────
+            // ─────────────────────────────────────────────────────────
+            await addIdeaFromOverlay(tester, idea1);
+
+            // ── EDITING THE IDEA  ────────────────────────────────────
+            // ─────────────────────────────────────────────────────────
+            // Searching the idea
+            var ideaFinder = find.byKey(const ValueKey('editable-deletable-text-item-0'));
+            await tester.ensureVisible(ideaFinder);
+            await tester.pumpAndSettle();   
+            // Verifying the idea present
+            expect(ideaFinder, findsOne);
+            // Tapping on the idea for edition
+            await tester.tap(ideaFinder);
+            await tester.pumpAndSettle();
+            // Edition
+            const tfKeyLabel = 'editable-deletable-tf-0';
+            var editableDeletableTfFinder = find.byKey(const ValueKey(tfKeyLabel));
+            await tester.ensureVisible(editableDeletableTfFinder);
+            await tester.pumpAndSettle();
+            await tester.tap(editableDeletableTfFinder);
+            await tester.pumpAndSettle();
+
+            var ideaEdited = "$idea1-edited";
+            await tester.enterText(editableDeletableTfFinder, ideaEdited);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 1));
+
+            // ── VERIFYING THAT THE EDITED VALUE IS ON THE GPS PROCESS PAGE  ─────────────────
+            // ────────────────────────────────────────────────────────────────────────────────
+            // Closing the overlay
+            var overlayClosingTooltipFinder = find.byTooltip(overlayClosingTooltip);
+            await tester.tap(overlayClosingTooltipFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the GPS process page present
+            expect(find.text(checkListTitle), findsOne);
+
+            // Verifing the edited idea on the GPS process page
+            expect(find.text(ideaEdited), findsOne);
+
+            await tester.pump(const Duration(seconds: 2)); 
+          });
+      
       });
     });
     });
