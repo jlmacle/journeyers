@@ -2,37 +2,246 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to list the ideas found during a group problem-solving process.
-class GPSIdeasList extends StatelessWidget {
+class GPSIdeasList extends StatefulWidget 
+{
   /// The ideas for the group problem-solving process.
   final List<String> ideas;
 
   const GPSIdeasList({super.key, required this.ideas});
 
   @override
+  State<GPSIdeasList> createState() => _GPSIdeasListState();
+}
+
+class _GPSIdeasListState extends State<GPSIdeasList> {
+
+  // Data related to deleting texts from the new list
+  List<String> _ideasSelectedForDeletion = [];
+  List<int> _ideasSelectedForDeletionIndexes = [];
+  bool _areSomeIdeasForDeletion = false;  
+
+  late final List<String> _enteredIdeasList;
+
+  final _tecNewIdea = TextEditingController();
+
+
+  void onUpdateTheIdeaValue({required String stringParam, required int intParam})
+  {
+    setState(() {
+      _enteredIdeasList[intParam] = stringParam;
+      print("onUpdateTheIdeaValue: _enteredIdeasList: $_enteredIdeasList");
+    });  
+  }
+
+  @override
+  void initState() {
+    super.initState();   
+    
+    _enteredIdeasList = widget.ideas;
+  }
+
+  @override
+  void dispose() {
+    _tecNewIdea.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(
-          child: Text(ideasListTitle, style: problemSolvingIdeasTitle),
-        ),
-        const SizedBox(height: 10),
-        if (ideas.isEmpty)
-          const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(ideasListPlaceholder, style: TextStyle(fontStyle: FontStyle.italic)),
-          ),
-        ...ideas.map((idea) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-              child: Card(
-                child: ListTile(
-                  title: Text(idea),
+    return GestureDetector
+    (    
+      onTap: ()
+             {
+              // List edition if list not empty
+              if (widget.ideas.isNotEmpty)
+              {
+                _showEditOverlay(context);
+              }
+             },
+      child : 
+      Column(
+        children: [
+           ListTile(
+              leading: const Icon(Icons.add_circle_outline),
+              title: const Text(ideasListTitle, style: problemSolvingIdeasTitle),
+              onTap: (){print("onTap: _showEditOverlay"); _showEditOverlay(context);},
+            ),
+          const SizedBox(height: 10),
+          if (widget.ideas.isEmpty)
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(ideasListPlaceholder, style: TextStyle(fontStyle: FontStyle.italic)),
+            ),
+          
+          ...widget.ideas.map
+          (
+            (idea) => 
+            Padding
+            (
+                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                child: Card(
+                  child: ListTile(
+                    leading: const Icon(Icons.edit),
+                    title: Text(idea),
+                  ),
                 ),
-              ),
-            )),
-      ],
+            )
+          ),
+        ],
+      )
+
     );
   }
+
+
+  // Method used to display an overlay with the solutions to edit. 
+  void _showEditOverlay(BuildContext context) 
+  {
+    
+    showGeneralDialog
+    (
+      context: context,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, anim1, anim2) 
+      {
+        return Scaffold
+        (
+          appBar:AppBar
+          (
+            centerTitle: true, 
+            title: 
+            const Text
+            (
+              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
+              softWrap:true, 'Ideas List', style: previewTitleStyle
+            ),
+ 
+            // Right side: Close Button
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.close),
+                color: appBarWhite,
+                onPressed: () => Navigator.of(context).pop(),
+                tooltip: "Close preview",
+              ),
+            ],
+          ),
+          body: 
+          SafeArea(
+            child:  
+            StatefulBuilder(
+              builder: (BuildContext context, StateSetter setLocalState) 
+              {   
+                return      
+                Column(
+                  children: [
+                    NewTextListDeletionByBulk
+                      (
+                        areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
+                        enteredTextItemsList: _enteredIdeasList,
+                        indexesOfTextItemsSelectedForDeletion: _ideasSelectedForDeletionIndexes,
+                        callbackFunctionToRefreshTheTextItemsList: 
+                        () 
+                        {
+                          setLocalState((){});
+                          setState(() {_areSomeIdeasForDeletion = false;});
+                        }
+                      ),
+                    // List of added texts or placeholder message
+                    Expanded(
+                      child: 
+                        ListView.builder
+                            (                  
+                              padding: const EdgeInsets.only(bottom: 96),
+                              itemCount: widget.ideas.length,
+                              itemBuilder: (_, index) 
+                              {
+                                return 
+                                  
+                                    EditableDeletableTextListItem
+                                    (
+                                      key: ValueKey(widget.ideas[index]),
+                                      itemIndex: index, 
+                                      itemText: widget.ideas[index], 
+                                      onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
+                                                                          { 
+                                                                            print("value: $boolParam");   
+                                                                            print("index: $intParam");                                                               
+                                                                            if(boolParam!) 
+                                                                            {                                                                    
+                                                                              // adding the index to _ideasSelectedForDeletionIndexes
+                                                                              _ideasSelectedForDeletionIndexes.add(index);
+                                                                              _ideasSelectedForDeletionIndexes.sort();
+                                                                              _areSomeIdeasForDeletion = true;                                    
+                                                                              
+                                                                              setLocalState(() {});
+                                                                            }
+                                                                            else{
+                                                                              _ideasSelectedForDeletionIndexes.remove(index);
+                                                                              if (_ideasSelectedForDeletionIndexes.isEmpty) _areSomeIdeasForDeletion = false;
+                                                                              
+                                                                              setLocalState(() {});
+                                                                            }
+                                                                            print("_ideasSelectedForDeletionIndexes: $_ideasSelectedForDeletionIndexes");
+                                                                          }, 
+                                      // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
+                                      parentCallbackFunctionToUpdateTheListItemValue: 
+                                      ({required intParam, required stringParam}) 
+                                      {
+                                        setLocalState(() {});
+                                        onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
+                                      },
+                                      parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_ideasSelectedForDeletionIndexes.add(index);}, 
+                                      themeData: Theme.of(context),                          
+                                    )                          
+                                  ;
+                              },
+                            )
+                    ),
+                    // TextField used to add a new text
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField
+                      (
+                        key: const ValueKey('ideaOverlayField'),
+                        controller: _tecNewIdea,
+                        textAlign: TextAlign.left,
+                        decoration: const InputDecoration
+                        (
+                          hint: Text
+                          ( 
+                            newIdeaTextFieldHint,
+                            textAlign: TextAlign.left,                                          
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                        ),
+                        onSubmitted: (value)
+                        {
+                          setLocalState(() {
+                            _enteredIdeasList.add(value.trim());
+                          });
+                          setState(() {
+                            
+                          });
+                          _tecNewIdea.clear();
+                          print("_enteredIdeasList: $_enteredIdeasList");
+                        },
+                      ),
+                    ),
+                  ]
+              );
+              }
+          ),
+        )
+        );
+      }
+    );
+  }
+
+
 }
