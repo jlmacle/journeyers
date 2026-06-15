@@ -429,7 +429,7 @@ class _NewTextListState extends State<NewTextList> {
                                                                   _textsSelectedForDeletionIndexes.sort();
                                                                   _areSomeTextItemsForDeletion = true;
     
-                                                                  // setState // to do later at bulk widget level
+                                                                  // setState // todo later at bulk widget level
                                                                   setState(() {
                                                                     
                                                                   });
@@ -437,7 +437,7 @@ class _NewTextListState extends State<NewTextList> {
                                                                 else{
                                                                    _textsSelectedForDeletionIndexes.remove(index);
                                                                    if (_textsSelectedForDeletionIndexes.isEmpty) _areSomeTextItemsForDeletion = false;
-                                                                  // setState // to do later at bulk widget level
+                                                                  // setState // todo later at bulk widget level
                                                                   setState(() {
                                                                     
                                                                   });
