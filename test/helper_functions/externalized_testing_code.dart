@@ -894,6 +894,23 @@ Future<void> testChecklistTitleBorderColor(WidgetTester tester, Color color) asy
   // print("passed: testChecklistTitleBorderColor: left");
   
 }
+// ── IDEAS-related  ──────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────────────
+// Method used to go from the GPS process page to the ideas overlay
+Future<void> ideasOverlayFromGPSprocessPage(WidgetTester tester) async
+{
+  // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────
+  var ideasListTitleFinder = find.text(ideasListTitle);
+  await tester.tap(ideasListTitleFinder);
+  await tester.pumpAndSettle();
+
+  // ── OVERLAY  ───────────────────────────────────
+  // ───────────────────────────────────────────────
+  // Verifying the overlay present
+  expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
+}
+
 
 // ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
 
