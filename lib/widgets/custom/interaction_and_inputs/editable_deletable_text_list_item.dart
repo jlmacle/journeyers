@@ -135,7 +135,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
           Expanded(
             child: TextField
             (
-              key: ValueKey('new-participant-tf-${widget.itemIndex}'),
+              key: ValueKey('editable-deletable-tf-${widget.itemIndex}'),
               controller: _tecEdition,
               autofocus: true,
               decoration: InputDecoration
