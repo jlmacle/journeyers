@@ -131,7 +131,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                 icon: const Icon(Icons.close),
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
-                tooltip: "Close preview",
+                tooltip: overlayClosingTooltip,
               ),
             ],
           ),

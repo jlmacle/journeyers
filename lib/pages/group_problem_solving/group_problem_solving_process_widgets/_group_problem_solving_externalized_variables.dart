@@ -38,6 +38,7 @@ const ideasListPlaceholder = "No ideas added yet.";
 
 // GPSNewIdea
 const newIdeaTextFieldHint = "Please enter an idea.";
+const overlayClosingTooltip = "Close overlay";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";
