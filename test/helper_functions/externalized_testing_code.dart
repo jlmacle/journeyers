@@ -749,7 +749,7 @@ Future<Finder> getNewListTextItems(WidgetTester tester) async
               (widget) 
               {
                 if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('text-item-');
+                  return (widget.key as ValueKey<String>).value.contains('editable-deletable-text-item-');
                 }
                 return false;
               }
