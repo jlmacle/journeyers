@@ -2221,9 +2221,9 @@ Future<void> main() async {
 
             // Verifying the values removed from the overlay
             expect(find.text(idea1), findsNothing);
-            expect(find.text(idea2), findsOne);
+            expect(find.text(idea2), findsNWidgets(2));
             expect(find.text(idea3), findsNothing);
-            expect(find.text(idea4), findsOne);
+            expect(find.text(idea4), findsNWidgets(2));
 
             // Closing the overlay
             var overlayClosingTooltipFinder = find.byTooltip(overlayClosingTooltip);
