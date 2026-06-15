@@ -436,7 +436,7 @@ final q = CAQuestionsFields();
   ) async
   {
     // Searching the text field used to add ideas
-    var newSolutionTextFieldFinder = find.ancestor
+    var newIdeaTextFieldFinder = find.ancestor
     (
       of: find.text(newIdeaTextFieldHint), 
       matching: find.byType(TextField)
@@ -445,13 +445,13 @@ final q = CAQuestionsFields();
     // Adding the ideas
     for (var idea in ideasList)
     {
-      await tester.enterText(newSolutionTextFieldFinder, idea);
+      await tester.enterText(newIdeaTextFieldFinder, idea);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       // pumpAndSettle timed out
       // await tester.pumpAndSettle();
       await tester.pump(const Duration(seconds: 1));  
 
-      await tester.tap(newSolutionTextFieldFinder); 
+      await tester.tap(newIdeaTextFieldFinder); 
     }
       
   }

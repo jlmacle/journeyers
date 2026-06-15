@@ -7,24 +7,24 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 
 void main() 
 {
-  Future<void> pumpGPSNewSolution(WidgetTester tester) async
+  Future<void> pumpGPSNewIdea(WidgetTester tester) async
   {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: GPSNewSolution
+          body: GPSNewIdea
           (
-            onSolutionAddedCallbackFunction: (_){},
+            onideaAddedCallbackFunction: (_){},
           ),
         ),
       ),
     );
   }
 
-  group('GPSNewSolution Tests: \n', 
+  group('GPSNewIdea Tests: \n', 
   () 
   {  
-    group("GPSNewSolution default aspect: \n", 
+    group("GPSNewIdea default aspect: \n", 
     () 
     {      
       // 'The hint text is present'
@@ -32,7 +32,7 @@ void main()
       (WidgetTester tester) async 
       {
         // Pumping the widget
-        await pumpGPSNewSolution(tester);
+        await pumpGPSNewIdea(tester);
 
         // Verifying the hint text present
         expect(find.text(newIdeaTextFieldHint), findsOne);        

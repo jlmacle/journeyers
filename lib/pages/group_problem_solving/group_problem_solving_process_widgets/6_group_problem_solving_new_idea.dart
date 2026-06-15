@@ -5,22 +5,22 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 
 /// {@category Group problem-solving}
 /// A widget used to add a new idea to the list.
-class GPSNewSolution extends StatefulWidget 
+class GPSNewIdea extends StatefulWidget 
 {
   /// A callback function used to update the list of ideas.
-  final ValueChanged<String> onSolutionAddedCallbackFunction;
+  final ValueChanged<String> onideaAddedCallbackFunction;
 
-  const GPSNewSolution
+  const GPSNewIdea
   ({
     super.key,
-    required this.onSolutionAddedCallbackFunction
+    required this.onideaAddedCallbackFunction
   });
 
   @override
-  State<GPSNewSolution> createState() => _GPSNewSolutionState();
+  State<GPSNewIdea> createState() => _GPSNewIdeaState();
 }
 
-class _GPSNewSolutionState extends State<GPSNewSolution> 
+class _GPSNewIdeaState extends State<GPSNewIdea> 
 {
   // TextEditingController for entering a new idea
   final TextEditingController _ideaController = .new();
@@ -28,10 +28,10 @@ class _GPSNewSolutionState extends State<GPSNewSolution>
   final FocusNode _ideaFocusNode = FocusNode();
 
   // Method to handle adding an idea to the list
-  void _submitSolution() {
+  void _submitIdea() {
     if (_ideaController.text.trim().isNotEmpty) {
       // Adding the new idea to the list
-      widget.onSolutionAddedCallbackFunction(_ideaController.text.trim());
+      widget.onideaAddedCallbackFunction(_ideaController.text.trim());
       _ideaController.clear();
     }
     _ideaFocusNode.unfocus();
@@ -60,13 +60,13 @@ class _GPSNewSolutionState extends State<GPSNewSolution>
                     hintText: newIdeaTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
-                  onSubmitted: (_) => _submitSolution(),
+                  onSubmitted: (_) => _submitIdea(),
                 ),
               ),
               const SizedBox(width: 8),
               IconButton(
                 icon: const Icon(Icons.send, color: navyBlue),
-                onPressed: _submitSolution,
+                onPressed: _submitIdea,
               ),
             ],
           ),

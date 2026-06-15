@@ -246,7 +246,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 }
 
   // Method used to add an idea to the list of ideas
-  void _addSolutionToList(String value)
+  void _addIdeaToList(String value)
   {
     _ideas.add(value);
     setState(() {});
@@ -462,9 +462,9 @@ void _handleSessionSelection(Map<String, dynamic> session) {
           ),
         ),
 
-        // 3. BOTTOM: Full Width Solution Input Field
+        // 3. BOTTOM: Full Width Idea Input Field
         const Divider(height: 1),
-        GPSNewSolution(onSolutionAddedCallbackFunction: _addSolutionToList),
+        GPSNewIdea(onideaAddedCallbackFunction: _addIdeaToList),
         
         //********** Data saving ************//
         Center
