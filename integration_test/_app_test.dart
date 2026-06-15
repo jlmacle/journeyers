@@ -1976,6 +1976,9 @@ Future<void> main() async {
       group('Ideas Overlay Editing Tests: \n', () 
       {
         var idea1 = "idea1";
+        var idea2 = "idea2";
+        var idea3 = "idea3";
+        var idea4 = "idea4";
 
         // 'Ideas can be added in the overlay'
         testWidgets('Ideas can be added in the overlay', 
@@ -2157,6 +2160,84 @@ Future<void> main() async {
 
             // Verifying the value removed from the GPS process page
             expect(find.text(idea1), findsNothing);
+
+            await tester.pump(const Duration(seconds: 2)); 
+          });
+      
+        // '4 additions, 2 deletions'
+        testWidgets('4 additions, 2 deletions', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            // Reaching the GPS process page from the home page
+            await gpsProcessPageFromHomePage(tester);
+
+            // ── REACHING THE OVERLAY  ──────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────
+            await ideasOverlayFromGPSprocessPage(tester);
+
+            // ── ADDING IDEAS  ──────────────────────────────────────
+            // ─────────────────────────────────────────────────────────
+            await addIdeaFromOverlay(tester, idea1);
+            await addIdeaFromOverlay(tester, idea2);
+            await addIdeaFromOverlay(tester, idea3);
+            await addIdeaFromOverlay(tester, idea4);
+
+            // ── DELETING 2 IDEAs  ────────────────────────────────────
+            // ─────────────────────────────────────────────────────────
+            // Searching the checkboxes
+            var checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-0'));
+            await tester.ensureVisible(checkboxFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the checkbox for deletion
+            await tester.tap(checkboxFinder);
+            await tester.pumpAndSettle();
+
+            checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-2'));
+            await tester.ensureVisible(checkboxFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the checkbox for deletion
+            await tester.tap(checkboxFinder);
+            await tester.pumpAndSettle();
+            
+            // Clicking on the Delete message
+            var deleteFinder = find.textContaining('Delete');
+            await tester.ensureVisible(deleteFinder);
+            await tester.tap(deleteFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the values removed from the overlay
+            expect(find.text(idea1), findsNothing);
+            expect(find.text(idea2), findsNWidgets(2));
+            expect(find.text(idea3), findsNothing);
+            expect(find.text(idea4), findsNWidgets(2));
+
+            // Closing the overlay
+            var overlayClosingTooltipFinder = find.byTooltip(overlayClosingTooltip);
+            await tester.tap(overlayClosingTooltipFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the GPS process page present
+            expect(find.text(checkListTitle), findsOne);
+
+            // Verifying the values removed from the GPS process page
+            expect(find.text(idea1), findsNothing);
+            expect(find.text(idea2), findsOne);
+            expect(find.text(idea3), findsNothing);
+            expect(find.text(idea4), findsOne);
 
             await tester.pump(const Duration(seconds: 2)); 
           });
