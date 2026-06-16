@@ -595,7 +595,7 @@ class DTOCAForm
       { 
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
         filePathWithExtension = path.join(applicationFolderPath!, "$fileName$fileExtension");
-        fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePathWithExtension,dataBytes: dataBytes);        
+        await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePathWithExtension,dataBytes: dataBytes);        
       }          
     }
     else if (Platform.isIOS)
@@ -608,7 +608,7 @@ class DTOCAForm
       { 
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
         filePathWithExtension = path.join(applicationFolderPath!, fileName!);
-        fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePathWithExtension, dataBytes: dataBytes);        
+        await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePathWithExtension, dataBytes: dataBytes);        
       } 
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)

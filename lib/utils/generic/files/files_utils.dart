@@ -112,17 +112,17 @@ class FileUtils
   // ─── METHODS USED TO SAVE FILES : beginning ───────────────────────────────────────
   /// Method used to save a file on Android.
   /// The actual code assumes a folder pre-selected by the user (handled by MainActivity.kt).
-  Future<String> saveFileOnAndroid(String fileName, String fileExtension, Uint8List dataBytes) async 
+  Future<String> saveFileOnAndroid(String fileNameWithoutExtension, String fileExtension, Uint8List dataBytes) async 
   {
     String? filePath;
     
     final bool success = await platformAndroid.invokeMethod('saveFile', 
     {
-      'fileName': "$fileName$fileExtension",
+      'fileName': "$fileNameWithoutExtension$fileExtension",
       'content': dataBytes,
     });
     String? folderPath = await rtdu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileName$fileExtension";
+    filePath = "$folderPath/$fileNameWithoutExtension$fileExtension";
 
     if (sessionDataDebug) pu.printd("Session Data: saveFileOnAndroid: success: $success");
     if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
@@ -207,19 +207,19 @@ class FileUtils
 
   // ─── METHODS USED TO DELETE FILES : beginning  ───────────────────────────────────────
   /// Generic method used to delete a file.
-  Future<void> deleteCSVFile(String pathToCSV) async
+  Future<void> deleteFile(String pathToFile) async
   {
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
     {
-      await deleteCSVFileOnDesktop(pathToCSV);
+      await deleteFileOnDesktop(pathToFile);
     }
     else if (Platform.isAndroid)
     {
-      await deleteCSVFileOnAndroid(pathToCSV);
+      await deleteFileOnAndroid(pathToFile);
     }
     else if (Platform.isIOS)
     {
-      await deleteCSVFileOnIOS(pathToCSV);
+      await deleteFileOnIOS(pathToFile);
     }
     else 
     {
@@ -228,7 +228,7 @@ class FileUtils
   }
 
   /// Method used to delete a file on desktop.
-  Future<void> deleteCSVFileOnDesktop(String pathToCSV) async
+  Future<void> deleteFileOnDesktop(String pathToCSV) async
   {
     try 
     {
@@ -252,7 +252,7 @@ class FileUtils
   }
 
   /// Method used to delete a file on Android.
-  Future<bool> deleteCSVFileOnAndroid(String pathToCSV) async 
+  Future<bool> deleteFileOnAndroid(String pathToCSV) async 
   {
     try 
     {
@@ -277,7 +277,7 @@ class FileUtils
   }
 
   /// Method used to delete a file on iOS.
-  Future<bool> deleteCSVFileOnIOS(String pathToCSV) async 
+  Future<bool> deleteFileOnIOS(String pathToCSV) async 
   {
     try 
     {

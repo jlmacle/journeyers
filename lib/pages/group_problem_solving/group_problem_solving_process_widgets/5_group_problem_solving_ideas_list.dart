@@ -34,7 +34,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   {
     setState(() {
       _enteredIdeasList[intParam] = stringParam;
-      print("onUpdateTheIdeaValue: _enteredIdeasList: $_enteredIdeasList");
+      print("ideas list: onUpdateTheIdeaValue: _enteredIdeasList: $_enteredIdeasList");
     });  
   }
 
@@ -103,7 +103,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   }
 
 
-  // Method used to display an overlay with the solutions to edit. 
+  // Method used to display an overlay with the ideas to edit. 
   void _showEditOverlay(BuildContext context) 
   {
     
@@ -233,7 +233,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                             
                           });
                           _tecNewIdea.clear();
-                          print("_enteredIdeasList: $_enteredIdeasList");
+                          print("ideas list: _enteredIdeasList: $_enteredIdeasList");
                         },
                       ),
                     ),

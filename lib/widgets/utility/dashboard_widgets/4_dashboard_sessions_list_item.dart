@@ -1,4 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:path/path.dart' as path;
 
 import 'package:share_plus/share_plus.dart';
 
@@ -6,11 +13,14 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 
 // Used to store a temporary file path used for session data sharing.
 String tmpFilePath = "";
@@ -72,6 +82,16 @@ class _SessionsListItemState extends State<SessionsListItem>
 {
   TextEditingController kwsEditController = .new();
 
+  // Data related to deleting ideas from the overlay
+  List<String> _ideasSelectedForDeletion = [];
+  List<int> _indexesOfIdeasSelectedForDeletion = [];
+  bool _areSomeIdeasForDeletion = false;
+  final _tecNewIdea = TextEditingController();
+  // List of ideas present before deletion
+  List<String> _ideasListBeforeEdition = [];
+  List<String> _ideasListBeforeEditionCopy = [];
+ 
+
   // To clean
   void onKeywordsUpdated(String? filePath) async
   {
@@ -90,6 +110,15 @@ class _SessionsListItemState extends State<SessionsListItem>
     Navigator.of(context).pop();
   }
 
+  // Method used to update one of the deletable/editable items
+  void onUpdateTheIdeaValue({required String stringParam, required int intParam})
+  {
+    setState(() {
+      _ideasListBeforeEdition[intParam] = stringParam;
+      print("list item: onUpdateTheIdeaValue: _enteredIdeasList: $_ideasListBeforeEdition");
+    });  
+  }
+
   // Method used to update the temporary file path used for session data sharing
   void updateTmpFilePath(String tmpFilePathFromPreview)
   {    
@@ -98,93 +127,148 @@ class _SessionsListItemState extends State<SessionsListItem>
     if (sessionDataDebug) pu.printd("Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
   }
 
-  // Method used to display an overlay with a session data preview. 
-  void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) 
+  // Method used to save data and metadata
+  Future<void> _saveUpdatedDataAndMetadata
+  ({
+    required String title, required List<String> keywords, required List<String> updatedIdeas,  
+    required String fileNameWithoutExtension, required String fileExtension
+  }) async 
   {
-    String title = sessionMetadata[DashboardUtils.keyTitle];
-    showGeneralDialog
-    (
-      context: context,
-      transitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, anim1, anim2) 
+    if (updatedIdeas.isEmpty) 
+    {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("No ideas to save!")),
+      );
+      return;
+    }
+
+    // Format ideas for the text file
+    var now = DateTime.now();
+    //.add_jm() to add this hour:minutes format: 5:08 PM
+    var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+    var formattedDate = formatter.format(now);
+    String fileContent = "Group Problem Solving Ideas\n";
+    fileContent += "$title\n";
+    fileContent += "Date: $formattedDate\n";
+    fileContent += "----------------------------\n";
+    for (var i = 0; i < updatedIdeas.length; i++) {
+      fileContent += "${i + 1}. ${updatedIdeas[i]}\n";
+    }
+    
+    Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));
+    String? filePath;
+
+    try {
+      // For mobile
+      String? folderPath = await rtdu.getApplicationFolderPath();
+      filePath = "$folderPath/$fileNameWithoutExtension$fileExtension";
+
+      // Platform-specific file saving
+      if (Platform.isAndroid) 
       {
-        return Scaffold
+        // Outside of testing: using SAF to save the file
+        if (!runningTests) {
+          // Deleting the current file if existant          
+          await fu.deleteFile(filePath);
+
+          // Removing the related stored dashboard data
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    
+
+          filePath = await fu.saveFileOnAndroid(fileNameWithoutExtension, fileExtension, dataBytes);
+          // Updating the file names list: saveFileOnAndroid
+          await du.getStoredFileNamesOnMobile();
+          if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+        }
+        else {
+          // otherwise: using tmp files for testing
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+
+          // Deleting the current file if existant          
+          await fu.deleteFile(filePath);
+
+          // Removing the related stored dashboard data
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    
+          await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
+        }
+
+        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+      } 
+      else if (Platform.isIOS) 
+      {
+        // Outside of testing
+        if (!runningTests) {
+
+          // Deleting the current file if existant          
+          await fu.deleteFile(filePath);
+
+          // Removing the related stored dashboard data
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    
+          filePath = await fu.saveFileOniOS(fileNameWithoutExtension, fileExtension, dataBytes);
+          // Updating the file names list: saveFileOniOS
+          await du.getStoredFileNamesOnMobile();
+          if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+        }
+        else {
+          // otherwise: using tmp files for testing
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+
+          // Deleting the current file if existant          
+          await fu.deleteFile(filePath);
+
+          // Removing the related stored dashboard data
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    
+          await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
+        }
+      } 
+      else 
+      {
+        // Removing the related stored dashboard data
+        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
+    
+        // Desktop implementation using FilePicker
+        filePath = await FilePicker.platform.saveFile(
+          dialogTitle: 'Please enter a file name.',
+          fileName: '$fileNameWithoutExtension$fileExtension', 
+          bytes: dataBytes,
+          type: FileType.custom,
+          allowedExtensions: ['txt'],
+        );       
+      }
+
+      // Save Metadata to Dashboard if file was saved successfully
+      if (filePath != null) 
+      {
+        // Date
+        var now = DateTime.now();
+        //.add_jm() to add this hour:minutes format: 5:08 PM
+        var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+        var formattedDate = formatter.format(now);   
+        await du.saveDashboardMetadata
         (
-          appBar:AppBar
-          (
-            centerTitle: true, 
-            title: 
-            Text
-            (
-              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-              softWrap:true, title, style: previewTitleStyle
-            ),
-            // Left side: Edit Button
-            leadingWidth: 100,
-            leading: Row(
-              children: [
-                // Group data is kept read-only
-                dashboardContext == DashboardUtils.caContext 
-                  ?
-                  IconButton
-                  (
-                    icon: const Icon(Icons.edit),
-                    color: appBarWhite,
-                    onPressed: ()
-                    {                      
-                      // Starts the session data editing
-                      editCASessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
-                      // Closes the modal preview overlay
-                      Navigator.of(context).pop();
-                    },
-                    tooltip: editTooltipLabel,
-                  )
-                  :
-                  const SizedBox(height: 0, width: 0),
-                IconButton(
-                  icon: const Icon(Icons.share),
-                  color: appBarWhite,
-                  onPressed: () 
-                  {shareSession(context, sessionMetadata, tmpFilePath);},
-                  tooltip: "Share session",
-                ),
-              ],
-            ),
-            
-            // Right side: Close Button
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.close),
-                color: appBarWhite,
-                onPressed: () => Navigator.of(context).pop(),
-                tooltip: "Close preview",
-              ),
-            ],
-          ),
-          body: SafeArea(
-            // SingleChildScrollView ensures the content is scrollable 
-            // regardless of the widget's internal structure
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: 
-                (sessionMetadata[DashboardUtils.keyFilePath] != null)
-                ?
-                  (dashboardContext == DashboardUtils.caContext)
-                  ? CAPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
-                  : GPSPreviewWidget(pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath)
-                :
-                  const Text('Null file path'),
-              ),
-            ),
-          )
+          typeOfDashboardContext: DashboardUtils.gpsContext,
+          title: title, 
+          keywords: keywords, 
+          formattedDate: formattedDate,
+          pathToFile: filePath,
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Session saved successfully!")),
         );
       }
-    );
+    } catch (e) {
+      pu.printd("Save Error: $e");
+    }
   }
 
 
+  
   @override void dispose() 
   {
     kwsEditController.dispose();
@@ -290,7 +374,6 @@ class _SessionsListItemState extends State<SessionsListItem>
                       tooltip: previewTooltipLabel,
                     ),
                     // To edit the session file data
-                    // Group data is kept read-only
                     widget.dashboardContext == DashboardUtils.caContext 
                     ?
                     IconButton(
@@ -332,6 +415,309 @@ class _SessionsListItemState extends State<SessionsListItem>
       ),
     );
   }
+
+// Method used to display an overlay with a session data preview. 
+void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) async
+{
+  String title = sessionMetadata[DashboardUtils.keyTitle];
+  await showGeneralDialog
+  (
+    context: context,
+    transitionDuration: const Duration(milliseconds: 300),
+    pageBuilder: (context, anim1, anim2) 
+    {
+      // Moving StatefulBuilder to wrap the Scaffold so setLocalState is available everywhere inside
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setLocalState) 
+        { 
+          return Scaffold
+          (
+            appBar: AppBar
+            (
+              centerTitle: true, 
+              title: 
+              Text
+              (
+                textAlign: TextAlign.center, maxLines: 20, overflow: TextOverflow.visible, 
+                softWrap: true, title, style: previewTitleStyle
+              ),
+              // Left side: Edit and Share Buttons
+              leadingWidth: 100,
+              leading: Row(
+                children: [
+                  IconButton
+                  (
+                    icon: const Icon(Icons.edit),
+                    color: appBarWhite,
+                    onPressed: () async
+                    {    
+                      print("IconButton: onPressed: ${widget.dashboardContext}");
+
+                      if (widget.dashboardContext == DashboardUtils.caContext) 
+                      {                
+                        // Starts the session data editing
+                        editCASessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                        // Closes the modal preview overlay
+                        Navigator.of(context).pop();
+                      }
+                      else if (widget.dashboardContext == DashboardUtils.gpsContext) 
+                      {
+                        // Retrieving the ideas
+                        _ideasListBeforeEdition = await editGPSSessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                        _ideasListBeforeEditionCopy = List.from(_ideasListBeforeEdition);
+                        print("_showPreviewOverlayListItem");
+                        print("widget.dashboardContext == DashboardUtils.gpsContext: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+
+                        // Opening the edition overlay and waiting for it to close
+                        if (context.mounted)
+                        {
+                          await _showEditOverlay(context);                        
+
+                          print("after await _showEditOverlayListItem(context):_ideasListBeforeEdition: $_ideasListBeforeEdition");
+
+                          setLocalState(() { });
+                        }
+                        
+                      }
+                      else 
+                      {
+                        throw Exception("Unexpected context: ${widget.dashboardContext}");
+                      }
+                    },
+                    tooltip: editTooltipLabel,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.share),
+                    color: appBarWhite,
+                    onPressed: () 
+                    { shareSession(context, sessionMetadata, tmpFilePath); },
+                    tooltip: "Share session",
+                  ),
+                ],
+              ),
+              
+              // Right side: Close Button
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  color: appBarWhite,
+                  onPressed: () async
+                  {
+                    // Saving the data if modified
+                    print("_ideasListBeforeEdition: $_ideasListBeforeEdition");
+                    print("_ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
+                    if ( !cu.areListsOfEqualSortedContent(_ideasListBeforeEdition, _ideasListBeforeEditionCopy) )
+                    {
+                        String filePath = sessionMetadata[DashboardUtils.keyFilePath];
+                        String fileName = filePath.split('/').last;
+                        fileName = filePath.split('\\').last; // for windows
+                        String fileNameWithoutExtension = fileName.split('.').first;
+                        var keywords = sessionMetadata[DashboardUtils.keyKeywords].cast<String>();
+                        print("fileNameWithoutExtension: $fileNameWithoutExtension");
+                        print("sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
+                        await _saveUpdatedDataAndMetadata
+                        (title: title, keywords: keywords, updatedIdeas: _ideasListBeforeEdition,
+                        fileNameWithoutExtension: fileNameWithoutExtension, fileExtension: ".txt");
+                    
+                    }
+                    Navigator.of(context).pop();
+                  },
+                  tooltip: "Close preview",
+                ),
+              ],
+            ),
+            body: SafeArea
+            (
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: 
+                  (sessionMetadata[DashboardUtils.keyFilePath] != null)
+                  ?
+                    (dashboardContext == DashboardUtils.caContext)
+                    ? CAPreviewWidget(
+                        pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
+                        caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
+                      )
+                    : GPSPreviewWidget(
+                        pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
+                        ideas: _ideasListBeforeEdition,                       
+                        
+                        gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
+                      )
+                  :
+                    const Text('Null file path'),
+                ),
+              ),
+            )
+          );
+        }
+      );
+    }
+  );
+}
+  
+
+  // Method used to display an overlay with the ideas to edit. 
+  Future<void> _showEditOverlay(BuildContext context) async
+  {
+    print("_showEditOverlayListItem");
+    await showGeneralDialog
+    (
+      context: context,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, anim1, anim2) 
+      {
+        return Scaffold
+        (
+          appBar:AppBar
+          (
+            centerTitle: true, 
+            title: 
+            const Text
+            (
+              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
+              softWrap:true, 'Ideas List', style: previewTitleStyle
+            ),
+ 
+            // Right side: Close Button
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.close),
+                color: appBarWhite,
+                onPressed: () 
+                {                   
+                  Navigator.of(context).pop();
+                },
+                tooltip: overlayClosingTooltip,
+              ),
+            ],
+          ),
+          body: 
+          SafeArea(
+            child:  
+            StatefulBuilder(
+              builder: (BuildContext context, StateSetter setLocalState) 
+              {   
+                return      
+                Column(
+                  children: [
+                    NewTextListDeletionByBulk
+                      (
+                        areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
+                        enteredTextItemsList: _ideasListBeforeEdition,
+                        indexesOfTextItemsSelectedForDeletion: _indexesOfIdeasSelectedForDeletion,
+                        callbackFunctionToRefreshTheTextItemsList: 
+                        () 
+                        {
+                          setLocalState((){});
+                          setState(() {_areSomeIdeasForDeletion = false;});
+                        }
+                      ),
+                    // List of added texts or placeholder message
+                    Expanded(
+                      child: 
+                        ListView.builder
+                            (                  
+                              padding: const EdgeInsets.only(bottom: 96),
+                              itemCount: _ideasListBeforeEdition.length,
+                              itemBuilder: (_, index) 
+                              {
+                                return 
+                                  
+                                    EditableDeletableTextListItem
+                                    (
+                                      key: ValueKey(_ideasListBeforeEdition[index]),
+                                      itemIndex: index, 
+                                      itemText: _ideasListBeforeEdition[index], 
+                                      onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
+                                                                          { 
+                                                                            print("value: $boolParam");   
+                                                                            print("index: $intParam");                                                               
+                                                                            if(boolParam!) 
+                                                                            {                                                                    
+                                                                              // adding the index to _ideasSelectedForDeletionIndexes
+                                                                              _indexesOfIdeasSelectedForDeletion.add(index);
+                                                                              _indexesOfIdeasSelectedForDeletion.sort();
+                                                                              _areSomeIdeasForDeletion = true;                                    
+                                                                              
+                                                                              setLocalState(() {});
+                                                                              setState(() {
+                                                                                
+                                                                              });
+                                                                            }
+                                                                            else{
+                                                                              _indexesOfIdeasSelectedForDeletion.remove(index);
+                                                                              if (_indexesOfIdeasSelectedForDeletion.isEmpty) _areSomeIdeasForDeletion = false;
+                                                                              
+                                                                              setLocalState(() {});
+                                                                              setState(() {
+                                                                                
+                                                                              });
+                                                                            }
+                                                                            print("showEditOverlayListItem: _ideasSelectedForDeletionIndexes: $_indexesOfIdeasSelectedForDeletion");
+                                                                          }, 
+                                      // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
+                                      parentCallbackFunctionToUpdateTheListItemValue: 
+                                      ({required intParam, required stringParam}) 
+                                      {
+                                        setLocalState(() {});
+                                        setState(() {
+                                          _ideasListBeforeEdition[intParam] = stringParam;
+                                        });
+                                        onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
+                                      },
+                                      parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_indexesOfIdeasSelectedForDeletion.add(index);}, 
+                                      themeData: Theme.of(context),                          
+                                    )                          
+                                  ;
+                              },
+                            )
+                    ),
+                    // TextField used to add a new text
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField
+                      (
+                        key: const ValueKey('ideaOverlayField'),
+                        controller: _tecNewIdea,
+                        textAlign: TextAlign.left,
+                        decoration: const InputDecoration
+                        (
+                          hint: Text
+                          ( 
+                            newIdeaTextFieldHint,
+                            textAlign: TextAlign.left,                                          
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                        ),
+                        onSubmitted: (value)
+                        {
+                          setLocalState(() {
+                            _ideasListBeforeEdition.add(value.trim());
+                          });
+                          setState(() {
+                            
+                          });
+                          _tecNewIdea.clear();
+                          print("_showEditOverlayListItem: list item: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                        },
+                      ),
+                    ),
+                  ]
+              );
+              }
+          ),
+        )
+        );
+      }
+    );
+  }
+
+
+
+
 }
 
 

@@ -158,7 +158,7 @@ class GPSProcessState extends State<GPSProcess>
           // otherwise: using tmp files for testing
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
           filePath = path.join(applicationFolderPath!, "$_fileName$_fileExtension");
-          fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
+          await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
 
         if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
@@ -176,7 +176,7 @@ class GPSProcessState extends State<GPSProcess>
           // otherwise: using tmp files for testing
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
           filePath = path.join(applicationFolderPath!, "$_fileName$_fileExtension");
-          fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
+          await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
       } 
       else 
