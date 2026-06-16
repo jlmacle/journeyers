@@ -60,23 +60,39 @@ class _GPSPreviewWidgetState
   // only runs once, at widget creation
   @override
   void initState() {
+    print("_GPSPreviewWidgetState: initState");
+    print("_GPSPreviewWidgetState: widget.ideas.isEmpty: ${widget.ideas.isEmpty}: widget.ideas: ${widget.ideas}");
     super.initState();
-    if (widget.ideas.isEmpty)
+    
+    _ideas = widget.ideas;
+    if (_ideas.isEmpty) 
     {
-       print("_GPSPreviewWidgetState: _fetchingData");
+      print("_GPSPreviewWidgetState: _fetchingData");
       _fetchingData();
     }
-    // else didUpdateWidget
+    else
+    {
+      setState(() {
+        _isLoading = false;
+      });
+    }
      
   }
 
   @override
   void didUpdateWidget(covariant GPSPreviewWidget oldWidget) {
+    print("_GPSPreviewWidgetState: didUpdateWidget");
+    print("widget.ideas: ${widget.ideas}");
+    print("oldWidget.ideas: ${oldWidget.ideas}");
+
     super.didUpdateWidget(oldWidget);
+
     // Updating with new values
     if (widget.ideas != oldWidget.ideas && widget.ideas.isNotEmpty) {
       setState(() {
+        print("didUpdateWidget: setState");
         _ideas = widget.ideas;
+        _isLoading = false;
       });
     }
   }
