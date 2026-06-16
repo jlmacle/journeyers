@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:journeyers/debug_constants.dart';
@@ -20,7 +21,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
 
     if (Platform.isAndroid)
     {      
-      if (editDebug) pu.printd("Editing: editSessionData on Android");
+      if (editDebug) pu.printd("Editing: editCASessionData on Android");
       try
       {
         // Outside of testing: reading file using SAF
@@ -28,7 +29,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("Testing Debug: editSessionData: Reading $fileNameWithExtension from tmp folder");
+          if (testingDebug) pu.printd("Testing Debug: editCASessionData: Reading $fileNameWithExtension from tmp folder");
           csvContent = await File(filePath).readAsString();
         }
       }
@@ -37,7 +38,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
     }
     else if (Platform.isIOS)
     {
-      if (previewBuildingDebug) pu.printd("Editing: editSessionData on iOS");
+      if (previewBuildingDebug) pu.printd("Editing: editCASessionData on iOS");
       try
       {
         // Outside of testing
@@ -45,7 +46,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("Editing: editSessionData: Reading $fileNameWithExtension from tmp folder");
+          if (testingDebug) pu.printd("Editing: editCASessionData: Reading $fileNameWithExtension from tmp folder");
           csvContent = await File(filePath).readAsString();
         }
       }
@@ -68,8 +69,98 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
     String editedTitle = "$title-for-edition";
 
     if (editDebug) dtoForEdition.printToConsole();
-    if (editDebug) pu.printd("Editing: editSessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
-    if (editDebug) pu.printd("Editing: editSessionData: editedTitle: $editedTitle");
+    if (editDebug) pu.printd("Editing: editCASessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: editCASessionData: editedTitle: $editedTitle");
     onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
     
   }
+
+
+// Method used to edit group problem-solving session data
+Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction) async {
+    if (editDebug) pu.printd("Editing: editGPSSessionData : $editGPSSessionData");
+
+    // Getting the title
+    List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
+    if (editDebug) pu.printd("Editing: sessionDataRetrieved : $sessionDataRetrieved");
+    var sessionData = sessionDataRetrieved.where((session) => session[DashboardUtils.keyFilePath] == filePath).first as Map<String,dynamic>;
+    if (editDebug) pu.printd("Editing: sessionData : $sessionData");
+    
+    var title = sessionData[DashboardUtils.keyTitle];
+
+    var content = "";
+    String fileNameWithExtension = filePath.split('/').last;
+    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+
+    if (Platform.isAndroid)
+    {      
+      if (editDebug) pu.printd("Editing: editGPSSessionData on Android");
+      try
+      {
+        // Outside of testing: reading file using SAF
+        if (!runningTests) { content = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension);}
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("Testing Debug: editGPSSessionData: Reading $fileNameWithExtension from tmp folder");
+          content = await File(filePath).readAsString();
+        }
+      }
+      on Exception
+      catch(e) {pu.printd("Editing: Exception: GPS on Android: $e"); }
+    }
+    else if (Platform.isIOS)
+    {
+      if (previewBuildingDebug) pu.printd("Editing: editGPSSessionData on iOS");
+      try
+      {
+        // Outside of testing
+        if (!runningTests) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("Editing: editGPSSessionData: Reading $fileNameWithExtension from tmp folder");
+          content = await File(filePath).readAsString();
+        }
+      }
+      on Exception
+      catch(e) {pu.printd("Editing: Exception: CA on iOS: $e"); }
+    }
+    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
+    {
+      // Checking if the CSV file exists
+      File csvFile = File(filePath);
+      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
+      content = csvFile.readAsStringSync();
+    }
+
+    var txtLines = LineSplitter.split(content).toList();
+    List<String> ideas = [];
+    if (txtLines.length >= 2) {       
+        // Ideas start after the "---" separator (index 3 onwards)
+        // We strip the "1. ", "2. " numbering prefix
+        ideas = txtLines
+            .skip(4)
+            .where((line) => line.trim().isNotEmpty)
+            .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
+            .toList();        
+      }
+
+    // Loading the data from the CSV into a DTO
+    DTOCAForm dtoForEdition = DTOCAForm.fromCSV(content);
+
+    // Building the edited versions of title and file name
+    String editedFileNameWithoutExtension = "$fileNameWithoutExtension-edited";
+    String editedTitle = "$title-for-edition";
+
+    if (editDebug) pu.printd("Editing: editGPSSessionData: ideas: $ideas");
+
+    if (editDebug) pu.printd("Editing: editGPSSessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: editGPSSessionData: editedTitle: $editedTitle");
+    // onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
+    
+    return ideas;
+  }
+
+  
+

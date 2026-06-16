@@ -16,12 +16,16 @@ class GPSPreviewWidget extends StatefulWidget {
   /// The path to a stored group problem-solving session data.
   final String pathToStoredData;
 
+  /// The ideas listed in the preview.
+  final List<String> ideas;
+
   /// Callback function used to update the temporary file path used for sharing a session data.
   final ValueChanged<String> gpsPreviewCallbackFunctionToUpdateTmpFilePath;
 
   const GPSPreviewWidget({
     super.key,
     required this.pathToStoredData,
+    required this.ideas,
     required this.gpsPreviewCallbackFunctionToUpdateTmpFilePath
   });
 
@@ -37,12 +41,44 @@ class _GPSPreviewWidgetState
   bool _isLoading = true;
   String _sessionTitle = "";
   String _dateString = "";
+
+  // List used to display the ideas
   List<String> _ideas = [];
 
+
+  // The ideas edited/added in the _showEditOverlayPreview
+  List<String> _editOverlayIdeasList = [];
+
+  void onIdeasUpdated(List<String> ideasUpdated)
+  {
+    print("onIdeasUpdated");
+    setState(() {
+      _ideas = ideasUpdated;
+    });  
+  }
+
+  // only runs once, at widget creation
   @override
   void initState() {
     super.initState();
-    _fetchingData();
+    if (widget.ideas.isEmpty)
+    {
+       print("_GPSPreviewWidgetState: _fetchingData");
+      _fetchingData();
+    }
+    // else didUpdateWidget
+     
+  }
+
+  @override
+  void didUpdateWidget(covariant GPSPreviewWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Updating with new values
+    if (widget.ideas != oldWidget.ideas && widget.ideas.isNotEmpty) {
+      setState(() {
+        _ideas = widget.ideas;
+      });
+    }
   }
 
   Future<void> _fetchingData() async {
