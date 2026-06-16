@@ -93,6 +93,7 @@ class _SessionsListItemState extends State<SessionsListItem>
  
 
   // To clean
+  // Method used to update the keywords
   void onKeywordsUpdated(String? filePath) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
@@ -518,6 +519,10 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         await _saveUpdatedDataAndMetadata
                         (title: title, keywords: keywords, updatedIdeas: _ideasListBeforeEdition,
                         fileNameWithoutExtension: fileNameWithoutExtension, fileExtension: ".txt");
+
+                        // Syncing the copy so the next time this preview is opened without editing,
+                        // the comparison won't falsely trigger another save.
+                        _ideasListBeforeEditionCopy = List.from(_ideasListBeforeEdition);
                     
                     }
                     Navigator.of(context).pop();
