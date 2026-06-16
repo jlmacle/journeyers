@@ -45,4 +45,23 @@ void main() {
       expect(cu.areListsEqualSets([1, null, 3], [1, 3]), isFalse);
     });
   });
+
+  group('areListsOfEqualSortedContent', () {
+    test('returns true for identical lists (same order)', () {
+      expect(cu.areListsOfEqualSortedContent([1, 2, 3], [1, 2, 3]), isTrue);
+    });
+
+    test('returns true for identical lists (different order)', () {
+      expect(cu.areListsOfEqualSortedContent([1, 2, 3], [3, 2, 1]), isTrue);
+    });
+
+    test('returns false for different lists (different length)', () {
+      expect(cu.areListsOfEqualSortedContent([1, 2, 3], [3, 2, 1, 0]), isFalse);
+    });
+
+    test('returns false for different lists (same length, different content)', () {
+      expect(cu.areListsOfEqualSortedContent([1, 2, 3], [3, 2, 0]), isFalse);
+    });
+
+  });
 }
