@@ -163,7 +163,7 @@ class DashboardPageState extends State<DashboardPage>
   Future<void> _deleteSelectedSession(String filePath) async
   {
     // Removing the stored file
-    await fu.deleteCSVFile(filePath);
+    await fu.deleteFile(filePath);
 
     // Removing the related stored dashboard data
     await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
@@ -373,8 +373,36 @@ class DashboardPageState extends State<DashboardPage>
                             session[DashboardUtils.keyTitle],
                             filePath,
                           ),
-                          onEditPressedCallbackFunction: () => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
-                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) => editCASessionData(filePath, widget.onEditSessionDataCallbackFunction),
+                          onEditPressedCallbackFunction: 
+                          () 
+                          {
+                            if (widget.dashboardContext == DashboardUtils.caContext)
+                            {
+                              editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                            }
+                            else if (widget.dashboardContext == DashboardUtils.gpsContext)
+                            {
+                              editGPSSessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                            }
+                            else 
+                            {
+                              throw Exception("Unknown context: ${widget.dashboardContext}");
+                            }
+
+                           },
+                          onEditSessionDataCallbackFunction: 
+                          ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) 
+                          { 
+                            if (widget.dashboardContext == DashboardUtils.caContext)
+                            {
+                              editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                            }
+                            else if (widget.dashboardContext == DashboardUtils.gpsContext)
+                            {
+                              editGPSSessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                            }
+                            
+                          },
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(filePath),
                         );
