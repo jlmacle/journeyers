@@ -61,8 +61,6 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     // Creating a fixed list to iterate over so clearing doesn't break the loop
     final keysOfListsSelectedForDeletion = List<String>.from(widget.keysOfListsSelectedForDeletion!);
 
-    // print("keysOfListsSelectedForDeletion: $keysOfListsSelectedForDeletion");
-
     // Updating the DB
     await _textListsDB.removeListData(keysOfListsSelectedForDeletion);    
 
