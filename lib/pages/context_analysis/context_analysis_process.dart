@@ -166,6 +166,11 @@ class CAProcessState extends State<CAProcess>
   }
 
   
+  // ─── SCROLLCONTROLLER related data ───────────────────────────────────────
+  final ScrollController scrollController = ScrollController();
+  double scrollbarThickness = 0;
+
+  
   @override
   void initState() {
     super.initState();
@@ -176,8 +181,7 @@ class CAProcessState extends State<CAProcess>
     _loadDTO(dtoAssetPathToJson: '');
     //_loadDTO(dtoAssetPathToJson: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');      
     analysisKeywords = widget.keywordsForEdition.toSet();
-    print("CAProcess: initState: analysisKeywords: $analysisKeywords");
-    
+    if (editDebug) pu.printd("CAProcess: initState: analysisKeywords: $analysisKeywords");    
     
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
@@ -191,9 +195,6 @@ class CAProcessState extends State<CAProcess>
     );    
   }
 
-  // ─── SCROLLCONTROLLER related data ───────────────────────────────────────
-  final ScrollController scrollController = ScrollController();
-    double scrollbarThickness = 0;
 
   @override
   Widget build(BuildContext context) 
