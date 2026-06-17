@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Context analysis}
 /// A widget used for keywords declaration in the context analysis process.
@@ -55,7 +57,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   void initState() {
     super.initState();
     _keywordsListSorted = widget.keywordsForEdition.toList();
-    print("_CAKeywordsDeclarationState: initState: _keywordsListSorted: $_keywordsListSorted");
+    if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: initState: _keywordsListSorted: $_keywordsListSorted");
   }
 
   @override
@@ -67,7 +69,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
 
   @override
   Widget build(BuildContext context) {
-    print("_CAKeywordsDeclarationState: ");
+
     return Column
     (
       children: 
@@ -115,10 +117,12 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                       // Removal from the reference set
                       setState( () 
                       {
-                        print("_keywordsSet.remove(tag);: _keywordsSet: $_keywordsSet");
-                        _keywordsSet.remove(tag);
-                        print("_keywordsSet: $_keywordsSet");
+                        
+                        _keywordsSet.remove(tag);                        
                         _keywordsListSorted.removeWhere((item) => item == tag);
+
+                        if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: build: _keywordsSet: $_keywordsSet");               
+                        if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: build: _keywordsListSorted: $_keywordsListSorted");               
                       });
                       widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
                     }, 
