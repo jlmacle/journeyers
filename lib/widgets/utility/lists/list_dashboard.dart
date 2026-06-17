@@ -28,7 +28,7 @@ class TextListsDisplay extends StatefulWidget
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A callback function called when session data is edited.
-  final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
+  final FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction;
 
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
@@ -422,7 +422,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                             index
                           ),
                           onEditPressedCallbackFunction: () {},
-                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) {},
+                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required keywordsForEdition, required bool sessionDataEdition}) {},
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onParticipantsUpdatedCallbackFunction: updateParticipants,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),

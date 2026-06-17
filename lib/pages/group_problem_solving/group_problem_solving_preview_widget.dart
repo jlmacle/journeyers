@@ -45,10 +45,6 @@ class _GPSPreviewWidgetState
   // List used to display the ideas
   List<String> _ideas = [];
 
-
-  // The ideas edited/added in the _showEditOverlayPreview
-  List<String> _editOverlayIdeasList = [];
-
   void onIdeasUpdated(List<String> ideasUpdated)
   {
     print("onIdeasUpdated");

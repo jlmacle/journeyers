@@ -36,7 +36,7 @@ class DashboardPage extends StatefulWidget
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A callback function called when session data is edited.
-  final FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction;
+  final FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
@@ -391,11 +391,13 @@ class DashboardPageState extends State<DashboardPage>
 
                            },
                           onEditSessionDataCallbackFunction: 
-                          ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required bool sessionDataEdition}) 
+                          ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required keywordsForEdition, required bool sessionDataEdition}) 
                           { 
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                              print("// editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);");
+                              // editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                              widget.onEditSessionDataCallbackFunction(dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle, keywordsForEdition: keywordsForEdition, sessionDataEdition: sessionDataEdition);
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {
@@ -500,4 +502,7 @@ class DashboardPageState extends State<DashboardPage>
       ),
     );
   }
+
+
+
 }

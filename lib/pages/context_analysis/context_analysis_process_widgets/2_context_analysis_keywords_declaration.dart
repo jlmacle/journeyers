@@ -6,12 +6,16 @@ import 'package:journeyers/app_themes.dart';
 /// A widget used for keywords declaration in the context analysis process.
 class CAKeywordsDeclaration extends StatefulWidget 
 {
+  /// A keywords value at edition time.
+  final Set<String> keywordsForEdition;
+
   /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> onKeywordsUpdatedProcessCallbackFunction;
 
   const CAKeywordsDeclaration
   ({
     super.key,
+    required this.keywordsForEdition,
     required this.onKeywordsUpdatedProcessCallbackFunction
   });
 
@@ -48,6 +52,13 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   }
 
   @override
+  void initState() {
+    super.initState();
+    _keywordsListSorted = widget.keywordsForEdition.toList();
+    print("_CAKeywordsDeclarationState: initState: _keywordsListSorted: $_keywordsListSorted");
+  }
+
+  @override
   void dispose()
   {
     _keywordsController.dispose();
@@ -56,6 +67,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
 
   @override
   Widget build(BuildContext context) {
+    print("_CAKeywordsDeclarationState: ");
     return Column
     (
       children: 
@@ -101,7 +113,13 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                     onDeleted: () 
                     {
                       // Removal from the reference set
-                      setState( () {_keywordsSet.remove(tag);});
+                      setState( () 
+                      {
+                        print("_keywordsSet.remove(tag);: _keywordsSet: $_keywordsSet");
+                        _keywordsSet.remove(tag);
+                        print("_keywordsSet: $_keywordsSet");
+                        _keywordsListSorted.removeWhere((item) => item == tag);
+                      });
                       widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
                     }, 
                     deleteIconColor: appBarWhite,
