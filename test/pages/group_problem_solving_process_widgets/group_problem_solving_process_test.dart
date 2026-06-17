@@ -224,7 +224,6 @@ void main()
 
     //     expect (activeColor, checklistItemCheckedColor);        
     //   }
-    //   print("Passed checklistItemCheckedColor test");
 
     //   // Searching to close the overlay
     //   var closeChecklistFinder = find.byTooltip(closeChecklistTooltipLabel);
