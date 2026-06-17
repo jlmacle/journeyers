@@ -118,7 +118,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   {
     setState(() {
       _ideasListBeforeEdition[intParam] = stringParam;
-      print("list item: onUpdateTheIdeaValue: _enteredIdeasList: $_ideasListBeforeEdition");
+      if (editDebug) pu.printd("Editing: _SessionsListItemState: onUpdateTheIdeaValue: Ideas list: $_ideasListBeforeEdition ");
     });  
   }
 
@@ -417,7 +417,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                     color: appBarWhite,
                     onPressed: () async
                     {    
-                      print("Edit: onPressed: ${widget.dashboardContext}");
+
                       previewEditMode = true;
 
                       if (widget.dashboardContext == DashboardUtils.caContext) 
@@ -432,15 +432,11 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         // Retrieving the ideas
                         _ideasListBeforeEdition = await editGPSSessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
                         _ideasListBeforeEditionCopy = List.from(_ideasListBeforeEdition);
-                        print("_showPreviewOverlayListItem");
-                        print("widget.dashboardContext == DashboardUtils.gpsContext: _ideasListBeforeEdition: $_ideasListBeforeEdition");
-
+                      
                         // Opening the edition overlay and waiting for it to close
                         if (context.mounted)
                         {
                           await _showEditOverlay(context);                        
-
-                          print("after await _showEditOverlayListItem(context):_ideasListBeforeEdition: $_ideasListBeforeEdition");
 
                           setLocalState(() { });
                         }
@@ -470,12 +466,13 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   color: appBarWhite,
                   onPressed: () async
                   {
-                    print("_ideasListBeforeEdition: $_ideasListBeforeEdition");
-                    print("_ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
-                    print("previewEditMode: $previewEditMode");
+                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: _ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
+                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: previewEditMode: $previewEditMode");
+                    
                     if (previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasListBeforeEdition, _ideasListBeforeEditionCopy) )
                     {
-                        print("List edited: saving data and metadata");
+                        if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: List edited: saving data and metadata");
 
                         String filePath = sessionMetadata[DashboardUtils.keyFilePath];
                         String fileName = filePath.split('/').last;
@@ -483,8 +480,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         String fileNameWithoutExtension = fileName.split('.').first;
                         var keywords = sessionMetadata[DashboardUtils.keyKeywords].cast<String>();
 
-                        print("fileNameWithoutExtension: $fileNameWithoutExtension");
-                        print("sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
+                        if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: fileNameWithoutExtension: $fileNameWithoutExtension");
+                        if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
                         
                         await _saveUpdatedDataAndMetadata
                         (title: title, keywords: keywords, updatedIdeas: _ideasListBeforeEdition,
@@ -536,7 +533,6 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
   // Method used to display an overlay with the ideas to edit. 
   Future<void> _showEditOverlay(BuildContext context) async
   {
-    print("_showEditOverlayListItem");
     await showGeneralDialog
     (
       context: context,
@@ -606,9 +602,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                       itemIndex: index, 
                                       itemText: _ideasListBeforeEdition[index], 
                                       onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
-                                                                          { 
-                                                                            print("value: $boolParam");   
-                                                                            print("index: $intParam");                                                               
+                                                                          {                                                               
                                                                             if(boolParam!) 
                                                                             {                                                                    
                                                                               // adding the index to _ideasSelectedForDeletionIndexes
@@ -630,7 +624,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                                                                 
                                                                               });
                                                                             }
-                                                                            print("showEditOverlayListItem: _ideasSelectedForDeletionIndexes: $_indexesOfIdeasSelectedForDeletion");
+                                                                            if (editDebug) pu.printd("Editing: _SessionsListItemState: _showEditOverlay: _ideasSelectedForDeletionIndexes: $_indexesOfIdeasSelectedForDeletion");
+                      
                                                                           }, 
                                       // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
                                       parentCallbackFunctionToUpdateTheListItemValue: 
@@ -675,7 +670,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                             
                           });
                           _tecNewIdea.clear();
-                          print("_showEditOverlayListItem: list item: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                          if (editDebug) pu.printd("Editing: _SessionsListItemState: _showEditOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                      
                         },
                       ),
                     ),
