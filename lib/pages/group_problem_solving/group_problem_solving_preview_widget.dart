@@ -45,25 +45,16 @@ class _GPSPreviewWidgetState
   // List used to display the ideas
   List<String> _ideas = [];
 
-  void onIdeasUpdated(List<String> ideasUpdated)
-  {
-    print("onIdeasUpdated");
-    setState(() {
-      _ideas = ideasUpdated;
-    });  
-  }
-
   // only runs once, at widget creation
   @override
   void initState() {
-    print("_GPSPreviewWidgetState: initState");
-    print("_GPSPreviewWidgetState: widget.ideas.isEmpty: ${widget.ideas.isEmpty}: widget.ideas: ${widget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: initState: widget.ideas: ${widget.ideas}");
     super.initState();
     
     _ideas = widget.ideas;
     if (_ideas.isEmpty) 
     {
-      print("_GPSPreviewWidgetState: _fetchingData");
+      if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: initState: _fetchingData");
       _fetchingData();
     }
     else
@@ -77,16 +68,15 @@ class _GPSPreviewWidgetState
 
   @override
   void didUpdateWidget(covariant GPSPreviewWidget oldWidget) {
-    print("_GPSPreviewWidgetState: didUpdateWidget");
-    print("widget.ideas: ${widget.ideas}");
-    print("oldWidget.ideas: ${oldWidget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: didUpdateWidget");
+    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: didUpdateWidget: widget.ideas: ${widget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: didUpdateWidget: oldWidget.ideas: ${oldWidget.ideas}");
 
     super.didUpdateWidget(oldWidget);
 
     // Updating with new values
     if (widget.ideas != oldWidget.ideas && widget.ideas.isNotEmpty) {
       setState(() {
-        print("didUpdateWidget: setState");
         _ideas = widget.ideas;
         _isLoading = false;
       });
