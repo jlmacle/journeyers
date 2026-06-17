@@ -96,9 +96,6 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
                     intParam: widget.itemIndex
                   );
                   
-                  
-                  // _textsSelectedForDeletion.add(_enteredTextItemsList[index]);
-                  // print("Selected for deletion: $_textsSelectedForDeletion");
                 }
             ),
             // List tile for reading/to start edition 
