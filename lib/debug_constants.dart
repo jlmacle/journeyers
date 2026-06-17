@@ -1,13 +1,13 @@
 const accessibilityDebug = false;
 const csvBuildingDebug = false;
-const editDebug = true;
-const listDebug = true;
+const editDebug = false;
+const listDebug = false;
 const mobileDebug = false;
-const preferencesDebug = false;
+const runtimeDataDebug = false;
 const preloadingDebug = false;
-const previewBuildingDebug = true;
-const sessionDataDebug = true;
-const testingDebug = true;
+const previewBuildingDebug = false;
+const sessionDataDebug = false;
+const testingDebug = false;
 const textFieldDebugging = false;
 
 // Modifiable for file saving/reading reasons
