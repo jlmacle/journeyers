@@ -391,11 +391,11 @@ class DashboardPageState extends State<DashboardPage>
 
                            },
                           onEditSessionDataCallbackFunction: 
-                          ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required keywordsForEdition, required bool sessionDataEdition}) 
+                          ({required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required keywordsForEdition, required bool sessionDataEdition}) 
                           { 
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              widget.onEditSessionDataCallbackFunction(dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle, keywordsForEdition: keywordsForEdition, sessionDataEdition: sessionDataEdition);
+                              widget.onEditSessionDataCallbackFunction(dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition, sessionDataEdition: sessionDataEdition);
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {

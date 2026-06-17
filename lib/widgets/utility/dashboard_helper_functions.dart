@@ -90,7 +90,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
 
 
     // Need to re-build the dashboard page    
-    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: fileNameWithoutExtension, editedTitle: title, keywordsForEdition: keywordsForEdition);
+    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition);
 
   }
 
@@ -168,15 +168,11 @@ Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2Strin
     // Loading the data from the CSV into a DTO
     DTOCAForm dtoForEdition = DTOCAForm.fromCSV(content);
 
-    // Building the edited versions of title and file name
-    String editedFileNameWithoutExtension = "$fileNameWithoutExtension-edited";
-    String editedTitle = "$title-for-edition";
-
     if (editDebug) pu.printd("Editing: editGPSSessionData: ideas: $ideas");
 
-    if (editDebug) pu.printd("Editing: editGPSSessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
-    if (editDebug) pu.printd("Editing: editGPSSessionData: editedTitle: $editedTitle");
-    // onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
+    if (editDebug) pu.printd("Editing: editGPSSessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: editGPSSessionData: title: $title");
+    // onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title);
     
     return ideas;
   }
