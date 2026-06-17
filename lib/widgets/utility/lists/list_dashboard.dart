@@ -136,12 +136,10 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used to get the list of keywords present in a session data
   Future<List<String>> _getUsedKeywords(List<dynamic> listOfListData) async 
   {
-    // print("listOfListData: $listOfListData");
 
     Set<String> kwSet = {};
     for (var listData in listOfListData) 
     {
-      print("listData: $listData");
       List<dynamic> kws = listData[itemKeywordsKey];
       kwSet.addAll(kws.cast<String>());
     }
@@ -157,9 +155,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used to update the list keywords
   Future<void> updateListsKeywords(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
   {
-    print("updateListsKeywords: updatedKeywords; $updatedKeywords");
-    print("updateListsKeywords: listData: $listData");
-
     // Updating listData with the new keywords
     listData[itemKeywordsKey] = updatedKeywords.toList();
 
@@ -192,8 +187,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used to update the list participants
   Future<void> updateListParticipants(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
   {
-    print("updateParticipants: updatedParticipants: $updatedParticipants");
-    print("updateParticipants: listData: $listData");
 
     // Updating listData with the new participants
     listData[subItemsDataListKey] = await _textListsDB.updateParticipants(updatedParticipants, listData);    
@@ -284,8 +277,6 @@ class TextListsDisplayState extends State<TextListsDisplay>
   // Method used to update the session title
   Future<void> updateListLabel(String listKey, String newLabel, Map<String, dynamic> listData) async 
   {
-    print("updateListLabel: listData: $listData");
-
     // Updating listData withe new label
     listData[itemTextKey] = newLabel;
 
