@@ -37,8 +37,6 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
   // Method used to delete several list items
   Future<void> _deleteSelectedLists() async 
   {
-    // print("_deleteSelectedLists:  widget.indexesOfTextItemsSelectedForDeletion: ${widget.indexesOfTextItemsSelectedForDeletion}");
-    // print("_deleteSelectedLists:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
     // Creating a new list to update _enteredTextItemsList
     List<String> updatedNewTextsList = widget.enteredTextItemsList
     // to compare ints with ints
@@ -47,8 +45,6 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
     // to get the strings
     .map((entry) => entry.value)
     .toList();
-
-    // print("_deleteSelectedLists:  updatedNewTextsList: $updatedNewTextsList");
 
     // Clearing indexesOfTextItemsSelectedForDeletion 
     widget.indexesOfTextItemsSelectedForDeletion.clear();
@@ -60,8 +56,6 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
     // Updating the UI
     widget.callbackFunctionToRefreshTheTextItemsList(); // setState    
     
-    // print("Deletion by bulk: after deletion:  widget.enteredTextItemsList: ${widget.enteredTextItemsList}");
-
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected sessions deleted.")));
