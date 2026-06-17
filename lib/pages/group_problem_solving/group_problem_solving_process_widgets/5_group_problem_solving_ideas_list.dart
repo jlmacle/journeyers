@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 
@@ -34,7 +36,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   {
     setState(() {
       _enteredIdeasList[intParam] = stringParam;
-      print("ideas list: onUpdateTheIdeaValue: _enteredIdeasList: $_enteredIdeasList");
+      if (editDebug) pu.printd("Editing: _GPSIdeasListState: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_enteredIdeasList");
     });  
   }
 
@@ -68,8 +70,8 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
         children: [
            ListTile(
               leading: const Icon(Icons.add_circle_outline),
-              title: const Text(ideasListTitle, style: problemSolvingIdeasTitle),
-              onTap: (){print("onTap: _showEditOverlay"); _showEditOverlay(context);},
+              title: const Text(ideasListTitle, style: problemSolvingIdeasTitle),              
+              onTap: () => _showEditOverlay(context),
             ),
           const SizedBox(height: 10),
           if (widget.ideas.isEmpty)
@@ -174,8 +176,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                       itemText: widget.ideas[index], 
                                       onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
                                                                           { 
-                                                                            print("value: $boolParam");   
-                                                                            print("index: $intParam");                                                               
+                                                             
                                                                             if(boolParam!) 
                                                                             {                                                                    
                                                                               // adding the index to _ideasSelectedForDeletionIndexes
@@ -191,7 +192,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                                                               
                                                                               setLocalState(() {});
                                                                             }
-                                                                            print("_ideasSelectedForDeletionIndexes: $_ideasSelectedForDeletionIndexes");
+                                                                            if (editDebug) pu.printd("Editing: _GPSIdeasListState: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes");
                                                                           }, 
                                       // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
                                       parentCallbackFunctionToUpdateTheListItemValue: 
@@ -233,7 +234,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                             
                           });
                           _tecNewIdea.clear();
-                          print("ideas list: _enteredIdeasList: $_enteredIdeasList");
+                          if (editDebug) pu.printd("Editing: _GPSIdeasListState: _showEditOverlay: onSubmitted: _enteredIdeasList : $_enteredIdeasList");
                         },
                       ),
                     ),
