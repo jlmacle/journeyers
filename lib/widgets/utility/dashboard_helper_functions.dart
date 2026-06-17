@@ -71,9 +71,6 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
     DTOCAForm dtoForEdition = DTOCAForm.fromCSV(csvContent);
     dtoForEdition.printToConsole();
 
-    // Building the edited versions of title and file name
-    String editedFileNameWithoutExtension = fileNameWithoutExtension;
-    String editedTitle = title;
     Set<String> keywordsForEdition = keywords.toSet();
 
     // Deleting the previous file and metadata
@@ -88,13 +85,12 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
     await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, allSessionsMetadata: sessionDataRetrieved);
 
     if (editDebug) dtoForEdition.printToConsole();
-    if (editDebug) pu.printd("Editing: editCASessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
-    if (editDebug) pu.printd("Editing: editCASessionData: editedTitle: $editedTitle");
-    
-    // rtdu.resetWasSessionDataSavedStatus(context: DashboardUtils.caContext);
+    if (editDebug) pu.printd("Editing: editCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: editCASessionData: title: $title");
+
 
     // Need to re-build the dashboard page    
-    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle, keywordsForEdition: keywordsForEdition);
+    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: fileNameWithoutExtension, editedTitle: title, keywordsForEdition: keywordsForEdition);
 
   }
 
