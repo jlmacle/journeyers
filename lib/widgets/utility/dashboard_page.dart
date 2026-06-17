@@ -395,8 +395,6 @@ class DashboardPageState extends State<DashboardPage>
                           { 
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              print("// editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);");
-                              // editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);
                               widget.onEditSessionDataCallbackFunction(dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle, keywordsForEdition: keywordsForEdition, sessionDataEdition: sessionDataEdition);
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
