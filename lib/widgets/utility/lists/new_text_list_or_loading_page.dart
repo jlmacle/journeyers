@@ -65,7 +65,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                                       (
                                         dashboardContext: '', 
                                         onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
-                                        onEditSessionDataCallbackFunction: ({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle}) {}, 
+                                        onEditSessionDataCallbackFunction: ({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required keywordsForEdition}) {}, 
                                         onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
                                         dashboardFilteringByKeywordsKey: null,
                                     ),

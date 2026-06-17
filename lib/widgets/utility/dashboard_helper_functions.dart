@@ -6,9 +6,11 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:path/path.dart' as path;
 
 // Method used to edit context analysis session data
-Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction) async {
+Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction) async {
+    print("-editCASessionData-");
     // to clean
     String csvContent = "";
     String fileNameWithExtension = filePath.split('/').last;
@@ -18,7 +20,11 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
     List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.caContext);
     var session = sessionDataRetrieved.where((session) => session[DashboardUtils.keyFilePath] == filePath).first as Map<String,dynamic>;
     var title = session[DashboardUtils.keyTitle];
+    List<String> keywords = (session[DashboardUtils.keyKeywords] as List).cast<String>();
 
+    // ((widget.listData[subItemsDataListKey]) as List)
+    //     .cast<Map<String, dynamic>>();
+    // Getting the CSV content
     if (Platform.isAndroid)
     {      
       if (editDebug) pu.printd("Editing: editCASessionData on Android");
@@ -34,7 +40,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
         }
       }
       on Exception
-      catch(e) {pu.printd("Editing: Exception: CA on Android: $e"); }
+      catch(e) {pu.printd("Editing: Exception: CA on Android:$filePath: $e"); }
     }
     else if (Platform.isIOS)
     {
@@ -58,26 +64,44 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsAndBool
       // Checking if the CSV file exists
       File csvFile = File(filePath);
       if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
-      csvContent = csvFile.readAsStringSync();
+      csvContent = await csvFile.readAsString();
     }
 
     // Loading the data from the CSV into a DTO
     DTOCAForm dtoForEdition = DTOCAForm.fromCSV(csvContent);
+    print("After DTOCAForm.fromCSV(csvContent)");
+    dtoForEdition.printToConsole();
 
     // Building the edited versions of title and file name
-    String editedFileNameWithoutExtension = "$fileNameWithoutExtension-edited";
-    String editedTitle = "$title-for-edition";
+    String editedFileNameWithoutExtension = fileNameWithoutExtension;
+    String editedTitle = title;
+    Set<String> keywordsForEdition = keywords.toSet();
+
+    // Deleting the previous file and metadata
+    await deleteFile(filePath: filePath);
+    print("sessionDataRetrieved (before): $sessionDataRetrieved");
+    sessionDataRetrieved.removeWhere
+    (
+      (session) => (session[DashboardUtils.keyFilePath]).contains(filePath)
+    );
+    print("sessionDataRetrieved (after): $sessionDataRetrieved");
+    // Saving the updated metadata
+    await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, allSessionsMetadata: sessionDataRetrieved);
 
     if (editDebug) dtoForEdition.printToConsole();
     if (editDebug) pu.printd("Editing: editCASessionData: editedFileNameWithoutExtension: $editedFileNameWithoutExtension");
     if (editDebug) pu.printd("Editing: editCASessionData: editedTitle: $editedTitle");
-    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle);
     
+    // rtdu.resetWasSessionDataSavedStatus(context: DashboardUtils.caContext);
+
+    // Need to re-build the dashboard page    
+    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, editedFileNameWithoutExtension: editedFileNameWithoutExtension, editedTitle: editedTitle, keywordsForEdition: keywordsForEdition);
+
   }
 
 
 // Method used to edit group problem-solving session data
-Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2StringsAndBool onEditSessionDataCallbackFunction) async {
+Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction) async {
     if (editDebug) pu.printd("Editing: editGPSSessionData : $editGPSSessionData");
 
     // Getting the title
@@ -163,4 +187,62 @@ Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2Strin
   }
 
   
+Future<void> deleteFile({required String filePath}) async
+{
+  String fileNameWithExtension = (filePath.split('/')).last;
+  fileNameWithExtension = (fileNameWithExtension.split('\\')).last; // for windows
 
+  String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+
+  print("filePath: $filePath");
+  print("fileNameWithExtension: $fileNameWithExtension");
+  print("fileNameWithoutExtension: $fileNameWithoutExtension");
+
+
+  // Removing existing file and metadata before saving
+  try 
+  {
+      String? folderPath = await rtdu.getApplicationFolderPath();
+      filePath = "$folderPath/$fileNameWithExtension";
+      var fileExtension = ".csv";
+
+      // On Android
+      if (Platform.isAndroid) 
+      {
+        if (!runningTests) {
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+        }
+        else {
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+        }
+      } 
+
+      // On iOS
+      else if (Platform.isIOS) 
+      {
+        if (!runningTests) {
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+           }
+        else {
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+        }
+      } 
+      // On desktop
+      else 
+      {
+        await fu.deleteFile(filePath);
+        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);     
+      }    
+  } catch (e) {
+    pu.printd("Delete Error: $e");
+  }  
+
+}

@@ -36,10 +36,13 @@ class CAProcess extends StatefulWidget
   final DTOCAForm? dtoOnInitState;
 
   /// A file name value used at editing time.
-  final String editedFileName;
+  final String fileNameForEdition;
 
   /// A title value used at editing time.
-  final String editedTitle;
+  final String titleForEdition;
+
+  /// A keywords value at edition time.
+  final Set<String> keywordsForEdition;
 
   /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback caPageCallbackFunctionToRefreshThePage;
@@ -51,8 +54,9 @@ class CAProcess extends StatefulWidget
     super.key,
     this.sessionDataEdition = false,
     this.dtoOnInitState,
-    this.editedFileName = "",
-    this.editedTitle = "",
+    this.fileNameForEdition = "",
+    this.titleForEdition = "",
+    this.keywordsForEdition = const {},
     required this.caPageCallbackFunctionToRefreshThePage,
     required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
     });
@@ -170,8 +174,11 @@ class CAProcessState extends State<CAProcess>
 
     // (code to clean)
     _loadDTO(dtoAssetPathToJson: '');
-    //_loadDTO(dtoAssetPathToJson: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');
-
+    //_loadDTO(dtoAssetPathToJson: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');      
+    analysisKeywords = widget.keywordsForEdition.toSet();
+    print("CAProcess: initState: analysisKeywords: $analysisKeywords");
+    
+    
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
       (){
@@ -233,12 +240,16 @@ class CAProcessState extends State<CAProcess>
             CATitleDeclaration
             (
               autofocus: widget.sessionDataEdition,
-              editedTitle: widget.editedTitle,
+              editedTitle: widget.titleForEdition,
               onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
             ),
             
             // Keywords
-            CAKeywordsDeclaration(onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)),
+            CAKeywordsDeclaration
+            (
+              keywordsForEdition: widget.keywordsForEdition,
+              onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)
+            ),
             
             const Gap(preAndPostLevel2DividerGap),
             const Divider(thickness: betweenLevel2DividerThickness),
@@ -289,7 +300,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameMobilePlatforms
                         (
-                          editedFileName: widget.editedFileName,
+                          editedFileName: widget.fileNameForEdition,
                           fileExtension: fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata,

@@ -20,6 +20,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
+                keywordsForEdition: const {},
                 onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
@@ -54,6 +55,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
+                keywordsForEdition: const {},
                 onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
@@ -89,6 +91,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
+                keywordsForEdition: const {},
                 onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
@@ -136,6 +139,7 @@ void main()
             home: Scaffold(
               body: CAKeywordsDeclaration
               (
+                keywordsForEdition: const {},
                 onKeywordsUpdatedProcessCallbackFunction: (_){}
               )
             ),
