@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>
   void _handleCATap()
   {
     // re-pulling the preferences from the context analysis page
-    caPageKey.currentState?.getPreferences();    
+    caPageKey.currentState?.getRuntimeData();    
   }
  
   // ─── LOCALE related method ───────────────────────────────────────
@@ -77,9 +77,9 @@ class _HomePageState extends State<HomePage>
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
-    if (preferencesDebug) pu.printd("Preferences");
-    if (preferencesDebug) pu.printd("Preferences: localeLangCodeFromLangName: $localeLangCodeFromLangName");
-    if (preferencesDebug) pu.printd("Preferences: localeLangCodeFromContext: $localeLangCodeFromContext");
+    if (runtimeDataDebug) pu.printd("Preferences");
+    if (runtimeDataDebug) pu.printd("RuntimeData: localeLangCodeFromLangName: $localeLangCodeFromLangName");
+    if (runtimeDataDebug) pu.printd("RuntimeData: localeLangCodeFromContext: $localeLangCodeFromContext");
 
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {

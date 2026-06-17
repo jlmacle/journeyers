@@ -35,7 +35,7 @@ class CAPage extends StatefulWidget
 class CAPageState extends State<CAPage> 
 { 
 
-  // Edition-related fields
+  // ─── EDITION related data ───────────────────────────────────────
   // The DTOCAForm value at initState
   DTOCAForm? _dtoOnInitState;
   // Value for the file name at edition time (without extension)
@@ -52,16 +52,19 @@ class CAPageState extends State<CAPage>
   bool? _wasFirstRunModalAcknowledged;
   bool? _wasCASessionDataSaved;
 
-  getPreferences() async 
+  // Method used to get stored run-time data
+  getRuntimeData() async 
   {
-    if (preferencesDebug) pu.printd("Preferences: getPreferences()");
+    if (runtimeDataDebug) pu.printd("CAPAge: getRuntimeData()");
+
     _wasFirstRunModalAcknowledged = await rtdu.wasFirstRunModalAcknowledged();
     _wasCASessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.caContext);
-
     setState(() {_preferencesLoading = false;});
-    if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_wasFirstRunModalAcknowledged");
-    if (preferencesDebug) pu.printd("Preferences: _wasCASessionDataSaved: $_wasCASessionDataSaved");
 
+    if (runtimeDataDebug) pu.printd("RuntimeData: _wasFirstRunModalAcknowledged: $_wasFirstRunModalAcknowledged");
+    if (runtimeDataDebug) pu.printd("RuntimeData: _wasCASessionDataSaved: $_wasCASessionDataSaved");
+
+    // First-run modal
     if ((_wasFirstRunModalAcknowledged == false) && mounted) 
     {
       showDialog
@@ -164,7 +167,7 @@ class CAPageState extends State<CAPage>
   void initState() 
   {
     super.initState();
-    getPreferences();
+    getRuntimeData();
   }  
 
   @override
