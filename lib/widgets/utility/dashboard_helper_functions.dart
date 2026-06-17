@@ -11,7 +11,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
 // Method used to edit context analysis session data
-Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction) async {
+Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditCASessionDataCallbackFunction) async {
     // to clean
     String csvContent = "";
     String fileNameWithExtension = filePath.split('/').last;
@@ -90,13 +90,13 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
 
 
     // Need to re-build the dashboard page    
-    onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition);
+    onEditCASessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition);
 
   }
 
 
 // Method used to edit group problem-solving session data
-Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction) async {
+Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditGPSSessionDataCallbackFunction) async {
     if (editDebug) pu.printd("Editing: editGPSSessionData : $editGPSSessionData");
 
     // Getting the title
@@ -130,7 +130,7 @@ Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2Strin
     }
     else if (Platform.isIOS)
     {
-      if (previewBuildingDebug) pu.printd("Editing: editGPSSessionData on iOS");
+      if (editDebug) pu.printd("Editing: editGPSSessionData on iOS");
       try
       {
         // Outside of testing
@@ -165,14 +165,10 @@ Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2Strin
             .toList();        
       }
 
-    // Loading the data from the CSV into a DTO
-    DTOCAForm dtoForEdition = DTOCAForm.fromCSV(content);
-
     if (editDebug) pu.printd("Editing: editGPSSessionData: ideas: $ideas");
 
     if (editDebug) pu.printd("Editing: editGPSSessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
     if (editDebug) pu.printd("Editing: editGPSSessionData: title: $title");
-    // onEditSessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title);
     
     return ideas;
   }
