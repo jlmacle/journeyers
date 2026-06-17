@@ -34,17 +34,17 @@ class CAPage extends StatefulWidget
 
 class CAPageState extends State<CAPage> 
 { 
+
+  // ─── EDITION related data ───────────────────────────────────────
   // The DTOCAForm value at initState
   DTOCAForm? _dtoOnInitState;
- 
-  // Edition-related fields
-  // Value for the edited file name (without extension)
+  // Value for the file name at edition time (without extension)
   String _editedFileNameWithoutExtension = "";
-  // Value for the edited title
+  // Value for the title at edition time
   String _editedTitle = "";
   // Value for the keywords at edition time
   Set<String> _keywordsForEdition = {};
-  // Edition in progress
+  // bool: edition in progress
   bool _sessionDataEdition = false;
 
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
@@ -52,16 +52,19 @@ class CAPageState extends State<CAPage>
   bool? _wasFirstRunModalAcknowledged;
   bool? _wasCASessionDataSaved;
 
-  getPreferences() async 
+  // Method used to get stored run-time data
+  getRuntimeData() async 
   {
-    if (preferencesDebug) pu.printd("Preferences: getPreferences()");
+    if (runtimeDataDebug) pu.printd("CAPAge: getRuntimeData()");
+
     _wasFirstRunModalAcknowledged = await rtdu.wasFirstRunModalAcknowledged();
     _wasCASessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.caContext);
-
     setState(() {_preferencesLoading = false;});
-    if (preferencesDebug) pu.printd("Preferences: _isInformationModalAlreadyAcknowledged: $_wasFirstRunModalAcknowledged");
-    if (preferencesDebug) pu.printd("Preferences: _wasCASessionDataSaved: $_wasCASessionDataSaved");
 
+    if (runtimeDataDebug) pu.printd("RuntimeData: _wasFirstRunModalAcknowledged: $_wasFirstRunModalAcknowledged");
+    if (runtimeDataDebug) pu.printd("RuntimeData: _wasCASessionDataSaved: $_wasCASessionDataSaved");
+
+    // First-run modal
     if ((_wasFirstRunModalAcknowledged == false) && mounted) 
     {
       showDialog
@@ -164,13 +167,13 @@ class CAPageState extends State<CAPage>
   void initState() 
   {
     super.initState();
-    getPreferences();
+    getRuntimeData();
   }  
 
   @override
   Widget build(BuildContext context) 
   {
-    print("CAProcess: _keywordsForEdition: $_keywordsForEdition");
+    if (editDebug) pu.printd("Editing: CAPage: _keywordsForEdition: $_keywordsForEdition");
     return 
     Scaffold
     (
