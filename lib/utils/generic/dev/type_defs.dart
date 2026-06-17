@@ -29,4 +29,4 @@ Future<void> Function();
 /// {@category Utils - Generic}
 /// A function with a DTOCAForm parameter, 2 String parameters, a List<String> parameter, a bool parameter, and returning void.
 typedef FunctionDTOCAForm2StringsSetStringAndBool = 
-void Function({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required Set<String> keywordsForEdition});
+void Function({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required Set<String> keywordsForEdition});

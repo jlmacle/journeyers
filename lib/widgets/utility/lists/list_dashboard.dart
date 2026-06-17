@@ -413,7 +413,7 @@ class TextListsDisplayState extends State<TextListsDisplay>
                             index
                           ),
                           onEditPressedCallbackFunction: () {},
-                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String editedFileNameWithoutExtension, required String editedTitle, required keywordsForEdition, required bool sessionDataEdition}) {},
+                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required keywordsForEdition, required bool sessionDataEdition}) {},
                           onKeywordsUpdatedCallbackFunction: updateKeywords,
                           onParticipantsUpdatedCallbackFunction: updateParticipants,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),
