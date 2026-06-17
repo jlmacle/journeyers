@@ -12,7 +12,6 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 // Method used to edit context analysis session data
 Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction) async {
-    print("-editCASessionData-");
     // to clean
     String csvContent = "";
     String fileNameWithExtension = filePath.split('/').last;
@@ -24,8 +23,6 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
     var title = session[DashboardUtils.keyTitle];
     List<String> keywords = (session[DashboardUtils.keyKeywords] as List).cast<String>();
 
-    // ((widget.listData[subItemsDataListKey]) as List)
-    //     .cast<Map<String, dynamic>>();
     // Getting the CSV content
     if (Platform.isAndroid)
     {      
@@ -46,7 +43,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
     }
     else if (Platform.isIOS)
     {
-      if (previewBuildingDebug) pu.printd("Editing: editCASessionData on iOS");
+      if (editDebug) pu.printd("Editing: editCASessionData on iOS");
       try
       {
         // Outside of testing
@@ -63,6 +60,7 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
+      if (editDebug) pu.printd("Editing: editCASessionData on desktop");
       // Checking if the CSV file exists
       File csvFile = File(filePath);
       if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
@@ -71,7 +69,6 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
 
     // Loading the data from the CSV into a DTO
     DTOCAForm dtoForEdition = DTOCAForm.fromCSV(csvContent);
-    print("After DTOCAForm.fromCSV(csvContent)");
     dtoForEdition.printToConsole();
 
     // Building the edited versions of title and file name
@@ -81,12 +78,12 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
 
     // Deleting the previous file and metadata
     await deleteFile(filePath: filePath);
-    print("sessionDataRetrieved (before): $sessionDataRetrieved");
+    if (editDebug) pu.printd("Editing: editCASessionData: sessionDataRetrieved (before file deletion): $sessionDataRetrieved");
     sessionDataRetrieved.removeWhere
     (
       (session) => (session[DashboardUtils.keyFilePath]).contains(filePath)
     );
-    print("sessionDataRetrieved (after): $sessionDataRetrieved");
+    if (editDebug) pu.printd("Editing: editCASessionData: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
     // Saving the updated metadata
     await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, allSessionsMetadata: sessionDataRetrieved);
 
@@ -196,10 +193,9 @@ Future<void> deleteFile({required String filePath}) async
 
   String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
 
-  print("filePath: $filePath");
-  print("fileNameWithExtension: $fileNameWithExtension");
-  print("fileNameWithoutExtension: $fileNameWithoutExtension");
-
+  if (editDebug) pu.printd("Editing: deleteFile: filePath: $filePath");
+  if (editDebug) pu.printd("Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension");
+  if (editDebug) pu.printd("Editing: deleteFile: fileNameWithoutExtension: $fileNameWithoutExtension");
 
   // Removing existing file and metadata before saving
   try 
