@@ -1030,7 +1030,7 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
     // Opening the preview
     var previewFinder = find.byTooltip(previewTooltipLabel);
     await tester.tap(previewFinder);
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
 
     //Searching for the expansion tiles
     var  expansionTilesFinder = find.descendant
