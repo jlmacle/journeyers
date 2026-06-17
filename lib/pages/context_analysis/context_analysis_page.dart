@@ -64,7 +64,7 @@ class CAPageState extends State<CAPage>
     if (runtimeDataDebug) pu.printd("RuntimeData: _wasFirstRunModalAcknowledged: $_wasFirstRunModalAcknowledged");
     if (runtimeDataDebug) pu.printd("RuntimeData: _wasCASessionDataSaved: $_wasCASessionDataSaved");
 
-    // First-run modal
+    // First-run modal at app installation time
     if ((_wasFirstRunModalAcknowledged == false) && mounted) 
     {
       showDialog
@@ -139,11 +139,11 @@ class CAPageState extends State<CAPage>
       _wasCASessionDataSaved = false;
 
       // Loading the CA Process with edited values
-      _dtoOnInitState = dtoForEdition;
-      _editedFileNameWithoutExtension = editedFileNameWithoutExtension;
-      _editedTitle  = editedTitle;
       _sessionDataEdition = sessionDataEdition;
+      _dtoOnInitState = dtoForEdition;      
+      _editedTitle  = editedTitle;
       _keywordsForEdition = keywordsForEdition;
+      _editedFileNameWithoutExtension = editedFileNameWithoutExtension;
     });
   }
 
