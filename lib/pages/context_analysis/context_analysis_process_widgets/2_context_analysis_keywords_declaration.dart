@@ -69,7 +69,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
 
   @override
   Widget build(BuildContext context) {
-    print("_CAKeywordsDeclarationState: ");
+
     return Column
     (
       children: 
@@ -117,10 +117,12 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                       // Removal from the reference set
                       setState( () 
                       {
-                        print("_keywordsSet.remove(tag);: _keywordsSet: $_keywordsSet");
-                        _keywordsSet.remove(tag);
-                        print("_keywordsSet: $_keywordsSet");
+                        
+                        _keywordsSet.remove(tag);                        
                         _keywordsListSorted.removeWhere((item) => item == tag);
+
+                        if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: build: _keywordsSet: $_keywordsSet");               
+                        if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: build: _keywordsListSorted: $_keywordsListSorted");               
                       });
                       widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
                     }, 
