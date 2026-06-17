@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
@@ -73,11 +75,11 @@ class _NewTextListState extends State<NewTextList> {
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;
         _loadingDB = false;
-        print("_loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
+        if (listDebug) pu.printd("List debug: _NewTextListState: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
       });
     } catch (e) {
       setState(() {
-        print(e);
+        pu.printd("Exception: _NewTextListState: _loadListOfGroupedTexts: $e");
         _errorLoadingDB = e.toString();
         _loadingDB = false;
       });
@@ -159,8 +161,6 @@ class _NewTextListState extends State<NewTextList> {
               }
               // Loading the list
               widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);
-              // print("widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);");
-              // print("_enteredTextItemsList: $_enteredTextItemsList");
 
               // To close the dialog
               Navigator.of(ctx).pop(label);
@@ -355,7 +355,8 @@ class _NewTextListState extends State<NewTextList> {
               currentKeywords: {},
               onKeywordsUpdatedCallbackFunction: (newKeywords) 
               {
-                print("newKeywords: $newKeywords");
+                if (listDebug) pu.printd("List debug: _NewTextListState: build: newKeywords: $newKeywords");
+    
                 _newKeywords = newKeywords.toList()..sort();
               }
             ),
@@ -419,9 +420,7 @@ class _NewTextListState extends State<NewTextList> {
                           itemIndex: index, 
                           itemText: _enteredTextItemsList[index], 
                           onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
-                                                              { 
-                                                                // print("value: $boolParam");   
-                                                                // print("index: $intParam");                                                               
+                                                              {                                                               
                                                                 if(boolParam!) 
                                                                 {                                                                    
                                                                   // adding the index to _textsSelectedForDeletionIndexes
@@ -442,7 +441,8 @@ class _NewTextListState extends State<NewTextList> {
                                                                     
                                                                   });
                                                                 }
-                                                                print("_textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
+                                                                if (listDebug) pu.printd("List debug: _NewTextListState: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
+
                                                               }, 
                           parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
                           parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
@@ -475,7 +475,7 @@ class _NewTextListState extends State<NewTextList> {
                     _enteredTextItemsList.add(value.trim());
                   });
                   _tecNewText.clear();
-                  print("_enteredTextItemsList: $_enteredTextItemsList");
+                  if (listDebug) pu.printd("List debug: _NewTextListState: build: _enteredTextItemsList: $_enteredTextItemsList");
                 },
               ),
             ),
