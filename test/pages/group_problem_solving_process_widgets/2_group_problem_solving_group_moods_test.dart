@@ -43,7 +43,7 @@ void main()
           await pumpIdentifierWidget(tester);
 
           // Verifying the color 
-          await testIdentifierColor(tester, green);
+          await gpsTestIdentifierColor(tester, green);
         });          
       });
 

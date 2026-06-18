@@ -15,7 +15,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix;
+import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix, previewTooltipLabel;
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
@@ -136,7 +136,7 @@ Future<void> main() async {
           // ───────────────────────────────────────────────────────────────────────────────
 
           // formToFill: false to skip the form filling
-          await enterNewCAProcessData
+          await caEnterNewProcessData
           (
             tester: tester, 
             formToFill: false,
@@ -150,7 +150,7 @@ Future<void> main() async {
           // ── 2. REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────
           // Reaching the GPS process page from the home page
-          await gpsProcessPageFromHomePage(tester);          
+          await gpsFromHomePageToProcessPage(tester);          
 
           // ── 3. SEARCHING FOR THE CA SESSION DATA IN THE GPS PROCESS  ──────────────────
           // ──────────────────────────────────────────────────────────────────────────────          
@@ -235,7 +235,7 @@ Future<void> main() async {
           }
 
           // Submitting the GPS data
-          await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
           // ── 5. VERIFYING THE CA DATA ON THE GPS PAGE  ───
           // ────────────────────────────────────────────────
@@ -295,11 +295,11 @@ Future<void> main() async {
         // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
         // ────────────────────────────────────────────────────────────────────────
         // Reaching the GPS process page from the home page
-        await gpsProcessPageFromHomePage(tester);
+        await gpsFromHomePageToProcessPage(tester);
 
         // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
         // ───────────────────────────────────────────────────────────
-        await participantsListsOptionsPageFromGPSprocessPage(tester);
+        await gpsFromProcessPageToparticipantsListsOptionsPage(tester);
 
         // Verifying the correct title present
         var textFinder = find.text('Participants lists');
@@ -326,11 +326,11 @@ Future<void> main() async {
         // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
         // ────────────────────────────────────────────────────────────────────────
         // Reaching the GPS process page from the home page
-        await gpsProcessPageFromHomePage(tester);
+        await gpsFromHomePageToProcessPage(tester);
 
         // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
         // ───────────────────────────────────────────────────────────
-        await participantsListsOptionsPageFromGPSprocessPage(tester);
+        await gpsFromProcessPageToparticipantsListsOptionsPage(tester);
 
         // Verifying the correct subtitle present
         var textFinder = find.text('What would you like to do?');
@@ -357,11 +357,11 @@ Future<void> main() async {
         // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
         // ────────────────────────────────────────────────────────────────────────
         // Reaching the GPS process page from the home page
-        await gpsProcessPageFromHomePage(tester);
+        await gpsFromHomePageToProcessPage(tester);
 
         // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
         // ───────────────────────────────────────────────────────────
-        await participantsListsOptionsPageFromGPSprocessPage(tester);
+        await gpsFromProcessPageToparticipantsListsOptionsPage(tester);
 
         // Verifying the correct option 1 label
         var textFinder = find.text('To load the list\nof previous groups?');
@@ -388,11 +388,11 @@ Future<void> main() async {
         // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
         // ────────────────────────────────────────────────────────────────────────
         // Reaching the GPS process page from the home page
-        await gpsProcessPageFromHomePage(tester);
+        await gpsFromHomePageToProcessPage(tester);
 
         // ── LOADING PARTICIPANTS LISTS OPTIONS PAGE   ──────────────
         // ───────────────────────────────────────────────────────────
-        await participantsListsOptionsPageFromGPSprocessPage(tester);
+        await gpsFromProcessPageToparticipantsListsOptionsPage(tester);
 
         // Verifying the correct option 2 label
         var textFinder = find.text('To add a new group?');
@@ -432,7 +432,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
@@ -440,12 +440,12 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── ADDING MORE PARTICIPANTS TO SAVE UNDER THE SAME LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await newListPageFromGPSprocessPage(tester);
+            await gpsFromProcessPageToNewListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -519,12 +519,12 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING PARTICIPANTS, KEYWORDS and ATTEMPTING TO SAVE THE LIST  ──────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await newListPageFromGPSprocessPage(tester);
+            await gpsFromProcessPageToNewListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -601,7 +601,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
@@ -609,12 +609,12 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await newListPageFromGPSprocessPage(tester);
+            await gpsFromProcessPageToNewListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -668,7 +668,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
@@ -676,12 +676,12 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await newListPageFromGPSprocessPage(tester);
+            await gpsFromProcessPageToNewListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -735,7 +735,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
@@ -744,11 +744,11 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── VERIFYING THE ORDER  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────
-            var listItemsFinder = await getNewListTextItems(tester);
+            var listItemsFinder = await gpsGetNewListTextItems(tester);
 
             var totalItems = listItemsFinder.evaluate().length;
             if (testingDebug) pu.printd('Testing Debug: totalItems: $totalItems');
@@ -779,7 +779,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
@@ -788,11 +788,11 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names,"keywords":[]}},            
             ];
-            await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
             // ── VERIFYING THE ORDER  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────
-            var listItemsFinder = await getNewListTextItems(tester);
+            var listItemsFinder = await gpsGetNewListTextItems(tester);
 
             var totalItems = listItemsFinder.evaluate().length;
             if (testingDebug) pu.printd('Testing Debug: totalItems: $totalItems');
@@ -827,12 +827,12 @@ Future<void> main() async {
                 await pumpApp(tester);
 
                 // Reaching the GPS process page from the home page
-                await gpsProcessPageFromHomePage(tester);
+                await gpsFromHomePageToProcessPage(tester);
 
                 // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────────
                 // Adding the names
-                await addParticipantsFromGPSprocessPage(tester, names1, keywords1);   
+                await gpsFromProcessPageAddParticipants(tester, names1, keywords1);   
 
                 // Verifying the names present
                 expect(find.text(name1), findsOne);    
@@ -885,13 +885,13 @@ Future<void> main() async {
                 await pumpApp(tester);
 
                 // Reaching the GPS process page from the home page
-                await gpsProcessPageFromHomePage(tester);
+                await gpsFromHomePageToProcessPage(tester);
 
                 // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────────
                 // Adding the names
                 var names = ["Bob", "Alice", "Benny", "Lily"];
-                await addParticipantsFromGPSprocessPage(tester, names, [kwCompanionship]);   
+                await gpsFromProcessPageAddParticipants(tester, names, [kwCompanionship]);   
 
                 // Verifying the names present
                 for (var name in names)
@@ -952,7 +952,7 @@ Future<void> main() async {
               await pumpApp(tester);
 
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING SEVERAL LISTS OF PARTICIPANTS   ──────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────
@@ -961,7 +961,7 @@ Future<void> main() async {
                 {listLabel1:{"names":names1,"keywords":[]}},
                 {listLabel2:{"names":names2,"keywords":[]}},
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
             });
 
         });         
@@ -988,12 +988,12 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING A PARTICIPANT ──────────────────────────────────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await newListPageFromGPSprocessPage(tester);
+            await gpsFromProcessPageToNewListPage(tester);
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1053,12 +1053,12 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING A PARTICIPANT ──────────────────────────────────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await newListPageFromGPSprocessPage(tester);
+            await gpsFromProcessPageToNewListPage(tester);
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1116,7 +1116,7 @@ Future<void> main() async {
           await pumpApp(tester);
 
           // Reaching the GPS process page from the home page
-          await gpsProcessPageFromHomePage(tester);
+          await gpsFromHomePageToProcessPage(tester);
 
           // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
@@ -1124,7 +1124,7 @@ Future<void> main() async {
           [
             {listLabel1:{"names":names1,"keywords":[]}},
           ];
-          await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+          await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
         
           // ── LOADING PARTICIPANTS   ─────────────────────────────────
           // ───────────────────────────────────────────────────────────
@@ -1205,7 +1205,7 @@ Future<void> main() async {
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           // Reaching the GPS process page from the home page
-          await gpsProcessPageFromHomePage(tester);
+          await gpsFromHomePageToProcessPage(tester);
 
           // ── LOADING PARTICIPANTS   ─────────────────────────────────
           // ───────────────────────────────────────────────────────────
@@ -1268,7 +1268,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING A LIST OF PARTICIPANTS   ──────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────
@@ -1276,11 +1276,11 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────            
@@ -1292,7 +1292,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Verifying the list item absent
-              var sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: listLabel1);
+              var sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: listLabel1);
               expect(sessionListItemFinder, findsNothing);
             }      
           );         
@@ -1317,7 +1317,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING 3 LISTS OF PARTICIPANTS   ──────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────
@@ -1327,11 +1327,11 @@ Future<void> main() async {
                 {listLabel2:{"names":names2,"keywords":[]}},
                 {listLabel3:{"names":names3,"keywords":[]}},
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── SEARCHING FOR THE ITEMS with listName1 and listName2 TO CHECK ON THE DASHBOARD  ─
               // ────────────────────────────────────────────────────────────────────────────────────
@@ -1397,7 +1397,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING 3 LISTS OF PARTICIPANTS (non alphabetical order)  ──────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────
@@ -1407,11 +1407,11 @@ Future<void> main() async {
                 {listLabel1:{"names":names1,"keywords":[]}},
                 {listLabel2:{"names":names2,"keywords":[]}},                          
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
               
               // ── SORTING BY LABEL ──────────────────────────────────
               // ────────────────────────────────────────────────────────
@@ -1422,7 +1422,7 @@ Future<void> main() async {
               await tester.pump(const Duration(seconds: 2));
 
               // Searching the list labels          
-              var titlesFinder = await getAllSessionsTitles(tester);
+              var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
 
@@ -1438,7 +1438,7 @@ Future<void> main() async {
               await tester.pump(const Duration(seconds: 2));
 
               // Re-searching the labels  
-              titlesFinder = await getAllSessionsTitles(tester); 
+              titlesFinder = await dashboardGetAllSessionsTitles(tester); 
 
               // Verifying the alphabetical order 
               for (var index = 0; index < totalTitles; index++)
@@ -1468,7 +1468,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING 3 LISTS OF PARTICIPANTS ──────────────────────────────────
               // ────────────────────────────────────────────────────────────────────
@@ -1478,21 +1478,21 @@ Future<void> main() async {
                 {listLabel2:{"names":names2,"keywords":keywords2}},
                 {listLabel3:{"names":names3,"keywords":keywords2}},                          
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
             
               // ── FILTERING BY KEYWORDS ────────────────────────────
               // ─────────────────────────────────────────────────────
               // 1. Filtering by kwCompanionship
-              var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+              var kwCompanionshipFinder = await dashboardGetKwFilterChip(tester, kwCompanionship);
               await tester.tap(kwCompanionshipFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              var titlesFinder = await getAllSessionsTitles(tester);
+              var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
 
@@ -1505,12 +1505,12 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // 2. Filtering by kwWorkplace
-              var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+              var kwWorkplaceFinder = await dashboardGetKwFilterChip(tester, kwWorkplace);
               await tester.tap(kwWorkplaceFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              titlesFinder = await getAllSessionsTitles(tester);
+              titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
 
@@ -1547,7 +1547,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────────
@@ -1555,16 +1555,16 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── EDITING THE LABEL   ────────────────────────
               // ───────────────────────────────────────────────
               // Searching for the label        
-              var labelsFinder = await getAllSessionsTitles(tester);
+              var labelsFinder = await dashboardGetAllSessionsTitles(tester);
               var totalLabels = labelsFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalLabels: $totalLabels');
 
@@ -1613,7 +1613,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────────
@@ -1621,16 +1621,16 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── EDITING THE LABEL   ─────────────────
               // ────────────────────────────────────────
               // Searching for the label         
-              var labelFinder = await getAllSessionsTitles(tester);
+              var labelFinder = await dashboardGetAllSessionsTitles(tester);
 
               // Tapping to edit the label
               await tester.tap(labelFinder);
@@ -1680,7 +1680,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────────
@@ -1688,16 +1688,16 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── EDITING THE PARTICIPANTS  ──────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await getParticipantsContainersOnDashboard(tester);
+              var participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
 
@@ -1723,7 +1723,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();              
 
               // Verifying data in the participants container
-              participantsContainersFinder = await getParticipantsContainersOnDashboard(tester);
+              participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
               var participantsFinder = find.descendant
                                       (
                                         of: participantsContainersFinder, 
@@ -1761,7 +1761,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────────
@@ -1769,16 +1769,16 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[]}},            
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── EDITING THE PARTICIPANTS   ─────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await getParticipantsContainersOnDashboard(tester);
+              var participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
 
@@ -1833,7 +1833,7 @@ Future<void> main() async {
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               // Reaching the GPS process page from the home page
-              await gpsProcessPageFromHomePage(tester);
+              await gpsFromHomePageToProcessPage(tester);
 
               // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────────
@@ -1841,16 +1841,16 @@ Future<void> main() async {
               [
                 {listLabel1:{"names":names1,"keywords":[kwCompanionship]}},            
               ];
-              await addParticipantsListsFromGPSprocessPageAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+              await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
               // ───────────────────────────────────────────────────────────────
-              await listLoadingDashboardFromGPSprocessPage(tester);
+              await gpsFromProcessPageToListLoadingDashboard(tester);
 
               // ── EDITING THE KEYWORDS   ─────────────────────
               // ───────────────────────────────────────────────
               // Searching for the keywords        
-              var keywordsDataFinder = await getParticipantsKeywordsOnDashboard(tester);
+              var keywordsDataFinder = await dashboardGetKeywordsOnDashboard(tester);
 
               // Tapping to edit the label
               await tester.tap(keywordsDataFinder.first);
@@ -1870,7 +1870,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();              
 
               // Verifying data
-              var newKeywordsDataFinder = await getParticipantsKeywordsOnDashboard(tester);
+              var newKeywordsDataFinder = await dashboardGetKeywordsOnDashboard(tester);
               var editedAndSortedKeywordsData ="Keywords: $kwCompanionship, $kwWorkplace";
               expect((tester.widget<Text>(newKeywordsDataFinder).data), editedAndSortedKeywordsData);
             });
@@ -1908,7 +1908,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1941,7 +1941,7 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── ADDING AN IDEA  ──────────────────────────────────────
             // ─────────────────────────────────────────────────────────
@@ -1999,11 +1999,11 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── REACHING THE OVERLAY  ──────────────────────────────────────
             // ───────────────────────────────────────────────────────────────
-            await ideasOverlayFromGPSprocessPage(tester);
+            await gpsFromProcessPageToIdeasOverlay(tester);
 
             // ── ADDING AN IDEA  ──────────────────────────────────────
             // ─────────────────────────────────────────────────────────
@@ -2050,15 +2050,15 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── REACHING THE OVERLAY  ──────────────────────────────────────
             // ───────────────────────────────────────────────────────────────
-            await ideasOverlayFromGPSprocessPage(tester);
+            await gpsFromProcessPageToIdeasOverlay(tester);
 
             // ── ADDING AN IDEA  ──────────────────────────────────────
             // ─────────────────────────────────────────────────────────
-            await addIdeaFromOverlay(tester, idea1);
+            await gpsFromOverlayAddIdea(tester, idea1);
 
             // ── EDITING THE IDEA  ────────────────────────────────────
             // ─────────────────────────────────────────────────────────
@@ -2121,15 +2121,15 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── REACHING THE OVERLAY  ──────────────────────────────────────
             // ───────────────────────────────────────────────────────────────
-            await ideasOverlayFromGPSprocessPage(tester);
+            await gpsFromProcessPageToIdeasOverlay(tester);
 
             // ── ADDING AN IDEA  ──────────────────────────────────────
             // ─────────────────────────────────────────────────────────
-            await addIdeaFromOverlay(tester, idea1);
+            await gpsFromOverlayAddIdea(tester, idea1);
 
             // ── DELETING THE IDEA  ────────────────────────────────────
             // ─────────────────────────────────────────────────────────
@@ -2183,18 +2183,18 @@ Future<void> main() async {
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             // Reaching the GPS process page from the home page
-            await gpsProcessPageFromHomePage(tester);
+            await gpsFromHomePageToProcessPage(tester);
 
             // ── REACHING THE OVERLAY  ──────────────────────────────────────
             // ───────────────────────────────────────────────────────────────
-            await ideasOverlayFromGPSprocessPage(tester);
+            await gpsFromProcessPageToIdeasOverlay(tester);
 
             // ── ADDING IDEAS  ──────────────────────────────────────
             // ─────────────────────────────────────────────────────────
-            await addIdeaFromOverlay(tester, idea1);
-            await addIdeaFromOverlay(tester, idea2);
-            await addIdeaFromOverlay(tester, idea3);
-            await addIdeaFromOverlay(tester, idea4);
+            await gpsFromOverlayAddIdea(tester, idea1);
+            await gpsFromOverlayAddIdea(tester, idea2);
+            await gpsFromOverlayAddIdea(tester, idea3);
+            await gpsFromOverlayAddIdea(tester, idea4);
 
             // ── DELETING 2 IDEAs  ────────────────────────────────────
             // ─────────────────────────────────────────────────────────

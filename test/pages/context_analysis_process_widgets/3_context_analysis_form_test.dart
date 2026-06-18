@@ -138,7 +138,7 @@ void main()
             await pumpCAProcess(tester);
   
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);           
+            await caOpenIndividualExpansionTile(tester);           
 
             // Searching the custom headings text for the first expansion tile
             var customHeadingTextFinders = find.descendant
@@ -179,7 +179,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(tester);
 
             // Getting the first expansion tile
             var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
@@ -205,7 +205,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(tester);
 
             // Getting the first expansion tile
             var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
@@ -230,7 +230,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -267,7 +267,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -302,7 +302,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -336,7 +336,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await openIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -378,7 +378,7 @@ void main()
             await pumpCAProcess(tester);            
 
             // Opening the group/team perspective expansion tile
-            await openGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(tester);
 
             // Searching the custom headings text for the second expansion tile
             var customHeadingTextFinders = find.descendant
@@ -420,7 +420,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the group/team perspective expansion tile
-            await openGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(tester);
 
             // Getting the second expansion tile
             var groupExpansionTileFinder =  find.byType(ExpansionTile).last;
@@ -446,7 +446,7 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the group/team perspective expansion tile
-            await openGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(tester);
 
             // Getting the second expansion tile
             var groupExpansionTileFinder =  find.byType(ExpansionTile).last;
@@ -474,7 +474,7 @@ void main()
           await pumpCAProcess(tester);
 
           // Opening the individual perspective expansion tile
-          await openIndividualExpansionTile(tester);   
+          await caOpenIndividualExpansionTile(tester);   
 
           // Searching the checkboxes present in the sub-tree
           var checkboxFinder = find.descendant
@@ -502,7 +502,7 @@ void main()
           await pumpCAProcess(tester);
 
           // Opening the group/teams perspective expansion tile
-          await openGroupExpansionTile(tester);   
+          await caOpenGroupExpansionTile(tester);   
 
           // Searching the segmented buttons present in the sub-tree
           var segButtonFinder = find.descendant

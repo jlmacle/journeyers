@@ -34,7 +34,7 @@ void main()
         await pumpGPSChecklist(tester);
 
         // Verifying the default rectangle color is orange
-        await testChecklistTitleBorderColor(tester, rectangleColor);        
+        await gpsTestChecklistTitleBorderColor(tester, rectangleColor);        
       });          
       });
 

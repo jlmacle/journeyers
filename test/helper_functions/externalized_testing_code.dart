@@ -27,9 +27,12 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 // Labels of the level 2 and 3 titles
 final q = CAQuestionsFields();
 
+// ─── CA  ───────────────────────────────────────────────────────────────
+// ───────────────────────────────────────────────────────────────────────
+
 // ─── EXPANSION TILES ───────────────────────────────────────────────────────────────
   // Method used to open the expansion tile with the individual perspective
-  Future<void> openIndividualExpansionTile(WidgetTester tester) async
+  Future<void> caOpenIndividualExpansionTile(WidgetTester tester) async
   {
     var tileFinder = find.text(q.level2TitleIndividual);
     await tester.ensureVisible(tileFinder);
@@ -45,7 +48,7 @@ final q = CAQuestionsFields();
   }
 
   // Method used to open the expansion tile with the group/team perspective
-  Future<void> openGroupExpansionTile(WidgetTester tester) async
+  Future<void> caOpenGroupExpansionTile(WidgetTester tester) async
   {
     var tileFinder = find.text(q.level2TitleGroup);
     await tester.ensureVisible(tileFinder);
@@ -62,7 +65,7 @@ final q = CAQuestionsFields();
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
   // Method used to check that the new CA process button functions
-  Future<void> checkNewCAProcessButtonFunctions(WidgetTester tester) async
+  Future<void> caCheckNewProcessButtonFunctions(WidgetTester tester) async
   {
     // To avoid intermittent test failures
     await tester.pump(const Duration(seconds: 2)); 
@@ -89,7 +92,7 @@ final q = CAQuestionsFields();
   }
  
   // Method used to enter a title in the CA process
-  Future<void> enterCAProcessTitle (WidgetTester tester, String aTitle) async
+  Future<void> caEnterProcessTitle (WidgetTester tester, String aTitle) async
   {
     // Searching the TextField inside CATitleDeclaration
     Finder titleTextField = find.descendant(
@@ -108,7 +111,7 @@ final q = CAQuestionsFields();
   }
   
   // Method used to enter keywords in the CA process
-  Future<void> enterCAProcessKeywords (WidgetTester tester, List<String> keywordsList) async
+  Future<void> caEnterProcessKeywords (WidgetTester tester, List<String> keywordsList) async
   {
     // Searching the TextField inside CAKeywordsDeclaration
     Finder keywordsTextField = find.descendant(
@@ -131,7 +134,7 @@ final q = CAQuestionsFields();
   }      
 
   // Method used to fill a context analyis form.
-  Future<void> fillCAForm
+  Future<void> caFillForm
   (
     WidgetTester tester,
     List<bool> checkboxValues, List<String> checkboxTextFieldValues, String indivAnotherIssueStrValue, 
@@ -140,7 +143,7 @@ final q = CAQuestionsFields();
   {
     // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
     // Opening the individual perspective expansion tile
-    await openIndividualExpansionTile(tester);  
+    await caOpenIndividualExpansionTile(tester);  
 
     // 1. Searching for all custom checkboxes
     var checkboxFinder = find.descendant(
@@ -195,7 +198,7 @@ final q = CAQuestionsFields();
     // ── FORM SECTION : Group/Teams perspective ─────────────────────────────────────────────────────────────
     
     // Opening the group/teams perspective expansion tile
-    await openGroupExpansionTile(tester); 
+    await caOpenGroupExpansionTile(tester); 
     
     // 1. Searching for the text field only
     var groupTextFieldOnlyFinder = find.descendant(
@@ -258,7 +261,7 @@ final q = CAQuestionsFields();
   // Method used to enter new CA process data
   // 7 values are necessary in checkboxValues
   // 4 values are necessary in segmentedButtonValues
-  Future<void> enterNewCAProcessData 
+  Future<void> caEnterNewProcessData 
   ({
     required WidgetTester tester, 
     bool formToFill = true,
@@ -272,33 +275,33 @@ final q = CAQuestionsFields();
     // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────────
     // Verifying that the new process button functions
-    await checkNewCAProcessButtonFunctions(tester);
+    await caCheckNewProcessButtonFunctions(tester);
 
 
     // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
     // ───────────────────────────────────────────────────────────────────────────────────
 
     // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-    await enterCAProcessTitle(tester, title);
+    await caEnterProcessTitle(tester, title);
 
     // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-    await enterCAProcessKeywords(tester, kwsList);
+    await caEnterProcessKeywords(tester, kwsList);
     
     if (formToFill)
     {
       // ── FORM SECTION ─────────────────────────────────────────────────────────────
-      await fillCAForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
+      await caFillForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
       groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
     }
 
     // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
     // Entering the file name and submitting data
-    await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
+    await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
   }
 
   // Method used to add several times context analysis data
   // The method assumes all lists have the same number of elements
-  Future<void> enterSeveralTimesNewCAProcessData
+  Future<void> caEnterSeveralTimesNewProcessData
   ({
     required bool formToFill,
     required WidgetTester tester,
@@ -310,7 +313,7 @@ final q = CAQuestionsFields();
     int listsLength = titlesList.length;
     for (var index = 0; index < listsLength; index++)
     {
-      await enterNewCAProcessData
+      await caEnterNewProcessData
       (
         formToFill: false,
         tester: tester, 
@@ -321,696 +324,9 @@ final q = CAQuestionsFields();
     }
   }
 
-// ─── GPS PROCESS ───────────────────────────────────────────────────────────────
-// Method used to check that the new GPS process button functions
-  Future<void> checkNewGPSProcessButtonFunctions(WidgetTester tester) async
-  {
-    // Verifying the NewProcessButton present
-    expect(
-      find.byType(NewProcessButton),
-      findsOneWidget,
-      reason: 'NewProcessButton should be visible when GPS session data is already saved.',
-    );
-
-    // Tapping NewProcessButton
-    await tester.tap(find.byType(NewProcessButton));
-    await tester.pumpAndSettle();
-
-    // Verifying GPSProcess displayed
-    expect(
-      find.byType(GPSProcess),
-      findsOneWidget,
-      reason: 'GPSProcess should be visible after tapping NewProcessButton.',
-    );
-  }
-
-// Method used to enter a title in the GPS process
-  Future<void> enterGPSProcessTitle (WidgetTester tester, String aTitle) async
-  {
-    // Searching the placeholder title
-    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
-
-    // Tapping on it
-    await tester.tap(placeholderTitleFinder);
-    await tester.pumpAndSettle();
-
-    // Searching the text field
-    var textFieldFinder = find.ancestor
-    (
-      of: find.text(gpsProcessTitleTextFieldHint), 
-      matching: find.byType(TextField)
-    );
-
-    expect(
-      textFieldFinder,
-      findsOneWidget,
-    );
-
-    // Entering the title
-    await tester.enterText(textFieldFinder, aTitle);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
-  }
-
-// Method used to enter keywords in the GPS process
-  Future<void> enterGPSProcessKeywords (WidgetTester tester, List<String> keywordsList) async
-  {
-    // Searching the keywords declaration title
-    var keywordsDeclarationTitleFinder = find.descendant
-                                  (
-                                    of: find.byType(GPSKeywordsDeclaration), 
-                                    matching: find.text(keywordsDeclarationTitle)
-                                  );
-
-    // Tapping on it to open the overlay
-    await tester.tap(keywordsDeclarationTitleFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2)); 
-
-    // The overlay should have opened
-    // Searching the text field
-    var textfieldFinder = find.descendant
-                          (
-                            of: find.byType(StatefulBuilder), 
-                            matching: find.byType(TextField)
-                          );   
-
-    for (var kw in keywordsList)
-    {
-      // Entering the keyword
-      await tester.enterText(textfieldFinder, kw);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pump(const Duration(seconds: 2)); 
-
-      // Necessary for the next keyword to be added
-      await tester.tap(textfieldFinder);         
-    }
-
-    // Searching the tooltip to close the overlay
-    var closingIconFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
-
-    // Closing the overlay
-    await tester.tap(closingIconFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2)); 
-
-    // Verifying the overlay absent
-    expect
-    (
-      find.descendant
-      (
-        of: find.byType(GPSKeywordsDeclaration), 
-        matching: find.byType(StatefulBuilder)
-      )        , 
-      findsNothing
-    );
-  }      
-
-// Method used to enter ideas
-  Future<void> enterIdeas
-  (
-    WidgetTester tester,
-    List<String> ideasList
-  ) async
-  {
-    // Searching the text field used to add ideas
-    var newIdeaTextFieldFinder = find.ancestor
-    (
-      of: find.text(newIdeaTextFieldHint), 
-      matching: find.byType(TextField)
-    );
-
-    // Adding the ideas
-    for (var idea in ideasList)
-    {
-      await tester.enterText(newIdeaTextFieldFinder, idea);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      // pumpAndSettle timed out
-      // await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 1));  
-
-      await tester.tap(newIdeaTextFieldFinder); 
-    }
-      
-  }
-
-// Method used to enter new GPS process data
-Future<void> enterNewGPSProcessData 
-({
-  required WidgetTester tester, 
-  required String title,
-  required List<String> kwsList,
-  required List<String> ideasList,
-  required String fileNameWithoutExtension
-}) async
-{
-  // ── 1. CLICK TOWARD A NEW GPS PROCESS ───────────────────────────────────────────────
-  // ───────────────────────────────────────────────────────────────────────────────────
-  // Verifying that the new process button functions
-  await checkNewGPSProcessButtonFunctions(tester);
-
-
-  // ── 2. GPS PROCESS FILLING ──────────────────────────────────────────────────────────
-  // ───────────────────────────────────────────────────────────────────────────────────
-
-  // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-  await enterGPSProcessTitle(tester, title);
-
-  // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-  await enterGPSProcessKeywords(tester, kwsList);
-  
-  // ── SOLUTIONS SECTION ─────────────────────────────────────────────────────────────
-  await enterIdeas(tester, ideasList);
-  
-  // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
-  // Entering the file name and submitting data
-  await enterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
-}
-
-  // Method used to add several times group problem-solving data
-  // The method assumes all lists have the same number of elements
-  Future<void> enterSeveralTimesNewGPSProcessData
-  ({
-    required WidgetTester tester,
-    required List<String> titlesList,
-    required List<List<String>> kwsLists,
-    required List<List<String>> ideasList,
-    required List<String> fileNamesWithoutExtensionList
-  }) async
-  {
-    int listsLength = titlesList.length;
-    for (var index = 0; index < listsLength; index++)
-    {
-      await enterNewGPSProcessData 
-      (
-        tester: tester, 
-        title: titlesList[index],
-        kwsList: kwsLists[index], 
-        ideasList: ideasList[index],
-        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
-      );
-    }
-  }
-
-// ─── PARTICIPANTS LISTS RELATED METHODS ───────────────────────────────────────────────────────────────
-
-// Method used to go from the home page to the GPS process page
-Future<void> gpsProcessPageFromHomePage(WidgetTester tester) async
-{
-  
-  // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-  // ────────────────────────────────────────────────────────────────────────────
-  var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
-  await tester.tap(bottomItemGPSFinder);
-  await tester.pumpAndSettle();
-
-  // Verifying the GPS page present
-  expect(find.byType(GPSPage), findsOne);
-
-  // ── STARTING A NEW GPS PROCESS ────────────────────────────────────
-  // ───────────────────────────────────────────────────────────────────────────
-
-  // Clicking on the GPS new process button
-  await checkNewGPSProcessButtonFunctions(tester);
-
-  // Searching the placeholder title
-  var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
-  expect(placeholderTitleFinder, findsOne);
-}
-
-// Method used to go from the GPS process page to the participants lists options page
-Future<void> participantsListsOptionsPageFromGPSprocessPage(WidgetTester tester) async
-{
-  // Searching the add emoji    
-  var addEmojiFinder = find.text(addEmoji);
-
-  // Verifying the add emoji present
-  expect(addEmojiFinder, findsOne);
-
-  // Tapping to reach the page with the loading/new group options
-  await tester.tap(addEmojiFinder);
-  // pumpAndSettle timed out
-  // await tester.pumpAndSettle();
-  await tester.pump(const Duration(seconds: 2));
-}
-
-// Method used to go from the GPS process page to new list page
-Future<void> newListPageFromGPSprocessPage(WidgetTester tester) async
-{
-  // Searching the add emoji    
-  var addEmojiFinder = find.text(addEmoji);
-
-  // Verifying the add emoji present
-  expect(addEmojiFinder, findsOne);
-
-  // Tapping to reach the page with the loading/new group options
-  await tester.tap(addEmojiFinder);
-
-  // pumpAndSettle timed out
-  // await tester.pumpAndSettle();
-  await tester.pump(const Duration(seconds: 5));
-
-  // Verifying the options page present
-  var optionsPageFinder = find.text(participantsListsSubTitle);
-  expect(optionsPageFinder, findsOne);
-
-  // Searching the new group button
-  var newParticipantsGroupFinder = find.text(newParticipantsGroupOptionLabel);
-  await tester.ensureVisible(newParticipantsGroupFinder);
-  expect(newParticipantsGroupFinder, findsOne);
-
-  // Tapping on it
-  await tester.tap(newParticipantsGroupFinder);
-  await tester.pumpAndSettle();
-  await tester.pump(const Duration(seconds: 2));
-}
-
-// Method used to go from GPS process page to list loading dashboard
-Future<void> listLoadingDashboardFromGPSprocessPage(WidgetTester tester) async
-{
-  // Searching the add emoji    
-  var addEmojiFinder = find.text(addEmoji);
-
-  // Verifying the add emoji present
-  expect(addEmojiFinder, findsOne);
-
-  // Tapping to reach the page with the loading/new group options
-  await tester.tap(addEmojiFinder);
-  // pumpAndSettle timed out
-  // await tester.pumpAndSettle();
-  await tester.pump(const Duration(seconds: 5));
-
-  // Verifying the options page present
-  var optionsPageFinder = find.text(participantsListsSubTitle);
-  expect(optionsPageFinder, findsOne);
-
-  // Searching the list loading option button
-  var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
-  await tester.ensureVisible(loadingAListOptionFinder);
-  expect(loadingAListOptionFinder, findsOne);
-
-  // Tapping on it
-  await tester.tap(loadingAListOptionFinder);
-  await tester.pumpAndSettle();
-
-  // Verifying the lists dashboard title present
-  var listDashboardTitleFinder = find.text(listsDashboardTitle);
-  expect(listDashboardTitleFinder, findsOne);
-}
-
-
-// Method used to add participants
-Future<void> addParticipantsFromGPSprocessPage
-(
-  WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
-) async
-{ 
-  // Loading the new list page from the GPS process page
-  await newListPageFromGPSprocessPage(tester);
-
-  if (keywords.isNotEmpty)
-  {
-    // Searching for the keywords declaration title
-    var keywordsTitleFinder = find.text(keywordsDeclarationTitle);
-    await tester.tap(keywordsTitleFinder);
-    await tester.pumpAndSettle();
-
-    // Searching for the new keyword text field
-    var newKeywordTextFieldFinder = find.byKey(const ValueKey('keywordField'));
-    expect(newKeywordTextFieldFinder, findsOne);
-    await tester.ensureVisible(newKeywordTextFieldFinder); 
-    await tester.pumpAndSettle(); 
-    await tester.tap(newKeywordTextFieldFinder);
-    await tester.pumpAndSettle();  
-
-    // Adding the keywords
-    for (var keyword in keywords)
-    {   
-      // Adding the keyword
-      await tester.enterText(newKeywordTextFieldFinder, keyword);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-      // Necessary for the next keyword to be added
-      await tester.tap(newKeywordTextFieldFinder);
-    }
-
-    // Closing the overlay
-    var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
-    await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
-    await tester.pumpAndSettle();
-  }
-  
-  // Searching for the new participant text field
-  // Searching by placeholder text is not robust enough
-  var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
-  expect(newParticipantTextFieldFinder, findsOne);
-  await tester.ensureVisible(newParticipantTextFieldFinder); 
-  await tester.pumpAndSettle(); 
-  await tester.tap(newParticipantTextFieldFinder);
-  await tester.pumpAndSettle();
-
-  // Adding the names
-  for (var name in participantsNames)
-  {   
-    // Adding the name
-    await tester.enterText(newParticipantTextFieldFinder, name);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
-    // Necessary for the next name to be added
-    await tester.tap(newParticipantTextFieldFinder);
-  }
-}
-
-// Method used to add participants lists
-// [
-//   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
-//   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
-// ];
-Future<void> addParticipantsListsFromGPSprocessPageAndVerifyListLoaded
-({
-  required WidgetTester tester, 
-  required List< Map<String,Map<String, dynamic>> > listDataMapsList
-}) async
-{
-  for (var map in listDataMapsList)
-  {
-    List<String> names = (map.values.first)["names"];
-    List<dynamic> keywords = (map.values.first)["keywords"];
-
-    await addParticipantsFromGPSprocessPage(tester, names, keywords);
-
-    // Verifying the names present
-    for (var name in names)
-    {
-      expect(find.text(name), findsOne);    
-    }      
-
-    // Searching the 'Save' icon
-    var saveListIconFinder = find.byIcon(Icons.save_outlined);
-    await tester.pump(const Duration(seconds: 3));
-    expect(saveListIconFinder, findsOne);
-
-    // Tapping on it
-    await tester.tap(saveListIconFinder);
-    await tester.pumpAndSettle();
-
-    // Searching the text field to add the list name
-    var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
-    expect(listNameSavingTextFieldFinder, findsOne);
-
-    // Adding the list name
-    var listName = map.keys.first;
-    await tester.ensureVisible(listNameSavingTextFieldFinder);
-    await tester.tap(listNameSavingTextFieldFinder);
-    await tester.enterText(listNameSavingTextFieldFinder, listName);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();
-
-    // Verifying the names on the GPS process page
-
-    // Verifying the GPS process page present
-    expect(find.text(checkListTitle), findsOne);
-
-    // Verifying the names present
-    for (var name in names)
-    {
-      expect(find.text(name), findsOne);    
-    } 
-  }
-}
-
-// Method used to get the finder of a new list text items
-Future<Finder> getNewListTextItems(WidgetTester tester) async
-{
-  var listItemsFinder = find.byWidgetPredicate
-            (
-              (widget) 
-              {
-                if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('editable-deletable-text-item-');
-                }
-                return false;
-              }
-            );  
-  return listItemsFinder;
-}
-
-// Method used to get the finder of the participants containers
-Future<Finder> getParticipantsContainersOnDashboard(WidgetTester tester) async
-{
-  var participantsContainersFinder = find.byWidgetPredicate
-  (
-    (widget) 
-    {
-      if (widget.key is ValueKey<String>) {
-        return (widget.key as ValueKey<String>).value.contains('session-participants-container-');
-      }
-      return false;
-    }
-  );  
-
-  return participantsContainersFinder;
-} 
-
-// Method used to get the finder of the keywords
-Future<Finder> getParticipantsKeywordsOnDashboard(WidgetTester tester) async
-{
-  var participantsContainersFinder = find.byWidgetPredicate
-  (
-    (widget) 
-    {
-      if (widget.key is ValueKey<String>) {
-        return (widget.key as ValueKey<String>).value.contains('session-keywords-');
-      }
-      return false;
-    }
-  );  
-
-  return participantsContainersFinder;
-} 
-
-
-// Method used to test the color of an identifier
-Future<void> testIdentifierColor(WidgetTester tester, Color color) async
-{
-  // Searching the container
-  var containerFinder = find.descendant
-  (
-    of: find.byType(IdentifierWidget), 
-    matching: find.byType(Container)
-  );
-
-  var totalContainers = containerFinder.evaluate().length;
-  if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
-
-  Container container = tester.widget<Container>(containerFinder);
-  var boxDecoration = container.decoration as BoxDecoration;
-  var border = boxDecoration.border as Border;
-
-  // Verifying the default circle color
-  expect(
-    border.top.color,
-    color,
-  );
-
-  expect(
-    border.bottom.color,
-    color,
-  );
-
-  expect(
-    border.right.color,
-    color,
-  );
-
-  expect(
-    border.left.color,
-    color,
-  );
-}
-
-// Method used to enter edit mode
-Future<void> enterEditMode(WidgetTester tester) async
-{
-  // Searching the edit button
-  var editButtonFinder = find.descendant
-                        (
-                          of: find.byType(ElevatedButton),
-                          matching: find.text(editEmoji)
-                        );
-  
-  var totalButton = editButtonFinder.evaluate().length;
-  if (testingDebug) pu.printd('Testing Debug: totalButton: $totalButton');
-
-  // Tapping the edit button
-  await tester.tap(editButtonFinder);
-  // pumpAndSettle timed out
-  // await tester.pumpAndSettle();
-  await tester.pump(const Duration(seconds: 2));
-}
-
-// Method used to test the color of the checklist title border
-Future<void> testChecklistTitleBorderColor(WidgetTester tester, Color color) async
-{
-  // Searching the container
-  var containerFinder = find.descendant
-  (
-    of: find.byType(GPSChecklist), 
-    matching: find.byType(Container)
-  );
-
-  var totalContainers = containerFinder.evaluate().length;
-  if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
-
-  Container container = tester.widget<Container>(containerFinder);
-  var boxDecoration = container.decoration as BoxDecoration;
-  var border = boxDecoration.border as Border;
-
-  // Verifying the color
-  expect(
-    border.top.color,
-    color,
-  );
-
-  expect(
-    border.bottom.color,
-    color,
-  );
-
-  expect(
-    border.right.color,
-    color,
-  );
-
-  expect(
-    border.left.color,
-    color,
-  );
-  
-}
-// ── IDEAS-related  ──────────────────────────────────────
-// ────────────────────────────────────────────────────────────────────────────
-// Method used to go from the GPS process page to the ideas overlay
-Future<void> ideasOverlayFromGPSprocessPage(WidgetTester tester) async
-{
-  // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
-  // ────────────────────────────────────────────────────────────────────────
-  var ideasListTitleFinder = find.text(ideasListTitle);
-  await tester.tap(ideasListTitleFinder);
-  await tester.pumpAndSettle();
-
-  // ── OVERLAY  ───────────────────────────────────
-  // ───────────────────────────────────────────────
-  // Verifying the overlay present
-  expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
-}
-
-// Method used to add an idea using the overlay
-Future<void> addIdeaFromOverlay(WidgetTester tester, String idea) async
-{
-  // Searching the text field used to add ideas
-  var newIdeaTextFieldFinder = find.byKey(const ValueKey('ideaOverlayField'));
-  // Adding the idea
-  await tester.ensureVisible(newIdeaTextFieldFinder);
-  await tester.tap(newIdeaTextFieldFinder);
-  await tester.pumpAndSettle(); 
-  await tester.enterText(newIdeaTextFieldFinder, idea);
-  await tester.testTextInput.receiveAction(TextInputAction.done);
-  // pumpAndSettle timed out
-  // await tester.pumpAndSettle();
-  await tester.pump(const Duration(seconds: 2));  
-}
-
-
-// ─── MULTI-CONTEXT HELPER FUNCTION ───────────────────────────────────────────────────────────────
-
-// Method used to enter a file name and to submit the CA process data on mobile device
-// (Assuming an already selected path to the user session data folder)
-Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
-{
-  Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
-
-  // Path to folder already declared 
-  // Scrolling to make the text field visible for small screens
-  await tester.ensureVisible(fileNameWidgetFinder);
-
-  // Entering a file name
-  await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
-  await tester.testTextInput.receiveAction(TextInputAction.done);
-  await tester.pumpAndSettle();  
-}  
-
-// ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
-  // Method used to search a title and keywords on the dashboard
-  Future<void> searchTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
-  {
-    if (titleSuffix != null) title = "$title$titleSuffix";
-    // Searching for the title
-    expect(find.text(title), findsOne);
-
-    // Searching for the keywords
-    for (var kw in kws)
-    {
-      expect(find.text(kw), findsOne);
-    }
-
-  }
-
-  // Method used to get the finder of a sessions list item by title
-  Future<Finder> getSessionListItemFinderByTitle({required WidgetTester tester, required String title, String? titleSuffix}) async 
-  {
-    if (titleSuffix != null) title = "$title$titleSuffix";
-    Finder sessionListItemFinder = find.text(title);
-    return sessionListItemFinder;
-  }
-
-  // Method used to get the finder of the sessions titles
-  Future<Finder> getAllSessionsTitles(WidgetTester tester) async
-  {
-    var titlesFinder = find.byWidgetPredicate
-    (
-      (widget) 
-      {
-        if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains('session-title-');
-        }
-        return false;
-      }
-    );  
-
-    return titlesFinder;
-  }
-
-  // Method used to get the finder of a keyword FilterChip
-  Future<Finder> getKwFilterChip(WidgetTester tester, String kw) async
-  {
-    var filterChipFinder = find.byWidgetPredicate
-    (
-      (widget) 
-      {
-        if (widget is FilterChip) {
-          final label = widget.label;
-          if (label is Text) {
-            return (label.data ?? '').contains(kw);
-          }
-        }
-        return false;
-      }      
-    );  
-
-    return filterChipFinder;
-  }
-  
-
-// ─── PREVIEW TESTING ───────────────────────────────────────────────────────────────
-
-  // Serialises a segmented-button selection to a slash-separated string.
-  String _segmentedButtonToString(Set<String> values) => values.join('/');
-
+// ─── CA PREVIEW ───────────────────────────────────────────────────────────────
   // Method used to test a CA preview.
-  Future<void> testCAPreview
+  Future<void> caTestPreview
   ({
     required WidgetTester tester, 
     List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
@@ -1165,45 +481,743 @@ Future<void> enterFileNameAndSubmitDataOnMobile({required WidgetTester tester, r
     }  
   }
 
+// ─── GPS ──────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────────
+
+// ─── GPS PROCESS FILING ───────────────────────────────────────────────────────────────
+  // Method used to check that the new GPS process button functions
+  Future<void> gpsCheckNewProcessButtonFunctions(WidgetTester tester) async
+  {
+    // Verifying the NewProcessButton present
+    expect(
+      find.byType(NewProcessButton),
+      findsOneWidget,
+      reason: 'NewProcessButton should be visible when GPS session data is already saved.',
+    );
+
+    // Tapping NewProcessButton
+    await tester.tap(find.byType(NewProcessButton));
+    await tester.pumpAndSettle();
+
+    // Verifying GPSProcess displayed
+    expect(
+      find.byType(GPSProcess),
+      findsOneWidget,
+      reason: 'GPSProcess should be visible after tapping NewProcessButton.',
+    );
+  }
+
+  // Method used to test the color of an identifier
+  Future<void> gpsTestIdentifierColor(WidgetTester tester, Color color) async
+  {
+    // Searching the container
+    var containerFinder = find.descendant
+    (
+      of: find.byType(IdentifierWidget), 
+      matching: find.byType(Container)
+    );
+
+    var totalContainers = containerFinder.evaluate().length;
+    if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
+
+    Container container = tester.widget<Container>(containerFinder);
+    var boxDecoration = container.decoration as BoxDecoration;
+    var border = boxDecoration.border as Border;
+
+    // Verifying the default circle color
+    expect(
+      border.top.color,
+      color,
+    );
+
+    expect(
+      border.bottom.color,
+      color,
+    );
+
+    expect(
+      border.right.color,
+      color,
+    );
+
+    expect(
+      border.left.color,
+      color,
+    );
+  }
+
+  // Method used to test the color of the checklist title border
+  Future<void> gpsTestChecklistTitleBorderColor(WidgetTester tester, Color color) async
+  {
+    // Searching the container
+    var containerFinder = find.descendant
+    (
+      of: find.byType(GPSChecklist), 
+      matching: find.byType(Container)
+    );
+
+    var totalContainers = containerFinder.evaluate().length;
+    if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
+
+    Container container = tester.widget<Container>(containerFinder);
+    var boxDecoration = container.decoration as BoxDecoration;
+    var border = boxDecoration.border as Border;
+
+    // Verifying the color
+    expect(
+      border.top.color,
+      color,
+    );
+
+    expect(
+      border.bottom.color,
+      color,
+    );
+
+    expect(
+      border.right.color,
+      color,
+    );
+
+    expect(
+      border.left.color,
+      color,
+    );
+    
+  }
+
+  // Method used to enter a title in the GPS process
+  Future<void> gpsEnterProcessTitle (WidgetTester tester, String aTitle) async
+  {
+    // Searching the placeholder title
+    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+
+    // Tapping on it
+    await tester.tap(placeholderTitleFinder);
+    await tester.pumpAndSettle();
+
+    // Searching the text field
+    var textFieldFinder = find.ancestor
+    (
+      of: find.text(gpsProcessTitleTextFieldHint), 
+      matching: find.byType(TextField)
+    );
+
+    expect(
+      textFieldFinder,
+      findsOneWidget,
+    );
+
+    // Entering the title
+    await tester.enterText(textFieldFinder, aTitle);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  // Method used to enter keywords in the GPS process
+  Future<void> gpsEnterProcessKeywords (WidgetTester tester, List<String> keywordsList) async
+  {
+    // Searching the keywords declaration title
+    var keywordsDeclarationTitleFinder = find.descendant
+                                  (
+                                    of: find.byType(GPSKeywordsDeclaration), 
+                                    matching: find.text(keywordsDeclarationTitle)
+                                  );
+
+    // Tapping on it to open the overlay
+    await tester.tap(keywordsDeclarationTitleFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2)); 
+
+    // The overlay should have opened
+    // Searching the text field
+    var textfieldFinder = find.descendant
+                          (
+                            of: find.byType(StatefulBuilder), 
+                            matching: find.byType(TextField)
+                          );   
+
+    for (var kw in keywordsList)
+    {
+      // Entering the keyword
+      await tester.enterText(textfieldFinder, kw);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pump(const Duration(seconds: 2)); 
+
+      // Necessary for the next keyword to be added
+      await tester.tap(textfieldFinder);         
+    }
+
+    // Searching the tooltip to close the overlay
+    var closingIconFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+
+    // Closing the overlay
+    await tester.tap(closingIconFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2)); 
+
+    // Verifying the overlay absent
+    expect
+    (
+      find.descendant
+      (
+        of: find.byType(GPSKeywordsDeclaration), 
+        matching: find.byType(StatefulBuilder)
+      )        , 
+      findsNothing
+    );
+  }      
+
+  // Method used to enter ideas
+  Future<void> gpsEnterIdeas
+  (
+    WidgetTester tester,
+    List<String> ideasList
+  ) async
+  {
+    // Searching the text field used to add ideas
+    var newIdeaTextFieldFinder = find.ancestor
+    (
+      of: find.text(newIdeaTextFieldHint), 
+      matching: find.byType(TextField)
+    );
+
+    // Adding the ideas
+    for (var idea in ideasList)
+    {
+      await tester.enterText(newIdeaTextFieldFinder, idea);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      // pumpAndSettle timed out
+      // await tester.pumpAndSettle();
+      await tester.pump(const Duration(seconds: 1));  
+
+      await tester.tap(newIdeaTextFieldFinder); 
+    }
+      
+  }
+
+  // Method used to enter new GPS process data
+  Future<void> gpsEnterNewProcessData 
+  ({
+    required WidgetTester tester, 
+    required String title,
+    required List<String> kwsList,
+    required List<String> ideasList,
+    required String fileNameWithoutExtension
+  }) async
+  {
+    // ── 1. CLICK TOWARD A NEW GPS PROCESS ───────────────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────────────────────────
+    // Verifying that the new process button functions
+    await gpsCheckNewProcessButtonFunctions(tester);
+
+
+    // ── 2. GPS PROCESS FILLING ──────────────────────────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────────────────────────
+
+    // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+    await gpsEnterProcessTitle(tester, title);
+
+    // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+    await gpsEnterProcessKeywords(tester, kwsList);
+    
+    // ── SOLUTIONS SECTION ─────────────────────────────────────────────────────────────
+    await gpsEnterIdeas(tester, ideasList);
+    
+    // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
+    // Entering the file name and submitting data
+    await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
+  }
+
+  // Method used to add several times group problem-solving data
+  // The method assumes all lists have the same number of elements
+  Future<void> gpsEnterSeveralTimesNewProcessData
+  ({
+    required WidgetTester tester,
+    required List<String> titlesList,
+    required List<List<String>> kwsLists,
+    required List<List<String>> ideasList,
+    required List<String> fileNamesWithoutExtensionList
+  }) async
+  {
+    int listsLength = titlesList.length;
+    for (var index = 0; index < listsLength; index++)
+    {
+      await gpsEnterNewProcessData 
+      (
+        tester: tester, 
+        title: titlesList[index],
+        kwsList: kwsLists[index], 
+        ideasList: ideasList[index],
+        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
+      );
+    }
+  }
+
+// ─── GPS PREVIEW ───────────────────────────────────────────────────────────────
   // Method used to test a GPS preview.
-  Future<void> testGPSPreview
+  Future<void> gpsTestPreview
   ({
     required WidgetTester tester, 
     required String title,
     required List<String> ideasList
   }) async
   {
+
     // Searching the preview tooltip for the session
-    var listItemFinder = find.ancestor
-                        (
-                          of: find.text("$title$gpsTitleSuffix"), 
-                          matching: find.byType(SessionsListItem)
-                        );
+      var listItemFinder = find.ancestor
+                          (
+                            of: find.text("$title$gpsTitleSuffix"), 
+                            matching: find.byType(SessionsListItem)
+                          );
 
-    var previewTooltipFinder = find.descendant
-    (
-      of: listItemFinder,       
-      matching: find.byTooltip(previewTooltipLabel)
-    );
+      var previewTooltipFinder = find.descendant
+      (
+        of: listItemFinder,       
+        matching: find.byTooltip(previewTooltipLabel)
+      );
 
-    // Opening the preview
-    await tester.tap(previewTooltipFinder);
+      // Opening the preview
+      await tester.tap(previewTooltipFinder);
+      await tester.pumpAndSettle();
+
+      // Searching for the title
+      var titleInAppBarFinder = find.descendant
+      (
+        of: find.byType(AppBar), 
+        matching: find.text(title)
+      );
+
+      // Verifying the title present
+      expect (titleInAppBarFinder, findsOne);
+
+      // TODO: To finish. Code valuable as is.
+      // Verifying the ideas present
+      for (var idea in ideasList)
+      {
+        expect(find.text(idea), findsOne);
+      }
+    }
+
+// ─── GPS: GOING FROM PAGE TO PAGE/OVERLAY ───────────────────────────────────────────────────────────────
+
+  // Method used to go from the home page to the GPS process page
+  Future<void> gpsFromHomePageToProcessPage(WidgetTester tester) async
+  {
+    
+    // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+    // ────────────────────────────────────────────────────────────────────────────
+    var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+    await tester.tap(bottomItemGPSFinder);
     await tester.pumpAndSettle();
 
-    // Searching for the title
-    var titleInAppBarFinder = find.descendant
-    (
-      of: find.byType(AppBar), 
-      matching: find.text(title)
-    );
+    // Verifying the GPS page present
+    expect(find.byType(GPSPage), findsOne);
 
-    // Verifying the title present
-    expect (titleInAppBarFinder, findsOne);
+    // ── STARTING A NEW GPS PROCESS ────────────────────────────────────
+    // ───────────────────────────────────────────────────────────────────────────
 
-    // TODO: To finish. Code valuable as is.
-    // Verifying the ideas present
-    for (var idea in ideasList)
+    // Clicking on the GPS new process button
+    await gpsCheckNewProcessButtonFunctions(tester);
+
+    // Searching the placeholder title
+    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+    expect(placeholderTitleFinder, findsOne);
+  }
+
+  // Method used to go from the GPS process page to the participants lists options page
+  Future<void> gpsFromProcessPageToparticipantsListsOptionsPage(WidgetTester tester) async
+  {
+    // Searching the add emoji    
+    var addEmojiFinder = find.text(addEmoji);
+
+    // Verifying the add emoji present
+    expect(addEmojiFinder, findsOne);
+
+    // Tapping to reach the page with the loading/new group options
+    await tester.tap(addEmojiFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
+  }
+
+  // Method used to go from the GPS process page to new list page
+  Future<void> gpsFromProcessPageToNewListPage(WidgetTester tester) async
+  {
+    // Searching the add emoji    
+    var addEmojiFinder = find.text(addEmoji);
+
+    // Verifying the add emoji present
+    expect(addEmojiFinder, findsOne);
+
+    // Tapping to reach the page with the loading/new group options
+    await tester.tap(addEmojiFinder);
+
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 5));
+
+    // Verifying the options page present
+    var optionsPageFinder = find.text(participantsListsSubTitle);
+    expect(optionsPageFinder, findsOne);
+
+    // Searching the new group button
+    var newParticipantsGroupFinder = find.text(newParticipantsGroupOptionLabel);
+    await tester.ensureVisible(newParticipantsGroupFinder);
+    expect(newParticipantsGroupFinder, findsOne);
+
+    // Tapping on it
+    await tester.tap(newParticipantsGroupFinder);
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
+  }
+
+  // Method used to go from GPS process page to list loading dashboard
+  Future<void> gpsFromProcessPageToListLoadingDashboard(WidgetTester tester) async
+  {
+    // Searching the add emoji    
+    var addEmojiFinder = find.text(addEmoji);
+
+    // Verifying the add emoji present
+    expect(addEmojiFinder, findsOne);
+
+    // Tapping to reach the page with the loading/new group options
+    await tester.tap(addEmojiFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 5));
+
+    // Verifying the options page present
+    var optionsPageFinder = find.text(participantsListsSubTitle);
+    expect(optionsPageFinder, findsOne);
+
+    // Searching the list loading option button
+    var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+    await tester.ensureVisible(loadingAListOptionFinder);
+    expect(loadingAListOptionFinder, findsOne);
+
+    // Tapping on it
+    await tester.tap(loadingAListOptionFinder);
+    await tester.pumpAndSettle();
+
+    // Verifying the lists dashboard title present
+    var listDashboardTitleFinder = find.text(listsDashboardTitle);
+    expect(listDashboardTitleFinder, findsOne);
+  }
+
+  // Method used to go from the GPS process page to the ideas overlay
+  Future<void> gpsFromProcessPageToIdeasOverlay(WidgetTester tester) async
+  {
+    // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
+    // ────────────────────────────────────────────────────────────────────────
+    var ideasListTitleFinder = find.text(ideasListTitle);
+    await tester.tap(ideasListTitleFinder);
+    await tester.pumpAndSettle();
+
+    // ── OVERLAY  ───────────────────────────────────
+    // ───────────────────────────────────────────────
+    // Verifying the overlay present
+    expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
+  }
+
+
+// ─── GPS: ADDING PARTICIPANTS ───────────────────────────────────────────────────────────────
+  // Method used to add participants
+  Future<void> gpsFromProcessPageAddParticipants
+  (
+    WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
+  ) async
+  { 
+    // Loading the new list page from the GPS process page
+    await gpsFromProcessPageToNewListPage(tester);
+
+    if (keywords.isNotEmpty)
     {
-      expect(find.text(idea), findsOne);
+      // Searching for the keywords declaration title
+      var keywordsTitleFinder = find.text(keywordsDeclarationTitle);
+      await tester.tap(keywordsTitleFinder);
+      await tester.pumpAndSettle();
+
+      // Searching for the new keyword text field
+      var newKeywordTextFieldFinder = find.byKey(const ValueKey('keywordField'));
+      expect(newKeywordTextFieldFinder, findsOne);
+      await tester.ensureVisible(newKeywordTextFieldFinder); 
+      await tester.pumpAndSettle(); 
+      await tester.tap(newKeywordTextFieldFinder);
+      await tester.pumpAndSettle();  
+
+      // Adding the keywords
+      for (var keyword in keywords)
+      {   
+        // Adding the keyword
+        await tester.enterText(newKeywordTextFieldFinder, keyword);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        // Necessary for the next keyword to be added
+        await tester.tap(newKeywordTextFieldFinder);
+      }
+
+      // Closing the overlay
+      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+      await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
+      await tester.pumpAndSettle();
+    }
+    
+    // Searching for the new participant text field
+    // Searching by placeholder text is not robust enough
+    var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+    expect(newParticipantTextFieldFinder, findsOne);
+    await tester.ensureVisible(newParticipantTextFieldFinder); 
+    await tester.pumpAndSettle(); 
+    await tester.tap(newParticipantTextFieldFinder);
+    await tester.pumpAndSettle();
+
+    // Adding the names
+    for (var name in participantsNames)
+    {   
+      // Adding the name
+      await tester.enterText(newParticipantTextFieldFinder, name);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      // Necessary for the next name to be added
+      await tester.tap(newParticipantTextFieldFinder);
     }
   }
+
+  // Method used to add participants lists
+  // [
+  //   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
+  //   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
+  // ];
+  Future<void> gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded
+  ({
+    required WidgetTester tester, 
+    required List< Map<String,Map<String, dynamic>> > listDataMapsList
+  }) async
+  {
+    for (var map in listDataMapsList)
+    {
+      List<String> names = (map.values.first)["names"];
+      List<dynamic> keywords = (map.values.first)["keywords"];
+
+      await gpsFromProcessPageAddParticipants(tester, names, keywords);
+
+      // Verifying the names present
+      for (var name in names)
+      {
+        expect(find.text(name), findsOne);    
+      }      
+
+      // Searching the 'Save' icon
+      var saveListIconFinder = find.byIcon(Icons.save_outlined);
+      await tester.pump(const Duration(seconds: 3));
+      expect(saveListIconFinder, findsOne);
+
+      // Tapping on it
+      await tester.tap(saveListIconFinder);
+      await tester.pumpAndSettle();
+
+      // Searching the text field to add the list name
+      var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+      expect(listNameSavingTextFieldFinder, findsOne);
+
+      // Adding the list name
+      var listName = map.keys.first;
+      await tester.ensureVisible(listNameSavingTextFieldFinder);
+      await tester.tap(listNameSavingTextFieldFinder);
+      await tester.enterText(listNameSavingTextFieldFinder, listName);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Verifying the names on the GPS process page
+
+      // Verifying the GPS process page present
+      expect(find.text(checkListTitle), findsOne);
+
+      // Verifying the names present
+      for (var name in names)
+      {
+        expect(find.text(name), findsOne);    
+      } 
+    }
+  }
+
+// ─── GPS: ADDING IDEAS ───────────────────────────────────────────────────────────────
+  // Method used to add an idea using the overlay
+  Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async
+  {
+    // Searching the text field used to add ideas
+    var newIdeaTextFieldFinder = find.byKey(const ValueKey('ideaOverlayField'));
+    // Adding the idea
+    await tester.ensureVisible(newIdeaTextFieldFinder);
+    await tester.tap(newIdeaTextFieldFinder);
+    await tester.pumpAndSettle(); 
+    await tester.enterText(newIdeaTextFieldFinder, idea);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));  
+  }
+
+// ─── GPS: MISC. ───────────────────────────────────────────────────────────────
+  // Method used to get the finder of a new list text items
+  Future<Finder> gpsGetNewListTextItems(WidgetTester tester) async
+  {
+    var listItemsFinder = find.byWidgetPredicate
+              (
+                (widget) 
+                {
+                  if (widget.key is ValueKey<String>) {
+                    return (widget.key as ValueKey<String>).value.contains('editable-deletable-text-item-');
+                  }
+                  return false;
+                }
+              );  
+    return listItemsFinder;
+  }
+
+  // Method used to get the finder of the participants containers
+  Future<Finder> gpsGetParticipantsContainersOnListDashboard(WidgetTester tester) async
+  {
+    var participantsContainersFinder = find.byWidgetPredicate
+    (
+      (widget) 
+      {
+        if (widget.key is ValueKey<String>) {
+          return (widget.key as ValueKey<String>).value.contains('session-participants-container-');
+        }
+        return false;
+      }
+    );  
+
+    return participantsContainersFinder;
+  } 
+
+  
+
+// ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
+
+  // Method used to enter edit mode
+  Future<void> dashboardEnterEditMode(WidgetTester tester) async
+  {
+    // Searching the edit button
+    var editButtonFinder = find.descendant
+                          (
+                            of: find.byType(ElevatedButton),
+                            matching: find.text(editEmoji)
+                          );
+    
+    var totalButton = editButtonFinder.evaluate().length;
+    if (testingDebug) pu.printd('Testing Debug: totalButton: $totalButton');
+
+    // Tapping the edit button
+    await tester.tap(editButtonFinder);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
+  }
+
+  // Method used to enter a file name and to submit the CA process data on mobile device
+  // (Assuming an already selected path to the user session data folder)
+  Future<void> dashboardEnterFileNameAndSubmitDataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
+  {
+    Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+
+    // Path to folder already declared 
+    // Scrolling to make the text field visible for small screens
+    await tester.ensureVisible(fileNameWidgetFinder);
+
+    // Entering a file name
+    await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();  
+  }  
+
+
+  // Method used to search a title and keywords on the dashboard
+  Future<void> dashboardSearchTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
+    {
+      if (titleSuffix != null) title = "$title$titleSuffix";
+      // Searching for the title
+      expect(find.text(title), findsOne);
+
+      // Searching for the keywords
+      for (var kw in kws)
+      {
+        expect(find.text(kw), findsOne);
+      }
+
+    }
+
+  // Method used to get the finder of the keywords
+  Future<Finder> dashboardGetKeywordsOnDashboard(WidgetTester tester) async
+  {
+    var participantsContainersFinder = find.byWidgetPredicate
+    (
+      (widget) 
+      {
+        if (widget.key is ValueKey<String>) {
+          return (widget.key as ValueKey<String>).value.contains('session-keywords-');
+        }
+        return false;
+      }
+    );  
+
+    return participantsContainersFinder;
+  } 
+
+  // Method used to get the finder of a sessions list item by title
+  Future<Finder> dashboardGetSessionListItemFinderByTitle({required WidgetTester tester, required String title, String? titleSuffix}) async 
+  {
+    if (titleSuffix != null) title = "$title$titleSuffix";
+    Finder sessionListItemFinder = find.text(title);
+    return sessionListItemFinder;
+  }
+
+  // Method used to get the finder of the sessions titles
+  Future<Finder> dashboardGetAllSessionsTitles(WidgetTester tester) async
+  {
+    var titlesFinder = find.byWidgetPredicate
+    (
+      (widget) 
+      {
+        if (widget.key is ValueKey<String>) {
+          return (widget.key as ValueKey<String>).value.contains('session-title-');
+        }
+        return false;
+      }
+    );  
+
+    return titlesFinder;
+  }
+
+  // Method used to get the finder of a keyword FilterChip
+  Future<Finder> dashboardGetKwFilterChip(WidgetTester tester, String kw) async
+    {
+      var filterChipFinder = find.byWidgetPredicate
+      (
+        (widget) 
+        {
+          if (widget is FilterChip) {
+            final label = widget.label;
+            if (label is Text) {
+              return (label.data ?? '').contains(kw);
+            }
+          }
+          return false;
+        }      
+      );  
+
+      return filterChipFinder;
+    }
+  
+
+// ─── MISC. ───────────────────────────────────────────────────────────────
+
+  // Serialises a segmented-button selection to a slash-separated string.
+  String _segmentedButtonToString(Set<String> values) => values.join('/');
+
+
+   
