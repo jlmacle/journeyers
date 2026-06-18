@@ -163,7 +163,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
 
-            await enterNewGPSProcessData
+            await gpsEnterNewProcessData
             (
               tester: tester, 
               title: testGPSTitle1,
@@ -180,12 +180,12 @@ Future<void> main() async {
             
             // To avoid intermittent test failures
             await tester.pump(const Duration(seconds: 2));
-            await searchTitleAndKeywords(title: testGPSTitle1, kws: kwsList, titleSuffix: gpsTitleSuffix);
+            await dashboardSearchTitleAndKeywords(title: testGPSTitle1, kws: kwsList, titleSuffix: gpsTitleSuffix);
 
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             await tester.pump(const Duration(seconds: 2));
-            await testGPSPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
+            await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -230,7 +230,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterNewGPSProcessData
+            await gpsEnterNewProcessData
             (
               tester: tester, 
               title: testGPSTitle1,
@@ -242,7 +242,7 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the finder with the title
-            Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
             expect(sessionListItemFinder, findsOne);
 
             // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
@@ -256,7 +256,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Verifying the sessions list item absent
-            sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
             expect(sessionListItemFinder, findsNothing);
       
             // await tester.pump(const Duration(seconds: 2));
@@ -298,7 +298,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterSeveralTimesNewGPSProcessData
+            await gpsEnterSeveralTimesNewProcessData
             (
               tester: tester,
               titlesList: titlesList,
@@ -393,7 +393,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterSeveralTimesNewGPSProcessData
+            await gpsEnterSeveralTimesNewProcessData
             (
               tester: tester,
               titlesList: titlesList,
@@ -412,7 +412,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 2));
 
             // Searching the titles          
-            var titlesFinder = await getAllSessionsTitles(tester);        
+            var titlesFinder = await dashboardGetAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
             if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
@@ -429,7 +429,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 2));
 
             // Re-searching the titles  
-            titlesFinder = await getAllSessionsTitles(tester); 
+            titlesFinder = await dashboardGetAllSessionsTitles(tester); 
 
             // Verifying the alphabetical order 
             for (var index = 0; index < totalTitles; index++)
@@ -474,7 +474,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterSeveralTimesNewGPSProcessData
+            await gpsEnterSeveralTimesNewProcessData
             (
               tester: tester,
               titlesList: titlesList,
@@ -571,7 +571,7 @@ Future<void> main() async {
               // ── 1. ENTERING NEW GPS PROCESS DATA (6 times) ──────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────
               
-              await enterSeveralTimesNewGPSProcessData
+              await gpsEnterSeveralTimesNewProcessData
               (
                 tester: tester,
                 titlesList: titlesListKwsSorting,
@@ -585,12 +585,12 @@ Future<void> main() async {
               // ────────────────────────────────────────────────────────
 
               // 1. Filtering by kwMaintenance
-              var kwMaintenanceFinder = await getKwFilterChip(tester, kwMaintenance);
+              var kwMaintenanceFinder = await dashboardGetKwFilterChip(tester, kwMaintenance);
               await tester.tap(kwMaintenanceFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              var titlesFinder = await getAllSessionsTitles(tester);
+              var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwMaintenance: $totalTitles');
@@ -604,12 +604,12 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // 2. Filtering by kwCompanionship
-              var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+              var kwCompanionshipFinder = await dashboardGetKwFilterChip(tester, kwCompanionship);
               await tester.tap(kwCompanionshipFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              titlesFinder = await getAllSessionsTitles(tester);
+              titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
@@ -624,12 +624,12 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // 3. Filtering by kwWorkplace
-              var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+              var kwWorkplaceFinder = await dashboardGetKwFilterChip(tester, kwWorkplace);
               await tester.tap(kwWorkplaceFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              titlesFinder = await getAllSessionsTitles(tester);
+              titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');

@@ -160,7 +160,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────────────────────────────
 
             // formToFill: false to skip the form filling
-            await enterNewCAProcessData
+            await caEnterNewProcessData
             (
               tester: tester, 
               formToFill: false,
@@ -176,7 +176,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await searchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList);
 
           // await tester.pump(const Duration(seconds: 2));
         }
@@ -221,7 +221,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────────────────────────────
 
             // All CA form fields empty in the default parameter values
-            await enterNewCAProcessData
+            await caEnterNewProcessData
             (
               tester: tester, 
               title: testAnalysisTitle2,
@@ -235,12 +235,12 @@ Future<void> main() async {
             
             // To avoid intermittent test failures
             await tester.pump(const Duration(seconds: 2)); 
-            await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+            await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             // Default parameter values for empty CA form fields
-            await testCAPreview(tester: tester);
+            await caTestPreview(tester: tester);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -298,7 +298,7 @@ Future<void> main() async {
             // b2 to b5
             List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
-            await enterNewCAProcessData
+            await caEnterNewProcessData
             (
               tester: tester, 
               title: testAnalysisTitle2,
@@ -318,7 +318,7 @@ Future<void> main() async {
             
             // To avoid intermittent test failures
             await tester.pump(const Duration(seconds: 2));
-            await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+            await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
             // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
@@ -326,7 +326,7 @@ Future<void> main() async {
             List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
             List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-            await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
+            await caTestPreview(tester: tester, individualStringValues: individualStringValues, 
             segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
             // await tester.pump(const Duration(seconds: 2));
@@ -382,7 +382,7 @@ Future<void> main() async {
           List<Set<String>> segmentedButtonValues = [{"Yes"},{},{"I don't know"},{}];
           List<String> segmentedButtonTextFieldValues = ["b2", "", "b4",""];
 
-          await enterNewCAProcessData
+          await caEnterNewProcessData
             (
               tester: tester, 
               title: testAnalysisTitle2,
@@ -402,7 +402,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -414,7 +414,7 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
+          await caTestPreview(tester: tester, individualStringValues: individualStringValues, 
           segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -470,7 +470,7 @@ Future<void> main() async {
           List<Set<String>> segmentedButtonValues = [{},{"No"},{},{"I don't know"}];
           List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
 
-          await enterNewCAProcessData
+          await caEnterNewProcessData
           (
             tester: tester, 
             title: testAnalysisTitle2,
@@ -490,7 +490,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -502,7 +502,7 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
+          await caTestPreview(tester: tester, individualStringValues: individualStringValues, 
           segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -558,7 +558,7 @@ Future<void> main() async {
           List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
           List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
           
-          await enterNewCAProcessData
+          await caEnterNewProcessData
           (
             tester: tester, 
             title: testAnalysisTitle2,
@@ -578,7 +578,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await searchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
           
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -590,7 +590,7 @@ Future<void> main() async {
     
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-          await testCAPreview(tester: tester, individualStringValues: individualStringValues, 
+          await caTestPreview(tester: tester, individualStringValues: individualStringValues, 
           segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -636,7 +636,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterNewCAProcessData
+            await caEnterNewProcessData
             (
               formToFill: false,
               tester: tester, 
@@ -648,7 +648,7 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the finder with the title
-            Finder sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
+            Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
             expect(sessionListItemFinder, findsOne);
 
             // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
@@ -662,7 +662,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Verifying the sessions list item absent
-            sessionListItemFinder = await getSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
+            sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
             expect(sessionListItemFinder, findsNothing);
       
             // await tester.pump(const Duration(seconds: 2));
@@ -704,7 +704,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterSeveralTimesNewCAProcessData
+            await caEnterSeveralTimesNewProcessData
             (
               formToFill: false,
               tester: tester,
@@ -795,7 +795,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterSeveralTimesNewCAProcessData
+            await caEnterSeveralTimesNewProcessData
             (
               formToFill: false,
               tester: tester,
@@ -814,7 +814,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 2));
 
             // Searching the titles          
-            var titlesFinder = await getAllSessionsTitles(tester);        
+            var titlesFinder = await dashboardGetAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
             if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
@@ -831,7 +831,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 2));
 
             // Re-searching the titles  
-            titlesFinder = await getAllSessionsTitles(tester); 
+            titlesFinder = await dashboardGetAllSessionsTitles(tester); 
 
             // Verifying the alphabetical order 
             for (var index = 0; index < totalTitles; index++)
@@ -876,7 +876,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await enterSeveralTimesNewCAProcessData
+            await caEnterSeveralTimesNewProcessData
             (
               formToFill: false,
               tester: tester,
@@ -973,7 +973,7 @@ Future<void> main() async {
               // ── 1. ENTERING NEW CA PROCESS DATA (6 times) ──────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────
               
-              await enterSeveralTimesNewCAProcessData
+              await caEnterSeveralTimesNewProcessData
               (
                 formToFill: false,
                 tester: tester,
@@ -987,12 +987,12 @@ Future<void> main() async {
               // ────────────────────────────────────────────────────────
 
               // 1. Filtering by kwMaintenance
-              var kwMaintenanceFinder = await getKwFilterChip(tester, kwMaintenance);
+              var kwMaintenanceFinder = await dashboardGetKwFilterChip(tester, kwMaintenance);
               await tester.tap(kwMaintenanceFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              var titlesFinder = await getAllSessionsTitles(tester);
+              var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwMaintenance: $totalTitles');
@@ -1006,12 +1006,12 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // 2. Filtering by kwCompanionship
-              var kwCompanionshipFinder = await getKwFilterChip(tester, kwCompanionship);
+              var kwCompanionshipFinder = await dashboardGetKwFilterChip(tester, kwCompanionship);
               await tester.tap(kwCompanionshipFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              titlesFinder = await getAllSessionsTitles(tester);
+              titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
@@ -1026,12 +1026,12 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // 3. Filtering by kwWorkplace
-              var kwWorkplaceFinder = await getKwFilterChip(tester, kwWorkplace);
+              var kwWorkplaceFinder = await dashboardGetKwFilterChip(tester, kwWorkplace);
               await tester.tap(kwWorkplaceFinder);
               await tester.pumpAndSettle();
 
               // Verifying the titles present
-              titlesFinder = await getAllSessionsTitles(tester);
+              titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
