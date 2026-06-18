@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
+import 'package:journeyers/utils/generic/alphabet/alphabet_utils.dart';
 import 'package:journeyers/utils/project_specific/dev/sort_utils.dart';
-import 'text_lists_storage_externalized_strings.dart';
-import '../../../../utils/generic/alphabet/alphabet_utils.dart';
+import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 
 
 // new category to consider
