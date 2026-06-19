@@ -294,7 +294,7 @@ Future<void> main() async {
             // Group/teams perspective testing values
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary
-            List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"}];
+            List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"No","Yes"}];
             // b2 to b5
             List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
 

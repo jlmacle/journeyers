@@ -83,7 +83,9 @@ class DTOCAForm
   // Both values are omitted (left empty) when nothing is selected.
   Future<LinkedHashMap<String, String>> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) async =>
       LinkedHashMap<String, String>.from({
-        qf.labelSegmentedButton: f.selection.isNotEmpty ? _segmentedToString(f.selection) : '',
+        // Sorting the options before saving
+        qf.labelSegmentedButton: f.selection.isNotEmpty ? 
+                                        _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : '',
         qf.labelTextField:       f.selection.isNotEmpty ? f.text : '',
         });
 
