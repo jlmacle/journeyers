@@ -1128,6 +1128,7 @@ final q = CAQuestionsFields();
     // Path to folder already declared 
     // Scrolling to make the text field visible for small screens
     await tester.ensureVisible(fileNameWidgetFinder);
+    await tester.pumpAndSettle();
 
     // Entering a file name
     await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
