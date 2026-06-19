@@ -500,6 +500,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
             body: SafeArea
             (
               child: SingleChildScrollView(
+                key: const ValueKey('context-analysis-preview-scrollview'),
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
