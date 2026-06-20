@@ -81,4 +81,6 @@ decision-making, planning
 Off-line functioning
 ------------------------------------------
 Storage of what can be positive credentials of our team life.
+------------------------------------------
+Supportive technology for sound priorities (dashboard+todos)/problem-solving/group problem-solving/team credentials
 
