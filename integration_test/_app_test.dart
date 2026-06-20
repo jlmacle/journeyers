@@ -2523,9 +2523,8 @@ Future<void> main() async {
             var b1Finder = find.text(textToFind);
             await tester.scrollUntilVisible
             (
-              find.text(textToFind), 
-              // 
-              43, 
+              b1Finder, 
+              45, 
               scrollable: find.descendant
                         (
                           of: find.byKey(const ValueKey('context-analysis-preview-scrollview')), 
@@ -2564,11 +2563,7 @@ Future<void> main() async {
               tester: tester, 
               individualStringValues: [...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newSegmentedButtonTextFieldValues],
-              segmentedButtonValues: newSegmentedButtonValues);
-
-              // todo: to finish
-
-            
+              segmentedButtonValues: newSegmentedButtonValues);            
           } // if platform
 
         });
