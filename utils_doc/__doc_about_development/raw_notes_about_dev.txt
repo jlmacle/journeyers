@@ -64,3 +64,21 @@ Urgent, Not perceived as urgent
 
 Prevention/remediation:
 We might have an issue with/We surely will have an issue with/We have an issue with
+
+-----------
+Learning by doing:
+to avoid lack of inspiration: top folder labels suggested for import at first run (imported keywords/labels list can be edited later + com about the feature) + ability to retrieve suggestions later  + top keywords
+sub-folder not suggested
+
+To avoid 3 clicks on Android to access folder-structured storage
+To monitor new files on the phone (downloads, pictures,...) for potential tagging/retrieval related to the folder-structured storage (companionship/memories/source pictures), without having to move the file
+An accessible dashboard (using the folder structure + substructures if preferred), potentially pointing to a to-do list (potentially using folder labels in potential field notes/keywords), potentially pointing to the structured folders/on-line files + assisted group problem-solving 
+Stored/loaded from user text files (to keep the data if the app is deleted) + import feature
+Plain text file storage 
+“Learning by doing” suggested keyword related to:
+communication, attitude, 
+decision-making, planning
+Off-line functioning
+------------------------------------------
+Storage of what can be positive credentials of our team life.
+
