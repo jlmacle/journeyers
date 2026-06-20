@@ -2520,7 +2520,7 @@ Future<void> main() async {
             var textToFind = "b1$suffix";
             if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
 
-            var b1Finder = find.text(textToFind);
+            var b1Finder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
               b1Finder, 
@@ -2529,7 +2529,7 @@ Future<void> main() async {
                         (
                           of: find.byKey(const ValueKey('context-analysis-preview-scrollview')), 
                           matching: find.byType(Scrollable)
-                        ),                  
+                        ),
             );            
             await tester.pumpAndSettle();
             expect(b1Finder, findsOne);
@@ -2540,16 +2540,20 @@ Future<void> main() async {
             if (testingDebug) pu.printd('Scrolling toward title for preview');            
 
             // Scrolling up
-            await tester.scrollUntilVisible
-            (
-              find.text(title), 
-              -45 , // getting up the list
-              scrollable: find.descendant
+            var scrollableFinder = find.descendant
                         (
                           of: find.byKey(const ValueKey('context-analysis-preview-scrollview')), 
                           matching: find.byType(Scrollable)
-                        ),
-              duration: const Duration(seconds: 2)
+                        ).first;
+
+            var totalScrollables = scrollableFinder.evaluate().length;
+            print("totalScrollables: $totalScrollables");
+
+            await tester.scrollUntilVisible
+            (
+              find.text(title).first, 
+              -40, // getting up the list
+              scrollable: scrollableFinder
             );
             await tester.pumpAndSettle();
             
@@ -2564,7 +2568,7 @@ Future<void> main() async {
               individualStringValues: [...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newSegmentedButtonTextFieldValues],
               segmentedButtonValues: newSegmentedButtonValues);            
-          } // if platform
+          } // platform-related if
 
         });
 
