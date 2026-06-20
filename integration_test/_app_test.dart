@@ -2572,6 +2572,165 @@ Future<void> main() async {
 
         });
 
+      // 'Group problem-solving edition \n'
+      testWidgets(
+        'Group problem-solving edition \n',
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the app
+            await pumpApp(tester);
+
+            // ── 1. CLICKING TO DISPLAY THE GPS PAGE  ────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────
+            var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+            await tester.tap(bottomItemGPSFinder);
+            await tester.pumpAndSettle();
+
+            // ── 2. ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+            var title = "GPS title";
+
+            var keywords = kwsList;
+            
+            await gpsEnterNewProcessData
+            (
+              tester: tester, 
+              title: title,
+              kwsList: keywords,
+              ideasList: ideasList1,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ── 3. CLICKING TO OPEN THE PREVIEW  ─────────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────
+            // Opening the preview
+            var previewFinder = find.byTooltip(previewTooltipLabel);
+            await tester.tap(previewFinder);
+            await tester.pumpAndSettle();
+
+            // ── 4. CLICKING TO START THE EDIT MODE  ──────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────
+            // Opening the edition overlay
+            var editIconFinder = find.byIcon(Icons.edit);
+            await tester.tap(editIconFinder);
+            await tester.pumpAndSettle();
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── 5. EDITION: Verifying data present and editing  ─────────────────
+            // ────────────────────────────────────────────────────────────────────
+
+            // ── Verifying the ideas present ─────────────
+            // ────────────────────────────────────────────
+            for (var idea in ideasList1)
+            {
+              expect(find.textContaining(idea), findsNWidgets(2));
+            }            
+
+            // ── Editing data ────────────────────────────
+            // ────────────────────────────────────────────
+
+            // const ideasList1 = ['idea1', 'idea2'];
+            var suffix = "-edited";
+
+            // ── Deleting idea1  ───────────────────────────────────
+            // ──────────────────────────────────────────────────────
+            // Searching the checkbox
+            var checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-0'));
+            await tester.ensureVisible(checkboxFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the checkbox for deletion
+            await tester.tap(checkboxFinder);
+            await tester.pumpAndSettle();
+            
+            // Clicking on the Delete message
+            var deleteFinder = find.textContaining('Delete').last;
+            await tester.pumpAndSettle();
+            await tester.tap(deleteFinder);
+            await tester.pumpAndSettle();
+            // Verifying the value removed from the overlay
+            expect(find.text('idea1'), findsOne);
+            if (testingDebug) pu.printd('Testing Debug: idea1 deleted');
+
+            // ── Editing idea2  ───────────────────────────────────
+            // ─────────────────────────────────────────────────────
+            // Searching the idea
+            var ideaFinder = find.byKey(const ValueKey('editable-deletable-text-item-0'));
+            await tester.ensureVisible(ideaFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the idea for edition
+            await tester.tap(ideaFinder);
+            await tester.pumpAndSettle();
+            // Edition
+            const tfKeyLabel = 'editable-deletable-tf-0';
+            var editableDeletableTfFinder = find.byKey(const ValueKey(tfKeyLabel));
+            await tester.ensureVisible(editableDeletableTfFinder);
+            await tester.pumpAndSettle();
+            await tester.tap(editableDeletableTfFinder);
+            await tester.pumpAndSettle();
+
+            var ideaEdited = "idea2$suffix";
+            await tester.enterText(editableDeletableTfFinder, ideaEdited);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 1));
+            if (testingDebug) pu.printd('Testing Debug: idea2 edited');
+
+            // ── Adding idea3  ───────────────────────────────────
+            // ────────────────────────────────────────────────────
+            // Searching the text field used to add ideas
+            var newIdeaTextFieldFinder = find.byKey(const ValueKey('ideaOverlayField'));
+
+            // Adding the new idea
+            await tester.ensureVisible(newIdeaTextFieldFinder);
+            await tester.pumpAndSettle(); 
+            await tester.tap(newIdeaTextFieldFinder, warnIfMissed: false);
+            await tester.pumpAndSettle(); 
+            await tester.enterText(newIdeaTextFieldFinder, 'idea3');
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();             
+            if (testingDebug) pu.printd('Testing Debug: idea3 added');
+
+            await tester.pump(const Duration(seconds: 5)); 
+
+            // ── 6. VERIFICATION  ─────────────────
+            // ─────────────────────────────────────
+
+            // ── Closing the overlay ──────────────────
+            // ─────────────────────────────────────────
+            var overlayClosingTooltipFinder = find.byTooltip(overlayClosingTooltip);
+            await tester.tap(overlayClosingTooltipFinder);
+            await tester.pumpAndSettle();           
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── Verifying the edited/added data present ────────────
+            // ───────────────────────────────────────────────────────
+            // ── Verifying the data present ──────────────────
+            expect(find.textContaining("idea2$suffix"), findsOne);
+            expect(find.textContaining("idea3"), findsOne);
+               
+          } // if platform
+
+        });
+
+
     });
 
  
