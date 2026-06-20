@@ -2414,7 +2414,7 @@ Future<void> main() async {
 
             totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalSegmentedButtons: $totalSegmentedButtons');
+            if (testingDebug) pu.printd('Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)');
 
             var optionsToSelect = ["Yes","No","I don't know"];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
