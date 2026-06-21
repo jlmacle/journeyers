@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
+/// {@category Lists}
 /// A widget used for the title of the dashboard.
 class ListDashboardTitle extends StatelessWidget 
 {

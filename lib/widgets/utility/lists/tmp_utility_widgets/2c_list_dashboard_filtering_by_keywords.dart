@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
+/// {@category Lists}
 /// A widget handling the filtering by keywords of lists.
 class ListDashboardFilteringByKeywords extends StatefulWidget 
 {
