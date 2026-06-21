@@ -35,12 +35,12 @@ class CustomFocusableText extends StatefulWidget
 
 class _CustomFocusableTextState extends State<CustomFocusableText> 
 {
-  FocusNode textFocusNode = .new();
+  final FocusNode _textFocusNode = .new();
 
   @override
   void dispose() 
   {
-    textFocusNode.dispose();
+    _textFocusNode.dispose();
     super.dispose();
   }
 
@@ -54,7 +54,7 @@ class _CustomFocusableTextState extends State<CustomFocusableText>
       child: 
       Focus
       (
-        focusNode: textFocusNode,
+        focusNode: _textFocusNode,
         child: Text(widget.text, style: widget.textStyle, textAlign: widget.textAlignment),
       ),
     );
