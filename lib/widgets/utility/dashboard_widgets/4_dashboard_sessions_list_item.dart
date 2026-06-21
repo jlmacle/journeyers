@@ -508,11 +508,11 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   (sessionMetadata[DashboardUtils.keyFilePath] != null)
                   ?
                     (dashboardContext == DashboardUtils.caContext)
-                    ? CAPreviewWidget(
+                    ? CAPreview(
                         pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
                         caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )
-                    : GPSPreviewWidget(
+                    : GPSPreview(
                         pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
                         ideas: _ideasListBeforeEdition,                       
                         
