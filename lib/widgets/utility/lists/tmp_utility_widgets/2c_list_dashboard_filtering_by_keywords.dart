@@ -38,7 +38,8 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
 
 class ListDashboardFilteringByKeywordsState extends State<ListDashboardFilteringByKeywords> 
 {  
-  // Method used to filter the lists by keywords
+  // Used in ListDashboard.
+  // Method used to filter the lists by keywords.
   Future<void> applyFilteringByKeywords() async
   {
     if (widget.selectedKeywords.isEmpty) 
@@ -84,7 +85,8 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
     await applyFilteringByKeywords();
   }
 
-  // Method used to refresh the keywords list after deletion of session data
+  // Used in ListDashboard.
+  // Method used to refresh the keywords list after deletion of session data.
   void refreshKeywordsAfterSessionDeletion() 
   {
     // if no lists left, nothing to do
