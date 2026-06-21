@@ -12,7 +12,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.
-class GPSPreviewWidget extends StatefulWidget {
+class GPSPreview extends StatefulWidget {
   /// The path to a stored group problem-solving session data.
   final String pathToStoredData;
 
@@ -22,7 +22,7 @@ class GPSPreviewWidget extends StatefulWidget {
   /// Callback function used to update the temporary file path used for sharing a session data.
   final ValueChanged<String> gpsPreviewCallbackFunctionToUpdateTmpFilePath;
 
-  const GPSPreviewWidget({
+  const GPSPreview({
     super.key,
     required this.pathToStoredData,
     required this.ideas,
@@ -30,13 +30,13 @@ class GPSPreviewWidget extends StatefulWidget {
   });
 
   @override
-  State<GPSPreviewWidget> createState() =>
-      _GPSPreviewWidgetState();
+  State<GPSPreview> createState() =>
+      _GPSPreviewState();
 }
 
 // TODO: to clean
-class _GPSPreviewWidgetState
-    extends State<GPSPreviewWidget> {
+class _GPSPreviewState
+    extends State<GPSPreview> {
 
   bool _isLoading = true;
   String _sessionTitle = "";
@@ -48,13 +48,13 @@ class _GPSPreviewWidgetState
   // only runs once, at widget creation
   @override
   void initState() {
-    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: initState: widget.ideas: ${widget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: widget.ideas: ${widget.ideas}");
     super.initState();
     
     _ideas = widget.ideas;
     if (_ideas.isEmpty) 
     {
-      if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: initState: _fetchingData");
+      if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: _fetchingData");
       _fetchingData();
     }
     else
@@ -67,10 +67,10 @@ class _GPSPreviewWidgetState
   }
 
   @override
-  void didUpdateWidget(covariant GPSPreviewWidget oldWidget) {
-    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: didUpdateWidget");
-    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: didUpdateWidget: widget.ideas: ${widget.ideas}");
-    if (editDebug) pu.printd("Editing: _GPSPreviewWidgetState: didUpdateWidget: oldWidget.ideas: ${oldWidget.ideas}");
+  void didUpdateWidget(covariant GPSPreview oldWidget) {
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: widget.ideas: ${widget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: oldWidget.ideas: ${oldWidget.ideas}");
 
     super.didUpdateWidget(oldWidget);
 

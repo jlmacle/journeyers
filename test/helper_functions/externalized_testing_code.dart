@@ -351,7 +351,7 @@ final q = CAQuestionsFields();
     //Searching for the expansion tiles
     var  expansionTilesFinder = find.descendant
     (
-      of: find.byType(CAPreviewWidget), 
+      of: find.byType(CAPreview), 
       matching: find.byType(ExpansionTile)
     );
 
@@ -377,7 +377,7 @@ final q = CAQuestionsFields();
     {  
       // Searching the expansion tile by index
       var currentExpansionTileFinder = find.descendant(
-        of: find.byType(CAPreviewWidget),
+        of: find.byType(CAPreview),
         matching: find.byType(ExpansionTile),
       ).at(expansionTileIndex);
 

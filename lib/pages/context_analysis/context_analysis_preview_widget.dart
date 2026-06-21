@@ -16,7 +16,7 @@ import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dar
 
 /// {@category Context analysis}
 /// A preview widget used in the context analysis dashboard.
-class CAPreviewWidget extends StatefulWidget 
+class CAPreview extends StatefulWidget 
 {
   /// The path to a stored context analysis session data.
   final String pathToStoredData;
@@ -24,17 +24,17 @@ class CAPreviewWidget extends StatefulWidget
   /// Callback function used to update the temporary file path used for sharing a session data.
   final ValueChanged<String> caPreviewCallbackFunctionToUpdateTmpFilePath;
 
-  const CAPreviewWidget({
+  const CAPreview({
     super.key, 
     required this.pathToStoredData,
     required this.caPreviewCallbackFunctionToUpdateTmpFilePath
   });
 
   @override
-  State<CAPreviewWidget> createState() => _CAPreviewWidgetState();
+  State<CAPreview> createState() => _CAPreviewState();
 }
 
-class _CAPreviewWidgetState extends State<CAPreviewWidget> 
+class _CAPreviewState extends State<CAPreview> 
 {
   bool _isLoading = true;
   final Map<String, dynamic> sectionsIndividual = {};
