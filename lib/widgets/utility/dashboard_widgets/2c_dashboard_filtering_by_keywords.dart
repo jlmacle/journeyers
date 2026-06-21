@@ -38,7 +38,8 @@ class DashboardFilteringByKeywords extends StatefulWidget
 
 class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywords> 
 {  
-  // Method used to filter the session data by keywords
+  // Used in DashboardPage.
+  // Method used to filter the session data by keywords.
   Future<void> applyFilteringByKeywords() async
   {
     if (widget.selectedKeywords.isEmpty) 
@@ -84,7 +85,8 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
     await applyFilteringByKeywords();
   }
 
-  // Method used to refresh the keywords list after deletion of session data
+  // Used in DashboardPage.
+  // Method used to refresh the keywords list after deletion of session data.
   void refreshKeywordsAfterSessionDeletion() 
   {
     // if no sessions left, nothing to do
