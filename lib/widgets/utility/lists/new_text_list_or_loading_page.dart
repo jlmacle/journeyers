@@ -61,7 +61,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                 FilledButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => TextListsDisplay
+                      builder: (_) => ListDashboard
                                       (
                                         dashboardContext: '', 
                                         onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 

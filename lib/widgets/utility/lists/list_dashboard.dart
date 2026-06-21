@@ -19,7 +19,7 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_l
 
 
 
-class TextListsDisplay extends StatefulWidget 
+class ListDashboard extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -36,7 +36,7 @@ class TextListsDisplay extends StatefulWidget
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<ListDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
-  const TextListsDisplay
+  const ListDashboard
   ({
     super.key,
     required this.dashboardContext,
@@ -47,10 +47,10 @@ class TextListsDisplay extends StatefulWidget
   });
 
   @override
-  State<TextListsDisplay> createState() => TextListsDisplayState();
+  State<ListDashboard> createState() => ListDashboardState();
 }
 
-class TextListsDisplayState extends State<TextListsDisplay> 
+class ListDashboardState extends State<ListDashboard> 
 {
   // The DB
   final _textListsDB = TextListsDB();
