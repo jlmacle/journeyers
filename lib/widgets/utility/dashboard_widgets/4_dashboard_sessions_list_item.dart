@@ -80,26 +80,26 @@ class SessionsListItem extends StatefulWidget
 
 class _SessionsListItemState extends State<SessionsListItem> 
 {
-  TextEditingController kwsEditController = .new();
+  final TextEditingController _kwsEditController = .new();
 
   // Data related to deleting ideas from the overlay
-  List<String> _ideasSelectedForDeletion = [];
-  List<int> _indexesOfIdeasSelectedForDeletion = [];
+  final List<String> _ideasSelectedForDeletion = [];
+  final List<int> _indexesOfIdeasSelectedForDeletion = [];
   bool _areSomeIdeasForDeletion = false;
   final _tecNewIdea = TextEditingController();
   // List of ideas present before deletion
   List<String> _ideasListBeforeEdition = [];
   List<String> _ideasListBeforeEditionCopy = [];
 
-  bool previewEditMode = false;
+  bool _previewEditMode = false;
  
 
   // To clean
   // Method used to update the keywords
-  void onKeywordsUpdated(String? filePath) async
+  void _onKeywordsUpdated(String? filePath) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = kwsEditController.text
+    final Set<String> updatedKeywords = _kwsEditController.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -114,7 +114,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   }
 
   // Method used to update one of the deletable/editable items
-  void onUpdateTheIdeaValue({required String stringParam, required int intParam})
+  void _onUpdateTheIdeaValue({required String stringParam, required int intParam})
   {
     setState(() {
       _ideasListBeforeEdition[intParam] = stringParam;
@@ -123,7 +123,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   }
 
   // Method used to update the temporary file path used for session data sharing
-  void updateTmpFilePath(String tmpFilePathFromPreview)
+  void _updateTmpFilePath(String tmpFilePathFromPreview)
   {    
     tmpFilePath = tmpFilePathFromPreview;
 
@@ -237,7 +237,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
   @override void dispose() 
   {
-    kwsEditController.dispose();
+    _kwsEditController.dispose();
     super.dispose();
   }
   
@@ -311,9 +311,9 @@ class _SessionsListItemState extends State<SessionsListItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                           filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                          kwsEditController: kwsEditController,
+                          kwsEditController: _kwsEditController,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                          onKeywordsUpdated: onKeywordsUpdated
+                          onKeywordsUpdated: _onKeywordsUpdated
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
@@ -336,7 +336,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     // To preview the session data
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
-                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, updateTmpFilePath),
+                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, _updateTmpFilePath),
                       tooltip: previewTooltipLabel,
                     ),
                     // To edit the session file data
@@ -359,9 +359,9 @@ class _SessionsListItemState extends State<SessionsListItem>
                         dashboardContext: widget.dashboardContext,
                         currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                         filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                        kwsEditController: kwsEditController,
+                        kwsEditController: _kwsEditController,
                         onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                        onKeywordsUpdated: onKeywordsUpdated
+                        onKeywordsUpdated: _onKeywordsUpdated
                       ),
                       tooltip: keywordsTooltipLabel,
                     ),
@@ -418,7 +418,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                     onPressed: () async
                     {    
 
-                      previewEditMode = true;
+                      _previewEditMode = true;
 
                       if (widget.dashboardContext == DashboardUtils.caContext) 
                       {                
@@ -453,7 +453,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                     icon: const Icon(Icons.share),
                     color: appBarWhite,
                     onPressed: () 
-                    { shareSession(context, sessionMetadata, tmpFilePath); },
+                    { _shareSession(context, sessionMetadata, tmpFilePath); },
                     tooltip: "Share session",
                   ),
                 ],
@@ -468,9 +468,9 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   {
                     if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
                     if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: _ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
-                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: previewEditMode: $previewEditMode");
+                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: previewEditMode: $_previewEditMode");
                     
-                    if (previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasListBeforeEdition, _ideasListBeforeEditionCopy) )
+                    if (_previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasListBeforeEdition, _ideasListBeforeEditionCopy) )
                     {
                         if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: List edited: saving data and metadata");
 
@@ -489,7 +489,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         originalFilePath: filePath);
 
                         _ideasListBeforeEditionCopy = List.from(_ideasListBeforeEdition);
-                        previewEditMode = false;
+                        _previewEditMode = false;
                     }
                     Navigator.of(context).pop();
                   },
@@ -636,7 +636,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                         setState(() {
                                           _ideasListBeforeEdition[intParam] = stringParam;
                                         });
-                                        onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
+                                        _onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
                                       },
                                       parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_indexesOfIdeasSelectedForDeletion.add(index);}, 
                                       themeData: Theme.of(context),                          
@@ -691,10 +691,10 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
 
 }
 
-
+// TODO: code to move
 // Triggers the platform's native share sheet for a session.
 // Shares both the raw session file (CSV / TXT) and some metadata.
-Future<void> shareSession(
+Future<void> _shareSession(
   BuildContext context,
   Map<String, dynamic> sessionMetadata,
   String tmpFilePath
