@@ -51,7 +51,7 @@ class DashboardDeletionByBulk extends StatefulWidget
 class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = GlobalKey();
+  final GlobalKey<DashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several session data
@@ -92,10 +92,10 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     widget.sessionsSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();    
+    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();    
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -121,7 +121,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     {
 
       // Updating the keywords UI
-      dashboardFilteringByKeywordsKey.currentState?.setState((){});
+      _dashboardFilteringByKeywordsKey.currentState?.setState((){});
 
       // Updating the sessions list UI
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
