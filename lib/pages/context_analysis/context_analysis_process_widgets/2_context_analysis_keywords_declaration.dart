@@ -30,10 +30,10 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
 
   final Set<String> _keywordsSet = {};
   List<String> _keywordsListSorted = [];
-  final TextEditingController _keywordsController = .new();
+  final TextEditingController _keywordsTfec = .new();
     
   // Method used to add keywords to the _keywords list
-  void addKeyword(String value)
+  void _keywordAdd(String value)
   {
     var trimmedValue = value.trim();
 
@@ -46,7 +46,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
       _keywordsListSorted = _keywordsSet.toList();
       _keywordsListSorted.sort();
 
-      _keywordsController.clear();
+      _keywordsTfec.clear();
       
       setState(() {});
     }
@@ -63,7 +63,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   @override
   void dispose()
   {
-    _keywordsController.dispose();
+    _keywordsTfec.dispose();
     super.dispose();
   }
 
@@ -79,7 +79,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
           padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
           child: TextField
           (
-            controller: _keywordsController,
+            controller: _keywordsTfec,
             decoration: const InputDecoration
             (
               hint: Center
@@ -90,7 +90,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
             ),
             textAlign: TextAlign.center,
             style: analysisTextFieldStyle,
-            onSubmitted: addKeyword,
+            onSubmitted: _keywordAdd,
           ),
         ),
         // Display of the keywords
