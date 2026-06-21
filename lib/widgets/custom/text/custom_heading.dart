@@ -35,7 +35,7 @@ class CustomHeadingState extends State<CustomHeading>
   
   TextStyle? _headerStyle;
 
-  TextStyle getTextStyle(int headingLevel)
+  TextStyle _getTextStyle(int headingLevel)
   {
 
 
@@ -60,11 +60,12 @@ class CustomHeadingState extends State<CustomHeading>
 
   @override
   void initState() {
-    _headerStyle = getTextStyle(widget.headingLevel);
+    _headerStyle = _getTextStyle(widget.headingLevel);
     super.initState();
   }
   
-  // switches the heading decoration if a checkbox is checked
+  // Used in CAForm.
+  // Switches the heading decoration if a checkbox is checked.  
   void switchCustomHeadingDecorationIfCheckboxChecked()
   {
     if (!_headingStyleUnderlined) {
@@ -82,7 +83,8 @@ class CustomHeadingState extends State<CustomHeading>
     }
   }
 
-  // switches the heading decoration if a text field is used
+  // Used in CAForm.
+  // Switches the heading decoration if a text field is used.
   void switchCustomHeadingDecorationIfTextFieldUsed(String value)
   {
     if (!_headingStyleUnderlined && value.trim() != "") {
@@ -103,8 +105,6 @@ class CustomHeadingState extends State<CustomHeading>
   @override
   Widget build(BuildContext context) 
   {
-
-
     return CustomFocusableText(text: widget.headingText, textStyle: _headerStyle!, textAlignment: widget.headingAlignment);
   }
 }
