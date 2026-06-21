@@ -56,17 +56,17 @@ class ListDashboardState extends State<ListDashboard>
   final _textListsDB = TextListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  GlobalKey<ListDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();
+  final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
-  void refreshDashboard()
+  void _refreshDashboard()
   {
     setState(() {});
   }
 
   // ─── PREFERENCES and DATA RETRIEVAL related data and methods ───────────────────────────────────────
   // List data from the DB
-  late List<dynamic> listData;
+  late List<dynamic> _listData;
   
   // Starting by loading data
   bool _isDataLoading = true;
@@ -79,20 +79,20 @@ class ListDashboardState extends State<ListDashboard>
 
   // Method used to retrieve the session data, to get the list of used keywords, 
   // and the list of all sessions available
-  Future<void> getStoredListsData() async 
+  Future<void> _getStoredListsData() async 
   {
     // Retrieving data 
-    listData = await _textListsDB.loadDataStructure();
+    _listData = await _textListsDB.loadDataStructure();
 
     // Getting the list labels
-    final labels = await _textListsDB.sortedLabels(dataStructure: listData);
+    final labels = await _textListsDB.sortedLabels(dataStructure: _listData);
     if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
     for (var label in labels.reversed)
     {
-      var listData = _textListsDB.loadListDataByListLabelSync(label: label, dataStructure: this.listData);
+      var listData = _textListsDB.loadListDataByListLabelSync(label: label, dataStructure: this._listData);
       _allListsData.add(listData);
     }
 
@@ -123,7 +123,7 @@ class ListDashboardState extends State<ListDashboard>
     _allListsData = [];
     _filteredListsData = [];
     // Circular indicator until data is retrieved
-    getStoredListsData();
+    _getStoredListsData();
   }
 
   // ─── SORTING AND FILTERING related data and methods ───────────────────────────────────────
@@ -147,13 +147,13 @@ class ListDashboardState extends State<ListDashboard>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void refreshKeywordsAfterSessionDeletion() 
+  void _refreshKeywordsAfterSessionDeletion() 
   {
-    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
   }
 
   // Method used to update the list keywords
-  Future<void> updateListsKeywords(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
+  Future<void> _updateListsKeywords(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
   {
     // Updating listData with the new keywords
     listData[itemKeywordsKey] = updatedKeywords.toList();
@@ -162,7 +162,7 @@ class ListDashboardState extends State<ListDashboard>
     await _textListsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    refreshKeywordsAfterSessionDeletion();
+    _refreshKeywordsAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -173,19 +173,19 @@ class ListDashboardState extends State<ListDashboard>
   }
     
   // Method used after keywords update
-  Future<void> updateKeywords({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
+  Future<void> _updateKeywords({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
   {
     if (listDebug) pu.printd("List debug: updateKeywords: updatedKeywords: $updatedItems");
     // To accomodate widget testing
     if (listKey != null)
     {
       // Updating the DB
-      await updateListsKeywords(listKey, updatedItems, listData);            
+      await _updateListsKeywords(listKey, updatedItems, listData);            
     }    
   }
 
   // Method used to update the list participants
-  Future<void> updateListParticipants(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
+  Future<void> _updateListParticipants(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
   {
 
     // Updating listData with the new participants
@@ -195,7 +195,7 @@ class ListDashboardState extends State<ListDashboard>
     await _textListsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    refreshKeywordsAfterSessionDeletion();
+    _refreshKeywordsAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -206,14 +206,14 @@ class ListDashboardState extends State<ListDashboard>
   }
 
   // Method used after participants update
-  Future<void> updateParticipants({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
+  Future<void> _updateParticipants({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
   {
     if (listDebug) pu.printd("List debug: Lists display: updateParticipants: updatedItems: $updatedItems");
     // To accomodate widget testing
     if (listKey != null)
     {
       // Updating the DB
-      await updateListParticipants(listKey, updatedItems, listData);            
+      await _updateListParticipants(listKey, updatedItems, listData);            
     }    
   }
 
@@ -240,10 +240,10 @@ class ListDashboardState extends State<ListDashboard>
     );
 
     // Updating the keywords list
-    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
+    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -293,7 +293,7 @@ class ListDashboardState extends State<ListDashboard>
 
     // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
   // Re-building of the widget
-  void updateState()
+  void _updateState()
   {
     setState(() {});
   }
@@ -335,8 +335,8 @@ class ListDashboardState extends State<ListDashboard>
                     dashboardContext: widget.dashboardContext, 
                     allLists: _allListsData, filteredLists: _filteredListsData,
                     usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
-                    parentCallbackFunctionToRefreshTheSessionsList: updateState,
-                    dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
+                    parentCallbackFunctionToRefreshTheSessionsList: _updateState,
+                    dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),
                 ),
     
@@ -349,7 +349,7 @@ class ListDashboardState extends State<ListDashboard>
                     filteredLists: _filteredListsData,
                     areListsForDeletion: _keysOfListsSelectedForDeletion.isNotEmpty,
                     keysOfListsSelectedForDeletion: _keysOfListsSelectedForDeletion,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard                    
+                    dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
                   )
                 ),
     
@@ -414,8 +414,8 @@ class ListDashboardState extends State<ListDashboard>
                           ),
                           onEditPressedCallbackFunction: () {},
                           onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required keywordsForEdition, required bool sessionDataEdition}) {},
-                          onKeywordsUpdatedCallbackFunction: updateKeywords,
-                          onParticipantsUpdatedCallbackFunction: updateParticipants,
+                          onKeywordsUpdatedCallbackFunction: _updateKeywords,
+                          onParticipantsUpdatedCallbackFunction: _updateParticipants,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),
                           onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
                         );
