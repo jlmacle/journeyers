@@ -8,15 +8,15 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 /// A widget used for the title of the context analysis.
 class CATitleDeclaration extends StatefulWidget 
 {
-
   /// A boolean used to state if the title is autofocused.
-  final bool autofocus;
+  final bool analysisTitleAutofocused;
+
+  // Todo: to clean
+  /// A title value used at editing time.
+  final String analysisTitleWhenEdited;
 
   /// A boolean used to state if an edition is in progress.
-  final bool sessionDataEdition;
-
-  /// A title value used at editing time.
-  final String editedTitle;
+  final bool isSessionDataEdited;  
   
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> onAnalysisTitleUpdatedProcessCallbackFunction;
@@ -24,9 +24,9 @@ class CATitleDeclaration extends StatefulWidget
   const CATitleDeclaration
   ({
     super.key,
-    this.sessionDataEdition = false,
-    this.autofocus = false,
-    required this.editedTitle,
+    this.isSessionDataEdited = false,
+    this.analysisTitleAutofocused = false,
+    required this.analysisTitleWhenEdited,
     required this.onAnalysisTitleUpdatedProcessCallbackFunction
   });
 
@@ -44,8 +44,8 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
       padding: const EdgeInsets.only(top: 16.0, bottom:16 ),
       child: CATextFieldSanitizedAndPadded
       (
-        autofocus: widget.autofocus,
-        textFieldStartValue: widget.editedTitle,
+        autofocus: widget.analysisTitleAutofocused,
+        textFieldStartValue: widget.analysisTitleWhenEdited,
         textFieldStyle: analysisTextFieldStyle, 
         textFieldHint: CAFormMiscConstants.caTitleDeclarationHintText, 
         textFieldHintStyle: analysisTextFieldHintStyle, 
