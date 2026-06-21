@@ -51,15 +51,15 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
-  static const platformAndroid = MethodChannel('dev.journeyers/saf');
+  static const _platformAndroid = MethodChannel('dev.journeyers/saf');
   // Android: storage access framework (reading/saving files)
-  static const platformIOS = MethodChannel('dev.journeyers/iossaf');
+  static const _platformIOS = MethodChannel('dev.journeyers/iossaf');
 
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
   String _applicationFolderPath = "";  
 
   // method used to get the set folder path for the application
-  void getApplicationFolderPathPref() async
+  void _getApplicationFolderPathPref() async
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
@@ -77,7 +77,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
   void initState() {
     super.initState();
     if (sessionDataDebug) pu.printd("Session Data: file extensions: ${widget.fileExtension}");
-    getApplicationFolderPathPref();
+    _getApplicationFolderPathPref();
 
     // Edited file name value if relevant
     if (editDebug) pu.printd("Editing: SessionFileNameMobilePlatforms: initState: widget.editedFileName: ${widget.editedFileName}");
@@ -101,13 +101,13 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
         // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
         String? result;
         if (Platform.isAndroid)
-          {result = await platformAndroid.invokeMethod('openDirectory');}
+          {result = await _platformAndroid.invokeMethod('openDirectory');}
         else if (Platform.isIOS)
-          {result = await platformIOS.invokeMethod('openDirectory');}
+          {result = await _platformIOS.invokeMethod('openDirectory');}
         
         if (result != null) {
           // Refreshing local state with the new path/bookmark
-          getApplicationFolderPathPref(); 
+          _getApplicationFolderPathPref(); 
 
         // Retrieving the stored file names once the path to the folder is defined
         await du.getStoredFileNamesOnMobile();  

@@ -114,7 +114,7 @@ class _NewTextListState extends State<NewTextList> {
   var _tecListLabel = TextEditingController();
 
   // Method used to verify if the newly entered texts have been already saved in a list
-  bool listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
+  bool _listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
   {
     var listOfPreviousGroupedTextsCopy = List.from(listOfPreviousGroupedTexts);
     var newListDataCopy = List.from(newListData);
@@ -122,13 +122,13 @@ class _NewTextListState extends State<NewTextList> {
     return val;
   }
 
-  bool get canSave =>
+  bool get _canSave =>
       // list has not been loaded from existant list
       !_listHasBeenLoaded 
       // at least one text has been added
       && _enteredTextItemsList.isNotEmpty 
       // added texts are not matching a saved list content
-      && !listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
+      && !_listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
       // the new list hasn't been saved yet
       && !_isSaved ;
 
@@ -265,7 +265,7 @@ class _NewTextListState extends State<NewTextList> {
     super.dispose();
   }
 
-  void onUpdateTheListItemValue({required String stringParam, required int intParam})
+  void _onUpdateTheListItemValue({required String stringParam, required int intParam})
   {
     setState(() {
       _enteredTextItemsList[intParam] = stringParam;
@@ -306,7 +306,7 @@ class _NewTextListState extends State<NewTextList> {
         foregroundColor: Colors.black,
         actions: [
           // If data can be saved
-          if (canSave) 
+          if (_canSave) 
           ...
           [
             _saving
@@ -444,7 +444,7 @@ class _NewTextListState extends State<NewTextList> {
                                                                 if (listDebug) pu.printd("List debug: _NewTextListState: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
 
                                                               }, 
-                          parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheListItemValue,
+                          parentCallbackFunctionToUpdateTheListItemValue: _onUpdateTheListItemValue,
                           parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
                           themeData: Theme.of(context),                          
                         )                          
