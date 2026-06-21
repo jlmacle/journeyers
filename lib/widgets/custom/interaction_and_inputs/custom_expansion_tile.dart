@@ -5,7 +5,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_icon_button.dart';
 
 /// {@category Custom widgets}
-/// A customizable expansion tile.
+/// A customizable expansion tile with callback functions for edition/deletion.
 class CustomExpansionTile extends StatefulWidget 
 {
   /// The text to display when the tile is not expanded.
