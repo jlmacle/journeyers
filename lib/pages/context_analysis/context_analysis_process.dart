@@ -240,8 +240,8 @@ class CAProcessState extends State<CAProcess>
             // Text field for the analysis title
             CATitleDeclaration
             (
-              autofocus: widget.sessionDataEdition,
-              editedTitle: widget.titleForEdition,
+              analysisTitleAutofocused: widget.sessionDataEdition,
+              analysisTitleWhenEdited: widget.titleForEdition,
               onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
             ),
             
