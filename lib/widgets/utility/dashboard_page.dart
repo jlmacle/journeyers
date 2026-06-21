@@ -57,10 +57,10 @@ class DashboardPage extends StatefulWidget
 class DashboardPageState extends State<DashboardPage> 
 {
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey = .new();
+  final GlobalKey<DashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
-  void refreshDashboard()
+  void _refreshDashboard()
   {
     setState(() {});
   }
@@ -77,7 +77,7 @@ class DashboardPageState extends State<DashboardPage>
 
   // Method used to retrieve the session data, to get the list of used keywords, 
   // and the list of all sessions available
-  Future<void> getStoredSessionData() async 
+  Future<void> _getStoredSessionData() async 
   {
     // Retrieving data from file
     final retrievedSessionData = 
@@ -111,7 +111,7 @@ class DashboardPageState extends State<DashboardPage>
     _allSessions = [];
     _filteredSessions = [];
     // Circular indicator until data is retrieved
-    getStoredSessionData();
+    _getStoredSessionData();
   }
 
   // ─── SORTING AND FILTERING related data and methods ───────────────────────────────────────
@@ -134,19 +134,19 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void refreshKeywordsAfterSessionDeletion() 
+  void _refreshKeywordsAfterSessionDeletion() 
   {
-    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
   }
     
   // Method used after keywords update
-  Future<void> updateKeywords({required Set<String> updatedKeywords, required String? filePath}) async
+  Future<void> _updateKeywords({required Set<String> updatedKeywords, required String? filePath}) async
   {
     if (sessionDataDebug) pu.printd("Session Data: updateKeywords: updatedKeywords: $updatedKeywords");
     // To accomodate widget testing
     if (filePath != null)
     {
-      await updateSessionKeywords(filePath, updatedKeywords); 
+      await _updateSessionKeywords(filePath, updatedKeywords); 
               
       await du.saveAllSessionsMetadata
       (
@@ -181,10 +181,10 @@ class DashboardPageState extends State<DashboardPage>
     );
 
     // Updating the keywords list
-    dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
+    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -223,7 +223,7 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to update the session title
-  Future<void> updateSessionTitle(String filePath, String newTitle) async 
+  Future<void> _updateSessionTitle(String filePath, String newTitle) async 
   {
     String? previousTitle;
 
@@ -250,7 +250,7 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to update the session keywords
-  Future<void> updateSessionKeywords(String filePath, Set<String> newKeywords) async 
+  Future<void> _updateSessionKeywords(String filePath, Set<String> newKeywords) async 
   {
     Set<dynamic>? previousKeywords;
 
@@ -275,7 +275,7 @@ class DashboardPageState extends State<DashboardPage>
                   );
     }
 
-    refreshKeywordsAfterSessionDeletion();
+    _refreshKeywordsAfterSessionDeletion();
      // Updates the keywords list
     
     if ( ! previousKeywords!.toList().equals(newKeywords.toList()) )
@@ -290,7 +290,7 @@ class DashboardPageState extends State<DashboardPage>
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
   // Re-building of the widget
-  void updateState()
+  void _updateState()
   {
     setState(() {});
   }
@@ -321,8 +321,8 @@ class DashboardPageState extends State<DashboardPage>
                     dashboardContext: widget.dashboardContext, 
                     allSessions: _allSessions, filteredSessions: _filteredSessions,
                     usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
-                    parentCallbackFunctionToRefreshTheSessionsList: updateState,
-                    dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKey
+                    parentCallbackFunctionToRefreshTheSessionsList: _updateState,
+                    dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),
                 ),
 
@@ -335,7 +335,7 @@ class DashboardPageState extends State<DashboardPage>
                     filteredSessions: _filteredSessions,
                     areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
                     sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: refreshDashboard                    
+                    dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
                   )
                 ),
 
@@ -403,7 +403,7 @@ class DashboardPageState extends State<DashboardPage>
                             }
                             
                           },
-                          onKeywordsUpdatedCallbackFunction: updateKeywords,
+                          onKeywordsUpdatedCallbackFunction: _updateKeywords,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(filePath),
                         );
                       },
@@ -453,7 +453,7 @@ class DashboardPageState extends State<DashboardPage>
 
                 // Performing async work outside of setState
                 // Updating session data
-                await updateSessionTitle(filePath, newTitle); 
+                await _updateSessionTitle(filePath, newTitle); 
                 
                 // Storing the updated session data
                 await du.saveAllSessionsMetadata
@@ -476,7 +476,7 @@ class DashboardPageState extends State<DashboardPage>
 
                 // Performing async work outside of setState
                 // Updating session data
-                await updateSessionTitle(filePath, newTitle); 
+                await _updateSessionTitle(filePath, newTitle); 
                 
                 // Storing the updated session data
                 await du.saveAllSessionsMetadata

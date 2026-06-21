@@ -73,17 +73,17 @@ class ListOfListsItem extends StatefulWidget
 
 class _ListOfListsItemState extends State<ListOfListsItem> 
 {
-  var _textListsDB = TextListsDB();
+  final _textListsDB = TextListsDB();
   List<String> _currentParticipants = [];
 
-  TextEditingController kwsEditTec = .new();
-  TextEditingController participantsEditTec = .new();
+  final TextEditingController _kwsEditTec = .new();
+  final TextEditingController _participantsEditTec = .new();
 
   // To clean
-  Future<void> onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
+  Future<void> _onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = kwsEditTec.text
+    final Set<String> updatedKeywords = _kwsEditTec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -98,10 +98,10 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   }
 
   // To clean
-  Future<void> onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
+  Future<void> _onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedParticipants = participantsEditTec.text
+    final Set<String> updatedParticipants = _participantsEditTec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -130,13 +130,13 @@ class _ListOfListsItemState extends State<ListOfListsItem>
  
   @override void dispose() 
   {
-    kwsEditTec.dispose();
-    participantsEditTec.dispose();
+    _kwsEditTec.dispose();
+    _participantsEditTec.dispose();
     super.dispose();
   }
 
   // Method used to get the participants' list
-  List<String> getParticipants(Map<String, dynamic> listData)
+  List<String> _getParticipants(Map<String, dynamic> listData)
   {
 
     List<String> participants = [];
@@ -213,9 +213,9 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                                   dashboardContext: widget.dashboardContext,                          
                                   currentParticipants: _currentParticipants,
                                   listKey: widget.listData[itemKey],
-                                  participantsTec: participantsEditTec,
+                                  participantsTec: _participantsEditTec,
                                   onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
-                                  onParticipantsUpdated: onParticipantsUpdated,
+                                  onParticipantsUpdated: _onParticipantsUpdated,
                                   listData: widget.listData
                                 ),
                         child: Wrap
@@ -223,7 +223,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           spacing: 8.0,
                           children: 
                           (
-                            getParticipants(widget.listData)
+                            _getParticipants(widget.listData)
                             ..sort
                             (
                               (a, b) 
@@ -267,9 +267,9 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.listData[itemKeywordsKey],
                           listKey: widget.listData[itemKey],
-                          kwsEditController: kwsEditTec,
+                          kwsEditController: _kwsEditTec,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                          onKeywordsUpdated: onKeywordsUpdated,
+                          onKeywordsUpdated: _onKeywordsUpdated,
                           listData: widget.listData
                           ),
                         child: Text(
@@ -295,9 +295,9 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                     dashboardContext: widget.dashboardContext,
                     currentKeywords: widget.listData[itemKeywordsKey],
                     listKey: widget.listData[itemKey],
-                    kwsEditController: kwsEditTec,
+                    kwsEditController: _kwsEditTec,
                     onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                    onKeywordsUpdated: onKeywordsUpdated,
+                    onKeywordsUpdated: _onKeywordsUpdated,
                     listData: widget.listData,
                   ),
                   tooltip: keywordsTooltipLabel,

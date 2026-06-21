@@ -32,7 +32,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
   final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list
-  void addKeyword(String value, [StateSetter? localSetState]) 
+  void _addKeyword(String value, [StateSetter? localSetState]) 
   {
     var trimmedValue = value.trim();
     if (trimmedValue.isNotEmpty && !_keywords!.contains(trimmedValue)) {
@@ -157,7 +157,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                         ),
                         textAlign: TextAlign.center,
                         style: analysisTextFieldStyle,
-                        onSubmitted: (value) => addKeyword(value, setLocalState),
+                        onSubmitted: (value) => _addKeyword(value, setLocalState),
                       ),
                     ),
                     // Display of the keywords
