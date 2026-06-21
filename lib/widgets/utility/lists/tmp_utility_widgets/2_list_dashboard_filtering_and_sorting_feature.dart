@@ -5,7 +5,7 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2a_list_das
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
+/// {@category Lists}
 /// A widget handling sorting and filtering of session data.
 class ListDashboardSortingAndFilteringFeature extends StatefulWidget 
 {
