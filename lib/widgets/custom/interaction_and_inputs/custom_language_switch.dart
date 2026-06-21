@@ -51,6 +51,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
   @override
   Widget build(BuildContext context) 
   {
+    // Context needed to get the languages
     getLanguages(context);
 
     return 
