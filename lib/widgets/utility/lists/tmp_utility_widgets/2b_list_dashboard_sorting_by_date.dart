@@ -5,7 +5,7 @@ import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
-/// {@category Dashboard}
+/// {@category Lists}
 /// A widget handling the sorting by date of session data.
 class ListDashboardSortingByDate extends StatefulWidget 
 {
