@@ -42,7 +42,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
   String? _selectedValue;
 
   // Getting the language options in the current locale.
-  void getLanguages(BuildContext context) 
+  void _getLanguages(BuildContext context) 
   {
     _dropdownItems = widget.getLanguages(context);
     _selectedValue = _dropdownItems.first;
@@ -52,7 +52,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
   Widget build(BuildContext context) 
   {
     // Context needed to get the languages
-    getLanguages(context);
+    _getLanguages(context);
 
     return 
     Row

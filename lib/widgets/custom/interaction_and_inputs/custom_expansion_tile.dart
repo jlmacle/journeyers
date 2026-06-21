@@ -77,12 +77,12 @@ class CustomExpansionTile extends StatefulWidget
 
 class _CustomExpansionTileState extends State<CustomExpansionTile> 
 {
-  FocusNode expandedAdditionalTextFocusNode = .new();
+  final FocusNode _expandedAdditionalTextFocusNode = .new();
 
   @override
   void dispose() 
   {
-    expandedAdditionalTextFocusNode.dispose();
+    _expandedAdditionalTextFocusNode.dispose();
     super.dispose();
   }
 
@@ -113,7 +113,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
             [
               Focus
               (
-                focusNode: expandedAdditionalTextFocusNode,
+                focusNode: _expandedAdditionalTextFocusNode,
                 child: widget.expandedContentWidget
                 
               ),
