@@ -28,7 +28,7 @@ class ListDashboard extends StatefulWidget
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A callback function called when session data is edited.
-  final FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction;
+  final OnEditSessionDataCallbackFunctionType onEditSessionDataCallbackFunction;
 
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
@@ -413,7 +413,7 @@ class ListDashboardState extends State<ListDashboard>
                             index
                           ),
                           onEditPressedCallbackFunction: () {},
-                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required keywordsForEdition, required bool sessionDataEdition}) {},
+                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required keywordsWhenEdition, required bool sessionDataBeingEdited}) {},
                           onKeywordsUpdatedCallbackFunction: _updateKeywords,
                           onParticipantsUpdatedCallbackFunction: _updateParticipants,
                           onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),

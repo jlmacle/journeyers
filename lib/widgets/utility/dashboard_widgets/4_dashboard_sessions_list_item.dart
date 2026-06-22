@@ -52,7 +52,7 @@ class SessionsListItem extends StatefulWidget
   final VoidCallback onEditPressedCallbackFunction;
 
   /// A callback function called when session data is edited.
-  final FunctionDTOCAForm2StringsSetStringAndBool onEditSessionDataCallbackFunction;
+  final OnEditSessionDataCallbackFunctionType onEditSessionDataCallbackFunction;
 
   /// A callback function called when the keywords are updated.
   final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;

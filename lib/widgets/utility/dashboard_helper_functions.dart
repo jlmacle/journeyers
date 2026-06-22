@@ -11,7 +11,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
 // Method used to edit context analysis session data
-Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditCASessionDataCallbackFunction) async {
+Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctionType onEditCASessionDataCallbackFunction) async {
     // to clean
     String csvContent = "";
     String fileNameWithExtension = filePath.split('/').last;
@@ -90,13 +90,13 @@ Future<void> editCASessionData(String filePath, FunctionDTOCAForm2StringsSetStri
 
 
     // Need to re-build the dashboard page    
-    onEditCASessionDataCallbackFunction(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition);
+    onEditCASessionDataCallbackFunction(sessionDataBeingEdited: true, dtoWhenEdition: dtoForEdition, fileNameWhenEditionWithoutExtension: fileNameWithoutExtension, titleWhenEdition: title, keywordsWhenEdition: keywordsForEdition);
 
   }
 
 
 // Method used to edit group problem-solving session data
-Future<List<String>> editGPSSessionData(String filePath, FunctionDTOCAForm2StringsSetStringAndBool onEditGPSSessionDataCallbackFunction) async {
+Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
     if (editDebug) pu.printd("Editing: editGPSSessionData : $editGPSSessionData");
 
     // Getting the title

@@ -132,7 +132,7 @@ class CAPageState extends State<CAPage>
   }
 
   // Method used to edit a session data
-  void _onEditSessionData({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required Set<String> keywordsForEdition})
+  void _onEditSessionData({required bool sessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition})
   {
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
@@ -141,27 +141,21 @@ class CAPageState extends State<CAPage>
       _caSessionDataSaved = false;
 
       // Loading the CA Process with edited values
-      _sessionDataBeingEdited = sessionDataEdition;
-      _dtoWhenEdition = dtoForEdition;      
-      _titleWhenEdition  = title;
-      _keywordsWhenEdition = keywordsForEdition;
-      _fileNameWhenEditionWithoutExtension = fileNameWithoutExtension;
+      _sessionDataBeingEdited = sessionDataBeingEdited;
+      _dtoWhenEdition = dtoWhenEdition;      
+      _titleWhenEdition  = titleWhenEdition;
+      _keywordsWhenEdition = keywordsWhenEdition;
+      _fileNameWhenEditionWithoutExtension = fileNameWhenEditionWithoutExtension;
     });
   }
 
-   // Method used to refresh the page
-  void _onPageToRefresh()
-  {
-    setState(() {});
-  }
-
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
-  final FocusNode _caFormPageFocusNode = .new();
+  final FocusNode _caProcessFocusNode = .new();
 
   @override
   void dispose() 
   {
-    _caFormPageFocusNode.dispose();
+    _caProcessFocusNode.dispose();
     super.dispose();
   } 
 
@@ -175,7 +169,7 @@ class CAPageState extends State<CAPage>
   @override
   Widget build(BuildContext context) 
   {
-    if (editDebug) pu.printd("Editing: CAPage: _keywordsForEdition: $_keywordsWhenEdition");
+
     return 
     Scaffold
     (
@@ -189,7 +183,7 @@ class CAPageState extends State<CAPage>
           if (_runtimeDataLoading)
             const Center(child: CircularProgressIndicator())
 
-          // OR RUNTIME DATA LOADED: When runtime data is loaded
+          // OR RUNTIME DATA LOADED
           else ...
           [
             // CA DATA STORED: Checking if context analysis session data has been stored
@@ -212,7 +206,7 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: ({required dtoForEdition, required fileNameWithoutExtension, required title, required keywordsForEdition, required sessionDataEdition}) => _onEditSessionData(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition),
+                  onEditSessionDataCallbackFunction: ({required sessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: dtoWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition, keywordsWhenEdition: _keywordsWhenEdition),
                 )
               ),
             ]
@@ -229,7 +223,7 @@ class CAPageState extends State<CAPage>
                 child: 
                 Focus
                 (
-                  focusNode: _caFormPageFocusNode,
+                  focusNode: _caProcessFocusNode,
                   child: CAProcess(key: caProcessKey, sessionDataEdition: _sessionDataBeingEdited,  dtoOnInitState: _dtoWhenEdition, fileNameWhenEdition: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition , keywordsForEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
