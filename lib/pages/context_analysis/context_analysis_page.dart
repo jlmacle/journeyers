@@ -37,35 +37,36 @@ class CAPageState extends State<CAPage>
 
   // ─── EDITION related data ───────────────────────────────────────
   // The DTOCAForm value at initState
-  DTOCAForm? _dtoOnInitState;
+  // CA Form values at edition time
+  DTOCAForm? _dtoWhenEdition;
   // Value for the file name at edition time (without extension)
-  String _fileNameWithoutExtension = "";
+  String _fileNameWhenEditionWithoutExtension = "";
   // Value for the title at edition time
-  String _title = "";
+  String _titleWhenEdition = "";
   // Value for the keywords at edition time
-  Set<String> _keywordsForEdition = {};
+  Set<String> _keywordsWhenEdition = {};
   // bool: edition in progress
-  bool _sessionDataEdition = false;
+  bool _sessionDataBeingEdited = false;
 
-  // ─── PREFERENCES related data and methods ───────────────────────────────────────
-  bool _preferencesLoading = true;
-  bool? _wasFirstRunModalAcknowledged;
-  bool? _wasCASessionDataSaved;
+  // ─── RUNTIME DATA related data and methods ───────────────────────────────────────
+  bool _runtimeDataLoading = true;
+  bool? _firstRunModalAcknowledged;
+  bool? _caSessionDataSaved;
 
   // Method used to get stored run-time data
   getRuntimeData() async 
   {
-    if (runtimeDataDebug) pu.printd("CAPAge: getRuntimeData()");
+    if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: getRuntimeData()");
 
-    _wasFirstRunModalAcknowledged = await rtdu.wasFirstRunModalAcknowledged();
-    _wasCASessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.caContext);
-    setState(() {_preferencesLoading = false;});
+    _firstRunModalAcknowledged = await rtdu.wasFirstRunModalAcknowledged();
+    _caSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.caContext);
+    setState(() {_runtimeDataLoading = false;});
 
-    if (runtimeDataDebug) pu.printd("Runtime Data: _wasFirstRunModalAcknowledged: $_wasFirstRunModalAcknowledged");
-    if (runtimeDataDebug) pu.printd("Runtime Data: _wasCASessionDataSaved: $_wasCASessionDataSaved");
+    if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: _firstRunModalAcknowledged: $_firstRunModalAcknowledged");
+    if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: _caSessionDataSaved: $_caSessionDataSaved");
 
-    // First-run modal at app installation time
-    if ((_wasFirstRunModalAcknowledged == false) && mounted) 
+    // IF FIRST-RUN MODAL NOT ACKNOWLEDGED (modal at app installation time):
+    if ((_firstRunModalAcknowledged == false) && mounted) 
     {
       showDialog
       (
@@ -107,25 +108,26 @@ class CAPageState extends State<CAPage>
     }
   }
 
-  // Method used to refresh the page from dashboard to context form, 
+  // Used in DashboardDeletionByBulk.
+  // Method used to refresh the page from dashboard to context analysis process, 
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
   {
-    if (sessionDataDebug) pu.printd("Session Data: CA page: onAllSessionFilesDeleted");
+    if (sessionDataDebug) pu.printd("Session Data: CAPage: onAllSessionFilesDeleted");
 
     setState(() {
-      _wasCASessionDataSaved = false;
+      _caSessionDataSaved = false;
     });
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
 
-  // Method used to refresh the page from context form to dashboard, 
-  // after form data has been saved
+  // Method used to refresh the page from context analysis process to dashboard, 
+  // after process data has been saved
   void _onDataSaved() 
   {
     setState(() {
-      _wasCASessionDataSaved = true;
+      _caSessionDataSaved = true;
     });
   }
 
@@ -136,14 +138,14 @@ class CAPageState extends State<CAPage>
 
     setState(() {
       // To have the CAProcess widget loaded with the edited values
-      _wasCASessionDataSaved = false;
+      _caSessionDataSaved = false;
 
       // Loading the CA Process with edited values
-      _sessionDataEdition = sessionDataEdition;
-      _dtoOnInitState = dtoForEdition;      
-      _title  = title;
-      _keywordsForEdition = keywordsForEdition;
-      _fileNameWithoutExtension = fileNameWithoutExtension;
+      _sessionDataBeingEdited = sessionDataEdition;
+      _dtoWhenEdition = dtoForEdition;      
+      _titleWhenEdition  = title;
+      _keywordsWhenEdition = keywordsForEdition;
+      _fileNameWhenEditionWithoutExtension = fileNameWithoutExtension;
     });
   }
 
@@ -173,7 +175,7 @@ class CAPageState extends State<CAPage>
   @override
   Widget build(BuildContext context) 
   {
-    if (editDebug) pu.printd("Editing: CAPage: _keywordsForEdition: $_keywordsForEdition");
+    if (editDebug) pu.printd("Editing: CAPage: _keywordsForEdition: $_keywordsWhenEdition");
     return 
     Scaffold
     (
@@ -183,21 +185,22 @@ class CAPageState extends State<CAPage>
         mainAxisAlignment: MainAxisAlignment.start,
         children: 
         [
-          // Circular progress indicator while preferences are loading
-          if (_preferencesLoading)
+          // RUNTIME DATA LOADING: Circular progress indicator while runtime data is loading
+          if (_runtimeDataLoading)
             const Center(child: CircularProgressIndicator())
-          // When preferences are loaded
+
+          // OR RUNTIME DATA LOADED: When runtime data is loaded
           else ...
           [
-            // Checking if context analysis session data has been stored
-            if (_wasCASessionDataSaved!) ...
+            // CA DATA STORED: Checking if context analysis session data has been stored
+            if (_caSessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new context analysis
               NewProcessButton
               ( 
                 dashboardContext: DashboardUtils.caContext, 
                 buttonText: "Please click to start\na new context analysis.",
-                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _wasCASessionDataSaved = false;});},
+                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _caSessionDataSaved = false;});},
               ),
 
               // and the session data dashboard in the remaining space
@@ -213,6 +216,8 @@ class CAPageState extends State<CAPage>
                 )
               ),
             ]
+
+            // OR CA DATA NOT STORED
             else
             // if no context analysis data has been stored, the context analysis process is displayed
             Expanded
@@ -225,7 +230,7 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: _caFormPageFocusNode,
-                  child: CAProcess(key: caProcessKey, sessionDataEdition: _sessionDataEdition,  dtoOnInitState: _dtoOnInitState, fileNameWhenEdition: _fileNameWithoutExtension, titleWhenEdition: _title , keywordsForEdition:  _keywordsForEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess(key: caProcessKey, sessionDataEdition: _sessionDataBeingEdited,  dtoOnInitState: _dtoWhenEdition, fileNameWhenEdition: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition , keywordsForEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
