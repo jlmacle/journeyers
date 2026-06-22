@@ -32,7 +32,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
   final TextEditingController _keywordsController = .new();
     
   // Method used to add keywords to the _keywords list
-  void addKeyword(String value, [StateSetter? localSetState]) 
+  void _keywordAdd(String value, [StateSetter? localSetState]) 
   {
     var trimmedValue = value.trim();
     if (trimmedValue.isNotEmpty && !_keywords!.contains(trimmedValue)) {
@@ -156,7 +156,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                         ),
                         textAlign: TextAlign.center,
                         style: analysisTextFieldStyle,
-                        onSubmitted: (value) => addKeyword(value, setLocalState),
+                        onSubmitted: (value) => _keywordAdd(value, setLocalState),
                       ),
                     ),
                     // Display of the keywords
