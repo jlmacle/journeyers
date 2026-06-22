@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage>
         if (accessibilityDebug) pu.printd("Accessibility: HomePage: _bottomNavigationItemsFocusable: $_bottomNavigationItemsFocusable");
       }
     ),
-    
+
     GPSPage
     (
       key: gpsPageKey
@@ -78,7 +78,6 @@ class _HomePageState extends State<HomePage>
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
-    if (runtimeDataDebug) pu.printd("Preferences");
     if (runtimeDataDebug) pu.printd("Runtime Data: localeLangCodeFromLangName: $localeLangCodeFromLangName");
     if (runtimeDataDebug) pu.printd("Runtime Data: localeLangCodeFromContext: $localeLangCodeFromContext");
 
