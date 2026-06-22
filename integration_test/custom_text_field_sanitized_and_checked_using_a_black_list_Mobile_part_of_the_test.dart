@@ -58,7 +58,7 @@ void main() {
         const MaterialApp(
           home: Scaffold(
             // du.getStoredFileNamesOnMobile(); is run in main.dart
-            body: MyApp()
+            body: GPSapp()
           ),
         ),
       );

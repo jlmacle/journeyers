@@ -26,17 +26,17 @@ void main() async
     ]);
   }
   
-  runApp(const MyApp());
+  runApp(const GPSapp());
 }
 
-class MyApp extends StatefulWidget 
+class GPSapp extends StatefulWidget 
 {
-  const MyApp({super.key});
+  const GPSapp({super.key});
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<GPSapp> createState() => _GPSappState();
 }
 
-class _MyAppState extends State<MyApp> 
+class _GPSappState extends State<GPSapp> 
 {
 
   @override
