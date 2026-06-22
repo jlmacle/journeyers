@@ -103,6 +103,7 @@ class CAProcessState extends State<CAProcess>
   }
 
   // ─── TEXT FIELD related data, methods and text editing controllers ───────────────────────────────────────
+  // Used in CAForm.
   // SESSION TITLE
   String analysisTitle = "";
   void _analysisTitleUpdate(String titleValue)
@@ -113,6 +114,7 @@ class CAProcessState extends State<CAProcess>
 
 
   // KEYWORDS
+  // Used in CAForm.
   Set<String> analysisKeywords = {};
   void _analysisKeywordsUpdate(Set<String> kws)
   {    
@@ -121,8 +123,9 @@ class CAProcessState extends State<CAProcess>
   }
   
   // FILE NAME
+  // Used in CAForm.
   String analysisFileName = "";
-  String fileExtension = TextFieldUtils.extensionCSV;
+  final String _fileExtension = TextFieldUtils.extensionCSV;
 
   void _analysisFileNameUpdate(String value)
   {   
@@ -132,7 +135,7 @@ class CAProcessState extends State<CAProcess>
   
   
   // Method used to print the form data to CSV
-  Future<void> saveDataAndMetadata() async
+  Future<void> _saveDataAndMetadata() async
   {
     await formKeyCA.currentState?.saveDataAndMetadata();
   }
@@ -140,7 +143,7 @@ class CAProcessState extends State<CAProcess>
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
   // Focus nodes and data related to reaching nodes
   final FocusNode _saveDataButtonFocusNode = .new();
-  bool movingThroughButton = false;
+  bool _movingThroughButton = false;
 
   @override
   void dispose()
@@ -153,7 +156,7 @@ class CAProcessState extends State<CAProcess>
   bool _isApplicationFolderPathLoading = true;
 
   // method used to get the set preferences
-  void getApplicationFolderPathPref() async
+  void _getApplicationFolderPathPref() async
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
@@ -167,15 +170,15 @@ class CAProcessState extends State<CAProcess>
 
   
   // ─── SCROLLCONTROLLER related data ───────────────────────────────────────
-  final ScrollController scrollController = ScrollController();
-  double scrollbarThickness = 0;
+  final ScrollController _scrollController = ScrollController();
+  double _scrollbarThickness = 0;
 
   
   @override
   void initState() {
     super.initState();
     // Retrieving the application folder
-    getApplicationFolderPathPref(); 
+    _getApplicationFolderPathPref(); 
 
     // (code to clean)
     _loadDTO(dtoAssetPathToJson: '');
@@ -190,7 +193,7 @@ class CAProcessState extends State<CAProcess>
         // restoring focus capability to the bottom items
         widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
         // data helping to know if the user tab navigates back up
-        movingThroughButton = true;
+        _movingThroughButton = true;
       }
     );    
   }
@@ -201,7 +204,7 @@ class CAProcessState extends State<CAProcess>
   {
     // TODO: to modify for tablets
     if (defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.linux || defaultTargetPlatform == TargetPlatform.macOS)
-    {scrollbarThickness = 15;}
+    {_scrollbarThickness = 15;}
 
     return 
     _isDTOAssetLoading
@@ -212,13 +215,13 @@ class CAProcessState extends State<CAProcess>
     Scrollbar
     (
       thumbVisibility: true, // to keep the scrollbar visible
-      thickness: scrollbarThickness,
-      controller: scrollController,
+      thickness: _scrollbarThickness,
+      controller: _scrollController,
       child: 
       SingleChildScrollView
       (
         key: const Key('context-analysis-process-scrollview'),
-        controller: scrollController,
+        controller: _scrollController,
         child: 
         Column
         (
@@ -302,12 +305,12 @@ class CAProcessState extends State<CAProcess>
                         ? SessionFileNameMobilePlatforms
                         (
                           editedFileName: widget.fileNameForEdition,
-                          fileExtension: fileExtension, 
+                          fileExtension: _fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
-                          parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata,
+                          parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
                         )
                         // Saving file for desktop platforms
-                        : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: saveDataAndMetadata)
+                        : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)
                   ),
                 ],
               ),
