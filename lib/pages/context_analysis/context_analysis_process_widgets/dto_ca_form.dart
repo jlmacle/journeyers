@@ -69,30 +69,6 @@ class DTOCAForm
   var groupEarningAbility              = DTOSegmentedButtonWithTextField();
   // ─── FIELDS: GROUP PERSPECTIVE : end ───────────────────────────────────────
 
-  // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
-  // Converts a [DTOCheckboxWithTextField] to the standard [LinkedHashMap] wire format.
-  // The text value is omitted (left empty) when the checkbox is unchecked.
-  Future<LinkedHashMap<String, String>> _checkboxDataToMap(DTOCheckboxWithTextField f) async
-
-    =>  LinkedHashMap<String, String>.from({
-        qf.labelCheckbox:  '${f.checked}',
-        qf.labelTextField: f.checked ? f.text : '',
-      });
-
-  // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
-  // Both values are omitted (left empty) when nothing is selected.
-  Future<LinkedHashMap<String, String>> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) async =>
-      LinkedHashMap<String, String>.from({
-        // Sorting the options before saving
-        qf.labelSegmentedButton: f.selection.isNotEmpty ? 
-                                        _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : '',
-        qf.labelTextField:       f.selection.isNotEmpty ? f.text : '',
-        });
-
-  // Serialises a segmented-button selection to a slash-separated string.
-  String _segmentedToString(Set<String> values) => values.join('/');
-  // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
-
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
   /// Method used to gather the form data into a LinkedHashMap.
   Future<LinkedHashMap<String, Object> > dataStructureBuilding() async {
@@ -164,11 +140,34 @@ class DTOCAForm
   }
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : end ───────────────────────────────────────
 
+  // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
+  // Converts a [DTOCheckboxWithTextField] to the standard [LinkedHashMap] wire format.
+  // The text value is omitted (left empty) when the checkbox is unchecked.
+  Future<LinkedHashMap<String, String>> _checkboxDataToMap(DTOCheckboxWithTextField f) async
+
+    =>  LinkedHashMap<String, String>.from({
+        qf.labelCheckbox:  '${f.checked}',
+        qf.labelTextField: f.checked ? f.text : '',
+      });
+
+  // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
+  // Both values are omitted (left empty) when nothing is selected.
+  Future<LinkedHashMap<String, String>> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) async =>
+      LinkedHashMap<String, String>.from({
+        // Sorting the options before saving
+        qf.labelSegmentedButton: f.selection.isNotEmpty ? 
+                                        _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : '',
+        qf.labelTextField:       f.selection.isNotEmpty ? f.text : '',
+        });
+
+  // Serialises a segmented-button selection to a slash-separated string.
+  String _segmentedToString(Set<String> values) => values.join('/');
+  // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
 
   /// Method extracting information from {labelCheckbox: false/true, labelTextField: data/""}
   /// and returning \[\[labelCheckbox,"false"/"true"\],\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<Object>> checkboxWithTextFieldDataToPreCSV({
+  Future<List<Object>> _checkboxWithTextFieldDataToPreCSV({
     required LinkedHashMap<String, Object> checkboxWithTextFieldData,
   }) async 
   {
@@ -183,7 +182,7 @@ class DTOCAForm
 
     String dataTextField = (checkboxWithTextFieldData[qf.labelTextField] ?? "") as String;
     var data2 = [
-      labelNotes,
+      _labelNotes,
       CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV,
     ]; // label in front of the text field data
 
@@ -197,13 +196,13 @@ class DTOCAForm
 
   // Used in the pre-CSV and CSV data
   /// A label used in front of the content of the answered questions, in the pre-CSV data and in the CSV file.
-  String labelNotes = "Notes:";
+  final String _labelNotes = "Notes:";
 
 
   /// Method extracting information from {labelSegmentedButton: "Yes"/"No"/"I don't know", labelTextField: data/""}
   /// and returning \[\[labelSegmentedButton,"Yes"/"No"/"I don't know"/""\],\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<List<String>>> segmentedButtonWithTextFieldDataToPreCSV({
+  Future<List<List<String>>> _segmentedButtonWithTextFieldDataToPreCSV({
     required LinkedHashMap<String, String> segmentedButtonWithTextFieldData,
   }) async
   {
@@ -215,7 +214,7 @@ class DTOCAForm
 
     var dataTextField =
         segmentedButtonWithTextFieldData[qf.labelTextField] as String;
-    List<String> data2 = [labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
+    List<String> data2 = [_labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
     segmentedButtonPreCSVData.add(data2);
@@ -226,14 +225,14 @@ class DTOCAForm
   /// Method extracting information from {labelTextField: data/""}
   /// and returning \[\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<List<String>>> textFieldDataToPreCSV({
+  Future<List<List<String>>> _textFieldDataToPreCSV({
     required LinkedHashMap<String, Object?> textFieldData,
   }) async
   {
     List<List<String>> textFieldPreCSVData = [];
 
     var dataTextField = textFieldData[qf.labelTextField] as String;
-    List<String> data = [labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
+    List<String> data = [_labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
 
     textFieldPreCSVData.add(data);
 
@@ -259,7 +258,7 @@ class DTOCAForm
     {
       if (qf.questionsToInputItemsMapping[itemOrTitleLabel] == qf.labelCheckbox) {
         // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
-        var checkboxPreCSVData = await checkboxWithTextFieldDataToPreCSV(
+        var checkboxPreCSVData = await _checkboxWithTextFieldDataToPreCSV(
           checkboxWithTextFieldData:
               titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
         );
@@ -271,7 +270,7 @@ class DTOCAForm
       else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
           qf.labelSegmentedButton) {
         var segmentedButtonPreCSVData =
-            await segmentedButtonWithTextFieldDataToPreCSV(
+            await _segmentedButtonWithTextFieldDataToPreCSV(
               segmentedButtonWithTextFieldData:
                   titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, String>,
             );
@@ -281,7 +280,7 @@ class DTOCAForm
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
       else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
           qf.labelTextField) {
-        var textFieldpreCSVData = await textFieldDataToPreCSV(
+        var textFieldpreCSVData = await _textFieldDataToPreCSV(
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
         );
         preCSVData.add(textFieldpreCSVData[0]);
@@ -704,6 +703,17 @@ factory DTOCAForm.fromCSV(String csvContent) {
   return dto;
 }
 
+/// Reads the JSON file at [assetPath] and returns its decoded
+/// contents as a Map\<String, dynamic\>.
+/// [assetPath] must be declared in the `assets` section of `pubspec.yaml`.
+static Future<Map<String, dynamic>> jsonDataMapFromAsset(String assetPath) async {
+  // Retrieves a string from the asset bundle.
+  final rawData = await rootBundle.loadString(assetPath);
+  Map<String, dynamic> decodedData = jsonDecode(rawData) as Map<String, dynamic>;
+  if (preloadingDebug) pu.printd("DTO Pre-loading: DTOCAForm: jsonDataMapFromAsset: $decodedData");
+  return decodedData;
+}
+
 // Parses a single CSV line, respecting double-quoted fields.
 static List<String> _splitCsvLine(String line) {
   final result = <String>[];
@@ -740,7 +750,7 @@ static void _parseIndividualFromRows(
     final (marker, content) = rows[i];
 
     
-    String readNotes() {
+    String _readNotes() {
       if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
         i++;
         return _stripNoteQuotes(rows[i].$2);
@@ -750,27 +760,27 @@ static void _parseIndividualFromRows(
 
     if (content == qf.level3TitleBalanceIssueItem1) {
       dto.indivBalanceStudiesHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceStudiesHousehold.text = readNotes();
+      if (marker == 'X') dto.indivBalanceStudiesHousehold.text = _readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem2) {
       dto.indivBalanceAccessingIncomeHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceAccessingIncomeHousehold.text = readNotes();
+      if (marker == 'X') dto.indivBalanceAccessingIncomeHousehold.text = _readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem3) {
       dto.indivBalanceEarningIncomeHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceEarningIncomeHousehold.text = readNotes();
+      if (marker == 'X') dto.indivBalanceEarningIncomeHousehold.text = _readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem4) {
       dto.indivBalanceHelpingOthersHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceHelpingOthersHousehold.text = readNotes();
+      if (marker == 'X') dto.indivBalanceHelpingOthersHousehold.text = _readNotes();
     } else if (content == qf.level3TitleWorkplaceIssueItem1) {
       dto.indivAtWorkMoreAppreciated.checked = marker == 'X';
-      if (marker == 'X') dto.indivAtWorkMoreAppreciated.text = readNotes();
+      if (marker == 'X') dto.indivAtWorkMoreAppreciated.text = _readNotes();
     } else if (content == qf.level3TitleWorkplaceIssueItem2) {
       dto.indivAtWorkRemainingAppreciated.checked = marker == 'X';
-      if (marker == 'X') dto.indivAtWorkRemainingAppreciated.text = readNotes();
+      if (marker == 'X') dto.indivAtWorkRemainingAppreciated.text = _readNotes();
     } else if (content == qf.level3TitleLegacyIssueItem1) {
       dto.indivBetterLegacies.checked = marker == 'X';
-      if (marker == 'X') dto.indivBetterLegacies.text = readNotes();
+      if (marker == 'X') dto.indivBetterLegacies.text = _readNotes();
     } else if (content == qf.level3TitleAnotherIssue) {
-      if (marker == 'X') dto.indivAnotherIssueStr = readNotes();
+      if (marker == 'X') dto.indivAnotherIssueStr = _readNotes();
     }
 
   }
@@ -780,7 +790,7 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
 
-    String readSelection() {
+    String _readSelection() {
       if (i + 1 < rows.length) {
         final nextContent = rows[i + 1].$2.trim();
         if (rows[i + 1].$1 == '' &&
@@ -795,7 +805,7 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     }
 
 
-    String readNotes() {
+    String _readNotes() {
       if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
         i++;
         return _stripNoteQuotes(rows[i].$2);
@@ -804,34 +814,34 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     }
 
     if (content == qf.level3TitleGroupsProblematics) {
-      if (marker == 'X') dto.groupProblemsToSolveStr = readNotes();
+      if (marker == 'X') dto.groupProblemsToSolveStr = _readNotes();
     } else if (content == qf.level3TitleSameProblem) {
       if (marker == 'X') {
-        final sel = readSelection();
+        final sel = _readSelection();
         dto.groupSameProblemsToSolve.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupSameProblemsToSolve.text = readNotes();
+        dto.groupSameProblemsToSolve.text = _readNotes();
       }
     } else if (content == qf.level3TitleHarmonyAtHome) {
       if (marker == 'X') {
-        final sel = readSelection();
+        final sel = _readSelection();
         dto.groupHarmonyHome.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupHarmonyHome.text = readNotes();
+        dto.groupHarmonyHome.text = _readNotes();
       }
     } else if (content == qf.level3TitleAppreciabilityAtWork) {
       if (marker == 'X') {
-        final sel = readSelection();
+        final sel = _readSelection();
         dto.groupAppreciabilityAtWork.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupAppreciabilityAtWork.text = readNotes();
+        dto.groupAppreciabilityAtWork.text = _readNotes();
       }
     } else if (content == qf.level3TitleIncomeEarningAbility) {
       if (marker == 'X') {
-        final sel = readSelection();
+        final sel = _readSelection();
         dto.groupEarningAbility.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupEarningAbility.text = readNotes();
+        dto.groupEarningAbility.text = _readNotes();
       }
     }
 
@@ -865,16 +875,7 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     return field;
   }
 
-  /// Reads the JSON file at [assetPath] and returns its decoded
-  /// contents as a Map\<String, dynamic\>.
-  /// [assetPath] must be declared in the `assets` section of `pubspec.yaml`.
-  static Future<Map<String, dynamic>> jsonDataMapFromAsset(String assetPath) async {
-    // Retrieves a string from the asset bundle.
-    final rawData = await rootBundle.loadString(assetPath);
-    Map<String, dynamic> decodedData = jsonDecode(rawData) as Map<String, dynamic>;
-    if (preloadingDebug) pu.printd("DTO Pre-loading: DTOCAForm: jsonDataMapFromAsset: $decodedData");
-    return decodedData;
-  }
+  
 
   // ─── PRINTING/SAVING METHODS ───────────────────────────────────────
 
