@@ -35,13 +35,13 @@ class CAProcess extends StatefulWidget
   /// A DTOCAForm instance used at initState time.
   final DTOCAForm? dtoOnInitState;
 
-  /// A file name value used at editing time.
-  final String fileNameForEdition;
+  /// The file name value at edition time.
+  final String fileNameWhenEdition;
 
-  /// A title value used at editing time.
-  final String titleForEdition;
+  /// The title value at edition time.
+  final String titleWhenEdition;
 
-  /// A keywords value at edition time.
+  /// The keywords value at edition time.
   final Set<String> keywordsForEdition;
 
   /// A callback function called to refresh the context analysis page after the process.
@@ -54,8 +54,8 @@ class CAProcess extends StatefulWidget
     super.key,
     this.sessionDataEdition = false,
     this.dtoOnInitState,
-    this.fileNameForEdition = "",
-    this.titleForEdition = "",
+    this.fileNameWhenEdition = "",
+    this.titleWhenEdition = "",
     this.keywordsForEdition = const {},
     required this.caPageCallbackFunctionToRefreshThePage,
     required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
@@ -244,7 +244,7 @@ class CAProcessState extends State<CAProcess>
             CATitleDeclaration
             (
               analysisTitleAutofocused: widget.sessionDataEdition,
-              analysisTitleWhenEdited: widget.titleForEdition,
+              analysisTitleWhenEdition: widget.titleWhenEdition,
               onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
             ),
             
@@ -304,7 +304,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameMobilePlatforms
                         (
-                          editedFileName: widget.fileNameForEdition,
+                          editedFileName: widget.fileNameWhenEdition,
                           fileExtension: _fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,

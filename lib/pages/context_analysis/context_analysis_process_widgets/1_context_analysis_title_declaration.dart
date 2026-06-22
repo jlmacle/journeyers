@@ -13,7 +13,7 @@ class CATitleDeclaration extends StatefulWidget
 
   // Todo: to clean
   /// A title value used at editing time.
-  final String analysisTitleWhenEdited;
+  final String analysisTitleWhenEdition;
 
   /// A boolean used to state if an edition is in progress.
   final bool isSessionDataEdited;  
@@ -26,7 +26,7 @@ class CATitleDeclaration extends StatefulWidget
     super.key,
     this.isSessionDataEdited = false,
     this.analysisTitleAutofocused = false,
-    required this.analysisTitleWhenEdited,
+    required this.analysisTitleWhenEdition,
     required this.onAnalysisTitleUpdatedProcessCallbackFunction
   });
 
@@ -45,7 +45,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
       child: CATextFieldSanitizedAndPadded
       (
         autofocus: widget.analysisTitleAutofocused,
-        textFieldStartValue: widget.analysisTitleWhenEdited,
+        textFieldStartValue: widget.analysisTitleWhenEdition,
         textFieldStyle: analysisTextFieldStyle, 
         textFieldHint: CAFormMiscConstants.caTitleDeclarationHintText, 
         textFieldHintStyle: analysisTextFieldHintStyle, 
