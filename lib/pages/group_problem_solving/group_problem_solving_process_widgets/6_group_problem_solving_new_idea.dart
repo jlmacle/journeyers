@@ -8,12 +8,12 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 class GPSNewIdea extends StatefulWidget 
 {
   /// A callback function used to update the list of ideas.
-  final ValueChanged<String> onideaAddedCallbackFunction;
+  final ValueChanged<String> onIdeaAddedCallbackFunction;
 
   const GPSNewIdea
   ({
     super.key,
-    required this.onideaAddedCallbackFunction
+    required this.onIdeaAddedCallbackFunction
   });
 
   @override
@@ -28,10 +28,10 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
   final FocusNode _ideaFocusNode = FocusNode();
 
   // Method to handle adding an idea to the list
-  void _submitIdea() {
+  void _ideaSubmit() {
     if (_ideaController.text.trim().isNotEmpty) {
       // Adding the new idea to the list
-      widget.onideaAddedCallbackFunction(_ideaController.text.trim());
+      widget.onIdeaAddedCallbackFunction(_ideaController.text.trim());
       _ideaController.clear();
     }
     _ideaFocusNode.unfocus();
@@ -60,13 +60,13 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
                     hintText: newIdeaTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
-                  onSubmitted: (_) => _submitIdea(),
+                  onSubmitted: (_) => _ideaSubmit(),
                 ),
               ),
               const SizedBox(width: 8),
               IconButton(
                 icon: const Icon(Icons.send, color: navyBlue),
-                onPressed: _submitIdea,
+                onPressed: _ideaSubmit,
               ),
             ],
           ),

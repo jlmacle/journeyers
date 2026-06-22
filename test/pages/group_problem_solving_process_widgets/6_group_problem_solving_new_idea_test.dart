@@ -14,7 +14,7 @@ void main()
         home: Scaffold(
           body: GPSNewIdea
           (
-            onideaAddedCallbackFunction: (_){},
+            onIdeaAddedCallbackFunction: (_){},
           ),
         ),
       ),
