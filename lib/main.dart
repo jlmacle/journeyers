@@ -43,9 +43,12 @@ class _GPSappState extends State<GPSapp>
   void initState() {
     super.initState();
 
-    // Getting the stored file names at start
-    if (sessionDataDebug) pu.printd("Session Data: Main.dart: currentListOfStoredFileNames (before retrieval)");
-    du.getStoredFileNamesOnMobile();
+    // Getting the stored file names at start on mobile
+    if (Platform.isAndroid || Platform.isIOS)
+    {
+      if (sessionDataDebug) pu.printd("Session Data: Main.dart: currentListOfStoredFileNames");
+      du.getStoredFileNamesOnMobile();
+    }    
     
   }
   // ─── LOCALE related data and methods ───────────────────────────────────────
