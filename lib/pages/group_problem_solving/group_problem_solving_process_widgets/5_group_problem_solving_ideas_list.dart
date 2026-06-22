@@ -24,7 +24,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
 
   // Data related to deleting texts from the new list
   List<String> _ideasSelectedForDeletion = [];
-  List<int> _ideasSelectedForDeletionIndexes = [];
+  final List<int> _ideasSelectedForDeletionIndexes = [];
   bool _areSomeIdeasForDeletion = false;  
 
   late final List<String> _enteredIdeasList;
@@ -32,7 +32,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   final _tecNewIdea = TextEditingController();
 
 
-  void onUpdateTheIdeaValue({required String stringParam, required int intParam})
+  void _onUpdateTheIdeaValue({required String stringParam, required int intParam})
   {
     setState(() {
       _enteredIdeasList[intParam] = stringParam;
@@ -199,7 +199,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                       ({required intParam, required stringParam}) 
                                       {
                                         setLocalState(() {});
-                                        onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
+                                        _onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
                                       },
                                       parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_ideasSelectedForDeletionIndexes.add(index);}, 
                                       themeData: Theme.of(context),                          
