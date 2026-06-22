@@ -62,25 +62,7 @@ class _GPSPreviewState
       setState(() {
         _isLoading = false;
       });
-    }
-     
-  }
-
-  @override
-  void didUpdateWidget(covariant GPSPreview oldWidget) {
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget");
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: widget.ideas: ${widget.ideas}");
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: oldWidget.ideas: ${oldWidget.ideas}");
-
-    super.didUpdateWidget(oldWidget);
-
-    // Updating with new values
-    if (widget.ideas != oldWidget.ideas && widget.ideas.isNotEmpty) {
-      setState(() {
-        _ideas = widget.ideas;
-        _isLoading = false;
-      });
-    }
+    }     
   }
 
   Future<void> _fetchingData() async {
@@ -176,6 +158,24 @@ class _GPSPreviewState
           _isLoading = false;
         });
       }
+    }
+  }
+
+
+  @override
+  void didUpdateWidget(covariant GPSPreview oldWidget) {
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: widget.ideas: ${widget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: oldWidget.ideas: ${oldWidget.ideas}");
+
+    super.didUpdateWidget(oldWidget);
+
+    // Updating with new values
+    if (widget.ideas != oldWidget.ideas && widget.ideas.isNotEmpty) {
+      setState(() {
+        _ideas = widget.ideas;
+        _isLoading = false;
+      });
     }
   }
 
