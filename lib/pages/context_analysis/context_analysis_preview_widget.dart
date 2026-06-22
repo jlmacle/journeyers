@@ -37,8 +37,8 @@ class CAPreview extends StatefulWidget
 class _CAPreviewState extends State<CAPreview> 
 {
   bool _isLoading = true;
-  final Map<String, dynamic> sectionsIndividual = {};
-  final Map<String, dynamic> sectionsGroup = {};
+  final Map<String, dynamic> _sectionsIndividual = {};
+  final Map<String, dynamic> _sectionsGroup = {};
   
   @override
   void initState() 
@@ -62,7 +62,7 @@ class _CAPreviewState extends State<CAPreview>
     }
         
     
-    Map<String, List<dynamic>> perspectiveData = await caCSVFileToPreviewPerspectiveData(widget.pathToStoredData);
+    Map<String, List<dynamic>> perspectiveData = await _caCSVFileToPreviewPerspectiveData(widget.pathToStoredData);
     await _perspectiveDataToDataStructures(perspectiveData);
     
     if (mounted) {
@@ -110,7 +110,7 @@ class _CAPreviewState extends State<CAPreview>
     List<dynamic> individualPerspective = perspectiveData["individualPerspective"]!;
     List<dynamic> groupPerspective = perspectiveData["groupPerspective"]!;
 
-    sectionsIndividual["questions"] = [];
+    _sectionsIndividual["questions"] = [];
     String currentTitleLevel2 = "";
     String currentTitleLevel3 = "";
     String currentTitleLevel3Item = "";
@@ -157,14 +157,14 @@ class _CAPreviewState extends State<CAPreview>
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
-        sectionsIndividual["title"] = secondValue;
+        _sectionsIndividual["title"] = secondValue;
       }
       // A title level 3?: "A Balance Issue?" for ex.
       else if (qf.level3TitlesIndividual.contains(secondValue)) 
       {
         // Adding a new map to the list of the key "questions", with the title level 3 as value for the key "title",
         // and an empty list for the key "items".
-        sectionsIndividual["questions"].add({"title": secondValue, "items":[]});
+        _sectionsIndividual["questions"].add({"title": secondValue, "items":[]});
         currentTitleLevel3 = secondValue;                
       }
       // A title level 3 item?: "To balance studies and household life?" for ex.
@@ -179,7 +179,7 @@ class _CAPreviewState extends State<CAPreview>
           {checkedBox = false;}
 
         // Retrieving the map with the same title level 3
-        for (var map in sectionsIndividual["questions"])
+        for (var map in _sectionsIndividual["questions"])
         {
           // The qf.titles level 3 with sub items are also the ones with checkboxes and text fields
           if (map["title"] == currentTitleLevel3 && qf.level3TitlesWithSubItems.contains(currentTitleLevel3))
@@ -205,7 +205,7 @@ class _CAPreviewState extends State<CAPreview>
         // If the current title level 3 has sub items, then a note for a checkbox
         if (qf.level3TitlesWithSubItems.contains(currentTitleLevel3))
         {
-          for(var map in sectionsIndividual["questions"])
+          for(var map in _sectionsIndividual["questions"])
           {
             // Searching for the current title level 3
             if (map["title"] == currentTitleLevel3)
@@ -225,7 +225,7 @@ class _CAPreviewState extends State<CAPreview>
         // Otherwise, a note for a text field only
         else
         {
-          for(var map in sectionsIndividual["questions"])
+          for(var map in _sectionsIndividual["questions"])
           {
             if (map["title"] == currentTitleLevel3)
             {
@@ -238,7 +238,7 @@ class _CAPreviewState extends State<CAPreview>
     }
 
     // Building the structure related to the group perspective  
-    sectionsGroup["questions"] = [];
+    _sectionsGroup["questions"] = [];
     currentTitleLevel2 = "";
     currentTitleLevel3 = "";
     currentTitleLevel3Item = "";
@@ -295,21 +295,21 @@ class _CAPreviewState extends State<CAPreview>
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
-        sectionsGroup["title"] = secondValue;
+        _sectionsGroup["title"] = secondValue;
         // Useful to identify the text only text field
         previousSecondValueFromSegButton = false;        
       }
       // A title level 3?: "What problem(s) are the groups/teams trying to solve?" for ex.
       else if (qf.level3TitlesGroup.contains(secondValue)) 
       {
-        sectionsGroup["questions"].add({"title": secondValue, "items":{}});
+        _sectionsGroup["questions"].add({"title": secondValue, "items":{}});
         currentTitleLevel3 = secondValue;
         previousSecondValueFromSegButton = false;
       }
       // A segmented button ?
       else if (firstValue.trim() == "")
       {
-        for (var map in sectionsGroup["questions"])
+        for (var map in _sectionsGroup["questions"])
         { 
           // Looking for the right map in the values of "questions"
           if (map["title"] == currentTitleLevel3)
@@ -327,7 +327,7 @@ class _CAPreviewState extends State<CAPreview>
         // a note of a text field only
         if (previousSecondValueFromSegButton == false) 
         {
-          for (var map in sectionsGroup["questions"])
+          for (var map in _sectionsGroup["questions"])
           {
             if (map["title"] == currentTitleLevel3)
             {
@@ -341,7 +341,7 @@ class _CAPreviewState extends State<CAPreview>
         // a note with a segmented button
         else
         { 
-          for (var map in sectionsGroup["questions"])
+          for (var map in _sectionsGroup["questions"])
           {
             if (map["title"] == currentTitleLevel3)
             {
@@ -357,14 +357,14 @@ class _CAPreviewState extends State<CAPreview>
     
     if (previewBuildingDebug) pu.printd("Preview Building");
     if (previewBuildingDebug) pu.printd("Preview Building: sectionsIndividual:");
-    if (previewBuildingDebug) pu.printd(sectionsIndividual);
+    if (previewBuildingDebug) pu.printd(_sectionsIndividual);
     if (previewBuildingDebug) pu.printd("Preview Building");
     if (previewBuildingDebug) pu.printd("Preview Building: sectionsGroup:");
-    if (previewBuildingDebug) pu.printd(sectionsGroup);
+    if (previewBuildingDebug) pu.printd(_sectionsGroup);
   }
 
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
-  Future<Map<String,List<Object>>> caCSVFileToPreviewPerspectiveData(String pathToCSVFile) async
+  Future<Map<String,List<Object>>> _caCSVFileToPreviewPerspectiveData(String pathToCSVFile) async
   {
     // Checking if the path is a path for a test (TODO: to cleanup/dto)
     if (pathsForTestFiles.contains(pathToCSVFile)) {
@@ -535,7 +535,7 @@ class _CAPreviewState extends State<CAPreview>
                       padding: const EdgeInsets.all(16.0),
                       child: Text
                       (
-                        sectionsIndividual['title'] ?? "Untitled",
+                        _sectionsIndividual['title'] ?? "Untitled",
                         style: styleExpansionTileTitle
                       ),
                     ),
@@ -547,7 +547,7 @@ class _CAPreviewState extends State<CAPreview>
                       // If no checkbox checked and no value for the text field only, a message to display
                       if 
                       (
-                        sectionsIndividual['questions'].where
+                        _sectionsIndividual['questions'].where
                         (
                           (question) => 
                             (question['items'] as List).any((item) => item['checked'] == "yes") 
@@ -568,7 +568,7 @@ class _CAPreviewState extends State<CAPreview>
                         // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
                         for 
                         (
-                          var question in sectionsIndividual['questions'].where
+                          var question in _sectionsIndividual['questions'].where
                           (
                             (question) => 
                               (question['items'] as List).any((item) => item['checked'] == 'yes') 
@@ -635,12 +635,12 @@ class _CAPreviewState extends State<CAPreview>
                       padding: const EdgeInsets.only(left: 16, top: 8, bottom:8),
                       child: Text
                       (
-                        sectionsGroup['title'],
+                        _sectionsGroup['title'],
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                       ),
                     ),
                     // Questions and potential answers for the group perspective
-                    for (var question in sectionsGroup['questions'])
+                    for (var question in _sectionsGroup['questions'])
                       ExpansionTile
                       (
                         // to remove the borders
