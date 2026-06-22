@@ -206,7 +206,7 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: ({required sessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: dtoWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition, keywordsWhenEdition: _keywordsWhenEdition),
+                  onEditSessionDataCallbackFunction: ({required sessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: _dtoWhenEdition!, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition, keywordsWhenEdition: _keywordsWhenEdition),
                 )
               ),
             ]
