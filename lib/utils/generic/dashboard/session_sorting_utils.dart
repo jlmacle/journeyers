@@ -12,12 +12,21 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_exter
 /// https://api.flutter.dev/flutter/package-intl_intl/DateFormat-class.html 
 Future<List<dynamic>> sortSessionByDateAddJm
 ({required List<dynamic> list, required String dateFormat, required bool byAscendingDate}) async 
-{
+{  
   list.sort((a, b) 
     {
-      DateTime dateA = DateFormat(dateFormat).add_jm().parse(a[DashboardUtils.keyDate]);
-      DateTime dateB = DateFormat(dateFormat).add_jm().parse(b[DashboardUtils.keyDate]);
-      return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
+      try
+      {
+        DateTime dateA = DateFormat(dateFormat).add_jm().parseLoose(a[DashboardUtils.keyDate]);
+        DateTime dateB = DateFormat(dateFormat).add_jm().parseLoose(b[DashboardUtils.keyDate]);
+
+        return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
+      }
+      catch(e)
+      {
+        pu.printd("sortSessionByDateAddJm: exception: $e");        
+      }  
+      return 0;    
     });
 
   return list;   
