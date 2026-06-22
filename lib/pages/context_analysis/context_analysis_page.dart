@@ -132,7 +132,7 @@ class CAPageState extends State<CAPage>
   }
 
   // Method used to edit a session data
-  void _onEditSessionData({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required Set<String> keywordsForEdition})
+  void _onEditSessionData({required bool sessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition})
   {
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
@@ -141,11 +141,11 @@ class CAPageState extends State<CAPage>
       _caSessionDataSaved = false;
 
       // Loading the CA Process with edited values
-      _sessionDataBeingEdited = sessionDataEdition;
-      _dtoWhenEdition = dtoForEdition;      
-      _titleWhenEdition  = title;
-      _keywordsWhenEdition = keywordsForEdition;
-      _fileNameWhenEditionWithoutExtension = fileNameWithoutExtension;
+      _sessionDataBeingEdited = sessionDataBeingEdited;
+      _dtoWhenEdition = dtoWhenEdition;      
+      _titleWhenEdition  = titleWhenEdition;
+      _keywordsWhenEdition = keywordsWhenEdition;
+      _fileNameWhenEditionWithoutExtension = fileNameWhenEditionWithoutExtension;
     });
   }
 
@@ -212,7 +212,7 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: ({required dtoForEdition, required fileNameWithoutExtension, required title, required keywordsForEdition, required sessionDataEdition}) => _onEditSessionData(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition),
+                  onEditSessionDataCallbackFunction: ({required dtoForEdition, required fileNameWithoutExtension, required title, required keywordsForEdition, required sessionDataEdition}) => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: dtoForEdition, fileNameWhenEditionWithoutExtension: fileNameWithoutExtension, titleWhenEdition: title, keywordsWhenEdition: keywordsForEdition),
                 )
               ),
             ]
