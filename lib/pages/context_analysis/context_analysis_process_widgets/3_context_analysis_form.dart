@@ -62,8 +62,8 @@ class CAFormState extends State<CAForm>
 
   // ─── ACCESSIBILITY related data ───────────────────────────────────────
   // Data related to the folding/unfolding of the expansion tiles
-  bool _isIndividualAreaPerspectiveExpanded = false;
-  bool _isGroupAreaPerspectiveExpanded = false;
+  bool _isPerspectiveAreaExpandedIndividual = false;
+  bool _isPerspectiveAreaExpandedGroup = false;
 
   // ─── SESSION METADATA ───────────────────────────────────────
   // Placeholder data for what is entered in addition to the form data
@@ -109,7 +109,7 @@ class CAFormState extends State<CAForm>
    => data.selection = values ?? {};
 
   // Method used to update the DTO, and the item styling (another issue)
-  Future<void> _onAnotherIssueFilledStr(String value) async 
+  Future<void> _onAnotherIssueFilled(String value) async 
   {
     _dtoCAForm!.indivAnotherIssueStr = value;
     anotherIssueHeadingKey.currentState
@@ -117,7 +117,7 @@ class CAFormState extends State<CAForm>
   }
 
   // Method used to update the DTO ( group problems to solve)
-  Future<void> _onGroupProblemsToSolveFilledStr(String value) async 
+  Future<void> _onGroupProblemsToSolveFilled(String value) async 
   {
     _dtoCAForm!.groupProblemsToSolveStr = value;
   }
@@ -193,7 +193,7 @@ class CAFormState extends State<CAForm>
           button: true, // with tooltip, useful for NVDA
           // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
           label: "Zone to click to expand data", // for Orca
-          expanded: _isIndividualAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
+          expanded: _isPerspectiveAreaExpandedIndividual, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
           child:
           ExpansionTile
           ( 
@@ -202,8 +202,8 @@ class CAFormState extends State<CAForm>
             internalAddSemanticForOnTap: true, 
             onExpansionChanged: (value) 
             {
-              setState(() {_isIndividualAreaPerspectiveExpanded = value;});
-              widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+              setState(() {_isPerspectiveAreaExpandedIndividual = value;});
+              widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isPerspectiveAreaExpandedIndividual || _isPerspectiveAreaExpandedGroup));
               },
             // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
             maintainState: true, // to keep the state of the children widget
@@ -336,7 +336,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.counterAbsent,
-                onTextFieldValueChangedCallbackFunction: (v) async => await _onAnotherIssueFilledStr(v), 
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onAnotherIssueFilled(v), 
               ),
             ]
           ),
@@ -356,7 +356,7 @@ class CAFormState extends State<CAForm>
           button: true, // with tooltip, useful for NVDA
           // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
           label: "Zone to click to expand data", // for Orca
-          expanded: _isGroupAreaPerspectiveExpanded, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
+          expanded: _isPerspectiveAreaExpandedGroup, // useful for NVDA, not voiced by Narrator at the time of coding (26/01/11)
           child:
           ExpansionTile
           ( 
@@ -366,8 +366,8 @@ class CAFormState extends State<CAForm>
             onExpansionChanged: (value) 
             {setState(() 
             {
-              _isGroupAreaPerspectiveExpanded = value;
-              widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isIndividualAreaPerspectiveExpanded || _isGroupAreaPerspectiveExpanded));
+              _isPerspectiveAreaExpandedGroup = value;
+              widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isPerspectiveAreaExpandedIndividual || _isPerspectiveAreaExpandedGroup));
             });
             },
             // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
@@ -397,7 +397,7 @@ class CAFormState extends State<CAForm>
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormMiscConstants.chars1Page,
                 textFieldCounter: TextFieldUtils.counterAbsent,
-                onTextFieldValueChangedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilledStr(v),
+                onTextFieldValueChangedCallbackFunction: (v) async => await _onGroupProblemsToSolveFilled(v),
               ),
 
               /**** ➡️ Sub-point  ****/
