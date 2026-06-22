@@ -26,7 +26,7 @@ Future<void> Function({required String? filePath, required Set<String> updatedKe
 typedef FutureVoidCallback = 
 Future<void> Function();
 
-/// {@category Utils - Generic}
-/// A function with a DTOCAForm parameter, 2 String parameters, a List<String> parameter, a bool parameter, and returning void.
-typedef FunctionDTOCAForm2StringsSetStringAndBool = 
-void Function({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required Set<String> keywordsForEdition});
+/// {@category Utils - Project-specific}
+/// A typedef for an onEditSessionDataCallbackFunction.
+typedef OnEditSessionDataCallbackFunctionType = 
+void Function({required bool sessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition});
