@@ -46,7 +46,7 @@ class _GPSappState extends State<GPSapp>
     // Getting the stored file names at start on mobile
     if (Platform.isAndroid || Platform.isIOS)
     {
-      if (sessionDataDebug) pu.printd("Session Data: Main.dart: currentListOfStoredFileNames");
+      if (sessionDataDebug) pu.printd("Session Data: GPSapp: currentListOfStoredFileNames");
       du.getStoredFileNamesOnMobile();
     }    
     
@@ -66,7 +66,7 @@ class _GPSappState extends State<GPSapp>
     {
       setState(() {        
         _currentLocale = newLocale;
-        if (runtimeDataDebug) pu.printd("Runtime Data: Main.dart: _setLocale: new locale: $newLocale");
+        if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: _setLocale: new locale: $newLocale");
       });
     }
   }

@@ -36,8 +36,8 @@ class HomePage extends StatefulWidget
 class _HomePageState extends State<HomePage> 
 {
   // ─── BOTTOM NAVIGATION BAR related data and methods ───────────────────────────────────────
-  int _currentIndex = 0;
-  bool _areBottomNavigationItemsFocusable = true;
+  int _bottomNavigationItemCurrentIndex = 0;
+  bool _bottomNavigationItemsFocusable = true;
 
   // Getter for the context analyses page and for the group problem solvings page
   List<Widget> get _pages => 
@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage>
       (bool boolValue) 
       {
         // Switches the focusability of the bottom bar items
-        setState(() {_areBottomNavigationItemsFocusable = boolValue;});
-        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: $_areBottomNavigationItemsFocusable");
+        setState(() {_bottomNavigationItemsFocusable = boolValue;});
+        if (accessibilityDebug) pu.printd("Accessibility: HomePage: _areBottomNavigationItemsFocusable: $_bottomNavigationItemsFocusable");
       }
     ),
     GPSPage
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage>
             [
               // Commented as not all translations are done
               // CustomLanguageSwitch(onLanguageSelectedHomePageCallbackFunction: _updateLocale),
-              Expanded(child: _pages[_currentIndex])
+              Expanded(child: _pages[_bottomNavigationItemCurrentIndex])
             ],
           ),
       ),
@@ -180,16 +180,16 @@ class _HomePageState extends State<HomePage>
       // Used to remove focus to the items when the expansion tiles are expanded (context analysis only as of 26/01/13)
       // Goal: to be able to scroll down the questions using tab navigation only
       ExcludeFocus(
-        excluding: !_areBottomNavigationItemsFocusable,
+        excluding: !_bottomNavigationItemsFocusable,
         child: 
         BottomNavigationBar
         (
           
           backgroundColor: navyBlue,
-          currentIndex: _currentIndex,
+          currentIndex: _bottomNavigationItemCurrentIndex,
           onTap: (index) 
           {
-            setState(() {_currentIndex = index;});
+            setState(() {_bottomNavigationItemCurrentIndex = index;});
             switch(index)
             {
               case 0:
