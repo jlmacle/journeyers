@@ -36,7 +36,7 @@ class CAPreview extends StatefulWidget
 
 class _CAPreviewState extends State<CAPreview> 
 {
-  bool _isLoading = true;
+  bool _previewDataLoading = true;
   final Map<String, dynamic> _sectionsIndividual = {};
   final Map<String, dynamic> _sectionsGroup = {};
   
@@ -55,7 +55,7 @@ class _CAPreviewState extends State<CAPreview>
     {
       if (mounted) {
         setState(() {
-          _isLoading = false;
+          _previewDataLoading = false;
         });
       }
       return;
@@ -67,7 +67,7 @@ class _CAPreviewState extends State<CAPreview>
     
     if (mounted) {
       setState(() {
-        _isLoading = false;
+        _previewDataLoading = false;
       });
     }
   }
@@ -516,10 +516,18 @@ class _CAPreviewState extends State<CAPreview>
   @override
   Widget build(BuildContext context) 
   {
-    return _isLoading
+    return 
+    _previewDataLoading
+    // PREVIEW DATA NOT LOADED
       ?  const Center(child:CircularProgressIndicator())
-      : (pathsForTestFiles.contains(widget.pathToStoredData)) 
+
+    // PREVIEW DATA LOADED
+      : 
+        // PREVIEW USED WITHIN TESTING
+        (pathsForTestFiles.contains(widget.pathToStoredData)) 
         ? const Text(testDataMessage)
+        
+        // PREVIEW NOT USED WITHIN TESTING
         :  Column
           (
             crossAxisAlignment: CrossAxisAlignment.start,
