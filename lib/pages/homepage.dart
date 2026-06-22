@@ -88,28 +88,28 @@ class _HomePageState extends State<HomePage>
   }
 
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
-  FocusNode appBarTitleFocusNode = .new();
+  final FocusNode _appBarTitleFocusNode = .new();
 
   @override
   void dispose() 
   {
-    appBarTitleFocusNode.dispose();
+    _appBarTitleFocusNode.dispose();
     super.dispose();
   }
 
   // TODO: cross-platform end of line
-  String? eol;
+  String? _eol;
 
   @override
   Widget build(BuildContext context) 
   {
     if (kIsWeb) 
     {
-      eol = '\n';
+      _eol = '\n';
     } 
     else 
     {
-      eol = Platform.lineTerminator; // The use of Platform is not portable on the web
+      _eol = Platform.lineTerminator; // The use of Platform is not portable on the web
     }
     
     return 
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage>
           child: 
           Focus
           (
-            focusNode: appBarTitleFocusNode,
+            focusNode: _appBarTitleFocusNode,
             child: 
             Column
             (
