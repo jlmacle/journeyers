@@ -107,18 +107,7 @@ class CAPageState extends State<CAPage>
     }
   }
 
-  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
-
-  // Method used to refresh the page from context form to dashboard, 
-  // after form data has been saved
-  void onDataSaved() 
-  {
-    setState(() {
-      _wasCASessionDataSaved = true;
-    });
-  }
-
-   // Method used to refresh the page from dashboard to context form, 
+  // Method used to refresh the page from dashboard to context form, 
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
   {
@@ -129,8 +118,19 @@ class CAPageState extends State<CAPage>
     });
   }
 
+  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
+
+  // Method used to refresh the page from context form to dashboard, 
+  // after form data has been saved
+  void _onDataSaved() 
+  {
+    setState(() {
+      _wasCASessionDataSaved = true;
+    });
+  }
+
   // Method used to edit a session data
-  void onEditSessionData({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required Set<String> keywordsForEdition})
+  void _onEditSessionData({required bool sessionDataEdition, required DTOCAForm dtoForEdition, required String fileNameWithoutExtension, required String title, required Set<String> keywordsForEdition})
   {
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
@@ -148,18 +148,18 @@ class CAPageState extends State<CAPage>
   }
 
    // Method used to refresh the page
-  void onPageToRefresh()
+  void _onPageToRefresh()
   {
     setState(() {});
   }
 
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
-  FocusNode caFormPageFocusNode = .new();
+  final FocusNode _caFormPageFocusNode = .new();
 
   @override
   void dispose() 
   {
-    caFormPageFocusNode.dispose();
+    _caFormPageFocusNode.dispose();
     super.dispose();
   } 
 
@@ -209,7 +209,7 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: ({required dtoForEdition, required fileNameWithoutExtension, required title, required keywordsForEdition, required sessionDataEdition}) => onEditSessionData(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition),
+                  onEditSessionDataCallbackFunction: ({required dtoForEdition, required fileNameWithoutExtension, required title, required keywordsForEdition, required sessionDataEdition}) => _onEditSessionData(sessionDataEdition: true, dtoForEdition: dtoForEdition, fileNameWithoutExtension: fileNameWithoutExtension, title: title, keywordsForEdition: keywordsForEdition),
                 )
               ),
             ]
@@ -224,8 +224,8 @@ class CAPageState extends State<CAPage>
                 child: 
                 Focus
                 (
-                  focusNode: caFormPageFocusNode,
-                  child: CAProcess(key: caProcessKey, sessionDataEdition: _sessionDataEdition,  dtoOnInitState: _dtoOnInitState, fileNameForEdition: _fileNameWithoutExtension, titleForEdition: _title , keywordsForEdition:  _keywordsForEdition , caPageCallbackFunctionToRefreshThePage: onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  focusNode: _caFormPageFocusNode,
+                  child: CAProcess(key: caProcessKey, sessionDataEdition: _sessionDataEdition,  dtoOnInitState: _dtoOnInitState, fileNameForEdition: _fileNameWithoutExtension, titleForEdition: _title , keywordsForEdition:  _keywordsForEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
