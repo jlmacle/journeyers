@@ -71,23 +71,25 @@ class CAProcessState extends State<CAProcess>
   // The DTO for the CA form
   DTOCAForm? _dtoCAForm;
   // Boolean to wait on the data loading
-  bool _isDTOAssetLoading = true;
+  bool _dtoAssetLoading = true;
 
   // Method used to load the DTO's data using a json file
   Future<void> _loadDTO({required String dtoAssetPathToJson}) async 
   {
     if (sessionDataDebug) pu.printd("Session Data: CA Process: path to DTO asset if preloading: $dtoAssetPathToJson");
     
+    // Loading from DTO
     if (dtoAssetPathToJson == "") 
     {
-      // widget.dtoOnInitState is nullable
+      // widget.dtoWhenEdition is nullable
       _dtoCAForm = widget.dtoWhenEdition ?? DTOCAForm();
       // To switch from circular indicator to process widgets
-      setState(() {_isDTOAssetLoading = false;});      
+      setState(() {_dtoAssetLoading = false;});      
     }
+    // Loading from Json
     else
     {
-      // Getting the data map from the Json file
+      // Getting a data map from a Json file (Todo: to keep or to clean)
       final jsonMap = await DTOCAForm.jsonDataMapFromAsset(dtoAssetPathToJson);
       setState(
         () 
@@ -95,7 +97,7 @@ class CAProcessState extends State<CAProcess>
           // Loading the DTO data from the data map
           _dtoCAForm = DTOCAForm.fromJson(jsonMap);
           // To switch from circular indicator to process widgets
-          _isDTOAssetLoading = false;
+          _dtoAssetLoading = false;
         }
       );
     }
@@ -207,7 +209,7 @@ class CAProcessState extends State<CAProcess>
     {_scrollbarThickness = 15;}
 
     return 
-    _isDTOAssetLoading
+    _dtoAssetLoading
     // Circular indicator if asset is loading
     ? const CircularProgressIndicator()
     // else loading process widgets

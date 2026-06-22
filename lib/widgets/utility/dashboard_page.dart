@@ -94,9 +94,11 @@ class DashboardPageState extends State<DashboardPage>
     _filteredSessions!.clear();
     _filteredSessions!.addAll(retrievedSessionData);
 
+    if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _allSessions: : $_allSessions");
+
     // Data is not sorted by date by default, and needs sorting
     await sortSessionByDateAddJm(list: _filteredSessions!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
-    
+        
     // Re-build to display the sessions
     setState(() {
       _isDataLoading = false;
