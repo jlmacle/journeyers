@@ -33,11 +33,11 @@ class GPSPageState extends State<GPSPage>
 
   _getPreferences() async 
   {
-    if (runtimeDataDebug) pu.printd("RuntimeData: getPreferences()");
+    if (runtimeDataDebug) pu.printd("Runtime Data: getPreferences()");
     _wasGPSSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
     setState(() {_preferencesLoading = false;});
-    if (runtimeDataDebug) pu.printd("RuntimeData: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");
+    if (runtimeDataDebug) pu.printd("Runtime Data: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────

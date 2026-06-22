@@ -64,9 +64,9 @@ class _GPSappState extends State<GPSapp>
   {
     if (newLocale != _currentLocale) 
     {
-      setState(() {
-        if (runtimeDataDebug) pu.printd("RuntimeData: _setLocale: _currentLocale: $newLocale");
+      setState(() {        
         _currentLocale = newLocale;
+        if (runtimeDataDebug) pu.printd("Runtime Data: Main.dart: _setLocale: new locale: $newLocale");
       });
     }
   }
