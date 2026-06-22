@@ -31,7 +31,7 @@ class GPSPageState extends State<GPSPage>
   bool _preferencesLoading = true;
   bool? _wasGPSSessionDataSaved;
 
-  getPreferences() async 
+  _getPreferences() async 
   {
     if (runtimeDataDebug) pu.printd("RuntimeData: getPreferences()");
     _wasGPSSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
@@ -44,13 +44,14 @@ class GPSPageState extends State<GPSPage>
 
   // Method used to refresh the page from group problem-solving process page to dashboard, 
   // after process data has been saved
-  void onDataSaved() 
+  void _onDataSaved() 
   {
     setState(() {
       _wasGPSSessionDataSaved = true;
     });
   }
 
+  // Used in DashboardDeletionByBulk.
   // Method used to refresh the page from dashboard to group problem-solving process page, 
   // after all session files have been deleted
   void onAllSessionFilesDeleted() 
@@ -63,12 +64,12 @@ class GPSPageState extends State<GPSPage>
   }
   
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
-  FocusNode gpsPageFocusNode = .new();
+  final FocusNode _gpsPageFocusNode = .new();
 
   @override
   void dispose() 
   {
-    gpsPageFocusNode.dispose();
+    _gpsPageFocusNode.dispose();
     super.dispose();
   } 
 
@@ -76,7 +77,7 @@ class GPSPageState extends State<GPSPage>
   void initState() 
   {
     super.initState();
-    getPreferences();
+    _getPreferences();
   }  
 
   @override
@@ -135,8 +136,8 @@ class GPSPageState extends State<GPSPage>
                 child: 
                 Focus
                 (
-                  focusNode: gpsPageFocusNode,
-                  child: GPSProcess(key: gpsProcessKey, parentCallbackFunctionToRefreshTheGPSPage: onDataSaved),
+                  focusNode: _gpsPageFocusNode,
+                  child: GPSProcess(key: gpsProcessKey, parentCallbackFunctionToRefreshTheGPSPage: _onDataSaved),
                 ),
               ),
             )
