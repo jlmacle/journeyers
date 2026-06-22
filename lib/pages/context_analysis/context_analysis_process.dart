@@ -30,19 +30,19 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 class CAProcess extends StatefulWidget 
 {
   /// A boolean used to state if an edition is in progress.
-  final bool sessionDataEdition;
+  final bool sessionDataBeingEdited;
 
   /// A DTOCAForm instance used at initState time.
-  final DTOCAForm? dtoOnInitState;
+  final DTOCAForm? dtoWhenEdition;
 
   /// The file name value at edition time.
-  final String fileNameWhenEdition;
+  final String fileNameWhenEditionWithoutExtension;
 
   /// The title value at edition time.
   final String titleWhenEdition;
 
   /// The keywords value at edition time.
-  final Set<String> keywordsForEdition;
+  final Set<String> keywordsWhenEdition;
 
   /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback caPageCallbackFunctionToRefreshThePage;
@@ -52,11 +52,11 @@ class CAProcess extends StatefulWidget
 
   const CAProcess({
     super.key,
-    this.sessionDataEdition = false,
-    this.dtoOnInitState,
-    this.fileNameWhenEdition = "",
+    this.sessionDataBeingEdited = false,
+    this.dtoWhenEdition,
+    this.fileNameWhenEditionWithoutExtension = "",
     this.titleWhenEdition = "",
-    this.keywordsForEdition = const {},
+    this.keywordsWhenEdition = const {},
     required this.caPageCallbackFunctionToRefreshThePage,
     required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
     });
@@ -81,7 +81,7 @@ class CAProcessState extends State<CAProcess>
     if (dtoAssetPathToJson == "") 
     {
       // widget.dtoOnInitState is nullable
-      _dtoCAForm = widget.dtoOnInitState ?? DTOCAForm();
+      _dtoCAForm = widget.dtoWhenEdition ?? DTOCAForm();
       // To switch from circular indicator to process widgets
       setState(() {_isDTOAssetLoading = false;});      
     }
@@ -183,7 +183,7 @@ class CAProcessState extends State<CAProcess>
     // (code to clean)
     _loadDTO(dtoAssetPathToJson: '');
     //_loadDTO(dtoAssetPathToJson: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');      
-    analysisKeywords = widget.keywordsForEdition.toSet();
+    analysisKeywords = widget.keywordsWhenEdition.toSet();
     if (editDebug) pu.printd("Editing: CAProcess: initState: analysisKeywords: $analysisKeywords");    
     
     // Listeners to know when some elements receive focus
@@ -243,7 +243,7 @@ class CAProcessState extends State<CAProcess>
             // Text field for the analysis title
             CATitleDeclaration
             (
-              analysisTitleAutofocused: widget.sessionDataEdition,
+              analysisTitleAutofocused: widget.sessionDataBeingEdited,
               analysisTitleWhenEdition: widget.titleWhenEdition,
               onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
             ),
@@ -251,7 +251,7 @@ class CAProcessState extends State<CAProcess>
             // Keywords
             CAKeywordsDeclaration
             (
-              keywordsForEdition: widget.keywordsForEdition,
+              keywordsForEdition: widget.keywordsWhenEdition,
               onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)
             ),
             
@@ -304,7 +304,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameMobilePlatforms
                         (
-                          editedFileName: widget.fileNameWhenEdition,
+                          editedFileName: widget.fileNameWhenEditionWithoutExtension,
                           fileExtension: _fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
