@@ -50,9 +50,10 @@ class _HomePageState extends State<HomePage>
       {
         // Switches the focusability of the bottom bar items
         setState(() {_bottomNavigationItemsFocusable = boolValue;});
-        if (accessibilityDebug) pu.printd("Accessibility: HomePage: _areBottomNavigationItemsFocusable: $_bottomNavigationItemsFocusable");
+        if (accessibilityDebug) pu.printd("Accessibility: HomePage: _bottomNavigationItemsFocusable: $_bottomNavigationItemsFocusable");
       }
     ),
+    
     GPSPage
     (
       key: gpsPageKey
