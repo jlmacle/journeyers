@@ -86,16 +86,18 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
 class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWithSanitizedAndPaddedTextField> 
 {
   late bool _isChecked;
-  
-  // To store the text field value if the checkbox is unchecked
-  late String _textFieldValueFromCheckbox;
+
   // The default checkbox style
   TextStyle _checkboxTextStyle = unselectedCheckboxTextStyle;
+  
+  // To store the text field value if the checkbox is unchecked
+  late String _textFieldValue;
+  
 
   @override
   void initState() {
     _isChecked = widget.checkboxStartValue;
-    _textFieldValueFromCheckbox = widget.textFieldStartValue;
+    _textFieldValue = widget.textFieldStartValue;
     super.initState();
   }
 
@@ -134,7 +136,7 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
           (
             stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
             // Getting the start value from the checkbox, in case the text field would have been removed from the tree
-            textFieldStartValue: _textFieldValueFromCheckbox,
+            textFieldStartValue: _textFieldValue,
             textFieldStyle: analysisTextFieldStyle,
             textFieldHint: widget.textFieldHint,
             textFieldHintStyle: analysisTextFieldHintStyle,
@@ -146,7 +148,7 @@ class CACheckboxWithSanitizedAndPaddedTextFieldState extends State<CACheckboxWit
               (String text) 
               {
                 widget.onTextFieldValueChangedCallbackFunction(text);
-                setState(() {_textFieldValueFromCheckbox = text;});
+                setState(() {_textFieldValue = text;});
               },
           ),
           
