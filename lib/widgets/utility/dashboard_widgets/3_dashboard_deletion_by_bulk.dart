@@ -92,10 +92,10 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     widget.sessionsSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();    
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar

@@ -8,16 +8,16 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 class DashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available session data.
-  final List<dynamic>? allSessions;
+  final List<dynamic>? sessionsAll;
 
   /// List containing all filtered session data.
-  final List<dynamic>? filteredSessions;
+  final List<dynamic>? sessionsFiltered;
 
   /// List containing the keywords used by the sessions.
-  final List<String> usedKeywords;
+  final List<String> keywordsAll;
 
   /// List containing the selected keywords.
-  final List<String> selectedKeywords;
+  final List<String> keywordsSelected;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -25,10 +25,10 @@ class DashboardFilteringByKeywords extends StatefulWidget
   const DashboardFilteringByKeywords
   ({
     super.key,
-    required this.allSessions,
-    required this.filteredSessions,
-    required this.usedKeywords,
-    required this.selectedKeywords,
+    required this.sessionsAll,
+    required this.sessionsFiltered,
+    required this.keywordsAll,
+    required this.keywordsSelected,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
   });
 
@@ -40,29 +40,29 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
 {  
   // Used in DashboardPage.
   // Method used to filter the session data by keywords.
-  Future<void> applyFilteringByKeywords() async
+  Future<void> keywordsApplyFiltering() async
   {
-    if (widget.selectedKeywords.isEmpty) 
+    if (widget.keywordsSelected.isEmpty) 
     {
       // Working with the list while keeping the same reference
-      widget.filteredSessions!.clear();
-      widget.filteredSessions!.addAll(widget.allSessions!);
+      widget.sessionsFiltered!.clear();
+      widget.sessionsFiltered!.addAll(widget.sessionsAll!);
     } 
     else 
     {
       List <dynamic> sortingResults =
-      widget.allSessions!.where
+      widget.sessionsAll!.where
       ( 
         (session) 
         {
           final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>();
-          return widget.selectedKeywords.every((k) => sessionKeywords.contains(k));
+          return widget.keywordsSelected.every((k) => sessionKeywords.contains(k));
         }
       ).toList();
       
       // Working with the list while keeping the same reference
-      widget.filteredSessions!.clear();
-      widget.filteredSessions!.addAll(sortingResults);
+      widget.sessionsFiltered!.clear();
+      widget.sessionsFiltered!.addAll(sortingResults);
     }
 
     // Refreshing the sessions list
@@ -70,31 +70,31 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   }
 
   // Method used to add/remove a keyword from the filtering criteria
-  Future<void> _toggleKeywordSelection(String keyword) async
+  Future<void> _keywordToggleSelection(String keyword) async
   {
-     if (widget.selectedKeywords.contains(keyword)) 
+     if (widget.keywordsSelected.contains(keyword)) 
     {
-      widget.selectedKeywords.remove(keyword);
+      widget.keywordsSelected.remove(keyword);
     } 
     else 
     {
-      widget.selectedKeywords.add(keyword);
+      widget.keywordsSelected.add(keyword);
     }
 
     // Applying the filtering by keywords
-    await applyFilteringByKeywords();
+    await keywordsApplyFiltering();
   }
 
   // Used in DashboardPage.
   // Method used to refresh the keywords list after deletion of session data.
-  void refreshKeywordsAfterSessionDeletion() 
+  void keywordsRefreshAfterSessionDeletion() 
   {
     // if no sessions left, nothing to do
-    if (widget.allSessions == null) return;
+    if (widget.sessionsAll == null) return;
     
     // Re-building the keywords' list from the remaining session data
     Set<String> remainingKws = {};
-    for (var sessionData in widget.allSessions!) 
+    for (var sessionData in widget.sessionsAll!) 
     {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
       remainingKws.addAll(kws.cast<String>());
@@ -106,10 +106,10 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
     (
       () 
       {
-        widget.usedKeywords.clear();
-        widget.usedKeywords.addAll(remainingKws);
+        widget.keywordsAll.clear();
+        widget.keywordsAll.addAll(remainingKws);
         // Removing selected filters if the keyword no longer exists
-        widget.selectedKeywords.removeWhere((kw) => !remainingKws.contains(kw));
+        widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
       }
     );
   }
@@ -125,7 +125,7 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
             spacing: 8.0,
             children: 
             (
-              widget.usedKeywords.toList()
+              widget.keywordsAll.toList()
               ..sort
               (
                 (a, b) 
@@ -144,8 +144,8 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
                 return FilterChip
                 (
                   label: Text(kw),
-                  onSelected: (_) async => await _toggleKeywordSelection(kw),
-                  selected: widget.selectedKeywords.contains(kw)
+                  onSelected: (_) async => await _keywordToggleSelection(kw),
+                  selected: widget.keywordsSelected.contains(kw)
                 );
               }
             ).toList(),

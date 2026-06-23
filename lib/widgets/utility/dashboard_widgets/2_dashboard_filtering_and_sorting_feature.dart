@@ -20,7 +20,7 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   final List<dynamic>? sessionsFiltered;
 
   /// List containing the keywords used by the sessions.
-  final List<String> keywordsUsed;
+  final List<String> keywordsAll;
 
   /// List containing the selected keywords.
   final List<String> keywordsSelected;
@@ -37,7 +37,7 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
     required this.dashboardContext,
     required this.sessionsAll,
     required this.sessionsFiltered,
-    required this.keywordsUsed,
+    required this.keywordsAll,
     required this.keywordsSelected,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
     required this.dashboardFilteringByKeywordsKey
@@ -100,10 +100,10 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
         DashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          allSessions: widget.sessionsAll, 
-          filteredSessions: widget.sessionsFiltered, 
-          usedKeywords: widget.keywordsUsed,
-          selectedKeywords: widget.keywordsSelected,
+          sessionsAll: widget.sessionsAll, 
+          sessionsFiltered: widget.sessionsFiltered, 
+          keywordsAll: widget.keywordsAll,
+          keywordsSelected: widget.keywordsSelected,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
         ),  
       ],
