@@ -23,10 +23,10 @@ class GPSIdeasList extends StatefulWidget
 class _GPSIdeasListState extends State<GPSIdeasList> {
 
   // Data related to deleting texts from the new list
+  bool _ideasAreSomeForDeletion = false;  
   List<String> _ideasSelectedForDeletion = [];
   final List<int> _ideasSelectedForDeletionIndexes = [];
-  late final List<String> _ideasEnteredList;
-  bool _ideasAreSomeForDeletion = false;  
+  late final List<String> _ideasEnteredList;  
   final _ideaNewTfec = TextEditingController();
 
 
