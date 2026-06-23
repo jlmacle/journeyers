@@ -72,10 +72,10 @@ class ListDashboardState extends State<ListDashboard>
   bool _isDataLoading = true;
 
   // All the sessions available
-  List<dynamic> _allListsData = [];
+  List<dynamic> _listsDataAll = [];
 
   // _filteredLists is what is used by build()
-  List<dynamic> _filteredListsData = [];
+  List<dynamic> _listsDataFiltered = [];
 
   // Method used to retrieve the session data, to get the list of used keywords, 
   // and the list of all sessions available
@@ -92,19 +92,19 @@ class ListDashboardState extends State<ListDashboard>
     // Reverse sorting to have the most recent label first
     for (var label in labels.reversed)
     {
-      var listData = _listsDB.loadListDataByListLabelSync(label: label, dataStructure: this._listData);
-      _allListsData.add(listData);
+      var listData = _listsDB.loadListDataByListLabelSync(label: label, dataStructure: _listData);
+      _listsDataAll.add(listData);
     }
 
-    if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_allListsData");
+    if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_listsDataAll");
     
     // Getting the used keywords from the retrieved data
-    _keywordsAll = await _getUsedKeywords(_allListsData);
+    _keywordsAll = await _keywordsGetAll(_listsDataAll);
 
 
     // _filteredLists is used in build
-    _filteredListsData.clear();
-    _filteredListsData.addAll(_allListsData);
+    _listsDataFiltered.clear();
+    _listsDataFiltered.addAll(_listsDataAll);
 
     // Data is not sorted by date by default, and needs sorting
     // await sortSessionByDateAddJm(list: _filteredListsData, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
@@ -120,8 +120,8 @@ class ListDashboardState extends State<ListDashboard>
   void initState() 
   {
     super.initState();
-    _allListsData = [];
-    _filteredListsData = [];
+    _listsDataAll = [];
+    _listsDataFiltered = [];
     // Circular indicator until data is retrieved
     _getStoredListsData();
   }
@@ -134,7 +134,7 @@ class ListDashboardState extends State<ListDashboard>
   final List<String> _keywordsSelected = [];
 
   // Method used to get the list of keywords present in a session data
-  Future<List<String>> _getUsedKeywords(List<dynamic> listOfListData) async 
+  Future<List<String>> _keywordsGetAll(List<dynamic> listOfListData) async 
   {
 
     Set<String> kwSet = {};
@@ -152,8 +152,8 @@ class ListDashboardState extends State<ListDashboard>
     _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
   }
 
-  // Method used to update the list keywords
-  Future<void> _updateListsKeywords(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
+  // Method used to update the list keywords in the database
+  Future<void> _updateKeywordsInDB(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
   {
     // Updating listData with the new keywords
     listData[itemKeywordsKey] = updatedKeywords.toList();
@@ -173,19 +173,19 @@ class ListDashboardState extends State<ListDashboard>
   }
     
   // Method used after keywords update
-  Future<void> _updateKeywords({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
+  Future<void> _updateListKeywords({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
   {
     if (listDebug) pu.printd("List debug: updateKeywords: updatedKeywords: $updatedItems");
     // To accomodate widget testing
     if (listKey != null)
     {
       // Updating the DB
-      await _updateListsKeywords(listKey, updatedItems, listData);            
+      await _updateKeywordsInDB(listKey, updatedItems, listData);            
     }    
   }
 
   // Method used to update the list participants
-  Future<void> _updateListParticipants(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
+  Future<void> _updateParticipantsInDB(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
   {
 
     // Updating listData with the new participants
@@ -213,30 +213,30 @@ class ListDashboardState extends State<ListDashboard>
     if (listKey != null)
     {
       // Updating the DB
-      await _updateListParticipants(listKey, updatedItems, listData);            
+      await _updateParticipantsInDB(listKey, updatedItems, listData);            
     }    
   }
 
   
   // ─── DELETION OF SINGLE LIST related data and methods ───────────────────────────────────────
-  final List<String> _keysOfListsSelectedForDeletion = [];  
+  final List<String> _listsSelectedForDeletionKeys = [];  
 
   // Method used to delete a single session data from the session list action icons
-  Future<void> _deleteSelectedSession(String listKey) async
+  Future<void> _selectedSessionDelete(String listKey) async
   {
     // Updating the DB
     await _listsDB.removeListData([listKey]);
 
     // Updating the _allListsData list
-    _allListsData.removeWhere((listData) => listData[itemKey] == listKey); 
+    _listsDataAll.removeWhere((listData) => listData[itemKey] == listKey); 
 
     // Updating the _filteredListsData list used by the UI
-    _filteredListsData.removeWhere((listData) => listData[itemKey] == listKey);     
+    _listsDataFiltered.removeWhere((listData) => listData[itemKey] == listKey);     
               
     // Updating the keys of the lists selected for bulk deletion
-    _keysOfListsSelectedForDeletion.removeWhere
+    _listsSelectedForDeletionKeys.removeWhere
     (
-      (_) => _keysOfListsSelectedForDeletion.contains(listKey)
+      (_) => _listsSelectedForDeletionKeys.contains(listKey)
     );
 
     // Updating the keywords list
@@ -250,7 +250,7 @@ class ListDashboardState extends State<ListDashboard>
     (const SnackBar(content: Text("Selected list deleted.")));
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
-    if (_allListsData.isEmpty) 
+    if (_listsDataAll.isEmpty) 
     {
       // resetWasSessionDataSavedStatus
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
@@ -266,16 +266,16 @@ class ListDashboardState extends State<ListDashboard>
      }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
-  final TextEditingController _titleController = .new();
+  final TextEditingController _titleTFec = .new();
 
   @override
   void dispose() {
-    _titleController.dispose();
+    _titleTFec.dispose();
     super.dispose();
   }
 
   // Method used to update the session title
-  Future<void> updateListLabel(String listKey, String newLabel, Map<String, dynamic> listData) async 
+  Future<void> _listLabelUpdate(String listKey, String newLabel, Map<String, dynamic> listData) async 
   {
     // Updating listData withe new label
     listData[itemTextKey] = newLabel;
@@ -333,7 +333,7 @@ class ListDashboardState extends State<ListDashboard>
                   child: ListDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    listsAll: _allListsData, listsFiltered: _filteredListsData,
+                    listsAll: _listsDataAll, listsFiltered: _listsDataFiltered,
                     keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
@@ -345,10 +345,10 @@ class ListDashboardState extends State<ListDashboard>
                   child: ListDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    listsAll: _allListsData,
-                    listsFiltered: _filteredListsData,
-                    areListsForDeletion: _keysOfListsSelectedForDeletion.isNotEmpty,
-                    listsSelectedForDeletionKeys: _keysOfListsSelectedForDeletion,
+                    listsAll: _listsDataAll,
+                    listsFiltered: _listsDataFiltered,
+                    areListsForDeletion: _listsSelectedForDeletionKeys.isNotEmpty,
+                    listsSelectedForDeletionKeys: _listsSelectedForDeletionKeys,
                     dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
                   )
                 ),
@@ -359,7 +359,7 @@ class ListDashboardState extends State<ListDashboard>
                   child: Divider()                       
                 ), 
                 
-                if (_filteredListsData.isEmpty)
+                if (_listsDataFiltered.isEmpty)
                   SliverFillRemaining(
                     hasScrollBody: false,
                     child: Center(
@@ -391,19 +391,19 @@ class ListDashboardState extends State<ListDashboard>
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final listData = _filteredListsData[index];
+                        final listData = _listsDataFiltered[index];
     
                         return ListOfListsItem(
                           listMetadata: listData,
                           listIndex: index,
                           dashboardContext: widget.dashboardContext,
-                          isChecked: _keysOfListsSelectedForDeletion.contains(listData[itemKey]),
+                          isChecked: _listsSelectedForDeletionKeys.contains(listData[itemKey]),
                           onCheckboxChangedCallbackFunction: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                _keysOfListsSelectedForDeletion.add(listData[itemKey]);
+                                _listsSelectedForDeletionKeys.add(listData[itemKey]);
                               } else {
-                                _keysOfListsSelectedForDeletion.remove(listData[itemKey]);
+                                _listsSelectedForDeletionKeys.remove(listData[itemKey]);
                               }
                             });
                           },
@@ -414,13 +414,13 @@ class ListDashboardState extends State<ListDashboard>
                           ),
                           onEditPressedCallbackFunction: () {},
                           onEditSessionDataCallbackFunction: ({required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required keywordsWhenEdition, required bool sessionDataBeingEdited}) {},
-                          onKeywordsUpdatedCallbackFunction: _updateKeywords,
+                          onKeywordsUpdatedCallbackFunction: _updateListKeywords,
                           onParticipantsUpdatedCallbackFunction: _updateParticipants,
-                          onDeleteCallbackFunction: () async => await _deleteSelectedSession(listData[itemKey]),
+                          onDeleteCallbackFunction: () async => await _selectedSessionDelete(listData[itemKey]),
                           onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
                         );
                       },
-                      childCount: _filteredListsData.length,
+                      childCount: _listsDataFiltered.length,
                     ),
                   ),
                 ),
@@ -434,7 +434,7 @@ class ListDashboardState extends State<ListDashboard>
   
   void _showTitleEditSheet(String title, String listKey, int listIndex) 
   {
-    _titleController.text = title; // Syncing current title to the field
+    _titleTFec.text = title; // Syncing current title to the field
 
     showModalBottomSheet(
       context: context,
@@ -449,7 +449,7 @@ class ListDashboardState extends State<ListDashboard>
           builder: (context, setState) {          
 
             Future<void> onConfirm() async {              
-              final label = _titleController.text.trim();
+              final label = _titleTFec.text.trim();
 
               if (label.isEmpty) {
                 setState(() {
@@ -479,7 +479,7 @@ class ListDashboardState extends State<ListDashboard>
                 TextField
                 (
                   key: const ValueKey('listEditField'),
-                  controller: _titleController,
+                  controller: _titleTFec,
                   autofocus: true,
                   decoration: InputDecoration
                   (
