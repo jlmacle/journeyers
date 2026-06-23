@@ -32,8 +32,8 @@ void main() {
         body: DashboardDeletionByBulk(
           dashboardContext: context,
           areSessionsForDeletion: areSessionsForDeletion,
-          allSessions: allSessions!,
-          filteredSessions: filteredSessions!,
+          sessionsAll: allSessions!,
+          sessionsFiltered: filteredSessions!,
           sessionsSelectedForDeletion: sessionsSelected!,
           dashboardCallbackFunctionToRefreshTheSessionsList: () {},
         ),
