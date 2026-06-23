@@ -8,12 +8,12 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 class GPSNewIdea extends StatefulWidget 
 {
   /// A callback function used to update the list of ideas.
-  final ValueChanged<String> ideaOnAddedCallbackFunction;
+  final ValueChanged<String> newIdeaOnAddedCallbackFunction;
 
   const GPSNewIdea
   ({
     super.key,
-    required this.ideaOnAddedCallbackFunction
+    required this.newIdeaOnAddedCallbackFunction
   });
 
   @override
@@ -23,24 +23,24 @@ class GPSNewIdea extends StatefulWidget
 class _GPSNewIdeaState extends State<GPSNewIdea> 
 {
   // TextEditingController for entering a new idea
-  final TextEditingController _ideaTfec = .new();
+  final TextEditingController _newIdeaTfec = .new();
   // FocusNode used to keep the focus on the new idea field after an idea has been entered
-  final FocusNode _ideaFocusNode = FocusNode();
+  final FocusNode _newIdeaFocusNode = FocusNode();
 
   // Method to handle adding an idea to the list
-  void _ideaSubmit() {
-    if (_ideaTfec.text.trim().isNotEmpty) {
+  void _newIdeaSubmit() {
+    if (_newIdeaTfec.text.trim().isNotEmpty) {
       // Adding the new idea to the list
-      widget.ideaOnAddedCallbackFunction(_ideaTfec.text.trim());
-      _ideaTfec.clear();
+      widget.newIdeaOnAddedCallbackFunction(_newIdeaTfec.text.trim());
+      _newIdeaTfec.clear();
     }
-    _ideaFocusNode.unfocus();
+    _newIdeaFocusNode.unfocus();
   }
 
   @override
   void dispose() 
   {
-    _ideaTfec.dispose();
+    _newIdeaTfec.dispose();
     super.dispose();
   }
 
@@ -54,19 +54,19 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
             children: [
               Expanded(
                 child: TextField(
-                  focusNode: _ideaFocusNode,
-                  controller: _ideaTfec,
+                  focusNode: _newIdeaFocusNode,
+                  controller: _newIdeaTfec,
                   decoration: const InputDecoration(
                     hintText: newIdeaTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   ),
-                  onSubmitted: (_) => _ideaSubmit(),
+                  onSubmitted: (_) => _newIdeaSubmit(),
                 ),
               ),
               const SizedBox(width: 8),
               IconButton(
                 icon: const Icon(Icons.send, color: navyBlue),
-                onPressed: _ideaSubmit,
+                onPressed: _newIdeaSubmit,
               ),
             ],
           ),
