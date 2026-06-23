@@ -80,7 +80,7 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                   // Sorting by date
                   DashboardSortingByDate
                   (
-                    sessionsToSort: widget.sessionsFiltered,
+                    filteredSessionsToSort: widget.sessionsFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                 ],
