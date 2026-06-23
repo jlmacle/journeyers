@@ -321,8 +321,8 @@ class DashboardPageState extends State<DashboardPage>
                   child: DashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    allSessions: _allSessions, filteredSessions: _filteredSessions,
-                    usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
+                    sessionsAll: _allSessions, sessionsFiltered: _filteredSessions,
+                    keywordsUsed: _usedKeywords, keywordsSelected: _selectedKeywords,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),
