@@ -53,7 +53,7 @@ class ListDashboard extends StatefulWidget
 class ListDashboardState extends State<ListDashboard> 
 {
   // The DB
-  final _textListsDB = ListsDB();
+  final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
   final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
@@ -82,17 +82,17 @@ class ListDashboardState extends State<ListDashboard>
   Future<void> _getStoredListsData() async 
   {
     // Retrieving data 
-    _listData = await _textListsDB.loadDataStructure();
+    _listData = await _listsDB.loadDataStructure();
 
     // Getting the list labels
-    final labels = await _textListsDB.getSortedLabels(dataStructure: _listData);
+    final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
     if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
     for (var label in labels.reversed)
     {
-      var listData = _textListsDB.loadListDataByListLabelSync(label: label, dataStructure: this._listData);
+      var listData = _listsDB.loadListDataByListLabelSync(label: label, dataStructure: this._listData);
       _allListsData.add(listData);
     }
 
@@ -159,7 +159,7 @@ class ListDashboardState extends State<ListDashboard>
     listData[itemKeywordsKey] = updatedKeywords.toList();
 
     // Updating the storage
-    await _textListsDB.updateListData(listKey, listData);
+    await _listsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
     _keywordsRefreshAfterSessionDeletion();
@@ -189,10 +189,10 @@ class ListDashboardState extends State<ListDashboard>
   {
 
     // Updating listData with the new participants
-    listData[subItemsDataListKey] = await _textListsDB.updateParticipants(updatedParticipants, listData);    
+    listData[subItemsDataListKey] = await _listsDB.updateParticipants(updatedParticipants, listData);    
 
     // Updating the storage
-    await _textListsDB.updateListData(listKey, listData);
+    await _listsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
     _keywordsRefreshAfterSessionDeletion();
@@ -225,7 +225,7 @@ class ListDashboardState extends State<ListDashboard>
   Future<void> _deleteSelectedSession(String listKey) async
   {
     // Updating the DB
-    await _textListsDB.removeListData([listKey]);
+    await _listsDB.removeListData([listKey]);
 
     // Updating the _allListsData list
     _allListsData.removeWhere((listData) => listData[itemKey] == listKey); 
@@ -281,7 +281,7 @@ class ListDashboardState extends State<ListDashboard>
     listData[itemTextKey] = newLabel;
 
     // Updating the storage
-    await _textListsDB.updateListData(listKey, listData);
+    await _listsDB.updateListData(listKey, listData);
 
     // Updating the local UI state
     setState(() {
@@ -394,8 +394,8 @@ class ListDashboardState extends State<ListDashboard>
                         final listData = _filteredListsData[index];
     
                         return ListOfListsItem(
-                          listData: listData,
-                          index: index,
+                          listMetadata: listData,
+                          listIndex: index,
                           dashboardContext: widget.dashboardContext,
                           isChecked: _keysOfListsSelectedForDeletion.contains(listData[itemKey]),
                           onCheckboxChangedCallbackFunction: (bool? value) {

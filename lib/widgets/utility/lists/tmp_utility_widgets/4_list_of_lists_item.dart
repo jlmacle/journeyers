@@ -15,17 +15,17 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_exter
 /// A widget handling a list data.
 class ListOfListsItem extends StatefulWidget 
 {
-  /// The session metadata.
-  final Map<String, dynamic> listData;
-
-  /// The index within the list.
-  final int index;
-
-  /// Boolean to indicate if the checkbox is checked.
-  final bool isChecked;
-
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
+
+  /// The session metadata.
+  final Map<String, dynamic> listMetadata;
+
+  /// The index within the list.
+  final int listIndex;
+
+  /// Boolean to indicate if the checkbox is checked.
+  final bool isChecked;  
 
   /// A callback function called when the checkbox is checked/unchecked.
   final ValueChanged<bool?> onCheckboxChangedCallbackFunction;
@@ -53,8 +53,8 @@ class ListOfListsItem extends StatefulWidget
 
   const ListOfListsItem({
     super.key,
-    required this.listData,
-    required this.index,
+    required this.listMetadata,
+    required this.listIndex,
     required this.isChecked,
     required this.dashboardContext,
     required this.onCheckboxChangedCallbackFunction,
@@ -73,17 +73,17 @@ class ListOfListsItem extends StatefulWidget
 
 class _ListOfListsItemState extends State<ListOfListsItem> 
 {
-  final _textListsDB = ListsDB();
-  List<String> _currentParticipants = [];
-
-  final TextEditingController _kwsEditTec = .new();
-  final TextEditingController _participantsEditTec = .new();
+  final _listsDB = ListsDB();
+  List<String> _participantsCurrent = [];
+  final TextEditingController _participantsEditTfec = .new();
+  final TextEditingController _kwsEditTfec = .new();
+  
 
   // To clean
   Future<void> _onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = _kwsEditTec.text
+    final Set<String> updatedKeywords = _kwsEditTfec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -101,14 +101,14 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   Future<void> _onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedParticipants = _participantsEditTec.text
+    final Set<String> updatedParticipants = _participantsEditTfec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toSet();
 
     // Updating _currentParticipants for list loading
-    _currentParticipants = updatedParticipants.toList();
+    _participantsCurrent = updatedParticipants.toList();
 
     if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedParticipants: $updatedParticipants");
     // Calling the parent callback for state 
@@ -121,17 +121,17 @@ class _ListOfListsItemState extends State<ListOfListsItem>
  @override
   void initState() {
     List<Map<String, dynamic>> subItemsDataList =
-    ((widget.listData[subItemsDataListKey]) as List)
+    ((widget.listMetadata[subItemsDataListKey]) as List)
         .cast<Map<String, dynamic>>();
-    Map<String, String> namesKeysMap = _textListsDB.getNamesKeys(subItemsDataList);
-    _currentParticipants =  namesKeysMap.keys.toList();
+    Map<String, String> namesKeysMap = _listsDB.getNamesKeys(subItemsDataList);
+    _participantsCurrent =  namesKeysMap.keys.toList();
     super.initState();
   }
  
   @override void dispose() 
   {
-    _kwsEditTec.dispose();
-    _participantsEditTec.dispose();
+    _kwsEditTfec.dispose();
+    _participantsEditTfec.dispose();
     super.dispose();
   }
 
@@ -159,11 +159,11 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   Widget build(BuildContext context) 
   {
     // Gets the title
-    final String displayTitle = widget.listData[itemTextKey];
+    final String displayTitle = widget.listMetadata[itemTextKey];
 
     // Sorting keywords for display
     final List<String> sortedKeywords = 
-    List<String>.from(widget.listData[itemKeywordsKey])..sort();
+    List<String>.from(widget.listMetadata[itemKeywordsKey])..sort();
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -177,7 +177,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: ValueKey('checkbox-${widget.index}'),
+                  key: ValueKey('checkbox-${widget.listIndex}'),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
@@ -194,7 +194,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             onTap: widget.onEditTitleCallbackFunction,
                             child: Text(
                               displayTitle,
-                              key: ValueKey('session-title-${widget.index}'),
+                              key: ValueKey('session-title-${widget.listIndex}'),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
@@ -211,19 +211,19 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                                 (
                                   context: context,
                                   dashboardContext: widget.dashboardContext,                          
-                                  currentParticipants: _currentParticipants,
-                                  listKey: widget.listData[itemKey],
-                                  participantsTec: _participantsEditTec,
+                                  currentParticipants: _participantsCurrent,
+                                  listKey: widget.listMetadata[itemKey],
+                                  participantsTec: _participantsEditTfec,
                                   onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
                                   onParticipantsUpdated: _onParticipantsUpdated,
-                                  listData: widget.listData
+                                  listData: widget.listMetadata
                                 ),
                         child: Wrap
                         (
                           spacing: 8.0,
                           children: 
                           (
-                            _getParticipants(widget.listData)
+                            _getParticipants(widget.listMetadata)
                             ..sort
                             (
                               (a, b) 
@@ -241,7 +241,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             {
                               return                  
                               Container(
-                                key: ValueKey('session-participants-container-${widget.index}-${participant}'),
+                                key: ValueKey('session-participants-container-${widget.listIndex}-${participant}'),
                                 decoration: BoxDecoration
                                 (
                                   color: Colors.transparent,  
@@ -265,16 +265,16 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                         (
                           context: context,
                           dashboardContext: widget.dashboardContext,                          
-                          currentKeywords: widget.listData[itemKeywordsKey],
-                          listKey: widget.listData[itemKey],
-                          kwsEditController: _kwsEditTec,
+                          currentKeywords: widget.listMetadata[itemKeywordsKey],
+                          listKey: widget.listMetadata[itemKey],
+                          kwsEditController: _kwsEditTfec,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                           onKeywordsUpdated: _onKeywordsUpdated,
-                          listData: widget.listData
+                          listData: widget.listMetadata
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
-                          key: ValueKey('session-keywords-${widget.index}'),
+                          key: ValueKey('session-keywords-${widget.listIndex}'),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -293,12 +293,12 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                   onPressed: () => _showKeywordsEditSheet(
                     context: context,
                     dashboardContext: widget.dashboardContext,
-                    currentKeywords: widget.listData[itemKeywordsKey],
-                    listKey: widget.listData[itemKey],
-                    kwsEditController: _kwsEditTec,
+                    currentKeywords: widget.listMetadata[itemKeywordsKey],
+                    listKey: widget.listMetadata[itemKey],
+                    kwsEditController: _kwsEditTfec,
                     onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                     onKeywordsUpdated: _onKeywordsUpdated,
-                    listData: widget.listData,
+                    listData: widget.listMetadata,
                   ),
                   tooltip: keywordsTooltipLabel,
                 ),
@@ -310,8 +310,8 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                       child: const Text(loadingButtonLabel),
                       onPressed: () 
                       {
-                        if (listDebug) pu.printd("List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_currentParticipants");
-                        widget.onParticipantsLoadedCallbackFunction(_currentParticipants);
+                        if (listDebug) pu.printd("List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_participantsCurrent");
+                        widget.onParticipantsLoadedCallbackFunction(_participantsCurrent);
                         // To close the lists display
                         Navigator.pop(context);
                         // To close the list loading/creation menu
@@ -323,7 +323,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 
                 // Right icon — pinned to row end
                 IconButton(
-                  key: ValueKey('session-delete-${widget.index}'),
+                  key: ValueKey('session-delete-${widget.listIndex}'),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
