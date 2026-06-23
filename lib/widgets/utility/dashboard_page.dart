@@ -136,7 +136,7 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void _refreshKeywordsAfterSessionDeletion() 
+  void _keywordsRefreshAfterSessionDeletion() 
   {
     _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
   }
@@ -277,7 +277,7 @@ class DashboardPageState extends State<DashboardPage>
                   );
     }
 
-    _refreshKeywordsAfterSessionDeletion();
+    _keywordsRefreshAfterSessionDeletion();
      // Updates the keywords list
     
     if ( ! previousKeywords!.toList().equals(newKeywords.toList()) )

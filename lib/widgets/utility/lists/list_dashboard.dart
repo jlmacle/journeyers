@@ -147,9 +147,9 @@ class ListDashboardState extends State<ListDashboard>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void _refreshKeywordsAfterSessionDeletion() 
+  void _keywordsRefreshAfterSessionDeletion() 
   {
-    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
   }
 
   // Method used to update the list keywords
@@ -162,7 +162,7 @@ class ListDashboardState extends State<ListDashboard>
     await _textListsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    _refreshKeywordsAfterSessionDeletion();
+    _keywordsRefreshAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -195,7 +195,7 @@ class ListDashboardState extends State<ListDashboard>
     await _textListsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    _refreshKeywordsAfterSessionDeletion();
+    _keywordsRefreshAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -240,10 +240,10 @@ class ListDashboardState extends State<ListDashboard>
     );
 
     // Updating the keywords list
-    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
