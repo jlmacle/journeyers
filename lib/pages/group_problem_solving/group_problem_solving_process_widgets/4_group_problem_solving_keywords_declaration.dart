@@ -29,7 +29,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
 {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
-  final TextEditingController _keywordsController = .new();
+  final TextEditingController _keywordsTfec = .new();
     
   // Method used to add keywords to the _keywords list
   void _keywordAdd(String value, [StateSetter? localSetState]) 
@@ -39,7 +39,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
       // Updates the underlying data
       setState(() {
         _keywords!.add(trimmedValue);
-        _keywordsController.clear();
+        _keywordsTfec.clear();
       });
       
       // Redraws the Dialog/Overlay
@@ -72,7 +72,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
   @override
   void dispose()
   {
-    _keywordsController.dispose();
+    _keywordsTfec.dispose();
     super.dispose();
   }
 
@@ -145,7 +145,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
                       child: TextField
                       (
-                        controller: _keywordsController,
+                        controller: _keywordsTfec,
                         decoration: const InputDecoration
                         (
                           hint: Center
