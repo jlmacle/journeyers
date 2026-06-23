@@ -361,12 +361,12 @@ class _NewTextListState extends State<NewTextList> {
               }
             ),
             // Deletion by bulk widget
-            NewTextListDeletionByBulk
+            NewListDeletionByBulk
             (
               areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
               enteredTextItemsList: _enteredTextItemsList,
-              indexesOfTextItemsSelectedForDeletion: _textsSelectedForDeletionIndexes,
-              callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
+              textItemsSelectedForDeletionIndexes: _textsSelectedForDeletionIndexes,
+              callbackFunctionToRefreshTheList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
             ),
             // List of added texts or placeholder message
             Expanded(
