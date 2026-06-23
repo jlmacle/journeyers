@@ -132,7 +132,7 @@ class CAPageState extends State<CAPage>
   }
 
   // Method used to edit a session data
-  void _onEditSessionData({required bool sessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition})
+  void _onEditSessionData({required bool sessionDataBeingEdited, required DTOCAForm? dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition})
   {
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
@@ -206,7 +206,9 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: ({required sessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: _dtoWhenEdition!, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition, keywordsWhenEdition: _keywordsWhenEdition),
+                  onEditSessionDataCallbackFunction: ({required sessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) 
+                    => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: dtoWhenEdition, fileNameWhenEditionWithoutExtension: fileNameWhenEditionWithoutExtension, titleWhenEdition: titleWhenEdition, keywordsWhenEdition: keywordsWhenEdition)
+                
                 )
               ),
             ]

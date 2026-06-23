@@ -84,9 +84,11 @@ Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctio
     // Saving the updated metadata
     await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, allSessionsMetadata: sessionDataRetrieved);
 
+    if (editDebug) pu.printd("Editing: editCASessionData: title: $title");
+    if (editDebug) pu.printd("Editing: editCASessionData: keywordsForEdition: $keywordsForEdition");
+    if (editDebug) pu.printd("Editing: editCASessionData: dtoForEdition: ");
     if (editDebug) dtoForEdition.printToConsole();
     if (editDebug) pu.printd("Editing: editCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
-    if (editDebug) pu.printd("Editing: editCASessionData: title: $title");
 
 
     // Need to re-build the dashboard page    
