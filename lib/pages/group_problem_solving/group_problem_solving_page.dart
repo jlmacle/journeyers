@@ -28,48 +28,48 @@ class GPSPage extends StatefulWidget
 class GPSPageState extends State<GPSPage> 
 {
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
-  bool _preferencesLoading = true;
-  bool? _wasGPSSessionDataSaved;
+  bool _runtimeDataLoading = true;
+  bool? _gpsWasSessionDataSaved;
 
-  _getPreferences() async 
+  _getRuntimeData() async 
   {
-    if (runtimeDataDebug) pu.printd("Runtime Data: getPreferences()");
-    _wasGPSSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
+    if (runtimeDataDebug) pu.printd("Runtime Data: _getRuntimeData()");
+    _gpsWasSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
-    setState(() {_preferencesLoading = false;});
-    if (runtimeDataDebug) pu.printd("Runtime Data: _wasGPSSessionDataSaved: $_wasGPSSessionDataSaved");
+    setState(() {_runtimeDataLoading = false;});
+    if (runtimeDataDebug) pu.printd("Runtime Data: _wasGPSSessionDataSaved: $_gpsWasSessionDataSaved");
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
 
   // Method used to refresh the page from group problem-solving process page to dashboard, 
   // after process data has been saved
-  void _onDataSaved() 
+  void _gpsOnSessionDataSaved() 
   {
     setState(() {
-      _wasGPSSessionDataSaved = true;
+      _gpsWasSessionDataSaved = true;
     });
   }
 
   // Used in DashboardDeletionByBulk.
   // Method used to refresh the page from dashboard to group problem-solving process page, 
   // after all session files have been deleted
-  void onAllSessionFilesDeleted() 
+  void gpsOnAllSessionsDataDeleted() 
   {
     if (sessionDataDebug) pu.printd("Session Data: GPS page: onAllSessionFilesDeleted");
 
     setState(() {
-      _wasGPSSessionDataSaved = false;
+      _gpsWasSessionDataSaved = false;
     });
   }
   
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
-  final FocusNode _gpsPageFocusNode = .new();
+  final FocusNode _gpsProcessFocusNode = .new();
 
   @override
   void dispose() 
   {
-    _gpsPageFocusNode.dispose();
+    _gpsProcessFocusNode.dispose();
     super.dispose();
   } 
 
@@ -77,7 +77,7 @@ class GPSPageState extends State<GPSPage>
   void initState() 
   {
     super.initState();
-    _getPreferences();
+    _getRuntimeData();
   }  
 
   @override
@@ -93,20 +93,20 @@ class GPSPageState extends State<GPSPage>
         children: 
         [
           // Circular progress indicator while preferences are loading
-          if (_preferencesLoading)
+          if (_runtimeDataLoading)
             const Center(child: CircularProgressIndicator())
           // When preferences are loaded
           else ...
           [
             // Checking if group problem-solving session data has been stored
-            if (_wasGPSSessionDataSaved!) ...
+            if (_gpsWasSessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new group problem-solving
               NewProcessButton
               ( 
                 dashboardContext: DashboardUtils.gpsContext, 
                 buttonText: "Please click to start\na new group problem-solving session.",
-                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _wasGPSSessionDataSaved = false;});},
+                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _gpsWasSessionDataSaved = false;});},
               ),
               
               // and the session data dashboard in the remaining space
@@ -118,7 +118,7 @@ class GPSPageState extends State<GPSPage>
                   key: const Key('group-problem-solving-dashboard'),
                   dashboardContext: DashboardUtils.gpsContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyGPS,
-                  onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
+                  onAllSessionFilesDeletedContextPageCallbackFunction: gpsOnAllSessionsDataDeleted,
                   // The GPS data is read-only 
                   onEditSessionDataCallbackFunction: ({required bool sessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition}) {},                 
                   
@@ -136,8 +136,8 @@ class GPSPageState extends State<GPSPage>
                 child: 
                 Focus
                 (
-                  focusNode: _gpsPageFocusNode,
-                  child: GPSProcess(key: gpsProcessKey, parentCallbackFunctionToRefreshTheGPSPage: _onDataSaved),
+                  focusNode: _gpsProcessFocusNode,
+                  child: GPSProcess(key: gpsProcessKey, parentCallbackFunctionToRefreshTheGPSPage: _gpsOnSessionDataSaved),
                 ),
               ),
             )

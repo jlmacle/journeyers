@@ -113,7 +113,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
 
       // refreshing the page, to re-start in the process page
       if (widget.dashboardContext == DashboardUtils.caContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
-      else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.onAllSessionFilesDeleted();}
+      else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.gpsOnAllSessionsDataDeleted();}
       else {pu.printd("Error: Unexpected context: ${widget.dashboardContext}");}
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
