@@ -359,7 +359,7 @@ class DashboardPageState extends State<DashboardPage>
                         
                         return SessionsListItem(
                           sessionMetadata: session,
-                          index: index,
+                          sessionDataIndex: index,
                           dashboardContext: widget.dashboardContext,
                           isChecked: _sessionsSelectedForDeletion.contains(filePath),
                           onCheckboxChangedCallbackFunction: (bool? value) {

@@ -32,7 +32,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -65,7 +65,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -90,7 +90,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -115,7 +115,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -139,7 +139,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -167,7 +167,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -196,7 +196,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.gpsContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -261,7 +261,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
@@ -291,7 +291,7 @@ void main() {
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
-                index: 0,
+                sessionDataIndex: 0,
                 isChecked: false,
                 dashboardContext: DashboardUtils.caContext, 
                 onCheckboxChangedCallbackFunction: (_) {},
