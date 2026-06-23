@@ -461,7 +461,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 
         // 3. BOTTOM: Full Width Idea Input Field
         const Divider(height: 1),
-        GPSNewIdea(onIdeaAddedCallbackFunction: _addIdeaToList),
+        GPSNewIdea(ideaOnAddedCallbackFunction: _addIdeaToList),
         
         //********** Data saving ************//
         Center
