@@ -333,8 +333,8 @@ class DashboardPageState extends State<DashboardPage>
                   child: DashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    allSessions: _allSessions,
-                    filteredSessions: _filteredSessions,
+                    sessionsAll: _allSessions,
+                    sessionsFiltered: _filteredSessions,
                     areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
                     sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    

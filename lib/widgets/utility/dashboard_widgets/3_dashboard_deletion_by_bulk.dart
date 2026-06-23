@@ -22,10 +22,10 @@ class DashboardDeletionByBulk extends StatefulWidget
   final bool areSessionsForDeletion; 
 
   /// List containing all available session data.
-  final List<dynamic>? allSessions;
+  final List<dynamic>? sessionsAll;
 
   /// List containing all filtered session data.
-  final List<dynamic>? filteredSessions;
+  final List<dynamic>? sessionsFiltered;
 
   /// List containing the sessions selected for deletion.
   final List<dynamic>? sessionsSelectedForDeletion;
@@ -38,8 +38,8 @@ class DashboardDeletionByBulk extends StatefulWidget
     super.key,
     required this.dashboardContext,
     required this.areSessionsForDeletion,
-    required this.allSessions,
-    required this.filteredSessions,
+    required this.sessionsAll,
+    required this.sessionsFiltered,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
     this.sessionsSelectedForDeletion    
   });
@@ -55,7 +55,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several session data
-  Future<void> _deleteSelectedSessions() async 
+  Future<void> _sessionsSelectedDelete() async 
   {
     // Creating a fixed list to iterate over so clearing doesn't break the loop
     final filesToDelete = List<String>.from(widget.sessionsSelectedForDeletion!);
@@ -74,19 +74,19 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     }
 
     // Updating the filtered sessions list
-    widget.filteredSessions?.removeWhere
+    widget.sessionsFiltered?.removeWhere
     (
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
 
     // Updating the _allSessions list
-    widget.allSessions?.removeWhere
+    widget.sessionsAll?.removeWhere
     (
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
-    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allSessions: ${widget.allSessions}");
+    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allSessions: ${widget.sessionsAll}");
 
     // Clearing the list of the selected sessions
     widget.sessionsSelectedForDeletion!.clear();
@@ -102,11 +102,11 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty?: ${widget.allSessions!.isEmpty}");
+    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty?: ${widget.sessionsAll!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.allSessions!.isEmpty) 
+    if (widget.sessionsAll!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus to false
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
@@ -142,7 +142,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
         child:        
           TextButton.icon(
             key: const Key('bulk-delete-button'),
-            onPressed: _deleteSelectedSessions,
+            onPressed: _sessionsSelectedDelete,
             icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
             label: Text(
               "Delete (${widget.sessionsSelectedForDeletion?.length ?? 0})",
