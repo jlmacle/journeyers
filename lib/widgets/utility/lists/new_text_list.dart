@@ -70,7 +70,7 @@ class _NewTextListState extends State<NewTextList> {
     });
     try {
 
-      List<List<String>> listOfGroupedTexts = await _textListsDB.listOfGroupedTexts(); 
+      List<List<String>> listOfGroupedTexts = await _textListsDB.getListOfGroupedTexts(); 
 
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;

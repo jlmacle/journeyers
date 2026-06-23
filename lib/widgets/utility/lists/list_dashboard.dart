@@ -85,7 +85,7 @@ class ListDashboardState extends State<ListDashboard>
     _listData = await _textListsDB.loadDataStructure();
 
     // Getting the list labels
-    final labels = await _textListsDB.sortedLabels(dataStructure: _listData);
+    final labels = await _textListsDB.getSortedLabels(dataStructure: _listData);
     if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: labels: $labels");
 
     // Building _allListsData

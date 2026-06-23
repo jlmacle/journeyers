@@ -259,7 +259,7 @@ class TextListsDB {
 
 
   /// Returns a list made of all the lists of texts.
-  Future<List<List<String>>> listOfGroupedTexts() async {
+  Future<List<List<String>>> getListOfGroupedTexts() async {
 
     // Loading the data
     var data = await loadDataStructure();
@@ -296,7 +296,7 @@ class TextListsDB {
   }
 
   /// Returns all saved group labels, sorted alphabetically.
-  Future<List<String>> sortedLabels({List<dynamic>? dataStructure}) async {
+  Future<List<String>> getSortedLabels({List<dynamic>? dataStructure}) async {
     var data = dataStructure ?? await loadDataStructure();
 
     List<String> labels =[];
