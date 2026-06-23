@@ -65,7 +65,8 @@ class GPSProcessState extends State<GPSProcess>
 
   // TITLE for the group problem-solving process
   // TextEditingController for entering a new title
-  final TextEditingController _problemTitleController = .new();
+  final TextEditingController _titleTfec = .new();
+    List<Map<String, dynamic>> _previousCAMetadata = [];
 
   // ─── STAKEHOLDER IDENTIFIERS related data ───────────────────────────────────────
   final GlobalKey<GPSGroupMoodsState> _groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
@@ -95,26 +96,26 @@ class GPSProcessState extends State<GPSProcess>
   // ─── KEYWORDS related data ───────────────────────────────────────
   // List to store the keywords entered by the user
   Set<String> _currentKeywords = {}; 
-  List<Map<String, dynamic>> _caMetadata = [];
+
   
   // ─── SOLUTIONS related data ───────────────────────────────────────
   // List to store the ideas entered by the user
-  final List<String> _ideas = [];
+  final List<String> _currentIdeas = [];
   
   // ─── FILE SAVING related data ───────────────────────────────────────
   String _fileName = "";
   final String _fileExtension = TextFieldUtils.extentionTXT;
 
   // Method used to update the file name value
-  void _processFileNameUpdate(String value)
+  void _setFileNameValue(String value)
   {
     _fileName = value;
   }
   
   // Method used to save data and metadata
-  Future<void> _saveDataAndMetadata() async 
+  Future<void> _saveGPSDataAndMetadata() async 
   {
-    if (_ideas.isEmpty) 
+    if (_currentIdeas.isEmpty) 
     {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("No ideas to save!")),
@@ -122,8 +123,8 @@ class GPSProcessState extends State<GPSProcess>
       return;
     }
 
-    String sessionTitle = _problemTitleController.text.trim().isNotEmpty 
-        ? _problemTitleController.text.trim()
+    String sessionTitle = _titleTfec.text.trim().isNotEmpty 
+        ? _titleTfec.text.trim()
         : "Problem Solving Session";
 
     // Format ideas for the text file
@@ -135,8 +136,8 @@ class GPSProcessState extends State<GPSProcess>
     fileContent += "$sessionTitle\n";
     fileContent += "Date: $formattedDate\n";
     fileContent += "----------------------------\n";
-    for (var i = 0; i < _ideas.length; i++) {
-      fileContent += "${i + 1}. ${_ideas[i]}\n";
+    for (var i = 0; i < _currentIdeas.length; i++) {
+      fileContent += "${i + 1}. ${_currentIdeas[i]}\n";
     }
     
     Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));
@@ -222,23 +223,22 @@ class GPSProcessState extends State<GPSProcess>
   }
 
 // Method used to load the context analyses metadata
-Future<void> _loadCAMetadata() async {
-  final data = await du.retrieveAllDashboardMetadata(
+Future<void> _loadAllCAMetadata() async {
+  final allCAMetadata = await du.retrieveAllDashboardMetadata(
     typeOfDashboardContext: DashboardUtils.caContext
   );
   setState(() {
-    _caMetadata = List<Map<String, dynamic>>.from(data);
+    _previousCAMetadata = List<Map<String, dynamic>>.from(allCAMetadata);
   });
 }
 
-void _handleSessionSelection(Map<String, dynamic> session) {
+// Method used to import a context analysis metadata
+void _handleCAMetadataSelection(Map<String, dynamic> session) {
   setState(() {
-    _problemTitleController.text = "${session['title']}";
+    _titleTfec.text = "${session[DashboardUtils.keyTitle]}";
     
     if (session['keywords'] != null) {
-      // Creates a NEW list instance instead of .clear() and .addAll()
-      // This changes the reference, triggering didUpdateWidget correctly
-      _currentKeywords = Set<String>.from(session['keywords']);
+      _currentKeywords = Set<String>.from(session[DashboardUtils.keyKeywords]);
     } else {
       _currentKeywords = {};
     }
@@ -246,23 +246,23 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 }
 
   // Method used to add an idea to the list of ideas
-  void _addIdeaToList(String value)
+  void _ideaAddToList(String value)
   {
-    _ideas.add(value);
+    _currentIdeas.add(value);
     setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-     _loadCAMetadata();
+     _loadAllCAMetadata();
     _getApplicationFolderPathPref();
   }
 
   @override
   void dispose() 
   {
-    _problemTitleController.dispose();
+    _titleTfec.dispose();
     super.dispose();
   }
   
@@ -276,9 +276,9 @@ void _handleSessionSelection(Map<String, dynamic> session) {
       children: [
         // 1. TOP: The problem to be solved (Full Width)
         GPSProblemToSolveDeclaration(
-          sessionTitleTfec: _problemTitleController,
-          previousSessions: _caMetadata,
-          onSessionSelected: _handleSessionSelection,
+          sessionTitleTfec: _titleTfec,
+          previousSessions: _previousCAMetadata,
+          onSessionSelected: _handleCAMetadataSelection,
         ),
         const Divider(),
 
@@ -409,7 +409,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                     ), 
                     // Ideas List component
                     SliverToBoxAdapter(
-                      child: GPSIdeasList(ideas: _ideas),
+                      child: GPSIdeasList(ideas: _currentIdeas),
                     ),
                   ]
                 )
@@ -461,7 +461,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
 
         // 3. BOTTOM: Full Width Idea Input Field
         const Divider(height: 1),
-        GPSNewIdea(newIdeaOnAddedCallbackFunction: _addIdeaToList),
+        GPSNewIdea(newIdeaOnAddedCallbackFunction: _ideaAddToList),
         
         //********** Data saving ************//
         Center
@@ -476,11 +476,11 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                 (
                   fileExtension: _fileExtension, 
                   editedFileName: "",
-                  onFileNameSubmittedProcessCallbackFunction: (value) => _processFileNameUpdate (value), 
-                  parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
+                  onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value), 
+                  parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
                 )
                 // Saving file for desktop platforms
-                : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)
+                : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata)
         ),
       ]
     );
