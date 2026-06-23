@@ -266,11 +266,11 @@ class ListDashboardState extends State<ListDashboard>
      }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
-  final TextEditingController _titleTFec = .new();
+  final TextEditingController _titleTfec = .new();
 
   @override
   void dispose() {
-    _titleTFec.dispose();
+    _titleTfec.dispose();
     super.dispose();
   }
 
@@ -434,7 +434,7 @@ class ListDashboardState extends State<ListDashboard>
   
   void _showTitleEditSheet(String title, String listKey, int listIndex) 
   {
-    _titleTFec.text = title; // Syncing current title to the field
+    _titleTfec.text = title; // Syncing current title to the field
 
     showModalBottomSheet(
       context: context,
@@ -449,7 +449,7 @@ class ListDashboardState extends State<ListDashboard>
           builder: (context, setState) {          
 
             Future<void> onConfirm() async {              
-              final label = _titleTFec.text.trim();
+              final label = _titleTfec.text.trim();
 
               if (label.isEmpty) {
                 setState(() {
@@ -479,7 +479,7 @@ class ListDashboardState extends State<ListDashboard>
                 TextField
                 (
                   key: const ValueKey('listEditField'),
-                  controller: _titleTFec,
+                  controller: _titleTfec,
                   autofocus: true,
                   decoration: InputDecoration
                   (
