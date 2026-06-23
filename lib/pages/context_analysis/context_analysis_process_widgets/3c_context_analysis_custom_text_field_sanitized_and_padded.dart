@@ -92,19 +92,19 @@ class CATextFieldSanitizedAndPadded extends StatefulWidget
 class _CATextFieldSanitizedAndPaddedState extends State<CATextFieldSanitizedAndPadded> 
 {
   final GlobalKey<_CATextFieldSanitizedAndPaddedState> _textFieldBeforeErrorMessageKey = GlobalKey();
-  final TextEditingController _textFieldEditingController = .new();
+  final TextEditingController _tfec = .new();
 
   @override
   void initState() 
   {
     super.initState();
-    _textFieldEditingController.text = widget.textFieldStartValue;
+    _tfec.text = widget.textFieldStartValue;
   }
 
   @override
   void dispose() 
   {
-    _textFieldEditingController.dispose();
+    _tfec.dispose();
     super.dispose();
   }
 
