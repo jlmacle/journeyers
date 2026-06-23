@@ -92,7 +92,7 @@ Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctio
 
 
     // Need to re-build the dashboard page    
-    onEditCASessionDataCallbackFunction(sessionDataBeingEdited: true, dtoWhenEdition: dtoForEdition, fileNameWhenEditionWithoutExtension: fileNameWithoutExtension, titleWhenEdition: title, keywordsWhenEdition: keywordsForEdition);
+    onEditCASessionDataCallbackFunction(isSessionDataBeingEdited: true, dtoWhenEdition: dtoForEdition, fileNameWhenEditionWithoutExtension: fileNameWithoutExtension, titleWhenEdition: title, keywordsWhenEdition: keywordsForEdition);
 
   }
 

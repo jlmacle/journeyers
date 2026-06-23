@@ -46,7 +46,7 @@ class CAPageState extends State<CAPage>
   // Value for the keywords at edition time
   Set<String> _keywordsWhenEdition = {};
   // bool: edition in progress
-  bool _sessionDataBeingEdited = false;
+  bool _isSessionDataBeingEdited = false;
 
   // ─── RUNTIME DATA related data and methods ───────────────────────────────────────
   bool _runtimeDataLoading = true;
@@ -132,7 +132,7 @@ class CAPageState extends State<CAPage>
   }
 
   // Method used to edit a session data
-  void _onEditSessionData({required bool sessionDataBeingEdited, required DTOCAForm? dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition})
+  void _onEditSessionData({required bool isSessionDataBeingEdited, required DTOCAForm? dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition})
   {
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
@@ -141,7 +141,7 @@ class CAPageState extends State<CAPage>
       _caSessionDataSaved = false;
 
       // Loading the CA Process with edited values
-      _sessionDataBeingEdited = sessionDataBeingEdited;
+      _isSessionDataBeingEdited = isSessionDataBeingEdited;
       _dtoWhenEdition = dtoWhenEdition;      
       _titleWhenEdition  = titleWhenEdition;
       _keywordsWhenEdition = keywordsWhenEdition;
@@ -206,8 +206,8 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: ({required sessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) 
-                    => _onEditSessionData(sessionDataBeingEdited: true, dtoWhenEdition: dtoWhenEdition, fileNameWhenEditionWithoutExtension: fileNameWhenEditionWithoutExtension, titleWhenEdition: titleWhenEdition, keywordsWhenEdition: keywordsWhenEdition)
+                  onEditSessionDataCallbackFunction: ({required isSessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) 
+                    => _onEditSessionData(isSessionDataBeingEdited: true, dtoWhenEdition: dtoWhenEdition, fileNameWhenEditionWithoutExtension: fileNameWhenEditionWithoutExtension, titleWhenEdition: titleWhenEdition, keywordsWhenEdition: keywordsWhenEdition)
                 
                 )
               ),
@@ -226,7 +226,7 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: _caProcessFocusNode,
-                  child: CAProcess(key: caProcessKey, sessionDataBeingEdited: _sessionDataBeingEdited,  dtoWhenEdition: _dtoWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition , keywordsWhenEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess(key: caProcessKey, isSessionDataBeingEdited: _isSessionDataBeingEdited,  dtoWhenEdition: _dtoWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition , keywordsWhenEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
