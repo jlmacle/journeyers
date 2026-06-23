@@ -4,7 +4,7 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart'
 
 
 void main() {
-  TextListsDB storage = TextListsDB();
+  ListsDB storage = ListsDB();
 
   group('getNextKey', () {
     // 'Next key after "a1"'

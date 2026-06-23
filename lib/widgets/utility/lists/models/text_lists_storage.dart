@@ -16,7 +16,7 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_exter
 ///             "subItemsListData": subItemsListData , "displayFunction": displayFunction} }
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
-class TextListsDB {
+class ListsDB {
   static const _fileName = 'journeyers_gps_participants_groups_lists21.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────

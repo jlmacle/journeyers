@@ -8,16 +8,16 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 class NewTextListKeywordsDeclaration extends StatefulWidget 
 {
   /// The keywords associated to the session data.
-  final Set<String> currentKeywords;
+  final Set<String> keywordsCurrent;
 
   /// A callback function called to update the keywords describing the session.
-  final ValueChanged<Set<String>> onKeywordsUpdatedCallbackFunction;  
+  final ValueChanged<Set<String>> keywordsOnUpdateCallbackFunction;  
 
   const NewTextListKeywordsDeclaration
   ({
     super.key,
-    required this.currentKeywords,
-    required this.onKeywordsUpdatedCallbackFunction
+    required this.keywordsCurrent,
+    required this.keywordsOnUpdateCallbackFunction
   });
 
 
@@ -29,17 +29,17 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
 {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
-  final TextEditingController _keywordsController = .new();
+  final TextEditingController _keywordsTfec = .new();
     
   // Method used to add keywords to the _keywords list
-  void _addKeyword(String value, [StateSetter? localSetState]) 
+  void _keywordAdd(String value, [StateSetter? localSetState]) 
   {
     var trimmedValue = value.trim();
     if (trimmedValue.isNotEmpty && !_keywords!.contains(trimmedValue)) {
       // Updates the underlying data
       setState(() {
         _keywords!.add(trimmedValue);
-        _keywordsController.clear();
+        _keywordsTfec.clear();
       });
       
       // Redraws the Dialog/Overlay
@@ -47,24 +47,24 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
         localSetState(() {});
       }
       
-      widget.onKeywordsUpdatedCallbackFunction(_keywords!);
+      widget.keywordsOnUpdateCallbackFunction(_keywords!);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    _keywords = Set.from(widget.currentKeywords); // Syncs at start
+    _keywords = Set.from(widget.keywordsCurrent); // Syncs at start
   }
 
   @override
   void didUpdateWidget(NewTextListKeywordsDeclaration oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Checks if the pointer or the content of the list has changed
-    if (widget.currentKeywords != oldWidget.currentKeywords) {
+    if (widget.keywordsCurrent != oldWidget.keywordsCurrent) {
       setState(() {
         // Creates a fresh copy from the new parent data
-        _keywords = Set<String>.from(widget.currentKeywords);
+        _keywords = Set<String>.from(widget.keywordsCurrent);
       });
     }
   }
@@ -72,7 +72,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
   @override
   void dispose()
   {
-    _keywordsController.dispose();
+    _keywordsTfec.dispose();
     super.dispose();
   }
 
@@ -80,7 +80,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _showKeywordsOverlay(context),
+      onTap: () => _keywordsShowOverlay(context),
       child: Container(        
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: const Row(
@@ -99,7 +99,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
     );
   }
 
-  void _showKeywordsOverlay(BuildContext context) {
+  void _keywordsShowOverlay(BuildContext context) {
     const String title = "Please enter keywords\n related to this group.";
 
     showGeneralDialog(
@@ -146,7 +146,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                       child: TextField
                       (
                         key: const ValueKey('keywordField'),
-                        controller: _keywordsController,
+                        controller: _keywordsTfec,
                         decoration: const InputDecoration
                         (
                           hint: Center
@@ -157,7 +157,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                         ),
                         textAlign: TextAlign.center,
                         style: analysisTextFieldStyle,
-                        onSubmitted: (value) => _addKeyword(value, setLocalState),
+                        onSubmitted: (value) => _keywordAdd(value, setLocalState),
                       ),
                     ),
                     // Display of the keywords
@@ -181,7 +181,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                                         {
                                           setState( () {_keywords!.remove(tag);});
                                           setLocalState(() {});
-                                          widget.onKeywordsUpdatedCallbackFunction(_keywords!);
+                                          widget.keywordsOnUpdateCallbackFunction(_keywords!);
                                         }, 
                                         deleteIconColor: appBarWhite,
                                       )

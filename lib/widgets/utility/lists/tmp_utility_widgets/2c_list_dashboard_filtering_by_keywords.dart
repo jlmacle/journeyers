@@ -8,10 +8,10 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_exter
 class ListDashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available lists data.
-  final List<dynamic>? allLists;
+  final List<dynamic>? listsAll;
 
   /// List containing all filtered lists data.
-  final List<dynamic>? filteredLists;
+  final List<dynamic>? listsFiltered;
 
   /// List containing the keywords used by the lists.
   final List<String> keywordsAll;
@@ -25,8 +25,8 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
   const ListDashboardFilteringByKeywords
   ({
     super.key,
-    required this.allLists,
-    required this.filteredLists,
+    required this.listsAll,
+    required this.listsFiltered,
     required this.keywordsAll,
     required this.keywordsSelected,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
@@ -40,18 +40,18 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
 {  
   // Used in ListDashboard.
   // Method used to filter the lists by keywords.
-  Future<void> applyFilteringByKeywords() async
+  Future<void> keywordsApplyFiltering() async
   {
     if (widget.keywordsSelected.isEmpty) 
     {
       // Working with the list while keeping the same reference
-      widget.filteredLists!.clear();
-      widget.filteredLists!.addAll(widget.allLists!);
+      widget.listsFiltered!.clear();
+      widget.listsFiltered!.addAll(widget.listsAll!);
     } 
     else 
     {
       List <dynamic> sortingResults =
-      widget.allLists!.where
+      widget.listsAll!.where
       ( 
         (session) 
         {
@@ -61,8 +61,8 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
       ).toList();
       
       // Working with the list while keeping the same reference
-      widget.filteredLists!.clear();
-      widget.filteredLists!.addAll(sortingResults);
+      widget.listsFiltered!.clear();
+      widget.listsFiltered!.addAll(sortingResults);
     }
 
     // Refreshing the sessions list
@@ -70,7 +70,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
   }
 
   // Method used to add/remove a keyword from the filtering criteria
-  Future<void> _toggleKeywordSelection(String keyword) async
+  Future<void> _keywordToggleSelection(String keyword) async
   {
      if (widget.keywordsSelected.contains(keyword)) 
     {
@@ -82,19 +82,19 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
     }
 
     // Applying the filtering by keywords
-    await applyFilteringByKeywords();
+    await keywordsApplyFiltering();
   }
 
   // Used in ListDashboard.
   // Method used to refresh the keywords list after deletion of session data.
-  void refreshKeywordsAfterSessionDeletion() 
+  void keywordsRefreshAfterSessionDeletion() 
   {
     // if no lists left, nothing to do
-    if (widget.allLists == null) return;
+    if (widget.listsAll == null) return;
     
     // Re-building the keywords' list from the remaining lists data
     Set<String> remainingKws = {};
-    for (var currentListData in widget.allLists!) 
+    for (var currentListData in widget.listsAll!) 
     {
       List<dynamic> kws = currentListData[itemKeywordsKey];
       remainingKws.addAll(kws.cast<String>());
@@ -144,7 +144,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
                 return FilterChip
                 (
                   label: Text(kw),
-                  onSelected: (_) async => await _toggleKeywordSelection(kw),
+                  onSelected: (_) async => await _keywordToggleSelection(kw),
                   selected: widget.keywordsSelected.contains(kw)
                 );
               }

@@ -574,12 +574,12 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                 return      
                 Column(
                   children: [
-                    NewTextListDeletionByBulk
+                    NewListDeletionByBulk
                       (
                         areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
                         enteredTextItemsList: _ideasListBeforeEdition,
-                        indexesOfTextItemsSelectedForDeletion: _ideasSelectedForDeletionIndexes,
-                        callbackFunctionToRefreshTheTextItemsList: 
+                        textItemsSelectedForDeletionIndexes: _ideasSelectedForDeletionIndexes,
+                        callbackFunctionToRefreshTheList: 
                         () 
                         {
                           setLocalState((){});

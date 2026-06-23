@@ -57,7 +57,7 @@ class _NewTextListState extends State<NewTextList> {
   bool get _listHasBeenLoaded => widget.loadedLabel != null;
 
   // Data related to retrieving the list of grouped texts
-  final _textListsDB = TextListsDB();
+  final _listsDB = ListsDB();
   bool _loadingDB = true;
   String? _errorLoadingDB;
   List<List<String>>? _listOfPreviousGroupedTexts = [];
@@ -70,7 +70,7 @@ class _NewTextListState extends State<NewTextList> {
     });
     try {
 
-      List<List<String>> listOfGroupedTexts = await _textListsDB.getListOfGroupedTexts(); 
+      List<List<String>> listOfGroupedTexts = await _listsDB.getListOfGroupedTexts(); 
 
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;
@@ -151,7 +151,7 @@ class _NewTextListState extends State<NewTextList> {
                 return;
               }
               // Warn if the label already exists, and prevents the saving of data.
-              final listLabelAlreadyExists = await _textListsDB.listLabelExistsAsync(label);
+              final listLabelAlreadyExists = await _listsDB.listLabelExistsAsync(label);
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
@@ -220,7 +220,7 @@ class _NewTextListState extends State<NewTextList> {
     try {
       // List.from(_enteredTextItemsList)..sort() : 
       // to sort at saving time, without re-ordering the texts on-screen
-      await _textListsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), _newKeywords);      
+      await _listsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), _newKeywords);      
 
       setState(() {
         _isSaved = true;
@@ -352,8 +352,8 @@ class _NewTextListState extends State<NewTextList> {
           [
             NewTextListKeywordsDeclaration
             (
-              currentKeywords: {},
-              onKeywordsUpdatedCallbackFunction: (newKeywords) 
+              keywordsCurrent: {},
+              keywordsOnUpdateCallbackFunction: (newKeywords) 
               {
                 if (listDebug) pu.printd("List debug: _NewTextListState: build: newKeywords: $newKeywords");
     
@@ -361,12 +361,12 @@ class _NewTextListState extends State<NewTextList> {
               }
             ),
             // Deletion by bulk widget
-            NewTextListDeletionByBulk
+            NewListDeletionByBulk
             (
               areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
               enteredTextItemsList: _enteredTextItemsList,
-              indexesOfTextItemsSelectedForDeletion: _textsSelectedForDeletionIndexes,
-              callbackFunctionToRefreshTheTextItemsList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
+              textItemsSelectedForDeletionIndexes: _textsSelectedForDeletionIndexes,
+              callbackFunctionToRefreshTheList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
             ),
             // List of added texts or placeholder message
             Expanded(

@@ -93,8 +93,8 @@ class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardS
         ListDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          allLists: widget.listsAll, 
-          filteredLists: widget.listsFiltered, 
+          listsAll: widget.listsAll, 
+          listsFiltered: widget.listsFiltered, 
           keywordsAll: widget.keywordsAll,
           keywordsSelected: widget.keywordsSelected,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList

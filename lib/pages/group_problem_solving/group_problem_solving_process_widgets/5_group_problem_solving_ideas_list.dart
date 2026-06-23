@@ -144,12 +144,12 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                 return      
                 Column(
                   children: [
-                    NewTextListDeletionByBulk
+                    NewListDeletionByBulk
                       (
                         areSomeTextItemsSelectedForDeletion: _ideasAreSomeForDeletion,
                         enteredTextItemsList: _ideasEnteredList,
-                        indexesOfTextItemsSelectedForDeletion: _ideasSelectedForDeletionIndexes,
-                        callbackFunctionToRefreshTheTextItemsList: 
+                        textItemsSelectedForDeletionIndexes: _ideasSelectedForDeletionIndexes,
+                        callbackFunctionToRefreshTheList: 
                         () 
                         {
                           setLocalState((){});

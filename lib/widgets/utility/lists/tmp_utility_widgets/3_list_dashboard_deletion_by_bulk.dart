@@ -21,13 +21,13 @@ class ListDashboardDeletionByBulk extends StatefulWidget
   final bool areListsForDeletion; 
 
   /// List containing all available lists.
-  final List<dynamic>? allLists;
+  final List<dynamic>? listsAll;
 
   /// List containing all filtered lists.
-  final List<dynamic>? filteredLists;
+  final List<dynamic>? listsFiltered;
 
   /// List containing the keys of lists selected for deletion.
-  final List<dynamic>? keysOfListsSelectedForDeletion;
+  final List<dynamic>? listsSelectedForDeletionKeys;
 
   /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -37,10 +37,10 @@ class ListDashboardDeletionByBulk extends StatefulWidget
     super.key,
     required this.dashboardContext,
     required this.areListsForDeletion,
-    required this.allLists,
-    required this.filteredLists,
+    required this.listsAll,
+    required this.listsFiltered,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
-    this.keysOfListsSelectedForDeletion    
+    this.listsSelectedForDeletionKeys    
   });
 
   @override
@@ -49,55 +49,55 @@ class ListDashboardDeletionByBulk extends StatefulWidget
 
 class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBulk> 
 {
-  final _textListsDB = TextListsDB();
+  final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
   final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several lists data
-  Future<void> _deleteSelectedLists() async 
+  Future<void> _selectedListsDelete() async 
   {
     // Creating a fixed list to iterate over so clearing doesn't break the loop
-    final keysOfListsSelectedForDeletion = List<String>.from(widget.keysOfListsSelectedForDeletion!);
+    final keysOfListsSelectedForDeletion = List<String>.from(widget.listsSelectedForDeletionKeys!);
 
     // Updating the DB
-    await _textListsDB.removeListData(keysOfListsSelectedForDeletion);    
+    await _listsDB.removeListData(keysOfListsSelectedForDeletion);    
 
     // Updating the filtered sessions list
-    widget.filteredLists?.removeWhere
+    widget.listsFiltered?.removeWhere
     (
       (session) => 
       keysOfListsSelectedForDeletion.contains(session[itemKey])
     );
 
     // Updating the _allLists list
-    widget.allLists?.removeWhere
+    widget.listsAll?.removeWhere
     (
       (session) => 
       keysOfListsSelectedForDeletion.contains(session[itemKey])
     );
-    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allLists: ${widget.allLists}");
+    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allLists: ${widget.listsAll}");
 
     // Clearing the list of the selected sessions
-    widget.keysOfListsSelectedForDeletion!.clear();
+    widget.listsSelectedForDeletionKeys!.clear();
 
     // Updating the keywords list
-    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();    
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
 
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.allLists!.isEmpty}");
+    if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.listsAll!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.allLists!.isEmpty) 
+    if (widget.listsAll!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus to false
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
@@ -124,10 +124,10 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
         child:        
           TextButton.icon(
             key: const Key('bulk-delete-button'),
-            onPressed: _deleteSelectedLists,
+            onPressed: _selectedListsDelete,
             icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(
-              "Delete (${widget.keysOfListsSelectedForDeletion?.length ?? 0})",
+              "Delete (${widget.listsSelectedForDeletionKeys?.length ?? 0})",
               style: TextStyle(
                 color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,
