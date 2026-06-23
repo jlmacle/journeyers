@@ -276,7 +276,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
       children: [
         // 1. TOP: The problem to be solved (Full Width)
         GPSProblemToSolveDeclaration(
-          problemTitleController: _problemTitleController,
+          sessionTitleTfec: _problemTitleController,
           previousSessions: _caMetadata,
           onSessionSelected: _handleSessionSelection,
         ),

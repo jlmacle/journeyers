@@ -7,15 +7,15 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 /// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
 class GPSProblemToSolveDeclaration extends StatefulWidget {
   /// A TextEditingController for the session title.
-  final TextEditingController problemTitleController;
-  /// The data from the previous context analyses sessions.
+  final TextEditingController sessionTitleTfec;
+  /// The data from the previous context analyses sessions (for metadata import).
   final List<Map<String, dynamic>> previousSessions;
   /// A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
 
   const GPSProblemToSolveDeclaration({
     super.key,
-    required this.problemTitleController,
+    required this.sessionTitleTfec,
     required this.previousSessions,
     required this.onSessionSelected,
   });
@@ -36,7 +36,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
             children: [
               TextField
               (
-                controller: widget.problemTitleController,
+                controller: widget.sessionTitleTfec,
                 autofocus: true,
                 decoration: InputDecoration
                 (
@@ -87,7 +87,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               Expanded(
                 child: Center(
                   child: Text(
-                  (widget.problemTitleController.text.trim() == "") ? gpsProcessTitlePlaceholder: widget.problemTitleController.text.trim(), 
+                  (widget.sessionTitleTfec.text.trim() == "") ? gpsProcessTitlePlaceholder: widget.sessionTitleTfec.text.trim(), 
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 ),
