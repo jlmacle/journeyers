@@ -9,7 +9,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 class CAKeywordsDeclaration extends StatefulWidget 
 {
   /// A keywords value at edition time.
-  final Set<String> keywordsForEdition;
+  final Set<String> keywordsWhenEdition;
 
   /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> onKeywordsUpdatedProcessCallbackFunction;
@@ -17,7 +17,7 @@ class CAKeywordsDeclaration extends StatefulWidget
   const CAKeywordsDeclaration
   ({
     super.key,
-    required this.keywordsForEdition,
+    required this.keywordsWhenEdition,
     required this.onKeywordsUpdatedProcessCallbackFunction
   });
 
@@ -56,7 +56,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   @override
   void initState() {
     super.initState();
-    _keywordsListSorted = widget.keywordsForEdition.toList();
+    _keywordsListSorted = widget.keywordsWhenEdition.toList();
     if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: initState: _keywordsListSorted: $_keywordsListSorted");
   }
 

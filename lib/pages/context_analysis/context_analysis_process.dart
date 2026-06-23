@@ -253,7 +253,7 @@ class CAProcessState extends State<CAProcess>
             // Keywords
             CAKeywordsDeclaration
             (
-              keywordsForEdition: widget.keywordsWhenEdition,
+              keywordsWhenEdition: widget.keywordsWhenEdition,
               onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)
             ),
             
