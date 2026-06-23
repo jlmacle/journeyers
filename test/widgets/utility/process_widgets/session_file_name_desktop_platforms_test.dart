@@ -23,7 +23,7 @@ void main()
           SharedPreferences.setMockInitialValues
           ({
               // Setting a value. 
-              // getApplicationFolderPathPref() is called in initState.
+              // getApplicationFolderPath() is called in initState.
               // Otherwise a "pumpAndSettle timed out" is thrown
               'applicationFolderPath': ""
           });
