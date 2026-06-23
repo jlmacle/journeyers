@@ -13,16 +13,16 @@ class ListDashboardSortingAndFilteringFeature extends StatefulWidget
   final String dashboardContext;
 
   /// List containing all available lists data.
-  final List<dynamic>? allLists;
+  final List<dynamic>? listsAll;
 
   /// List containing all filtered lists data.
-  final List<dynamic>? filteredLists;
+  final List<dynamic>? listsFiltered;
 
   /// List containing the keywords used by the sessions.
-  final List<String> usedKeywords;
+  final List<String> keywordsAll;
 
   /// List containing the selected keywords.
-  final List<String> selectedKeywords;
+  final List<String> keywordsSelected;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
@@ -34,10 +34,10 @@ class ListDashboardSortingAndFilteringFeature extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    required this.allLists,
-    required this.filteredLists,
-    required this.usedKeywords,
-    required this.selectedKeywords,
+    required this.listsAll,
+    required this.listsFiltered,
+    required this.keywordsAll,
+    required this.keywordsSelected,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
     required this.dashboardFilteringByKeywordsKey
   });
@@ -73,7 +73,7 @@ class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardS
                   // Sorting by title
                   ListDashboardSortingByLabel
                   (
-                    filteredListsToSort: widget.filteredLists,
+                    filteredListsToSort: widget.listsFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                 ],
@@ -93,10 +93,10 @@ class _ListDashboardSortingAndFilteringFeatureState extends State<ListDashboardS
         ListDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          allLists: widget.allLists, 
-          filteredLists: widget.filteredLists, 
-          usedKeywords: widget.usedKeywords,
-          selectedKeywords: widget.selectedKeywords,
+          allLists: widget.listsAll, 
+          filteredLists: widget.listsFiltered, 
+          keywordsAll: widget.keywordsAll,
+          keywordsSelected: widget.keywordsSelected,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
         ),  
       ],

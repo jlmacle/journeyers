@@ -30,17 +30,17 @@ String tmpFilePath = "";
 /// A widget handling a session data.
 class SessionsListItem extends StatefulWidget 
 {
+  /// The context of the dashboard (context analyses or group problem-solving sessions).
+  final String dashboardContext;
+
   /// The session metadata.
   final Map<String, dynamic> sessionMetadata;
 
   /// The index within the list.
-  final int index;
+  final int sessionDataIndex;
 
   /// Boolean to indicate if the checkbox is checked.
   final bool isChecked;
-
-  /// The context of the dashboard (context analyses or group problem-solving sessions).
-  final String dashboardContext;
 
   /// A callback function called when the checkbox is checked/unchecked.
   final ValueChanged<bool?> onCheckboxChangedCallbackFunction;
@@ -63,7 +63,7 @@ class SessionsListItem extends StatefulWidget
   const SessionsListItem({
     super.key,
     required this.sessionMetadata,
-    required this.index,
+    required this.sessionDataIndex,
     required this.isChecked,
     required this.dashboardContext,
     required this.onCheckboxChangedCallbackFunction,
@@ -80,12 +80,12 @@ class SessionsListItem extends StatefulWidget
 
 class _SessionsListItemState extends State<SessionsListItem> 
 {
-  final TextEditingController _kwsEditController = .new();
+  final TextEditingController _kwsEditTfec = .new();
 
   // Data related to deleting ideas from the overlay
-  final List<String> _ideasSelectedForDeletion = [];
-  final List<int> _indexesOfIdeasSelectedForDeletion = [];
   bool _areSomeIdeasForDeletion = false;
+  final List<String> _ideasSelectedForDeletion = [];
+  final List<int> _ideasSelectedForDeletionIndexes = [];  
   final _tecNewIdea = TextEditingController();
   // List of ideas present before deletion
   List<String> _ideasListBeforeEdition = [];
@@ -99,7 +99,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   void _onKeywordsUpdated(String? filePath) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = _kwsEditController.text
+    final Set<String> updatedKeywords = _kwsEditTfec.text
         .split(',')
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -237,7 +237,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
   @override void dispose() 
   {
-    _kwsEditController.dispose();
+    _kwsEditTfec.dispose();
     super.dispose();
   }
   
@@ -272,7 +272,7 @@ class _SessionsListItemState extends State<SessionsListItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: ValueKey('checkbox-${widget.index}'),
+                  key: ValueKey('checkbox-${widget.sessionDataIndex}'),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
@@ -289,7 +289,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                             onTap: widget.onEditTitleCallbackFunction,
                             child: Text(
                               displayTitle,
-                              key: ValueKey('session-title-${widget.index}'),
+                              key: ValueKey('session-title-${widget.sessionDataIndex}'),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
@@ -297,7 +297,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           // The session date
                           Text(
                             "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
-                            key: ValueKey('session-date-${widget.index}'),
+                            key: ValueKey('session-date-${widget.sessionDataIndex}'),
                             style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
@@ -311,13 +311,13 @@ class _SessionsListItemState extends State<SessionsListItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                           filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                          kwsEditController: _kwsEditController,
+                          kwsEditController: _kwsEditTfec,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                           onKeywordsUpdated: _onKeywordsUpdated
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
-                          key: ValueKey('session-keywords-${widget.index}'),
+                          key: ValueKey('session-keywords-${widget.sessionDataIndex}'),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -359,7 +359,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                         dashboardContext: widget.dashboardContext,
                         currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                         filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                        kwsEditController: _kwsEditController,
+                        kwsEditController: _kwsEditTfec,
                         onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                         onKeywordsUpdated: _onKeywordsUpdated
                       ),
@@ -369,7 +369,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 ),
                 // To delete session metadata and file
                 IconButton(
-                  key: ValueKey('session-delete-${widget.index}'),
+                  key: ValueKey('session-delete-${widget.sessionDataIndex}'),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
@@ -436,7 +436,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         // Opening the edition overlay and waiting for it to close
                         if (context.mounted)
                         {
-                          await _showEditOverlay(context);                        
+                          await _showIdeasEditOverlay(context);                        
 
                           setLocalState(() { });
                         }
@@ -532,7 +532,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
   
 
   // Method used to display an overlay with the ideas to edit. 
-  Future<void> _showEditOverlay(BuildContext context) async
+  Future<void> _showIdeasEditOverlay(BuildContext context) async
   {
     await showGeneralDialog
     (
@@ -578,7 +578,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       (
                         areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
                         enteredTextItemsList: _ideasListBeforeEdition,
-                        indexesOfTextItemsSelectedForDeletion: _indexesOfIdeasSelectedForDeletion,
+                        indexesOfTextItemsSelectedForDeletion: _ideasSelectedForDeletionIndexes,
                         callbackFunctionToRefreshTheTextItemsList: 
                         () 
                         {
@@ -607,8 +607,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                                                             if(boolParam!) 
                                                                             {                                                                    
                                                                               // adding the index to _ideasSelectedForDeletionIndexes
-                                                                              _indexesOfIdeasSelectedForDeletion.add(index);
-                                                                              _indexesOfIdeasSelectedForDeletion.sort();
+                                                                              _ideasSelectedForDeletionIndexes.add(index);
+                                                                              _ideasSelectedForDeletionIndexes.sort();
                                                                               _areSomeIdeasForDeletion = true;                                    
                                                                               
                                                                               setLocalState(() {});
@@ -617,15 +617,15 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                                                               });
                                                                             }
                                                                             else{
-                                                                              _indexesOfIdeasSelectedForDeletion.remove(index);
-                                                                              if (_indexesOfIdeasSelectedForDeletion.isEmpty) _areSomeIdeasForDeletion = false;
+                                                                              _ideasSelectedForDeletionIndexes.remove(index);
+                                                                              if (_ideasSelectedForDeletionIndexes.isEmpty) _areSomeIdeasForDeletion = false;
                                                                               
                                                                               setLocalState(() {});
                                                                               setState(() {
                                                                                 
                                                                               });
                                                                             }
-                                                                            if (editDebug) pu.printd("Editing: _SessionsListItemState: _showEditOverlay: _ideasSelectedForDeletionIndexes: $_indexesOfIdeasSelectedForDeletion");
+                                                                            if (editDebug) pu.printd("Editing: _SessionsListItemState: _showEditOverlay: _ideasSelectedForDeletionIndexes: $_ideasSelectedForDeletionIndexes");
                       
                                                                           }, 
                                       // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
@@ -638,7 +638,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                         });
                                         _onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
                                       },
-                                      parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_indexesOfIdeasSelectedForDeletion.add(index);}, 
+                                      parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_ideasSelectedForDeletionIndexes.add(index);}, 
                                       themeData: Theme.of(context),                          
                                     )                          
                                   ;
@@ -718,6 +718,7 @@ Future<void> _shareSession(
   await SharePlus.instance.share(params);
 }
 
+// todo: to move/clean
 void _showKeywordsEditSheet
 ({
   required BuildContext context, required String dashboardContext, 
