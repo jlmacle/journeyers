@@ -29,12 +29,12 @@ class ListDashboardSortingByLabel extends StatefulWidget
 class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabel> 
 {
   // Random alphabetical order by default
-  bool _isAscendingTitle = false;   
+  bool _isAscendingLabel = false;   
 
   // Method used to sort session data by title 
   Future<void> _sortListsByLabel() async
   {
-    await sortListsByLabel(list: widget.filteredListsToSort!, byAscendingLabel: _isAscendingTitle);
+    await sortListsByLabel(list: widget.filteredListsToSort!, byAscendingLabel: _isAscendingLabel);
   }
 
 
@@ -45,7 +45,7 @@ class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabe
     (
       onPressed: () async 
       {
-        _isAscendingTitle = !_isAscendingTitle;
+        _isAscendingLabel = !_isAscendingLabel;
         // Updating the widget UI
         setState((){});
         
@@ -61,7 +61,7 @@ class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabe
       ),
       label: Text
       (
-        "$sortByTitleLabel (${_isAscendingTitle ? 'Z-A' : 'A-Z'})",
+        "$sortByTitleLabel (${_isAscendingLabel ? 'Z-A' : 'A-Z'})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
