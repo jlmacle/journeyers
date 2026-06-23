@@ -53,7 +53,7 @@ class ListDashboard extends StatefulWidget
 class ListDashboardState extends State<ListDashboard> 
 {
   // The DB
-  final _textListsDB = TextListsDB();
+  final _textListsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
   final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
@@ -345,10 +345,10 @@ class ListDashboardState extends State<ListDashboard>
                   child: ListDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    allLists: _allListsData,
-                    filteredLists: _filteredListsData,
+                    listsAll: _allListsData,
+                    listsFiltered: _filteredListsData,
                     areListsForDeletion: _keysOfListsSelectedForDeletion.isNotEmpty,
-                    keysOfListsSelectedForDeletion: _keysOfListsSelectedForDeletion,
+                    listsSelectedForDeletionKeys: _keysOfListsSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
                   )
                 ),

@@ -73,7 +73,7 @@ class ListOfListsItem extends StatefulWidget
 
 class _ListOfListsItemState extends State<ListOfListsItem> 
 {
-  final _textListsDB = TextListsDB();
+  final _textListsDB = ListsDB();
   List<String> _currentParticipants = [];
 
   final TextEditingController _kwsEditTec = .new();

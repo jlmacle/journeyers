@@ -57,7 +57,7 @@ class _NewTextListState extends State<NewTextList> {
   bool get _listHasBeenLoaded => widget.loadedLabel != null;
 
   // Data related to retrieving the list of grouped texts
-  final _textListsDB = TextListsDB();
+  final _textListsDB = ListsDB();
   bool _loadingDB = true;
   String? _errorLoadingDB;
   List<List<String>>? _listOfPreviousGroupedTexts = [];
