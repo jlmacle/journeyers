@@ -14,16 +14,16 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   final String dashboardContext;
 
   /// List containing all available session data.
-  final List<dynamic>? allSessions;
+  final List<dynamic>? sessionsAll;
 
   /// List containing all filtered session data.
-  final List<dynamic>? filteredSessions;
+  final List<dynamic>? sessionsFiltered;
 
   /// List containing the keywords used by the sessions.
-  final List<String> usedKeywords;
+  final List<String> keywordsUsed;
 
   /// List containing the selected keywords.
-  final List<String> selectedKeywords;
+  final List<String> keywordsSelected;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
@@ -35,10 +35,10 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    required this.allSessions,
-    required this.filteredSessions,
-    required this.usedKeywords,
-    required this.selectedKeywords,
+    required this.sessionsAll,
+    required this.sessionsFiltered,
+    required this.keywordsUsed,
+    required this.keywordsSelected,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
     required this.dashboardFilteringByKeywordsKey
   });
@@ -74,13 +74,13 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                   // Sorting by title
                   DashboardSortingByTitle
                   (
-                    filteredSessionsToSort: widget.filteredSessions,
+                    filteredSessionsToSort: widget.sessionsFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                   // Sorting by date
                   DashboardSortingByDate
                   (
-                    sessionsToSort: widget.filteredSessions,
+                    filteredSessionsToSort: widget.sessionsFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                 ],
@@ -100,10 +100,10 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
         DashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          allSessions: widget.allSessions, 
-          filteredSessions: widget.filteredSessions, 
-          usedKeywords: widget.usedKeywords,
-          selectedKeywords: widget.selectedKeywords,
+          allSessions: widget.sessionsAll, 
+          filteredSessions: widget.sessionsFiltered, 
+          usedKeywords: widget.keywordsUsed,
+          selectedKeywords: widget.keywordsSelected,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
         ),  
       ],
