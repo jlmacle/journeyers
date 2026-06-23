@@ -30,7 +30,7 @@ import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mob
 class CAProcess extends StatefulWidget 
 {
   /// A boolean used to state if an edition is in progress.
-  final bool sessionDataBeingEdited;
+  final bool isSessionDataBeingEdited;
 
   /// A DTOCAForm instance used at initState time.
   final DTOCAForm? dtoWhenEdition;
@@ -52,7 +52,7 @@ class CAProcess extends StatefulWidget
 
   const CAProcess({
     super.key,
-    this.sessionDataBeingEdited = false,
+    this.isSessionDataBeingEdited = false,
     this.dtoWhenEdition,
     this.fileNameWhenEditionWithoutExtension = "",
     this.titleWhenEdition = "",
@@ -245,7 +245,7 @@ class CAProcessState extends State<CAProcess>
             // Text field for the analysis title
             CATitleDeclaration
             (
-              analysisTitleAutofocused: widget.sessionDataBeingEdited,
+              analysisTitleAutofocused: widget.isSessionDataBeingEdited,
               analysisTitleWhenEdition: widget.titleWhenEdition,
               onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
             ),

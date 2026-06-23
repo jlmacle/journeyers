@@ -413,7 +413,7 @@ class ListDashboardState extends State<ListDashboard>
                             index
                           ),
                           onEditPressedCallbackFunction: () {},
-                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required keywordsWhenEdition, required bool sessionDataBeingEdited}) {},
+                          onEditSessionDataCallbackFunction: ({required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required keywordsWhenEdition, required bool isSessionDataBeingEdited}) {},
                           onKeywordsUpdatedCallbackFunction: _updateListKeywords,
                           onParticipantsUpdatedCallbackFunction: _updateParticipants,
                           onDeleteCallbackFunction: () async => await _selectedSessionDelete(listData[itemKey]),
