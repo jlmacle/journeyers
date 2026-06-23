@@ -14,10 +14,10 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
   final List<dynamic>? filteredLists;
 
   /// List containing the keywords used by the lists.
-  final List<String> usedKeywords;
+  final List<String> keywordsAll;
 
   /// List containing the selected keywords.
-  final List<String> selectedKeywords;
+  final List<String> keywordsSelected;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -27,8 +27,8 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
     super.key,
     required this.allLists,
     required this.filteredLists,
-    required this.usedKeywords,
-    required this.selectedKeywords,
+    required this.keywordsAll,
+    required this.keywordsSelected,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
   });
 
@@ -42,7 +42,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
   // Method used to filter the lists by keywords.
   Future<void> applyFilteringByKeywords() async
   {
-    if (widget.selectedKeywords.isEmpty) 
+    if (widget.keywordsSelected.isEmpty) 
     {
       // Working with the list while keeping the same reference
       widget.filteredLists!.clear();
@@ -56,7 +56,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
         (session) 
         {
           final sessionKeywords = session[itemKeywordsKey].cast<String>();
-          return widget.selectedKeywords.every((k) => sessionKeywords.contains(k));
+          return widget.keywordsSelected.every((k) => sessionKeywords.contains(k));
         }
       ).toList();
       
@@ -72,13 +72,13 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
   // Method used to add/remove a keyword from the filtering criteria
   Future<void> _toggleKeywordSelection(String keyword) async
   {
-     if (widget.selectedKeywords.contains(keyword)) 
+     if (widget.keywordsSelected.contains(keyword)) 
     {
-      widget.selectedKeywords.remove(keyword);
+      widget.keywordsSelected.remove(keyword);
     } 
     else 
     {
-      widget.selectedKeywords.add(keyword);
+      widget.keywordsSelected.add(keyword);
     }
 
     // Applying the filtering by keywords
@@ -106,10 +106,10 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
     (
       () 
       {
-        widget.usedKeywords.clear();
-        widget.usedKeywords.addAll(remainingKws);
+        widget.keywordsAll.clear();
+        widget.keywordsAll.addAll(remainingKws);
         // Removing selected filters if the keyword no longer exists
-        widget.selectedKeywords.removeWhere((kw) => !remainingKws.contains(kw));
+        widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
       }
     );
   }
@@ -125,7 +125,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
             spacing: 8.0,
             children: 
             (
-              widget.usedKeywords.toList()
+              widget.keywordsAll.toList()
               ..sort
               (
                 (a, b) 
@@ -145,7 +145,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
                 (
                   label: Text(kw),
                   onSelected: (_) async => await _toggleKeywordSelection(kw),
-                  selected: widget.selectedKeywords.contains(kw)
+                  selected: widget.keywordsSelected.contains(kw)
                 );
               }
             ).toList(),

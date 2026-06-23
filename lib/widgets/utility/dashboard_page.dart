@@ -85,7 +85,7 @@ class DashboardPageState extends State<DashboardPage>
                 (typeOfDashboardContext: widget.dashboardContext);
     
     // Getting the used keywords from the retrieved data
-    _usedKeywords = await _getUsedKeywords(retrievedSessionData);
+    _keywordsAll = await _getUsedKeywords(retrievedSessionData);
 
     // When getting the stored data, _allSessions = retrievedSessionData
     _allSessions = retrievedSessionData;
@@ -118,10 +118,10 @@ class DashboardPageState extends State<DashboardPage>
 
   // ─── SORTING AND FILTERING related data and methods ───────────────────────────────────────
   // All the keywords available
-  List<String> _usedKeywords = [];
+  List<String> _keywordsAll = [];
 
   // All the selected keywords
-  final List<String> _selectedKeywords = [];
+  final List<String> _keywordsSelected = [];
 
   // Method used to get the list of keywords present in a session data
   Future<List<String>> _getUsedKeywords(List<dynamic> listOfSessionData) async 
@@ -322,7 +322,7 @@ class DashboardPageState extends State<DashboardPage>
                   (
                     dashboardContext: widget.dashboardContext, 
                     sessionsAll: _allSessions, sessionsFiltered: _filteredSessions,
-                    keywordsAll: _usedKeywords, keywordsSelected: _selectedKeywords,
+                    keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),

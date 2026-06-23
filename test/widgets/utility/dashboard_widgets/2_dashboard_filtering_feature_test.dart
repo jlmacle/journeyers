@@ -11,15 +11,15 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filter
 void main() {
   group('DashboardFilteringFeature Widget Tests: \n', () {
     GlobalKey<DashboardFilteringByKeywordsState>? testKey;
-    List<String>? usedKeywords;
-    List<String>? selectedKeywords;
+    List<String>? keywordsAll;
+    List<String>? keywordsSelected;
     List<dynamic>? allSessions;
     List<dynamic>? filteredSessions;
 
     setUp(() {
       testKey = GlobalKey<DashboardFilteringByKeywordsState>();
-      usedKeywords = ['Flutter', 'Dart', 'Testing'];
-      selectedKeywords = [];
+      keywordsAll = ['Flutter', 'Dart', 'Testing'];
+      keywordsSelected = [];
       allSessions = [{'title': 'A'}, {'title': 'B'}];
       filteredSessions = [{'title': 'A'}];
     });
@@ -32,8 +32,8 @@ void main() {
             dashboardContext: DashboardUtils.caContext,
             sessionsAll: allSessions,
             sessionsFiltered: filteredSessions,
-            keywordsAll: usedKeywords!,
-            keywordsSelected: selectedKeywords!,
+            keywordsAll: keywordsAll!,
+            keywordsSelected: keywordsSelected!,
             parentCallbackFunctionToRefreshTheSessionsList: () {},
             dashboardFilteringByKeywordsKey: testKey!,
           ),

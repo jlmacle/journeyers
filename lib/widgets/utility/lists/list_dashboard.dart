@@ -99,7 +99,7 @@ class ListDashboardState extends State<ListDashboard>
     if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_allListsData");
     
     // Getting the used keywords from the retrieved data
-    _usedKeywords = await _getUsedKeywords(_allListsData);
+    _keywordsAll = await _getUsedKeywords(_allListsData);
 
 
     // _filteredLists is used in build
@@ -128,10 +128,10 @@ class ListDashboardState extends State<ListDashboard>
 
   // ─── SORTING AND FILTERING related data and methods ───────────────────────────────────────
   // All the keywords available
-  List<String> _usedKeywords = [];
+  List<String> _keywordsAll = [];
 
   // All the selected keywords
-  final List<String> _selectedKeywords = [];
+  final List<String> _keywordsSelected = [];
 
   // Method used to get the list of keywords present in a session data
   Future<List<String>> _getUsedKeywords(List<dynamic> listOfListData) async 
@@ -333,8 +333,8 @@ class ListDashboardState extends State<ListDashboard>
                   child: ListDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    allLists: _allListsData, filteredLists: _filteredListsData,
-                    usedKeywords: _usedKeywords, selectedKeywords: _selectedKeywords,
+                    listsAll: _allListsData, listsFiltered: _filteredListsData,
+                    keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),
