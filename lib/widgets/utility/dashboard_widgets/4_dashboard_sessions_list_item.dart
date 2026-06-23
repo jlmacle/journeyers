@@ -513,8 +513,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )
                     : GPSPreview(
-                        pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
-                        ideas: _ideasListBeforeEdition,                       
+                        gpsPreviewPathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
+                        gpsPreviewIdeasStored: _ideasListBeforeEdition,                       
                         
                         gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )

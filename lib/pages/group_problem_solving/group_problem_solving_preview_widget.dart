@@ -14,18 +14,19 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// A preview widget used for the group problem-solving dashboard.
 class GPSPreview extends StatefulWidget {
   /// The path to a stored group problem-solving session data.
-  final String pathToStoredData;
+  final String gpsPreviewPathToStoredData;
 
   /// The ideas listed in the preview.
-  final List<String> ideas;
+  final List<String> gpsPreviewIdeasStored;
 
   /// Callback function used to update the temporary file path used for sharing a session data.
   final ValueChanged<String> gpsPreviewCallbackFunctionToUpdateTmpFilePath;
 
   const GPSPreview({
     super.key,
-    required this.pathToStoredData,
-    required this.ideas,
+    required this.gpsPreviewPathToStoredData,
+    // todo: to clean
+    required this.gpsPreviewIdeasStored,
     required this.gpsPreviewCallbackFunctionToUpdateTmpFilePath
   });
 
@@ -38,21 +39,20 @@ class GPSPreview extends StatefulWidget {
 class _GPSPreviewState
     extends State<GPSPreview> {
 
-  bool _isLoading = true;
-  String _sessionTitle = "";
-  String _dateString = "";
-
-  // List used to display the ideas
-  List<String> _ideas = [];
+  bool _isPreviewDataLoading = true;
+  // Data displayed
+  String _dataSessionTitle = "";
+  String _dataDateString = "";
+  List<String> _dataIdeas = [];
 
   // only runs once, at widget creation
   @override
   void initState() {
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: widget.ideas: ${widget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}");
     super.initState();
     
-    _ideas = widget.ideas;
-    if (_ideas.isEmpty) 
+    _dataIdeas = widget.gpsPreviewIdeasStored;
+    if (_dataIdeas.isEmpty) 
     {
       if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: _fetchingData");
       _fetchingData();
@@ -60,7 +60,7 @@ class _GPSPreviewState
     else
     {
       setState(() {
-        _isLoading = false;
+        _isPreviewDataLoading = false;
       });
     }     
   }
@@ -69,13 +69,13 @@ class _GPSPreviewState
     List<String> txtLines = [];
 
     try {
-      if (pathsForTestFiles.contains(widget.pathToStoredData)) 
+      if (pathsForTestFiles.contains(widget.gpsPreviewPathToStoredData)) 
       {
-        _ideas = [testDataMessage];
+        _dataIdeas = [testDataMessage];
         return;
       }
 
-      String fileNameWithExtension = path.basename(widget.pathToStoredData);
+      String fileNameWithExtension = path.basename(widget.gpsPreviewPathToStoredData);
       final String content;
       // Retrieving the TXT content
       if (Platform.isAndroid)
@@ -90,7 +90,7 @@ class _GPSPreviewState
           else 
           { 
             if (testingDebug) pu.printd("Testing Debug: Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
-            content = await File(widget.pathToStoredData).readAsString();
+            content = await File(widget.gpsPreviewPathToStoredData).readAsString();
           }
           txtLines = LineSplitter.split(content).toList();
         }
@@ -109,7 +109,7 @@ class _GPSPreviewState
           else 
           { 
             if (testingDebug) pu.printd("Testing Debug: Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
-            content = await File(widget.pathToStoredData).readAsString();
+            content = await File(widget.gpsPreviewPathToStoredData).readAsString();
           }
           txtLines = LineSplitter.split(content).toList();
         }
@@ -119,8 +119,8 @@ class _GPSPreviewState
       else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
       {
         // Checking if the CSV file exists
-        File csvFile = File(widget.pathToStoredData);
-        if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: ${widget.pathToStoredData} (${Platform.operatingSystem})");
+        File csvFile = File(widget.gpsPreviewPathToStoredData);
+        if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: ${widget.gpsPreviewPathToStoredData} (${Platform.operatingSystem})");
         // Loading the file content
         txtLines = csvFile.readAsLinesSync();
       }
@@ -128,7 +128,7 @@ class _GPSPreviewState
       // To clean
       // Writing the content in a temporary file for data sharing
       Directory testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_preview_temp');
-      String tmpFilePathWithExtension = path.join(testTmpDir.path, widget.pathToStoredData.split("/").last);
+      String tmpFilePathWithExtension = path.join(testTmpDir.path, widget.gpsPreviewPathToStoredData.split("/").last);
       var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));
       String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
       if (sessionDataDebug) pu.printd("Session Data: GPSPreview: _fetchingData: saveFileUsingWriteAsBytes: tmpFilePath: $tmpFilePath");
@@ -137,13 +137,13 @@ class _GPSPreviewState
 
       // Building the preview
       if (txtLines.length >= 2) {
-        _sessionTitle = txtLines[1];
+        _dataSessionTitle = txtLines[1];
         // Extracting date from the second line: "Date: MMMM dd, yyyy h:mm a"
-        _dateString = txtLines[2].replaceFirst("Date: ", "");
+        _dataDateString = txtLines[2].replaceFirst("Date: ", "");
         
         // Ideas start after the "---" separator (index 3 onwards)
         // We strip the "1. ", "2. " numbering prefix
-        _ideas = txtLines
+        _dataIdeas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
             .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
@@ -155,7 +155,7 @@ class _GPSPreviewState
     } finally {
       if (mounted) {
         setState(() {
-          _isLoading = false;
+          _isPreviewDataLoading = false;
         });
       }
     }
@@ -165,27 +165,27 @@ class _GPSPreviewState
   @override
   void didUpdateWidget(covariant GPSPreview oldWidget) {
     if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget");
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: widget.ideas: ${widget.ideas}");
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: oldWidget.ideas: ${oldWidget.ideas}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
+    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");
 
     super.didUpdateWidget(oldWidget);
 
     // Updating with new values
-    if (widget.ideas != oldWidget.ideas && widget.ideas.isNotEmpty) {
+    if (widget.gpsPreviewIdeasStored != oldWidget.gpsPreviewIdeasStored && widget.gpsPreviewIdeasStored.isNotEmpty) {
       setState(() {
-        _ideas = widget.ideas;
-        _isLoading = false;
+        _dataIdeas = widget.gpsPreviewIdeasStored;
+        _isPreviewDataLoading = false;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
+    if (_isPreviewDataLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (_ideas.isEmpty) {
+    if (_dataIdeas.isEmpty) {
       return const Center(child: Text("No ideas found."));
     }
 
@@ -195,12 +195,12 @@ class _GPSPreviewState
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            _dateString,
+            _dataDateString,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),
         const Divider(),
-        ..._ideas.map((idea) => Padding(
+        ..._dataIdeas.map((idea) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               // Rows with the ideas texts
               child: Row(
