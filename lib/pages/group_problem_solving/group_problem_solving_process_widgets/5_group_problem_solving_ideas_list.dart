@@ -25,18 +25,16 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   // Data related to deleting texts from the new list
   List<String> _ideasSelectedForDeletion = [];
   final List<int> _ideasSelectedForDeletionIndexes = [];
-  bool _areSomeIdeasForDeletion = false;  
-
-  late final List<String> _enteredIdeasList;
-
-  final _tecNewIdea = TextEditingController();
+  late final List<String> _ideasEnteredList;
+  bool _ideasAreSomeForDeletion = false;  
+  final _ideaNewTfec = TextEditingController();
 
 
-  void _onUpdateTheIdeaValue({required String stringParam, required int intParam})
+  void _ideaOnUpdateTheValue({required String stringParam, required int intParam})
   {
     setState(() {
-      _enteredIdeasList[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: _GPSIdeasListState: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_enteredIdeasList");
+      _ideasEnteredList[intParam] = stringParam;
+      if (editDebug) pu.printd("Editing: _GPSIdeasListState: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_ideasEnteredList");
     });  
   }
 
@@ -44,12 +42,12 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   void initState() {
     super.initState();   
     
-    _enteredIdeasList = widget.ideas;
+    _ideasEnteredList = widget.ideas;
   }
 
   @override
   void dispose() {
-    _tecNewIdea.dispose();
+    _ideaNewTfec.dispose();
     super.dispose();
   }
 
@@ -62,7 +60,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
               // List edition if list not empty
               if (widget.ideas.isNotEmpty)
               {
-                _showEditOverlay(context);
+                _ideasShowEditOverlay(context);
               }
              },
       child : 
@@ -71,7 +69,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
            ListTile(
               leading: const Icon(Icons.add_circle_outline),
               title: const Text(ideasListTitle, style: problemSolvingIdeasTitle),              
-              onTap: () => _showEditOverlay(context),
+              onTap: () => _ideasShowEditOverlay(context),
             ),
           const SizedBox(height: 10),
           if (widget.ideas.isEmpty)
@@ -106,7 +104,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
 
 
   // Method used to display an overlay with the ideas to edit. 
-  void _showEditOverlay(BuildContext context) 
+  void _ideasShowEditOverlay(BuildContext context) 
   {
     
     showGeneralDialog
@@ -148,14 +146,14 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                   children: [
                     NewTextListDeletionByBulk
                       (
-                        areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
-                        enteredTextItemsList: _enteredIdeasList,
+                        areSomeTextItemsSelectedForDeletion: _ideasAreSomeForDeletion,
+                        enteredTextItemsList: _ideasEnteredList,
                         indexesOfTextItemsSelectedForDeletion: _ideasSelectedForDeletionIndexes,
                         callbackFunctionToRefreshTheTextItemsList: 
                         () 
                         {
                           setLocalState((){});
-                          setState(() {_areSomeIdeasForDeletion = false;});
+                          setState(() {_ideasAreSomeForDeletion = false;});
                         }
                       ),
                     // List of added texts or placeholder message
@@ -182,13 +180,13 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                                                               // adding the index to _ideasSelectedForDeletionIndexes
                                                                               _ideasSelectedForDeletionIndexes.add(index);
                                                                               _ideasSelectedForDeletionIndexes.sort();
-                                                                              _areSomeIdeasForDeletion = true;                                    
+                                                                              _ideasAreSomeForDeletion = true;                                    
                                                                               
                                                                               setLocalState(() {});
                                                                             }
                                                                             else{
                                                                               _ideasSelectedForDeletionIndexes.remove(index);
-                                                                              if (_ideasSelectedForDeletionIndexes.isEmpty) _areSomeIdeasForDeletion = false;
+                                                                              if (_ideasSelectedForDeletionIndexes.isEmpty) _ideasAreSomeForDeletion = false;
                                                                               
                                                                               setLocalState(() {});
                                                                             }
@@ -199,7 +197,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                       ({required intParam, required stringParam}) 
                                       {
                                         setLocalState(() {});
-                                        _onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
+                                        _ideaOnUpdateTheValue(stringParam: stringParam, intParam: intParam);
                                       },
                                       parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_ideasSelectedForDeletionIndexes.add(index);}, 
                                       themeData: Theme.of(context),                          
@@ -214,7 +212,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                       child: TextField
                       (
                         key: const ValueKey('ideaOverlayField'),
-                        controller: _tecNewIdea,
+                        controller: _ideaNewTfec,
                         textAlign: TextAlign.left,
                         decoration: const InputDecoration
                         (
@@ -228,13 +226,13 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                         onSubmitted: (value)
                         {
                           setLocalState(() {
-                            _enteredIdeasList.add(value.trim());
+                            _ideasEnteredList.add(value.trim());
                           });
                           setState(() {
                             
                           });
-                          _tecNewIdea.clear();
-                          if (editDebug) pu.printd("Editing: _GPSIdeasListState: _showEditOverlay: onSubmitted: _enteredIdeasList : $_enteredIdeasList");
+                          _ideaNewTfec.clear();
+                          if (editDebug) pu.printd("Editing: _GPSIdeasListState: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList");
                         },
                       ),
                     ),

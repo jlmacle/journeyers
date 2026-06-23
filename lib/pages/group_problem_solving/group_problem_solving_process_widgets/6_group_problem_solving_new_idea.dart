@@ -8,12 +8,12 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 class GPSNewIdea extends StatefulWidget 
 {
   /// A callback function used to update the list of ideas.
-  final ValueChanged<String> onIdeaAddedCallbackFunction;
+  final ValueChanged<String> ideaOnAddedCallbackFunction;
 
   const GPSNewIdea
   ({
     super.key,
-    required this.onIdeaAddedCallbackFunction
+    required this.ideaOnAddedCallbackFunction
   });
 
   @override
@@ -23,16 +23,16 @@ class GPSNewIdea extends StatefulWidget
 class _GPSNewIdeaState extends State<GPSNewIdea> 
 {
   // TextEditingController for entering a new idea
-  final TextEditingController _ideaController = .new();
+  final TextEditingController _ideaTfec = .new();
   // FocusNode used to keep the focus on the new idea field after an idea has been entered
   final FocusNode _ideaFocusNode = FocusNode();
 
   // Method to handle adding an idea to the list
   void _ideaSubmit() {
-    if (_ideaController.text.trim().isNotEmpty) {
+    if (_ideaTfec.text.trim().isNotEmpty) {
       // Adding the new idea to the list
-      widget.onIdeaAddedCallbackFunction(_ideaController.text.trim());
-      _ideaController.clear();
+      widget.ideaOnAddedCallbackFunction(_ideaTfec.text.trim());
+      _ideaTfec.clear();
     }
     _ideaFocusNode.unfocus();
   }
@@ -40,7 +40,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
   @override
   void dispose() 
   {
-    _ideaController.dispose();
+    _ideaTfec.dispose();
     super.dispose();
   }
 
@@ -55,7 +55,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
               Expanded(
                 child: TextField(
                   focusNode: _ideaFocusNode,
-                  controller: _ideaController,
+                  controller: _ideaTfec,
                   decoration: const InputDecoration(
                     hintText: newIdeaTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
