@@ -276,7 +276,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
       children: [
         // 1. TOP: The problem to be solved (Full Width)
         GPSProblemToSolveDeclaration(
-          problemTitleController: _problemTitleController,
+          sessionTitleTfec: _problemTitleController,
           previousSessions: _caMetadata,
           onSessionSelected: _handleSessionSelection,
         ),
@@ -436,7 +436,7 @@ void _handleSessionSelection(Map<String, dynamic> session) {
                       _buildHeaderButton
                       (
                         text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
-                        onPressed: () {_groupMoods1Key.currentState?.clearAllIdentifiers();},
+                        onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
                         screenWidthInInches: screenWidthInInches
                       ),
                     // GPSGroupMoods widget (column 2)

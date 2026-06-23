@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 
 /// {@category Group problem-solving}
@@ -63,47 +62,23 @@ class GPSGroupMoods extends StatefulWidget
 
 class GPSGroupMoodsState extends State<GPSGroupMoods> 
 {
-  // TODO: import of previous teams
 
   // Boolean used to store if a swipe left of right has happened
   bool? _wasARightSwipe;
   
-  // Callback function used to update the wasARightSwipe field
-  final ValueChanged<bool> _onSwipe = placeHolderFunctionBool;
-
-  // Method used to trigger a re-build
-  void _updateData()
+  // Used in GPSProcess.
+  // Function used to delete all stakeholder identifiers
+  void identifiersClearAll() 
   {
-    setState(() {});
-  }
+    widget.identifiersCol1.clear();
+    widget.identifiersCol2.clear();
+    widget.groupMoodsKey1.currentState?.setState(() {});
+    widget.groupMoodsKey2.currentState?.setState(() {});
 
-  // Method used to add stakeholder identifiers
-  // Important: the knowledge of the state of both list (and colors) of identifiers is needed
-  void _addToIdentifiers()
-  {
-    // There should be as much identifiers in the first column,
-    // as in the second.
-
-    // Adding to col 1
-    int totalIndexes = widget.identifiersCol1.length + widget.identifiersCol2.length;
-    if (widget.identifiersCol1.length <= widget.identifiersCol2.length) 
-    {
-      widget.identifiersCol1.add("$totalIndexes");
-      // All identifiers are green by default
-      widget.identifiersColors1.add(greenShade900);
-      widget.groupMoodsKey1.currentState?.setState(() {});
-    }
-    else 
-    {
-      widget.identifiersCol2.add("$totalIndexes");
-      // All identifiers are green by default
-      widget.identifiersColors2.add(greenShade900);
-      widget.groupMoodsKey2.currentState?.setState(() {});
-    }    
   }
 
   // Function used to remove a stakeholder identifier
-  void _removeIdentifier({int? index}) 
+  void _identifierRemove({int? index}) 
       => setState(() 
                   {
                     if (widget.columnNumber == 1) 
@@ -118,7 +93,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
                   });
 
   // Function used to edit a stakeholder identifier
-  void _editIdentifier({int? index}) {
+  void _identifierEdit({int? index}) {
     showDialog(
       context: context,
       builder: (context) {
@@ -176,14 +151,8 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
     );
   }
 
-  // Method used to update if a swipe happened
-  void _swipeStateUpdate(bool isSwipeRight)
-  {
-    setState(() {_wasARightSwipe = isSwipeRight;});  
-  }
-
   // Function used to change a stakeholder identifier's color
-  void _changeIdentifierColor({required int index, required Color currentColor}) 
+  void _identifierChangeColor({required int index, required Color currentColor}) 
   { 
     int colorIndex = identifierColors.indexOf(currentColor);
     Color? newColor;
@@ -213,7 +182,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   }
 
   // Method used to build the list of identifiers
-  List<Widget> _buildIdentifiersList
+  List<Widget> _identifiersBuildList
   ({
     required List<String> identifiers, 
     required List<Color> identifiersColors})
@@ -221,44 +190,42 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
     return identifiers.asMap().entries
         .map((entry) => IdentifierWidget(
               identifierValue: entry.value,
-              color: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
+              identifierCircleColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key],
               isEditMode: widget.isEditMode,
               isDeleteMode: widget.isDeleteMode,
-              onDelete: () => _removeIdentifier(index: entry.key),
-              onEdit: () => _editIdentifier(index: entry.key),
+              onDelete: () => _identifierRemove(index: entry.key),
+              onEdit: () => _identifierEdit(index: entry.key),
               onSwipe: (bool value)
               {
                 _swipeStateUpdate(value);
-                _changeIdentifierColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
+                _identifierChangeColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
               },
               onClick: (bool value)
               {
                 _swipeStateUpdate(value);
-                _changeIdentifierColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
+                _identifierChangeColor(index: entry.key, currentColor: (widget.columnNumber == 1) ? widget.identifiersColors1[entry.key] : widget.identifiersColors2[entry.key]);
               },
             ))
         .toList();
   }
 
   // Method used to decide which list of identifiers to build
-  List<Widget> _whichIdentifiersListToBuild() 
+  List<Widget> _identifiersWhichListToBuild() 
   {
     if (widget.columnNumber == 1)
-    {return _buildIdentifiersList(identifiers: widget.identifiersCol1, identifiersColors: widget.identifiersColors1);}
+    {return _identifiersBuildList(identifiers: widget.identifiersCol1, identifiersColors: widget.identifiersColors1);}
     else 
-    {return _buildIdentifiersList(identifiers: widget.identifiersCol2, identifiersColors: widget.identifiersColors2);}
+    {return _identifiersBuildList(identifiers: widget.identifiersCol2, identifiersColors: widget.identifiersColors2);}
   }
 
-  // Function used to delete all stakeholder identifiers
-  // Used in GPSProcess.
-  void clearAllIdentifiers() 
+  // Method used to update if a swipe happened
+  void _swipeStateUpdate(bool isSwipeRight)
   {
-    widget.identifiersCol1.clear();
-    widget.identifiersCol2.clear();
-    widget.groupMoodsKey1.currentState?.setState(() {});
-    widget.groupMoodsKey2.currentState?.setState(() {});
-
+    setState(() {_wasARightSwipe = isSwipeRight;});  
   }
+
+  
+  
   
   @override
   Widget build(BuildContext context) {
@@ -268,7 +235,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
         // shrinkWrap: true, // Allows the list to be as small as its children
         children: 
         [          
-          ..._whichIdentifiersListToBuild()
+          ..._identifiersWhichListToBuild()
         ],
     );
   }
@@ -278,7 +245,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 class IdentifierWidget extends StatelessWidget 
 {
   final String identifierValue;
-  final Color color;
+  final Color identifierCircleColor;
   final bool isEditMode;
   final bool isDeleteMode;
   final VoidCallback onDelete;
@@ -290,7 +257,7 @@ class IdentifierWidget extends StatelessWidget
   ({
     super.key, 
     this.identifierValue = editEmoji, 
-    this.color = green,
+    this.identifierCircleColor = green,
     required this.isEditMode, 
     required this.isDeleteMode,
     required this.onDelete, 
@@ -322,7 +289,7 @@ class IdentifierWidget extends StatelessWidget
               BoxDecoration
               (
                 color: Colors.white, shape: BoxShape.circle, 
-                border: Border.all(width: 5, color: color), 
+                border: Border.all(width: 5, color: identifierCircleColor), 
               ),
               child: 
                 InkWell(

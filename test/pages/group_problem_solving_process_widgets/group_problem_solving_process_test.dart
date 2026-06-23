@@ -46,7 +46,7 @@ void main()
           (
             onSessionSelected:(_) {},
             previousSessions: const [],
-            problemTitleController: TextEditingController(),
+            sessionTitleTfec: TextEditingController(),
           ),
         ),
       ),

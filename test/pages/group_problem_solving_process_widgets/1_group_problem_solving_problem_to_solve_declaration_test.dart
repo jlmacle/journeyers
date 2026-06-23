@@ -9,14 +9,14 @@ void main()
 {
     Future<void> pumpGPSProblemToSolveDeclaration(WidgetTester tester) async
     {
-      var tec = TextEditingController();
+      var tfec = TextEditingController();
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: GPSProblemToSolveDeclaration
             (
-              problemTitleController: tec,
+              sessionTitleTfec: tfec,
               previousSessions: const [],
               onSessionSelected: (_){},
             ),
