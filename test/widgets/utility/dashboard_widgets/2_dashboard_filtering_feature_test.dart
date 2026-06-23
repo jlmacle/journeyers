@@ -32,7 +32,7 @@ void main() {
             dashboardContext: DashboardUtils.caContext,
             sessionsAll: allSessions,
             sessionsFiltered: filteredSessions,
-            keywordsUsed: usedKeywords!,
+            keywordsAll: usedKeywords!,
             keywordsSelected: selectedKeywords!,
             parentCallbackFunctionToRefreshTheSessionsList: () {},
             dashboardFilteringByKeywordsKey: testKey!,

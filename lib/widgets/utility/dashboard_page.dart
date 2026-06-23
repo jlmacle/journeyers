@@ -138,7 +138,7 @@ class DashboardPageState extends State<DashboardPage>
   // Method used to refresh the keywords list after deletion of session data
   void _refreshKeywordsAfterSessionDeletion() 
   {
-    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
   }
     
   // Method used after keywords update
@@ -183,10 +183,10 @@ class DashboardPageState extends State<DashboardPage>
     );
 
     // Updating the keywords list
-    _dashboardFilteringByKeywordsKey.currentState?.refreshKeywordsAfterSessionDeletion();
+    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await _dashboardFilteringByKeywordsKey.currentState?.applyFilteringByKeywords();
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
@@ -322,7 +322,7 @@ class DashboardPageState extends State<DashboardPage>
                   (
                     dashboardContext: widget.dashboardContext, 
                     sessionsAll: _allSessions, sessionsFiltered: _filteredSessions,
-                    keywordsUsed: _usedKeywords, keywordsSelected: _selectedKeywords,
+                    keywordsAll: _usedKeywords, keywordsSelected: _selectedKeywords,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),
