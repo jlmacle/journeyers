@@ -352,8 +352,8 @@ class _NewTextListState extends State<NewTextList> {
           [
             NewTextListKeywordsDeclaration
             (
-              currentKeywords: {},
-              onKeywordsUpdatedCallbackFunction: (newKeywords) 
+              keywordsCurrent: {},
+              keywordsOnUpdateCallbackFunction: (newKeywords) 
               {
                 if (listDebug) pu.printd("List debug: _NewTextListState: build: newKeywords: $newKeywords");
     
