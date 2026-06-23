@@ -19,7 +19,7 @@ import 'package:journeyers/widgets/utility/process_widgets/process_const_strings
 class SessionFileNameMobilePlatforms extends StatefulWidget 
 {
   /// A file name value used at editing time.
-  final String editedFileName;
+  final String fileNameWhenEdition;
 
   /// The file extension when saving the session data ('.' included)
   final String fileExtension;
@@ -33,7 +33,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   const SessionFileNameMobilePlatforms
   ({
     super.key,
-    required this.editedFileName,
+    required this.fileNameWhenEdition,
     required this.fileExtension,
     required this.onFileNameSubmittedProcessCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
@@ -45,9 +45,9 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
 
 class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePlatforms> 
 {
-  final TextEditingController _fileNameController = .new();  
+  final TextEditingController _fileNameTfec = .new();  
   
-  final GlobalKey<_SessionFileNameMobilePlatformsState> errorMessageKey = .new();
+  final GlobalKey<_SessionFileNameMobilePlatformsState> _errorMessageKey = .new();
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
@@ -59,7 +59,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
   String _applicationFolderPath = "";  
 
   // method used to get the set folder path for the application
-  void _getApplicationFolderPathPref() async
+  void _getApplicationFolderPath() async
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
@@ -77,17 +77,17 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
   void initState() {
     super.initState();
     if (sessionDataDebug) pu.printd("Session Data: file extensions: ${widget.fileExtension}");
-    _getApplicationFolderPathPref();
+    _getApplicationFolderPath();
 
     // Edited file name value if relevant
-    if (editDebug) pu.printd("Editing: SessionFileNameMobilePlatforms: initState: widget.editedFileName: ${widget.editedFileName}");
-    _fileNameController.text = widget.editedFileName;
+    if (editDebug) pu.printd("Editing: SessionFileNameMobilePlatforms: initState: widget.fileNameWhenEdition: ${widget.fileNameWhenEdition}");
+    _fileNameTfec.text = widget.fileNameWhenEdition;
   }
 
   @override
   void dispose()
   {
-    _fileNameController.dispose();
+    _fileNameTfec.dispose();
     super.dispose();
   }
 
@@ -107,7 +107,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
         
         if (result != null) {
           // Refreshing local state with the new path/bookmark
-          _getApplicationFolderPathPref(); 
+          _getApplicationFolderPath(); 
 
         // Retrieving the stored file names once the path to the folder is defined
         await du.getStoredFileNamesOnMobile();  
@@ -123,7 +123,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     )
     : TextFieldSanitizedAndCheckedUsingABlackList
     (
-      textFieldStartValue: widget.editedFileName,
+      textFieldStartValue: widget.fileNameWhenEdition,
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 

@@ -49,7 +49,7 @@ class GPSProcessState extends State<GPSProcess>
   bool _isApplicationFolderPathLoading = true;
 
   // method used to get the set preferences
-  void _getApplicationFolderPathPref() async
+  void _getApplicationFolderPath() async
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
@@ -256,7 +256,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
   void initState() {
     super.initState();
      _loadAllCAMetadata();
-    _getApplicationFolderPathPref();
+    _getApplicationFolderPath();
   }
 
   @override
@@ -475,7 +475,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 ? SessionFileNameMobilePlatforms
                 (
                   fileExtension: _fileExtension, 
-                  editedFileName: "",
+                  fileNameWhenEdition: "",
                   onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value), 
                   parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
                 )

@@ -88,9 +88,9 @@ class NewTextListOrLoadingPage extends StatelessWidget
                     MaterialPageRoute<void>(
                       builder: (_) => NewTextList
                                         (
-                                          listLabelHintText: listLabelHintText,
-                                          listPlaceholder: listPlaceholder,
-                                          invitationToEnterTextPlaceholder: invitationToEnterTextPlaceholder,
+                                          labelHintText: listLabelHintText,
+                                          placeholderList: listPlaceholder,
+                                          placeholderInvitationToEnterText: invitationToEnterTextPlaceholder,
                                           themeData: Theme.of(context),
                                           onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
                                         ),

@@ -15,23 +15,23 @@ import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_li
 /// The widget can be used to load a list for edition.
 class NewTextList extends StatefulWidget 
 {
+  /// The theme data used.
+  final ThemeData themeData;
+
   /// Pre-populated content (from a loaded list).
   final List<String> initialTextValues;
 
   /// When non-null the screen is read-only and shows this label in the title.
-  final String? loadedLabel;
+  final String? labelLoaded;
 
   /// The hint text when saving the list label.
-  final String listLabelHintText;
+  final String labelHintText;
 
   /// The text inviting to enter a new text in the list.
-  final String invitationToEnterTextPlaceholder;
+  final String placeholderInvitationToEnterText;
 
   /// The placeholder text for the new list.
-  final String listPlaceholder;
-
-  /// The theme data used.
-  final ThemeData themeData;
+  final String placeholderList;
 
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
@@ -39,10 +39,10 @@ class NewTextList extends StatefulWidget
   const NewTextList({
     super.key,
     this.initialTextValues = const [],
-    this.loadedLabel,
-    required this.listLabelHintText,
-    required this.listPlaceholder,
-    required this.invitationToEnterTextPlaceholder,
+    this.labelLoaded,
+    required this.labelHintText,
+    required this.placeholderList,
+    required this.placeholderInvitationToEnterText,
     required this.themeData, 
     required this.onParticipantsLoadedCallbackFunction
   });  
@@ -54,19 +54,19 @@ class NewTextList extends StatefulWidget
 class _NewTextListState extends State<NewTextList> {
 
   // bool: a list has been loaded
-  bool get _listHasBeenLoaded => widget.loadedLabel != null;
+  bool get _listHasBeenLoaded => widget.labelLoaded != null;
 
   // Data related to retrieving the list of grouped texts
   final _listsDB = ListsDB();
   bool _loadingDB = true;
-  String? _errorLoadingDB;
+  String? _loadingDBError;
   List<List<String>>? _listOfPreviousGroupedTexts = [];
 
   // Used to load the list of grouped texts
-  Future<void> _loadListOfPreviousGroupedTexts() async {
+  Future<void> _listOfPreviousGroupedTextsLoad() async {
     setState(() {
       _loadingDB = true;
-      _errorLoadingDB = null;
+      _loadingDBError = null;
     });
     try {
 
@@ -80,7 +80,7 @@ class _NewTextListState extends State<NewTextList> {
     } catch (e) {
       setState(() {
         pu.printd("Exception: _NewTextListState: _loadListOfGroupedTexts: $e");
-        _errorLoadingDB = e.toString();
+        _loadingDBError = e.toString();
         _loadingDB = false;
       });
     }
@@ -88,7 +88,7 @@ class _NewTextListState extends State<NewTextList> {
 
   
   // Data used to adding a text to the list
-  var _tecNewText = TextEditingController();
+  final _newTextItemTfec = TextEditingController();
   // To store the new grouped texts data
   late final List<String> _enteredTextItemsList;
 
@@ -97,8 +97,8 @@ class _NewTextListState extends State<NewTextList> {
 
   // Data used to edit a text after addition to the list
   var _isEdited = false;
-  var _editedIndex = -1;
-  var _tecTextEdition = TextEditingController();
+  var _editedItemIndex = -1;
+  final _editionTfec = TextEditingController();
 
   // Data related to deleting texts from the new list
   List<String> _textsSelectedForDeletion = [];
@@ -107,11 +107,11 @@ class _NewTextListState extends State<NewTextList> {
 
   // Data related to saving the added texts in a list
   // True once the current list has been persisted.
-  bool _isSaved = false;
+  bool _dataIsSaved = false;
   // True while an async save is in progress (prevents double-tap).
-  bool _saving = false;
+  bool _dataSaving = false;
   // For entering the list label
-  var _tecListLabel = TextEditingController();
+  final _labelTfec = TextEditingController();
 
   // Method used to verify if the newly entered texts have been already saved in a list
   bool _listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
@@ -130,11 +130,11 @@ class _NewTextListState extends State<NewTextList> {
       // added texts are not matching a saved list content
       && !_listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
       // the new list hasn't been saved yet
-      && !_isSaved ;
+      && !_dataIsSaved ;
 
   /// Shows a dialog that asks for a list label.
   /// Requires for the label to not be used already.
-  Future<String?> _showListLabelDialog() async {
+  Future<String?> _labelShowDialog() async {
 
     String? errorText;
 
@@ -145,7 +145,7 @@ class _NewTextListState extends State<NewTextList> {
           builder: (ctx, setDialogState) {
 
             Future<void> onConfirm() async {
-              final label = _tecListLabel.text.trim();
+              final label = _labelTfec.text.trim();
               if (label.isEmpty) {
                 setDialogState(() => errorText = emptyLabelError);
                 return;
@@ -174,13 +174,13 @@ class _NewTextListState extends State<NewTextList> {
               title: const Text('Save list'),
               content: TextField(
                 key: const ValueKey('saveListField'),
-                controller: _tecListLabel,
+                controller: _labelTfec,
                 autofocus: true,
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) async => await onConfirm(), 
                 decoration: InputDecoration(
                   labelText: 'List label',
-                  hintText: widget.listLabelHintText,
+                  hintText: widget.labelHintText,
                   errorText: errorText,
                 ),
                 onChanged: (_) {
@@ -208,14 +208,14 @@ class _NewTextListState extends State<NewTextList> {
   }
 
   // Method used to save the grouped texts in a list
-  Future<void> _saveGroupedTextsList() async {
+  Future<void> _enteredTextItemsListSave() async {
 
     // Opening a dialog to enter the list label
-    final listLabel = await _showListLabelDialog();
+    final listLabel = await _labelShowDialog();
 
     if (listLabel == null) return; // for user cancellation
 
-    setState(() => _saving = true);
+    setState(() => _dataSaving = true);
 
     try {
       // List.from(_enteredTextItemsList)..sort() : 
@@ -223,8 +223,8 @@ class _NewTextListState extends State<NewTextList> {
       await _listsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), _newKeywords);      
 
       setState(() {
-        _isSaved = true;
-        _saving = false;
+        _dataIsSaved = true;
+        _dataSaving = false;
       });
 
       if (!mounted) return;
@@ -235,7 +235,7 @@ class _NewTextListState extends State<NewTextList> {
       );
     } catch (e) 
     {
-      setState(() => _saving = false);
+      setState(() => _dataSaving = false);
 
       if (!mounted) return;
 
@@ -251,7 +251,7 @@ class _NewTextListState extends State<NewTextList> {
   void initState() {
     super.initState();
     // Loading the previous lists of grouped texts
-    _loadListOfPreviousGroupedTexts();
+    _listOfPreviousGroupedTextsLoad();
     
     _enteredTextItemsList = List<String>.from(widget.initialTextValues);
   }
@@ -259,9 +259,9 @@ class _NewTextListState extends State<NewTextList> {
   // Disposing of the TextEditingController instances
   @override
   void dispose() {
-    _tecNewText.dispose();
-    _tecTextEdition.dispose();
-    _tecListLabel.dispose();
+    _newTextItemTfec.dispose();
+    _editionTfec.dispose();
+    _labelTfec.dispose();
     super.dispose();
   }
 
@@ -280,12 +280,12 @@ class _NewTextListState extends State<NewTextList> {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (_errorLoadingDB != null) {
+    if (_loadingDBError != null) {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Text(
-            'Error loading the lists:\n$_errorLoadingDB',
+            'Error loading the lists:\n$_loadingDBError',
             textAlign: TextAlign.center,
           ),
         ),
@@ -299,7 +299,7 @@ class _NewTextListState extends State<NewTextList> {
       appBar: AppBar(
         title: Text
               (
-                _listHasBeenLoaded ? widget.loadedLabel! : newListAppBarTitle, 
+                _listHasBeenLoaded ? widget.labelLoaded! : newListAppBarTitle, 
                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
               ),          
         backgroundColor: Colors.white,
@@ -309,7 +309,7 @@ class _NewTextListState extends State<NewTextList> {
           if (_canSave) 
           ...
           [
-            _saving
+            _dataSaving
                 // Currently saving data
                 ? const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
@@ -323,7 +323,7 @@ class _NewTextListState extends State<NewTextList> {
                 : IconButton(
                     tooltip: 'Save list',
                     icon: const Icon(Icons.save_outlined),
-                    onPressed: _saveGroupedTextsList,
+                    onPressed: _enteredTextItemsListSave,
                   ),
           ]
           else 
@@ -375,7 +375,7 @@ class _NewTextListState extends State<NewTextList> {
                 // Placeholder message if empty list
                 ? Center(
                     child: Text(
-                      widget.listPlaceholder,
+                      widget.placeholderList,
                       textAlign: TextAlign.center,
                       style: widget.themeData.textTheme.bodyLarge
                     ),
@@ -391,12 +391,12 @@ class _NewTextListState extends State<NewTextList> {
                   {
                     return 
                       // Text field (edition mode), or ListTile (reading mode)
-                      _isEdited && (index == _editedIndex)                        
+                      _isEdited && (index == _editedItemIndex)                        
                         ?
                         // Text field (edition mode)
                         TextField
                         (
-                          controller: _tecTextEdition,
+                          controller: _editionTfec,
                           autofocus: true,
                           decoration: const InputDecoration
                           (                    
@@ -408,7 +408,7 @@ class _NewTextListState extends State<NewTextList> {
                             {
                               _enteredTextItemsList[index] = value; 
                               _isEdited = false;
-                              _tecTextEdition.clear();
+                              _editionTfec.clear();
                             }),
                           
                         )
@@ -458,7 +458,7 @@ class _NewTextListState extends State<NewTextList> {
               child: TextField
               (
                 key: const ValueKey('participantNameField'),
-                controller: _tecNewText,
+                controller: _newTextItemTfec,
                 textAlign: TextAlign.left,
                 decoration: const InputDecoration
                 (
@@ -474,7 +474,7 @@ class _NewTextListState extends State<NewTextList> {
                   setState(() {
                     _enteredTextItemsList.add(value.trim());
                   });
-                  _tecNewText.clear();
+                  _newTextItemTfec.clear();
                   if (listDebug) pu.printd("List debug: _NewTextListState: build: _enteredTextItemsList: $_enteredTextItemsList");
                 },
               ),

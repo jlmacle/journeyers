@@ -158,7 +158,7 @@ class CAProcessState extends State<CAProcess>
   bool _isApplicationFolderPathLoading = true;
 
   // method used to get the set preferences
-  void _getApplicationFolderPathPref() async
+  void _getApplicationFolderPath() async
   { 
     var prefs = await SharedPreferences.getInstance();
     await prefs.reload(); // necessary to have access to the newly set preference
@@ -180,7 +180,7 @@ class CAProcessState extends State<CAProcess>
   void initState() {
     super.initState();
     // Retrieving the application folder
-    _getApplicationFolderPathPref(); 
+    _getApplicationFolderPath(); 
 
     // (code to clean)
     _loadDTO(dtoAssetPathToJson: '');
@@ -306,7 +306,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameMobilePlatforms
                         (
-                          editedFileName: widget.fileNameWhenEditionWithoutExtension,
+                          fileNameWhenEdition: widget.fileNameWhenEditionWithoutExtension,
                           fileExtension: _fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
