@@ -368,9 +368,9 @@ class ListDashboardState extends State<ListDashboard>
                           MaterialPageRoute<void>(
                             builder: (_) => NewTextList
                                               (
-                                                listLabelHintText: listLabelHintText,
-                                                listPlaceholder: listPlaceholder,
-                                                invitationToEnterTextPlaceholder: invitationToEnterTextPlaceholder,
+                                                labelHintText: listLabelHintText,
+                                                placeholderList: listPlaceholder,
+                                                placeholderInvitationToEnterText: invitationToEnterTextPlaceholder,
                                                 themeData: Theme.of(context),
                                                 onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
                                               ),
