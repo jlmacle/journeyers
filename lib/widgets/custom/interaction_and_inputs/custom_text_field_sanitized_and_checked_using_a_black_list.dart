@@ -217,8 +217,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Screen reader voicing
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
-      // The default mode is Assertiveness.polite."
-      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+      // The default mode is Assertiveness.polite."      
       // TODO:  TextDirection.ltr: code to modify for l10n
       // Doesn't seem effective yet. Left for later. 
       SemanticsService.sendAnnouncement
@@ -298,8 +297,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Screen reader voicing
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
-      // The default mode is Assertiveness.polite."
-      // https://api.flutter.dev/flutter/semantics/SemanticsService/sendAnnouncement.html
+      // The default mode is Assertiveness.polite."      
       // TODO:  TextDirection.ltr: code to modify for l10n
       // Doesn't seem effective yet. Left for later. 
       SemanticsService.sendAnnouncement
@@ -400,8 +398,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       focusNode: _focusNode,
       // https://api.flutter.dev/flutter/services/TextInputType/text-constant.html
       keyboardType: TextInputType.text,
-      minLines: widget.textFieldMinLines,
-      // https://api.flutter.dev/flutter/material/TextField/maxLines.html
+      minLines: widget.textFieldMinLines,      
       // "If this is null, there is no limit to the number of lines, 
       // and the text container will start with enough vertical space for one line 
       // and automatically grow to accommodate additional lines as they are entered, 
