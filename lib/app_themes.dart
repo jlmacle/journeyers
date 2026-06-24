@@ -301,37 +301,24 @@ ThemeData appTheme = ThemeData
   ),
 
   // ─── TEXT THEME ───────────────────────────────────────
-  // https://api.flutter.dev/flutter/material/TextTheme-class.html
   textTheme: const TextTheme
   (
     // doesn't apply to the appbar
-    // https://api.flutter.dev/flutter/material/TextTheme/displayLarge.html
-    // displayLarge: TextStyle(color: Colors.black),
-    // https://api.flutter.dev/flutter/material/TextTheme/displayMedium.html
-    // displayMedium: TextStyle(color: Colors.black),
-    // https://api.flutter.dev/flutter/material/TextTheme/displaySmall.html
-    // displaySmall: TextStyle(color: Colors.black),
-    // https://api.flutter.dev/flutter/material/TextTheme/headlineLarge.html
     headlineLarge: TextStyle
     (
       color: Colors.black,
       fontSize: 24,
       fontWeight: FontWeight.w900,
-    ),
-    // https://api.flutter.dev/flutter/material/TextTheme/headlineMedium.html
+    ),    
     headlineMedium: TextStyle
     (
       color: Colors.black,
       fontSize: 23,
       fontWeight: FontWeight.bold,
-    ),
-    // https://api.flutter.dev/flutter/material/TextTheme/headlineSmall.html
-    headlineSmall: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
-    // https://api.flutter.dev/flutter/material/TextTheme/titleLarge.html
-    titleLarge: TextStyle(color: Colors.black, fontSize: 20),
-    // https://api.flutter.dev/flutter/material/TextTheme/titleMedium.html
-    titleMedium: TextStyle(color: Colors.black, fontSize: 18),
-    // https://api.flutter.dev/flutter/material/TextTheme/titleSmall.html
+    ),    
+    headlineSmall: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),    
+    titleLarge: TextStyle(color: Colors.black, fontSize: 20),    
+    titleMedium: TextStyle(color: Colors.black, fontSize: 18),    
     titleSmall: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
     bodyLarge: TextStyle(color: Colors.black),
     bodyMedium: TextStyle(color: Colors.black),

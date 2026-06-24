@@ -9,7 +9,6 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_exter
 /// Method used to sort sessions by date
 /// The list parameter is assumed to be a list of sessions, 
 /// with a key DashboardUtils.keyDate for the date values.
-/// https://api.flutter.dev/flutter/package-intl_intl/DateFormat-class.html 
 Future<List<dynamic>> sortSessionByDateAddJm
 ({required List<dynamic> list, required String dateFormat, required bool byAscendingDate}) async 
 {  
