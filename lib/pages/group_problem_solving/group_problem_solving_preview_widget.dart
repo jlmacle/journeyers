@@ -48,10 +48,12 @@ class _GPSPreviewState
   // only runs once, at widget creation
   @override
   void initState() {
+    super.initState();
+
     pu.printdLine();
     pu.printd("GPSPreview");
+    
     if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}");
-    super.initState();
     
     _dataIdeas = widget.gpsPreviewIdeasStored;
     if (_dataIdeas.isEmpty) 

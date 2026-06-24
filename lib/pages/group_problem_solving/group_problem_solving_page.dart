@@ -77,8 +77,10 @@ class GPSPageState extends State<GPSPage>
   void initState() 
   {
     super.initState();
+
     pu.printdLine();
     pu.printd("GPSPage");
+    
     _getRuntimeData();
   }  
 

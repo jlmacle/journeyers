@@ -44,8 +44,10 @@ class _CAPreviewState extends State<CAPreview>
   void initState() 
   {
     super.initState();
+
     pu.printdLine();
     pu.printd("CAPreview");
+    
     _fetchingData();
   }
 
