@@ -155,7 +155,7 @@ Future<void> main() async {
             // letting the async getPreferences() call complete 
             // and setState(() { _preferencesLoading = false; }) rebuild the tree.
             //
-            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 3));
@@ -223,7 +223,7 @@ Future<void> main() async {
             // letting the async getPreferences() call complete 
             // and setState(() { _preferencesLoading = false; }) rebuild the tree.
             //
-            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
@@ -291,7 +291,7 @@ Future<void> main() async {
             // letting the async getPreferences() call complete 
             // and setState(() { _preferencesLoading = false; }) rebuild the tree.
             //
-            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
@@ -386,7 +386,7 @@ Future<void> main() async {
             // letting the async getPreferences() call complete 
             // and setState(() { _preferencesLoading = false; }) rebuild the tree.
             //
-            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
@@ -467,7 +467,7 @@ Future<void> main() async {
             // letting the async getPreferences() call complete 
             // and setState(() { _preferencesLoading = false; }) rebuild the tree.
             //
-            // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+            
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
@@ -564,7 +564,7 @@ Future<void> main() async {
               // letting the async getPreferences() call complete 
               // and setState(() { _preferencesLoading = false; }) rebuild the tree.
               //
-              // https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html
+              
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
 
