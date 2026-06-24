@@ -57,7 +57,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
       ),
       label: const Text
       (
-        sortByDateLabel,
+        sortByDate,
         style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
     );

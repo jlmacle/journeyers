@@ -5,15 +5,15 @@ const String listsDashboardTitle = "Stored participants lists";
 
 // ─── SORTING AND FILTERING ───────────────────────────────────────
 const String filterByKeywordsLabel = "Filter by Keywords";
-const String sortByDateLabel = "Sort by Date";
-const String sortByTitleLabel = "List sort";
+const String listsSortByDate = "Sort by Date";
+const String listsSortByLabel = "List sort";
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
 const String keywordsLabel = "Keywords:";
 
 // Tooltips
 const String keywordsTooltipLabel = "Edit Keywords";
-const String deleteTooltipLabel = "Delete";
+const String listsDeleteTooltipLabel = "Delete";
 
 // Buttons
 const String newListButton = 'Please tap to add a list.';

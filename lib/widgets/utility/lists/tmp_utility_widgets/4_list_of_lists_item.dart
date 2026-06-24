@@ -326,7 +326,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                   key: ValueKey('session-delete-${widget.listIndex}'),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
-                  tooltip: deleteTooltipLabel,
+                  tooltip: listsDeleteTooltipLabel,
                 ),
               ],
             ),

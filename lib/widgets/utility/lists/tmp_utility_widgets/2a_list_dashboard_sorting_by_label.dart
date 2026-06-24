@@ -61,7 +61,7 @@ class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabe
       ),
       label: Text
       (
-        "$sortByTitleLabel (${_isAscendingLabel ? 'Z-A' : 'A-Z'})",
+        "$listsSortByLabel (${_isAscendingLabel ? 'Z-A' : 'A-Z'})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),

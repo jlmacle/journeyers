@@ -57,7 +57,7 @@ class ListDashboardSortingByDateState extends State<ListDashboardSortingByDate>
       ),
       label: const Text
       (
-        sortByDateLabel,
+        listsSortByDate,
         style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
     );
