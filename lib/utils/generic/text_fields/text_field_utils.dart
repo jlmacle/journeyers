@@ -10,7 +10,6 @@ class TextFieldUtils
  {
   // ─── COUNTERS ───────────────────────────────────────
 
-  // https://api.flutter.dev/flutter/material/InputCounterWidgetBuilder.html
   /// A counter displaying no data.
   static Widget? counterAbsent(
     BuildContext context, {

@@ -94,7 +94,6 @@ class _GPSappState extends State<GPSapp>
       ],
       // "By default only the American English locale is supported. 
       // Apps should configure this list to match the locales they support."
-      // https://api.flutter.dev/flutter/material/MaterialApp/supportedLocales.html
       supportedLocales: const
       [
         Locale('en'), // English
@@ -102,7 +101,6 @@ class _GPSappState extends State<GPSapp>
       ],
 
       locale: _currentLocale, // to be able to swap translated strings,
-      // https://api.flutter.dev/flutter/widgets/SafeArea-class.html
       home: 
       SafeArea
       (
