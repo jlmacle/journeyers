@@ -396,7 +396,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       autofocus: widget.autofocus,
       controller: _tfec,
       focusNode: _focusNode,
-      // https://api.flutter.dev/flutter/services/TextInputType/text-constant.html
       keyboardType: TextInputType.text,
       minLines: widget.textFieldMinLines,      
       // "If this is null, there is no limit to the number of lines, 

@@ -255,6 +255,8 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
   @override
   void initState() {
     super.initState();
+    pu.printdLine();
+    pu.printd("GPSProcess");
      _loadAllCAMetadata();
     _getApplicationFolderPath();
   }

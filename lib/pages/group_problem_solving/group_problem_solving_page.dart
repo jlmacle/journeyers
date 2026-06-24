@@ -78,7 +78,7 @@ class GPSPageState extends State<GPSPage>
   {
     super.initState();
     pu.printdLine();
-    pu.printd("Session Data: GPSPage");
+    pu.printd("GPSPage");
     _getRuntimeData();
   }  
 

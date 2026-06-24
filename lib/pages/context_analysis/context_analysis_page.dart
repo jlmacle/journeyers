@@ -163,7 +163,7 @@ class CAPageState extends State<CAPage>
   void initState() 
   {
     pu.printdLine();
-    pu.printd("Session Data: CAPage");
+    pu.printd("CAPage");
     super.initState();
     getRuntimeData();
   }  

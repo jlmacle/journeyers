@@ -97,7 +97,6 @@ Future<void> main() async {
   });
 
   // This function will be called after each test is run. The body may be asynchronous; if so, it must return a Future.
-  // https://api.flutter.dev/flutter/flutter_test/tearDown.html
   tearDown(() async {
     if (testTmpDir!.existsSync()) {
       // Deleting the temporary folder created to store the saved files

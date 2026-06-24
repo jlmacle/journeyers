@@ -179,6 +179,8 @@ class CAProcessState extends State<CAProcess>
   @override
   void initState() {
     super.initState();
+    pu.printdLine();
+    pu.printd("CAProcess");
     // Retrieving the application folder
     _getApplicationFolderPath(); 
 
