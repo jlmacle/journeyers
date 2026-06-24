@@ -203,7 +203,7 @@ class _SessionsListItemState extends State<SessionsListItem>
     else 
     {
       await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
-      filePath = await FilePicker.platform.saveFile(
+      filePath = await FilePicker.saveFile(
         dialogTitle: 'Please enter a file name.',
         fileName: '$fileNameWithoutExtension$fileExtension', 
         bytes: dataBytes,

@@ -614,7 +614,7 @@ class DTOCAForm
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
-      filePathWithExtension = await FilePicker.platform.saveFile
+      filePathWithExtension = await FilePicker.saveFile
       (
         dialogTitle: 'Please enter a file name.',
         fileName: '.csv',
