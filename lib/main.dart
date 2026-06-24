@@ -43,7 +43,7 @@ class _GPSappState extends State<GPSapp>
   void initState() {
     super.initState();
     pu.printdLine();
-    pu.printd("Session Data: GPSapp");
+    pu.printd("GPSapp");
 
     // Getting the stored file names at start on mobile
     if (Platform.isAndroid || Platform.isIOS)
