@@ -42,6 +42,7 @@ class _GPSappState extends State<GPSapp>
   @override
   void initState() {
     super.initState();
+    
     pu.printdLine();
     pu.printd("GPSapp");
 

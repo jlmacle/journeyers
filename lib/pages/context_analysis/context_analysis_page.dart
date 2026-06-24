@@ -162,9 +162,11 @@ class CAPageState extends State<CAPage>
   @override
   void initState() 
   {
+    super.initState();
+    
     pu.printdLine();
     pu.printd("CAPage");
-    super.initState();
+    
     getRuntimeData();
   }  
 
