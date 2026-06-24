@@ -48,11 +48,11 @@ void main() {
       // sorting by title
       expect(find.byType(DashboardSortingByTitle), findsOneWidget);
       // String interpolation used for the text
-      expect(find.textContaining(sortByTitleLabel), findsOneWidget);
+      expect(find.textContaining(sortByTitle), findsOneWidget);
 
       // sorting by date
       expect(find.byType(DashboardSortingByDate), findsOneWidget);
-      expect(find.text(sortByDateLabel), findsOneWidget);
+      expect(find.text(sortByDate), findsOneWidget);
 
       // filtering by keywords
       expect(find.byType(DashboardFilteringByKeywords), findsOneWidget);

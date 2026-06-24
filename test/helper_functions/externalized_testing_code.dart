@@ -827,6 +827,18 @@ final q = CAQuestionsFields();
     expect(placeholderTitleFinder, findsOne);
   }
 
+  // Method used to go from the GPS page to the GPS process page
+  Future<void> gpsFromGPSPageToProcessPage(WidgetTester tester) async
+  {
+
+    // Clicking on the GPS new process button
+    await gpsCheckNewProcessButtonFunctions(tester);
+
+    // Searching the placeholder title
+    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+    expect(placeholderTitleFinder, findsOne);
+  }
+
   // Method used to go from the GPS process page to the participants lists options page
   Future<void> gpsFromProcessPageToparticipantsListsOptionsPage(WidgetTester tester) async
   {
