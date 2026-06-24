@@ -183,7 +183,7 @@ class GPSProcessState extends State<GPSProcess>
       else 
       {
         // Desktop implementation using FilePicker
-        filePath = await FilePicker.platform.saveFile(
+        filePath = await FilePicker.saveFile(
           dialogTitle: 'Please enter a file name.',
           fileName: '$_fileName$_fileExtension', 
           bytes: dataBytes,
