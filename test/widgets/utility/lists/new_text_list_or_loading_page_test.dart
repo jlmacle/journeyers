@@ -32,8 +32,20 @@ void main() {
       // Verifying the correct title present
       var textFinder = find.text('Participants lists');
       expect(textFinder, findsOne);      
-    }
-    );    
+    }); 
+    
+    // 'Participants Lists Options Page: correct subtitle'
+    testWidgets('Participants Lists Options Page: correct subtitle', 
+    (WidgetTester tester) async 
+    {
+      // Pumping the widget
+      await pumpTestableWidget(tester);
+
+      // Verifying the correct subtitle present
+      var textFinder = find.text('What would you like to do?');
+      expect(textFinder, findsOne);     
+    }); 
+       
   }
 );  
 
