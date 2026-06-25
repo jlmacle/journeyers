@@ -376,7 +376,7 @@ class ListDashboardState extends State<ListDashboard>
                                               ),
                           ),
                         ),
-                        label: const Text(newListButton, textAlign: TextAlign.center),
+                        label: const Text(newListButtonLabel, textAlign: TextAlign.center),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 90),
                         ),

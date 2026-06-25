@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/alphabet/alphabet_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/project_specific/dev/sort_utils.dart';
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 
@@ -21,10 +23,13 @@ class ListsDB {
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
-  // Method used to get the file where the data is stored.
-  Future<File> _getFile() async {
+  // Method used to get the file where the data is stored 
+  // (or null if the file doesn't exist).
+  Future<File?> _getFile() async {
     var dir = await getApplicationSupportDirectory();
-    return File('${dir.path}/$_fileName');
+    var file = File('${dir.path}/$_fileName');
+    if (!file.existsSync()) return null;
+    return file;
   }
 
   // Method used to find the next alphabet "number", by switching/adding alphabetical "digits".
@@ -141,11 +146,15 @@ class ListsDB {
   Future<List<dynamic>> loadDataStructure() async
   {
     // Getting the file
-    File f = await _getFile();
+    File? f = await _getFile();
 
-    // Decoding the file
-    if (!await f.exists()) return [];
+    if (f == null) 
+    {
+      if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: non data to load"); 
+      return [];
+    }
 
+        // Decoding the file
     var stringData = await f.readAsString();
     return jsonDecode(stringData);
   } 
@@ -584,7 +593,7 @@ class ListsDB {
     data.add(listData);
     // Saving the data
     var f = await _getFile();
-    await f.writeAsString(jsonEncode(data));
+    await f!.writeAsString(jsonEncode(data));
   }
 
   /// Method used to add, or remove, one or several participants of the list.
@@ -686,7 +695,7 @@ class ListsDB {
 
     // Saving the data
     var f = await _getFile();
-    await f.writeAsString(jsonEncode(data));
+    await f!.writeAsString(jsonEncode(data));
   }
 
   /// Removes a list data.
@@ -711,7 +720,7 @@ class ListsDB {
 
     // Saving the data
     var f = await _getFile();
-    await f.writeAsString(jsonEncode(data));
+    await f!.writeAsString(jsonEncode(data));
   }
 }
 
