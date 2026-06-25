@@ -353,7 +353,7 @@ Future<void> main() async {
                 ideasList: [ideasList1, ideasList1, ideasList1, ideasList1, ideasList1, ideasList1],
                 fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
               );
-              await tester.pump(const Duration(seconds: 4));
+              // await tester.pump(const Duration(seconds: 4));
             
               // ── 2. FILTERING BY KEYWORDS ────────────────────────────
               // ────────────────────────────────────────────────────────
@@ -414,7 +414,7 @@ Future<void> main() async {
               }
               
 
-              await tester.pump(const Duration(seconds: 2));
+              // await tester.pump(const Duration(seconds: 2));
             }
           });     
     
@@ -613,7 +613,7 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 3));
+            // await tester.pump(const Duration(seconds: 3));
 
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -672,7 +672,7 @@ Future<void> main() async {
             // Pumping the GPSPage
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             // ── 1. ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -705,7 +705,7 @@ Future<void> main() async {
             await tester.tap(editIconFinder);
             await tester.pumpAndSettle();
 
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             // ── 4. EDITION: Verifying data present and editing  ─────────────────
             // ────────────────────────────────────────────────────────────────────
@@ -764,7 +764,7 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 1));
+            await tester.pump(const Duration(seconds: 2));
             if (testingDebug) pu.printd('Testing Debug: idea2 edited');
 
             // ── Adding idea3  ───────────────────────────────────
@@ -783,7 +783,7 @@ Future<void> main() async {
             // await tester.pumpAndSettle();             
             if (testingDebug) pu.printd('Testing Debug: idea3 added');
 
-            await tester.pump(const Duration(seconds: 5)); 
+            // await tester.pump(const Duration(seconds: 5)); 
 
             // ── 5. VERIFICATION  ─────────────────
             // ─────────────────────────────────────
@@ -794,7 +794,7 @@ Future<void> main() async {
             await tester.tap(overlayClosingTooltipFinder);
             await tester.pumpAndSettle();           
 
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             // ── Verifying the edited/added data present ────────────
             // ───────────────────────────────────────────────────────
@@ -991,7 +991,10 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);    
+
+            // Waiting on the "list saved" snackbar
+            await tester.pump(const Duration(seconds: 3));  
         
             // ── ADDING MORE PARTICIPANTS TO SAVE UNDER THE SAME LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -1016,6 +1019,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
               // Necessary for the next name to be added
               await tester.tap(newParticipantTextFieldFinder);
+              await tester.pumpAndSettle();
             }
 
             // Verifying the names present
@@ -1095,6 +1099,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
               // Necessary for the next name to be added
               await tester.tap(newParticipantTextFieldFinder);
+              await tester.pumpAndSettle();
             }
 
             // Verifying the names present
@@ -1103,7 +1108,7 @@ Future<void> main() async {
               expect(find.text(name), findsOne);    
             }      
 
-            await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 5));
 
             
             // Searching the 'Save' icon
@@ -1162,6 +1167,9 @@ Future<void> main() async {
             ];
             await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
         
+            // Waiting on the "list saved" snackbar
+            await tester.pump(const Duration(seconds: 3));
+
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
@@ -1185,6 +1193,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
               // Necessary for the next name to be added
               await tester.tap(newParticipantTextFieldFinder);
+              await tester.pumpAndSettle();
             }
 
             // Verifying the names present
@@ -1193,7 +1202,7 @@ Future<void> main() async {
               expect(find.text(name), findsOne);    
             }      
 
-            await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 5));
 
             // Verifying the 'Save' icon absent
             var saveListIconFinder = find.byIcon(Icons.save_outlined);
@@ -1227,7 +1236,10 @@ Future<void> main() async {
             [
               {listLabel1:{"names":names1,"keywords":[]}},            
             ];
-            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);      
+            await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+
+            // Waiting on the "list saved" snackbar
+            await tester.pump(const Duration(seconds: 3));      
         
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
@@ -1260,7 +1272,7 @@ Future<void> main() async {
               expect(find.text(name), findsOne);    
             }      
 
-            await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 5));
 
             // Verifying the 'Save' icon absent
             var saveListIconFinder = find.byIcon(Icons.save_outlined);
@@ -1698,7 +1710,7 @@ Future<void> main() async {
           await tester.tap(addEmojiFinder);
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 5));
+          await tester.pump(const Duration(seconds: 2));
 
           // Verifying the options page present
           var optionsPageFinder = find.text(participantsListsSubTitle);
@@ -1725,7 +1737,7 @@ Future<void> main() async {
           );
           expect(listDashboardTitleFinder, findsOne);
 
-          await tester.pump(const Duration(seconds: 2));
+          // await tester.pump(const Duration(seconds: 2));
 
           // Tapping on it
           await tester.tap(loadingButtonFinder);
@@ -1778,7 +1790,7 @@ Future<void> main() async {
           await tester.tap(addEmojiFinder);
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 5));
+          await tester.pump(const Duration(seconds: 2));
 
           // Verifying the options page present
           var optionsPageFinder = find.text(participantsListsSubTitle);
@@ -1978,7 +1990,7 @@ Future<void> main() async {
               var sortByTitleFinder = find.textContaining(listsSortByLabel);
               await tester.tap(sortByTitleFinder);
               await tester.pumpAndSettle();
-              await tester.pump(const Duration(seconds: 2));
+              // await tester.pump(const Duration(seconds: 2));
 
               // Searching the list labels          
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
@@ -1994,7 +2006,7 @@ Future<void> main() async {
               // Re-triggering the sort
               await tester.tap(sortByTitleFinder);
               await tester.pumpAndSettle();
-              await tester.pump(const Duration(seconds: 2));
+              // await tester.pump(const Duration(seconds: 2));
 
               // Re-searching the labels  
               titlesFinder = await dashboardGetAllSessionsTitles(tester); 
@@ -2078,7 +2090,7 @@ Future<void> main() async {
                 expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
               }         
 
-              await tester.pump(const Duration(seconds: 2));
+              // await tester.pump(const Duration(seconds: 2));
 
             });      
         
@@ -2209,7 +2221,7 @@ Future<void> main() async {
               await tester.pumpAndSettle(); 
 
               // Clicking on the 'Save' button
-              await tester.pump(const Duration(seconds: 5));  
+              // await tester.pump(const Duration(seconds: 5));  
               var saveButtonFinder = find.text(saveButtonLabel); 
               await tester.tap(saveButtonFinder);
               await tester.pumpAndSettle();
@@ -2363,7 +2375,7 @@ Future<void> main() async {
               await tester.pumpAndSettle(); 
 
               // Clicking on the 'Save' button
-              await tester.pump(const Duration(seconds: 5));  
+              // await tester.pump(const Duration(seconds: 5));  
               var saveButtonFinder = find.text(saveButtonLabel); 
               await tester.tap(saveButtonFinder);
               await tester.pumpAndSettle();
@@ -2516,7 +2528,7 @@ Future<void> main() async {
           await tester.testTextInput.receiveAction(TextInputAction.done);
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 1));  
+          await tester.pump(const Duration(seconds: 2));  
 
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
@@ -2527,8 +2539,6 @@ Future<void> main() async {
 
           // Verifying the overlay present
           expect(find.byKey(const ValueKey('ideaOverlayField')), findsOne);
-
-          await tester.pump(const Duration(seconds: 1)); 
         });
     });
 
@@ -2576,7 +2586,7 @@ Future<void> main() async {
           await tester.testTextInput.receiveAction(TextInputAction.done);
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 1));  
+          await tester.pump(const Duration(seconds: 2));  
 
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
@@ -2587,7 +2597,7 @@ Future<void> main() async {
           // Verifying the idea present
           expect(ideaFinder, findsOne);
 
-          await tester.pump(const Duration(seconds: 5)); 
+          // await tester.pump(const Duration(seconds: 5)); 
         });
     
       // 'Ideas can be edited in the overlay'
@@ -2643,7 +2653,7 @@ Future<void> main() async {
           await tester.testTextInput.receiveAction(TextInputAction.done);
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 1));
+          await tester.pump(const Duration(seconds: 2));
 
           // ── VERIFYING THAT THE EDITED VALUE IS ON THE GPS PROCESS PAGE  ─────────────────
           // ────────────────────────────────────────────────────────────────────────────────
@@ -2658,7 +2668,7 @@ Future<void> main() async {
           // Verifing the edited idea on the GPS process page
           expect(find.text(ideaEdited), findsOne);
 
-          await tester.pump(const Duration(seconds: 2)); 
+          // await tester.pump(const Duration(seconds: 2)); 
         });
     
       // 'Ideas can be deleted in the overlay'
@@ -2720,7 +2730,7 @@ Future<void> main() async {
           // Verifying the value removed from the GPS process page
           expect(find.text(idea1), findsNothing);
 
-          await tester.pump(const Duration(seconds: 2)); 
+          // await tester.pump(const Duration(seconds: 2)); 
         });
     
       // '4 additions, 2 deletions'
@@ -2798,7 +2808,7 @@ Future<void> main() async {
           expect(find.text(idea3), findsNothing);
           expect(find.text(idea4), findsOne);
 
-          await tester.pump(const Duration(seconds: 2)); 
+          // await tester.pump(const Duration(seconds: 2)); 
         });
     
     });
