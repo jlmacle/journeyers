@@ -28,6 +28,7 @@ void main() {
     {
       // Pumping the widget
       await pumpTestableWidget(tester);
+      await tester.pumpAndSettle();
 
       // Verifying the correct title present
       var textFinder = find.text('Participants lists');
@@ -40,6 +41,7 @@ void main() {
     {
       // Pumping the widget
       await pumpTestableWidget(tester);
+      await tester.pumpAndSettle();
 
       // Verifying the correct subtitle present
       var textFinder = find.text('What would you like to do?');
@@ -52,6 +54,7 @@ void main() {
     {
       // Pumping the widget
       await pumpTestableWidget(tester);
+      await tester.pumpAndSettle();
 
       // Verifying the correct option 1 label
       var textFinder = find.text('To load the list\nof previous groups?');
@@ -64,6 +67,7 @@ void main() {
     {
       // Pumping the widget
       await pumpTestableWidget(tester);
+      await tester.pumpAndSettle();
 
       // Verifying the correct option 2 label
       var textFinder = find.text('To add a new group?');
