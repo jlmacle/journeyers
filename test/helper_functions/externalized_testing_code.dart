@@ -261,7 +261,7 @@ final q = CAQuestionsFields();
   // Method used to enter new CA process data
   // 7 values are necessary in checkboxValues
   // 4 values are necessary in segmentedButtonValues
-  Future<void> caEnterNewProcessData 
+  Future<void> caEnterNewProcessDataOnMobile 
   ({
     required WidgetTester tester, 
     bool formToFill = true,
@@ -313,7 +313,7 @@ final q = CAQuestionsFields();
     int listsLength = titlesList.length;
     for (var index = 0; index < listsLength; index++)
     {
-      await caEnterNewProcessData
+      await caEnterNewProcessDataOnMobile
       (
         formToFill: false,
         tester: tester, 
