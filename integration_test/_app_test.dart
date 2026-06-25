@@ -133,7 +133,7 @@ Future<void> main() async {
           // ───────────────────────────────────────────────────────────────────────────────
 
           // formToFill: false to skip the form filling
-          await caEnterNewProcessData
+          await caEnterNewProcessDataOnMobile
           (
             tester: tester, 
             formToFill: false,
@@ -299,7 +299,7 @@ Future<void> main() async {
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
-            await caEnterNewProcessData
+            await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: title,
