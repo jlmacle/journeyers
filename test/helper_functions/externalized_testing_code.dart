@@ -830,7 +830,6 @@ final q = CAQuestionsFields();
   // Method used to go from the GPS page to the GPS process page
   Future<void> gpsFromGPSPageToProcessPage(WidgetTester tester) async
   {
-
     // Clicking on the GPS new process button
     await gpsCheckNewProcessButtonFunctions(tester);
 
