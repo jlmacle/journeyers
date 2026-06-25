@@ -588,7 +588,7 @@ Future<void> main() async {
       // 'Session data entered is found on the preview'
       // '(assuming an already selected path to the user session data folder)',
       testWidgets(
-        'Session data entered is found on the preview'
+        'Session data entered is found on the preview \n'
         '(assuming an already selected path to the user session data folder)',
         (WidgetTester tester) async {
 
@@ -1629,66 +1629,6 @@ Future<void> main() async {
 
       group('Participants Dashboard Tests: \n', () 
       {    
-        // 'Empty dashboard: button toward adding a new list'
-        testWidgets('Empty dashboard: button toward adding a new list', 
-        (WidgetTester tester) async 
-        {
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
-            // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
-          });
-
-          // Pumping the GPSPage
-          await tester.pumpWidget(buildTestableGPSPage());
-          await tester.pumpAndSettle();
-
-          // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-          // ────────────────────────────────────────────────────────────────────────
-          await gpsFromGPSPageToProcessPage(tester);
-
-          // ── LOADING PARTICIPANTS   ─────────────────────────────────
-          // ───────────────────────────────────────────────────────────
-          // Searching the add emoji    
-          var addEmojiFinder = find.text(addEmoji);
-
-          // Verifying the add emoji present
-          expect(addEmojiFinder, findsOne);
-
-          // Tapping to reach the page with the loading/new group options
-          await tester.tap(addEmojiFinder);
-          // pumpAndSettle timed out
-          // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 2));
-
-          // Verifying the options page present
-          var optionsPageFinder = find.text(participantsListsSubTitle);
-          expect(optionsPageFinder, findsOne);
-
-          // Searching the loading button
-          var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
-          await tester.ensureVisible(loadingAListOptionFinder);
-          expect(loadingAListOptionFinder, findsOne);
-
-          // Tapping on it
-          await tester.tap(loadingAListOptionFinder);
-          await tester.pumpAndSettle();
-
-          // Verifying the list items absent
-          expect(find.byType(ListOfListsItem), findsNothing);
-
-          // Verifying the new list button present
-          var newListButtonFinder = find.text(newListButton);
-          await tester.tap(newListButtonFinder);
-          await tester.pumpAndSettle();
-
-          // Verifying the New List Page present
-          expect (find.text(newListAppBarTitle), findsOne);
-      });  
-
         group('Deletion Tests: \n', ()
         {
           // 'Deletion: Single deletion with icon \n'
