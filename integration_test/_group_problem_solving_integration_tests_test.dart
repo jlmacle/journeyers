@@ -132,235 +132,6 @@ Future<void> main() async {
 
   group('Group Problem-Solving Integration Tests: Mobile: \n', () 
   {
-    group('Preview Tests: Mobile: \n', () 
-    {
-      // 'Session data entered is found on the preview'
-      // '(assuming an already selected path to the user session data folder)',
-      testWidgets(
-        'Session data entered is found on the preview'
-        '(assuming an already selected path to the user session data folder)',
-        (WidgetTester tester) async {
-
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // To have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
-            // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
-          });
-
-          if (Platform.isAndroid || Platform.isIOS)
-          {
-            // Pumping the GPSPage
-            //
-            // pumpWidget renders the first frame.
-            // pumpAndSettle drives the event loop until there are no more pending frames,
-            // letting the async getPreferences() call complete 
-            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-            //
-            
-            await tester.pumpWidget(buildTestableGPSPage());
-            await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 3));
-
-            // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────
-
-            await gpsEnterNewProcessData
-            (
-              tester: tester, 
-              title: testGPSTitle1,
-              kwsList: kwsList,
-              ideasList: ideasList1,
-              fileNameWithoutExtension: fileName1WithoutExtension
-            );
-
-            // await tester.pump(const Duration(seconds: 5));
-
-            // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────
-            // Searching for the title and keywords
-            
-            // To avoid intermittent test failures
-            await tester.pump(const Duration(seconds: 2));
-            await dashboardSearchTitleAndKeywords(title: testGPSTitle1, kws: kwsList, titleSuffix: gpsTitleSuffix);
-
-            // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────────
-            await tester.pump(const Duration(seconds: 2));
-            await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
-
-            // await tester.pump(const Duration(seconds: 2));
-
-          }
-        }
-      );
-    });
-
-    group('Deletion Tests: Mobile: \n', ()
-    {
-      // 'Deletion: Single deletion with icon \n'
-      // '(assuming an already selected path to the user session data folder)',
-      testWidgets(
-        'Deletion: Single deletion with icon \n'
-        '(assuming an already selected path to the user session data folder)',
-        (WidgetTester tester) async {
-
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
-            // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
-            // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
-          });
-
-          if (Platform.isAndroid || Platform.isIOS)
-          {
-            // Pumping the GPSPage
-            //
-            // pumpWidget renders the first frame.
-            // pumpAndSettle drives the event loop until there are no more pending frames,
-            // letting the async getPreferences() call complete 
-            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-            //
-            
-            await tester.pumpWidget(buildTestableGPSPage());
-            await tester.pumpAndSettle();
-
-            // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────
-            
-            await gpsEnterNewProcessData
-            (
-              tester: tester, 
-              title: testGPSTitle1,
-              kwsList: kwsList,
-              ideasList: ideasList1,
-              fileNameWithoutExtension: fileName1WithoutExtension
-            );
-
-            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────
-            // Searching for the finder with the title
-            Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
-            expect(sessionListItemFinder, findsOne);
-
-            // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────────
-            
-            // Searching for the tooltip 
-            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
-
-            // Tapping the icon
-            await tester.tap(deleteIconFinder);
-            await tester.pumpAndSettle();
-
-            // Verifying the sessions list item absent
-            sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
-            expect(sessionListItemFinder, findsNothing);
-      
-            // await tester.pump(const Duration(seconds: 2));
-          }
-        }      
-      );
-
-      // 'Deletion: Bulk deletion \n'
-      // '(assuming an already selected path to the user session data folder)',
-      testWidgets(
-        'Deletion: Bulk deletion \n'
-        '(assuming an already selected path to the user session data folder)',
-        (WidgetTester tester) async {
-
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
-            // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
-            // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
-          });
-
-          if (Platform.isAndroid || Platform.isIOS)
-          {
-            // Pumping the GPSPage
-            //
-            // pumpWidget renders the first frame.
-            // pumpAndSettle drives the event loop until there are no more pending frames,
-            // letting the async getPreferences() call complete 
-            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-            //
-            
-            await tester.pumpWidget(buildTestableGPSPage());
-            await tester.pumpAndSettle();
-
-            // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────
-            
-            await gpsEnterSeveralTimesNewProcessData
-            (
-              tester: tester,
-              titlesList: titlesList,
-              kwsLists: [[], [], []],
-              ideasList: [ideasList1, ideasList1, ideasList1],
-              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
-            );
-
-            // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
-            // Searching and tapping the checkboxes for title 1 and title 2
-            var checkbox1Finder = find.descendant
-            (
-              of: find.ancestor(of: find.text("$testGPSTitle1$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
-              matching: find.byType(Checkbox)
-            );
-            // Needed more than ensureVisible
-            await scrollListUpScrollableByFirstDescendant(tester: tester, listFinder: find.byType(CustomScrollView), elementToReachFinder: checkbox1Finder);
-            await tester.tap(checkbox1Finder);
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 2));
-
-           var checkbox2Finder = find.descendant
-            (
-                of: find.ancestor(of: find.text("$testGPSTitle2$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
-                matching: find.byType(Checkbox)
-            );
-            await tester.ensureVisible(checkbox2Finder);
-            await tester.tap(checkbox2Finder);
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 2));
-
-            // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
-            // ─────────────────────────────────────────────────────────────────────────────────
-            // Searching the widget
-            var bulkDeletionFinder = find.textContaining('Delete');
-            expect(bulkDeletionFinder, findsOne);
-            await tester.ensureVisible(bulkDeletionFinder);
-            await tester.tap(bulkDeletionFinder);
-            await tester.pumpAndSettle();
-
-            // ── 4. TESTING THE DELETION ────────────────────────────────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────────       
-            // Checking the number of list items left 
-            var sessionsListItemsFinder = find.byType(SessionsListItem);
-            expect(sessionsListItemsFinder, findsOne);
-
-            // Verifying title 3 remains
-            var title3WithSuffix = "$testGPSTitle3$gpsTitleSuffix";
-            var textFinder = find.text(title3WithSuffix);
-            Text textWidget = tester.widget(textFinder);
-            expect(textWidget.data, title3WithSuffix);
-
-            // await tester.pump(const Duration(seconds: 2));
-          }
-        }      
-      );      
-    });
-
     group('Sorting and filtering: Mobile: \n', ()
     {
       // 'Sorting by title \n'
@@ -649,13 +420,395 @@ Future<void> main() async {
           });     
     
     });
-
   
+    group('Deletion Tests: Mobile: \n', ()
+    {
+      // 'Deletion: Single deletion with icon \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Deletion: Single deletion with icon \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            await gpsEnterNewProcessData
+            (
+              tester: tester, 
+              title: testGPSTitle1,
+              kwsList: kwsList,
+              ideasList: ideasList1,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────
+            // Searching for the finder with the title
+            Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            expect(sessionListItemFinder, findsOne);
+
+            // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────
+            
+            // Searching for the tooltip 
+            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+
+            // Tapping the icon
+            await tester.tap(deleteIconFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the sessions list item absent
+            sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            expect(sessionListItemFinder, findsNothing);
+      
+            // await tester.pump(const Duration(seconds: 2));
+          }
+        }      
+      );
+
+      // 'Deletion: Bulk deletion \n'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Deletion: Bulk deletion \n'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
+
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            
+            await gpsEnterSeveralTimesNewProcessData
+            (
+              tester: tester,
+              titlesList: titlesList,
+              kwsLists: [[], [], []],
+              ideasList: [ideasList1, ideasList1, ideasList1],
+              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+            );
+
+            // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
+            // Searching and tapping the checkboxes for title 1 and title 2
+            var checkbox1Finder = find.descendant
+            (
+              of: find.ancestor(of: find.text("$testGPSTitle1$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
+              matching: find.byType(Checkbox)
+            );
+            // Needed more than ensureVisible
+            await scrollListUpScrollableByFirstDescendant(tester: tester, listFinder: find.byType(CustomScrollView), elementToReachFinder: checkbox1Finder);
+            await tester.tap(checkbox1Finder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+           var checkbox2Finder = find.descendant
+            (
+                of: find.ancestor(of: find.text("$testGPSTitle2$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
+                matching: find.byType(Checkbox)
+            );
+            await tester.ensureVisible(checkbox2Finder);
+            await tester.tap(checkbox2Finder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────────────────
+            // Searching the widget
+            var bulkDeletionFinder = find.textContaining('Delete');
+            expect(bulkDeletionFinder, findsOne);
+            await tester.ensureVisible(bulkDeletionFinder);
+            await tester.tap(bulkDeletionFinder);
+            await tester.pumpAndSettle();
+
+            // ── 4. TESTING THE DELETION ────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────       
+            // Checking the number of list items left 
+            var sessionsListItemsFinder = find.byType(SessionsListItem);
+            expect(sessionsListItemsFinder, findsOne);
+
+            // Verifying title 3 remains
+            var title3WithSuffix = "$testGPSTitle3$gpsTitleSuffix";
+            var textFinder = find.text(title3WithSuffix);
+            Text textWidget = tester.widget(textFinder);
+            expect(textWidget.data, title3WithSuffix);
+
+            // await tester.pump(const Duration(seconds: 2));
+          }
+        }      
+      );      
+    });
   
+    group('Preview Tests: Mobile: \n', () 
+    {
+      // 'Session data entered is found on the preview'
+      // '(assuming an already selected path to the user session data folder)',
+      testWidgets(
+        'Session data entered is found on the preview'
+        '(assuming an already selected path to the user session data folder)',
+        (WidgetTester tester) async {
 
-});
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // To have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
 
-group('Participants Tests: \n', () 
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //
+            
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 3));
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+
+            await gpsEnterNewProcessData
+            (
+              tester: tester, 
+              title: testGPSTitle1,
+              kwsList: kwsList,
+              ideasList: ideasList1,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // await tester.pump(const Duration(seconds: 5));
+
+            // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────
+            // Searching for the title and keywords
+            
+            // To avoid intermittent test failures
+            await tester.pump(const Duration(seconds: 2));
+            await dashboardSearchTitleAndKeywords(title: testGPSTitle1, kws: kwsList, titleSuffix: gpsTitleSuffix);
+
+            // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────────────
+            await tester.pump(const Duration(seconds: 2));
+            await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
+
+            // await tester.pump(const Duration(seconds: 2));
+
+          }
+        }
+      );
+    });
+
+    group('Edition Tests: Mobile: \n', ()
+    {
+      
+      // 'Group problem-solving edition \n'
+      testWidgets(
+        'Group problem-solving edition \n',
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the group problem-solving page, with the dashboard.
+            'wasGPSSessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+            var title = "GPS title";
+
+            var keywords = kwsList;
+            
+            await gpsEnterNewProcessData
+            (
+              tester: tester, 
+              title: title,
+              kwsList: keywords,
+              ideasList: ideasList1,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ── 2. CLICKING TO OPEN THE PREVIEW  ─────────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────
+            // Opening the preview
+            var previewFinder = find.byTooltip(previewTooltipLabel);
+            await tester.tap(previewFinder);
+            await tester.pumpAndSettle();
+
+            // ── 3. CLICKING TO START THE EDIT MODE  ──────────────────────────────
+            // ─────────────────────────────────────────────────────────────────────
+            // Opening the edition overlay
+            var editIconFinder = find.byIcon(Icons.edit);
+            await tester.tap(editIconFinder);
+            await tester.pumpAndSettle();
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── 4. EDITION: Verifying data present and editing  ─────────────────
+            // ────────────────────────────────────────────────────────────────────
+
+            // ── Verifying the ideas present ─────────────
+            // ────────────────────────────────────────────
+            for (var idea in ideasList1)
+            {
+              expect(find.textContaining(idea), findsNWidgets(2));
+            }            
+
+            // ── Editing data ────────────────────────────
+            // ────────────────────────────────────────────
+
+            // const ideasList1 = ['idea1', 'idea2'];
+            var suffix = "-edited";
+
+            // ── Deleting idea1  ───────────────────────────────────
+            // ──────────────────────────────────────────────────────
+            // Searching the checkbox
+            var checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-0'));
+            await tester.ensureVisible(checkboxFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the checkbox for deletion
+            await tester.tap(checkboxFinder);
+            await tester.pumpAndSettle();
+            
+            // Clicking on the Delete message
+            var deleteFinder = find.textContaining('Delete').last;
+            await tester.pumpAndSettle();
+            await tester.tap(deleteFinder);
+            await tester.pumpAndSettle();
+            // Verifying the value removed from the overlay
+            expect(find.text('idea1'), findsOne);
+            if (testingDebug) pu.printd('Testing Debug: idea1 deleted');
+
+            // ── Editing idea2  ───────────────────────────────────
+            // ─────────────────────────────────────────────────────
+            // Searching the idea
+            var ideaFinder = find.byKey(const ValueKey('editable-deletable-text-item-0'));
+            await tester.ensureVisible(ideaFinder);
+            await tester.pumpAndSettle();   
+            // Tapping on the idea for edition
+            await tester.tap(ideaFinder);
+            await tester.pumpAndSettle();
+            // Edition
+            const tfKeyLabel = 'editable-deletable-tf-0';
+            var editableDeletableTfFinder = find.byKey(const ValueKey(tfKeyLabel));
+            await tester.ensureVisible(editableDeletableTfFinder);
+            await tester.pumpAndSettle();
+            await tester.tap(editableDeletableTfFinder);
+            await tester.pumpAndSettle();
+
+            var ideaEdited = "idea2$suffix";
+            await tester.enterText(editableDeletableTfFinder, ideaEdited);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 1));
+            if (testingDebug) pu.printd('Testing Debug: idea2 edited');
+
+            // ── Adding idea3  ───────────────────────────────────
+            // ────────────────────────────────────────────────────
+            // Searching the text field used to add ideas
+            var newIdeaTextFieldFinder = find.byKey(const ValueKey('ideaOverlayField'));
+
+            // Adding the new idea
+            await tester.ensureVisible(newIdeaTextFieldFinder);
+            await tester.pumpAndSettle(); 
+            await tester.tap(newIdeaTextFieldFinder, warnIfMissed: false);
+            await tester.pumpAndSettle(); 
+            await tester.enterText(newIdeaTextFieldFinder, 'idea3');
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();             
+            if (testingDebug) pu.printd('Testing Debug: idea3 added');
+
+            await tester.pump(const Duration(seconds: 5)); 
+
+            // ── 5. VERIFICATION  ─────────────────
+            // ─────────────────────────────────────
+
+            // ── Closing the overlay ──────────────────
+            // ─────────────────────────────────────────
+            var overlayClosingTooltipFinder = find.byTooltip(overlayClosingTooltip);
+            await tester.tap(overlayClosingTooltipFinder);
+            await tester.pumpAndSettle();           
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── Verifying the edited/added data present ────────────
+            // ───────────────────────────────────────────────────────
+            // ── Verifying the data present ──────────────────
+            expect(find.textContaining("idea2$suffix"), findsOne);
+            expect(find.textContaining("idea3"), findsOne);
+               
+          } // if platform
+
+        });
+    });
+
+    group('Participants Tests: \n', () 
   {
     var name1 = "Bob";
     var name2 = "Alice";
@@ -2289,7 +2442,7 @@ group('Participants Tests: \n', ()
 
 });
 
-group('Ideas Tests: \n', () 
+    group('Ideas Tests: \n', () 
 {
   group('Ideas Overlay Tests: \n', () 
   {
@@ -2651,8 +2804,9 @@ group('Ideas Tests: \n', ()
     
     });
   });
+
   });
 
-
+});
 
 }
