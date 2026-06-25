@@ -57,7 +57,19 @@ void main() {
       var textFinder = find.text('To load the list\nof previous groups?');
       expect(textFinder, findsOne);    
     }); 
-     
+    
+    // 'Participants Lists Options Page: correct option 2 label'
+    testWidgets('Participants Lists Options Page: correct option 2 label', 
+    (WidgetTester tester) async 
+    {
+      // Pumping the widget
+      await pumpTestableWidget(tester);
+
+      // Verifying the correct option 2 label
+      var textFinder = find.text('To add a new group?');
+      expect(textFinder, findsOne);   
+    }); 
+    
   }
 );  
 
