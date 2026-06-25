@@ -17,7 +17,7 @@ import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix, previewTooltipLabel;
 
-import '../test/helper_functions/externalized_testing_code.dart';
+import 'externalized_code/externalized_testing_code.dart';
 
 // Used to define a folder value for getApplicationSupportPath (PathProvider) 
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {

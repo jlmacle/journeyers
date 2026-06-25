@@ -20,9 +20,8 @@ import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_stri
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
 
-// TODO: to clean
-import '../test/helper_functions/externalized_testing_code.dart';
-import 'externalized_code/integration_test_utils.dart';
+import 'externalized_code/externalized_testing_code.dart';
+
 
 // Used to define a folder value for getApplicationSupportPath (PathProvider) 
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {

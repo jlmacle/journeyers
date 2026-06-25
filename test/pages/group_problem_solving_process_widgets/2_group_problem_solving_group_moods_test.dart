@@ -6,7 +6,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 
-import '../../helper_functions/externalized_testing_code.dart';
+import '../../../integration_test/externalized_code/externalized_testing_code.dart';
 
 void main() 
 {
