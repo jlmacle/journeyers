@@ -1231,5 +1231,27 @@ final q = CAQuestionsFields();
   // Serialises a segmented-button selection to a slash-separated string.
   String _segmentedButtonToString(Set<String> values) => values.join('/');
 
+  /// Method used to scroll up the screen (-200 as default delta value to go up the list).
+  /// The method assumes that the first descendant is the right one.
+  Future<int> scrollListUpScrollableByFirstDescendant({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = -200}) async
+  {
+  if (testingDebug) pu.printd('Testing Debug: scrollListUpScreen');
+
+  var scrollablesFinder = find.descendant
+  (
+    of: listFinder,
+    matching: find.byType(Scrollable),
+  );
+
+  if (testingDebug) pu.printd("Testing Debug: Scrollable count: ${scrollablesFinder.evaluate().length}");
+
+  await tester.scrollUntilVisible
+  (
+    elementToReachFinder, 
+    -200 , // getting back up the list
+    scrollable: scrollablesFinder.first
+  );
+  return await tester.pumpAndSettle(); 
+}
 
    

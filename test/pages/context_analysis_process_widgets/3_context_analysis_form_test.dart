@@ -14,7 +14,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
 
-import '../../helper_functions/externalized_testing_code.dart';
+import '../../../integration_test/externalized_code/externalized_testing_code.dart';
 
 void main() 
 {

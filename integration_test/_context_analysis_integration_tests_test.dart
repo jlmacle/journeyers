@@ -17,7 +17,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_str
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
 
-import '../test/helper_functions/externalized_testing_code.dart';
+import 'externalized_code/externalized_testing_code.dart';
 
 // Used to define a folder value for getApplicationSupportPath (PathProvider) 
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
