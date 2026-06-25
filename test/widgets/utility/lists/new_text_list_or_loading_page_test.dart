@@ -45,7 +45,19 @@ void main() {
       var textFinder = find.text('What would you like to do?');
       expect(textFinder, findsOne);     
     }); 
-       
+
+    // 'Participants Lists Options Page: correct option 1 label'
+    testWidgets('Participants Lists Options Page: correct option 1 label', 
+    (WidgetTester tester) async 
+    {
+      // Pumping the widget
+      await pumpTestableWidget(tester);
+
+      // Verifying the correct option 1 label
+      var textFinder = find.text('To load the list\nof previous groups?');
+      expect(textFinder, findsOne);    
+    }); 
+     
   }
 );  
 
