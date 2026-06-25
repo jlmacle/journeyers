@@ -405,7 +405,7 @@ Future<void> main() async {
                 kwsLists: kwsListsKwsSorting,
                 fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
               );
-              await tester.pump(const Duration(seconds: 4));
+              // await tester.pump(const Duration(seconds: 4));
             
               // ── 2. FILTERING BY KEYWORDS ────────────────────────────
               // ────────────────────────────────────────────────────────
@@ -466,7 +466,7 @@ Future<void> main() async {
               }
               
 
-              await tester.pump(const Duration(seconds: 2));
+              // await tester.pump(const Duration(seconds: 2));
             }
           });     
     });
@@ -1279,7 +1279,6 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
                 await tester.enterText(currentTextFieldFinder, dataList[tfIndex]!);
                 await tester.pumpAndSettle();
-                await tester.pump(const Duration(seconds: 1));
                 // data entered only
               }
             }
@@ -1296,7 +1295,7 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();  
 
-            await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 2));
 
             // ── Verifying the edited data present ──────────────────
             // ───────────────────────────────────────────────────────
@@ -1308,7 +1307,7 @@ Future<void> main() async {
             await tester.tap(previewFinder);
             await tester.pumpAndSettle();
 
-            await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 5));
 
             var textToFind = "a7$suffix";
             if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
@@ -1324,7 +1323,7 @@ Future<void> main() async {
                         ),
             );            
             await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 5));
             if (testingDebug) pu.printd('Scrolled to $textToFind');
 
             textToFind = "b1$suffix";
@@ -1344,7 +1343,7 @@ Future<void> main() async {
             expect(textToFindFinder, findsOne);
             if (testingDebug) pu.printd('Scrolled to $textToFind');
 
-            await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 5));
 
             if (testingDebug) pu.printd('Scrolling toward title for preview');
 
@@ -1364,7 +1363,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
             
             if (testingDebug) pu.printd('Testing Debug: Scrolled to title');
-            await tester.pump(const Duration(seconds: 3));
+            // await tester.pump(const Duration(seconds: 3));
 
             // ── Verifying the edited data present ──────────────────            
             

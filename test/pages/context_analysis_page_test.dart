@@ -161,6 +161,8 @@ void main()
             // Pumping the widget
             await tester.pumpWidget(const MaterialApp(home: CAPage()));
             // Waiting for the preferences to be loaded
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 2));
 
             // pumpAndSettle timed out exception if pumpAndSettle is used

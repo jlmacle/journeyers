@@ -259,7 +259,7 @@ void main()
       await tester.tap(keywordsDeclarationTitleFinder);
       // pumpAndSettle timed out
       // await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 1)); 
+      await tester.pump(const Duration(seconds: 2)); 
 
       // Verifying the keyword absent
       expect(find.text(aKw), findsNothing);
@@ -276,7 +276,7 @@ void main()
       await tester.testTextInput.receiveAction(TextInputAction.done);
       // pumpAndSettle timed out
       // await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 1)); 
+      await tester.pump(const Duration(seconds: 2)); 
 
       // Verifying the keyword present
       expect(find.text(aKw), findsOne);
@@ -335,7 +335,7 @@ void main()
         await tester.testTextInput.receiveAction(TextInputAction.done);
         // pumpAndSettle timed out
         // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 1));        
+        await tester.pump(const Duration(seconds: 2));        
 
         // Verifying the text present
         var textFinder = find.descendant

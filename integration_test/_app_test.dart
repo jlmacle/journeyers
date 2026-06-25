@@ -140,7 +140,7 @@ Future<void> main() async {
             fileNameWithoutExtension: fileName1WithoutExtension
           );
 
-          await tester.pump(const Duration(seconds: 2));      
+          // await tester.pump(const Duration(seconds: 2));      
 
           // ── 2. REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────
@@ -164,7 +164,7 @@ Future<void> main() async {
           // Tapping on the list tile
           await tester.tap(listTileFinder);
           await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 2));
+          // await tester.pump(const Duration(seconds: 2));
 
           // Searching the keywords declaration title
           var keywordsDeclarationTitleFinder = find.descendant
@@ -224,7 +224,7 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 1));  
+            await tester.pump(const Duration(seconds: 2));  
 
             await tester.tap(newIdeaTextFieldFinder); 
           }

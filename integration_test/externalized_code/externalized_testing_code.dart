@@ -41,7 +41,7 @@ final q = CAQuestionsFields();
     await tester.tap(tileFinder);
 
     // Waiting for the expansion tile to be unfolded before searching descendants
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
 
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
@@ -57,7 +57,7 @@ final q = CAQuestionsFields();
     await tester.tap(tileFinder);
 
     // Waiting for the expansion tile to be unfolded before searching descendants
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pumpAndSettle();
 
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
@@ -643,7 +643,8 @@ final q = CAQuestionsFields();
       // Entering the keyword
       await tester.enterText(textfieldFinder, kw);
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pump(const Duration(seconds: 2)); 
+      await tester.pumpAndSettle();
+      // await tester.pump(const Duration(seconds: 2)); 
 
       // Necessary for the next keyword to be added
       await tester.tap(textfieldFinder);         
@@ -691,7 +692,7 @@ final q = CAQuestionsFields();
       await tester.testTextInput.receiveAction(TextInputAction.done);
       // pumpAndSettle timed out
       // await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 1));  
+      await tester.pump(const Duration(seconds: 2));  
 
       await tester.tap(newIdeaTextFieldFinder); 
     }
@@ -868,7 +869,7 @@ final q = CAQuestionsFields();
 
     // pumpAndSettle timed out
     // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 5));
+    await tester.pump(const Duration(seconds: 2));
 
     // Verifying the options page present
     var optionsPageFinder = find.text(participantsListsSubTitle);
@@ -882,7 +883,7 @@ final q = CAQuestionsFields();
     // Tapping on it
     await tester.tap(newParticipantsGroupFinder);
     await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
+    // await tester.pump(const Duration(seconds: 2));
   }
 
   // Method used to go from GPS process page to list loading dashboard
@@ -898,7 +899,7 @@ final q = CAQuestionsFields();
     await tester.tap(addEmojiFinder);
     // pumpAndSettle timed out
     // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 5));
+    await tester.pump(const Duration(seconds: 2));
 
     // Verifying the options page present
     var optionsPageFinder = find.text(participantsListsSubTitle);
@@ -953,8 +954,8 @@ final q = CAQuestionsFields();
 
       // Searching for the new keyword text field
       var newKeywordTextFieldFinder = find.byKey(const ValueKey('keywordField'));
-      expect(newKeywordTextFieldFinder, findsOne);
       await tester.ensureVisible(newKeywordTextFieldFinder); 
+      expect(newKeywordTextFieldFinder, findsOne);
       await tester.pumpAndSettle(); 
       await tester.tap(newKeywordTextFieldFinder);
       await tester.pumpAndSettle();  
@@ -968,6 +969,7 @@ final q = CAQuestionsFields();
         await tester.pumpAndSettle();
         // Necessary for the next keyword to be added
         await tester.tap(newKeywordTextFieldFinder);
+        await tester.pumpAndSettle();
       }
 
       // Closing the overlay
@@ -1023,7 +1025,7 @@ final q = CAQuestionsFields();
 
       // Searching the 'Save' icon
       var saveListIconFinder = find.byIcon(Icons.save_outlined);
-      await tester.pump(const Duration(seconds: 3));
+      // await tester.pump(const Duration(seconds: 3));
       expect(saveListIconFinder, findsOne);
 
       // Tapping on it
@@ -1041,6 +1043,9 @@ final q = CAQuestionsFields();
       await tester.enterText(listNameSavingTextFieldFinder, listName);
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pumpAndSettle();
+
+      // Waiting on the "list saved" snackbar
+      await tester.pump(const Duration(seconds: 3));
 
       // Verifying the names on the GPS process page
 
