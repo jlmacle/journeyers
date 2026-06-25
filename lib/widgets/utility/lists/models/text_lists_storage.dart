@@ -150,7 +150,7 @@ class ListsDB {
 
     if (f == null) 
     {
-      if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: non data to load"); 
+      if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: no data to load"); 
       return [];
     }
 
