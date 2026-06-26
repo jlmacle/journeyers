@@ -64,6 +64,9 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
 
   @override
   void didUpdateWidget(NewTextListKeywordsDeclaration oldWidget) {
+    pu.printdLine();
+    pu.printd("NewTextListKeywordsDeclaration: didUpdateWidget");
+
     super.didUpdateWidget(oldWidget);
     // Checks if the pointer or the content of the list has changed
     if (widget.keywordsCurrent != oldWidget.keywordsCurrent) {
