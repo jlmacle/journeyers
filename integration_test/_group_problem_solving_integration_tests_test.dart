@@ -807,7 +807,7 @@ Future<void> main() async {
         });
     });
 
-    group('Participants Tests: \n', () 
+  group('Participants Tests: \n', () 
   {
     var name1 = "Bob";
     var name2 = "Alice";
