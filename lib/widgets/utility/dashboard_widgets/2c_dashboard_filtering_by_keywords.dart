@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
@@ -112,6 +113,14 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
         widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
       }
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+                                            
+    pu.printdLine();
+    pu.printd("DashboardFilteringByKeywords");
   }
 
   @override

@@ -240,6 +240,14 @@ class _SessionsListItemState extends State<SessionsListItem>
     _kwsEditTfec.dispose();
     super.dispose();
   }
+
+  @override
+  void initState() {
+    super.initState();
+                                                    
+    pu.printdLine();
+    pu.printd("SessionsListItem");
+  }
   
   @override
   Widget build(BuildContext context) 
