@@ -19,7 +19,7 @@ import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_exter
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class ListsDB {
-  static const _fileName = 'journeyers_gps_participants_groups_lists21.json';
+  static var _fileName = 'journeyers_gps_participants_groups_lists21.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -28,7 +28,16 @@ class ListsDB {
   Future<File?> _getFile() async {
     var dir = await getApplicationSupportDirectory();
     var file = File('${dir.path}/$_fileName');
-    if (!file.existsSync()) return null;
+    if (!file.existsSync()) 
+    {
+      _fileName = "tmp_list_data.json";
+      file = File('${dir.path}/$_fileName');
+      file.createSync();
+      List<Map<String, String>> records = [];
+      String content = jsonEncode(records);
+      await file.writeAsString(content);
+      return file;
+    }
     return file;
   }
 
