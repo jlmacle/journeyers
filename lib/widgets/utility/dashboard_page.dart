@@ -70,34 +70,34 @@ class DashboardPageState extends State<DashboardPage>
   bool _isDataLoading = true;
 
   // All the sessions available
-  List<dynamic>? _sessionsAll;
+  List<dynamic>? _sessionsMetadataAll;
 
-  // _filteredSessions is what is used by build()
-  List<dynamic>? _sessionsFiltered;
+  // _sessionsMetadataFiltered is what is used by build()
+  List<dynamic>? _sessionsMetadataFiltered;
 
   // Method used to retrieve the session data, to get the list of used keywords, 
   // and the list of all sessions available
   Future<void> _getStoredSessionData() async 
   {
     // Retrieving data from file
-    final retrievedSessionData = 
+    final retrievedSessionMetadata = 
       await du.retrieveAllDashboardMetadata
                 (typeOfDashboardContext: widget.dashboardContext);
     
     // Getting the used keywords from the retrieved data
-    _keywordsAll = await _keywordsAllGet(retrievedSessionData);
+    _keywordsAll = await _keywordsAllGet(retrievedSessionMetadata);
 
-    // When getting the stored data, _allSessions = retrievedSessionData
-    _sessionsAll = retrievedSessionData;
+    // When getting the stored data, _sessionsMetadataAll = retrievedSessionMetadata
+    _sessionsMetadataAll = retrievedSessionMetadata;
 
-    // _filteredSessions is used in build, and is populated with the content of retrievedSessionData
-    _sessionsFiltered!.clear();
-    _sessionsFiltered!.addAll(retrievedSessionData);
+    // _sessionsMetadataFiltered is used in build, and is populated with the content of retrievedSessionMetadata
+    _sessionsMetadataFiltered!.clear();
+    _sessionsMetadataFiltered!.addAll(retrievedSessionMetadata);
 
-    if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _allSessions: : $_sessionsAll");
+    if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _sessionsMetadataAll: : $_sessionsMetadataAll");
 
     // Data is not sorted by date by default, and needs sorting
-    await sortSessionByDateAddJm(list: _sessionsFiltered!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
+    await sortSessionByDateAddJm(list: _sessionsMetadataFiltered!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
         
     // Re-build to display the sessions
     setState(() {
@@ -105,7 +105,7 @@ class DashboardPageState extends State<DashboardPage>
     });
   }
 
-  // Previous session data retrieval; _allSessions and _filteredSessions are initialized
+  // Previous session data retrieval; _sessionsMetadataAll and _sessionsMetadataFiltered are initialized
   @override
   void initState() 
   {
@@ -114,8 +114,8 @@ class DashboardPageState extends State<DashboardPage>
     pu.printdLine();
     pu.printd("DashboardPage");
 
-    _sessionsAll = [];
-    _sessionsFiltered = [];
+    _sessionsMetadataAll = [];
+    _sessionsMetadataFiltered = [];
     // Circular indicator until data is retrieved
     _getStoredSessionData();
   }
@@ -157,7 +157,7 @@ class DashboardPageState extends State<DashboardPage>
       await du.saveAllSessionsMetadata
       (
         typeOfDashboardContext: widget.dashboardContext, 
-        allSessionsMetadata: _sessionsAll!,
+        allSessionsMetadata: _sessionsMetadataAll!,
       );
     }    
   }
@@ -174,11 +174,11 @@ class DashboardPageState extends State<DashboardPage>
     // Removing the related stored dashboard data
     await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
     
-    // Updating the _allSessions list
-    _sessionsAll?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
+    // Updating the _sessionsMetadataAll list
+    _sessionsMetadataAll?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
 
     // Updating the _filteredSessions list used by the UI
-    _sessionsFiltered?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
+    _sessionsMetadataFiltered?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
               
     // Updating the sessions selected for bulk deletion
     _sessionsSelectedForDeletion.removeWhere
@@ -197,7 +197,7 @@ class DashboardPageState extends State<DashboardPage>
     (const SnackBar(content: Text("Selected session deleted.")));
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
-    if (_sessionsAll != null  && _sessionsAll!.isEmpty) 
+    if (_sessionsMetadataAll != null  && _sessionsMetadataAll!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
@@ -236,13 +236,13 @@ class DashboardPageState extends State<DashboardPage>
     // Updating the local UI state
     setState(() {
       // Finding the session in the session data, and updating its title
-      final sessionIndex = _sessionsAll?.indexWhere(
+      final sessionIndex = _sessionsMetadataAll?.indexWhere(
         (s) => s[DashboardUtils.keyFilePath] == filePath
       );
 
       if (sessionIndex != null && sessionIndex != -1) {
-        previousTitle = _sessionsAll![sessionIndex][DashboardUtils.keyTitle];
-        _sessionsAll![sessionIndex][DashboardUtils.keyTitle] = newTitle;
+        previousTitle = _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle];
+        _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle] = newTitle;
       }
       
       // Notifying success
@@ -260,14 +260,14 @@ class DashboardPageState extends State<DashboardPage>
   {
     Set<dynamic>? previousKeywords;
 
-    final sessionIndex = _sessionsAll?.indexWhere(
+    final sessionIndex = _sessionsMetadataAll?.indexWhere(
         (s) => s[DashboardUtils.keyFilePath] == filePath
       );
 
     if (sessionIndex != null && sessionIndex != -1) {
-      previousKeywords = Set.from(_sessionsAll![sessionIndex][DashboardUtils.keyKeywords]);
+      previousKeywords = Set.from(_sessionsMetadataAll![sessionIndex][DashboardUtils.keyKeywords]);
       // Updating the list with the new keywords
-      _sessionsAll![sessionIndex][DashboardUtils.keyKeywords] = 
+      _sessionsMetadataAll![sessionIndex][DashboardUtils.keyKeywords] = 
       newKeywords.toList()..sort
                   (
                     (a, b) 
@@ -325,7 +325,7 @@ class DashboardPageState extends State<DashboardPage>
                   child: DashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    sessionsAll: _sessionsAll, sessionsFiltered: _sessionsFiltered,
+                    sessionsAll: _sessionsMetadataAll, sessionsFiltered: _sessionsMetadataFiltered,
                     keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
@@ -337,8 +337,8 @@ class DashboardPageState extends State<DashboardPage>
                   child: DashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    sessionsAll: _sessionsAll,
-                    sessionsFiltered: _sessionsFiltered,
+                    sessionsMetadataAll: _sessionsMetadataAll,
+                    sessionsFiltered: _sessionsMetadataFiltered,
                     areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
                     sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
@@ -358,7 +358,7 @@ class DashboardPageState extends State<DashboardPage>
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final session = _sessionsFiltered![index];
+                        final session = _sessionsMetadataFiltered![index];
                         final String filePath = session[DashboardUtils.keyFilePath];
                         
                         return SessionsListItem(
@@ -413,7 +413,7 @@ class DashboardPageState extends State<DashboardPage>
                           onDeleteCallbackFunction: () async => await _sessionSelectedDelete(filePath),
                         );
                       },
-                      childCount: _sessionsFiltered?.length ?? 0,
+                      childCount: _sessionsMetadataFiltered?.length ?? 0,
                     ),
                   ),
                 ),
@@ -465,7 +465,7 @@ class DashboardPageState extends State<DashboardPage>
                 await du.saveAllSessionsMetadata
                 (
                   typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _sessionsAll!,
+                  allSessionsMetadata: _sessionsMetadataAll!,
                 );
 
                 // Closing the modal sheet
@@ -488,7 +488,7 @@ class DashboardPageState extends State<DashboardPage>
                 await du.saveAllSessionsMetadata
                 (
                   typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _sessionsAll!,
+                  allSessionsMetadata: _sessionsMetadataAll!,
                 );
 
                 // Closing the modal sheet
