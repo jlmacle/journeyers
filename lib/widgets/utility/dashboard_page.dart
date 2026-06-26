@@ -110,6 +110,10 @@ class DashboardPageState extends State<DashboardPage>
   void initState() 
   {
     super.initState();
+    
+    pu.printdLine();
+    pu.printd("DashboardPage");
+
     _sessionsAll = [];
     _sessionsFiltered = [];
     // Circular indicator until data is retrieved
