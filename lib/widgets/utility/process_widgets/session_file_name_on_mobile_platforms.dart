@@ -16,7 +16,7 @@ import 'package:journeyers/widgets/utility/process_widgets/process_const_strings
 /// {@category Utility widgets}
 /// {@category Process}
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
-class SessionFileNameMobilePlatforms extends StatefulWidget 
+class SessionFileNameOnMobilePlatforms extends StatefulWidget 
 {
   /// A file name value used at editing time.
   final String fileNameWhenEdition;
@@ -30,7 +30,7 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   /// A callback function called to save session data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
 
-  const SessionFileNameMobilePlatforms
+  const SessionFileNameOnMobilePlatforms
   ({
     super.key,
     required this.fileNameWhenEdition,
@@ -40,14 +40,14 @@ class SessionFileNameMobilePlatforms extends StatefulWidget
   });
 
   @override
-  State<SessionFileNameMobilePlatforms> createState() => _SessionFileNameMobilePlatformsState();
+  State<SessionFileNameOnMobilePlatforms> createState() => _SessionFileNameOnMobilePlatformsState();
 }
 
-class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePlatforms> 
+class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobilePlatforms> 
 {
   final TextEditingController _fileNameTfec = .new();  
   
-  final GlobalKey<_SessionFileNameMobilePlatformsState> _errorMessageKey = .new();
+  final GlobalKey<_SessionFileNameOnMobilePlatformsState> _errorMessageKey = .new();
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
@@ -80,7 +80,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
     _getApplicationFolderPath();
 
     // Edited file name value if relevant
-    if (editDebug) pu.printd("Editing: SessionFileNameMobilePlatforms: initState: widget.fileNameWhenEdition: ${widget.fileNameWhenEdition}");
+    if (editDebug) pu.printd("Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWhenEdition}");
     _fileNameTfec.text = widget.fileNameWhenEdition;
   }
 

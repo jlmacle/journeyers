@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/main.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
 
 void main() {
   // The file name is tested without the extension to avoid triggering the dot removal
@@ -22,7 +22,7 @@ void main() {
   setUp(() 
   {
     // Creates a temporary directory on any host OS
-    testTmpDir = Directory.systemTemp.createTempSync('SessionFileNameMobilePlatforms_test');
+    testTmpDir = Directory.systemTemp.createTempSync('SessionFileNameOnMobilePlatforms_test');
     pathToTmpFolder = testTmpDir!.path;
   });
 
@@ -85,12 +85,12 @@ void main() {
         // The path was an invalid URI for SAF, therefore throwing an exception.
         // The following PlatformException was thrown running a test:
         // PlatformException(INVALID_URI, Expected a SAF content:// tree URI, got:
-        // /data/user/0/dev.journeyers/code_cache/SessionFileNameMobilePlatforms_testKCXGHA, null, null)
+        // /data/user/0/dev.journeyers/code_cache/SessionFileNameOnMobilePlatforms_testKCXGHA, null, null)
 
         // Making sure the text field visible
         var textFieldFinder = 
         find.descendant(
-          of: find.byType(SessionFileNameMobilePlatforms), 
+          of: find.byType(SessionFileNameOnMobilePlatforms), 
           matching: find.byType(TextField));
         await tester.ensureVisible(textFieldFinder);
 

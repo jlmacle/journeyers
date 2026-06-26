@@ -17,8 +17,8 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
 
 /// {@category Context analysis}
 /// The process for the context analyses.
@@ -308,7 +308,7 @@ class CAProcessState extends State<CAProcess>
                     ? const Center(child: CircularProgressIndicator())
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
-                        ? SessionFileNameMobilePlatforms
+                        ? SessionFileNameOnMobilePlatforms
                         (
                           fileNameWhenEdition: widget.fileNameWhenEditionWithoutExtension,
                           fileExtension: _fileExtension, 
@@ -316,7 +316,7 @@ class CAProcessState extends State<CAProcess>
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
                         )
                         // Saving file for desktop platforms
-                        : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)
+                        : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)
                   ),
                 ],
               ),

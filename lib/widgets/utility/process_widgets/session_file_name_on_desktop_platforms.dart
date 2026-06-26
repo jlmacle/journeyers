@@ -5,20 +5,20 @@ import 'package:journeyers/app_themes.dart';
 /// {@category Utility widgets}
 /// {@category Process}
 /// A widget used for choosing a file name, and saving a session file, on desktop platforms.
-class SessionFileNameDesktopPlatforms extends StatefulWidget 
+class SessionFileNameOnDesktopPlatforms extends StatefulWidget 
 {
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata;
-  const SessionFileNameDesktopPlatforms
+  const SessionFileNameOnDesktopPlatforms
   ({
     super.key,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
   @override
-  State<SessionFileNameDesktopPlatforms> createState() => _SessionFileNameDesktopPlatformsState();
+  State<SessionFileNameOnDesktopPlatforms> createState() => _SessionFileNameOnDesktopPlatformsState();
 }
 
-class _SessionFileNameDesktopPlatformsState extends State<SessionFileNameDesktopPlatforms> 
+class _SessionFileNameOnDesktopPlatformsState extends State<SessionFileNameOnDesktopPlatforms> 
 {
 
   @override
