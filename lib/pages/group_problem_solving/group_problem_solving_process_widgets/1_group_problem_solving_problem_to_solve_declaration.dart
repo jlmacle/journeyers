@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Group problem-solving}
 /// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
@@ -26,6 +27,14 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
 
 class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclaration> {
   bool _isEditing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    pu.printdLine();
+    pu.printd("GPSProblemToSolveDeclaration");
+  }
 
   @override
   Widget build(BuildContext context) {
