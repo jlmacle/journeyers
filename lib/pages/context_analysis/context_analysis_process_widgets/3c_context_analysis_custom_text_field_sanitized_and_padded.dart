@@ -4,7 +4,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_black_list.dart';
+import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart';
 
 
 /// {@category Context analysis}
