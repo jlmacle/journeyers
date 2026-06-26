@@ -198,7 +198,7 @@ class DashboardUtils {
   /// Method used to retrieved all the file names, from the user application folder (mobile applications).
   Future<List<String>> getStoredFileNamesOnMobile() async
   {
-    if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile: \n currentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
+    if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile:\n currentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
     // Getting the list of stored file names
     List<Object?> result = [];
     if(Platform.isAndroid)
