@@ -56,6 +56,10 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   @override
   void initState() {
     super.initState();
+        
+    pu.printdLine();
+    pu.printd("CAKeywordsDeclaration");
+
     _keywordsListSorted = widget.keywordsWhenEdition.toList();
     if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: initState: _keywordsListSorted: $_keywordsListSorted");
   }
