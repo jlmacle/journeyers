@@ -76,7 +76,7 @@ class _SessionFileNameMobilePlatformsState extends State<SessionFileNameMobilePl
   @override
   void initState() {
     super.initState();
-    if (sessionDataDebug) pu.printd("Session Data: file extensions: ${widget.fileExtension}");
+    if (sessionDataDebug) pu.printd("Session Data: file extension: ${widget.fileExtension}");
     _getApplicationFolderPath();
 
     // Edited file name value if relevant
