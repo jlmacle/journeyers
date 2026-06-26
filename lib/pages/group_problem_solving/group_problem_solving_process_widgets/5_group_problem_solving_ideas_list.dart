@@ -40,7 +40,10 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
 
   @override
   void initState() {
-    super.initState();   
+    super.initState();
+                    
+    pu.printdLine();
+    pu.printd("GPSIdeasList");
     
     _ideasEnteredList = widget.ideas;
   }
