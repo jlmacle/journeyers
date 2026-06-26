@@ -22,7 +22,7 @@ class DashboardDeletionByBulk extends StatefulWidget
   final bool areSessionsForDeletion; 
 
   /// List containing all available session data.
-  final List<dynamic>? sessionsAll;
+  final List<dynamic>? sessionsMetadataAll;
 
   /// List containing all filtered session data.
   final List<dynamic>? sessionsFiltered;
@@ -38,7 +38,7 @@ class DashboardDeletionByBulk extends StatefulWidget
     super.key,
     required this.dashboardContext,
     required this.areSessionsForDeletion,
-    required this.sessionsAll,
+    required this.sessionsMetadataAll,
     required this.sessionsFiltered,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
     this.sessionsSelectedForDeletion    
@@ -81,12 +81,12 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     );
 
     // Updating the _allSessions list
-    widget.sessionsAll?.removeWhere
+    widget.sessionsMetadataAll?.removeWhere
     (
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])
     );
-    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allSessions: ${widget.sessionsAll}");
+    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.sessionsMetadataAll: ${widget.sessionsMetadataAll}");
 
     // Clearing the list of the selected sessions
     widget.sessionsSelectedForDeletion!.clear();
@@ -102,11 +102,11 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allSessions!.isEmpty?: ${widget.sessionsAll!.isEmpty}");
+    if (sessionDataDebug) pu.printd("Session Data: widget.sessionsMetadataAll!.isEmpty?: ${widget.sessionsMetadataAll!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.sessionsAll!.isEmpty) 
+    if (widget.sessionsMetadataAll!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus to false
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
