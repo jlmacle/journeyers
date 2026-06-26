@@ -168,7 +168,9 @@ class _GPSPreviewState
 
   @override
   void didUpdateWidget(covariant GPSPreview oldWidget) {
-    if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget");
+    pu.printdLine();
+    pu.printd("GPSPreview: didUpdateWidget");
+    
     if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
     if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");
 

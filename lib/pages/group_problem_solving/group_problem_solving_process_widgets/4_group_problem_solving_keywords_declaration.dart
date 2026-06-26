@@ -64,7 +64,11 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
 
   @override
   void didUpdateWidget(GPSKeywordsDeclaration oldWidget) {
+    pu.printdLine();
+    pu.printd("GPSKeywordsDeclaration: didUpdateWidget");
+
     super.didUpdateWidget(oldWidget);
+    
     // Checks if the pointer or the content of the list has changed
     if (widget.currentKeywords != oldWidget.currentKeywords) {
       setState(() {
