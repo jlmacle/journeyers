@@ -254,6 +254,10 @@ class _NewTextListState extends State<NewTextList> {
   @override
   void initState() {
     super.initState();
+
+    pu.printdLine();
+    pu.printd("NewTextList");
+
     // Loading the previous lists of grouped texts
     _listOfPreviousGroupedTextsLoad();
     
@@ -365,7 +369,7 @@ class _NewTextListState extends State<NewTextList> {
               }
             ),
             // Deletion by bulk widget
-            NewListDeletionByBulk
+            NewTextListDeletionByBulk
             (
               areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
               enteredTextItemsList: _enteredTextItemsList,

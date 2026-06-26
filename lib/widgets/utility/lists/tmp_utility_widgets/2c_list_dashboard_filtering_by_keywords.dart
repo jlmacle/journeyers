@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
 
@@ -112,6 +113,14 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
         widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
       }
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+            
+    pu.printdLine();
+    pu.printd("ListDashboardFilteringByKeywords");
   }
 
   @override
