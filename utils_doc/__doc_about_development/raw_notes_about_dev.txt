@@ -85,6 +85,6 @@ Storage of what can be positive credentials of our team life.
 Supportive technology for sound priorities (dashboard+todos)/problem-solving/group problem-solving/team credentials
 ------------------------------------------
 DPGs:
-- to ease building on win-wins where we dwell.
-- to determine productivity we can be reliable at/feel good about.
+- to ease building on win-wins where we dwell
+- to determine productivity we can be reliable at/feel good about
 
