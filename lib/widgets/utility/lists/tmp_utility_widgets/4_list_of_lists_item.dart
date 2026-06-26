@@ -120,12 +120,17 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 
  @override
   void initState() {
+    super.initState();
+    
+    pu.printdLine();
+    pu.printd("ListOfListsItem");
+
     List<Map<String, dynamic>> subItemsDataList =
     ((widget.listMetadata[subItemsDataListKey]) as List)
         .cast<Map<String, dynamic>>();
     Map<String, String> namesKeysMap = _listsDB.getNamesKeys(subItemsDataList);
     _participantsCurrent =  namesKeysMap.keys.toList();
-    super.initState();
+
   }
  
   @override void dispose() 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
@@ -35,6 +36,14 @@ class ListDashboardSortingByDateState extends State<ListDashboardSortingByDate>
   {
     await sortSessionByDateAddJm(list: widget.filteredListsToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+        
+    pu.printdLine();
+    pu.printd("ListDashboardSortingByDate");
   }
 
   @override

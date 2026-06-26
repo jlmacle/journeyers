@@ -120,6 +120,10 @@ class ListDashboardState extends State<ListDashboard>
   void initState() 
   {
     super.initState();
+         
+    pu.printdLine();
+    pu.printd("ListDashboard");
+
     _listsDataAll = [];
     _listsDataFiltered = [];
     // Circular indicator until data is retrieved

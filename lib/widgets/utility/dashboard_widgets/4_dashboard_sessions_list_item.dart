@@ -574,7 +574,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                 return      
                 Column(
                   children: [
-                    NewListDeletionByBulk
+                    NewTextListDeletionByBulk
                       (
                         areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
                         enteredTextItemsList: _ideasListBeforeEdition,

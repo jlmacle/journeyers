@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+
 
 /// {@category Utils - Generic}
 /// {@category Lists}
 /// A widget handling bulk deletion of text items in a list.
-class NewListDeletionByBulk extends StatefulWidget 
+class NewTextListDeletionByBulk extends StatefulWidget 
 {
   /// Boolean used to store if some text items are selected for deletion.
   final bool areSomeTextItemsSelectedForDeletion; 
@@ -18,7 +20,7 @@ class NewListDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the text items displayed.
   final VoidCallback callbackFunctionToRefreshTheList;
 
-  const NewListDeletionByBulk
+  const NewTextListDeletionByBulk
   ({
     super.key,
     required this.areSomeTextItemsSelectedForDeletion,
@@ -28,10 +30,10 @@ class NewListDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<NewListDeletionByBulk> createState() => NewListDeletionByBulkState();
+  State<NewTextListDeletionByBulk> createState() => NewTextListDeletionByBulkState();
 }
 
-class NewListDeletionByBulkState extends State<NewListDeletionByBulk> 
+class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk> 
 {
   // ─── BULK DELETION OF LIST ITEMS ───────────────────────────────────────
   // Method used to delete several list items
@@ -60,6 +62,14 @@ class NewListDeletionByBulkState extends State<NewListDeletionByBulk>
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected items deleted.")));
  
+  }
+
+  @override
+  void initState() {
+    super.initState();
+        
+    pu.printdLine();
+    pu.printd("NewTextListDeletionByBulk");
   }
   
   @override

@@ -7,7 +7,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deleta
 import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart';
+import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_list_keywords_declaration.dart';
 
 
 /// Class used to add a text list to a set of text lists.
@@ -254,6 +254,10 @@ class _NewTextListState extends State<NewTextList> {
   @override
   void initState() {
     super.initState();
+
+    pu.printdLine();
+    pu.printd("NewTextList");
+
     // Loading the previous lists of grouped texts
     _listOfPreviousGroupedTextsLoad();
     
@@ -365,7 +369,7 @@ class _NewTextListState extends State<NewTextList> {
               }
             ),
             // Deletion by bulk widget
-            NewListDeletionByBulk
+            NewTextListDeletionByBulk
             (
               areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
               enteredTextItemsList: _enteredTextItemsList,

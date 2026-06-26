@@ -144,7 +144,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                 return      
                 Column(
                   children: [
-                    NewListDeletionByBulk
+                    NewTextListDeletionByBulk
                       (
                         areSomeTextItemsSelectedForDeletion: _ideasAreSomeForDeletion,
                         enteredTextItemsList: _ideasEnteredList,
