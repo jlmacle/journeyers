@@ -76,8 +76,6 @@ class CAProcessState extends State<CAProcess>
   // Method used to load the DTO's data using a json file
   Future<void> _loadDTO({required String dtoAssetPathToJson}) async 
   {
-    if (sessionDataDebug) pu.printd("Session Data: CAProcess: path to DTO asset if preloading: $dtoAssetPathToJson");
-    
     // Loading from DTO
     if (dtoAssetPathToJson == "") 
     {
