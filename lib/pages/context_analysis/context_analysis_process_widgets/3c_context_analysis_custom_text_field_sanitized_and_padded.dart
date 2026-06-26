@@ -98,6 +98,7 @@ class _CATextFieldSanitizedAndPaddedState extends State<CATextFieldSanitizedAndP
   void initState() 
   {
     super.initState();
+
     _tfec.text = widget.textFieldStartValue;
   }
 

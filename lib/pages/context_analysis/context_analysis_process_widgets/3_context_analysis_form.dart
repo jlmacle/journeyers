@@ -55,9 +55,13 @@ class CAFormState extends State<CAForm>
 
   @override
   void initState() {
+    super.initState();
+            
+    pu.printdLine();
+    pu.printd("CAForm");
+
     // _dtoCAForm assigned only from the widget if null
     _dtoCAForm ??= widget.dtoCAForm;
-    super.initState();
   }
 
   // ─── ACCESSIBILITY related data ───────────────────────────────────────
