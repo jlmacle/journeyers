@@ -49,8 +49,6 @@ class _GPSappState extends State<GPSapp>
     // Getting the stored file names at start on mobile
     if (Platform.isAndroid || Platform.isIOS)
     {
-      
-      if (sessionDataDebug) pu.printd("Session Data: GPSapp: currentListOfStoredFileNames");
       du.getStoredFileNamesOnMobile();
     }    
     
