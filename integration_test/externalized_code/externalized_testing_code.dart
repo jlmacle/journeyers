@@ -22,7 +22,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_session
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
   
 // Labels of the level 2 and 3 titles
 final q = CAQuestionsFields();
@@ -1139,7 +1139,7 @@ final q = CAQuestionsFields();
   // (Assuming an already selected path to the user session data folder)
   Future<void> dashboardEnterFileNameAndSubmitDataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
   {
-    Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+    Finder fileNameWidgetFinder =  find.byType(SessionFileNameOnMobilePlatforms);
 
     // Path to folder already declared 
     // Scrolling to make the text field visible for small screens

@@ -14,7 +14,7 @@ void main()
 {
   const String textFieldHintPart = "Please add the";
 
-    group('SessionFileNameMobilePlatforms Tests: \n', 
+    group('SessionFileNameOnMobilePlatforms Tests: \n', 
     () 
     {      
         // "On mobile: The folder picker is available to the user, when the user didn't select the folder for its files yet"

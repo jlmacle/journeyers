@@ -22,8 +22,8 @@ import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
 
 // TODO: to clean
 /// {@category Group problem-solving}
@@ -258,7 +258,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
 
     pu.printdLine();
     pu.printd("GPSProcess");
-    
+
      _loadAllCAMetadata();
     _getApplicationFolderPath();
   }
@@ -476,7 +476,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
             ? const Center(child: CircularProgressIndicator())
             : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                 // Defining file name and saving file for mobile platforms 
-                ? SessionFileNameMobilePlatforms
+                ? SessionFileNameOnMobilePlatforms
                 (
                   fileExtension: _fileExtension, 
                   fileNameWhenEdition: "",
@@ -484,7 +484,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
                 )
                 // Saving file for desktop platforms
-                : SessionFileNameDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata)
+                : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata)
         ),
       ]
     );

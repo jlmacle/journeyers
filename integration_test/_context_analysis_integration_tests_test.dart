@@ -15,7 +15,7 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
 
 import 'externalized_code/externalized_testing_code.dart';
 
@@ -1286,7 +1286,7 @@ Future<void> main() async {
             // ── Submitting edited data ──────────────────
             // ────────────────────────────────────────────
 
-            Finder fileNameWidgetFinder =  find.byType(SessionFileNameMobilePlatforms);
+            Finder fileNameWidgetFinder =  find.byType(SessionFileNameOnMobilePlatforms);
             await tester.ensureVisible(fileNameWidgetFinder);
             await tester.pumpAndSettle();
             await tester.tap(fileNameWidgetFinder);

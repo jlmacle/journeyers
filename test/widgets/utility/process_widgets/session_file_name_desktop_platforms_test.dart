@@ -12,7 +12,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 void main() 
 {
-    group('SessionFileNameDesktopPlatforms Tests: \n', 
+    group('SessionFileNameOnDesktopPlatforms Tests: \n', 
     () 
     {      
         // 'The elevated button, for the file picker, is available to the user.'
