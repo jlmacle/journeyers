@@ -76,7 +76,7 @@ class CAProcessState extends State<CAProcess>
   // Method used to load the DTO's data using a json file
   Future<void> _loadDTO({required String dtoAssetPathToJson}) async 
   {
-    if (sessionDataDebug) pu.printd("Session Data: CA Process: path to DTO asset if preloading: $dtoAssetPathToJson");
+    if (sessionDataDebug) pu.printd("Session Data: CAProcess: path to DTO asset if preloading: $dtoAssetPathToJson");
     
     // Loading from DTO
     if (dtoAssetPathToJson == "") 
@@ -111,7 +111,7 @@ class CAProcessState extends State<CAProcess>
   void _analysisTitleUpdate(String titleValue)
   {
     analysisTitle = titleValue;
-    if (sessionDataDebug) pu.printd("Session Data: CA Process: _analysisTitleUpdate: analysisTitle: $analysisTitle");
+    if (sessionDataDebug) pu.printd("Session Data: CAProcess: _analysisTitleUpdate: analysisTitle: $analysisTitle");
   }
 
 
@@ -121,7 +121,7 @@ class CAProcessState extends State<CAProcess>
   void _analysisKeywordsUpdate(Set<String> kws)
   {    
     analysisKeywords = kws;
-    if (sessionDataDebug) pu.printd("Session Data: CA Process: _analysisKeywordsUpdate: analysisKeywords: $analysisKeywords");
+    if (sessionDataDebug) pu.printd("Session Data: CAProcess: _analysisKeywordsUpdate: analysisKeywords: $analysisKeywords");
   }
   
   // FILE NAME
@@ -132,7 +132,7 @@ class CAProcessState extends State<CAProcess>
   void _analysisFileNameUpdate(String value)
   {   
     analysisFileName = value;
-    if (sessionDataDebug) pu.printd("Session Data: CA Process: _analysisFileNameUpdate: analysisFileName: $analysisFileName");
+    if (sessionDataDebug) pu.printd("Session Data: CAProcess: _analysisFileNameUpdate: analysisFileName: $analysisFileName");
   }
   
   
