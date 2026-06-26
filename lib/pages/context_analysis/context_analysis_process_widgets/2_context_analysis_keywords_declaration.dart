@@ -61,7 +61,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
     pu.printd("CAKeywordsDeclaration");
 
     _keywordsListSorted = widget.keywordsWhenEdition.toList();
-    if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: initState: _keywordsListSorted: $_keywordsListSorted");
+    if (editDebug) pu.printd("Editing: CAKeywordsDeclaration: initState: _keywordsListSorted: $_keywordsListSorted");
   }
 
   @override
@@ -125,8 +125,8 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                         _keywordsSet.remove(tag);                        
                         _keywordsListSorted.removeWhere((item) => item == tag);
 
-                        if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: build: _keywordsSet: $_keywordsSet");               
-                        if (editDebug) pu.printd("Editing: _CAKeywordsDeclarationState: build: _keywordsListSorted: $_keywordsListSorted");               
+                        if (editDebug) pu.printd("Editing: CAKeywordsDeclaration: build: _keywordsSet: $_keywordsSet");               
+                        if (editDebug) pu.printd("Editing: CAKeywordsDeclaration: build: _keywordsListSorted: $_keywordsListSorted");               
                       });
                       widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
                     }, 

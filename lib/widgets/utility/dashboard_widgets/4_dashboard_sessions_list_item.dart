@@ -118,7 +118,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   {
     setState(() {
       _ideasListBeforeEdition[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: _SessionsListItemState: onUpdateTheIdeaValue: Ideas list: $_ideasListBeforeEdition ");
+      if (editDebug) pu.printd("Editing: SessionsListItem: onUpdateTheIdeaValue: Ideas list: $_ideasListBeforeEdition ");
     });  
   }
 
@@ -474,13 +474,13 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   color: appBarWhite,
                   onPressed: () async
                   {
-                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
-                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: _ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
-                    if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: previewEditMode: $_previewEditMode");
+                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
+                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: previewEditMode: $_previewEditMode");
                     
                     if (_previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasListBeforeEdition, _ideasListBeforeEditionCopy) )
                     {
-                        if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: List edited: saving data and metadata");
+                        if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: List edited: saving data and metadata");
 
                         String filePath = sessionMetadata[DashboardUtils.keyFilePath];
                         String fileName = filePath.split('/').last;
@@ -488,8 +488,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         String fileNameWithoutExtension = fileName.split('.').first;
                         var keywords = sessionMetadata[DashboardUtils.keyKeywords].cast<String>();
 
-                        if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: fileNameWithoutExtension: $fileNameWithoutExtension");
-                        if (editDebug) pu.printd("Editing: _SessionsListItemState: _showPreviewOverlay: sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
+                        if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: fileNameWithoutExtension: $fileNameWithoutExtension");
+                        if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
                         
                         await _saveUpdatedDataAndMetadata
                         (title: title, keywords: keywords, updatedIdeas: _ideasListBeforeEdition,
@@ -633,7 +633,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                                                                 
                                                                               });
                                                                             }
-                                                                            if (editDebug) pu.printd("Editing: _SessionsListItemState: _showEditOverlay: _ideasSelectedForDeletionIndexes: $_ideasSelectedForDeletionIndexes");
+                                                                            if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: _ideasSelectedForDeletionIndexes: $_ideasSelectedForDeletionIndexes");
                       
                                                                           }, 
                                       // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
@@ -679,7 +679,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                             
                           });
                           _tecNewIdea.clear();
-                          if (editDebug) pu.printd("Editing: _SessionsListItemState: _showEditOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                          if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
                       
                         },
                       ),

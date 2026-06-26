@@ -53,12 +53,12 @@ class _GPSPreviewState
     pu.printdLine();
     pu.printd("GPSPreview");
     
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}");
+    if (editDebug) pu.printd("Editing: GPSPreview: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}");
     
     _dataIdeas = widget.gpsPreviewIdeasStored;
     if (_dataIdeas.isEmpty) 
     {
-      if (editDebug) pu.printd("Editing: _GPSPreviewState: initState: _fetchingData");
+      if (editDebug) pu.printd("Editing: GPSPreview: initState: _fetchingData");
       _fetchingData();
     }
     else
@@ -168,9 +168,9 @@ class _GPSPreviewState
 
   @override
   void didUpdateWidget(covariant GPSPreview oldWidget) {
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget");
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
-    if (editDebug) pu.printd("Editing: _GPSPreviewState: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");
+    if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget");
+    if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
+    if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");
 
     super.didUpdateWidget(oldWidget);
 
