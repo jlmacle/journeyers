@@ -34,7 +34,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   {
     setState(() {
       _ideasEnteredList[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: _GPSIdeasListState: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_ideasEnteredList");
+      if (editDebug) pu.printd("Editing: GPSIdeasList: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_ideasEnteredList");
     });  
   }
 
@@ -193,7 +193,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                                                               
                                                                               setLocalState(() {});
                                                                             }
-                                                                            if (editDebug) pu.printd("Editing: _GPSIdeasListState: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes");
+                                                                            if (editDebug) pu.printd("Editing: GPSIdeasList: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes");
                                                                           }, 
                                       // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
                                       parentCallbackFunctionToUpdateTheListItemValue: 
@@ -235,7 +235,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                             
                           });
                           _ideaNewTfec.clear();
-                          if (editDebug) pu.printd("Editing: _GPSIdeasListState: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList");
+                          if (editDebug) pu.printd("Editing: GPSIdeasList: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList");
                         },
                       ),
                     ),
