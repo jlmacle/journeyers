@@ -75,11 +75,11 @@ class _NewTextListState extends State<NewTextList> {
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;
         _loadingDB = false;
-        if (listDebug) pu.printd("List debug: _NewTextListState: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
+        if (listDebug) pu.printd("List debug: NewTextList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
       });
     } catch (e) {
       setState(() {
-        pu.printd("Exception: _NewTextListState: _loadListOfGroupedTexts: $e");
+        pu.printd("Exception: NewTextList: _loadListOfGroupedTexts: $e");
         _loadingDBError = e.toString();
         _loadingDB = false;
       });
@@ -231,16 +231,20 @@ class _NewTextListState extends State<NewTextList> {
 
       ScaffoldMessenger.of(context).showSnackBar
       (
+
         SnackBar(content: Text('Saved as "$listLabel"')),
       );
-    } catch (e) 
+    } 
+    catch (e, stackTrace) 
     {
+      if (listDebug) pu.printd("List debug: NewTextList: Error: Save failed: $e");
+      if (listDebug) pu.printd("List debug: NewTextList: Error: $stackTrace");
       setState(() => _dataSaving = false);
 
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar
-      (
+      (    
         SnackBar(content: Text('Save failed: $e')),
       );
     }
@@ -355,7 +359,7 @@ class _NewTextListState extends State<NewTextList> {
               keywordsCurrent: {},
               keywordsOnUpdateCallbackFunction: (newKeywords) 
               {
-                if (listDebug) pu.printd("List debug: _NewTextListState: build: newKeywords: $newKeywords");
+                if (listDebug) pu.printd("List debug: NewTextList: build: newKeywords: $newKeywords");
     
                 _newKeywords = newKeywords.toList()..sort();
               }
@@ -441,7 +445,7 @@ class _NewTextListState extends State<NewTextList> {
                                                                     
                                                                   });
                                                                 }
-                                                                if (listDebug) pu.printd("List debug: _NewTextListState: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
+                                                                if (listDebug) pu.printd("List debug: NewTextList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
 
                                                               }, 
                           parentCallbackFunctionToUpdateTheListItemValue: _onUpdateTheListItemValue,
@@ -475,7 +479,7 @@ class _NewTextListState extends State<NewTextList> {
                     _enteredTextItemsList.add(value.trim());
                   });
                   _newTextItemTfec.clear();
-                  if (listDebug) pu.printd("List debug: _NewTextListState: build: _enteredTextItemsList: $_enteredTextItemsList");
+                  if (listDebug) pu.printd("List debug: NewTextList: build: _enteredTextItemsList: $_enteredTextItemsList");
                 },
               ),
             ),
