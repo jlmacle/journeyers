@@ -136,6 +136,16 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   }
   
   @override
+  void initState() {
+
+    super.initState();
+                                                
+    pu.printdLine();
+    pu.printd("DashboardDeletionByBulk");
+  }
+
+
+  @override
   Widget build(BuildContext context) 
   {
     return Center(

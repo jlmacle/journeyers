@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
+import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
 
 /// {@category Utility widgets}
@@ -36,6 +37,14 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
     await sortDashboardSessionsByTitle(list: widget.filteredSessionsToSort!, byAscendingTitle: _isAscendingTitle);
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+                                    
+    pu.printdLine();
+    pu.printd("DashboardSortingByTitle");
+  }
 
   @override
   Widget build(BuildContext context) {

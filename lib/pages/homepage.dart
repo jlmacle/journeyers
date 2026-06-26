@@ -101,6 +101,14 @@ class _HomePageState extends State<HomePage>
   String? _eol;
 
   @override
+  void initState() {
+    super.initState();
+                            
+    pu.printdLine();
+    pu.printd("HomePage");
+  }
+
+  @override
   Widget build(BuildContext context) 
   {
     if (kIsWeb) 
