@@ -325,7 +325,7 @@ class DashboardPageState extends State<DashboardPage>
                   child: DashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    sessionsAll: _sessionsMetadataAll, sessionsFiltered: _sessionsMetadataFiltered,
+                    sessionsMetadataAll: _sessionsMetadataAll, sessionsMetadataFiltered: _sessionsMetadataFiltered,
                     keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
                     parentCallbackFunctionToRefreshTheSessionsList: _updateState,
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
@@ -338,7 +338,7 @@ class DashboardPageState extends State<DashboardPage>
                   (
                     dashboardContext: widget.dashboardContext,
                     sessionsMetadataAll: _sessionsMetadataAll,
-                    sessionsFiltered: _sessionsMetadataFiltered,
+                    sessionsMetadataFiltered: _sessionsMetadataFiltered,
                     areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
                     sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    

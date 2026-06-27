@@ -15,10 +15,10 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   final String dashboardContext;
 
   /// List containing all available session data.
-  final List<dynamic>? sessionsAll;
+  final List<dynamic>? sessionsMetadataAll;
 
   /// List containing all filtered session data.
-  final List<dynamic>? sessionsFiltered;
+  final List<dynamic>? sessionsMetadataFiltered;
 
   /// List containing the keywords used by the sessions.
   final List<String> keywordsAll;
@@ -36,8 +36,8 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   ({
     super.key,
     required this.dashboardContext,
-    required this.sessionsAll,
-    required this.sessionsFiltered,
+    required this.sessionsMetadataAll,
+    required this.sessionsMetadataFiltered,
     required this.keywordsAll,
     required this.keywordsSelected,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
@@ -83,13 +83,13 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                   // Sorting by title
                   DashboardSortingByTitle
                   (
-                    filteredSessionsToSort: widget.sessionsFiltered,
+                    filteredSessionsToSort: widget.sessionsMetadataFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                   // Sorting by date
                   DashboardSortingByDate
                   (
-                    filteredSessionsToSort: widget.sessionsFiltered,
+                    filteredSessionsToSort: widget.sessionsMetadataFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                 ],
@@ -109,8 +109,8 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
         DashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          sessionsAll: widget.sessionsAll, 
-          sessionsFiltered: widget.sessionsFiltered, 
+          sessionsMetadataAll: widget.sessionsMetadataAll, 
+          sessionsMetadataFiltered: widget.sessionsMetadataFiltered, 
           keywordsAll: widget.keywordsAll,
           keywordsSelected: widget.keywordsSelected,
           dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList

@@ -33,7 +33,7 @@ void main() {
           dashboardContext: context,
           areSessionsForDeletion: areSessionsForDeletion,
           sessionsMetadataAll: allSessions!,
-          sessionsFiltered: filteredSessions!,
+          sessionsMetadataFiltered: filteredSessions!,
           sessionsSelectedForDeletion: sessionsSelected!,
           dashboardCallbackFunctionToRefreshTheSessionsList: () {},
         ),
