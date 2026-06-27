@@ -30,8 +30,8 @@ void main() {
         home: Scaffold(
           body: DashboardSortingAndFilteringFeature(
             dashboardContext: DashboardUtils.caContext,
-            sessionsAll: allSessions,
-            sessionsFiltered: filteredSessions,
+            sessionsMetadataAll: allSessions,
+            sessionsMetadataFiltered: filteredSessions,
             keywordsAll: keywordsAll!,
             keywordsSelected: keywordsSelected!,
             parentCallbackFunctionToRefreshTheSessionsList: () {},

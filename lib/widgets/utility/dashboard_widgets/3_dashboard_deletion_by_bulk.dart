@@ -25,7 +25,7 @@ class DashboardDeletionByBulk extends StatefulWidget
   final List<dynamic>? sessionsMetadataAll;
 
   /// List containing all filtered session data.
-  final List<dynamic>? sessionsFiltered;
+  final List<dynamic>? sessionsMetadataFiltered;
 
   /// List containing the sessions selected for deletion.
   final List<dynamic>? sessionsSelectedForDeletion;
@@ -39,7 +39,7 @@ class DashboardDeletionByBulk extends StatefulWidget
     required this.dashboardContext,
     required this.areSessionsForDeletion,
     required this.sessionsMetadataAll,
-    required this.sessionsFiltered,
+    required this.sessionsMetadataFiltered,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
     this.sessionsSelectedForDeletion    
   });
@@ -74,7 +74,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     }
 
     // Updating the filtered sessions list
-    widget.sessionsFiltered?.removeWhere
+    widget.sessionsMetadataFiltered?.removeWhere
     (
       (session) => 
       filesToDelete.contains(session[DashboardUtils.keyFilePath])

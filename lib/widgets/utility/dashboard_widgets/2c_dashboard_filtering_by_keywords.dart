@@ -9,10 +9,10 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 class DashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available session data.
-  final List<dynamic>? sessionsAll;
+  final List<dynamic>? sessionsMetadataAll;
 
   /// List containing all filtered session data.
-  final List<dynamic>? sessionsFiltered;
+  final List<dynamic>? sessionsMetadataFiltered;
 
   /// List containing the keywords used by the sessions.
   final List<String> keywordsAll;
@@ -26,8 +26,8 @@ class DashboardFilteringByKeywords extends StatefulWidget
   const DashboardFilteringByKeywords
   ({
     super.key,
-    required this.sessionsAll,
-    required this.sessionsFiltered,
+    required this.sessionsMetadataAll,
+    required this.sessionsMetadataFiltered,
     required this.keywordsAll,
     required this.keywordsSelected,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
@@ -46,13 +46,13 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
     if (widget.keywordsSelected.isEmpty) 
     {
       // Working with the list while keeping the same reference
-      widget.sessionsFiltered!.clear();
-      widget.sessionsFiltered!.addAll(widget.sessionsAll!);
+      widget.sessionsMetadataFiltered!.clear();
+      widget.sessionsMetadataFiltered!.addAll(widget.sessionsMetadataAll!);
     } 
     else 
     {
       List <dynamic> sortingResults =
-      widget.sessionsAll!.where
+      widget.sessionsMetadataAll!.where
       ( 
         (session) 
         {
@@ -62,8 +62,8 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
       ).toList();
       
       // Working with the list while keeping the same reference
-      widget.sessionsFiltered!.clear();
-      widget.sessionsFiltered!.addAll(sortingResults);
+      widget.sessionsMetadataFiltered!.clear();
+      widget.sessionsMetadataFiltered!.addAll(sortingResults);
     }
 
     // Refreshing the sessions list
@@ -91,11 +91,11 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   void keywordsRefreshAfterSessionDeletion() 
   {
     // if no sessions left, nothing to do
-    if (widget.sessionsAll == null) return;
+    if (widget.sessionsMetadataAll == null) return;
     
     // Re-building the keywords' list from the remaining session data
     Set<String> remainingKws = {};
-    for (var sessionData in widget.sessionsAll!) 
+    for (var sessionData in widget.sessionsMetadataAll!) 
     {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
       remainingKws.addAll(kws.cast<String>());
