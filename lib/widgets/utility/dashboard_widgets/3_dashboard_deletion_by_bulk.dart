@@ -55,7 +55,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several session data
-  Future<void> _sessionsSelectedDelete() async 
+  Future<void> _sessionsMetadataSelectedDelete() async 
   {
     // Creating a fixed list to iterate over so clearing doesn't break the loop
     final filesToDeleteMetadata = List<String>.from(widget.sessionsMetadataSelectedForDeletion!);
@@ -152,7 +152,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
         child:        
           TextButton.icon(
             key: const Key('bulk-delete-button'),
-            onPressed: _sessionsSelectedDelete,
+            onPressed: _sessionsMetadataSelectedDelete,
             icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
             label: Text(
               "Delete (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
