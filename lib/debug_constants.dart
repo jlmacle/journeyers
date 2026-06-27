@@ -2,7 +2,6 @@ const accessibilityDebug = false;
 const csvBuildingDebug = false;
 const editDebug = false;
 const listDebug = false;
-const mobileDebug = false;
 const runtimeDataDebug = false;
 const preloadingDebug = false;
 const previewBuildingDebug = false;
@@ -12,7 +11,7 @@ const textFieldDebugging = false;
 
 // Modifiable for file saving/reading reasons
 // Modified in setups
-bool runningTests = false;
+bool runningTests = true;
 int dateIndex = 0;
 const constDatesList = [
                         "January 30, 2026 10:25 AM",
