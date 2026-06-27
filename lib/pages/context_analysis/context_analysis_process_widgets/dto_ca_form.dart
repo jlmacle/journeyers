@@ -889,22 +889,22 @@ void printToConsole() {
 
   // ── Individual perspective ──────────────────────────────────────
   pu.printd('  ── Individual perspective ──');
-  pu.printd('  indivBalanceStudiesHousehold        : checked=${indivBalanceStudiesHousehold.checked}, text="${indivBalanceStudiesHousehold.text}"');
-  pu.printd('  indivBalanceAccessingIncomeHousehold: checked=${indivBalanceAccessingIncomeHousehold.checked}, text="${indivBalanceAccessingIncomeHousehold.text}"');
-  pu.printd('  indivBalanceEarningIncomeHousehold  : checked=${indivBalanceEarningIncomeHousehold.checked}, text="${indivBalanceEarningIncomeHousehold.text}"');
-  pu.printd('  indivBalanceHelpingOthersHousehold  : checked=${indivBalanceHelpingOthersHousehold.checked}, text="${indivBalanceHelpingOthersHousehold.text}"');
-  pu.printd('  indivAtWorkMoreAppreciated          : checked=${indivAtWorkMoreAppreciated.checked}, text="${indivAtWorkMoreAppreciated.text}"');
-  pu.printd('  indivAtWorkRemainingAppreciated     : checked=${indivAtWorkRemainingAppreciated.checked},  text="${indivAtWorkRemainingAppreciated.text}"');
-  pu.printd('  indivBetterLegacies                 : checked=${indivBetterLegacies.checked},  text="${indivBetterLegacies.text}"');
-  pu.printd('  indivAnotherIssueStr                : "$indivAnotherIssueStr"');
+  pu.printd('  indivBalanceStudiesHousehold        : text="${indivBalanceStudiesHousehold.text}", checked=${indivBalanceStudiesHousehold.checked}');
+  pu.printd('  indivBalanceAccessingIncomeHousehold: text="${indivBalanceAccessingIncomeHousehold.text}", checked=${indivBalanceAccessingIncomeHousehold.checked}');
+  pu.printd('  indivBalanceEarningIncomeHousehold  : text="${indivBalanceEarningIncomeHousehold.text}", checked=${indivBalanceEarningIncomeHousehold.checked}');
+  pu.printd('  indivBalanceHelpingOthersHousehold  : text="${indivBalanceHelpingOthersHousehold.text}", checked=${indivBalanceHelpingOthersHousehold.checked}');
+  pu.printd('  indivAtWorkMoreAppreciated          : text="${indivAtWorkMoreAppreciated.text}", checked=${indivAtWorkMoreAppreciated.checked}');
+  pu.printd('  indivAtWorkRemainingAppreciated     : text="${indivAtWorkRemainingAppreciated.text}", checked=${indivAtWorkRemainingAppreciated.checked}');
+  pu.printd('  indivBetterLegacies                 : text="${indivBetterLegacies.text}", checked=${indivBetterLegacies.checked}');
+  pu.printd('  indivAnotherIssueStr                : text="$indivAnotherIssueStr"');
 
   // ── Group / team perspective ────────────────────────────────────
   pu.printd('  ── Group/team perspective ──');
-  pu.printd('  groupProblemsToSolveStr   : "$groupProblemsToSolveStr"');
-  pu.printd('  groupSameProblemsToSolve  : selection=${groupSameProblemsToSolve.selection}, text="${groupSameProblemsToSolve.text}"');
-  pu.printd('  groupHarmonyHome          : selection=${groupHarmonyHome.selection}, text="${groupHarmonyHome.text}"');
-  pu.printd('  groupAppreciabilityAtWork : selection=${groupAppreciabilityAtWork.selection},  text="${groupAppreciabilityAtWork.text}"');
-  pu.printd('  groupEarningAbility       : selection=${groupEarningAbility.selection},  text="${groupEarningAbility.text}"');
+  pu.printd('  groupProblemsToSolveStr   :  text="$groupProblemsToSolveStr"');
+  pu.printd('  groupSameProblemsToSolve  :  text="${groupSameProblemsToSolve.text}", selection=${groupSameProblemsToSolve.selection}');
+  pu.printd('  groupHarmonyHome          :  text="${groupHarmonyHome.text}", selection=${groupHarmonyHome.selection}');
+  pu.printd('  groupAppreciabilityAtWork :  text="${groupAppreciabilityAtWork.text}", selection=${groupAppreciabilityAtWork.selection}');
+  pu.printd('  groupEarningAbility       :  text="${groupEarningAbility.text}", selection=${groupEarningAbility.selection}');
 
   pu.printd('────────────────────────────────────────────────────────────');
 }
