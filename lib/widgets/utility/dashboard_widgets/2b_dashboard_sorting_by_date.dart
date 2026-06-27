@@ -11,7 +11,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_str
 class DashboardSortingByDate extends StatefulWidget 
 {
   /// List containing the sessions to sort.
-  final List<dynamic>? filteredSessionsToSort;
+  final List<dynamic>? sessionsMetadataFilteredToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -19,7 +19,7 @@ class DashboardSortingByDate extends StatefulWidget
   const DashboardSortingByDate
   ({
     super.key,
-    required this.filteredSessionsToSort,
+    required this.sessionsMetadataFilteredToSort,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
   });
 
@@ -34,7 +34,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   // Method used to sort session data by date
   Future<void> _sortSessionsByDate() async
   {
-    await sortSessionByDateAddJm(list: widget.filteredSessionsToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
+    await sortSessionByDateAddJm(list: widget.sessionsMetadataFilteredToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
   }
 

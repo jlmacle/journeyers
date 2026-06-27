@@ -83,13 +83,13 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                   // Sorting by title
                   DashboardSortingByTitle
                   (
-                    filteredSessionsToSort: widget.sessionsMetadataFiltered,
+                    sessionsMetadataFilteredToSort: widget.sessionsMetadataFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                   // Sorting by date
                   DashboardSortingByDate
                   (
-                    filteredSessionsToSort: widget.sessionsMetadataFiltered,
+                    sessionsMetadataFilteredToSort: widget.sessionsMetadataFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
                   ),
                 ],
