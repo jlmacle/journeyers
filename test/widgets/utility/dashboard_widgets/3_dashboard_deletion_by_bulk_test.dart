@@ -13,14 +13,14 @@ void main() {
     {DashboardUtils.keyTitle: 'Session 2',  DashboardUtils.keyFilePath: 'path/2', },
   ];
 
-  List<dynamic>? allSessions;
-  List<dynamic>? filteredSessions;
-  List<dynamic>? sessionsSelected;
+  List<dynamic>? sessionsMetadataAll;
+  List<dynamic>? sessionsMetadataFiltered;
+  List<dynamic>? sessionsMetadataSelectedForDeletion;
 
   setUp(() {
-    allSessions = List.from(sessionsMetadata);
-    filteredSessions = List.from(sessionsMetadata);
-    sessionsSelected = ['path/1']; // Session selected by default
+    sessionsMetadataAll = List.from(sessionsMetadata);
+    sessionsMetadataFiltered = List.from(sessionsMetadata);
+    sessionsMetadataSelectedForDeletion = ['path/1']; // Session selected by default
   });
 
   Widget createWidgetUnderTest({
@@ -32,9 +32,9 @@ void main() {
         body: DashboardDeletionByBulk(
           dashboardContext: context,
           areSessionsForDeletion: areSessionsForDeletion,
-          sessionsMetadataAll: allSessions!,
-          sessionsMetadataFiltered: filteredSessions!,
-          sessionsSelectedForDeletion: sessionsSelected!,
+          sessionsMetadataAll: sessionsMetadataAll!,
+          sessionsMetadataFiltered: sessionsMetadataFiltered!,
+          sessionsMetadataSelectedForDeletion: sessionsMetadataSelectedForDeletion!,
           dashboardCallbackFunctionToRefreshTheSessionsList: () {},
         ),
       ),
@@ -45,7 +45,7 @@ void main() {
 
     testWidgets('Empty selection color is transparent', (WidgetTester tester) async 
     {
-        sessionsSelected = [];
+        sessionsMetadataSelectedForDeletion = [];
         await tester.pumpWidget(createWidgetUnderTest(areSessionsForDeletion: false));
 
         // Checks the delete icon is transparent
@@ -65,7 +65,7 @@ void main() {
         var textDeleteFinder = find.byType(Text).first;
         Text textDelete = tester.widget(textDeleteFinder);
 
-        // Checks if the label displays the correct count from sessionsSelected
+        // Checks if the label displays the correct count from sessionsMetadataSelectedForDeletion
         expect(textDelete.data, 'Delete (1)');
         // Checks if the label is red
         expect(textDelete.style?.color, red);

@@ -8,10 +8,10 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// A widget handling the filtering by keywords of session data.
 class DashboardFilteringByKeywords extends StatefulWidget 
 {
-  /// List containing all available session data.
+  /// List containing all available session metadata.
   final List<dynamic>? sessionsMetadataAll;
 
-  /// List containing all filtered session data.
+  /// List containing all filtered session metadata.
   final List<dynamic>? sessionsMetadataFiltered;
 
   /// List containing the keywords used by the sessions.

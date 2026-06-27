@@ -21,14 +21,14 @@ class DashboardDeletionByBulk extends StatefulWidget
   /// Boolean used to store if some sessions are selected for deletion.
   final bool areSessionsForDeletion; 
 
-  /// List containing all available session data.
+  /// List containing all available session metadata.
   final List<dynamic>? sessionsMetadataAll;
 
-  /// List containing all filtered session data.
+  /// List containing all filtered session metadata.
   final List<dynamic>? sessionsMetadataFiltered;
 
-  /// List containing the sessions selected for deletion.
-  final List<dynamic>? sessionsSelectedForDeletion;
+  /// List containing the sessions selected for deletion metadata.
+  final List<dynamic>? sessionsMetadataSelectedForDeletion;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -41,7 +41,7 @@ class DashboardDeletionByBulk extends StatefulWidget
     required this.sessionsMetadataAll,
     required this.sessionsMetadataFiltered,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
-    this.sessionsSelectedForDeletion    
+    this.sessionsMetadataSelectedForDeletion    
   });
 
   @override
@@ -58,9 +58,9 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   Future<void> _sessionsSelectedDelete() async 
   {
     // Creating a fixed list to iterate over so clearing doesn't break the loop
-    final filesToDelete = List<String>.from(widget.sessionsSelectedForDeletion!);
+    final filesToDeleteMetadata = List<String>.from(widget.sessionsMetadataSelectedForDeletion!);
 
-    for (String filePath in filesToDelete) 
+    for (String filePath in filesToDeleteMetadata) 
     {
       // Removing the file
       await fu.deleteFile(filePath); 
@@ -77,19 +77,19 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     widget.sessionsMetadataFiltered?.removeWhere
     (
       (session) => 
-      filesToDelete.contains(session[DashboardUtils.keyFilePath])
+      filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
     );
 
     // Updating the _allSessions list
     widget.sessionsMetadataAll?.removeWhere
     (
       (session) => 
-      filesToDelete.contains(session[DashboardUtils.keyFilePath])
+      filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
     );
     if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.sessionsMetadataAll: ${widget.sessionsMetadataAll}");
 
     // Clearing the list of the selected sessions
-    widget.sessionsSelectedForDeletion!.clear();
+    widget.sessionsMetadataSelectedForDeletion!.clear();
 
     // Updating the keywords list
     _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
@@ -155,7 +155,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
             onPressed: _sessionsSelectedDelete,
             icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
             label: Text(
-              "Delete (${widget.sessionsSelectedForDeletion?.length ?? 0})",
+              "Delete (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
               style: TextStyle(
                 color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,
