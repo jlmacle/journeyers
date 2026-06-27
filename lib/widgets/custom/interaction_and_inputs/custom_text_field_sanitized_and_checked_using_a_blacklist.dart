@@ -368,7 +368,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     // Data submission if not blocked
     if (!_submitIsBlocked) {
       widget.onTextFieldValueSubmittedCallbackFunction(newValue);
-      if (textFieldDebugging) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: submit unblocked: widget.onTextFieldValueChangedCallbackFunction(newValue): newValue: $newValue");
     }
     
   }
