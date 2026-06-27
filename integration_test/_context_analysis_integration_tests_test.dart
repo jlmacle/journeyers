@@ -331,7 +331,6 @@ Future<void> main() async {
             );          
 
             var totalDates = datesFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalDates: $totalDates');
 
             // Verifying the alphabetical order
             for (var index = 0; index < totalDates; index++)
