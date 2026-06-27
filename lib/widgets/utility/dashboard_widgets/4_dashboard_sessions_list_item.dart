@@ -118,7 +118,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   {
     setState(() {
       _ideasListBeforeEdition[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: SessionsListItem: onUpdateTheIdeaValue: Ideas list: $_ideasListBeforeEdition ");
+      if (editDebug) pu.printd("Editing: SessionsListItem: _onUpdateTheIdeaValue: Ideas list: $_ideasListBeforeEdition ");
     });  
   }
 
