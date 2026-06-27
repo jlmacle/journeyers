@@ -163,7 +163,7 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // ─── DELETION OF SINGLE SESSION DATA related data and methods ───────────────────────────────────────
-  final List<String> _sessionsSelectedForDeletion = [];  
+  final List<String> _sessionsMetadataSelectedForDeletion = [];  
 
   // Method used to delete a single session data from the session list action icons
   Future<void> _sessionSelectedDelete(String filePath) async
@@ -181,9 +181,9 @@ class DashboardPageState extends State<DashboardPage>
     _sessionsMetadataFiltered?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
               
     // Updating the sessions selected for bulk deletion
-    _sessionsSelectedForDeletion.removeWhere
+    _sessionsMetadataSelectedForDeletion.removeWhere
     (
-      (session) => _sessionsSelectedForDeletion.contains(filePath)
+      (session) => _sessionsMetadataSelectedForDeletion.contains(filePath)
     );
 
     // Updating the keywords list
@@ -339,8 +339,8 @@ class DashboardPageState extends State<DashboardPage>
                     dashboardContext: widget.dashboardContext,
                     sessionsMetadataAll: _sessionsMetadataAll,
                     sessionsMetadataFiltered: _sessionsMetadataFiltered,
-                    areSessionsForDeletion: _sessionsSelectedForDeletion.isNotEmpty,
-                    sessionsSelectedForDeletion: _sessionsSelectedForDeletion,
+                    areSessionsForDeletion: _sessionsMetadataSelectedForDeletion.isNotEmpty,
+                    sessionsMetadataSelectedForDeletion: _sessionsMetadataSelectedForDeletion,
                     dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
                   )
                 ),
@@ -365,13 +365,13 @@ class DashboardPageState extends State<DashboardPage>
                           sessionMetadata: session,
                           sessionDataIndex: index,
                           dashboardContext: widget.dashboardContext,
-                          isChecked: _sessionsSelectedForDeletion.contains(filePath),
+                          isChecked: _sessionsMetadataSelectedForDeletion.contains(filePath),
                           onCheckboxChangedCallbackFunction: (bool? value) {
                             setState(() {
                               if (value == true) {
-                                _sessionsSelectedForDeletion.add(filePath);
+                                _sessionsMetadataSelectedForDeletion.add(filePath);
                               } else {
-                                _sessionsSelectedForDeletion.remove(filePath);
+                                _sessionsMetadataSelectedForDeletion.remove(filePath);
                               }
                             });
                           },
