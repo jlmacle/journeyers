@@ -101,12 +101,12 @@ Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctio
 Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
 
     // Getting the title
-    List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
-    if (editDebug) pu.printd("Editing: sessionDataRetrieved : $sessionDataRetrieved");
-    var sessionData = sessionDataRetrieved.where((session) => session[DashboardUtils.keyFilePath] == filePath).first as Map<String,dynamic>;
-    if (editDebug) pu.printd("Editing: sessionData : $sessionData");
+    List<dynamic> sessionsMetadataAll  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
+    if (editDebug) pu.printd("Editing: sessionsMetadataAll : $sessionsMetadataAll");
+    var sessionToEditMetadata = sessionsMetadataAll.where((session) => session[DashboardUtils.keyFilePath] == filePath).first as Map<String,dynamic>;
+    if (editDebug) pu.printd("Editing: sessionToEditMetadata : $sessionToEditMetadata");
     
-    var title = sessionData[DashboardUtils.keyTitle];
+    var title = sessionToEditMetadata[DashboardUtils.keyTitle];
 
     var content = "";
     String fileNameWithExtension = filePath.split('/').last;
