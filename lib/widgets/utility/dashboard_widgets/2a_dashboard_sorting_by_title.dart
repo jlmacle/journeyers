@@ -10,7 +10,7 @@ import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_str
 class DashboardSortingByTitle extends StatefulWidget 
 {
   /// List containing the filtered sessions to sort.
-  final List<dynamic>? filteredSessionsToSort;
+  final List<dynamic>? sessionsMetadataFilteredToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
@@ -18,7 +18,7 @@ class DashboardSortingByTitle extends StatefulWidget
   const DashboardSortingByTitle
   ({
     super.key,
-    required this.filteredSessionsToSort,
+    required this.sessionsMetadataFilteredToSort,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList
   });
 
@@ -34,7 +34,7 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
   // Method used to sort session data by title 
   Future<void> _sortSessionsByTitle() async
   {
-    await sortDashboardSessionsByTitle(list: widget.filteredSessionsToSort!, byAscendingTitle: _isAscendingTitle);
+    await sortDashboardSessionsByTitle(list: widget.sessionsMetadataFilteredToSort!, byAscendingTitle: _isAscendingTitle);
   }
 
 

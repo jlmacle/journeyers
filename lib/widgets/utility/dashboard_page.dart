@@ -157,7 +157,7 @@ class DashboardPageState extends State<DashboardPage>
       await du.saveAllSessionsMetadata
       (
         typeOfDashboardContext: widget.dashboardContext, 
-        allSessionsMetadata: _sessionsMetadataAll!,
+        sessionsMetadataAll: _sessionsMetadataAll!,
       );
     }    
   }
@@ -177,7 +177,7 @@ class DashboardPageState extends State<DashboardPage>
     // Updating the _sessionsMetadataAll list
     _sessionsMetadataAll?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
 
-    // Updating the _filteredSessions list used by the UI
+    // Updating the _sessionsMetadataFiltered list used by the UI
     _sessionsMetadataFiltered?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
               
     // Updating the sessions selected for bulk deletion
@@ -465,7 +465,7 @@ class DashboardPageState extends State<DashboardPage>
                 await du.saveAllSessionsMetadata
                 (
                   typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _sessionsMetadataAll!,
+                  sessionsMetadataAll: _sessionsMetadataAll!,
                 );
 
                 // Closing the modal sheet
@@ -488,7 +488,7 @@ class DashboardPageState extends State<DashboardPage>
                 await du.saveAllSessionsMetadata
                 (
                   typeOfDashboardContext: widget.dashboardContext, 
-                  allSessionsMetadata: _sessionsMetadataAll!,
+                  sessionsMetadataAll: _sessionsMetadataAll!,
                 );
 
                 // Closing the modal sheet

@@ -334,7 +334,7 @@ void main() {
 
       await sut!.saveAllSessionsMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
-        allSessionsMetadata: [],
+        sessionsMetadataAll: [],
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(

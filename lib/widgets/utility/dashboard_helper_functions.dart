@@ -82,7 +82,7 @@ Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctio
     );
     if (editDebug) pu.printd("Editing: editCASessionData: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
     // Saving the updated metadata
-    await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, allSessionsMetadata: sessionDataRetrieved);
+    await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, sessionsMetadataAll: sessionDataRetrieved);
 
     if (editDebug) pu.printd("Editing: editCASessionData: title: $title");
     if (editDebug) pu.printd("Editing: editCASessionData: keywordsForEdition: $keywordsForEdition");

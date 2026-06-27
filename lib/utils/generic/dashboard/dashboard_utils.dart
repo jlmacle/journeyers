@@ -165,7 +165,7 @@ class DashboardUtils {
   }
 
   /// Method used to save all sessions metadata.  
-  Future<void> saveAllSessionsMetadata({required String typeOfDashboardContext, required List<dynamic> allSessionsMetadata}) async
+  Future<void> saveAllSessionsMetadata({required String typeOfDashboardContext, required List<dynamic> sessionsMetadataAll}) async
   {
     String fileName = "";
     final applicationSupportDirectory = await getApplicationSupportDirectory();
@@ -190,7 +190,7 @@ class DashboardUtils {
     if (!sessionFile.existsSync()) {sessionFile.createSync();}
 
     // Adding the metadata to the file
-    var savedContent = jsonEncode(allSessionsMetadata);
+    var savedContent = jsonEncode(sessionsMetadataAll);
     await sessionFile.writeAsString(savedContent);
     if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName");
   }

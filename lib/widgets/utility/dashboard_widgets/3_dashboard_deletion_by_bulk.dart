@@ -80,7 +80,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
     );
 
-    // Updating the _allSessions list
+    // Updating the sessionsMetadataAll list
     widget.sessionsMetadataAll?.removeWhere
     (
       (session) => 
