@@ -13,15 +13,15 @@ void main() {
     GlobalKey<DashboardFilteringByKeywordsState>? testKey;
     List<String>? keywordsAll;
     List<String>? keywordsSelected;
-    List<dynamic>? allSessions;
-    List<dynamic>? filteredSessions;
+    List<dynamic>? sessionsMetadataAll;
+    List<dynamic>? sessionsMetadataFiltered;
 
     setUp(() {
       testKey = GlobalKey<DashboardFilteringByKeywordsState>();
       keywordsAll = ['Flutter', 'Dart', 'Testing'];
       keywordsSelected = [];
-      allSessions = [{'title': 'A'}, {'title': 'B'}];
-      filteredSessions = [{'title': 'A'}];
+      sessionsMetadataAll = [{'title': 'A'}, {'title': 'B'}];
+      sessionsMetadataFiltered = [{'title': 'A'}];
     });
 
     // Helper to wrap the widget under test
@@ -30,8 +30,8 @@ void main() {
         home: Scaffold(
           body: DashboardSortingAndFilteringFeature(
             dashboardContext: DashboardUtils.caContext,
-            sessionsMetadataAll: allSessions,
-            sessionsMetadataFiltered: filteredSessions,
+            sessionsMetadataAll: sessionsMetadataAll,
+            sessionsMetadataFiltered: sessionsMetadataFiltered,
             keywordsAll: keywordsAll!,
             keywordsSelected: keywordsSelected!,
             parentCallbackFunctionToRefreshTheSessionsList: () {},
