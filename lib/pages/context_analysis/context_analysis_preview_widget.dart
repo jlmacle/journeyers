@@ -452,7 +452,7 @@ class _CAPreviewState extends State<CAPreview>
     String tmpFilePathWithExtension = path.join(testTmpDir.path, pathToCSVFile.split("/").last);
     var dataBytes = Uint8List.fromList(utf8.encode(csvLines.toString()));
     String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
-    if (sessionDataDebug) pu.printd("Session Data: CAPreview: caCSVFileToPreviewPerspectiveData: saveFileUsingWriteAsBytes: tmpFilePath: $tmpFilePath");
+    if (previewBuildingDebug) pu.printd("Preview Building: CAPreview: temporary file for data sharing: tmpFilePath: $tmpFilePath");
     // Updating the value for the session list item
     widget.caPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);    
 
