@@ -99,7 +99,6 @@ Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctio
 
 // Method used to edit group problem-solving session data
 Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
-    if (editDebug) pu.printd("Editing: editGPSSessionData : $editGPSSessionData");
 
     // Getting the title
     List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
