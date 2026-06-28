@@ -88,7 +88,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   final List<int> _ideasSelectedForDeletionIndexes = [];  
   final _tecNewIdea = TextEditingController();
   // List of ideas present before deletion
-  List<String> _ideasListBeforeEdition = [];
+  List<String> _ideasList = [];
   List<String> _ideasListBeforeEditionCopy = [];
 
   bool _previewEditMode = false;
@@ -117,8 +117,8 @@ class _SessionsListItemState extends State<SessionsListItem>
   void _onUpdateTheIdeaValue({required String stringParam, required int intParam})
   {
     setState(() {
-      _ideasListBeforeEdition[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: _onUpdateTheIdeaValue: Ideas list: $_ideasListBeforeEdition ");
+      _ideasList[intParam] = stringParam;
+      if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: _onUpdateTheIdeaValue: Ideas list: $_ideasList ");
     });  
   }
 
@@ -438,8 +438,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       else if (widget.dashboardContext == DashboardUtils.gpsContext) 
                       {
                         // Retrieving the ideas
-                        _ideasListBeforeEdition = await editGPSSessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
-                        _ideasListBeforeEditionCopy = List.from(_ideasListBeforeEdition);
+                        _ideasList = await editGPSSessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                        _ideasListBeforeEditionCopy = List.from(_ideasList);
                       
                         // Opening the edition overlay and waiting for it to close
                         if (context.mounted)
@@ -474,11 +474,11 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   color: appBarWhite,
                   onPressed: () async
                   {
-                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasList: $_ideasList");
                     if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
                     if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: previewEditMode: $_previewEditMode");
                     
-                    if (_previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasListBeforeEdition, _ideasListBeforeEditionCopy) )
+                    if (_previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasList, _ideasListBeforeEditionCopy) )
                     {
                         if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: List edited: saving data and metadata");
 
@@ -492,11 +492,11 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
                         
                         await _saveUpdatedDataAndMetadata
-                        (title: title, keywords: keywords, updatedIdeas: _ideasListBeforeEdition,
+                        (title: title, keywords: keywords, updatedIdeas: _ideasList,
                         fileNameWithoutExtension: fileNameWithoutExtension, fileExtension: ".txt",
                         originalFilePath: filePath);
 
-                        _ideasListBeforeEditionCopy = List.from(_ideasListBeforeEdition);
+                        _ideasListBeforeEditionCopy = List.from(_ideasList);
                         _previewEditMode = false;
                     }
                     Navigator.of(context).pop();
@@ -522,7 +522,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       )
                     : GPSPreview(
                         gpsPreviewPathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
-                        gpsPreviewIdeasStored: _ideasListBeforeEdition,                       
+                        gpsPreviewIdeasStored: _ideasList,                       
                         
                         gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )
@@ -585,7 +585,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                     NewTextListDeletionByBulk
                       (
                         areSomeTextItemsSelectedForDeletion: _areSomeIdeasForDeletion,
-                        enteredTextItemsList: _ideasListBeforeEdition,
+                        enteredTextItemsList: _ideasList,
                         textItemsSelectedForDeletionIndexes: _ideasSelectedForDeletionIndexes,
                         callbackFunctionToRefreshTheList: 
                         () 
@@ -600,16 +600,16 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         ListView.builder
                             (                  
                               padding: const EdgeInsets.only(bottom: 96),
-                              itemCount: _ideasListBeforeEdition.length,
+                              itemCount: _ideasList.length,
                               itemBuilder: (_, index) 
                               {
                                 return 
                                   
                                     EditableDeletableTextListItem
                                     (
-                                      key: ValueKey(_ideasListBeforeEdition[index]),
+                                      key: ValueKey(_ideasList[index]),
                                       itemIndex: index, 
-                                      itemText: _ideasListBeforeEdition[index], 
+                                      itemText: _ideasList[index], 
                                       onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
                                                                           {                                                               
                                                                             if(boolParam!) 
@@ -642,7 +642,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                                       {
                                         setLocalState(() {});
                                         setState(() {
-                                          _ideasListBeforeEdition[intParam] = stringParam;
+                                          _ideasList[intParam] = stringParam;
                                         });
                                         _onUpdateTheIdeaValue(stringParam: stringParam, intParam: intParam);
                                       },
@@ -658,7 +658,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       padding: const EdgeInsets.all(8.0),
                       child: TextField
                       (
-                        key: const ValueKey('ideaOverlayField'),
+                        key: const ValueKey('ideaOverlayTextField'),
                         controller: _tecNewIdea,
                         textAlign: TextAlign.left,
                         decoration: const InputDecoration
@@ -673,13 +673,13 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         onSubmitted: (value)
                         {
                           setLocalState(() {
-                            _ideasListBeforeEdition.add(value.trim());
+                            _ideasList.add(value.trim());
                           });
                           setState(() {
                             
                           });
                           _tecNewIdea.clear();
-                          if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: _ideasListBeforeEdition: $_ideasListBeforeEdition");
+                          if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: ideas after edition: $_ideasList");
                       
                         },
                       ),
