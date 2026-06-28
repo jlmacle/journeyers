@@ -101,6 +101,14 @@ class _HomePageState extends State<HomePage>
   String? _eol;
 
   @override
+  void didUpdateWidget(covariant HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    pu.printdLine();
+    pu.printd("HomePage: didUpdateWidget");
+  }
+
+  @override
   void initState() {
     super.initState();
                             

@@ -173,6 +173,13 @@ class CAProcessState extends State<CAProcess>
   final ScrollController _scrollController = ScrollController();
   double _scrollbarThickness = 0;
 
+  @override
+  void didUpdateWidget(covariant CAProcess oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    pu.printdLine();
+    pu.printd("CAProcess: didUpdateWidget");
+  }
   
   @override
   void initState() {

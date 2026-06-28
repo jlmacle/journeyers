@@ -160,6 +160,14 @@ class CAPageState extends State<CAPage>
   } 
 
   @override
+  void didUpdateWidget(covariant CAPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    pu.printdLine();
+    pu.printd("CAPage: didUpdateWidget");
+  }
+
+  @override
   void initState() 
   {
     super.initState();

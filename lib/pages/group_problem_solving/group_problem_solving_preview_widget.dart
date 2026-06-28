@@ -133,9 +133,9 @@ class _GPSPreviewState
       // Writing the content in a temporary file for data sharing
       Directory testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_preview_temp');
       String tmpFilePathWithExtension = path.join(testTmpDir.path, widget.gpsPreviewPathToStoredData.split("/").last);
-      var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));
+      var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));      
       String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
-      if (sessionDataDebug) pu.printd("Session Data: GPSPreview: _fetchingData: saveFileUsingWriteAsBytes: tmpFilePath: $tmpFilePath");
+      if (previewBuildingDebug) pu.printd("Preview Building: GPSPreview: _fetchingData: saved tmp file path for file sharing: $tmpFilePath");
       // Updating the value for the session list item
       widget.gpsPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);   
 
