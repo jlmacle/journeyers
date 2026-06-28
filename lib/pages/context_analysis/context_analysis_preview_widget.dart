@@ -41,6 +41,14 @@ class _CAPreviewState extends State<CAPreview>
   final Map<String, dynamic> _sectionsGroup = {};
   
   @override
+  void didUpdateWidget(covariant CAPreview oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    pu.printdLine();
+    pu.printd("CAPreview: didUpdateWidget");
+  }
+
+  @override
   void initState() 
   {
     super.initState();

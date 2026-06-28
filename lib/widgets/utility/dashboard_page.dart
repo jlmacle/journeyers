@@ -105,6 +105,14 @@ class DashboardPageState extends State<DashboardPage>
     });
   }
 
+  @override
+  void didUpdateWidget(covariant DashboardPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    pu.printdLine();
+    pu.printd("DashboardPage: didUpdateWidget");
+  }
+
   // Previous session data retrieval; _sessionsMetadataAll and _sessionsMetadataFiltered are initialized
   @override
   void initState() 

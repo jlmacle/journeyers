@@ -253,6 +253,14 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
   }
 
   @override
+  void didUpdateWidget(covariant GPSProcess oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    pu.printdLine();
+    pu.printd("GPSProcess: didUpdateWidget");
+  }
+
+  @override
   void initState() {
     super.initState();
 
