@@ -165,9 +165,6 @@ void main()
             // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 2));
 
-            // pumpAndSettle timed out exception if pumpAndSettle is used
-            // await tester.pumpAndSettle();
-
             // Verifying the new process button present
             final buttonWidget = find.byType(NewProcessButton);
             expect(buttonWidget, findsOneWidget); 
