@@ -345,7 +345,7 @@ void main() {
       () async {
         const expectedTitle = 'Round-trip Title';
         const expectedKeywords = ['alpha', 'beta', 'gamma'];
-        const expectedDate = aDate;
+        const expectedDate = 'January 30, 2026 10:25 AM';
         const expectedPath = '/round/trip';
 
         await sut!.saveDashboardMetadata(
