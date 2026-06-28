@@ -166,10 +166,9 @@ Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallba
             .toList();        
       }
 
-    if (editDebug) pu.printd("Editing: editGPSSessionData: ideas: $ideas");
-
-    if (editDebug) pu.printd("Editing: editGPSSessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
-    if (editDebug) pu.printd("Editing: editGPSSessionData: title: $title");
+    if (editDebug) pu.printd("Editing: editGPSSessionData: original ideas: $ideas");
+    if (editDebug) pu.printd("Editing: editGPSSessionData: original fileNameWithoutExtension: $fileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: editGPSSessionData: original title: $title");
     
     return ideas;
   }
