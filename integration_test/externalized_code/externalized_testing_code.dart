@@ -45,6 +45,7 @@ final q = CAQuestionsFields();
 
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
   }
 
   // Method used to open the expansion tile with the group/team perspective
@@ -57,10 +58,9 @@ final q = CAQuestionsFields();
     await tester.tap(tileFinder);
 
     // Waiting for the expansion tile to be unfolded before searching descendants
-    await tester.pumpAndSettle();
-
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 2));
   }
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
