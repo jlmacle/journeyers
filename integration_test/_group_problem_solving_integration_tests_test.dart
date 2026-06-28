@@ -12,6 +12,7 @@ import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
@@ -21,17 +22,6 @@ import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_e
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
 
 import 'externalized_code/externalized_testing_code.dart';
-
-
-// Used to define a folder value for getApplicationSupportPath (PathProvider) 
-class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
-  PathProviderPlatformRedirectForTesting(this._path);
-
-  final String _path;
-
-  @override
-  Future<String?> getApplicationSupportPath() async => _path;
-}
 
 // ─── Helper function ──────────────────────────────────────────────────────────────────
 
