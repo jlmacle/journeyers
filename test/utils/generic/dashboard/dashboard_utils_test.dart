@@ -7,15 +7,7 @@ import 'package:path_provider_platform_interface/path_provider_platform_interfac
 
 import 'package:journeyers/utils/generic/dashboard/dashboard_testing_data.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-
-class PathProviderPlatformRedirectForTesting extends  PathProviderPlatform {
-  PathProviderPlatformRedirectForTesting(this._path);
-
-  final String _path;
-
-  @override
-  Future<String?> getApplicationSupportPath() async => _path;
-}
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 
 // ---------------------------------------------------------------------------
 // Helper funtion
