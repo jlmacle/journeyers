@@ -40,9 +40,6 @@ final q = CAQuestionsFields();
     // Opening the individual perspective expansion tile
     await tester.tap(tileFinder);
 
-    // Waiting for the expansion tile to be unfolded before searching descendants
-    await tester.pumpAndSettle();
-
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
     await tester.pump(const Duration(seconds: 2));
@@ -60,7 +57,7 @@ final q = CAQuestionsFields();
     // Waiting for the expansion tile to be unfolded before searching descendants
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
-    await tester.pumpAndSettle(const Duration(seconds: 2));
+    await tester.pump(const Duration(seconds: 2));
   }
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
