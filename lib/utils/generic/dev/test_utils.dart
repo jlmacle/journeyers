@@ -1,6 +1,7 @@
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
-// Used to define a folder value for getApplicationSupportPath (PathProvider) 
+/// {@category Utils - Generic}
+/// A generic utility class used to define a folder value for getApplicationSupportPath (PathProvider) when testing.
 class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
   PathProviderPlatformRedirectForTesting(this._path);
 
