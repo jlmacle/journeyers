@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_testing_data.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
@@ -28,6 +29,7 @@ void main() {
     tempDir = await Directory.systemTemp.createTemp('dashboard_utils_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(tempDir!.path);
     sut = DashboardUtils();
+    dateIndex = 0;
   });
 
   // This function will be called after each test is run. The body may be asynchronous; if so, it must return a Future.
