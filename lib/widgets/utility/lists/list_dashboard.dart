@@ -81,12 +81,13 @@ class ListDashboardState extends State<ListDashboard>
   // and the list of all sessions available
   Future<void> _getStoredListsData() async 
   {
+    if (listDebug) pu.printd("List debug: ListDashboard: getStoredListsData");
     // Retrieving data 
     _listData = await _listsDB.loadDataStructure();
-
+    if (listDebug) pu.printd("List debug: ListDashboard: _listData: _listData");
     // Getting the list labels
     final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
-    if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: labels: $labels");
+    if (listDebug) pu.printd("List debug: ListDashboard: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
@@ -304,6 +305,10 @@ class ListDashboardState extends State<ListDashboard>
 
 @override
   Widget build(BuildContext context) {
+
+    if (listDebug) pu.printd("List debug: ListDashboard: build: _isDataLoading: $_isDataLoading"); 
+    if (listDebug) pu.printd("List debug: ListDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
+
     return 
     Scaffold
     (
