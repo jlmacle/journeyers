@@ -30,13 +30,29 @@ class ListsDB {
     var file = File('${dir.path}/$_fileName');
     if (!file.existsSync()) 
     {
-      _fileName = "tmp_list_data.json";
-      file = File('${dir.path}/$_fileName');
-      file.createSync();
-      List<Map<String, String>> records = [];
-      String content = jsonEncode(records);
-      await file.writeAsString(content);
+      try
+      {
+        if (listDebug) pu.printd("List debug: ListsDB: file DB not existant. File creation");
+        _fileName = "tmp_list_data.json";
+        file = File('${dir.path}/$_fileName');
+        file.createSync();
+        if (listDebug) pu.printd("List debug: ListsDB: file created: ${file.path}");
+        List<Map<String, String>> records = [];
+        String content = jsonEncode(records);
+        await file.writeAsString(content);
+        content = await file.readAsString();
+        if (listDebug) pu.printd("List debug: ListsDB: file content. $content");
+      }
+      catch(e,s)
+      {
+        pu.printd("Error at new listsDB creation: $e: $s");
+      }
+      
       return file;
+    }
+    else
+    {
+      if (listDebug) pu.printd("List debug: ListsDB: file DB exists");
     }
     return file;
   }
@@ -163,9 +179,11 @@ class ListsDB {
       return [];
     }
 
-        // Decoding the file
+    // Decoding the file
     var stringData = await f.readAsString();
-    return jsonDecode(stringData);
+    var decodedData = jsonDecode(stringData);
+    if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: decoded data: $decodedData"); 
+    return decodedData;
   } 
 
   // To clean: Code duplication
