@@ -39,9 +39,11 @@ class ListsDB {
         if (listDebug) pu.printd("List debug: ListsDB: file created: ${file.path}");
         List<Map<String, String>> records = [];
         String content = jsonEncode(records);
-        await file.writeAsString(content);
-        content = await file.readAsString();
-        if (listDebug) pu.printd("List debug: ListsDB: file content. $content");
+        // writeAsStringSync - Widget testing fails with writeAsString
+        file.writeAsStringSync(content);
+        // readAsStringSync - Widget testing fails with readAsString
+        content = file.readAsStringSync();
+        if (listDebug) pu.printd("List debug: ListsDB: file content: $content");
       }
       catch(e,s)
       {
@@ -180,7 +182,8 @@ class ListsDB {
     }
 
     // Decoding the file
-    var stringData = await f.readAsString();
+    // readAsStringSync - Widget testing fails with readAsString
+    var stringData = f.readAsStringSync();
     var decodedData = jsonDecode(stringData);
     if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: decoded data: $decodedData"); 
     return decodedData;
