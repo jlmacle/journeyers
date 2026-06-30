@@ -12,7 +12,6 @@ import 'package:journeyers/l10n/app_localizations.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/l10n/l10n_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language_switch.dart';
 
@@ -66,25 +65,6 @@ class _HomePageState extends State<HomePage>
   {
     // re-pulling the preferences from the context analysis page
     caPageKey.currentState?.getRuntimeData();    
-  }
- 
-  // ─── LOCALE related method ───────────────────────────────────────
-  // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale.
-  // The logic cannot be moved in main.dart, as the context would be called without having being built yet.
-  void _updateLocale(String languageName) 
-  {
-    // The locale related to the language selected
-    String? localeLangCodeFromLangName = L10nUtils.getLangCodeFromLangName(languageName: languageName);
-    // The language code from the current locale
-    String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
-
-    if (runtimeDataDebug) pu.printd("Runtime Data: localeLangCodeFromLangName: $localeLangCodeFromLangName");
-    if (runtimeDataDebug) pu.printd("Runtime Data: localeLangCodeFromContext: $localeLangCodeFromContext");
-
-    if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
-    {
-      widget.onLanguageSelectedCallbackFunction(Locale(localeLangCodeFromLangName!));
-    }
   }
 
   // ─── FOCUS NODE related data and methods ───────────────────────────────────────
