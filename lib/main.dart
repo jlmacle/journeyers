@@ -38,6 +38,8 @@ class GPSapp extends StatefulWidget
 
 class _GPSappState extends State<GPSapp> 
 {
+  // to wait on the file names loading
+  var areFileNamesLoading = true;
 
   @override
   void initState() {
@@ -50,6 +52,9 @@ class _GPSappState extends State<GPSapp>
     if (Platform.isAndroid || Platform.isIOS)
     {
       du.getStoredFileNamesOnMobile();
+      setState(() {
+        areFileNamesLoading = false;
+      });
     }    
     
   }
@@ -76,9 +81,9 @@ class _GPSappState extends State<GPSapp>
   @override
   Widget build(BuildContext context) 
   {
-    return 
-    MaterialApp
-    (
+    return      
+      MaterialApp
+      (
       // To visualize the semantics tree
       // showSemanticsDebugger: true,
       debugShowCheckedModeBanner: false,
@@ -104,10 +109,16 @@ class _GPSappState extends State<GPSapp>
       SafeArea
       (
         child: 
-        HomePage
-        (
-          onLanguageSelectedMainCallbackFunction: _setLocale,
-        ),
+        (areFileNamesLoading)
+        // Waiting on the stored file names
+        ?
+          const CircularProgressIndicator()
+        :
+        // Loading the homepage when done
+          HomePage
+          (
+            onLanguageSelectedMainCallbackFunction: _setLocale,
+          ),
       ),
     );
   }
