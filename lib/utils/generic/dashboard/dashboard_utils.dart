@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
@@ -79,9 +79,11 @@ class DashboardUtils {
   async {
     if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
     if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
+    if (testingDebug) pu.printd("Session Data: isInTestEnvironment: $isInTestEnvironment");
 
+  
     // Date value interception for testing purposes
-    if (kDebugMode && runningTests)
+    if (isInTestEnvironment)
     {
       formattedDate = constDatesList[dateIndex];
       dateIndex++;

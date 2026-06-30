@@ -19,6 +19,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart';
@@ -148,7 +149,7 @@ class GPSProcessState extends State<GPSProcess>
       if (Platform.isAndroid) 
       {
         // Outside of testing: using SAF to save the file
-        if (!runningTests) {
+        if (!isInTestEnvironment) {
           filePath = await fu.saveFileOnAndroid(_fileName, _fileExtension, dataBytes);
           // Updating the file names list: saveFileOnAndroid
           await du.getStoredFileNamesOnMobile();
@@ -167,7 +168,7 @@ class GPSProcessState extends State<GPSProcess>
       else if (Platform.isIOS) 
       {
         // Outside of testing
-        if (!runningTests) {
+        if (!isInTestEnvironment) {
           filePath = await fu.saveFileOniOS(_fileName, _fileExtension, dataBytes);
           // Updating the file names list: saveFileOniOS
           await du.getStoredFileNamesOnMobile();

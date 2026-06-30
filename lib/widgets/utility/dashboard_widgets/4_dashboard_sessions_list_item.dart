@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 
@@ -16,6 +17,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pre
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
@@ -166,7 +168,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
     if (Platform.isAndroid) 
     {
-      if (!runningTests) {
+      if (!isInTestEnvironment) {
         await fu.deleteFile(filePath);
         await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
         filePath = await fu.saveFileOnAndroid(fileNameWithoutExtension, fileExtension, dataBytes);
@@ -185,7 +187,7 @@ class _SessionsListItemState extends State<SessionsListItem>
     } 
     else if (Platform.isIOS) 
     {
-      if (!runningTests) {
+      if (!isInTestEnvironment) {
         await fu.deleteFile(filePath);
         await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
         filePath = await fu.saveFileOniOS(fileNameWithoutExtension, fileExtension, dataBytes);
@@ -491,8 +493,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: List edited: saving data and metadata");
 
                         String filePath = sessionMetadata[DashboardUtils.keyFilePath];
-                        String fileName = filePath.split('/').last;
-                        fileName = filePath.split('\\').last; // for windows
+                        String fileName = path.basename(filePath);
                         String fileNameWithoutExtension = fileName.split('.').first;
                         var keywords = sessionMetadata[DashboardUtils.keyKeywords].cast<String>();
 

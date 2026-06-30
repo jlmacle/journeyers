@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 /// {@category Utils - Generic}
@@ -10,3 +12,8 @@ class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
   @override
   Future<String?> getApplicationSupportPath() async => _path;
 }
+
+/// {@category Utils - Generic}
+/// A getter to test if a test is being run.
+bool get isInTestEnvironment =>
+    WidgetsBinding.instance.runtimeType.toString().contains('Test');
