@@ -22,6 +22,9 @@ List<dynamic> _readRecords(File file) =>
 // Test suite
 // ---------------------------------------------------------------------------
 void main() {
+  // Necessary for isInTestEnvironment used in DashboardUtils (saveDashboardMetadata)
+  TestWidgetsFlutterBinding .ensureInitialized();
+
   Directory? tempDir;
   DashboardUtils? sut; // system under test
 
