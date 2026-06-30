@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:journeyers/debug_constants.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 /// {@category Utils - Generic}
@@ -157,11 +158,11 @@ class FileUtils
 
       await file.writeAsBytes(dataBytes);
 
-      if (runningTests) pu.printd('Running Tests: File written successfully to ${file.path} on ${Platform.operatingSystem}');
+      if (isInTestEnvironment) pu.printd('Running Tests: File written successfully to ${file.path} on ${Platform.operatingSystem}');
  
-      } catch (e) 
+      } catch (e, stackTrace) 
       {
-        pu.printd('saveFileUsingWriteAsBytes: Error writing file as bytes: $e');
+        pu.printd('saveFileUsingWriteAsBytes: Error writing file as bytes: $e: $stackTrace');
       }
 
     return filePathWithExtension;

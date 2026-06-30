@@ -10,6 +10,7 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 import 'package:journeyers/utils/generic/dev/test_externalized_strings.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
 
@@ -415,7 +416,7 @@ class _CAPreviewState extends State<CAPreview>
       try
       {
         // Outside of testing: reading file using SAF
-        if (!runningTests) { content = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension); }
+        if (!isInTestEnvironment) { content = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension); }
         // While testing
         else 
         { 
@@ -433,7 +434,7 @@ class _CAPreviewState extends State<CAPreview>
       try
       {
         // Outside of testing
-        if (!runningTests) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        if (!isInTestEnvironment) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
         // While testing
         else 
         { 
