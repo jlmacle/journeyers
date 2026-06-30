@@ -117,7 +117,7 @@ class _GPSappState extends State<GPSapp>
         // Loading the homepage when done
           HomePage
           (
-            onLanguageSelectedMainCallbackFunction: _setLocale,
+            onLanguageSelectedCallbackFunction: _setLocale,
           ),
       ),
     );

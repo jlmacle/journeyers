@@ -45,7 +45,7 @@ Future<void> main() async {
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: HomePage(onLanguageSelectedMainCallbackFunction: (_){})
+        home: HomePage(onLanguageSelectedCallbackFunction: (_){})
       )
     );
     await tester.pumpAndSettle();
