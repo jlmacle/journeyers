@@ -99,8 +99,7 @@ Future<void> main() async {
     // Creating a temporary folder to store the files to save
     testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
-    // To use the alternative saving/reading file paths or to intercept the way the date is saved
-    runningTests = true;
+    // To intercept the way the date is saved
     dateIndex = 0;
   });
 
