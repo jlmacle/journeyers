@@ -228,6 +228,7 @@ class _SessionsListItemState extends State<SessionsListItem>
         pathToFile: filePath,
       );
 
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Session saved successfully!")),
       );
