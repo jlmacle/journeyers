@@ -214,6 +214,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Scrolling for better error message communication to the user
       await _scrollForBetterErrorViewing();
 
+      if(!mounted) return;
       // Screen reader voicing
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
