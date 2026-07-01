@@ -43,7 +43,8 @@ class CAPageState extends State<CAPage>
   String _titleWhenEdition = "";
   // Values for the keywords at edition time
   Set<String> _keywordsWhenEdition = {};
-  // bool: edition in progress
+
+  // boolean: if an edition is in progress
   bool _isSessionDataBeingEdited = false;
 
   // ─── RUNTIME DATA related data and methods ───────────────────────────────────────
