@@ -234,6 +234,7 @@ class CAPageState extends State<CAPage>
               // and the session data dashboard in the remaining space
               Expanded
               (
+                // todo: to clean (dtoCAFormWhenEdition)
                 child: DashboardPage
                 (
                   key: const Key('analyses-dashboard'), 
@@ -255,8 +256,7 @@ class CAPageState extends State<CAPage>
                       fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 
                       titleWhenEdition: titleWhenEdition, 
                       keywordsWhenEdition: keywordsWhenEdition
-                    )
-                
+                    )                
                 )
               ),
             ]
