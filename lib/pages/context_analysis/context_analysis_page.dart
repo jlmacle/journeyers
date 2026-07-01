@@ -67,7 +67,8 @@ class CAPageState extends State<CAPage>
     if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: _firstRunModalAcknowledged: $_firstRunModalAcknowledged");
     if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: _caSessionDataSaved: $_caSessionDataSaved");
 
-    // IF FIRST-RUN MODAL NOT ACKNOWLEDGED (modal at app installation time):
+    // IF FIRST-RUN MODAL NOT ACKNOWLEDGED:
+    // (Modal displayed at app installation time)
     if ((_firstRunModalAcknowledged == false) && mounted) 
     {
       showDialog
