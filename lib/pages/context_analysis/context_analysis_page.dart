@@ -38,7 +38,7 @@ class CAPageState extends State<CAPage>
   // Values for the CA Form at edition time
   DTOCAForm? _dtoCAFormWhenEdition;
   // Value for the file name at edition time 
-  String _fileNameWhenEditionWithoutExtension = "";
+  String _fileNameWithoutExtensionWhenEdition = "";
   // Value for the title at edition time
   String _titleWhenEdition = "";
   // Values for the keywords at edition time
@@ -162,7 +162,7 @@ class CAPageState extends State<CAPage>
       _dtoCAFormWhenEdition = dtoCAFormWhenEdition;      
       _titleWhenEdition  = titleWhenEdition;
       _keywordsWhenEdition = keywordsWhenEdition;
-      _fileNameWhenEditionWithoutExtension = fileNameWithoutExtensionWhenEdition;
+      _fileNameWithoutExtensionWhenEdition = fileNameWithoutExtensionWhenEdition;
     });
   }
 
@@ -255,7 +255,7 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: _caProcessFocusNode,
-                  child: CAProcess(key: caProcessKey, isSessionDataBeingEdited: _isSessionDataBeingEdited,  dtoWhenEdition: _dtoCAFormWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWhenEditionWithoutExtension, titleWhenEdition: _titleWhenEdition , keywordsWhenEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess(key: caProcessKey, isSessionDataBeingEdited: _isSessionDataBeingEdited,  dtoWhenEdition: _dtoCAFormWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWithoutExtensionWhenEdition, titleWhenEdition: _titleWhenEdition , keywordsWhenEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
                 ),
               ),
             )
