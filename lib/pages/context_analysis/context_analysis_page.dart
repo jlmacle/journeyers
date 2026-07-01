@@ -16,7 +16,7 @@ import 'package:journeyers/widgets/utility/process_widgets/new_process_button.da
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analysis sessions.
-/// The context analysis page embeds a DashboardPage widget and/or a CAProcess widget.
+/// The context analysis page embeds a [DashboardPage] widget and/or a [CAProcess] widget.
 class CAPage extends StatefulWidget 
 {
   /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
