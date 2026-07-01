@@ -93,7 +93,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     // Calling the parent callback for state 
     await widget.onKeywordsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedKeywords, listData: listData);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
     Navigator.of(context).pop();
   }
 
@@ -114,7 +114,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     // Calling the parent callback for state 
     await widget.onParticipantsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedParticipants, listData: listData);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
     Navigator.of(context).pop();
   }
 

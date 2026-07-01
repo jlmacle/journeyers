@@ -88,6 +88,7 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     // Re-applying the keywords filtering
     await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
 
+    if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected sessions deleted.")));
