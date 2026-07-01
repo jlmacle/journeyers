@@ -132,7 +132,7 @@ class GPSPageState extends State<GPSPage>
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyGPS,
                   onAllSessionFilesDeletedContextPageCallbackFunction: gpsOnAllSessionsDataDeleted,
                   // The GPS data is read-only 
-                  onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition}) {},                 
+                  onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required Set<String> keywordsWhenEdition}) {},                 
                   
                 )
               ),

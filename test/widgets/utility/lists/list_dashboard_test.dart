@@ -43,7 +43,7 @@ void main() {
             dashboardContext: '', 
             onAllSessionFilesDeletedContextPageCallbackFunction: () {}, 
             onParticipantsLoadedCallbackFunction: (_) {}, 
-            onEditSessionDataCallbackFunction: ({required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required bool isSessionDataBeingEdited, required Set<String> keywordsWhenEdition, required String titleWhenEdition}) {}, 
+            onEditSessionDataCallbackFunction: ({required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required bool isSessionDataBeingEdited, required Set<String> keywordsWhenEdition, required String titleWhenEdition}) {}, 
             dashboardFilteringByKeywordsKey: null,
           ),
         ),

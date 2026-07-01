@@ -29,4 +29,4 @@ Future<void> Function();
 /// {@category Utils - Project-specific}
 /// A typedef for an onEditSessionDataCallbackFunction.
 typedef OnEditSessionDataCallbackFunctionType = 
-void Function({required bool isSessionDataBeingEdited, required DTOCAForm dtoWhenEdition, required String fileNameWhenEditionWithoutExtension, required String titleWhenEdition, required Set<String> keywordsWhenEdition});
+void Function({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required Set<String> keywordsWhenEdition});
