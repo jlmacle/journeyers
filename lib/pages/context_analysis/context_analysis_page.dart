@@ -116,7 +116,7 @@ class CAPageState extends State<CAPage>
 
   // Used in DashboardDeletionByBulk.
   // Method used to refresh the page from dashboard to context analysis process, 
-  // after all session files have been deleted
+  // after all session files have been deleted.
   void onAllSessionFilesDeleted() 
   {
     if (sessionDataDebug) pu.printd("Session Data: CAPage: onAllSessionFilesDeleted");
