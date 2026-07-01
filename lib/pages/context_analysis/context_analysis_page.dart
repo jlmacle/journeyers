@@ -16,7 +16,7 @@ import 'package:journeyers/widgets/utility/process_widgets/new_process_button.da
 /// {@category Pages}
 /// {@category Context analysis}
 /// The root page for the context analysis sessions.
-/// The context analysis page embeds a DashboardPage widget and/or a CAProcess widget.
+/// The context analysis page embeds a [DashboardPage] widget and/or a [CAProcess] widget.
 class CAPage extends StatefulWidget 
 {
   /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
@@ -44,15 +44,15 @@ class CAPageState extends State<CAPage>
   // Values for the keywords at edition time
   Set<String> _keywordsWhenEdition = {};
 
-  // boolean: if an edition is in progress
+  // if an edition is in progress
   bool _isSessionDataBeingEdited = false;
 
   // ─── RUNTIME DATA related data and methods ───────────────────────────────────────
-  // boolean: if runtime data is being loaded
+  // if runtime data is being loaded
   bool _runtimeDataLoading = true;
-  // boolean: if the modal was acknowledged at app first run 
+  // if the modal was acknowledged at app first run 
   bool? _firstRunModalAcknowledged;
-  // boolean: if context analysis data is stored 
+  // if context analysis data is stored 
   bool? _caSessionDataSaved;
 
   // Method used to get stored run-time data
