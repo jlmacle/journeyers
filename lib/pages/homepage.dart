@@ -141,11 +141,12 @@ class _HomePageState extends State<HomePage>
                   style: appBarTitleStyle 
                 ),
                 const Gap(5),
+                // AppBar subtitle
                 Text
                 (
                   AppLocalizations.of(context)?.appSubTitle ?? 'Issue with the application subtitle text',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20),
+                  style: appBarSubTitleStyle
                 ),
               ],
             ),
