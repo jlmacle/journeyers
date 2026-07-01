@@ -55,7 +55,12 @@ class _GPSappState extends State<GPSapp>
       setState(() {
         areFileNamesLoading = false;
       });
-    }    
+    }   
+    // no file names to load on desktop
+    else
+    {
+      areFileNamesLoading = false;
+    } 
     
   }
   // ─── LOCALE related data and methods ───────────────────────────────────────
