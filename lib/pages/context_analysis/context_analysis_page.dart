@@ -34,16 +34,14 @@ class CAPage extends StatefulWidget
 
 class CAPageState extends State<CAPage> 
 { 
-
   // ─── EDITION related data ───────────────────────────────────────
-  // The DTOCAForm value at initState
-  // CA Form values at edition time
+  // Values for the CA Form at edition time
   DTOCAForm? _dtoWhenEdition;
-  // Value for the file name at edition time (without extension)
+  // Value for the file name at edition time 
   String _fileNameWhenEditionWithoutExtension = "";
   // Value for the title at edition time
   String _titleWhenEdition = "";
-  // Value for the keywords at edition time
+  // Values for the keywords at edition time
   Set<String> _keywordsWhenEdition = {};
   // bool: edition in progress
   bool _isSessionDataBeingEdited = false;
