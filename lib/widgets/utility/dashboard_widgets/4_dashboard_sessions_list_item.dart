@@ -509,6 +509,8 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         _ideasListBeforeEditionCopy = List.from(_ideasList);
                         _previewEditMode = false;
                     }
+
+                    if (!context.mounted) return;
                     Navigator.of(context).pop();
                   },
                   tooltip: "Close preview",

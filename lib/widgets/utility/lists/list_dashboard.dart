@@ -250,6 +250,7 @@ class ListDashboardState extends State<ListDashboard>
     // Re-applying the relevant filters
     await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();
     
+    if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected list deleted.")));
