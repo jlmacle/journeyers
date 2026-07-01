@@ -37,6 +37,14 @@ const double elevatedButtonPaddingBottom = 20;
 
 // ─── TEXT STYLES ───────────────────────────────────────
 
+// Text styles: APPBAR
+const TextStyle appBarStyle = TextStyle
+(
+  fontSize: 22,
+  fontFamily: 'Georgia',
+  //https://accessibility.uncg.edu/make-content-accessible/design-elements/
+);
+
 // Text styles: HEADINGS
 const TextStyle defaultConstHeadingStyle = TextStyle
 (

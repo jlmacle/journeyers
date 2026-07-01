@@ -134,15 +134,11 @@ class _HomePageState extends State<HomePage>
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>
               [
+                // AppBar title
                 Text
                 (
                   AppLocalizations.of(context)?.appTitle ?? 'Issue with the application title text',
-                  style: 
-                  const TextStyle
-                  (
-                    fontSize: 22,
-                    fontFamily: 'Georgia',
-                  ), //https://accessibility.uncg.edu/make-content-accessible/design-elements/
+                  style: appBarStyle 
                 ),
                 const Gap(5),
                 Text
