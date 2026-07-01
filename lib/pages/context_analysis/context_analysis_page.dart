@@ -88,8 +88,11 @@ class CAPageState extends State<CAPage>
               (
                 onPressed: () async
                 {
+                  // Run-time data: modal acknowledged stored
                   await rtdu.saveFirstRunModalAcknowledgement(wasAcknowledged: true);
+
                   if (!context.mounted) return;
+                  // Closing dialog
                   Navigator.pop(context);
                 },
                 child: 
