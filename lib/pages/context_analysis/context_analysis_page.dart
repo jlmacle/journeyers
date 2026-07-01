@@ -192,13 +192,13 @@ class CAPageState extends State<CAPage>
     pu.printdLine();
     pu.printd("CAPage");
     
+    // Getting the values for _firstRunModalAcknowledged, _caSessionDataSaved
     getRuntimeData();
   }  
 
   @override
   Widget build(BuildContext context) 
   {
-
     return 
     Scaffold
     (
@@ -215,7 +215,7 @@ class CAPageState extends State<CAPage>
           // OR RUNTIME DATA LOADED
           else ...
           [
-            // CA DATA STORED: Checking if context analysis session data has been stored
+            // IF CA DATA STORED: Checking if context analysis session data has been stored
             if (_caSessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new context analysis
@@ -223,7 +223,12 @@ class CAPageState extends State<CAPage>
               ( 
                 dashboardContext: DashboardUtils.caContext, 
                 buttonText: "Please click to start\na new context analysis.",
-                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _caSessionDataSaved = false;});},
+                onNewProcessButtonPressedCAPageCallbackFunction: 
+                () 
+                {
+                  // To display the CAProcess page, without the dashboard
+                  setState(() { _caSessionDataSaved = false;});
+                },
               ),
 
               // and the session data dashboard in the remaining space
