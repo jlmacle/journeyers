@@ -89,6 +89,7 @@ class CAPageState extends State<CAPage>
                 onPressed: () async
                 {
                   await rtdu.saveFirstRunModalAcknowledgement(wasAcknowledged: true);
+                  if (!context.mounted) return;
                   Navigator.pop(context);
                 },
                 child: 
