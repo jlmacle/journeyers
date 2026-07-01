@@ -38,7 +38,7 @@ const double elevatedButtonPaddingBottom = 20;
 // ─── TEXT STYLES ───────────────────────────────────────
 
 // Text styles: APPBAR
-const TextStyle appBarStyle = TextStyle
+const TextStyle appBarTitleStyle = TextStyle
 (
   fontSize: 22,
   fontFamily: 'Georgia',

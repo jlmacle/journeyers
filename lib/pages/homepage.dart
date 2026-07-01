@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage>
                 Text
                 (
                   AppLocalizations.of(context)?.appTitle ?? 'Issue with the application title text',
-                  style: appBarStyle 
+                  style: appBarTitleStyle 
                 ),
                 const Gap(5),
                 Text
