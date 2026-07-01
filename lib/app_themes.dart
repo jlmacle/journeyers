@@ -41,8 +41,15 @@ const double elevatedButtonPaddingBottom = 20;
 const TextStyle appBarTitleStyle = TextStyle
 (
   fontSize: 22,
+  // Todo: fonts
   fontFamily: 'Georgia',
   //https://accessibility.uncg.edu/make-content-accessible/design-elements/
+);
+
+const TextStyle appBarSubTitleStyle = TextStyle
+(   
+  fontSize: 20,
+  // Todo: fonts
 );
 
 // Text styles: HEADINGS
