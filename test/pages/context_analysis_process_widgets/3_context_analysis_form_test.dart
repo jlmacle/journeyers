@@ -51,7 +51,7 @@ void main()
             body: CAProcess
             (
               caPageCallbackFunctionToRefreshThePage: (){},
-              parentCallbackFunctionToSetFocusabilityOfBottomBarItems: (_){},              
+              caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: (_){},              
             )
           ),
         )

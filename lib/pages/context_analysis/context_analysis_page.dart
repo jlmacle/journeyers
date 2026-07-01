@@ -274,7 +274,17 @@ class CAPageState extends State<CAPage>
                 Focus
                 (
                   focusNode: _caProcessFocusNode,
-                  child: CAProcess(key: caProcessKey, isSessionDataBeingEdited: _isSessionDataBeingEdited,  dtoWhenEdition: _dtoCAFormWhenEdition, fileNameWhenEditionWithoutExtension: _fileNameWithoutExtensionWhenEdition, titleWhenEdition: _titleWhenEdition , keywordsWhenEdition:  _keywordsWhenEdition , caPageCallbackFunctionToRefreshThePage: _onDataSaved, parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems),
+                  child: CAProcess
+                  (
+                    key: caProcessKey, 
+                    isSessionDataBeingEdited: _isSessionDataBeingEdited,  
+                    dtoCAFormWhenEdition: _dtoCAFormWhenEdition, 
+                    fileNameWithoutExtensionWhenEdition: _fileNameWithoutExtensionWhenEdition, 
+                    titleWhenEdition: _titleWhenEdition, 
+                    keywordsWhenEdition:  _keywordsWhenEdition , 
+                    caPageCallbackFunctionToRefreshThePage: _onDataSaved, 
+                    caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems
+                  ),
                 ),
               ),
             )
