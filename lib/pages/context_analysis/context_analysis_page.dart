@@ -154,10 +154,10 @@ class CAPageState extends State<CAPage>
     if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
 
     setState(() {
-      // To have the CAProcess widget loaded with the edited values
+      // To have the CAProcess widget loaded with the values to edit
       _caSessionDataSaved = false;
 
-      // Loading the CA Process with edited values
+      // Loading the CA Process with the values to edit
       _isSessionDataBeingEdited = isSessionDataBeingEdited;
       _dtoCAFormWhenEdition = dtoCAFormWhenEdition;      
       _titleWhenEdition  = titleWhenEdition;
