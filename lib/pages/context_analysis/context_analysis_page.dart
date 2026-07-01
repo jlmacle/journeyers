@@ -114,6 +114,8 @@ class CAPageState extends State<CAPage>
     }
   }
 
+  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
+
   // Used in DashboardDeletionByBulk.
   // Method used to refresh the page from dashboard to context analysis process, 
   // after all session files have been deleted.
@@ -122,11 +124,10 @@ class CAPageState extends State<CAPage>
     if (sessionDataDebug) pu.printd("Session Data: CAPage: onAllSessionFilesDeleted");
 
     setState(() {
+      // to reset the display to CAProcess only
       _caSessionDataSaved = false;
     });
   }
-
-  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
 
   // Method used to refresh the page from context analysis process to dashboard, 
   // after process data has been saved
