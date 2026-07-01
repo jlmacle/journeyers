@@ -111,7 +111,7 @@ class _SessionsListItemState extends State<SessionsListItem>
     // Calling the parent callback function for state update
     await widget.onKeywordsUpdatedCallbackFunction(filePath: filePath, updatedKeywords: updatedKeywords);
 
-    if (!context.mounted) return;
+    if (!mounted) return;
     Navigator.of(context).pop();
   }
 
