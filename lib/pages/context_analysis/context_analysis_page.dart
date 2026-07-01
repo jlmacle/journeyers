@@ -146,7 +146,7 @@ class CAPageState extends State<CAPage>
   ({
     required bool isSessionDataBeingEdited, 
     required DTOCAForm? dtoCAFormWhenEdition, 
-    required String fileNameWhenEditionWithoutExtension, 
+    required String fileNameWithoutExtensionWhenEdition, 
     required String titleWhenEdition, 
     required Set<String> keywordsWhenEdition
   })
@@ -162,7 +162,7 @@ class CAPageState extends State<CAPage>
       _dtoCAFormWhenEdition = dtoCAFormWhenEdition;      
       _titleWhenEdition  = titleWhenEdition;
       _keywordsWhenEdition = keywordsWhenEdition;
-      _fileNameWhenEditionWithoutExtension = fileNameWhenEditionWithoutExtension;
+      _fileNameWhenEditionWithoutExtension = fileNameWithoutExtensionWhenEdition;
     });
   }
 
@@ -236,7 +236,7 @@ class CAPageState extends State<CAPage>
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
                   onEditSessionDataCallbackFunction: ({required isSessionDataBeingEdited, required dtoWhenEdition, required fileNameWhenEditionWithoutExtension, required titleWhenEdition, required keywordsWhenEdition}) 
-                    => _onEditSessionData(isSessionDataBeingEdited: true, dtoCAFormWhenEdition: dtoWhenEdition, fileNameWhenEditionWithoutExtension: fileNameWhenEditionWithoutExtension, titleWhenEdition: titleWhenEdition, keywordsWhenEdition: keywordsWhenEdition)
+                    => _onEditSessionData(isSessionDataBeingEdited: true, dtoCAFormWhenEdition: dtoWhenEdition, fileNameWithoutExtensionWhenEdition: fileNameWhenEditionWithoutExtension, titleWhenEdition: titleWhenEdition, keywordsWhenEdition: keywordsWhenEdition)
                 
                 )
               ),
