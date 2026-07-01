@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage>
         centerTitle: true,
         toolbarHeight: 90.00,
         backgroundColor: appTheme.appBarTheme.backgroundColor,
+        // Overrides the default value of [AppBar.systemOverlayStyle].
         systemOverlayStyle: appTheme.appBarTheme.systemOverlayStyle,
         title: 
         Semantics
