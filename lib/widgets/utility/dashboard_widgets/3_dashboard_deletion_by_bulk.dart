@@ -98,6 +98,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
 
     // Displaying an informational message
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
