@@ -199,6 +199,7 @@ class _HomePageState extends State<HomePage>
             ),
             BottomNavigationBarItem
             (
+              // Key used in testing
               key: Key('homepage-bottom-navigation-bar-item-gps'),
               icon: Icon(Icons.group),
               label: 'Group problem-solving',
