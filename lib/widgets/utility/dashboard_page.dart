@@ -477,8 +477,9 @@ class DashboardPageState extends State<DashboardPage>
                   sessionsMetadataAll: _sessionsMetadataAll!,
                 );
 
+                if (!context.mounted) return;
                 // Closing the modal sheet
-                if (mounted) Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             const SizedBox(height: 10),
