@@ -17,6 +17,7 @@ import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language
 
 /// {@category Pages}
 /// The homepage for the app.
+/// Displays [CAPage] or [GPSPage] (use of bottom navigation bar).
 class HomePage extends StatefulWidget 
 {
   /// The language switch-related callback function for the parent widget.
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage>
   int _bottomNavigationItemCurrentIndex = 0;
   bool _bottomNavigationItemsFocusable = true;
 
-  // Getter for the context analyses page and for the group problem solvings page
+  // Getter for the context analyses page, and for the group problem solvings page 
   List<Widget> get _pages => 
   [
     CAPage
