@@ -33,10 +33,10 @@ class CAProcess extends StatefulWidget
   final bool isSessionDataBeingEdited;
 
   /// A DTOCAForm instance used at initState time.
-  final DTOCAForm? dtoWhenEdition;
+  final DTOCAForm? dtoCAFormWhenEdition;
 
   /// The file name value at edition time.
-  final String fileNameWhenEditionWithoutExtension;
+  final String fileNameWithoutExtensionWhenEdition;
 
   /// The title value at edition time.
   final String titleWhenEdition;
@@ -48,17 +48,17 @@ class CAProcess extends StatefulWidget
   final VoidCallback caPageCallbackFunctionToRefreshThePage;
 
   /// An "expansion tile folded/unfolded"-related callback function for the parent widget, to enhance the tab navigation.
-  final ValueChanged<bool> parentCallbackFunctionToSetFocusabilityOfBottomBarItems;
+  final ValueChanged<bool> caPageCallbackFunctionToSetFocusabilityOfBottomBarItems;
 
   const CAProcess({
     super.key,
     this.isSessionDataBeingEdited = false,
-    this.dtoWhenEdition,
-    this.fileNameWhenEditionWithoutExtension = "",
+    this.dtoCAFormWhenEdition,
+    this.fileNameWithoutExtensionWhenEdition = "",
     this.titleWhenEdition = "",
     this.keywordsWhenEdition = const {},
     required this.caPageCallbackFunctionToRefreshThePage,
-    required this.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
+    required this.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems
     });
 
   @override
@@ -80,7 +80,7 @@ class CAProcessState extends State<CAProcess>
     if (dtoAssetPathToJson == "") 
     {
       // widget.dtoWhenEdition is nullable
-      _dtoCAForm = widget.dtoWhenEdition ?? DTOCAForm();
+      _dtoCAForm = widget.dtoCAFormWhenEdition ?? DTOCAForm();
       // To switch from circular indicator to process widgets
       setState(() {_dtoAssetLoading = false;});      
     }
@@ -202,7 +202,7 @@ class CAProcessState extends State<CAProcess>
       (){
         if (accessibilityDebug) pu.printd("Accessibility: Button used to save data reached");
         // restoring focus capability to the bottom items
-        widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
+        widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
         // data helping to know if the user tab navigates back up
         _movingThroughButton = true;
       }
@@ -276,7 +276,7 @@ class CAProcessState extends State<CAProcess>
               key: formKeyCA,
               dtoCAForm: _dtoCAForm!,
               parentCallbackFunctionToRefreshTheCAPage: widget.caPageCallbackFunctionToRefreshThePage,
-              parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems
+              parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems
             ),                        
 
             // ─── DATA SAVING ───────────────────────────────────────          
@@ -296,13 +296,13 @@ class CAProcessState extends State<CAProcess>
                           && HardwareKeyboard.instance.isShiftPressed)
                       {
                         if (accessibilityDebug) pu.printd("Accessibility: Shift-tab detected");
-                        widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(false);
+                        widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(false);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
                       }
                       else
                       {
-                        widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
+                        widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
                       } 
 
@@ -315,7 +315,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameOnMobilePlatforms
                         (
-                          fileNameWhenEdition: widget.fileNameWhenEditionWithoutExtension,
+                          fileNameWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
                           fileExtension: _fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
