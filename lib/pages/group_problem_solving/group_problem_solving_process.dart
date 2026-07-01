@@ -214,6 +214,7 @@ class GPSProcessState extends State<GPSProcess>
 
         widget.parentCallbackFunctionToRefreshTheGPSPage();
 
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Session saved successfully!")),
         );
