@@ -138,7 +138,7 @@ class GPSPageState extends State<GPSPage>
                     required bool isSessionDataBeingEdited, 
                     required String titleWhenEdition, 
                     required Set<String> keywordsWhenEdition,
-                    required DTOCAForm dtoCAFormWhenEdition, 
+                    required DTOCAForm dtoForEdition, 
                     required String fileNameWithoutExtensionWhenEdition
                   }) {},                 
                   
