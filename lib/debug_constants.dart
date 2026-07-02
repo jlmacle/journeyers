@@ -6,7 +6,7 @@ const runtimeDataDebug = false;
 const preloadingDebug = false;
 const previewBuildingDebug = false;
 const sessionDataDebug = false;
-const testingDebug = true;
+const testingDebug = false;
 const textFieldDebug = false;
 const widgetSequenceDebug = false;
 
