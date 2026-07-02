@@ -442,7 +442,12 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       if (widget.dashboardContext == DashboardUtils.caContext) 
                       {                
                         // Starts the session data editing
-                        editCASessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                        editCASessionData
+                        (
+                          dashboardContext: DashboardUtils.caContext,
+                          filePath: sessionMetadata[DashboardUtils.keyFilePath], 
+                          onEditCASessionDataCallbackFunction: widget.onEditSessionDataCallbackFunction
+                        );
                         // Closes the modal preview overlay
                         Navigator.of(context).pop();
                       }

@@ -393,7 +393,12 @@ class DashboardPageState extends State<DashboardPage>
                           {
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              editCASessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                              editCASessionData
+                              (
+                                dashboardContext: DashboardUtils.caContext,
+                                filePath: filePath, 
+                                onEditCASessionDataCallbackFunction: widget.onEditSessionDataCallbackFunction
+                              );
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {
@@ -406,11 +411,26 @@ class DashboardPageState extends State<DashboardPage>
 
                            },
                           onEditSessionDataCallbackFunction: 
-                          ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) 
+                          ({
+                            required String dashboardContext,
+                            required bool isSessionDataBeingEdited,
+                            required DTOCAForm dtoCAFormWhenEdition,
+                            required String fileNameWithoutExtensionWhenEdition,
+                            required String titleWhenEdition,
+                            required keywordsWhenEdition
+                          }) 
                           { 
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              widget.onEditSessionDataCallbackFunction(dtoCAFormWhenEdition: dtoCAFormWhenEdition, fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, titleWhenEdition: titleWhenEdition, keywordsWhenEdition: keywordsWhenEdition, isSessionDataBeingEdited: isSessionDataBeingEdited);
+                              widget.onEditSessionDataCallbackFunction
+                              ( 
+                                dashboardContext: DashboardUtils.caContext,
+                                dtoCAFormWhenEdition: dtoCAFormWhenEdition, 
+                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 
+                                titleWhenEdition: titleWhenEdition, 
+                                keywordsWhenEdition: keywordsWhenEdition, 
+                                isSessionDataBeingEdited: isSessionDataBeingEdited
+                              );
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {
