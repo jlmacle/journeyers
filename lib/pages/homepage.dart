@@ -85,16 +85,16 @@ class _HomePageState extends State<HomePage>
   void didUpdateWidget(covariant HomePage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("HomePage: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("HomePage: didUpdateWidget");
   }
 
   @override
   void initState() {
     super.initState();
                             
-    pu.printdLine();
-    pu.printd("HomePage");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("HomePage");
   }
 
   @override

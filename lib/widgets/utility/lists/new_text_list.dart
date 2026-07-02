@@ -255,8 +255,8 @@ class _NewTextListState extends State<NewTextList> {
   void initState() {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("NewTextList");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("NewTextList");
 
     // Loading the previous lists of grouped texts
     _listOfPreviousGroupedTextsLoad();

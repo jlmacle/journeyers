@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -42,8 +43,8 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
   void initState() {
     super.initState();
     
-    pu.printdLine();
-    pu.printd("CATitleDeclaration");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CATitleDeclaration");
   }
 
   @override

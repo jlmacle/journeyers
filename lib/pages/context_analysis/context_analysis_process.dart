@@ -177,16 +177,16 @@ class CAProcessState extends State<CAProcess>
   void didUpdateWidget(covariant CAProcess oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("CAProcess: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAProcess: didUpdateWidget");
   }
   
   @override
   void initState() {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("CAProcess");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAProcess");
     
     // Retrieving the application folder
     _getApplicationFolderPath(); 

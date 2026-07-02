@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -119,8 +120,8 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   void initState() {
     super.initState();
                                             
-    pu.printdLine();
-    pu.printd("DashboardFilteringByKeywords");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("DashboardFilteringByKeywords");
   }
 
   @override

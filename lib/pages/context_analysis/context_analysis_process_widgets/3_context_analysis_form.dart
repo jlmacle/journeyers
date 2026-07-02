@@ -57,8 +57,8 @@ class CAFormState extends State<CAForm>
   void initState() {
     super.initState();
             
-    pu.printdLine();
-    pu.printd("CAForm");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAForm");
 
     // _dtoCAForm assigned only from the widget if null
     _dtoCAForm ??= widget.dtoCAForm;

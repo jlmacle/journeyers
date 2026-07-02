@@ -179,18 +179,18 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
               _wasStringSanitized = true; 
 
               bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
-              if (textFieldDebugging) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: $bundleWithSanitizingFunctionThatReturnedTrue");
+              if (textFieldDebug) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: $bundleWithSanitizingFunctionThatReturnedTrue");
             }
             return shouldStringBeSanitized;
           }
         )
         ) 
     {
-      if (textFieldDebugging) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
+      if (textFieldDebug) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
       
       // Blocking the submit
       _submitIsBlocked = true;
-      if (textFieldDebugging) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
+      if (textFieldDebug) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
 
       // Sanitizing the input
       // DESIGN NOTES: after research, 
@@ -200,7 +200,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       var cleanedValue = text;
       cleanedValue = bundleWithSanitizingFunctionThatReturnedTrue!(cleanedValue).sanitizingFunction(text);
 
-      if (textFieldDebugging) pu.printd("Text Field: cleanedValue: $cleanedValue");
+      if (textFieldDebug) pu.printd("Text Field: cleanedValue: $cleanedValue");
    
       setState(() 
       {
@@ -241,7 +241,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Re-setting the variable
       _wasStringSanitized = false; 
 
-      if (textFieldDebugging) pu.printd("Text Field: No sanitizing needed: value: $text");
+      if (textFieldDebug) pu.printd("Text Field: No sanitizing needed: value: $text");
 
       // Removing the error message
       setState(() 
@@ -271,18 +271,18 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
             if (shouldStringBeBlocked) 
             {
               blacklistingFunctionsReturnedTrueList.add(blacklistingFunction);
-              if (textFieldDebugging) pu.printd("Text Field: Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}");
+              if (textFieldDebug) pu.printd("Text Field: Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}");
             }
             return shouldStringBeBlocked;
           }
         )
         ) 
     {
-      if (textFieldDebugging) pu.printd("Text Field: blacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}");
+      if (textFieldDebug) pu.printd("Text Field: blacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}");
       
       // Blocking the submit
       _submitIsBlocked = true;
-      if (textFieldDebugging) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
+      if (textFieldDebug) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
    
       setState(() 
       {
@@ -315,12 +315,12 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     // No, because no blacklisting function returned true
     else 
     {
-      if (textFieldDebugging) pu.printd("Text Field: No blacklisting needed: value: $text");
+      if (textFieldDebug) pu.printd("Text Field: No blacklisting needed: value: $text");
 
       // Removing the error message, after delay if string was sanitized
       if (_wasStringSanitized) 
       {
-        if (textFieldDebugging) pu.printd("wasStringSanitized: $_wasStringSanitized: Timer started");
+        if (textFieldDebug) pu.printd("wasStringSanitized: $_wasStringSanitized: Timer started");
         _stringSanitizedErrorTimer = Timer
         (
           const Duration(
@@ -348,7 +348,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     // By default, submit is not blocked
     _submitIsBlocked = false;
 
-    if (textFieldDebugging) pu.printd("Text Field: onChanged: submitIsBlocked: $_submitIsBlocked");
+    if (textFieldDebug) pu.printd("Text Field: onChanged: submitIsBlocked: $_submitIsBlocked");
 
     // Sanitizing the text, and resetting the error message if relevant
     await _userInputSanitizing(newValue);
@@ -366,7 +366,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     // Additional onSubmitted instructions (before potentially saving data and exiting the process page)
     widget.additionalOnSubmittedInstructions(newValue);
 
-    if (textFieldDebugging) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ");
+    if (textFieldDebug) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ");
     // Data submission if not blocked
     if (!_submitIsBlocked) {
       widget.onTextFieldValueSubmittedCallbackFunction(newValue);

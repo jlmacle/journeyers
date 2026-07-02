@@ -180,8 +180,8 @@ class CAPageState extends State<CAPage>
   void didUpdateWidget(covariant CAPage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("CAPage: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAPage: didUpdateWidget");
   }
 
   @override
@@ -189,8 +189,8 @@ class CAPageState extends State<CAPage>
   {
     super.initState();
     
-    pu.printdLine();
-    pu.printd("CAPage");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAPage");
     
     // Getting the values for _firstRunModalAcknowledged, _caSessionDataSaved
     getRuntimeData();

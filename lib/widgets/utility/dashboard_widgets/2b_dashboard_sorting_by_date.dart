@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journeyers/debug_constants.dart';
 
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
@@ -42,8 +43,8 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   void initState() {
     super.initState();
                                         
-    pu.printdLine();
-    pu.printd("DashboardSortingByDate");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("DashboardSortingByDate");
   }
 
   @override

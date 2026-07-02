@@ -45,8 +45,8 @@ class _CAPreviewState extends State<CAPreview>
   void didUpdateWidget(covariant CAPreview oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("CAPreview: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAPreview: didUpdateWidget");
   }
 
   @override
@@ -54,8 +54,8 @@ class _CAPreviewState extends State<CAPreview>
   {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("CAPreview");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("CAPreview");
     
     _fetchingData();
   }

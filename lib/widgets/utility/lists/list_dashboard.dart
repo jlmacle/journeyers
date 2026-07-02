@@ -122,8 +122,8 @@ class ListDashboardState extends State<ListDashboard>
   {
     super.initState();
          
-    pu.printdLine();
-    pu.printd("ListDashboard");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("ListDashboard");
 
     _listsDataAll = [];
     _listsDataFiltered = [];

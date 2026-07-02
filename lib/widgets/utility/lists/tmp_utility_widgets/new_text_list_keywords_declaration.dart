@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -56,16 +57,16 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
   void initState() {
     super.initState();
             
-    pu.printdLine();
-    pu.printd("NewTextListKeywordsDeclaration");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("NewTextListKeywordsDeclaration");
 
     _keywords = Set.from(widget.keywordsCurrent); // Syncs at start
   }
 
   @override
   void didUpdateWidget(NewTextListKeywordsDeclaration oldWidget) {
-    pu.printdLine();
-    pu.printd("NewTextListKeywordsDeclaration: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("NewTextListKeywordsDeclaration: didUpdateWidget");
 
     super.didUpdateWidget(oldWidget);
     // Checks if the pointer or the content of the list has changed

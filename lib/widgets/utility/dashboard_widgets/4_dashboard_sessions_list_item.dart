@@ -248,16 +248,16 @@ class _SessionsListItemState extends State<SessionsListItem>
   void didUpdateWidget(covariant SessionsListItem oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("SessionsListItem: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("SessionsListItem: didUpdateWidget");
   }
 
   @override
   void initState() {
     super.initState();
                                                     
-    pu.printdLine();
-    pu.printd("SessionsListItem");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("SessionsListItem");
   }
   
   @override
