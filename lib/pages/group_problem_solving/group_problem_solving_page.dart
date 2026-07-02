@@ -136,10 +136,10 @@ class GPSPageState extends State<GPSPage>
                   ({
                     required String dashboardContext,
                     required bool isSessionDataBeingEdited, 
-                    required DTOCAForm dtoCAFormWhenEdition, 
-                    required String fileNameWithoutExtensionWhenEdition, 
                     required String titleWhenEdition, 
-                    required Set<String> keywordsWhenEdition
+                    required Set<String> keywordsWhenEdition,
+                    required DTOCAForm dtoCAFormWhenEdition, 
+                    required String fileNameWithoutExtensionWhenEdition
                   }) {},                 
                   
                 )

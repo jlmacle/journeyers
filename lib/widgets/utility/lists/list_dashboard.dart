@@ -426,11 +426,11 @@ class ListDashboardState extends State<ListDashboard>
                           onEditSessionDataCallbackFunction: 
                           ({
                             required String dashboardContext,
-                            required DTOCAForm dtoCAFormWhenEdition, 
-                            required String fileNameWithoutExtensionWhenEdition, 
+                            required bool isSessionDataBeingEdited, 
                             required String titleWhenEdition, 
-                            required keywordsWhenEdition, 
-                            required bool isSessionDataBeingEdited
+                            required Set<String> keywordsWhenEdition,
+                            required DTOCAForm dtoCAFormWhenEdition, 
+                            required String fileNameWithoutExtensionWhenEdition 
                           }) {},
                           onKeywordsUpdatedCallbackFunction: _updateListKeywords,
                           onParticipantsUpdatedCallbackFunction: _updateParticipants,
