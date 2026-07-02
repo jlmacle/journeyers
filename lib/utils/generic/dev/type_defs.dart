@@ -31,10 +31,11 @@ Future<void> Function();
 typedef OnEditSessionDataCallbackFunctionType = 
 void Function
 ({
-  required String dashboardContext,
-  required bool isSessionDataBeingEdited, 
-  required DTOCAForm dtoCAFormWhenEdition, 
-  required String fileNameWithoutExtensionWhenEdition, 
-  required String titleWhenEdition, 
-  required Set<String> keywordsWhenEdition  
+    required String dashboardContext,
+    required bool isSessionDataBeingEdited, 
+    required String titleWhenEdition, 
+    required Set<String> keywordsWhenEdition,
+    required DTOCAForm dtoCAFormWhenEdition, 
+    required String fileNameWithoutExtensionWhenEdition
+                                        
   });

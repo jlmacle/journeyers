@@ -46,11 +46,11 @@ void main() {
             onEditSessionDataCallbackFunction: 
             ({
               required String dashboardContext,
-              required DTOCAForm dtoCAFormWhenEdition, 
-              required String fileNameWithoutExtensionWhenEdition, 
               required bool isSessionDataBeingEdited, 
-              required Set<String> keywordsWhenEdition, 
-              required String titleWhenEdition
+              required String titleWhenEdition, 
+              required Set<String> keywordsWhenEdition,
+              required DTOCAForm dtoCAFormWhenEdition, 
+              required String fileNameWithoutExtensionWhenEdition 
             }) {}, 
             dashboardFilteringByKeywordsKey: null,
           ),
