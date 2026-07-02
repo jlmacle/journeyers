@@ -414,7 +414,7 @@ class DashboardPageState extends State<DashboardPage>
                           ({
                             required String dashboardContext,
                             required bool isSessionDataBeingEdited,
-                            required DTOCAForm dtoForEdition,
+                            required Object dtoForEdition,
                             required String fileNameWithoutExtensionWhenEdition,
                             required String titleWhenEdition,
                             required keywordsWhenEdition

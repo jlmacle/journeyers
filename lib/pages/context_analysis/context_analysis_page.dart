@@ -255,7 +255,7 @@ class CAPageState extends State<CAPage>
                     (
                       dashboardContext: DashboardUtils.caContext,
                       isSessionDataBeingEdited: true, 
-                      dtoCAFormWhenEdition: dtoForEdition, 
+                      dtoCAFormWhenEdition: dtoForEdition as DTOCAForm, 
                       fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 
                       titleWhenEdition: titleWhenEdition, 
                       keywordsWhenEdition: keywordsWhenEdition

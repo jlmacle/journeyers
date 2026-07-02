@@ -71,7 +71,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                                           required bool isSessionDataBeingEdited, 
                                           required String titleWhenEdition, 
                                           required Set<String> keywordsWhenEdition,
-                                          required DTOCAForm dtoForEdition, 
+                                          required Object dtoForEdition, 
                                           required String fileNameWithoutExtensionWhenEdition
                                         }) {}, 
                                         onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,

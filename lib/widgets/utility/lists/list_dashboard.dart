@@ -429,7 +429,7 @@ class ListDashboardState extends State<ListDashboard>
                             required bool isSessionDataBeingEdited, 
                             required String titleWhenEdition, 
                             required Set<String> keywordsWhenEdition,
-                            required DTOCAForm dtoForEdition, 
+                            required Object dtoForEdition, 
                             required String fileNameWithoutExtensionWhenEdition 
                           }) {},
                           onKeywordsUpdatedCallbackFunction: _updateListKeywords,
