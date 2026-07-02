@@ -156,7 +156,7 @@ class _GPSPreviewState
         
       }
     } catch (e) {
-      debugPrint("Error reading preview data: $e");
+      pu.printd("Error reading preview data: $e");
     } finally {
       if (mounted) {
         setState(() {
