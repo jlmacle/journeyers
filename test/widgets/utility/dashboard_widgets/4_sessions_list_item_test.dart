@@ -38,7 +38,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -71,7 +79,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -96,7 +112,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -121,7 +145,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -145,7 +177,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -173,7 +213,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -202,7 +250,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -267,7 +323,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),
@@ -297,7 +361,15 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: ({required bool isSessionDataBeingEdited, required DTOCAForm dtoCAFormWhenEdition, required String fileNameWithoutExtensionWhenEdition, required String titleWhenEdition, required keywordsWhenEdition}) {},
+                onEditSessionDataCallbackFunction: 
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited, 
+                  required DTOCAForm dtoCAFormWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition, 
+                  required String titleWhenEdition, 
+                  required keywordsWhenEdition
+                }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
               ),

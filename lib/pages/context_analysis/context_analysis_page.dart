@@ -144,6 +144,7 @@ class CAPageState extends State<CAPage>
   // Method used to edit a session data
   void _onEditSessionData
   ({
+    required String dashboardContext,
     required bool isSessionDataBeingEdited, 
     required DTOCAForm? dtoCAFormWhenEdition, 
     required String fileNameWithoutExtensionWhenEdition, 
@@ -243,6 +244,7 @@ class CAPageState extends State<CAPage>
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
                   onEditSessionDataCallbackFunction: 
                   ({
+                    required String dashboardContext,
                     required isSessionDataBeingEdited, 
                     required dtoCAFormWhenEdition, 
                     required fileNameWithoutExtensionWhenEdition, 
@@ -251,6 +253,7 @@ class CAPageState extends State<CAPage>
                   }) 
                     => _onEditSessionData
                     (
+                      dashboardContext: DashboardUtils.caContext,
                       isSessionDataBeingEdited: true, 
                       dtoCAFormWhenEdition: dtoCAFormWhenEdition, 
                       fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 

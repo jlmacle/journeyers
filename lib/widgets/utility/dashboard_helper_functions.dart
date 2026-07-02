@@ -12,7 +12,12 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
 // Method used to edit context analysis session data
-Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctionType onEditCASessionDataCallbackFunction) async {
+Future<void> editCASessionData
+({
+  required String dashboardContext,
+  required String filePath, 
+  required OnEditSessionDataCallbackFunctionType onEditCASessionDataCallbackFunction
+}) async {
     // to clean
     String csvContent = "";
     String fileNameWithExtension = filePath.split('/').last;
@@ -93,7 +98,15 @@ Future<void> editCASessionData(String filePath, OnEditSessionDataCallbackFunctio
 
 
     // Need to re-build the dashboard page    
-    onEditCASessionDataCallbackFunction(isSessionDataBeingEdited: true, dtoCAFormWhenEdition: dtoForEdition, fileNameWithoutExtensionWhenEdition: fileNameWithoutExtension, titleWhenEdition: title, keywordsWhenEdition: keywordsForEdition);
+    onEditCASessionDataCallbackFunction
+    (
+      dashboardContext: dashboardContext,
+      isSessionDataBeingEdited: true, 
+      dtoCAFormWhenEdition: dtoForEdition, 
+      fileNameWithoutExtensionWhenEdition: fileNameWithoutExtension, 
+      titleWhenEdition: title, 
+      keywordsWhenEdition: keywordsForEdition
+    );
 
   }
 
