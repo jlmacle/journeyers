@@ -49,7 +49,7 @@ void main() {
               required bool isSessionDataBeingEdited, 
               required String titleWhenEdition, 
               required Set<String> keywordsWhenEdition,
-              required DTOCAForm dtoForEdition, 
+              required Object dtoForEdition, 
               required String fileNameWithoutExtensionWhenEdition 
             }) {}, 
             dashboardFilteringByKeywordsKey: null,
