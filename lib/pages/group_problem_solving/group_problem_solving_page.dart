@@ -77,8 +77,8 @@ class GPSPageState extends State<GPSPage>
   void didUpdateWidget(covariant GPSPage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("GPSPage: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSPage: didUpdateWidget");
   }
 
   @override
@@ -86,8 +86,8 @@ class GPSPageState extends State<GPSPage>
   {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("GPSPage");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSPage");
     
     _getRuntimeData();
   }  

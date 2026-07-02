@@ -109,8 +109,8 @@ class DashboardPageState extends State<DashboardPage>
   void didUpdateWidget(covariant DashboardPage oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("DashboardPage: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("DashboardPage: didUpdateWidget");
   }
 
   // Previous session data retrieval; _sessionsMetadataAll and _sessionsMetadataFiltered are initialized
@@ -119,8 +119,8 @@ class DashboardPageState extends State<DashboardPage>
   {
     super.initState();
     
-    pu.printdLine();
-    pu.printd("DashboardPage");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("DashboardPage");
 
     _sessionsMetadataAll = [];
     _sessionsMetadataFiltered = [];

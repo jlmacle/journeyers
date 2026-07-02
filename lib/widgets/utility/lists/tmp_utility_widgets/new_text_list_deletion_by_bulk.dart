@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
@@ -68,8 +69,8 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
   void initState() {
     super.initState();
         
-    pu.printdLine();
-    pu.printd("NewTextListDeletionByBulk");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("NewTextListDeletionByBulk");
   }
   
   @override

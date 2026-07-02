@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/app_themes.dart';
+import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
@@ -22,8 +23,8 @@ class _GPSChecklistState extends State<GPSChecklist> {
   void initState() {
     super.initState();
             
-    pu.printdLine();
-    pu.printd("GPSChecklist");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSChecklist");
   }
 
   @override

@@ -122,8 +122,8 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   void initState() {
     super.initState();
     
-    pu.printdLine();
-    pu.printd("ListOfListsItem");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("ListOfListsItem");
 
     List<Map<String, dynamic>> subItemsDataList =
     ((widget.listMetadata[subItemsDataListKey]) as List)

@@ -96,9 +96,9 @@ class TextFieldUtils
       (fileName) => fileName.contains(fileExtension)
     ).toList();
 
-    if (textFieldDebugging) pu.printd("Text Field: currentListOfStoredFileNames for extension $fileExtension: $currentListOfStoredFileNames");
+    if (textFieldDebug) pu.printd("Text Field: currentListOfStoredFileNames for extension $fileExtension: $currentListOfStoredFileNames");
     var valueWithExtension = "$value$fileExtension";
-    if (textFieldDebugging) pu.printd("Text Field: valueWithExtension: $valueWithExtension");
+    if (textFieldDebug) pu.printd("Text Field: valueWithExtension: $valueWithExtension");
     return currentListOfStoredFileNames.contains(valueWithExtension);
   }
 

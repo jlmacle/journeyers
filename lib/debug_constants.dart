@@ -6,12 +6,11 @@ const runtimeDataDebug = false;
 const preloadingDebug = false;
 const previewBuildingDebug = false;
 const sessionDataDebug = false;
-const testingDebug = false;
-const textFieldDebugging = false;
+const testingDebug = true;
+const textFieldDebug = false;
+const widgetSequenceDebug = false;
 
-// Modifiable for file saving/reading reasons
-// Modified in setups
-bool runningTests = true;
+// To intercept the way the date is saved
 int dateIndex = 0;
 const constDatesList = [
                         "January 30, 2026 10:25 AM",

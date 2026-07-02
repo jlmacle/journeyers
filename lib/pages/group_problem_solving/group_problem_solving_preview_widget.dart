@@ -51,8 +51,8 @@ class _GPSPreviewState
   void initState() {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("GPSPreview");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSPreview");
     
     if (editDebug) pu.printd("Editing: GPSPreview: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}");
     
@@ -169,8 +169,8 @@ class _GPSPreviewState
 
   @override
   void didUpdateWidget(covariant GPSPreview oldWidget) {
-    pu.printdLine();
-    pu.printd("GPSPreview: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSPreview: didUpdateWidget");
     
     if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
     if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");

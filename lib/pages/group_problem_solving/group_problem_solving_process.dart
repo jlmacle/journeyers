@@ -258,16 +258,16 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
   void didUpdateWidget(covariant GPSProcess oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("GPSProcess: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSProcess: didUpdateWidget");
   }
 
   @override
   void initState() {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("GPSProcess");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSProcess");
 
      _loadAllCAMetadata();
     _getApplicationFolderPath();

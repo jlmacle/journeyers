@@ -42,8 +42,8 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   void initState() {
     super.initState();
                     
-    pu.printdLine();
-    pu.printd("GPSIdeasList");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("GPSIdeasList");
     
     _ideasEnteredList = widget.ideas;
   }

@@ -77,16 +77,16 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
   void didUpdateWidget(covariant SessionFileNameOnMobilePlatforms oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    pu.printdLine();
-    pu.printd("SessionFileNameOnMobilePlatforms: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("SessionFileNameOnMobilePlatforms: didUpdateWidget");
   }
 
   @override
   void initState() {
     super.initState();
 
-    pu.printdLine();
-    pu.printd("SessionFileNameOnMobilePlatforms");
+    if (widgetSequenceDebug) pu.printdLine();
+    if (widgetSequenceDebug) pu.printd("SessionFileNameOnMobilePlatforms");
 
     if (sessionDataDebug) pu.printd("Session Data: file extension: ${widget.fileExtension}");
     _getApplicationFolderPath();
