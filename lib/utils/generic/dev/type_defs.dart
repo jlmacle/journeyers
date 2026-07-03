@@ -27,8 +27,8 @@ typedef FutureVoidCallback =
 Future<void> Function();
 
 /// {@category Utils - Project-specific}
-/// A typedef for an onEditSessionDataCallbackFunction.
-typedef OnEditSessionDataCallbackFunctionType = 
+/// A typedef for an onRetrievedSessionDataCallback.
+typedef OnRetrievedSessionDataBeforeEditionCallbackFunctionType = 
 void Function
 ({
     required String dashboardContext,

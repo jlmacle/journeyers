@@ -65,7 +65,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                                       (
                                         dashboardContext: '', 
                                         onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
-                                        onEditSessionDataCallbackFunction: 
+                                        onRetrievedSessionDataBeforeEditionCallbackFunction: 
                                         ({
                                           required String dashboardContext,
                                           required bool isSessionDataBeingEdited, 

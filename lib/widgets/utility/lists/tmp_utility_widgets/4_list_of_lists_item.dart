@@ -36,8 +36,8 @@ class ListOfListsItem extends StatefulWidget
   // A callback function called when editing the session data.
   final VoidCallback onEditPressedCallbackFunction;
 
-  /// A callback function called when session data is edited.
-  final OnEditSessionDataCallbackFunctionType onEditSessionDataCallbackFunction;
+  /// A callback function called when session data is retrieved before edition.
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
   final FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction;
@@ -60,7 +60,7 @@ class ListOfListsItem extends StatefulWidget
     required this.onCheckboxChangedCallbackFunction,
     required this.onEditTitleCallbackFunction,
     required this.onEditPressedCallbackFunction,
-    required this.onEditSessionDataCallbackFunction,
+    required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onParticipantsUpdatedCallbackFunction,
     required this.onParticipantsLoadedCallbackFunction,

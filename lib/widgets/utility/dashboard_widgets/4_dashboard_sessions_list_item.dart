@@ -53,8 +53,8 @@ class SessionsListItem extends StatefulWidget
   // A callback function called when editing the session data.
   final VoidCallback onEditPressedCallbackFunction;
 
-  /// A callback function called when session data is edited.
-  final OnEditSessionDataCallbackFunctionType onEditSessionDataCallbackFunction;
+  /// A callback function called when session data is retrieved before edition.
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
   final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
@@ -71,7 +71,7 @@ class SessionsListItem extends StatefulWidget
     required this.onCheckboxChangedCallbackFunction,
     required this.onEditTitleCallbackFunction,
     required this.onEditPressedCallbackFunction,
-    required this.onEditSessionDataCallbackFunction,
+    required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onDeleteCallbackFunction,
   });
@@ -446,7 +446,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         (
                           dashboardContext: DashboardUtils.caContext,
                           filePath: sessionMetadata[DashboardUtils.keyFilePath], 
-                          onEditCASessionDataCallbackFunction: widget.onEditSessionDataCallbackFunction
+                          onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
                         );
                         // Closes the modal preview overlay
                         Navigator.of(context).pop();
@@ -454,7 +454,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       else if (widget.dashboardContext == DashboardUtils.gpsContext) 
                       {
                         // Retrieving the ideas
-                        _ideasList = await retrieveGPSIdeas(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                        _ideasList = await retrieveGPSIdeas(sessionMetadata[DashboardUtils.keyFilePath], widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
                         _ideasListBeforeEditionCopy = List.from(_ideasList);
                       
                         // Opening the edition overlay and waiting for it to close

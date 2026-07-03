@@ -38,7 +38,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -79,7 +79,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -112,7 +112,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -145,7 +145,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -177,7 +177,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -213,7 +213,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -250,7 +250,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -323,7 +323,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
@@ -361,7 +361,7 @@ void main() {
                 onCheckboxChangedCallbackFunction: (_) {},
                 onEditTitleCallbackFunction: () {},
                 onEditPressedCallbackFunction: () {},
-                onEditSessionDataCallbackFunction: 
+                onRetrievedSessionDataBeforeEditionCallbackFunction: 
                 ({
                   required String dashboardContext,
                   required bool isSessionDataBeingEdited, 
