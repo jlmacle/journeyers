@@ -18,6 +18,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -26,17 +27,37 @@ import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.d
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_desktop_platforms.dart';
 import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
 
-// TODO: to clean
+// TODO: transition to dto use to finish
 /// {@category Group problem-solving}
 /// The process for a group problem-solving.
 class GPSProcess extends StatefulWidget 
 {
+  /// A boolean used to state if an edition is in progress.
+  final bool isSessionDataBeingEdited;
+
+  /// The title value at edition time.
+  final String titleWhenEdition;
+
+  /// The keywords value at edition time.
+  final Set<String> keywordsWhenEdition;
+
+  /// A DTOGPSForm instance used at edition time.
+  final DTOGPSForm? dtoGPSFormWhenEdition;
+
+  /// The file name value (without extension) at edition time.
+  final String fileNameWithoutExtensionWhenEdition;
+
   /// A callback function called after the end of the process, and used to pass from new session process to dashboard.
   final VoidCallback parentCallbackFunctionToRefreshTheGPSPage;
 
   const GPSProcess
   ({
     super.key,
+    this.isSessionDataBeingEdited = false,
+    this.titleWhenEdition = "",
+    this.keywordsWhenEdition = const {},
+    required this.dtoGPSFormWhenEdition, 
+    this.fileNameWithoutExtensionWhenEdition = "",
     required this.parentCallbackFunctionToRefreshTheGPSPage
   });
 

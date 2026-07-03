@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/utility/dashboard_page.dart';
 import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
@@ -27,17 +27,30 @@ class GPSPage extends StatefulWidget
 
 class GPSPageState extends State<GPSPage> 
 {
+  // ─── EDITION related data ───────────────────────────────────────
+  // Value for the title at edition time
+  String _titleWhenEdition = "";
+  // Values for the keywords at edition time
+  Set<String> _keywordsWhenEdition = {};
+  // Values for the GPS Form at edition time
+  DTOGPSForm? _dtoGPSFormWhenEdition;
+  // Value for the file name (without extension) at edition time 
+  String _fileNameWithoutExtensionWhenEdition = "";
+
+  // if an edition is in progress
+  bool _isSessionDataBeingEdited = false;
+
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
   bool _runtimeDataLoading = true;
-  bool? _gpsWasSessionDataSaved;
+  bool? _gpsSessionDataSaved;
 
   _getRuntimeData() async 
   {
     if (runtimeDataDebug) pu.printd("Runtime Data: _getRuntimeData()");
-    _gpsWasSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
+    _gpsSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
     setState(() {_runtimeDataLoading = false;});
-    if (runtimeDataDebug) pu.printd("Runtime Data: _wasGPSSessionDataSaved: $_gpsWasSessionDataSaved");
+    if (runtimeDataDebug) pu.printd("Runtime Data: _gpsSessionDataSaved: $_gpsSessionDataSaved");
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
@@ -47,7 +60,7 @@ class GPSPageState extends State<GPSPage>
   void _gpsOnSessionDataSaved() 
   {
     setState(() {
-      _gpsWasSessionDataSaved = true;
+      _gpsSessionDataSaved = true;
     });
   }
 
@@ -59,7 +72,35 @@ class GPSPageState extends State<GPSPage>
     if (sessionDataDebug) pu.printd("Session Data: GPS page: onAllSessionFilesDeleted");
 
     setState(() {
-      _gpsWasSessionDataSaved = false;
+      _gpsSessionDataSaved = false;
+    });
+  }
+
+  // ─── METHODS USED TO EDIT SESSION DATA ───────────────────────────────────────
+
+  // Method used to edit a session data
+  void _onEditSessionData
+  ({
+    required String dashboardContext,
+    required bool isSessionDataBeingEdited, 
+    required String titleWhenEdition, 
+    required Set<String> keywordsWhenEdition,
+    required DTOGPSForm? dtoGPSFormWhenEdition, 
+    required String fileNameWithoutExtensionWhenEdition,
+  })
+  {
+    if (editDebug) pu.printd("Editing: GPSPage: onEditSessionData");
+
+    setState(() {
+      // To have the GPSProcess widget loaded with the values to edit
+      _gpsSessionDataSaved = false;
+
+      // Loading the GPSProcess with the values to edit
+      _isSessionDataBeingEdited = isSessionDataBeingEdited;
+      _titleWhenEdition  = titleWhenEdition;
+      _keywordsWhenEdition = keywordsWhenEdition;
+      _dtoGPSFormWhenEdition = dtoGPSFormWhenEdition;
+      _fileNameWithoutExtensionWhenEdition = fileNameWithoutExtensionWhenEdition;
     });
   }
   
@@ -111,14 +152,16 @@ class GPSPageState extends State<GPSPage>
           else ...
           [
             // Checking if group problem-solving session data has been stored
-            if (_gpsWasSessionDataSaved!) ...
+            if (_gpsSessionDataSaved!) ...
             [
               // If so, a screen-wide rectangle, with an invite to start a new group problem-solving
               NewProcessButton
               ( 
                 dashboardContext: DashboardUtils.gpsContext, 
                 buttonText: "Please click to start\na new group problem-solving session.",
-                onNewProcessButtonPressedCAPageCallbackFunction: () {setState(() { _gpsWasSessionDataSaved = false;});},
+                onNewProcessButtonPressedCAPageCallbackFunction: 
+                () 
+                {setState(() { _gpsSessionDataSaved = false;});},
               ),
               
               // and the session data dashboard in the remaining space
@@ -140,8 +183,16 @@ class GPSPageState extends State<GPSPage>
                     required Set<String> keywordsWhenEdition,
                     required Object dtoForEdition, 
                     required String fileNameWithoutExtensionWhenEdition
-                  }) {},                 
-                  
+                  }) 
+                    => _onEditSessionData
+                    (
+                      dashboardContext: DashboardUtils.caContext,
+                      isSessionDataBeingEdited: true, 
+                      titleWhenEdition: titleWhenEdition, 
+                      keywordsWhenEdition: keywordsWhenEdition,
+                      dtoGPSFormWhenEdition: dtoForEdition as DTOGPSForm, 
+                      fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition
+                    )                  
                 )
               ),
             ]
@@ -157,7 +208,16 @@ class GPSPageState extends State<GPSPage>
                 Focus
                 (
                   focusNode: _gpsProcessFocusNode,
-                  child: GPSProcess(key: gpsProcessKey, parentCallbackFunctionToRefreshTheGPSPage: _gpsOnSessionDataSaved),
+                  child: GPSProcess
+                  (
+                    key: gpsProcessKey,
+                    isSessionDataBeingEdited: _isSessionDataBeingEdited, 
+                    titleWhenEdition: _titleWhenEdition, 
+                    keywordsWhenEdition:  _keywordsWhenEdition, 
+                    dtoGPSFormWhenEdition: _dtoGPSFormWhenEdition, 
+                    fileNameWithoutExtensionWhenEdition: _fileNameWithoutExtensionWhenEdition, 
+                    parentCallbackFunctionToRefreshTheGPSPage: _gpsOnSessionDataSaved
+                  ),
                 ),
               ),
             )

@@ -19,7 +19,8 @@ void main()
         home: Scaffold(
           body: GPSProcess
           (
-            parentCallbackFunctionToRefreshTheGPSPage: () {},
+            dtoGPSFormWhenEdition: null,
+            parentCallbackFunctionToRefreshTheGPSPage: () {}, 
           ),
         ),
       ),
