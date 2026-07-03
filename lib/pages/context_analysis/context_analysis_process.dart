@@ -32,7 +32,7 @@ class CAProcess extends StatefulWidget
   /// A boolean used to state if an edition is in progress.
   final bool isSessionDataBeingEdited;
 
-  /// A DTOCAForm instance used at initState time.
+  /// A DTOCAForm instance used at edition time.
   final DTOCAForm? dtoCAFormWhenEdition;
 
   /// The file name value at edition time.
