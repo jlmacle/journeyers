@@ -401,7 +401,7 @@ class DashboardPageState extends State<DashboardPage>
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {
-                              editGPSSessionData(filePath, widget.onEditSessionDataCallbackFunction);
+                              retrieveGPSIdeas(filePath, widget.onEditSessionDataCallbackFunction);
                             }
                             else 
                             {
