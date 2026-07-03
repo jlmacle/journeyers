@@ -41,7 +41,7 @@ class CAProcess extends StatefulWidget
   /// A DTOCAForm instance used at edition time.
   final DTOCAForm? dtoCAFormWhenEdition;
 
-  /// The file name value at edition time.
+  /// The file name value (without extension) at edition time.
   final String fileNameWithoutExtensionWhenEdition;
 
   /// A callback function called to refresh the context analysis page after the process.
