@@ -191,7 +191,7 @@ class CAProcessState extends State<CAProcess>
     // Retrieving the application folder
     _getApplicationFolderPath(); 
 
-    // (code to clean)
+    // Todo: code to clean
     _loadDTO(dtoAssetPathToJson: '');
     //_loadDTO(dtoAssetPathToJson: 'assets/caFormPreLoading/context_analysis_form_data_for_preloading.json');      
     analysisKeywords = widget.keywordsWhenEdition.toSet();
