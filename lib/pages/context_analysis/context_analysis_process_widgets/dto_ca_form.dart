@@ -671,6 +671,7 @@ class DTOCAForm
 
   // ─── fromCSV CONSTRUCTOR and helper methods ───────────────────────────────────────────────────────
 
+// todo: to modify to use a file path.
 /// Populates a [DTOCAForm] from a CSV string.
 ///
 /// The CSV format pairs the individual perspective (cols 0–1) with the
