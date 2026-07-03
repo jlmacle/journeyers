@@ -426,7 +426,7 @@ class _CAPreviewState extends State<CAPreview>
         csvLines = LineSplitter.split(content).toList();
       }
       on Exception
-      catch(e) {pu.printd("Preview Building: Exception: CA on Android: $e"); }
+      catch(e, s) {pu.printd("Preview Building: Exception: CA on Android: $e: $s"); }
     }
     else if (Platform.isIOS)
     {
@@ -444,7 +444,7 @@ class _CAPreviewState extends State<CAPreview>
         csvLines = LineSplitter.split(content).toList();
       }
       on Exception
-      catch(e) {pu.printd("Preview Building: Exception: CA on iOS: $e"); }
+      catch(e, s) {pu.printd("Preview Building: Exception: CA on iOS: $e: $s"); }
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {

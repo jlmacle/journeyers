@@ -45,7 +45,7 @@ Future<void> editCASessionData
         }
       }
       on Exception
-      catch(e) {pu.printd("Editing: Exception: CA on Android:$filePath: $e"); }
+      catch(e, s) {pu.printd("Editing: Exception: CA on Android:$filePath: $e: $s"); }
     }
     else if (Platform.isIOS)
     {
@@ -62,7 +62,7 @@ Future<void> editCASessionData
         }
       }
       on Exception
-      catch(e) {pu.printd("Editing: Exception: CA on iOS: $e"); }
+      catch(e, s) {pu.printd("Editing: Exception: CA on iOS: $e: $s"); }
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
@@ -112,13 +112,13 @@ Future<void> editCASessionData
 
 
 // Method used to edit group problem-solving session data
-Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
+Future<List<String>> retrieveGPSIdeas(String filePath, OnEditSessionDataCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
 
     // Getting the title
     List<dynamic> sessionsMetadataAll  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
-    if (editDebug) pu.printd("Editing: sessionsMetadataAll : $sessionsMetadataAll");
+    if (editDebug) pu.printd("Editing: retrieveGPSIdeas: sessionsMetadataAll : $sessionsMetadataAll");
     var sessionToEditMetadata = sessionsMetadataAll.where((session) => session[DashboardUtils.keyFilePath] == filePath).first as Map<String,dynamic>;
-    if (editDebug) pu.printd("Editing: sessionToEditMetadata : $sessionToEditMetadata");
+    if (editDebug) pu.printd("Editing: retrieveGPSIdeas: sessionToEditMetadata : $sessionToEditMetadata");
     
     var title = sessionToEditMetadata[DashboardUtils.keyTitle];
 
@@ -128,7 +128,7 @@ Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallba
 
     if (Platform.isAndroid)
     {      
-      if (editDebug) pu.printd("Editing: editGPSSessionData on Android");
+      if (editDebug) pu.printd("Editing: retrieveGPSIdeas on Android");
       try
       {
         // Outside of testing: reading file using SAF
@@ -136,16 +136,16 @@ Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallba
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("Testing Debug: editGPSSessionData: Reading $fileNameWithExtension from tmp folder");
+          if (testingDebug) pu.printd("Testing Debug: Editing: retrieveGPSIdeas: Reading $fileNameWithExtension from tmp folder");
           content = await File(filePath).readAsString();
         }
       }
       on Exception
-      catch(e) {pu.printd("Editing: Exception: GPS on Android: $e"); }
+      catch(e, s) {pu.printd("Dashboard helper functions: retrieveGPSIdeas: Exception: GPS on Android: $e: $s"); }
     }
     else if (Platform.isIOS)
     {
-      if (editDebug) pu.printd("Editing: editGPSSessionData on iOS");
+      if (editDebug) pu.printd("Editing: retrieveGPSIdeas on iOS");
       try
       {
         // Outside of testing
@@ -153,19 +153,19 @@ Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallba
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("Editing: editGPSSessionData: Reading $fileNameWithExtension from tmp folder");
+          if (testingDebug) pu.printd("Testing Debug: Editing: retrieveGPSIdeas: Reading $fileNameWithExtension from tmp folder");
           content = await File(filePath).readAsString();
         }
       }
       on Exception
-      catch(e) {pu.printd("Editing: Exception: CA on iOS: $e"); }
+      catch(e, s) {pu.printd("Dashboard helper functions: retrieveGPSIdeas: Exception: GPS on iOS: $e: $s"); }
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
       // Checking if the CSV file exists
-      File csvFile = File(filePath);
-      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
-      content = csvFile.readAsStringSync();
+      File txtFile = File(filePath);
+      if (!txtFile.existsSync()) throw Exception("Dashboard helper functions: retrieveGPSIdeas: The TXT file doesn't exist: $filePath (${Platform.operatingSystem})");
+      content = txtFile.readAsStringSync();
     }
 
     var txtLines = LineSplitter.split(content).toList();
@@ -180,9 +180,9 @@ Future<List<String>> editGPSSessionData(String filePath, OnEditSessionDataCallba
             .toList();        
       }
 
-    if (editDebug) pu.printd("Editing: editGPSSessionData: original ideas: $ideas");
-    if (editDebug) pu.printd("Editing: editGPSSessionData: original fileNameWithoutExtension: $fileNameWithoutExtension");
-    if (editDebug) pu.printd("Editing: editGPSSessionData: original title: $title");
+    if (editDebug) pu.printd("Editing: retrieveGPSIdeas: original ideas: $ideas");
+    if (editDebug) pu.printd("Editing: retrieveGPSIdeas: original fileNameWithoutExtension: $fileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: retrieveGPSIdeas: original title: $title");
     
     return ideas;
   }

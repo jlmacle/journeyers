@@ -21,10 +21,9 @@ Future<List<dynamic>> sortSessionByDateAddJm
 
         return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
       }
-      catch(e, stacktrace)
+      catch(e, s)
       {
-        pu.printd("sortSessionByDateAddJm: exception: $e");  
-        pu.printd("sortSessionByDateAddJm: exception: $stacktrace");       
+        pu.printd("sortSessionByDateAddJm: exception: $e: $s");      
       }  
       return 0;    
     });

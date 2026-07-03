@@ -100,7 +100,7 @@ class _GPSPreviewState
           txtLines = LineSplitter.split(content).toList();
         }
         on Exception
-        catch(e) {pu.printd("Preview Building: Exception: GPS: on Android: $e");}
+        catch(e, s) {pu.printd("Preview Building: Exception: GPS: on Android: $e: $s");}
       }
       else if (Platform.isIOS)
       {
@@ -119,7 +119,7 @@ class _GPSPreviewState
           txtLines = LineSplitter.split(content).toList();
         }
         on Exception
-        catch(e) {pu.printd("Preview Building: Exception: GPS: on iOS: $e");}
+        catch(e, s) {pu.printd("Preview Building: Exception: GPS: on iOS: $e: $s");}
       }
       else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
       {

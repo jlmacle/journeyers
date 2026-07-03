@@ -454,7 +454,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       else if (widget.dashboardContext == DashboardUtils.gpsContext) 
                       {
                         // Retrieving the ideas
-                        _ideasList = await editGPSSessionData(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
+                        _ideasList = await retrieveGPSIdeas(sessionMetadata[DashboardUtils.keyFilePath], widget.onEditSessionDataCallbackFunction);
                         _ideasListBeforeEditionCopy = List.from(_ideasList);
                       
                         // Opening the edition overlay and waiting for it to close
