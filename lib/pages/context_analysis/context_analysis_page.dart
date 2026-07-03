@@ -37,7 +37,7 @@ class CAPageState extends State<CAPage>
   // ─── EDITION related data ───────────────────────────────────────
   // Values for the CA Form at edition time
   DTOCAForm? _dtoCAFormWhenEdition;
-  // Value for the file name at edition time 
+  // Value for the file name (without extension) at edition time 
   String _fileNameWithoutExtensionWhenEdition = "";
   // Value for the title at edition time
   String _titleWhenEdition = "";
