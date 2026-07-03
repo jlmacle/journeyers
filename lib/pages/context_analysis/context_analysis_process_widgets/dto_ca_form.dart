@@ -881,10 +881,6 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
   // ─── PRINTING/SAVING METHODS ───────────────────────────────────────
 
 /// Prints all DTO field values to the console for debugging purposes.
-///
-/// Uses [pu.printd] to remain consistent with the rest of the classes.
-/// Output is wrapped in a visible banner so it is easy to locate in
-/// the log stream.
 void printToConsole() {
   pu.printd('─── DTOCAForm ──────────────────────────────────────────────');
 
