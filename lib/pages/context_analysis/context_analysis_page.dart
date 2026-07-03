@@ -284,7 +284,7 @@ class CAPageState extends State<CAPage>
                     dtoCAFormWhenEdition: _dtoCAFormWhenEdition, 
                     fileNameWithoutExtensionWhenEdition: _fileNameWithoutExtensionWhenEdition, 
                     titleWhenEdition: _titleWhenEdition, 
-                    keywordsWhenEdition:  _keywordsWhenEdition , 
+                    keywordsWhenEdition:  _keywordsWhenEdition, 
                     caPageCallbackFunctionToRefreshThePage: _onDataSaved, 
                     caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: widget.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems
                   ),
