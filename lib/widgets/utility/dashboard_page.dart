@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
@@ -425,18 +424,25 @@ class DashboardPageState extends State<DashboardPage>
                               widget.onEditSessionDataCallbackFunction
                               ( 
                                 dashboardContext: DashboardUtils.caContext,
-                                dtoForEdition: dtoForEdition, 
-                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 
+                                isSessionDataBeingEdited: isSessionDataBeingEdited,
                                 titleWhenEdition: titleWhenEdition, 
                                 keywordsWhenEdition: keywordsWhenEdition, 
-                                isSessionDataBeingEdited: isSessionDataBeingEdited
+                                dtoForEdition: dtoForEdition,                                
+                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,                       
                               );
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
-                            {
-                              editGPSSessionData(filePath, widget.onEditSessionDataCallbackFunction);
-                            }
-                            
+                            {                              
+                              widget.onEditSessionDataCallbackFunction
+                              ( 
+                                dashboardContext: DashboardUtils.gpsContext,
+                                isSessionDataBeingEdited: isSessionDataBeingEdited,
+                                titleWhenEdition: titleWhenEdition, 
+                                keywordsWhenEdition: keywordsWhenEdition, 
+                                dtoForEdition: dtoForEdition, 
+                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition
+                              );
+                            }                            
                           },
                           onKeywordsUpdatedCallbackFunction: _keywordsUpdate,
                           onDeleteCallbackFunction: () async => await _sessionSelectedDelete(filePath),
