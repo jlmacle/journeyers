@@ -160,9 +160,9 @@ class CAPageState extends State<CAPage>
 
       // Loading the CA Process with the values to edit
       _isSessionDataBeingEdited = isSessionDataBeingEdited;
-      _dtoCAFormWhenEdition = dtoCAFormWhenEdition;      
       _titleWhenEdition  = titleWhenEdition;
       _keywordsWhenEdition = keywordsWhenEdition;
+      _dtoCAFormWhenEdition = dtoCAFormWhenEdition;
       _fileNameWithoutExtensionWhenEdition = fileNameWithoutExtensionWhenEdition;
     });
   }
