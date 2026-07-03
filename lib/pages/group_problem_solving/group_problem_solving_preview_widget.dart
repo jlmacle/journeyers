@@ -147,7 +147,7 @@ class _GPSPreviewState
         _dataDateString = txtLines[2].replaceFirst("Date: ", "");
         
         // Ideas start after the "---" separator (index 3 onwards)
-        // We strip the "1. ", "2. " numbering prefix
+        // Numbering prefixes "1. ", "2. " are stripped
         _dataIdeas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
