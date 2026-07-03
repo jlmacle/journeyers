@@ -392,7 +392,7 @@ class DashboardPageState extends State<DashboardPage>
                           {
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              editCASessionData
+                              retrieveCASessionData
                               (
                                 dashboardContext: DashboardUtils.caContext,
                                 filePath: filePath, 

@@ -442,7 +442,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       if (widget.dashboardContext == DashboardUtils.caContext) 
                       {                
                         // Starts the session data editing
-                        editCASessionData
+                        retrieveCASessionData
                         (
                           dashboardContext: DashboardUtils.caContext,
                           filePath: sessionMetadata[DashboardUtils.keyFilePath], 
