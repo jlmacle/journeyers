@@ -34,8 +34,8 @@ class DashboardPage extends StatefulWidget
   /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
-  /// A callback function called when session data is edited.
-  final OnEditSessionDataCallbackFunctionType onEditSessionDataCallbackFunction;
+  /// A callback function called when session data is retrieved before edition.
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
   final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
@@ -45,7 +45,7 @@ class DashboardPage extends StatefulWidget
     super.key,
     required this.dashboardContext,
     required this.onAllSessionFilesDeletedContextPageCallbackFunction,
-    required this.onEditSessionDataCallbackFunction,
+    required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.dashboardFilteringByKeywordsKey
   });
 
@@ -396,12 +396,12 @@ class DashboardPageState extends State<DashboardPage>
                               (
                                 dashboardContext: DashboardUtils.caContext,
                                 filePath: filePath, 
-                                onEditCASessionDataCallbackFunction: widget.onEditSessionDataCallbackFunction
+                                onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
                               );
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {
-                              retrieveGPSIdeas(filePath, widget.onEditSessionDataCallbackFunction);
+                              retrieveGPSIdeas(filePath, widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
                             }
                             else 
                             {
@@ -409,7 +409,7 @@ class DashboardPageState extends State<DashboardPage>
                             }
 
                            },
-                          onEditSessionDataCallbackFunction: 
+                          onRetrievedSessionDataBeforeEditionCallbackFunction: 
                           ({
                             required String dashboardContext,
                             required bool isSessionDataBeingEdited,
@@ -421,7 +421,7 @@ class DashboardPageState extends State<DashboardPage>
                           { 
                             if (widget.dashboardContext == DashboardUtils.caContext)
                             {
-                              widget.onEditSessionDataCallbackFunction
+                              widget.onRetrievedSessionDataBeforeEditionCallbackFunction
                               ( 
                                 dashboardContext: DashboardUtils.caContext,
                                 isSessionDataBeingEdited: isSessionDataBeingEdited,
@@ -433,7 +433,7 @@ class DashboardPageState extends State<DashboardPage>
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {                              
-                              widget.onEditSessionDataCallbackFunction
+                              widget.onRetrievedSessionDataBeforeEditionCallbackFunction
                               ( 
                                 dashboardContext: DashboardUtils.gpsContext,
                                 isSessionDataBeingEdited: isSessionDataBeingEdited,

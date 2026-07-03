@@ -43,7 +43,7 @@ void main() {
             dashboardContext: '', 
             onAllSessionFilesDeletedContextPageCallbackFunction: () {}, 
             onParticipantsLoadedCallbackFunction: (_) {}, 
-            onEditSessionDataCallbackFunction: 
+            onRetrievedSessionDataBeforeEditionCallbackFunction: 
             ({
               required String dashboardContext,
               required bool isSessionDataBeingEdited, 

@@ -242,7 +242,7 @@ class CAPageState extends State<CAPage>
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
-                  onEditSessionDataCallbackFunction: 
+                  onRetrievedSessionDataBeforeEditionCallbackFunction: 
                   ({
                     required String dashboardContext,
                     required isSessionDataBeingEdited, 

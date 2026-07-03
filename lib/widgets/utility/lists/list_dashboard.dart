@@ -27,8 +27,8 @@ class ListDashboard extends StatefulWidget
   /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
-  /// A callback function called when session data is edited.
-  final OnEditSessionDataCallbackFunctionType onEditSessionDataCallbackFunction;
+  /// A callback function called when session data is retrieved before edition.
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
@@ -41,7 +41,7 @@ class ListDashboard extends StatefulWidget
     super.key,
     required this.dashboardContext,
     required this.onAllSessionFilesDeletedContextPageCallbackFunction,
-    required this.onEditSessionDataCallbackFunction,
+    required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onParticipantsLoadedCallbackFunction,
     required this.dashboardFilteringByKeywordsKey
   });
@@ -423,7 +423,7 @@ class ListDashboardState extends State<ListDashboard>
                             index
                           ),
                           onEditPressedCallbackFunction: () {},
-                          onEditSessionDataCallbackFunction: 
+                          onRetrievedSessionDataBeforeEditionCallbackFunction: 
                           ({
                             required String dashboardContext,
                             required bool isSessionDataBeingEdited, 

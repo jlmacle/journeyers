@@ -175,7 +175,7 @@ class GPSPageState extends State<GPSPage>
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyGPS,
                   onAllSessionFilesDeletedContextPageCallbackFunction: gpsOnAllSessionsDataDeleted,
                   // Code to clean
-                  onEditSessionDataCallbackFunction: 
+                  onRetrievedSessionDataBeforeEditionCallbackFunction: 
                   ({
                     required String dashboardContext,
                     required bool isSessionDataBeingEdited, 

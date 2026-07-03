@@ -12,11 +12,11 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
 // Method used to edit context analysis session data
-Future<void> editCASessionData
+Future<void> retrieveCASessionData
 ({
   required String dashboardContext,
   required String filePath, 
-  required OnEditSessionDataCallbackFunctionType onEditCASessionDataCallbackFunction
+  required OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedCASessionDataBeforeEditionCallbackFunction
 }) async {
     // to clean
     String csvContent = "";
@@ -32,7 +32,7 @@ Future<void> editCASessionData
     // Getting the CSV content
     if (Platform.isAndroid)
     {      
-      if (editDebug) pu.printd("Editing: editCASessionData on Android");
+      if (editDebug) pu.printd("Editing: retrieveCASessionData on Android");
       try
       {
         // Outside of testing: reading file using SAF
@@ -40,16 +40,16 @@ Future<void> editCASessionData
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("Testing Debug: editCASessionData: Reading $fileNameWithExtension from tmp folder");
+          if (testingDebug) pu.printd("Testing Debug: retrieveCASessionData: Reading $fileNameWithExtension from tmp folder");
           csvContent = await File(filePath).readAsString();
         }
       }
       on Exception
-      catch(e, s) {pu.printd("Editing: Exception: CA on Android:$filePath: $e: $s"); }
+      catch(e, s) {pu.printd("Editing: retrieveCASessionData: Exception: CA on Android:$filePath: $e: $s"); }
     }
     else if (Platform.isIOS)
     {
-      if (editDebug) pu.printd("Editing: editCASessionData on iOS");
+      if (editDebug) pu.printd("Editing: retrieveCASessionData on iOS");
       try
       {
         // Outside of testing
@@ -57,19 +57,19 @@ Future<void> editCASessionData
         // While testing
         else 
         { 
-          if (testingDebug) pu.printd("Editing: editCASessionData: Reading $fileNameWithExtension from tmp folder");
+          if (testingDebug) pu.printd("Editing: retrieveCASessionData: Reading $fileNameWithExtension from tmp folder");
           csvContent = await File(filePath).readAsString();
         }
       }
       on Exception
-      catch(e, s) {pu.printd("Editing: Exception: CA on iOS: $e: $s"); }
+      catch(e, s) {pu.printd("Editing: retrieveCASessionData: Exception: CA on iOS: $e: $s"); }
     }
     else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
     {
-      if (editDebug) pu.printd("Editing: editCASessionData on desktop");
+      if (editDebug) pu.printd("Editing: retrieveCASessionData on desktop");
       // Checking if the CSV file exists
       File csvFile = File(filePath);
-      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
+      if (!csvFile.existsSync()) throw Exception("Editing: retrieveCASessionData: The CSV file doesn't exist: $filePath (${Platform.operatingSystem})");
       csvContent = await csvFile.readAsString();
     }
 
@@ -81,24 +81,23 @@ Future<void> editCASessionData
 
     // Deleting the previous file and metadata
     await deleteFile(filePath: filePath);
-    if (editDebug) pu.printd("Editing: editCASessionData: sessionDataRetrieved (before file deletion): $sessionDataRetrieved");
+    if (editDebug) pu.printd("Editing: retrieveCASessionData: sessionDataRetrieved (before file deletion): $sessionDataRetrieved");
     sessionDataRetrieved.removeWhere
     (
       (session) => (session[DashboardUtils.keyFilePath]).contains(filePath)
     );
-    if (editDebug) pu.printd("Editing: editCASessionData: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
+    if (editDebug) pu.printd("Editing: retrieveCASessionData: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
     // Saving the updated metadata
     await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, sessionsMetadataAll: sessionDataRetrieved);
 
-    if (editDebug) pu.printd("Editing: editCASessionData: title: $title");
-    if (editDebug) pu.printd("Editing: editCASessionData: keywordsForEdition: $keywordsForEdition");
-    if (editDebug) pu.printd("Editing: editCASessionData: dtoForEdition: ");
+    if (editDebug) pu.printd("Editing: retrieveCASessionData: title: $title");
+    if (editDebug) pu.printd("Editing: retrieveCASessionData: keywordsForEdition: $keywordsForEdition");
+    if (editDebug) pu.printd("Editing: retrieveCASessionData: dtoForEdition: ");
     if (editDebug) dtoForEdition.printToConsole();
-    if (editDebug) pu.printd("Editing: editCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
-
+    if (editDebug) pu.printd("Editing: retrieveCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
 
     // Need to re-build the dashboard page    
-    onEditCASessionDataCallbackFunction
+    onRetrievedCASessionDataBeforeEditionCallbackFunction
     (
       dashboardContext: dashboardContext,
       isSessionDataBeingEdited: true, 
@@ -112,7 +111,7 @@ Future<void> editCASessionData
 
 
 // Method used to edit group problem-solving session data
-Future<List<String>> retrieveGPSIdeas(String filePath, OnEditSessionDataCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
+Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBeforeEditionCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
 
     // Getting the title
     List<dynamic> sessionsMetadataAll  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
