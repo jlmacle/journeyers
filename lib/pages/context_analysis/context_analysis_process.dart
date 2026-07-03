@@ -32,17 +32,17 @@ class CAProcess extends StatefulWidget
   /// A boolean used to state if an edition is in progress.
   final bool isSessionDataBeingEdited;
 
-  /// A DTOCAForm instance used at edition time.
-  final DTOCAForm? dtoCAFormWhenEdition;
-
-  /// The file name value at edition time.
-  final String fileNameWithoutExtensionWhenEdition;
-
   /// The title value at edition time.
   final String titleWhenEdition;
 
   /// The keywords value at edition time.
   final Set<String> keywordsWhenEdition;
+
+  /// A DTOCAForm instance used at edition time.
+  final DTOCAForm? dtoCAFormWhenEdition;
+
+  /// The file name value at edition time.
+  final String fileNameWithoutExtensionWhenEdition;
 
   /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback caPageCallbackFunctionToRefreshThePage;
@@ -53,10 +53,10 @@ class CAProcess extends StatefulWidget
   const CAProcess({
     super.key,
     this.isSessionDataBeingEdited = false,
-    this.dtoCAFormWhenEdition,
-    this.fileNameWithoutExtensionWhenEdition = "",
     this.titleWhenEdition = "",
     this.keywordsWhenEdition = const {},
+    this.dtoCAFormWhenEdition,
+    this.fileNameWithoutExtensionWhenEdition = "",
     required this.caPageCallbackFunctionToRefreshThePage,
     required this.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems
     });
