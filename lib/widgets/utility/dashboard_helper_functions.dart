@@ -11,7 +11,7 @@ import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 
 
-// Method used to edit context analysis session data
+// Method used to retrieve context analysis session data before edition
 Future<void> retrieveCASessionData
 ({
   required String dashboardContext,
@@ -96,7 +96,7 @@ Future<void> retrieveCASessionData
     if (editDebug) dtoForEdition.printToConsole();
     if (editDebug) pu.printd("Editing: retrieveCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
 
-    // Need to re-build the dashboard page    
+    // CA page re-build 
     onRetrievedCASessionDataBeforeEditionCallbackFunction
     (
       dashboardContext: dashboardContext,
@@ -108,7 +108,6 @@ Future<void> retrieveCASessionData
     );
 
   }
-
 
 // Method used to edit group problem-solving session data
 Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBeforeEditionCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {
@@ -186,7 +185,7 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
     return ideas;
   }
 
-  
+
 Future<void> deleteFile({required String filePath}) async
 {
   String fileNameWithExtension = path.basename(filePath);
