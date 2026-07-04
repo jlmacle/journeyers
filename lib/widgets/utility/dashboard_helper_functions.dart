@@ -20,7 +20,7 @@ Future<void> retrieveCASessionData
 }) async {
     // to clean
     String csvContent = "";
-    String fileNameWithExtension = filePath.split('/').last;
+    String fileNameWithExtension = path.basename(filePath);
     String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
 
     // Getting the title
@@ -121,7 +121,7 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
     var title = sessionToEditMetadata[DashboardUtils.keyTitle];
 
     var content = "";
-    String fileNameWithExtension = filePath.split('/').last;
+    String fileNameWithExtension = path.basename(filePath);
     String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
 
     if (Platform.isAndroid)
