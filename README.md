@@ -18,6 +18,7 @@ Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Pub
 as part of the app development growth process.<br>
 <br>
 Adapting the software to a different set of questions is feasible, and is planned to be made easier.<br>
+Also, this is free and unencumbered software <a href="https://github.com/jlmacle/journeyers/blob/main/LICENSE"> released into the public domain</a>.<br>
 <br>
 <a href="https://github.com/jlmacle/journeyers/wiki">More notes on the wiki</a><br>
 <br>
