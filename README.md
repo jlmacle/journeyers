@@ -11,6 +11,7 @@ is meant to support our group problem-solving processes, and to help us reach la
 
 An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
+Issues might remain with some features.<br>
 Please note that the code needs cleaning.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
 <br>
@@ -42,7 +43,6 @@ https://lnkd.in/ee8hFarp
 <a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">Context analysis: preview video.</a><br>
 <a href="https://github.com/jlmacle/journeyers_releases/blob/main/video-Group_problem-solving.mp4">Group problem-solving: preview video.</a><br>
 <br> (Click on the "Download raw file" icon to download the video.)
-<br><em>The "Edit" and "Sharing" features are not yet implemented. Issues might remain with the other features</em>.<br>
 <br><br>
 <p align="center">
 <img src="https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png" width="400">
