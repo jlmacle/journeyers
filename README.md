@@ -9,12 +9,10 @@ and with a goal of being multilingual, accessible, and offline-friendly), <br>
 is meant to support our group problem-solving processes, and to help us reach lasting solutions.<br>
 <br>
 
-The dashboard supports previewing, sorting by title/date, keyword filtering and deletion.<br>
-(<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
 An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
-At the time of writing, more features are planned, <br>
-and additional effort needs to be done for the accessibility.<br>
+Additional effort needs to be done for the accessibility.<br>
 Please note that the code needs cleaning.<br>
+(<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
 <br>
 Developing at "<a href="https://www.digitalpublicgoods.net/standard">Digital Public Goods</a>" level is planned, <br>
 as part of the app development growth process.<br>
