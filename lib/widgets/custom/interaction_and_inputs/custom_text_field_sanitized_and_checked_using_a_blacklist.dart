@@ -1,12 +1,16 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+import 'package:path/path.dart' as path;
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
@@ -16,8 +20,16 @@ import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 /// and prevents the value from being submitted, in any of the functions returns true.
 class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget 
 {
-  /// A boolean used to state if the title is autofocused.
-  final bool autofocus;
+  /// A boolean used to override blacklist check temporarily 
+  /// (e.g. if a file name has been pre-loaded for a session data edition, 
+  /// to be able to save data using the same file name).
+  final bool isBlacklistingToBeOverridenTemporarily;
+
+  /// A boolean used to state if an existent file name is being pre-loaded.
+  final bool isExistentFileNamePreLoaded;
+
+  /// A boolean used to state if the text field is autofocused.
+  final bool textFieldAutofocused;
 
   /// The start value for the text field.
   final String textFieldStartValue;
@@ -67,10 +79,15 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// The context of the text field (nullable, potentially context analysis or group problem-solving).
   final String? textFieldContext;
 
+  /// A parameter used for different reasons, e.g. to pass a file path related to a file name being loaded.
+  final Object? versatileParameterIsEmptyStringByDefault;
+
   const TextFieldSanitizedAndCheckedUsingABlackList
   ({
     super.key,
-    this.autofocus = false,
+    this.isBlacklistingToBeOverridenTemporarily = false,
+    this.isExistentFileNamePreLoaded = false,
+    this.textFieldAutofocused = false,
     required this.textFieldStartValue,
     required this.textFieldStyle,
     required this.textFieldHint,
@@ -86,7 +103,8 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.additionalOnSubmittedInstructions = placeHolderFunctionString,
     required this.stringSanitizerBundlesErrorsMapping,
     required this.blacklistingFunctionsErrorsMapping,
-    this.textFieldContext
+    this.textFieldContext,
+    this.versatileParameterIsEmptyStringByDefault = ""
     
   });
 
@@ -114,7 +132,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   final GlobalKey _errorMessageKeyGeneric = GlobalKey(debugLabel: 'generic-file-name-error-msg');
   late GlobalKey _errorMessageKey;
   
-  TextEditingController _tfec = .new();
+  final TextEditingController _tfec = .new();
   String _errorMessage = "";
   Timer? _stringSanitizedErrorTimer;
   // A field used to store if sanitizing was done
@@ -354,25 +372,111 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     await _userInputSanitizing(newValue);
 
     // Checking if the text is part of a blacklist
-    await _userInputBlacklistCheck(newValue);
+    if (!widget.isBlacklistingToBeOverridenTemporarily) await _userInputBlacklistCheck(newValue);
 
     // Additional onChanged instructions 
     widget.additionalOnChangedInstructions(newValue);
   }
 
   // Method used for the onSubmitted named parameter
-  _onTextFieldValueSubmitted(String newValue)
+  _onTextFieldValueSubmitted
+  ({
+    required String newValue, 
+    required String filePathWhenEdition, 
+  }) async
   {
     // Additional onSubmitted instructions (before potentially saving data and exiting the process page)
     widget.additionalOnSubmittedInstructions(newValue);
 
-    if (textFieldDebug) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ");
+    if (textFieldDebug) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ");
+    
     // Data submission if not blocked
     if (!_submitIsBlocked) {
+      
+      // Deleting the existing file with the same file name if this is for an edition   
+      if (filePathWhenEdition != "")
+      {
+        List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.caContext);
+      
+        // Deleting the previous file 
+        await deleteFile(filePath: filePathWhenEdition);
+        if (editDebug) pu.printd("Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (before file deletion): $sessionDataRetrieved");
+        
+        // Deleting the metadata
+        sessionDataRetrieved.removeWhere
+        (
+          (session) => (session[DashboardUtils.keyFilePath]).contains(filePathWhenEdition)
+        );
+        if (editDebug) pu.printd("Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
+        
+        // Saving the updated metadata
+        await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, sessionsMetadataAll: sessionDataRetrieved);
+      }
+
+      // onTextFieldValueSubmittedCallbackFunction 
       widget.onTextFieldValueSubmittedCallbackFunction(newValue);
     }
     
   }
+
+// todo: code to move
+Future<void> deleteFile({required String filePath}) async
+{
+  String fileNameWithExtension = path.basename(filePath);
+  String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+
+  if (editDebug) pu.printd("Editing: deleteFile: filePath: $filePath");
+  if (editDebug) pu.printd("Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension");
+  if (editDebug) pu.printd("Editing: deleteFile: fileNameWithoutExtension: $fileNameWithoutExtension");
+
+  // Removing existing file and metadata before saving
+  try 
+  {
+      String? folderPath = await rtdu.getApplicationFolderPath();
+      filePath = "$folderPath/$fileNameWithExtension";
+      var fileExtension = ".csv";
+
+      // On Android
+      if (Platform.isAndroid) 
+      {
+        if (!isInTestEnvironment) {
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+        }
+        else {
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+        }
+      } 
+
+      // On iOS
+      else if (Platform.isIOS) 
+      {
+        if (!isInTestEnvironment) {
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+           }
+        else {
+          var applicationFolderPath = await rtdu.getApplicationFolderPath();
+          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+          await fu.deleteFile(filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+        }
+      } 
+      // On desktop
+      else 
+      {
+        await fu.deleteFile(filePath);
+        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);     
+      }    
+  } catch (e) {
+    pu.printd("Delete Error: $e");
+  }  
+
+}
+
 
   @override
   Widget build(BuildContext context) 
@@ -394,7 +498,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     }
     return TextField
     (
-      autofocus: widget.autofocus,
+      autofocus: widget.textFieldAutofocused,
       controller: _tfec,
       focusNode: _focusNode,
       keyboardType: TextInputType.text,
@@ -432,7 +536,18 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
           errorMaxLines: 3
       ),
       onChanged: _onTextFieldValueChanged,
-      onSubmitted: (!_submitIsBlocked) ? (value) => _onTextFieldValueSubmitted(value) : null,  
+      onSubmitted: 
+        (!_submitIsBlocked) 
+          ? (value) async 
+          {
+            
+            await _onTextFieldValueSubmitted
+                    (
+                      filePathWhenEdition: widget.versatileParameterIsEmptyStringByDefault as String, 
+                      newValue:value
+                    ) ;
+          }
+          : null,  
       // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
       onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
     );

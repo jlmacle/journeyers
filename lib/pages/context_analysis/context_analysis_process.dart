@@ -44,6 +44,9 @@ class CAProcess extends StatefulWidget
   /// The file name value (without extension) at edition time.
   final String fileNameWithoutExtensionWhenEdition;
 
+  /// The file path at edition time.
+  final String filePathWhenEdition;
+
   /// A callback function called to refresh the context analysis page after the process.
   final VoidCallback caPageCallbackFunctionToRefreshThePage;
 
@@ -57,6 +60,7 @@ class CAProcess extends StatefulWidget
     this.keywordsWhenEdition = const {},
     this.dtoCAFormWhenEdition,
     this.fileNameWithoutExtensionWhenEdition = "",
+    this.filePathWhenEdition = "",
     required this.caPageCallbackFunctionToRefreshThePage,
     required this.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems
     });
@@ -315,10 +319,13 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameOnMobilePlatforms
                         (
+                          isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
+                          isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
                           fileNameWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
                           fileExtension: _fileExtension, 
                           onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
+                          versatileParameter: widget.filePathWhenEdition                          
                         )
                         // Saving file for desktop platforms
                         : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)

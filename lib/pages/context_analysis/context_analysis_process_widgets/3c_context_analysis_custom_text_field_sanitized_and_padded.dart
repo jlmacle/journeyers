@@ -119,7 +119,7 @@ class _CATextFieldSanitizedAndPaddedState extends State<CATextFieldSanitizedAndP
       child: 
       TextFieldSanitizedAndCheckedUsingABlackList
       (
-        autofocus: widget.autofocus,
+        textFieldAutofocused: widget.autofocus,
         key: _textFieldBeforeErrorMessageKey,
         stringSanitizerBundlesErrorsMapping: widget.stringSanitizerBundlesErrorsMap,
         textFieldStartValue: widget.textFieldStartValue,
