@@ -9,7 +9,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
 
-
+// todo: code to clean
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling a list data.
@@ -45,6 +45,10 @@ class ListOfListsItem extends StatefulWidget
   /// A callback function called when the participants are updated.
   final FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction;
 
+  /// A callback function called when the list is updated.
+  final OnListNameUpdatedCallbackFunctionType  onListNameUpdatedCallbackFunction;
+ 
+
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
 
@@ -62,6 +66,7 @@ class ListOfListsItem extends StatefulWidget
     required this.onEditPressedCallbackFunction,
     required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
+    required this.onListNameUpdatedCallbackFunction,
     required this.onParticipantsUpdatedCallbackFunction,
     required this.onParticipantsLoadedCallbackFunction,
     required this.onDeleteCallbackFunction,
@@ -75,6 +80,8 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 {
   final _listsDB = ListsDB();
   List<String> _participantsCurrent = [];
+  String _listNameCurrent = "";
+  final TextEditingController _listNameEditTfec = .new();
   final TextEditingController _participantsEditTfec = .new();
   final TextEditingController _kwsEditTfec = .new();
   
@@ -96,6 +103,19 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     if (!mounted) return;
     Navigator.of(context).pop();
   }
+
+  // To clean
+  Future<void> _onListNameUpdated({required String? listKey, required Map<String, dynamic> listData}) async
+  {
+    if (listDebug) pu.printd("List Debug: ListOfListsItem: _onListNameUpdated");
+
+    // Calling the parent callback for state 
+    await widget.onListNameUpdatedCallbackFunction(listKey: listKey!, listData: listData);
+
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
 
   // To clean
   Future<void> _onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
@@ -136,6 +156,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   @override void dispose() 
   {
     _kwsEditTfec.dispose();
+    _listNameEditTfec.dispose();
     _participantsEditTfec.dispose();
     super.dispose();
   }
@@ -196,7 +217,17 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                         children: [
                           // For the edition of the list label
                           GestureDetector(
-                            onTap: widget.onEditListNameCallbackFunction,
+                            onTap: () => _showListNameEditSheet
+                                (
+                                  context: context,
+                                  dashboardContext: widget.dashboardContext,                          
+                                  currentListName: displayTitle,
+                                  listKey: widget.listMetadata[itemKey],
+                                  listNameEditTec: _participantsEditTfec,
+                                  onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
+                                  onListNameUpdated: _onListNameUpdated,
+                                  listData: widget.listMetadata
+                                ),
                             child: Text(
                               displayTitle,
                               // todo: to clean
@@ -400,7 +431,6 @@ void _showKeywordsEditSheet
 
 }
 
-
 void _showParticipantsEditSheet({
   required BuildContext context,
   required String dashboardContext,
@@ -459,6 +489,88 @@ void _showParticipantsEditSheet({
                     labelText: participantsTextFieldLabel,
                     labelStyle: const TextStyle(color: Colors.black),
                     hintText: 'Please enter the participants.',
+                    errorText: errorText,
+                  ),
+                  onSubmitted: (_) async => await onConfirm(),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () async => await onConfirm(),
+                  child: const Text(saveButtonLabel, style: TextStyle(color: Colors.black)),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        },
+      );
+    },
+  );
+}
+
+void _showListNameEditSheet({
+  required BuildContext context,
+  required String dashboardContext,
+  required String currentListName,
+  required String? listKey,
+  required TextEditingController listNameEditTec,
+  required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
+  required FunctionStringAndMapStringDynamic onListNameUpdated,
+  required Map<String, dynamic> listData,
+}) {
+  listNameEditTec.text = currentListName;
+
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    isScrollControlled: true,
+    builder: (context) {
+      String? errorText; 
+      // StatefulBuilder gives a local setState scoped to this sheet
+      return StatefulBuilder(
+        builder: (context, setState) {          
+
+          Future<void> onConfirm() async {
+            final updatedListName = listNameEditTec.text.trim();
+
+            if (updatedListName.isEmpty) {
+              setState(() {
+                errorText = emptyLabelEditError;
+              });
+              return;
+            }
+
+            setState(() {
+              // Clearing error on valid input
+              errorText = null; 
+            });
+
+            // Updating the list label
+            listData[itemTextKey] = updatedListName;
+
+            print("listData[itemTextKey]: ${listData[itemTextKey]}");
+
+            await onListNameUpdated(listKey: listKey, listData: listData);
+          }
+
+          return Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              left: 20,
+              right: 20,
+              top: 20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  key: const ValueKey('listNameEditField'),
+                  controller: listNameEditTec,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: participantsTextFieldLabel,
+                    labelStyle: const TextStyle(color: Colors.black),
+                    hintText: 'Please enter the new list name.',
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),
