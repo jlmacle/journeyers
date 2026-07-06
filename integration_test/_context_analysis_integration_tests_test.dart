@@ -1031,11 +1031,12 @@ Future<void> main() async {
 
 });
 
+    // todo: to finish/clean: from dashboard/preview
     group('Edition Tests: Mobile: \n', ()
     {
-      // 'Context analysis edition \n'
+      // 'Context analysis data edition \n'
       testWidgets(
-        'Context analysis edition \n',
+        'Context analysis data edition \n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
