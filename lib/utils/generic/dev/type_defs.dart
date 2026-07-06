@@ -39,3 +39,14 @@ void Function
     required String fileNameWithoutExtensionWhenEdition,
     required String filePathWhenEdition                                         
   });
+
+/// {@category Utils - Project-specific}
+/// A typedef for an onListNameUpdatedCallbackFunction.
+typedef OnListNameUpdatedCallbackFunctionType = 
+Future<void> Function
+({
+  required String? listKey,
+  required Map<String, dynamic> listData
+});
+
+

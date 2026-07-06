@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 
 import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
@@ -208,6 +207,40 @@ class ListDashboardState extends State<ListDashboard>
           const SnackBar(content: Text("Keywords updated successfully"))
         );
     });
+  }
+
+  // TODO: To clean
+  // Method used to update the list participants
+  Future<void> _updateListNameInDB(String listKey, Map<String, dynamic> listData) async 
+  {
+    // Updating the storage
+    await _listsDB.updateListData(listKey, listData);
+
+    // TODO: To clean/name modification
+    _keywordsRefreshAfterSessionDeletion();
+
+    // Updating the local UI state
+    setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("List name updated successfully"))
+        );
+    });
+  }
+
+  // Method used to update the list name
+  Future<void> _updateListName
+  ({
+    required String? listKey, 
+    required Map<String, dynamic> listData
+  }) async
+  {
+    if (listDebug) pu.printd("List debug: ListDashboard: _updateListName");
+    // To accomodate widget testing
+    if (listKey != null)
+    {
+      // Updating the DB
+      await _updateListNameInDB(listKey, listData);            
+    }    
   }
 
   // Method used after participants update
@@ -434,6 +467,7 @@ class ListDashboardState extends State<ListDashboard>
                             required String filePathWhenEdition
                           }) {},
                           onKeywordsUpdatedCallbackFunction: _updateListKeywords,
+                          onListNameUpdatedCallbackFunction: _updateListName,
                           onParticipantsUpdatedCallbackFunction: _updateParticipants,
                           onDeleteCallbackFunction: () async => await _selectedSessionDelete(listData[itemKey]),
                           onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
@@ -505,7 +539,7 @@ class ListDashboardState extends State<ListDashboard>
                   autofocus: true,
                   decoration: InputDecoration
                   (
-                    labelText: 'Edit Title', 
+                    labelText: 'Edit List Label', 
                     labelStyle: const TextStyle(color: Colors.black),
                     errorText: errorText,
                   ),

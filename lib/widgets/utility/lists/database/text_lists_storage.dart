@@ -20,7 +20,7 @@ import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class ListsDB {
-  static var _fileName = 'journeyers_gps_participants_groups_lists21.json';
+  static var _fileName = 'journeyers_gps_participants_groups_lists22a.json';
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
@@ -629,6 +629,23 @@ class ListsDB {
     var f = await _getFile();
     await f!.writeAsString(jsonEncode(data));
   }
+
+  // todo: to clean
+  /// Method used to add, or remove, one or several participants of the list.
+  Future<String> updateListName(String updatedListName, Map<String, dynamic> listData) async
+  {
+
+    if (listDebug) pu.printd("List debug: ListsDB: updateListName: updatedListName: $updatedListName");
+
+    var listLabel = listData[itemTextKey];
+    if (listDebug) pu.printd("List debug: ListsDB: updateListName (before): listLabel: $listLabel");
+
+    // listData[itemTextKey] = updatedListName;
+    
+    if (listDebug) pu.printd("List debug: ListsDB: updateListName (after): listLabel: $listLabel");
+    return listLabel;
+  }
+
 
   /// Method used to add, or remove, one or several participants of the list.
   Future<List<dynamic>> updateParticipants(Set<String> updatedParticipants, Map<String, dynamic> listData) async
