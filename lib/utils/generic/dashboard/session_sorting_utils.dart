@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
 
 /// {@category Utils - Generic}
 /// Method used to sort sessions by date

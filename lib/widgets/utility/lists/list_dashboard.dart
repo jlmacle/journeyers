@@ -7,8 +7,8 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/database/text_lists_storage.dart';
+import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/1_list_dashboard_title.dart';
@@ -417,7 +417,7 @@ class ListDashboardState extends State<ListDashboard>
                               }
                             });
                           },
-                          onEditListNameCallbackFunction: () => _showTitleEditSheet(
+                          onEditListNameCallbackFunction: () => _showListNameEditSheet(
                             listData[itemTextKey],
                             listData[itemKey],
                             index
@@ -451,7 +451,7 @@ class ListDashboardState extends State<ListDashboard>
   }
 
   
-  void _showTitleEditSheet(String title, String listKey, int listIndex) 
+  void _showListNameEditSheet(String title, String listKey, int listIndex) 
   {
     _titleTfec.text = title; // Syncing current title to the field
 
@@ -480,7 +480,10 @@ class ListDashboardState extends State<ListDashboard>
               setState(() {
                 // Clearing error on valid input
                 errorText = null; 
-              });            
+              });    
+
+              // To close the dialog
+              Navigator.of(context).pop();     
             }
 
           return Padding

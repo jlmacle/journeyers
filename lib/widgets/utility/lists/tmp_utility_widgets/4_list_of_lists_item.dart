@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage.dart';
+import 'package:journeyers/widgets/utility/lists/database/text_lists_storage.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
 
 
 /// {@category Utility widgets}
