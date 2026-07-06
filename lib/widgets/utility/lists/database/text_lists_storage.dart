@@ -5,9 +5,10 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/alphabet/alphabet_utils.dart';
+import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/project_specific/dev/sort_utils.dart';
-import 'package:journeyers/widgets/utility/lists/models/text_lists_storage_externalized_strings.dart';
+import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
 
 
 // new category to consider
@@ -33,7 +34,9 @@ class ListsDB {
       try
       {
         if (listDebug) pu.printd("List debug: ListsDB: _getFile: file DB not existant. File creation");
-        _fileName = "tmp_list_data.json";
+
+        if (isInTestEnvironment) _fileName = "tmp_list_data.json";
+
         file = File('${dir.path}/$_fileName');
         file.createSync();
         if (listDebug) pu.printd("List debug: ListsDB: _getFile: file created: ${file.path}");
@@ -55,6 +58,7 @@ class ListsDB {
     else
     {
       if (listDebug) pu.printd("List debug: ListsDB: _getFile: file DB exists");
+      if (listDebug) pu.printd("List debug: ListsDB: _getFile: file content: ${file.readAsStringSync()}");
     }
     return file;
   }
