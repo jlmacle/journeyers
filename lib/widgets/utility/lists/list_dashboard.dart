@@ -417,7 +417,7 @@ class ListDashboardState extends State<ListDashboard>
                               }
                             });
                           },
-                          onEditTitleCallbackFunction: () => _showTitleEditSheet(
+                          onEditListNameCallbackFunction: () => _showTitleEditSheet(
                             listData[itemTextKey],
                             listData[itemKey],
                             index
@@ -429,8 +429,9 @@ class ListDashboardState extends State<ListDashboard>
                             required bool isSessionDataBeingEdited, 
                             required String titleWhenEdition, 
                             required Set<String> keywordsWhenEdition,
-                            required Object dtoForEdition, 
-                            required String fileNameWithoutExtensionWhenEdition 
+                            required Object dtoWhenEdition, 
+                            required String fileNameWithoutExtensionWhenEdition,
+                            required String filePathWhenEdition
                           }) {},
                           onKeywordsUpdatedCallbackFunction: _updateListKeywords,
                           onParticipantsUpdatedCallbackFunction: _updateParticipants,

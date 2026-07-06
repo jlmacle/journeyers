@@ -47,6 +47,9 @@ class GPSProcess extends StatefulWidget
   /// The file name value (without extension) at edition time.
   final String fileNameWithoutExtensionWhenEdition;
 
+  /// The file path at edition time.
+  final String filePathWhenEdition;
+
   /// A callback function called after the end of the process, and used to pass from new session process to dashboard.
   final VoidCallback parentCallbackFunctionToRefreshTheGPSPage;
 
@@ -58,6 +61,7 @@ class GPSProcess extends StatefulWidget
     this.keywordsWhenEdition = const {},
     required this.dtoGPSFormWhenEdition, 
     this.fileNameWithoutExtensionWhenEdition = "",
+    this.filePathWhenEdition = "",
     required this.parentCallbackFunctionToRefreshTheGPSPage
   });
 
@@ -509,10 +513,13 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 // Defining file name and saving file for mobile platforms 
                 ? SessionFileNameOnMobilePlatforms
                 (
+                  isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
+                  isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
                   fileExtension: _fileExtension, 
                   fileNameWhenEdition: "",
                   onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value), 
                   parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
+                  versatileParameter: widget.filePathWhenEdition   
                 )
                 // Saving file for desktop platforms
                 : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata)

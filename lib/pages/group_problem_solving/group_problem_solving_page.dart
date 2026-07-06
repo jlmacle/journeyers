@@ -36,6 +36,8 @@ class GPSPageState extends State<GPSPage>
   DTOGPSForm? _dtoGPSFormWhenEdition;
   // Value for the file name (without extension) at edition time 
   String _fileNameWithoutExtensionWhenEdition = "";
+  // Value for the file path at edition time
+  String _filePathWhenEdition = "";
 
   // if an edition is in progress
   bool _isSessionDataBeingEdited = false;
@@ -87,6 +89,7 @@ class GPSPageState extends State<GPSPage>
     required Set<String> keywordsWhenEdition,
     required DTOGPSForm? dtoGPSFormWhenEdition, 
     required String fileNameWithoutExtensionWhenEdition,
+    required String filePathWhenEdition
   })
   {
     if (editDebug) pu.printd("Editing: GPSPage: onEditSessionData");
@@ -101,6 +104,7 @@ class GPSPageState extends State<GPSPage>
       _keywordsWhenEdition = keywordsWhenEdition;
       _dtoGPSFormWhenEdition = dtoGPSFormWhenEdition;
       _fileNameWithoutExtensionWhenEdition = fileNameWithoutExtensionWhenEdition;
+      _filePathWhenEdition = filePathWhenEdition;
     });
   }
   
@@ -181,8 +185,9 @@ class GPSPageState extends State<GPSPage>
                     required bool isSessionDataBeingEdited, 
                     required String titleWhenEdition, 
                     required Set<String> keywordsWhenEdition,
-                    required Object dtoForEdition, 
-                    required String fileNameWithoutExtensionWhenEdition
+                    required Object dtoWhenEdition, 
+                    required String fileNameWithoutExtensionWhenEdition,
+                    required String filePathWhenEdition
                   }) 
                     => _onEditSessionData
                     (
@@ -190,8 +195,9 @@ class GPSPageState extends State<GPSPage>
                       isSessionDataBeingEdited: true, 
                       titleWhenEdition: titleWhenEdition, 
                       keywordsWhenEdition: keywordsWhenEdition,
-                      dtoGPSFormWhenEdition: dtoForEdition as DTOGPSForm, 
-                      fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition
+                      dtoGPSFormWhenEdition: dtoWhenEdition as DTOGPSForm, 
+                      fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,
+                      filePathWhenEdition: filePathWhenEdition
                     )                  
                 )
               ),
@@ -216,6 +222,7 @@ class GPSPageState extends State<GPSPage>
                     keywordsWhenEdition:  _keywordsWhenEdition, 
                     dtoGPSFormWhenEdition: _dtoGPSFormWhenEdition, 
                     fileNameWithoutExtensionWhenEdition: _fileNameWithoutExtensionWhenEdition, 
+                    filePathWhenEdition: _filePathWhenEdition,
                     parentCallbackFunctionToRefreshTheGPSPage: _gpsOnSessionDataSaved
                   ),
                 ),

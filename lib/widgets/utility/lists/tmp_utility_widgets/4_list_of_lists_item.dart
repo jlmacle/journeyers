@@ -31,7 +31,7 @@ class ListOfListsItem extends StatefulWidget
   final ValueChanged<bool?> onCheckboxChangedCallbackFunction;
 
   /// A callback function called when the title is updated.
-  final VoidCallback onEditTitleCallbackFunction;
+  final VoidCallback onEditListNameCallbackFunction;
 
   // A callback function called when editing the session data.
   final VoidCallback onEditPressedCallbackFunction;
@@ -58,7 +58,7 @@ class ListOfListsItem extends StatefulWidget
     required this.isChecked,
     required this.dashboardContext,
     required this.onCheckboxChangedCallbackFunction,
-    required this.onEditTitleCallbackFunction,
+    required this.onEditListNameCallbackFunction,
     required this.onEditPressedCallbackFunction,
     required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
@@ -194,11 +194,12 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                         crossAxisAlignment: WrapCrossAlignment.center,
                         spacing: 8,
                         children: [
-                          // For the edition of the title
+                          // For the edition of the list label
                           GestureDetector(
-                            onTap: widget.onEditTitleCallbackFunction,
+                            onTap: widget.onEditListNameCallbackFunction,
                             child: Text(
                               displayTitle,
+                              // todo: to clean
                               key: ValueKey('session-title-${widget.listIndex}'),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),

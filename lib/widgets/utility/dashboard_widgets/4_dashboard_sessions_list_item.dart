@@ -445,7 +445,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         retrieveCASessionData
                         (
                           dashboardContext: DashboardUtils.caContext,
-                          filePath: sessionMetadata[DashboardUtils.keyFilePath], 
+                          filePathWhenEdition: sessionMetadata[DashboardUtils.keyFilePath], 
                           onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
                         );
                         // Closes the modal preview overlay

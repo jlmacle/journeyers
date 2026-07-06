@@ -18,10 +18,18 @@ import 'package:journeyers/widgets/utility/process_widgets/process_const_strings
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
 class SessionFileNameOnMobilePlatforms extends StatefulWidget 
 {
+  /// A boolean used to override blacklist check temporarily 
+  /// (e.g. if a file name has been pre-loaded for a session data edition, 
+  /// to be able to save data using the same file name).
+  final bool isBlacklistingToBeOverridenTemporarily;
+
+  /// A boolean used to state if an existent file name is being pre-loaded.
+  final bool isExistentFileNamePreLoaded;
+  
   /// A file name value used at editing time.
   final String fileNameWhenEdition;
 
-  /// The file extension when saving the session data ('.' included)
+  /// The file extension when saving the session data ('.' included).
   final String fileExtension;
 
   /// The callback function called when the file name is submitted.
@@ -30,13 +38,19 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
   /// A callback function called to save session data and metadata.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
 
+  /// A parameter used for different reasons, e.g. to pass a file path related to a file name being loaded.
+  final Object? versatileParameter;
+
   const SessionFileNameOnMobilePlatforms
   ({
     super.key,
+    this.isBlacklistingToBeOverridenTemporarily = false,
+    this.isExistentFileNamePreLoaded = false,
     required this.fileNameWhenEdition,
     required this.fileExtension,
     required this.onFileNameSubmittedProcessCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
+    this.versatileParameter
   });
 
   @override
@@ -107,10 +121,10 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
   Widget build(BuildContext context) {
     return 
     _applicationFolderPath == ""
+    // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
     ? ElevatedButton(
       onPressed: () async 
-      {
-        // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
+      {        
         String? result;
         if (Platform.isAndroid)
           {result = await _platformAndroid.invokeMethod('openDirectory');}
@@ -133,6 +147,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
         : labelFolderPickerAndroid
       ),
     )
+    // Text field used to enter the file name
     : TextFieldSanitizedAndCheckedUsingABlackList
     (
       textFieldStartValue: widget.fileNameWhenEdition,
@@ -156,7 +171,10 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV) 
         ? TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForCSVFileNames
         // otherwise .txt
-        : TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForTXTFileNames
+        : TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForTXTFileNames,
+      // for the file path
+      versatileParameterIsEmptyStringByDefault: widget.versatileParameter,
+      isExistentFileNamePreLoaded: widget.isExistentFileNamePreLoaded,
     );
   }
 }

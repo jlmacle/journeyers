@@ -44,8 +44,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition                                        
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition                               
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -85,8 +86,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -118,8 +120,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition                                        
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition                                        
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -151,8 +154,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition                                        
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition                                       
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -183,8 +187,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition 
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition 
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -219,8 +224,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition  
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -256,8 +262,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition 
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -329,8 +336,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition 
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},
@@ -367,8 +375,9 @@ void main() {
                   required bool isSessionDataBeingEdited, 
                   required String titleWhenEdition, 
                   required Set<String> keywordsWhenEdition,
-                  required Object dtoForEdition, 
-                  required String fileNameWithoutExtensionWhenEdition 
+                  required Object dtoWhenEdition, 
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition
                 }) {},
                 onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
                 onDeleteCallbackFunction: () {},

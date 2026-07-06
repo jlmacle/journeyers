@@ -395,7 +395,7 @@ class DashboardPageState extends State<DashboardPage>
                               retrieveCASessionData
                               (
                                 dashboardContext: DashboardUtils.caContext,
-                                filePath: filePath, 
+                                filePathWhenEdition: filePath, 
                                 onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
                               );
                             }
@@ -413,10 +413,11 @@ class DashboardPageState extends State<DashboardPage>
                           ({
                             required String dashboardContext,
                             required bool isSessionDataBeingEdited,
-                            required Object dtoForEdition,
+                            required Object dtoWhenEdition,
                             required String fileNameWithoutExtensionWhenEdition,
                             required String titleWhenEdition,
-                            required keywordsWhenEdition
+                            required Set<String> keywordsWhenEdition,
+                            required String filePathWhenEdition
                           }) 
                           { 
                             if (widget.dashboardContext == DashboardUtils.caContext)
@@ -427,8 +428,9 @@ class DashboardPageState extends State<DashboardPage>
                                 isSessionDataBeingEdited: isSessionDataBeingEdited,
                                 titleWhenEdition: titleWhenEdition, 
                                 keywordsWhenEdition: keywordsWhenEdition, 
-                                dtoForEdition: dtoForEdition,                                
-                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,                       
+                                dtoWhenEdition: dtoWhenEdition,                                
+                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 
+                                filePathWhenEdition: filePathWhenEdition              
                               );
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
@@ -439,8 +441,9 @@ class DashboardPageState extends State<DashboardPage>
                                 isSessionDataBeingEdited: isSessionDataBeingEdited,
                                 titleWhenEdition: titleWhenEdition, 
                                 keywordsWhenEdition: keywordsWhenEdition, 
-                                dtoForEdition: dtoForEdition, 
-                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition
+                                dtoWhenEdition: dtoWhenEdition, 
+                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,
+                                filePathWhenEdition: filePathWhenEdition 
                               );
                             }                            
                           },

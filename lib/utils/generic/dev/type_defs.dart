@@ -35,6 +35,7 @@ void Function
     required bool isSessionDataBeingEdited, 
     required String titleWhenEdition, 
     required Set<String> keywordsWhenEdition,
-    required Object dtoForEdition, 
-    required String fileNameWithoutExtensionWhenEdition                                        
+    required Object dtoWhenEdition, 
+    required String fileNameWithoutExtensionWhenEdition,
+    required String filePathWhenEdition                                         
   });
