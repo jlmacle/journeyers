@@ -258,6 +258,7 @@ ThemeData appTheme = ThemeData
   appBarTheme: const AppBarTheme
   (
     backgroundColor: navyBlue,
+    foregroundColor: appBarWhite,
     elevation: 0,
     // to avoid a tint (during a scroll up e.g.)
     surfaceTintColor: Colors.transparent,
