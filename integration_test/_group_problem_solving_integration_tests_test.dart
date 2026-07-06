@@ -637,12 +637,13 @@ Future<void> main() async {
       );
     });
 
-    group('Edition Tests: Mobile: \n', ()
+    // todo: to finish/clean: from dashboard/preview    
+    group('Edition Tests: Preview: Mobile: \n', ()
     {
       
-      // 'Group problem-solving edition \n'
+      // 'Group problem-solving data edition \n'
       testWidgets(
-        'Group problem-solving edition \n',
+        'Group problem-solving data edition \n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1399,8 +1400,8 @@ Future<void> main() async {
 
       group('New Participants List Editing: \n', () 
       {
-        // 'Participants names can be edited'
-        testWidgets('Participants names can be edited', 
+        // 'Participants names can be edited (while building a new list)'
+        testWidgets('Participants names can be edited (while building a new list)', 
         (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
@@ -1464,8 +1465,8 @@ Future<void> main() async {
 
           });
         
-        // 'Participants names can be deleted'
-        testWidgets('Participants names can be deleted', 
+        // 'Participants names can be deleted (while building a new list)'
+        testWidgets('Participants names can be deleted (while building a new list)', 
         (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
