@@ -807,7 +807,7 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     }
 
 
-    String _readNotes() {
+    String readNotes() {
       if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
         i++;
         return _stripNoteQuotes(rows[i].$2);
@@ -816,34 +816,34 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     }
 
     if (content == qf.level3TitleGroupsProblematics) {
-      if (marker == 'X') dto.groupProblemsToSolveStr = _readNotes();
+      if (marker == 'X') dto.groupProblemsToSolveStr = readNotes();
     } else if (content == qf.level3TitleSameProblem) {
       if (marker == 'X') {
         final sel = readSelection();
         dto.groupSameProblemsToSolve.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupSameProblemsToSolve.text = _readNotes();
+        dto.groupSameProblemsToSolve.text = readNotes();
       }
     } else if (content == qf.level3TitleHarmonyAtHome) {
       if (marker == 'X') {
         final sel = readSelection();
         dto.groupHarmonyHome.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupHarmonyHome.text = _readNotes();
+        dto.groupHarmonyHome.text = readNotes();
       }
     } else if (content == qf.level3TitleAppreciabilityAtWork) {
       if (marker == 'X') {
         final sel = readSelection();
         dto.groupAppreciabilityAtWork.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupAppreciabilityAtWork.text = _readNotes();
+        dto.groupAppreciabilityAtWork.text = readNotes();
       }
     } else if (content == qf.level3TitleIncomeEarningAbility) {
       if (marker == 'X') {
         final sel = readSelection();
         dto.groupEarningAbility.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
-        dto.groupEarningAbility.text = _readNotes();
+        dto.groupEarningAbility.text = readNotes();
       }
     }
 
