@@ -792,7 +792,7 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
 
-    String _readSelection() {
+    String readSelection() {
       if (i + 1 < rows.length) {
         final nextContent = rows[i + 1].$2.trim();
         if (rows[i + 1].$1 == '' &&
@@ -819,28 +819,28 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
       if (marker == 'X') dto.groupProblemsToSolveStr = _readNotes();
     } else if (content == qf.level3TitleSameProblem) {
       if (marker == 'X') {
-        final sel = _readSelection();
+        final sel = readSelection();
         dto.groupSameProblemsToSolve.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
         dto.groupSameProblemsToSolve.text = _readNotes();
       }
     } else if (content == qf.level3TitleHarmonyAtHome) {
       if (marker == 'X') {
-        final sel = _readSelection();
+        final sel = readSelection();
         dto.groupHarmonyHome.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
         dto.groupHarmonyHome.text = _readNotes();
       }
     } else if (content == qf.level3TitleAppreciabilityAtWork) {
       if (marker == 'X') {
-        final sel = _readSelection();
+        final sel = readSelection();
         dto.groupAppreciabilityAtWork.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
         dto.groupAppreciabilityAtWork.text = _readNotes();
       }
     } else if (content == qf.level3TitleIncomeEarningAbility) {
       if (marker == 'X') {
-        final sel = _readSelection();
+        final sel = readSelection();
         dto.groupEarningAbility.selection =
             sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
         dto.groupEarningAbility.text = _readNotes();
