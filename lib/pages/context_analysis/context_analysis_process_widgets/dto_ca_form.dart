@@ -752,7 +752,7 @@ static void _parseIndividualFromRows(
     final (marker, content) = rows[i];
 
     
-    String _readNotes() {
+    String readNotes() {
       if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
         i++;
         return _stripNoteQuotes(rows[i].$2);
@@ -762,27 +762,27 @@ static void _parseIndividualFromRows(
 
     if (content == qf.level3TitleBalanceIssueItem1) {
       dto.indivBalanceStudiesHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceStudiesHousehold.text = _readNotes();
+      if (marker == 'X') dto.indivBalanceStudiesHousehold.text = readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem2) {
       dto.indivBalanceAccessingIncomeHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceAccessingIncomeHousehold.text = _readNotes();
+      if (marker == 'X') dto.indivBalanceAccessingIncomeHousehold.text = readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem3) {
       dto.indivBalanceEarningIncomeHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceEarningIncomeHousehold.text = _readNotes();
+      if (marker == 'X') dto.indivBalanceEarningIncomeHousehold.text = readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem4) {
       dto.indivBalanceHelpingOthersHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceHelpingOthersHousehold.text = _readNotes();
+      if (marker == 'X') dto.indivBalanceHelpingOthersHousehold.text = readNotes();
     } else if (content == qf.level3TitleWorkplaceIssueItem1) {
       dto.indivAtWorkMoreAppreciated.checked = marker == 'X';
-      if (marker == 'X') dto.indivAtWorkMoreAppreciated.text = _readNotes();
+      if (marker == 'X') dto.indivAtWorkMoreAppreciated.text = readNotes();
     } else if (content == qf.level3TitleWorkplaceIssueItem2) {
       dto.indivAtWorkRemainingAppreciated.checked = marker == 'X';
-      if (marker == 'X') dto.indivAtWorkRemainingAppreciated.text = _readNotes();
+      if (marker == 'X') dto.indivAtWorkRemainingAppreciated.text = readNotes();
     } else if (content == qf.level3TitleLegacyIssueItem1) {
       dto.indivBetterLegacies.checked = marker == 'X';
-      if (marker == 'X') dto.indivBetterLegacies.text = _readNotes();
+      if (marker == 'X') dto.indivBetterLegacies.text = readNotes();
     } else if (content == qf.level3TitleAnotherIssue) {
-      if (marker == 'X') dto.indivAnotherIssueStr = _readNotes();
+      if (marker == 'X') dto.indivAnotherIssueStr = readNotes();
     }
 
   }
