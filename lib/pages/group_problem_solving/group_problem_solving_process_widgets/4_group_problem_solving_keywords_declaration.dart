@@ -119,7 +119,6 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
         return Scaffold(
           appBar: AppBar(
             centerTitle: true, 
-            automaticallyImplyLeading : false,
             title: 
             const Padding
             (
