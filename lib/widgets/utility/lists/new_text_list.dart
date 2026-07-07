@@ -101,7 +101,6 @@ class _NewTextListState extends State<NewTextList> {
   final _editionTfec = TextEditingController();
 
   // Data related to deleting texts from the new list
-  List<String> _textsSelectedForDeletion = [];
   List<int> _textsSelectedForDeletionIndexes = [];
   bool _areSomeTextItemsForDeletion = false;  
 
