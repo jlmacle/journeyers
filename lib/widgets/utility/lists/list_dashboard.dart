@@ -313,24 +313,7 @@ class ListDashboardState extends State<ListDashboard>
     super.dispose();
   }
 
-  // Method used to update the session title
-  Future<void> _listLabelUpdate(String listKey, String newLabel, Map<String, dynamic> listData) async 
-  {
-    // Updating listData withe new label
-    listData[itemTextKey] = newLabel;
-
-    // Updating the storage
-    await _listsDB.updateListData(listKey, listData);
-
-    // Updating the local UI state
-    setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Label updated successfully"))
-        );
-    });
-  }
-
-    // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
+  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
   // Re-building of the widget
   void _updateState()
   {
