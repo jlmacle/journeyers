@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2a_dashboard_sorting_by_title.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2b_dashboard_sorting_by_date.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2a_dashboard_sorting_by_title.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2b_dashboard_sorting_by_date.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
 
 /// {@category Utility widgets}
 /// {@category Dashboard}

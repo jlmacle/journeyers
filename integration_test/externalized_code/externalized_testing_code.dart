@@ -17,12 +17,12 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process/new_process_button.dart';
+import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
   
 // Labels of the level 2 and 3 titles
 final q = CAQuestionsFields();
