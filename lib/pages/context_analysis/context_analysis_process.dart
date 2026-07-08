@@ -13,12 +13,13 @@ import 'package:journeyers/pages/context_analysis/context_analysis_process_widge
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
+import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
 import 'package:journeyers/widgets/custom/text/custom_heading.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process/session_file_name_on_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
 
 /// {@category Context analysis}
 /// The process for the context analyses.
@@ -321,11 +322,12 @@ class CAProcessState extends State<CAProcess>
                         (
                           isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
                           isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
-                          fileNameWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
+                          fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
                           fileExtension: _fileExtension, 
-                          onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value),
+                          onFileNameSubmittedProcessCallbackFunction: (value) => _analysisFileNameUpdate(value.trim()),
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata,
-                          versatileParameter: widget.filePathWhenEdition                          
+                          versatileParameter: widget.filePathWhenEdition,
+                          textFieldContext: DashboardUtils.caContext,                         
                         )
                         // Saving file for desktop platforms
                         : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)

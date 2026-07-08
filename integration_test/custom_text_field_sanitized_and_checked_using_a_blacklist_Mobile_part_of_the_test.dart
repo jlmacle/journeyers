@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/main.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
 
 void main() {
   // The file name is tested without the extension to avoid triggering the dot removal
