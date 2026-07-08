@@ -396,7 +396,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Deleting the existing file with the same file name if this is for an edition   
       if (filePathWhenEdition != "")
       {
-        List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.caContext);
+        List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: widget.textFieldContext!);
       
         // Deleting the previous file 
         await deleteFile(filePath: filePathWhenEdition);
