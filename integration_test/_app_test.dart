@@ -16,7 +16,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import 'package:journeyers/pages/homepage.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix;
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix;
 
 import 'externalized_code/externalized_testing_code.dart';
 

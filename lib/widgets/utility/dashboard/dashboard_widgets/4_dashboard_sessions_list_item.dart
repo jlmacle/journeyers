@@ -20,8 +20,8 @@ import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart';
 import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 
 // Used to store a temporary file path used for session data sharing.
@@ -453,17 +453,27 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       }
                       else if (widget.dashboardContext == DashboardUtils.gpsContext) 
                       {
-                        // Retrieving the ideas
-                        _ideasList = await retrieveGPSIdeas(sessionMetadata[DashboardUtils.keyFilePath], widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
-                        _ideasListBeforeEditionCopy = List.from(_ideasList);
-                      
-                        // Opening the edition overlay and waiting for it to close
-                        if (context.mounted)
-                        {
-                          await _showIdeasEditOverlay(context);                        
+                        retrieveGPSSessionData
+                        (
+                          dashboardContext: dashboardContext, 
+                          filePathWhenEdition: sessionMetadata[DashboardUtils.keyFilePath], 
+                          onRetrievedGPSSessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
+                        );
 
-                          setLocalState(() { });
-                        }
+                        // Closes the modal preview overlay
+                        Navigator.of(context).pop();
+                        
+                        // // Retrieving the ideas
+                        // _ideasList = await retrieveGPSIdeas(sessionMetadata[DashboardUtils.keyFilePath], widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
+                        // _ideasListBeforeEditionCopy = List.from(_ideasList);
+                      
+                        // // Opening the edition overlay and waiting for it to close
+                        // if (context.mounted)
+                        // {
+                        //   await _showIdeasEditOverlay(context);                        
+
+                        //   setLocalState(() { });
+                        // }
                         
                       }
                       else 

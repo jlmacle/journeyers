@@ -10,13 +10,13 @@ import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
 import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard_helper_functions.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/1_dashboard_title.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/1_dashboard_title.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 
 
 /// {@category Utility widgets}
@@ -401,7 +401,13 @@ class DashboardPageState extends State<DashboardPage>
                             }
                             else if (widget.dashboardContext == DashboardUtils.gpsContext)
                             {
-                              retrieveGPSIdeas(filePath, widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
+                              // retrieveGPSIdeas(filePath, widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
+                              retrieveGPSSessionData
+                              (
+                                dashboardContext: DashboardUtils.gpsContext,
+                                filePathWhenEdition: filePath, 
+                                onRetrievedGPSSessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
+                              );
                             }
                             else 
                             {

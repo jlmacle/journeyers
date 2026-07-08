@@ -5,6 +5,7 @@ import 'package:path/path.dart' as path;
 
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
+import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
@@ -84,7 +85,7 @@ Future<void> retrieveCASessionData
     if (editDebug) dtoWhenEdition.printToConsole();
     if (editDebug) pu.printd("Editing: retrieveCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
 
-    // CA page re-build with the loaded data
+    // CA process page re-build with the loaded data
     onRetrievedCASessionDataBeforeEditionCallbackFunction
     (
       dashboardContext: dashboardContext,
@@ -96,6 +97,93 @@ Future<void> retrieveCASessionData
       filePathWhenEdition: filePathWhenEdition
     );
   }
+
+// Method used to retrieve group problem-solving session data before edition
+Future<void> retrieveGPSSessionData
+({
+  required String dashboardContext,
+  required String filePathWhenEdition, 
+  required OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedGPSSessionDataBeforeEditionCallbackFunction
+}) async {
+    String txtContent = "";
+    String fileNameWithExtension = path.basename(filePathWhenEdition);
+    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+
+    // Getting the title
+    List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
+    var sessionToEdit = sessionDataRetrieved.where((session) => session[DashboardUtils.keyFilePath] == filePathWhenEdition).first as Map<String,dynamic>;
+    var titleWhenEdition = sessionToEdit[DashboardUtils.keyTitle];
+    List<String> keywordsWhenEdition = (sessionToEdit[DashboardUtils.keyKeywords] as List).cast<String>();
+
+    // Getting the TXT content
+    if (Platform.isAndroid)
+    {      
+      if (editDebug) pu.printd("Editing: retrieveGPSSessionData on Android");
+      try
+      {
+        // Outside of testing: reading file using SAF
+        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension);}
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("Testing Debug: retrieveGPSSessionData: Reading $fileNameWithExtension from tmp folder");
+          txtContent = await File(filePathWhenEdition).readAsString();
+        }
+      }
+      on Exception
+      catch(e, s) {pu.printd("Editing: retrieveGPSSessionData: Exception: GPS on Android:$filePathWhenEdition: $e: $s"); }
+    }
+    else if (Platform.isIOS)
+    {
+      if (editDebug) pu.printd("Editing: retrieveGPSSessionData on iOS");
+      try
+      {
+        // Outside of testing
+        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        // While testing
+        else 
+        { 
+          if (testingDebug) pu.printd("Editing: retrieveGPSSessionData: Reading $fileNameWithExtension from tmp folder");
+          txtContent = await File(filePathWhenEdition).readAsString();
+        }
+      }
+      on Exception
+      catch(e, s) {pu.printd("Editing: retrieveGPSSessionData: Exception: GPS on iOS: $e: $s"); }
+    }
+    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
+    {
+      if (editDebug) pu.printd("Editing: retrieveGPSSessionData on desktop");
+      // Checking if the TXT file exists
+      File txtFile = File(filePathWhenEdition);
+      if (!txtFile.existsSync()) throw Exception("Editing: retrieveGPSSessionData: The CSV file doesn't exist: $filePathWhenEdition (${Platform.operatingSystem})");
+      txtContent = await txtFile.readAsString();
+    }
+
+    // Loading the data from the TXT into a DTO
+    DTOGPSForm dtoWhenEdition = await DTOGPSForm.fromTXT(txtContent);
+    dtoWhenEdition.printToConsole();
+
+    Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();
+
+    if (editDebug) pu.printd("Editing: retrieveGPSSessionData: titleWhenEdition: $titleWhenEdition");
+    if (editDebug) pu.printd("Editing: retrieveGPSSessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
+    if (editDebug) pu.printd("Editing: retrieveGPSSessionData: dtoWhenEdition: ");
+    if (editDebug) dtoWhenEdition.printToConsole();
+    if (editDebug) pu.printd("Editing: retrieveGPSSessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
+
+    // GPS process page re-build with the loaded data
+    onRetrievedGPSSessionDataBeforeEditionCallbackFunction
+    (
+      dashboardContext: dashboardContext,
+      isSessionDataBeingEdited: true, 
+      dtoWhenEdition: dtoWhenEdition, 
+      fileNameWithoutExtensionWhenEdition: fileNameWithoutExtension, 
+      titleWhenEdition: titleWhenEdition, 
+      keywordsWhenEdition: keywordsSetWhenEdition,
+      filePathWhenEdition: filePathWhenEdition
+    );
+  }
+
 
 // Method used to edit group problem-solving session data
 Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBeforeEditionCallbackFunctionType onEditGPSSessionDataCallbackFunction) async {

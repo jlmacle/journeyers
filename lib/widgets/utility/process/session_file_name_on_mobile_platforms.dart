@@ -11,7 +11,7 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart' as tfu_gen;
 import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart';
-import 'package:journeyers/widgets/utility/process_widgets/process_const_strings.dart';
+import 'package:journeyers/widgets/utility/process/process_const_strings.dart';
 
 /// {@category Utility widgets}
 /// {@category Process}
@@ -25,9 +25,12 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
 
   /// A boolean used to state if an existent file name is being pre-loaded.
   final bool isExistentFileNamePreLoaded;
+
+  /// The context of the text field (nullable, potentially context analysis or group problem-solving).
+  final String? textFieldContext;
   
   /// A file name value used at editing time.
-  final String fileNameWhenEdition;
+  final String fileNameWithoutExtensionWhenEdition;
 
   /// The file extension when saving the session data ('.' included).
   final String fileExtension;
@@ -46,7 +49,8 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
     super.key,
     this.isBlacklistingToBeOverridenTemporarily = false,
     this.isExistentFileNamePreLoaded = false,
-    required this.fileNameWhenEdition,
+    this.textFieldContext,
+    required this.fileNameWithoutExtensionWhenEdition,
     required this.fileExtension,
     required this.onFileNameSubmittedProcessCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
@@ -106,8 +110,8 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
     _getApplicationFolderPath();
 
     // Edited file name value if relevant
-    if (editDebug) pu.printd("Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWhenEdition}");
-    _fileNameTfec.text = widget.fileNameWhenEdition;
+    if (editDebug) pu.printd("Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWithoutExtensionWhenEdition}");
+    _fileNameTfec.text = widget.fileNameWithoutExtensionWhenEdition;
   }
 
   @override
@@ -150,14 +154,15 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
     // Text field used to enter the file name
     : TextFieldSanitizedAndCheckedUsingABlackList
     (
-      textFieldStartValue: widget.fileNameWhenEdition,
+      textFieldStartValue: widget.fileNameWithoutExtensionWhenEdition,
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
       textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
       onTextFieldValueSubmittedCallbackFunction: (value) async
-      { widget.onFileNameSubmittedProcessCallbackFunction(value);
+      { 
+        widget.onFileNameSubmittedProcessCallbackFunction(value);
       
         if (value.isNotEmpty)
         { // Saving data 
@@ -175,6 +180,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       // for the file path
       versatileParameterIsEmptyStringByDefault: widget.versatileParameter,
       isExistentFileNamePreLoaded: widget.isExistentFileNamePreLoaded,
+      textFieldContext: widget.textFieldContext,
     );
   }
 }

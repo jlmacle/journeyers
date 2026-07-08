@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/widgets/utility/dashboard_page.dart';
-import 'package:journeyers/widgets/utility/process_widgets/new_process_button.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_page.dart';
+import 'package:journeyers/widgets/utility/process/new_process_button.dart';
 
 
 void main() 

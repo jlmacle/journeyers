@@ -548,8 +548,6 @@ void _showListNameEditSheet({
             // Updating the list label
             listData[itemTextKey] = updatedListName;
 
-            print("listData[itemTextKey]: ${listData[itemTextKey]}");
-
             await onListNameUpdated(listKey: listKey, listData: listData);
           }
 

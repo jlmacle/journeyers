@@ -9,6 +9,9 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// A widget used to declare keywords, or to retrieve keywords from previous context analyses.
 class GPSKeywordsDeclaration extends StatefulWidget 
 {
+  /// The keywords value at edition time.
+  final Set<String> keywordsWhenEdition;
+
   /// The keywords associated to the session data.
   final Set<String> currentKeywords;
 
@@ -18,6 +21,7 @@ class GPSKeywordsDeclaration extends StatefulWidget
   const GPSKeywordsDeclaration
   ({
     super.key,
+    this.keywordsWhenEdition = const {},
     required this.currentKeywords,
     required this.onKeywordsUpdatedCallbackFunction
   });
@@ -60,7 +64,15 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSKeywordsDeclaration");
 
-    _keywords = Set.from(widget.currentKeywords); // Syncs at start
+    if (widget.keywordsWhenEdition.isNotEmpty) 
+      { 
+        _keywords = widget.keywordsWhenEdition; 
+        if (editDebug) pu.printd("Editing: GPSKeywordsDeclaration: initState: widget.keywordsWhenEdition.isNotEmpty: _keywords: $_keywords");
+      }
+    else
+    { 
+      _keywords = Set.from(widget.currentKeywords); 
+    }
   }
 
   @override

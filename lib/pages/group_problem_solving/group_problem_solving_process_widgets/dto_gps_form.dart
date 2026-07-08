@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:core';
 
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
@@ -10,20 +11,21 @@ class DTOGPSForm
   DTOGPSForm();
 
   // ─── FIELDS ───────────────────────────────────────
-  var ideas = [];
+  List<String> ideas = [];
 
-  /// Populates a [DTOGPSForm] from a TXT string.
-  factory DTOGPSForm.fromTXT(String txtContent) {
+  /// Static method used to populates a [DTOGPSForm] from a TXT string.
+  static Future<DTOGPSForm> fromTXT(String txtContent) async 
+  {
     final dto = DTOGPSForm();
-
+    dto.ideas = await ideasFrom(LineSplitter.split(txtContent).toList());
     return dto;
   }
 
   // ─── HELPER FUNCTIONS ───────────────────────────────────────
 
   // todo: to modify to use a file path.
-  // Method used to return the list of ideas stored in the gps session data
-  Future<List<String>> ideasFrom(List<String> txtLines) async
+  // Static method used to return the list of ideas stored in the gps session data
+  static Future<List<String>> ideasFrom(List<String> txtLines) async
   {
     List<String> ideas = [];
 

@@ -8,6 +8,8 @@ import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 /// {@category Group problem-solving}
 /// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
 class GPSProblemToSolveDeclaration extends StatefulWidget {
+  /// The title value at edition time.
+  final String titleWhenEdition;
   /// A TextEditingController for the session title.
   final TextEditingController sessionTitleTfec;
   /// The data from the previous context analyses sessions (for metadata import).
@@ -17,6 +19,7 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
 
   const GPSProblemToSolveDeclaration({
     super.key,
+    this.titleWhenEdition = "",
     required this.sessionTitleTfec,
     required this.previousSessions,
     required this.onSessionSelected,
@@ -35,6 +38,8 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
     
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSProblemToSolveDeclaration");
+
+    if (widget.titleWhenEdition != "") widget.sessionTitleTfec.text = widget.titleWhenEdition;
   }
 
   @override
@@ -96,9 +101,27 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               // Expanded fills the middle gap so Center can work effectively
               Expanded(
                 child: Center(
-                  child: Text(
-                  (widget.sessionTitleTfec.text.trim() == "") ? gpsProcessTitlePlaceholder: widget.sessionTitleTfec.text.trim(), 
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  child: Text
+                  (
+                    // if not an edition, or editing an empty title
+                    (widget.titleWhenEdition == "")
+                    ? 
+                      (widget.sessionTitleTfec.text.trim() == "") 
+                      ? 
+                        gpsProcessTitlePlaceholder
+                      : 
+                        widget.sessionTitleTfec.text.trim() 
+                    // if an edition
+                    : 
+                      // value to edit was edited?
+                      (widget.sessionTitleTfec.text.trim() != "") 
+                      ?
+                        widget.sessionTitleTfec.text.trim()
+                      :
+                        widget.titleWhenEdition,
+
+                    style: 
+                      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 ),
               ),

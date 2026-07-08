@@ -14,8 +14,8 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pag
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/4_dashboard_sessions_list_item.dart';
-import 'package:journeyers/widgets/utility/dashboard_widgets/dashboard_const_strings.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart' show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
 import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
