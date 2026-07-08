@@ -14,7 +14,11 @@ class GPSIdeasList extends StatefulWidget
   /// The ideas for the group problem-solving process.
   final List<String> ideas;
 
-  const GPSIdeasList({super.key, required this.ideas});
+  const GPSIdeasList
+  ({
+    super.key,
+    required this.ideas
+  });
 
   @override
   State<GPSIdeasList> createState() => _GPSIdeasListState();

@@ -24,8 +24,8 @@ import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
 import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
 import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/process_widgets/session_file_name_on_mobile_platforms.dart';
+import 'package:journeyers/widgets/utility/process/session_file_name_on_desktop_platforms.dart';
+import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
 
 // TODO: transition to dto use to finish
 /// {@category Group problem-solving}
@@ -126,7 +126,7 @@ class GPSProcessState extends State<GPSProcess>
   
   // ─── SOLUTIONS related data ───────────────────────────────────────
   // List to store the ideas entered by the user
-  final List<String> _currentIdeas = [];
+  List<String> _currentIdeas = [];
   
   // ─── FILE SAVING related data ───────────────────────────────────────
   String _fileName = "";
@@ -151,7 +151,12 @@ class GPSProcessState extends State<GPSProcess>
 
     String sessionTitle = _titleTfec.text.trim().isNotEmpty 
         ? _titleTfec.text.trim()
-        : "Problem Solving Session";
+        : widget.titleWhenEdition.isNotEmpty
+          ? widget.titleWhenEdition
+          : "Problem Solving Session";
+
+    if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: sessionTitle: $sessionTitle");
+    if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: _currentIdeas: $_currentIdeas");
 
     // Format ideas for the text file
     var now = DateTime.now();
@@ -217,6 +222,13 @@ class GPSProcessState extends State<GPSProcess>
           allowedExtensions: ['txt'],
         );       
       }
+
+    // Removing the previous metadata from the stored metadata
+    await du.deleteSpecificSessionMetadata
+    (
+      typeOfDashboardContext: DashboardUtils.gpsContext, 
+      filePathRelatedToDataToDelete: widget.filePathWhenEdition
+    );
 
       // Save Metadata to Dashboard if file was saved successfully
       if (filePath != null) 
@@ -285,6 +297,9 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
 
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSProcess: didUpdateWidget");
+    
+    if (widget.dtoGPSFormWhenEdition != null) _currentIdeas = widget.dtoGPSFormWhenEdition!.ideas;
+    
   }
 
   @override
@@ -296,6 +311,8 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
 
      _loadAllCAMetadata();
     _getApplicationFolderPath();
+
+    if (widget.isSessionDataBeingEdited && widget.dtoGPSFormWhenEdition != null) _currentIdeas = widget.dtoGPSFormWhenEdition!.ideas;
   }
 
   @override
@@ -315,6 +332,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
       children: [
         // 1. TOP: The problem to be solved (Full Width)
         GPSProblemToSolveDeclaration(
+          titleWhenEdition: widget.titleWhenEdition,
           sessionTitleTfec: _titleTfec,
           previousSessions: _previousCAMetadata,
           onSessionSelected: _handleCAMetadataSelection,
@@ -431,6 +449,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: GPSKeywordsDeclaration
                         (
+                          keywordsWhenEdition: widget.keywordsWhenEdition,
                           currentKeywords: _currentKeywords,
                           onKeywordsUpdatedCallbackFunction: (newKeywords) 
                           {
@@ -447,9 +466,10 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                       child: Divider()                       
                     ), 
                     // Ideas List component
-                    SliverToBoxAdapter(
-                      child: GPSIdeasList(ideas: _currentIdeas),
-                    ),
+                    SliverToBoxAdapter
+                    (
+                      child: GPSIdeasList(ideas: _currentIdeas)                        
+                    ),                    
                   ]
                 )
               ),
@@ -516,10 +536,11 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
                   isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
                   fileExtension: _fileExtension, 
-                  fileNameWhenEdition: "",
-                  onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value), 
+                  fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
+                  onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value.trim()), 
                   parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
-                  versatileParameter: widget.filePathWhenEdition   
+                  versatileParameter: widget.filePathWhenEdition,
+                  textFieldContext: DashboardUtils.gpsContext,
                 )
                 // Saving file for desktop platforms
                 : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata)
