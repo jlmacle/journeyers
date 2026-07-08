@@ -773,7 +773,7 @@ Future<void> main() async {
             await tester.tap(deleteFinder);
             await tester.pumpAndSettle();
 
-            await tester.pump(const Duration(seconds: 10));
+            // await tester.pump(const Duration(seconds: 10));
             
             if (testingDebug) pu.printd('Testing Debug: idea2 deleted');
               // Waiting on Snackbar removal
@@ -803,7 +803,7 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
-            await tester.pump(const Duration(seconds: 5));
+             await tester.pump(const Duration(seconds: 2));
 
             // ── 5. VERIFICATION  ─────────────────
             // ─────────────────────────────────────   
