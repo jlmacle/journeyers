@@ -358,17 +358,12 @@ class _SessionsListItemState extends State<SessionsListItem>
                       onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, _updateTmpFilePath),
                       tooltip: previewTooltipLabel,
                     ),
-                    // To edit the session file data
-                    widget.dashboardContext == DashboardUtils.caContext 
-                    ?
+                    // To edit the session file data                    
                     IconButton(
                       icon: const Icon(Icons.edit_document),
                       onPressed: widget.onEditPressedCallbackFunction,                      
                       tooltip: editTooltipLabel,
-                    )
-                    :
-                    const SizedBox(height: 0, width: 0)
-                    ,
+                    ),
                     // To edit the keywords
                     IconButton(
                       icon: const Icon(Icons.style_rounded),
