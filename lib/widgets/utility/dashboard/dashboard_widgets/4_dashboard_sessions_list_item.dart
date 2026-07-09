@@ -462,19 +462,6 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
 
                         // Closes the modal preview overlay
                         Navigator.of(context).pop();
-                        
-                        // // Retrieving the ideas
-                        // _ideasList = await retrieveGPSIdeas(sessionMetadata[DashboardUtils.keyFilePath], widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
-                        // _ideasListBeforeEditionCopy = List.from(_ideasList);
-                      
-                        // // Opening the edition overlay and waiting for it to close
-                        // if (context.mounted)
-                        // {
-                        //   await _showIdeasEditOverlay(context);                        
-
-                        //   setLocalState(() { });
-                        // }
-                        
                       }
                       else 
                       {
