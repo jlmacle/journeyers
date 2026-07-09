@@ -69,7 +69,6 @@ class _GPSChecklistState extends State<GPSChecklist> {
           appBar: AppBar(
             centerTitle: true, 
             toolbarHeight: 90.00,
-            automaticallyImplyLeading : false,
             title: 
             const Padding
             (
