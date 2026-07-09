@@ -536,8 +536,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                       )
                     : GPSPreview(
                         gpsPreviewPathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
-                        gpsPreviewIdeasStored: _ideasList,                       
-                        
+                        gpsPreviewIdeasStored: _ideasList,                        
                         gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )
                   :
