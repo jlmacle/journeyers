@@ -121,7 +121,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                         widget.titleWhenEdition,
 
                     style: 
-                      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 ),
               ),
