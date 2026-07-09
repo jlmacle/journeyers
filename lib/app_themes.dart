@@ -235,6 +235,14 @@ const TextStyle problemSolvingKeywordsMessage = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
+  color: appBarWhite
+);
+
+const TextStyle groupKeywordsMessage = TextStyle
+(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  color: black
 );
 
 // Text styles: DASHBOARD PAGE RELATED STYLES
