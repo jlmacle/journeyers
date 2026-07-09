@@ -104,7 +104,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
     return GestureDetector(
       onTap: () => _showKeywordsOverlay(context),
       child: Container(        
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
