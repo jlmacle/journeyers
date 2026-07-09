@@ -355,7 +355,6 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                     _buildHeaderButton
                     (
                       text: addEmoji, color: Colors.white, 
-                      // onPressed: (){groupMoods1Key.currentState?.addToIdentifiers();},
                       onPressed: 
                         () => Navigator.of(context).push
                         (
