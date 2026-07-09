@@ -118,6 +118,8 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
         return Scaffold(
           appBar: AppBar(
             centerTitle: true, 
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
             title: 
             const Padding
             (
@@ -128,14 +130,14 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                 maxLines: 20,
                 overflow: TextOverflow.visible,
                 softWrap: true,
-                style: problemSolvingKeywordsMessage,
+                style: groupKeywordsMessage,
               ),
             ),
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
                 tooltip: closeKeywordsDeclarationTooltipLabel,
-                color: appBarWhite,
+                color: black,
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],

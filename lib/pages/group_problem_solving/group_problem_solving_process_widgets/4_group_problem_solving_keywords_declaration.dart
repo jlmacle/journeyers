@@ -122,7 +122,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
   }
 
   void _showKeywordsOverlay(BuildContext context) {
-    const String title = "Please enter keywords\nto describe the analysis.";
+    const String title = "Keywords for the\nproblem-solving session";
 
     showGeneralDialog(
       context: context,
