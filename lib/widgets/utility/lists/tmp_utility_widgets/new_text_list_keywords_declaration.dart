@@ -118,7 +118,6 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
         return Scaffold(
           appBar: AppBar(
             centerTitle: true, 
-            // automaticallyImplyLeading : false,
             title: 
             const Padding
             (
