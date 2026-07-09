@@ -71,13 +71,31 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
              },
       child : 
       Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           ListTile(
-              leading: const Icon(Icons.add_circle_outline),
-              title: const Text(ideasListTitle, style: problemSolvingIdeasTitle),              
+           Center(
+             child: 
+             GestureDetector
+             (
               onTap: () => _ideasShowEditOverlay(context),
-            ),
-          const SizedBox(height: 10),
+              child: Container(        
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Icon(Icons.add_circle_outline),
+                    ),
+                    Center(
+                      child: Text(ideasListTitle, style: problemSolvingIdeasTitle),
+                    )
+                  ],
+                ),
+              ),
+            )       
+           ),
+          const SizedBox(height: 5),
           if (widget.ideas.isEmpty)
             const Padding(
               padding: EdgeInsets.all(20.0),

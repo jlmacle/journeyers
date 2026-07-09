@@ -349,6 +349,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
               Expanded(
                 child: Column
                 (
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: 
                   [
                     _buildHeaderButton
