@@ -488,6 +488,7 @@ class DashboardPageState extends State<DashboardPage>
           [
             TextField
             (
+              key: const ValueKey('titleDashboardEditField'),
               controller: _titleTfec,
               autofocus: true,
               decoration: const InputDecoration
