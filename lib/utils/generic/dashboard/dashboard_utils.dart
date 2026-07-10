@@ -85,8 +85,8 @@ class DashboardUtils {
     // Date value interception for testing purposes
     if (isInTestEnvironment)
     {
-      formattedDate = constDatesList[dateIndex];
-      dateIndex++;
+      formattedDate = datesForTestingList[dateForTestingIndex];
+      dateForTestingIndex++;
     }
 
     Map<String, dynamic> sessionData = 
