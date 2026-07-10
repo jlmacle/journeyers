@@ -99,6 +99,9 @@ Future<void> main() async {
   const String fileName3WithoutExtension = 'file3';
   const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
 
+  // Edition
+  const String editionSuffix = "-edited";
+
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
   
@@ -729,9 +732,7 @@ Future<void> main() async {
             // ── Editing data ────────────────────────────
             // ────────────────────────────────────────────
 
-            // const ideasList1 = ['idea1', 'idea2'];
-            var suffix = "-edited";
-           
+            // const ideasList1 = ['idea1', 'idea2'];         
             // ── Editing idea1 : suffix addition ───────────────────────────────────
             // ─────────────────────────────────────────────────────
               // Searching idea1
@@ -752,7 +753,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
               // Editing idea1
             var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
-            await tester.enterText(tfIdea1Finder, "${ideasList1[0]}$suffix");
+            await tester.enterText(tfIdea1Finder, "${ideasList1[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
@@ -808,7 +809,7 @@ Future<void> main() async {
             // ── 5. VERIFICATION  ─────────────────
             // ─────────────────────────────────────   
             // ── Verifying the edited/added data present ────────────
-            await gpsTestPreview(tester: tester, title: titleEdition, ideasList: ["${ideasList1[0]}${suffix}", idea3Added]);
+            await gpsTestPreview(tester: tester, title: titleEdition, ideasList: ["${ideasList1[0]}${editionSuffix}", idea3Added]);
                
           } // if platform
 

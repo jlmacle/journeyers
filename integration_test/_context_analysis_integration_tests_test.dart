@@ -92,6 +92,9 @@ Future<void> main() async {
   const String fileName3WithoutExtension = 'file3';
   const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
 
+  // Edition
+  const String editionSuffix = "-edited";
+
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
   
@@ -1082,8 +1085,7 @@ Future<void> main() async {
             await tester.tap(titleFinder);
             await tester.pumpAndSettle();
               // Editing the title
-            var suffix = "-edited";
-            var editedTitle = "${title}${suffix}";
+            var editedTitle = "${title}${editionSuffix}";
             
             var editTfecFinder = find.byKey(const ValueKey('titleDashboardEditField'));
             await tester.enterText(editTfecFinder, editedTitle);
@@ -1145,8 +1147,7 @@ Future<void> main() async {
             await tester.tap(kwFinder);
             await tester.pumpAndSettle();
               // Editing the keywords
-            var suffix = "-edited";
-            var kwEdited = "${kwsList[0]}${suffix}";
+            var kwEdited = "${kwsList[0]}${editionSuffix}";
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
@@ -1366,17 +1367,16 @@ Future<void> main() async {
             }
 
             // ── Editing data in the text fields ────────────────────────────
-            var suffix = "-edited";
 
             List<String> newCheckboxTextFieldValues = 
-            [for (var value in checkboxTextFieldValues) "${value}${suffix}"]; 
+            [for (var value in checkboxTextFieldValues) "${value}${editionSuffix}"]; 
 
-            String newIndivAnotherIssueStrValue = "a8$suffix";   
+            String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
 
-            String newGroupProblemsToSolveStrValue = "b1$suffix";
+            String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
 
             List<String> newSegmentedButtonTextFieldValues = 
-            [ for (var value in segmentedButtonTextFieldValues) "${value}${suffix}" ]; 
+            [ for (var value in segmentedButtonTextFieldValues) "${value}${editionSuffix}" ]; 
 
             textFieldsFinder = find.byType(TextField);
             totalTextFields = textFieldsFinder.evaluate().length;
@@ -1440,7 +1440,7 @@ Future<void> main() async {
 
             // await tester.pump(const Duration(seconds: 5));
 
-            var textToFind = "a7$suffix";
+            var textToFind = "a7$editionSuffix";
             if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
             var textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
@@ -1457,7 +1457,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 5));
             if (testingDebug) pu.printd('Scrolled to $textToFind');
 
-            textToFind = "b1$suffix";
+            textToFind = "b1$editionSuffix";
             if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
             textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
