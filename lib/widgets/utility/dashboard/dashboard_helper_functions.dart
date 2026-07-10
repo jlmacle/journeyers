@@ -36,7 +36,7 @@ Future<void> retrieveCASessionData
       try
       {
         // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { csvContent = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension);}
+        if (!isInTestEnvironment) { csvContent = await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension);}
         // While testing
         else 
         { 
@@ -53,7 +53,7 @@ Future<void> retrieveCASessionData
       try
       {
         // Outside of testing
-        if (!isInTestEnvironment) { csvContent = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        if (!isInTestEnvironment) { csvContent = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
         // While testing
         else 
         { 
@@ -122,7 +122,7 @@ Future<void> retrieveGPSSessionData
       try
       {
         // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension);}
+        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension);}
         // While testing
         else 
         { 
@@ -139,7 +139,7 @@ Future<void> retrieveGPSSessionData
       try
       {
         // Outside of testing
-        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
         // While testing
         else 
         { 
@@ -206,7 +206,7 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
       try
       {
         // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { content = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension);}
+        if (!isInTestEnvironment) { content = await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension);}
         // While testing
         else 
         { 
@@ -223,7 +223,7 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
       try
       {
         // Outside of testing
-        if (!isInTestEnvironment) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+        if (!isInTestEnvironment) { content = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
         // While testing
         else 
         { 
