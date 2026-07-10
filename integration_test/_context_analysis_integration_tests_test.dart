@@ -130,7 +130,7 @@ Future<void> main() async {
           // Setting value for the first-run modal to be absent,
           'wasFirstRunModalAcknowledged': true,
           // and to have the context analysis page, with the dashboard.
-          'wasSessionDataSaved': true,
+          'wasCASessionDataSaved': true,
           // Temporary test dir as application folder path
           'applicationFolderPath': testTmpDir!.path
         });
@@ -189,7 +189,7 @@ Future<void> main() async {
             // Setting value for the first-run modal to be absent,
             'wasFirstRunModalAcknowledged': true,
             // and to have the context analysis page, with the dashboard.
-            'wasSessionDataSaved': true,
+            'wasCASessionDataSaved': true,
             // Temporary test dir as application folder path
             'applicationFolderPath': testTmpDir!.path
           });
@@ -270,7 +270,7 @@ Future<void> main() async {
             // Setting value for the first-run modal to be absent,
             'wasFirstRunModalAcknowledged': true,
             // and to have the context analysis page, with the dashboard.
-            'wasSessionDataSaved': true,
+            'wasCASessionDataSaved': true,
             // Temporary test dir as application folder path
             'applicationFolderPath': testTmpDir!.path
           });
@@ -366,7 +366,7 @@ Future<void> main() async {
               // Setting value for the first-run modal to be absent,
               'wasFirstRunModalAcknowledged': true,
               // and to have the context analysis page, with the dashboard.
-              'wasSessionDataSaved': true,
+              'wasCASessionDataSaved': true,
               // Temporary test dir as application folder path
               'applicationFolderPath': testTmpDir!.path
             });
@@ -476,7 +476,7 @@ Future<void> main() async {
         // Setting value for the first-run modal to be absent,
         'wasFirstRunModalAcknowledged': true,
         // and to have the context analysis page, with the dashboard.
-        'wasSessionDataSaved': true,
+        'wasCASessionDataSaved': true,
         // Temporary test dir as application folder path
         'applicationFolderPath': testTmpDir!.path
       });
@@ -544,7 +544,7 @@ Future<void> main() async {
         // Setting value for the first-run modal to be absent,
         'wasFirstRunModalAcknowledged': true,
         // and to have the context analysis page, with the dashboard.
-        'wasSessionDataSaved': true,
+        'wasCASessionDataSaved': true,
         // Temporary test dir as application folder path
         'applicationFolderPath': testTmpDir!.path
       });
@@ -637,7 +637,7 @@ Future<void> main() async {
         // Setting value for the first-run modal to be absent,
         'wasFirstRunModalAcknowledged': true,
         // and to have the context analysis page, with the dashboard.
-        'wasSessionDataSaved': true,
+        'wasCASessionDataSaved': true,
         // Temporary test dir as application folder path
         'applicationFolderPath': testTmpDir!.path
       });
@@ -694,7 +694,7 @@ Future<void> main() async {
         // Setting value for the first-run modal to be absent,
         'wasFirstRunModalAcknowledged': true,
         // and to have the context analysis page, with the dashboard.
-        'wasSessionDataSaved': true,
+        'wasCASessionDataSaved': true,
         // Temporary test dir as application folder path
         'applicationFolderPath': testTmpDir!.path
       });
@@ -780,7 +780,7 @@ Future<void> main() async {
       // Setting value for the first-run modal to be absent,
       'wasFirstRunModalAcknowledged': true,
       // and to have the context analysis page, with the dashboard.
-      'wasSessionDataSaved': true,
+      'wasCASessionDataSaved': true,
       // Temporary test dir as application folder path
       'applicationFolderPath': testTmpDir!.path
     });
@@ -868,7 +868,7 @@ Future<void> main() async {
       // Setting value for the first-run modal to be absent,
       'wasFirstRunModalAcknowledged': true,
       // and to have the context analysis page, with the dashboard.
-      'wasSessionDataSaved': true,
+      'wasCASessionDataSaved': true,
       // Temporary test dir as application folder path
       'applicationFolderPath': testTmpDir!.path
     });
@@ -956,7 +956,7 @@ Future<void> main() async {
       // Setting value for the first-run modal to be absent,
       'wasFirstRunModalAcknowledged': true,
       // and to have the context analysis page, with the dashboard.
-      'wasSessionDataSaved': true,
+      'wasCASessionDataSaved': true,
       // Temporary test dir as application folder path
       'applicationFolderPath': testTmpDir!.path
     });
@@ -1044,7 +1044,7 @@ Future<void> main() async {
             // Setting value for the first-run modal to be absent,
             'wasFirstRunModalAcknowledged': true,
             // and to have the context analysis page, with the dashboard.
-            'wasSessionDataSaved': true,
+            'wasCASessionDataSaved': true,
             // Temporary test dir as application folder path
             'applicationFolderPath': testTmpDir!.path
           });

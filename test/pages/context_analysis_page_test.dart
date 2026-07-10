@@ -33,7 +33,7 @@ void main()
               // Setting value for first-run modal to be present,
               'wasFirstRunModalAcknowledged': false,
               // and to have the context analysis page, without the dashboard.
-              'wasSessionDataSaved': false
+              'wasCASessionDataSaved': false
             });
 
             // Widget wrapped in a MaterialApp because the page uses Scaffold, 
@@ -81,7 +81,7 @@ void main()
               // To not have the modal at startup
               'wasFirstRunModalAcknowledged': true,
               // To have the context analysis page, without the dashboard
-              'wasSessionDataSaved': false,
+              'wasCASessionDataSaved': false,
             });
 
             // Widget wrapped in a MaterialApp because the page uses Scaffold, 
@@ -121,7 +121,7 @@ void main()
             SharedPreferences.setMockInitialValues
             ({            
               'wasFirstRunModalAcknowledged': true,
-              'wasSessionDataSaved': false,
+              'wasCASessionDataSaved': false,
             });
             
             // Widget wrapped in a MaterialApp because the page uses Scaffold, 
@@ -155,7 +155,7 @@ void main()
             SharedPreferences.setMockInitialValues
             ({
               'wasFirstRunModalAcknowledged': true, 
-              'wasSessionDataSaved': true,
+              'wasCASessionDataSaved': true,
             });
             
             // Pumping the widget

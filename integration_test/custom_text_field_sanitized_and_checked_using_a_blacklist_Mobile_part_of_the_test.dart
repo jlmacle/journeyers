@@ -47,7 +47,7 @@ void main() {
           // To avoid the first-run modal
           'wasFirstRunModalAcknowledged': true, 
           // To get the CA process page
-          'wasSessionDataSaved': false,
+          'wasCASessionDataSaved': false,
           // Test dir as application folder path
           'applicationFolderPath': testTmpDir!.path
       });
