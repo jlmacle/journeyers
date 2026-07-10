@@ -209,6 +209,13 @@ class FileUtils
   /// Generic method used to delete a file.
   Future<void> deleteFile(String pathToFile) async
   {
+    if (isInTestEnvironment) 
+    {
+      await File(pathToFile).delete();
+      if (testingDebug) pu.printd("Testing Debug: File successfully deleted: $pathToFile");     
+      return;
+    }
+
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
     {
       await deleteFileOnDesktop(pathToFile);
@@ -258,7 +265,7 @@ class FileUtils
     {
       // Extracting only the filename from the path if necessary, 
       // as findFile() in Kotlin expects the name within the tree
-      final fileName = pathToCSV.split('/').last;
+      final fileName = path.basename(pathToCSV);
 
       final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
 
@@ -283,7 +290,7 @@ class FileUtils
     {
       // Extracting only the filename from the path if necessary, 
       // as findFile() in Kotlin expects the name within the tree
-      final fileName = pathToCSV.split('/').last;
+      final fileName = path.basename(pathToCSV);
 
       final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
 
