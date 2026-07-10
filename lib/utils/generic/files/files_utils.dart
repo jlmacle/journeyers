@@ -171,15 +171,58 @@ class FileUtils
   // ─── METHODS USED TO SAVE FILES : end ───────────────────────────────────────
 
   // ─── METHODS USED TO READ FILES : beginning ───────────────────────────────────────
+  /// Generic method used to read a text file.
+  Future<String> readTextFile({required String filePath}) async
+  {
+    if (isInTestEnvironment) 
+    {
+      return await File(filePath).readAsString();      
+    }
+
+    if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
+    {
+      return await File(filePath).readAsString(); 
+    }
+    else if (Platform.isAndroid)
+    {
+      return await readTextFileOnAndroid(filePath);
+    }
+    else if (Platform.isIOS)
+    {
+      return await readTextFileOnIOS(filePath);
+    }
+    else 
+    {
+      throw Exception("Platform not taken into account: ${Platform.operatingSystem}");
+    }
+  }
+
   /// Method used to read a text file on Android.
-  Future<String> readTextFileOnAndroid({required String fileNameWithExtension}) async
+  Future<String> readTextFileOnAndroid(String filePath) async
+  {
+    var fileNameWithExtension = path.basename(filePath);
+    return await platformAndroid.invokeMethod
+        ('readFileContent', {'fileName': fileNameWithExtension}); 
+  }
+
+  /// Method used to read a text file on iOS.
+  Future<String> readTextFileOnIOS(String filePath) async
+  {
+    var fileNameWithExtension = path.basename(filePath);
+    return await platformIOS.invokeMethod
+        ('readFileContent', {'fileName': fileNameWithExtension}); 
+  }
+
+
+  /// Method used to read a text file on Android.
+  Future<String> readTextFileOnAndroidTmp({required String fileNameWithExtension}) async
   {
     return await platformAndroid.invokeMethod
         ('readFileContent', {'fileName': fileNameWithExtension}); 
   }
 
   /// Method used to read a text file on iOS.
-  Future<String> readTextFileOnIOS({required String fileNameWithExtension}) async
+  Future<String> readTextFileOnIOSTmp({required String fileNameWithExtension}) async
   {
     return await platformIOS.invokeMethod
         ('readFileContent', {'fileName': fileNameWithExtension}); 
@@ -191,11 +234,11 @@ class FileUtils
     String fileName = path.basename(pathToData);
     if (Platform.isIOS)
     {
-      return await readTextFileOnIOS(fileNameWithExtension: fileName);
+      return await readTextFileOnIOSTmp(fileNameWithExtension: fileName);
     }
     else if (Platform.isAndroid)
     {
-      return await readTextFileOnAndroid(fileNameWithExtension: fileName);
+      return await readTextFileOnAndroidTmp(fileNameWithExtension: fileName);
     }
     else 
     {
@@ -207,19 +250,26 @@ class FileUtils
 
   // ─── METHODS USED TO DELETE FILES : beginning  ───────────────────────────────────────
   /// Generic method used to delete a file.
-  Future<void> deleteFile(String pathToFile) async
+  Future<void> deleteFile(String filePath) async
   {
+    if (isInTestEnvironment) 
+    {
+      await File(filePath).delete();
+      if (testingDebug) pu.printd("Testing Debug: File successfully deleted: $filePath");     
+      return;
+    }
+
     if (Platform.isLinux || Platform.isMacOS || Platform.isWindows)
     {
-      await deleteFileOnDesktop(pathToFile);
+      await deleteFileOnDesktop(filePath);
     }
     else if (Platform.isAndroid)
     {
-      await deleteFileOnAndroid(pathToFile);
+      await deleteFileOnAndroid(filePath);
     }
     else if (Platform.isIOS)
     {
-      await deleteFileOnIOS(pathToFile);
+      await deleteFileOnIOS(filePath);
     }
     else 
     {
@@ -258,7 +308,7 @@ class FileUtils
     {
       // Extracting only the filename from the path if necessary, 
       // as findFile() in Kotlin expects the name within the tree
-      final fileName = pathToCSV.split('/').last;
+      final fileName = path.basename(pathToCSV);
 
       final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
 
@@ -283,7 +333,7 @@ class FileUtils
     {
       // Extracting only the filename from the path if necessary, 
       // as findFile() in Kotlin expects the name within the tree
-      final fileName = pathToCSV.split('/').last;
+      final fileName = path.basename(pathToCSV);
 
       final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
 

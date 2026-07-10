@@ -509,7 +509,7 @@ Future<void> main() async {
           formToFill: false,
           tester: tester, 
           title: testAnalysisTitle2,
-          kwsList: [],              
+          kwsList: [kwCompanionship],              
           fileNameWithoutExtension: fileName1WithoutExtension
         );
 
@@ -518,6 +518,17 @@ Future<void> main() async {
         // Searching for the finder with the title
         Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
         expect(sessionListItemFinder, findsOne);
+
+        // await tester.pump(const Duration(seconds: 4));
+
+        // Verifying the Filter Chip present
+        var filterChipFinder = find.descendant
+        (
+          of: find.byType(FilterChip), 
+          matching: find.text(kwCompanionship)
+        );
+
+        expect(filterChipFinder, findsOne);
 
         // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -532,6 +543,16 @@ Future<void> main() async {
         // Verifying the sessions list item absent
         sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
         expect(sessionListItemFinder, findsNothing);
+
+        // Verifying the Filter Chip absent
+        filterChipFinder = find.descendant
+        (
+          of: find.byType(InputChip), 
+          matching: find.text(kwCompanionship)
+        );
+
+        expect(filterChipFinder, findsNothing);
+
 
         // await tester.pump(const Duration(seconds: 2));
       }

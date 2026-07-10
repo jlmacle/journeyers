@@ -406,54 +406,10 @@ class _CAPreviewState extends State<CAPreview>
     List<List<String>> groupPerspective = [];
 
     List<String> csvLines = [""];
-    String fileNameWithExtension = path.basename(pathToCSVFile);
-    final String content;
 
-    if (Platform.isAndroid)
-    {
-      
-      if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on Android");
-      try
-      {
-        // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { content = await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension); }
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Testing Debug: caCSVFileToPreviewPerspectiveData: Reading $fileNameWithExtension from tmp folder");
-          content = await File(pathToCSVFile).readAsString();
-        }
-        csvLines = LineSplitter.split(content).toList();
-      }
-      on Exception
-      catch(e, s) {pu.printd("Preview Building: Exception: CA on Android: $e: $s"); }
-    }
-    else if (Platform.isIOS)
-    {
-      if (previewBuildingDebug) pu.printd("Preview Building: caCSVFileToPreviewPerspectiveData on iOS");
-      try
-      {
-        // Outside of testing
-        if (!isInTestEnvironment) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Testing Debug: caCSVFileToPreviewPerspectiveData: Reading $fileNameWithExtension from tmp folder");
-          content = await File(pathToCSVFile).readAsString();
-        }
-        csvLines = LineSplitter.split(content).toList();
-      }
-      on Exception
-      catch(e, s) {pu.printd("Preview Building: Exception: CA on iOS: $e: $s"); }
-    }
-    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
-    {
-      // Checking if the CSV file exists
-      File csvFile = File(pathToCSVFile);
-      if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: $pathToCSVFile (${Platform.operatingSystem})");
-      // Loading the file content
-      csvLines = csvFile.readAsLinesSync();
-    }
+    // Reading the content
+    final String content = await fu.readTextFile(filePath: pathToCSVFile);
+    csvLines = LineSplitter.split(content).toList();
 
     // To clean
     // Writing the content in a temporary file for data sharing

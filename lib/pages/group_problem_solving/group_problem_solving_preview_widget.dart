@@ -90,7 +90,7 @@ class _GPSPreviewState
         try
         {
           // Outside of testing: reading file using SAF
-          if (!isInTestEnvironment) { content= await fu.readTextFileOnAndroid(fileNameWithExtension: fileNameWithExtension); }
+          if (!isInTestEnvironment) { content= await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension); }
           // While testing
           else 
           { 
@@ -109,7 +109,7 @@ class _GPSPreviewState
         try
         {
           // Outside of testing
-          if (!isInTestEnvironment) { content = await fu.readTextFileOnIOS(fileNameWithExtension: fileNameWithExtension); }
+          if (!isInTestEnvironment) { content = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
           // While testing
           else 
           { 
