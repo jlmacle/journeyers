@@ -252,7 +252,7 @@ Future<void> main() async {
             // Re-searching the titles  
             titlesFinder = await dashboardGetAllSessionsTitles(tester); 
 
-            // Verifying the alphabetical order 
+            // Verifying the reversed alphabetical order 
             for (var index = 0; index < totalTitles; index++)
             {
               expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesListSorted.reversed.toList()[index]);
