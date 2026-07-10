@@ -107,7 +107,7 @@ Future<void> main() async {
     testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_integration_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To intercept the way the date is saved
-    dateIndex = 0;
+    dateForTestingIndex = 0;
   });
 
   // This function will be called after each test is run. The body may be asynchronous; if so, it must return a Future.

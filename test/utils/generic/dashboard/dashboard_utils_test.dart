@@ -32,7 +32,7 @@ void main() {
     tempDir = await Directory.systemTemp.createTemp('dashboard_utils_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(tempDir!.path);
     sut = DashboardUtils();
-    dateIndex = 0;
+    dateForTestingIndex = 0;
   });
 
   // This function will be called after each test is run. The body may be asynchronous; if so, it must return a Future.

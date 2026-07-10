@@ -100,7 +100,7 @@ Future<void> main() async {
     testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To intercept the way the date is saved
-    dateIndex = 0;
+    dateForTestingIndex = 0;
   });
 
   // This function will be called after each test is run. The body may be asynchronous; if so, it must return a Future.
@@ -117,10 +117,10 @@ Future<void> main() async {
   {
     group('Entered metadata is displayed on the dashboard: Mobile: \n', ()
     {
-    // 'Session metadata entered is found: '
+    // 'Session metadata entered (title, keywords, date) is found: '
     // '(assuming an already selected path to the user session data folder)',
     testWidgets(
-      'Session metadata entered is found: '
+      'Session metadata entered (title, keywords, date) is found: '
       '(assuming an already selected path to the user session data folder)',
       (WidgetTester tester) async {
 
@@ -168,7 +168,11 @@ Future<void> main() async {
           await tester.pump(const Duration(seconds: 2)); 
           await dashboardSearchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList);
 
-          // await tester.pump(const Duration(seconds: 2));
+          await tester.pump(const Duration(seconds: 5));
+
+          // Searching for the date
+          dateForTestingIndex = 0;
+          expect(find.textContaining(datesForTestingList[0]), findsOne);
         }
     });
  
