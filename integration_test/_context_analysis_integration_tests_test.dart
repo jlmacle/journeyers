@@ -1038,6 +1038,66 @@ Future<void> main() async {
     // todo: to finish/clean: from dashboard/preview
     group('Edition Tests: Mobile: \n', ()
     {
+      // 'Edition: Title \n'
+      testWidgets(
+        'Edition: Title \n',
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasCASessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage        
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+
+            var title = "CA title";
+
+            await caEnterNewProcessDataOnMobile
+            (
+              tester: tester, 
+              title: title,
+              kwsList: [],
+              formToFill: false,
+              fileNameWithoutExtension: "file"
+            );
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── 2. CLICKING TO EDIT THE TITLE ─────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────
+              // Clicking on the title
+            var titleFinder = find.text(title);
+            await tester.tap(titleFinder);
+            await tester.pumpAndSettle();
+              // Editing the title
+            var suffix = "-edited";
+            var editedTitle = "${title}${suffix}";
+            
+            var editTfecFinder = find.byKey(const ValueKey('titleDashboardEditField'));
+            await tester.enterText(editTfecFinder, editedTitle);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+              // Verifying the text field absent
+            expect(editTfecFinder, findsNothing);
+              // Verifying the edited title present
+            expect(find.text(editedTitle), findsOne);
+          }
+        });
+  
+
       // 'Context analysis data edition \n'
       testWidgets(
         'Context analysis data edition \n',
