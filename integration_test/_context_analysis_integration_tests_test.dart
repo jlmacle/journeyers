@@ -1097,6 +1097,82 @@ Future<void> main() async {
           }
         });
   
+      // 'Edition: Keywords \n'
+      testWidgets(
+        'Edition: Keywords \n',
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasCASessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage        
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+
+            var title = "CA title";
+
+            await caEnterNewProcessDataOnMobile
+            (
+              tester: tester, 
+              title: title,
+              kwsList: [kwsList[0]],
+              formToFill: false,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── 2. CLICKING TO EDIT THE KEYWORDS ─────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────
+              // Clicking on the keyword
+            var kwFinder = find.descendant
+            (
+              of: find.byType(SessionsListItem), 
+              matching: find.textContaining(kwsList[0])
+            );            
+            await tester.tap(kwFinder);
+            await tester.pumpAndSettle();
+              // Editing the keywords
+            var suffix = "-edited";
+            var kwEdited = "${kwsList[0]}${suffix}";
+            var kwAdded = "kwAdded";
+            var editedKeywords = "$kwEdited,$kwAdded";
+            
+            var editTfecFinder = find.byKey(const ValueKey('kwsDashboardEditField'));
+            await tester.enterText(editTfecFinder, editedKeywords);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+              // Verifying the text field absent
+            expect(editTfecFinder, findsNothing);
+              // Verifying the input chips present
+            var kw1Finder = find.descendant
+            (
+              of: find.byType(FilterChip), 
+              matching: find.text(kwEdited)
+            );
+            expect(kw1Finder, findsOne);
+
+            var kw2Finder = find.descendant
+            (
+              of: find.byType(FilterChip), 
+              matching: find.text(kwAdded)
+            );
+            expect(kw2Finder, findsOne);            
+          }
+        });
+  
 
       // 'Context analysis data edition \n'
       testWidgets(
