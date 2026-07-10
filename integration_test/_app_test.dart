@@ -104,7 +104,7 @@ Future<void> main() async {
           // Setting value for the first-run modal to be absent,
           'wasFirstRunModalAcknowledged': true,
           // to have the context analysis page, with the dashboard,
-          'wasSessionDataSaved': true,
+          'wasCASessionDataSaved': true,
           // and to have the group problem-solving page, with the dashboard.
           'wasGPSSessionDataSaved': true,
           // Temporary test dir as application folder path
