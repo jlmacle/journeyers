@@ -327,7 +327,7 @@ Future<void> main() async {
 
             var totalDates = datesFinder.evaluate().length;
 
-            // Verifying the alphabetical order
+            // Verifying the order
             for (var index = 0; index < totalDates; index++)
             {
               expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted[index]})");
@@ -349,7 +349,7 @@ Future<void> main() async {
               }
             );          
 
-            // Verifying the alphabetical order 
+            // Verifying the order 
             for (var index = 0; index < totalDates; index++)
             {
               expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted.reversed.toList()[index]})");
