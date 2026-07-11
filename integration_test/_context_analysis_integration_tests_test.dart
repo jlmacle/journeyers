@@ -1534,6 +1534,65 @@ Future<void> main() async {
         // + interrupted editions and original data kept
 
       }); 
-       
+
+     group('Visual Tests: Mobile: \n', ()
+    {
+      // 'Sharing test \n'
+      testWidgets(
+        'Sharing test \n',
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            'wasFirstRunModalAcknowledged': true,
+            // and to have the context analysis page, with the dashboard.
+            'wasCASessionDataSaved': true,
+            // Temporary test dir as application folder path
+            'applicationFolderPath': testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+              // Pumping the CAPage
+              //
+              // pumpWidget renders the first frame.
+              // pumpAndSettle drives the event loop until there are no more pending frames,
+              // letting the async getPreferences() call complete 
+              // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+              //
+              
+              await tester.pumpWidget(buildTestableCAPage());
+              await tester.pumpAndSettle();
+
+              // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+              // ───────────────────────────────────────────────────────────────────────────────
+              await caEnterNewProcessDataOnMobile
+              (
+                tester: tester, 
+                title: testAnalysisTitle1,
+                kwsList: [],
+                formToFill: false,
+                fileNameWithoutExtension: fileName1WithoutExtension
+              );
+
+              // ── 2. CLICKING ON THE DASHBOARD TO PREVIEW ───────────────────────────────────────
+              // ───────────────────────────────────────────────────────────────────────────────
+              var previewFinder = find.byIcon(Icons.find_in_page_rounded);
+              await tester.tap(previewFinder);
+              await tester.pumpAndSettle();
+
+              // ── 3. CLICKING ON THE SHARING BUTTON IN THE PREVIEW ───────────────────────────
+              // ───────────────────────────────────────────────────────────────────────────────
+              var shareFinder = find.byIcon(Icons.share);
+              await tester.tap(shareFinder);
+              await tester.pumpAndSettle();
+
+              // ── 4. PAUSE FOR VISUAL INSPECTION ───────────────────────────
+              // ─────────────────────────────────────────────────────────────
+              await tester.pump(const Duration(seconds: 10));
+          }
+        });
+    });  
   });
 }

@@ -14,15 +14,12 @@ import 'package:journeyers/app_themes.dart';
 import 'package:journeyers/debug_constants.dart';
 import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
 import 'package:journeyers/utils/generic/dev/type_defs.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
 import 'package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
 
 // Used to store a temporary file path used for session data sharing.
 String tmpFilePath = "";
@@ -85,10 +82,6 @@ class _SessionsListItemState extends State<SessionsListItem>
   final TextEditingController _kwsEditTfec = .new();
 
   // Data related to deleting ideas from the overlay
-  bool _areSomeIdeasForDeletion = false;
-  final List<String> _ideasSelectedForDeletion = [];
-  final List<int> _ideasSelectedForDeletionIndexes = [];  
-  final _tecNewIdea = TextEditingController();
   // List of ideas present before deletion
   List<String> _ideasList = [];
   List<String> _ideasListBeforeEditionCopy = [];
@@ -113,15 +106,6 @@ class _SessionsListItemState extends State<SessionsListItem>
 
     if (!mounted) return;
     Navigator.of(context).pop();
-  }
-
-  // Method used to update one of the deletable/editable items
-  void _onUpdateTheIdeaValue({required String stringParam, required int intParam})
-  {
-    setState(() {
-      _ideasList[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: SessionsListItem: _showEditOverlay: _onUpdateTheIdeaValue: Ideas list: $_ideasList ");
-    });  
   }
 
   // Method used to update the temporary file path used for session data sharing
