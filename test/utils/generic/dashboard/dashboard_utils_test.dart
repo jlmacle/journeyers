@@ -72,7 +72,7 @@ void main() {
         title: testFile1Title,
         keywords: testFile1Keywords,
         formattedDate: aDate,
-        pathToFile: testFile1Path,
+        filePath: testFile1Path,
       );
 
       final file = await sut!.getSessionMetadataFile(
@@ -89,7 +89,7 @@ void main() {
         title: null,
         keywords: [],
         formattedDate: aDate,
-        pathToFile: aPath,
+        filePath: aPath,
       );
 
       final file = await sut!.getSessionMetadataFile(
@@ -106,7 +106,7 @@ void main() {
         title: aTitle,
         keywords: keywords,
         formattedDate: aDate,
-        pathToFile: aPath,
+        filePath: aPath,
       );
 
       final file = await sut!.getSessionMetadataFile(
@@ -126,7 +126,7 @@ void main() {
     //     title: aTitle,
     //     keywords: keywords,
     //     formattedDate: aDate,
-    //     pathToFile: aPath,
+    //     filePath: aPath,
     //   );
 
     //   final file = await sut!.getSessionMetadataFile(
@@ -143,7 +143,7 @@ void main() {
         title: aTitle,
         keywords: [],
         formattedDate: aDate,
-        pathToFile: aPath,
+        filePath: aPath,
       );
 
       final file = await sut!.getSessionMetadataFile(
@@ -161,14 +161,14 @@ void main() {
           title: 'CA Session',
           keywords: [],
           formattedDate: aDate,
-          pathToFile: testFile1Path,
+          filePath: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.gpsContext,
           title: 'GPS Session',
           keywords: [],
           formattedDate: aDate,
-          pathToFile: testFile2Path,
+          filePath: testFile2Path,
         );
 
         final caFile = await sut!.getSessionMetadataFile(
@@ -204,7 +204,7 @@ void main() {
           title: t,
           keywords: [],
           formattedDate: aDate,
-          pathToFile: '/files/${t.toLowerCase()}.json',
+          filePath: '/files/${t.toLowerCase()}.json',
         );
       }
 
@@ -222,7 +222,7 @@ void main() {
         title: aTitle,
         keywords: [],
         formattedDate: aDate,
-        pathToFile: aPath,
+        filePath: aPath,
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
@@ -247,14 +247,14 @@ void main() {
         title: 'Title: File to keep',
         keywords: [],
         formattedDate: aDate,
-        pathToFile: '/file/to/keep',
+        filePath: '/file/to/keep',
       );
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
         title: testFile2Title,
         keywords: [],
         formattedDate: aDate,
-        pathToFile: fileToDelete,
+        filePath: fileToDelete,
       );
 
       await sut!.deleteSpecificSessionMetadata(
@@ -277,7 +277,7 @@ void main() {
           title: 'Session $i',
           keywords: [],
           formattedDate: aDate,
-          pathToFile: '/files/session_$i.json',
+          filePath: '/files/session_$i.json',
         );
       }
 
@@ -306,7 +306,7 @@ void main() {
         title: 'Only one file',
         keywords: [],
         formattedDate: aDate,
-        pathToFile: onlyPath,
+        filePath: onlyPath,
       );
 
       await sut!.deleteSpecificSessionMetadata(
@@ -358,7 +358,7 @@ void main() {
           title: expectedTitle,
           keywords: expectedKeywords,
           formattedDate: expectedDate,
-          pathToFile: expectedPath,
+          filePath: expectedPath,
         );
 
         final result = await sut!.retrieveAllDashboardMetadata(
@@ -386,14 +386,14 @@ void main() {
           title: testFile1Title,
           keywords: [],
           formattedDate: aDate,
-          pathToFile: testFile1Path,
+          filePath: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.caContext,
           title: testFile2Title,
           keywords: [],
           formattedDate: aDate,
-          pathToFile: fileToDelete,
+          filePath: fileToDelete,
         );
 
         // 1 file deleted

@@ -74,7 +74,7 @@ class DashboardUtils {
     required String? title,
     required List<String> keywords,
     required String formattedDate,
-    required String pathToFile,
+    required String filePath,
   }) 
   async {
     if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
@@ -94,7 +94,7 @@ class DashboardUtils {
       keyTitle: title ?? "Untitled",
       keyKeywords: keywords,
       keyDate: formattedDate,
-      keyFilePath: pathToFile,
+      keyFilePath: filePath,
     };
 
     // Saving the session metadata (file created in getSessionFile if needed)

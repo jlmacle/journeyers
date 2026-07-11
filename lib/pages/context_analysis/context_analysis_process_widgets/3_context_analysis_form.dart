@@ -175,7 +175,7 @@ class CAFormState extends State<CAForm>
       var formattedDate = formatter.format(now);   
       await du.saveDashboardMetadata
       (typeOfDashboardContext: DashboardUtils.caContext, title: _analysisTitle, 
-      keywords: _keywords.toList(), formattedDate: formattedDate, pathToFile: pathToCSVFile);
+      keywords: _keywords.toList(), formattedDate: formattedDate, filePath: pathToCSVFile);
       await rtdu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.caContext);
     }
     

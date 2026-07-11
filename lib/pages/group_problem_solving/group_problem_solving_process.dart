@@ -244,7 +244,7 @@ class GPSProcessState extends State<GPSProcess>
           title: sessionTitle, 
           keywords: _currentKeywords.toList(), 
           formattedDate: formattedDate,
-          pathToFile: filePath,
+          filePath: filePath,
         );
 
         await rtdu.saveWasSessionDataSaved(wasDataSaved: true, context: DashboardUtils.gpsContext);
