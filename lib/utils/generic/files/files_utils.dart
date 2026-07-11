@@ -213,39 +213,6 @@ class FileUtils
         ('readFileContent', {'fileName': fileNameWithExtension}); 
   }
 
-
-  /// Method used to read a text file on Android.
-  Future<String> readTextFileOnAndroidTmp({required String fileNameWithExtension}) async
-  {
-    return await platformAndroid.invokeMethod
-        ('readFileContent', {'fileName': fileNameWithExtension}); 
-  }
-
-  /// Method used to read a text file on iOS.
-  Future<String> readTextFileOnIOSTmp({required String fileNameWithExtension}) async
-  {
-    return await platformIOS.invokeMethod
-        ('readFileContent', {'fileName': fileNameWithExtension}); 
-  }
-
-  /// Method used to read a text file on mobile.
-  Future<String> readTextFileOnMobile({required String pathToData}) async
-  {
-    String fileName = path.basename(pathToData);
-    if (Platform.isIOS)
-    {
-      return await readTextFileOnIOSTmp(fileNameWithExtension: fileName);
-    }
-    else if (Platform.isAndroid)
-    {
-      return await readTextFileOnAndroidTmp(fileNameWithExtension: fileName);
-    }
-    else 
-    {
-      throw Exception("Platform not taken into account");
-    }
-
-  }
   // ─── METHODS USED TO READ FILES : end ───────────────────────────────────────
 
   // ─── METHODS USED TO DELETE FILES : beginning  ───────────────────────────────────────

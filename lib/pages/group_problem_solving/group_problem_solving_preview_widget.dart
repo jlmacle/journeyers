@@ -80,55 +80,9 @@ class _GPSPreviewState
         return;
       }
 
-      String fileNameWithExtension = path.basename(widget.gpsPreviewPathToStoredData);
-      final String content;
       // Retrieving the TXT content
-      if (Platform.isAndroid)
-      {
-        if (previewBuildingDebug) pu.printd("Preview Building: GPS: on Android");
-
-        try
-        {
-          // Outside of testing: reading file using SAF
-          if (!isInTestEnvironment) { content= await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension); }
-          // While testing
-          else 
-          { 
-            if (testingDebug) pu.printd("Testing Debug: Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
-            content = await File(widget.gpsPreviewPathToStoredData).readAsString();
-          }
-          txtLines = LineSplitter.split(content).toList();
-        }
-        on Exception
-        catch(e, s) {pu.printd("Preview Building: Exception: GPS: on Android: $e: $s");}
-      }
-      else if (Platform.isIOS)
-      {
-        
-        if (previewBuildingDebug) pu.printd("Preview Building: GPS: on iOS");
-        try
-        {
-          // Outside of testing
-          if (!isInTestEnvironment) { content = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
-          // While testing
-          else 
-          { 
-            if (testingDebug) pu.printd("Testing Debug: Preview Building: GPS: Reading $fileNameWithExtension from tmp folder");
-            content = await File(widget.gpsPreviewPathToStoredData).readAsString();
-          }
-          txtLines = LineSplitter.split(content).toList();
-        }
-        on Exception
-        catch(e, s) {pu.printd("Preview Building: Exception: GPS: on iOS: $e: $s");}
-      }
-      else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
-      {
-        // Checking if the CSV file exists
-        File csvFile = File(widget.gpsPreviewPathToStoredData);
-        if (!csvFile.existsSync()) throw Exception("The CSV file doesn't exist: ${widget.gpsPreviewPathToStoredData} (${Platform.operatingSystem})");
-        // Loading the file content
-        txtLines = csvFile.readAsLinesSync();
-      }
+      final String content = await fu.readTextFile(filePath: widget.gpsPreviewPathToStoredData);
+      txtLines = LineSplitter.split(content).toList();
       
       // To clean
       // Writing the content in a temporary file for data sharing
