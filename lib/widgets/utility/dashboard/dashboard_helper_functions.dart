@@ -18,10 +18,7 @@ Future<void> retrieveCASessionData
   required String dashboardContext,
   required String filePathWhenEdition, 
   required OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedCASessionDataBeforeEditionCallbackFunction
-}) async {
-    String csvContent = "";
-    String fileNameWithExtension = path.basename(filePathWhenEdition);
-    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+}) async {   
 
     // Getting the title
     List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.caContext);
@@ -30,48 +27,9 @@ Future<void> retrieveCASessionData
     List<String> keywordsWhenEdition = (sessionToEdit[DashboardUtils.keyKeywords] as List).cast<String>();
 
     // Getting the CSV content
-    if (Platform.isAndroid)
-    {      
-      if (editDebug) pu.printd("Editing: retrieveCASessionData on Android");
-      try
-      {
-        // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { csvContent = await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension);}
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Testing Debug: retrieveCASessionData: Reading $fileNameWithExtension from tmp folder");
-          csvContent = await File(filePathWhenEdition).readAsString();
-        }
-      }
-      on Exception
-      catch(e, s) {pu.printd("Editing: retrieveCASessionData: Exception: CA on Android:$filePathWhenEdition: $e: $s"); }
-    }
-    else if (Platform.isIOS)
-    {
-      if (editDebug) pu.printd("Editing: retrieveCASessionData on iOS");
-      try
-      {
-        // Outside of testing
-        if (!isInTestEnvironment) { csvContent = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Editing: retrieveCASessionData: Reading $fileNameWithExtension from tmp folder");
-          csvContent = await File(filePathWhenEdition).readAsString();
-        }
-      }
-      on Exception
-      catch(e, s) {pu.printd("Editing: retrieveCASessionData: Exception: CA on iOS: $e: $s"); }
-    }
-    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
-    {
-      if (editDebug) pu.printd("Editing: retrieveCASessionData on desktop");
-      // Checking if the CSV file exists
-      File csvFile = File(filePathWhenEdition);
-      if (!csvFile.existsSync()) throw Exception("Editing: retrieveCASessionData: The CSV file doesn't exist: $filePathWhenEdition (${Platform.operatingSystem})");
-      csvContent = await csvFile.readAsString();
-    }
+    String fileNameWithExtension = path.basename(filePathWhenEdition);
+    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+    String csvContent = await fu.readTextFile(filePath: filePathWhenEdition);
 
     // Loading the data from the CSV into a DTO
     DTOCAForm dtoWhenEdition = DTOCAForm.fromCSV(csvContent);
@@ -105,9 +63,6 @@ Future<void> retrieveGPSSessionData
   required String filePathWhenEdition, 
   required OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedGPSSessionDataBeforeEditionCallbackFunction
 }) async {
-    String txtContent = "";
-    String fileNameWithExtension = path.basename(filePathWhenEdition);
-    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
 
     // Getting the title
     List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: DashboardUtils.gpsContext);
@@ -116,48 +71,9 @@ Future<void> retrieveGPSSessionData
     List<String> keywordsWhenEdition = (sessionToEdit[DashboardUtils.keyKeywords] as List).cast<String>();
 
     // Getting the TXT content
-    if (Platform.isAndroid)
-    {      
-      if (editDebug) pu.printd("Editing: retrieveGPSSessionData on Android");
-      try
-      {
-        // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension);}
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Testing Debug: retrieveGPSSessionData: Reading $fileNameWithExtension from tmp folder");
-          txtContent = await File(filePathWhenEdition).readAsString();
-        }
-      }
-      on Exception
-      catch(e, s) {pu.printd("Editing: retrieveGPSSessionData: Exception: GPS on Android:$filePathWhenEdition: $e: $s"); }
-    }
-    else if (Platform.isIOS)
-    {
-      if (editDebug) pu.printd("Editing: retrieveGPSSessionData on iOS");
-      try
-      {
-        // Outside of testing
-        if (!isInTestEnvironment) { txtContent = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Editing: retrieveGPSSessionData: Reading $fileNameWithExtension from tmp folder");
-          txtContent = await File(filePathWhenEdition).readAsString();
-        }
-      }
-      on Exception
-      catch(e, s) {pu.printd("Editing: retrieveGPSSessionData: Exception: GPS on iOS: $e: $s"); }
-    }
-    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
-    {
-      if (editDebug) pu.printd("Editing: retrieveGPSSessionData on desktop");
-      // Checking if the TXT file exists
-      File txtFile = File(filePathWhenEdition);
-      if (!txtFile.existsSync()) throw Exception("Editing: retrieveGPSSessionData: The CSV file doesn't exist: $filePathWhenEdition (${Platform.operatingSystem})");
-      txtContent = await txtFile.readAsString();
-    }
+    String txtContent = await fu.readTextFile(filePath: filePathWhenEdition);
+    String fileNameWithExtension = path.basename(filePathWhenEdition);
+    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
 
     // Loading the data from the TXT into a DTO
     DTOGPSForm dtoWhenEdition = await DTOGPSForm.fromTXT(txtContent);
@@ -195,54 +111,14 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
     if (editDebug) pu.printd("Editing: retrieveGPSIdeas: sessionToEditMetadata : $sessionToEditMetadata");
     
     var title = sessionToEditMetadata[DashboardUtils.keyTitle];
-
-    var content = "";
+    
+    // Getting the TXT content
     String fileNameWithExtension = path.basename(filePath);
     String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
-
-    if (Platform.isAndroid)
-    {      
-      if (editDebug) pu.printd("Editing: retrieveGPSIdeas on Android");
-      try
-      {
-        // Outside of testing: reading file using SAF
-        if (!isInTestEnvironment) { content = await fu.readTextFileOnAndroidTmp(fileNameWithExtension: fileNameWithExtension);}
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Testing Debug: Editing: retrieveGPSIdeas: Reading $fileNameWithExtension from tmp folder");
-          content = await File(filePath).readAsString();
-        }
-      }
-      on Exception
-      catch(e, s) {pu.printd("Dashboard helper functions: retrieveGPSIdeas: Exception: GPS on Android: $e: $s"); }
-    }
-    else if (Platform.isIOS)
-    {
-      if (editDebug) pu.printd("Editing: retrieveGPSIdeas on iOS");
-      try
-      {
-        // Outside of testing
-        if (!isInTestEnvironment) { content = await fu.readTextFileOnIOSTmp(fileNameWithExtension: fileNameWithExtension); }
-        // While testing
-        else 
-        { 
-          if (testingDebug) pu.printd("Testing Debug: Editing: retrieveGPSIdeas: Reading $fileNameWithExtension from tmp folder");
-          content = await File(filePath).readAsString();
-        }
-      }
-      on Exception
-      catch(e, s) {pu.printd("Dashboard helper functions: retrieveGPSIdeas: Exception: GPS on iOS: $e: $s"); }
-    }
-    else if (Platform.isLinux || Platform.isMacOS | Platform.isWindows)
-    {
-      // Checking if the CSV file exists
-      File txtFile = File(filePath);
-      if (!txtFile.existsSync()) throw Exception("Dashboard helper functions: retrieveGPSIdeas: The TXT file doesn't exist: $filePath (${Platform.operatingSystem})");
-      content = txtFile.readAsStringSync();
-    }
-
+    var content = await fu.readTextFile(filePath: filePath);    
     var txtLines = LineSplitter.split(content).toList();
+
+    // Getting the ideas
     List<String> ideas = [];
     if (txtLines.length >= 2) {       
         // Ideas start after the "---" separator (index 3 onwards)
