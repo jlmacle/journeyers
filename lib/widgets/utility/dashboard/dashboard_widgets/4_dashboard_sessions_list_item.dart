@@ -225,7 +225,7 @@ class _SessionsListItemState extends State<SessionsListItem>
         title: title, 
         keywords: keywords, 
         formattedDate: formattedDate,
-        pathToFile: filePath,
+        filePath: filePath,
       );
 
       if (!mounted) return;
