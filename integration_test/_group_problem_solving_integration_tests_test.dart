@@ -124,7 +124,65 @@ Future<void> main() async {
   // ── Test cases ─────────────────────────────────────────────────────────────
 
   group('Group Problem-Solving Integration Tests: Mobile: \n', () 
-  {
+  {    
+    group('Entered metadata is displayed on the dashboard: Mobile: \n', ()
+    {
+    // 'Session metadata entered (title, keywords, date) is found: '
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
+      'Session metadata entered (title, keywords, date) is found: '
+      '(assuming an already selected path to the user session data folder)',
+      (WidgetTester tester) async {
+
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the GPSPage
+          //
+          // pumpWidget renders the first frame.
+          // pumpAndSettle drives the event loop until there are no more pending frames,
+          // letting the async getPreferences() call complete 
+          // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+          
+          await tester.pumpWidget(buildTestableGPSPage());
+          await tester.pumpAndSettle();
+
+          // ── 1. ENTERING NEW GPS PROCESS DATA ───────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          await gpsEnterNewProcessData
+                (
+                  tester: tester, 
+                  title: testGPSTitle1,
+                  kwsList: kwsList,
+                  ideasList: ["at least one idea needed"],
+                  fileNameWithoutExtension: fileName1WithoutExtension
+                );
+
+          // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────
+          // Searching for the title and keywords          
+            // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2)); 
+          await dashboardSearchTitleAndKeywords(title: "${testGPSTitle1}${gpsTitleSuffix}", kws: kwsList);
+
+          // Searching for the date
+          dateForTestingIndex = 0;
+          expect(find.textContaining(datesForTestingList[0]), findsOne);
+        }
+      }); 
+    });
+
+
     group('Sorting and filtering: Mobile: \n', ()
     {
       // 'Sorting by title \n'
