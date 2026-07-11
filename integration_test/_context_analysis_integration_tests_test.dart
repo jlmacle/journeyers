@@ -1196,9 +1196,9 @@ Future<void> main() async {
         });
   
 
-      // 'Context analysis data edition \n'
+      // 'Context analysis data edition (from preview) \n'
       testWidgets(
-        'Context analysis data edition \n',
+        'Context analysis data edition (from preview) \n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
