@@ -522,6 +522,16 @@ Future<void> main() async {
             Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
             expect(sessionListItemFinder, findsOne);
 
+            // Verifying the Filter Chip present
+            var filterChipFinder = find.descendant
+            (
+              of: find.byType(FilterChip), 
+              matching: find.text(kwCompanionship)
+            );
+
+            expect(filterChipFinder, findsOne);
+
+
             // ── 3. TESTING THE DELETION ────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             
@@ -535,7 +545,14 @@ Future<void> main() async {
             // Verifying the sessions list item absent
             sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
             expect(sessionListItemFinder, findsNothing);
-      
+
+            // Verifying the Filter Chip absent
+            filterChipFinder = find.descendant
+            (
+              of: find.byType(InputChip), 
+              matching: find.text(kwCompanionship)
+            );
+            expect(filterChipFinder, findsNothing);      
             // await tester.pump(const Duration(seconds: 2));
           }
         }      
