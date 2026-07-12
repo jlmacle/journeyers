@@ -173,6 +173,7 @@ Future<void> main() async {
           // Searching for the title and keywords          
             // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
+          // todo: a dashboardSearchMetadata
           await dashboardSearchTitleAndKeywords(title: "${testGPSTitle1}${gpsTitleSuffix}", kws: kwsList);
 
           // Searching for the date
