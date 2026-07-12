@@ -89,7 +89,7 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
 
   // Used in DashboardPage.
   // Method used to refresh the keywords list after deletion of session data.
-  void keywordsRefreshAfterSessionDeletion() 
+  Future<void> keywordsRefreshAfterSessionDeletion() async
   {
     // if no sessions left, nothing to do
     if (widget.sessionsMetadataAll == null) return;
@@ -104,16 +104,12 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
     
     // Refreshing the used keywords' list, the selection of keywords, 
     // and the DashboardFilteringByKeywords widget
-    setState
-    (
-      () 
-      {
-        widget.keywordsAll.clear();
-        widget.keywordsAll.addAll(remainingKws);
-        // Removing selected filters if the keyword no longer exists
-        widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
-      }
-    );
+    widget.keywordsAll.clear();
+    widget.keywordsAll.addAll(remainingKws);
+    // Removing selected filters if the keyword no longer exists
+    widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
+    
+    setState((){});
   }
 
   @override

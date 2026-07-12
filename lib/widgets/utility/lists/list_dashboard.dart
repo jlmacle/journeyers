@@ -151,9 +151,9 @@ class ListDashboardState extends State<ListDashboard>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  void _keywordsRefreshAfterSessionDeletion() 
+  Future<void> _keywordsRefreshAfterSessionDeletion() async
   {
-    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
   }
 
   // Method used to update the list keywords in the database
@@ -166,7 +166,7 @@ class ListDashboardState extends State<ListDashboard>
     await _listsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    _keywordsRefreshAfterSessionDeletion();
+    await _keywordsRefreshAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -199,7 +199,7 @@ class ListDashboardState extends State<ListDashboard>
     await _listsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    _keywordsRefreshAfterSessionDeletion();
+    await _keywordsRefreshAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -217,7 +217,7 @@ class ListDashboardState extends State<ListDashboard>
     await _listsDB.updateListData(listKey, listData);
 
     // TODO: To clean/name modification
-    _keywordsRefreshAfterSessionDeletion();
+    await _keywordsRefreshAfterSessionDeletion();
 
     // Updating the local UI state
     setState(() {
@@ -254,7 +254,6 @@ class ListDashboardState extends State<ListDashboard>
       await _updateParticipantsInDB(listKey, updatedItems, listData);            
     }    
   }
-
   
   // ─── DELETION OF SINGLE LIST related data and methods ───────────────────────────────────────
   final List<String> _listsSelectedForDeletionKeys = [];  
@@ -278,7 +277,7 @@ class ListDashboardState extends State<ListDashboard>
     );
 
     // Updating the keywords list
-    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the relevant filters
     await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();

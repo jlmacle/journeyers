@@ -89,7 +89,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
 
   // Used in ListDashboard.
   // Method used to refresh the keywords list after deletion of session data.
-  void keywordsRefreshAfterSessionDeletion() 
+  Future<void> keywordsRefreshAfterSessionDeletion() async
   {
     // if no lists left, nothing to do
     if (widget.listsAll == null) return;
