@@ -547,7 +547,7 @@ Future<void> main() async {
         // Verifying the Filter Chip absent
         filterChipFinder = find.descendant
         (
-          of: find.byType(InputChip), 
+          of: find.byType(FilterChip), 
           matching: find.text(kwCompanionship)
         );
 
