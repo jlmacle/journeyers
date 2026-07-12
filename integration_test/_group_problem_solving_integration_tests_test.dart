@@ -528,7 +528,6 @@ Future<void> main() async {
               of: find.byType(FilterChip), 
               matching: find.text(kwCompanionship)
             );
-
             expect(filterChipFinder, findsOne);
 
 
