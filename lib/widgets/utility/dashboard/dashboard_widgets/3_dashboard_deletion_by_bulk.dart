@@ -92,7 +92,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     widget.sessionsMetadataSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the keywords filtering
     await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
