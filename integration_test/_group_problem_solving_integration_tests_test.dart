@@ -2711,9 +2711,71 @@ Future<void> main() async {
         });
     
     });
+    
   });
 
+  
+
   });
+
+  group('Visual Tests: Mobile: \n', ()
+  {
+    // 'Sharing test \n'
+    testWidgets(
+      'Sharing test \n',
+      (WidgetTester tester) async {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the group problem-solving page, with the dashboard.
+          'wasGPSSessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+            // Pumping the GPSPage
+            //
+            // pumpWidget renders the first frame.
+            // pumpAndSettle drives the event loop until there are no more pending frames,
+            // letting the async getPreferences() call complete 
+            // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+            //              
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            await gpsEnterNewProcessData
+            (
+              tester: tester, 
+              title: testGPSTitle1,
+              kwsList: [],
+              ideasList: ["at least one idea needed"],
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // ── 2. CLICKING ON THE DASHBOARD TO PREVIEW ───────────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            var previewFinder = find.byIcon(Icons.find_in_page_rounded);
+            await tester.tap(previewFinder);
+            await tester.pumpAndSettle();
+
+            // ── 3. CLICKING ON THE SHARING BUTTON IN THE PREVIEW ───────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+            var shareFinder = find.byIcon(Icons.share);
+            await tester.tap(shareFinder);
+            await tester.pumpAndSettle();
+
+            // ── 4. PAUSE FOR VISUAL INSPECTION ───────────────────────────
+            // ─────────────────────────────────────────────────────────────
+            await tester.pump(const Duration(seconds: 10));
+        }
+      });
+  }); 
 
 });
 
