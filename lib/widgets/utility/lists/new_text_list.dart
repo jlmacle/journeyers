@@ -357,6 +357,7 @@ class _NewTextListState extends State<NewTextList> {
         (
           children: 
           [
+            const Divider(),
             NewTextListKeywordsDeclaration
             (
               keywordsCurrent: {},
@@ -367,6 +368,7 @@ class _NewTextListState extends State<NewTextList> {
                 _newKeywords = newKeywords.toList()..sort();
               }
             ),
+            const Divider(),
             // Deletion by bulk widget
             NewTextListDeletionByBulk
             (
