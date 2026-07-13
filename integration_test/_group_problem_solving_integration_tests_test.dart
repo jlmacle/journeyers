@@ -159,7 +159,7 @@ Future<void> main() async {
 
           // ── 1. ENTERING NEW GPS PROCESS DATA ───────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-          await gpsEnterNewProcessData
+          await gpsEnterNewProcessDataOnMobile
                 (
                   tester: tester, 
                   title: testGPSTitle1,
@@ -507,7 +507,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
             
-            await gpsEnterNewProcessData
+            await gpsEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: testGPSTitle1,
@@ -695,7 +695,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
 
-            await gpsEnterNewProcessData
+            await gpsEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: testGPSTitle1,
@@ -750,7 +750,7 @@ Future<void> main() async {
             var keywordsEdition = kwsList; 
             var idea3Added = "idea3-edited";
             
-            await gpsEnterNewProcessData
+            await gpsEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: titleEdition,
@@ -2749,7 +2749,7 @@ Future<void> main() async {
 
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
-            await gpsEnterNewProcessData
+            await gpsEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: testGPSTitle1,

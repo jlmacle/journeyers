@@ -698,7 +698,7 @@ final q = CAQuestionsFields();
   }
 
   // Method used to enter new GPS process data
-  Future<void> gpsEnterNewProcessData 
+  Future<void> gpsEnterNewProcessDataOnMobile 
   ({
     required WidgetTester tester, 
     required String title,
@@ -744,7 +744,7 @@ final q = CAQuestionsFields();
     int listsLength = titlesList.length;
     for (var index = 0; index < listsLength; index++)
     {
-      await gpsEnterNewProcessData 
+      await gpsEnterNewProcessDataOnMobile 
       (
         tester: tester, 
         title: titlesList[index],
