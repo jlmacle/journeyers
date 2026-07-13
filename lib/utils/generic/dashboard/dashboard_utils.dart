@@ -79,9 +79,7 @@ class DashboardUtils {
   async {
     if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
     if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
-    if (testingDebug) pu.printd("Session Data: isInTestEnvironment: $isInTestEnvironment");
-
-  
+      
     // Date value interception for testing purposes
     if (isInTestEnvironment)
     {
