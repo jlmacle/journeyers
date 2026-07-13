@@ -597,12 +597,17 @@ Future<void> main() async {
         (
           formToFill: false,
           tester: tester,
+          // const List<String> titlesList = [testAnalysisTitle3, testAnalysisTitle1, testAnalysisTitle2];
           titlesList: titlesList,
-          kwsLists: [[], [], []],
+          kwsLists: [["kw3"], ["kw1"], ["kw2"]],
           fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
         );
 
-        // ── 2. SEARCHING FOR THE TILES with title 1 and title 2 TO CHECK ON THE DASHBOARD  ─
+        // Verifying the Filter Chips present
+        var filterChipFinder = find.byType(FilterChip);
+        expect(filterChipFinder, findsNWidgets(3));
+
+        // ── 2. DELETION: SEARCHING FOR THE TILES with title 1 and title 2  ─
         // Searching and tapping the checkboxes for title 1 and title 2
         var checkbox1Finder = find.descendant
         (
@@ -631,6 +636,7 @@ Future<void> main() async {
         await tester.tap(bulkDeletionFinder);
         await tester.pumpAndSettle();
 
+
         // ── 4. TESTING THE DELETION ────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────       
         // Checking the number of list items left 
@@ -642,77 +648,170 @@ Future<void> main() async {
         Text textWidget = tester.widget(textFinder);
         expect(textWidget.data, testAnalysisTitle3);
 
+        // Verifying that only kw3 is present
+        filterChipFinder = find.byType(FilterChip);
+        expect(filterChipFinder, findsNWidgets(1));
+        expect(find.text("kw3"), findsOne);
+
         // await tester.pump(const Duration(seconds: 2));
       }
     }      
   );      
+
+  
   });
 
     group('Preview Tests: Mobile: \n', () 
-{
-  // 'Session data entered is found on the preview: '
-  // 'all fields empty \n'
-  // '(assuming an already selected path to the user session data folder)',
-  testWidgets(
-    'Session data entered is found on the preview: '
-    'all fields empty \n'
-    '(assuming an already selected path to the user session data folder)',
-    (WidgetTester tester) async {
+  {
+    // 'Session data entered is found on the preview: '
+    // 'all fields empty \n'
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
+      'Session data entered is found on the preview: '
+      'all fields empty \n'
+      '(assuming an already selected path to the user session data folder)',
+      (WidgetTester tester) async {
 
-      // Setting mock values for SharedPreferences
-      SharedPreferences.setMockInitialValues
-      ({
-        // Setting value for the first-run modal to be absent,
-        'wasFirstRunModalAcknowledged': true,
-        // and to have the context analysis page, with the dashboard.
-        'wasCASessionDataSaved': true,
-        // Temporary test dir as application folder path
-        'applicationFolderPath': testTmpDir!.path
-      });
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the context analysis page, with the dashboard.
+          'wasCASessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
 
-      if (Platform.isAndroid || Platform.isIOS)
-      {
-        // Pumping the CAPage        
-        await tester.pumpWidget(buildTestableCAPage());
-        await tester.pumpAndSettle();
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the CAPage        
+          await tester.pumpWidget(buildTestableCAPage());
+          await tester.pumpAndSettle();
 
-        // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────
+          // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
 
-        // All CA form fields empty in the default parameter values
-        await caEnterNewProcessDataOnMobile
-        (
-          tester: tester, 
-          title: testAnalysisTitle2,
-          kwsList: kwsList,
-          fileNameWithoutExtension: fileName1WithoutExtension
-        );
+          // All CA form fields empty in the default parameter values
+          await caEnterNewProcessDataOnMobile
+          (
+            tester: tester, 
+            title: testAnalysisTitle2,
+            kwsList: kwsList,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
 
-        // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────
-        // Searching for the title and keywords
-        
-        // To avoid intermittent test failures
-        await tester.pump(const Duration(seconds: 2)); 
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+          // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────
+          // Searching for the title and keywords
+          
+          // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2)); 
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
 
-        // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
-        // ───────────────────────────────────────────────────────────────────────────────────────
-        // Default parameter values for empty CA form fields
-        await caTestPreview(tester: tester, title: testAnalysisTitle2);
+          // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────────
+          // Default parameter values for empty CA form fields
+          await caTestPreview(tester: tester, title: testAnalysisTitle2);
 
-        // await tester.pump(const Duration(seconds: 2));
+          // await tester.pump(const Duration(seconds: 2));
 
+        }
       }
-    }
-  );
+    );
 
-  // 'Session data entered is found on the preview: '
-  // 'all fields filled \n'
-  // '(assuming an already selected path to the user session data folder)',
-  testWidgets(
+    // 'Session data entered is found on the preview: '
+    // 'all fields filled \n'
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
+      'Session data entered is found on the preview: '
+      'all fields filled \n'
+      '(assuming an already selected path to the user session data folder)',
+      (WidgetTester tester) async {
+
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          'wasFirstRunModalAcknowledged': true,
+          // and to have the context analysis page, with the dashboard.
+          'wasCASessionDataSaved': true,
+          // Temporary test dir as application folder path
+          'applicationFolderPath': testTmpDir!.path
+        });
+
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the CAPage
+          //
+          // pumpWidget renders the first frame.
+          // pumpAndSettle drives the event loop until there are no more pending frames,
+          // letting the async getPreferences() call complete 
+          // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+          //
+          
+          await tester.pumpWidget(buildTestableCAPage());
+          await tester.pumpAndSettle();
+
+          // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+
+          // Individual perspective testing values
+          // 7 values are necessary
+          List<bool> checkboxValues = List.filled(7, true);
+          // a1 to a7
+          List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
+          String indivAnotherIssueStrValue = "a8";        
+
+          // Group/teams perspective testing values
+          String groupProblemsToSolveStrValue = "b1";
+          // 4 values are necessary
+          List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"No","Yes"}];
+          // b2 to b5
+          List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+
+          await caEnterNewProcessDataOnMobile
+          (
+            tester: tester, 
+            title: testAnalysisTitle2,
+            kwsList: kwsList,
+            checkboxValues: checkboxValues,
+            checkboxTextFieldValues: checkboxTextFieldValues,
+            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+            segmentedButtonValues: segmentedButtonValues,
+            segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
+
+          // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────
+          // Searching for the title and keywords
+          
+          // To avoid intermittent test failures
+          await tester.pump(const Duration(seconds: 2));
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+
+          // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────────────
+          // Putting all string values together, to retrieve them by index
+          List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
+          List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+          await caTestPreview(tester: tester, title: testAnalysisTitle2 , individualStringValues: individualStringValues, 
+          segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+
+          // await tester.pump(const Duration(seconds: 2));
+        }
+      },
+    );
+
+    // 'Session data entered is found on the preview: '
+    // 'not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n'
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
     'Session data entered is found on the preview: '
-    'all fields filled \n'
+    'not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n'
     '(assuming an already selected path to the user session data folder)',
     (WidgetTester tester) async {
 
@@ -745,18 +844,192 @@ Future<void> main() async {
 
         // Individual perspective testing values
         // 7 values are necessary
-        List<bool> checkboxValues = List.filled(7, true);
-        // a1 to a7
-        List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
-        String indivAnotherIssueStrValue = "a8";        
+        List<bool> checkboxValues = [true, false, false, true, true, true, false];
+        List<String> checkboxTextFieldValues = ["a1", "", "", "a4", "a5", "a6", ""];       
+        String indivAnotherIssueStrValue = "";        
+
+        // Group/teams perspective testing values
+        String groupProblemsToSolveStrValue = "";
+        // 4 values are necessary
+        List<Set<String>> segmentedButtonValues = [{"Yes"},{},{"I don't know"},{}];
+        List<String> segmentedButtonTextFieldValues = ["b2", "", "b4",""];
+
+        await caEnterNewProcessDataOnMobile
+          (
+            tester: tester, 
+            title: testAnalysisTitle2,
+            kwsList: kwsList,
+            checkboxValues: checkboxValues,
+            checkboxTextFieldValues: checkboxTextFieldValues,
+            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+            segmentedButtonValues: segmentedButtonValues,
+            segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
+        
+        // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+        // Searching for the title and keywords
+        
+        // To avoid intermittent test failures
+        await tester.pump(const Duration(seconds: 2));
+        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+
+        // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────────
+        // Putting all non-empty string values together, to retrieve them by index
+        List<String> individualStringValues = 
+          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          .where((string) => string.isNotEmpty)
+          .toList();
+
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+        await caTestPreview(tester: tester, title:testAnalysisTitle2 ,individualStringValues: individualStringValues, 
+        segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+
+        // await tester.pump(const Duration(seconds: 2));
+      }
+    },
+  ); 
+
+    // 'Session data entered is found on the preview: '
+    // 'not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
+    'Session data entered is found on the preview: '
+    'not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
+    '(assuming an already selected path to the user session data folder)',
+    (WidgetTester tester) async {
+
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues
+      ({
+        // Setting value for the first-run modal to be absent,
+        'wasFirstRunModalAcknowledged': true,
+        // and to have the context analysis page, with the dashboard.
+        'wasCASessionDataSaved': true,
+        // Temporary test dir as application folder path
+        'applicationFolderPath': testTmpDir!.path
+      });
+
+      if (Platform.isAndroid || Platform.isIOS)
+      {
+        // Pumping the CAPage
+        //
+        // pumpWidget renders the first frame.
+        // pumpAndSettle drives the event loop until there are no more pending frames,
+        // letting the async getPreferences() call complete 
+        // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+        //
+        
+        await tester.pumpWidget(buildTestableCAPage());
+        await tester.pumpAndSettle();
+
+        // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────
+        
+        // Individual perspective testing values
+        // 7 values are necessary
+        List<bool> checkboxValues = [false, true, false, false, true, true, false];
+        List<String> checkboxTextFieldValues = ["", "a2",  "", "", "a5", "a6", ""];       
+        String indivAnotherIssueStrValue = "";        
 
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "b1";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"No","Yes"}];
-        // b2 to b5
-        List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+        List<Set<String>> segmentedButtonValues = [{},{"No"},{},{"I don't know"}];
+        List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
 
+        await caEnterNewProcessDataOnMobile
+        (
+          tester: tester, 
+          title: testAnalysisTitle2,
+          kwsList: kwsList,
+          checkboxValues: checkboxValues,
+          checkboxTextFieldValues: checkboxTextFieldValues,
+          indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+          groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+          segmentedButtonValues: segmentedButtonValues,
+          segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+          fileNameWithoutExtension: fileName1WithoutExtension
+        );
+        
+        // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────
+        // Searching for the title and keywords
+        
+        // To avoid intermittent test failures
+        await tester.pump(const Duration(seconds: 2));
+        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+
+        // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────────────
+        // Putting all non-empty string values together, to retrieve them by index
+        List<String> individualStringValues = 
+          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          .where((string) => string.isNotEmpty)
+          .toList();
+
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+        await caTestPreview(tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
+        segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+
+        // await tester.pump(const Duration(seconds: 2));
+      }
+    },
+  ); 
+
+    // 'Session data entered is found on the preview: '
+    // 'not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
+    // '(assuming an already selected path to the user session data folder)',
+    testWidgets(
+    'Session data entered is found on the preview: '
+    'not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
+    '(assuming an already selected path to the user session data folder)',
+    (WidgetTester tester) async {
+
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues
+      ({
+        // Setting value for the first-run modal to be absent,
+        'wasFirstRunModalAcknowledged': true,
+        // and to have the context analysis page, with the dashboard.
+        'wasCASessionDataSaved': true,
+        // Temporary test dir as application folder path
+        'applicationFolderPath': testTmpDir!.path
+      });
+
+      if (Platform.isAndroid || Platform.isIOS)
+      {
+        // Pumping the CAPage
+        //
+        // pumpWidget renders the first frame.
+        // pumpAndSettle drives the event loop until there are no more pending frames,
+        // letting the async getPreferences() call complete 
+        // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+        //
+        
+        await tester.pumpWidget(buildTestableCAPage());
+        await tester.pumpAndSettle();
+
+        // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────
+        
+        // Individual perspective testing values
+        // 7 values are necessary
+        List<bool> checkboxValues = [true, false, false, false, true, true, true];
+        List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
+        String indivAnotherIssueStrValue = "a8";        
+
+        // Group/teams perspective testing values
+        String groupProblemsToSolveStrValue = "";
+        // 4 values are necessary
+        List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
+        List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
+        
         await caEnterNewProcessDataOnMobile
         (
           tester: tester, 
@@ -778,286 +1051,26 @@ Future<void> main() async {
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
         await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
-
+        
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
-        // Putting all string values together, to retrieve them by index
-        List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
+        // Putting all non-empty string values together, to retrieve them by index
+        List<String> individualStringValues = 
+          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          .where((string) => string.isNotEmpty)
+          .toList();
+
         List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
 
-        await caTestPreview(tester: tester, title: testAnalysisTitle2 , individualStringValues: individualStringValues, 
+        await caTestPreview(tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
         segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
 
         // await tester.pump(const Duration(seconds: 2));
       }
     },
-  );
+  ); 
 
-  // 'Session data entered is found on the preview: '
-  // 'not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n'
-  // '(assuming an already selected path to the user session data folder)',
-  testWidgets(
-  'Session data entered is found on the preview: '
-  'not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n'
-  '(assuming an already selected path to the user session data folder)',
-  (WidgetTester tester) async {
-
-    // Setting mock values for SharedPreferences
-    SharedPreferences.setMockInitialValues
-    ({
-      // Setting value for the first-run modal to be absent,
-      'wasFirstRunModalAcknowledged': true,
-      // and to have the context analysis page, with the dashboard.
-      'wasCASessionDataSaved': true,
-      // Temporary test dir as application folder path
-      'applicationFolderPath': testTmpDir!.path
-    });
-
-    if (Platform.isAndroid || Platform.isIOS)
-    {
-      // Pumping the CAPage
-      //
-      // pumpWidget renders the first frame.
-      // pumpAndSettle drives the event loop until there are no more pending frames,
-      // letting the async getPreferences() call complete 
-      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-      //
-      
-      await tester.pumpWidget(buildTestableCAPage());
-      await tester.pumpAndSettle();
-
-      // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────
-
-      // Individual perspective testing values
-      // 7 values are necessary
-      List<bool> checkboxValues = [true, false, false, true, true, true, false];
-      List<String> checkboxTextFieldValues = ["a1", "", "", "a4", "a5", "a6", ""];       
-      String indivAnotherIssueStrValue = "";        
-
-      // Group/teams perspective testing values
-      String groupProblemsToSolveStrValue = "";
-      // 4 values are necessary
-      List<Set<String>> segmentedButtonValues = [{"Yes"},{},{"I don't know"},{}];
-      List<String> segmentedButtonTextFieldValues = ["b2", "", "b4",""];
-
-      await caEnterNewProcessDataOnMobile
-        (
-          tester: tester, 
-          title: testAnalysisTitle2,
-          kwsList: kwsList,
-          checkboxValues: checkboxValues,
-          checkboxTextFieldValues: checkboxTextFieldValues,
-          indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-          groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-          segmentedButtonValues: segmentedButtonValues,
-          segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
-          fileNameWithoutExtension: fileName1WithoutExtension
-        );
-      
-      // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────
-      // Searching for the title and keywords
-      
-      // To avoid intermittent test failures
-      await tester.pump(const Duration(seconds: 2));
-      await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
-
-      // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────────
-      // Putting all non-empty string values together, to retrieve them by index
-      List<String> individualStringValues = 
-        [...checkboxTextFieldValues, indivAnotherIssueStrValue]
-        .where((string) => string.isNotEmpty)
-        .toList();
-
-      List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
-
-      await caTestPreview(tester: tester, title:testAnalysisTitle2 ,individualStringValues: individualStringValues, 
-      segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
-
-      // await tester.pump(const Duration(seconds: 2));
-    }
-  },
-); 
-
-  // 'Session data entered is found on the preview: '
-  // 'not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-  // '(assuming an already selected path to the user session data folder)',
-  testWidgets(
-  'Session data entered is found on the preview: '
-  'not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-  '(assuming an already selected path to the user session data folder)',
-  (WidgetTester tester) async {
-
-    // Setting mock values for SharedPreferences
-    SharedPreferences.setMockInitialValues
-    ({
-      // Setting value for the first-run modal to be absent,
-      'wasFirstRunModalAcknowledged': true,
-      // and to have the context analysis page, with the dashboard.
-      'wasCASessionDataSaved': true,
-      // Temporary test dir as application folder path
-      'applicationFolderPath': testTmpDir!.path
-    });
-
-    if (Platform.isAndroid || Platform.isIOS)
-    {
-      // Pumping the CAPage
-      //
-      // pumpWidget renders the first frame.
-      // pumpAndSettle drives the event loop until there are no more pending frames,
-      // letting the async getPreferences() call complete 
-      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-      //
-      
-      await tester.pumpWidget(buildTestableCAPage());
-      await tester.pumpAndSettle();
-
-      // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────
-      
-      // Individual perspective testing values
-      // 7 values are necessary
-      List<bool> checkboxValues = [false, true, false, false, true, true, false];
-      List<String> checkboxTextFieldValues = ["", "a2",  "", "", "a5", "a6", ""];       
-      String indivAnotherIssueStrValue = "";        
-
-      // Group/teams perspective testing values
-      String groupProblemsToSolveStrValue = "b1";
-      // 4 values are necessary
-      List<Set<String>> segmentedButtonValues = [{},{"No"},{},{"I don't know"}];
-      List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
-
-      await caEnterNewProcessDataOnMobile
-      (
-        tester: tester, 
-        title: testAnalysisTitle2,
-        kwsList: kwsList,
-        checkboxValues: checkboxValues,
-        checkboxTextFieldValues: checkboxTextFieldValues,
-        indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-        groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-        segmentedButtonValues: segmentedButtonValues,
-        segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
-        fileNameWithoutExtension: fileName1WithoutExtension
-      );
-      
-      // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────
-      // Searching for the title and keywords
-      
-      // To avoid intermittent test failures
-      await tester.pump(const Duration(seconds: 2));
-      await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
-
-      // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────────
-      // Putting all non-empty string values together, to retrieve them by index
-      List<String> individualStringValues = 
-        [...checkboxTextFieldValues, indivAnotherIssueStrValue]
-        .where((string) => string.isNotEmpty)
-        .toList();
-
-      List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
-
-      await caTestPreview(tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
-      segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
-
-      // await tester.pump(const Duration(seconds: 2));
-    }
-  },
-); 
-
-  // 'Session data entered is found on the preview: '
-  // 'not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-  // '(assuming an already selected path to the user session data folder)',
-  testWidgets(
-  'Session data entered is found on the preview: '
-  'not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-  '(assuming an already selected path to the user session data folder)',
-  (WidgetTester tester) async {
-
-    // Setting mock values for SharedPreferences
-    SharedPreferences.setMockInitialValues
-    ({
-      // Setting value for the first-run modal to be absent,
-      'wasFirstRunModalAcknowledged': true,
-      // and to have the context analysis page, with the dashboard.
-      'wasCASessionDataSaved': true,
-      // Temporary test dir as application folder path
-      'applicationFolderPath': testTmpDir!.path
-    });
-
-    if (Platform.isAndroid || Platform.isIOS)
-    {
-      // Pumping the CAPage
-      //
-      // pumpWidget renders the first frame.
-      // pumpAndSettle drives the event loop until there are no more pending frames,
-      // letting the async getPreferences() call complete 
-      // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-      //
-      
-      await tester.pumpWidget(buildTestableCAPage());
-      await tester.pumpAndSettle();
-
-      // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────
-      
-      // Individual perspective testing values
-      // 7 values are necessary
-      List<bool> checkboxValues = [true, false, false, false, true, true, true];
-      List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
-      String indivAnotherIssueStrValue = "a8";        
-
-      // Group/teams perspective testing values
-      String groupProblemsToSolveStrValue = "";
-      // 4 values are necessary
-      List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{},{"I don't know"}];
-      List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
-      
-      await caEnterNewProcessDataOnMobile
-      (
-        tester: tester, 
-        title: testAnalysisTitle2,
-        kwsList: kwsList,
-        checkboxValues: checkboxValues,
-        checkboxTextFieldValues: checkboxTextFieldValues,
-        indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-        groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-        segmentedButtonValues: segmentedButtonValues,
-        segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
-        fileNameWithoutExtension: fileName1WithoutExtension
-      );
-
-      // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────
-      // Searching for the title and keywords
-      
-      // To avoid intermittent test failures
-      await tester.pump(const Duration(seconds: 2));
-      await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
-      
-      // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
-      // ───────────────────────────────────────────────────────────────────────────────────────
-      // Putting all non-empty string values together, to retrieve them by index
-      List<String> individualStringValues = 
-        [...checkboxTextFieldValues, indivAnotherIssueStrValue]
-        .where((string) => string.isNotEmpty)
-        .toList();
-
-      List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
-
-      await caTestPreview(tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
-      segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
-
-      // await tester.pump(const Duration(seconds: 2));
-    }
-  },
-); 
-
-});
+  });
 
     // todo: to finish/clean: from dashboard/preview
     group('Edition Tests: Mobile: \n', ()
