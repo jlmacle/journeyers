@@ -827,7 +827,9 @@ Future<void> main() async {
             var idea1EditableDeletableFinder = find.byKey(const ValueKey('text0'));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
-              // Editing idea1
+
+            // ── Adding idea1: modification  ─────────────────────
+            // ────────────────────────────────────────────────────
             var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
             await tester.enterText(tfIdea1Finder, "${ideasList1[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -836,7 +838,7 @@ Future<void> main() async {
             await tester.pump(const Duration(seconds: 2));  
             if (testingDebug) pu.printd('Testing Debug: idea1 edited');
 
-            // ── Editing idea2 : deletion ───────────────────────────────────
+            // ── Editing idea2 : deletion ─────────────────────────
             // ─────────────────────────────────────────────────────
               // Searching idea2
               // Searching the editable/deletable checkbox for idea2
@@ -856,7 +858,7 @@ Future<void> main() async {
               // Waiting on Snackbar removal
             await tester.pump(const Duration(seconds: 5));
 
-            // ── Adding idea3  ───────────────────────────────────
+            // ── Adding idea3: addition  ─────────────────────────
             // ────────────────────────────────────────────────────
             var ideaOverlayTextFieldFinder = find.byKey(const ValueKey('ideaOverlayTextField'));
             await tester.enterText(ideaOverlayTextFieldFinder, idea3Added);
