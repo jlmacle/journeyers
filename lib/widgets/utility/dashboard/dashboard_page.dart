@@ -349,7 +349,8 @@ class DashboardPageState extends State<DashboardPage>
                     sessionsMetadataFiltered: _sessionsMetadataFiltered,
                     areSessionsForDeletion: _sessionsMetadataSelectedForDeletion.isNotEmpty,
                     sessionsMetadataSelectedForDeletion: _sessionsMetadataSelectedForDeletion,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
+                    dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard,
+                    dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey                    
                   )
                 ),
 

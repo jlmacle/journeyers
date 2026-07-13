@@ -33,6 +33,9 @@ class DashboardDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
+  /// Global key for DashboardFilteringByKeywordsState.
+  final GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
+
   const DashboardDeletionByBulk
   ({
     super.key,
@@ -40,18 +43,17 @@ class DashboardDeletionByBulk extends StatefulWidget
     required this.areSessionsForDeletion,
     required this.sessionsMetadataAll,
     required this.sessionsMetadataFiltered,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
-    this.sessionsMetadataSelectedForDeletion    
+    required this.dashboardCallbackFunctionToRefreshTheSessionsList,    
+    required this.sessionsMetadataSelectedForDeletion,
+    required this.dashboardFilteringByKeywordsKey,   
   });
 
   @override
-  State<DashboardDeletionByBulk> createState() => _DashboardDeletionByBulkState();
+  State<DashboardDeletionByBulk> createState() => DashboardDeletionByBulkState();
 }
 
-class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
+class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
 {
-  // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<DashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several session data
@@ -86,16 +88,16 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       (session) => 
       filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
     );
-    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.sessionsMetadataAll: ${widget.sessionsMetadataAll}");
+    if (testingDebug) pu.printd("Testing Debug: DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll: ${widget.sessionsMetadataAll}");
 
     // Clearing the list of the selected sessions
     widget.sessionsMetadataSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await widget.dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
+    await widget.dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
 
     // Displaying an informational message
     if (!mounted) return;
@@ -122,7 +124,7 @@ class _DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     {
 
       // Updating the keywords UI
-      _dashboardFilteringByKeywordsKey.currentState?.setState((){});
+      widget.dashboardFilteringByKeywordsKey.currentState?.setState((){});
 
       // Updating the sessions list UI
       widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
