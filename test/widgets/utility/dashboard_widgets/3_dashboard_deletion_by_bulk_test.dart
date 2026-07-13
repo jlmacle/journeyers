@@ -36,6 +36,7 @@ void main() {
           sessionsMetadataFiltered: sessionsMetadataFiltered!,
           sessionsMetadataSelectedForDeletion: sessionsMetadataSelectedForDeletion!,
           dashboardCallbackFunctionToRefreshTheSessionsList: () {},
+          dashboardFilteringByKeywordsKey: GlobalKey(),
         ),
       ),
     );

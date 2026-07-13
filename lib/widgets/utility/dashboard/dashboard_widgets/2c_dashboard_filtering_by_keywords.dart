@@ -91,6 +91,7 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   // Method used to refresh the keywords list after deletion of session data.
   Future<void> keywordsRefreshAfterSessionDeletion() async
   {
+    if (testingDebug) pu.printd('Testing Debug: DashboardFilteringByKeywords: keywordsRefreshAfterSessionDeletion');
     // if no sessions left, nothing to do
     if (widget.sessionsMetadataAll == null) return;
     
