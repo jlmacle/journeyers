@@ -1548,7 +1548,7 @@ Future<void> main() async {
 
       }); 
 
-     group('Visual Tests: Mobile: \n', ()
+    group('Visual Tests: Mobile: \n', ()
     {
       // 'Sharing test \n'
       testWidgets(
