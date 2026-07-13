@@ -163,6 +163,8 @@ class GPSProcessState extends State<GPSProcess>
     //.add_jm() to add this hour:minutes format: 5:08 PM
     var formatter = DateFormat('MMMM dd, yyyy').add_jm();
     var formattedDate = formatter.format(now);
+    if (isInTestEnvironment) formattedDate = datesForTestingList[dateForTestingIndex];
+
     String fileContent = "Group Problem Solving Ideas\n";
     fileContent += "$sessionTitle\n";
     fileContent += "Date: $formattedDate\n";
