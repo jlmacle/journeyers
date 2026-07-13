@@ -894,7 +894,7 @@ Future<void> main() async {
         });
     });
 
-  group('Participants Tests: \n', () 
+  group('Participants-related Tests: \n', () 
   {
     var name1 = "Bob";
     var name2 = "Alice";
@@ -2352,7 +2352,7 @@ Future<void> main() async {
 
 });
 
-    group('Ideas Tests: \n', () 
+    group('Ideas-related Tests: \n', () 
 {
   group('Ideas Overlay Tests: \n', () 
   {
