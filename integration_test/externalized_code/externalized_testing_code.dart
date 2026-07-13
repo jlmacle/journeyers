@@ -783,16 +783,14 @@ final q = CAQuestionsFields();
       await tester.pumpAndSettle();
 
       // Searching for the title
-      var titleInAppBarFinder = find.descendant
-      (
-        of: find.byType(AppBar), 
-        matching: find.text(title)
-      );
+      var titleFinder = find.textContaining(title);
+        // Verifying the title present
+      expect (titleFinder, findsNWidgets(2));
 
-      // Verifying the title present
-      expect (titleInAppBarFinder, findsOne);
-
-      // TODO: To finish. Code valuable as is.
+      // Searching for the date
+      dateForTestingIndex = 0;
+      expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+        
       // Verifying the ideas present
       for (var idea in ideasList)
       {
