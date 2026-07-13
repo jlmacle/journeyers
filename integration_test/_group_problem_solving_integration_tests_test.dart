@@ -594,8 +594,9 @@ Future<void> main() async {
             await gpsEnterSeveralTimesNewProcessData
             (
               tester: tester,
+              // const List<String> titlesList = [testGPSTitle3, testGPSTitle1, testGPSTitle2];
               titlesList: titlesList,
-              kwsLists: [[], [], []],
+              kwsLists: [["kw3"], ["kw1"], ["kw2"]],
               ideasList: [ideasList1, ideasList1, ideasList1],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
@@ -623,6 +624,10 @@ Future<void> main() async {
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
 
+            // Verifying the Filter Chips present
+            var filterChipFinder = find.byType(FilterChip);
+            expect(filterChipFinder, findsNWidgets(3));
+
             // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────
             // Searching the widget
@@ -643,6 +648,11 @@ Future<void> main() async {
             var textFinder = find.text(title3WithSuffix);
             Text textWidget = tester.widget(textFinder);
             expect(textWidget.data, title3WithSuffix);
+
+            // Verifying that only kw3 is present
+            filterChipFinder = find.byType(FilterChip);
+            expect(filterChipFinder, findsNWidgets(1));
+            expect(find.text("kw3"), findsOne);
 
             // await tester.pump(const Duration(seconds: 2));
           }
