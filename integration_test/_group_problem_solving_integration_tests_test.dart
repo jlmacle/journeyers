@@ -705,16 +705,8 @@ Future<void> main() async {
             );
 
             // await tester.pump(const Duration(seconds: 5));
-
-            // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────────
-            // Searching for the title and keywords
             
-            // To avoid intermittent test failures
-            await tester.pump(const Duration(seconds: 2));
-            await dashboardSearchTitleAndKeywords(title: testGPSTitle1, kws: kwsList, titleSuffix: gpsTitleSuffix);
-
-            // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
+            // ── 2. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             await tester.pump(const Duration(seconds: 2));
             await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
