@@ -2540,9 +2540,7 @@ Future<void> main() async {
 
 });
 
-    group('Ideas-related Tests: \n', () 
-{
-  group('Ideas Overlay Tests: \n', () 
+  group('Ideas overlay-related Tests: \n', () 
   {
 
     group('Ideas Overlay Opening Tests: \n', () 
@@ -2900,10 +2898,6 @@ Future<void> main() async {
     
     });
     
-  });
-
-  
-
   });
 
   group('Visual Tests: Mobile: \n', ()
