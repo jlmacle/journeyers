@@ -184,7 +184,7 @@ Future<void> main() async {
     });
 
 
-    group('Sorting and filtering: Mobile: \n', ()
+    group('Sorting and filtering Tests: Mobile: \n', ()
     {
       // 'Sorting by title \n'
       // '(assuming an already selected path to the user session data folder)',
