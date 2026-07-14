@@ -912,12 +912,12 @@ Future<void> main() async {
     var titlesCompanionship = [listLabel1];
     var titlesWorkplace = [listLabel2, listLabel3];
 
-    group('New Participants List Tests: \n', () 
+    group('New participants list Tests: \n', () 
     {
-      group('New Participants List Saving: \n', () 
+      group('New participants list saving: \n', () 
       {
 
-        group('New Participants List Labels/Content: \n', () 
+        group('New participants list labels/content: \n', () 
         {
           // 'Lists labels must be unique
           testWidgets('Lists labels must be unique', 
@@ -1431,7 +1431,7 @@ Future<void> main() async {
         
         }); 
       
-        group('New Participants List Saving: \n', () 
+        group('New participants list saving: \n', () 
         {
           // "1. Participants can be added, keywords added, the data saved in a list, 
           // and the participants' names are loaded in the GPS process page"
@@ -1596,7 +1596,7 @@ Future<void> main() async {
         });         
       });
 
-      group('New Participants List Editing: \n', () 
+      group('New participants list editing: \n', () 
       {
         // 'Participants names can be edited (while building a new list)'
         testWidgets('Participants names can be edited (while building a new list)', 
@@ -1724,9 +1724,9 @@ Future<void> main() async {
 
     });  
 
-    group('Participants Loading/Dashboard Tests: \n', () 
+    group('Participants loading/dashboard Tests: \n', () 
     {
-      group('Participants Loading: \n', () 
+      group('Participants loading: \n', () 
       {        
         // 'Participants can be loaded from an existing list'
         testWidgets('Participants can be loaded from an existing list', 
@@ -1815,7 +1815,7 @@ Future<void> main() async {
         
       });
 
-      group('Participants Dashboard Tests: \n', () 
+      group('Participants dashboard Tests: \n', () 
       {    
 
         group('Entered list data is displayed on the list dashboard: Mobile: \n', ()
@@ -2185,9 +2185,9 @@ Future<void> main() async {
       
         group('Edition Tests: \n', ()
         {
-          // 'List label edition: non empty label \n'
+          // 'List label edition: Non empty label \n'
           testWidgets(
-            'List label edition: non empty label \n',
+            'List label edition: Non empty label \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2251,9 +2251,9 @@ Future<void> main() async {
 
             });
 
-          // 'List label edition: empty label \n'
+          // 'List label edition: Empty label \n'
           testWidgets(
-            'List label edition: empty label \n',
+            'List label edition: Empty label \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2318,9 +2318,9 @@ Future<void> main() async {
 
             });
         
-          // 'Participants edition: non empty participants list \n'
+          // 'Participants edition: Non empty participants list \n'
           testWidgets(
-            'Participants edition: non empty participants list \n',
+            'Participants edition: Non empty participants list \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2399,9 +2399,9 @@ Future<void> main() async {
 
             });
         
-          // 'Participants edition: empty participants list \n'
+          // 'Participants edition: Empty participants list \n'
           testWidgets(
-            'Participants edition: empty participants list \n',
+            'Participants edition: Empty participants list \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2543,7 +2543,7 @@ Future<void> main() async {
   group('Ideas overlay-related Tests: \n', () 
   {
 
-    group('Ideas Overlay Opening Tests: \n', () 
+    group('Ideas overlay opening Tests: \n', () 
     {
       // 'The overlay can be opened clicking on the ideas area title'
       testWidgets('The overlay can be opened clicking on the ideas area title', 
@@ -2627,7 +2627,7 @@ Future<void> main() async {
         });
     });
 
-    group('Ideas Overlay Editing Tests: \n', () 
+    group('Ideas overlay editing Tests: \n', () 
     {
       var idea1 = "idea1";
       var idea2 = "idea2";
@@ -2902,9 +2902,9 @@ Future<void> main() async {
 
   group('Visual Tests: Mobile: \n', ()
   {
-    // 'Sharing test \n'
+    // 'Sharing \n'
     testWidgets(
-      'Sharing test \n',
+      'Sharing \n',
       (WidgetTester tester) async {
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
