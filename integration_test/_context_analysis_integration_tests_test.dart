@@ -1550,9 +1550,9 @@ Future<void> main() async {
 
     group('Visual Tests: Mobile: \n', ()
     {
-      // 'Sharing test \n'
+      // 'Sharing \n'
       testWidgets(
-        'Sharing test \n',
+        'Sharing \n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
