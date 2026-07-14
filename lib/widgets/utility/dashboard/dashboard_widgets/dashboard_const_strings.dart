@@ -11,7 +11,7 @@ const String gpsTitleSuffix = " (gps)";
 
 // Tooltips
 const String previewTooltipLabel = "Preview";
-const String editTooltipLabel = "Edit session data";
+const String editFromDashboardItemTooltipLabel = "Edit session data";
 const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete selected items";
 

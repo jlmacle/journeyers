@@ -346,7 +346,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     IconButton(
                       icon: const Icon(Icons.edit_document),
                       onPressed: widget.onEditPressedCallbackFunction,                      
-                      tooltip: editTooltipLabel,
+                      tooltip: editFromDashboardItemTooltipLabel,
                     ),
                     // To edit the keywords
                     IconButton(
@@ -411,6 +411,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                 children: [
                   IconButton
                   (
+                    tooltip: editFromDashboardItemTooltipLabel,
                     icon: const Icon(Icons.edit),
                     color: appBarWhite,
                     onPressed: () async
@@ -447,7 +448,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         throw Exception("Unexpected context: ${widget.dashboardContext}");
                       }
                     },
-                    tooltip: editTooltipLabel,
+                    
                   ),
                   IconButton(
                     icon: const Icon(Icons.share),
