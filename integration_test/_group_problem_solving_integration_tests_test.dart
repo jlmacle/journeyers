@@ -2185,9 +2185,9 @@ Future<void> main() async {
       
         group('Edition Tests: \n', ()
         {
-          // 'Label edition: non empty label \n'
+          // 'List label edition: non empty label \n'
           testWidgets(
-            'Label edition: non empty label \n',
+            'List label edition: non empty label \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2251,9 +2251,9 @@ Future<void> main() async {
 
             });
 
-          // 'Label edition: empty label \n'
+          // 'List label edition: empty label \n'
           testWidgets(
-            'Label edition: empty label \n',
+            'List label edition: empty label \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
