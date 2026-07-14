@@ -461,7 +461,7 @@ class _NewTextListState extends State<NewTextList> {
                   },
                 ),
               ),
-            // TextField used to add a new text
+            // TextField used to add a new participant's name
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField
