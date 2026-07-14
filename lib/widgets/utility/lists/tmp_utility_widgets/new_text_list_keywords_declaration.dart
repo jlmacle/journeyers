@@ -187,6 +187,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                               (tag) => InputChip
                                       (
                                         label: Text(tag),
+                                        deleteIcon: const Icon(Icons.close),
                                         onDeleted: () 
                                         {
                                           setState( () {_keywords!.remove(tag);});

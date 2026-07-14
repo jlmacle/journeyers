@@ -1324,6 +1324,111 @@ Future<void> main() async {
                 
           });            
         
+          // Todo: To find a better integration tests/widget tests organization
+          // 'Keywords can be added/removed'
+          testWidgets('Keywords can be added/removed', 
+          (WidgetTester tester) async 
+          {
+            // Setting mock values for SharedPreferences
+            SharedPreferences.setMockInitialValues
+            ({
+              // Setting value for the first-run modal to be absent,
+              'wasFirstRunModalAcknowledged': true,
+              // and to have the group problem-solving page, with the dashboard.
+              'wasGPSSessionDataSaved': true,
+            });
+
+            // Pumping the GPSPage
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+
+            // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────
+            await gpsFromGPSPageToProcessPage(tester);
+
+            // ── REACHING THE NEW PARTICIPANTS LIST  ──────────────────────────────────
+            // ────────────────────────────────────────────────────────────────────────────────────────
+            await gpsFromProcessPageToNewListPage(tester);
+
+            // ── ADDING KEYWORDS  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────
+              // Searching the keywordsDeclarationTitle
+            var keywordsDeclarationTitleFinder = find.text(keywordsDeclarationTitle);
+            await tester.tap(keywordsDeclarationTitleFinder);
+            await tester.pumpAndSettle();
+              // Adding two keywords
+            var keywords = ["kw1", "kw2"];
+                // Searching the text field
+            var keywordTfecFinder = find.byKey(const ValueKey('keywordField'));
+            for (var kw in keywords)
+            {
+              await tester.enterText(keywordTfecFinder, kw);
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle();
+              await tester.tap(keywordTfecFinder);
+              await tester.pumpAndSettle();
+            }
+
+            // ── REMOVING A KEYWORD  ───────────────────────────────
+            // ──────────────────────────────────────────────────────
+            var kw1ClosingFinder = 
+            find.descendant
+            (
+              of: find.ancestor
+                      (
+                        of: find.text("kw1"), 
+                        matching: find.byType(InputChip)
+                      ), 
+              matching: find.byIcon(Icons.close)
+            );
+            
+            await tester.tap(kw1ClosingFinder);
+            await tester.pumpAndSettle();
+
+            // ── VERIFYING KW2 REMAINING  ────────────────────
+            // ────────────────────────────────────────────────
+            expect(find.byType(InputChip), findsOne);
+            expect(find.text("kw2"), findsOne);   
+
+            // ── CLOSING THE OVERLAY  ────────────────────
+            // ────────────────────────────────────────────
+            var closeOverlayFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+            await tester.tap(closeOverlayFinder); 
+            await tester.pumpAndSettle();   
+
+            // ── ADDING A PARTICIPANT  ──────────────────
+            // ───────────────────────────────────────────
+            var participantNameFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            await tester.enterText(participantNameFieldFinder, "Bob");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // ── SAVING THE LIST  ──────────────────
+            // ──────────────────────────────────────
+            var saveListFinder = find.byTooltip('Save list');
+            await tester.tap(saveListFinder);
+            await tester.pumpAndSettle();
+              // Entering the list name
+            var saveListFieldFinder = find.byKey(const ValueKey('saveListField'));
+            await tester.enterText(saveListFieldFinder, "list name");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // await tester.pump(const Duration(seconds: 5));  
+
+            // ── GOING TO THE LIST LOADING PAGE  ──
+            // ─────────────────────────────────────
+            await gpsFromProcessPageToListLoadingDashboard(tester);
+
+            // ── VERIFYING THE KEYWORD PRESENT ──
+            // ───────────────────────────────────
+            expect(find.byType(Card), findsOne);
+            expect(find.text("kw1"), findsNothing);
+            expect(find.text("kw2"), findsOne);            
+
+            // await tester.pump(const Duration(seconds: 5));                
+          });            
+        
         }); 
       
         group('New Participants List Saving: \n', () 
