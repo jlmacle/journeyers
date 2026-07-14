@@ -1818,12 +1818,12 @@ Future<void> main() async {
       group('Participants Dashboard Tests: \n', () 
       {    
 
-        group('Entered metadata is displayed on the list dashboard: Mobile: \n', ()
+        group('Entered list data is displayed on the list dashboard: Mobile: \n', ()
         {
-          // 'Session metadata entered (participants, list name, keywords) is found: '
+          // 'List data entered (participants, list name, keywords) is found: '
           // '(assuming an already selected path to the user session data folder)',
           testWidgets(
-            'Session metadata entered (participants, list name, keywords) is found: '
+            'List data entered (participants, list name, keywords) is found: '
             '(assuming an already selected path to the user session data folder)',
             (WidgetTester tester) async 
             {
