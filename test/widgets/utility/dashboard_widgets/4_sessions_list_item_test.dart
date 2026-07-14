@@ -131,7 +131,7 @@ void main() {
         );
 
         // Verifies edit tooltip present
-        expect(find.byTooltip(editTooltipLabel), findsOneWidget);      
+        expect(find.byTooltip(editFromDashboardItemTooltipLabel), findsOneWidget);      
       });
 
       // 'Finds the keywords tooltip label'
