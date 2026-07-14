@@ -2471,9 +2471,9 @@ Future<void> main() async {
               expect(find.text(emptyParticipantsListError), findsOne);
             });
         
-          // 'The keywords can be edited \n'
+          // 'Keywords edition \n'
           testWidgets(
-            'The keywords can be edited \n',
+            'Keywords edition \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
