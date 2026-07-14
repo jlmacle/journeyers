@@ -147,7 +147,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
-                tooltip: closeKeywordsDeclarationTooltipLabel,
+                tooltip: closeGPSKeywordsDeclarationTooltipLabel,
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
               ),
@@ -166,6 +166,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
                       child: TextField
                       (
+                        key: const ValueKey("gpsKeywordsField"),
                         controller: _keywordsTfec,
                         decoration: const InputDecoration
                         (
