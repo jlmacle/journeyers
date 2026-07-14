@@ -956,7 +956,7 @@ Future<void> main() async {
             // ── ADDING MORE PARTICIPANTS TO SAVE UNDER THE SAME LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1036,7 +1036,7 @@ Future<void> main() async {
             // ── ADDING PARTICIPANTS, KEYWORDS and ATTEMPTING TO SAVE THE LIST  ──────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1130,7 +1130,7 @@ Future<void> main() async {
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1201,7 +1201,7 @@ Future<void> main() async {
             // ── ADDING THE SAME PARTICIPANTS TO SAVE UNDER ANOTHER LIST NAME ────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1348,7 +1348,7 @@ Future<void> main() async {
 
             // ── REACHING THE NEW PARTICIPANTS LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
 
             // ── ADDING KEYWORDS  ──────────────────────────────────
             // ──────────────────────────────────────────────────────
@@ -1622,7 +1622,7 @@ Future<void> main() async {
             // ── ADDING A PARTICIPANT ──────────────────────────────────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
@@ -1687,7 +1687,7 @@ Future<void> main() async {
             // ── ADDING A PARTICIPANT ──────────────────────────────────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
             // Loading the new list page from the GPS process page
-            await gpsFromProcessPageToNewListPage(tester);
+            await gpsFromProcessPageToNewParticipantsListPage(tester);
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
