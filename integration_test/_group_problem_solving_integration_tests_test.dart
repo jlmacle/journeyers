@@ -718,10 +718,8 @@ Future<void> main() async {
       );
     });
 
-    // todo: to finish/clean: from dashboard/preview    
     group('Edition Tests: Preview: Mobile: \n', ()
     {
-      //todo: keywords
       // 'Group problem-solving data edition (preview)\n'
       testWidgets(
         'Group problem-solving data edition (preview)\n',
@@ -746,16 +744,20 @@ Future<void> main() async {
 
             // ── 1. ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
-            var titleEdition = "GPS title";
-            var keywordsEdition = kwsList; 
+            var titleForEdition = "GPS title";
+            var keywordsListForEdition = [...kwsList, kwMaintenance]; 
+            var ideasListForEdition = ideasList1;
             var idea3Added = "idea3-edited";
             
+            // important for gpsTestPreview
+            // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+            dateForTestingIndex = 0;
             await gpsEnterNewProcessDataOnMobile
             (
               tester: tester, 
-              title: titleEdition,
-              kwsList: keywordsEdition,
-              ideasList: ideasList1,
+              title: titleForEdition,
+              kwsList: keywordsListForEdition,
+              ideasList: ideasListForEdition,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -780,7 +782,7 @@ Future<void> main() async {
 
             // ── Verifying the title present ─────────────
             // ────────────────────────────────────────────
-            expect(find.text(titleEdition), findsOne);
+            expect(find.text(titleForEdition), findsOne);
 
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
@@ -789,7 +791,7 @@ Future<void> main() async {
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
-              for (var kw in keywordsEdition)
+              for (var kw in keywordsListForEdition)
               {
                 expect(find.text(kw), findsOne);
               }
@@ -805,13 +807,24 @@ Future<void> main() async {
               expect(find.textContaining(idea), findsNWidgets(1));
             }            
 
+            // important for gpsTestPreview
+            // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+            dateForTestingIndex = 0;
             // ── Editing data ────────────────────────────
             // ────────────────────────────────────────────
+              // TITLE EDITION
+            var titleFinder = find.text(titleForEdition);
+            await tester.tap(titleFinder);
+            await tester.pumpAndSettle();
+              // searching the text field
+            titleFinder = find.byKey(const ValueKey("problemToSolveField"));
+            await tester.enterText(titleFinder, "${titleForEdition}${editionSuffix}");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
 
+              // IDEAS EDITION
             // const ideasList1 = ['idea1', 'idea2'];         
-            // ── Editing idea1 : suffix addition ───────────────────────────────────
-            // ─────────────────────────────────────────────────────
-              // Searching idea1
+             // Searching idea1
             var idea1Finder = find.text(ideasList1[0]);
             await tester.ensureVisible(idea1Finder);
             await tester.pumpAndSettle();   
@@ -828,7 +841,7 @@ Future<void> main() async {
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 
-            // ── Adding idea1: modification  ─────────────────────
+            // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
             var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
             await tester.enterText(tfIdea1Finder, "${ideasList1[0]}$editionSuffix");
@@ -874,6 +887,38 @@ Future<void> main() async {
             await tester.tap(closeFinder);
             await tester.pumpAndSettle();
 
+            // KEYWORDS EDITION
+              // Opening the keywords overlay
+            keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            await tester.tap(keywordsWidgetTitleFinder);
+            await tester.pumpAndSettle();
+
+              // Removing kwMaintenance
+            var deletekwMaintenanceFinder = 
+              find.descendant
+              (
+                of: find.ancestor
+                (
+                  of: find.text(kwMaintenance), 
+                  matching: find.byType(InputChip)
+                ), 
+                matching: find.byIcon(Icons.close)                
+              );
+            
+              await tester.tap(deletekwMaintenanceFinder);
+              await tester.pumpAndSettle();
+
+              // Adding kwCommunication
+              var kwTfecFinder = find.byKey(const ValueKey("gpsKeywordsField"));
+              await tester.enterText(kwTfecFinder, kwCommunication);
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle();
+
+              // closing the overlay
+              var closeOverlayFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
+              await tester.tap(closeOverlayFinder);
+              await tester.pumpAndSettle();
+
             // ── Submitting new data  ───────────────────────
             // ───────────────────────────────────────────────
               // Searching the file name text field
@@ -882,13 +927,26 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
-             await tester.pump(const Duration(seconds: 2));
+            // await tester.pump(const Duration(seconds: 10));
 
             // ── 5. VERIFICATION  ─────────────────
             // ─────────────────────────────────────   
-            // ── Verifying the edited/added data present ────────────
-            await gpsTestPreview(tester: tester, title: titleEdition, ideasList: ["${ideasList1[0]}${editionSuffix}", idea3Added]);
-               
+              // Verifying the edited title present
+            expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
+
+              // Verifying the edited keywords present
+            for (var kw in [...kwsList, kwCommunication])
+            {
+              expect(find.text(kw), findsOne);
+            }
+
+              // Verifying the edited/added data present
+            await gpsTestPreview
+            (
+              tester: tester, title: "${titleForEdition}${editionSuffix}", 
+              ideasList: ["${ideasList1[0]}${editionSuffix}", idea3Added]
+            );
+       
           } // if platform
 
         });
@@ -922,6 +980,8 @@ Future<void> main() async {
             var keywordsEdition = kwsList; 
             var idea3Added = "idea3-edited";
 
+            // Important for gpsTestPreview
+            // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
             dateForTestingIndex = 0;
             
             await gpsEnterNewProcessDataOnMobile
@@ -933,7 +993,7 @@ Future<void> main() async {
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
-            // await tester.pump(const Duration(seconds: 5));
+            await tester.pump(const Duration(seconds: 5));
 
             // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
             // ──────────────────────────────────────────────────────────────────
@@ -1040,10 +1100,10 @@ Future<void> main() async {
             await tester.tap(closeFinder);
             await tester.pumpAndSettle();
 
+            await tester.pump(const Duration(seconds: 5));
+
             // ── Submitting new data  ───────────────────────
             // ───────────────────────────────────────────────
-              // To find the same date twice as required during the test
-            dateForTestingIndex = 0;
               // Searching the file name text field
             var sessionFileNameOnMobilePlatformsFinder = find.byType(SessionFileNameOnMobilePlatforms);
             await tester.tap(sessionFileNameOnMobilePlatformsFinder);
