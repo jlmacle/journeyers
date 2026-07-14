@@ -2318,9 +2318,9 @@ Future<void> main() async {
 
             });
         
-          // 'The participants can be edited (non empty participants list) \n'
+          // 'Participants edition: non empty participants list \n'
           testWidgets(
-            'The participants can be edited (non empty participants list) \n',
+            'Participants edition: non empty participants list \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2399,9 +2399,9 @@ Future<void> main() async {
 
             });
         
-          // 'The participants can be edited (empty participants list) \n'
+          // 'Participants edition: empty participants list \n'
           testWidgets(
-            'The participants can be edited (empty participants list) \n',
+            'Participants edition: empty participants list \n',
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
