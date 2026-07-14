@@ -197,13 +197,15 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                               (tag) => InputChip
                                       (
                                         label: Text(tag),
+                                        deleteIcon: const Icon(Icons.close),
+                                        deleteIconColor: appBarWhite,
                                         onDeleted: () 
                                         {
                                           setState( () {_keywords!.remove(tag);});
                                           setLocalState(() {});
                                           widget.onKeywordsUpdatedCallbackFunction(_keywords!);
-                                        }, 
-                                        deleteIconColor: appBarWhite,
+                                        },
+                                        
                                       )
                             )
                           ],
