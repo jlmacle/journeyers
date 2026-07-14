@@ -722,9 +722,9 @@ Future<void> main() async {
     group('Edition Tests: Preview: Mobile: \n', ()
     {
       
-      // 'Group problem-solving data edition \n'
+      // 'Group problem-solving data edition (preview)\n'
       testWidgets(
-        'Group problem-solving data edition \n',
+        'Group problem-solving data edition (preview)\n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -892,6 +892,7 @@ Future<void> main() async {
           } // if platform
 
         });
+    
     });
 
   group('Participants-related Tests: \n', () 
