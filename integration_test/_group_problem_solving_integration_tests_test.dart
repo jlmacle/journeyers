@@ -2818,8 +2818,8 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 2)); 
         });
     
-      // '4 additions, 2 deletions'
-      testWidgets('4 additions, 2 deletions', 
+      // 'Ideas overlay: 4 additions, 2 deletions'
+      testWidgets('Ideas overlay: 4 additions, 2 deletions', 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
