@@ -51,6 +51,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
             children: [
               TextField
               (
+                key: const ValueKey("problemToSolveField"),
                 controller: widget.sessionTitleTfec,
                 autofocus: true,
                 decoration: InputDecoration
