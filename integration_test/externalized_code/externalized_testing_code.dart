@@ -852,7 +852,7 @@ final q = CAQuestionsFields();
   }
 
   // Method used to go from the GPS process page to new list page
-  Future<void> gpsFromProcessPageToNewListPage(WidgetTester tester) async
+  Future<void> gpsFromProcessPageToNewParticipantsListPage(WidgetTester tester) async
   {
     // Searching the add emoji    
     var addEmojiFinder = find.text(addEmoji);
@@ -939,7 +939,7 @@ final q = CAQuestionsFields();
   ) async
   { 
     // Loading the new list page from the GPS process page
-    await gpsFromProcessPageToNewListPage(tester);
+    await gpsFromProcessPageToNewParticipantsListPage(tester);
 
     if (keywords.isNotEmpty)
     {
