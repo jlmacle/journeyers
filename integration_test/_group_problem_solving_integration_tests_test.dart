@@ -1817,6 +1817,93 @@ Future<void> main() async {
 
       group('Participants Dashboard Tests: \n', () 
       {    
+
+        group('Entered metadata is displayed on the list dashboard: Mobile: \n', ()
+        {
+          // 'Session metadata entered (participants, list name, keywords) is found: '
+          // '(assuming an already selected path to the user session data folder)',
+          testWidgets(
+            'Session metadata entered (participants, list name, keywords) is found: '
+            '(assuming an already selected path to the user session data folder)',
+            (WidgetTester tester) async 
+            {
+              // Setting mock values for SharedPreferences
+              SharedPreferences.setMockInitialValues
+              ({
+                // Setting value for the first-run modal to be absent,
+                'wasFirstRunModalAcknowledged': true,
+                // and to have the group problem-solving page, with the dashboard.
+                'wasGPSSessionDataSaved': true,
+              });
+
+              // Pumping the GPSPage
+              await tester.pumpWidget(buildTestableGPSPage());
+              await tester.pumpAndSettle();
+
+              // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────
+              await gpsFromGPSPageToProcessPage(tester);
+
+              // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────
+              // Adding the names
+              await gpsFromProcessPageAddParticipants(tester, names1, keywords1);   
+
+              // Verifying the names present
+              expect(find.text(name1), findsOne);    
+              expect(find.text(name2), findsOne);  
+
+              // Searching the 'Save' icon
+              var saveListIconFinder = find.byIcon(Icons.save_outlined);
+              expect(saveListIconFinder, findsOne);
+
+              // Tapping on it
+              await tester.tap(saveListIconFinder);
+              await tester.pumpAndSettle();
+
+              // Searching the text field to add the list name
+              var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+              expect(listNameSavingTextFieldFinder, findsOne);
+
+              // Adding a list name
+              await tester.ensureVisible(listNameSavingTextFieldFinder);
+              await tester.tap(listNameSavingTextFieldFinder);
+              await tester.enterText(listNameSavingTextFieldFinder, listLabel1);
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle();
+
+              // Verifying the GPS process page present
+              expect(find.text(checkListTitle), findsOne);
+
+              // Verifying the names present
+              expect(find.text(name1), findsOne);    
+              expect(find.text(name2), findsOne); 
+
+              // ── SEARCHING THE METADATA ON THE DASHBOARD  ────────────────────────────────
+              // ────────────────────────────────────────────────────────────────────────────
+              // Going from the process page to the list dashboard page
+              await gpsFromProcessPageToListLoadingDashboard(tester);
+
+              // Searching for the list name
+              expect(find.text(listLabel1), findsOne);
+
+              // Searching for the names
+              for (var name in names1)
+              {
+                expect(find.text(name), findsOne);
+              }
+
+              // Searching for the keywords
+              for (var kw in keywords1)
+              {
+                expect(find.text(kw), findsOne);
+              }
+
+              // await tester.pump(const Duration(seconds: 5));
+            }
+          );
+        });   
+
         group('Sorting and Filtering Tests: \n', ()
         {
           // 'Sorting by list label \n'
