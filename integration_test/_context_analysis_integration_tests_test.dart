@@ -1120,7 +1120,7 @@ Future<void> main() async {
               // Editing the title
             var editedTitle = "${title}${editionSuffix}";
             
-            var editTfecFinder = find.byKey(const ValueKey('titleDashboardEditField'));
+            var editTfecFinder = find.byKey(const Key('titleDashboardEditField'));
             await tester.enterText(editTfecFinder, editedTitle);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
