@@ -155,7 +155,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
                       padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
                       child: TextField
                       (
-                        key: const ValueKey('keywordField'),
+                        key: const Key('kwsFieldNewList'),
                         controller: _keywordsTfec,
                         decoration: const InputDecoration
                         (
