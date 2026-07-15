@@ -166,7 +166,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
                       child: TextField
                       (
-                        key: const ValueKey("gpsKeywordsField"),
+                        key: const Key("gpsKeywordsField"),
                         controller: _keywordsTfec,
                         decoration: const InputDecoration
                         (

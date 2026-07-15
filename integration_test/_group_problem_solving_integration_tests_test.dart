@@ -909,7 +909,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Adding kwCommunication
-              var kwTfecFinder = find.byKey(const ValueKey("gpsKeywordsField"));
+              var kwTfecFinder = find.byKey(const Key("gpsKeywordsField"));
               await tester.enterText(kwTfecFinder, kwCommunication);
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
@@ -1131,7 +1131,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Adding kwCommunication
-              var kwTfecFinder = find.byKey(const ValueKey("gpsKeywordsField"));
+              var kwTfecFinder = find.byKey(const Key("gpsKeywordsField"));
               await tester.enterText(kwTfecFinder, kwCommunication);
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
