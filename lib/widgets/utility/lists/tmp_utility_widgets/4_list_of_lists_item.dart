@@ -203,7 +203,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: ValueKey('checkbox-${widget.listIndex}'),
+                  key: Key('checkbox-${widget.listIndex}'),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
