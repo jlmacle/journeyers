@@ -432,12 +432,6 @@ class ListDashboardState extends State<ListDashboard>
                               }
                             });
                           },
-                          onEditListNameCallbackFunction: () => _showListNameEditSheet(
-                            listData[itemTextKey],
-                            listData[itemKey],
-                            index
-                          ),
-                          onEditPressedCallbackFunction: () {},
                           onRetrievedSessionDataBeforeEditionCallbackFunction: 
                           ({
                             required String dashboardContext,
@@ -466,84 +460,4 @@ class ListDashboardState extends State<ListDashboard>
   
   }
 
-  
-  void _showListNameEditSheet(String title, String listKey, int listIndex) 
-  {
-    _titleTfec.text = title; // Syncing current title to the field
-
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangle shape
-      isScrollControlled: true, // Allows sheet to push up with keyboard
-
-      builder: (context) 
-      {
-        String? errorText; 
-        // StatefulBuilder gives a local setState scoped to this sheet
-        return StatefulBuilder(
-          builder: (context, setState) {          
-
-            Future<void> onConfirm() async {              
-              final label = _titleTfec.text.trim();
-
-              if (label.isEmpty) {
-                setState(() {
-                  errorText = emptyLabelEditError;
-                });
-                return;
-              }
-
-              setState(() {
-                // Clearing error on valid input
-                errorText = null; 
-              });    
-
-              // To close the dialog
-              Navigator.of(context).pop();     
-            }
-
-          return Padding
-          (
-            padding: EdgeInsets.only
-            (
-              bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
-              left: 20, right: 20, top: 20,
-            ),
-            child: Column
-            (
-              mainAxisSize: MainAxisSize.min,
-              children: 
-              [
-                TextField
-                (
-                  key: const ValueKey('listEditField'),
-                  controller: _titleTfec,
-                  autofocus: true,
-                  decoration: InputDecoration
-                  (
-                    labelText: 'Edit List Label', 
-                    labelStyle: const TextStyle(color: Colors.black),
-                    errorText: errorText,
-                  ),
-                  // Duplicated code to clean
-                  onSubmitted: (_) async => await onConfirm(),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton
-                (
-                  onPressed: () async => await onConfirm(),
-                  child: const Text
-                  (
-                    "Save",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          );
-        }
-        );
-      },
-  );
-}}
+}
