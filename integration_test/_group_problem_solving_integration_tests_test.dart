@@ -818,7 +818,7 @@ Future<void> main() async {
             await tester.tap(titleFinder);
             await tester.pumpAndSettle();
               // searching the text field
-            titleFinder = find.byKey(const ValueKey("problemToSolveField"));
+            titleFinder = find.byKey(const Key("problemToSolveField"));
             await tester.enterText(titleFinder, "${titleForEdition}${editionSuffix}");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1040,7 +1040,7 @@ Future<void> main() async {
             await tester.tap(titleFinder);
             await tester.pumpAndSettle();
               // searching the text field
-            titleFinder = find.byKey(const ValueKey("problemToSolveField"));
+            titleFinder = find.byKey(const Key("problemToSolveField"));
             await tester.enterText(titleFinder, "${titleForEdition}${editionSuffix}");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
