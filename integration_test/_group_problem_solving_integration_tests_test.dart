@@ -2649,7 +2649,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the participants
-              var newParticipantsTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
+              var newParticipantsTextFieldFinder = find.byKey(const Key('participantsEditField'));
               expect(newParticipantsTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2730,7 +2730,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the participants
-              var newParticipantsTextFieldFinder = find.byKey(const ValueKey('participantsEditField'));
+              var newParticipantsTextFieldFinder = find.byKey(const Key('participantsEditField'));
               expect(newParticipantsTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 

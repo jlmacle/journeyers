@@ -482,7 +482,7 @@ void _showParticipantsEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  key: const ValueKey('participantsEditField'),
+                  key: const Key('participantsEditField'),
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
