@@ -933,7 +933,7 @@ final q = CAQuestionsFields();
 
 // ─── GPS: ADDING PARTICIPANTS ───────────────────────────────────────────────────────────────
   // Method used to add participants
-  Future<void> gpsFromProcessPageAddParticipants
+  Future<void> gpsFromProcessPageAddParticipantsAndKeywords
   (
     WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
   ) async
@@ -1011,7 +1011,7 @@ final q = CAQuestionsFields();
       List<String> names = (map.values.first)["names"];
       List<dynamic> keywords = (map.values.first)["keywords"];
 
-      await gpsFromProcessPageAddParticipants(tester, names, keywords);
+      await gpsFromProcessPageAddParticipantsAndKeywords(tester, names, keywords);
 
       // Verifying the names present
       for (var name in names)
