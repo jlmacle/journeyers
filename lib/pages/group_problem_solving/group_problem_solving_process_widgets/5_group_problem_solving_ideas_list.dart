@@ -235,7 +235,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField
                       (
-                        key: const ValueKey('ideaOverlayTextField'),
+                        key: const Key('ideaOverlayTextField'),
                         controller: _ideaNewTfec,
                         textAlign: TextAlign.left,
                         decoration: const InputDecoration
