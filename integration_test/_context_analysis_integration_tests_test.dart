@@ -1184,7 +1184,7 @@ Future<void> main() async {
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
-            var editTfecFinder = find.byKey(const ValueKey('kwsDashboardEditField'));
+            var editTfecFinder = find.byKey(const Key('kwsDashboardEditField'));
             await tester.enterText(editTfecFinder, editedKeywords);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
