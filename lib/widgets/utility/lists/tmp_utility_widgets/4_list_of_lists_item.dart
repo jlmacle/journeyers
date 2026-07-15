@@ -30,12 +30,6 @@ class ListOfListsItem extends StatefulWidget
   /// A callback function called when the checkbox is checked/unchecked.
   final ValueChanged<bool?> onCheckboxChangedCallbackFunction;
 
-  /// A callback function called when the title is updated.
-  final VoidCallback onEditListNameCallbackFunction;
-
-  // A callback function called when editing the session data.
-  final VoidCallback onEditPressedCallbackFunction;
-
   /// A callback function called when session data is retrieved before edition.
   final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
@@ -62,8 +56,6 @@ class ListOfListsItem extends StatefulWidget
     required this.isChecked,
     required this.dashboardContext,
     required this.onCheckboxChangedCallbackFunction,
-    required this.onEditListNameCallbackFunction,
-    required this.onEditPressedCallbackFunction,
     required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onKeywordsUpdatedCallbackFunction,
     required this.onListNameUpdatedCallbackFunction,
