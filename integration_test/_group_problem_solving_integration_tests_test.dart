@@ -837,7 +837,7 @@ Future<void> main() async {
             if (testingDebug) pu.printd('Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder');
 
               // Searching the editable/deletable field for idea1
-            var idea1EditableDeletableFinder = find.byKey(const ValueKey('text0'));   // todo: to clean           
+            var idea1EditableDeletableFinder = find.byKey(const ValueKey('editable-deletable-list-tile-0'));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 
@@ -1060,7 +1060,7 @@ Future<void> main() async {
             if (testingDebug) pu.printd('Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder');
 
               // Searching the editable/deletable field for idea1
-            var idea1EditableDeletableFinder = find.byKey(const ValueKey('text0'));   // todo: to clean           
+            var idea1EditableDeletableFinder = find.byKey(const ValueKey('editable-deletable-list-tile-0'));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 

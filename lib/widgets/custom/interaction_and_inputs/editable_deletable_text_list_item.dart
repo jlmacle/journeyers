@@ -65,7 +65,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
 
   bool _isEdited = false;
 
-  var _tecEdition = TextEditingController();
+  final _tfecEdition = TextEditingController();
   
 
   @override
@@ -103,8 +103,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
             Expanded(
               child: ListTile
               (
-                // TODO: to clean
-                key: Key('text${widget.itemIndex}'),
+                key: Key('editable-deletable-list-tile-${widget.itemIndex}'),
                 dense: true,
                 leading: Text(
                   '${widget.itemIndex + 1}.',
@@ -121,7 +120,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
                   setState(() 
                   {
                     _isEdited = true; 
-                    _tecEdition.text = widget.itemText;
+                    _tfecEdition.text = widget.itemText;
                   });
                 },
               ),
@@ -133,7 +132,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
             child: TextField
             (
               key: ValueKey('editable-deletable-tf-${widget.itemIndex}'),
-              controller: _tecEdition,
+              controller: _tfecEdition,
               autofocus: true,
               decoration: InputDecoration
               (                    
@@ -148,7 +147,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
                 (value) => setState(() 
                 {
                   _isEdited = false;
-                  _tecEdition.clear();
+                  _tfecEdition.clear();
                   widget.parentCallbackFunctionToUpdateTheListItemValue(stringParam: value, intParam: widget.itemIndex);
                 }),
               
