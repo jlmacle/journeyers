@@ -873,7 +873,7 @@ Future<void> main() async {
 
             // ── Adding idea3: addition  ─────────────────────────
             // ────────────────────────────────────────────────────
-            var ideaOverlayTextFieldFinder = find.byKey(const ValueKey('ideaOverlayTextField'));
+            var ideaOverlayTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
             await tester.enterText(ideaOverlayTextFieldFinder, idea3Added);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
@@ -1095,7 +1095,7 @@ Future<void> main() async {
 
             // ── Adding idea3: addition  ─────────────────────────
             // ────────────────────────────────────────────────────
-            var ideaOverlayTextFieldFinder = find.byKey(const ValueKey('ideaOverlayTextField'));
+            var ideaOverlayTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
             await tester.enterText(ideaOverlayTextFieldFinder, idea3Added);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
@@ -2856,7 +2856,7 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Verifying the overlay present
-          expect(find.byKey(const ValueKey('ideaOverlayTextField')), findsOne);
+          expect(find.byKey(const Key('ideaOverlayTextField')), findsOne);
         });
       
       // 'The overlay can be opened clicking on the ideas'
@@ -2904,7 +2904,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the overlay present
-          expect(find.byKey(const ValueKey('ideaOverlayTextField')), findsOne);
+          expect(find.byKey(const Key('ideaOverlayTextField')), findsOne);
         });
     });
 
@@ -2943,7 +2943,7 @@ Future<void> main() async {
           // ── ADDING AN IDEA  ──────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the text field used to add ideas
-          var newIdeaTextFieldFinder = find.byKey(const ValueKey('ideaOverlayTextField'));
+          var newIdeaTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
           // Adding the idea
           await tester.ensureVisible(newIdeaTextFieldFinder);
           await tester.tap(newIdeaTextFieldFinder);
