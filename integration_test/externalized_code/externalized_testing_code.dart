@@ -976,7 +976,7 @@ final q = CAQuestionsFields();
     
     // Searching for the new participant text field
     // Searching by placeholder text is not robust enough
-    var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+    var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
     expect(newParticipantTextFieldFinder, findsOne);
     await tester.ensureVisible(newParticipantTextFieldFinder); 
     await tester.pumpAndSettle(); 

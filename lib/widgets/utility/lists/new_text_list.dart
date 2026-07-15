@@ -466,7 +466,7 @@ class _NewTextListState extends State<NewTextList> {
               padding: const EdgeInsets.all(8.0),
               child: TextField
               (
-                key: const ValueKey('participantNameField'),
+                key: const Key('participantNameField'),
                 controller: _newTextItemTfec,
                 textAlign: TextAlign.left,
                 decoration: const InputDecoration

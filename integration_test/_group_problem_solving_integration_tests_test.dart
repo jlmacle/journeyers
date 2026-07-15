@@ -1241,7 +1241,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1321,7 +1321,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1415,7 +1415,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1486,7 +1486,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1679,7 +1679,7 @@ Future<void> main() async {
 
             // ── ADDING A PARTICIPANT  ──────────────────
             // ───────────────────────────────────────────
-            var participantNameFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var participantNameFieldFinder = find.byKey(const Key('participantNameField'));
             await tester.enterText(participantNameFieldFinder, "Bob");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1907,7 +1907,7 @@ Future<void> main() async {
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(newParticipantTextFieldFinder);
@@ -1972,7 +1972,7 @@ Future<void> main() async {
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const ValueKey('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(newParticipantTextFieldFinder);
