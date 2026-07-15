@@ -292,7 +292,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                             onTap: widget.onEditTitleCallbackFunction,
                             child: Text(
                               displayTitle,
-                              key: ValueKey('session-title-${widget.sessionDataIndex}'),
+                              key: Key('session-title-${widget.sessionDataIndex}'),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
@@ -300,7 +300,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           // The session date
                           Text(
                             "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
-                            key: ValueKey('session-date-${widget.sessionDataIndex}'),
+                            key: Key('session-date-${widget.sessionDataIndex}'),
                             style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
@@ -320,7 +320,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
-                          key: ValueKey('session-keywords-${widget.sessionDataIndex}'),
+                          key: Key('session-keywords-${widget.sessionDataIndex}'),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -367,7 +367,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 ),
                 // To delete session metadata and file
                 IconButton(
-                  key: ValueKey('session-delete-${widget.sessionDataIndex}'),
+                  key: Key('session-delete-${widget.sessionDataIndex}'),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
