@@ -1741,7 +1741,7 @@ Future<void> main() async {
                 // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────────
                 // Adding the names
-                await gpsFromProcessPageAddParticipants(tester, names1, keywords1);   
+                await gpsFromProcessPageAddParticipantsAndKeywords(tester, names1, keywords1);   
 
                 // Verifying the names present
                 expect(find.text(name1), findsOne);    
@@ -1802,7 +1802,7 @@ Future<void> main() async {
                 // ────────────────────────────────────────────────────────────────────────────
                 // Adding the names
                 var names = ["Bob", "Alice", "Benny", "Lily"];
-                await gpsFromProcessPageAddParticipants(tester, names, [kwCompanionship]);   
+                await gpsFromProcessPageAddParticipantsAndKeywords(tester, names, [kwCompanionship]);   
 
                 // Verifying the names present
                 for (var name in names)
@@ -2129,7 +2129,7 @@ Future<void> main() async {
               // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────
               // Adding the names
-              await gpsFromProcessPageAddParticipants(tester, names1, keywords1);   
+              await gpsFromProcessPageAddParticipantsAndKeywords(tester, names1, keywords1);   
 
               // Verifying the names present
               expect(find.text(name1), findsOne);    
