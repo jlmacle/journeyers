@@ -14,6 +14,7 @@ import 'package:journeyers/pages/group_problem_solving/group_problem_solving_pag
 import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
 import 'package:journeyers/utils/generic/dev/test_utils.dart';
 import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import 'package:journeyers/utils/project_specific/dev/test_utils.dart';
 import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
 import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
@@ -164,7 +165,7 @@ Future<void> main() async {
                   tester: tester, 
                   title: testGPSTitle1,
                   kwsList: kwsList,
-                  ideasList: ["at least one idea needed"],
+                  ideasList: ideasListAtLeastOneIdeaNeeded,
                   fileNameWithoutExtension: fileName1WithoutExtension
                 );
 
@@ -3218,7 +3219,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: [],
-              ideasList: ["at least one idea needed"],
+              ideasList: ideasListAtLeastOneIdeaNeeded,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
