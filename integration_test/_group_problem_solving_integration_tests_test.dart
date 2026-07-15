@@ -720,9 +720,9 @@ Future<void> main() async {
 
     group('Edition Tests: Preview: Mobile: \n', ()
     {
-      // 'Group problem-solving data edition (preview)\n'
+      // 'Group problem-solving data edition (from preview)\n'
       testWidgets(
-        'Group problem-solving data edition (preview)\n',
+        'Group problem-solving data edition (from preview)\n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -951,9 +951,9 @@ Future<void> main() async {
 
         });
     
-      // 'Group problem-solving data edition (dashboard item)\n'
+      // 'Group problem-solving data edition (from dashboard)\n'
       testWidgets(
-        'Group problem-solving data edition (dashboard item)\n',
+        'Group problem-solving data edition (from dashboard)\n',
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -994,7 +994,7 @@ Future<void> main() async {
 
             // await tester.pump(const Duration(seconds: 2));
 
-             // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
+            // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
             // ──────────────────────────────────────────────────────────────────
             var editIconFromItemFinder = find.byTooltip(editFromDashboardItemTooltipLabel);
             await tester.tap(editIconFromItemFinder);
