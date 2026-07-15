@@ -10,14 +10,14 @@ void main() {
 
   var title = 'Legacy';
   var date = 'March 20, 2026 4:51 PM';
-  var keywords = ['Kw', 'Kw2'];
+  var keywordsListKw1Kw2 = ['Kw', 'Kw2'];
 
   // Data for the test
   final testMetadata = {
     DashboardUtils.keyTitle: title,
     DashboardUtils.keyDate: date,
     DashboardUtils.keyFilePath: pathForTestFile1,
-    DashboardUtils.keyKeywords: keywords,
+    DashboardUtils.keyKeywords: keywordsListKw1Kw2,
   };
 
   group('SessionsListItem Tests: \n', () 

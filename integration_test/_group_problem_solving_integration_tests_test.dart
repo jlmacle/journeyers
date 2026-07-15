@@ -84,7 +84,7 @@ Future<void> main() async {
   const String kwCommunication = 'Communication';
   const String kwMaintenance = 'Maintenance';
   const String kwLogistics = 'Logistics';
-  const List<String> kwsList = [kwCompanionship, kwWorkplace];
+  const List<String> kwsList2Keywords = [kwCompanionship, kwWorkplace];
   const List<List<String>> kwsListsKwsSorting = 
                     [
                       [kwMaintenance], [kwCompanionship, kwLogistics], [kwWorkplace, kwCommunication],
@@ -164,7 +164,7 @@ Future<void> main() async {
                 (
                   tester: tester, 
                   title: testGPSTitle1,
-                  kwsList: kwsList,
+                  kwsList: kwsList2Keywords,
                   ideasList: ideasListAtLeastOneIdeaNeeded,
                   fileNameWithoutExtension: fileName1WithoutExtension
                 );
@@ -175,7 +175,7 @@ Future<void> main() async {
             // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
           // todo: a dashboardSearchMetadata
-          await dashboardSearchTitleAndKeywords(title: "${testGPSTitle1}${gpsTitleSuffix}", kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: "${testGPSTitle1}${gpsTitleSuffix}", kws: kwsList2Keywords);
 
           // Searching for the date
           dateForTestingIndex = 0;
@@ -512,7 +512,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testGPSTitle1,
-              kwsList: kwsList,
+              kwsList: kwsList2Keywords,
               ideasList: ideasList2Ideas,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
@@ -700,7 +700,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: testGPSTitle1,
-              kwsList: kwsList,
+              kwsList: kwsList2Keywords,
               ideasList: ideasList2Ideas,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
@@ -746,7 +746,7 @@ Future<void> main() async {
             // ── 1. ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
             var titleForEdition = "GPS title";
-            var keywordsListForEdition = [...kwsList, kwMaintenance]; 
+            var keywordsListForEdition3Kws = [...kwsList2Keywords, kwMaintenance]; 
             var ideasListForEdition = ideasList2Ideas;
             var idea3Added = "idea3-edited";
             
@@ -757,7 +757,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: titleForEdition,
-              kwsList: keywordsListForEdition,
+              kwsList: keywordsListForEdition3Kws,
               ideasList: ideasListForEdition,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
@@ -792,7 +792,7 @@ Future<void> main() async {
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
-              for (var kw in keywordsListForEdition)
+              for (var kw in keywordsListForEdition3Kws)
               {
                 expect(find.text(kw), findsOne);
               }
@@ -935,7 +935,7 @@ Future<void> main() async {
             expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
 
               // Verifying the edited keywords present
-            for (var kw in [...kwsList, kwCommunication])
+            for (var kw in [...kwsList2Keywords, kwCommunication])
             {
               expect(find.text(kw), findsOne);
             }
@@ -976,7 +976,7 @@ Future<void> main() async {
             // ──  ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
             var titleForEdition = "GPS title";
-            var keywordsListForEdition = [...kwsList, kwMaintenance]; 
+            var keywordsListForEdition3Kws = [...kwsList2Keywords, kwMaintenance]; 
             var ideasListForEdition = ideasList2Ideas;
             var idea3Added = "idea3-edited";
             
@@ -987,7 +987,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: titleForEdition,
-              kwsList: keywordsListForEdition,
+              kwsList: keywordsListForEdition3Kws,
               ideasList: ideasListForEdition,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
@@ -1014,7 +1014,7 @@ Future<void> main() async {
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
-              for (var kw in keywordsListForEdition)
+              for (var kw in keywordsListForEdition3Kws)
               {
                 expect(find.text(kw), findsOne);
               }
@@ -1157,7 +1157,7 @@ Future<void> main() async {
             expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
 
               // Verifying the edited keywords present
-            for (var kw in [...kwsList, kwCommunication])
+            for (var kw in [...kwsList2Keywords, kwCommunication])
             {
               expect(find.text(kw), findsOne);
             }
@@ -1188,8 +1188,8 @@ Future<void> main() async {
     var listLabel2 = "List2";
     var listLabel3 = "List3";
     var listLabelsSorted = [listLabel1, listLabel2, listLabel3];
-    var keywords1 = [kwCompanionship];
-    var keywords2 = [kwWorkplace];
+    var keywordsListKwCompanionship = [kwCompanionship];
+    var keywordsListKwWorkplace = [kwWorkplace];
     var titlesCompanionship = [listLabel1];
     var titlesWorkplace = [listLabel2, listLabel3];
 
@@ -1638,10 +1638,10 @@ Future<void> main() async {
             await tester.tap(keywordsDeclarationTitleFinder);
             await tester.pumpAndSettle();
               // Adding two keywords
-            var keywords = ["kw1", "kw2"];
+            var keywordsListKw1Kw2 = ["kw1", "kw2"];
                 // Searching the text field
             var keywordTfecFinder = find.byKey(const ValueKey('keywordField'));
-            for (var kw in keywords)
+            for (var kw in keywordsListKw1Kw2)
             {
               await tester.enterText(keywordTfecFinder, kw);
               await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -1740,7 +1740,7 @@ Future<void> main() async {
                 // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────────
                 // Adding the names
-                await gpsFromProcessPageAddParticipantsAndKeywords(tester, names1, keywords1);   
+                await gpsFromProcessPageAddParticipantsAndKeywords(tester, names1, keywordsListKwCompanionship);   
 
                 // Verifying the names present
                 expect(find.text(name1), findsOne);    
@@ -2128,7 +2128,7 @@ Future<void> main() async {
               // ── CLICKING TO DISPLAY THE PARTICIPANTS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────
               // Adding the names
-              await gpsFromProcessPageAddParticipantsAndKeywords(tester, names1, keywords1);   
+              await gpsFromProcessPageAddParticipantsAndKeywords(tester, names1, keywordsListKwCompanionship);   
 
               // Verifying the names present
               expect(find.text(name1), findsOne);    
@@ -2175,7 +2175,7 @@ Future<void> main() async {
               }
 
               // Searching for the keywords
-              for (var kw in keywords1)
+              for (var kw in keywordsListKwCompanionship)
               {
                 expect(find.text(kw), findsOne);
               }
@@ -2284,9 +2284,9 @@ Future<void> main() async {
               // ────────────────────────────────────────────────────────────────────
               List< Map<String,Map<String, dynamic>> > listDataMapsList =
               [            
-                {listLabel1:{"names":names1,"keywords":keywords1}},
-                {listLabel2:{"names":names2,"keywords":keywords2}},
-                {listLabel3:{"names":names3,"keywords":keywords2}},                          
+                {listLabel1:{"names":names1,"keywords":keywordsListKwCompanionship}},
+                {listLabel2:{"names":names2,"keywords":keywordsListKwWorkplace}},
+                {listLabel3:{"names":names3,"keywords":keywordsListKwWorkplace}},                          
               ];
               await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
 
