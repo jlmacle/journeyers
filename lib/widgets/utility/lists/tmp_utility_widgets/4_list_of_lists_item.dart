@@ -203,7 +203,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: ValueKey('checkbox-${widget.listIndex}'),
+                  key: Key('checkbox-${widget.listIndex}'),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
@@ -407,7 +407,7 @@ void _showKeywordsEditSheet
         [
           TextField
           (
-            key: const ValueKey('keywordsEditField'),
+            key: const Key('kwsGroupsDashboardEditField'),
             controller: kwsEditController,
             autofocus: true,
             decoration: const InputDecoration
