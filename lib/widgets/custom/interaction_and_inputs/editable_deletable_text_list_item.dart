@@ -81,7 +81,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
             // Checkbox for list item deletion
             Checkbox
             (
-              key: ValueKey('editable-deletable-checkbox-${widget.itemIndex}'),
+              key: Key('editable-deletable-checkbox-${widget.itemIndex}'),
               value: _isChecked, 
               onChanged: 
                 (value)
@@ -131,7 +131,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
           Expanded(
             child: TextField
             (
-              key: ValueKey('editable-deletable-tf-${widget.itemIndex}'),
+              key: Key('editable-deletable-tf-${widget.itemIndex}'),
               controller: _tfecEdition,
               autofocus: true,
               decoration: InputDecoration

@@ -837,13 +837,13 @@ Future<void> main() async {
             if (testingDebug) pu.printd('Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder');
 
               // Searching the editable/deletable field for idea1
-            var idea1EditableDeletableFinder = find.byKey(const ValueKey('editable-deletable-list-tile-0'));   // todo: to clean           
+            var idea1EditableDeletableFinder = find.byKey(const Key('editable-deletable-list-tile-0'));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 
             // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
-            var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
+            var tfIdea1Finder = find.byKey(const Key('editable-deletable-tf-0'));
             await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
@@ -855,7 +855,7 @@ Future<void> main() async {
             // ─────────────────────────────────────────────────────
               // Searching idea2
               // Searching the editable/deletable checkbox for idea2
-            var idea2EditableDeletableFinder = find.byKey(const ValueKey('editable-deletable-checkbox-1'));   // todo: to clean           
+            var idea2EditableDeletableFinder = find.byKey(const Key('editable-deletable-checkbox-1'));   // todo: to clean           
             await tester.ensureVisible(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
             await tester.tap(idea2EditableDeletableFinder);
@@ -1059,13 +1059,13 @@ Future<void> main() async {
             if (testingDebug) pu.printd('Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder');
 
               // Searching the editable/deletable field for idea1
-            var idea1EditableDeletableFinder = find.byKey(const ValueKey('editable-deletable-list-tile-0'));   // todo: to clean           
+            var idea1EditableDeletableFinder = find.byKey(const Key('editable-deletable-list-tile-0'));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 
             // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
-            var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
+            var tfIdea1Finder = find.byKey(const Key('editable-deletable-tf-0'));
             await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
@@ -1077,7 +1077,7 @@ Future<void> main() async {
             // ─────────────────────────────────────────────────────
               // Searching idea2
               // Searching the editable/deletable checkbox for idea2
-            var idea2EditableDeletableFinder = find.byKey(const ValueKey('editable-deletable-checkbox-1'));   // todo: to clean           
+            var idea2EditableDeletableFinder = find.byKey(const Key('editable-deletable-checkbox-1'));   // todo: to clean           
             await tester.ensureVisible(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
             await tester.tap(idea2EditableDeletableFinder);
@@ -2998,7 +2998,7 @@ Future<void> main() async {
           // ── EDITING THE IDEA  ────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the idea
-          var ideaFinder = find.byKey(const ValueKey('editable-deletable-text-item-0'));
+          var ideaFinder = find.byKey(const Key('editable-deletable-text-item-0'));
           await tester.ensureVisible(ideaFinder);
           await tester.pumpAndSettle();   
           // Verifying the idea present
@@ -3069,7 +3069,7 @@ Future<void> main() async {
           // ── DELETING THE IDEA  ────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the checkbox
-          var checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-0'));
+          var checkboxFinder = find.byKey(const Key('editable-deletable-checkbox-0'));
           await tester.ensureVisible(checkboxFinder);
           await tester.pumpAndSettle();   
           // Tapping on the checkbox for deletion
@@ -3134,14 +3134,14 @@ Future<void> main() async {
           // ── DELETING 2 IDEAs  ────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the checkboxes
-          var checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-0'));
+          var checkboxFinder = find.byKey(const Key('editable-deletable-checkbox-0'));
           await tester.ensureVisible(checkboxFinder);
           await tester.pumpAndSettle();   
           // Tapping on the checkbox for deletion
           await tester.tap(checkboxFinder);
           await tester.pumpAndSettle();
 
-          checkboxFinder = find.byKey(const ValueKey('editable-deletable-checkbox-2'));
+          checkboxFinder = find.byKey(const Key('editable-deletable-checkbox-2'));
           await tester.ensureVisible(checkboxFinder);
           await tester.pumpAndSettle();   
           // Tapping on the checkbox for deletion
