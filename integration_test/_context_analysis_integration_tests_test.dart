@@ -1072,7 +1072,6 @@ Future<void> main() async {
 
   });
 
-    // todo: to finish/clean: from dashboard/preview
     group('Edition Tests: Mobile: \n', ()
     {
       // 'Edition: Title \n'
@@ -1537,6 +1536,7 @@ Future<void> main() async {
         });
 
       // 'Context analysis data edition (from dashboard) \n'
+
       testWidgets(
         'Context analysis data edition (from dashboard) \n',
         (WidgetTester tester) async {
@@ -1855,8 +1855,6 @@ Future<void> main() async {
           } // platform-related if
 
         });
-
-      // Todo: interrupted editions and original data kept
 
       }); 
 
