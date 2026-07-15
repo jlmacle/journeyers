@@ -562,7 +562,7 @@ void _showListNameEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  key: const ValueKey('listNameEditField'),
+                  key: const Key('listNameEditField'),
                   controller: listNameEditTec,
                   autofocus: true,
                   decoration: InputDecoration(

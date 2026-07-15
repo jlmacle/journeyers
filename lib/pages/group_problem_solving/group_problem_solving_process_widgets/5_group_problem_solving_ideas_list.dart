@@ -112,7 +112,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                 child: ListTile(
                   leading: const Icon(Icons.edit),
                   title: Text(
-                    key: ValueKey('idea-$index'), // Use the index in the key
+                    key: Key('idea-$index'), // Use the index in the key
                     idea,
                   ),
                 ),
