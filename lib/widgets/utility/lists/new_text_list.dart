@@ -172,7 +172,7 @@ class _NewTextListState extends State<NewTextList> {
             return AlertDialog(
               title: const Text('Save list'),
               content: TextField(
-                key: const ValueKey('saveListField'),
+                key: const Key('saveListField'),
                 controller: _labelTfec,
                 autofocus: true,
                 textInputAction: TextInputAction.done,

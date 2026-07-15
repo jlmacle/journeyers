@@ -1275,7 +1275,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Searching the text field to add the same list name
-            var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+            var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
             expect(listNameSavingTextFieldFinder, findsOne);
 
             // Adding the same list name
@@ -1358,7 +1358,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Searching the text field to add an empty list name
-            var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+            var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
             expect(listNameSavingTextFieldFinder, findsOne);
 
             // Adding an empty list name
@@ -1690,7 +1690,7 @@ Future<void> main() async {
             await tester.tap(saveListFinder);
             await tester.pumpAndSettle();
               // Entering the list name
-            var saveListFieldFinder = find.byKey(const ValueKey('saveListField'));
+            var saveListFieldFinder = find.byKey(const Key('saveListField'));
             await tester.enterText(saveListFieldFinder, "list name");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1755,7 +1755,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Searching the text field to add the list name
-                var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+                var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
                 expect(listNameSavingTextFieldFinder, findsOne);
 
                 // Adding a list name
@@ -1818,7 +1818,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Searching the text field to add the list name
-                var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+                var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
                 expect(listNameSavingTextFieldFinder, findsOne);
 
                 // Adding a list name
@@ -2143,7 +2143,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to add the list name
-              var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+              var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
               expect(listNameSavingTextFieldFinder, findsOne);
 
               // Adding a list name

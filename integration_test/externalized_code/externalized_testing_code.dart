@@ -1029,7 +1029,7 @@ final q = CAQuestionsFields();
       await tester.pumpAndSettle();
 
       // Searching the text field to add the list name
-      var listNameSavingTextFieldFinder = find.byKey(const ValueKey('saveListField'));
+      var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
       expect(listNameSavingTextFieldFinder, findsOne);
 
       // Adding the list name
