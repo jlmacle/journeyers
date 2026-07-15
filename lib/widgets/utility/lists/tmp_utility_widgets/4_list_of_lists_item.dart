@@ -223,7 +223,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             child: Text(
                               displayTitle,
                               // todo: to clean
-                              key: ValueKey('session-title-${widget.listIndex}'),
+                              key: Key('session-title-${widget.listIndex}'),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
@@ -270,7 +270,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             {
                               return                  
                               Container(
-                                key: ValueKey('session-participants-container-${widget.listIndex}-${participant}'),
+                                key: Key('session-participants-container-${widget.listIndex}-${participant}'),
                                 decoration: BoxDecoration
                                 (
                                   color: Colors.transparent,  
@@ -303,7 +303,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           ),
                         child: Text(
                           "Keywords: ${sortedKeywords.join(', ')}",
-                          key: ValueKey('session-keywords-${widget.listIndex}'),
+                          key: Key('session-keywords-${widget.listIndex}'),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -352,7 +352,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 
                 // Right icon — pinned to row end
                 IconButton(
-                  key: ValueKey('session-delete-${widget.listIndex}'),
+                  key: Key('session-delete-${widget.listIndex}'),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: listsDeleteTooltipLabel,

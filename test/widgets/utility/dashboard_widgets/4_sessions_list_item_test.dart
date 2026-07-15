@@ -386,7 +386,7 @@ void main() {
         );
 
         // Keywords data 
-        var keywordsDataFinder = find.byKey(const ValueKey('session-keywords-0'));
+        var keywordsDataFinder = find.byKey(const Key('session-keywords-0'));
         await tester.tap(keywordsDataFinder);
         await tester.pumpAndSettle();
         // Verifies text field label present
