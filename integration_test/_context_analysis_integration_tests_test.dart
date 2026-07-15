@@ -79,7 +79,7 @@ Future<void> main() async {
   const String kwCommunication = 'Communication';
   const String kwMaintenance = 'Maintenance';
   const String kwLogistics = 'Logistics';
-  const List<String> kwsList = [kwCompanionship, kwWorkplace];
+  const List<String> kwsList2Keywords = [kwCompanionship, kwWorkplace];
   const List<List<String>> kwsListsKwsSorting = 
                     [
                       [kwMaintenance], [kwCompanionship, kwLogistics], [kwWorkplace, kwCommunication],
@@ -158,7 +158,7 @@ Future<void> main() async {
               tester: tester, 
               formToFill: false,
               title: testAnalysisTitle1,
-              kwsList: kwsList,
+              kwsList: kwsList2Keywords,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -169,7 +169,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList2Keywords);
 
           await tester.pump(const Duration(seconds: 5));
 
@@ -697,7 +697,7 @@ Future<void> main() async {
           (
             tester: tester, 
             title: testAnalysisTitle2,
-            kwsList: kwsList,
+            kwsList: kwsList2Keywords,
             fileNameWithoutExtension: fileName1WithoutExtension
           );
 
@@ -707,7 +707,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -774,7 +774,7 @@ Future<void> main() async {
           (
             tester: tester, 
             title: testAnalysisTitle2,
-            kwsList: kwsList,
+            kwsList: kwsList2Keywords,
             checkboxValues: checkboxValues,
             checkboxTextFieldValues: checkboxTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -790,7 +790,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -858,7 +858,7 @@ Future<void> main() async {
           (
             tester: tester, 
             title: testAnalysisTitle2,
-            kwsList: kwsList,
+            kwsList: kwsList2Keywords,
             checkboxValues: checkboxValues,
             checkboxTextFieldValues: checkboxTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -874,7 +874,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -946,7 +946,7 @@ Future<void> main() async {
         (
           tester: tester, 
           title: testAnalysisTitle2,
-          kwsList: kwsList,
+          kwsList: kwsList2Keywords,
           checkboxValues: checkboxValues,
           checkboxTextFieldValues: checkboxTextFieldValues,
           indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -962,7 +962,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -1034,7 +1034,7 @@ Future<void> main() async {
         (
           tester: tester, 
           title: testAnalysisTitle2,
-          kwsList: kwsList,
+          kwsList: kwsList2Keywords,
           checkboxValues: checkboxValues,
           checkboxTextFieldValues: checkboxTextFieldValues,
           indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -1050,7 +1050,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList);
+        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
         
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -1162,7 +1162,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: title,
-              kwsList: [kwsList[0]],
+              kwsList: [kwsList2Keywords[0]],
               formToFill: false,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
@@ -1175,12 +1175,12 @@ Future<void> main() async {
             var kwFinder = find.descendant
             (
               of: find.byType(SessionsListItem), 
-              matching: find.textContaining(kwsList[0])
+              matching: find.textContaining(kwsList2Keywords[0])
             );            
             await tester.tap(kwFinder);
             await tester.pumpAndSettle();
               // Editing the keywords
-            var kwEdited = "${kwsList[0]}${editionSuffix}";
+            var kwEdited = "${kwsList2Keywords[0]}${editionSuffix}";
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
@@ -1232,7 +1232,6 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────────────────────
 
             var title = "CA title";
-            var keywords = kwsList;
             
             // Individual perspective testing values
             // All checkboxes checked
@@ -1254,7 +1253,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: title,
-              kwsList: keywords,
+              kwsList: kwsList2Keywords,
               checkboxValues: checkboxValues,
               checkboxTextFieldValues: checkboxTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
@@ -1561,7 +1560,6 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────────────────────
 
             var title = "CA title";
-            var keywords = kwsList;
             
             // Individual perspective testing values
             // All checkboxes checked
@@ -1583,7 +1581,7 @@ Future<void> main() async {
             (
               tester: tester, 
               title: title,
-              kwsList: keywords,
+              kwsList: kwsList2Keywords,
               checkboxValues: checkboxValues,
               checkboxTextFieldValues: checkboxTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
