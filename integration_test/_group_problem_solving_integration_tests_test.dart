@@ -92,7 +92,7 @@ Future<void> main() async {
                     ];
 
   // Ideas
-  const ideasList1 = ['idea1', 'idea2'];
+  const ideasList2Ideas = ['idea1', 'idea2'];
 
   // File names
   const String fileName1WithoutExtension = 'file1';
@@ -226,7 +226,7 @@ Future<void> main() async {
               tester: tester,
               titlesList: titlesList,
               kwsLists: [[], [], []],
-              ideasList: [ideasList1, ideasList1, ideasList1],
+              ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
             // await tester.pump(const Duration(seconds: 2));
@@ -307,7 +307,7 @@ Future<void> main() async {
               tester: tester,
               titlesList: titlesList,
               kwsLists: [[], [], []],
-              ideasList: [ideasList1, ideasList1, ideasList1],
+              ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
             // await tester.pump(const Duration(seconds: 2));
@@ -403,7 +403,7 @@ Future<void> main() async {
                 tester: tester,
                 titlesList: titlesListKwsSorting,
                 kwsLists: kwsListsKwsSorting,
-                ideasList: [ideasList1, ideasList1, ideasList1, ideasList1, ideasList1, ideasList1],
+                ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
                 fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
               );
               // await tester.pump(const Duration(seconds: 4));
@@ -513,7 +513,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: kwsList,
-              ideasList: ideasList1,
+              ideasList: ideasList2Ideas,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -598,7 +598,7 @@ Future<void> main() async {
               // const List<String> titlesList = [testGPSTitle3, testGPSTitle1, testGPSTitle2];
               titlesList: titlesList,
               kwsLists: [["kw3"], ["kw1"], ["kw2"]],
-              ideasList: [ideasList1, ideasList1, ideasList1],
+              ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
               fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
             );
 
@@ -701,7 +701,7 @@ Future<void> main() async {
               tester: tester, 
               title: testGPSTitle1,
               kwsList: kwsList,
-              ideasList: ideasList1,
+              ideasList: ideasList2Ideas,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -710,7 +710,7 @@ Future<void> main() async {
             // ── 2. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             await tester.pump(const Duration(seconds: 2));
-            await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList1);
+            await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList2Ideas);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -747,7 +747,7 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────────────────────
             var titleForEdition = "GPS title";
             var keywordsListForEdition = [...kwsList, kwMaintenance]; 
-            var ideasListForEdition = ideasList1;
+            var ideasListForEdition = ideasList2Ideas;
             var idea3Added = "idea3-edited";
             
             // important for gpsTestPreview
@@ -803,7 +803,7 @@ Future<void> main() async {
 
             // ── Verifying the ideas present ─────────────
             // ────────────────────────────────────────────
-            for (var idea in ideasList1)
+            for (var idea in ideasList2Ideas)
             {
               expect(find.textContaining(idea), findsNWidgets(1));
             }            
@@ -824,9 +824,8 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
               // IDEAS EDITION
-            // const ideasList1 = ['idea1', 'idea2'];         
              // Searching idea1
-            var idea1Finder = find.text(ideasList1[0]);
+            var idea1Finder = find.text(ideasList2Ideas[0]);
             await tester.ensureVisible(idea1Finder);
             await tester.pumpAndSettle();   
               // Tapping on the idea to open the edition overlay
@@ -845,7 +844,7 @@ Future<void> main() async {
             // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
             var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
-            await tester.enterText(tfIdea1Finder, "${ideasList1[0]}$editionSuffix");
+            await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
@@ -945,7 +944,7 @@ Future<void> main() async {
             await gpsTestPreview
             (
               tester: tester, title: "${titleForEdition}${editionSuffix}", 
-              ideasList: ["${ideasList1[0]}${editionSuffix}", idea3Added]
+              ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
             );
        
           } // if platform
@@ -978,7 +977,7 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────────────────────
             var titleForEdition = "GPS title";
             var keywordsListForEdition = [...kwsList, kwMaintenance]; 
-            var ideasListForEdition = ideasList1;
+            var ideasListForEdition = ideasList2Ideas;
             var idea3Added = "idea3-edited";
             
             // important for gpsTestPreview
@@ -1026,7 +1025,7 @@ Future<void> main() async {
 
             // ── Verifying the ideas present ─────────────
             // ────────────────────────────────────────────
-            for (var idea in ideasList1)
+            for (var idea in ideasList2Ideas)
             {
               expect(find.textContaining(idea), findsNWidgets(1));
             }            
@@ -1047,9 +1046,8 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
               // IDEAS EDITION
-            // const ideasList1 = ['idea1', 'idea2'];         
              // Searching idea1
-            var idea1Finder = find.text(ideasList1[0]);
+            var idea1Finder = find.text(ideasList2Ideas[0]);
             await tester.ensureVisible(idea1Finder);
             await tester.pumpAndSettle();   
               // Tapping on the idea to open the edition overlay
@@ -1068,7 +1066,7 @@ Future<void> main() async {
             // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
             var tfIdea1Finder = find.byKey(const ValueKey('editable-deletable-tf-0'));
-            await tester.enterText(tfIdea1Finder, "${ideasList1[0]}$editionSuffix");
+            await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
@@ -1168,7 +1166,7 @@ Future<void> main() async {
             await gpsTestPreview
             (
               tester: tester, title: "${titleForEdition}${editionSuffix}", 
-              ideasList: ["${ideasList1[0]}${editionSuffix}", idea3Added]
+              ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
             );
        
           } // if platform

@@ -63,7 +63,7 @@ Future<void> main() async {
   const List<String> kwsList = [kwCompanionship, kwWorkplace];
 
   // Ideas
-  const ideasList1 = ['idea1', 'idea2'];
+  const ideasList2Ideas = ['idea1', 'idea2'];
 
   // File names
   const String fileName1WithoutExtension = 'file1';
@@ -207,7 +207,7 @@ Future<void> main() async {
           );
 
           // Adding the ideas
-          for (var idea in ideasList1)
+          for (var idea in ideasList2Ideas)
           {
             await tester.enterText(newIdeaTextFieldFinder, idea);
             await tester.testTextInput.receiveAction(TextInputAction.done);
