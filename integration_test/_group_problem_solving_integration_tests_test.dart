@@ -1640,7 +1640,7 @@ Future<void> main() async {
               // Adding two keywords
             var keywordsListKw1Kw2 = ["kw1", "kw2"];
                 // Searching the text field
-            var keywordTfecFinder = find.byKey(const ValueKey('keywordField'));
+            var keywordTfecFinder = find.byKey(const Key('kwsFieldNewList'));
             for (var kw in keywordsListKw1Kw2)
             {
               await tester.enterText(keywordTfecFinder, kw);

@@ -949,7 +949,7 @@ final q = CAQuestionsFields();
       await tester.pumpAndSettle();
 
       // Searching for the new keyword text field
-      var newKeywordTextFieldFinder = find.byKey(const ValueKey('keywordField'));
+      var newKeywordTextFieldFinder = find.byKey(const Key('kwsFieldNewList'));
       await tester.ensureVisible(newKeywordTextFieldFinder); 
       expect(newKeywordTextFieldFinder, findsOne);
       await tester.pumpAndSettle(); 
