@@ -407,7 +407,7 @@ void _showKeywordsEditSheet
         [
           TextField
           (
-            key: const ValueKey('keywordsEditField'),
+            key: const Key('kwsGroupsDashboardEditField'),
             controller: kwsEditController,
             autofocus: true,
             decoration: const InputDecoration

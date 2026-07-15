@@ -2796,7 +2796,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the keywords
-              var newKeywordsTextFieldFinder = find.byKey(const ValueKey('keywordsEditField'));
+              var newKeywordsTextFieldFinder = find.byKey(const Key('kwsGroupsDashboardEditField'));
               expect(newKeywordsTextFieldFinder, findsOne);
               await tester.ensureVisible(newKeywordsTextFieldFinder); 
               await tester.pumpAndSettle(); 
