@@ -2899,7 +2899,7 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Tapping on the idea
-          var ideaFinder = find.byKey(const ValueKey('idea-0'));
+          var ideaFinder = find.byKey(const Key('idea-0'));
           await tester.tap(ideaFinder);
           await tester.pumpAndSettle();
 
@@ -2957,7 +2957,7 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Searching the idea
-          var ideaFinder = find.byKey(const ValueKey('idea-0'));
+          var ideaFinder = find.byKey(const Key('idea-0'));
           await tester.ensureVisible(ideaFinder);
           await tester.pumpAndSettle();   
           // Verifying the idea present
