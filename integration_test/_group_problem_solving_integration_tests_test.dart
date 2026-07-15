@@ -2515,7 +2515,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var newLabelTextFieldFinder = find.byKey(const ValueKey('listNameEditField'));
+              var newLabelTextFieldFinder = find.byKey(const Key('listNameEditField'));
               expect(newLabelTextFieldFinder, findsOne);
               await tester.ensureVisible(newLabelTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2576,7 +2576,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var listEditTextFieldFinder = find.byKey(const ValueKey('listNameEditField'));
+              var listEditTextFieldFinder = find.byKey(const Key('listNameEditField'));
               expect(listEditTextFieldFinder, findsOne);
               await tester.ensureVisible(listEditTextFieldFinder); 
               await tester.pumpAndSettle(); 
