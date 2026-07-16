@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/widgets/custom/text/custom_focusable_text.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/widgets/custom/text/custom_focusable_text.dart";
 
 /// {@category Custom widgets}
 /// A customizable heading (level 1 to 6).

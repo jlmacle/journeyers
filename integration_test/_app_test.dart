@@ -1,24 +1,24 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:integration_test/integration_test.dart';
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:integration_test/integration_test.dart";
+import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/pages/homepage.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart' show gpsTitleSuffix;
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/pages/homepage.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart" show gpsTitleSuffix;
 
-import 'externalized_code/externalized_testing_code.dart';
+import "externalized_code/externalized_testing_code.dart";
 
 // ─── Test suite ───────────────────────────────────────────────────────────────
 
@@ -54,26 +54,26 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const String testAnalysisTitleRoot = 'Integration-test CA session title';
-  const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
+  const String testAnalysisTitleRoot = "Integration-test CA session title";
+  const String testAnalysisTitle1 = "$testAnalysisTitleRoot (1)";
   
   // Keywords
-  const String kwCompanionship = 'Companionship';
-  const String kwWorkplace = 'Workplace';
+  const String kwCompanionship = "Companionship";
+  const String kwWorkplace = "Workplace";
   const List<String> kwsList = [kwCompanionship, kwWorkplace];
 
   // Ideas
-  const ideasList2Ideas = ['idea1', 'idea2'];
+  const ideasList2Ideas = ["idea1", "idea2"];
 
   // File names
-  const String fileName1WithoutExtension = 'file1';
+  const String fileName1WithoutExtension = "file1";
  
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
   
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
+    testTmpDir = await Directory.systemTemp.createTemp("context_analysis_integration_test_");
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To intercept the way the date is saved
     dateForTestingIndex = 0;
@@ -89,26 +89,26 @@ Future<void> main() async {
 
   // ── Test cases ─────────────────────────────────────────────────────────────
 
-  group('Application Tests: Mobile: \n', () 
+  group("Application Tests: Mobile: \n", () 
   {
-    // 'CA + GPS: Session data entered in the context analysis is available for the group problem-solving'
-    // ' (assuming an already selected path to the user session data folder)',
+    // "CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
+    // " (assuming an already selected path to the user session data folder)",
     testWidgets(
-      'CA + GPS: Session data entered in the context analysis is available for the group problem-solving'
-      ' (assuming an already selected path to the user session data folder)',
+      "CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
+      " (assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
         ({
           // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
+          "wasFirstRunModalAcknowledged": true,
           // to have the context analysis page, with the dashboard,
-          'wasCASessionDataSaved': true,
+          "wasCASessionDataSaved": true,
           // and to have the group problem-solving page, with the dashboard.
-          'wasGPSSessionDataSaved': true,
+          "wasGPSSessionDataSaved": true,
           // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
         });
 
         if (Platform.isAndroid || Platform.isIOS)
@@ -148,7 +148,7 @@ Future<void> main() async {
           var listTileFinder = find.byType(ListTile);
 
           var totalListTile = listTileFinder.evaluate().length;
-          if (testingDebug) pu.printd('Testing Debug: totalListTile: $totalListTile');
+          if (testingDebug) pu.printd("Testing Debug: totalListTile: $totalListTile");
 
           // Tapping on the list tile
           await tester.tap(listTileFinder.first);

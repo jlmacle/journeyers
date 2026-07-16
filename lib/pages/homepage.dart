@@ -1,19 +1,19 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
+// import "package:flutter/rendering.dart";
 
-import 'package:gap/gap.dart';
+import "package:gap/gap.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_language_switch.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
+import "package:journeyers/widgets/custom/interaction_and_inputs/custom_language_switch.dart";
 
 /// {@category Pages}
 /// The homepage for the app.
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage>
   {
     if (kIsWeb) 
     {
-      _eol = '\n';
+      _eol = "\n";
     } 
     else 
     {
@@ -138,14 +138,14 @@ class _HomePageState extends State<HomePage>
                 // AppBar title
                 Text
                 (
-                  AppLocalizations.of(context)?.appTitle ?? 'Issue with the application title text',
+                  AppLocalizations.of(context)?.appTitle ?? "Issue with the application title text",
                   style: appBarTitleStyle 
                 ),
                 const Gap(5),
                 // AppBar subtitle
                 Text
                 (
-                  AppLocalizations.of(context)?.appSubTitle ?? 'Issue with the application subtitle text',
+                  AppLocalizations.of(context)?.appSubTitle ?? "Issue with the application subtitle text",
                   textAlign: TextAlign.center,
                   style: appBarSubTitleStyle
                 ),
@@ -196,14 +196,14 @@ class _HomePageState extends State<HomePage>
             BottomNavigationBarItem
             (
               icon: Icon(Icons.task_alt),
-              label: 'Context analysis',
+              label: "Context analysis",
             ),
             BottomNavigationBarItem
             (
               // Key used in testing
-              key: Key('homepage-bottom-navigation-bar-item-gps'),
+              key: Key("homepage-bottom-navigation-bar-item-gps"),
               icon: Icon(Icons.group),
-              label: 'Group problem-solving',
+              label: "Group problem-solving",
             ),
           ],
         ),

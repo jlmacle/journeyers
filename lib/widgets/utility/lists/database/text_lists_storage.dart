@@ -1,14 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'package:path_provider/path_provider.dart';
+import "package:path_provider/path_provider.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/alphabet/alphabet_utils.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/dev/sort_utils.dart';
-import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/alphabet/alphabet_utils.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/dev/sort_utils.dart";
+import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 
 
 // new category to consider
@@ -20,15 +20,15 @@ import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 class ListsDB {
-  static var _fileName = 'journeyers_gps_participants_groups_lists22a.json';
+  static var _fileName = "journeyers_gps_participants_groups_lists22a.json";
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
   // Method used to get the file where the data is stored 
-  // (or null if the file doesn't exist).
+  // (or null if the file doesn"t exist).
   Future<File?> _getFile() async {
     var dir = await getApplicationSupportDirectory();
-    var file = File('${dir.path}/$_fileName');
+    var file = File("${dir.path}/$_fileName");
     if (!file.existsSync()) 
     {
       try
@@ -37,7 +37,7 @@ class ListsDB {
 
         if (isInTestEnvironment) _fileName = "tmp_list_data.json";
 
-        file = File('${dir.path}/$_fileName');
+        file = File("${dir.path}/$_fileName");
         file.createSync();
         if (listDebug) pu.printd("List debug: ListsDB: _getFile: file created: ${file.path}");
         List<Map<String, String>> records = [];
@@ -70,14 +70,14 @@ class ListsDB {
 
   // Case 1: a <= alphabetPartLastLetter <= y: nextAlphabetPart: determining next last letter
   // Case 2: alphabetPartLastLetter = z: nextAlphabetPart: 
-  //          determining the sequence of 'z's before reaching a letter between a and y
+  //          determining the sequence of "z"s before reaching a letter between a and y
   String _nextAlphabetPart(String alphabetPart)
   {
     // the next alphabet part
     String nextAlphabetPart = "";
     // the alphabet part before alphabetPartLastLetter
     String alphabetPartRoot = "";
-    // The number of consecutive 'z's at the end of alphabetPart
+    // The number of consecutive "z"s at the end of alphabetPart
     int zEndSequenceCount = 0;
 
     // Starting by the end of alphabetPart
@@ -124,33 +124,33 @@ class ListsDB {
       // Case 2: alphabetPartLastLetter = z
       case(false):
       {
-        // determining the sequence of 'z's before reaching a letter between a and y
-        // alphabetPartLastLetter was 'z'
+        // determining the sequence of "z"s before reaching a letter between a and y
+        // alphabetPartLastLetter was "z"
         bool nonBrokenZSequence = true;
         for (var index = alphabetPart.length - 1; index >= 0;  index--)
         {
-          // if sequence of 'z's
-          // 'a' added by the front to nextAlphabetPart
-          // one extra 'a' to add eventually if alphabetPart made of 'z's
-          if (alphabetPart[index] == 'z' && nonBrokenZSequence)  
+          // if sequence of "z"s
+          // "a" added by the front to nextAlphabetPart
+          // one extra "a" to add eventually if alphabetPart made of "z"s
+          if (alphabetPart[index] == "z" && nonBrokenZSequence)  
           {
             zEndSequenceCount++;
-            nextAlphabetPart = 'a' + nextAlphabetPart;
+            nextAlphabetPart = "a" + nextAlphabetPart;
            
             // if (listDebug) pu.printd("List debug: nextAlphabetPart: $nextAlphabetPart");
-            // remains one extra 'a' to add if alphabetPart made only of 'z's
+            // remains one extra "a" to add if alphabetPart made only of "z"s
           }
 
-          // Reached a letter different than 'z'.
-          // End of the sequence of 'z's
+          // Reached a letter different than "z".
+          // End of the sequence of "z"s
           else
           {
             nonBrokenZSequence = false;
 
-            // Removing the sequence of 'z's at the end, 
-            // before applying _nextAlphabetPart to remaining part, to determine additional part to add to the 'a'(s)
-            // or before adding an extra 'a'
-            // The last letter is a 'z', therefore at least one 'z' to remove
+            // Removing the sequence of "z"s at the end, 
+            // before applying _nextAlphabetPart to remaining part, to determine additional part to add to the "a"(s)
+            // or before adding an extra "a"
+            // The last letter is a "z", therefore at least one "z" to remove
             String alphabetPartWithoutZSequence = 
                 alphabetPart.substring(0, alphabetPart.length - zEndSequenceCount);
            
@@ -165,8 +165,8 @@ class ListsDB {
         }
       }
     }
-    // All 'z's, 'a' to add in front
-    if(alphabetPart.length == zEndSequenceCount) nextAlphabetPart = 'a' + nextAlphabetPart;
+    // All "z"s, "a" to add in front
+    if(alphabetPart.length == zEndSequenceCount) nextAlphabetPart = "a" + nextAlphabetPart;
     return nextAlphabetPart;
   }
 
@@ -226,7 +226,7 @@ class ListsDB {
 
     bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
-      throw ArgumentError('No list found for label: "$label".');
+      throw ArgumentError("No list found for label: '$label'.");
     }
 
     // Lists-level loop
@@ -275,7 +275,7 @@ class ListsDB {
 
     bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
-      throw ArgumentError('No list found for label: "$label".');
+      throw ArgumentError("No list found for label: '$label'.");
     }
 
     // Lists-level loop
@@ -392,7 +392,7 @@ class ListsDB {
       case false:
       {
         // the next digit is 0
-        String nextDigitPart = '0';
+        String nextDigitPart = "0";
 
         // searching to determine the next alphabet part
         String nextAlphabetPart = "";
@@ -437,7 +437,7 @@ class ListsDB {
           case false:
           {
             // Retrieving the next letter in the alphabet after z: a
-            String nextLetterAfterAlphabetPartLastLetter ='a';
+            String nextLetterAfterAlphabetPartLastLetter ="a";
             // Building the new alphabet part root
             // String nextAlphabetPartRoot = _nextAlphabetPart(alphabetPartRoot);
             String nextAlphabetPart = _nextAlphabetPart(alphabetPart);
@@ -461,7 +461,7 @@ class ListsDB {
     Set<String> longestKeysSet = Set.from(keys);
 
     // Keys should be unique
-    if (keys.length != Set.from(keys).length) throw Exception('Keys should be unique: keysUsed: $keys');
+    if (keys.length != Set.from(keys).length) throw Exception("Keys should be unique: keysUsed: $keys");
 
     // Searching for max longestKeyLength
     for (var keyIndex = 0; keyIndex < keys.length; keyIndex++)

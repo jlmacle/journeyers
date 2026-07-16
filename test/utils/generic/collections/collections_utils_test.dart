@@ -1,65 +1,65 @@
-import 'package:test/test.dart';
+import "package:test/test.dart";
 
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
 void main() {
-  group('areListsEqualSets', () {
-    test('returns true for identical sets (same order)', () {
+  group("areListsEqualSets", () {
+    test("returns true for identical sets (same order)", () {
       expect(cu.areListsEqualSets([1, 2, 3], [1, 2, 3]), isTrue);
     });
 
-    test('returns true for identical sets (different order)', () {
+    test("returns true for identical sets (different order)", () {
       expect(cu.areListsEqualSets([1, 2, 3], [3, 2, 1]), isTrue);
     });
 
-    test('returns true for identical sets with duplicates', () {
+    test("returns true for identical sets with duplicates", () {
       expect(cu.areListsEqualSets([1, 2, 2, 3], [3, 2, 1]), isTrue);
     });
 
-    test('returns false for different sets', () {
+    test("returns false for different sets", () {
       expect(cu.areListsEqualSets([1, 2, 3], [1, 2, 4]), isFalse);
     });
 
-    test('returns false for different sets (2)', () {
+    test("returns false for different sets (2)", () {
       expect(cu.areListsEqualSets([1, 2, 3], []), isFalse);
     });
 
-    test('returns false for different sets (3)', () {
+    test("returns false for different sets (3)", () {
       expect(cu.areListsEqualSets([] , [1, 2, 3]), isFalse);
     });
 
-    test('returns false for different sets (4)', () {
+    test("returns false for different sets (4)", () {
       expect(cu.areListsEqualSets([1, 2] , [1, 2, 3]), isFalse);
     });
 
-    test('returns true for empty lists', () {
+    test("returns true for empty lists", () {
       expect(cu.areListsEqualSets([], []), isTrue);
     });
 
-    test('returns true for lists with null values', () {
+    test("returns true for lists with null values", () {
       expect(cu.areListsEqualSets([1, null, 3], [null, 3, 1]), isTrue);
     });
 
-    test('returns false for lists with different null counts', () {
+    test("returns false for lists with different null counts", () {
       expect(cu.areListsEqualSets([1, null, 3], [1, 3]), isFalse);
     });
   });
 
-  group('areListsOfEqualSortedContent', () {
-    test('returns true for identical lists (same order)', () {
+  group("areListsOfEqualSortedContent", () {
+    test("returns true for identical lists (same order)", () {
       expect(cu.areListsOfEqualSortedContent([1, 2, 3], [1, 2, 3]), isTrue);
     });
 
-    test('returns true for identical lists (different order)', () {
+    test("returns true for identical lists (different order)", () {
       expect(cu.areListsOfEqualSortedContent([1, 2, 3], [3, 2, 1]), isTrue);
     });
 
-    test('returns false for different lists (different length)', () {
+    test("returns false for different lists (different length)", () {
       expect(cu.areListsOfEqualSortedContent([1, 2, 3], [3, 2, 1, 0]), isFalse);
     });
 
-    test('returns false for different lists (same length, different content)', () {
+    test("returns false for different lists (same length, different content)", () {
       expect(cu.areListsOfEqualSortedContent([1, 2, 3], [3, 2, 0]), isFalse);
     });
 

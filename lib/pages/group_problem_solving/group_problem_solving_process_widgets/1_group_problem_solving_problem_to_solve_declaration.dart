@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to define the problem to solve, or to retrieve a title from previous context analyses. In the latter case, (gps) is added in suffix.
@@ -76,8 +76,8 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                     itemBuilder: (context, index) {
                       final session = widget.previousSessions[index];
                       return ListTile(
-                        title: Text(session['title']),
-                        subtitle: Text("Date: ${session['date']}"),
+                        title: Text(session["title"]),
+                        subtitle: Text("Date: ${session["date"]}"),
                         onTap: () {
                           widget.onSessionSelected(session);
                           setState(() => _isEditing = false);

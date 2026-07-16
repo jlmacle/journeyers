@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
 /// A widget used for keywords declaration in the context analysis process.
@@ -89,7 +89,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
               hint: Center
               (
                 child: 
-                Text(textAlign: TextAlign.center, 'Please enter keywords\nto describe the analysis.\n(+ Enter key)', style: analysisTextFieldHintStyle)
+                Text(textAlign: TextAlign.center, "Please enter keywords\nto describe the analysis.\n(+ Enter key)", style: analysisTextFieldHintStyle)
               )
             ),
             textAlign: TextAlign.center,

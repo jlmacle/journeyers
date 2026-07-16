@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/widgets/utility/lists/list_dashboard.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/widgets/utility/lists/list_dashboard.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list.dart";
 
 
 /// ParticipantsGroupDeclaration offers two choices:
@@ -62,7 +62,7 @@ class NewTextListOrLoadingPage extends StatelessWidget
                     MaterialPageRoute<void>(
                       builder: (_) => ListDashboard
                                       (
-                                        dashboardContext: '', 
+                                        dashboardContext: "", 
                                         onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
                                         onRetrievedSessionDataBeforeEditionCallbackFunction: 
                                         ({

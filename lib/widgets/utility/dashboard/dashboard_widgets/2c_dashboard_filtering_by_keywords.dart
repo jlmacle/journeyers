@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
@@ -91,11 +91,11 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   // Method used to refresh the keywords list after deletion of session data.
   Future<void> keywordsRefreshAfterSessionDeletion() async
   {
-    if (testingDebug) pu.printd('Testing Debug: DashboardFilteringByKeywords: keywordsRefreshAfterSessionDeletion');
+    if (testingDebug) pu.printd("Testing Debug: DashboardFilteringByKeywords: keywordsRefreshAfterSessionDeletion");
     // if no sessions left, nothing to do
     if (widget.sessionsMetadataAll == null) return;
     
-    // Re-building the keywords' list from the remaining session data
+    // Re-building the keywords" list from the remaining session data
     Set<String> remainingKws = {};
     for (var sessionData in widget.sessionsMetadataAll!) 
     {
@@ -103,7 +103,7 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
       remainingKws.addAll(kws.cast<String>());
     }
     
-    // Refreshing the used keywords' list, the selection of keywords, 
+    // Refreshing the used keywords" list, the selection of keywords, 
     // and the DashboardFilteringByKeywords widget
     widget.keywordsAll.clear();
     widget.keywordsAll.addAll(remainingKws);

@@ -7,5 +7,5 @@ class DTOCheckboxWithTextField
   /// The text of the text field.
   String text;
 
-  DTOCheckboxWithTextField() : checked = false, text = '';
+  DTOCheckboxWithTextField() : checked = false, text = "";
 }

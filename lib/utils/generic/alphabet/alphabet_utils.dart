@@ -11,7 +11,7 @@ List<String> alphabetListMinusZ =
 ];
 
 
-// {'a':0, 'b':1, ... }
+// {"a":0, "b":1, ... }
 Map<String, int> alphabetToIndexMap = 
 {
   for (int i = 0; i <= 25; i++) String.fromCharCode(97 + i) : i,

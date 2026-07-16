@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/widgets/utility/lists/database/text_lists_storage.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 
 // todo: code to clean
 /// {@category Utility widgets}
@@ -83,7 +83,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedKeywords = _kwsEditTfec.text
-        .split(',')
+        .split(",")
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toSet();
@@ -114,7 +114,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedParticipants = _participantsEditTfec.text
-        .split(',')
+        .split(",")
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toSet();
@@ -153,7 +153,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     super.dispose();
   }
 
-  // Method used to get the participants' list
+  // Method used to get the participants" list
   List<String> _getParticipants(Map<String, dynamic> listData)
   {
 
@@ -195,7 +195,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: Key('checkbox-${widget.listIndex}'),
+                  key: Key("checkbox-${widget.listIndex}"),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
@@ -223,7 +223,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             child: Text(
                               displayTitle,
                               // todo: to clean
-                              key: Key('session-title-${widget.listIndex}'),
+                              key: Key("session-title-${widget.listIndex}"),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
@@ -270,7 +270,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                             {
                               return                  
                               Container(
-                                key: Key('session-participants-container-${widget.listIndex}-${participant}'),
+                                key: Key("session-participants-container-${widget.listIndex}-${participant}"),
                                 decoration: BoxDecoration
                                 (
                                   color: Colors.transparent,  
@@ -302,8 +302,8 @@ class _ListOfListsItemState extends State<ListOfListsItem>
                           listData: widget.listMetadata
                           ),
                         child: Text(
-                          "Keywords: ${sortedKeywords.join(', ')}",
-                          key: Key('session-keywords-${widget.listIndex}'),
+                          "Keywords: ${sortedKeywords.join(", ")}",
+                          key: Key("session-keywords-${widget.listIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -352,7 +352,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 
                 // Right icon — pinned to row end
                 IconButton(
-                  key: Key('session-delete-${widget.listIndex}'),
+                  key: Key("session-delete-${widget.listIndex}"),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: listsDeleteTooltipLabel,
@@ -378,7 +378,7 @@ void _showKeywordsEditSheet
 
 }) {
   // Converting list to a comma-separated string for editing
-  kwsEditController.text = (currentKeywords..sort()).join(', '); 
+  kwsEditController.text = (currentKeywords..sort()).join(", "); 
   
   showModalBottomSheet
   (
@@ -399,14 +399,14 @@ void _showKeywordsEditSheet
         [
           TextField
           (
-            key: const Key('kwsGroupsDashboardEditField'),
+            key: const Key("kwsGroupsDashboardEditField"),
             controller: kwsEditController,
             autofocus: true,
             decoration: const InputDecoration
             (
               labelText: keywordsTextFieldLabel, 
               labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Please enter keywords.',
+              hintText: "Please enter keywords.",
             ),
             onSubmitted: (_) async => onKeywordsUpdated(listKey: listKey, listData: listData)
           ),       
@@ -433,7 +433,7 @@ void _showParticipantsEditSheet({
   required FunctionStringAndMapStringDynamic onParticipantsUpdated,
   required Map<String, dynamic> listData,
 }) {
-  participantsTec.text = currentParticipants.join(', ');
+  participantsTec.text = currentParticipants.join(", ");
 
   showModalBottomSheet(
     context: context,
@@ -474,13 +474,13 @@ void _showParticipantsEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  key: const Key('participantsEditField'),
+                  key: const Key("participantsEditField"),
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
                     labelText: participantsTextFieldLabel,
                     labelStyle: const TextStyle(color: Colors.black),
-                    hintText: 'Please enter the participants.',
+                    hintText: "Please enter the participants.",
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),
@@ -554,13 +554,13 @@ void _showListNameEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  key: const Key('listNameEditField'),
+                  key: const Key("listNameEditField"),
                   controller: listNameEditTec,
                   autofocus: true,
                   decoration: InputDecoration(
                     labelText: participantsTextFieldLabel,
                     labelStyle: const TextStyle(color: Colors.black),
-                    hintText: 'Please enter the new list name.',
+                    hintText: "Please enter the new list name.",
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),

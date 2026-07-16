@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_page.dart';
-import 'package:journeyers/widgets/utility/process/new_process_button.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
+import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_page.dart";
+import "package:journeyers/widgets/utility/process/new_process_button.dart";
 
 
 /// {@category Pages}
@@ -103,7 +103,7 @@ class CAPageState extends State<CAPage>
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: Text
                   (
-                    AppLocalizations.of(context)?.start_msg ?? 'Issue with the application start message',
+                    AppLocalizations.of(context)?.start_msg ?? "Issue with the application start message",
                     textAlign: TextAlign.center,                                          
                     style: dialogStyle, 
                   ),
@@ -242,7 +242,7 @@ class CAPageState extends State<CAPage>
                 // todo: to clean (dtoCAFormWhenEdition)
                 child: DashboardPage
                 (
-                  key: const Key('analyses-dashboard'), 
+                  key: const Key("analyses-dashboard"), 
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,

@@ -1,19 +1,19 @@
-import 'dart:async';
-import 'dart:io';
+import "dart:async";
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import "package:flutter/material.dart";
+import "package:flutter/rendering.dart";
 
-import 'package:path/path.dart' as path;
+import "package:path/path.dart" as path;
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/placeholder_functions.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 
 /// {@category Custom widgets}
 /// A text field that checks the entered value with different functions,
@@ -127,9 +127,9 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   bool _submitIsBlocked = false;
 
   // Useful for automatic scrolling
-  final GlobalKey _errorMessageKeyCA = GlobalKey(debugLabel: 'context-analysis-file-name-error-msg');
-  final GlobalKey _errorMessageKeyGPS = GlobalKey(debugLabel: 'group-problem-solving-file-name-error-msg');
-  final GlobalKey _errorMessageKeyGeneric = GlobalKey(debugLabel: 'generic-file-name-error-msg');
+  final GlobalKey _errorMessageKeyCA = GlobalKey(debugLabel: "context-analysis-file-name-error-msg");
+  final GlobalKey _errorMessageKeyGPS = GlobalKey(debugLabel: "group-problem-solving-file-name-error-msg");
+  final GlobalKey _errorMessageKeyGeneric = GlobalKey(debugLabel: "generic-file-name-error-msg");
   late GlobalKey _errorMessageKey;
   
   final TextEditingController _tfec = .new();
@@ -213,7 +213,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Sanitizing the input
       // DESIGN NOTES: after research, 
       // it seems that only straight double quote are used to delimit text when importing CSV files
-      // var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, '');
+      // var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, "");
       // Going through the list of sanitizing functions
       var cleanedValue = text;
       cleanedValue = bundleWithSanitizingFunctionThatReturnedTrue!(cleanedValue).sanitizingFunction(text);
@@ -222,7 +222,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
    
       setState(() 
       {
-        // Updating the text editing controller's text with the sanitized input
+        // Updating the text editing controller"s text with the sanitized input
         _tfec.text = cleanedValue;
 
         // Letting the user know that the input was sanitized
@@ -238,7 +238,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Currently, this is only supported by the web engine and has no effect on other platforms.
       // The default mode is Assertiveness.polite."      
       // TODO:  TextDirection.ltr: code to modify for l10n
-      // Doesn't seem effective yet. Left for later. 
+      // Doesn"t seem effective yet. Left for later. 
       SemanticsService.sendAnnouncement
       (
         View.of(context), _errorMessage, 
@@ -319,7 +319,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Currently, this is only supported by the web engine and has no effect on other platforms.
       // The default mode is Assertiveness.polite."      
       // TODO:  TextDirection.ltr: code to modify for l10n
-      // Doesn't seem effective yet. Left for later. 
+      // Doesn"t seem effective yet. Left for later. 
       SemanticsService.sendAnnouncement
       (
         View.of(context), _errorMessage, 
@@ -423,7 +423,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 Future<void> deleteFile({required String filePath}) async
 {
   String fileNameWithExtension = path.basename(filePath);
-  String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+  String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
 
   if (editDebug) pu.printd("Editing: deleteFile: filePath: $filePath");
   if (editDebug) pu.printd("Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension");

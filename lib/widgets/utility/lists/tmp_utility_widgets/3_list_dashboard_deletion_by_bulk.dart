@@ -1,12 +1,12 @@
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/lists/database/text_lists_storage.dart';
-import 'package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
+import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart";
 
 
 /// {@category Utility widgets}
@@ -58,7 +58,7 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
   // Method used to delete several lists data
   Future<void> _selectedListsDelete() async 
   {
-    // Creating a fixed list to iterate over so clearing doesn't break the loop
+    // Creating a fixed list to iterate over so clearing doesn"t break the loop
     final keysOfListsSelectedForDeletion = List<String>.from(widget.listsSelectedForDeletionKeys!);
 
     // Updating the DB
@@ -132,7 +132,7 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     return Center(
         child:        
           TextButton.icon(
-            key: const Key('bulk-delete-button'),
+            key: const Key("bulk-delete-button"),
             onPressed: _selectedListsDelete,
             icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(

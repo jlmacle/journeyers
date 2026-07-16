@@ -1,28 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
-import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/process/new_process_button.dart';
-import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
+import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart";
+import "package:journeyers/widgets/utility/process/new_process_button.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
   
 // Labels of the level 2 and 3 titles
 final q = CAQuestionsFields();
@@ -71,7 +71,7 @@ final q = CAQuestionsFields();
     expect(
       find.byType(NewProcessButton),
       findsOneWidget,
-      reason: 'NewProcessButton should be visible when CA session data is already saved.',
+      reason: "NewProcessButton should be visible when CA session data is already saved.",
     );
 
     // Tapping NewProcessButton
@@ -84,7 +84,7 @@ final q = CAQuestionsFields();
     expect(
       find.byType(CAProcess),
       findsOneWidget,
-      reason: 'CAProcess should be visible after tapping NewProcessButton.',
+      reason: "CAProcess should be visible after tapping NewProcessButton.",
     );
   }
  
@@ -100,7 +100,7 @@ final q = CAQuestionsFields();
     expect(
       titleTextField,
       findsOneWidget,
-      reason: 'A TextField should exist inside CATitleDeclaration.',
+      reason: "A TextField should exist inside CATitleDeclaration.",
     );
 
     // Entering a title
@@ -490,7 +490,7 @@ final q = CAQuestionsFields();
     expect(
       find.byType(NewProcessButton),
       findsOneWidget,
-      reason: 'NewProcessButton should be visible when GPS session data is already saved.',
+      reason: "NewProcessButton should be visible when GPS session data is already saved.",
     );
 
     // Tapping NewProcessButton
@@ -501,7 +501,7 @@ final q = CAQuestionsFields();
     expect(
       find.byType(GPSProcess),
       findsOneWidget,
-      reason: 'GPSProcess should be visible after tapping NewProcessButton.',
+      reason: "GPSProcess should be visible after tapping NewProcessButton.",
     );
   }
 
@@ -516,7 +516,7 @@ final q = CAQuestionsFields();
     );
 
     var totalContainers = containerFinder.evaluate().length;
-    if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
+    if (testingDebug) pu.printd("Testing Debug: totalContainers: $totalContainers");
 
     Container container = tester.widget<Container>(containerFinder);
     var boxDecoration = container.decoration as BoxDecoration;
@@ -555,7 +555,7 @@ final q = CAQuestionsFields();
     );
 
     var totalContainers = containerFinder.evaluate().length;
-    if (testingDebug) pu.printd('Testing Debug: totalContainers: $totalContainers');
+    if (testingDebug) pu.printd("Testing Debug: totalContainers: $totalContainers");
 
     Container container = tester.widget<Container>(containerFinder);
     var boxDecoration = container.decoration as BoxDecoration;
@@ -806,7 +806,7 @@ final q = CAQuestionsFields();
     
     // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
     // ────────────────────────────────────────────────────────────────────────────
-    var bottomItemGPSFinder = find.byKey(const Key('homepage-bottom-navigation-bar-item-gps'));
+    var bottomItemGPSFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-gps"));
     await tester.tap(bottomItemGPSFinder);
     await tester.pumpAndSettle();
 
@@ -927,7 +927,7 @@ final q = CAQuestionsFields();
     // ── OVERLAY  ───────────────────────────────────
     // ───────────────────────────────────────────────
     // Verifying the overlay present
-    expect(find.byKey(const Key('ideaOverlayTextField')), findsOne);
+    expect(find.byKey(const Key("ideaOverlayTextField")), findsOne);
   }
 
 
@@ -949,7 +949,7 @@ final q = CAQuestionsFields();
       await tester.pumpAndSettle();
 
       // Searching for the new keyword text field
-      var newKeywordTextFieldFinder = find.byKey(const Key('kwsFieldNewList'));
+      var newKeywordTextFieldFinder = find.byKey(const Key("kwsFieldNewList"));
       await tester.ensureVisible(newKeywordTextFieldFinder); 
       expect(newKeywordTextFieldFinder, findsOne);
       await tester.pumpAndSettle(); 
@@ -976,7 +976,7 @@ final q = CAQuestionsFields();
     
     // Searching for the new participant text field
     // Searching by placeholder text is not robust enough
-    var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+    var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
     expect(newParticipantTextFieldFinder, findsOne);
     await tester.ensureVisible(newParticipantTextFieldFinder); 
     await tester.pumpAndSettle(); 
@@ -1019,7 +1019,7 @@ final q = CAQuestionsFields();
         expect(find.text(name), findsOne);    
       }      
 
-      // Searching the 'Save' icon
+      // Searching the "Save" icon
       var saveListIconFinder = find.byIcon(Icons.save_outlined);
       // await tester.pump(const Duration(seconds: 3));
       expect(saveListIconFinder, findsOne);
@@ -1029,7 +1029,7 @@ final q = CAQuestionsFields();
       await tester.pumpAndSettle();
 
       // Searching the text field to add the list name
-      var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
+      var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
       expect(listNameSavingTextFieldFinder, findsOne);
 
       // Adding the list name
@@ -1061,7 +1061,7 @@ final q = CAQuestionsFields();
   Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async
   {
     // Searching the text field used to add ideas
-    var newIdeaTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
+    var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayTextField"));
     // Adding the idea
     await tester.ensureVisible(newIdeaTextFieldFinder);
     await tester.tap(newIdeaTextFieldFinder);
@@ -1082,7 +1082,7 @@ final q = CAQuestionsFields();
                 (widget) 
                 {
                   if (widget.key is ValueKey<String>) {
-                    return (widget.key as ValueKey<String>).value.contains('editable-deletable-text-item-');
+                    return (widget.key as ValueKey<String>).value.contains("editable-deletable-text-item-");
                   }
                   return false;
                 }
@@ -1098,7 +1098,7 @@ final q = CAQuestionsFields();
       (widget) 
       {
         if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains('session-participants-container-');
+          return (widget.key as ValueKey<String>).value.contains("session-participants-container-");
         }
         return false;
       }
@@ -1122,7 +1122,7 @@ final q = CAQuestionsFields();
                           );
     
     var totalButton = editButtonFinder.evaluate().length;
-    if (testingDebug) pu.printd('Testing Debug: totalButton: $totalButton');
+    if (testingDebug) pu.printd("Testing Debug: totalButton: $totalButton");
 
     // Tapping the edit button
     await tester.tap(editButtonFinder);
@@ -1172,7 +1172,7 @@ final q = CAQuestionsFields();
       (widget) 
       {
         if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains('session-keywords-');
+          return (widget.key as ValueKey<String>).value.contains("session-keywords-");
         }
         return false;
       }
@@ -1197,7 +1197,7 @@ final q = CAQuestionsFields();
       (widget) 
       {
         if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains('session-title-');
+          return (widget.key as ValueKey<String>).value.contains("session-title-");
         }
         return false;
       }
@@ -1216,7 +1216,7 @@ final q = CAQuestionsFields();
           if (widget is FilterChip) {
             final label = widget.label;
             if (label is Text) {
-              return (label.data ?? '').contains(kw);
+              return (label.data ?? "").contains(kw);
             }
           }
           return false;
@@ -1230,13 +1230,13 @@ final q = CAQuestionsFields();
 // ─── MISC. ───────────────────────────────────────────────────────────────
 
   // Serialises a segmented-button selection to a slash-separated string.
-  String _segmentedButtonToString(Set<String> values) => values.join('/');
+  String _segmentedButtonToString(Set<String> values) => values.join("/");
 
   /// Method used to scroll up the screen (-200 as default delta value to go up the list).
   /// The method assumes that the first descendant is the right one.
   Future<int> scrollListUpScrollableByFirstDescendant({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = -200}) async
   {
-  if (testingDebug) pu.printd('Testing Debug: scrollListUpScreen');
+  if (testingDebug) pu.printd("Testing Debug: scrollListUpScreen");
 
   var scrollablesFinder = find.descendant
   (

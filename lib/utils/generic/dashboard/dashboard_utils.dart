@@ -1,13 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'package:flutter/services.dart';
+import "package:flutter/services.dart";
 
-import 'package:path_provider/path_provider.dart';
+import "package:path_provider/path_provider.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
 /// {@category Utils - Generic}
@@ -21,25 +21,25 @@ class DashboardUtils {
   static const String gpsContext = "group-problem-solving";
 
   /// The key for the session title.
-  static const String keyTitle = 'title';
+  static const String keyTitle = "title";
 
   /// The key for the session keywords.
-  static const String keyKeywords = 'keywords';
+  static const String keyKeywords = "keywords";
 
   /// The key for the session date.
-  static const String keyDate = 'date';
+  static const String keyDate = "date";
 
   /// The key for the session file path.
-  static const String keyFilePath = 'filePath';
+  static const String keyFilePath = "filePath";
 
   /// The current list of stored file names (for the mobile applications).
   List<String> currentListOfStoredFileNames = [];  
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
-  static const _platformAndroid = MethodChannel('dev.journeyers/saf');
+  static const _platformAndroid = MethodChannel("dev.journeyers/saf");
   // Android: storage access framework (reading/saving files)
-  static const _platformIOS = MethodChannel('dev.journeyers/iossaf');
+  static const _platformIOS = MethodChannel("dev.journeyers/iossaf");
 
   /// Method used to retrieve the file with all the dashboard session metadata, 
   /// either for the context analyses, or for the group problem-solvings.
@@ -48,14 +48,14 @@ class DashboardUtils {
     final path = directory.path;
     String fileName = "";
     if (typeOfDashboardContext == caContext) {
-      fileName = 'dashboard_session_data_context_analyses.json';
+      fileName = "dashboard_session_data_context_analyses.json";
     } else if (typeOfDashboardContext == gpsContext) {
-      fileName = 'dashboard_session_data_group_problem_solvings.json';
+      fileName = "dashboard_session_data_group_problem_solvings.json";
     } else {
       if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
     }
 
-    File sessionFile = File('$path/$fileName');
+    File sessionFile = File("$path/$fileName");
     if (!sessionFile.existsSync()) {
       sessionFile.createSync();
       // Adding an empty map to the file
@@ -111,7 +111,7 @@ class DashboardUtils {
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    if (sessionDataDebug) pu.printd('Session Data: new session metadata: $sessionData saved to: ${file.path}'); 
+    if (sessionDataDebug) pu.printd("Session Data: new session metadata: $sessionData saved to: ${file.path}"); 
   }
 
   /// Method used to retrieved all the session metadata used for a dashboard.
@@ -174,19 +174,19 @@ class DashboardUtils {
     // Getting file name according to context
     if (typeOfDashboardContext == caContext) 
     {
-      fileName = 'dashboard_session_data_context_analyses.json';
+      fileName = "dashboard_session_data_context_analyses.json";
     } 
     else if (typeOfDashboardContext == gpsContext) 
     {
-      fileName = 'dashboard_session_data_group_problem_solvings.json';
+      fileName = "dashboard_session_data_group_problem_solvings.json";
     } 
     else 
     {
       if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
     }
 
-    File sessionFile = File('$pathToApplicationSupportDirectory/$fileName');
-    // Creating session file if doesn't exist
+    File sessionFile = File("$pathToApplicationSupportDirectory/$fileName");
+    // Creating session file if doesn"t exist
     if (!sessionFile.existsSync()) {sessionFile.createSync();}
 
     // Adding the metadata to the file
@@ -202,9 +202,9 @@ class DashboardUtils {
     // Getting the list of stored file names
     List<Object?> result = [];
     if(Platform.isAndroid)
-    {result = await _platformAndroid.invokeMethod('listFiles');}
+    {result = await _platformAndroid.invokeMethod("listFiles");}
     else if(Platform.isIOS)
-    {result = await _platformIOS.invokeMethod('listFiles');}    
+    {result = await _platformIOS.invokeMethod("listFiles");}    
 
     List<String> retrievedFileNames = result.cast<String>();
     // Verifying that the lists are different, while not empty

@@ -1,15 +1,15 @@
 // ignore: file_names
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/main.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/main.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
 void main() {
   // The file name is tested without the extension to avoid triggering the dot removal
@@ -22,7 +22,7 @@ void main() {
   setUp(() 
   {
     // Creates a temporary directory on any host OS
-    testTmpDir = Directory.systemTemp.createTempSync('SessionFileNameOnMobilePlatforms_test');
+    testTmpDir = Directory.systemTemp.createTempSync("SessionFileNameOnMobilePlatforms_test");
     pathToTmpFolder = testTmpDir!.path;
   });
 
@@ -31,12 +31,12 @@ void main() {
   if (testTmpDir!.existsSync()) testTmpDir!.deleteSync(recursive: true);
   });
   
-  group('TextFieldChecked Tests (Mobile platforms):\n', () {       
+  group("TextFieldChecked Tests (Mobile platforms):\n", () {       
 
-    // Couldn't test with a POSIX path.
-    // Kept to illustrate that the idea wasn't overlooked.
-    // 'On mobile: The user cannot submit a CSV file name already used.'
-    testWidgets('On mobile: The user cannot submit a CSV file name already used.', 
+    // Couldn"t test with a POSIX path.
+    // Kept to illustrate that the idea wasn"t overlooked.
+    // "On mobile: The user cannot submit a CSV file name already used."
+    testWidgets("On mobile: The user cannot submit a CSV file name already used.", 
     (WidgetTester tester) async 
     {
       
@@ -45,11 +45,11 @@ void main() {
       SharedPreferences.setMockInitialValues
       ({
           // To avoid the first-run modal
-          'wasFirstRunModalAcknowledged': true, 
+          "wasFirstRunModalAcknowledged": true, 
           // To get the CA process page
-          'wasCASessionDataSaved': false,
+          "wasCASessionDataSaved": false,
           // Test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
       });
 
       // Loading the widget
@@ -68,10 +68,10 @@ void main() {
       if (Platform.isAndroid || Platform.isIOS)
       {
         // Writing CSV files in the tmp folder 
-        File csvFile1 = File('${pathToTmpFolder!}/file1.csv');
+        File csvFile1 = File("${pathToTmpFolder!}/file1.csv");
         await csvFile1.create();
 
-        File csvFile2 = File('${pathToTmpFolder!}/file2.csv');
+        File csvFile2 = File("${pathToTmpFolder!}/file2.csv");
         await csvFile2.create();
 
         List<File> fileList = await 
@@ -104,8 +104,8 @@ void main() {
     }
     );
 
-    // 'On mobile: The user cannot submit a TXT file name already used.'
-    testWidgets('On mobile: The user cannot submit a TXT file name already used.', 
+    // "On mobile: The user cannot submit a TXT file name already used."
+    testWidgets("On mobile: The user cannot submit a TXT file name already used.", 
     (WidgetTester tester) async 
     {
     });

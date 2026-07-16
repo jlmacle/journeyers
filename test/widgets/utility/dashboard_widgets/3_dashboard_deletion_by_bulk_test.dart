@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart";
 
 
 void main() {
   // Test metadata
   final sessionsMetadata = [
-    {DashboardUtils.keyTitle: 'Session 1', DashboardUtils.keyFilePath: 'path/1'},
-    {DashboardUtils.keyTitle: 'Session 2',  DashboardUtils.keyFilePath: 'path/2', },
+    {DashboardUtils.keyTitle: "Session 1", DashboardUtils.keyFilePath: "path/1"},
+    {DashboardUtils.keyTitle: "Session 2",  DashboardUtils.keyFilePath: "path/2", },
   ];
 
   List<dynamic>? sessionsMetadataAll;
@@ -20,7 +20,7 @@ void main() {
   setUp(() {
     sessionsMetadataAll = List.from(sessionsMetadata);
     sessionsMetadataFiltered = List.from(sessionsMetadata);
-    sessionsMetadataSelectedForDeletion = ['path/1']; // Session selected by default
+    sessionsMetadataSelectedForDeletion = ["path/1"]; // Session selected by default
   });
 
   Widget createWidgetUnderTest({
@@ -42,9 +42,9 @@ void main() {
     );
   }
 
-  group('DashboardDeletionByBulk UI Tests: \n', () {
+  group("DashboardDeletionByBulk UI Tests: \n", () {
 
-    testWidgets('Empty selection color is transparent', (WidgetTester tester) async 
+    testWidgets("Empty selection color is transparent", (WidgetTester tester) async 
     {
         sessionsMetadataSelectedForDeletion = [];
         await tester.pumpWidget(createWidgetUnderTest(areSessionsForDeletion: false));
@@ -60,14 +60,14 @@ void main() {
         expect(textDelete.style?.color, transparent);
       });
 
-      testWidgets('Non empty selection has "Delete (n)" in label, and color is red', (WidgetTester tester) async {
+      testWidgets("Non empty selection has 'Delete (n)' in label, and color is red", (WidgetTester tester) async {
         await tester.pumpWidget(createWidgetUnderTest());
 
         var textDeleteFinder = find.byType(Text).first;
         Text textDelete = tester.widget(textDeleteFinder);
 
         // Checks if the label displays the correct count from sessionsMetadataSelectedForDeletion
-        expect(textDelete.data, 'Delete (1)');
+        expect(textDelete.data, "Delete (1)");
         // Checks if the label is red
         expect(textDelete.style?.color, red);
         

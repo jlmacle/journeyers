@@ -1,22 +1,22 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:collection/collection.dart';
+import "package:collection/collection.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
-import 'package:journeyers/utils/generic/date/date_formats_utils.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/1_dashboard_title.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
+import "package:journeyers/utils/generic/date/date_formats_utils.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/1_dashboard_title.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 
 
 /// {@category Utility widgets}
@@ -316,7 +316,7 @@ class DashboardPageState extends State<DashboardPage>
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
             // Key used for automated testing, to scroll up the screen 
-            key: const Key('sessions-list-scrollview'),
+            key: const Key("sessions-list-scrollview"),
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)
@@ -489,12 +489,12 @@ class DashboardPageState extends State<DashboardPage>
           [
             TextField
             (
-              key: const Key('titleDashboardEditField'),
+              key: const Key("titleDashboardEditField"),
               controller: _titleTfec,
               autofocus: true,
               decoration: const InputDecoration
               (
-                labelText: 'Edit Title', 
+                labelText: "Edit Title", 
                 labelStyle: TextStyle(color: Colors.black)
               ),
               // Duplicated code to clean

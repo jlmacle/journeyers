@@ -1,21 +1,21 @@
 
-import 'dart:collection';
-import 'dart:convert';
-import 'dart:io';
+import "dart:collection";
+import "dart:convert";
+import "dart:io";
 
-import 'package:flutter/services.dart';
+import "package:flutter/services.dart";
 
-import 'package:file_picker/file_picker.dart';
-import 'package:path/path.dart' as path;
+import "package:file_picker/file_picker.dart";
+import "package:path/path.dart" as path;
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
+import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
 /// A DTO for the context analysis form widget.
@@ -49,13 +49,13 @@ class DTOCAForm
   var indivBetterLegacies              = DTOCheckboxWithTextField();
 
   /// The string for the question related to an issue of another type.
-  String indivAnotherIssueStr = '';
+  String indivAnotherIssueStr = "";
   // ─── FIELDS: INDIVIDUAL PERSPECTIVE : end ───────────────────────────────────────
 
 
   // ─── FIELDS: GROUP PERSPECTIVE : beginning ───────────────────────────────────────
   /// The string for the question related to the problems that the groups/teams are trying to solve.
-  String groupProblemsToSolveStr = '';
+  String groupProblemsToSolveStr = "";
 
   /// The DTOSegmentedButtonWithTextField instance for the question related to solving the same problem(s) as our groups/teams.
   var groupSameProblemsToSolve                = DTOSegmentedButtonWithTextField();
@@ -131,10 +131,10 @@ class DTOCAForm
     enteredData.addAll({"individualPerspective": individualData, "groupPerspective": groupData});
 
     if (sessionDataDebug) {
-      pu.printd('Session Data');
-      pu.printd('Session Data: enteredData');
-      pu.printd('Session Data: $enteredData');
-      pu.printd('Session Data');
+      pu.printd("Session Data");
+      pu.printd("Session Data: enteredData");
+      pu.printd("Session Data: $enteredData");
+      pu.printd("Session Data");
     }
 
     return enteredData;
@@ -147,8 +147,8 @@ class DTOCAForm
   Future<LinkedHashMap<String, String>> _checkboxDataToMap(DTOCheckboxWithTextField f) async
 
     =>  LinkedHashMap<String, String>.from({
-        qf.labelCheckbox:  '${f.checked}',
-        qf.labelTextField: f.checked ? f.text : '',
+        qf.labelCheckbox:  "${f.checked}",
+        qf.labelTextField: f.checked ? f.text : "",
       });
 
   // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
@@ -157,12 +157,12 @@ class DTOCAForm
       LinkedHashMap<String, String>.from({
         // Sorting the options before saving
         qf.labelSegmentedButton: f.selection.isNotEmpty ? 
-                                        _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : '',
-        qf.labelTextField:       f.selection.isNotEmpty ? f.text : '',
+                                        _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : "",
+        qf.labelTextField:       f.selection.isNotEmpty ? f.text : "",
         });
 
   // Serialises a segmented-button selection to a slash-separated string.
-  String _segmentedToString(Set<String> values) => values.join('/');
+  String _segmentedToString(Set<String> values) => values.join("/");
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
 
   /// Method extracting information from {labelCheckbox: false/true, labelTextField: data/""}
@@ -381,7 +381,7 @@ class DTOCAForm
       }
     }
 
-    // ─── ANALYZING THE DATA TO REPLACE "CHECKBOX"S WITH 'X'S  ───────────────────────────────────────
+    // ─── ANALYZING THE DATA TO REPLACE "CHECKBOX"S WITH "X"S  ───────────────────────────────────────
     // ─── WHERE QUESTIONS WITH CHECKBOXES HAVE BEEN CHECKED, ───────────────────────────────────────
     // ─── AND IN FRONT OF THE PARENT TITLE LEVEL 3 IF EXISTANT ───────────────────────────────────────
 
@@ -408,7 +408,7 @@ class DTOCAForm
         // Adding X in front of the question
         // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
         var previousIndexData = preCSVData[index - 1];
-        previousIndexData[0] = 'X';
+        previousIndexData[0] = "X";
 
         // Adding an X to the parent title level 3
         var previousIndexData_1AsString = previousIndexData[1];
@@ -418,21 +418,21 @@ class DTOCAForm
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[qf.level3TitleBalanceIssue];
           var parentData = preCSVData[parentIndex!];
-          parentData[0] = 'X';
+          parentData[0] = "X";
         } else if (qf.childrenOfLevel3TitleWorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[qf.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
-          parentData[0] = 'X';
+          parentData[0] = "X";
         } else if (qf.childrenOfLevel3TitleLegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
               indexesOfTitlesLevel3WithChildren[qf.level3TitleLegacyIssue];
           var parentData = preCSVData[parentIndex!];
-          parentData[0] = 'X';
+          parentData[0] = "X";
         }
       }
     }
@@ -447,7 +447,7 @@ class DTOCAForm
       }
     }
 
-    // ─── ANALYZING THE DATA TO ADD 'X'S ───────────────────────────────────────
+    // ─── ANALYZING THE DATA TO ADD "X"S ───────────────────────────────────────
     // ─── IN FRONT OF THE QUESTIONS WHERE SEGMENTED BUTTONS HAVE BEEN ANSWERED ───────────────────────────────────────
     // ─── AND IN FRONT OF THE PARENT TITLE LEVEL 3 IF EXISTANT ───────────────────────────────────────
     
@@ -463,7 +463,7 @@ class DTOCAForm
           // Adding X in front of the question
           // With the widget design of a question preceding a segmented button, (index -1) is the index of the question
           var previousIndexData = preCSVData[index - 1];
-          previousIndexData[0] = 'X';
+          previousIndexData[0] = "X";
         }
 
         // If the question was not a title level 3, should add an X to the parent title level 3
@@ -484,7 +484,7 @@ class DTOCAForm
       }
     }
 
-    // ─── ANALYZING THE DATA TO ADD 'X'S  ───────────────────────────────────────
+    // ─── ANALYZING THE DATA TO ADD "X"S  ───────────────────────────────────────
     // ─── WHERE TEXT FIELD WIDGETS (WITH NO CHECKBOX OR SEGMENTED BUTTONS) HAVE BEEN ANSWERED ───────────────────────────────────────
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
@@ -497,9 +497,9 @@ class DTOCAForm
           int noteIndex = index + 1;
           // Adding the X in front of the question if the note has content
           List<String> noteData = preCSVData[noteIndex];
-          if (noteData[1].trim() != '""') {
+          if (noteData[1].trim() != "") {
             var questionData = preCSVData[index];
-            questionData[0] = 'X';
+            questionData[0] = "X";
           } else // removing the note
           {
             preCSVData.removeAt(noteIndex);
@@ -617,11 +617,11 @@ class DTOCAForm
     {
       filePathWithExtension = await FilePicker.saveFile
       (
-        dialogTitle: 'Please enter a file name.',
-        fileName: '.csv',
+        dialogTitle: "Please enter a file name.",
+        fileName: ".csv",
         bytes: dataBytes, // necessary, at least on Windows
         type: FileType.custom, // necessary, at least on macOS
-        allowedExtensions: ['csv'],
+        allowedExtensions: ["csv"],
       );
     }
     
@@ -635,35 +635,35 @@ class DTOCAForm
     final dto = DTOCAForm();
 
     // ── INDIVIDUAL PERSPECTIVE ──────────────────────────────────────────────
-    final individual = json['individual'] as Map<String, dynamic>;
+    final individual = json["individual"] as Map<String, dynamic>;
 
     // Balance sub-section
-    final balance = individual['balance'] as Map<String, dynamic>;
-    dto.indivBalanceStudiesHousehold         = _checkboxFromJson(balance['studies']        as Map<String, dynamic>);
-    dto.indivBalanceAccessingIncomeHousehold = _checkboxFromJson(balance['accessingIncome'] as Map<String, dynamic>);
-    dto.indivBalanceEarningIncomeHousehold   = _checkboxFromJson(balance['earningIncome']   as Map<String, dynamic>);
-    dto.indivBalanceHelpingOthersHousehold   = _checkboxFromJson(balance['helpingOthers']   as Map<String, dynamic>);
+    final balance = individual["balance"] as Map<String, dynamic>;
+    dto.indivBalanceStudiesHousehold         = _checkboxFromJson(balance["studies"]        as Map<String, dynamic>);
+    dto.indivBalanceAccessingIncomeHousehold = _checkboxFromJson(balance["accessingIncome"] as Map<String, dynamic>);
+    dto.indivBalanceEarningIncomeHousehold   = _checkboxFromJson(balance["earningIncome"]   as Map<String, dynamic>);
+    dto.indivBalanceHelpingOthersHousehold   = _checkboxFromJson(balance["helpingOthers"]   as Map<String, dynamic>);
 
     // Workplace sub-section
-    final workplace = individual['workplace'] as Map<String, dynamic>;
-    dto.indivAtWorkMoreAppreciated      = _checkboxFromJson(workplace['moreAppreciated']      as Map<String, dynamic>);
-    dto.indivAtWorkRemainingAppreciated = _checkboxFromJson(workplace['remainingAppreciated'] as Map<String, dynamic>);
+    final workplace = individual["workplace"] as Map<String, dynamic>;
+    dto.indivAtWorkMoreAppreciated      = _checkboxFromJson(workplace["moreAppreciated"]      as Map<String, dynamic>);
+    dto.indivAtWorkRemainingAppreciated = _checkboxFromJson(workplace["remainingAppreciated"] as Map<String, dynamic>);
 
     // Legacy sub-section
-    final legacy = individual['legacy'] as Map<String, dynamic>;
-    dto.indivBetterLegacies = _checkboxFromJson(legacy['betterLegacies'] as Map<String, dynamic>);
+    final legacy = individual["legacy"] as Map<String, dynamic>;
+    dto.indivBetterLegacies = _checkboxFromJson(legacy["betterLegacies"] as Map<String, dynamic>);
 
     // Plain text field
-    dto.indivAnotherIssueStr = individual['anotherIssue'] as String? ?? '';
+    dto.indivAnotherIssueStr = individual["anotherIssue"] as String? ?? "";
 
     // ── GROUP / TEAM PERSPECTIVE ────────────────────────────────────────────
-    final groups = json['groups'] as Map<String, dynamic>;
+    final groups = json["groups"] as Map<String, dynamic>;
 
-    dto.groupProblemsToSolveStr   = groups['problemsText']        as String? ?? '';
-    dto.groupSameProblemsToSolve  = _segmentedFromJson(groups['sameProblems']         as Map<String, dynamic>);
-    dto.groupHarmonyHome          = _segmentedFromJson(groups['harmonyAtHome']         as Map<String, dynamic>);
-    dto.groupAppreciabilityAtWork = _segmentedFromJson(groups['appreciabilityAtWork']  as Map<String, dynamic>);
-    dto.groupEarningAbility       = _segmentedFromJson(groups['earningAbility']        as Map<String, dynamic>);
+    dto.groupProblemsToSolveStr   = groups["problemsText"]        as String? ?? "";
+    dto.groupSameProblemsToSolve  = _segmentedFromJson(groups["sameProblems"]         as Map<String, dynamic>);
+    dto.groupHarmonyHome          = _segmentedFromJson(groups["harmonyAtHome"]         as Map<String, dynamic>);
+    dto.groupAppreciabilityAtWork = _segmentedFromJson(groups["appreciabilityAtWork"]  as Map<String, dynamic>);
+    dto.groupEarningAbility       = _segmentedFromJson(groups["earningAbility"]        as Map<String, dynamic>);
 
     return dto;
   }
@@ -682,8 +682,8 @@ factory DTOCAForm.fromCSV(String csvContent) {
 
   // Normalising line endings and discarding blank lines.
   final lines = csvContent
-      .split('\n')
-      .map((l) => l.endsWith('\r') ? l.substring(0, l.length - 1) : l)
+      .split("\n")
+      .map((l) => l.endsWith("\r") ? l.substring(0, l.length - 1) : l)
       .where((l) => l.isNotEmpty)
       .toList();
 
@@ -694,7 +694,7 @@ factory DTOCAForm.fromCSV(String csvContent) {
 
   for (final line in lines) {
     final cols = _splitCsvLine(line);
-    while (cols.length < 5) cols.add('');
+    while (cols.length < 5) cols.add("");
     indivRows.add((cols[0].trim(), cols[1].trim()));
     groupRows.add((cols[3].trim(), cols[4].trim()));
   }
@@ -722,11 +722,11 @@ static List<String> _splitCsvLine(String line) {
   final sb = StringBuffer();
   bool inQuotes = false;
 
-  for (final ch in line.split('')) {
+  for (final ch in line.split("")) {
     if (ch == '"') {
       inQuotes = !inQuotes;
       sb.write(ch);
-    } else if (ch == ',' && !inQuotes) {
+    } else if (ch == "," && !inQuotes) {
       result.add(sb.toString());
       sb.clear();
     } else {
@@ -753,36 +753,36 @@ static void _parseIndividualFromRows(
 
     
     String readNotes() {
-      if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
+      if (i + 1 < rows.length && rows[i + 1].$1 == "Notes:") {
         i++;
         return _stripNoteQuotes(rows[i].$2);
       }
-      return '';
+      return "";
     }
 
     if (content == qf.level3TitleBalanceIssueItem1) {
-      dto.indivBalanceStudiesHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceStudiesHousehold.text = readNotes();
+      dto.indivBalanceStudiesHousehold.checked = marker == "X";
+      if (marker == "X") dto.indivBalanceStudiesHousehold.text = readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem2) {
-      dto.indivBalanceAccessingIncomeHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceAccessingIncomeHousehold.text = readNotes();
+      dto.indivBalanceAccessingIncomeHousehold.checked = marker == "X";
+      if (marker == "X") dto.indivBalanceAccessingIncomeHousehold.text = readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem3) {
-      dto.indivBalanceEarningIncomeHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceEarningIncomeHousehold.text = readNotes();
+      dto.indivBalanceEarningIncomeHousehold.checked = marker == "X";
+      if (marker == "X") dto.indivBalanceEarningIncomeHousehold.text = readNotes();
     } else if (content == qf.level3TitleBalanceIssueItem4) {
-      dto.indivBalanceHelpingOthersHousehold.checked = marker == 'X';
-      if (marker == 'X') dto.indivBalanceHelpingOthersHousehold.text = readNotes();
+      dto.indivBalanceHelpingOthersHousehold.checked = marker == "X";
+      if (marker == "X") dto.indivBalanceHelpingOthersHousehold.text = readNotes();
     } else if (content == qf.level3TitleWorkplaceIssueItem1) {
-      dto.indivAtWorkMoreAppreciated.checked = marker == 'X';
-      if (marker == 'X') dto.indivAtWorkMoreAppreciated.text = readNotes();
+      dto.indivAtWorkMoreAppreciated.checked = marker == "X";
+      if (marker == "X") dto.indivAtWorkMoreAppreciated.text = readNotes();
     } else if (content == qf.level3TitleWorkplaceIssueItem2) {
-      dto.indivAtWorkRemainingAppreciated.checked = marker == 'X';
-      if (marker == 'X') dto.indivAtWorkRemainingAppreciated.text = readNotes();
+      dto.indivAtWorkRemainingAppreciated.checked = marker == "X";
+      if (marker == "X") dto.indivAtWorkRemainingAppreciated.text = readNotes();
     } else if (content == qf.level3TitleLegacyIssueItem1) {
-      dto.indivBetterLegacies.checked = marker == 'X';
-      if (marker == 'X') dto.indivBetterLegacies.text = readNotes();
+      dto.indivBetterLegacies.checked = marker == "X";
+      if (marker == "X") dto.indivBetterLegacies.text = readNotes();
     } else if (content == qf.level3TitleAnotherIssue) {
-      if (marker == 'X') dto.indivAnotherIssueStr = readNotes();
+      if (marker == "X") dto.indivAnotherIssueStr = readNotes();
     }
 
   }
@@ -795,7 +795,7 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     String readSelection() {
       if (i + 1 < rows.length) {
         final nextContent = rows[i + 1].$2.trim();
-        if (rows[i + 1].$1 == '' &&
+        if (rows[i + 1].$1 == "" &&
             nextContent.isNotEmpty &&
             !qf.level2Titles.contains(nextContent) &&
             !qf.level3TitlesGroup.contains(nextContent)) {
@@ -803,46 +803,46 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
           return nextContent;
         }
       }
-      return '';
+      return "";
     }
 
 
     String readNotes() {
-      if (i + 1 < rows.length && rows[i + 1].$1 == 'Notes:') {
+      if (i + 1 < rows.length && rows[i + 1].$1 == "Notes:") {
         i++;
         return _stripNoteQuotes(rows[i].$2);
       }
-      return '';
+      return "";
     }
 
     if (content == qf.level3TitleGroupsProblematics) {
-      if (marker == 'X') dto.groupProblemsToSolveStr = readNotes();
+      if (marker == "X") dto.groupProblemsToSolveStr = readNotes();
     } else if (content == qf.level3TitleSameProblem) {
-      if (marker == 'X') {
+      if (marker == "X") {
         final sel = readSelection();
         dto.groupSameProblemsToSolve.selection =
-            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+            sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupSameProblemsToSolve.text = readNotes();
       }
     } else if (content == qf.level3TitleHarmonyAtHome) {
-      if (marker == 'X') {
+      if (marker == "X") {
         final sel = readSelection();
         dto.groupHarmonyHome.selection =
-            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+            sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupHarmonyHome.text = readNotes();
       }
     } else if (content == qf.level3TitleAppreciabilityAtWork) {
-      if (marker == 'X') {
+      if (marker == "X") {
         final sel = readSelection();
         dto.groupAppreciabilityAtWork.selection =
-            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+            sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupAppreciabilityAtWork.text = readNotes();
       }
     } else if (content == qf.level3TitleIncomeEarningAbility) {
-      if (marker == 'X') {
+      if (marker == "X") {
         final sel = readSelection();
         dto.groupEarningAbility.selection =
-            sel.isNotEmpty ? sel.split('/').map((s) => s.trim()).toSet() : {};
+            sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupEarningAbility.text = readNotes();
       }
     }
@@ -855,8 +855,8 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
   // `{ "checked": bool, "text": String }`.
   static DTOCheckboxWithTextField _checkboxFromJson(Map<String, dynamic> map) {
     final field = DTOCheckboxWithTextField();
-    field.checked = map['checked'] as bool?   ?? false;
-    field.text    = map['text']    as String? ?? '';
+    field.checked = map["checked"] as bool?   ?? false;
+    field.text    = map["text"]    as String? ?? "";
     return field;
   }
 
@@ -869,11 +869,11 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
   // which matches the default state of a DTOSegmentedButtonWithTextField.
   static DTOSegmentedButtonWithTextField _segmentedFromJson(Map<String, dynamic> map) {
     final field = DTOSegmentedButtonWithTextField();
-    final raw   = map['selection'] as String? ?? '';
+    final raw   = map["selection"] as String? ?? "";
     field.selection = raw.isNotEmpty
-        ? raw.split(',').map((token) => token.trim()).toSet()
+        ? raw.split(",").map((token) => token.trim()).toSet()
         : <String>{};
-    field.text = map['text'] as String? ?? '';
+    field.text = map["text"] as String? ?? "";
     return field;
   }
 
@@ -883,28 +883,28 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
 
 /// Prints all DTO field values to the console for debugging purposes.
 void printToConsole() {
-  pu.printd('─── DTOCAForm ──────────────────────────────────────────────');
+  pu.printd("─── DTOCAForm ──────────────────────────────────────────────");
 
   // ── Individual perspective ──────────────────────────────────────
-  pu.printd('  ── Individual perspective ──');
-  pu.printd('  indivBalanceStudiesHousehold        : text="${indivBalanceStudiesHousehold.text}", checked=${indivBalanceStudiesHousehold.checked}');
-  pu.printd('  indivBalanceAccessingIncomeHousehold: text="${indivBalanceAccessingIncomeHousehold.text}", checked=${indivBalanceAccessingIncomeHousehold.checked}');
-  pu.printd('  indivBalanceEarningIncomeHousehold  : text="${indivBalanceEarningIncomeHousehold.text}", checked=${indivBalanceEarningIncomeHousehold.checked}');
-  pu.printd('  indivBalanceHelpingOthersHousehold  : text="${indivBalanceHelpingOthersHousehold.text}", checked=${indivBalanceHelpingOthersHousehold.checked}');
-  pu.printd('  indivAtWorkMoreAppreciated          : text="${indivAtWorkMoreAppreciated.text}", checked=${indivAtWorkMoreAppreciated.checked}');
-  pu.printd('  indivAtWorkRemainingAppreciated     : text="${indivAtWorkRemainingAppreciated.text}", checked=${indivAtWorkRemainingAppreciated.checked}');
-  pu.printd('  indivBetterLegacies                 : text="${indivBetterLegacies.text}", checked=${indivBetterLegacies.checked}');
-  pu.printd('  indivAnotherIssueStr                : text="$indivAnotherIssueStr"');
+  pu.printd("  ── Individual perspective ──");
+  pu.printd("  indivBalanceStudiesHousehold        : text=${indivBalanceStudiesHousehold.text}, checked=${indivBalanceStudiesHousehold.checked}");
+  pu.printd("  indivBalanceAccessingIncomeHousehold: text=${indivBalanceAccessingIncomeHousehold.text}, checked=${indivBalanceAccessingIncomeHousehold.checked}");
+  pu.printd("  indivBalanceEarningIncomeHousehold  : text=${indivBalanceEarningIncomeHousehold.text}, checked=${indivBalanceEarningIncomeHousehold.checked}");
+  pu.printd("  indivBalanceHelpingOthersHousehold  : text=${indivBalanceHelpingOthersHousehold.text}, checked=${indivBalanceHelpingOthersHousehold.checked}");
+  pu.printd("  indivAtWorkMoreAppreciated          : text=${indivAtWorkMoreAppreciated.text}, checked=${indivAtWorkMoreAppreciated.checked}");
+  pu.printd("  indivAtWorkRemainingAppreciated     : text=${indivAtWorkRemainingAppreciated.text}, checked=${indivAtWorkRemainingAppreciated.checked}");
+  pu.printd("  indivBetterLegacies                 : text=${indivBetterLegacies.text}, checked=${indivBetterLegacies.checked}");
+  pu.printd("  indivAnotherIssueStr                : text=$indivAnotherIssueStr");
 
   // ── Group / team perspective ────────────────────────────────────
-  pu.printd('  ── Group/team perspective ──');
-  pu.printd('  groupProblemsToSolveStr   :  text="$groupProblemsToSolveStr"');
-  pu.printd('  groupSameProblemsToSolve  :  text="${groupSameProblemsToSolve.text}", selection=${groupSameProblemsToSolve.selection}');
-  pu.printd('  groupHarmonyHome          :  text="${groupHarmonyHome.text}", selection=${groupHarmonyHome.selection}');
-  pu.printd('  groupAppreciabilityAtWork :  text="${groupAppreciabilityAtWork.text}", selection=${groupAppreciabilityAtWork.selection}');
-  pu.printd('  groupEarningAbility       :  text="${groupEarningAbility.text}", selection=${groupEarningAbility.selection}');
+  pu.printd("  ── Group/team perspective ──");
+  pu.printd("  groupProblemsToSolveStr   :  text=$groupProblemsToSolveStr");
+  pu.printd("  groupSameProblemsToSolve  :  text=${groupSameProblemsToSolve.text}, selection=${groupSameProblemsToSolve.selection}");
+  pu.printd("  groupHarmonyHome          :  text=${groupHarmonyHome.text}, selection=${groupHarmonyHome.selection}");
+  pu.printd("  groupAppreciabilityAtWork :  text=${groupAppreciabilityAtWork.text}, selection=${groupAppreciabilityAtWork.selection}");
+  pu.printd("  groupEarningAbility       :  text=${groupEarningAbility.text}, selection=${groupEarningAbility.selection}");
 
-  pu.printd('────────────────────────────────────────────────────────────');
+  pu.printd("────────────────────────────────────────────────────────────");
 }
 
 }

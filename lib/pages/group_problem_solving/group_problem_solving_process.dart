@@ -1,31 +1,31 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:io";
+import "dart:typed_data";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:file_picker/file_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:path/path.dart' as path;
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:file_picker/file_picker.dart";
+import "package:intl/intl.dart";
+import "package:path/path.dart" as path;
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart';
-import 'package:journeyers/widgets/utility/process/session_file_name_on_desktop_platforms.dart';
-import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_desktop_platforms.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
 // TODO: transition to dto use to finish
 /// {@category Group problem-solving}
@@ -161,7 +161,7 @@ class GPSProcessState extends State<GPSProcess>
     // Format ideas for the text file
     var now = DateTime.now();
     //.add_jm() to add this hour:minutes format: 5:08 PM
-    var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+    var formatter = DateFormat("MMMM dd, yyyy").add_jm();
     var formattedDate = formatter.format(now);
     if (isInTestEnvironment) formattedDate = datesForTestingList[dateForTestingIndex];
 
@@ -217,11 +217,11 @@ class GPSProcessState extends State<GPSProcess>
       {
         // Desktop implementation using FilePicker
         filePath = await FilePicker.saveFile(
-          dialogTitle: 'Please enter a file name.',
-          fileName: '$_fileName$_fileExtension', 
+          dialogTitle: "Please enter a file name.",
+          fileName: "$_fileName$_fileExtension", 
           bytes: dataBytes,
           type: FileType.custom,
-          allowedExtensions: ['txt'],
+          allowedExtensions: ["txt"],
         );       
       }
 
@@ -238,7 +238,7 @@ class GPSProcessState extends State<GPSProcess>
         // Date
         var now = DateTime.now();
         //.add_jm() to add this hour:minutes format: 5:08 PM
-        var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+        var formatter = DateFormat("MMMM dd, yyyy").add_jm();
         var formattedDate = formatter.format(now);   
         await du.saveDashboardMetadata
         (
@@ -278,7 +278,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
   setState(() {
     _titleTfec.text = "${session[DashboardUtils.keyTitle]}";
     
-    if (session['keywords'] != null) {
+    if (session["keywords"] != null) {
       _currentKeywords = Set<String>.from(session[DashboardUtils.keyKeywords]);
     } else {
       _currentKeywords = {};
@@ -347,7 +347,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
           Row(
             children: 
             [
-              // LEFT COLUMN: Add/'Clear One'/'Edit' buttons, group mood widget
+              // LEFT COLUMN: Add/"Clear One"/"Edit" buttons, group mood widget
               Expanded(
                 child: Column
                 (
@@ -428,7 +428,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 child: 
                 CustomScrollView
                 (
-                  key: const Key('group-problem-solving-process-scrollview'),
+                  key: const Key("group-problem-solving-process-scrollview"),
                   slivers: 
                   [
                     const SliverToBoxAdapter

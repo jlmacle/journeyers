@@ -1,14 +1,14 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/widgets/utility/lists/list_dashboard.dart';
-import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/widgets/utility/lists/list_dashboard.dart";
+import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
 
 
 void main() {
@@ -17,7 +17,7 @@ void main() {
   
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_integration_test_');
+    testTmpDir = await Directory.systemTemp.createTemp("group_problem_solving_integration_test_");
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To intercept the way the date is saved
     dateForTestingIndex = 0;
@@ -39,7 +39,7 @@ void main() {
         home: Scaffold(
           body: ListDashboard
           (
-            dashboardContext: '', 
+            dashboardContext: "", 
             onAllSessionFilesDeletedContextPageCallbackFunction: () {}, 
             onParticipantsLoadedCallbackFunction: (_) {}, 
             onRetrievedSessionDataBeforeEditionCallbackFunction: 
@@ -59,10 +59,10 @@ void main() {
     );    
   }
 
-  group('ListDashboard Tests: \n', () 
+  group("ListDashboard Tests: \n", () 
   {
-    // 'Empty dashboard: button toward adding a new list'
-    testWidgets('Empty dashboard: button toward adding a new list', 
+    // "Empty dashboard: button toward adding a new list"
+    testWidgets("Empty dashboard: button toward adding a new list", 
     (WidgetTester tester) async 
     {
       // Pumping the widget

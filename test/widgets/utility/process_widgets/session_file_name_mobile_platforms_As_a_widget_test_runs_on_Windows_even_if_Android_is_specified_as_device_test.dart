@@ -1,19 +1,19 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 void main() 
 {
   const String textFieldHintPart = "Please add the";
 
-    group('SessionFileNameOnMobilePlatforms Tests: \n', 
+    group("SessionFileNameOnMobilePlatforms Tests: \n", 
     () 
     {      
         // "On mobile: The folder picker is available to the user, when the user didn't select the folder for its files yet"
@@ -26,7 +26,7 @@ void main()
             SharedPreferences.setMockInitialValues
             ({
                 // Setting to "" to have the folder picker
-                'applicationFolderPath': ""
+                "applicationFolderPath": ""
             });
 
             // Loading the widget
@@ -66,7 +66,7 @@ void main()
             SharedPreferences.setMockInitialValues
             ({
                 // Setting to "a/path" to not have the folder picker
-                'applicationFolderPath': "a/path"
+                "applicationFolderPath": "a/path"
             });
 
             // Loading the widget

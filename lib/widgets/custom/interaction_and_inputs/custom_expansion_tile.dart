@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_icon_button.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/custom/interaction_and_inputs/custom_icon_button.dart";
 
 /// {@category Custom widgets}
 /// A customizable expansion tile with callback functions for edition/deletion.
@@ -45,10 +45,10 @@ class CustomExpansionTile extends StatefulWidget
   final MainAxisAlignment listActionIconsMainAxisAlignment;
 
   /// The tooltip label for the "Edit" icon.
-  static const String toolTipEdit = 'Edit';
+  static const String toolTipEdit = "Edit";
 
   /// The tooltip label for the "Delete" icon.
-  static const String toolTipDelete = 'Delete';
+  static const String toolTipDelete = "Delete";
 
   const CustomExpansionTile
   ({

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A checklist widget used for the group problem-solving process.
@@ -57,9 +57,9 @@ class _GPSChecklistState extends State<GPSChecklist> {
   }
 
   void _showChecklistOverlay(BuildContext context) {
-    const String title = 'Please consider postponing\n'
-                          'the group problem-solving\n'
-                          'if the checklist is incomplete.';
+    const String title = "Please consider postponing\n"
+                          "the group problem-solving\n"
+                          "if the checklist is incomplete.";
 
     showGeneralDialog(
       context: context,

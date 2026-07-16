@@ -18,5 +18,5 @@
 
   const aTitle = "A title";
   const List<String> keywords = ["kw1","kw2"];
-  const String aDate = 'January 30, 2026 10:25 AM';
+  const String aDate = "January 30, 2026 10:25 AM";
   const String aPath = "/path/to/file";

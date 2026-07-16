@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to declare keywords, or to retrieve keywords from previous context analyses.
@@ -173,7 +173,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                           hint: Center
                           (
                             child: 
-                            Text(textAlign: TextAlign.center, 'Please enter the keywords here.\n(+ Enter key)', style: analysisTextFieldHintStyle)
+                            Text(textAlign: TextAlign.center, "Please enter the keywords here.\n(+ Enter key)", style: analysisTextFieldHintStyle)
                           )
                         ),
                         textAlign: TextAlign.center,

@@ -1,9 +1,9 @@
 // ignore: file_names
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 
 void main() 
 {
@@ -21,14 +21,14 @@ void main()
     );
   }
 
-  group('GPSIdeasList Tests: \n', 
+  group("GPSIdeasList Tests: \n", 
   () 
   {  
     group("GPSIdeasList default aspect: \n", 
     () 
     {
-      // 'The title is present'
-      testWidgets('The title is present', 
+      // "The title is present"
+      testWidgets("The title is present", 
       (WidgetTester tester) async 
       {
         // Pumping the widget
@@ -38,8 +38,8 @@ void main()
         expect(find.text(ideasListTitle), findsOne);        
       });    
 
-      // 'The placeholder is present'
-      testWidgets('The placeholder is present', 
+      // "The placeholder is present"
+      testWidgets("The placeholder is present", 
       (WidgetTester tester) async 
       {
         // Pumping the widget

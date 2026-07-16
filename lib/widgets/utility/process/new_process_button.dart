@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
+import "package:journeyers/app_themes.dart";
 
 /// {@category Utility widgets}
 /// {@category Process}
@@ -44,7 +44,7 @@ class NewProcessButton extends StatelessWidget
           child: ElevatedButton
           ( 
             // Key for the button                   
-            key: Key('$dashboardContext-new-session-button'),
+            key: Key("$dashboardContext-new-session-button"),
             // Sets _wasGPSSessionDataSaved to false to display the process page
             onPressed: () => onNewProcessButtonPressedCAPageCallbackFunction(),
             style: ElevatedButton.styleFrom
