@@ -43,8 +43,6 @@ class NewProcessButton extends StatelessWidget
           ),
           child: ElevatedButton
           ( 
-            // Key for the button                   
-            key: Key("$dashboardContext-new-session-button"),
             // Sets _wasGPSSessionDataSaved to false to display the process page
             onPressed: () => onNewProcessButtonPressedCAPageCallbackFunction(),
             style: ElevatedButton.styleFrom
