@@ -242,7 +242,6 @@ class CAPageState extends State<CAPage>
                 // todo: to clean (dtoCAFormWhenEdition)
                 child: DashboardPage
                 (
-                  key: const Key("analyses-dashboard"), 
                   dashboardContext: DashboardUtils.caContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyCA,
                   onAllSessionFilesDeletedContextPageCallbackFunction: onAllSessionFilesDeleted,
