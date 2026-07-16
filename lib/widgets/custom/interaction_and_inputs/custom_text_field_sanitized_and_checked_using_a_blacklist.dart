@@ -434,7 +434,7 @@ Future<void> deleteFile({required String filePath}) async
   {
       String? folderPath = await rtdu.getApplicationFolderPath();
       filePath = "$folderPath/$fileNameWithExtension";
-      var fileExtension = ".csv";
+      var fileExtension = fileNameWithExtension.split(".").last;
 
       // On Android
       if (Platform.isAndroid) 
@@ -445,7 +445,7 @@ Future<void> deleteFile({required String filePath}) async
         }
         else {
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+          filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
           await fu.deleteFile(filePath);
           await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
         }
@@ -460,7 +460,7 @@ Future<void> deleteFile({required String filePath}) async
            }
         else {
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+          filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
           await fu.deleteFile(filePath);
           await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
         }

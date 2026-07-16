@@ -118,11 +118,11 @@ class FileUtils
     
     final bool success = await platformAndroid.invokeMethod("saveFile", 
     {
-      "fileName": "$fileNameWithoutExtension$fileExtension",
+      "fileName": "${fileNameWithoutExtension}.${fileExtension}",
       "content": dataBytes,
     });
     String? folderPath = await rtdu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileNameWithoutExtension$fileExtension";
+    filePath = "$folderPath/${fileNameWithoutExtension}.${fileExtension}";
 
     if (sessionDataDebug) pu.printd("Session Data: saveFileOnAndroid: success: $success");
     if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
@@ -138,11 +138,11 @@ class FileUtils
     
     final bool success = await platformIOS.invokeMethod("saveFile", 
     {
-      "fileName": "$fileName$fileExtension",
+      "fileName": "${fileName}.${fileExtension}",
       "content": dataBytes,
     });
     String? folderPath = await rtdu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileName$fileExtension";
+    filePath = "$folderPath/${fileName}.${fileExtension}";
 
     if (sessionDataDebug) pu.printd("Session Data: saveFileOniOS: success: $success");
     if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");

@@ -41,11 +41,11 @@ class TextFieldUtils
   /// An externalization for a line return.
   static const String charLR = "\n";
 
-  /// An externalization for ".csv".
-  static const String extensionCSV = ".csv";
+  /// An externalization for "csv".
+  static const String extensionCSV = "csv";
 
-  /// An externalization for ".txt".
-  static const String extentionTXT = ".txt";
+  /// An externalization for "txt".
+  static const String extentionTXT = "txt";
 
   // ─── STRING SANITIZER BUNDLES AND ERROR MESSAGES ───────────────────────────────────────
   /// A [StringSanitizerBundle] sanitizing straight quotes.
