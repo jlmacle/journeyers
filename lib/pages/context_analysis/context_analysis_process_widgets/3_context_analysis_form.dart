@@ -1,28 +1,28 @@
-import 'dart:collection';
-import 'dart:core';
-import 'dart:io';
+import "dart:collection";
+import "dart:core";
+import "dart:io";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
+import "package:gap/gap.dart";
+import "package:intl/intl.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
-import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj; 
-import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
+import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
+import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj; 
+import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 /// {@category Context analysis}
 /// Form used in the context analysis.
@@ -171,7 +171,7 @@ class CAFormState extends State<CAForm>
       // Date
       var now = DateTime.now();
       //.add_jm() to add this hour:minutes format: 5:08 PM
-      var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+      var formatter = DateFormat("MMMM dd, yyyy").add_jm();
       var formattedDate = formatter.format(now);   
       await du.saveDashboardMetadata
       (typeOfDashboardContext: DashboardUtils.caContext, title: _analysisTitle, 
@@ -193,7 +193,7 @@ class CAFormState extends State<CAForm>
         // ─── EXPANSION TILE DIPLAYING THE INDIVIDUAL PERSPECTIVE: beginning ───────────────────────────────────────
         Semantics
         (
-          toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
+          toggled: false, // seems necessary (as of 26/01/11) to have "button" voiced on Android
           button: true, // with tooltip, useful for NVDA
           // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
           label: "Zone to click to expand data", // for Orca
@@ -209,7 +209,7 @@ class CAFormState extends State<CAForm>
               setState(() {_isPerspectiveAreaExpandedIndividual = value;});
               widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isPerspectiveAreaExpandedIndividual || _isPerspectiveAreaExpandedGroup));
               },
-            // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+            // on Windows, for Narrator: was necessary (as of 26/01/11) to have "button" voiced after the title was voiced
             maintainState: true, // to keep the state of the children widget
             title:             
             CustomHeading
@@ -230,9 +230,9 @@ class CAFormState extends State<CAForm>
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleBalanceIssueItem1,
-                // Initializing the checkbox value with the DTO's value
+                // Initializing the checkbox value with the DTO"s value
                 checkboxStartValue:  _dtoCAForm!.indivBalanceStudiesHousehold.checked,
-                // Initializing the text field value with the DTO's value
+                // Initializing the text field value with the DTO"s value
                 textFieldStartValue: _dtoCAForm!.indivBalanceStudiesHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 // Updating DTO and UI (heading and item styling)
@@ -356,7 +356,7 @@ class CAFormState extends State<CAForm>
         // ─── EXPANSION TILE DIPLAYING THE GROUP PERSPECTIVE : beginning ───────────────────────────────────────
         Semantics
         ( 
-          toggled: false, // seems necessary (as of 26/01/11) to have 'button' voiced on Android
+          toggled: false, // seems necessary (as of 26/01/11) to have "button" voiced on Android
           button: true, // with tooltip, useful for NVDA
           // tooltip: "Zone to click to expand data", // both label and tooltip were voiced with Narrator
           label: "Zone to click to expand data", // for Orca
@@ -374,7 +374,7 @@ class CAFormState extends State<CAForm>
               widget.parentCallbackFunctionToSetFocusabilityOfBottomBarItems(!(_isPerspectiveAreaExpandedIndividual || _isPerspectiveAreaExpandedGroup));
             });
             },
-            // on Windows, for Narrator: was necessary (as of 26/01/11) to have 'button' voiced after the title was voiced
+            // on Windows, for Narrator: was necessary (as of 26/01/11) to have "button" voiced after the title was voiced
             maintainState: true, // to keep the state of the children widget
             title:              
             CustomHeading
@@ -414,8 +414,8 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
-                segButtonTextOption1: 'Yes',
-                segButtonTextOption2: 'No',
+                segButtonTextOption1: "Yes",
+                segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupSameProblemsToSolve.selection,
@@ -439,8 +439,8 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
-                segButtonTextOption1: 'Yes',
-                segButtonTextOption2: 'No',
+                segButtonTextOption1: "Yes",
+                segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupHarmonyHome.selection,
@@ -464,8 +464,8 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
-                segButtonTextOption1: 'Yes',
-                segButtonTextOption2: 'No',
+                segButtonTextOption1: "Yes",
+                segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupAppreciabilityAtWork.selection,
@@ -489,8 +489,8 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
-                segButtonTextOption1: 'Yes',
-                segButtonTextOption2: 'No',
+                segButtonTextOption1: "Yes",
+                segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupEarningAbility.selection,

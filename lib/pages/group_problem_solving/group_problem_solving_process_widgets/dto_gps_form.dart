@@ -1,7 +1,7 @@
-import 'dart:convert';
-import 'dart:core';
+import "dart:convert";
+import "dart:core";
 
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A DTO for the form part of the group problem-solving process 
@@ -35,7 +35,7 @@ class DTOGPSForm
         ideas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
-            .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
+            .map((line) => line.replaceFirst(RegExp(r"^\d+\.\s"), ""))
             .toList();   
     }
 
@@ -46,10 +46,10 @@ class DTOGPSForm
 
   /// Prints all DTO field values to the console for debugging purposes.
   void printToConsole() {
-    pu.printd('─── DTOGPSForm ──────────────────────────────────────────────');
-    pu.printd('─────────────────────────────────────────────────────────────');
-    pu.printd('  Ideas        : $ideas');
-    pu.printd('─────────────────────────────────────────────────────────────');
+    pu.printd("─── DTOGPSForm ──────────────────────────────────────────────");
+    pu.printd("─────────────────────────────────────────────────────────────");
+    pu.printd("  Ideas        : $ideas");
+    pu.printd("─────────────────────────────────────────────────────────────");
   }
 
 }

@@ -1,15 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
 
-import 'package:path/path.dart' as path;
+import "package:path/path.dart" as path;
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
 // Method used to retrieve context analysis session data before edition
@@ -28,7 +27,7 @@ Future<void> retrieveCASessionData
 
     // Getting the CSV content
     String fileNameWithExtension = path.basename(filePathWhenEdition);
-    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+    String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
     String csvContent = await fu.readTextFile(filePath: filePathWhenEdition);
 
     // Loading the data from the CSV into a DTO
@@ -73,7 +72,7 @@ Future<void> retrieveGPSSessionData
     // Getting the TXT content
     String txtContent = await fu.readTextFile(filePath: filePathWhenEdition);
     String fileNameWithExtension = path.basename(filePathWhenEdition);
-    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+    String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
 
     // Loading the data from the TXT into a DTO
     DTOGPSForm dtoWhenEdition = await DTOGPSForm.fromTXT(txtContent);
@@ -114,7 +113,7 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
     
     // Getting the TXT content
     String fileNameWithExtension = path.basename(filePath);
-    String fileNameWithoutExtension = fileNameWithExtension.split('.').first;
+    String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
     var content = await fu.readTextFile(filePath: filePath);    
     var txtLines = LineSplitter.split(content).toList();
 
@@ -126,7 +125,7 @@ Future<List<String>> retrieveGPSIdeas(String filePath, OnRetrievedSessionDataBef
         ideas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
-            .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
+            .map((line) => line.replaceFirst(RegExp(r"^\d+\.\s"), ""))
             .toList();        
       }
 

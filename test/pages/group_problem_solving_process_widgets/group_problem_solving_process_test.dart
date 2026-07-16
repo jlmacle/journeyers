@@ -1,13 +1,13 @@
 // ignore: file_names
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 
 
 void main() 
@@ -54,14 +54,14 @@ void main()
     );
   }
 
-  group('GPSProcess Tests: \n', 
+  group("GPSProcess Tests: \n", 
   () 
   {  
     group("Participants Tests: \n", 
     () 
     {      
-      // 'Participants can be added' (failing as a widget test)
-      // testWidgets('Participants can be added', 
+      // "Participants can be added" (failing as a widget test)
+      // testWidgets("Participants can be added", 
       // (WidgetTester tester) async 
       // {
       //   var name1 = "Bob";
@@ -85,25 +85,25 @@ void main()
     });
             
     
-      // 'Stakeholder identifiers can be edited'
+      // "Stakeholder identifiers can be edited"
       // to be updated
       
 
-      // 'Stakeholder identifiers can be deleted: single deletion'
+      // "Stakeholder identifiers can be deleted: single deletion"
       // to be updated
       
-      // 'Stakeholder identifiers can be deleted: bulk deletion'
+      // "Stakeholder identifiers can be deleted: bulk deletion"
       // to be updated
 
       // "Stakeholder identifiers' colors can be changed from green, to orange, to red, to green by tapping"
       // to be updated
   });
 
-  group('Session Title Tests: \n', 
+  group("Session Title Tests: \n", 
   () 
   {  
-    // 'A title can be added by clicking on the placeholder title'
-    testWidgets('A title can be added by clicking on the placeholder title', 
+    // "A title can be added by clicking on the placeholder title"
+    testWidgets("A title can be added by clicking on the placeholder title", 
     (WidgetTester tester) async 
     {
       var aTitle = "aTitle";
@@ -138,8 +138,8 @@ void main()
     }
     );
   
-    // 'A title can be added by clicking on the edit emoji'
-    testWidgets('A title can be added by clicking on the edit emoji', 
+    // "A title can be added by clicking on the edit emoji"
+    testWidgets("A title can be added by clicking on the edit emoji", 
     (WidgetTester tester) async 
     {
       var aTitle = "aTitle";
@@ -182,11 +182,11 @@ void main()
   });
 
   // todo: to understand why not passing anymore
-  group('Checklist Tests: \n', 
+  group("Checklist Tests: \n", 
   () 
   {  
-    // // 'The checklist turns to green when checked, and the rectangle goes from orange to transparent'
-    // testWidgets('The checklist turns to green when checked, and the rectangle goes from orange to transparent', 
+    // // "The checklist turns to green when checked, and the rectangle goes from orange to transparent"
+    // testWidgets("The checklist turns to green when checked, and the rectangle goes from orange to transparent", 
     // (WidgetTester tester) async 
     // {
     //   // Pumping the widget
@@ -210,7 +210,7 @@ void main()
     //   );
 
     //   var totalCheckboxListTilesFinder = checkboxListTilesFinder.evaluate().length;
-    //   if (testingDebug) pu.printd('Testing Debug: totalCheckboxListTilesFinder: $totalCheckboxListTilesFinder');
+    //   if (testingDebug) pu.printd("Testing Debug: totalCheckboxListTilesFinder: $totalCheckboxListTilesFinder");
 
     //   // Verifying their color after tapping them 
     //   for (var index = 0; index < totalCheckboxListTilesFinder; index++)
@@ -237,11 +237,11 @@ void main()
     // });
   });
 
-  group('List of Keywords Tests: \n', 
+  group("List of Keywords Tests: \n", 
   () 
   { 
-    // 'A keyword can be added'
-    testWidgets('A keyword can be added', 
+    // "A keyword can be added"
+    testWidgets("A keyword can be added", 
     (WidgetTester tester) async 
     {
       var aKw = "kw";
@@ -310,11 +310,11 @@ void main()
   );
 
 
-  group('List of Ideas Tests: \n', 
+  group("List of Ideas Tests: \n", 
   () 
   { 
-    // '50 ideas added are found in the list of ideas'
-    testWidgets('50 ideas added are found in the list of ideas', 
+    // "50 ideas added are found in the list of ideas"
+    testWidgets("50 ideas added are found in the list of ideas", 
     (WidgetTester tester) async 
     {
       var someText = "someText";

@@ -1,14 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
+import "dart:convert";
+import "dart:io";
 
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_testing_data.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_testing_data.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
 
 // ---------------------------------------------------------------------------
 // Helper funtion
@@ -29,7 +29,7 @@ void main() {
   DashboardUtils? sut; // system under test
 
   setUp(() async {
-    tempDir = await Directory.systemTemp.createTemp('dashboard_utils_test_');
+    tempDir = await Directory.systemTemp.createTemp("dashboard_utils_test_");
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(tempDir!.path);
     sut = DashboardUtils();
     dateForTestingIndex = 0;
@@ -43,16 +43,16 @@ void main() {
   });
 
 
-  group('getSessionMetadataFile', () {
+  group("getSessionMetadataFile", () {
 
-    test('creates the file when it does not yet exist', () async {
+    test("creates the file when it does not yet exist", () async {
       final file = await sut!.getSessionMetadataFile(
         typeOfDashboardContext: DashboardUtils.caContext,
       );
       expect(file.existsSync(), isTrue);
     });
 
-    test('initialises a newly created file with an empty JSON array',
+    test("initialises a newly created file with an empty JSON array",
       () async {
         final file = await sut!.getSessionMetadataFile(
           typeOfDashboardContext: DashboardUtils.caContext,
@@ -65,8 +65,8 @@ void main() {
   });
 
 
-  group('saveDashboardMetadata', () {
-    test('persists the title correctly', () async {
+  group("saveDashboardMetadata", () {
+    test("persists the title correctly", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
         title: testFile1Title,
@@ -83,7 +83,7 @@ void main() {
       expect(records.first[DashboardUtils.keyTitle], testFile1Title);
     });
 
-    test('uses "Untitled" when title is null', () async {
+    test("uses 'Untitled' when title is null", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
         title: null,
@@ -97,10 +97,10 @@ void main() {
       );
       final records = _readRecords(file);
 
-      expect(records.first[DashboardUtils.keyTitle], 'Untitled');
+      expect(records.first[DashboardUtils.keyTitle], "Untitled");
     });
 
-    test('persists the keywords list correctly', () async {
+    test("persists the keywords list correctly", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
         title: aTitle,
@@ -120,7 +120,7 @@ void main() {
       );
     });
 
-    // test('persists the date correctly', () async {
+    // test("persists the date correctly", () async {
     //   await sut!.saveDashboardMetadata(
     //     typeOfDashboardContext: DashboardUtils.caContext,
     //     title: aTitle,
@@ -137,7 +137,7 @@ void main() {
     //   expect(records.first[DashboardUtils.keyDate], aDate);
     // });
 
-    test('persists the file path correctly', () async {
+    test("persists the file path correctly", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
         title: aTitle,
@@ -154,18 +154,18 @@ void main() {
       expect(records.first[DashboardUtils.keyFilePath], aPath);
     });
 
-    test('stores records for the two contexts in separate files',
+    test("stores records for the two contexts in separate files",
       () async {
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.caContext,
-          title: 'CA Session',
+          title: "CA Session",
           keywords: [],
           formattedDate: aDate,
           filePath: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.gpsContext,
-          title: 'GPS Session',
+          title: "GPS Session",
           keywords: [],
           formattedDate: aDate,
           filePath: testFile2Path,
@@ -183,28 +183,28 @@ void main() {
 
         expect(
           _readRecords(caFile).first[DashboardUtils.keyTitle],
-          'CA Session',
+          "CA Session",
         );
         expect(
           _readRecords(gpsFile).first[DashboardUtils.keyTitle],
-          'GPS Session',
+          "GPS Session",
         );
       },
     );
   });
 
 
-  group('retrieveAllDashboardMetadata –', () {  
-    test('returns records in reverse insertion order (most recent first)',
+  group("retrieveAllDashboardMetadata –", () {  
+    test("returns records in reverse insertion order (most recent first)",
         () async {
-      final titles = ['Oldest', 'Middle', 'Newest'];
+      final titles = ["Oldest", "Middle", "Newest"];
       for (final t in titles) {
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.caContext,
           title: t,
           keywords: [],
           formattedDate: aDate,
-          filePath: '/files/${t.toLowerCase()}.json',
+          filePath: "/files/${t.toLowerCase()}.json",
         );
       }
 
@@ -212,11 +212,11 @@ void main() {
         typeOfDashboardContext: DashboardUtils.caContext,
       );
 
-      expect(result.first[DashboardUtils.keyTitle], 'Newest');
-      expect(result.last[DashboardUtils.keyTitle], 'Oldest');
+      expect(result.first[DashboardUtils.keyTitle], "Newest");
+      expect(result.last[DashboardUtils.keyTitle], "Oldest");
     });
 
-    test('returned records contain all expected keys', () async {
+    test("returned records contain all expected keys", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
         title: aTitle,
@@ -238,16 +238,16 @@ void main() {
   });
 
 
-  group('deleteSpecificSessionMetadata', () {
-    test('removes the record whose file path matches the target', () async {
-      const fileToDelete = '/file/to/delete';
+  group("deleteSpecificSessionMetadata", () {
+    test("removes the record whose file path matches the target", () async {
+      const fileToDelete = "/file/to/delete";
 
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
-        title: 'Title: File to keep',
+        title: "Title: File to keep",
         keywords: [],
         formattedDate: aDate,
-        filePath: '/file/to/keep',
+        filePath: "/file/to/keep",
       );
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
@@ -267,23 +267,23 @@ void main() {
       );
 
       expect(result, hasLength(1));
-      expect(result.first[DashboardUtils.keyTitle], 'Title: File to keep');
+      expect(result.first[DashboardUtils.keyTitle], "Title: File to keep");
     });
 
-    test('does not alter other records when one is deleted', () async {
+    test("does not alter other records when one is deleted", () async {
       for (var i = 1; i <= 4; i++) {
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.caContext,
-          title: 'Session $i',
+          title: "Session $i",
           keywords: [],
           formattedDate: aDate,
-          filePath: '/files/session_$i.json',
+          filePath: "/files/session_$i.json",
         );
       }
 
       await sut!.deleteSpecificSessionMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
-        filePathRelatedToDataToDelete: '/files/session_2.json',
+        filePathRelatedToDataToDelete: "/files/session_2.json",
       );
 
       final result = await sut!.retrieveAllDashboardMetadata(
@@ -295,15 +295,15 @@ void main() {
       final remaining = result
           .map((r) => r[DashboardUtils.keyFilePath] as String)
           .toList();
-      expect(remaining, isNot(contains('/files/session_2.json')));
+      expect(remaining, isNot(contains("/files/session_2.json")));
     });
 
-    test('results in an empty file after its only record is deleted',
+    test("results in an empty file after its only record is deleted",
         () async {
-      const onlyPath = 'only/file';
+      const onlyPath = "only/file";
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
-        title: 'Only one file',
+        title: "Only one file",
         keywords: [],
         formattedDate: aDate,
         filePath: onlyPath,
@@ -324,9 +324,9 @@ void main() {
     
   });
 
-  group('saveAllSessionsMetadata –', () {
+  group("saveAllSessionsMetadata –", () {
 
-    test('can save an empty list',
+    test("can save an empty list",
         () async {
 
       await sut!.saveAllSessionsMetadata(
@@ -344,14 +344,14 @@ void main() {
   });
 
 
-  group('Round-trip', () {
-    test('data saved via saveDashboardMetadata is faithfully recovered '
-        'via retrieveAllDashboardMetadata',
+  group("Round-trip", () {
+    test("data saved via saveDashboardMetadata is faithfully recovered "
+        "via retrieveAllDashboardMetadata",
       () async {
-        const expectedTitle = 'Round-trip Title';
-        const expectedKeywords = ['alpha', 'beta', 'gamma'];
-        const expectedDate = 'January 30, 2026 10:25 AM';
-        const expectedPath = '/round/trip';
+        const expectedTitle = "Round-trip Title";
+        const expectedKeywords = ["alpha", "beta", "gamma"];
+        const expectedDate = "January 30, 2026 10:25 AM";
+        const expectedPath = "/round/trip";
 
         await sut!.saveDashboardMetadata(
           typeOfDashboardContext: DashboardUtils.caContext,
@@ -376,9 +376,9 @@ void main() {
       },
     );
 
-    test('save → delete → retrieve leaves no trace of the deleted session',
+    test("save → delete → retrieve leaves no trace of the deleted session",
       () async {
-        const fileToDelete = '/path/to/file/to/delete';
+        const fileToDelete = "/path/to/file/to/delete";
 
         // 2 files added
         await sut!.saveDashboardMetadata(

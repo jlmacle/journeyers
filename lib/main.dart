@@ -1,14 +1,14 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'; // https://docs.flutter.dev/ui/internationalization
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_localizations/flutter_localizations.dart"; // https://docs.flutter.dev/ui/internationalization
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/homepage.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/pages/homepage.dart";
 
 void main() async
 {
@@ -67,7 +67,7 @@ class _GPSappState extends State<GPSapp>
 
   // Temporarily defining English as the locale
   // TODO: to get eventually the value from user preferences
-  Locale? _currentLocale = const Locale('en');
+  Locale? _currentLocale = const Locale("en");
   // To get the locale from the platform
   // Locale? _currentLocale = PlatformDispatcher.instance.locale;
 
@@ -105,8 +105,8 @@ class _GPSappState extends State<GPSapp>
       // Apps should configure this list to match the locales they support."
       supportedLocales: const
       [
-        Locale('en'), // English
-        Locale('fr'), // French
+        Locale("en"), // English
+        Locale("fr"), // French
       ],
 
       locale: _currentLocale, // to be able to swap translated strings,

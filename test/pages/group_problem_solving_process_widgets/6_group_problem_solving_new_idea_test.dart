@@ -1,9 +1,9 @@
 // ignore: file_names
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 
 void main() 
 {
@@ -21,14 +21,14 @@ void main()
     );
   }
 
-  group('GPSNewIdea Tests: \n', 
+  group("GPSNewIdea Tests: \n", 
   () 
   {  
     group("GPSNewIdea default aspect: \n", 
     () 
     {      
-      // 'The hint text is present'
-      testWidgets('The hint text is present', 
+      // "The hint text is present"
+      testWidgets("The hint text is present", 
       (WidgetTester tester) async 
       {
         // Pumping the widget

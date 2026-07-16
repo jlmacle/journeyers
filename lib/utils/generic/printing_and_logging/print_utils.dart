@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import "package:flutter/foundation.dart";
 
 /// {@category Utils - Generic}
 /// A generic utility class related to printing.

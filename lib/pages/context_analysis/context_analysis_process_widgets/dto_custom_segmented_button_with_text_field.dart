@@ -7,5 +7,5 @@ class DTOSegmentedButtonWithTextField
   /// The text of the text field.
   String text;
 
-  DTOSegmentedButtonWithTextField() : selection = {}, text = '';
+  DTOSegmentedButtonWithTextField() : selection = {}, text = "";
 }

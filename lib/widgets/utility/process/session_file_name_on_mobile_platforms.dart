@@ -1,17 +1,17 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart' as tfu_gen;
-import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart';
-import 'package:journeyers/widgets/utility/process/process_const_strings.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart" as tfu_gen;
+import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart";
+import "package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart";
+import "package:journeyers/widgets/utility/process/process_const_strings.dart";
 
 /// {@category Utility widgets}
 /// {@category Process}
@@ -32,7 +32,7 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
   /// A file name value used at editing time.
   final String fileNameWithoutExtensionWhenEdition;
 
-  /// The file extension when saving the session data ('.' included).
+  /// The file extension when saving the session data ("." included).
   final String fileExtension;
 
   /// The callback function called when the file name is submitted.
@@ -69,9 +69,9 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
-  static const _platformAndroid = MethodChannel('dev.journeyers/saf');
+  static const _platformAndroid = MethodChannel("dev.journeyers/saf");
   // Android: storage access framework (reading/saving files)
-  static const _platformIOS = MethodChannel('dev.journeyers/iossaf');
+  static const _platformIOS = MethodChannel("dev.journeyers/iossaf");
 
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
   String _applicationFolderPath = "";  
@@ -131,9 +131,9 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       {        
         String? result;
         if (Platform.isAndroid)
-          {result = await _platformAndroid.invokeMethod('openDirectory');}
+          {result = await _platformAndroid.invokeMethod("openDirectory");}
         else if (Platform.isIOS)
-          {result = await _platformIOS.invokeMethod('openDirectory');}
+          {result = await _platformIOS.invokeMethod("openDirectory");}
         
         if (result != null) {
           // Refreshing local state with the new path/bookmark
@@ -157,7 +157,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       textFieldStartValue: widget.fileNameWithoutExtensionWhenEdition,
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
-      textFieldHint: 'Please add the file name, without ${widget.fileExtension}, here.', 
+      textFieldHint: "Please add the file name, without ${widget.fileExtension}, here.", 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
       onTextFieldValueSubmittedCallbackFunction: (value) async

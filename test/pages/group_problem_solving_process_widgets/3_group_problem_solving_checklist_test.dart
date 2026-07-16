@@ -1,11 +1,11 @@
 // ignore: file_names
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 
-import '../../../integration_test/externalized_code/externalized_testing_code.dart';
+import "../../../integration_test/externalized_code/externalized_testing_code.dart";
 
 void main() 
 {
@@ -20,14 +20,14 @@ void main()
     );
   }
 
-  group('GPSChecklist Tests: \n', 
+  group("GPSChecklist Tests: \n", 
   () 
   {  
     group("GPSChecklist default aspect: \n", 
     () 
     { 
-      // 'The default rectangle color is orange'
-      testWidgets('The default rectangle color is orange', 
+      // "The default rectangle color is orange"
+      testWidgets("The default rectangle color is orange", 
       (WidgetTester tester) async 
       {
         // Pumping the widget
@@ -38,8 +38,8 @@ void main()
       });          
       });
 
-      // 'The title is present'
-      testWidgets('The title is present', 
+      // "The title is present"
+      testWidgets("The title is present", 
       (WidgetTester tester) async 
       {
         // Pumping the widget

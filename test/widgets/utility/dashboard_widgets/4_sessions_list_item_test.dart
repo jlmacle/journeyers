@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/test_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 
 void main() {
 
-  var title = 'Legacy';
-  var date = 'March 20, 2026 4:51 PM';
-  var keywordsListKw1Kw2 = ['Kw', 'Kw2'];
+  var title = "Legacy";
+  var date = "March 20, 2026 4:51 PM";
+  var keywordsListKw1Kw2 = ["Kw", "Kw2"];
 
   // Data for the test
   final testMetadata = {
@@ -20,12 +20,12 @@ void main() {
     DashboardUtils.keyKeywords: keywordsListKw1Kw2,
   };
 
-  group('SessionsListItem Tests: \n', () 
+  group("SessionsListItem Tests: \n", () 
   {  
-    group('Info and tooltips Tests: \n', () 
+    group("Info and tooltips Tests: \n", () 
     { 
-      // 'Displays session info correctly (Title, date, keywords)'
-      testWidgets('Displays session info correctly (Title, date, keywords)', (WidgetTester tester) async {
+      // "Displays session info correctly (Title, date, keywords)"
+      testWidgets("Displays session info correctly (Title, date, keywords)", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -60,14 +60,14 @@ void main() {
         // Verifies date
         var dateFinder = find.byType(Text).at(1);
         Text dateWidget = tester.widget(dateFinder);
-        expect(dateWidget.data, '($date)');
+        expect(dateWidget.data, "($date)");
         
         // Verifies keywords
-        expect(find.text('Keywords: Kw, Kw2'), findsOneWidget);
+        expect(find.text("Keywords: Kw, Kw2"), findsOneWidget);
       });
 
-      // 'Finds the preview tooltip label'
-      testWidgets('Finds the preview tooltip label', (WidgetTester tester) async {
+      // "Finds the preview tooltip label"
+      testWidgets("Finds the preview tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -100,8 +100,8 @@ void main() {
         expect(find.byTooltip(previewTooltipLabel), findsOneWidget);      
       });
 
-      // 'Finds the edit tooltip label'
-      testWidgets('Finds the edit tooltip label', (WidgetTester tester) async {
+      // "Finds the edit tooltip label"
+      testWidgets("Finds the edit tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -134,8 +134,8 @@ void main() {
         expect(find.byTooltip(editFromDashboardItemTooltipLabel), findsOneWidget);      
       });
 
-      // 'Finds the keywords tooltip label'
-      testWidgets('Finds the keywords tooltip label', (WidgetTester tester) async {
+      // "Finds the keywords tooltip label"
+      testWidgets("Finds the keywords tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -167,8 +167,8 @@ void main() {
         expect(find.byTooltip(keywordsTooltipLabel), findsOneWidget);      
       });
 
-      // 'Finds the delete tooltip label'
-      testWidgets('Finds the delete tooltip label', (WidgetTester tester) async {
+      // "Finds the delete tooltip label"
+      testWidgets("Finds the delete tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -202,10 +202,10 @@ void main() {
       });
     });
     
-    group('Preview Tests: \n', () 
+    group("Preview Tests: \n", () 
     { 
-      // 'Opens the CA preview'
-      testWidgets('Opens the CA preview', (WidgetTester tester) async {
+      // "Opens the CA preview"
+      testWidgets("Opens the CA preview", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -242,8 +242,8 @@ void main() {
         expect(find.text(testDataMessage), findsOneWidget);
       });
 
-      // 'Opens the GPS preview'
-      testWidgets('Opens the GPS preview', (WidgetTester tester) async {
+      // "Opens the GPS preview"
+      testWidgets("Opens the GPS preview", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -282,10 +282,10 @@ void main() {
     
     });
 
-    group('Edit Tests: \n', () 
+    group("Edit Tests: \n", () 
     { 
-      // 'Shows the placeholder message'
-      // testWidgets('Shows the placeholder message', (WidgetTester tester) async {
+      // "Shows the placeholder message"
+      // testWidgets("Shows the placeholder message", (WidgetTester tester) async {
       //   await tester.pumpWidget(
       //     MaterialApp(
       //       home: Scaffold(
@@ -314,10 +314,10 @@ void main() {
       // });
     });  
   
-    group('Keywords Tests: \n', () 
+    group("Keywords Tests: \n", () 
     {
-      // 'Opens the keywords edition overlay by clicking on the icon'
-      testWidgets('Opens the keywords edition overlay by clicking on the icon', (WidgetTester tester) async {
+      // "Opens the keywords edition overlay by clicking on the icon"
+      testWidgets("Opens the keywords edition overlay by clicking on the icon", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -355,8 +355,8 @@ void main() {
       });
 
 
-    // 'Opens the keywords edition overlay by clicking on the keywords data'
-      testWidgets('Opens the keywords edition overlay by clicking on the keywords data', (WidgetTester tester) async {
+    // "Opens the keywords edition overlay by clicking on the keywords data"
+      testWidgets("Opens the keywords edition overlay by clicking on the keywords data", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -386,7 +386,7 @@ void main() {
         );
 
         // Keywords data 
-        var keywordsDataFinder = find.byKey(const Key('session-keywords-0'));
+        var keywordsDataFinder = find.byKey(const Key("session-keywords-0"));
         await tester.tap(keywordsDataFinder);
         await tester.pumpAndSettle();
         // Verifies text field label present

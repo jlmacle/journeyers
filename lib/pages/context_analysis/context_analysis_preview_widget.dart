@@ -1,17 +1,17 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:io";
+import "dart:typed_data";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:path/path.dart' as path;
+import "package:path/path.dart" as path;
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart';
-import 'package:journeyers/utils/generic/dev/test_externalized_strings.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/dev/utility_classes_import.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
+import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
 
 
 /// {@category Context analysis}
@@ -96,7 +96,7 @@ class _CAPreviewState extends State<CAPreview>
     {
       var char = line[index]; 
 
-      // reaching a ',' while not being inside quotes
+      // reaching a "," while not being inside quotes
       // reaching the end of the itemData
       if (char == "," && inQuotes == false)
       {
@@ -111,7 +111,7 @@ class _CAPreviewState extends State<CAPreview>
         if (char == CAFormMiscConstants.quotesForCSV) inQuotes = !inQuotes;
       }      
     }
-    // Adding the last item data (no ',' reachable for the last item with the current code)
+    // Adding the last item data (no "," reachable for the last item with the current code)
     data.add(itemData);
 
     return data;
@@ -154,7 +154,7 @@ class _CAPreviewState extends State<CAPreview>
     // [Notes:, "about studies"]
     // [X, Is the issue of another type?], 
     // [Notes:, "another issue"]]
-    // To be noted that the last 'X' is not related to a checkbox, but to a choice in the CSV formatting.
+    // To be noted that the last "X" is not related to a checkbox, but to a choice in the CSV formatting.
 
     //****** The individual perspective is made of checkboxes displaying a text field when checked, ******//
     //****** except for the last input item made of a text field.                                   ******//
@@ -184,8 +184,8 @@ class _CAPreviewState extends State<CAPreview>
       else if (qf.questionsToInputItemsMapping.keys.contains(secondValue))
       {
         currentTitleLevel3Item = secondValue;
-        // Checking if an 'X' is in front of the title level 3, and if the item is also a checkbox
-        if (firstValue == 'X' && qf.questionsToInputItemsMapping[currentTitleLevel3Item] == qf.labelCheckbox) 
+        // Checking if an "X" is in front of the title level 3, and if the item is also a checkbox
+        if (firstValue == "X" && qf.questionsToInputItemsMapping[currentTitleLevel3Item] == qf.labelCheckbox) 
           {checkedBox = true;}
         else 
           {checkedBox = false;}
@@ -228,7 +228,7 @@ class _CAPreviewState extends State<CAPreview>
                 if (itemMap["text"] == currentTitleLevel3Item)
                 {
                   // Removing added straight quotes before adding the note content
-                  itemMap["notes"] = secondValue.replaceAll('"', '');
+                  itemMap["notes"] = secondValue.replaceAll('"', "");
                 }
               }
             }
@@ -242,7 +242,7 @@ class _CAPreviewState extends State<CAPreview>
             if (map["title"] == currentTitleLevel3)
             {
               // At this point, no item is set yet + Removing added straight quotes
-              map["items"].add({"notesTextField": secondValue.replaceAll('"', '')});
+              map["items"].add({"notesTextField": secondValue.replaceAll('"', "")});
             }
           }          
         }
@@ -344,7 +344,7 @@ class _CAPreviewState extends State<CAPreview>
             if (map["title"] == currentTitleLevel3)
             {
               // Removing added straight quotes
-              map["items"]["notes"] = secondValue.replaceAll('"', '');
+              map["items"]["notes"] = secondValue.replaceAll('"', "");
               previousSecondValueFromSegButton = false;
               break;
             }
@@ -358,7 +358,7 @@ class _CAPreviewState extends State<CAPreview>
             if (map["title"] == currentTitleLevel3)
             {
               // Removing added straight quotes
-              map["items"]["notes"] = secondValue.replaceAll('"', '');
+              map["items"]["notes"] = secondValue.replaceAll('"', "");
               previousSecondValueFromSegButton = true;
               break;
             }
@@ -412,7 +412,7 @@ class _CAPreviewState extends State<CAPreview>
 
     // To clean
     // Writing the content in a temporary file for data sharing
-    Directory testTmpDir = await Directory.systemTemp.createTemp('context_analysis_preview_temp');
+    Directory testTmpDir = await Directory.systemTemp.createTemp("context_analysis_preview_temp");
     String tmpFilePathWithExtension = path.join(testTmpDir.path, pathToCSVFile.split("/").last);
     var dataBytes = Uint8List.fromList(utf8.encode(csvLines.toString()));
     String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
@@ -511,7 +511,7 @@ class _CAPreviewState extends State<CAPreview>
                       padding: const EdgeInsets.all(16.0),
                       child: Text
                       (
-                        _sectionsIndividual['title'] ?? "Untitled",
+                        _sectionsIndividual["title"] ?? "Untitled",
                         style: styleExpansionTileTitle
                       ),
                     ),
@@ -523,12 +523,12 @@ class _CAPreviewState extends State<CAPreview>
                       // If no checkbox checked and no value for the text field only, a message to display
                       if 
                       (
-                        _sectionsIndividual['questions'].where
+                        _sectionsIndividual["questions"].where
                         (
                           (question) => 
-                            (question['items'] as List).any((item) => item['checked'] == "yes") 
+                            (question["items"] as List).any((item) => item["checked"] == "yes") 
                             ||
-                            (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
+                            (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
                         ).isEmpty
                       )
                         const Padding
@@ -536,7 +536,7 @@ class _CAPreviewState extends State<CAPreview>
                           padding: EdgeInsets.only(left:16, top:8, bottom:8),
                           child: Text
                           (
-                            'No question checked and no data in the last text field.',
+                            "No question checked and no data in the last text field.",
                             style: styleDataAbsent
                           ),
                         )
@@ -544,12 +544,12 @@ class _CAPreviewState extends State<CAPreview>
                         // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
                         for 
                         (
-                          var question in _sectionsIndividual['questions'].where
+                          var question in _sectionsIndividual["questions"].where
                           (
                             (question) => 
-                              (question['items'] as List).any((item) => item['checked'] == 'yes') 
+                              (question["items"] as List).any((item) => item["checked"] == "yes") 
                               ||
-                              (question['items'] as List).any((item) => item['notesTextField'] != null && item['notesTextField'] != "")
+                              (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
                           )
                       
                         )
@@ -560,39 +560,39 @@ class _CAPreviewState extends State<CAPreview>
                             initiallyExpanded: true,
                             title: Text
                             (
-                              question['title'],
+                              question["title"],
                               style: styleExpansionTileTitle
                             ),
                             children: 
                             [
                               // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
                               for 
-                              (var item in (question['items'] as List).where
+                              (var item in (question["items"] as List).where
                                 (
-                                  (item) => item['checked'] == 'yes' 
+                                  (item) => item["checked"] == "yes" 
                                   ||
-                                  item['notesTextField'] != null && item['notesTextField'] != ""                          
+                                  item["notesTextField"] != null && item["notesTextField"] != ""                          
                                 )
                               )
                                 ListTile
                                 (
                                   leading: Icon
                                   (
-                                    item['checked'] != null
+                                    item["checked"] != null
                                     ? Icons.check_box
                                     : Icons.text_snippet
                                   ),
                                   title: Text
                                   (
-                                    item['text'] != null 
-                                    ? item['text']
-                                    :(item['notesTextField'] != null && item['notesTextField'] != "")
-                                    ? "Notes: ${item['notesTextField']}"
+                                    item["text"] != null 
+                                    ? item["text"]
+                                    :(item["notesTextField"] != null && item["notesTextField"] != "")
+                                    ? "Notes: ${item["notesTextField"]}"
                                     : "",
                                     style: styleExpandedTitleSubTitle                              
                                   ),
-                                  subtitle: (item['notes'] != null)
-                                    ? Text("Notes: ${item['notes']}", style: styleExpandedTitleSubTitle)
+                                  subtitle: (item["notes"] != null)
+                                    ? Text("Notes: ${item["notes"]}", style: styleExpandedTitleSubTitle)
                                     : null,
                                 ),
                             ],
@@ -611,12 +611,12 @@ class _CAPreviewState extends State<CAPreview>
                       padding: const EdgeInsets.only(left: 16, top: 8, bottom:8),
                       child: Text
                       (
-                        _sectionsGroup['title'],
+                        _sectionsGroup["title"],
                         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                       ),
                     ),
                     // Questions and potential answers for the group perspective
-                    for (var question in _sectionsGroup['questions'])
+                    for (var question in _sectionsGroup["questions"])
                       ExpansionTile
                       (
                         // to remove the borders
@@ -624,7 +624,7 @@ class _CAPreviewState extends State<CAPreview>
                         initiallyExpanded: true, 
                         title: Text
                         (
-                          question['title'], 
+                          question["title"], 
                           style: styleExpansionTileTitle
                         ),
                         children: 
@@ -636,10 +636,10 @@ class _CAPreviewState extends State<CAPreview>
                             ( 
                               question["items"]["segValue"] == null
                               ?
-                              'Notes: ${question["items"]["notes"] ?? ""}'
+                              "Notes: ${question["items"]["notes"] ?? ""}"
                               :
-                              'Answer(s): ${question["items"]["segValue"] ?? ""}'
-                              '\nNotes: ${question["items"]["notes"] ?? ""}'
+                              "Answer(s): ${question["items"]["segValue"] ?? ""}"
+                              "\nNotes: ${question["items"]["notes"] ?? ""}"
                             ),
                           ),
                         ],

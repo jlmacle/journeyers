@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart';
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 
 void main() 
 {
-    group('CAKeywordsDeclaration Tests: \n', 
+    group("CAKeywordsDeclaration Tests: \n", 
     () 
     { 
-      // 'A keyword is added to the display, when added from the text field: \n'
-      testWidgets('A keyword is added to the display, when added from the text field: \n', 
+      // "A keyword is added to the display, when added from the text field: \n"
+      testWidgets("A keyword is added to the display, when added from the text field: \n", 
       (WidgetTester tester) async 
       {
         const String kw = "kw";
@@ -43,8 +43,8 @@ void main()
       );
 
 
-      // 'A keyword added twice, is displayed once: \n'
-      testWidgets('A keyword added twice, is displayed once: \n', 
+      // "A keyword added twice, is displayed once: \n"
+      testWidgets("A keyword added twice, is displayed once: \n", 
       (WidgetTester tester) async 
       {
         const String kw = "kw";
@@ -81,8 +81,8 @@ void main()
       }
       );
   
-      // 'Keywords are added in alphabetical order: \n'
-      testWidgets('Keywords are added in alphabetical order: \n', 
+      // "Keywords are added in alphabetical order: \n"
+      testWidgets("Keywords are added in alphabetical order: \n", 
       (WidgetTester tester) async 
       {
         // Building the widget
@@ -99,15 +99,15 @@ void main()
         );
 
         // Adding the keywords with the text fields: B, A, C
-        await tester.enterText(find.byType(TextField), 'B');
+        await tester.enterText(find.byType(TextField), "B");
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pump();
 
-        await tester.enterText(find.byType(TextField), 'A');
+        await tester.enterText(find.byType(TextField), "A");
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pump();
 
-        await tester.enterText(find.byType(TextField), 'C');
+        await tester.enterText(find.byType(TextField), "C");
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pump();
 
@@ -117,7 +117,7 @@ void main()
         expect(inputChipTextFinder, findsNWidgets(3));
 
         // Verifying their order
-        const expectedOrder = ['A', 'B', 'C'];
+        const expectedOrder = ["A", "B", "C"];
         int index = 0;
         for (Element inputChipTextFound in inputChipTextFinder.evaluate())
         {
@@ -129,8 +129,8 @@ void main()
       }
       );
 
-      // '20 keywords can be added to the context analysis, without having an exception: \n'
-      testWidgets('20 keywords can be added to the context analysis, without having an exception: \n', 
+      // "20 keywords can be added to the context analysis, without having an exception: \n"
+      testWidgets("20 keywords can be added to the context analysis, without having an exception: \n", 
       (WidgetTester tester) async 
       {
         // Building the widget
@@ -149,7 +149,7 @@ void main()
         // Adding 20 keywords
         for (var index=1; index <= 20; index++)
         {
-          await tester.enterText(find.byType(TextField), 'Household$index');
+          await tester.enterText(find.byType(TextField), "Household$index");
           await tester.testTextInput.receiveAction(TextInputAction.done);
           await tester.pump();
         }        

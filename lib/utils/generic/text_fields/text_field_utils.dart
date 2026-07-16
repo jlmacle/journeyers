@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:journeyers/debug_constants.dart';
+import "package:flutter/material.dart";
+import "package:journeyers/debug_constants.dart";
 
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Utils - Generic}
 /// A generic utility class related to text fields.
@@ -27,7 +27,7 @@ class TextFieldUtils
     int? maxLength,
     bool? isFocused,
   }) {
-    return Text('$currentLength/$maxLength');
+    return Text("$currentLength/$maxLength");
   }
 
   // ─── CHARS AND FILE EXTENSIONS ───────────────────────────────────────
@@ -36,10 +36,10 @@ class TextFieldUtils
   static const String charQuote = '"';
 
   /// An externalization for dot.
-  static const String charDot = '.';
+  static const String charDot = ".";
 
   /// An externalization for a line return.
-  static const String charLR = '\n';
+  static const String charLR = "\n";
 
   /// An externalization for ".csv".
   static const String extensionCSV = ".csv";
@@ -57,14 +57,14 @@ class TextFieldUtils
   containsAStraightQuote(String value) => 
   (
     shouldStringBeSanitized: value.contains(charQuote), 
-    sanitizingFunction: (value) => value.replaceAll(charQuote, '')
+    sanitizingFunction: (value) => value.replaceAll(charQuote, "")
   );
 
   /// An error message displayed if containsAStraightQuote returns true.
   static const String errorContainsAStraightQuote = 
-  'Straight double quotes\n'
-  'are removed from the text typed\n'
-  'for CSV-export reasons.\nWith apologies.';
+  "Straight double quotes\n"
+  "are removed from the text typed\n"
+  "for CSV-export reasons.\nWith apologies.";
 
   /// A [StringSanitizerBundle] sanitizing dots.
   static 
@@ -75,14 +75,14 @@ class TextFieldUtils
   containsADot(String value) => 
   (
     shouldStringBeSanitized: value.contains(charDot), 
-    sanitizingFunction: (value) => value.replaceAll(charDot, '')
+    sanitizingFunction: (value) => value.replaceAll(charDot, "")
   );
 
   /// An error message displayed if containsADot returns true.
   static const String errorContainsADot = 
-  'Dots are removed,\n'
-  'as no extension should be entered\n'
-  'in the file name.';
+  "Dots are removed,\n"
+  "as no extension should be entered\n"
+  "in the file name.";
 
   // ─── BLACKLISTING FUNCTIONS AND ERROR MESSAGES ───────────────────────────────────────
   
@@ -116,8 +116,8 @@ class TextFieldUtils
 
   /// An error message displayed if a file name is already used.
   static const String errorFileNameAlreadyUsed = 
-  'File name not available.\n'
-  'Please use a different file name.';
+  "File name not available.\n"
+  "Please use a different file name.";
 
   /// Simple blacklisting function returning true.
   static bool simpleBlacklistingFunction(String value) 

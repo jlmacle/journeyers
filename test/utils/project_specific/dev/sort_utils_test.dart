@@ -1,12 +1,12 @@
-import 'package:test/test.dart';
+import "package:test/test.dart";
 
-import 'package:journeyers/utils/project_specific/dev/sort_utils.dart';
+import "package:journeyers/utils/project_specific/dev/sort_utils.dart";
 
 /// The method assumes that all keys have the same length.
 void main()
 {
 
-  group('sort_utils', () 
+  group("sort_utils", () 
   {
     test('["a3","a1","a2"]', 
     ()

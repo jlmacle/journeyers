@@ -1,39 +1,39 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_page.dart';
-import 'package:journeyers/widgets/utility/process/new_process_button.dart';
+import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_page.dart";
+import "package:journeyers/widgets/utility/process/new_process_button.dart";
 
 
 void main() 
 {
-    group('CAPage Tests: \n', 
+    group("CAPage Tests: \n", 
     () 
     {  
-      group('CAPage: Runtime behavior\n', 
+      group("CAPage: Runtime behavior\n", 
       () 
       { 
-        // 'First-run modal: \n'
-        // 'A newly installed app should display the first-run modal,\n'
-        // 'before starting the first context analysis.'
+        // "First-run modal: \n"
+        // "A newly installed app should display the first-run modal,\n"
+        // "before starting the first context analysis."
         testWidgets
         (        
-          'First-run modal: \n'
-          'A newly installed app should display the first-run modal,\n'
-          'before starting the first context analysis.',
+          "First-run modal: \n"
+          "A newly installed app should display the first-run modal,\n"
+          "before starting the first context analysis.",
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for first-run modal to be present,
-              'wasFirstRunModalAcknowledged': false,
+              "wasFirstRunModalAcknowledged": false,
               // and to have the context analysis page, without the dashboard.
-              'wasCASessionDataSaved': false
+              "wasCASessionDataSaved": false
             });
 
             // Widget wrapped in a MaterialApp because the page uses Scaffold, 
@@ -50,7 +50,7 @@ void main()
             final modalFinder = find.byType(AlertDialog);
             expect(modalFinder, findsOneWidget);
 
-            // Verifying the modal's behavior
+            // Verifying the modal"s behavior
             await tester.tap(modalFinder);
             await tester.pumpAndSettle();
 
@@ -67,21 +67,21 @@ void main()
           }
         );        
 
-        // 'First-run modal: \n'
-        // 'The first-run modal is not displayed when already acknowledged.', 
+        // "First-run modal: \n"
+        // "The first-run modal is not displayed when already acknowledged.", 
         testWidgets
         (          
-          'First-run modal: \n'
-          'The first-run modal is not displayed when already acknowledged', 
+          "First-run modal: \n"
+          "The first-run modal is not displayed when already acknowledged", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // To not have the modal at startup
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // To have the context analysis page, without the dashboard
-              'wasCASessionDataSaved': false,
+              "wasCASessionDataSaved": false,
             });
 
             // Widget wrapped in a MaterialApp because the page uses Scaffold, 
@@ -106,22 +106,22 @@ void main()
           }
         );
 
-        // 'No session data stored: \n'
-        // 'When no session data is stored, the context analysis process page should be displayed,\n'
-        // 'without the dashboard.', 
+        // "No session data stored: \n"
+        // "When no session data is stored, the context analysis process page should be displayed,\n"
+        // "without the dashboard.", 
         testWidgets
         ( 
                   
-          'No session data stored: \n'
-          'When no session data is stored, the context analysis process page should be displayed,\n'
-          'without the dashboard.', 
+          "No session data stored: \n"
+          "When no session data is stored, the context analysis process page should be displayed,\n"
+          "without the dashboard.", 
           (tester) async 
           {  
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({            
-              'wasFirstRunModalAcknowledged': true,
-              'wasCASessionDataSaved': false,
+              "wasFirstRunModalAcknowledged": true,
+              "wasCASessionDataSaved": false,
             });
             
             // Widget wrapped in a MaterialApp because the page uses Scaffold, 
@@ -142,20 +142,20 @@ void main()
           }
         );
 
-        // 'Data stored: New context analysis button: \n'
-        // 'The context analysis page should have a button to start a new context analysis.',
+        // "Data stored: New context analysis button: \n"
+        // "The context analysis page should have a button to start a new context analysis.",
         testWidgets
         (
           
-          'Data stored: New context analysis button: \n'
-          'The context analysis page should have a button to start a new context analysis.',
+          "Data stored: New context analysis button: \n"
+          "The context analysis page should have a button to start a new context analysis.",
           (WidgetTester tester) async 
           { 
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
-              'wasFirstRunModalAcknowledged': true, 
-              'wasCASessionDataSaved': true,
+              "wasFirstRunModalAcknowledged": true, 
+              "wasCASessionDataSaved": true,
             });
             
             // Pumping the widget

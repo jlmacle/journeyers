@@ -16,7 +16,7 @@ const String keywordsTooltipLabel = "Edit Keywords";
 const String deleteTooltipLabel = "Delete selected items";
 
 // Text field labels
-const String keywordsTextFieldLabel = 'Keywords Edition (please separate with commas)';
+const String keywordsTextFieldLabel = "Keywords Edition (please separate with commas)";
 
 // Placeholder messages
-const String placeholderForEdit = 'Edit not yet implemented.';
+const String placeholderForEdit = "Edit not yet implemented.";

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 /// {@category Utils - Generic}
 /// A function that returns a record,

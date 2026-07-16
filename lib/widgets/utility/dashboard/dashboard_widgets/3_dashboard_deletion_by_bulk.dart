@@ -1,13 +1,13 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/global_keys/global_keys.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart";
 
 
 /// {@category Utility widgets}
@@ -59,7 +59,7 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   // Method used to delete several session data
   Future<void> _sessionsMetadataSelectedDelete() async 
   {
-    // Creating a fixed list to iterate over so clearing doesn't break the loop
+    // Creating a fixed list to iterate over so clearing doesn"t break the loop
     final filesToDeleteMetadata = List<String>.from(widget.sessionsMetadataSelectedForDeletion!);
 
     for (String filePath in filesToDeleteMetadata) 
@@ -154,7 +154,7 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     return Center(
         child:        
           TextButton.icon(
-            key: const Key('bulk-delete-button'),
+            key: const Key("bulk-delete-button"),
             onPressed: _sessionsMetadataSelectedDelete,
             icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
             label: Text(

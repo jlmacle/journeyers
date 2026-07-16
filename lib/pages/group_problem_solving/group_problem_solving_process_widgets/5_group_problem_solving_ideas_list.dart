@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to list the ideas found during a group problem-solving process.
@@ -112,7 +112,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                 child: ListTile(
                   leading: const Icon(Icons.edit),
                   title: Text(
-                    key: Key('idea-$index'), // Use the index in the key
+                    key: Key("idea-$index"), // Use the index in the key
                     idea,
                   ),
                 ),
@@ -146,7 +146,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
             const Text
             (
               textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-              softWrap:true, 'Ideas List', style: previewTitleStyle
+              softWrap:true, "Ideas List", style: previewTitleStyle
             ),
  
             // Right side: Close Button
@@ -235,7 +235,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField
                       (
-                        key: const Key('ideaOverlayTextField'),
+                        key: const Key("ideaOverlayTextField"),
                         controller: _ideaNewTfec,
                         textAlign: TextAlign.left,
                         decoration: const InputDecoration

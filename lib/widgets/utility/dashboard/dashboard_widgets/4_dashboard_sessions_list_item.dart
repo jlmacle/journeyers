@@ -1,25 +1,25 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:io";
+import "dart:typed_data";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:file_picker/file_picker.dart';
-import 'package:intl/intl.dart';
-import 'package:path/path.dart' as path;
+import "package:file_picker/file_picker.dart";
+import "package:intl/intl.dart";
+import "package:path/path.dart" as path;
 
-import 'package:share_plus/share_plus.dart';
+import "package:share_plus/share_plus.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart';
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart";
 
 // Used to store a temporary file path used for session data sharing.
 String tmpFilePath = "";
@@ -95,7 +95,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedKeywords = _kwsEditTfec.text
-        .split(',')
+        .split(",")
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toSet();
@@ -133,7 +133,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   }
 
   var now = DateTime.now();
-  var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+  var formatter = DateFormat("MMMM dd, yyyy").add_jm();
   var formattedDate = formatter.format(now);
   String fileContent = "Group Problem Solving Ideas\n";
   fileContent += "$title\n";
@@ -190,18 +190,18 @@ class _SessionsListItemState extends State<SessionsListItem>
     {
       await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
       filePath = await FilePicker.saveFile(
-        dialogTitle: 'Please enter a file name.',
-        fileName: '$fileNameWithoutExtension$fileExtension', 
+        dialogTitle: "Please enter a file name.",
+        fileName: "$fileNameWithoutExtension$fileExtension", 
         bytes: dataBytes,
         type: FileType.custom,
-        allowedExtensions: ['txt'],
+        allowedExtensions: ["txt"],
       );       
     }
 
     if (filePath != null) 
     {
       var now = DateTime.now();
-      var formatter = DateFormat('MMMM dd, yyyy').add_jm();
+      var formatter = DateFormat("MMMM dd, yyyy").add_jm();
       var formattedDate = formatter.format(now);   
       await du.saveDashboardMetadata
       (
@@ -275,7 +275,7 @@ class _SessionsListItemState extends State<SessionsListItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: Key('checkbox-${widget.sessionDataIndex}'),
+                  key: Key("checkbox-${widget.sessionDataIndex}"),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
@@ -292,7 +292,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                             onTap: widget.onEditTitleCallbackFunction,
                             child: Text(
                               displayTitle,
-                              key: Key('session-title-${widget.sessionDataIndex}'),
+                              key: Key("session-title-${widget.sessionDataIndex}"),
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16),
                             ),
@@ -300,7 +300,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           // The session date
                           Text(
                             "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
-                            key: Key('session-date-${widget.sessionDataIndex}'),
+                            key: Key("session-date-${widget.sessionDataIndex}"),
                             style: const TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
@@ -319,8 +319,8 @@ class _SessionsListItemState extends State<SessionsListItem>
                           onKeywordsUpdated: _onKeywordsUpdated
                           ),
                         child: Text(
-                          "Keywords: ${sortedKeywords.join(', ')}",
-                          key: Key('session-keywords-${widget.sessionDataIndex}'),
+                          "Keywords: ${sortedKeywords.join(", ")}",
+                          key: Key("session-keywords-${widget.sessionDataIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
                       ),
@@ -367,7 +367,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 ),
                 // To delete session metadata and file
                 IconButton(
-                  key: Key('session-delete-${widget.sessionDataIndex}'),
+                  key: Key("session-delete-${widget.sessionDataIndex}"),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
@@ -477,7 +477,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
 
                         String filePath = sessionMetadata[DashboardUtils.keyFilePath];
                         String fileName = path.basename(filePath);
-                        String fileNameWithoutExtension = fileName.split('.').first;
+                        String fileNameWithoutExtension = fileName.split(".").first;
                         var keywords = sessionMetadata[DashboardUtils.keyKeywords].cast<String>();
 
                         if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: fileNameWithoutExtension: $fileNameWithoutExtension");
@@ -502,7 +502,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
             body: SafeArea
             (
               child: SingleChildScrollView(
-                key: Key('context-analysis-preview-scrollview'),
+                key: Key("context-analysis-preview-scrollview"),
                 physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -520,7 +520,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )
                   :
-                    const Text('Null file path'),
+                    const Text("Null file path"),
                 ),
               ),
             )
@@ -534,7 +534,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
 }
 
 // TODO: code to move
-// Triggers the platform's native share sheet for a session.
+// Triggers the platform"s native share sheet for a session.
 // Shares both the raw session file (CSV / TXT) and some metadata.
 Future<void> _shareSession(
   BuildContext context,
@@ -542,14 +542,14 @@ Future<void> _shareSession(
   String tmpFilePath
 ) async
 {
-  final String title     = sessionMetadata[DashboardUtils.keyTitle]    ?? '';
-  final String date      = sessionMetadata[DashboardUtils.keyDate]     ?? '';
+  final String title     = sessionMetadata[DashboardUtils.keyTitle]    ?? "";
+  final String date      = sessionMetadata[DashboardUtils.keyDate]     ?? "";
   final List<dynamic> keywords = sessionMetadata[DashboardUtils.keyKeywords] ?? [];
 
   final String shareText =
-      'Session: $title\n'
-      'Date: $date\n'
-      'Keywords: ${keywords.join(', ')}';
+      "Session: $title\n"
+      "Date: $date\n"
+      "Keywords: ${keywords.join(", ")}";
 
   final ShareParams params = ShareParams(
           subject: title,
@@ -571,7 +571,7 @@ void _showKeywordsEditSheet
 
 }) {
   // Converting list to a comma-separated string for editing
-  kwsEditController.text = currentKeywords.join(', '); 
+  kwsEditController.text = currentKeywords.join(", "); 
   
   showModalBottomSheet
   (
@@ -592,14 +592,14 @@ void _showKeywordsEditSheet
         [
           TextField
           (
-            key: const Key('kwsDashboardEditField'),
+            key: const Key("kwsDashboardEditField"),
             controller: kwsEditController,
             autofocus: true,
             decoration: const InputDecoration
             (
               labelText: keywordsTextFieldLabel, 
               labelStyle: TextStyle(color: Colors.black),
-              hintText: 'Please enter your keywords.',
+              hintText: "Please enter your keywords.",
             ),
             onSubmitted: (_) async => onKeywordsUpdated(filePath)
           ),       

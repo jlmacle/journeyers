@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
 
 // ─── COLORS ───────────────────────────────────────
@@ -42,7 +42,7 @@ const TextStyle appBarTitleStyle = TextStyle
 (
   fontSize: 22,
   // Todo: fonts
-  fontFamily: 'Georgia',
+  fontFamily: "Georgia",
   //https://accessibility.uncg.edu/make-content-accessible/design-elements/
 );
 
@@ -188,21 +188,21 @@ const TextStyle previewTitleStyle = TextStyle
 // ─── CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS ───────────────────────────────────────
 
 const String pleaseDescribeTextHouseholdHint =
-    'Please describe the past outcomes for the household, '
-    'if some seem to have been out of their comfort zone for too long, '
-    'and the more desirable outcomes for the household.';
+    "Please describe the past outcomes for the household, "
+    "if some seem to have been out of their comfort zone for too long, "
+    "and the more desirable outcomes for the household.";
 
 const String pleaseDescribeTextWorkplaceHint =
-    'Please describe the past outcomes for the workplace, '
-    'if some seem to have been out of their comfort zone for too long, '
-    'and the more desirable outcomes for the workplace and for the household.';
+    "Please describe the past outcomes for the workplace, "
+    "if some seem to have been out of their comfort zone for too long, "
+    "and the more desirable outcomes for the workplace and for the household.";
 
-const String pleaseDevelopHint = 'Please develop.';
+const String pleaseDevelopHint = "Please develop.";
 
 const String pleaseDescribeTextGroupsHint =
-    'Please describe the problem(s) that the groups/teams are trying to solve.';
+    "Please describe the problem(s) that the groups/teams are trying to solve.";
 
-const String textFieldHint = 'Please enter some text.';
+const String textFieldHint = "Please enter some text.";
 
 // Text styles: GROUP PROBLEM-SOLVING PAGE RELATED STYLES
 const TextStyle problemSolvingChecklistTitle = TextStyle
@@ -327,7 +327,7 @@ ThemeData appTheme = ThemeData
   // ─── TEXT THEME ───────────────────────────────────────
   textTheme: const TextTheme
   (
-    // doesn't apply to the appbar
+    // doesn"t apply to the appbar
     headlineLarge: TextStyle
     (
       color: Colors.black,

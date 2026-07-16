@@ -1,14 +1,14 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+import "dart:convert";
+import "dart:io";
+import "dart:typed_data";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:path/path.dart' as path;
+import "package:path/path.dart" as path;
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/test_externalized_strings.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A preview widget used for the group problem-solving dashboard.
@@ -85,7 +85,7 @@ class _GPSPreviewState
       
       // To clean
       // Writing the content in a temporary file for data sharing
-      Directory testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_preview_temp');
+      Directory testTmpDir = await Directory.systemTemp.createTemp("group_problem_solving_preview_temp");
       String tmpFilePathWithExtension = path.join(testTmpDir.path, widget.gpsPreviewPathToStoredData.split("/").last);
       var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));      
       String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
@@ -104,7 +104,7 @@ class _GPSPreviewState
         _dataIdeas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
-            .map((line) => line.replaceFirst(RegExp(r'^\d+\.\s'), ''))
+            .map((line) => line.replaceFirst(RegExp(r"^\d+\.\s"), ""))
             .toList();         
         
       }

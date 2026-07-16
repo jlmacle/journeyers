@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
 /// {@category Utils - Generic}
@@ -79,7 +79,7 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
     return Center(
         child:        
           TextButton.icon(
-            key: const Key('bulk-delete-button'),
+            key: const Key("bulk-delete-button"),
             onPressed: _selectedTextItemsDelete,
             icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
             label: Text(

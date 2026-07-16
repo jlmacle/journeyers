@@ -1,6 +1,6 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/utils/generic/dashboard/dashboard_utils.dart';
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 
 /// {@category Utils - Project-specific}
 /// A project-specific utility class related to user preferences.
@@ -18,21 +18,21 @@ class RunTimeDataUtils
   Future<bool> saveFirstRunModalAcknowledgement({required bool wasAcknowledged}) async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return await prefs.setBool('wasFirstRunModalAcknowledged', true);
+    return await prefs.setBool("wasFirstRunModalAcknowledged", true);
   }
 
   /// Method used to check if the first-run modal has been acknowledged.
   Future<bool?> wasFirstRunModalAcknowledged() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('wasFirstRunModalAcknowledged') ?? false;
+    return prefs.getBool("wasFirstRunModalAcknowledged") ?? false;
   }
 
   /// Method used to reset to false if the first-run modal has been acknowledged.
   Future<bool> resetFirstRunModalStatus() async 
   {
     final prefs = await SharedPreferences.getInstance();
-    return await prefs.setBool('wasFirstRunModalAcknowledged', false);
+    return await prefs.setBool("wasFirstRunModalAcknowledged", false);
   }
 
   // ─── FOLDER SELECTED FOR APPLICATION USE ───────────────────────────────────────
@@ -42,14 +42,14 @@ class RunTimeDataUtils
   Future<String?> getApplicationFolderPath() async 
   {
     final prefs =  await SharedPreferences.getInstance();
-    return prefs.getString('applicationFolderPath') ?? "";
+    return prefs.getString("applicationFolderPath") ?? "";
   }
 
   /// Method used to save the path to the application folder selected by the user (mobile applications).
   Future<bool> saveApplicationFolderPath({required String path}) async 
   {
     final prefs =  await SharedPreferences.getInstance();
-    return prefs.setString('applicationFolderPath', path);
+    return prefs.setString("applicationFolderPath", path);
   }
 
   // ─── EXISTING ANALYSIS SESSION DATA ? ───────────────────────────────────────
@@ -61,11 +61,11 @@ class RunTimeDataUtils
     {
       case (DashboardUtils.caContext):
       {
-        return await prefs.setBool('wasCASessionDataSaved', wasDataSaved);
+        return await prefs.setBool("wasCASessionDataSaved", wasDataSaved);
       }
       case (DashboardUtils.gpsContext):
       {
-        return await prefs.setBool('wasGPSSessionDataSaved', wasDataSaved);
+        return await prefs.setBool("wasGPSSessionDataSaved", wasDataSaved);
       }
       default: return false;
     }   
@@ -79,11 +79,11 @@ class RunTimeDataUtils
     {
       case (DashboardUtils.caContext):
       {
-        return prefs.getBool('wasCASessionDataSaved') ?? false;
+        return prefs.getBool("wasCASessionDataSaved") ?? false;
       }
       case (DashboardUtils.gpsContext):
       {
-        return prefs.getBool('wasGPSSessionDataSaved') ?? false;
+        return prefs.getBool("wasGPSSessionDataSaved") ?? false;
       }   
       default:
         return null;
@@ -98,11 +98,11 @@ class RunTimeDataUtils
     {
       case (DashboardUtils.caContext):
       {
-        return await prefs.setBool('wasCASessionDataSaved', false);
+        return await prefs.setBool("wasCASessionDataSaved", false);
       }
       case (DashboardUtils.gpsContext):
       {
-        return await prefs.setBool('wasGPSSessionDataSaved', false);
+        return await prefs.setBool("wasGPSSessionDataSaved", false);
       }
       default: return false;
     }

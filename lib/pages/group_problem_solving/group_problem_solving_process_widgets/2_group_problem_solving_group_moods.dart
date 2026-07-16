@@ -1,13 +1,13 @@
 // ignore: file_names
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/type_defs.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.
@@ -153,7 +153,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
     );
   }
 
-  // Function used to change a stakeholder identifier's color
+  // Function used to change a stakeholder identifier"s color
   void _identifierChangeColor({required int index, required Color currentColor}) 
   { 
     int colorIndex = identifierColors.indexOf(currentColor);
@@ -249,7 +249,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
   }
 }
 
-// Class for the stakeholders' identifiers
+// Class for the stakeholders" identifiers
 class IdentifierWidget extends StatelessWidget 
 {
   final String identifierValue;

@@ -1,20 +1,20 @@
 // ignore: file_names
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
-import '../../../integration_test/externalized_code/externalized_testing_code.dart';
+import "../../../integration_test/externalized_code/externalized_testing_code.dart";
 
 void main() 
 {
@@ -76,18 +76,18 @@ void main()
   
   // ─── TESTS ───────────────────────────────────────
 
-  group('CAForm Tests: \n', 
+  group("CAForm Tests: \n", 
   () 
   {  
     group
     (
-      'Form: Structure: Root structure: \n',
+      "Form: Structure: Root structure: \n",
       ()
       {
-        // 'Two perspective expansion tiles are present'
+        // "Two perspective expansion tiles are present"
         testWidgets
         (
-          'Two perspective expansion tiles are present',
+          "Two perspective expansion tiles are present",
           (tester) async
           {
             // Pumping the CAForm widget
@@ -98,10 +98,10 @@ void main()
           },
         );
 
-        // 'Individual and group tiles carry the correct heading text'
+        // "Individual and group tiles carry the correct heading text"
         testWidgets
         (
-          'Individual and group tiles carry the correct heading text',
+          "Individual and group tiles carry the correct heading text",
           (tester) async
           {
             // Pumping the CAForm widget
@@ -122,16 +122,16 @@ void main()
       });
 
     // ─── INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
-    // 'Form: Structure: Individual perspective: \n'
+    // "Form: Structure: Individual perspective: \n"
     group
     (
-      'Form: Structure: Individual perspective: \n',
+      "Form: Structure: Individual perspective: \n",
       ()
       {
-        // 'Expanding the tile with the individual perspective reveals all four level-3 section questions'
+        // "Expanding the tile with the individual perspective reveals all four level-3 section questions"
         testWidgets
         (
-          'Expanding the tile with the individual perspective reveals all four level-3 section questions',
+          "Expanding the tile with the individual perspective reveals all four level-3 section questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -167,12 +167,12 @@ void main()
           },
         );      
       
-        // 'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
-        // '4 balance + 2 workplace + 1 legacy = 7'
+        // "Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n"
+        // "4 balance + 2 workplace + 1 legacy = 7"
         testWidgets
         (
-          'Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n'
-          '4 balance + 2 workplace + 1 legacy = 7',
+          "Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n"
+          "4 balance + 2 workplace + 1 legacy = 7",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -193,12 +193,12 @@ void main()
           },
         );
       
-        // 'Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n'
-        // '1 issue of another type = 1'
+        // "Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
+        // "1 issue of another type = 1"
         testWidgets
         (
-          'Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n'
-          '1 issue of another type = 1',
+          "Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
+          "1 issue of another type = 1",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -220,10 +220,10 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
-        // 'Balance issue: all four item labels are correct after expansion',
+        // "Balance issue: all four item labels are correct after expansion",
         testWidgets
         (          
-          'Balance issue: all four item labels are correct after expansion',
+          "Balance issue: all four item labels are correct after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -256,11 +256,11 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: WORKPLACE SECTION ───────────────────────────────────────
-        // 'Workplace issue: both item labels are correct after expansion',
+        // "Workplace issue: both item labels are correct after expansion",
         testWidgets
         (
           
-          'Workplace issue: both item labels are correct after expansion',
+          "Workplace issue: both item labels are correct after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -291,11 +291,11 @@ void main()
         );
 
         // ─── INDIVIDUAL PERSPECTIVE: LEGACY SECTION ───────────────────────────────────────
-        // 'Legacy issue: the item label is present after expansion',
+        // "Legacy issue: the item label is present after expansion",
         testWidgets
         (
           
-          'Legacy issue: the item label is present after expansion',
+          "Legacy issue: the item label is present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -325,11 +325,11 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: ANOTHER ISSUE SECTION ───────────────────────────────────────
-        // 'Another issue: the hint text is present after expansion',
+        // "Another issue: the hint text is present after expansion",
         testWidgets
         (
           
-          'Another issue: the hint text is present after expansion',
+          "Another issue: the hint text is present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -362,16 +362,16 @@ void main()
     );    
 
     // ─── GROUP/TEAMS PERSPECTIVE ───────────────────────────────────────
-    // 'Form: Structure: Group/Teams perspective: \n'
+    // "Form: Structure: Group/Teams perspective: \n"
     group
     (
-      'Form: Structure: Group/Teams perspective: \n',
+      "Form: Structure: Group/Teams perspective: \n",
       ()
       {
-        // 'Expanding the tile with the group/teams perspective reveals all five level-3 questions',
+        // "Expanding the tile with the group/teams perspective reveals all five level-3 questions",
         testWidgets
         (
-          'Expanding the tile with the group/teams perspective reveals all five level-3 questions',
+          "Expanding the tile with the group/teams perspective reveals all five level-3 questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -408,12 +408,12 @@ void main()
           },
         );
       
-        // 'Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n'
-        // '1 problems the groups/teams are trying to solve = 1'
+        // "Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n"
+        // "1 problems the groups/teams are trying to solve = 1"
         testWidgets
         (
-          'Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n'
-          '1 problems the groups/teams are trying to solve = 1',
+          "Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n"
+          "1 problems the groups/teams are trying to solve = 1",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -434,12 +434,12 @@ void main()
           },
         );
       
-        // 'Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n'
-        // '4'
+        // "Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n"
+        // "4"
         testWidgets
         (
-          'Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n'
-          '4',
+          "Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n"
+          "4",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -463,11 +463,11 @@ void main()
       }
     ); 
 
-    group('Form: Start values: \n', 
+    group("Form: Start values: \n", 
     () 
     { 
-        // 'At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked'
-        testWidgets('At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked', 
+        // "At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked"
+        testWidgets("At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked", 
         (WidgetTester tester) async {
 
           // Pumping the widget within the CA process to allow for the tile expansion
@@ -494,8 +494,8 @@ void main()
         }
         );
     
-        // 'At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons'
-        testWidgets('At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons', 
+        // "At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons"
+        testWidgets("At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons", 
         (WidgetTester tester) async {
 
           // Pumping the widget within the CA process to allow for the tile expansion

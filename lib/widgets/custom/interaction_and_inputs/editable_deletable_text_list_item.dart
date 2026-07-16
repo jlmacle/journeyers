@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart';
+import "package:flutter/material.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart";
 
 /// {@category Utils - Generic}
 /// {@category Lists}
@@ -81,7 +81,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
             // Checkbox for list item deletion
             Checkbox
             (
-              key: Key('editable-deletable-checkbox-${widget.itemIndex}'),
+              key: Key("editable-deletable-checkbox-${widget.itemIndex}"),
               value: _isChecked, 
               onChanged: 
                 (value)
@@ -103,14 +103,14 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
             Expanded(
               child: ListTile
               (
-                key: Key('editable-deletable-list-tile-${widget.itemIndex}'),
+                key: Key("editable-deletable-list-tile-${widget.itemIndex}"),
                 dense: true,
                 leading: Text(
-                  '${widget.itemIndex + 1}.',
+                  "${widget.itemIndex + 1}.",
                   style: widget.themeData.textTheme.bodySmall,
                 ),                            
                 title: Text(
-                  key: Key('editable-deletable-text-item-${widget.itemIndex}'),
+                  key: Key("editable-deletable-text-item-${widget.itemIndex}"),
                   widget.itemText,
                   style: widget.themeData.textTheme.titleMedium,
                 ),
@@ -131,7 +131,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
           Expanded(
             child: TextField
             (
-              key: Key('editable-deletable-tf-${widget.itemIndex}'),
+              key: Key("editable-deletable-tf-${widget.itemIndex}"),
               controller: _tfecEdition,
               autofocus: true,
               decoration: InputDecoration

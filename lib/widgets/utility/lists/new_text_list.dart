@@ -1,13 +1,13 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
-import 'package:journeyers/widgets/utility/lists/database/text_lists_storage.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
+import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_keywords_declaration.dart";
 
 
 /// Class used to add a text list to a set of text lists.
@@ -128,7 +128,7 @@ class _NewTextListState extends State<NewTextList> {
       && _enteredTextItemsList.isNotEmpty 
       // added texts are not matching a saved list content
       && !_listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
-      // the new list hasn't been saved yet
+      // the new list hasn"t been saved yet
       && !_dataIsSaved ;
 
   /// Shows a dialog that asks for a list label.
@@ -154,7 +154,7 @@ class _NewTextListState extends State<NewTextList> {
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
-                  () => errorText = '${label}${listAlreadySavedErrorEndPart}',
+                  () => errorText = "${label}${listAlreadySavedErrorEndPart}",
                 );
                 return;
               }
@@ -170,15 +170,15 @@ class _NewTextListState extends State<NewTextList> {
             }
 
             return AlertDialog(
-              title: const Text('Save list'),
+              title: const Text("Save list"),
               content: TextField(
-                key: const Key('saveListField'),
+                key: const Key("saveListField"),
                 controller: _labelTfec,
                 autofocus: true,
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) async => await onConfirm(), 
                 decoration: InputDecoration(
-                  labelText: 'List label',
+                  labelText: "List label",
                   hintText: widget.labelHintText,
                   errorText: errorText,
                 ),
@@ -192,11 +192,11 @@ class _NewTextListState extends State<NewTextList> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(ctx).pop(),
-                  child: const Text('Cancel'),
+                  child: const Text("Cancel"),
                 ),
                 FilledButton(
                   onPressed: onConfirm,
-                  child: const Text('Save'),
+                  child: const Text("Save"),
                 ),
               ],
             );
@@ -231,7 +231,7 @@ class _NewTextListState extends State<NewTextList> {
       ScaffoldMessenger.of(context).showSnackBar
       (
 
-        SnackBar(content: Text('Saved as "$listLabel"')),
+        SnackBar(content: Text("Saved as '$listLabel'")),
       );
     } 
     catch (e, stackTrace) 
@@ -244,7 +244,7 @@ class _NewTextListState extends State<NewTextList> {
 
       ScaffoldMessenger.of(context).showSnackBar
       (    
-        SnackBar(content: Text('Save failed: $e')),
+        SnackBar(content: Text("Save failed: $e")),
       );
     }
   }
@@ -292,7 +292,7 @@ class _NewTextListState extends State<NewTextList> {
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: Text(
-            'Error loading the lists:\n$_loadingDBError',
+            "Error loading the lists:\n$_loadingDBError",
             textAlign: TextAlign.center,
           ),
         ),
@@ -328,7 +328,7 @@ class _NewTextListState extends State<NewTextList> {
                   )
                 // Potentially saving data
                 : IconButton(
-                    tooltip: 'Save list',
+                    tooltip: "Save list",
                     icon: const Icon(Icons.save_outlined),
                     onPressed: _enteredTextItemsListSave,
                   ),
@@ -466,7 +466,7 @@ class _NewTextListState extends State<NewTextList> {
               padding: const EdgeInsets.all(8.0),
               child: TextField
               (
-                key: const Key('participantNameField'),
+                key: const Key("participantNameField"),
                 controller: _newTextItemTfec,
                 textAlign: TextAlign.left,
                 decoration: const InputDecoration

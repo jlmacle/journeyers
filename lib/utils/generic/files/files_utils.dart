@@ -1,21 +1,21 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/services.dart';
+import "package:flutter/services.dart";
 
-import 'package:path/path.dart' as path;
+import "package:path/path.dart" as path;
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Utils - Generic}
 /// A generic utility class related to files.
 class FileUtils 
 {
   /// Channel used for communicating with Android.
-  var platformAndroid = const MethodChannel('dev.journeyers/saf');
+  var platformAndroid = const MethodChannel("dev.journeyers/saf");
   /// Channel used for communicating with IOS.
-  var platformIOS = const MethodChannel('dev.journeyers/iossaf');
+  var platformIOS = const MethodChannel("dev.journeyers/iossaf");
 
   /// Method used to append text at the end of a file.
   Future<void> addTextAtFileEnd
@@ -43,7 +43,7 @@ class FileUtils
     required String text,
   }) async 
   {
-    String errorMsg = 'Error appending text in front of file:';
+    String errorMsg = "Error appending text in front of file:";
     try 
     {
       File file = File(filePath);
@@ -66,7 +66,7 @@ class FileUtils
     required String text,
   }) async 
   {
-    String errorMsg = 'Error writing text to file:';
+    String errorMsg = "Error writing text to file:";
     try 
     {
       File file = File(filePath);
@@ -116,10 +116,10 @@ class FileUtils
   {
     String? filePath;
     
-    final bool success = await platformAndroid.invokeMethod('saveFile', 
+    final bool success = await platformAndroid.invokeMethod("saveFile", 
     {
-      'fileName': "$fileNameWithoutExtension$fileExtension",
-      'content': dataBytes,
+      "fileName": "$fileNameWithoutExtension$fileExtension",
+      "content": dataBytes,
     });
     String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/$fileNameWithoutExtension$fileExtension";
@@ -136,10 +136,10 @@ class FileUtils
   {
     String? filePath;
     
-    final bool success = await platformIOS.invokeMethod('saveFile', 
+    final bool success = await platformIOS.invokeMethod("saveFile", 
     {
-      'fileName': "$fileName$fileExtension",
-      'content': dataBytes,
+      "fileName": "$fileName$fileExtension",
+      "content": dataBytes,
     });
     String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/$fileName$fileExtension";
@@ -158,11 +158,11 @@ class FileUtils
 
       await file.writeAsBytes(dataBytes);
 
-      if (isInTestEnvironment) pu.printd('Running Tests: File written successfully to ${file.path} on ${Platform.operatingSystem}');
+      if (isInTestEnvironment) pu.printd("Running Tests: File written successfully to ${file.path} on ${Platform.operatingSystem}");
  
       } catch (e, stackTrace) 
       {
-        pu.printd('saveFileUsingWriteAsBytes: Error writing file as bytes: $e: $stackTrace');
+        pu.printd("saveFileUsingWriteAsBytes: Error writing file as bytes: $e: $stackTrace");
       }
 
     return filePathWithExtension;
@@ -202,7 +202,7 @@ class FileUtils
   {
     var fileNameWithExtension = path.basename(filePath);
     return await platformAndroid.invokeMethod
-        ('readFileContent', {'fileName': fileNameWithExtension}); 
+        ("readFileContent", {"fileName": fileNameWithExtension}); 
   }
 
   /// Method used to read a text file on iOS.
@@ -210,7 +210,7 @@ class FileUtils
   {
     var fileNameWithExtension = path.basename(filePath);
     return await platformIOS.invokeMethod
-        ('readFileContent', {'fileName': fileNameWithExtension}); 
+        ("readFileContent", {"fileName": fileNameWithExtension}); 
   }
 
   // ─── METHODS USED TO READ FILES : end ───────────────────────────────────────
@@ -277,7 +277,7 @@ class FileUtils
       // as findFile() in Kotlin expects the name within the tree
       final fileName = path.basename(pathToCSV);
 
-      final bool success = await platformAndroid.invokeMethod('deleteFile', {'fileName': fileName});
+      final bool success = await platformAndroid.invokeMethod("deleteFile", {"fileName": fileName});
 
       if (success) 
       {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from Android SAF storage.");} 
@@ -302,7 +302,7 @@ class FileUtils
       // as findFile() in Kotlin expects the name within the tree
       final fileName = path.basename(pathToCSV);
 
-      final bool success = await platformIOS.invokeMethod('deleteFile', {'fileName': fileName});
+      final bool success = await platformIOS.invokeMethod("deleteFile", {"fileName": fileName});
 
       if (success) 
       {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from iOS SAF storage.");} 

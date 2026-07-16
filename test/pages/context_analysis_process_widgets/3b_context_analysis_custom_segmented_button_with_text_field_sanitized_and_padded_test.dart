@@ -1,12 +1,12 @@
 // ignore: file_names
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 
 void main() 
 {
-  const segButtonTextOption1 = 'Yes';
+  const segButtonTextOption1 = "Yes";
 
   // Method used to pump the CASegmentedButtonWithSanitizedAndPaddedTextField widget
   Future<void> pumpCASegmentedButtonWithSanitizedAndPaddedTextField(WidgetTester tester) async
@@ -16,9 +16,9 @@ void main()
         home: Scaffold(
           body:  CASegmentedButtonWithSanitizedAndPaddedTextField
           (            
-            textFieldHint: '', 
+            textFieldHint: "", 
             segButtonTextOption1: segButtonTextOption1, 
-            segButtonTextOption2: '',
+            segButtonTextOption2: "",
           )
         )
       )
@@ -26,15 +26,15 @@ void main()
   }
 
 
-  group('CASegmentedButtonWithSanitizedAndPaddedTextField Tests: \n', 
+  group("CASegmentedButtonWithSanitizedAndPaddedTextField Tests: \n", 
   () 
   {  
-    group('Presence/Absence of the text field: \n', 
+    group("Presence/Absence of the text field: \n", 
     () 
     { 
-        // 'At start, no selection is made with the segmented button, and the textfield is absent'
+        // "At start, no selection is made with the segmented button, and the textfield is absent"
         testWidgets(
-          'At start, no selection is made with the segmented button, and the textfield is absent', 
+          "At start, no selection is made with the segmented button, and the textfield is absent", 
           (WidgetTester tester) async 
           {
             // Pumping the widget 
@@ -55,9 +55,9 @@ void main()
           }
         );       
 
-        // 'If a selection is made with the segmented button, the textfield is present'
+        // "If a selection is made with the segmented button, the textfield is present"
         testWidgets(
-          'If a selection is made with the segmented button, the textfield is present', 
+          "If a selection is made with the segmented button, the textfield is present", 
           (WidgetTester tester) async 
           {
             // Pumping the widget 
@@ -73,15 +73,15 @@ void main()
         );       
     });    
  
-    group('Text field state maintained: \n', 
+    group("Text field state maintained: \n", 
     () 
     { 
-      // 'Text maintained if text was present, and selections are unselected/re-selected: \n'
+      // "Text maintained if text was present, and selections are unselected/re-selected: \n"
         testWidgets(
-          'Text maintained if text was present, and selections are unselected/re-selected: \n', 
+          "Text maintained if text was present, and selections are unselected/re-selected: \n", 
           (WidgetTester tester) async 
           {
-            var someText = 'someText';
+            var someText = "someText";
 
             // Pumping the widget 
             await pumpCASegmentedButtonWithSanitizedAndPaddedTextField(tester);

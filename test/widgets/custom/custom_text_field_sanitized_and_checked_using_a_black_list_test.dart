@@ -1,21 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:journeyers/app_themes.dart';
-import 'package:journeyers/utils/generic/text_fields/text_field_utils.dart';
-import 'package:journeyers/utils/project_specific/text_fields/text_field_utils.dart' as tfu_proj;
-import 'package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart';
+import "package:journeyers/app_themes.dart";
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
+import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj;
+import "package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart";
 
 
 void main() {
   const textWithQuote = 'Perse"verance';
-  const textWithDot = '.Legacy';
+  const textWithDot = ".Legacy";
   const fileNameBlacklisted = "a.csv";
-  const textValid = 'Context analysis';
+  const textValid = "Context analysis";
   
-  group('TextFieldChecked Tests:\n', () {
-    testWidgets('Should display no initial error', (WidgetTester tester) async {
-      GlobalKey errorMessageKey1 = GlobalKey(debugLabel: 'error-msg-1');
+  group("TextFieldChecked Tests:\n", () {
+    testWidgets("Should display no initial error", (WidgetTester tester) async {
+      GlobalKey errorMessageKey1 = GlobalKey(debugLabel: "error-msg-1");
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -44,7 +44,7 @@ void main() {
       expect(errorTextWidget.data, equals(""));
     });
 
-    testWidgets('Should show error message when a sanitizing function (containsAStraightQuote) returns true', (WidgetTester tester) async {
+    testWidgets("Should show error message when a sanitizing function (containsAStraightQuote) returns true", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -70,7 +70,7 @@ void main() {
       expect(find.text(TextFieldUtils.errorContainsAStraightQuote), findsOneWidget);
     });
 
-    testWidgets('Should show error message when a sanitizing function (containsADot) returns true', (WidgetTester tester) async {
+    testWidgets("Should show error message when a sanitizing function (containsADot) returns true", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -96,8 +96,8 @@ void main() {
       expect(find.text(TextFieldUtils.errorContainsADot), findsOneWidget);
     });
     
-    testWidgets('Should show error message when a blacklist check is positive', (WidgetTester tester) async {
-      GlobalKey errorMessageKey2 = GlobalKey(debugLabel: 'error-msg-2');
+    testWidgets("Should show error message when a blacklist check is positive", (WidgetTester tester) async {
+      GlobalKey errorMessageKey2 = GlobalKey(debugLabel: "error-msg-2");
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -126,7 +126,7 @@ void main() {
     });
 
 
-    testWidgets('Should call onTextFieldValueSubmittedCallbackFunction if input is valid', (WidgetTester tester) async {
+    testWidgets("Should call onTextFieldValueSubmittedCallbackFunction if input is valid", (WidgetTester tester) async {
       String submittedValue = "";
 
       await tester.pumpWidget(

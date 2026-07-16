@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/widgets/custom/text/custom_heading.dart';
+import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}

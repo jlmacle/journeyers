@@ -1,24 +1,24 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:integration_test/integration_test.dart';
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:integration_test/integration_test.dart";
+import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_page.dart';
-import 'package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
-import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
-import 'externalized_code/externalized_testing_code.dart';
+import "externalized_code/externalized_testing_code.dart";
 
 
 // ─── Helper function ──────────────────────────────────────────────────────────────────
@@ -57,10 +57,10 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const String testAnalysisTitleRoot = 'Integration-test CA session title';
-  const String testAnalysisTitle1 = '$testAnalysisTitleRoot (1)';
-  const String testAnalysisTitle2 = '$testAnalysisTitleRoot (2)';
-  const String testAnalysisTitle3 = '$testAnalysisTitleRoot (3)';
+  const String testAnalysisTitleRoot = "Integration-test CA session title";
+  const String testAnalysisTitle1 = "$testAnalysisTitleRoot (1)";
+  const String testAnalysisTitle2 = "$testAnalysisTitleRoot (2)";
+  const String testAnalysisTitle3 = "$testAnalysisTitleRoot (3)";
   const List<String> titlesList = [testAnalysisTitle3, testAnalysisTitle1, testAnalysisTitle2];
   const List<String> titlesMaintenance = ["Maintenance topic 1", "Maintenance topic 2", "Maintenance topic 3"];
   const List<String> titlesCompanionship = ["Companionship and Logistics topic", "Companionship and Studies topic"];
@@ -73,12 +73,12 @@ Future<void> main() async {
   const List<String> titlesListSorted = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
 
   // Keywords
-  const String kwCompanionship = 'Companionship';
-  const String kwWorkplace = 'Workplace';
-  const String kwStudies = 'Studies';  
-  const String kwCommunication = 'Communication';
-  const String kwMaintenance = 'Maintenance';
-  const String kwLogistics = 'Logistics';
+  const String kwCompanionship = "Companionship";
+  const String kwWorkplace = "Workplace";
+  const String kwStudies = "Studies";  
+  const String kwCommunication = "Communication";
+  const String kwMaintenance = "Maintenance";
+  const String kwLogistics = "Logistics";
   const List<String> kwsList2Keywords = [kwCompanionship, kwWorkplace];
   const List<List<String>> kwsListsKwsSorting = 
                     [
@@ -87,9 +87,9 @@ Future<void> main() async {
                     ];
 
   // File names
-  const String fileName1WithoutExtension = 'file1';
-  const String fileName2WithoutExtension = 'file2';
-  const String fileName3WithoutExtension = 'file3';
+  const String fileName1WithoutExtension = "file1";
+  const String fileName2WithoutExtension = "file2";
+  const String fileName3WithoutExtension = "file3";
   const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
 
   // Edition
@@ -100,7 +100,7 @@ Future<void> main() async {
   
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp('context_analysis_integration_test_');
+    testTmpDir = await Directory.systemTemp.createTemp("context_analysis_integration_test_");
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To intercept the way the date is saved
     dateForTestingIndex = 0;
@@ -116,26 +116,26 @@ Future<void> main() async {
 
   // ── Test cases ─────────────────────────────────────────────────────────────
 
-  group('Context Analysis Integration Tests: Mobile: \n', () 
+  group("Context Analysis Integration Tests: Mobile: \n", () 
   {
-    group('Entered metadata is displayed on the dashboard: Mobile: \n', ()
+    group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
     {
-    // 'Session metadata entered (title, keywords, date) is found: '
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session metadata entered (title, keywords, date) is found: "
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-      'Session metadata entered (title, keywords, date) is found: '
-      '(assuming an already selected path to the user session data folder)',
+      "Session metadata entered (title, keywords, date) is found: "
+      "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
         ({
           // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
+          "wasFirstRunModalAcknowledged": true,
           // and to have the context analysis page, with the dashboard.
-          'wasCASessionDataSaved': true,
+          "wasCASessionDataSaved": true,
           // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
         });
 
         if (Platform.isAndroid || Platform.isIOS)
@@ -181,24 +181,24 @@ Future<void> main() async {
  
     });
 
-    group('Sorting and filtering Tests: Mobile: \n', ()
+    group("Sorting and filtering Tests: Mobile: \n", ()
     {
-      // 'Sorting by title \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Sorting by title \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Sorting by title \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Sorting by title \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -239,7 +239,7 @@ Future<void> main() async {
             var titlesFinder = await dashboardGetAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+            if (testingDebug) pu.printd("Testing Debug: totalTitles: $totalTitles");
 
             // Verifying the alphabetical order
             for (var index = 0; index < totalTitles; index++)
@@ -264,22 +264,22 @@ Future<void> main() async {
         }
       );
          
-      // 'Sorting by date \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Sorting by date \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Sorting by date \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Sorting by date \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -322,7 +322,7 @@ Future<void> main() async {
               (widget) 
               {
                 if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                  return (widget.key as ValueKey<String>).value.contains("session-date-");
                 }
                 return false;
               }
@@ -346,7 +346,7 @@ Future<void> main() async {
               (widget) 
               {
                 if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                  return (widget.key as ValueKey<String>).value.contains("session-date-");
                 }
                 return false;
               }
@@ -360,22 +360,22 @@ Future<void> main() async {
           }
         });
 
-      // 'Filtering by keywords \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Filtering by keywords \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-          'Filtering by keywords \n'
-          '(assuming an already selected path to the user session data folder)',
+          "Filtering by keywords \n"
+          "(assuming an already selected path to the user session data folder)",
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the context analysis page, with the dashboard.
-              'wasCASessionDataSaved': true,
+              "wasCASessionDataSaved": true,
               // Temporary test dir as application folder path
-              'applicationFolderPath': testTmpDir!.path
+              "applicationFolderPath": testTmpDir!.path
             });
 
             if (Platform.isAndroid || Platform.isIOS)
@@ -400,7 +400,7 @@ Future<void> main() async {
                 tester: tester,
                 titlesList: titlesListKwsSorting,
                 kwsLists: kwsListsKwsSorting,
-                fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
+                fileNamesWithoutExtensionList: List.generate(6, (i)=> "file${i+1}")
               );
               // await tester.pump(const Duration(seconds: 4));
             
@@ -416,7 +416,7 @@ Future<void> main() async {
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwMaintenance: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwMaintenance: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -435,7 +435,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -455,7 +455,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwWorkplace: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -468,24 +468,24 @@ Future<void> main() async {
           });     
     });
   
-    group('Deletion Tests: Mobile: \n', ()
+    group("Deletion Tests: Mobile: \n", ()
   {
-  // 'Deletion: Single deletion with icon \n'
-  // '(assuming an already selected path to the user session data folder)',
+  // "Deletion: Single deletion with icon \n"
+  // "(assuming an already selected path to the user session data folder)",
   testWidgets(
-    'Deletion: Single deletion with icon \n'
-    '(assuming an already selected path to the user session data folder)',
+    "Deletion: Single deletion with icon \n"
+    "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
       // Setting mock values for SharedPreferences
       SharedPreferences.setMockInitialValues
       ({
         // Setting value for the first-run modal to be absent,
-        'wasFirstRunModalAcknowledged': true,
+        "wasFirstRunModalAcknowledged": true,
         // and to have the context analysis page, with the dashboard.
-        'wasCASessionDataSaved': true,
+        "wasCASessionDataSaved": true,
         // Temporary test dir as application folder path
-        'applicationFolderPath': testTmpDir!.path
+        "applicationFolderPath": testTmpDir!.path
       });
 
       if (Platform.isAndroid || Platform.isIOS)
@@ -559,22 +559,22 @@ Future<void> main() async {
     }      
   );
 
-  // 'Deletion: Bulk deletion \n'
-  // '(assuming an already selected path to the user session data folder)',
+  // "Deletion: Bulk deletion \n"
+  // "(assuming an already selected path to the user session data folder)",
   testWidgets(
-    'Deletion: Bulk deletion \n'
-    '(assuming an already selected path to the user session data folder)',
+    "Deletion: Bulk deletion \n"
+    "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
       // Setting mock values for SharedPreferences
       SharedPreferences.setMockInitialValues
       ({
         // Setting value for the first-run modal to be absent,
-        'wasFirstRunModalAcknowledged': true,
+        "wasFirstRunModalAcknowledged": true,
         // and to have the context analysis page, with the dashboard.
-        'wasCASessionDataSaved': true,
+        "wasCASessionDataSaved": true,
         // Temporary test dir as application folder path
-        'applicationFolderPath': testTmpDir!.path
+        "applicationFolderPath": testTmpDir!.path
       });
 
       if (Platform.isAndroid || Platform.isIOS)
@@ -630,7 +630,7 @@ Future<void> main() async {
         // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────
         // Searching the widget
-        var bulkDeletionFinder = find.textContaining('Delete');
+        var bulkDeletionFinder = find.textContaining("Delete");
         expect(bulkDeletionFinder, findsOne);
         await tester.ensureVisible(bulkDeletionFinder);
         await tester.tap(bulkDeletionFinder);
@@ -661,26 +661,26 @@ Future<void> main() async {
   
   });
 
-    group('Preview Tests: Mobile: \n', () 
+    group("Preview Tests: Mobile: \n", () 
   {
-    // 'Session data entered is found on the preview: '
-    // 'all fields empty \n'
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session data entered is found on the preview: "
+    // "all fields empty \n"
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-      'Session data entered is found on the preview: '
-      'all fields empty \n'
-      '(assuming an already selected path to the user session data folder)',
+      "Session data entered is found on the preview: "
+      "all fields empty \n"
+      "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
         ({
           // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
+          "wasFirstRunModalAcknowledged": true,
           // and to have the context analysis page, with the dashboard.
-          'wasCASessionDataSaved': true,
+          "wasCASessionDataSaved": true,
           // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
         });
 
         if (Platform.isAndroid || Platform.isIOS)
@@ -720,24 +720,24 @@ Future<void> main() async {
       }
     );
 
-    // 'Session data entered is found on the preview: '
-    // 'all fields filled \n'
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session data entered is found on the preview: "
+    // "all fields filled \n"
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-      'Session data entered is found on the preview: '
-      'all fields filled \n'
-      '(assuming an already selected path to the user session data folder)',
+      "Session data entered is found on the preview: "
+      "all fields filled \n"
+      "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
         ({
           // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
+          "wasFirstRunModalAcknowledged": true,
           // and to have the context analysis page, with the dashboard.
-          'wasCASessionDataSaved': true,
+          "wasCASessionDataSaved": true,
           // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
         });
 
         if (Platform.isAndroid || Platform.isIOS)
@@ -806,24 +806,24 @@ Future<void> main() async {
       },
     );
 
-    // 'Session data entered is found on the preview: '
-    // 'not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n'
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session data entered is found on the preview: "
+    // "not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n"
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-    'Session data entered is found on the preview: '
-    'not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n'
-    '(assuming an already selected path to the user session data folder)',
+    "Session data entered is found on the preview: "
+    "not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n"
+    "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
       // Setting mock values for SharedPreferences
       SharedPreferences.setMockInitialValues
       ({
         // Setting value for the first-run modal to be absent,
-        'wasFirstRunModalAcknowledged': true,
+        "wasFirstRunModalAcknowledged": true,
         // and to have the context analysis page, with the dashboard.
-        'wasCASessionDataSaved': true,
+        "wasCASessionDataSaved": true,
         // Temporary test dir as application folder path
-        'applicationFolderPath': testTmpDir!.path
+        "applicationFolderPath": testTmpDir!.path
       });
 
       if (Platform.isAndroid || Platform.isIOS)
@@ -894,24 +894,24 @@ Future<void> main() async {
     },
   ); 
 
-    // 'Session data entered is found on the preview: '
-    // 'not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session data entered is found on the preview: "
+    // "not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-    'Session data entered is found on the preview: '
-    'not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-    '(assuming an already selected path to the user session data folder)',
+    "Session data entered is found on the preview: "
+    "not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
+    "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
       // Setting mock values for SharedPreferences
       SharedPreferences.setMockInitialValues
       ({
         // Setting value for the first-run modal to be absent,
-        'wasFirstRunModalAcknowledged': true,
+        "wasFirstRunModalAcknowledged": true,
         // and to have the context analysis page, with the dashboard.
-        'wasCASessionDataSaved': true,
+        "wasCASessionDataSaved": true,
         // Temporary test dir as application folder path
-        'applicationFolderPath': testTmpDir!.path
+        "applicationFolderPath": testTmpDir!.path
       });
 
       if (Platform.isAndroid || Platform.isIOS)
@@ -982,24 +982,24 @@ Future<void> main() async {
     },
   ); 
 
-    // 'Session data entered is found on the preview: '
-    // 'not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session data entered is found on the preview: "
+    // "not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-    'Session data entered is found on the preview: '
-    'not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n'
-    '(assuming an already selected path to the user session data folder)',
+    "Session data entered is found on the preview: "
+    "not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
+    "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
       // Setting mock values for SharedPreferences
       SharedPreferences.setMockInitialValues
       ({
         // Setting value for the first-run modal to be absent,
-        'wasFirstRunModalAcknowledged': true,
+        "wasFirstRunModalAcknowledged": true,
         // and to have the context analysis page, with the dashboard.
-        'wasCASessionDataSaved': true,
+        "wasCASessionDataSaved": true,
         // Temporary test dir as application folder path
-        'applicationFolderPath': testTmpDir!.path
+        "applicationFolderPath": testTmpDir!.path
       });
 
       if (Platform.isAndroid || Platform.isIOS)
@@ -1072,21 +1072,21 @@ Future<void> main() async {
 
   });
 
-    group('Edition Tests: Mobile: \n', ()
+    group("Edition Tests: Mobile: \n", ()
     {
-      // 'Edition: Title \n'
+      // "Edition: Title \n"
       testWidgets(
-        'Edition: Title \n',
+        "Edition: Title \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -1120,7 +1120,7 @@ Future<void> main() async {
               // Editing the title
             var editedTitle = "${title}${editionSuffix}";
             
-            var editTfecFinder = find.byKey(const Key('titleDashboardEditField'));
+            var editTfecFinder = find.byKey(const Key("titleDashboardEditField"));
             await tester.enterText(editTfecFinder, editedTitle);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1132,19 +1132,19 @@ Future<void> main() async {
           }
         });
   
-      // 'Edition: Keywords \n'
+      // "Edition: Keywords \n"
       testWidgets(
-        'Edition: Keywords \n',
+        "Edition: Keywords \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -1184,7 +1184,7 @@ Future<void> main() async {
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
-            var editTfecFinder = find.byKey(const Key('kwsDashboardEditField'));
+            var editTfecFinder = find.byKey(const Key("kwsDashboardEditField"));
             await tester.enterText(editTfecFinder, editedKeywords);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1207,19 +1207,19 @@ Future<void> main() async {
           }
         });
   
-      // 'Context analysis data edition (from preview) \n'
+      // "Context analysis data edition (from preview) \n"
       testWidgets(
-        'Context analysis data edition (from preview) \n',
+        "Context analysis data edition (from preview) \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -1293,7 +1293,7 @@ Future<void> main() async {
             var checkboxesFinder = find.byType(Checkbox);
             var totalCheckboxes = checkboxesFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalCheckboxes: $totalCheckboxes');
+            if (testingDebug) pu.printd("Testing Debug: totalCheckboxes: $totalCheckboxes");
 
             for (var cbIndex = 0; cbIndex < totalCheckboxes; cbIndex++)
             {
@@ -1313,7 +1313,7 @@ Future<void> main() async {
 
             var totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)');
+            if (testingDebug) pu.printd("Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
@@ -1324,7 +1324,7 @@ Future<void> main() async {
             var textFieldsFinder = find.byType(TextField);
             var totalTextFields = textFieldsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalTextFields: $totalTextFields (expected: 16)');
+            if (testingDebug) pu.printd("Testing Debug: totalTextFields: $totalTextFields (expected: 16)");
 
             // null for keywords
             // Should have 16 values
@@ -1365,7 +1365,7 @@ Future<void> main() async {
 
             totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)');
+            if (testingDebug) pu.printd("Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
             var optionsToSelect = ["Yes","No","I don't know"];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
@@ -1406,7 +1406,7 @@ Future<void> main() async {
             textFieldsFinder = find.byType(TextField);
             totalTextFields = textFieldsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalTextFields: $totalTextFields (expected: 16)');
+            if (testingDebug) pu.printd("Testing Debug: totalTextFields: $totalTextFields (expected: 16)");
 
             // null for keywords and file name
             // Should have 16 values
@@ -1425,8 +1425,8 @@ Future<void> main() async {
                 && tfIndex != 15
               ) 
               {
-                if (testingDebug) pu.printd('Testing Debug: tfIndex: $tfIndex');
-                if (testingDebug) pu.printd('dataList[tfIndex]!: ${dataList[tfIndex]!}');
+                if (testingDebug) pu.printd("Testing Debug: tfIndex: $tfIndex");
+                if (testingDebug) pu.printd("dataList[tfIndex]!: ${dataList[tfIndex]!}");
 
                 var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
                 await tester.ensureVisible(currentTextFieldFinder);
@@ -1466,7 +1466,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 5));
 
             var textToFind = "a7$editionSuffix";
-            if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
+            if (testingDebug) pu.printd("Testing Debug: Scrolling toward textToFind: $textToFind for screen copy");
             var textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
@@ -1474,16 +1474,16 @@ Future<void> main() async {
               45, 
               scrollable: find.descendant
                         (
-                          of: find.byKey(Key('context-analysis-preview-scrollview')), 
+                          of: find.byKey(Key("context-analysis-preview-scrollview")), 
                           matching: find.byType(Scrollable)
                         ),
             );            
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 5));
-            if (testingDebug) pu.printd('Scrolled to $textToFind');
+            if (testingDebug) pu.printd("Scrolled to $textToFind");
 
             textToFind = "b1$editionSuffix";
-            if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
+            if (testingDebug) pu.printd("Testing Debug: Scrolling toward textToFind: $textToFind for screen copy");
             textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
@@ -1491,22 +1491,22 @@ Future<void> main() async {
               45, 
               scrollable: find.descendant
                         (
-                          of: find.byKey(Key('context-analysis-preview-scrollview')), 
+                          of: find.byKey(Key("context-analysis-preview-scrollview")), 
                           matching: find.byType(Scrollable)
                         ),
             );            
             await tester.pumpAndSettle();
             expect(textToFindFinder, findsOne);
-            if (testingDebug) pu.printd('Scrolled to $textToFind');
+            if (testingDebug) pu.printd("Scrolled to $textToFind");
 
             // await tester.pump(const Duration(seconds: 5));
 
-            if (testingDebug) pu.printd('Scrolling toward title for preview');
+            if (testingDebug) pu.printd("Scrolling toward title for preview");
 
             // Scrolling up
             var scrollableFinder = find.descendant
                         (
-                          of: find.byKey(Key('context-analysis-preview-scrollview')), 
+                          of: find.byKey(Key("context-analysis-preview-scrollview")), 
                           matching: find.byType(Scrollable)
                         ).first;
 
@@ -1518,7 +1518,7 @@ Future<void> main() async {
             );
             await tester.pumpAndSettle();
             
-            if (testingDebug) pu.printd('Testing Debug: Scrolled to title');
+            if (testingDebug) pu.printd("Testing Debug: Scrolled to title");
             // await tester.pump(const Duration(seconds: 3));
 
             // ── Verifying the edited data present ──────────────────            
@@ -1534,20 +1534,20 @@ Future<void> main() async {
 
         });
 
-      // 'Context analysis data edition (from dashboard) \n'
+      // "Context analysis data edition (from dashboard) \n"
 
       testWidgets(
-        'Context analysis data edition (from dashboard) \n',
+        "Context analysis data edition (from dashboard) \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -1613,7 +1613,7 @@ Future<void> main() async {
             var checkboxesFinder = find.byType(Checkbox);
             var totalCheckboxes = checkboxesFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalCheckboxes: $totalCheckboxes');
+            if (testingDebug) pu.printd("Testing Debug: totalCheckboxes: $totalCheckboxes");
 
             for (var cbIndex = 0; cbIndex < totalCheckboxes; cbIndex++)
             {
@@ -1633,7 +1633,7 @@ Future<void> main() async {
 
             var totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)');
+            if (testingDebug) pu.printd("Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
@@ -1644,7 +1644,7 @@ Future<void> main() async {
             var textFieldsFinder = find.byType(TextField);
             var totalTextFields = textFieldsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalTextFields: $totalTextFields (expected: 16)');
+            if (testingDebug) pu.printd("Testing Debug: totalTextFields: $totalTextFields (expected: 16)");
 
             // null for keywords
             // Should have 16 values
@@ -1685,7 +1685,7 @@ Future<void> main() async {
 
             totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)');
+            if (testingDebug) pu.printd("Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
             var optionsToSelect = ["Yes","No","I don't know"];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
@@ -1726,7 +1726,7 @@ Future<void> main() async {
             textFieldsFinder = find.byType(TextField);
             totalTextFields = textFieldsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd('Testing Debug: totalTextFields: $totalTextFields (expected: 16)');
+            if (testingDebug) pu.printd("Testing Debug: totalTextFields: $totalTextFields (expected: 16)");
 
             // null for keywords and file name
             // Should have 16 values
@@ -1745,8 +1745,8 @@ Future<void> main() async {
                 && tfIndex != 15
               ) 
               {
-                if (testingDebug) pu.printd('Testing Debug: tfIndex: $tfIndex');
-                if (testingDebug) pu.printd('dataList[tfIndex]!: ${dataList[tfIndex]!}');
+                if (testingDebug) pu.printd("Testing Debug: tfIndex: $tfIndex");
+                if (testingDebug) pu.printd("dataList[tfIndex]!: ${dataList[tfIndex]!}");
 
                 var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
                 await tester.ensureVisible(currentTextFieldFinder);
@@ -1786,7 +1786,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 5));
 
             var textToFind = "a7$editionSuffix";
-            if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
+            if (testingDebug) pu.printd("Testing Debug: Scrolling toward textToFind: $textToFind for screen copy");
             var textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
@@ -1794,16 +1794,16 @@ Future<void> main() async {
               45, 
               scrollable: find.descendant
                         (
-                          of: find.byKey(Key('context-analysis-preview-scrollview')), 
+                          of: find.byKey(Key("context-analysis-preview-scrollview")), 
                           matching: find.byType(Scrollable)
                         ),
             );            
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 5));
-            if (testingDebug) pu.printd('Scrolled to $textToFind');
+            if (testingDebug) pu.printd("Scrolled to $textToFind");
 
             textToFind = "b1$editionSuffix";
-            if (testingDebug) pu.printd('Testing Debug: Scrolling toward textToFind: $textToFind for screen copy');
+            if (testingDebug) pu.printd("Testing Debug: Scrolling toward textToFind: $textToFind for screen copy");
             textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
@@ -1811,22 +1811,22 @@ Future<void> main() async {
               45, 
               scrollable: find.descendant
                         (
-                          of: find.byKey(Key('context-analysis-preview-scrollview')), 
+                          of: find.byKey(Key("context-analysis-preview-scrollview")), 
                           matching: find.byType(Scrollable)
                         ),
             );            
             await tester.pumpAndSettle();
             expect(textToFindFinder, findsOne);
-            if (testingDebug) pu.printd('Scrolled to $textToFind');
+            if (testingDebug) pu.printd("Scrolled to $textToFind");
 
             // await tester.pump(const Duration(seconds: 5));
 
-            if (testingDebug) pu.printd('Scrolling toward title for preview');
+            if (testingDebug) pu.printd("Scrolling toward title for preview");
 
             // Scrolling up
             var scrollableFinder = find.descendant
                         (
-                          of: find.byKey(Key('context-analysis-preview-scrollview')), 
+                          of: find.byKey(Key("context-analysis-preview-scrollview")), 
                           matching: find.byType(Scrollable)
                         ).first;
 
@@ -1838,7 +1838,7 @@ Future<void> main() async {
             );
             await tester.pumpAndSettle();
             
-            if (testingDebug) pu.printd('Testing Debug: Scrolled to title');
+            if (testingDebug) pu.printd("Testing Debug: Scrolled to title");
             // await tester.pump(const Duration(seconds: 3));
 
             // ── Verifying the edited data present ──────────────────            
@@ -1856,21 +1856,21 @@ Future<void> main() async {
 
       }); 
 
-    group('Visual Tests: Mobile: \n', ()
+    group("Visual Tests: Mobile: \n", ()
     {
-      // 'Sharing \n'
+      // "Sharing \n"
       testWidgets(
-        'Sharing \n',
+        "Sharing \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the context analysis page, with the dashboard.
-            'wasCASessionDataSaved': true,
+            "wasCASessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)

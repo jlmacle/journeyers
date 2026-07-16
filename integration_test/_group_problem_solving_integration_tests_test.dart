@@ -1,30 +1,30 @@
-import 'dart:io';
+import "dart:io";
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_test/flutter_test.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_test/flutter_test.dart";
 
-import 'package:integration_test/integration_test.dart';
-import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import "package:integration_test/integration_test.dart";
+import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/l10n/app_localizations.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart';
-import 'package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart';
-import 'package:journeyers/utils/generic/dev/test_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/utils/project_specific/dev/test_utils.dart';
-import 'package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
-import 'package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart' show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
-import 'package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart';
-import 'package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart';
-import 'package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/project_specific/dev/test_utils.dart";
+import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
-import 'externalized_code/externalized_testing_code.dart';
+import "externalized_code/externalized_testing_code.dart";
 
 // ─── Helper function ──────────────────────────────────────────────────────────────────
 
@@ -62,10 +62,10 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const String testGPSTitleRoot = 'Integration-test GPS session title';
-  const String testGPSTitle1 = '$testGPSTitleRoot (1)';
-  const String testGPSTitle2 = '$testGPSTitleRoot (2)';
-  const String testGPSTitle3 = '$testGPSTitleRoot (3)';
+  const String testGPSTitleRoot = "Integration-test GPS session title";
+  const String testGPSTitle1 = "$testGPSTitleRoot (1)";
+  const String testGPSTitle2 = "$testGPSTitleRoot (2)";
+  const String testGPSTitle3 = "$testGPSTitleRoot (3)";
   const List<String> titlesList = [testGPSTitle3, testGPSTitle1, testGPSTitle2];
   const List<String> titlesMaintenance = ["Maintenance topic 1", "Maintenance topic 2", "Maintenance topic 3"];
   const List<String> titlesCompanionship = ["Companionship and Logistics topic", "Companionship and Studies topic"];
@@ -78,12 +78,12 @@ Future<void> main() async {
   const List<String> titlesListSorted = [testGPSTitle1, testGPSTitle2, testGPSTitle3];
 
   // Keywords
-  const String kwCompanionship = 'Companionship';
-  const String kwWorkplace = 'Workplace';
-  const String kwStudies = 'Studies';  
-  const String kwCommunication = 'Communication';
-  const String kwMaintenance = 'Maintenance';
-  const String kwLogistics = 'Logistics';
+  const String kwCompanionship = "Companionship";
+  const String kwWorkplace = "Workplace";
+  const String kwStudies = "Studies";  
+  const String kwCommunication = "Communication";
+  const String kwMaintenance = "Maintenance";
+  const String kwLogistics = "Logistics";
   const List<String> kwsList2Keywords = [kwCompanionship, kwWorkplace];
   const List<List<String>> kwsListsKwsSorting = 
                     [
@@ -92,12 +92,12 @@ Future<void> main() async {
                     ];
 
   // Ideas
-  const ideasList2Ideas = ['idea1', 'idea2'];
+  const ideasList2Ideas = ["idea1", "idea2"];
 
   // File names
-  const String fileName1WithoutExtension = 'file1';
-  const String fileName2WithoutExtension = 'file2';
-  const String fileName3WithoutExtension = 'file3';
+  const String fileName1WithoutExtension = "file1";
+  const String fileName2WithoutExtension = "file2";
+  const String fileName3WithoutExtension = "file3";
   const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
 
   // Edition
@@ -108,7 +108,7 @@ Future<void> main() async {
   
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp('group_problem_solving_integration_test_');
+    testTmpDir = await Directory.systemTemp.createTemp("group_problem_solving_integration_test_");
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
     // To intercept the way the date is saved
     dateForTestingIndex = 0;
@@ -124,26 +124,26 @@ Future<void> main() async {
 
   // ── Test cases ─────────────────────────────────────────────────────────────
 
-  group('Group Problem-Solving Integration Tests: Mobile: \n', () 
+  group("Group Problem-Solving Integration Tests: Mobile: \n", () 
   {    
-    group('Entered metadata is displayed on the dashboard: Mobile: \n', ()
+    group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
     {
-    // 'Session metadata entered (title, keywords, date) is found: '
-    // '(assuming an already selected path to the user session data folder)',
+    // "Session metadata entered (title, keywords, date) is found: "
+    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
-      'Session metadata entered (title, keywords, date) is found: '
-      '(assuming an already selected path to the user session data folder)',
+      "Session metadata entered (title, keywords, date) is found: "
+      "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
         ({
           // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
+          "wasFirstRunModalAcknowledged": true,
           // and to have the group problem-solving page, with the dashboard.
-          'wasGPSSessionDataSaved': true,
+          "wasGPSSessionDataSaved": true,
           // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
         });
 
         if (Platform.isAndroid || Platform.isIOS)
@@ -185,24 +185,24 @@ Future<void> main() async {
     });
 
 
-    group('Sorting and filtering Tests: Mobile: \n', ()
+    group("Sorting and filtering Tests: Mobile: \n", ()
     {
-      // 'Sorting by title \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Sorting by title \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Sorting by title \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Sorting by title \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -243,7 +243,7 @@ Future<void> main() async {
             var titlesFinder = await dashboardGetAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+            if (testingDebug) pu.printd("Testing Debug: totalTitles: $totalTitles");
 
             // Verifying the alphabetical order
             for (var index = 0; index < totalTitles; index++)
@@ -268,22 +268,22 @@ Future<void> main() async {
         }
       );
       
-      // 'Sorting by date \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Sorting by date \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Sorting by date \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Sorting by date \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -326,7 +326,7 @@ Future<void> main() async {
               (widget) 
               {
                 if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                  return (widget.key as ValueKey<String>).value.contains("session-date-");
                 }
                 return false;
               }
@@ -350,7 +350,7 @@ Future<void> main() async {
               (widget) 
               {
                 if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains('session-date-');
+                  return (widget.key as ValueKey<String>).value.contains("session-date-");
                 }
                 return false;
               }
@@ -364,22 +364,22 @@ Future<void> main() async {
           }
         });
     
-      // 'Filtering by keywords \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Filtering by keywords \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-          'Filtering by keywords \n'
-          '(assuming an already selected path to the user session data folder)',
+          "Filtering by keywords \n"
+          "(assuming an already selected path to the user session data folder)",
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
               // Temporary test dir as application folder path
-              'applicationFolderPath': testTmpDir!.path
+              "applicationFolderPath": testTmpDir!.path
             });
 
             if (Platform.isAndroid || Platform.isIOS)
@@ -404,7 +404,7 @@ Future<void> main() async {
                 titlesList: titlesListKwsSorting,
                 kwsLists: kwsListsKwsSorting,
                 ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
-                fileNamesWithoutExtensionList: List.generate(6, (i)=> 'file${i+1}')
+                fileNamesWithoutExtensionList: List.generate(6, (i)=> "file${i+1}")
               );
               // await tester.pump(const Duration(seconds: 4));
             
@@ -420,7 +420,7 @@ Future<void> main() async {
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwMaintenance: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwMaintenance: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -439,7 +439,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -459,7 +459,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwWorkplace: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -472,24 +472,24 @@ Future<void> main() async {
     
     });
   
-    group('Deletion Tests: Mobile: \n', ()
+    group("Deletion Tests: Mobile: \n", ()
     {
-      // 'Deletion: Single deletion with icon \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Deletion: Single deletion with icon \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Deletion: Single deletion with icon \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Deletion: Single deletion with icon \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async {
 
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -558,22 +558,22 @@ Future<void> main() async {
         }      
       );
 
-      // 'Deletion: Bulk deletion \n'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Deletion: Bulk deletion \n"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Deletion: Bulk deletion \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Deletion: Bulk deletion \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async {
 
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -632,7 +632,7 @@ Future<void> main() async {
             // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────
             // Searching the widget
-            var bulkDeletionFinder = find.textContaining('Delete');
+            var bulkDeletionFinder = find.textContaining("Delete");
             expect(bulkDeletionFinder, findsOne);
             await tester.ensureVisible(bulkDeletionFinder);
             await tester.tap(bulkDeletionFinder);
@@ -661,22 +661,22 @@ Future<void> main() async {
       );      
     });
   
-    group('Preview Tests: Mobile: \n', () 
+    group("Preview Tests: Mobile: \n", () 
     {
-      // 'Session data entered is found on the preview'
-      // '(assuming an already selected path to the user session data folder)',
+      // "Session data entered is found on the preview"
+      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
-        'Session data entered is found on the preview \n'
-        '(assuming an already selected path to the user session data folder)',
+        "Session data entered is found on the preview \n"
+        "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async {
 
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // To have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -719,21 +719,21 @@ Future<void> main() async {
       );
     });
 
-    group('Edition Tests: Preview: Mobile: \n', ()
+    group("Edition Tests: Preview: Mobile: \n", ()
     {
-      // 'Group problem-solving data edition (from preview)\n'
+      // "Group problem-solving data edition (from preview)\n"
       testWidgets(
-        'Group problem-solving data edition (from preview)\n',
+        "Group problem-solving data edition (from preview)\n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -834,52 +834,52 @@ Future<void> main() async {
 
             var editableDeletableTextListItemFinder = find.byType(EditableDeletableTextListItem);
             var totalEditableDeletableTextListItemFinder = editableDeletableTextListItemFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder');
+            if (testingDebug) pu.printd("Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder");
 
               // Searching the editable/deletable field for idea1
-            var idea1EditableDeletableFinder = find.byKey(const Key('editable-deletable-list-tile-0'));   // todo: to clean           
+            var idea1EditableDeletableFinder = find.byKey(const Key("editable-deletable-list-tile-0"));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 
             // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
-            var tfIdea1Finder = find.byKey(const Key('editable-deletable-tf-0'));
+            var tfIdea1Finder = find.byKey(const Key("editable-deletable-tf-0"));
             await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 2));  
-            if (testingDebug) pu.printd('Testing Debug: idea1 edited');
+            if (testingDebug) pu.printd("Testing Debug: idea1 edited");
 
             // ── Editing idea2 : deletion ─────────────────────────
             // ─────────────────────────────────────────────────────
               // Searching idea2
               // Searching the editable/deletable checkbox for idea2
-            var idea2EditableDeletableFinder = find.byKey(const Key('editable-deletable-checkbox-1'));   // todo: to clean           
+            var idea2EditableDeletableFinder = find.byKey(const Key("editable-deletable-checkbox-1"));   // todo: to clean           
             await tester.ensureVisible(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
             await tester.tap(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
               // Deleting 
-            var deleteFinder = find.textContaining('Delete');
+            var deleteFinder = find.textContaining("Delete");
             await tester.tap(deleteFinder);
             await tester.pumpAndSettle();
 
             // await tester.pump(const Duration(seconds: 10));
             
-            if (testingDebug) pu.printd('Testing Debug: idea2 deleted');
+            if (testingDebug) pu.printd("Testing Debug: idea2 deleted");
               // Waiting on Snackbar removal
             await tester.pump(const Duration(seconds: 5));
 
             // ── Adding idea3: addition  ─────────────────────────
             // ────────────────────────────────────────────────────
-            var ideaOverlayTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
+            var ideaOverlayTextFieldFinder = find.byKey(const Key("ideaOverlayTextField"));
             await tester.enterText(ideaOverlayTextFieldFinder, idea3Added);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 2));             
-            if (testingDebug) pu.printd('Testing Debug: idea3 added');  
+            if (testingDebug) pu.printd("Testing Debug: idea3 added");  
 
             // ── Closing the ideas list  ───────────────────────
             // ───────────────────────────────────────────────────
@@ -951,19 +951,19 @@ Future<void> main() async {
 
         });
     
-      // 'Group problem-solving data edition (from dashboard)\n'
+      // "Group problem-solving data edition (from dashboard)\n"
       testWidgets(
-        'Group problem-solving data edition (from dashboard)\n',
+        "Group problem-solving data edition (from dashboard)\n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
             // Temporary test dir as application folder path
-            'applicationFolderPath': testTmpDir!.path
+            "applicationFolderPath": testTmpDir!.path
           });
 
           if (Platform.isAndroid || Platform.isIOS)
@@ -1056,52 +1056,52 @@ Future<void> main() async {
 
             var editableDeletableTextListItemFinder = find.byType(EditableDeletableTextListItem);
             var totalEditableDeletableTextListItemFinder = editableDeletableTextListItemFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder');
+            if (testingDebug) pu.printd("Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder");
 
               // Searching the editable/deletable field for idea1
-            var idea1EditableDeletableFinder = find.byKey(const Key('editable-deletable-list-tile-0'));   // todo: to clean           
+            var idea1EditableDeletableFinder = find.byKey(const Key("editable-deletable-list-tile-0"));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
             await tester.pumpAndSettle();
 
             // ── Editing idea1: modification  ─────────────────────
             // ────────────────────────────────────────────────────
-            var tfIdea1Finder = find.byKey(const Key('editable-deletable-tf-0'));
+            var tfIdea1Finder = find.byKey(const Key("editable-deletable-tf-0"));
             await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 2));  
-            if (testingDebug) pu.printd('Testing Debug: idea1 edited');
+            if (testingDebug) pu.printd("Testing Debug: idea1 edited");
 
             // ── Editing idea2 : deletion ─────────────────────────
             // ─────────────────────────────────────────────────────
               // Searching idea2
               // Searching the editable/deletable checkbox for idea2
-            var idea2EditableDeletableFinder = find.byKey(const Key('editable-deletable-checkbox-1'));   // todo: to clean           
+            var idea2EditableDeletableFinder = find.byKey(const Key("editable-deletable-checkbox-1"));   // todo: to clean           
             await tester.ensureVisible(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
             await tester.tap(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
               // Deleting 
-            var deleteFinder = find.textContaining('Delete');
+            var deleteFinder = find.textContaining("Delete");
             await tester.tap(deleteFinder);
             await tester.pumpAndSettle();
 
             // await tester.pump(const Duration(seconds: 10));
             
-            if (testingDebug) pu.printd('Testing Debug: idea2 deleted');
+            if (testingDebug) pu.printd("Testing Debug: idea2 deleted");
               // Waiting on Snackbar removal
             await tester.pump(const Duration(seconds: 5));
 
             // ── Adding idea3: addition  ─────────────────────────
             // ────────────────────────────────────────────────────
-            var ideaOverlayTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
+            var ideaOverlayTextFieldFinder = find.byKey(const Key("ideaOverlayTextField"));
             await tester.enterText(ideaOverlayTextFieldFinder, idea3Added);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
             await tester.pump(const Duration(seconds: 2));             
-            if (testingDebug) pu.printd('Testing Debug: idea3 added');  
+            if (testingDebug) pu.printd("Testing Debug: idea3 added");  
 
             // ── Closing the ideas list  ───────────────────────
             // ───────────────────────────────────────────────────
@@ -1175,7 +1175,7 @@ Future<void> main() async {
     
     });
 
-  group('Participants-related Tests: \n', () 
+  group("Participants-related Tests: \n", () 
   {
     var name1 = "Bob";
     var name2 = "Alice";
@@ -1193,26 +1193,26 @@ Future<void> main() async {
     var titlesCompanionship = [listLabel1];
     var titlesWorkplace = [listLabel2, listLabel3];
 
-    group('New participants list Tests: \n', () 
+    group("New participants list Tests: \n", () 
     {
-      group('New participants list saving: \n', () 
+      group("New participants list saving: \n", () 
       {
 
-        group('New participants list labels/content: \n', () 
+        group("New participants list labels/content: \n", () 
         {
-          // 'Lists labels must be unique
-          testWidgets('Lists labels must be unique', 
+          // "Lists labels must be unique
+          testWidgets("Lists labels must be unique", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
               // Temporary test dir as application folder path
-              'applicationFolderPath': testTmpDir!.path
+              "applicationFolderPath": testTmpDir!.path
             });
 
             // Pumping the GPSPage
@@ -1241,7 +1241,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1266,7 +1266,7 @@ Future<void> main() async {
               expect(find.text(name), findsOne);    
             }      
 
-            // Searching the 'Save' icon
+            // Searching the "Save" icon
             var saveListIconFinder = find.byIcon(Icons.save_outlined);
             expect(saveListIconFinder, findsOne);
 
@@ -1275,7 +1275,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Searching the text field to add the same list name
-            var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
+            var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
             expect(listNameSavingTextFieldFinder, findsOne);
 
             // Adding the same list name
@@ -1293,17 +1293,17 @@ Future<void> main() async {
             expect(find.text(checkListTitle), findsNothing);
           });            
         
-          // 'Lists labels must be non empty'
-          testWidgets('Lists labels must be non empty', 
+          // "Lists labels must be non empty"
+          testWidgets("Lists labels must be non empty", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1321,7 +1321,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1349,7 +1349,7 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 5));
 
             
-            // Searching the 'Save' icon
+            // Searching the "Save" icon
             var saveListIconFinder = find.byIcon(Icons.save_outlined);
             expect(saveListIconFinder, findsOne);
 
@@ -1358,7 +1358,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Searching the text field to add an empty list name
-            var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
+            var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
             expect(listNameSavingTextFieldFinder, findsOne);
 
             // Adding an empty list name
@@ -1376,17 +1376,17 @@ Future<void> main() async {
             expect(find.text(checkListTitle), findsNothing);    
           });            
         
-          // 'List content must be unique (without reversed order when adding 2nd list)'
-          testWidgets('List content must be unique (without reversed order when adding 2nd list)', 
+          // "List content must be unique (without reversed order when adding 2nd list)"
+          testWidgets("List content must be unique (without reversed order when adding 2nd list)", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1415,7 +1415,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1442,22 +1442,22 @@ Future<void> main() async {
 
             // await tester.pump(const Duration(seconds: 5));
 
-            // Verifying the 'Save' icon absent
+            // Verifying the "Save" icon absent
             var saveListIconFinder = find.byIcon(Icons.save_outlined);
             expect(saveListIconFinder, findsNothing);        
           });            
         
-          // 'List content must be unique (with reversed order when adding 2nd list)'
-          testWidgets('List content must be unique (with reversed order when adding 2nd list)', 
+          // "List content must be unique (with reversed order when adding 2nd list)"
+          testWidgets("List content must be unique (with reversed order when adding 2nd list)", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1486,7 +1486,7 @@ Future<void> main() async {
             
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
             expect(newParticipantTextFieldFinder, findsOne);
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
@@ -1512,22 +1512,22 @@ Future<void> main() async {
 
             // await tester.pump(const Duration(seconds: 5));
 
-            // Verifying the 'Save' icon absent
+            // Verifying the "Save" icon absent
             var saveListIconFinder = find.byIcon(Icons.save_outlined);
             expect(saveListIconFinder, findsNothing);        
           });            
         
-          // 'Names are displayed in the order added (names in alphabetical order)'
-          testWidgets('Names are displayed in the order added (names in alphabetical order)', 
+          // "Names are displayed in the order added (names in alphabetical order)"
+          testWidgets("Names are displayed in the order added (names in alphabetical order)", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1540,7 +1540,7 @@ Future<void> main() async {
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
-            var names = ['a', 'b', 'c'];
+            var names = ["a", "b", "c"];
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
               {listLabel1:{"names":names,"keywords":[]}},            
@@ -1552,7 +1552,7 @@ Future<void> main() async {
             var listItemsFinder = await gpsGetNewListTextItems(tester);
 
             var totalItems = listItemsFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalItems: $totalItems');
+            if (testingDebug) pu.printd("Testing Debug: totalItems: $totalItems");
 
             for (var itemIndex = 0; itemIndex < totalItems; itemIndex++)
             {
@@ -1561,17 +1561,17 @@ Future<void> main() async {
                 
           });            
         
-          // 'Names are displayed in the order added (names not in alphabetical order)'
-          testWidgets('Names are displayed in the order added (names not in alphabetical order)', 
+          // "Names are displayed in the order added (names not in alphabetical order)"
+          testWidgets("Names are displayed in the order added (names not in alphabetical order)", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1584,7 +1584,7 @@ Future<void> main() async {
 
             // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────────────────────
-            var names = ['c', 'b', 'a'];
+            var names = ["c", "b", "a"];
             List< Map<String,Map<String, dynamic>> > listDataMapsList =
             [
               {listLabel1:{"names":names,"keywords":[]}},            
@@ -1596,7 +1596,7 @@ Future<void> main() async {
             var listItemsFinder = await gpsGetNewListTextItems(tester);
 
             var totalItems = listItemsFinder.evaluate().length;
-            if (testingDebug) pu.printd('Testing Debug: totalItems: $totalItems');
+            if (testingDebug) pu.printd("Testing Debug: totalItems: $totalItems");
 
             for (var itemIndex = 0; itemIndex < totalItems; itemIndex++)
             {
@@ -1606,17 +1606,17 @@ Future<void> main() async {
           });            
         
           // Todo: To find a better integration tests/widget tests organization
-          // 'Keywords can be added/removed'
-          testWidgets('Keywords can be added/removed', 
+          // "Keywords can be added/removed"
+          testWidgets("Keywords can be added/removed", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1640,7 +1640,7 @@ Future<void> main() async {
               // Adding two keywords
             var keywordsListKw1Kw2 = ["kw1", "kw2"];
                 // Searching the text field
-            var keywordTfecFinder = find.byKey(const Key('kwsFieldNewList'));
+            var keywordTfecFinder = find.byKey(const Key("kwsFieldNewList"));
             for (var kw in keywordsListKw1Kw2)
             {
               await tester.enterText(keywordTfecFinder, kw);
@@ -1679,18 +1679,18 @@ Future<void> main() async {
 
             // ── ADDING A PARTICIPANT  ──────────────────
             // ───────────────────────────────────────────
-            var participantNameFieldFinder = find.byKey(const Key('participantNameField'));
+            var participantNameFieldFinder = find.byKey(const Key("participantNameField"));
             await tester.enterText(participantNameFieldFinder, "Bob");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
             // ── SAVING THE LIST  ──────────────────
             // ──────────────────────────────────────
-            var saveListFinder = find.byTooltip('Save list');
+            var saveListFinder = find.byTooltip("Save list");
             await tester.tap(saveListFinder);
             await tester.pumpAndSettle();
               // Entering the list name
-            var saveListFieldFinder = find.byKey(const Key('saveListField'));
+            var saveListFieldFinder = find.byKey(const Key("saveListField"));
             await tester.enterText(saveListFieldFinder, "list name");
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1712,7 +1712,7 @@ Future<void> main() async {
         
         }); 
       
-        group('New participants list saving: \n', () 
+        group("New participants list saving: \n", () 
         {
           // "1. Participants can be added, keywords added, the data saved in a list, 
           // and the participants' names are loaded in the GPS process page"
@@ -1724,9 +1724,9 @@ Future<void> main() async {
                 SharedPreferences.setMockInitialValues
                 ({
                   // Setting value for the first-run modal to be absent,
-                  'wasFirstRunModalAcknowledged': true,
+                  "wasFirstRunModalAcknowledged": true,
                   // and to have the group problem-solving page, with the dashboard.
-                  'wasGPSSessionDataSaved': true,
+                  "wasGPSSessionDataSaved": true,
                 });
 
                 // Pumping the GPSPage
@@ -1746,7 +1746,7 @@ Future<void> main() async {
                 expect(find.text(name1), findsOne);    
                 expect(find.text(name2), findsOne);  
 
-                // Searching the 'Save' icon
+                // Searching the "Save" icon
                 var saveListIconFinder = find.byIcon(Icons.save_outlined);
                 expect(saveListIconFinder, findsOne);
 
@@ -1755,7 +1755,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Searching the text field to add the list name
-                var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
+                var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
                 expect(listNameSavingTextFieldFinder, findsOne);
 
                 // Adding a list name
@@ -1784,9 +1784,9 @@ Future<void> main() async {
                 SharedPreferences.setMockInitialValues
                 ({
                   // Setting value for the first-run modal to be absent,
-                  'wasFirstRunModalAcknowledged': true,
+                  "wasFirstRunModalAcknowledged": true,
                   // and to have the group problem-solving page, with the dashboard.
-                  'wasGPSSessionDataSaved': true,
+                  "wasGPSSessionDataSaved": true,
                 });
 
                 // Pumping the GPSPage
@@ -1809,7 +1809,7 @@ Future<void> main() async {
                   expect(find.text(name), findsOne);  
                 }                  
 
-                // Searching the 'Save' icon
+                // Searching the "Save" icon
                 var saveListIconFinder = find.byIcon(Icons.save_outlined);
                 expect(saveListIconFinder, findsOne);
 
@@ -1818,7 +1818,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Searching the text field to add the list name
-                var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
+                var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
                 expect(listNameSavingTextFieldFinder, findsOne);
 
                 // Adding a list name
@@ -1849,11 +1849,11 @@ Future<void> main() async {
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
                 // Temporary test dir as application folder path
-                'applicationFolderPath': testTmpDir!.path
+                "applicationFolderPath": testTmpDir!.path
               });
 
               // Pumping the GPSPage
@@ -1877,19 +1877,19 @@ Future<void> main() async {
         });         
       });
 
-      group('New participants list editing: \n', () 
+      group("New participants list editing: \n", () 
       {
-        // 'Participants names can be edited (while building a new list)'
-        testWidgets('Participants names can be edited (while building a new list)', 
+        // "Participants names can be edited (while building a new list)"
+        testWidgets("Participants names can be edited (while building a new list)", 
         (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1907,7 +1907,7 @@ Future<void> main() async {
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(newParticipantTextFieldFinder);
@@ -1924,14 +1924,14 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Editing the name
-            const tfKeyLabel = 'editable-deletable-tf-0';
+            const tfKeyLabel = "editable-deletable-tf-0";
             var editionTfFinder = find.byKey(const ValueKey(tfKeyLabel));
             await tester.ensureVisible(editionTfFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(editionTfFinder);
             await tester.pumpAndSettle();
 
-            var editedName = '$name1-edited';
+            var editedName = "$name1-edited";
             await tester.enterText(editionTfFinder, editedName);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
@@ -1944,17 +1944,17 @@ Future<void> main() async {
 
           });
         
-        // 'Participants names can be deleted (while building a new list)'
-        testWidgets('Participants names can be deleted (while building a new list)', 
+        // "Participants names can be deleted (while building a new list)"
+        testWidgets("Participants names can be deleted (while building a new list)", 
         (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
             SharedPreferences.setMockInitialValues
             ({
               // Setting value for the first-run modal to be absent,
-              'wasFirstRunModalAcknowledged': true,
+              "wasFirstRunModalAcknowledged": true,
               // and to have the group problem-solving page, with the dashboard.
-              'wasGPSSessionDataSaved': true,
+              "wasGPSSessionDataSaved": true,
             });
 
             // Pumping the GPSPage
@@ -1972,7 +1972,7 @@ Future<void> main() async {
 
             // Searching for the new participant text field
             // Searching by placeholder text is not robust enough
-            var newParticipantTextFieldFinder = find.byKey(const Key('participantNameField'));
+            var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
             await tester.ensureVisible(newParticipantTextFieldFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(newParticipantTextFieldFinder);
@@ -1984,7 +1984,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Checking the checkbox
-            const checkboxKeyLabel = 'editable-deletable-checkbox-0';
+            const checkboxKeyLabel = "editable-deletable-checkbox-0";
             var deletionCheckboxFinder = find.byKey(const ValueKey(checkboxKeyLabel));
             await tester.ensureVisible(deletionCheckboxFinder); 
             await tester.pumpAndSettle(); 
@@ -1992,7 +1992,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Tapping the deletion label
-            var bulkDeletionFinder = find.textContaining('Delete');
+            var bulkDeletionFinder = find.textContaining("Delete");
             await tester.tap(bulkDeletionFinder);
             await tester.pumpAndSettle();
             
@@ -2005,21 +2005,21 @@ Future<void> main() async {
 
     });  
 
-    group('Participants loading/dashboard Tests: \n', () 
+    group("Participants loading/dashboard Tests: \n", () 
     {
-      group('Participants loading: \n', () 
+      group("Participants loading: \n", () 
       {        
-        // 'Participants can be loaded from an existing list'
-        testWidgets('Participants can be loaded from an existing list', 
+        // "Participants can be loaded from an existing list"
+        testWidgets("Participants can be loaded from an existing list", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -2096,25 +2096,25 @@ Future<void> main() async {
         
       });
 
-      group('Participants dashboard Tests: \n', () 
+      group("Participants dashboard Tests: \n", () 
       {    
 
-        group('Entered list data is displayed on the list dashboard: Mobile: \n', ()
+        group("Entered list data is displayed on the list dashboard: Mobile: \n", ()
         {
-          // 'List data entered (participants, list name, keywords) is found: '
-          // '(assuming an already selected path to the user session data folder)',
+          // "List data entered (participants, list name, keywords) is found: "
+          // "(assuming an already selected path to the user session data folder)",
           testWidgets(
-            'List data entered (participants, list name, keywords) is found: '
-            '(assuming an already selected path to the user session data folder)',
+            "List data entered (participants, list name, keywords) is found: "
+            "(assuming an already selected path to the user session data folder)",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2134,7 +2134,7 @@ Future<void> main() async {
               expect(find.text(name1), findsOne);    
               expect(find.text(name2), findsOne);  
 
-              // Searching the 'Save' icon
+              // Searching the "Save" icon
               var saveListIconFinder = find.byIcon(Icons.save_outlined);
               expect(saveListIconFinder, findsOne);
 
@@ -2143,7 +2143,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to add the list name
-              var listNameSavingTextFieldFinder = find.byKey(const Key('saveListField'));
+              var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
               expect(listNameSavingTextFieldFinder, findsOne);
 
               // Adding a list name
@@ -2185,20 +2185,20 @@ Future<void> main() async {
           );
         });   
 
-        group('Sorting and Filtering Tests: \n', ()
+        group("Sorting and Filtering Tests: \n", ()
         {
-          // 'Sorting by list label \n'
+          // "Sorting by list label \n"
           testWidgets(
-            'Sorting by list label \n',
+            "Sorting by list label \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2234,7 +2234,7 @@ Future<void> main() async {
               // Searching the list labels          
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalTitles: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles: $totalTitles");
 
               // Verifying the alphabetical order
               for (var index = 0; index < totalTitles; index++)
@@ -2258,18 +2258,18 @@ Future<void> main() async {
             }
           );        
         
-          // 'Filtering by keywords \n'
+          // "Filtering by keywords \n"
           testWidgets(
-            'Filtering by keywords \n',
+            "Filtering by keywords \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2304,7 +2304,7 @@ Future<void> main() async {
               // Verifying the titles present
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwCompanionship: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -2322,7 +2322,7 @@ Future<void> main() async {
               // Verifying the titles present
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalTitles for $kwWorkplace: $totalTitles');
+              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwWorkplace: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -2335,20 +2335,20 @@ Future<void> main() async {
         
         });
     
-        group('Deletion Tests: \n', ()
+        group("Deletion Tests: \n", ()
         {
-          // 'Deletion: Single deletion with icon \n'
+          // "Deletion: Single deletion with icon \n"
           testWidgets(
-            'Deletion: Single deletion with icon \n',
+            "Deletion: Single deletion with icon \n",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2386,18 +2386,18 @@ Future<void> main() async {
             }      
           );         
         
-          // 'Deletion: Bulk deletion \n'
+          // "Deletion: Bulk deletion \n"
           testWidgets(
-            'Deletion: Bulk deletion \n',
+            "Deletion: Bulk deletion \n",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2445,7 +2445,7 @@ Future<void> main() async {
               // ── BULK DELETION ────────────────────────────────────────────────────────────
               // ─────────────────────────────────────────────────────────────────────────────            
               // Searching the widget
-              var bulkDeletionFinder = find.textContaining('Delete');
+              var bulkDeletionFinder = find.textContaining("Delete");
               expect(bulkDeletionFinder, findsOne);
               await tester.ensureVisible(bulkDeletionFinder);
               await tester.tap(bulkDeletionFinder);
@@ -2464,20 +2464,20 @@ Future<void> main() async {
           );
         });    
       
-        group('Edition Tests: \n', ()
+        group("Edition Tests: \n", ()
         {
-          // 'List label edition: Non empty label \n'
+          // "List label edition: Non empty label \n"
           testWidgets(
-            'List label edition: Non empty label \n',
+            "List label edition: Non empty label \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2505,7 +2505,7 @@ Future<void> main() async {
               // Searching for the label        
               var labelsFinder = await dashboardGetAllSessionsTitles(tester);
               var totalLabels = labelsFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalLabels: $totalLabels');
+              if (testingDebug) pu.printd("Testing Debug: totalLabels: $totalLabels");
 
               // Verifying the label present
               expect((tester.widget<Text>(labelsFinder.first).data), listLabel1);
@@ -2515,7 +2515,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var newLabelTextFieldFinder = find.byKey(const Key('listNameEditField'));
+              var newLabelTextFieldFinder = find.byKey(const Key("listNameEditField"));
               expect(newLabelTextFieldFinder, findsOne);
               await tester.ensureVisible(newLabelTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2532,18 +2532,18 @@ Future<void> main() async {
 
             });
 
-          // 'List label edition: Empty label \n'
+          // "List label edition: Empty label \n"
           testWidgets(
-            'List label edition: Empty label \n',
+            "List label edition: Empty label \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2576,7 +2576,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var listEditTextFieldFinder = find.byKey(const Key('listNameEditField'));
+              var listEditTextFieldFinder = find.byKey(const Key("listNameEditField"));
               expect(listEditTextFieldFinder, findsOne);
               await tester.ensureVisible(listEditTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2588,7 +2588,7 @@ Future<void> main() async {
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle(); 
 
-              // Clicking on the 'Save' button
+              // Clicking on the "Save" button
               // await tester.pump(const Duration(seconds: 5));  
               var saveButtonFinder = find.text(saveButtonLabel); 
               await tester.tap(saveButtonFinder);
@@ -2599,18 +2599,18 @@ Future<void> main() async {
 
             });
         
-          // 'Participants edition: Non empty participants list \n'
+          // "Participants edition: Non empty participants list \n"
           testWidgets(
-            'Participants edition: Non empty participants list \n',
+            "Participants edition: Non empty participants list \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2638,7 +2638,7 @@ Future<void> main() async {
               // Searching for the participants containers        
               var participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
+              if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
 
               // Searching for text within the container
               var aParticipant = 
@@ -2649,7 +2649,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the participants
-              var newParticipantsTextFieldFinder = find.byKey(const Key('participantsEditField'));
+              var newParticipantsTextFieldFinder = find.byKey(const Key("participantsEditField"));
               expect(newParticipantsTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2670,7 +2670,7 @@ Future<void> main() async {
                                       );
 
               var totalParticipants = participantsFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalParticipants: $totalParticipants');
+              if (testingDebug) pu.printd("Testing Debug: totalParticipants: $totalParticipants");
 
               List<String> editedAndSortedParticipantsList = ["Alicia","Benny","Bob"];
               for (var index = 0; index < totalParticipants; index++)
@@ -2680,18 +2680,18 @@ Future<void> main() async {
 
             });
         
-          // 'Participants edition: Empty participants list \n'
+          // "Participants edition: Empty participants list \n"
           testWidgets(
-            'Participants edition: Empty participants list \n',
+            "Participants edition: Empty participants list \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2719,7 +2719,7 @@ Future<void> main() async {
               // Searching for the participants containers        
               var participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
-              if (testingDebug) pu.printd('Testing Debug: totalNames: $totalNames');
+              if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
 
               // Searching for text within the container
               var aParticipant = 
@@ -2730,7 +2730,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the participants
-              var newParticipantsTextFieldFinder = find.byKey(const Key('participantsEditField'));
+              var newParticipantsTextFieldFinder = find.byKey(const Key("participantsEditField"));
               expect(newParticipantsTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2742,7 +2742,7 @@ Future<void> main() async {
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle(); 
 
-              // Clicking on the 'Save' button
+              // Clicking on the "Save" button
               // await tester.pump(const Duration(seconds: 5));  
               var saveButtonFinder = find.text(saveButtonLabel); 
               await tester.tap(saveButtonFinder);
@@ -2752,18 +2752,18 @@ Future<void> main() async {
               expect(find.text(emptyParticipantsListError), findsOne);
             });
         
-          // 'Keywords edition \n'
+          // "Keywords edition \n"
           testWidgets(
-            'Keywords edition \n',
+            "Keywords edition \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues
               ({
                 // Setting value for the first-run modal to be absent,
-                'wasFirstRunModalAcknowledged': true,
+                "wasFirstRunModalAcknowledged": true,
                 // and to have the group problem-solving page, with the dashboard.
-                'wasGPSSessionDataSaved': true,
+                "wasGPSSessionDataSaved": true,
               });
 
               // Pumping the GPSPage
@@ -2796,7 +2796,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the keywords
-              var newKeywordsTextFieldFinder = find.byKey(const Key('kwsGroupsDashboardEditField'));
+              var newKeywordsTextFieldFinder = find.byKey(const Key("kwsGroupsDashboardEditField"));
               expect(newKeywordsTextFieldFinder, findsOne);
               await tester.ensureVisible(newKeywordsTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2821,22 +2821,22 @@ Future<void> main() async {
 
 });
 
-  group('Ideas overlay-related Tests: \n', () 
+  group("Ideas overlay-related Tests: \n", () 
   {
 
-    group('Ideas overlay opening Tests: \n', () 
+    group("Ideas overlay opening Tests: \n", () 
     {
-      // 'The overlay can be opened clicking on the ideas area title'
-      testWidgets('The overlay can be opened clicking on the ideas area title', 
+      // "The overlay can be opened clicking on the ideas area title"
+      testWidgets("The overlay can be opened clicking on the ideas area title", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -2856,20 +2856,20 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Verifying the overlay present
-          expect(find.byKey(const Key('ideaOverlayTextField')), findsOne);
+          expect(find.byKey(const Key("ideaOverlayTextField")), findsOne);
         });
       
-      // 'The overlay can be opened clicking on the ideas'
-      testWidgets('The overlay can be opened clicking on the ideas', 
+      // "The overlay can be opened clicking on the ideas"
+      testWidgets("The overlay can be opened clicking on the ideas", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -2899,33 +2899,33 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Tapping on the idea
-          var ideaFinder = find.byKey(const Key('idea-0'));
+          var ideaFinder = find.byKey(const Key("idea-0"));
           await tester.tap(ideaFinder);
           await tester.pumpAndSettle();
 
           // Verifying the overlay present
-          expect(find.byKey(const Key('ideaOverlayTextField')), findsOne);
+          expect(find.byKey(const Key("ideaOverlayTextField")), findsOne);
         });
     });
 
-    group('Ideas overlay editing Tests: \n', () 
+    group("Ideas overlay editing Tests: \n", () 
     {
       var idea1 = "idea1";
       var idea2 = "idea2";
       var idea3 = "idea3";
       var idea4 = "idea4";
 
-      // 'Ideas can be added in the overlay'
-      testWidgets('Ideas can be added in the overlay', 
+      // "Ideas can be added in the overlay"
+      testWidgets("Ideas can be added in the overlay", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -2943,7 +2943,7 @@ Future<void> main() async {
           // ── ADDING AN IDEA  ──────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the text field used to add ideas
-          var newIdeaTextFieldFinder = find.byKey(const Key('ideaOverlayTextField'));
+          var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayTextField"));
           // Adding the idea
           await tester.ensureVisible(newIdeaTextFieldFinder);
           await tester.tap(newIdeaTextFieldFinder);
@@ -2957,7 +2957,7 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Searching the idea
-          var ideaFinder = find.byKey(const Key('idea-0'));
+          var ideaFinder = find.byKey(const Key("idea-0"));
           await tester.ensureVisible(ideaFinder);
           await tester.pumpAndSettle();   
           // Verifying the idea present
@@ -2966,17 +2966,17 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 5)); 
         });
     
-      // 'Ideas can be edited in the overlay'
-      testWidgets('Ideas can be edited in the overlay', 
+      // "Ideas can be edited in the overlay"
+      testWidgets("Ideas can be edited in the overlay", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -2998,7 +2998,7 @@ Future<void> main() async {
           // ── EDITING THE IDEA  ────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the idea
-          var ideaFinder = find.byKey(const Key('editable-deletable-text-item-0'));
+          var ideaFinder = find.byKey(const Key("editable-deletable-text-item-0"));
           await tester.ensureVisible(ideaFinder);
           await tester.pumpAndSettle();   
           // Verifying the idea present
@@ -3007,7 +3007,7 @@ Future<void> main() async {
           await tester.tap(ideaFinder);
           await tester.pumpAndSettle();
           // Edition
-          const tfKeyLabel = 'editable-deletable-tf-0';
+          const tfKeyLabel = "editable-deletable-tf-0";
           var editableDeletableTfFinder = find.byKey(const ValueKey(tfKeyLabel));
           await tester.ensureVisible(editableDeletableTfFinder);
           await tester.pumpAndSettle();
@@ -3037,17 +3037,17 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 2)); 
         });
     
-      // 'Ideas can be deleted in the overlay'
-      testWidgets('Ideas can be deleted in the overlay', 
+      // "Ideas can be deleted in the overlay"
+      testWidgets("Ideas can be deleted in the overlay", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -3069,7 +3069,7 @@ Future<void> main() async {
           // ── DELETING THE IDEA  ────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the checkbox
-          var checkboxFinder = find.byKey(const Key('editable-deletable-checkbox-0'));
+          var checkboxFinder = find.byKey(const Key("editable-deletable-checkbox-0"));
           await tester.ensureVisible(checkboxFinder);
           await tester.pumpAndSettle();   
           // Tapping on the checkbox for deletion
@@ -3077,7 +3077,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
           
           // Clicking on the Delete message
-          var deleteFinder = find.textContaining('Delete');
+          var deleteFinder = find.textContaining("Delete");
           await tester.ensureVisible(deleteFinder);
           await tester.tap(deleteFinder);
           await tester.pumpAndSettle();
@@ -3099,17 +3099,17 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 2)); 
         });
     
-      // 'Ideas overlay: 4 additions, 2 deletions'
-      testWidgets('Ideas overlay: 4 additions, 2 deletions', 
+      // "Ideas overlay: 4 additions, 2 deletions"
+      testWidgets("Ideas overlay: 4 additions, 2 deletions", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
           ({
             // Setting value for the first-run modal to be absent,
-            'wasFirstRunModalAcknowledged': true,
+            "wasFirstRunModalAcknowledged": true,
             // and to have the group problem-solving page, with the dashboard.
-            'wasGPSSessionDataSaved': true,
+            "wasGPSSessionDataSaved": true,
           });
 
           // Pumping the GPSPage
@@ -3134,14 +3134,14 @@ Future<void> main() async {
           // ── DELETING 2 IDEAs  ────────────────────────────────────
           // ─────────────────────────────────────────────────────────
           // Searching the checkboxes
-          var checkboxFinder = find.byKey(const Key('editable-deletable-checkbox-0'));
+          var checkboxFinder = find.byKey(const Key("editable-deletable-checkbox-0"));
           await tester.ensureVisible(checkboxFinder);
           await tester.pumpAndSettle();   
           // Tapping on the checkbox for deletion
           await tester.tap(checkboxFinder);
           await tester.pumpAndSettle();
 
-          checkboxFinder = find.byKey(const Key('editable-deletable-checkbox-2'));
+          checkboxFinder = find.byKey(const Key("editable-deletable-checkbox-2"));
           await tester.ensureVisible(checkboxFinder);
           await tester.pumpAndSettle();   
           // Tapping on the checkbox for deletion
@@ -3149,7 +3149,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
           
           // Clicking on the Delete message
-          var deleteFinder = find.textContaining('Delete');
+          var deleteFinder = find.textContaining("Delete");
           await tester.ensureVisible(deleteFinder);
           await tester.tap(deleteFinder);
           await tester.pumpAndSettle();
@@ -3181,21 +3181,21 @@ Future<void> main() async {
     
   });
 
-  group('Visual Tests: Mobile: \n', ()
+  group("Visual Tests: Mobile: \n", ()
   {
-    // 'Sharing \n'
+    // "Sharing \n"
     testWidgets(
-      'Sharing \n',
+      "Sharing \n",
       (WidgetTester tester) async {
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
         ({
           // Setting value for the first-run modal to be absent,
-          'wasFirstRunModalAcknowledged': true,
+          "wasFirstRunModalAcknowledged": true,
           // and to have the group problem-solving page, with the dashboard.
-          'wasGPSSessionDataSaved': true,
+          "wasGPSSessionDataSaved": true,
           // Temporary test dir as application folder path
-          'applicationFolderPath': testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path
         });
 
         if (Platform.isAndroid || Platform.isIOS)

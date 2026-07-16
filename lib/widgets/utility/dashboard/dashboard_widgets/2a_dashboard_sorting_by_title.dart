@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:journeyers/debug_constants.dart';
-import 'package:journeyers/utils/generic/dashboard/session_sorting_utils.dart';
-import 'package:journeyers/utils/generic/dev/utility_classes_import.dart';
-import 'package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart';
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
@@ -70,7 +70,7 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
       ),
       label: Text
       (
-        "$sortByTitle (${_isAscendingTitle ? 'Z-A' : 'A-Z'})",
+        "$sortByTitle (${_isAscendingTitle ? "Z-A" : "A-Z"})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
