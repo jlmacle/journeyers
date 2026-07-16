@@ -471,8 +471,8 @@ Future<void> deleteFile({required String filePath}) async
         await fu.deleteFile(filePath);
         await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);     
       }    
-  } catch (e) {
-    pu.printd("Delete Error: $e");
+  } catch (e, s) {
+    pu.printd("Delete Error: $e: $s");
   }  
 
 }
