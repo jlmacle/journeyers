@@ -275,7 +275,6 @@ class _SessionsListItemState extends State<SessionsListItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: Key("checkbox-${widget.sessionDataIndex}"),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
@@ -366,8 +365,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                   ],
                 ),
                 // To delete session metadata and file
-                IconButton(
-                  key: Key("session-delete-${widget.sessionDataIndex}"),
+                IconButton(                  
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
