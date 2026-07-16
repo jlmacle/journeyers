@@ -132,7 +132,6 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     return Center(
         child:        
           TextButton.icon(
-            key: const Key("bulk-delete-button"),
             onPressed: _selectedListsDelete,
             icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(
