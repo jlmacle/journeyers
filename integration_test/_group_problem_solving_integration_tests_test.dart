@@ -1984,8 +1984,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Checking the checkbox
-            const checkboxKeyLabel = "editable-deletable-checkbox-0";
-            var deletionCheckboxFinder = find.byKey(const ValueKey(checkboxKeyLabel));
+            var deletionCheckboxFinder = find.byKey(const ValueKey("editable-deletable-checkbox-0"));
             await tester.ensureVisible(deletionCheckboxFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(deletionCheckboxFinder);
