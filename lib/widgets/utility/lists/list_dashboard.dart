@@ -340,8 +340,6 @@ class ListDashboardState extends State<ListDashboard>
       _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
-            // Key used for automated testing, to scroll up the screen 
-            key: const Key("list-of-lists-scrollview"),
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)
