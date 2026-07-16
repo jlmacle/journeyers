@@ -366,8 +366,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                   ],
                 ),
                 // To delete session metadata and file
-                IconButton(
-                  key: Key("session-delete-${widget.sessionDataIndex}"),
+                IconButton(                  
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: deleteTooltipLabel,
