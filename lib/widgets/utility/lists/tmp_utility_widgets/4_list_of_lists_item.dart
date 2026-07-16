@@ -352,7 +352,6 @@ class _ListOfListsItemState extends State<ListOfListsItem>
 
                 // Right icon — pinned to row end
                 IconButton(
-                  key: Key("session-delete-${widget.listIndex}"),
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
                   tooltip: listsDeleteTooltipLabel,
