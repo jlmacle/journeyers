@@ -44,3 +44,7 @@ const overlayClosingTooltip = "Close overlay";
 const editIdentifierLabel = "Edit Value";
 const singleDeletionLabel = "Clear\nOne";
 const bulkDeletionLabel = "Clear\nAll";
+
+// NewTextListKeywordsDeclaration
+const closeGroupKeywordsDeclarationTooltipLabel = "Please click to close the keywords declaration page";
+

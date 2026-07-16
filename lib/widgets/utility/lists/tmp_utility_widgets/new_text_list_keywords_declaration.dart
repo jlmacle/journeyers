@@ -136,7 +136,7 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
-                tooltip: closeKeywordsDeclarationTooltipLabel,
+                tooltip: closeGroupKeywordsDeclarationTooltipLabel,
                 color: black,
                 onPressed: () => Navigator.of(context).pop(),
               ),
