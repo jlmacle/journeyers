@@ -2513,7 +2513,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var listNameEditFieldFinder = find.byKey(const Key("listGroupsDashboardNameEditField"));
+              var listNameEditFieldFinder = find.byKey(const Key("listLabelGroupsDashboardEditField"));
               expect(listNameEditFieldFinder, findsOne);
               await tester.ensureVisible(listNameEditFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2574,7 +2574,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var listNameEditFieldFinder = find.byKey(const Key("listGroupsDashboardNameEditField"));
+              var listNameEditFieldFinder = find.byKey(const Key("listLabelGroupsDashboardEditField"));
               expect(listNameEditFieldFinder, findsOne);
               await tester.ensureVisible(listNameEditFieldFinder); 
               await tester.pumpAndSettle(); 
