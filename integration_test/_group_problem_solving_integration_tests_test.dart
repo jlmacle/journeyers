@@ -1924,8 +1924,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Editing the name
-            const tfKeyLabel = "editable-deletable-tf-0";
-            var editionTfFinder = find.byKey(const ValueKey(tfKeyLabel));
+            var editionTfFinder = find.byKey(const ValueKey("editable-deletable-tf-0"));
             await tester.ensureVisible(editionTfFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(editionTfFinder);
@@ -1937,7 +1936,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Verifying the text field absent
-            expect(find.byKey(const ValueKey(tfKeyLabel)), findsNothing);
+            expect(find.byKey(const ValueKey("editable-deletable-tf-0")), findsNothing);
             
             // Verifying the edited name present
             expect(find.text(editedName), findsOne);
@@ -1984,8 +1983,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Checking the checkbox
-            const checkboxKeyLabel = "editable-deletable-checkbox-0";
-            var deletionCheckboxFinder = find.byKey(const ValueKey(checkboxKeyLabel));
+            var deletionCheckboxFinder = find.byKey(const ValueKey("editable-deletable-checkbox-0"));
             await tester.ensureVisible(deletionCheckboxFinder); 
             await tester.pumpAndSettle(); 
             await tester.tap(deletionCheckboxFinder);
