@@ -275,7 +275,6 @@ class _SessionsListItemState extends State<SessionsListItem>
               children: [
                 // Checkbox used for bulk deletion
                 Checkbox(
-                  key: Key("checkbox-${widget.sessionDataIndex}"),
                   value: widget.isChecked,
                   onChanged: widget.onCheckboxChangedCallbackFunction,
                 ),
