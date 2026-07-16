@@ -7,7 +7,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Lists}
 /// A widget used to declare keywords, or to retrieve keywords from previous context analyses.
-class NewTextListKeywordsDeclaration extends StatefulWidget 
+class NewGroupKeywordsDeclaration extends StatefulWidget 
 {
   /// The keywords associated to the session data.
   final Set<String> keywordsCurrent;
@@ -15,7 +15,7 @@ class NewTextListKeywordsDeclaration extends StatefulWidget
   /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> keywordsOnUpdateCallbackFunction;  
 
-  const NewTextListKeywordsDeclaration
+  const NewGroupKeywordsDeclaration
   ({
     super.key,
     required this.keywordsCurrent,
@@ -24,10 +24,10 @@ class NewTextListKeywordsDeclaration extends StatefulWidget
 
 
   @override
-  State<NewTextListKeywordsDeclaration> createState() => _NewTextListKeywordsDeclarationState();
+  State<NewGroupKeywordsDeclaration> createState() => _NewGroupKeywordsDeclarationState();
 }
 
-class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDeclaration> 
+class _NewGroupKeywordsDeclarationState extends State<NewGroupKeywordsDeclaration> 
 {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
@@ -58,15 +58,15 @@ class _NewTextListKeywordsDeclarationState extends State<NewTextListKeywordsDecl
     super.initState();
             
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("NewTextListKeywordsDeclaration");
+    if (widgetSequenceDebug) pu.printd("NewGroupKeywordsDeclaration");
 
     _keywords = Set.from(widget.keywordsCurrent); // Syncs at start
   }
 
   @override
-  void didUpdateWidget(NewTextListKeywordsDeclaration oldWidget) {
+  void didUpdateWidget(NewGroupKeywordsDeclaration oldWidget) {
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("NewTextListKeywordsDeclaration: didUpdateWidget");
+    if (widgetSequenceDebug) pu.printd("NewGroupKeywordsDeclaration: didUpdateWidget");
 
     super.didUpdateWidget(oldWidget);
     // Checks if the pointer or the content of the list has changed
