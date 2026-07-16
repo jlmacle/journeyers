@@ -176,7 +176,7 @@ Future<void> main() async {
           expect(find.text(kwWorkplace), findsOne);
           
           // Searching the tooltip to close the overlay
-          var closingIconFinder = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+          var closingIconFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
 
           // Closing the overlay
           await tester.tap(closingIconFinder);

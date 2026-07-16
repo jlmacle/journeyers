@@ -30,9 +30,7 @@ const closeChecklistTooltipLabel = "Close checklist";
 
 // GPSKeywordsDeclaration
 const keywordsDeclarationTitle = "Keywords";
-const closeGPSKeywordsDeclarationTooltipLabel = "Close keywords declaration";
-// todo: to clean
-const closeKeywordsDeclarationTooltipLabel = "Close keywords declaration";
+const closeGPSKeywordsDeclarationTooltipLabel = "Please click to close the keywords declaration page";
 
 // GPSIdeasList
 const ideasListTitle = "List of ideas";
