@@ -124,8 +124,13 @@ class FileUtils
     String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/${fileNameWithoutExtension}.${fileExtension}";
 
-    if (sessionDataDebug) pu.printd("Session Data: saveFileOnAndroid: success: $success");
-    if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
+    if (sessionDataDebug) 
+    {
+      if (success) 
+      {pu.printd("Session Data: saveFileOnAndroid: File written successfully to $filePath on ${Platform.operatingSystem}");}
+      else
+      {pu.printd("Session Data: saveFileOnAndroid: Error while writing to $filePath on ${Platform.operatingSystem}");}
+    }
 
     return filePath;
   }
@@ -144,9 +149,14 @@ class FileUtils
     String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/${fileName}.${fileExtension}";
 
-    if (sessionDataDebug) pu.printd("Session Data: saveFileOniOS: success: $success");
-    if (sessionDataDebug) pu.printd("Session Data: filePath: $filePath");
-
+    if (sessionDataDebug) 
+    {
+      if (success) 
+      {pu.printd("Session Data: saveFileOniOS: File written successfully to $filePath on ${Platform.operatingSystem}");}
+      else
+      {pu.printd("Session Data: saveFileOniOS: Error while writing to $filePath on ${Platform.operatingSystem}");}
+    }
+    
     return filePath;
   }
 
@@ -222,7 +232,7 @@ class FileUtils
     if (isInTestEnvironment) 
     {
       await File(filePath).delete();
-      if (testingDebug) pu.printd("Testing Debug: File successfully deleted: $filePath");     
+      if (testingDebug) pu.printd("Testing Debug: File deleted successfully: $filePath");     
       return;
     }
 
@@ -255,7 +265,7 @@ class FileUtils
       if (await file.exists()) 
       {
         await file.delete();
-        if (sessionDataDebug) pu.printd("Session Data: File successfully deleted: $pathToCSV");
+        if (sessionDataDebug) pu.printd("Session Data: File deleted successfully: $pathToCSV");
       } else 
       {
         if (sessionDataDebug) pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCSV");

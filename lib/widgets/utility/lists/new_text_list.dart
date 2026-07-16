@@ -358,7 +358,7 @@ class _NewTextListState extends State<NewTextList> {
           children: 
           [
             const Divider(),
-            NewTextListKeywordsDeclaration
+            NewGroupKeywordsDeclaration
             (
               keywordsCurrent: {},
               keywordsOnUpdateCallbackFunction: (newKeywords) 

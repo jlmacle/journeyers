@@ -283,7 +283,7 @@ void main()
       expect(find.text(aKw), findsOne);
 
       // Searching the tooltip to close the overlay
-      var closingIcon = find.byTooltip(closeKeywordsDeclarationTooltipLabel);
+      var closingIcon = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
 
       // Closing the overlay
       await tester.tap(closingIcon);

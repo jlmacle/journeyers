@@ -359,13 +359,7 @@ class DTOCAForm
   ///
   /// Addition of a \["",""\] before all level 3 titles.
   Future<List<List<String>>> preCSVToCSVData({required List<List<String>> preCSVData}) async
-  {
-    // List<LinkedHashMap<String, Object>> _enteredData = [];
-    // LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> level2TitleIndividualData 
-    // LinkedHashMap<String, LinkedHashMap<String, LinkedHashMap<String, Object>>> level2TitleGroupData
-    // List<List<String>> csvDataIndividualPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
-    // List<List<String>> csvDataGroupPerspective = await cu.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
-
+  {    
     // ─── ANALYZING THE DATA FOR CHECKBOXES WITH "FALSE", AND TEXT FIELDS WITH EMPTY NOTES ───────────────────────────────────────
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];

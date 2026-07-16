@@ -181,7 +181,6 @@ class GPSPageState extends State<GPSPage>
                 child: 
                 DashboardPage
                 (
-                  key: const Key("group-problem-solving-dashboard"),
                   dashboardContext: DashboardUtils.gpsContext,
                   dashboardFilteringByKeywordsKey: dashboardFilteringByKeywordsKeyGPS,
                   onAllSessionFilesDeletedContextPageCallbackFunction: gpsOnAllSessionsDataDeleted,

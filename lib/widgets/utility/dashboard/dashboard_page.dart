@@ -315,8 +315,6 @@ class DashboardPageState extends State<DashboardPage>
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
-            // Key used for automated testing, to scroll up the screen 
-            key: const Key("sessions-list-scrollview"),
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)

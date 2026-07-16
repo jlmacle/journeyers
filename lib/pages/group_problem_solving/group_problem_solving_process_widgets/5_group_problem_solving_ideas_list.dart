@@ -193,7 +193,6 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                                   
                                     EditableDeletableTextListItem
                                     (
-                                      key: Key("edit-ideas-overlay-${widget.ideas[index]}"),
                                       itemIndex: index, 
                                       itemText: widget.ideas[index], 
                                       onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 

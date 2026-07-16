@@ -79,7 +79,6 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
     return Center(
         child:        
           TextButton.icon(
-            key: const Key("bulk-delete-button"),
             onPressed: _selectedTextItemsDelete,
             icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
             label: Text(
