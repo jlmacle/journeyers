@@ -472,7 +472,7 @@ void _showParticipantsEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  key: const Key("participantsEditField"),
+                  key: const Key("participantsGroupsDashboardEditField"),
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
@@ -552,7 +552,7 @@ void _showListNameEditSheet({
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  key: const Key("listNameEditField"),
+                  key: const Key("listLabelGroupsDashboardEditField"),
                   controller: listNameEditTec,
                   autofocus: true,
                   decoration: InputDecoration(

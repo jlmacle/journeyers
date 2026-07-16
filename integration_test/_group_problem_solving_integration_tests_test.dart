@@ -2513,15 +2513,15 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var newLabelTextFieldFinder = find.byKey(const Key("listNameEditField"));
-              expect(newLabelTextFieldFinder, findsOne);
-              await tester.ensureVisible(newLabelTextFieldFinder); 
+              var listNameEditFieldFinder = find.byKey(const Key("listLabelGroupsDashboardEditField"));
+              expect(listNameEditFieldFinder, findsOne);
+              await tester.ensureVisible(listNameEditFieldFinder); 
               await tester.pumpAndSettle(); 
-              await tester.tap(newLabelTextFieldFinder);
+              await tester.tap(listNameEditFieldFinder);
               await tester.pumpAndSettle();
 
               // Adding the edited label
-              await tester.enterText(newLabelTextFieldFinder, "${listLabel1}-edited");
+              await tester.enterText(listNameEditFieldFinder, "${listLabel1}-edited");
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();              
 
@@ -2574,15 +2574,15 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the label
-              var listEditTextFieldFinder = find.byKey(const Key("listNameEditField"));
-              expect(listEditTextFieldFinder, findsOne);
-              await tester.ensureVisible(listEditTextFieldFinder); 
+              var listNameEditFieldFinder = find.byKey(const Key("listLabelGroupsDashboardEditField"));
+              expect(listNameEditFieldFinder, findsOne);
+              await tester.ensureVisible(listNameEditFieldFinder); 
               await tester.pumpAndSettle(); 
-              await tester.tap(listEditTextFieldFinder);
+              await tester.tap(listNameEditFieldFinder);
               await tester.pumpAndSettle();
 
               // Adding the empty label
-              await tester.enterText(listEditTextFieldFinder, "");
+              await tester.enterText(listNameEditFieldFinder, "");
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle(); 
 
@@ -2647,7 +2647,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the participants
-              var newParticipantsTextFieldFinder = find.byKey(const Key("participantsEditField"));
+              var newParticipantsTextFieldFinder = find.byKey(const Key("participantsGroupsDashboardEditField"));
               expect(newParticipantsTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
@@ -2728,7 +2728,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Searching the text field to edit the participants
-              var newParticipantsTextFieldFinder = find.byKey(const Key("participantsEditField"));
+              var newParticipantsTextFieldFinder = find.byKey(const Key("participantsGroupsDashboardEditField"));
               expect(newParticipantsTextFieldFinder, findsOne);
               await tester.ensureVisible(newParticipantsTextFieldFinder); 
               await tester.pumpAndSettle(); 
