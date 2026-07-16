@@ -76,7 +76,7 @@ void main() {
 
         List<File> fileList = await 
         fu.getFilesWithExtensionInDirectory
-        (directoryPath: pathToTmpFolder!, fileExtension: ".csv", searchIsRecursive: true);
+        (directoryPath: pathToTmpFolder!, fileExtension: "csv", searchIsRecursive: true);
 
         if (testingDebug) pu.printd("Testing Debug: Files found in ${pathToTmpFolder!}:\n $fileList");
 

@@ -148,7 +148,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
   try {
     String? folderPath = await rtdu.getApplicationFolderPath();
-    filePath = "$folderPath/$fileNameWithoutExtension$fileExtension";
+    filePath = "$folderPath/${fileNameWithoutExtension}.${fileExtension}";
 
     if (Platform.isAndroid) 
     {
@@ -161,7 +161,7 @@ class _SessionsListItemState extends State<SessionsListItem>
       }
       else {
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+        filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
         await fu.deleteFile(filePath);
         await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
         await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
@@ -180,7 +180,7 @@ class _SessionsListItemState extends State<SessionsListItem>
       }
       else {
         var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, "$fileNameWithoutExtension$fileExtension");
+        filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
         await fu.deleteFile(filePath);
         await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
         await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
@@ -191,7 +191,7 @@ class _SessionsListItemState extends State<SessionsListItem>
       await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
       filePath = await FilePicker.saveFile(
         dialogTitle: "Please enter a file name.",
-        fileName: "$fileNameWithoutExtension$fileExtension", 
+        fileName: "${fileNameWithoutExtension}.${fileExtension}", 
         bytes: dataBytes,
         type: FileType.custom,
         allowedExtensions: ["txt"],
@@ -485,7 +485,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         
                         await _saveUpdatedDataAndMetadata
                         (title: title, keywords: keywords, updatedIdeas: _ideasList,
-                        fileNameWithoutExtension: fileNameWithoutExtension, fileExtension: ".txt",
+                        fileNameWithoutExtension: fileNameWithoutExtension, fileExtension: "txt",
                         originalFilePath: filePath);
 
                         _ideasListBeforeEditionCopy = List.from(_ideasList);

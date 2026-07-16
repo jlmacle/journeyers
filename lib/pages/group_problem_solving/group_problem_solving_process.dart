@@ -191,7 +191,7 @@ class GPSProcessState extends State<GPSProcess>
         else {
           // otherwise: using tmp files for testing
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "$_fileName$_fileExtension");
+          filePath = path.join(applicationFolderPath!, "${_fileName}.${_fileExtension}");
           await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
 
@@ -209,7 +209,7 @@ class GPSProcessState extends State<GPSProcess>
         else {
           // otherwise: using tmp files for testing
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "$_fileName$_fileExtension");
+          filePath = path.join(applicationFolderPath!, "${_fileName}.${_fileExtension}");
           await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
       } 
@@ -218,7 +218,7 @@ class GPSProcessState extends State<GPSProcess>
         // Desktop implementation using FilePicker
         filePath = await FilePicker.saveFile(
           dialogTitle: "Please enter a file name.",
-          fileName: "$_fileName$_fileExtension", 
+          fileName: "${_fileName}.${_fileExtension}", 
           bytes: dataBytes,
           type: FileType.custom,
           allowedExtensions: ["txt"],

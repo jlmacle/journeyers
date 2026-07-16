@@ -927,7 +927,7 @@ final q = CAQuestionsFields();
     // ── OVERLAY  ───────────────────────────────────
     // ───────────────────────────────────────────────
     // Verifying the overlay present
-    expect(find.byKey(const Key("ideaOverlayTextField")), findsOne);
+    expect(find.byKey(const Key("ideaOverlayField")), findsOne);
   }
 
 
@@ -1061,7 +1061,7 @@ final q = CAQuestionsFields();
   Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async
   {
     // Searching the text field used to add ideas
-    var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayTextField"));
+    var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayField"));
     // Adding the idea
     await tester.ensureVisible(newIdeaTextFieldFinder);
     await tester.tap(newIdeaTextFieldFinder);
