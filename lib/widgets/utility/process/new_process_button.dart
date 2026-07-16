@@ -43,7 +43,7 @@ class NewProcessButton extends StatelessWidget
           ),
           child: ElevatedButton
           ( 
-            // Sets _wasGPSSessionDataSaved to false to display the process page
+            // Sets _wasCA/GPS/SessionDataSaved to false to display the process page
             onPressed: () => onNewProcessButtonPressedCAPageCallbackFunction(),
             style: ElevatedButton.styleFrom
             (
