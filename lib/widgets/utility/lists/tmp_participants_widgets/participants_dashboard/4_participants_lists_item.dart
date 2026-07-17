@@ -12,7 +12,7 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 // todo: code to clean
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling a list data.
+/// A widget handling a single participants list data on the participants lists dashboard.
 class ParticipantsListsItem extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).

@@ -6,7 +6,7 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling the filtering by keywords of lists.
+/// A widget handling the filtering by keywords on the participants lists dashboard.
 class ParticipantsDashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available lists data.

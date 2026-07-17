@@ -11,7 +11,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling bulk deletion of session data.
+/// A widget handling bulk deletion on the participants lists dashboard.
 class ParticipantsDashboardDeletionByBulk extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
