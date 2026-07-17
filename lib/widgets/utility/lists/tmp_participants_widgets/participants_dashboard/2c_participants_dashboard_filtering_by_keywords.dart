@@ -4,7 +4,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 
-/// {@category Utility widgets}
+/// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling the filtering by keywords of lists.
 class ParticipantsDashboardFilteringByKeywords extends StatefulWidget 

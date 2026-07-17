@@ -6,7 +6,7 @@ import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 
-/// {@category Utility widgets}
+/// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling the sorting by date of session data.
 class ParticipantsDashboardSortingByDate extends StatefulWidget 
