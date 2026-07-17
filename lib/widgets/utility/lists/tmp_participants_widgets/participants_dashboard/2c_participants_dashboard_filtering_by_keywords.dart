@@ -10,10 +10,10 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available lists data.
-  final List<dynamic>? listsAll;
+  final List<dynamic>? participantsListsAll;
 
   /// List containing all filtered lists data.
-  final List<dynamic>? listsFiltered;
+  final List<dynamic>? participantsListsFiltered;
 
   /// List containing the keywords used by the lists.
   final List<String> keywordsAll;
@@ -27,8 +27,8 @@ class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget
   const ParticipantsListsDashboardFilteringByKeywords
   ({
     super.key,
-    required this.listsAll,
-    required this.listsFiltered,
+    required this.participantsListsAll,
+    required this.participantsListsFiltered,
     required this.keywordsAll,
     required this.keywordsSelected,
     required this.featureCallbackFunctionToRefreshTheParticipantsLists,
@@ -47,13 +47,13 @@ class ParticipantsListsDashboardFilteringByKeywordsState extends State<Participa
     if (widget.keywordsSelected.isEmpty) 
     {
       // Working with the list while keeping the same reference
-      widget.listsFiltered!.clear();
-      widget.listsFiltered!.addAll(widget.listsAll!);
+      widget.participantsListsFiltered!.clear();
+      widget.participantsListsFiltered!.addAll(widget.participantsListsAll!);
     } 
     else 
     {
       List <dynamic> sortingResults =
-      widget.listsAll!.where
+      widget.participantsListsAll!.where
       ( 
         (session) 
         {
@@ -63,8 +63,8 @@ class ParticipantsListsDashboardFilteringByKeywordsState extends State<Participa
       ).toList();
       
       // Working with the list while keeping the same reference
-      widget.listsFiltered!.clear();
-      widget.listsFiltered!.addAll(sortingResults);
+      widget.participantsListsFiltered!.clear();
+      widget.participantsListsFiltered!.addAll(sortingResults);
     }
 
     // Refreshing the sessions list
@@ -92,11 +92,11 @@ class ParticipantsListsDashboardFilteringByKeywordsState extends State<Participa
   Future<void> keywordsRefreshAfterSessionDeletion() async
   {
     // if no lists left, nothing to do
-    if (widget.listsAll == null) return;
+    if (widget.participantsListsAll == null) return;
     
     // Re-building the keywords" list from the remaining lists data
     Set<String> remainingKws = {};
-    for (var currentListData in widget.listsAll!) 
+    for (var currentListData in widget.participantsListsAll!) 
     {
       List<dynamic> kws = currentListData[itemKeywordsKey];
       remainingKws.addAll(kws.cast<String>());

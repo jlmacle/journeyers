@@ -12,7 +12,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 class ParticipantsListsDashboardSortingByDate extends StatefulWidget 
 {
   /// List containing the sessions to sort.
-  final List<dynamic>? filteredListsToSort;
+  final List<dynamic>? participantsListsFilteredToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback featureCallbackFunctionToRefreshTheParticipantsLists;
@@ -20,7 +20,7 @@ class ParticipantsListsDashboardSortingByDate extends StatefulWidget
   const ParticipantsListsDashboardSortingByDate
   ({
     super.key,
-    required this.filteredListsToSort,
+    required this.participantsListsFilteredToSort,
     required this.featureCallbackFunctionToRefreshTheParticipantsLists,
   });
 
@@ -35,7 +35,7 @@ class ParticipantsListsDashboardSortingByDateState extends State<ParticipantsLis
   // Method used to sort session data by date
   Future<void> _sortListsByDate() async
   {
-    await sortSessionByDateAddJm(list: widget.filteredListsToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
+    await sortSessionByDateAddJm(list: widget.participantsListsFilteredToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
     widget.featureCallbackFunctionToRefreshTheParticipantsLists();
   }
 

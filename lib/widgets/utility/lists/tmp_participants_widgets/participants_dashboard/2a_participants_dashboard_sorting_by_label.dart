@@ -12,7 +12,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 class ParticipantsListsDashboardSortingByLabel extends StatefulWidget 
 {
   /// List containing the filtered lists to sort.
-  final List<dynamic>? filteredListsToSort;
+  final List<dynamic>? participantsListsFilteredToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback featureCallbackFunctionToRefreshTheParticipantsLists;
@@ -20,7 +20,7 @@ class ParticipantsListsDashboardSortingByLabel extends StatefulWidget
   const ParticipantsListsDashboardSortingByLabel
   ({
     super.key,
-    required this.filteredListsToSort,
+    required this.participantsListsFilteredToSort,
     required this.featureCallbackFunctionToRefreshTheParticipantsLists
   });
 
@@ -36,7 +36,7 @@ class _ParticipantsListsDashboardSortingByLabelState extends State<ParticipantsL
   // Method used to sort session data by title 
   Future<void> _sortListsByLabel() async
   {
-    await sortListsByLabel(list: widget.filteredListsToSort!, byAscendingLabel: _isAscendingLabel);
+    await sortListsByLabel(list: widget.participantsListsFilteredToSort!, byAscendingLabel: _isAscendingLabel);
   }
 
   @override
