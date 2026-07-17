@@ -11,7 +11,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget used for a participants list.
+/// A widget used for a new participants list.
 class NewParticipantsList extends StatefulWidget 
 {
   /// The theme data used.

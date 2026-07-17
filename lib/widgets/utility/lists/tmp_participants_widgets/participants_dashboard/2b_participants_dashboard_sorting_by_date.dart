@@ -8,7 +8,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling the sorting by date of session data.
+/// A widget handling the sorting of lists by date on the participants lists dashboard.
 class ParticipantsDashboardSortingByDate extends StatefulWidget 
 {
   /// List containing the sessions to sort.

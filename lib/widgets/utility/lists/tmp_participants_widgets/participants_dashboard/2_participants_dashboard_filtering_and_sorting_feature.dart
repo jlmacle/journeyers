@@ -8,7 +8,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling sorting and filtering of session data.
+/// A widget handling sorting and filtering of lists on the participants lists dashboard.
 class ParticipantsDashboardSortingAndFilteringFeature extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
