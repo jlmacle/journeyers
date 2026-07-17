@@ -22,7 +22,7 @@ class NewParticipantsList extends StatefulWidget
 
   // todo: to clean
   /// When non-null the screen is read-only and shows this label in the title.
-  final String? labelLoaded;
+  final String? listLabelLoaded;
 
   /// The hint text when saving the list label.
   final String listLabelHintText;
@@ -31,20 +31,20 @@ class NewParticipantsList extends StatefulWidget
   final String placeholderInvitationToEnterAParticipantSName;
 
   /// The placeholder text for the new list.
-  final String placeholderList;
+  final String placeholderWhenNoParticipantsNames;
 
   /// A callback function called when the participants list is loaded.
-  final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
+  final ValueChanged<List<String>> onParticipantsListLoadedCallbackFunction;
 
   const NewParticipantsList({
     super.key,
     this.initialParticipantsNamesList = const [],
-    this.labelLoaded,
+    this.listLabelLoaded,
     required this.listLabelHintText,
-    required this.placeholderList,
+    required this.placeholderWhenNoParticipantsNames,
     required this.placeholderInvitationToEnterAParticipantSName,
     required this.themeData, 
-    required this.onParticipantsLoadedCallbackFunction
+    required this.onParticipantsListLoadedCallbackFunction
   });  
 
   @override
@@ -54,7 +54,7 @@ class NewParticipantsList extends StatefulWidget
 class _NewParticipantsListState extends State<NewParticipantsList> {
 
   // bool: a list has been loaded
-  bool get _listHasBeenLoaded => widget.labelLoaded != null;
+  bool get _listHasBeenLoaded => widget.listLabelLoaded != null;
 
   // Data related to retrieving the list of grouped texts
   final _listsDB = ListsDB();
@@ -159,7 +159,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 return;
               }
               // Loading the list
-              widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);
+              widget.onParticipantsListLoadedCallbackFunction(_enteredTextItemsList);
 
               // To close the dialog
               Navigator.of(ctx).pop(label);
@@ -306,7 +306,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
       appBar: AppBar(
         title: Text
               (
-                _listHasBeenLoaded ? widget.labelLoaded! : newListAppBarTitle, 
+                _listHasBeenLoaded ? widget.listLabelLoaded! : newListAppBarTitle, 
                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
               ),          
         backgroundColor: Colors.white,
@@ -387,7 +387,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 // Placeholder message if empty list
                 ? Center(
                     child: Text(
-                      widget.placeholderList,
+                      widget.placeholderWhenNoParticipantsNames,
                       textAlign: TextAlign.center,
                       style: widget.themeData.textTheme.bodyLarge
                     ),

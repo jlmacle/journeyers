@@ -30,7 +30,7 @@ class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget
   final List<dynamic>? listsSelectedForDeletionKeys;
 
   /// Callback function used to refresh the lists displayed.
-  final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
+  final VoidCallback dashboardCallbackFunctionToRefreshTheParticipantsLists;
 
   const ParticipantsListsDashboardDeletionByBulk
   ({
@@ -39,7 +39,7 @@ class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget
     required this.areListsForDeletion,
     required this.listsAll,
     required this.listsFiltered,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
+    required this.dashboardCallbackFunctionToRefreshTheParticipantsLists,
     this.listsSelectedForDeletionKeys    
   });
 
@@ -103,7 +103,7 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
       // resetWasSessionDataSavedStatus to false
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
 
-      widget.dashboardCallbackFunctionToRefreshTheSessionsList();
+      widget.dashboardCallbackFunctionToRefreshTheParticipantsLists();
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
     else
@@ -113,7 +113,7 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
       _dashboardFilteringByKeywordsKey.currentState?.setState((){});
 
       // Updating the sessions list UI
-      widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
+      widget.dashboardCallbackFunctionToRefreshTheParticipantsLists();      
     }
 
   }
