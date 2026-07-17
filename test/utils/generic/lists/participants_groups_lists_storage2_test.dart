@@ -1,10 +1,10 @@
 import "package:test/test.dart";
 
-import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
+import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 
 
 void main() {
-  ListsDB storage = ListsDB();
+  ParticipantsListsDB storage = ParticipantsListsDB();
 
   group("getNextKey", () {
     // "Next key after 'a1'"
