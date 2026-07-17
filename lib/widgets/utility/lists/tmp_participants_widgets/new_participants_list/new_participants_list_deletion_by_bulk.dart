@@ -6,7 +6,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling bulk deletion of participants in a list.
+/// A widget handling bulk deletion of participants in the participants list.
 class NewParticipantsDeletionByBulk extends StatefulWidget 
 {
   /// Boolean used to store if some text items are selected for deletion.
