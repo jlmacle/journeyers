@@ -11,9 +11,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// Class used to add a text list to a set of text lists.
-/// A new list can be saved only if its content is not identical to a previous list content.
-/// The widget can be used to load a list for edition.
+/// A widget used for a participants list.
 class NewParticipantsList extends StatefulWidget 
 {
   /// The theme data used.
