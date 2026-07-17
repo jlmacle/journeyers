@@ -394,7 +394,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                             builder: (_) => NewParticipantsList
                                               (
                                                 listLabelHintText: listLabelHintText,
-                                                placeholderList: listPlaceholder,
+                                                listPlaceholder: listPlaceholder,
                                                 placeholderInvitationToEnterAParticipantSName: invitationToEnterToEnterAParticipantSName,
                                                 themeData: Theme.of(context),
                                                 onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
