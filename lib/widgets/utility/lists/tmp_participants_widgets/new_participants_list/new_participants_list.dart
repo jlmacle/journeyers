@@ -18,16 +18,17 @@ class NewParticipantsList extends StatefulWidget
   final ThemeData themeData;
 
   /// Pre-populated content (from a loaded list).
-  final List<String> initialTextValues;
+  final List<String> initialParticipantsNamesList;
 
+  // todo: to clean
   /// When non-null the screen is read-only and shows this label in the title.
   final String? labelLoaded;
 
   /// The hint text when saving the list label.
-  final String labelHintText;
+  final String listLabelHintText;
 
-  /// The text inviting to enter a new text in the list.
-  final String placeholderInvitationToEnterText;
+  /// The text inviting to enter a new participant's name in the list.
+  final String placeholderInvitationToEnterAParticipantSName;
 
   /// The placeholder text for the new list.
   final String placeholderList;
@@ -37,11 +38,11 @@ class NewParticipantsList extends StatefulWidget
 
   const NewParticipantsList({
     super.key,
-    this.initialTextValues = const [],
+    this.initialParticipantsNamesList = const [],
     this.labelLoaded,
-    required this.labelHintText,
+    required this.listLabelHintText,
     required this.placeholderList,
-    required this.placeholderInvitationToEnterText,
+    required this.placeholderInvitationToEnterAParticipantSName,
     required this.themeData, 
     required this.onParticipantsLoadedCallbackFunction
   });  
@@ -178,7 +179,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 onSubmitted: (_) async => await onConfirm(), 
                 decoration: InputDecoration(
                   labelText: "List label",
-                  hintText: widget.labelHintText,
+                  hintText: widget.listLabelHintText,
                   errorText: errorText,
                 ),
                 onChanged: (_) {
@@ -259,7 +260,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
     // Loading the previous lists of grouped texts
     _listOfPreviousGroupedTextsLoad();
     
-    _enteredTextItemsList = List<String>.from(widget.initialTextValues);
+    _enteredTextItemsList = List<String>.from(widget.initialParticipantsNamesList);
   }
 
   // Disposing of the TextEditingController instances
@@ -357,6 +358,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
           children: 
           [
             const Divider(),
+            //-------------------------------
             NewParticipantsKeywordsDeclaration
             (
               keywordsCurrent: const {},
@@ -367,6 +369,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 _newKeywords = newKeywords.toList()..sort();
               }
             ),
+            //-------------------------------
             const Divider(),
             // Deletion by bulk widget
             NewParticipantsDeletionByBulk
@@ -379,6 +382,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             // List of added texts or placeholder message
             Expanded(
               child: 
+                // Is the participants list empty?
                 _enteredTextItemsList.isEmpty
                 // Placeholder message if empty list
                 ? Center(
@@ -388,9 +392,8 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                       style: widget.themeData.textTheme.bodyLarge
                     ),
                   )
-                :
-                      
-                // List of added texts otherwise             
+                :                      
+                // List of added participants otherwise             
                 ListView.builder
                 (                  
                   padding: const EdgeInsets.only(bottom: 96),
@@ -472,7 +475,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 (
                   hint: Text
                   ( 
-                    invitationToEnterTextPlaceholder,
+                    invitationToEnterToEnterAParticipantSName,
                     textAlign: TextAlign.left,                                          
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  

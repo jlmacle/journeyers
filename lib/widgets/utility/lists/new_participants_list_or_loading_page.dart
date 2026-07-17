@@ -97,9 +97,9 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                     MaterialPageRoute<void>(
                       builder: (_) => NewParticipantsList
                                         (
-                                          labelHintText: listLabelHintText,
+                                          listLabelHintText: listLabelHintText,
                                           placeholderList: listPlaceholder,
-                                          placeholderInvitationToEnterText: invitationToEnterTextPlaceholder,
+                                          placeholderInvitationToEnterAParticipantSName: invitationToEnterToEnterAParticipantSName,
                                           themeData: Theme.of(context),
                                           onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
                                         ),
