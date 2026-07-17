@@ -359,7 +359,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             const Divider(),
             NewParticipantsKeywordsDeclaration
             (
-              keywordsCurrent: {},
+              keywordsCurrent: const {},
               keywordsOnUpdateCallbackFunction: (newKeywords) 
               {
                 if (listDebug) pu.printd("List debug: NewParticipantsList: build: newKeywords: $newKeywords");
