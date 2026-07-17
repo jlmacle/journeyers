@@ -7,8 +7,8 @@ import "package:path_provider_platform_interface/path_provider_platform_interfac
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
-import "package:journeyers/widgets/utility/lists/list_dashboard.dart";
-import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart";
 
 
 void main() {

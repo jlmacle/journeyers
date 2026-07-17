@@ -4,13 +4,13 @@ import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 /// {@category Utility widgets}
 /// {@category Lists}
-/// A widget used for the title of the dashboard.
-class ListDashboardTitle extends StatelessWidget 
+/// A widget used for the title of the participants dashboard.
+class ParticipantsDashboardTitle extends StatelessWidget 
 {
   /// The title for the dashboard.
   final String title;
 
-  const ListDashboardTitle
+  const ParticipantsDashboardTitle
   ({
     super.key,
     required this.title    

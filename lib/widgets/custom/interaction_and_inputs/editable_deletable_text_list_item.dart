@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/type_defs2.dart";
 
 /// {@category Utils - Generic}
 /// {@category Lists}

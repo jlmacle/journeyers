@@ -5,16 +5,16 @@ import "package:flutter/material.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/new_text_list.dart";
-import "package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/1_list_dashboard_title.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/2_list_dashboard_filtering_and_sorting_feature.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/3_list_dashboard_deletion_by_bulk.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/1_participants_dashboard_title.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2_participants_dashboard_filtering_and_sorting_feature.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/3_participants_dashboard_deletion_by_bulk.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 
 
 
@@ -347,7 +347,7 @@ class ListDashboardState extends State<ListDashboard>
     
                 // DASHBOARD TITLE
                 const SliverToBoxAdapter(
-                  child: ListDashboardTitle(title: listsDashboardTitle)
+                  child: ParticipantsDashboardTitle(title: listsDashboardTitle)
                 ),
     
                 // DASHBOARD FILTERING FEATURES

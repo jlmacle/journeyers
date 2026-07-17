@@ -18,10 +18,10 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
-import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
-import "package:journeyers/widgets/utility/lists/new_text_list_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/4_list_of_lists_item.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
 import "externalized_code/externalized_testing_code.dart";
@@ -2065,8 +2065,8 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the lists dashboard title present
-          var listDashboardTitleFinder = find.text(listsDashboardTitle);
-          expect(listDashboardTitleFinder, findsOne);
+          var ParticipantsDashboardTitleFinder = find.text(listsDashboardTitle);
+          expect(ParticipantsDashboardTitleFinder, findsOne);
 
           // Searching for a loading button
           var loadingButtonFinder = find.descendant
@@ -2074,7 +2074,7 @@ Future<void> main() async {
             of: find.byType(ElevatedButton), 
             matching: find.text(loadingButtonLabel)
           );
-          expect(listDashboardTitleFinder, findsOne);
+          expect(ParticipantsDashboardTitleFinder, findsOne);
 
           // await tester.pump(const Duration(seconds: 2));
 

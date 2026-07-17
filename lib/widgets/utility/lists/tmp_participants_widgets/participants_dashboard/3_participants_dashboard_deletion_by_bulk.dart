@@ -6,7 +6,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
 
 
 /// {@category Utility widgets}

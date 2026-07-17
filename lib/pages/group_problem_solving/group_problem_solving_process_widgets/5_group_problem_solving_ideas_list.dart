@@ -5,7 +5,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/new_text_list_deletion_by_bulk.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_deletion_by_bulk.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to list the ideas found during a group problem-solving process.
