@@ -11,8 +11,8 @@ import "package:journeyers/utils/project_specific/dev/sort_utils.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 
 
-// new category to consider
-/// {@category Utils - Generic}
+/// {@category Utils - Project-specific}
+/// {@category Lists}
 /// Persists a list of participants list data with the pattern:
 /// { "key": { "itemText": "participantListLabel", "itemTextKey": "a0" , 
 ///             "itemTextKeywords": ["Household", "Workplace"]  ,
