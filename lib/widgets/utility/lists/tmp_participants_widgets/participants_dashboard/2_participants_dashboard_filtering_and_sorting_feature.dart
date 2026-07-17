@@ -9,7 +9,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling sorting and filtering of lists on the participants lists dashboard.
-class ParticipantsDashboardSortingAndFilteringFeature extends StatefulWidget 
+class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -30,9 +30,9 @@ class ParticipantsDashboardSortingAndFilteringFeature extends StatefulWidget
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
 
   /// Global key used to identify the widget handling the filtering by keywords.
-  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
 
-  const ParticipantsDashboardSortingAndFilteringFeature
+  const ParticipantsListsDashboardSortingAndFilteringFeature
   ({
     super.key,
     required this.dashboardContext,
@@ -45,17 +45,17 @@ class ParticipantsDashboardSortingAndFilteringFeature extends StatefulWidget
   });
 
   @override
-  State<ParticipantsDashboardSortingAndFilteringFeature> createState() => _ParticipantsDashboardSortingAndFilteringFeatureState();
+  State<ParticipantsListsDashboardSortingAndFilteringFeature> createState() => _ParticipantsListsDashboardSortingAndFilteringFeatureState();
 }
 
-class _ParticipantsDashboardSortingAndFilteringFeatureState extends State<ParticipantsDashboardSortingAndFilteringFeature> 
+class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<ParticipantsListsDashboardSortingAndFilteringFeature> 
 {  
   @override
   void initState() {
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardSortingAndFilteringFeature");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardSortingAndFilteringFeature");
   }
 
   @override
@@ -81,7 +81,7 @@ class _ParticipantsDashboardSortingAndFilteringFeatureState extends State<Partic
                 children: 
                 [
                   // Sorting by title
-                  ParticipantsDashboardSortingByLabel
+                  ParticipantsListsDashboardSortingByLabel
                   (
                     filteredListsToSort: widget.listsFiltered,
                     dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
@@ -100,7 +100,7 @@ class _ParticipantsDashboardSortingAndFilteringFeatureState extends State<Partic
           ),
         ),
         // Filtering by keywords
-        ParticipantsDashboardFilteringByKeywords
+        ParticipantsListsDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
           listsAll: widget.listsAll, 

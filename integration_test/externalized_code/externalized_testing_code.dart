@@ -911,8 +911,8 @@ final q = CAQuestionsFields();
     await tester.pumpAndSettle();
 
     // Verifying the lists dashboard title present
-    var ParticipantsDashboardTitleFinder = find.text(listsDashboardTitle);
-    expect(ParticipantsDashboardTitleFinder, findsOne);
+    var ParticipantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
+    expect(ParticipantsListsDashboardTitleFinder, findsOne);
   }
 
   // Method used to go from the GPS process page to the ideas overlay
@@ -1091,7 +1091,7 @@ final q = CAQuestionsFields();
   }
 
   // Method used to get the finder of the participants containers
-  Future<Finder> gpsGetParticipantsContainersOnParticipantsDashboard(WidgetTester tester) async
+  Future<Finder> gpsGetParticipantsContainersOnParticipantsListsDashboard(WidgetTester tester) async
   {
     var participantsContainersFinder = find.byWidgetPredicate
     (

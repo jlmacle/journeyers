@@ -9,7 +9,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling the sorting of lists by label on the participants lists dashboard.
-class ParticipantsDashboardSortingByLabel extends StatefulWidget 
+class ParticipantsListsDashboardSortingByLabel extends StatefulWidget 
 {
   /// List containing the filtered lists to sort.
   final List<dynamic>? filteredListsToSort;
@@ -17,7 +17,7 @@ class ParticipantsDashboardSortingByLabel extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ParticipantsDashboardSortingByLabel
+  const ParticipantsListsDashboardSortingByLabel
   ({
     super.key,
     required this.filteredListsToSort,
@@ -25,10 +25,10 @@ class ParticipantsDashboardSortingByLabel extends StatefulWidget
   });
 
   @override
-  State<ParticipantsDashboardSortingByLabel> createState() => _ParticipantsDashboardSortingByLabelState();
+  State<ParticipantsListsDashboardSortingByLabel> createState() => _ParticipantsListsDashboardSortingByLabelState();
 }
 
-class _ParticipantsDashboardSortingByLabelState extends State<ParticipantsDashboardSortingByLabel> 
+class _ParticipantsListsDashboardSortingByLabelState extends State<ParticipantsListsDashboardSortingByLabel> 
 {
   // Random alphabetical order by default
   bool _isAscendingLabel = false;   
@@ -44,7 +44,7 @@ class _ParticipantsDashboardSortingByLabelState extends State<ParticipantsDashbo
     super.initState();
     
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardSortingByLabel");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardSortingByLabel");
   }
 
   @override

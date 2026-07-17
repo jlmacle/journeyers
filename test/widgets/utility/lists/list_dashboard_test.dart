@@ -37,7 +37,7 @@ void main() {
     return tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: ParticipantsDashboard
+          body: ParticipantsListsDashboard
           (
             dashboardContext: "", 
             onAllSessionFilesDeletedContextPageCallbackFunction: () {}, 
@@ -59,7 +59,7 @@ void main() {
     );    
   }
 
-  group("ParticipantsDashboard Tests: \n", () 
+  group("ParticipantsListsDashboard Tests: \n", () 
   {
     // "Empty dashboard: button toward adding a new list"
     testWidgets("Empty dashboard: button toward adding a new list", 

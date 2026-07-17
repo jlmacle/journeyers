@@ -9,7 +9,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling the sorting of lists by date on the participants lists dashboard.
-class ParticipantsDashboardSortingByDate extends StatefulWidget 
+class ParticipantsListsDashboardSortingByDate extends StatefulWidget 
 {
   /// List containing the sessions to sort.
   final List<dynamic>? filteredListsToSort;
@@ -17,7 +17,7 @@ class ParticipantsDashboardSortingByDate extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ParticipantsDashboardSortingByDate
+  const ParticipantsListsDashboardSortingByDate
   ({
     super.key,
     required this.filteredListsToSort,
@@ -25,10 +25,10 @@ class ParticipantsDashboardSortingByDate extends StatefulWidget
   });
 
   @override
-  State<ParticipantsDashboardSortingByDate> createState() => ParticipantsDashboardSortingByDateState();
+  State<ParticipantsListsDashboardSortingByDate> createState() => ParticipantsListsDashboardSortingByDateState();
 }
 
-class ParticipantsDashboardSortingByDateState extends State<ParticipantsDashboardSortingByDate> 
+class ParticipantsListsDashboardSortingByDateState extends State<ParticipantsListsDashboardSortingByDate> 
 {
   bool _isAscendingDate = false;   
 
@@ -44,7 +44,7 @@ class ParticipantsDashboardSortingByDateState extends State<ParticipantsDashboar
     super.initState();
         
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardSortingByDate");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardSortingByDate");
   }
 
   @override

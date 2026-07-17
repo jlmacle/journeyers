@@ -7,7 +7,7 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling the filtering by keywords on the participants lists dashboard.
-class ParticipantsDashboardFilteringByKeywords extends StatefulWidget 
+class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available lists data.
   final List<dynamic>? listsAll;
@@ -24,7 +24,7 @@ class ParticipantsDashboardFilteringByKeywords extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ParticipantsDashboardFilteringByKeywords
+  const ParticipantsListsDashboardFilteringByKeywords
   ({
     super.key,
     required this.listsAll,
@@ -35,12 +35,12 @@ class ParticipantsDashboardFilteringByKeywords extends StatefulWidget
   });
 
   @override
-  State<ParticipantsDashboardFilteringByKeywords> createState() => ParticipantsDashboardFilteringByKeywordsState();
+  State<ParticipantsListsDashboardFilteringByKeywords> createState() => ParticipantsListsDashboardFilteringByKeywordsState();
 }
 
-class ParticipantsDashboardFilteringByKeywordsState extends State<ParticipantsDashboardFilteringByKeywords> 
+class ParticipantsListsDashboardFilteringByKeywordsState extends State<ParticipantsListsDashboardFilteringByKeywords> 
 {  
-  // Used in ParticipantsDashboard.
+  // Used in ParticipantsListsDashboard.
   // Method used to filter the lists by keywords.
   Future<void> keywordsApplyFiltering() async
   {
@@ -87,7 +87,7 @@ class ParticipantsDashboardFilteringByKeywordsState extends State<ParticipantsDa
     await keywordsApplyFiltering();
   }
 
-  // Used in ParticipantsDashboard.
+  // Used in ParticipantsListsDashboard.
   // Method used to refresh the keywords list after deletion of session data.
   Future<void> keywordsRefreshAfterSessionDeletion() async
   {
@@ -121,7 +121,7 @@ class ParticipantsDashboardFilteringByKeywordsState extends State<ParticipantsDa
     super.initState();
             
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardFilteringByKeywords");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardFilteringByKeywords");
   }
 
   @override

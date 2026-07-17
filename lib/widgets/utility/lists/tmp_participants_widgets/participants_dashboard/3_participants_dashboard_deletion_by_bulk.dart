@@ -12,7 +12,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling bulk deletion on the participants lists dashboard.
-class ParticipantsDashboardDeletionByBulk extends StatefulWidget 
+class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -32,7 +32,7 @@ class ParticipantsDashboardDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ParticipantsDashboardDeletionByBulk
+  const ParticipantsListsDashboardDeletionByBulk
   ({
     super.key,
     required this.dashboardContext,
@@ -44,15 +44,15 @@ class ParticipantsDashboardDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<ParticipantsDashboardDeletionByBulk> createState() => _ParticipantsDashboardDeletionByBulkState();
+  State<ParticipantsListsDashboardDeletionByBulk> createState() => _ParticipantsListsDashboardDeletionByBulkState();
 }
 
-class _ParticipantsDashboardDeletionByBulkState extends State<ParticipantsDashboardDeletionByBulk> 
+class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsListsDashboardDeletionByBulk> 
 {
   final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several lists data
@@ -123,7 +123,7 @@ class _ParticipantsDashboardDeletionByBulkState extends State<ParticipantsDashbo
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardDeletionByBulk");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardDeletionByBulk");
   }
 
   @override
