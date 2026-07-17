@@ -9,7 +9,8 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_deletion_by_bulk.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_keywords_declaration.dart";
 
-
+/// {@category Utils - Project-specific}
+/// {@category Lists}
 /// Class used to add a text list to a set of text lists.
 /// A new list can be saved only if its content is not identical to a previous list content.
 /// The widget can be used to load a list for edition.

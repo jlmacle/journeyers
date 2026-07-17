@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
-/// {@category Utility widgets}
+/// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget used for the title of the participants dashboard.
 class ParticipantsDashboardTitle extends StatelessWidget 
