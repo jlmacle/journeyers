@@ -35,6 +35,8 @@ class ParticipantsListsDB {
   Future<File?> _getFile() async {
     var dir = await getApplicationSupportDirectory();
     var file = File("${dir.path}/$_fileName");
+
+    // DB doesn't exist yet
     if (!file.existsSync()) 
     {
       try
@@ -42,25 +44,28 @@ class ParticipantsListsDB {
         if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file DB not existant. File creation");
 
         if (isInTestEnvironment) _fileName = "participants_lists_test_data.json";
-
-        file = File("${dir.path}/$_fileName");
+        file = File("${dir.path}/$_fileName");       
         file.createSync();
+
         if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file created: ${file.path}");
+
         List<Map<String, String>> records = [];
         String content = jsonEncode(records);
         // writeAsStringSync - Widget testing fails with writeAsString
         file.writeAsStringSync(content);
         // readAsStringSync - Widget testing fails with readAsString
         content = file.readAsStringSync();
+
         if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file content: $content");
       }
       catch(e,s)
       {
-        pu.printd("Error at new listsDB creation: $e: $s");
+        pu.printd("Error at new ParticipantsListsDB creation: $e: $s");
       }
       
       return file;
     }
+    // DB does exist already
     else
     {
       if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file DB exists");
