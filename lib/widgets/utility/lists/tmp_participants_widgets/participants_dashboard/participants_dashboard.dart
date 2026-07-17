@@ -19,7 +19,8 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-class ParticipantsDashboard extends StatefulWidget 
+/// A participants lists dashboard widget.
+class ParticipantsListsDashboard extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -34,9 +35,9 @@ class ParticipantsDashboard extends StatefulWidget
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
-  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
-  const ParticipantsDashboard
+  const ParticipantsListsDashboard
   ({
     super.key,
     required this.dashboardContext,
@@ -47,16 +48,16 @@ class ParticipantsDashboard extends StatefulWidget
   });
 
   @override
-  State<ParticipantsDashboard> createState() => ParticipantsDashboardState();
+  State<ParticipantsListsDashboard> createState() => ParticipantsListsDashboardState();
 }
 
-class ParticipantsDashboardState extends State<ParticipantsDashboard> 
+class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard> 
 {
   // The DB
   final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
   void _refreshDashboard()
@@ -81,13 +82,13 @@ class ParticipantsDashboardState extends State<ParticipantsDashboard>
   // and the list of all sessions available
   Future<void> _getStoredListsData() async 
   {
-    if (listDebug) pu.printd("List debug: ParticipantsDashboard: getStoredListsData");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: getStoredListsData");
     // Retrieving data 
     _listData = await _listsDB.loadDataStructure();
-    if (listDebug) pu.printd("List debug: ParticipantsDashboard: _listData: _listData");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: _listData: _listData");
     // Getting the list labels
     final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
-    if (listDebug) pu.printd("List debug: ParticipantsDashboard: getStoredListsData: labels: $labels");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
@@ -123,7 +124,7 @@ class ParticipantsDashboardState extends State<ParticipantsDashboard>
     super.initState();
          
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsDashboard");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboard");
 
     _listsDataAll = [];
     _listsDataFiltered = [];
@@ -235,7 +236,7 @@ class ParticipantsDashboardState extends State<ParticipantsDashboard>
     required Map<String, dynamic> listData
   }) async
   {
-    if (listDebug) pu.printd("List debug: ParticipantsDashboard: _updateListName");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: _updateListName");
     // To accomodate widget testing
     if (listKey != null)
     {
@@ -323,8 +324,8 @@ class ParticipantsDashboardState extends State<ParticipantsDashboard>
 @override
   Widget build(BuildContext context) {
 
-    if (listDebug) pu.printd("List debug: ParticipantsDashboard: build: _isDataLoading: $_isDataLoading"); 
-    if (listDebug) pu.printd("List debug: ParticipantsDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
+    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading"); 
+    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
 
     return 
     Scaffold
@@ -348,13 +349,13 @@ class ParticipantsDashboardState extends State<ParticipantsDashboard>
     
                 // DASHBOARD TITLE
                 const SliverToBoxAdapter(
-                  child: ParticipantsDashboardTitle(title: listsDashboardTitle)
+                  child: ParticipantsListsDashboardTitle(title: listsDashboardTitle)
                 ),
     
                 // DASHBOARD FILTERING FEATURES
                 SliverToBoxAdapter 
                 (
-                  child: ParticipantsDashboardSortingAndFilteringFeature
+                  child: ParticipantsListsDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
                     listsAll: _listsDataAll, listsFiltered: _listsDataFiltered,
@@ -366,7 +367,7 @@ class ParticipantsDashboardState extends State<ParticipantsDashboard>
     
                 // BULK DELETION
                 SliverToBoxAdapter(
-                  child: ParticipantsDashboardDeletionByBulk
+                  child: ParticipantsListsDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
                     listsAll: _listsDataAll,

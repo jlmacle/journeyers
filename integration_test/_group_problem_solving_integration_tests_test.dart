@@ -2065,8 +2065,8 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the lists dashboard title present
-          var ParticipantsDashboardTitleFinder = find.text(listsDashboardTitle);
-          expect(ParticipantsDashboardTitleFinder, findsOne);
+          var ParticipantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
+          expect(ParticipantsListsDashboardTitleFinder, findsOne);
 
           // Searching for a loading button
           var loadingButtonFinder = find.descendant
@@ -2074,7 +2074,7 @@ Future<void> main() async {
             of: find.byType(ElevatedButton), 
             matching: find.text(loadingButtonLabel)
           );
-          expect(ParticipantsDashboardTitleFinder, findsOne);
+          expect(ParticipantsListsDashboardTitleFinder, findsOne);
 
           // await tester.pump(const Duration(seconds: 2));
 
@@ -2634,7 +2634,7 @@ Future<void> main() async {
               // ── EDITING THE PARTICIPANTS  ──────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsDashboard(tester);
+              var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
 
@@ -2660,7 +2660,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();              
 
               // Verifying data in the participants container
-              participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsDashboard(tester);
+              participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
               var participantsFinder = find.descendant
                                       (
                                         of: participantsContainersFinder, 
@@ -2715,7 +2715,7 @@ Future<void> main() async {
               // ── EDITING THE PARTICIPANTS   ─────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsDashboard(tester);
+              var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
 

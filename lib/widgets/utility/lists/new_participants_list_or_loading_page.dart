@@ -61,7 +61,7 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                 FilledButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => ParticipantsDashboard
+                      builder: (_) => ParticipantsListsDashboard
                                       (
                                         dashboardContext: "", 
                                         onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
