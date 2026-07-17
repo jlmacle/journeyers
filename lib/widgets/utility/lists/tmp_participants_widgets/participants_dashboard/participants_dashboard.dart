@@ -5,7 +5,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
@@ -18,7 +18,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 
 
 
-class ListDashboard extends StatefulWidget 
+class ParticipantsDashboard extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -33,9 +33,9 @@ class ListDashboard extends StatefulWidget
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
-  final GlobalKey<ListDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
+  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
 
-  const ListDashboard
+  const ParticipantsDashboard
   ({
     super.key,
     required this.dashboardContext,
@@ -46,16 +46,16 @@ class ListDashboard extends StatefulWidget
   });
 
   @override
-  State<ListDashboard> createState() => ListDashboardState();
+  State<ParticipantsDashboard> createState() => ParticipantsDashboardState();
 }
 
-class ListDashboardState extends State<ListDashboard> 
+class ParticipantsDashboardState extends State<ParticipantsDashboard> 
 {
   // The DB
   final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
+  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
   void _refreshDashboard()
@@ -80,13 +80,13 @@ class ListDashboardState extends State<ListDashboard>
   // and the list of all sessions available
   Future<void> _getStoredListsData() async 
   {
-    if (listDebug) pu.printd("List debug: ListDashboard: getStoredListsData");
+    if (listDebug) pu.printd("List debug: ParticipantsDashboard: getStoredListsData");
     // Retrieving data 
     _listData = await _listsDB.loadDataStructure();
-    if (listDebug) pu.printd("List debug: ListDashboard: _listData: _listData");
+    if (listDebug) pu.printd("List debug: ParticipantsDashboard: _listData: _listData");
     // Getting the list labels
     final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
-    if (listDebug) pu.printd("List debug: ListDashboard: getStoredListsData: labels: $labels");
+    if (listDebug) pu.printd("List debug: ParticipantsDashboard: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
@@ -122,7 +122,7 @@ class ListDashboardState extends State<ListDashboard>
     super.initState();
          
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListDashboard");
+    if (widgetSequenceDebug) pu.printd("ParticipantsDashboard");
 
     _listsDataAll = [];
     _listsDataFiltered = [];
@@ -234,7 +234,7 @@ class ListDashboardState extends State<ListDashboard>
     required Map<String, dynamic> listData
   }) async
   {
-    if (listDebug) pu.printd("List debug: ListDashboard: _updateListName");
+    if (listDebug) pu.printd("List debug: ParticipantsDashboard: _updateListName");
     // To accomodate widget testing
     if (listKey != null)
     {
@@ -322,8 +322,8 @@ class ListDashboardState extends State<ListDashboard>
 @override
   Widget build(BuildContext context) {
 
-    if (listDebug) pu.printd("List debug: ListDashboard: build: _isDataLoading: $_isDataLoading"); 
-    if (listDebug) pu.printd("List debug: ListDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
+    if (listDebug) pu.printd("List debug: ParticipantsDashboard: build: _isDataLoading: $_isDataLoading"); 
+    if (listDebug) pu.printd("List debug: ParticipantsDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
 
     return 
     Scaffold
@@ -353,7 +353,7 @@ class ListDashboardState extends State<ListDashboard>
                 // DASHBOARD FILTERING FEATURES
                 SliverToBoxAdapter 
                 (
-                  child: ListDashboardSortingAndFilteringFeature
+                  child: ParticipantsDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
                     listsAll: _listsDataAll, listsFiltered: _listsDataFiltered,
@@ -365,7 +365,7 @@ class ListDashboardState extends State<ListDashboard>
     
                 // BULK DELETION
                 SliverToBoxAdapter(
-                  child: ListDashboardDeletionByBulk
+                  child: ParticipantsDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
                     listsAll: _listsDataAll,
@@ -389,7 +389,7 @@ class ListDashboardState extends State<ListDashboard>
                       child: FilledButton.icon(
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute<void>(
-                            builder: (_) => NewTextList
+                            builder: (_) => NewParticipantsList
                                               (
                                                 labelHintText: listLabelHintText,
                                                 placeholderList: listPlaceholder,
@@ -416,7 +416,7 @@ class ListDashboardState extends State<ListDashboard>
                       (context, index) {
                         final listData = _listsDataFiltered[index];
     
-                        return ListOfListsItem(
+                        return ParticipantsListsItem(
                           listMetadata: listData,
                           listIndex: index,
                           dashboardContext: widget.dashboardContext,

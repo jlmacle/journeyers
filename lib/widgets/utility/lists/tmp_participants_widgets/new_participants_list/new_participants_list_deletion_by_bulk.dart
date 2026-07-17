@@ -4,10 +4,10 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
-/// {@category Utils - Generic}
+/// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling bulk deletion of text items in a list.
-class NewTextListDeletionByBulk extends StatefulWidget 
+/// A widget handling bulk deletion of participants in a list.
+class NewParticipantsDeletionByBulk extends StatefulWidget 
 {
   /// Boolean used to store if some text items are selected for deletion.
   final bool areSomeTextItemsSelectedForDeletion; 
@@ -21,7 +21,7 @@ class NewTextListDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the text items displayed.
   final VoidCallback callbackFunctionToRefreshTheList;
 
-  const NewTextListDeletionByBulk
+  const NewParticipantsDeletionByBulk
   ({
     super.key,
     required this.areSomeTextItemsSelectedForDeletion,
@@ -31,10 +31,10 @@ class NewTextListDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<NewTextListDeletionByBulk> createState() => NewTextListDeletionByBulkState();
+  State<NewParticipantsDeletionByBulk> createState() => NewParticipantsListDeletionByBulkState();
 }
 
-class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk> 
+class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeletionByBulk> 
 {
   // ─── BULK DELETION OF LIST ITEMS ───────────────────────────────────────
   // Method used to delete several list items
@@ -70,7 +70,7 @@ class NewTextListDeletionByBulkState extends State<NewTextListDeletionByBulk>
     super.initState();
         
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("NewTextListDeletionByBulk");
+    if (widgetSequenceDebug) pu.printd("NewParticipantsDeletionByBulk");
   }
   
   @override

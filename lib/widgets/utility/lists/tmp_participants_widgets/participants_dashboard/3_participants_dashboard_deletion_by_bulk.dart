@@ -12,7 +12,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling bulk deletion of session data.
-class ListDashboardDeletionByBulk extends StatefulWidget 
+class ParticipantsDashboardDeletionByBulk extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -32,7 +32,7 @@ class ListDashboardDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ListDashboardDeletionByBulk
+  const ParticipantsDashboardDeletionByBulk
   ({
     super.key,
     required this.dashboardContext,
@@ -44,15 +44,15 @@ class ListDashboardDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<ListDashboardDeletionByBulk> createState() => _ListDashboardDeletionByBulkState();
+  State<ParticipantsDashboardDeletionByBulk> createState() => _ParticipantsDashboardDeletionByBulkState();
 }
 
-class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBulk> 
+class _ParticipantsDashboardDeletionByBulkState extends State<ParticipantsDashboardDeletionByBulk> 
 {
   final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
+  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several lists data
@@ -123,7 +123,7 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListDashboardDeletionByBulk");
+    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardDeletionByBulk");
   }
 
   @override

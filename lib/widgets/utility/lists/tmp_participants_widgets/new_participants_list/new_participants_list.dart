@@ -13,7 +13,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 /// Class used to add a text list to a set of text lists.
 /// A new list can be saved only if its content is not identical to a previous list content.
 /// The widget can be used to load a list for edition.
-class NewTextList extends StatefulWidget 
+class NewParticipantsList extends StatefulWidget 
 {
   /// The theme data used.
   final ThemeData themeData;
@@ -36,7 +36,7 @@ class NewTextList extends StatefulWidget
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
 
-  const NewTextList({
+  const NewParticipantsList({
     super.key,
     this.initialTextValues = const [],
     this.labelLoaded,
@@ -48,10 +48,10 @@ class NewTextList extends StatefulWidget
   });  
 
   @override
-  State<NewTextList> createState() => _NewTextListState();
+  State<NewParticipantsList> createState() => _NewParticipantsListState();
 }
 
-class _NewTextListState extends State<NewTextList> {
+class _NewParticipantsListState extends State<NewParticipantsList> {
 
   // bool: a list has been loaded
   bool get _listHasBeenLoaded => widget.labelLoaded != null;
@@ -75,11 +75,11 @@ class _NewTextListState extends State<NewTextList> {
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;
         _loadingDB = false;
-        if (listDebug) pu.printd("List debug: NewTextList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
+        if (listDebug) pu.printd("List debug: NewParticipantsList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
       });
     } catch (e) {
       setState(() {
-        pu.printd("Exception: NewTextList: _loadListOfGroupedTexts: $e");
+        pu.printd("Exception: NewParticipantsList: _loadListOfGroupedTexts: $e");
         _loadingDBError = e.toString();
         _loadingDB = false;
       });
@@ -236,8 +236,8 @@ class _NewTextListState extends State<NewTextList> {
     } 
     catch (e, stackTrace) 
     {
-      if (listDebug) pu.printd("List debug: NewTextList: Error: Save failed: $e");
-      if (listDebug) pu.printd("List debug: NewTextList: Error: $stackTrace");
+      if (listDebug) pu.printd("List debug: NewParticipantsList: Error: Save failed: $e");
+      if (listDebug) pu.printd("List debug: NewParticipantsList: Error: $stackTrace");
       setState(() => _dataSaving = false);
 
       if (!mounted) return;
@@ -255,7 +255,7 @@ class _NewTextListState extends State<NewTextList> {
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("NewTextList");
+    if (widgetSequenceDebug) pu.printd("NewParticipantsList");
 
     // Loading the previous lists of grouped texts
     _listOfPreviousGroupedTextsLoad();
@@ -358,19 +358,19 @@ class _NewTextListState extends State<NewTextList> {
           children: 
           [
             const Divider(),
-            NewGroupKeywordsDeclaration
+            NewParticipantsKeywordsDeclaration
             (
               keywordsCurrent: {},
               keywordsOnUpdateCallbackFunction: (newKeywords) 
               {
-                if (listDebug) pu.printd("List debug: NewTextList: build: newKeywords: $newKeywords");
+                if (listDebug) pu.printd("List debug: NewParticipantsList: build: newKeywords: $newKeywords");
     
                 _newKeywords = newKeywords.toList()..sort();
               }
             ),
             const Divider(),
             // Deletion by bulk widget
-            NewTextListDeletionByBulk
+            NewParticipantsDeletionByBulk
             (
               areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
               enteredTextItemsList: _enteredTextItemsList,
@@ -450,7 +450,7 @@ class _NewTextListState extends State<NewTextList> {
                                                                     
                                                                   });
                                                                 }
-                                                                if (listDebug) pu.printd("List debug: NewTextList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
+                                                                if (listDebug) pu.printd("List debug: NewParticipantsList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
 
                                                               }, 
                           parentCallbackFunctionToUpdateTheListItemValue: _onUpdateTheListItemValue,
@@ -484,7 +484,7 @@ class _NewTextListState extends State<NewTextList> {
                     _enteredTextItemsList.add(value.trim());
                   });
                   _newTextItemTfec.clear();
-                  if (listDebug) pu.printd("List debug: NewTextList: build: _enteredTextItemsList: $_enteredTextItemsList");
+                  if (listDebug) pu.printd("List debug: NewParticipantsList: build: _enteredTextItemsList: $_enteredTextItemsList");
                 },
               ),
             ),

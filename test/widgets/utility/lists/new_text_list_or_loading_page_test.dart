@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
-import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart";
+import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page.dart";
 
 void main() {
 
@@ -11,7 +11,7 @@ void main() {
     return tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: NewTextListOrLoadingPage
+          body: NewParticipantsListOrLoadingPage
           (
             onParticipantsLoadedCallbackFunction: (_) {},
           ),
@@ -20,7 +20,7 @@ void main() {
     );    
   }
 
-  group("NewTextListOrLoadingPage Tests: \n", () 
+  group("NewParticipantsListOrLoadingPage Tests: \n", () 
   {
     // "Participants Lists Options Page: correct title"
     testWidgets("Participants Lists Options Page: correct title", 

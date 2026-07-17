@@ -7,7 +7,7 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling the filtering by keywords of lists.
-class ListDashboardFilteringByKeywords extends StatefulWidget 
+class ParticipantsDashboardFilteringByKeywords extends StatefulWidget 
 {
   /// List containing all available lists data.
   final List<dynamic>? listsAll;
@@ -24,7 +24,7 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ListDashboardFilteringByKeywords
+  const ParticipantsDashboardFilteringByKeywords
   ({
     super.key,
     required this.listsAll,
@@ -35,12 +35,12 @@ class ListDashboardFilteringByKeywords extends StatefulWidget
   });
 
   @override
-  State<ListDashboardFilteringByKeywords> createState() => ListDashboardFilteringByKeywordsState();
+  State<ParticipantsDashboardFilteringByKeywords> createState() => ParticipantsDashboardFilteringByKeywordsState();
 }
 
-class ListDashboardFilteringByKeywordsState extends State<ListDashboardFilteringByKeywords> 
+class ParticipantsDashboardFilteringByKeywordsState extends State<ParticipantsDashboardFilteringByKeywords> 
 {  
-  // Used in ListDashboard.
+  // Used in ParticipantsDashboard.
   // Method used to filter the lists by keywords.
   Future<void> keywordsApplyFiltering() async
   {
@@ -87,7 +87,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
     await keywordsApplyFiltering();
   }
 
-  // Used in ListDashboard.
+  // Used in ParticipantsDashboard.
   // Method used to refresh the keywords list after deletion of session data.
   Future<void> keywordsRefreshAfterSessionDeletion() async
   {
@@ -121,7 +121,7 @@ class ListDashboardFilteringByKeywordsState extends State<ListDashboardFiltering
     super.initState();
             
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListDashboardFilteringByKeywords");
+    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardFilteringByKeywords");
   }
 
   @override

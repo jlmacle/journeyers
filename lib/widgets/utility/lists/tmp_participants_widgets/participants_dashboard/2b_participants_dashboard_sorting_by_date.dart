@@ -4,12 +4,12 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling the sorting by date of session data.
-class ListDashboardSortingByDate extends StatefulWidget 
+class ParticipantsDashboardSortingByDate extends StatefulWidget 
 {
   /// List containing the sessions to sort.
   final List<dynamic>? filteredListsToSort;
@@ -17,7 +17,7 @@ class ListDashboardSortingByDate extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ListDashboardSortingByDate
+  const ParticipantsDashboardSortingByDate
   ({
     super.key,
     required this.filteredListsToSort,
@@ -25,10 +25,10 @@ class ListDashboardSortingByDate extends StatefulWidget
   });
 
   @override
-  State<ListDashboardSortingByDate> createState() => ListDashboardSortingByDateState();
+  State<ParticipantsDashboardSortingByDate> createState() => ParticipantsDashboardSortingByDateState();
 }
 
-class ListDashboardSortingByDateState extends State<ListDashboardSortingByDate> 
+class ParticipantsDashboardSortingByDateState extends State<ParticipantsDashboardSortingByDate> 
 {
   bool _isAscendingDate = false;   
 
@@ -44,7 +44,7 @@ class ListDashboardSortingByDateState extends State<ListDashboardSortingByDate>
     super.initState();
         
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListDashboardSortingByDate");
+    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardSortingByDate");
   }
 
   @override

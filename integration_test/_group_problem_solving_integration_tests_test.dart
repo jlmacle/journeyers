@@ -18,9 +18,9 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
@@ -2424,7 +2424,7 @@ Future<void> main() async {
               // ────────────────────────────────────────────────────────────────────────────────────
               var checkbox1Finder = find.descendant
               (
-                of: find.ancestor(of: find.text(listLabel1), matching: find.byType(ListOfListsItem)), 
+                of: find.ancestor(of: find.text(listLabel1), matching: find.byType(ParticipantsListsItem)), 
                 matching: find.byType(Checkbox)
               );
               await tester.ensureVisible(checkbox1Finder);
@@ -2433,7 +2433,7 @@ Future<void> main() async {
 
             var checkbox2Finder = find.descendant
               (
-                  of: find.ancestor(of: find.text(listLabel2), matching: find.byType(ListOfListsItem)), 
+                  of: find.ancestor(of: find.text(listLabel2), matching: find.byType(ParticipantsListsItem)), 
                   matching: find.byType(Checkbox)
               );
               await tester.ensureVisible(checkbox2Finder);
@@ -2452,7 +2452,7 @@ Future<void> main() async {
               // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────────────       
               // Checking the number of list items left 
-              var sessionsListItemsFinder = find.byType(ListOfListsItem);
+              var sessionsListItemsFinder = find.byType(ParticipantsListsItem);
               expect(sessionsListItemsFinder, findsOne);
               // Verifying listName3 remains
               var textFinder = find.text(listLabel3);
@@ -2634,7 +2634,7 @@ Future<void> main() async {
               // ── EDITING THE PARTICIPANTS  ──────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
+              var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
 
@@ -2660,7 +2660,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();              
 
               // Verifying data in the participants container
-              participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
+              participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsDashboard(tester);
               var participantsFinder = find.descendant
                                       (
                                         of: participantsContainersFinder, 
@@ -2715,7 +2715,7 @@ Future<void> main() async {
               // ── EDITING THE PARTICIPANTS   ─────────────────
               // ───────────────────────────────────────────────
               // Searching for the participants containers        
-              var participantsContainersFinder = await gpsGetParticipantsContainersOnListDashboard(tester);
+              var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
               if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
 

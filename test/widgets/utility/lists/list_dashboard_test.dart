@@ -7,8 +7,8 @@ import "package:path_provider_platform_interface/path_provider_platform_interfac
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 
 
 void main() {
@@ -37,7 +37,7 @@ void main() {
     return tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: ListDashboard
+          body: ParticipantsDashboard
           (
             dashboardContext: "", 
             onAllSessionFilesDeletedContextPageCallbackFunction: () {}, 
@@ -59,7 +59,7 @@ void main() {
     );    
   }
 
-  group("ListDashboard Tests: \n", () 
+  group("ParticipantsDashboard Tests: \n", () 
   {
     // "Empty dashboard: button toward adding a new list"
     testWidgets("Empty dashboard: button toward adding a new list", 
