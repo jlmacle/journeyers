@@ -8,7 +8,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget handling the sorting by title of session data.
+/// A widget handling the sorting of lists by label on the participants dashboard.
 class ParticipantsDashboardSortingByLabel extends StatefulWidget 
 {
   /// List containing the filtered lists to sort.
