@@ -2065,8 +2065,8 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the lists dashboard title present
-          var ParticipantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
-          expect(ParticipantsListsDashboardTitleFinder, findsOne);
+          var participantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
+          expect(participantsListsDashboardTitleFinder, findsOne);
 
           // Searching for a loading button
           var loadingButtonFinder = find.descendant
@@ -2074,7 +2074,7 @@ Future<void> main() async {
             of: find.byType(ElevatedButton), 
             matching: find.text(loadingButtonLabel)
           );
-          expect(ParticipantsListsDashboardTitleFinder, findsOne);
+          expect(participantsListsDashboardTitleFinder, findsOne);
 
           // await tester.pump(const Duration(seconds: 2));
 
