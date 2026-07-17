@@ -148,7 +148,6 @@ class ParticipantsListsDB {
             zEndSequenceCount++;
             nextAlphabetPart = "a" + nextAlphabetPart;
            
-            // if (listDebug) pu.printd("List debug: nextAlphabetPart: $nextAlphabetPart");
             // remains one extra "a" to add if alphabetPart made only of "z"s
           }
 
@@ -166,10 +165,6 @@ class ParticipantsListsDB {
                 alphabetPart.substring(0, alphabetPart.length - zEndSequenceCount);
            
             nextAlphabetPart = _nextAlphabetPart(alphabetPartWithoutZSequence) + nextAlphabetPart;
-
-            // if (listDebug) pu.printd("List debug: alphabetPart: $alphabetPart");
-            // if (listDebug) pu.printd("List debug: zCount: $zEndSequenceCount");
-            // if (listDebug) pu.printd("List debug: alphabetPartWithoutZSequence: $alphabetPartWithoutZSequence");
 
             return nextAlphabetPart;
           }
@@ -204,37 +199,29 @@ class ParticipantsListsDB {
     return decodedData;
   } 
 
-  // To clean: Code duplication
-  /// Returns `true` when [label] already exists in the list of participants lists labels (async).
-  Future<bool> listLabelExistsAsync(String label) async {
-    var data = await loadDataStructure();
-    for (var index = 0; index < data.length; index++)
-    {
-      var listData = data[index] as Map<String, dynamic>;
-      var listDataValues = listData.values.first;
-      if (listDataValues[itemTextKey] == label) return true;
-    }
-    return false; 
-  }
-
   /// Returns `true` when [label] already exists in the list of grouped texts (sync).
   bool listLabelExistsSync({required String label, required List<dynamic> dataStructure}) {
     for (var index = 0; index < dataStructure.length; index++)
     {
       var listData = dataStructure[index] as Map<String, dynamic>;
       var listDataValues = listData.values.first;
-      // if (listDebug) pu.printd("List debug: listData.values.first: ${listData.values.first}");
+
       if (listDataValues[itemTextKey] == label) return true;
     }
     return false; 
   }
 
+  // To clean: Code duplication
+  /// Returns `true` when [label] already exists in the list of participants lists labels (async).
+  Future<bool> listLabelExistsAsync(String label) async {
+    var dataStructure = await loadDataStructure();
+
+    return listLabelExistsSync(label: label, dataStructure: dataStructure);
+  }
+  
   /// Loads the texts for [label]. Throws [ArgumentError] when absent.
   List<String> loadTextsByListLabelSync({required String label, required List<dynamic> dataStructure})
   {
-    // if (listDebug) pu.printd("List debug: label: $label");
-    // if (listDebug) pu.printd("List debug: dataStructure: $dataStructure");
-
     bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
       throw ArgumentError("No list found for label: '$label'.");
@@ -265,7 +252,6 @@ class ParticipantsListsDB {
         texts.add(text);
       }
 
-      // if (listDebug) pu.printd("List debug: texts: $texts");
       if (listLabel == label) return List.from(texts);   
     }
 
@@ -280,10 +266,6 @@ class ParticipantsListsDB {
   Map<String, dynamic> loadListDataByListLabelSync({required String label, required List<dynamic> dataStructure})
   {
 
-    // if (listDebug) pu.printd("List debug: dataStructure: $dataStructure");
-
-    Map<String, dynamic> listData = {};
-
     bool labelExists = listLabelExistsSync(label: label, dataStructure: dataStructure);
     if (!labelExists) {
       throw ArgumentError("No list found for label: '$label'.");
@@ -292,10 +274,6 @@ class ParticipantsListsDB {
     // Lists-level loop
     for (var indexLists = 0; indexLists < dataStructure.length; indexLists++)
     {
-      // var listUniqueKey = "";
-      // var listTexts = [];
-      // var listKeywords = [];
-      
       // Retrieving the data for the current list  
       var currentListData = dataStructure[indexLists] as Map<String, dynamic>;  
       // Retrieving the data values for the current list
@@ -303,9 +281,7 @@ class ParticipantsListsDB {
       // Retrieving the label for the current list  
       var listLabel = currentListDataValues[itemTextKey];
 
-      if (listLabel == label) return currentListDataValues;
-
-       
+      if (listLabel == label) return currentListDataValues;       
     }
 
     return {};
@@ -317,7 +293,6 @@ class ParticipantsListsDB {
 
     // Loading the data
     var data = await loadDataStructure();
-    // if (listDebug) pu.printd("List debug: data: $data");
 
     List<List<String>> listOfGroupedTexts =[];
 
@@ -345,7 +320,7 @@ class ParticipantsListsDB {
       // Adding to the list
       listOfGroupedTexts.add(textsList);
     }
-    // if (listDebug) pu.printd("List debug: listOfGroupedTexts(): listOfGroupedTexts: $listOfGroupedTexts");
+
     return listOfGroupedTexts;
   }
 
@@ -375,15 +350,9 @@ class ParticipantsListsDB {
   // Case 3: digitPart = 9 and  alphabetPartLastLetter = z: nextGenKey: need to increment the alphabet part before z
   String getNextKey({required String key})
   {
-
-    //print(alphabetToIndexMap);
-
     String nextKey = "";
     int digitPart = int.parse( key[key.length -1] );
     String alphabetPart = key.substring(0, key.length-1);
-
-    //if (listDebug) pu.printd("List debug: digitPart: $digitPart");
-    //if (listDebug) pu.printd("List debug: alphabetPart: $alphabetPart");
 
     // Case 1: 0 <= digitPart <= 8
     switch (List.generate(8, (i) => i).contains(digitPart))
@@ -413,9 +382,7 @@ class ParticipantsListsDB {
         String alphabetPartLastLetter = alphabetPart[alphabetPart.length - 1];
         // determining the root part of alphabetPart
         if (alphabetPart != alphabetPartLastLetter) alphabetPartRoot = alphabetPart.substring(0, alphabetPart.length - 1);
-
-        //if (listDebug) pu.printd("List debug: alphabetPartRoot: $alphabetPartRoot");
-        
+ 
         // Case 2: digitPart = 9 and  a <= alphabetPartLastLetter <= y
         switch(alphabetListMinusZ.contains(alphabetPartLastLetter))
         {
@@ -450,12 +417,9 @@ class ParticipantsListsDB {
             // Retrieving the next letter in the alphabet after z: a
             String nextLetterAfterAlphabetPartLastLetter ="a";
             // Building the new alphabet part root
-            // String nextAlphabetPartRoot = _nextAlphabetPart(alphabetPartRoot);
             String nextAlphabetPart = _nextAlphabetPart(alphabetPart);
             nextKey = "${nextAlphabetPart}${nextDigitPart}";
-            // nextKey = "${nextAlphabetPartRoot}${nextLetterAfterAlphabetPartLastLetter}${nextDigitPart}";
-            //if (listDebug) pu.printd("List debug: nextKey: $nextKey");
-          }
+         }
         }
       }
 
@@ -486,12 +450,9 @@ class ParticipantsListsDB {
       else
       {
         // Removing the key from longestKeysSet
-        // if (listDebug) pu.printd("List debug: Removing: ${keys[keyIndex]}: longestKeyLength: $longestKeyLength");
         longestKeysSet.remove(keys[keyIndex]);
       }
     }
-
-    // if (listDebug) pu.printd("List debug: longestKeysSet after first loop: $longestKeysSet");
 
     // Removing all values smaller than longestKeyLength
     List<String> longestKeysList = longestKeysSet.toList();
@@ -500,10 +461,8 @@ class ParticipantsListsDB {
       // Is the key longer than longestKeyLength
       if ( longestKeyLength > longestKeysList[keyIndex].length )
       {
-        // if (listDebug) pu.printd("List debug: Removing: ${longestKeysList[keyIndex]}");
         // Removing the key from longestKeysSet
-        longestKeysSet.remove(longestKeysList[keyIndex]);
-        
+        longestKeysSet.remove(longestKeysList[keyIndex]);        
       }
     }
 
@@ -554,7 +513,6 @@ class ParticipantsListsDB {
       map[(list[listIndex]).keys.first] = listIndex;
     }
 
-
     return map;
   }
 
@@ -575,21 +533,16 @@ class ParticipantsListsDB {
   /// Saves [texts] under [label], overwriting any previous entry.
   /// The key used is a sequence of letters followed by a digit (0 to 9)
   Future<void> saveListData(String label, List<String> texts, List<String> keywords) async {
-    // if (listDebug) pu.printd("List debug: saveListData");
 
     List<dynamic> data = await loadDataStructure();
 
-    // if (listDebug) pu.printd("List debug: data: $data");
-
     // Key building
     String listKey;
-    String lastKeyInData;
+
     // Case: structure is empty
     if (data.isEmpty) 
     { 
-      // if (listDebug) pu.printd("List debug: Empty list set");
       listKey = "a0"; 
-      // if (listDebug) pu.printd("List debug: new key: $listKey");
     }
     // Case: structure is not empty
     else 
@@ -608,7 +561,6 @@ class ParticipantsListsDB {
       var lastKeyInData = lastSubItemData.keys.first;
 
       listKey = getNextKey(key: lastKeyInData);
-      // if (listDebug) pu.printd("List debug: new list key: $listKey");
     }
   
     //List of sub-items data building
@@ -620,19 +572,14 @@ class ParticipantsListsDB {
     {
       // building the key from the previously used key
       key = getNextKey(key: key);
-      // if (listDebug) pu.printd("List debug: item key: $key");
       Map<String, dynamic> itemDataMap = {itemKey: key, itemTextKey: texts[textIndex], subItemsDataListKey: null, displayFunctionKey: null};
 
       subItemsDataList.add({key: itemDataMap});
     }
-    
-    // if (listDebug) pu.printd("List debug: subItemsDataList: $subItemsDataList");
 
     // Building the list data
     var listDataMap=  {itemKey: listKey, itemTextKey: label, itemKeywordsKey: keywords..sort(), subItemsDataListKey: subItemsDataList, displayFunctionKey: null};
     var listData = {listKey: listDataMap};
-
-    // if (listDebug) pu.printd("List debug: List data: $listData");
 
     // Adding the list (verified previously as unique)
     data.add(listData);
@@ -651,7 +598,7 @@ class ParticipantsListsDB {
     var listLabel = listData[itemTextKey];
     if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName (before): listLabel: $listLabel");
 
-    // listData[itemTextKey] = updatedListName;
+
     
     if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName (after): listLabel: $listLabel");
     return listLabel;
@@ -687,7 +634,6 @@ class ParticipantsListsDB {
         String? keyForRemoval = actualNamesKeysMap[actualParticipant];
         var indexForRemoval = keyActualIndexMap[keyForRemoval!];
         subItemsDataList.removeAt(indexForRemoval);
-
 
         // Todo: data structure
         // updating the index map
@@ -734,9 +680,6 @@ class ParticipantsListsDB {
   /// Updates a list data.
   Future<void> updateListData(String listKey, Map<String, dynamic> listData) async {
 
-    // if (listDebug) pu.printd("List debug: updateListData: ");
-    // if (listDebug) pu.printd("List debug: listData: $listData");
-
     List<dynamic> data = await loadDataStructure();
 
     for (var index = 0; index < data.length; index++)
@@ -745,15 +688,10 @@ class ParticipantsListsDB {
       var currentListDataKeys = currentListData.keys.first;
       if (currentListDataKeys == listKey) 
       {
-
         // Updating the list data by index and key
         data[index][listKey] = listData;
-        // if (listDebug) pu.printd("List debug: data[index][listKey]: ${data[index][listKey]}");
-
       }
     }
-
-    // if (listDebug) pu.printd("List debug: data (updated): $data"); 
 
     // Saving the data
     var f = await _getFile();
