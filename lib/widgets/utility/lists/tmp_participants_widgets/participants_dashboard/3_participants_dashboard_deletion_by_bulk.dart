@@ -4,8 +4,8 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
-import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
+import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
 
 
@@ -49,7 +49,7 @@ class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget
 
 class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsListsDashboardDeletionByBulk> 
 {
-  final _listsDB = ListsDB();
+  final _listsDB = ParticipantsListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
   final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();

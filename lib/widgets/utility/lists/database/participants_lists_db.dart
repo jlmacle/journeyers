@@ -8,7 +8,7 @@ import "package:journeyers/utils/generic/alphabet/alphabet_utils.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/project_specific/dev/sort_utils.dart";
-import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
+import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 
 
 /// {@category Utils - Project-specific}
@@ -25,7 +25,7 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
 /// The structure is meant to be reusable, for categorized text lists with sub-items. 
-class ListsDB {
+class ParticipantsListsDB {
   static var _fileName = "journeyers_gps_participants_lists22a.json";
 
   // ── Internal helpers ────────────────────────────────────────────────────────
