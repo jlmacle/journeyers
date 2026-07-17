@@ -41,7 +41,7 @@ class ListsDB {
       {
         if (listDebug) pu.printd("List debug: ListsDB: _getFile: file DB not existant. File creation");
 
-        if (isInTestEnvironment) _fileName = "tmp_list_data.json";
+        if (isInTestEnvironment) _fileName = "participants_lists_test_data.json";
 
         file = File("${dir.path}/$_fileName");
         file.createSync();
