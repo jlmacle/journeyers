@@ -83,7 +83,7 @@ class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<P
                   // Sorting by title
                   ParticipantsListsDashboardSortingByLabel
                   (
-                    filteredListsToSort: widget.participantsListsFiltered,
+                    participantsListsFilteredToSort: widget.participantsListsFiltered,
                     featureCallbackFunctionToRefreshTheParticipantsLists: widget.dashboardCallbackFunctionToRefreshTheParticipantsLists
                   ),
                 ],
@@ -103,8 +103,8 @@ class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<P
         ParticipantsListsDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          listsAll: widget.participantsListsAll, 
-          listsFiltered: widget.participantsListsFiltered, 
+          participantsListsAll: widget.participantsListsAll, 
+          participantsListsFiltered: widget.participantsListsFiltered, 
           keywordsAll: widget.keywordsAll,
           keywordsSelected: widget.keywordsSelected,
           featureCallbackFunctionToRefreshTheParticipantsLists: widget.dashboardCallbackFunctionToRefreshTheParticipantsLists

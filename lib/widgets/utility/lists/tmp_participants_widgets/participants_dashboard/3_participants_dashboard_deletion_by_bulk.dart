@@ -21,13 +21,13 @@ class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget
   final bool areListsForDeletion; 
 
   /// List containing all available lists.
-  final List<dynamic>? listsAll;
+  final List<dynamic>? participantsListsAll;
 
   /// List containing all filtered lists.
-  final List<dynamic>? listsFiltered;
+  final List<dynamic>? participantsListsFiltered;
 
   /// List containing the keys of lists selected for deletion.
-  final List<dynamic>? listsSelectedForDeletionKeys;
+  final List<dynamic>? participantsListsSelectedForDeletionKeys;
 
   /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheParticipantsLists;
@@ -37,10 +37,10 @@ class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget
     super.key,
     required this.dashboardContext,
     required this.areListsForDeletion,
-    required this.listsAll,
-    required this.listsFiltered,
+    required this.participantsListsAll,
+    required this.participantsListsFiltered,
     required this.dashboardCallbackFunctionToRefreshTheParticipantsLists,
-    this.listsSelectedForDeletionKeys    
+    this.participantsListsSelectedForDeletionKeys    
   });
 
   @override
@@ -59,28 +59,28 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
   Future<void> _selectedListsDelete() async 
   {
     // Creating a fixed list to iterate over so clearing doesn"t break the loop
-    final keysOfListsSelectedForDeletion = List<String>.from(widget.listsSelectedForDeletionKeys!);
+    final keysOfListsSelectedForDeletion = List<String>.from(widget.participantsListsSelectedForDeletionKeys!);
 
     // Updating the DB
     await _listsDB.removeListData(keysOfListsSelectedForDeletion);    
 
     // Updating the filtered sessions list
-    widget.listsFiltered?.removeWhere
+    widget.participantsListsFiltered?.removeWhere
     (
       (session) => 
       keysOfListsSelectedForDeletion.contains(session[itemKey])
     );
 
     // Updating the _allLists list
-    widget.listsAll?.removeWhere
+    widget.participantsListsAll?.removeWhere
     (
       (session) => 
       keysOfListsSelectedForDeletion.contains(session[itemKey])
     );
-    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allLists: ${widget.listsAll}");
+    if (sessionDataDebug) pu.printd("Session Data: Deletion by bulk: after deletion:  widget.allLists: ${widget.participantsListsAll}");
 
     // Clearing the list of the selected sessions
-    widget.listsSelectedForDeletionKeys!.clear();
+    widget.participantsListsSelectedForDeletionKeys!.clear();
 
     // Updating the keywords list
     await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
@@ -94,11 +94,11 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
     (const SnackBar(content: Text("Selected sessions deleted.")));
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.listsAll!.isEmpty}");
+    if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.participantsListsAll!.isEmpty}");
 
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.listsAll!.isEmpty) 
+    if (widget.participantsListsAll!.isEmpty) 
     {
       // resetWasSessionDataSavedStatus to false
       await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
@@ -135,7 +135,7 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
             onPressed: _selectedListsDelete,
             icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(
-              "Delete (${widget.listsSelectedForDeletionKeys?.length ?? 0})",
+              "Delete (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
               style: TextStyle(
                 color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,

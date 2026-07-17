@@ -357,10 +357,10 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                   child: ParticipantsListsDashboardDeletionByBulk
                   (
                     dashboardContext: widget.dashboardContext,
-                    listsAll: _listsDataAll,
-                    listsFiltered: _listsDataFiltered,
+                    participantsListsAll: _listsDataAll,
+                    participantsListsFiltered: _listsDataFiltered,
                     areListsForDeletion: _listsSelectedForDeletionKeys.isNotEmpty,
-                    listsSelectedForDeletionKeys: _listsSelectedForDeletionKeys,
+                    participantsListsSelectedForDeletionKeys: _listsSelectedForDeletionKeys,
                     dashboardCallbackFunctionToRefreshTheParticipantsLists: () => setState(() {})                    
                   )
                 ),
