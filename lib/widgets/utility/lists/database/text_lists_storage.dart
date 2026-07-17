@@ -26,7 +26,7 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// (see [getApplicationSupportDirectory]).
 /// The structure is meant to be reusable, for categorized text lists with sub-items. 
 class ListsDB {
-  static var _fileName = "journeyers_gps_participants_groups_lists22a.json";
+  static var _fileName = "journeyers_gps_participants_lists22a.json";
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
