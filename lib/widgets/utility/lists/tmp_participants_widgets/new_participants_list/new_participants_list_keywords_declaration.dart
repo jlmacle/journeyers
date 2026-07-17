@@ -7,7 +7,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
-/// A widget used to declare keywords, or to retrieve keywords from previous context analyses, in the participants list.
+/// A widget used to declare keywords, or to retrieve keywords from previous context analyses, in a new participants list.
 class NewParticipantsKeywordsDeclaration extends StatefulWidget 
 {
   /// The keywords associated to the session data.
