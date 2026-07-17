@@ -14,13 +14,19 @@ import "package:journeyers/widgets/utility/lists/database/text_lists_storage_ext
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// Persists a list of participants list data with the pattern:
-/// { "key": { "itemText": "participantListLabel", "itemTextKey": "a0" , 
+/// { "key": { 
+///             "itemText": "participantListLabel", 
+///             "itemTextKey": "a0" , 
 ///             "itemTextKeywords": ["Household", "Workplace"]  ,
-///             "subItemsListData": subItemsListData , "displayFunction": displayFunction} }
+///             "subItemsListData": subItemsListData , 
+///             "displayFunction": displayFunction
+///           } 
+/// }
 /// to a single JSON file located in the application-support directory 
 /// (see [getApplicationSupportDirectory]).
+/// The structure is meant to be reusable, for categorized text lists with sub-items. 
 class ListsDB {
-  static var _fileName = "journeyers_gps_participants_groups_lists22a.json";
+  static var _fileName = "journeyers_gps_participants_lists22a.json";
 
   // ── Internal helpers ────────────────────────────────────────────────────────
 
