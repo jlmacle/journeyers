@@ -17,7 +17,8 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 
 
-
+/// {@category Utils - Project-specific}
+/// {@category Lists}
 class ParticipantsDashboard extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
