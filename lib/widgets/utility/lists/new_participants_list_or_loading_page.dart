@@ -6,7 +6,8 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
 
-
+/// {@category Utils - Project-specific}
+/// {@category Lists}
 /// ParticipantsGroupDeclaration offers two choices:
 ///   • Loading a list of previous groups of participants
 ///   • Adding a new group of participants
