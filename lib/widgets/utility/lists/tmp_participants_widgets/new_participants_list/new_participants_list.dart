@@ -31,20 +31,20 @@ class NewParticipantsList extends StatefulWidget
   final String placeholderInvitationToEnterAParticipantSName;
 
   /// The placeholder text for the new list.
-  final String listPlaceholder;
+  final String placeholderWhenNoParticipantsNames;
 
   /// A callback function called when the participants list is loaded.
-  final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
+  final ValueChanged<List<String>> onParticipantsListLoadedCallbackFunction;
 
   const NewParticipantsList({
     super.key,
     this.initialParticipantsNamesList = const [],
     this.listLabelLoaded,
     required this.listLabelHintText,
-    required this.listPlaceholder,
+    required this.placeholderWhenNoParticipantsNames,
     required this.placeholderInvitationToEnterAParticipantSName,
     required this.themeData, 
-    required this.onParticipantsLoadedCallbackFunction
+    required this.onParticipantsListLoadedCallbackFunction
   });  
 
   @override
@@ -159,7 +159,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 return;
               }
               // Loading the list
-              widget.onParticipantsLoadedCallbackFunction(_enteredTextItemsList);
+              widget.onParticipantsListLoadedCallbackFunction(_enteredTextItemsList);
 
               // To close the dialog
               Navigator.of(ctx).pop(label);
@@ -387,7 +387,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 // Placeholder message if empty list
                 ? Center(
                     child: Text(
-                      widget.listPlaceholder,
+                      widget.placeholderWhenNoParticipantsNames,
                       textAlign: TextAlign.center,
                       style: widget.themeData.textTheme.bodyLarge
                     ),
