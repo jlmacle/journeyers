@@ -23,7 +23,7 @@ import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
-import "package:journeyers/widgets/utility/lists/new_text_list_or_loading_page.dart";
+import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_desktop_platforms.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
@@ -361,7 +361,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                         () => Navigator.of(context).push
                         (
                           MaterialPageRoute<void>(
-                            builder: (_) => NewTextListOrLoadingPage
+                            builder: (_) => NewParticipantsListOrLoadingPage
                             (
                               onParticipantsLoadedCallbackFunction:
                               (participants)

@@ -4,16 +4,16 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/type_defs2.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/type_defs2.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 
 // todo: code to clean
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling a list data.
-class ListOfListsItem extends StatefulWidget 
+class ParticipantsListsItem extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -49,7 +49,7 @@ class ListOfListsItem extends StatefulWidget
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDeleteCallbackFunction;
 
-  const ListOfListsItem({
+  const ParticipantsListsItem({
     super.key,
     required this.listMetadata,
     required this.listIndex,
@@ -65,10 +65,10 @@ class ListOfListsItem extends StatefulWidget
   });
 
   @override
-  State<ListOfListsItem> createState() => _ListOfListsItemState();
+  State<ParticipantsListsItem> createState() => _ParticipantsListsItemState();
 }
 
-class _ListOfListsItemState extends State<ListOfListsItem> 
+class _ParticipantsListsItemState extends State<ParticipantsListsItem> 
 {
   final _listsDB = ListsDB();
   List<String> _participantsCurrent = [];
@@ -99,7 +99,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
   // To clean
   Future<void> _onListNameUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
-    if (listDebug) pu.printd("List Debug: ListOfListsItem: _onListNameUpdated");
+    if (listDebug) pu.printd("List Debug: ParticipantsListsItem: _onListNameUpdated");
 
     // Calling the parent callback for state 
     await widget.onListNameUpdatedCallbackFunction(listKey: listKey!, listData: listData);
@@ -135,7 +135,7 @@ class _ListOfListsItemState extends State<ListOfListsItem>
     super.initState();
     
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListOfListsItem");
+    if (widgetSequenceDebug) pu.printd("ParticipantsListsItem");
 
     List<Map<String, dynamic>> subItemsDataList =
     ((widget.listMetadata[subItemsDataListKey]) as List)

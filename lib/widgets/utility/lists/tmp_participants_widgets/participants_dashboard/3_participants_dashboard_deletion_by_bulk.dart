@@ -6,13 +6,13 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage.dart";
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_utility_widgets/2c_list_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
 
 
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling bulk deletion of session data.
-class ListDashboardDeletionByBulk extends StatefulWidget 
+class ParticipantsDashboardDeletionByBulk extends StatefulWidget 
 {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
@@ -32,7 +32,7 @@ class ListDashboardDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ListDashboardDeletionByBulk
+  const ParticipantsDashboardDeletionByBulk
   ({
     super.key,
     required this.dashboardContext,
@@ -44,15 +44,15 @@ class ListDashboardDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<ListDashboardDeletionByBulk> createState() => _ListDashboardDeletionByBulkState();
+  State<ParticipantsDashboardDeletionByBulk> createState() => _ParticipantsDashboardDeletionByBulkState();
 }
 
-class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBulk> 
+class _ParticipantsDashboardDeletionByBulkState extends State<ParticipantsDashboardDeletionByBulk> 
 {
   final _listsDB = ListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ListDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
+  final GlobalKey<ParticipantsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several lists data
@@ -123,7 +123,7 @@ class _ListDashboardDeletionByBulkState extends State<ListDashboardDeletionByBul
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListDashboardDeletionByBulk");
+    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardDeletionByBulk");
   }
 
   @override

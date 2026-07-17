@@ -3,13 +3,13 @@ import "package:flutter/material.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/list_dashboard_const_strings.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 
 
 /// {@category Utility widgets}
 /// {@category Lists}
 /// A widget handling the sorting by title of session data.
-class ListDashboardSortingByLabel extends StatefulWidget 
+class ParticipantsDashboardSortingByLabel extends StatefulWidget 
 {
   /// List containing the filtered lists to sort.
   final List<dynamic>? filteredListsToSort;
@@ -17,7 +17,7 @@ class ListDashboardSortingByLabel extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const ListDashboardSortingByLabel
+  const ParticipantsDashboardSortingByLabel
   ({
     super.key,
     required this.filteredListsToSort,
@@ -25,10 +25,10 @@ class ListDashboardSortingByLabel extends StatefulWidget
   });
 
   @override
-  State<ListDashboardSortingByLabel> createState() => _ListDashboardSortingByLabelState();
+  State<ParticipantsDashboardSortingByLabel> createState() => _ParticipantsDashboardSortingByLabelState();
 }
 
-class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabel> 
+class _ParticipantsDashboardSortingByLabelState extends State<ParticipantsDashboardSortingByLabel> 
 {
   // Random alphabetical order by default
   bool _isAscendingLabel = false;   
@@ -44,7 +44,7 @@ class _ListDashboardSortingByLabelState extends State<ListDashboardSortingByLabe
     super.initState();
     
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ListDashboardSortingByLabel");
+    if (widgetSequenceDebug) pu.printd("ParticipantsDashboardSortingByLabel");
   }
 
   @override
