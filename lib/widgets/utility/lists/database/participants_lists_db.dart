@@ -39,20 +39,20 @@ class ParticipantsListsDB {
     {
       try
       {
-        if (listDebug) pu.printd("List debug: ListsDB: _getFile: file DB not existant. File creation");
+        if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file DB not existant. File creation");
 
         if (isInTestEnvironment) _fileName = "participants_lists_test_data.json";
 
         file = File("${dir.path}/$_fileName");
         file.createSync();
-        if (listDebug) pu.printd("List debug: ListsDB: _getFile: file created: ${file.path}");
+        if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file created: ${file.path}");
         List<Map<String, String>> records = [];
         String content = jsonEncode(records);
         // writeAsStringSync - Widget testing fails with writeAsString
         file.writeAsStringSync(content);
         // readAsStringSync - Widget testing fails with readAsString
         content = file.readAsStringSync();
-        if (listDebug) pu.printd("List debug: ListsDB: _getFile: file content: $content");
+        if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file content: $content");
       }
       catch(e,s)
       {
@@ -63,8 +63,8 @@ class ParticipantsListsDB {
     }
     else
     {
-      if (listDebug) pu.printd("List debug: ListsDB: _getFile: file DB exists");
-      if (listDebug) pu.printd("List debug: ListsDB: _getFile: file content: ${file.readAsStringSync()}");
+      if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file DB exists");
+      if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file content: ${file.readAsStringSync()}");
     }
     return file;
   }
@@ -187,7 +187,7 @@ class ParticipantsListsDB {
 
     if (f == null) 
     {
-      if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: no data to load"); 
+      if (listDebug) pu.printd("List debug: ParticipantsListsDB: loadDataStructure: no data to load"); 
       return [];
     }
 
@@ -195,7 +195,7 @@ class ParticipantsListsDB {
     // readAsStringSync - Widget testing fails with readAsString
     var stringData = f.readAsStringSync();
     var decodedData = jsonDecode(stringData);
-    if (listDebug) pu.printd("List debug: ListsDB: loadDataStructure: decoded data: $decodedData"); 
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: loadDataStructure: decoded data: $decodedData"); 
     return decodedData;
   } 
 
@@ -641,14 +641,14 @@ class ParticipantsListsDB {
   Future<String> updateListName(String updatedListName, Map<String, dynamic> listData) async
   {
 
-    if (listDebug) pu.printd("List debug: ListsDB: updateListName: updatedListName: $updatedListName");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName: updatedListName: $updatedListName");
 
     var listLabel = listData[itemTextKey];
-    if (listDebug) pu.printd("List debug: ListsDB: updateListName (before): listLabel: $listLabel");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName (before): listLabel: $listLabel");
 
     // listData[itemTextKey] = updatedListName;
     
-    if (listDebug) pu.printd("List debug: ListsDB: updateListName (after): listLabel: $listLabel");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName (after): listLabel: $listLabel");
     return listLabel;
   }
 
@@ -658,26 +658,26 @@ class ParticipantsListsDB {
   {
     var newKey = "";
 
-    if (listDebug) pu.printd("List debug: ListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
     List<String> updatedParticipantsList = updatedParticipants.toList();
     var subItemsDataList = listData[subItemsDataListKey];
-    if (listDebug) pu.printd("List debug: ListsDB: updateParticipants (before): subItemsDataList: $subItemsDataList");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants (before): subItemsDataList: $subItemsDataList");
 
     // Getting a map names/keys from the stored subItemsDataList
     Map<String, String> actualNamesKeysMap = getNamesKeys(subItemsDataList);
 
-    if (listDebug) pu.printd("List debug: ListsDB: updateParticipants: actualNamesKeysMap: $actualNamesKeysMap");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: actualNamesKeysMap: $actualNamesKeysMap");
 
     // Verifying if some participants are to be removed from the subItemsDataList
     List<String> actualParticipants = actualNamesKeysMap.keys.toList();
     Map<String, int> keyActualIndexMap  = getListKeyIndexMap(subItemsDataList);
 
-    if (listDebug) pu.printd("List debug: ListsDB: updateParticipants: actualParticipants: $actualParticipants");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: actualParticipants: $actualParticipants");
     for (String actualParticipant in actualParticipants)
     {
       if (!updatedParticipantsList.contains(actualParticipant))
       {
-        if (listDebug) pu.printd("List debug: ListsDB: updateParticipants: participant removal: $actualParticipant not in $updatedParticipantsList");
+        if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: participant removal: $actualParticipant not in $updatedParticipantsList");
         // removing from subItemsDataList
         String? keyForRemoval = actualNamesKeysMap[actualParticipant];
         var indexForRemoval = keyActualIndexMap[keyForRemoval!];
@@ -694,12 +694,12 @@ class ParticipantsListsDB {
     // Getting actualParticipantsList from updated subItemsDataList
     actualNamesKeysMap = getNamesKeys(subItemsDataList);
     var actualParticipantsList = actualNamesKeysMap.keys.toList();
-    if (listDebug) pu.printd("List debug: ListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
     for (String updatedParticipant in updatedParticipants)
     {
       if (!actualParticipantsList.contains(updatedParticipant))
       {
-        if (listDebug) pu.printd("List debug: ListsDB: updateParticipants: participant addition: $updatedParticipant not in $actualParticipantsList");
+        if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: participant addition: $updatedParticipant not in $actualParticipantsList");
         
         // Sub-item data needs to be added
         Map<String, dynamic> subItemData = {};
@@ -722,7 +722,7 @@ class ParticipantsListsDB {
       }
     }
 
-    if (listDebug) pu.printd("List debug: ListsDB: updateParticipants (after): subItemsDataList: $subItemsDataList");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants (after): subItemsDataList: $subItemsDataList");
     return subItemsDataList;
   }
 
@@ -758,7 +758,7 @@ class ParticipantsListsDB {
   /// Removes a list data.
   Future<void> removeListData(List<String> listKeys) async {
 
-    if (listDebug) pu.printd("List debug: ListsDB: removeListData: ");
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: removeListData: ");
 
     List<dynamic> data = await loadDataStructure();
 
@@ -773,7 +773,7 @@ class ParticipantsListsDB {
       }
     }
 
-    if (listDebug) pu.printd("List debug: ListsDB: removeListData: data (updated): $data"); 
+    if (listDebug) pu.printd("List debug: ParticipantsListsDB: removeListData: data (updated): $data"); 
 
     // Saving the data
     var f = await _getFile();
