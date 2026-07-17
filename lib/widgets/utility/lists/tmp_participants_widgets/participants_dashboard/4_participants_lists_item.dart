@@ -10,7 +10,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/lists/database/text_lists_storage_externalized_strings.dart";
 
 // todo: code to clean
-/// {@category Utility widgets}
+/// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling a list data.
 class ParticipantsListsItem extends StatefulWidget 
