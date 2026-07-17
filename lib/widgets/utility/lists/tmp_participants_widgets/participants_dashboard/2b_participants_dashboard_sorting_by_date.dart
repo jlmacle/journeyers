@@ -15,13 +15,13 @@ class ParticipantsListsDashboardSortingByDate extends StatefulWidget
   final List<dynamic>? filteredListsToSort;
 
   /// Callback function used to refresh the sessions displayed.
-  final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
+  final VoidCallback featureCallbackFunctionToRefreshTheParticipantsLists;
 
   const ParticipantsListsDashboardSortingByDate
   ({
     super.key,
     required this.filteredListsToSort,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
+    required this.featureCallbackFunctionToRefreshTheParticipantsLists,
   });
 
   @override
@@ -36,7 +36,7 @@ class ParticipantsListsDashboardSortingByDateState extends State<ParticipantsLis
   Future<void> _sortListsByDate() async
   {
     await sortSessionByDateAddJm(list: widget.filteredListsToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
-    widget.dashboardCallbackFunctionToRefreshTheSessionsList();
+    widget.featureCallbackFunctionToRefreshTheParticipantsLists();
   }
 
   @override

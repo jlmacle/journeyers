@@ -59,12 +59,6 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // ─── GLOBAL KEYS ───────────────────────────────────────
   final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
 
-  // Method used to refresh the dashboard page
-  void _refreshDashboard()
-  {
-    setState(() {});
-  }
-
   // ─── PREFERENCES and DATA RETRIEVAL related data and methods ───────────────────────────────────────
   // List data from the DB
   late List<dynamic> _listData;
@@ -314,13 +308,6 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     super.dispose();
   }
 
-  // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
-  // Re-building of the widget
-  void _updateState()
-  {
-    setState(() {});
-  }
-
 @override
   Widget build(BuildContext context) {
 
@@ -358,9 +345,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                   child: ParticipantsListsDashboardSortingAndFilteringFeature
                   (
                     dashboardContext: widget.dashboardContext, 
-                    listsAll: _listsDataAll, listsFiltered: _listsDataFiltered,
+                    participantsListsAll: _listsDataAll, participantsListsFiltered: _listsDataFiltered,
                     keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
-                    parentCallbackFunctionToRefreshTheSessionsList: _updateState,
+                    dashboardCallbackFunctionToRefreshTheParticipantsLists: () => setState(() {}),
                     dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
                   ),
                 ),
@@ -374,7 +361,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                     listsFiltered: _listsDataFiltered,
                     areListsForDeletion: _listsSelectedForDeletionKeys.isNotEmpty,
                     listsSelectedForDeletionKeys: _listsSelectedForDeletionKeys,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard                    
+                    dashboardCallbackFunctionToRefreshTheParticipantsLists: () => setState(() {})                    
                   )
                 ),
     

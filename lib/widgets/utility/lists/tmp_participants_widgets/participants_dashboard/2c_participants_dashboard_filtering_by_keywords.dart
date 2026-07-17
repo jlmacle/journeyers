@@ -22,7 +22,7 @@ class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget
   final List<String> keywordsSelected;
 
   /// Callback function used to refresh the sessions displayed.
-  final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
+  final VoidCallback featureCallbackFunctionToRefreshTheParticipantsLists;
 
   const ParticipantsListsDashboardFilteringByKeywords
   ({
@@ -31,7 +31,7 @@ class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget
     required this.listsFiltered,
     required this.keywordsAll,
     required this.keywordsSelected,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
+    required this.featureCallbackFunctionToRefreshTheParticipantsLists,
   });
 
   @override
@@ -68,7 +68,7 @@ class ParticipantsListsDashboardFilteringByKeywordsState extends State<Participa
     }
 
     // Refreshing the sessions list
-    widget.dashboardCallbackFunctionToRefreshTheSessionsList();
+    widget.featureCallbackFunctionToRefreshTheParticipantsLists();
   }
 
   // Method used to add/remove a keyword from the filtering criteria

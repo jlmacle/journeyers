@@ -15,13 +15,13 @@ class ParticipantsListsDashboardSortingByLabel extends StatefulWidget
   final List<dynamic>? filteredListsToSort;
 
   /// Callback function used to refresh the sessions displayed.
-  final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
+  final VoidCallback featureCallbackFunctionToRefreshTheParticipantsLists;
 
   const ParticipantsListsDashboardSortingByLabel
   ({
     super.key,
     required this.filteredListsToSort,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList
+    required this.featureCallbackFunctionToRefreshTheParticipantsLists
   });
 
   @override
@@ -61,7 +61,7 @@ class _ParticipantsListsDashboardSortingByLabelState extends State<ParticipantsL
         // Sorting
         await _sortListsByLabel();        
         // Updating the sessions list UI
-        widget.dashboardCallbackFunctionToRefreshTheSessionsList();
+        widget.featureCallbackFunctionToRefreshTheParticipantsLists();
       },
       icon: const Icon
       (

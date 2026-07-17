@@ -15,10 +15,10 @@ class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidge
   final String dashboardContext;
 
   /// List containing all available lists data.
-  final List<dynamic>? listsAll;
+  final List<dynamic>? participantsListsAll;
 
   /// List containing all filtered lists data.
-  final List<dynamic>? listsFiltered;
+  final List<dynamic>? participantsListsFiltered;
 
   /// List containing the keywords used by the sessions.
   final List<String> keywordsAll;
@@ -27,7 +27,7 @@ class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidge
   final List<String> keywordsSelected;
 
   /// Callback function used to refresh the sessions displayed.
-  final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
+  final VoidCallback dashboardCallbackFunctionToRefreshTheParticipantsLists;
 
   /// Global key used to identify the widget handling the filtering by keywords.
   final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
@@ -36,11 +36,11 @@ class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidge
   ({
     super.key,
     required this.dashboardContext,
-    required this.listsAll,
-    required this.listsFiltered,
+    required this.participantsListsAll,
+    required this.participantsListsFiltered,
     required this.keywordsAll,
     required this.keywordsSelected,
-    required this.parentCallbackFunctionToRefreshTheSessionsList,
+    required this.dashboardCallbackFunctionToRefreshTheParticipantsLists,
     required this.dashboardFilteringByKeywordsKey
   });
 
@@ -83,8 +83,8 @@ class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<P
                   // Sorting by title
                   ParticipantsListsDashboardSortingByLabel
                   (
-                    filteredListsToSort: widget.listsFiltered,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+                    filteredListsToSort: widget.participantsListsFiltered,
+                    featureCallbackFunctionToRefreshTheParticipantsLists: widget.dashboardCallbackFunctionToRefreshTheParticipantsLists
                   ),
                 ],
               ),              
@@ -103,11 +103,11 @@ class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<P
         ParticipantsListsDashboardFilteringByKeywords
         (
           key: widget.dashboardFilteringByKeywordsKey,
-          listsAll: widget.listsAll, 
-          listsFiltered: widget.listsFiltered, 
+          listsAll: widget.participantsListsAll, 
+          listsFiltered: widget.participantsListsFiltered, 
           keywordsAll: widget.keywordsAll,
           keywordsSelected: widget.keywordsSelected,
-          dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+          featureCallbackFunctionToRefreshTheParticipantsLists: widget.dashboardCallbackFunctionToRefreshTheParticipantsLists
         ),  
       ],
     );
