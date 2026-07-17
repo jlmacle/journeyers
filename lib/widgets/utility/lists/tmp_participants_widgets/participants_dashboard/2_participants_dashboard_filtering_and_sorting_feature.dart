@@ -6,7 +6,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2a_participants_dashboard_sorting_by_label.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
 
-/// {@category Utility widgets}
+/// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling sorting and filtering of session data.
 class ParticipantsDashboardSortingAndFilteringFeature extends StatefulWidget 
