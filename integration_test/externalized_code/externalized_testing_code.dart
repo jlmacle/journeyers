@@ -911,8 +911,8 @@ final q = CAQuestionsFields();
     await tester.pumpAndSettle();
 
     // Verifying the lists dashboard title present
-    var ParticipantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
-    expect(ParticipantsListsDashboardTitleFinder, findsOne);
+    var participantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
+    expect(participantsListsDashboardTitleFinder, findsOne);
   }
 
   // Method used to go from the GPS process page to the ideas overlay
