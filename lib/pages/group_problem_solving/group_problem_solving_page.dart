@@ -172,7 +172,14 @@ class GPSPageState extends State<GPSPage>
                 buttonText: "Please click to start\na new group problem-solving session.",
                 onNewProcessButtonPressedCAPageCallbackFunction: 
                 () 
-                {setState(() { _gpsSessionDataSaved = false;});},
+                {
+                  // Reset of edition-related data
+                  _titleWhenEdition = "";
+                  _keywordsWhenEdition = {};
+                  _dtoGPSFormWhenEdition = DTOGPSForm();
+                  _fileNameWithoutExtensionWhenEdition = "";
+                  setState(() { _gpsSessionDataSaved = false;});
+                  },
               ),
               
               // and the session data dashboard in the remaining space
