@@ -12,7 +12,7 @@ void main()
       testWidgets("A keyword is added to the display, when added from the text field: \n", 
       (WidgetTester tester) async 
       {
-        const String kw = "kw";
+        const kw = "kw";
 
         // Building the widget
         await tester.pumpWidget(
@@ -47,7 +47,7 @@ void main()
       testWidgets("A keyword added twice, is displayed once: \n", 
       (WidgetTester tester) async 
       {
-        const String kw = "kw";
+        const kw = "kw";
 
         // Building the widget
         await tester.pumpWidget(

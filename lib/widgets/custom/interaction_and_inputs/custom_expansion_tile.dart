@@ -45,10 +45,10 @@ class CustomExpansionTile extends StatefulWidget
   final MainAxisAlignment listActionIconsMainAxisAlignment;
 
   /// The tooltip label for the "Edit" icon.
-  static const String toolTipEdit = "Edit";
+  static const toolTipEdit = "Edit";
 
   /// The tooltip label for the "Delete" icon.
-  static const String toolTipDelete = "Delete";
+  static const toolTipDelete = "Delete";
 
   const CustomExpansionTile
   ({

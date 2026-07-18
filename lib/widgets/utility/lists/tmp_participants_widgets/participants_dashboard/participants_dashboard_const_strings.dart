@@ -1,29 +1,29 @@
 // ─── DISPLAY DATA ───────────────────────────────────────
 // ────────────────────────────────────────────────────────
 
-const String listsDashboardTitle = "Stored participants lists";
+const listsDashboardTitle = "Stored participants lists";
 
 // ─── SORTING AND FILTERING ───────────────────────────────────────
-const String filterByKeywordsLabel = "Filter by Keywords";
-const String listsSortByDate = "Sort by Date";
-const String listsSortByLabel = "List sort";
+const filterByKeywordsLabel = "Filter by Keywords";
+const listsSortByDate = "Sort by Date";
+const listsSortByLabel = "List sort";
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
-const String keywordsLabel = "Keywords:";
+const keywordsLabel = "Keywords:";
 
 // Tooltips
-const String keywordsTooltipLabel = "Edit Keywords";
-const String listsDeleteTooltipLabel = "Delete";
+const keywordsTooltipLabel = "Edit Keywords";
+const listsDeleteTooltipLabel = "Delete";
 
 // Buttons
-const String newListButtonLabel = "Please tap to add a list.";
-const String loadingButtonLabel = "Please click to load";
-const String saveButtonLabel = "Save";
+const newListButtonLabel = "Please tap to add a list.";
+const loadingButtonLabel = "Please click to load";
+const saveButtonLabel = "Save";
 
 // Text field labels
-const String keywordsTextFieldLabel = "Keywords Edition (please separate with commas)";
-const String participantsTextFieldLabel = "Participants Edition (please separate with commas)";
+const keywordsTextFieldLabel = "Keywords Edition (please separate with commas)";
+const participantsTextFieldLabel = "Participants Edition (please separate with commas)";
 
 // Error messages
-const String emptyParticipantsListError = "Participants list cannot be empty.";
-const String emptyLabelEditError = "Label cannot be empty.";
+const emptyParticipantsListError = "Participants list cannot be empty.";
+const emptyLabelEditError = "Label cannot be empty.";

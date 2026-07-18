@@ -8,7 +8,7 @@ void main() {
 
   group("DashboardTitle Widget Tests: \n", () 
   {
-    const String testTitle = dashboardTitle;
+    const testTitle = dashboardTitle;
 
     // "should render the correct title text"
     testWidgets("Should render the correct title text", 

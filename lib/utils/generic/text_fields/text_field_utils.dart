@@ -33,19 +33,19 @@ class TextFieldUtils
   // ─── CHARS AND FILE EXTENSIONS ───────────────────────────────────────
 
   /// An externalization for the type of quote to be removed.
-  static const String charQuote = '"';
+  static const charQuote = '"';
 
   /// An externalization for dot.
-  static const String charDot = ".";
+  static const charDot = ".";
 
   /// An externalization for a line return.
-  static const String charLR = "\n";
+  static const charLR = "\n";
 
   /// An externalization for "csv".
-  static const String extensionCSV = "csv";
+  static const extensionCSV = "csv";
 
   /// An externalization for "txt".
-  static const String extentionTXT = "txt";
+  static const extentionTXT = "txt";
 
   // ─── STRING SANITIZER BUNDLES AND ERROR MESSAGES ───────────────────────────────────────
   /// A [StringSanitizerBundle] sanitizing straight quotes.
@@ -61,7 +61,7 @@ class TextFieldUtils
   );
 
   /// An error message displayed if containsAStraightQuote returns true.
-  static const String errorContainsAStraightQuote = 
+  static const errorContainsAStraightQuote = 
   "Straight double quotes\n"
   "are removed from the text typed\n"
   "for CSV-export reasons.\nWith apologies.";
@@ -79,7 +79,7 @@ class TextFieldUtils
   );
 
   /// An error message displayed if containsADot returns true.
-  static const String errorContainsADot = 
+  static const errorContainsADot = 
   "Dots are removed,\n"
   "as no extension should be entered\n"
   "in the file name.";
@@ -115,7 +115,7 @@ class TextFieldUtils
   }
 
   /// An error message displayed if a file name is already used.
-  static const String errorFileNameAlreadyUsed = 
+  static const errorFileNameAlreadyUsed = 
   "File name not available.\n"
   "Please use a different file name.";
 
@@ -126,7 +126,7 @@ class TextFieldUtils
   }
 
   /// An error message displayed for the simple blacklisting function returning true.
-  static const String errorTextBlacklisted = "This text is part of a blacklist.";
+  static const errorTextBlacklisted = "This text is part of a blacklist.";
 
   // ─── MAP WITH A BLACKLISTING FUNCTION AS KEY, AND AN ERROR MESSAGE AS VALUE (for automated testing) ───────────────────────────────────────
   /// Map with a simple blacklisting function as key, and an error message as value (for automated testing).
