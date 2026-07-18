@@ -46,6 +46,14 @@ At the time of writing, entering a new solution doesn't allow for line returns.
 The potentiality doesn't need testing therefore.
 
 ------------------------------------------------
+About best practices
+
+https://dart.dev/tools/linter-rules#flutter_lints
+
+flutter_lints
+Contains the flutter rule set, which the Flutter team encourages you to use in Flutter apps, packages, and plugins. This rule set is a superset of the recommended set, which is itself a superset of the core set that partially determines the score of packages uploaded to pub.dev.
+
+------------------------------------------------
 A potential priority for the companionship: to maintain a household organization favoring companionship 
 
 A potential priority for the workplace appreciability: to maintain a household organization favoring workplace appreciability 
