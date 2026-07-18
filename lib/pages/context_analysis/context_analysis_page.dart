@@ -231,6 +231,11 @@ class CAPageState extends State<CAPage>
                 onNewProcessButtonPressedCAPageCallbackFunction: 
                 () 
                 {
+                  // Reset of edition-related data
+                  _titleWhenEdition = "";
+                  _keywordsWhenEdition = {};
+                  _dtoCAFormWhenEdition = DTOCAForm();
+                  _fileNameWithoutExtensionWhenEdition = "";
                   // To display the CAProcess page, without the dashboard
                   setState(() { _caSessionDataSaved = false;});
                 },
