@@ -125,6 +125,13 @@ and how to harmonize those potentialities?
 What makes those persons reliable in their places of productivity, 
 and how to harmonize those needs?
 ------------------------------------------
+Problem-solving toward employability:
+- metrics of hard skills reliability (diplomas, certifications, portfolio, ...)
+- metrics of soft skills reliability (diplomas, certifications, other credentials)
+Potentially, development of a project consistent with employment requirements.
+Also as an opportunity to measure if we appreciate to grow into a productivity
+that is supposed to be decades-long.
+------------------------------------------
 Custom Public License (No Attribution Required)
 
 All my writings—past, present, and future—are released under this modified public license. You are free to use, copy, modify, and distribute them for any allowed purpose without attribution to me.
