@@ -110,7 +110,7 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
   }
 
   void _keywordsShowOverlay(BuildContext context) {
-    const String title = "Please enter keywords\n related to this group.";
+    const title = "Please enter keywords\n related to this group.";
 
     showGeneralDialog(
       context: context,

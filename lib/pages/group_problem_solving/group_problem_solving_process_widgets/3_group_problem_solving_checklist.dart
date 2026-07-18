@@ -57,7 +57,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
   }
 
   void _showChecklistOverlay(BuildContext context) {
-    const String title = "Please consider postponing\n"
+    const title = "Please consider postponing\n"
                           "the group problem-solving\n"
                           "if the checklist is incomplete.";
 

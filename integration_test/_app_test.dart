@@ -54,19 +54,19 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const String testAnalysisTitleRoot = "Integration-test CA session title";
-  const String testAnalysisTitle1 = "$testAnalysisTitleRoot (1)";
+  const testAnalysisTitleRoot = "Integration-test CA session title";
+  const testAnalysisTitle1 = "$testAnalysisTitleRoot (1)";
   
   // Keywords
-  const String kwCompanionship = "Companionship";
-  const String kwWorkplace = "Workplace";
+  const kwCompanionship = "Companionship";
+  const kwWorkplace = "Workplace";
   const List<String> kwsList = [kwCompanionship, kwWorkplace];
 
   // Ideas
   const ideasList2Ideas = ["idea1", "idea2"];
 
   // File names
-  const String fileName1WithoutExtension = "file1";
+  const fileName1WithoutExtension = "file1";
  
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;

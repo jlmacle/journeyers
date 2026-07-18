@@ -7,7 +7,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 void main() {
   group("CATitleDeclaration Widget Tests: \n", () 
   {
-    const String hintText = CAFormMiscConstants.caTitleDeclarationHintText;
+    const hintText = CAFormMiscConstants.caTitleDeclarationHintText;
 
     // "Should render the correct text field hint"
     testWidgets("Should render the correct text field hint", 

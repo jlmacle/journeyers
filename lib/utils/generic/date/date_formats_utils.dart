@@ -3,6 +3,6 @@
 class DateFormatsUtils 
 {
   /// Date format for "MMMM dd, yyyy".
-  static const String dateFormatMMMMddyyyy = "MMMM dd, yyyy";
+  static const dateFormatMMMMddyyyy = "MMMM dd, yyyy";
 }
 

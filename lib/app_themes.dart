@@ -187,22 +187,22 @@ const TextStyle previewTitleStyle = TextStyle
 // ─── TEXT FIELD HINTS: ───────────────────────────────────────
 // ─── CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS ───────────────────────────────────────
 
-const String pleaseDescribeTextHouseholdHint =
+const pleaseDescribeTextHouseholdHint =
     "Please describe the past outcomes for the household, "
     "if some seem to have been out of their comfort zone for too long, "
     "and the more desirable outcomes for the household.";
 
-const String pleaseDescribeTextWorkplaceHint =
+const pleaseDescribeTextWorkplaceHint =
     "Please describe the past outcomes for the workplace, "
     "if some seem to have been out of their comfort zone for too long, "
     "and the more desirable outcomes for the workplace and for the household.";
 
-const String pleaseDevelopHint = "Please develop.";
+const pleaseDevelopHint = "Please develop.";
 
-const String pleaseDescribeTextGroupsHint =
+const pleaseDescribeTextGroupsHint =
     "Please describe the problem(s) that the groups/teams are trying to solve.";
 
-const String textFieldHint = "Please enter some text.";
+const textFieldHint = "Please enter some text.";
 
 // Text styles: GROUP PROBLEM-SOLVING PAGE RELATED STYLES
 const TextStyle problemSolvingChecklistTitle = TextStyle

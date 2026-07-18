@@ -4,10 +4,10 @@ class CAFormMiscConstants
 {
   /// Straight double quotes used to encapsulate the content of answered questions, 
   /// and sanitized from the context analysis text fields.
-  static const String quotesForCSV = '"';
+  static const quotesForCSV = '"';
 
   /// The hint for the context analysis title text field.
-  static const String caTitleDeclarationHintText = "Please enter a title for this analysis.";
+  static const caTitleDeclarationHintText = "Please enter a title for this analysis.";
 
   // ─── USED IN THE CA TEXT FIELDS ───────────────────────────────────────
   /// A number of characters used to represent 10 lines of text field input on a computer.

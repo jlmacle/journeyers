@@ -62,10 +62,10 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const String testGPSTitleRoot = "Integration-test GPS session title";
-  const String testGPSTitle1 = "$testGPSTitleRoot (1)";
-  const String testGPSTitle2 = "$testGPSTitleRoot (2)";
-  const String testGPSTitle3 = "$testGPSTitleRoot (3)";
+  const testGPSTitleRoot = "Integration-test GPS session title";
+  const testGPSTitle1 = "$testGPSTitleRoot (1)";
+  const testGPSTitle2 = "$testGPSTitleRoot (2)";
+  const testGPSTitle3 = "$testGPSTitleRoot (3)";
   const List<String> titlesList = [testGPSTitle3, testGPSTitle1, testGPSTitle2];
   const List<String> titlesMaintenance = ["Maintenance topic 1", "Maintenance topic 2", "Maintenance topic 3"];
   const List<String> titlesCompanionship = ["Companionship and Logistics topic", "Companionship and Studies topic"];
@@ -78,12 +78,12 @@ Future<void> main() async {
   const List<String> titlesListSorted = [testGPSTitle1, testGPSTitle2, testGPSTitle3];
 
   // Keywords
-  const String kwCompanionship = "Companionship";
-  const String kwWorkplace = "Workplace";
-  const String kwStudies = "Studies";  
-  const String kwCommunication = "Communication";
-  const String kwMaintenance = "Maintenance";
-  const String kwLogistics = "Logistics";
+  const kwCompanionship = "Companionship";
+  const kwWorkplace = "Workplace";
+  const kwStudies = "Studies";  
+  const kwCommunication = "Communication";
+  const kwMaintenance = "Maintenance";
+  const kwLogistics = "Logistics";
   const List<String> kwsList2Keywords = [kwCompanionship, kwWorkplace];
   const List<List<String>> kwsListsKwsSorting = 
                     [
@@ -95,13 +95,13 @@ Future<void> main() async {
   const ideasList2Ideas = ["idea1", "idea2"];
 
   // File names
-  const String fileName1WithoutExtension = "file1";
-  const String fileName2WithoutExtension = "file2";
-  const String fileName3WithoutExtension = "file3";
+  const fileName1WithoutExtension = "file1";
+  const fileName2WithoutExtension = "file2";
+  const fileName3WithoutExtension = "file3";
   const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
 
   // Edition
-  const String editionSuffix = "-edited";
+  const editionSuffix = "-edited";
 
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;

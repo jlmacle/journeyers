@@ -11,7 +11,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 void main() 
 {
-  const String textFieldHintPart = "Please add the";
+  const textFieldHintPart = "Please add the";
 
     group("SessionFileNameOnMobilePlatforms Tests: \n", 
     () 

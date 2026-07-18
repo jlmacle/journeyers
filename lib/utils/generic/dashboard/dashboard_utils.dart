@@ -15,22 +15,22 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 class DashboardUtils {
 
   /// String used to communicate a dashboard of context analyses.
-  static const String caContext = "context-analysis";
+  static const caContext = "context-analysis";
 
   /// String used to communicate a dashboard of group problem-solvings.
-  static const String gpsContext = "group-problem-solving";
+  static const gpsContext = "group-problem-solving";
 
   /// The key for the session title.
-  static const String keyTitle = "title";
+  static const keyTitle = "title";
 
   /// The key for the session keywords.
-  static const String keyKeywords = "keywords";
+  static const keyKeywords = "keywords";
 
   /// The key for the session date.
-  static const String keyDate = "date";
+  static const keyDate = "date";
 
   /// The key for the session file path.
-  static const String keyFilePath = "filePath";
+  static const keyFilePath = "filePath";
 
   /// The current list of stored file names (for the mobile applications).
   List<String> currentListOfStoredFileNames = [];  
