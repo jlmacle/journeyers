@@ -461,6 +461,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
               // Right side: Close Button
               actions: [
                 IconButton(
+                  tooltip: previewClosingTooltipLabel,
                   icon: const Icon(Icons.close),
                   color: appBarWhite,
                   onPressed: () async
@@ -493,7 +494,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                     if (!context.mounted) return;
                     Navigator.of(context).pop();
                   },
-                  tooltip: "Close preview",
+                  
                 ),
               ],
             ),
