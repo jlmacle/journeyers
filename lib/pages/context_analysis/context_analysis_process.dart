@@ -259,6 +259,7 @@ class CAProcessState extends State<CAProcess>
             // Text field for the analysis title
             CATitleDeclaration
             (
+              key: const Key("ca-process-catitledeclaration-widget"),
               analysisTitleAutofocused: widget.isSessionDataBeingEdited,
               analysisTitleWhenEdition: widget.titleWhenEdition,
               onAnalysisTitleUpdatedProcessCallbackFunction: (value) => _analysisTitleUpdate(value)
@@ -267,6 +268,7 @@ class CAProcessState extends State<CAProcess>
             // Keywords
             CAKeywordsDeclaration
             (
+              key: const Key("ca-process-cakeywordsdeclaration-widget"),
               keywordsWhenEdition: widget.keywordsWhenEdition,
               onKeywordsUpdatedProcessCallbackFunction: (values)=>_analysisKeywordsUpdate(values)
             ),
@@ -320,6 +322,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameOnMobilePlatforms
                         (
+                          key: const Key("ca-process-sessionfilenameonmobileplatforms-widget"),
                           isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
                           isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
                           fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,

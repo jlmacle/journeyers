@@ -337,6 +337,7 @@ class CAFormState extends State<CAForm>
                 ),
               CATextFieldSanitizedAndPadded
               (
+                key: const Key("ca-process-another-issue-widget"),
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldStartValue:_dtoCAForm!.indivAnotherIssueStr,
@@ -398,6 +399,7 @@ class CAFormState extends State<CAForm>
               ),
               CATextFieldSanitizedAndPadded
               (
+                key: const Key("ca-process-group-problems-to-solve-widget"),
                 textFieldStartValue: _dtoCAForm!.groupProblemsToSolveStr,
                 textFieldHint: pleaseDescribeTextGroupsHint,
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
@@ -419,6 +421,7 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
+                key: const Key("ca-process-group-same-problems-to-solve-widget"),
                 segButtonTextOption1: "Yes",
                 segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
@@ -444,6 +447,7 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
+                key: const Key("ca-process-group-harmony-home-widget"),
                 segButtonTextOption1: "Yes",
                 segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
@@ -469,6 +473,7 @@ class CAFormState extends State<CAForm>
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
               (
+                key: const Key("ca-process-group-appreciability-at-work-widget"),
                 segButtonTextOption1: "Yes",
                 segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",
@@ -493,7 +498,8 @@ class CAFormState extends State<CAForm>
               ),
               const Gap(level3AndSegmentedButtonGap),
               CASegmentedButtonWithSanitizedAndPaddedTextField
-              (
+              (                
+                key: const Key("ca-process-group-earning-ability-widget"),
                 segButtonTextOption1: "Yes",
                 segButtonTextOption2: "No",
                 segButtonTextOption3: "I don't know",

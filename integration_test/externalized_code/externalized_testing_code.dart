@@ -479,6 +479,76 @@ final q = CAQuestionsFields();
     }  
   }
 
+// ─── CA SCROLLING ───────────────────────────────────────────────────────────────
+  // Method used to verify empty content in the custom checkboxes.
+  Future<void> caCheckboxesVerifyEmptyContent
+  ({
+    required WidgetTester tester, 
+    required List<String> listOfTextsToFind,
+    required FinderBase<Element>? scrollable
+  }) async
+  {
+    for (var text in listOfTextsToFind)
+    {
+      var textFinder = find.text(text, skipOffstage: false);
+      await tester.scrollUntilVisible(textFinder, scrollable: scrollable, 45);
+      var customCheckboxFinder = find.ancestor
+      (of: textFinder, matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)); 
+      // Tapping to display the text field
+      await tester.tap(customCheckboxFinder);
+      await tester.pumpAndSettle();
+      // Verifying the text field content
+      var textFieldFinder = find.descendant
+      (of: customCheckboxFinder, matching: find.byType(TextField));
+      var textField = tester.widget<TextField>(textFieldFinder);
+      expect(textField.controller!.text, "");
+    }
+  }
+
+  // Method used to verify empty content in custom segmented buttons.
+  Future<void> caSegmentedButtonsVerifyEmptyContent
+  ({
+    required WidgetTester tester, 
+    required List<Key> listOfKeysToFind,
+    required FinderBase<Element>? scrollable
+  }) async
+  {
+    for (var key in listOfKeysToFind)
+    {
+      var keyFinder = find.byKey(key, skipOffstage: false);
+      await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45);    
+      // Tapping to display the text field
+      var optionFinder = find.descendant
+        (
+          of: keyFinder,
+          matching: find.text("I don't know")
+        );   
+      await tester.tap(optionFinder);
+      await tester.pumpAndSettle();
+      // Verifying the text field content
+      var textFieldFinder = find.descendant
+      (of: keyFinder, matching: find.byType(TextField));
+      var textField = tester.widget<TextField>(textFieldFinder);
+      expect(textField.controller!.text, "");
+    }
+  }
+
+  // Method used to verify empty content in the text fields only.
+  Future<void> caTextFieldOnlyVerifyEmptyContent
+  ({
+    required WidgetTester tester, 
+    required Key key,
+    required FinderBase<Element>? scrollable
+  }) async
+  {
+    var textFieldWidgetFinder = find.byKey(key, skipOffstage: false);
+    var textFieldFinder = find.descendant
+      (of: textFieldWidgetFinder, matching: find.byType(TextField));
+    await tester.scrollUntilVisible(textFieldFinder, scrollable: scrollable, 45);
+    var textField = tester.widget<TextField>(textFieldFinder);
+    expect(textField.controller!.text, "");    
+  }
+
 // ─── GPS ──────────────────────────────────────────────────────────────
 // ──────────────────────────────────────────────────────────────────────────────
 
