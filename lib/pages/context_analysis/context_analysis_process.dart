@@ -322,7 +322,7 @@ class CAProcessState extends State<CAProcess>
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameOnMobilePlatforms
                         (
-                          key: const Key("ca-process-sessionfilenameonmobileplatforms-widget"),
+                          key: const Key("process-sessionfilenameonmobileplatforms-widget"),
                           isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
                           isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
                           fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
