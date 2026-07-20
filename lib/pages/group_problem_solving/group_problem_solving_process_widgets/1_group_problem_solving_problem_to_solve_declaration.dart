@@ -104,6 +104,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 child: Center(
                   child: Text
                   (
+                    key: const Key("gps-process-gpsproblemtosolvedeclaration-title-text"),
                     // if not an edition, or editing an empty title
                     (widget.titleWhenEdition == "")
                     ? 

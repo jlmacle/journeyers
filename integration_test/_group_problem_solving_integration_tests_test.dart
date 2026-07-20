@@ -11,6 +11,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -22,6 +23,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
+import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
 import "externalized_code/externalized_testing_code.dart";
@@ -921,7 +923,7 @@ Future<void> main() async {
 
             // ── Submitting new data  ───────────────────────
             // ───────────────────────────────────────────────
-              // Searching the file name text field
+              // Searching the file name text field and submitting data
             var sessionFileNameOnMobilePlatformsFinder = find.byType(SessionFileNameOnMobilePlatforms);
             await tester.tap(sessionFileNameOnMobilePlatformsFinder);
             await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -1141,9 +1143,9 @@ Future<void> main() async {
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
-            // ── Submitting new data  ───────────────────────
+            // ── Submitting edited data  ───────────────────────
             // ───────────────────────────────────────────────
-              // Searching the file name text field
+              // Searching the file name text field and submitting data
             var sessionFileNameOnMobilePlatformsFinder = find.byType(SessionFileNameOnMobilePlatforms);
             await tester.tap(sessionFileNameOnMobilePlatformsFinder);
             await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -1172,7 +1174,295 @@ Future<void> main() async {
           } // if platform
 
         });
-    
+
+      // Edition data is not retained in next process
+      testWidgets(
+        "Edition data is not retained in next process \n",
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            "wasFirstRunModalAcknowledged": true,
+            // and to have the group problem-solving page, with the dashboard.
+            "wasGPSSessionDataSaved": true,
+            // Temporary test dir as application folder path
+            "applicationFolderPath": testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the GPSPage
+            await tester.pumpWidget(buildTestableGPSPage());
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ──  ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+            var titleForEdition = "GPS title";
+            var keywordsListForEdition3Kws = [...kwsList2Keywords, kwMaintenance]; 
+            var ideasListForEdition = ideasList2Ideas;
+            var idea3Added = "idea3-edited";
+            
+            // important for gpsTestPreview
+            // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+            dateForTestingIndex = 0;
+            await gpsEnterNewProcessDataOnMobile
+            (
+              tester: tester, 
+              title: titleForEdition,
+              kwsList: keywordsListForEdition3Kws,
+              ideasList: ideasListForEdition,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────
+            var editIconFromItemFinder = find.byTooltip(editFromDashboardItemTooltipLabel);
+            await tester.tap(editIconFromItemFinder);
+            await tester.pumpAndSettle();
+
+            // ── EDITION: Verifying data present and editing  ─────────────────
+            // ────────────────────────────────────────────────────────────────────
+
+            // ── Verifying the title present ─────────────
+            // ────────────────────────────────────────────
+            expect(find.text(titleForEdition), findsOne);
+
+            // ── Verifying the keywords present ──────────
+            // ────────────────────────────────────────────
+              // Opening the keywords overlay
+            var keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            await tester.tap(keywordsWidgetTitleFinder);
+            await tester.pumpAndSettle();
+              // Verifying the keywords present
+              for (var kw in keywordsListForEdition3Kws)
+              {
+                expect(find.text(kw), findsOne);
+              }
+              // Closing the keywords overlay
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
+              await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
+              await tester.pumpAndSettle();
+
+            // ── Verifying the ideas present ─────────────
+            // ────────────────────────────────────────────
+            for (var idea in ideasList2Ideas)
+            {
+              expect(find.textContaining(idea), findsNWidgets(1));
+            }            
+
+            // important for gpsTestPreview
+            // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+            dateForTestingIndex = 0;
+            // ── Editing data ────────────────────────────
+            // ────────────────────────────────────────────
+              // TITLE EDITION
+            var titleFinder = find.text(titleForEdition);
+            await tester.tap(titleFinder);
+            await tester.pumpAndSettle();
+              // searching the text field
+            titleFinder = find.byKey(const Key("problemToSolveField"));
+            await tester.enterText(titleFinder, "${titleForEdition}${editionSuffix}");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+              // IDEAS EDITION
+             // Searching idea1
+            var idea1Finder = find.text(ideasList2Ideas[0]);
+            await tester.ensureVisible(idea1Finder);
+            await tester.pumpAndSettle();   
+              // Tapping on the idea to open the edition overlay
+            await tester.tap(idea1Finder);
+            await tester.pumpAndSettle();
+
+            var editableDeletableTextListItemFinder = find.byType(EditableDeletableTextListItem);
+            var totalEditableDeletableTextListItemFinder = editableDeletableTextListItemFinder.evaluate().length;
+            if (testingDebug) pu.printd("Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder");
+
+              // Searching the editable/deletable field for idea1
+            var idea1EditableDeletableFinder = find.byKey(const Key("editable-deletable-list-tile-0"));   // todo: to clean           
+            await tester.tap(idea1EditableDeletableFinder);
+            await tester.pumpAndSettle();
+
+            // ── Editing idea1: modification  ─────────────────────
+            // ────────────────────────────────────────────────────
+            var tfIdea1Finder = find.byKey(const Key("editable-deletable-tf-0"));
+            await tester.enterText(tfIdea1Finder, "${ideasList2Ideas[0]}$editionSuffix");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));  
+            if (testingDebug) pu.printd("Testing Debug: idea1 edited");
+
+            // ── Editing idea2 : deletion ─────────────────────────
+            // ─────────────────────────────────────────────────────
+              // Searching idea2
+              // Searching the editable/deletable checkbox for idea2
+            var idea2EditableDeletableFinder = find.byKey(const Key("editable-deletable-checkbox-1"));   // todo: to clean           
+            await tester.ensureVisible(idea2EditableDeletableFinder);
+            await tester.pumpAndSettle();
+            await tester.tap(idea2EditableDeletableFinder);
+            await tester.pumpAndSettle();
+              // Deleting 
+            var deleteFinder = find.textContaining("Delete");
+            await tester.tap(deleteFinder);
+            await tester.pumpAndSettle();
+
+            // await tester.pump(const Duration(seconds: 10));
+            
+            if (testingDebug) pu.printd("Testing Debug: idea2 deleted");
+              // Waiting on Snackbar removal
+            await tester.pump(const Duration(seconds: 5));
+
+            // ── Adding idea3: addition  ─────────────────────────
+            // ────────────────────────────────────────────────────
+            var ideaOverlayTextFieldFinder = find.byKey(const Key("ideaOverlayField"));
+            await tester.enterText(ideaOverlayTextFieldFinder, idea3Added);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));             
+            if (testingDebug) pu.printd("Testing Debug: idea3 added");  
+
+            // ── Closing the ideas list  ───────────────────────
+            // ───────────────────────────────────────────────────
+            var closeFinder = find.byIcon(Icons.close);  
+            await tester.tap(closeFinder);
+            await tester.pumpAndSettle();
+
+            // KEYWORDS EDITION
+              // Opening the keywords overlay
+            keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            await tester.tap(keywordsWidgetTitleFinder);
+            await tester.pumpAndSettle();
+
+              // Removing kwMaintenance
+            var deletekwMaintenanceFinder = 
+              find.descendant
+              (
+                of: find.ancestor
+                (
+                  of: find.text(kwMaintenance), 
+                  matching: find.byType(InputChip)
+                ), 
+                matching: find.byIcon(Icons.close)                
+              );
+            
+              await tester.tap(deletekwMaintenanceFinder);
+              await tester.pumpAndSettle();
+
+              // Adding kwCommunication
+              var kwTfecFinder = find.byKey(const Key("gpsKeywordsField"));
+              await tester.enterText(kwTfecFinder, kwCommunication);
+              await tester.testTextInput.receiveAction(TextInputAction.done);
+              await tester.pumpAndSettle();
+
+              // closing the overlay
+              var closeOverlayFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
+              await tester.tap(closeOverlayFinder);
+              await tester.pumpAndSettle();
+
+            // ── Submitting edited data  ───────────────────
+            // ───────────────────────────────────────────────
+              // Searching the file name text field and submitting data
+            var sessionFileNameOnMobilePlatformsFinder = find.byType(SessionFileNameOnMobilePlatforms);
+            await tester.tap(sessionFileNameOnMobilePlatformsFinder);
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pumpAndSettle();
+
+            // await tester.pump(const Duration(seconds: 10));
+
+            // ──  VERIFICATION  ─────────────────
+            // ─────────────────────────────────────   
+              // Verifying the edited title present
+            expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
+
+              // Verifying the edited keywords present
+            for (var kw in [...kwsList2Keywords, kwCommunication])
+            {
+              expect(find.text(kw), findsOne);
+            }
+
+              // Verifying the edited/added data present
+            await gpsTestPreview
+            (
+              tester: tester, title: "${titleForEdition}${editionSuffix}", 
+              ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
+            );
+              // ── Closing the GPS preview ──────────────────
+            var previewClosingTooltipLabelFinder = find.byTooltip(previewClosingTooltipLabel);
+            await tester.tap(previewClosingTooltipLabelFinder);
+            await tester.pumpAndSettle();
+
+            // ──  VERIFYING THE EDITED DATA ABSENT FROM A NEW PROCESS  ──────────────
+            // ───────────────────────────────────────────────────────────────────────
+
+            // ── STARTING A NEW GPS PROCESS ──────────────────
+            // ───────────────────────────────────────────────
+            var newProcessButtonFinder = find.byType(NewProcessButton);
+            await tester.tap(newProcessButtonFinder);
+            await tester.pumpAndSettle();
+
+            // ── VERIFYING ALL FIELDS EMPTY ─────────────────
+            // ───────────────────────────────────────────────
+            
+              // ── VERIFYING TITLE TEXT EMPTY ──────────────
+              // ──────────────────────────────────────────────────
+            var titleTextFinder = find.byKey(const Key("gps-process-gpsproblemtosolvedeclaration-title-text"), skipOffstage: false);
+            var titleText = tester.widget<Text>(titleTextFinder);
+            expect(titleText.data, gpsProcessTitlePlaceholder);
+
+              // ── VERIFYING KEYWORDS TEXT FIELD EMPTY AND KEYWORDS INPUT CHIPS ABSENT ─────────────
+              // ──────────────────────────────────────────────────────────────────────────────────────
+              // ── OPENING THE KEYWORDS OVERLAY ─────────────
+            var keywordsTitleFinder = find.byType(GPSKeywordsDeclaration, skipOffstage: false);
+            await tester.tap(keywordsTitleFinder);
+            await tester.pumpAndSettle();
+
+            // await tester.pump(const Duration(seconds: 5));
+
+              // ── VERIFYING KEYWORDS TEXT FIELD EMPTY ─────────────
+            var keywordsTextFieldFinder = find.byKey(const Key("gpsKeywordsField"));
+            var keywordsTextField = tester.widget<TextField>(keywordsTextFieldFinder);
+            expect(keywordsTextField.controller!.text,"");
+
+              // ── VERIFYING KEYWORDS INPUT CHIPS ABSENT ──────
+            var inputChipsFinder = find.byType(InputChip);
+            expect(inputChipsFinder, findsNothing);
+
+              // ── CLOSING THE OVERLAY ──────
+            var closeDeclarationTooltipFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
+            await tester.tap(closeDeclarationTooltipFinder);
+            await tester.pumpAndSettle();
+
+              // ── VERIFYING IDEAS LIST EMPTY ────────────
+              // ──────────────────────────────────────────
+            var listTilesFinder = find.byType(ListTile);
+            expect(listTilesFinder, findsNothing);
+
+              // ── VERIFYING NEW IDEA LIST EMPTY ────────────
+              // ──────────────────────────────────────────
+            var gpsNewListFieldFinder = find.byKey(const Key("gpsNewIdeaField"), skipOffstage: false);
+            var gpsNewListFieldWidget = tester.widget<TextField>(gpsNewListFieldFinder);
+            expect(gpsNewListFieldWidget.controller!.text, "");
+            
+            // await tester.pump(const Duration(seconds: 5));
+
+              // ── VERIFYING FILE NAME TEXT FIELD EMPTY ────────
+              // ────────────────────────────────────────────────
+            sessionFileNameOnMobilePlatformsFinder = find.byKey(const Key("gps-process-sessionfilenameonmobileplatforms-widget"), skipOffstage: false);
+            var sessionFileNameOnMobilePlatformsTextFieldFinder = find.descendant(of: sessionFileNameOnMobilePlatformsFinder, matching: find.byType(TextField), skipOffstage: false);
+            await tester.ensureVisible(sessionFileNameOnMobilePlatformsTextFieldFinder);         
+            await tester.pumpAndSettle();
+            var sessionFileNameOnMobilePlatformsTextFieldWidget = tester.widget<TextField>(sessionFileNameOnMobilePlatformsTextFieldFinder);
+            expect(sessionFileNameOnMobilePlatformsTextFieldWidget.controller!.text,"");       
+          } // if platform
+
+        });
+
     });
 
   group("Participants-related Tests: \n", () 

@@ -64,6 +64,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
             children: [
               Expanded(
                 child: TextField(
+                  key: const Key("gpsNewIdeaField"),
                   focusNode: _newIdeaFocusNode,
                   controller: _newIdeaTfec,
                   decoration: const InputDecoration(
