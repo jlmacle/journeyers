@@ -2273,7 +2273,7 @@ Future<void> main() async {
    
             // ── VERIFYING FILE NAME TEXT FIELD EMPTY ────────
             // ────────────────────────────────────────────────
-            var sessionFileNameOnMobilePlatformsFinder = find.byKey(const Key("ca-process-sessionfilenameonmobileplatforms-widget"));
+            var sessionFileNameOnMobilePlatformsFinder = find.byKey(const Key("process-sessionfilenameonmobileplatforms-widget"));
             var sessionFileNameOnMobilePlatformsTextField = find.descendant(of: sessionFileNameOnMobilePlatformsFinder, matching: find.byType(TextField));
             var sessionFileNameOnMobilePlatformsTextFieldWidget = tester.widget<TextField>(sessionFileNameOnMobilePlatformsTextField);
             expect(sessionFileNameOnMobilePlatformsTextFieldWidget.controller!.text,"");
