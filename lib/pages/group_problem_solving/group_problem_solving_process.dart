@@ -334,6 +334,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
       children: [
         // 1. TOP: The problem to be solved (Full Width)
         GPSProblemToSolveDeclaration(
+          key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
           titleWhenEdition: widget.titleWhenEdition,
           sessionTitleTfec: _titleTfec,
           previousSessions: _previousCAMetadata,
@@ -428,6 +429,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 child: 
                 CustomScrollView
                 (
+                  key: const Key("gps-process-scrollview"),
                   slivers: 
                   [
                     const SliverToBoxAdapter
@@ -450,6 +452,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                         padding: const EdgeInsets.only(top: 0, bottom: 0),
                         child: GPSKeywordsDeclaration
                         (
+                          key: const Key("gps-process-gpskeywordsdeclaration-widget"),
                           keywordsWhenEdition: widget.keywordsWhenEdition,
                           currentKeywords: _currentKeywords,
                           onKeywordsUpdatedCallbackFunction: (newKeywords) 
@@ -534,6 +537,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 // Defining file name and saving file for mobile platforms 
                 ? SessionFileNameOnMobilePlatforms
                 (
+                  key: const Key("gps-process-sessionfilenameonmobileplatforms-widget"),
                   isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
                   isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
                   fileExtension: _fileExtension, 
