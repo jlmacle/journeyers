@@ -57,4 +57,7 @@ Future<void> Function({required String? listKey, required Set<String> updatedIte
 typedef OnListDataUpdatedCallbackFunctionType = 
 Future<void> Function({required String? listKey, required Map<String, dynamic> listData});
 
-
+/// {@category Utils - Generic}
+/// A function with a String parameter, an int parameter, and returning void.
+typedef OnListItemValueUpdatedCallbackFunctionType = 
+void Function({required int intParam, required String stringParam});

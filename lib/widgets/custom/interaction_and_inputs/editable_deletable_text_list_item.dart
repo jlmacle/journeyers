@@ -31,7 +31,7 @@ class EditableDeletableTextListItem extends StatefulWidget {
   final FunctionNullableBoolAndInt onCheckboxChangedCallbackFunction;
 
   /// Callback function used to update the list item value.
-  final FunctionStringAndInt parentCallbackFunctionToUpdateTheListItemValue;
+  final OnListItemValueUpdatedCallbackFunctionType parentCallbackFunctionToUpdateTheListItemValue;
 
   /// Callback function used to update the list of items selected for deletion.
   final ValueChanged<int> parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion;
