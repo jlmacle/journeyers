@@ -2342,6 +2342,66 @@ Future<void> main() async {
               await tester.pump(const Duration(seconds: 10));
           }
         });
+
+      // "Complex data \n"
+      testWidgets(
+        "Complex data \n",
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            "wasFirstRunModalAcknowledged": true,
+            // and to have the context analysis process.
+            "wasCASessionDataSaved": true,
+            // Temporary test dir as application folder path
+            "applicationFolderPath": testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage        
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // Building data for the form
+              // Individual perspective testing values
+              // 7 values are necessary
+            List<bool> checkboxValues = List.filled(7, true);
+              // Getting the complex data              
+            var data = await rootBundle.loadString("assets/caFormLoading/complex_data.txt");           
+            List<String> checkboxTextFieldValues = [data, ...List.filled(7, "")];
+            String indivAnotherIssueStrValue = "";        
+
+             // Group/teams perspective testing values
+            String groupProblemsToSolveStrValue = "b1";
+              // 4 values are necessary
+            List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"No","Yes"}];
+              // b2 to b5
+            List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+
+            await caEnterNewProcessDataOnMobile
+            (
+              tester: tester, 
+              title: "",
+              kwsList: [],
+              checkboxValues: checkboxValues,
+              checkboxTextFieldValues: checkboxTextFieldValues,
+              indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+              segmentedButtonValues: segmentedButtonValues,
+              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              fileNameWithoutExtension: fileName1WithoutExtension
+            );
+           
+            // Opening the preview
+            var previewFinder = find.byTooltip(previewTooltipLabel);
+            await tester.tap(previewFinder);
+            await tester.pumpAndSettle();
+
+            await tester.pump(const Duration(seconds: 10));
+          }
+      });
     });  
   });
 }
