@@ -34,10 +34,10 @@ class ParticipantsListsItem extends StatefulWidget
   final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
-  final FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction;
+  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the participants are updated.
-  final FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction;
+  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction;
 
   /// A callback function called when the list is updated.
   final OnListNameUpdatedCallbackFunctionType  onListNameUpdatedCallbackFunction;
@@ -369,7 +369,7 @@ void _showKeywordsEditSheet
   required BuildContext context, required String dashboardContext, 
   required List<dynamic> currentKeywords, required String? listKey, 
   required TextEditingController kwsEditController,
-  required FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction,
   required FunctionStringAndMapStringDynamic onKeywordsUpdated,
   required Map<String, dynamic> listData
 
@@ -427,7 +427,7 @@ void _showParticipantsEditSheet({
   required List<dynamic> currentParticipants,
   required String? listKey,
   required TextEditingController participantsTec,
-  required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
   required FunctionStringAndMapStringDynamic onParticipantsUpdated,
   required Map<String, dynamic> listData,
 }) {
@@ -504,7 +504,7 @@ void _showListNameEditSheet({
   required String currentListName,
   required String? listKey,
   required TextEditingController listNameEditTec,
-  required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
   required FunctionStringAndMapStringDynamic onListNameUpdated,
   required Map<String, dynamic> listData,
 }) {

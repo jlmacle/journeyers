@@ -47,4 +47,11 @@ Future<void> Function
   required Map<String, dynamic> listData
 });
 
+/// {@category Utils - Project-specific}
+/// An async function typedef with a String parameter, a Set\<String\> parameter, and a Map\<String, dynamic\> parameter,
+/// and used with the ParticipantsListsItem widget.
+typedef OnParticipantListsItemSetStringUpdatedCallbackFunctionType = 
+Future<void> Function({required String? listKey, required Set<String> updatedItems, required Map<String, dynamic> listData});
+
+
 
