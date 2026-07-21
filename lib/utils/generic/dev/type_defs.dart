@@ -16,7 +16,7 @@ bool Function(String value);
 
 /// {@category Utils - Generic}
 /// An async function with a Set\<String\> parameter, and a String parameter.
-typedef FunctionSetStringAndString = 
+typedef OnKeywordsUpdatedCallbackFunctionType = 
 Future<void> Function({required String? filePath, required Set<String> updatedKeywords});
 
 /// {@category Utils - Generic}
