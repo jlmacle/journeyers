@@ -4,7 +4,6 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/type_defs2.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
@@ -72,7 +71,6 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
 {
   final _listsDB = ParticipantsListsDB();
   List<String> _participantsCurrent = [];
-  String _listNameCurrent = "";
   final TextEditingController _listNameEditTfec = .new();
   final TextEditingController _participantsEditTfec = .new();
   final TextEditingController _kwsEditTfec = .new();
