@@ -175,101 +175,91 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
   // Method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display.
-  Future<void> _userInputSanitizing(String text) async
+  Future<String> _userInputSanitizing(String text) async
   {
+    var cleanedValue = text;
     // Does the user input needs sanitization and does the submit needs to be blocked?
 
     // Yes, because a blocking function returned true
     StringSanitizerBundle? bundleWithSanitizingFunctionThatReturnedTrue;
-    if (widget.stringSanitizerBundlesErrorsMapping
-        .keys
-        .any
-        (
-          (stringSanitizerBundle)
-          {
-            var recordResult = stringSanitizerBundle(text);
-            // Getting the info from the record
-            bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
-            // Adding the sanitizing function to the list for later sanitizing
-            if (shouldStringBeSanitized) 
-            {
-              // Storing to add a delay, for the error message to be displayed long enough to be read
-              _wasStringSanitized = true; 
 
-              bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
-              if (textFieldDebug) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: $bundleWithSanitizingFunctionThatReturnedTrue");
-            }
-            return shouldStringBeSanitized;
-          }
-        )
-        ) 
+    // Verifying for all string sanitizer bundles of the mapping
+    for (var stringSanitizerBundle in widget.stringSanitizerBundlesErrorsMapping.keys)
     {
-      if (textFieldDebug) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
-      
-      // Blocking the submit
-      _submitIsBlocked = true;
-      if (textFieldDebug) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
+        var recordResult = stringSanitizerBundle(cleanedValue);
+        // Getting the info from the record
+        bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
+        // Adding the sanitizing function to the list for later sanitizing
+        if (shouldStringBeSanitized) 
+        {
+          // Storing to add a delay, for the error message to be displayed long enough to be read
+          _wasStringSanitized = true; 
 
-      // Sanitizing the input
-      // DESIGN NOTES: after research, 
-      // it seems that only straight double quote are used to delimit text when importing CSV files
-      // var cleanedValue = value.replaceAll(TextFieldUtils.quoteChar, "");
-      // Going through the list of sanitizing functions
-      var cleanedValue = text;
-      cleanedValue = bundleWithSanitizingFunctionThatReturnedTrue!(cleanedValue).sanitizingFunction(text);
+          bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
+          if (textFieldDebug) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
+        
+          // Blocking the submit
+          _submitIsBlocked = true;
+          if (textFieldDebug) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
 
-      if (textFieldDebug) pu.printd("Text Field: cleanedValue: $cleanedValue");
+          // Sanitizing the input
+          // DESIGN NOTES: after research, 
+          // it seems that only straight double quote are used to delimit text when importing CSV files
+          var bundleRecord = bundleWithSanitizingFunctionThatReturnedTrue(cleanedValue);
+          cleanedValue = bundleRecord.sanitizingFunction(cleanedValue);
+
+          if (textFieldDebug) pu.printd("Text Field: cleanedValue: $cleanedValue");
    
-      setState(() 
-      {
-        // Updating the text editing controller"s text with the sanitized input
-        _tfec.text = cleanedValue;
+          setState(() 
+          {
+            // Updating the text editing controller"s text with the sanitized input
+            _tfec.text = cleanedValue;
 
-        // Letting the user know that the input was sanitized
-        _errorMessage = widget.stringSanitizerBundlesErrorsMapping[bundleWithSanitizingFunctionThatReturnedTrue]!;  
-      });    
+            // Letting the user know that the input was sanitized
+            _errorMessage = widget.stringSanitizerBundlesErrorsMapping[bundleWithSanitizingFunctionThatReturnedTrue]!;  
+          });    
 
-      // Scrolling for better error message communication to the user
-      await _scrollForBetterErrorViewing();
+          // Scrolling for better error message communication to the user
+          await _scrollForBetterErrorViewing();
 
-      if(!mounted) return;
-      // Screen reader voicing
-      // "The assertiveness level of the announcement is determined by assertiveness.
-      // Currently, this is only supported by the web engine and has no effect on other platforms.
-      // The default mode is Assertiveness.polite."      
-      // TODO:  TextDirection.ltr: code to modify for l10n
-      // Doesn"t seem effective yet. Left for later. 
-      SemanticsService.sendAnnouncement
-      (
-        View.of(context), _errorMessage, 
-        TextDirection.ltr, assertiveness: Assertiveness.assertive
-      );
+          // Updating the parental widget information with the sanitized value
+          // Un-related to onSubmit
+          widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
 
-      // Updating the parental widget information with the sanitized value
-      // Un-related to onSubmit
-      widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
+          // Unblocking the submit
+          _submitIsBlocked = false;
 
-      // Unblocking the submit
-      _submitIsBlocked = false;
-    } 
-
-    // No, because no blocking function returned true
-    else 
-    {
-      // Re-setting the variable
-      _wasStringSanitized = false; 
-
-      if (textFieldDebug) pu.printd("Text Field: No sanitizing needed: value: $text");
-
-      // Removing the error message
-      setState(() 
-      {
-        _errorMessage = "";        
-      });
-
-      // Updating the parental widget information with the value
-      widget.onTextFieldValueChangedCallbackFunction(text);
+          if(!mounted) return cleanedValue;
+          // Screen reader voicing
+          // "The assertiveness level of the announcement is determined by assertiveness.
+          // Currently, this is only supported by the web engine and has no effect on other platforms.
+          // The default mode is Assertiveness.polite."      
+          // TODO:  TextDirection.ltr: code to modify for l10n
+          // Doesn"t seem effective yet. Left for later. 
+          SemanticsService.sendAnnouncement
+          (
+            View.of(context), _errorMessage, 
+            TextDirection.ltr, assertiveness: Assertiveness.assertive
+          );      
+      }
+        
     }
+
+ 
+    // Re-setting the variable
+    _wasStringSanitized = false; 
+
+
+    // Removing the error message
+    setState(() 
+    {
+      _errorMessage = "";        
+    });
+
+    // Updating the parental widget information with the value
+    widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
+
+    return cleanedValue;
   }
 
   Future<void> _userInputBlacklistCheck(String text) async
@@ -369,10 +359,10 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     if (textFieldDebug) pu.printd("Text Field: onChanged: submitIsBlocked: $_submitIsBlocked");
 
     // Sanitizing the text, and resetting the error message if relevant
-    await _userInputSanitizing(newValue);
+     var cleanedValue = await _userInputSanitizing(newValue);
 
     // Checking if the text is part of a blacklist
-    if (!widget.isBlacklistingToBeOverridenTemporarily) await _userInputBlacklistCheck(newValue);
+    if (!widget.isBlacklistingToBeOverridenTemporarily) await _userInputBlacklistCheck(cleanedValue);
 
     // Additional onChanged instructions 
     widget.additionalOnChangedInstructions(newValue);
