@@ -153,7 +153,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
     );
   }
 
-  // Function used to change a stakeholder identifier"s color
+  // Function used to change a stakeholder identifier's color
   void _identifierChangeColor({required int index, required Color currentColor}) 
   { 
     int colorIndex = identifierColors.indexOf(currentColor);

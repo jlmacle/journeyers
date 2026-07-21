@@ -235,9 +235,9 @@ class CAFormState extends State<CAForm>
               CACheckboxWithSanitizedAndPaddedTextField
               (
                 checkboxText: qf.level3TitleBalanceIssueItem1,
-                // Initializing the checkbox value with the DTO"s value
+                // Initializing the checkbox value with the DTO's value
                 checkboxStartValue:  _dtoCAForm!.indivBalanceStudiesHousehold.checked,
-                // Initializing the text field value with the DTO"s value
+                // Initializing the text field value with the DTO's value
                 textFieldStartValue: _dtoCAForm!.indivBalanceStudiesHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,
                 // Updating DTO and UI (heading and item styling)

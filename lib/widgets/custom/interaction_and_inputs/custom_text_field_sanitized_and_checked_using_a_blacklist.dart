@@ -212,7 +212,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
    
           setState(() 
           {
-            // Updating the text editing controller"s text with the sanitized input
+            // Updating the text editing controller's text with the sanitized input
             _tfec.text = cleanedValue;
 
             // Letting the user know that the input was sanitized
@@ -245,16 +245,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
         
     }
 
- 
-    // Re-setting the variable
-    _wasStringSanitized = false; 
-
-
-    // Removing the error message
-    setState(() 
-    {
-      _errorMessage = "";        
-    });
 
     // Updating the parental widget information with the value
     widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
@@ -298,8 +288,6 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
         _errorMessage = widget.blacklistingFunctionsErrorsMapping[blacklistingFunctionsReturnedTrueList[0]]!;  
       });       
 
-      // An intent to fix an intermittent scrolling for the CA process file name error message
-      await Future.delayed(const Duration(milliseconds: 500));
       // Scrolling for better error message communication to the user
       await _scrollForBetterErrorViewing();
 

@@ -8,6 +8,6 @@
   "@lang_fr": {"description": "The name of the French language in US English"},
   "lang_en": "English",
   "@lang_en": {"description": "The name of the English language in US English"},
-  "start_msg": "This is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.",
+  "start_msg": "Disclaimer:\nThis work is provided \"as is\"\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.",
   "@start_msg": {"description": "The information message that a newly installed app should display."}
 }
