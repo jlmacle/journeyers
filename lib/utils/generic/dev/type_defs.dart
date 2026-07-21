@@ -15,14 +15,14 @@ typedef BlacklistingFunction =
 bool Function(String value);
 
 /// {@category Utils - Generic}
-/// An async function with a Set\<String\> parameter, and a String parameter.
-typedef OnKeywordsUpdatedCallbackFunctionType = 
-Future<void> Function({required String? filePath, required Set<String> updatedKeywords});
-
-/// {@category Utils - Generic}
 /// An async function without parameters, and returning Future\<void\>.
 typedef FutureVoidCallback = 
 Future<void> Function();
+
+/// {@category Utils - Generic}
+/// An async function with a Set\<String\> parameter, and a String parameter.
+typedef OnKeywordsUpdatedCallbackFunctionType = 
+Future<void> Function({required String? filePath, required Set<String> updatedKeywords});
 
 /// {@category Utils - Project-specific}
 /// A typedef for an onRetrievedSessionDataCallback.
