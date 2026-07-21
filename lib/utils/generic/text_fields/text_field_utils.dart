@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
-import "package:journeyers/debug_constants.dart";
 
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -38,8 +39,11 @@ class TextFieldUtils
   /// An externalization for dot.
   static const charDot = ".";
 
-  /// An externalization for a line return.
-  static const charLR = "\n";
+  /// An externalization for a line feed.
+  static const charLF = "\n";
+
+  // An externalization for carriage return.
+  static const charCR = "\r";
 
   /// An externalization for "csv".
   static const extensionCSV = "csv";
@@ -47,8 +51,10 @@ class TextFieldUtils
   /// An externalization for "txt".
   static const extentionTXT = "txt";
 
+  static const intermediaryReplacementString = "←$addEmoji←$addEmoji←";
+
   // ─── STRING SANITIZER BUNDLES AND ERROR MESSAGES ───────────────────────────────────────
-  /// A [StringSanitizerBundle] sanitizing straight quotes.
+  /// A [StringSanitizerBundle] sanitizing straight double quotes, by replacing them by single quotes.
   static 
   ({
     bool shouldStringBeSanitized, 
@@ -57,13 +63,42 @@ class TextFieldUtils
   containsAStraightQuote(String value) => 
   (
     shouldStringBeSanitized: value.contains(charQuote), 
-    sanitizingFunction: (value) => value.replaceAll(charQuote, "")
+    sanitizingFunction: (value) 
+    {
+      value = value.replaceAll(charQuote, intermediaryReplacementString);
+      value = value.replaceAll(intermediaryReplacementString, "'");
+      return value;
+    }
+  );
+
+  /// A [StringSanitizerBundle] sanitizing line returns, removing them.
+  static 
+  ({
+    bool shouldStringBeSanitized, 
+    dynamic Function(dynamic) sanitizingFunction
+  }) 
+  containsALineReturn(String value) => 
+  (
+    shouldStringBeSanitized: value.contains(charLF), 
+    sanitizingFunction: (value) 
+    {
+      value = value.replaceAll(charCR, "");
+      value = value.replaceAll(charLF, intermediaryReplacementString);
+      value = value.replaceAll(intermediaryReplacementString, " ");
+      return value;
+    }
   );
 
   /// An error message displayed if containsAStraightQuote returns true.
   static const errorContainsAStraightQuote = 
   "Straight double quotes\n"
-  "are removed from the text typed\n"
+  "are replaced in the text typed\n"
+  "for CSV-export reasons.\nWith apologies.";
+
+  /// An error message displayed if containsAStraightQuote returns true.
+  static const errorContainsALineReturn = 
+  "Line returns\n"
+  "are removed in the text typed\n"
   "for CSV-export reasons.\nWith apologies.";
 
   /// A [StringSanitizerBundle] sanitizing dots.

@@ -10,7 +10,8 @@ class TextFieldStringSanitizerBundlesErrorsMappings
   /// for the context analysis text fields.
   static const Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMappingForCA = 
   {
-    TextFieldUtils.containsAStraightQuote :TextFieldUtils.errorContainsAStraightQuote,
+    TextFieldUtils.containsAStraightQuote: TextFieldUtils.errorContainsAStraightQuote,
+    TextFieldUtils.containsALineReturn: TextFieldUtils.errorContainsALineReturn
   };  
 
   /// A map with String sanitizer bundles as keys, and error messages as values,
