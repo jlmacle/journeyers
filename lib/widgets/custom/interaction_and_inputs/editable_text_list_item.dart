@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/type_defs2.dart";
-import "../../../utils/generic/dev/placeholder_functions.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
 
 /// {@category Utils - Generic}
 /// {@category Lists}
