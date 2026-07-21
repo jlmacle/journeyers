@@ -54,7 +54,7 @@ class SessionsListItem extends StatefulWidget
   final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
-  final FunctionSetStringAndString onKeywordsUpdatedCallbackFunction;
+  final OnKeywordsUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the delete icon is interacted with.
   final VoidCallback onDeleteCallbackFunction;
@@ -565,7 +565,7 @@ void _showKeywordsEditSheet
   required BuildContext context, required String dashboardContext, 
   required List<dynamic> currentKeywords, required String? filePath, 
   required TextEditingController kwsEditController,
-  required FunctionSetStringAndString onKeywordsUpdatedCallbackFunction,
+  required OnKeywordsUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction,
   required ValueChanged<String?> onKeywordsUpdated
 
 }) {

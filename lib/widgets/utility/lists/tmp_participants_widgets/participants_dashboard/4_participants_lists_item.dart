@@ -4,7 +4,6 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/type_defs2.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
@@ -34,10 +33,10 @@ class ParticipantsListsItem extends StatefulWidget
   final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
-  final FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction;
+  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the participants are updated.
-  final FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction;
+  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction;
 
   /// A callback function called when the list is updated.
   final OnListNameUpdatedCallbackFunctionType  onListNameUpdatedCallbackFunction;
@@ -72,7 +71,6 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
 {
   final _listsDB = ParticipantsListsDB();
   List<String> _participantsCurrent = [];
-  String _listNameCurrent = "";
   final TextEditingController _listNameEditTfec = .new();
   final TextEditingController _participantsEditTfec = .new();
   final TextEditingController _kwsEditTfec = .new();
@@ -369,8 +367,8 @@ void _showKeywordsEditSheet
   required BuildContext context, required String dashboardContext, 
   required List<dynamic> currentKeywords, required String? listKey, 
   required TextEditingController kwsEditController,
-  required FunctionSetStringMapStringDynamicAndString onKeywordsUpdatedCallbackFunction,
-  required FunctionStringAndMapStringDynamic onKeywordsUpdated,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction,
+  required OnListDataUpdatedCallbackFunctionType onKeywordsUpdated,
   required Map<String, dynamic> listData
 
 
@@ -427,8 +425,8 @@ void _showParticipantsEditSheet({
   required List<dynamic> currentParticipants,
   required String? listKey,
   required TextEditingController participantsTec,
-  required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
-  required FunctionStringAndMapStringDynamic onParticipantsUpdated,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
+  required OnListDataUpdatedCallbackFunctionType onParticipantsUpdated,
   required Map<String, dynamic> listData,
 }) {
   participantsTec.text = currentParticipants.join(", ");
@@ -504,8 +502,8 @@ void _showListNameEditSheet({
   required String currentListName,
   required String? listKey,
   required TextEditingController listNameEditTec,
-  required FunctionSetStringMapStringDynamicAndString onParticipantsUpdatedCallbackFunction,
-  required FunctionStringAndMapStringDynamic onListNameUpdated,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
+  required OnListDataUpdatedCallbackFunctionType onListNameUpdated,
   required Map<String, dynamic> listData,
 }) {
   listNameEditTec.text = currentListName;

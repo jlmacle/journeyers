@@ -82,6 +82,8 @@ class TextFieldUtils
     shouldStringBeSanitized: value.contains(charLF), 
     sanitizingFunction: (value) 
     {
+      // DOS vs. Unix Line Endings
+      // https://www.cs.toronto.edu/~krueger/csc209h/tut/line-endings.html
       value = value.replaceAll(charCR, "");
       value = value.replaceAll(charLF, intermediaryReplacementString);
       value = value.replaceAll(intermediaryReplacementString, " ");
