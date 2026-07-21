@@ -20,7 +20,7 @@ Future<void> Function();
 typedef OnKeywordsUpdatedCallbackFunctionType = 
 Future<void> Function({required String? filePath, required Set<String> updatedKeywords});
 
-// A typedef for an onRetrievedSessionDataCallback.
+// A typedef for an onRetrievedCA/GPSSessionDataBeforeEditionCallbackFunction.
 typedef OnRetrievedSessionDataBeforeEditionCallbackFunctionType = 
 void Function
 ({
@@ -41,19 +41,18 @@ Future<void> Function
   required Map<String, dynamic> listData
 });
 
-// A typedef for an async function typedef with a String parameter, a Set\<String\> parameter, and a Map\<String, dynamic\> parameter,
-// and used with the ParticipantsListsItem widget.
+// A typedef used with the ParticipantsListsItem onKeywordsUpdatedCallbackFunction, onParticipantsUpdatedCallbackFunction.
 typedef OnParticipantListsItemSetStringUpdatedCallbackFunctionType = 
 Future<void> Function({required String? listKey, required Set<String> updatedItems, required Map<String, dynamic> listData});
 
-// A typedef for an async function with a String parameter, and a Map\<String, dynamic\> parameter.
+// A typedef for an onListNameUpdated, onParticipantsUpdated, onKeywordsUpdated.
 typedef OnListDataUpdatedCallbackFunctionType = 
 Future<void> Function({required String? listKey, required Map<String, dynamic> listData});
 
-// A typedef for a function with a String parameter, an int parameter, and returning void.
+// A typedef for a parentCallbackFunctionToUpdateTheListItemValue.
 typedef OnListItemValueUpdatedCallbackFunctionType = 
 void Function({required int intParam, required String stringParam});
 
-// A typedef for a function with a bool? parameter, and an int parameter.
+// A typedef for an onCheckboxChangedCallbackFunction.
 typedef OnCheckboxChangedCallbackFunctionType = 
 void Function({required bool? boolParam, required int intParam});
