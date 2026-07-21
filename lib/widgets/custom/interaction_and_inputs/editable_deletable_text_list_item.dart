@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+
+import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/type_defs2.dart";
 
 /// {@category Utils - Generic}
@@ -28,7 +30,7 @@ class EditableDeletableTextListItem extends StatefulWidget {
   final double paddingBottom;
 
   /// A callback function called when the checkbox is checked/unchecked.
-  final FunctionNullableBoolAndInt onCheckboxChangedCallbackFunction;
+  final OnCheckboxChangedCallbackFunctionType onCheckboxChangedCallbackFunction;
 
   /// Callback function used to update the list item value.
   final OnListItemValueUpdatedCallbackFunctionType parentCallbackFunctionToUpdateTheListItemValue;
