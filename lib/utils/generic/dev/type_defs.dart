@@ -45,8 +45,8 @@ Future<void> Function
 typedef OnParticipantListsItemSetStringUpdatedCallbackFunctionType = 
 Future<void> Function({required String? listKey, required Set<String> updatedItems, required Map<String, dynamic> listData});
 
-// A typedef for an onListNameUpdated, onParticipantsUpdated, onKeywordsUpdated.
-typedef OnListDataUpdatedCallbackFunctionType = 
+// A typedef used with the ParticipantsListsItem onListNameUpdated, onParticipantsUpdated, onKeywordsUpdated.
+typedef OnParticipantListsItemDataUpdatedCallbackFunctionType = 
 Future<void> Function({required String? listKey, required Map<String, dynamic> listData});
 
 // A typedef for a parentCallbackFunctionToUpdateTheListItemValue.
