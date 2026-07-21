@@ -50,7 +50,7 @@ void main()
             final modalFinder = find.byType(AlertDialog);
             expect(modalFinder, findsOneWidget);
 
-            // Verifying the modal"s behavior
+            // Verifying the modal's behavior
             await tester.tap(modalFinder);
             await tester.pumpAndSettle();
 

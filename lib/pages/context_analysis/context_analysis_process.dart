@@ -78,7 +78,7 @@ class CAProcessState extends State<CAProcess>
   // Boolean to wait on the data loading
   bool _dtoAssetLoading = true;
 
-  // Method used to load the DTO"s data using a json file
+  // Method used to load the DTO's data using a json file
   Future<void> _loadDTO({required String dtoAssetPathToJson}) async 
   {
     // Loading from DTO
