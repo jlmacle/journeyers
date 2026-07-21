@@ -53,5 +53,8 @@ Future<void> Function
 typedef OnParticipantListsItemSetStringUpdatedCallbackFunctionType = 
 Future<void> Function({required String? listKey, required Set<String> updatedItems, required Map<String, dynamic> listData});
 
+/// An async function with a String parameter, and a Map\<String, dynamic\> parameter.
+typedef OnListDataUpdatedCallbackFunctionType = 
+Future<void> Function({required String? listKey, required Map<String, dynamic> listData});
 
 

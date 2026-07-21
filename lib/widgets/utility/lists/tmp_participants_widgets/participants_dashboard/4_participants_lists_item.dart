@@ -370,7 +370,7 @@ void _showKeywordsEditSheet
   required List<dynamic> currentKeywords, required String? listKey, 
   required TextEditingController kwsEditController,
   required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction,
-  required FunctionStringAndMapStringDynamic onKeywordsUpdated,
+  required OnListDataUpdatedCallbackFunctionType onKeywordsUpdated,
   required Map<String, dynamic> listData
 
 
@@ -428,7 +428,7 @@ void _showParticipantsEditSheet({
   required String? listKey,
   required TextEditingController participantsTec,
   required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
-  required FunctionStringAndMapStringDynamic onParticipantsUpdated,
+  required OnListDataUpdatedCallbackFunctionType onParticipantsUpdated,
   required Map<String, dynamic> listData,
 }) {
   participantsTec.text = currentParticipants.join(", ");
@@ -505,7 +505,7 @@ void _showListNameEditSheet({
   required String? listKey,
   required TextEditingController listNameEditTec,
   required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
-  required FunctionStringAndMapStringDynamic onListNameUpdated,
+  required OnListDataUpdatedCallbackFunctionType onListNameUpdated,
   required Map<String, dynamic> listData,
 }) {
   listNameEditTec.text = currentListName;

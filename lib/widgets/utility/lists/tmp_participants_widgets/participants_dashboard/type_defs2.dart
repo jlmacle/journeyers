@@ -2,10 +2,6 @@ import "package:flutter/material.dart";
 
 
 
-/// An async function with a String parameter, and a Map\<String, dynamic\> parameter.
-typedef FunctionStringAndMapStringDynamic = 
-Future<void> Function({required String? listKey, required Map<String, dynamic> listData});
-
 
 /// {@category Utils - Generic}
 /// An async function without parameters, and returning Future\<void\>.
