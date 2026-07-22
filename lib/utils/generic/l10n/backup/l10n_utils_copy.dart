@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart'; 
+// ignore_for_file: prefer_double_quotes
 
-import 'package:journeyers/l10n/app_localizations.dart'; 
+import "package:flutter/material.dart"; 
+
+import "package:journeyers/l10n/app_localizations.dart"; 
 
 /// {@category Utils - Generic} 
 /// A generic utility class related to localization. 
