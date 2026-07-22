@@ -79,7 +79,7 @@ class SessionsListItem extends StatefulWidget
 
 class _SessionsListItemState extends State<SessionsListItem> 
 {
-  final TextEditingController _kwsEditTfec = .new();
+  final TextEditingController _kwsEditTec = .new();
 
   // Data related to deleting ideas from the overlay
   // List of ideas present before deletion
@@ -94,7 +94,7 @@ class _SessionsListItemState extends State<SessionsListItem>
   void _onKeywordsUpdated(String? filePath) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = _kwsEditTfec.text
+    final Set<String> updatedKeywords = _kwsEditTec.text
         .split(",")
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -224,7 +224,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
   @override void dispose() 
   {
-    _kwsEditTfec.dispose();
+    _kwsEditTec.dispose();
     super.dispose();
   }
 
@@ -313,7 +313,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                           filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                          kwsEditController: _kwsEditTfec,
+                          kwsEditController: _kwsEditTec,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                           onKeywordsUpdated: _onKeywordsUpdated
                           ),
@@ -356,7 +356,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                         dashboardContext: widget.dashboardContext,
                         currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
                         filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
-                        kwsEditController: _kwsEditTfec,
+                        kwsEditController: _kwsEditTec,
                         onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                         onKeywordsUpdated: _onKeywordsUpdated
                       ),

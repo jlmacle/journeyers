@@ -16,7 +16,7 @@ void main()
           home: Scaffold(
             body: GPSProblemToSolveDeclaration
             (
-              sessionTitleTfec: tfec,
+              sessionTitleTec: tfec,
               previousSessions: const [],
               onSessionSelected: (_){},
             ),

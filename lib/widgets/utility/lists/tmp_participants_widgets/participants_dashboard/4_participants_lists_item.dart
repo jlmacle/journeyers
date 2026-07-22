@@ -71,16 +71,16 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
 {
   final _listsDB = ParticipantsListsDB();
   List<String> _participantsCurrent = [];
-  final TextEditingController _listNameEditTfec = .new();
-  final TextEditingController _participantsEditTfec = .new();
-  final TextEditingController _kwsEditTfec = .new();
+  final TextEditingController _listNameEditTec = .new();
+  final TextEditingController _participantsEditTec = .new();
+  final TextEditingController _kwsEditTec = .new();
   
 
   // To clean
   Future<void> _onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedKeywords = _kwsEditTfec.text
+    final Set<String> updatedKeywords = _kwsEditTec.text
         .split(",")
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -111,7 +111,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
   Future<void> _onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
   {
     // Splitting string into list, trimming whitespaces, and removing empty entries
-    final Set<String> updatedParticipants = _participantsEditTfec.text
+    final Set<String> updatedParticipants = _participantsEditTec.text
         .split(",")
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
@@ -145,9 +145,9 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
  
   @override void dispose() 
   {
-    _kwsEditTfec.dispose();
-    _listNameEditTfec.dispose();
-    _participantsEditTfec.dispose();
+    _kwsEditTec.dispose();
+    _listNameEditTec.dispose();
+    _participantsEditTec.dispose();
     super.dispose();
   }
 
@@ -212,7 +212,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                   dashboardContext: widget.dashboardContext,                          
                                   currentListName: displayTitle,
                                   listKey: widget.listMetadata[itemKey],
-                                  listNameEditTec: _participantsEditTfec,
+                                  listNameEditTec: _participantsEditTec,
                                   onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
                                   onListNameUpdated: _onListNameUpdated,
                                   listData: widget.listMetadata
@@ -239,7 +239,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                   dashboardContext: widget.dashboardContext,                          
                                   currentParticipants: _participantsCurrent,
                                   listKey: widget.listMetadata[itemKey],
-                                  participantsTec: _participantsEditTfec,
+                                  participantsTec: _participantsEditTec,
                                   onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
                                   onParticipantsUpdated: _onParticipantsUpdated,
                                   listData: widget.listMetadata
@@ -293,7 +293,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                           dashboardContext: widget.dashboardContext,                          
                           currentKeywords: widget.listMetadata[itemKeywordsKey],
                           listKey: widget.listMetadata[itemKey],
-                          kwsEditController: _kwsEditTfec,
+                          kwsEditController: _kwsEditTec,
                           onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                           onKeywordsUpdated: _onKeywordsUpdated,
                           listData: widget.listMetadata
@@ -321,7 +321,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                     dashboardContext: widget.dashboardContext,
                     currentKeywords: widget.listMetadata[itemKeywordsKey],
                     listKey: widget.listMetadata[itemKey],
-                    kwsEditController: _kwsEditTfec,
+                    kwsEditController: _kwsEditTec,
                     onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                     onKeywordsUpdated: _onKeywordsUpdated,
                     listData: widget.listMetadata,

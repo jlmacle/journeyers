@@ -35,7 +35,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
 {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
-  final TextEditingController _keywordsTfec = .new();
+  final TextEditingController _keywordsTec = .new();
     
   // Method used to add keywords to the _keywords list
   void _keywordAdd(String value, [StateSetter? localSetState]) 
@@ -45,7 +45,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
       // Updates the underlying data
       setState(() {
         _keywords!.add(trimmedValue);
-        _keywordsTfec.clear();
+        _keywordsTec.clear();
       });
       
       // Redraws the Dialog/Overlay
@@ -94,7 +94,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
   @override
   void dispose()
   {
-    _keywordsTfec.dispose();
+    _keywordsTec.dispose();
     super.dispose();
   }
 
@@ -122,6 +122,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
   }
 
   void _showKeywordsOverlay(BuildContext context) {
+
     const title = "Keywords for the\nproblem-solving session";
 
     showGeneralDialog(
@@ -167,7 +168,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       child: TextField
                       (
                         key: const Key("gpsKeywordsField"),
-                        controller: _keywordsTfec,
+                        controller: _keywordsTec,
                         decoration: const InputDecoration
                         (
                           hint: Center
@@ -222,4 +223,5 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
       },
     );
   }
+
 }

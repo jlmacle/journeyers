@@ -88,7 +88,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
   
   // Data used to adding a text to the list
-  final _newTextItemTfec = TextEditingController();
+  final _newTextItemTec = TextEditingController();
   // To store the new grouped texts data
   late final List<String> _enteredTextItemsList;
 
@@ -98,7 +98,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
   // Data used to edit a text after addition to the list
   var _isEdited = false;
   var _editedItemIndex = -1;
-  final _editionTfec = TextEditingController();
+  final _editionTec = TextEditingController();
 
   // Data related to deleting texts from the new list
   List<int> _textsSelectedForDeletionIndexes = [];
@@ -110,7 +110,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
   // True while an async save is in progress (prevents double-tap).
   bool _dataSaving = false;
   // For entering the list label
-  final _labelTfec = TextEditingController();
+  final _labelTec = TextEditingController();
 
   // Method used to verify if the newly entered texts have been already saved in a list
   bool _listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
@@ -144,7 +144,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
           builder: (ctx, setDialogState) {
 
             Future<void> onConfirm() async {
-              final label = _labelTfec.text.trim();
+              final label = _labelTec.text.trim();
               if (label.isEmpty) {
                 setDialogState(() => errorText = emptyLabelError);
                 return;
@@ -173,7 +173,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               title: const Text("Save list"),
               content: TextField(
                 key: const Key("saveListField"),
-                controller: _labelTfec,
+                controller: _labelTec,
                 autofocus: true,
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) async => await onConfirm(), 
@@ -266,9 +266,9 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
   // Disposing of the TextEditingController instances
   @override
   void dispose() {
-    _newTextItemTfec.dispose();
-    _editionTfec.dispose();
-    _labelTfec.dispose();
+    _newTextItemTec.dispose();
+    _editionTec.dispose();
+    _labelTec.dispose();
     super.dispose();
   }
 
@@ -407,7 +407,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                         // Text field (edition mode)
                         TextField
                         (
-                          controller: _editionTfec,
+                          controller: _editionTec,
                           autofocus: true,
                           decoration: const InputDecoration
                           (                    
@@ -419,7 +419,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                             {
                               _enteredTextItemsList[index] = value; 
                               _isEdited = false;
-                              _editionTfec.clear();
+                              _editionTec.clear();
                             }),
                           
                         )
@@ -469,7 +469,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               child: TextField
               (
                 key: const Key("participantNameField"),
-                controller: _newTextItemTfec,
+                controller: _newTextItemTec,
                 textAlign: TextAlign.left,
                 decoration: const InputDecoration
                 (
@@ -485,7 +485,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                   setState(() {
                     _enteredTextItemsList.add(value.trim());
                   });
-                  _newTextItemTfec.clear();
+                  _newTextItemTec.clear();
                   if (listDebug) pu.printd("List debug: NewParticipantsList: build: _enteredTextItemsList: $_enteredTextItemsList");
                 },
               ),

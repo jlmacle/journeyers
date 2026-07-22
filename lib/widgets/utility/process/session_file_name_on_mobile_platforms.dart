@@ -63,7 +63,7 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
 
 class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobilePlatforms> 
 {
-  final TextEditingController _fileNameTfec = .new();  
+  final TextEditingController _fileNameTec = .new();  
   
   final GlobalKey<_SessionFileNameOnMobilePlatformsState> _errorMessageKey = .new();
 
@@ -111,13 +111,13 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
 
     // Edited file name value if relevant
     if (editDebug && widget.fileNameWithoutExtensionWhenEdition != "") pu.printd("Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWithoutExtensionWhenEdition}");
-    _fileNameTfec.text = widget.fileNameWithoutExtensionWhenEdition;
+    _fileNameTec.text = widget.fileNameWithoutExtensionWhenEdition;
   }
 
   @override
   void dispose()
   {
-    _fileNameTfec.dispose();
+    _fileNameTec.dispose();
     super.dispose();
   }
 

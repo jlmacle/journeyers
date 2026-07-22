@@ -91,7 +91,7 @@ class GPSProcessState extends State<GPSProcess>
 
   // TITLE for the group problem-solving process
   // TextEditingController for entering a new title
-  final TextEditingController _titleTfec = .new();
+  final TextEditingController _titleTec = .new();
     List<Map<String, dynamic>> _previousCAMetadata = [];
 
   // ─── STAKEHOLDER IDENTIFIERS related data ───────────────────────────────────────
@@ -149,8 +149,8 @@ class GPSProcessState extends State<GPSProcess>
       return;
     }
 
-    String sessionTitle = _titleTfec.text.trim().isNotEmpty 
-        ? _titleTfec.text.trim()
+    String sessionTitle = _titleTec.text.trim().isNotEmpty 
+        ? _titleTec.text.trim()
         : widget.titleWhenEdition.isNotEmpty
           ? widget.titleWhenEdition
           : "Problem Solving Session";
@@ -276,7 +276,7 @@ Future<void> _loadAllCAMetadata() async {
 // Method used to import a context analysis metadata
 void _handleCAMetadataSelection(Map<String, dynamic> session) {
   setState(() {
-    _titleTfec.text = "${session[DashboardUtils.keyTitle]}";
+    _titleTec.text = "${session[DashboardUtils.keyTitle]}";
     
     if (session["keywords"] != null) {
       _currentKeywords = Set<String>.from(session[DashboardUtils.keyKeywords]);
@@ -320,7 +320,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
   @override
   void dispose() 
   {
-    _titleTfec.dispose();
+    _titleTec.dispose();
     super.dispose();
   }
   
@@ -336,7 +336,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
         GPSProblemToSolveDeclaration(
           key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
           titleWhenEdition: widget.titleWhenEdition,
-          sessionTitleTfec: _titleTfec,
+          sessionTitleTec: _titleTec,
           previousSessions: _previousCAMetadata,
           onSessionSelected: _handleCAMetadataSelection,
         ),

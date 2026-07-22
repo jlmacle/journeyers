@@ -911,8 +911,8 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Adding kwCommunication
-              var kwTfecFinder = find.byKey(const Key("gpsKeywordsField"));
-              await tester.enterText(kwTfecFinder, kwCommunication);
+              var kwTecFinder = find.byKey(const Key("gpsKeywordsField"));
+              await tester.enterText(kwTecFinder, kwCommunication);
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
 
@@ -1133,8 +1133,8 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Adding kwCommunication
-              var kwTfecFinder = find.byKey(const Key("gpsKeywordsField"));
-              await tester.enterText(kwTfecFinder, kwCommunication);
+              var kwTecFinder = find.byKey(const Key("gpsKeywordsField"));
+              await tester.enterText(kwTecFinder, kwCommunication);
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
 
@@ -1355,8 +1355,8 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Adding kwCommunication
-              var kwTfecFinder = find.byKey(const Key("gpsKeywordsField"));
-              await tester.enterText(kwTfecFinder, kwCommunication);
+              var kwTecFinder = find.byKey(const Key("gpsKeywordsField"));
+              await tester.enterText(kwTecFinder, kwCommunication);
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
 
@@ -1930,13 +1930,13 @@ Future<void> main() async {
               // Adding two keywords
             var keywordsListKw1Kw2 = ["kw1", "kw2"];
                 // Searching the text field
-            var keywordTfecFinder = find.byKey(const Key("kwsFieldNewList"));
+            var keywordTecFinder = find.byKey(const Key("kwsFieldNewList"));
             for (var kw in keywordsListKw1Kw2)
             {
-              await tester.enterText(keywordTfecFinder, kw);
+              await tester.enterText(keywordTecFinder, kw);
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
-              await tester.tap(keywordTfecFinder);
+              await tester.tap(keywordTecFinder);
               await tester.pumpAndSettle();
             }
 

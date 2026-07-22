@@ -11,7 +11,7 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
   /// The title value at edition time.
   final String titleWhenEdition;
   /// A TextEditingController for the session title.
-  final TextEditingController sessionTitleTfec;
+  final TextEditingController sessionTitleTec;
   /// The data from the previous context analyses sessions (for metadata import).
   final List<Map<String, dynamic>> previousSessions;
   /// A callback function used when a previous context analysis session data is selected.
@@ -20,7 +20,7 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
   const GPSProblemToSolveDeclaration({
     super.key,
     this.titleWhenEdition = "",
-    required this.sessionTitleTfec,
+    required this.sessionTitleTec,
     required this.previousSessions,
     required this.onSessionSelected,
   });
@@ -39,7 +39,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSProblemToSolveDeclaration");
 
-    if (widget.titleWhenEdition != "") widget.sessionTitleTfec.text = widget.titleWhenEdition;
+    if (widget.titleWhenEdition != "") widget.sessionTitleTec.text = widget.titleWhenEdition;
   }
 
   @override
@@ -52,7 +52,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               TextField
               (
                 key: const Key("problemToSolveField"),
-                controller: widget.sessionTitleTfec,
+                controller: widget.sessionTitleTec,
                 autofocus: true,
                 decoration: InputDecoration
                 (
@@ -108,17 +108,17 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                     // if not an edition, or editing an empty title
                     (widget.titleWhenEdition == "")
                     ? 
-                      (widget.sessionTitleTfec.text.trim() == "") 
+                      (widget.sessionTitleTec.text.trim() == "") 
                       ? 
                         gpsProcessTitlePlaceholder
                       : 
-                        widget.sessionTitleTfec.text.trim() 
+                        widget.sessionTitleTec.text.trim() 
                     // if an edition
                     : 
                       // value to edit was edited?
-                      (widget.sessionTitleTfec.text.trim() != "") 
+                      (widget.sessionTitleTec.text.trim() != "") 
                       ?
-                        widget.sessionTitleTfec.text.trim()
+                        widget.sessionTitleTec.text.trim()
                       :
                         widget.titleWhenEdition,
 

@@ -1122,13 +1122,13 @@ Future<void> main() async {
               // Editing the title
             var editedTitle = "${title}${editionSuffix}";
             
-            var editTfecFinder = find.byKey(const Key("titleDashboardEditField"));
-            await tester.enterText(editTfecFinder, editedTitle);
+            var editTecFinder = find.byKey(const Key("titleDashboardEditField"));
+            await tester.enterText(editTecFinder, editedTitle);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
               // Verifying the text field absent
-            expect(editTfecFinder, findsNothing);
+            expect(editTecFinder, findsNothing);
               // Verifying the edited title present
             expect(find.text(editedTitle), findsOne);
           }
@@ -1186,12 +1186,12 @@ Future<void> main() async {
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
-            var editTfecFinder = find.byKey(const Key("kwsDashboardEditField"));
-            await tester.enterText(editTfecFinder, editedKeywords);
+            var editTecFinder = find.byKey(const Key("kwsDashboardEditField"));
+            await tester.enterText(editTecFinder, editedKeywords);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
               // Verifying the text field absent
-            expect(editTfecFinder, findsNothing);
+            expect(editTecFinder, findsNothing);
               // Verifying the input chips present
             var kw1Finder = find.descendant
             (
