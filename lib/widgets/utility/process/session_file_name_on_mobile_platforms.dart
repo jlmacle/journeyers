@@ -65,8 +65,6 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
 {
   final TextEditingController _fileNameTec = .new();  
   
-  final GlobalKey<_SessionFileNameOnMobilePlatformsState> _errorMessageKey = .new();
-
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
   static const _platformAndroid = MethodChannel("dev.journeyers/saf");
