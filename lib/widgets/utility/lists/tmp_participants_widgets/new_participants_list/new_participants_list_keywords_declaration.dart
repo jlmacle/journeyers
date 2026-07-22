@@ -32,7 +32,7 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
 {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
-  final TextEditingController _keywordsTfec = .new();
+  final TextEditingController _keywordsTec = .new();
     
   // Method used to add keywords to the _keywords list
   void _keywordAdd(String value, [StateSetter? localSetState]) 
@@ -42,7 +42,7 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
       // Updates the underlying data
       setState(() {
         _keywords!.add(trimmedValue);
-        _keywordsTfec.clear();
+        _keywordsTec.clear();
       });
       
       // Redraws the Dialog/Overlay
@@ -82,7 +82,7 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
   @override
   void dispose()
   {
-    _keywordsTfec.dispose();
+    _keywordsTec.dispose();
     super.dispose();
   }
 
@@ -157,7 +157,7 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
                       child: TextField
                       (
                         key: const Key("kwsFieldNewList"),
-                        controller: _keywordsTfec,
+                        controller: _keywordsTec,
                         decoration: const InputDecoration
                         (
                           hint: Center

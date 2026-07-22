@@ -30,7 +30,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   bool _ideasAreSomeForDeletion = false;  
   final List<int> _ideasSelectedForDeletionIndexes = [];
   late final List<String> _ideasEnteredList;  
-  final _ideaNewTfec = TextEditingController();
+  final _ideaNewTec = TextEditingController();
 
 
   void _ideaOnUpdateTheValue({required String stringParam, required int intParam})
@@ -53,7 +53,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
 
   @override
   void dispose() {
-    _ideaNewTfec.dispose();
+    _ideaNewTec.dispose();
     super.dispose();
   }
 
@@ -235,7 +235,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                       child: TextField
                       (
                         key: const Key("ideaOverlayField"),
-                        controller: _ideaNewTfec,
+                        controller: _ideaNewTec,
                         textAlign: TextAlign.left,
                         decoration: const InputDecoration
                         (
@@ -254,7 +254,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                           setState(() {
                             
                           });
-                          _ideaNewTfec.clear();
+                          _ideaNewTec.clear();
                           if (editDebug) pu.printd("Editing: GPSIdeasList: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList");
                         },
                       ),

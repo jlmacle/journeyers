@@ -228,11 +228,11 @@ class DashboardPageState extends State<DashboardPage>
      }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
-  final TextEditingController _titleTfec = .new();
+  final TextEditingController _titleTec = .new();
 
   @override
   void dispose() {
-    _titleTfec.dispose();
+    _titleTec.dispose();
     super.dispose();
   }
 
@@ -468,7 +468,7 @@ class DashboardPageState extends State<DashboardPage>
   
   void _titleShowEditSheet(String title, String filePath) 
   {
-    _titleTfec.text = title; // Syncing current title to the field
+    _titleTec.text = title; // Syncing current title to the field
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangle shape
@@ -488,7 +488,7 @@ class DashboardPageState extends State<DashboardPage>
             TextField
             (
               key: const Key("titleDashboardEditField"),
-              controller: _titleTfec,
+              controller: _titleTec,
               autofocus: true,
               decoration: const InputDecoration
               (
@@ -499,7 +499,7 @@ class DashboardPageState extends State<DashboardPage>
               onSubmitted: (_) async 
               {
                 // New title from the controller
-                final String newTitle = _titleTfec.text;
+                final String newTitle = _titleTec.text;
 
                 // Performing async work outside of setState
                 // Updating session data
@@ -523,7 +523,7 @@ class DashboardPageState extends State<DashboardPage>
               onPressed: () async 
               {
                 // New title from the controller
-                final String newTitle = _titleTfec.text;
+                final String newTitle = _titleTec.text;
 
                 // Performing async work outside of setState
                 // Updating session data

@@ -300,11 +300,11 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
      }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
-  final TextEditingController _titleTfec = .new();
+  final TextEditingController _titleTec = .new();
 
   @override
   void dispose() {
-    _titleTfec.dispose();
+    _titleTec.dispose();
     super.dispose();
   }
 

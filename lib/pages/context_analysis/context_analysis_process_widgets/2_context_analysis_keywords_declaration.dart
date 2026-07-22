@@ -30,7 +30,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
 
   final Set<String> _keywordsSet = {};
   List<String> _keywordsListSorted = [];
-  final TextEditingController _keywordsTfec = .new();
+  final TextEditingController _keywordsTec = .new();
     
   // Method used to add keywords to the _keywords list
   void _keywordAdd(String value)
@@ -46,7 +46,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
       _keywordsListSorted = _keywordsSet.toList();
       _keywordsListSorted.sort();
 
-      _keywordsTfec.clear();
+      _keywordsTec.clear();
       
       setState(() {});
     }
@@ -67,7 +67,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   @override
   void dispose()
   {
-    _keywordsTfec.dispose();
+    _keywordsTec.dispose();
     super.dispose();
   }
 
@@ -83,7 +83,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
           padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
           child: TextField
           (
-            controller: _keywordsTfec,
+            controller: _keywordsTec,
             decoration: const InputDecoration
             (
               hint: Center

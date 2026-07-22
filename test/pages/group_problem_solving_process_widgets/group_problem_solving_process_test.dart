@@ -47,7 +47,7 @@ void main()
           (
             onSessionSelected:(_) {},
             previousSessions: const [],
-            sessionTitleTfec: TextEditingController(),
+            sessionTitleTec: TextEditingController(),
           ),
         ),
       ),

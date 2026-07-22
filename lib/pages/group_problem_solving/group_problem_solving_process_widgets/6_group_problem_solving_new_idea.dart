@@ -25,16 +25,16 @@ class GPSNewIdea extends StatefulWidget
 class _GPSNewIdeaState extends State<GPSNewIdea> 
 {
   // TextEditingController for entering a new idea
-  final TextEditingController _newIdeaTfec = .new();
+  final TextEditingController _newIdeaTec = .new();
   // FocusNode used to keep the focus on the new idea field after an idea has been entered
   final FocusNode _newIdeaFocusNode = FocusNode();
 
   // Method to handle adding an idea to the list
   void _newIdeaSubmit() {
-    if (_newIdeaTfec.text.trim().isNotEmpty) {
+    if (_newIdeaTec.text.trim().isNotEmpty) {
       // Adding the new idea to the list
-      widget.newIdeaOnAddedCallbackFunction(_newIdeaTfec.text.trim());
-      _newIdeaTfec.clear();
+      widget.newIdeaOnAddedCallbackFunction(_newIdeaTec.text.trim());
+      _newIdeaTec.clear();
     }
     _newIdeaFocusNode.unfocus();
   }
@@ -42,7 +42,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
   @override
   void dispose() 
   {
-    _newIdeaTfec.dispose();
+    _newIdeaTec.dispose();
     super.dispose();
   }
 
@@ -66,7 +66,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
                 child: TextField(
                   key: const Key("gpsNewIdeaField"),
                   focusNode: _newIdeaFocusNode,
-                  controller: _newIdeaTfec,
+                  controller: _newIdeaTec,
                   decoration: const InputDecoration(
                     hintText: newIdeaTextFieldHint,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
