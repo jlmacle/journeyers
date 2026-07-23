@@ -16,10 +16,10 @@ void showAddToSetOverlay
   required TextStyle textFieldStyle,
   required String textFieldHintText,
   required TextStyle textFieldHintStyle,
-  required Function onSubmittedCallbackFunction,
+  required void Function(String value, StateSetter setLocalState) onSubmittedCallbackFunction,
   required Set<String> setToUpdate,
   Color inputChipDeleteIconColor = black,
-  required VoidCallback? onDeletedCallbackFunction
+  required void Function(String tag, StateSetter setLocalState) onDeletedCallbackFunction
 }) 
 {
     showGeneralDialog(
@@ -107,7 +107,7 @@ void showAddToSetOverlay
                                         label: Text(tag),
                                         deleteIcon: const Icon(Icons.close),
                                         deleteIconColor: inputChipDeleteIconColor,
-                                        onDeleted: onDeletedCallbackFunction
+                                        onDeleted: () => onDeletedCallbackFunction(tag, setLocalState)
                                       )
                             )
                           ],
