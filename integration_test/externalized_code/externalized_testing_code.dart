@@ -719,7 +719,7 @@ final q = CAQuestionsFields();
     }
 
     // Searching the tooltip to close the overlay
-    var closingIconFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
+    var closingIconFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
 
     // Closing the overlay
     await tester.tap(closingIconFinder);
@@ -1039,7 +1039,7 @@ final q = CAQuestionsFields();
       }
 
       // Closing the overlay
-      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(closeGPSKeywordsDeclarationTooltipLabel);
+      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
       await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
       await tester.pumpAndSettle();
     }
