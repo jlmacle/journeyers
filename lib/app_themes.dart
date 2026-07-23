@@ -231,7 +231,7 @@ const TextStyle problemSolvingKeywordsTitle = TextStyle
   // backgroundColor: appBarWhite,
 );
 
-const TextStyle problemSolvingKeywordsMessage = TextStyle
+const TextStyle problemSolvingKeywordsTitleStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
