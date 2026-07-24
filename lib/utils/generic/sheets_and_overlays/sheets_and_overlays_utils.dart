@@ -7,6 +7,8 @@ import "package:journeyers/app_themes.dart";
 void showAddToSetOverlay
 ({
   required BuildContext context,
+  appBarBackgroundColor = white,
+  appBarForegroundColor = black,
   required String overlayTitle,
   required TextStyle overlayTitleStyle,
   required String overlayCloseIconButtonToolTip,
@@ -30,6 +32,8 @@ void showAddToSetOverlay
           // APPBAR SECTION
           appBar: AppBar(
             centerTitle: true, 
+            backgroundColor: appBarBackgroundColor,
+            foregroundColor: appBarForegroundColor,
             title: 
               Padding
               (

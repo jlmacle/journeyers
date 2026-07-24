@@ -106,6 +106,8 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
       onTap: () => showAddToSetOverlay
                     (
                       context: context, 
+                      appBarBackgroundColor: navyBlue,
+                      appBarForegroundColor: appBarWhite,
                       overlayTitle: "Keywords for the\nproblem-solving session", 
                       overlayTitleStyle: problemSolvingKeywordsOverlayTitleStyle, 
                       overlayCloseIconButtonToolTip: gpsKeywordsDeclarationOverlayCloseIconButtonToolTip, 
