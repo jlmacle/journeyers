@@ -238,7 +238,7 @@ const TextStyle problemSolvingKeywordsOverlayTitleStyle = TextStyle
   color: appBarWhite
 );
 
-const TextStyle groupKeywordsMessage = TextStyle
+const TextStyle newParticipantsListKeywordsOverlayTitleStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
