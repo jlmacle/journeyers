@@ -54,7 +54,7 @@ https://lnkd.in/ee8hFarp
   <li><i>Nonviolent Communication</i>,  Marshall B. Rosenberg</li>
   <li><i>The 7 Habits of Highly Effective People</i>, Stephen R. Covey</li>
   <li><i>Group Problem Solving Process</i>, Ohio State University</li>
-  <li><i>Negotiation Fundamentals</i>, IRENE ESSEC - Institute for Research and Education on Negotiation</li>
+  <li><i>Negotiation Fundamentals</i>, IRENE (Institute for Research and Education on Negotiation), ESSEC Business School</li>
   <li><i>Effective Problem-Solving and Decision-Making</i>, University of California, Irvine</li>  
 </ul>
 
