@@ -107,7 +107,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                     (
                       context: context, 
                       overlayTitle: "Keywords for the\nproblem-solving session", 
-                      overlayTitleStyle: problemSolvingKeywordsTitleStyle, 
+                      overlayTitleStyle: problemSolvingKeywordsOverlayTitleStyle, 
                       overlayCloseIconButtonToolTip: gpsKeywordsDeclarationOverlayCloseIconButtonToolTip, 
                       overlayCloseIconButtonColor: appBarWhite,
                       textEditingControllerKey: const Key("gpsKeywordsField"), 
