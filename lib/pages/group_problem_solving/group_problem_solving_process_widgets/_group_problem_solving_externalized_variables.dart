@@ -46,5 +46,5 @@ const singleDeletionLabel = "Clear\nOne";
 const bulkDeletionLabel = "Clear\nAll";
 
 // NewParticipantsKeywordsDeclaration
-const closeGroupKeywordsDeclarationTooltipLabel = "Please click to close the keywords declaration page";
+const newParticipantsListKeywordsOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
 
