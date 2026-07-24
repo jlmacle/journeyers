@@ -29,7 +29,7 @@ const checklistItemCheckedColor = Colors.green;
 const checklistOverlayCloseIconButtonToolTip = "Close checklist";
 
 // GPSKeywordsDeclaration
-const keywordsDeclarationTitle = "Keywords";
+const gpsKeywordsTitle = "Keywords";
 const gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
 
 // GPSIdeasList

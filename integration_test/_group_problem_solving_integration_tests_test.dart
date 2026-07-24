@@ -790,7 +790,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -891,7 +891,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1012,7 +1012,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -1113,7 +1113,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1234,7 +1234,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -1335,7 +1335,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(keywordsDeclarationTitle);
+            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1924,7 +1924,7 @@ Future<void> main() async {
             // ── ADDING KEYWORDS  ──────────────────────────────────
             // ──────────────────────────────────────────────────────
               // Searching the keywordsDeclarationTitle
-            var keywordsDeclarationTitleFinder = find.text(keywordsDeclarationTitle);
+            var keywordsDeclarationTitleFinder = find.text(gpsKeywordsTitle);
             await tester.tap(keywordsDeclarationTitleFinder);
             await tester.pumpAndSettle();
               // Adding two keywords

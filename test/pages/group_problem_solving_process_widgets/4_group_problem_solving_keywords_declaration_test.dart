@@ -36,7 +36,7 @@ void main()
         await pumpGPSKeywordsDeclaration(tester);
 
         // Verifying the title present
-        expect(find.text(keywordsDeclarationTitle), findsOne);        
+        expect(find.text(gpsKeywordsTitle), findsOne);        
       });          
     
     });

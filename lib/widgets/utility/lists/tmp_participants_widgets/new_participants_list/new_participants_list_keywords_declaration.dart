@@ -124,7 +124,7 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
               child: Icon(Icons.style_rounded),
             ),
             Center(
-              child: Text(keywordsDeclarationTitle, style: problemSolvingKeywordsTitle),
+              child: Text(gpsKeywordsTitle, style: gpsKeywordsTitleStyle),
             )
           ],
         ),

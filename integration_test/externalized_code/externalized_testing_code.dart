@@ -689,7 +689,7 @@ final q = CAQuestionsFields();
     var keywordsDeclarationTitleFinder = find.descendant
                                   (
                                     of: find.byType(GPSKeywordsDeclaration), 
-                                    matching: find.text(keywordsDeclarationTitle)
+                                    matching: find.text(gpsKeywordsTitle)
                                   );
 
     // Tapping on it to open the overlay
@@ -1014,7 +1014,7 @@ final q = CAQuestionsFields();
     if (keywords.isNotEmpty)
     {
       // Searching for the keywords declaration title
-      var keywordsTitleFinder = find.text(keywordsDeclarationTitle);
+      var keywordsTitleFinder = find.text(gpsKeywordsTitle);
       await tester.tap(keywordsTitleFinder);
       await tester.pumpAndSettle();
 

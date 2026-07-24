@@ -224,7 +224,7 @@ const TextStyle problemSolvingIdeasTitle = TextStyle
   fontWeight: FontWeight.bold,
 );
 
-const TextStyle problemSolvingKeywordsTitle = TextStyle
+const TextStyle gpsKeywordsTitleStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
