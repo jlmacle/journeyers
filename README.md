@@ -49,7 +49,7 @@ https://lnkd.in/ee8hFarp
 </p>
 
 <hr>
-<b>Some sources I have studied, starting around 2007:</b>:<br>
+<b>Some sources I have studied, starting around 2007</b>:<br>
 <ul>
   <li><i>Nonviolent Communication</i>,  Marshall B. Rosenberg</li>
   <li><i>The 7 Habits of Highly Effective People</i>, Stephen R. Covey</li>
