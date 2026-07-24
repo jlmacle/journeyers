@@ -45,6 +45,6 @@ const editIdentifierLabel = "Edit Value";
 const singleDeletionLabel = "Clear\nOne";
 const bulkDeletionLabel = "Clear\nAll";
 
-// NewParticipantsKeywordsDeclaration
+// NewParticipantsListKeywordsDeclaration
 const newParticipantsListKeywordsOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
 
