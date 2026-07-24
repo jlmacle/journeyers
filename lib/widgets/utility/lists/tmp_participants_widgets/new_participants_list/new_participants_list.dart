@@ -359,7 +359,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
           [
             const Divider(),
             //-------------------------------
-            NewParticipantsKeywordsDeclaration
+            NewParticipantsListKeywordsDeclaration
             (
               keywordsCurrent: const {},
               keywordsOnUpdateCallbackFunction: (newKeywords) 

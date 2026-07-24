@@ -4,11 +4,12 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget used to declare keywords in a new participants list.
-class NewParticipantsKeywordsDeclaration extends StatefulWidget 
+class NewParticipantsListKeywordsDeclaration extends StatefulWidget 
 {
   /// The keywords associated to the session data.
   final Set<String> keywordsCurrent;
@@ -16,7 +17,7 @@ class NewParticipantsKeywordsDeclaration extends StatefulWidget
   /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> keywordsOnUpdateCallbackFunction;  
 
-  const NewParticipantsKeywordsDeclaration
+  const NewParticipantsListKeywordsDeclaration
   ({
     super.key,
     required this.keywordsCurrent,
@@ -25,10 +26,10 @@ class NewParticipantsKeywordsDeclaration extends StatefulWidget
 
 
   @override
-  State<NewParticipantsKeywordsDeclaration> createState() => _NewParticipantsKeywordsDeclarationState();
+  State<NewParticipantsListKeywordsDeclaration> createState() => _NewParticipantsListKeywordsDeclarationState();
 }
 
-class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeywordsDeclaration> 
+class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipantsListKeywordsDeclaration> 
 {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
@@ -65,7 +66,7 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
   }
 
   @override
-  void didUpdateWidget(NewParticipantsKeywordsDeclaration oldWidget) {
+  void didUpdateWidget(NewParticipantsListKeywordsDeclaration oldWidget) {
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("NewParticipantsKeywordsDeclaration: didUpdateWidget");
 
@@ -90,7 +91,29 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _keywordsShowOverlay(context),
+      onTap: () => showAddToSetOverlay
+                    (
+                      context: context, 
+                      appBarBackgroundColor: white,
+                      appBarForegroundColor: black,
+                      overlayTitle: "Please enter keywords\n related to this group.", 
+                      overlayTitleStyle: newParticipantsListKeywordsOverlayTitleStyle, 
+                      overlayCloseIconButtonToolTip: newParticipantsListKeywordsOverlayCloseIconButtonToolTip, 
+                      textEditingControllerKey: const Key("kwsFieldNewList"), 
+                      textEditingController: _keywordsTec, 
+                      textFieldStyle: analysisTextFieldStyle, 
+                      textFieldHintText: "Please enter the keywords here.\n(+ Enter key)", 
+                      textFieldHintStyle: analysisTextFieldHintStyle, 
+                      onSubmittedCallbackFunction: (value, setLocalState) => _keywordAdd(value, setLocalState), 
+                      setToUpdate: _keywords!, 
+                      onDeletedCallbackFunction: 
+                        (tag, setLocalState) 
+                        {
+                          setState( () {_keywords!.remove(tag);});
+                          setLocalState(() {});
+                          widget.keywordsOnUpdateCallbackFunction(_keywords!);
+                        }, 
+                    ),
       child: Container(        
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: const Row(
@@ -109,106 +132,4 @@ class _NewParticipantsKeywordsDeclarationState extends State<NewParticipantsKeyw
     );
   }
 
-  void _keywordsShowOverlay(BuildContext context) {
-    const title = "Please enter keywords\n related to this group.";
-
-    showGeneralDialog(
-      context: context,
-      transitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, anim1, anim2) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true, 
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            title: 
-            const Padding
-            (
-              padding: EdgeInsets.all(16.0), 
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                maxLines: 20,
-                overflow: TextOverflow.visible,
-                softWrap: true,
-                style: groupKeywordsMessage,
-              ),
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.close),
-                tooltip: closeGroupKeywordsDeclarationTooltipLabel,
-                color: black,
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ],
-          ),
-          body: SafeArea(
-            child: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setLocalState) {
-                return 
-                Column
-                (
-                  children: 
-                  [                     
-                    Padding
-                    (
-                      padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
-                      child: TextField
-                      (
-                        key: const Key("kwsFieldNewList"),
-                        controller: _keywordsTec,
-                        decoration: const InputDecoration
-                        (
-                          hint: Center
-                          (
-                            child: 
-                            Text(textAlign: TextAlign.center, "Please enter the keywords here.\n(+ Enter key)", style: analysisTextFieldHintStyle)
-                          )
-                        ),
-                        textAlign: TextAlign.center,
-                        style: analysisTextFieldStyle,
-                        onSubmitted: (value) => _keywordAdd(value, setLocalState),
-                      ),
-                    ),
-                    // Display of the keywords
-                    Center
-                    (
-                      child: Padding
-                      (
-                        padding: const EdgeInsets.only(bottom: 0),
-                        child: Wrap
-                        (
-                          spacing: 8.0,
-                          runSpacing: 4.0,
-                          children: 
-                          [
-                            ..._keywords!.map
-                            (
-                              (tag) => InputChip
-                                      (
-                                        label: Text(tag),
-                                        deleteIcon: const Icon(Icons.close),
-                                        onDeleted: () 
-                                        {
-                                          setState( () {_keywords!.remove(tag);});
-                                          setLocalState(() {});
-                                          widget.keywordsOnUpdateCallbackFunction(_keywords!);
-                                        }, 
-                                        deleteIconColor: appBarWhite,
-                                      )
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ); 
-              },
-            ),
-          ),
-        );
-      },
-    );
-  }
 }
