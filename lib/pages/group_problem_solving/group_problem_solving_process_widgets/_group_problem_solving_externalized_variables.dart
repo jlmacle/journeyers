@@ -26,7 +26,7 @@ Map<String, bool> checklistItems = {
     "Do we need to further our context analysis?": false,
   };
 const checklistItemCheckedColor = Colors.green;
-const closeChecklistTooltipLabel = "Close checklist";
+const checklistOverlayCloseIconButtonToolTip = "Close checklist";
 
 // GPSKeywordsDeclaration
 const keywordsDeclarationTitle = "Keywords";
@@ -45,6 +45,6 @@ const editIdentifierLabel = "Edit Value";
 const singleDeletionLabel = "Clear\nOne";
 const bulkDeletionLabel = "Clear\nAll";
 
-// NewParticipantsKeywordsDeclaration
-const closeGroupKeywordsDeclarationTooltipLabel = "Please click to close the keywords declaration page";
+// NewParticipantsListKeywordsDeclaration
+const newParticipantsListKeywordsOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
 

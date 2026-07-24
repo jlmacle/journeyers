@@ -212,7 +212,7 @@ const TextStyle problemSolvingChecklistTitle = TextStyle
   // backgroundColor: appBarWhite,
 );
 
-const TextStyle problemSolvingChecklistMessage = TextStyle
+const TextStyle problemSolvingChecklistMessageStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
@@ -231,14 +231,14 @@ const TextStyle problemSolvingKeywordsTitle = TextStyle
   // backgroundColor: appBarWhite,
 );
 
-const TextStyle problemSolvingKeywordsTitleStyle = TextStyle
+const TextStyle problemSolvingKeywordsOverlayTitleStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
   color: appBarWhite
 );
 
-const TextStyle groupKeywordsMessage = TextStyle
+const TextStyle newParticipantsListKeywordsOverlayTitleStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,

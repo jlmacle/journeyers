@@ -79,13 +79,13 @@ class _GPSChecklistState extends State<GPSChecklist> {
                 maxLines: 20,
                 overflow: TextOverflow.visible,
                 softWrap: true,
-                style: problemSolvingChecklistMessage,
+                style: problemSolvingChecklistMessageStyle,
               ),
             ),
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
-                tooltip: closeChecklistTooltipLabel,
+                tooltip: checklistOverlayCloseIconButtonToolTip,
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
               ),
