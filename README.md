@@ -48,5 +48,13 @@ https://lnkd.in/ee8hFarp
 <img src="https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png" width="400">
 </p>
 
-
+<hr>
+<b>Some sources of studies, which have spread since around 2007</b>:<br>
+<ul>
+  <li>"Nonviolent Communication",  Marshall B. Rosenberg</li>
+  <li>"The 7 Habits of Highly Effective People", Stephen R. Covey</li>
+  <li>"Group Problem Solving Process", Ohio State University</li>
+  <li>"Negotiation Fundamentals", IRENE ESSEC - Institute for Research and Education on Negotiation</li>
+  <li>"Effective Problem-Solving and Decision-Making", University of California, Irvine</li>  
+</ul>
 
