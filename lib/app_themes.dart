@@ -212,7 +212,7 @@ const TextStyle problemSolvingChecklistTitle = TextStyle
   // backgroundColor: appBarWhite,
 );
 
-const TextStyle problemSolvingChecklistMessage = TextStyle
+const TextStyle problemSolvingChecklistMessageStyle = TextStyle
 (
   fontSize: 16,
   fontWeight: FontWeight.normal,
