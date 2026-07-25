@@ -41,7 +41,7 @@ class EditableTextListItem extends StatefulWidget {
     this.paddingTop = 8,
     this.paddingLeft = 16,
     this.paddingRight = 16,
-    this.parentCallbackFunctionToUpdateTheListItemValue = placeHolderFunctionStringAndInt,
+    this.parentCallbackFunctionToUpdateTheListItemValue = placeHolderCallbackFunctionToUpdateTheListItemValue,
     super.key
   });
 

@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
 
 /// {@category Utils - Generic}
-/// Method building an overlay used to add elements to a set, for example keywords.
+/// Method building an overlay used to add elements to a set, for example to a set of keywords.
 void showAddToSetOverlay
 ({
   required BuildContext context,
@@ -13,15 +14,15 @@ void showAddToSetOverlay
   required TextStyle overlayTitleStyle,
   required String overlayCloseIconButtonToolTip,
   Color overlayCloseIconButtonColor = black,
-  required Key textEditingControllerKey,
   required TextEditingController textEditingController,
+  required Key textEditingControllerKey,  
   required TextStyle textFieldStyle,
   required String textFieldHintText,
   required TextStyle textFieldHintStyle,
-  required void Function(String value, StateSetter setLocalState) onSubmittedCallbackFunction,
+  required void Function(String value, StateSetter stateSetter) onSubmittedCallbackFunction,
   required Set<String> setToUpdate,
   Color inputChipDeleteIconColor = black,
-  required void Function(String tag, StateSetter setLocalState) onDeletedCallbackFunction
+  required void Function(String tag, StateSetter stateSetter) onDeletedCallbackFunction
 }) 
 {
     showGeneralDialog(
@@ -125,5 +126,120 @@ void showAddToSetOverlay
           ),
         );
       },
+    );
+  }
+
+/// {@category Utils - Generic}
+/// Method building a modal bottom sheet used to edit, keywords for example.
+void showEditSheet
+({
+  required BuildContext context,
+  required TextEditingController textEditingController,
+  required Key textEditingControllerKey,
+  required String textFieldStartValue,
+  required String textFieldLabelText,
+  required TextStyle textFieldLabelStyle,
+  required String? textFieldErrorText,
+  Future<bool> Function({required String value}) errorTextTriggerFunction = placeHolderErrorTextTriggerFunctionReturningFalse,
+  String? errorTextTriggerFunctionParameter,
+  required Future<void> Function(String value)? onConfirmSuccessfulCallbackFunction,
+  required String elevatedButtonText,
+  required TextStyle elevatedButtonStyle
+})
+{
+    // Adding a start value to the tec
+    textEditingController.text = textFieldStartValue; 
+
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), 
+      builder: (BuildContext context)  
+      {
+        // The text field error text
+        String? errorText;
+
+        // StatefulBuilder gives a local setState scoped to this sheet
+        return       
+        StatefulBuilder
+        (
+          builder: (context, setLocalState) 
+          { 
+            // Method used to verify the data before submitting
+            Future<void> onConfirm
+            ({
+              required TextEditingController textEditingController,
+              required String? enteredValue,
+            }) async 
+            {
+              // if reason to show an error message
+              if (await errorTextTriggerFunction(value: enteredValue!)) {
+                setLocalState(() {
+                  errorText = textFieldErrorText;
+                });
+                return;
+              }
+
+              setLocalState(() {
+                // Clearing error on valid input
+                errorText = null; 
+              });
+
+              // Callback function on updating edited value
+              await onConfirmSuccessfulCallbackFunction!(textEditingController.text.trim());
+            }
+                
+            return Padding
+            (
+              padding: EdgeInsets.only
+              (
+                bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
+                left: 20, right: 20, top: 10,
+              ),
+              child: Column
+              (
+                mainAxisSize: MainAxisSize.min,
+                children: 
+                [
+                  TextField
+                  (
+                    key: textEditingControllerKey,
+                    controller: textEditingController,
+                    autofocus: true,
+                    decoration: InputDecoration
+                    (
+                      labelText: textFieldLabelText, 
+                      labelStyle: textFieldLabelStyle,
+                      errorText: errorText
+                    ),
+                    onSubmitted:(value) async => await onConfirm
+                                (
+                                  textEditingController: textEditingController, 
+                                  enteredValue: value,
+                                ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton
+                  (
+                    onPressed:  () async
+                                {
+                                  await onConfirm
+                                  (
+                                    textEditingController: textEditingController, 
+                                    enteredValue: textEditingController.text.trim(),
+                                  );
+                                },               
+                    child: Text
+                    (
+                      elevatedButtonText,
+                      style: elevatedButtonStyle,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            );
+          });
+        
+      }
     );
   }

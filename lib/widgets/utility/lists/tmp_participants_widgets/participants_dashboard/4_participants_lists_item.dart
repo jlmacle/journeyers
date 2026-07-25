@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
+import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
@@ -72,6 +73,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
   final _listsDB = ParticipantsListsDB();
   List<String> _participantsCurrent = [];
   final TextEditingController _listNameEditTec = .new();
+  String? _listNameEditErrorText;
   final TextEditingController _participantsEditTec = .new();
   final TextEditingController _kwsEditTec = .new();
   
@@ -174,8 +176,8 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
   @override
   Widget build(BuildContext context) 
   {
-    // Gets the title
-    final String displayTitle = widget.listMetadata[itemTextKey];
+    // Gets the list name
+    final String currentListName = widget.listMetadata[itemTextKey];
 
     // Sorting keywords for display
     final List<String> sortedKeywords = 
@@ -206,19 +208,33 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                         children: [
                           // For the edition of the list label
                           GestureDetector(
-                            onTap: () => _showListNameEditSheet
-                                (
-                                  context: context,
-                                  dashboardContext: widget.dashboardContext,                          
-                                  currentListName: displayTitle,
-                                  listKey: widget.listMetadata[itemKey],
-                                  listNameEditTec: _participantsEditTec,
-                                  onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
-                                  onListNameUpdated: _onListNameUpdated,
-                                  listData: widget.listMetadata
-                                ),
+                            onTap: 
+                              () 
+                              => 
+                              showEditSheet
+                              (
+                                context: context, 
+                                textEditingController: _listNameEditTec, 
+                                textEditingControllerKey: const Key("listLabelGroupsDashboardEditField"), 
+                                textFieldStartValue: currentListName, 
+                                textFieldLabelText: listNameTextFieldLabel, 
+                                textFieldLabelStyle: const TextStyle(color: black),
+                                errorTextTriggerFunction: ({required String value}) async => value.isEmpty,
+                                errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
+                                textFieldErrorText: emptyLabelEditError,
+                                onConfirmSuccessfulCallbackFunction: 
+                                (String updatedListName) async
+                                {
+                                   // Updating the list label
+                                  widget.listMetadata[itemTextKey] = updatedListName;
+                             
+                                  await _onListNameUpdated(listKey: widget.listMetadata[itemKey], listData: widget.listMetadata);
+                                },
+                                elevatedButtonText: saveButtonLabel, 
+                                elevatedButtonStyle: const TextStyle(color: black)
+                              ),                            
                             child: Text(
-                              displayTitle,
+                              currentListName,
                               // todo: to clean
                               key: Key("session-title-${widget.listIndex}"),
                               style: const TextStyle(
@@ -477,86 +493,6 @@ void _showParticipantsEditSheet({
                     labelText: participantsTextFieldLabel,
                     labelStyle: const TextStyle(color: Colors.black),
                     hintText: "Please enter the participants.",
-                    errorText: errorText,
-                  ),
-                  onSubmitted: (_) async => await onConfirm(),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () async => await onConfirm(),
-                  child: const Text(saveButtonLabel, style: TextStyle(color: Colors.black)),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          );
-        },
-      );
-    },
-  );
-}
-
-void _showListNameEditSheet({
-  required BuildContext context,
-  required String dashboardContext,
-  required String currentListName,
-  required String? listKey,
-  required TextEditingController listNameEditTec,
-  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
-  required OnParticipantListsItemDataUpdatedCallbackFunctionType onListNameUpdated,
-  required Map<String, dynamic> listData,
-}) {
-  listNameEditTec.text = currentListName;
-
-  showModalBottomSheet(
-    context: context,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    isScrollControlled: true,
-    builder: (context) {
-      String? errorText; 
-      // StatefulBuilder gives a local setState scoped to this sheet
-      return StatefulBuilder(
-        builder: (context, setState) {          
-
-          Future<void> onConfirm() async {
-            final updatedListName = listNameEditTec.text.trim();
-
-            if (updatedListName.isEmpty) {
-              setState(() {
-                errorText = emptyLabelEditError;
-              });
-              return;
-            }
-
-            setState(() {
-              // Clearing error on valid input
-              errorText = null; 
-            });
-
-            // Updating the list label
-            listData[itemTextKey] = updatedListName;
-
-            await onListNameUpdated(listKey: listKey, listData: listData);
-          }
-
-          return Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-              left: 20,
-              right: 20,
-              top: 20,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  key: const Key("listLabelGroupsDashboardEditField"),
-                  controller: listNameEditTec,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: participantsTextFieldLabel,
-                    labelStyle: const TextStyle(color: Colors.black),
-                    hintText: "Please enter the new list name.",
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),

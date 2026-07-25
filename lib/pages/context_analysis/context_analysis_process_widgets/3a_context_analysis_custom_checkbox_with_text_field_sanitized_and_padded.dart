@@ -75,8 +75,8 @@ class CACheckboxWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = CAFormMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.counterAbsent,
-    this.onTextFieldValueChangedCallbackFunction = placeHolderFunctionString,
-    this.onCheckboxValueChangedCallbackFunction = placeHolderFunctionNullableBool,
+    this.onTextFieldValueChangedCallbackFunction = placeHolderVoidFunctionString,
+    this.onCheckboxValueChangedCallbackFunction = placeHolderVoidFunctionNullableBool,
   });
 
   @override

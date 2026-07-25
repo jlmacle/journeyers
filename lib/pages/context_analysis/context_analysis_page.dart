@@ -25,7 +25,7 @@ class CAPage extends StatefulWidget
   const CAPage
   ({
     super.key,
-    this.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderFunctionBool
+    this.homepageCallbackFunctionToSetFocusabilityOfBottomBarItems = placeHolderVoidFunctionBool
   });
 
   @override
