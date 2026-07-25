@@ -137,7 +137,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
               child: Icon(Icons.style_rounded),
             ),
             Center(
-              child: Text(keywordsDeclarationTitle, style: problemSolvingKeywordsTitle),
+              child: Text(gpsKeywordsTitle, style: gpsKeywordsTitleStyle),
             )
           ],
         ),

@@ -13,8 +13,8 @@ void showAddToSetOverlay
   required TextStyle overlayTitleStyle,
   required String overlayCloseIconButtonToolTip,
   Color overlayCloseIconButtonColor = black,
-  required Key textEditingControllerKey,
   required TextEditingController textEditingController,
+  required Key textEditingControllerKey,  
   required TextStyle textFieldStyle,
   required String textFieldHintText,
   required TextStyle textFieldHintStyle,
@@ -125,5 +125,69 @@ void showAddToSetOverlay
           ),
         );
       },
+    );
+  }
+
+
+/// {@category Utils - Generic}
+/// Method building a modal bottom sheet used to edit, keywords for example.
+void showEditSheet
+({
+  required BuildContext context,
+  required TextEditingController textEditingController,
+  required Key textEditingControllerKey,
+  required String textEditingControllerStartValue,
+  required String textEditingControllerLabelText,
+  required TextStyle textEditingControllerLabelStyle,
+  required void Function(String value) onSubmittedCallbackFunction,
+  required void Function() onPressedCallbackFunction,
+  required String elevatedButtonText,
+  required TextStyle elevatedButtonStyle
+})
+{
+    // Adding a start value to the tec
+    textEditingController.text = textEditingControllerStartValue; 
+
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), 
+      builder: (context) => Padding
+      (
+        padding: EdgeInsets.only
+        (
+          bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
+          left: 20, right: 20, top: 20,
+        ),
+        child: Column
+        (
+          mainAxisSize: MainAxisSize.min,
+          children: 
+          [
+            TextField
+            (
+              key: textEditingControllerKey,
+              controller: textEditingController,
+              autofocus: true,
+              decoration: InputDecoration
+              (
+                labelText: textEditingControllerLabelText, 
+                labelStyle: textEditingControllerLabelStyle
+              ),
+              onSubmitted: onSubmittedCallbackFunction,
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton
+            (
+              onPressed: onPressedCallbackFunction, 
+              child: Text
+              (
+                elevatedButtonText,
+                style: elevatedButtonStyle,
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
     );
   }

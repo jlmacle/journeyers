@@ -159,7 +159,7 @@ Future<void> main() async {
           var keywordsDeclarationTitleFinder = find.descendant
                                         (
                                           of: find.byType(GPSKeywordsDeclaration), 
-                                          matching: find.text(keywordsDeclarationTitle)
+                                          matching: find.text(gpsKeywordsTitle)
                                         );
 
           // Tapping on it to open the overlay

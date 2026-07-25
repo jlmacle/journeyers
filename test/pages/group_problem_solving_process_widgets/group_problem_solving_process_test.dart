@@ -253,7 +253,7 @@ void main()
       var keywordsDeclarationTitleFinder = find.descendant
                                     (
                                       of: find.byType(GPSKeywordsDeclaration), 
-                                      matching: find.text(keywordsDeclarationTitle)
+                                      matching: find.text(gpsKeywordsTitle)
                                     );
 
       // Tapping on it
