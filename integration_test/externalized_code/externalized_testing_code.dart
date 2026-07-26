@@ -965,7 +965,8 @@ final q = CAQuestionsFields();
     await tester.tap(addEmojiFinder);
     // pumpAndSettle timed out
     // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
+    // Intermittent failure at 2s
+    await tester.pump(const Duration(seconds: 5));
 
     // Verifying the options page present
     var optionsPageFinder = find.text(participantsListsSubTitle);

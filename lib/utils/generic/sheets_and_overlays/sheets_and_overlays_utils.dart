@@ -220,6 +220,7 @@ void showEditSheet
                   const SizedBox(height: 10),
                   ElevatedButton
                   (
+                    key: const Key("overlay-edit-save-button"),
                     onPressed:  () async
                                 {
                                   await onConfirm
