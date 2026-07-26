@@ -87,9 +87,9 @@ class CASegmentedButtonWithSanitizedAndPaddedTextField extends StatefulWidget
     this.textFieldMaxLines = 10,
     this.textFieldMaxLength = CAFormMiscConstants.chars1Page, // a page as a reference
     this.textFieldCounter = TextFieldUtils.counterAbsent,
-    this.onTextFieldValueSubmittedCallbackFunction = placeHolderFunctionString,
+    this.onTextFieldValueSubmittedCallbackFunction = placeHolderVoidFunctionString,
     this.onSegmentedButtonOptionsSelectedCallbackFunction =
-        placeHolderFunctionSetString,
+        placeHolderVoidFunctionNullableSetString,
   });
 
   @override

@@ -4,12 +4,14 @@ import "package:flutter/material.dart";
 
 import "package:collection/collection.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/1_dashboard_title.dart";
@@ -382,10 +384,41 @@ class DashboardPageState extends State<DashboardPage>
                               }
                             });
                           },
-                          onEditTitleCallbackFunction: () => _titleShowEditSheet(
-                            session[DashboardUtils.keyTitle],
-                            filePath,
-                          ),
+                          onEditTitleCallbackFunction: 
+                            () => showEditSheet
+                            (
+                              context: context, 
+                              textEditingController: _titleTec, 
+                              textEditingControllerKey: const Key("titleDashboardEditField"),
+                              textFieldStartValue: session[DashboardUtils.keyTitle], 
+                              textFieldLabelText: "Edit Title", 
+                              textFieldLabelStyle: const TextStyle(color: black), 
+                              errorTextTriggerFunction: ({required String value}) async => value.isEmpty,
+                              errorTextTriggerFunctionParameter: _titleTec.text.trim(),
+                              textFieldErrorText: emptyTitleEditError,
+                              onConfirmSuccessfulCallbackFunction: (String value) async
+                                {
+                                  // New title from the controller
+                                  final String newTitle = _titleTec.text.trim();
+
+                                  // Performing async work outside of setState
+                                  // Updating session data
+                                  await _sessionTitleUpdate(filePath, newTitle); 
+                                  
+                                  // Storing the updated session data
+                                  await du.saveAllSessionsMetadata
+                                  (
+                                    typeOfDashboardContext: widget.dashboardContext, 
+                                    sessionsMetadataAll: _sessionsMetadataAll!,
+                                  );
+
+                                  if (!context.mounted) return;
+                                  // Closing the modal sheet
+                                  Navigator.pop(context);
+                              },    
+                              elevatedButtonText:"Save",
+                              elevatedButtonStyle: const TextStyle(color: black)
+                            ),
                           onEditPressedCallbackFunction: 
                           () 
                           {
@@ -412,8 +445,7 @@ class DashboardPageState extends State<DashboardPage>
                             {
                               throw Exception("Unknown context: ${widget.dashboardContext}");
                             }
-
-                           },
+                          },
                           onRetrievedSessionDataBeforeEditionCallbackFunction: 
                           ({
                             required String dashboardContext,
@@ -464,95 +496,6 @@ class DashboardPageState extends State<DashboardPage>
             ),
     );
   }
-
-  
-  void _titleShowEditSheet(String title, String filePath) 
-  {
-    _titleTec.text = title; // Syncing current title to the field
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Rectangle shape
-      isScrollControlled: true, // Allows sheet to push up with keyboard
-      builder: (context) => Padding
-      (
-        padding: EdgeInsets.only
-        (
-          bottom: MediaQuery.of(context).viewInsets.bottom, // Keyboard padding
-          left: 20, right: 20, top: 20,
-        ),
-        child: Column
-        (
-          mainAxisSize: MainAxisSize.min,
-          children: 
-          [
-            TextField
-            (
-              key: const Key("titleDashboardEditField"),
-              controller: _titleTec,
-              autofocus: true,
-              decoration: const InputDecoration
-              (
-                labelText: "Edit Title", 
-                labelStyle: TextStyle(color: Colors.black)
-              ),
-              // Duplicated code to clean
-              onSubmitted: (_) async 
-              {
-                // New title from the controller
-                final String newTitle = _titleTec.text;
-
-                // Performing async work outside of setState
-                // Updating session data
-                await _sessionTitleUpdate(filePath, newTitle); 
-                
-                // Storing the updated session data
-                await du.saveAllSessionsMetadata
-                (
-                  typeOfDashboardContext: widget.dashboardContext, 
-                  sessionsMetadataAll: _sessionsMetadataAll!,
-                );
-
-                if (!context.mounted) return;
-                // Closing the modal sheet
-                Navigator.pop(context);
-              },
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton
-            (
-              onPressed: () async 
-              {
-                // New title from the controller
-                final String newTitle = _titleTec.text;
-
-                // Performing async work outside of setState
-                // Updating session data
-                await _sessionTitleUpdate(filePath, newTitle); 
-                
-                // Storing the updated session data
-                await du.saveAllSessionsMetadata
-                (
-                  typeOfDashboardContext: widget.dashboardContext, 
-                  sessionsMetadataAll: _sessionsMetadataAll!,
-                );
-
-                if (!context.mounted) return;
-                // Closing the modal sheet
-                Navigator.pop(context);
-              },
-              child: const Text
-              (
-                "Save",
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
-    );
-  }
-
 
 
 }

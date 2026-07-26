@@ -1,18 +1,20 @@
-/// A placeholder void callback function 
+/// A placeholder void callback function.
 void placeHolderVoidCallback() {}
 
-/// A placeholder void callback function with a bool parameter
-void placeHolderFunctionBool(bool value) {}
+/// A placeholder function, returning void, with a bool parameter.
+void placeHolderVoidFunctionBool(bool value) {}
 
-/// A placeholder void callback function with a nullable bool parameter
-void placeHolderFunctionNullableBool(bool? value) {}
+/// A placeholder function, returning void, with a nullable bool parameter.
+void placeHolderVoidFunctionNullableBool(bool? value) {}
 
-/// A placeholder void callback function with a String parameter
-void placeHolderFunctionString(String value) {}
+/// A placeholder function, returning void, with a String parameter.
+void placeHolderVoidFunctionString(String value) {}
 
-/// A placeholder void callback function with a Set\<String\> parameter.
-void placeHolderFunctionSetString(Set<String>? values) {}
+/// A placeholder function, returning void, with a nullable Set\<String\> parameter.
+void placeHolderVoidFunctionNullableSetString(Set<String>? values) {}
 
-/// A placeholder FunctionStringAndInt function
-void placeHolderFunctionStringAndInt({required String stringParam, required int intParam}) {}
- 
+/// A placeholder for parentCallbackFunctionToUpdateTheListItemValue.
+void placeHolderCallbackFunctionToUpdateTheListItemValue({required String stringParam, required int intParam}) {}
+
+/// A placeholder for errorTextTriggerFunction.
+Future<bool> placeHolderErrorTextTriggerFunctionReturningFalse({required String value}) async => false;

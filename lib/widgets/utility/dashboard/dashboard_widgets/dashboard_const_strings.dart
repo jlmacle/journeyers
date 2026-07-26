@@ -21,3 +21,6 @@ const keywordsTextFieldLabel = "Keywords Edition (please separate with commas)";
 
 // Placeholder messages
 const placeholderForEdit = "Edit not yet implemented.";
+
+// Error messages
+const emptyTitleEditError = "Title cannot be empty.";
