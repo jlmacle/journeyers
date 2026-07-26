@@ -215,7 +215,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                               (
                                 context: context, 
                                 textEditingController: _listNameEditTec, 
-                                textEditingControllerKey: const Key("listLabelGroupsDashboardEditField"), 
+                                textFieldKey: const Key("listLabelGroupsDashboardEditField"), 
                                 textFieldStartValue: currentListName, 
                                 textFieldLabelText: listNameTextFieldLabel, 
                                 textFieldLabelStyle: const TextStyle(color: black),

@@ -389,7 +389,7 @@ class DashboardPageState extends State<DashboardPage>
                             (
                               context: context, 
                               textEditingController: _titleTec, 
-                              textEditingControllerKey: const Key("titleDashboardEditField"),
+                              textFieldKey: const Key("titleDashboardEditField"),
                               textFieldStartValue: session[DashboardUtils.keyTitle], 
                               textFieldLabelText: "Edit Title", 
                               textFieldLabelStyle: const TextStyle(color: black), 
