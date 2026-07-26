@@ -1076,9 +1076,9 @@ Future<void> main() async {
 
     group("Edition Tests: Mobile: \n", ()
     {
-      // "Edition: Title \n"
+      // "Edition: Title (non empty edited title) \n"
       testWidgets(
-        "Edition: Title \n",
+        "Edition: Title (non empty edited title)\n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1122,18 +1122,81 @@ Future<void> main() async {
               // Editing the title
             var editedTitle = "${title}${editionSuffix}";
             
-            var editTecFinder = find.byKey(const Key("titleDashboardEditField"));
-            await tester.enterText(editTecFinder, editedTitle);
+            var editTfFinder = find.byKey(const Key("titleDashboardEditField"));
+            await tester.enterText(editTfFinder, editedTitle);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
               // Verifying the text field absent
-            expect(editTecFinder, findsNothing);
+            expect(editTfFinder, findsNothing);
               // Verifying the edited title present
             expect(find.text(editedTitle), findsOne);
           }
         });
   
+      // "Edition: Title (empty edited title) \n"
+      testWidgets("Edition: Title (empty edited title) \n", 
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          "wasFirstRunModalAcknowledged": true,
+          // and to have the context analysis page, with the dashboard.
+          "wasCASessionDataSaved": true,
+          // Temporary test dir as application folder path
+          "applicationFolderPath": testTmpDir!.path
+        });
+
+        // Pumping the CAPage        
+        await tester.pumpWidget(buildTestableCAPage());
+        await tester.pumpAndSettle();
+
+        // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
+        // ──────────────────────────────────────────────────────────────────────
+
+        var title = "CA title";
+
+        await caEnterNewProcessDataOnMobile
+        (
+          tester: tester, 
+          title: title,
+          kwsList: [],
+          formToFill: false,
+          fileNameWithoutExtension: fileName1WithoutExtension
+        );
+
+        await tester.pump(const Duration(seconds: 2));
+
+        // ── 2. EDITING THE TITLE ─────────────────────────────────
+        // ──────────────────────────────────────────────────────────
+          // Clicking on the title
+        var titleFinder = find.text(title);
+        await tester.tap(titleFinder);
+        await tester.pumpAndSettle();
+          // Editing the title toward empty
+        var editedTitle = "";
+        
+        var editTfFinder = find.byKey(const Key("titleDashboardEditField"));
+        await tester.enterText(editTfFinder, editedTitle);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+
+        // ── 3. CLICKING ON THE SAVE BUTTON ────────────────────────
+        // ──────────────────────────────────────────────────────────
+        var elevatedButtonFinder = find.byKey(const Key("overlay-edit-save-button"),);
+        await tester.tap(elevatedButtonFinder);
+        await tester.pumpAndSettle();
+
+        // Searching for the error message
+        var emptyTitleEditErrorFinder = find.textContaining(emptyTitleEditError);
+        expect(emptyTitleEditErrorFinder, findsOne);
+
+        // Verifying bottom sheet remaining present
+        expect(find.byType(StatefulBuilder), findsOne);    
+      });            
+    
       // "Edition: Keywords \n"
       testWidgets(
         "Edition: Keywords \n",
@@ -1186,12 +1249,12 @@ Future<void> main() async {
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
-            var editTecFinder = find.byKey(const Key("kwsDashboardEditField"));
-            await tester.enterText(editTecFinder, editedKeywords);
+            var editTfFinder = find.byKey(const Key("kwsDashboardEditField"));
+            await tester.enterText(editTfFinder, editedKeywords);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
               // Verifying the text field absent
-            expect(editTecFinder, findsNothing);
+            expect(editTfFinder, findsNothing);
               // Verifying the input chips present
             var kw1Finder = find.descendant
             (
