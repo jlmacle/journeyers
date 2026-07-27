@@ -66,7 +66,7 @@ def code_generation_for_method_get_languages() -> str:
     f'{INDENT_LEVEL_1}// Code to generate automatically from the base locales l10n data: begin \n'
   )
 
-  method_1_add_begin = f"{INDENT_LEVEL_1}languages.add(AppLocalizations.of(buildContext)?.lang_"
+  method_1_add_begin = f"{INDENT_LEVEL_1}languages.add(AppLocalizations.of(buildContext)?.app_lang_"
 
   method_1_add_middle = " ?? \"Default for '"
 
