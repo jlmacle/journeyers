@@ -8,7 +8,7 @@
     "@app_start_msg": {"description": "Le message qu'une application nouvellement installée devrait afficher"},
     "app_lang_en": "Anglais",
     "@app_lang_en": {"description": "Le nom de la langue anglaise en français"},
-    "lang_fr": "Français",
-    "@lang_fr": {"description": "Le nom de la langue française en français"}
+    "app_lang_fr": "Français",
+    "@app_lang_fr": {"description": "Le nom de la langue française en français"}
 
     }

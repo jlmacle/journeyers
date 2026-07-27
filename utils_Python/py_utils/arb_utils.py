@@ -20,7 +20,7 @@ def get_base_locales_file_paths(arbs_dir_path: str) -> List[str]:
         search_is_recursive=True
     )
     
-    # Keeping only the base locales from the found files (lang_en.arb, lang_fr.arb, not app_en_US.arb)
+    # Keeping only the base locales from the found files (app_lang_en.arb, app_lang_fr.arb, not app_en_US.arb)
     base_locales_files_paths = [
         file_path for file_path in file_list
         if os.path.basename(file_path).count('_') != 2
@@ -65,7 +65,7 @@ def get_all_base_locales_language_codes(arbs_dir_path: str) -> List[str]:
 
 def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base_locales_paths: List[Path], list_of_language_codes: List[str]) ->  Dict[str, List[str]]:
     """
-    Extracts all the translations for a given language from all the base locales files (lang_en.arb, lang_fr.arb, ...),
+    Extracts all the translations for a given language from all the base locales files (app_en.arb, app_fr.arb, ...),
     and returns a dictionary with the language codes as keys, and lists of translations as values.
     For example: {'en': ['English', 'Anglais'], 'fr': ['French', 'Français']}.
 
