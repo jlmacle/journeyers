@@ -129,6 +129,11 @@ void showAddToSetOverlay
     );
   }
 
+
+/// {@category Utils - Generic}
+/// A function used to test if a trimmed value is empty.
+Future<bool> onConfirmFunctionEmptyValue ({required String value}) async => value.trim().isEmpty;
+
 /// {@category Utils - Generic}
 /// Method building a modal bottom sheet used to edit, keywords for example.
 void showEditSheet
@@ -156,6 +161,7 @@ void showEditSheet
       builder: (BuildContext context)  
       {
         // The text field error text
+        // Needs to be outside of StatefulBuilder for the info to remain after setLocalState
         String? errorText;
 
         // StatefulBuilder gives a local setState scoped to this sheet
@@ -171,6 +177,7 @@ void showEditSheet
               required String? enteredValue,
             }) async 
             {
+  
               // if reason to show an error message
               if (await errorTextTriggerFunction(value: enteredValue!)) {
                 setLocalState(() {
@@ -211,11 +218,14 @@ void showEditSheet
                       labelStyle: textFieldLabelStyle,
                       errorText: errorText
                     ),
-                    onSubmitted:(value) async => await onConfirm
-                                (
-                                  textEditingController: textEditingController, 
-                                  enteredValue: value,
-                                ),
+                    onSubmitted:(value) async {
+                       await onConfirm
+                              (
+                                
+                                textEditingController: textEditingController, 
+                                enteredValue: value
+                              );
+                    },
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton
@@ -244,3 +254,4 @@ void showEditSheet
       }
     );
   }
+  

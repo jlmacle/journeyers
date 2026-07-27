@@ -393,7 +393,7 @@ class DashboardPageState extends State<DashboardPage>
                               textFieldStartValue: session[DashboardUtils.keyTitle], 
                               textFieldLabelText: "Edit Title", 
                               textFieldLabelStyle: const TextStyle(color: black), 
-                              errorTextTriggerFunction: ({required String value}) async => value.isEmpty,
+                              errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                               errorTextTriggerFunctionParameter: _titleTec.text.trim(),
                               textFieldErrorText: emptyTitleEditError,
                               onConfirmSuccessfulCallbackFunction: (String value) async
