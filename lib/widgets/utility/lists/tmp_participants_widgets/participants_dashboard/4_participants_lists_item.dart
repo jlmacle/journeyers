@@ -219,7 +219,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                 textFieldStartValue: currentListName, 
                                 textFieldLabelText: listNameTextFieldLabel, 
                                 textFieldLabelStyle: const TextStyle(color: black),
-                                errorTextTriggerFunction: ({required String value}) async => value.isEmpty,
+                                errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                                 errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
                                 textFieldErrorText: emptyLabelEditError,
                                 onConfirmSuccessfulCallbackFunction: 
