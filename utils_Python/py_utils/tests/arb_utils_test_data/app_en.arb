@@ -1,6 +1,6 @@
 {
-  "appTitle": "Journeyers",
-  "@appTitle": {"description": "The title for the app"},
+  "app_title": "Journeyers",
+  "@app_title": {"description": "The title for the app"},
   "lang_fr": "French",
   "@lang_fr": {"description": "The name of the French language"},
   "lang_en": "English",

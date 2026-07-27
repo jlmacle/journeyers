@@ -1,7 +1,7 @@
 {
     "@@locale":"fr",
-    "appTitle": "Témoignages",
-    "@appTitle": {"description": "Le titre de l'application"},
+    "app_title": "Témoignages",
+    "@app_title": {"description": "Le titre de l'application"},
     "appSubTitle":"Quelle histoire laisserons-nous\nà nos proches ?",
     "@appSubTitle": {"description": "Le sous-titre de l'application"},
     "lang_fr": "Français",
