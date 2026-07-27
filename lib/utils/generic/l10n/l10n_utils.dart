@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart'; 
+import "package:flutter/material.dart"; 
 
-import 'package:journeyers/l10n/app_localizations.dart'; 
+import "package:journeyers/l10n/app_localizations.dart"; 
 
 /// {@category Utils - Generic} 
 /// A generic utility class related to localization. 
@@ -29,8 +29,8 @@ static String? getLangCodeFromLangName({required String languageName})
   // Code to generate automatically from the base locales l10n data: begin 
   List<String> enLanguage = ["English","Anglais"]; 
   List<String> frLanguage = ["French","Français"]; 
-  if (enLanguage.contains(languageName)) return 'en'; 
-  if (frLanguage.contains(languageName)) return 'fr'; 
+  if (enLanguage.contains(languageName)) return "en"; 
+  if (frLanguage.contains(languageName)) return "fr"; 
   // Code to generate automatically from the base locales l10n data: end 
   return null; 
 }
