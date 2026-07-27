@@ -5,37 +5,51 @@ import 'app_localizations.dart';
 // ignore_for_file: type=lint
 
 /// The translations for French (`fr`).
-/// {@category L10n}
 class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get appTitle => 'Compagnons';
+  String get app_title => 'Témoignages';
 
   @override
-  String get appSubTitle => 'Quelle histoire laisserons-nous à nos proches ?';
+  String get app_sub_title =>
+      'Quelle histoire laisserons-nous\nà nos proches ?';
 
   @override
-  String get lang_fr => 'Français';
+  String get app_start_msg =>
+      'Ceci est votre première analyse de contexte.\nLe tableau de bord s\'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.';
 
   @override
-  String get lang_en => 'Anglais';
+  String get app_lang_en => 'Anglais';
+
+  @override
+  String get app_lang_fr => 'Français';
+
+  @override
+  String get ca_process_title => 'Analyse du contexte';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
-/// {@category L10n}
 class AppLocalizationsFrFr extends AppLocalizationsFr {
   AppLocalizationsFrFr() : super('fr_FR');
 
   @override
-  String get appTitle => 'Compagnons';
+  String get app_title => 'Témoignages';
 
   @override
-  String get appSubTitle => 'Quelle histoire laisserons-nous à nos proches ?';
+  String get app_sub_title =>
+      'Quelle histoire laisserons-nous\nà nos proches ?';
 
   @override
-  String get lang_fr => 'Français';
+  String get app_start_msg =>
+      'Ceci est votre première analyse de contexte.\nLe tableau de bord s\'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.';
 
   @override
-  String get lang_en => 'Anglais';
+  String get app_lang_en => 'Anglais';
+
+  @override
+  String get app_lang_fr => 'Français';
+
+  @override
+  String get ca_process_title => 'Analyse du contexte';
 }

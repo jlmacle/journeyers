@@ -9,6 +9,9 @@
     "app_lang_en": "Anglais",
     "@app_lang_en": {"description": "Le nom de la langue anglaise en français"},
     "app_lang_fr": "Français",
-    "@app_lang_fr": {"description": "Le nom de la langue française en français"}
+    "@app_lang_fr": {"description": "Le nom de la langue française en français"},
+    "ca_process_title": "Analyse du contexte",
+    "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte, en français"}
+ 
 
     }

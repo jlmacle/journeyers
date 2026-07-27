@@ -9,6 +9,7 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
@@ -246,12 +247,12 @@ class CAProcessState extends State<CAProcess>
           children: 
           [
             // ─── Process widgets ───────────────────────────────────────
-            const Center
+            Center
             (
               child: 
               CustomHeading
               (
-                headingText: "Context analysis",
+                headingText: AppLocalizations.of(context)?.ca_process_title ?? "Issue with the context analysis process title",
                 headingLevel: 1,
               ),
             ),
