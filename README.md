@@ -51,7 +51,6 @@ https://lnkd.in/ee8hFarp
 <hr>
 <b>Some sources I have studied, starting around 2007</b>:<br>
 <ul>
-  <li><i>Nonviolent Communication</i>,  Marshall B. Rosenberg</li>
   <li><i>The 7 Habits of Highly Effective People</i>, Stephen R. Covey</li>
   <li><i>Group Problem Solving Process</i>, Ohio State University</li>
   <li><i>Negotiation Fundamentals</i>, IRENE (Institute for Research and Education on Negotiation), ESSEC Business School</li> 
