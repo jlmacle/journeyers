@@ -2,12 +2,12 @@
   "@@locale":"en_US",
   "app_title": "Journeyers",
   "@app_title": {"description": "The title for the app"},
-  "appSubTitle": "What story will we leave\nfor our loved ones to tell?",
-  "@appSubTitle": {"description": "The subtitle for the app"},
+  "app_sub_title": "What story will we leave\nfor our loved ones to tell?",
+  "@app_sub_title": {"description": "The subtitle for the app"},
   "lang_fr": "French",
   "@lang_fr": {"description": "The name of the French language in US English"},
   "lang_en": "English",
   "@lang_en": {"description": "The name of the English language in US English"},
-  "start_msg": "Disclaimer:\nThis work is provided \"as is\"\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.",
-  "@start_msg": {"description": "The information message that a newly installed app should display."}
+  "app_start_msg": "Disclaimer:\nThis work is provided \"as is\"\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.",
+  "@app_start_msg": {"description": "The information message that a newly installed app should display."}
 }

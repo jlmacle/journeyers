@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage>
                 // AppBar subtitle
                 Text
                 (
-                  AppLocalizations.of(context)?.appSubTitle ?? "Issue with the application subtitle text",
+                  AppLocalizations.of(context)?.app_sub_title ?? "Issue with the application subtitle text",
                   textAlign: TextAlign.center,
                   style: appBarSubTitleStyle
                 ),

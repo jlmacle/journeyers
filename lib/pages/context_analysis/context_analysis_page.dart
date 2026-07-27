@@ -103,7 +103,7 @@ class CAPageState extends State<CAPage>
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: Text
                   (
-                    AppLocalizations.of(context)?.start_msg ?? "Issue with the application start message",
+                    AppLocalizations.of(context)?.app_start_msg ?? "Issue with the application start message",
                     textAlign: TextAlign.center,                                          
                     style: dialogStyle, 
                   ),
