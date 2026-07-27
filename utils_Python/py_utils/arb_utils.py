@@ -89,7 +89,7 @@ def get_language_translations_for_each_language(arbs_dir_path: str, list_of_base
         with open(base_locale_path, 'r', encoding="utf-8") as arb_file:
             data = json.load(arb_file)
             for lang_code in list_of_language_codes:  
-                # lang_en is the key to find the word 'English' translated in different languages              
-                value = data.get(f"lang_{lang_code}")
+                # app_lang_en is the key to find the word 'English' translated in different languages              
+                value = data.get(f"app_lang_{lang_code}")
                 languages_values[lang_code].append(value)
     return languages_values

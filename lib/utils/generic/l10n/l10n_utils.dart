@@ -16,7 +16,7 @@ static List<String> getLanguages({required BuildContext buildContext})
 {
   List<String> languages = []; 
   // Code to generate automatically from the base locales l10n data: begin 
-  languages.add(AppLocalizations.of(buildContext)?.lang_en ?? "Default for 'en' language");
+  languages.add(AppLocalizations.of(buildContext)?.app_lang_en ?? "Default for 'en' language");
   languages.add(AppLocalizations.of(buildContext)?.lang_fr ?? "Default for 'fr' language");
   // Code to generate automatically from the base locales l10n data: end 
   languages.sort(); 
