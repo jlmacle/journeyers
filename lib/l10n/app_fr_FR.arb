@@ -4,10 +4,10 @@
     "@app_title": {"description": "Le titre de l'application"},
     "app_sub_title":"Quelle histoire laisserons-nous\nà nos proches ?",
     "@app_sub_title": {"description": "Le sous-titre de l'application"},
+    "app_start_msg": "Ceci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.",
+    "@app_start_msg": {"description": "Le message qu'une application nouvellement installée devrait afficher"},
     "lang_fr": "Français",
     "@lang_fr": {"description": "Le nom de la langue française en français"},
     "lang_en": "Anglais",
-    "@lang_en": {"description": "Le nom de la langue anglaise en français"},
-    "app_start_msg": "Ceci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.",
-    "@app_start_msg": {"description": "Le message qu'une application nouvellement installée devrait afficher"}
-}
+    "@lang_en": {"description": "Le nom de la langue anglaise en français"}
+    }
