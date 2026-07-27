@@ -61,7 +61,6 @@ import 'app_localizations_fr.dart';
 /// you wish to add from the pop-up menu in the Value field. This list should
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
-/// {@category L10n}
 abstract class AppLocalizations {
   AppLocalizations(String locale)
     : localeName = intl.Intl.canonicalizedLocale(locale.toString());
@@ -105,28 +104,39 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Journeyers'**
-  String get appTitle;
+  String get app_title;
 
   /// The subtitle for the app
   ///
   /// In en, this message translates to:
   /// **'What story will we leave\nfor our loved ones to tell?'**
-  String get appSubTitle;
+  String get app_sub_title;
 
-  /// The name of the French language in English
+  /// The information message that a newly installed app should display.
   ///
   /// In en, this message translates to:
-  /// **'French'**
-  String get lang_fr;
+  /// **'Disclaimer:\nThis work is provided \'as is\'\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.'**
+  String get app_start_msg;
 
   /// The name of the English language in English
   ///
   /// In en, this message translates to:
   /// **'English'**
-  String get lang_en;
+  String get app_lang_en;
+
+  /// The name of the French language in English
+  ///
+  /// In en, this message translates to:
+  /// **'French'**
+  String get app_lang_fr;
+
+  /// The title of the context analysis process in English
+  ///
+  /// In en, this message translates to:
+  /// **'Context analysis'**
+  String get ca_process_title;
 }
 
-/// {@category L10n}
 class _AppLocalizationsDelegate
     extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
