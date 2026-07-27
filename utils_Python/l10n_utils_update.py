@@ -32,9 +32,9 @@ print(f"Language translations for each language: {LANGUAGE_VALUES_FOR_EACH_BASE_
 INDENT_LEVEL_1 = "  "
 INDENT_LEVEL_2 = "    "
 CLASS_BEGIN = (
-  "import 'package:flutter/material.dart'; \n"
+  'import "package:flutter/material.dart"; \n'
   "\n"
-  "import 'package:journeyers/l10n/app_localizations.dart'; \n"
+  'import "package:journeyers/l10n/app_localizations.dart"; \n'
   "\n"
   "/// {@category Utils - Generic} \n"
   "/// A generic utility class related to localization. \n"
@@ -111,8 +111,8 @@ def code_generation_for_method_get_lang_code_from_lang_name() -> str:
   method_2_list_line_end = "]; \n"
   # if (frLanguage.contains(languageName)) return 'fr';
   method_2_if_line_begin = f"{INDENT_LEVEL_1}if ("
-  method_2_if_line_middle = "Language.contains(languageName)) return '"
-  method_2_if_line_end = "'; \n"
+  method_2_if_line_middle = 'Language.contains(languageName)) return "'
+  method_2_if_line_end = '"; \n'
   method_2_end =  (
     f"{INDENT_LEVEL_1}// Code to generate automatically from the base locales l10n data: end \n"
     f"{INDENT_LEVEL_1}return null; \n"
