@@ -2,8 +2,8 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
@@ -57,7 +57,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
         autofocus: widget.analysisTitleAutofocused,
         textFieldStartValue: widget.analysisTitleWhenEdition,
         textFieldStyle: analysisTextFieldStyle, 
-        textFieldHint: CAFormMiscConstants.caTitleDeclarationHintText, 
+        textFieldHint: AppLocalizations.of(context)?.ca_process_title_text_field_hint ?? "Issue with the text field hint, for the title of the context analysis process", 
         textFieldHintStyle: analysisTextFieldHintStyle, 
         errorMessageStyle: analysisTextFieldErrorMessageStyle, 
         stringSanitizerBundlesErrorsMap: const {},
