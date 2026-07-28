@@ -230,7 +230,7 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: balanceIssueHeadingKey,
-                headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_issue_section_question ?? "Issue with the section question for the balance issue, in the individual perspective",
+                headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_issue_section_question ?? "Issue with the section question for the balance issue, in the individual perspective", 
                 headingLevel: 3,
               ),
               CACheckboxWithSanitizedAndPaddedTextField
