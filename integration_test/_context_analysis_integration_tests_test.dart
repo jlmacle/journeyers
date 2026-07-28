@@ -1351,7 +1351,9 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────
 
             // Opening the expansion tiles
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
             await caOpenGroupExpansionTile(tester);
 
             // ── Verifying checkbox data present ────────────────────────────
@@ -1670,7 +1672,9 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────
 
             // Opening the expansion tiles
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
             await caOpenGroupExpansionTile(tester);
 
             // ── Verifying checkbox data present ────────────────────────────
@@ -1988,7 +1992,9 @@ Future<void> main() async {
             // ──────────────────────────────────────────────────────
 
             // Opening the expansion tiles
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
             await caOpenGroupExpansionTile(tester);
 
             // ── Verifying checkbox data present ────────────────────────────
@@ -2247,7 +2253,7 @@ Future<void> main() async {
             // ── VERIFYING ALL FIELDS EMPTY ─────────────────
             // ───────────────────────────────────────────────
               // Opening all expansion tiles
-            await caOpenIndividualExpansionTile(tester);
+            await caOpenIndividualExpansionTile(context, tester);
             await caOpenGroupExpansionTile(tester);
 
             // ── VERIFYING TITLE TEXT FIELD EMPTY ──────────────

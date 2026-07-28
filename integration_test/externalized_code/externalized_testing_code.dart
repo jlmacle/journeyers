@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
@@ -32,9 +33,9 @@ final q = CAQuestionsFields();
 
 // ─── EXPANSION TILES ───────────────────────────────────────────────────────────────
   // Method used to open the expansion tile with the individual perspective
-  Future<void> caOpenIndividualExpansionTile(WidgetTester tester) async
+  Future<void> caOpenIndividualExpansionTile(BuildContext context, WidgetTester tester) async
   {
-    var tileFinder = find.text(q.level2TitleIndividual);
+    var tileFinder = find.text(AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective");
     await tester.ensureVisible(tileFinder);
 
     // Opening the individual perspective expansion tile
@@ -140,7 +141,9 @@ final q = CAQuestionsFields();
   {
     // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
     // Opening the individual perspective expansion tile
-    await caOpenIndividualExpansionTile(tester);  
+      // Getting the build context
+    final context = tester.element(find.byType(Scaffold));
+    await caOpenIndividualExpansionTile(context, tester);  
 
     // 1. Searching for all custom checkboxes
     var checkboxFinder = find.descendant(
