@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
 
@@ -45,7 +46,12 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
   void _getLanguages(BuildContext context) 
   {
     _dropdownItems = widget.getLanguages(context);
-    _selectedValue = _dropdownItems.first;
+    var languageCode = (Localizations.localeOf(context)).languageCode;
+    switch(languageCode)
+    {
+      case "en": _selectedValue = AppLocalizations.of(context)?.app_lang_en ?? "Issue with the selected language value";
+      case "fr": _selectedValue = AppLocalizations.of(context)?.app_lang_fr ?? "Issue with the selected language value";
+    }  
   }
 
   @override
@@ -65,6 +71,7 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
           child: 
           DropdownMenu<String>
           (
+            width: 180,
             leadingIcon: const Icon(Icons.language),
             inputDecorationTheme: appTheme.inputDecorationTheme.copyWith
             (
