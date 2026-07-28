@@ -118,23 +118,29 @@ abstract class AppLocalizations {
   /// **'Disclaimer:\nThis work is provided \'as is\'\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.'**
   String get app_start_msg;
 
-  /// The name of the English language in English
+  /// The name of the English language, in English
   ///
   /// In en, this message translates to:
   /// **'English'**
   String get app_lang_en;
 
-  /// The name of the French language in English
+  /// The name of the French language, in English
   ///
   /// In en, this message translates to:
   /// **'French'**
   String get app_lang_fr;
 
-  /// The title of the context analysis process in English
+  /// The title of the context analysis process
   ///
   /// In en, this message translates to:
   /// **'Context analysis'**
   String get ca_process_title;
+
+  /// The text field hint, for the title of the context analysis process
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a title for this analysis.'**
+  String get ca_process_title_text_field_hint;
 }
 
 class _AppLocalizationsDelegate

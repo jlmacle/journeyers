@@ -11,7 +11,8 @@
     "app_lang_fr": "Français",
     "@app_lang_fr": {"description": "Le nom de la langue française, en français"},
     "ca_process_title": "Analyse du contexte",
-    "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"}
- 
+    "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},
+    "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
+    "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"}
 
     }

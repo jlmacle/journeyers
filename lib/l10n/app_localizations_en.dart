@@ -27,6 +27,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_title => 'Context analysis';
+
+  @override
+  String get ca_process_title_text_field_hint =>
+      'Please enter a title for this analysis.';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -52,4 +56,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_title => 'Context analysis';
+
+  @override
+  String get ca_process_title_text_field_hint =>
+      'Please enter a title for this analysis.';
 }
