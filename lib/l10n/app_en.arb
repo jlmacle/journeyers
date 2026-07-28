@@ -16,4 +16,7 @@
   "@ca_process_title_text_field_hint": {"description": "The text field hint, for the title of the context analysis process"},
   "ca_process_keywords_text_field_hint": "Please enter keywords\nto describe the analysis.\n(+ Enter key)",
   "@ca_process_keywords_text_field_hint": {"description": "The text field hint, for the keywords of the context analysis process"}
+  ,"ca_process_individual_perspective_title_question":"As an individual:\nWhat problem am I trying to solve?"
+  ,"@ca_process_individual_perspective_title_question": {"description": "The title question for the individual perspective"}
+
 }

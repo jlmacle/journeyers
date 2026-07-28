@@ -35,6 +35,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_process_keywords_text_field_hint =>
       'Please enter keywords\nto describe the analysis.\n(+ Enter key)';
+
+  @override
+  String get ca_process_individual_perspective_title_question =>
+      'As an individual:\nWhat problem am I trying to solve?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -68,4 +72,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_keywords_text_field_hint =>
       'Please enter keywords\nto describe the analysis.\n(+ Enter key)';
+
+  @override
+  String get ca_process_individual_perspective_title_question =>
+      'As an individual:\nWhat problem am I trying to solve?';
 }
