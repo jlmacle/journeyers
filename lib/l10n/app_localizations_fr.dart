@@ -31,6 +31,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_title_text_field_hint =>
       'Veuillez renseigner le titre\nde cette analyse.';
+
+  @override
+  String get ca_process_keywords_text_field_hint =>
+      'Veuillez renseigner des mots-clés\npour cette analyse.';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -60,4 +64,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_title_text_field_hint =>
       'Veuillez renseigner le titre\nde cette analyse.';
+
+  @override
+  String get ca_process_keywords_text_field_hint =>
+      'Veuillez renseigner des mots-clés\npour cette analyse.';
 }

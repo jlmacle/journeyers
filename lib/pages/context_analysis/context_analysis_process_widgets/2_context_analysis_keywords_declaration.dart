@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
@@ -84,12 +85,12 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
           child: TextField
           (
             controller: _keywordsTec,
-            decoration: const InputDecoration
+            decoration: InputDecoration
             (
               hint: Center
               (
                 child: 
-                Text(textAlign: TextAlign.center, "Please enter keywords\nto describe the analysis.\n(+ Enter key)", style: analysisTextFieldHintStyle)
+                Text(textAlign: TextAlign.center, AppLocalizations.of(context)?.ca_process_keywords_text_field_hint ?? "Issue with the text field hint, for the keywords of the context analysis process", style: analysisTextFieldHintStyle)
               )
             ),
             textAlign: TextAlign.center,
