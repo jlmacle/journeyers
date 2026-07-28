@@ -57,7 +57,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
         autofocus: widget.analysisTitleAutofocused,
         textFieldStartValue: widget.analysisTitleWhenEdition,
         textFieldStyle: analysisTextFieldStyle, 
-        textFieldHint: AppLocalizations.of(context)?.ca_process_title_text_field_hint ?? "Issue with the text field hint, for the title of the context analysis process", 
+        textFieldHint: AppLocalizations.of(context)?.ca_process_title ?? "Issue with the title of the context analysis process", 
         textFieldHintStyle: analysisTextFieldHintStyle, 
         errorMessageStyle: analysisTextFieldErrorMessageStyle, 
         stringSanitizerBundlesErrorsMap: const {},
