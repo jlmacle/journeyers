@@ -18,5 +18,7 @@
     "@ca_process_keywords_text_field_hint": {"description": "Le placeholder du champ de texte, pour les mots-clés du processus d'analyse de contexte"}
     ,"ca_process_individual_perspective_title_question":"En tant qu'individu:\nQuel problème dois-je résoudre?"
     ,"@ca_process_individual_perspective_title_question": {"description": "La question-titre pour la perspective individuelle"}
-
+    ,"ca_process_individual_perspective_balance_issue_section_question": "Un problème d'équilibre? "
+    ,"@ca_process_individual_perspective_balance_issue_section_question": {"description": "La question de section relative à un problème d'équilibre, pour la perspective individuelle"}
+    
     }

@@ -153,6 +153,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'As an individual:\nWhat problem am I trying to solve?'**
   String get ca_process_individual_perspective_title_question;
+
+  /// The section question for the balance issue, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'A Balance Issue? '**
+  String get ca_process_individual_perspective_balance_issue_section_question;
 }
 
 class _AppLocalizationsDelegate
