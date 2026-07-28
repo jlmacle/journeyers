@@ -42,7 +42,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
-      'A Balance Issue?';
+      'A Balance Issue? ';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -83,5 +83,5 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
-      'A Balance Issue?';
+      'A Balance Issue? ';
 }
