@@ -1,5 +1,7 @@
 import "dart:convert";
 
+import "package:flutter/material.dart";
+
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
@@ -13,6 +15,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 // Method used to retrieve context analysis session data before edition
 Future<void> retrieveCASessionData
 ({
+  required BuildContext context, 
   required String dashboardContext,
   required String filePathWhenEdition, 
   required OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedCASessionDataBeforeEditionCallbackFunction

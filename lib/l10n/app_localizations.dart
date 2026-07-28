@@ -147,6 +147,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter keywords\nto describe the analysis.\n(+ Enter key)'**
   String get ca_process_keywords_text_field_hint;
+
+  /// The title question for the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'As an individual:\nWhat problem am I trying to solve?'**
+  String get ca_process_individual_perspective_title_question;
 }
 
 class _AppLocalizationsDelegate

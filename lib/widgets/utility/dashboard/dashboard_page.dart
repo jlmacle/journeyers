@@ -426,6 +426,7 @@ class DashboardPageState extends State<DashboardPage>
                             {
                               retrieveCASessionData
                               (
+                                context: context,
                                 dashboardContext: DashboardUtils.caContext,
                                 filePathWhenEdition: filePath, 
                                 onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction

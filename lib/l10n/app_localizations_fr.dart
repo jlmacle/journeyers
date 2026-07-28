@@ -35,6 +35,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_keywords_text_field_hint =>
       'Veuillez renseigner des mots-clés\npour cette analyse.';
+
+  @override
+  String get ca_process_individual_perspective_title_question =>
+      'En tant qu\'individu:\nQuel problème dois-je résoudre?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -68,4 +72,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_keywords_text_field_hint =>
       'Veuillez renseigner des mots-clés\npour cette analyse.';
+
+  @override
+  String get ca_process_individual_perspective_title_question =>
+      'En tant qu\'individu:\nQuel problème dois-je résoudre?';
 }

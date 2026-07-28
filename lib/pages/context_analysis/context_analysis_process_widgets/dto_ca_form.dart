@@ -3,6 +3,7 @@ import "dart:collection";
 import "dart:convert";
 import "dart:io";
 
+import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
 import "package:file_picker/file_picker.dart";
@@ -72,7 +73,7 @@ class DTOCAForm
 
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
   /// Method used to gather the form data into a LinkedHashMap.
-  Future<LinkedHashMap<String, Object> > dataStructureBuilding() async {
+  Future<LinkedHashMap<String, Object> > dataStructureBuilding(BuildContext context) async {
   final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
 
   // Individual perspective
@@ -783,6 +784,7 @@ static void _parseIndividualFromRows(
 }
 
 static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
+  
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
 

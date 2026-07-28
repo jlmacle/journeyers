@@ -422,6 +422,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                         // Starts the session data editing
                         retrieveCASessionData
                         (
+                          context: context,
                           dashboardContext: DashboardUtils.caContext,
                           filePathWhenEdition: sessionMetadata[DashboardUtils.keyFilePath], 
                           onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction

@@ -9,6 +9,7 @@ import "package:intl/intl.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
@@ -137,7 +138,7 @@ class CAFormState extends State<CAForm>
     _fileName = caProcessKey.currentState!.analysisFileName;
 
     // Building the data structure
-    final LinkedHashMap<String, Object> enteredData = await _dtoCAForm!.dataStructureBuilding();
+    final LinkedHashMap<String, Object> enteredData = await _dtoCAForm!.dataStructureBuilding(context);
 
     // Transforming the data into a CSV-friendly form
     List<List<String>> preCSVDataIndividualPerspective = await _dtoCAForm!.dataToPreCSV(perspectiveData: enteredData["individualPerspective"] as LinkedHashMap<String, Object>);
@@ -219,7 +220,7 @@ class CAFormState extends State<CAForm>
             title:             
             CustomHeading
             (
-              headingText: qf.level2TitleIndividual,
+              headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective",
               headingLevel: 2,
             ),
             children: <Widget>

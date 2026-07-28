@@ -4,6 +4,7 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
@@ -109,8 +110,10 @@ void main()
 
             // Verifying that the first expansion tile title is correct
             var firstExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().first;
-            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);        
-            expect( firstExpansionTileTextWidget.data, q.level2TitleIndividual);
+            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);   
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));     
+            expect(firstExpansionTileTextWidget.data, AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective");
 
             // Verifying that the second expansion tile title is correct
             var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
@@ -138,7 +141,9 @@ void main()
             await pumpCAProcess(tester);
   
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);           
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);           
 
             // Searching the custom headings text for the first expansion tile
             var customHeadingTextFinders = find.descendant
@@ -179,7 +184,9 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
 
             // Getting the first expansion tile
             var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
@@ -205,7 +212,9 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
 
             // Getting the first expansion tile
             var individualExpansionTileFinder =  find.byType(ExpansionTile).first;
@@ -230,7 +239,9 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -267,7 +278,9 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -302,7 +315,9 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -336,7 +351,9 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the individual perspective expansion tile
-            await caOpenIndividualExpansionTile(tester);
+              // Getting the build context
+            final context = tester.element(find.byType(Scaffold));
+            await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
             var textFinders = find.descendant
@@ -474,7 +491,9 @@ void main()
           await pumpCAProcess(tester);
 
           // Opening the individual perspective expansion tile
-          await caOpenIndividualExpansionTile(tester);   
+            // Getting the build context
+          final context = tester.element(find.byType(Scaffold));
+          await caOpenIndividualExpansionTile(context, tester);   
 
           // Searching the checkboxes present in the sub-tree
           var checkboxFinder = find.descendant
