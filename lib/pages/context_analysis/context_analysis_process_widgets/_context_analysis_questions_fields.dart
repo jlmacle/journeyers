@@ -7,7 +7,7 @@ class CAQuestionsFields
   // ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
   // Heading level 2
   /// Question asked in the form: As an individual: What problem am I trying to solve?
-  // String level2TitleIndividual = AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective";
+  String level2TitleIndividual = "As an individual: What problem am I trying to solve?";
 
   // Heading level 3 and sub items
   /// Question asked in the form: A Balance Issue?
@@ -85,6 +85,9 @@ class CAQuestionsFields
   /// (text field, checkbox with text field, segmented button with text field) used to answer.
   Map<String, String> questionsToInputItemsMapping = {};
 
+  /// The set of the titles level 2.
+  Set<String> level2Titles = {};
+
   /// The set of the titles level 3 related to an individual perspective.
   Set<String> level3TitlesIndividual = {};
 
@@ -141,6 +144,9 @@ class CAQuestionsFields
       // earning ability
       level3TitleIncomeEarningAbility: labelSegmentedButton,
     };
+
+    /// The set of the titles level 2.
+    level2Titles = {level2TitleIndividual, level2TitleGroup};
 
     /// The set of the titles level 3 related to an individual perspective.
     level3TitlesIndividual = {
