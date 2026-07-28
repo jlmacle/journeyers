@@ -39,6 +39,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_individual_perspective_title_question =>
       'En tant qu\'individu:\nQuel problème dois-je résoudre?';
+
+  @override
+  String get ca_process_individual_perspective_balance_issue_section_question =>
+      'Un problème d\'équilibre?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -76,4 +80,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_individual_perspective_title_question =>
       'En tant qu\'individu:\nQuel problème dois-je résoudre?';
+
+  @override
+  String get ca_process_individual_perspective_balance_issue_section_question =>
+      'Un problème d\'équilibre?';
 }
