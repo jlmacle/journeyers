@@ -8,7 +8,6 @@ import "package:path/path.dart" as path;
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/level2_titles.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -166,7 +165,7 @@ class _CAPreviewState extends State<CAPreview>
       String secondValue = individualPerspectiveItem[1];    
       
       // A title Level 2?: "As an individual: What problem am I trying to solve?", in the case of the individual perspective.
-      if (getLevel2Titles(context).contains(secondValue)) 
+      if (qf.level2Titles.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
@@ -304,7 +303,7 @@ class _CAPreviewState extends State<CAPreview>
       String secondValue = groupPerspectiveItem[1]; 
 
       // A title Level 2?: "As a member of groups/teams: What problem(s) are we trying to solve?", in the case of the group perspective.
-      if (getLevel2Titles(context).contains(secondValue)) 
+      if (qf.level2Titles.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.

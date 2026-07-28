@@ -10,8 +10,6 @@ import "package:file_picker/file_picker.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/level2_titles.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart";
@@ -81,7 +79,7 @@ class DTOCAForm
   // Individual perspective
   final individualData = LinkedHashMap<String, Object>.from
   ({
-      AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective": 
+      qf.level2TitleIndividual: 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
         qf.level3TitleBalanceIssue: 
@@ -674,7 +672,7 @@ class DTOCAForm
 /// The CSV format pairs the individual perspective (cols 0–1) with the
 /// group/team perspective (cols 3–4) on every row.  The two perspectives
 /// are extracted independently and mapped back to DTO fields.
-factory DTOCAForm.fromCSV(BuildContext context, String csvContent) {
+factory DTOCAForm.fromCSV(String csvContent) {
   final dto = DTOCAForm();
 
   // Normalising line endings and discarding blank lines.
@@ -697,7 +695,7 @@ factory DTOCAForm.fromCSV(BuildContext context, String csvContent) {
   }
 
   _parseIndividualFromRows(dto, indivRows);
-  _parseGroupFromRows(context, dto, groupRows);
+  _parseGroupFromRows(dto, groupRows);
 
   return dto;
 }
@@ -785,9 +783,8 @@ static void _parseIndividualFromRows(
   }
 }
 
-static void _parseGroupFromRows(BuildContext context, DTOCAForm dto, List<(String, String)> rows) {
+static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
   
-  var level2Titles = getLevel2Titles(context);
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
 
@@ -796,7 +793,7 @@ static void _parseGroupFromRows(BuildContext context, DTOCAForm dto, List<(Strin
         final nextContent = rows[i + 1].$2.trim();
         if (rows[i + 1].$1 == "" &&
             nextContent.isNotEmpty &&
-            !getLevel2Titles(context).contains(nextContent) &&
+            !qf.level2Titles.contains(nextContent) &&
             !qf.level3TitlesGroup.contains(nextContent)) {
           i++;
           return nextContent;
