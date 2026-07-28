@@ -13,6 +13,8 @@
     "ca_process_title": "Analyse du contexte",
     "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
-    "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"}
+    "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"},
+    "ca_process_keywords_text_field_hint": "Veuillez renseigner des mots-clés\npour cette analyse.",
+    "@ca_process_keywords_text_field_hint": {"description": "Le placeholder du champ de texte, pour les mots-clés du processus d'analyse de contexte"}
 
     }

@@ -141,6 +141,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter a title for this analysis.'**
   String get ca_process_title_text_field_hint;
+
+  /// The text field hint, for the keywords of the context analysis process
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter keywords\nto describe the analysis.\n(+ Enter key)'**
+  String get ca_process_keywords_text_field_hint;
 }
 
 class _AppLocalizationsDelegate
