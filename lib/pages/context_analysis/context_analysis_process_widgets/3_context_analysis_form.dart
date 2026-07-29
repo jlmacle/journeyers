@@ -266,7 +266,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: qf.level3TitleBalanceIssueItem4,
+                checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_helping_others_household ?? "Issue with the helping others-household life balance question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.text,
                 textFieldHint: AppLocalizations.of(context)?.ca_process_past_outcomes_text_field_hint ?? "Issue with the text field hint, for the past outcomes for the household",

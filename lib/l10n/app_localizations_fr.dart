@@ -61,6 +61,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String
   get ca_process_individual_perspective_balance_earning_income_household =>
       'Équilibre entre maintenir un revenu et la vie de famille ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_helping_others_household =>
+      'Équilibre entre aider les autres et la vie de famille ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -120,4 +125,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String
   get ca_process_individual_perspective_balance_earning_income_household =>
       'Équilibre entre maintenir un revenu et la vie de famille ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_helping_others_household =>
+      'Équilibre entre aider les autres et la vie de famille ?';
 }
