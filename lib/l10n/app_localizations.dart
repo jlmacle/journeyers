@@ -154,6 +154,12 @@ abstract class AppLocalizations {
   /// **'Please describe the past outcomes for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.'**
   String get ca_process_past_outcomes_text_field_hint;
 
+  /// The text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others
+  ///
+  /// In en, this message translates to:
+  /// **'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.'**
+  String get ca_process_helping_household_text_field_hint;
+
   /// The title question for the individual perspective
   ///
   /// In en, this message translates to:
