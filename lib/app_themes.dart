@@ -71,14 +71,14 @@ const TextStyle underlinedConstHeadingStyle = TextStyle
 // Text styles: CHECKBOXES
 const TextStyle unselectedCheckboxTextStyle = TextStyle
 (
-  fontSize: 24,
+  fontSize: 22,
   color: Colors.black,
   decoration: TextDecoration.none
 );
 
 const TextStyle selectedCheckboxTextStyle = TextStyle
 (
-  fontSize: 24,
+  fontSize: 22,
   color: Colors.black,
   decoration: TextDecoration.underline
 );

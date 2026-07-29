@@ -171,6 +171,13 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To balance studies and household life?'**
   String get ca_process_individual_perspective_balance_studies_household;
+
+  /// The accessing income-household life balance question, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'To balance accessing income and household life?'**
+  String
+  get ca_process_individual_perspective_balance_accessing_income_household;
 }
 
 class _AppLocalizationsDelegate
