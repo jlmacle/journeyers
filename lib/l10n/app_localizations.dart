@@ -196,6 +196,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To balance helping others and household life?'**
   String get ca_process_individual_perspective_balance_helping_others_household;
+
+  /// The section question for the workplace issue, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'A Workplace Issue?'**
+  String get ca_process_individual_perspective_workplace_issue_section_question;
 }
 
 class _AppLocalizationsDelegate
