@@ -24,5 +24,7 @@
   ,"@ca_process_individual_perspective_balance_issue_section_question": {"description": "The section question for the balance issue, in the individual perspective"}
   ,"ca_process_individual_perspective_balance_studies_household": "To balance studies and household life?"
   ,"@ca_process_individual_perspective_balance_studies_household": {"description": "The studies-household life balance question, in the individual perspective"}
+  ,"ca_process_individual_perspective_balance_accessing_income_household": "To balance accessing income and household life?"
+  ,"@ca_process_individual_perspective_balance_accessing_income_household": {"description": "The accessing income-household life balance question, in the individual perspective"}  
 
 }

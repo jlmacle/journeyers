@@ -248,7 +248,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: qf.level3TitleBalanceIssueItem2,
+                checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_accessing_income_household ?? "Issue with the accessing income-household life balance question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: pleaseDescribeTextHouseholdHint,

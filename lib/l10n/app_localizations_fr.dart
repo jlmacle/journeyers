@@ -50,7 +50,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_balance_studies_household =>
-      'Équilibre entre études et vie de famille?';
+      'Équilibre entre les études et la vie de famille?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_accessing_income_household =>
+      'Équilibre entre l\'accès à l\'emploi et la vie de famille?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -99,5 +104,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_individual_perspective_balance_studies_household =>
-      'Équilibre entre études et vie de famille?';
+      'Équilibre entre les études et la vie de famille?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_accessing_income_household =>
+      'Équilibre entre l\'accès à l\'emploi et la vie de famille?';
 }
