@@ -235,7 +235,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: qf.level3TitleBalanceIssueItem1,
+                checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_studies_household ?? "Issue with the studies-household life balance question, in the individual perspective",
                 // Initializing the checkbox value with the DTO's value
                 checkboxStartValue:  _dtoCAForm!.indivBalanceStudiesHousehold.checked,
                 // Initializing the text field value with the DTO's value
