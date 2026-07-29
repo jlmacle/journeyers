@@ -269,7 +269,7 @@ class CAFormState extends State<CAForm>
                 checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_helping_others_household ?? "Issue with the helping others-household life balance question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.text,
-                textFieldHint: AppLocalizations.of(context)?.ca_process_past_outcomes_text_field_hint ?? "Issue with the text field hint, for the past outcomes for the household",
+                textFieldHint: AppLocalizations.of(context)?.ca_process_helping_household_text_field_hint ?? "Issue with the text field hint, for the past outcomes for the household",
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
               ),
