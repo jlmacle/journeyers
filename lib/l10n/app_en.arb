@@ -28,5 +28,7 @@
   ,"@ca_process_individual_perspective_balance_accessing_income_household": {"description": "The accessing income-household life balance question, in the individual perspective"}  
   ,"ca_process_individual_perspective_balance_earning_income_household": "To balance earning an income and household life?"
   ,"@ca_process_individual_perspective_balance_earning_income_household": {"description": "The earning income-household life balance question, in the individual perspective"}  
-
+  ,"ca_process_individual_perspective_balance_helping_others_household": "To balance helping others and household life?"
+  ,"@ca_process_individual_perspective_balance_helping_others_household": {"description": "The helping others-household life balance question, in the individual perspective"}  
+  
 }
