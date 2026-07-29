@@ -42,20 +42,25 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'En tant qu\'individu:\nQuel problème dois-je résoudre?';
+      'En tant qu\'individu:\nQuel problème dois-je résoudre ?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
-      'Un problème d\'équilibre?';
+      'Un problème d\'équilibre ?';
 
   @override
   String get ca_process_individual_perspective_balance_studies_household =>
-      'Équilibre entre les études et la vie de famille?';
+      'Équilibre entre les études et la vie de famille ?';
 
   @override
   String
   get ca_process_individual_perspective_balance_accessing_income_household =>
-      'Équilibre entre l\'accès à l\'emploi et la vie de famille?';
+      'Équilibre entre l\'accès à l\'emploi et la vie de famille ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_earning_income_household =>
+      'Équilibre entre maintenir un revenu et la vie de famille ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -96,18 +101,23 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'En tant qu\'individu:\nQuel problème dois-je résoudre?';
+      'En tant qu\'individu:\nQuel problème dois-je résoudre ?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
-      'Un problème d\'équilibre?';
+      'Un problème d\'équilibre ?';
 
   @override
   String get ca_process_individual_perspective_balance_studies_household =>
-      'Équilibre entre les études et la vie de famille?';
+      'Équilibre entre les études et la vie de famille ?';
 
   @override
   String
   get ca_process_individual_perspective_balance_accessing_income_household =>
-      'Équilibre entre l\'accès à l\'emploi et la vie de famille?';
+      'Équilibre entre l\'accès à l\'emploi et la vie de famille ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_earning_income_household =>
+      'Équilibre entre maintenir un revenu et la vie de famille ?';
 }

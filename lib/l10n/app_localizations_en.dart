@@ -56,6 +56,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String
   get ca_process_individual_perspective_balance_accessing_income_household =>
       'To balance accessing income and household life?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_earning_income_household =>
+      'To balance earning an income and household life?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -110,4 +115,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String
   get ca_process_individual_perspective_balance_accessing_income_household =>
       'To balance accessing income and household life?';
+
+  @override
+  String
+  get ca_process_individual_perspective_balance_earning_income_household =>
+      'To balance earning an income and household life?';
 }
