@@ -148,6 +148,12 @@ abstract class AppLocalizations {
   /// **'Please enter keywords\nto describe the analysis.\n(+ Enter key)'**
   String get ca_process_keywords_text_field_hint;
 
+  /// The text field hint, for the past outcomes for the household
+  ///
+  /// In en, this message translates to:
+  /// **'Please describe the past outcomes for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.'**
+  String get ca_process_past_outcomes_text_field_hint;
+
   /// The title question for the individual perspective
   ///
   /// In en, this message translates to:

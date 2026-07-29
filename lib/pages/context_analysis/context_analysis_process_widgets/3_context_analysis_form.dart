@@ -240,7 +240,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue:  _dtoCAForm!.indivBalanceStudiesHousehold.checked,
                 // Initializing the text field value with the DTO's value
                 textFieldStartValue: _dtoCAForm!.indivBalanceStudiesHousehold.text,
-                textFieldHint: pleaseDescribeTextHouseholdHint,
+                textFieldHint: AppLocalizations.of(context)?.ca_process_past_outcomes_text_field_hint ?? "Issue with the text field hint, for the past outcomes for the household",
                 // Updating DTO and UI (heading and item styling)
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceStudiesHousehold, v),
                 // Updating DTO
