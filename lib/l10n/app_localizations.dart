@@ -178,6 +178,12 @@ abstract class AppLocalizations {
   /// **'To balance accessing income and household life?'**
   String
   get ca_process_individual_perspective_balance_accessing_income_household;
+
+  /// The earning income-household life balance question, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'To balance earning an income and household life?'**
+  String get ca_process_individual_perspective_balance_earning_income_household;
 }
 
 class _AppLocalizationsDelegate
