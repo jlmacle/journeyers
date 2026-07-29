@@ -282,7 +282,7 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: workplaceIssueHeadingKey,
-                headingText: qf.level3TitleWorkplaceIssue,
+                headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_workplace_issue_section_question ?? "Issue with the section question for the workplace issue, in the individual perspective",
                 headingLevel: 3,
               ),
               CACheckboxWithSanitizedAndPaddedTextField

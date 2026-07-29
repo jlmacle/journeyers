@@ -70,6 +70,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String
   get ca_process_individual_perspective_balance_helping_others_household =>
       'Équilibre entre aider les autres et la vie de famille ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_workplace_issue_section_question =>
+      'Un problème au travail ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -138,4 +143,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String
   get ca_process_individual_perspective_balance_helping_others_household =>
       'Équilibre entre aider les autres et la vie de famille ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_workplace_issue_section_question =>
+      'Un problème au travail ?';
 }
