@@ -202,6 +202,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A Workplace Issue?'**
   String get ca_process_individual_perspective_workplace_issue_section_question;
+
+  /// The more appreciated at work question, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'To solve a need to be more appreciated at work?'**
+  String get ca_process_individual_perspective_workplace_more_appreciated;
 }
 
 class _AppLocalizationsDelegate
