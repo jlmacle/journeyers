@@ -52,6 +52,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
 
   @override
+  String get ca_process_please_describe_problems_field_hint =>
+      'Please describe the problem(s) that the groups/teams are trying to solve.';
+
+  @override
   String get ca_process_individual_perspective_title_question =>
       'As an individual:\nWhat problem\nam I trying to solve?';
 
@@ -159,6 +163,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
+
+  @override
+  String get ca_process_please_describe_problems_field_hint =>
+      'Please describe the problem(s) that the groups/teams are trying to solve.';
 
   @override
   String get ca_process_individual_perspective_title_question =>
