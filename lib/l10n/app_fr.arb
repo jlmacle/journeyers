@@ -50,5 +50,7 @@
     ,"@ca_process_individual_perspective_another_issue_section_question": {"description": "La question de section relative à un problème d'un autre type, pour la perspective individuelle"}
     ,"ca_process_group_perspective_title_question":"En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"
     ,"@ca_process_group_perspective_title_question":  {"description": "La question-titre pour la perspective de groupe"}
+    ,"ca_process_group_perspective_problems":"Quel(s) problème(s)\nles groupes/équipes\nessayent de résoudre ?"
+    ,"@ca_process_group_perspective_problems": {"description": "La question relative au(x) problème(s) que les groupes/équipe(s) essayent de résoudre"}
 
-    }
+}

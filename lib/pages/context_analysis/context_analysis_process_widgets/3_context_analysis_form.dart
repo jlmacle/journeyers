@@ -401,7 +401,7 @@ class CAFormState extends State<CAForm>
               // Question about the group problems
               CustomHeading
               (
-                headingText: qf.level3TitleGroupsProblematics,
+                headingText: AppLocalizations.of(context)?.ca_process_group_perspective_problems ?? "Issue with the question for the problem(s) the groups/teams are trying to solve",
                 headingLevel: 3,
               ),
               CATextFieldSanitizedAndPadded

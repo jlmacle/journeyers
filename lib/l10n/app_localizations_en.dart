@@ -106,7 +106,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_title_question =>
-      'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?';
+      'As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?';
+
+  @override
+  String get ca_process_group_perspective_problems =>
+      'What problem(s)\nare the groups/teams\ntrying to solve?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -212,4 +216,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_group_perspective_title_question =>
       'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?';
+
+  @override
+  String get ca_process_group_perspective_problems =>
+      'What problem(s)\nare the groups/teams\ntrying to solve?';
 }
