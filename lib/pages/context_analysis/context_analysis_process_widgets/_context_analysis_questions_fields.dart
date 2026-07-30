@@ -3,11 +3,13 @@
 /// A class with fields related to the questions of the context analysis.
 class CAQuestionsFields
 {
+  //  ➡️IMPORTANT: no \n should be found in this file⬅️
+
   // ─── USED IN THE CA FORM ───────────────────────────────────────
   // ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
   // Heading level 2
   /// Question asked in the form: As an individual: What problem am I trying to solve?
-  String level2TitleIndividual = "As an individual:\nWhat problem am I trying to solve?";
+  String level2TitleIndividual = "As an individual: What problem am I trying to solve?";
 
   // Heading level 3 and sub items
   /// Question asked in the form: A Balance Issue?
@@ -37,7 +39,7 @@ class CAQuestionsFields
 
   // Heading level 3 without sub items
   /// Question asked in the form: Is The issue Of Another Type?
-  String level3TitleAnotherIssue = "Is The Issue Of Another Type?";
+  String level3TitleAnotherIssue = "Is the issue of another type?";
 
 
 

@@ -388,7 +388,7 @@ class _CAPreviewState extends State<CAPreview>
       ["", "To balance earning an income and household life?"], ["", "To balance helping others and household life?"], 
       ["", "A Workplace Issue?"], ["", "To solve a need to be more appreciated at work?"], 
       ["", "To solve a need to remain appreciated at work?"], ["", "A Legacy Issue?"], 
-      ["", "To have a better legacy to leave to my children/others?"], ["", "Is The Issue Of Another Type?"]], 
+      ["", "To have a better legacy to leave to my children/others?"], ["", "Is the issue of another type?"]], 
       "groupPerspective":
       [["", "As a member of groups/teams: What problem(s) are we trying to solve?"], 
       ["X", "What problem(s) are the groups/teams trying to solve?"], ["Notes:", "b1"], 
