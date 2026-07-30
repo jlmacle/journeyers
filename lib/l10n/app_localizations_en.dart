@@ -99,6 +99,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_process_individual_perspective_legacy_better_legacy =>
       'To have a better legacy to leave to my children/others?';
+
+  @override
+  String get ca_process_individual_perspective_another_issue_section_question =>
+      'Is the issue\nof another type?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -196,4 +200,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_individual_perspective_legacy_better_legacy =>
       'To have a better legacy to leave to my children/others?';
+
+  @override
+  String get ca_process_individual_perspective_another_issue_section_question =>
+      'Is the issue\nof another type?';
 }

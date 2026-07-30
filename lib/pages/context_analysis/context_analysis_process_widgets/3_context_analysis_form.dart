@@ -336,7 +336,7 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: anotherIssueHeadingKey,
-                headingText: qf.level3TitleAnotherIssue,
+                headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_another_issue_section_question ?? "Issue with the section question for an issue of another type, in the individual perspective",
                 headingLevel: 3,
                 ),
               CATextFieldSanitizedAndPadded

@@ -238,6 +238,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To have a better legacy to leave to my children/others?'**
   String get ca_process_individual_perspective_legacy_better_legacy;
+
+  /// The section question for an issue of another type, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'Is the issue\nof another type?'**
+  String get ca_process_individual_perspective_another_issue_section_question;
 }
 
 class _AppLocalizationsDelegate
