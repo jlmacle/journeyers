@@ -83,6 +83,11 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
       'To solve a need to be more appreciated at work?';
+
+  @override
+  String
+  get ca_process_individual_perspective_workplace_to_remain_appreciated =>
+      'To solve a need to remain appreciated at work?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -164,4 +169,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
       'To solve a need to be more appreciated at work?';
+
+  @override
+  String
+  get ca_process_individual_perspective_workplace_to_remain_appreciated =>
+      'To solve a need to remain appreciated at work?';
 }

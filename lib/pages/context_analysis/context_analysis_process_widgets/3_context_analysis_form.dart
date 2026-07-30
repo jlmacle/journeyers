@@ -296,7 +296,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: qf.level3TitleWorkplaceIssueItem2,
+                checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_workplace_to_remain_appreciated ?? "Issue with the to-remain-appreciated-at-work question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivAtWorkRemainingAppreciated.checked,
                 textFieldStartValue: _dtoCAForm!.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: AppLocalizations.of(context)?.ca_process_past_workplace_outcomes_text_field_hint ?? "Issue with the text field hint, for the past outcomes for the workplace",
