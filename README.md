@@ -6,7 +6,7 @@ depends on our ability to group problem-solve toward lasting solutions.<br>
 This open source ed tech and assistive technology, proof of concept project <br>
 (built with Flutter, therefore cross-platform [Android, iPhone, Linux, macOS, Windows], <br>
 and with a goal of being multilingual, accessible, and offline-friendly), <br>
-is meant to support our group problem-solving processes, and to help us reach lasting solutions,<br>
+is meant to illustrate supporting our group problem-solving processes, and to help us reach lasting solutions,<br>
 consistent with harmony in the household and reliability in the workplace.
 <br>
 
