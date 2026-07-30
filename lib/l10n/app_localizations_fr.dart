@@ -108,6 +108,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_group_perspective_title_question =>
       'En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?';
+
+  @override
+  String get ca_process_group_perspective_problems =>
+      'Quel(s) problème(s)\nles groupes/équipes\nessayent de résoudre ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -160,7 +164,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'En tant qu\'individu:\nQuel problème dois-je résoudre ?';
+      'En tant qu\'individu:\nQuel problème\ndois-je résoudre ?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
@@ -214,4 +218,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_group_perspective_title_question =>
       'En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?';
+
+  @override
+  String get ca_process_group_perspective_problems =>
+      'Quel(s) problème(s)\nles groupes/équipes\nessayent de résoudre ?';
 }

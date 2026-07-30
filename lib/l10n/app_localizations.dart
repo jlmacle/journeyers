@@ -248,8 +248,14 @@ abstract class AppLocalizations {
   /// The title question for the groups/teams perspective
   ///
   /// In en, this message translates to:
-  /// **'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?'**
+  /// **'As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?'**
   String get ca_process_group_perspective_title_question;
+
+  /// The question for the problem(s) the groups/teams are trying to solve
+  ///
+  /// In en, this message translates to:
+  /// **'What problem(s)\nare the groups/teams\ntrying to solve?'**
+  String get ca_process_group_perspective_problems;
 }
 
 class _AppLocalizationsDelegate
