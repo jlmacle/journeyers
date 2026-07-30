@@ -220,6 +220,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To solve a need to remain appreciated at work?'**
   String get ca_process_individual_perspective_workplace_to_remain_appreciated;
+
+  /// The section question for the legacy issue, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'A Legacy Issue?'**
+  String get ca_process_individual_perspective_legacy_issue_section_question;
 }
 
 class _AppLocalizationsDelegate

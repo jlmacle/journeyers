@@ -22,7 +22,7 @@
     ,"@ca_process_helping_household_text_field_hint": {"description": "Le placeholder du champ de texte, pour les raisons et les impacts potentiels, d'un déséquilibre entre fidélité envers famille et considération envers les autres"}
     ,"ca_process_past_workplace_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer."
     ,"@ca_process_past_workplace_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le lieu de travail et pour le foyer"}  
-    ,"ca_process_individual_perspective_title_question":"En tant qu'individu:\nQuel problème dois-je résoudre ?"
+    ,"ca_process_individual_perspective_title_question":"En tant qu'individu:\nQuel problème\ndois-je résoudre ?"
     ,"@ca_process_individual_perspective_title_question": {"description": "La question-titre pour la perspective individuelle"}
     ,"ca_process_individual_perspective_balance_issue_section_question": "Un problème d'équilibre ?"
     ,"@ca_process_individual_perspective_balance_issue_section_question": {"description": "La question de section relative à un problème d'équilibre, pour la perspective individuelle"}
@@ -40,5 +40,7 @@
     ,"@ca_process_individual_perspective_workplace_more_appreciated": {"description": "La question relative au besoin d'être plus apprécié(e) au travail, pour la perspective individuelle"} 
     ,"ca_process_individual_perspective_workplace_to_remain_appreciated": "Le besoin de rester apprécié(e) au travail ?"
     ,"@ca_process_individual_perspective_workplace_to_remain_appreciated": {"description": "La question relative au besoin de rester apprécié(e) au travail, pour la perspective individuelle"} 
+    ,"ca_process_individual_perspective_legacy_issue_section_question": "Un problème\navec mon histoire de vie ?"
+    ,"@ca_process_individual_perspective_legacy_issue_section_question": {"description": "La question de section relative à un problème avec mon histoire de vie, pour la perspective individuelle"}
 
 }

@@ -88,6 +88,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String
   get ca_process_individual_perspective_workplace_to_remain_appreciated =>
       'To solve a need to remain appreciated at work?';
+
+  @override
+  String get ca_process_individual_perspective_legacy_issue_section_question =>
+      'A Legacy Issue?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -174,4 +178,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String
   get ca_process_individual_perspective_workplace_to_remain_appreciated =>
       'To solve a need to remain appreciated at work?';
+
+  @override
+  String get ca_process_individual_perspective_legacy_issue_section_question =>
+      'A Legacy Issue?';
 }
