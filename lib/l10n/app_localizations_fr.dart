@@ -38,11 +38,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
-      'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable au foyer.';
+      'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
   @override
   String get ca_process_helping_household_text_field_hint =>
       'Veuillez développer les raisons, et les impacts potentiels, d\'un déséquilibre entre fidélité envers votre famille et considération envers les autres.';
+
+  @override
+  String get ca_process_past_workplace_outcomes_text_field_hint =>
+      'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
 
   @override
   String get ca_process_individual_perspective_title_question =>
@@ -78,7 +82,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
-      'Le besoin d\'être plus apprécié au travail ?';
+      'Le besoin d\'être plus apprécié(e) au travail ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -115,11 +119,15 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
-      'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable au foyer.';
+      'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
   @override
   String get ca_process_helping_household_text_field_hint =>
       'Veuillez développer les raisons, et les impacts potentiels, d\'un déséquilibre entre fidélité envers votre famille et considération envers les autres.';
+
+  @override
+  String get ca_process_past_workplace_outcomes_text_field_hint =>
+      'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
 
   @override
   String get ca_process_individual_perspective_title_question =>
@@ -155,5 +163,5 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
-      'Le besoin d\'être plus apprécié au travail ?';
+      'Le besoin d\'être plus apprécié(e) au travail ?';
 }
