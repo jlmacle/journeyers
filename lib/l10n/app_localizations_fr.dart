@@ -122,6 +122,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Est-ce que j\'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?';
 
   @override
+  String get ca_process_group_perspective_harmony_home =>
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l\'harmonie au foyer ?';
+
+  @override
   String get segmented_button_yes => 'Oui';
 
   @override
@@ -247,6 +251,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_group_perspective_solving_same_problems =>
       'Est-ce que j\'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?';
+
+  @override
+  String get ca_process_group_perspective_harmony_home =>
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l\'harmonie au foyer ?';
 
   @override
   String get segmented_button_yes => 'Oui';

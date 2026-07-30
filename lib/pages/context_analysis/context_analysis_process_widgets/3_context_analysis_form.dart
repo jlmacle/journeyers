@@ -448,7 +448,7 @@ class CAFormState extends State<CAForm>
               // Question about harmony at home
               CustomHeading
               (
-                headingText: qf.level3TitleHarmonyAtHome,
+                headingText: AppLocalizations.of(context)?.ca_process_group_perspective_harmony_home ?? "Issue with the question related to harmony at home",
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),
