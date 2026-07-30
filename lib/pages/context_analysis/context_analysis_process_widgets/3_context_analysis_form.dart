@@ -391,7 +391,7 @@ class CAFormState extends State<CAForm>
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: CustomHeading
                 (
-                  headingText: qf.level2TitleGroup,
+                  headingText: AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the title question for the groups/teams perspective",
                   headingLevel: 2,
                 ),
               ),

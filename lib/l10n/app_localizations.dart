@@ -175,7 +175,7 @@ abstract class AppLocalizations {
   /// The title question for the individual perspective
   ///
   /// In en, this message translates to:
-  /// **'As an individual:\nWhat problem am I trying to solve?'**
+  /// **'As an individual:\nWhat problem\nam I trying to solve?'**
   String get ca_process_individual_perspective_title_question;
 
   /// The section question for the balance issue, in the individual perspective
@@ -244,6 +244,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Is the issue\nof another type?'**
   String get ca_process_individual_perspective_another_issue_section_question;
+
+  /// The title question for the groups/teams perspective
+  ///
+  /// In en, this message translates to:
+  /// **'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?'**
+  String get ca_process_group_perspective_title_question;
 }
 
 class _AppLocalizationsDelegate

@@ -53,7 +53,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'As an individual:\nWhat problem am I trying to solve?';
+      'As an individual:\nWhat problem\nam I trying to solve?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
@@ -103,6 +103,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_process_individual_perspective_another_issue_section_question =>
       'Is the issue\nof another type?';
+
+  @override
+  String get ca_process_group_perspective_title_question =>
+      'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -154,7 +158,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'As an individual:\nWhat problem am I trying to solve?';
+      'As an individual:\nWhat problem\nam I trying to solve?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
@@ -204,4 +208,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_individual_perspective_another_issue_section_question =>
       'Is the issue\nof another type?';
+
+  @override
+  String get ca_process_group_perspective_title_question =>
+      'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?';
 }
