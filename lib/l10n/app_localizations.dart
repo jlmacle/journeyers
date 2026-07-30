@@ -172,6 +172,12 @@ abstract class AppLocalizations {
   /// **'Please develop.'**
   String get ca_process_please_develop_text_field_hint;
 
+  /// The text field hint inviting to describe the problem(s) that the groups/teams are trying to solve
+  ///
+  /// In en, this message translates to:
+  /// **'Please describe the problem(s) that the groups/teams are trying to solve.'**
+  String get ca_process_please_describe_problems_field_hint;
+
   /// The title question for the individual perspective
   ///
   /// In en, this message translates to:

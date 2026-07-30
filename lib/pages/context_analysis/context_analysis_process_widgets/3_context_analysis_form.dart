@@ -408,7 +408,7 @@ class CAFormState extends State<CAForm>
               (
                 key: const Key("ca-process-group-problems-to-solve-widget"),
                 textFieldStartValue: _dtoCAForm!.groupProblemsToSolveStr,
-                textFieldHint: pleaseDescribeTextGroupsHint,
+                textFieldHint: AppLocalizations.of(context)?.ca_process_please_describe_problems_field_hint ?? "Issue with the text field hint inviting to describe the problem(s) that the groups/teams are trying to solve",
                 stringSanitizerBundlesErrorsMap: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldHintStyle: analysisTextFieldHintStyle,
