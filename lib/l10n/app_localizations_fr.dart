@@ -50,7 +50,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'En tant qu\'individu:\nQuel problème dois-je résoudre ?';
+      'En tant qu\'individu:\nQuel problème\ndois-je résoudre ?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
@@ -88,6 +88,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String
   get ca_process_individual_perspective_workplace_to_remain_appreciated =>
       'Le besoin de rester apprécié(e) au travail ?';
+
+  @override
+  String get ca_process_individual_perspective_legacy_issue_section_question =>
+      'Un problème\navec mon histoire de vie ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -136,7 +140,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_individual_perspective_title_question =>
-      'En tant qu\'individu:\nQuel problème dois-je résoudre ?';
+      'En tant qu\'individu:\nQuel problème\ndois-je résoudre ?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
@@ -174,4 +178,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String
   get ca_process_individual_perspective_workplace_to_remain_appreciated =>
       'Le besoin de rester apprécié(e) au travail ?';
+
+  @override
+  String get ca_process_individual_perspective_legacy_issue_section_question =>
+      'Un problème\navec mon histoire de vie ?';
 }

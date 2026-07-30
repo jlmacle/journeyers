@@ -218,11 +218,14 @@ class CAFormState extends State<CAForm>
             // on Windows, for Narrator: was necessary (as of 26/01/11) to have "button" voiced after the title was voiced
             maintainState: true, // to keep the state of the children widget
             title:             
-            CustomHeading
-            (
-              headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective",
-              headingLevel: 2,
-            ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: CustomHeading
+                (
+                  headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective",
+                  headingLevel: 2,
+                ),
+              ),
             children: <Widget>
             [
               /**** ➡️ Sub-point  ****/
@@ -312,7 +315,7 @@ class CAFormState extends State<CAForm>
               CustomHeading
               (
                 key: legacyIssueHeadingKey,
-                headingText: qf.level3TitleLegacyIssue,
+                headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_legacy_issue_section_question ?? "Issue with the section question for the legacy issue, in the individual perspective",
                 headingLevel: 3,
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -384,11 +387,14 @@ class CAFormState extends State<CAForm>
             // on Windows, for Narrator: was necessary (as of 26/01/11) to have "button" voiced after the title was voiced
             maintainState: true, // to keep the state of the children widget
             title:              
-            CustomHeading
-            (
-              headingText: qf.level2TitleGroup,
-              headingLevel: 2,
-            ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: CustomHeading
+                (
+                  headingText: qf.level2TitleGroup,
+                  headingLevel: 2,
+                ),
+              ),
             children: <Widget>
             [
               /**** ➡️ Sub-point  ****/

@@ -40,5 +40,8 @@
   ,"@ca_process_individual_perspective_workplace_more_appreciated": {"description": "The more-appreciated-at-work question, in the individual perspective"} 
   ,"ca_process_individual_perspective_workplace_to_remain_appreciated": "To solve a need to remain appreciated at work?"
   ,"@ca_process_individual_perspective_workplace_to_remain_appreciated": {"description": "The to-remain-appreciated-at-work question, in the individual perspective"} 
+  ,"ca_process_individual_perspective_legacy_issue_section_question": "A Legacy Issue?"
+  ,"@ca_process_individual_perspective_legacy_issue_section_question": {"description": "The section question for the legacy issue, in the individual perspective"}
 
+  
 }
