@@ -214,6 +214,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'To solve a need to be more appreciated at work?'**
   String get ca_process_individual_perspective_workplace_more_appreciated;
+
+  /// The to-remain-appreciated-at-work question, in the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'To solve a need to remain appreciated at work?'**
+  String get ca_process_individual_perspective_workplace_to_remain_appreciated;
 }
 
 class _AppLocalizationsDelegate

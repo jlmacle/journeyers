@@ -83,6 +83,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
       'Le besoin d\'être plus apprécié(e) au travail ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_workplace_to_remain_appreciated =>
+      'Le besoin de rester apprécié(e) au travail ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -164,4 +169,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
       'Le besoin d\'être plus apprécié(e) au travail ?';
+
+  @override
+  String
+  get ca_process_individual_perspective_workplace_to_remain_appreciated =>
+      'Le besoin de rester apprécié(e) au travail ?';
 }
