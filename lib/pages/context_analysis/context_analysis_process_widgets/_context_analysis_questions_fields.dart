@@ -7,7 +7,7 @@ class CAQuestionsFields
   // ─── QUESTIONS: INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
   // Heading level 2
   /// Question asked in the form: As an individual: What problem am I trying to solve?
-  String level2TitleIndividual = "As an individual: What problem am I trying to solve?";
+  String level2TitleIndividual = "As an individual:\nWhat problem am I trying to solve?";
 
   // Heading level 3 and sub items
   /// Question asked in the form: A Balance Issue?
@@ -32,8 +32,8 @@ class CAQuestionsFields
   // Heading level 3 and sub items
   /// Question asked in the form: A Legacy Issue?
   String level3TitleLegacyIssue = "A Legacy Issue?";
-  /// Question asked in the form: To have better legacies to leave to our children/others?
-  String level3TitleLegacyIssueItem1 = "To have better legacies to leave to our children/others?";
+  /// Question asked in the form: To have a better legacy to leave to my children/others?
+  String level3TitleLegacyIssueItem1 = "To have a better legacy to leave to my children/others?";
 
   // Heading level 3 without sub items
   /// Question asked in the form: Is the issue of another type?

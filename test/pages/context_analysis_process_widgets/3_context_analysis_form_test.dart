@@ -47,6 +47,8 @@ void main()
     await tester.pumpWidget(
         MaterialApp
         (
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold
           (
             body: CAProcess
@@ -335,7 +337,7 @@ void main()
             }
 
             // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(10)).data, q.level3TitleLegacyIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(10)).data, "To have a better legacy to leave to my children/others?");
           },
         );
       
