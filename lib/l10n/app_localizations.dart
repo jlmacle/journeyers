@@ -268,6 +268,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Am I trying to solve the same problem(s) as my groups/teams?'**
   String get ca_process_group_perspective_solving_same_problems;
+
+  /// l10n for Yes
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get segmented_button_yes;
+
+  /// l10n for No
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get segmented_button_no;
+
+  /// l10n for I don't know
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t know'**
+  String get segmented_button_I_don_t_know;
 }
 
 class _AppLocalizationsDelegate
