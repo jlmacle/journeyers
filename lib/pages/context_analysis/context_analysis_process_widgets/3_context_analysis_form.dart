@@ -422,7 +422,7 @@ class CAFormState extends State<CAForm>
               // Question about the same problems
               CustomHeading
               (
-                headingText: qf.level3TitleSameProblem,
+                headingText: AppLocalizations.of(context)?.ca_process_group_perspective_solving_same_problems ?? "Issue with the question related to solving the same problem(s) as the groups/teams",
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),

@@ -262,6 +262,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What problem(s)\nare the groups/teams\ntrying to solve?'**
   String get ca_process_group_perspective_problems;
+
+  /// The question related to solving the same problem(s) as the groups/teams
+  ///
+  /// In en, this message translates to:
+  /// **'Am I trying to solve the same problem(s) as my groups/teams?'**
+  String get ca_process_group_perspective_solving_same_problems;
 }
 
 class _AppLocalizationsDelegate

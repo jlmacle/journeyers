@@ -54,7 +54,10 @@
   ,"@ca_process_group_perspective_title_question": {"description": "The title question for the groups/teams perspective"}
   ,"ca_process_group_perspective_problems":"What problem(s)\nare the groups/teams\ntrying to solve?"
   ,"@ca_process_group_perspective_problems": {"description": "The question for the problem(s) the groups/teams are trying to solve"}
+  ,"ca_process_group_perspective_solving_same_problems": "Am I trying to solve the same problem(s) as my groups/teams?"
+  ,"@ca_process_group_perspective_solving_same_problems": {"description": "The question related to solving the same problem(s) as the groups/teams"}
 
+  
   
 
   }
