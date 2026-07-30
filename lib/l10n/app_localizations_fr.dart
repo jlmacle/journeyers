@@ -120,6 +120,15 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_group_perspective_solving_same_problems =>
       'Est-ce que j\'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?';
+
+  @override
+  String get segmented_button_yes => 'Oui';
+
+  @override
+  String get segmented_button_no => 'Non';
+
+  @override
+  String get segmented_button_I_don_t_know => 'Je ne sais pas';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -238,4 +247,13 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_group_perspective_solving_same_problems =>
       'Est-ce que j\'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?';
+
+  @override
+  String get segmented_button_yes => 'Oui';
+
+  @override
+  String get segmented_button_no => 'Non';
+
+  @override
+  String get segmented_button_I_don_t_know => 'Je ne sais pas';
 }

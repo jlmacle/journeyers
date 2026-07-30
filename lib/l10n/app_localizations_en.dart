@@ -119,6 +119,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_process_group_perspective_solving_same_problems =>
       'Am I trying to solve the same problem(s) as my groups/teams?';
+
+  @override
+  String get segmented_button_yes => 'Yes';
+
+  @override
+  String get segmented_button_no => 'No';
+
+  @override
+  String get segmented_button_I_don_t_know => 'I don\'t know';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -236,4 +245,13 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_group_perspective_solving_same_problems =>
       'Am I trying to solve the same problem(s) as my groups/teams?';
+
+  @override
+  String get segmented_button_yes => 'Yes';
+
+  @override
+  String get segmented_button_no => 'No';
+
+  @override
+  String get segmented_button_I_don_t_know => 'I don\'t know';
 }
