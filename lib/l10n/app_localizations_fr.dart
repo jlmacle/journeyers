@@ -49,6 +49,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
 
   @override
+  String get ca_process_please_develop_text_field_hint =>
+      'Veuillez développer.';
+
+  @override
   String get ca_process_individual_perspective_title_question =>
       'En tant qu\'individu:\nQuel problème\ndois-je résoudre ?';
 
@@ -141,6 +145,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_past_workplace_outcomes_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
+
+  @override
+  String get ca_process_please_develop_text_field_hint =>
+      'Veuillez développer.';
 
   @override
   String get ca_process_individual_perspective_title_question =>

@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// **'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.'**
   String get ca_process_past_workplace_outcomes_text_field_hint;
 
+  /// The text field hint inviting to develop
+  ///
+  /// In en, this message translates to:
+  /// **'Please develop.'**
+  String get ca_process_please_develop_text_field_hint;
+
   /// The title question for the individual perspective
   ///
   /// In en, this message translates to:

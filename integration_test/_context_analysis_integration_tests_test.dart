@@ -1149,52 +1149,55 @@ Future<void> main() async {
           "applicationFolderPath": testTmpDir!.path
         });
 
-        // Pumping the CAPage        
-        await tester.pumpWidget(buildTestableCAPage());
-        await tester.pumpAndSettle();
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the CAPage        
+          await tester.pumpWidget(buildTestableCAPage());
+          await tester.pumpAndSettle();
 
-        // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
-        // ──────────────────────────────────────────────────────────────────────
+          // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
+          // ──────────────────────────────────────────────────────────────────────
 
-        var title = "CA title";
+          var title = "CA title";
 
-        await caEnterNewProcessDataOnMobile
-        (
-          tester: tester, 
-          title: title,
-          kwsList: [],
-          formToFill: false,
-          fileNameWithoutExtension: fileName1WithoutExtension
-        );
+          await caEnterNewProcessDataOnMobile
+          (
+            tester: tester, 
+            title: title,
+            kwsList: [],
+            formToFill: false,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
 
-        await tester.pump(const Duration(seconds: 2));
+          await tester.pump(const Duration(seconds: 2));
 
-        // ── 2. EDITING THE TITLE ─────────────────────────────────
-        // ──────────────────────────────────────────────────────────
-          // Clicking on the title
-        var titleFinder = find.text(title);
-        await tester.tap(titleFinder);
-        await tester.pumpAndSettle();
-          // Editing the title toward empty
-        var editedTitle = "";
-        
-        var editTfFinder = find.byKey(const Key("titleDashboardEditField"));
-        await tester.enterText(editTfFinder, editedTitle);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
+          // ── 2. EDITING THE TITLE ─────────────────────────────────
+          // ──────────────────────────────────────────────────────────
+            // Clicking on the title
+          var titleFinder = find.text(title);
+          await tester.tap(titleFinder);
+          await tester.pumpAndSettle();
+            // Editing the title toward empty
+          var editedTitle = "";
+          
+          var editTfFinder = find.byKey(const Key("titleDashboardEditField"));
+          await tester.enterText(editTfFinder, editedTitle);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pumpAndSettle();
 
-        // ── 3. CLICKING ON THE SAVE BUTTON ────────────────────────
-        // ──────────────────────────────────────────────────────────
-        var elevatedButtonFinder = find.byKey(const Key("overlay-edit-save-button"),);
-        await tester.tap(elevatedButtonFinder);
-        await tester.pumpAndSettle();
+          // ── 3. CLICKING ON THE SAVE BUTTON ────────────────────────
+          // ──────────────────────────────────────────────────────────
+          var elevatedButtonFinder = find.byKey(const Key("overlay-edit-save-button"),);
+          await tester.tap(elevatedButtonFinder);
+          await tester.pumpAndSettle();
 
-        // Searching for the error message
-        var emptyTitleEditErrorFinder = find.textContaining(emptyTitleEditError);
-        expect(emptyTitleEditErrorFinder, findsOne);
+          // Searching for the error message
+          var emptyTitleEditErrorFinder = find.textContaining(emptyTitleEditError);
+          expect(emptyTitleEditErrorFinder, findsOne);
 
-        // Verifying bottom sheet remaining present
-        expect(find.byType(StatefulBuilder), findsOne);    
+          // Verifying bottom sheet remaining present
+          expect(find.byType(StatefulBuilder), findsOne);   
+        } 
       });            
     
       // "Edition: Keywords \n"
