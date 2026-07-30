@@ -46,5 +46,7 @@
   ,"@ca_process_individual_perspective_legacy_issue_section_question": {"description": "The section question for the legacy issue, in the individual perspective"}
   ,"ca_process_individual_perspective_legacy_better_legacy": "To have a better legacy to leave to my children/others?"
   ,"@ca_process_individual_perspective_legacy_better_legacy": {"description": "The better legacy question, in the individual perspective"}
+  ,"ca_process_individual_perspective_another_issue_section_question": "Is the issue\nof another type?"
+  ,"@ca_process_individual_perspective_another_issue_section_question": {"description": "The section question for an issue of another type, in the individual perspective"}
   
 }
