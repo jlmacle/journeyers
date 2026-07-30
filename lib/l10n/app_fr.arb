@@ -48,5 +48,7 @@
     ,"@ca_process_individual_perspective_legacy_better_legacy": {"description": "La question relative à une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres, pour la perspective individuelle"} 
     ,"ca_process_individual_perspective_another_issue_section_question": "Est-ce un autre type\nde problème ?"
     ,"@ca_process_individual_perspective_another_issue_section_question": {"description": "La question de section relative à un problème d'un autre type, pour la perspective individuelle"}
+    ,"ca_process_group_perspective_title_question":"En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"
+    ,"@ca_process_group_perspective_title_question":  {"description": "La question-titre pour la perspective de groupe"}
 
     }
