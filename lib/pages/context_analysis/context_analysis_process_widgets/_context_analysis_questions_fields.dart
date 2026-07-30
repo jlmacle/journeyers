@@ -36,8 +36,8 @@ class CAQuestionsFields
   String level3TitleLegacyIssueItem1 = "To have a better legacy to leave to my children/others?";
 
   // Heading level 3 without sub items
-  /// Question asked in the form: Is the issue of another type?
-  String level3TitleAnotherIssue = "Is the issue of another type?";
+  /// Question asked in the form: Is The issue Of Another Type?
+  String level3TitleAnotherIssue = "Is The Issue Of Another Type?";
 
 
 
