@@ -24,7 +24,7 @@
     ,"@ca_process_past_workplace_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le lieu de travail et pour le foyer"}  
     ,"ca_process_please_develop_text_field_hint": "Veuillez développer."
     ,"@ca_process_please_develop_text_field_hint": {"description": "Le placeholder du champ de texte, invitant à développer"}  
-    ,"ca_process_individual_perspective_title_question":"En tant qu'individu:\nQuel problème dois-je résoudre ?"
+    ,"ca_process_individual_perspective_title_question":"En tant qu'individu:\nQuel problème\ndois-je résoudre ?"
     ,"@ca_process_individual_perspective_title_question": {"description": "La question-titre pour la perspective individuelle"}
     ,"ca_process_individual_perspective_balance_issue_section_question": "Un problème d'équilibre ?"
     ,"@ca_process_individual_perspective_balance_issue_section_question": {"description": "La question de section relative à un problème d'équilibre, pour la perspective individuelle"}
