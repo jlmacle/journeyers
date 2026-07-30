@@ -92,6 +92,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_process_individual_perspective_legacy_issue_section_question =>
       'Un problème\navec mon histoire de vie ?';
+
+  @override
+  String get ca_process_individual_perspective_legacy_better_legacy =>
+      'Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -182,4 +186,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_individual_perspective_legacy_issue_section_question =>
       'Un problème\navec mon histoire de vie ?';
+
+  @override
+  String get ca_process_individual_perspective_legacy_better_legacy =>
+      'Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?';
 }

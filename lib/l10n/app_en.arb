@@ -42,6 +42,7 @@
   ,"@ca_process_individual_perspective_workplace_to_remain_appreciated": {"description": "The to-remain-appreciated-at-work question, in the individual perspective"} 
   ,"ca_process_individual_perspective_legacy_issue_section_question": "A Legacy Issue?"
   ,"@ca_process_individual_perspective_legacy_issue_section_question": {"description": "The section question for the legacy issue, in the individual perspective"}
-
+  ,"ca_process_individual_perspective_legacy_better_legacy": "To have a better legacy to leave to my children/others?"
+  ,"@ca_process_individual_perspective_legacy_better_legacy": {"description": "The better legacy question, in the individual perspective"}
   
 }

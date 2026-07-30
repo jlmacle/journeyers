@@ -320,7 +320,7 @@ class CAFormState extends State<CAForm>
               ),
               CACheckboxWithSanitizedAndPaddedTextField
               (
-                checkboxText: qf.level3TitleLegacyIssueItem1,
+                checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_legacy_better_legacy ?? "Issue with the better legacy question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBetterLegacies.checked,
                 textFieldStartValue: _dtoCAForm!.indivBetterLegacies.text,
                 textFieldHint: pleaseDevelopHint,
