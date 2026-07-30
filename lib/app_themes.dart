@@ -188,14 +188,10 @@ const TextStyle previewTitleStyle = TextStyle
 // ─── CONTEXT ANALYSIS PAGE RELATED TEXT FIELD HINTS ───────────────────────────────────────
 
 const pleaseDescribeTextHouseholdHint =
-    "Please describe the past outcomes for the household, "
-    "if some seem to have been out of their comfort zone for too long, "
-    "and the more desirable outcomes for the household.";
+    "Please describe the past outcomes for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.";
 
 const pleaseDescribeTextWorkplaceHint =
-    "Please describe the past outcomes for the workplace, "
-    "if some seem to have been out of their comfort zone for too long, "
-    "and the more desirable outcomes for the workplace and for the household.";
+    "Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.";
 
 const pleaseDevelopHint = "Please develop.";
 
