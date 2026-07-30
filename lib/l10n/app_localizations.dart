@@ -160,6 +160,12 @@ abstract class AppLocalizations {
   /// **'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.'**
   String get ca_process_helping_household_text_field_hint;
 
+  /// The text field hint, for the past outcomes for the workplace
+  ///
+  /// In en, this message translates to:
+  /// **'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.'**
+  String get ca_process_past_workplace_outcomes_text_field_hint;
+
   /// The title question for the individual perspective
   ///
   /// In en, this message translates to:
@@ -203,7 +209,7 @@ abstract class AppLocalizations {
   /// **'A Workplace Issue?'**
   String get ca_process_individual_perspective_workplace_issue_section_question;
 
-  /// The more appreciated at work question, in the individual perspective
+  /// The more-appreciated-at-work question, in the individual perspective
   ///
   /// In en, this message translates to:
   /// **'To solve a need to be more appreciated at work?'**

@@ -45,6 +45,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.';
 
   @override
+  String get ca_process_past_workplace_outcomes_text_field_hint =>
+      'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
+
+  @override
   String get ca_process_individual_perspective_title_question =>
       'As an individual:\nWhat problem am I trying to solve?';
 
@@ -120,6 +124,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_helping_household_text_field_hint =>
       'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.';
+
+  @override
+  String get ca_process_past_workplace_outcomes_text_field_hint =>
+      'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
 
   @override
   String get ca_process_individual_perspective_title_question =>
