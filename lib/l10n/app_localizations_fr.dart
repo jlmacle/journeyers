@@ -123,7 +123,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_harmony_home =>
-      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l\'harmonie dans mon foyer ?';
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l\'harmonie dans le foyer ?';
 
   @override
   String get ca_process_group_perspective_appreciability_work =>
@@ -270,7 +270,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_group_perspective_harmony_home =>
-      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l\'harmonie dans mon foyer ?';
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l\'harmonie dans le foyer ?';
 
   @override
   String get ca_process_group_perspective_appreciability_work =>

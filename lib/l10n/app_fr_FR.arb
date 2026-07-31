@@ -56,7 +56,7 @@
     ,"@ca_process_group_perspective_problems": {"description": "La question relative au(x) problème(s) que les groupes/équipe(s) essayent de résoudre"}
     ,"ca_process_group_perspective_solving_same_problems": "Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?"
     ,"@ca_process_group_perspective_solving_same_problems": {"description": "La question relative au fait de résoudre les mêmes problèmes que mes groupes/équipes"}
-    ,"ca_process_group_perspective_harmony_home": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans mon foyer ?"
+    ,"ca_process_group_perspective_harmony_home": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?"
     ,"@ca_process_group_perspective_harmony_home": {"description": "La question relative à la cohérence avec l'harmonie au foyer"}
     ,"ca_process_group_perspective_appreciability_work": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?"
     ,"@ca_process_group_perspective_appreciability_work": {"description": "La question relative à la cohérence avec être apprécié au travail"}
