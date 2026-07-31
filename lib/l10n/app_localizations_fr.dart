@@ -156,6 +156,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_unfilled_analysis_title => 'Sans titre';
+
+  @override
+  String get ca_dashboard_title => 'Analyses précédentes';
+
+  @override
+  String get ca_dashboard_sort_by_title => 'Tri par titre';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -310,4 +316,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_unfilled_analysis_title => 'Sans titre';
+
+  @override
+  String get ca_dashboard_title => 'Analyses précédentes';
+
+  @override
+  String get ca_dashboard_sort_by_title => 'Tri par titre';
 }

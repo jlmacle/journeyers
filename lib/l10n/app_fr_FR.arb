@@ -76,5 +76,9 @@
     ,"@ca_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle analyse de contexte."}
     ,"ca_unfilled_analysis_title": "Sans titre"
     ,"@ca_unfilled_analysis_title": {"description": "La valeur par défaut du titre d'une analyse de contexte"}   
-
+    ,"ca_dashboard_title": "Analyses précédentes"
+    ,"@ca_dashboard_title": {"description": "Le titre du tableau de bord"}
+    ,"ca_dashboard_sort_by_title": "Tri par titre"
+    ,"@ca_dashboard_sort_by_title": {"description": "Le label pour le 'Tri par titre'"}   
+ 
 }

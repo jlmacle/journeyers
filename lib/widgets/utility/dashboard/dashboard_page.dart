@@ -6,6 +6,7 @@ import "package:collection/collection.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_formats_utils.dart";
@@ -323,8 +324,8 @@ class DashboardPageState extends State<DashboardPage>
                 // TODO: the sliver code to clean eventually
 
                 // DASHBOARD TITLE
-                const SliverToBoxAdapter(
-                  child: DashboardTitle(title: dashboardTitle)
+                SliverToBoxAdapter(
+                  child: DashboardTitle(title: AppLocalizations.of(context)?.ca_dashboard_title ?? "Issue with the dashboard title")
                 ),
 
                 // DASHBOARD FILTERING FEATURES
