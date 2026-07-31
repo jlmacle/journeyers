@@ -148,10 +148,10 @@ abstract class AppLocalizations {
   /// **'Please enter keywords\nto describe the analysis.\n(+ Enter key)'**
   String get ca_process_keywords_text_field_hint;
 
-  /// The text field hint, for the past outcomes for the household
+  /// The text field hint, for the past outcomes of the problem for the household
   ///
   /// In en, this message translates to:
-  /// **'Please describe the past outcomes for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.'**
+  /// **'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.'**
   String get ca_process_past_outcomes_text_field_hint;
 
   /// The text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others
@@ -160,10 +160,10 @@ abstract class AppLocalizations {
   /// **'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.'**
   String get ca_process_helping_household_text_field_hint;
 
-  /// The text field hint, for the past outcomes for the workplace
+  /// The text field hint, for the past outcomes of the problem for the workplace
   ///
   /// In en, this message translates to:
-  /// **'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.'**
+  /// **'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.'**
   String get ca_process_past_workplace_outcomes_text_field_hint;
 
   /// The text field hint inviting to develop
