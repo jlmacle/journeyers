@@ -474,7 +474,7 @@ class CAFormState extends State<CAForm>
               // Question about appreciability at work
               CustomHeading
               (
-                headingText: qf.level3TitleAppreciabilityAtWork,
+                headingText: AppLocalizations.of(context)?.ca_process_group_perspective_appreciability_work ?? "Issue with the question related to the consistency with appreciability at work?",
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),

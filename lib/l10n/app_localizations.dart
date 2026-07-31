@@ -269,11 +269,17 @@ abstract class AppLocalizations {
   /// **'Am I trying to solve the same problem(s) as my groups/teams?'**
   String get ca_process_group_perspective_solving_same_problems;
 
-  /// The question related to harmony at home
+  /// The question related to the consistency with harmony at home
   ///
   /// In en, this message translates to:
   /// **'Is entering the group problem-solving process consistent with harmony at home?'**
   String get ca_process_group_perspective_harmony_home;
+
+  /// The question related to the consistency with appreciability at work?
+  ///
+  /// In en, this message translates to:
+  /// **'Is entering the group problem-solving process consistent with appreciability at work?'**
+  String get ca_process_group_perspective_appreciability_work;
 
   /// l10n for Yes
   ///

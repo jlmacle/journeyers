@@ -125,6 +125,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Is entering the group problem-solving process consistent with harmony at home?';
 
   @override
+  String get ca_process_group_perspective_appreciability_work =>
+      'Is entering the group problem-solving process consistent with appreciability at work?';
+
+  @override
   String get segmented_button_yes => 'Yes';
 
   @override
@@ -253,6 +257,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_group_perspective_harmony_home =>
       'Is entering the group problem-solving process consistent with harmony at home?';
+
+  @override
+  String get ca_process_group_perspective_appreciability_work =>
+      'Is entering the group problem-solving process consistent with appreciability at work?';
 
   @override
   String get segmented_button_yes => 'Yes';
