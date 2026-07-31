@@ -260,7 +260,7 @@ abstract class AppLocalizations {
   /// The question for the problem(s) the groups/teams are trying to solve
   ///
   /// In en, this message translates to:
-  /// **'What problem(s)\nare the groups/teams\ntrying to solve?'**
+  /// **'What problem(s)\nare my groups/teams\ntrying to solve?'**
   String get ca_process_group_perspective_problems;
 
   /// The question related to solving the same problem(s) as the groups/teams

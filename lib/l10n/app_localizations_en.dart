@@ -114,7 +114,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_problems =>
-      'What problem(s)\nare the groups/teams\ntrying to solve?';
+      'What problem(s)\nare my groups/teams\ntrying to solve?';
 
   @override
   String get ca_process_group_perspective_solving_same_problems =>
@@ -260,7 +260,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_group_perspective_problems =>
-      'What problem(s)\nare the groups/teams\ntrying to solve?';
+      'What problem(s)\nare my groups/teams\ntrying to solve?';
 
   @override
   String get ca_process_group_perspective_solving_same_problems =>
