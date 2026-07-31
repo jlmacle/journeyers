@@ -115,7 +115,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_problems =>
-      'Quel(s) problème(s)\nvos groupes/équipes\nessayent de résoudre ?';
+      'Quel(s) problème(s)\nnos groupes/équipes\nessayent de résoudre ?';
 
   @override
   String get ca_process_group_perspective_solving_same_problems =>
@@ -262,7 +262,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_group_perspective_problems =>
-      'Quel(s) problème(s)\nvos groupes/équipes\nessayent de résoudre ?';
+      'Quel(s) problème(s)\nnos groupes/équipes\nessayent de résoudre ?';
 
   @override
   String get ca_process_group_perspective_solving_same_problems =>
