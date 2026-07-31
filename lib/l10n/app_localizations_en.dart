@@ -38,7 +38,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
-      'Please describe the past outcomes for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
+      'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
   @override
   String get ca_process_helping_household_text_field_hint =>
@@ -46,7 +46,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_past_workplace_outcomes_text_field_hint =>
-      'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
+      'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
 
   @override
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
@@ -184,7 +184,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
-      'Please describe the past outcomes for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
+      'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
   @override
   String get ca_process_helping_household_text_field_hint =>
@@ -192,7 +192,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_past_workplace_outcomes_text_field_hint =>
-      'Please describe the past outcomes for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
+      'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
 
   @override
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
