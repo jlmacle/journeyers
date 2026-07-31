@@ -60,6 +60,8 @@
     ,"@ca_process_group_perspective_harmony_home": {"description": "La question relative à la cohérence avec l'harmonie au foyer"}
     ,"ca_process_group_perspective_appreciability_work": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?"
     ,"@ca_process_group_perspective_appreciability_work": {"description": "La question relative à la cohérence avec être apprécié au travail"}
+    ,"ca_process_group_perspective_earning_ability": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?"
+    ,"@ca_process_group_perspective_earning_ability": {"description": "La question relative à la cohérence avec la capacité à générer un revenu"}
     ,"segmented_button_yes": "Oui"
     ,"@segmented_button_yes": {"description":"l10n pour Oui"}
     ,"segmented_button_no": "Non"
