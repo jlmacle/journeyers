@@ -24,7 +24,7 @@
     ,"@ca_process_past_workplace_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le lieu de travail et pour le foyer"}  
     ,"ca_process_please_develop_text_field_hint": "Veuillez développer."
     ,"@ca_process_please_develop_text_field_hint": {"description": "Le placeholder du champ de texte, invitant à développer"}  
-    ,"ca_process_please_describe_problems_text_field_hint": "Veuillez décrire le(s) problème(s) que les groupes/équipes essayent de résoudre."
+    ,"ca_process_please_describe_problems_text_field_hint": "Veuillez décrire le(s) problème(s) que vos groupes/équipes essayent de résoudre."
     ,"@ca_process_please_describe_problems_text_field_hint": {"description": "Le placeholder du champ de texte, pour le(s) problème(s) que les groupes/équipes essayent de résoudre."}   
     ,"ca_process_individual_perspective_title_question":"En tant qu'individu:\nQuel problème\ndois-je résoudre ?"
     ,"@ca_process_individual_perspective_title_question": {"description": "La question-titre pour la perspective individuelle"}
@@ -52,7 +52,7 @@
     ,"@ca_process_individual_perspective_another_issue_section_question": {"description": "La question de section relative à un problème d'un autre type, pour la perspective individuelle"}
     ,"ca_process_group_perspective_title_question":"En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"
     ,"@ca_process_group_perspective_title_question":  {"description": "La question-titre pour la perspective de groupe"}
-    ,"ca_process_group_perspective_problems":"Quel(s) problème(s)\nles groupes/équipes\nessayent de résoudre ?"
+    ,"ca_process_group_perspective_problems":"Quel(s) problème(s)\nvos groupes/équipes\nessayent de résoudre ?"
     ,"@ca_process_group_perspective_problems": {"description": "La question relative au(x) problème(s) que les groupes/équipe(s) essayent de résoudre"}
     ,"ca_process_group_perspective_solving_same_problems": "Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?"
     ,"@ca_process_group_perspective_solving_same_problems": {"description": "La question relative au fait de résoudre les mêmes problèmes que mes groupes/équipes"}
