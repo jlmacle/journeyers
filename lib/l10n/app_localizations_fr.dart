@@ -54,7 +54,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_please_describe_problems_text_field_hint =>
-      'Veuillez décrire le(s) problème(s) que les groupes/équipes essayent de résoudre.';
+      'Veuillez décrire le(s) problème(s) que vos groupes/équipes essayent de résoudre.';
 
   @override
   String get ca_process_individual_perspective_title_question =>
@@ -115,7 +115,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_problems =>
-      'Quel(s) problème(s)\nles groupes/équipes\nessayent de résoudre ?';
+      'Quel(s) problème(s)\nvos groupes/équipes\nessayent de résoudre ?';
 
   @override
   String get ca_process_group_perspective_solving_same_problems =>
@@ -201,7 +201,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_please_describe_problems_text_field_hint =>
-      'Veuillez décrire le(s) problème(s) que les groupes/équipes essayent de résoudre.';
+      'Veuillez décrire le(s) problème(s) que vos groupes/équipes essayent de résoudre.';
 
   @override
   String get ca_process_individual_perspective_title_question =>
@@ -262,7 +262,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_group_perspective_problems =>
-      'Quel(s) problème(s)\nles groupes/équipes\nessayent de résoudre ?';
+      'Quel(s) problème(s)\nvos groupes/équipes\nessayent de résoudre ?';
 
   @override
   String get ca_process_group_perspective_solving_same_problems =>
