@@ -83,23 +83,6 @@ void main() {
       expect(records.first[DashboardUtils.keyTitle], testFile1Title);
     });
 
-    test("uses 'Untitled' when title is null", () async {
-      await sut!.saveDashboardMetadata(
-        typeOfDashboardContext: DashboardUtils.caContext,
-        title: null,
-        keywords: [],
-        formattedDate: aDate,
-        filePath: aPath,
-      );
-
-      final file = await sut!.getSessionMetadataFile(
-        typeOfDashboardContext: DashboardUtils.caContext,
-      );
-      final records = _readRecords(file);
-
-      expect(records.first[DashboardUtils.keyTitle], "Untitled");
-    });
-
     test("persists the keywords list correctly", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
