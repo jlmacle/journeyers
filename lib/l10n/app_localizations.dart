@@ -275,13 +275,13 @@ abstract class AppLocalizations {
   /// **'Is entering the group problem-solving process consistent with harmony at home?'**
   String get ca_process_group_perspective_harmony_home;
 
-  /// The question related to the consistency with appreciability at work?
+  /// The question related to the consistency with appreciability at work
   ///
   /// In en, this message translates to:
   /// **'Is entering the group problem-solving process consistent with appreciability at work?'**
   String get ca_process_group_perspective_appreciability_work;
 
-  /// The question related to the consistency with earning ability?
+  /// The question related to the consistency with earning ability
   ///
   /// In en, this message translates to:
   /// **'Is entering the group problem-solving process consistent with my income earning ability?'**
@@ -304,6 +304,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I don\'t know'**
   String get segmented_button_I_don_t_know;
+
+  /// Label for folder selection/creation, for app storage
+  ///
+  /// In en, this message translates to:
+  /// **'Please select or create a folder\nfor app storage.'**
+  String get folder_picker_on_android_mobile;
 }
 
 class _AppLocalizationsDelegate

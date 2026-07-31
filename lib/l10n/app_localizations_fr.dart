@@ -141,6 +141,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get segmented_button_I_don_t_know => 'Je ne sais pas';
+
+  @override
+  String get folder_picker_on_android_mobile =>
+      'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -280,4 +284,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get segmented_button_I_don_t_know => 'Je ne sais pas';
+
+  @override
+  String get folder_picker_on_android_mobile =>
+      'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 }

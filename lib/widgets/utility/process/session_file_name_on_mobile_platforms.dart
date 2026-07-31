@@ -7,6 +7,7 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart" as tfu_gen;
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart";
@@ -146,7 +147,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
         textAlign: TextAlign.center, 
         Platform.isIOS 
         ? labelFolderPickerIOS  
-        : labelFolderPickerAndroid
+        : AppLocalizations.of(context)?.folder_picker_on_android_mobile ?? "Issue with the label for folder selection/creation, for app storage",
       ),
     )
     // Text field used to enter the file name
