@@ -68,8 +68,8 @@
   ,"@segmented_button_no": {"description":"l10n for No"}
   ,"segmented_button_I_don_t_know": "I don't know"
   ,"@segmented_button_I_don_t_know": {"description":"l10n for I don't know"}
-  ,"folder_picker_on_android_mobile": "Please select or create a folder\nfor app storage."
-  ,"@folder_picker_on_android_mobile": {"description":"Label for folder selection/creation, for app storage"}
+  ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
+  ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
 
 
   }
