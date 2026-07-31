@@ -74,5 +74,7 @@
   ,"@file_name_process_text_field_hint": {"description": "The text field hint inviting to add a file name without extension"}   
   ,"ca_new_process_button": "Please click to start\na new context analysis."
   ,"@ca_new_process_button": {"description": "The text inviting to click to start a new context analysis."}   
+  ,"ca_unfilled_analysis_title": "Untitled"
+  ,"@ca_unfilled_analysis_title": {"description": "The default title value for a context analysis"}   
   
 }

@@ -153,6 +153,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get ca_new_process_button =>
       'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Sans titre';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -304,4 +307,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_new_process_button =>
       'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Sans titre';
 }

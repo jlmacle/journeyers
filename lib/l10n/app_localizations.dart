@@ -322,6 +322,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please click to start\na new context analysis.'**
   String get ca_new_process_button;
+
+  /// The default title value for a context analysis
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled'**
+  String get ca_unfilled_analysis_title;
 }
 
 class _AppLocalizationsDelegate

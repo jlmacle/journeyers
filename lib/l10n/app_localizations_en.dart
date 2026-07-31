@@ -152,6 +152,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_new_process_button =>
       'Please click to start\na new context analysis.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Untitled';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -302,4 +305,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_new_process_button =>
       'Please click to start\na new context analysis.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Untitled';
 }
