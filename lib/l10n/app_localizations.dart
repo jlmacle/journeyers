@@ -328,6 +328,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Untitled'**
   String get ca_unfilled_analysis_title;
+
+  /// The dashboard title
+  ///
+  /// In en, this message translates to:
+  /// **'Previous analyses'**
+  String get ca_dashboard_title;
+
+  /// The 'Sort by Title' label
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by Title'**
+  String get ca_dashboard_sort_by_title;
 }
 
 class _AppLocalizationsDelegate

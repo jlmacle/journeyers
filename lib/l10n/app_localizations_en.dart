@@ -155,6 +155,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_unfilled_analysis_title => 'Untitled';
+
+  @override
+  String get ca_dashboard_title => 'Previous analyses';
+
+  @override
+  String get ca_dashboard_sort_by_title => 'Sort by Title';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -308,4 +314,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_unfilled_analysis_title => 'Untitled';
+
+  @override
+  String get ca_dashboard_title => 'Previous analyses';
+
+  @override
+  String get ca_dashboard_sort_by_title => 'Sort by Title';
 }
