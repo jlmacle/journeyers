@@ -57,7 +57,9 @@
   ,"ca_process_group_perspective_solving_same_problems": "Am I trying to solve the same problem(s) as my groups/teams?"
   ,"@ca_process_group_perspective_solving_same_problems": {"description": "The question related to solving the same problem(s) as the groups/teams"}
   ,"ca_process_group_perspective_harmony_home": "Is entering the group problem-solving process consistent with harmony at home?"
-  ,"@ca_process_group_perspective_harmony_home": {"description": "The question related to harmony at home"}
+  ,"@ca_process_group_perspective_harmony_home": {"description": "The question related to the consistency with harmony at home"}
+  ,"ca_process_group_perspective_appreciability_work": "Is entering the group problem-solving process consistent with appreciability at work?"
+  ,"@ca_process_group_perspective_appreciability_work": {"description": "The question related to the consistency with appreciability at work?"}
   ,"segmented_button_yes": "Yes"
   ,"@segmented_button_yes": {"description":"l10n for Yes"}
   ,"segmented_button_no": "No"
