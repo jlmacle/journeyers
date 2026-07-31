@@ -176,7 +176,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please describe the problem(s) that the groups/teams are trying to solve.'**
-  String get ca_process_please_describe_problems_field_hint;
+  String get ca_process_please_describe_problems_text_field_hint;
 
   /// The title question for the individual perspective
   ///
@@ -310,6 +310,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please select or create a folder\nfor app storage.'**
   String get folder_picker_on_mobile;
+
+  /// The text field hint inviting to add a file name without extension
+  ///
+  /// In en, this message translates to:
+  /// **'Please add the file name, without .'**
+  String get file_name_process_text_field_hint;
 }
 
 class _AppLocalizationsDelegate

@@ -52,7 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
 
   @override
-  String get ca_process_please_describe_problems_field_hint =>
+  String get ca_process_please_describe_problems_text_field_hint =>
       'Please describe the problem(s) that the groups/teams are trying to solve.';
 
   @override
@@ -144,6 +144,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
+
+  @override
+  String get file_name_process_text_field_hint =>
+      'Please add the file name, without .';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -194,7 +198,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
 
   @override
-  String get ca_process_please_describe_problems_field_hint =>
+  String get ca_process_please_describe_problems_text_field_hint =>
       'Please describe the problem(s) that the groups/teams are trying to solve.';
 
   @override
@@ -286,4 +290,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
+
+  @override
+  String get file_name_process_text_field_hint =>
+      'Please add the file name, without .';
 }

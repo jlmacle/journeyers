@@ -53,7 +53,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez développer.';
 
   @override
-  String get ca_process_please_describe_problems_field_hint =>
+  String get ca_process_please_describe_problems_text_field_hint =>
       'Veuillez décrire le(s) problème(s) que les groupes/équipes essayent de résoudre.';
 
   @override
@@ -145,6 +145,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get folder_picker_on_mobile =>
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
+
+  @override
+  String get file_name_process_text_field_hint =>
+      'Veuillez entrer un nom de fichier, sans .';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -196,7 +200,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez développer.';
 
   @override
-  String get ca_process_please_describe_problems_field_hint =>
+  String get ca_process_please_describe_problems_text_field_hint =>
       'Veuillez décrire le(s) problème(s) que les groupes/équipes essayent de résoudre.';
 
   @override
@@ -288,4 +292,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get folder_picker_on_mobile =>
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
+
+  @override
+  String get file_name_process_text_field_hint =>
+      'Veuillez entrer un nom de fichier, sans .';
 }
