@@ -133,7 +133,7 @@ class CAFormState extends State<CAForm>
   { 
     // Updating analysis title, keywords, and file name
     _analysisTitle = caProcessKey.currentState!.analysisTitle.trim() == "" 
-                      ? "Untitled" : caProcessKey.currentState!.analysisTitle.trim();
+                      ?  AppLocalizations.of(context)?.ca_unfilled_analysis_title ?? "Issue with the default title value for a context analysis" : caProcessKey.currentState!.analysisTitle.trim();
     _keywords = caProcessKey.currentState!.analysisKeywords;
     _fileName = caProcessKey.currentState!.analysisFileName;
 

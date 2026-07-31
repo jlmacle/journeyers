@@ -74,6 +74,7 @@
     ,"@file_name_process_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
     ,"ca_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte."
     ,"@ca_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle analyse de contexte."}
-  
+    ,"ca_unfilled_analysis_title": "Sans titre"
+    ,"@ca_unfilled_analysis_title": {"description": "La valeur par défaut du titre d'une analyse de contexte"}   
 
 }
