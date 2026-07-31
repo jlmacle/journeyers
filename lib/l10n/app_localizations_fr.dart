@@ -34,7 +34,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner des mots-clés\npour cette analyse.';
+      'Veuillez renseigner des mots-clés\npour cette analyse.\n(+ Touche Entrée)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -181,7 +181,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner des mots-clés\npour cette analyse.';
+      'Veuillez renseigner des mots-clés\npour cette analyse.\n(+ Touche Entrée)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>

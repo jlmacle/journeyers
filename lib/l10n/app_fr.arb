@@ -14,7 +14,7 @@
     "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
     "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"},
-    "ca_process_keywords_text_field_hint": "Veuillez renseigner des mots-clés\npour cette analyse.",
+    "ca_process_keywords_text_field_hint": "Veuillez renseigner des mots-clés\npour cette analyse.\n(+ Touche Entrée)",
     "@ca_process_keywords_text_field_hint": {"description": "Le placeholder du champ de texte, pour les mots-clés du processus d'analyse de contexte"}
     ,"ca_process_past_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer."
     ,"@ca_process_past_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le foyer"}
