@@ -80,7 +80,9 @@
   ,"@ca_dashboard_title": {"description": "The dashboard title"}   
   ,"ca_dashboard_sort_by_title": "Sort by Title"
   ,"@ca_dashboard_sort_by_title": {"description": "The 'Sort by Title' label"}
-
+  ,"ca_dashboard_sort_by_date": "Sort by Date"
+  ,"@ca_dashboard_sort_by_date": {"description": "The 'Sort by Date' label"}
+ 
 
 
 }
