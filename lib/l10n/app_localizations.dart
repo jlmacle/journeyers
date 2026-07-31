@@ -316,6 +316,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please add the file name, without .'**
   String get file_name_process_text_field_hint;
+
+  /// The text inviting to click to start a new context analysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to start\na new context analysis.'**
+  String get ca_new_process_button;
 }
 
 class _AppLocalizationsDelegate

@@ -148,6 +148,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get file_name_process_text_field_hint =>
       'Please add the file name, without .';
+
+  @override
+  String get ca_new_process_button =>
+      'Please click to start\na new context analysis.';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -294,4 +298,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get file_name_process_text_field_hint =>
       'Please add the file name, without .';
+
+  @override
+  String get ca_new_process_button =>
+      'Please click to start\na new context analysis.';
 }

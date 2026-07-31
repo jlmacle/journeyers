@@ -227,7 +227,7 @@ class CAPageState extends State<CAPage>
               NewProcessButton
               ( 
                 dashboardContext: DashboardUtils.caContext, 
-                buttonText: "Please click to start\na new context analysis.",
+                buttonText: AppLocalizations.of(context)?.ca_new_process_button ?? "Issue with the text inviting to click to start a new context analysis.",
                 onNewProcessButtonPressedCAPageCallbackFunction: 
                 () 
                 {

@@ -72,5 +72,7 @@
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
   ,"file_name_process_text_field_hint": "Please add the file name, without ."
   ,"@file_name_process_text_field_hint": {"description": "The text field hint inviting to add a file name without extension"}   
- 
-  }
+  ,"ca_new_process_button": "Please click to start\na new context analysis."
+  ,"@ca_new_process_button": {"description": "The text inviting to click to start a new context analysis."}   
+  
+}
