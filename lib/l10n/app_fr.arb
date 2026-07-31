@@ -68,7 +68,7 @@
     ,"@segmented_button_no": {"description":"l10n pour Non"}
     ,"segmented_button_I_don_t_know": "Je ne sais pas"
     ,"@segmented_button_I_don_t_know": {"description":"l10n pour Je ne sais pas"}
-    ,"folder_picker_on_android_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
-    ,"@folder_picker_on_android_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
+    ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
+    ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
 
 }

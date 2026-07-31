@@ -309,7 +309,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please select or create a folder\nfor app storage.'**
-  String get folder_picker_on_android_mobile;
+  String get folder_picker_on_mobile;
 }
 
 class _AppLocalizationsDelegate

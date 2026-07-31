@@ -145,9 +145,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       child: Text
       (
         textAlign: TextAlign.center, 
-        Platform.isIOS 
-        ? labelFolderPickerIOS  
-        : AppLocalizations.of(context)?.folder_picker_on_android_mobile ?? "Issue with the label for folder selection/creation, for app storage",
+        AppLocalizations.of(context)?.folder_picker_on_mobile ?? "Issue with the label for folder selection/creation, for app storage",
       ),
     )
     // Text field used to enter the file name

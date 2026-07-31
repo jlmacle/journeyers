@@ -142,7 +142,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get segmented_button_I_don_t_know => 'I don\'t know';
 
   @override
-  String get folder_picker_on_android_mobile =>
+  String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
 }
 
@@ -284,6 +284,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get segmented_button_I_don_t_know => 'I don\'t know';
 
   @override
-  String get folder_picker_on_android_mobile =>
+  String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
 }
