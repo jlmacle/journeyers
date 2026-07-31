@@ -162,6 +162,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_dashboard_sort_by_title => 'Tri par titre';
+
+  @override
+  String get ca_dashboard_sort_by_date => 'Tri par date';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -322,4 +325,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_dashboard_sort_by_title => 'Tri par titre';
+
+  @override
+  String get ca_dashboard_sort_by_date => 'Tri par date';
 }

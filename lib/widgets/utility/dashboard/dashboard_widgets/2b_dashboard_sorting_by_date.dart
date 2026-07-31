@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
-import "package:journeyers/debug_constants.dart";
 
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
@@ -65,10 +65,10 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
         _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
         color: Colors.black,
       ),
-      label: const Text
+      label: Text
       (
-        sortByDate,
-        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+        AppLocalizations.of(context)?.ca_dashboard_sort_by_date ?? "Issue with the 'Sort by Date' label",
+        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
     );
   }

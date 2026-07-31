@@ -80,4 +80,7 @@
     ,"@ca_dashboard_title": {"description": "Le titre du tableau de bord"} 
     ,"ca_dashboard_sort_by_title": "Tri par titre"
     ,"@ca_dashboard_sort_by_title": {"description": "Le label pour le 'Tri par titre'"}   
- }
+    ,"ca_dashboard_sort_by_date": "Tri par date"
+    ,"@ca_dashboard_sort_by_date": {"description": "Le label pour le 'Tri par date'"}   
+ 
+}

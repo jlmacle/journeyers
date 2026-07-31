@@ -340,6 +340,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sort by Title'**
   String get ca_dashboard_sort_by_title;
+
+  /// The 'Sort by Date' label
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by Date'**
+  String get ca_dashboard_sort_by_date;
 }
 
 class _AppLocalizationsDelegate
