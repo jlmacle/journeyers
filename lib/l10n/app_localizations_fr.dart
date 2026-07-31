@@ -149,6 +149,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get file_name_process_text_field_hint =>
       'Veuillez entrer un nom de fichier, sans .';
+
+  @override
+  String get ca_new_process_button =>
+      'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -296,4 +300,8 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get file_name_process_text_field_hint =>
       'Veuillez entrer un nom de fichier, sans .';
+
+  @override
+  String get ca_new_process_button =>
+      'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
 }

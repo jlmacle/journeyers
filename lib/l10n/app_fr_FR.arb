@@ -72,6 +72,8 @@
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
     ,"file_name_process_text_field_hint": "Veuillez entrer un nom de fichier, sans ."
     ,"@file_name_process_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
- 
+    ,"ca_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte."
+    ,"@ca_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle analyse de contexte."}
+  
 
 }
