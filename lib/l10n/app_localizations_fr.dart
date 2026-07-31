@@ -130,6 +130,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?';
 
   @override
+  String get ca_process_group_perspective_earning_ability =>
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
+
+  @override
   String get segmented_button_yes => 'Oui';
 
   @override
@@ -263,6 +267,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_group_perspective_appreciability_work =>
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?';
+
+  @override
+  String get ca_process_group_perspective_earning_ability =>
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
 
   @override
   String get segmented_button_yes => 'Oui';

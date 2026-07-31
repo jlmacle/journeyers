@@ -500,7 +500,7 @@ class CAFormState extends State<CAForm>
               // Question about the earning ability
               CustomHeading
               (
-                headingText: qf.level3TitleIncomeEarningAbility,
+                headingText: AppLocalizations.of(context)?.ca_process_group_perspective_earning_ability ?? "Issue with the question related to the consistency with earning ability?",
                 headingLevel: 3,
               ),
               const Gap(level3AndSegmentedButtonGap),

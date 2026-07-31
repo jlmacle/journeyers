@@ -281,6 +281,12 @@ abstract class AppLocalizations {
   /// **'Is entering the group problem-solving process consistent with appreciability at work?'**
   String get ca_process_group_perspective_appreciability_work;
 
+  /// The question related to the consistency with earning ability?
+  ///
+  /// In en, this message translates to:
+  /// **'Is entering the group problem-solving process consistent with my income earning ability?'**
+  String get ca_process_group_perspective_earning_ability;
+
   /// l10n for Yes
   ///
   /// In en, this message translates to:
