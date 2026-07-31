@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2a_dashboard_sorting_by_title.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2b_dashboard_sorting_by_date.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart";
@@ -95,12 +95,12 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                   ),
                 ],
               ),              
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text // TODO: to move
                 (
-                  filterByKeywordsLabel, 
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
+                  AppLocalizations.of(context)?.ca_dashboard_filter_by_keywords ?? "Issue with the 'Filter by Keywords' label",
+                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
                 ),
               ),
             ],

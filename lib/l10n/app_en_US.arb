@@ -82,5 +82,7 @@
   ,"@ca_dashboard_sort_by_title": {"description": "The 'Sort by Title' label"}
   ,"ca_dashboard_sort_by_date": "Sort by Date"
   ,"@ca_dashboard_sort_by_date": {"description": "The 'Sort by Date' label"}
- 
+  ,"ca_dashboard_filter_by_keywords": "Filter by Keywords"
+  ,"@ca_dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
+
 }
