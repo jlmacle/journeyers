@@ -154,7 +154,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       textFieldStartValue: widget.fileNameWithoutExtensionWhenEdition,
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
-      textFieldHint: "Please add the file name, without ${widget.fileExtension}, here.", 
+      textFieldHint: "${AppLocalizations.of(context)?.file_name_process_text_field_hint ?? "Issue with the text field hint inviting to add a file name without extension"}${widget.fileExtension}", 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
       onTextFieldValueSubmittedCallbackFunction: (value) async
