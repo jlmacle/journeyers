@@ -164,6 +164,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_dashboard_sort_by_date => 'Sort by Date';
+
+  @override
+  String get ca_dashboard_filter_by_keywords => 'Filter by Keywords';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -326,4 +329,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_dashboard_sort_by_date => 'Sort by Date';
+
+  @override
+  String get ca_dashboard_filter_by_keywords => 'Filter by Keywords';
 }

@@ -346,6 +346,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sort by Date'**
   String get ca_dashboard_sort_by_date;
+
+  /// The 'Filter by Keywords' label
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Keywords'**
+  String get ca_dashboard_filter_by_keywords;
 }
 
 class _AppLocalizationsDelegate
