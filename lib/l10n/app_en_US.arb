@@ -84,5 +84,6 @@
   ,"@ca_dashboard_sort_by_date": {"description": "The 'Sort by Date' label"}
   ,"ca_dashboard_filter_by_keywords": "Filter by Keywords"
   ,"@ca_dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
-
+  ,"ca_dashboard_keywords": "Keywords: "
+  ,"@ca_dashboard_keywords": {"description": "l10n for Keywords"}
 }

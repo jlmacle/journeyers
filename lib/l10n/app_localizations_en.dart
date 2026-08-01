@@ -167,6 +167,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_dashboard_filter_by_keywords => 'Filter by Keywords';
+
+  @override
+  String get ca_dashboard_keywords => 'Keywords: ';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -332,4 +335,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_dashboard_filter_by_keywords => 'Filter by Keywords';
+
+  @override
+  String get ca_dashboard_keywords => 'Keywords: ';
 }
