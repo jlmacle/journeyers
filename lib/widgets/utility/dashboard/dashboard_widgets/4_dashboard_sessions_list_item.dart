@@ -12,6 +12,7 @@ import "package:share_plus/share_plus.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
@@ -318,7 +319,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           onKeywordsUpdated: _onKeywordsUpdated
                           ),
                         child: Text(
-                          "Keywords: ${sortedKeywords.join(", ")}",
+                          "${AppLocalizations.of(context)?.ca_dashboard_keywords ?? "Issue with the 'Keywords' label"}${sortedKeywords.join(", ")}",
                           key: Key("session-keywords-${widget.sessionDataIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),

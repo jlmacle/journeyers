@@ -352,6 +352,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Filter by Keywords'**
   String get ca_dashboard_filter_by_keywords;
+
+  /// The 'Keywords' label
+  ///
+  /// In en, this message translates to:
+  /// **'Keywords: '**
+  String get ca_dashboard_keywords;
 }
 
 class _AppLocalizationsDelegate

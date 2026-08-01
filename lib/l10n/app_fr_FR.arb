@@ -84,5 +84,6 @@
     ,"@ca_dashboard_sort_by_date": {"description": "Le label pour le 'Tri par date'"}   
     ,"ca_dashboard_filter_by_keywords": "Filtrage par mots-clés"
     ,"@ca_dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
-
+    ,"ca_dashboard_keywords": "Mots-clés: "
+    ,"@ca_dashboard_keywords": {"description": "l10n pour Mots-clés"}
 }
