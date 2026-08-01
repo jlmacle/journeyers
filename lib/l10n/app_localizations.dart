@@ -353,7 +353,7 @@ abstract class AppLocalizations {
   /// **'Filter by Keywords'**
   String get ca_dashboard_filter_by_keywords;
 
-  /// The 'Keywords' label
+  /// l10n for Keywords
   ///
   /// In en, this message translates to:
   /// **'Keywords: '**

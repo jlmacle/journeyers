@@ -171,9 +171,10 @@ class CAFormState extends State<CAForm>
     { 
       // Date
       var now = DateTime.now();
+      var languageCode = (Localizations.localeOf(context)).languageCode;
       //.add_jm() to add this hour:minutes format: 5:08 PM
-      var formatter = DateFormat("MMMM dd, yyyy").add_jm();
-      var formattedDate = formatter.format(now);   
+      var formatter = DateFormat.yMMMMd(languageCode).add_jm();
+      var formattedDate = formatter.format(now); 
       await du.saveDashboardMetadata
       (
         typeOfDashboardContext: DashboardUtils.caContext, 
