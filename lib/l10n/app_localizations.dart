@@ -377,6 +377,12 @@ abstract class AppLocalizations {
   /// **'Edit Keywords'**
   String get ca_dashboard_tooltip_edit_keywords;
 
+  /// l10n for the 'Delete selected items' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected items'**
+  String get ca_dashboard_tooltip_delete;
+
   /// l10n for Notes:
   ///
   /// In en, this message translates to:
