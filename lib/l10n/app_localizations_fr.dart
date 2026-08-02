@@ -176,6 +176,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ca_dashboard_tooltip_preview => 'Aperçu';
 
   @override
+  String get ca_dashboard_tooltip_edit => 'Éditer l\'analyse';
+
+  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -356,6 +359,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_dashboard_tooltip_preview => 'Aperçu';
+
+  @override
+  String get ca_dashboard_tooltip_edit => 'Éditer l\'analyse';
 
   @override
   String get ca_preview_notes => 'Notes: ';

@@ -88,6 +88,8 @@
     ,"@ca_dashboard_keywords": {"description": "l10n pour Mots-clés"}
     ,"ca_dashboard_tooltip_preview": "Aperçu"
     ,"@ca_dashboard_tooltip_preview": {"description": "l10n pour l'infobulle d'aperçu"} 
+    ,"ca_dashboard_tooltip_edit": "Éditer l'analyse"
+    ,"@ca_dashboard_tooltip_edit": {"description": "l10n pour l'infobulle 'Éditer l'analyse'"}
     ,"ca_preview_notes": "Notes: "
     ,"@ca_preview_notes": {"description": "l10n pour Notes:"}
     ,"ca_preview_answers": "Réponse(s): "
