@@ -369,7 +369,13 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Edit session data'**
-  String get ca_dashboard_tooltip_edit;
+  String get ca_dashboard_tooltip_edit_session_data;
+
+  /// l10n for the 'Edit Keywords' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Keywords'**
+  String get ca_dashboard_tooltip_edit_keywords;
 
   /// l10n for Notes:
   ///
