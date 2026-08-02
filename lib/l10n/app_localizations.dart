@@ -365,6 +365,12 @@ abstract class AppLocalizations {
   /// **'Preview'**
   String get ca_dashboard_tooltip_preview;
 
+  /// l10n for the 'Edit session data' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Edit session data'**
+  String get ca_dashboard_tooltip_edit;
+
   /// l10n for Notes:
   ///
   /// In en, this message translates to:
