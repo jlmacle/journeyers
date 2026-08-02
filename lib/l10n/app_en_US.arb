@@ -88,8 +88,10 @@
   ,"@ca_dashboard_keywords": {"description": "l10n for Keywords"}
   ,"ca_dashboard_tooltip_preview": "Preview"
   ,"@ca_dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
-  ,"ca_dashboard_tooltip_edit": "Edit session data"
-  ,"@ca_dashboard_tooltip_edit": {"description": "l10n for the 'Edit session data' tooltip"}
+  ,"ca_dashboard_tooltip_edit_session_data": "Edit session data"
+  ,"@ca_dashboard_tooltip_edit_session_data": {"description": "l10n for the 'Edit session data' tooltip"}
+  ,"ca_dashboard_tooltip_edit_keywords": "Edit Keywords"
+  ,"@ca_dashboard_tooltip_edit_keywords": {"description": "l10n for the 'Edit Keywords' tooltip"}
   ,"ca_preview_notes": "Notes: "
   ,"@ca_preview_notes": {"description": "l10n for Notes:"}
   ,"ca_preview_answers": "Answer(s): "
