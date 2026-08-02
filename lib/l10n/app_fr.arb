@@ -86,4 +86,11 @@
     ,"@ca_dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
     ,"ca_dashboard_keywords": "Mots-clés: "
     ,"@ca_dashboard_keywords": {"description": "l10n pour Mots-clés"}
+    ,"ca_preview_notes": "Notes: "
+    ,"@ca_preview_notes": {"description": "l10n pour Notes:"}
+    ,"ca_preview_answers": "Réponse(s): "
+    ,"@ca_preview_answers": {"description": "l10n pour Réponse(s): "}
+    ,"ca_preview_no_data_stored": "Cases non cochées et pas de réponse dans le dernier champ de texte."
+    ,"@ca_preview_no_data_stored": {"description": "l10n pour 'Cases non cochées et pas de réponse dans le dernier champ de texte.'"}
+ 
 }

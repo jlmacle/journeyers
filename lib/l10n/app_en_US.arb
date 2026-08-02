@@ -86,4 +86,12 @@
   ,"@ca_dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
   ,"ca_dashboard_keywords": "Keywords: "
   ,"@ca_dashboard_keywords": {"description": "l10n for Keywords"}
+  ,"ca_preview_notes": "Notes: "
+  ,"@ca_preview_notes": {"description": "l10n for Notes:"}
+  ,"ca_preview_answers": "Answer(s): "
+  ,"@ca_preview_answers": {"description": "l10n for Answer(s): "}
+  ,"ca_preview_no_data_stored": "No question checked and no data in the last text field."
+  ,"@ca_preview_no_data_stored": {"description": "l10n for 'No question checked and no data in the last text field.'"}
+ 
+  
 }

@@ -10,13 +10,14 @@ import "package:file_picker/file_picker.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/ca_questions_fields_localized.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
-import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
+import "package:journeyers/utils/string/string_utils.dart";
 
 /// {@category Context analysis}
 /// A DTO for the context analysis form widget.
@@ -74,39 +75,41 @@ class DTOCAForm
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
   /// Method used to gather the form data into a LinkedHashMap.
   Future<LinkedHashMap<String, Object> > dataStructureBuilding(BuildContext context) async {
+  CAQuestionsFieldsLocalized? qfl = .new(context);
+  
   final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
 
   // Individual perspective
   final individualData = LinkedHashMap<String, Object>.from
   ({
-      qf.level2TitleIndividual: 
+     lineReturnToSpace(lineReturnToSpace(qfl.level2TitleIndividual)): 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        qf.level3TitleBalanceIssue: 
+        lineReturnToSpace(qfl.level3TitleBalanceIssue): 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          qf.level3TitleBalanceIssueItem1:  await _checkboxDataToMap(indivBalanceStudiesHousehold),
-          qf.level3TitleBalanceIssueItem2:  await _checkboxDataToMap(indivBalanceAccessingIncomeHousehold),
-          qf.level3TitleBalanceIssueItem3:  await _checkboxDataToMap(indivBalanceEarningIncomeHousehold),
-          qf.level3TitleBalanceIssueItem4:  await _checkboxDataToMap(indivBalanceHelpingOthersHousehold),
+          lineReturnToSpace(qfl.level3TitleBalanceIssueItem1):  await _checkboxDataToMap(context, indivBalanceStudiesHousehold),
+          lineReturnToSpace(qfl.level3TitleBalanceIssueItem2):  await _checkboxDataToMap(context, indivBalanceAccessingIncomeHousehold),
+          lineReturnToSpace(qfl.level3TitleBalanceIssueItem3):  await _checkboxDataToMap(context, indivBalanceEarningIncomeHousehold),
+          lineReturnToSpace(qfl.level3TitleBalanceIssueItem4):  await _checkboxDataToMap(context, indivBalanceHelpingOthersHousehold),
         }),
 
-        qf.level3TitleWorkplaceIssue: 
+        lineReturnToSpace(qfl.level3TitleWorkplaceIssue): 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          qf.level3TitleWorkplaceIssueItem1:  await _checkboxDataToMap(indivAtWorkMoreAppreciated),
-          qf.level3TitleWorkplaceIssueItem2:  await _checkboxDataToMap(indivAtWorkRemainingAppreciated),
+          lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem1):  await _checkboxDataToMap(context, indivAtWorkMoreAppreciated),
+          lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem2):  await _checkboxDataToMap(context, indivAtWorkRemainingAppreciated),
         }),
 
-        qf.level3TitleLegacyIssue: 
+        lineReturnToSpace(qfl.level3TitleLegacyIssue): 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          qf.level3TitleLegacyIssueItem1:  await _checkboxDataToMap(indivBetterLegacies),
+          lineReturnToSpace(qfl.level3TitleLegacyIssueItem1):  await _checkboxDataToMap(context, indivBetterLegacies),
         }),
         
-        qf.level3TitleAnotherIssue: LinkedHashMap<String, Object>.from
+        lineReturnToSpace(qfl.level3TitleAnotherIssue): LinkedHashMap<String, Object>.from
         ({
-          qf.labelTextField: indivAnotherIssueStr,
+          lineReturnToSpace(qfl.labelTextField): indivAnotherIssueStr,
         }),
       }),
     });
@@ -114,18 +117,18 @@ class DTOCAForm
     // Groups/teams perspective
   final groupData = LinkedHashMap<String, Object>.from
     ({
-      qf.level2TitleGroup: 
+      lineReturnToSpace(qfl.level2TitleGroup): 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        qf.level3TitleGroupsProblematics: LinkedHashMap<String, Object>.from({qf.labelTextField: groupProblemsToSolveStr}),
+        lineReturnToSpace(qfl.level3TitleGroupsProblematics): LinkedHashMap<String, Object>.from({lineReturnToSpace(qfl.labelTextField): groupProblemsToSolveStr}),
 
-        qf.level3TitleSameProblem:          await _segmentedDataToMap(groupSameProblemsToSolve),
+        lineReturnToSpace(qfl.level3TitleSameProblem):          await _segmentedDataToMap(context, groupSameProblemsToSolve),
 
-        qf.level3TitleHarmonyAtHome:        await _segmentedDataToMap(groupHarmonyHome),
+        lineReturnToSpace(qfl.level3TitleHarmonyAtHome):        await _segmentedDataToMap(context, groupHarmonyHome),
 
-        qf.level3TitleAppreciabilityAtWork: await _segmentedDataToMap(groupAppreciabilityAtWork),
+        lineReturnToSpace(qfl.level3TitleAppreciabilityAtWork): await _segmentedDataToMap(context, groupAppreciabilityAtWork),
 
-        qf.level3TitleIncomeEarningAbility: await _segmentedDataToMap(groupEarningAbility),
+        lineReturnToSpace(qfl.level3TitleIncomeEarningAbility): await _segmentedDataToMap(context, groupEarningAbility),
       }),
     });
 
@@ -145,22 +148,30 @@ class DTOCAForm
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : HELPER METHODS: beginning ───────────────────────────────────────
   // Converts a [DTOCheckboxWithTextField] to the standard [LinkedHashMap] wire format.
   // The text value is omitted (left empty) when the checkbox is unchecked.
-  Future<LinkedHashMap<String, String>> _checkboxDataToMap(DTOCheckboxWithTextField f) async
+  Future<LinkedHashMap<String, String>> _checkboxDataToMap(BuildContext context, DTOCheckboxWithTextField f) async
+  {
+      CAQuestionsFieldsLocalized? qfl = .new(context);
 
-    =>  LinkedHashMap<String, String>.from({
-        qf.labelCheckbox:  "${f.checked}",
-        qf.labelTextField: f.checked ? f.text : "",
+      return LinkedHashMap<String, String>.from({
+        lineReturnToSpace(qfl.labelCheckbox):  "${f.checked}",
+        lineReturnToSpace(qfl.labelTextField): f.checked ? f.text : "",
       });
+
+  }
 
   // Converts a [DTOSegmentedButtonWithTextField] to the standard [LinkedHashMap] wire format.
   // Both values are omitted (left empty) when nothing is selected.
-  Future<LinkedHashMap<String, String>> _segmentedDataToMap(DTOSegmentedButtonWithTextField f) async =>
-      LinkedHashMap<String, String>.from({
-        // Sorting the options before saving
-        qf.labelSegmentedButton: f.selection.isNotEmpty ? 
-                                        _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : "",
-        qf.labelTextField:       f.selection.isNotEmpty ? f.text : "",
-        });
+  Future<LinkedHashMap<String, String>> _segmentedDataToMap(BuildContext context, DTOSegmentedButtonWithTextField f) async 
+  {
+    CAQuestionsFieldsLocalized? qfl = .new(context);
+
+    return LinkedHashMap<String, String>.from({
+      // Sorting the options before saving
+      lineReturnToSpace(qfl.labelSegmentedButton): f.selection.isNotEmpty ? 
+                                      _segmentedToString( ((f.selection).toList()..sort()).toSet() ) : "",
+      lineReturnToSpace(qfl.labelTextField):       f.selection.isNotEmpty ? f.text : "",
+      });
+  }
 
   // Serialises a segmented-button selection to a slash-separated string.
   String _segmentedToString(Set<String> values) => values.join("/");
@@ -169,20 +180,24 @@ class DTOCAForm
   /// Method extracting information from {labelCheckbox: false/true, labelTextField: data/""}
   /// and returning \[\[labelCheckbox,"false"/"true"\],\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<Object>> _checkboxWithTextFieldDataToPreCSV({
+  Future<List<Object>> _checkboxWithTextFieldDataToPreCSV
+  ({
+    required BuildContext context,
     required LinkedHashMap<String, Object> checkboxWithTextFieldData,
   }) async 
   {
+    CAQuestionsFieldsLocalized? qfl = .new(context); 
+
     List<Object> checkboxPreCSVData = [];
 
     // checkbox data converted from bool to String: values can be "true" or "false"
-    var dataCheckbox = "${checkboxWithTextFieldData[qf.labelCheckbox]}";
+    var dataCheckbox = "${checkboxWithTextFieldData[lineReturnToSpace(qfl.labelCheckbox)]}";
     var data1 = [
-      qf.labelCheckbox,
+      lineReturnToSpace(qfl.labelCheckbox),
       dataCheckbox,
     ]; // label in front of the checkbox data in the pre CSV, to help with the processing toward the final CSV
 
-    String dataTextField = (checkboxWithTextFieldData[qf.labelTextField] ?? "") as String;
+    String dataTextField = (checkboxWithTextFieldData[lineReturnToSpace(qfl.labelTextField)] ?? "") as String;
     var data2 = [
       _labelNotes,
       CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV,
@@ -204,18 +219,22 @@ class DTOCAForm
   /// Method extracting information from {labelSegmentedButton: "Yes"/"No"/"I don't know", labelTextField: data/""}
   /// and returning \[\[labelSegmentedButton,"Yes"/"No"/"I don't know"/""\],\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<List<String>>> _segmentedButtonWithTextFieldDataToPreCSV({
+  Future<List<List<String?>>> _segmentedButtonWithTextFieldDataToPreCSV
+  ({
+    required BuildContext context,
     required LinkedHashMap<String, String> segmentedButtonWithTextFieldData,
   }) async
   {
-    List<List<String>> segmentedButtonPreCSVData = [];
+    CAQuestionsFieldsLocalized? qfl = .new(context); 
+
+    List<List<String?>> segmentedButtonPreCSVData = [];
 
     var dataSegmentedButton =
-        segmentedButtonWithTextFieldData[qf.labelSegmentedButton] ?? "";
-    var data1 = [qf.labelSegmentedButton, dataSegmentedButton];
+        segmentedButtonWithTextFieldData[lineReturnToSpace(qfl.labelSegmentedButton)] ?? "";
+    var data1 = [lineReturnToSpace(qfl.labelSegmentedButton), dataSegmentedButton];
 
     var dataTextField =
-        segmentedButtonWithTextFieldData[qf.labelTextField] as String;
+        segmentedButtonWithTextFieldData[lineReturnToSpace(qfl.labelTextField)] as String;
     List<String> data2 = [_labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
 
     segmentedButtonPreCSVData.add(data1);
@@ -227,13 +246,17 @@ class DTOCAForm
   /// Method extracting information from {labelTextField: data/""}
   /// and returning \[\[labelNotes, data/""\]\].
   /// Straight double quotes are refused during text field input and removed.
-  Future<List<List<String>>> _textFieldDataToPreCSV({
+  Future<List<List<String>>> _textFieldDataToPreCSV
+  ({
+    required BuildContext context, 
     required LinkedHashMap<String, Object?> textFieldData,
   }) async
   {
+    CAQuestionsFieldsLocalized? qfl = .new(context); 
+
     List<List<String>> textFieldPreCSVData = [];
 
-    var dataTextField = textFieldData[qf.labelTextField] as String;
+    var dataTextField = textFieldData[lineReturnToSpace(qfl.labelTextField)] as String;
     List<String> data = [_labelNotes, CAFormMiscConstants.quotesForCSV + dataTextField + CAFormMiscConstants.quotesForCSV];
 
     textFieldPreCSVData.add(data);
@@ -244,35 +267,51 @@ class DTOCAForm
   /// Method processing the form data, and returning a list of pair of data, for the saving to CSV.
   /// The data should be either the individual perspective data, or the group/team perspective data.
   /// The individual perspective data and the group/team perspective data are written side by side in the CSV file.
-  Future<List<List<String>>> dataToPreCSV
+  Future<List<List<String?>>> dataToPreCSV
   ({
+    required BuildContext context,
     required LinkedHashMap<String, Object> perspectiveData,
   }) async 
   {
-    List<List<String>> preCSVData = [];
+    CAQuestionsFieldsLocalized? qfl = .new(context); 
+
+    List<List<String?>> preCSVData = [];
 
     /// Method adding to the pre-CSV data according to input type.
-    Future<List<List<String>>> treatmentAccordingToInputType(
-      List<List<String>> preCSVData,
+    Future<List<List<String?>>> treatmentAccordingToInputType
+    (
+      BuildContext context,
+      List<List<String?>> preCSVData,
       String itemOrTitleLabel,
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      if (qf.questionsToInputItemsMapping[itemOrTitleLabel] == qf.labelCheckbox) {
+      CAQuestionsFieldsLocalized? qfl = .new(context);
+
+      if (lineReturnToSpace(qfl.questionsToInputItemsMapping[itemOrTitleLabel]) == lineReturnToSpace(qfl.labelCheckbox)) 
+      {
         // checkboxWithTextFieldDataToPreCSV returns a data similar to [[checkbox, true], [Notes:, a_note]]
-        var checkboxPreCSVData = await _checkboxWithTextFieldDataToPreCSV(
+        List<Object> checkboxPreCSVData = await _checkboxWithTextFieldDataToPreCSV
+        (
+          context: context,
           checkboxWithTextFieldData:
               titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object>,
         );
         
-        preCSVData.add(checkboxPreCSVData[0] as List<String>);
-        preCSVData.add(checkboxPreCSVData[1] as List<String>);
+        preCSVData.add(checkboxPreCSVData[0] as List<String?>);
+        preCSVData.add(checkboxPreCSVData[1] as List<String?>);
       }
       // segmentedButtonWithTextFieldDataToPreCSV returns a data similar to [[segmentedButton, Yes], [Notes:, a_note]]
-      else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
-          qf.labelSegmentedButton) {
+      else if 
+      (
+        lineReturnToSpace(qfl.questionsToInputItemsMapping[itemOrTitleLabel]) ==
+        lineReturnToSpace(qfl.labelSegmentedButton)
+      ) 
+      {
         var segmentedButtonPreCSVData =
-            await _segmentedButtonWithTextFieldDataToPreCSV(
+            await _segmentedButtonWithTextFieldDataToPreCSV
+            (
+              context: context,
               segmentedButtonWithTextFieldData:
                   titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, String>,
             );
@@ -280,9 +319,15 @@ class DTOCAForm
         preCSVData.add(segmentedButtonPreCSVData[1]);
       }
       // textFieldDataToPreCSV returns a data similar to [[Notes:, a_note]]
-      else if (qf.questionsToInputItemsMapping[itemOrTitleLabel] ==
-          qf.labelTextField) {
-        var textFieldpreCSVData = await _textFieldDataToPreCSV(
+      else if 
+      (
+        lineReturnToSpace(qfl.questionsToInputItemsMapping[itemOrTitleLabel]) ==
+        lineReturnToSpace(qfl.labelTextField)
+      ) 
+      {
+        var textFieldpreCSVData = await _textFieldDataToPreCSV
+        (
+          context: context,
           textFieldData: titleLevel2Or3DataAsLinkedHashMap[itemOrTitleLabel] as LinkedHashMap<String, Object?>,
         );
         preCSVData.add(textFieldpreCSVData[0]);
@@ -292,12 +337,12 @@ class DTOCAForm
         if (csvBuildingDebug) pu.printd("CSV Building");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
-        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${qf.questionsToInputItemsMapping[itemOrTitleLabel]}");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${lineReturnToSpace(qfl.questionsToInputItemsMapping[itemOrTitleLabel])}");
         if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
     }
-
+    
     // There is only one key in the perspective data, one of the two level 2 titles
     var level2TitlePreCSVData = ["", perspectiveData.keys.first];
     // Adding the level 2 title
@@ -313,9 +358,9 @@ class DTOCAForm
       var level3TitlePreCSVData = ["", level3Title];
       // Adding the level 3 title
       preCSVData.add(level3TitlePreCSVData);
-
+      
       // 1. Checking if sub-items exist before starting the processing of the level 3 title data
-      if (qf.level3TitlesWithSubItems.contains(level3Title)) {
+      if ( qfl.level3TitlesWithSubItems.contains(level3Title)) {
         // Going through the sub items
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
         // A LinkedHashMap as value
@@ -326,6 +371,7 @@ class DTOCAForm
           preCSVData.add(["", itemLabel]);
           // Adding input data
           await treatmentAccordingToInputType(
+            context,
             preCSVData,
             itemLabel,
             level3TitleItemsDataAsLinkedHashMap,
@@ -337,6 +383,7 @@ class DTOCAForm
       else {
         // Adding input data
         await treatmentAccordingToInputType(
+          context,
           preCSVData,
           level3Title,
           perspectiveDataAsLinkedHashMap,
@@ -359,8 +406,14 @@ class DTOCAForm
   /// "textField was replaced with "Notes" during the pre-CSV processing.
   ///
   /// Addition of a \["",""\] before all level 3 titles.
-  Future<List<List<String>>> preCSVToCSVData({required List<List<String>> preCSVData}) async
-  {    
+  Future<List<List<String?>>> preCSVToCSVData
+  ({
+    required BuildContext context,
+    required List<List<String?>> preCSVData
+  }) async
+  {   
+    CAQuestionsFieldsLocalized? qfl = .new(context);
+
     // ─── ANALYZING THE DATA FOR CHECKBOXES WITH "FALSE", AND TEXT FIELDS WITH EMPTY NOTES ───────────────────────────────────────
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
@@ -368,8 +421,8 @@ class DTOCAForm
 
       // Removal of all [checkbox, "false"] (unchecked boxes)
       // Removal of all ["Notes:",]  if related to an unchecked checkbox
-      if ((indexedData[0].contains(qf.labelCheckbox)) &&
-          (indexData_1AsString.trim() == "false")) {
+      if ((indexedData[0]!.contains(qfl.labelCheckbox)) &&
+          (indexData_1AsString!.trim() == "false")) {
         preCSVData.removeAt(index);
         // The index now points to the following note
         preCSVData.removeAt(index);
@@ -384,12 +437,12 @@ class DTOCAForm
     Map<String, int> indexesOfTitlesLevel3WithChildren = {};
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[1].trim() == qf.level3TitleBalanceIssue) {
-        indexesOfTitlesLevel3WithChildren[qf.level3TitleBalanceIssue] = index;
-      } else if (indexedData[1].trim() == qf.level3TitleWorkplaceIssue) {
-        indexesOfTitlesLevel3WithChildren[qf.level3TitleWorkplaceIssue] = index;
-      } else if (indexedData[1].trim() == qf.level3TitleLegacyIssue) {
-        indexesOfTitlesLevel3WithChildren[qf.level3TitleLegacyIssue] = index;
+      if (indexedData[1]!.trim() == lineReturnToSpace(qfl.level3TitleBalanceIssue)) {
+        indexesOfTitlesLevel3WithChildren[lineReturnToSpace(qfl.level3TitleBalanceIssue)!] = index;
+      } else if (indexedData[1]!.trim() == lineReturnToSpace(qfl.level3TitleWorkplaceIssue)) {
+        indexesOfTitlesLevel3WithChildren[lineReturnToSpace(qfl.level3TitleWorkplaceIssue)!] = index;
+      } else if (indexedData[1]!.trim() == lineReturnToSpace(qfl.level3TitleLegacyIssue)) {
+        indexesOfTitlesLevel3WithChildren[lineReturnToSpace(qfl.level3TitleLegacyIssue)!] = index;
       }
     }
 
@@ -398,8 +451,8 @@ class DTOCAForm
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
-      if ((indexedData[0].contains(qf.labelCheckbox)) &&
-          (indexData_1AsString.trim() == "true")) {
+      if ((indexedData[0]!.contains(lineReturnToSpace(qfl.labelCheckbox)!)) &&
+          (indexData_1AsString!.trim() == "true")) {
         // Adding X in front of the question
         // With the widget design of a question preceding a checkbox, (index -1) is the index of the question
         var previousIndexData = preCSVData[index - 1];
@@ -407,25 +460,28 @@ class DTOCAForm
 
         // Adding an X to the parent title level 3
         var previousIndexData_1AsString = previousIndexData[1];
-        if (qf.childrenOfLevel3TitleBalanceIssue.contains(
-          previousIndexData_1AsString,
-        )) {
+        if 
+        (
+            (qfl.childrenOfLevel3TitleBalanceIssue)
+            .contains(previousIndexData_1AsString)
+        )
+        {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[qf.level3TitleBalanceIssue];
+              indexesOfTitlesLevel3WithChildren[lineReturnToSpace(qfl.level3TitleBalanceIssue)];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = "X";
-        } else if (qf.childrenOfLevel3TitleWorkplaceIssue.contains(
+        } else if (qfl.childrenOfLevel3TitleWorkplaceIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[qf.level3TitleWorkplaceIssue];
+              indexesOfTitlesLevel3WithChildren[qfl.level3TitleWorkplaceIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = "X";
-        } else if (qf.childrenOfLevel3TitleLegacyIssue.contains(
+        } else if (qfl.childrenOfLevel3TitleLegacyIssue.contains(
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[qf.level3TitleLegacyIssue];
+              indexesOfTitlesLevel3WithChildren[qfl.level3TitleLegacyIssue];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = "X";
         }
@@ -437,7 +493,7 @@ class DTOCAForm
     // All the analysis is feasible in one loop, in spite of the removal effect on the indexes
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
-      if (indexedData[0].contains(qf.labelCheckbox)) {
+      if (indexedData[0]!.contains(qfl.labelCheckbox)) {
         preCSVData.removeAt(index);
       }
     }
@@ -451,8 +507,8 @@ class DTOCAForm
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
 
-      if (indexedData[0].contains(qf.labelSegmentedButton)) {
-        if (indexData_1AsString.trim() != "") {
+      if (indexedData[0]!.contains(qfl.labelSegmentedButton)) {
+        if (indexData_1AsString!.trim() != "") {
           // Removing segmentedButton from the data written
           indexedData[0] = "";
           // Adding X in front of the question
@@ -472,7 +528,7 @@ class DTOCAForm
       // segmentedButton has already been removed from the answered segmented buttons
       // and replaced with ""
       // Removing all remaining preCSVData lines with segmentedButton
-      if (indexedData[0].contains(qf.labelSegmentedButton)) {
+      if (indexedData[0]!.contains(qfl.labelSegmentedButton)) {
         preCSVData.removeAt(index);
         // The index now points to the following note
         preCSVData.removeAt(index);
@@ -486,13 +542,13 @@ class DTOCAForm
       var indexData_1AsString = indexedData[1];
 
       // Getting the labels that are text field only from textFieldOnlyItems
-      for (String textFieldOnlyItem in qf.textFieldOnlyItems) {
-        if (indexData_1AsString.trim() == textFieldOnlyItem) {
+      for (String textFieldOnlyItem in qfl.textFieldOnlyItems) {
+        if (indexData_1AsString!.trim() == textFieldOnlyItem) {
           // Checking if the note at the next index has content
           int noteIndex = index + 1;
           // Adding the X in front of the question if the note has content
-          List<String> noteData = preCSVData[noteIndex];
-          if (noteData[1].trim() != "") {
+          List<String?> noteData = preCSVData[noteIndex];
+          if (noteData[1]!.trim() != "") {
             var questionData = preCSVData[index];
             questionData[0] = "X";
           } else // removing the note
@@ -508,18 +564,21 @@ class DTOCAForm
     for (var index = 0; index < preCSVData.length; index++) {
       var indexedData = preCSVData[index];
       var indexData_1AsString = indexedData[1];
-      String indexData_1AsStringTrimmed = indexData_1AsString.trim();
+      String indexData_1AsStringTrimmed = indexData_1AsString!.trim();
 
-      if (
-      // Found titles level 3
-      (qf.level3TitlesIndividual.contains(
-                indexData_1AsStringTrimmed,
-              ) ||
-              qf.level3TitlesGroup.contains(
-                indexData_1AsStringTrimmed,
-              )) &&
-          // and not yet processed
-          !(titlesLevel3Processed.contains(indexData_1AsStringTrimmed))) {
+      if 
+      (
+        // Found titles level 3
+        (
+          qfl.level3TitlesIndividual.contains(indexData_1AsStringTrimmed) 
+          ||
+          qfl.level3TitlesGroup.contains(indexData_1AsStringTrimmed)   
+        )    
+        &&
+        // and not yet processed
+        !( titlesLevel3Processed.contains(indexData_1AsStringTrimmed) )
+      ) 
+      {
         preCSVData.insert(index, ["", ""]);
         titlesLevel3Processed.add(indexData_1AsStringTrimmed);
       }
@@ -532,8 +591,8 @@ class DTOCAForm
   /// Method used to print the individual perspective CSV data, and the group/team perspective CSV data, to a file.
   /// Returns the file name.
   Future<String?> printToCSV({
-    required List<List<String>> csvDataIndividualPerspective,
-    required List<List<String>> csvDataGroupPerspective,
+    required List<List<String?>> csvDataIndividualPerspective,
+    required List<List<String?>> csvDataGroupPerspective,
     String? fileName
   }) async {
     String fileExtension = TextFieldUtils.extensionCSV;
@@ -672,7 +731,12 @@ class DTOCAForm
 /// The CSV format pairs the individual perspective (cols 0–1) with the
 /// group/team perspective (cols 3–4) on every row.  The two perspectives
 /// are extracted independently and mapped back to DTO fields.
-factory DTOCAForm.fromCSV(String csvContent) {
+factory DTOCAForm.fromCSV
+(
+  BuildContext context,
+  String csvContent
+) 
+{
   final dto = DTOCAForm();
 
   // Normalising line endings and discarding blank lines.
@@ -694,8 +758,8 @@ factory DTOCAForm.fromCSV(String csvContent) {
     groupRows.add((cols[3].trim(), cols[4].trim()));
   }
 
-  _parseIndividualFromRows(dto, indivRows);
-  _parseGroupFromRows(dto, groupRows);
+  _parseIndividualFromRows(context, dto, indivRows);
+  _parseGroupFromRows(context, dto, groupRows);
 
   return dto;
 }
@@ -741,13 +805,21 @@ static String _stripNoteQuotes(String s) {
 }
 
 
-static void _parseIndividualFromRows(
-    DTOCAForm dto, List<(String, String)> rows) {
+static void _parseIndividualFromRows
+(
+  BuildContext context, 
+  DTOCAForm dto, 
+  List<(String, String)> rows
+) 
+{
+  CAQuestionsFieldsLocalized? qfl = .new(context);
+
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
-
     
-    String readNotes() {
+    String readNotes() 
+    {     
+
       if (i + 1 < rows.length && rows[i + 1].$1 == "Notes:") {
         i++;
         return _stripNoteQuotes(rows[i].$2);
@@ -755,35 +827,41 @@ static void _parseIndividualFromRows(
       return "";
     }
 
-    if (content == qf.level3TitleBalanceIssueItem1) {
+    if (content == lineReturnToSpace(qfl.level3TitleBalanceIssueItem1)) {
       dto.indivBalanceStudiesHousehold.checked = marker == "X";
       if (marker == "X") dto.indivBalanceStudiesHousehold.text = readNotes();
-    } else if (content == qf.level3TitleBalanceIssueItem2) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleBalanceIssueItem2)) {
       dto.indivBalanceAccessingIncomeHousehold.checked = marker == "X";
       if (marker == "X") dto.indivBalanceAccessingIncomeHousehold.text = readNotes();
-    } else if (content == qf.level3TitleBalanceIssueItem3) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleBalanceIssueItem3)) {
       dto.indivBalanceEarningIncomeHousehold.checked = marker == "X";
       if (marker == "X") dto.indivBalanceEarningIncomeHousehold.text = readNotes();
-    } else if (content == qf.level3TitleBalanceIssueItem4) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleBalanceIssueItem4)) {
       dto.indivBalanceHelpingOthersHousehold.checked = marker == "X";
       if (marker == "X") dto.indivBalanceHelpingOthersHousehold.text = readNotes();
-    } else if (content == qf.level3TitleWorkplaceIssueItem1) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem1)) {
       dto.indivAtWorkMoreAppreciated.checked = marker == "X";
       if (marker == "X") dto.indivAtWorkMoreAppreciated.text = readNotes();
-    } else if (content == qf.level3TitleWorkplaceIssueItem2) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem2)) {
       dto.indivAtWorkRemainingAppreciated.checked = marker == "X";
       if (marker == "X") dto.indivAtWorkRemainingAppreciated.text = readNotes();
-    } else if (content == qf.level3TitleLegacyIssueItem1) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleLegacyIssueItem1)) {
       dto.indivBetterLegacies.checked = marker == "X";
       if (marker == "X") dto.indivBetterLegacies.text = readNotes();
-    } else if (content == qf.level3TitleAnotherIssue) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleAnotherIssue)) {
       if (marker == "X") dto.indivAnotherIssueStr = readNotes();
     }
 
   }
 }
 
-static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
+static void _parseGroupFromRows
+(
+  BuildContext context,
+  DTOCAForm dto, List<(String, String)> rows
+) 
+{
+  CAQuestionsFieldsLocalized? qfl = .new(context); 
   
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
@@ -791,10 +869,14 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
     String readSelection() {
       if (i + 1 < rows.length) {
         final nextContent = rows[i + 1].$2.trim();
-        if (rows[i + 1].$1 == "" &&
+        if 
+        (
+            rows[i + 1].$1 == "" &&
             nextContent.isNotEmpty &&
-            !qf.level2Titles.contains(nextContent) &&
-            !qf.level3TitlesGroup.contains(nextContent)) {
+            !qfl.level2Titles.contains(nextContent) &&
+            !qfl.level3TitlesGroup.contains(nextContent)
+        ) 
+        {
           i++;
           return nextContent;
         }
@@ -811,30 +893,30 @@ static void _parseGroupFromRows(DTOCAForm dto, List<(String, String)> rows) {
       return "";
     }
 
-    if (content == qf.level3TitleGroupsProblematics) {
+    if (content == lineReturnToSpace(qfl.level3TitleGroupsProblematics)) {
       if (marker == "X") dto.groupProblemsToSolveStr = readNotes();
-    } else if (content == qf.level3TitleSameProblem) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleSameProblem)) {
       if (marker == "X") {
         final sel = readSelection();
         dto.groupSameProblemsToSolve.selection =
             sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupSameProblemsToSolve.text = readNotes();
       }
-    } else if (content == qf.level3TitleHarmonyAtHome) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleHarmonyAtHome)) {
       if (marker == "X") {
         final sel = readSelection();
         dto.groupHarmonyHome.selection =
             sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupHarmonyHome.text = readNotes();
       }
-    } else if (content == qf.level3TitleAppreciabilityAtWork) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleAppreciabilityAtWork)) {
       if (marker == "X") {
         final sel = readSelection();
         dto.groupAppreciabilityAtWork.selection =
             sel.isNotEmpty ? sel.split("/").map((s) => s.trim()).toSet() : {};
         dto.groupAppreciabilityAtWork.text = readNotes();
       }
-    } else if (content == qf.level3TitleIncomeEarningAbility) {
+    } else if (content == lineReturnToSpace(qfl.level3TitleIncomeEarningAbility)) {
       if (marker == "X") {
         final sel = readSelection();
         dto.groupEarningAbility.selection =

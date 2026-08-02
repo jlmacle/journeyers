@@ -20,7 +20,6 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
-import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj; 
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
@@ -141,8 +140,17 @@ class CAFormState extends State<CAForm>
     final LinkedHashMap<String, Object> enteredData = await _dtoCAForm!.dataStructureBuilding(context);
 
     // Transforming the data into a CSV-friendly form
-    List<List<String>> preCSVDataIndividualPerspective = await _dtoCAForm!.dataToPreCSV(perspectiveData: enteredData["individualPerspective"] as LinkedHashMap<String, Object>);
-    List<List<String>> preCSVDataGroupPerspective = await _dtoCAForm!.dataToPreCSV(perspectiveData: enteredData["groupPerspective"] as LinkedHashMap<String, Object>);
+    List<List<String?>> preCSVDataIndividualPerspective = 
+      await _dtoCAForm!.dataToPreCSV
+      ( 
+        context: context,
+        perspectiveData: enteredData["individualPerspective"] as LinkedHashMap<String, Object>
+      );
+    List<List<String?>> preCSVDataGroupPerspective = await _dtoCAForm!.dataToPreCSV
+    (
+      context: context,
+      perspectiveData: enteredData["groupPerspective"] as LinkedHashMap<String, Object>
+    );
 
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
@@ -151,8 +159,8 @@ class CAFormState extends State<CAForm>
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building");
 
-    List<List<String>> csvDataIndividualPerspective = await _dtoCAForm!.preCSVToCSVData(preCSVData: preCSVDataIndividualPerspective);
-    List<List<String>> csvDataGroupPerspective = await _dtoCAForm!.preCSVToCSVData(preCSVData: preCSVDataGroupPerspective);
+    List<List<String?>> csvDataIndividualPerspective = await _dtoCAForm!.preCSVToCSVData(context: context, preCSVData: preCSVDataIndividualPerspective);
+    List<List<String?>> csvDataGroupPerspective = await _dtoCAForm!.preCSVToCSVData(context: context, preCSVData: preCSVDataGroupPerspective);
     // Printing to CSV
     String? pathToCSVFile = 
       await _dtoCAForm!.printToCSV(csvDataIndividualPerspective: csvDataIndividualPerspective, 

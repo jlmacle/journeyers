@@ -33,7 +33,7 @@ Future<void> retrieveCASessionData
     String csvContent = await fu.readTextFile(filePath: filePathWhenEdition);
 
     // Loading the data from the CSV into a DTO
-    DTOCAForm dtoWhenEdition = DTOCAForm.fromCSV(csvContent);
+    DTOCAForm dtoWhenEdition = DTOCAForm.fromCSV(context, csvContent);
     dtoWhenEdition.printToConsole();
 
     Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();

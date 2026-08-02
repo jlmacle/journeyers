@@ -1,3 +1,5 @@
+import "package:flutter/material.dart";
+
 import "package:intl/intl.dart";
 
 import "package:journeyers/debug_constants.dart";
@@ -10,14 +12,20 @@ import "package:journeyers/widgets/utility/lists/database/participants_lists_db_
 /// The list parameter is assumed to be a list of sessions, 
 /// with a key DashboardUtils.keyDate for the date values.
 Future<List<dynamic>> sortSessionByDateAddJm
-({required List<dynamic> list, required String dateFormat, required bool byAscendingDate}) async 
+({
+  required BuildContext context,
+  required List<dynamic> list, 
+  required String dateFormat, 
+  required bool byAscendingDate
+}) async 
 {  
   list.sort((a, b) 
     {
       try
       {
-        DateTime dateA = DateFormat(dateFormat).add_jm().parseLoose(a[DashboardUtils.keyDate]);
-        DateTime dateB = DateFormat(dateFormat).add_jm().parseLoose(b[DashboardUtils.keyDate]);
+        var languageCode = (Localizations.localeOf(context)).languageCode;
+        DateTime dateA = DateFormat.yMMMMd(languageCode).add_jm().parseLoose(a[DashboardUtils.keyDate]);
+        DateTime dateB = DateFormat.yMMMMd(languageCode).add_jm().parseLoose(b[DashboardUtils.keyDate]);
 
         return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
       }

@@ -512,6 +512,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   ?
                     (dashboardContext == DashboardUtils.caContext)
                     ? CAPreview(
+                        context: context,
                         pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
                         caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
                       )
