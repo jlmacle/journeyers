@@ -170,6 +170,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_dashboard_keywords => 'Keywords: ';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Answer(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'No question checked and no data in the last text field.';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -338,4 +348,14 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_dashboard_keywords => 'Keywords: ';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Answer(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'No question checked and no data in the last text field.';
 }

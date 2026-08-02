@@ -99,7 +99,13 @@ class DashboardPageState extends State<DashboardPage>
     if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _sessionsMetadataAll: : $_sessionsMetadataAll");
 
     // Data is not sorted by date by default, and needs sorting
-    await sortSessionByDateAddJm(list: _sessionsMetadataFiltered!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
+    await sortSessionByDateAddJm
+    (
+      context: context,
+      list: _sessionsMetadataFiltered!, 
+      dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, 
+      byAscendingDate: false
+    );
         
     // Re-build to display the sessions
     setState(() {

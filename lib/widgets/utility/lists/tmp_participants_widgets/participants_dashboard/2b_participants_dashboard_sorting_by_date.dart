@@ -35,7 +35,13 @@ class ParticipantsListsDashboardSortingByDateState extends State<ParticipantsLis
   // Method used to sort session data by date
   Future<void> _sortListsByDate() async
   {
-    await sortSessionByDateAddJm(list: widget.participantsListsFilteredToSort!, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: _isAscendingDate);
+    await sortSessionByDateAddJm
+    (
+      context: context,
+      list: widget.participantsListsFilteredToSort!, 
+      dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, 
+      byAscendingDate: _isAscendingDate
+    );
     widget.featureCallbackFunctionToRefreshTheParticipantsLists();
   }
 

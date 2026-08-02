@@ -171,6 +171,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_dashboard_keywords => 'Mots-clés: ';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Réponse(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -340,4 +350,14 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_dashboard_keywords => 'Mots-clés: ';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Réponse(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 }

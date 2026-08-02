@@ -358,6 +358,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keywords: '**
   String get ca_dashboard_keywords;
+
+  /// l10n for Notes:
+  ///
+  /// In en, this message translates to:
+  /// **'Notes: '**
+  String get ca_preview_notes;
+
+  /// l10n for Answer(s):
+  ///
+  /// In en, this message translates to:
+  /// **'Answer(s): '**
+  String get ca_preview_answers;
+
+  /// l10n for 'No question checked and no data in the last text field.'
+  ///
+  /// In en, this message translates to:
+  /// **'No question checked and no data in the last text field.'**
+  String get ca_preview_no_data_stored;
 }
 
 class _AppLocalizationsDelegate
