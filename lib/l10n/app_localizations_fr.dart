@@ -173,6 +173,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ca_dashboard_keywords => 'Mots-clés: ';
 
   @override
+  String get ca_dashboard_tooltip_preview => 'Aperçu';
+
+  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -350,6 +353,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_dashboard_keywords => 'Mots-clés: ';
+
+  @override
+  String get ca_dashboard_tooltip_preview => 'Aperçu';
 
   @override
   String get ca_preview_notes => 'Notes: ';

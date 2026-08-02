@@ -86,6 +86,8 @@
   ,"@ca_dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
   ,"ca_dashboard_keywords": "Keywords: "
   ,"@ca_dashboard_keywords": {"description": "l10n for Keywords"}
+  ,"ca_dashboard_tooltip_preview": "Preview"
+  ,"@ca_dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
   ,"ca_preview_notes": "Notes: "
   ,"@ca_preview_notes": {"description": "l10n for Notes:"}
   ,"ca_preview_answers": "Answer(s): "

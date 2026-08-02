@@ -172,6 +172,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_dashboard_keywords => 'Keywords: ';
 
   @override
+  String get ca_dashboard_tooltip_preview => 'Preview';
+
+  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -348,6 +351,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_dashboard_keywords => 'Keywords: ';
+
+  @override
+  String get ca_dashboard_tooltip_preview => 'Preview';
 
   @override
   String get ca_preview_notes => 'Notes: ';

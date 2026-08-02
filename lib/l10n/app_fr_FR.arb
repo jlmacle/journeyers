@@ -86,6 +86,8 @@
     ,"@ca_dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
     ,"ca_dashboard_keywords": "Mots-clés: "
     ,"@ca_dashboard_keywords": {"description": "l10n pour Mots-clés"}
+    ,"ca_dashboard_tooltip_preview": "Aperçu"
+    ,"@ca_dashboard_tooltip_preview": {"description": "l10n pour l'infobulle d'aperçu"}  
     ,"ca_preview_notes": "Notes: "
     ,"@ca_preview_notes": {"description": "l10n pour Notes:"}
     ,"ca_preview_answers": "Réponse(s): "

@@ -359,6 +359,12 @@ abstract class AppLocalizations {
   /// **'Keywords: '**
   String get ca_dashboard_keywords;
 
+  /// l10n for the 'Preview' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get ca_dashboard_tooltip_preview;
+
   /// l10n for Notes:
   ///
   /// In en, this message translates to:
