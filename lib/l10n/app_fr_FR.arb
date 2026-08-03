@@ -64,6 +64,8 @@
     ,"@ca_process_group_perspective_appreciability_work": {"description": "La question relative à la cohérence avec être apprécié au travail"}
     ,"ca_process_group_perspective_earning_ability": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?"
     ,"@ca_process_group_perspective_earning_ability": {"description": "La question relative à la cohérence avec la capacité à générer un revenu"}
+    ,"ca_process_file_name_save_button_text_on_desktop": "Veuillez cliquer pour sauvegarder les données en CSV,\nun format compatible avec les logiciels tableurs."
+    ,"@ca_process_file_name_save_button_text_on_desktop": {"description": "l10n pour le texte du bouton de sauvegarde des données, durant le processus d'analyse de contexte (sur desktop)"}   
     ,"ca_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte."
     ,"@ca_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle analyse de contexte."}
     ,"ca_unfilled_analysis_title": "Sans titre"
@@ -86,8 +88,8 @@
     
     ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
-    ,"file_name_process_text_field_hint": "Veuillez entrer un nom de fichier, sans ."
-    ,"@file_name_process_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
+    ,"file_name_process_text_field_hint_on_mobile": "Veuillez entrer un nom de fichier, sans ."
+    ,"@file_name_process_text_field_hint_on_mobile": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
     
     ,"dashboard_sort_by_title": "Tri par titre"
     ,"@dashboard_sort_by_title": {"description": "Le label pour le 'Tri par titre'"}    

@@ -133,6 +133,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_process_file_name_save_button_text_on_desktop =>
+      'Click to save your data in CSV,\nspreadsheet-compatible format';
+
+  @override
   String get ca_new_process_button =>
       'Please click to start\na new context analysis.';
 
@@ -166,7 +170,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please select or create a folder\nfor app storage.';
 
   @override
-  String get file_name_process_text_field_hint =>
+  String get file_name_process_text_field_hint_on_mobile =>
       'Please add the file name, without .';
 
   @override
@@ -344,6 +348,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_process_file_name_save_button_text_on_desktop =>
+      'Click to save your data in CSV,\nspreadsheet-compatible format';
+
+  @override
   String get ca_new_process_button =>
       'Please click to start\na new context analysis.';
 
@@ -377,7 +385,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please select or create a folder\nfor app storage.';
 
   @override
-  String get file_name_process_text_field_hint =>
+  String get file_name_process_text_field_hint_on_mobile =>
       'Please add the file name, without .';
 
   @override

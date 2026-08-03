@@ -548,7 +548,11 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   textFieldContext: DashboardUtils.gpsContext,
                 )
                 // Saving file for desktop platforms
-                : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata)
+                : SessionFileNameOnDesktopPlatforms
+                (
+                  savebuttonText: "Click to save your data in TXT format",
+                  parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata
+                )
         ),
       ]
     );

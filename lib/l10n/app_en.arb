@@ -64,6 +64,8 @@
   ,"@ca_process_group_perspective_appreciability_work": {"description": "The question related to the consistency with appreciability at work"}
   ,"ca_process_group_perspective_earning_ability": "Is entering the group problem-solving process consistent with my income earning ability?"
   ,"@ca_process_group_perspective_earning_ability": {"description": "The question related to the consistency with earning ability"}
+  ,"ca_process_file_name_save_button_text_on_desktop": "Click to save your data in CSV,\nspreadsheet-compatible format"
+  ,"@ca_process_file_name_save_button_text_on_desktop": {"description": "l10n for the save button text, in the c.a. process (on desktop)"}   
   ,"ca_new_process_button": "Please click to start\na new context analysis."
   ,"@ca_new_process_button": {"description": "The text inviting to click to start a new context analysis."}   
   ,"ca_unfilled_analysis_title": "Untitled"
@@ -86,9 +88,9 @@
   
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
-  ,"file_name_process_text_field_hint": "Please add the file name, without ."
-  ,"@file_name_process_text_field_hint": {"description": "The text field hint inviting to add a file name without extension"}   
- 
+  ,"file_name_process_text_field_hint_on_mobile": "Please add the file name, without ."
+  ,"@file_name_process_text_field_hint_on_mobile": {"description": "The text field hint inviting to add a file name without extension"}   
+  
   ,"dashboard_sort_by_title": "Sort by Title"
   ,"@dashboard_sort_by_title": {"description": "The 'Sort by Title' label"}  
   ,"dashboard_sort_by_date": "Sort by Date"
