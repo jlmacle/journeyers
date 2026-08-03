@@ -608,7 +608,12 @@ void _showKeywordsEditSheet
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () async =>  onKeywordsUpdated(filePath),
-            child: const Text("Save", style: TextStyle(color: Colors.black)),
+            child: 
+            Text
+              (
+                AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save_button text",  
+                style: const TextStyle(color: Colors.black)
+              ),
           ),
           const SizedBox(height: 20),
         ],
