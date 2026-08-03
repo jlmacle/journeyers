@@ -144,6 +144,7 @@ void showEditSheet
   required String textFieldStartValue,
   required String textFieldLabelText,
   required TextStyle textFieldLabelStyle,
+  required Widget textFiedHint,
   required String? textFieldErrorText,
   Future<bool> Function({required String value}) errorTextTriggerFunction = placeHolderErrorTextTriggerFunctionReturningFalse,
   String? errorTextTriggerFunctionParameter,
@@ -216,6 +217,7 @@ void showEditSheet
                     (
                       labelText: textFieldLabelText, 
                       labelStyle: textFieldLabelStyle,
+                      hint: textFiedHint,
                       errorText: errorText
                     ),
                     onSubmitted:(value) async {
