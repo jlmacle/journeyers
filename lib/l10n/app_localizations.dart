@@ -351,7 +351,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please add the file name, without .'**
-  String get file_name_process_text_field_hint;
+  String get file_name_process_text_field_hint_on_mobile;
 
   /// The 'Sort by Title' label
   ///

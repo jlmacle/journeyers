@@ -86,8 +86,8 @@
     
     ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
-    ,"file_name_process_text_field_hint": "Veuillez entrer un nom de fichier, sans ."
-    ,"@file_name_process_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
+    ,"file_name_process_text_field_hint_on_mobile": "Veuillez entrer un nom de fichier, sans ."
+    ,"@file_name_process_text_field_hint_on_mobile": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
     
     ,"dashboard_sort_by_title": "Tri par titre"
     ,"@dashboard_sort_by_title": {"description": "Le label pour le 'Tri par titre'"}    

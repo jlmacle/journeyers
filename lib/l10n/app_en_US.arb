@@ -86,8 +86,8 @@
   
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
-  ,"file_name_process_text_field_hint": "Please add the file name, without ."
-  ,"@file_name_process_text_field_hint": {"description": "The text field hint inviting to add a file name without extension"}   
+  ,"file_name_process_text_field_hint_on_mobile": "Please add the file name, without ."
+  ,"@file_name_process_text_field_hint_on_mobile": {"description": "The text field hint inviting to add a file name without extension"}   
  
   ,"dashboard_sort_by_title": "Sort by Title"
   ,"@dashboard_sort_by_title": {"description": "The 'Sort by Title' label"} 

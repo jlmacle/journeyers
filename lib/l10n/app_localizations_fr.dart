@@ -167,7 +167,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 
   @override
-  String get file_name_process_text_field_hint =>
+  String get file_name_process_text_field_hint_on_mobile =>
       'Veuillez entrer un nom de fichier, sans .';
 
   @override
@@ -380,7 +380,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 
   @override
-  String get file_name_process_text_field_hint =>
+  String get file_name_process_text_field_hint_on_mobile =>
       'Veuillez entrer un nom de fichier, sans .';
 
   @override

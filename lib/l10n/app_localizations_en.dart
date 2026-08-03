@@ -166,7 +166,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please select or create a folder\nfor app storage.';
 
   @override
-  String get file_name_process_text_field_hint =>
+  String get file_name_process_text_field_hint_on_mobile =>
       'Please add the file name, without .';
 
   @override
@@ -377,7 +377,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please select or create a folder\nfor app storage.';
 
   @override
-  String get file_name_process_text_field_hint =>
+  String get file_name_process_text_field_hint_on_mobile =>
       'Please add the file name, without .';
 
   @override
