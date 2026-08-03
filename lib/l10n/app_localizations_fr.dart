@@ -203,6 +203,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Supprimer les données sélectionnées';
 
   @override
+  String get dashboard_preview_share_session_data_tooltip =>
+      'Partager l\'analyse';
+
+  @override
   String get dashboard_edit_title_sheet_label_text => 'Édition du titre';
 
   @override
@@ -418,6 +422,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get dashboard_tooltip_bulk_delete =>
       'Supprimer les données sélectionnées';
+
+  @override
+  String get dashboard_preview_share_session_data_tooltip =>
+      'Partager l\'analyse';
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Édition du titre';

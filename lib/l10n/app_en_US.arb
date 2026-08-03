@@ -109,6 +109,8 @@
   ,"@dashboard_tooltip_delete": {"description": "l10n for the 'Delete data' tooltip"}
   ,"dashboard_tooltip_bulk_delete": "Delete selected data"
   ,"@dashboard_tooltip_bulk_delete": {"description": "l10n for the 'Delete selected data' tooltip"}
+  ,"dashboard_preview_share_session_data_tooltip": "Share session data"
+  ,"@dashboard_preview_share_session_data_tooltip": {"description": "l10n for the preview 'Share session data' tooltip"}
   ,"dashboard_edit_title_sheet_label_text": "Title Edition"
   ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Title Edition' label text"}
   ,"dashboard_edit_title_sheet_text_field_hint": "Please enter your title."

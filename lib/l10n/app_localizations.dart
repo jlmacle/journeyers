@@ -413,6 +413,12 @@ abstract class AppLocalizations {
   /// **'Delete selected data'**
   String get dashboard_tooltip_bulk_delete;
 
+  /// l10n for the preview 'Share session data' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Share session data'**
+  String get dashboard_preview_share_session_data_tooltip;
+
   /// l10n for the 'Title Edition' label text
   ///
   /// In en, this message translates to:

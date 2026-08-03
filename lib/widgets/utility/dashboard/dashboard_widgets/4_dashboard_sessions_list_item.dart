@@ -455,7 +455,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                     color: appBarWhite,
                     onPressed: () 
                     { _shareSession(context, sessionMetadata, tmpFilePath); },
-                    tooltip: "Share session",
+                    tooltip: AppLocalizations.of(context)?.dashboard_preview_share_session_data_tooltip ?? "Issue with the l10n for the preview 'Share session data' tooltip",
                   ),
                 ],
               ),
