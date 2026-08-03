@@ -182,8 +182,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ca_dashboard_tooltip_edit_keywords => 'Éditer les mots-clés';
 
   @override
-  String get ca_dashboard_tooltip_delete =>
-      'Supprimer les données sélectionnées';
+  String get ca_dashboard_tooltip_delete => 'Supprimer les données';
 
   @override
   String get ca_preview_notes => 'Notes: ';
@@ -374,8 +373,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get ca_dashboard_tooltip_edit_keywords => 'Éditer les mots-clés';
 
   @override
-  String get ca_dashboard_tooltip_delete =>
-      'Supprimer les données sélectionnées';
+  String get ca_dashboard_tooltip_delete => 'Supprimer les données';
 
   @override
   String get ca_preview_notes => 'Notes: ';

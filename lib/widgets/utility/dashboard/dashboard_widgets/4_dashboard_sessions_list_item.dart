@@ -369,7 +369,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 IconButton(                  
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
-                  tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete selected items' tooltip",
+                  tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete item' tooltip",
                 ),
               ],
             ),
