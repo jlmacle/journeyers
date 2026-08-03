@@ -287,6 +287,12 @@ abstract class AppLocalizations {
   /// **'Is entering the group problem-solving process consistent with my income earning ability?'**
   String get ca_process_group_perspective_earning_ability;
 
+  /// l10n for the save button text, in the c.a. process (on desktop)
+  ///
+  /// In en, this message translates to:
+  /// **'Click to save your data in CSV,\nspreadsheet-compatible format'**
+  String get ca_process_file_name_save_button_text_on_desktop;
+
   /// The text inviting to click to start a new context analysis.
   ///
   /// In en, this message translates to:

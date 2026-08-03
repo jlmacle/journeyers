@@ -133,6 +133,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_process_file_name_save_button_text_on_desktop =>
+      'Click to save your data in CSV,\nspreadsheet-compatible format';
+
+  @override
   String get ca_new_process_button =>
       'Please click to start\na new context analysis.';
 
@@ -342,6 +346,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_group_perspective_earning_ability =>
       'Is entering the group problem-solving process consistent with my income earning ability?';
+
+  @override
+  String get ca_process_file_name_save_button_text_on_desktop =>
+      'Click to save your data in CSV,\nspreadsheet-compatible format';
 
   @override
   String get ca_new_process_button =>

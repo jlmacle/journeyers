@@ -336,7 +336,7 @@ class CAProcessState extends State<CAProcess>
                         // Saving file for desktop platforms
                         : SessionFileNameOnDesktopPlatforms
                         (
-                          savebuttonText: "Click to save your data in CSV, \nspreadsheet-compatible format",
+                          savebuttonText: AppLocalizations.of(context)?.ca_process_file_name_save_button_text_on_desktop ?? "Issue with the l10n for the save button text, in the c.a. process (on desktop)",  
                           parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata
                         )
                   ),

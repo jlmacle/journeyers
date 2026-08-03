@@ -134,6 +134,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
 
   @override
+  String get ca_process_file_name_save_button_text_on_desktop =>
+      'Veuillez cliquer pour sauvegarder les données en CSV,\nun format compatible avec les logiciels tableurs.';
+
+  @override
   String get ca_new_process_button =>
       'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
 
@@ -345,6 +349,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_group_perspective_earning_ability =>
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
+
+  @override
+  String get ca_process_file_name_save_button_text_on_desktop =>
+      'Veuillez cliquer pour sauvegarder les données en CSV,\nun format compatible avec les logiciels tableurs.';
 
   @override
   String get ca_new_process_button =>
