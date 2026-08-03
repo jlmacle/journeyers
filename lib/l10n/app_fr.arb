@@ -107,9 +107,13 @@
     ,"@dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
     ,"dashboard_tooltip_bulk_delete": "Supprimer les données sélectionnées"
     ,"@dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
-    ,"dashboard_edit_title_sheet_label_text": "Éditer le titre"
-    ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette 'Éditer le titre'"}
-    
+    ,"dashboard_edit_title_sheet_label_text": "Édition du titre"
+    ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du titre"}
+    ,"dashboard_edit_keywords_sheet_label_text": "Édition des mots-clés (veuillez les séparer avec des virgules)"
+    ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des mots-clés"}
+    ,"dashboard_edit_keywords_sheet_text_field_hint": "Veuillez entrer vos mots-clés."
+    ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition des mots-clés"}
+  
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
 

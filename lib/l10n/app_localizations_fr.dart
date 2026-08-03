@@ -199,7 +199,15 @@ class AppLocalizationsFr extends AppLocalizations {
       'Supprimer les données sélectionnées';
 
   @override
-  String get dashboard_edit_title_sheet_label_text => 'Éditer le titre';
+  String get dashboard_edit_title_sheet_label_text => 'Édition du titre';
+
+  @override
+  String get dashboard_edit_keywords_sheet_label_text =>
+      'Édition des mots-clés (veuillez les séparer avec des virgules)';
+
+  @override
+  String get dashboard_edit_keywords_sheet_text_field_hint =>
+      'Veuillez entrer vos mots-clés.';
 
   @override
   String get save_button_text => 'Enregistrer les données';
@@ -400,7 +408,15 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Supprimer les données sélectionnées';
 
   @override
-  String get dashboard_edit_title_sheet_label_text => 'Éditer le titre';
+  String get dashboard_edit_title_sheet_label_text => 'Édition du titre';
+
+  @override
+  String get dashboard_edit_keywords_sheet_label_text =>
+      'Édition des mots-clés (veuillez les séparer avec des virgules)';
+
+  @override
+  String get dashboard_edit_keywords_sheet_text_field_hint =>
+      'Veuillez entrer vos mots-clés.';
 
   @override
   String get save_button_text => 'Enregistrer les données';

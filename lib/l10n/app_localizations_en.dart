@@ -197,7 +197,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_tooltip_bulk_delete => 'Delete selected data';
 
   @override
-  String get dashboard_edit_title_sheet_label_text => 'Edit Title';
+  String get dashboard_edit_title_sheet_label_text => 'Title Edition';
+
+  @override
+  String get dashboard_edit_keywords_sheet_label_text =>
+      'Keywords Edition (please separate with commas)';
+
+  @override
+  String get dashboard_edit_keywords_sheet_text_field_hint =>
+      'Please enter your keywords.';
 
   @override
   String get save_button_text => 'Save Changes';
@@ -396,7 +404,15 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get dashboard_tooltip_bulk_delete => 'Delete selected data';
 
   @override
-  String get dashboard_edit_title_sheet_label_text => 'Edit Title';
+  String get dashboard_edit_title_sheet_label_text => 'Title Edition';
+
+  @override
+  String get dashboard_edit_keywords_sheet_label_text =>
+      'Keywords Edition (please separate with commas)';
+
+  @override
+  String get dashboard_edit_keywords_sheet_text_field_hint =>
+      'Please enter your keywords.';
 
   @override
   String get save_button_text => 'Save Changes';
