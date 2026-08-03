@@ -334,7 +334,11 @@ class CAProcessState extends State<CAProcess>
                           textFieldContext: DashboardUtils.caContext,                         
                         )
                         // Saving file for desktop platforms
-                        : SessionFileNameOnDesktopPlatforms(parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata)
+                        : SessionFileNameOnDesktopPlatforms
+                        (
+                          savebuttonText: "Click to save your data in CSV, \nspreadsheet-compatible format",
+                          parentCallbackFunctionToSaveDataAndMetadata: _saveDataAndMetadata
+                        )
                   ),
                 ],
               ),

@@ -7,10 +7,16 @@ import "package:journeyers/app_themes.dart";
 /// A widget used for choosing a file name, and saving a session file, on desktop platforms.
 class SessionFileNameOnDesktopPlatforms extends StatefulWidget 
 {
+  /// The text for the 'Save' button.
+  final String savebuttonText;
+
+  /// The callback function called when saving data.
   final VoidCallback parentCallbackFunctionToSaveDataAndMetadata;
+
   const SessionFileNameOnDesktopPlatforms
   ({
     super.key,
+    required this.savebuttonText,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
   });
 
@@ -30,8 +36,8 @@ class _SessionFileNameOnDesktopPlatformsState extends State<SessionFileNameOnDes
       {
         widget.parentCallbackFunctionToSaveDataAndMetadata();        
       },
-      child: const Text(
-        "Click to save your data in CSV, \nspreadsheet-compatible format",
+      child: Text(
+        widget.savebuttonText,
         style: elevatedButtonSaveDataOnDesktopStyle,
         textAlign: TextAlign.center,
       ),
