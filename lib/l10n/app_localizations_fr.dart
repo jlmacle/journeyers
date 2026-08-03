@@ -134,6 +134,26 @@ class AppLocalizationsFr extends AppLocalizations {
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
 
   @override
+  String get ca_new_process_button =>
+      'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Sans titre';
+
+  @override
+  String get ca_dashboard_title => 'Analyses précédentes';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Réponse(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'Cases non cochées et pas de réponse dans le dernier champ de texte.';
+
+  @override
   String get segmented_button_yes => 'Oui';
 
   @override
@@ -151,55 +171,38 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez entrer un nom de fichier, sans .';
 
   @override
-  String get ca_new_process_button =>
-      'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
+  String get dashboard_sort_by_title => 'Tri par titre';
 
   @override
-  String get ca_unfilled_analysis_title => 'Sans titre';
+  String get dashboard_sort_by_date => 'Tri par date';
 
   @override
-  String get ca_dashboard_title => 'Analyses précédentes';
+  String get dashboard_filter_by_keywords => 'Filtrage par mots-clés';
 
   @override
-  String get ca_dashboard_sort_by_title => 'Tri par titre';
+  String get dashboard_keywords => 'Mots-clés: ';
 
   @override
-  String get ca_dashboard_sort_by_date => 'Tri par date';
+  String get dashboard_tooltip_preview => 'Aperçu';
 
   @override
-  String get ca_dashboard_filter_by_keywords => 'Filtrage par mots-clés';
+  String get dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
 
   @override
-  String get ca_dashboard_keywords => 'Mots-clés: ';
+  String get dashboard_tooltip_edit_keywords => 'Éditer les mots-clés';
 
   @override
-  String get ca_dashboard_tooltip_preview => 'Aperçu';
+  String get dashboard_tooltip_delete => 'Supprimer les données';
 
   @override
-  String get ca_dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
+  String get dashboard_tooltip_bulk_delete =>
+      'Supprimer les données sélectionnées';
 
   @override
-  String get ca_dashboard_tooltip_edit_keywords => 'Éditer les mots-clés';
+  String get dashboard_edit_title_sheet_label_text => 'Éditer le titre';
 
   @override
-  String get ca_dashboard_tooltip_delete => 'Supprimer les données';
-
-  @override
-  String get ca_dashboard_tooltip_bulk_delete =>
-      'Supprimer les éléments sélectionnés';
-
-  @override
-  String get ca_dashboard_edit_title_sheet_label_text => 'Éditer le titre';
-
-  @override
-  String get ca_preview_notes => 'Notes: ';
-
-  @override
-  String get ca_preview_answers => 'Réponse(s): ';
-
-  @override
-  String get ca_preview_no_data_stored =>
-      'Cases non cochées et pas de réponse dans le dernier champ de texte.';
+  String get save_button_text => 'Enregistrer les données';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -332,6 +335,26 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
 
   @override
+  String get ca_new_process_button =>
+      'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Sans titre';
+
+  @override
+  String get ca_dashboard_title => 'Analyses précédentes';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Réponse(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'Cases non cochées et pas de réponse dans le dernier champ de texte.';
+
+  @override
   String get segmented_button_yes => 'Oui';
 
   @override
@@ -349,53 +372,36 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez entrer un nom de fichier, sans .';
 
   @override
-  String get ca_new_process_button =>
-      'Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte.';
+  String get dashboard_sort_by_title => 'Tri par titre';
 
   @override
-  String get ca_unfilled_analysis_title => 'Sans titre';
+  String get dashboard_sort_by_date => 'Tri par date';
 
   @override
-  String get ca_dashboard_title => 'Analyses précédentes';
+  String get dashboard_filter_by_keywords => 'Filtrage par mots-clés';
 
   @override
-  String get ca_dashboard_sort_by_title => 'Tri par titre';
+  String get dashboard_keywords => 'Mots-clés: ';
 
   @override
-  String get ca_dashboard_sort_by_date => 'Tri par date';
+  String get dashboard_tooltip_preview => 'Aperçu';
 
   @override
-  String get ca_dashboard_filter_by_keywords => 'Filtrage par mots-clés';
+  String get dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
 
   @override
-  String get ca_dashboard_keywords => 'Mots-clés: ';
+  String get dashboard_tooltip_edit_keywords => 'Éditer les mots-clés';
 
   @override
-  String get ca_dashboard_tooltip_preview => 'Aperçu';
+  String get dashboard_tooltip_delete => 'Supprimer les données';
 
   @override
-  String get ca_dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
+  String get dashboard_tooltip_bulk_delete =>
+      'Supprimer les données sélectionnées';
 
   @override
-  String get ca_dashboard_tooltip_edit_keywords => 'Éditer les mots-clés';
+  String get dashboard_edit_title_sheet_label_text => 'Éditer le titre';
 
   @override
-  String get ca_dashboard_tooltip_delete => 'Supprimer les données';
-
-  @override
-  String get ca_dashboard_tooltip_bulk_delete =>
-      'Supprimer les éléments sélectionnés';
-
-  @override
-  String get ca_dashboard_edit_title_sheet_label_text => 'Éditer le titre';
-
-  @override
-  String get ca_preview_notes => 'Notes: ';
-
-  @override
-  String get ca_preview_answers => 'Réponse(s): ';
-
-  @override
-  String get ca_preview_no_data_stored =>
-      'Cases non cochées et pas de réponse dans le dernier champ de texte.';
+  String get save_button_text => 'Enregistrer les données';
 }

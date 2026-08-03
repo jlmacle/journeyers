@@ -287,6 +287,42 @@ abstract class AppLocalizations {
   /// **'Is entering the group problem-solving process consistent with my income earning ability?'**
   String get ca_process_group_perspective_earning_ability;
 
+  /// The text inviting to click to start a new context analysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to start\na new context analysis.'**
+  String get ca_new_process_button;
+
+  /// The default title value for a context analysis
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled'**
+  String get ca_unfilled_analysis_title;
+
+  /// The dashboard title
+  ///
+  /// In en, this message translates to:
+  /// **'Previous analyses'**
+  String get ca_dashboard_title;
+
+  /// l10n for Notes:
+  ///
+  /// In en, this message translates to:
+  /// **'Notes: '**
+  String get ca_preview_notes;
+
+  /// l10n for Answer(s):
+  ///
+  /// In en, this message translates to:
+  /// **'Answer(s): '**
+  String get ca_preview_answers;
+
+  /// l10n for 'No question checked and no data in the last text field.'
+  ///
+  /// In en, this message translates to:
+  /// **'No question checked and no data in the last text field.'**
+  String get ca_preview_no_data_stored;
+
   /// l10n for Yes
   ///
   /// In en, this message translates to:
@@ -317,101 +353,71 @@ abstract class AppLocalizations {
   /// **'Please add the file name, without .'**
   String get file_name_process_text_field_hint;
 
-  /// The text inviting to click to start a new context analysis.
-  ///
-  /// In en, this message translates to:
-  /// **'Please click to start\na new context analysis.'**
-  String get ca_new_process_button;
-
-  /// The default title value for a context analysis
-  ///
-  /// In en, this message translates to:
-  /// **'Untitled'**
-  String get ca_unfilled_analysis_title;
-
-  /// The dashboard title
-  ///
-  /// In en, this message translates to:
-  /// **'Previous analyses'**
-  String get ca_dashboard_title;
-
   /// The 'Sort by Title' label
   ///
   /// In en, this message translates to:
   /// **'Sort by Title'**
-  String get ca_dashboard_sort_by_title;
+  String get dashboard_sort_by_title;
 
   /// The 'Sort by Date' label
   ///
   /// In en, this message translates to:
   /// **'Sort by Date'**
-  String get ca_dashboard_sort_by_date;
+  String get dashboard_sort_by_date;
 
   /// The 'Filter by Keywords' label
   ///
   /// In en, this message translates to:
   /// **'Filter by Keywords'**
-  String get ca_dashboard_filter_by_keywords;
+  String get dashboard_filter_by_keywords;
 
   /// l10n for Keywords
   ///
   /// In en, this message translates to:
   /// **'Keywords: '**
-  String get ca_dashboard_keywords;
+  String get dashboard_keywords;
 
   /// l10n for the 'Preview' tooltip
   ///
   /// In en, this message translates to:
   /// **'Preview'**
-  String get ca_dashboard_tooltip_preview;
+  String get dashboard_tooltip_preview;
 
   /// l10n for the 'Edit session data' tooltip
   ///
   /// In en, this message translates to:
   /// **'Edit session data'**
-  String get ca_dashboard_tooltip_edit_session_data;
+  String get dashboard_tooltip_edit_session_data;
 
   /// l10n for the 'Edit Keywords' tooltip
   ///
   /// In en, this message translates to:
   /// **'Edit Keywords'**
-  String get ca_dashboard_tooltip_edit_keywords;
+  String get dashboard_tooltip_edit_keywords;
 
-  /// l10n for the 'Delete item' tooltip
+  /// l10n for the 'Delete data' tooltip
   ///
   /// In en, this message translates to:
-  /// **'Delete item'**
-  String get ca_dashboard_tooltip_delete;
+  /// **'Delete data'**
+  String get dashboard_tooltip_delete;
 
-  /// l10n for the 'Delete selected items' tooltip
+  /// l10n for the 'Delete selected data' tooltip
   ///
   /// In en, this message translates to:
-  /// **'Delete selected items'**
-  String get ca_dashboard_tooltip_bulk_delete;
+  /// **'Delete selected data'**
+  String get dashboard_tooltip_bulk_delete;
 
   /// l10n for the 'Edit Title' label text
   ///
   /// In en, this message translates to:
   /// **'Edit Title'**
-  String get ca_dashboard_edit_title_sheet_label_text;
+  String get dashboard_edit_title_sheet_label_text;
 
-  /// l10n for Notes:
+  /// l10n for the save_button text
   ///
   /// In en, this message translates to:
-  /// **'Notes: '**
-  String get ca_preview_notes;
-
-  /// l10n for Answer(s):
-  ///
-  /// In en, this message translates to:
-  /// **'Answer(s): '**
-  String get ca_preview_answers;
-
-  /// l10n for 'No question checked and no data in the last text field.'
-  ///
-  /// In en, this message translates to:
-  /// **'No question checked and no data in the last text field.'**
-  String get ca_preview_no_data_stored;
+  /// **'Save Changes'**
+  String get save_button_text;
 }
 
 class _AppLocalizationsDelegate

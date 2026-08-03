@@ -1,5 +1,6 @@
 {
     "@@locale":"fr",
+    
     "app_title": "Témoignages",
     "@app_title": {"description": "Le titre de l'application"},
     "app_sub_title":"Quelle histoire laisserons-nous\nà nos proches ?",
@@ -10,6 +11,7 @@
     "@app_lang_en": {"description": "Le nom de la langue anglaise, en français"},
     "app_lang_fr": "Français",
     "@app_lang_fr": {"description": "Le nom de la langue française, en français"},
+
     "ca_process_title": "Analyse du contexte",
     "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
@@ -57,52 +59,58 @@
     ,"ca_process_group_perspective_solving_same_problems": "Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?"
     ,"@ca_process_group_perspective_solving_same_problems": {"description": "La question relative au fait de résoudre les mêmes problèmes que mes groupes/équipes"}
     ,"ca_process_group_perspective_harmony_home": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?"
-    ,"@ca_process_group_perspective_harmony_home": {"description": "La question relative à l'harmonie au foyer"}
+    ,"@ca_process_group_perspective_harmony_home": {"description": "La question relative à la cohérence avec l'harmonie au foyer"}
     ,"ca_process_group_perspective_appreciability_work": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?"
     ,"@ca_process_group_perspective_appreciability_work": {"description": "La question relative à la cohérence avec être apprécié au travail"}
     ,"ca_process_group_perspective_earning_ability": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?"
     ,"@ca_process_group_perspective_earning_ability": {"description": "La question relative à la cohérence avec la capacité à générer un revenu"}
-    ,"segmented_button_yes": "Oui"
-    ,"@segmented_button_yes": {"description":"l10n pour Oui"}
-    ,"segmented_button_no": "Non"
-    ,"@segmented_button_no": {"description":"l10n pour Non"}
-    ,"segmented_button_I_don_t_know": "Je ne sais pas"
-    ,"@segmented_button_I_don_t_know": {"description":"l10n pour Je ne sais pas"}
-    ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
-    ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
-    ,"file_name_process_text_field_hint": "Veuillez entrer un nom de fichier, sans ."
-    ,"@file_name_process_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
     ,"ca_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte."
     ,"@ca_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle analyse de contexte."}
     ,"ca_unfilled_analysis_title": "Sans titre"
-    ,"@ca_unfilled_analysis_title": {"description": "La valeur par défaut du titre d'une analyse de contexte"}  
+    ,"@ca_unfilled_analysis_title": {"description": "La valeur par défaut du titre d'une analyse de contexte"}   
     ,"ca_dashboard_title": "Analyses précédentes"
-    ,"@ca_dashboard_title": {"description": "Le titre du tableau de bord"} 
-    ,"ca_dashboard_sort_by_title": "Tri par titre"
-    ,"@ca_dashboard_sort_by_title": {"description": "Le label pour le 'Tri par titre'"}   
-    ,"ca_dashboard_sort_by_date": "Tri par date"
-    ,"@ca_dashboard_sort_by_date": {"description": "Le label pour le 'Tri par date'"}   
-    ,"ca_dashboard_filter_by_keywords": "Filtrage par mots-clés"
-    ,"@ca_dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
-    ,"ca_dashboard_keywords": "Mots-clés: "
-    ,"@ca_dashboard_keywords": {"description": "l10n pour Mots-clés"}
-    ,"ca_dashboard_tooltip_preview": "Aperçu"
-    ,"@ca_dashboard_tooltip_preview": {"description": "l10n pour l'infobulle d'aperçu"} 
-    ,"ca_dashboard_tooltip_edit_session_data": "Éditer l'analyse"
-    ,"@ca_dashboard_tooltip_edit_session_data": {"description": "l10n pour l'infobulle 'Éditer l'analyse'"}
-    ,"ca_dashboard_tooltip_edit_keywords": "Éditer les mots-clés"
-    ,"@ca_dashboard_tooltip_edit_keywords": {"description": "l10n pour l'infobulle 'Éditer les mots-clés'"}
-    ,"ca_dashboard_tooltip_delete": "Supprimer les données"
-    ,"@ca_dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
-    ,"ca_dashboard_tooltip_bulk_delete": "Supprimer les éléments sélectionnés"
-    ,"@ca_dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les éléments sélectionnés'"} 
-    ,"ca_dashboard_edit_title_sheet_label_text": "Éditer le titre"
-    ,"@ca_dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette 'Éditer le titre'"}
+    ,"@ca_dashboard_title": {"description": "Le titre du tableau de bord"}
     ,"ca_preview_notes": "Notes: "
     ,"@ca_preview_notes": {"description": "l10n pour Notes:"}
     ,"ca_preview_answers": "Réponse(s): "
     ,"@ca_preview_answers": {"description": "l10n pour Réponse(s): "}
     ,"ca_preview_no_data_stored": "Cases non cochées et pas de réponse dans le dernier champ de texte."
     ,"@ca_preview_no_data_stored": {"description": "l10n pour 'Cases non cochées et pas de réponse dans le dernier champ de texte.'"}
- 
+
+    ,"segmented_button_yes": "Oui"
+    ,"@segmented_button_yes": {"description":"l10n pour Oui"}
+    ,"segmented_button_no": "Non"
+    ,"@segmented_button_no": {"description":"l10n pour Non"}
+    ,"segmented_button_I_don_t_know": "Je ne sais pas"
+    ,"@segmented_button_I_don_t_know": {"description":"l10n pour Je ne sais pas"}
+    
+    ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
+    ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
+    ,"file_name_process_text_field_hint": "Veuillez entrer un nom de fichier, sans ."
+    ,"@file_name_process_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
+    
+    ,"dashboard_sort_by_title": "Tri par titre"
+    ,"@dashboard_sort_by_title": {"description": "Le label pour le 'Tri par titre'"}      
+    ,"dashboard_sort_by_date": "Tri par date"
+    ,"@dashboard_sort_by_date": {"description": "Le label pour le 'Tri par date'"}   
+    ,"dashboard_filter_by_keywords": "Filtrage par mots-clés"
+    ,"@dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
+    ,"dashboard_keywords": "Mots-clés: "
+    ,"@dashboard_keywords": {"description": "l10n pour Mots-clés"}
+    ,"dashboard_tooltip_preview": "Aperçu"
+    ,"@dashboard_tooltip_preview": {"description": "l10n pour l'infobulle d'aperçu"}  
+    ,"dashboard_tooltip_edit_session_data": "Éditer l'analyse"
+    ,"@dashboard_tooltip_edit_session_data": {"description": "l10n pour l'infobulle 'Éditer l'analyse'"}
+    ,"dashboard_tooltip_edit_keywords": "Éditer les mots-clés"
+    ,"@dashboard_tooltip_edit_keywords": {"description": "l10n pour l'infobulle 'Éditer les mots-clés'"}
+    ,"dashboard_tooltip_delete": "Supprimer les données"
+    ,"@dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
+    ,"dashboard_tooltip_bulk_delete": "Supprimer les données sélectionnées"
+    ,"@dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
+    ,"dashboard_edit_title_sheet_label_text": "Éditer le titre"
+    ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette 'Éditer le titre'"}
+    
+    ,"save_button_text": "Enregistrer les données"
+    ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
+
 }

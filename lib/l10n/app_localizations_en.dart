@@ -133,6 +133,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_new_process_button =>
+      'Please click to start\na new context analysis.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Untitled';
+
+  @override
+  String get ca_dashboard_title => 'Previous analyses';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Answer(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'No question checked and no data in the last text field.';
+
+  @override
   String get segmented_button_yes => 'Yes';
 
   @override
@@ -150,54 +170,37 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please add the file name, without .';
 
   @override
-  String get ca_new_process_button =>
-      'Please click to start\na new context analysis.';
+  String get dashboard_sort_by_title => 'Sort by Title';
 
   @override
-  String get ca_unfilled_analysis_title => 'Untitled';
+  String get dashboard_sort_by_date => 'Sort by Date';
 
   @override
-  String get ca_dashboard_title => 'Previous analyses';
+  String get dashboard_filter_by_keywords => 'Filter by Keywords';
 
   @override
-  String get ca_dashboard_sort_by_title => 'Sort by Title';
+  String get dashboard_keywords => 'Keywords: ';
 
   @override
-  String get ca_dashboard_sort_by_date => 'Sort by Date';
+  String get dashboard_tooltip_preview => 'Preview';
 
   @override
-  String get ca_dashboard_filter_by_keywords => 'Filter by Keywords';
+  String get dashboard_tooltip_edit_session_data => 'Edit session data';
 
   @override
-  String get ca_dashboard_keywords => 'Keywords: ';
+  String get dashboard_tooltip_edit_keywords => 'Edit Keywords';
 
   @override
-  String get ca_dashboard_tooltip_preview => 'Preview';
+  String get dashboard_tooltip_delete => 'Delete data';
 
   @override
-  String get ca_dashboard_tooltip_edit_session_data => 'Edit session data';
+  String get dashboard_tooltip_bulk_delete => 'Delete selected data';
 
   @override
-  String get ca_dashboard_tooltip_edit_keywords => 'Edit Keywords';
+  String get dashboard_edit_title_sheet_label_text => 'Edit Title';
 
   @override
-  String get ca_dashboard_tooltip_delete => 'Delete item';
-
-  @override
-  String get ca_dashboard_tooltip_bulk_delete => 'Delete selected items';
-
-  @override
-  String get ca_dashboard_edit_title_sheet_label_text => 'Edit Title';
-
-  @override
-  String get ca_preview_notes => 'Notes: ';
-
-  @override
-  String get ca_preview_answers => 'Answer(s): ';
-
-  @override
-  String get ca_preview_no_data_stored =>
-      'No question checked and no data in the last text field.';
+  String get save_button_text => 'Save Changes';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -306,7 +309,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_group_perspective_title_question =>
-      'As a member of\ngroups/teams:\nWhat problem(s)\nare we trying to solve?';
+      'As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?';
 
   @override
   String get ca_process_group_perspective_problems =>
@@ -329,6 +332,26 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_new_process_button =>
+      'Please click to start\na new context analysis.';
+
+  @override
+  String get ca_unfilled_analysis_title => 'Untitled';
+
+  @override
+  String get ca_dashboard_title => 'Previous analyses';
+
+  @override
+  String get ca_preview_notes => 'Notes: ';
+
+  @override
+  String get ca_preview_answers => 'Answer(s): ';
+
+  @override
+  String get ca_preview_no_data_stored =>
+      'No question checked and no data in the last text field.';
+
+  @override
   String get segmented_button_yes => 'Yes';
 
   @override
@@ -346,52 +369,35 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please add the file name, without .';
 
   @override
-  String get ca_new_process_button =>
-      'Please click to start\na new context analysis.';
+  String get dashboard_sort_by_title => 'Sort by Title';
 
   @override
-  String get ca_unfilled_analysis_title => 'Untitled';
+  String get dashboard_sort_by_date => 'Sort by Date';
 
   @override
-  String get ca_dashboard_title => 'Previous analyses';
+  String get dashboard_filter_by_keywords => 'Filter by Keywords';
 
   @override
-  String get ca_dashboard_sort_by_title => 'Sort by Title';
+  String get dashboard_keywords => 'Keywords: ';
 
   @override
-  String get ca_dashboard_sort_by_date => 'Sort by Date';
+  String get dashboard_tooltip_preview => 'Preview';
 
   @override
-  String get ca_dashboard_filter_by_keywords => 'Filter by Keywords';
+  String get dashboard_tooltip_edit_session_data => 'Edit session data';
 
   @override
-  String get ca_dashboard_keywords => 'Keywords: ';
+  String get dashboard_tooltip_edit_keywords => 'Edit Keywords';
 
   @override
-  String get ca_dashboard_tooltip_preview => 'Preview';
+  String get dashboard_tooltip_delete => 'Delete data';
 
   @override
-  String get ca_dashboard_tooltip_edit_session_data => 'Edit session data';
+  String get dashboard_tooltip_bulk_delete => 'Delete selected data';
 
   @override
-  String get ca_dashboard_tooltip_edit_keywords => 'Edit Keywords';
+  String get dashboard_edit_title_sheet_label_text => 'Edit Title';
 
   @override
-  String get ca_dashboard_tooltip_delete => 'Delete item';
-
-  @override
-  String get ca_dashboard_tooltip_bulk_delete => 'Delete selected items';
-
-  @override
-  String get ca_dashboard_edit_title_sheet_label_text => 'Edit Title';
-
-  @override
-  String get ca_preview_notes => 'Notes: ';
-
-  @override
-  String get ca_preview_answers => 'Answer(s): ';
-
-  @override
-  String get ca_preview_no_data_stored =>
-      'No question checked and no data in the last text field.';
+  String get save_button_text => 'Save Changes';
 }

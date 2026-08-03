@@ -155,13 +155,13 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     return Center(
         child: 
         Tooltip(
-          message: AppLocalizations.of(context)?.ca_dashboard_tooltip_bulk_delete ?? "Issue with the l10n for the 'Delete selected items' tooltip",  
+          message: AppLocalizations.of(context)?.dashboard_tooltip_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' tooltip",  
           child: TextButton.icon(
             onPressed: _sessionsMetadataSelectedDelete,
             icon: Icon
                   (
                     Icons.delete, 
-                    semanticLabel: AppLocalizations.of(context)?.ca_dashboard_tooltip_bulk_delete ?? "Issue with the l10n for the 'Delete selected items' tooltip",  
+                    semanticLabel: AppLocalizations.of(context)?.dashboard_tooltip_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' tooltip",  
                     color: (widget.areSessionsForDeletion == true)? Colors.red: transparent
                   ),
             label: Text(

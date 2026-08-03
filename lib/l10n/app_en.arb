@@ -1,5 +1,6 @@
 {
   "@@locale":"en",
+
   "app_title": "Journeyers",
   "@app_title": {"description": "The title for the app"},
   "app_sub_title": "What story will we leave\nfor our loved ones to tell?",
@@ -10,6 +11,7 @@
   "@app_lang_en": {"description": "The name of the English language, in English"},
   "app_lang_fr": "French",
   "@app_lang_fr": {"description": "The name of the French language, in English"},
+
   "ca_process_title": "Context analysis",
   "@ca_process_title": {"description": "The title of the context analysis process"},
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
@@ -62,48 +64,54 @@
   ,"@ca_process_group_perspective_appreciability_work": {"description": "The question related to the consistency with appreciability at work"}
   ,"ca_process_group_perspective_earning_ability": "Is entering the group problem-solving process consistent with my income earning ability?"
   ,"@ca_process_group_perspective_earning_ability": {"description": "The question related to the consistency with earning ability"}
-  ,"segmented_button_yes": "Yes"
-  ,"@segmented_button_yes": {"description":"l10n for Yes"}
-  ,"segmented_button_no": "No"
-  ,"@segmented_button_no": {"description":"l10n for No"}
-  ,"segmented_button_I_don_t_know": "I don't know"
-  ,"@segmented_button_I_don_t_know": {"description":"l10n for I don't know"}
-  ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
-  ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
-  ,"file_name_process_text_field_hint": "Please add the file name, without ."
-  ,"@file_name_process_text_field_hint": {"description": "The text field hint inviting to add a file name without extension"}   
   ,"ca_new_process_button": "Please click to start\na new context analysis."
   ,"@ca_new_process_button": {"description": "The text inviting to click to start a new context analysis."}   
   ,"ca_unfilled_analysis_title": "Untitled"
   ,"@ca_unfilled_analysis_title": {"description": "The default title value for a context analysis"}   
   ,"ca_dashboard_title": "Previous analyses"
   ,"@ca_dashboard_title": {"description": "The dashboard title"}   
-  ,"ca_dashboard_sort_by_title": "Sort by Title"
-  ,"@ca_dashboard_sort_by_title": {"description": "The 'Sort by Title' label"}
-  ,"ca_dashboard_sort_by_date": "Sort by Date"
-  ,"@ca_dashboard_sort_by_date": {"description": "The 'Sort by Date' label"}
-  ,"ca_dashboard_filter_by_keywords": "Filter by Keywords"
-  ,"@ca_dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
-  ,"ca_dashboard_keywords": "Keywords: "
-  ,"@ca_dashboard_keywords": {"description": "l10n for Keywords"}
-  ,"ca_dashboard_tooltip_preview": "Preview"
-  ,"@ca_dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
-  ,"ca_dashboard_tooltip_edit_session_data": "Edit session data"
-  ,"@ca_dashboard_tooltip_edit_session_data": {"description": "l10n for the 'Edit session data' tooltip"}
-  ,"ca_dashboard_tooltip_edit_keywords": "Edit Keywords"
-  ,"@ca_dashboard_tooltip_edit_keywords": {"description": "l10n for the 'Edit Keywords' tooltip"}
-  ,"ca_dashboard_tooltip_delete": "Delete item"
-  ,"@ca_dashboard_tooltip_delete": {"description": "l10n for the 'Delete item' tooltip"}
-  ,"ca_dashboard_tooltip_bulk_delete": "Delete selected items"
-  ,"@ca_dashboard_tooltip_bulk_delete": {"description": "l10n for the 'Delete selected items' tooltip"}
-  ,"ca_dashboard_edit_title_sheet_label_text": "Edit Title"
-  ,"@ca_dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Edit Title' label text"}
   ,"ca_preview_notes": "Notes: "
   ,"@ca_preview_notes": {"description": "l10n for Notes:"}
   ,"ca_preview_answers": "Answer(s): "
   ,"@ca_preview_answers": {"description": "l10n for Answer(s): "}
   ,"ca_preview_no_data_stored": "No question checked and no data in the last text field."
   ,"@ca_preview_no_data_stored": {"description": "l10n for 'No question checked and no data in the last text field.'"}
- 
   
+  ,"segmented_button_yes": "Yes"
+  ,"@segmented_button_yes": {"description":"l10n for Yes"}
+  ,"segmented_button_no": "No"
+  ,"@segmented_button_no": {"description":"l10n for No"}
+  ,"segmented_button_I_don_t_know": "I don't know"
+  ,"@segmented_button_I_don_t_know": {"description":"l10n for I don't know"}
+  
+  ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
+  ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
+  ,"file_name_process_text_field_hint": "Please add the file name, without ."
+  ,"@file_name_process_text_field_hint": {"description": "The text field hint inviting to add a file name without extension"}   
+ 
+  ,"dashboard_sort_by_title": "Sort by Title"
+  ,"@dashboard_sort_by_title": {"description": "The 'Sort by Title' label"}  
+  ,"dashboard_sort_by_date": "Sort by Date"
+  ,"@dashboard_sort_by_date": {"description": "The 'Sort by Date' label"}
+  ,"dashboard_filter_by_keywords": "Filter by Keywords"
+  ,"@dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
+  ,"dashboard_keywords": "Keywords: "
+  ,"@dashboard_keywords": {"description": "l10n for Keywords"}
+  ,"dashboard_tooltip_preview": "Preview"
+  ,"@dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
+  ,"dashboard_tooltip_edit_session_data": "Edit session data"
+  ,"@dashboard_tooltip_edit_session_data": {"description": "l10n for the 'Edit session data' tooltip"}
+  ,"dashboard_tooltip_edit_keywords": "Edit Keywords"
+  ,"@dashboard_tooltip_edit_keywords": {"description": "l10n for the 'Edit Keywords' tooltip"}
+  ,"dashboard_tooltip_delete": "Delete data"
+  ,"@dashboard_tooltip_delete": {"description": "l10n for the 'Delete data' tooltip"}
+  ,"dashboard_tooltip_bulk_delete": "Delete selected data"
+  ,"@dashboard_tooltip_bulk_delete": {"description": "l10n for the 'Delete selected data' tooltip"}
+  ,"dashboard_edit_title_sheet_label_text": "Edit Title"
+  ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Edit Title' label text"}
+  
+  ,"save_button_text": "Save Changes"
+  ,"@save_button_text": {"description": "l10n for the save_button text"}
+  
+
 }

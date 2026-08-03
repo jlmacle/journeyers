@@ -319,7 +319,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           onKeywordsUpdated: _onKeywordsUpdated
                           ),
                         child: Text(
-                          "${AppLocalizations.of(context)?.ca_dashboard_keywords ?? "Issue with the 'Keywords' label"}${sortedKeywords.join(", ")}",
+                          "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"}${sortedKeywords.join(", ")}",
                           key: Key("session-keywords-${widget.sessionDataIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
@@ -340,13 +340,13 @@ class _SessionsListItemState extends State<SessionsListItem>
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
                       onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, _updateTmpFilePath),
-                      tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip",
+                      tooltip: AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip",
                     ),
                     // To edit the session file data                    
                     IconButton(
                       icon: const Icon(Icons.edit_document),
                       onPressed: widget.onEditPressedCallbackFunction,                      
-                      tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip",
+                      tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip",
                     ),
                     // To edit the keywords
                     IconButton(
@@ -361,7 +361,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                         onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
                         onKeywordsUpdated: _onKeywordsUpdated
                       ),
-                      tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_edit_keywords ?? "Issue with the l10n for the 'Edit Keywords' tooltip",
+                      tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_keywords ?? "Issue with the l10n for the 'Edit Keywords' tooltip",
                     ),
                   ],
                 ),
@@ -369,7 +369,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                 IconButton(                  
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
-                  tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete item' tooltip",
+                  tooltip: AppLocalizations.of(context)?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip",
                 ),
               ],
             ),
@@ -410,7 +410,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                 children: [
                   IconButton
                   (
-                    tooltip: AppLocalizations.of(context)?.ca_dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip",
+                    tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip",
                     icon: const Icon(Icons.edit),
                     color: appBarWhite,
                     onPressed: () async

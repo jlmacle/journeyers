@@ -99,7 +99,7 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
                 padding: const EdgeInsets.all(8.0),
                 child: Text // TODO: to move
                 (
-                  AppLocalizations.of(context)?.ca_dashboard_filter_by_keywords ?? "Issue with the 'Filter by Keywords' label",
+                  AppLocalizations.of(context)?.dashboard_filter_by_keywords ?? "Issue with the 'Filter by Keywords' label",
                   style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
                 ),
               ),
