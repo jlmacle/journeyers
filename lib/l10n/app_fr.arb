@@ -92,8 +92,8 @@
     ,"@ca_dashboard_tooltip_edit_session_data": {"description": "l10n pour l'infobulle 'Éditer l'analyse'"}
     ,"ca_dashboard_tooltip_edit_keywords": "Éditer les mots-clés"
     ,"@ca_dashboard_tooltip_edit_keywords": {"description": "l10n pour l'infobulle 'Éditer les mots-clés'"}
-    ,"ca_dashboard_tooltip_delete": "Supprimer les données sélectionnées"
-    ,"@ca_dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
+    ,"ca_dashboard_tooltip_delete": "Supprimer les données"
+    ,"@ca_dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
     ,"ca_preview_notes": "Notes: "
     ,"@ca_preview_notes": {"description": "l10n pour Notes:"}
     ,"ca_preview_answers": "Réponse(s): "

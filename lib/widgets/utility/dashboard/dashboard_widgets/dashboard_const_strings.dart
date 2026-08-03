@@ -14,7 +14,7 @@ const previewTooltipLabel = "Preview";
 const previewClosingTooltipLabel = "Please click to close preview";
 const editFromDashboardItemTooltipLabel = "Edit session data";
 const keywordsTooltipLabel = "Edit Keywords";
-const deleteTooltipLabel = "Delete selected items";
+const deleteTooltipLabel = "Delete item";
 
 // Text field labels
 const keywordsTextFieldLabel = "Keywords Edition (please separate with commas)";
