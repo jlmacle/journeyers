@@ -383,6 +383,12 @@ abstract class AppLocalizations {
   /// **'Delete item'**
   String get ca_dashboard_tooltip_delete;
 
+  /// l10n for the 'Delete selected items' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected items'**
+  String get ca_dashboard_tooltip_bulk_delete;
+
   /// l10n for Notes:
   ///
   /// In en, this message translates to:

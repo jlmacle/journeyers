@@ -94,6 +94,8 @@
   ,"@ca_dashboard_tooltip_edit_keywords": {"description": "l10n for the 'Edit Keywords' tooltip"}
   ,"ca_dashboard_tooltip_delete": "Delete item"
   ,"@ca_dashboard_tooltip_delete": {"description": "l10n for the 'Delete item' tooltip"}
+  ,"ca_dashboard_tooltip_bulk_delete": "Delete selected items"
+  ,"@ca_dashboard_tooltip_bulk_delete": {"description": "l10n for the 'Delete selected items' tooltip"}
   ,"ca_preview_notes": "Notes: "
   ,"@ca_preview_notes": {"description": "l10n for Notes:"}
   ,"ca_preview_answers": "Answer(s): "
