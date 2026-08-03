@@ -73,7 +73,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
       ),
       label: Text
       (
-        AppLocalizations.of(context)?.ca_dashboard_sort_by_date ?? "Issue with the 'Sort by Date' label",
+        AppLocalizations.of(context)?.dashboard_sort_by_date ?? "Issue with the 'Sort by Date' label",
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
     );

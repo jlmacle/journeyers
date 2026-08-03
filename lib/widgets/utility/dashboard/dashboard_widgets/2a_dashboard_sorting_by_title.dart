@@ -70,7 +70,7 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
       ),
       label: Text
       (
-        "${AppLocalizations.of(context)?.ca_dashboard_sort_by_title ?? "Issue with the 'Sort by Title' label"} (${_isAscendingTitle ? "Z-A" : "A-Z"})",
+        "${AppLocalizations.of(context)?.dashboard_sort_by_title ?? "Issue with the 'Sort by Title' label"} (${_isAscendingTitle ? "Z-A" : "A-Z"})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),
