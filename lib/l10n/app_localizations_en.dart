@@ -187,6 +187,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_dashboard_tooltip_bulk_delete => 'Delete selected items';
 
   @override
+  String get ca_dashboard_edit_title_sheet_label_text => 'Edit Title';
+
+  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -378,6 +381,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_dashboard_tooltip_bulk_delete => 'Delete selected items';
+
+  @override
+  String get ca_dashboard_edit_title_sheet_label_text => 'Edit Title';
 
   @override
   String get ca_preview_notes => 'Notes: ';

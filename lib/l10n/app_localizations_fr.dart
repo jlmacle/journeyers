@@ -189,6 +189,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Supprimer les éléments sélectionnés';
 
   @override
+  String get ca_dashboard_edit_title_sheet_label_text => 'Éditer le titre';
+
+  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -382,6 +385,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_dashboard_tooltip_bulk_delete =>
       'Supprimer les éléments sélectionnés';
+
+  @override
+  String get ca_dashboard_edit_title_sheet_label_text => 'Éditer le titre';
 
   @override
   String get ca_preview_notes => 'Notes: ';
