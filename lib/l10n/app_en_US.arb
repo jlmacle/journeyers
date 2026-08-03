@@ -107,8 +107,12 @@
   ,"@dashboard_tooltip_delete": {"description": "l10n for the 'Delete data' tooltip"}
   ,"dashboard_tooltip_bulk_delete": "Delete selected data"
   ,"@dashboard_tooltip_bulk_delete": {"description": "l10n for the 'Delete selected data' tooltip"}
-  ,"dashboard_edit_title_sheet_label_text": "Edit Title"
-  ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Edit Title' label text"}
+  ,"dashboard_edit_title_sheet_label_text": "Title Edition"
+  ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Title Edition' label text"}
+  ,"dashboard_edit_keywords_sheet_label_text": "Keywords Edition (please separate with commas)"
+  ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n for the 'Keywords Edition' label text"}
+  ,"dashboard_edit_keywords_sheet_text_field_hint": "Please enter your keywords."
+  ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n for the 'Keywords Edition' text field hint"}
   
   ,"save_button_text": "Save Changes"
   ,"@save_button_text": {"description": "l10n for the save_button text"}

@@ -407,11 +407,23 @@ abstract class AppLocalizations {
   /// **'Delete selected data'**
   String get dashboard_tooltip_bulk_delete;
 
-  /// l10n for the 'Edit Title' label text
+  /// l10n for the 'Title Edition' label text
   ///
   /// In en, this message translates to:
-  /// **'Edit Title'**
+  /// **'Title Edition'**
   String get dashboard_edit_title_sheet_label_text;
+
+  /// l10n for the 'Keywords Edition' label text
+  ///
+  /// In en, this message translates to:
+  /// **'Keywords Edition (please separate with commas)'**
+  String get dashboard_edit_keywords_sheet_label_text;
+
+  /// l10n for the 'Keywords Edition' text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your keywords.'**
+  String get dashboard_edit_keywords_sheet_text_field_hint;
 
   /// l10n for the save_button text
   ///

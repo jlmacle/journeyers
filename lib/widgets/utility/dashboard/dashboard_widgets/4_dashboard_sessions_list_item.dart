@@ -597,11 +597,11 @@ void _showKeywordsEditSheet
             key: const Key("kwsDashboardEditField"),
             controller: kwsEditController,
             autofocus: true,
-            decoration: const InputDecoration
+            decoration: InputDecoration
             (
-              labelText: keywordsTextFieldLabel, 
-              labelStyle: TextStyle(color: Colors.black),
-              hintText: "Please enter your keywords.",
+              labelText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_label_text ?? "Issue with the l10n for the 'Keywords Edition' label text", 
+              labelStyle: const TextStyle(color: Colors.black),
+              hintText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_text_field_hint ?? "Issue with the l10n for the 'Keywords Edition' text field hint",
             ),
             onSubmitted: (_) async => onKeywordsUpdated(filePath)
           ),       
