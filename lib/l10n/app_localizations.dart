@@ -383,6 +383,12 @@ abstract class AppLocalizations {
   /// **'Keywords: '**
   String get dashboard_keywords;
 
+  /// Error message when previewing with a different interface language setting than the language used for the saved data
+  ///
+  /// In en, this message translates to:
+  /// **'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.'**
+  String get dashboard_preview_mixed_languages_error_message;
+
   /// l10n for the 'Preview' tooltip
   ///
   /// In en, this message translates to:

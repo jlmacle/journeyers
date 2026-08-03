@@ -99,6 +99,8 @@
   ,"@dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
   ,"dashboard_keywords": "Keywords: "
   ,"@dashboard_keywords": {"description": "l10n for Keywords"}
+  ,"dashboard_preview_mixed_languages_error_message": "Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data."
+  ,"@dashboard_preview_mixed_languages_error_message": {"description": "Error message when previewing with a different interface language setting than the language used for the saved data"}
   ,"dashboard_tooltip_preview": "Preview"
   ,"@dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
   ,"dashboard_tooltip_edit_session_data": "Edit session data"
