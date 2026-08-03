@@ -423,7 +423,7 @@ class DashboardPageState extends State<DashboardPage>
                                   // Closing the modal sheet
                                   Navigator.pop(context);
                               },    
-                              elevatedButtonText:"Save",
+                              elevatedButtonText: AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save_button text",  
                               elevatedButtonStyle: const TextStyle(color: black)
                             ),
                           onEditPressedCallbackFunction: 

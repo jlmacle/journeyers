@@ -305,12 +305,6 @@ abstract class AppLocalizations {
   /// **'Previous analyses'**
   String get ca_dashboard_title;
 
-  /// The 'Sort by Title' label
-  ///
-  /// In en, this message translates to:
-  /// **'Sort by Title'**
-  String get dashboard_sort_by_title;
-
   /// l10n for Notes:
   ///
   /// In en, this message translates to:
@@ -358,6 +352,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please add the file name, without .'**
   String get file_name_process_text_field_hint;
+
+  /// The 'Sort by Title' label
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by Title'**
+  String get dashboard_sort_by_title;
 
   /// The 'Sort by Date' label
   ///
@@ -412,6 +412,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit Title'**
   String get dashboard_edit_title_sheet_label_text;
+
+  /// l10n for the save_button text
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get save_button_text;
 }
 
 class _AppLocalizationsDelegate

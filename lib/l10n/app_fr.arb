@@ -109,5 +109,8 @@
     ,"@dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
     ,"dashboard_edit_title_sheet_label_text": "Éditer le titre"
     ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette 'Éditer le titre'"}
-     
+    
+    ,"save_button_text": "Enregistrer les données"
+    ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
+
 }

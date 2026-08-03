@@ -110,4 +110,8 @@
   ,"dashboard_edit_title_sheet_label_text": "Edit Title"
   ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Edit Title' label text"}
   
+  ,"save_button_text": "Save Changes"
+  ,"@save_button_text": {"description": "l10n for the save_button text"}
+  
+
 }

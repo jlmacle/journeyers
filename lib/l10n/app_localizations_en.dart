@@ -143,9 +143,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_dashboard_title => 'Previous analyses';
 
   @override
-  String get dashboard_sort_by_title => 'Sort by Title';
-
-  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -173,6 +170,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please add the file name, without .';
 
   @override
+  String get dashboard_sort_by_title => 'Sort by Title';
+
+  @override
   String get dashboard_sort_by_date => 'Sort by Date';
 
   @override
@@ -198,6 +198,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Edit Title';
+
+  @override
+  String get save_button_text => 'Save Changes';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -339,9 +342,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get ca_dashboard_title => 'Previous analyses';
 
   @override
-  String get dashboard_sort_by_title => 'Sort by Title';
-
-  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -369,6 +369,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please add the file name, without .';
 
   @override
+  String get dashboard_sort_by_title => 'Sort by Title';
+
+  @override
   String get dashboard_sort_by_date => 'Sort by Date';
 
   @override
@@ -394,4 +397,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Edit Title';
+
+  @override
+  String get save_button_text => 'Save Changes';
 }

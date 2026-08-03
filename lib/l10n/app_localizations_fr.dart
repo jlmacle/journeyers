@@ -144,9 +144,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ca_dashboard_title => 'Analyses précédentes';
 
   @override
-  String get dashboard_sort_by_title => 'Tri par titre';
-
-  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -172,6 +169,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get file_name_process_text_field_hint =>
       'Veuillez entrer un nom de fichier, sans .';
+
+  @override
+  String get dashboard_sort_by_title => 'Tri par titre';
 
   @override
   String get dashboard_sort_by_date => 'Tri par date';
@@ -200,6 +200,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Éditer le titre';
+
+  @override
+  String get save_button_text => 'Enregistrer les données';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -342,9 +345,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get ca_dashboard_title => 'Analyses précédentes';
 
   @override
-  String get dashboard_sort_by_title => 'Tri par titre';
-
-  @override
   String get ca_preview_notes => 'Notes: ';
 
   @override
@@ -370,6 +370,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get file_name_process_text_field_hint =>
       'Veuillez entrer un nom de fichier, sans .';
+
+  @override
+  String get dashboard_sort_by_title => 'Tri par titre';
 
   @override
   String get dashboard_sort_by_date => 'Tri par date';
@@ -398,4 +401,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Éditer le titre';
+
+  @override
+  String get save_button_text => 'Enregistrer les données';
 }
