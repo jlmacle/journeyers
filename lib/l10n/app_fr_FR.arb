@@ -109,6 +109,8 @@
     ,"@dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
     ,"dashboard_tooltip_bulk_delete": "Supprimer les données sélectionnées"
     ,"@dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
+    ,"dashboard_preview_share_session_data_tooltip": "Partager l'analyse"
+    ,"@dashboard_preview_share_session_data_tooltip": {"description": "l10n pour l'infobulle 'Partager l'analyse' dans l'aperçu"} 
     ,"dashboard_edit_title_sheet_label_text": "Édition du titre"
     ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du titre"}
     ,"dashboard_edit_title_sheet_text_field_hint": "Veuillez entrer un titre."
