@@ -209,6 +209,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Share session data';
 
   @override
+  String get dashboard_preview_close_preview_tooltip =>
+      'Please click to close the preview';
+
+  @override
   String get dashboard_edit_title_sheet_label_text => 'Title Edition';
 
   @override
@@ -430,6 +434,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get dashboard_preview_share_session_data_tooltip =>
       'Share session data';
+
+  @override
+  String get dashboard_preview_close_preview_tooltip =>
+      'Please click to close the preview';
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Title Edition';
