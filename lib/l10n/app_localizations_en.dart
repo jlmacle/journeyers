@@ -186,6 +186,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_keywords => 'Keywords: ';
 
   @override
+  String get dashboard_preview_mixed_languages_error_message =>
+      'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
+
+  @override
   String get dashboard_tooltip_preview => 'Preview';
 
   @override
@@ -403,6 +407,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get dashboard_keywords => 'Keywords: ';
+
+  @override
+  String get dashboard_preview_mixed_languages_error_message =>
+      'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
 
   @override
   String get dashboard_tooltip_preview => 'Preview';

@@ -83,9 +83,15 @@ class _CAPreviewState extends State<CAPreview>
       return;
     }
         
-    
-    Map<String, List<dynamic>> perspectiveData = await _caCSVFileToPreviewPerspectiveData(widget.pathToStoredData);
-    await _perspectiveDataToDataStructures(perspectiveData);
+    try
+    {
+      Map<String, List<dynamic>> perspectiveData = await _caCSVFileToPreviewPerspectiveData(widget.pathToStoredData);
+      await _perspectiveDataToDataStructures(perspectiveData);
+    }
+    catch(e,s)
+    {
+      pu.printd("Error: CAPreview: _fetchingData: $e: $s");
+    }
     
     if (mounted) {
       setState(() {
@@ -183,7 +189,6 @@ class _CAPreviewState extends State<CAPreview>
           lineReturnToSpace(AppLocalizations.of(context)?.ca_process_group_perspective_title_question)
               ?? "Issue with the title question for the group perspective"
         ].contains(secondValue)) 
-      // if (qfl!.level2Titles.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
@@ -514,155 +519,165 @@ class _CAPreviewState extends State<CAPreview>
         ? const Text(testDataMessage)
         
         // PREVIEW NOT USED WITHIN TESTING
-        :  Column
-          (
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: 
-            [
-                Column
-                (
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: 
-                  [
-                    Padding
-                    (
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text
-                      (
-                        _sectionsIndividual["title"] ?? "No individual section title found",
-                        style: styleExpansionTileTitle
-                      ),
-                    ),
-
-                    // Questions and potential answers for the individual perspective
-                    ...
+        : (_sectionsGroup["title"] == null)
+          ?
+            Center
+            (
+              child: Text
+              (
+                textAlign: .center,
+                AppLocalizations.of(context)?.dashboard_preview_mixed_languages_error_message ?? "Issue with the error message when previewing with a different interface language setting than the language used for the saved data"
+              )
+            )
+          :  Column
+            (
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: 
+              [
+                  Column
+                  (
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: 
                     [
-                      // "questions": list of maps with "title" and "items" as keys
-                      // If no checkbox checked and no value for the text field only, a message to display
-                      if 
+                      Padding
                       (
-                        _sectionsIndividual["questions"].where
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text
                         (
-                          (question) => 
-                            (question["items"] as List).any((item) => item["checked"] == "yes") 
-                            ||
-                            (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
-                        ).isEmpty
-                      )
-                        Padding
+                          _sectionsIndividual["title"] ?? "No individual section title found",
+                          style: styleExpansionTileTitle
+                        ),
+                      ),
+
+                      // Questions and potential answers for the individual perspective
+                      ...
+                      [
+                        // "questions": list of maps with "title" and "items" as keys
+                        // If no checkbox checked and no value for the text field only, a message to display
+                        if 
                         (
-                          padding: const EdgeInsets.only(left:16, top:8, bottom:8),
-                          child: Text
-                          (
-                            AppLocalizations.of(context)?.ca_preview_no_data_stored ?? "Issue with the l10n for 'No question checked and no data in the last text field.'",
-                            style: styleDataAbsent
-                          ),
-                        )
-                      else
-                        // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
-                        for 
-                        (
-                          var question in _sectionsIndividual["questions"].where
+                          _sectionsIndividual["questions"].where
                           (
                             (question) => 
                               (question["items"] as List).any((item) => item["checked"] == "yes") 
                               ||
                               (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
-                          )
-                      
+                          ).isEmpty
                         )
-                          ExpansionTile
+                          Padding
                           (
-                            // to remove the borders
-                            shape: Border.all(color: Colors.transparent, width: 0),
-                            initiallyExpanded: true,
-                            title: Text
+                            padding: const EdgeInsets.only(left:16, top:8, bottom:8),
+                            child: Text
                             (
-                              question["title"],
-                              style: styleExpansionTileTitle
+                              AppLocalizations.of(context)?.ca_preview_no_data_stored ?? "Issue with the l10n for 'No question checked and no data in the last text field.'",
+                              style: styleDataAbsent
                             ),
-                            children: 
-                            [
-                              // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
-                              for 
-                              (var item in (question["items"] as List).where
-                                (
-                                  (item) => item["checked"] == "yes" 
-                                  ||
-                                  item["notesTextField"] != null && item["notesTextField"] != ""                          
-                                )
-                              )
-                                ListTile
-                                (
-                                  leading: Icon
-                                  (
-                                    item["checked"] != null
-                                    ? Icons.check_box
-                                    : Icons.text_snippet
-                                  ),
-                                  title: Text
-                                  (
-                                    item["text"] ?? ((item["notesTextField"] != null && item["notesTextField"] != "")
-                                    ? "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${item["notesTextField"]}"
-                                    : ""),
-                                    style: styleExpandedTitleSubTitle                              
-                                  ),
-                                  subtitle: (item["notes"] != null)
-                                    ? Text("${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${item["notes"]}", style: styleExpandedTitleSubTitle)
-                                    : null,
-                                ),
-                            ],
-                          ),
-                      ],
-                  ],
-                ),
-                const Divider(thickness: 3, color: Colors.black),
-                Column
-                (
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: 
-                  [
-                    Padding
-                    (
-                      padding: const EdgeInsets.only(left: 16, top: 8, bottom:8),
-                      child: Text
-                      (
-                        _sectionsGroup["title"],
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    // Questions and potential answers for the group perspective
-                    for (var question in _sectionsGroup["questions"])
-                      ExpansionTile
-                      (
-                        // to remove the borders
-                        shape: Border.all(color: Colors.transparent, width: 0),                      
-                        initiallyExpanded: true, 
-                        title: Text
-                        (
-                          question["title"], 
-                          style: styleExpansionTileTitle
-                        ),
-                        children: 
-                        [
-                          ListTile
+                          )
+                        else
+                          // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
+                          for 
                           (
-                            leading: const Icon(Icons.text_snippet),
-                            title: Text                            
-                            ( 
-                              question["items"]["segValue"] == null
-                              ?
-                              "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
-                              :
-                              "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${question["items"]["segValue"] ?? ""}"
-                              "\n${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                            var question in _sectionsIndividual["questions"].where
+                            (
+                              (question) => 
+                                (question["items"] as List).any((item) => item["checked"] == "yes") 
+                                ||
+                                (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
+                            )
+                        
+                          )
+                            ExpansionTile
+                            (
+                              // to remove the borders
+                              shape: Border.all(color: Colors.transparent, width: 0),
+                              initiallyExpanded: true,
+                              title: Text
+                              (
+                                question["title"],
+                                style: styleExpansionTileTitle
+                              ),
+                              children: 
+                              [
+                                // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
+                                for 
+                                (var item in (question["items"] as List).where
+                                  (
+                                    (item) => item["checked"] == "yes" 
+                                    ||
+                                    item["notesTextField"] != null && item["notesTextField"] != ""                          
+                                  )
+                                )
+                                  ListTile
+                                  (
+                                    leading: Icon
+                                    (
+                                      item["checked"] != null
+                                      ? Icons.check_box
+                                      : Icons.text_snippet
+                                    ),
+                                    title: Text
+                                    (
+                                      item["text"] ?? ((item["notesTextField"] != null && item["notesTextField"] != "")
+                                      ? "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${item["notesTextField"]}"
+                                      : ""),
+                                      style: styleExpandedTitleSubTitle                              
+                                    ),
+                                    subtitle: (item["notes"] != null)
+                                      ? Text("${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${item["notes"]}", style: styleExpandedTitleSubTitle)
+                                      : null,
+                                  ),
+                              ],
                             ),
-                          ),
                         ],
+                    ],
+                  ),
+                  const Divider(thickness: 3, color: Colors.black),
+                  Column
+                  (
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: 
+                    [
+                      Padding
+                      (
+                        padding: const EdgeInsets.only(left: 16, top: 8, bottom:8),
+                        child: Text
+                        (
+                          _sectionsGroup["title"],
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
                       ),
-                  ],
-                ),
-            ],
-          );
+                      // Questions and potential answers for the group perspective
+                      for (var question in _sectionsGroup["questions"])
+                        ExpansionTile
+                        (
+                          // to remove the borders
+                          shape: Border.all(color: Colors.transparent, width: 0),                      
+                          initiallyExpanded: true, 
+                          title: Text
+                          (
+                            question["title"], 
+                            style: styleExpansionTileTitle
+                          ),
+                          children: 
+                          [
+                            ListTile
+                            (
+                              leading: const Icon(Icons.text_snippet),
+                              title: Text                            
+                              ( 
+                                question["items"]["segValue"] == null
+                                ?
+                                "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                                :
+                                "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${question["items"]["segValue"] ?? ""}"
+                                "\n${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                    ),
+              ],
+            );
     }
   }

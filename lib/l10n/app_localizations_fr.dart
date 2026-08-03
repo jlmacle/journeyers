@@ -187,6 +187,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboard_keywords => 'Mots-clés: ';
 
   @override
+  String get dashboard_preview_mixed_languages_error_message =>
+      'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
+
+  @override
   String get dashboard_tooltip_preview => 'Aperçu';
 
   @override
@@ -406,6 +410,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get dashboard_keywords => 'Mots-clés: ';
+
+  @override
+  String get dashboard_preview_mixed_languages_error_message =>
+      'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
 
   @override
   String get dashboard_tooltip_preview => 'Aperçu';
