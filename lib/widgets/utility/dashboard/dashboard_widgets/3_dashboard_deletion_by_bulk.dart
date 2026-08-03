@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
@@ -152,10 +153,17 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   Widget build(BuildContext context) 
   {
     return Center(
-        child:        
-          TextButton.icon(
+        child: 
+        Tooltip(
+          message: AppLocalizations.of(context)?.ca_dashboard_tooltip_bulk_delete ?? "Issue with the l10n for the 'Delete selected items' tooltip",  
+          child: TextButton.icon(
             onPressed: _sessionsMetadataSelectedDelete,
-            icon: Icon(Icons.delete, color: (widget.areSessionsForDeletion == true)? Colors.red: transparent),
+            icon: Icon
+                  (
+                    Icons.delete, 
+                    semanticLabel: AppLocalizations.of(context)?.ca_dashboard_tooltip_bulk_delete ?? "Issue with the l10n for the 'Delete selected items' tooltip",  
+                    color: (widget.areSessionsForDeletion == true)? Colors.red: transparent
+                  ),
             label: Text(
               "Delete (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
               style: TextStyle(
@@ -163,7 +171,8 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ),    
+          )
+        ),    
     );
   }
 }
