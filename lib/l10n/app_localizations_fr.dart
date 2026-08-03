@@ -183,7 +183,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_dashboard_tooltip_delete =>
-      'Supprimer les élements sélectionnés';
+      'Supprimer les données sélectionnées';
 
   @override
   String get ca_preview_notes => 'Notes: ';
@@ -375,7 +375,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_dashboard_tooltip_delete =>
-      'Supprimer les élements sélectionnés';
+      'Supprimer les données sélectionnées';
 
   @override
   String get ca_preview_notes => 'Notes: ';
