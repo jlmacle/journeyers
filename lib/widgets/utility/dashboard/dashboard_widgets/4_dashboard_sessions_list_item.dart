@@ -463,7 +463,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
               // Right side: Close Button
               actions: [
                 IconButton(
-                  tooltip: previewClosingTooltipLabel,
+                  tooltip: AppLocalizations.of(context)?.dashboard_preview_close_preview_tooltip ?? "Issue with the l10n for the preview 'Close the preview' tooltip",
                   icon: const Icon(Icons.close),
                   color: appBarWhite,
                   onPressed: () async

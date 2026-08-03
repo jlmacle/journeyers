@@ -425,6 +425,12 @@ abstract class AppLocalizations {
   /// **'Share session data'**
   String get dashboard_preview_share_session_data_tooltip;
 
+  /// l10n for the preview 'Close the preview' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to close the preview'**
+  String get dashboard_preview_close_preview_tooltip;
+
   /// l10n for the 'Title Edition' label text
   ///
   /// In en, this message translates to:
