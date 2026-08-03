@@ -400,6 +400,7 @@ class DashboardPageState extends State<DashboardPage>
                               textFieldStartValue: session[DashboardUtils.keyTitle], 
                               textFieldLabelText: AppLocalizations.of(context)?.dashboard_edit_title_sheet_label_text ?? "Issue with the l10n for the 'Edit Title' label text", 
                               textFieldLabelStyle: const TextStyle(color: black), 
+                              textFiedHint:  Text(AppLocalizations.of(context)?.dashboard_edit_title_sheet_text_field_hint ?? "Issue with the l10n for the 'Title Edition' text field hint"),
                               errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                               errorTextTriggerFunctionParameter: _titleTec.text.trim(),
                               textFieldErrorText: emptyTitleEditError,

@@ -219,6 +219,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                 textFieldStartValue: currentListName, 
                                 textFieldLabelText: listNameTextFieldLabel, 
                                 textFieldLabelStyle: const TextStyle(color: black),
+                                textFiedHint: const Text("Please enter a list name."),
                                 errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                                 errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
                                 textFieldErrorText: emptyLabelEditError,

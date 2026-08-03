@@ -413,6 +413,12 @@ abstract class AppLocalizations {
   /// **'Title Edition'**
   String get dashboard_edit_title_sheet_label_text;
 
+  /// l10n for the 'Title Edition' text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your title.'**
+  String get dashboard_edit_title_sheet_text_field_hint;
+
   /// l10n for the 'Keywords Edition' label text
   ///
   /// In en, this message translates to:
