@@ -96,6 +96,8 @@
     ,"@ca_dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
     ,"ca_dashboard_tooltip_bulk_delete": "Supprimer les éléments sélectionnés"
     ,"@ca_dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les éléments sélectionnés'"} 
+    ,"ca_dashboard_edit_title_sheet_label_text": "Éditer le titre"
+    ,"@ca_dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette 'Éditer le titre'"}
     ,"ca_preview_notes": "Notes: "
     ,"@ca_preview_notes": {"description": "l10n pour Notes:"}
     ,"ca_preview_answers": "Réponse(s): "

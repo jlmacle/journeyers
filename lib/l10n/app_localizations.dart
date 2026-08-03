@@ -389,6 +389,12 @@ abstract class AppLocalizations {
   /// **'Delete selected items'**
   String get ca_dashboard_tooltip_bulk_delete;
 
+  /// l10n for the 'Edit Title' label text
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Title'**
+  String get ca_dashboard_edit_title_sheet_label_text;
+
   /// l10n for Notes:
   ///
   /// In en, this message translates to:
