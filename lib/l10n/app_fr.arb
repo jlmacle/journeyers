@@ -145,6 +145,8 @@
     ,"@text_lists_new_list_keywords_title": {"description": "Le titre pour l'overlay des mots-clés, pour la page de création de liste."}
     ,"text_lists_new_list_placeholder_when_no_list_data": "Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l'ajouter au groupe."
     ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "Le texte placeholder lorsqu'aucun nom n'est présent dans le nouveau groupe."}
+    ,"text_lists_new_list_text_field_hint": "Veuillez ajouter le nom d'un participant."
+    ,"@text_lists_new_list_text_field_hint": {"description": "Le placeholder du champ de texte, pour l'ajout du nom d'un participant."}
   
   
 

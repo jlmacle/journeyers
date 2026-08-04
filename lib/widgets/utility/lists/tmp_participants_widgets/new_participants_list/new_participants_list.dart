@@ -472,11 +472,11 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 key: const Key("participantNameField"),
                 controller: _newTextItemTec,
                 textAlign: TextAlign.left,
-                decoration: const InputDecoration
+                decoration: InputDecoration
                 (
                   hint: Text
                   ( 
-                    invitationToEnterToEnterAParticipantSName,
+                    AppLocalizations.of(context)?.text_lists_new_list_text_field_hint ?? "Issue with the text field hint for adding a participant's name.",
                     textAlign: TextAlign.left,                                          
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
