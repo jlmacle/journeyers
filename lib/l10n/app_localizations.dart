@@ -395,7 +395,7 @@ abstract class AppLocalizations {
   /// **'Filter by Keywords'**
   String get dashboard_filter_by_keywords;
 
-  /// l10n for Keywords
+  /// Text for the 'Keywords: ' prefix for the dashboard items
   ///
   /// In en, this message translates to:
   /// **'Keywords: '**
@@ -502,6 +502,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New list'**
   String get text_lists_new_list_title;
+
+  /// l10n for 'Keywords'
+  ///
+  /// In en, this message translates to:
+  /// **'Keywords'**
+  String get l10n_keywords;
 
   /// l10n for the save_button text
   ///

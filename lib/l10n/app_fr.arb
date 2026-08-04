@@ -105,7 +105,7 @@
     ,"dashboard_filter_by_keywords": "Filtrage par mots-clés"
     ,"@dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
     ,"dashboard_keywords": "Mots-clés: "
-    ,"@dashboard_keywords": {"description": "l10n pour Mots-clés"}
+    ,"@dashboard_keywords": {"description": "Texte pour le préfixe 'Mots-clés: ' pour les éléments du dashboard"}
     ,"dashboard_preview_mixed_languages_error_message": "Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c'est le cas,\nveuillez re-modifier le paramètre de langue."
     ,"@dashboard_preview_mixed_languages_error_message": {"description": "Message d'erreur si l'aperçu est requis avec un paramètre de langue, pour l'interface, différent de la langue utilisée pour sauvegarder les données"}
     ,"dashboard_tooltip_preview": "Aperçu"
@@ -142,7 +142,9 @@
     ,"text_lists_new_list_title": "Nouvelle liste"
     ,"@text_lists_new_list_title": {"description": "Le titre de la page de création de liste."}
 
-  
+    ,"l10n_keywords": "Mots-clés"
+    ,"@l10n_keywords": {"description": "l10n pour 'Mots-clés'"}
+    
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
 

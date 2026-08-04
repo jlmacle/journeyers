@@ -257,6 +257,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get text_lists_new_list_title => 'New list';
 
   @override
+  String get l10n_keywords => 'Keywords';
+
+  @override
   String get save_button_text => 'Save Changes';
 }
 
@@ -511,6 +514,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_new_list_title => 'New list';
+
+  @override
+  String get l10n_keywords => 'Keywords';
 
   @override
   String get save_button_text => 'Save Changes';
