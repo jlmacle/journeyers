@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
@@ -115,7 +116,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       textEditingControllerKey: const Key("gpsKeywordsField"), 
                       textEditingController: _keywordsTec, 
                       textFieldStyle: analysisTextFieldStyle, 
-                      textFieldHintText: "Please enter the keywords here.\n(+ Enter key)", 
+                      textFieldHintText: AppLocalizations.of(context)?.l10n_keywords_entry_text_field_hint ?? "Issue with the l10n for the keywords entry text field hint.",                 
                       textFieldHintStyle: analysisTextFieldHintStyle, 
                       onSubmittedCallbackFunction: (value, setLocalState) => _keywordAdd(value, setLocalState), 
                       setToUpdate: _keywords!, 
