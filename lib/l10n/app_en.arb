@@ -141,7 +141,11 @@
   ,"@text_lists_new_list_or_loading_list_new_group_option": {"description": "The new group option text for the new list or loading list page."}
   ,"text_lists_new_list_title": "New list"
   ,"@text_lists_new_list_title": {"description": "The title of the new list page."}
+  ,"text_lists_new_list_keywords_title": "Please enter keywords\nrelated to this group."
+  ,"@text_lists_new_list_keywords_title": {"description": "The title of the new list page keywords overlay."}
   
+  
+
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
   

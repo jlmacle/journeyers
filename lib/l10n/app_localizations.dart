@@ -503,6 +503,12 @@ abstract class AppLocalizations {
   /// **'New list'**
   String get text_lists_new_list_title;
 
+  /// The title of the new list page keywords overlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter keywords\n related to this group.'**
+  String get text_lists_new_list_keywords_title;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

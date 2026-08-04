@@ -97,7 +97,7 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
                       context: context, 
                       appBarBackgroundColor: white,
                       appBarForegroundColor: black,
-                      overlayTitle: "Please enter keywords\n related to this group.", 
+                      overlayTitle: AppLocalizations.of(context)?.text_lists_new_list_keywords_title ?? "Issue with the title of the new list page keywords overlay.",
                       overlayTitleStyle: newParticipantsListKeywordsOverlayTitleStyle, 
                       overlayCloseIconButtonToolTip: newParticipantsListKeywordsOverlayCloseIconButtonToolTip, 
                       textEditingControllerKey: const Key("kwsFieldNewList"), 
