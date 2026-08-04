@@ -34,7 +34,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner des mots-clés\npour cette analyse.\n(+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois\npour cette analyse.\n(+ Touche Entrée)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -264,6 +264,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_keywords => 'Mots-clés';
+
+  @override
+  String get l10n_keywords_entry_text_field_hint =>
+      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
 
   @override
   String get save_button_text => 'Enregistrer les données';
@@ -299,7 +303,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner des mots-clés\npour cette analyse.\n(+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois\npour cette analyse.\n(+ Touche Entrée)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -529,6 +533,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_keywords => 'Mots-clés';
+
+  @override
+  String get l10n_keywords_entry_text_field_hint =>
+      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
 
   @override
   String get save_button_text => 'Enregistrer les données';

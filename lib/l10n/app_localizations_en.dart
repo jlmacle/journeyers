@@ -34,7 +34,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Please enter keywords\nto describe the analysis.\n(+ Enter key)';
+      'Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -258,10 +258,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get text_lists_new_list_keywords_title =>
-      'Please enter keywords\n related to this group.';
+      'Please enter keywords\nrelated to this group.';
 
   @override
   String get l10n_keywords => 'Keywords';
+
+  @override
+  String get l10n_keywords_entry_text_field_hint =>
+      'Please enter one keyword at a time.\n(+ Enter key)';
 
   @override
   String get save_button_text => 'Save Changes';
@@ -297,7 +301,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Please enter keywords\nto describe the analysis.\n(+ Enter key)';
+      'Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -521,10 +525,14 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_new_list_keywords_title =>
-      'Please enter keywords\n related to this group.';
+      'Please enter keywords\nrelated to this group.';
 
   @override
   String get l10n_keywords => 'Keywords';
+
+  @override
+  String get l10n_keywords_entry_text_field_hint =>
+      'Please enter one keyword at a time.\n(+ Enter key)';
 
   @override
   String get save_button_text => 'Save Changes';
