@@ -497,6 +497,12 @@ abstract class AppLocalizations {
   /// **'To add a new group?'**
   String get text_lists_new_list_or_loading_list_new_group_option;
 
+  /// The title of the new list page.
+  ///
+  /// In en, this message translates to:
+  /// **'New list'**
+  String get text_lists_new_list_title;
+
   /// l10n for the save_button text
   ///
   /// In en, this message translates to:

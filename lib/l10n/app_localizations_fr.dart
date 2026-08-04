@@ -256,6 +256,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ajouter un nouveau groupe ?';
 
   @override
+  String get text_lists_new_list_title => 'Nouvelle liste';
+
+  @override
   String get save_button_text => 'Enregistrer les données';
 }
 
@@ -509,6 +512,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_or_loading_list_new_group_option =>
       'Ajouter un nouveau groupe ?';
+
+  @override
+  String get text_lists_new_list_title => 'Nouvelle liste';
 
   @override
   String get save_button_text => 'Enregistrer les données';
