@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
@@ -41,7 +42,7 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
               children: [
                 // ── title ──────────────────────────────────────────────────
                 Text(
-                  participantsListsTitle,
+                  AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_page_title ?? "Issue with the default title for the new list or loading list page.",
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -49,7 +50,7 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  participantsListsSubTitle,
+                  AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_page_subtitle ?? "Issue with the default subtitle for the new list or loading list page.",
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.bodyMedium?.copyWith(
                     color: appTheme.colorScheme.onSurface.withOpacity(0.8),
@@ -78,13 +79,14 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                                         onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
                                         dashboardFilteringByKeywordsKey: null,
                                     ),
-                      //  builder: (_) => TextListsDisplay
-                      //                 (
-                      //               ),
                     ),
                   ),
                   icon: const Icon(Icons.folder_open_outlined),
-                  label: const Text(loadingAListOptionLabel, textAlign: TextAlign.center),
+                  label: Text
+                    (
+                      AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_group_loading_option ?? "Issue with the loading option text for the new list or loading list page.",
+                      textAlign: TextAlign.center
+                    ),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),

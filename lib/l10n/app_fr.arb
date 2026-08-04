@@ -90,9 +90,9 @@
     ,"@gps_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle session de résolution de problèmes en groupe."}
     ,"gps_title_suffix": " (rpg)"
     ,"@gps_title_suffix": {"description": "Le suffixe de titre pour une session de résolution de problèmes en groupe."}  
-  
-    
-    
+    ,"gps_process_default_title": "Problème à résoudre"
+    ,"@gps_process_default_title": {"description": "Le titre par défaut pour une session de résolution de problèmes en groupe."}
+        
     ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
     ,"file_name_process_text_field_hint_on_mobile": "Veuillez entrer un nom de fichier, sans ."
@@ -131,6 +131,14 @@
     ,"dashboard_edit_keywords_sheet_text_field_hint": "Veuillez entrer vos mots-clés."
     ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition des mots-clés"}
   
+    ,"text_lists_new_list_or_loading_list_page_title": "Listes de Participants"
+    ,"@text_lists_new_list_or_loading_list_page_title": {"description": "Le titre par défaut pour la page de chargement de liste, ou de création d'une nouvelle liste."}
+    ,"text_lists_new_list_or_loading_list_page_subtitle": "Quelle est votre préférence ?"
+    ,"@text_lists_new_list_or_loading_list_page_subtitle": {"description": "Le sous-titre par défaut pour la page de chargement de liste, ou de création d'une nouvelle liste."}
+    ,"text_lists_new_list_or_loading_list_group_loading_option": "Charger un groupe sauvegardé ?"
+    ,"@text_lists_new_list_or_loading_list_group_loading_option": {"description": "Le texte de l'option de chargement pour la page de chargement de liste, ou de création d'une nouvelle liste."}
+
+
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
 

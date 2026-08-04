@@ -90,8 +90,8 @@
   ,"@gps_new_process_button": {"description": "The text inviting to click to start a new group problem-solving session."}  
   ,"gps_title_suffix": " (gps)"
   ,"@gps_title_suffix": {"description": "The title suffix for a problem-solving session."}  
-  
-
+  ,"gps_process_default_title": "Problem To Solve"
+  ,"@gps_process_default_title": {"description": "The default title for a problem-solving session."}
 
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
@@ -131,6 +131,16 @@
   ,"dashboard_edit_keywords_sheet_text_field_hint": "Please enter your keywords."
   ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n for the 'Keywords Edition' text field hint"}
   
+  ,"text_lists_new_list_or_loading_list_page_title": "Participants lists"
+  ,"@text_lists_new_list_or_loading_list_page_title": {"description": "The default title for the new list or loading list page."}
+  ,"text_lists_new_list_or_loading_list_page_subtitle": "What would you like to do?"
+  ,"@text_lists_new_list_or_loading_list_page_subtitle": {"description": "The default subtitle for the new list or loading list page."}
+  ,"text_lists_new_list_or_loading_list_group_loading_option": "To load a saved group?"
+  ,"@text_lists_new_list_or_loading_list_group_loading_option": {"description": "The loading option text for the new list or loading list page."}
+
+  
+  
+
   ,"save_button_text": "Save Changes"
   ,"@save_button_text": {"description": "l10n for the save_button text"}
   
