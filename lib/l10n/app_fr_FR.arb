@@ -154,6 +154,9 @@
     ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)"
     ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n pour le placeholder du champ de texte pour l'entrée de mots-clés"}
 
+    ,"l10n_keywords_overlay_close_button_tooltip": "Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés"
+    ,"@l10n_keywords_overlay_close_button_tooltip": {"description": "l10n pour l'infobulle de fermeture de la fenêtre de déclaration des mots-clés."}
+  
 
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
