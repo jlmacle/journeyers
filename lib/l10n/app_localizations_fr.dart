@@ -256,11 +256,15 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ajouter un nouveau groupe ?';
 
   @override
-  String get text_lists_new_list_title => 'Nouvelle liste';
+  String get text_lists_new_list_title => 'Nouveau groupe';
 
   @override
   String get text_lists_new_list_keywords_title =>
       'Veuillez entrer des mots-clés\npour ce groupe.';
+
+  @override
+  String get text_lists_new_list_placeholder_when_no_list_data =>
+      'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l\'ajouter au groupe.';
 
   @override
   String get l10n_keywords => 'Mots-clés';
@@ -529,11 +533,15 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Ajouter un nouveau groupe ?';
 
   @override
-  String get text_lists_new_list_title => 'Nouvelle liste';
+  String get text_lists_new_list_title => 'Nouveau groupe';
 
   @override
   String get text_lists_new_list_keywords_title =>
       'Veuillez entrer des mots-clés\npour ce groupe.';
+
+  @override
+  String get text_lists_new_list_placeholder_when_no_list_data =>
+      'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l\'ajouter au groupe.';
 
   @override
   String get l10n_keywords => 'Mots-clés';

@@ -142,6 +142,8 @@
   ,"@text_lists_new_list_title": {"description": "The title of the new list page."}
   ,"text_lists_new_list_keywords_title": "Please enter keywords\nrelated to this group."
   ,"@text_lists_new_list_keywords_title": {"description": "The title of the new list page keywords overlay."}
+  ,"text_lists_new_list_placeholder_when_no_list_data": "No names in the new group.\nPlease enter a name to add a participant to the group."
+  ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "The placeholder text when no participant's name has been added to the new group"}
   
   
 
