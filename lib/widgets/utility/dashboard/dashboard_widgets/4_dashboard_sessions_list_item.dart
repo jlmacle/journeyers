@@ -252,7 +252,7 @@ class _SessionsListItemState extends State<SessionsListItem>
     final String sessionTitle = widget.sessionMetadata[DashboardUtils.keyTitle];
     // Modifies the title according to context (ca or gps)
     final String displayTitle = (widget.dashboardContext == DashboardUtils.gpsContext)
-        ? "$sessionTitle$gpsTitleSuffix"
+        ? "$sessionTitle${AppLocalizations.of(context)?.gps_title_suffix ?? "Issue with the title suffix for a problem-solving session."}"
         : sessionTitle;
 
     // Sorting keywords for display

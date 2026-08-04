@@ -347,11 +347,17 @@ abstract class AppLocalizations {
   /// **'I don\'t know'**
   String get segmented_button_I_don_t_know;
 
-  /// The text inviting to click to start a new group problem-solving process.
+  /// The text inviting to click to start a new group problem-solving session.
   ///
   /// In en, this message translates to:
   /// **'Please click to start\na new group problem-solving session.'**
   String get gps_new_process_button;
+
+  /// The title suffix for a problem-solving session.
+  ///
+  /// In en, this message translates to:
+  /// **' (gps)'**
+  String get gps_title_suffix;
 
   /// Label for folder selection/creation, for app storage
   ///

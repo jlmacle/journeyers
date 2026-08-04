@@ -88,6 +88,8 @@
 
   ,"gps_new_process_button": "Please click to start\na new group problem-solving session."
   ,"@gps_new_process_button": {"description": "The text inviting to click to start a new group problem-solving session."}  
+  ,"gps_title_suffix": " (gps)"
+  ,"@gps_title_suffix": {"description": "The title suffix for a problem-solving session."}  
   
   
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."

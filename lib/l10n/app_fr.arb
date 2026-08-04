@@ -88,6 +88,8 @@
 
     ,"gps_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle session de résolution de problèmes en groupe."
     ,"@gps_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle session de résolution de problèmes en groupe."}
+    ,"gps_title_suffix": " (rpg)"
+    ,"@gps_title_suffix": {"description": "Le suffixe de titre pour une session de résolution de problèmes en groupe."}  
   
     
     
