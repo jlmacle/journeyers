@@ -142,7 +142,9 @@
     ,"text_lists_new_list_title": "Nouvelle liste"
     ,"@text_lists_new_list_title": {"description": "Le titre de la page de création de liste."}
 
-  
+    ,"l10n_keywords": "Mots-clés"
+    ,"@l10n_keywords": {"description": "l10n pour 'Mots-clés'"}
+    
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
 
