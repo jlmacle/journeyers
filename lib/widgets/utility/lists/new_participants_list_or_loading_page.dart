@@ -100,7 +100,7 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                       builder: (_) => NewParticipantsList
                                         (
                                           listLabelHintText: listLabelHintText,
-                                          placeholderWhenNoParticipantsNames: placeholderWhenNoParticipantsNames,
+                                          placeholderWhenNoParticipantsNames: AppLocalizations.of(context)?.text_lists_new_list_placeholder_when_no_list_data ?? "Issue with the placeholder text when no participant's name has been added to the new list.",
                                           placeholderInvitationToEnterAParticipantSName: invitationToEnterToEnterAParticipantSName,
                                           themeData: Theme.of(context),
                                           onParticipantsListLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,

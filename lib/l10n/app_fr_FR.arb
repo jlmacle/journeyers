@@ -141,10 +141,13 @@
     ,"@text_lists_new_list_or_loading_list_group_loading_option": {"description": "Le texte de l'option de chargement pour la page de chargement de liste, ou de création d'une nouvelle liste."}
     ,"text_lists_new_list_or_loading_list_new_group_option": "Ajouter un nouveau groupe ?"
     ,"@text_lists_new_list_or_loading_list_new_group_option": {"description": "Le texte de l'option de nouveau groupe pour la page de chargement de liste, ou de création d'une nouvelle liste."}
-    ,"text_lists_new_list_title": "Nouvelle liste"
+    ,"text_lists_new_list_title": "Nouveau groupe"
     ,"@text_lists_new_list_title": {"description": "Le titre de la page de création de liste."}
     ,"text_lists_new_list_keywords_title": "Veuillez entrer des mots-clés\npour ce groupe."
     ,"@text_lists_new_list_keywords_title": {"description": "Le titre pour l'overlay des mots-clés, pour la page de création de liste."}
+    ,"text_lists_new_list_placeholder_when_no_list_data": "Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l'ajouter au groupe."
+    ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "Le texte placeholder lorsqu'aucun nom n'est présent dans le nouveau groupe."}
+  
   
 
 
