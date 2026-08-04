@@ -108,7 +108,11 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                     ),
                   ),
                   icon: const Icon(Icons.add_circle_outline),
-                  label: const Text(newParticipantsGroupOptionLabel, textAlign: TextAlign.center),
+                  label: Text
+                  (
+                    AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_new_group_option ?? "Issue with the new group option text for the new list or loading list page.", 
+                    textAlign: TextAlign.center
+                  ),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
