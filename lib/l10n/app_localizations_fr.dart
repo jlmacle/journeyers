@@ -174,6 +174,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gps_title_suffix => ' (rpg)';
 
   @override
+  String get gps_process_default_title => 'Problème à résoudre';
+
+  @override
   String get folder_picker_on_mobile =>
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 
@@ -235,6 +238,18 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get dashboard_edit_keywords_sheet_text_field_hint =>
       'Veuillez entrer vos mots-clés.';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_title =>
+      'Listes de Participants';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_subtitle =>
+      'Quelle est votre préférence ?';
+
+  @override
+  String get text_lists_new_list_or_loading_list_group_loading_option =>
+      'Charger un groupe sauvegardé ?';
 
   @override
   String get save_button_text => 'Enregistrer les données';
@@ -410,6 +425,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get gps_title_suffix => ' (rpg)';
 
   @override
+  String get gps_process_default_title => 'Problème à résoudre';
+
+  @override
   String get folder_picker_on_mobile =>
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 
@@ -471,6 +489,18 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get dashboard_edit_keywords_sheet_text_field_hint =>
       'Veuillez entrer vos mots-clés.';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_title =>
+      'Listes de Participants';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_subtitle =>
+      'Quelle est votre préférence ?';
+
+  @override
+  String get text_lists_new_list_or_loading_list_group_loading_option =>
+      'Charger un groupe sauvegardé ?';
 
   @override
   String get save_button_text => 'Enregistrer les données';

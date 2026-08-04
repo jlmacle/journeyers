@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -110,7 +111,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                     ? 
                       (widget.sessionTitleTec.text.trim() == "") 
                       ? 
-                        gpsProcessTitlePlaceholder
+                        AppLocalizations.of(context)?.gps_process_default_title ?? "Issue with the default title for a problem-solving session."
                       : 
                         widget.sessionTitleTec.text.trim() 
                     // if an edition

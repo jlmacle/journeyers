@@ -359,6 +359,12 @@ abstract class AppLocalizations {
   /// **' (gps)'**
   String get gps_title_suffix;
 
+  /// The default title for a problem-solving session.
+  ///
+  /// In en, this message translates to:
+  /// **'Problem To Solve'**
+  String get gps_process_default_title;
+
   /// Label for folder selection/creation, for app storage
   ///
   /// In en, this message translates to:
@@ -466,6 +472,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your keywords.'**
   String get dashboard_edit_keywords_sheet_text_field_hint;
+
+  /// The default title for the new list or loading list page.
+  ///
+  /// In en, this message translates to:
+  /// **'Participants lists'**
+  String get text_lists_new_list_or_loading_list_page_title;
+
+  /// The default subtitle for the new list or loading list page.
+  ///
+  /// In en, this message translates to:
+  /// **'What would you like to do?'**
+  String get text_lists_new_list_or_loading_list_page_subtitle;
+
+  /// The loading option text for the new list or loading list page.
+  ///
+  /// In en, this message translates to:
+  /// **'To load a saved group?'**
+  String get text_lists_new_list_or_loading_list_group_loading_option;
 
   /// l10n for the save_button text
   ///

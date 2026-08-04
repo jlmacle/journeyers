@@ -173,6 +173,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_title_suffix => ' (gps)';
 
   @override
+  String get gps_process_default_title => 'Problem To Solve';
+
+  @override
   String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
 
@@ -233,6 +236,18 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dashboard_edit_keywords_sheet_text_field_hint =>
       'Please enter your keywords.';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_title =>
+      'Participants lists';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_subtitle =>
+      'What would you like to do?';
+
+  @override
+  String get text_lists_new_list_or_loading_list_group_loading_option =>
+      'To load a saved group?';
 
   @override
   String get save_button_text => 'Save Changes';
@@ -407,6 +422,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get gps_title_suffix => ' (gps)';
 
   @override
+  String get gps_process_default_title => 'Problem To Solve';
+
+  @override
   String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
 
@@ -467,6 +485,18 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get dashboard_edit_keywords_sheet_text_field_hint =>
       'Please enter your keywords.';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_title =>
+      'Participants lists';
+
+  @override
+  String get text_lists_new_list_or_loading_list_page_subtitle =>
+      'What would you like to do?';
+
+  @override
+  String get text_lists_new_list_or_loading_list_group_loading_option =>
+      'To load a saved group?';
 
   @override
   String get save_button_text => 'Save Changes';
