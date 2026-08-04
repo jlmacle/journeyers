@@ -130,15 +130,19 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                     ),
       child: Container(        
         padding: const EdgeInsets.symmetric(vertical: 5),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(right: 15),
               child: Icon(Icons.style_rounded),
             ),
             Center(
-              child: Text(gpsKeywordsTitle, style: gpsKeywordsTitleStyle),
+              child: Text
+                    (
+                      AppLocalizations.of(context)?.l10n_keywords ?? "Issue with the l10n for 'Keywords'", 
+                      style: gpsKeywordsTitleStyle
+                    ),
             )
           ],
         ),

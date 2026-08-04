@@ -515,7 +515,7 @@ abstract class AppLocalizations {
   /// **'Keywords'**
   String get l10n_keywords;
 
-  /// l10n for keywords entry text field hint
+  /// l10n for the keywords entry text field hint
   ///
   /// In en, this message translates to:
   /// **'Please enter one keyword at a time.\n(+ Enter key)'**
