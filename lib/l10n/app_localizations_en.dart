@@ -257,6 +257,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get text_lists_new_list_title => 'New list';
 
   @override
+  String get text_lists_new_list_keywords_title =>
+      'Please enter keywords\n related to this group.';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -514,6 +518,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_new_list_title => 'New list';
+
+  @override
+  String get text_lists_new_list_keywords_title =>
+      'Please enter keywords\n related to this group.';
 
   @override
   String get l10n_keywords => 'Keywords';
