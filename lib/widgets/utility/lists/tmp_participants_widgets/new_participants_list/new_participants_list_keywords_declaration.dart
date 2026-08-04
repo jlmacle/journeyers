@@ -103,7 +103,7 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
                       textEditingControllerKey: const Key("kwsFieldNewList"), 
                       textEditingController: _keywordsTec, 
                       textFieldStyle: analysisTextFieldStyle, 
-                      textFieldHintText: "Please enter the keywords here.\n(+ Enter key)", 
+                      textFieldHintText: AppLocalizations.of(context)?.l10n_keywords_entry_text_field_hint ?? "Issue with the l10n for the keywords entry text field hint.", 
                       textFieldHintStyle: analysisTextFieldHintStyle, 
                       onSubmittedCallbackFunction: (value, setLocalState) => _keywordAdd(value, setLocalState), 
                       setToUpdate: _keywords!, 

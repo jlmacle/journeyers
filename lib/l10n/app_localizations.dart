@@ -145,7 +145,7 @@ abstract class AppLocalizations {
   /// The text field hint, for the keywords of the context analysis process
   ///
   /// In en, this message translates to:
-  /// **'Please enter keywords\nto describe the analysis.\n(+ Enter key)'**
+  /// **'Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)'**
   String get ca_process_keywords_text_field_hint;
 
   /// The text field hint, for the past outcomes of the problem for the household
@@ -506,7 +506,7 @@ abstract class AppLocalizations {
   /// The title of the new list page keywords overlay.
   ///
   /// In en, this message translates to:
-  /// **'Please enter keywords\n related to this group.'**
+  /// **'Please enter keywords\nrelated to this group.'**
   String get text_lists_new_list_keywords_title;
 
   /// l10n for 'Keywords'
@@ -514,6 +514,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keywords'**
   String get l10n_keywords;
+
+  /// l10n for keywords entry text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter one keyword at a time.\n(+ Enter key)'**
+  String get l10n_keywords_entry_text_field_hint;
 
   /// l10n for the save_button text
   ///
