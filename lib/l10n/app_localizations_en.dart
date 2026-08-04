@@ -170,6 +170,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to start\na new group problem-solving session.';
 
   @override
+  String get gps_title_suffix => ' (gps)';
+
+  @override
   String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
 
@@ -399,6 +402,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_new_process_button =>
       'Please click to start\na new group problem-solving session.';
+
+  @override
+  String get gps_title_suffix => ' (gps)';
 
   @override
   String get folder_picker_on_mobile =>
