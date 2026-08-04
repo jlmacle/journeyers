@@ -139,8 +139,10 @@
     ,"@text_lists_new_list_or_loading_list_group_loading_option": {"description": "Le texte de l'option de chargement pour la page de chargement de liste, ou de création d'une nouvelle liste."}
     ,"text_lists_new_list_or_loading_list_new_group_option": "Ajouter un nouveau groupe ?"
     ,"@text_lists_new_list_or_loading_list_new_group_option": {"description": "Le texte de l'option de nouveau groupe pour la page de chargement de liste, ou de création d'une nouvelle liste."}
+    ,"text_lists_new_list_title": "Nouvelle liste"
+    ,"@text_lists_new_list_title": {"description": "Le titre de la page de création de liste."}
 
-
+  
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
 

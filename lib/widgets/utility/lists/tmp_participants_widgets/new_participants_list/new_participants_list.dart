@@ -2,6 +2,7 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -306,7 +307,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
       appBar: AppBar(
         title: Text
               (
-                _listHasBeenLoaded ? widget.listLabelLoaded! : newListAppBarTitle, 
+                _listHasBeenLoaded ? widget.listLabelLoaded! : AppLocalizations.of(context)?.text_lists_new_list_title ?? "Issue with the title of the new list page.", 
                 style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
               ),          
         backgroundColor: Colors.white,
