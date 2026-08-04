@@ -347,6 +347,12 @@ abstract class AppLocalizations {
   /// **'I don\'t know'**
   String get segmented_button_I_don_t_know;
 
+  /// The text inviting to click to start a new group problem-solving process.
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to start\na new group problem-solving session.'**
+  String get gps_new_process_button;
+
   /// Label for folder selection/creation, for app storage
   ///
   /// In en, this message translates to:
