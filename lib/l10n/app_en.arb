@@ -144,8 +144,10 @@
   ,"@text_lists_new_list_keywords_title": {"description": "The title of the new list page keywords overlay."}
   ,"text_lists_new_list_placeholder_when_no_list_data": "No names in the new group.\nPlease enter a name to add a participant to the group."
   ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "The placeholder text when no participant's name has been added to the new group"}
+  ,"text_lists_new_list_text_field_hint": "Please add a participant's name."
+  ,"@text_lists_new_list_text_field_hint": {"description": "The text field hint for adding a participant's name."}
   
-  
+
 
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}

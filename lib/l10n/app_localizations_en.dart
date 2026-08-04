@@ -265,6 +265,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'No names in the new group.\nPlease enter a name to add a participant to the group.';
 
   @override
+  String get text_lists_new_list_text_field_hint =>
+      'Please add a participant\'s name.';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -538,6 +542,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_new_list_placeholder_when_no_list_data =>
       'No names in the new group.\nPlease enter a name to add a participant to the group.';
+
+  @override
+  String get text_lists_new_list_text_field_hint =>
+      'Please add a participant\'s name.';
 
   @override
   String get l10n_keywords => 'Keywords';

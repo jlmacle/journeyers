@@ -509,11 +509,17 @@ abstract class AppLocalizations {
   /// **'Please enter keywords\nrelated to this group.'**
   String get text_lists_new_list_keywords_title;
 
-  /// The placeholder text when no participant's name has been added to the new list
+  /// The placeholder text when no participant's name has been added to the new group
   ///
   /// In en, this message translates to:
   /// **'No names in the new group.\nPlease enter a name to add a participant to the group.'**
   String get text_lists_new_list_placeholder_when_no_list_data;
+
+  /// The text field hint for adding a participant's name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add a participant\'s name.'**
+  String get text_lists_new_list_text_field_hint;
 
   /// l10n for 'Keywords'
   ///
