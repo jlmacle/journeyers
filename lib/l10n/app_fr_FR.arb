@@ -85,6 +85,10 @@
     ,"@segmented_button_no": {"description":"l10n pour Non"}
     ,"segmented_button_I_don_t_know": "Je ne sais pas"
     ,"@segmented_button_I_don_t_know": {"description":"l10n pour Je ne sais pas"}
+
+    ,"gps_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle session de résolution de problèmes en groupe."
+    ,"@gps_new_process_button": {"description": "La requête invitant à cliquer pour démarrer une nouvelle session de résolution de problèmes en groupe."}
+  
     
     ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}

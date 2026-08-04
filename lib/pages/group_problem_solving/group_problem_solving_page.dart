@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
@@ -169,7 +170,7 @@ class GPSPageState extends State<GPSPage>
               NewProcessButton
               ( 
                 dashboardContext: DashboardUtils.gpsContext, 
-                buttonText: "Please click to start\na new group problem-solving session.",
+                buttonText: AppLocalizations.of(context)?.gps_new_process_button ?? "Issue with the text inviting to click to start a new group problem-solving process.",
                 onNewProcessButtonPressedCAPageCallbackFunction: 
                 () 
                 {
