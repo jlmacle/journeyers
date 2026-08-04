@@ -491,6 +491,12 @@ abstract class AppLocalizations {
   /// **'To load a saved group?'**
   String get text_lists_new_list_or_loading_list_group_loading_option;
 
+  /// The new group option text for the new list or loading list page.
+  ///
+  /// In en, this message translates to:
+  /// **'To add a new group?'**
+  String get text_lists_new_list_or_loading_list_new_group_option;
+
   /// l10n for the save_button text
   ///
   /// In en, this message translates to:

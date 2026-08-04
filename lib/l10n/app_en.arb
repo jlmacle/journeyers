@@ -137,6 +137,8 @@
   ,"@text_lists_new_list_or_loading_list_page_subtitle": {"description": "The default subtitle for the new list or loading list page."}
   ,"text_lists_new_list_or_loading_list_group_loading_option": "To load a saved group?"
   ,"@text_lists_new_list_or_loading_list_group_loading_option": {"description": "The loading option text for the new list or loading list page."}
+  ,"text_lists_new_list_or_loading_list_new_group_option": "To add a new group?"
+  ,"@text_lists_new_list_or_loading_list_new_group_option": {"description": "The new group option text for the new list or loading list page."}
 
   
   

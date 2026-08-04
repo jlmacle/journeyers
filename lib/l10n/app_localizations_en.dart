@@ -250,6 +250,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'To load a saved group?';
 
   @override
+  String get text_lists_new_list_or_loading_list_new_group_option =>
+      'To add a new group?';
+
+  @override
   String get save_button_text => 'Save Changes';
 }
 
@@ -497,6 +501,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_new_list_or_loading_list_group_loading_option =>
       'To load a saved group?';
+
+  @override
+  String get text_lists_new_list_or_loading_list_new_group_option =>
+      'To add a new group?';
 
   @override
   String get save_button_text => 'Save Changes';
