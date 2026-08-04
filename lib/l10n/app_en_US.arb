@@ -145,14 +145,15 @@
   ,"@text_lists_new_list_keywords_title": {"description": "The title of the new list page keywords overlay."}
   
 
-
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
 
   ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time.\n(+ Enter key)"
   ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n for the keywords entry text field hint"}
   
-  
+  ,"l10n_keywords_overlay_close_button_tooltip": "Please click to close the keywords declaration page"
+  ,"@l10n_keywords_overlay_close_button_tooltip": {"description": "l10n for the keywords overlay close button tooltip"}
+
 
   ,"save_button_text": "Save Changes"
   ,"@save_button_text": {"description": "l10n for the save_button text"}

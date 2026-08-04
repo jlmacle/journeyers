@@ -268,6 +268,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter one keyword at a time.\n(+ Enter key)';
 
   @override
+  String get l10n_keywords_overlay_close_button_tooltip =>
+      'Please click to close the keywords declaration page';
+
+  @override
   String get save_button_text => 'Save Changes';
 }
 
@@ -533,6 +537,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get l10n_keywords_entry_text_field_hint =>
       'Please enter one keyword at a time.\n(+ Enter key)';
+
+  @override
+  String get l10n_keywords_overlay_close_button_tooltip =>
+      'Please click to close the keywords declaration page';
 
   @override
   String get save_button_text => 'Save Changes';

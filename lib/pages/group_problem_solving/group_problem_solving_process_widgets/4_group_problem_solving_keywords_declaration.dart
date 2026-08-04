@@ -111,7 +111,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       appBarForegroundColor: appBarWhite,
                       overlayTitle: "Keywords for the\nproblem-solving session", 
                       overlayTitleStyle: problemSolvingKeywordsOverlayTitleStyle, 
-                      overlayCloseIconButtonToolTip: gpsKeywordsDeclarationOverlayCloseIconButtonToolTip, 
+                      overlayCloseIconButtonToolTip: AppLocalizations.of(context)?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip",                 
                       overlayCloseIconButtonColor: appBarWhite,
                       textEditingControllerKey: const Key("gpsKeywordsField"), 
                       textEditingController: _keywordsTec, 

@@ -270,6 +270,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
 
   @override
+  String get l10n_keywords_overlay_close_button_tooltip =>
+      'Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés';
+
+  @override
   String get save_button_text => 'Enregistrer les données';
 }
 
@@ -537,6 +541,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get l10n_keywords_entry_text_field_hint =>
       'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
+
+  @override
+  String get l10n_keywords_overlay_close_button_tooltip =>
+      'Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés';
 
   @override
   String get save_button_text => 'Enregistrer les données';

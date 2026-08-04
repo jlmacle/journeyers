@@ -521,6 +521,12 @@ abstract class AppLocalizations {
   /// **'Please enter one keyword at a time.\n(+ Enter key)'**
   String get l10n_keywords_entry_text_field_hint;
 
+  /// l10n for the keywords overlay close button tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to close the keywords declaration page'**
+  String get l10n_keywords_overlay_close_button_tooltip;
+
   /// l10n for the save_button text
   ///
   /// In en, this message translates to:
