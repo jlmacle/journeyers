@@ -179,7 +179,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) async => await onConfirm(), 
                 decoration: InputDecoration(
-                  labelText: "List label",
+                  labelText: AppLocalizations.of(context)?.text_lists_new_list_save_dialog_text_field_label ?? "Issue with the l10n for the save dialog text field label",
                   hintText: widget.listLabelHintText,
                   errorText: errorText,
                 ),
