@@ -563,6 +563,12 @@ abstract class AppLocalizations {
   /// **' already exists.\nPlease choose another label.'**
   String get text_lists_new_list_same_list_name_message;
 
+  /// The title for the participants lists dashboard
+  ///
+  /// In en, this message translates to:
+  /// **'Stored participants lists'**
+  String get text_lists_dashboard_title;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

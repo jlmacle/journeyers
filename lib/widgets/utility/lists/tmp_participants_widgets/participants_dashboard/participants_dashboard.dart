@@ -1,15 +1,14 @@
 
 import "package:flutter/material.dart";
 
-
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/1_participants_dashboard_title.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2_participants_dashboard_filtering_and_sorting_feature.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
@@ -335,8 +334,11 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                 // TODO: the sliver code to clean eventually
     
                 // DASHBOARD TITLE
-                const SliverToBoxAdapter(
-                  child: ParticipantsListsDashboardTitle(title: listsDashboardTitle)
+                SliverToBoxAdapter(
+                  child: ParticipantsListsDashboardTitle
+                  (
+                    title: AppLocalizations.of(context)?.text_lists_dashboard_title ?? "Issue with the title for the participants lists dashboard",
+                  )
                 ),
     
                 // DASHBOARD FILTERING FEATURES
