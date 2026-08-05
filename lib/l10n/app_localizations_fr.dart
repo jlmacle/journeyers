@@ -275,7 +275,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Liste déjà sauvegardée';
 
   @override
-  String get text_lists_new_list_save_button_tooltip => 'Sauvegarder la liste';
+  String get text_lists_new_list_save_button_tooltip => 'Enregistrer la liste';
+
+  @override
+  String get text_lists_new_list_save_dialog_title => 'Enregistrer la liste';
 
   @override
   String get l10n_keywords => 'Mots-clés';
@@ -563,7 +566,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Liste déjà sauvegardée';
 
   @override
-  String get text_lists_new_list_save_button_tooltip => 'Sauvegarder la liste';
+  String get text_lists_new_list_save_button_tooltip => 'Enregistrer la liste';
+
+  @override
+  String get text_lists_new_list_save_dialog_title => 'Enregistrer la liste';
 
   @override
   String get l10n_keywords => 'Mots-clés';

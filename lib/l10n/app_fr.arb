@@ -151,7 +151,8 @@
     ,"@text_lists_new_list_content_already_saved_message": {"description": "Le message si une liste a déjà été sauvegardée"}
     ,"text_lists_new_list_save_button_tooltip": "Enregistrer la liste"
     ,"@text_lists_new_list_save_button_tooltip": {"description": "l10n pour l'infobulle de l'icône de sauvegarde de liste."}
-  
+    ,"text_lists_new_list_save_dialog_title": "Enregistrer la liste"
+    ,"@text_lists_new_list_save_dialog_title": {"description": "l10n pour le titre du dialogue de sauvegarde de liste."}
   
 
     ,"l10n_keywords": "Mots-clés"

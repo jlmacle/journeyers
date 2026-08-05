@@ -151,6 +151,8 @@
   ,"@text_lists_new_list_content_already_saved_message": {"description": "The message when a list content is already saved"}
   ,"text_lists_new_list_save_button_tooltip": "Save list"
   ,"@text_lists_new_list_save_button_tooltip": {"description": "l10n for the save button tooltip"}
+  ,"text_lists_new_list_save_dialog_title": "Save list"
+  ,"@text_lists_new_list_save_dialog_title": {"description": "l10n for the save dialog title"}
  
   
 

@@ -533,6 +533,12 @@ abstract class AppLocalizations {
   /// **'Save list'**
   String get text_lists_new_list_save_button_tooltip;
 
+  /// l10n for the save dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Save list'**
+  String get text_lists_new_list_save_dialog_title;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:
