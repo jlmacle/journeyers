@@ -304,6 +304,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'List Name Edition';
 
   @override
+  String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
+      'Please enter a list name';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -622,6 +626,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_dashboard_edit_list_name_sheet_label_text =>
       'List Name Edition';
+
+  @override
+  String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
+      'Please enter a list name';
 
   @override
   String get l10n_keywords => 'Keywords';

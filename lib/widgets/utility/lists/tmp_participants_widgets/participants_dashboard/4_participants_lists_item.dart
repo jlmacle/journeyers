@@ -220,7 +220,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                 textFieldStartValue: currentListName, 
                                 textFieldLabelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_label_text ?? "Issue with the l10n for the 'List Name Edition' label text", 
                                 textFieldLabelStyle: const TextStyle(color: black),
-                                textFiedHint: const Text("Please enter a list name."),
+                                textFiedHint: Text(AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_text_field_hint ?? "Issue with the l10n for the 'List Name Edition' text field hint"),
                                 errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                                 errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
                                 textFieldErrorText: AppLocalizations.of(context)?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time",

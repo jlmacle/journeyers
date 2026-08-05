@@ -168,6 +168,8 @@
   ,"@text_lists_dashboard_sort_by_list_name": {"description": "The 'List sort' label"} 
   ,"text_lists_dashboard_edit_list_name_sheet_label_text": "List Name Edition"
   ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n for the 'List Name Edition' label text"}
+  ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Please enter a list name"
+  ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n for the 'List Name Edition' text field hint"}
   
 
   ,"l10n_keywords": "Keywords"

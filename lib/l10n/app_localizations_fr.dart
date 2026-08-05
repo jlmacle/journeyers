@@ -308,6 +308,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Édition du nom de liste';
 
   @override
+  String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
+      'Veuillez entrer un nom de liste';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -630,6 +634,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_edit_list_name_sheet_label_text =>
       'Édition du nom de liste';
+
+  @override
+  String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
+      'Veuillez entrer un nom de liste';
 
   @override
   String get l10n_keywords => 'Mots-clés';
