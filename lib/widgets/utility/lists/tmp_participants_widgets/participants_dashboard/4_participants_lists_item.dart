@@ -317,7 +317,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                           listData: widget.listMetadata
                           ),
                         child: Text(
-                          "Keywords: ${sortedKeywords.join(", ")}",
+                          "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"} ${sortedKeywords.join(", ")}",
                           key: Key("session-keywords-${widget.listIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
