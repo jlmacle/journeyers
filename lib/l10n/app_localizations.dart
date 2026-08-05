@@ -545,6 +545,12 @@ abstract class AppLocalizations {
   /// **'List label'**
   String get text_lists_new_list_save_dialog_text_field_label;
 
+  /// l10n for the save dialog text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Our household members'**
+  String get text_lists_new_list_save_dialog_text_field_hint;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

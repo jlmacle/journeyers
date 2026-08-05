@@ -155,7 +155,9 @@
     ,"@text_lists_new_list_save_dialog_title": {"description": "l10n pour le titre du dialogue de sauvegarde de liste."}
     ,"text_lists_new_list_save_dialog_text_field_label": "Nom de la liste"
     ,"@text_lists_new_list_save_dialog_text_field_label": {"description": "l10n pour le label du champ de texte, du dialogue de sauvegarde de liste."}
-  
+    ,"text_lists_new_list_save_dialog_text_field_hint": "Par ex. Les membres de notre foyer"
+    ,"@text_lists_new_list_save_dialog_text_field_hint": {"description": "l10n pour le placeholder du champ de texte, du dialogue de sauvegarde de liste."}
+ 
 
     ,"l10n_keywords": "Mots-clés"
     ,"@l10n_keywords": {"description": "l10n pour 'Mots-clés'"}
