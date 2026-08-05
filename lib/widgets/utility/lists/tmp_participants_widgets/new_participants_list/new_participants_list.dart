@@ -171,7 +171,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             }
 
             return AlertDialog(
-              title: const Text("Save list"),
+              title: Text(AppLocalizations.of(context)?.text_lists_new_list_save_dialog_title ?? "Issue with the l10n for the save dialog title",),
               content: TextField(
                 key: const Key("saveListField"),
                 controller: _labelTec,
