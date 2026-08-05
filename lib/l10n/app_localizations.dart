@@ -527,6 +527,12 @@ abstract class AppLocalizations {
   /// **'List content already saved.'**
   String get text_lists_new_list_content_already_saved_message;
 
+  /// l10n for the save button tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Save list'**
+  String get text_lists_new_list_save_button_tooltip;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

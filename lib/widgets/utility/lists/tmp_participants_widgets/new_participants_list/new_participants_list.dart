@@ -329,7 +329,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                   )
                 // Potentially saving data
                 : IconButton(
-                    tooltip: "Save list",
+                    tooltip: AppLocalizations.of(context)?.text_lists_new_list_save_button_tooltip ?? "Issue with the l10n for the save button tooltip.",
                     icon: const Icon(Icons.save_outlined),
                     onPressed: _enteredTextItemsListSave,
                   ),

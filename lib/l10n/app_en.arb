@@ -148,7 +148,8 @@
   ,"@text_lists_new_list_text_field_hint": {"description": "The text field hint for adding a participant's name."}
   ,"text_lists_new_list_content_already_saved_message": "List content already saved."
   ,"@text_lists_new_list_content_already_saved_message": {"description": "The message when a list content is already saved"}
-  
+  ,"text_lists_new_list_save_button_tooltip": "Save list"
+  ,"@text_lists_new_list_save_button_tooltip": {"description": "l10n for the save button tooltip"}
 
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}

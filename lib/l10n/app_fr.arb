@@ -149,6 +149,8 @@
     ,"@text_lists_new_list_text_field_hint": {"description": "Le placeholder du champ de texte, pour l'ajout du nom d'un participant."}
     ,"text_lists_new_list_content_already_saved_message": "Liste déjà sauvegardée"
     ,"@text_lists_new_list_content_already_saved_message": {"description": "Le message si une liste a déjà été sauvegardée"}
+    ,"text_lists_new_list_save_button_tooltip": "Enregistrer la liste"
+    ,"@text_lists_new_list_save_button_tooltip": {"description": "l10n pour l'infobulle de l'icône de sauvegarde de liste."}
   
   
 
