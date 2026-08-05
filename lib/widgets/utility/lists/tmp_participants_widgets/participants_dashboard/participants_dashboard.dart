@@ -378,11 +378,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                       child: FilledButton.icon(
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute<void>(
+                            //todo: to clean
                             builder: (_) => NewParticipantsList
                                               (
-                                                listLabelHintText: listLabelHintText,
-                                                placeholderWhenNoParticipantsNames: placeholderWhenNoParticipantsNames,
-                                                placeholderInvitationToEnterAParticipantSName: invitationToEnterToEnterAParticipantSName,
                                                 themeData: Theme.of(context),
                                                 onParticipantsListLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
                                               ),

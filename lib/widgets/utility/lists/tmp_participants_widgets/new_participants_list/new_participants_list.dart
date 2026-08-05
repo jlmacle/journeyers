@@ -25,15 +25,6 @@ class NewParticipantsList extends StatefulWidget
   /// When non-null the screen is read-only and shows this label in the title.
   final String? listLabelLoaded;
 
-  /// The hint text when saving the list label.
-  final String listLabelHintText;
-
-  /// The text inviting to enter a new participant's name in the list.
-  final String placeholderInvitationToEnterAParticipantSName;
-
-  /// The placeholder text for the new list.
-  final String placeholderWhenNoParticipantsNames;
-
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsListLoadedCallbackFunction;
 
@@ -41,9 +32,6 @@ class NewParticipantsList extends StatefulWidget
     super.key,
     this.initialParticipantsNamesList = const [],
     this.listLabelLoaded,
-    required this.listLabelHintText,
-    required this.placeholderWhenNoParticipantsNames,
-    required this.placeholderInvitationToEnterAParticipantSName,
     required this.themeData, 
     required this.onParticipantsListLoadedCallbackFunction
   });  
@@ -180,7 +168,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 onSubmitted: (_) async => await onConfirm(), 
                 decoration: InputDecoration(
                   labelText: AppLocalizations.of(context)?.text_lists_new_list_save_dialog_text_field_label ?? "Issue with the l10n for the save dialog text field label",
-                  hintText: widget.listLabelHintText,
+                  hintText: AppLocalizations.of(context)?.text_lists_new_list_save_dialog_text_field_hint ?? "Issue with the l10n for the save dialog text field hint",
                   errorText: errorText,
                 ),
                 onChanged: (_) {
@@ -388,7 +376,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 // Placeholder message if empty list
                 ? Center(
                     child: Text(
-                      widget.placeholderWhenNoParticipantsNames,
+                      AppLocalizations.of(context)?.text_lists_new_list_placeholder_when_no_list_data ?? "Issue with the placeholder text when no participant's name has been added to the new list.",
                       textAlign: TextAlign.center,
                       style: widget.themeData.textTheme.bodyLarge
                     ),
