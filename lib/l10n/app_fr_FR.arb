@@ -168,7 +168,9 @@
     ,"@text_lists_dashboard_title": {"description": "Le titre du tableau de bord pour les listes de participants déjà sauvegardées"}
     ,"text_lists_dashboard_sort_by_list_name": "Tri par liste"
     ,"@text_lists_dashboard_sort_by_list_name": {"description": "Le label pour le 'Tri par liste'"}    
-  
+    ,"text_lists_dashboard_edit_list_name_sheet_label_text": "Édition du nom de liste"
+    ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du nom de liste"}
+    
 
     ,"l10n_keywords": "Mots-clés"
     ,"@l10n_keywords": {"description": "l10n pour 'Mots-clés'"}

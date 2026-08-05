@@ -166,7 +166,10 @@
   ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
   ,"text_lists_dashboard_sort_by_list_name": "List sort"
   ,"@text_lists_dashboard_sort_by_list_name": {"description": "The 'List sort' label"} 
+  ,"text_lists_dashboard_edit_list_name_sheet_label_text": "List Name Edition"
+  ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n for the 'List Name Edition' label text"}
   
+
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
   ,"l10n_cancel": "Cancel"
