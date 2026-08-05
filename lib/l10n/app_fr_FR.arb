@@ -149,6 +149,8 @@
     ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "Le texte placeholder lorsqu'aucun nom n'est présent dans le nouveau groupe."}
     ,"text_lists_new_list_text_field_hint": "Veuillez ajouter le nom d'un participant."
     ,"@text_lists_new_list_text_field_hint": {"description": "Le placeholder du champ de texte, pour l'ajout du nom d'un participant."}
+    ,"text_lists_new_list_content_already_saved_message": "Liste déjà sauvegardée"
+    ,"@text_lists_new_list_content_already_saved_message": {"description": "Le message si une liste a déjà été sauvegardée"}
   
   
 

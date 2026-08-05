@@ -271,6 +271,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez ajouter le nom d\'un participant.';
 
   @override
+  String get text_lists_new_list_content_already_saved_message =>
+      'Liste déjà sauvegardée';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -550,6 +554,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_text_field_hint =>
       'Veuillez ajouter le nom d\'un participant.';
+
+  @override
+  String get text_lists_new_list_content_already_saved_message =>
+      'Liste déjà sauvegardée';
 
   @override
   String get l10n_keywords => 'Mots-clés';

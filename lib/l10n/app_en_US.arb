@@ -147,6 +147,8 @@
   ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "The placeholder text when no participant's name has been added to the new group"}
   ,"text_lists_new_list_text_field_hint": "Please add a participant's name."
   ,"@text_lists_new_list_text_field_hint": {"description": "The text field hint for adding a participant's name."}
+  ,"text_lists_new_list_content_already_saved_message": "List content already saved."
+  ,"@text_lists_new_list_content_already_saved_message": {"description": "The message when a list content is already saved"}
   
   
 
