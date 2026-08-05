@@ -285,6 +285,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Nom de la liste';
 
   @override
+  String get text_lists_new_list_save_dialog_text_field_hint =>
+      'Par ex. Les membres de notre foyer';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -578,6 +582,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_save_dialog_text_field_label =>
       'Nom de la liste';
+
+  @override
+  String get text_lists_new_list_save_dialog_text_field_hint =>
+      'Par ex. Les membres de notre foyer';
 
   @override
   String get l10n_keywords => 'Mots-clés';
