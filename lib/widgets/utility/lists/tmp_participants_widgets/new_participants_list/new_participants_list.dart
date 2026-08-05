@@ -146,7 +146,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
-                  () => errorText = "${label}${listAlreadySavedErrorEndPart}",
+                  () => errorText = "${label}${AppLocalizations.of(context)?.text_lists_new_list_same_list_name_message ?? "Issue with the message, at saving time, when a list name has already been used."}",
                 );
                 return;
               }

@@ -293,6 +293,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Absence de nom de liste';
 
   @override
+  String get text_lists_new_list_same_list_name_message =>
+      ' existe déjà.\nVeuillez choisir un autre nom.';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -594,6 +598,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_empty_list_name_message =>
       'Absence de nom de liste';
+
+  @override
+  String get text_lists_new_list_same_list_name_message =>
+      ' existe déjà.\nVeuillez choisir un autre nom.';
 
   @override
   String get l10n_keywords => 'Mots-clés';
