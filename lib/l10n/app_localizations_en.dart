@@ -294,6 +294,9 @@ class AppLocalizationsEn extends AppLocalizations {
       ' already exists.\nPlease choose another label.';
 
   @override
+  String get text_lists_dashboard_title => 'Stored participants lists';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -602,6 +605,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_new_list_same_list_name_message =>
       ' already exists.\nPlease choose another label.';
+
+  @override
+  String get text_lists_dashboard_title => 'Stored participants lists';
 
   @override
   String get l10n_keywords => 'Keywords';

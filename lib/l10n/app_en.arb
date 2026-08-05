@@ -161,6 +161,10 @@
   ,"text_lists_new_list_same_list_name_message": " already exists.\nPlease choose another label."
   ,"@text_lists_new_list_same_list_name_message": {"description": "The message, at saving time, when a list name has already been used."}
   
+  ,"text_lists_dashboard_title": "Stored participants lists"
+  ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
+  
+
 
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
