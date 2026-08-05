@@ -420,7 +420,7 @@ void _showKeywordsEditSheet
             (
               labelText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_label_text ?? "Issue with the l10n for the 'Keywords Edition' label text", 
               labelStyle: const TextStyle(color: Colors.black),
-              hintText: "Please enter keywords.",
+              hintText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_text_field_hint ?? "Issue with the l10n for the 'Keywords Edition' text field hint",
             ),
             onSubmitted: (_) async => onKeywordsUpdated(listKey: listKey, listData: listData)
           ),       
