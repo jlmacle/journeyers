@@ -163,6 +163,10 @@
   
   ,"text_lists_dashboard_title": "Stored participants lists"
   ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
+  ,"text_lists_dashboard_sort_by_list_name": "List sort"
+  ,"@text_lists_dashboard_sort_by_list_name": {"description": "The 'List sort' label"} 
+  ,"text_lists_dashboard_edit_list_name_sheet_label_text": "List Name Edition"
+  ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n for the 'List Name Edition' label text"}
   
 
 

@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 
 
 /// {@category Utils - Project-specific}
@@ -70,7 +70,7 @@ class _ParticipantsListsDashboardSortingByLabelState extends State<ParticipantsL
       ),
       label: Text
       (
-        "$listsSortByLabel (${_isAscendingLabel ? "Z-A" : "A-Z"})",
+        "${AppLocalizations.of(context)?.text_lists_dashboard_sort_by_list_name ?? "Issue with the 'List sort' label"} (${_isAscendingLabel ? "Z-A" : "A-Z"})",
         // TODO: style to externalize
         style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
       ),

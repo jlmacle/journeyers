@@ -297,6 +297,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get text_lists_dashboard_title => 'Stored participants lists';
 
   @override
+  String get text_lists_dashboard_sort_by_list_name => 'List sort';
+
+  @override
+  String get text_lists_dashboard_edit_list_name_sheet_label_text =>
+      'List Name Edition';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -608,6 +615,13 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_dashboard_title => 'Stored participants lists';
+
+  @override
+  String get text_lists_dashboard_sort_by_list_name => 'List sort';
+
+  @override
+  String get text_lists_dashboard_edit_list_name_sheet_label_text =>
+      'List Name Edition';
 
   @override
   String get l10n_keywords => 'Keywords';

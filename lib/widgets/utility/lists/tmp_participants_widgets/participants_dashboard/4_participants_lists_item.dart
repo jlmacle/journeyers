@@ -218,7 +218,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                 textEditingController: _listNameEditTec, 
                                 textFieldKey: const Key("listLabelGroupsDashboardEditField"), 
                                 textFieldStartValue: currentListName, 
-                                textFieldLabelText: listNameTextFieldLabel, 
+                                textFieldLabelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_label_text ?? "Issue with the l10n for the 'List Name Edition' label text", 
                                 textFieldLabelStyle: const TextStyle(color: black),
                                 textFiedHint: const Text("Please enter a list name."),
                                 errorTextTriggerFunction: onConfirmFunctionEmptyValue,

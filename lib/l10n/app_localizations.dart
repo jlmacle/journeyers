@@ -569,6 +569,18 @@ abstract class AppLocalizations {
   /// **'Stored participants lists'**
   String get text_lists_dashboard_title;
 
+  /// The 'List sort' label
+  ///
+  /// In en, this message translates to:
+  /// **'List sort'**
+  String get text_lists_dashboard_sort_by_list_name;
+
+  /// l10n for the 'List Name Edition' label text
+  ///
+  /// In en, this message translates to:
+  /// **'List Name Edition'**
+  String get text_lists_dashboard_edit_list_name_sheet_label_text;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:
