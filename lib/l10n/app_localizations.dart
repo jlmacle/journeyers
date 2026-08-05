@@ -569,6 +569,12 @@ abstract class AppLocalizations {
   /// **'Keywords'**
   String get l10n_keywords;
 
+  /// l10n for 'Cancel'
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get l10n_cancel;
+
   /// l10n for the keywords entry text field hint
   ///
   /// In en, this message translates to:

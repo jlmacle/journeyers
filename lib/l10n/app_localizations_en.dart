@@ -297,6 +297,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get l10n_keywords => 'Keywords';
 
   @override
+  String get l10n_cancel => 'Cancel';
+
+  @override
   String get l10n_keywords_entry_text_field_hint =>
       'Please enter one keyword at a time.\n(+ Enter key)';
 
@@ -599,6 +602,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords => 'Keywords';
+
+  @override
+  String get l10n_cancel => 'Cancel';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>

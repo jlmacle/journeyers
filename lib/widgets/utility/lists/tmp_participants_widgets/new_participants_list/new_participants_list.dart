@@ -184,7 +184,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(ctx).pop(),
-                  child: const Text("Cancel"),
+                  child: Text(AppLocalizations.of(context)?.l10n_cancel ?? "Issue with the l10n for 'Cancel'"),
                 ),
                 FilledButton(
                   onPressed: onConfirm,
