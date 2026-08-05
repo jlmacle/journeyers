@@ -273,6 +273,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'List content already saved.';
 
   @override
+  String get text_lists_new_list_save_button_tooltip => 'Save list';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -554,6 +557,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_new_list_content_already_saved_message =>
       'List content already saved.';
+
+  @override
+  String get text_lists_new_list_save_button_tooltip => 'Save list';
 
   @override
   String get l10n_keywords => 'Keywords';
