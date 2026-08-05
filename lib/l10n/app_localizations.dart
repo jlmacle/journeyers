@@ -551,6 +551,12 @@ abstract class AppLocalizations {
   /// **'e.g. Our household members'**
   String get text_lists_new_list_save_dialog_text_field_hint;
 
+  /// The message when the list name is empty at saving time
+  ///
+  /// In en, this message translates to:
+  /// **'Label cannot be empty.'**
+  String get text_lists_new_list_empty_list_name_message;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

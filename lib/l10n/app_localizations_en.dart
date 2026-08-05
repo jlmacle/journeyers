@@ -286,6 +286,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'e.g. Our household members';
 
   @override
+  String get text_lists_new_list_empty_list_name_message =>
+      'Label cannot be empty.';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -580,6 +584,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
       'e.g. Our household members';
+
+  @override
+  String get text_lists_new_list_empty_list_name_message =>
+      'Label cannot be empty.';
 
   @override
   String get l10n_keywords => 'Keywords';
