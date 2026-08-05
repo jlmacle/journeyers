@@ -152,7 +152,9 @@
   ,"@text_lists_new_list_save_button_tooltip": {"description": "l10n for the save button tooltip"}
   ,"text_lists_new_list_save_dialog_title": "Save list"
   ,"@text_lists_new_list_save_dialog_title": {"description": "l10n for the save dialog title"}
-
+  ,"text_lists_new_list_save_dialog_text_field_label": "List label"
+  ,"@text_lists_new_list_save_dialog_text_field_label": {"description": "l10n for the save dialog text field label"}
+ 
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
   
