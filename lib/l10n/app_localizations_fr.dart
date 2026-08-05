@@ -301,6 +301,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Listes de participants déjà sauvegardées';
 
   @override
+  String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -616,6 +619,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_title =>
       'Listes de participants déjà sauvegardées';
+
+  @override
+  String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
 
   @override
   String get l10n_keywords => 'Mots-clés';

@@ -166,6 +166,8 @@
 
     ,"text_lists_dashboard_title": "Listes de participants déjà sauvegardées"
     ,"@text_lists_dashboard_title": {"description": "Le titre du tableau de bord pour les listes de participants déjà sauvegardées"}
+    ,"text_lists_dashboard_sort_by_list_name": "Tri par liste"
+    ,"@text_lists_dashboard_sort_by_list_name": {"description": "Le label pour le 'Tri par liste'"}    
   
 
     ,"l10n_keywords": "Mots-clés"

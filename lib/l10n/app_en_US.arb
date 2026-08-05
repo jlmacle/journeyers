@@ -164,7 +164,8 @@
   
   ,"text_lists_dashboard_title": "Stored participants lists"
   ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
-  
+  ,"text_lists_dashboard_sort_by_list_name": "List sort"
+  ,"@text_lists_dashboard_sort_by_list_name": {"description": "The 'List sort' label"} 
   
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}

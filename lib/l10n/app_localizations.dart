@@ -569,6 +569,12 @@ abstract class AppLocalizations {
   /// **'Stored participants lists'**
   String get text_lists_dashboard_title;
 
+  /// The 'List sort' label
+  ///
+  /// In en, this message translates to:
+  /// **'List sort'**
+  String get text_lists_dashboard_sort_by_list_name;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:
