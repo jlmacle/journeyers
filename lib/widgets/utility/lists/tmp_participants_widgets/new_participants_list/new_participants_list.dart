@@ -341,9 +341,9 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             // To avoid saving twice the same data, at new list declaration
             // TODO: to move at saving time            
             if (_enteredTextItemsList.isNotEmpty)
-              const Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Text(contentAlreadySavedError),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(AppLocalizations.of(context)?.text_lists_new_list_content_already_saved_message ?? "Issue with the message when a list content is already saved."),
               )
           ]            
         ],

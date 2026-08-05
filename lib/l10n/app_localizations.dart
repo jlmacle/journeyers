@@ -521,6 +521,12 @@ abstract class AppLocalizations {
   /// **'Please add a participant\'s name.'**
   String get text_lists_new_list_text_field_hint;
 
+  /// The message when a list content is already saved
+  ///
+  /// In en, this message translates to:
+  /// **'List content already saved.'**
+  String get text_lists_new_list_content_already_saved_message;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

@@ -100,6 +100,7 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
                       overlayTitle: AppLocalizations.of(context)?.text_lists_new_list_keywords_title ?? "Issue with the title of the new list page keywords overlay.",
                       overlayTitleStyle: newParticipantsListKeywordsOverlayTitleStyle, 
                       overlayCloseIconButtonToolTip: AppLocalizations.of(context)?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip",                  
+                      inputChipDeleteIconColor: appBarWhite,
                       textEditingControllerKey: const Key("kwsFieldNewList"), 
                       textEditingController: _keywordsTec, 
                       textFieldStyle: analysisTextFieldStyle, 
