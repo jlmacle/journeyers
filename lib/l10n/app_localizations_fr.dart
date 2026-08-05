@@ -303,6 +303,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get l10n_cancel => 'Annuler';
 
   @override
+  String get l10n_save => 'Enregistrer';
+
+  @override
   String get l10n_keywords_entry_text_field_hint =>
       'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
 
@@ -611,6 +614,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_cancel => 'Annuler';
+
+  @override
+  String get l10n_save => 'Enregistrer';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
