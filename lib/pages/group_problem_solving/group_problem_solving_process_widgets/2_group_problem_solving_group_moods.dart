@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -145,7 +146,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 
                 Navigator.pop(context);
               },
-              child: const Text("Save"),
+              child: Text(AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'"),
             )
           ],
         );

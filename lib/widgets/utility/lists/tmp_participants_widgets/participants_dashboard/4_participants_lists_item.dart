@@ -220,7 +220,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                 textFieldStartValue: currentListName, 
                                 textFieldLabelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_label_text ?? "Issue with the l10n for the 'List Name Edition' label text", 
                                 textFieldLabelStyle: const TextStyle(color: black),
-                                textFiedHint: const Text("Please enter a list name."),
+                                textFiedHint: Text(AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_text_field_hint ?? "Issue with the l10n for the 'List Name Edition' text field hint"),
                                 errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                                 errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
                                 textFieldErrorText: AppLocalizations.of(context)?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time",
@@ -232,7 +232,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                              
                                   await _onListNameUpdated(listKey: widget.listMetadata[itemKey], listData: widget.listMetadata);
                                 },
-                                elevatedButtonText: saveButtonLabel, 
+                                elevatedButtonText: AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'", 
                                 elevatedButtonStyle: const TextStyle(color: black)
                               ),                            
                             child: Text(
@@ -317,7 +317,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                           listData: widget.listMetadata
                           ),
                         child: Text(
-                          "Keywords: ${sortedKeywords.join(", ")}",
+                          "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"} ${sortedKeywords.join(", ")}",
                           key: Key("session-keywords-${widget.listIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
@@ -416,18 +416,22 @@ void _showKeywordsEditSheet
             key: const Key("kwsGroupsDashboardEditField"),
             controller: kwsEditController,
             autofocus: true,
-            decoration: const InputDecoration
+            decoration: InputDecoration
             (
-              labelText: keywordsTextFieldLabel, 
-              labelStyle: TextStyle(color: Colors.black),
-              hintText: "Please enter keywords.",
+              labelText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_label_text ?? "Issue with the l10n for the 'Keywords Edition' label text", 
+              labelStyle: const TextStyle(color: Colors.black),
+              hintText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_text_field_hint ?? "Issue with the l10n for the 'Keywords Edition' text field hint",
             ),
             onSubmitted: (_) async => onKeywordsUpdated(listKey: listKey, listData: listData)
           ),       
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () async =>  onKeywordsUpdated(listKey: listKey, listData: listData),
-            child: const Text("Save", style: TextStyle(color: Colors.black)),
+            child: Text
+            (
+              AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'",
+              style: const TextStyle(color: Colors.black)
+            ),
           ),
           const SizedBox(height: 20),
         ],
@@ -492,9 +496,9 @@ void _showParticipantsEditSheet({
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: participantsTextFieldLabel,
+                    labelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_participants_sheet_label_text ?? "Issue with the l10n for the 'Participants Edition' label text", 
                     labelStyle: const TextStyle(color: Colors.black),
-                    hintText: "Please enter the participants.",
+                    hintText: AppLocalizations.of(context)?.text_lists_dashboard_edit_participants_sheet_text_field_hint ?? "Issue with the l10n for the 'Participants Edition' text field hint", 
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),
@@ -502,7 +506,11 @@ void _showParticipantsEditSheet({
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async => await onConfirm(),
-                  child: const Text(saveButtonLabel, style: TextStyle(color: Colors.black)),
+                  child: Text
+                  (
+                    AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'", 
+                    style: const TextStyle(color: Colors.black)
+                  ),
                 ),
                 const SizedBox(height: 20),
               ],
