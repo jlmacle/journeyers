@@ -587,6 +587,18 @@ abstract class AppLocalizations {
   /// **'Please enter a list name'**
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint;
 
+  /// l10n for the 'Participants Edition' label text
+  ///
+  /// In en, this message translates to:
+  /// **'Participants Edition (please separate with commas)'**
+  String get text_lists_dashboard_edit_participants_sheet_label_text;
+
+  /// l10n for the 'Participants Edition' text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the participants.'**
+  String get text_lists_dashboard_edit_participants_sheet_text_field_hint;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

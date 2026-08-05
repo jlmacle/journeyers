@@ -312,6 +312,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez entrer un nom de liste';
 
   @override
+  String get text_lists_dashboard_edit_participants_sheet_label_text =>
+      'Édition des Participants (veuillez les séparer par des virgules)';
+
+  @override
+  String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
+      'Veuillez entrer les participants.';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -638,6 +646,14 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
       'Veuillez entrer un nom de liste';
+
+  @override
+  String get text_lists_dashboard_edit_participants_sheet_label_text =>
+      'Édition des Participants (veuillez les séparer par des virgules)';
+
+  @override
+  String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
+      'Veuillez entrer les participants.';
 
   @override
   String get l10n_keywords => 'Mots-clés';

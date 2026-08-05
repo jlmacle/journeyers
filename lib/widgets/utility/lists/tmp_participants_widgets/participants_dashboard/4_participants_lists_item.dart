@@ -496,9 +496,9 @@ void _showParticipantsEditSheet({
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: participantsTextFieldLabel,
+                    labelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_participants_sheet_label_text ?? "Issue with the l10n for the 'Participants Edition' label text", 
                     labelStyle: const TextStyle(color: Colors.black),
-                    hintText: "Please enter the participants.",
+                    hintText: AppLocalizations.of(context)?.text_lists_dashboard_edit_participants_sheet_text_field_hint ?? "Issue with the l10n for the 'Participants Edition' text field hint", 
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),

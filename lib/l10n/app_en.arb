@@ -169,6 +169,10 @@
   ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n for the 'List Name Edition' label text"}
   ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Please enter a list name"
   ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n for the 'List Name Edition' text field hint"}
+  ,"text_lists_dashboard_edit_participants_sheet_label_text": "Participants Edition (please separate with commas)"
+  ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n for the 'Participants Edition' label text"}
+   ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Please enter the participants."
+  ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n for the 'Participants Edition' text field hint"}
   
 
 
