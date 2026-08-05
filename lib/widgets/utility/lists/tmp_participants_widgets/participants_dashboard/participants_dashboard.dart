@@ -378,7 +378,6 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                       child: FilledButton.icon(
                         onPressed: () => Navigator.of(context).push(
                           MaterialPageRoute<void>(
-                            //todo: to clean
                             builder: (_) => NewParticipantsList
                                               (
                                                 themeData: Theme.of(context),

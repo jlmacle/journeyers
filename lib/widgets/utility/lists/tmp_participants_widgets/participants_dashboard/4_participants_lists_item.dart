@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -222,7 +223,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                                 textFiedHint: const Text("Please enter a list name."),
                                 errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                                 errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
-                                textFieldErrorText: emptyLabelEditError,
+                                textFieldErrorText: AppLocalizations.of(context)?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time",
                                 onConfirmSuccessfulCallbackFunction: 
                                 (String updatedListName) async
                                 {

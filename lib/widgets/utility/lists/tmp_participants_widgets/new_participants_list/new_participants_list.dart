@@ -135,7 +135,10 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             Future<void> onConfirm() async {
               final label = _labelTec.text.trim();
               if (label.isEmpty) {
-                setDialogState(() => errorText = emptyLabelError);
+                setDialogState
+                (
+                  () => errorText = AppLocalizations.of(context)?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time"
+                );
                 return;
               }
               // Warn if the label already exists, and prevents the saving of data.
@@ -159,7 +162,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             }
 
             return AlertDialog(
-              title: Text(AppLocalizations.of(context)?.text_lists_new_list_save_dialog_title ?? "Issue with the l10n for the save dialog title",),
+              title: Text(AppLocalizations.of(context)?.text_lists_new_list_save_dialog_title ?? "Issue with the l10n for the save dialog title"),
               content: TextField(
                 key: const Key("saveListField"),
                 controller: _labelTec,
