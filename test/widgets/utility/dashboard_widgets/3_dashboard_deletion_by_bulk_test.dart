@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart";
 
@@ -28,6 +29,8 @@ void main() {
     String context = DashboardUtils.caContext,
   }) {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: DashboardDeletionByBulk(
           dashboardContext: context,
