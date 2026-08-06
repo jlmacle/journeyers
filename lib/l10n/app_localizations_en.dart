@@ -26,6 +26,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_lang_fr => 'French';
 
   @override
+  String get app_bottom_bar_item_context_analysis => 'Context analysis';
+
+  @override
+  String get app_bottom_bar_item_group_problem_solving =>
+      'Group problem-solving';
+
+  @override
   String get ca_process_title => 'Context analysis';
 
   @override
@@ -363,6 +370,13 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get app_lang_fr => 'French';
+
+  @override
+  String get app_bottom_bar_item_context_analysis => 'Context analysis';
+
+  @override
+  String get app_bottom_bar_item_group_problem_solving =>
+      'Group problem-solving';
 
   @override
   String get ca_process_title => 'Context analysis';
