@@ -383,6 +383,12 @@ abstract class AppLocalizations {
   /// **'Checklist'**
   String get gps_process_checklist_title;
 
+  /// The invitation before the checklist
+  ///
+  /// In en, this message translates to:
+  /// **'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.'**
+  String get gps_process_checklist_invitation;
+
   /// Label for folder selection/creation, for app storage
   ///
   /// In en, this message translates to:

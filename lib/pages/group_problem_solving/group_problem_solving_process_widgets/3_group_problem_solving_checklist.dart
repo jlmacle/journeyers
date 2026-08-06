@@ -61,9 +61,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
   }
 
   void _showChecklistOverlay(BuildContext context) {
-    const title = "Please consider postponing\n"
-                          "the group problem-solving\n"
-                          "if the checklist is incomplete.";
+    var title = AppLocalizations.of(context)?.gps_process_checklist_invitation ?? "Issue with the invitation before the checklist";
 
     showGeneralDialog(
       context: context,
@@ -74,9 +72,9 @@ class _GPSChecklistState extends State<GPSChecklist> {
             centerTitle: true, 
             toolbarHeight: 90.00,
             title: 
-            const Padding
+            Padding
             (
-              padding: EdgeInsets.all(16.0), 
+              padding: const EdgeInsets.all(16.0), 
               child: Text(
                 title,
                 textAlign: TextAlign.center,

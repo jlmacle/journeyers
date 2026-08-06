@@ -187,6 +187,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gps_process_checklist_title => 'Check-list';
 
   @override
+  String get gps_process_checklist_invitation =>
+      'Veuillez considérer reporter\nla session de résolution de problèmes en groupe\nsi la check-list est incomplète.';
+
+  @override
   String get folder_picker_on_mobile =>
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 
@@ -538,6 +542,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_checklist_title => 'Check-list';
+
+  @override
+  String get gps_process_checklist_invitation =>
+      'Veuillez considérer reporter\nla session de résolution de problèmes en groupe\nsi la check-list est incomplète.';
 
   @override
   String get folder_picker_on_mobile =>
