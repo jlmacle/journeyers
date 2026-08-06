@@ -28,9 +28,7 @@ void main() {
       await tester.pumpAndSettle();
       
       // Getting the build context
-      final context = tester.element(find.byType(Scaffold));
-      var hintText = AppLocalizations.of(context)?.ca_process_title_text_field_hint ?? "Issue with the context analysis title text field hint";
-
+      var hintText = "Please enter a title for this analysis.";
 
       // Verifying the text field hint present
       expect(find.text(hintText), findsOneWidget);
