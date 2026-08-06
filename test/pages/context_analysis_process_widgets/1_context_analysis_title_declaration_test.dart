@@ -29,7 +29,7 @@ void main() {
       
       // Getting the build context
       final context = tester.element(find.byType(Scaffold));
-      var hintText = AppLocalizations.of(context)?.ca_process_title ?? "Issue with the context analysis process title";
+      var hintText = AppLocalizations.of(context)?.ca_process_title_text_field_hint ?? "Issue with the context analysis title text field hint";
 
 
       // Verifying the text field hint present
