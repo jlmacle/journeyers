@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page.dart";
 
 void main() {
@@ -10,6 +11,8 @@ void main() {
     // Building the widget
     return tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: NewParticipantsListOrLoadingPage
           (
@@ -57,7 +60,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verifying the correct option 1 label
-      var textFinder = find.text("To load the list\nof previous groups?");
+      var textFinder = find.text("To load a saved group?");
       expect(textFinder, findsOne);    
     }); 
     

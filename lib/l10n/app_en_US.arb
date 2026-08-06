@@ -100,6 +100,8 @@
   ,"@gps_process_default_title": {"description": "The default title for a problem-solving session."}
   ,"gps_process_checklist_title": "Checklist"
   ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
+  ,"gps_process_checklist_invitation": "Please consider postponing\nthe group problem-solving\nif the checklist is incomplete."
+  ,"@gps_process_checklist_invitation": {"description": "The invitation before the checklist"}
 
 
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
