@@ -2,6 +2,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -42,6 +43,8 @@ void main()
   {
     await tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: GPSProblemToSolveDeclaration
           (
@@ -111,8 +114,8 @@ void main()
       // Pumping the widget
       await pumpGPSProblemToSolveDeclaration(tester);
 
-      // Searching the placeholder title
-      var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+      // Searching the placeholder title 
+      var placeholderTitleFinder = find.text("Problem To Solve");
 
       // Tapping
       await tester.tap(placeholderTitleFinder);
