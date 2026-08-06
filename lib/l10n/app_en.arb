@@ -96,6 +96,9 @@
   ,"@gps_title_suffix": {"description": "The title suffix for a problem-solving session."}  
   ,"gps_process_default_title": "Problem To Solve"
   ,"@gps_process_default_title": {"description": "The default title for a problem-solving session."}
+  ,"gps_process_checklist_title": "Checklist"
+  ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
+
 
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}

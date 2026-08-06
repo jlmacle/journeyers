@@ -377,6 +377,12 @@ abstract class AppLocalizations {
   /// **'Problem To Solve'**
   String get gps_process_default_title;
 
+  /// The default title for the checklist-related widget.
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist'**
+  String get gps_process_checklist_title;
+
   /// Label for folder selection/creation, for app storage
   ///
   /// In en, this message translates to:

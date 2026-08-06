@@ -184,6 +184,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gps_process_default_title => 'Problème à résoudre';
 
   @override
+  String get gps_process_checklist_title => 'Check-list';
+
+  @override
   String get folder_picker_on_mobile =>
       'Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données.';
 
@@ -532,6 +535,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_default_title => 'Problème à résoudre';
+
+  @override
+  String get gps_process_checklist_title => 'Check-list';
 
   @override
   String get folder_picker_on_mobile =>
