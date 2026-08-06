@@ -11,6 +11,11 @@
     "@app_lang_en": {"description": "Le nom de la langue anglaise, en français"},
     "app_lang_fr": "Français",
     "@app_lang_fr": {"description": "Le nom de la langue française, en français"},
+    "app_bottom_bar_item_context_analysis": "Analyse de contexte",
+    "@app_bottom_bar_item_context_analysis": {"description": "Le label 'Analyse de contexte' de l'élément de la barre inférieure"},
+    "app_bottom_bar_item_group_problem_solving": "Résolution de problème",
+    "@app_bottom_bar_item_group_problem_solving": {"description": "Le label 'Résolution de problème' de l'élément de la barre inférieure"},
+
 
     "ca_process_title": "Analyse du contexte",
     "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},

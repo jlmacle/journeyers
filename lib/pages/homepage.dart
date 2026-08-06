@@ -211,19 +211,19 @@ class _HomePageState extends State<HomePage>
                 _handleCATap();
             }
           },
-          items: const 
+          items:
           [
             BottomNavigationBarItem
             (
-              icon: Icon(Icons.task_alt),
-              label: "Context analysis",
+              icon: const Icon(Icons.task_alt),
+              label:AppLocalizations.of(context)?.app_bottom_bar_item_context_analysis ?? "Issue with the 'Context analysis' bottom bar item label",
             ),
             BottomNavigationBarItem
             (
               // Key used in testing
-              key: Key("homepage-bottom-navigation-bar-item-gps"),
-              icon: Icon(Icons.group),
-              label: "Group problem-solving",
+              key: const Key("homepage-bottom-navigation-bar-item-gps"),
+              icon: const Icon(Icons.group),
+              label: AppLocalizations.of(context)?.app_bottom_bar_item_group_problem_solving ?? "Issue with the 'Group problem-solving' bottom bar item label",
             ),
           ],
         ),

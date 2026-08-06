@@ -11,6 +11,12 @@
   "@app_lang_en": {"description": "The name of the English language, in English"},
   "app_lang_fr": "French",
   "@app_lang_fr": {"description": "The name of the French language, in English"},
+  "app_bottom_bar_item_context_analysis": "Context analysis",
+  "@app_bottom_bar_item_context_analysis": {"description": "The 'Context analysis' bottom bar item label"},
+  "app_bottom_bar_item_group_problem_solving": "Group problem-solving",
+  "@app_bottom_bar_item_group_problem_solving": {"description": "The 'Group problem-solving' bottom bar item label"},
+
+
 
   "ca_process_title": "Context analysis",
   "@ca_process_title": {"description": "The title of the context analysis process"},

@@ -130,6 +130,18 @@ abstract class AppLocalizations {
   /// **'French'**
   String get app_lang_fr;
 
+  /// The 'Context analysis' bottom bar item label
+  ///
+  /// In en, this message translates to:
+  /// **'Context analysis'**
+  String get app_bottom_bar_item_context_analysis;
+
+  /// The 'Group problem-solving' bottom bar item label
+  ///
+  /// In en, this message translates to:
+  /// **'Group problem-solving'**
+  String get app_bottom_bar_item_group_problem_solving;
+
   /// The title of the context analysis process
   ///
   /// In en, this message translates to:
