@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
@@ -28,6 +29,8 @@ void main() {
       testWidgets("Displays session info correctly (Title, date, keywords)", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -70,6 +73,8 @@ void main() {
       testWidgets("Finds the preview tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -104,6 +109,8 @@ void main() {
       testWidgets("Finds the edit tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -138,6 +145,8 @@ void main() {
       testWidgets("Finds the keywords tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -171,6 +180,8 @@ void main() {
       testWidgets("Finds the delete tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -208,6 +219,8 @@ void main() {
       testWidgets("Opens the CA preview", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -246,6 +259,8 @@ void main() {
       testWidgets("Opens the GPS preview", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -320,6 +335,8 @@ void main() {
       testWidgets("Opens the keywords edition overlay by clicking on the icon", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -359,6 +376,8 @@ void main() {
       testWidgets("Opens the keywords edition overlay by clicking on the keywords data", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
