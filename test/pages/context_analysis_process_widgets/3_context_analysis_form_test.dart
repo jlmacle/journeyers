@@ -120,7 +120,7 @@ void main()
             // Verifying that the second expansion tile title is correct
             var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
-            expect(secondExpansionTileTextWidget.data, q.level2TitleGroup);
+            expect(secondExpansionTileTextWidget.data, AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the title question for the groups/teams perspective");
           },
         ); 
 
