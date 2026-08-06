@@ -167,10 +167,10 @@ void main()
             }
 
             // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, q.level3TitleBalanceIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, q.level3TitleWorkplaceIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, q.level3TitleLegacyIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, q.level3TitleAnotherIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, "A Balance Issue?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, "A Workplace Issue?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, "A Legacy Issue?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, "Is the issue\nof another type?");
           },
         );      
       
@@ -419,11 +419,11 @@ void main()
             }
 
             // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, q.level3TitleGroupsProblematics);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, q.level3TitleSameProblem);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, q.level3TitleHarmonyAtHome);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, q.level3TitleAppreciabilityAtWork);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, q.level3TitleIncomeEarningAbility);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, "What problem(s)\nare my groups/teams\ntrying to solve?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, "Am I trying to solve the same problem(s) as my groups/teams?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, "Is entering the group problem-solving process consistent with harmony at home?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, "Is entering the group problem-solving process consistent with appreciability at work?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, "Is entering the group problem-solving process consistent with my income earning ability?");
           },
         );
       
