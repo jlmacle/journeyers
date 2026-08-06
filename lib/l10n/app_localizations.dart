@@ -605,6 +605,12 @@ abstract class AppLocalizations {
   /// **'Keywords'**
   String get l10n_keywords;
 
+  /// l10n for 'Delete'
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get l10n_delete;
+
   /// l10n for 'Cancel'
   ///
   /// In en, this message translates to:

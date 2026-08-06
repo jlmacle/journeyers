@@ -180,6 +180,8 @@
 
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
+  ,"l10n_delete": "Delete"
+  ,"@l10n_delete": {"description": "l10n for 'Delete'"}
   ,"l10n_cancel": "Cancel"
   ,"@l10n_cancel": {"description": "l10n for 'Cancel'"}
   ,"l10n_save": "Save"
