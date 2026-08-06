@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -40,15 +41,18 @@ class _GPSChecklistState extends State<GPSChecklist> {
           ),
         ),
         padding: const EdgeInsets.symmetric(vertical: 10),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(right: 15),
               child: Icon(Icons.checklist_rounded),
             ),
             Center(
-              child: Text(checkListTitle, style: problemSolvingChecklistTitle),
+              child: Text
+              (
+                AppLocalizations.of(context)?.gps_process_checklist_title ?? "Issue with the default title for the checklist-related widget.",                style: problemSolvingChecklistTitle
+              ),
             )
           ],
         ),
