@@ -351,7 +351,10 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                 Wrap(
                   children: [
                     ElevatedButton(
-                      child: const Text(loadingButtonLabel),
+                      child: Text
+                      ( 
+                        AppLocalizations.of(context)?.text_lists_dashboard_list_loading_button_text ?? "Issue with the l10n for the list loading button text",
+                      ),
                       onPressed: () 
                       {
                         if (listDebug) pu.printd("List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_participantsCurrent");
