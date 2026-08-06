@@ -2,6 +2,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 
@@ -13,6 +14,8 @@ void main()
 
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: GPSProblemToSolveDeclaration
             (
@@ -42,7 +45,7 @@ void main()
             expect(find.byType(TextField), findsNothing);
 
             // Getting the default title
-            var titleFinder = find.text(gpsProcessTitlePlaceholder);
+            var titleFinder = find.text("Problem To Solve");
 
             // Clicking on the default title
             await tester.tap(titleFinder);
