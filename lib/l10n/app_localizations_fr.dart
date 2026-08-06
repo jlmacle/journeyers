@@ -320,6 +320,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez entrer les participants.';
 
   @override
+  String get text_lists_dashboard_list_loading_button_text =>
+      'Veuillez cliquer pour charger une liste';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -657,6 +661,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
       'Veuillez entrer les participants.';
+
+  @override
+  String get text_lists_dashboard_list_loading_button_text =>
+      'Veuillez cliquer pour charger une liste';
 
   @override
   String get l10n_keywords => 'Mots-clés';

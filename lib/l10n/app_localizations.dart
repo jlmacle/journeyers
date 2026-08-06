@@ -599,6 +599,12 @@ abstract class AppLocalizations {
   /// **'Please enter the participants.'**
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint;
 
+  /// l10n for the list loading button text
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to load'**
+  String get text_lists_dashboard_list_loading_button_text;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:

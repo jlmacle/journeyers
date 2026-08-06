@@ -176,6 +176,8 @@
     ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
     ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participants."
     ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition des participants"}
+    ,"text_lists_dashboard_list_loading_button_text": "Veuillez cliquer pour charger une liste"
+    ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n pour le texte du bouton de chargement de liste"}
   
 
     ,"l10n_keywords": "Mots-clés"

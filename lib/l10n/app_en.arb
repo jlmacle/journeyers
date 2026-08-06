@@ -173,6 +173,8 @@
   ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n for the 'Participants Edition' label text"}
    ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Please enter the participants."
   ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n for the 'Participants Edition' text field hint"}
+  ,"text_lists_dashboard_list_loading_button_text": "Please click to load"
+  ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n for the list loading button text"}
   
 
 
