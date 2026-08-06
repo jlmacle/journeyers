@@ -319,6 +319,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get l10n_keywords => 'Keywords';
 
   @override
+  String get l10n_delete => 'Delete';
+
+  @override
   String get l10n_cancel => 'Cancel';
 
   @override
@@ -649,6 +652,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords => 'Keywords';
+
+  @override
+  String get l10n_delete => 'Delete';
 
   @override
   String get l10n_cancel => 'Cancel';

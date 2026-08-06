@@ -165,7 +165,7 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
                     color: (widget.areSessionsForDeletion == true)? Colors.red: transparent
                   ),
             label: Text(
-              "Delete (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
+              "${AppLocalizations.of(context)?.l10n_delete ?? 'Issue with the l10n for Delete'} (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
               style: TextStyle(
                 color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,

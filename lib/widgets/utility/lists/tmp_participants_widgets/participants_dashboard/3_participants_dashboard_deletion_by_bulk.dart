@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
@@ -135,7 +136,7 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
             onPressed: _selectedListsDelete,
             icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(
-              "Delete (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
+              "${AppLocalizations.of(context)?.l10n_delete ?? 'Issue with the l10n for Delete'} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
               style: TextStyle(
                 color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,

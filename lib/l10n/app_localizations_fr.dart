@@ -323,6 +323,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get l10n_keywords => 'Mots-clés';
 
   @override
+  String get l10n_delete => 'Effacer les données';
+
+  @override
   String get l10n_cancel => 'Annuler';
 
   @override
@@ -657,6 +660,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_keywords => 'Mots-clés';
+
+  @override
+  String get l10n_delete => 'Effacer les données';
 
   @override
   String get l10n_cancel => 'Annuler';

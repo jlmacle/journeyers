@@ -344,7 +344,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                     onKeywordsUpdated: _onKeywordsUpdated,
                     listData: widget.listMetadata,
                   ),
-                  tooltip: keywordsTooltipLabel,
+                  tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_keywords ?? "Issue with the l10n for the 'Edit Keywords' tooltip",
                 ),
 
                 // Center content — wraps if needed
@@ -369,7 +369,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                 IconButton(
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
-                  tooltip: listsDeleteTooltipLabel,
+                  tooltip: AppLocalizations.of(context)?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip",
                 ),
               ],
             ),
