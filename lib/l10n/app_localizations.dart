@@ -422,7 +422,7 @@ abstract class AppLocalizations {
   /// Text for the 'Keywords: ' prefix for the dashboard items
   ///
   /// In en, this message translates to:
-  /// **'Keywords: '**
+  /// **'Keywords:'**
   String get dashboard_keywords;
 
   /// Error message when previewing with a different interface language setting than the language used for the saved data

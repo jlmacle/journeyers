@@ -208,7 +208,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboard_filter_by_keywords => 'Filtrage par mots-clés';
 
   @override
-  String get dashboard_keywords => 'Mots-clés: ';
+  String get dashboard_keywords => 'Mots-clés:';
 
   @override
   String get dashboard_preview_mixed_languages_error_message =>
@@ -565,7 +565,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get dashboard_filter_by_keywords => 'Filtrage par mots-clés';
 
   @override
-  String get dashboard_keywords => 'Mots-clés: ';
+  String get dashboard_keywords => 'Mots-clés:';
 
   @override
   String get dashboard_preview_mixed_languages_error_message =>
