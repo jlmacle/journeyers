@@ -1,3 +1,5 @@
+import "package:journeyers/utils/string/string_utils.dart";
+
 /// {@category Context analysis}
 
 /// A class with fields related to the questions of the context analysis.
@@ -46,11 +48,11 @@ class CAQuestionsFields
   // ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
   // Heading level 2
   /// Question asked in the form: As a member of groups/teams: What problem(s) are we trying to solve?
-  String level2TitleGroup = "As a member of groups/teams: What problem(s) are we trying to solve?";
-
+  String level2TitleGroup = "As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?";
+  
   // Heading level 3 without sub items
   /// Question asked in the form: What problem(s) are the groups/teams trying to solve?
-  String level3TitleGroupsProblematics = "What problem(s) are the groups/teams trying to solve?";
+  String level3TitleGroupsProblematics = lineReturnToSpace("What problem(s)\nare my groups/teams\ntrying to solve?")!;
 
   // Heading level 3 without sub items
   /// Question asked in the form: Am I trying to solve the same problem(s) as my groups/teams?

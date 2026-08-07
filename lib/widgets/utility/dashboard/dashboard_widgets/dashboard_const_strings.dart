@@ -11,7 +11,7 @@ const gpsTitleSuffix = " (gps)";
 
 // Tooltips
 const previewTooltipLabel = "Preview";
-const previewClosingTooltipLabel = "Please click to close preview";
+const previewClosingTooltipLabel = "Please click to close the preview";
 const editFromDashboardItemTooltipLabel = "Edit session data";
 const keywordsTooltipLabel = "Edit Keywords";
 const deleteTooltipLabel = "Delete data";

@@ -1926,8 +1926,7 @@ Future<void> main() async {
         });
 
       // Edition data is not retained in next process
-      testWidgets(
-        "Edition data is not retained in next process \n",
+      testWidgets("Edition data is not retained in next process \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues

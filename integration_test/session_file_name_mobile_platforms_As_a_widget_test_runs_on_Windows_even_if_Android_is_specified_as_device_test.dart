@@ -7,6 +7,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -73,6 +74,8 @@ void main()
             await tester.pumpWidget
             (
               MaterialApp(
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
                 home: Scaffold(
                   body: CAProcess
                   (
