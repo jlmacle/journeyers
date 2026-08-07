@@ -333,7 +333,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             // TODO: to move at saving time            
             if (_enteredTextItemsList.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: 16.0),
                 child: Text(AppLocalizations.of(context)?.text_lists_new_list_content_already_saved_message ?? "Issue with the message when a list content is already saved."),
               )
           ]            
