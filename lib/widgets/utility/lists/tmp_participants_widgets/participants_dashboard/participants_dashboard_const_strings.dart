@@ -13,7 +13,7 @@ const keywordsLabel = "Keywords:";
 
 // Tooltips
 const keywordsTooltipLabel = "Edit Keywords";
-const listsDeleteTooltipLabel = "Delete";
+const listsDeleteTooltipLabel = "Delete data";
 
 // Buttons
 const newListButtonLabel = "Please tap to add a list.";
