@@ -6,9 +6,7 @@ depends on our ability to group problem-solve toward lasting solutions.<br>
 This open source ed tech and assistive technology, proof of concept project <br>
 (built with Flutter, therefore cross-platform [Android, iPhone, Linux, macOS, Windows], <br>
 and with a goal of being multilingual, accessible, and offline-friendly), <br>
-is meant to illustrate supporting our group problem-solving processes, and to help us reach lasting solutions,<br>
-consistent with harmony in the household and reliability in the workplace.
-<br>
+is meant to illustrate supporting our group problem-solving processes, in a family setting.<br>
 
 An English/French localization proof of concept is illustrated (unfinished and commented in homepage.dart).<br>
 Additional effort needs to be done for the accessibility.<br>
@@ -49,7 +47,7 @@ https://lnkd.in/ee8hFarp
 </p>
 
 <hr>
-<b>Some sources I have studied, starting around 2007</b>:<br>
+<b>Some sources I have studied throughout the years</b>:<br>
 <ul>
   <li><i>The 7 Habits of Highly Effective People</i>, Stephen R. Covey</li>
   <li><i>Group Problem Solving Process</i>, Ohio State University</li>
