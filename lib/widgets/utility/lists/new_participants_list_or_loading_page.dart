@@ -31,6 +31,16 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
               (
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
+                actions: 
+                [
+                  IconButton
+                  (
+                    icon: const Icon(Icons.close),
+                    tooltip: AppLocalizations.of(context)?.text_lists_new_list_close_tooltip ?? "Issue with the l10n for the 'click to go to the previous page' tooltip.",
+                    color: black,
+                    onPressed: () => Navigator.of(context).pop()
+                  )
+                ],
               ),
       body: SafeArea(
         child: Center(
