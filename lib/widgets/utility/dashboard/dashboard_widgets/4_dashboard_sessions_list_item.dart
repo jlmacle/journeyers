@@ -319,7 +319,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           onKeywordsUpdated: _onKeywordsUpdated
                           ),
                         child: Text(
-                          "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"}${sortedKeywords.join(", ")}",
+                          "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"} ${sortedKeywords.join(", ")}",
                           key: Key("session-keywords-${widget.sessionDataIndex}"),
                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
                         ),
