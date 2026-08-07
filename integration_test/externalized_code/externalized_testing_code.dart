@@ -349,20 +349,28 @@ final q = CAQuestionsFields();
     await tester.tap(previewFinder);
     await tester.pumpAndSettle();
 
+    // await tester.pump(const Duration(seconds: 10));
+
     //Searching for the expansion tiles
     var  expansionTilesFinder = find.descendant
     (
       of: find.byType(CAPreview), 
-      matching: find.byType(ExpansionTile)
+      matching: find.byType(ExpansionTile),
+      skipOffstage: false
     );
 
+    // Getting the number of non empty individual perspective values
+    var totalNonEmptyIndivPerspectiveValues = 
+      individualStringValues.where((item) => item.isNotEmpty).toList().length;
+    if (testingDebug) pu.printd("Testing Debug: Number of non empty individual perspective values: $totalNonEmptyIndivPerspectiveValues");
+
     // Getting the total number of expansion tiles
-    int totalExpansionTiles = expansionTilesFinder.evaluate().length;
+    int totalExpansionTiles = expansionTilesFinder.evaluate().length;    
     if (testingDebug) pu.printd("Testing Debug: Number of expansion tiles: $totalExpansionTiles");
-    // Should be 9: 4 for the individual perspective, 5 for the group/teams perspective
 
     // Expansion tile indexes for the individual perspective
-    var indivIndexes = List.generate(4, (i)=> i);
+    var indivIndexes = List.generate(totalNonEmptyIndivPerspectiveValues, (i)=> i);
+
     // Expansion tile indexes for the group/teams perspective
     var groupIndexes = List.generate(5, (i)=> i+4);
 
@@ -370,7 +378,7 @@ final q = CAQuestionsFields();
     if (testingDebug) pu.printd("Testing Debug: Expansion tile indexes for the group/teams perspective: $groupIndexes");
     
     // To have the index of the data for each perspective
-    // Reset for the group/teams perspective
+    // reset at the start of the group/teams perspective
     int previewListTileDataIndex = -1;
 
     // Accessing the expansion tiles by index
@@ -380,6 +388,7 @@ final q = CAQuestionsFields();
       var currentExpansionTileFinder = find.descendant(
         of: find.byType(CAPreview),
         matching: find.byType(ExpansionTile),
+        skipOffstage: false
       ).at(expansionTileIndex);
 
       // Getting the expansion tile title
@@ -392,7 +401,8 @@ final q = CAQuestionsFields();
       var listTilesFinder = find.descendant
       (
         of: currentExpansionTileFinder, 
-        matching: find.byType(ListTile)
+        matching: find.byType(ListTile),
+        skipOffstage: false
       );
 
       // Getting the total number of list tiles for this expansion tile
@@ -423,7 +433,8 @@ final q = CAQuestionsFields();
         // Searching the tiles by index
         var currentListTile = find.descendant(
           of: currentExpansionTileFinder, 
-          matching: find.byType(ListTile)
+          matching: find.byType(ListTile),
+          skipOffstage: false
         ).at(listTileIndex);
         
         // Getting the list tile title
@@ -463,7 +474,8 @@ final q = CAQuestionsFields();
             expect(listTileTitle, "Notes: ${groupStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the title with the segmented button answers
-          else{
+          else
+          {
             var segButtonValue = segmentedButtonValues[previewListTileDataIndex-1];
              
             if(segButtonValue.isNotEmpty)
@@ -493,6 +505,7 @@ final q = CAQuestionsFields();
   {
     for (var text in listOfTextsToFind)
     {
+      if (testingDebug) pu.printd("Testing Debug: caCheckboxesVerifyEmptyContent: searching for: $text");
       var textFinder = find.text(text, skipOffstage: false);
       await tester.scrollUntilVisible(textFinder, scrollable: scrollable, 45);
       var customCheckboxFinder = find.ancestor
