@@ -75,16 +75,12 @@ A potential priority for the workplace appreciability: to maintain a household o
 Some themes: 
 - communication, attitude, decision-making, planning 
 - learning by doing
-- credentials, metrics
+- credentials
 - maintenance, logistics 
 - companionship, workplace appreciability, legacy
 
 Some keywords:
-Specifically important
-Urgent, Not perceived as urgent
-
-Prevention/remediation:
-We might have an issue with/We surely will have an issue with/We have an issue with
+Important, specifically important, not perceived as important
 
 -----------
 Learning by doing:
@@ -103,11 +99,10 @@ Off-line functioning
 ------------------------------------------
 Storage of what can be positive credentials of our team life.
 ------------------------------------------
-Supportive technology for sound priorities (dashboard+todos)/problem-solving/group problem-solving/team credentials
+Supportive technology for sound priorities (dashboard+todos)
 ------------------------------------------
 DPGs:
 - to ease building on win-wins where we dwell
-- to determine productivity we can be reliable at/feel good about
 
 Let's suppose that we have the ability, assisted or not:
 
@@ -147,8 +142,8 @@ What makes those persons reliable in their places of productivity,
 and how to harmonize those needs?
 ------------------------------------------
 Problem-solving toward employability:
-- metrics of hard skills reliability (diplomas, certifications, portfolio, ...)
-- metrics of soft skills reliability (diplomas, certifications, other credentials)
+- metrics of hard skills reliability (diplomas, [VR] certifications, portfolio, ...)
+- metrics of soft skills reliability (diplomas, [VR] certifications, other credentials)
 Potentially, development of a project consistent with employment requirements.
 Also as an opportunity to measure if we appreciate to grow into a productivity
 that is supposed to be decades-long.
