@@ -17,7 +17,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get app_start_msg =>
-      'Ceci est votre première analyse de contexte.\nLe tableau de bord s\'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.';
+      'Avertissement:\nCe travail est fourni « en l\'état »,\nsans garantie d\'aucune sorte.\nL\'auteur décline toute responsabilité\npour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première\nanalyse de contexte.\nLe tableau de bord s\'affichera\nune fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.';
 
   @override
   String get app_lang_en => 'Anglais';
@@ -278,7 +278,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_new_list_placeholder_when_no_list_data =>
-      'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l\'ajouter au groupe.';
+      'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom\npour l\'ajouter au groupe.';
 
   @override
   String get text_lists_new_list_text_field_hint =>
@@ -309,6 +309,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get text_lists_new_list_same_list_name_message =>
       ' existe déjà.\nVeuillez choisir un autre nom.';
+
+  @override
+  String get text_lists_new_list_close_tooltip =>
+      'Veuillez cliquer pour retourner à la page précédente';
 
   @override
   String get text_lists_dashboard_title =>
@@ -374,7 +378,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get app_start_msg =>
-      'Ceci est votre première analyse de contexte.\nLe tableau de bord s\'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.';
+      'Avertissement:\nCe travail est fourni « en l\'état »,\nsans garantie d\'aucune sorte.\nL\'auteur décline toute responsabilité\npour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première\nanalyse de contexte.\nLe tableau de bord s\'affichera\nune fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.';
 
   @override
   String get app_lang_en => 'Anglais';
@@ -635,7 +639,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_new_list_placeholder_when_no_list_data =>
-      'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l\'ajouter au groupe.';
+      'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom\npour l\'ajouter au groupe.';
 
   @override
   String get text_lists_new_list_text_field_hint =>
@@ -666,6 +670,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_same_list_name_message =>
       ' existe déjà.\nVeuillez choisir un autre nom.';
+
+  @override
+  String get text_lists_new_list_close_tooltip =>
+      'Veuillez cliquer pour retourner à la page précédente';
 
   @override
   String get text_lists_dashboard_title =>

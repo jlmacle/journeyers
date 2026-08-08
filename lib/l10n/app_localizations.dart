@@ -536,7 +536,7 @@ abstract class AppLocalizations {
   /// The placeholder text when no participant's name has been added to the new group
   ///
   /// In en, this message translates to:
-  /// **'No names in the new group.\nPlease enter a name to add a participant to the group.'**
+  /// **'No names in the new group.\nPlease enter a name\nto add a participant to the group.'**
   String get text_lists_new_list_placeholder_when_no_list_data;
 
   /// The text field hint for adding a participant's name.
@@ -586,6 +586,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **' already exists.\nPlease choose another label.'**
   String get text_lists_new_list_same_list_name_message;
+
+  /// l10n for the 'click to go to the previous page' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to go to the previous page'**
+  String get text_lists_new_list_close_tooltip;
 
   /// The title for the participants lists dashboard
   ///

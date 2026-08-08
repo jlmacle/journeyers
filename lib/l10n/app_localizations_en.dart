@@ -276,7 +276,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get text_lists_new_list_placeholder_when_no_list_data =>
-      'No names in the new group.\nPlease enter a name to add a participant to the group.';
+      'No names in the new group.\nPlease enter a name\nto add a participant to the group.';
 
   @override
   String get text_lists_new_list_text_field_hint =>
@@ -306,6 +306,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get text_lists_new_list_same_list_name_message =>
       ' already exists.\nPlease choose another label.';
+
+  @override
+  String get text_lists_new_list_close_tooltip =>
+      'Please click to go to the previous page';
 
   @override
   String get text_lists_dashboard_title => 'Stored participants lists';
@@ -629,7 +633,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_new_list_placeholder_when_no_list_data =>
-      'No names in the new group.\nPlease enter a name to add a participant to the group.';
+      'No names in the new group.\nPlease enter a name\nto add a participant to the group.';
 
   @override
   String get text_lists_new_list_text_field_hint =>
@@ -659,6 +663,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_new_list_same_list_name_message =>
       ' already exists.\nPlease choose another label.';
+
+  @override
+  String get text_lists_new_list_close_tooltip =>
+      'Please click to go to the previous page';
 
   @override
   String get text_lists_dashboard_title => 'Stored participants lists';

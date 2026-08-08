@@ -151,7 +151,7 @@
   ,"@text_lists_new_list_title": {"description": "The title of the new list page."}
   ,"text_lists_new_list_keywords_title": "Please enter keywords\nrelated to this group."
   ,"@text_lists_new_list_keywords_title": {"description": "The title of the new list page keywords overlay."}
-  ,"text_lists_new_list_placeholder_when_no_list_data": "No names in the new group.\nPlease enter a name to add a participant to the group."
+  ,"text_lists_new_list_placeholder_when_no_list_data": "No names in the new group.\nPlease enter a name\nto add a participant to the group."
   ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "The placeholder text when no participant's name has been added to the new group"}
   ,"text_lists_new_list_text_field_hint": "Please add a participant's name."
   ,"@text_lists_new_list_text_field_hint": {"description": "The text field hint for adding a participant's name."}
@@ -169,7 +169,10 @@
   ,"@text_lists_new_list_empty_list_name_message": {"description": "The message when the list name is empty at saving time"}
   ,"text_lists_new_list_same_list_name_message": " already exists.\nPlease choose another label."
   ,"@text_lists_new_list_same_list_name_message": {"description": "The message, at saving time, when a list name has already been used."}
+  ,"text_lists_new_list_close_tooltip": "Please click to go to the previous page"
+  ,"@text_lists_new_list_close_tooltip": {"description": "l10n for the 'click to go to the previous page' tooltip"}
   
+
   ,"text_lists_dashboard_title": "Stored participants lists"
   ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
   ,"text_lists_dashboard_sort_by_list_name": "List sort"
