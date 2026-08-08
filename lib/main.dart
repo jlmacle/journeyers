@@ -88,7 +88,7 @@ class _GPSappState extends State<GPSapp>
     if (!availableTranslationsCodes.contains(_currentLocale!.countryCode!.toLowerCase())) 
     {
       
-      if (runtimeDataDebug) pu.printd("Translations not available for ${_currentLocale!.languageCode}. Defaulting to English.");
+      if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: Translations not available for ${_currentLocale!.languageCode}. Defaulting to English.");
       _currentLocale = const Locale("en");      
     }
     if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: current locale country code: ${_currentLocale!.countryCode}");
