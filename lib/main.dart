@@ -85,13 +85,14 @@ class _GPSappState extends State<GPSapp>
   @override
   Widget build(BuildContext context) 
   {
-    if (!availableTranslationsCodes.contains(_currentLocale!.countryCode!.toLowerCase())) 
+    if (!availableTranslationsCodes.contains(_currentLocale!.languageCode.toLowerCase())) 
     {
-      
+      if (runtimeDataDebug) pu.printd("availableTranslationsCodes: $availableTranslationsCodes");
+      if (runtimeDataDebug) pu.printd("_currentLocale!.languageCode.toLowerCase(): ${_currentLocale!.languageCode.toLowerCase()}");
       if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: Translations not available for ${_currentLocale!.languageCode}. Defaulting to English.");
       _currentLocale = const Locale("en");      
     }
-    if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: current locale country code: ${_currentLocale!.countryCode}");
+    if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: current locale language code: ${_currentLocale!.languageCode}");
     
 
     return      
