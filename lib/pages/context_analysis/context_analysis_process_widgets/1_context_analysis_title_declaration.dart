@@ -13,8 +13,7 @@ class CATitleDeclaration extends StatefulWidget
   /// A boolean used to state if the title is autofocused.
   final bool analysisTitleAutofocused;
 
-  // Todo: to clean
-  /// A title value used at editing time.
+  /// The title value at edition time.
   final String analysisTitleWhenEdition;
 
   /// A boolean used to state if an edition is in progress.
@@ -62,8 +61,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
         errorMessageStyle: analysisTextFieldErrorMessageStyle, 
         stringSanitizerBundlesErrorsMap: const {},
         textFieldMaxLength: 150,
-        onTextFieldValueChangedCallbackFunction : widget.onAnalysisTitleUpdatedProcessCallbackFunction,
-        
+        onTextFieldValueChangedCallbackFunction : widget.onAnalysisTitleUpdatedProcessCallbackFunction        
       )
     );
   }
