@@ -46,6 +46,19 @@ At the time of writing, entering a new solution doesn't allow for line returns.
 The potentiality doesn't need testing therefore.
 
 ------------------------------------------------
+About locales: 
+
+On iPhone:
+- language: FR 
+- region: US 
+--> app in FR
+
+On macOS:
+- language: FR 
+- region: US 
+--> app in FR
+
+------------------------------------------------
 About best practices
 
 https://dart.dev/tools/linter-rules#flutter_lints
