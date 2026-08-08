@@ -117,6 +117,8 @@
     ,"@dashboard_filter_by_keywords": {"description": "Le label pour 'Filtrage par mots-clés'"}
     ,"dashboard_keywords": "Mots-clés:"
     ,"@dashboard_keywords": {"description": "Texte pour le préfixe 'Mots-clés: ' pour les éléments du dashboard"}
+    ,"dashboard_bulk_delete": "Supprimer les données sélectionnées"
+    ,"@dashboard_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
     ,"dashboard_preview_mixed_languages_error_message": "Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c'est le cas,\nveuillez re-modifier le paramètre de langue."
     ,"@dashboard_preview_mixed_languages_error_message": {"description": "Message d'erreur si l'aperçu est requis avec un paramètre de langue, pour l'interface, différent de la langue utilisée pour sauvegarder les données"}
     ,"dashboard_tooltip_preview": "Aperçu"
@@ -127,8 +129,6 @@
     ,"@dashboard_tooltip_edit_keywords": {"description": "l10n pour l'infobulle 'Éditer les mots-clés'"}
     ,"dashboard_tooltip_delete": "Supprimer les données"
     ,"@dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
-    ,"dashboard_tooltip_bulk_delete": "Supprimer les données sélectionnées"
-    ,"@dashboard_tooltip_bulk_delete": {"description": "l10n pour l'infobulle 'Supprimer les données sélectionnées'"} 
     ,"dashboard_preview_share_session_data_tooltip": "Partager l'analyse"
     ,"@dashboard_preview_share_session_data_tooltip": {"description": "l10n pour l'infobulle 'Partager l'analyse' dans l'aperçu"} 
     ,"dashboard_preview_close_preview_tooltip": "Veuillez cliquer pour fermer l'aperçu"
@@ -194,8 +194,8 @@
 
     ,"l10n_keywords": "Mots-clés"
     ,"@l10n_keywords": {"description": "l10n pour 'Mots-clés'"}
-    ,"l10n_delete": "Effacer les données"
-    ,"@l10n_delete": {"description": "l10n pour 'Effacer les données'"}
+    ,"l10n_delete": "Supprimer"
+    ,"@l10n_delete": {"description": "l10n pour 'Supprimer'"}
     ,"l10n_cancel": "Annuler"
     ,"@l10n_cancel": {"description": "l10n pour 'Annuler'"}
     ,"l10n_save": "Enregistrer"

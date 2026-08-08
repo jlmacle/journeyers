@@ -9,7 +9,7 @@ import Flutter
     private let CHANNEL = "dev.journeyers/iossaf"
     private let KEY_BOOKMARK = "dev.journeyers.folderBookmarkiOS"
     private let KEY_PATH = "flutter.applicationFolderPath" 
-    private let DEBUG: Bool = true
+    private let DEBUG: Bool = false
     
     // Stores the result callback for Flutter communication
     private var pendingResult: FlutterResult?

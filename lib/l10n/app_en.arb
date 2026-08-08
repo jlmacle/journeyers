@@ -116,6 +116,8 @@
   ,"@dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
   ,"dashboard_keywords": "Keywords:"
   ,"@dashboard_keywords": {"description": "Text for the 'Keywords: ' prefix for the dashboard items"}
+  ,"dashboard_bulk_delete": "Delete selected data"
+  ,"@dashboard_bulk_delete": {"description": "l10n for the 'Delete selected data' text"}
   ,"dashboard_preview_mixed_languages_error_message": "Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data."
   ,"@dashboard_preview_mixed_languages_error_message": {"description": "Error message when previewing with a different interface language setting than the language used for the saved data"}
   ,"dashboard_tooltip_preview": "Preview"
@@ -126,8 +128,6 @@
   ,"@dashboard_tooltip_edit_keywords": {"description": "l10n for the 'Edit Keywords' tooltip"}
   ,"dashboard_tooltip_delete": "Delete data"
   ,"@dashboard_tooltip_delete": {"description": "l10n for the 'Delete data' tooltip"}
-  ,"dashboard_tooltip_bulk_delete": "Delete selected data"
-  ,"@dashboard_tooltip_bulk_delete": {"description": "l10n for the 'Delete selected data' tooltip"}
   ,"dashboard_preview_share_session_data_tooltip": "Share session data"
   ,"@dashboard_preview_share_session_data_tooltip": {"description": "l10n for the preview 'Share session data' tooltip"}
   ,"dashboard_preview_close_preview_tooltip": "Please click to close the preview"

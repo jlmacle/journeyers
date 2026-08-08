@@ -136,7 +136,7 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
             onPressed: _selectedListsDelete,
             icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
             label: Text(
-              "${AppLocalizations.of(context)?.l10n_delete ?? 'Issue with the l10n for Delete'} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
+              "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
               style: TextStyle(
                 color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
                 fontWeight: FontWeight.bold,
