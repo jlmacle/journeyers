@@ -1,8 +1,12 @@
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 void main() {
   group("CATitleDeclaration Widget Tests: \n", () 
@@ -27,8 +31,24 @@ void main() {
       );
       await tester.pumpAndSettle();
       
-      // Getting the build context
-      var hintText = "Please enter a title for this analysis.";
+      // Getting the hint text
+      var hintText = "";
+      /// Consider avoiding static references to this singleton through
+      /// [PlatformDispatcher.instance] and instead prefer using a binding for
+      /// dependency resolution such as `WidgetsBinding.instance.platformDispatcher`.
+      /// See [PlatformDispatcher.instance] for more information about why this is
+      /// preferred.
+      Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
+      var localeLanguageCode = currentLocale.languageCode;
+      if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
+      if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
+
+      switch(localeLanguageCode.toLowerCase())
+      {
+        case("fr"): { hintText = "Veuillez renseigner le titre\nde cette analyse."; }
+        case("en"): { hintText = "Please enter a title for this analysis."; }
+      }
+      if (testingDebug) pu.printd("Testing Debug: hintText: $hintText");      
 
       // Verifying the text field hint present
       expect(find.text(hintText), findsOneWidget);
