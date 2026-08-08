@@ -190,6 +190,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.';
 
   @override
+  String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
+
+  @override
   String get folder_picker_on_mobile =>
       'Please select or create a folder\nfor app storage.';
 
@@ -545,6 +548,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_checklist_invitation =>
       'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.';
+
+  @override
+  String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
 
   @override
   String get folder_picker_on_mobile =>

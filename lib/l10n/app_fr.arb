@@ -101,7 +101,8 @@
     ,"@gps_process_checklist_title": {"description": "Le titre par défaut pour le widget lié à la check-list."}
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nla session de résolution de problèmes en groupe\nsi la check-list est incomplète."
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
-
+    ,"gps_process_checklist_close_overlay_tooltip": "Fermer la check-list"
+    ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n pour l'infobulle 'Fermer la check-list'"}
 
     ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
