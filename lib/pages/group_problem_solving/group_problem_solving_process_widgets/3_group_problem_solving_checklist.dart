@@ -51,7 +51,8 @@ class _GPSChecklistState extends State<GPSChecklist> {
             Center(
               child: Text
               (
-                AppLocalizations.of(context)?.gps_process_checklist_title ?? "Issue with the default title for the checklist-related widget.",                style: problemSolvingChecklistTitle
+                AppLocalizations.of(context)?.gps_process_checklist_title ?? "Issue with the default title for the checklist-related widget.",
+                style: problemSolvingChecklistTitle
               ),
             )
           ],
@@ -87,7 +88,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
-                tooltip: checklistOverlayCloseIconButtonToolTip,
+                tooltip: AppLocalizations.of(context)?.gps_process_checklist_close_overlay_tooltip ?? "Issue with the l10n for the 'Close checklist' tooltip",
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
               ),

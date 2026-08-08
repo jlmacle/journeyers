@@ -389,6 +389,12 @@ abstract class AppLocalizations {
   /// **'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.'**
   String get gps_process_checklist_invitation;
 
+  /// l10n for the 'Close checklist' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Close checklist'**
+  String get gps_process_checklist_close_overlay_tooltip;
+
   /// Label for folder selection/creation, for app storage
   ///
   /// In en, this message translates to:
