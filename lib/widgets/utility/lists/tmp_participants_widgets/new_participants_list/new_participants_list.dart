@@ -1,12 +1,12 @@
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_deletion_by_bulk.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_keywords_declaration.dart";
 
@@ -333,10 +333,17 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             // TODO: to move at saving time            
             if (_enteredTextItemsList.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: 16.0),
                 child: Text(AppLocalizations.of(context)?.text_lists_new_list_content_already_saved_message ?? "Issue with the message when a list content is already saved."),
               )
-          ]            
+          ],
+          IconButton
+          (
+            icon: const Icon(Icons.close),
+            tooltip: AppLocalizations.of(context)?.text_lists_new_list_close_tooltip ?? "Issue with the l10n for the 'click to go to the previous page' tooltip.",
+            color: black,
+            onPressed: () => Navigator.of(context).pop(),
+          ),          
         ],
       ),
     
@@ -378,10 +385,13 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 _enteredTextItemsList.isEmpty
                 // Placeholder message if empty list
                 ? Center(
-                    child: Text(
-                      AppLocalizations.of(context)?.text_lists_new_list_placeholder_when_no_list_data ?? "Issue with the placeholder text when no participant's name has been added to the new list.",
-                      textAlign: TextAlign.center,
-                      style: widget.themeData.textTheme.bodyLarge
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        AppLocalizations.of(context)?.text_lists_new_list_placeholder_when_no_list_data ?? "Issue with the placeholder text when no participant's name has been added to the new list.",
+                        textAlign: TextAlign.center,
+                        style: widget.themeData.textTheme.bodyLarge
+                      ),
                     ),
                   )
                 :                      

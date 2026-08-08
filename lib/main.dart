@@ -1,4 +1,5 @@
 import "dart:io";
+import "dart:ui";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -65,12 +66,10 @@ class _GPSappState extends State<GPSapp>
   }
   // ─── LOCALE related data and methods ───────────────────────────────────────
 
-  // Temporarily defining English as the locale
-  // TODO: to get eventually the value from user preferences
-  Locale? _currentLocale = const Locale("en");
-  // To get the locale from the platform
-  // Locale? _currentLocale = PlatformDispatcher.instance.locale;
-
+  // Getting the locale from the platform
+  Locale? _currentLocale = PlatformDispatcher.instance.locale;
+  List<String> availableTranslationsCodes = ["fr", "fr_fr", "en", "en_us"];
+  
   // Method used to set a new locale value
   void _setLocale(Locale newLocale) 
   {
@@ -86,6 +85,15 @@ class _GPSappState extends State<GPSapp>
   @override
   Widget build(BuildContext context) 
   {
+    if (!availableTranslationsCodes.contains(_currentLocale!.countryCode!.toLowerCase())) 
+    {
+      
+      if (runtimeDataDebug) pu.printd("Translations not available for ${_currentLocale!.languageCode}. Defaulting to English.");
+      _currentLocale = const Locale("en");      
+    }
+    if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: current locale country code: ${_currentLocale!.countryCode}");
+    
+
     return      
       MaterialApp
       (

@@ -5,7 +5,7 @@
     "@app_title": {"description": "Le titre de l'application"},
     "app_sub_title":"Quelle histoire laisserons-nous\nà nos proches ?",
     "@app_sub_title": {"description": "Le sous-titre de l'application"},
-    "app_start_msg": "Ceci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nCliquez pour fermer.",
+    "app_start_msg": "Avertissement:\nCe travail est fourni « en l'état »,\nsans garantie d'aucune sorte.\nL'auteur décline toute responsabilité\npour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première\nanalyse de contexte.\nLe tableau de bord s'affichera\nune fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.",
     "@app_start_msg": {"description": "Le message qu'une application nouvellement installée devrait afficher"},
     "app_lang_en": "Anglais",
     "@app_lang_en": {"description": "Le nom de la langue anglaise, en français"},
@@ -153,7 +153,7 @@
     ,"@text_lists_new_list_title": {"description": "Le titre de la page de création de liste."}
     ,"text_lists_new_list_keywords_title": "Veuillez entrer des mots-clés\npour ce groupe."
     ,"@text_lists_new_list_keywords_title": {"description": "Le titre pour l'overlay des mots-clés, pour la page de création de liste."}
-    ,"text_lists_new_list_placeholder_when_no_list_data": "Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom pour l'ajouter au groupe."
+    ,"text_lists_new_list_placeholder_when_no_list_data": "Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom\npour l'ajouter au groupe."
     ,"@text_lists_new_list_placeholder_when_no_list_data": {"description": "Le texte placeholder lorsqu'aucun nom n'est présent dans le nouveau groupe."}
     ,"text_lists_new_list_text_field_hint": "Veuillez ajouter le nom d'un participant."
     ,"@text_lists_new_list_text_field_hint": {"description": "Le placeholder du champ de texte, pour l'ajout du nom d'un participant."}
@@ -171,6 +171,9 @@
     ,"@text_lists_new_list_empty_list_name_message": {"description": "Le message en cas d'enregistrement sans nom de liste"}
     ,"text_lists_new_list_same_list_name_message": " existe déjà.\nVeuillez choisir un autre nom."
     ,"@text_lists_new_list_same_list_name_message": {"description": "Le message en cas d'enregistrement avec nom de liste déjà existant"}
+    ,"text_lists_new_list_close_tooltip": "Veuillez cliquer pour retourner à la page précédente"
+    ,"@text_lists_new_list_close_tooltip": {"description": "l10n pour l'infobulle de fermeture pour retourner à la page précédent."}
+  
 
     ,"text_lists_dashboard_title": "Listes de participants déjà sauvegardées"
     ,"@text_lists_dashboard_title": {"description": "Le titre du tableau de bord pour les listes de participants déjà sauvegardées"}
