@@ -213,6 +213,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_keywords => 'Keywords:';
 
   @override
+  String get dashboard_bulk_delete => 'Delete selected data';
+
+  @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
 
@@ -227,9 +230,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboard_tooltip_delete => 'Delete data';
-
-  @override
-  String get dashboard_tooltip_bulk_delete => 'Delete selected data';
 
   @override
   String get dashboard_preview_share_session_data_tooltip =>
@@ -573,6 +573,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get dashboard_keywords => 'Keywords:';
 
   @override
+  String get dashboard_bulk_delete => 'Delete selected data';
+
+  @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
 
@@ -587,9 +590,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get dashboard_tooltip_delete => 'Delete data';
-
-  @override
-  String get dashboard_tooltip_bulk_delete => 'Delete selected data';
 
   @override
   String get dashboard_preview_share_session_data_tooltip =>

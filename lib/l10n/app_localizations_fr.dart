@@ -215,6 +215,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboard_keywords => 'Mots-clés:';
 
   @override
+  String get dashboard_bulk_delete => 'Supprimer les données sélectionnées';
+
+  @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
 
@@ -229,10 +232,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dashboard_tooltip_delete => 'Supprimer les données';
-
-  @override
-  String get dashboard_tooltip_bulk_delete =>
-      'Supprimer les données sélectionnées';
 
   @override
   String get dashboard_preview_share_session_data_tooltip =>
@@ -349,7 +348,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get l10n_keywords => 'Mots-clés';
 
   @override
-  String get l10n_delete => 'Effacer les données';
+  String get l10n_delete => 'Supprimer';
 
   @override
   String get l10n_cancel => 'Annuler';
@@ -580,6 +579,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get dashboard_keywords => 'Mots-clés:';
 
   @override
+  String get dashboard_bulk_delete => 'Supprimer les données sélectionnées';
+
+  @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
 
@@ -594,10 +596,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get dashboard_tooltip_delete => 'Supprimer les données';
-
-  @override
-  String get dashboard_tooltip_bulk_delete =>
-      'Supprimer les données sélectionnées';
 
   @override
   String get dashboard_preview_share_session_data_tooltip =>
@@ -714,7 +712,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get l10n_keywords => 'Mots-clés';
 
   @override
-  String get l10n_delete => 'Effacer les données';
+  String get l10n_delete => 'Supprimer';
 
   @override
   String get l10n_cancel => 'Annuler';

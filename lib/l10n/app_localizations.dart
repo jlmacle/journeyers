@@ -431,6 +431,12 @@ abstract class AppLocalizations {
   /// **'Keywords:'**
   String get dashboard_keywords;
 
+  /// l10n for the 'Delete selected data' text
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected data'**
+  String get dashboard_bulk_delete;
+
   /// Error message when previewing with a different interface language setting than the language used for the saved data
   ///
   /// In en, this message translates to:
@@ -460,12 +466,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete data'**
   String get dashboard_tooltip_delete;
-
-  /// l10n for the 'Delete selected data' tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Delete selected data'**
-  String get dashboard_tooltip_bulk_delete;
 
   /// l10n for the preview 'Share session data' tooltip
   ///
