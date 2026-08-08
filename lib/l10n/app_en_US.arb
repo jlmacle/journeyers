@@ -118,7 +118,7 @@
   ,"dashboard_filter_by_keywords": "Filter by Keywords"
   ,"@dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
   ,"dashboard_keywords": "Keywords:"
-  ,"@dashboard_keywords": {"description": "Text for the 'Keywords: ' prefix for the dashboard items"}
+   ,"@dashboard_keywords": {"description": "Text for the 'Keywords: ' prefix for the dashboard items"}
   ,"dashboard_bulk_delete": "Delete selected data"
   ,"@dashboard_bulk_delete": {"description": "l10n for the 'Delete selected data' text"}
   ,"dashboard_preview_mixed_languages_error_message": "Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data."
