@@ -186,6 +186,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_checklist_title => 'Checklist';
 
   @override
+  String get gps_process_edit_title_tooltip => 'Please click to edit the title';
+
+  @override
   String get gps_process_checklist_invitation =>
       'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.';
 
@@ -544,6 +547,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_checklist_title => 'Checklist';
+
+  @override
+  String get gps_process_edit_title_tooltip => 'Please click to edit the title';
 
   @override
   String get gps_process_checklist_invitation =>

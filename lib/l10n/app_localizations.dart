@@ -383,6 +383,12 @@ abstract class AppLocalizations {
   /// **'Checklist'**
   String get gps_process_checklist_title;
 
+  /// l10n for the 'Please click to edit the title' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to edit the title'**
+  String get gps_process_edit_title_tooltip;
+
   /// The invitation before the checklist
   ///
   /// In en, this message translates to:
