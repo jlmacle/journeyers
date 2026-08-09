@@ -45,8 +45,8 @@ void main() {
 
       switch(localeLanguageCode.toLowerCase())
       {
-        case("fr"): { hintText = "Veuillez renseigner le titre\nde cette analyse."; }
         case("en"): { hintText = "Please enter a title for this analysis."; }
+        case("fr"): { hintText = "Veuillez renseigner le titre\nde cette analyse."; }        
       }
       if (testingDebug) pu.printd("Testing Debug: hintText: $hintText");      
 
