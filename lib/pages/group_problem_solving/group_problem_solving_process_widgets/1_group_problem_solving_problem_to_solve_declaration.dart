@@ -134,7 +134,12 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 width: 50,
                 child: GestureDetector
                 (
-                  child: const Text(editEmoji),
+                  child: 
+                    Tooltip
+                    (
+                      message: AppLocalizations.of(context)?.gps_process_edit_title_tooltip ?? "Issue with the l10n for the 'Please click to edit the title' tooltip",
+                      child: const Text(editEmoji)
+                    ),
                   onTap: () => setState(() => _isEditing = true),
                 ),
               ),

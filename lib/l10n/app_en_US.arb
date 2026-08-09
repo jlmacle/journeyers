@@ -98,6 +98,9 @@
   ,"@gps_title_suffix": {"description": "The title suffix for a problem-solving session."}  
   ,"gps_process_default_title": "Problem To Solve"
   ,"@gps_process_default_title": {"description": "The default title for a problem-solving session."}
+  ,"gps_process_edit_title_tooltip": "Please click to edit the title"
+  ,"@gps_process_edit_title_tooltip": {"description": "l10n for the 'Please click to edit the title' tooltip"}
+  
   ,"gps_process_checklist_title": "Checklist"
   ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
   ,"gps_process_checklist_invitation": "Please consider postponing\nthe group problem-solving\nif the checklist is incomplete."

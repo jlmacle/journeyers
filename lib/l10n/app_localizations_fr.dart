@@ -187,6 +187,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gps_process_checklist_title => 'Check-list';
 
   @override
+  String get gps_process_edit_title_tooltip =>
+      'Veuillez cliquer pour éditer le titre';
+
+  @override
   String get gps_process_checklist_invitation =>
       'Veuillez considérer reporter\nla session de résolution de problèmes en groupe\nsi la check-list est incomplète.';
 
@@ -549,6 +553,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_checklist_title => 'Check-list';
+
+  @override
+  String get gps_process_edit_title_tooltip =>
+      'Veuillez cliquer pour éditer le titre';
 
   @override
   String get gps_process_checklist_invitation =>

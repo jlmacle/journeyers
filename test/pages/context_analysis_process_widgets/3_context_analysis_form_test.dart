@@ -1,4 +1,6 @@
 // ignore: file_names
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
@@ -29,6 +31,8 @@ void main()
   {
     return await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body:  CAForm.fromDTO
             (
@@ -260,11 +264,43 @@ void main()
               if (testingDebug) pu.printd("Testing Debug: Text: ${textWidget.data}");
             }
 
+            Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
+            var localeLanguageCode = currentLocale.languageCode;
+            if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
+            if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
+
+            var level3TitleBalanceIssueItem1 = "";
+            var level3TitleBalanceIssueItem2 = "";
+            var level3TitleBalanceIssueItem3 = "";
+            var level3TitleBalanceIssueItem4 = "";
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                level3TitleBalanceIssueItem1 = "To balance studies and household life?";
+                level3TitleBalanceIssueItem2 = "To balance accessing income and household life?";
+                level3TitleBalanceIssueItem3 = "To balance earning an income and household life?";
+                level3TitleBalanceIssueItem4 = "To balance helping others and household life?";
+              }
+              case("fr"): 
+              { 
+                level3TitleBalanceIssueItem1 = "Équilibre entre les études et la vie de famille ?";
+                level3TitleBalanceIssueItem2 = "Équilibre entre l'accès à l'emploi et la vie de famille ?";
+                level3TitleBalanceIssueItem3 = "Équilibre entre maintenir un revenu et la vie de famille ?";
+                level3TitleBalanceIssueItem4 = "Équilibre entre aider les autres et la vie de famille ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem1");
+            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem2");
+            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem3");
+            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem4");
+
             // Verifying the level 3 titles present
-            expect(tester.widget<Text>(textFinders.at(2)).data, q.level3TitleBalanceIssueItem1);
-            expect(tester.widget<Text>(textFinders.at(3)).data, q.level3TitleBalanceIssueItem2);
-            expect(tester.widget<Text>(textFinders.at(4)).data, q.level3TitleBalanceIssueItem3);
-            expect(tester.widget<Text>(textFinders.at(5)).data, q.level3TitleBalanceIssueItem4);
+            expect(tester.widget<Text>(textFinders.at(2)).data, level3TitleBalanceIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(3)).data, level3TitleBalanceIssueItem2);
+            expect(tester.widget<Text>(textFinders.at(4)).data, level3TitleBalanceIssueItem3);
+            expect(tester.widget<Text>(textFinders.at(5)).data, level3TitleBalanceIssueItem4);
           },
         );
       
