@@ -2,11 +2,13 @@ const accessibilityDebug = false;
 const csvBuildingDebug = false;
 const editDebug = false;
 const listDebug = false;
-const runtimeDataDebug = false;
+const runtimeDataDebug = true;
 const preloadingDebug = false;
 const previewBuildingDebug = false;
 const sessionDataDebug = false;
 const testingDebug = true;
+const testingLocaleOption = "fr";
+// const testingDebugLocale = "en";
 const textFieldDebug = false;
 const widgetSequenceDebug = false;
 
