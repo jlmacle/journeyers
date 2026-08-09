@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj;
 import "package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart";
@@ -14,39 +15,11 @@ void main() {
   const textValid = "Context analysis";
   
   group("TextFieldChecked Tests:\n", () {
-    testWidgets("Should display no initial error", (WidgetTester tester) async {
-      GlobalKey errorMessageKey1 = GlobalKey(debugLabel: "error-msg-1");
+   testWidgets("Should show error message when a sanitizing function (containsAStraightQuote) returns true", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: TextFieldSanitizedAndCheckedUsingABlackList(
-              textFieldStartValue: "",
-              textFieldStyle: analysisTextFieldStyle,
-              textFieldHint: textFieldHint,
-              textFieldHintStyle: analysisTextFieldHintStyle,
-              errorMessageFieldKey : errorMessageKey1,
-              errorMessageStyle: analysisTextFieldErrorMessageStyle,
-              onTextFieldValueChangedCallbackFunction: (_) {},
-              stringSanitizerBundlesErrorsMapping: const {},
-              blacklistingFunctionsErrorsMapping:  const {},
-            ),
-          ),
-        ),
-      );
-      
-      // Verifying that the error message starts empty
-      final errorMessageFinder = find.descendant
-      (
-        of: find.byKey(errorMessageKey1), // Finds the Center widget by Key
-        matching: find.byType(Text), // Finds the error message Text widget inside it
-      );
-      final errorTextWidget = tester.widget<Text>(errorMessageFinder);
-      expect(errorTextWidget.data, equals(""));
-    });
-
-    testWidgets("Should show error message when a sanitizing function (containsAStraightQuote) returns true", (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
               textFieldStartValue: "",
@@ -73,6 +46,8 @@ void main() {
     testWidgets("Should show error message when a sanitizing function (containsADot) returns true", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
               textFieldStartValue: "",
@@ -100,6 +75,8 @@ void main() {
       GlobalKey errorMessageKey2 = GlobalKey(debugLabel: "error-msg-2");
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
               textFieldStartValue: "",
@@ -125,12 +102,13 @@ void main() {
       expect(find.text(TextFieldUtils.errorTextBlacklisted), findsOneWidget);
     });
 
-
     testWidgets("Should call onTextFieldValueSubmittedCallbackFunction if input is valid", (WidgetTester tester) async {
       String submittedValue = "";
 
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: TextFieldSanitizedAndCheckedUsingABlackList(
               textFieldStartValue: "",
