@@ -10,11 +10,11 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/ca_questions_fields_localized.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/utils/project_specific/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
@@ -1946,9 +1946,12 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
 
+            var context = tester.element(find.byType(Scaffold).first);
+            CAQuestionsFieldsLocalized? qfl = .new(context);
+
             // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────
-            var title = "CA title";
+            var title = "Journeyers";
             
             // Individual perspective testing values
             // All checkboxes checked
@@ -1962,7 +1965,10 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"}];
+            var yes =  AppLocalizations.of(context)?.segmented_button_yes ?? "Issue with the l10n for Yes";
+            var no = AppLocalizations.of(context)?.segmented_button_no ?? "Issue with the l10n for No";
+            var iDontKnow = AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
+            List<Set<String>> segmentedButtonValues = [{yes},{no},{iDontKnow},{yes,no}];
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
@@ -1996,7 +2002,6 @@ Future<void> main() async {
 
             // Opening the expansion tiles
               // Getting the build context
-            final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);
             await caOpenGroupExpansionTile(context, tester);
 
@@ -2066,8 +2071,8 @@ Future<void> main() async {
  
             // ── Editing data in the segmented buttons ────────────────────────────
             // Original values: List<Set<String>> segmentedButtonValues = [{"Yes"},{"No"},{"I don't know"},{"Yes","No"}];
-            List<Set<String>> newSegmentedButtonValues = [{"No","Yes"},{"No","Yes"},{"I don't know","Yes"},{"I don't know" , "No", "Yes"}];
-            List<String> segmentedButtonsAddedValues = ["No", "Yes", "Yes", "I don't know"];
+            List<Set<String>> newSegmentedButtonValues = [{no,yes},{no,yes},{iDontKnow,yes},{iDontKnow,no,yes}];
+            List<String> segmentedButtonsAddedValues = [no, yes, yes, iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
               of: find.byType(ExpansionTile).last, 
@@ -2078,7 +2083,7 @@ Future<void> main() async {
 
             if (testingDebug) pu.printd("Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
-            var optionsToSelect = ["Yes","No","I don't know"];
+            var optionsToSelect = [yes,no,iDontKnow];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
               var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
@@ -2168,7 +2173,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────
           
             // ── Opening the preview ──────────────────
-            var previewFinder = find.byTooltip(previewTooltipLabel);
+            var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip",);
             await tester.ensureVisible(previewFinder);
             await tester.pumpAndSettle();
             await tester.tap(previewFinder);
@@ -2243,7 +2248,8 @@ Future<void> main() async {
             ); 
 
             // ── Closing the CA preview ──────────────────
-            var previewClosingTooltipLabelFinder = find.byTooltip(previewClosingTooltipLabel);
+            var previewClosingTooltipLabelFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_preview_close_preview_tooltip ?? "Issue with the l10n for the preview 'Close the preview' tooltip",
+);
             await tester.tap(previewClosingTooltipLabelFinder);
             await tester.pumpAndSettle();
 
@@ -2289,7 +2295,6 @@ Future<void> main() async {
             
             // ── Individual perspective ────────────
               // Balance issue items
-            List<String> childrenOfLevel3TitleBalanceIssue = [];
 
             var localeLanguageCode = getLocaleLanguageCode(tester);
 
@@ -2320,14 +2325,11 @@ Future<void> main() async {
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveLegacyIssue");
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
 
-            childrenOfLevel3TitleBalanceIssue = 
-            [individualPerspectiveBalanceIssue, individualPerspectiveWorkplaceIssue, 
-            individualPerspectiveLegacyIssue, individualPerspectiveAnotherIssue];
-
+          
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: childrenOfLevel3TitleBalanceIssue,
+              listOfTextsToFind: qfl.childrenOfLevel3TitleBalanceIssue.toList(),
               scrollable: firstScrollable
             );
 
@@ -2335,7 +2337,7 @@ Future<void> main() async {
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: qf.childrenOfLevel3TitleWorkplaceIssue.toList(),
+              listOfTextsToFind: qfl.childrenOfLevel3TitleWorkplaceIssue.toList(),
               scrollable: firstScrollable
             );
 
@@ -2343,7 +2345,7 @@ Future<void> main() async {
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: qf.childrenOfLevel3TitleLegacyIssue.toList(),
+              listOfTextsToFind: qfl.childrenOfLevel3TitleLegacyIssue.toList(),
               scrollable: firstScrollable
             );
 
