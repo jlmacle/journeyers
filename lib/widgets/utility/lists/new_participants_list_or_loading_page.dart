@@ -2,10 +2,8 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
