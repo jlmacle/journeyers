@@ -5,7 +5,7 @@
     "@app_title": {"description": "Le titre de l'application"},
     "app_sub_title":"Quelle histoire laisserons-nous\nà nos proches ?",
     "@app_sub_title": {"description": "Le sous-titre de l'application"},
-    "app_start_msg": "Avertissement:\nCe travail est fourni « en l'état »,\nsans garantie d'aucune sorte.\nL'auteur décline toute responsabilité\npour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première\nanalyse de contexte.\nLe tableau de bord s'affichera\nune fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.",
+    "app_start_msg": "Avertissement:\nCe travail est fourni «en l'état», sans garantie d'aucune sorte.\nL'auteur décline toute responsabilité pour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première analyse de contexte.\nLe tableau de bord s'affichera une fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.",
     "@app_start_msg": {"description": "Le message qu'une application nouvellement installée devrait afficher"},
     "app_lang_en": "Anglais",
     "@app_lang_en": {"description": "Le nom de la langue anglaise, en français"},
@@ -21,7 +21,7 @@
     "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
     "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"},
-    "ca_process_keywords_text_field_hint": "Veuillez renseigner un mot-clé à la fois\npour cette analyse.\n(+ Touche Entrée)",
+    "ca_process_keywords_text_field_hint": "Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)",
     "@ca_process_keywords_text_field_hint": {"description": "Le placeholder du champ de texte, pour les mots-clés du processus d'analyse de contexte"}
     ,"ca_process_past_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer."
     ,"@ca_process_past_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le foyer"}
