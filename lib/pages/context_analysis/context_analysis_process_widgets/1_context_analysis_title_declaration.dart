@@ -50,7 +50,7 @@ class _CATitleDeclarationState extends State<CATitleDeclaration>
   Widget build(BuildContext context) {
     return 
     Padding(
-      padding: const EdgeInsets.only(top: 16.0, bottom:16 ),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: CATextFieldSanitizedAndPadded
       (
         autofocus: widget.analysisTitleAutofocused,
