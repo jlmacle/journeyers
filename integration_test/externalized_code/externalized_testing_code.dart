@@ -47,9 +47,9 @@ final q = CAQuestionsFields();
   }
 
   // Method used to open the expansion tile with the group/team perspective
-  Future<void> caOpenGroupExpansionTile(WidgetTester tester) async
+  Future<void> caOpenGroupExpansionTile(BuildContext context, WidgetTester tester) async
   {
-    var tileFinder = find.text(q.level2TitleGroup);
+    var tileFinder = find.text(AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the  title question for the groups/teams perspective");
     await tester.ensureVisible(tileFinder);
 
     // Opening the group/team perspective expansion tile
@@ -198,7 +198,7 @@ final q = CAQuestionsFields();
     // ── FORM SECTION : Group/Teams perspective ─────────────────────────────────────────────────────────────
     
     // Opening the group/teams perspective expansion tile
-    await caOpenGroupExpansionTile(tester); 
+    await caOpenGroupExpansionTile(context, tester); 
     
     // 1. Searching for the text field only
     var groupTextFieldOnlyFinder = find.descendant(
