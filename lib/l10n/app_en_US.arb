@@ -5,7 +5,7 @@
   "@app_title": {"description": "The title for the app"},
   "app_sub_title": "What story will we leave\nfor our loved ones to tell?",
   "@app_sub_title": {"description": "The subtitle for the app"},
-  "app_start_msg": "Disclaimer:\nThis work is provided 'as is'\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.",
+  "app_start_msg": "Disclaimer:\nThis work is provided 'as is' without warranty of any kind.\nThe author disclaims all liability for any use or misuse of the work.\n\nPlease note:\nThis is your first context analysis.\nThe dashboard will be displayed after data has been saved.\nPlease click to acknowledge.",
   "@app_start_msg": {"description": "The information message that a newly installed app should display."},
   "app_lang_en": "English",
   "@app_lang_en": {"description": "The name of the English language, in English"},
@@ -22,7 +22,7 @@
   "@ca_process_title": {"description": "The title of the context analysis process"},
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
   "@ca_process_title_text_field_hint": {"description": "The text field hint, for the title of the context analysis process"},
-  "ca_process_keywords_text_field_hint": "Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)",
+  "ca_process_keywords_text_field_hint": "Please enter one keyword at a time (+ Enter key).",
   "@ca_process_keywords_text_field_hint": {"description": "The text field hint, for the keywords of the context analysis process"}
   ,"ca_process_past_outcomes_text_field_hint": "Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household."
   ,"@ca_process_past_outcomes_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the household"}
