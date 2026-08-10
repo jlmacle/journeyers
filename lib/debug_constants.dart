@@ -7,8 +7,8 @@ const preloadingDebug = false;
 const previewBuildingDebug = false;
 const sessionDataDebug = false;
 const testingDebug = true;
-const testingLocaleOption = "fr";
-// const testingLocaleOption = "en";
+// const testingLocaleOption = "fr";
+const testingLocaleOption = "en";
 const textFieldDebug = false;
 const widgetSequenceDebug = false;
 
