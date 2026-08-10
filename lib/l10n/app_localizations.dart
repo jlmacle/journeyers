@@ -677,6 +677,12 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get l10n_save;
 
+  /// l10n for 'Done'
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get l10n_done;
+
   /// l10n for the keywords entry text field hint
   ///
   /// In en, this message translates to:
