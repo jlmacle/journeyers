@@ -11,6 +11,7 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -486,7 +487,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   children: [
                     _buildHeaderButton
                     (
-                      tooltipMessage: "",
+                      tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
                       text: _isModificationMode ? "Done" : editEmoji, 
                       color: _isModificationMode ? orangeShade900 : Colors.white, 
                       onPressed:_isModificationMode 

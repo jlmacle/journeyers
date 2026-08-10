@@ -103,11 +103,13 @@
   
   ,"gps_process_checklist_title": "Checklist"
   ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
-  ,"gps_process_checklist_invitation": "Please consider postponing\nthe group problem-solving\nif the checklist is incomplete."
+  ,"gps_process_checklist_invitation": "Please consider postponing\nif incomplete"
   ,"@gps_process_checklist_invitation": {"description": "The invitation before the checklist"}
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}
-
+  ,"gps_process_edit_identifiers_tooltip": "Please click to edit the participants identifiers"
+  ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n for the 'Please click to edit the participants identifiers' tooltip"}
+  
 
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}

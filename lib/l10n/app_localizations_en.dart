@@ -190,10 +190,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gps_process_checklist_invitation =>
-      'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.';
+      'Please consider postponing\nif incomplete';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
+
+  @override
+  String get gps_process_edit_identifiers_tooltip =>
+      'Please click to edit the participants identifiers';
 
   @override
   String get folder_picker_on_mobile =>
@@ -553,10 +557,14 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_checklist_invitation =>
-      'Please consider postponing\nthe group problem-solving\nif the checklist is incomplete.';
+      'Please consider postponing\nif incomplete';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
+
+  @override
+  String get gps_process_edit_identifiers_tooltip =>
+      'Please click to edit the participants identifiers';
 
   @override
   String get folder_picker_on_mobile =>

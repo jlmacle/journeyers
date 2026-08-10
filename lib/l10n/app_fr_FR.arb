@@ -101,12 +101,15 @@
     ,"gps_process_edit_title_tooltip": "Veuillez cliquer pour éditer le titre"
     ,"@gps_process_edit_title_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour éditer le titre'"}
   
-    ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nla session de résolution de problèmes en groupe\nsi la check-list est incomplète."
+    ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
     ,"gps_process_checklist_close_overlay_tooltip": "Fermer la check-list"
     ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n pour l'infobulle 'Fermer la check-list'"}
+    ,"gps_process_edit_identifiers_tooltip": "Veuillez cliquer pour éditer les identifiants de participants"
+    ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour éditer les identifiants de participants'"}
+  
 
-    ,"folder_picker_on_mobile": "Veuillez sélectionner,\nou créer un dossier,\npour stocker vos données."
+    ,"folder_picker_on_mobile": "Veuillez sélectionner, ou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
     ,"file_name_process_text_field_hint_on_mobile": "Veuillez entrer un nom de fichier, sans ."
     ,"@file_name_process_text_field_hint_on_mobile": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
@@ -190,7 +193,7 @@
     ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
     ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participants."
     ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition des participants"}
-    ,"text_lists_dashboard_list_loading_button_text": "Veuillez cliquer pour charger une liste"
+    ,"text_lists_dashboard_list_loading_button_text": "Charger une liste"
     ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n pour le texte du bouton de chargement de liste"}
   
 
