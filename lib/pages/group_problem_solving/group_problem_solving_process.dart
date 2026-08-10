@@ -11,6 +11,7 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -357,7 +358,8 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   [
                     _buildHeaderButton
                     (
-                      text: addEmoji, color: Colors.white, 
+                      tooltipMessage: "",
+                      text: addEmoji, color: Colors.white,                       
                       onPressed: 
                         () => Navigator.of(context).push
                         (
@@ -400,7 +402,8 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                     if (_isModificationMode)
                       _buildHeaderButton
                       (
-                        text:  _isDeleteMode ? "Edit" : singleDeletionLabel,
+                        tooltipMessage: "",
+                        text:  _isDeleteMode ? "Edit" : singleDeletionLabel,                        
                         color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
                         onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
                         screenWidthInInches: screenWidthInInches
@@ -484,6 +487,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   children: [
                     _buildHeaderButton
                     (
+                      tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
                       text: _isModificationMode ? "Done" : editEmoji, 
                       color: _isModificationMode ? orangeShade900 : Colors.white, 
                       onPressed:_isModificationMode 
@@ -498,6 +502,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                     if (_isModificationMode)
                       _buildHeaderButton
                       (
+                        tooltipMessage: "",
                         text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
                         onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
                         screenWidthInInches: screenWidthInInches
@@ -560,15 +565,33 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
 
   // Method used to build the header buttons
   Widget _buildHeaderButton
-  ({required String text, required Color color, 
-  required VoidCallback onPressed, required double screenWidthInInches}) 
+  ({  
+    required String text,
+    String? tooltipMessage,
+    required Color color, 
+    required VoidCallback onPressed, 
+    required double screenWidthInInches
+  }) 
   {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: appBarWhite, padding: (screenWidthInInches <2.7) ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
         onPressed: onPressed,
-        child: Center(child: Text(text, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center)),
+        child: 
+        Tooltip(
+          message: tooltipMessage,
+          child: Center
+                (
+                  child: 
+                  Text
+                  (
+                    text, 
+                    style: const TextStyle(fontSize: 12), 
+                    textAlign: TextAlign.center
+                  )
+                ),
+        ),
       ),
     );
   }

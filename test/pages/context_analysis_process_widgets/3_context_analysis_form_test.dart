@@ -4,7 +4,6 @@ import "dart:io";
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
-import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
@@ -12,17 +11,15 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 import "../../../integration_test/externalized_code/externalized_testing_code.dart";
+import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() 
 {
-  // Labels of the level 2 and 3 titles
-  final q = CAQuestionsFields();
 
   // ─── HELPER FUNCTIONS ───────────────────────────────────────
 
@@ -33,6 +30,7 @@ void main()
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale(testingLocaleOption),
           home: Scaffold(
             body:  CAForm.fromDTO
             (
@@ -53,6 +51,7 @@ void main()
         (
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale(testingLocaleOption),
           home: Scaffold
           (
             body: CAProcess
@@ -114,17 +113,35 @@ void main()
             // Pumping the CAForm widget
             await pumpCAForm(tester);
 
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var individualPerspectiveQuestion = "";
+            var groupPerspectiveQuestion = "";
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                individualPerspectiveQuestion = "As an individual:\nWhat problem\nam I trying to solve?";
+                groupPerspectiveQuestion = "As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?";
+
+              }
+              case("fr"): 
+              { 
+                individualPerspectiveQuestion = "En tant qu'individu:\nQuel problème\ndois-je résoudre ?";
+                groupPerspectiveQuestion = "En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?";
+              }              
+            }
+
             // Verifying that the first expansion tile title is correct
             var firstExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().first;
             Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);   
-              // Getting the build context
-            final context = tester.element(find.byType(Scaffold));     
-            expect(firstExpansionTileTextWidget.data, AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective");
+   
+            expect(firstExpansionTileTextWidget.data, individualPerspectiveQuestion);
 
             // Verifying that the second expansion tile title is correct
             var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
-            expect(secondExpansionTileTextWidget.data, AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the title question for the groups/teams perspective");
+            expect(secondExpansionTileTextWidget.data, groupPerspectiveQuestion);
           },
         ); 
 
@@ -163,18 +180,41 @@ void main()
               )
             );
 
-            // Debug data
-            for (var textElement in customHeadingTextFinders.evaluate())
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+            
+            var individualPerspectiveBalanceIssue = "";
+            var individualPerspectiveWorkplaceIssue = "";
+            var individualPerspectiveLegacyIssue = "";
+            var individualPerspectiveAnotherIssue = "";
+            switch(localeLanguageCode.toLowerCase())
             {
-              Text textWidget = textElement.widget as Text;
-              if (testingDebug) pu.printd("Testing Debug: Custom heading text: ${textWidget.data}");
+              case("en"): 
+              { 
+                individualPerspectiveBalanceIssue = "A Balance Issue?";
+                individualPerspectiveWorkplaceIssue = "A Workplace Issue?";
+                individualPerspectiveLegacyIssue = "A Legacy Issue?";
+                individualPerspectiveAnotherIssue = "Is the issue\nof another type?";
+              }
+              case("fr"): 
+              { 
+                individualPerspectiveBalanceIssue = "Un problème d'équilibre ?";
+                individualPerspectiveWorkplaceIssue = "Un problème au travail ?";
+                individualPerspectiveLegacyIssue = "Un problème\navec mon histoire de vie ?";
+                individualPerspectiveAnotherIssue = "Est-ce un autre type\nde problème ?";
+              }              
             }
 
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveBalanceIssue");
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveWorkplaceIssue");
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveLegacyIssue");
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
+
+
             // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, "A Balance Issue?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, "A Workplace Issue?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, "A Legacy Issue?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, "Is the issue\nof another type?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, individualPerspectiveBalanceIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, individualPerspectiveWorkplaceIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, individualPerspectiveLegacyIssue);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, individualPerspectiveAnotherIssue);
           },
         );      
       
@@ -257,17 +297,8 @@ void main()
               matching: find.byType(Text)
             );
 
-            // Debug data
-            for (var textElement in textFinders.evaluate())
-            {
-              Text textWidget = textElement.widget as Text;
-              if (testingDebug) pu.printd("Testing Debug: Text: ${textWidget.data}");
-            }
 
-            Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
-            var localeLanguageCode = currentLocale.languageCode;
-            if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
-            if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
+            var localeLanguageCode = getLocaleLanguageCode(tester);
 
             var level3TitleBalanceIssueItem1 = "";
             var level3TitleBalanceIssueItem2 = "";
@@ -291,10 +322,10 @@ void main()
               }              
             }
 
-            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem1");
-            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem2");
-            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem3");
-            if (testingDebug) pu.printd("Testing Debug: hintText: $level3TitleBalanceIssueItem4");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem1");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem2");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
 
             // Verifying the level 3 titles present
             expect(tester.widget<Text>(textFinders.at(2)).data, level3TitleBalanceIssueItem1);
@@ -328,24 +359,41 @@ void main()
               matching: find.byType(Text)
             );
 
-            // Debug data
-            for (var textElement in textFinders.evaluate())
+            
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var level3TitleWorkplaceIssueItem1 = "";
+            var level3TitleWorkplaceIssueItem2 = "";
+            switch(localeLanguageCode.toLowerCase())
             {
-              Text textWidget = textElement.widget as Text;
-              if (testingDebug) pu.printd("Testing Debug: Text: ${textWidget.data}");
+              case("en"): 
+              { 
+                level3TitleWorkplaceIssueItem1 = "To solve a need to be more appreciated at work?";
+                level3TitleWorkplaceIssueItem2 = "To solve a need to remain appreciated at work?";
+              }
+              case("fr"): 
+              { 
+                level3TitleWorkplaceIssueItem1 = "Le besoin d'être plus apprécié(e) au travail ?";
+                level3TitleWorkplaceIssueItem2 = "Le besoin de rester apprécié(e) au travail ?";              
+              }
             }
 
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem1");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem2");
+
+
+
             // Verifying the level 3 titles present
-            expect(tester.widget<Text>(textFinders.at(7)).data, q.level3TitleWorkplaceIssueItem1);
-            expect(tester.widget<Text>(textFinders.at(8)).data, q.level3TitleWorkplaceIssueItem2);
+            expect(tester.widget<Text>(textFinders.at(7)).data, level3TitleWorkplaceIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(8)).data, level3TitleWorkplaceIssueItem2);
           },
         );
 
         // ─── INDIVIDUAL PERSPECTIVE: LEGACY SECTION ───────────────────────────────────────
         // "Legacy issue: the item label is present after expansion",
         testWidgets
-        (
-          
+        (          
           "Legacy issue: the item label is present after expansion",
           (tester) async
           {
@@ -365,23 +413,31 @@ void main()
               matching: find.byType(Text)
             );
 
-            // Debug data
-            for (var textElement in textFinders.evaluate())
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+           
+            var individualPerspectiveBetterLegacy = "";
+
+            switch(localeLanguageCode.toLowerCase())
             {
-              Text textWidget = textElement.widget as Text;
-              if (testingDebug) pu.printd("Testing Debug: Text: ${textWidget.data}");
+              case("en"): 
+              { 
+                individualPerspectiveBetterLegacy = "To have a better legacy to leave to my children/others?";
+              }
+              case("fr"): 
+              { 
+                individualPerspectiveBetterLegacy = "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?";                
+              }              
             }
 
             // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(10)).data, "To have a better legacy to leave to my children/others?");
+            expect(tester.widget<Text>(textFinders.at(10)).data, individualPerspectiveBetterLegacy);
           },
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: ANOTHER ISSUE SECTION ───────────────────────────────────────
         // "Another issue: the hint text is present after expansion",
         testWidgets
-        (
-          
+        (          
           "Another issue: the hint text is present after expansion",
           (tester) async
           {
@@ -401,15 +457,26 @@ void main()
               matching: find.byType(Text)
             );
 
-            // Debug data
-            for (var textElement in textFinders.evaluate())
+            
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var caProcessPleaseDevelopTextFieldHint = "";
+
+            switch(localeLanguageCode.toLowerCase())
             {
-              Text textWidget = textElement.widget as Text;
-              if (testingDebug) pu.printd("Testing Debug: Text: ${textWidget.data}");
+              case("en"): 
+              { 
+                caProcessPleaseDevelopTextFieldHint = "Please develop.";
+              }
+              case("fr"): 
+              { 
+                caProcessPleaseDevelopTextFieldHint = "Veuillez développer.";                
+              }              
             }
 
             // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(12)).data, pleaseDevelopHint);
+            expect(tester.widget<Text>(textFinders.at(12)).data, caProcessPleaseDevelopTextFieldHint);
           },
         );
       
@@ -433,7 +500,8 @@ void main()
             await pumpCAProcess(tester);            
 
             // Opening the group/team perspective expansion tile
-            await caOpenGroupExpansionTile(tester);
+            var context = tester.element(find.byType(Scaffold));
+            await caOpenGroupExpansionTile(context, tester);
 
             // Searching the custom headings text for the second expansion tile
             var customHeadingTextFinders = find.descendant
@@ -447,19 +515,47 @@ void main()
               )
             );
 
-            // Debug data
-            for (var textElement in customHeadingTextFinders.evaluate())
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var groupPerspectiveProblems = "";
+            var groupPerspectiveSameProblems = "";
+            var groupPerspectiveHarmonyHome = "";
+            var groupPerspectiveAppreciabilityWork = "";
+            var groupPerspectiveEarningAbility = "";
+
+            switch(localeLanguageCode.toLowerCase())
             {
-              Text textWidget = textElement.widget as Text;
-              if (testingDebug) pu.printd("Testing Debug: Custom heading text: ${textWidget.data}");
+              case("en"): 
+              { 
+                groupPerspectiveProblems = "What problem(s)\nare my groups/teams\ntrying to solve?";
+                groupPerspectiveSameProblems = "Am I trying to solve the same problem(s) as my groups/teams?";
+                groupPerspectiveHarmonyHome = "Is entering the group problem-solving process consistent with harmony at home?";
+                groupPerspectiveAppreciabilityWork = "Is entering the group problem-solving process consistent with appreciability at work?";
+                groupPerspectiveEarningAbility = "Is entering the group problem-solving process consistent with my income earning ability?";
+              }
+              case("fr"): 
+              { 
+                groupPerspectiveProblems = "Quel(s) problème(s)\nnos groupes/équipes\nessayent de résoudre ?";
+                groupPerspectiveSameProblems = "Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?";
+                groupPerspectiveHarmonyHome = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?";
+                groupPerspectiveAppreciabilityWork = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?";
+                groupPerspectiveEarningAbility = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?";
+              }              
             }
 
+            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveProblems");
+            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveSameProblems");
+            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveHarmonyHome");
+            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveAppreciabilityWork");
+            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveEarningAbility");
+
             // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, "What problem(s)\nare my groups/teams\ntrying to solve?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, "Am I trying to solve the same problem(s) as my groups/teams?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, "Is entering the group problem-solving process consistent with harmony at home?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, "Is entering the group problem-solving process consistent with appreciability at work?");
-            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, "Is entering the group problem-solving process consistent with my income earning ability?");
+            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, groupPerspectiveProblems);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, groupPerspectiveSameProblems);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, groupPerspectiveHarmonyHome);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, groupPerspectiveAppreciabilityWork);
+            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, groupPerspectiveEarningAbility);
           },
         );
       
@@ -475,7 +571,8 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the group/team perspective expansion tile
-            await caOpenGroupExpansionTile(tester);
+            var context = tester.element(find.byType(Scaffold));
+            await caOpenGroupExpansionTile(context, tester);
 
             // Getting the second expansion tile
             var groupExpansionTileFinder =  find.byType(ExpansionTile).last;
@@ -501,7 +598,8 @@ void main()
             await pumpCAProcess(tester);
             
             // Opening the group/team perspective expansion tile
-            await caOpenGroupExpansionTile(tester);
+            var context = tester.element(find.byType(Scaffold));
+            await caOpenGroupExpansionTile(context, tester);
 
             // Getting the second expansion tile
             var groupExpansionTileFinder =  find.byType(ExpansionTile).last;
@@ -557,9 +655,10 @@ void main()
 
           // Pumping the widget within the CA process to allow for the tile expansion
           await pumpCAProcess(tester);
-
+          
           // Opening the group/teams perspective expansion tile
-          await caOpenGroupExpansionTile(tester);   
+          var context = tester.element(find.byType(Scaffold));          
+          await caOpenGroupExpansionTile(context, tester);   
 
           // Searching the segmented buttons present in the sub-tree
           var segButtonFinder = find.descendant

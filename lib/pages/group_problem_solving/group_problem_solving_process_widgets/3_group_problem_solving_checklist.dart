@@ -75,7 +75,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
             title: 
             Padding
             (
-              padding: const EdgeInsets.all(16.0), 
+              padding: const EdgeInsets.all(8.0), 
               child: Text(
                 title,
                 textAlign: TextAlign.center,
