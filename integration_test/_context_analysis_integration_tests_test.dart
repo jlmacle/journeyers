@@ -20,6 +20,7 @@ import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboa
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
+import "../test/_widget_testing_utils/widget_testing_utils.dart";
 import "externalized_code/externalized_testing_code.dart";
 
 
@@ -1357,7 +1358,7 @@ Future<void> main() async {
               // Getting the build context
             final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(context, tester);
 
             // ── Verifying checkbox data present ────────────────────────────
             var checkboxesFinder = find.byType(Checkbox);
@@ -1678,7 +1679,7 @@ Future<void> main() async {
               // Getting the build context
             final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(context, tester);
 
             // ── Verifying checkbox data present ────────────────────────────
             var checkboxesFinder = find.byType(Checkbox);
@@ -1997,7 +1998,7 @@ Future<void> main() async {
               // Getting the build context
             final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(context, tester);
 
             // ── Verifying checkbox data present ────────────────────────────
             var checkboxesFinder = find.byType(Checkbox);
@@ -2256,7 +2257,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────
               // Opening all expansion tiles
             await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(tester);
+            await caOpenGroupExpansionTile(context, tester);
 
             // ── VERIFYING TITLE TEXT FIELD EMPTY ──────────────
             // ──────────────────────────────────────────────────
@@ -2288,10 +2289,45 @@ Future<void> main() async {
             
             // ── Individual perspective ────────────
               // Balance issue items
+            List<String> childrenOfLevel3TitleBalanceIssue = [];
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var individualPerspectiveBalanceIssue = "";
+            var individualPerspectiveWorkplaceIssue = "";
+            var individualPerspectiveLegacyIssue = "";
+            var individualPerspectiveAnotherIssue = "";
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                individualPerspectiveBalanceIssue = "A Balance Issue?";
+                individualPerspectiveWorkplaceIssue = "A Workplace Issue?";
+                individualPerspectiveLegacyIssue = "A Legacy Issue?";
+                individualPerspectiveAnotherIssue = "Is the issue\nof another type?";
+              }
+              case("fr"): 
+              { 
+                individualPerspectiveBalanceIssue = "Un problème d'équilibre ?";
+                individualPerspectiveWorkplaceIssue = "Un problème au travail ?";
+                individualPerspectiveLegacyIssue = "Un problème\navec mon histoire de vie ?";
+                individualPerspectiveAnotherIssue = "Est-ce un autre type\nde problème ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveBalanceIssue");
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveWorkplaceIssue");
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveLegacyIssue");
+            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
+
+            childrenOfLevel3TitleBalanceIssue = 
+            [individualPerspectiveBalanceIssue, individualPerspectiveWorkplaceIssue, 
+            individualPerspectiveLegacyIssue, individualPerspectiveAnotherIssue];
+
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: qf.childrenOfLevel3TitleBalanceIssue.toList(),
+              listOfTextsToFind: childrenOfLevel3TitleBalanceIssue,
               scrollable: firstScrollable
             );
 
