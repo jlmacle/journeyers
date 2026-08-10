@@ -23,9 +23,9 @@ Future<List<dynamic>> sortSessionByDateAddJm
     {
       try
       {
-        var languageCode = (Localizations.localeOf(context)).languageCode;
-        DateTime dateA = DateFormat.yMMMMd(languageCode).add_jm().parseLoose(a[DashboardUtils.keyDate]);
-        DateTime dateB = DateFormat.yMMMMd(languageCode).add_jm().parseLoose(b[DashboardUtils.keyDate]);
+        
+        String dateA = a[DashboardUtils.keyDate];
+        String dateB = b[DashboardUtils.keyDate];
 
         return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
       }
