@@ -206,6 +206,8 @@
   ,"@l10n_cancel": {"description": "l10n for 'Cancel'"}
   ,"l10n_save": "Save"
   ,"@l10n_save": {"description": "l10n for 'Save'"}
+  ,"l10n_done": "Done"
+  ,"@l10n_done": {"description": "l10n for 'Done'"}
   
 
   ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time.\n(+ Enter key)"

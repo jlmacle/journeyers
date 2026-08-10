@@ -17,7 +17,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get app_start_msg =>
-      'Avertissement:\nCe travail est fourni « en l\'état »,\nsans garantie d\'aucune sorte.\nL\'auteur décline toute responsabilité\npour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première\nanalyse de contexte.\nLe tableau de bord s\'affichera\nune fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.';
+      'Avertissement:\nCe travail est fourni «en l\'état», sans garantie d\'aucune sorte.\nL\'auteur décline toute responsabilité pour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première analyse de contexte.\nLe tableau de bord s\'affichera une fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.';
 
   @override
   String get app_lang_en => 'Anglais';
@@ -41,7 +41,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois\npour cette analyse.\n(+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -363,6 +363,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_save => 'Enregistrer';
+
+  @override
+  String get l10n_done => 'Fait';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -389,7 +392,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get app_start_msg =>
-      'Avertissement:\nCe travail est fourni « en l\'état »,\nsans garantie d\'aucune sorte.\nL\'auteur décline toute responsabilité\npour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première\nanalyse de contexte.\nLe tableau de bord s\'affichera\nune fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.';
+      'Avertissement:\nCe travail est fourni «en l\'état», sans garantie d\'aucune sorte.\nL\'auteur décline toute responsabilité pour toute utilisation ou mauvaise utilisation de ce travail.\n\nCeci est votre première analyse de contexte.\nLe tableau de bord s\'affichera une fois que des données auront été enregistrées.\nVeuillez cliquer pour fermer.';
 
   @override
   String get app_lang_en => 'Anglais';
@@ -413,7 +416,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois\npour cette analyse.\n(+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -735,6 +738,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_save => 'Enregistrer';
+
+  @override
+  String get l10n_done => 'Fait';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>

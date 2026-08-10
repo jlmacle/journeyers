@@ -115,7 +115,7 @@ abstract class AppLocalizations {
   /// The information message that a newly installed app should display.
   ///
   /// In en, this message translates to:
-  /// **'Disclaimer:\nThis work is provided \'as is\'\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.'**
+  /// **'Disclaimer:\nThis work is provided \'as is\' without warranty of any kind.\nThe author disclaims all liability for any use or misuse of the work.\n\nPlease note:\nThis is your first context analysis.\nThe dashboard will be displayed after data has been saved.\nPlease click to acknowledge.'**
   String get app_start_msg;
 
   /// The name of the English language, in English
@@ -157,7 +157,7 @@ abstract class AppLocalizations {
   /// The text field hint, for the keywords of the context analysis process
   ///
   /// In en, this message translates to:
-  /// **'Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)'**
+  /// **'Please enter one keyword at a time (+ Enter key).'**
   String get ca_process_keywords_text_field_hint;
 
   /// The text field hint, for the past outcomes of the problem for the household
@@ -676,6 +676,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get l10n_save;
+
+  /// l10n for 'Done'
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get l10n_done;
 
   /// l10n for the keywords entry text field hint
   ///

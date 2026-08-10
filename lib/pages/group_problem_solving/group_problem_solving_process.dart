@@ -488,7 +488,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                     _buildHeaderButton
                     (
                       tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
-                      text: _isModificationMode ? "Done" : editEmoji, 
+                      text: _isModificationMode ? AppLocalizations.of(context)?.l10n_done ?? "Issue with the l10n for 'Done'" : editEmoji, 
                       color: _isModificationMode ? orangeShade900 : Colors.white, 
                       onPressed:_isModificationMode 
                         ? () => setState(() {                      

@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "package:intl/intl.dart";
-
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -23,9 +21,9 @@ Future<List<dynamic>> sortSessionByDateAddJm
     {
       try
       {
-        var languageCode = (Localizations.localeOf(context)).languageCode;
-        DateTime dateA = DateFormat.yMMMMd(languageCode).add_jm().parseLoose(a[DashboardUtils.keyDate]);
-        DateTime dateB = DateFormat.yMMMMd(languageCode).add_jm().parseLoose(b[DashboardUtils.keyDate]);
+        
+        String dateA = a[DashboardUtils.keyDate];
+        String dateB = b[DashboardUtils.keyDate];
 
         return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
       }

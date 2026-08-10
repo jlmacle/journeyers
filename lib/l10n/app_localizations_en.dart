@@ -17,7 +17,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get app_start_msg =>
-      'Disclaimer:\nThis work is provided \'as is\'\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.';
+      'Disclaimer:\nThis work is provided \'as is\' without warranty of any kind.\nThe author disclaims all liability for any use or misuse of the work.\n\nPlease note:\nThis is your first context analysis.\nThe dashboard will be displayed after data has been saved.\nPlease click to acknowledge.';
 
   @override
   String get app_lang_en => 'English';
@@ -41,7 +41,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)';
+      'Please enter one keyword at a time (+ Enter key).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -358,6 +358,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get l10n_save => 'Save';
+
+  @override
+  String get l10n_done => 'Done';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -384,7 +387,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get app_start_msg =>
-      'Disclaimer:\nThis work is provided \'as is\'\nwithout warranty of any kind.\nThe author disclaims all liability\nfor any use or misuse of the work.\n\nPlease note:\nThis is your first\ncontext analysis.\nThe dashboard will be displayed\nafter data has been saved.\nPlease click to acknowledge.';
+      'Disclaimer:\nThis work is provided \'as is\' without warranty of any kind.\nThe author disclaims all liability for any use or misuse of the work.\n\nPlease note:\nThis is your first context analysis.\nThe dashboard will be displayed after data has been saved.\nPlease click to acknowledge.';
 
   @override
   String get app_lang_en => 'English';
@@ -408,7 +411,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time\nto describe the analysis.\n(+ Enter key)';
+      'Please enter one keyword at a time (+ Enter key).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -725,6 +728,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_save => 'Save';
+
+  @override
+  String get l10n_done => 'Done';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>

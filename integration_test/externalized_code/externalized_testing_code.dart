@@ -3,6 +3,7 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/ca_questions_fields_localized.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
@@ -328,6 +329,7 @@ final q = CAQuestionsFields();
   // Method used to test a CA preview.
   Future<void> caTestPreview
   ({
+    required BuildContext context,
     required WidgetTester tester, 
     required String title,
     List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
@@ -335,17 +337,17 @@ final q = CAQuestionsFields();
     List<String> groupStringValues = const ["", "", "", "", ""]
   }) async
   {
+    // Accessin the localized form data
+    CAQuestionsFieldsLocalized? qfl = .new(context);
 
     if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
 
     // The total number of expansion tile for the individual perspective
     int totalIndivExpansionTiles = 0;
-    // Data with the form questions
-    CAQuestionsFields q = .new();
 
     // Opening the preview
-    var previewFinder = find.byTooltip(previewTooltipLabel);
+    var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip");
     await tester.tap(previewFinder);
     await tester.pumpAndSettle();
 
@@ -412,7 +414,7 @@ final q = CAQuestionsFields();
                   "(The expansion tile is included. The first index is skipped.)");
       }
 
-      if (q.level3TitlesIndividual.contains(expansionTileTitle)) 
+      if (qfl.level3TitlesIndividual.contains(expansionTileTitle)) 
       {        
         totalIndivExpansionTiles++;
       }
@@ -445,13 +447,13 @@ final q = CAQuestionsFields();
         if (testingDebug) pu.printd("Testing Debug: expansionTileIndex: $expansionTileIndex, listTileIndex: $listTileIndex");
 
         // Testing if the expansion tile is related to the individual perspective
-        if (q.level3TitlesIndividual.contains(expansionTileTitle))
+        if (qfl.level3TitlesIndividual.contains(expansionTileTitle))
         {
           // The last individual perspective expansion tile is for a text field only data
           // For a text field only, the notes are in the title
-          if (expansionTileTitle == q.level3TitleAnotherIssue  && listTileIndex == 1)
+          if (expansionTileTitle == qfl.level3TitleAnotherIssue  && listTileIndex == 1)
           {
-            expect(listTileTitle, "Notes: ${individualStringValues[previewListTileDataIndex]}");
+            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the subtitle, for the individual perspective
           else {
@@ -460,7 +462,7 @@ final q = CAQuestionsFields();
             String listTileSubTitle = listTileSubTitleWidget.data!;
             if (testingDebug) pu.printd("Testing Debug: List tiles subtitle for $expansionTileTitle: $listTileSubTitle");
             
-            expect(listTileSubTitle, "Notes: ${individualStringValues[previewListTileDataIndex]}");
+            expect(listTileSubTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
           }          
 
         }
@@ -469,9 +471,9 @@ final q = CAQuestionsFields();
         {
           // The first group/teams perspective expansion tile is for a text field only data
           // For a text field only, the notes are in the title
-          if (expansionTileTitle == q.level3TitleGroupsProblematics  && listTileIndex == 1)
+          if (expansionTileTitle == qfl.level3TitleGroupsProblematics  && listTileIndex == 1)
           {
-            expect(listTileTitle, "Notes: ${groupStringValues[previewListTileDataIndex]}");
+            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the title with the segmented button answers
           else
@@ -480,13 +482,13 @@ final q = CAQuestionsFields();
              
             if(segButtonValue.isNotEmpty)
             {
-              var segButtonAnswersWithNotes = "Answer(s): ${_segmentedButtonToString(segButtonValue)}\n"
-                                            "Notes: ${groupStringValues[previewListTileDataIndex]}";
+              var segButtonAnswersWithNotes = "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
+                                            "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
               expect(listTileTitle, segButtonAnswersWithNotes);
             }
             else
             {
-              expect(listTileTitle,  "Notes: ");
+              expect(listTileTitle,  AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:");
             }
           }             
         }
@@ -524,6 +526,7 @@ final q = CAQuestionsFields();
   // Method used to verify empty content in custom segmented buttons.
   Future<void> caSegmentedButtonsVerifyEmptyContent
   ({
+    required BuildContext context, 
     required WidgetTester tester, 
     required List<Key> listOfKeysToFind,
     required FinderBase<Element>? scrollable
@@ -534,10 +537,11 @@ final q = CAQuestionsFields();
       var keyFinder = find.byKey(key, skipOffstage: false);
       await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45);    
       // Tapping to display the text field
+      var iDontKnow = AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
       var optionFinder = find.descendant
         (
           of: keyFinder,
-          matching: find.text("I don't know")
+          matching: find.text(iDontKnow)
         );   
       await tester.tap(optionFinder);
       await tester.pumpAndSettle();

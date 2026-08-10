@@ -70,7 +70,7 @@ void main() {
         Text textDelete = tester.widget(textDeleteFinder);
 
         // Checks if the label displays the correct count from sessionsMetadataSelectedForDeletion
-        expect(textDelete.data, "Delete (1)");
+        expect(textDelete.data, "Delete selected data (1)");
         // Checks if the label is red
         expect(textDelete.style?.color, red);
         

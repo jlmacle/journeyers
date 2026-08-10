@@ -205,6 +205,8 @@
     ,"@l10n_cancel": {"description": "l10n pour 'Annuler'"}
     ,"l10n_save": "Enregistrer"
     ,"@l10n_save": {"description": "l10n pour 'Enregistrer'"}
+    ,"l10n_done": "Fait"
+    ,"@l10n_done": {"description": "l10n pour 'Fait'"}
   
 
     ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)"
