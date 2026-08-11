@@ -2031,7 +2031,7 @@ Future<void> main() async {
 
             // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
             // ──────────────────────────────────────────────────────────────────
-            var editIconFromItemFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip");
+            var editIconFromItemFinder = find.byTooltip(lds.editFromDashboardItemTooltipLabel);
             await tester.tap(editIconFromItemFinder);
             await tester.pumpAndSettle();
 
@@ -2290,8 +2290,7 @@ Future<void> main() async {
             ); 
 
             // ── Closing the CA preview ──────────────────
-            var previewClosingTooltipLabelFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_preview_close_preview_tooltip ?? "Issue with the l10n for the preview 'Close the preview' tooltip",
-);
+            var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
             await tester.tap(previewClosingTooltipLabelFinder);
             await tester.pumpAndSettle();
 
