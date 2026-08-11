@@ -10,7 +10,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 /// A method getting a locale language code for a widget test.
 String getLocaleLanguageCode(WidgetTester tester)
 {
-  var context = tester.element(find.byType(Scaffold));
+  var context = tester.element(find.byType(Scaffold).first);
   Locale? currentLocale = (Localizations.localeOf(context));
   var localeLanguageCode = currentLocale.languageCode;
   if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
