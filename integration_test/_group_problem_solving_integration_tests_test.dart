@@ -10,6 +10,7 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
@@ -18,7 +19,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
@@ -159,6 +160,9 @@ Future<void> main() async {
           
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── 1. ENTERING NEW GPS PROCESS DATA ───────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -177,7 +181,7 @@ Future<void> main() async {
             // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
           // todo: a dashboardSearchMetadata
-          await dashboardSearchTitleAndKeywords(title: "${testGPSTitle1}${gpsTitleSuffix}", kws: kwsList2Keywords);
+          await dashboardSearchTitleAndKeywords(title: "${testGPSTitle1}${lgps.gpsTitleSuffix}", kws: kwsList2Keywords);
 
           // Searching for the date
           dateForTestingIndex = 0;
@@ -219,6 +223,10 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedGPSStrings lgps = .new(context);
 
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -236,7 +244,7 @@ Future<void> main() async {
             // ── 2. SORTING BY TITLE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
             // Triggering the sort
-            var sortByTitleFinder = find.textContaining(sortByTitle);
+            var sortByTitleFinder = find.textContaining(lds.sortByTitle);
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
@@ -250,7 +258,7 @@ Future<void> main() async {
             // Verifying the alphabetical order
             for (var index = 0; index < totalTitles; index++)
             {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesListSorted[index]}$gpsTitleSuffix");
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesListSorted[index]}${lgps.gpsTitleSuffix}");
             }
 
             // Re-triggering the sort
@@ -264,7 +272,7 @@ Future<void> main() async {
             // Verifying the alphabetical order 
             for (var index = 0; index < totalTitles; index++)
             {
-              expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesListSorted.reversed.toList()[index]}$gpsTitleSuffix");
+              expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesListSorted.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
             }
           }          
         }
@@ -300,6 +308,9 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
 
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -317,7 +328,7 @@ Future<void> main() async {
             // ── 2. SORTING BY DATE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
             // Triggering the sort
-            var sortByDateFinder = find.textContaining(sortByDate);
+            var sortByDateFinder = find.textContaining(lds.sortByDate);
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
@@ -396,6 +407,9 @@ Future<void> main() async {
               
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedGPSStrings lgps = .new(context);
 
               // ── 1. ENTERING NEW GPS PROCESS DATA (6 times) ──────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────
@@ -426,7 +440,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesMaintenance.reversed.toList()[index]}$gpsTitleSuffix");
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesMaintenance.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
               }
               // Un-selecting the keyword
               await tester.tap(kwMaintenanceFinder);
@@ -445,7 +459,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesCompanionship.reversed.toList()[index]}$gpsTitleSuffix");
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesCompanionship.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
               }
 
               // Un-selecting the keyword
@@ -465,7 +479,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesWorkplace.reversed.toList()[index]}$gpsTitleSuffix");
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesWorkplace.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
               }              
 
               // await tester.pump(const Duration(seconds: 2));
@@ -502,10 +516,13 @@ Future<void> main() async {
             // pumpAndSettle drives the event loop until there are no more pending frames,
             // letting the async getPreferences() call complete 
             // and setState(() { _preferencesLoading = false; }) rebuild the tree.
-            //
             
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedGPSStrings lgps = .new(context);
 
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -522,7 +539,7 @@ Future<void> main() async {
             // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────
             // Searching for the finder with the title
-            Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester,title: testGPSTitle1, titleSuffix: lgps.gpsTitleSuffix);
             expect(sessionListItemFinder, findsOne);
 
             // Verifying the Filter Chip present
@@ -538,14 +555,14 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────────────────────────────────────
             
             // Searching for the tooltip 
-            var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+            var deleteIconFinder = find.byTooltip(lds.deleteTooltipLabel);
 
             // Tapping the icon
             await tester.tap(deleteIconFinder);
             await tester.pumpAndSettle();
 
             // Verifying the sessions list item absent
-            sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: gpsTitleSuffix);
+            sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testGPSTitle1, titleSuffix: lgps.gpsTitleSuffix);
             expect(sessionListItemFinder, findsNothing);
 
             // Verifying the Filter Chip absent
@@ -590,6 +607,9 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
 
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -608,7 +628,7 @@ Future<void> main() async {
             // Searching and tapping the checkboxes for title 1 and title 2
             var checkbox1Finder = find.descendant
             (
-              of: find.ancestor(of: find.text("$testGPSTitle1$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
+              of: find.ancestor(of: find.text("$testGPSTitle1${lgps.gpsTitleSuffix}"), matching: find.byType(SessionsListItem)), 
               matching: find.byType(Checkbox)
             );
             // Needed more than ensureVisible
@@ -619,7 +639,7 @@ Future<void> main() async {
 
            var checkbox2Finder = find.descendant
             (
-                of: find.ancestor(of: find.text("$testGPSTitle2$gpsTitleSuffix"), matching: find.byType(SessionsListItem)), 
+                of: find.ancestor(of: find.text("$testGPSTitle2${lgps.gpsTitleSuffix}"), matching: find.byType(SessionsListItem)), 
                 matching: find.byType(Checkbox)
             );
             await tester.ensureVisible(checkbox2Finder);
@@ -647,7 +667,7 @@ Future<void> main() async {
             expect(sessionsListItemsFinder, findsOne);
 
             // Verifying title 3 remains
-            var title3WithSuffix = "$testGPSTitle3$gpsTitleSuffix";
+            var title3WithSuffix = "$testGPSTitle3${lgps.gpsTitleSuffix}";
             var textFinder = find.text(title3WithSuffix);
             Text textWidget = tester.widget(textFinder);
             expect(textWidget.data, title3WithSuffix);
@@ -693,6 +713,8 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
             // await tester.pump(const Duration(seconds: 3));
 
             // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
@@ -712,7 +734,7 @@ Future<void> main() async {
             // ── 2. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────────────
             await tester.pump(const Duration(seconds: 2));
-            await gpsTestPreview(tester: tester, title: testGPSTitle1, ideasList: ideasList2Ideas);
+            await gpsTestPreview(context: context, tester: tester, title: testGPSTitle1, ideasList: ideasList2Ideas);
 
             // await tester.pump(const Duration(seconds: 2));
 
@@ -743,6 +765,10 @@ Future<void> main() async {
             // Pumping the GPSPage
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedGPSStrings lgps = .new(context);
             // await tester.pump(const Duration(seconds: 2));
 
             // ── 1. ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
@@ -769,7 +795,7 @@ Future<void> main() async {
             // ── 2. CLICKING TO OPEN THE PREVIEW  ─────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────
             // Opening the preview
-            var previewFinder = find.byTooltip(previewTooltipLabel);
+            var previewFinder = find.byTooltip(lds.previewTooltipLabel);
             await tester.tap(previewFinder);
             await tester.pumpAndSettle();
 
@@ -934,7 +960,7 @@ Future<void> main() async {
             // ── 5. VERIFICATION  ─────────────────
             // ─────────────────────────────────────   
               // Verifying the edited title present
-            expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
+            expect(find.text("${titleForEdition}${editionSuffix}${lgps.gpsTitleSuffix}"),findsOne);
 
               // Verifying the edited keywords present
             for (var kw in [...kwsList2Keywords, kwCommunication])
@@ -945,6 +971,7 @@ Future<void> main() async {
               // Verifying the edited/added data present
             await gpsTestPreview
             (
+              context: context,
               tester: tester, title: "${titleForEdition}${editionSuffix}", 
               ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
             );
@@ -973,6 +1000,10 @@ Future<void> main() async {
             // Pumping the GPSPage
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedGPSStrings lgps = .new(context);
             // await tester.pump(const Duration(seconds: 2));
 
             // ──  ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
@@ -998,7 +1029,7 @@ Future<void> main() async {
 
             // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
             // ──────────────────────────────────────────────────────────────────
-            var editIconFromItemFinder = find.byTooltip(editFromDashboardItemTooltipLabel);
+            var editIconFromItemFinder = find.byTooltip(lds.editFromDashboardItemTooltipLabel);
             await tester.tap(editIconFromItemFinder);
             await tester.pumpAndSettle();
 
@@ -1156,7 +1187,7 @@ Future<void> main() async {
             // ──  VERIFICATION  ─────────────────
             // ─────────────────────────────────────   
               // Verifying the edited title present
-            expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
+            expect(find.text("${titleForEdition}${editionSuffix}${lgps.gpsTitleSuffix}"),findsOne);
 
               // Verifying the edited keywords present
             for (var kw in [...kwsList2Keywords, kwCommunication])
@@ -1167,6 +1198,7 @@ Future<void> main() async {
               // Verifying the edited/added data present
             await gpsTestPreview
             (
+              context: context,
               tester: tester, title: "${titleForEdition}${editionSuffix}", 
               ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
             );
@@ -1195,6 +1227,10 @@ Future<void> main() async {
             // Pumping the GPSPage
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedGPSStrings lgps = .new(context);
             // await tester.pump(const Duration(seconds: 2));
 
             // ──  ENTERING NEW GPS PROCESS DATA  ──────────────────────────────────
@@ -1220,7 +1256,7 @@ Future<void> main() async {
 
             // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
             // ──────────────────────────────────────────────────────────────────
-            var editIconFromItemFinder = find.byTooltip(editFromDashboardItemTooltipLabel);
+            var editIconFromItemFinder = find.byTooltip(lds.editFromDashboardItemTooltipLabel);
             await tester.tap(editIconFromItemFinder);
             await tester.pumpAndSettle();
 
@@ -1378,7 +1414,7 @@ Future<void> main() async {
             // ──  VERIFICATION  ─────────────────
             // ─────────────────────────────────────   
               // Verifying the edited title present
-            expect(find.text("${titleForEdition}${editionSuffix}${gpsTitleSuffix}"),findsOne);
+            expect(find.text("${titleForEdition}${editionSuffix}${lgps.gpsTitleSuffix}"),findsOne);
 
               // Verifying the edited keywords present
             for (var kw in [...kwsList2Keywords, kwCommunication])
@@ -1389,11 +1425,12 @@ Future<void> main() async {
               // Verifying the edited/added data present
             await gpsTestPreview
             (
+              context: context,
               tester: tester, title: "${titleForEdition}${editionSuffix}", 
               ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
             );
               // ── Closing the GPS preview ──────────────────
-            var previewClosingTooltipLabelFinder = find.byTooltip(previewClosingTooltipLabel);
+            var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
             await tester.tap(previewClosingTooltipLabelFinder);
             await tester.pumpAndSettle();
 
