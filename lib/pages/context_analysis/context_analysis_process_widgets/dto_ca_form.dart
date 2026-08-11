@@ -74,53 +74,55 @@ class DTOCAForm
 
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
   /// Method used to gather the form data into a LinkedHashMap.
-  Future<LinkedHashMap<String, Object> > dataStructureBuilding(BuildContext context) async {
-  LocalizedCAQuestionsFields? qfl = .new(context);
-  
-  final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
+  Future<LinkedHashMap<String, Object> > dataStructureBuilding(BuildContext context) async 
+  {
+    // Accessing the localized data
+    LocalizedCAQuestionsFields? qfl = .new(context);
+    
+    final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
 
-  // Individual perspective
-  final individualData = LinkedHashMap<String, Object>.from
-  ({
-     lineReturnToSpace(qfl.level2TitleIndividual): 
-      LinkedHashMap<String, LinkedHashMap<String, Object>>.from
-      ({
-        lineReturnToSpace(qfl.level3TitleBalanceIssue): 
+    // Individual perspective
+    final individualData = LinkedHashMap<String, Object>.from
+    ({
+      lineReturnToSpace(qfl.level2TitleIndividual): 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem1):  await _checkboxDataToMap(context, indivBalanceStudiesHousehold),
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem2):  await _checkboxDataToMap(context, indivBalanceAccessingIncomeHousehold),
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem3):  await _checkboxDataToMap(context, indivBalanceEarningIncomeHousehold),
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem4):  await _checkboxDataToMap(context, indivBalanceHelpingOthersHousehold),
-        }),
+          lineReturnToSpace(qfl.level3TitleBalanceIssue): 
+          LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+          ({
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem1):  await _checkboxDataToMap(context, indivBalanceStudiesHousehold),
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem2):  await _checkboxDataToMap(context, indivBalanceAccessingIncomeHousehold),
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem3):  await _checkboxDataToMap(context, indivBalanceEarningIncomeHousehold),
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem4):  await _checkboxDataToMap(context, indivBalanceHelpingOthersHousehold),
+          }),
 
-        lineReturnToSpace(qfl.level3TitleWorkplaceIssue): 
-        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
-        ({
-          lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem1):  await _checkboxDataToMap(context, indivAtWorkMoreAppreciated),
-          lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem2):  await _checkboxDataToMap(context, indivAtWorkRemainingAppreciated),
-        }),
+          lineReturnToSpace(qfl.level3TitleWorkplaceIssue): 
+          LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+          ({
+            lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem1):  await _checkboxDataToMap(context, indivAtWorkMoreAppreciated),
+            lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem2):  await _checkboxDataToMap(context, indivAtWorkRemainingAppreciated),
+          }),
 
-        lineReturnToSpace(qfl.level3TitleLegacyIssue): 
-        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
-        ({
-          lineReturnToSpace(qfl.level3TitleLegacyIssueItem1):  await _checkboxDataToMap(context, indivBetterLegacies),
+          lineReturnToSpace(qfl.level3TitleLegacyIssueForDataSaving): 
+          LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+          ({
+            lineReturnToSpace(qfl.level3TitleLegacyIssueItem1):  await _checkboxDataToMap(context, indivBetterLegacies),
+          }),
+          
+          lineReturnToSpace(qfl.level3TitleAnotherIssueForDataSaving): LinkedHashMap<String, Object>.from
+          ({
+            lineReturnToSpace(qfl.labelTextField): indivAnotherIssueStr,
+          }),
         }),
-        
-        lineReturnToSpace(qfl.level3TitleAnotherIssue): LinkedHashMap<String, Object>.from
-        ({
-          lineReturnToSpace(qfl.labelTextField): indivAnotherIssueStr,
-        }),
-      }),
-    });
+      });
 
-    // Groups/teams perspective
-  final groupData = LinkedHashMap<String, Object>.from
+      // Groups/teams perspective
+    final groupData = LinkedHashMap<String, Object>.from
     ({
       lineReturnToSpace(qfl.level2TitleGroup): 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        lineReturnToSpace(qfl.level3TitleGroupsProblematics): LinkedHashMap<String, Object>.from({lineReturnToSpace(qfl.labelTextField): groupProblemsToSolveStr}),
+        lineReturnToSpace(qfl.level3TitleGroupsProblematicsForDataSaving): LinkedHashMap<String, Object>.from({lineReturnToSpace(qfl.labelTextField): groupProblemsToSolveStr}),
 
         lineReturnToSpace(qfl.level3TitleSameProblem):          await _segmentedDataToMap(context, groupSameProblemsToSolve),
 

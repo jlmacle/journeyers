@@ -1,6 +1,7 @@
 import "package:flutter/widgets.dart";
 
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/utils/string/string_utils.dart";
 
 class LocalizedCAQuestionsFields
 {
@@ -35,6 +36,10 @@ class LocalizedCAQuestionsFields
   // Heading level 3 and sub items
   /// Question asked in the form: A Legacy Issue?
   String level3TitleLegacyIssue = "";
+
+  /// Question asked in the form: A Legacy Issue? (for data saving)
+  String level3TitleLegacyIssueForDataSaving = "";
+
   /// Question asked in the form: To have a better legacy to leave to my children/others?
   String level3TitleLegacyIssueItem1 = "";
 
@@ -42,6 +47,8 @@ class LocalizedCAQuestionsFields
   /// Question asked in the form: Is The issue Of Another Type?
   String level3TitleAnotherIssue = "";
 
+  /// Question asked in the form: Is The issue Of Another Type? (for data saving)
+  String level3TitleAnotherIssueForDataSaving = "";
 
 
   // ─── QUESTIONS: GROUP/TEAM PERSPECTIVE ───────────────────────────────────────
@@ -52,6 +59,9 @@ class LocalizedCAQuestionsFields
   // Heading level 3 without sub items
   /// Question asked in the form: What problem(s) are the groups/teams trying to solve?
   String level3TitleGroupsProblematics = "";
+
+  /// Question asked in the form: What problem(s) are the groups/teams trying to solve? (for data saving)
+  String level3TitleGroupsProblematicsForDataSaving = "";
 
   // Heading level 3 without sub items
   /// Question asked in the form: Am I trying to solve the same problem(s) as my groups/teams?
@@ -91,14 +101,20 @@ class LocalizedCAQuestionsFields
   /// The set of the titles level 2.
   Set<String> level2Titles = {};
 
+  /// The set of the titles level 2 for the preview.
+  Set<String> level2TitlesForPreview = {};
+
   /// The set of the titles level 3 related to an individual perspective.
   Set<String> level3TitlesIndividual = {};
 
   /// The set of the titles level 3 related to an individual perspective used in the preview.
-  Set<String> level3TitlesIndividualPreview = {};
+  Set<String> level3TitlesIndividualForPreview = {};
 
   /// The set of the titles level 3 related to a group/team perspective.
   Set<String> level3TitlesGroup = {};
+
+  /// The set of the titles level 3 related to a group/team perspective used in the preview.
+  Set<String> level3TitlesGroupForPreview = {};
 
   /// The set of the titles level 3 related to a group/team perspective that are answered with segmented buttons.
   Set<String> level3TitlesGroupCustomSegmentedButtons = {};
@@ -145,12 +161,18 @@ class LocalizedCAQuestionsFields
     // Heading level 3 and sub items
     /// Question asked in the form: A Legacy Issue?
     level3TitleLegacyIssue = AppLocalizations.of(context)?.ca_process_individual_perspective_legacy_issue_section_question ?? "Issue with the section question for the legacy issue, in the individual perspective";
+    /// Question asked in the form: A Legacy Issue? (for data saving)
+    level3TitleLegacyIssueForDataSaving = lineReturnToSpace(level3TitleLegacyIssue)!;
+
     /// Question asked in the form: To have a better legacy to leave to my children/others?
     level3TitleLegacyIssueItem1 = AppLocalizations.of(context)?.ca_process_individual_perspective_legacy_better_legacy ?? "Issue with the better legacy question, in the individual perspective";
 
     // Heading level 3 without sub items
     /// Question asked in the form: Is The issue Of Another Type?
     level3TitleAnotherIssue = AppLocalizations.of(context)?.ca_process_individual_perspective_another_issue_section_question ?? "Issue with the section question for an issue of another type, in the individual perspective";
+
+    /// Question asked in the form: Is The issue Of Another Type? (for data saving)
+    level3TitleAnotherIssueForDataSaving = lineReturnToSpace(level3TitleAnotherIssue)!;
 
     // Heading level 2
     /// Question asked in the form: As a member of groups/teams: What problem(s) are we trying to solve?
@@ -159,6 +181,9 @@ class LocalizedCAQuestionsFields
     // Heading level 3 without sub items
     /// Question asked in the form: What problem(s) are the groups/teams trying to solve?
     level3TitleGroupsProblematics = AppLocalizations.of(context)?.ca_process_group_perspective_problems ?? "Issue with the question for the problem(s) the groups/teams are trying to solve";
+
+    /// Question asked in the form: What problem(s) are the groups/teams trying to solve? (for data saving)
+    level3TitleGroupsProblematicsForDataSaving = lineReturnToSpace(level3TitleGroupsProblematics)!;
 
     // Heading level 3 without sub items
     /// Question asked in the form: Am I trying to solve the same problem(s) as my groups/teams?
@@ -192,11 +217,11 @@ class LocalizedCAQuestionsFields
       // legacy issue
       level3TitleLegacyIssueItem1: labelCheckbox,
       // another type
-      level3TitleAnotherIssue: labelTextField,
+      level3TitleAnotherIssueForDataSaving: labelTextField,
 
       //** Group/team perspective **/
       // group problematics
-      level3TitleGroupsProblematics: labelTextField,
+      level3TitleGroupsProblematicsForDataSaving: labelTextField,
       // same problem?
       level3TitleSameProblem: labelSegmentedButton,
       // harmony at home
@@ -210,13 +235,24 @@ class LocalizedCAQuestionsFields
     /// The set of the titles level 2.
     level2Titles = {level2TitleIndividual, level2TitleGroup};
 
+    /// The set of the titles level 2 for the preview.
+    level2TitlesForPreview = {lineReturnToSpace(level2TitleIndividual)!, lineReturnToSpace(level2TitleGroup)!};
+
     /// The set of the titles level 3 related to an individual perspective.
     level3TitlesIndividual = {
         level3TitleBalanceIssue,
         level3TitleWorkplaceIssue,
         level3TitleLegacyIssue,
         level3TitleAnotherIssue,
-      };
+      };   
+
+    /// The set of the titles level 3 related to an individual perspective.
+    level3TitlesIndividualForPreview = {
+      lineReturnToSpace(level3TitleBalanceIssue)!,
+      lineReturnToSpace(level3TitleWorkplaceIssue)!,
+      lineReturnToSpace(level3TitleLegacyIssue)!,
+      lineReturnToSpace(level3TitleAnotherIssue)!,
+      };    
 
     /// The set of the titles level 3 related to a group/team perspective.
     level3TitlesGroup = {
@@ -225,6 +261,14 @@ class LocalizedCAQuestionsFields
       level3TitleHarmonyAtHome,
       level3TitleAppreciabilityAtWork,
       level3TitleIncomeEarningAbility,
+    };
+
+    level3TitlesGroupForPreview = {
+      lineReturnToSpace(level3TitleGroupsProblematics)!,
+      lineReturnToSpace(level3TitleSameProblem)!,
+      lineReturnToSpace(level3TitleHarmonyAtHome)!,
+      lineReturnToSpace(level3TitleAppreciabilityAtWork)!,
+      lineReturnToSpace(level3TitleIncomeEarningAbility)!,
     };
 
     /// The set of the titles level 3 related to a group/team perspective that are answered with segmented buttons.
@@ -263,8 +307,8 @@ class LocalizedCAQuestionsFields
 
     /// The set of the text fields only items
     textFieldOnlyItems = {
-      level3TitleAnotherIssue,
-      level3TitleGroupsProblematics,
+      level3TitleAnotherIssueForDataSaving,
+      level3TitleGroupsProblematicsForDataSaving,
     };
   }
 

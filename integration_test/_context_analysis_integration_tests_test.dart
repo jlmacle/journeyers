@@ -10,12 +10,12 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/ca_questions_fields_localized.dart";
+import "package:journeyers/l10n/localized_ca_questions_fields.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
@@ -35,8 +35,11 @@ import "externalized_code/externalized_testing_code.dart";
 Widget buildTestableCAPage() {
   return const MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,
-    home: CAPage(),
+    supportedLocales: AppLocalizations.supportedLocales,    
+    home: Scaffold
+    ( 
+      body: CAPage()
+    ),
   );
 }
 
@@ -216,6 +219,9 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -233,7 +239,7 @@ Future<void> main() async {
             // ── 2. SORTING BY TITLE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
             // Triggering the sort
-            var sortByTitleFinder = find.textContaining(sortByTitle);
+            var sortByTitleFinder = find.textContaining(lds.sortByTitle);
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
@@ -297,6 +303,9 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -314,7 +323,7 @@ Future<void> main() async {
             // ── 2. SORTING BY DATE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
             // Triggering the sort
-            var sortByDateFinder = find.textContaining(sortByDate);
+            var sortByDateFinder = find.textContaining(lds.sortByDate);
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
@@ -503,6 +512,9 @@ Future<void> main() async {
         
         await tester.pumpWidget(buildTestableCAPage());
         await tester.pumpAndSettle();
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
 
         // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -537,7 +549,7 @@ Future<void> main() async {
         // ───────────────────────────────────────────────────────────────────────────────────────
         
         // Searching for the tooltip 
-        var deleteIconFinder = find.byTooltip(deleteTooltipLabel);
+        var deleteIconFinder = find.byTooltip(lds.deleteTooltipLabel);
 
         // Tapping the icon
         await tester.tap(deleteIconFinder);
@@ -1204,9 +1216,12 @@ Future<void> main() async {
           var elevatedButtonFinder = find.byKey(const Key("overlay-edit-save-button"),);
           await tester.tap(elevatedButtonFinder);
           await tester.pumpAndSettle();
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedDashboardStrings lds = .new(context);
 
           // Searching for the error message
-          var emptyTitleEditErrorFinder = find.textContaining(emptyTitleEditError);
+          var emptyTitleEditErrorFinder = find.textContaining(lds.emptyTitleEditError);
           expect(emptyTitleEditErrorFinder, findsOne);
 
           // Verifying bottom sheet remaining present
@@ -1308,7 +1323,9 @@ Future<void> main() async {
             // Pumping the CAPage        
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
+            // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1353,7 +1370,7 @@ Future<void> main() async {
             // ── 2. CLICKING TO OPEN THE PREVIEW  ─────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────
             // Opening the preview
-            var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip");
+            var previewFinder = find.byTooltip(lds.previewTooltipLabel);
             await tester.tap(previewFinder);
             await tester.pumpAndSettle();
 
@@ -1489,7 +1506,7 @@ Future<void> main() async {
             List<String> newSegmentedButtonTextFieldValues = 
             [ for (var value in segmentedButtonTextFieldValues) "${value}${editionSuffix}" ]; 
 
-            textFieldsFinder = find.byType(TextField);
+            textFieldsFinder = find.byType(TextField, skipOffstage: false);
             totalTextFields = textFieldsFinder.evaluate().length;
 
             if (testingDebug) pu.printd("Testing Debug: totalTextFields: $totalTextFields (expected: 16)");
@@ -1543,7 +1560,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────
           
             // ── Opening the preview ──────────────────
-            previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip");
+            previewFinder = find.byTooltip(lds.previewTooltipLabel);
             await tester.ensureVisible(previewFinder);
             await tester.pumpAndSettle();
             await tester.tap(previewFinder);
@@ -1585,7 +1602,7 @@ Future<void> main() async {
             expect(textToFindFinder, findsOne);
             if (testingDebug) pu.printd("Scrolled to $textToFind");
 
-            // await tester.pump(const Duration(seconds: 5));
+            // await tester.pump(const Duration(seconds: 10));
 
             if (testingDebug) pu.printd("Scrolling toward title for preview");
 
@@ -1605,7 +1622,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
             
             if (testingDebug) pu.printd("Testing Debug: Scrolled to title");
-            // await tester.pump(const Duration(seconds: 3));
+            // await tester.pump(const Duration(seconds: 10));
 
             // ── Verifying the edited data present ──────────────────            
             await caTestPreview
@@ -1641,7 +1658,9 @@ Future<void> main() async {
             // Pumping the CAPage        
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
-            final context = tester.element(find.byType(Scaffold).first);
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
 
             // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1685,7 +1704,7 @@ Future<void> main() async {
 
             // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
             // ──────────────────────────────────────────────────────────────────
-            var editIconFromItemFinder = find.byTooltip(editFromDashboardItemTooltipLabel);
+            var editIconFromItemFinder = find.byTooltip(lds.editFromDashboardItemTooltipLabel);
             await tester.tap(editIconFromItemFinder);
             await tester.pumpAndSettle();
 
@@ -1868,7 +1887,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────
           
             // ── Opening the preview ──────────────────
-            var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip");
+            var previewFinder = find.byTooltip(lds.previewTooltipLabel);
             await tester.ensureVisible(previewFinder);
             await tester.pumpAndSettle();
             await tester.tap(previewFinder);
@@ -1966,8 +1985,10 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
-            CAQuestionsFieldsLocalized? qfl = .new(context);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedCAQuestionsFields? qfl = .new(context);
 
             // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────
@@ -2193,7 +2214,7 @@ Future<void> main() async {
             // ───────────────────────────────────────────────────────
           
             // ── Opening the preview ──────────────────
-            var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false);
+            var previewFinder = find.byTooltip(lds.previewTooltipLabel, skipOffstage: false);
             await tester.ensureVisible(previewFinder);
             await tester.pumpAndSettle();
             await tester.tap(previewFinder);
