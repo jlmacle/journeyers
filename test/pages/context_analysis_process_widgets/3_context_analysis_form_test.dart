@@ -5,6 +5,7 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
@@ -112,35 +113,19 @@ void main()
             // Pumping the CAForm widget
             await pumpCAForm(tester);
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            var individualPerspectiveQuestion = "";
-            var groupPerspectiveQuestion = "";
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                individualPerspectiveQuestion = "As an individual:\nWhat problem\nam I trying to solve?";
-                groupPerspectiveQuestion = "As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?";
-
-              }
-              case("fr"): 
-              { 
-                individualPerspectiveQuestion = "En tant qu'individu:\nQuel problème\ndois-je résoudre ?";
-                groupPerspectiveQuestion = "En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?";
-              }              
-            }
+            // Acccessing the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedCAQuestionsFields qfl = .new(context);
 
             // Verifying that the first expansion tile title is correct
             var firstExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().first;
-            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);   
-   
-            expect(firstExpansionTileTextWidget.data, individualPerspectiveQuestion);
+            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);
+            expect(firstExpansionTileTextWidget.data, qfl.level2TitleIndividual);
 
             // Verifying that the second expansion tile title is correct
             var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
-            expect(secondExpansionTileTextWidget.data, groupPerspectiveQuestion);
+            expect(secondExpansionTileTextWidget.data, qfl.level2TitleGroup);
           },
         ); 
 

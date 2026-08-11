@@ -9,7 +9,7 @@ import "package:path/path.dart" as path;
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/ca_questions_fields_localized.dart";
+import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -41,7 +41,8 @@ class CAPreview extends StatefulWidget
 
 class _CAPreviewState extends State<CAPreview> 
 {
-  CAQuestionsFieldsLocalized? qfl;
+  // Getting the localized data
+  LocalizedCAQuestionsFields? qfl;
 
   bool _previewDataLoading = true;
   final Map<String, dynamic> _sectionsIndividual = {};
@@ -195,7 +196,7 @@ class _CAPreviewState extends State<CAPreview>
         _sectionsIndividual["title"] = secondValue;
       }
       // A title level 3?: "A Balance Issue?" for ex.
-      else if (qfl!.level3TitlesIndividual.contains(secondValue)) 
+      else if (qfl!.level3TitlesIndividualForPreview.contains(secondValue)) 
       {
         // Adding a new map to the list of the key "questions", with the title level 3 as value for the key "title",
         // and an empty list for the key "items".
@@ -326,7 +327,7 @@ class _CAPreviewState extends State<CAPreview>
       String secondValue = groupPerspectiveItem[1]; 
 
       // A title Level 2?: "As a member of groups/teams: What problem(s) are we trying to solve?", in the case of the group perspective.
-      if (qfl!.level2Titles.contains(secondValue)) 
+      if (qfl!.level2TitlesForPreview.contains(secondValue)) 
       {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
@@ -335,7 +336,7 @@ class _CAPreviewState extends State<CAPreview>
         previousSecondValueFromSegButton = false;        
       }
       // A title level 3?: "What problem(s) are the groups/teams trying to solve?" for ex.
-      else if (qfl!.level3TitlesGroup.contains(secondValue)) 
+      else if (qfl!.level3TitlesGroupForPreview.contains(secondValue)) 
       {
         _sectionsGroup["questions"].add({"title": secondValue, "items":{}});
         currentTitleLevel3 = secondValue;
@@ -396,6 +397,7 @@ class _CAPreviewState extends State<CAPreview>
     if (previewBuildingDebug) pu.printd("Preview Building");
     if (previewBuildingDebug) pu.printd("Preview Building: sectionsGroup:");
     if (previewBuildingDebug) pu.printd(_sectionsGroup);
+    if (previewBuildingDebug) pu.printd("_sectionsGroup['title']: ${_sectionsGroup['title']}");
   }
 
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures

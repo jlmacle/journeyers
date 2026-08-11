@@ -141,6 +141,8 @@
     ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du titre"}
     ,"dashboard_edit_title_sheet_text_field_hint": "Veuillez entrer un titre."
     ,"@dashboard_edit_title_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition du titre"}
+    ,"dashboard_edit_title_error_empty_title": "Absence de titre"
+    ,"@dashboard_edit_title_error_empty_title": {"description": "Le message d'erreur en cas d'enregistrement sans titre"}
     ,"dashboard_edit_keywords_sheet_label_text": "Édition des mots-clés (veuillez les séparer avec des virgules)"
     ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des mots-clés"}
     ,"dashboard_edit_keywords_sheet_text_field_hint": "Veuillez entrer vos mots-clés."
@@ -173,7 +175,7 @@
     ,"text_lists_new_list_save_dialog_text_field_hint": "Par ex. Les membres de notre foyer"
     ,"@text_lists_new_list_save_dialog_text_field_hint": {"description": "l10n pour le placeholder du champ de texte, du dialogue de sauvegarde de liste."}
     ,"text_lists_new_list_empty_list_name_message": "Absence de nom de liste"
-    ,"@text_lists_new_list_empty_list_name_message": {"description": "Le message en cas d'enregistrement sans nom de liste"}
+    ,"@text_lists_new_list_empty_list_name_message": {"description": "Le message d'erreur en cas d'enregistrement sans nom de liste"}
     ,"text_lists_new_list_same_list_name_message": " existe déjà.\nVeuillez choisir un autre nom."
     ,"@text_lists_new_list_same_list_name_message": {"description": "Le message en cas d'enregistrement avec nom de liste déjà existant"}
     ,"text_lists_new_list_close_tooltip": "Veuillez cliquer pour retourner à la page précédente"

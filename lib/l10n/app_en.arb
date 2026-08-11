@@ -119,7 +119,7 @@
   ,"dashboard_filter_by_keywords": "Filter by Keywords"
   ,"@dashboard_filter_by_keywords": {"description": "The 'Filter by Keywords' label"}
   ,"dashboard_keywords": "Keywords:"
-  ,"@dashboard_keywords": {"description": "Text for the 'Keywords: ' prefix for the dashboard items"}
+  ,"@dashboard_keywords": {"description": "Text for the 'Keywords:' prefix for the dashboard items"}
   ,"dashboard_bulk_delete": "Delete selected data"
   ,"@dashboard_bulk_delete": {"description": "l10n for the 'Delete selected data' text"}
   ,"dashboard_preview_mixed_languages_error_message": "Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data."
@@ -140,6 +140,8 @@
   ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Title Edition' label text"}
   ,"dashboard_edit_title_sheet_text_field_hint": "Please enter your title."
   ,"@dashboard_edit_title_sheet_text_field_hint": {"description": "l10n for the 'Title Edition' text field hint"}
+  ,"dashboard_edit_title_error_empty_title": "Title cannot be empty"
+  ,"@dashboard_edit_title_error_empty_title": {"description": "l10n for the 'Title cannot be empty' error message"}
   ,"dashboard_edit_keywords_sheet_label_text": "Keywords Edition (please separate with commas)"
   ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n for the 'Keywords Edition' label text"}
   ,"dashboard_edit_keywords_sheet_text_field_hint": "Please enter your keywords."

@@ -3,7 +3,9 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/ca_questions_fields_localized.dart";
+import "package:journeyers/l10n/localized_ca_questions_fields.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
@@ -11,7 +13,6 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_questions_fields.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
@@ -19,15 +20,12 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
-  
-// Labels of the level 2 and 3 titles
-final q = CAQuestionsFields();
+
 
 // ─── CA  ───────────────────────────────────────────────────────────────
 // ───────────────────────────────────────────────────────────────────────
@@ -143,7 +141,7 @@ final q = CAQuestionsFields();
     // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
     // Opening the individual perspective expansion tile
       // Getting the build context
-    final context = tester.element(find.byType(Scaffold));
+    final context = tester.element(find.byType(Scaffold).first);
     await caOpenIndividualExpansionTile(context, tester);  
 
     // 1. Searching for all custom checkboxes
@@ -337,8 +335,8 @@ final q = CAQuestionsFields();
     List<String> groupStringValues = const ["", "", "", "", ""]
   }) async
   {
-    // Accessin the localized form data
-    CAQuestionsFieldsLocalized? qfl = .new(context);
+    // Accessing the localized form data
+    LocalizedCAQuestionsFields? qfl = .new(context);
 
     if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
@@ -346,8 +344,10 @@ final q = CAQuestionsFields();
     // The total number of expansion tile for the individual perspective
     int totalIndivExpansionTiles = 0;
 
+    await tester.pump(const Duration(seconds: 2));
     // Opening the preview
-    var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip");
+    var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false);
+    await tester.ensureVisible(previewFinder);
     await tester.tap(previewFinder);
     await tester.pumpAndSettle();
 
@@ -414,7 +414,7 @@ final q = CAQuestionsFields();
                   "(The expansion tile is included. The first index is skipped.)");
       }
 
-      if (qfl.level3TitlesIndividual.contains(expansionTileTitle)) 
+      if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) 
       {        
         totalIndivExpansionTiles++;
       }
@@ -447,11 +447,11 @@ final q = CAQuestionsFields();
         if (testingDebug) pu.printd("Testing Debug: expansionTileIndex: $expansionTileIndex, listTileIndex: $listTileIndex");
 
         // Testing if the expansion tile is related to the individual perspective
-        if (qfl.level3TitlesIndividual.contains(expansionTileTitle))
+        if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle))
         {
           // The last individual perspective expansion tile is for a text field only data
           // For a text field only, the notes are in the title
-          if (expansionTileTitle == qfl.level3TitleAnotherIssue  && listTileIndex == 1)
+          if (expansionTileTitle == qfl.level3TitleAnotherIssueForDataSaving  && listTileIndex == 1)
           {
             expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
           }
@@ -471,8 +471,9 @@ final q = CAQuestionsFields();
         {
           // The first group/teams perspective expansion tile is for a text field only data
           // For a text field only, the notes are in the title
-          if (expansionTileTitle == qfl.level3TitleGroupsProblematics  && listTileIndex == 1)
+          if (expansionTileTitle == qfl.level3TitleGroupsProblematicsForDataSaving  && listTileIndex == 1)
           {
+            if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
             expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the title with the segmented button answers
@@ -482,12 +483,14 @@ final q = CAQuestionsFields();
              
             if(segButtonValue.isNotEmpty)
             {
+              if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
               var segButtonAnswersWithNotes = "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
                                             "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
               expect(listTileTitle, segButtonAnswersWithNotes);
             }
             else
             {
+              if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
               expect(listTileTitle,  AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:");
             }
           }             
@@ -849,44 +852,48 @@ final q = CAQuestionsFields();
   // Method used to test a GPS preview.
   Future<void> gpsTestPreview
   ({
+    required BuildContext context,
     required WidgetTester tester, 
     required String title,
     required List<String> ideasList
   }) async
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+    LocalizedGPSStrings lgps = .new(context);
 
     // Searching the preview tooltip for the session
-      var listItemFinder = find.ancestor
-                          (
-                            of: find.text("$title$gpsTitleSuffix"), 
-                            matching: find.byType(SessionsListItem)
-                          );
+    var listItemFinder = find.ancestor
+                        (
+                          of: find.text("$title${lgps.gpsTitleSuffix}"), 
+                          matching: find.byType(SessionsListItem)
+                        );
 
-      var previewTooltipFinder = find.descendant
-      (
-        of: listItemFinder,       
-        matching: find.byTooltip(previewTooltipLabel)
-      );
+    var previewTooltipFinder = find.descendant
+    (
+      of: listItemFinder,       
+      matching: find.byTooltip(lds.previewTooltipLabel)
+    );
 
-      // Opening the preview
-      await tester.tap(previewTooltipFinder);
-      await tester.pumpAndSettle();
+    // Opening the preview
+    await tester.tap(previewTooltipFinder);
+    await tester.pumpAndSettle();
 
-      // Searching for the title
-      var titleFinder = find.textContaining(title);
-        // Verifying the title present
-      expect (titleFinder, findsNWidgets(2));
+    // Searching for the title
+    var titleFinder = find.textContaining(title);
+      // Verifying the title present
+    expect (titleFinder, findsNWidgets(2));
 
-      // Searching for the date
-      dateForTestingIndex = 0;
-      expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
-        
-      // Verifying the ideas present
-      for (var idea in ideasList)
-      {
-        expect(find.text(idea), findsOne);
-      }
+    // Searching for the date
+    dateForTestingIndex = 0;
+    expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+      
+    // Verifying the ideas present
+    for (var idea in ideasList)
+    {
+      expect(find.text(idea), findsOne);
     }
+  }
 
 // ─── GPS: GOING FROM PAGE TO PAGE/OVERLAY ───────────────────────────────────────────────────────────────
 

@@ -13,7 +13,6 @@ import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/1_dashboard_title.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart";
@@ -403,7 +402,7 @@ class DashboardPageState extends State<DashboardPage>
                               textFiedHint:  Text(AppLocalizations.of(context)?.dashboard_edit_title_sheet_text_field_hint ?? "Issue with the l10n for the 'Title Edition' text field hint"),
                               errorTextTriggerFunction: onConfirmFunctionEmptyValue,
                               errorTextTriggerFunctionParameter: _titleTec.text.trim(),
-                              textFieldErrorText: emptyTitleEditError,
+                              textFieldErrorText: AppLocalizations.of(context)?.dashboard_edit_title_error_empty_title ?? "Issue with the l10n for the 'Title cannot be empty' error message",
                               onConfirmSuccessfulCallbackFunction: (String value) async
                                 {
                                   // New title from the controller

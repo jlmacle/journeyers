@@ -257,6 +257,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez entrer un titre.';
 
   @override
+  String get dashboard_edit_title_error_empty_title => 'Absence de titre';
+
+  @override
   String get dashboard_edit_keywords_sheet_label_text =>
       'Édition des mots-clés (veuillez les séparer avec des virgules)';
 
@@ -630,6 +633,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get dashboard_edit_title_sheet_text_field_hint =>
       'Veuillez entrer un titre.';
+
+  @override
+  String get dashboard_edit_title_error_empty_title => 'Absence de titre';
 
   @override
   String get dashboard_edit_keywords_sheet_label_text =>

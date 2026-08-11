@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 
 void main() {
@@ -31,6 +32,7 @@ void main() {
           MaterialApp(
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
+            locale: const Locale(testingLocaleOption),
             home: Scaffold(
               body: SessionsListItem(
                 sessionMetadata: testMetadata,
@@ -56,6 +58,11 @@ void main() {
             ),
           ),
         );
+        await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
 
         // Verifies title
         expect(find.text(title), findsOneWidget);
@@ -66,7 +73,7 @@ void main() {
         expect(dateWidget.data, "($date)");
         
         // Verifies keywords
-        expect(find.text("Keywords: Kw, Kw2"), findsOneWidget);
+        expect(find.text("${lds.keywordsLabel} Kw, Kw2"), findsOneWidget);
       });
 
       // "Finds the preview tooltip label"
@@ -101,8 +108,12 @@ void main() {
           ),
         );
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Verifies preview tooltip present
-        expect(find.byTooltip(previewTooltipLabel), findsOneWidget);      
+        expect(find.byTooltip(lds.previewTooltipLabel), findsOneWidget);      
       });
 
       // "Finds the edit tooltip label"
@@ -137,8 +148,12 @@ void main() {
           ),
         );
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Verifies edit tooltip present
-        expect(find.byTooltip(editFromDashboardItemTooltipLabel), findsOneWidget);      
+        expect(find.byTooltip(lds.editFromDashboardItemTooltipLabel), findsOneWidget);      
       });
 
       // "Finds the keywords tooltip label"
@@ -172,8 +187,13 @@ void main() {
             ),
           ),
         );
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Verifies keywords tooltip present
-        expect(find.byTooltip(keywordsTooltipLabel), findsOneWidget);      
+        expect(find.byTooltip(lds.keywordsTooltipLabel), findsOneWidget);      
       });
 
       // "Finds the delete tooltip label"
@@ -208,8 +228,12 @@ void main() {
           ),
         );
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Verifies delete tooltip present
-        expect(find.byTooltip(deleteTooltipLabel), findsOneWidget);      
+        expect(find.byTooltip(lds.deleteTooltipLabel), findsOneWidget);      
       });
     });
     
@@ -247,8 +271,12 @@ void main() {
           ),
         );
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Preview tooltip 
-        var previewTooltipFinder = find.byTooltip(previewTooltipLabel);
+        var previewTooltipFinder = find.byTooltip(lds.previewTooltipLabel);
         await tester.tap(previewTooltipFinder);
         await tester.pumpAndSettle();
         // Verifies title level 2 present
@@ -287,8 +315,12 @@ void main() {
           ),
         );
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Preview tooltip 
-        var previewTooltipFinder = find.byTooltip(previewTooltipLabel);
+        var previewTooltipFinder = find.byTooltip(lds.previewTooltipLabel);
         await tester.tap(previewTooltipFinder);
         await tester.pumpAndSettle();
         // Verifies text
@@ -363,12 +395,16 @@ void main() {
           ),
         );
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+
         // Keywords tooltip 
-        var keywordsTooltipFinder = find.byTooltip(keywordsTooltipLabel);
+        var keywordsTooltipFinder = find.byTooltip(lds.keywordsTooltipLabel);
         await tester.tap(keywordsTooltipFinder);
         await tester.pumpAndSettle();
         // Verifies text field label present
-        expect(find.text(keywordsTextFieldLabel), findsOneWidget);
+        expect(find.text(lds.keywordsTextFieldLabel), findsOneWidget);
       });
 
 
@@ -403,13 +439,18 @@ void main() {
             ),
           ),
         );
+        await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
 
         // Keywords data 
         var keywordsDataFinder = find.byKey(const Key("session-keywords-0"));
         await tester.tap(keywordsDataFinder);
         await tester.pumpAndSettle();
         // Verifies text field label present
-        expect(find.text(keywordsTextFieldLabel), findsOneWidget);
+        expect(find.text(lds.keywordsTextFieldLabel), findsOneWidget);
       });
     });
   

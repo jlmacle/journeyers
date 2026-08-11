@@ -10,7 +10,7 @@ import "package:file_picker/file_picker.dart";
 import "package:path/path.dart" as path;
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/ca_questions_fields_localized.dart";
+import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart";
@@ -74,53 +74,55 @@ class DTOCAForm
 
   // ─── DATA STRUCTURE BUILDING : LINKEDHASHMAP : beginning ───────────────────────────────────────
   /// Method used to gather the form data into a LinkedHashMap.
-  Future<LinkedHashMap<String, Object> > dataStructureBuilding(BuildContext context) async {
-  CAQuestionsFieldsLocalized? qfl = .new(context);
-  
-  final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
+  Future<LinkedHashMap<String, Object> > dataStructureBuilding(BuildContext context) async 
+  {
+    // Accessing the localized data
+    LocalizedCAQuestionsFields? qfl = .new(context);
+    
+    final LinkedHashMap<String, Object> enteredData = LinkedHashMap<String, Object>.from({});
 
-  // Individual perspective
-  final individualData = LinkedHashMap<String, Object>.from
-  ({
-     lineReturnToSpace(lineReturnToSpace(qfl.level2TitleIndividual)): 
-      LinkedHashMap<String, LinkedHashMap<String, Object>>.from
-      ({
-        lineReturnToSpace(qfl.level3TitleBalanceIssue): 
+    // Individual perspective
+    final individualData = LinkedHashMap<String, Object>.from
+    ({
+      lineReturnToSpace(qfl.level2TitleIndividual): 
         LinkedHashMap<String, LinkedHashMap<String, Object>>.from
         ({
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem1):  await _checkboxDataToMap(context, indivBalanceStudiesHousehold),
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem2):  await _checkboxDataToMap(context, indivBalanceAccessingIncomeHousehold),
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem3):  await _checkboxDataToMap(context, indivBalanceEarningIncomeHousehold),
-          lineReturnToSpace(qfl.level3TitleBalanceIssueItem4):  await _checkboxDataToMap(context, indivBalanceHelpingOthersHousehold),
-        }),
+          lineReturnToSpace(qfl.level3TitleBalanceIssue): 
+          LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+          ({
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem1):  await _checkboxDataToMap(context, indivBalanceStudiesHousehold),
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem2):  await _checkboxDataToMap(context, indivBalanceAccessingIncomeHousehold),
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem3):  await _checkboxDataToMap(context, indivBalanceEarningIncomeHousehold),
+            lineReturnToSpace(qfl.level3TitleBalanceIssueItem4):  await _checkboxDataToMap(context, indivBalanceHelpingOthersHousehold),
+          }),
 
-        lineReturnToSpace(qfl.level3TitleWorkplaceIssue): 
-        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
-        ({
-          lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem1):  await _checkboxDataToMap(context, indivAtWorkMoreAppreciated),
-          lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem2):  await _checkboxDataToMap(context, indivAtWorkRemainingAppreciated),
-        }),
+          lineReturnToSpace(qfl.level3TitleWorkplaceIssue): 
+          LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+          ({
+            lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem1):  await _checkboxDataToMap(context, indivAtWorkMoreAppreciated),
+            lineReturnToSpace(qfl.level3TitleWorkplaceIssueItem2):  await _checkboxDataToMap(context, indivAtWorkRemainingAppreciated),
+          }),
 
-        lineReturnToSpace(qfl.level3TitleLegacyIssue): 
-        LinkedHashMap<String, LinkedHashMap<String, Object>>.from
-        ({
-          lineReturnToSpace(qfl.level3TitleLegacyIssueItem1):  await _checkboxDataToMap(context, indivBetterLegacies),
+          lineReturnToSpace(qfl.level3TitleLegacyIssueForDataSaving): 
+          LinkedHashMap<String, LinkedHashMap<String, Object>>.from
+          ({
+            lineReturnToSpace(qfl.level3TitleLegacyIssueItem1):  await _checkboxDataToMap(context, indivBetterLegacies),
+          }),
+          
+          lineReturnToSpace(qfl.level3TitleAnotherIssueForDataSaving): LinkedHashMap<String, Object>.from
+          ({
+            lineReturnToSpace(qfl.labelTextField): indivAnotherIssueStr,
+          }),
         }),
-        
-        lineReturnToSpace(qfl.level3TitleAnotherIssue): LinkedHashMap<String, Object>.from
-        ({
-          lineReturnToSpace(qfl.labelTextField): indivAnotherIssueStr,
-        }),
-      }),
-    });
+      });
 
-    // Groups/teams perspective
-  final groupData = LinkedHashMap<String, Object>.from
+      // Groups/teams perspective
+    final groupData = LinkedHashMap<String, Object>.from
     ({
       lineReturnToSpace(qfl.level2TitleGroup): 
       LinkedHashMap<String, LinkedHashMap<String, Object>>.from
       ({
-        lineReturnToSpace(qfl.level3TitleGroupsProblematics): LinkedHashMap<String, Object>.from({lineReturnToSpace(qfl.labelTextField): groupProblemsToSolveStr}),
+        lineReturnToSpace(qfl.level3TitleGroupsProblematicsForDataSaving): LinkedHashMap<String, Object>.from({lineReturnToSpace(qfl.labelTextField): groupProblemsToSolveStr}),
 
         lineReturnToSpace(qfl.level3TitleSameProblem):          await _segmentedDataToMap(context, groupSameProblemsToSolve),
 
@@ -150,7 +152,7 @@ class DTOCAForm
   // The text value is omitted (left empty) when the checkbox is unchecked.
   Future<LinkedHashMap<String, String>> _checkboxDataToMap(BuildContext context, DTOCheckboxWithTextField f) async
   {
-      CAQuestionsFieldsLocalized? qfl = .new(context);
+      LocalizedCAQuestionsFields? qfl = .new(context);
 
       return LinkedHashMap<String, String>.from({
         lineReturnToSpace(qfl.labelCheckbox):  "${f.checked}",
@@ -163,7 +165,7 @@ class DTOCAForm
   // Both values are omitted (left empty) when nothing is selected.
   Future<LinkedHashMap<String, String>> _segmentedDataToMap(BuildContext context, DTOSegmentedButtonWithTextField f) async 
   {
-    CAQuestionsFieldsLocalized? qfl = .new(context);
+    LocalizedCAQuestionsFields? qfl = .new(context);
 
     return LinkedHashMap<String, String>.from({
       // Sorting the options before saving
@@ -186,7 +188,7 @@ class DTOCAForm
     required LinkedHashMap<String, Object> checkboxWithTextFieldData,
   }) async 
   {
-    CAQuestionsFieldsLocalized? qfl = .new(context); 
+    LocalizedCAQuestionsFields? qfl = .new(context); 
 
     List<Object> checkboxPreCSVData = [];
 
@@ -225,7 +227,7 @@ class DTOCAForm
     required LinkedHashMap<String, String> segmentedButtonWithTextFieldData,
   }) async
   {
-    CAQuestionsFieldsLocalized? qfl = .new(context); 
+    LocalizedCAQuestionsFields? qfl = .new(context); 
 
     List<List<String?>> segmentedButtonPreCSVData = [];
 
@@ -252,7 +254,7 @@ class DTOCAForm
     required LinkedHashMap<String, Object?> textFieldData,
   }) async
   {
-    CAQuestionsFieldsLocalized? qfl = .new(context); 
+    LocalizedCAQuestionsFields? qfl = .new(context); 
 
     List<List<String>> textFieldPreCSVData = [];
 
@@ -273,7 +275,7 @@ class DTOCAForm
     required LinkedHashMap<String, Object> perspectiveData,
   }) async 
   {
-    CAQuestionsFieldsLocalized? qfl = .new(context); 
+    LocalizedCAQuestionsFields? qfl = .new(context); 
 
     List<List<String?>> preCSVData = [];
 
@@ -286,7 +288,7 @@ class DTOCAForm
       LinkedHashMap<String, LinkedHashMap<String, Object>> titleLevel2Or3DataAsLinkedHashMap,
     ) async
     {
-      CAQuestionsFieldsLocalized? qfl = .new(context);
+      LocalizedCAQuestionsFields? qfl = .new(context);
 
       if (lineReturnToSpace(qfl.questionsToInputItemsMapping[itemOrTitleLabel]) == lineReturnToSpace(qfl.labelCheckbox)) 
       {
@@ -412,7 +414,7 @@ class DTOCAForm
     required List<List<String?>> preCSVData
   }) async
   {   
-    CAQuestionsFieldsLocalized? qfl = .new(context);
+    LocalizedCAQuestionsFields? qfl = .new(context);
 
     // ─── ANALYZING THE DATA FOR CHECKBOXES WITH "FALSE", AND TEXT FIELDS WITH EMPTY NOTES ───────────────────────────────────────
     for (var index = 0; index < preCSVData.length; index++) {
@@ -812,7 +814,7 @@ static void _parseIndividualFromRows
   List<(String, String)> rows
 ) 
 {
-  CAQuestionsFieldsLocalized? qfl = .new(context);
+  LocalizedCAQuestionsFields? qfl = .new(context);
 
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
@@ -861,7 +863,7 @@ static void _parseGroupFromRows
   DTOCAForm dto, List<(String, String)> rows
 ) 
 {
-  CAQuestionsFieldsLocalized? qfl = .new(context); 
+  LocalizedCAQuestionsFields? qfl = .new(context); 
   
   for (int i = 0; i < rows.length; i++) {
     final (marker, content) = rows[i];
