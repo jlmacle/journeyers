@@ -10,13 +10,13 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/pages/homepage.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/dashboard_const_strings.dart" show gpsTitleSuffix;
 
 import "externalized_code/externalized_testing_code.dart";
 
@@ -115,6 +115,9 @@ Future<void> main() async {
         {
           // Pumping the app
           await pumpApp(tester);
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -221,6 +224,7 @@ Future<void> main() async {
           // Submitting the GPS data
           await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
 
+          await tester.pump(const Duration(seconds: 5));
           // ── 5. VERIFYING THE CA DATA ON THE GPS PAGE  ───
           // ────────────────────────────────────────────────
 
@@ -228,7 +232,7 @@ Future<void> main() async {
           expect(find.byType(GPSPage), findsOne);
 
           // Searching for the title imported from the CA 
-          expect(find.text("$testAnalysisTitle1$gpsTitleSuffix"), findsOne);
+          expect(find.text("$testAnalysisTitle1${lgps.gpsTitleSuffix}"), findsOne);
 
           // Searching for the keywords imported from the CA 
           expect(find.text(kwCompanionship), findsOne);
