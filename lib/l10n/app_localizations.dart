@@ -503,6 +503,12 @@ abstract class AppLocalizations {
   /// **'Please enter your title.'**
   String get dashboard_edit_title_sheet_text_field_hint;
 
+  /// l10n for the 'Title cannot be empty.' error message
+  ///
+  /// In en, this message translates to:
+  /// **'Title cannot be empty.'**
+  String get dashboard_edit_title_error_empty_title;
+
   /// l10n for the 'Keywords Edition' label text
   ///
   /// In en, this message translates to:
