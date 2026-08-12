@@ -183,6 +183,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_default_title => 'Problem To Solve';
 
   @override
+  String get gps_process_add_participants_tooltip =>
+      'Please click to add participants to the problem-solving session';
+
+  @override
+  String get gps_process_edit_identifiers_tooltip =>
+      'Please click to edit the participants identifiers';
+
+  @override
   String get gps_process_checklist_title => 'Checklist';
 
   @override
@@ -194,10 +202,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
-
-  @override
-  String get gps_process_edit_identifiers_tooltip =>
-      'Please click to edit the participants identifiers';
 
   @override
   String get folder_picker_on_mobile =>
@@ -556,6 +560,14 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get gps_process_default_title => 'Problem To Solve';
 
   @override
+  String get gps_process_add_participants_tooltip =>
+      'Please click to add participants to the problem-solving session';
+
+  @override
+  String get gps_process_edit_identifiers_tooltip =>
+      'Please click to edit the participants identifiers';
+
+  @override
   String get gps_process_checklist_title => 'Checklist';
 
   @override
@@ -567,10 +579,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
-
-  @override
-  String get gps_process_edit_identifiers_tooltip =>
-      'Please click to edit the participants identifiers';
 
   @override
   String get folder_picker_on_mobile =>

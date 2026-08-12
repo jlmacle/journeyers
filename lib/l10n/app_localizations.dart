@@ -377,6 +377,18 @@ abstract class AppLocalizations {
   /// **'Problem To Solve'**
   String get gps_process_default_title;
 
+  /// l10n for the 'Please click to add participants to the problem-solving session' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to add participants to the problem-solving session'**
+  String get gps_process_add_participants_tooltip;
+
+  /// l10n for the 'Please click to edit the participants identifiers' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to edit the participants identifiers'**
+  String get gps_process_edit_identifiers_tooltip;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:
@@ -400,12 +412,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close checklist'**
   String get gps_process_checklist_close_overlay_tooltip;
-
-  /// l10n for the 'Please click to edit the participants identifiers' tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Please click to edit the participants identifiers'**
-  String get gps_process_edit_identifiers_tooltip;
 
   /// Label for folder selection/creation, for app storage
   ///
