@@ -93,7 +93,8 @@ class GPSProcessState extends State<GPSProcess>
   // TITLE for the group problem-solving process
   // TextEditingController for entering a new title
   final TextEditingController _titleTec = .new();
-    List<Map<String, dynamic>> _previousCAMetadata = [];
+  List<Map<String, dynamic>> _previousCAMetadata = [];
+  var _isTitleTextFieldUnfocused = true;
 
   // ─── STAKEHOLDER IDENTIFIERS related data ───────────────────────────────────────
   final GlobalKey<GPSGroupMoodsState> _groupMoods1Key = GlobalKey(debugLabel: "group-moods-1");
@@ -340,6 +341,8 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
           sessionTitleTec: _titleTec,
           previousSessions: _previousCAMetadata,
           onSessionSelected: _handleCAMetadataSelection,
+          onTextFieldFocused: () => setState((){_isTitleTextFieldUnfocused = false;}),
+          onTextFieldLosingFocus: () => setState(() {_isTitleTextFieldUnfocused = true;}),
         ),
         const Divider(),
 
@@ -356,59 +359,68 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: 
                   [
-                    _buildHeaderButton
-                    (
-                      tooltipMessage: AppLocalizations.of(context)?.gps_process_add_participants_tooltip ?? "Issue with the l10n for the 'Please click to add participants to the problem-solving session' tooltip",
-                      text: addEmoji, 
-                      color: Colors.white,                       
-                      onPressed: 
-                        () => Navigator.of(context).push
-                        (
-                          MaterialPageRoute<void>(
-                            builder: (_) => NewParticipantsListOrLoadingPage
-                            (
-                              onParticipantsLoadedCallbackFunction:
-                              (participants)
-                              {
-                                // Re-setting previous data
-                                _identifiersCol1.clear();
-                                _identifiersColors1.clear();
-                                _identifiersCol2.clear();
-                                _identifiersColors2.clear();
-
-                                setState(() {
-                                  for (var index = 0; index < participants.length; index++)
-                                  {
-                                    if (index%2 == 0) 
-                                    {
-                                      _identifiersCol1.add(participants[index]);
-                                      _identifiersColors1.add(greenShade900);
-                                    
-                                    }
-                                    else 
-                                    {
-                                      _identifiersCol2.add(participants[index]);
-                                      _identifiersColors2.add(greenShade900);
-                                    }
-                                  }
-                                });
-                                
-                              } ,
-                            ) 
-                            ),
-                        ),
-
-                      screenWidthInInches: screenWidthInInches
-                    ),
-                    if (_isModificationMode)
+                    if(_isTitleTextFieldUnfocused)...
+                    [
                       _buildHeaderButton
                       (
-                        tooltipMessage: "",
-                        text:  _isDeleteMode ? "Edit" : singleDeletionLabel,                        
-                        color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
-                        onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
+                        tooltipMessage: AppLocalizations.of(context)?.gps_process_add_participants_tooltip ?? "Issue with the l10n for the 'Please click to add participants to the problem-solving session' tooltip",
+                        text: addEmoji, 
+                        color: Colors.white,                       
+                        onPressed: 
+                          () => Navigator.of(context).push
+                          (
+                            MaterialPageRoute<void>(
+                              builder: (_) => NewParticipantsListOrLoadingPage
+                              (
+                                onParticipantsLoadedCallbackFunction:
+                                (participants)
+                                {
+                                  // Re-setting previous data
+                                  _identifiersCol1.clear();
+                                  _identifiersColors1.clear();
+                                  _identifiersCol2.clear();
+                                  _identifiersColors2.clear();
+
+                                  setState(() {
+                                    for (var index = 0; index < participants.length; index++)
+                                    {
+                                      if (index%2 == 0) 
+                                      {
+                                        _identifiersCol1.add(participants[index]);
+                                        _identifiersColors1.add(greenShade900);                                      
+                                      }
+                                      else 
+                                      {
+                                        _identifiersCol2.add(participants[index]);
+                                        _identifiersColors2.add(greenShade900);
+                                      }
+                                    }
+                                  });
+                                  
+                                } ,
+                              ) 
+                              ),
+                          ),
+
                         screenWidthInInches: screenWidthInInches
-                      ),
+                      ),]
+                      
+                    else
+                      const SizedBox(height: 0,width: 0,),
+                    if (_isModificationMode)
+                      if (_isTitleTextFieldUnfocused)...
+                      [
+                        _buildHeaderButton
+                        (
+                          tooltipMessage: "",
+                          text:  _isDeleteMode ? "Edit" : singleDeletionLabel,                        
+                          color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
+                          onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
+                          screenWidthInInches: screenWidthInInches
+                        ),
+                      ]
+                      else
+                        const SizedBox(height: 0,width: 0,),
                     // GPSGroupMoods widget (column 1)
                     Expanded
                     (
@@ -486,41 +498,48 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
               Expanded(
                 child: Column(
                   children: [
-                    _buildHeaderButton
-                    (
-                      tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
-                      text: _isModificationMode ? AppLocalizations.of(context)?.l10n_done ?? "Issue with the l10n for 'Done'" : editEmoji, 
-                      color: _isModificationMode ? orangeShade900 : Colors.white, 
-                      onPressed:_isModificationMode 
-                        ? () => setState(() {                      
-                            _isEditMode = false;
-                            _isDeleteMode = false;
-                            _isModificationMode = !_isModificationMode;                      
-                          })
-                        : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;}),
-                        screenWidthInInches: screenWidthInInches
-                    ),
-                    if (_isModificationMode)
+                    if (_isTitleTextFieldUnfocused)...
+                    [
                       _buildHeaderButton
                       (
-                        tooltipMessage: "",
-                        text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
-                        onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
-                        screenWidthInInches: screenWidthInInches
+                        tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
+                        text: _isModificationMode ? AppLocalizations.of(context)?.l10n_done ?? "Issue with the l10n for 'Done'" : editEmoji, 
+                        color: _isModificationMode ? orangeShade900 : Colors.white, 
+                        onPressed:_isModificationMode 
+                          ? () => setState(() {                      
+                              _isEditMode = false;
+                              _isDeleteMode = false;
+                              _isModificationMode = !_isModificationMode;                      
+                            })
+                          : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;}),
+                          screenWidthInInches: screenWidthInInches
                       ),
-                    // GPSGroupMoods widget (column 2)
-                    Expanded
-                    (
-                      child: GPSGroupMoods
+                      
+                      if (_isModificationMode)
+                        _buildHeaderButton
+                        (
+                          tooltipMessage: "",
+                          text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
+                          onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
+                          screenWidthInInches: screenWidthInInches
+                        ),
+                      // GPSGroupMoods widget (column 2)
+                      Expanded
                       (
-                        key: _groupMoods2Key,
-                        groupMoodsKey1: _groupMoods1Key,groupMoodsKey2: _groupMoods2Key,
-                        columnNumber: 2, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
-                        identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
-                        isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
-                        gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
+                        child: GPSGroupMoods
+                        (
+                          key: _groupMoods2Key,
+                          groupMoodsKey1: _groupMoods1Key,groupMoodsKey2: _groupMoods2Key,
+                          columnNumber: 2, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
+                          identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
+                          isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
+                          gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
+                        )
                       )
-                    )
+                      
+                    ]
+                    else
+                      const SizedBox(height: 0,width: 0,)
                   ],
                 ),
               ),
@@ -577,7 +596,12 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: color, foregroundColor: appBarWhite, padding: (screenWidthInInches <2.7) ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+        style: ElevatedButton.styleFrom
+        (
+          backgroundColor: color, 
+          foregroundColor: appBarWhite, 
+          padding: (screenWidthInInches <2.7) ? EdgeInsets.zero : const EdgeInsets.symmetric(horizontal: 20, vertical: 10)
+        ),
         onPressed: onPressed,
         child: 
         Tooltip(

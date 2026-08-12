@@ -22,6 +22,8 @@ void main()
               sessionTitleTec: tfec,
               previousSessions: const [],
               onSessionSelected: (_){},
+              onTextFieldFocused: (){},
+              onTextFieldLosingFocus: (){},
             ),
           ),
         ),

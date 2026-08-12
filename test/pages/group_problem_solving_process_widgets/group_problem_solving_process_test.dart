@@ -50,6 +50,8 @@ void main()
             onSessionSelected:(_) {},
             previousSessions: const [],
             sessionTitleTec: TextEditingController(),
+            onTextFieldFocused: () {},
+            onTextFieldLosingFocus: () {},
           ),
         ),
       ),
