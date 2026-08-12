@@ -17,6 +17,10 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
   final List<Map<String, dynamic>> previousSessions;
   /// A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
+  /// A callback function used when the text field is focused.
+  final VoidCallback onTextFieldFocused;
+  /// A callback function used when the text field loses focus.
+  final VoidCallback onTextFieldLosingFocus;
 
   const GPSProblemToSolveDeclaration({
     super.key,
@@ -24,14 +28,27 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
     required this.sessionTitleTec,
     required this.previousSessions,
     required this.onSessionSelected,
+    required this.onTextFieldFocused,
+    required this.onTextFieldLosingFocus,
   });
 
   @override
   State<GPSProblemToSolveDeclaration> createState() => _GPSProblemToSolveDeclarationState();
 }
 
-class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclaration> {
+class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclaration> 
+{
   bool _isEditing = false;
+
+  final FocusNode _textFieldFocusNode = .new();
+
+  void _onFocusChange()
+  {
+    if (_textFieldFocusNode.hasFocus)
+    {
+      widget.onTextFieldFocused();
+    }
+  }
 
   @override
   void initState() {
@@ -40,7 +57,17 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSProblemToSolveDeclaration");
 
+    // Verifying the focus present/absent to remove the buttons if present 
+    // (RenderFlex exception on small screen otherwise)
+    _textFieldFocusNode.addListener(_onFocusChange);
+
     if (widget.titleWhenEdition != "") widget.sessionTitleTec.text = widget.titleWhenEdition;
+  }
+
+  @override
+  void dispose() {
+    _textFieldFocusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -55,16 +82,25 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 key: const Key("problemToSolveField"),
                 controller: widget.sessionTitleTec,
                 autofocus: true,
+                focusNode: _textFieldFocusNode,
                 decoration: InputDecoration
                 (
                   hintText: gpsProcessTitleTextFieldHint,
                   suffixIcon: IconButton
                   (
                     icon: const Icon(Icons.check, color: greenShade900),
-                    onPressed: () => setState(() => _isEditing = false),
+                    onPressed: ()
+                    {                      
+                      setState(() => _isEditing = false);
+                      widget.onTextFieldLosingFocus();
+                    },
                   ),
                 ),
-                onSubmitted: (_) => setState(() => _isEditing = false),
+                onSubmitted: (_) 
+                { 
+                      setState(() => _isEditing = false);
+                      widget.onTextFieldLosingFocus();
+                },
               ),
               // Suggestions List from previous context analyses session data
               if (widget.previousSessions.isNotEmpty)
@@ -125,7 +161,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
 
                     style: 
                       const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
+                  ),
                 ),
               ),
               

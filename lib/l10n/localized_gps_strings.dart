@@ -10,13 +10,16 @@ class LocalizedGPSStrings
 
   var ideasListTitle = "";
 
+  // GPSProcess
+  var singleParticipantDeletionLabel = "Clear\nOne";
+
   LocalizedGPSStrings(BuildContext context)
   { 
     _l10n = AppLocalizations.of(context);
        
     gpsTitleSuffix = _l10n?.gps_title_suffix ?? "Issue with the title suffix for a problem-solving session.";
   
-    ideasListTitle = "List of ideas";
+    singleParticipantDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_one ?? "Issue with the l10n for 'Clear\nOne'";
   }
 
 }
