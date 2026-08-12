@@ -358,8 +358,9 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                   [
                     _buildHeaderButton
                     (
-                      tooltipMessage: "",
-                      text: addEmoji, color: Colors.white,                       
+                      tooltipMessage: AppLocalizations.of(context)?.gps_process_add_participants_tooltip ?? "Issue with the l10n for the 'Please click to add participants to the problem-solving session' tooltip",
+                      text: addEmoji, 
+                      color: Colors.white,                       
                       onPressed: 
                         () => Navigator.of(context).push
                         (

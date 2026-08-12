@@ -377,6 +377,18 @@ abstract class AppLocalizations {
   /// **'Problem To Solve'**
   String get gps_process_default_title;
 
+  /// l10n for the 'Please click to add participants to the problem-solving session' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to add participants to the problem-solving session'**
+  String get gps_process_add_participants_tooltip;
+
+  /// l10n for the 'Please click to edit the participants identifiers' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to edit the participants identifiers'**
+  String get gps_process_edit_identifiers_tooltip;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:
@@ -400,12 +412,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Close checklist'**
   String get gps_process_checklist_close_overlay_tooltip;
-
-  /// l10n for the 'Please click to edit the participants identifiers' tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Please click to edit the participants identifiers'**
-  String get gps_process_edit_identifiers_tooltip;
 
   /// Label for folder selection/creation, for app storage
   ///
@@ -437,7 +443,7 @@ abstract class AppLocalizations {
   /// **'Filter by Keywords'**
   String get dashboard_filter_by_keywords;
 
-  /// Text for the 'Keywords: ' prefix for the dashboard items
+  /// Text for the 'Keywords:' prefix for the dashboard items
   ///
   /// In en, this message translates to:
   /// **'Keywords:'**
@@ -503,10 +509,10 @@ abstract class AppLocalizations {
   /// **'Please enter your title.'**
   String get dashboard_edit_title_sheet_text_field_hint;
 
-  /// l10n for the 'Title cannot be empty.' error message
+  /// l10n for the 'Title cannot be empty' error message
   ///
   /// In en, this message translates to:
-  /// **'Title cannot be empty.'**
+  /// **'Title cannot be empty'**
   String get dashboard_edit_title_error_empty_title;
 
   /// l10n for the 'Keywords Edition' label text
