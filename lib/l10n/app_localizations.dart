@@ -389,6 +389,13 @@ abstract class AppLocalizations {
   /// **'Please click to edit the participants identifiers'**
   String get gps_process_edit_identifiers_tooltip;
 
+  /// l10n for 'Clear
+  /// One'
+  ///
+  /// In en, this message translates to:
+  /// **'Clear\nOne'**
+  String get gps_process_edit_identifiers_clear_one;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:

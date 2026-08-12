@@ -192,6 +192,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez cliquer pour éditer les identifiants de participants';
 
   @override
+  String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
+
+  @override
   String get gps_process_checklist_title => 'Check-list';
 
   @override
@@ -572,6 +575,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_edit_identifiers_tooltip =>
       'Veuillez cliquer pour éditer les identifiants de participants';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
 
   @override
   String get gps_process_checklist_title => 'Check-list';

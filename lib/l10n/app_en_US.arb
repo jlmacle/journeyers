@@ -104,6 +104,9 @@
   ,"@gps_process_add_participants_tooltip": {"description": "l10n for the 'Please click to add participants to the problem-solving session' tooltip"}
   ,"gps_process_edit_identifiers_tooltip": "Please click to edit the participants identifiers"
   ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n for the 'Please click to edit the participants identifiers' tooltip"}
+  ,"gps_process_edit_identifiers_clear_one": "Clear\nOne"
+  ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n for 'Clear\nOne'"}
+
   
   
   ,"gps_process_checklist_title": "Checklist"
@@ -213,6 +216,7 @@
   ,"@l10n_save": {"description": "l10n for 'Save'"}
   ,"l10n_done": "Done"
   ,"@l10n_done": {"description": "l10n for 'Done'"}
+  
   
 
   ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time.\n(+ Enter key)"

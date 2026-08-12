@@ -42,7 +42,6 @@ const overlayClosingTooltip = "Close overlay";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";
-const singleDeletionLabel = "Clear\nOne";
 const bulkDeletionLabel = "Clear\nAll";
 
 // NewParticipantsListKeywordsDeclaration

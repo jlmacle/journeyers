@@ -12,6 +12,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -28,7 +29,6 @@ import "package:journeyers/widgets/utility/lists/new_participants_list_or_loadin
 import "package:journeyers/widgets/utility/process/session_file_name_on_desktop_platforms.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
-// TODO: transition to dto use to finish
 /// {@category Group problem-solving}
 /// The process for a group problem-solving.
 class GPSProcess extends StatefulWidget 
@@ -110,10 +110,10 @@ class GPSProcessState extends State<GPSProcess>
   bool _isDeleteMode = false;
 
   // The list of stakeholders identifiers for the first column
-  List<String> _identifiersCol1 = [];
+  final List<String> _identifiersCol1 = [];
 
   // The list of stakeholders identifiers for the second column
-  List<String> _identifiersCol2 = [];
+  final List<String> _identifiersCol2 = [];
 
   // The list of stakeholders identifiers' colors for the first column
   final List<Color> _identifiersColors1 = [];
@@ -329,6 +329,9 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
     
  @override
   Widget build(BuildContext context) {
+    // ─── LOCALIZED STRINGS ───────────────────────────────────────
+    LocalizedGPSStrings lgps = LocalizedGPSStrings(context);
+
     final Size size = MediaQuery.sizeOf(context);
     final double screenWidthInInches = size.width / 160;
 
@@ -413,7 +416,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                         _buildHeaderButton
                         (
                           tooltipMessage: "",
-                          text:  _isDeleteMode ? "Edit" : singleDeletionLabel,                        
+                          text:  _isDeleteMode ? "Edit" : lgps.singleParticipantDeletionLabel,                        
                           color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
                           onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
                           screenWidthInInches: screenWidthInInches
@@ -456,7 +459,6 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                         child: GPSChecklist(),
                       )                        
                     ), 
-                    // TODO: to store and retrieve previous stakeholder teams
                     const SliverToBoxAdapter
                     (
                       child: Divider()                       
