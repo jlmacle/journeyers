@@ -437,7 +437,7 @@ abstract class AppLocalizations {
   /// **'Filter by Keywords'**
   String get dashboard_filter_by_keywords;
 
-  /// Text for the 'Keywords: ' prefix for the dashboard items
+  /// Text for the 'Keywords:' prefix for the dashboard items
   ///
   /// In en, this message translates to:
   /// **'Keywords:'**
@@ -503,10 +503,10 @@ abstract class AppLocalizations {
   /// **'Please enter your title.'**
   String get dashboard_edit_title_sheet_text_field_hint;
 
-  /// l10n for the 'Title cannot be empty.' error message
+  /// l10n for the 'Title cannot be empty' error message
   ///
   /// In en, this message translates to:
-  /// **'Title cannot be empty.'**
+  /// **'Title cannot be empty'**
   String get dashboard_edit_title_error_empty_title;
 
   /// l10n for the 'Keywords Edition' label text

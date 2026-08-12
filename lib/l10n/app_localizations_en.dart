@@ -254,7 +254,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter your title.';
 
   @override
-  String get dashboard_edit_title_error_empty_title => 'Title cannot be empty.';
+  String get dashboard_edit_title_error_empty_title => 'Title cannot be empty';
 
   @override
   String get dashboard_edit_keywords_sheet_label_text =>
@@ -627,7 +627,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please enter your title.';
 
   @override
-  String get dashboard_edit_title_error_empty_title => 'Title cannot be empty.';
+  String get dashboard_edit_title_error_empty_title => 'Title cannot be empty';
 
   @override
   String get dashboard_edit_keywords_sheet_label_text =>
