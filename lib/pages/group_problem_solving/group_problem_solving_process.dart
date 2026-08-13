@@ -333,255 +333,270 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
     LocalizedGPSStrings lgps = LocalizedGPSStrings(context);
 
     final Size size = MediaQuery.sizeOf(context);
-    final double screenWidthInInches = size.width / 160;
+    final double screenWidthInInches = size.width / 160;    
 
-    return Column(   
-      children: [
-        // 1. TOP: The problem to be solved (Full Width)
-        GPSProblemToSolveDeclaration(
-          key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
-          titleWhenEdition: widget.titleWhenEdition,
-          sessionTitleTec: _titleTec,
-          previousSessions: _previousCAMetadata,
-          onSessionSelected: _handleCAMetadataSelection,
-          onTextFieldFocused: () => setState((){_isTitleTextFieldUnfocused = false;}),
-          onTextFieldLosingFocus: () => setState(() {_isTitleTextFieldUnfocused = true;}),
-        ),
-        const Divider(),
+    return 
+    LayoutBuilder(
+      builder: (context, constraints) 
+      {
+        final double caSuggestionsMaxHeight =
+                (constraints.maxHeight * 0.3).clamp(150.0, 200.0);
+        return 
+        Column
+        (   
+          children: [
+            // 1. TOP: The problem to be solved (Full Width)
+            GPSProblemToSolveDeclaration(
+              key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
+              titleWhenEdition: widget.titleWhenEdition,
+              sessionTitleTec: _titleTec,
+              caPreviousSessions: _previousCAMetadata,
+              caSuggestionsMaxHeight: caSuggestionsMaxHeight,
+              onSessionSelected: _handleCAMetadataSelection,
+              onTextFieldFocused: () => setState((){_isTitleTextFieldUnfocused = false;}),
+              onTextFieldLosingFocus: () => setState(() {_isTitleTextFieldUnfocused = true;}),
+            ),
+            
 
-        // 2. CENTER: The row with identifiers and scrollable content
-        Expanded(
-          child:
-          Row(
-            children: 
+            // 2. CENTER: The row with identifiers and scrollable content
+            if (_isTitleTextFieldUnfocused)...
             [
-              // LEFT COLUMN: Add/"Clear One"/"Edit" buttons, group mood widget
+              const Divider(),
+
               Expanded(
-                child: Column
-                (
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                child:
+                Row(
                   children: 
                   [
-                    if(_isTitleTextFieldUnfocused)...
-                    [
-                      _buildHeaderButton
+                    // LEFT COLUMN: Add/"Clear One"/"Edit" buttons, group mood widget
+                    Expanded(
+                      child: Column
                       (
-                        tooltipMessage: AppLocalizations.of(context)?.gps_process_add_participants_tooltip ?? "Issue with the l10n for the 'Please click to add participants to the problem-solving session' tooltip",
-                        text: addEmoji, 
-                        color: Colors.white,                       
-                        onPressed: 
-                          () => Navigator.of(context).push
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: 
+                        [
+
+                          _buildHeaderButton
                           (
-                            MaterialPageRoute<void>(
-                              builder: (_) => NewParticipantsListOrLoadingPage
+                            tooltipMessage: AppLocalizations.of(context)?.gps_process_add_participants_tooltip ?? "Issue with the l10n for the 'Please click to add participants to the problem-solving session' tooltip",
+                            text: addEmoji, 
+                            color: Colors.white,                       
+                            onPressed: 
+                              () => Navigator.of(context).push
                               (
-                                onParticipantsLoadedCallbackFunction:
-                                (participants)
-                                {
-                                  // Re-setting previous data
-                                  _identifiersCol1.clear();
-                                  _identifiersColors1.clear();
-                                  _identifiersCol2.clear();
-                                  _identifiersColors2.clear();
-
-                                  setState(() {
-                                    for (var index = 0; index < participants.length; index++)
+                                MaterialPageRoute<void>(
+                                  builder: (_) => NewParticipantsListOrLoadingPage
+                                  (
+                                    onParticipantsLoadedCallbackFunction:
+                                    (participants)
                                     {
-                                      if (index%2 == 0) 
-                                      {
-                                        _identifiersCol1.add(participants[index]);
-                                        _identifiersColors1.add(greenShade900);                                      
-                                      }
-                                      else 
-                                      {
-                                        _identifiersCol2.add(participants[index]);
-                                        _identifiersColors2.add(greenShade900);
-                                      }
-                                    }
-                                  });
-                                  
-                                } ,
-                              ) 
-                              ),
-                          ),
+                                      // Re-setting previous data
+                                      _identifiersCol1.clear();
+                                      _identifiersColors1.clear();
+                                      _identifiersCol2.clear();
+                                      _identifiersColors2.clear();
 
-                        screenWidthInInches: screenWidthInInches
-                      ),]
-                      
-                    else
-                      const SizedBox(height: 0,width: 0,),
-                    if (_isModificationMode)
-                      if (_isTitleTextFieldUnfocused)...
-                      [
-                        _buildHeaderButton
-                        (
-                          tooltipMessage: "",
-                          text:  _isDeleteMode ? "Edit" : lgps.singleParticipantDeletionLabel,                        
-                          color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
-                          onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
-                          screenWidthInInches: screenWidthInInches
-                        ),
-                      ]
-                      else
-                        const SizedBox(height: 0,width: 0,),
-                    // GPSGroupMoods widget (column 1)
+                                      setState(() {
+                                        for (var index = 0; index < participants.length; index++)
+                                        {
+                                          if (index%2 == 0) 
+                                          {
+                                            _identifiersCol1.add(participants[index]);
+                                            _identifiersColors1.add(greenShade900);                                      
+                                          }
+                                          else 
+                                          {
+                                            _identifiersCol2.add(participants[index]);
+                                            _identifiersColors2.add(greenShade900);
+                                          }
+                                        }
+                                      });
+                                      
+                                    } ,
+                                  ) 
+                                  ),
+                              ),
+                            screenWidthInInches: screenWidthInInches
+                          ),
+                          
+
+                          if (_isModificationMode)
+                            if (_isTitleTextFieldUnfocused)...
+                            [
+                              _buildHeaderButton
+                              (
+                                tooltipMessage: "",
+                                text:  _isDeleteMode ? "Edit" : lgps.singleParticipantDeletionLabel,                        
+                                color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
+                                onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
+                                screenWidthInInches: screenWidthInInches
+                              ),
+                            ]
+                            else
+                              const SizedBox(height: 0,width: 0,),
+                          // GPSGroupMoods widget (column 1)
+                          Expanded
+                          (
+                            child:GPSGroupMoods
+                            (
+                              key: _groupMoods1Key,
+                              groupMoodsKey1: _groupMoods1Key, groupMoodsKey2: _groupMoods2Key,
+                              columnNumber:1, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
+                              identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
+                              isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
+                              gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
+                            )
+                          )
+                        ],
+                      ),
+                    ),
+                    
+                    // CENTER CONTENT
                     Expanded
                     (
-                      child:GPSGroupMoods
+                      flex: 2,
+                      child: 
+                      CustomScrollView
                       (
-                        key: _groupMoods1Key,
-                        groupMoodsKey1: _groupMoods1Key, groupMoodsKey2: _groupMoods2Key,
-                        columnNumber:1, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
-                        identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
-                        isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
-                        gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
+                        key: const Key("gps-process-scrollview"),
+                        slivers: 
+                        [
+                          const SliverToBoxAdapter
+                          (
+                            child: Padding
+                            (
+                              padding: EdgeInsets.only(top: 10, bottom: 10),
+                              child: GPSChecklist(),
+                            )                        
+                          ), 
+                          const SliverToBoxAdapter
+                          (
+                            child: Divider()                       
+                          ),  
+                          SliverToBoxAdapter
+                          (
+                            child: Padding
+                            (
+                              padding: const EdgeInsets.only(top: 0, bottom: 0),
+                              child: GPSKeywordsDeclaration
+                              (
+                                key: const Key("gps-process-gpskeywordsdeclaration-widget"),
+                                keywordsWhenEdition: widget.keywordsWhenEdition,
+                                currentKeywords: _currentKeywords,
+                                onKeywordsUpdatedCallbackFunction: (newKeywords) 
+                                {
+                                  setState(() {
+                                    _currentKeywords.clear();
+                                    _currentKeywords.addAll(newKeywords);
+                                  });
+                                }
+                              ),
+                            )                        
+                          ),  
+                          const SliverToBoxAdapter
+                          (
+                            child: Divider()                       
+                          ), 
+                          // Ideas List component
+                          SliverToBoxAdapter
+                          (
+                            child: GPSIdeasList(ideas: _currentIdeas)                        
+                          ),                    
+                        ]
                       )
-                    )
-                  ],
-                ),
-              ),
-              
-              // CENTER CONTENT
-              Expanded
-              (
-                flex: 2,
-                child: 
-                CustomScrollView
-                (
-                  key: const Key("gps-process-scrollview"),
-                  slivers: 
-                  [
-                    const SliverToBoxAdapter
-                    (
-                      child: Padding
-                      (
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: GPSChecklist(),
-                      )                        
-                    ), 
-                    const SliverToBoxAdapter
-                    (
-                      child: Divider()                       
-                    ),  
-                    SliverToBoxAdapter
-                    (
-                      child: Padding
-                      (
-                        padding: const EdgeInsets.only(top: 0, bottom: 0),
-                        child: GPSKeywordsDeclaration
-                        (
-                          key: const Key("gps-process-gpskeywordsdeclaration-widget"),
-                          keywordsWhenEdition: widget.keywordsWhenEdition,
-                          currentKeywords: _currentKeywords,
-                          onKeywordsUpdatedCallbackFunction: (newKeywords) 
-                          {
-                            setState(() {
-                              _currentKeywords.clear();
-                              _currentKeywords.addAll(newKeywords);
-                            });
-                          }
-                        ),
-                      )                        
-                    ),  
-                    const SliverToBoxAdapter
-                    (
-                      child: Divider()                       
-                    ), 
-                    // Ideas List component
-                    SliverToBoxAdapter
-                    (
-                      child: GPSIdeasList(ideas: _currentIdeas)                        
-                    ),                    
-                  ]
-                )
-              ),
+                    ),
 
-              // RIGHT COLUMN
-              Expanded(
-                child: Column(
-                  children: [
-                    if (_isTitleTextFieldUnfocused)...
-                    [
-                      _buildHeaderButton
-                      (
-                        tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
-                        text: _isModificationMode ? AppLocalizations.of(context)?.l10n_done ?? "Issue with the l10n for 'Done'" : editEmoji, 
-                        color: _isModificationMode ? orangeShade900 : Colors.white, 
-                        onPressed:_isModificationMode 
-                          ? () => setState(() {                      
-                              _isEditMode = false;
-                              _isDeleteMode = false;
-                              _isModificationMode = !_isModificationMode;                      
-                            })
-                          : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;}),
-                          screenWidthInInches: screenWidthInInches
+                    // RIGHT COLUMN
+                    Expanded(
+                      child: Column(
+                        children: 
+                        [
+                          _buildHeaderButton
+                          (
+                            tooltipMessage: AppLocalizations.of(context)?.gps_process_edit_identifiers_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
+                            text: _isModificationMode ? AppLocalizations.of(context)?.l10n_done ?? "Issue with the l10n for 'Done'" : editEmoji, 
+                            color: _isModificationMode ? orangeShade900 : Colors.white, 
+                            onPressed:_isModificationMode 
+                              ? () => setState(() {                      
+                                  _isEditMode = false;
+                                  _isDeleteMode = false;
+                                  _isModificationMode = !_isModificationMode;                      
+                                })
+                              : () => setState(() {_isEditMode = true; _isModificationMode = !_isModificationMode;}),
+                              screenWidthInInches: screenWidthInInches
+                          ),
+                          
+                          if (_isModificationMode)
+                            _buildHeaderButton
+                            (
+                              tooltipMessage: "",
+                              text: lgps.bulkDeletionLabel, color:  const Color(0xFFB71C1C),
+                              onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
+                              screenWidthInInches: screenWidthInInches
+                            ),
+                          // GPSGroupMoods widget (column 2)
+                          Expanded
+                          (
+                              child: GPSGroupMoods
+                              (
+                                key: _groupMoods2Key,
+                                groupMoodsKey1: _groupMoods1Key,groupMoodsKey2: _groupMoods2Key,
+                                columnNumber: 2, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
+                                identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
+                                isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
+                                gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
+                              )
+                            )
+                        ],
                       ),
-                      
-                      if (_isModificationMode)
-                        _buildHeaderButton
-                        (
-                          tooltipMessage: "",
-                          text: bulkDeletionLabel, color:  const Color(0xFFB71C1C),
-                          onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
-                          screenWidthInInches: screenWidthInInches
-                        ),
-                      // GPSGroupMoods widget (column 2)
-                      Expanded
-                      (
-                        child: GPSGroupMoods
-                        (
-                          key: _groupMoods2Key,
-                          groupMoodsKey1: _groupMoods1Key,groupMoodsKey2: _groupMoods2Key,
-                          columnNumber: 2, identifiersCol1: _identifiersCol1, identifiersCol2: _identifiersCol2,
-                          identifiersColors1: _identifiersColors1, identifiersColors2: _identifiersColors2,
-                          isEditMode: _isEditMode, isDeleteMode: _isDeleteMode,
-                          gpsProcessCallbackFunctionToRefreshThePage: () async {setState(() {});},
-                        )
-                      )
-                      
-                    ]
-                    else
-                      const SizedBox(height: 0,width: 0,)
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
+            ]
+            else
+              const SizedBox(height: 0,width: 0),
 
-        // 3. BOTTOM: Full Width Idea Input Field
-        const Divider(height: 1),
-        GPSNewIdea(newIdeaOnAddedCallbackFunction: _ideaAddToList),
-        
-        //********** Data saving ************//
-        Center
-        (
-          child:         
-            // Button to start the data saving process                     
-            _isApplicationFolderPathLoading
-            ? const Center(child: CircularProgressIndicator())
-            : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
-                // Defining file name and saving file for mobile platforms 
-                ? SessionFileNameOnMobilePlatforms
-                (
-                  key: const Key("gps-process-sessionfilenameonmobileplatforms-widget"),
-                  isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
-                  isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
-                  fileExtension: _fileExtension, 
-                  fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
-                  onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value.trim()), 
-                  parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
-                  versatileParameter: widget.filePathWhenEdition,
-                  textFieldContext: DashboardUtils.gpsContext,
-                )
-                // Saving file for desktop platforms
-                : SessionFileNameOnDesktopPlatforms
-                (
-                  savebuttonText: "Click to save your data in TXT format",
-                  parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata
-                )
-        ),
-      ]
+            // 3. BOTTOM: Full Width Idea Input Field
+            if (_isTitleTextFieldUnfocused)...
+            [
+              const Divider(height: 1),
+              GPSNewIdea(newIdeaOnAddedCallbackFunction: _ideaAddToList),
+              
+              //********** Data saving ************//
+              Center
+              (
+                child:         
+                  // Button to start the data saving process                     
+                  _isApplicationFolderPathLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
+                      // Defining file name and saving file for mobile platforms 
+                      ? SessionFileNameOnMobilePlatforms
+                      (
+                        key: const Key("gps-process-sessionfilenameonmobileplatforms-widget"),
+                        isBlacklistingToBeOverridenTemporarily: widget.isSessionDataBeingEdited,
+                        isExistentFileNamePreLoaded: widget.isSessionDataBeingEdited,
+                        fileExtension: _fileExtension, 
+                        fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
+                        onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value.trim()), 
+                        parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata,
+                        versatileParameter: widget.filePathWhenEdition,
+                        textFieldContext: DashboardUtils.gpsContext,
+                      )
+                      // Saving file for desktop platforms
+                      : SessionFileNameOnDesktopPlatforms
+                      (
+                        savebuttonText: "Click to save your data in TXT format",
+                        parentCallbackFunctionToSaveDataAndMetadata: _saveGPSDataAndMetadata
+                      )
+              ),
+            ]
+            else
+              const SizedBox(height: 0,width: 0)
+          ]
+        );
+      }    
     );
   }
 

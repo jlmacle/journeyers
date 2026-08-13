@@ -48,7 +48,8 @@ void main()
           body: GPSProblemToSolveDeclaration
           (
             onSessionSelected:(_) {},
-            previousSessions: const [],
+            caPreviousSessions: const [],
+            caSuggestionsMaxHeight: 0,
             sessionTitleTec: TextEditingController(),
             onTextFieldFocused: () {},
             onTextFieldLosingFocus: () {},

@@ -20,7 +20,8 @@ void main()
             body: GPSProblemToSolveDeclaration
             (
               sessionTitleTec: tfec,
-              previousSessions: const [],
+              caPreviousSessions: const [],
+              caSuggestionsMaxHeight: 0,
               onSessionSelected: (_){},
               onTextFieldFocused: (){},
               onTextFieldLosingFocus: (){},
