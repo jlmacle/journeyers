@@ -13,8 +13,10 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
   final String titleWhenEdition;
   /// A TextEditingController for the session title.
   final TextEditingController sessionTitleTec;
-  /// The data from the previous context analyses sessions (for metadata import).
-  final List<Map<String, dynamic>> previousSessions;
+  /// The data from the previous context analyses sessions (for title import).
+  final List<Map<String, dynamic>> caPreviousSessions;
+  /// A max height value for the list of previous context analyses sessions titles.
+  final double caSuggestionsMaxHeight;
   /// A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
   /// A callback function used when the text field is focused.
@@ -26,7 +28,8 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
     super.key,
     this.titleWhenEdition = "",
     required this.sessionTitleTec,
-    required this.previousSessions,
+    required this.caPreviousSessions,
+    required this.caSuggestionsMaxHeight,
     required this.onSessionSelected,
     required this.onTextFieldFocused,
     required this.onTextFieldLosingFocus,
@@ -72,115 +75,114 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: _isEditing 
-        ? Column(
-            children: [
-              TextField
+    return _isEditing 
+      ? Column(
+          children: [
+            TextField
+            (
+              key: const Key("problemToSolveField"),
+              controller: widget.sessionTitleTec,
+              autofocus: true,
+              focusNode: _textFieldFocusNode,
+              decoration: InputDecoration
               (
-                key: const Key("problemToSolveField"),
-                controller: widget.sessionTitleTec,
-                autofocus: true,
-                focusNode: _textFieldFocusNode,
-                decoration: InputDecoration
+                hintText: gpsProcessTitleTextFieldHint,
+                suffixIcon: IconButton
                 (
-                  hintText: gpsProcessTitleTextFieldHint,
-                  suffixIcon: IconButton
-                  (
-                    icon: const Icon(Icons.check, color: greenShade900),
-                    onPressed: ()
-                    {                      
-                      setState(() => _isEditing = false);
-                      widget.onTextFieldLosingFocus();
-                    },
-                  ),
+                  icon: const Icon(Icons.check, color: greenShade900),
+                  onPressed: ()
+                  {                      
+                    setState(() => _isEditing = false);
+                    widget.onTextFieldLosingFocus();
+                  },
                 ),
-                onSubmitted: (_) 
-                { 
-                      setState(() => _isEditing = false);
-                      widget.onTextFieldLosingFocus();
-                },
               ),
-              // Suggestions List from previous context analyses session data
-              if (widget.previousSessions.isNotEmpty)
-                Container(
-                  // Limiting the suggestion area height to avoid an overflow
-                  // TODO: different maxHeight according to platform
-                  constraints: const BoxConstraints(maxHeight: 85), 
-                  child: ListView.builder(
-                    itemCount: widget.previousSessions.length,
-                    itemBuilder: (context, index) {
-                      final session = widget.previousSessions[index];
-                      return ListTile(
-                        title: Text(session["title"]),
-                        subtitle: Text("Date: ${session["date"]}"),
-                        onTap: () {
-                          widget.onSessionSelected(session);
-                          setState(() => _isEditing = false);
-                        },
-                      );
-                    },
-                  ),
+              onSubmitted: (_) 
+              { 
+                    setState(() => _isEditing = false);
+                    widget.onTextFieldLosingFocus();
+              },
+            ),
+            // Suggestions List from previous context analyses session data
+            if (widget.caPreviousSessions.isNotEmpty)
+               Container(
+                // Limiting the suggestion area height to avoid an overflow
+                // TODO: different maxHeight according to platform
+                constraints: BoxConstraints(maxHeight: widget.caSuggestionsMaxHeight), 
+                child: 
+                ListView.builder(
+                  itemCount: widget.caPreviousSessions.length,
+                  itemBuilder: (context, index) {
+                    final session = widget.caPreviousSessions[index];
+                    return ListTile(
+                      title: Text(session["title"]),
+                      subtitle: Text("Date: ${session["date"]}"),
+                      onTap: () {
+                        widget.onSessionSelected(session);
+                        setState(() => _isEditing = false);
+                        widget.onTextFieldLosingFocus();
+                      },
+                    );
+                  },
                 ),
-            ],
-          )
-          : 
-          GestureDetector(
-            onTap: () => setState(() => _isEditing = true),
-            child:
-            Flex(
-            direction: Axis.horizontal, 
-            children: [
-              // Widget 1: Left side
-              Container(width: 50),
-              
-              // Widget 2: The Centered Text
-              // Expanded fills the middle gap so Center can work effectively
-              Expanded(
-                child: Center(
-                  child: Text
-                  (
-                    key: const Key("gps-process-gpsproblemtosolvedeclaration-title-text"),
-                    // if not an edition, or editing an empty title
-                    (widget.titleWhenEdition == "")
+              ),
+          ],
+        )
+        : 
+        GestureDetector(
+          onTap: () => setState(() => _isEditing = true),
+          child:
+          Flex(
+          direction: Axis.horizontal, 
+          children: [
+            // Widget 1: Left side
+            Container(width: 50),
+            
+            // Widget 2: The Centered Text
+            // Expanded fills the middle gap so Center can work effectively
+            Expanded(
+              child: Center(
+                child: Text
+                (
+                  key: const Key("gps-process-gpsproblemtosolvedeclaration-title-text"),
+                  // if not an edition, or editing an empty title
+                  (widget.titleWhenEdition == "")
+                  ? 
+                    (widget.sessionTitleTec.text.trim() == "") 
                     ? 
-                      (widget.sessionTitleTec.text.trim() == "") 
-                      ? 
-                        AppLocalizations.of(context)?.gps_process_default_title ?? "Issue with the default title for a problem-solving session."
-                      : 
-                        widget.sessionTitleTec.text.trim() 
-                    // if an edition
+                      AppLocalizations.of(context)?.gps_process_default_title ?? "Issue with the default title for a problem-solving session."
                     : 
-                      // value to edit was edited?
-                      (widget.sessionTitleTec.text.trim() != "") 
-                      ?
-                        widget.sessionTitleTec.text.trim()
-                      :
-                        widget.titleWhenEdition,
-
-                    style: 
-                      const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      widget.sessionTitleTec.text.trim() 
+                  // if an edition
+                  : 
+                    // value to edit was edited?
+                    (widget.sessionTitleTec.text.trim() != "") 
+                    ?
+                      widget.sessionTitleTec.text.trim()
+                    :
+                      widget.titleWhenEdition,
+    
+                  style: 
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            
+            // Widget 3: Right side
+            SizedBox(
+              width: 50,
+              child: GestureDetector
+              (
+                child: 
+                  Tooltip
+                  (
+                    message: AppLocalizations.of(context)?.gps_process_edit_title_tooltip ?? "Issue with the l10n for the 'Please click to edit the title' tooltip",
+                    child: const Text(editEmoji)
                   ),
-                ),
+                onTap: () => setState(() => _isEditing = true),
               ),
-              
-              // Widget 3: Right side
-              Container(
-                width: 50,
-                child: GestureDetector
-                (
-                  child: 
-                    Tooltip
-                    (
-                      message: AppLocalizations.of(context)?.gps_process_edit_title_tooltip ?? "Issue with the l10n for the 'Please click to edit the title' tooltip",
-                      child: const Text(editEmoji)
-                    ),
-                  onTap: () => setState(() => _isEditing = true),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
   }
