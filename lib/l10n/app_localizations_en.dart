@@ -194,6 +194,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_edit_identifiers_clear_one => 'Clear\nOne';
 
   @override
+  String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
+
+  @override
   String get gps_process_checklist_title => 'Checklist';
 
   @override
@@ -572,6 +575,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Clear\nOne';
+
+  @override
+  String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
 
   @override
   String get gps_process_checklist_title => 'Checklist';

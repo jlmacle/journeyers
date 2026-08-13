@@ -426,7 +426,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                               _buildHeaderButton
                               (
                                 tooltipMessage: "",
-                                text:  _isDeleteMode ? "Edit" : lgps.singleParticipantDeletionLabel,                        
+                                text:  _isDeleteMode ? "Edit" : lgps.participantIdentifiersSingleDeletionLabel,                        
                                 color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
                                 onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
                                 screenWidthInInches: screenWidthInInches
@@ -530,7 +530,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                             _buildHeaderButton
                             (
                               tooltipMessage: "",
-                              text: lgps.bulkDeletionLabel, color:  const Color(0xFFB71C1C),
+                              text: lgps.participantIdentifiersBulkDeletionLabel, color:  const Color(0xFFB71C1C),
                               onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
                               screenWidthInInches: screenWidthInInches
                             ),

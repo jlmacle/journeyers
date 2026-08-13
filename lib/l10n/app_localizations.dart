@@ -396,6 +396,13 @@ abstract class AppLocalizations {
   /// **'Clear\nOne'**
   String get gps_process_edit_identifiers_clear_one;
 
+  /// l10n for 'Clear
+  /// All'
+  ///
+  /// In en, this message translates to:
+  /// **'Clear\nAll'**
+  String get gps_process_edit_identifiers_clear_all;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:
