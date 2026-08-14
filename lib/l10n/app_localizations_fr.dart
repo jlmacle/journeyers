@@ -184,6 +184,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gps_process_default_title => 'Problème à résoudre';
 
   @override
+  String get gps_process_default_saved_title =>
+      'Session de résolution de problème';
+
+  @override
   String get gps_process_add_participants_tooltip =>
       'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes';
 
@@ -576,6 +580,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_default_title => 'Problème à résoudre';
+
+  @override
+  String get gps_process_default_saved_title =>
+      'Session de résolution de problème';
 
   @override
   String get gps_process_add_participants_tooltip =>

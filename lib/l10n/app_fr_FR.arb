@@ -96,6 +96,8 @@
     ,"@gps_title_suffix": {"description": "Le suffixe de titre pour une session de résolution de problèmes en groupe."}  
     ,"gps_process_default_title": "Problème à résoudre"
     ,"@gps_process_default_title": {"description": "Le titre par défaut pour une session de résolution de problèmes en groupe."}
+    ,"gps_process_default_saved_title": "Session de résolution de problème"
+    ,"@gps_process_default_saved_title": {"description": "Le titre par défaut losqu'une session de résolution de problème est sauvegardée."}
     ,"gps_process_checklist_title": "Check-list"
     ,"@gps_process_checklist_title": {"description": "Le titre par défaut pour le widget lié à la check-list."}
     ,"gps_process_edit_title_tooltip": "Veuillez cliquer pour éditer le titre"
