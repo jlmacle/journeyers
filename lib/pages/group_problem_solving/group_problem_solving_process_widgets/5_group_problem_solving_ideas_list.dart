@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
@@ -59,6 +60,8 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
 
   @override
   Widget build(BuildContext context) {
+    LocalizedGPSStrings lgps = .new(context);
+
     return GestureDetector
     (    
       onTap: ()
@@ -80,15 +83,15 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
               onTap: () => _ideasShowEditOverlay(context),
               child: Container(        
                 padding: const EdgeInsets.symmetric(vertical: 5),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(right: 15),
                       child: Icon(Icons.add_circle_outline),
                     ),
                     Center(
-                      child: Text(ideasListTitle, style: problemSolvingIdeasTitle),
+                      child: Text(lgps.ideasListTitle, style: problemSolvingIdeasTitle),
                     )
                   ],
                 ),
