@@ -93,6 +93,7 @@ class GPSProcessState extends State<GPSProcess>
   // TITLE for the group problem-solving process
   // TextEditingController for entering a new title
   final TextEditingController _titleTec = .new();
+  var titleValueAtStart = "";
   List<Map<String, dynamic>> _previousCAMetadata = [];
   var _isTitleTextFieldUnfocused = true;
 
@@ -315,6 +316,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
 
      _loadAllCAMetadata();
     _getApplicationFolderPath();
+    titleValueAtStart = widget.titleWhenEdition;
 
     if (widget.isSessionDataBeingEdited && widget.dtoGPSFormWhenEdition != null) _currentIdeas = widget.dtoGPSFormWhenEdition!.ideas;
   }
@@ -344,7 +346,8 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
               GPSProblemToSolveDeclaration
               (
                 key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
-                titleWhenEdition: widget.titleWhenEdition,
+                titleWhenEdition: titleValueAtStart,
+                onTitleModified: () { titleValueAtStart = _titleTec.text.trim();},
                 sessionTitleTec: _titleTec,
                 caPreviousSessions: _previousCAMetadata,
                 onSessionSelected: _handleCAMetadataSelection,
@@ -359,6 +362,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 (
                   key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
                   titleWhenEdition: widget.titleWhenEdition,
+                  onTitleModified: () { titleValueAtStart = _titleTec.text.trim();},
                   sessionTitleTec: _titleTec,
                   isEditMode: true,
                   caPreviousSessions: _previousCAMetadata,
