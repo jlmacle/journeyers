@@ -3168,13 +3168,17 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Accessing the localized data
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings? lgps = .new(context);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
 
           // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
-          var ideasListTitleFinder = find.text(ideasListTitle);
+          var ideasListTitleFinder = find.text(lgps.ideasListTitle);
           await tester.tap(ideasListTitleFinder);
           await tester.pumpAndSettle();
 
@@ -3257,13 +3261,16 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Accessing the context
+          var context = tester.element(find.byType(Scaffold).first);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
 
           // ── REACHING THE OVERLAY  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────
-          await gpsFromProcessPageToIdeasOverlay(tester);
+          await gpsFromProcessPageToIdeasOverlay(context:context, tester:tester);
 
           // ── ADDING AN IDEA  ──────────────────────────────────────
           // ─────────────────────────────────────────────────────────
@@ -3308,13 +3315,16 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Accessing the context
+          var context = tester.element(find.byType(Scaffold).first);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
 
           // ── REACHING THE OVERLAY  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────
-          await gpsFromProcessPageToIdeasOverlay(tester);
+          await gpsFromProcessPageToIdeasOverlay(context: context, tester: tester);
 
           // ── ADDING AN IDEA  ──────────────────────────────────────
           // ─────────────────────────────────────────────────────────
@@ -3379,13 +3389,16 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Accessing the context
+          var context = tester.element(find.byType(Scaffold).first);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
 
           // ── REACHING THE OVERLAY  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────
-          await gpsFromProcessPageToIdeasOverlay(tester);
+          await gpsFromProcessPageToIdeasOverlay(context:context, tester:tester);
 
           // ── ADDING AN IDEA  ──────────────────────────────────────
           // ─────────────────────────────────────────────────────────
@@ -3441,13 +3454,16 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Accessing the context
+          var context = tester.element(find.byType(Scaffold).first);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
 
           // ── REACHING THE OVERLAY  ──────────────────────────────────────
           // ───────────────────────────────────────────────────────────────
-          await gpsFromProcessPageToIdeasOverlay(tester);
+          await gpsFromProcessPageToIdeasOverlay(context:context, tester:tester);
 
           // ── ADDING IDEAS  ──────────────────────────────────────
           // ─────────────────────────────────────────────────────────
