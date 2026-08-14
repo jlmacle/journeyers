@@ -326,8 +326,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
     super.dispose();
   }
   
-    
- @override
+  @override
   Widget build(BuildContext context) {
     // ─── LOCALIZED STRINGS ───────────────────────────────────────
     LocalizedGPSStrings lgps = LocalizedGPSStrings(context);
@@ -335,28 +334,39 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
     final Size size = MediaQuery.sizeOf(context);
     final double screenWidthInInches = size.width / 160;    
 
-    return 
-    LayoutBuilder(
-      builder: (context, constraints) 
-      {
-        final double caSuggestionsMaxHeight =
-                (constraints.maxHeight * 0.3).clamp(150.0, 200.0);
-        return 
+    return
         Column
-        (   
+        (
           children: [
             // 1. TOP: The problem to be solved (Full Width)
-            GPSProblemToSolveDeclaration(
-              key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
-              titleWhenEdition: widget.titleWhenEdition,
-              sessionTitleTec: _titleTec,
-              caPreviousSessions: _previousCAMetadata,
-              caSuggestionsMaxHeight: caSuggestionsMaxHeight,
-              onSessionSelected: _handleCAMetadataSelection,
-              onTextFieldFocused: () => setState((){_isTitleTextFieldUnfocused = false;}),
-              onTextFieldLosingFocus: () => setState(() {_isTitleTextFieldUnfocused = true;}),
-            ),
-            
+            _isTitleTextFieldUnfocused
+              ? 
+              GPSProblemToSolveDeclaration
+              (
+                key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
+                titleWhenEdition: widget.titleWhenEdition,
+                sessionTitleTec: _titleTec,
+                caPreviousSessions: _previousCAMetadata,
+                onSessionSelected: _handleCAMetadataSelection,
+                onTitleTapped: () => setState((){_isTitleTextFieldUnfocused = false;}),
+                onTextFieldLosingFocus: () => setState(() {_isTitleTextFieldUnfocused = true;}),
+              )
+              :
+              // Title editing mode: all other widgets removed, except for GPSProblemToSolveDeclaration
+              Expanded(
+                child: 
+                GPSProblemToSolveDeclaration
+                (
+                  key: const Key("gps-process-gpsproblemtosolvedeclaration-widget"),
+                  titleWhenEdition: widget.titleWhenEdition,
+                  sessionTitleTec: _titleTec,
+                  isEditMode: true,
+                  caPreviousSessions: _previousCAMetadata,
+                  onSessionSelected: _handleCAMetadataSelection,
+                  onTitleTapped: () => setState((){_isTitleTextFieldUnfocused = false;}),
+                  onTextFieldLosingFocus: () => setState(() {_isTitleTextFieldUnfocused = true;}),
+                )),
+
 
             // 2. CENTER: The row with identifiers and scrollable content
             if (_isTitleTextFieldUnfocused)...
@@ -557,7 +567,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
             else
               const SizedBox(height: 0,width: 0),
 
-            // 3. BOTTOM: Full Width Idea Input Field
+            // 3. BOTTOM: Full Width Idea Input Field and Data Saving
             if (_isTitleTextFieldUnfocused)...
             [
               const Divider(height: 1),
@@ -595,11 +605,9 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
             else
               const SizedBox(height: 0,width: 0)
           ]
-        );
-      }    
     );
   }
-
+ 
   // Method used to build the header buttons
   Widget _buildHeaderButton
   ({  

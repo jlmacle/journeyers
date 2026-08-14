@@ -15,23 +15,23 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
   final TextEditingController sessionTitleTec;
   /// The data from the previous context analyses sessions (for title import).
   final List<Map<String, dynamic>> caPreviousSessions;
-  /// A max height value for the list of previous context analyses sessions titles.
-  final double caSuggestionsMaxHeight;
   /// A callback function used when a previous context analysis session data is selected.
   final Function(Map<String, dynamic>) onSessionSelected;
-  /// A callback function used when the text field is focused.
-  final VoidCallback onTextFieldFocused;
+  /// A callback function used when entering title edit mode (title tapped, or edit emoji tapped).
+  final VoidCallback onTitleTapped;
   /// A callback function used when the text field loses focus.
   final VoidCallback onTextFieldLosingFocus;
+  /// A boolean used to state if the title is being edited.
+  final bool isEditMode;
 
   const GPSProblemToSolveDeclaration({
     super.key,
     this.titleWhenEdition = "",
     required this.sessionTitleTec,
+    this.isEditMode = false,
     required this.caPreviousSessions,
-    required this.caSuggestionsMaxHeight,
     required this.onSessionSelected,
-    required this.onTextFieldFocused,
+    required this.onTitleTapped,
     required this.onTextFieldLosingFocus,
   });
 
@@ -41,16 +41,15 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
 
 class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclaration> 
 {
-  bool _isEditing = false;
+  bool _isEditMode = false;
 
   final FocusNode _textFieldFocusNode = .new();
 
-  void _onFocusChange()
+
+  void _enterEditMode()
   {
-    if (_textFieldFocusNode.hasFocus)
-    {
-      widget.onTextFieldFocused();
-    }
+    setState(() => _isEditMode = true);
+    widget.onTitleTapped();
   }
 
   @override
@@ -59,10 +58,6 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
     
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSProblemToSolveDeclaration");
-
-    // Verifying the focus present/absent to remove the buttons if present 
-    // (RenderFlex exception on small screen otherwise)
-    _textFieldFocusNode.addListener(_onFocusChange);
 
     if (widget.titleWhenEdition != "") widget.sessionTitleTec.text = widget.titleWhenEdition;
   }
@@ -75,7 +70,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
 
   @override
   Widget build(BuildContext context) {
-    return _isEditing 
+    return _isEditMode || widget.isEditMode
       ? Column(
           children: [
             TextField
@@ -92,24 +87,22 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                   icon: const Icon(Icons.check, color: greenShade900),
                   onPressed: ()
                   {                      
-                    setState(() => _isEditing = false);
+                    setState(() => _isEditMode = false);
                     widget.onTextFieldLosingFocus();
                   },
                 ),
               ),
               onSubmitted: (_) 
               { 
-                    setState(() => _isEditing = false);
+                    setState(() => _isEditMode = false);
                     widget.onTextFieldLosingFocus();
               },
             ),
+
             // Suggestions List from previous context analyses session data
             if (widget.caPreviousSessions.isNotEmpty)
-               Container(
-                // Limiting the suggestion area height to avoid an overflow
-                // TODO: different maxHeight according to platform
-                constraints: BoxConstraints(maxHeight: widget.caSuggestionsMaxHeight), 
-                child: 
+               Expanded(
+                child:
                 ListView.builder(
                   itemCount: widget.caPreviousSessions.length,
                   itemBuilder: (context, index) {
@@ -119,7 +112,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                       subtitle: Text("Date: ${session["date"]}"),
                       onTap: () {
                         widget.onSessionSelected(session);
-                        setState(() => _isEditing = false);
+                        setState(() => _isEditMode = false);
                         widget.onTextFieldLosingFocus();
                       },
                     );
@@ -130,7 +123,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
         )
         : 
         GestureDetector(
-          onTap: () => setState(() => _isEditing = true),
+          onTap: _enterEditMode,
           child:
           Flex(
           direction: Axis.horizontal, 
@@ -179,7 +172,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                     message: AppLocalizations.of(context)?.gps_process_edit_title_tooltip ?? "Issue with the l10n for the 'Please click to edit the title' tooltip",
                     child: const Text(editEmoji)
                   ),
-                onTap: () => setState(() => _isEditing = true),
+                onTap: _enterEditMode,
               ),
             ),
           ],
