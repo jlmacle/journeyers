@@ -409,6 +409,12 @@ abstract class AppLocalizations {
   /// **'List of ideas'**
   String get gps_process_list_of_ideas_title;
 
+  /// l10n for the 'No ideas added yet.' placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'No ideas added yet.'**
+  String get gps_process_list_of_ideas_placeholder;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:

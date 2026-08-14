@@ -32,8 +32,6 @@ const checklistOverlayCloseIconButtonToolTip = "Close checklist";
 const gpsKeywordsTitle = "Keywords";
 const gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
 
-// GPSIdeasList
-const ideasListPlaceholder = "No ideas added yet.";
 
 // GPSNewIdea
 const newIdeaTextFieldHint = "Please enter an idea.";

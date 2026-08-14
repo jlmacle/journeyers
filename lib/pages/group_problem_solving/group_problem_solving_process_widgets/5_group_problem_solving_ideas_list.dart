@@ -100,9 +100,11 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
            ),
           const SizedBox(height: 5),
           if (widget.ideas.isEmpty)
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Text(ideasListPlaceholder, style: TextStyle(fontStyle: FontStyle.italic)),
+            Padding
+            (
+              padding: const EdgeInsets.all(20.0),
+              child: Text(lgps.ideasListPlaceholder, 
+              style: const TextStyle(fontStyle: FontStyle.italic)),
             ),
           
           ...widget.ideas.asMap().entries.map(

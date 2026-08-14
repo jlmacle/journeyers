@@ -15,6 +15,7 @@ class LocalizedGPSStrings
 
   // GPSIdeasList
   var ideasListTitle = "";
+  var ideasListPlaceholder = "";
 
   LocalizedGPSStrings(BuildContext context)
   { 
@@ -29,7 +30,7 @@ class LocalizedGPSStrings
   
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
-  
+    ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
   }
 
 }

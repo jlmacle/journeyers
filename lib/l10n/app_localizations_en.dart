@@ -200,6 +200,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_list_of_ideas_title => 'List of ideas';
 
   @override
+  String get gps_process_list_of_ideas_placeholder => 'No ideas added yet.';
+
+  @override
   String get gps_process_checklist_title => 'Checklist';
 
   @override
@@ -584,6 +587,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_list_of_ideas_title => 'List of ideas';
+
+  @override
+  String get gps_process_list_of_ideas_placeholder => 'No ideas added yet.';
 
   @override
   String get gps_process_checklist_title => 'Checklist';
