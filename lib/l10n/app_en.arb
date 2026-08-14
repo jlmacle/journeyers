@@ -104,7 +104,8 @@
   ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n for 'Clear\nOne'"}
   ,"gps_process_edit_identifiers_clear_all": "Clear\nAll"
   ,"@gps_process_edit_identifiers_clear_all": {"description": "l10n for 'Clear\nAll'"}
-  
+  ,"gps_process_list_of_ideas_title": "List of ideas"
+  ,"@gps_process_list_of_ideas_title": {"description": "l10n for the 'List of ideas' title"}
 
   ,"gps_process_checklist_title": "Checklist"
   ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}

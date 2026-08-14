@@ -21,9 +21,8 @@ void main()
             (
               sessionTitleTec: tfec,
               caPreviousSessions: const [],
-              caSuggestionsMaxHeight: 0,
               onSessionSelected: (_){},
-              onTextFieldFocused: (){},
+              onTitleTapped: (){},
               onTextFieldLosingFocus: (){},
             ),
           ),

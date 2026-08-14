@@ -49,9 +49,8 @@ void main()
           (
             onSessionSelected:(_) {},
             caPreviousSessions: const [],
-            caSuggestionsMaxHeight: 0,
             sessionTitleTec: TextEditingController(),
-            onTextFieldFocused: () {},
+            onTitleTapped: () {},
             onTextFieldLosingFocus: () {},
           ),
         ),

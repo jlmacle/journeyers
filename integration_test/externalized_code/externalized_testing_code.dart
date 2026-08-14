@@ -1014,11 +1014,18 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   }
 
   // Method used to go from the GPS process page to the ideas overlay
-  Future<void> gpsFromProcessPageToIdeasOverlay(WidgetTester tester) async
+  Future<void> gpsFromProcessPageToIdeasOverlay
+  ({
+    required BuildContext context,
+    required WidgetTester tester
+  }) async
   {
+    // Accessing the localized data
+    LocalizedGPSStrings? lgps = .new(context);
+
     // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
     // ────────────────────────────────────────────────────────────────────────
-    var ideasListTitleFinder = find.text(ideasListTitle);
+    var ideasListTitleFinder = find.text(lgps.ideasListTitle);
     await tester.tap(ideasListTitleFinder);
     await tester.pumpAndSettle();
 

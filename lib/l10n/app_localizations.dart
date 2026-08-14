@@ -403,6 +403,12 @@ abstract class AppLocalizations {
   /// **'Clear\nAll'**
   String get gps_process_edit_identifiers_clear_all;
 
+  /// l10n for the 'List of ideas' title
+  ///
+  /// In en, this message translates to:
+  /// **'List of ideas'**
+  String get gps_process_list_of_ideas_title;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:

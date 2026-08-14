@@ -33,7 +33,6 @@ const gpsKeywordsTitle = "Keywords";
 const gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
 
 // GPSIdeasList
-const ideasListTitle = "List of ideas";
 const ideasListPlaceholder = "No ideas added yet.";
 
 // GPSNewIdea
