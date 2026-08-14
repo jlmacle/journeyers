@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -49,6 +50,7 @@ void main()
           (
             onSessionSelected:(_) {},
             caPreviousSessions: const [],
+            onTitleModified: () {},
             sessionTitleTec: TextEditingController(),
             onTitleTapped: () {},
             onTextFieldLosingFocus: () {},
@@ -268,6 +270,10 @@ void main()
       // Pumping the widget
       await pumpGPSProcess(tester);
 
+      // Accessing the localized data
+      var context = tester.element(find.byType(Scaffold).first);
+      LocalizedGPSStrings? lgps = .new(context); 
+
       // Searching the text field used to add ideas
       var newIdeaTextFieldFinder = find.ancestor
       (
@@ -282,7 +288,7 @@ void main()
         await tester.testTextInput.receiveAction(TextInputAction.done);
         // pumpAndSettle timed out
         // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));        
+        await tester.pump(const Duration(seconds: 2));              
 
         // Verifying the text present
         var textFinder = find.descendant
@@ -294,7 +300,7 @@ void main()
       }
 
       // Verifying the placeholder text absent
-      expect(find.text(ideasListPlaceholder), findsNothing);
+      expect(find.text(lgps.ideasListPlaceholder), findsNothing);
     });
 
   });
