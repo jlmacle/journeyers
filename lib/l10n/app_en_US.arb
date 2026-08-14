@@ -110,7 +110,9 @@
   ,"@gps_process_edit_identifiers_clear_all": {"description": "l10n for 'Clear\nAll'"}
   ,"gps_process_list_of_ideas_title": "List of ideas"
   ,"@gps_process_list_of_ideas_title": {"description": "l10n for the 'List of ideas' title"}
-  
+  ,"gps_process_list_of_ideas_placeholder": "No ideas added yet."
+  ,"@gps_process_list_of_ideas_placeholder": {"description": "l10n for the 'No ideas added yet.' placeholder"}
+
 
   
   

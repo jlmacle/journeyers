@@ -21,6 +21,8 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
   final VoidCallback onTitleTapped;
   /// A callback function used when the text field loses focus.
   final VoidCallback onTextFieldLosingFocus;
+  /// A callback function used when the title has been modified.
+  final VoidCallback onTitleModified;
   /// A boolean used to state if the title is being edited.
   final bool isEditMode;
 
@@ -33,6 +35,7 @@ class GPSProblemToSolveDeclaration extends StatefulWidget {
     required this.onSessionSelected,
     required this.onTitleTapped,
     required this.onTextFieldLosingFocus,
+    required this.onTitleModified
   });
 
   @override
@@ -86,7 +89,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                 (
                   icon: const Icon(Icons.check, color: greenShade900),
                   onPressed: ()
-                  {                      
+                  {                   
                     setState(() => _isEditMode = false);
                     widget.onTextFieldLosingFocus();
                   },

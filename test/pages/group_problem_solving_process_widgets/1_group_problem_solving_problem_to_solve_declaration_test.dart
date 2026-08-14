@@ -21,6 +21,7 @@ void main()
             (
               sessionTitleTec: tfec,
               caPreviousSessions: const [],
+              onTitleModified: () {},
               onSessionSelected: (_){},
               onTitleTapped: (){},
               onTextFieldLosingFocus: (){},
