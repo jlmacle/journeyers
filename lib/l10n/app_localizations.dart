@@ -377,6 +377,12 @@ abstract class AppLocalizations {
   /// **'Problem To Solve'**
   String get gps_process_default_title;
 
+  /// The default title when saving a problem-solving session.
+  ///
+  /// In en, this message translates to:
+  /// **'Problem Solving Session'**
+  String get gps_process_default_saved_title;
+
   /// l10n for the 'Please click to add participants to the problem-solving session' tooltip
   ///
   /// In en, this message translates to:
