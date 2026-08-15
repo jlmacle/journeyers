@@ -142,13 +142,13 @@ class TextFieldUtils
   /// Method checking if a CSV file name is already used.
   static bool fileNameAlreadyUsedCSV(String value) 
   {
-    return fileNameAlreadyUsed(value, extensionCSV);
+    return fileNameAlreadyUsed(value, ".$extensionCSV");
   }
 
   /// Method checking if a TXT file name is already used.
   static bool fileNameAlreadyUsedTXT(String value) 
   {
-    return fileNameAlreadyUsed(value, extentionTXT);
+    return fileNameAlreadyUsed(value, ".$extentionTXT");
   }
 
   /// An error message displayed if a file name is already used.
