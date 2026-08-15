@@ -178,6 +178,57 @@ void main() {
       expect(find.text(TextFieldUtils.errorFileNameAlreadyUsed), findsOneWidget);
     });
 
+    testWidgets("Should show an error message when a blacklist check is positive (existant TXT file name)", 
+    (WidgetTester tester) async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues
+      ({
+        // Temporary test dir as application folder path
+        "applicationFolderPath": testTmpDir!.path
+      });
+
+      File txtFile1 = File(p.join(testTmpDir!.path, "file1.txt"));
+      txtFile1.createSync();
+
+      File txtFile2 = File(p.join(testTmpDir!.path, "file2.txt"));
+      txtFile2.createSync();
+
+      await du.getStoredFileNamesOnMobile(testDirectoryPath: testTmpDir!.path, fileExtension: TextFieldUtils.extensionTXT);
+
+      var fileNameWithExtensionBlacklisted = "file1";
+
+      // Pumping the widget
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: TextFieldSanitizedAndCheckedUsingABlackList(
+              textFieldStartValue: "",
+              textFieldStyle: analysisTextFieldStyle,
+              textFieldHint: textFieldHint,
+              textFieldHintStyle: analysisTextFieldHintStyle,
+              errorMessageFieldKey: GlobalKey(),
+              errorMessageStyle: analysisTextFieldErrorMessageStyle,
+              onTextFieldValueChangedCallbackFunction: (_) {},
+              stringSanitizerBundlesErrorsMapping: const {},
+              blacklistingFunctionsErrorsMapping: tfu_proj.TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForTXTFileNames,
+            ),
+          ),
+        ),
+      );
+
+      // Entering the text to search in the blacklist
+      await tester.enterText(find.byType(TextField), fileNameWithExtensionBlacklisted);
+      await tester.pumpAndSettle();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      // Verifying error message rendered
+      expect(find.text(TextFieldUtils.errorFileNameAlreadyUsed), findsOneWidget);
+    });
+
     testWidgets("Should call onTextFieldValueSubmittedCallbackFunction if input is valid", (WidgetTester tester) async {
       String submittedValue = "";
 
