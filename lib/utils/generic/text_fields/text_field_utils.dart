@@ -49,7 +49,7 @@ class TextFieldUtils
   static const extensionCSV = "csv";
 
   /// An externalization for "txt".
-  static const extentionTXT = "txt";
+  static const extensionTXT = "txt";
 
   static const intermediaryReplacementString = "←$addEmoji←$addEmoji←";
 
@@ -148,7 +148,7 @@ class TextFieldUtils
   /// Method checking if a TXT file name is already used.
   static bool fileNameAlreadyUsedTXT(String value) 
   {
-    return fileNameAlreadyUsed(value, ".$extentionTXT");
+    return fileNameAlreadyUsed(value, ".$extensionTXT");
   }
 
   /// An error message displayed if a file name is already used.
