@@ -198,7 +198,7 @@ class DashboardUtils {
 
   /// Method used to retrieved all the file names, from the user application folder (mobile applications).
   /// The parameter is optional, and for testing environment only.
-  Future<List<String>> getStoredFileNamesOnMobile({String? testDirectoryPath}) async
+  Future<List<String>> getStoredFileNamesOnMobile({String? testDirectoryPath, String? fileExtension}) async
   {
     if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile:\ncurrentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
     
@@ -208,7 +208,7 @@ class DashboardUtils {
     {
       var filesList = await 
       fu.getFilesWithExtensionInDirectory
-      (directoryPath: testDirectoryPath!, fileExtension: TextFieldUtils.extensionCSV, searchIsRecursive: true);
+      (directoryPath: testDirectoryPath!, fileExtension: fileExtension!, searchIsRecursive: true);
 
       result = [for (File item in filesList) path.basename(item.path)];
     }
