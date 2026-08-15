@@ -116,7 +116,9 @@
     ,"@gps_process_list_of_ideas_title": {"description": "l10n pour le titre 'Liste des idées'"}
     ,"gps_process_list_of_ideas_placeholder": "Liste d'idées vide"
     ,"@gps_process_list_of_ideas_placeholder": {"description": "l10n pour le placeholder 'Liste d'idées vide'"}
-
+    ,"gps_process_snackbar_message_no_ideas_to_save": "Liste d'idées vide"
+    ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n pour le message de snackbar 'Liste d'idées vide"}
+  
 
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}

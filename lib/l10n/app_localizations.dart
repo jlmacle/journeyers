@@ -427,6 +427,12 @@ abstract class AppLocalizations {
   /// **'No ideas added yet.'**
   String get gps_process_list_of_ideas_placeholder;
 
+  /// l10n for the 'No ideas to save' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'No ideas to save'**
+  String get gps_process_snackbar_message_no_ideas_to_save;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:

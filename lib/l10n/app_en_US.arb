@@ -114,11 +114,9 @@
   ,"@gps_process_list_of_ideas_title": {"description": "l10n for the 'List of ideas' title"}
   ,"gps_process_list_of_ideas_placeholder": "No ideas added yet."
   ,"@gps_process_list_of_ideas_placeholder": {"description": "l10n for the 'No ideas added yet.' placeholder"}
-
-
-  
-  
-  
+  ,"gps_process_snackbar_message_no_ideas_to_save": "No ideas to save"
+  ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n for the 'No ideas to save' snackbar message"}
+    
   ,"gps_process_checklist_title": "Checklist"
   ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
   ,"gps_process_checklist_invitation": "Please consider postponing\nif incomplete"

@@ -133,7 +133,7 @@ class GPSProcessState extends State<GPSProcess>
   
   // ─── FILE SAVING related data ───────────────────────────────────────
   String _fileName = "";
-  final String _fileExtension = TextFieldUtils.extentionTXT;
+  final String _fileExtension = TextFieldUtils.extensionTXT;
 
   // Method used to update the file name value
   void _setFileNameValue(String value)
@@ -142,12 +142,18 @@ class GPSProcessState extends State<GPSProcess>
   }
   
   // Method used to save data and metadata
-  Future<void> _saveGPSDataAndMetadata(String defaultSessionTitle) async 
+  Future<void> _saveGPSDataAndMetadata
+  ({
+    required BuildContext context,
+  }) async 
   {
+    // Accessing the localized data
+    LocalizedGPSStrings lgps = .new(context);
+
     if (_currentIdeas.isEmpty) 
     {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("No ideas to save!")),
+        SnackBar(content: Text(lgps.ideasListEmptyListSnackbarMessage)),
       );
       return;
     }
@@ -156,7 +162,7 @@ class GPSProcessState extends State<GPSProcess>
         ? _titleTec.text.trim()
         : widget.titleWhenEdition.isNotEmpty
           ? widget.titleWhenEdition
-          : defaultSessionTitle;
+          : lgps.defaultSessionTitle;
 
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: sessionTitle: $sessionTitle");
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: _currentIdeas: $_currentIdeas");
@@ -594,7 +600,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                         fileExtension: _fileExtension, 
                         fileNameWithoutExtensionWhenEdition: widget.fileNameWithoutExtensionWhenEdition,
                         onFileNameSubmittedProcessCallbackFunction: (value) => _setFileNameValue (value.trim()), 
-                        parentCallbackFunctionToSaveDataAndMetadata: () async {await _saveGPSDataAndMetadata(lgps.defaultSessionTitle);},
+                        parentCallbackFunctionToSaveDataAndMetadata: () async {await _saveGPSDataAndMetadata(context: context);},
                         versatileParameter: widget.filePathWhenEdition,
                         textFieldContext: DashboardUtils.gpsContext,
                       )
@@ -602,7 +608,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                       : SessionFileNameOnDesktopPlatforms
                       (
                         savebuttonText: "Click to save your data in TXT format",
-                        parentCallbackFunctionToSaveDataAndMetadata: () async {await _saveGPSDataAndMetadata(lgps.defaultSessionTitle);}
+                        parentCallbackFunctionToSaveDataAndMetadata: () async {await _saveGPSDataAndMetadata(context: context);}
                       )
               ),
             ]

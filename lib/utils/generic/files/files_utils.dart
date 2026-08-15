@@ -103,7 +103,7 @@ class FileUtils
       if (entity is File) 
       {
         String fileName = path.basename(entity.path);
-        if (fileName.endsWith(fileExtension)) fileList.add(entity);
+        if (fileName.endsWith(".$fileExtension")) fileList.add(entity);
       }
     }
     return fileList;
@@ -164,16 +164,18 @@ class FileUtils
   Future<String> saveFileUsingWriteAsBytes({required String filePathWithExtension, required Uint8List dataBytes}) async 
   {
     File file = File(filePathWithExtension);
-    try {
+    try 
+    {
 
       await file.writeAsBytes(dataBytes);
 
       if (isInTestEnvironment) pu.printd("Running Tests: File written successfully to ${file.path} on ${Platform.operatingSystem}");
  
-      } catch (e, stackTrace) 
-      {
-        pu.printd("saveFileUsingWriteAsBytes: Error writing file as bytes: $e: $stackTrace");
-      }
+    } 
+    catch (e, stackTrace) 
+    {
+      pu.printd("saveFileUsingWriteAsBytes: Error writing file as bytes: $e: $stackTrace");
+    }
 
     return filePathWithExtension;
   }
