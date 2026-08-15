@@ -144,7 +144,7 @@ void main() {
       File csvFile2 = File(p.join(testTmpDir!.path, "file2.csv"));
       csvFile2.createSync();
 
-      await du.getStoredFileNamesOnMobile(testDirectoryPath: testTmpDir!.path);
+      await du.getStoredFileNamesOnMobile(testDirectoryPath: testTmpDir!.path, fileExtension: TextFieldUtils.extensionCSV);
 
       var fileNameWithExtensionBlacklisted = "file1";
 
