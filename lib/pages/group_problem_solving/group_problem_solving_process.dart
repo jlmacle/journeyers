@@ -133,7 +133,7 @@ class GPSProcessState extends State<GPSProcess>
   
   // ─── FILE SAVING related data ───────────────────────────────────────
   String _fileName = "";
-  final String _fileExtension = TextFieldUtils.extentionTXT;
+  final String _fileExtension = TextFieldUtils.extensionTXT;
 
   // Method used to update the file name value
   void _setFileNameValue(String value)
