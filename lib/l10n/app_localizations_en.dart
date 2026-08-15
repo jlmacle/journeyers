@@ -36,6 +36,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_process_title => 'Context analysis';
 
   @override
+  String get ca_process_invitation_to_unfold_expansion_tile =>
+      'Please click to toggle';
+
+  @override
   String get ca_process_title_text_field_hint =>
       'Please enter a title for this analysis.';
 
@@ -183,7 +187,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_default_title => 'Problem To Solve';
 
   @override
-  String get gps_process_default_saved_title => 'Problem Solving Session';
+  String get gps_process_default_saved_title => 'Problem-Solving Session';
 
   @override
   String get gps_process_add_participants_tooltip =>
@@ -428,6 +432,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get ca_process_title => 'Context analysis';
 
   @override
+  String get ca_process_invitation_to_unfold_expansion_tile =>
+      'Please click to toggle';
+
+  @override
   String get ca_process_title_text_field_hint =>
       'Please enter a title for this analysis.';
 
@@ -575,7 +583,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get gps_process_default_title => 'Problem To Solve';
 
   @override
-  String get gps_process_default_saved_title => 'Problem Solving Session';
+  String get gps_process_default_saved_title => 'Problem-Solving Session';
 
   @override
   String get gps_process_add_participants_tooltip =>

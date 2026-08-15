@@ -10,6 +10,7 @@ import "package:intl/intl.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
@@ -201,6 +202,9 @@ class CAFormState extends State<CAForm>
    
   @override
   Widget build(BuildContext context) {
+    // Accessing the localized data
+    LocalizedCAStrings lca = .new(context);
+
     return Column
     (
       children: 
@@ -216,6 +220,8 @@ class CAFormState extends State<CAForm>
           child:
           ExpansionTile
           ( 
+            // No trailing icon on display
+            showTrailingIcon: false,
             tilePadding: const EdgeInsets.only(top:0),
             expandedCrossAxisAlignment: CrossAxisAlignment.center,
             internalAddSemanticForOnTap: true, 
@@ -229,10 +235,19 @@ class CAFormState extends State<CAForm>
             title:             
               Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
-                child: CustomHeading
-                (
-                  headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective",
-                  headingLevel: 2,
+                child: Column(
+                  children: [
+                    CustomHeading
+                    (
+                      headingText: AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective",
+                      headingLevel: 2,
+                    ),
+                    CustomHeading
+                    (
+                      headingText: lca.invitationToUnfoldExpansionTile,
+                      headingLevel: 5,
+                    ),
+                  ],
                 ),
               ),
             children: <Widget>
@@ -383,6 +398,7 @@ class CAFormState extends State<CAForm>
           child:
           ExpansionTile
           ( 
+            showTrailingIcon: false,
             expandedCrossAxisAlignment: CrossAxisAlignment.center,
             expandedAlignment: Alignment.center,
             internalAddSemanticForOnTap: true, 
@@ -398,10 +414,19 @@ class CAFormState extends State<CAForm>
             title:              
               Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
-                child: CustomHeading
-                (
-                  headingText: AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the title question for the groups/teams perspective",
-                  headingLevel: 2,
+                child: Column(
+                  children: [
+                    CustomHeading
+                    (
+                      headingText: AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the title question for the groups/teams perspective",
+                      headingLevel: 2,
+                    ),
+                    CustomHeading
+                    (
+                      headingText: lca.invitationToUnfoldExpansionTile,
+                      headingLevel: 5,
+                    ),
+                  ],
                 ),
               ),
             children: <Widget>

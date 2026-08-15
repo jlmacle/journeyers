@@ -18,6 +18,9 @@
 
   "ca_process_title": "Context analysis",
   "@ca_process_title": {"description": "The title of the context analysis process"},
+  "ca_process_invitation_to_unfold_expansion_tile": "Please click to toggle",
+  "@ca_process_invitation_to_unfold_expansion_tile": {"description": "The l10n for 'Please click to toggle'"},
+  
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
   "@ca_process_title_text_field_hint": {"description": "The text field hint, for the title of the context analysis process"},
   "ca_process_keywords_text_field_hint": "Please enter one keyword at a time (+ Enter key).",

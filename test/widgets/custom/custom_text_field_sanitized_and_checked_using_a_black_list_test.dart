@@ -7,7 +7,6 @@ import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj;
 import "package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart";
 
-
 void main() {
   const textWithQuote = 'Perse"verance';
   const textWithDot = ".Legacy";
@@ -15,7 +14,7 @@ void main() {
   const textValid = "Context analysis";
   
   group("TextFieldChecked Tests:\n", () {
-   testWidgets("Should show error message when a sanitizing function (containsAStraightQuote) returns true", (WidgetTester tester) async {
+   testWidgets("Should show an error message when a sanitizing function (containsAStraightQuote) returns true", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -43,7 +42,7 @@ void main() {
       expect(find.text(TextFieldUtils.errorContainsAStraightQuote), findsOneWidget);
     });
 
-    testWidgets("Should show error message when a sanitizing function (containsADot) returns true", (WidgetTester tester) async {
+    testWidgets("Should show an error message when a sanitizing function (containsADot) returns true", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -71,8 +70,7 @@ void main() {
       expect(find.text(TextFieldUtils.errorContainsADot), findsOneWidget);
     });
     
-    testWidgets("Should show error message when a blacklist check is positive", (WidgetTester tester) async {
-      GlobalKey errorMessageKey2 = GlobalKey(debugLabel: "error-msg-2");
+    testWidgets("Should show an error message when a blacklist check is positive (simple blacklist check)", (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -83,7 +81,7 @@ void main() {
               textFieldStyle: analysisTextFieldStyle,
               textFieldHint: textFieldHint,
               textFieldHintStyle: analysisTextFieldHintStyle,
-              errorMessageFieldKey: errorMessageKey2,
+              errorMessageFieldKey: GlobalKey(),
               errorMessageStyle: analysisTextFieldErrorMessageStyle,
               onTextFieldValueChangedCallbackFunction: (_) {},
               stringSanitizerBundlesErrorsMapping: const {},
