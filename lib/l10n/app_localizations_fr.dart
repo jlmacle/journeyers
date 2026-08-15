@@ -36,6 +36,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ca_process_title => 'Analyse du contexte';
 
   @override
+  String get ca_process_invitation_to_unfold_expansion_tile =>
+      'Veuillez cliquer pour commencer';
+
+  @override
   String get ca_process_title_text_field_hint =>
       'Veuillez renseigner le titre\nde cette analyse.';
 
@@ -432,6 +436,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_title => 'Analyse du contexte';
+
+  @override
+  String get ca_process_invitation_to_unfold_expansion_tile =>
+      'Veuillez cliquer pour commencer';
 
   @override
   String get ca_process_title_text_field_hint =>

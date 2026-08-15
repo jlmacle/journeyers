@@ -19,6 +19,8 @@
 
     "ca_process_title": "Analyse du contexte",
     "@ca_process_title": {"description": "Le titre du processus d'analyse de contexte"},
+    "ca_process_invitation_to_unfold_expansion_tile": "Veuillez cliquer pour commencer",
+    "@ca_process_invitation_to_unfold_expansion_tile": {"description": "Le l10n pour 'Veuillez cliquer pour commencer'"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
     "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"},
     "ca_process_keywords_text_field_hint": "Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)",

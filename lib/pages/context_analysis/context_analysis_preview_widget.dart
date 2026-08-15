@@ -590,6 +590,8 @@ class _CAPreviewState extends State<CAPreview>
                           )
                             ExpansionTile
                             (
+                              // To remove the trailing icon
+                              showTrailingIcon: false,
                               // to remove the borders
                               shape: Border.all(color: Colors.transparent, width: 0),
                               initiallyExpanded: true,
@@ -652,6 +654,8 @@ class _CAPreviewState extends State<CAPreview>
                       for (var question in _sectionsGroup["questions"])
                         ExpansionTile
                         (
+                          // To remove the trailing icon
+                          showTrailingIcon: false,
                           // to remove the borders
                           shape: Border.all(color: Colors.transparent, width: 0),                      
                           initiallyExpanded: true, 

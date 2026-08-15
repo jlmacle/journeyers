@@ -148,6 +148,12 @@ abstract class AppLocalizations {
   /// **'Context analysis'**
   String get ca_process_title;
 
+  /// The l10n for 'Please click to toggle'
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to toggle'**
+  String get ca_process_invitation_to_unfold_expansion_tile;
+
   /// The text field hint, for the title of the context analysis process
   ///
   /// In en, this message translates to:
@@ -380,7 +386,7 @@ abstract class AppLocalizations {
   /// The default title when saving a problem-solving session.
   ///
   /// In en, this message translates to:
-  /// **'Problem Solving Session'**
+  /// **'Problem-Solving Session'**
   String get gps_process_default_saved_title;
 
   /// l10n for the 'Please click to add participants to the problem-solving session' tooltip
