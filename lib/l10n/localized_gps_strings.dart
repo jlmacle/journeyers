@@ -17,6 +17,7 @@ class LocalizedGPSStrings
   // GPSIdeasList
   var ideasListTitle = "";
   var ideasListPlaceholder = "";
+  var ideasListEmptyListSnackbarMessage = "";
 
   LocalizedGPSStrings(BuildContext context)
   { 
@@ -33,6 +34,7 @@ class LocalizedGPSStrings
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
     ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
+    ideasListEmptyListSnackbarMessage = _l10n?.gps_process_snackbar_message_no_ideas_to_save ?? "Issue with the l10n for the 'No ideas to save' snackbar message";
   }
 
 }
