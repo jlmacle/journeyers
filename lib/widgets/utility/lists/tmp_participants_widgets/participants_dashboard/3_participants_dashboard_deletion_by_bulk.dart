@@ -96,7 +96,13 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
     if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
+    (
+      SnackBar
+      (
+        content: Text(lds.snackbarMessageDataDeleted),
+        duration: const Duration(seconds: 2)
+      ),
+    );
 
     // REFRESHING THE UI
     if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.participantsListsAll!.isEmpty}");
