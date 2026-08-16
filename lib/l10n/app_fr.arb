@@ -119,7 +119,8 @@
     ,"@gps_process_list_of_ideas_placeholder": {"description": "l10n pour le placeholder 'Liste d'idées vide'"}
     ,"gps_process_snackbar_message_no_ideas_to_save": "Liste d'idées vide"
     ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n pour le message de snackbar 'Liste d'idées vide'"}
-  
+    ,"dashboard_snackbar_message_keywords_updated": "Mots-clés mis à jour"
+        ,"@dashboard_snackbar_message_keywords_updated": {"description": "l10n pour le message de snackbar 'Mots-clés mis à jour'"}
 
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
