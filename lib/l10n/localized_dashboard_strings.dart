@@ -13,6 +13,7 @@ class LocalizedDashboardStrings
 
   // ─── SNACKBARS ───────────────────────────────────────
   var snackbarMessageSessionSavedSuccessfully = "";
+  var snackbarMessageDataDeleted = "";
 
   // ─── SESSIONS ITEM ───────────────────────────────────────
   var keywordsLabel = "";
@@ -44,6 +45,7 @@ class LocalizedDashboardStrings
 
     // ─── SNACKBARS ───────────────────────────────────────
     snackbarMessageSessionSavedSuccessfully = _l10n?.dashboard_snackbar_message_session_saved_successfully ?? "Issue with the l10n for the 'Session data saved' snackbar message";
+    snackbarMessageDataDeleted = _l10n?.dashboard_snackbar_message_data_deleted ?? "Issue with the l10n for the 'Data deleted' snackbar message";
 
     // ─── SESSIONS ITEM ───────────────────────────────────────
     keywordsLabel = _l10n?.dashboard_keywords ?? "Issue with the 'Keywords' label";
