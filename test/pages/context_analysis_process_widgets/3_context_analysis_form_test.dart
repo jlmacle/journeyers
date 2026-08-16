@@ -315,34 +315,12 @@ void main()
               matching: find.byType(Text)
             );
 
-            
+            // Getting the localized strings
+            LocalizedCAQuestionsFields lqf = .new(context);
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            var level3TitleWorkplaceIssueItem1 = "";
-            var level3TitleWorkplaceIssueItem2 = "";
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                level3TitleWorkplaceIssueItem1 = "To solve a need to be more appreciated at work?";
-                level3TitleWorkplaceIssueItem2 = "To solve a need to remain appreciated at work?";
-              }
-              case("fr"): 
-              { 
-                level3TitleWorkplaceIssueItem1 = "Le besoin d'être plus apprécié(e) au travail ?";
-                level3TitleWorkplaceIssueItem2 = "Le besoin de rester apprécié(e) au travail ?";              
-              }
-            }
-
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem1");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem2");
-
-
-
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(textFinders.at(7)).data, level3TitleWorkplaceIssueItem1);
-            expect(tester.widget<Text>(textFinders.at(8)).data, level3TitleWorkplaceIssueItem2);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(8)).data, lqf.level3TitleWorkplaceIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(9)).data, lqf.level3TitleWorkplaceIssueItem2);
           },
         );
 
