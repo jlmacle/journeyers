@@ -303,6 +303,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboard_snackbar_message_data_deleted => 'Données supprimées';
 
   @override
+  String get dashboard_snackbar_message_keywords_updated =>
+      'Mots-clés mis à jour';
+
+  @override
   String get text_lists_new_list_or_loading_list_page_title =>
       'Listes de Participants';
 
@@ -714,6 +718,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get dashboard_snackbar_message_data_deleted => 'Données supprimées';
+
+  @override
+  String get dashboard_snackbar_message_keywords_updated =>
+      'Mots-clés mis à jour';
 
   @override
   String get text_lists_new_list_or_loading_list_page_title =>
