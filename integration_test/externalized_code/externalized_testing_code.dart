@@ -6,6 +6,7 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
@@ -21,7 +22,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
@@ -982,6 +982,10 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to go from GPS process page to list loading dashboard
   Future<void> gpsFromProcessPageToListLoadingDashboard(WidgetTester tester) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedParticipantsStrings lps = .new(context);
+
     // Searching the add emoji    
     var addEmojiFinder = find.text(addEmoji);
 
@@ -1009,7 +1013,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.pumpAndSettle();
 
     // Verifying the lists dashboard title present
-    var participantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
+    var participantsListsDashboardTitleFinder = find.text(lps.listsDashboardTitle);
     expect(participantsListsDashboardTitleFinder, findsOne);
   }
 
