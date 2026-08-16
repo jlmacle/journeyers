@@ -296,6 +296,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Session data saved';
 
   @override
+  String get dashboard_snackbar_message_data_deleted => 'Data deleted';
+
+  @override
   String get text_lists_new_list_or_loading_list_page_title =>
       'Participants lists';
 
@@ -698,6 +701,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get dashboard_snackbar_message_session_saved_successfully =>
       'Session data saved';
+
+  @override
+  String get dashboard_snackbar_message_data_deleted => 'Data deleted';
 
   @override
   String get text_lists_new_list_or_loading_list_page_title =>

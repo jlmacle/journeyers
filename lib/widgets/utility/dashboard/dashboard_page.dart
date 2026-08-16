@@ -7,6 +7,7 @@ import "package:collection/collection.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_formats_utils.dart";
@@ -183,6 +184,9 @@ class DashboardPageState extends State<DashboardPage>
   // Method used to delete a single session data from the session list action icons
   Future<void> _sessionSelectedDelete(String filePath) async
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     // Removing the stored file
     await fu.deleteFile(filePath);
 
@@ -210,7 +214,7 @@ class DashboardPageState extends State<DashboardPage>
     if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected session deleted.")));
+    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
     if (_sessionsMetadataAll != null  && _sessionsMetadataAll!.isEmpty) 

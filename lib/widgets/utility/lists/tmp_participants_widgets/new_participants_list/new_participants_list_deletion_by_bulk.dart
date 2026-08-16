@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
@@ -41,6 +42,9 @@ class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeleti
   // Method used to delete several list items
   Future<void> _selectedTextItemsDelete() async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+    
     // Creating a new list to update enteredTextItemsList
     List<String> updatedNewTextsList = widget.enteredTextItemsList
     // to compare ints with ints
@@ -62,7 +66,7 @@ class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeleti
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected items deleted.")));
+    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
  
   }
 

@@ -577,6 +577,12 @@ abstract class AppLocalizations {
   /// **'Session data saved'**
   String get dashboard_snackbar_message_session_saved_successfully;
 
+  /// l10n for the 'Data deleted' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'Data deleted'**
+  String get dashboard_snackbar_message_data_deleted;
+
   /// The default title for the new list or loading list page.
   ///
   /// In en, this message translates to:

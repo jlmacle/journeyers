@@ -266,7 +266,11 @@ class GPSProcessState extends State<GPSProcess>
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(lds.snackbarMessageSessionSavedSuccessfully)),
+          SnackBar
+          (
+            content: Text(lds.snackbarMessageSessionSavedSuccessfully),
+            duration: const Duration(seconds: 2),
+          ),
         );
       }
     } catch (e) {

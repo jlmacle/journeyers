@@ -167,6 +167,8 @@
     ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition des mots-clés"}
     ,"dashboard_snackbar_message_session_saved_successfully": "Session sauvegardée"
     ,"@dashboard_snackbar_message_session_saved_successfully": {"description": "l10n pour le message de snackbar 'Session sauvegardée'"}
+    ,"dashboard_snackbar_message_data_deleted": "Données supprimées"
+    ,"@dashboard_snackbar_message_data_deleted": {"description": "l10n pour le message de snackbar 'Données supprimées'"}
   
 
     ,"text_lists_new_list_or_loading_list_page_title": "Listes de Participants"
