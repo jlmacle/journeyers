@@ -278,6 +278,9 @@ class DashboardPageState extends State<DashboardPage>
   // Method used to update the session keywords
   Future<void> _sessionKeywordsUpdate(String filePath, Set<String> newKeywords) async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     Set<dynamic>? previousKeywords;
 
     final sessionIndex = _sessionsMetadataAll?.indexWhere(
@@ -308,7 +311,7 @@ class DashboardPageState extends State<DashboardPage>
     {
       setState((){ }); 
       ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Keywords updated successfully"))
+        SnackBar(content: Text(lds.snackbarMessageKeywordsUpdated))
       );
     }
     
