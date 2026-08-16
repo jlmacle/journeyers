@@ -296,6 +296,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez entrer vos mots-clés.';
 
   @override
+  String get dashboard_snackbar_message_session_saved_successfully =>
+      'Session saved';
+
+  @override
   String get text_lists_new_list_or_loading_list_page_title =>
       'Listes de Participants';
 
