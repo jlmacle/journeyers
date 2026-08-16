@@ -571,10 +571,10 @@ abstract class AppLocalizations {
   /// **'Please enter your keywords.'**
   String get dashboard_edit_keywords_sheet_text_field_hint;
 
-  /// l10n for the 'Session saved' snackbar message
+  /// l10n for the 'Session data saved' snackbar message
   ///
   /// In en, this message translates to:
-  /// **'Session saved'**
+  /// **'Session data saved'**
   String get dashboard_snackbar_message_session_saved_successfully;
 
   /// The default title for the new list or loading list page.
