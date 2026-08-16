@@ -7,12 +7,12 @@ import "package:flutter/material.dart";
 import "package:file_picker/file_picker.dart";
 import "package:intl/intl.dart";
 import "package:path/path.dart" as path;
-
 import "package:share_plus/share_plus.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
@@ -124,6 +124,9 @@ class _SessionsListItemState extends State<SessionsListItem>
   required String originalFilePath,
 }) async 
 {
+  // Accessing the localized data
+  LocalizedDashboardStrings lds = .new(context);
+
   if (updatedIdeas.isEmpty) 
   {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -214,7 +217,7 @@ class _SessionsListItemState extends State<SessionsListItem>
 
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Session saved successfully!")),
+        SnackBar(content: Text(lds.snackbarMessageSessionSavedSuccessfully)),
       );
     }
   } catch (e) {
