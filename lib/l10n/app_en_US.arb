@@ -164,7 +164,10 @@
   ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n for the 'Keywords Edition' label text"}
   ,"dashboard_edit_keywords_sheet_text_field_hint": "Please enter your keywords."
   ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n for the 'Keywords Edition' text field hint"}
+  ,"dashboard_snackbar_message_session_saved_successfully": "Session data saved"
+  ,"@dashboard_snackbar_message_session_saved_successfully": {"description": "l10n for the 'Session data saved' snackbar message"}
   
+
   ,"text_lists_new_list_or_loading_list_page_title": "Participants lists"
   ,"@text_lists_new_list_or_loading_list_page_title": {"description": "The default title for the new list or loading list page."}
   ,"text_lists_new_list_or_loading_list_page_subtitle": "What would you like to do?"
