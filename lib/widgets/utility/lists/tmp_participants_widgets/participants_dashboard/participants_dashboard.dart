@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
@@ -155,6 +156,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // Method used to update the list keywords in the database
   Future<void> _updateKeywordsInDB(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     // Updating listData with the new keywords
     listData[itemKeywordsKey] = updatedKeywords.toList();
 
@@ -167,7 +171,11 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     // Updating the local UI state
     setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Keywords updated successfully"))
+          SnackBar
+          (
+            content: Text(lds.snackbarMessageKeywordsUpdated),
+            duration: const Duration(seconds: 2),
+          )
         );
     });
   }
