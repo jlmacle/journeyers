@@ -396,8 +396,8 @@ void main()
               }              
             }
 
-            // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(12)).data, caProcessPleaseDevelopTextFieldHint);
+            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(13)).data, caProcessPleaseDevelopTextFieldHint);
           },
         );
       
