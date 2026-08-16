@@ -425,7 +425,7 @@ void main()
             await caOpenGroupExpansionTile(context, tester);
 
             // Searching the custom headings text for the second expansion tile
-            var customHeadingTextFinders = find.descendant
+            var customHeadingTextsFinder = find.descendant
             (
               of: find.byType(ExpansionTile)
                   .last, 
@@ -471,12 +471,12 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveAppreciabilityWork");
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveEarningAbility");
 
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, groupPerspectiveProblems);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, groupPerspectiveSameProblems);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, groupPerspectiveHarmonyHome);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, groupPerspectiveAppreciabilityWork);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, groupPerspectiveEarningAbility);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(2)).data, groupPerspectiveProblems);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(3)).data, groupPerspectiveSameProblems);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(4)).data, groupPerspectiveHarmonyHome);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(5)).data, groupPerspectiveAppreciabilityWork);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(6)).data, groupPerspectiveEarningAbility);
           },
         );
       
