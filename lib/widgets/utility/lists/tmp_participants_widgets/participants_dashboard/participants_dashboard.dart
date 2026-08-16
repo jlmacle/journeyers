@@ -5,6 +5,7 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
@@ -195,6 +196,8 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // Method used to update the list participants
   Future<void> _updateParticipantsInDB(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
 
     // Updating listData with the new participants
     listData[subItemsDataListKey] = await _listsDB.updateParticipants(updatedParticipants, listData);    
@@ -208,7 +211,11 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     // Updating the local UI state
     setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Keywords updated successfully"))
+          SnackBar
+          (
+            content: Text(lds.snackbarMessageKeywordsUpdated),
+            duration: const Duration(seconds: 2),
+          ),
         );
     });
   }
@@ -322,6 +329,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading"); 
     if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
 
+    // Getting the localized strings
+    LocalizedParticipantsStrings lps = .new(context);
+
     return 
     Scaffold
     (
@@ -356,7 +366,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                 SliverToBoxAdapter(
                   child: ParticipantsListsDashboardTitle
                   (
-                    title: AppLocalizations.of(context)?.text_lists_dashboard_title ?? "Issue with the title for the participants lists dashboard",
+                    title: lps.listsDashboardTitle
                   )
                 ),
     

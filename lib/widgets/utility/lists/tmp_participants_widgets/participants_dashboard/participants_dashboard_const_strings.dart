@@ -1,8 +1,3 @@
-// ─── DISPLAY DATA ───────────────────────────────────────
-// ────────────────────────────────────────────────────────
-
-const listsDashboardTitle = "Stored participants lists";
-
 // ─── SORTING AND FILTERING ───────────────────────────────────────
 const filterByKeywordsLabel = "Filter by Keywords";
 const listsSortByDate = "Sort by Date";
