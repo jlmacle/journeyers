@@ -69,17 +69,6 @@ void main()
     return;
   }
   
-  // Method used to find the Text widgets within the expansion tiles
-  Finder getFinderForTextsWithinTheExpansionTiles()
-  {
-    return  
-    find.descendant
-    (
-      of: find.byType(ExpansionTile), 
-      matching: find.byType(Text)
-    );
-  }
-  
   // ─── TESTS ───────────────────────────────────────
 
   group("CAForm Tests: \n", 
@@ -117,14 +106,26 @@ void main()
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedCAQuestionsFields qfl = .new(context);
 
-            // Verifying that the first expansion tile title is correct
-            var firstExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().first;
-            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);
+            // Verifying that the first expansion tile title is correct 
+            var firstExpansionTileQuestionFinder = find.descendant
+                                                    (
+                                                      // first expansion tile
+                                                      of: find.byType(ExpansionTile).first, 
+                                                      matching: find.byType(Text)
+                                                    // first Text widget out of 2
+                                                    ).first;
+            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileQuestionFinder.first);
             expect(firstExpansionTileTextWidget.data, qfl.level2TitleIndividual);
 
-            // Verifying that the second expansion tile title is correct
-            var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
-            Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
+            // Verifying that the second expansion tile title is correct 
+            var secondExpansionTileQuestionFinder = find.descendant
+                                                    (
+                                                      // second expansion tile
+                                                      of: find.byType(ExpansionTile).last, 
+                                                      matching: find.byType(Text)
+                                                    // first Text widget out of 2
+                                                    ).first;
+            Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileQuestionFinder.first);        
             expect(secondExpansionTileTextWidget.data, qfl.level2TitleGroup);
           },
         ); 
