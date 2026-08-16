@@ -2351,6 +2351,10 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedDashboardStrings lds = .new(context);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
@@ -2392,7 +2396,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the lists dashboard title present
-          var participantsListsDashboardTitleFinder = find.text(listsDashboardTitle);
+          var participantsListsDashboardTitleFinder = find.text(lds.listsDashboardTitle);
           expect(participantsListsDashboardTitleFinder, findsOne);
 
           // Searching for a loading button
