@@ -214,7 +214,13 @@ class DashboardPageState extends State<DashboardPage>
     if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
+    (
+      SnackBar
+      (
+        content: Text(lds.snackbarMessageDataDeleted),
+        duration: const Duration(seconds: 2),
+      ),
+    );
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
     if (_sessionsMetadataAll != null  && _sessionsMetadataAll!.isEmpty) 
@@ -311,7 +317,11 @@ class DashboardPageState extends State<DashboardPage>
     {
       setState((){ }); 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(lds.snackbarMessageKeywordsUpdated))
+        SnackBar
+        (
+          content: Text(lds.snackbarMessageKeywordsUpdated),
+          duration: const Duration(seconds: 2),
+        ),
       );
     }
     

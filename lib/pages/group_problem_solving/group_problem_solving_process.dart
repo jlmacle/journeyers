@@ -155,7 +155,11 @@ class GPSProcessState extends State<GPSProcess>
     if (_currentIdeas.isEmpty) 
     {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(lgps.ideasListEmptyListSnackbarMessage)),
+        SnackBar
+        (
+          content: Text(lgps.ideasListEmptyListSnackbarMessage),
+          duration: const Duration(seconds: 2),
+          ),
       );
       return;
     }
