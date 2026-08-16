@@ -347,24 +347,11 @@ void main()
               matching: find.byType(Text)
             );
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-           
-            var individualPerspectiveBetterLegacy = "";
+            // Getting the localized strings
+            LocalizedCAQuestionsFields lqf = .new(context);
 
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                individualPerspectiveBetterLegacy = "To have a better legacy to leave to my children/others?";
-              }
-              case("fr"): 
-              { 
-                individualPerspectiveBetterLegacy = "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?";                
-              }              
-            }
-
-            // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(10)).data, individualPerspectiveBetterLegacy);
+            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(11)).data, lqf.level3TitleLegacyIssueItem1);
           },
         );
       
