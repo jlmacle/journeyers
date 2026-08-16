@@ -292,6 +292,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter your keywords.';
 
   @override
+  String get dashboard_snackbar_message_session_saved_successfully =>
+      'Session saved';
+
+  @override
   String get text_lists_new_list_or_loading_list_page_title =>
       'Participants lists';
 
