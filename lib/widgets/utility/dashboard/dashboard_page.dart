@@ -317,7 +317,11 @@ class DashboardPageState extends State<DashboardPage>
     {
       setState((){ }); 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(lds.snackbarMessageKeywordsUpdated))
+        SnackBar
+        (
+          content: Text(lds.snackbarMessageKeywordsUpdated),
+          duration: const Duration(seconds: 2),
+        ),
       );
     }
     
