@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
@@ -59,6 +60,9 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
   // Method used to delete several lists data
   Future<void> _selectedListsDelete() async 
   {
+      // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+    
     // Creating a fixed list to iterate over so clearing doesn"t break the loop
     final keysOfListsSelectedForDeletion = List<String>.from(widget.participantsListsSelectedForDeletionKeys!);
 
@@ -92,7 +96,7 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
     if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected sessions deleted.")));
+    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
 
     // REFRESHING THE UI
     if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.participantsListsAll!.isEmpty}");
