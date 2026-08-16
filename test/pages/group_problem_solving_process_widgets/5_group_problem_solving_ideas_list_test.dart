@@ -2,6 +2,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
 
@@ -11,6 +12,8 @@ void main()
   {
     await tester.pumpWidget(
       const MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: GPSIdeasList
           (

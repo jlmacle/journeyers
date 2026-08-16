@@ -118,7 +118,7 @@
     ,"gps_process_list_of_ideas_placeholder": "Liste d'idées vide"
     ,"@gps_process_list_of_ideas_placeholder": {"description": "l10n pour le placeholder 'Liste d'idées vide'"}
     ,"gps_process_snackbar_message_no_ideas_to_save": "Liste d'idées vide"
-    ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n pour le message de snackbar 'Liste d'idées vide"}
+    ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n pour le message de snackbar 'Liste d'idées vide'"}
   
 
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
@@ -165,7 +165,10 @@
     ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des mots-clés"}
     ,"dashboard_edit_keywords_sheet_text_field_hint": "Veuillez entrer vos mots-clés."
     ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition des mots-clés"}
+    ,"dashboard_snackbar_message_session_saved_successfully": "Session sauvegardée"
+    ,"@dashboard_snackbar_message_session_saved_successfully": {"description": "l10n pour le message de snackbar 'Session sauvegardée'"}
   
+
     ,"text_lists_new_list_or_loading_list_page_title": "Listes de Participants"
     ,"@text_lists_new_list_or_loading_list_page_title": {"description": "Le titre par défaut pour la page de chargement de liste, ou de création d'une nouvelle liste."}
     ,"text_lists_new_list_or_loading_list_page_subtitle": "Quelle est votre préférence ?"

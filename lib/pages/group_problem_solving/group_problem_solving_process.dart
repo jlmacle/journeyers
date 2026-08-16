@@ -12,6 +12,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
@@ -148,7 +149,8 @@ class GPSProcessState extends State<GPSProcess>
   }) async 
   {
     // Accessing the localized data
-    LocalizedGPSStrings lgps = .new(context);
+    LocalizedGPSStrings lgps = .new(context);   
+    LocalizedDashboardStrings lds = .new(context);
 
     if (_currentIdeas.isEmpty) 
     {
@@ -264,7 +266,7 @@ class GPSProcessState extends State<GPSProcess>
 
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Session saved successfully!")),
+          SnackBar(content: Text(lds.snackbarMessageSessionSavedSuccessfully)),
         );
       }
     } catch (e) {

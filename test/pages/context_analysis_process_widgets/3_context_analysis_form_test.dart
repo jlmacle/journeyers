@@ -69,17 +69,6 @@ void main()
     return;
   }
   
-  // Method used to find the Text widgets within the expansion tiles
-  Finder getFinderForTextsWithinTheExpansionTiles()
-  {
-    return  
-    find.descendant
-    (
-      of: find.byType(ExpansionTile), 
-      matching: find.byType(Text)
-    );
-  }
-  
   // ─── TESTS ───────────────────────────────────────
 
   group("CAForm Tests: \n", 
@@ -115,17 +104,29 @@ void main()
 
             // Acccessing the localized strings
             var context = tester.element(find.byType(Scaffold).first);
-            LocalizedCAQuestionsFields qfl = .new(context);
+            LocalizedCAQuestionsFields lqf = .new(context);
 
-            // Verifying that the first expansion tile title is correct
-            var firstExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().first;
-            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileTextFinder);
-            expect(firstExpansionTileTextWidget.data, qfl.level2TitleIndividual);
+            // Verifying that the first expansion tile title is correct 
+            var firstExpansionTileQuestionFinder = find.descendant
+                                                    (
+                                                      // first expansion tile
+                                                      of: find.byType(ExpansionTile).first, 
+                                                      matching: find.byType(Text)
+                                                    // first Text widget out of 2
+                                                    ).first;
+            Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileQuestionFinder.first);
+            expect(firstExpansionTileTextWidget.data, lqf.level2TitleIndividual);
 
-            // Verifying that the second expansion tile title is correct
-            var secondExpansionTileTextFinder = getFinderForTextsWithinTheExpansionTiles().last;
-            Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileTextFinder);        
-            expect(secondExpansionTileTextWidget.data, qfl.level2TitleGroup);
+            // Verifying that the second expansion tile title is correct 
+            var secondExpansionTileQuestionFinder = find.descendant
+                                                    (
+                                                      // second expansion tile
+                                                      of: find.byType(ExpansionTile).last, 
+                                                      matching: find.byType(Text)
+                                                    // first Text widget out of 2
+                                                    ).first;
+            Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileQuestionFinder.first);        
+            expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
           },
         ); 
 
@@ -152,8 +153,8 @@ void main()
             final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);           
 
-            // Searching the custom headings text for the first expansion tile
-            var customHeadingTextFinders = find.descendant
+            // Searching the custom headings texts for the first expansion tile
+            var customHeadingTextsFinders = find.descendant
             (
               of: find.byType(ExpansionTile)
                   .first, 
@@ -194,11 +195,11 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
 
 
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, individualPerspectiveBalanceIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, individualPerspectiveWorkplaceIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, individualPerspectiveLegacyIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, individualPerspectiveAnotherIssue);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(2)).data, individualPerspectiveBalanceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(3)).data, individualPerspectiveWorkplaceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(4)).data, individualPerspectiveLegacyIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(5)).data, individualPerspectiveAnotherIssue);
           },
         );      
       
@@ -260,9 +261,7 @@ void main()
       
         // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
         // "Balance issue: all four item labels are correct after expansion",
-        testWidgets
-        (          
-          "Balance issue: all four item labels are correct after expansion",
+        testWidgets("Balance issue: all four item labels are correct after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -274,48 +273,21 @@ void main()
             await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
-            var textFinders = find.descendant
+            var textsFinder = find.descendant
             (
               of: find.byType(ExpansionTile)
                   .first, 
               matching: find.byType(Text)
             );
 
+            // Getting the localized strings
+            LocalizedCAQuestionsFields lqf = .new(context); 
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            var level3TitleBalanceIssueItem1 = "";
-            var level3TitleBalanceIssueItem2 = "";
-            var level3TitleBalanceIssueItem3 = "";
-            var level3TitleBalanceIssueItem4 = "";
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                level3TitleBalanceIssueItem1 = "To balance studies and household life?";
-                level3TitleBalanceIssueItem2 = "To balance accessing income and household life?";
-                level3TitleBalanceIssueItem3 = "To balance earning an income and household life?";
-                level3TitleBalanceIssueItem4 = "To balance helping others and household life?";
-              }
-              case("fr"): 
-              { 
-                level3TitleBalanceIssueItem1 = "Équilibre entre les études et la vie de famille ?";
-                level3TitleBalanceIssueItem2 = "Équilibre entre l'accès à l'emploi et la vie de famille ?";
-                level3TitleBalanceIssueItem3 = "Équilibre entre maintenir un revenu et la vie de famille ?";
-                level3TitleBalanceIssueItem4 = "Équilibre entre aider les autres et la vie de famille ?";
-              }              
-            }
-
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem1");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem2");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
-
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(textFinders.at(2)).data, level3TitleBalanceIssueItem1);
-            expect(tester.widget<Text>(textFinders.at(3)).data, level3TitleBalanceIssueItem2);
-            expect(tester.widget<Text>(textFinders.at(4)).data, level3TitleBalanceIssueItem3);
-            expect(tester.widget<Text>(textFinders.at(5)).data, level3TitleBalanceIssueItem4);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textsFinder.at(3)).data, lqf.level3TitleBalanceIssueItem1);
+            expect(tester.widget<Text>(textsFinder.at(4)).data, lqf.level3TitleBalanceIssueItem2);
+            expect(tester.widget<Text>(textsFinder.at(5)).data, lqf.level3TitleBalanceIssueItem3);
+            expect(tester.widget<Text>(textsFinder.at(6)).data, lqf.level3TitleBalanceIssueItem4);
           },
         );
       
@@ -343,34 +315,12 @@ void main()
               matching: find.byType(Text)
             );
 
-            
+            // Getting the localized strings
+            LocalizedCAQuestionsFields lqf = .new(context);
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            var level3TitleWorkplaceIssueItem1 = "";
-            var level3TitleWorkplaceIssueItem2 = "";
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                level3TitleWorkplaceIssueItem1 = "To solve a need to be more appreciated at work?";
-                level3TitleWorkplaceIssueItem2 = "To solve a need to remain appreciated at work?";
-              }
-              case("fr"): 
-              { 
-                level3TitleWorkplaceIssueItem1 = "Le besoin d'être plus apprécié(e) au travail ?";
-                level3TitleWorkplaceIssueItem2 = "Le besoin de rester apprécié(e) au travail ?";              
-              }
-            }
-
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem1");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem2");
-
-
-
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(textFinders.at(7)).data, level3TitleWorkplaceIssueItem1);
-            expect(tester.widget<Text>(textFinders.at(8)).data, level3TitleWorkplaceIssueItem2);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(8)).data, lqf.level3TitleWorkplaceIssueItem1);
+            expect(tester.widget<Text>(textFinders.at(9)).data, lqf.level3TitleWorkplaceIssueItem2);
           },
         );
 
@@ -397,24 +347,11 @@ void main()
               matching: find.byType(Text)
             );
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-           
-            var individualPerspectiveBetterLegacy = "";
+            // Getting the localized strings
+            LocalizedCAQuestionsFields lqf = .new(context);
 
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                individualPerspectiveBetterLegacy = "To have a better legacy to leave to my children/others?";
-              }
-              case("fr"): 
-              { 
-                individualPerspectiveBetterLegacy = "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?";                
-              }              
-            }
-
-            // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(10)).data, individualPerspectiveBetterLegacy);
+            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(11)).data, lqf.level3TitleLegacyIssueItem1);
           },
         );
       
@@ -459,8 +396,8 @@ void main()
               }              
             }
 
-            // Verifying the level 3 title present
-            expect(tester.widget<Text>(textFinders.at(12)).data, caProcessPleaseDevelopTextFieldHint);
+            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(13)).data, caProcessPleaseDevelopTextFieldHint);
           },
         );
       
@@ -488,7 +425,7 @@ void main()
             await caOpenGroupExpansionTile(context, tester);
 
             // Searching the custom headings text for the second expansion tile
-            var customHeadingTextFinders = find.descendant
+            var customHeadingTextsFinder = find.descendant
             (
               of: find.byType(ExpansionTile)
                   .last, 
@@ -534,12 +471,12 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveAppreciabilityWork");
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveEarningAbility");
 
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, groupPerspectiveProblems);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, groupPerspectiveSameProblems);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, groupPerspectiveHarmonyHome);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, groupPerspectiveAppreciabilityWork);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(5)).data, groupPerspectiveEarningAbility);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(2)).data, groupPerspectiveProblems);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(3)).data, groupPerspectiveSameProblems);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(4)).data, groupPerspectiveHarmonyHome);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(5)).data, groupPerspectiveAppreciabilityWork);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(6)).data, groupPerspectiveEarningAbility);
           },
         );
       

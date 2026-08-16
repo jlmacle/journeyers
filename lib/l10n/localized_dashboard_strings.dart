@@ -11,6 +11,9 @@ class LocalizedDashboardStrings
   var sortByDate = "";
   var sortByTitle = "";
 
+  // ─── SNACKBARS ───────────────────────────────────────
+  var snackbarMessageSessionSavedSuccessfully = "";
+
   // ─── SESSIONS ITEM ───────────────────────────────────────
   var keywordsLabel = "";
 
@@ -38,6 +41,9 @@ class LocalizedDashboardStrings
     filterByKeywordsLabel = _l10n?.dashboard_filter_by_keywords ?? "Issue with the 'Filter by Keywords' label";
     sortByDate = _l10n?.dashboard_sort_by_date ?? "Issue with the 'Sort by Date' label";
     sortByTitle = _l10n?.dashboard_sort_by_title ?? "Issue with the 'Sort by Title' label";
+
+    // ─── SNACKBARS ───────────────────────────────────────
+    snackbarMessageSessionSavedSuccessfully = _l10n?.dashboard_snackbar_message_session_saved_successfully ?? "Issue with the l10n for the 'Session data saved' snackbar message";
 
     // ─── SESSIONS ITEM ───────────────────────────────────────
     keywordsLabel = _l10n?.dashboard_keywords ?? "Issue with the 'Keywords' label";
