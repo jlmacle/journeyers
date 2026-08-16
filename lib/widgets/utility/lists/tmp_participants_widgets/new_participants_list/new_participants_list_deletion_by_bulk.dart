@@ -66,7 +66,13 @@ class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeleti
     
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
+    (
+      SnackBar
+      (
+        content: Text(lds.snackbarMessageDataDeleted),
+        duration: const Duration(seconds: 2),
+      ),
+    );
  
   }
 
