@@ -153,8 +153,8 @@ void main()
             final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);           
 
-            // Searching the custom headings text for the first expansion tile
-            var customHeadingTextFinders = find.descendant
+            // Searching the custom headings texts for the first expansion tile
+            var customHeadingTextsFinders = find.descendant
             (
               of: find.byType(ExpansionTile)
                   .first, 
@@ -195,11 +195,11 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
 
 
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(customHeadingTextFinders.at(1)).data, individualPerspectiveBalanceIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(2)).data, individualPerspectiveWorkplaceIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(3)).data, individualPerspectiveLegacyIssue);
-            expect(tester.widget<Text>(customHeadingTextFinders.at(4)).data, individualPerspectiveAnotherIssue);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(2)).data, individualPerspectiveBalanceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(3)).data, individualPerspectiveWorkplaceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(4)).data, individualPerspectiveLegacyIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(5)).data, individualPerspectiveAnotherIssue);
           },
         );      
       
