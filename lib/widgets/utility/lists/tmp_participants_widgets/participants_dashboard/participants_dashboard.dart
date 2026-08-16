@@ -196,6 +196,8 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // Method used to update the list participants
   Future<void> _updateParticipantsInDB(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
 
     // Updating listData with the new participants
     listData[subItemsDataListKey] = await _listsDB.updateParticipants(updatedParticipants, listData);    
@@ -209,7 +211,11 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     // Updating the local UI state
     setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Keywords updated successfully"))
+          SnackBar
+          (
+            content: Text(lds.snackbarMessageKeywordsUpdated),
+            duration: const Duration(seconds: 2),
+          ),
         );
     });
   }
