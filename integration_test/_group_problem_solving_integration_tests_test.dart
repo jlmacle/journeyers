@@ -11,6 +11,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
@@ -20,7 +21,7 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsDashboardTitle, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
@@ -2353,7 +2354,7 @@ Future<void> main() async {
 
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
-          LocalizedDashboardStrings lds = .new(context);
+          LocalizedParticipantsStrings lps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -2396,7 +2397,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the lists dashboard title present
-          var participantsListsDashboardTitleFinder = find.text(lds.listsDashboardTitle);
+          var participantsListsDashboardTitleFinder = find.text(lps.listsDashboardTitle);
           expect(participantsListsDashboardTitleFinder, findsOne);
 
           // Searching for a loading button
