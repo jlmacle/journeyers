@@ -5,6 +5,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
@@ -60,6 +61,9 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   // Method used to delete several session data
   Future<void> _sessionsMetadataSelectedDelete() async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+    
     // Creating a fixed list to iterate over so clearing doesn"t break the loop
     final filesToDeleteMetadata = List<String>.from(widget.sessionsMetadataSelectedForDeletion!);
 
@@ -103,7 +107,7 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     // Displaying an informational message
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected sessions deleted.")));
+    (SnackBar(content: Text(lds.snackbarMessageDataDeleted)));
 
     // REFRESHING THE UI
     if (sessionDataDebug) pu.printd("Session Data: widget.sessionsMetadataAll!.isEmpty?: ${widget.sessionsMetadataAll!.isEmpty}");
