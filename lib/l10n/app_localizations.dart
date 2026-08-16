@@ -583,6 +583,12 @@ abstract class AppLocalizations {
   /// **'Data deleted'**
   String get dashboard_snackbar_message_data_deleted;
 
+  /// l10n for the 'Keywords updated' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'Keywords updated'**
+  String get dashboard_snackbar_message_keywords_updated;
+
   /// The default title for the new list or loading list page.
   ///
   /// In en, this message translates to:

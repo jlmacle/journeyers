@@ -3,12 +3,13 @@ import "dart:io";
 
 import "package:flutter/services.dart";
 
-import "package:path_provider/path_provider.dart";
 import "package:path/path.dart" as path;
+import "package:path_provider/path_provider.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+
 
 /// {@category Utils - Generic}
 /// A generic utility class used for the context analyses dashboard, and for the group problem-solvings dashboard (more to do on genericity).
@@ -196,22 +197,25 @@ class DashboardUtils {
   }
 
   /// Method used to retrieved all the file names, from the user application folder (mobile applications).
-  /// The parameter is optional, and for testing environment only.
-  Future<List<String>> getStoredFileNamesOnMobile({String? testDirectoryPath, String? fileExtension}) async
+  /// The parameters are optional, and for testing environment only.
+  Future<List<String>> getStoredFileNamesOnMobile
+  ({
+    String? testDirectoryPath,
+    String? fileExtension
+  }) async
   {
     if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile:\ncurrentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
-    
     // Getting the list of stored file names
-    List<String> result = [];
+    List<Object?> result = [];
 
     // Case of one of the integration tests
-    if (testDirectoryPath == null) return result;
+    if (testDirectoryPath == null && isInTestEnvironment) return result.cast<String>();
 
     if (isInTestEnvironment) 
     {
       var filesList = await 
       fu.getFilesWithExtensionInDirectory
-      (directoryPath: testDirectoryPath, fileExtension: fileExtension!, searchIsRecursive: true);
+      (directoryPath: testDirectoryPath!, fileExtension: fileExtension!, searchIsRecursive: true);
 
       result = [for (File item in filesList) path.basename(item.path)];
     }

@@ -168,6 +168,8 @@
   ,"@dashboard_snackbar_message_session_saved_successfully": {"description": "l10n for the 'Session data saved' snackbar message"}
   ,"dashboard_snackbar_message_data_deleted": "Data deleted"
   ,"@dashboard_snackbar_message_data_deleted": {"description": "l10n for the 'Data deleted' snackbar message"}
+  ,"dashboard_snackbar_message_keywords_updated": "Keywords updated"
+  ,"@dashboard_snackbar_message_keywords_updated": {"description": "l10n for the 'Keywords updated' snackbar message"}
   
   
   ,"text_lists_new_list_or_loading_list_page_title": "Participants lists"
