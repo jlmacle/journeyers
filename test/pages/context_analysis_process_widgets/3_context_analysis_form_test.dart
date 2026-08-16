@@ -104,7 +104,7 @@ void main()
 
             // Acccessing the localized strings
             var context = tester.element(find.byType(Scaffold).first);
-            LocalizedCAQuestionsFields qfl = .new(context);
+            LocalizedCAQuestionsFields lqf = .new(context);
 
             // Verifying that the first expansion tile title is correct 
             var firstExpansionTileQuestionFinder = find.descendant
@@ -115,7 +115,7 @@ void main()
                                                     // first Text widget out of 2
                                                     ).first;
             Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileQuestionFinder.first);
-            expect(firstExpansionTileTextWidget.data, qfl.level2TitleIndividual);
+            expect(firstExpansionTileTextWidget.data, lqf.level2TitleIndividual);
 
             // Verifying that the second expansion tile title is correct 
             var secondExpansionTileQuestionFinder = find.descendant
@@ -126,7 +126,7 @@ void main()
                                                     // first Text widget out of 2
                                                     ).first;
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileQuestionFinder.first);        
-            expect(secondExpansionTileTextWidget.data, qfl.level2TitleGroup);
+            expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
           },
         ); 
 
@@ -261,9 +261,7 @@ void main()
       
         // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
         // "Balance issue: all four item labels are correct after expansion",
-        testWidgets
-        (          
-          "Balance issue: all four item labels are correct after expansion",
+        testWidgets("Balance issue: all four item labels are correct after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -275,48 +273,21 @@ void main()
             await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
-            var textFinders = find.descendant
+            var textsFinder = find.descendant
             (
               of: find.byType(ExpansionTile)
                   .first, 
               matching: find.byType(Text)
             );
 
+            // Getting the localized strings
+            LocalizedCAQuestionsFields lqf = .new(context); 
 
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            var level3TitleBalanceIssueItem1 = "";
-            var level3TitleBalanceIssueItem2 = "";
-            var level3TitleBalanceIssueItem3 = "";
-            var level3TitleBalanceIssueItem4 = "";
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                level3TitleBalanceIssueItem1 = "To balance studies and household life?";
-                level3TitleBalanceIssueItem2 = "To balance accessing income and household life?";
-                level3TitleBalanceIssueItem3 = "To balance earning an income and household life?";
-                level3TitleBalanceIssueItem4 = "To balance helping others and household life?";
-              }
-              case("fr"): 
-              { 
-                level3TitleBalanceIssueItem1 = "Équilibre entre les études et la vie de famille ?";
-                level3TitleBalanceIssueItem2 = "Équilibre entre l'accès à l'emploi et la vie de famille ?";
-                level3TitleBalanceIssueItem3 = "Équilibre entre maintenir un revenu et la vie de famille ?";
-                level3TitleBalanceIssueItem4 = "Équilibre entre aider les autres et la vie de famille ?";
-              }              
-            }
-
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem1");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem2");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
-
-            // Verifying the level 3 titles present
-            expect(tester.widget<Text>(textFinders.at(2)).data, level3TitleBalanceIssueItem1);
-            expect(tester.widget<Text>(textFinders.at(3)).data, level3TitleBalanceIssueItem2);
-            expect(tester.widget<Text>(textFinders.at(4)).data, level3TitleBalanceIssueItem3);
-            expect(tester.widget<Text>(textFinders.at(5)).data, level3TitleBalanceIssueItem4);
+            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textsFinder.at(3)).data, lqf.level3TitleBalanceIssueItem1);
+            expect(tester.widget<Text>(textsFinder.at(4)).data, lqf.level3TitleBalanceIssueItem2);
+            expect(tester.widget<Text>(textsFinder.at(5)).data, lqf.level3TitleBalanceIssueItem3);
+            expect(tester.widget<Text>(textsFinder.at(6)).data, lqf.level3TitleBalanceIssueItem4);
           },
         );
       
