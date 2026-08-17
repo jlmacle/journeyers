@@ -1,6 +1,3 @@
-// ─── SORTING AND FILTERING ───────────────────────────────────────
-
-const listsSortByLabel = "List sort";
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
 const keywordsLabel = "Keywords:";
