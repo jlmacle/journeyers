@@ -21,7 +21,7 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, listsSortByLabel, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
@@ -1302,8 +1302,10 @@ Future<void> main() async {
             await tester.pumpAndSettle();
               // searching the text field
             titleFinder = find.byKey(const Key("problemToSolveField"));
-            await tester.enterText(titleFinder, "${titleForEdition}${editionSuffix}");
+            var titleEdited = "${titleForEdition}${editionSuffix}";
+            await tester.enterText(titleFinder, titleEdited);
             await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pump(const Duration(seconds: 10));
             await tester.pumpAndSettle();
 
               // IDEAS EDITION
@@ -1451,7 +1453,7 @@ Future<void> main() async {
               // ──────────────────────────────────────────────────
             var titleTextFinder = find.byKey(const Key("gps-process-gpsproblemtosolvedeclaration-title-text"), skipOffstage: false);
             var titleText = tester.widget<Text>(titleTextFinder);
-            expect(titleText.data, gpsProcessTitlePlaceholder);
+            expect(titleText.data, lgps.gpsDefaultProcessSessionTitle);
 
               // ── VERIFYING KEYWORDS TEXT FIELD EMPTY AND KEYWORDS INPUT CHIPS ABSENT ─────────────
               // ──────────────────────────────────────────────────────────────────────────────────────
@@ -2535,6 +2537,10 @@ Future<void> main() async {
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
 
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
+
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               await gpsFromGPSPageToProcessPage(tester);
@@ -2556,7 +2562,7 @@ Future<void> main() async {
               // ── SORTING BY LABEL ──────────────────────────────────
               // ────────────────────────────────────────────────────────
               // Triggering the sort
-              var sortByTitleFinder = find.textContaining(listsSortByLabel);
+              var sortByTitleFinder = find.textContaining(lps.listsSortByLabel);
               await tester.tap(sortByTitleFinder);
               await tester.pumpAndSettle();
               // await tester.pump(const Duration(seconds: 2));
