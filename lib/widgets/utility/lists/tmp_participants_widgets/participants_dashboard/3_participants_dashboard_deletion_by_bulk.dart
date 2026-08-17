@@ -8,7 +8,7 @@ import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2b_participants_dashboard_filtering_by_keywords.dart";
 
 
 /// {@category Utils - Project-specific}

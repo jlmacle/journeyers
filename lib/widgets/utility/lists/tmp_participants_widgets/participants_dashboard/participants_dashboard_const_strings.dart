@@ -1,7 +1,3 @@
-// ─── SORTING AND FILTERING ───────────────────────────────────────
-const filterByKeywordsLabel = "Filter by Keywords";
-const listsSortByDate = "Sort by Date";
-const listsSortByLabel = "List sort";
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
 const keywordsLabel = "Keywords:";

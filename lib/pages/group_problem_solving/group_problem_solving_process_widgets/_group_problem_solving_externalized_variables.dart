@@ -8,7 +8,6 @@ const addEmoji = "➕";
 const identifierColors = [greenShade900, orange, red];
 
 // GPSProblemToSolveDeclaration
-const gpsProcessTitlePlaceholder = "Problem To Solve";
 const gpsProcessTitleTextFieldHint = "Enter title or select below";
 
 // GPSChecklist

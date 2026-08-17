@@ -118,6 +118,10 @@ void main()
       // Pumping the widget
       await pumpGPSProblemToSolveDeclaration(tester);
 
+      // Getting the localized strings
+      var context = tester.element(find.byType(Scaffold).first);
+      LocalizedGPSStrings lgps = .new(context);
+
       // Searching the placeholder title 
       var placeholderTitleFinder = find.text("Problem To Solve");
 
@@ -138,7 +142,7 @@ void main()
       await tester.pumpAndSettle();
 
       // Verifying the placeholder title absent
-      expect(find.text(gpsProcessTitlePlaceholder), findsNothing);
+      expect(find.text(lgps.gpsDefaultProcessSessionTitle), findsNothing);
 
       // Verifying the title present
       expect(find.text(aTitle), findsOne);
@@ -153,6 +157,10 @@ void main()
 
       // Pumping the widget
       await pumpGPSProblemToSolveDeclaration(tester);
+
+      // Getting the localized strings
+      var context = tester.element(find.byType(Scaffold).first);
+      LocalizedGPSStrings lgps = .new(context);
 
       // Searching the edit emoji
       var editEmojiFinder = find.descendant
@@ -178,7 +186,7 @@ void main()
       await tester.pumpAndSettle();
 
       // Verifying the placeholder title absent
-      expect(find.text(gpsProcessTitlePlaceholder), findsNothing);
+      expect(find.text(lgps.gpsDefaultProcessSessionTitle), findsNothing);
 
       // Verifying the title present
       expect(find.text(aTitle), findsOne);

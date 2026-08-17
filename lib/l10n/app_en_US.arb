@@ -160,6 +160,8 @@
   ,"@dashboard_edit_title_sheet_text_field_hint": {"description": "l10n for the 'Title Edition' text field hint"}
   ,"dashboard_edit_title_error_empty_title": "Title cannot be empty"
   ,"@dashboard_edit_title_error_empty_title": {"description": "l10n for the 'Title cannot be empty' error message"}
+  ,"dashboard_edit_title_snackbar_message": "Title updated"
+  ,"@dashboard_edit_title_snackbar_message": {"description": "l10n for the 'Title updated' snackbar message"}
   ,"dashboard_edit_keywords_sheet_label_text": "Keywords Edition (please separate with commas)"
   ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n for the 'Keywords Edition' label text"}
   ,"dashboard_edit_keywords_sheet_text_field_hint": "Please enter your keywords."

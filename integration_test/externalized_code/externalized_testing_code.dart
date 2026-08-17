@@ -680,8 +680,12 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to enter a title in the GPS process
   Future<void> gpsEnterProcessTitle (WidgetTester tester, String aTitle) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Searching the placeholder title
-    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+    var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
 
     // Tapping on it
     await tester.tap(placeholderTitleFinder);
@@ -900,6 +904,9 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to go from the home page to the GPS process page
   Future<void> gpsFromHomePageToProcessPage(WidgetTester tester) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
     
     // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
     // ────────────────────────────────────────────────────────────────────────────
@@ -917,18 +924,22 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await gpsCheckNewProcessButtonFunctions(tester);
 
     // Searching the placeholder title
-    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+    var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
     expect(placeholderTitleFinder, findsOne);
   }
 
   // Method used to go from the GPS page to the GPS process page
   Future<void> gpsFromGPSPageToProcessPage(WidgetTester tester) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Clicking on the GPS new process button
     await gpsCheckNewProcessButtonFunctions(tester);
 
     // Searching the placeholder title
-    var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+    var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
     expect(placeholderTitleFinder, findsOne);
   }
 

@@ -284,6 +284,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_edit_title_error_empty_title => 'Title cannot be empty';
 
   @override
+  String get dashboard_edit_title_snackbar_message => 'Title updated';
+
+  @override
   String get dashboard_edit_keywords_sheet_label_text =>
       'Keywords Edition (please separate with commas)';
 
@@ -692,6 +695,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get dashboard_edit_title_error_empty_title => 'Title cannot be empty';
+
+  @override
+  String get dashboard_edit_title_snackbar_message => 'Title updated';
 
   @override
   String get dashboard_edit_keywords_sheet_label_text =>

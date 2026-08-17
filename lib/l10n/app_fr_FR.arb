@@ -161,6 +161,8 @@
     ,"@dashboard_edit_title_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition du titre"}
     ,"dashboard_edit_title_error_empty_title": "Absence de titre"
     ,"@dashboard_edit_title_error_empty_title": {"description": "Le message d'erreur en cas d'enregistrement sans titre"}
+    ,"dashboard_edit_title_snackbar_message": "Titre mis à jour"
+    ,"@dashboard_edit_title_snackbar_message": {"description": "l10n pour le message de snackbar 'Titre mis à jour'"}
     ,"dashboard_edit_keywords_sheet_label_text": "Édition des mots-clés (veuillez les séparer avec des virgules)"
     ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des mots-clés"}
     ,"dashboard_edit_keywords_sheet_text_field_hint": "Veuillez entrer vos mots-clés."

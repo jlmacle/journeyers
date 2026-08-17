@@ -159,7 +159,7 @@ class GPSProcessState extends State<GPSProcess>
         (
           content: Text(lgps.ideasListEmptyListSnackbarMessage),
           duration: const Duration(seconds: 2),
-          ),
+        ),
       );
       return;
     }
@@ -168,7 +168,7 @@ class GPSProcessState extends State<GPSProcess>
         ? _titleTec.text.trim()
         : widget.titleWhenEdition.isNotEmpty
           ? widget.titleWhenEdition
-          : lgps.defaultSessionTitle;
+          : lgps.gpsDefaultSavedSessionTitle;
 
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: sessionTitle: $sessionTitle");
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: _currentIdeas: $_currentIdeas");

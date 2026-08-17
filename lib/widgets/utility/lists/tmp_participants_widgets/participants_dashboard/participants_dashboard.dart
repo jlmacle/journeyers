@@ -14,7 +14,7 @@ import "package:journeyers/widgets/utility/lists/database/participants_lists_db_
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/1_participants_dashboard_title.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2_participants_dashboard_filtering_and_sorting_feature.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2b_participants_dashboard_filtering_by_keywords.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/3_participants_dashboard_deletion_by_bulk.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 

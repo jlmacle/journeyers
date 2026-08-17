@@ -4,7 +4,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2a_participants_dashboard_sorting_by_label.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2c_participants_dashboard_filtering_by_keywords.dart";
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2b_participants_dashboard_filtering_by_keywords.dart";
 
 /// {@category Utils - Project-specific}
 /// {@category Lists}
