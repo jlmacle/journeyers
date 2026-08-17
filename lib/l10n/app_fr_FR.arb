@@ -22,7 +22,7 @@
     "@ca_process_invitation_to_unfold_expansion_tile": {"description": "Le l10n pour 'Veuillez cliquer pour commencer'"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
     "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"},
-    "ca_process_keywords_text_field_hint": "Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)",
+    "ca_process_keywords_text_field_hint": "Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).",
     "@ca_process_keywords_text_field_hint": {"description": "Le placeholder du champ de texte, pour les mots-clés du processus d'analyse de contexte"}
     ,"ca_process_past_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer."
     ,"@ca_process_past_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le foyer"}
@@ -98,12 +98,14 @@
     ,"@gps_title_suffix": {"description": "Le suffixe de titre pour une session de résolution de problèmes en groupe."}  
     ,"gps_process_default_title": "Problème à résoudre"
     ,"@gps_process_default_title": {"description": "Le titre par défaut pour une session de résolution de problèmes en groupe."}
+    ,"gps_process_edit_title_tooltip": "Veuillez cliquer pour éditer le titre"
+    ,"@gps_process_edit_title_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour éditer le titre'"}
+    ,"gps_process_edit_title_text_field_hint": "Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."
+    ,"@gps_process_edit_title_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un titre, ou à en choisir un, si disponible."}   
     ,"gps_process_default_saved_title": "Session de résolution de problème"
     ,"@gps_process_default_saved_title": {"description": "Le titre par défaut losqu'une session de résolution de problème est sauvegardée."}
     ,"gps_process_checklist_title": "Check-list"
     ,"@gps_process_checklist_title": {"description": "Le titre par défaut pour le widget lié à la check-list."}
-    ,"gps_process_edit_title_tooltip": "Veuillez cliquer pour éditer le titre"
-    ,"@gps_process_edit_title_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour éditer le titre'"}
     ,"gps_process_add_participants_tooltip": "Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes"
     ,"@gps_process_add_participants_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes'"}
     ,"gps_process_edit_identifiers_tooltip": "Veuillez cliquer pour éditer les identifiants de participants"
@@ -199,7 +201,7 @@
     ,"@text_lists_new_list_save_dialog_title": {"description": "l10n pour le titre du dialogue de sauvegarde de liste."}
     ,"text_lists_new_list_save_dialog_text_field_label": "Nom de la liste"
     ,"@text_lists_new_list_save_dialog_text_field_label": {"description": "l10n pour le label du champ de texte, du dialogue de sauvegarde de liste."}
-    ,"text_lists_new_list_save_dialog_text_field_hint": "Par ex. Les membres de notre foyer"
+    ,"text_lists_new_list_save_dialog_text_field_hint": "Par ex. Les membres de notre foyer."
     ,"@text_lists_new_list_save_dialog_text_field_hint": {"description": "l10n pour le placeholder du champ de texte, du dialogue de sauvegarde de liste."}
     ,"text_lists_new_list_empty_list_name_message": "Absence de nom de liste"
     ,"@text_lists_new_list_empty_list_name_message": {"description": "Le message d'erreur en cas d'enregistrement sans nom de liste"}
@@ -215,7 +217,7 @@
     ,"@text_lists_dashboard_sort_by_list_name": {"description": "Le label pour le 'Tri par liste'"}    
     ,"text_lists_dashboard_edit_list_name_sheet_label_text": "Édition du nom de liste"
     ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du nom de liste"}
-    ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Veuillez entrer un nom de liste"
+    ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Veuillez entrer un nom de liste."
     ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition du nom de liste"}
     ,"text_lists_dashboard_edit_participants_sheet_label_text": "Édition des Participants (veuillez les séparer par des virgules)"
     ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
@@ -237,7 +239,7 @@
     ,"@l10n_done": {"description": "l10n pour 'Fait'"}
   
 
-    ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)"
+    ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."
     ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n pour le placeholder du champ de texte pour l'entrée de mots-clés"}
 
     ,"l10n_keywords_overlay_close_button_tooltip": "Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés"

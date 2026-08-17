@@ -190,6 +190,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_default_saved_title => 'Problem-Solving Session';
 
   @override
+  String get gps_process_edit_title_tooltip => 'Please click to edit the title';
+
+  @override
+  String get gps_process_edit_title_text_field_hint =>
+      'Please enter a title or select below.';
+
+  @override
   String get gps_process_add_participants_tooltip =>
       'Please click to add participants to the problem-solving session';
 
@@ -215,9 +222,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gps_process_checklist_title => 'Checklist';
-
-  @override
-  String get gps_process_edit_title_tooltip => 'Please click to edit the title';
 
   @override
   String get gps_process_checklist_invitation =>
@@ -350,7 +354,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
-      'e.g. Our household members';
+      'e.g. Our household members.';
 
   @override
   String get text_lists_new_list_empty_list_name_message =>
@@ -376,7 +380,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
-      'Please enter a list name';
+      'Please enter a list name.';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
@@ -407,7 +411,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Please enter one keyword at a time.\n(+ Enter key)';
+      'Please enter one keyword at a time.\n(+ Enter key).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
@@ -603,6 +607,13 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get gps_process_default_saved_title => 'Problem-Solving Session';
 
   @override
+  String get gps_process_edit_title_tooltip => 'Please click to edit the title';
+
+  @override
+  String get gps_process_edit_title_text_field_hint =>
+      'Please enter a title or select below.';
+
+  @override
   String get gps_process_add_participants_tooltip =>
       'Please click to add participants to the problem-solving session';
 
@@ -628,9 +639,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_checklist_title => 'Checklist';
-
-  @override
-  String get gps_process_edit_title_tooltip => 'Please click to edit the title';
 
   @override
   String get gps_process_checklist_invitation =>
@@ -763,7 +771,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
-      'e.g. Our household members';
+      'e.g. Our household members.';
 
   @override
   String get text_lists_new_list_empty_list_name_message =>
@@ -789,7 +797,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
-      'Please enter a list name';
+      'Please enter a list name.';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
@@ -820,7 +828,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Please enter one keyword at a time.\n(+ Enter key)';
+      'Please enter one keyword at a time.\n(+ Enter key).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>

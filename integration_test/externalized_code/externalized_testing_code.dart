@@ -694,7 +694,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // Searching the text field
     var textFieldFinder = find.ancestor
     (
-      of: find.text(gpsProcessTitleTextFieldHint), 
+      of: find.text(lgps.gpsProcessTitleTextFieldHint), 
       matching: find.byType(TextField)
     );
 

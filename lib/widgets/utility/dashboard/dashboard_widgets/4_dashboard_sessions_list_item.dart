@@ -1,23 +1,15 @@
-import "dart:convert";
-import "dart:io";
-import "dart:typed_data";
 
 import "package:flutter/material.dart";
 
-import "package:file_picker/file_picker.dart";
-import "package:intl/intl.dart";
-import "package:path/path.dart" as path;
 import "package:share_plus/share_plus.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
-import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart";
 
@@ -83,11 +75,9 @@ class _SessionsListItemState extends State<SessionsListItem>
 
   // Data related to deleting ideas from the overlay
   // List of ideas present before deletion
-  List<String> _ideasList = [];
-  List<String> _ideasListBeforeEditionCopy = [];
+  final List<String> _ideasList = [];
 
-  bool _previewEditMode = false;
- 
+  bool _previewEditMode = false; 
 
   // To clean
   // Method used to update the keywords
@@ -115,119 +105,6 @@ class _SessionsListItemState extends State<SessionsListItem>
 
     if (sessionDataDebug) pu.printd("Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
   }
-
-  // Method used to save data and metadata
-  Future<void> _saveUpdatedDataAndMetadata
-({
-  required String title, required List<String> keywords, required List<String> updatedIdeas,  
-  required String fileNameWithoutExtension, required String fileExtension,
-  required String originalFilePath,
-}) async 
-{
-  // Accessing the localized data
-  LocalizedDashboardStrings lds = .new(context);
-
-  if (updatedIdeas.isEmpty) 
-  {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("No ideas to save!")),
-    );
-    return;
-  }
-
-  var now = DateTime.now();
-  var formatter = DateFormat("MMMM dd, yyyy").add_jm();
-  var formattedDate = formatter.format(now);
-  String fileContent = "Group Problem Solving Ideas\n";
-  fileContent += "$title\n";
-  fileContent += "Date: $formattedDate\n";
-  fileContent += "----------------------------\n";
-  for (var i = 0; i < updatedIdeas.length; i++) {
-    fileContent += "${i + 1}. ${updatedIdeas[i]}\n";
-  }
-  
-  Uint8List dataBytes = Uint8List.fromList(utf8.encode(fileContent));
-  String? filePath;
-
-  try {
-    String? folderPath = await rtdu.getApplicationFolderPath();
-    filePath = "$folderPath/${fileNameWithoutExtension}.${fileExtension}";
-
-    if (Platform.isAndroid) 
-    {
-      if (!isInTestEnvironment) {
-        await fu.deleteFile(filePath);
-        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
-        filePath = await fu.saveFileOnAndroid(fileNameWithoutExtension, fileExtension, dataBytes);
-        await du.getStoredFileNamesOnMobile();
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
-      }
-      else {
-        var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
-        await fu.deleteFile(filePath);
-        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
-        await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
-      }
-
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
-    } 
-    else if (Platform.isIOS) 
-    {
-      if (!isInTestEnvironment) {
-        await fu.deleteFile(filePath);
-        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
-        filePath = await fu.saveFileOniOS(fileNameWithoutExtension, fileExtension, dataBytes);
-        await du.getStoredFileNamesOnMobile();
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
-      }
-      else {
-        var applicationFolderPath = await rtdu.getApplicationFolderPath();
-        filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
-        await fu.deleteFile(filePath);
-        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
-        await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
-      }
-    } 
-    else 
-    {
-      await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: originalFilePath);
-      filePath = await FilePicker.saveFile(
-        dialogTitle: "Please enter a file name.",
-        fileName: "${fileNameWithoutExtension}.${fileExtension}", 
-        bytes: dataBytes,
-        type: FileType.custom,
-        allowedExtensions: ["txt"],
-      );       
-    }
-
-    if (filePath != null) 
-    {
-      var now = DateTime.now();
-      var formatter = DateFormat("MMMM dd, yyyy").add_jm();
-      var formattedDate = formatter.format(now);   
-      await du.saveDashboardMetadata
-      (
-        typeOfDashboardContext: DashboardUtils.gpsContext,
-        title: title, 
-        keywords: keywords, 
-        formattedDate: formattedDate,
-        filePath: filePath,
-      );
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar
-        (
-          content: Text(lds.snackbarMessageSessionSavedSuccessfully),
-          duration: const Duration(seconds: 2),
-        ),
-      );
-    }
-  } catch (e) {
-    pu.printd("Save Error: $e");
-  }
-}
 
   @override void dispose() 
   {
@@ -473,32 +350,7 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
                   icon: const Icon(Icons.close),
                   color: appBarWhite,
                   onPressed: () async
-                  {
-                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasList: $_ideasList");
-                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: _ideasListBeforeEditionCopy: $_ideasListBeforeEditionCopy");
-                    if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: previewEditMode: $_previewEditMode");
-                    
-                    if (_previewEditMode  && !cu.areListsOfEqualSortedContent(_ideasList, _ideasListBeforeEditionCopy) )
-                    {
-                        if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: List edited: saving data and metadata");
-
-                        String filePath = sessionMetadata[DashboardUtils.keyFilePath];
-                        String fileName = path.basename(filePath);
-                        String fileNameWithoutExtension = fileName.split(".").first;
-                        var keywords = sessionMetadata[DashboardUtils.keyKeywords].cast<String>();
-
-                        if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: fileNameWithoutExtension: $fileNameWithoutExtension");
-                        if (editDebug) pu.printd("Editing: SessionsListItem: _showPreviewOverlay: sessionMetadata[DashboardUtils.keyKeywords]: ${sessionMetadata[DashboardUtils.keyKeywords]}");
-                        
-                        await _saveUpdatedDataAndMetadata
-                        (title: title, keywords: keywords, updatedIdeas: _ideasList,
-                        fileNameWithoutExtension: fileNameWithoutExtension, fileExtension: "txt",
-                        originalFilePath: filePath);
-
-                        _ideasListBeforeEditionCopy = List.from(_ideasList);
-                        _previewEditMode = false;
-                    }
-
+                  {                    
                     if (!context.mounted) return;
                     Navigator.of(context).pop();
                   },

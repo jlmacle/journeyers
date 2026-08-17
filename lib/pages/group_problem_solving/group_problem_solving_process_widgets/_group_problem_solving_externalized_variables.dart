@@ -7,9 +7,6 @@ const editEmoji = "✏️";
 const addEmoji = "➕";
 const identifierColors = [greenShade900, orange, red];
 
-// GPSProblemToSolveDeclaration
-const gpsProcessTitleTextFieldHint = "Enter title or select below";
-
 // GPSChecklist
 const checkListTitle = "Checklist";
 const rectangleColor = orangeShade900;

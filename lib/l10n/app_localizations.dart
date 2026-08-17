@@ -389,6 +389,18 @@ abstract class AppLocalizations {
   /// **'Problem-Solving Session'**
   String get gps_process_default_saved_title;
 
+  /// l10n for the 'Please click to edit the title' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to edit the title'**
+  String get gps_process_edit_title_tooltip;
+
+  /// l10n for the 'Please enter a title or select below' text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a title or select below.'**
+  String get gps_process_edit_title_text_field_hint;
+
   /// l10n for the 'Please click to add participants to the problem-solving session' tooltip
   ///
   /// In en, this message translates to:
@@ -438,12 +450,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Checklist'**
   String get gps_process_checklist_title;
-
-  /// l10n for the 'Please click to edit the title' tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Please click to edit the title'**
-  String get gps_process_edit_title_tooltip;
 
   /// The invitation before the checklist
   ///
@@ -670,7 +676,7 @@ abstract class AppLocalizations {
   /// l10n for the save dialog text field hint
   ///
   /// In en, this message translates to:
-  /// **'e.g. Our household members'**
+  /// **'e.g. Our household members.'**
   String get text_lists_new_list_save_dialog_text_field_hint;
 
   /// The message when the list name is empty at saving time
@@ -712,7 +718,7 @@ abstract class AppLocalizations {
   /// l10n for the 'List Name Edition' text field hint
   ///
   /// In en, this message translates to:
-  /// **'Please enter a list name'**
+  /// **'Please enter a list name.'**
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint;
 
   /// l10n for the 'Participants Edition' label text
@@ -766,7 +772,7 @@ abstract class AppLocalizations {
   /// l10n for the keywords entry text field hint
   ///
   /// In en, this message translates to:
-  /// **'Please enter one keyword at a time.\n(+ Enter key)'**
+  /// **'Please enter one keyword at a time.\n(+ Enter key).'**
   String get l10n_keywords_entry_text_field_hint;
 
   /// l10n for the keywords overlay close button tooltip

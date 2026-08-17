@@ -15,6 +15,9 @@ class LocalizedGPSStrings
   var participantIdentifiersSingleDeletionLabel = "";
   var participantIdentifiersBulkDeletionLabel = "";
 
+  // GPSProblemToSolveDeclaration
+  var gpsProcessTitleTextFieldHint = "";
+
   // GPSIdeasList
   var ideasListTitle = "";
   var ideasListPlaceholder = "";
@@ -33,6 +36,9 @@ class LocalizedGPSStrings
     participantIdentifiersSingleDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_one ?? "Issue with the l10n for 'Clear\nOne'";
     participantIdentifiersBulkDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_all ?? "Issue with the l10n for 'Clear\nAll'";
   
+    // GPSProblemToSolveDeclaration
+    gpsProcessTitleTextFieldHint = _l10n?.gps_process_edit_title_text_field_hint ?? "Issue with the l10n for the 'Please enter a title or select below' text field hint'";
+
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
     ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";

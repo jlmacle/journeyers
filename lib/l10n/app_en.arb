@@ -20,7 +20,6 @@
   "@ca_process_title": {"description": "The title of the context analysis process"},
   "ca_process_invitation_to_unfold_expansion_tile": "Please click to toggle",
   "@ca_process_invitation_to_unfold_expansion_tile": {"description": "The l10n for 'Please click to toggle'"},
-  
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
   "@ca_process_title_text_field_hint": {"description": "The text field hint, for the title of the context analysis process"},
   "ca_process_keywords_text_field_hint": "Please enter one keyword at a time (+ Enter key).",
@@ -101,6 +100,10 @@
   ,"@gps_process_default_title": {"description": "The default title for a problem-solving session."}
   ,"gps_process_default_saved_title": "Problem-Solving Session"
   ,"@gps_process_default_saved_title": {"description": "The default title when saving a problem-solving session."}
+  ,"gps_process_edit_title_tooltip": "Please click to edit the title"
+  ,"@gps_process_edit_title_tooltip": {"description": "l10n for the 'Please click to edit the title' tooltip"}
+  ,"gps_process_edit_title_text_field_hint": "Please enter a title or select below."
+  ,"@gps_process_edit_title_text_field_hint": {"description": "l10n for the 'Please enter a title or select below' text field hint"}
   ,"gps_process_add_participants_tooltip": "Please click to add participants to the problem-solving session"
   ,"@gps_process_add_participants_tooltip": {"description": "l10n for the 'Please click to add participants to the problem-solving session' tooltip"}
   ,"gps_process_edit_identifiers_tooltip": "Please click to edit the participants identifiers"
@@ -115,16 +118,15 @@
   ,"@gps_process_list_of_ideas_placeholder": {"description": "l10n for the 'No ideas added yet.' placeholder"}
   ,"gps_process_snackbar_message_no_ideas_to_save": "No ideas to save"
   ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n for the 'No ideas to save' snackbar message"}
-  
+    
   ,"gps_process_checklist_title": "Checklist"
   ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
-  ,"gps_process_edit_title_tooltip": "Please click to edit the title"
-  ,"@gps_process_edit_title_tooltip": {"description": "l10n for the 'Please click to edit the title' tooltip"}
   ,"gps_process_checklist_invitation": "Please consider postponing\nif incomplete"
   ,"@gps_process_checklist_invitation": {"description": "The invitation before the checklist"}
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}
   
+
   ,"folder_picker_on_mobile": "Please select or create a folder\nfor app storage."
   ,"@folder_picker_on_mobile": {"description":"Label for folder selection/creation, for app storage"}
   ,"file_name_process_text_field_hint_on_mobile": "Please add the file name, without ."
@@ -172,8 +174,8 @@
   ,"@dashboard_snackbar_message_data_deleted": {"description": "l10n for the 'Data deleted' snackbar message"}
   ,"dashboard_snackbar_message_keywords_updated": "Keywords updated"
   ,"@dashboard_snackbar_message_keywords_updated": {"description": "l10n for the 'Keywords updated' snackbar message"}
-  
-  
+   
+
   ,"text_lists_new_list_or_loading_list_page_title": "Participants lists"
   ,"@text_lists_new_list_or_loading_list_page_title": {"description": "The default title for the new list or loading list page."}
   ,"text_lists_new_list_or_loading_list_page_subtitle": "What would you like to do?"
@@ -198,7 +200,7 @@
   ,"@text_lists_new_list_save_dialog_title": {"description": "l10n for the save dialog title"}
   ,"text_lists_new_list_save_dialog_text_field_label": "List label"
   ,"@text_lists_new_list_save_dialog_text_field_label": {"description": "l10n for the save dialog text field label"}
-  ,"text_lists_new_list_save_dialog_text_field_hint": "e.g. Our household members"
+  ,"text_lists_new_list_save_dialog_text_field_hint": "e.g. Our household members."
   ,"@text_lists_new_list_save_dialog_text_field_hint": {"description": "l10n for the save dialog text field hint"}
   ,"text_lists_new_list_empty_list_name_message": "Label cannot be empty."
   ,"@text_lists_new_list_empty_list_name_message": {"description": "The message when the list name is empty at saving time"}
@@ -207,23 +209,21 @@
   ,"text_lists_new_list_close_tooltip": "Please click to go to the previous page"
   ,"@text_lists_new_list_close_tooltip": {"description": "l10n for the 'click to go to the previous page' tooltip"}
   
-
   ,"text_lists_dashboard_title": "Stored participants lists"
   ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
   ,"text_lists_dashboard_sort_by_list_name": "List sort"
   ,"@text_lists_dashboard_sort_by_list_name": {"description": "The 'List sort' label"} 
   ,"text_lists_dashboard_edit_list_name_sheet_label_text": "List Name Edition"
   ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n for the 'List Name Edition' label text"}
-  ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Please enter a list name"
+  ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Please enter a list name."
   ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n for the 'List Name Edition' text field hint"}
   ,"text_lists_dashboard_edit_participants_sheet_label_text": "Participants Edition (please separate with commas)"
   ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n for the 'Participants Edition' label text"}
-   ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Please enter the participants."
+  ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Please enter the participants."
   ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n for the 'Participants Edition' text field hint"}
   ,"text_lists_dashboard_list_loading_button_text": "Please click to load"
   ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n for the list loading button text"}
-  
-
+    
 
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
@@ -235,17 +235,16 @@
   ,"@l10n_save": {"description": "l10n for 'Save'"}
   ,"l10n_done": "Done"
   ,"@l10n_done": {"description": "l10n for 'Done'"}
-
   
-  ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time.\n(+ Enter key)"
+  
+
+  ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time.\n(+ Enter key)."
   ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n for the keywords entry text field hint"}
   
   ,"l10n_keywords_overlay_close_button_tooltip": "Please click to close the keywords declaration page"
   ,"@l10n_keywords_overlay_close_button_tooltip": {"description": "l10n for the keywords overlay close button tooltip"}
-  
+
 
   ,"save_button_text": "Save Changes"
   ,"@save_button_text": {"description": "l10n for the save_button text"}
-  
-
 }

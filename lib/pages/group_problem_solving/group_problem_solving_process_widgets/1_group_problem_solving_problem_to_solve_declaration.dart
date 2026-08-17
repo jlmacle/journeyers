@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -73,6 +74,9 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedGPSStrings lgps = .new(context);
+    
     return _isEditMode || widget.isEditMode
       ? Column(
           children: [
@@ -84,7 +88,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               focusNode: _textFieldFocusNode,
               decoration: InputDecoration
               (
-                hintText: gpsProcessTitleTextFieldHint,
+                hintText: lgps.gpsProcessTitleTextFieldHint,
                 suffixIcon: IconButton
                 (
                   icon: const Icon(Icons.check, color: greenShade900),

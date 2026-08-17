@@ -45,7 +45,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -192,6 +192,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Session de résolution de problème';
 
   @override
+  String get gps_process_edit_title_tooltip =>
+      'Veuillez cliquer pour éditer le titre';
+
+  @override
+  String get gps_process_edit_title_text_field_hint =>
+      'Veuillez entrer un titre ou en choisir un ci-dessous, si disponible.';
+
+  @override
   String get gps_process_add_participants_tooltip =>
       'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes';
 
@@ -217,10 +225,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_checklist_title => 'Check-list';
-
-  @override
-  String get gps_process_edit_title_tooltip =>
-      'Veuillez cliquer pour éditer le titre';
 
   @override
   String get gps_process_checklist_invitation =>
@@ -356,7 +360,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
-      'Par ex. Les membres de notre foyer';
+      'Par ex. Les membres de notre foyer.';
 
   @override
   String get text_lists_new_list_empty_list_name_message =>
@@ -383,7 +387,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
-      'Veuillez entrer un nom de liste';
+      'Veuillez entrer un nom de liste.';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
@@ -414,7 +418,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
@@ -465,7 +469,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -612,6 +616,14 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Session de résolution de problème';
 
   @override
+  String get gps_process_edit_title_tooltip =>
+      'Veuillez cliquer pour éditer le titre';
+
+  @override
+  String get gps_process_edit_title_text_field_hint =>
+      'Veuillez entrer un titre ou en choisir un ci-dessous, si disponible.';
+
+  @override
   String get gps_process_add_participants_tooltip =>
       'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes';
 
@@ -637,10 +649,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_checklist_title => 'Check-list';
-
-  @override
-  String get gps_process_edit_title_tooltip =>
-      'Veuillez cliquer pour éditer le titre';
 
   @override
   String get gps_process_checklist_invitation =>
@@ -776,7 +784,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
-      'Par ex. Les membres de notre foyer';
+      'Par ex. Les membres de notre foyer.';
 
   @override
   String get text_lists_new_list_empty_list_name_message =>
@@ -803,7 +811,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
-      'Veuillez entrer un nom de liste';
+      'Veuillez entrer un nom de liste.';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
@@ -834,7 +842,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)';
+      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
