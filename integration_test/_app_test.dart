@@ -142,7 +142,7 @@ Future<void> main() async {
           // ── 3. SEARCHING FOR THE CA SESSION DATA IN THE GPS PROCESS  ──────────────────
           // ──────────────────────────────────────────────────────────────────────────────          
           // Searching the placeholder title
-          var placeholderTitleFinder = find.text(gpsProcessTitlePlaceholder);
+          var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
 
           // Tapping on it
           await tester.tap(placeholderTitleFinder);
