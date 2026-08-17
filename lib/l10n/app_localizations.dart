@@ -559,6 +559,12 @@ abstract class AppLocalizations {
   /// **'Title cannot be empty'**
   String get dashboard_edit_title_error_empty_title;
 
+  /// l10n for the 'Title updated' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'Title updated'**
+  String get dashboard_edit_title_snackbar_message;
+
   /// l10n for the 'Keywords Edition' label text
   ///
   /// In en, this message translates to:
