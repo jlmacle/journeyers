@@ -257,6 +257,9 @@ class DashboardPageState extends State<DashboardPage>
   // Method used to update the session title
   Future<void> _sessionTitleUpdate(String filePath, String newTitle) async 
   {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     String? previousTitle;
 
     // Updating the local UI state
@@ -274,8 +277,13 @@ class DashboardPageState extends State<DashboardPage>
       // Notifying success
       if (previousTitle!.trim() != newTitle.trim())
       {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Title updated successfully"))
+        ScaffoldMessenger.of(context).showSnackBar
+        (
+          SnackBar
+          (
+            content: Text(lds.snackbarMessageTitleUpdated),
+            duration: const Duration(seconds: 2),
+          )
         );
       }
     });
