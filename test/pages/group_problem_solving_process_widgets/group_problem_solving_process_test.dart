@@ -132,7 +132,7 @@ void main()
       // Searching the text field
       var textFieldFinder = find.ancestor
       (
-        of: find.text(gpsProcessTitleTextFieldHint), 
+        of: find.text(lgps.gpsProcessTitleTextFieldHint), 
         matching: find.byType(TextField)
       );
 
@@ -176,7 +176,7 @@ void main()
       // Searching the text field
       var textFieldFinder = find.ancestor
       (
-        of: find.text(gpsProcessTitleTextFieldHint), 
+        of: find.text(lgps.gpsProcessTitleTextFieldHint), 
         matching: find.byType(TextField)
       );
 
