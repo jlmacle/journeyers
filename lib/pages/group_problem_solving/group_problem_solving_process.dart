@@ -159,7 +159,7 @@ class GPSProcessState extends State<GPSProcess>
         (
           content: Text(lgps.ideasListEmptyListSnackbarMessage),
           duration: const Duration(seconds: 2),
-          ),
+        ),
       );
       return;
     }
