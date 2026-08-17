@@ -168,7 +168,7 @@ class GPSProcessState extends State<GPSProcess>
         ? _titleTec.text.trim()
         : widget.titleWhenEdition.isNotEmpty
           ? widget.titleWhenEdition
-          : lgps.defaultSavedSessionTitle;
+          : lgps.gpsDefaultSavedSessionTitle;
 
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: sessionTitle: $sessionTitle");
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: _currentIdeas: $_currentIdeas");
