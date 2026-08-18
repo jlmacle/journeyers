@@ -30,6 +30,7 @@ class LocalizedParticipantsStrings
 
   // ─── Error messages ───────────────────────────────────────
   var emptyParticipantsListError = "";
+  var emptyLabelEditError = "";
 
   LocalizedParticipantsStrings(BuildContext context)
   {
@@ -59,5 +60,7 @@ class LocalizedParticipantsStrings
   
     // ─── Error messages ───────────────────────────────────────
     emptyParticipantsListError = _l10n?.text_lists_dashboard_edit_participants_sheet_empty_list_error_message ?? "Issue with the l10n for the 'Participants list cannot be empty' error message";
+    emptyLabelEditError = _l10n?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time";
+  
   }
 }
