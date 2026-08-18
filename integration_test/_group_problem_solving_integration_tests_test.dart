@@ -1549,6 +1549,10 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             await gpsFromGPSPageToProcessPage(tester);
@@ -1620,7 +1624,7 @@ Future<void> main() async {
             expect(listAlreadySavedErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
-            expect(find.text(checkListTitle), findsNothing);
+            expect(find.text(lgps.checkListTitle), findsNothing);
           });            
         
           // "Lists labels must be non empty"
@@ -1639,6 +1643,10 @@ Future<void> main() async {
             // Pumping the GPSPage
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1703,7 +1711,7 @@ Future<void> main() async {
             expect(labelEmptyErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
-            expect(find.text(checkListTitle), findsNothing);    
+            expect(find.text(lgps.checkListTitle), findsNothing);    
           });            
         
           // "List content must be unique (without reversed order when adding 2nd list)"
@@ -2063,6 +2071,10 @@ Future<void> main() async {
                 await tester.pumpWidget(buildTestableGPSPage());
                 await tester.pumpAndSettle();
 
+                // Getting the localized strings
+                var context = tester.element(find.byType(Scaffold).first);
+                LocalizedGPSStrings lgps = .new(context);
+
                 // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────
                 await gpsFromGPSPageToProcessPage(tester);
@@ -2096,7 +2108,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Verifying the GPS process page present
-                expect(find.text(checkListTitle), findsOne);
+                expect(find.text(lgps.checkListTitle), findsOne);
 
                 // Verifying the names present
                 expect(find.text(name1), findsOne);    
@@ -2122,6 +2134,10 @@ Future<void> main() async {
                 // Pumping the GPSPage
                 await tester.pumpWidget(buildTestableGPSPage());
                 await tester.pumpAndSettle();
+
+                // Getting the localized strings
+                var context = tester.element(find.byType(Scaffold).first);
+                LocalizedGPSStrings lgps = .new(context);
 
                 // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────
@@ -2159,7 +2175,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Verifying the GPS process page present
-                expect(find.text(checkListTitle), findsOne);
+                expect(find.text(lgps.checkListTitle), findsOne);
 
                 // Verifying the names present
                 for (var name in names)
@@ -2357,6 +2373,7 @@ Future<void> main() async {
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedParticipantsStrings lps = .new(context);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -2417,7 +2434,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifying the names present
           for (var name in names1)
@@ -2453,6 +2470,10 @@ Future<void> main() async {
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
 
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedGPSStrings lgps = .new(context);
+
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               await gpsFromGPSPageToProcessPage(tester);
@@ -2486,7 +2507,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Verifying the GPS process page present
-              expect(find.text(checkListTitle), findsOne);
+              expect(find.text(lgps.checkListTitle), findsOne);
 
               // Verifying the names present
               expect(find.text(name1), findsOne);    
@@ -3326,8 +3347,9 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
-          // Accessing the context
+          // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -3375,7 +3397,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifing the edited idea on the GPS process page
           expect(find.text(ideaEdited), findsOne);
@@ -3400,8 +3422,9 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
-          // Accessing the context
+          // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -3440,7 +3463,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifying the value removed from the GPS process page
           expect(find.text(idea1), findsNothing);
@@ -3465,8 +3488,9 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
-          // Accessing the context
+          // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -3518,7 +3542,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifying the values removed from the GPS process page
           expect(find.text(idea1), findsNothing);
