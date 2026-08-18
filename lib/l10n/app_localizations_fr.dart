@@ -398,6 +398,11 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez entrer les participants.';
 
   @override
+  String
+  get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
+      'La liste de participants est vide';
+
+  @override
   String get text_lists_dashboard_list_loading_button_text =>
       'Charger une liste';
 
@@ -820,6 +825,11 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
       'Veuillez entrer les participants.';
+
+  @override
+  String
+  get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
+      'La liste de participants est vide';
 
   @override
   String get text_lists_dashboard_list_loading_button_text =>

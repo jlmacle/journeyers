@@ -8,7 +8,6 @@ const addEmoji = "➕";
 const identifierColors = [greenShade900, orange, red];
 
 // GPSChecklist
-const checkListTitle = "Checklist";
 const rectangleColor = orangeShade900;
 Map<String, bool> checklistItems = {
     "Can we get feedback about people’s emotions?": false,
@@ -22,12 +21,6 @@ Map<String, bool> checklistItems = {
     "Do we need to further our context analysis?": false,
   };
 const checklistItemCheckedColor = Colors.green;
-const checklistOverlayCloseIconButtonToolTip = "Close checklist";
-
-// GPSKeywordsDeclaration
-const gpsKeywordsTitle = "Keywords";
-const gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
-
 
 // GPSNewIdea
 const newIdeaTextFieldHint = "Please enter an idea.";
@@ -35,8 +28,3 @@ const overlayClosingTooltip = "Close overlay";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";
-
-
-// NewParticipantsListKeywordsDeclaration
-const newParticipantsListKeywordsOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
-

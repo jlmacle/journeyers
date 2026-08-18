@@ -712,11 +712,15 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to enter keywords in the GPS process
   Future<void> gpsEnterProcessKeywords (WidgetTester tester, List<String> keywordsList) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Searching the keywords declaration title
     var keywordsDeclarationTitleFinder = find.descendant
                                   (
                                     of: find.byType(GPSKeywordsDeclaration), 
-                                    matching: find.text(gpsKeywordsTitle)
+                                    matching: find.text(lgps.gpsKeywordsTitle)
                                   );
 
     // Tapping on it to open the overlay
@@ -746,7 +750,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
 
     // Searching the tooltip to close the overlay
-    var closingIconFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+    var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
 
     // Closing the overlay
     await tester.tap(closingIconFinder);
@@ -1058,13 +1062,17 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
   ) async
   { 
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Loading the new list page from the GPS process page
     await gpsFromProcessPageToNewParticipantsListPage(tester);
 
     if (keywords.isNotEmpty)
     {
       // Searching for the keywords declaration title
-      var keywordsTitleFinder = find.text(gpsKeywordsTitle);
+      var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
       await tester.tap(keywordsTitleFinder);
       await tester.pumpAndSettle();
 
@@ -1089,7 +1097,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       }
 
       // Closing the overlay
-      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
       await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
       await tester.pumpAndSettle();
     }
@@ -1126,6 +1134,10 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     required List< Map<String,Map<String, dynamic>> > listDataMapsList
   }) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     for (var map in listDataMapsList)
     {
       List<String> names = (map.values.first)["names"];
@@ -1166,7 +1178,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       // Verifying the names on the GPS process page
 
       // Verifying the GPS process page present
-      expect(find.text(checkListTitle), findsOne);
+      expect(find.text(lgps.checkListTitle), findsOne);
 
       // Verifying the names present
       for (var name in names)

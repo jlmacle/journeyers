@@ -21,7 +21,7 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError;
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
@@ -817,7 +817,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -826,7 +826,7 @@ Future<void> main() async {
                 expect(find.text(kw), findsOne);
               }
               // Closing the keywords overlay
-              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
               await tester.pumpAndSettle();
 
@@ -918,7 +918,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -944,7 +944,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // closing the overlay
-              var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
@@ -1044,7 +1044,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -1053,7 +1053,7 @@ Future<void> main() async {
                 expect(find.text(kw), findsOne);
               }
               // Closing the keywords overlay
-              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
               await tester.pumpAndSettle();
 
@@ -1145,7 +1145,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1171,7 +1171,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // closing the overlay
-              var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
@@ -1271,7 +1271,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -1280,7 +1280,7 @@ Future<void> main() async {
                 expect(find.text(kw), findsOne);
               }
               // Closing the keywords overlay
-              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
               await tester.pumpAndSettle();
 
@@ -1374,7 +1374,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1400,7 +1400,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // closing the overlay
-              var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
@@ -1474,7 +1474,7 @@ Future<void> main() async {
             expect(inputChipsFinder, findsNothing);
 
               // ── CLOSING THE OVERLAY ──────
-            var closeDeclarationTooltipFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+            var closeDeclarationTooltipFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
             await tester.tap(closeDeclarationTooltipFinder);
             await tester.pumpAndSettle();
 
@@ -1549,6 +1549,10 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             await gpsFromGPSPageToProcessPage(tester);
@@ -1620,7 +1624,7 @@ Future<void> main() async {
             expect(listAlreadySavedErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
-            expect(find.text(checkListTitle), findsNothing);
+            expect(find.text(lgps.checkListTitle), findsNothing);
           });            
         
           // "Lists labels must be non empty"
@@ -1639,6 +1643,10 @@ Future<void> main() async {
             // Pumping the GPSPage
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1703,7 +1711,7 @@ Future<void> main() async {
             expect(labelEmptyErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
-            expect(find.text(checkListTitle), findsNothing);    
+            expect(find.text(lgps.checkListTitle), findsNothing);    
           });            
         
           // "List content must be unique (without reversed order when adding 2nd list)"
@@ -1953,6 +1961,10 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             await gpsFromGPSPageToProcessPage(tester);
@@ -1964,7 +1976,7 @@ Future<void> main() async {
             // ── ADDING KEYWORDS  ──────────────────────────────────
             // ──────────────────────────────────────────────────────
               // Searching the keywordsDeclarationTitle
-            var keywordsDeclarationTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsDeclarationTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsDeclarationTitleFinder);
             await tester.pumpAndSettle();
               // Adding two keywords
@@ -2003,7 +2015,7 @@ Future<void> main() async {
 
             // ── CLOSING THE OVERLAY  ────────────────────
             // ────────────────────────────────────────────
-            var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+            var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
             await tester.tap(closeOverlayFinder); 
             await tester.pumpAndSettle();   
 
@@ -2063,6 +2075,10 @@ Future<void> main() async {
                 await tester.pumpWidget(buildTestableGPSPage());
                 await tester.pumpAndSettle();
 
+                // Getting the localized strings
+                var context = tester.element(find.byType(Scaffold).first);
+                LocalizedGPSStrings lgps = .new(context);
+
                 // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────
                 await gpsFromGPSPageToProcessPage(tester);
@@ -2096,7 +2112,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Verifying the GPS process page present
-                expect(find.text(checkListTitle), findsOne);
+                expect(find.text(lgps.checkListTitle), findsOne);
 
                 // Verifying the names present
                 expect(find.text(name1), findsOne);    
@@ -2122,6 +2138,10 @@ Future<void> main() async {
                 // Pumping the GPSPage
                 await tester.pumpWidget(buildTestableGPSPage());
                 await tester.pumpAndSettle();
+
+                // Getting the localized strings
+                var context = tester.element(find.byType(Scaffold).first);
+                LocalizedGPSStrings lgps = .new(context);
 
                 // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────
@@ -2159,7 +2179,7 @@ Future<void> main() async {
                 await tester.pumpAndSettle();
 
                 // Verifying the GPS process page present
-                expect(find.text(checkListTitle), findsOne);
+                expect(find.text(lgps.checkListTitle), findsOne);
 
                 // Verifying the names present
                 for (var name in names)
@@ -2357,6 +2377,7 @@ Future<void> main() async {
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedParticipantsStrings lps = .new(context);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -2406,7 +2427,7 @@ Future<void> main() async {
           var loadingButtonFinder = find.descendant
           (
             of: find.byType(ElevatedButton), 
-            matching: find.text(loadingButtonLabel)
+            matching: find.text(lps.loadingButtonLabel)
           );
           expect(participantsListsDashboardTitleFinder, findsOne);
 
@@ -2417,7 +2438,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifying the names present
           for (var name in names1)
@@ -2453,6 +2474,10 @@ Future<void> main() async {
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
 
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedGPSStrings lgps = .new(context);
+
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               await gpsFromGPSPageToProcessPage(tester);
@@ -2486,7 +2511,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Verifying the GPS process page present
-              expect(find.text(checkListTitle), findsOne);
+              expect(find.text(lgps.checkListTitle), findsOne);
 
               // Verifying the names present
               expect(find.text(name1), findsOne);    
@@ -2674,8 +2699,7 @@ Future<void> main() async {
         group("Deletion Tests: \n", ()
         {
           // "Deletion: Single deletion with icon \n"
-          testWidgets(
-            "Deletion: Single deletion with icon \n",
+          testWidgets("Deletion: Single deletion with icon \n",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -2690,6 +2714,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -2710,7 +2738,7 @@ Future<void> main() async {
               // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────            
               // Searching for the tooltip 
-              var deleteIconFinder = find.byTooltip(listsDeleteTooltipLabel);
+              var deleteIconFinder = find.byTooltip(lps.listsDeleteTooltipLabel);
 
               // Tapping the icon
               await tester.tap(deleteIconFinder);
@@ -2886,6 +2914,10 @@ Future<void> main() async {
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
 
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
+
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               await gpsFromGPSPageToProcessPage(tester);
@@ -2926,7 +2958,7 @@ Future<void> main() async {
 
               // Clicking on the "Save" button
               // await tester.pump(const Duration(seconds: 5));  
-              var saveButtonFinder = find.text(saveButtonLabel); 
+              var saveButtonFinder = find.text(lps.saveButtonLabel); 
               await tester.tap(saveButtonFinder);
               await tester.pumpAndSettle();
 
@@ -3034,6 +3066,10 @@ Future<void> main() async {
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
 
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
+
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
               await gpsFromGPSPageToProcessPage(tester);
@@ -3080,12 +3116,12 @@ Future<void> main() async {
 
               // Clicking on the "Save" button
               // await tester.pump(const Duration(seconds: 5));  
-              var saveButtonFinder = find.text(saveButtonLabel); 
+              var saveButtonFinder = find.text(lps.saveButtonLabel); 
               await tester.tap(saveButtonFinder);
               await tester.pumpAndSettle();
 
               // Verifying error message present
-              expect(find.text(emptyParticipantsListError), findsOne);
+              expect(find.text(lps.emptyParticipantsListError), findsOne);
             });
         
           // "Keywords edition \n"
@@ -3326,8 +3362,9 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
-          // Accessing the context
+          // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -3375,7 +3412,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifing the edited idea on the GPS process page
           expect(find.text(ideaEdited), findsOne);
@@ -3400,8 +3437,9 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
-          // Accessing the context
+          // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -3440,7 +3478,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifying the value removed from the GPS process page
           expect(find.text(idea1), findsNothing);
@@ -3465,8 +3503,9 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
-          // Accessing the context
+          // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
@@ -3518,7 +3557,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
 
           // Verifying the GPS process page present
-          expect(find.text(checkListTitle), findsOne);
+          expect(find.text(lgps.checkListTitle), findsOne);
 
           // Verifying the values removed from the GPS process page
           expect(find.text(idea1), findsNothing);
