@@ -21,7 +21,7 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, loadingButtonLabel, saveButtonLabel, listsDeleteTooltipLabel;
+import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart" show emptyLabelEditError, emptyParticipantsListError, loadingButtonLabel, saveButtonLabel;
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
@@ -2699,8 +2699,7 @@ Future<void> main() async {
         group("Deletion Tests: \n", ()
         {
           // "Deletion: Single deletion with icon \n"
-          testWidgets(
-            "Deletion: Single deletion with icon \n",
+          testWidgets("Deletion: Single deletion with icon \n",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -2715,6 +2714,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -2735,7 +2738,7 @@ Future<void> main() async {
               // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────────────────            
               // Searching for the tooltip 
-              var deleteIconFinder = find.byTooltip(listsDeleteTooltipLabel);
+              var deleteIconFinder = find.byTooltip(lps.listsDeleteTooltipLabel);
 
               // Tapping the icon
               await tester.tap(deleteIconFinder);
