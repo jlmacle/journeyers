@@ -3,7 +3,6 @@
 
 // Buttons
 const newListButtonLabel = "Please tap to add a list.";
-const saveButtonLabel = "Save";
 
 // Text field labels
 const keywordsTextFieldLabel = "Keywords Edition (please separate with commas)";
