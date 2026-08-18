@@ -3,7 +3,6 @@
 
 // Buttons
 const newListButtonLabel = "Please tap to add a list.";
-const loadingButtonLabel = "Please click to load";
 const saveButtonLabel = "Save";
 
 // Text field labels
