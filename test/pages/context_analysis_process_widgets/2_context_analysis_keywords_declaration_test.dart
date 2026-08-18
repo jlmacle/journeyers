@@ -8,7 +8,6 @@ void main()
     group("CAKeywordsDeclaration Tests: \n", 
     () 
     { 
-      // "A keyword is added to the display, when added from the text field: \n"
       testWidgets("A keyword is added to the display, when added from the text field: \n", 
       (WidgetTester tester) async 
       {
@@ -42,8 +41,6 @@ void main()
       }
       );
 
-
-      // "A keyword added twice, is displayed once: \n"
       testWidgets("A keyword added twice, is displayed once: \n", 
       (WidgetTester tester) async 
       {
@@ -81,7 +78,6 @@ void main()
       }
       );
   
-      // "Keywords are added in alphabetical order: \n"
       testWidgets("Keywords are added in alphabetical order: \n", 
       (WidgetTester tester) async 
       {
@@ -129,7 +125,6 @@ void main()
       }
       );
 
-      // "20 keywords can be added to the context analysis, without having an exception: \n"
       testWidgets("20 keywords can be added to the context analysis, without having an exception: \n", 
       (WidgetTester tester) async 
       {
