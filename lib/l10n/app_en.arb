@@ -206,6 +206,10 @@
   ,"@text_lists_new_list_empty_list_name_message": {"description": "The message when the list name is empty at saving time"}
   ,"text_lists_new_list_same_list_name_message": " already exists.\nPlease choose another label."
   ,"@text_lists_new_list_same_list_name_message": {"description": "The message, at saving time, when a list name has already been used."}
+  ,"text_lists_new_list_saved_as_snackbar_message": "Saved as "
+  ,"@text_lists_new_list_saved_as_snackbar_message": {"description": "Part of the SnackBar message, at list saving time."}
+  
+  
   ,"text_lists_new_list_close_tooltip": "Please click to go to the previous page"
   ,"@text_lists_new_list_close_tooltip": {"description": "l10n for the 'click to go to the previous page' tooltip"}
   
