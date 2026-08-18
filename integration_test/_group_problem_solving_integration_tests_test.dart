@@ -826,7 +826,7 @@ Future<void> main() async {
                 expect(find.text(kw), findsOne);
               }
               // Closing the keywords overlay
-              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
               await tester.pumpAndSettle();
 
@@ -944,7 +944,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // closing the overlay
-              var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
@@ -1053,7 +1053,7 @@ Future<void> main() async {
                 expect(find.text(kw), findsOne);
               }
               // Closing the keywords overlay
-              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
               await tester.pumpAndSettle();
 
@@ -1171,7 +1171,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // closing the overlay
-              var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
@@ -1280,7 +1280,7 @@ Future<void> main() async {
                 expect(find.text(kw), findsOne);
               }
               // Closing the keywords overlay
-              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
               await tester.pumpAndSettle();
 
@@ -1400,7 +1400,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // closing the overlay
-              var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+              var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
               await tester.tap(closeOverlayFinder);
               await tester.pumpAndSettle();
 
@@ -1474,7 +1474,7 @@ Future<void> main() async {
             expect(inputChipsFinder, findsNothing);
 
               // ── CLOSING THE OVERLAY ──────
-            var closeDeclarationTooltipFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+            var closeDeclarationTooltipFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
             await tester.tap(closeDeclarationTooltipFinder);
             await tester.pumpAndSettle();
 
@@ -2015,7 +2015,7 @@ Future<void> main() async {
 
             // ── CLOSING THE OVERLAY  ────────────────────
             // ────────────────────────────────────────────
-            var closeOverlayFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+            var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
             await tester.tap(closeOverlayFinder); 
             await tester.pumpAndSettle();   
 
