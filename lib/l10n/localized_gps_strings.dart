@@ -18,6 +18,9 @@ class LocalizedGPSStrings
   // GPSProblemToSolveDeclaration
   var gpsProcessTitleTextFieldHint = "";
 
+  // GPSChecklist
+  var checkListTitle = "";
+
   // GPSIdeasList
   var ideasListTitle = "";
   var ideasListPlaceholder = "";
@@ -38,6 +41,9 @@ class LocalizedGPSStrings
   
     // GPSProblemToSolveDeclaration
     gpsProcessTitleTextFieldHint = _l10n?.gps_process_edit_title_text_field_hint ?? "Issue with the l10n for the 'Please enter a title or select below' text field hint'";
+
+    // GPSChecklist
+    checkListTitle = _l10n?.gps_process_checklist_title ?? "Issue with the title for the checklist-related widget.";
 
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
