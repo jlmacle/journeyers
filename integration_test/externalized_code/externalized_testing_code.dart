@@ -1126,6 +1126,10 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     required List< Map<String,Map<String, dynamic>> > listDataMapsList
   }) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     for (var map in listDataMapsList)
     {
       List<String> names = (map.values.first)["names"];
@@ -1166,7 +1170,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       // Verifying the names on the GPS process page
 
       // Verifying the GPS process page present
-      expect(find.text(checkListTitle), findsOne);
+      expect(find.text(lgps.checkListTitle), findsOne);
 
       // Verifying the names present
       for (var name in names)
