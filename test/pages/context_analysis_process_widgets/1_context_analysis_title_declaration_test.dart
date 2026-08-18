@@ -88,6 +88,29 @@ void main() {
     }
     );    
   
+    testWidgets("The title length has a limit of 150 characters", 
+    (WidgetTester tester) async 
+    {
+      // Building the widget
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: CATitleDeclaration
+            (
+              analysisTitleWhenEdition: "",
+              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
+            )
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect (find.textContaining("/150"), findsOne);
+    }
+    );    
+  
   }
 );  
 
