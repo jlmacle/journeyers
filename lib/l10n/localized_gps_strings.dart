@@ -23,6 +23,7 @@ class LocalizedGPSStrings
 
   // GPSKeywordsDeclaration
   var gpsKeywordsTitle = "";
+  var gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = "";
 
   // GPSIdeasList
   var ideasListTitle = "";
@@ -50,6 +51,7 @@ class LocalizedGPSStrings
 
     // GPSKeywordsDeclaration
     gpsKeywordsTitle = _l10n?.l10n_keywords ?? "Issue with the l10n for 'Keywords'.";
+    gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = _l10n?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip";                 
 
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
