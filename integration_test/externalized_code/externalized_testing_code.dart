@@ -712,11 +712,15 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to enter keywords in the GPS process
   Future<void> gpsEnterProcessKeywords (WidgetTester tester, List<String> keywordsList) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Searching the keywords declaration title
     var keywordsDeclarationTitleFinder = find.descendant
                                   (
                                     of: find.byType(GPSKeywordsDeclaration), 
-                                    matching: find.text(gpsKeywordsTitle)
+                                    matching: find.text(lgps.gpsKeywordsTitle)
                                   );
 
     // Tapping on it to open the overlay
@@ -1058,13 +1062,17 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
   ) async
   { 
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Loading the new list page from the GPS process page
     await gpsFromProcessPageToNewParticipantsListPage(tester);
 
     if (keywords.isNotEmpty)
     {
       // Searching for the keywords declaration title
-      var keywordsTitleFinder = find.text(gpsKeywordsTitle);
+      var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
       await tester.tap(keywordsTitleFinder);
       await tester.pumpAndSettle();
 
