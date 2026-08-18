@@ -817,7 +817,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -918,7 +918,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1044,7 +1044,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -1145,7 +1145,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1271,7 +1271,7 @@ Future<void> main() async {
             // ── Verifying the keywords present ──────────
             // ────────────────────────────────────────────
               // Opening the keywords overlay
-            var keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
               // Verifying the keywords present
@@ -1374,7 +1374,7 @@ Future<void> main() async {
 
             // KEYWORDS EDITION
               // Opening the keywords overlay
-            keywordsWidgetTitleFinder = find.text(gpsKeywordsTitle);
+            keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsWidgetTitleFinder);
             await tester.pumpAndSettle();
 
@@ -1961,6 +1961,10 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableGPSPage());
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
             await gpsFromGPSPageToProcessPage(tester);
@@ -1972,7 +1976,7 @@ Future<void> main() async {
             // ── ADDING KEYWORDS  ──────────────────────────────────
             // ──────────────────────────────────────────────────────
               // Searching the keywordsDeclarationTitle
-            var keywordsDeclarationTitleFinder = find.text(gpsKeywordsTitle);
+            var keywordsDeclarationTitleFinder = find.text(lgps.gpsKeywordsTitle);
             await tester.tap(keywordsDeclarationTitleFinder);
             await tester.pumpAndSettle();
               // Adding two keywords
