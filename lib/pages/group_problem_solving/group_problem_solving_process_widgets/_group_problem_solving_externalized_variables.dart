@@ -22,10 +22,6 @@ Map<String, bool> checklistItems = {
   };
 const checklistItemCheckedColor = Colors.green;
 
-// GPSKeywordsDeclaration
-const gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
-
-
 // GPSNewIdea
 const newIdeaTextFieldHint = "Please enter an idea.";
 const overlayClosingTooltip = "Close overlay";
