@@ -5,6 +5,7 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -30,6 +31,10 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
+
+      // Getting the localized strings
+      var context = tester.element(find.byType(Scaffold).first);
+      LocalizedCAStrings lca = .new(context);
       
       // Getting the hint text
       var hintText = "";
@@ -48,7 +53,10 @@ void main() {
         case("en"): { hintText = "Please enter a title for this analysis."; }
         case("fr"): { hintText = "Veuillez renseigner le titre\nde cette analyse."; }        
       }
-      if (testingDebug) pu.printd("Testing Debug: hintText: $hintText");      
+      if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
+
+      // Verifying consistency between hard-coded string and localized string
+      expect(hintText, lca.caTitleTextFieldHint);     
 
       // Verifying the text field hint present
       expect(find.text(hintText), findsOneWidget);
