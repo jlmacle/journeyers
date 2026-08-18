@@ -21,6 +21,9 @@ class LocalizedGPSStrings
   // GPSChecklist
   var checkListTitle = "";
 
+  // GPSKeywordsDeclaration
+  var gpsKeywordsTitle = "";
+
   // GPSIdeasList
   var ideasListTitle = "";
   var ideasListPlaceholder = "";
@@ -44,6 +47,9 @@ class LocalizedGPSStrings
 
     // GPSChecklist
     checkListTitle = _l10n?.gps_process_checklist_title ?? "Issue with the title for the checklist-related widget.";
+
+    // GPSKeywordsDeclaration
+    gpsKeywordsTitle = _l10n?.l10n_keywords ?? "Issue with the l10n for 'Keywords'.";
 
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
