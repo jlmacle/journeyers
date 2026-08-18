@@ -28,8 +28,3 @@ const overlayClosingTooltip = "Close overlay";
 
 // GPSProcess
 const editIdentifierLabel = "Edit Value";
-
-
-// NewParticipantsListKeywordsDeclaration
-const newParticipantsListKeywordsOverlayCloseIconButtonToolTip = "Please click to close the keywords declaration page";
-
