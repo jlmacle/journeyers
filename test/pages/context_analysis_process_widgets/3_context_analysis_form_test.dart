@@ -75,9 +75,7 @@ void main()
   group("CAForm Tests: \n", 
   () 
   {  
-    group
-    (
-      "Form: Structure: Root structure: \n",
+    group("Form: Structure: Root structure: \n",
       ()
       {
         testWidgets("Two perspective expansion tiles are present",
@@ -164,16 +162,10 @@ void main()
       });
 
     // ─── INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
-    // "Form: Structure: Individual perspective: \n"
-    group
-    (
-      "Form: Structure: Individual perspective: \n",
+    group("Form: Structure: Individual perspective: \n",
       ()
       {
-        // "Expanding the tile with the individual perspective reveals all four level-3 section questions"
-        testWidgets
-        (
-          "Expanding the tile with the individual perspective reveals all four level-3 section questions",
+        testWidgets("Expanding the tile with the individual perspective reveals all four level-3 section questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -234,11 +226,7 @@ void main()
           },
         );      
       
-        // "Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n"
-        // "4 balance + 2 workplace + 1 legacy = 7"
-        testWidgets
-        (
-          "Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n"
+        testWidgets("Expanding the tile with the individual perspective reveals the correct total number of checkbox items: \n"
           "4 balance + 2 workplace + 1 legacy = 7",
           (tester) async
           {
@@ -262,11 +250,7 @@ void main()
           },
         );
       
-        // "Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
-        // "1 issue of another type = 1"
-        testWidgets
-        (
-          "Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
+        testWidgets("Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
           "1 issue of another type = 1",
           (tester) async
           {
@@ -291,7 +275,6 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
-        // "Balance issue: all four item labels are correct after expansion",
         testWidgets("Balance issue: all four item labels are correct after expansion",
           (tester) async
           {
@@ -323,11 +306,7 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: WORKPLACE SECTION ───────────────────────────────────────
-        // "Workplace issue: both item labels are correct after expansion",
-        testWidgets
-        (
-          
-          "Workplace issue: both item labels are correct after expansion",
+        testWidgets("Workplace issue: both item labels are correct after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -356,10 +335,7 @@ void main()
         );
 
         // ─── INDIVIDUAL PERSPECTIVE: LEGACY SECTION ───────────────────────────────────────
-        // "Legacy issue: the item label is present after expansion",
-        testWidgets
-        (          
-          "Legacy issue: the item label is present after expansion",
+        testWidgets("Legacy issue: the item label is present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -387,10 +363,7 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: ANOTHER ISSUE SECTION ───────────────────────────────────────
-        // "Another issue: the hint text is present after expansion",
-        testWidgets
-        (          
-          "Another issue: the hint text is present after expansion",
+        testWidgets("Another issue: the hint text is present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -436,16 +409,10 @@ void main()
     );    
 
     // ─── GROUP/TEAMS PERSPECTIVE ───────────────────────────────────────
-    // "Form: Structure: Group/Teams perspective: \n"
-    group
-    (
-      "Form: Structure: Group/Teams perspective: \n",
+    group("Form: Structure: Group/Teams perspective: \n",
       ()
-      {
-        // "Expanding the tile with the group/teams perspective reveals all five level-3 questions",
-        testWidgets
-        (
-          "Expanding the tile with the group/teams perspective reveals all five level-3 questions",
+      {    
+        testWidgets("Expanding the tile with the group/teams perspective reveals all five level-3 questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -511,11 +478,7 @@ void main()
           },
         );
       
-        // "Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n"
-        // "1 problems the groups/teams are trying to solve = 1"
-        testWidgets
-        (
-          "Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n"
+        testWidgets("Expanding the tile with the group/teams perspective reveals the correct total number of text field only items: \n"
           "1 problems the groups/teams are trying to solve = 1",
           (tester) async
           {
@@ -538,11 +501,7 @@ void main()
           },
         );
       
-        // "Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n"
-        // "4"
-        testWidgets
-        (
-          "Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n"
+        testWidgets("Expanding the tile with the group/teams perspective reveals the correct total number of segmented button items: \n"
           "4",
           (tester) async
           {
@@ -571,7 +530,6 @@ void main()
     group("Form: Start values: \n", 
     () 
     { 
-        // "At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked"
         testWidgets("At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked", 
         (WidgetTester tester) async {
 
@@ -601,7 +559,6 @@ void main()
         }
         );
     
-        // "At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons"
         testWidgets("At start, when the tile with the group/teams perspective is unfolded, no selection is present in the segmented buttons", 
         (WidgetTester tester) async {
 
