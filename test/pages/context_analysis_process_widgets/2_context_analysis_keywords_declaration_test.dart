@@ -5,10 +5,10 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 
 void main() 
 {
-    group("CAKeywordsDeclaration Tests: \n", 
+    group("CAKeywordsDeclaration Tests: ", 
     () 
     { 
-      testWidgets("A keyword is added to the display, when added from the text field: \n", 
+      testWidgets("A keyword is added to the display, when added from the text field: ", 
       (WidgetTester tester) async 
       {
         const kw = "kw";
@@ -41,7 +41,7 @@ void main()
       }
       );
 
-      testWidgets("A keyword added twice, is displayed once: \n", 
+      testWidgets("A keyword added twice, is displayed once: ", 
       (WidgetTester tester) async 
       {
         const kw = "kw";
@@ -78,7 +78,7 @@ void main()
       }
       );
   
-      testWidgets("Keywords are added in alphabetical order: \n", 
+      testWidgets("Keywords are added in alphabetical order: ", 
       (WidgetTester tester) async 
       {
         // Building the widget
@@ -125,7 +125,7 @@ void main()
       }
       );
 
-      testWidgets("20 keywords can be added to the context analysis, without having an exception: \n", 
+      testWidgets("20 keywords can be added to the context analysis, without having an exception: ", 
       (WidgetTester tester) async 
       {
         // Building the widget
@@ -154,6 +154,27 @@ void main()
         expect(inputChipTextFinder, findsNWidgets(20));
       }
       );
+  
+      testWidgets("No counter is displayed", 
+      (WidgetTester tester) async 
+      {
+        // Building the widget
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: CAKeywordsDeclaration
+              (
+                keywordsWhenEdition: const {},
+                onKeywordsUpdatedProcessCallbackFunction: (_){}
+              )
+            ),
+          ),
+        );
+
+        expect(find.textContaining("/"), findsNothing);
+      }
+      );
+  
   });
 
 
