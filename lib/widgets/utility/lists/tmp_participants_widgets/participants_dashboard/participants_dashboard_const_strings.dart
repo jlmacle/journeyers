@@ -1,8 +1,7 @@
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
 
-// Tooltips
-const listsDeleteTooltipLabel = "Delete data";
+
 
 // Buttons
 const newListButtonLabel = "Please tap to add a list.";
