@@ -12,7 +12,6 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 void main() {
   group("CATitleDeclaration Widget Tests: \n", () 
   {    
-    // "Should render the correct text field hint"
     testWidgets("Should render the correct text field hint", 
     (WidgetTester tester) async 
     {
@@ -62,6 +61,33 @@ void main() {
       expect(find.text(hintText), findsOneWidget);
     }
     );    
+  
+    testWidgets("Starts not autofocused (to avoid the keyboard on mobile)", 
+    (WidgetTester tester) async 
+    {
+      // Building the widget
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: CATitleDeclaration
+            (
+              analysisTitleWhenEdition: "",
+              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
+            )
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Getting the text field
+      var textFieldFinder = find.byType(TextField);
+      var textField = tester.widget<TextField>(textFieldFinder);
+      expect (textField.autofocus, false);
+    }
+    );    
+  
   }
 );  
 
