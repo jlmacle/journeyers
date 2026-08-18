@@ -1,8 +1,6 @@
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
 
-
-
 // Buttons
 const newListButtonLabel = "Please tap to add a list.";
 const loadingButtonLabel = "Please click to load";
