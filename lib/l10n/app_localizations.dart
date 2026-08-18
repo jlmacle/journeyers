@@ -733,6 +733,13 @@ abstract class AppLocalizations {
   /// **'Please enter the participants.'**
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint;
 
+  /// l10n for the 'The participants list is empty' error message
+  ///
+  /// In en, this message translates to:
+  /// **'The participants list is empty'**
+  String
+  get text_lists_dashboard_edit_participants_sheet_empty_list_error_message;
+
   /// l10n for the list loading button text
   ///
   /// In en, this message translates to:
