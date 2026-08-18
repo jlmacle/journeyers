@@ -22,8 +22,11 @@ class LocalizedParticipantsStrings
   // ─── New list ───────────────────────────────────────
   var newListButtonLabel = "";
 
-  // ─── List loading───────────────────────────────────────
+  // ─── List loading ───────────────────────────────────────
   var loadingButtonLabel = "";
+
+  // ─── Dialog ───────────────────────────────────────
+  var saveButtonLabel = "";
 
   LocalizedParticipantsStrings(BuildContext context)
   {
@@ -45,7 +48,10 @@ class LocalizedParticipantsStrings
     // ─── New list ───────────────────────────────────────
     newListButtonLabel = "";
 
-    // ─── List loading───────────────────────────────────────
+    // ─── List loading ───────────────────────────────────────
     loadingButtonLabel = _l10n?.text_lists_dashboard_list_loading_button_text ?? "Issue with the l10n for the list loading button text";
+  
+    // ─── Dialog ───────────────────────────────────────
+    saveButtonLabel = _l10n?.l10n_save ?? "Issue with the l10n for 'Save'";
   }
 }
