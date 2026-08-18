@@ -3,11 +3,11 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 
 // todo: code to clean
@@ -464,14 +464,17 @@ void _showParticipantsEditSheet({
       String? errorText; 
       // StatefulBuilder gives a local setState scoped to this sheet
       return StatefulBuilder(
-        builder: (context, setState) {          
+        builder: (context, setState) {   
+
+          // Getting the localized strings
+          LocalizedParticipantsStrings lps = .new(context);       
 
           Future<void> onConfirm() async {
             final participants = participantsTec.text.trim();
 
             if (participants.isEmpty) {
               setState(() {
-                errorText = emptyParticipantsListError;
+                errorText = lps.emptyParticipantsListError;
               });
               return;
             }
