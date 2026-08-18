@@ -93,8 +93,7 @@ Future<void> main() async {
   {
     // "CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
     // " (assuming an already selected path to the user session data folder)",
-    testWidgets(
-      "CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
+    testWidgets("CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
       " (assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
@@ -179,7 +178,7 @@ Future<void> main() async {
           expect(find.text(kwWorkplace), findsOne);
           
           // Searching the tooltip to close the overlay
-          var closingIconFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+          var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
 
           // Closing the overlay
           await tester.tap(closingIconFinder);
