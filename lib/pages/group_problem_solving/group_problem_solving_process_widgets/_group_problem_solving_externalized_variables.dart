@@ -8,7 +8,6 @@ const addEmoji = "➕";
 const identifierColors = [greenShade900, orange, red];
 
 // GPSChecklist
-const checkListTitle = "Checklist";
 const rectangleColor = orangeShade900;
 Map<String, bool> checklistItems = {
     "Can we get feedback about people’s emotions?": false,
