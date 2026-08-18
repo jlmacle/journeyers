@@ -1,4 +1,5 @@
 // ignore: file_names
+import "dart:io";
 
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
@@ -79,10 +80,7 @@ void main()
       "Form: Structure: Root structure: \n",
       ()
       {
-        // "Two perspective expansion tiles are present"
-        testWidgets
-        (
-          "Two perspective expansion tiles are present",
+        testWidgets("Two perspective expansion tiles are present",
           (tester) async
           {
             // Pumping the CAForm widget
@@ -93,10 +91,7 @@ void main()
           },
         );
 
-        // "Individual and group tiles carry the correct heading text"
-        testWidgets
-        (
-          "Individual and group tiles carry the correct heading text",
+        testWidgets("Individual and group tiles carry the correct heading text",
           (tester) async
           {
             // Pumping the CAForm widget
@@ -105,6 +100,26 @@ void main()
             // Acccessing the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedCAQuestionsFields lqf = .new(context);
+
+            /// Consider avoiding static references to this singleton through
+            /// [PlatformDispatcher.instance] and instead prefer using a binding for
+            /// dependency resolution such as `WidgetsBinding.instance.platformDispatcher`.
+            /// See [PlatformDispatcher.instance] for more information about why this is
+            /// preferred.
+            Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
+            var localeLanguageCode = currentLocale.languageCode;
+            if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
+            if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
+
+            var level2TitleIndividual = ""; 
+            var level2TitleGroup = ""; 
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { level2TitleIndividual = "As an individual:\nWhat problem\nam I trying to solve?"; }
+              case("fr"): { level2TitleIndividual = "En tant qu'individu:\nQuel problème\ndois-je résoudre ?"; }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: hintText: $level2TitleIndividual"); 
 
             // Verifying that the first expansion tile title is correct 
             var firstExpansionTileQuestionFinder = find.descendant
@@ -115,7 +130,12 @@ void main()
                                                     // first Text widget out of 2
                                                     ).first;
             Text firstExpansionTileTextWidget = tester.widget<Text>(firstExpansionTileQuestionFinder.first);
-            expect(firstExpansionTileTextWidget.data, lqf.level2TitleIndividual);
+            
+            // Verifying consistency between hard-coded string and localized string
+            expect(level2TitleIndividual, lqf.level2TitleIndividual);     
+
+            // Verifying the first title correct
+            expect(firstExpansionTileTextWidget.data, level2TitleIndividual);
 
             // Verifying that the second expansion tile title is correct 
             var secondExpansionTileQuestionFinder = find.descendant
@@ -126,7 +146,18 @@ void main()
                                                     // first Text widget out of 2
                                                     ).first;
             Text secondExpansionTileTextWidget = tester.widget<Text>(secondExpansionTileQuestionFinder.first);        
-            expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
+            
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { level2TitleGroup = "As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?"; }
+              case("fr"): { level2TitleGroup = "En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"; }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: hintText: $level2TitleGroup"); 
+
+            // Verifying consistency between hard-coded string and localized string
+            expect(level2TitleGroup, lqf.level2TitleGroup);     
+
+            expect(secondExpansionTileTextWidget.data, level2TitleIndividual);
           },
         ); 
 
