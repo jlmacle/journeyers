@@ -7,23 +7,45 @@ class LocalizedParticipantsStrings
   AppLocalizations? _l10n;
 
   // ─── DASHBOARD ───────────────────────────────────────
+
   // The title for the participants dashboard
   var listsDashboardTitle = "";
+
+  //  ─── Sorting and filtering ───────────────────────────────────────
   // Sorting by list name label
   var listsSortByLabel = "" ;
+
+  //  ─── Deletion ───────────────────────────────────────
   // Single deletion tooltip
   var listsDeleteTooltipLabel = "";
+
+  // ─── New list ───────────────────────────────────────
+  var newListButtonLabel = "";
+
+  // ─── List loading───────────────────────────────────────
+  var loadingButtonLabel = "";
 
   LocalizedParticipantsStrings(BuildContext context)
   {
     _l10n = AppLocalizations.of(context);    
     
     // ─── DASHBOARD ───────────────────────────────────────
+
     // The title for the participants dashboard
     listsDashboardTitle = _l10n?.text_lists_dashboard_title ?? "Issue with the title for the participants lists dashboard";
+    
+    //  ─── Sorting and filtering ───────────────────────────────────────
     // Sorting by list name label
     listsSortByLabel = _l10n?.text_lists_dashboard_sort_by_list_name ?? "Issue with the l10n for the 'List sort' label";
+    
+    //  ─── Deletion ───────────────────────────────────────
     // Single deletion tooltip
     listsDeleteTooltipLabel = _l10n?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip";
+  
+    // ─── New list ───────────────────────────────────────
+    newListButtonLabel = "";
+
+    // ─── List loading───────────────────────────────────────
+    loadingButtonLabel = _l10n?.text_lists_dashboard_list_loading_button_text ?? "Issue with the l10n for the list loading button text";
   }
 }
