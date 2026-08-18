@@ -28,6 +28,9 @@ class LocalizedParticipantsStrings
   // ─── Dialog ───────────────────────────────────────
   var saveButtonLabel = "";
 
+  // ─── Error messages ───────────────────────────────────────
+  var emptyParticipantsListError = "";
+
   LocalizedParticipantsStrings(BuildContext context)
   {
     _l10n = AppLocalizations.of(context);    
@@ -53,5 +56,8 @@ class LocalizedParticipantsStrings
   
     // ─── Dialog ───────────────────────────────────────
     saveButtonLabel = _l10n?.l10n_save ?? "Issue with the l10n for 'Save'";
+  
+    // ─── Error messages ───────────────────────────────────────
+    emptyParticipantsListError = _l10n?.text_lists_dashboard_edit_participants_sheet_empty_list_error_message ?? "Issue with the l10n for the 'Participants list cannot be empty' error message";
   }
 }
