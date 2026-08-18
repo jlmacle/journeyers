@@ -22,6 +22,8 @@ class LocalizedParticipantsStrings
   // ─── New list ───────────────────────────────────────
   var newListButtonLabel = "";
 
+  var savedAsSnackBarMessage = "";
+
   // ─── List loading ───────────────────────────────────────
   var loadingButtonLabel = "";
 
@@ -30,6 +32,7 @@ class LocalizedParticipantsStrings
 
   // ─── Error messages ───────────────────────────────────────
   var emptyParticipantsListError = "";
+  var emptyLabelEditError = "";
 
   LocalizedParticipantsStrings(BuildContext context)
   {
@@ -51,6 +54,8 @@ class LocalizedParticipantsStrings
     // ─── New list ───────────────────────────────────────
     newListButtonLabel = "";
 
+    savedAsSnackBarMessage = _l10n?.text_lists_new_list_saved_as_snackbar_message ?? "Issue with the l10n for the part of the SnackBar message, at list saving time.";
+
     // ─── List loading ───────────────────────────────────────
     loadingButtonLabel = _l10n?.text_lists_dashboard_list_loading_button_text ?? "Issue with the l10n for the list loading button text";
   
@@ -59,5 +64,7 @@ class LocalizedParticipantsStrings
   
     // ─── Error messages ───────────────────────────────────────
     emptyParticipantsListError = _l10n?.text_lists_dashboard_edit_participants_sheet_empty_list_error_message ?? "Issue with the l10n for the 'Participants list cannot be empty' error message";
+    emptyLabelEditError = _l10n?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time";
+  
   }
 }

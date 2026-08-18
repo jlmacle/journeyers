@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -200,6 +201,8 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
   // Method used to save the grouped texts in a list
   Future<void> _enteredTextItemsListSave() async {
+    // Getting the localized strings
+    LocalizedParticipantsStrings lps = .new(context);
 
     // Opening a dialog to enter the list label
     final listLabel = await _labelShowDialog();
@@ -223,7 +226,11 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
       ScaffoldMessenger.of(context).showSnackBar
       (
 
-        SnackBar(content: Text("Saved as '$listLabel'")),
+        SnackBar
+        (
+          content: Text("${lps.savedAsSnackBarMessage}$listLabel'"),
+          duration: const Duration(seconds: 2),
+        ),
       );
     } 
     catch (e, stackTrace) 

@@ -371,6 +371,10 @@ class AppLocalizationsFr extends AppLocalizations {
       ' existe déjà.\nVeuillez choisir un autre nom.';
 
   @override
+  String get text_lists_new_list_saved_as_snackbar_message =>
+      'Enregistrée en tant que ';
+
+  @override
   String get text_lists_new_list_close_tooltip =>
       'Veuillez cliquer pour retourner à la page précédente';
 
@@ -798,6 +802,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_same_list_name_message =>
       ' existe déjà.\nVeuillez choisir un autre nom.';
+
+  @override
+  String get text_lists_new_list_saved_as_snackbar_message =>
+      'Enregistrée en tant que ';
 
   @override
   String get text_lists_new_list_close_tooltip =>
