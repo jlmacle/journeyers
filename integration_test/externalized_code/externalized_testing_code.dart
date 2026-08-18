@@ -750,7 +750,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
 
     // Searching the tooltip to close the overlay
-    var closingIconFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+    var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
 
     // Closing the overlay
     await tester.tap(closingIconFinder);
@@ -1097,7 +1097,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       }
 
       // Closing the overlay
-      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
       await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
       await tester.pumpAndSettle();
     }
