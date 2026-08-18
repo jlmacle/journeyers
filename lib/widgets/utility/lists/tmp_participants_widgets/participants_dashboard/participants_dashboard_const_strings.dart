@@ -1,9 +1,7 @@
 
 // ─── SESSIONS ITEMS ───────────────────────────────────────
-const keywordsLabel = "Keywords:";
 
 // Tooltips
-const keywordsTooltipLabel = "Edit Keywords";
 const listsDeleteTooltipLabel = "Delete data";
 
 // Buttons
