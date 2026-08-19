@@ -697,6 +697,12 @@ abstract class AppLocalizations {
   /// **'Saved as '**
   String get text_lists_new_list_saved_as_snackbar_message;
 
+  /// 'Save failed' SnackBar message, at list saving time.
+  ///
+  /// In en, this message translates to:
+  /// **'Save failed'**
+  String get text_lists_new_list_save_failed_snackbar_message;
+
   /// l10n for the 'click to go to the previous page' tooltip
   ///
   /// In en, this message translates to:

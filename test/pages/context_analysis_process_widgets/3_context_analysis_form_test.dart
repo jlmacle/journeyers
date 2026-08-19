@@ -165,15 +165,17 @@ void main()
     group("Form: Structure: Individual perspective: \n",
       ()
       {
-        testWidgets("Expanding the tile with the individual perspective reveals all four level-3 section questions",
+        testWidgets("Expanding the tile with the individual perspective reveals the four correct level-3 section questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
-  
-            // Opening the individual perspective expansion tile
-              // Getting the build context
+
+            // Getting the localized strings
             final context = tester.element(find.byType(Scaffold));
+            LocalizedCAQuestionsFields lqf = .new(context); 
+
+            // Opening the individual perspective expansion tile
             await caOpenIndividualExpansionTile(context, tester);           
 
             // Searching the custom headings texts for the first expansion tile
@@ -216,6 +218,13 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveWorkplaceIssue");
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveLegacyIssue");
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
+
+            
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(individualPerspectiveBalanceIssue, lqf.level3TitleBalanceIssue);     
+            expect(individualPerspectiveWorkplaceIssue, lqf.level3TitleWorkplaceIssue);
+            expect(individualPerspectiveLegacyIssue, lqf.level3TitleLegacyIssue);
+            expect(individualPerspectiveAnotherIssue, lqf.level3TitleAnotherIssue);
 
 
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)

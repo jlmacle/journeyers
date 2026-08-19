@@ -375,6 +375,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Enregistrée en tant que ';
 
   @override
+  String get text_lists_new_list_save_failed_snackbar_message =>
+      'La sauvegarde a échouée';
+
+  @override
   String get text_lists_new_list_close_tooltip =>
       'Veuillez cliquer pour retourner à la page précédente';
 
@@ -806,6 +810,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_new_list_saved_as_snackbar_message =>
       'Enregistrée en tant que ';
+
+  @override
+  String get text_lists_new_list_save_failed_snackbar_message =>
+      'La sauvegarde a échouée';
 
   @override
   String get text_lists_new_list_close_tooltip =>
