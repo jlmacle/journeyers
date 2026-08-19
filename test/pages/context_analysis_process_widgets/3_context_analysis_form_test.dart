@@ -7,6 +7,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
@@ -450,15 +451,17 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: ANOTHER ISSUE SECTION ───────────────────────────────────────
-        testWidgets("Another issue: the hint text is present after expansion",
+        testWidgets("Another issue: the hint text is correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
+
+            // Getting the localized strings
+            final context = tester.element(find.byType(Scaffold));
+            LocalizedCAStrings lca = .new(context);
             
             // Opening the individual perspective expansion tile
-              // Getting the build context
-            final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
@@ -469,26 +472,27 @@ void main()
               matching: find.byType(Text)
             );
 
-            
-
             var localeLanguageCode = getLocaleLanguageCode(tester);
 
-            var caProcessPleaseDevelopTextFieldHint = "";
+            var caFormPleaseDevelopTextFieldHint = "";
 
             switch(localeLanguageCode.toLowerCase())
             {
               case("en"): 
               { 
-                caProcessPleaseDevelopTextFieldHint = "Please develop.";
+                caFormPleaseDevelopTextFieldHint = "Please develop.";
               }
               case("fr"): 
               { 
-                caProcessPleaseDevelopTextFieldHint = "Veuillez développer.";                
+                caFormPleaseDevelopTextFieldHint = "Veuillez développer.";                
               }              
             }
 
-            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
-            expect(tester.widget<Text>(textFinders.at(13)).data, caProcessPleaseDevelopTextFieldHint);
+            // Verifying consistency between hard-coded string and localized string
+            expect(caFormPleaseDevelopTextFieldHint, lca.caFormPleaseDevelopTextFieldHint);
+
+            // Verifying text hint text present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(13)).data, lca.caFormPleaseDevelopTextFieldHint);
           },
         );
       
