@@ -260,7 +260,7 @@ void main()
         );
       
         testWidgets("Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
-          "1 issue of another type = 1",
+          "1: issue of another type = 1",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
