@@ -528,13 +528,18 @@ ThemeData appTheme = ThemeData
     selectedShadowColor: navyBlue,
     checkmarkColor: appBarWhite,
 
-    // added to stop a green flash
-    color: WidgetStateProperty.resolveWith<Color?>((states) {
-    if (states.contains(WidgetState.selected)) {
-      return navyBlue; 
-    }
-    return navyBlue; 
-  }),
+    color: WidgetStateProperty.resolveWith<Color?>
+    (
+      (states) 
+      {
+        // selected
+        if (states.contains(WidgetState.selected)) {
+          return navyBlue; 
+        }
+        // unselected
+        return navyBlue; 
+      }
+    ),
     
     brightness: Brightness.light, 
   ),  
