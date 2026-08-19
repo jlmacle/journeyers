@@ -117,6 +117,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                   InputChip
                   (
                     label: Text(tag),
+                    deleteIconColor: appBarWhite,
                     onDeleted: () 
                     {
                       // Removal from the reference set
@@ -131,7 +132,6 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                       });
                       widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
                     }, 
-                    deleteIconColor: appBarWhite,
                   )
                 )
               ],
