@@ -99,13 +99,7 @@ void main()
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedCAQuestionsFields lqf = .new(context);
 
-            /// Consider avoiding static references to this singleton through
-            /// [PlatformDispatcher.instance] and instead prefer using a binding for
-            /// dependency resolution such as `WidgetsBinding.instance.platformDispatcher`.
-            /// See [PlatformDispatcher.instance] for more information about why this is
-            /// preferred.
-            Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
-            var localeLanguageCode = currentLocale.languageCode;
+            var localeLanguageCode = getLocaleLanguageCode(tester);
             if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
             if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
 
@@ -155,7 +149,7 @@ void main()
             // Verifying consistency between hard-coded string and localized string
             expect(level2TitleGroup, lqf.level2TitleGroup);     
 
-            expect(secondExpansionTileTextWidget.data, level2TitleIndividual);
+            expect(secondExpansionTileTextWidget.data, level2TitleGroup);
           },
         ); 
 
@@ -305,6 +299,42 @@ void main()
 
             // Getting the localized strings
             LocalizedCAQuestionsFields lqf = .new(context); 
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+            
+            var level3TitleBalanceIssueItem1 = "";
+            var level3TitleBalanceIssueItem2 = "";
+            var level3TitleBalanceIssueItem3 = "";
+            var level3TitleBalanceIssueItem4 = "";
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                level3TitleBalanceIssueItem1 = "To balance studies and household life?";
+                level3TitleBalanceIssueItem2 = "To balance accessing income and household life?";
+                level3TitleBalanceIssueItem3 = "To balance earning an income and household life?";
+                level3TitleBalanceIssueItem4 = "To balance helping others and household life?";
+              }
+              case("fr"): 
+              { 
+                level3TitleBalanceIssueItem1 = "Équilibre entre les études et la vie de famille ?";
+                level3TitleBalanceIssueItem2 = "Équilibre entre l'accès à l'emploi et la vie de famille ?";
+                level3TitleBalanceIssueItem3 = "Équilibre entre maintenir un revenu et la vie de famille ?";
+                level3TitleBalanceIssueItem4 = "Équilibre entre aider les autres et la vie de famille ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem1");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem2");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(level3TitleBalanceIssueItem1, lqf.level3TitleBalanceIssueItem1);     
+            expect(level3TitleBalanceIssueItem2, lqf.level3TitleBalanceIssueItem2);
+            expect(level3TitleBalanceIssueItem3, lqf.level3TitleBalanceIssueItem3);
+            expect(level3TitleBalanceIssueItem4, lqf.level3TitleBalanceIssueItem4);
+
 
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
             expect(tester.widget<Text>(textsFinder.at(3)).data, lqf.level3TitleBalanceIssueItem1);
