@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
@@ -74,6 +74,8 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedCAStrings lca = .new(context);
 
     return Column
     (
@@ -90,7 +92,12 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
               hint: Center
               (
                 child: 
-                Text(textAlign: TextAlign.center, AppLocalizations.of(context)?.ca_process_keywords_text_field_hint ?? "Issue with the text field hint, for the keywords of the context analysis process", style: analysisTextFieldHintStyle)
+                Text
+                (
+                  lca.caKeywordsTextFieldHint, 
+                  textAlign: TextAlign.center,                   
+                  style: analysisTextFieldHintStyle
+                )
               )
             ),
             textAlign: TextAlign.center,
