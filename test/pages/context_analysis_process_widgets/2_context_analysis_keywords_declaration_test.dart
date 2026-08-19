@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 
 void main() 
@@ -175,6 +176,45 @@ void main()
       }
       );
   
+
+      group("Colors check", 
+        ()
+        {
+          testWidgets("The input chips are navyBlue", 
+          (WidgetTester tester) async 
+          {
+            // Building the widget
+            await tester.pumpWidget(
+              MaterialApp(
+                theme: appTheme,
+                home: Scaffold(
+                  body: CAKeywordsDeclaration
+                  (
+                    keywordsWhenEdition: const {},
+                    onKeywordsUpdatedProcessCallbackFunction: (_){}
+                  )
+                ),
+              ),
+            );
+
+            // Adding a keyword with the text field
+            await tester.enterText(find.byType(TextField), "kw");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pump();
+
+            // Verifying the color
+            var inputChipsFinder = find.byType(InputChip);
+            final theme = Theme.of(tester.element(inputChipsFinder.first));
+            final chipTheme = theme.chipTheme;
+            // Unselected state value 
+            // resolve({WidgetState.selected}) for a selected state value
+            final defaultColor = chipTheme.color?.resolve({});
+            expect(defaultColor, navyBlue);
+          }
+          );
+  
+        }
+      );
   });
 
 
