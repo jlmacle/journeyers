@@ -44,10 +44,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter a title for this analysis.';
 
   @override
-  String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time (+ Enter key).';
-
-  @override
   String get ca_process_past_outcomes_text_field_hint =>
       'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
@@ -389,6 +385,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter a list name.';
 
   @override
+  String
+  get text_lists_dashboard_edit_list_name_list_updated_snackbar_message =>
+      'List name updated';
+
+  @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
       'Participants Edition (please separate with commas)';
 
@@ -422,7 +423,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Please enter one keyword at a time.\n(+ Enter key).';
+      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
@@ -472,10 +473,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please enter a title for this analysis.';
 
   @override
-  String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time (+ Enter key).';
-
-  @override
   String get ca_process_past_outcomes_text_field_hint =>
       'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
@@ -817,6 +814,11 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please enter a list name.';
 
   @override
+  String
+  get text_lists_dashboard_edit_list_name_list_updated_snackbar_message =>
+      'List name updated';
+
+  @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
       'Participants Edition (please separate with commas)';
 
@@ -850,7 +852,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Please enter one keyword at a time.\n(+ Enter key).';
+      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>

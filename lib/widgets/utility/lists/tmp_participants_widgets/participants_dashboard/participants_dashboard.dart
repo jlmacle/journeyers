@@ -224,6 +224,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // Method used to update the list participants
   Future<void> _updateListNameInDB(String listKey, Map<String, dynamic> listData) async 
   {
+    // Getting the localized strings
+    LocalizedParticipantsStrings lps = .new(context);
+
     // Updating the storage
     await _listsDB.updateListData(listKey, listData);
 
@@ -233,7 +236,11 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     // Updating the local UI state
     setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("List name updated successfully"))
+          SnackBar
+          (
+            content: Text(lps.listUpdatedSnackBarMessage),
+            duration: const Duration(seconds: 2),
+          )
         );
     });
   }

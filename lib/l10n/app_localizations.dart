@@ -160,12 +160,6 @@ abstract class AppLocalizations {
   /// **'Please enter a title for this analysis.'**
   String get ca_process_title_text_field_hint;
 
-  /// The text field hint, for the keywords of the context analysis process
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter one keyword at a time (+ Enter key).'**
-  String get ca_process_keywords_text_field_hint;
-
   /// The text field hint, for the past outcomes of the problem for the household
   ///
   /// In en, this message translates to:
@@ -733,6 +727,12 @@ abstract class AppLocalizations {
   /// **'Please enter a list name.'**
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint;
 
+  /// l10n for the 'List name updated' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'List name updated'**
+  String get text_lists_dashboard_edit_list_name_list_updated_snackbar_message;
+
   /// l10n for the 'Participants Edition' label text
   ///
   /// In en, this message translates to:
@@ -791,7 +791,7 @@ abstract class AppLocalizations {
   /// l10n for the keywords entry text field hint
   ///
   /// In en, this message translates to:
-  /// **'Please enter one keyword at a time.\n(+ Enter key).'**
+  /// **'Please enter one keyword at a time\n(+ Enter key).'**
   String get l10n_keywords_entry_text_field_hint;
 
   /// l10n for the keywords overlay close button tooltip

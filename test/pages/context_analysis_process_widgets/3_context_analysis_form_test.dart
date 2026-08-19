@@ -7,6 +7,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
@@ -99,13 +100,7 @@ void main()
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedCAQuestionsFields lqf = .new(context);
 
-            /// Consider avoiding static references to this singleton through
-            /// [PlatformDispatcher.instance] and instead prefer using a binding for
-            /// dependency resolution such as `WidgetsBinding.instance.platformDispatcher`.
-            /// See [PlatformDispatcher.instance] for more information about why this is
-            /// preferred.
-            Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
-            var localeLanguageCode = currentLocale.languageCode;
+            var localeLanguageCode = getLocaleLanguageCode(tester);
             if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
             if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
 
@@ -133,7 +128,7 @@ void main()
             expect(level2TitleIndividual, lqf.level2TitleIndividual);     
 
             // Verifying the first title correct
-            expect(firstExpansionTileTextWidget.data, level2TitleIndividual);
+            expect(firstExpansionTileTextWidget.data, lqf.level2TitleIndividual);
 
             // Verifying that the second expansion tile title is correct 
             var secondExpansionTileQuestionFinder = find.descendant
@@ -155,7 +150,7 @@ void main()
             // Verifying consistency between hard-coded string and localized string
             expect(level2TitleGroup, lqf.level2TitleGroup);     
 
-            expect(secondExpansionTileTextWidget.data, level2TitleIndividual);
+            expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
           },
         ); 
 
@@ -228,10 +223,10 @@ void main()
 
 
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(2)).data, individualPerspectiveBalanceIssue);
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(3)).data, individualPerspectiveWorkplaceIssue);
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(4)).data, individualPerspectiveLegacyIssue);
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(5)).data, individualPerspectiveAnotherIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(2)).data, lqf.level3TitleBalanceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(3)).data, lqf.level3TitleWorkplaceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(4)).data, lqf.level3TitleLegacyIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(5)).data, lqf.level3TitleAnotherIssue);
           },
         );      
       
@@ -260,7 +255,7 @@ void main()
         );
       
         testWidgets("Expanding the tile with the individual perspective reveals the correct total number of text field only items: \n"
-          "1 issue of another type = 1",
+          "1: issue of another type = 1",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -284,7 +279,7 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
-        testWidgets("Balance issue: all four item labels are correct after expansion",
+        testWidgets("Balance issue: all four item labels are correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -306,6 +301,42 @@ void main()
             // Getting the localized strings
             LocalizedCAQuestionsFields lqf = .new(context); 
 
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+            
+            var level3TitleBalanceIssueItem1 = "";
+            var level3TitleBalanceIssueItem2 = "";
+            var level3TitleBalanceIssueItem3 = "";
+            var level3TitleBalanceIssueItem4 = "";
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                level3TitleBalanceIssueItem1 = "To balance studies and household life?";
+                level3TitleBalanceIssueItem2 = "To balance accessing income and household life?";
+                level3TitleBalanceIssueItem3 = "To balance earning an income and household life?";
+                level3TitleBalanceIssueItem4 = "To balance helping others and household life?";
+              }
+              case("fr"): 
+              { 
+                level3TitleBalanceIssueItem1 = "Équilibre entre les études et la vie de famille ?";
+                level3TitleBalanceIssueItem2 = "Équilibre entre l'accès à l'emploi et la vie de famille ?";
+                level3TitleBalanceIssueItem3 = "Équilibre entre maintenir un revenu et la vie de famille ?";
+                level3TitleBalanceIssueItem4 = "Équilibre entre aider les autres et la vie de famille ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem1");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem2");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(level3TitleBalanceIssueItem1, lqf.level3TitleBalanceIssueItem1);     
+            expect(level3TitleBalanceIssueItem2, lqf.level3TitleBalanceIssueItem2);
+            expect(level3TitleBalanceIssueItem3, lqf.level3TitleBalanceIssueItem3);
+            expect(level3TitleBalanceIssueItem4, lqf.level3TitleBalanceIssueItem4);
+
+
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
             expect(tester.widget<Text>(textsFinder.at(3)).data, lqf.level3TitleBalanceIssueItem1);
             expect(tester.widget<Text>(textsFinder.at(4)).data, lqf.level3TitleBalanceIssueItem2);
@@ -315,7 +346,7 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: WORKPLACE SECTION ───────────────────────────────────────
-        testWidgets("Workplace issue: both item labels are correct after expansion",
+        testWidgets("Workplace issue: both item labels are correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -336,6 +367,33 @@ void main()
 
             // Getting the localized strings
             LocalizedCAQuestionsFields lqf = .new(context);
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+            
+            var level3TitleWorkplaceIssueItem1 = "";
+            var level3TitleWorkplaceIssueItem2 = "";
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                level3TitleWorkplaceIssueItem1 = "To solve a need to be more appreciated at work?";
+                level3TitleWorkplaceIssueItem2 = "To solve a need to remain appreciated at work?";
+              }
+              case("fr"): 
+              { 
+                level3TitleWorkplaceIssueItem1 = "Le besoin d'être plus apprécié(e) au travail ?";
+                level3TitleWorkplaceIssueItem2 = "Le besoin de rester apprécié(e) au travail ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem1");
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem2");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(level3TitleWorkplaceIssueItem1, lqf.level3TitleWorkplaceIssueItem1);     
+            expect(level3TitleWorkplaceIssueItem2, lqf.level3TitleWorkplaceIssueItem2);
+
 
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
             expect(tester.widget<Text>(textFinders.at(8)).data, lqf.level3TitleWorkplaceIssueItem1);
@@ -344,7 +402,7 @@ void main()
         );
 
         // ─── INDIVIDUAL PERSPECTIVE: LEGACY SECTION ───────────────────────────────────────
-        testWidgets("Legacy issue: the item label is present after expansion",
+        testWidgets("Legacy issue: the item label is correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -366,21 +424,44 @@ void main()
             // Getting the localized strings
             LocalizedCAQuestionsFields lqf = .new(context);
 
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+            
+            var level3TitleLegacyIssueItem1 = "";
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                level3TitleLegacyIssueItem1 = "To have a better legacy to leave to my children/others?";
+              }
+              case("fr"): 
+              { 
+                level3TitleLegacyIssueItem1 = "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleLegacyIssueItem1");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(level3TitleLegacyIssueItem1, lqf.level3TitleLegacyIssueItem1);     
+
             // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
             expect(tester.widget<Text>(textFinders.at(11)).data, lqf.level3TitleLegacyIssueItem1);
           },
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: ANOTHER ISSUE SECTION ───────────────────────────────────────
-        testWidgets("Another issue: the hint text is present after expansion",
+        testWidgets("Another issue: the hint text is correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
             await pumpCAProcess(tester);
+
+            // Getting the localized strings
+            final context = tester.element(find.byType(Scaffold));
+            LocalizedCAStrings lca = .new(context);
             
             // Opening the individual perspective expansion tile
-              // Getting the build context
-            final context = tester.element(find.byType(Scaffold));
             await caOpenIndividualExpansionTile(context, tester);
 
             // Searching the Text widgets for the first expansion tile
@@ -391,26 +472,27 @@ void main()
               matching: find.byType(Text)
             );
 
-            
-
             var localeLanguageCode = getLocaleLanguageCode(tester);
 
-            var caProcessPleaseDevelopTextFieldHint = "";
+            var caFormPleaseDevelopTextFieldHint = "";
 
             switch(localeLanguageCode.toLowerCase())
             {
               case("en"): 
               { 
-                caProcessPleaseDevelopTextFieldHint = "Please develop.";
+                caFormPleaseDevelopTextFieldHint = "Please develop.";
               }
               case("fr"): 
               { 
-                caProcessPleaseDevelopTextFieldHint = "Veuillez développer.";                
+                caFormPleaseDevelopTextFieldHint = "Veuillez développer.";                
               }              
             }
 
-            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
-            expect(tester.widget<Text>(textFinders.at(13)).data, caProcessPleaseDevelopTextFieldHint);
+            // Verifying consistency between hard-coded string and localized string
+            expect(caFormPleaseDevelopTextFieldHint, lca.caFormPleaseDevelopTextFieldHint);
+
+            // Verifying text hint text present (skipping lca.invitationToUnfoldExpansionTile)
+            expect(tester.widget<Text>(textFinders.at(13)).data, lca.caFormPleaseDevelopTextFieldHint);
           },
         );
       

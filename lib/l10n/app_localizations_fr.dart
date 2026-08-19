@@ -44,10 +44,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).';
-
-  @override
   String get ca_process_past_outcomes_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
@@ -396,6 +392,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
       'Veuillez entrer un nom de liste.';
+
+  @override
+  String
+  get text_lists_dashboard_edit_list_name_list_updated_snackbar_message =>
+      'Nom de liste mis à jour';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
@@ -481,10 +482,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).';
-
-  @override
   String get ca_process_past_outcomes_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
@@ -833,6 +830,11 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
       'Veuillez entrer un nom de liste.';
+
+  @override
+  String
+  get text_lists_dashboard_edit_list_name_list_updated_snackbar_message =>
+      'Nom de liste mis à jour';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>

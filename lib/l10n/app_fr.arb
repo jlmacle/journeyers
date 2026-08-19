@@ -22,9 +22,7 @@
     "@ca_process_invitation_to_unfold_expansion_tile": {"description": "Le l10n pour 'Veuillez cliquer pour commencer'"},
     "ca_process_title_text_field_hint": "Veuillez renseigner le titre\nde cette analyse.",
     "@ca_process_title_text_field_hint": {"description": "Le placeholder du champ de texte, pour le titre du processus d'analyse de contexte"},
-    "ca_process_keywords_text_field_hint": "Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).",
-    "@ca_process_keywords_text_field_hint": {"description": "Le placeholder du champ de texte, pour les mots-clés du processus d'analyse de contexte"}
-    ,"ca_process_past_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer."
+    "ca_process_past_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer."
     ,"@ca_process_past_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le foyer"}
     ,"ca_process_helping_household_text_field_hint": "Veuillez développer les raisons, et les impacts potentiels, d'un déséquilibre entre fidélité envers votre famille et considération envers les autres."
     ,"@ca_process_helping_household_text_field_hint": {"description": "Le placeholder du champ de texte, pour les raisons et les impacts potentiels, d'un déséquilibre entre fidélité envers famille et considération envers les autres"}
@@ -225,6 +223,8 @@
     ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du nom de liste"}
     ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Veuillez entrer un nom de liste."
     ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition du nom de liste"}
+    ,"text_lists_dashboard_edit_list_name_list_updated_snackbar_message": "Nom de liste mis à jour"
+    ,"@text_lists_dashboard_edit_list_name_list_updated_snackbar_message": {"description": "l10n pour le message de snackbar 'Nom de liste mis à jour'"}
     ,"text_lists_dashboard_edit_participants_sheet_label_text": "Édition des Participants (veuillez les séparer par des virgules)"
     ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
     ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participants."

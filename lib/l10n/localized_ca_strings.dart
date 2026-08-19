@@ -10,8 +10,13 @@ class LocalizedCAStrings
   // ─── Title ───────────────────────────────────────
   var caTitleTextFieldHint = "";
 
+  // ─── Keywords ───────────────────────────────────────
+  var caKeywordsTextFieldHint = "";
+
+
   // ─── CA Form ───────────────────────────────────────
   var invitationToUnfoldExpansionTile = "";
+  var caFormPleaseDevelopTextFieldHint = "";
 
   // Segmented button options
   var yes = "";
@@ -33,9 +38,14 @@ class LocalizedCAStrings
     // ─── Title ───────────────────────────────────────
     caTitleTextFieldHint = _l10n?.ca_process_title_text_field_hint ?? "Issue with the context analysis title text field hint";
 
+    // ─── Keywords ───────────────────────────────────────
+    caKeywordsTextFieldHint = _l10n?.l10n_keywords_entry_text_field_hint ?? "Issue with the l10n for the keywords entry text field hint";
+
     // ─── CA Form ───────────────────────────────────────
     invitationToUnfoldExpansionTile = _l10n?.ca_process_invitation_to_unfold_expansion_tile ?? "Issue with the l10n for 'Please click to unfold'";
   
+    caFormPleaseDevelopTextFieldHint = _l10n?.ca_process_please_develop_text_field_hint ?? "Issue with the text field hint inviting to develop";
+
     yes =  _l10n?.segmented_button_yes ?? "Issue with the l10n for Yes";
     no = _l10n?.segmented_button_no ?? "Issue with the l10n for No";
     iDontKnow = _l10n?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
