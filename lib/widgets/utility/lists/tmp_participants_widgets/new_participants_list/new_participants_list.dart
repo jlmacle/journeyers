@@ -243,7 +243,11 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
       ScaffoldMessenger.of(context).showSnackBar
       (    
-        SnackBar(content: Text("Save failed: $e")),
+        SnackBar
+        (
+          content: Text(lps.savedFailedSnackBarMessage),
+          duration: const Duration(seconds: 2),
+        ),
       );
     }
   }
