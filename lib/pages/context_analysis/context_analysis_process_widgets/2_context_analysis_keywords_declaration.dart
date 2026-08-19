@@ -116,7 +116,11 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                   (tag) => 
                   InputChip
                   (
-                    label: Text(tag),
+                    label: Text
+                            (
+                              tag, 
+                              style: const TextStyle(color: appBarWhite),
+                            ),
                     deleteIconColor: appBarWhite,
                     onDeleted: () 
                     {
