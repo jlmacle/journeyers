@@ -44,10 +44,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).';
-
-  @override
   String get ca_process_past_outcomes_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
@@ -479,10 +475,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get ca_process_title_text_field_hint =>
       'Veuillez renseigner le titre\nde cette analyse.';
-
-  @override
-  String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
