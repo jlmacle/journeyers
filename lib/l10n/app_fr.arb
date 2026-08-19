@@ -223,6 +223,8 @@
     ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du nom de liste"}
     ,"text_lists_dashboard_edit_list_name_sheet_text_field_hint": "Veuillez entrer un nom de liste."
     ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition du nom de liste"}
+    ,"text_lists_dashboard_edit_list_name_list_updated_snackbar_message": "Nom de liste mis à jour"
+    ,"@text_lists_dashboard_edit_list_name_list_updated_snackbar_message": {"description": "l10n pour le message de snackbar 'Nom de liste mis à jour'"}
     ,"text_lists_dashboard_edit_participants_sheet_label_text": "Édition des Participants (veuillez les séparer par des virgules)"
     ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
     ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participants."
