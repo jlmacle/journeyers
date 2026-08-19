@@ -127,7 +127,7 @@ void main()
             expect(level2TitleIndividual, lqf.level2TitleIndividual);     
 
             // Verifying the first title correct
-            expect(firstExpansionTileTextWidget.data, level2TitleIndividual);
+            expect(firstExpansionTileTextWidget.data, lqf.level2TitleIndividual);
 
             // Verifying that the second expansion tile title is correct 
             var secondExpansionTileQuestionFinder = find.descendant
