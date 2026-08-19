@@ -160,12 +160,6 @@ abstract class AppLocalizations {
   /// **'Please enter a title for this analysis.'**
   String get ca_process_title_text_field_hint;
 
-  /// The text field hint, for the keywords of the context analysis process
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter one keyword at a time\n(+ Enter key).'**
-  String get ca_process_keywords_text_field_hint;
-
   /// The text field hint, for the past outcomes of the problem for the household
   ///
   /// In en, this message translates to:
