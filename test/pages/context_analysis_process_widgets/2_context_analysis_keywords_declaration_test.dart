@@ -213,6 +213,36 @@ void main()
           }
           );
 
+          testWidgets("The text color is appBarWhite", 
+          (WidgetTester tester) async 
+          {
+            // Building the widget
+            await tester.pumpWidget(
+              MaterialApp(
+                theme: appTheme,
+                home: Scaffold(
+                  body: CAKeywordsDeclaration
+                  (
+                    keywordsWhenEdition: const {},
+                    onKeywordsUpdatedProcessCallbackFunction: (_){}
+                  )
+                ),
+              ),
+            );
+
+            // Adding a keyword with the text field
+            await tester.enterText(find.byType(TextField), "kw");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            await tester.pump();
+
+            // Verifying the color
+            var inputChipsFinder = find.byType(InputChip);
+            var inputChipWidget = tester.widget<InputChip>(inputChipsFinder.first);            
+            Text text = inputChipWidget.label as Text;
+            expect(text.style?.color, appBarWhite);
+          }
+          );
+  
           testWidgets("The delete icon color is appBarWhite", 
           (WidgetTester tester) async 
           {
