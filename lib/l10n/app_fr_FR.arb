@@ -209,6 +209,8 @@
     ,"@text_lists_new_list_same_list_name_message": {"description": "Le message en cas d'enregistrement avec nom de liste déjà existant"}
     ,"text_lists_new_list_saved_as_snackbar_message": "Enregistrée en tant que "
     ,"@text_lists_new_list_saved_as_snackbar_message": {"description": "Partie du message de SnackBar, au moment d'enregistrer la liste."}
+    ,"text_lists_new_list_save_failed_snackbar_message": "La sauvegarde a échouée"
+    ,"@text_lists_new_list_save_failed_snackbar_message": {"description": "Message de SnackBar 'La sauvegarde a échouée', au moment d'enregistrer la liste."}
   
     
     ,"text_lists_new_list_close_tooltip": "Veuillez cliquer pour retourner à la page précédente"
