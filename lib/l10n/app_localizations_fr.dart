@@ -45,7 +45,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).';
+      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -482,7 +482,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Veuillez renseigner un mot-clé à la fois (+ Touche Entrée).';
+      'Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
