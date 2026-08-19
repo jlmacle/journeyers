@@ -222,10 +222,10 @@ void main()
 
 
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(2)).data, individualPerspectiveBalanceIssue);
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(3)).data, individualPerspectiveWorkplaceIssue);
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(4)).data, individualPerspectiveLegacyIssue);
-            expect(tester.widget<Text>(customHeadingTextsFinders.at(5)).data, individualPerspectiveAnotherIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(2)).data, lqf.level3TitleBalanceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(3)).data, lqf.level3TitleWorkplaceIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(4)).data, lqf.level3TitleLegacyIssue);
+            expect(tester.widget<Text>(customHeadingTextsFinders.at(5)).data, lqf.level3TitleAnotherIssue);
           },
         );      
       
