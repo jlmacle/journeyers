@@ -44,10 +44,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter a title for this analysis.';
 
   @override
-  String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time\n(+ Enter key).';
-
-  @override
   String get ca_process_past_outcomes_text_field_hint =>
       'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
@@ -470,10 +466,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_title_text_field_hint =>
       'Please enter a title for this analysis.';
-
-  @override
-  String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
