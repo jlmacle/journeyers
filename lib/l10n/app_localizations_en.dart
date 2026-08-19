@@ -45,7 +45,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time (+ Enter key).';
+      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -422,7 +422,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Please enter one keyword at a time.\n(+ Enter key).';
+      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
@@ -473,7 +473,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_keywords_text_field_hint =>
-      'Please enter one keyword at a time (+ Enter key).';
+      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get ca_process_past_outcomes_text_field_hint =>
@@ -850,7 +850,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
-      'Please enter one keyword at a time.\n(+ Enter key).';
+      'Please enter one keyword at a time\n(+ Enter key).';
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
