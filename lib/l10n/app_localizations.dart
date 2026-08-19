@@ -727,6 +727,12 @@ abstract class AppLocalizations {
   /// **'Please enter a list name.'**
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint;
 
+  /// l10n for the 'List name updated' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'List name updated'**
+  String get text_lists_dashboard_edit_list_name_list_updated_snackbar_message;
+
   /// l10n for the 'Participants Edition' label text
   ///
   /// In en, this message translates to:
