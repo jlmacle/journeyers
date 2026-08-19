@@ -22,7 +22,7 @@
   "@ca_process_invitation_to_unfold_expansion_tile": {"description": "The l10n for 'Please click to toggle'"},
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
   "@ca_process_title_text_field_hint": {"description": "The text field hint, for the title of the context analysis process"},
-  "ca_process_keywords_text_field_hint": "Please enter one keyword at a time (+ Enter key).",
+  "ca_process_keywords_text_field_hint": "Please enter one keyword at a time\n(+ Enter key).",
   "@ca_process_keywords_text_field_hint": {"description": "The text field hint, for the keywords of the context analysis process"}
   ,"ca_process_past_outcomes_text_field_hint": "Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household."
   ,"@ca_process_past_outcomes_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the household"}
@@ -246,7 +246,7 @@
   
   
 
-  ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time.\n(+ Enter key)."
+  ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time\n(+ Enter key)."
   ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n for the keywords entry text field hint"}
   
   ,"l10n_keywords_overlay_close_button_tooltip": "Please click to close the keywords declaration page"
