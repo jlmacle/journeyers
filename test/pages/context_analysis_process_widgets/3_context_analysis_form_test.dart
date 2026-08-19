@@ -423,6 +423,27 @@ void main()
             // Getting the localized strings
             LocalizedCAQuestionsFields lqf = .new(context);
 
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+            
+            var level3TitleLegacyIssueItem1 = "";
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                level3TitleLegacyIssueItem1 = "To have a better legacy to leave to my children/others?";
+              }
+              case("fr"): 
+              { 
+                level3TitleLegacyIssueItem1 = "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?";
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleLegacyIssueItem1");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(level3TitleLegacyIssueItem1, lqf.level3TitleLegacyIssueItem1);     
+
             // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
             expect(tester.widget<Text>(textFinders.at(11)).data, lqf.level3TitleLegacyIssueItem1);
           },
