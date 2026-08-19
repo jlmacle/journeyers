@@ -385,6 +385,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter a list name.';
 
   @override
+  String
+  get text_lists_dashboard_edit_list_name_list_updated_snackbar_message =>
+      'List name updated';
+
+  @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
       'Participants Edition (please separate with commas)';
 
@@ -807,6 +812,11 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_dashboard_edit_list_name_sheet_text_field_hint =>
       'Please enter a list name.';
+
+  @override
+  String
+  get text_lists_dashboard_edit_list_name_list_updated_snackbar_message =>
+      'List name updated';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
