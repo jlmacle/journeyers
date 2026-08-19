@@ -513,7 +513,6 @@ ThemeData appTheme = ThemeData
 
 
   // ─── CHIP THEME ───────────────────────────────────────
-  // to remove the emerald green color from appearing
   chipTheme: ChipThemeData
   (
     backgroundColor: navyBlue,
