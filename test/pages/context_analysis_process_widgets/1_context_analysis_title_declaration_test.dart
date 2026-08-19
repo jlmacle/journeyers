@@ -9,6 +9,8 @@ import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
+import "../../_widget_testing_utils/widget_testing_utils.dart";
+
 void main() {
   group("CATitleDeclaration Widget Tests: \n", () 
   {    
@@ -37,13 +39,8 @@ void main() {
       
       // Getting the hint text
       var hintText = "";
-      /// Consider avoiding static references to this singleton through
-      /// [PlatformDispatcher.instance] and instead prefer using a binding for
-      /// dependency resolution such as `WidgetsBinding.instance.platformDispatcher`.
-      /// See [PlatformDispatcher.instance] for more information about why this is
-      /// preferred.
-      Locale? currentLocale = WidgetsBinding.instance.platformDispatcher.locale;
-      var localeLanguageCode = currentLocale.languageCode;
+      
+      var localeLanguageCode = getLocaleLanguageCode(tester);
       if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
       if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
 
