@@ -149,7 +149,7 @@ void main()
             // Verifying consistency between hard-coded string and localized string
             expect(level2TitleGroup, lqf.level2TitleGroup);     
 
-            expect(secondExpansionTileTextWidget.data, level2TitleGroup);
+            expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
           },
         ); 
 
