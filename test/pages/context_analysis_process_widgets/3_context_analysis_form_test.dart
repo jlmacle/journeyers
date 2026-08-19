@@ -278,7 +278,7 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: BALANCE SECTION ───────────────────────────────────────
-        testWidgets("Balance issue: all four item labels are correct after expansion",
+        testWidgets("Balance issue: all four item labels are correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -345,7 +345,7 @@ void main()
         );
       
         // ─── INDIVIDUAL PERSPECTIVE: WORKPLACE SECTION ───────────────────────────────────────
-        testWidgets("Workplace issue: both item labels are correct after expansion",
+        testWidgets("Workplace issue: both item labels are correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
@@ -401,7 +401,7 @@ void main()
         );
 
         // ─── INDIVIDUAL PERSPECTIVE: LEGACY SECTION ───────────────────────────────────────
-        testWidgets("Legacy issue: the item label is present after expansion",
+        testWidgets("Legacy issue: the item label is correct and present after expansion",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
