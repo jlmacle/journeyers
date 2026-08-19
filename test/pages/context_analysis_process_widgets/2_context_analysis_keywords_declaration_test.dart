@@ -1,14 +1,65 @@
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+
+import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() 
 {
     group("CAKeywordsDeclaration Tests: ", 
     () 
     { 
+    testWidgets("Should render the correct text field hint", 
+    (WidgetTester tester) async 
+    {
+      // Building the widget
+      await tester.pumpWidget(
+        MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: Scaffold(
+            body: CAKeywordsDeclaration
+            (
+              keywordsWhenEdition: const {},
+              onKeywordsUpdatedProcessCallbackFunction: (_){}
+            )
+          ),
+        ),
+      );
+       
+      // Getting the localized strings
+      var context = tester.element(find.byType(Scaffold).first);
+      LocalizedCAStrings lca = .new(context);
+      
+      // Getting the hint text
+      var hintText = "";
+      var localeLanguageCode = getLocaleLanguageCode(tester);
+      if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
+      if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
+
+      switch(localeLanguageCode.toLowerCase())
+      {
+        case("en"): { hintText = "Please enter one keyword at a time\n(+ Enter key)."; }
+        case("fr"): { hintText = "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."; }        
+      }
+      if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
+
+      // Verifying consistency between hard-coded string and localized string
+      expect(hintText, lca.caKeywordsTextFieldHint);     
+
+      // Verifying the text field hint present
+      expect(find.text(lca.caKeywordsTextFieldHint), findsOneWidget);
+    }
+    );    
+
       testWidgets("A keyword is added to the display, when added from the text field: ", 
       (WidgetTester tester) async 
       {
