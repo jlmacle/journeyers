@@ -44,7 +44,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_past_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_household_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
   @override
@@ -486,7 +486,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_past_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_household_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
   @override
