@@ -412,6 +412,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'La liste de participants est vide';
 
   @override
+  String get text_lists_dashboard_snackbar_message_selected_list_deleted =>
+      'Liste sélectionnée supprimée';
+
+  @override
   String get text_lists_dashboard_list_loading_button_text =>
       'Charger une liste';
 
@@ -848,6 +852,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
       'La liste de participants est vide';
+
+  @override
+  String get text_lists_dashboard_snackbar_message_selected_list_deleted =>
+      'Liste sélectionnée supprimée';
 
   @override
   String get text_lists_dashboard_list_loading_button_text =>
