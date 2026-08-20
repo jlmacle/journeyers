@@ -44,7 +44,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_past_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_household_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
   @override
@@ -52,7 +52,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez développer les raisons, et les impacts potentiels, d\'un déséquilibre entre fidélité envers votre famille et considération envers les autres.';
 
   @override
-  String get ca_process_past_workplace_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_workplace_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
 
   @override
@@ -381,6 +381,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get text_lists_dashboard_title =>
       'Listes de participants déjà sauvegardées';
+
+  @override
+  String get text_lists_dashboard_invitation_to_add_a_list =>
+      'Veuillez cliquer\npour ajouter une liste';
 
   @override
   String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
@@ -486,7 +490,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez renseigner le titre\nde cette analyse.';
 
   @override
-  String get ca_process_past_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_household_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.';
 
   @override
@@ -494,7 +498,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez développer les raisons, et les impacts potentiels, d\'un déséquilibre entre fidélité envers votre famille et considération envers les autres.';
 
   @override
-  String get ca_process_past_workplace_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_workplace_text_field_hint =>
       'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
 
   @override
@@ -823,6 +827,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_title =>
       'Listes de participants déjà sauvegardées';
+
+  @override
+  String get text_lists_dashboard_invitation_to_add_a_list =>
+      'Veuillez cliquer\npour ajouter une liste';
 
   @override
   String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';

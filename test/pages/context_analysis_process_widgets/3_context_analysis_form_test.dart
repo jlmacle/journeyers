@@ -338,7 +338,7 @@ void main()
             expect(level3TitleBalanceIssueItem4, lqf.level3TitleBalanceIssueItem4);
 
 
-            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying the level 3 items present
             expect(tester.widget<Text>(textsFinder.at(3)).data, lqf.level3TitleBalanceIssueItem1);
             expect(tester.widget<Text>(textsFinder.at(4)).data, lqf.level3TitleBalanceIssueItem2);
             expect(tester.widget<Text>(textsFinder.at(5)).data, lqf.level3TitleBalanceIssueItem3);
@@ -396,7 +396,7 @@ void main()
             expect(level3TitleWorkplaceIssueItem2, lqf.level3TitleWorkplaceIssueItem2);
 
 
-            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying the level 3 items present
             expect(tester.widget<Text>(textFinders.at(8)).data, lqf.level3TitleWorkplaceIssueItem1);
             expect(tester.widget<Text>(textFinders.at(9)).data, lqf.level3TitleWorkplaceIssueItem2);
           },
@@ -446,7 +446,7 @@ void main()
             // Verifying consistency between hard-coded strings and localized strings
             expect(level3TitleLegacyIssueItem1, lqf.level3TitleLegacyIssueItem1);     
 
-            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying the level 3 item present
             expect(tester.widget<Text>(textFinders.at(11)).data, lqf.level3TitleLegacyIssueItem1);
           },
         );
@@ -492,8 +492,118 @@ void main()
             // Verifying consistency between hard-coded string and localized string
             expect(caFormPleaseDevelopTextFieldHint, lca.caFormPleaseDevelopTextFieldHint);
 
-            // Verifying text hint text present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying text hint text present 
             expect(tester.widget<Text>(textFinders.at(13)).data, lca.caFormPleaseDevelopTextFieldHint);
+          },
+        );
+      
+
+        // ─── INDIVIDUAL PERSPECTIVE: HINT TEXTS ───────────────────────────────────────
+        testWidgets("Individual perspective: Checkboxes with text fields: the hint texts are correct and present after expansion",
+          (tester) async
+          {
+            // Pumping the widget within the CA process to allow for the tile expansion
+            await pumpCAProcess(tester);
+
+            // Getting the localized strings
+            final context = tester.element(find.byType(Scaffold));
+            LocalizedCAStrings lca = .new(context);
+            
+            // Opening the individual perspective expansion tile
+            await caOpenIndividualExpansionTile(context, tester);
+
+            // Checking all checkboxes
+            var checkboxesFinder = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .first, 
+              matching: find.byType(Checkbox),
+              skipOffstage: false                         
+            );
+
+            var totalCheckboxesFinders = checkboxesFinder.evaluate().length;
+            if (testingDebug) pu.printd("Testing Debug: totalCheckboxesFinders: $totalCheckboxesFinders");
+            
+            for(var i = 0; i < checkboxesFinder.evaluate().length; i++)
+            {
+              await tester.scrollUntilVisible
+              (
+                checkboxesFinder.at(i), 
+                45, 
+                scrollable: find.descendant
+                          (
+                            of: find.byKey(const Key("context-analysis-process-scrollview")), 
+                            matching: find.byType(Scrollable)
+                          ).first,
+              );   
+              // pumpAndSettle timed out
+              await tester.pump(const Duration(seconds: 2));
+              await tester.tap(checkboxesFinder.at(i));
+              await tester.pump(const Duration(seconds: 2));
+            }
+
+            // Searching the Text widgets for the first expansion tile
+            var textFinders = find.descendant
+            (
+              of: find.byType(ExpansionTile)
+                  .first, 
+              matching: find.byType(Text),
+              skipOffstage: false
+            );
+            
+            var totalTextFinders = textFinders.evaluate().length;
+            if (testingDebug) pu.printd("Testing Debug: totalTextFinders: $totalTextFinders");
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var pastOutcomesHouseholdTextFieldHint = "";
+            var pastOutcomesWorkplaceTextFieldHint = "";
+            var helpingAndHouseholdTextFieldHint = "";
+            var caFormPleaseDevelopTextFieldHint = "";
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                pastOutcomesHouseholdTextFieldHint = "Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.";
+                pastOutcomesWorkplaceTextFieldHint = "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.";
+                helpingAndHouseholdTextFieldHint = "Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.";
+                caFormPleaseDevelopTextFieldHint = "Please develop.";
+              }
+              case("fr"): 
+              { 
+                pastOutcomesHouseholdTextFieldHint = "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.";
+                pastOutcomesWorkplaceTextFieldHint  = "Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.";
+                helpingAndHouseholdTextFieldHint = "Veuillez développer les raisons, et les impacts potentiels, d'un déséquilibre entre fidélité envers votre famille et considération envers les autres.";
+                caFormPleaseDevelopTextFieldHint = "Veuillez développer.";                
+              }              
+            }
+
+            if (testingDebug) pu.printd("Testing Debug: data: $pastOutcomesHouseholdTextFieldHint");
+            if (testingDebug) pu.printd("Testing Debug: data: $pastOutcomesWorkplaceTextFieldHint");
+            if (testingDebug) pu.printd("Testing Debug: data: $helpingAndHouseholdTextFieldHint");
+            if (testingDebug) pu.printd("Testing Debug: data: $caFormPleaseDevelopTextFieldHint");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(pastOutcomesHouseholdTextFieldHint, lca.pastOutcomesHouseholdTextFieldHint);     
+            expect(pastOutcomesWorkplaceTextFieldHint, lca.pastOutcomesWorkplaceTextFieldHint);     
+            expect(helpingAndHouseholdTextFieldHint, lca.helpingAndHouseholdTextFieldHint);
+            expect(caFormPleaseDevelopTextFieldHint, lca.caFormPleaseDevelopTextFieldHint);
+
+            for(var i= 0; i < totalTextFinders; i++)
+            {
+              if (testingDebug) pu.printd("$i: ${tester.widget<Text>(textFinders.at(i)).data}");
+            }
+
+            // Verifying the hint texts present 
+            expect(tester.widget<Text>(textFinders.at(4)).data, lca.pastOutcomesHouseholdTextFieldHint);
+            expect(tester.widget<Text>(textFinders.at(7)).data, lca.pastOutcomesHouseholdTextFieldHint);
+            expect(tester.widget<Text>(textFinders.at(10)).data, lca.pastOutcomesHouseholdTextFieldHint);           
+            expect(tester.widget<Text>(textFinders.at(13)).data, lca.helpingAndHouseholdTextFieldHint);          
+            expect(tester.widget<Text>(textFinders.at(17)).data, lca.pastOutcomesWorkplaceTextFieldHint);
+            expect(tester.widget<Text>(textFinders.at(20)).data, lca.pastOutcomesWorkplaceTextFieldHint);           
+            expect(tester.widget<Text>(textFinders.at(24)).data, lca.caFormPleaseDevelopTextFieldHint);          
+            expect(tester.widget<Text>(textFinders.at(27)).data, lca.caFormPleaseDevelopTextFieldHint);
           },
         );
       
@@ -504,14 +614,17 @@ void main()
     group("Form: Structure: Group/Teams perspective: \n",
       ()
       {    
-        testWidgets("Expanding the tile with the group/teams perspective reveals all five level-3 questions",
+        testWidgets("Expanding the tile with the group/teams perspective reveals the five correct level-3 section questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
-            await pumpCAProcess(tester);            
+            await pumpCAProcess(tester);      
+
+            // Acccessing the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedCAQuestionsFields lqf = .new(context);      
 
             // Opening the group/team perspective expansion tile
-            var context = tester.element(find.byType(Scaffold));
             await caOpenGroupExpansionTile(context, tester);
 
             // Searching the custom headings text for the second expansion tile
@@ -561,12 +674,19 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveAppreciabilityWork");
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveEarningAbility");
 
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(groupPerspectiveProblems, lqf.level3TitleGroupsProblematics);     
+            expect(groupPerspectiveSameProblems, lqf.level3TitleSameProblem);
+            expect(groupPerspectiveHarmonyHome, lqf.level3TitleHarmonyAtHome);
+            expect(groupPerspectiveAppreciabilityWork, lqf.level3TitleAppreciabilityAtWork);
+            expect(groupPerspectiveEarningAbility, lqf.level3TitleIncomeEarningAbility);
+
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(2)).data, groupPerspectiveProblems);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(3)).data, groupPerspectiveSameProblems);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(4)).data, groupPerspectiveHarmonyHome);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(5)).data, groupPerspectiveAppreciabilityWork);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(6)).data, groupPerspectiveEarningAbility);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(2)).data, lqf.level3TitleGroupsProblematics);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(3)).data, lqf.level3TitleSameProblem);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(4)).data, lqf.level3TitleHarmonyAtHome);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(5)).data, lqf.level3TitleAppreciabilityAtWork);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(6)).data, lqf.level3TitleIncomeEarningAbility);
           },
         );
       

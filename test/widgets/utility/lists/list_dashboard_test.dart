@@ -6,9 +6,9 @@ import "package:flutter_test/flutter_test.dart";
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard_const_strings.dart";
 
 
 void main() {
@@ -69,8 +69,12 @@ void main() {
       await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
 
+      // Getting the localized strings
+      var context = tester.element(find.byType(Scaffold).first);
+      LocalizedParticipantsStrings lps = .new(context);
+
       // Verifying the new list button present
-      var newListButtonFinder = find.text(newListButtonLabel);
+      var newListButtonFinder = find.text(lps.newListButtonLabel);
       expect(newListButtonFinder, findsOne);
     });  
   }); 

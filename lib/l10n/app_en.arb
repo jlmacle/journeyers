@@ -22,12 +22,12 @@
   "@ca_process_invitation_to_unfold_expansion_tile": {"description": "The l10n for 'Please click to toggle'"},
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
   "@ca_process_title_text_field_hint": {"description": "The text field hint, for the title of the context analysis process"},
-  "ca_process_past_outcomes_text_field_hint": "Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household."
-  ,"@ca_process_past_outcomes_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the household"}
+  "ca_process_past_outcomes_household_text_field_hint": "Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household."
+  ,"@ca_process_past_outcomes_household_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the household"}
   ,"ca_process_helping_household_text_field_hint": "Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others."
   ,"@ca_process_helping_household_text_field_hint": {"description": "The text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others"}
-  ,"ca_process_past_workplace_outcomes_text_field_hint": "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household."
-  ,"@ca_process_past_workplace_outcomes_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the workplace"}  
+  ,"ca_process_past_outcomes_workplace_text_field_hint": "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household."
+  ,"@ca_process_past_outcomes_workplace_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the workplace"}  
   ,"ca_process_please_develop_text_field_hint": "Please develop."
   ,"@ca_process_please_develop_text_field_hint": {"description": "The text field hint inviting to develop"}   
   ,"ca_process_please_describe_problems_text_field_hint": "Please describe the problem(s) that the groups/teams are trying to solve."
@@ -215,6 +215,8 @@
   
   ,"text_lists_dashboard_title": "Stored participants lists"
   ,"@text_lists_dashboard_title": {"description": "The title for the participants lists dashboard"}
+  ,"text_lists_dashboard_invitation_to_add_a_list": "Please tap\nto add a list"
+  ,"@text_lists_dashboard_invitation_to_add_a_list": {"description": "l10n for the invitation to add a list"}
   ,"text_lists_dashboard_sort_by_list_name": "List sort"
   ,"@text_lists_dashboard_sort_by_list_name": {"description": "The 'List sort' label"} 
   ,"text_lists_dashboard_edit_list_name_sheet_label_text": "List Name Edition"

@@ -66,8 +66,8 @@ class LocalizedParticipantsStrings
 
     
     // ─── NEW LIST ───────────────────────────────────────
-    newListButtonLabel = "";
-
+    newListButtonLabel =  _l10n?.text_lists_dashboard_invitation_to_add_a_list ?? "Issue with the l10n for the invitation to add a list.";
+   
     savedAsSnackBarMessage = _l10n?.text_lists_new_list_saved_as_snackbar_message ?? "Issue with the l10n for the part of the SnackBar message, at list saving time.";
     savedFailedSnackBarMessage = _l10n?.text_lists_new_list_save_failed_snackbar_message ?? "Issue with the 'Save failed' SnackBar message, at list saving time.";
 

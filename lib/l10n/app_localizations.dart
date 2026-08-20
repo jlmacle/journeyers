@@ -164,7 +164,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.'**
-  String get ca_process_past_outcomes_text_field_hint;
+  String get ca_process_past_outcomes_household_text_field_hint;
 
   /// The text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others
   ///
@@ -176,7 +176,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.'**
-  String get ca_process_past_workplace_outcomes_text_field_hint;
+  String get ca_process_past_outcomes_workplace_text_field_hint;
 
   /// The text field hint inviting to develop
   ///
@@ -708,6 +708,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stored participants lists'**
   String get text_lists_dashboard_title;
+
+  /// l10n for the invitation to add a list
+  ///
+  /// In en, this message translates to:
+  /// **'Please tap\nto add a list'**
+  String get text_lists_dashboard_invitation_to_add_a_list;
 
   /// The 'List sort' label
   ///

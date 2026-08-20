@@ -18,7 +18,8 @@ class LocalizedCAStrings
   var invitationToUnfoldExpansionTile = "";
 
   // Text field hints
-  var pastOutcomesTextFieldHint = "";
+  var pastOutcomesHouseholdTextFieldHint = "";
+  var pastOutcomesWorkplaceTextFieldHint = "";
   var helpingAndHouseholdTextFieldHint = "";
   var caFormPleaseDevelopTextFieldHint = "";
 
@@ -49,7 +50,8 @@ class LocalizedCAStrings
     invitationToUnfoldExpansionTile = _l10n?.ca_process_invitation_to_unfold_expansion_tile ?? "Issue with the l10n for 'Please click to unfold'";
   
     // Text field hints
-    pastOutcomesTextFieldHint = _l10n?.ca_process_past_outcomes_text_field_hint ?? "Issue with the text field hint, for the past outcomes of the problem for the household";
+    pastOutcomesHouseholdTextFieldHint = _l10n?.ca_process_past_outcomes_household_text_field_hint ?? "Issue with the text field hint, for the past outcomes of the problem for the household";
+    pastOutcomesWorkplaceTextFieldHint = _l10n?.ca_process_past_outcomes_workplace_text_field_hint ?? "Issue with the text field hint, for the past outcomes of the problem for the workplace";
     helpingAndHouseholdTextFieldHint = _l10n?.ca_process_helping_household_text_field_hint ?? "Issue with the text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others";
     caFormPleaseDevelopTextFieldHint = _l10n?.ca_process_please_develop_text_field_hint ?? "Issue with the text field hint inviting to develop";
 
