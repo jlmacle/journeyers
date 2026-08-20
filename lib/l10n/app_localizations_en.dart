@@ -404,7 +404,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get text_lists_dashboard_snackbar_message_selected_list_deleted =>
-      'Selected list deleted';
+      'List deleted';
 
   @override
   String get text_lists_dashboard_list_loading_button_text =>
@@ -837,7 +837,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_dashboard_snackbar_message_selected_list_deleted =>
-      'Selected list deleted';
+      'List deleted';
 
   @override
   String get text_lists_dashboard_list_loading_button_text =>
