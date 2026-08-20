@@ -338,7 +338,7 @@ void main()
             expect(level3TitleBalanceIssueItem4, lqf.level3TitleBalanceIssueItem4);
 
 
-            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying the level 3 items present
             expect(tester.widget<Text>(textsFinder.at(3)).data, lqf.level3TitleBalanceIssueItem1);
             expect(tester.widget<Text>(textsFinder.at(4)).data, lqf.level3TitleBalanceIssueItem2);
             expect(tester.widget<Text>(textsFinder.at(5)).data, lqf.level3TitleBalanceIssueItem3);
@@ -396,7 +396,7 @@ void main()
             expect(level3TitleWorkplaceIssueItem2, lqf.level3TitleWorkplaceIssueItem2);
 
 
-            // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying the level 3 items present
             expect(tester.widget<Text>(textFinders.at(8)).data, lqf.level3TitleWorkplaceIssueItem1);
             expect(tester.widget<Text>(textFinders.at(9)).data, lqf.level3TitleWorkplaceIssueItem2);
           },
@@ -446,7 +446,7 @@ void main()
             // Verifying consistency between hard-coded strings and localized strings
             expect(level3TitleLegacyIssueItem1, lqf.level3TitleLegacyIssueItem1);     
 
-            // Verifying the level 3 title present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying the level 3 item present
             expect(tester.widget<Text>(textFinders.at(11)).data, lqf.level3TitleLegacyIssueItem1);
           },
         );
@@ -492,7 +492,7 @@ void main()
             // Verifying consistency between hard-coded string and localized string
             expect(caFormPleaseDevelopTextFieldHint, lca.caFormPleaseDevelopTextFieldHint);
 
-            // Verifying text hint text present (skipping lca.invitationToUnfoldExpansionTile)
+            // Verifying text hint text present 
             expect(tester.widget<Text>(textFinders.at(13)).data, lca.caFormPleaseDevelopTextFieldHint);
           },
         );
