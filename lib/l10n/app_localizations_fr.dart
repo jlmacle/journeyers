@@ -383,6 +383,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Listes de participants déjà sauvegardées';
 
   @override
+  String get text_lists_dashboard_invitation_to_add_a_list =>
+      'Veuillez cliquer\npour ajouter une liste';
+
+  @override
   String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
 
   @override
@@ -823,6 +827,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get text_lists_dashboard_title =>
       'Listes de participants déjà sauvegardées';
+
+  @override
+  String get text_lists_dashboard_invitation_to_add_a_list =>
+      'Veuillez cliquer\npour ajouter une liste';
 
   @override
   String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
