@@ -756,7 +756,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'List deleted'**
-  String get text_lists_dashboard_snackbar_message_selected_list_deleted;
+  String get text_lists_dashboard_snackbar_message_list_deleted;
 
   /// l10n for the list loading button text
   ///
