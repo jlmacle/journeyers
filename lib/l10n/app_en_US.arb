@@ -26,8 +26,8 @@
   ,"@ca_process_past_outcomes_household_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the household"}
   ,"ca_process_helping_household_text_field_hint": "Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others."
   ,"@ca_process_helping_household_text_field_hint": {"description": "The text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others"}
-  ,"ca_process_past_workplace_outcomes_text_field_hint": "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household."
-  ,"@ca_process_past_workplace_outcomes_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the workplace"}  
+  ,"ca_process_past_outcomes_workplace_text_field_hint": "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household."
+  ,"@ca_process_past_outcomes_workplace_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the workplace"}  
   ,"ca_process_please_develop_text_field_hint": "Please develop."
   ,"@ca_process_please_develop_text_field_hint": {"description": "The text field hint inviting to develop"}   
   ,"ca_process_please_describe_problems_text_field_hint": "Please describe the problem(s) that the groups/teams are trying to solve."
