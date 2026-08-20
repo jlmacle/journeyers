@@ -614,14 +614,17 @@ void main()
     group("Form: Structure: Group/Teams perspective: \n",
       ()
       {    
-        testWidgets("Expanding the tile with the group/teams perspective reveals all five level-3 questions",
+        testWidgets("Expanding the tile with the group/teams perspective reveals the five correct level-3 section questions",
           (tester) async
           {
             // Pumping the widget within the CA process to allow for the tile expansion
-            await pumpCAProcess(tester);            
+            await pumpCAProcess(tester);      
+
+            // Acccessing the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedCAQuestionsFields lqf = .new(context);      
 
             // Opening the group/team perspective expansion tile
-            var context = tester.element(find.byType(Scaffold));
             await caOpenGroupExpansionTile(context, tester);
 
             // Searching the custom headings text for the second expansion tile
@@ -671,12 +674,19 @@ void main()
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveAppreciabilityWork");
             if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveEarningAbility");
 
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(groupPerspectiveProblems, lqf.level3TitleGroupsProblematics);     
+            expect(groupPerspectiveSameProblems, lqf.level3TitleSameProblem);
+            expect(groupPerspectiveHarmonyHome, lqf.level3TitleHarmonyAtHome);
+            expect(groupPerspectiveAppreciabilityWork, lqf.level3TitleAppreciabilityAtWork);
+            expect(groupPerspectiveEarningAbility, lqf.level3TitleIncomeEarningAbility);
+
             // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(2)).data, groupPerspectiveProblems);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(3)).data, groupPerspectiveSameProblems);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(4)).data, groupPerspectiveHarmonyHome);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(5)).data, groupPerspectiveAppreciabilityWork);
-            expect(tester.widget<Text>(customHeadingTextsFinder.at(6)).data, groupPerspectiveEarningAbility);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(2)).data, lqf.level3TitleGroupsProblematics);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(3)).data, lqf.level3TitleSameProblem);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(4)).data, lqf.level3TitleHarmonyAtHome);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(5)).data, lqf.level3TitleAppreciabilityAtWork);
+            expect(tester.widget<Text>(customHeadingTextsFinder.at(6)).data, lqf.level3TitleIncomeEarningAbility);
           },
         );
       
