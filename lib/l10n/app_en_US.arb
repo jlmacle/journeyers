@@ -229,6 +229,8 @@
   ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n for the 'Participants Edition' text field hint"}
   ,"text_lists_dashboard_edit_participants_sheet_empty_list_error_message": "The participants list is empty"
   ,"@text_lists_dashboard_edit_participants_sheet_empty_list_error_message": {"description": "l10n for the 'The participants list is empty' error message"}
+  ,"text_lists_dashboard_snackbar_message_list_deleted": "List deleted"
+  ,"@text_lists_dashboard_snackbar_message_list_deleted": {"description": "l10n for the 'List deleted' snackbar message"}
   ,"text_lists_dashboard_list_loading_button_text": "Please click to load"
   ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n for the list loading button text"}
     
