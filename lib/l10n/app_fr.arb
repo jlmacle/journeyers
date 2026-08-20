@@ -26,8 +26,8 @@
     ,"@ca_process_past_outcomes_household_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le foyer"}
     ,"ca_process_helping_household_text_field_hint": "Veuillez développer les raisons, et les impacts potentiels, d'un déséquilibre entre fidélité envers votre famille et considération envers les autres."
     ,"@ca_process_helping_household_text_field_hint": {"description": "Le placeholder du champ de texte, pour les raisons et les impacts potentiels, d'un déséquilibre entre fidélité envers famille et considération envers les autres"}
-    ,"ca_process_past_workplace_outcomes_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer."
-    ,"@ca_process_past_workplace_outcomes_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le lieu de travail et pour le foyer"}  
+    ,"ca_process_past_outcomes_workplace_text_field_hint": "Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer."
+    ,"@ca_process_past_outcomes_workplace_text_field_hint": {"description": "Le placeholder du champ de texte, pour les conséquences du problème pour le lieu de travail et pour le foyer"}  
     ,"ca_process_please_develop_text_field_hint": "Veuillez développer."
     ,"@ca_process_please_develop_text_field_hint": {"description": "Le placeholder du champ de texte, invitant à développer"}  
     ,"ca_process_please_describe_problems_text_field_hint": "Veuillez décrire le(s) problème(s) que vos groupes/équipes essayent de résoudre."
