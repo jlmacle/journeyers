@@ -44,7 +44,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enter a title for this analysis.';
 
   @override
-  String get ca_process_past_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_household_text_field_hint =>
       'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
   @override
@@ -477,7 +477,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please enter a title for this analysis.';
 
   @override
-  String get ca_process_past_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_household_text_field_hint =>
       'Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.';
 
   @override
