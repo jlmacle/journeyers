@@ -432,7 +432,12 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                                               ),
                           ),
                         ),
-                        label: const Text(newListButtonLabel, textAlign: TextAlign.center),
+                        label:  
+                        Text
+                        (
+                          lps.newListButtonLabel, 
+                          textAlign: TextAlign.center
+                        ),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 90),
                         ),
