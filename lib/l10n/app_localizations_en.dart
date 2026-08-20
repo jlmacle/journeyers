@@ -52,7 +52,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.';
 
   @override
-  String get ca_process_past_workplace_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_workplace_text_field_hint =>
       'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
 
   @override
@@ -485,7 +485,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.';
 
   @override
-  String get ca_process_past_workplace_outcomes_text_field_hint =>
+  String get ca_process_past_outcomes_workplace_text_field_hint =>
       'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
 
   @override
