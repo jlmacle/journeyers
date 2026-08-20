@@ -279,6 +279,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // Method used to delete a single session data from the session list action icons
   Future<void> _selectedSessionDelete(String listKey) async
   {
+    // Getting the localized strings
+    LocalizedParticipantsStrings lps = .new(context);
+
     // Updating the DB
     await _listsDB.removeListData([listKey]);
 
@@ -303,7 +306,13 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     if (!mounted) return;
     // Displaying an informational message
     ScaffoldMessenger.of(context).showSnackBar
-    (const SnackBar(content: Text("Selected list deleted.")));
+    ( 
+      SnackBar
+      (
+        content: Text(lps.listDeletedSnackbarMessage),
+        duration: const Duration(seconds: 2),
+      )
+    );
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
     if (_listsDataAll.isEmpty) 
