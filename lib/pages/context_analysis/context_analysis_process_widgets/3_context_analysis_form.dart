@@ -267,7 +267,7 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue:  _dtoCAForm!.indivBalanceStudiesHousehold.checked,
                 // Initializing the text field value with the DTO's value
                 textFieldStartValue: _dtoCAForm!.indivBalanceStudiesHousehold.text,
-                textFieldHint: lca.pastOutcomesTextFieldHint,
+                textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
                 // Updating DTO and UI (heading and item styling)
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceStudiesHousehold, v),
                 // Updating DTO
@@ -278,7 +278,7 @@ class CAFormState extends State<CAForm>
                 checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_accessing_income_household ?? "Issue with the accessing income-household life balance question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.text,
-                textFieldHint: lca.pastOutcomesTextFieldHint,
+                textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
               ),
@@ -287,7 +287,7 @@ class CAFormState extends State<CAForm>
                 checkboxText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_earning_income_household ?? "Issue with the earning income-household life balance question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBalanceEarningIncomeHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceEarningIncomeHousehold.text,
-                textFieldHint: lca.pastOutcomesTextFieldHint,
+                textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
               ),
