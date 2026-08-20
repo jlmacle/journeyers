@@ -709,6 +709,12 @@ abstract class AppLocalizations {
   /// **'Stored participants lists'**
   String get text_lists_dashboard_title;
 
+  /// l10n for the invitation to add a list
+  ///
+  /// In en, this message translates to:
+  /// **'Please tap\nto add a list'**
+  String get text_lists_dashboard_invitation_to_add_a_list;
+
   /// The 'List sort' label
   ///
   /// In en, this message translates to:
