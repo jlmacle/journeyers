@@ -12,13 +12,10 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
-  group("CATitleDeclaration Widget Tests: \n", () 
-  {    
-    testWidgets("Should render the correct text field hint", 
-    (WidgetTester tester) async 
-    {
-      // Building the widget
-      await tester.pumpWidget(
+
+  Future<void> pumpTestableWidget(WidgetTester tester) async
+  {
+    return await tester.pumpWidget(
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -31,6 +28,15 @@ void main() {
           ),
         ),
       );
+  }
+
+  group("CATitleDeclaration Widget Tests: \n", () 
+  {    
+    testWidgets("Should render the correct text field hint", 
+    (WidgetTester tester) async 
+    {
+      // Building the widget
+      await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
 
       // Getting the localized strings
@@ -63,19 +69,7 @@ void main() {
     (WidgetTester tester) async 
     {
       // Building the widget
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: Scaffold(
-            body: CATitleDeclaration
-            (
-              analysisTitleWhenEdition: "",
-              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
-            )
-          ),
-        ),
-      );
+      await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
 
       // Getting the text field
@@ -89,19 +83,7 @@ void main() {
     (WidgetTester tester) async 
     {
       // Building the widget
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: Scaffold(
-            body: CATitleDeclaration
-            (
-              analysisTitleWhenEdition: "",
-              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
-            )
-          ),
-        ),
-      );
+      await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
 
       expect (find.textContaining("/150"), findsOne);
