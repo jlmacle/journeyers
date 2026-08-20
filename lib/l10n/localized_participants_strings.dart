@@ -23,6 +23,8 @@ class LocalizedParticipantsStrings
   //  ─── Deletion ───────────────────────────────────────
   // Single deletion tooltip
   var listsDeleteTooltipLabel = "";
+  // Single deletion snackbar message
+  var listDeletedSnackbarMessage = "";
 
   // ─── NEW LIST ───────────────────────────────────────
   var newListButtonLabel = "";
@@ -59,7 +61,8 @@ class LocalizedParticipantsStrings
     //  ─── Deletion ───────────────────────────────────────
     // Single deletion tooltip
     listsDeleteTooltipLabel = _l10n?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip";
-    
+    // Single deletion snackbar message
+    listDeletedSnackbarMessage = _l10n?.text_lists_dashboard_snackbar_message_list_deleted ?? "Issue with the l10n for the 'List deleted' snackbar message";
 
     
     // ─── NEW LIST ───────────────────────────────────────
