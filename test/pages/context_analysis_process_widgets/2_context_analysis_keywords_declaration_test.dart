@@ -14,15 +14,11 @@ import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() 
 {
-    group("CAKeywordsDeclaration Tests: ", 
-    () 
-    { 
-    testWidgets("Should render the correct text field hint", 
-    (WidgetTester tester) async 
-    {
-      // Building the widget
-      await tester.pumpWidget(
+  Future<void> pumpTestableWidget(WidgetTester tester) async
+  {
+    return await tester.pumpWidget(
         MaterialApp(
+          theme: appTheme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
@@ -34,6 +30,17 @@ void main()
           ),
         ),
       );
+  }
+
+
+    group("CAKeywordsDeclaration Tests: ", 
+    () 
+    { 
+    testWidgets("Should render the correct text field hint", 
+    (WidgetTester tester) async 
+    {
+      // Building the widget
+      await pumpTestableWidget(tester);
        
       // Getting the localized strings
       var context = tester.element(find.byType(Scaffold).first);
@@ -66,17 +73,7 @@ void main()
         const kw = "kw";
 
         // Building the widget
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: CAKeywordsDeclaration
-              (
-                keywordsWhenEdition: const {},
-                onKeywordsUpdatedProcessCallbackFunction: (_){}
-              )
-            ),
-          ),
-        );
+        await pumpTestableWidget(tester);
 
         // Adding a keyword with the text field
         await tester.enterText(find.byType(TextField), kw);
@@ -99,17 +96,7 @@ void main()
         const kw = "kw";
 
         // Building the widget
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: CAKeywordsDeclaration
-              (
-                keywordsWhenEdition: const {},
-                onKeywordsUpdatedProcessCallbackFunction: (_){}
-              )
-            ),
-          ),
-        );
+        await pumpTestableWidget(tester);
 
         // Adding a keyword twice with the text field
         await tester.enterText(find.byType(TextField), kw);
@@ -134,17 +121,7 @@ void main()
       (WidgetTester tester) async 
       {
         // Building the widget
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: CAKeywordsDeclaration
-              (
-                keywordsWhenEdition: const {},
-                onKeywordsUpdatedProcessCallbackFunction: (_){}
-              )
-            ),
-          ),
-        );
+       await pumpTestableWidget(tester);
 
         // Adding the keywords with the text fields: B, A, C
         await tester.enterText(find.byType(TextField), "B");
@@ -181,17 +158,7 @@ void main()
       (WidgetTester tester) async 
       {
         // Building the widget
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: CAKeywordsDeclaration
-              (
-                keywordsWhenEdition: const {},
-                onKeywordsUpdatedProcessCallbackFunction: (_){}
-              )
-            ),
-          ),
-        );
+       await pumpTestableWidget(tester);
 
         // Adding 20 keywords
         for (var index=1; index <= 20; index++)
@@ -211,17 +178,7 @@ void main()
       (WidgetTester tester) async 
       {
         // Building the widget
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: CAKeywordsDeclaration
-              (
-                keywordsWhenEdition: const {},
-                onKeywordsUpdatedProcessCallbackFunction: (_){}
-              )
-            ),
-          ),
-        );
+       await pumpTestableWidget(tester);
 
         expect(find.textContaining("/"), findsNothing);
       }
@@ -235,18 +192,7 @@ void main()
           (WidgetTester tester) async 
           {
             // Building the widget
-            await tester.pumpWidget(
-              MaterialApp(
-                theme: appTheme,
-                home: Scaffold(
-                  body: CAKeywordsDeclaration
-                  (
-                    keywordsWhenEdition: const {},
-                    onKeywordsUpdatedProcessCallbackFunction: (_){}
-                  )
-                ),
-              ),
-            );
+            await pumpTestableWidget(tester);
 
             // Adding a keyword with the text field
             await tester.enterText(find.byType(TextField), "kw");
@@ -268,18 +214,7 @@ void main()
           (WidgetTester tester) async 
           {
             // Building the widget
-            await tester.pumpWidget(
-              MaterialApp(
-                theme: appTheme,
-                home: Scaffold(
-                  body: CAKeywordsDeclaration
-                  (
-                    keywordsWhenEdition: const {},
-                    onKeywordsUpdatedProcessCallbackFunction: (_){}
-                  )
-                ),
-              ),
-            );
+            await pumpTestableWidget(tester);
 
             // Adding a keyword with the text field
             await tester.enterText(find.byType(TextField), "kw");
@@ -298,18 +233,7 @@ void main()
           (WidgetTester tester) async 
           {
             // Building the widget
-            await tester.pumpWidget(
-              MaterialApp(
-                theme: appTheme,
-                home: Scaffold(
-                  body: CAKeywordsDeclaration
-                  (
-                    keywordsWhenEdition: const {},
-                    onKeywordsUpdatedProcessCallbackFunction: (_){}
-                  )
-                ),
-              ),
-            );
+            await pumpTestableWidget(tester);
 
             // Adding a keyword with the text field
             await tester.enterText(find.byType(TextField), "kw");

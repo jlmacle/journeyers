@@ -403,6 +403,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'The participants list is empty';
 
   @override
+  String get text_lists_dashboard_snackbar_message_list_deleted =>
+      'List deleted';
+
+  @override
   String get text_lists_dashboard_list_loading_button_text =>
       'Please click to load';
 
@@ -830,6 +834,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
       'The participants list is empty';
+
+  @override
+  String get text_lists_dashboard_snackbar_message_list_deleted =>
+      'List deleted';
 
   @override
   String get text_lists_dashboard_list_loading_button_text =>

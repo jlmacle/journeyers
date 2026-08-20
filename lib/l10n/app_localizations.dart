@@ -752,6 +752,12 @@ abstract class AppLocalizations {
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message;
 
+  /// l10n for the 'List deleted' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'List deleted'**
+  String get text_lists_dashboard_snackbar_message_list_deleted;
+
   /// l10n for the list loading button text
   ///
   /// In en, this message translates to:
