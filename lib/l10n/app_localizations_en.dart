@@ -374,6 +374,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get text_lists_dashboard_title => 'Stored participants lists';
 
   @override
+  String get text_lists_dashboard_invitation_to_add_a_list =>
+      'Please tap\nto add a list';
+
+  @override
   String get text_lists_dashboard_sort_by_list_name => 'List sort';
 
   @override
@@ -805,6 +809,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_dashboard_title => 'Stored participants lists';
+
+  @override
+  String get text_lists_dashboard_invitation_to_add_a_list =>
+      'Please tap\nto add a list';
 
   @override
   String get text_lists_dashboard_sort_by_list_name => 'List sort';
