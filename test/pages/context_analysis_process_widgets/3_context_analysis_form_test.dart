@@ -101,8 +101,6 @@ void main()
             LocalizedCAQuestionsFields lqf = .new(context);
 
             var localeLanguageCode = getLocaleLanguageCode(tester);
-            if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
-            if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
 
             var level2TitleIndividual = ""; 
             var level2TitleGroup = ""; 
@@ -152,6 +150,58 @@ void main()
 
             // Verifying the second title correct
             expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
+          },
+        ); 
+
+        testWidgets("Individual and group tiles carry the correct sub-text",
+          (tester) async
+          {
+            // Pumping the CAForm widget
+            await pumpCAForm(tester);
+
+            // Acccessing the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedCAStrings lca = .new(context);
+
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            var invitationToUnfoldExpansionTile = ""; 
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { invitationToUnfoldExpansionTile = "Please click to toggle"; }
+              case("fr"): { invitationToUnfoldExpansionTile = "Veuillez cliquer pour commencer"; }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: invitationToUnfoldExpansionTile: $invitationToUnfoldExpansionTile"); 
+
+            // Verifying that the first expansion tile subtext is correct 
+            var firstUnfoldedExpansionTileSubTextFinder = find.descendant
+                                                    (
+                                                      // first expansion tile
+                                                      of: find.byType(ExpansionTile).first, 
+                                                      matching: find.byType(Text)
+                                                    // second Text widget out of 2
+                                                    ).last;
+            Text firstUnfoldedExpansionTileSubTextWidget = tester.widget<Text>(firstUnfoldedExpansionTileSubTextFinder);
+            
+            // Verifying consistency between hard-coded string and localized string
+            expect(invitationToUnfoldExpansionTile, lca.invitationToUnfoldExpansionTile);     
+
+            // Verifying the first subtext correct
+            expect(firstUnfoldedExpansionTileSubTextWidget.data, lca.invitationToUnfoldExpansionTile);
+
+            // Verifying that the second expansion tile subtext is correct 
+            var secondUnfoldedExpansionTileSubTextFinder = find.descendant
+                                                    (
+                                                      // second expansion tile
+                                                      of: find.byType(ExpansionTile).last, 
+                                                      matching: find.byType(Text)
+                                                    // second Text widget out of 2
+                                                    ).last;
+            Text secondUnfoldedExpansionTileSubTextWidget = tester.widget<Text>(secondUnfoldedExpansionTileSubTextFinder);       
+            
+            // Verifying the second sub-text correct
+            expect(secondUnfoldedExpansionTileSubTextWidget.data, lca.invitationToUnfoldExpansionTile);
           },
         ); 
 
