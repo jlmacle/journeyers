@@ -197,6 +197,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to add participants to the problem-solving session';
 
   @override
+  String get gps_process_edit_identifiers_dialog_label => 'Edit Value';
+
+  @override
   String get gps_process_edit_identifiers_tooltip =>
       'Please click to edit the participants identifiers';
 
@@ -632,6 +635,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_add_participants_tooltip =>
       'Please click to add participants to the problem-solving session';
+
+  @override
+  String get gps_process_edit_identifiers_dialog_label => 'Edit Value';
 
   @override
   String get gps_process_edit_identifiers_tooltip =>
