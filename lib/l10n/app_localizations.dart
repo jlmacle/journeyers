@@ -401,6 +401,12 @@ abstract class AppLocalizations {
   /// **'Please click to add participants to the problem-solving session'**
   String get gps_process_add_participants_tooltip;
 
+  /// The label for the 'Edit Value' dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Value'**
+  String get gps_process_edit_identifiers_dialog_label;
+
   /// l10n for the 'Please click to edit the participants identifiers' tooltip
   ///
   /// In en, this message translates to:
