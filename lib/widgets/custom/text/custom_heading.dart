@@ -66,16 +66,16 @@ class CustomHeadingState extends State<CustomHeading>
   
   // Used in CAForm.
   // Switches the heading decoration if a checkbox is checked.  
-  void switchCustomHeadingDecorationIfCheckboxChecked()
+  void switchCustomHeadingDecorationIfRelevant({required bool isOneItemChecked})
   {
-    if (!_headingStyleUnderlined) {
+    if (isOneItemChecked && !_headingStyleUnderlined) {      
       setState(() {
         _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.underline);
       });
       
       _headingStyleUnderlined = true;
     }
-    else{
+    else if (!isOneItemChecked){
       setState(() {
         _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.none);
       });
