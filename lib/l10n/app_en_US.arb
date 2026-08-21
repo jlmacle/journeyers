@@ -104,6 +104,8 @@
   ,"@gps_process_edit_title_text_field_hint": {"description": "l10n for the 'Please enter a title or select below' text field hint"}
   ,"gps_process_add_participants_tooltip": "Please click to add participants to the problem-solving session"
   ,"@gps_process_add_participants_tooltip": {"description": "l10n for the 'Please click to add participants to the problem-solving session' tooltip"}
+  ,"gps_process_edit_identifiers_dialog_label": "Edit Value"
+  ,"@gps_process_edit_identifiers_dialog_label": {"description": "The label for the 'Edit Value' dialog"}
   ,"gps_process_edit_identifiers_tooltip": "Please click to edit the participants identifiers"
   ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n for the 'Please click to edit the participants identifiers' tooltip"}
   ,"gps_process_edit_identifiers_clear_one": "Clear\nOne"
