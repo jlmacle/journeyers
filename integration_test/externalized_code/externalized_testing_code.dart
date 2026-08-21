@@ -824,10 +824,14 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     List<String> ideasList
   ) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
     // Searching the text field used to add ideas
     var newIdeaTextFieldFinder = find.ancestor
     (
-      of: find.text(newIdeaTextFieldHint), 
+      of: find.text(lgps.newIdeaTextFieldHint), 
       matching: find.byType(TextField)
     );
 
