@@ -439,6 +439,12 @@ abstract class AppLocalizations {
   /// **'No ideas added yet.'**
   String get gps_process_list_of_ideas_placeholder;
 
+  /// l10n for the 'Please enter an idea.' text field hint
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter an idea.'**
+  String get gps_process_new_idea_text_field_hint;
+
   /// l10n for the 'No ideas to save' snackbar message
   ///
   /// In en, this message translates to:

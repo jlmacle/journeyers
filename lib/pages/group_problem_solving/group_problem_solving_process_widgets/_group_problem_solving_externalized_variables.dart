@@ -23,7 +23,6 @@ Map<String, bool> checklistItems = {
 const checklistItemCheckedColor = Colors.green;
 
 // GPSNewIdea
-const newIdeaTextFieldHint = "Please enter an idea.";
 const overlayClosingTooltip = "Close overlay";
 
 

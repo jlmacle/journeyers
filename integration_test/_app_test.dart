@@ -13,7 +13,6 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
-import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/pages/homepage.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -204,7 +203,7 @@ Future<void> main() async {
           // Searching the text field used to add ideas
           var newIdeaTextFieldFinder = find.ancestor
           (
-            of: find.text(newIdeaTextFieldHint), 
+            of: find.text(lgps.newIdeaTextFieldHint), 
             matching: find.byType(TextField)
           );
 

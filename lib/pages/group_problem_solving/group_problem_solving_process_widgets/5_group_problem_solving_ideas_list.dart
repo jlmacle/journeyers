@@ -142,6 +142,9 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (context, anim1, anim2) 
       {
+          // Getting the localized strings
+          LocalizedGPSStrings lgps = .new(context);
+
         return Scaffold
         (
           appBar:AppBar
@@ -242,14 +245,14 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                         key: const Key("ideaOverlayField"),
                         controller: _ideaNewTec,
                         textAlign: TextAlign.left,
-                        decoration: const InputDecoration
+                        decoration: InputDecoration
                         (
                           hint: Text
                           ( 
-                            newIdeaTextFieldHint,
+                            lgps.newIdeaTextFieldHint,
                             textAlign: TextAlign.left,                                          
                           ),
-                          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
                         ),
                         onSubmitted: (value)
                         {

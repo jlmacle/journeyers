@@ -2,8 +2,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart";
-import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 
 void main() 
 {
@@ -34,8 +34,12 @@ void main()
         // Pumping the widget
         await pumpGPSNewIdea(tester);
 
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);
+
         // Verifying the hint text present
-        expect(find.text(newIdeaTextFieldHint), findsOne);        
+        expect(find.text(lgps.newIdeaTextFieldHint), findsOne);        
       });          
     
     });

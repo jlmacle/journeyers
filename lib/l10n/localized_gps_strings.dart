@@ -31,6 +31,9 @@ class LocalizedGPSStrings
   var ideasListPlaceholder = "";
   var ideasListEmptyListSnackbarMessage = "";
 
+  // GPSNewIdea
+  var newIdeaTextFieldHint = "";
+
   LocalizedGPSStrings(BuildContext context)
   { 
     _l10n = AppLocalizations.of(context);
@@ -59,6 +62,9 @@ class LocalizedGPSStrings
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
     ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
     ideasListEmptyListSnackbarMessage = _l10n?.gps_process_snackbar_message_no_ideas_to_save ?? "Issue with the l10n for the 'No ideas to save' snackbar message";
+  
+    // GPSNewIdea
+    newIdeaTextFieldHint = _l10n?.gps_process_new_idea_text_field_hint ?? "Issue with the l10n for the 'Please enter an idea.' text field hint";
   }
 
 }

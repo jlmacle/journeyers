@@ -3251,6 +3251,10 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableGPSPage());
           await tester.pumpAndSettle();
 
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
+
           // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
           // ────────────────────────────────────────────────────────────────────────
           await gpsFromGPSPageToProcessPage(tester);
@@ -3260,7 +3264,7 @@ Future<void> main() async {
           // Searching the text field used to add ideas
           var newIdeaTextFieldFinder = find.ancestor
           (
-            of: find.text(newIdeaTextFieldHint), 
+            of: find.text(lgps.newIdeaTextFieldHint), 
             matching: find.byType(TextField)
           );
 
