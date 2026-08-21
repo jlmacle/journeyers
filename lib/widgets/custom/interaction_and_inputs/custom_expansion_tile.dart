@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
-import "package:journeyers/widgets/custom/interaction_and_inputs/custom_icon_button.dart";
 
 /// {@category Custom widgets}
 /// A customizable expansion tile with callback functions for edition/deletion.
@@ -127,18 +126,18 @@ class _CustomExpansionTileState extends State<CustomExpansionTile>
                 widget.listActionIconsData.map((actionIconData) 
                 {
                   final iconData = actionIconData[0] as IconData;
-                  final toolTipLabel = actionIconData[1] as String;
-                  final VoidCallback onPressedFunction;
-                  if (toolTipLabel == CustomExpansionTile.toolTipEdit) {onPressedFunction = widget.onEditPressedCallbackFunction;} 
-                  else if (toolTipLabel == CustomExpansionTile.toolTipDelete) {onPressedFunction = widget.onDeletePressedCallbackFunction;} 
-                  else {onPressedFunction = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTipLabel");};}
+                  final toolTip = actionIconData[1] as String;
+                  final VoidCallback onPressed;
+                  if (toolTip == CustomExpansionTile.toolTipEdit) {onPressed = widget.onEditPressedCallbackFunction;} 
+                  else if (toolTip == CustomExpansionTile.toolTipDelete) {onPressed = widget.onDeletePressedCallbackFunction;} 
+                  else {onPressed = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTip");};}
 
                   return 
-                  CustomIconButton
+                  IconButton
                   (
                     icon: Icon(iconData),
-                    toolTipLabel: toolTipLabel,
-                    onPressedCallbackFunction: onPressedFunction,
+                    tooltip: toolTip,
+                    onPressed: onPressed,
                   );
                 }).toList(),
               ),
