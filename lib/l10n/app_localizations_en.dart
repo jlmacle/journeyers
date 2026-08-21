@@ -216,6 +216,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_list_of_ideas_placeholder => 'No ideas added yet.';
 
   @override
+  String get gps_process_new_idea_text_field_hint => 'Please enter an idea.';
+
+  @override
   String get gps_process_snackbar_message_no_ideas_to_save =>
       'No ideas to save';
 
@@ -654,6 +657,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_list_of_ideas_placeholder => 'No ideas added yet.';
+
+  @override
+  String get gps_process_new_idea_text_field_hint => 'Please enter an idea.';
 
   @override
   String get gps_process_snackbar_message_no_ideas_to_save =>
