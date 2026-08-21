@@ -6,6 +6,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -97,6 +98,9 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
 
   // Function used to edit a stakeholder identifier
   void _identifierEdit({int? index}) {
+    // Getting the localized strings
+    LocalizedGPSStrings lgps = .new(context);
+
     showDialog(
       context: context,
       builder: (context) {
@@ -110,7 +114,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
           controller.text = widget.identifiersCol2[index!];
         }
         return AlertDialog(
-          title: const Text(editIdentifierLabel),
+          title: Text(lgps.participantIdentifierEditLabel),
           content: TextField
           (
             controller: controller, 
