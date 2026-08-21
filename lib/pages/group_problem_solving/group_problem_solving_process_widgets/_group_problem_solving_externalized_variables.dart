@@ -26,5 +26,4 @@ const checklistItemCheckedColor = Colors.green;
 const newIdeaTextFieldHint = "Please enter an idea.";
 const overlayClosingTooltip = "Close overlay";
 
-// GPSProcess
-const editIdentifierLabel = "Edit Value";
+
