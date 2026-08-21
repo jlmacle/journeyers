@@ -54,6 +54,11 @@ class CAFormState extends State<CAForm>
   // ─── DTO related data ───────────────────────────────────────
   DTOCAForm? _dtoCAForm;
 
+  // ─── Items-checked related data ───────────────────────────────────────
+  List<String> checkedBalanceItems = [];
+  List<String> checkedWorkplaceItems = [];
+  List<String> checkedLegacyItems = [];
+
   @override
   void initState() {
     super.initState();
@@ -86,27 +91,60 @@ class CAFormState extends State<CAForm>
   
   // ─── Methods related to updating DTO and item/heading styling ──────────────────────────────────────────────────
   // Method used to update the DTO, and the item and heading styling (balance issue)
-  Future<void> _onBalanceItemChecked(DTOCheckboxWithTextField data, bool? value) async
+  Future<void> _onBalanceItemChecked
+  ({
+    required DTOCheckboxWithTextField data, 
+    required bool? value, 
+    required String itemText, 
+    required List<String> checkedBalanceItems
+  }) async
   {
+    // Updating the DTO
     data.checked = value!;
+    // Updating the checkedBalanceItems list
+    if(value) {checkedBalanceItems.add(itemText);}
+    else {checkedBalanceItems.remove(itemText);}
+    // Switching decoration if relevant
     balanceIssueHeadingKey.currentState
-        ?.switchCustomHeadingDecorationIfCheckboxChecked();
+        ?.switchCustomHeadingDecorationIfRelevant(isOneItemChecked: checkedBalanceItems.isNotEmpty);
   }
 
   // Method used to update the DTO, and the item and heading styling (workplace issue)
-  Future<void> _onWorkplaceItemChecked(DTOCheckboxWithTextField data, bool? value) async
+  Future<void> _onWorkplaceItemChecked
+  ({
+    required DTOCheckboxWithTextField data, 
+    required bool? value,
+    required String itemText,
+    required List<String> checkedWorkplaceItems
+  }) async
   {
+    // Updating the DTO
     data.checked = value!;
+    // Updating the checkedWorkplaceItems list
+    if(value) {checkedWorkplaceItems.add(itemText);}
+    else {checkedWorkplaceItems.remove(itemText);}
+    // Switching decoration if relevant
     workplaceIssueHeadingKey.currentState
-        ?.switchCustomHeadingDecorationIfCheckboxChecked();
+        ?.switchCustomHeadingDecorationIfRelevant(isOneItemChecked: checkedWorkplaceItems.isNotEmpty);
   }
 
   // Method used to update the DTO, and the item and heading styling (legacy issue)
-  Future<void> _onLegacyItemChecked(DTOCheckboxWithTextField data, bool? value) async 
+  Future<void> _onLegacyItemChecked
+  ({
+    required DTOCheckboxWithTextField data, 
+    required bool? value,
+    required String itemText,
+    required List<String> checkedLegacyItems
+  }) async 
   {
+    // Updating the DTO
     data.checked = value!;
+    // Updating the checkedLegacyItems list
+    if(value) {checkedLegacyItems.add(itemText);}
+    else {checkedLegacyItems.remove(itemText);}
+    // Switching decoration if relevant
     legacyIssueHeadingKey.currentState
-        ?.switchCustomHeadingDecorationIfCheckboxChecked();
+        ?.switchCustomHeadingDecorationIfRelevant(isOneItemChecked: checkedLegacyItems.isNotEmpty);
   }
 
   // Method used to update the DTO (segmented buttons)
@@ -269,7 +307,13 @@ class CAFormState extends State<CAForm>
                 textFieldStartValue: _dtoCAForm!.indivBalanceStudiesHousehold.text,
                 textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
                 // Updating DTO and UI (heading and item styling)
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceStudiesHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked
+                                                                        (
+                                                                          data: _dtoCAForm!.indivBalanceStudiesHousehold, 
+                                                                          value: v,
+                                                                          itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_studies_household ?? "Issue with the studies-household life balance question, in the individual perspective",
+                                                                          checkedBalanceItems: checkedBalanceItems
+                                                                        ),
                 // Updating DTO
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceStudiesHousehold, v),
               ),
@@ -279,7 +323,13 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceAccessingIncomeHousehold.text,
                 textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked
+                                                                            (
+                                                                              data: _dtoCAForm!.indivBalanceAccessingIncomeHousehold, 
+                                                                              value: v,
+                                                                              itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_accessing_income_household ?? "Issue with the accessing income-household life balance question, in the individual perspective",
+                                                                              checkedBalanceItems:  checkedBalanceItems
+                                                                              ),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceAccessingIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -288,7 +338,13 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: _dtoCAForm!.indivBalanceEarningIncomeHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceEarningIncomeHousehold.text,
                 textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked
+                                                                          (
+                                                                            data: _dtoCAForm!.indivBalanceEarningIncomeHousehold, 
+                                                                            value: v,
+                                                                            itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_earning_income_household ?? "Issue with the earning income-household life balance question, in the individual perspective",
+                                                                            checkedBalanceItems: checkedBalanceItems 
+                                                                          ),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceEarningIncomeHousehold, v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -297,7 +353,13 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.checked,
                 textFieldStartValue: _dtoCAForm!.indivBalanceHelpingOthersHousehold.text,
                 textFieldHint: lca.helpingAndHouseholdTextFieldHint,
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onBalanceItemChecked
+                                                                            (
+                                                                              data: _dtoCAForm!.indivBalanceHelpingOthersHousehold,
+                                                                              value: v,
+                                                                              itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_balance_helping_others_household ?? "Issue with the helping others-household life balance question, in the individual perspective",
+                                                                              checkedBalanceItems: checkedBalanceItems 
+                                                                            ),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBalanceHelpingOthersHousehold, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
@@ -318,7 +380,13 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: _dtoCAForm!.indivAtWorkMoreAppreciated.checked,
                 textFieldStartValue: _dtoCAForm!.indivAtWorkMoreAppreciated.text,
                 textFieldHint: lca.pastOutcomesWorkplaceTextFieldHint,
-                onCheckboxValueChangedCallbackFunction: (v) async  => await _onWorkplaceItemChecked(_dtoCAForm!.indivAtWorkMoreAppreciated, v),
+                onCheckboxValueChangedCallbackFunction: (v) async  => await _onWorkplaceItemChecked
+                                                                            (
+                                                                              data: _dtoCAForm!.indivAtWorkMoreAppreciated, 
+                                                                              value: v,
+                                                                              itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_workplace_more_appreciated ?? "Issue with the more-appreciated-at-work question, in the individual perspective", 
+                                                                              checkedWorkplaceItems: checkedWorkplaceItems
+                                                                            ),
                 onTextFieldValueChangedCallbackFunction:  (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivAtWorkMoreAppreciated , v),
               ),
               CACheckboxWithSanitizedAndPaddedTextField
@@ -327,7 +395,13 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: _dtoCAForm!.indivAtWorkRemainingAppreciated.checked,
                 textFieldStartValue: _dtoCAForm!.indivAtWorkRemainingAppreciated.text,
                 textFieldHint: lca.pastOutcomesWorkplaceTextFieldHint,
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onWorkplaceItemChecked(_dtoCAForm!.indivAtWorkRemainingAppreciated, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onWorkplaceItemChecked
+                                                                             (
+                                                                              data: _dtoCAForm!.indivAtWorkRemainingAppreciated, 
+                                                                              value: v,
+                                                                              itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_workplace_to_remain_appreciated ?? "Issue with the to-remain-appreciated-at-work question, in the individual perspective",
+                                                                              checkedWorkplaceItems: checkedWorkplaceItems
+                                                                            ),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivAtWorkRemainingAppreciated, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
@@ -348,7 +422,13 @@ class CAFormState extends State<CAForm>
                 checkboxStartValue: _dtoCAForm!.indivBetterLegacies.checked,
                 textFieldStartValue: _dtoCAForm!.indivBetterLegacies.text,
                 textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
-                onCheckboxValueChangedCallbackFunction: (v) async => await _onLegacyItemChecked(_dtoCAForm!.indivBetterLegacies, v),
+                onCheckboxValueChangedCallbackFunction: (v) async => await _onLegacyItemChecked
+                                                                            (
+                                                                              data: _dtoCAForm!.indivBetterLegacies,
+                                                                              value: v,
+                                                                              itemText: AppLocalizations.of(context)?.ca_process_individual_perspective_legacy_better_legacy ?? "Issue with the better legacy question, in the individual perspective",
+                                                                              checkedLegacyItems: checkedLegacyItems
+                                                                            ),
                 onTextFieldValueChangedCallbackFunction: (v) async => await _onDTOCheckboxWithTextFieldUpdate(_dtoCAForm!.indivBetterLegacies, v),
               ),
               const Gap(preAndPostLevel3DividerGap),
