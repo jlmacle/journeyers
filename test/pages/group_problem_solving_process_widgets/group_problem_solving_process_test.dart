@@ -286,7 +286,7 @@ void main()
       // Searching the text field used to add ideas
       var newIdeaTextFieldFinder = find.ancestor
       (
-        of: find.text(newIdeaTextFieldHint), 
+        of: find.text(lgps.newIdeaTextFieldHint), 
         matching: find.byType(TextField)
       );
 
