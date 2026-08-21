@@ -257,6 +257,53 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
   }
 
+  // Method used to determine if a checkbox text is underlined.
+  bool caIsCheckboxTextUnderlined
+  ({
+    required WidgetTester tester,
+    required checkboxTextsFinder,
+    required int checkboxIndex
+  })
+  {
+    var indivTextWidget = tester.widget<Text>(checkboxTextsFinder.at(checkboxIndex));
+    if (testingDebug) pu.printd("Testing Debug: checkbox text: ${indivTextWidget.data}");
+    var decoration = indivTextWidget.style?.decoration;
+    if (testingDebug) pu.printd("_________________ decoration: $decoration");
+    return(decoration == TextDecoration.underline);
+  }
+
+  // Method used to change a checkbox value. 
+  Future<void> caCheckboxChangeValue
+  ({
+    required WidgetTester tester,
+    required String checkboxText, 
+    bool scrollUpwards = false 
+  }) async
+  {
+    double delta = 45;
+    if(scrollUpwards) delta *= -1;
+    // Getting the scrollable
+    var firstScrollable =  find.descendant
+                (
+                  of: find.byKey(const Key("context-analysis-process-scrollview")), 
+                  matching: find.byType(Scrollable)
+                ).first;
+    
+    // Scrolling
+    var textFinder = find.text(checkboxText, skipOffstage: false);
+    await tester.scrollUntilVisible(textFinder, scrollable: firstScrollable, delta);
+    // pumpAndSettle timed out
+    await tester.pump(const Duration(seconds: 2));
+    
+    // Tapping 
+    await tester.tap(textFinder);
+    // pumpAndSettle timed out
+    await tester.pump(const Duration(seconds: 2));
+
+    return;
+  }
+
+
   // Method used to enter new CA process data
   // 7 values are necessary in checkboxValues
   // 4 values are necessary in segmentedButtonValues
