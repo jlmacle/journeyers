@@ -261,14 +261,14 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   bool caIsCheckboxTextUnderlined
   ({
     required WidgetTester tester,
-    required checkboxTextsFinder,
+    required textsFinder,
     required int checkboxIndex
   })
   {
-    var indivTextWidget = tester.widget<Text>(checkboxTextsFinder.at(checkboxIndex));
-    if (testingDebug) pu.printd("Testing Debug: checkbox text: ${indivTextWidget.data}");
+    var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
+    if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
     var decoration = indivTextWidget.style?.decoration;
-    if (testingDebug) pu.printd("_________________ decoration: $decoration");
+    if (testingDebug) pu.printd("______________ decoration: $decoration");
     return(decoration == TextDecoration.underline);
   }
 
@@ -290,15 +290,26 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
                 ).first;
     
     // Scrolling
-    var textFinder = find.text(checkboxText, skipOffstage: false);
-    await tester.scrollUntilVisible(textFinder, scrollable: firstScrollable, delta);
+    // if (nextCheckboxText != null) checkboxText = nextCheckboxText;
+    var correctCACheckboxWithSanitizedAndPaddedTextField = find.ancestor
+    (
+      of: find.text(checkboxText),
+      matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)
+    );
+    var checkboxFinder = find.descendant
+    (
+      of: correctCACheckboxWithSanitizedAndPaddedTextField, 
+      matching: find.byType(Checkbox)
+    );
+   
+    await tester.scrollUntilVisible(checkboxFinder, scrollable: firstScrollable, delta);
     // pumpAndSettle timed out
-    await tester.pump(const Duration(seconds: 2));
-    
-    // Tapping 
-    await tester.tap(textFinder);
+    await tester.pump(const Duration(seconds: 2));    
+    // To avoid a missed tap
+    await tester.ensureVisible(checkboxFinder);
+    await tester.tap(checkboxFinder);
     // pumpAndSettle timed out
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pump();
 
     return;
   }

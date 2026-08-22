@@ -1,10 +1,16 @@
 // ignore: file_names
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+
+import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() 
 {
@@ -16,6 +22,7 @@ void main()
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale(testingLocaleOption),
           home: Scaffold(
             body: GPSProblemToSolveDeclaration
             (
@@ -34,6 +41,87 @@ void main()
     group("GPSProblemToSolveDeclaration Tests: \n", 
     () 
     {  
+      group("Default values: \n", 
+      () 
+      { 
+          testWidgets("Correct default title value", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpGPSProblemToSolveDeclaration(tester);
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+            
+            // Getting the default title
+            var defaultTitle = "";
+            
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { defaultTitle = "Problem To Solve"; }
+              case("fr"): { defaultTitle = "Problème à résoudre"; }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+
+            // Verifying consistency between hard-coded string and localized string
+            expect(defaultTitle, lgps.gpsDefaultProcessSessionTitle);     
+
+            // Verifying the default title present
+            expect(find.text(lgps.gpsDefaultProcessSessionTitle), findsOneWidget);
+          }
+          );
+
+          testWidgets("Correct text field hint", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpGPSProblemToSolveDeclaration(tester);
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+            
+            // Getting the default title
+            var defaultTitle = "";
+            // Getting the default text field hint
+            var defaultTextFieldHint = "";
+            
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                defaultTitle = "Problem To Solve";
+                defaultTextFieldHint = "Please enter a title or select below."; 
+              }
+              case("fr"): 
+              { 
+                defaultTitle = "Problème à résoudre";
+                defaultTextFieldHint = "Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."; 
+              }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+            if (testingDebug) pu.printd("Testing Debug: defaultTextFieldHint: $defaultTextFieldHint");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(defaultTitle, lgps.gpsDefaultProcessSessionTitle); 
+            expect(defaultTextFieldHint, lgps.gpsProcessTitleTextFieldHint);   
+
+            // Tapping on the default title
+            var titleFinder = find.text(defaultTitle);
+            await tester.tap(titleFinder);
+            await tester.pumpAndSettle();  
+
+            // Verifying the text field hint present
+            expect(find.text(lgps.gpsProcessTitleTextFieldHint), findsOneWidget);
+          }
+          );
+      });
+        
       group("Click to Text Field: \n", 
       () 
       { 
@@ -48,7 +136,19 @@ void main()
             expect(find.byType(TextField), findsNothing);
 
             // Getting the default title
-            var titleFinder = find.text("Problem To Solve");
+            var defaultTitle = "";
+            
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { defaultTitle = "Problem To Solve"; }
+              case("fr"): { defaultTitle = "Problème à résoudre"; }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+
+            // Getting the default title
+            var titleFinder = find.text(defaultTitle);
 
             // Clicking on the default title
             await tester.tap(titleFinder);

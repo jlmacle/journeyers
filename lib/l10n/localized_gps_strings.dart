@@ -30,6 +30,7 @@ class LocalizedGPSStrings
   var ideasListTitle = "";
   var ideasListPlaceholder = "";
   var ideasListEmptyListSnackbarMessage = "";
+  var ideasListOverlayClosingTooltip = "";
 
   // GPSNewIdea
   var newIdeaTextFieldHint = "";
@@ -62,7 +63,8 @@ class LocalizedGPSStrings
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
     ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
     ideasListEmptyListSnackbarMessage = _l10n?.gps_process_snackbar_message_no_ideas_to_save ?? "Issue with the l10n for the 'No ideas to save' snackbar message";
-  
+    ideasListOverlayClosingTooltip = _l10n?.gps_process_ideas_overlay_close_button_tooltip ?? "Issue with the l10n for the ideas overlay close button tooltip";
+
     // GPSNewIdea
     newIdeaTextFieldHint = _l10n?.gps_process_new_idea_text_field_hint ?? "Issue with the l10n for the 'Please enter an idea.' text field hint";
   }

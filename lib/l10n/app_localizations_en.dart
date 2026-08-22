@@ -223,6 +223,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'No ideas to save';
 
   @override
+  String get gps_process_ideas_overlay_close_button_tooltip =>
+      'Please click to close the ideas edition page';
+
+  @override
   String get gps_process_checklist_title => 'Checklist';
 
   @override
@@ -664,6 +668,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_snackbar_message_no_ideas_to_save =>
       'No ideas to save';
+
+  @override
+  String get gps_process_ideas_overlay_close_button_tooltip =>
+      'Please click to close the ideas edition page';
 
   @override
   String get gps_process_checklist_title => 'Checklist';

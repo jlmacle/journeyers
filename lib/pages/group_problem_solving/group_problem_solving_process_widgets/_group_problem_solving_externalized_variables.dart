@@ -22,7 +22,5 @@ Map<String, bool> checklistItems = {
   };
 const checklistItemCheckedColor = Colors.green;
 
-// GPSNewIdea
-const overlayClosingTooltip = "Close overlay";
 
 

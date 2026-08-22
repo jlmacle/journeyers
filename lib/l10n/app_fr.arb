@@ -122,7 +122,9 @@
     ,"@gps_process_new_idea_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer une idée"}
     ,"gps_process_snackbar_message_no_ideas_to_save": "Liste d'idées vide"
     ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n pour le message de snackbar 'Liste d'idées vide'"}
-  
+    ,"gps_process_ideas_overlay_close_button_tooltip": "Veuillez cliquer pour fermer la page d'édition des idées"
+    ,"@gps_process_ideas_overlay_close_button_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour fermer la page d'édition des idées'"}
+
 
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
