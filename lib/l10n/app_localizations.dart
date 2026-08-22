@@ -451,6 +451,12 @@ abstract class AppLocalizations {
   /// **'No ideas to save'**
   String get gps_process_snackbar_message_no_ideas_to_save;
 
+  /// l10n for the ideas overlay close button tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to close the ideas edition page'**
+  String get gps_process_ideas_overlay_close_button_tooltip;
+
   /// The default title for the checklist-related widget.
   ///
   /// In en, this message translates to:
