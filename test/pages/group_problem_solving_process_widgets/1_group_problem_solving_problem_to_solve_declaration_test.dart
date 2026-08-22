@@ -127,7 +127,7 @@ void main()
           );
       });
         
-      group("Click to Text Field: \n", 
+      group("Click toward text field: \n", 
       () 
       { 
           // "Clicking on the title reveals a text field"
