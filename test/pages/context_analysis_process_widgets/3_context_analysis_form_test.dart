@@ -1184,6 +1184,136 @@ void main()
         }
       );
 
+      testWidgets("The legacy section question is underlined if and only if an item of the section, at least, is checked, without impact on the other sections", 
+        (WidgetTester tester) async
+        {
+          bool isUnderlined = true;
+          bool isNotUnderlined = false;
+
+          // Pumping the widget within the CA process to allow for the tile expansion
+          await pumpCAProcess(tester);
+
+          // Acccessing the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedCAQuestionsFields lqf = .new(context);
+
+          // Expanding the expansion tile
+          await caOpenIndividualExpansionTile(context, tester);
+
+          // Searching for the Texts
+          var indivTextsFinder = find.descendant
+          (
+            of: find.byType(ExpansionTile).first, 
+            matching: find.byType(Text),
+            skipOffstage: false
+          );
+
+          // ─── VERIFYING THE FORMATTING ───────────────────────────────────────
+
+          // ─── 1. AT START ───────────────────────────────────────
+            // Balance elements: title + items
+          var listAllBalanceTextsNotUnderlined = List.filled(5, isNotUnderlined);
+          var listAllBalanceTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all balance elements not underlined"); 
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 4));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 5));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 6));
+
+          expect(listAllBalanceTextsValues, listAllBalanceTextsNotUnderlined);
+
+            // Workplace elements: title + items
+          var listAllWorkplaceTextsNotUnderlined = List.filled(3, isNotUnderlined);
+          var listAllWorkplaceTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all workplace elements not underlined"); 
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 9));
+          
+          expect(listAllWorkplaceTextsValues, listAllWorkplaceTextsNotUnderlined);
+
+            // Legacy elements: title + items
+          var listAllLegacyTextsNotUnderlined = List.filled(2, isNotUnderlined);
+          var listAllLegacyTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all legacy elements not underlined"); 
+          listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
+          listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
+          
+          expect(listAllLegacyTextsValues, listAllLegacyTextsNotUnderlined);
+
+          // ─── 2. LEGACY ITEM CHECKED ───────────────────────────────────────
+          if (testingDebug) pu.printd("\n\n"); 
+          // Clicking on the first legacy item and verifying the new values
+          await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleLegacyIssueItem1);
+          // Verifying the formatting for the legacy issue
+          var expectedAllLegacyTextsFormatting = [isUnderlined, isUnderlined];
+          listAllLegacyTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying the legacy section question and the first checkbox checked"); 
+          listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
+          listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
+           expect(listAllLegacyTextsValues, expectedAllLegacyTextsFormatting);
+
+          // SEARCHING FOR SIDE EFFECTS ON THE BALANCE AND WORKPLACE PARTS
+          // Verifying the formatting for the balance issue
+          var expectedAllBalanceTextsFormatting = List.filled(5, isNotUnderlined);
+          listAllBalanceTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all balance elements not underlined"); 
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 4));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 5));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 6));
+          expect(listAllBalanceTextsValues, expectedAllBalanceTextsFormatting);
+
+          // Verifying the formatting for the workplace issue
+          var expectedAllWorkplaceTextsFormatting = List.filled(3, isNotUnderlined);
+          listAllWorkplaceTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all workplace elements not underlined"); 
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 9));
+          expect(listAllWorkplaceTextsValues, expectedAllWorkplaceTextsFormatting);          
+
+          // ─── 3. FIRST LEGACY ITEM UNCHECKED ───────────────────────────────────────
+          if (testingDebug) pu.printd("\n\n"); 
+          // Re-clicking on the first legacy item and verifying the new values
+          await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleLegacyIssueItem1);
+          // Verifying the formatting
+          expectedAllLegacyTextsFormatting = List.filled(2, isNotUnderlined);
+          listAllLegacyTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all legacy elements not underlined"); 
+          listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
+          listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
+          
+          expect(listAllLegacyTextsValues, expectedAllLegacyTextsFormatting);
+
+          // Balance elements: title + items
+          listAllBalanceTextsNotUnderlined = List.filled(5, isNotUnderlined);
+          listAllBalanceTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all balance elements not underlined"); 
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 4));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 5));
+          listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 6));
+
+          expect(listAllBalanceTextsValues, listAllBalanceTextsNotUnderlined);
+
+            // Workplace elements: title + items
+          listAllWorkplaceTextsNotUnderlined = List.filled(3, isNotUnderlined);
+          listAllWorkplaceTextsValues = [];
+          if (testingDebug) pu.printd("Testing Debug: Verifying all workplace elements not underlined"); 
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
+          listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 9));
+          
+          expect(listAllWorkplaceTextsValues, listAllWorkplaceTextsNotUnderlined);
+
+        }
+      );
+
+    
     });     
   });
 
