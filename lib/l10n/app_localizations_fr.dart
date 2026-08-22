@@ -214,7 +214,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_keywords_overlay_appbar_title =>
-      'Mots-clés pour la\nsession de résolution de problèmes';
+      'Mots-clés pour la\nsession de résolution du problème';
 
   @override
   String get gps_process_list_of_ideas_title => 'Liste des idées';
@@ -675,7 +675,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_keywords_overlay_appbar_title =>
-      'Mots-clés pour la\nsession de résolution de problèmes';
+      'Mots-clés pour la\nsession de résolution du problème';
 
   @override
   String get gps_process_list_of_ideas_title => 'Liste des idées';
