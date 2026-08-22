@@ -227,6 +227,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Liste d\'idées vide';
 
   @override
+  String get gps_process_ideas_overlay_close_button_tooltip =>
+      'Veuillez cliquer pour fermer la page d\'édition des idées';
+
+  @override
   String get gps_process_checklist_title => 'Check-list';
 
   @override
@@ -678,6 +682,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_snackbar_message_no_ideas_to_save =>
       'Liste d\'idées vide';
+
+  @override
+  String get gps_process_ideas_overlay_close_button_tooltip =>
+      'Veuillez cliquer pour fermer la page d\'édition des idées';
 
   @override
   String get gps_process_checklist_title => 'Check-list';
