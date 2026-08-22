@@ -210,6 +210,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
 
   @override
+  String get gps_process_keywords_overlay_appbar_title =>
+      'Keywords for the\nproblem-solving session';
+
+  @override
   String get gps_process_list_of_ideas_title => 'List of ideas';
 
   @override
@@ -655,6 +659,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
+
+  @override
+  String get gps_process_keywords_overlay_appbar_title =>
+      'Keywords for the\nproblem-solving session';
 
   @override
   String get gps_process_list_of_ideas_title => 'List of ideas';
