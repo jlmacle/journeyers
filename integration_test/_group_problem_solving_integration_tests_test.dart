@@ -3410,7 +3410,7 @@ Future<void> main() async {
           // ── VERIFYING THAT THE EDITED VALUE IS ON THE GPS PROCESS PAGE  ─────────────────
           // ────────────────────────────────────────────────────────────────────────────────
           // Closing the overlay
-          var overlayClosingTooltipFinder = find.byTooltip(lgps.overlayClosingTooltip);
+          var overlayClosingTooltipFinder = find.byTooltip(lgps.ideasListOverlayClosingTooltip);
           await tester.tap(overlayClosingTooltipFinder);
           await tester.pumpAndSettle();
 
@@ -3476,7 +3476,7 @@ Future<void> main() async {
           expect(find.text(idea1), findsNothing);
 
           // Closing the overlay
-          var overlayClosingTooltipFinder = find.byTooltip(lgps.overlayClosingTooltip);
+          var overlayClosingTooltipFinder = find.byTooltip(lgps.ideasListOverlayClosingTooltip);
           await tester.tap(overlayClosingTooltipFinder);
           await tester.pumpAndSettle();
 
@@ -3555,7 +3555,7 @@ Future<void> main() async {
           expect(find.text(idea4), findsNWidgets(2));
 
           // Closing the overlay
-          var overlayClosingTooltipFinder = find.byTooltip(lgps.overlayClosingTooltip);
+          var overlayClosingTooltipFinder = find.byTooltip(lgps.ideasListOverlayClosingTooltip);
           await tester.tap(overlayClosingTooltipFinder);
           await tester.pumpAndSettle();
 
