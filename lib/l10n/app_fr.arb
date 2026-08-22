@@ -114,6 +114,9 @@
     ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n pour 'Effacer\nUn'"}
     ,"gps_process_edit_identifiers_clear_all": "Effacer\nTout"
     ,"@gps_process_edit_identifiers_clear_all": {"description": "l10n pour 'Effacer\nTout'"}
+    ,"gps_process_keywords_overlay_appbar_title": "Mots-clés pour la\nsession de résolution du problème"
+    ,"@gps_process_keywords_overlay_appbar_title": {"description": "l10n pour le titre de l'appbar de l'overlay des mots-clés"}
+    
     ,"gps_process_list_of_ideas_title": "Liste des idées"
     ,"@gps_process_list_of_ideas_title": {"description": "l10n pour le titre 'Liste des idées'"}
     ,"gps_process_list_of_ideas_placeholder": "Liste d'idées vide"

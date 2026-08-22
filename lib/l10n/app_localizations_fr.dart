@@ -213,6 +213,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gps_process_edit_identifiers_clear_all => 'Effacer\nTout';
 
   @override
+  String get gps_process_keywords_overlay_appbar_title =>
+      'Mots-clés pour la\nsession de résolution du problème';
+
+  @override
   String get gps_process_list_of_ideas_title => 'Liste des idées';
 
   @override
@@ -668,6 +672,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_edit_identifiers_clear_all => 'Effacer\nTout';
+
+  @override
+  String get gps_process_keywords_overlay_appbar_title =>
+      'Mots-clés pour la\nsession de résolution du problème';
 
   @override
   String get gps_process_list_of_ideas_title => 'Liste des idées';

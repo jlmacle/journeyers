@@ -7,8 +7,13 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
@@ -122,7 +127,7 @@ void main()
           );
       });
         
-      group("Click to Text Field: \n", 
+      group("Click toward text field: \n", 
       () 
       { 
           // "Clicking on the title reveals a text field"
@@ -147,7 +152,7 @@ void main()
             }
             if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
 
-            // Getting the default title
+            // Getting the default title finder
             var titleFinder = find.text(defaultTitle);
 
             // Clicking on the default title
@@ -182,5 +187,41 @@ void main()
           );      
       });
 
+      group("Display: \n", 
+      () 
+      { 
+          testWidgets("Clicking on the title removes all other widgets", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpGPSProblemToSolveDeclaration(tester);
+
+            // Getting the default title
+            var defaultTitle = "";
+            
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { defaultTitle = "Problem To Solve"; }
+              case("fr"): { defaultTitle = "Problème à résoudre"; }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+
+            // Clicking on the default title
+            var titleFinder = find.text(defaultTitle);            
+            await tester.tap(titleFinder);
+            await tester.pumpAndSettle();
+
+            // Verifying the other widgets absent
+            expect(find.text(addEmoji), findsNothing);
+            expect(find.byType(GPSChecklist), findsNothing);
+            expect(find.text(editEmoji), findsNothing);         
+            expect(find.byType(GPSKeywordsDeclaration), findsNothing);
+            expect(find.byType(GPSIdeasList), findsNothing);
+            expect(find.byType(GPSNewIdea), findsNothing);
+            expect(find.byType(SessionFileNameOnMobilePlatforms), findsNothing);
+          });
+      });
     });
 }
