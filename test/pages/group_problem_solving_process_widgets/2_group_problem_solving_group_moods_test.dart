@@ -12,7 +12,10 @@ import "../../../integration_test/externalized_code/externalized_testing_code.da
 
 void main() 
 {
-  Future<void> pumpIdentifierWidget(WidgetTester tester) async
+  Future<void> pumpIdentifierWidget({
+    required WidgetTester tester, 
+    required isEditMode, 
+  })  async
     {
       await tester.pumpWidget(
         MaterialApp(
@@ -21,8 +24,8 @@ void main()
           home: Scaffold(
             body: IdentifierWidget
             (
-                isEditMode: false, 
-                isDeleteMode: false,
+                isEditMode: isEditMode, 
+                isDeleteMode: !isEditMode,
                 onDelete:() {}, 
                 onEdit:() {}, 
                 onSwipe:(_) {}, 
@@ -32,7 +35,6 @@ void main()
         ),
       );
     }
-
 
   group("GPSGroupMoods Tests: \n", 
   () 
@@ -47,7 +49,7 @@ void main()
           (WidgetTester tester) async 
           {
             // Pumping the widget
-            await pumpIdentifierWidget(tester);
+            await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
             // Searching the emoji 
             var emojiFinder = find.textContaining(editEmoji);
@@ -65,7 +67,7 @@ void main()
         (WidgetTester tester) async 
         {
           // Pumping the widget
-          await pumpIdentifierWidget(tester);
+          await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
           // Verifying the color 
           await gpsTestIdentifierColor(tester, green);
@@ -75,7 +77,7 @@ void main()
         (WidgetTester tester) async 
         {
           // Pumping the widget
-          await pumpIdentifierWidget(tester);
+          await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
           // Searching the delete icon 
           var deleteIconFinder = find.byType(Icon);
@@ -83,8 +85,22 @@ void main()
           expect(deleteIconFinder, findsNothing);
         });   
 
+        testWidgets("The delete icon is present in 'delete' mode", 
+        (WidgetTester tester) async 
+        {
+          // Pumping the widget
+          await pumpIdentifierWidget(tester: tester, isEditMode: false);
+
+          // Searching the delete icon 
+          var deleteIconFinder = find.byType(Icon);
+
+          expect(deleteIconFinder, findsOne);
+        }); 
+    
+    
+
       });
       });
-    });
+  });
 
 }
