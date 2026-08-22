@@ -427,6 +427,12 @@ abstract class AppLocalizations {
   /// **'Clear\nAll'**
   String get gps_process_edit_identifiers_clear_all;
 
+  /// l10n for the GPS keywords overlay appbar title
+  ///
+  /// In en, this message translates to:
+  /// **'Keywords for the\nproblem-solving session'**
+  String get gps_process_keywords_overlay_appbar_title;
+
   /// l10n for the 'List of ideas' title
   ///
   /// In en, this message translates to:
