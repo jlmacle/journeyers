@@ -398,7 +398,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 Row(
                   children: 
                   [
-                    // LEFT COLUMN: Add/"Clear One"/"Edit" buttons, group mood widget
+                    // LEFT COLUMN: Add/"Clear One" buttons, identifiers widgets
                     Expanded(
                       child: Column
                       (
@@ -481,7 +481,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                       ),
                     ),
                     
-                    // CENTER CONTENT
+                    // CENTER CONTENT (Checklist, keywords, list of ideas)
                     Expanded
                     (
                       flex: 2,
@@ -536,7 +536,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                       )
                     ),
 
-                    // RIGHT COLUMN
+                    // RIGHT COLUMN: "Edit"/"Done"/"Clear All" buttons, identifiers widgets
                     Expanded(
                       child: Column(
                         children: 
