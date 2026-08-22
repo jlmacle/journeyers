@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 
@@ -102,13 +103,16 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedGPSStrings lgps = .new(context);
+
     return GestureDetector(
       onTap: () => showAddToSetOverlay
                     (
                       context: context, 
                       appBarBackgroundColor: navyBlue,
                       appBarForegroundColor: appBarWhite,
-                      overlayTitle: "Keywords for the\nproblem-solving session", 
+                      overlayTitle: lgps.gpsKeywordsOverlayAppbarTitle, 
                       overlayTitleStyle: problemSolvingKeywordsOverlayTitleStyle, 
                       overlayCloseIconButtonToolTip: AppLocalizations.of(context)?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip",                 
                       overlayCloseIconButtonColor: appBarWhite,
