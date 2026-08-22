@@ -74,7 +74,53 @@ void main()
           }
           );
 
-          });
+          testWidgets("Correct text field hint", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpGPSProblemToSolveDeclaration(tester);
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);
+            
+            // Getting the default title
+            var defaultTitle = "";
+            // Getting the default text field hint
+            var defaultTextFieldHint = "";
+            
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): 
+              { 
+                defaultTitle = "Problem To Solve";
+                defaultTextFieldHint = "Please enter a title or select below."; 
+              }
+              case("fr"): 
+              { 
+                defaultTitle = "Problème à résoudre";
+                defaultTextFieldHint = "Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."; 
+              }        
+            }
+            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+            if (testingDebug) pu.printd("Testing Debug: defaultTextFieldHint: $defaultTextFieldHint");
+
+            // Verifying consistency between hard-coded strings and localized strings
+            expect(defaultTitle, lgps.gpsDefaultProcessSessionTitle); 
+            expect(defaultTextFieldHint, lgps.gpsProcessTitleTextFieldHint);   
+
+            // Tapping on the default title
+            var titleFinder = find.text(defaultTitle);
+            await tester.tap(titleFinder);
+            await tester.pumpAndSettle();  
+
+            // Verifying the text field hint present
+            expect(find.text(lgps.gpsProcessTitleTextFieldHint), findsOneWidget);
+          }
+          );
+      });
         
       group("Click to Text Field: \n", 
       () 
