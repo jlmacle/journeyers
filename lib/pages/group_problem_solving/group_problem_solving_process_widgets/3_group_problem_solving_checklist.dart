@@ -127,7 +127,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
                       title: Text(key),
                       value: isChecked,
                       activeColor: checklistItemCheckedColor,
-                      tileColor: isChecked ? const Color(0xFFE8F5E9) : null,
+                      tileColor: isChecked ? const Color(0xFFE8F5E9) : white,
                       onChanged: (bool? value) {
                         setLocalState(() {
                           checklistItems[key] = value ?? false;
