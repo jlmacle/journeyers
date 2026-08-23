@@ -156,6 +156,39 @@ void main()
         expect(iconButtonWidget.color, appBarWhite);        
       });          
 
+      testWidgets("The correct text field placeholder is present", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSIdeasList(tester);
+        await tester.pumpAndSettle();
+
+         // Accessing the localized data
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);
+
+        // Tapping on the title
+        await tester.tap(find.text(lgps.ideasListTitle));
+        await tester.pumpAndSettle();
+
+        // newIdeaTextFieldHint hard-coded strings
+        var newIdeaTextFieldHint = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { newIdeaTextFieldHint = "Please enter an idea."; }
+          case("fr"): { newIdeaTextFieldHint = "Veuillez entrer une idée."; }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: newIdeaTextFieldHint: $newIdeaTextFieldHint");
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(newIdeaTextFieldHint, lgps.newIdeaTextFieldHint);     
+
+        // Verifying the newIdeaTextFieldHint present
+        expect(find.text(lgps.newIdeaTextFieldHint), findsOne);        
+      });    
 
 
     });
