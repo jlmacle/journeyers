@@ -238,6 +238,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please consider postponing\nif incomplete';
 
   @override
+  String get gps_process_checklist_question_1 =>
+      'Can we get feedback about people’s emotions?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
 
   @override
@@ -687,6 +691,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_checklist_invitation =>
       'Please consider postponing\nif incomplete';
+
+  @override
+  String get gps_process_checklist_question_1 =>
+      'Can we get feedback about people’s emotions?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
