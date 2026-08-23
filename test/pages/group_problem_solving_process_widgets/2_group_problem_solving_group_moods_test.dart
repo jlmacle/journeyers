@@ -21,6 +21,7 @@ void main()
         MaterialApp(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale(testingLocaleOption),
           home: Scaffold(
             body: IdentifierWidget
             (
