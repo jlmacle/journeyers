@@ -1,9 +1,10 @@
 // ignore: file_names
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
+
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
@@ -74,8 +75,37 @@ void main()
         expect(find.text(lgps.checkListTitle), findsOne);        
       });  
 
-    });        
+    });     
+
+  group("GPSChecklist overlay default aspect: \n", 
+    () 
+    { 
+      testWidgets("The correct appbar foreground color is present", 
+        /// "[foregroundColor], which specifies the color for icons and text within
+        ///  the app bar."
+        (WidgetTester tester) async 
+        {
+          // Pumping the widget
+          await pumpGPSChecklist(tester);
+          await tester.pumpAndSettle();
+
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);      
+
+          // Tapping to open the overlay
+          var checklistTitleFinder = find.text(lgps.checkListTitle);
+          await tester.tap(checklistTitleFinder);
+          await tester.pumpAndSettle();  
+
+          // Verifying the color
+          var iconButtonsFinder = find.byType(IconButton);
+          var iconButtonWidget = tester.widget<IconButton>(iconButtonsFinder.last);            
+          expect(iconButtonWidget.color, appBarWhite);        
+        });          
+
+    });      
     
-    });
+  });
   
 }
