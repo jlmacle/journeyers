@@ -135,7 +135,9 @@
   ,"@gps_process_checklist_invitation": {"description": "The invitation before the checklist"}
   ,"gps_process_checklist_question_1": "Can we get feedback about people’s emotions?"
   ,"@gps_process_checklist_question_1": {"description": "l10n for the checklist question 1"}
-  
+    ,"gps_process_checklist_question_2": "Is our context analysis done?"
+  ,"@gps_process_checklist_question_2": {"description": "l10n for the checklist question 2"}
+
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}
   
