@@ -475,6 +475,12 @@ abstract class AppLocalizations {
   /// **'Please consider postponing\nif incomplete'**
   String get gps_process_checklist_invitation;
 
+  /// l10n for the checklist question 1
+  ///
+  /// In en, this message translates to:
+  /// **'Can we get feedback about people’s emotions?'**
+  String get gps_process_checklist_question_1;
+
   /// l10n for the 'Close checklist' tooltip
   ///
   /// In en, this message translates to:
