@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -62,7 +63,8 @@ class _GPSChecklistState extends State<GPSChecklist> {
   }
 
   void _showChecklistOverlay(BuildContext context) {
-    var title = AppLocalizations.of(context)?.gps_process_checklist_invitation ?? "Issue with the invitation before the checklist";
+    LocalizedGPSStrings lgps = .new(context);
+    var title = lgps.checkListAppBarTitle;
 
     showGeneralDialog(
       context: context,
