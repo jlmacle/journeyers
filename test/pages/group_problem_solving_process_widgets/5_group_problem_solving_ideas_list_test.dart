@@ -2,6 +2,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
@@ -131,6 +132,30 @@ void main()
         // Verifying the ideasListAppBarTitle present
         expect(find.text(lgps.ideasListAppBarTitle), findsNWidgets(2));        
       });    
+
+      testWidgets("The correct appbar foreground color is present", 
+      /// "[foregroundColor], which specifies the color for icons and text within
+      ///  the app bar."
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSIdeasList(tester);
+        await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);      
+
+         // Tapping on the title
+        await tester.tap(find.text(lgps.ideasListTitle));
+        await tester.pumpAndSettle();
+
+        // Verifying the color
+        var iconButtonsFinder = find.byType(IconButton);
+        var iconButtonWidget = tester.widget<IconButton>(iconButtonsFinder.last);            
+        expect(iconButtonWidget.color, appBarWhite);        
+      });          
+
 
 
     });
