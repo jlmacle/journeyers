@@ -92,8 +92,47 @@ void main()
 
         // Verifying the placeholder present
         expect(find.text(lgps.ideasListPlaceholder), findsOne);        
-      });          
-    
+      });    
+    });
+
+    group("GPSIdeasList overlay default aspect: \n", 
+    () 
+    {
+      testWidgets("The correct appbar title is present", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSIdeasList(tester);
+        await tester.pumpAndSettle();
+
+         // Accessing the localized data
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);
+
+        // Tapping on the title
+        await tester.tap(find.text(lgps.ideasListTitle));
+        await tester.pumpAndSettle();
+
+        // ideasListAppBarTitle hard-coded strings
+        var ideasListAppBarTitle = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { ideasListAppBarTitle = "List of ideas"; }
+          case("fr"): { ideasListAppBarTitle = "Liste des idées"; }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: ideasListAppBarTitle: $ideasListAppBarTitle");
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(ideasListAppBarTitle, lgps.ideasListAppBarTitle);     
+
+        // Verifying the ideasListAppBarTitle present
+        expect(find.text(lgps.ideasListAppBarTitle), findsNWidgets(2));        
+      });    
+
+
     });
   });
 }
