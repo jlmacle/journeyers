@@ -104,6 +104,41 @@ void main()
           expect(iconButtonWidget.color, appBarWhite);        
         });          
 
+      testWidgets("The correct appbar title is present", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSChecklist(tester);
+        await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);      
+
+        // Tapping to open the overlay
+        var checkListTitleFinder = find.text(lgps.checkListTitle);
+        await tester.tap(checkListTitleFinder);
+        await tester.pumpAndSettle();  
+
+        // checkListAppbarTitle hard-coded strings
+        var checkListAppbarTitle = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+     
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { checkListAppbarTitle = "Please consider postponing\nif incomplete"; }
+          case("fr"): { checkListAppbarTitle = "Veuillez considérer reporter\nsi incomplet"; }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: checkListAppbarTitle: $checkListAppbarTitle"); 
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(checkListAppbarTitle, lgps.checkListAppBarTitle);     
+
+        // Verifying the checkListAppbarTitle present
+        expect(find.text(lgps.checkListAppBarTitle), findsOneWidget);   
+          
+      });  
     });      
     
   });
