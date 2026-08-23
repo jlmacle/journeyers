@@ -139,7 +139,39 @@ void main()
         expect(find.text(lgps.checkListAppBarTitle), findsOneWidget);   
           
       });  
-    });      
+    }); 
+
+    group("GPSChecklist overlay formatting: \n", 
+    () 
+    { 
+      testWidgets("Default color for unchecked checkbox and text is white", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSChecklist(tester);
+        await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);      
+
+        // Tapping to open the overlay
+        var checkListTitleFinder = find.text(lgps.checkListTitle);
+        await tester.tap(checkListTitleFinder);
+        await tester.pumpAndSettle();  
+
+        // Getting a checkbox
+        var checkboxesFinder = find.byType(Checkbox);
+        var aCheckboxWidget = tester.widget<Checkbox>(checkboxesFinder.first);
+        expect(aCheckboxWidget.fillColor, null);
+
+         // Getting a tile
+        var checkboxListTilesFinder = find.byType(CheckboxListTile);
+        var aCheckboxListTileWidget = tester.widget<CheckboxListTile>(checkboxListTilesFinder.first);
+        expect(aCheckboxListTileWidget.tileColor, white);
+
+      });
+    });     
     
   });
   
