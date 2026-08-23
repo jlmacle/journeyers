@@ -23,6 +23,7 @@ class LocalizedGPSStrings
   var checkListTitle = "";
   var checkListAppBarTitle = "";
   var checkListQuestion1 = "";
+  var checkListQuestion2 = "";
 
   // GPSKeywordsDeclaration
   var gpsKeywordsTitle = "";
@@ -60,6 +61,7 @@ class LocalizedGPSStrings
     checkListTitle = _l10n?.gps_process_checklist_title ?? "Issue with the title for the checklist-related widget.";
     checkListAppBarTitle = _l10n?.gps_process_checklist_invitation ?? "Issue with the invitation before the checklist";
     checkListQuestion1 = _l10n?.gps_process_checklist_question_1 ?? "Issue with the l10n for the checklist question 1";
+    checkListQuestion2 = _l10n?.gps_process_checklist_question_2 ?? "Issue with the l10n for the checklist question 2";
 
     // GPSKeywordsDeclaration
     gpsKeywordsTitle = _l10n?.l10n_keywords ?? "Issue with the l10n for 'Keywords'.";
