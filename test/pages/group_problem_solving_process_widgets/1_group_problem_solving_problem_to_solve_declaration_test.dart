@@ -59,7 +59,7 @@ void main()
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
             
-            // Getting the default title
+            // Default title hard-coded strings
             var defaultTitle = "";
             
             var localeLanguageCode = getLocaleLanguageCode(tester);
@@ -89,9 +89,9 @@ void main()
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
             
-            // Getting the default title
+            // Default title hard-coded strings
             var defaultTitle = "";
-            // Getting the default text field hint
+            // Default text field hint hard-coded strings
             var defaultTextFieldHint = "";
             
             var localeLanguageCode = getLocaleLanguageCode(tester);
@@ -140,7 +140,7 @@ void main()
             // Verifying the text field absent
             expect(find.byType(TextField), findsNothing);
 
-            // Getting the default title
+            // Default title hard-coded strings
             var defaultTitle = "";
             
             var localeLanguageCode = getLocaleLanguageCode(tester);
@@ -196,7 +196,7 @@ void main()
             // Pumping the widget
             await pumpGPSProblemToSolveDeclaration(tester);
 
-            // Getting the default title
+            // Default title hard-coded strings
             var defaultTitle = "";
             
             var localeLanguageCode = getLocaleLanguageCode(tester);
