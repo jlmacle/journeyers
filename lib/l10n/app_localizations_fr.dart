@@ -242,6 +242,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez considérer reporter\nsi incomplet';
 
   @override
+  String get gps_process_checklist_question_1 =>
+      'Pouvons-nous avoir un retour sur les émotions des participants ?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip =>
       'Fermer la check-list';
 
@@ -701,6 +705,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_checklist_invitation =>
       'Veuillez considérer reporter\nsi incomplet';
+
+  @override
+  String get gps_process_checklist_question_1 =>
+      'Pouvons-nous avoir un retour sur les émotions des participants ?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip =>
