@@ -65,8 +65,7 @@ void main()
         expect(find.text(lgps.ideasListTitle), findsOne);        
       });    
 
-      // "The placeholder is present"
-      testWidgets("The placeholder is present", 
+      testWidgets("The correct placeholder is present", 
       (WidgetTester tester) async 
       {
         // Pumping the widget
@@ -75,6 +74,21 @@ void main()
         // Accessing the localized data
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings? lgps = .new(context);
+
+        // ideasListPlaceholder hard-coded strings
+        var ideasListPlaceholder = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { ideasListPlaceholder = "No ideas added yet."; }
+          case("fr"): { ideasListPlaceholder = "Liste d'idées vide"; }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: ideasListPlaceholder: $ideasListPlaceholder");
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(ideasListPlaceholder, lgps.ideasListPlaceholder);   
 
         // Verifying the placeholder present
         expect(find.text(lgps.ideasListPlaceholder), findsOne);        
