@@ -2,9 +2,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+
+import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() 
 {
@@ -14,6 +18,7 @@ void main()
       const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        locale: Locale(testingLocaleOption),
         home: Scaffold(
           body: GPSIdeasList
           (
@@ -30,8 +35,7 @@ void main()
     group("GPSIdeasList default aspect: \n", 
     () 
     {
-      // "The title is present"
-      testWidgets("The title is present", 
+      testWidgets("The correct title is present", 
       (WidgetTester tester) async 
       {
         // Pumping the widget
@@ -42,7 +46,22 @@ void main()
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Verifying the title present
+        // ideasListTitle hard-coded strings
+        var ideasListTitle = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { ideasListTitle = "List of ideas"; }
+          case("fr"): { ideasListTitle = "Liste des idées"; }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: ideasListTitle: $ideasListTitle");
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(ideasListTitle, lgps.ideasListTitle);     
+
+        // Verifying the ideasListTitle present
         expect(find.text(lgps.ideasListTitle), findsOne);        
       });    
 
