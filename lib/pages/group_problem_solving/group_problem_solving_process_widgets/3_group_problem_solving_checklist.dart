@@ -21,6 +21,10 @@ class _GPSChecklistState extends State<GPSChecklist> {
   // Helper method to check if all items are completed
   bool get _isAllChecked => checklistItems.values.every((element) => element == true);
 
+  // Localized strings for the checklist
+  late LocalizedGPSStrings lgps;
+  late Map<String, bool> checklistItems;    
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +35,23 @@ class _GPSChecklistState extends State<GPSChecklist> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    // Accessing the localized data
+    LocalizedGPSStrings lgps = .new(context);
+
+    checklistItems = {
+      lgps.checkListQuestion1: false,
+      "Is our context analysis done?": false,
+      "Is the group open to using the app for group problem-solving?": false,    
+      "Is the group emotionally ready to problem-solve?": false,    
+      "Did we agree on what to do if emotions become problematic?": false,
+      "Do we agree on the problem that needs to be solved?": false,
+      "Did we agree on the order in which to offer the ideas?":false,
+      "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?":false,
+      "Do we need to further our context analysis?": false,
+    };
+
+    return 
+    GestureDetector(
       onTap: () => _showChecklistOverlay(context),
       child: Container(
         decoration: BoxDecoration(
