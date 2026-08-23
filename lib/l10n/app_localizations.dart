@@ -481,6 +481,12 @@ abstract class AppLocalizations {
   /// **'Can we get feedback about people’s emotions?'**
   String get gps_process_checklist_question_1;
 
+  /// l10n for the checklist question 2
+  ///
+  /// In en, this message translates to:
+  /// **'Is our context analysis done?'**
+  String get gps_process_checklist_question_2;
+
   /// l10n for the 'Close checklist' tooltip
   ///
   /// In en, this message translates to:

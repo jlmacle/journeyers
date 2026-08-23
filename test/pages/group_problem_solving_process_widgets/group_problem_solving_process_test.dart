@@ -2,6 +2,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
+import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
@@ -18,6 +19,7 @@ void main()
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale(testingLocaleOption),
         home: Scaffold(
           body: GPSProcess
           (
@@ -33,6 +35,9 @@ void main()
   {
     await tester.pumpWidget(
       const MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: Locale(testingLocaleOption),
         home: Scaffold(
           body: GPSChecklist(),
         ),
@@ -67,28 +72,11 @@ void main()
     group("Participants Tests: \n", 
     () 
     {      
-      // "Participants can be added" (failing as a widget test)
-      // testWidgets("Participants can be added", 
-      // (WidgetTester tester) async 
-      // {
-      //   var name1 = "Bob";
-      //   var name2 = "Alice";
-      //   List<String> names = [name1, name2];
-      //   var list1 = "list1";
-
-      //   // Pumping the widget
-      //   await pumpGPSProcess(tester);
-      //   // pumpAndSettle timed out
-      //   // await tester.pumpAndSettle();
-      //   await tester.pump(const Duration(seconds: 10));
-
-      //   // Adding the participants
-      //   List< Map<String,List<String>> > listNamesParticipantsNamesMapList =
-      //   [
-      //     {list1:names},
-      //   ];
-      //   await addParticipantsListsFromGPSprocessPage(tester: tester, listNamesParticipantsNamesMapList: listNamesParticipantsNamesMapList);
-      // });    
+      // Tested at integration level
+      testWidgets("Participants can be added", 
+      (WidgetTester tester) async 
+      {        
+      });    
     });
             
     

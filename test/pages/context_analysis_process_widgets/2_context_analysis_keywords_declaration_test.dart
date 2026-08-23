@@ -21,6 +21,7 @@ void main()
           theme: appTheme,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale(testingLocaleOption),
           home: Scaffold(
             body: CAKeywordsDeclaration
             (

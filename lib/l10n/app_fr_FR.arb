@@ -131,7 +131,9 @@
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
     ,"gps_process_checklist_question_1": "Pouvons-nous avoir un retour sur les émotions des participants ?"
     ,"@gps_process_checklist_question_1": {"description": "l10n pour la question n° 1 de la check-list"}
-  
+    ,"gps_process_checklist_question_2": "Notre analyse de contexte est-elle faite ?"
+    ,"@gps_process_checklist_question_2": {"description": "l10n pour la question n° 2 de la check-list"}
+
     ,"gps_process_checklist_close_overlay_tooltip": "Fermer la check-list"
     ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n pour l'infobulle 'Fermer la check-list'"}
     

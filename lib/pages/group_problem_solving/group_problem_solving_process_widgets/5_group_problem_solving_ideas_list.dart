@@ -141,8 +141,8 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (context, anim1, anim2) 
       {
-          // Getting the localized strings
-          LocalizedGPSStrings lgps = .new(context);
+        // Getting the localized strings
+        LocalizedGPSStrings lgps = .new(context);
 
         return Scaffold
         (
@@ -150,10 +150,10 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
           (
             centerTitle: true, 
             title: 
-            const Text
+            Text
             (
               textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-              softWrap:true, "Ideas List", style: previewTitleStyle
+              softWrap:true, lgps.ideasListAppBarTitle, style: previewTitleStyle
             ),
  
             // Right side: Close Button

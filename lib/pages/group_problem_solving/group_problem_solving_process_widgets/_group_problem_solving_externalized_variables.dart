@@ -9,7 +9,9 @@ const identifierColors = [greenShade900, orange, red];
 
 // GPSChecklist
 const rectangleColor = orangeShade900;
-const checklistItemCheckedColor = Colors.green;
+const checkboxCheckedColor = Colors.green;
+const checkboxCheckedListTileColor = Color(0xFFE8F5E9);
+
 
 
 

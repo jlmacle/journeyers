@@ -23,6 +23,7 @@ class LocalizedGPSStrings
   var checkListTitle = "";
   var checkListAppBarTitle = "";
   var checkListQuestion1 = "";
+  var checkListQuestion2 = "";
 
   // GPSKeywordsDeclaration
   var gpsKeywordsTitle = "";
@@ -31,6 +32,7 @@ class LocalizedGPSStrings
 
   // GPSIdeasList
   var ideasListTitle = "";
+  var ideasListAppBarTitle = "";
   var ideasListPlaceholder = "";
   var ideasListEmptyListSnackbarMessage = "";
   var ideasListOverlayClosingTooltip = "";
@@ -59,6 +61,7 @@ class LocalizedGPSStrings
     checkListTitle = _l10n?.gps_process_checklist_title ?? "Issue with the title for the checklist-related widget.";
     checkListAppBarTitle = _l10n?.gps_process_checklist_invitation ?? "Issue with the invitation before the checklist";
     checkListQuestion1 = _l10n?.gps_process_checklist_question_1 ?? "Issue with the l10n for the checklist question 1";
+    checkListQuestion2 = _l10n?.gps_process_checklist_question_2 ?? "Issue with the l10n for the checklist question 2";
 
     // GPSKeywordsDeclaration
     gpsKeywordsTitle = _l10n?.l10n_keywords ?? "Issue with the l10n for 'Keywords'.";
@@ -68,6 +71,7 @@ class LocalizedGPSStrings
 
     // GPSIdeasList
     ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
+    ideasListAppBarTitle  =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
     ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
     ideasListEmptyListSnackbarMessage = _l10n?.gps_process_snackbar_message_no_ideas_to_save ?? "Issue with the l10n for the 'No ideas to save' snackbar message";
     ideasListOverlayClosingTooltip = _l10n?.gps_process_ideas_overlay_close_button_tooltip ?? "Issue with the l10n for the ideas overlay close button tooltip";
