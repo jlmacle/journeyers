@@ -45,7 +45,7 @@ void main()
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
         
-        // Getting the title
+        // Title hard-coded strings
         var keywordsTitle = "";
         
         var localeLanguageCode = getLocaleLanguageCode(tester);
@@ -63,6 +63,47 @@ void main()
 
         // Verifying the title present
         expect(find.text(keywordsTitle), findsOne);        
+      });          
+    
+      testWidgets("The correct appbar title is present", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSKeywordsDeclaration(tester);
+        await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);
+        
+        // Appbar title hard-coded strings
+        var keywordsAppBarTitle = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): 
+          { 
+            keywordsAppBarTitle = "Keywords for the\nproblem-solving session"; 
+          }
+          case("fr"): 
+          { 
+            keywordsAppBarTitle = "Mots-clés pour la\nsession de résolution du problème"; 
+          }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: defaultTitle: $keywordsAppBarTitle");
+
+        // Tapping to open the overlay
+        var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
+        await tester.tap(keywordsTitleFinder);
+        await tester.pumpAndSettle();
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(keywordsAppBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);
+
+        // Verifying the appbar title present
+        expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOne);        
       });          
     
     });
