@@ -46,12 +46,10 @@ void main()
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedCAStrings lca = .new(context);
       
-      // Getting the hint text
+      // Hint text hard-coded strings
       var hintText = "";
       var localeLanguageCode = getLocaleLanguageCode(tester);
-      if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
-      if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
-
+    
       switch(localeLanguageCode.toLowerCase())
       {
         case("en"): { hintText = "Please enter one keyword at a time\n(+ Enter key)."; }
