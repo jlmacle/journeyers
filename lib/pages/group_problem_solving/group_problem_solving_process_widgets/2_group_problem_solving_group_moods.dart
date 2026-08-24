@@ -117,6 +117,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
           title: Text(lgps.participantIdentifierEditLabel),
           content: TextField
           (
+            key: const Key("gpsParticipantsEditField"),
             controller: controller, 
             autofocus: true,
             keyboardType: TextInputType.name,
