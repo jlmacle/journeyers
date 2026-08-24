@@ -48,7 +48,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
       checklistItems = {
         lgps.checkListQuestion1: false,
         lgps.checkListQuestion2: false,
-        "Is the group open to using the app for group problem-solving?": false,
+        lgps.checkListQuestion3: false,
         "Is the group emotionally ready to problem-solve?": false,
         "Did we agree on what to do if emotions become problematic?": false,
         "Do we agree on the problem that needs to be solved?": false,
