@@ -6,6 +6,12 @@ class LocalizedParticipantsStrings
 {
   AppLocalizations? _l10n;
 
+  // ─── OPTIONS ───────────────────────────────────────
+  var participantsListsOptionsTitle = "";
+  var participantsListsSubTitle = "";
+  var newParticipantsGroupOptionLabel = "";
+  var loadingAListOptionLabel = "";
+
   // ─── DASHBOARD ───────────────────────────────────────
 
   // The title for the participants dashboard
@@ -42,8 +48,14 @@ class LocalizedParticipantsStrings
 
   LocalizedParticipantsStrings(BuildContext context)
   {
-    _l10n = AppLocalizations.of(context);    
-    
+    _l10n = AppLocalizations.of(context);
+
+    // ─── OPTIONS ─────────────────────────────────────── 
+    participantsListsOptionsTitle = _l10n?.text_lists_new_list_or_loading_list_page_title ?? "Issue with the default title for the new list or loading list page.";
+    participantsListsSubTitle = _l10n?.text_lists_new_list_or_loading_list_page_subtitle ?? "Issue with the default subtitle for the new list or loading list page.";
+    newParticipantsGroupOptionLabel = _l10n?.text_lists_new_list_or_loading_list_new_group_option ?? "Issue with the new group option text for the new list or loading list page.";
+    loadingAListOptionLabel = _l10n?.text_lists_new_list_or_loading_list_group_loading_option ?? "Issue with the loading option text for the new list or loading list page.";
+
     // ─── DASHBOARD ───────────────────────────────────────
 
     // The title for the participants dashboard
