@@ -41,13 +41,13 @@ class _GPSChecklistState extends State<GPSChecklist> {
     // Safe place for InheritedWidget-based lookups per the Flutter docs:
     // https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html
     lgps = .new(context);
-    
+
     // Building the checklist map once, the first time strings are available.
     checklistItems = {
       lgps.checkListQuestion1: false,
       lgps.checkListQuestion2: false,
       lgps.checkListQuestion3: false,
-      "Is the group emotionally ready to problem-solve?": false,
+      lgps.checkListQuestion4: false,
       "Did we agree on what to do if emotions become problematic?": false,
       "Do we agree on the problem that needs to be solved?": false,
       "Did we agree on the order in which to offer the ideas?": false,
@@ -129,11 +129,17 @@ class _GPSChecklistState extends State<GPSChecklist> {
           body: SafeArea(
             child: StatefulBuilder(
               builder: (BuildContext context, StateSetter setLocalState) {
-                return ListView(
-                  children: checklistItems.keys.map((String key) {
+                final keys = checklistItems.keys.toList();
+                return 
+                ListView(
+                  key: const Key("checklist-process-scrollview"),
+                  children: keys.asMap().entries.map((entry) {
+                    final int index = entry.key;
+                    final String key = entry.value;
                     bool isChecked = checklistItems[key] ?? false;
 
                     return CheckboxListTile(
+                      key: Key("checklist-checkbox-$index"),
                       title: Text(key),
                       value: isChecked,
                       activeColor: checkboxCheckedColor,
