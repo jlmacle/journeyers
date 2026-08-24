@@ -136,6 +136,9 @@
     ,"@gps_process_checklist_question_2": {"description": "l10n pour la question n° 2 de la check-list"}
     ,"gps_process_checklist_question_3": "Le groupe est-il d'accord pour utiliser l'application pour la résolution de problème ?"
     ,"@gps_process_checklist_question_3": {"description": "l10n pour la question n° 3 de la check-list"}
+    ,"gps_process_checklist_question_4": "Le groupe est-il émotionnellement capable de porter le processus de résolution de problème ?"
+    ,"@gps_process_checklist_question_4": {"description": "l10n pour la question n° 4 de la check-list"}
+ 
  
 
     ,"gps_process_checklist_close_overlay_tooltip": "Fermer la check-list"
