@@ -5,6 +5,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -13,6 +14,22 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 
 void main() 
 {
+  Future<void> pumpGPSPage(WidgetTester tester) async
+  {
+    await tester.pumpWidget(
+      const MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: Locale(testingLocaleOption),
+        home: 
+        Scaffold
+        (
+          body: GPSPage ()
+        )
+      )
+    );
+  }
+
   Future<void> pumpGPSProcess(WidgetTester tester) async
   {
     await tester.pumpWidget(
@@ -51,6 +68,7 @@ void main()
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale(testingLocaleOption),
         home: Scaffold(
           body: GPSProblemToSolveDeclaration
           (
@@ -66,38 +84,13 @@ void main()
     );
   }
 
+  
   group("GPSProcess Tests: \n", 
   () 
   {  
-    group("Participants Tests: \n", 
-    () 
-    {      
-      // Tested at integration level
-      testWidgets("Participants can be added", 
-      (WidgetTester tester) async 
-      {        
-      });    
-    });
-            
-    
-      // "Stakeholder identifiers can be edited"
-      // to be updated
-      
-
-      // "Stakeholder identifiers can be deleted: single deletion"
-      // to be updated
-      
-      // "Stakeholder identifiers can be deleted: bulk deletion"
-      // to be updated
-
-      // "Stakeholder identifiers' colors can be changed from green, to orange, to red, to green by tapping"
-      // to be updated
-  });
-
-  group("Session Title Tests: \n", 
+    group("Title Tests: \n", 
   () 
   {  
-    // "A title can be added by clicking on the placeholder title"
     testWidgets("A title can be added by clicking on the placeholder title", 
     (WidgetTester tester) async 
     {
@@ -111,7 +104,7 @@ void main()
       LocalizedGPSStrings lgps = .new(context);
 
       // Searching the placeholder title 
-      var placeholderTitleFinder = find.text("Problem To Solve");
+      var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
 
       // Tapping
       await tester.tap(placeholderTitleFinder);
@@ -137,7 +130,6 @@ void main()
     }
     );
   
-    // "A title can be added by clicking on the edit emoji"
     testWidgets("A title can be added by clicking on the edit emoji", 
     (WidgetTester tester) async 
     {
@@ -184,122 +176,140 @@ void main()
   
   });
 
-  // todo: to understand why not passing anymore
-  group("Checklist Tests: \n", 
-  () 
-  {  
-    // // "The checklist turns to green when checked, and the rectangle goes from orange to transparent"
-    // testWidgets("The checklist turns to green when checked, and the rectangle goes from orange to transparent", 
-    // (WidgetTester tester) async 
-    // {
-    //   // Pumping the widget
-    //   await pumpGPSChecklist(tester);
-
-    //   // Verifying the default rectangle color is orange
-    //   await testChecklistTitleBorderColor(tester, rectangleColor);
-
-    //   // Searching the checklist
-    //   var checklistFinder = find.byType(GPSChecklist);
-
-    //   // Tapping the checklist
-    //   await tester.tap(checklistFinder);
-    //   await tester.pumpAndSettle();
-
-    //   // Searching the checkbox list tiles in the checklist
-    //   var checkboxListTilesFinder = find.descendant
-    //   (
-    //     of: find.byType(ListView), 
-    //     matching: find.byType(CheckboxListTile)
-    //   );
-
-    //   var totalCheckboxListTilesFinder = checkboxListTilesFinder.evaluate().length;
-    //   if (testingDebug) pu.printd("Testing Debug: totalCheckboxListTilesFinder: $totalCheckboxListTilesFinder");
-
-    //   // Verifying their color after tapping them 
-    //   for (var index = 0; index < totalCheckboxListTilesFinder; index++)
-    //   {
-    //     Finder checkboxListTileFinder = checkboxListTilesFinder.at(index);
-    //     await tester.ensureVisible(checkboxListTileFinder);
-    //     await tester.tap(checkboxListTileFinder);
-    //     await tester.pumpAndSettle();
-
-    //     CheckboxListTile checklistItemWidget = tester.widget<CheckboxListTile>(checkboxListTileFinder);
-    //     Color activeColor = checklistItemWidget.activeColor!;
-
-    //     expect (activeColor, checklistItemCheckedColor);        
-    //   }
-
-    //   // Searching to close the overlay
-    //   var closeChecklistFinder = find.byTooltip(closeChecklistTooltipLabel);
-    //   await tester.tap(closeChecklistFinder);
-    //   await tester.pump(const Duration(seconds: 15));
-    //   await tester.pumpAndSettle();
+  
+    group("Participants Identifiers Tests: \n", 
+    () 
+    {      
+      // Tested at integration level:
+      // - Addition
+      // - Edition
+      // - Deletion (single/bulk)
       
-    //   // Verifying the rectangle color is transparent
-    //   await testChecklistTitleBorderColor(tester, Colors.transparent);
-    // });
-  });
 
-  group("List of Keywords Tests: \n", 
-  () 
-  { 
-    // "A keyword can be added"
-    testWidgets("A keyword can be added", 
-    (WidgetTester tester) async 
-    {
-      // RenderFlex issue on small phone.
-      // Wasn't able to reporoduce the issue manually.
-      // Tested in the integration tests
+      // "Stakeholder identifiers' colors can be changed from green, to orange, to red, to green by tapping"
+      // to be updated
+
+      });
     });
-  }
-  );
 
+    // todo: to understand why not passing anymore
+    group("Checklist Tests: \n", 
+    () 
+    {        
+      // testWidgets("The checklist turns to green when checked, and the rectangle goes from orange to transparent", 
+      // (WidgetTester tester) async 
+      // {
 
-  group("List of Ideas Tests: \n", 
-  () 
-  { 
-    // "50 ideas added are found in the list of ideas"
-    testWidgets("50 ideas added are found in the list of ideas", 
-    (WidgetTester tester) async 
-    {
-      var someText = "someText";
+      //   // Pumping the widget
+      //   await pumpGPSChecklist(tester);
+      //   await tester.pumpAndSettle();
 
-      // Pumping the widget
-      await pumpGPSProcess(tester);
+      //   // Accessing the localized data
+      //   var context = tester.element(find.byType(Scaffold).first);
+      //   LocalizedGPSStrings lgps = .new(context);
 
-      // Accessing the localized data
-      var context = tester.element(find.byType(Scaffold).first);
-      LocalizedGPSStrings? lgps = .new(context); 
+      //   // Verifying the default rectangle color is orange
+      //   await gpsTestChecklistTitleBorderColor(tester, rectangleColor);
 
-      // Searching the text field used to add ideas
-      var newIdeaTextFieldFinder = find.ancestor
-      (
-        of: find.text(lgps.newIdeaTextFieldHint), 
-        matching: find.byType(TextField)
-      );
+      //   // Searching the checklist
+      //   var checklistFinder = find.byType(GPSChecklist);
 
-      for (var i = 0; i < 50; i++)
+      //   // Tapping the checklist
+      //   await tester.tap(checklistFinder);
+      //   await tester.pumpAndSettle();
+
+      //   // Searching the checkbox list tiles in the checklist
+      //   var checkboxListTilesFinder = find.descendant
+      //   (
+      //     of: find.byType(ListView), 
+      //     matching: find.byType(CheckboxListTile)
+      //   );
+
+      //   var totalCheckboxListTilesFinder = checkboxListTilesFinder.evaluate().length;
+      //   if (testingDebug) pu.printd("Testing Debug: totalCheckboxListTilesFinder: $totalCheckboxListTilesFinder");
+
+      //   // Verifying their color after tapping them 
+      //   for (var index = 0; index < totalCheckboxListTilesFinder; index++)
+      //   {
+      //     Finder checkboxListTileFinder = checkboxListTilesFinder.at(index);
+      //     await tester.ensureVisible(checkboxListTileFinder);
+      //     await tester.tap(checkboxListTileFinder);
+      //     await tester.pumpAndSettle();
+
+      //     CheckboxListTile checklistItemWidget = tester.widget<CheckboxListTile>(checkboxListTileFinder);
+      //     Color activeColor = checklistItemWidget.activeColor!;
+
+      //     expect (activeColor, checkboxCheckedColor);        
+      //   }
+
+      //   // Searching to close the overlay
+      //   var closeChecklistFinder = find.byTooltip(lgps.closeChecklistTooltipLabel);
+      //   await tester.tap(closeChecklistFinder);
+      //   await tester.pump(const Duration(seconds: 15));
+      //   await tester.pumpAndSettle();
+        
+      //   // Verifying the rectangle color is transparent
+      //   await gpsTestChecklistTitleBorderColor(tester, Colors.transparent);
+      // });
+    
+    });
+
+    group("Keywords Tests: \n", 
+    () 
+    { 
+  
+      // "A keyword can be added"
+      
+        // RenderFlex issue on small phone.
+        // Wasn't able to reporoduce the issue manually.
+        // Tested in the integration tests
+      });
+  
+    group("List of Ideas Tests: \n", 
+    () 
+    { 
+      // "50 ideas added are found in the list of ideas"
+      testWidgets("50 ideas added are found in the list of ideas", 
+      (WidgetTester tester) async 
       {
-        // Adding some text
-        await tester.enterText(newIdeaTextFieldFinder,"$someText$i");
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        // pumpAndSettle timed out
-        // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));              
+        var someText = "someText";
 
-        // Verifying the text present
-        var textFinder = find.descendant
+        // Pumping the widget
+        await pumpGPSProcess(tester);
+
+        // Accessing the localized data
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings? lgps = .new(context); 
+
+        // Searching the text field used to add ideas
+        var newIdeaTextFieldFinder = find.ancestor
         (
-          of: find.byType(GPSIdeasList), 
-          matching: find.text("$someText$i")
+          of: find.text(lgps.newIdeaTextFieldHint), 
+          matching: find.byType(TextField)
         );
-        expect(textFinder.evaluate().length, 1);
-      }
 
-      // Verifying the placeholder text absent
-      expect(find.text(lgps.ideasListPlaceholder), findsNothing);
+        for (var i = 0; i < 50; i++)
+        {
+          // Adding some text
+          await tester.enterText(newIdeaTextFieldFinder,"$someText$i");
+          await tester.testTextInput.receiveAction(TextInputAction.done);
+          // pumpAndSettle timed out
+          // await tester.pumpAndSettle();
+          await tester.pump(const Duration(seconds: 2));              
+
+          // Verifying the text present
+          var textFinder = find.descendant
+          (
+            of: find.byType(GPSIdeasList), 
+            matching: find.text("$someText$i")
+          );
+          expect(textFinder.evaluate().length, 1);
+        }
+
+        // Verifying the placeholder text absent
+        expect(find.text(lgps.ideasListPlaceholder), findsNothing);
+      });
+
     });
-
-  });
 
 }

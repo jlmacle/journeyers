@@ -246,6 +246,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Is our context analysis done?';
 
   @override
+  String get gps_process_checklist_question_3 =>
+      'Is the group open to using the app for group problem-solving?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
 
   @override
@@ -703,6 +707,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_checklist_question_2 =>
       'Is our context analysis done?';
+
+  @override
+  String get gps_process_checklist_question_3 =>
+      'Is the group open to using the app for group problem-solving?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';

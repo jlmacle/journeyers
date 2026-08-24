@@ -21,34 +21,51 @@ class _GPSChecklistState extends State<GPSChecklist> {
   // Helper method to check if all items are completed
   bool get _isAllChecked => checklistItems.values.every((element) => element == true);
 
-  // Localized strings for the checklist
   late LocalizedGPSStrings lgps;
-  late Map<String, bool> checklistItems;    
+
+  // Localized checklist items.
+  Map<String, bool> checklistItems = {};
+  bool _questionsReady = false;
 
   @override
   void initState() {
     super.initState();
-            
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSChecklist");
   }
 
   @override
-  Widget build(BuildContext context) {
-    // Accessing the localized data
-    LocalizedGPSStrings lgps = .new(context);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    checklistItems = {
-      lgps.checkListQuestion1: false,
-      lgps.checkListQuestion2: false,
-      "Is the group open to using the app for group problem-solving?": false,    
-      "Is the group emotionally ready to problem-solve?": false,    
-      "Did we agree on what to do if emotions become problematic?": false,
-      "Do we agree on the problem that needs to be solved?": false,
-      "Did we agree on the order in which to offer the ideas?":false,
-      "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?":false,
-      "Do we need to further our context analysis?": false,
-    };
+    // Safe place for InheritedWidget-based lookups per the Flutter docs:
+    // https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html
+    lgps = .new(context);
+
+    if (!_questionsReady) {
+      // Building the checklist map once, the first time strings are available.
+      checklistItems = {
+        lgps.checkListQuestion1: false,
+        lgps.checkListQuestion2: false,
+        lgps.checkListQuestion3: false,
+        "Is the group emotionally ready to problem-solve?": false,
+        "Did we agree on what to do if emotions become problematic?": false,
+        "Do we agree on the problem that needs to be solved?": false,
+        "Did we agree on the order in which to offer the ideas?": false,
+        "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?": false,
+        "Do we need to further our context analysis?": false,
+      };
+      _questionsReady = true;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    if (!_questionsReady) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
     return 
     GestureDetector(
@@ -110,7 +127,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
             actions: [
               IconButton(
                 icon: const Icon(Icons.close),
-                tooltip: AppLocalizations.of(context)?.gps_process_checklist_close_overlay_tooltip ?? "Issue with the l10n for the 'Close checklist' tooltip",
+                tooltip: lgps.closeChecklistTooltipLabel,
                 color: appBarWhite,
                 onPressed: () => Navigator.of(context).pop(),
               ),

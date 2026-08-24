@@ -487,6 +487,12 @@ abstract class AppLocalizations {
   /// **'Is our context analysis done?'**
   String get gps_process_checklist_question_2;
 
+  /// l10n for the checklist question 3
+  ///
+  /// In en, this message translates to:
+  /// **'Is the group open to using the app for group problem-solving?'**
+  String get gps_process_checklist_question_3;
+
   /// l10n for the 'Close checklist' tooltip
   ///
   /// In en, this message translates to:
