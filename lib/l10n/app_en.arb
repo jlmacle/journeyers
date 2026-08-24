@@ -139,6 +139,9 @@
   ,"@gps_process_checklist_question_2": {"description": "l10n for the checklist question 2"}
   ,"gps_process_checklist_question_3": "Is the group open to using the app for group problem-solving?"
   ,"@gps_process_checklist_question_3": {"description": "l10n for the checklist question 3"}
+  ,"gps_process_checklist_question_4": "Is the group emotionally capable to problem-solve?"
+  ,"@gps_process_checklist_question_4": {"description": "l10n for the checklist question 4"}
+ 
  
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}

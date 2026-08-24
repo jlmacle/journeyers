@@ -25,7 +25,6 @@ class _GPSChecklistState extends State<GPSChecklist> {
 
   // Localized checklist items.
   Map<String, bool> checklistItems = {};
-  bool _questionsReady = false;
 
   @override
   void initState() {
@@ -43,29 +42,23 @@ class _GPSChecklistState extends State<GPSChecklist> {
     // https://api.flutter.dev/flutter/widgets/State/didChangeDependencies.html
     lgps = .new(context);
 
-    if (!_questionsReady) {
-      // Building the checklist map once, the first time strings are available.
-      checklistItems = {
-        lgps.checkListQuestion1: false,
-        lgps.checkListQuestion2: false,
-        lgps.checkListQuestion3: false,
-        "Is the group emotionally ready to problem-solve?": false,
-        "Did we agree on what to do if emotions become problematic?": false,
-        "Do we agree on the problem that needs to be solved?": false,
-        "Did we agree on the order in which to offer the ideas?": false,
-        "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?": false,
-        "Do we need to further our context analysis?": false,
-      };
-      _questionsReady = true;
-    }
+    // Building the checklist map once, the first time strings are available.
+    checklistItems = {
+      lgps.checkListQuestion1: false,
+      lgps.checkListQuestion2: false,
+      lgps.checkListQuestion3: false,
+      lgps.checkListQuestion4: false,
+      "Did we agree on what to do if emotions become problematic?": false,
+      "Do we agree on the problem that needs to be solved?": false,
+      "Did we agree on the order in which to offer the ideas?": false,
+      "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?": false,
+      "Do we need to further our context analysis?": false,
+    };
+
   }
 
   @override
   Widget build(BuildContext context) {
-
-    if (!_questionsReady) {
-      return const Center(child: CircularProgressIndicator());
-    }
 
     return 
     GestureDetector(
@@ -136,11 +129,17 @@ class _GPSChecklistState extends State<GPSChecklist> {
           body: SafeArea(
             child: StatefulBuilder(
               builder: (BuildContext context, StateSetter setLocalState) {
-                return ListView(
-                  children: checklistItems.keys.map((String key) {
+                final keys = checklistItems.keys.toList();
+                return 
+                ListView(
+                  key: const Key("checklist-process-scrollview"),
+                  children: keys.asMap().entries.map((entry) {
+                    final int index = entry.key;
+                    final String key = entry.value;
                     bool isChecked = checklistItems[key] ?? false;
 
                     return CheckboxListTile(
+                      key: Key("checklist-checkbox-$index"),
                       title: Text(key),
                       value: isChecked,
                       activeColor: checkboxCheckedColor,

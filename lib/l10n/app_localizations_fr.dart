@@ -254,6 +254,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le groupe est-il d\'accord pour utiliser l\'application pour la résolution de problème ?';
 
   @override
+  String get gps_process_checklist_question_4 =>
+      'Le groupe est-il émotionnellement capable de porter le processus de résolution de problème ?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip =>
       'Fermer la check-list';
 
@@ -725,6 +729,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_checklist_question_3 =>
       'Le groupe est-il d\'accord pour utiliser l\'application pour la résolution de problème ?';
+
+  @override
+  String get gps_process_checklist_question_4 =>
+      'Le groupe est-il émotionnellement capable de porter le processus de résolution de problème ?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip =>
