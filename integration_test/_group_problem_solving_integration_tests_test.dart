@@ -13,6 +13,7 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
@@ -22,7 +23,6 @@ import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deleta
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
-import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
@@ -1510,7 +1510,7 @@ Future<void> main() async {
     var name2 = "Alice";
     var name3 = "Ben";
     var name4 = "Jane";
-    List<String> names1 = [name1, name2];
+    List<String> names1 = [name1, name2, name3];
     List<String> names2 = [name2, name4];
     List<String> names3 = [name1, name3];
     var listLabel1 = "List1";
@@ -2357,7 +2357,8 @@ Future<void> main() async {
       group("Participants loading: \n", () 
       {        
         // "Participants can be loaded from an existing list"
-        testWidgets("Participants can be loaded from an existing list", 
+        testWidgets("Participants can be loaded from an existing list, they can be edited, "
+        "and deleted using single deletion or bulk deletion", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
@@ -2406,11 +2407,11 @@ Future<void> main() async {
           await tester.pump(const Duration(seconds: 2));
 
           // Verifying the options page present
-          var optionsPageFinder = find.text(participantsListsSubTitle);
+          var optionsPageFinder = find.text(lps.participantsListsSubTitle);
           expect(optionsPageFinder, findsOne);
 
           // Searching the loading button
-          var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+          var loadingAListOptionFinder = find.text(lps.loadingAListOptionLabel);
           await tester.ensureVisible(loadingAListOptionFinder);
           expect(loadingAListOptionFinder, findsOne);
 
@@ -2444,6 +2445,75 @@ Future<void> main() async {
           {
             expect(find.text(name), findsOne);    
           }  
+
+          // ── PARTICIPANTS EDITION   ─────────────────────────────────
+          // ───────────────────────────────────────────────────────────
+
+          // Tapping the edit emoji to enter edition mode
+          await tester.tap(find.text(editEmoji).last);
+          await tester.pumpAndSettle();
+
+          for (var name in names1)
+          {
+            // Tapping the name
+            await tester.tap(find.text(name));  
+            await tester.pumpAndSettle();
+
+            // Finding the text field
+            var textFieldFinder = find.byKey(const Key("gpsParticipantsEditField"));            
+            await tester.enterText(textFieldFinder, "${name}${editionSuffix}");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // helped with a failing test
+            await tester.pump(const Duration(seconds: 1));
+
+          } 
+          await tester.pumpAndSettle();
+
+          // Verifying the text field absent
+          expect(find.byKey(const Key("gpsParticipantsEditField")), findsNothing);
+
+          // ── PARTICIPANTS DELETION   ─────────────────────────────────
+          // ───────────────────────────────────────────────────────────
+
+            // ── SINGLE DELETION   ─────────────────────────────────
+          // Edit mode still on
+          // Clicking on "Clear One"
+          await tester.tap(find.text(lgps.participantIdentifiersSingleDeletionLabel));
+
+          await tester.pump(const Duration(seconds: 2));
+
+          // Clicking on the delete icon for name1
+          var identifierForName1Finder = find.ancestor
+          (
+            of: find.text("${name1}${editionSuffix}"), 
+            matching: find.byType(IdentifierWidget)
+          );
+
+          var deleteIconForName1Finder = find.descendant
+          (
+            of: identifierForName1Finder, 
+            matching: find.byIcon(Icons.delete_rounded)
+          );
+
+          await tester.tap(deleteIconForName1Finder);
+          await tester.pumpAndSettle();
+
+          await tester.pump(const Duration(seconds: 2));
+
+          // Verifying the name removed
+          expect(find.text("${name1}${editionSuffix}"), findsNothing);
+
+           // ── BULK DELETION   ─────────────────────────────────
+          // Edit mode still on
+          // Clicking on "Clear All"
+          await tester.tap(find.text(lgps.participantIdentifiersBulkDeletionLabel));
+          await tester.pumpAndSettle();
+
+          // Verifying remaining names absent
+          expect(find.text("${name2}${editionSuffix}"), findsNothing);
+          expect(find.text("${name3}${editionSuffix}"), findsNothing);
+
+          await tester.pump(const Duration(seconds: 1));
       });      
         
       });
