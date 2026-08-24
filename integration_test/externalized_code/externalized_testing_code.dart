@@ -20,9 +20,9 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
+import "package:journeyers/utils/generic/dev/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
-import "package:journeyers/widgets/utility/lists/new_participants_list_or_loading_page_externalized_strings.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
@@ -1001,6 +1001,9 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     var context = tester.element(find.byType(Scaffold).first);
     LocalizedGPSStrings lgps = .new(context);
 
+    if (testingDebug) isCircularProgressIndicatorPresent(tester);
+    if (testingDebug) printTextData(tester);
+
     // Clicking on the GPS new process button
     await gpsCheckNewProcessButtonFunctions(tester);
 
@@ -1028,6 +1031,10 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to go from the GPS process page to new list page
   Future<void> gpsFromProcessPageToNewParticipantsListPage(WidgetTester tester) async
   {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedParticipantsStrings lps = .new(context);
+
     // Searching the add emoji    
     var addEmojiFinder = find.text(addEmoji);
 
@@ -1041,12 +1048,14 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // await tester.pumpAndSettle();
     await tester.pump(const Duration(seconds: 5));
 
+    if (testingDebug) printTextData(tester);
+
     // Verifying the options page present
-    var optionsPageFinder = find.text(participantsListsSubTitle);
+    var optionsPageFinder = find.text(lps.participantsListsSubTitle);
     expect(optionsPageFinder, findsOne);
 
     // Searching the new group button
-    var newParticipantsGroupFinder = find.text(newParticipantsGroupOptionLabel);
+    var newParticipantsGroupFinder = find.text(lps.newParticipantsGroupOptionLabel);
     await tester.ensureVisible(newParticipantsGroupFinder);
     expect(newParticipantsGroupFinder, findsOne);
 
@@ -1077,11 +1086,11 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.pump(const Duration(seconds: 5));
 
     // Verifying the options page present
-    var optionsPageFinder = find.text(participantsListsSubTitle);
+    var optionsPageFinder = find.text(lps.participantsListsSubTitle);
     expect(optionsPageFinder, findsOne);
 
     // Searching the list loading option button
-    var loadingAListOptionFinder = find.text(loadingAListOptionLabel);
+    var loadingAListOptionFinder = find.text(lps.loadingAListOptionLabel);
     await tester.ensureVisible(loadingAListOptionFinder);
     expect(loadingAListOptionFinder, findsOne);
 
