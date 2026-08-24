@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
 
@@ -23,6 +24,8 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedParticipantsStrings lps = .new(context);
 
     return Scaffold(
       appBar: AppBar
@@ -50,7 +53,7 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
               children: [
                 // ── title ──────────────────────────────────────────────────
                 Text(
-                  AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_page_title ?? "Issue with the default title for the new list or loading list page.",
+                  lps.participantsListsOptionsTitle,
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
