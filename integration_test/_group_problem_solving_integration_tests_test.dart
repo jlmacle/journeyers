@@ -24,7 +24,6 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
@@ -1730,6 +1729,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
+            LocalizedParticipantsStrings lps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1789,8 +1789,9 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
+            // await tester.pump(const Duration(seconds: 5));
             // Searching for the error message
-            var labelEmptyErrorFinder = find.textContaining(lps.emptyLabelError);
+            var labelEmptyErrorFinder = find.textContaining(lps.emptyLabelEditError);
             expect(labelEmptyErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
