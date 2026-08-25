@@ -130,6 +130,9 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
     return showDialog<String>(
       context: context,
       builder: (ctx) {
+        // Getting the localized strings
+        LocalizedParticipantsStrings lps = .new(context);
+
         return StatefulBuilder(
           builder: (ctx, setDialogState) {
 
@@ -147,7 +150,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
-                  () => errorText = "${label}${AppLocalizations.of(context)?.text_lists_new_list_same_list_name_message ?? "Issue with the message, at saving time, when a list name has already been used."}",
+                  () => errorText = "${label}${lps.listAlreadySavedErrorEndPart}",
                 );
                 return;
               }
