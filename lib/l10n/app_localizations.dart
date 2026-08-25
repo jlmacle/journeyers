@@ -496,7 +496,7 @@ abstract class AppLocalizations {
   /// l10n for the checklist question 4
   ///
   /// In en, this message translates to:
-  /// **'Is the group emotionally ready to problem-solve?'**
+  /// **'Is the group emotionally capable to problem-solve?'**
   String get gps_process_checklist_question_4;
 
   /// l10n for the 'Close checklist' tooltip
