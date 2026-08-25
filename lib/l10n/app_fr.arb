@@ -140,6 +140,8 @@
     ,"@gps_process_checklist_question_4": {"description": "l10n pour la question n° 4 de la check-list"}
     ,"gps_process_checklist_question_5": "Avons-nous une procédure en place si les émotions deviennent problématiques ?"
     ,"@gps_process_checklist_question_5": {"description": "l10n pour la question n° 5 de la check-list"}
+    ,"gps_process_checklist_question_6": "Avons-nous la même perception du problème qui a besoin d'être résolu ?"
+    ,"@gps_process_checklist_question_6": {"description": "l10n pour la question n° 6 de la check-list"}
  
 
     ,"gps_process_checklist_close_overlay_tooltip": "Fermer la check-list"
