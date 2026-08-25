@@ -2446,8 +2446,8 @@ Future<void> main() async {
           ({
             // Setting value for the first-run modal to be absent,
             "wasFirstRunModalAcknowledged": true,
-            // and to have the group problem-solving page, with the dashboard.
-            "wasGPSSessionDataSaved": true,
+            // and to have the group problem-solving process page.
+            "wasGPSSessionDataSaved": false,
           });
 
           // Pumping the GPSPage
@@ -2458,10 +2458,6 @@ Future<void> main() async {
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedParticipantsStrings lps = .new(context);
           LocalizedGPSStrings lgps = .new(context);
-
-          // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-          // ────────────────────────────────────────────────────────────────────────
-          await gpsFromGPSPageToProcessPage(tester);
 
           // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
@@ -2551,6 +2547,12 @@ Future<void> main() async {
 
           // Verifying the text field absent
           expect(find.byKey(const Key("gpsParticipantsEditField")), findsNothing);
+
+          // Verifying the edition
+          for (var name in names1)
+          {
+            expect(find.text("${name}${editionSuffix}"), findsOne);
+          }
 
           // ── PARTICIPANTS DELETION   ─────────────────────────────────
           // ───────────────────────────────────────────────────────────
