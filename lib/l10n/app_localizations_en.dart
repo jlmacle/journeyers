@@ -251,7 +251,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gps_process_checklist_question_4 =>
-      'Is the group emotionally ready to problem-solve?';
+      'Is the group emotionally capable to problem-solve?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
@@ -718,7 +718,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_checklist_question_4 =>
-      'Is the group emotionally ready to problem-solve?';
+      'Is the group emotionally capable to problem-solve?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
