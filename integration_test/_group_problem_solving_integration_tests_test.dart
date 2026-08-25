@@ -1632,6 +1632,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
+            LocalizedParticipantsStrings lps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1699,8 +1700,10 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
+            await tester.pump(const Duration(seconds: 5));
+
             // Searching for the error message
-            var listAlreadySavedErrorFinder = find.textContaining(listAlreadySavedErrorEndPart);
+            var listAlreadySavedErrorFinder = find.textContaining(lps.listAlreadySavedErrorEndPart);
             expect(listAlreadySavedErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
@@ -1787,7 +1790,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Searching for the error message
-            var labelEmptyErrorFinder = find.textContaining(emptyLabelError);
+            var labelEmptyErrorFinder = find.textContaining(lps.emptyLabelError);
             expect(labelEmptyErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
