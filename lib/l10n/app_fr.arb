@@ -138,7 +138,8 @@
     ,"@gps_process_checklist_question_3": {"description": "l10n pour la question n° 3 de la check-list"}
     ,"gps_process_checklist_question_4": "Le groupe est-il émotionnellement capable de porter le processus de résolution de problème ?"
     ,"@gps_process_checklist_question_4": {"description": "l10n pour la question n° 4 de la check-list"}
- 
+    ,"gps_process_checklist_question_5": "Avons-nous une procédure en place si les émotions deviennent problématiques ?"
+    ,"@gps_process_checklist_question_5": {"description": "l10n pour la question n° 5 de la check-list"}
  
 
     ,"gps_process_checklist_close_overlay_tooltip": "Fermer la check-list"

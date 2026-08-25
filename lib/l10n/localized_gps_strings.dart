@@ -26,6 +26,7 @@ class LocalizedGPSStrings
   var checkListQuestion2 = "";
   var checkListQuestion3 = "";
   var checkListQuestion4 = "";
+  var checkListQuestion5 = "";
 
   var closeChecklistTooltipLabel = "";
 
@@ -40,6 +41,7 @@ class LocalizedGPSStrings
   var ideasListPlaceholder = "";
   var ideasListEmptyListSnackbarMessage = "";
   var ideasListOverlayClosingTooltip = "";
+  var ideasListBulkDeletionText = "";
 
   // GPSNewIdea
   var newIdeaTextFieldHint = "";
@@ -68,6 +70,8 @@ class LocalizedGPSStrings
     checkListQuestion2 = _l10n?.gps_process_checklist_question_2 ?? "Issue with the l10n for the checklist question 2";
     checkListQuestion3 = _l10n?.gps_process_checklist_question_3 ?? "Issue with the l10n for the checklist question 3";
     checkListQuestion4 = _l10n?.gps_process_checklist_question_4 ?? "Issue with the l10n for the checklist question 4";
+    checkListQuestion5 = _l10n?.gps_process_checklist_question_5 ?? "Issue with the l10n for the checklist question 5";
+
 
     closeChecklistTooltipLabel = _l10n?.gps_process_checklist_close_overlay_tooltip ?? "Issue with the l10n for the 'Close checklist' tooltip";
     
@@ -83,6 +87,7 @@ class LocalizedGPSStrings
     ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
     ideasListEmptyListSnackbarMessage = _l10n?.gps_process_snackbar_message_no_ideas_to_save ?? "Issue with the l10n for the 'No ideas to save' snackbar message";
     ideasListOverlayClosingTooltip = _l10n?.gps_process_ideas_overlay_close_button_tooltip ?? "Issue with the l10n for the ideas overlay close button tooltip";
+    ideasListBulkDeletionText = _l10n?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text";
 
     // GPSNewIdea
     newIdeaTextFieldHint = _l10n?.gps_process_new_idea_text_field_hint ?? "Issue with the l10n for the 'Please enter an idea.' text field hint";

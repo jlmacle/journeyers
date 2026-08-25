@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
@@ -87,13 +87,16 @@ class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeleti
   @override
   Widget build(BuildContext context) 
   {
+    // Getting the localized strings
+    LocalizedGPSStrings lgps = .new(context);
+
     return Center(
         child:        
           TextButton.icon(
             onPressed: _selectedTextItemsDelete,
             icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
             label: Text(
-              "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.textItemsSelectedForDeletionIndexes.length})",
+              "${lgps.ideasListBulkDeletionText} (${widget.textItemsSelectedForDeletionIndexes.length})",
               style: TextStyle(
                 color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent, 
                 fontWeight: FontWeight.bold,
