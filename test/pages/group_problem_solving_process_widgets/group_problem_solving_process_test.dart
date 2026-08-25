@@ -153,11 +153,9 @@ void main()
       // Tested at integration level:
       // - Addition
       // - Edition
-      // - Deletion (single/bulk)
-      
+      // - Deletion (single/bulk)  
+      // - Change of identifiers' colors    
 
-      // "Stakeholder identifiers' colors can be changed from green, to orange, to red, to green by tapping"
-      // todo
 
       });
     
@@ -166,7 +164,7 @@ void main()
     () 
     {     
       // Tested at integration level:   
-      // "The checklist turns to green when checked, and the rectangle goes from orange to transparent"
+      // "The checklist (and checkboxes) turns to green when checked, and the rectangle goes from orange to transparent"
       
     });
 

@@ -8,6 +8,7 @@ import "package:integration_test/integration_test.dart";
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
@@ -23,7 +24,6 @@ import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
-import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
@@ -39,10 +39,11 @@ import "externalized_code/externalized_testing_code.dart";
 /// call inside GPSPage (e.g. the first-run AlertDialog) resolves correctly instead
 /// of returning null and falling back to the raw fallback string.
 Widget buildTestableGPSPage() {
-  return const MaterialApp(
+  return MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
-    home: GPSPage(),
+    theme: appTheme,
+    home: const GPSPage(),
   );
 }
 
@@ -1630,6 +1631,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
+            LocalizedParticipantsStrings lps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1697,8 +1699,10 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
+            await tester.pump(const Duration(seconds: 5));
+
             // Searching for the error message
-            var listAlreadySavedErrorFinder = find.textContaining(listAlreadySavedErrorEndPart);
+            var listAlreadySavedErrorFinder = find.textContaining(lps.listAlreadySavedErrorEndPart);
             expect(listAlreadySavedErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
@@ -1725,6 +1729,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
+            LocalizedParticipantsStrings lps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -1784,8 +1789,9 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
+            // await tester.pump(const Duration(seconds: 5));
             // Searching for the error message
-            var labelEmptyErrorFinder = find.textContaining(emptyLabelError);
+            var labelEmptyErrorFinder = find.textContaining(lps.emptyLabelEditError);
             expect(labelEmptyErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent
@@ -2435,7 +2441,6 @@ Future<void> main() async {
     {
       group("Participants loading: \n", () 
       {        
-        // "Participants can be loaded from an existing list"
         testWidgets("Participants can be loaded from an existing list, they can be edited, "
         "and deleted using single deletion or bulk deletion", 
         (WidgetTester tester) async 
@@ -2445,8 +2450,8 @@ Future<void> main() async {
           ({
             // Setting value for the first-run modal to be absent,
             "wasFirstRunModalAcknowledged": true,
-            // and to have the group problem-solving page, with the dashboard.
-            "wasGPSSessionDataSaved": true,
+            // and to have the group problem-solving process page.
+            "wasGPSSessionDataSaved": false,
           });
 
           // Pumping the GPSPage
@@ -2457,10 +2462,6 @@ Future<void> main() async {
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedParticipantsStrings lps = .new(context);
           LocalizedGPSStrings lgps = .new(context);
-
-          // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-          // ────────────────────────────────────────────────────────────────────────
-          await gpsFromGPSPageToProcessPage(tester);
 
           // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
@@ -2551,6 +2552,12 @@ Future<void> main() async {
           // Verifying the text field absent
           expect(find.byKey(const Key("gpsParticipantsEditField")), findsNothing);
 
+          // Verifying the edition
+          for (var name in names1)
+          {
+            expect(find.text("${name}${editionSuffix}"), findsOne);
+          }
+
           // ── PARTICIPANTS DELETION   ─────────────────────────────────
           // ───────────────────────────────────────────────────────────
 
@@ -2593,6 +2600,79 @@ Future<void> main() async {
           expect(find.text("${name3}${editionSuffix}"), findsNothing);
 
           await tester.pump(const Duration(seconds: 1));
+      });      
+        
+        testWidgets("(Mobile) Stakeholders identifiers' colors can be changed from green, to orange, to red, and vice-versa by swiping", 
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            "wasFirstRunModalAcknowledged": true,
+            // and to have the group problem-solving process page.
+            "wasGPSSessionDataSaved": false,
+          });
+
+          // Pumping the GPSPage
+          await tester.pumpWidget(buildTestableGPSPage());
+          await tester.pumpAndSettle();
+
+          // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+          // ──────────────────────────────────────────────────────────────────────────────────────
+          List< Map<String,Map<String, dynamic>> > listDataMapsList =
+          [
+            {listLabel1:{"names":names1,"keywords":[]}},
+          ];
+          await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+        
+          // Verifying the names present
+          for (var name in names1)
+          {
+            expect(find.text(name), findsOne);    
+          }  
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // ── MODIFYING FEEDBACK DATA ON EMOTIONS   ──────────────────
+            // ───────────────────────────────────────────────────────────
+            var name1Finder = find.text(name1);
+            // Searching the container
+            var identifierFinder = find.ancestor
+            (
+              of: name1Finder, 
+              matching: find.byType(IdentifierWidget)
+            );
+
+            var containerFinder = find.descendant
+            (
+              of: identifierFinder, 
+              matching: find.byType(Container)
+            );
+
+            // Verifying that the color is green
+            await gpsTestIdentifierColor(tester, containerFinder, greenShade900);
+            await tester.pump(const Duration(seconds: 2));
+
+              // SWIPING RIGHT  
+            await tester.fling(name1Finder, const Offset(100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, orange);
+
+            await tester.fling(name1Finder, const Offset(100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, red);
+
+              // SWIPING LEFT
+            await tester.fling(name1Finder, const Offset(-100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, orange);
+
+            await tester.fling(name1Finder, const Offset(-100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, greenShade900);
+            // await tester.pump(const Duration(seconds: 2));
+          }
       });      
         
       });

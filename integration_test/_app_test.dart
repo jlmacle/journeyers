@@ -15,7 +15,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pag
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/homepage.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
-import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 import "externalized_code/externalized_testing_code.dart";
 
@@ -54,12 +53,7 @@ Future<void> main() async {
 
   // Titles
   const testAnalysisTitleRoot = "Integration-test CA session title";
-  const testAnalysisTitle1 = "$testAnalysisTitleRoot (1)";
   
-  // Keywords
-  const kwCompanionship = "Companionship";
-  const kwWorkplace = "Workplace";
-  const List<String> kwsList = [kwCompanionship, kwWorkplace];
 
   // Ideas
   const ideasList2Ideas = ["idea1", "idea2"];
@@ -119,15 +113,19 @@ Future<void> main() async {
 
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-
+          var totalEntries = 20;
+          var titlesList = List.generate(totalEntries, (i)=> "$testAnalysisTitleRoot ($i)");
+          var kwsLists = List.generate(totalEntries, (i)=> ["keyword-$i"]);
+          var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${fileName1WithoutExtension}_${i}");
+          
           // formToFill: false to skip the form filling
-          await caEnterNewProcessDataOnMobile
+          await caEnterSeveralTimesNewProcessData
           (
             tester: tester, 
             formToFill: false,
-            title: testAnalysisTitle1,
-            kwsList: kwsList,
-            fileNameWithoutExtension: fileName1WithoutExtension
+            titlesList: titlesList,
+            kwsLists: kwsLists,
+            fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
           );
 
           // await tester.pump(const Duration(seconds: 2));      
@@ -145,14 +143,23 @@ Future<void> main() async {
           // Tapping on it
           await tester.tap(placeholderTitleFinder);
           await tester.pumpAndSettle();
-          // Searching for the list tile with the CA data
-          var listTileFinder = find.byType(ListTile);
+          // Searching for the last title of the CA data         
+          // Scrolling to tap on the last title
+          var lastTitle = find.text("$testAnalysisTitleRoot (0)");
 
-          var totalListTile = listTileFinder.evaluate().length;
-          if (testingDebug) pu.printd("Testing Debug: totalListTile: $totalListTile");
+          await tester.scrollUntilVisible
+            (
+              lastTitle, 
+              45, 
+              scrollable: find.descendant
+                        (
+                          of: find.byKey(const Key("gps-title-scrollview")), 
+                          matching: find.byType(Scrollable)
+                        ),
+            );            
+          await tester.pumpAndSettle();
 
-          // Tapping on the list tile
-          await tester.tap(listTileFinder.first);
+          await tester.tap(lastTitle);
           await tester.pumpAndSettle();
           // await tester.pump(const Duration(seconds: 2));
 
@@ -169,12 +176,10 @@ Future<void> main() async {
           // await tester.pumpAndSettle();
           await tester.pump(const Duration(seconds: 2)); 
 
-          // Verifying that the keywords have been imported
+          // Verifying that the keyword has been imported
           var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
-          expect(inputChipTextFinder, findsNWidgets(2));
-
-          expect(find.text(kwCompanionship), findsOne);
-          expect(find.text(kwWorkplace), findsOne);
+          expect(inputChipTextFinder, findsOne);         
+          expect(find.text("keyword-0"), findsOne);
           
           // Searching the tooltip to close the overlay
           var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
@@ -230,11 +235,10 @@ Future<void> main() async {
           expect(find.byType(GPSPage), findsOne);
 
           // Searching for the title imported from the CA 
-          expect(find.text("$testAnalysisTitle1${lgps.gpsTitleSuffix}"), findsOne);
+          expect(find.text("$testAnalysisTitleRoot (0)${lgps.gpsTitleSuffix}"), findsOne);
 
-          // Searching for the keywords imported from the CA 
-          expect(find.text(kwCompanionship), findsOne);
-          expect(find.text(kwWorkplace), findsOne);
+          // Searching for the keyword imported from the CA 
+          expect(find.text("keyword-0"), findsOne);
 
           // await tester.pump(const Duration(seconds: 2));
         }

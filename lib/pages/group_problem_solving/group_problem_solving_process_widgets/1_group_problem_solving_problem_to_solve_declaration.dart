@@ -111,6 +111,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                Expanded(
                 child:
                 ListView.builder(
+                  key: const Key("gps-title-scrollview"),
                   itemCount: widget.caPreviousSessions.length,
                   itemBuilder: (context, index) {
                     final session = widget.caPreviousSessions[index];

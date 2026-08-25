@@ -86,6 +86,7 @@ class DashboardUtils {
     {
       formattedDate = datesForTestingList[dateForTestingIndex];
       dateForTestingIndex++;
+      if (dateForTestingIndex == 5) dateForTestingIndex = 0;
     }
 
     Map<String, dynamic> sessionData = 

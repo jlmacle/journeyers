@@ -16,7 +16,6 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
-import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
@@ -657,18 +656,8 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   }
 
   // Method used to test the color of an identifier
-  Future<void> gpsTestIdentifierColor(WidgetTester tester, Color color) async
+  Future<void> gpsTestIdentifierColor(WidgetTester tester, Finder containerFinder, Color color) async
   {
-    // Searching the container
-    var containerFinder = find.descendant
-    (
-      of: find.byType(IdentifierWidget), 
-      matching: find.byType(Container)
-    );
-
-    var totalContainers = containerFinder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: totalContainers: $totalContainers");
-
     Container container = tester.widget<Container>(containerFinder);
     var boxDecoration = container.decoration as BoxDecoration;
     var border = boxDecoration.border as Border;

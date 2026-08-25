@@ -143,7 +143,10 @@
   ,"@gps_process_checklist_question_4": {"description": "l10n for the checklist question 4"}
   ,"gps_process_checklist_question_5": "Did we agree on what to do if emotions become problematic?"
   ,"@gps_process_checklist_question_5": {"description": "l10n for the checklist question 5"}
+  ,"gps_process_checklist_question_6": "Do we agree on the problem that needs to be solved?"
+  ,"@gps_process_checklist_question_6": {"description": "l10n for the checklist question 6"}
  
+
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}
   

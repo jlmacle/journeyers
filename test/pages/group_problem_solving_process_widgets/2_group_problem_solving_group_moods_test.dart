@@ -22,6 +22,7 @@ void main()
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale(testingLocaleOption),
+          theme: appTheme,
           home: Scaffold(
             body: IdentifierWidget
             (
@@ -71,7 +72,7 @@ void main()
           await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
           // Verifying the color 
-          await gpsTestIdentifierColor(tester, green);
+          await gpsTestIdentifierColor(tester, find.byType(Container), green);
         });          
       
         testWidgets("The delete icon is absent at addition of the identifier", 

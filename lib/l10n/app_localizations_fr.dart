@@ -262,6 +262,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Avons-nous une procédure en place si les émotions deviennent problématiques ?';
 
   @override
+  String get gps_process_checklist_question_6 =>
+      'Avons-nous la même perception du problème qui a besoin d\'être résolu ?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip =>
       'Fermer la check-list';
 
@@ -741,6 +745,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_checklist_question_5 =>
       'Avons-nous une procédure en place si les émotions deviennent problématiques ?';
+
+  @override
+  String get gps_process_checklist_question_6 =>
+      'Avons-nous la même perception du problème qui a besoin d\'être résolu ?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip =>

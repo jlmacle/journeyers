@@ -505,6 +505,12 @@ abstract class AppLocalizations {
   /// **'Did we agree on what to do if emotions become problematic?'**
   String get gps_process_checklist_question_5;
 
+  /// l10n for the checklist question 6
+  ///
+  /// In en, this message translates to:
+  /// **'Do we agree on the problem that needs to be solved?'**
+  String get gps_process_checklist_question_6;
+
   /// l10n for the 'Close checklist' tooltip
   ///
   /// In en, this message translates to:
