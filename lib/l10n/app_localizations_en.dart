@@ -258,6 +258,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Did we agree on what to do if emotions become problematic?';
 
   @override
+  String get gps_process_checklist_question_6 =>
+      'Do we agree on the problem that needs to be solved?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
 
   @override
@@ -727,6 +731,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_checklist_question_5 =>
       'Did we agree on what to do if emotions become problematic?';
+
+  @override
+  String get gps_process_checklist_question_6 =>
+      'Do we agree on the problem that needs to be solved?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
