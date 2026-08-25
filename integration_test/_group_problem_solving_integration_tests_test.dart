@@ -8,6 +8,7 @@ import "package:integration_test/integration_test.dart";
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
@@ -39,10 +40,11 @@ import "externalized_code/externalized_testing_code.dart";
 /// call inside GPSPage (e.g. the first-run AlertDialog) resolves correctly instead
 /// of returning null and falling back to the raw fallback string.
 Widget buildTestableGPSPage() {
-  return const MaterialApp(
+  return MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
     supportedLocales: AppLocalizations.supportedLocales,
-    home: GPSPage(),
+    theme: appTheme,
+    home: const GPSPage(),
   );
 }
 
@@ -2435,7 +2437,6 @@ Future<void> main() async {
     {
       group("Participants loading: \n", () 
       {        
-        // "Participants can be loaded from an existing list"
         testWidgets("Participants can be loaded from an existing list, they can be edited, "
         "and deleted using single deletion or bulk deletion", 
         (WidgetTester tester) async 
@@ -2593,6 +2594,79 @@ Future<void> main() async {
           expect(find.text("${name3}${editionSuffix}"), findsNothing);
 
           await tester.pump(const Duration(seconds: 1));
+      });      
+        
+        testWidgets("(Mobile) Stakeholders identifiers' colors can be changed from green, to orange, to red, and vice-versa by swiping", 
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            "wasFirstRunModalAcknowledged": true,
+            // and to have the group problem-solving process page.
+            "wasGPSSessionDataSaved": false,
+          });
+
+          // Pumping the GPSPage
+          await tester.pumpWidget(buildTestableGPSPage());
+          await tester.pumpAndSettle();
+
+          // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
+          // ──────────────────────────────────────────────────────────────────────────────────────
+          List< Map<String,Map<String, dynamic>> > listDataMapsList =
+          [
+            {listLabel1:{"names":names1,"keywords":[]}},
+          ];
+          await gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded(tester: tester, listDataMapsList: listDataMapsList);
+        
+          // Verifying the names present
+          for (var name in names1)
+          {
+            expect(find.text(name), findsOne);    
+          }  
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // ── MODIFYING FEEDBACK DATA ON EMOTIONS   ──────────────────
+            // ───────────────────────────────────────────────────────────
+            var name1Finder = find.text(name1);
+            // Searching the container
+            var identifierFinder = find.ancestor
+            (
+              of: name1Finder, 
+              matching: find.byType(IdentifierWidget)
+            );
+
+            var containerFinder = find.descendant
+            (
+              of: identifierFinder, 
+              matching: find.byType(Container)
+            );
+
+            // Verifying that the color is green
+            await gpsTestIdentifierColor(tester, containerFinder, greenShade900);
+            await tester.pump(const Duration(seconds: 2));
+
+              // SWIPING RIGHT  
+            await tester.fling(name1Finder, const Offset(100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, orange);
+
+            await tester.fling(name1Finder, const Offset(100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, red);
+
+              // SWIPING LEFT
+            await tester.fling(name1Finder, const Offset(-100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, orange);
+
+            await tester.fling(name1Finder, const Offset(-100, 0), 1000.0);
+            await tester.pumpAndSettle();
+            await gpsTestIdentifierColor(tester, containerFinder, greenShade900);
+            // await tester.pump(const Duration(seconds: 2));
+          }
       });      
         
       });
