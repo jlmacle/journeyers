@@ -14,6 +14,7 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
+import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
@@ -128,13 +129,91 @@ Future<void> main() async {
   // ── Test cases ─────────────────────────────────────────────────────────────
 
   group("Group Problem-Solving Integration Tests: Mobile: \n", () 
-  {    
+  { 
+    group("Checklist Tests: \n", () 
+    {
+      testWidgets("The checklist title border is orange, and turns transparent when all items are checked. "
+      "An item checked (and the checkbox) turns to green.",
+      (WidgetTester tester) async 
+      {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          "wasFirstRunModalAcknowledged": true,
+          // and to have the group problem-solving page, without the dashboard.
+          "wasGPSSessionDataSaved": false,
+          // Temporary test dir as application folder path
+          "applicationFolderPath": testTmpDir!.path
+        });
+
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the GPSPage
+          //
+          // pumpWidget renders the first frame.
+          // pumpAndSettle drives the event loop until there are no more pending frames,
+          // letting the async getPreferences() call complete 
+          // and setState(() { _preferencesLoading = false; }) rebuild the tree.
+          
+          await tester.pumpWidget(buildTestableGPSPage());
+          await tester.pumpAndSettle();
+
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
+
+          // Verifying the default rectangle color is orange
+          await gpsTestChecklistTitleBorderColor(tester, rectangleColor);
+
+          // Searching the checklist
+          var checklistFinder = find.byType(GPSChecklist);
+
+          // Tapping the checklist
+          await tester.tap(checklistFinder);
+          await tester.pumpAndSettle();
+
+          // Searching the checkbox list tiles in the checklist
+          var checkboxListTilesFinder = find.descendant
+          (
+            of: find.byType(ListView), 
+            matching: find.byType(CheckboxListTile)
+          );
+
+          var totalCheckboxListTilesFinder = checkboxListTilesFinder.evaluate().length;
+          if (testingDebug) pu.printd("Testing Debug: totalCheckboxListTilesFinder: $totalCheckboxListTilesFinder");
+
+          // Verifying their color after tapping them 
+          for (var index = 0; index < totalCheckboxListTilesFinder; index++)
+          {
+            Finder checkboxListTileFinder = checkboxListTilesFinder.at(index);
+            await tester.ensureVisible(checkboxListTileFinder);
+            await tester.tap(checkboxListTileFinder);
+            await tester.pumpAndSettle();
+
+            CheckboxListTile checklistItemWidget = tester.widget<CheckboxListTile>(checkboxListTileFinder);
+            if (testingDebug) pu.printd("Testing Debug: checklistItemWidget.value: ${checklistItemWidget.value}");
+
+            Color activeColor = checklistItemWidget.activeColor!;
+    
+            expect (activeColor, checkboxCheckedColor);        
+          }
+
+          // Searching to close the overlay
+          var closeChecklistFinder = find.byTooltip(lgps.closeChecklistTooltipLabel);
+          await tester.tap(closeChecklistFinder);
+          await tester.pump(const Duration(seconds: 2));
+          await tester.pumpAndSettle();
+          
+          // Verifying the rectangle color is transparent
+          await gpsTestChecklistTitleBorderColor(tester, Colors.transparent);
+
+        }
+      });
+    }); 
     group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
     {
-    // "Session metadata entered (title, keywords, date) is found: "
-    // "(assuming an already selected path to the user session data folder)",
-    testWidgets(
-      "Session metadata entered (title, keywords, date) is found: "
+     testWidgets("Session metadata entered (title, keywords, date) is found: "
       "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
@@ -2613,9 +2692,7 @@ Future<void> main() async {
 
         group("Sorting and Filtering Tests: \n", ()
         {
-          // "Sorting by list label \n"
-          testWidgets(
-            "Sorting by list label \n",
+          testWidgets("Sorting by list label \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -2688,9 +2765,7 @@ Future<void> main() async {
             }
           );        
         
-          // "Filtering by keywords \n"
-          testWidgets(
-            "Filtering by keywords \n",
+          testWidgets("Filtering by keywords \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
