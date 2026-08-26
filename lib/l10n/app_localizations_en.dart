@@ -262,6 +262,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Do we agree on the problem that needs to be solved?';
 
   @override
+  String get gps_process_checklist_question_7 =>
+      'Did we agree on the order in which to offer the ideas?';
+
+  @override
+  String get gps_process_checklist_question_8 =>
+      'Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?';
+
+  @override
+  String get gps_process_checklist_question_9 =>
+      'Do we need to further our context analysis?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
 
   @override
@@ -735,6 +747,18 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_checklist_question_6 =>
       'Do we agree on the problem that needs to be solved?';
+
+  @override
+  String get gps_process_checklist_question_7 =>
+      'Did we agree on the order in which to offer the ideas?';
+
+  @override
+  String get gps_process_checklist_question_8 =>
+      'Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?';
+
+  @override
+  String get gps_process_checklist_question_9 =>
+      'Do we need to further our context analysis?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip => 'Close checklist';
