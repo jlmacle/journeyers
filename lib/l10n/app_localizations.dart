@@ -511,6 +511,24 @@ abstract class AppLocalizations {
   /// **'Do we agree on the problem that needs to be solved?'**
   String get gps_process_checklist_question_6;
 
+  /// l10n for the checklist question 7
+  ///
+  /// In en, this message translates to:
+  /// **'Did we agree on the order in which to offer the ideas?'**
+  String get gps_process_checklist_question_7;
+
+  /// l10n for the checklist question 8
+  ///
+  /// In en, this message translates to:
+  /// **'Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?'**
+  String get gps_process_checklist_question_8;
+
+  /// l10n for the checklist question 9
+  ///
+  /// In en, this message translates to:
+  /// **'Do we need to further our context analysis?'**
+  String get gps_process_checklist_question_9;
+
   /// l10n for the 'Close checklist' tooltip
   ///
   /// In en, this message translates to:
