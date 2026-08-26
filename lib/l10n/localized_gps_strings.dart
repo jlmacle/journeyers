@@ -28,6 +28,9 @@ class LocalizedGPSStrings
   var checkListQuestion4 = "";
   var checkListQuestion5 = "";
   var checkListQuestion6 = "";
+  var checkListQuestion7 = "";
+  var checkListQuestion8 = "";
+  var checkListQuestion9 = "";
 
   var closeChecklistTooltipLabel = "";
 
@@ -73,6 +76,11 @@ class LocalizedGPSStrings
     checkListQuestion4 = _l10n?.gps_process_checklist_question_4 ?? "Issue with the l10n for the checklist question 4";
     checkListQuestion5 = _l10n?.gps_process_checklist_question_5 ?? "Issue with the l10n for the checklist question 5";
     checkListQuestion6 = _l10n?.gps_process_checklist_question_6 ?? "Issue with the l10n for the checklist question 6";
+    checkListQuestion7 = _l10n?.gps_process_checklist_question_7 ?? "Issue with the l10n for the checklist question 7";
+    checkListQuestion8 = _l10n?.gps_process_checklist_question_8 ?? "Issue with the l10n for the checklist question 8";
+    checkListQuestion9 = _l10n?.gps_process_checklist_question_9 ?? "Issue with the l10n for the checklist question 9";
+
+
 
 
     closeChecklistTooltipLabel = _l10n?.gps_process_checklist_close_overlay_tooltip ?? "Issue with the l10n for the 'Close checklist' tooltip";
