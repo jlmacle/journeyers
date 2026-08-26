@@ -50,9 +50,9 @@ class _GPSChecklistState extends State<GPSChecklist> {
       lgps.checkListQuestion4: false,
       lgps.checkListQuestion5: false,
       lgps.checkListQuestion6: false,
-      "Did we agree on the order in which to offer the ideas?": false,
-      "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?": false,
-      "Do we need to further our context analysis?": false,
+      lgps.checkListQuestion7: false,
+      lgps.checkListQuestion8: false,
+      lgps.checkListQuestion9: false,
     };
 
   }

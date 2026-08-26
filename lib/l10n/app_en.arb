@@ -145,7 +145,14 @@
   ,"@gps_process_checklist_question_5": {"description": "l10n for the checklist question 5"}
   ,"gps_process_checklist_question_6": "Do we agree on the problem that needs to be solved?"
   ,"@gps_process_checklist_question_6": {"description": "l10n for the checklist question 6"}
- 
+  ,"gps_process_checklist_question_7": "Did we agree on the order in which to offer the ideas?"
+  ,"@gps_process_checklist_question_7": {"description": "l10n for the checklist question 7"}
+  ,"gps_process_checklist_question_8": "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?"
+  ,"@gps_process_checklist_question_8": {"description": "l10n for the checklist question 8"}
+  ,"gps_process_checklist_question_9": "Do we need to further our context analysis?"
+  ,"@gps_process_checklist_question_9": {"description": "l10n for the checklist question 9"}
+  
+
 
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}

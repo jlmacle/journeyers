@@ -266,6 +266,18 @@ class AppLocalizationsFr extends AppLocalizations {
       'Avons-nous la même perception du problème qui a besoin d\'être résolu ?';
 
   @override
+  String get gps_process_checklist_question_7 =>
+      'Sommes-nous d\'accord sur l\'ordre dans lequel offrir les idées ?';
+
+  @override
+  String get gps_process_checklist_question_8 =>
+      'Y a-t-il des raisons pour lesquelles il pourrait être important de présenter, ou recevoir, les idées avec un ton neutre ?';
+
+  @override
+  String get gps_process_checklist_question_9 =>
+      'Devons-nous approfondir notre analyse de contexte ?';
+
+  @override
   String get gps_process_checklist_close_overlay_tooltip =>
       'Fermer la check-list';
 
@@ -749,6 +761,18 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_checklist_question_6 =>
       'Avons-nous la même perception du problème qui a besoin d\'être résolu ?';
+
+  @override
+  String get gps_process_checklist_question_7 =>
+      'Sommes-nous d\'accord sur l\'ordre dans lequel offrir les idées ?';
+
+  @override
+  String get gps_process_checklist_question_8 =>
+      'Y a-t-il des raisons pour lesquelles il pourrait être important de présenter, ou recevoir, les idées avec un ton neutre ?';
+
+  @override
+  String get gps_process_checklist_question_9 =>
+      'Devons-nous approfondir notre analyse de contexte ?';
 
   @override
   String get gps_process_checklist_close_overlay_tooltip =>
