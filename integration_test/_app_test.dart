@@ -84,8 +84,6 @@ Future<void> main() async {
 
   group("Application Tests: Mobile: \n", () 
   {
-    // "CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
-    // " (assuming an already selected path to the user session data folder)",
     testWidgets("CA + GPS: Session data entered in the context analysis is available for the group problem-solving"
       " (assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
