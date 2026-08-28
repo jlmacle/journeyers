@@ -127,8 +127,6 @@ Future<void> main() async {
   {
     group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
     {
-    // "Session metadata entered (title, keywords, date) is found: "
-    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
       "Session metadata entered (title, keywords, date) is found: "
       "(assuming an already selected path to the user session data folder)",
@@ -190,8 +188,6 @@ Future<void> main() async {
 
     group("Sorting and filtering Tests: Mobile: \n", ()
     {
-      // "Sorting by title \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Sorting by title \n"
         "(assuming an already selected path to the user session data folder)",
@@ -274,8 +270,6 @@ Future<void> main() async {
         }
       );
          
-      // "Sorting by date \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Sorting by date \n"
         "(assuming an already selected path to the user session data folder)",
@@ -373,8 +367,6 @@ Future<void> main() async {
           }
         });
 
-      // "Filtering by keywords \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
           "Filtering by keywords \n"
           "(assuming an already selected path to the user session data folder)",
@@ -483,8 +475,6 @@ Future<void> main() async {
   
     group("Deletion Tests: Mobile: \n", ()
   {
-  // "Deletion: Single deletion with icon \n"
-  // "(assuming an already selected path to the user session data folder)",
   testWidgets(
     "Deletion: Single deletion with icon \n"
     "(assuming an already selected path to the user session data folder)",
@@ -575,8 +565,6 @@ Future<void> main() async {
     }      
   );
 
-  // "Deletion: Bulk deletion \n"
-  // "(assuming an already selected path to the user session data folder)",
   testWidgets(
     "Deletion: Bulk deletion \n"
     "(assuming an already selected path to the user session data folder)",
@@ -679,9 +667,6 @@ Future<void> main() async {
 
     group("Preview Tests: Mobile: \n", () 
   {
-    // "Session data entered is found on the preview: "
-    // "all fields empty \n"
-    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
       "Session data entered is found on the preview: "
       "all fields empty \n"
@@ -737,9 +722,6 @@ Future<void> main() async {
       }
     );
 
-    // "Session data entered is found on the preview: "
-    // "all fields filled \n"
-    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
       "Session data entered is found on the preview: "
       "all fields filled \n"
@@ -826,9 +808,6 @@ Future<void> main() async {
       },
     );
 
-    // "Session data entered is found on the preview: "
-    // "not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n"
-    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
     "Session data entered is found on the preview: "
     "not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n"
@@ -917,9 +896,6 @@ Future<void> main() async {
     },
   ); 
 
-    // "Session data entered is found on the preview: "
-    // "not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
-    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
     "Session data entered is found on the preview: "
     "not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
@@ -1008,9 +984,6 @@ Future<void> main() async {
     },
   ); 
 
-    // "Session data entered is found on the preview: "
-    // "not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
-    // "(assuming an already selected path to the user session data folder)",
     testWidgets(
     "Session data entered is found on the preview: "
     "not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
@@ -1103,7 +1076,6 @@ Future<void> main() async {
 
     group("Edition Tests: Mobile: \n", ()
     {
-      // "Edition: Title (non empty edited title) \n"
       testWidgets(
         "Edition: Title (non empty edited title)\n",
         (WidgetTester tester) async {
@@ -1161,7 +1133,6 @@ Future<void> main() async {
           }
         });
   
-      // "Edition: Title (empty edited title) \n"
       testWidgets("Edition: Title (empty edited title) \n", 
       (WidgetTester tester) async 
       {
@@ -1230,7 +1201,6 @@ Future<void> main() async {
         } 
       });            
     
-      // "Edition: Keywords \n"
       testWidgets(
         "Edition: Keywords \n",
         (WidgetTester tester) async {
@@ -1305,7 +1275,6 @@ Future<void> main() async {
           }
         });
   
-      // "Context analysis data edition (from preview) \n"
       testWidgets("Context analysis data edition (from preview) \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
@@ -1637,7 +1606,6 @@ Future<void> main() async {
 
         });
 
-      // "Context analysis data edition (from dashboard) \n"
       testWidgets(
         "Context analysis data edition (from dashboard) \n",
         (WidgetTester tester) async {
@@ -1962,7 +1930,6 @@ Future<void> main() async {
 
         });
 
-      // Edition data is not retained in next process
       testWidgets("Edition data is not retained in next process \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
@@ -2432,7 +2399,6 @@ Future<void> main() async {
 
     group("Visual Tests: Mobile: \n", ()
     {
-      // "Sharing \n"
       testWidgets(
         "Sharing \n",
         (WidgetTester tester) async {
@@ -2489,7 +2455,6 @@ Future<void> main() async {
           }
         });
 
-      // "Complex data \n"
       testWidgets(
         "Complex data \n",
         (WidgetTester tester) async {
