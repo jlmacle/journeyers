@@ -273,8 +273,6 @@ Future<void> main() async {
 
     group("Sorting and filtering Tests: Mobile: \n", ()
     {
-      // "Sorting by title \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Sorting by title \n"
         "(assuming an already selected path to the user session data folder)",
@@ -358,8 +356,6 @@ Future<void> main() async {
         }
       );
       
-      // "Sorting by date \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Sorting by date \n"
         "(assuming an already selected path to the user session data folder)",
@@ -457,8 +453,6 @@ Future<void> main() async {
           }
         });
     
-      // "Filtering by keywords \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
           "Filtering by keywords \n"
           "(assuming an already selected path to the user session data folder)",
@@ -570,8 +564,6 @@ Future<void> main() async {
   
     group("Deletion Tests: Mobile: \n", ()
     {
-      // "Deletion: Single deletion with icon \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Deletion: Single deletion with icon \n"
         "(assuming an already selected path to the user session data folder)",
@@ -657,8 +649,6 @@ Future<void> main() async {
         }      
       );
 
-      // "Deletion: Bulk deletion \n"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Deletion: Bulk deletion \n"
         "(assuming an already selected path to the user session data folder)",
@@ -765,8 +755,6 @@ Future<void> main() async {
   
     group("Preview Tests: Mobile: \n", () 
     {
-      // "Session data entered is found on the preview"
-      // "(assuming an already selected path to the user session data folder)",
       testWidgets(
         "Session data entered is found on the preview \n"
         "(assuming an already selected path to the user session data folder)",
@@ -825,7 +813,6 @@ Future<void> main() async {
 
     group("Edition Tests: Preview: Mobile: \n", ()
     {
-      // "Group problem-solving data edition (from preview)\n"
       testWidgets(
         "Group problem-solving data edition (from preview)\n",
         (WidgetTester tester) async {
@@ -1060,7 +1047,6 @@ Future<void> main() async {
 
         });
     
-      // "Group problem-solving data edition (from dashboard)\n"
       testWidgets(
         "Group problem-solving data edition (from dashboard)\n",
         (WidgetTester tester) async {
@@ -1287,7 +1273,6 @@ Future<void> main() async {
 
         });
 
-      // Edition data is not retained in next process
       testWidgets(
         "Edition data is not retained in next process \n",
         (WidgetTester tester) async {
@@ -1609,7 +1594,6 @@ Future<void> main() async {
 
         group("New participants list labels/content: \n", () 
         {
-          // "Lists labels must be unique
           testWidgets("Lists labels must be unique", 
           (WidgetTester tester) async 
           {
@@ -1709,7 +1693,6 @@ Future<void> main() async {
             expect(find.text(lgps.checkListTitle), findsNothing);
           });            
         
-          // "Lists labels must be non empty"
           testWidgets("Lists labels must be non empty", 
           (WidgetTester tester) async 
           {
@@ -1798,7 +1781,6 @@ Future<void> main() async {
             expect(find.text(lgps.checkListTitle), findsNothing);    
           });            
         
-          // "List content must be unique (without reversed order when adding 2nd list)"
           testWidgets("List content must be unique (without reversed order when adding 2nd list)", 
           (WidgetTester tester) async 
           {
@@ -1869,7 +1851,6 @@ Future<void> main() async {
             expect(saveListIconFinder, findsNothing);        
           });            
         
-          // "List content must be unique (with reversed order when adding 2nd list)"
           testWidgets("List content must be unique (with reversed order when adding 2nd list)", 
           (WidgetTester tester) async 
           {
@@ -1939,7 +1920,6 @@ Future<void> main() async {
             expect(saveListIconFinder, findsNothing);        
           });            
         
-          // "Names are displayed in the order added (names in alphabetical order)"
           testWidgets("Names are displayed in the order added (names in alphabetical order)", 
           (WidgetTester tester) async 
           {
@@ -1983,7 +1963,6 @@ Future<void> main() async {
                 
           });            
         
-          // "Names are displayed in the order added (names not in alphabetical order)"
           testWidgets("Names are displayed in the order added (names not in alphabetical order)", 
           (WidgetTester tester) async 
           {
@@ -2140,8 +2119,6 @@ Future<void> main() async {
       
         group("New participants list saving: \n", () 
         {
-          // "1. Participants can be added, keywords added, the data saved in a list, 
-          // and the participants' names are loaded in the GPS process page"
           testWidgets("1. Participants can be added, keywords added, the data saved in a list, "
                       "and the participants' names are loaded in the GPS process page", 
             (WidgetTester tester) async 
@@ -2203,9 +2180,6 @@ Future<void> main() async {
                 expect(find.text(name2), findsOne);  
               });
         
-          // A case that failed at manual testing
-          // "2. Participants can be added, keywords added, the data saved in a list, 
-          // and the participants' names are loaded in the GPS process page"
           testWidgets("2. Participants can be added, keywords added, the data saved in a list, "
                       "and the participants' names are loaded in the GPS process page", 
             (WidgetTester tester) async 
@@ -2272,9 +2246,6 @@ Future<void> main() async {
                 }   
               });
         
-          // Had a multi-list issue at manual testing time
-          // "Multi-list: Participants can be added, keywords added, the data saved in a list, 
-          //  and the participants' names are loaded in the GPS process page"
           testWidgets("Multi-list: Participants can be added, keywords added, the data saved in a list, "
                       " and the participants' names are loaded in the GPS process page", 
             (WidgetTester tester) async 
@@ -2313,7 +2284,6 @@ Future<void> main() async {
 
       group("New participants list editing: \n", () 
       {
-        // "Participants names can be edited (while building a new list)"
         testWidgets("Participants names can be edited (while building a new list)", 
         (WidgetTester tester) async 
           {
@@ -2377,7 +2347,6 @@ Future<void> main() async {
 
           });
         
-        // "Participants names can be deleted (while building a new list)"
         testWidgets("Participants names can be deleted (while building a new list)", 
         (WidgetTester tester) async 
           {
@@ -2682,8 +2651,6 @@ Future<void> main() async {
 
         group("Entered list data is displayed on the list dashboard: Mobile: \n", ()
         {
-          // "List data entered (participants, list name, keywords) is found: "
-          // "(assuming an already selected path to the user session data folder)",
           testWidgets(
             "List data entered (participants, list name, keywords) is found: "
             "(assuming an already selected path to the user session data folder)",
@@ -2922,7 +2889,6 @@ Future<void> main() async {
     
         group("Deletion Tests: \n", ()
         {
-          // "Deletion: Single deletion with icon \n"
           testWidgets("Deletion: Single deletion with icon \n",
             (WidgetTester tester) async {
 
@@ -2974,7 +2940,6 @@ Future<void> main() async {
             }      
           );         
         
-          // "Deletion: Bulk deletion \n"
           testWidgets(
             "Deletion: Bulk deletion \n",
             (WidgetTester tester) async {
@@ -3054,7 +3019,6 @@ Future<void> main() async {
       
         group("Edition Tests: \n", ()
         {
-          // "List label edition: Non empty label \n"
           testWidgets(
             "List label edition: Non empty label \n",
             (WidgetTester tester) async 
@@ -3120,7 +3084,6 @@ Future<void> main() async {
 
             });
 
-          // "List label edition: Empty label \n"
           testWidgets(
             "List label edition: Empty label \n",
             (WidgetTester tester) async 
@@ -3191,7 +3154,6 @@ Future<void> main() async {
 
             });
         
-          // "Participants edition: Non empty participants list \n"
           testWidgets(
             "Participants edition: Non empty participants list \n",
             (WidgetTester tester) async 
@@ -3272,7 +3234,6 @@ Future<void> main() async {
 
             });
         
-          // "Participants edition: Empty participants list \n"
           testWidgets(
             "Participants edition: Empty participants list \n",
             (WidgetTester tester) async 
@@ -3348,7 +3309,6 @@ Future<void> main() async {
               expect(find.text(lps.emptyParticipantsListError), findsOne);
             });
         
-          // "Keywords edition \n"
           testWidgets(
             "Keywords edition \n",
             (WidgetTester tester) async 
