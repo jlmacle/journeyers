@@ -273,8 +273,7 @@ Future<void> main() async {
 
     group("Sorting and filtering Tests: Mobile: \n", ()
     {
-      testWidgets(
-        "Sorting by title \n"
+      testWidgets("Sorting by title \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
@@ -356,8 +355,7 @@ Future<void> main() async {
         }
       );
       
-      testWidgets(
-        "Sorting by date \n"
+      testWidgets("Sorting by date \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
@@ -453,8 +451,7 @@ Future<void> main() async {
           }
         });
     
-      testWidgets(
-          "Filtering by keywords \n"
+      testWidgets("Filtering by keywords \n"
           "(assuming an already selected path to the user session data folder)",
           (WidgetTester tester) async 
           {
@@ -564,8 +561,7 @@ Future<void> main() async {
   
     group("Deletion Tests: Mobile: \n", ()
     {
-      testWidgets(
-        "Deletion: Single deletion with icon \n"
+      testWidgets("Deletion: Single deletion with icon \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async {
 
@@ -649,8 +645,7 @@ Future<void> main() async {
         }      
       );
 
-      testWidgets(
-        "Deletion: Bulk deletion \n"
+      testWidgets("Deletion: Bulk deletion \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async {
 
@@ -755,8 +750,7 @@ Future<void> main() async {
   
     group("Preview Tests: Mobile: \n", () 
     {
-      testWidgets(
-        "Session data entered is found on the preview \n"
+      testWidgets("Session data entered is found on the preview \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async {
 
@@ -813,8 +807,7 @@ Future<void> main() async {
 
     group("Edition Tests: Preview: Mobile: \n", ()
     {
-      testWidgets(
-        "Group problem-solving data edition (from preview)\n",
+      testWidgets("Group problem-solving data edition (from preview)\n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1047,8 +1040,7 @@ Future<void> main() async {
 
         });
     
-      testWidgets(
-        "Group problem-solving data edition (from dashboard)\n",
+      testWidgets("Group problem-solving data edition (from dashboard)\n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1273,8 +1265,7 @@ Future<void> main() async {
 
         });
 
-      testWidgets(
-        "Edition data is not retained in next process \n",
+      testWidgets("Edition data is not retained in next process \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -2651,8 +2642,7 @@ Future<void> main() async {
 
         group("Entered list data is displayed on the list dashboard: Mobile: \n", ()
         {
-          testWidgets(
-            "List data entered (participants, list name, keywords) is found: "
+          testWidgets("List data entered (participants, list name, keywords) is found: "
             "(assuming an already selected path to the user session data folder)",
             (WidgetTester tester) async 
             {
@@ -2940,8 +2930,7 @@ Future<void> main() async {
             }      
           );         
         
-          testWidgets(
-            "Deletion: Bulk deletion \n",
+          testWidgets("Deletion: Bulk deletion \n",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -3019,8 +3008,7 @@ Future<void> main() async {
       
         group("Edition Tests: \n", ()
         {
-          testWidgets(
-            "List label edition: Non empty label \n",
+          testWidgets("List label edition: Non empty label \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3084,8 +3072,7 @@ Future<void> main() async {
 
             });
 
-          testWidgets(
-            "List label edition: Empty label \n",
+          testWidgets("List label edition: Empty label \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3154,8 +3141,7 @@ Future<void> main() async {
 
             });
         
-          testWidgets(
-            "Participants edition: Non empty participants list \n",
+          testWidgets("Participants edition: Non empty participants list \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3234,8 +3220,7 @@ Future<void> main() async {
 
             });
         
-          testWidgets(
-            "Participants edition: Empty participants list \n",
+          testWidgets("Participants edition: Empty participants list \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3309,8 +3294,7 @@ Future<void> main() async {
               expect(find.text(lps.emptyParticipantsListError), findsOne);
             });
         
-          testWidgets(
-            "Keywords edition \n",
+          testWidgets("Keywords edition \n",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3382,7 +3366,6 @@ Future<void> main() async {
 
     group("Ideas overlay opening Tests: \n", () 
     {
-      // "The overlay can be opened clicking on the ideas area title"
       testWidgets("The overlay can be opened clicking on the ideas area title", 
         (WidgetTester tester) async 
         {
@@ -3419,7 +3402,6 @@ Future<void> main() async {
           expect(find.byKey(const Key("ideaOverlayField")), findsOne);
         });
       
-      // "The overlay can be opened clicking on the ideas"
       testWidgets("The overlay can be opened clicking on the ideas", 
         (WidgetTester tester) async 
         {
@@ -3479,7 +3461,6 @@ Future<void> main() async {
       var idea3 = "idea3";
       var idea4 = "idea4";
 
-      // "Ideas can be added in the overlay"
       testWidgets("Ideas can be added in the overlay", 
         (WidgetTester tester) async 
         {
@@ -3533,7 +3514,6 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 5)); 
         });
     
-      // "Ideas can be edited in the overlay"
       testWidgets("Ideas can be edited in the overlay", 
         (WidgetTester tester) async 
         {
@@ -3608,7 +3588,6 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 2)); 
         });
     
-      // "Ideas can be deleted in the overlay"
       testWidgets("Ideas can be deleted in the overlay", 
         (WidgetTester tester) async 
         {
@@ -3674,7 +3653,6 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 2)); 
         });
     
-      // "Ideas overlay: 4 additions, 2 deletions"
       testWidgets("Ideas overlay: 4 additions, 2 deletions", 
         (WidgetTester tester) async 
         {
@@ -3762,9 +3740,7 @@ Future<void> main() async {
 
   group("Visual Tests: Mobile: \n", ()
   {
-    // "Sharing \n"
-    testWidgets(
-      "Sharing \n",
+    testWidgets("Sharing \n",
       (WidgetTester tester) async {
         // Setting mock values for SharedPreferences
         SharedPreferences.setMockInitialValues
