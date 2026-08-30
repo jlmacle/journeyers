@@ -127,8 +127,7 @@ Future<void> main() async {
   {
     group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
     {
-    testWidgets(
-      "Session metadata entered (title, keywords, date) is found: "
+    testWidgets("Session metadata entered (title, keywords, date) is found: "
       "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
@@ -188,8 +187,7 @@ Future<void> main() async {
 
     group("Sorting and filtering Tests: Mobile: \n", ()
     {
-      testWidgets(
-        "Sorting by title \n"
+      testWidgets("Sorting by title \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
@@ -270,8 +268,7 @@ Future<void> main() async {
         }
       );
          
-      testWidgets(
-        "Sorting by date \n"
+      testWidgets("Sorting by date \n"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
@@ -367,8 +364,7 @@ Future<void> main() async {
           }
         });
 
-      testWidgets(
-          "Filtering by keywords \n"
+      testWidgets("Filtering by keywords \n"
           "(assuming an already selected path to the user session data folder)",
           (WidgetTester tester) async 
           {
@@ -475,8 +471,7 @@ Future<void> main() async {
   
     group("Deletion Tests: Mobile: \n", ()
   {
-  testWidgets(
-    "Deletion: Single deletion with icon \n"
+  testWidgets("Deletion: Single deletion with icon \n"
     "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
@@ -565,8 +560,7 @@ Future<void> main() async {
     }      
   );
 
-  testWidgets(
-    "Deletion: Bulk deletion \n"
+  testWidgets("Deletion: Bulk deletion \n"
     "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
@@ -667,8 +661,7 @@ Future<void> main() async {
 
     group("Preview Tests: Mobile: \n", () 
   {
-    testWidgets(
-      "Session data entered is found on the preview: "
+    testWidgets("Session data entered is found on the preview: "
       "all fields empty \n"
       "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
@@ -722,8 +715,7 @@ Future<void> main() async {
       }
     );
 
-    testWidgets(
-      "Session data entered is found on the preview: "
+    testWidgets("Session data entered is found on the preview: "
       "all fields filled \n"
       "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
@@ -808,8 +800,7 @@ Future<void> main() async {
       },
     );
 
-    testWidgets(
-    "Session data entered is found on the preview: "
+    testWidgets("Session data entered is found on the preview: "
     "not all fields filled: 1: several unchecked checkboxes, several unselected segmented buttons, empty text field only items \n"
     "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
@@ -896,8 +887,7 @@ Future<void> main() async {
     },
   ); 
 
-    testWidgets(
-    "Session data entered is found on the preview: "
+    testWidgets("Session data entered is found on the preview: "
     "not all fields filled: 2: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
     "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
@@ -984,8 +974,7 @@ Future<void> main() async {
     },
   ); 
 
-    testWidgets(
-    "Session data entered is found on the preview: "
+    testWidgets("Session data entered is found on the preview: "
     "not all fields filled: 3: several unchecked checkboxes, several unselected segmented buttons, one empty text field only item \n"
     "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
@@ -1076,8 +1065,7 @@ Future<void> main() async {
 
     group("Edition Tests: Mobile: \n", ()
     {
-      testWidgets(
-        "Edition: Title (non empty edited title)\n",
+      testWidgets("Edition: Title (non empty edited title)\n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1201,8 +1189,7 @@ Future<void> main() async {
         } 
       });            
     
-      testWidgets(
-        "Edition: Keywords \n",
+      testWidgets("Edition: Keywords \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1606,8 +1593,7 @@ Future<void> main() async {
 
         });
 
-      testWidgets(
-        "Context analysis data edition (from dashboard) \n",
+      testWidgets("Context analysis data edition (from dashboard) \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -2399,8 +2385,7 @@ Future<void> main() async {
 
     group("Visual Tests: Mobile: \n", ()
     {
-      testWidgets(
-        "Sharing \n",
+      testWidgets("Sharing \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -2455,8 +2440,7 @@ Future<void> main() async {
           }
         });
 
-      testWidgets(
-        "Complex data \n",
+      testWidgets("Complex data \n",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
