@@ -62,7 +62,7 @@ void main() {
       expect(hintText, lca.caTitleTextFieldHint);     
 
       // Verifying the text field hint present
-      expect(find.text(hintText), findsOneWidget);
+      expect(find.text(lca.caTitleTextFieldHint), findsOneWidget);
     }
     );    
   
