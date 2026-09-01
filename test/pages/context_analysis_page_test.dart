@@ -17,13 +17,8 @@ void main()
       group("CAPage: Runtime behavior\n", 
       () 
       { 
-        // "First-run modal: \n"
-        // "A newly installed app should display the first-run modal,\n"
-        // "before starting the first context analysis."
         testWidgets
-        (        
-          "First-run modal: \n"
-          "A newly installed app should display the first-run modal,\n"
+        ("First-run modal: A newly installed app should display the first-run modal,\n"
           "before starting the first context analysis.",
           (WidgetTester tester) async 
           {
@@ -67,12 +62,8 @@ void main()
           }
         );        
 
-        // "First-run modal: \n"
-        // "The first-run modal is not displayed when already acknowledged.", 
         testWidgets
-        (          
-          "First-run modal: \n"
-          "The first-run modal is not displayed when already acknowledged", 
+        ("First-run modal: The first-run modal is not displayed when already acknowledged", 
           (WidgetTester tester) async 
           {
             // Setting mock values for SharedPreferences
@@ -106,14 +97,8 @@ void main()
           }
         );
 
-        // "No session data stored: \n"
-        // "When no session data is stored, the context analysis process page should be displayed,\n"
-        // "without the dashboard.", 
         testWidgets
-        ( 
-                  
-          "No session data stored: \n"
-          "When no session data is stored, the context analysis process page should be displayed,\n"
+        ("No session data stored: When no session data is stored, the context analysis process page should be displayed,\n"
           "without the dashboard.", 
           (tester) async 
           {  
@@ -142,13 +127,8 @@ void main()
           }
         );
 
-        // "Data stored: New context analysis button: \n"
-        // "The context analysis page should have a button to start a new context analysis.",
         testWidgets
-        (
-          
-          "Data stored: New context analysis button: \n"
-          "The context analysis page should have a button to start a new context analysis.",
+        ("Data stored: New context analysis button: The context analysis page should have a button to start a new context analysis.",
           (WidgetTester tester) async 
           { 
             // Setting mock values for SharedPreferences
