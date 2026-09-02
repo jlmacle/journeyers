@@ -2954,7 +2954,8 @@ Future<void> main() async {
             }      
           );         
         
-          testWidgets("Deletion: Bulk deletion \n",
+          testWidgets("Deletion: Bulk deletion \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -2969,6 +2970,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedDashboardStrings lds = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3010,12 +3015,35 @@ Future<void> main() async {
 
               // ── BULK DELETION ────────────────────────────────────────────────────────────
               // ─────────────────────────────────────────────────────────────────────────────            
-              // Searching the widget
+              // Searching the widget 
               var bulkDeletionFinder = find.textContaining("Delete");
               expect(bulkDeletionFinder, findsOne);
               await tester.ensureVisible(bulkDeletionFinder);
+              // Deletion
               await tester.tap(bulkDeletionFinder);
               await tester.pumpAndSettle();
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "Data deleted"; }
+                case("fr"): { snackbarMessage = "Données supprimées"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // NewParticipantsDeletionByBulk: lds.snackbarMessageDataDeleted
+              expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
+
 
               // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────────────       
