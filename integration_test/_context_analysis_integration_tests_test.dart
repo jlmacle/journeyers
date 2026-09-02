@@ -1255,6 +1255,10 @@ Future<void> main() async {
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
 
@@ -1290,6 +1294,28 @@ Future<void> main() async {
             await tester.enterText(editTfFinder, editedKeywords);
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
+
+            // Verifying the correct snackbar message present ───────────────────────────────────────────
+            // snackbarMessage hard-coded strings
+            var snackbarMessage = "";
+            
+            var localeLanguageCode = getLocaleLanguageCode(tester);
+
+            switch(localeLanguageCode.toLowerCase())
+            {
+              case("en"): { snackbarMessage = "Keywords updated"; }
+              case("fr"): { snackbarMessage = "Mots-clés mis à jour"; }        
+            }
+            
+            if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+            
+            // Verifying consistency between hard-coded string and localized string
+            // DashboardPage: lds.snackbarMessageKeywordsUpdated
+            expect(snackbarMessage, lds.snackbarMessageKeywordsUpdated);  
+            
+            // Verifying the snackbarMessage present
+            expect(find.text(lds.snackbarMessageKeywordsUpdated), findsOne);
+
               // Verifying the text field absent
             expect(editTfFinder, findsNothing);
               // Verifying the input chips present
