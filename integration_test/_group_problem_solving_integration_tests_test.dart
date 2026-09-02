@@ -3395,7 +3395,8 @@ Future<void> main() async {
               expect(find.text(lps.emptyParticipantsListError), findsOne);
             });
         
-          testWidgets("Keywords edition \n",
+          testWidgets("Keywords edition \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3410,6 +3411,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedDashboardStrings lds = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3447,7 +3452,28 @@ Future<void> main() async {
               // Adding the edited keywords data (comma-separated values)
               await tester.enterText(newKeywordsTextFieldFinder, "${kwWorkplace},${kwCompanionship}");
               await tester.testTextInput.receiveAction(TextInputAction.done);
-              await tester.pumpAndSettle();              
+              await tester.pumpAndSettle();      
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "Keywords updated"; }
+                case("fr"): { snackbarMessage = "Mots-clés mis à jour"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lds.snackbarMessageKeywordsUpdated
+              expect(snackbarMessage, lds.snackbarMessageKeywordsUpdated);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lds.snackbarMessageKeywordsUpdated), findsOne);        
 
               // Verifying data
               var newKeywordsDataFinder = await dashboardGetKeywordsOnDashboard(tester);
