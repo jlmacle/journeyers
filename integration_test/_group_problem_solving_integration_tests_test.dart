@@ -3109,7 +3109,8 @@ Future<void> main() async {
       
         group("Edition Tests: \n", ()
         {
-          testWidgets("List label edition: Non empty label \n",
+          testWidgets("List label edition: Non empty label \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3124,6 +3125,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3166,7 +3171,29 @@ Future<void> main() async {
               // Adding the edited label
               await tester.enterText(listNameEditFieldFinder, "${listLabel1}-edited");
               await tester.testTextInput.receiveAction(TextInputAction.done);
-              await tester.pumpAndSettle();              
+              await tester.pumpAndSettle();     
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "List name updated"; }
+                case("fr"): { snackbarMessage = "Nom de liste mis à jour"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lps.listUpdatedSnackBarMessage
+              expect(snackbarMessage, lps.listUpdatedSnackBarMessage);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lps.listUpdatedSnackBarMessage), findsOne);        
+         
 
               // Verifying the edited label present
               expect(find.text("${listLabel1}-edited"), findsOne);                   
