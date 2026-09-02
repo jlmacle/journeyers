@@ -22,6 +22,7 @@ class LocalizedParticipantsStrings
   var listsSortByLabel = "" ;
 
   //  ─── Edition ───────────────────────────────────────
+  var participantsUpdatedSnackBarMessage = "";
   var listUpdatedSnackBarMessage = "";
   var emptyParticipantsListError = "";
   var emptyLabelEditError = "";
@@ -66,6 +67,7 @@ class LocalizedParticipantsStrings
     listsSortByLabel = _l10n?.text_lists_dashboard_sort_by_list_name ?? "Issue with the l10n for the 'List sort' label";
     
     //  ─── Edition ───────────────────────────────────────
+    participantsUpdatedSnackBarMessage = _l10n?.text_lists_dashboard_edit_participants_snackbar_message_participants_updated ?? "Issue with the l10n for the 'Participants updated' snackbar message";
     listUpdatedSnackBarMessage = _l10n?.text_lists_dashboard_edit_list_name_list_updated_snackbar_message ?? "Issue with the l10n for the 'List name updated' snackbar message";
     emptyParticipantsListError = _l10n?.text_lists_dashboard_edit_participants_sheet_empty_list_error_message ?? "Issue with the l10n for the 'Participants list cannot be empty' error message";
     emptyLabelEditError = _l10n?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time";
