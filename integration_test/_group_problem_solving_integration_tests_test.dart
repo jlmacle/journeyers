@@ -2135,7 +2135,8 @@ Future<void> main() async {
         group("New participants list saving: \n", () 
         {
           testWidgets("1. Participants can be added, keywords added, the data saved in a list, "
-                      "and the participants' names are loaded in the GPS process page", 
+                      "and the participants' names are loaded in the GPS process page"
+                      "(the correct snackbar message is displayed) ", 
             (WidgetTester tester) async 
             {
                 // Setting mock values for SharedPreferences
@@ -2154,6 +2155,7 @@ Future<void> main() async {
                 // Getting the localized strings
                 var context = tester.element(find.byType(Scaffold).first);
                 LocalizedGPSStrings lgps = .new(context);
+                LocalizedParticipantsStrings lps = .new(context);
 
                 // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
                 // ────────────────────────────────────────────────────────────────────────
@@ -2186,6 +2188,27 @@ Future<void> main() async {
                 await tester.enterText(listNameSavingTextFieldFinder, listLabel1);
                 await tester.testTextInput.receiveAction(TextInputAction.done);
                 await tester.pumpAndSettle();
+
+                // Verifying the correct snackbar message present ───────────────────────────────────────────
+                // snackbarMessage hard-coded strings
+                var snackbarMessage = "";
+                
+                var localeLanguageCode = getLocaleLanguageCode(tester);
+
+                switch(localeLanguageCode.toLowerCase())
+                {
+                  case("en"): { snackbarMessage = "Saved as "; }
+                  case("fr"): { snackbarMessage = "Enregistrée en tant que "; }        
+                }
+                
+                if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+                
+                // Verifying consistency between hard-coded string and localized string
+                // NewParticipantsList: lps.savedAsSnackBarMessage
+                expect(snackbarMessage, lps.savedAsSnackBarMessage);  
+                
+                // Verifying the snackbarMessage present
+                expect(find.textContaining(lps.savedAsSnackBarMessage), findsOne);
 
                 // Verifying the GPS process page present
                 expect(find.text(lgps.checkListTitle), findsOne);
@@ -2954,7 +2977,8 @@ Future<void> main() async {
             }      
           );         
         
-          testWidgets("Deletion: Bulk deletion \n",
+          testWidgets("Deletion: Bulk deletion \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -2969,6 +2993,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedDashboardStrings lds = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3010,12 +3038,35 @@ Future<void> main() async {
 
               // ── BULK DELETION ────────────────────────────────────────────────────────────
               // ─────────────────────────────────────────────────────────────────────────────            
-              // Searching the widget
+              // Searching the widget 
               var bulkDeletionFinder = find.textContaining("Delete");
               expect(bulkDeletionFinder, findsOne);
               await tester.ensureVisible(bulkDeletionFinder);
+              // Deletion
               await tester.tap(bulkDeletionFinder);
               await tester.pumpAndSettle();
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "Data deleted"; }
+                case("fr"): { snackbarMessage = "Données supprimées"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboardDeletionByBulk: lds.snackbarMessageDataDeleted
+              expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
+
 
               // ── TESTING THE DELETION ────────────────────────────────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────────────       
