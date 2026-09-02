@@ -28,6 +28,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
+import "../test/_widget_testing_utils/widget_testing_utils.dart";
 import "externalized_code/externalized_testing_code.dart";
 
 // ─── Helper function ──────────────────────────────────────────────────────────────────
@@ -214,7 +215,8 @@ Future<void> main() async {
     }); 
     group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
     {
-     testWidgets("Session metadata entered (title, keywords, date) is found: "
+     testWidgets("Session metadata entered (title, keywords, date) is found "
+      " and the correct snackbar message is displayed: "
       "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
@@ -243,19 +245,41 @@ Future<void> main() async {
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedGPSStrings lgps = .new(context);
+          LocalizedDashboardStrings lds = .new(context);
 
           // ── 1. ENTERING NEW GPS PROCESS DATA ───────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
           await gpsEnterNewProcessDataOnMobile
-                (
-                  tester: tester, 
-                  title: testGPSTitle1,
-                  kwsList: kwsList2Keywords,
-                  ideasList: ideasListAtLeastOneIdeaNeeded,
-                  fileNameWithoutExtension: fileName1WithoutExtension
-                );
+          (
+            tester: tester, 
+            title: testGPSTitle1,
+            kwsList: kwsList2Keywords,
+            ideasList: ideasListAtLeastOneIdeaNeeded,
+            fileNameWithoutExtension: fileName1WithoutExtension
+          );
 
-          // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
+          // ── 2. VERIFYING THE CORRECT SNACKBAR MESSAGE PRESENT ───────────────────────────────────────────
+          // snackbarMessage hard-coded strings
+          var snackbarMessage = "";
+          
+          var localeLanguageCode = getLocaleLanguageCode(tester);
+
+          switch(localeLanguageCode.toLowerCase())
+          {
+            case("en"): { snackbarMessage = "Session data saved"; }
+            case("fr"): { snackbarMessage = "Session sauvegardée"; }        
+          }
+          
+          if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+          
+          // Verifying consistency between hard-coded string and localized string
+          // GPSProcess: lds.snackbarMessageSessionSavedSuccessfully
+          expect(snackbarMessage, lds.snackbarMessageSessionSavedSuccessfully);  
+          
+          // Verifying the snackbarMessage present
+          expect(find.text(lds.snackbarMessageSessionSavedSuccessfully), findsOne);
+
+          // ── 3. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────
           // Searching for the title and keywords          
             // To avoid intermittent test failures
