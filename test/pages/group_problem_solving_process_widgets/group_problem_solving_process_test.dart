@@ -1,4 +1,6 @@
 // ignore: file_names
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
@@ -10,6 +12,9 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+
+import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 
 void main() 
@@ -253,6 +258,41 @@ void main()
         expect(find.text("someText1"), findsNothing);
       });
 
+    });
+    group("Snackbar Tests: \n", 
+    () 
+    {
+      testWidgets("Should render the correct snackbar message (empty list of ideas) ", 
+      (WidgetTester tester) async 
+      {
+        // Pumping the widget
+        await pumpGPSProcess(tester);
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);
+        
+        // snackbarMessage hard-coded strings
+        var snackbarMessage = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+        
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { snackbarMessage = "No ideas to save"; }
+          case("fr"): { snackbarMessage = "Liste d'idées vide"; }        
+        }
+
+        if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage"); 
+
+        // Verifying consistency between hard-coded string and localized string
+        // GPSProcess: lgps.ideasListEmptyListSnackbarMessage
+        expect(snackbarMessage, lgps.ideasListEmptyListSnackbarMessage);     
+
+        // Verifying the snackbarMessage present
+        expect(find.text(lgps.ideasListEmptyListSnackbarMessage), findsOneWidget);
+    }
+    );    
     });
   });
 }
