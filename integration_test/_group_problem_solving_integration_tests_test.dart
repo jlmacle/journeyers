@@ -2952,7 +2952,8 @@ Future<void> main() async {
     
         group("Deletion Tests: \n", ()
         {
-          testWidgets("Deletion: Single deletion with icon \n",
+          testWidgets("Deletion: Single deletion with icon \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -2996,6 +2997,28 @@ Future<void> main() async {
               // Tapping the icon
               await tester.tap(deleteIconFinder);
               await tester.pumpAndSettle();
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "List deleted"; }
+                case("fr"): { snackbarMessage = "Liste supprimée"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lps.listDeletedSnackbarMessage
+              expect(snackbarMessage, lps.listDeletedSnackbarMessage);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lps.listDeletedSnackbarMessage), findsOne);
+
 
               // Verifying the list item absent
               var sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: listLabel1);
