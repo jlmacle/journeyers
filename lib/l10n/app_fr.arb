@@ -260,6 +260,10 @@
     ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
     ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participants."
     ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition des participants"}
+    ,"text_lists_dashboard_edit_participants_snackbar_message_participants_updated": "Participants mis à jour"
+    ,"@text_lists_dashboard_edit_participants_snackbar_message_participants_updated": {"description": "l10n pour le message de snackbar 'Participants mis à jour'"}
+   
+    
     ,"text_lists_dashboard_edit_participants_sheet_empty_list_error_message": "La liste de participants est vide"
     ,"@text_lists_dashboard_edit_participants_sheet_empty_list_error_message": {"description": "l10n pour le message d'erreur 'La liste de participants est vide'"}
     ,"text_lists_dashboard_snackbar_message_list_deleted": "Liste supprimée"
