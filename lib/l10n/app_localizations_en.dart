@@ -453,6 +453,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String
+  get text_lists_dashboard_edit_participants_snackbar_message_participants_updated =>
+      'Participants updated';
+
+  @override
+  String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
       'The participants list is empty';
 
@@ -937,6 +942,11 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
       'Please enter the participants.';
+
+  @override
+  String
+  get text_lists_dashboard_edit_participants_snackbar_message_participants_updated =>
+      'Participants updated';
 
   @override
   String
