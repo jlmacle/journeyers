@@ -276,9 +276,7 @@ void main()
         var snackbarMessage = "";
         
         var localeLanguageCode = getLocaleLanguageCode(tester);
-        if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
-        if (testingDebug) pu.printd("Testing Debug: localeLanguageCode: $localeLanguageCode");
-
+        
         switch(localeLanguageCode.toLowerCase())
         {
           case("en"): { snackbarMessage = "No ideas to save"; }
