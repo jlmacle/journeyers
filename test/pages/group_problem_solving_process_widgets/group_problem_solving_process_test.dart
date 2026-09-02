@@ -282,9 +282,11 @@ void main()
           case("en"): { snackbarMessage = "No ideas to save"; }
           case("fr"): { snackbarMessage = "Liste d'idées vide"; }        
         }
+
         if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage"); 
 
         // Verifying consistency between hard-coded string and localized string
+        // GPSProcess: lgps.ideasListEmptyListSnackbarMessage
         expect(snackbarMessage, lgps.ideasListEmptyListSnackbarMessage);     
 
         // Verifying the snackbarMessage present
