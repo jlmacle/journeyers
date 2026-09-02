@@ -472,6 +472,7 @@ Future<void> main() async {
     group("Deletion Tests: Mobile: \n", ()
   {
   testWidgets("Deletion: Single deletion with icon \n"
+    "(the correct snackbar message is displayed) "
     "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
@@ -554,6 +555,26 @@ Future<void> main() async {
 
         expect(filterChipFinder, findsNothing);
 
+        // Verifying the correct snackbar message present ───────────────────────────────────────────
+        // snackbarMessage hard-coded strings
+        var snackbarMessage = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { snackbarMessage = "Data deleted"; }
+          case("fr"): { snackbarMessage = "Données supprimées"; }        
+        }
+        
+        if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+        
+        // Verifying consistency between hard-coded string and localized string
+        // DashboardPage: lds.snackbarMessageDataDeleted
+        expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
+        
+        // Verifying the snackbarMessage present
+        expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
 
         // await tester.pump(const Duration(seconds: 2));
       }
