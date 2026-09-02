@@ -3242,7 +3242,8 @@ Future<void> main() async {
 
             });
         
-          testWidgets("Participants edition: Non empty participants list \n",
+          testWidgets("Participants edition: Non empty participants list \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3257,6 +3258,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3300,7 +3305,29 @@ Future<void> main() async {
               // Adding the edited participant data (comma-separated values)
               await tester.enterText(newParticipantsTextFieldFinder, "Bob,Benny,Alicia");
               await tester.testTextInput.receiveAction(TextInputAction.done);
-              await tester.pumpAndSettle();              
+              await tester.pumpAndSettle();        
+
+              
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "Participants updated"; }
+                case("fr"): { snackbarMessage = "Participants mis à jour"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lps.participantsUpdatedSnackBarMessage
+              expect(snackbarMessage, lps.participantsUpdatedSnackBarMessage);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lps.participantsUpdatedSnackBarMessage), findsOne);       
 
               // Verifying data in the participants container
               participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
