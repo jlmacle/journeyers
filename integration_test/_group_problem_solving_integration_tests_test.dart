@@ -3061,7 +3061,7 @@ Future<void> main() async {
               if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
               
               // Verifying consistency between hard-coded string and localized string
-              // NewParticipantsDeletionByBulk: lds.snackbarMessageDataDeleted
+              // ParticipantsListsDashboardDeletionByBulk: lds.snackbarMessageDataDeleted
               expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
               
               // Verifying the snackbarMessage present
