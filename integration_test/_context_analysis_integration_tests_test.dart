@@ -582,7 +582,8 @@ Future<void> main() async {
   );
 
   testWidgets("Deletion: Bulk deletion \n"
-    "(assuming an already selected path to the user session data folder)",
+              "(the correct snackbar message is displayed) "
+              "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
 
       // Setting mock values for SharedPreferences
@@ -608,6 +609,10 @@ Future<void> main() async {
         
         await tester.pumpWidget(buildTestableCAPage());
         await tester.pumpAndSettle();
+
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
 
         // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -655,6 +660,26 @@ Future<void> main() async {
         await tester.tap(bulkDeletionFinder);
         await tester.pumpAndSettle();
 
+        // Verifying the correct snackbar message present ───────────────────────────────────────────
+        // snackbarMessage hard-coded strings
+        var snackbarMessage = "";
+        
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { snackbarMessage = "Data deleted"; }
+          case("fr"): { snackbarMessage = "Données supprimées"; }        
+        }
+        
+        if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+        
+        // Verifying consistency between hard-coded string and localized string
+        // DashboardDeletionByBulk: lds.snackbarMessageDataDeleted
+        expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
+        
+        // Verifying the snackbarMessage present
+        expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
 
         // ── 4. TESTING THE DELETION ────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────       
