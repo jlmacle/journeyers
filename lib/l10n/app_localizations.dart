@@ -829,6 +829,13 @@ abstract class AppLocalizations {
   /// **'Please enter the participants.'**
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint;
 
+  /// l10n for the 'Participants updated' snackbar message
+  ///
+  /// In en, this message translates to:
+  /// **'Participants updated'**
+  String
+  get text_lists_dashboard_edit_participants_snackbar_message_participants_updated;
+
   /// l10n for the 'The participants list is empty' error message
   ///
   /// In en, this message translates to:
