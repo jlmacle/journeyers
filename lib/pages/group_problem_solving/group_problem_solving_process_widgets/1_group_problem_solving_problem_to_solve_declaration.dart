@@ -95,6 +95,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                   onPressed: ()
                   {                   
                     setState(() => _isEditMode = false);
+                    widget.onTitleModified();
                     widget.onTextFieldLosingFocus();
                   },
                 ),
@@ -102,6 +103,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               onSubmitted: (_) 
               { 
                     setState(() => _isEditMode = false);
+                    widget.onTitleModified();
                     widget.onTextFieldLosingFocus();
               },
             ),
@@ -174,13 +176,13 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
               width: 50,
               child: GestureDetector
               (
+                onTap: _enterEditMode,
                 child: 
                   Tooltip
                   (
                     message: AppLocalizations.of(context)?.gps_process_edit_title_tooltip ?? "Issue with the l10n for the 'Please click to edit the title' tooltip",
                     child: const Text(editEmoji)
                   ),
-                onTap: _enterEditMode,
               ),
             ),
           ],

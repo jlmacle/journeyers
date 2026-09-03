@@ -2952,7 +2952,8 @@ Future<void> main() async {
     
         group("Deletion Tests: \n", ()
         {
-          testWidgets("Deletion: Single deletion with icon \n",
+          testWidgets("Deletion: Single deletion with icon \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async {
 
               // Setting mock values for SharedPreferences
@@ -2996,6 +2997,28 @@ Future<void> main() async {
               // Tapping the icon
               await tester.tap(deleteIconFinder);
               await tester.pumpAndSettle();
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "List deleted"; }
+                case("fr"): { snackbarMessage = "Liste supprimée"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lps.listDeletedSnackbarMessage
+              expect(snackbarMessage, lps.listDeletedSnackbarMessage);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lps.listDeletedSnackbarMessage), findsOne);
+
 
               // Verifying the list item absent
               var sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: listLabel1);
@@ -3109,7 +3132,8 @@ Future<void> main() async {
       
         group("Edition Tests: \n", ()
         {
-          testWidgets("List label edition: Non empty label \n",
+          testWidgets("List label edition: Non empty label \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3124,6 +3148,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3166,7 +3194,29 @@ Future<void> main() async {
               // Adding the edited label
               await tester.enterText(listNameEditFieldFinder, "${listLabel1}-edited");
               await tester.testTextInput.receiveAction(TextInputAction.done);
-              await tester.pumpAndSettle();              
+              await tester.pumpAndSettle();     
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "List name updated"; }
+                case("fr"): { snackbarMessage = "Nom de liste mis à jour"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lps.listUpdatedSnackBarMessage
+              expect(snackbarMessage, lps.listUpdatedSnackBarMessage);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lps.listUpdatedSnackBarMessage), findsOne);        
+         
 
               // Verifying the edited label present
               expect(find.text("${listLabel1}-edited"), findsOne);                   
@@ -3242,7 +3292,8 @@ Future<void> main() async {
 
             });
         
-          testWidgets("Participants edition: Non empty participants list \n",
+          testWidgets("Participants edition: Non empty participants list \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3257,6 +3308,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedParticipantsStrings lps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3300,7 +3355,29 @@ Future<void> main() async {
               // Adding the edited participant data (comma-separated values)
               await tester.enterText(newParticipantsTextFieldFinder, "Bob,Benny,Alicia");
               await tester.testTextInput.receiveAction(TextInputAction.done);
-              await tester.pumpAndSettle();              
+              await tester.pumpAndSettle();        
+
+              
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "Participants updated"; }
+                case("fr"): { snackbarMessage = "Participants mis à jour"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lps.participantsUpdatedSnackBarMessage
+              expect(snackbarMessage, lps.participantsUpdatedSnackBarMessage);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lps.participantsUpdatedSnackBarMessage), findsOne);       
 
               // Verifying data in the participants container
               participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
@@ -3395,7 +3472,8 @@ Future<void> main() async {
               expect(find.text(lps.emptyParticipantsListError), findsOne);
             });
         
-          testWidgets("Keywords edition \n",
+          testWidgets("Keywords edition \n"
+                      "(the correct snackbar message is displayed) ",
             (WidgetTester tester) async 
             {
               // Setting mock values for SharedPreferences
@@ -3410,6 +3488,10 @@ Future<void> main() async {
               // Pumping the GPSPage
               await tester.pumpWidget(buildTestableGPSPage());
               await tester.pumpAndSettle();
+
+              // Getting the localized strings
+              var context = tester.element(find.byType(Scaffold).first);
+              LocalizedDashboardStrings lds = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3447,7 +3529,28 @@ Future<void> main() async {
               // Adding the edited keywords data (comma-separated values)
               await tester.enterText(newKeywordsTextFieldFinder, "${kwWorkplace},${kwCompanionship}");
               await tester.testTextInput.receiveAction(TextInputAction.done);
-              await tester.pumpAndSettle();              
+              await tester.pumpAndSettle();      
+
+              // Verifying the correct snackbar message present ───────────────────────────────────────────
+              // snackbarMessage hard-coded strings
+              var snackbarMessage = "";
+              
+              var localeLanguageCode = getLocaleLanguageCode(tester);
+
+              switch(localeLanguageCode.toLowerCase())
+              {
+                case("en"): { snackbarMessage = "Keywords updated"; }
+                case("fr"): { snackbarMessage = "Mots-clés mis à jour"; }        
+              }
+              
+              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+              
+              // Verifying consistency between hard-coded string and localized string
+              // ParticipantsListsDashboard: lds.snackbarMessageKeywordsUpdated
+              expect(snackbarMessage, lds.snackbarMessageKeywordsUpdated);  
+              
+              // Verifying the snackbarMessage present
+              expect(find.text(lds.snackbarMessageKeywordsUpdated), findsOne);        
 
               // Verifying data
               var newKeywordsDataFinder = await dashboardGetKeywordsOnDashboard(tester);

@@ -52,7 +52,7 @@ class EditableTextListItem extends StatefulWidget {
 class _EditableTextListItemState extends State<EditableTextListItem> 
 {
   var _isEdited = false;
-  var _tecEdition = TextEditingController();
+  final _tecEdition = TextEditingController();
 
   @override
   void dispose() {
