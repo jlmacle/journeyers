@@ -205,7 +205,7 @@ class GPSPageState extends State<GPSPage>
                   }) 
                     => _onEditSessionData
                     (
-                      dashboardContext: DashboardUtils.caContext,
+                      dashboardContext: DashboardUtils.gpsContext,
                       isSessionDataBeingEdited: true, 
                       titleWhenEdition: titleWhenEdition, 
                       keywordsWhenEdition: keywordsWhenEdition,
