@@ -388,7 +388,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
         if (editDebug) pu.printd("Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
         
         // Saving the updated metadata
-        await du.saveAllSessionsMetadata(typeOfDashboardContext: DashboardUtils.caContext, sessionsMetadataAll: sessionDataRetrieved);
+        await du.saveAllSessionsMetadata(typeOfDashboardContext: widget.textFieldContext!, sessionsMetadataAll: sessionDataRetrieved);
       }
 
       // onTextFieldValueSubmittedCallbackFunction 
@@ -419,13 +419,13 @@ Future<void> deleteFile({required String filePath}) async
       {
         if (!isInTestEnvironment) {
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
         }
         else {
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
           filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
         }
       } 
 
@@ -434,20 +434,20 @@ Future<void> deleteFile({required String filePath}) async
       {
         if (!isInTestEnvironment) {
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
            }
         else {
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
           filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);
+          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
         }
       } 
       // On desktop
       else 
       {
         await fu.deleteFile(filePath);
-        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: DashboardUtils.caContext, filePathRelatedToDataToDelete: filePath);     
+        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);     
       }    
   } catch (e, s) {
     pu.printd("Delete Error: $e: $s");
