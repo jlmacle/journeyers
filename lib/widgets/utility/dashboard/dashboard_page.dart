@@ -96,7 +96,7 @@ class DashboardPageState extends State<DashboardPage>
     _sessionsMetadataFiltered!.clear();
     _sessionsMetadataFiltered!.addAll(retrievedSessionMetadata);
 
-    if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _sessionsMetadataAll: : $_sessionsMetadataAll");
+    if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _sessionsMetadataAll (context): : $_sessionsMetadataAll (${widget.dashboardContext})");
 
     // Data is not sorted by date by default, and needs sorting
     await sortSessionByDateAddJm
