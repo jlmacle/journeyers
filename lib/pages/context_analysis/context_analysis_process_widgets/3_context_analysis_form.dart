@@ -169,9 +169,10 @@ class CAFormState extends State<CAForm>
   // Method used to store the form data to CSV, and the session metadata in a file.
   Future<void> saveDataAndMetadata() async 
   { 
-    // Updating analysis title, keywords, and file name
-    _analysisTitle = caProcessKey.currentState!.analysisTitle.trim() == "" 
-                      ?  AppLocalizations.of(context)?.ca_unfilled_analysis_title ?? "Issue with the default title value for a context analysis" : caProcessKey.currentState!.analysisTitle.trim();
+   // Updating analysis title, keywords, and file name
+    _analysisTitle = (caProcessKey.currentState!.analysisTitle.trim() == "")
+                      ?  AppLocalizations.of(context)?.ca_unfilled_analysis_title ?? "Issue with the default title value for a context analysis" 
+                      : caProcessKey.currentState!.analysisTitle.trim();
     _keywords = caProcessKey.currentState!.analysisKeywords;
     _fileName = caProcessKey.currentState!.analysisFileName;
 
