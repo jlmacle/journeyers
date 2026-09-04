@@ -234,7 +234,7 @@ Future<void> main() async {
             // ── 2. SORTING BY TITLE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
             // Triggering the sort
-            var sortByTitleFinder = find.textContaining(lds.sortByTitle);
+            var sortByTitleFinder = find.textContaining(lds.sortByTitleLabel);
             await tester.tap(sortByTitleFinder);
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
@@ -315,7 +315,7 @@ Future<void> main() async {
             // ── 2. SORTING BY DATE ──────────────────────────────────
             // ────────────────────────────────────────────────────────
             // Triggering the sort
-            var sortByDateFinder = find.textContaining(lds.sortByDate);
+            var sortByDateFinder = find.textContaining(lds.sortByDateLabel);
             await tester.tap(sortByDateFinder);
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 2));
