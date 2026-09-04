@@ -1,13 +1,12 @@
 # Journeyers
 ## EN/FR
 Most of our lives are spent in teams: household, school, workplace. . . <br>
-Our appreciability in these teams, and therefore our quality of life, <br>
-depends on our ability to group problem-solve toward lasting solutions.<br>
+Our quality of life depends on our ability to group problem-solve toward lasting solutions.<br>
 <br>
-This open source ed tech and assistive technology, proof of concept project <br>
-(built with Flutter, therefore cross-platform [Android, iPhone, Linux, macOS, Windows], <br>
+This open source ed tech and assistive technology, proof-of-concept project <br>
+(built with Flutter, therefore multi-platform [Android, iPhone, Linux, macOS, Windows], <br>
 and with a goal of being multilingual, accessible, and offline-friendly), <br>
-is meant to illustrate supporting our group problem-solving processes, in a family setting.<br>
+is meant to illustrate supporting our group problem-solving processes.<br>
 
 English/French localization is illustrated.<br>
 Additional effort needs to be done for the accessibility.<br>
