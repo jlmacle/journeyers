@@ -228,9 +228,9 @@ class GPSProcessState extends State<GPSProcess>
           await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
       } 
+      // Desktop implementation using FilePicker
       else 
-      {
-        // Desktop implementation using FilePicker
+      {        
         filePath = await FilePicker.saveFile(
           dialogTitle: "Please enter a file name.",
           fileName: "${_fileName}.${_fileExtension}", 
