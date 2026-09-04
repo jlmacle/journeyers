@@ -1,6 +1,6 @@
 # Journeyers
 ## EN/FR
-Most of our lives are spent in teams: household, school, workplace,. . . <br>
+Most of our lives are spent in teams: household, school, workplace, . . . <br>
 Our quality of life depends on our ability to group problem-solve toward lasting solutions.<br>
 <br>
 This open source ed tech and assistive technology, proof-of-concept project <br>
