@@ -24,7 +24,7 @@ Also, this is free and unencumbered software <a href="https://github.com/jlmacle
 
 <a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">Context analysis: preview video.</a><br>
 <a href="https://github.com/jlmacle/journeyers_releases/blob/main/video-Group_problem-solving.mp4">Group problem-solving: preview video.</a><br>
-<br> (Click on the "Download raw file" icon to download the video.)
+<br> (Click on the "Download raw file" icon to download a video.)
 <br><br>
 <p align="center">
 <img src="https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png" width="400">
