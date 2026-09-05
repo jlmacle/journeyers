@@ -32,37 +32,35 @@ void main()
   }
 
 
-    group("CAKeywordsDeclaration Tests: ", 
-    () 
-    { 
-    testWidgets("Should render the correct text field hint", 
-    (WidgetTester tester) async 
-    {
-      // Building the widget
-      await pumpTestableWidget(tester);
-       
-      // Getting the localized strings
-      var context = tester.element(find.byType(Scaffold).first);
-      LocalizedDashboardStrings lds = .new(context);
-      
-      // Hint text hard-coded strings
-      var hintText = "";
-      var localeLanguageCode = getLocaleLanguageCode(tester);
-    
-      switch(localeLanguageCode.toLowerCase())
+    group("CAKeywordsDeclaration Tests: ", () { 
+      testWidgets("Should render the correct text field hint", 
+      (WidgetTester tester) async 
       {
-        case("en"): { hintText = "Please enter one keyword at a time\n(+ Enter key)."; }
-        case("fr"): { hintText = "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."; }        
+        // Building the widget
+        await pumpTestableWidget(tester);
+        
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedDashboardStrings lds = .new(context);
+        
+        // Hint text hard-coded strings
+        var hintText = "";
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+      
+        switch(localeLanguageCode.toLowerCase())
+        {
+          case("en"): { hintText = "Please enter one keyword at a time\n(+ Enter key)."; }
+          case("fr"): { hintText = "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."; }        
+        }
+        if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
+
+        // Verifying consistency between hard-coded string and localized string
+        expect(hintText, lds.keywordsEntryTextFieldHint);     
+
+        // Verifying the text field hint present
+        expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);
       }
-      if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
-
-      // Verifying consistency between hard-coded string and localized string
-      expect(hintText, lds.keywordsEntryTextFieldHint);     
-
-      // Verifying the text field hint present
-      expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);
-    }
-    );    
+      );    
 
       testWidgets("A keyword is added to the display, when added from the text field: ", 
       (WidgetTester tester) async 
@@ -182,9 +180,7 @@ void main()
       );
   
 
-      group("Colors check", 
-        ()
-        {
+      group("Colors check", () {
           testWidgets("The input chips are navyBlue", 
           (WidgetTester tester) async 
           {
