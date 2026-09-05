@@ -5,7 +5,7 @@ void main() {
 
   group("DashboardTitle Widget Tests: \n", () 
   {
-
+    // No test for this widget
   });  
 
 }
