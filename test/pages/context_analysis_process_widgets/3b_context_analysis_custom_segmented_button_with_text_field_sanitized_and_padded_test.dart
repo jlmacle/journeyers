@@ -4,8 +4,7 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 
-void main() 
-{
+void main() {
   const segButtonTextOption1 = "Yes";
 
   // Method used to pump the CASegmentedButtonWithSanitizedAndPaddedTextField widget
@@ -26,17 +25,11 @@ void main()
   }
 
 
-  group("CASegmentedButtonWithSanitizedAndPaddedTextField Tests: \n", 
-  () 
-  {  
-    group("Presence/Absence of the text field: \n", 
-    () 
-    { 
-        // "At start, no selection is made with the segmented button, and the textfield is absent"
-        testWidgets(
-          "At start, no selection is made with the segmented button, and the textfield is absent", 
-          (WidgetTester tester) async 
-          {
+  group("CASegmentedButtonWithSanitizedAndPaddedTextField Tests: \n", () {  
+    group("Presence/Absence of the text field: \n", () { 
+      testWidgets("At start, no selection is made with the segmented button, and the textfield is absent", 
+        (WidgetTester tester) async 
+        {
             // Pumping the widget 
             await pumpCASegmentedButtonWithSanitizedAndPaddedTextField(tester);
 
@@ -55,11 +48,9 @@ void main()
           }
         );       
 
-        // "If a selection is made with the segmented button, the textfield is present"
-        testWidgets(
-          "If a selection is made with the segmented button, the textfield is present", 
-          (WidgetTester tester) async 
-          {
+      testWidgets("If a selection is made with the segmented button, the textfield is present", 
+        (WidgetTester tester) async 
+        {
             // Pumping the widget 
             await pumpCASegmentedButtonWithSanitizedAndPaddedTextField(tester);
 
@@ -73,11 +64,8 @@ void main()
         );       
     });    
  
-    group("Text field state maintained: \n", 
-    () 
-    { 
-      // "Text maintained if text was present, and selections are unselected/re-selected: \n"
-        testWidgets(
+    group("Text field state maintained: \n", () { 
+      testWidgets(
           "Text maintained if text was present, and selections are unselected/re-selected: \n", 
           (WidgetTester tester) async 
           {
