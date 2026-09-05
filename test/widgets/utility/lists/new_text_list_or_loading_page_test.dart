@@ -23,9 +23,7 @@ void main() {
     );    
   }
 
-  group("NewParticipantsListOrLoadingPage Tests: \n", () 
-  {
-    // "Participants Lists Options Page: correct title"
+  group("NewParticipantsListOrLoadingPage Tests: \n", () {
     testWidgets("Participants Lists Options Page: correct title", 
     (WidgetTester tester) async 
     {
@@ -38,7 +36,6 @@ void main() {
       expect(textFinder, findsOne);      
     }); 
     
-    // "Participants Lists Options Page: correct subtitle"
     testWidgets("Participants Lists Options Page: correct subtitle", 
     (WidgetTester tester) async 
     {
@@ -51,7 +48,6 @@ void main() {
       expect(textFinder, findsOne);     
     }); 
 
-    // "Participants Lists Options Page: correct option 1 label"
     testWidgets("Participants Lists Options Page: correct option 1 label", 
     (WidgetTester tester) async 
     {
@@ -64,7 +60,6 @@ void main() {
       expect(textFinder, findsOne);    
     }); 
     
-    // "Participants Lists Options Page: correct option 2 label"
     testWidgets("Participants Lists Options Page: correct option 2 label", 
     (WidgetTester tester) async 
     {

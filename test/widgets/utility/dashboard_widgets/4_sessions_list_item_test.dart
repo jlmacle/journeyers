@@ -22,11 +22,8 @@ void main() {
     DashboardUtils.keyKeywords: keywordsListKw1Kw2,
   };
 
-  group("SessionsListItem Tests: \n", () 
-  {  
-    group("Info and tooltips Tests: \n", () 
-    { 
-      // "Displays session info correctly (Title, date, keywords)"
+  group("SessionsListItem Tests: \n", () {  
+    group("Info and tooltips Tests: \n", () { 
       testWidgets("Displays session info correctly (Title, date, keywords)", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -76,7 +73,6 @@ void main() {
         expect(find.text("${lds.keywordsLabel} Kw, Kw2"), findsOneWidget);
       });
 
-      // "Finds the preview tooltip label"
       testWidgets("Finds the preview tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -116,7 +112,6 @@ void main() {
         expect(find.byTooltip(lds.previewTooltipLabel), findsOneWidget);      
       });
 
-      // "Finds the edit tooltip label"
       testWidgets("Finds the edit tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -156,7 +151,6 @@ void main() {
         expect(find.byTooltip(lds.editFromDashboardItemTooltipLabel), findsOneWidget);      
       });
 
-      // "Finds the keywords tooltip label"
       testWidgets("Finds the keywords tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -196,7 +190,6 @@ void main() {
         expect(find.byTooltip(lds.keywordsTooltipLabel), findsOneWidget);      
       });
 
-      // "Finds the delete tooltip label"
       testWidgets("Finds the delete tooltip label", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -237,9 +230,7 @@ void main() {
       });
     });
     
-    group("Preview Tests: \n", () 
-    { 
-      // "Opens the CA preview"
+    group("Preview Tests: \n", () { 
       testWidgets("Opens the CA preview", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -283,7 +274,6 @@ void main() {
         expect(find.text(testDataMessage), findsOneWidget);
       });
 
-      // "Opens the GPS preview"
       testWidgets("Opens the GPS preview", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -331,7 +321,6 @@ void main() {
 
     group("Edit Tests: \n", () 
     { 
-      // "Shows the placeholder message"
       // testWidgets("Shows the placeholder message", (WidgetTester tester) async {
       //   await tester.pumpWidget(
       //     MaterialApp(
@@ -361,9 +350,7 @@ void main() {
       // });
     });  
   
-    group("Keywords Tests: \n", () 
-    {
-      // "Opens the keywords edition overlay by clicking on the icon"
+    group("Keywords Tests: \n", () {
       testWidgets("Opens the keywords edition overlay by clicking on the icon", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(
@@ -407,8 +394,6 @@ void main() {
         expect(find.text(lds.keywordsTextFieldLabel), findsOneWidget);
       });
 
-
-    // "Opens the keywords edition overlay by clicking on the keywords data"
       testWidgets("Opens the keywords edition overlay by clicking on the keywords data", (WidgetTester tester) async {
         await tester.pumpWidget(
           MaterialApp(

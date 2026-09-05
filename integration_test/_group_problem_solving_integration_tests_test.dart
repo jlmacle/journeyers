@@ -2022,7 +2022,6 @@ Future<void> main() async {
           });            
         
           // Todo: To find a better integration tests/widget tests organization
-          // "Keywords can be added/removed"
           testWidgets("Keywords can be added/removed", 
           (WidgetTester tester) async 
           {

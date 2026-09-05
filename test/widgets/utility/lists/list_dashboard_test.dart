@@ -59,9 +59,7 @@ void main() {
     );    
   }
 
-  group("ParticipantsListsDashboard Tests: \n", () 
-  {
-    // "Empty dashboard: button toward adding a new list"
+  group("ParticipantsListsDashboard Tests: \n", () {
     testWidgets("Empty dashboard: button toward adding a new list", 
     (WidgetTester tester) async 
     {
