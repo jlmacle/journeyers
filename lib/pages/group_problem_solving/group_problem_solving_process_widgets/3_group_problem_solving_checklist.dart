@@ -139,7 +139,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
                     bool isChecked = checklistItems[key] ?? false;
 
                     return CheckboxListTile(
-                      key: Key("checklist-checkbox-$index"),
+                      key: Key("gps-checklist-checkbox-$index"),
                       title: Text(key),
                       value: isChecked,
                       activeColor: checkboxCheckedColor,
