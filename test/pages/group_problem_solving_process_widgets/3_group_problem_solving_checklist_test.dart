@@ -13,8 +13,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "../../../integration_test/externalized_code/externalized_testing_code.dart";
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
-void main() 
-{
+void main() {
   Future<void> pumpGPSChecklist(WidgetTester tester) async
   {
     await tester.pumpWidget(
@@ -29,12 +28,8 @@ void main()
     );
   }
 
-  group("GPSChecklist Tests: \n", 
-  () 
-  {  
-    group("GPSChecklist default aspect: \n", 
-    () 
-    { 
+  group("GPSChecklist Tests: \n", () {  
+    group("GPSChecklist default aspect: \n", () { 
       testWidgets("The default rectangle color is orange", 
       (WidgetTester tester) async 
       {
@@ -45,7 +40,6 @@ void main()
         await gpsTestChecklistTitleBorderColor(tester, rectangleColor);
       });          
       
-
       testWidgets("The correct title is present", 
       (WidgetTester tester) async 
       {
@@ -77,12 +71,32 @@ void main()
 
     });     
 
-  group("GPSChecklist overlay default aspect: \n", 
-    () 
-    { 
-      testWidgets("The correct appbar foreground color is present", 
-        /// "[foregroundColor], which specifies the color for icons and text within
-        ///  the app bar."
+    group("GPSChecklist overlay default aspect: \n", () { 
+        testWidgets("The correct appbar foreground color is present", 
+          /// "[foregroundColor], which specifies the color for icons and text within
+          ///  the app bar."
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpGPSChecklist(tester);
+            await tester.pumpAndSettle();
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedGPSStrings lgps = .new(context);      
+
+            // Tapping to open the overlay
+            var checklistTitleFinder = find.text(lgps.checkListTitle);
+            await tester.tap(checklistTitleFinder);
+            await tester.pumpAndSettle();  
+
+            // Verifying the color
+            var iconButtonsFinder = find.byType(IconButton);
+            var iconButtonWidget = tester.widget<IconButton>(iconButtonsFinder.last);            
+            expect(iconButtonWidget.color, appBarWhite);        
+          });          
+
+        testWidgets("The correct appbar title is present", 
         (WidgetTester tester) async 
         {
           // Pumping the widget
@@ -94,56 +108,32 @@ void main()
           LocalizedGPSStrings lgps = .new(context);      
 
           // Tapping to open the overlay
-          var checklistTitleFinder = find.text(lgps.checkListTitle);
-          await tester.tap(checklistTitleFinder);
+          var checkListTitleFinder = find.text(lgps.checkListTitle);
+          await tester.tap(checkListTitleFinder);
           await tester.pumpAndSettle();  
 
-          // Verifying the color
-          var iconButtonsFinder = find.byType(IconButton);
-          var iconButtonWidget = tester.widget<IconButton>(iconButtonsFinder.last);            
-          expect(iconButtonWidget.color, appBarWhite);        
-        });          
-
-      testWidgets("The correct appbar title is present", 
-      (WidgetTester tester) async 
-      {
-        // Pumping the widget
-        await pumpGPSChecklist(tester);
-        await tester.pumpAndSettle();
-
-        // Getting the localized strings
-        var context = tester.element(find.byType(Scaffold).first);
-        LocalizedGPSStrings lgps = .new(context);      
-
-        // Tapping to open the overlay
-        var checkListTitleFinder = find.text(lgps.checkListTitle);
-        await tester.tap(checkListTitleFinder);
-        await tester.pumpAndSettle();  
-
-        // checkListAppbarTitle hard-coded strings
-        var checkListAppbarTitle = "";
-        
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-     
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): { checkListAppbarTitle = "Please consider postponing\nif incomplete"; }
-          case("fr"): { checkListAppbarTitle = "Veuillez considérer reporter\nsi incomplet"; }        
-        }
-        if (testingDebug) pu.printd("Testing Debug: checkListAppbarTitle: $checkListAppbarTitle"); 
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(checkListAppbarTitle, lgps.checkListAppBarTitle);     
-
-        // Verifying the checkListAppbarTitle present
-        expect(find.text(lgps.checkListAppBarTitle), findsOneWidget);   
+          // checkListAppbarTitle hard-coded strings
+          var checkListAppbarTitle = "";
           
-      });  
-    }); 
+          var localeLanguageCode = getLocaleLanguageCode(tester);
+      
+          switch(localeLanguageCode.toLowerCase())
+          {
+            case("en"): { checkListAppbarTitle = "Please consider postponing\nif incomplete"; }
+            case("fr"): { checkListAppbarTitle = "Veuillez considérer reporter\nsi incomplet"; }        
+          }
+          if (testingDebug) pu.printd("Testing Debug: checkListAppbarTitle: $checkListAppbarTitle"); 
 
-    group("GPSChecklist overlay formatting: \n", 
-    () 
-    { 
+          // Verifying consistency between hard-coded string and localized string
+          expect(checkListAppbarTitle, lgps.checkListAppBarTitle);     
+
+          // Verifying the checkListAppbarTitle present
+          expect(find.text(lgps.checkListAppBarTitle), findsOneWidget);   
+            
+        });  
+      }); 
+
+    group("GPSChecklist overlay formatting: \n", () { 
       testWidgets("Default color for unchecked checkbox and text is white", 
       (WidgetTester tester) async 
       {
@@ -231,8 +221,7 @@ void main()
         var aCheckboxListTileWidget = tester.widget<CheckboxListTile>(checkboxListTilesFinder.first);
         expect(aCheckboxListTileWidget.tileColor, checkboxCheckedListTileColor);
 
-      });
-    
+      });  
     
     });     
     
