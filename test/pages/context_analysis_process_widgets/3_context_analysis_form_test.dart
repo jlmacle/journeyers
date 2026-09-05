@@ -74,12 +74,8 @@ void main()
   
   // ─── TESTS ───────────────────────────────────────
 
-  group("CAForm Tests: \n", 
-  () 
-  {  
-    group("Form: Structure: Root structure: \n",
-      ()
-      {
+  group("CAForm Tests: \n", () {  
+    group("Form: Structure: Root structure: \n", () {
         testWidgets("Two perspective expansion tiles are present",
           (tester) async
           {
@@ -209,9 +205,7 @@ void main()
       });
 
     // ─── INDIVIDUAL PERSPECTIVE ───────────────────────────────────────
-    group("Form: Structure: Individual perspective: \n",
-      ()
-      {
+    group("Form: Structure: Individual perspective: \n", () {
         testWidgets("Expanding the tile with the individual perspective reveals the four correct level-3 section questions",
           (tester) async
           {
@@ -662,9 +656,7 @@ void main()
     );    
 
     // ─── GROUP/TEAMS PERSPECTIVE ───────────────────────────────────────
-    group("Form: Structure: Group/Teams perspective: \n",
-      ()
-      {    
+    group("Form: Structure: Group/Teams perspective: \n", () {    
         testWidgets("Expanding the tile with the group/teams perspective reveals the five correct level-3 section questions",
           (tester) async
           {
@@ -790,9 +782,7 @@ void main()
       }
     ); 
 
-    group("Form: Start values: \n", 
-    () 
-    { 
+    group("Form: Start values: \n", () { 
         testWidgets("At start, when the tile with the individual perspective is unfolded, all checkboxes are unchecked", 
         (WidgetTester tester) async {
 
@@ -850,9 +840,7 @@ void main()
         ); 
     }); 
 
-    group("Formatting: Individual perspective", 
-    ()
-    {
+    group("Formatting: Individual perspective", () {
       testWidgets("The balance section question is underlined if and only if an item of the section, at least, is checked, without impact on the other sections", 
         (WidgetTester tester) async
         {
