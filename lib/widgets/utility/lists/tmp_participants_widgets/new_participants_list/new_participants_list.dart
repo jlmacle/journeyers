@@ -150,7 +150,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
-                  () => errorText = "${label}${lps.listAlreadySavedErrorEndPart}",
+                  () => errorText = "${label}${lps.listLabelAlreadyExistsErrorEndPart}",
                 );
                 return;
               }
