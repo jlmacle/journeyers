@@ -132,7 +132,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
                 final keys = checklistItems.keys.toList();
                 return 
                 ListView(
-                  key: const Key("checklist-process-scrollview"),
+                  key: const Key("gps-checklist-process-scrollview"),
                   children: keys.asMap().entries.map((entry) {
                     final int index = entry.key;
                     final String key = entry.value;
