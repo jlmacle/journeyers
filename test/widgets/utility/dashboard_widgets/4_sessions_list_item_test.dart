@@ -319,37 +319,6 @@ void main() {
     
     });
 
-    group("Edit Tests: \n", () 
-    { 
-      // testWidgets("Shows the placeholder message", (WidgetTester tester) async {
-      //   await tester.pumpWidget(
-      //     MaterialApp(
-      //       home: Scaffold(
-      //         body: SessionsListItem(
-      //           sessionMetadata: testMetadata,
-      //           index: 0,
-      //           isChecked: false,
-      //           dashboardContext: DashboardUtils.caContext, 
-      //           onCheckboxChangedCallbackFunction: (_) {},
-      //           onEditTitleCallbackFunction: () {},
-      //           onEditSessionCallbackFunction: () {},
-      //           onKeywordsUpdatedCallbackFunction: ({required String? filePath, required Set<String> updatedKeywords}) async {},
-      //           onDeleteCallbackFunction: () {},
-      //         ),
-      //       ),
-      //     ),
-      //   );
-
-      //   // Edit tooltip 
-      //   var editTooltipFinder = find.byTooltip(editTooltipLabel);
-      //   await tester.tap(editTooltipFinder);
-      //   await tester.pumpAndSettle();
-       
-      //   // Verifies placeholder message
-      //   expect(find.text(placeholderForEdit), findsOneWidget);
-      // });
-    });  
-  
     group("Keywords Tests: \n", () {
       testWidgets("Opens the keywords edition overlay by clicking on the icon", (WidgetTester tester) async {
         await tester.pumpWidget(
