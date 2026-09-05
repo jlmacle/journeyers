@@ -10,8 +10,7 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 
 import "../../../integration_test/externalized_code/externalized_testing_code.dart";
 
-void main() 
-{
+void main() {
   Future<void> pumpIdentifierWidget({
     required WidgetTester tester, 
     required isEditMode, 
@@ -38,15 +37,9 @@ void main()
       );
     }
 
-  group("GPSGroupMoods Tests: \n", 
-  () 
-  {
-    group("IdentifierWidget \n", 
-      () 
-      { 
-        group("IdentifierWidget: structure \n", 
-        () 
-        {  
+  group("GPSGroupMoods Tests: \n", () {
+    group("IdentifierWidget \n", () { 
+        group("IdentifierWidget: structure \n", () {  
           testWidgets("The edit emoji is present", 
           (WidgetTester tester) async 
           {
@@ -61,46 +54,41 @@ void main()
         
         });
 
+        group("IdentifierWidget: default aspect: \n", () { 
+          testWidgets("The default circle color is green", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
-        group("IdentifierWidget: default aspect: \n", 
-      () 
-      { 
-        testWidgets("The default circle color is green", 
-        (WidgetTester tester) async 
-        {
-          // Pumping the widget
-          await pumpIdentifierWidget(tester: tester, isEditMode: true);
+            // Verifying the color 
+            await gpsTestIdentifierColor(tester, find.byType(Container), green);
+          });          
+        
+          testWidgets("The delete icon is absent at addition of the identifier", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
-          // Verifying the color 
-          await gpsTestIdentifierColor(tester, find.byType(Container), green);
-        });          
+            // Searching the delete icon 
+            var deleteIconFinder = find.byType(Icon);
+
+            expect(deleteIconFinder, findsNothing);
+          });   
+
+          testWidgets("The delete icon is present in 'delete' mode", 
+          (WidgetTester tester) async 
+          {
+            // Pumping the widget
+            await pumpIdentifierWidget(tester: tester, isEditMode: false);
+
+            // Searching the delete icon 
+            var deleteIconFinder = find.byType(Icon);
+
+            expect(deleteIconFinder, findsOne);
+          }); 
       
-        testWidgets("The delete icon is absent at addition of the identifier", 
-        (WidgetTester tester) async 
-        {
-          // Pumping the widget
-          await pumpIdentifierWidget(tester: tester, isEditMode: true);
-
-          // Searching the delete icon 
-          var deleteIconFinder = find.byType(Icon);
-
-          expect(deleteIconFinder, findsNothing);
-        });   
-
-        testWidgets("The delete icon is present in 'delete' mode", 
-        (WidgetTester tester) async 
-        {
-          // Pumping the widget
-          await pumpIdentifierWidget(tester: tester, isEditMode: false);
-
-          // Searching the delete icon 
-          var deleteIconFinder = find.byType(Icon);
-
-          expect(deleteIconFinder, findsOne);
-        }); 
-    
-    
-
       });
       });
   });

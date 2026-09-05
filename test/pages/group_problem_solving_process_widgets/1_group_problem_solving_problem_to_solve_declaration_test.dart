@@ -17,8 +17,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
-void main() 
-{
+void main() {
     Future<void> pumpGPSProblemToSolveDeclaration(WidgetTester tester) async
     {
       var tfec = TextEditingController();
@@ -43,12 +42,8 @@ void main()
       );
     }
 
-    group("GPSProblemToSolveDeclaration Tests: \n", 
-    () 
-    {  
-      group("Default values: \n", 
-      () 
-      { 
+    group("GPSProblemToSolveDeclaration Tests: \n", () {  
+      group("Default values: \n", () { 
           testWidgets("Correct default title value", 
           (WidgetTester tester) async 
           {
@@ -127,10 +122,7 @@ void main()
           );
       });
         
-      group("Click toward text field: \n", 
-      () 
-      { 
-          // "Clicking on the title reveals a text field"
+      group("Click toward text field: \n", () { 
           testWidgets("Clicking on the title reveals a text field", 
           (WidgetTester tester) async 
           {
@@ -164,7 +156,6 @@ void main()
           }
           );
       
-          // "Clicking on the edit emoji reveals a text field"
           testWidgets("Clicking on the edit emoji reveals a text field", 
           (WidgetTester tester) async 
           {
@@ -187,9 +178,7 @@ void main()
           );      
       });
 
-      group("Display: \n", 
-      () 
-      { 
+      group("Display: \n", () { 
           testWidgets("Clicking on the title removes all other widgets", 
           (WidgetTester tester) async 
           {

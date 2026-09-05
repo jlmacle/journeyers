@@ -30,8 +30,7 @@ void main() {
       );
   }
 
-  group("CATitleDeclaration Widget Tests: \n", () 
-  {    
+  group("CATitleDeclaration Widget Tests: \n", () {    
     testWidgets("Should render the correct text field hint", 
     (WidgetTester tester) async 
     {
