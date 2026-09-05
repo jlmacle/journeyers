@@ -12,8 +12,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
-void main() 
-{
+void main() {
   Future<void> pumpGPSKeywordsDeclaration(WidgetTester tester) async
   {
     await tester.pumpWidget(
@@ -32,12 +31,8 @@ void main()
     );
   }
 
-  group("GPSKeywordsDeclaration Tests: \n", 
-  () 
-  {  
-    group("GPSKeywordsDeclaration default aspect: \n", 
-    () 
-    {
+  group("GPSKeywordsDeclaration Tests: \n", () {  
+    group("GPSKeywordsDeclaration default aspect: \n", () {
       testWidgets("The correct title is present", 
       (WidgetTester tester) async 
       {
@@ -109,7 +104,6 @@ void main()
         expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOne);        
       });          
     
-
       testWidgets("The correct text hint is present", 
       (WidgetTester tester) async 
       {
@@ -205,7 +199,6 @@ void main()
         expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOneWidget);   
           
       });          
-
      
     });
   });
