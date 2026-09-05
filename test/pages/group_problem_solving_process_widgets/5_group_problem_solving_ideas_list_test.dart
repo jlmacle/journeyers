@@ -11,8 +11,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
-void main() 
-{
+void main() {
   Future<void> pumpGPSIdeasList(WidgetTester tester) async
   {
     await tester.pumpWidget(
@@ -30,12 +29,8 @@ void main()
     );
   }
 
-  group("GPSIdeasList Tests: \n", 
-  () 
-  {  
-    group("GPSIdeasList default aspect: \n", 
-    () 
-    {
+  group("GPSIdeasList Tests: \n", () {  
+    group("GPSIdeasList default aspect: \n", () {
       testWidgets("The correct title is present", 
       (WidgetTester tester) async 
       {
@@ -96,9 +91,7 @@ void main()
       });    
     });
 
-    group("GPSIdeasList overlay default aspect: \n", 
-    () 
-    {
+    group("GPSIdeasList overlay default aspect: \n", () {
       testWidgets("The correct appbar title is present", 
       (WidgetTester tester) async 
       {
@@ -189,7 +182,6 @@ void main()
         // Verifying the newIdeaTextFieldHint present
         expect(find.text(lgps.newIdeaTextFieldHint), findsOne);        
       });    
-
 
     });
   });

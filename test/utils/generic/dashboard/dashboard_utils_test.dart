@@ -103,23 +103,6 @@ void main() {
       );
     });
 
-    // test("persists the date correctly", () async {
-    //   await sut!.saveDashboardMetadata(
-    //     typeOfDashboardContext: DashboardUtils.caContext,
-    //     title: aTitle,
-    //     keywords: keywords,
-    //     formattedDate: aDate,
-    //     filePath: aPath,
-    //   );
-
-    //   final file = await sut!.getSessionMetadataFile(
-    //     typeOfDashboardContext: DashboardUtils.caContext,
-    //   );
-    //   final records = _readRecords(file);
-
-    //   expect(records.first[DashboardUtils.keyDate], aDate);
-    // });
-
     test("persists the file path correctly", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,

@@ -3,11 +3,9 @@ import "package:test/test.dart";
 import "package:journeyers/utils/project_specific/dev/sort_utils.dart";
 
 /// The method assumes that all keys have the same length.
-void main()
-{
+void main() {
 
-  group("sort_utils", () 
-  {
+  group("sort_utils", () {
     test('["a3","a1","a2"]', 
     ()
     {
@@ -21,12 +19,11 @@ void main()
     });
 
 
-     test('["aabz3","afsf1","dfds2"]', 
-    ()
-    {
-      expect(getBiggestKey(["aabz3","afsf1","dfds2"]), "dfds2");
-    });
-
+    test('["aabz3","afsf1","dfds2"]', 
+  ()
+  {
+    expect(getBiggestKey(["aabz3","afsf1","dfds2"]), "dfds2");
+  });
 
   });
 }
