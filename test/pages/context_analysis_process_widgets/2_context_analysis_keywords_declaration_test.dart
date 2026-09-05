@@ -4,7 +4,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -43,7 +43,7 @@ void main()
        
       // Getting the localized strings
       var context = tester.element(find.byType(Scaffold).first);
-      LocalizedCAStrings lca = .new(context);
+      LocalizedDashboardStrings lds = .new(context);
       
       // Hint text hard-coded strings
       var hintText = "";
@@ -57,10 +57,10 @@ void main()
       if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
 
       // Verifying consistency between hard-coded string and localized string
-      expect(hintText, lca.caKeywordsTextFieldHint);     
+      expect(hintText, lds.keywordsEntryTextFieldHint);     
 
       // Verifying the text field hint present
-      expect(find.text(lca.caKeywordsTextFieldHint), findsOneWidget);
+      expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);
     }
     );    
 
