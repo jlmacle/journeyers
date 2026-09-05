@@ -10,10 +10,6 @@ class LocalizedCAStrings
   // ─── Title ───────────────────────────────────────
   var caTitleTextFieldHint = "";
 
-  // ─── Keywords ───────────────────────────────────────
-  var caKeywordsTextFieldHint = "";
-
-
   // ─── CA Form ───────────────────────────────────────
   var invitationToUnfoldExpansionTile = "";
 
@@ -43,9 +39,7 @@ class LocalizedCAStrings
     // ─── Title ───────────────────────────────────────
     caTitleTextFieldHint = _l10n?.ca_process_title_text_field_hint ?? "Issue with the context analysis title text field hint";
 
-    // ─── Keywords ───────────────────────────────────────
-    caKeywordsTextFieldHint = _l10n?.l10n_keywords_entry_text_field_hint ?? "Issue with the l10n for the keywords entry text field hint";
-
+   
     // ─── CA Form ───────────────────────────────────────
     invitationToUnfoldExpansionTile = _l10n?.ca_process_invitation_to_unfold_expansion_tile ?? "Issue with the l10n for 'Please click to unfold'";
   
