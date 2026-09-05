@@ -11,12 +11,8 @@ import "package:journeyers/pages/context_analysis/context_analysis_process.dart"
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 
-void main() 
-{
-    group("SessionFileNameOnDesktopPlatforms Tests: \n", 
-    () 
-    {      
-        // "The elevated button, for the file picker, is available to the user."
+void main() {
+    group("SessionFileNameOnDesktopPlatforms Tests: \n", () {      
         testWidgets("The elevated button, for the file picker, is available to the user.", 
         (WidgetTester tester) async 
         {
