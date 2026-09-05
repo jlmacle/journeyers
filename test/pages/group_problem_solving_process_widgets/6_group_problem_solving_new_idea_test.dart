@@ -10,8 +10,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
-void main() 
-{
+void main() {
   Future<void> pumpGPSNewIdea(WidgetTester tester) async
   {
     await tester.pumpWidget(
@@ -29,12 +28,8 @@ void main()
     );
   }
 
-  group("GPSNewIdea Tests: \n", 
-  () 
-  {  
-    group("GPSNewIdea default aspect: \n", 
-    () 
-    {      
+  group("GPSNewIdea Tests: \n", () {  
+    group("GPSNewIdea default aspect: \n", () {      
       testWidgets("The correct hint text is present", 
       (WidgetTester tester) async 
       {
