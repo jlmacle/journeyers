@@ -256,64 +256,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
   }
 
-  // Method used to determine if a checkbox text is underlined.
-  bool caIsCheckboxTextUnderlined
-  ({
-    required WidgetTester tester,
-    required textsFinder,
-    required int checkboxIndex
-  })
-  {
-    var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
-    if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
-    var decoration = indivTextWidget.style?.decoration;
-    if (testingDebug) pu.printd("______________ decoration: $decoration");
-    return(decoration == TextDecoration.underline);
-  }
-
-  // Method used to change a checkbox value. 
-  Future<void> caCheckboxChangeValue
-  ({
-    required WidgetTester tester,
-    required String checkboxText, 
-    bool scrollUpwards = false 
-  }) async
-  {
-    double delta = 45;
-    if(scrollUpwards) delta *= -1;
-    // Getting the scrollable
-    var firstScrollable =  find.descendant
-                (
-                  of: find.byKey(const Key("context-analysis-process-scrollview")), 
-                  matching: find.byType(Scrollable)
-                ).first;
-    
-    // Scrolling
-    // if (nextCheckboxText != null) checkboxText = nextCheckboxText;
-    var correctCACheckboxWithSanitizedAndPaddedTextField = find.ancestor
-    (
-      of: find.text(checkboxText),
-      matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)
-    );
-    var checkboxFinder = find.descendant
-    (
-      of: correctCACheckboxWithSanitizedAndPaddedTextField, 
-      matching: find.byType(Checkbox)
-    );
-   
-    await tester.scrollUntilVisible(checkboxFinder, scrollable: firstScrollable, delta);
-    // pumpAndSettle timed out
-    await tester.pump(const Duration(seconds: 2));    
-    // To avoid a missed tap
-    await tester.ensureVisible(checkboxFinder);
-    await tester.tap(checkboxFinder);
-    // pumpAndSettle timed out
-    await tester.pump();
-
-    return;
-  }
-
-
   // Method used to enter new CA process data
   // 7 values are necessary in checkboxValues
   // 4 values are necessary in segmentedButtonValues
@@ -556,7 +498,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }  
   }
 
-// ─── CA SCROLLING ───────────────────────────────────────────────────────────────
+// ─── CA FORM TESTING ───────────────────────────────────────────────────────────────
   // Method used to verify empty content in the custom checkboxes.
   Future<void> caCheckboxesVerifyEmptyContent
   ({
@@ -629,6 +571,65 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     expect(textField.controller!.text, "");    
   }
 
+  // Method used to determine if a checkbox text is underlined.
+  bool caIsCheckboxTextUnderlined
+  ({
+    required WidgetTester tester,
+    required textsFinder,
+    required int checkboxIndex
+  })
+  {
+    var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
+    if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
+    var decoration = indivTextWidget.style?.decoration;
+    if (testingDebug) pu.printd("______________ decoration: $decoration");
+    return(decoration == TextDecoration.underline);
+  }
+
+// ─── CA FORM MODIFYING ───────────────────────────────────────────────────────────────
+  // Method used to change a checkbox value. 
+  Future<void> caCheckboxChangeValue
+  ({
+    required WidgetTester tester,
+    required String checkboxText, 
+    bool scrollUpwards = false 
+  }) async
+  {
+    double delta = 45;
+    if(scrollUpwards) delta *= -1;
+    // Getting the scrollable
+    var firstScrollable =  find.descendant
+                (
+                  of: find.byKey(const Key("context-analysis-process-scrollview")), 
+                  matching: find.byType(Scrollable)
+                ).first;
+    
+    // Scrolling
+    // if (nextCheckboxText != null) checkboxText = nextCheckboxText;
+    var correctCACheckboxWithSanitizedAndPaddedTextField = find.ancestor
+    (
+      of: find.text(checkboxText),
+      matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)
+    );
+    var checkboxFinder = find.descendant
+    (
+      of: correctCACheckboxWithSanitizedAndPaddedTextField, 
+      matching: find.byType(Checkbox)
+    );
+   
+    await tester.scrollUntilVisible(checkboxFinder, scrollable: firstScrollable, delta);
+    // pumpAndSettle timed out
+    await tester.pump(const Duration(seconds: 2));    
+    // To avoid a missed tap
+    await tester.ensureVisible(checkboxFinder);
+    await tester.tap(checkboxFinder);
+    // pumpAndSettle timed out
+    await tester.pump();
+
+    return;
+  }
+
+
 // ─── GPS ──────────────────────────────────────────────────────────────
 // ──────────────────────────────────────────────────────────────────────────────
 
@@ -653,75 +654,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       findsOneWidget,
       reason: "GPSProcess should be visible after tapping NewProcessButton.",
     );
-  }
-
-  // Method used to test the color of an identifier
-  Future<void> gpsTestIdentifierColor(WidgetTester tester, Finder containerFinder, Color color) async
-  {
-    Container container = tester.widget<Container>(containerFinder);
-    var boxDecoration = container.decoration as BoxDecoration;
-    var border = boxDecoration.border as Border;
-
-    // Verifying the default circle color
-    expect(
-      border.top.color,
-      color,
-    );
-
-    expect(
-      border.bottom.color,
-      color,
-    );
-
-    expect(
-      border.right.color,
-      color,
-    );
-
-    expect(
-      border.left.color,
-      color,
-    );
-  }
-
-  // Method used to test the color of the checklist title border
-  Future<void> gpsTestChecklistTitleBorderColor(WidgetTester tester, Color color) async
-  {
-    // Searching the container
-    var containerFinder = find.descendant
-    (
-      of: find.byType(GPSChecklist), 
-      matching: find.byType(Container)
-    );
-
-    var totalContainers = containerFinder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: totalContainers: $totalContainers");
-
-    Container container = tester.widget<Container>(containerFinder);
-    var boxDecoration = container.decoration as BoxDecoration;
-    var border = boxDecoration.border as Border;
-
-    // Verifying the color
-    expect(
-      border.top.color,
-      color,
-    );
-
-    expect(
-      border.bottom.color,
-      color,
-    );
-
-    expect(
-      border.right.color,
-      color,
-    );
-
-    expect(
-      border.left.color,
-      color,
-    );
-    
   }
 
   // Method used to enter a title in the GPS process
@@ -849,6 +781,153 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       
   }
 
+  // Method used to add an idea using the overlay
+  Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async
+  {
+    // Searching the text field used to add ideas
+    var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayField"));
+    // Adding the idea
+    await tester.ensureVisible(newIdeaTextFieldFinder);
+    await tester.tap(newIdeaTextFieldFinder);
+    await tester.pumpAndSettle(); 
+    await tester.enterText(newIdeaTextFieldFinder, idea);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));  
+  }
+
+  Future<void> gpsFromProcessPageAddParticipantsAndKeywords
+(
+  WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
+) async
+{ 
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
+
+  // Loading the new list page from the GPS process page
+  await gpsFromProcessPageToNewParticipantsListPage(tester);
+
+  if (keywords.isNotEmpty)
+  {
+    // Searching for the keywords declaration title
+    var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
+    await tester.tap(keywordsTitleFinder);
+    await tester.pumpAndSettle();
+
+    // Searching for the new keyword text field
+    var newKeywordTextFieldFinder = find.byKey(const Key("kwsFieldNewList"));
+    await tester.ensureVisible(newKeywordTextFieldFinder); 
+    expect(newKeywordTextFieldFinder, findsOne);
+    await tester.pumpAndSettle(); 
+    await tester.tap(newKeywordTextFieldFinder);
+    await tester.pumpAndSettle();  
+
+    // Adding the keywords
+    for (var keyword in keywords)
+    {   
+      // Adding the keyword
+      await tester.enterText(newKeywordTextFieldFinder, keyword);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+      // Necessary for the next keyword to be added
+      await tester.tap(newKeywordTextFieldFinder);
+      await tester.pumpAndSettle();
+    }
+
+    // Closing the overlay
+    var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+    await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
+    await tester.pumpAndSettle();
+  }
+  
+  // Searching for the new participant text field
+  // Searching by placeholder text is not robust enough
+  var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
+  expect(newParticipantTextFieldFinder, findsOne);
+  await tester.ensureVisible(newParticipantTextFieldFinder); 
+  await tester.pumpAndSettle(); 
+  await tester.tap(newParticipantTextFieldFinder);
+  await tester.pumpAndSettle();
+
+  // Adding the names
+  for (var name in participantsNames)
+  {   
+    // Adding the name
+    await tester.enterText(newParticipantTextFieldFinder, name);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+    // Necessary for the next name to be added
+    await tester.tap(newParticipantTextFieldFinder);
+  }
+}
+
+  // Method used to add participants lists
+  // [
+  //   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
+  //   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
+  // ];
+  Future<void> gpsFromProcessPageAddParticipantsListsAndKeywordsAndVerifyListLoaded
+  ({
+    required WidgetTester tester, 
+    required List< Map<String,Map<String, dynamic>> > listDataMapsList
+  }) async
+  {
+    // Getting the localized strings
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedGPSStrings lgps = .new(context);
+
+    for (var map in listDataMapsList)
+    {
+      List<String> names = (map.values.first)["names"];
+      List<dynamic> keywords = (map.values.first)["keywords"];
+
+      await gpsFromProcessPageAddParticipantsAndKeywords(tester, names, keywords);
+
+      // Verifying the names present
+      for (var name in names)
+      {
+        expect(find.text(name), findsOne);    
+      }      
+
+      // Searching the "Save" icon
+      var saveListIconFinder = find.byIcon(Icons.save_outlined);
+      // await tester.pump(const Duration(seconds: 3));
+      expect(saveListIconFinder, findsOne);
+
+      // Tapping on it
+      await tester.tap(saveListIconFinder);
+      await tester.pumpAndSettle();
+
+      // Searching the text field to add the list name
+      var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
+      expect(listNameSavingTextFieldFinder, findsOne);
+
+      // Adding the list name
+      var listName = map.keys.first;
+      await tester.ensureVisible(listNameSavingTextFieldFinder);
+      await tester.tap(listNameSavingTextFieldFinder);
+      await tester.enterText(listNameSavingTextFieldFinder, listName);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Waiting on the "list saved" snackbar
+      await tester.pump(const Duration(seconds: 3));
+
+      // Verifying the names on the GPS process page
+
+      // Verifying the GPS process page present
+      expect(find.text(lgps.checkListTitle), findsOne);
+
+      // Verifying the names present
+      for (var name in names)
+      {
+        expect(find.text(name), findsOne);    
+      } 
+    }
+  }
+
   // Method used to enter new GPS process data
   Future<void> gpsEnterNewProcessDataOnMobile 
   ({
@@ -954,7 +1033,90 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
   }
 
+// ─── GPS PROCESS TESTING ───────────────────────────────────────────────────────────────
+ // Method used to test the color of an identifier
+  Future<void> gpsTestIdentifierColor(WidgetTester tester, Finder containerFinder, Color color) async
+  {
+    Container container = tester.widget<Container>(containerFinder);
+    var boxDecoration = container.decoration as BoxDecoration;
+    var border = boxDecoration.border as Border;
+
+    // Verifying the default circle color
+    expect(
+      border.top.color,
+      color,
+    );
+
+    expect(
+      border.bottom.color,
+      color,
+    );
+
+    expect(
+      border.right.color,
+      color,
+    );
+
+    expect(
+      border.left.color,
+      color,
+    );
+  }
+
+  // Method used to test the color of the checklist title border
+  Future<void> gpsTestChecklistTitleBorderColor(WidgetTester tester, Color color) async
+  {
+    // Searching the container
+    var containerFinder = find.descendant
+    (
+      of: find.byType(GPSChecklist), 
+      matching: find.byType(Container)
+    );
+
+    var totalContainers = containerFinder.evaluate().length;
+    if (testingDebug) pu.printd("Testing Debug: totalContainers: $totalContainers");
+
+    Container container = tester.widget<Container>(containerFinder);
+    var boxDecoration = container.decoration as BoxDecoration;
+    var border = boxDecoration.border as Border;
+
+    // Verifying the color
+    expect(
+      border.top.color,
+      color,
+    );
+
+    expect(
+      border.bottom.color,
+      color,
+    );
+
+    expect(
+      border.right.color,
+      color,
+    );
+
+    expect(
+      border.left.color,
+      color,
+    );
+    
+  }
+
 // ─── GPS: GOING FROM PAGE TO PAGE/OVERLAY ───────────────────────────────────────────────────────────────
+  // Method used to go from the home page to the GPS page
+  Future<void> gpsFromHomePageToGPSPage(WidgetTester tester) async
+  {
+    
+    // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+    // ────────────────────────────────────────────────────────────────────────────
+    var bottomItemGPSFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-gps"));
+    await tester.tap(bottomItemGPSFinder);
+    await tester.pumpAndSettle();
+
+    // Verifying the GPS page present
+    expect(find.byType(GPSPage), findsOne);
+  }
 
   // Method used to go from the home page to the GPS process page
   Future<void> gpsFromHomePageToProcessPage(WidgetTester tester) async
@@ -1114,157 +1276,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     expect(find.byKey(const Key("ideaOverlayField")), findsOne);
   }
 
-
-// ─── GPS: ADDING PARTICIPANTS ───────────────────────────────────────────────────────────────
-  // Method used to add participants
-  Future<void> gpsFromProcessPageAddParticipantsAndKeywords
-  (
-    WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
-  ) async
-  { 
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
-
-    // Loading the new list page from the GPS process page
-    await gpsFromProcessPageToNewParticipantsListPage(tester);
-
-    if (keywords.isNotEmpty)
-    {
-      // Searching for the keywords declaration title
-      var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
-      await tester.tap(keywordsTitleFinder);
-      await tester.pumpAndSettle();
-
-      // Searching for the new keyword text field
-      var newKeywordTextFieldFinder = find.byKey(const Key("kwsFieldNewList"));
-      await tester.ensureVisible(newKeywordTextFieldFinder); 
-      expect(newKeywordTextFieldFinder, findsOne);
-      await tester.pumpAndSettle(); 
-      await tester.tap(newKeywordTextFieldFinder);
-      await tester.pumpAndSettle();  
-
-      // Adding the keywords
-      for (var keyword in keywords)
-      {   
-        // Adding the keyword
-        await tester.enterText(newKeywordTextFieldFinder, keyword);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
-        // Necessary for the next keyword to be added
-        await tester.tap(newKeywordTextFieldFinder);
-        await tester.pumpAndSettle();
-      }
-
-      // Closing the overlay
-      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
-      await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
-      await tester.pumpAndSettle();
-    }
-    
-    // Searching for the new participant text field
-    // Searching by placeholder text is not robust enough
-    var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
-    expect(newParticipantTextFieldFinder, findsOne);
-    await tester.ensureVisible(newParticipantTextFieldFinder); 
-    await tester.pumpAndSettle(); 
-    await tester.tap(newParticipantTextFieldFinder);
-    await tester.pumpAndSettle();
-
-    // Adding the names
-    for (var name in participantsNames)
-    {   
-      // Adding the name
-      await tester.enterText(newParticipantTextFieldFinder, name);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-      // Necessary for the next name to be added
-      await tester.tap(newParticipantTextFieldFinder);
-    }
-  }
-
-  // Method used to add participants lists
-  // [
-  //   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
-  //   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
-  // ];
-  Future<void> gpsFromProcessPageAddParticipantsListsAndVerifyListLoaded
-  ({
-    required WidgetTester tester, 
-    required List< Map<String,Map<String, dynamic>> > listDataMapsList
-  }) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
-
-    for (var map in listDataMapsList)
-    {
-      List<String> names = (map.values.first)["names"];
-      List<dynamic> keywords = (map.values.first)["keywords"];
-
-      await gpsFromProcessPageAddParticipantsAndKeywords(tester, names, keywords);
-
-      // Verifying the names present
-      for (var name in names)
-      {
-        expect(find.text(name), findsOne);    
-      }      
-
-      // Searching the "Save" icon
-      var saveListIconFinder = find.byIcon(Icons.save_outlined);
-      // await tester.pump(const Duration(seconds: 3));
-      expect(saveListIconFinder, findsOne);
-
-      // Tapping on it
-      await tester.tap(saveListIconFinder);
-      await tester.pumpAndSettle();
-
-      // Searching the text field to add the list name
-      var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
-      expect(listNameSavingTextFieldFinder, findsOne);
-
-      // Adding the list name
-      var listName = map.keys.first;
-      await tester.ensureVisible(listNameSavingTextFieldFinder);
-      await tester.tap(listNameSavingTextFieldFinder);
-      await tester.enterText(listNameSavingTextFieldFinder, listName);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-
-      // Waiting on the "list saved" snackbar
-      await tester.pump(const Duration(seconds: 3));
-
-      // Verifying the names on the GPS process page
-
-      // Verifying the GPS process page present
-      expect(find.text(lgps.checkListTitle), findsOne);
-
-      // Verifying the names present
-      for (var name in names)
-      {
-        expect(find.text(name), findsOne);    
-      } 
-    }
-  }
-
-// ─── GPS: ADDING IDEAS ───────────────────────────────────────────────────────────────
-  // Method used to add an idea using the overlay
-  Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async
-  {
-    // Searching the text field used to add ideas
-    var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayField"));
-    // Adding the idea
-    await tester.ensureVisible(newIdeaTextFieldFinder);
-    await tester.tap(newIdeaTextFieldFinder);
-    await tester.pumpAndSettle(); 
-    await tester.enterText(newIdeaTextFieldFinder, idea);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));  
-  }
-
 // ─── GPS: MISC. ───────────────────────────────────────────────────────────────
   // Method used to get the finder of a new list text items
   Future<Finder> gpsGetNewListTextItems(WidgetTester tester) async
@@ -1299,7 +1310,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     return participantsContainersFinder;
   } 
 
-  
 
 // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
 
@@ -1339,7 +1349,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();  
   }  
-
 
   // Method used to search a title and keywords on the dashboard
   Future<void> dashboardSearchTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
