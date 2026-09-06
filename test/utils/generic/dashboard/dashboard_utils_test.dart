@@ -8,7 +8,7 @@ import "package:path_provider_platform_interface/path_provider_platform_interfac
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_testing_data.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
-import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 // ---------------------------------------------------------------------------
 // Helper funtion

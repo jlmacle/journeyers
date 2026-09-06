@@ -9,7 +9,7 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj;
