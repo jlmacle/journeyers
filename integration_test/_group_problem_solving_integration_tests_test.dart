@@ -3641,6 +3641,7 @@ Future<void> main() async {
           // Adding the idea
           await tester.enterText(newIdeaTextFieldFinder, "An idea");
           await tester.testTextInput.receiveAction(TextInputAction.done);
+          await tester.pump();
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
           await tester.pump(const Duration(seconds: 2));  
@@ -3648,7 +3649,7 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Tapping on the idea
-          var ideaFinder = find.byKey(const Key("idea-0"));
+          var ideaFinder = find.byKey(const Key("gps-process-idea-0"));
           await tester.tap(ideaFinder);
           await tester.pumpAndSettle();
 
@@ -3708,7 +3709,7 @@ Future<void> main() async {
           // ── OVERLAY  ───────────────────────────────────
           // ───────────────────────────────────────────────
           // Searching the idea
-          var ideaFinder = find.byKey(const Key("idea-0"));
+          var ideaFinder = find.byKey(const Key("gps-process-idea-0"));
           await tester.ensureVisible(ideaFinder);
           await tester.pumpAndSettle();   
           // Verifying the idea present
