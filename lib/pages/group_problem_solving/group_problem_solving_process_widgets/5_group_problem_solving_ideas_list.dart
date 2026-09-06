@@ -116,7 +116,7 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                 child: ListTile(
                   leading: const Icon(Icons.edit),
                   title: Text(
-                    key: Key("idea-$index"), // Use the index in the key
+                    key: Key("gps-process-idea-$index"), // Use the index in the key
                     idea,
                   ),
                 ),
@@ -197,10 +197,10 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                               itemBuilder: (_, index) 
                               {
                                 return 
-                                  
+                                   
                                     EditableDeletableTextListItem
                                     (
-                                      key: ValueKey(widget.ideas[index]),
+                                      key: Key("editable-deletable-idea-$index"),
                                       itemIndex: index, 
                                       itemText: widget.ideas[index], 
                                       onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
