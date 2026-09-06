@@ -1313,26 +1313,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
 // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
 
-  // Method used to enter edit mode
-  Future<void> dashboardEnterEditMode(WidgetTester tester) async
-  {
-    // Searching the edit button
-    var editButtonFinder = find.descendant
-                          (
-                            of: find.byType(ElevatedButton),
-                            matching: find.text(editEmoji)
-                          );
-    
-    var totalButton = editButtonFinder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: totalButton: $totalButton");
-
-    // Tapping the edit button
-    await tester.tap(editButtonFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
-  }
-
   // Method used to enter a file name and to submit the CA process data on mobile device
   // (Assuming an already selected path to the user session data folder)
   Future<void> dashboardEnterFileNameAndSubmitDataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
