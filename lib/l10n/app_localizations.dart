@@ -855,6 +855,12 @@ abstract class AppLocalizations {
   /// **'Please click to load'**
   String get text_lists_dashboard_list_loading_button_text;
 
+  /// l10n for 'Keyword'
+  ///
+  /// In en, this message translates to:
+  /// **'Keyword'**
+  String get l10n_keyword;
+
   /// l10n for 'Keywords'
   ///
   /// In en, this message translates to:
@@ -902,6 +908,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save Changes'**
   String get save_button_text;
+
+  /// l10n for the context analysis title root
+  ///
+  /// In en, this message translates to:
+  /// **'Context analysis title'**
+  String get testing_ca_title_root;
+
+  /// l10n for the group problem-solving title root
+  ///
+  /// In en, this message translates to:
+  /// **'Problem-solving title'**
+  String get testing_gps_title_root;
+
+  /// l10n for the 'Companionship' keyword
+  ///
+  /// In en, this message translates to:
+  /// **'Companionship'**
+  String get testing_kw_companionship;
+
+  /// l10n for the 'Idea 1'
+  ///
+  /// In en, this message translates to:
+  /// **'Idea 1'**
+  String get testing_idea_1;
+
+  /// l10n for 'file'
+  ///
+  /// In en, this message translates to:
+  /// **'file'**
+  String get testing_file_name_without_extension_root;
+
+  /// l10n for the edition suffix
+  ///
+  /// In en, this message translates to:
+  /// **'-edited'**
+  String get testing_edition_suffix;
 }
 
 class _AppLocalizationsDelegate
