@@ -18,7 +18,7 @@ void main()
     group("SessionFileNameOnMobilePlatforms Tests: \n", 
     () 
     {      
-        testWidgets("On mobile: The folder picker is available to the user, when the user didn't select of folder for its files yet.", 
+        testWidgets("On mobile: The button to call the folder picker is available to the user, when the user didn't select of folder for its files yet.", 
         (WidgetTester tester) async 
         {
 
