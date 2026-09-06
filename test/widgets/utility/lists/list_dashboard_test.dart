@@ -7,7 +7,7 @@ import "package:path_provider_platform_interface/path_provider_platform_interfac
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
-import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
 
 
