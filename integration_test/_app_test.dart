@@ -14,7 +14,7 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/homepage.dart";
-import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 import "externalized_code/externalized_testing_code.dart";
 
@@ -82,8 +82,7 @@ Future<void> main() async {
 
   // ── Test cases ─────────────────────────────────────────────────────────────
 
-  group("Application Tests: Mobile: \n", () 
-  {
+  group("Application Tests: Mobile: \n", () {
     testWidgets("CA + GPS: Session data entered in the context analysis "
                 "is available for the group problem-solving"
       " (assuming an already selected path to the user session data folder)",
@@ -244,5 +243,4 @@ Future<void> main() async {
     });
         
   });
-  
 }
