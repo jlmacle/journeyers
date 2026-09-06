@@ -480,6 +480,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Charger une liste';
 
   @override
+  String get l10n_keyword => 'Mots-clé';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -504,6 +507,24 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get save_button_text => 'Enregistrer les données';
+
+  @override
+  String get testing_ca_title_root => 'Titre d\'analyse de contexte';
+
+  @override
+  String get testing_gps_title_root => 'Titre de résolution de problème';
+
+  @override
+  String get testing_kw_companionship => 'Convivialité';
+
+  @override
+  String get testing_idea_1 => 'Idée 1';
+
+  @override
+  String get testing_file_name_without_extension_root => 'fichier';
+
+  @override
+  String get testing_edition_suffix => '-édité';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -982,6 +1003,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Charger une liste';
 
   @override
+  String get l10n_keyword => 'Mots-clé';
+
+  @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
@@ -1006,4 +1030,22 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get save_button_text => 'Enregistrer les données';
+
+  @override
+  String get testing_ca_title_root => 'Titre d\'analyse de contexte';
+
+  @override
+  String get testing_gps_title_root => 'Titre de résolution de problème';
+
+  @override
+  String get testing_kw_companionship => 'Convivialité';
+
+  @override
+  String get testing_idea_1 => 'Idée 1';
+
+  @override
+  String get testing_file_name_without_extension_root => 'fichier';
+
+  @override
+  String get testing_edition_suffix => '-édité';
 }
