@@ -470,6 +470,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to load';
 
   @override
+  String get l10n_keyword => 'Keyword';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -494,6 +497,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save_button_text => 'Save Changes';
+
+  @override
+  String get testing_ca_title_root => 'Context analysis title';
+
+  @override
+  String get testing_gps_title_root => 'Problem-solving title';
+
+  @override
+  String get testing_kw_companionship => 'Companionship';
+
+  @override
+  String get testing_idea_1 => 'Idea 1';
+
+  @override
+  String get testing_file_name_without_extension_root => 'file';
+
+  @override
+  String get testing_edition_suffix => '-edited';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -962,6 +983,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please click to load';
 
   @override
+  String get l10n_keyword => 'Keyword';
+
+  @override
   String get l10n_keywords => 'Keywords';
 
   @override
@@ -986,4 +1010,22 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get save_button_text => 'Save Changes';
+
+  @override
+  String get testing_ca_title_root => 'Context analysis title';
+
+  @override
+  String get testing_gps_title_root => 'Problem-solving title';
+
+  @override
+  String get testing_kw_companionship => 'Companionship';
+
+  @override
+  String get testing_idea_1 => 'Idea 1';
+
+  @override
+  String get testing_file_name_without_extension_root => 'file';
+
+  @override
+  String get testing_edition_suffix => '-edited';
 }

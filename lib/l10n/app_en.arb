@@ -272,7 +272,8 @@
   ,"text_lists_dashboard_list_loading_button_text": "Please click to load"
   ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n for the list loading button text"}
     
-
+  ,"l10n_keyword": "Keyword"
+  ,"@l10n_keyword": {"description": "l10n for 'Keyword'"}  
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
   ,"l10n_delete": "Delete"
@@ -295,4 +296,18 @@
 
   ,"save_button_text": "Save Changes"
   ,"@save_button_text": {"description": "l10n for the save_button text"}
+
+  ,"testing_ca_title_root": "Context analysis title"
+  ,"@testing_ca_title_root": {"description": "l10n for the context analysis title root"}
+  ,"testing_gps_title_root": "Problem-solving title"
+  ,"@testing_gps_title_root": {"description": "l10n for the group problem-solving title root"}
+  ,"testing_kw_companionship": "Companionship" 
+  ,"@testing_kw_companionship": {"description": "l10n for the 'Companionship' keyword"}
+  ,"testing_idea_1": "Idea 1" 
+  ,"@testing_idea_1": {"description": "l10n for the 'Idea 1'"}
+  ,"testing_file_name_without_extension_root": "file" 
+  ,"@testing_file_name_without_extension_root": {"description": "l10n for 'file'"}
+  ,"testing_edition_suffix": "-edited" 
+  ,"@testing_edition_suffix": {"description": "l10n for the edition suffix"}
+
 }

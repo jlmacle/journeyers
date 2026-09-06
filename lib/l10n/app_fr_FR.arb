@@ -270,6 +270,8 @@
     ,"@text_lists_dashboard_list_loading_button_text": {"description": "l10n pour le texte du bouton de chargement de liste"}
   
 
+    ,"l10n_keyword": "Mots-clé"
+    ,"@l10n_keyword": {"description": "l10n pour 'Mots-clé'"}    
     ,"l10n_keywords": "Mots-clés"
     ,"@l10n_keywords": {"description": "l10n pour 'Mots-clés'"}
     ,"l10n_delete": "Supprimer"
@@ -291,4 +293,17 @@
 
     ,"save_button_text": "Enregistrer les données"
     ,"@save_button_text": {"description": "l10n pour le texte du bouton de sauvegarde des données"}
+
+    ,"testing_ca_title_root": "Titre d'analyse de contexte"
+    ,"@testing_ca_title_root": {"description": "l10n pour la racine d'un titre d'analyse de contexte"}
+    ,"testing_gps_title_root": "Titre de résolution de problème"
+    ,"@testing_gps_title_root": {"description": "l10n pour la racine d'un titre de résolution de problème"}    
+    ,"testing_kw_companionship": "Convivialité" 
+    ,"@testing_kw_companionship": {"description": "l10n pour le mot-clé 'Convivialité'"}
+    ,"testing_idea_1": "Idée 1" 
+    ,"@testing_idea_1": {"description": "l10n pour l' 'Idée 1'"}
+    ,"testing_file_name_without_extension_root": "fichier" 
+    ,"@testing_file_name_without_extension_root": {"description": "l10n pour 'fichier'"}
+    ,"testing_edition_suffix": "-édité" 
+    ,"@testing_edition_suffix": {"description": "l10n pour l'édition de suffixe"}
 }
