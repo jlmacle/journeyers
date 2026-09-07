@@ -485,7 +485,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
             if(segButtonValue.isNotEmpty)
             {
               if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
-              var segButtonAnswersWithNotes = "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
+              var segButtonAnswersWithNotes = "${AppLocalizations.of(context)?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
                                             "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
               expect(listTileTitle, segButtonAnswersWithNotes);
             }
