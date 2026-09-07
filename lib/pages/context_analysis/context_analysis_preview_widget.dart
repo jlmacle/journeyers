@@ -622,12 +622,12 @@ class _CAPreviewState extends State<CAPreview>
                                     title: Text
                                     (
                                       item["text"] ?? ((item["notesTextField"] != null && item["notesTextField"] != "")
-                                      ? "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${item["notesTextField"]}"
+                                      ? "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${item["notesTextField"]}"
                                       : ""),
                                       style: styleExpandedTitleSubTitle                              
                                     ),
                                     subtitle: (item["notes"] != null)
-                                      ? Text("${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${item["notes"]}", style: styleExpandedTitleSubTitle)
+                                      ? Text("${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${item["notes"]}", style: styleExpandedTitleSubTitle)
                                       : null,
                                   ),
                               ],
@@ -673,10 +673,10 @@ class _CAPreviewState extends State<CAPreview>
                               ( 
                                 question["items"]["segValue"] == null
                                 ?
-                                "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                                "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
                                 :
                                 "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${question["items"]["segValue"] ?? ""}"
-                                "\n${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                                "\n${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
                               ),
                             ),
                           ],
