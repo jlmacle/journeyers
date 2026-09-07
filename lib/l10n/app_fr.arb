@@ -78,8 +78,8 @@
     ,"@ca_dashboard_title": {"description": "Le titre du tableau de bord"}
     ,"ca_preview_notes_introduction": "Notes: "
     ,"@ca_preview_notes_introduction": {"description": "l10n pour Notes:"}
-    ,"ca_preview_answers": "Réponse(s): "
-    ,"@ca_preview_answers": {"description": "l10n pour Réponse(s): "}
+    ,"ca_preview_answers_introduction": "Réponse(s): "
+    ,"@ca_preview_answers_introduction": {"description": "l10n pour Réponse(s): "}
     ,"ca_preview_no_data_stored": "Cases non cochées et pas de réponse dans le dernier champ de texte."
     ,"@ca_preview_no_data_stored": {"description": "l10n pour 'Cases non cochées et pas de réponse dans le dernier champ de texte.'"}
 
