@@ -78,8 +78,8 @@
   ,"@ca_dashboard_title": {"description": "The dashboard title"}   
   ,"ca_preview_notes_introduction": "Notes: "
   ,"@ca_preview_notes_introduction": {"description": "l10n for Notes:"}
-  ,"ca_preview_answers": "Answer(s): "
-  ,"@ca_preview_answers": {"description": "l10n for Answer(s): "}
+  ,"ca_preview_answers_introduction": "Answer(s): "
+  ,"@ca_preview_answers_introduction": {"description": "l10n for Answer(s): "}
   ,"ca_preview_no_data_stored": "No question checked and no data in the last text field."
   ,"@ca_preview_no_data_stored": {"description": "l10n for 'No question checked and no data in the last text field.'"}
   

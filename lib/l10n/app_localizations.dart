@@ -333,7 +333,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Answer(s): '**
-  String get ca_preview_answers;
+  String get ca_preview_answers_introduction;
 
   /// l10n for 'No question checked and no data in the last text field.'
   ///

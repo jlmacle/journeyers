@@ -157,7 +157,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_preview_notes_introduction => 'Notes: ';
 
   @override
-  String get ca_preview_answers => 'Answer(s): ';
+  String get ca_preview_answers_introduction => 'Answer(s): ';
 
   @override
   String get ca_preview_no_data_stored =>
@@ -670,7 +670,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get ca_preview_notes_introduction => 'Notes: ';
 
   @override
-  String get ca_preview_answers => 'Answer(s): ';
+  String get ca_preview_answers_introduction => 'Answer(s): ';
 
   @override
   String get ca_preview_no_data_stored =>
