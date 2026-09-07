@@ -215,6 +215,7 @@ class _HomePageState extends State<HomePage>
           [
             BottomNavigationBarItem
             (
+              key: const Key("homepage-bottom-navigation-bar-item-ca"),
               icon: const Icon(Icons.task_alt),
               label:AppLocalizations.of(context)?.app_bottom_bar_item_context_analysis ?? "Issue with the 'Context analysis' bottom bar item label",
             ),
