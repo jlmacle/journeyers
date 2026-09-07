@@ -4,6 +4,7 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 
@@ -105,6 +106,7 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
   Widget build(BuildContext context) {
     // Getting the localized strings
     LocalizedGPSStrings lgps = .new(context);
+    LocalizedUtilsStrings lus = .new(context);
 
     return GestureDetector(
       onTap: () => showAddToSetOverlay
@@ -114,9 +116,9 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration>
                       appBarForegroundColor: appBarWhite,
                       overlayTitle: lgps.gpsKeywordsOverlayAppbarTitle, 
                       overlayTitleStyle: problemSolvingKeywordsOverlayTitleStyle, 
-                      overlayCloseIconButtonToolTip: AppLocalizations.of(context)?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip",                 
+                      overlayCloseIconButtonToolTip: lus.keywordsOverlayCloseButtonTooltip,                 
                       overlayCloseIconButtonColor: appBarWhite,
-                      textEditingControllerKey: const Key("gpsKeywordsField"), 
+                      textEditingControllerKey: const Key("gpsKeywordsTextField"), 
                       textEditingController: _keywordsTec, 
                       textFieldStyle: analysisTextFieldStyle, 
                       textFieldHintText: AppLocalizations.of(context)?.l10n_keywords_entry_text_field_hint ?? "Issue with the l10n for the keywords entry text field hint.",                 
