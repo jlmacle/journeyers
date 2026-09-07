@@ -7,6 +7,9 @@ import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
+import "package:journeyers/l10n/localized_testing_strings.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
@@ -19,7 +22,7 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
-import "package:journeyers/utils/generic/dev/test_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
@@ -350,7 +353,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.tap(previewFinder);
     await tester.pumpAndSettle();
 
-    // await tester.pump(const Duration(seconds: 10));
+     await tester.pump(const Duration(seconds: 5));
 
     //Searching for the expansion tiles
     var  expansionTilesFinder = find.descendant
@@ -729,7 +732,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
 
     // Searching the tooltip to close the overlay
-    var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+    var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip).last;
 
     // Closing the overlay
     await tester.tap(closingIconFinder);
@@ -797,7 +800,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.pump(const Duration(seconds: 2));  
   }
 
-  Future<void> gpsFromProcessPageAddParticipantsAndKeywords
+  Future<void> gpsAddParticipantsAndKeywordsFromProcessPage
 (
   WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
 ) async
@@ -868,7 +871,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   //   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
   //   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
   // ];
-  Future<void> gpsFromProcessPageAddParticipantsListsAndKeywordsAndVerifyListLoaded
+  Future<void> gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage
   ({
     required WidgetTester tester, 
     required List< Map<String,Map<String, dynamic>> > listDataMapsList
@@ -883,7 +886,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       List<String> names = (map.values.first)["names"];
       List<dynamic> keywords = (map.values.first)["keywords"];
 
-      await gpsFromProcessPageAddParticipantsAndKeywords(tester, names, keywords);
+      await gpsAddParticipantsAndKeywordsFromProcessPage(tester, names, keywords);
 
       // Verifying the names present
       for (var name in names)
@@ -986,6 +989,136 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     }
   }
 
+  // ─── GPS DATA EDITION ───────────────────────────────────────────────────────────────
+
+  // Method used to enter new GPS process data
+  Future<void> gpsEditDataOnMobile 
+  ({
+    required WidgetTester tester, 
+    required String titleWithoutSuffix,
+    required List<String> kwsList,
+    required List<String> ideasList,
+    required String fileNameWithoutExtension
+  }) async
+  {
+    // Accessing the localized data
+    var context = tester.element(find.byType(Scaffold).first);
+    LocalizedDashboardStrings lds = .new(context);
+    LocalizedGPSStrings lgps = .new(context);
+    LocalizedTestingStrings lts = .new(context);
+    LocalizedUtilsStrings lus = .new(context);
+
+    // ── ENTERING EDIT MODE ───────────────────────────────────────────────────────────── 
+    // printTextData(tester);
+    // Clicking on the edit button
+    var sessionsListItemWithTitle = find.ancestor
+    (of: find.text("$titleWithoutSuffix${lgps.gpsTitleSuffix}"), matching: find.byType(SessionsListItem));
+    var editIconButton = find.descendant
+    (of: sessionsListItemWithTitle, 
+    matching: find.byTooltip(lds.editFromDashboardItemTooltipLabel));
+    await tester.tap(editIconButton);
+    await tester.pumpAndSettle();
+
+    // ── Verifying the keywords present ──────────
+    // ────────────────────────────────────────────
+      // Opening the keywords overlay
+    var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
+    await tester.tap(keywordsWidgetTitleFinder);
+    await tester.pumpAndSettle();
+      // Verifying the keywords present
+      for (var kw in kwsList)
+      {
+        expect(find.text(kw), findsOne);
+      }
+      // Closing the keywords overlay
+      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip).last;
+      await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
+      await tester.pumpAndSettle();
+
+    // ── Verifying the ideas present ─────────────
+    // ────────────────────────────────────────────
+    for (var idea in ideasList)
+    {
+      expect(find.textContaining(idea), findsNWidgets(1));
+    }            
+
+    // important for gpsTestPreview
+    // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+    dateForTestingIndex = 0;
+    // ── Editing data ────────────────────────────
+    // ────────────────────────────────────────────
+      // TITLE EDITION
+    var titleFinder = find.text(titleWithoutSuffix);
+    await tester.tap(titleFinder);
+    await tester.pumpAndSettle();
+      // searching the text field
+    titleFinder = find.byKey(const Key("problemToSolveField"));
+    await tester.enterText(titleFinder, "${titleWithoutSuffix}${lts.editionSuffix}");
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+
+      // KEYWORDS EDITION
+      // Opening the keywords overlay
+    keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
+    await tester.tap(keywordsWidgetTitleFinder);
+    await tester.pumpAndSettle();
+      // Modifying the keywords
+      for (var kw in kwsList)
+      {
+        // deleting the kw
+        var inputChipKw = find.ancestor(of: find.text(kw), matching: find.byType(InputChip));
+        var kwCloseIcon = find.descendant(of: inputChipKw, matching: find.byIcon(Icons.close));
+        await tester.tap(kwCloseIcon);
+        await tester.pumpAndSettle();
+
+        // entering edited keywords
+        var kwEdited = "$kw${lts.editionSuffix}";
+        var gpsKeywordsTextFieldFinder = find.byKey(const Key("gpsKeywordsTextField"));
+        await tester.enterText(gpsKeywordsTextFieldFinder, kwEdited);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pumpAndSettle();
+        
+      }
+      // closing the overlay
+      var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+      await tester.tap(closeOverlayFinder);
+      await tester.pumpAndSettle();
+
+      // IDEAS EDITION
+        // Clicking on an idea to access the list
+    await tester.tap(find.text(ideasList[0]));
+    await tester.pumpAndSettle();
+    // await tester.pump(const Duration(seconds: 5));
+        // Editing the ideas
+    for (var i = 0; i < ideasList.length; i ++)
+    {
+      // Clicking on the tile
+      await tester.tap(find.byKey(Key("editable-deletable-list-tile-$i")));
+      await tester.pumpAndSettle();
+
+      var key = "editable-deletable-tf-$i";
+      print("key: $key");
+      var tfIdea1Finder = find.byKey(Key(key)).first;
+      await tester.ensureVisible(tfIdea1Finder);
+      await tester.enterText(tfIdea1Finder, "${ideasList[i]}${lts.editionSuffix}");
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+    }  
+    // await tester.pump(const Duration(seconds: 2));
+    
+    // ── Closing the ideas list  ───────────────────────
+    // ───────────────────────────────────────────────────
+    var closeFinder = find.byIcon(Icons.close);  
+    await tester.tap(closeFinder);
+    await tester.pumpAndSettle();
+
+    // await tester.pump(const Duration(seconds: 2));
+
+    // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
+    // Entering the file name and submitting data
+    await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
+  }
+
 // ─── GPS PREVIEW ───────────────────────────────────────────────────────────────
   // Method used to test a GPS preview.
   Future<void> gpsTestPreview
@@ -1016,6 +1149,8 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // Opening the preview
     await tester.tap(previewTooltipFinder);
     await tester.pumpAndSettle();
+
+    await tester.pump(const Duration(seconds: 2)); 
 
     // Searching for the title
     var titleFinder = find.textContaining(title);
@@ -1118,6 +1253,21 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     expect(find.byType(GPSPage), findsOne);
   }
 
+  // Method used to go from the GPS page to the CA page
+  Future<void> gpsFromGPSPageToCAPage(WidgetTester tester) async
+  {
+    
+    // ── CLICKING TO DISPLAY THE CA PAGE  ──────────────────────────────────────
+    // ────────────────────────────────────────────────────────────────────────────
+    var bottomItemCAPageFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-ca"));
+    await tester.tap(bottomItemCAPageFinder);
+    await tester.pumpAndSettle();
+
+    // Verifying the CA page present
+    expect(find.byType(CAPage), findsOne);
+  }
+
+  
   // Method used to go from the home page to the GPS process page
   Future<void> gpsFromHomePageToProcessPage(WidgetTester tester) async
   {
