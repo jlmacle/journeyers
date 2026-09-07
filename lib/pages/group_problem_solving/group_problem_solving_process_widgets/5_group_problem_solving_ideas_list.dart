@@ -196,11 +196,12 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                               itemCount: widget.ideas.length,
                               itemBuilder: (_, index) 
                               {
+                                var key = "editable-deletable-idea-$index";
                                 return 
                                    
                                     EditableDeletableTextListItem
                                     (
-                                      key: Key("editable-deletable-idea-$index"),
+                                      key: Key(key),
                                       itemIndex: index, 
                                       itemText: widget.ideas[index], 
                                       onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
