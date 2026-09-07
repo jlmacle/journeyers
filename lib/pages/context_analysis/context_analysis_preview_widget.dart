@@ -675,7 +675,7 @@ class _CAPreviewState extends State<CAPreview>
                                 ?
                                 "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
                                 :
-                                "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${question["items"]["segValue"] ?? ""}"
+                                "${AppLocalizations.of(context)?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): "}${question["items"]["segValue"] ?? ""}"
                                 "\n${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
                               ),
                             ),
