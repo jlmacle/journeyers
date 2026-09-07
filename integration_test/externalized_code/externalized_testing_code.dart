@@ -8,7 +8,6 @@ import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
-import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
@@ -455,7 +454,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
           // For a text field only, the notes are in the title
           if (expansionTileTitle == qfl.level3TitleAnotherIssueForDataSaving  && listTileIndex == 1)
           {
-            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
+            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the subtitle, for the individual perspective
           else {
@@ -464,7 +463,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
             String listTileSubTitle = listTileSubTitleWidget.data!;
             if (testingDebug) pu.printd("Testing Debug: List tiles subtitle for $expansionTileTitle: $listTileSubTitle");
             
-            expect(listTileSubTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
+            expect(listTileSubTitle, "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
           }          
 
         }
@@ -476,7 +475,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
           if (expansionTileTitle == qfl.level3TitleGroupsProblematicsForDataSaving  && listTileIndex == 1)
           {
             if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
-            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}");
+            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}");
           }
           // Otherwise the notes are in the title with the segmented button answers
           else
@@ -487,13 +486,13 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
             {
               if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
               var segButtonAnswersWithNotes = "${AppLocalizations.of(context)?.ca_preview_answers ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
-                                            "${AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
+                                            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
               expect(listTileTitle, segButtonAnswersWithNotes);
             }
             else
             {
               if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
-              expect(listTileTitle,  AppLocalizations.of(context)?.ca_preview_notes ?? "Issue with the l10n for Notes:");
+              expect(listTileTitle,  AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:");
             }
           }             
         }
@@ -1006,7 +1005,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     LocalizedDashboardStrings lds = .new(context);
     LocalizedGPSStrings lgps = .new(context);
     LocalizedTestingStrings lts = .new(context);
-    LocalizedUtilsStrings lus = .new(context);
 
     // ── ENTERING EDIT MODE ───────────────────────────────────────────────────────────── 
     // printTextData(tester);
