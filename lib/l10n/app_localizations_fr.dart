@@ -155,7 +155,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get ca_dashboard_title => 'Analyses précédentes';
 
   @override
-  String get ca_preview_notes => 'Notes: ';
+  String get ca_preview_notes_introduction => 'Notes: ';
 
   @override
   String get ca_preview_answers => 'Réponse(s): ';
@@ -678,7 +678,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get ca_dashboard_title => 'Analyses précédentes';
 
   @override
-  String get ca_preview_notes => 'Notes: ';
+  String get ca_preview_notes_introduction => 'Notes: ';
 
   @override
   String get ca_preview_answers => 'Réponse(s): ';

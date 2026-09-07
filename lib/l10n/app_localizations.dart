@@ -327,7 +327,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Notes: '**
-  String get ca_preview_notes;
+  String get ca_preview_notes_introduction;
 
   /// l10n for Answer(s):
   ///
