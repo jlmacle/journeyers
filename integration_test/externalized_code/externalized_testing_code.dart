@@ -348,7 +348,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
     await tester.pump(const Duration(seconds: 2));
     // Opening the preview
-    var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false);
+    var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false).last;
     await tester.ensureVisible(previewFinder);
     await tester.tap(previewFinder);
     await tester.pumpAndSettle();
@@ -1119,8 +1119,23 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
   }
 
-// ─── GPS PREVIEW ───────────────────────────────────────────────────────────────
+// ─── GPS ADDED DATA TESTING ───────────────────────────────────────────────────────────────
   // Method used to test a GPS preview.
+  
+ Future<void> gpsTestKeywordsOnDashboardAndOnSession
+  ({
+    required BuildContext context,
+    required WidgetTester tester, 
+    required List<String> kwsList
+  }) async
+  {
+    for (var kw in kwsList)
+    {
+      // one as input chip, one as keyword
+      expect(find.textContaining(kw), findsNWidgets(2));
+    }
+  }
+  
   Future<void> gpsTestPreview
   ({
     required BuildContext context,
@@ -1166,6 +1181,10 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     {
       expect(find.text(idea), findsOne);
     }
+
+    // Closing the preview
+    await tester.tap(find.byTooltip(lds.previewClosingTooltipLabel));
+    await tester.pumpAndSettle();
   }
 
 // ─── GPS PROCESS TESTING ───────────────────────────────────────────────────────────────
@@ -1260,8 +1279,11 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // ── CLICKING TO DISPLAY THE CA PAGE  ──────────────────────────────────────
     // ────────────────────────────────────────────────────────────────────────────
     var bottomItemCAPageFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-ca"));
+    await tester.ensureVisible(bottomItemCAPageFinder);
     await tester.tap(bottomItemCAPageFinder);
     await tester.pumpAndSettle();
+
+    // await tester.pump(const Duration(seconds: 5));
 
     // Verifying the CA page present
     expect(find.byType(CAPage), findsOne);
