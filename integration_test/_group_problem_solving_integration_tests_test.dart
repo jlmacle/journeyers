@@ -1510,11 +1510,7 @@ Future<void> main() async {
               context: context,
               tester: tester, title: "${titleForEdition}${editionSuffix}", 
               ideasList: ["${ideasList2Ideas[0]}${editionSuffix}", idea3Added]
-            );
-              // ── Closing the GPS preview ──────────────────
-            var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
-            await tester.tap(previewClosingTooltipLabelFinder);
-            await tester.pumpAndSettle();
+            );            
 
             // ──  VERIFYING THE EDITED DATA ABSENT FROM A NEW PROCESS  ──────────────
             // ───────────────────────────────────────────────────────────────────────
