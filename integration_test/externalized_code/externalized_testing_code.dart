@@ -301,7 +301,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
   // Method used to add several times context analysis data
   // The method assumes all lists have the same number of elements
-  Future<void> caEnterSeveralTimesNewProcessData
+  Future<void> caEnterSeveralTimesNewProcessDataWithoutFormData
   ({
     required bool formToFill,
     required WidgetTester tester,
@@ -319,6 +319,42 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
         tester: tester, 
         title: titlesList[index],
         kwsList: kwsLists[index],              
+        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
+      );
+    }
+  }
+
+  // Method used to add several times context analysis data
+  // The method assumes all lists have the same number of elements
+  Future<void> caEnterSeveralTimesNewProcessData
+  ({
+    required bool formToFill,
+    required WidgetTester tester,
+    required List<String> titlesList,
+    required List<List<String>> kwsLists,
+    required List<bool> checkboxValues,
+    required List<String> checkboxTextFieldValues,
+    required String indivAnotherIssueStrValue,
+    required String groupProblemsToSolveStrValue,
+    required List<Set<String>> segmentedButtonValues,
+    required List<String> segmentedButtonTextFieldValues,
+    required List<String> fileNamesWithoutExtensionList
+  }) async
+  {
+    int listsLength = titlesList.length;
+    for (var index = 0; index < listsLength; index++)
+    {
+      await caEnterNewProcessDataOnMobile
+      (
+        tester: tester, 
+        title: titlesList[index],
+        kwsList: kwsLists[index],    
+        checkboxValues: checkboxValues,
+        checkboxTextFieldValues: checkboxTextFieldValues,
+        indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+        groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+        segmentedButtonValues: segmentedButtonValues,
+        segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
         fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
       );
     }

@@ -117,7 +117,7 @@ Future<void> main() async {
           var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${fileName1WithoutExtension}_${i}");
           
           // formToFill: false to skip the form filling
-          await caEnterSeveralTimesNewProcessData
+          await caEnterSeveralTimesNewProcessDataWithoutFormData
           (
             tester: tester, 
             formToFill: false,
