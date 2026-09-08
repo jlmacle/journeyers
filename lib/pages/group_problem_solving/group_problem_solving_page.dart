@@ -110,7 +110,7 @@ class GPSPageState extends State<GPSPage>
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: titleWhenEdition: $titleWhenEdition");
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: keywordsWhenEdition: $keywordsWhenEdition");
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: dtoGPSFormWhenEdition");
-      dtoGPSFormWhenEdition!.printToConsole();
+      if (editDebug) dtoGPSFormWhenEdition!.printToConsole();
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: fileNameWithoutExtensionWhenEdition: $fileNameWithoutExtensionWhenEdition");
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: filePathWhenEdition: $filePathWhenEdition");
     });

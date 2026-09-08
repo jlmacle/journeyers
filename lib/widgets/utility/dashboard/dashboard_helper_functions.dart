@@ -34,7 +34,6 @@ Future<void> retrieveCASessionData
 
     // Loading the data from the CSV into a DTO
     DTOCAForm dtoWhenEdition = DTOCAForm.fromCSV(context, csvContent);
-    dtoWhenEdition.printToConsole();
 
     Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();
 
@@ -78,7 +77,6 @@ Future<void> retrieveGPSSessionData
 
     // Loading the data from the TXT into a DTO
     DTOGPSForm dtoWhenEdition = await DTOGPSForm.fromTXT(txtContent);
-    dtoWhenEdition.printToConsole();
 
     Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();
 
