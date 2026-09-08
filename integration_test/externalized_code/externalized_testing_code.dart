@@ -366,6 +366,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   ({
     required BuildContext context,
     required WidgetTester tester, 
+    Finder? previewFinder,
     required String title,
     List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
     List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}, {}], 
@@ -374,6 +375,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   {
     // Accessing the localized form data
     LocalizedCAQuestionsFields? qfl = .new(context);
+    LocalizedDashboardStrings lds = .new(context);
 
     if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
@@ -383,12 +385,18 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
     await tester.pump(const Duration(seconds: 2));
     // Opening the preview
-    var previewFinder = find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false).last;
-    await tester.ensureVisible(previewFinder);
-    await tester.tap(previewFinder);
+    var previewFinderVal = previewFinder ?? find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false).last;
+        // Getting the scrollable
+    var scrollable =  find.descendant
+                (
+                  of: find.byKey(const Key("dashboard-scrollview")), 
+                  matching: find.byType(Scrollable)
+                ).first;
+    await tester.scrollUntilVisible(previewFinderVal, 45, scrollable: scrollable);
+    await tester.tap(previewFinderVal);
     await tester.pumpAndSettle();
 
-     await tester.pump(const Duration(seconds: 5));
+    await tester.pump(const Duration(seconds: 5));
 
     //Searching for the expansion tiles
     var  expansionTilesFinder = find.descendant
@@ -534,6 +542,11 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
         }
       }
     }  
+  
+    // Closing the preview
+    var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
+    await tester.tap(previewClosingTooltipLabelFinder);
+    await tester.pumpAndSettle();
   }
 
 // ─── CA FORM TESTING ───────────────────────────────────────────────────────────────
@@ -1131,7 +1144,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       await tester.pumpAndSettle();
 
       var key = "editable-deletable-tf-$i";
-      print("key: $key");
       var tfIdea1Finder = find.byKey(Key(key)).first;
       await tester.ensureVisible(tfIdea1Finder);
       await tester.enterText(tfIdea1Finder, "${ideasList[i]}${lts.editionSuffix}");

@@ -10,11 +10,14 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
+import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/homepage.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
+import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 
 import "externalized_code/externalized_testing_code.dart";
 
@@ -241,6 +244,170 @@ Future<void> main() async {
           // await tester.pump(const Duration(seconds: 2));
         }
     });
-        
+
+    group
+    ("Potential side effects", 
+    ()
+    {
+      testWidgets("Data entered and modified on the context analysis side doesn't impact "
+                  "data entered on the group problem-solving side  "
+                  "(assuming an already selected path to the user session data folder)",
+      (WidgetTester tester) async {
+
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues
+        ({
+          // Setting value for the first-run modal to be absent,
+          "wasFirstRunModalAcknowledged": true,
+          // to have the context analysis page, with the dashboard,
+          "wasCASessionDataSaved": true,
+          // and to have the group problem-solving page, with the dashboard.
+          "wasGPSSessionDataSaved": true,
+          // Temporary test dir as application folder path
+          "applicationFolderPath": testTmpDir!.path
+        });
+
+        if (Platform.isAndroid || Platform.isIOS)
+        {
+          // Pumping the app
+          await pumpApp(tester);
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedTestingStrings lts = .new(context);
+          LocalizedCAStrings lca = .new(context);
+
+          // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          var totalEntries = 2;
+          var titlesList = List.generate(totalEntries, (i)=> "${lts.caTitleRoot} ($i)");
+          var kwsLists = List.generate(totalEntries, (i)=> ["${lts.kw}-$i"]);
+
+          // Individual perspective testing values
+          // 7 values are necessary
+          List<bool> checkboxValues = List.filled(7, true);
+          // a1 to a7
+          List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
+          String indivAnotherIssueStrValue = "a8";        
+
+          // Group/teams perspective testing values
+          String groupProblemsToSolveStrValue = "b1";
+          // 4 values are necessary
+          List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+          // b2 to b5
+          List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+
+          var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${lts.fileNameWithoutExtensionRoot}_${i}");
+          
+          // formToFill: false to skip the form filling
+          await caEnterSeveralTimesNewProcessData
+          (
+            tester: tester, 
+            formToFill: false,
+            titlesList: titlesList,
+            kwsLists: kwsLists,            
+            checkboxValues: checkboxValues,
+            checkboxTextFieldValues: checkboxTextFieldValues,
+            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+            segmentedButtonValues: segmentedButtonValues,
+            segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+          );
+
+
+          // ── 2. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          // Reaching the GPS process page from the home page
+          await gpsFromHomePageToGPSPage
+          (tester);     
+
+          // Entering data
+          await gpsEnterNewProcessDataOnMobile
+          (
+            tester: tester, 
+            title: lts.gpsTitleRoot, 
+            kwsList: [lts.kwCompanionship], 
+            ideasList: [lts.idea1], 
+            fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot
+          );     
+
+          // ── 3. EDITING THE GPS PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          await gpsEditDataOnMobile (
+            tester: tester, 
+            titleWithoutSuffix: lts.gpsTitleRoot, 
+            kwsList: [lts.kwCompanionship], 
+            ideasList: [lts.idea1], 
+            fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot
+          );
+
+          await tester.pump(const Duration(seconds: 2));
+
+          // ── 4. TESTING THE EDITED GPS KEYWORDS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          await gpsTestKeywordsOnDashboardAndOnSession
+          (
+            context: context, 
+            tester: tester, 
+            kwsList: ["${lts.kwCompanionship}${lts.editionSuffix}"]
+          );
+
+          // ── 5. PREVIEWING AND TESTING THE GPS EDITED TITLE AND IDEA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          await gpsTestPreview
+          (
+            context: context, 
+            tester: tester, 
+            title: "${lts.gpsTitleRoot}${lts.editionSuffix}", 
+            ideasList: ["${lts.idea1}${lts.editionSuffix}"]
+          );     
+
+           await tester.pump(const Duration(seconds: 5)); 
+
+          // ── 6. VERIFYING THE CA DATA unchanged ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+            // Going to the CA Page
+          await gpsFromGPSPageToCAPage(tester);
+
+          List<String> individualStringValues = 
+          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          .where((string) => string.isNotEmpty)
+          .toList();
+
+          List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+
+            // Verifying the data
+          for (var i = 0; i < totalEntries; i++){
+
+            var sessionItemFinder = find.ancestor
+              (
+                of: find.textContaining(titlesList[i]), 
+                matching: find.byType(SessionsListItem)
+              );
+
+
+            var previewFinder = find.descendant
+            (
+              of: sessionItemFinder,
+              matching: find.byIcon(Icons.find_in_page_rounded)
+            );
+
+            await caTestPreview
+            (
+              context: context, 
+              tester: tester, 
+              previewFinder: previewFinder,
+              title: titlesList[i],
+              individualStringValues: individualStringValues,
+              groupStringValues: groupStringValues,
+              segmentedButtonValues: segmentedButtonValues              
+            );
+          }
+
+          // await tester.pump(const Duration(seconds: 2));
+        }
+      });  
+    });
+     
   });
 }

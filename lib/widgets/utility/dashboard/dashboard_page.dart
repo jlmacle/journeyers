@@ -348,6 +348,7 @@ class DashboardPageState extends State<DashboardPage>
       body: _isDataLoading
           ? const Center(child: CircularProgressIndicator())
           : CustomScrollView(
+              key: const Key("dashboard-scrollview"),
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
                 // Static heading (Scrolls away normally)
