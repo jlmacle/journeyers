@@ -518,7 +518,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get testing_kw_companionship => 'Convivialité';
 
   @override
-  String get testing_idea_1 => 'Idée 1';
+  String get testing_idea => 'Idée';
 
   @override
   String get testing_file_name_without_extension_root => 'fichier';
@@ -1041,7 +1041,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get testing_kw_companionship => 'Convivialité';
 
   @override
-  String get testing_idea_1 => 'Idée 1';
+  String get testing_idea => 'Idée';
 
   @override
   String get testing_file_name_without_extension_root => 'fichier';
