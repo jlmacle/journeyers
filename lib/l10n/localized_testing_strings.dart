@@ -15,7 +15,7 @@ class LocalizedTestingStrings
   var kwCompanionship = "";
 
   // ideas
-  var idea1 = "";
+  var idea = "";
 
   // file name
   var fileNameWithoutExtensionRoot = "";
@@ -36,7 +36,7 @@ class LocalizedTestingStrings
     kwCompanionship = _l10n?.testing_kw_companionship ?? "Issue with the l10n for the 'Companionship' keyword";
     
     // ideas
-    idea1 = _l10n?.testing_idea_1 ?? "Issue with the l10n for the 'Idea 1'";
+    idea = _l10n?.testing_idea ?? "Issue with the l10n for the 'Idea 1'";
     
     // file name
     fileNameWithoutExtensionRoot = _l10n?.testing_file_name_without_extension_root ?? "Issue with the l10n for 'file'";
