@@ -927,11 +927,11 @@ abstract class AppLocalizations {
   /// **'Companionship'**
   String get testing_kw_companionship;
 
-  /// l10n for the 'Idea 1'
+  /// l10n for the 'Idea'
   ///
   /// In en, this message translates to:
-  /// **'Idea 1'**
-  String get testing_idea_1;
+  /// **'Idea'**
+  String get testing_idea;
 
   /// l10n for 'file'
   ///
