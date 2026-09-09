@@ -304,8 +304,8 @@
   ,"@testing_gps_title_root": {"description": "l10n for the group problem-solving title root"}
   ,"testing_kw_companionship": "Companionship" 
   ,"@testing_kw_companionship": {"description": "l10n for the 'Companionship' keyword"}
-  ,"testing_idea_1": "Idea 1" 
-  ,"@testing_idea_1": {"description": "l10n for the 'Idea 1'"}
+  ,"testing_idea": "Idea" 
+  ,"@testing_idea": {"description": "l10n for the 'Idea'"}
   ,"testing_file_name_without_extension_root": "file" 
   ,"@testing_file_name_without_extension_root": {"description": "l10n for 'file'"}
   ,"testing_edition_suffix": "-edited" 
