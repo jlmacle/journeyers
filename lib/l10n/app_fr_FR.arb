@@ -300,8 +300,8 @@
     ,"@testing_gps_title_root": {"description": "l10n pour la racine d'un titre de résolution de problème"}    
     ,"testing_kw_companionship": "Convivialité" 
     ,"@testing_kw_companionship": {"description": "l10n pour le mot-clé 'Convivialité'"}
-    ,"testing_idea_1": "Idée 1" 
-    ,"@testing_idea_1": {"description": "l10n pour l' 'Idée 1'"}
+    ,"testing_idea": "Idée" 
+    ,"@testing_idea": {"description": "l10n pour l' 'Idée'"}
     ,"testing_file_name_without_extension_root": "fichier" 
     ,"@testing_file_name_without_extension_root": {"description": "l10n pour 'fichier'"}
     ,"testing_edition_suffix": "-édité" 
