@@ -278,8 +278,8 @@
   ,"@l10n_delete": {"description": "l10n for 'Delete'"}
   ,"l10n_done": "Done"
   ,"@l10n_done": {"description": "l10n for 'Done'"}
-  ,"testing_idea": "Idea" 
-  ,"@testing_idea": {"description": "l10n for 'Idea'"}
+  ,"l10n_idea": "Idea" 
+  ,"@l10n_idea": {"description": "l10n for 'Idea'"}
   ,"l10n_keyword": "Keyword"
   ,"@l10n_keyword": {"description": "l10n for 'Keyword'"}  
   ,"l10n_keywords": "Keywords"
@@ -306,8 +306,8 @@
   ,"@testing_gps_title_root": {"description": "l10n for the group problem-solving title root"}
   ,"testing_kw_companionship": "Companionship" 
   ,"@testing_kw_companionship": {"description": "l10n for the 'Companionship' keyword"}
-  ,"testing_file_name_without_extension_root": "file" 
-  ,"@testing_file_name_without_extension_root": {"description": "l10n for 'file'"}
+  ,"testing_file_name_without_extension_root": "File" 
+  ,"@testing_file_name_without_extension_root": {"description": "l10n for 'File'"}
   ,"testing_edition_suffix": "-edited" 
   ,"@testing_edition_suffix": {"description": "l10n for the edition suffix"}
 

@@ -277,8 +277,8 @@
     ,"@l10n_save": {"description": "l10n pour 'Enregistrer'"}
     ,"l10n_done": "Fait"
     ,"@l10n_done": {"description": "l10n pour 'Fait'"}
-    ,"testing_idea": "Idée" 
-    ,"@testing_idea": {"description": "l10n pour 'Idée'"}
+    ,"l10n_idea": "Idée" 
+    ,"@l10n_idea": {"description": "l10n pour 'Idée'"}
     ,"l10n_keyword": "Mots-clé"
     ,"@l10n_keyword": {"description": "l10n pour 'Mots-clé'"}
     ,"l10n_keywords": "Mots-clés"
@@ -307,8 +307,8 @@
     ,"@testing_gps_title_root": {"description": "l10n pour la racine d'un titre de résolution de problème"}
     ,"testing_kw_companionship": "Convivialité" 
     ,"@testing_kw_companionship": {"description": "l10n pour le mot-clé 'Convivialité'"}
-    ,"testing_file_name_without_extension_root": "fichier" 
-    ,"@testing_file_name_without_extension_root": {"description": "l10n pour 'fichier'"}
+    ,"testing_file_name_without_extension_root": "Fichier" 
+    ,"@testing_file_name_without_extension_root": {"description": "l10n pour 'Fichier'"}
     ,"testing_edition_suffix": "-édité" 
     ,"@testing_edition_suffix": {"description": "l10n pour l'édition de suffixe"}
 
