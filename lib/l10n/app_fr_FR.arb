@@ -303,8 +303,8 @@
     ,"@testing_gps_title_root": {"description": "l10n pour la racine d'un titre de résolution de problème"}    
     ,"testing_kw_companionship": "Convivialité" 
     ,"@testing_kw_companionship": {"description": "l10n pour le mot-clé 'Convivialité'"}
-    ,"testing_file_name_without_extension_root": "fichier" 
-    ,"@testing_file_name_without_extension_root": {"description": "l10n pour 'fichier'"}
+    ,"testing_file_name_without_extension_root": "Fichier" 
+    ,"@testing_file_name_without_extension_root": {"description": "l10n pour 'Fichier'"}
     ,"testing_edition_suffix": "-édité" 
     ,"@testing_edition_suffix": {"description": "l10n pour l'édition de suffixe"}
 }
