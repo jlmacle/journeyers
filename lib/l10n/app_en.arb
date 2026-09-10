@@ -284,7 +284,8 @@
   ,"@l10n_save": {"description": "l10n for 'Save'"}
   ,"l10n_done": "Done"
   ,"@l10n_done": {"description": "l10n for 'Done'"}
-  
+  ,"testing_idea": "Idea" 
+  ,"@testing_idea": {"description": "l10n for the 'Idea'"}
   
 
   ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time\n(+ Enter key)."
@@ -303,8 +304,6 @@
   ,"@testing_gps_title_root": {"description": "l10n for the group problem-solving title root"}
   ,"testing_kw_companionship": "Companionship" 
   ,"@testing_kw_companionship": {"description": "l10n for the 'Companionship' keyword"}
-  ,"testing_idea": "Idea" 
-  ,"@testing_idea": {"description": "l10n for the 'Idea'"}
   ,"testing_file_name_without_extension_root": "file" 
   ,"@testing_file_name_without_extension_root": {"description": "l10n for 'file'"}
   ,"testing_edition_suffix": "-edited" 
