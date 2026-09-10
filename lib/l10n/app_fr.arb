@@ -277,8 +277,8 @@
     ,"@l10n_save": {"description": "l10n pour 'Enregistrer'"}
     ,"l10n_done": "Fait"
     ,"@l10n_done": {"description": "l10n pour 'Fait'"}
-    ,"testing_idea": "Idée" 
-    ,"@testing_idea": {"description": "l10n pour 'Idée'"}
+    ,"l10n_idea": "Idée" 
+    ,"@l10n_idea": {"description": "l10n pour 'Idée'"}
     ,"l10n_keyword": "Mots-clé"
     ,"@l10n_keyword": {"description": "l10n pour 'Mots-clé'"}
     ,"l10n_keywords": "Mots-clés"
