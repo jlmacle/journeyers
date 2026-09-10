@@ -285,7 +285,7 @@
     ,"l10n_done": "Fait"
     ,"@l10n_done": {"description": "l10n pour 'Fait'"}
     ,"testing_idea": "Idée" 
-    ,"@testing_idea": {"description": "l10n pour l' 'Idée'"}
+    ,"@testing_idea": {"description": "l10n pour 'Idée'"}
   
 
     ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."
