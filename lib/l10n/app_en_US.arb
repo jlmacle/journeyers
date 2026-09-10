@@ -278,8 +278,8 @@
   ,"@l10n_delete": {"description": "l10n for 'Delete'"}
   ,"l10n_done": "Done"
   ,"@l10n_done": {"description": "l10n for 'Done'"}
-  ,"testing_idea": "Idea" 
-  ,"@testing_idea": {"description": "l10n for 'Idea'"}
+  ,"l10n_idea": "Idea" 
+  ,"@l10n_idea": {"description": "l10n for 'Idea'"}
   ,"l10n_keyword": "Keyword"
   ,"@l10n_keyword": {"description": "l10n for 'Keyword'"}  
   ,"l10n_keywords": "Keywords"
