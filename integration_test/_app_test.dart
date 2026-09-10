@@ -327,7 +327,7 @@ Future<void> main() async {
             tester: tester, 
             title: lts.gpsTitleRoot, 
             kwsList: [lts.kwCompanionship], 
-            ideasList: [lts.idea1], 
+            ideasList: [lts.idea], 
             fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot
           );     
 
@@ -337,7 +337,7 @@ Future<void> main() async {
             tester: tester, 
             titleWithoutSuffix: lts.gpsTitleRoot, 
             kwsList: [lts.kwCompanionship], 
-            ideasList: [lts.idea1], 
+            ideasList: [lts.idea], 
             fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot
           );
 
@@ -359,7 +359,7 @@ Future<void> main() async {
             context: context, 
             tester: tester, 
             title: "${lts.gpsTitleRoot}${lts.editionSuffix}", 
-            ideasList: ["${lts.idea1}${lts.editionSuffix}"]
+            ideasList: ["${lts.idea}${lts.editionSuffix}"]
           );     
 
            await tester.pump(const Duration(seconds: 5)); 
