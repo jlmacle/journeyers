@@ -36,10 +36,10 @@ class LocalizedTestingStrings
     kwCompanionship = _l10n?.testing_kw_companionship ?? "Issue with the l10n for the 'Companionship' keyword";
     
     // ideas
-    idea = _l10n?.testing_idea ?? "Issue with the l10n for the 'Idea 1'";
+    idea = _l10n?.l10n_idea ?? "Issue with the l10n for the 'Idea 1'";
     
     // file name
-    fileNameWithoutExtensionRoot = _l10n?.testing_file_name_without_extension_root ?? "Issue with the l10n for 'file'";
+    fileNameWithoutExtensionRoot = _l10n?.l10n_file ?? "Issue with the l10n for 'file'";
     
     // edition
     editionSuffix = _l10n?.testing_edition_suffix ?? "Issue with the l10n for the edition suffix";
