@@ -8,7 +8,7 @@ built with Flutter, therefore multi-platform (Android, iPhone, Linux, macOS, Win
 and with a goal of being multilingual, accessible, and offline-friendly, <br>
 is meant to illustrate supporting our group problem-solving processes.<br>
 
-English/French localization is illustrated.<br>
+English/French localization is implemented.<br>
 Additional effort needs to be done for the accessibility.<br>
 Issues might remain with some features.<br>
 Please note that the code needs cleaning.<br>
