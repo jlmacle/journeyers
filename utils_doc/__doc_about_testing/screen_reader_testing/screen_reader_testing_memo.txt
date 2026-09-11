@@ -62,6 +62,7 @@ https://support.apple.com/guide/voiceover/general-commands-cpvokys01/mac
 
 Testing with TalkBack:
 Down then right swipe/Up and right swipe: to open the TalkBack menu 
+2-finger tap: to pause or resume speech
 Up then left: to go to the home screen
 2-finger swipe up or down: to scroll up or down	
 2-finger swipe left or right: scroll left or right
