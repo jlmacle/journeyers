@@ -931,13 +931,13 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Idea'**
-  String get testing_idea;
+  String get l10n_idea;
 
   /// l10n for 'file'
   ///
   /// In en, this message translates to:
   /// **'file'**
-  String get testing_file_name_without_extension_root;
+  String get l10n_file;
 
   /// l10n for the edition suffix
   ///
