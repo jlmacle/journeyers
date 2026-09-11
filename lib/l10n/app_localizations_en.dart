@@ -508,10 +508,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get testing_kw_companionship => 'Companionship';
 
   @override
-  String get testing_idea => 'Idea';
+  String get l10n_idea => 'Idea';
 
   @override
-  String get testing_file_name_without_extension_root => 'file';
+  String get l10n_file => 'file';
 
   @override
   String get testing_edition_suffix => '-edited';
@@ -1021,10 +1021,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get testing_kw_companionship => 'Companionship';
 
   @override
-  String get testing_idea => 'Idea';
+  String get l10n_idea => 'Idea';
 
   @override
-  String get testing_file_name_without_extension_root => 'file';
+  String get l10n_file => 'file';
 
   @override
   String get testing_edition_suffix => '-edited';
