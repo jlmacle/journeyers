@@ -45,7 +45,7 @@ De plus, il s'agit d'un logiciel gratuit et libre, <a href="https://github.com/j
 <br>
 <a href="https://github.com/jlmacle/journeyers/wiki">Plus de notes sur le wiki.</a><br>
 <br>
-<a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">Analyse contextuelle : vidéo de preview.</a><br>
+<a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">Analyse de contexte : vidéo de preview.</a><br>
 <a href="https://github.com/jlmacle/journeyers_releases/blob/main/video-Group_problem-solving.mp4">Résolution de problèmes en groupe : vidéo de preview.</a><br>
 
 <br>
