@@ -40,7 +40,7 @@ Des problèmes pourraient subsister avec certaines fonctionnalités.<br>
 Veuillez noter que le code nécessite d'être nettoyé.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - version alpha</a>)<br>
 <br>
-Il est possible d'adapter le logiciel à un ensemble différent de questions, et cela est prévu.<br>
+Il est possible d'adapter le logiciel à un ensemble différent de questions, et il est prévu de rendre cela plus facile.<br>
 De plus, il s'agit d'un logiciel gratuit et libre, <a href="https://github.com/jlmacle/journeyers/blob/main/LICENSE">dans le domaine public</a>.<br>
 <br>
 <a href="https://github.com/jlmacle/journeyers/wiki">Plus de notes sur le wiki.</a><br>
