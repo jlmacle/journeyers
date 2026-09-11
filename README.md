@@ -3,9 +3,9 @@
 Most of our lives are spent in teams: household, school, workplace, . . . <br>
 Our quality of life depends on our ability to group problem-solve toward lasting solutions.<br>
 <br>
-This open source ed tech and assistive technology, proof-of-concept project <br>
-(built with Flutter, therefore multi-platform [Android, iPhone, Linux, macOS, Windows], <br>
-and with a goal of being multilingual, accessible, and offline-friendly), <br>
+This open source ed tech and assistive technology, proof-of-concept project, <br>
+built with Flutter, therefore multi-platform (Android, iPhone, Linux, macOS, Windows), <br>
+and with a goal of being multilingual, accessible, and offline-friendly, <br>
 is meant to illustrate supporting our group problem-solving processes.<br>
 
 English/French localization is illustrated.<br>
@@ -30,8 +30,8 @@ La majeure partie de notre vie est passée en équipe : à la maison, à l'écol
 Notre qualité de vie dépend de notre capacité à résoudre collectivement des problèmes en vue de trouver des solutions durables.<br>
 <br>
 Ce projet de technologie éducative (ed tech) et de technologie d'assistance en code source ouvert (open source), <br>
-une preuve de concept (construit avec Flutter, donc multi-plateforme [Android, iPhone, Linux, macOS, Windows], <br>
-et avec pour objectif d'être multilingue, accessible et fonctionnant hors ligne), <br>
+preuve de concept, construit avec Flutter, donc multi-plateforme (Android, iPhone, Linux, macOS, Windows), <br>
+et avec pour objectif d'être multilingue, accessible et fonctionnant hors ligne, <br>
 illustre un processus potentiel de résolution de problèmes en groupe.<br>
 <br>
 La localisation anglais/français est implémentée.<br>
