@@ -855,6 +855,36 @@ abstract class AppLocalizations {
   /// **'Please click to load'**
   String get text_lists_dashboard_list_loading_button_text;
 
+  /// l10n for 'Cancel'
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get l10n_cancel;
+
+  /// l10n for 'Delete'
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get l10n_delete;
+
+  /// l10n for 'Done'
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get l10n_done;
+
+  /// l10n for 'File'
+  ///
+  /// In en, this message translates to:
+  /// **'File'**
+  String get l10n_file;
+
+  /// l10n for 'Idea'
+  ///
+  /// In en, this message translates to:
+  /// **'Idea'**
+  String get l10n_idea;
+
   /// l10n for 'Keyword'
   ///
   /// In en, this message translates to:
@@ -867,29 +897,11 @@ abstract class AppLocalizations {
   /// **'Keywords'**
   String get l10n_keywords;
 
-  /// l10n for 'Delete'
-  ///
-  /// In en, this message translates to:
-  /// **'Delete'**
-  String get l10n_delete;
-
-  /// l10n for 'Cancel'
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get l10n_cancel;
-
   /// l10n for 'Save'
   ///
   /// In en, this message translates to:
   /// **'Save'**
   String get l10n_save;
-
-  /// l10n for 'Done'
-  ///
-  /// In en, this message translates to:
-  /// **'Done'**
-  String get l10n_done;
 
   /// l10n for the keywords entry text field hint
   ///
@@ -926,18 +938,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Companionship'**
   String get testing_kw_companionship;
-
-  /// l10n for the 'Idea'
-  ///
-  /// In en, this message translates to:
-  /// **'Idea'**
-  String get l10n_idea;
-
-  /// l10n for 'file'
-  ///
-  /// In en, this message translates to:
-  /// **'file'**
-  String get l10n_file;
 
   /// l10n for the edition suffix
   ///
