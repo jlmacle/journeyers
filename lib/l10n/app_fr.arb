@@ -102,12 +102,12 @@
     ,"@gps_process_edit_title_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer un titre, ou à en choisir un, si disponible."}   
     ,"gps_process_default_saved_title": "Session de résolution de problème"
     ,"@gps_process_default_saved_title": {"description": "Le titre par défaut losqu'une session de résolution de problème est sauvegardée."}
-    ,"gps_process_add_participants_tooltip": "Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes"
-    ,"@gps_process_add_participants_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes'"}
+    ,"gps_process_add_participants_tooltip": "Veuillez cliquer pour ajouter des participant(e)s à la session de résolution de problèmes"
+    ,"@gps_process_add_participants_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour ajouter des participant(e)s à la session de résolution de problèmes'"}
     ,"gps_process_edit_identifiers_dialog_label": "Éditer"
     ,"@gps_process_edit_identifiers_dialog_label": {"description": "Le label pour le dialogue d'édition d'identifiant"}
-    ,"gps_process_edit_identifiers_tooltip": "Veuillez cliquer pour éditer les identifiants de participants"
-    ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour éditer les identifiants de participants'"}
+    ,"gps_process_edit_identifiers_tooltip": "Veuillez cliquer pour éditer les identifiants de participant(e)s"
+    ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour éditer les identifiants de participant(e)s'"}
     ,"gps_process_edit_identifiers_clear_one": "Effacer\nUn"
     ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n pour 'Effacer\nUn'"}
     ,"gps_process_edit_identifiers_clear_all": "Effacer\nTout"
@@ -130,7 +130,7 @@
     ,"@gps_process_checklist_title": {"description": "Le titre par défaut pour le widget lié à la check-list."}
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
-    ,"gps_process_checklist_question_1": "Pouvons-nous avoir un retour sur les émotions des participants ?"
+    ,"gps_process_checklist_question_1": "Pouvons-nous avoir un retour sur les émotions des participant(e)s ?"
     ,"@gps_process_checklist_question_1": {"description": "l10n pour la question n° 1 de la check-list"}
     ,"gps_process_checklist_question_2": "Notre analyse de contexte est-elle faite ?"
     ,"@gps_process_checklist_question_2": {"description": "l10n pour la question n° 2 de la check-list"}
@@ -192,7 +192,7 @@
     ,"@dashboard_edit_title_error_empty_title": {"description": "Le message d'erreur en cas d'enregistrement sans titre"}
     ,"dashboard_edit_title_snackbar_message": "Titre mis à jour"
     ,"@dashboard_edit_title_snackbar_message": {"description": "l10n pour le message de snackbar 'Titre mis à jour'"}
-    ,"dashboard_edit_keywords_sheet_label_text": "Édition des mots-clés (veuillez les séparer avec des virgules)"
+    ,"dashboard_edit_keywords_sheet_label_text": "Édition des mots-clés, séparés par des virgules"
     ,"@dashboard_edit_keywords_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des mots-clés"}
     ,"dashboard_edit_keywords_sheet_text_field_hint": "Veuillez entrer vos mots-clés."
     ,"@dashboard_edit_keywords_sheet_text_field_hint": {"description": "l10n pour le placeholder du champ de texte d'édition des mots-clés"}
@@ -204,7 +204,7 @@
     ,"@dashboard_snackbar_message_keywords_updated": {"description": "l10n pour le message de snackbar 'Mots-clés mis à jour'"}
   
 
-    ,"text_lists_new_list_or_loading_list_page_title": "Listes de Participants"
+    ,"text_lists_new_list_or_loading_list_page_title": "Listes de Participant(e)s"
     ,"@text_lists_new_list_or_loading_list_page_title": {"description": "Le titre par défaut pour la page de chargement de liste, ou de création d'une nouvelle liste."}
     ,"text_lists_new_list_or_loading_list_page_subtitle": "Quelle est votre préférence ?"
     ,"@text_lists_new_list_or_loading_list_page_subtitle": {"description": "Le sous-titre par défaut pour la page de chargement de liste, ou de création d'une nouvelle liste."}
@@ -244,8 +244,8 @@
     ,"@text_lists_new_list_close_tooltip": {"description": "l10n pour l'infobulle de fermeture pour retourner à la page précédent."}
   
 
-    ,"text_lists_dashboard_title": "Listes de participants déjà sauvegardées"
-    ,"@text_lists_dashboard_title": {"description": "Le titre du tableau de bord pour les listes de participants déjà sauvegardées"}
+    ,"text_lists_dashboard_title": "Listes de participant(e)s déjà sauvegardées"
+    ,"@text_lists_dashboard_title": {"description": "Le titre du tableau de bord pour les listes de participant(e)s déjà sauvegardées"}
     ,"text_lists_dashboard_invitation_to_add_a_list": "Veuillez cliquer\npour ajouter une liste"
     ,"@text_lists_dashboard_invitation_to_add_a_list": {"description": "l10n pour l'invitation à cliquer pour ajouter une liste"}
     ,"text_lists_dashboard_sort_by_list_name": "Tri par liste"
@@ -256,16 +256,16 @@
     ,"@text_lists_dashboard_edit_list_name_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition du nom de liste"}
     ,"text_lists_dashboard_edit_list_name_list_updated_snackbar_message": "Nom de liste mis à jour"
     ,"@text_lists_dashboard_edit_list_name_list_updated_snackbar_message": {"description": "l10n pour le message de snackbar 'Nom de liste mis à jour'"}
-    ,"text_lists_dashboard_edit_participants_sheet_label_text": "Édition des Participants (veuillez les séparer par des virgules)"
-    ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participants"}
-    ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participants."
-    ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition des participants"}
-    ,"text_lists_dashboard_edit_participants_snackbar_message_participants_updated": "Participants mis à jour"
-    ,"@text_lists_dashboard_edit_participants_snackbar_message_participants_updated": {"description": "l10n pour le message de snackbar 'Participants mis à jour'"}
+    ,"text_lists_dashboard_edit_participants_sheet_label_text": "Édition des Participant(e)s, séparé(e)s par des virgules"
+    ,"@text_lists_dashboard_edit_participants_sheet_label_text": {"description": "l10n pour l'étiquette d'édition des participant(e)s"}
+    ,"text_lists_dashboard_edit_participants_sheet_text_field_hint": "Veuillez entrer les participant(e)s."
+    ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n pour le placeholder de champ de texte d'édition des participant(e)s"}
+    ,"text_lists_dashboard_edit_participants_snackbar_message_participants_updated": "Participant(e)s mis à jour"
+    ,"@text_lists_dashboard_edit_participants_snackbar_message_participants_updated": {"description": "l10n pour le message de snackbar 'Participant(e)s mis à jour'"}
    
     
-    ,"text_lists_dashboard_edit_participants_sheet_empty_list_error_message": "La liste de participants est vide"
-    ,"@text_lists_dashboard_edit_participants_sheet_empty_list_error_message": {"description": "l10n pour le message d'erreur 'La liste de participants est vide'"}
+    ,"text_lists_dashboard_edit_participants_sheet_empty_list_error_message": "La liste de participant(e)s est vide"
+    ,"@text_lists_dashboard_edit_participants_sheet_empty_list_error_message": {"description": "l10n pour le message d'erreur 'La liste de participant(e)s est vide'"}
     ,"text_lists_dashboard_snackbar_message_list_deleted": "Liste supprimée"
     ,"@text_lists_dashboard_snackbar_message_list_deleted": {"description": "l10n pour le message de snackbar 'Liste supprimée'"}
     ,"text_lists_dashboard_list_loading_button_text": "Charger une liste"
