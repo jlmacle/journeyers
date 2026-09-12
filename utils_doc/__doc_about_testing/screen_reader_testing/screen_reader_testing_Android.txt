@@ -27,4 +27,6 @@ Keywords are read: ✔️
 
 Bulk deletetion label is ignored when no selection is made: 
 
+Session title is read:
 
+Date is read: ✔️
