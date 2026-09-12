@@ -43,7 +43,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pump(const Duration(seconds: 3));
   }
 
   // Method used to open the expansion tile with the group/team perspective
@@ -58,7 +58,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // Waiting for the expansion tile to be unfolded before searching descendants
     // pumpAndSettle timed out exception if pumpAndSettle is used
     // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
+    await tester.pump(const Duration(seconds: 3));
   }
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
@@ -149,6 +149,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     var checkboxFinder = find.descendant(
       of: find.byType(ExpansionTile).first, 
       matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+      skipOffstage: false
     );
 
     // Getting the total number of custom checkboxes
@@ -162,14 +163,17 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       var currentCheckbox = find.descendant(
         of: find.byType(ExpansionTile).first,
         matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+        skipOffstage: false
       ).at(index);
 
       // if checkbox value is true, tapping the checkbox, and entering the text, if any.
       if (checkboxValues[index] == true)
       {
-        await tester.ensureVisible(currentCheckbox);
+        await tester.scrollUntilVisible(currentCheckbox, 45, scrollable: find.byType(Scrollable).last);
+        await tester.pumpAndSettle();
         await tester.tap(currentCheckbox);
-        await tester.pump();
+        await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
 
         // Searching the text field related to the current checkbox
         var textFieldFinder = find.descendant(
@@ -242,7 +246,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
           await tester.ensureVisible(optionFinder);
           await tester.tap(optionFinder);
-          await tester.pump();
+          await tester.pump(const Duration(seconds: 2));
         }
 
         // Searching the text field related to the current checkbox
@@ -393,6 +397,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
                   matching: find.byType(Scrollable)
                 ).first;
     await tester.scrollUntilVisible(previewFinderVal, 45, scrollable: scrollable);
+    await tester.pumpAndSettle();
     await tester.tap(previewFinderVal);
     await tester.pumpAndSettle();
 
@@ -563,6 +568,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       if (testingDebug) pu.printd("Testing Debug: caCheckboxesVerifyEmptyContent: searching for: $text");
       var textFinder = find.text(text, skipOffstage: false);
       await tester.scrollUntilVisible(textFinder, scrollable: scrollable, 45);
+      await tester.pumpAndSettle();
       var customCheckboxFinder = find.ancestor
       (of: textFinder, matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)); 
       // Tapping to display the text field
@@ -588,7 +594,8 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     for (var key in listOfKeysToFind)
     {
       var keyFinder = find.byKey(key, skipOffstage: false);
-      await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45);    
+      await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45); 
+      await tester.pumpAndSettle();   
       // Tapping to display the text field
       var iDontKnow = AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
       var optionFinder = find.descendant
@@ -618,6 +625,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     var textFieldFinder = find.descendant
       (of: textFieldWidgetFinder, matching: find.byType(TextField));
     await tester.scrollUntilVisible(textFieldFinder, scrollable: scrollable, 45);
+    await tester.pumpAndSettle();
     var textField = tester.widget<TextField>(textFieldFinder);
     expect(textField.controller!.text, "");    
   }
@@ -675,7 +683,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.ensureVisible(checkboxFinder);
     await tester.tap(checkboxFinder);
     // pumpAndSettle timed out
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
 
     return;
   }
