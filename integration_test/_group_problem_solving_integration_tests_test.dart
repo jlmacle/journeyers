@@ -2037,6 +2037,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
+            LocalizedParticipantsStrings lps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -2101,7 +2102,7 @@ Future<void> main() async {
 
             // ── SAVING THE LIST  ──────────────────
             // ──────────────────────────────────────
-            var saveListFinder = find.byTooltip("Save list");
+            var saveListFinder = find.byTooltip(lps.saveListTooltipLabel);
             await tester.tap(saveListFinder);
             await tester.pumpAndSettle();
               // Entering the list name
