@@ -162,23 +162,31 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   @override
   Widget build(BuildContext context) 
   {
-    return Center(
+    return 
+    Semantics
+    (
+      excludeSemantics: !widget.areSessionsForDeletion,
+      child:Center
+      (
         child: 
-        TextButton.icon(
+        TextButton.icon
+        (
           onPressed: _sessionsMetadataSelectedDelete,
           icon: Icon
                 (
                   Icons.delete,                    
                   color: (widget.areSessionsForDeletion == true)? Colors.red: transparent
                 ),
-          label: Text(
+          label:          
+          Text(
             "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
             style: TextStyle(
               color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
               fontWeight: FontWeight.bold,
             ),
           ),
-        ),    
+        )
+      ),    
     );
   }
 }
