@@ -134,7 +134,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_appreciability_work =>
-      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?';
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?';
 
   @override
   String get ca_process_group_perspective_earning_ability =>
@@ -480,22 +480,28 @@ class AppLocalizationsFr extends AppLocalizations {
       'Charger une liste';
 
   @override
+  String get l10n_cancel => 'Annuler';
+
+  @override
+  String get l10n_delete => 'Supprimer';
+
+  @override
+  String get l10n_done => 'Fait';
+
+  @override
+  String get l10n_file => 'Fichier';
+
+  @override
+  String get l10n_idea => 'Idée';
+
+  @override
   String get l10n_keyword => 'Mots-clé';
 
   @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
-  String get l10n_delete => 'Supprimer';
-
-  @override
-  String get l10n_cancel => 'Annuler';
-
-  @override
   String get l10n_save => 'Enregistrer';
-
-  @override
-  String get l10n_done => 'Fait';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -516,12 +522,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get testing_kw_companionship => 'Convivialité';
-
-  @override
-  String get l10n_idea => 'Idée';
-
-  @override
-  String get l10n_file => 'fichier';
 
   @override
   String get testing_edition_suffix => '-édité';
@@ -657,7 +657,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_group_perspective_appreciability_work =>
-      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?';
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?';
 
   @override
   String get ca_process_group_perspective_earning_ability =>
@@ -1003,22 +1003,28 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Charger une liste';
 
   @override
+  String get l10n_cancel => 'Annuler';
+
+  @override
+  String get l10n_delete => 'Supprimer';
+
+  @override
+  String get l10n_done => 'Fait';
+
+  @override
+  String get l10n_file => 'Fichier';
+
+  @override
+  String get l10n_idea => 'Idée';
+
+  @override
   String get l10n_keyword => 'Mots-clé';
 
   @override
   String get l10n_keywords => 'Mots-clés';
 
   @override
-  String get l10n_delete => 'Supprimer';
-
-  @override
-  String get l10n_cancel => 'Annuler';
-
-  @override
   String get l10n_save => 'Enregistrer';
-
-  @override
-  String get l10n_done => 'Fait';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -1039,12 +1045,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get testing_kw_companionship => 'Convivialité';
-
-  @override
-  String get l10n_idea => 'Idée';
-
-  @override
-  String get l10n_file => 'fichier';
 
   @override
   String get testing_edition_suffix => '-édité';

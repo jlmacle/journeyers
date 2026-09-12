@@ -1,0 +1,29 @@
+The app bar title is read: ✔️
+
+// ── CONTEXT ANALYSIS  ───────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────────────
+
+// ── LANGUAGE SWITCH  ───────────────────────────────────────────────
+The language switch is read: ✔️
+"Collapsed", "English", "Button"
+
+// ── NEW SESSION BUTTON  ───────────────────────────────────────────────
+The new session button label is read:  ✔️
+
+// ── DASHBOARD  ───────────────────────────────────────────────
+The dashboard title is read: ✔️
+
+The "Sort by Title" label is read: ✔️
+"Sort by Title A to Z", "Button"
+
+The "Sort by Date" label is read: ✔️
+"Sort by Date", "Button"
+
+The "Filter by Keywords" label is read: ✔️
+"Filter by Keywords"
+
+Keywords are read: ✔️
+"Household", "Button"
+
+Bulk deletetion label is ignored when no selection is made: 
+

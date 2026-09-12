@@ -743,7 +743,7 @@ Future<void> main() async {
             // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────────────────
             // Searching the widget
-            var bulkDeletionFinder = find.textContaining("Delete");
+            var bulkDeletionFinder = find.textContaining(lgps.ideasListBulkDeletionText);
             expect(bulkDeletionFinder, findsOne);
             await tester.ensureVisible(bulkDeletionFinder);
             await tester.tap(bulkDeletionFinder);
@@ -973,7 +973,7 @@ Future<void> main() async {
             await tester.tap(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
               // Deleting 
-            var deleteFinder = find.textContaining("Delete");
+            var deleteFinder = find.textContaining(lgps.ideasListBulkDeletionText);
             await tester.tap(deleteFinder);
             await tester.pumpAndSettle();
 
@@ -1198,7 +1198,7 @@ Future<void> main() async {
             await tester.tap(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
               // Deleting 
-            var deleteFinder = find.textContaining("Delete");
+            var deleteFinder = find.textContaining(lgps.ideasListBulkDeletionText);
             await tester.tap(deleteFinder);
             await tester.pumpAndSettle();
 
@@ -1425,7 +1425,7 @@ Future<void> main() async {
             await tester.tap(idea2EditableDeletableFinder);
             await tester.pumpAndSettle();
               // Deleting 
-            var deleteFinder = find.textContaining("Delete");
+            var deleteFinder = find.textContaining(lgps.ideasListBulkDeletionText);
             await tester.tap(deleteFinder);
             await tester.pumpAndSettle();
 
@@ -2037,6 +2037,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedGPSStrings lgps = .new(context);
+            LocalizedParticipantsStrings lps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -2101,7 +2102,7 @@ Future<void> main() async {
 
             // ── SAVING THE LIST  ──────────────────
             // ──────────────────────────────────────
-            var saveListFinder = find.byTooltip("Save list");
+            var saveListFinder = find.byTooltip(lps.saveListTooltipLabel);
             await tester.tap(saveListFinder);
             await tester.pumpAndSettle();
               // Entering the list name
@@ -2400,6 +2401,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
+            LocalizedGPSStrings lgps = .new(context);
 
             // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
             // ────────────────────────────────────────────────────────────────────────
@@ -2431,7 +2433,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             // Tapping the deletion label
-            var bulkDeletionFinder = find.textContaining("Delete");
+            var bulkDeletionFinder = find.textContaining(lgps.ideasListBulkDeletionText);
             await tester.tap(bulkDeletionFinder);
             await tester.pumpAndSettle();
 
@@ -3041,6 +3043,7 @@ Future<void> main() async {
               // Getting the localized strings
               var context = tester.element(find.byType(Scaffold).first);
               LocalizedDashboardStrings lds = .new(context);
+              LocalizedGPSStrings lgps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3083,7 +3086,7 @@ Future<void> main() async {
               // ── BULK DELETION ────────────────────────────────────────────────────────────
               // ─────────────────────────────────────────────────────────────────────────────            
               // Searching the widget 
-              var bulkDeletionFinder = find.textContaining("Delete");
+              var bulkDeletionFinder = find.textContaining(lgps.ideasListBulkDeletionText);
               expect(bulkDeletionFinder, findsOne);
               await tester.ensureVisible(bulkDeletionFinder);
               // Deletion
@@ -3487,6 +3490,7 @@ Future<void> main() async {
               // Getting the localized strings
               var context = tester.element(find.byType(Scaffold).first);
               LocalizedDashboardStrings lds = .new(context);
+              LocalizedGPSStrings lgps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3549,7 +3553,7 @@ Future<void> main() async {
 
               // Verifying data
               var newKeywordsDataFinder = await dashboardGetKeywordsOnDashboard(tester);
-              var editedAndSortedKeywordsData ="Keywords: $kwCompanionship, $kwWorkplace";
+              var editedAndSortedKeywordsData ="${lgps.gpsKeywordsTitle}: $kwCompanionship, $kwWorkplace";
               expect((tester.widget<Text>(newKeywordsDataFinder).data), editedAndSortedKeywordsData);
             });
         
@@ -3831,7 +3835,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
           
           // Clicking on the Delete message
-          var deleteFinder = find.textContaining("Delete");
+          var deleteFinder = find.textContaining(lgps.ideasListBulkDeletionText);
           await tester.ensureVisible(deleteFinder);
           await tester.tap(deleteFinder);
           await tester.pumpAndSettle();
@@ -3906,7 +3910,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
           
           // Clicking on the Delete message
-          var deleteFinder = find.textContaining("Delete");
+          var deleteFinder = find.textContaining(lgps.ideasListBulkDeletionText);
           await tester.ensureVisible(deleteFinder);
           await tester.tap(deleteFinder);
           await tester.pumpAndSettle();

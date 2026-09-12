@@ -12,6 +12,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
@@ -613,6 +614,7 @@ Future<void> main() async {
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedDashboardStrings lds = .new(context);
+        LocalizedGPSStrings lgps = .new(context);
 
         // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -653,7 +655,7 @@ Future<void> main() async {
         // ── 3. BULK DELETION ─────────────────────────────────────────────────────────────
         // ─────────────────────────────────────────────────────────────────────────────────
         // Searching the widget
-        var bulkDeletionFinder = find.textContaining("Delete");
+        var bulkDeletionFinder = find.textContaining(lgps.ideasListBulkDeletionText);
         expect(bulkDeletionFinder, findsOne);
         await tester.ensureVisible(bulkDeletionFinder);
         await tester.tap(bulkDeletionFinder);
