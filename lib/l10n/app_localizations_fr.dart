@@ -197,14 +197,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_add_participants_tooltip =>
-      'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes';
+      'Veuillez cliquer pour ajouter des participant(e)s à la session de résolution de problèmes';
 
   @override
   String get gps_process_edit_identifiers_dialog_label => 'Éditer';
 
   @override
   String get gps_process_edit_identifiers_tooltip =>
-      'Veuillez cliquer pour éditer les identifiants de participants';
+      'Veuillez cliquer pour éditer les identifiants de participant(e)s';
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
@@ -243,7 +243,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_checklist_question_1 =>
-      'Pouvons-nous avoir un retour sur les émotions des participants ?';
+      'Pouvons-nous avoir un retour sur les émotions des participant(e)s ?';
 
   @override
   String get gps_process_checklist_question_2 =>
@@ -343,7 +343,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dashboard_edit_keywords_sheet_label_text =>
-      'Édition des mots-clés (veuillez les séparer avec des virgules)';
+      'Édition des mots-clés, séparés par des virgules';
 
   @override
   String get dashboard_edit_keywords_sheet_text_field_hint =>
@@ -362,7 +362,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_new_list_or_loading_list_page_title =>
-      'Listes de Participants';
+      'Listes de Participant(e)s';
 
   @override
   String get text_lists_new_list_or_loading_list_page_subtitle =>
@@ -431,7 +431,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_dashboard_title =>
-      'Listes de participants déjà sauvegardées';
+      'Listes de participant(e)s déjà sauvegardées';
 
   @override
   String get text_lists_dashboard_invitation_to_add_a_list =>
@@ -455,21 +455,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
-      'Édition des Participants (veuillez les séparer par des virgules)';
+      'Édition des Participant(e)s, séparé(e)s par des virgules';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
-      'Veuillez entrer les participants.';
+      'Veuillez entrer les participant(e)s.';
 
   @override
   String
   get text_lists_dashboard_edit_participants_snackbar_message_participants_updated =>
-      'Participants mis à jour';
+      'Participant(e)s mis à jour';
 
   @override
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
-      'La liste de participants est vide';
+      'La liste de participant(e)s est vide';
 
   @override
   String get text_lists_dashboard_snackbar_message_list_deleted =>
@@ -720,14 +720,14 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_add_participants_tooltip =>
-      'Veuillez cliquer pour ajouter des participants à la session de résolution de problèmes';
+      'Veuillez cliquer pour ajouter des participant(e)s à la session de résolution de problèmes';
 
   @override
   String get gps_process_edit_identifiers_dialog_label => 'Éditer';
 
   @override
   String get gps_process_edit_identifiers_tooltip =>
-      'Veuillez cliquer pour éditer les identifiants de participants';
+      'Veuillez cliquer pour éditer les identifiants de participant(e)s';
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
@@ -766,7 +766,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_checklist_question_1 =>
-      'Pouvons-nous avoir un retour sur les émotions des participants ?';
+      'Pouvons-nous avoir un retour sur les émotions des participant(e)s ?';
 
   @override
   String get gps_process_checklist_question_2 =>
@@ -866,7 +866,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get dashboard_edit_keywords_sheet_label_text =>
-      'Édition des mots-clés (veuillez les séparer avec des virgules)';
+      'Édition des mots-clés, séparés par des virgules';
 
   @override
   String get dashboard_edit_keywords_sheet_text_field_hint =>
@@ -885,7 +885,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_new_list_or_loading_list_page_title =>
-      'Listes de Participants';
+      'Listes de Participant(e)s';
 
   @override
   String get text_lists_new_list_or_loading_list_page_subtitle =>
@@ -954,7 +954,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_dashboard_title =>
-      'Listes de participants déjà sauvegardées';
+      'Listes de participant(e)s déjà sauvegardées';
 
   @override
   String get text_lists_dashboard_invitation_to_add_a_list =>
@@ -978,21 +978,21 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
-      'Édition des Participants (veuillez les séparer par des virgules)';
+      'Édition des Participant(e)s, séparé(e)s par des virgules';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
-      'Veuillez entrer les participants.';
+      'Veuillez entrer les participant(e)s.';
 
   @override
   String
   get text_lists_dashboard_edit_participants_snackbar_message_participants_updated =>
-      'Participants mis à jour';
+      'Participant(e)s mis à jour';
 
   @override
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
-      'La liste de participants est vide';
+      'La liste de participant(e)s est vide';
 
   @override
   String get text_lists_dashboard_snackbar_message_list_deleted =>
