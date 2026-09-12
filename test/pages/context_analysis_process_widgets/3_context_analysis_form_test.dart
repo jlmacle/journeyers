@@ -706,7 +706,7 @@ void main()
                 groupPerspectiveProblems = "Quel(s) problème(s)\nnos groupes/équipes\nessayent de résoudre ?";
                 groupPerspectiveSameProblems = "Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?";
                 groupPerspectiveHarmonyHome = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?";
-                groupPerspectiveAppreciabilityWork = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié au travail ?";
+                groupPerspectiveAppreciabilityWork = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?";
                 groupPerspectiveEarningAbility = "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?";
               }              
             }
