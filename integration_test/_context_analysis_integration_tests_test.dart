@@ -1383,6 +1383,7 @@ Future<void> main() async {
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
             LocalizedCAStrings lca = .new(context);
+            LocalizedCAQuestionsFields lqf = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1427,6 +1428,11 @@ Future<void> main() async {
             var previewFinder = find.byTooltip(lds.previewTooltipLabel);
             await tester.tap(previewFinder);
             await tester.pumpAndSettle();
+            //Scrolling to the second half of the screen 
+            await tester.scrollUntilVisible(find.text(lqf.level3TitleLegacyIssueForDataSaving), 45, scrollable: find.byType(Scrollable).last);
+            await tester.pumpAndSettle();
+
+            await tester.pump(const Duration(seconds: 2));
 
             // ── 3. CLICKING TO START THE EDIT MODE  ──────────────────────────────
             // ─────────────────────────────────────────────────────────────────────
@@ -1447,7 +1453,7 @@ Future<void> main() async {
             await caOpenGroupExpansionTile(context, tester);
 
             // ── Verifying checkbox data present ────────────────────────────
-            var checkboxesFinder = find.byType(Checkbox);
+            var checkboxesFinder = find.byType(Checkbox, skipOffstage: false);
             var totalCheckboxes = checkboxesFinder.evaluate().length;
 
             if (testingDebug) pu.printd("Testing Debug: totalCheckboxes: $totalCheckboxes");
@@ -1457,7 +1463,11 @@ Future<void> main() async {
               // cbIndex = 1: keywords: skipping the text field
               if (cbIndex != 1) 
               {
-                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxValues[cbIndex]);
+                var currentCheckboxFinder = checkboxesFinder.at(cbIndex);
+                await tester.scrollUntilVisible(currentCheckboxFinder, 45, scrollable: find.byType(Scrollable).last);
+                await tester.pumpAndSettle();
+                var currentCheckboxWidget = tester.widget<Checkbox>(currentCheckboxFinder);
+                expect(currentCheckboxWidget.value, checkboxValues[cbIndex]);
               }
             }
 
@@ -2335,11 +2345,6 @@ Future<void> main() async {
               groupStringValues: [newGroupProblemsToSolveStrValue,...newSegmentedButtonTextFieldValues],
               segmentedButtonValues: newSegmentedButtonValues
             ); 
-
-            // ── Closing the CA preview ──────────────────
-            var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
-            await tester.tap(previewClosingTooltipLabelFinder);
-            await tester.pumpAndSettle();
 
             // ── STARTING A NEW CA PROCESS ──────────────────
             // ───────────────────────────────────────────────

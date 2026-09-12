@@ -3641,7 +3641,6 @@ Future<void> main() async {
           // Adding the idea
           await tester.enterText(newIdeaTextFieldFinder, "An idea");
           await tester.testTextInput.receiveAction(TextInputAction.done);
-          await tester.pump();
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
           await tester.pump(const Duration(seconds: 2));  

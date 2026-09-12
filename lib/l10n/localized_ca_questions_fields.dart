@@ -283,7 +283,7 @@ class LocalizedCAQuestionsFields
     level3TitlesWithSubItems = {
       level3TitleBalanceIssue,
       level3TitleWorkplaceIssue,
-      level3TitleLegacyIssue,
+      level3TitleLegacyIssueForDataSaving,
     };
 
     // Sets of the children of the titles level 3 with sub items

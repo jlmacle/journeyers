@@ -338,8 +338,9 @@ class DTOCAForm
       {
         if (csvBuildingDebug) pu.printd("CSV Building");
         if (csvBuildingDebug) pu.printd("CSV Building: Error: treatmentAccordingToInputType: no mapping found");
-        if (csvBuildingDebug) pu.printd("CSV Building: Error: level3Title: $itemOrTitleLabel");
-        if (csvBuildingDebug) pu.printd("CSV Building: Error: mappingLabelsToInputItems[level3Title]: ${lineReturnToSpace(qfl.questionsToInputItemsMapping[itemOrTitleLabel])}");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: itemOrTitleLabel: $itemOrTitleLabel");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: qfl.questionsToInputItemsMapping[itemOrTitleLabel: ${qfl.questionsToInputItemsMapping[itemOrTitleLabel]}");
+        if (csvBuildingDebug) pu.printd("CSV Building: Error: questionsToInputItemsMapping: ${qfl.questionsToInputItemsMapping}");
         if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
@@ -362,9 +363,10 @@ class DTOCAForm
       preCSVData.add(level3TitlePreCSVData);
       
       // 1. Checking if sub-items exist before starting the processing of the level 3 title data
-      if ( qfl.level3TitlesWithSubItems.contains(level3Title)) {
+      if (qfl.level3TitlesWithSubItems.contains(level3Title)) {
         // Going through the sub items
         var level3TitleItemsData = perspectiveDataAsLinkedHashMap[level3Title];
+        
         // A LinkedHashMap as value
         var level3TitleItemsDataAsLinkedHashMap =
             level3TitleItemsData as LinkedHashMap<String, LinkedHashMap<String, Object>>;
@@ -483,7 +485,7 @@ class DTOCAForm
           previousIndexData_1AsString,
         )) {
           var parentIndex =
-              indexesOfTitlesLevel3WithChildren[qfl.level3TitleLegacyIssue];
+              indexesOfTitlesLevel3WithChildren[qfl.level3TitleLegacyIssueForDataSaving];
           var parentData = preCSVData[parentIndex!];
           parentData[0] = "X";
         }

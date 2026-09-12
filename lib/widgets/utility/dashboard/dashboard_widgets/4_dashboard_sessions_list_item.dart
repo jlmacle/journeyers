@@ -174,6 +174,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                           GestureDetector(
                             onTap: widget.onEditTitleCallbackFunction,
                             child: Text(
+                              semanticsLabel: displayTitle,
                               displayTitle,
                               key: Key("session-title-${widget.sessionDataIndex}"),
                               style: const TextStyle(

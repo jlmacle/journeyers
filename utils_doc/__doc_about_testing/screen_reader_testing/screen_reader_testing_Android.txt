@@ -25,8 +25,8 @@ The "Filter by Keywords" label is read: ✔️
 Keywords are read: ✔️
 "Household", "Button"
 
-Bulk deletetion label is ignored when no selection is made: 
+Bulk deletetion label is ignored when no selection is made: ✔️
 
-Session title is read:
+Session title is read: ✔️
 
 Date is read: ✔️
