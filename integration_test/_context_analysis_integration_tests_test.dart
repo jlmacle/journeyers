@@ -2346,11 +2346,6 @@ Future<void> main() async {
               segmentedButtonValues: newSegmentedButtonValues
             ); 
 
-            // ── Closing the CA preview ──────────────────
-            var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
-            await tester.tap(previewClosingTooltipLabelFinder);
-            await tester.pumpAndSettle();
-
             // ── STARTING A NEW CA PROCESS ──────────────────
             // ───────────────────────────────────────────────
             var newProcessButtonFinder = find.byType(NewProcessButton);
