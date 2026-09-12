@@ -470,22 +470,28 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to load';
 
   @override
+  String get l10n_cancel => 'Cancel';
+
+  @override
+  String get l10n_delete => 'Delete';
+
+  @override
+  String get l10n_done => 'Done';
+
+  @override
+  String get l10n_file => 'File';
+
+  @override
+  String get l10n_idea => 'Idea';
+
+  @override
   String get l10n_keyword => 'Keyword';
 
   @override
   String get l10n_keywords => 'Keywords';
 
   @override
-  String get l10n_delete => 'Delete';
-
-  @override
-  String get l10n_cancel => 'Cancel';
-
-  @override
   String get l10n_save => 'Save';
-
-  @override
-  String get l10n_done => 'Done';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -506,12 +512,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get testing_kw_companionship => 'Companionship';
-
-  @override
-  String get l10n_idea => 'Idea';
-
-  @override
-  String get l10n_file => 'file';
 
   @override
   String get testing_edition_suffix => '-edited';
@@ -983,22 +983,28 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please click to load';
 
   @override
+  String get l10n_cancel => 'Cancel';
+
+  @override
+  String get l10n_delete => 'Delete';
+
+  @override
+  String get l10n_done => 'Done';
+
+  @override
+  String get l10n_file => 'File';
+
+  @override
+  String get l10n_idea => 'Idea';
+
+  @override
   String get l10n_keyword => 'Keyword';
 
   @override
   String get l10n_keywords => 'Keywords';
 
   @override
-  String get l10n_delete => 'Delete';
-
-  @override
-  String get l10n_cancel => 'Cancel';
-
-  @override
   String get l10n_save => 'Save';
-
-  @override
-  String get l10n_done => 'Done';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -1019,12 +1025,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get testing_kw_companionship => 'Companionship';
-
-  @override
-  String get l10n_idea => 'Idea';
-
-  @override
-  String get l10n_file => 'file';
 
   @override
   String get testing_edition_suffix => '-edited';
