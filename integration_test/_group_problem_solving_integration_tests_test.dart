@@ -3489,6 +3489,7 @@ Future<void> main() async {
               // Getting the localized strings
               var context = tester.element(find.byType(Scaffold).first);
               LocalizedDashboardStrings lds = .new(context);
+              LocalizedGPSStrings lgps = .new(context);
 
               // ── REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
               // ────────────────────────────────────────────────────────────────────────
@@ -3551,7 +3552,7 @@ Future<void> main() async {
 
               // Verifying data
               var newKeywordsDataFinder = await dashboardGetKeywordsOnDashboard(tester);
-              var editedAndSortedKeywordsData ="Keywords: $kwCompanionship, $kwWorkplace";
+              var editedAndSortedKeywordsData ="${lgps.gpsKeywordsTitle}: $kwCompanionship, $kwWorkplace";
               expect((tester.widget<Text>(newKeywordsDataFinder).data), editedAndSortedKeywordsData);
             });
         
