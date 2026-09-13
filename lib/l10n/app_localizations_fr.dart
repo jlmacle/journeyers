@@ -302,7 +302,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dashboard_keywords => 'Mots-clés:';
 
   @override
-  String get dashboard_bulk_delete => 'Supprimer les données sélectionnées';
+  String get dashboard_bulk_delete => 'Supprimer les données';
+
+  @override
+  String get dashboard_bulk_delete_end_text => 'items';
 
   @override
   String get dashboard_preview_mixed_languages_error_message =>
@@ -825,7 +828,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get dashboard_keywords => 'Mots-clés:';
 
   @override
-  String get dashboard_bulk_delete => 'Supprimer les données sélectionnées';
+  String get dashboard_bulk_delete => 'Supprimer les données';
+
+  @override
+  String get dashboard_bulk_delete_end_text => 'items';
 
   @override
   String get dashboard_preview_mixed_languages_error_message =>

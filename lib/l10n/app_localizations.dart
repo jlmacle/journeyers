@@ -571,11 +571,17 @@ abstract class AppLocalizations {
   /// **'Keywords:'**
   String get dashboard_keywords;
 
-  /// l10n for the 'Delete selected data' text
+  /// l10n for the 'Delete data' text
   ///
   /// In en, this message translates to:
-  /// **'Delete selected data'**
+  /// **'Delete data'**
   String get dashboard_bulk_delete;
+
+  /// l10n for the 'items' text
+  ///
+  /// In en, this message translates to:
+  /// **'items'**
+  String get dashboard_bulk_delete_end_text;
 
   /// Error message when previewing with a different interface language setting than the language used for the saved data
   ///

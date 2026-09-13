@@ -24,6 +24,7 @@ class LocalizedDashboardStrings
 
   // ─── DATA DELETION ───────────────────────────────────────
   var deleteTooltipLabel = "";
+  var bulkDeletionText = "";
   var snackbarMessageDataDeleted = "";
 
   // ─── DATA EDITION ───────────────────────────────────────
@@ -62,6 +63,7 @@ class LocalizedDashboardStrings
     
     // ─── DATA DELETION ───────────────────────────────────────
     deleteTooltipLabel = _l10n?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip";
+    bulkDeletionText = _l10n?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete data' text";
     snackbarMessageDataDeleted = _l10n?.dashboard_snackbar_message_data_deleted ?? "Issue with the l10n for the 'Data deleted' snackbar message";
     
     // ─── DATA EDITION ───────────────────────────────────────

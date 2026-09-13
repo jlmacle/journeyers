@@ -22,10 +22,11 @@ The "Sort by Date" label is read: ✔️
 The "Filter by Keywords" label is read: ✔️
 "Filter by Keywords"
 
-Keywords are read: ✔️
+Keywords Input chips are read: ✔️
 "Household", "Button"
 
 Bulk deletetion label is ignored when no selection is made: ✔️
+Bulk deletetion label is read when selection is made: ✔️
 
 Session title is read: ✔️
 

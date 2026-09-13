@@ -162,6 +162,16 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
   @override
   Widget build(BuildContext context) 
   {
+    // todo: to clean
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
+    var bulkDeletionTextEnd = "";
+    if (widget.sessionsMetadataSelectedForDeletion?.length == 1)
+    { bulkDeletionTextEnd = "1 item"; }
+    else 
+    { bulkDeletionTextEnd = "${widget.sessionsMetadataSelectedForDeletion?.length} items"; }
+
     return 
     Semantics
     (
@@ -179,7 +189,7 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
                 ),
           label:          
           Text(
-            "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.sessionsMetadataSelectedForDeletion?.length ?? 0})",
+            "${lds.bulkDeletionText}: $bulkDeletionTextEnd",
             style: TextStyle(
               color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
               fontWeight: FontWeight.bold,

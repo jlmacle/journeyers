@@ -297,7 +297,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboard_keywords => 'Keywords:';
 
   @override
-  String get dashboard_bulk_delete => 'Delete selected data';
+  String get dashboard_bulk_delete => 'Delete data';
+
+  @override
+  String get dashboard_bulk_delete_end_text => 'items';
 
   @override
   String get dashboard_preview_mixed_languages_error_message =>
@@ -810,7 +813,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get dashboard_keywords => 'Keywords:';
 
   @override
-  String get dashboard_bulk_delete => 'Delete selected data';
+  String get dashboard_bulk_delete => 'Delete data';
+
+  @override
+  String get dashboard_bulk_delete_end_text => 'items';
 
   @override
   String get dashboard_preview_mixed_languages_error_message =>
