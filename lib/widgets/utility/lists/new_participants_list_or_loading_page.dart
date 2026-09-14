@@ -64,7 +64,8 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                   AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_page_subtitle ?? "Issue with the default subtitle for the new list or loading list page.",
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.bodyMedium?.copyWith(
-                    color: appTheme.colorScheme.onSurface.withOpacity(0.8),
+                    color: black,
+                    fontSize: 16
                   ),
                 ),
                 const SizedBox(height: 48),
