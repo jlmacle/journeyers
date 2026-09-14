@@ -389,7 +389,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     LocalizedDashboardStrings lds = .new(context);
 
     // Verifying the title present
-    expect(find.text(title), findsOne);  
+    expect(find.text(title), findsNWidgets(2));  
 
     if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
