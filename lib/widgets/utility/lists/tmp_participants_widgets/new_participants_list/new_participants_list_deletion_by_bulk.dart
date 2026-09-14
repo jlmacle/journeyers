@@ -90,19 +90,25 @@ class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeleti
     // Getting the localized strings
     LocalizedGPSStrings lgps = .new(context);
 
-    return Center(
-        child:        
-          TextButton.icon(
-            onPressed: _selectedTextItemsDelete,
-            icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
-            label: Text(
-              "${lgps.ideasListBulkDeletionText} (${widget.textItemsSelectedForDeletionIndexes.length})",
-              style: TextStyle(
-                color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent, 
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),    
-    );
+    return 
+    Semantics
+    (
+      excludeSemantics: !widget.areSomeTextItemsSelectedForDeletion,
+      child:
+        Center(
+            child:        
+              TextButton.icon(
+                onPressed: _selectedTextItemsDelete,
+                icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
+                label: Text(
+                  "${lgps.ideasListBulkDeletionText} (${widget.textItemsSelectedForDeletionIndexes.length})",
+                  style: TextStyle(
+                    color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent, 
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),    
+        )      
+    ); 
   }
 }
