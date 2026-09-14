@@ -174,7 +174,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList2Keywords);
 
           await tester.pump(const Duration(seconds: 5));
 
@@ -748,7 +748,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -831,7 +831,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -914,7 +914,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -1001,7 +1001,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -1088,7 +1088,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
         
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
