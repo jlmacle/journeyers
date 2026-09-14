@@ -192,7 +192,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 ),
                 FilledButton(
                   onPressed: onConfirm,
-                  child: Text(AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'"),
+                  child: Text(AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text"),
                 ),
               ],
             );
