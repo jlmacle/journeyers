@@ -38,12 +38,15 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     LocalizedCAQuestionsFields lqf = .new(context);
     var tileFinder = find.text(lqf.level2TitleIndividual, skipOffstage: false);
     await tester.scrollUntilVisible(tileFinder, 45, scrollable: find.byType(Scrollable).last);
-    await tester.pumpAndSettle();
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 3));
 
     // Opening the individual perspective expansion tile
     await tester.tap(tileFinder);
-    await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 3));
   }
 
   // Method used to open the expansion tile with the group/team perspective
@@ -52,12 +55,15 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     LocalizedCAQuestionsFields lqf = .new(context);
     var tileFinder = find.text(lqf.level2TitleGroup, skipOffstage: false);
     await tester.scrollUntilVisible(tileFinder, 45, scrollable: find.byType(Scrollable).last);
-    await tester.pumpAndSettle();
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 3));
 
     // Opening the group/team perspective expansion tile
     await tester.tap(tileFinder);
-    await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 3));
   }
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
