@@ -287,7 +287,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get file_name_process_text_field_hint_on_mobile =>
-      'Veuillez entrer un nom de fichier, sans .';
+      'Veuillez entrer un nom de fichier, sans .extension';
 
   @override
   String get dashboard_sort_by_title => 'Tri par titre';
@@ -410,7 +410,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
-      'Par ex. Les membres de notre foyer.';
+      'Par ex. Notre foyer.';
 
   @override
   String get text_lists_new_list_empty_list_name_message =>
@@ -441,7 +441,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez cliquer\npour ajouter une liste';
 
   @override
-  String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
+  String get text_lists_dashboard_sort_by_list_name => 'Tri';
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_label_text =>
@@ -813,7 +813,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get file_name_process_text_field_hint_on_mobile =>
-      'Veuillez entrer un nom de fichier, sans .';
+      'Veuillez entrer un nom de fichier, sans .extension';
 
   @override
   String get dashboard_sort_by_title => 'Tri par titre';
@@ -936,7 +936,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_new_list_save_dialog_text_field_hint =>
-      'Par ex. Les membres de notre foyer.';
+      'Par ex. Notre foyer.';
 
   @override
   String get text_lists_new_list_empty_list_name_message =>
@@ -967,7 +967,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez cliquer\npour ajouter une liste';
 
   @override
-  String get text_lists_dashboard_sort_by_list_name => 'Tri par liste';
+  String get text_lists_dashboard_sort_by_list_name => 'Tri';
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_label_text =>

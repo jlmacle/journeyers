@@ -63,14 +63,14 @@ void main() {
         expect(textDelete.style?.color, transparent);
       });
 
-    testWidgets("Non empty selection has 'Delete (n)' in label, and color is red", (WidgetTester tester) async {
+    testWidgets("Non empty selection has 'Delete data: n item(s)' in label, and color is red", (WidgetTester tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
 
       var textDeleteFinder = find.byType(Text).first;
       Text textDelete = tester.widget(textDeleteFinder);
 
       // Checks if the label displays the correct count from sessionsMetadataSelectedForDeletion
-      expect(textDelete.data, "Delete selected data (1)");
+      expect(textDelete.data, "Delete data: 1 item");
       // Checks if the label is red
       expect(textDelete.style?.color, red);
       

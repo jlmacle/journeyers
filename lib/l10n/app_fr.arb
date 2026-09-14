@@ -157,7 +157,7 @@
 
     ,"folder_picker_on_mobile": "Veuillez sélectionner, ou créer un dossier,\npour stocker vos données."
     ,"@folder_picker_on_mobile": {"description":"La requête de sélectionner/créer un dossier pour stocker les données"}
-    ,"file_name_process_text_field_hint_on_mobile": "Veuillez entrer un nom de fichier, sans ."
+    ,"file_name_process_text_field_hint_on_mobile": "Veuillez entrer un nom de fichier, sans .extension"
     ,"@file_name_process_text_field_hint_on_mobile": {"description": "Le placeholder du champ de texte invitant à entrer un nom de fichier sans extension"}   
     
     ,"dashboard_sort_by_title": "Tri par titre"
@@ -230,7 +230,7 @@
     ,"@text_lists_new_list_save_dialog_title": {"description": "l10n pour le titre du dialogue de sauvegarde de liste."}
     ,"text_lists_new_list_save_dialog_text_field_label": "Nom de la liste"
     ,"@text_lists_new_list_save_dialog_text_field_label": {"description": "l10n pour le label du champ de texte, du dialogue de sauvegarde de liste."}
-    ,"text_lists_new_list_save_dialog_text_field_hint": "Par ex. Les membres de notre foyer."
+    ,"text_lists_new_list_save_dialog_text_field_hint": "Par ex. Notre foyer."
     ,"@text_lists_new_list_save_dialog_text_field_hint": {"description": "l10n pour le placeholder du champ de texte, du dialogue de sauvegarde de liste."}
     ,"text_lists_new_list_empty_list_name_message": "Absence de nom de liste"
     ,"@text_lists_new_list_empty_list_name_message": {"description": "Le message d'erreur en cas d'enregistrement sans nom de liste"}
@@ -250,7 +250,7 @@
     ,"@text_lists_dashboard_title": {"description": "Le titre du tableau de bord pour les listes de participant(e)s déjà sauvegardées"}
     ,"text_lists_dashboard_invitation_to_add_a_list": "Veuillez cliquer\npour ajouter une liste"
     ,"@text_lists_dashboard_invitation_to_add_a_list": {"description": "l10n pour l'invitation à cliquer pour ajouter une liste"}
-    ,"text_lists_dashboard_sort_by_list_name": "Tri par liste"
+    ,"text_lists_dashboard_sort_by_list_name": "Tri"
     ,"@text_lists_dashboard_sort_by_list_name": {"description": "Le label pour le 'Tri par liste'"}    
     ,"text_lists_dashboard_edit_list_name_sheet_label_text": "Édition du nom de liste"
     ,"@text_lists_dashboard_edit_list_name_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du nom de liste"}

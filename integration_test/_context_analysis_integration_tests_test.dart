@@ -14,6 +14,7 @@ import "package:journeyers/l10n/localized_ca_questions_fields.dart";
 import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
+import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
@@ -174,7 +175,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitle1, kws: kwsList2Keywords);
 
           await tester.pump(const Duration(seconds: 5));
 
@@ -748,7 +749,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -831,7 +832,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -914,7 +915,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -1001,7 +1002,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -1088,7 +1089,7 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await dashboardSearchTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
         
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
@@ -2049,10 +2050,11 @@ Future<void> main() async {
             LocalizedDashboardStrings lds = .new(context);
             LocalizedCAQuestionsFields? qfl = .new(context);
             LocalizedCAStrings lca = .new(context);
+            LocalizedTestingStrings lts = .new(context);
 
             // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────
-            var title = "Journeyers";
+            var title = lts.caTitleRoot;
             
             // Individual perspective testing values
             // All checkboxes checked

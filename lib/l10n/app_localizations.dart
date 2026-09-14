@@ -544,7 +544,7 @@ abstract class AppLocalizations {
   /// The text field hint inviting to add a file name without extension
   ///
   /// In en, this message translates to:
-  /// **'Please add the file name, without .'**
+  /// **'Please add the file name, without .extension'**
   String get file_name_process_text_field_hint_on_mobile;
 
   /// The 'Sort by Title' label
@@ -802,7 +802,7 @@ abstract class AppLocalizations {
   /// The 'List sort' label
   ///
   /// In en, this message translates to:
-  /// **'List sort'**
+  /// **'Sort'**
   String get text_lists_dashboard_sort_by_list_name;
 
   /// l10n for the 'List Name Edition' label text

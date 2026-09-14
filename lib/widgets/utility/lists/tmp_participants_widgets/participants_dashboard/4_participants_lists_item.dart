@@ -232,7 +232,7 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                              
                                   await _onListNameUpdated(listKey: widget.listMetadata[itemKey], listData: widget.listMetadata);
                                 },
-                                elevatedButtonText: AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'", 
+                                elevatedButtonText: AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text", 
                                 elevatedButtonStyle: const TextStyle(color: black)
                               ),                            
                             child: Text(
@@ -432,7 +432,7 @@ void _showKeywordsEditSheet
             onPressed: () async =>  onKeywordsUpdated(listKey: listKey, listData: listData),
             child: Text
             (
-              AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'",
+              AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text",
               style: const TextStyle(color: Colors.black)
             ),
           ),
@@ -514,7 +514,7 @@ void _showParticipantsEditSheet({
                   onPressed: () async => await onConfirm(),
                   child: Text
                   (
-                    AppLocalizations.of(context)?.l10n_save ?? "Issue with the l10n for 'Save'", 
+                    AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text", 
                     style: const TextStyle(color: Colors.black)
                   ),
                 ),
