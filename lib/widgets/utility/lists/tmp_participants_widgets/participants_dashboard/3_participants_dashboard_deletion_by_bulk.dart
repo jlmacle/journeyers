@@ -140,19 +140,25 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
   @override
   Widget build(BuildContext context) 
   {
-    return Center(
-        child:        
-          TextButton.icon(
-            onPressed: _selectedListsDelete,
-            icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
-            label: Text(
-              "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
-              style: TextStyle(
-                color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),    
+    return 
+    Semantics
+    (
+      excludeSemantics: !widget.areListsForDeletion,
+      child:    
+        Center(
+            child:        
+              TextButton.icon(
+                onPressed: _selectedListsDelete,
+                icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
+                label: Text(
+                  "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
+                  style: TextStyle(
+                    color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),    
+        )      
     );
   }
 }
