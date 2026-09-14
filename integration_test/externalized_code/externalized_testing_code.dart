@@ -35,30 +35,29 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   // Method used to open the expansion tile with the individual perspective
   Future<void> caOpenIndividualExpansionTile(BuildContext context, WidgetTester tester) async
   {
-    var tileFinder = find.text(AppLocalizations.of(context)?.ca_process_individual_perspective_title_question ?? "Issue with the title question for the individual perspective");
-    await tester.ensureVisible(tileFinder);
+    LocalizedCAQuestionsFields lqf = .new(context);
+    var tileFinder = find.text(lqf.level2TitleIndividual, skipOffstage: false);
+    await tester.scrollUntilVisible(tileFinder, 45, scrollable: find.byType(Scrollable).last);
+    await tester.pumpAndSettle();
 
     // Opening the individual perspective expansion tile
     await tester.tap(tileFinder);
-
-    // pumpAndSettle timed out exception if pumpAndSettle is used
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 3));
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
   }
 
   // Method used to open the expansion tile with the group/team perspective
   Future<void> caOpenGroupExpansionTile(BuildContext context, WidgetTester tester) async
   {
-    var tileFinder = find.text(AppLocalizations.of(context)?.ca_process_group_perspective_title_question ?? "Issue with the  title question for the groups/teams perspective");
-    await tester.ensureVisible(tileFinder);
+    LocalizedCAQuestionsFields lqf = .new(context);
+    var tileFinder = find.text(lqf.level2TitleGroup, skipOffstage: false);
+    await tester.scrollUntilVisible(tileFinder, 45, scrollable: find.byType(Scrollable).last);
+    await tester.pumpAndSettle();
 
     // Opening the group/team perspective expansion tile
     await tester.tap(tileFinder);
-
-    // Waiting for the expansion tile to be unfolded before searching descendants
-    // pumpAndSettle timed out exception if pumpAndSettle is used
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 3));
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
   }
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
@@ -173,7 +172,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
         await tester.pumpAndSettle();
         await tester.tap(currentCheckbox);
         await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));
+        // await tester.pump(const Duration(seconds: 2));
 
         // Searching the text field related to the current checkbox
         var textFieldFinder = find.descendant(
@@ -182,6 +181,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
         );
 
         // Adding text        
+        await tester.scrollUntilVisible(textFieldFinder, 45, scrollable: find.byType(Scrollable).last);
         await tester.enterText(textFieldFinder, checkboxTextFieldValues[index]);
         await tester.pumpAndSettle();
       }
@@ -246,7 +246,8 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
           await tester.ensureVisible(optionFinder);
           await tester.tap(optionFinder);
-          await tester.pump(const Duration(seconds: 2));
+          await tester.pumpAndSettle();
+          // await tester.pump(const Duration(seconds: 2));
         }
 
         // Searching the text field related to the current checkbox
@@ -380,6 +381,9 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // Accessing the localized form data
     LocalizedCAQuestionsFields? qfl = .new(context);
     LocalizedDashboardStrings lds = .new(context);
+
+    // Verifying the title present
+    expect(find.text(title), findsOne);  
 
     if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
@@ -1175,21 +1179,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
 // ─── GPS ADDED DATA TESTING ───────────────────────────────────────────────────────────────
   // Method used to test a GPS preview.
-  
- Future<void> gpsTestKeywordsOnDashboardAndOnSession
-  ({
-    required BuildContext context,
-    required WidgetTester tester, 
-    required List<String> kwsList
-  }) async
-  {
-    for (var kw in kwsList)
-    {
-      // one as input chip, one as keyword
-      expect(find.textContaining(kw), findsNWidgets(2));
-    }
-  }
-  
   Future<void> gpsTestPreview
   ({
     required BuildContext context,
@@ -1557,7 +1546,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
   }  
 
   // Method used to search a title and keywords on the dashboard
-  Future<void> dashboardSearchTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
+  Future<void> testTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
     {
       if (titleSuffix != null) title = "$title$titleSuffix";
       // Searching for the title
@@ -1570,6 +1559,21 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
       }
 
     }
+
+  // Method used to test keywords on the dashboard.  
+ Future<void> testKeywordsOnDashboardAndOnSession
+  ({
+    required BuildContext context,
+    required WidgetTester tester, 
+    required List<String> kwsList
+  }) async
+  {
+    for (var kw in kwsList)
+    {
+      // one as input chip, one as keyword
+      expect(find.textContaining(kw), findsNWidgets(2));
+    }
+  }
 
   // Method used to get the finder of the keywords
   Future<Finder> dashboardGetKeywordsOnDashboard(WidgetTester tester) async
