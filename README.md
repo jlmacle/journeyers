@@ -9,7 +9,8 @@ and with a goal of being multilingual, accessible, and offline-friendly, <br>
 is meant to illustrate supporting our group problem-solving processes.<br>
 
 English/French localization is implemented.<br>
-Additional effort needs to be done for the accessibility.<br>
+Accessibility needs to be finished.<br>
+Screen reader accessibility on Android needs to be polished.<br>
 Issues might remain with some features.<br>
 Please note that the code needs cleaning.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
@@ -35,7 +36,8 @@ et avec pour objectif d'être multilingue, accessible et fonctionnant hors ligne
 illustre un processus potentiel de résolution de problèmes en groupe.<br>
 <br>
 La localisation anglais/français est implémentée.<br>
-Des efforts supplémentaires doivent être déployés pour l'accessibilité.<br>
+L'accessibilité a besoin d'être terminée.<br>
+L'accessibilité pour lecteur d'écran sur Android a besoin d'être peaufinée.<br>
 Des problèmes pourraient subsister avec certaines fonctionnalités.<br>
 Veuillez noter que le code nécessite d'être nettoyé.<br>
 (<a href="https://github.com/jlmacle/journeyers_releases">apk - version alpha</a>)<br>
