@@ -8,6 +8,7 @@ import "package:integration_test/integration_test.dart";
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_strings.dart";
@@ -46,7 +47,9 @@ Future<void> main() async {
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: HomePage(onLanguageSelectedCallbackFunction: (_){})
+        home: HomePage(onLanguageSelectedCallbackFunction: (_){}),
+        theme: appTheme,
+
       )
     );
     await tester.pumpAndSettle();
@@ -249,8 +252,8 @@ Future<void> main() async {
     ("Potential side effects", 
     ()
     {
-      testWidgets("Data entered and modified on the context analysis side doesn't impact "
-                  "data entered on the group problem-solving side  "
+      testWidgets("Data entered previously on the context analysis side "
+                  "is not impacted by data entered and modified on the group problem-solving side "                  
                   "(assuming an already selected path to the user session data folder)",
       (WidgetTester tester) async {
 
@@ -345,7 +348,7 @@ Future<void> main() async {
 
           // ── 4. TESTING THE EDITED GPS KEYWORDS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-          await gpsTestKeywordsOnDashboardAndOnSession
+          await testKeywordsOnDashboardAndOnSession
           (
             context: context, 
             tester: tester, 
