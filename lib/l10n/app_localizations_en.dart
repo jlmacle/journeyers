@@ -282,7 +282,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get file_name_process_text_field_hint_on_mobile =>
-      'Please add the file name, without .';
+      'Please add the file name, without .extension';
 
   @override
   String get dashboard_sort_by_title => 'Sort by Title';
@@ -431,7 +431,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please tap\nto add a list';
 
   @override
-  String get text_lists_dashboard_sort_by_list_name => 'List sort';
+  String get text_lists_dashboard_sort_by_list_name => 'Sort';
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_label_text =>
@@ -798,7 +798,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get file_name_process_text_field_hint_on_mobile =>
-      'Please add the file name, without .';
+      'Please add the file name, .extension';
 
   @override
   String get dashboard_sort_by_title => 'Sort by Title';
@@ -947,7 +947,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please tap\nto add a list';
 
   @override
-  String get text_lists_dashboard_sort_by_list_name => 'List sort';
+  String get text_lists_dashboard_sort_by_list_name => 'Sort';
 
   @override
   String get text_lists_dashboard_edit_list_name_sheet_label_text =>
