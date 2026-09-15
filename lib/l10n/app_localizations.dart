@@ -419,18 +419,29 @@ abstract class AppLocalizations {
   /// **'Please click to stop editing the participants\' list'**
   String get gps_process_edit_group_end_tooltip;
 
+  /// l10n for 'Edit name'
+  ///
+  /// In en, this message translates to:
+  /// **'Edit\nname'**
+  String get gps_process_edit_identifiers_edit_name;
+
   /// l10n for the 'Please click to remove a specific member from the group' tooltip
   ///
   /// In en, this message translates to:
   /// **'Please click to remove a specific member from the group'**
-  String get gps_process_edit_identifiers_clear_one_tooltip;
+  String get gps_process_edit_identifiers_clear_name_tooltip;
 
-  /// l10n for 'Clear
-  /// One'
+  /// l10n for 'Clear name'
   ///
   /// In en, this message translates to:
-  /// **'Clear\nOne'**
+  /// **'Clear\nname'**
   String get gps_process_edit_identifiers_clear_one;
+
+  /// l10n for 'Please click to remove the name from the group'
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to remove the name from the group'**
+  String get gps_process_edit_identifiers_clear_one_delete_icon_label;
 
   /// l10n for the 'Please click to remove all members from the group' tooltip
   ///

@@ -208,11 +208,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to stop editing the participants\' list';
 
   @override
-  String get gps_process_edit_identifiers_clear_one_tooltip =>
+  String get gps_process_edit_identifiers_edit_name => 'Edit\nname';
+
+  @override
+  String get gps_process_edit_identifiers_clear_name_tooltip =>
       'Please click to remove a specific member from the group';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Clear\nOne';
+  String get gps_process_edit_identifiers_clear_one => 'Clear\nname';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one_delete_icon_label =>
+      'Please click to remove the name from the group';
 
   @override
   String get gps_process_edit_identifiers_clear_all_tooltip =>
@@ -743,11 +750,18 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please click to stop editing the participants\' list';
 
   @override
-  String get gps_process_edit_identifiers_clear_one_tooltip =>
+  String get gps_process_edit_identifiers_edit_name => 'Edit\nname';
+
+  @override
+  String get gps_process_edit_identifiers_clear_name_tooltip =>
       'Please click to remove a specific member from the group';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Clear\nOne';
+  String get gps_process_edit_identifiers_clear_one => 'Clear\nname';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one_delete_icon_label =>
+      'Please click to remove the name from the group';
 
   @override
   String get gps_process_edit_identifiers_clear_all_tooltip =>
