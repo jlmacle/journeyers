@@ -435,7 +435,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Clear\nname'**
-  String get gps_process_edit_identifiers_clear_one;
+  String get gps_process_edit_identifiers_clear_name;
 
   /// l10n for 'Please click to remove the name from the group'
   ///
