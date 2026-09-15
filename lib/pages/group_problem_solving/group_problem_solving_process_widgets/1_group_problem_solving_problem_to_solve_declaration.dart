@@ -181,7 +181,7 @@ class _GPSProblemToSolveDeclarationState extends State<GPSProblemToSolveDeclarat
                   Tooltip
                   (
                     message: AppLocalizations.of(context)?.gps_process_edit_title_tooltip ?? "Issue with the l10n for the 'Please click to edit the title' tooltip",
-                    child: const Text(editEmoji)
+                    child: const Text(editEmoji, semanticsLabel: "",)
                   ),
               ),
             ),

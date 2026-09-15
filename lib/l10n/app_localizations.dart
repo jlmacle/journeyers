@@ -175,7 +175,7 @@ abstract class AppLocalizations {
   /// The text field hint, for the past outcomes of the problem for the workplace
   ///
   /// In en, this message translates to:
-  /// **'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.'**
+  /// **'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household. Please identify any competence or efficiency issues.'**
   String get ca_process_past_outcomes_workplace_text_field_hint;
 
   /// The text field hint inviting to develop
@@ -407,11 +407,23 @@ abstract class AppLocalizations {
   /// **'Edit Value'**
   String get gps_process_edit_identifiers_dialog_label;
 
-  /// l10n for the 'Please click to edit the participants identifiers' tooltip
+  /// l10n for the 'Please click to edit the participants' list' tooltip
   ///
   /// In en, this message translates to:
-  /// **'Please click to edit the participants identifiers'**
-  String get gps_process_edit_identifiers_tooltip;
+  /// **'Please click to edit the participants\' list'**
+  String get gps_process_edit_group_start_tooltip;
+
+  /// l10n for the 'Please click to stop editing the participants' list' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to stop editing the participants\' list'**
+  String get gps_process_edit_group_end_tooltip;
+
+  /// l10n for the 'Please click to remove a specific member from the group' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to remove a specific member from the group'**
+  String get gps_process_edit_identifiers_clear_one_tooltip;
 
   /// l10n for 'Clear
   /// One'
@@ -420,12 +432,24 @@ abstract class AppLocalizations {
   /// **'Clear\nOne'**
   String get gps_process_edit_identifiers_clear_one;
 
+  /// l10n for the 'Please click to remove all members from the group' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to remove all members from the group'**
+  String get gps_process_edit_identifiers_clear_all_tooltip;
+
   /// l10n for 'Clear
   /// All'
   ///
   /// In en, this message translates to:
   /// **'Clear\nAll'**
   String get gps_process_edit_identifiers_clear_all;
+
+  /// l10n for the 'Please click to enter name edition mode' tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Please click to enter name edition mode'**
+  String get gps_process_edit_identifiers_edit_tooltip;
 
   /// l10n for the GPS keywords overlay appbar title
   ///
@@ -878,6 +902,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Done'**
   String get l10n_done;
+
+  /// l10n for 'Edit'
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get l10n_edit;
 
   /// l10n for 'File'
   ///

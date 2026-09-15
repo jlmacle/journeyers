@@ -53,7 +53,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_process_past_outcomes_workplace_text_field_hint =>
-      'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
+      'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household. Please identify any competence or efficiency issues.';
 
   @override
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
@@ -200,14 +200,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gps_process_edit_identifiers_dialog_label => 'Edit Value';
 
   @override
-  String get gps_process_edit_identifiers_tooltip =>
-      'Please click to edit the participants identifiers';
+  String get gps_process_edit_group_start_tooltip =>
+      'Please click to edit the participants\' list';
+
+  @override
+  String get gps_process_edit_group_end_tooltip =>
+      'Please click to stop editing the participants\' list';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one_tooltip =>
+      'Please click to remove a specific member from the group';
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Clear\nOne';
 
   @override
+  String get gps_process_edit_identifiers_clear_all_tooltip =>
+      'Please click to remove all members from the group';
+
+  @override
   String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
+
+  @override
+  String get gps_process_edit_identifiers_edit_tooltip =>
+      'Please click to enter name edition mode';
 
   @override
   String get gps_process_keywords_overlay_appbar_title =>
@@ -482,6 +498,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get l10n_done => 'Done';
 
   @override
+  String get l10n_edit => 'Edit';
+
+  @override
   String get l10n_file => 'File';
 
   @override
@@ -569,7 +588,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_process_past_outcomes_workplace_text_field_hint =>
-      'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.';
+      'Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household. Please identify any competence or efficiency issues.';
 
   @override
   String get ca_process_please_develop_text_field_hint => 'Please develop.';
@@ -716,14 +735,30 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get gps_process_edit_identifiers_dialog_label => 'Edit Value';
 
   @override
-  String get gps_process_edit_identifiers_tooltip =>
-      'Please click to edit the participants identifiers';
+  String get gps_process_edit_group_start_tooltip =>
+      'Please click to edit the participants\' list';
+
+  @override
+  String get gps_process_edit_group_end_tooltip =>
+      'Please click to stop editing the participants\' list';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one_tooltip =>
+      'Please click to remove a specific member from the group';
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Clear\nOne';
 
   @override
+  String get gps_process_edit_identifiers_clear_all_tooltip =>
+      'Please click to remove all members from the group';
+
+  @override
   String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
+
+  @override
+  String get gps_process_edit_identifiers_edit_tooltip =>
+      'Please click to enter name edition mode';
 
   @override
   String get gps_process_keywords_overlay_appbar_title =>
@@ -996,6 +1031,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_done => 'Done';
+
+  @override
+  String get l10n_edit => 'Edit';
 
   @override
   String get l10n_file => 'File';
