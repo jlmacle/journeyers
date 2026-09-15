@@ -26,7 +26,7 @@
   ,"@ca_process_past_outcomes_household_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the household"}
   ,"ca_process_helping_household_text_field_hint": "Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others."
   ,"@ca_process_helping_household_text_field_hint": {"description": "The text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others"}
-  ,"ca_process_past_outcomes_workplace_text_field_hint": "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household."
+  ,"ca_process_past_outcomes_workplace_text_field_hint": "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household. Please identify any competence or efficiency issues."
   ,"@ca_process_past_outcomes_workplace_text_field_hint": {"description": "The text field hint, for the past outcomes of the problem for the workplace"}  
   ,"ca_process_please_develop_text_field_hint": "Please develop."
   ,"@ca_process_please_develop_text_field_hint": {"description": "The text field hint inviting to develop"}   
@@ -107,12 +107,20 @@
   ,"gps_process_edit_identifiers_dialog_label": "Edit Value"
   ,"@gps_process_edit_identifiers_dialog_label": {"description": "The label for the 'Edit Value' dialog"}
 
-  ,"gps_process_edit_identifiers_tooltip": "Please click to edit the participants identifiers"
-  ,"@gps_process_edit_identifiers_tooltip": {"description": "l10n for the 'Please click to edit the participants identifiers' tooltip"}
+  ,"gps_process_edit_group_start_tooltip": "Please click to edit the participants' list"
+  ,"@gps_process_edit_group_start_tooltip": {"description": "l10n for the 'Please click to edit the participants' list' tooltip"}
+  ,"gps_process_edit_group_end_tooltip": "Please click to stop editing the participants' list"
+  ,"@gps_process_edit_group_end_tooltip": {"description": "l10n for the 'Please click to stop editing the participants' list' tooltip"}
+  ,"gps_process_edit_identifiers_clear_one_tooltip": "Please click to remove a specific member from the group"
+  ,"@gps_process_edit_identifiers_clear_one_tooltip": {"description": "l10n for the 'Please click to remove a specific member from the group' tooltip"}
   ,"gps_process_edit_identifiers_clear_one": "Clear\nOne"
   ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n for 'Clear\nOne'"}
+  ,"gps_process_edit_identifiers_clear_all_tooltip": "Please click to remove all members from the group"
+  ,"@gps_process_edit_identifiers_clear_all_tooltip": {"description": "l10n for the 'Please click to remove all members from the group' tooltip"}
   ,"gps_process_edit_identifiers_clear_all": "Clear\nAll"
   ,"@gps_process_edit_identifiers_clear_all": {"description": "l10n for 'Clear\nAll'"}
+  ,"gps_process_edit_identifiers_edit_tooltip": "Please click to enter name edition mode"
+  ,"@gps_process_edit_identifiers_edit_tooltip": {"description": "l10n for the 'Please click to enter name edition mode' tooltip"}  
   ,"gps_process_keywords_overlay_appbar_title": "Keywords for the\nproblem-solving session"
   ,"@gps_process_keywords_overlay_appbar_title": {"description": "l10n for the GPS keywords overlay appbar title"}
   
@@ -280,6 +288,8 @@
   ,"@l10n_delete": {"description": "l10n for 'Delete'"}
   ,"l10n_done": "Done"
   ,"@l10n_done": {"description": "l10n for 'Done'"}
+  ,"l10n_edit": "Edit"
+  ,"@l10n_edit": {"description": "l10n for 'Edit'"}
   ,"l10n_file": "File" 
   ,"@l10n_file": {"description": "l10n for 'File'"}
   ,"l10n_idea": "Idea" 

@@ -53,7 +53,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_past_outcomes_workplace_text_field_hint =>
-      'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
+      'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer. Veuillez identifier les problèmes de compétence et d\'efficacité.';
 
   @override
   String get ca_process_please_develop_text_field_hint =>
@@ -197,20 +197,36 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_add_participants_tooltip =>
-      'Veuillez cliquer pour ajouter des participant(e)s à la session de résolution de problèmes';
+      'Veuillez cliquer pour ajouter un groupe à la session de résolution de problème';
 
   @override
   String get gps_process_edit_identifiers_dialog_label => 'Éditer';
 
   @override
-  String get gps_process_edit_identifiers_tooltip =>
-      'Veuillez cliquer pour éditer les identifiants de participant(e)s';
+  String get gps_process_edit_group_start_tooltip =>
+      'Veuillez cliquer pour éditer le groupe';
+
+  @override
+  String get gps_process_edit_group_end_tooltip =>
+      'Veuillez cliquer pour arrêter l\'édition du groupe';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one_tooltip =>
+      'Veuillez cliquer pour retirer un nom du groupe';
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
 
   @override
+  String get gps_process_edit_identifiers_clear_all_tooltip =>
+      'Veuillez cliquer pour retirer tous les noms du groupe';
+
+  @override
   String get gps_process_edit_identifiers_clear_all => 'Effacer\nTout';
+
+  @override
+  String get gps_process_edit_identifiers_edit_tooltip =>
+      'Veuillez cliquer pour démarrer le mode d\'édition des noms';
 
   @override
   String get gps_process_keywords_overlay_appbar_title =>
@@ -243,7 +259,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_checklist_question_1 =>
-      'Pouvons-nous avoir un retour sur les émotions des participant(e)s ?';
+      'Pouvons-nous avoir un retour sur les émotions du groupe ?';
 
   @override
   String get gps_process_checklist_question_2 =>
@@ -365,7 +381,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_new_list_or_loading_list_page_title =>
-      'Listes de Participant(e)s';
+      'Liste des Groupes';
 
   @override
   String get text_lists_new_list_or_loading_list_page_subtitle =>
@@ -391,8 +407,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom\npour l\'ajouter au groupe.';
 
   @override
-  String get text_lists_new_list_text_field_hint =>
-      'Veuillez ajouter le nom d\'un participant.';
+  String get text_lists_new_list_text_field_hint => 'Veuillez ajouter un nom.';
 
   @override
   String get text_lists_new_list_content_already_saved_message =>
@@ -433,8 +448,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez cliquer pour retourner à la page précédente';
 
   @override
-  String get text_lists_dashboard_title =>
-      'Listes de participant(e)s déjà sauvegardées';
+  String get text_lists_dashboard_title => 'Liste des Groupes';
 
   @override
   String get text_lists_dashboard_invitation_to_add_a_list =>
@@ -458,21 +472,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
-      'Édition des Participant(e)s, séparé(e)s par des virgules';
+      'Édition des noms, séparés par des virgules';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
-      'Veuillez entrer les participant(e)s.';
+      'Veuillez entrer les noms.';
 
   @override
   String
   get text_lists_dashboard_edit_participants_snackbar_message_participants_updated =>
-      'Participant(e)s mis à jour';
+      'Noms mis à jour';
 
   @override
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
-      'La liste de participant(e)s est vide';
+      'La liste de noms est vide';
 
   @override
   String get text_lists_dashboard_snackbar_message_list_deleted =>
@@ -490,6 +504,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_done => 'Fait';
+
+  @override
+  String get l10n_edit => 'Éditer';
 
   @override
   String get l10n_file => 'Fichier';
@@ -579,7 +596,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_past_outcomes_workplace_text_field_hint =>
-      'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.';
+      'Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer. Veuillez identifier les problèmes de compétence et d\'efficacité.';
 
   @override
   String get ca_process_please_develop_text_field_hint =>
@@ -723,20 +740,36 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_add_participants_tooltip =>
-      'Veuillez cliquer pour ajouter des participant(e)s à la session de résolution de problèmes';
+      'Veuillez cliquer pour ajouter un groupe à la session de résolution de problème';
 
   @override
   String get gps_process_edit_identifiers_dialog_label => 'Éditer';
 
   @override
-  String get gps_process_edit_identifiers_tooltip =>
-      'Veuillez cliquer pour éditer les identifiants de participant(e)s';
+  String get gps_process_edit_group_start_tooltip =>
+      'Veuillez cliquer pour éditer le groupe';
+
+  @override
+  String get gps_process_edit_group_end_tooltip =>
+      'Veuillez cliquer pour arrêter l\'édition du groupe';
+
+  @override
+  String get gps_process_edit_identifiers_clear_one_tooltip =>
+      'Veuillez cliquer pour retirer un nom du groupe';
 
   @override
   String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
 
   @override
+  String get gps_process_edit_identifiers_clear_all_tooltip =>
+      'Veuillez cliquer pour retirer tous les noms du groupe';
+
+  @override
   String get gps_process_edit_identifiers_clear_all => 'Effacer\nTout';
+
+  @override
+  String get gps_process_edit_identifiers_edit_tooltip =>
+      'Veuillez cliquer pour démarrer le mode d\'édition des noms';
 
   @override
   String get gps_process_keywords_overlay_appbar_title =>
@@ -769,7 +802,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_checklist_question_1 =>
-      'Pouvons-nous avoir un retour sur les émotions des participant(e)s ?';
+      'Pouvons-nous avoir un retour sur les émotions du groupe ?';
 
   @override
   String get gps_process_checklist_question_2 =>
@@ -891,7 +924,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_new_list_or_loading_list_page_title =>
-      'Listes de Participant(e)s';
+      'Liste des Groupes';
 
   @override
   String get text_lists_new_list_or_loading_list_page_subtitle =>
@@ -917,8 +950,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Aucun nom dans le nouveau groupe.\nVeuillez entrer un nom\npour l\'ajouter au groupe.';
 
   @override
-  String get text_lists_new_list_text_field_hint =>
-      'Veuillez ajouter le nom d\'un participant.';
+  String get text_lists_new_list_text_field_hint => 'Veuillez ajouter un nom.';
 
   @override
   String get text_lists_new_list_content_already_saved_message =>
@@ -959,8 +991,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez cliquer pour retourner à la page précédente';
 
   @override
-  String get text_lists_dashboard_title =>
-      'Listes de participant(e)s déjà sauvegardées';
+  String get text_lists_dashboard_title => 'Liste des Groupes';
 
   @override
   String get text_lists_dashboard_invitation_to_add_a_list =>
@@ -984,21 +1015,21 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_label_text =>
-      'Édition des Participant(e)s, séparé(e)s par des virgules';
+      'Édition des noms, séparés par des virgules';
 
   @override
   String get text_lists_dashboard_edit_participants_sheet_text_field_hint =>
-      'Veuillez entrer les participant(e)s.';
+      'Veuillez entrer les noms.';
 
   @override
   String
   get text_lists_dashboard_edit_participants_snackbar_message_participants_updated =>
-      'Participant(e)s mis à jour';
+      'Noms mis à jour';
 
   @override
   String
   get text_lists_dashboard_edit_participants_sheet_empty_list_error_message =>
-      'La liste de participant(e)s est vide';
+      'La liste de noms est vide';
 
   @override
   String get text_lists_dashboard_snackbar_message_list_deleted =>
@@ -1016,6 +1047,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_done => 'Fait';
+
+  @override
+  String get l10n_edit => 'Éditer';
 
   @override
   String get l10n_file => 'Fichier';
