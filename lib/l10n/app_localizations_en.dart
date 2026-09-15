@@ -215,7 +215,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to remove a specific member from the group';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Clear\nname';
+  String get gps_process_edit_identifiers_clear_name => 'Clear\nname';
 
   @override
   String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
@@ -757,7 +757,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Please click to remove a specific member from the group';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Clear\nname';
+  String get gps_process_edit_identifiers_clear_name => 'Clear\nname';
 
   @override
   String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
