@@ -117,8 +117,8 @@
   ,"@gps_process_edit_identifiers_clear_name_tooltip": {"description": "l10n for the 'Please click to remove a specific member from the group' tooltip"}
   ,"gps_process_edit_identifiers_clear_one": "Clear\nname"
   ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n for 'Clear name'"}
-  ,"gps_process_edit_identifiers_clear_one_delete_icon_label": "Please click to remove the name from the group"
-  ,"@gps_process_edit_identifiers_clear_one_delete_icon_label": {"description": "l10n for 'Please click to remove the name from the group'"}
+  ,"gps_process_edit_identifiers_clear_name_delete_icon_label": "Please click to remove the name from the group"
+  ,"@gps_process_edit_identifiers_clear_name_delete_icon_label": {"description": "l10n for 'Please click to remove the name from the group'"}
  
   ,"gps_process_edit_identifiers_clear_all_tooltip": "Please click to remove all members from the group"
   ,"@gps_process_edit_identifiers_clear_all_tooltip": {"description": "l10n for the 'Please click to remove all members from the group' tooltip"}
