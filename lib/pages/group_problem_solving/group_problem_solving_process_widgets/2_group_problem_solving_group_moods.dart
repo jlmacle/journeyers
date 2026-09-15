@@ -114,7 +114,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods>
           controller.text = widget.identifiersCol2[index!];
         }
         return AlertDialog(
-          title: Text(lgps.participantIdentifierEditLabel),
+          title: Text(lgps.participantIdentifierEditDialogTitle),
           content: TextField
           (
             key: const Key("gpsParticipantsEditField"),
