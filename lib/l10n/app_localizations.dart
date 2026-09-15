@@ -441,7 +441,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Please click to remove the name from the group'**
-  String get gps_process_edit_identifiers_clear_one_delete_icon_label;
+  String get gps_process_edit_identifiers_clear_name_delete_icon_label;
 
   /// l10n for the 'Please click to remove all members from the group' tooltip
   ///
