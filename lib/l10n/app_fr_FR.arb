@@ -115,8 +115,8 @@
     
     ,"gps_process_edit_identifiers_clear_name_tooltip": "Veuillez cliquer pour retirer un nom du groupe"
     ,"@gps_process_edit_identifiers_clear_name_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour retirer un nom du groupe'"}
-    ,"gps_process_edit_identifiers_clear_one": "Effacer\nun nom"
-    ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n pour 'Effacer un nom'"}
+    ,"gps_process_edit_identifiers_clear_name": "Effacer\nun nom"
+    ,"@gps_process_edit_identifiers_clear_name": {"description": "l10n pour 'Effacer un nom'"}
     ,"gps_process_edit_identifiers_clear_name_delete_icon_label": "Veuillez cliquer pour retirer le nom du groupe"
     ,"@gps_process_edit_identifiers_clear_name_delete_icon_label": {"description": "l10n pour 'Veuillez cliquer pour retirer le nom du groupe'"}
  
