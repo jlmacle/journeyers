@@ -218,7 +218,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez cliquer pour retirer un nom du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Effacer\nun nom';
+  String get gps_process_edit_identifiers_clear_name => 'Effacer\nun nom';
 
   @override
   String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
@@ -768,7 +768,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez cliquer pour retirer un nom du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Effacer\nun nom';
+  String get gps_process_edit_identifiers_clear_name => 'Effacer\nun nom';
 
   @override
   String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
