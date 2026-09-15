@@ -14,6 +14,7 @@ class LocalizedGPSStrings
   var gpsDefaultSavedSessionTitle = "";
   var participantIdentifiersSingleDeletionLabel = "";
   var participantIdentifiersSingleDeletionTooltipLabel = "";
+  var participantIdentifiersSingleDeletionIconTooltipLabel = "";
   var participantIdentifiersBulkDeletionLabel = "";
   var participantIdentifiersBulkDeletionTooltipLabel = "";
   var participantIdentifiersEditLabel = "";
@@ -65,11 +66,12 @@ class LocalizedGPSStrings
     gpsDefaultProcessSessionTitle = _l10n?.gps_process_default_title ?? "Issue with the l10n for the default title for a problem-solving session.";
     gpsDefaultSavedSessionTitle = _l10n?.gps_process_default_saved_title ?? "Issue with the default title when saving a problem-solving session.";
     participantIdentifiersSingleDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_one ?? "Issue with the l10n for 'Clear\nOne'";
-    participantIdentifiersSingleDeletionTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_one_tooltip ?? "Issue with the l10n for the 'Please click to remove a specific member from the group' tooltip";
+    participantIdentifiersSingleDeletionTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_name_tooltip ?? "Issue with the l10n for the 'Please click to remove a specific member from the group' tooltip";
+    participantIdentifiersSingleDeletionIconTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_name_delete_icon_label?? "Issue with the l10n for 'Please click to remove the name from the group'";
     participantIdentifiersBulkDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_all ?? "Issue with the l10n for 'Clear\nAll'";
     participantIdentifiersBulkDeletionTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_all_tooltip ?? "Issue with the l10n for the 'Please click to remove all members from the group' tooltip";
     
-    participantIdentifiersEditLabel = _l10n?.l10n_edit ?? "Issue with the l10n for 'Edit'";
+    participantIdentifiersEditLabel = _l10n?.gps_process_edit_identifiers_edit_name ?? "Issue with the l10n for 'Edit name'";
     participantIdentifiersEditTooltipLabel =  _l10n?.gps_process_edit_identifiers_edit_tooltip ?? "Issue with the l10n for the 'Please click to enter name edition mode' tooltip";
     participantIdentifierEditDialogTitle = _l10n?.gps_process_edit_identifiers_dialog_label ?? "Issue with the label for the 'Edit Value' dialog";
     
