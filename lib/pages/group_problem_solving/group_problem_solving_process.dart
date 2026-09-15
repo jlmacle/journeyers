@@ -455,10 +455,10 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                             [
                               _buildHeaderButton
                               (
-                                tooltipMessage: _isDeleteMode ? lgps.participantIdentifiersEditTooltipLabel : lgps.participantIdentifiersSingleDeletionTooltipLabel,
-                                text:  _isDeleteMode ? lgps.participantIdentifiersEditLabel : lgps.participantIdentifiersSingleDeletionLabel,                        
-                                color: _isDeleteMode ? const Color(0xFFE65100) : const Color(0xFFB71C1C), 
-                                onPressed: () =>  setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;}),
+                                tooltipMessage: _isEditMode ? lgps.participantIdentifiersSingleDeletionTooltipLabel : lgps.participantIdentifiersEditTooltipLabel,
+                                text:  lgps.participantIdentifiersEditLabel ,                        
+                                color: _isEditMode ? Colors.green.shade900 : const Color(0xFFE65100),// : const Color(0xFFB71C1C), 
+                                onPressed: () {setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;});},
                                 screenWidthInInches: screenWidthInInches
                               ),
                             ]
@@ -545,7 +545,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                           (
                             tooltipMessage: _isModificationMode ? AppLocalizations.of(context)?.gps_process_edit_group_end_tooltip ?? "Issue with the l10n for the 'Please click to stop editing the participants identifiers' tooltip" : AppLocalizations.of(context)?.gps_process_edit_group_start_tooltip ?? "Issue with the l10n for the 'Please click to edit the participants identifiers' tooltip",
                             text: _isModificationMode ? AppLocalizations.of(context)?.l10n_done ?? "Issue with the l10n for 'Done'" : editEmoji, 
-                            color: _isModificationMode ? orangeShade900 : Colors.white, 
+                            color: _isModificationMode ? greenShade900 : Colors.white, 
                             onPressed:_isModificationMode 
                               ? () => setState(() {                      
                                   _isEditMode = false;
@@ -559,9 +559,11 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                           if (_isModificationMode)
                             _buildHeaderButton
                             (
-                              tooltipMessage: lgps.participantIdentifiersBulkDeletionTooltipLabel,
-                              text: lgps.participantIdentifiersBulkDeletionLabel, color:  const Color(0xFFB71C1C),
-                              onPressed: () {_groupMoods1Key.currentState?.identifiersClearAll();},
+                              tooltipMessage: _isDeleteMode ? lgps.participantIdentifiersEditTooltipLabel : lgps.participantIdentifiersSingleDeletionTooltipLabel,
+                              text: lgps.participantIdentifiersSingleDeletionLabel, 
+                              // color:  const Color(0xFFB71C1C),
+                              color: _isDeleteMode ? Colors.green.shade900 : const Color(0xFFE65100),// : const Color(0xFFB71C1C), 
+                              onPressed: () {setState(() { _isDeleteMode = !_isDeleteMode; _isEditMode = !_isEditMode;});},
                               screenWidthInInches: screenWidthInInches
                             ),
                           // GPSGroupMoods widget (column 2)
