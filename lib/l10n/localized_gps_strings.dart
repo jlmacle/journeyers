@@ -65,7 +65,7 @@ class LocalizedGPSStrings
     // GPSProcess
     gpsDefaultProcessSessionTitle = _l10n?.gps_process_default_title ?? "Issue with the l10n for the default title for a problem-solving session.";
     gpsDefaultSavedSessionTitle = _l10n?.gps_process_default_saved_title ?? "Issue with the default title when saving a problem-solving session.";
-    participantIdentifiersSingleDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_one ?? "Issue with the l10n for 'Clear\nOne'";
+    participantIdentifiersSingleDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_name ?? "Issue with the l10n for 'Clear\nOne'";
     participantIdentifiersSingleDeletionTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_name_tooltip ?? "Issue with the l10n for the 'Please click to remove a specific member from the group' tooltip";
     participantIdentifiersSingleDeletionIconTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_name_delete_icon_label?? "Issue with the l10n for 'Please click to remove the name from the group'";
     participantIdentifiersBulkDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_all ?? "Issue with the l10n for 'Clear\nAll'";
