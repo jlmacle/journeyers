@@ -282,6 +282,9 @@ class IdentifierWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedGPSStrings lgps = .new(context);
+
     return 
     GestureDetector(
       onHorizontalDragEnd: (details) {
@@ -325,7 +328,16 @@ class IdentifierWidget extends StatelessWidget
             if (isDeleteMode) ...[
               Positioned(
                 right: (Platform.isAndroid || Platform.isIOS) ? 0 : 100, top: 0,
-                child: IconButton(icon: const Icon(Icons.delete_rounded, size: 35, color:  Color(0xFFB71C1C)), onPressed: onDelete),
+                child: IconButton
+                (
+                  tooltip: lgps.participantIdentifiersSingleDeletionIconTooltipLabel,
+                  icon: const Icon
+                  (
+                    Icons.delete_rounded, 
+                    size: 35, 
+                    color:  Color(0xFFB71C1C)), 
+                    onPressed: onDelete
+                  ),
               ),
             ],
           ],

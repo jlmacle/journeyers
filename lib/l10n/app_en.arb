@@ -111,10 +111,15 @@
   ,"@gps_process_edit_group_start_tooltip": {"description": "l10n for the 'Please click to edit the participants' list' tooltip"}
   ,"gps_process_edit_group_end_tooltip": "Please click to stop editing the participants' list"
   ,"@gps_process_edit_group_end_tooltip": {"description": "l10n for the 'Please click to stop editing the participants' list' tooltip"}
-  ,"gps_process_edit_identifiers_clear_one_tooltip": "Please click to remove a specific member from the group"
-  ,"@gps_process_edit_identifiers_clear_one_tooltip": {"description": "l10n for the 'Please click to remove a specific member from the group' tooltip"}
-  ,"gps_process_edit_identifiers_clear_one": "Clear\nOne"
-  ,"@gps_process_edit_identifiers_clear_one": {"description": "l10n for 'Clear\nOne'"}
+  ,"gps_process_edit_identifiers_edit_name": "Edit\nname"
+  ,"@gps_process_edit_identifiers_edit_name": {"description": "l10n for 'Edit name'"}
+  ,"gps_process_edit_identifiers_clear_name_tooltip": "Please click to remove a specific member from the group"
+  ,"@gps_process_edit_identifiers_clear_name_tooltip": {"description": "l10n for the 'Please click to remove a specific member from the group' tooltip"}
+  ,"gps_process_edit_identifiers_clear_name": "Clear\nname"
+  ,"@gps_process_edit_identifiers_clear_name": {"description": "l10n for 'Clear name'"}
+  ,"gps_process_edit_identifiers_clear_name_delete_icon_label": "Please click to remove the name from the group"
+  ,"@gps_process_edit_identifiers_clear_name_delete_icon_label": {"description": "l10n for 'Please click to remove the name from the group'"}
+ 
   ,"gps_process_edit_identifiers_clear_all_tooltip": "Please click to remove all members from the group"
   ,"@gps_process_edit_identifiers_clear_all_tooltip": {"description": "l10n for the 'Please click to remove all members from the group' tooltip"}
   ,"gps_process_edit_identifiers_clear_all": "Clear\nAll"
@@ -274,7 +279,6 @@
   ,"@text_lists_dashboard_edit_participants_sheet_text_field_hint": {"description": "l10n for the 'Participants Edition' text field hint"}
   ,"text_lists_dashboard_edit_participants_snackbar_message_participants_updated": "Participants updated"
   ,"@text_lists_dashboard_edit_participants_snackbar_message_participants_updated": {"description": "l10n for the 'Participants updated' snackbar message"}
-  
   ,"text_lists_dashboard_edit_participants_sheet_empty_list_error_message": "The participants list is empty"
   ,"@text_lists_dashboard_edit_participants_sheet_empty_list_error_message": {"description": "l10n for the 'The participants list is empty' error message"}
   ,"text_lists_dashboard_snackbar_message_list_deleted": "List deleted"

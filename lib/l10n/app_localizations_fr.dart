@@ -211,11 +211,18 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez cliquer pour arrêter l\'édition du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_one_tooltip =>
+  String get gps_process_edit_identifiers_edit_name => 'Éditer\nun nom';
+
+  @override
+  String get gps_process_edit_identifiers_clear_name_tooltip =>
       'Veuillez cliquer pour retirer un nom du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
+  String get gps_process_edit_identifiers_clear_name => 'Effacer\nun nom';
+
+  @override
+  String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
+      'Veuillez cliquer pour retirer le nom du groupe';
 
   @override
   String get gps_process_edit_identifiers_clear_all_tooltip =>
@@ -754,11 +761,18 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Veuillez cliquer pour arrêter l\'édition du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_one_tooltip =>
+  String get gps_process_edit_identifiers_edit_name => 'Éditer\nun nom';
+
+  @override
+  String get gps_process_edit_identifiers_clear_name_tooltip =>
       'Veuillez cliquer pour retirer un nom du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_one => 'Effacer\nUn';
+  String get gps_process_edit_identifiers_clear_name => 'Effacer\nun nom';
+
+  @override
+  String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
+      'Veuillez cliquer pour retirer le nom du groupe';
 
   @override
   String get gps_process_edit_identifiers_clear_all_tooltip =>
