@@ -261,7 +261,7 @@ void main()
     group("Snackbar Tests: \n", 
     () 
     {
-      testWidgets("Should render the correct snackbar message (empty list of ideas) ", 
+      testWidgets("Should render the placeholder message (empty list of ideas) ", 
       (WidgetTester tester) async 
       {
         // Pumping the widget
@@ -271,25 +271,24 @@ void main()
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
         
-        // snackbarMessage hard-coded strings
-        var snackbarMessage = "";
+        // placeholder hard-coded strings
+        var placeholder = "";
         
         var localeLanguageCode = getLocaleLanguageCode(tester);
         
         switch(localeLanguageCode.toLowerCase())
         {
-          case("en"): { snackbarMessage = "No ideas added yet."; }
-          case("fr"): { snackbarMessage = "Liste d'idées vide"; }        
+          case("en"): { placeholder = "No ideas added yet."; }
+          case("fr"): { placeholder = "Liste d'idées vide"; }        
         }
 
-        if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage"); 
+        if (testingDebug) pu.printd("Testing Debug: placeholder: $placeholder"); 
 
         // Verifying consistency between hard-coded string and localized string
-        // GPSProcess: lgps.ideasListEmptyListSnackbarMessage
-        expect(snackbarMessage, lgps.ideasListEmptyListSnackbarMessage);     
+        expect(placeholder, lgps.ideasListPlaceholder);     
 
-        // Verifying the snackbarMessage present
-        expect(find.text(lgps.ideasListEmptyListSnackbarMessage), findsOneWidget);
+        // Verifying the placeholder present
+        expect(find.text(lgps.ideasListPlaceholder), findsOneWidget);
     }
     );    
     });
