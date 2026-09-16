@@ -8,12 +8,13 @@ import "package:shared_preferences/shared_preferences.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 void main() 
 {
-  const textFieldHintPart = "Please add the";
+  
 
     group("SessionFileNameOnMobilePlatforms Tests: \n", 
     () 
@@ -44,11 +45,15 @@ void main()
             );
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedUtilsStrings lus = .new(context);
+
             if (testingDebug) pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
             if (Platform.isAndroid || Platform.isIOS)
             {
               // Verifying the text field absent
-              expect(find.textContaining(textFieldHintPart), findsNothing);
+              expect(find.text(lus.fileNameTextFieldHint), findsNothing);
               
               // Verifying the elevated button present
               expect(find.byType(ElevatedButton), findsOneWidget);  
@@ -83,6 +88,10 @@ void main()
             );
             await tester.pumpAndSettle();
 
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedUtilsStrings lus = .new(context);
+
             if (testingDebug) pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
 
             if (Platform.isAndroid || Platform.isIOS)
@@ -91,7 +100,7 @@ void main()
               expect(find.byType(ElevatedButton), findsNothing);   
 
               // Verifying the text field present
-              expect(find.textContaining(textFieldHintPart), findsOneWidget);   
+              expect(find.text(lus.fileNameTextFieldHint), findsOneWidget);   
             }                  
         }
         );        
