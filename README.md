@@ -23,8 +23,8 @@ Also, this is free and unencumbered software <a href="https://github.com/jlmacle
 <br>
 
 
-<a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">Context analysis: preview video.</a><br>
-<a href="https://github.com/jlmacle/journeyers_releases/blob/main/video-Group_problem-solving.mp4">Group problem-solving: preview video.</a><br>
+<a href="https://github.com/jlmacle/journeyers_media/blob/main/video.mp4">Context analysis: preview video.</a><br>
+<a href="https://github.com/jlmacle/journeyers_media/blob/main/video-Group_problem-solving.mp4">Group problem-solving: preview video.</a><br>
 <br> (Click on the "Download raw file" icon to download a video.)
 <hr>
 La majeure partie de notre vie est passée en équipe : à la maison, à l'école, au travail, etc.<br>
@@ -47,8 +47,8 @@ De plus, il s'agit d'un logiciel gratuit et libre, <a href="https://github.com/j
 <br>
 <a href="https://github.com/jlmacle/journeyers/wiki">Plus de notes sur le wiki.</a><br>
 <br>
-<a href="https://github.com/jlmacle/journeyers_releases/blob/main/video.mp4">Analyse de contexte : vidéo de preview.</a><br>
-<a href="https://github.com/jlmacle/journeyers_releases/blob/main/video-Group_problem-solving.mp4">Résolution de problèmes en groupe : vidéo de preview.</a><br>
+<a href="https://github.com/jlmacle/journeyers_media/blob/main/video.mp4">Analyse de contexte : vidéo de preview.</a><br>
+<a href="https://github.com/jlmacle/journeyers_media/blob/main/video-Group_problem-solving.mp4">Résolution de problèmes en groupe : vidéo de preview.</a><br>
 
 <br>
 
@@ -57,7 +57,7 @@ De plus, il s'agit d'un logiciel gratuit et libre, <a href="https://github.com/j
 <hr>
 <br><br>
 <p align="center">
-<img src="https://github.com/jlmacle/journeyers_releases/blob/main/screencopy.png" width="400">
+<img src="https://github.com/jlmacle/journeyers_media/blob/main/screencopy.png" width="400">
 </p>
 
 <hr>
