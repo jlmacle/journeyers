@@ -8,6 +8,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart" as tfu_gen;
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart";
@@ -121,6 +122,9 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedUtilsStrings lus = .new(context);
+
     return 
     _applicationFolderPath == ""
     // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
@@ -153,7 +157,7 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
       textFieldStartValue: widget.fileNameWithoutExtensionWhenEdition,
       textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
       textFieldStyle: commonTextFieldStyle, 
-      textFieldHint: AppLocalizations.of(context)?.file_name_process_text_field_hint_on_mobile ?? "Issue with the text field hint inviting to add a file name without extension", 
+      textFieldHint: lus.fileNameTextFieldHint, 
       textFieldHintStyle: commonTextFieldHintStyle, 
       errorMessageStyle: commonTextFieldErrorMessageStyle, 
       onTextFieldValueSubmittedCallbackFunction: (value) async
