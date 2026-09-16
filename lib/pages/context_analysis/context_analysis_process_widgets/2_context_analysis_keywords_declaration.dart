@@ -128,6 +128,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
                               tag, 
                               style: const TextStyle(color: appBarWhite),
                             ),
+                    deleteIcon: const Icon(Icons.close),
                     deleteIconColor: appBarWhite,
                     onDeleted: () 
                     {

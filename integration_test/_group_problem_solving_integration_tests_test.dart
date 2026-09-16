@@ -3356,7 +3356,7 @@ Future<void> main() async {
               switch(localeLanguageCode.toLowerCase())
               {
                 case("en"): { snackbarMessage = "Participants updated"; }
-                case("fr"): { snackbarMessage = "Participants mis à jour"; }        
+                case("fr"): { snackbarMessage = "Noms mis à jour"; }        
               }
               
               if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
