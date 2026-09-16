@@ -611,14 +611,14 @@ void main()
               case("en"): 
               { 
                 pastOutcomesHouseholdTextFieldHint = "Please describe the past outcomes of the problem for the household, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the household.";
-                pastOutcomesWorkplaceTextFieldHint = "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household.";
+                pastOutcomesWorkplaceTextFieldHint = "Please describe the past outcomes of the problem for the workplace, if some seem to have been out of their comfort zone for too long, and the more desirable outcomes for the workplace and for the household. Please identify any competence or efficiency issues.";
                 helpingAndHouseholdTextFieldHint = "Please develop the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others.";
                 caFormPleaseDevelopTextFieldHint = "Please develop.";
               }
               case("fr"): 
               { 
                 pastOutcomesHouseholdTextFieldHint = "Veuillez décrire les conséquences du problème, si des membres du foyer ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux membres du foyer.";
-                pastOutcomesWorkplaceTextFieldHint  = "Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer.";
+                pastOutcomesWorkplaceTextFieldHint  = "Veuillez décrire les conséquences du problème, si des membres du lieu de travail ont été en dehors de leur zone de confort pendant trop longtemps, et une situation de vie qui serait plus favorable aux collègues du lieu de travail et aux membres du foyer. Veuillez identifier les problèmes de compétence et d'efficacité.";
                 helpingAndHouseholdTextFieldHint = "Veuillez développer les raisons, et les impacts potentiels, d'un déséquilibre entre fidélité envers votre famille et considération envers les autres.";
                 caFormPleaseDevelopTextFieldHint = "Veuillez développer.";                
               }              
