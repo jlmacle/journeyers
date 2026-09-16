@@ -278,7 +278,7 @@ void main()
         
         switch(localeLanguageCode.toLowerCase())
         {
-          case("en"): { snackbarMessage = "No ideas to save"; }
+          case("en"): { snackbarMessage = "No ideas added yet."; }
           case("fr"): { snackbarMessage = "Liste d'idées vide"; }        
         }
 
