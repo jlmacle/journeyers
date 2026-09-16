@@ -801,7 +801,7 @@ abstract class AppLocalizations {
   /// The message, at saving time, when a list name has already been used.
   ///
   /// In en, this message translates to:
-  /// **' already exists.\nPlease choose another label.'**
+  /// **'The list name already exists.\nPlease choose another label.'**
   String get text_lists_new_list_same_list_name_message;
 
   /// Part of the SnackBar message, at list saving time.
