@@ -13,7 +13,7 @@ Accessibility needs to be finished.<br>
 Screen reader accessibility on Android needs to be polished.<br>
 Issues might remain with some features.<br>
 Please note that the code needs cleaning.<br>
-(<a href="https://github.com/jlmacle/journeyers_releases">apk - alpha release)</a><br>
+(<a href="https://github.com/jlmacle/journeyers/releases">apk - alpha release)</a><br>
 <br>
 
 Adapting the software to a different set of questions is feasible, and is planned to be made easier.<br>
@@ -40,7 +40,7 @@ L'accessibilité a besoin d'être terminée.<br>
 L'accessibilité pour lecteur d'écran sur Android a besoin d'être peaufinée.<br>
 Des problèmes pourraient subsister avec certaines fonctionnalités.<br>
 Veuillez noter que le code nécessite d'être nettoyé.<br>
-(<a href="https://github.com/jlmacle/journeyers_releases">apk - version alpha</a>)<br>
+(<a href="https://github.com/jlmacle/journeyers/releases">apk - version alpha</a>)<br>
 <br>
 Il est possible d'adapter le logiciel à un ensemble différent de questions, et il est prévu de rendre cela plus facile.<br>
 De plus, il s'agit d'un logiciel gratuit et libre, <a href="https://github.com/jlmacle/journeyers/blob/main/LICENSE">dans le domaine public</a>.<br>
