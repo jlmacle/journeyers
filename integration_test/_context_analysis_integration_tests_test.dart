@@ -1876,7 +1876,7 @@ Future<void> main() async {
                                       (of: currentSegmentedButtonFinder,
                                         matching: find.text(option));
 
-                  await tester.ensureVisible(currentSegmentedButtonFinder);
+                  await tester.scrollUntilVisible(currentSegmentedButtonFinder, 45, scrollable: find.byType(Scrollable).last);
                   await tester.pumpAndSettle();
                   await tester.tap(optionFinder);
                   await tester.pumpAndSettle();
