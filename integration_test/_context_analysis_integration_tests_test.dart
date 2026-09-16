@@ -8,6 +8,7 @@ import "package:integration_test/integration_test.dart";
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
+import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
@@ -36,10 +37,11 @@ import "externalized_code/externalized_testing_code.dart";
 /// call inside CAPage (e.g. the first-run AlertDialog) resolves correctly instead
 /// of returning null and falling back to the raw fallback string.
 Widget buildTestableCAPage() {
-  return const MaterialApp(
+  return MaterialApp(
     localizationsDelegates: AppLocalizations.localizationsDelegates,
-    supportedLocales: AppLocalizations.supportedLocales,    
-    home: Scaffold
+    supportedLocales: AppLocalizations.supportedLocales, 
+    theme: appTheme,   
+    home: const Scaffold
     ( 
       body: CAPage()
     ),
@@ -66,7 +68,7 @@ Future<void> main() async {
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const testAnalysisTitleRoot = "Integration-test CA session title";
+  const testAnalysisTitleRoot = "CA session title";
   const testAnalysisTitle1 = "$testAnalysisTitleRoot (1)";
   const testAnalysisTitle2 = "$testAnalysisTitleRoot (2)";
   const testAnalysisTitle3 = "$testAnalysisTitleRoot (3)";
