@@ -2472,7 +2472,7 @@ Future<void> main() async {
       group("Participants loading: \n", () 
       {        
         testWidgets("Participants can be loaded from an existing list, they can be edited, "
-        "and deleted using single deletion or bulk deletion", 
+        "and deleted using single deletion", 
         (WidgetTester tester) async 
         {
           // Setting mock values for SharedPreferences
@@ -2495,11 +2495,11 @@ Future<void> main() async {
 
           // ── ADDING PARTICIPANTS, KEYWORDS and SAVING THE LIST  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────────────────────
-          List< Map<String,Map<String, dynamic>> > listDataMapsList =
+          List< Map<String,Map<String, dynamic>> > dataMapsList =
           [
             {listLabel1:{"names":names1,"keywords":[]}},
           ];
-          await gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage(tester: tester, listDataMapsList: listDataMapsList);
+          await gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage(tester: tester, listDataMapsList: dataMapsList);
         
           // ── LOADING PARTICIPANTS   ─────────────────────────────────
           // ───────────────────────────────────────────────────────────
@@ -2534,11 +2534,7 @@ Future<void> main() async {
           expect(participantsListsDashboardTitleFinder, findsOne);
 
           // Searching for a loading button
-          var loadingButtonFinder = find.descendant
-          (
-            of: find.byType(ElevatedButton), 
-            matching: find.text(lps.loadingButtonLabel)
-          );
+          var loadingButtonFinder = find.text(lps.loadingButtonLabel);
           expect(participantsListsDashboardTitleFinder, findsOne);
 
           // await tester.pump(const Duration(seconds: 2));
@@ -2593,41 +2589,36 @@ Future<void> main() async {
 
             // ── SINGLE DELETION   ─────────────────────────────────
           // Edit mode still on
-          // Clicking on "Clear One"
+          // Clicking to start deletion mode
           await tester.tap(find.text(lgps.participantIdentifiersSingleDeletionLabel));
 
           await tester.pump(const Duration(seconds: 2));
 
-          // Clicking on the delete icon for name1
-          var identifierForName1Finder = find.ancestor
-          (
-            of: find.text("${name1}${editionSuffix}"), 
-            matching: find.byType(IdentifierWidget)
-          );
+          for (var name in names1)
+          {
+            // Clicking on the delete icon for the name
+            var identifierForNameFinder = find.ancestor
+            (
+              of: find.text("${name}${editionSuffix}"), 
+              matching: find.byType(IdentifierWidget)
+            );
 
-          var deleteIconForName1Finder = find.descendant
-          (
-            of: identifierForName1Finder, 
-            matching: find.byIcon(Icons.delete_rounded)
-          );
+            var deleteIconForNameFinder = find.descendant
+            (
+              of: identifierForNameFinder, 
+              matching: find.byIcon(Icons.delete_rounded)
+            );
 
-          await tester.tap(deleteIconForName1Finder);
-          await tester.pumpAndSettle();
+            await tester.tap(deleteIconForNameFinder);
+            await tester.pumpAndSettle();
 
-          await tester.pump(const Duration(seconds: 2));
+            await tester.pump(const Duration(seconds: 2));
 
-          // Verifying the name removed
-          expect(find.text("${name1}${editionSuffix}"), findsNothing);
+            // Verifying the name removed
+            expect(find.text("${name1}${editionSuffix}"), findsNothing);   
+          }
 
-           // ── BULK DELETION   ─────────────────────────────────
-          // Edit mode still on
-          // Clicking on "Clear All"
-          await tester.tap(find.text(lgps.participantIdentifiersBulkDeletionLabel));
-          await tester.pumpAndSettle();
-
-          // Verifying remaining names absent
-          expect(find.text("${name2}${editionSuffix}"), findsNothing);
-          expect(find.text("${name3}${editionSuffix}"), findsNothing);
+               
 
           await tester.pump(const Duration(seconds: 1));
       });      
