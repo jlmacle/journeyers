@@ -388,9 +388,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     LocalizedCAQuestionsFields? qfl = .new(context);
     LocalizedDashboardStrings lds = .new(context);
 
-    // Verifying the title present
-    expect(find.text(title), findsNWidgets(2));  
-
     if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
     if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
 
@@ -412,6 +409,10 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     await tester.pumpAndSettle();
 
     await tester.pump(const Duration(seconds: 5));
+
+    // Verifying the title present
+    var titleFinder  = find.descendant(of: find.byType(StatefulBuilder), matching: find.textContaining(title));
+    expect(titleFinder, findsOne);  
 
     //Searching for the expansion tiles
     var  expansionTilesFinder = find.descendant
@@ -562,6 +563,8 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
     await tester.tap(previewClosingTooltipLabelFinder);
     await tester.pumpAndSettle();
+
+    // await tester.pump(const Duration(seconds: 2));
   }
 
 // ─── CA FORM TESTING ───────────────────────────────────────────────────────────────
