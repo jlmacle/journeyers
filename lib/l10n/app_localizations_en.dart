@@ -434,7 +434,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get text_lists_new_list_same_list_name_message =>
-      ' already exists.\nPlease choose another label.';
+      'The list name already exists.\nPlease choose another label.';
 
   @override
   String get text_lists_new_list_saved_as_snackbar_message => 'Saved as ';
@@ -976,7 +976,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get text_lists_new_list_same_list_name_message =>
-      ' already exists.\nPlease choose another label.';
+      'The list name already exists.\nPlease choose another label.';
 
   @override
   String get text_lists_new_list_saved_as_snackbar_message => 'Saved as ';

@@ -1697,7 +1697,7 @@ Future<void> main() async {
             await tester.pump(const Duration(seconds: 5));
 
             // Searching for the error message
-            var listAlreadySavedErrorFinder = find.textContaining(lps.listLabelAlreadyExistsErrorEndPart);
+            var listAlreadySavedErrorFinder = find.textContaining(lps.listLabelAlreadyExistsError);
             expect(listAlreadySavedErrorFinder, findsOne);
 
             // Verifying transition to GPS process page absent

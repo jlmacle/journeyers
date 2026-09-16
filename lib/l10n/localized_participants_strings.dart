@@ -37,7 +37,7 @@ class LocalizedParticipantsStrings
   var newListButtonLabel = "";
 
   var saveListTooltipLabel = "";
-  var listLabelAlreadyExistsErrorEndPart = "";
+  var listLabelAlreadyExistsError = "";
   var savedAsSnackBarMessage = "";
   var savedFailedSnackBarMessage = "";
 
@@ -77,6 +77,7 @@ class LocalizedParticipantsStrings
     //  ─── Deletion ───────────────────────────────────────
     // Single deletion tooltip
     listsDeleteTooltipLabel = _l10n?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip";
+    
     // Single deletion snackbar message
     listDeletedSnackbarMessage = _l10n?.text_lists_dashboard_snackbar_message_list_deleted ?? "Issue with the l10n for the 'List deleted' snackbar message";
 
@@ -85,7 +86,7 @@ class LocalizedParticipantsStrings
     newListButtonLabel =  _l10n?.text_lists_dashboard_invitation_to_add_a_list ?? "Issue with the l10n for the invitation to add a list.";
    
     saveListTooltipLabel = _l10n?.text_lists_new_list_save_button_tooltip ?? "Issue with the l10n for the save button tooltip.";
-    listLabelAlreadyExistsErrorEndPart = _l10n?.text_lists_new_list_same_list_name_message ?? "Issue with the message, at saving time, when a list name has already been used.";
+    listLabelAlreadyExistsError = _l10n?.text_lists_new_list_same_list_name_message ?? "Issue with the message, at saving time, when a list name has already been used.";
     savedAsSnackBarMessage = _l10n?.text_lists_new_list_saved_as_snackbar_message ?? "Issue with the l10n for the part of the SnackBar message, at list saving time.";
     savedFailedSnackBarMessage = _l10n?.text_lists_new_list_save_failed_snackbar_message ?? "Issue with the 'Save failed' SnackBar message, at list saving time.";
 
