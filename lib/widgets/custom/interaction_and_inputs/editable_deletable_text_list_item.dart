@@ -105,11 +105,7 @@ class _EditableDeletableTextListItemState extends State<EditableDeletableTextLis
               child: ListTile
               (
                 key: Key("editable-deletable-list-tile-${widget.itemIndex}"),
-                dense: true,
-                leading: Text(
-                  "${widget.itemIndex + 1}.",
-                  style: widget.themeData.textTheme.bodySmall,
-                ),                            
+                dense: true,                                           
                 title: Text(
                   key: Key("editable-deletable-text-item-${widget.itemIndex}"),
                   widget.itemText,
