@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -55,27 +55,38 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     return 
-    TextButton.icon
-    (
-      onPressed: () async
-      {
-        _isAscendingDate = !_isAscendingDate;   
-        // Updating the widget     
-        setState((){});
-        // Sorting and updating the sessions list
-        await _sortSessionsByDate();
-      },
-      icon: Icon
+    Semantics(
+      // To have the change voiced when the re-build occurs
+      liveRegion: true,
+      label: "${lds.sortByDateLabel} (${_isAscendingDate ? "Old to New" : "New to Old"}) ",
+      child:
+      TextButton.icon
       (
-        _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
-        color: Colors.black,
-      ),
-      label: Text
-      (
-        AppLocalizations.of(context)?.dashboard_sort_by_date ?? "Issue with the 'Sort by Date' label",
-        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-      ),
+        onPressed: () async
+        {
+          _isAscendingDate = !_isAscendingDate;   
+          // Updating the widget     
+          setState((){});
+          // Sorting and updating the sessions list
+          await _sortSessionsByDate();
+        },
+        icon: Icon
+        (
+          _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
+          color: Colors.black,
+        ),
+        label: Text
+        (
+          semanticsLabel: "",
+          lds.sortByDateLabel,
+          style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+        ),
+      )
+      
     );
   }
 }
