@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
@@ -49,31 +49,43 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     return 
-    TextButton.icon
+    Semantics
     (
-      onPressed: () async 
-      {
-        _isAscendingTitle = !_isAscendingTitle;
-        // Updating the widget UI
-        setState((){});
-        
-        // Sorting
-        await _sortSessionsByTitle();        
-        // Updating the sessions list UI
-        widget.dashboardCallbackFunctionToRefreshTheSessionsList();
-      },
-      icon: const Icon
+      // To have the change voiced when the re-build occurs
+      liveRegion: true,
+      label: "${lds.sortByTitleLabel} (${_isAscendingTitle ? "Z to A" : "A to Z"})",
+      child:    
+      TextButton.icon
       (
-        Icons.sort_by_alpha,
-        color: Colors.black,
-      ),
-      label: Text
-      (
-        "${AppLocalizations.of(context)?.dashboard_sort_by_title ?? "Issue with the 'Sort by Title' label"} (${_isAscendingTitle ? "Z-A" : "A-Z"})",
-        // TODO: style to externalize
-        style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-      ),
+        onPressed: () async 
+        {
+          _isAscendingTitle = !_isAscendingTitle;
+          // Updating the widget UI
+          setState((){});
+          
+          // Sorting
+          await _sortSessionsByTitle();        
+          // Updating the sessions list UI
+          widget.dashboardCallbackFunctionToRefreshTheSessionsList();
+        },
+        icon: const Icon
+        (
+          Icons.sort_by_alpha,
+          color: Colors.black,
+        ),
+        label: Text
+        (
+          semanticsLabel: "",
+          "${lds.sortByTitleLabel} (${_isAscendingTitle ? "Z to A" : "A to Z"})",
+          // TODO: style to externalize
+          style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+        ),
+      )
+      
     );
   }
 }

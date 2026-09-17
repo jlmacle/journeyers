@@ -138,7 +138,7 @@
   ,"@gps_process_new_idea_text_field_hint": {"description": "l10n for the 'Please enter an idea.' text field hint"}
   ,"gps_process_snackbar_message_no_ideas_to_save": "No ideas to save"
   ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n for the 'No ideas to save' snackbar message"}
-  ,"gps_process_ideas_overlay_close_button_tooltip": "Please click to close the ideas edition page"
+  ,"gps_process_ideas_overlay_close_button_tooltip": "Click to close the ideas edition page"
   ,"@gps_process_ideas_overlay_close_button_tooltip": {"description": "l10n for the ideas overlay close button tooltip"}
  
 
@@ -200,7 +200,7 @@
   ,"@dashboard_tooltip_delete": {"description": "l10n for the 'Delete data' tooltip"}
   ,"dashboard_preview_share_session_data_tooltip": "Share session data"
   ,"@dashboard_preview_share_session_data_tooltip": {"description": "l10n for the preview 'Share session data' tooltip"}
-  ,"dashboard_preview_close_preview_tooltip": "Please click to close the preview"
+  ,"dashboard_preview_close_preview_tooltip": "Click to close the preview"
   ,"@dashboard_preview_close_preview_tooltip": {"description": "l10n for the preview 'Close the preview' tooltip"}
   ,"dashboard_edit_title_sheet_label_text": "Title Edition"
   ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n for the 'Title Edition' label text"}
@@ -311,7 +311,7 @@
   ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time\n(+ Enter key)."
   ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n for the keywords entry text field hint"}
   
-  ,"l10n_keywords_overlay_close_button_tooltip": "Please click to close the keywords declaration page"
+  ,"l10n_keywords_overlay_close_button_tooltip": "Click to close the keywords declaration page"
   ,"@l10n_keywords_overlay_close_button_tooltip": {"description": "l10n for the keywords overlay close button tooltip"}
 
 

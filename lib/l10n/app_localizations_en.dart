@@ -251,7 +251,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gps_process_ideas_overlay_close_button_tooltip =>
-      'Please click to close the ideas edition page';
+      'Click to close the ideas edition page';
 
   @override
   String get gps_process_checklist_title => 'Checklist';
@@ -347,7 +347,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dashboard_preview_close_preview_tooltip =>
-      'Please click to close the preview';
+      'Click to close the preview';
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Title Edition';
@@ -528,7 +528,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
-      'Please click to close the keywords declaration page';
+      'Click to close the keywords declaration page';
 
   @override
   String get save_button_text => 'Save Changes';
@@ -793,7 +793,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get gps_process_ideas_overlay_close_button_tooltip =>
-      'Please click to close the ideas edition page';
+      'Click to close the ideas edition page';
 
   @override
   String get gps_process_checklist_title => 'Checklist';
@@ -889,7 +889,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get dashboard_preview_close_preview_tooltip =>
-      'Please click to close the preview';
+      'Click to close the preview';
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Title Edition';
@@ -1070,7 +1070,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
-      'Please click to close the keywords declaration page';
+      'Click to close the keywords declaration page';
 
   @override
   String get save_button_text => 'Save Changes';
