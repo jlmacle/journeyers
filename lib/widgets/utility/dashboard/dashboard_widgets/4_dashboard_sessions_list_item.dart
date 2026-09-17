@@ -165,29 +165,24 @@ class _SessionsListItemState extends State<SessionsListItem>
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        spacing: 8,
-                        children: [
-                          // For the edition of the title
-                          GestureDetector(
-                            onTap: widget.onEditTitleCallbackFunction,
-                            child: Text(
-                              displayTitle,
-                              key: Key("session-title-${widget.sessionDataIndex}"),
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
-                            ),
-                          ),
-                          // The session date
-                          Text(
-                            "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
-                            key: Key("session-date-${widget.sessionDataIndex}"),
-                            style: const TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                        ],
+                    children: [ 
+                      // Title                     
+                      GestureDetector(
+                        onTap: widget.onEditTitleCallbackFunction,
+                        child: Text(
+                          displayTitle,
+                          key: Key("session-title-${widget.sessionDataIndex}"),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
                       ),
+                      // Session date
+                      Text(
+                        "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
+                        key: Key("session-date-${widget.sessionDataIndex}"),
+                        style: const TextStyle(fontSize: 14, color: Colors.grey),
+                        textAlign: .left,
+                      ),                 
                       const SizedBox(height: 4),
                       // For the edition of the keywords
                       GestureDetector(
