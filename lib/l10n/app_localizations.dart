@@ -495,7 +495,7 @@ abstract class AppLocalizations {
   /// l10n for the ideas overlay close button tooltip
   ///
   /// In en, this message translates to:
-  /// **'Please click to close the ideas edition page'**
+  /// **'Click to close the ideas edition page'**
   String get gps_process_ideas_overlay_close_button_tooltip;
 
   /// The default title for the checklist-related widget.
@@ -657,7 +657,7 @@ abstract class AppLocalizations {
   /// l10n for the preview 'Close the preview' tooltip
   ///
   /// In en, this message translates to:
-  /// **'Please click to close the preview'**
+  /// **'Click to close the preview'**
   String get dashboard_preview_close_preview_tooltip;
 
   /// l10n for the 'Title Edition' label text
@@ -959,7 +959,7 @@ abstract class AppLocalizations {
   /// l10n for the keywords overlay close button tooltip
   ///
   /// In en, this message translates to:
-  /// **'Please click to close the keywords declaration page'**
+  /// **'Click to close the keywords declaration page'**
   String get l10n_keywords_overlay_close_button_tooltip;
 
   /// l10n for the save_button text
