@@ -136,8 +136,8 @@
     ,"@gps_process_new_idea_text_field_hint": {"description": "Le placeholder du champ de texte invitant à entrer une idée"}
     ,"gps_process_snackbar_message_no_ideas_to_save": "Liste d'idées vide"
     ,"@gps_process_snackbar_message_no_ideas_to_save": {"description": "l10n pour le message de snackbar 'Liste d'idées vide'"}
-    ,"gps_process_ideas_overlay_close_button_tooltip": "Veuillez cliquer pour fermer la page d'édition des idées"
-    ,"@gps_process_ideas_overlay_close_button_tooltip": {"description": "l10n pour l'infobulle 'Veuillez cliquer pour fermer la page d'édition des idées'"}
+    ,"gps_process_ideas_overlay_close_button_tooltip": "Cliquer pour fermer la page d'édition des idées"
+    ,"@gps_process_ideas_overlay_close_button_tooltip": {"description": "l10n pour l'infobulle 'Cliquer pour fermer la page d'édition des idées'"}
 
     ,"gps_process_checklist_title": "Check-list"
     ,"@gps_process_checklist_title": {"description": "Le titre par défaut pour le widget lié à la check-list."}
@@ -196,7 +196,7 @@
     ,"@dashboard_tooltip_delete": {"description": "l10n pour l'infobulle 'Supprimer les données'"} 
     ,"dashboard_preview_share_session_data_tooltip": "Partager l'analyse"
     ,"@dashboard_preview_share_session_data_tooltip": {"description": "l10n pour l'infobulle 'Partager l'analyse' dans l'aperçu"} 
-    ,"dashboard_preview_close_preview_tooltip": "Veuillez cliquer pour fermer l'aperçu"
+    ,"dashboard_preview_close_preview_tooltip": "Cliquer pour fermer l'aperçu"
     ,"@dashboard_preview_close_preview_tooltip": {"description": "l10n pour l'infobulle 'Cliquer pour fermer l'aperçu' dans l'aperçu"}
     ,"dashboard_edit_title_sheet_label_text": "Édition du titre"
     ,"@dashboard_edit_title_sheet_label_text": {"description": "l10n pour l'étiquette d'édition du titre"}
@@ -310,7 +310,7 @@
     ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."
     ,"@l10n_keywords_entry_text_field_hint": {"description": "l10n pour le placeholder du champ de texte pour l'entrée de mots-clés"}
 
-    ,"l10n_keywords_overlay_close_button_tooltip": "Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés"
+    ,"l10n_keywords_overlay_close_button_tooltip": "Cliquer pour fermer la fenêtre de déclaration des mots-clés"
     ,"@l10n_keywords_overlay_close_button_tooltip": {"description": "l10n pour l'infobulle de fermeture de la fenêtre de déclaration des mots-clés."}
   
 
