@@ -255,7 +255,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gps_process_ideas_overlay_close_button_tooltip =>
-      'Veuillez cliquer pour fermer la page d\'édition des idées';
+      'Cliquer pour fermer la page d\'édition des idées';
 
   @override
   String get gps_process_checklist_title => 'Check-list';
@@ -352,7 +352,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dashboard_preview_close_preview_tooltip =>
-      'Veuillez cliquer pour fermer l\'aperçu';
+      'Cliquer pour fermer l\'aperçu';
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Édition du titre';
@@ -536,7 +536,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
-      'Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés';
+      'Cliquer pour fermer la fenêtre de déclaration des mots-clés';
 
   @override
   String get save_button_text => 'Enregistrer les données';
@@ -805,7 +805,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get gps_process_ideas_overlay_close_button_tooltip =>
-      'Veuillez cliquer pour fermer la page d\'édition des idées';
+      'Cliquer pour fermer la page d\'édition des idées';
 
   @override
   String get gps_process_checklist_title => 'Check-list';
@@ -902,7 +902,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get dashboard_preview_close_preview_tooltip =>
-      'Veuillez cliquer pour fermer l\'aperçu';
+      'Cliquer pour fermer l\'aperçu';
 
   @override
   String get dashboard_edit_title_sheet_label_text => 'Édition du titre';
@@ -1086,7 +1086,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_keywords_overlay_close_button_tooltip =>
-      'Veuillez cliquer pour fermer la fenêtre de déclaration des mots-clés';
+      'Cliquer pour fermer la fenêtre de déclaration des mots-clés';
 
   @override
   String get save_button_text => 'Enregistrer les données';
