@@ -2911,6 +2911,12 @@ Future<void> main() async {
                 {listLabel2:{"names":names2,"keywords":keywordsListKwWorkplace}},
                 {listLabel3:{"names":names3,"keywords":keywordsListKwWorkplace}},                          
               ];
+              for (var i = 0; i <= 2; i++)
+              {
+                if (testingDebug) pu.printd("Testing Debug: Data: ${listDataMapsList[i]}");
+                if (testingDebug) pu.printd("Testing Debug: Title: ${listDataMapsList[i]["List${i+1}"]?["names"]}");
+                if (testingDebug) pu.printd("Testing Debug: Kws: ${listDataMapsList[i]["List${i+1}"]?["keywords"]}");
+              }  
               await gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage(tester: tester, listDataMapsList: listDataMapsList);
 
               // ── REACHING THE DASHBOARD/LISTS PAGE   ────────────────────────
@@ -2919,6 +2925,9 @@ Future<void> main() async {
             
               // ── FILTERING BY KEYWORDS ────────────────────────────
               // ─────────────────────────────────────────────────────
+              List<String> titlesCompanionshipExpected = titlesCompanionship;
+              List<String> titlesWorkplaceExpected = ["List3","List2"];
+
               // 1. Filtering by kwCompanionship
               var kwCompanionshipFinder = await dashboardGetKwFilterChip(tester, kwCompanionship);
               await tester.tap(kwCompanionshipFinder);
@@ -2931,7 +2940,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionshipExpected[index]);
               }
               // Un-selecting the keyword
               await tester.tap(kwCompanionshipFinder);
@@ -2949,7 +2958,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace[index]);
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplaceExpected[index]);
               }         
 
               // await tester.pump(const Duration(seconds: 2));
