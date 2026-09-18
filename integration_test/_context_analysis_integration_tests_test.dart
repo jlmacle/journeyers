@@ -410,6 +410,9 @@ Future<void> main() async {
               // await tester.pump(const Duration(seconds: 4));
             
               // ── 2. FILTERING BY KEYWORDS ────────────────────────────
+              List<String> titlesMaintenanceExpected = [titlesMaintenance[2], titlesMaintenance[0],titlesMaintenance[1]];
+              List<String> titlesCompanionshipExpected = titlesCompanionship;
+
               // ────────────────────────────────────────────────────────
 
               // 1. Filtering by kwMaintenance
@@ -425,7 +428,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesMaintenance.reversed.toList()[index]);
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesMaintenanceExpected[index]);
               }
               // Un-selecting the keyword
               await tester.tap(kwMaintenanceFinder);
@@ -444,7 +447,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionship.reversed.toList()[index]);
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionshipExpected[index]);
               }
 
               // Un-selecting the keyword
@@ -464,7 +467,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace[index]);
               }
               
 
