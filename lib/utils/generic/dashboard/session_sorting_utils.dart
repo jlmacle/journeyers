@@ -1,19 +1,15 @@
-import "package:flutter/material.dart";
-
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 
 /// {@category Utils - Generic}
-/// Method used to sort sessions by date
+/// Method used to sort sessions by date.
 /// The list parameter is assumed to be a list of sessions, 
-/// with a key DashboardUtils.keyDate for the date values.
-Future<List<dynamic>> sortSessionByDateAddJm
+/// with a key DashboardUtils.keyDateISO8601 for the date ISO 8601 values.
+Future<List<dynamic>> sortSessionByDate
 ({
-  required BuildContext context,
   required List<dynamic> list, 
-  required String dateFormat, 
   required bool byAscendingDate
 }) async 
 {  
@@ -22,17 +18,23 @@ Future<List<dynamic>> sortSessionByDateAddJm
       try
       {
         
-        String dateA = a[DashboardUtils.keyDate];
-        String dateB = b[DashboardUtils.keyDate];
+        String dateA = a[DashboardUtils.keyDateISO8601];
+        String dateB = b[DashboardUtils.keyDateISO8601];
 
         return byAscendingDate ? dateA.compareTo(dateB) : dateB.compareTo(dateA);
       }
       catch(e, s)
       {
-        pu.printd("sortSessionByDateAddJm: exception: $e: $s");      
+        pu.printd("sortSessionByDate: exception: $e: $s");      
       }  
       return 0;    
     });
+
+  if (sessionDataDebug) pu.printd("Sorted by date:");
+  for (var item in list)
+  {
+    if (sessionDataDebug) pu.printd("${item[DashboardUtils.keyDateISO8601]}");
+  }
 
   return list;   
 }
@@ -40,7 +42,7 @@ Future<List<dynamic>> sortSessionByDateAddJm
 /// {@category Utils - Generic}
 /// Method used to sort dashboard sessions by title.
 /// The list parameter is assumed to be a list of sessions,
-/// with a key DashboardUtils.keyTitle for the title values.
+/// with a key DashboardUtils.keyTitleLowerCase for the lower case title values.
 Future<void> sortDashboardSessionsByTitle
 ({required List<dynamic> list, required bool byAscendingTitle}) async 
 {
@@ -50,8 +52,8 @@ Future<void> sortDashboardSessionsByTitle
       (sessionItemA, sessionItemB)
       {
         // The goal is to compare the titles, not the sessions 
-        var titleA = sessionItemA[DashboardUtils.keyTitle].toString();
-        var titleB = sessionItemB[DashboardUtils.keyTitle].toString();      
+        var titleA = sessionItemA[DashboardUtils.keyTitleLowerCase].toString();
+        var titleB = sessionItemB[DashboardUtils.keyTitleLowerCase].toString();      
         return titleA.compareTo(titleB);
       }
     );
@@ -64,11 +66,17 @@ Future<void> sortDashboardSessionsByTitle
       (sessionItemB, sessionItemA)
       {
         // The goal is to compare the titles, not the sessions 
-        var titleA = sessionItemA[DashboardUtils.keyTitle].toString();
-        var titleB = sessionItemB[DashboardUtils.keyTitle].toString();
+        var titleA = sessionItemA[DashboardUtils.keyTitleLowerCase].toString();
+        var titleB = sessionItemB[DashboardUtils.keyTitleLowerCase].toString();
         return titleA.compareTo(titleB);
       }
     );
+  }
+
+  if (sessionDataDebug) pu.printd("Sorted by title:");
+  for (var item in list)
+  {
+    if (sessionDataDebug) pu.printd("${item[DashboardUtils.keyTitleLowerCase]}");
   }
 }
 
