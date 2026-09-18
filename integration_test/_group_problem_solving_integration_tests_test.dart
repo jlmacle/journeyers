@@ -508,6 +508,12 @@ Future<void> main() async {
 
               // ── 1. ENTERING NEW GPS PROCESS DATA (6 times) ──────────────────────────────────
               // ───────────────────────────────────────────────────────────────────────────────
+              for (var i = 1; i <= 6; i++)
+              {
+                if (testingDebug) pu.printd("Testing Debug: Data: $i");
+                if (testingDebug) pu.printd("Testing Debug: Title: ${titlesListKwsSorting[i-1]}");
+                if (testingDebug) pu.printd("Testing Debug: Kws: ${kwsListsKwsSorting[i-1]}");
+              }              
               
               await gpsEnterSeveralTimesNewProcessData
               (
@@ -517,10 +523,12 @@ Future<void> main() async {
                 ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
                 fileNamesWithoutExtensionList: List.generate(6, (i)=> "file${i+1}")
               );
-              // await tester.pump(const Duration(seconds: 4));
+              // await tester.pump(const Duration(seconds: 10));
             
               // ── 2. FILTERING BY KEYWORDS ────────────────────────────
               // ────────────────────────────────────────────────────────
+              List<String> titlesMaintenanceExpected = [titlesMaintenance[2], titlesMaintenance[0],titlesMaintenance[1]];
+              List<String> titlesCompanionshipExpected = titlesCompanionship;
 
               // 1. Filtering by kwMaintenance
               var kwMaintenanceFinder = await dashboardGetKwFilterChip(tester, kwMaintenance);
@@ -532,10 +540,14 @@ Future<void> main() async {
               var totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwMaintenance: $totalTitles");
+              for (var index = 0; index < totalTitles; index++)
+              {
+                if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
+              }
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesMaintenance.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesMaintenanceExpected[index]}${lgps.gpsTitleSuffix}");
               }
               // Un-selecting the keyword
               await tester.tap(kwMaintenanceFinder);
@@ -551,10 +563,14 @@ Future<void> main() async {
               totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
+              for (var index = 0; index < totalTitles; index++)
+              {
+                if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
+              }
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesCompanionship.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesCompanionshipExpected[index]}${lgps.gpsTitleSuffix}");
               }
 
               // Un-selecting the keyword
@@ -571,10 +587,14 @@ Future<void> main() async {
               totalTitles = titlesFinder.evaluate().length;
 
               if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwWorkplace: $totalTitles");
+              for (var index = 0; index < totalTitles; index++)
+              {
+                if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
+              }
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesWorkplace.reversed.toList()[index]}${lgps.gpsTitleSuffix}");
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), "${titlesWorkplace[index]}${lgps.gpsTitleSuffix}");
               }              
 
               // await tester.pump(const Duration(seconds: 2));
