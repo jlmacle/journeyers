@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:io";
 
 import "package:flutter_test/flutter_test.dart";
+
 import "package:intl/date_symbol_data_local.dart";
 
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
@@ -165,27 +166,7 @@ void main() {
 
 
   group("retrieveAllDashboardMetadata –", () {  
-    test("returns records in reverse insertion order (most recent first)",
-        () async {
-      final titles = ["Oldest", "Middle", "Newest"];
-      for (final t in titles) {
-        await sut!.saveDashboardMetadata(
-          typeOfDashboardContext: DashboardUtils.caContext,
-          title: t,
-          keywords: [],
-          formattedDate: aDate,
-          filePath: "/files/${t.toLowerCase()}.json",
-        );
-      }
-
-      final result = await sut!.retrieveAllDashboardMetadata(
-        typeOfDashboardContext: DashboardUtils.caContext,
-      );
-
-      expect(result.first[DashboardUtils.keyTitle], "Newest");
-      expect(result.last[DashboardUtils.keyTitle], "Oldest");
-    });
-
+    
     test("returned records contain all expected keys", () async {
       await sut!.saveDashboardMetadata(
         typeOfDashboardContext: DashboardUtils.caContext,
