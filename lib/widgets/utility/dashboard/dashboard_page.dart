@@ -10,7 +10,6 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
-import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
@@ -99,11 +98,9 @@ class DashboardPageState extends State<DashboardPage>
     if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _sessionsMetadataAll (context): : $_sessionsMetadataAll (${widget.dashboardContext})");
 
     // Data is not sorted by date by default, and needs sorting
-    await sortSessionByDateAddJm
+    await sortSessionByDate
     (
-      context: context,
       list: _sessionsMetadataFiltered!, 
-      dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, 
       byAscendingDate: false
     );
         
@@ -272,6 +269,7 @@ class DashboardPageState extends State<DashboardPage>
       if (sessionIndex != null && sessionIndex != -1) {
         previousTitle = _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle];
         _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle] = newTitle;
+        _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitleLowerCase] = newTitle.toLowerCase();
       }
       
       // Notifying success
