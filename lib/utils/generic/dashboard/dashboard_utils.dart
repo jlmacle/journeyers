@@ -7,8 +7,10 @@ import "package:path/path.dart" as path;
 import "package:path_provider/path_provider.dart";
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/utils/generic/testing/test_utils.dart";
+import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
+import "package:journeyers/utils/generic/date/date_formats_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 
 /// {@category Utils - Generic}
@@ -24,11 +26,17 @@ class DashboardUtils {
   /// The key for the session title.
   static const keyTitle = "title";
 
+  /// The key for the session title in lower case (for sorting).
+  static const keyTitleLowerCase = "titleLowerCase";
+
   /// The key for the session keywords.
   static const keyKeywords = "keywords";
 
   /// The key for the session date.
   static const keyDate = "date";
+
+  /// The key for the session date using ISO 8601 format (for sorting).
+  static const keyDateISO8601 = "dateISO8601";
 
   /// The key for the session file path.
   static const keyFilePath = "filePath";
@@ -92,8 +100,10 @@ class DashboardUtils {
     Map<String, dynamic> sessionData = 
     {
       keyTitle: title ?? "Untitled",
+      keyTitleLowerCase: title?.toLowerCase() ?? "Untitled".toLowerCase(),
       keyKeywords: keywords,
       keyDate: formattedDate,
+      keyDateISO8601: _toIso8601(DateUtils.sanitizeDate(formattedDate)),
       keyFilePath: filePath,
     };
 
@@ -115,7 +125,51 @@ class DashboardUtils {
     await file.writeAsString(updatedContent);
     if (sessionDataDebug) pu.printd("Session Data: new session metadata: $sessionData saved to: ${file.path}"); 
   }
+ 
+  /// Method used to parse a French or US English date to ISO 8601. 
+  /// Tries the French format first, then falls back to US English.
+  /// Returns the ISO 8601 string, or throws a [FormatException] if neither
+  /// format matches.
+  String _toIso8601(String input) {
+  var frFormat =  DateUtils.frFormat;
+  var enFormat =  DateUtils.enFormat;
 
+  DateTime parsed;
+  try {
+    parsed = frFormat.parseStrict(input);
+  } on FormatException {
+    try {
+      parsed = enFormat.parseStrict(input);
+    } on FormatException {
+      throw FormatException("Unrecognized date format", input);
+    }
+  }
+  return parsed.toIso8601String();
+}
+
+  // Method used to patch the previous code
+  void addExtraFields(List<dynamic> sessionData)
+  { 
+    for (var item in sessionData)
+    {
+      item = item as Map<String,dynamic>;
+      // Adding keyTitleLowerCase value if necessary
+      if (!item.keys.contains(keyTitleLowerCase))
+      {
+        item[keyTitleLowerCase] = (item[keyTitle] as String).toLowerCase();        
+      }
+
+      // Adding keyDateISO8601 value if necessary
+      if (!item.keys.contains(keyDateISO8601))
+      {
+        var date = item[keyDate] as String;
+        var sanitizedDate = DateUtils.sanitizeDate(date);
+        item[keyDateISO8601] = _toIso8601(sanitizedDate); 
+           
+      }  
+    }
+  }
+  
   /// Method used to retrieved all the session metadata used for a dashboard.
   /// This metadata is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// The metadata retrieved has the format:
@@ -131,6 +185,19 @@ class DashboardUtils {
     // Empty list if null, at least for testing purposes
     sessionData = jsonDecode(fileContent) ?? [];
     sessionData = sessionData.reversed.toList();
+
+    //todo: to clean
+    // Verifying presence of keyTitleLowerCase and keyDateISO8601
+    // Adding them if necessary
+    addExtraFields(sessionData);      
+
+    //todo: to clean
+    // Sorting metadata by date
+    await sortSessionByDate
+    (
+      list: sessionData, 
+      byAscendingDate: true
+    );
 
     return sessionData;
   }
@@ -190,6 +257,13 @@ class DashboardUtils {
     File sessionFile = File("$pathToApplicationSupportDirectory/$fileName");
     // Creating session file if doesn"t exist
     if (!sessionFile.existsSync()) {sessionFile.createSync();}
+
+    // Sorting metadata by date
+    await sortSessionByDate
+    (
+      list: sessionsMetadataAll, 
+      byAscendingDate: true
+    );
 
     // Adding the metadata to the file
     var savedContent = jsonEncode(sessionsMetadataAll);

@@ -103,6 +103,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     _listsDataFiltered.clear();
     _listsDataFiltered.addAll(_listsDataAll);
 
+    // todo: to clean
     // Data is not sorted by date by default, and needs sorting
     // await sortSessionByDateAddJm(list: _filteredListsData, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
     

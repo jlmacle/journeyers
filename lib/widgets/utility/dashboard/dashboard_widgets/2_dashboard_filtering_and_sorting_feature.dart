@@ -62,7 +62,8 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
   @override
   Widget build(BuildContext context) {
     return Column
-    (      
+    ( 
+      crossAxisAlignment: .center,
       children: 
       [
         Padding
@@ -78,7 +79,7 @@ class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAn
               (
                 spacing: 8.0,   // horizontal gap between buttons
                 runSpacing: 4.0, // vertical gap between wrapped lines
-                alignment: WrapAlignment.start,
+                alignment: WrapAlignment.center,
                 children: 
                 [
                   // Sorting by title

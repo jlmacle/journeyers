@@ -35,11 +35,9 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   // Method used to sort session data by date
   Future<void> _sortSessionsByDate() async
   {
-    await sortSessionByDateAddJm
+    await sortSessionByDate
     (
-      context: context,
       list: widget.sessionsMetadataFilteredToSort!, 
-      dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, 
       byAscendingDate: _isAscendingDate
     );
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
@@ -62,7 +60,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
     Semantics(
       // To have the change voiced when the re-build occurs
       liveRegion: true,
-      label: "${lds.sortByDateLabel} (${_isAscendingDate ? "Old to New" : "New to Old"}) ",
+      label: "${lds.sortByDateLabel} (${_isAscendingDate ? "Newest first" : "Oldest first"})",
       child:
       TextButton.icon
       (
@@ -76,6 +74,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
         },
         icon: Icon
         (
+          semanticLabel: "",
           _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
           color: Colors.black,
         ),
