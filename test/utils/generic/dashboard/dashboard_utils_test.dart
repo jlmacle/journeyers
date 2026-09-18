@@ -2,6 +2,7 @@ import "dart:convert";
 import "dart:io";
 
 import "package:flutter_test/flutter_test.dart";
+import "package:intl/date_symbol_data_local.dart";
 
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
 
@@ -23,12 +24,15 @@ List<dynamic> _readRecords(File file) =>
 // ---------------------------------------------------------------------------
 void main() {
   // Necessary for isInTestEnvironment used in DashboardUtils (saveDashboardMetadata)
-  TestWidgetsFlutterBinding .ensureInitialized();
+  TestWidgetsFlutterBinding.ensureInitialized();
 
   Directory? tempDir;
   DashboardUtils? sut; // system under test
 
   setUp(() async {
+    // "This should be called for at least one [locale] before any date formatting methods are called."
+    initializeDateFormatting();
+    
     tempDir = await Directory.systemTemp.createTemp("dashboard_utils_test_");
     PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(tempDir!.path);
     sut = DashboardUtils();
