@@ -2949,7 +2949,7 @@ Future<void> main() async {
 
               for (var index = 0; index < totalTitles; index++)
               {
-                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace.reversed.toList()[index]);
+                expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplace[index]);
               }         
 
               // await tester.pump(const Duration(seconds: 2));
