@@ -30,10 +30,10 @@ Future<List<dynamic>> sortSessionByDate
       return 0;    
     });
 
-  if (sessionDataDebug) pu.printd("Sorted by date:");
+  if (testingDebug && list.isNotEmpty) pu.printd("Sorted by date:");
   for (var item in list)
   {
-    if (sessionDataDebug) pu.printd("${item[DashboardUtils.keyDateISO8601]}");
+    if (testingDebug) pu.printd("${item[DashboardUtils.keyDateISO8601]}");
   }
 
   return list;   
