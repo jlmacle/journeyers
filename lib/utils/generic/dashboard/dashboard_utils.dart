@@ -97,7 +97,7 @@ class DashboardUtils {
       if (dateForTestingIndex == 5) dateForTestingIndex = 0;
     }
 
-    Map<String, dynamic> sessionData = 
+    Map<String, dynamic> sessionMetadata = 
     {
       keyTitle: title ?? "Untitled",
       keyTitleLowerCase: title?.toLowerCase() ?? "Untitled".toLowerCase(),
@@ -117,13 +117,13 @@ class DashboardUtils {
     List<dynamic> recordsList = jsonDecode(jsonContent);
 
     // Adding to the records
-    recordsList.add(sessionData);
+    recordsList.add(sessionMetadata);
 
     // Encoding the metadata to String
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    if (sessionDataDebug) pu.printd("Session Data: new session metadata: $sessionData saved to: ${file.path}"); 
+    if (sessionMetadataDebug) pu.printd("Session Metadata: new session metadata: $sessionMetadata saved to: ${file.path}"); 
   }
  
   /// Method used to parse a French or US English date to ISO 8601. 

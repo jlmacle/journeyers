@@ -15,12 +15,15 @@ class DateUtils
   /// US English: "September 5, 2026 1:54 AM" -> MMMM d, yyyy h:mm a (12h clock)
   static final enFormat = DateFormat("MMMM d, yyyy h:mm a", "en_US");
 
-  /// Replaces all non-alphanumeric characters, and non ',' or ':' 
+  /// Replaces all non-alphanumeric characters (Unicode), non ',' and non ':' 
   /// with a single space.
-  static String sanitizeDate(String input) {
+  static String sanitizeDate(String? input) {
 
-    final regex = RegExp(r"[^a-zA-Z0-9,:]");
-    
+    if (input == null) return "";
+
+    // \p{L} matches any letter in any language (A-Z, a-z, é, à, etc.)
+    // \p{N} matches any numeric digit (0-9)
+    final regex = RegExp(r"[^\p{L}\p{N},:]", unicode: true);  
     return input.replaceAll(regex, " ");
   }
 }
