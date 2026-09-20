@@ -258,7 +258,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cliquer pour fermer la page d\'édition des idées';
 
   @override
-  String get gps_process_checklist_title => 'Check-list';
+  String get l10n_checklist => 'Check-list';
 
   @override
   String get gps_process_checklist_invitation =>
@@ -808,7 +808,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Cliquer pour fermer la page d\'édition des idées';
 
   @override
-  String get gps_process_checklist_title => 'Check-list';
+  String get l10n_checklist => 'Check-list';
 
   @override
   String get gps_process_checklist_invitation =>

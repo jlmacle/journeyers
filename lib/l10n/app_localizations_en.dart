@@ -254,7 +254,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Click to close the ideas edition page';
 
   @override
-  String get gps_process_checklist_title => 'Checklist';
+  String get l10n_checklist => 'Checklist';
 
   @override
   String get gps_process_checklist_invitation =>
@@ -796,7 +796,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Click to close the ideas edition page';
 
   @override
-  String get gps_process_checklist_title => 'Checklist';
+  String get l10n_checklist => 'Checklist';
 
   @override
   String get gps_process_checklist_invitation =>

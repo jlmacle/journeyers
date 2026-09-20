@@ -139,8 +139,6 @@
     ,"gps_process_ideas_overlay_close_button_tooltip": "Cliquer pour fermer la page d'édition des idées"
     ,"@gps_process_ideas_overlay_close_button_tooltip": {"description": "l10n pour l'infobulle 'Cliquer pour fermer la page d'édition des idées'"}
 
-    ,"gps_process_checklist_title": "Check-list"
-    ,"@gps_process_checklist_title": {"description": "Le titre par défaut pour le widget lié à la check-list."}
     ,"gps_process_checklist_invitation": "Veuillez considérer reporter\nsi incomplet"
     ,"@gps_process_checklist_invitation": {"description": "L'invitation avant la check-list"}
     ,"gps_process_checklist_question_1": "Pouvons-nous avoir un retour sur les émotions du groupe ?"
@@ -287,6 +285,8 @@
     ,"@l10n_cancel": {"description": "l10n pour 'Annuler'"}
     ,"l10n_preview": "Aperçu"
     ,"@l10n_preview": {"description": "l10n pour 'Aperçu'"}  
+    ,"l10n_checklist": "Check-list"
+    ,"@l10n_checklist": {"description": "l10n pour 'Check-list'"}
     ,"l10n_edit": "Éditer"
     ,"@l10n_edit": {"description": "l10n pour 'Éditer'"}
     ,"l10n_save": "Enregistrer"
