@@ -6,10 +6,10 @@ const runtimeDataDebug = false;
 const preloadingDebug = false;
 const previewBuildingDebug = false;
 const sessionDataDebug = false;
-const sessionMetadataDebug = true;
-const testingDebug = true;
-// const testingLocaleOption = "fr";
-const testingLocaleOption = "en";
+const sessionMetadataDebug = false;
+const testingDebug = false;
+const testingLocaleOption = "fr";
+// const testingLocaleOption = "en";
 const textFieldDebug = false;
 const widgetSequenceDebug = false;
 
