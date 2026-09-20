@@ -330,7 +330,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
 
   @override
-  String get dashboard_tooltip_preview => 'Preview';
+  String get l10n_preview => 'Preview';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Edit session data';
@@ -872,7 +872,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
 
   @override
-  String get dashboard_tooltip_preview => 'Preview';
+  String get l10n_preview => 'Preview';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Edit session data';
