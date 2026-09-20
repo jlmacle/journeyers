@@ -28,6 +28,7 @@ import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
 
+
 // ─── CA  ───────────────────────────────────────────────────────────────
 // ───────────────────────────────────────────────────────────────────────
 
@@ -1546,7 +1547,9 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // Path to folder already declared 
     // Scrolling to make the text field visible for small screens
     await tester.ensureVisible(fileNameWidgetFinder);
-    await tester.pumpAndSettle();
+    // pumpAndSettle timed out
+    // await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 5));
 
     // Entering a file name
     await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
@@ -1645,7 +1648,6 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
       return filterChipFinder;
     }
-  
 
 // ─── MISC. ───────────────────────────────────────────────────────────────
 
