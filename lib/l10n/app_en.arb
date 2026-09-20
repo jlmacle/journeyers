@@ -142,8 +142,6 @@
   ,"@gps_process_ideas_overlay_close_button_tooltip": {"description": "l10n for the ideas overlay close button tooltip"}
  
 
-  ,"gps_process_checklist_title": "Checklist"
-  ,"@gps_process_checklist_title": {"description": "The default title for the checklist-related widget."}
   ,"gps_process_checklist_invitation": "Please consider postponing\nif incomplete"
   ,"@gps_process_checklist_invitation": {"description": "The invitation before the checklist"}
   ,"gps_process_checklist_question_1": "Can we get feedback about people’s emotions?"
@@ -286,6 +284,8 @@
     
   ,"l10n_cancel": "Cancel"
   ,"@l10n_cancel": {"description": "l10n for 'Cancel'"}
+  ,"l10n_checklist": "Checklist"
+  ,"@l10n_checklist": {"description": "l10n for 'Checklist'"}
   ,"l10n_delete": "Delete"
   ,"@l10n_delete": {"description": "l10n for 'Delete'"}
   ,"l10n_done": "Done"
