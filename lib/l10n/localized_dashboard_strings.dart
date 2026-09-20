@@ -58,7 +58,7 @@ class LocalizedDashboardStrings
     
       
     // ─── PREVIEW ───────────────────────────────────────
-    previewTooltipLabel = _l10n?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip";
+    previewTooltipLabel = _l10n?.l10n_preview ?? "Issue with the l10n for the 'Preview' tooltip";
     previewClosingTooltipLabel = _l10n?.dashboard_preview_close_preview_tooltip ?? "Issue with the l10n for the preview 'Close the preview' tooltip";
     
     // ─── DATA DELETION ───────────────────────────────────────
