@@ -11,6 +11,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
@@ -22,12 +23,12 @@ import "package:journeyers/widgets/custom/interaction_and_inputs/custom_language
 class HomePage extends StatefulWidget 
 {
   /// The language switch-related callback function for the parent widget.
-  final ValueChanged<Locale> onLanguageSelectedCallbackFunction;
+  final OnUpdateLocaleCallbackFunctionType onUpdateLocaleCallbackFunction;
 
   const HomePage
   ({
     super.key,
-    required this.onLanguageSelectedCallbackFunction,
+    required this.onUpdateLocaleCallbackFunction,
   });
 
   @override
@@ -72,10 +73,10 @@ class _HomePageState extends State<HomePage>
   // ─── LOCALE related method ───────────────────────────────────────
   // A method that updates the locale, if the language selected [languageName] has a language code different from the one of the current locale.
   // The logic cannot be moved in main.dart, as the context would be called without having being built yet.
-  void _updateLocale(String languageName) 
+  Future<void> _updateLocale(String languageName) async
   {
     // The locale related to the language selected
-    String? localeLangCodeFromLangName = L10nUtils.getLangCodeFromLangName(languageName: languageName);
+    String? localeLangCodeFromLangName = await L10nUtils.getLangCodeFromLangName(languageName: languageName);
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage>
 
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {
-      widget.onLanguageSelectedCallbackFunction(Locale(localeLangCodeFromLangName!));
+      await widget.onUpdateLocaleCallbackFunction(Locale(localeLangCodeFromLangName!));
     }
   }
 
