@@ -186,8 +186,6 @@
   ,"@dashboard_bulk_delete_end_text": {"description": "l10n for the 'items' text"}
   ,"dashboard_preview_mixed_languages_error_message": "Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data."
   ,"@dashboard_preview_mixed_languages_error_message": {"description": "Error message when previewing with a different interface language setting than the language used for the saved data"}
-  ,"dashboard_tooltip_preview": "Preview"
-  ,"@dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
   ,"dashboard_tooltip_edit_session_data": "Edit session data"
   ,"@dashboard_tooltip_edit_session_data": {"description": "l10n for the 'Edit session data' tooltip"}
   ,"dashboard_tooltip_edit_keywords": "Edit Keywords"
@@ -299,6 +297,8 @@
   ,"@l10n_keyword": {"description": "l10n for 'Keyword'"}  
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
+  ,"l10n_preview": "Preview"
+  ,"@l10n_preview": {"description": "l10n for 'Preview'"}
   ,"l10n_save": "Save"
   ,"@l10n_save": {"description": "l10n for 'Save'"}
 
