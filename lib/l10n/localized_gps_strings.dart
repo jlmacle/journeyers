@@ -79,7 +79,7 @@ class LocalizedGPSStrings
     gpsProcessTitleTextFieldHint = _l10n?.gps_process_edit_title_text_field_hint ?? "Issue with the l10n for the 'Please enter a title or select below' text field hint'";
 
     // GPSChecklist
-    checkListTitle = _l10n?.gps_process_checklist_title ?? "Issue with the title for the checklist-related widget.";
+    checkListTitle = _l10n?.l10n_checklist ?? "Issue with the title for the checklist-related widget.";
     checkListAppBarTitle = _l10n?.gps_process_checklist_invitation ?? "Issue with the invitation before the checklist";
     checkListQuestion1 = _l10n?.gps_process_checklist_question_1 ?? "Issue with the l10n for the checklist question 1";
     checkListQuestion2 = _l10n?.gps_process_checklist_question_2 ?? "Issue with the l10n for the checklist question 2";
