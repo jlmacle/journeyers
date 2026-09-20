@@ -397,7 +397,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
     await tester.pump(const Duration(seconds: 2));
     // Opening the preview
-    var previewFinderVal = previewFinder ?? find.byTooltip(AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false).last;
+    var previewFinderVal = previewFinder ?? find.byTooltip(AppLocalizations.of(context)?.l10n_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false).last;
         // Getting the scrollable
     var scrollable =  find.descendant
                 (
