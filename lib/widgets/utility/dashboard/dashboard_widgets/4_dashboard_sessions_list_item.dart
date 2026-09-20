@@ -218,7 +218,7 @@ class _SessionsListItemState extends State<SessionsListItem>
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
                       onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, _updateTmpFilePath),
-                      tooltip: AppLocalizations.of(context)?.dashboard_tooltip_preview ?? "Issue with the l10n for the 'Preview' tooltip",
+                      tooltip: AppLocalizations.of(context)?.l10n_preview ?? "Issue with the l10n for the 'Preview' tooltip",
                     ),
                     // To edit the session file data                    
                     IconButton(
