@@ -59,13 +59,12 @@ Future<void> main() async {
 
   // Titles
   const testAnalysisTitleRoot = "Integration-test CA session title";
-  
 
   // Ideas
   const ideasList2Ideas = ["idea1", "idea2"];
 
   // File names
-  const fileName1WithoutExtension = "file1";
+  const fileNameWithoutExtensionRoot = "file";
  
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
@@ -120,7 +119,7 @@ Future<void> main() async {
           var totalEntries = 20;
           var titlesList = List.generate(totalEntries, (i)=> "$testAnalysisTitleRoot ($i)");
           var kwsLists = List.generate(totalEntries, (i)=> ["keyword-$i"]);
-          var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${fileName1WithoutExtension}_${i}");
+          var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${fileNameWithoutExtensionRoot}_${i}");
           
           // formToFill: false to skip the form filling
           await caEnterSeveralTimesNewProcessDataWithoutFormData
@@ -229,7 +228,7 @@ Future<void> main() async {
           }
 
           // Submitting the GPS data
-          await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileName1WithoutExtension);
+          await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtensionRoot);
 
           await tester.pump(const Duration(seconds: 5));
           // ── 5. VERIFYING THE CA DATA ON THE GPS PAGE  ───
