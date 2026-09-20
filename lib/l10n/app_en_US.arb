@@ -162,11 +162,7 @@
   ,"gps_process_checklist_question_8": "Can we find reasons why presenting or receiving the ideas, in a neutral tone, could be important?"
   ,"@gps_process_checklist_question_8": {"description": "l10n for the checklist question 8"}
   ,"gps_process_checklist_question_9": "Do we need to further our context analysis?"
-  ,"@gps_process_checklist_question_9": {"description": "l10n for the checklist question 9"}
-  
-
-  
-  
+  ,"@gps_process_checklist_question_9": {"description": "l10n for the checklist question 9"}  
   ,"gps_process_checklist_close_overlay_tooltip": "Close checklist"
   ,"@gps_process_checklist_close_overlay_tooltip": {"description": "l10n for the 'Close checklist' tooltip"}
   
@@ -190,8 +186,6 @@
   ,"@dashboard_bulk_delete_end_text": {"description": "l10n for the 'items' text"}
   ,"dashboard_preview_mixed_languages_error_message": "Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data."
   ,"@dashboard_preview_mixed_languages_error_message": {"description": "Error message when previewing with a different interface language setting than the language used for the saved data"}
-  ,"dashboard_tooltip_preview": "Preview"
-  ,"@dashboard_tooltip_preview": {"description": "l10n for the 'Preview' tooltip"}
   ,"dashboard_tooltip_edit_session_data": "Edit session data"
   ,"@dashboard_tooltip_edit_session_data": {"description": "l10n for the 'Edit session data' tooltip"}
   ,"dashboard_tooltip_edit_keywords": "Edit Keywords"
@@ -303,6 +297,8 @@
   ,"@l10n_keyword": {"description": "l10n for 'Keyword'"}  
   ,"l10n_keywords": "Keywords"
   ,"@l10n_keywords": {"description": "l10n for 'Keywords'"}
+  ,"l10n_preview": "Preview"
+  ,"@l10n_preview": {"description": "l10n for 'Preview'"}
   ,"l10n_save": "Save"
   ,"@l10n_save": {"description": "l10n for 'Save'"}
 

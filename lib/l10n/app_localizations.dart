@@ -628,7 +628,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Preview'**
-  String get dashboard_tooltip_preview;
+  String get l10n_preview;
 
   /// l10n for the 'Edit session data' tooltip
   ///

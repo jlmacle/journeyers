@@ -335,7 +335,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
 
   @override
-  String get dashboard_tooltip_preview => 'Aperçu';
+  String get l10n_preview => 'Aperçu';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
@@ -885,7 +885,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
 
   @override
-  String get dashboard_tooltip_preview => 'Aperçu';
+  String get l10n_preview => 'Aperçu';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
