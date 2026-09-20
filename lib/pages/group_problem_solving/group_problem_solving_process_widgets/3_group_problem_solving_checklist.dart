@@ -82,7 +82,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
             Center(
               child: Text
               (
-                AppLocalizations.of(context)?.gps_process_checklist_title ?? "Issue with the default title for the checklist-related widget.",
+                AppLocalizations.of(context)?.l10n_checklist ?? "Issue with the default title for the checklist-related widget.",
                 style: problemSolvingChecklistTitle
               ),
             )
