@@ -498,12 +498,6 @@ abstract class AppLocalizations {
   /// **'Click to close the ideas edition page'**
   String get gps_process_ideas_overlay_close_button_tooltip;
 
-  /// The default title for the checklist-related widget.
-  ///
-  /// In en, this message translates to:
-  /// **'Checklist'**
-  String get l10n_checklist;
-
   /// The invitation before the checklist
   ///
   /// In en, this message translates to:
@@ -623,12 +617,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.'**
   String get dashboard_preview_mixed_languages_error_message;
-
-  /// l10n for the 'Preview' tooltip
-  ///
-  /// In en, this message translates to:
-  /// **'Preview'**
-  String get l10n_preview;
 
   /// l10n for the 'Edit session data' tooltip
   ///
@@ -902,6 +890,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get l10n_cancel;
 
+  /// l10n for 'Checklist'
+  ///
+  /// In en, this message translates to:
+  /// **'Checklist'**
+  String get l10n_checklist;
+
   /// l10n for 'Delete'
   ///
   /// In en, this message translates to:
@@ -943,6 +937,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Keywords'**
   String get l10n_keywords;
+
+  /// l10n for 'Preview'
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get l10n_preview;
 
   /// l10n for 'Save'
   ///
