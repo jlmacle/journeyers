@@ -502,7 +502,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Checklist'**
-  String get gps_process_checklist_title;
+  String get l10n_checklist;
 
   /// The invitation before the checklist
   ///
