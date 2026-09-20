@@ -258,9 +258,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cliquer pour fermer la page d\'édition des idées';
 
   @override
-  String get l10n_checklist => 'Check-list';
-
-  @override
   String get gps_process_checklist_invitation =>
       'Veuillez considérer reporter\nsi incomplet';
 
@@ -333,9 +330,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
-
-  @override
-  String get l10n_preview => 'Aperçu';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
@@ -507,6 +501,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get l10n_cancel => 'Annuler';
 
   @override
+  String get l10n_checklist => 'Check-list';
+
+  @override
   String get l10n_delete => 'Supprimer';
 
   @override
@@ -526,6 +523,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_keywords => 'Mots-clés';
+
+  @override
+  String get l10n_preview => 'Aperçu';
 
   @override
   String get l10n_save => 'Enregistrer';
@@ -808,9 +808,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Cliquer pour fermer la page d\'édition des idées';
 
   @override
-  String get l10n_checklist => 'Check-list';
-
-  @override
   String get gps_process_checklist_invitation =>
       'Veuillez considérer reporter\nsi incomplet';
 
@@ -883,9 +880,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Avez-vous sauvegardé les données dans une langue différente,\nde celle du paramètre de langue actuel.\nSi c\'est le cas,\nveuillez re-modifier le paramètre de langue.';
-
-  @override
-  String get l10n_preview => 'Aperçu';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Éditer l\'analyse';
@@ -1057,6 +1051,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   String get l10n_cancel => 'Annuler';
 
   @override
+  String get l10n_checklist => 'Check-list';
+
+  @override
   String get l10n_delete => 'Supprimer';
 
   @override
@@ -1076,6 +1073,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_keywords => 'Mots-clés';
+
+  @override
+  String get l10n_preview => 'Aperçu';
 
   @override
   String get l10n_save => 'Enregistrer';
