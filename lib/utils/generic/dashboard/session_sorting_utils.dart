@@ -30,10 +30,10 @@ Future<List<dynamic>> sortSessionByDate
       return 0;    
     });
 
-  if (testingDebug && list.isNotEmpty) pu.printd("Sorted by date:");
+  if (sessionMetadataDebug && list.isNotEmpty) pu.printd("Session Metadata: Sorted by date:");
   for (var item in list)
   {
-    if (testingDebug) pu.printd("${item[DashboardUtils.keyDateISO8601]}");
+    if (sessionMetadataDebug) pu.printd("Session Metadata: ${item[DashboardUtils.keyDateISO8601]}");
   }
 
   return list;   
@@ -73,10 +73,10 @@ Future<void> sortDashboardSessionsByTitle
     );
   }
 
-  if (sessionDataDebug) pu.printd("Sorted by title:");
+  if (sessionMetadataDebug) pu.printd("Session Metadata: Sorted by title:");
   for (var item in list)
   {
-    if (sessionDataDebug) pu.printd("${item[DashboardUtils.keyTitleLowerCase]}");
+    if (sessionMetadataDebug) pu.printd("${item[DashboardUtils.keyTitleLowerCase]}");
   }
 }
 
