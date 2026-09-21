@@ -326,5 +326,17 @@
   ,"@testing_kw_companionship": {"description": "l10n for the 'Companionship' keyword"}
   ,"testing_edition_suffix": "-edited" 
   ,"@testing_edition_suffix": {"description": "l10n for the edition suffix"}
+  ,"testing_date_0": "January 30, 2026 10:25 AM" 
+  ,"@testing_date_0": {"description": "l10n for date 0"}
+  ,"testing_date_1": "January 01, 2026 10:25 AM" 
+  ,"@testing_date_1": {"description": "l10n for date 1"}
+  ,"testing_date_2": "January 15, 2026 10:25 AM" 
+  ,"@testing_date_2": {"description": "l10n for date 2"}
+  ,"testing_date_3": "February 01, 2026 10:25 AM" 
+  ,"@testing_date_3": {"description": "l10n for date 3"}
+  ,"testing_date_4": "February 15, 2026 10:25 AM" 
+  ,"@testing_date_4": {"description": "l10n for date 4"}
+  ,"testing_date_5": "February 30, 2026 10:25 AM" 
+  ,"@testing_date_5": {"description": "l10n for date 5"}
 
 }
