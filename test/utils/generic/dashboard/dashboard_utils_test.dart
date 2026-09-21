@@ -73,6 +73,7 @@ void main() {
   group("saveDashboardMetadata", () {
     test("persists the title correctly", () async {
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: testFile1Title,
         keywords: testFile1Keywords,
@@ -90,6 +91,7 @@ void main() {
 
     test("persists the keywords list correctly", () async {
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: aTitle,
         keywords: keywords,
@@ -110,6 +112,7 @@ void main() {
 
     test("persists the file path correctly", () async {
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: aTitle,
         keywords: [],
@@ -128,6 +131,7 @@ void main() {
     test("stores records for the two contexts in separate files",
       () async {
         await sut!.saveDashboardMetadata(
+          context: null,
           typeOfDashboardContext: DashboardUtils.caContext,
           title: "CA Session",
           keywords: [],
@@ -135,6 +139,7 @@ void main() {
           filePath: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
+          context: null,
           typeOfDashboardContext: DashboardUtils.gpsContext,
           title: "GPS Session",
           keywords: [],
@@ -169,6 +174,7 @@ void main() {
     
     test("returned records contain all expected keys", () async {
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: aTitle,
         keywords: [],
@@ -194,6 +200,7 @@ void main() {
       const fileToDelete = "/file/to/delete";
 
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: "Title: File to keep",
         keywords: [],
@@ -201,6 +208,7 @@ void main() {
         filePath: "/file/to/keep",
       );
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: testFile2Title,
         keywords: [],
@@ -224,6 +232,7 @@ void main() {
     test("does not alter other records when one is deleted", () async {
       for (var i = 1; i <= 4; i++) {
         await sut!.saveDashboardMetadata(
+          context: null,
           typeOfDashboardContext: DashboardUtils.caContext,
           title: "Session $i",
           keywords: [],
@@ -253,6 +262,7 @@ void main() {
         () async {
       const onlyPath = "only/file";
       await sut!.saveDashboardMetadata(
+        context: null,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: "Only one file",
         keywords: [],
@@ -305,6 +315,7 @@ void main() {
         const expectedPath = "/round/trip";
 
         await sut!.saveDashboardMetadata(
+          context: null,
           typeOfDashboardContext: DashboardUtils.caContext,
           title: expectedTitle,
           keywords: expectedKeywords,
@@ -333,6 +344,7 @@ void main() {
 
         // 2 files added
         await sut!.saveDashboardMetadata(
+          context: null,
           typeOfDashboardContext: DashboardUtils.caContext,
           title: testFile1Title,
           keywords: [],
@@ -340,6 +352,7 @@ void main() {
           filePath: testFile1Path,
         );
         await sut!.saveDashboardMetadata(
+          context: null,
           typeOfDashboardContext: DashboardUtils.caContext,
           title: testFile2Title,
           keywords: [],
