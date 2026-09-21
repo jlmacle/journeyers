@@ -15,6 +15,7 @@ const widgetSequenceDebug = false;
 
 // To intercept the way the date is saved
 int dateForTestingIndex = 0;
+
 const datesForTestingList = [
                         "January 30, 2026 10:25 AM",
                         "January 01, 2026 10:25 AM",
@@ -23,8 +24,21 @@ const datesForTestingList = [
                         "February 15, 2026 10:25 AM",
                         "February 30, 2026 10:25 AM",
                         ];
+
 const constJanuaryDatesListSorted = [                        
                         "January 01, 2026 10:25 AM",
                         "January 15, 2026 10:25 AM",
                         "January 30, 2026 10:25 AM",
                         ];
+
+// Mapping all French dates to US English dates
+const datesFrEnMap = 
+{
+  "30 janvier 2026 10:25": "January 30, 2026 10:25 AM",
+  "01 janvier 2026 10:25": "January 01, 2026 10:25 AM",
+  "15 janvier 2026 10:25": "January 15, 2026 10:25 AM",
+  "01 février 2026 10:25": "February 01, 2026 10:25 AM",
+  "15 février 2026 10:25": "February 15, 2026 10:25 AM",
+  "30 février 2026 10:25": "February 30, 2026 10:25 AM",
+};
+
