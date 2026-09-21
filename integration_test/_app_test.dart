@@ -14,6 +14,7 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
+import "package:journeyers/main.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/homepage.dart";
@@ -39,15 +40,16 @@ Future<void> main() async {
     ]);
   }
 
-  // ── App pumping ─────────────────────────────────────────────────────────────
-  Future<void> pumpApp(WidgetTester tester) async
+  // ── Widget/App pumping ─────────────────────────────────────────────────────────────
+   
+  Future<void> pumpHomePage(WidgetTester tester) async
   {
-    // Pumping the app
+    // Pumping the homepage
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: HomePage(onLanguageSelectedCallbackFunction: (_){}),
+        home: HomePage(onUpdateLocaleCallbackFunction: (_) async {}),
         theme: appTheme,
 
       )
@@ -55,10 +57,19 @@ Future<void> main() async {
     await tester.pumpAndSettle();
   }
 
+  
+  Future<void> pumpApp(WidgetTester tester) async
+  {
+    // Pumping the app
+    await tester.pumpWidget(const GPSapp());
+    await tester.pumpAndSettle();
+  }
+
+
   // ── Constants ─────────────────────────────────────────────────────────────
 
   // Titles
-  const testAnalysisTitleRoot = "Integration-test CA session title";
+  const testAnalysisTitleRoot = "";
 
   // Ideas
   const ideasList2Ideas = ["idea1", "idea2"];
@@ -108,8 +119,8 @@ Future<void> main() async {
 
         if (Platform.isAndroid || Platform.isIOS)
         {
-          // Pumping the app
-          await pumpApp(tester);
+          // Pumping the homepage
+          await pumpHomePage(tester);
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedGPSStrings lgps = .new(context);
@@ -271,8 +282,8 @@ Future<void> main() async {
 
         if (Platform.isAndroid || Platform.isIOS)
         {
-          // Pumping the app
-          await pumpApp(tester);
+          // Pumping the homepage
+          await pumpHomePage(tester);
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedTestingStrings lts = .new(context);

@@ -254,9 +254,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Click to close the ideas edition page';
 
   @override
-  String get l10n_checklist => 'Checklist';
-
-  @override
   String get gps_process_checklist_invitation =>
       'Please consider postponing\nif incomplete';
 
@@ -328,9 +325,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
-
-  @override
-  String get l10n_preview => 'Preview';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Edit session data';
@@ -499,6 +493,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get l10n_cancel => 'Cancel';
 
   @override
+  String get l10n_checklist => 'Checklist';
+
+  @override
   String get l10n_delete => 'Delete';
 
   @override
@@ -518,6 +515,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get l10n_keywords => 'Keywords';
+
+  @override
+  String get l10n_preview => 'Preview';
 
   @override
   String get l10n_save => 'Save';
@@ -796,9 +796,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Click to close the ideas edition page';
 
   @override
-  String get l10n_checklist => 'Checklist';
-
-  @override
   String get gps_process_checklist_invitation =>
       'Please consider postponing\nif incomplete';
 
@@ -870,9 +867,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get dashboard_preview_mixed_languages_error_message =>
       'Did you save the data in a different language\nthan the current setting?\nIf so, please modify the setting\nto visualize the data.';
-
-  @override
-  String get l10n_preview => 'Preview';
 
   @override
   String get dashboard_tooltip_edit_session_data => 'Edit session data';
@@ -1041,6 +1035,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get l10n_cancel => 'Cancel';
 
   @override
+  String get l10n_checklist => 'Checklist';
+
+  @override
   String get l10n_delete => 'Delete';
 
   @override
@@ -1060,6 +1057,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_keywords => 'Keywords';
+
+  @override
+  String get l10n_preview => 'Preview';
 
   @override
   String get l10n_save => 'Save';

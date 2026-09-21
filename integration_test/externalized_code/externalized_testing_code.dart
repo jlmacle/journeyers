@@ -1200,6 +1200,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
     LocalizedGPSStrings lgps = .new(context);
+    LocalizedTestingStrings lts = .new(context);
 
     // Searching the preview tooltip for the session
     var listItemFinder = find.ancestor
@@ -1227,7 +1228,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
     // Searching for the date
     dateForTestingIndex = 0;
-    expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+    expect(find.textContaining(lts.datesForTestingList[0]), findsNWidgets(2));
       
     // Verifying the ideas present
     for (var idea in ideasList)

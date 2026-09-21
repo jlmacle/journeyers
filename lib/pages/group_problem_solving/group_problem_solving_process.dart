@@ -14,6 +14,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
+import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/1_group_problem_solving_problem_to_solve_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -151,6 +152,7 @@ class GPSProcessState extends State<GPSProcess>
     // Accessing the localized data
     LocalizedGPSStrings lgps = .new(context);   
     LocalizedDashboardStrings lds = .new(context);
+    LocalizedTestingStrings lts = .new(context);
 
     if (_currentIdeas.isEmpty) 
     {
@@ -178,7 +180,7 @@ class GPSProcessState extends State<GPSProcess>
     //.add_jm() to add this hour:minutes format: 5:08 PM
     var formatter = DateFormat("MMMM dd, yyyy").add_jm();
     var formattedDate = formatter.format(now);
-    if (isInTestEnvironment) formattedDate = datesForTestingList[dateForTestingIndex];
+    if (isInTestEnvironment) formattedDate = lts.datesForTestingList[dateForTestingIndex];
 
     String fileContent = "Group Problem Solving Ideas\n";
     fileContent += "$sessionTitle\n";
@@ -257,6 +259,7 @@ class GPSProcessState extends State<GPSProcess>
         var formattedDate = formatter.format(now);   
         await du.saveDashboardMetadata
         (
+          context: context,
           typeOfDashboardContext: DashboardUtils.gpsContext,
           title: sessionTitle, 
           keywords: _currentKeywords.toList(), 

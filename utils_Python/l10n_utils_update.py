@@ -97,7 +97,7 @@ def code_generation_for_method_get_lang_code_from_lang_name() -> str:
   code = ""
   method_2_begin = (
     "/// A method used to get a language code, being provided a language name. \n"
-    "static String? getLangCodeFromLangName({required String languageName}) \n"
+    "static Future<String?> getLangCodeFromLangName({required String languageName}) async \n"
     "{ \n"
     ""
     "  // Code to generate automatically from the base locales l10n data: begin \n"

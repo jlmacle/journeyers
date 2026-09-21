@@ -157,6 +157,10 @@ Future<void> main() async {
           await tester.pumpWidget(buildTestableCAPage());
           await tester.pumpAndSettle();
 
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedTestingStrings lts = .new(context);
+
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
 
@@ -183,7 +187,7 @@ Future<void> main() async {
 
           // Searching for the date
           dateForTestingIndex = 0;
-          expect(find.textContaining(datesForTestingList[0]), findsOne);
+          expect(find.textContaining(lts.datesForTestingList[0]), findsOne);
         }
     });
  
@@ -299,9 +303,11 @@ Future<void> main() async {
             
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
+
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
+            LocalizedTestingStrings lts = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -341,7 +347,7 @@ Future<void> main() async {
             // Verifying the order
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${lts.constJanuaryDatesListSorted[index]})");
             }
 
             // Re-triggering the sort
@@ -363,7 +369,7 @@ Future<void> main() async {
             // Verifying the order 
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted.reversed.toList()[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${lts.constJanuaryDatesListSorted.reversed.toList()[index]})");
             }
           }
         });

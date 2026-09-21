@@ -24,7 +24,7 @@ static List<String> getLanguages({required BuildContext buildContext})
 }
 
 /// A method used to get a language code, being provided a language name. 
-static String? getLangCodeFromLangName({required String languageName}) 
+static Future<String?> getLangCodeFromLangName({required String languageName}) async 
 { 
   // Code to generate automatically from the base locales l10n data: begin 
   List<String> enLanguage = ["English","Anglais"]; 

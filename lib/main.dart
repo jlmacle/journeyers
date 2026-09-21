@@ -73,7 +73,7 @@ class _GPSappState extends State<GPSapp>
   List<String> availableTranslationsCodes = ["fr", "fr_fr", "en", "en_us"];
   
   // Method used to set a new locale value
-  void _setLocale(Locale newLocale) 
+  Future<void> _setLocale(Locale newLocale) async
   {
     if (newLocale != _currentLocale) 
     {
@@ -133,7 +133,7 @@ class _GPSappState extends State<GPSapp>
         // Loading the homepage when done
           HomePage
           (
-            onLanguageSelectedCallbackFunction: _setLocale,
+            onUpdateLocaleCallbackFunction: _setLocale,
           ),
       ),
     );
