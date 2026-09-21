@@ -544,6 +544,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get testing_edition_suffix => '-edited';
+
+  @override
+  String get testing_date_0 => 'January 30, 2026 10:25 AM';
+
+  @override
+  String get testing_date_1 => 'January 01, 2026 10:25 AM';
+
+  @override
+  String get testing_date_2 => 'January 15, 2026 10:25 AM';
+
+  @override
+  String get testing_date_3 => 'February 01, 2026 10:25 AM';
+
+  @override
+  String get testing_date_4 => 'February 15, 2026 10:25 AM';
+
+  @override
+  String get testing_date_5 => 'February 30, 2026 10:25 AM';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -1086,4 +1104,22 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get testing_edition_suffix => '-edited';
+
+  @override
+  String get testing_date_0 => 'January 30, 2026 10:25 AM';
+
+  @override
+  String get testing_date_1 => 'January 01, 2026 10:25 AM';
+
+  @override
+  String get testing_date_2 => 'January 15, 2026 10:25 AM';
+
+  @override
+  String get testing_date_3 => 'February 01, 2026 10:25 AM';
+
+  @override
+  String get testing_date_4 => 'February 15, 2026 10:25 AM';
+
+  @override
+  String get testing_date_5 => 'February 30, 2026 10:25 AM';
 }
