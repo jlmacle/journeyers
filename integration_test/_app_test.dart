@@ -12,6 +12,7 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/main.dart";
@@ -68,9 +69,6 @@ Future<void> main() async {
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
-  // Titles
-  const testAnalysisTitleRoot = "";
-
   // Ideas
   const ideasList2Ideas = ["idea1", "idea2"];
 
@@ -121,12 +119,15 @@ Future<void> main() async {
         {
           // Pumping the homepage
           await pumpHomePage(tester);
+
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedGPSStrings lgps = .new(context);
+          LocalizedTestingStrings lts = .new(context);
 
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
+          var testAnalysisTitleRoot = lts.caTitleRoot;
           var totalEntries = 20;
           var titlesList = List.generate(totalEntries, (i)=> "$testAnalysisTitleRoot ($i)");
           var kwsLists = List.generate(totalEntries, (i)=> ["keyword-$i"]);
@@ -256,6 +257,166 @@ Future<void> main() async {
 
           // await tester.pump(const Duration(seconds: 2));
         }
+    });
+
+    group("Sorting with US English/French content: \n", () {
+      testWidgets("Sorting by date: US English/French dates \n"
+        "(assuming an already selected path to the user session data folder)",
+        (WidgetTester tester) async 
+        {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            "wasFirstRunModalAcknowledged": true,
+            // and to have the context analysis page, with the dashboard.
+            "wasCASessionDataSaved": true,
+            // Temporary test dir as application folder path
+            "applicationFolderPath": testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the app            
+            await pumpApp(tester);
+            await tester.pumpAndSettle();
+            
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedDashboardStrings lds = .new(context);
+            LocalizedTestingStrings lts = .new(context);
+
+            var testAnalysisTitleRoot = lts.caTitleRoot;
+
+            // ── 1. ENTERING NEW CA PROCESS DATA IN ENGLISH ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+
+            // Selecting English on the interface
+            await selectLanguage(tester: tester, languageCodeToSet: "en");
+            lts = .new(context);
+            testAnalysisTitleRoot = lts.caTitleRoot;
+
+            // await tester.pump(const Duration(seconds: 5));
+            int dataIndex = 1;
+            await caEnterNewProcessDataOnMobile
+            (
+              formToFill: false,
+              tester: tester,
+              title: "${testAnalysisTitleRoot} $dataIndex",
+              kwsList: [],
+              fileNameWithoutExtension: "${fileNameWithoutExtensionRoot}$dataIndex",
+            );
+            // await tester.pump(const Duration(seconds: 2));
+
+            // ── 2. ENTERING NEW CA PROCESS DATA IN FRENCH ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+
+            // Selecting French on the interface
+            await selectLanguage(tester: tester, languageCodeToSet: "fr");
+            lts = .new(context);
+            testAnalysisTitleRoot = lts.caTitleRoot;
+
+            // await tester.pump(const Duration(seconds: 5));
+            dataIndex = 2;
+            await caEnterNewProcessDataOnMobile
+            (
+              formToFill: false,
+              tester: tester,
+              title: "${testAnalysisTitleRoot} $dataIndex",
+              kwsList: [],
+              fileNameWithoutExtension: "${fileNameWithoutExtensionRoot}$dataIndex",
+            );
+           
+            // ── 3. ENTERING NEW CA PROCESS DATA IN ENGLISH ──────────────────────────────────
+            // ───────────────────────────────────────────────────────────────────────────────
+
+            // Selecting English on the interface
+            await selectLanguage(tester: tester, languageCodeToSet: "en");
+            lts = .new(context);
+            testAnalysisTitleRoot = lts.caTitleRoot;
+
+            // await tester.pump(const Duration(seconds: 5));
+
+            dataIndex = 3;
+            await caEnterNewProcessDataOnMobile
+            (
+              formToFill: false,
+              tester: tester,
+              title: "${testAnalysisTitleRoot} $dataIndex",
+              kwsList: [],
+              fileNameWithoutExtension: "${fileNameWithoutExtensionRoot}$dataIndex",
+            );        
+          
+            // ── 4. SORTING BY DATE ──────────────────────────────────
+            // ────────────────────────────────────────────────────────
+            // Triggering the sort
+            lds = .new(context);
+            var sortByDateFinder = find.textContaining(lds.sortByDateLabel);
+            await tester.tap(sortByDateFinder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));     
+
+
+            // Searching the dates          
+            var datesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains("session-date-");
+                }
+                return false;
+              }
+            );          
+
+            var totalDates = datesFinder.evaluate().length;
+
+            // Verifying the order
+            for (var index = 0; index < totalDates; index++)
+            {
+              var dashboardDateWithParenthesis = tester.widget<Text>(datesFinder.at(index)).data;
+              var dashboardDateWithoutParenthesis = dashboardDateWithParenthesis?.replaceAll("(","").replaceAll(")","");
+
+              expect(
+                // Mapping any French date to a US date
+                "(${datesFrEnMap[dashboardDateWithoutParenthesis] ?? dashboardDateWithoutParenthesis})"                
+                , 
+                "(${constJanuaryDatesListSorted[index]})"
+              );
+            }
+
+            // Re-triggering the sort
+            await tester.tap(sortByDateFinder);
+            await tester.pumpAndSettle();
+            // await tester.pump(const Duration(seconds: 2));
+
+            datesFinder = find.byWidgetPredicate
+            (
+              (widget) 
+              {
+                if (widget.key is ValueKey<String>) {
+                  return (widget.key as ValueKey<String>).value.contains("session-date-");
+                }
+                return false;
+              }
+            );          
+
+            // Verifying the order 
+            for (var index = 0; index < totalDates; index++)
+            {            
+              var dashboardDateWithParenthesis = tester.widget<Text>(datesFinder.at(index)).data;
+              var dashboardDateWithoutParenthesis = dashboardDateWithParenthesis?.replaceAll("(","").replaceAll(")", "");
+
+              expect(
+                // Mapping any French date to a US date
+                "(${datesFrEnMap[dashboardDateWithoutParenthesis] ?? dashboardDateWithoutParenthesis})"                 
+                , 
+                "(${constJanuaryDatesListSorted.reversed.toList()[index]})"
+              );
+            }
+          }
+        });
+
     });
 
     group
