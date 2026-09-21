@@ -23,19 +23,9 @@ class LocalizedTestingStrings
   // edition
   var editionSuffix = "";
 
-  var datesForTestingList = [
-                        "January 30, 2026 10:25 AM",
-                        "January 01, 2026 10:25 AM",
-                        "January 15, 2026 10:25 AM",
-                        "February 01, 2026 10:25 AM",
-                        "February 15, 2026 10:25 AM",
-                        "February 30, 2026 10:25 AM",
-                        ];
-  var constJanuaryDatesListSorted = [                        
-                        "January 01, 2026 10:25 AM",
-                        "January 15, 2026 10:25 AM",
-                        "January 30, 2026 10:25 AM",
-                        ];
+  var datesForTestingList = [];
+
+  var constJanuaryDatesListSorted = [];
   
   LocalizedTestingStrings(BuildContext context)
   {
@@ -57,5 +47,17 @@ class LocalizedTestingStrings
     
     // edition
     editionSuffix = _l10n?.testing_edition_suffix ?? "Issue with the l10n for the edition suffix";
+  
+    // dates
+    datesForTestingList.add(_l10n?.testing_date_0);
+    datesForTestingList.add(_l10n?.testing_date_1);
+    datesForTestingList.add(_l10n?.testing_date_2);
+    datesForTestingList.add(_l10n?.testing_date_3);
+    datesForTestingList.add(_l10n?.testing_date_4);
+    datesForTestingList.add(_l10n?.testing_date_5);
+
+    constJanuaryDatesListSorted.add(_l10n?.testing_date_1);
+    constJanuaryDatesListSorted.add(_l10n?.testing_date_2);
+    constJanuaryDatesListSorted.add(_l10n?.testing_date_0);
   }
 }
