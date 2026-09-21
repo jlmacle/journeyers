@@ -1,3 +1,5 @@
+import "dart:ui";
+
 // A typedef for a function that returns a record,
 // with a boolean (true if a string should be sanitized),
 // and with a function to sanitize the string.
@@ -56,3 +58,11 @@ void Function({required int intParam, required String stringParam});
 // A typedef for an onCheckboxChangedCallbackFunction.
 typedef OnCheckboxChangedCallbackFunctionType = 
 void Function({required bool? boolParam, required int intParam});
+
+// A typedef for an onLanguageSelectedHomePageCallbackFunction
+typedef OnLanguageSelectedHomePageCallbackFunctionType = 
+Future<void> Function(String value);
+
+// A typedef for an onUpdateLocaleCallbackFunction
+typedef OnUpdateLocaleCallbackFunctionType = 
+Future<void> Function(Locale value);
