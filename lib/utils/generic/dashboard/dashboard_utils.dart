@@ -1,12 +1,14 @@
 import "dart:convert";
 import "dart:io";
 
+import "package:flutter/material.dart" hide DateUtils;
 import "package:flutter/services.dart";
 
 import "package:path/path.dart" as path;
 import "package:path_provider/path_provider.dart";
 
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/date/date_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -79,6 +81,7 @@ class DashboardUtils {
   /// Method used to save dashboard metadata, either for a context analysis, or for a group problem-solving.
   Future<void> saveDashboardMetadata
   ({
+    required BuildContext? context,
     required String typeOfDashboardContext,
     required String? title,
     required List<String> keywords,
@@ -92,9 +95,23 @@ class DashboardUtils {
     // Date value interception for testing purposes
     if (isInTestEnvironment)
     {
-      formattedDate = datesForTestingList[dateForTestingIndex];
+      // Unit testing
+      if (context == null)
+      {
+        formattedDate = datesForTestingList[dateForTestingIndex]; 
+      }
+      // Widget/integration testing
+      else
+      {
+        // Getting the localized strings
+        LocalizedTestingStrings lts = .new(context);
+        formattedDate = lts.datesForTestingList[dateForTestingIndex];        
+      }
+
+      // index increased for next date
       dateForTestingIndex++;
       if (dateForTestingIndex == 5) dateForTestingIndex = 0;
+      
     }
 
     Map<String, dynamic> sessionMetadata = 
