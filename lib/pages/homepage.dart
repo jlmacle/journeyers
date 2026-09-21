@@ -80,8 +80,8 @@ class _HomePageState extends State<HomePage>
     // The language code from the current locale
     String? localeLangCodeFromContext = (Localizations.localeOf(context)).languageCode;
 
-    if (runtimeDataDebug) pu.printd("Runtime Data: localeLangCodeFromLangName: $localeLangCodeFromLangName");
-    if (runtimeDataDebug) pu.printd("Runtime Data: localeLangCodeFromContext: $localeLangCodeFromContext");
+    if (runtimeDataDebug) pu.printd("Runtime Data: HomePage: _updateLocale: localeLangCodeFromLangName: $localeLangCodeFromLangName");
+    if (runtimeDataDebug) pu.printd("Runtime Data: HomePage: _updateLocale: localeLangCodeFromContext: $localeLangCodeFromContext");
 
     if ((localeLangCodeFromLangName != localeLangCodeFromContext) & (localeLangCodeFromLangName != null)) 
     {
