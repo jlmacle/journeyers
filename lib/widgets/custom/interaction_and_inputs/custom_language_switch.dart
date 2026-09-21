@@ -1,9 +1,8 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
-import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
 
 /// {@category Custom widgets}
@@ -11,7 +10,7 @@ import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
 class CustomLanguageSwitch extends StatefulWidget 
 {
   /// The callback function called when a language value is selected.
-  final ValueChanged<String> onLanguageSelectedHomePageCallbackFunction;
+  final OnLanguageSelectedHomePageCallbackFunctionType onLanguageSelectedHomePageCallbackFunction;
 
   /// The horizontal location of the dropdown menu.
   final MainAxisAlignment languageSwitchMainAxisAlignment;
@@ -30,8 +29,7 @@ class CustomLanguageSwitch extends StatefulWidget
   /// Method used to get the language options in the current locale.
   List<String> getLanguages(BuildContext context) 
   {
-    List<String> dropdownItems = [];
-    if (runtimeDataDebug) pu.printd("Runtime Data: Language switcher: Localizations.localeOf(context): ${Localizations.localeOf(context)}");
+    List<String> dropdownItems = [];    
     dropdownItems = L10nUtils.getLanguages(buildContext: context);
     return dropdownItems;
   }
@@ -84,9 +82,9 @@ class _CustomLanguageSwitchState extends State<CustomLanguageSwitch>
             {
               return DropdownMenuEntry<String>(value: value, label: value);
             }).toList(),
-            onSelected: (String? newValue) 
+            onSelected: (String? newValue) async
             {
-              if (newValue != null) widget.onLanguageSelectedHomePageCallbackFunction(newValue);
+              if (newValue != null) await widget.onLanguageSelectedHomePageCallbackFunction(newValue);
             },
           ),
         ),
