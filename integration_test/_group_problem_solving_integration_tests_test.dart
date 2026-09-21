@@ -13,6 +13,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
+import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/2_group_problem_solving_group_moods.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -246,6 +247,7 @@ Future<void> main() async {
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedGPSStrings lgps = .new(context);
           LocalizedDashboardStrings lds = .new(context);
+          LocalizedTestingStrings lts = .new(context);
 
           // ── 1. ENTERING NEW GPS PROCESS DATA ───────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -289,7 +291,7 @@ Future<void> main() async {
 
           // Searching for the date
           dateForTestingIndex = 0;
-          expect(find.textContaining(datesForTestingList[0]), findsOne);
+          expect(find.textContaining(lts.datesForTestingList[0]), findsOne);
         }
       }); 
     });
@@ -409,6 +411,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
+            LocalizedTestingStrings lts = .new(context);
 
             // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
@@ -448,7 +451,7 @@ Future<void> main() async {
             // Verifying the order
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${lts.constJanuaryDatesListSorted[index]})");
             }
 
             // Re-triggering the sort
@@ -470,7 +473,7 @@ Future<void> main() async {
             // Verifying the order 
             for (var index = 0; index < totalDates; index++)
             {
-              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${constJanuaryDatesListSorted.reversed.toList()[index]})");
+              expect((tester.widget<Text>(datesFinder.at(index)).data), "(${lts.constJanuaryDatesListSorted.reversed.toList()[index]})");
             }
           }
         });
