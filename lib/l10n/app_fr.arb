@@ -327,5 +327,17 @@
     ,"@testing_kw_companionship": {"description": "l10n pour le mot-clé 'Convivialité'"}
     ,"testing_edition_suffix": "-édité" 
     ,"@testing_edition_suffix": {"description": "l10n pour l'édition de suffixe"}
+    ,"testing_date_0": "30 janvier 2026 10:25" 
+    ,"@testing_date_0": {"description": "l10n pour la date 0"}
+    ,"testing_date_1": "01 janvier 2026 10:25" 
+    ,"@testing_date_1": {"description": "l10n pour la date 1"}
+    ,"testing_date_2": "15 janvier 2026 10:25" 
+    ,"@testing_date_2": {"description": "l10n pour la date 2"}
+    ,"testing_date_3": "01 février 2026 10:25" 
+    ,"@testing_date_3": {"description": "l10n pour la date 3"}
+    ,"testing_date_4": "15 février 2026 10:25" 
+    ,"@testing_date_4": {"description": "l10n pour la date 4"}
+    ,"testing_date_5": "30 février 2026 10:25" 
+    ,"@testing_date_5": {"description": "l10n pour la date 5"}
 
 }

@@ -552,6 +552,24 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get testing_edition_suffix => '-édité';
+
+  @override
+  String get testing_date_0 => '30 janvier 2026 10:25';
+
+  @override
+  String get testing_date_1 => '01 janvier 2026 10:25';
+
+  @override
+  String get testing_date_2 => '15 janvier 2026 10:25';
+
+  @override
+  String get testing_date_3 => '01 février 2026 10:25';
+
+  @override
+  String get testing_date_4 => '15 février 2026 10:25';
+
+  @override
+  String get testing_date_5 => '30 février 2026 10:25';
 }
 
 /// The translations for French, as used in France (`fr_FR`).
@@ -1102,4 +1120,22 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get testing_edition_suffix => '-édité';
+
+  @override
+  String get testing_date_0 => '30 janvier 2026 10:25';
+
+  @override
+  String get testing_date_1 => '01 janvier 2026 10:25';
+
+  @override
+  String get testing_date_2 => '15 janvier 2026 10:25';
+
+  @override
+  String get testing_date_3 => '01 février 2026 10:25';
+
+  @override
+  String get testing_date_4 => '15 février 2026 10:25';
+
+  @override
+  String get testing_date_5 => '30 février 2026 10:25';
 }

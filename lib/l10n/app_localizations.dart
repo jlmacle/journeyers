@@ -991,6 +991,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'-edited'**
   String get testing_edition_suffix;
+
+  /// l10n for date 0
+  ///
+  /// In en, this message translates to:
+  /// **'January 30, 2026 10:25 AM'**
+  String get testing_date_0;
+
+  /// l10n for date 1
+  ///
+  /// In en, this message translates to:
+  /// **'January 01, 2026 10:25 AM'**
+  String get testing_date_1;
+
+  /// l10n for date 2
+  ///
+  /// In en, this message translates to:
+  /// **'January 15, 2026 10:25 AM'**
+  String get testing_date_2;
+
+  /// l10n for date 3
+  ///
+  /// In en, this message translates to:
+  /// **'February 01, 2026 10:25 AM'**
+  String get testing_date_3;
+
+  /// l10n for date 4
+  ///
+  /// In en, this message translates to:
+  /// **'February 15, 2026 10:25 AM'**
+  String get testing_date_4;
+
+  /// l10n for date 5
+  ///
+  /// In en, this message translates to:
+  /// **'February 30, 2026 10:25 AM'**
+  String get testing_date_5;
 }
 
 class _AppLocalizationsDelegate

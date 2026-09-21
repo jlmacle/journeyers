@@ -8,6 +8,7 @@ import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
@@ -26,6 +27,8 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
+
+import "../../test/_widget_testing_utils/widget_testing_utils.dart";
 
 
 
@@ -295,6 +298,7 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
     // ── TITLE SECTION ─────────────────────────────────────────────────────────────
     await caEnterProcessTitle(tester, title);
+    // await tester.pump(const Duration(seconds: 2));
 
     // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
     await caEnterProcessKeywords(tester, kwsList);
@@ -1649,6 +1653,60 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
       return filterChipFinder;
     }
+
+// ─── L10N ───────────────────────────────────────────────────────────────
+// Method used to select a specific language, using a language code, "en" for English, "fr" for French.
+Future<void> selectLanguage
+({
+  required WidgetTester tester, 
+  required String languageCodeToSet
+}) async
+{
+  if (sessionMetadataDebug) pu.printd("Session Metadata: -----------> language to select: $languageCodeToSet");
+
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedUtilsStrings lus = .new(context);
+
+  // Getting the current locale language code from the context
+  var currentLocaleLanguageCode = getLocaleLanguageCode(tester);
+
+  // Case: already set on the right language
+  if (currentLocaleLanguageCode == languageCodeToSet) return;
+
+  final dropdownButtonFinder = find.byType(DropdownMenu<String>);
+  // Otherwise: languageCodeToSet is different from currentLocaleLanguageCode
+  switch(languageCodeToSet.toLowerCase().trim())
+  {
+    // English to set, from interface in French
+    case "en":
+    {
+      await tester.tap(dropdownButtonFinder);
+      await tester.pumpAndSettle();
+
+      var anglaisFinder = find.widgetWithText(MenuItemButton, lus.englishL10n).last; 
+      // Need to click on "Anglais"
+      await tester.ensureVisible(anglaisFinder);
+      await tester.tap(anglaisFinder);
+      await tester.pumpAndSettle();    
+    }
+
+    // French to set, from interface in English
+    case "fr":
+    {
+      await tester.tap(dropdownButtonFinder);
+      await tester.pumpAndSettle();
+
+      var frenchFinder = find.widgetWithText(MenuItemButton, lus.frenchL10n).last;
+      // Need to click on "French"
+      await tester.ensureVisible(frenchFinder);
+      await tester.tap(frenchFinder);
+      await tester.pumpAndSettle();    
+    }
+
+  }
+  
+}
 
 // ─── MISC. ───────────────────────────────────────────────────────────────
 
