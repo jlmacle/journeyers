@@ -944,7 +944,7 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get l10n_save;
 
-  /// l10n for Yes
+  /// l10n for 'Yes'
   ///
   /// In en, this message translates to:
   /// **'Yes'**
