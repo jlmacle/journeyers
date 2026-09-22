@@ -84,8 +84,6 @@
   ,"@ca_preview_no_data_stored": {"description": "l10n for 'No question checked and no data in the last text field.'"}
   
   
-  ,"segmented_button_I_don_t_know": "I don't know"
-  ,"@segmented_button_I_don_t_know": {"description":"l10n for I don't know"}
 
   ,"gps_new_process_button": "Please click to start\na new group problem-solving session."
   ,"@gps_new_process_button": {"description": "The text inviting to click to start a new group problem-solving session."}  
@@ -306,6 +304,8 @@
   ,"@l10n_yes": {"description":"l10n for 'Yes'"}
   ,"l10n_no": "No"
   ,"@l10n_no": {"description":"l10n for 'No'"}
+  ,"l10n_I_don_t_know": "I don't know"
+  ,"@l10n_I_don_t_know": {"description":"l10n for 'I don't know'"}
   
 
   ,"l10n_keywords_entry_text_field_hint": "Please enter one keyword at a time\n(+ Enter key)."
