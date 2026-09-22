@@ -83,8 +83,7 @@
     ,"ca_preview_no_data_stored": "Cases non cochées et pas de réponse dans le dernier champ de texte."
     ,"@ca_preview_no_data_stored": {"description": "l10n pour 'Cases non cochées et pas de réponse dans le dernier champ de texte.'"}
 
-    ,"segmented_button_yes": "Oui"
-    ,"@segmented_button_yes": {"description":"l10n pour Oui"}
+
     ,"segmented_button_no": "Non"
     ,"@segmented_button_no": {"description":"l10n pour Non"}
     ,"segmented_button_I_don_t_know": "Je ne sais pas"
@@ -304,7 +303,8 @@
     ,"l10n_delete": "Supprimer"
     ,"@l10n_delete": {"description": "l10n pour 'Supprimer'"}
 
-
+    ,"l10n_yes": "Oui"
+    ,"@l10n_yes": {"description":"l10n pour 'Oui'"}
 
 
   
