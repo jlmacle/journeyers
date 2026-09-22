@@ -165,9 +165,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 
   @override
-  String get segmented_button_yes => 'Oui';
-
-  @override
   String get segmented_button_no => 'Non';
 
   @override
@@ -529,6 +526,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_save => 'Enregistrer';
+
+  @override
+  String get l10n_yes => 'Oui';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -733,9 +733,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 
   @override
-  String get segmented_button_yes => 'Oui';
-
-  @override
   String get segmented_button_no => 'Non';
 
   @override
@@ -1097,6 +1094,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_save => 'Enregistrer';
+
+  @override
+  String get l10n_yes => 'Oui';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
