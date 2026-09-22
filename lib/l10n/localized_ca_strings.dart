@@ -51,7 +51,7 @@ class LocalizedCAStrings
 
     yes =  _l10n?.l10n_yes ?? "Issue with the l10n for 'Yes'";
     no = _l10n?.l10n_no ?? "Issue with the l10n for 'No'";
-    iDontKnow = _l10n?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
+    iDontKnow = _l10n?.l10n_I_don_t_know ?? "Issue with the l10n for 'I don't know'";
     
     // ─── DASHBOARD ───────────────────────────────────────
     // CA dashboard title
