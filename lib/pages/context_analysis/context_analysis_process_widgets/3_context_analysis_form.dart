@@ -546,7 +546,7 @@ class CAFormState extends State<CAForm>
               (
                 key: const Key("ca-process-group-same-problems-to-solve-widget"),
                 segButtonTextOption1: AppLocalizations.of(context)?.l10n_yes ?? "Issue with the l10n for 'Yes'",
-                segButtonTextOption2: AppLocalizations.of(context)?.segmented_button_no ?? "Issue with the l10n for No",
+                segButtonTextOption2: AppLocalizations.of(context)?.l10n_no ?? "Issue with the l10n for 'No'",
                 segButtonTextOption3: AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupSameProblemsToSolve.selection,
@@ -572,7 +572,7 @@ class CAFormState extends State<CAForm>
               (
                 key: const Key("ca-process-group-harmony-home-widget"),
                 segButtonTextOption1: AppLocalizations.of(context)?.l10n_yes ?? "Issue with the l10n for 'Yes'",
-                segButtonTextOption2: AppLocalizations.of(context)?.segmented_button_no ?? "Issue with the l10n for No",
+                segButtonTextOption2: AppLocalizations.of(context)?.l10n_no ?? "Issue with the l10n for 'No'",
                 segButtonTextOption3: AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupHarmonyHome.selection,
@@ -598,7 +598,7 @@ class CAFormState extends State<CAForm>
               (
                 key: const Key("ca-process-group-appreciability-at-work-widget"),
                 segButtonTextOption1: AppLocalizations.of(context)?.l10n_yes ?? "Issue with the l10n for 'Yes'",
-                segButtonTextOption2: AppLocalizations.of(context)?.segmented_button_no ?? "Issue with the l10n for No",
+                segButtonTextOption2: AppLocalizations.of(context)?.l10n_no ?? "Issue with the l10n for 'No'",
                 segButtonTextOption3: AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupAppreciabilityAtWork.selection,
@@ -624,7 +624,7 @@ class CAFormState extends State<CAForm>
               (                
                 key: const Key("ca-process-group-earning-ability-widget"),
                 segButtonTextOption1: AppLocalizations.of(context)?.l10n_yes ?? "Issue with the l10n for 'Yes'",
-                segButtonTextOption2: AppLocalizations.of(context)?.segmented_button_no ?? "Issue with the l10n for No",
+                segButtonTextOption2: AppLocalizations.of(context)?.l10n_no ?? "Issue with the l10n for 'No'",
                 segButtonTextOption3: AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know",
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupEarningAbility.selection,

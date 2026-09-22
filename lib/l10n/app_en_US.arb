@@ -84,8 +84,6 @@
   ,"@ca_preview_no_data_stored": {"description": "l10n for 'No question checked and no data in the last text field.'"}
   
   
-  ,"segmented_button_no": "No"
-  ,"@segmented_button_no": {"description":"l10n for No"}
   ,"segmented_button_I_don_t_know": "I don't know"
   ,"@segmented_button_I_don_t_know": {"description":"l10n for I don't know"}
 
@@ -304,7 +302,8 @@
 
   ,"l10n_yes": "Yes"
   ,"@l10n_yes": {"description":"l10n for 'Yes'"}
-
+  ,"l10n_no": "No"
+  ,"@l10n_no": {"description":"l10n for 'No'"}
 
   
   

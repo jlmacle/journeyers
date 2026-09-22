@@ -341,11 +341,11 @@ abstract class AppLocalizations {
   /// **'No question checked and no data in the last text field.'**
   String get ca_preview_no_data_stored;
 
-  /// l10n for No
+  /// l10n for 'No'
   ///
   /// In en, this message translates to:
   /// **'No'**
-  String get segmented_button_no;
+  String get l10n_no;
 
   /// l10n for I don't know
   ///
