@@ -165,7 +165,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 
   @override
-  String get segmented_button_no => 'Non';
+  String get l10n_no => 'Non';
 
   @override
   String get segmented_button_I_don_t_know => 'Je ne sais pas';
@@ -733,7 +733,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 
   @override
-  String get segmented_button_no => 'Non';
+  String get l10n_no => 'Non';
 
   @override
   String get segmented_button_I_don_t_know => 'Je ne sais pas';
