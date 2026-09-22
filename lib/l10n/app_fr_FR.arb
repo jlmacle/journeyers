@@ -84,8 +84,6 @@
     ,"@ca_preview_no_data_stored": {"description": "l10n pour 'Cases non cochées et pas de réponse dans le dernier champ de texte.'"}
 
     
-    ,"segmented_button_no": "Non"
-    ,"@segmented_button_no": {"description":"l10n pour Non"}
     ,"segmented_button_I_don_t_know": "Je ne sais pas"
     ,"@segmented_button_I_don_t_know": {"description":"l10n pour Je ne sais pas"}
 
@@ -305,6 +303,8 @@
 
     ,"l10n_yes": "Oui"
     ,"@l10n_yes": {"description":"l10n pour 'Oui'"}
+    ,"l10n_no": "Non"
+    ,"@l10n_no": {"description":"l10n pour 'Non'"}
   
 
     ,"l10n_keywords_entry_text_field_hint": "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."
