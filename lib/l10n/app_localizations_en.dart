@@ -164,7 +164,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'No question checked and no data in the last text field.';
 
   @override
-  String get segmented_button_no => 'No';
+  String get l10n_no => 'No';
 
   @override
   String get segmented_button_I_don_t_know => 'I don\'t know';
@@ -724,7 +724,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'No question checked and no data in the last text field.';
 
   @override
-  String get segmented_button_no => 'No';
+  String get l10n_no => 'No';
 
   @override
   String get segmented_button_I_don_t_know => 'I don\'t know';
