@@ -50,7 +50,7 @@ class LocalizedCAStrings
     caFormPleaseDevelopTextFieldHint = _l10n?.ca_process_please_develop_text_field_hint ?? "Issue with the text field hint inviting to develop";
 
     yes =  _l10n?.l10n_yes ?? "Issue with the l10n for 'Yes'";
-    no = _l10n?.segmented_button_no ?? "Issue with the l10n for No";
+    no = _l10n?.l10n_no ?? "Issue with the l10n for 'No'";
     iDontKnow = _l10n?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
     
     // ─── DASHBOARD ───────────────────────────────────────
