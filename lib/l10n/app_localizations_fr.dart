@@ -165,10 +165,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 
   @override
-  String get l10n_no => 'Non';
-
-  @override
-  String get segmented_button_I_don_t_know => 'Je ne sais pas';
+  String get l10n_I_don_t_know => 'Je ne sais pas';
 
   @override
   String get gps_new_process_button =>
@@ -529,6 +526,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get l10n_yes => 'Oui';
+
+  @override
+  String get l10n_no => 'Non';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
@@ -733,10 +733,7 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
       'Cases non cochées et pas de réponse dans le dernier champ de texte.';
 
   @override
-  String get l10n_no => 'Non';
-
-  @override
-  String get segmented_button_I_don_t_know => 'Je ne sais pas';
+  String get l10n_I_don_t_know => 'Je ne sais pas';
 
   @override
   String get gps_new_process_button =>
@@ -1097,6 +1094,9 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get l10n_yes => 'Oui';
+
+  @override
+  String get l10n_no => 'Non';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>

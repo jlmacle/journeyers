@@ -615,7 +615,7 @@ import "../../test/_widget_testing_utils/widget_testing_utils.dart";
       await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45); 
       await tester.pumpAndSettle();   
       // Tapping to display the text field
-      var iDontKnow = AppLocalizations.of(context)?.segmented_button_I_don_t_know ?? "Issue with the l10n for I don't know";
+      var iDontKnow = AppLocalizations.of(context)?.l10n_I_don_t_know ?? "Issue with the l10n for 'I don't know'";
       var optionFinder = find.descendant
         (
           of: keyFinder,
