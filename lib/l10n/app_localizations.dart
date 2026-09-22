@@ -341,12 +341,6 @@ abstract class AppLocalizations {
   /// **'No question checked and no data in the last text field.'**
   String get ca_preview_no_data_stored;
 
-  /// l10n for Yes
-  ///
-  /// In en, this message translates to:
-  /// **'Yes'**
-  String get segmented_button_yes;
-
   /// l10n for No
   ///
   /// In en, this message translates to:
@@ -949,6 +943,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get l10n_save;
+
+  /// l10n for Yes
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get l10n_yes;
 
   /// l10n for the keywords entry text field hint
   ///
