@@ -164,9 +164,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'No question checked and no data in the last text field.';
 
   @override
-  String get segmented_button_yes => 'Yes';
-
-  @override
   String get segmented_button_no => 'No';
 
   @override
@@ -523,6 +520,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get l10n_save => 'Save';
 
   @override
+  String get l10n_yes => 'Yes';
+
+  @override
   String get l10n_keywords_entry_text_field_hint =>
       'Please enter one keyword at a time\n(+ Enter key).';
 
@@ -722,9 +722,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_preview_no_data_stored =>
       'No question checked and no data in the last text field.';
-
-  @override
-  String get segmented_button_yes => 'Yes';
 
   @override
   String get segmented_button_no => 'No';
@@ -1081,6 +1078,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_save => 'Save';
+
+  @override
+  String get l10n_yes => 'Yes';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
