@@ -81,7 +81,7 @@ Future<void> main() async {
                         titlesMaintenance[0], titlesCompanionship[0], titlesWorkplace[0],
                         titlesCompanionship[1], titlesMaintenance[1], titlesMaintenance[2]
                       ];
-  const List<String> titlesListSorted = [testAnalysisTitle1, testAnalysisTitle2, testAnalysisTitle3];
+  const List<String> titlesListSorted = ["atitl", "aTitle", "atitle2", "Untitled", "untitre"];
 
   // Keywords
   const kwCompanionship = "Companionship";
@@ -226,16 +226,16 @@ Future<void> main() async {
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
 
-            // ── 1. ENTERING NEW CA PROCESS DATA (3 times) ──────────────────────────────────
+            // ── 1. ENTERING NEW CA PROCESS DATA (5 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
-            
+            var fileNamesList = List.generate(5, (i)=> "file-$i");
             await caEnterSeveralTimesNewProcessDataWithoutFormData
             (
               formToFill: false,
               tester: tester,
-              titlesList: titlesList,
-              kwsLists: [[], [], []],
-              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+              titlesList: ["aTitle", "atitl","atitle2","untitre", "Untitled"],
+              kwsLists: [[], [], [], [], []],
+              fileNamesWithoutExtensionList: fileNamesList
             );
             // await tester.pump(const Duration(seconds: 2));
           
