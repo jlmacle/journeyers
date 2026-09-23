@@ -82,7 +82,7 @@ Future<void> main() async {
                         titlesMaintenance[0], titlesCompanionship[0], titlesWorkplace[0],
                         titlesCompanionship[1], titlesMaintenance[1], titlesMaintenance[2]
                       ];
-  const List<String> titlesListSorted = [testGPSTitle1, testGPSTitle2, testGPSTitle3];
+  const List<String> titlesListSorted = ["atitl", "aTitle", "atitle2", "Untitled", "untitre"];
 
   // Keywords
   const kwCompanionship = "Companionship";
@@ -331,16 +331,15 @@ Future<void> main() async {
             LocalizedDashboardStrings lds = .new(context);
             LocalizedGPSStrings lgps = .new(context);
 
-            // ── 1. ENTERING NEW GPS PROCESS DATA (3 times) ──────────────────────────────────
+            // ── 1. ENTERING NEW GPS PROCESS DATA (5 times) ──────────────────────────────────
             // ───────────────────────────────────────────────────────────────────────────────
-            
             await gpsEnterSeveralTimesNewProcessData
             (
               tester: tester,
-              titlesList: titlesList,
-              kwsLists: [[], [], []],
-              ideasList: [ideasList2Ideas, ideasList2Ideas, ideasList2Ideas],
-              fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+              titlesList: ["aTitle", "atitl","atitle2","untitre", "Untitled"],
+              kwsLists: List.generate(5, (i)=> []),
+              ideasList: List.generate(5, (i)=> ["idea-$i"]),
+              fileNamesWithoutExtensionList: List.generate(5, (i)=> "file-$i")
             );
             // await tester.pump(const Duration(seconds: 2));
           
