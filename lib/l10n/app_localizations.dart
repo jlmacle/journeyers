@@ -341,12 +341,6 @@ abstract class AppLocalizations {
   /// **'No question checked and no data in the last text field.'**
   String get ca_preview_no_data_stored;
 
-  /// l10n for I don't know
-  ///
-  /// In en, this message translates to:
-  /// **'I don\'t know'**
-  String get l10n_I_don_t_know;
-
   /// The text inviting to click to start a new group problem-solving session.
   ///
   /// In en, this message translates to:
@@ -949,6 +943,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No'**
   String get l10n_no;
+
+  /// l10n for 'I don't know'
+  ///
+  /// In en, this message translates to:
+  /// **'I don\'t know'**
+  String get l10n_I_don_t_know;
 
   /// l10n for the keywords entry text field hint
   ///

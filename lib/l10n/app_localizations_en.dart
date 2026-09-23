@@ -164,9 +164,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'No question checked and no data in the last text field.';
 
   @override
-  String get l10n_I_don_t_know => 'I don\'t know';
-
-  @override
   String get gps_new_process_button =>
       'Please click to start\na new group problem-solving session.';
 
@@ -523,6 +520,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get l10n_no => 'No';
 
   @override
+  String get l10n_I_don_t_know => 'I don\'t know';
+
+  @override
   String get l10n_keywords_entry_text_field_hint =>
       'Please enter one keyword at a time\n(+ Enter key).';
 
@@ -722,9 +722,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_preview_no_data_stored =>
       'No question checked and no data in the last text field.';
-
-  @override
-  String get l10n_I_don_t_know => 'I don\'t know';
 
   @override
   String get gps_new_process_button =>
@@ -1081,6 +1078,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get l10n_no => 'No';
+
+  @override
+  String get l10n_I_don_t_know => 'I don\'t know';
 
   @override
   String get l10n_keywords_entry_text_field_hint =>
