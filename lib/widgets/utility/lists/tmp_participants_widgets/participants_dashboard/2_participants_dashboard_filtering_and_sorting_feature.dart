@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2a_participants_dashboard_sorting_by_label.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2b_participants_dashboard_filtering_by_keywords.dart";
@@ -60,6 +61,10 @@ class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<P
 
   @override
   Widget build(BuildContext context) {
+
+    // Getting the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+    
     return Column
     (      
       children: 
@@ -92,7 +97,7 @@ class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<P
                 padding: const EdgeInsets.all(8.0),
                 child: Text // TODO: to move
                 (
-                  AppLocalizations.of(context)?.dashboard_filter_by_keywords ?? "Issue with the 'Filter by Keywords' label", 
+                  lds.filterByKeywordsLabel, 
                   style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
                 ),
               ),
