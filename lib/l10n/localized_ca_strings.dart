@@ -30,7 +30,8 @@ class LocalizedCAStrings
 
 
   // CA Preview
-  var caPreviewNoDataInIndividualPerspective = "";          
+  var caPreviewNoDataInIndividualPerspective = ""; 
+  var caPreviewNotesIntroduction  = "";      
 
   LocalizedCAStrings(BuildContext context)
   {
@@ -60,7 +61,7 @@ class LocalizedCAStrings
 
     // CA Preview
     caPreviewNoDataInIndividualPerspective = _l10n?.ca_preview_no_data_stored ?? "Issue with the l10n for 'No question checked and no data in the last text field.'";
-          
+    caPreviewNotesIntroduction = _l10n?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:";
   
   }
 
