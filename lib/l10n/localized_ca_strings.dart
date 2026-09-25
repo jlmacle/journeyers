@@ -29,7 +29,8 @@ class LocalizedCAStrings
   var dashboardTitle = "";
 
 
-          
+  // CA Preview
+  var caPreviewNoDataInIndividualPerspective = "";          
 
   LocalizedCAStrings(BuildContext context)
   {
@@ -57,7 +58,8 @@ class LocalizedCAStrings
     // CA dashboard title
     dashboardTitle = _l10n?.ca_dashboard_title ?? "Issue with the dashboard title";
 
-    
+    // CA Preview
+    caPreviewNoDataInIndividualPerspective = _l10n?.ca_preview_no_data_stored ?? "Issue with the l10n for 'No question checked and no data in the last text field.'";
           
   
   }
