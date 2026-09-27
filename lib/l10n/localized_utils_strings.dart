@@ -15,6 +15,7 @@ class LocalizedUtilsStrings
 
   // ─── OVERLAYS ───────────────────────────────────────
   var keywordsOverlayCloseButtonTooltip = "";
+  var overlayCloseButtonTooltip = "";
   
   
   LocalizedUtilsStrings(BuildContext context)
@@ -30,5 +31,6 @@ class LocalizedUtilsStrings
   
     // ─── OVERLAYS ───────────────────────────────────────
     keywordsOverlayCloseButtonTooltip  = _l10n?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip";
+    overlayCloseButtonTooltip = _l10n?.text_lists_new_list_close_tooltip ?? "Issue with the l10n for the 'click to go to the previous page' tooltip.";
   }
 }
