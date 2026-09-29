@@ -5,6 +5,7 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -291,6 +292,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
     // Accessing the localized data
     LocalizedParticipantsStrings lps = .new(context);
+    LocalizedUtilsStrings lus =  .new(context);
 
     if (_loadingDB) {
       return const Center(child: CircularProgressIndicator());
@@ -357,7 +359,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
           IconButton
           (
             icon: const Icon(Icons.close),
-            tooltip: AppLocalizations.of(context)?.text_lists_new_list_close_tooltip ?? "Issue with the l10n for the 'click to go to the previous page' tooltip.",
+            tooltip: lus.overlayCloseButtonTooltip,
             color: black,
             onPressed: () => Navigator.of(context).pop(),
           ),          
