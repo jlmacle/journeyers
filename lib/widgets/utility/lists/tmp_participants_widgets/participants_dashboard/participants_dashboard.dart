@@ -3,9 +3,9 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
+import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -347,6 +347,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
 
     // Getting the localized strings
     LocalizedParticipantsStrings lps = .new(context);
+    LocalizedUtilsStrings lus = .new(context);
 
     return 
     Scaffold
@@ -360,7 +361,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
                   IconButton
                   (
                     icon: const Icon(Icons.close),
-                    tooltip: AppLocalizations.of(context)?.text_lists_new_list_close_tooltip ?? "Issue with the l10n for the 'click to go to the previous page' tooltip.",
+                    tooltip: lus.overlayCloseButtonTooltip,
                     color: black,
                     onPressed: () => Navigator.of(context).pop()
                   )
