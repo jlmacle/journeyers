@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -78,6 +79,9 @@ class CAPageState extends State<CAPage>
         context: context,
         builder: (BuildContext context) 
         {
+          // Getting the localized strings
+          LocalizedCAStrings lca = .new(context);
+
           return 
           AlertDialog
           (
@@ -103,7 +107,7 @@ class CAPageState extends State<CAPage>
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: Text
                   (
-                    AppLocalizations.of(context)?.app_start_msg ?? "Issue with the application start message",
+                    lca.caAppStartMessage,
                     textAlign: TextAlign.center,                                          
                     style: dialogStyle, 
                   ),

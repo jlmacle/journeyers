@@ -6,6 +6,9 @@ class LocalizedCAStrings
 {
   AppLocalizations? _l10n;
 
+  // ─── APP START MESSAGE ───────────────────────────────────────
+  var caAppStartMessage = "";
+
   // ─── CA PROCESS ───────────────────────────────────────
   // ─── Title ───────────────────────────────────────
   var caTitleTextFieldHint = "";
@@ -37,6 +40,9 @@ class LocalizedCAStrings
   LocalizedCAStrings(BuildContext context)
   {
     _l10n = AppLocalizations.of(context);
+
+    // ─── APP START MESSAGE ───────────────────────────────────────
+    caAppStartMessage = _l10n?.app_start_msg ?? "Issue with the application start message";
     
     // ─── CA PROCESS ───────────────────────────────────────
     // ─── Title ───────────────────────────────────────
