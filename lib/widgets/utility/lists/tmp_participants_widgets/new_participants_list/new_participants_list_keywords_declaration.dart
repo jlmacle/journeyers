@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
 
@@ -90,6 +91,9 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
 
   @override
   Widget build(BuildContext context) {
+    // Getting the localized strings
+    LocalizedGPSStrings lgps = .new(context);
+
     return GestureDetector(
       onTap: () => showAddToSetOverlay
                     (
@@ -98,7 +102,7 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
                       appBarForegroundColor: black,
                       overlayTitle: AppLocalizations.of(context)?.text_lists_new_list_keywords_title ?? "Issue with the title of the new list page keywords overlay.",
                       overlayTitleStyle: newParticipantsListKeywordsOverlayTitleStyle, 
-                      overlayCloseIconButtonToolTip: AppLocalizations.of(context)?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip",                  
+                      overlayCloseIconButtonToolTip: lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip,                  
                       inputChipDeleteIconColor: appBarWhite,
                       textEditingControllerKey: const Key("kwsFieldNewList"), 
                       textEditingController: _keywordsTec, 
