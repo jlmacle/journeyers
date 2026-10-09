@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2a_participants_dashboard_sorting_by_label.dart";
