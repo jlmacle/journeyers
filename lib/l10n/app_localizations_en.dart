@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Group problem-solving';
 
   @override
-  String get ca_process_title => 'Context analysis';
+  String get ca_process_page_title => 'Context analysis';
 
   @override
   String get ca_process_invitation_to_unfold_expansion_tile =>
@@ -593,7 +593,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Group problem-solving';
 
   @override
-  String get ca_process_title => 'Context analysis';
+  String get ca_process_page_title => 'Context analysis';
 
   @override
   String get ca_process_invitation_to_unfold_expansion_tile =>
