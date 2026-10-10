@@ -146,7 +146,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Context analysis'**
-  String get ca_process_title;
+  String get ca_process_page_title;
 
   /// The l10n for 'Please click to toggle'
   ///
