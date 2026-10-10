@@ -252,7 +252,7 @@ class CAProcessState extends State<CAProcess>
               child: 
               CustomHeading
               (
-                headingText: AppLocalizations.of(context)?.ca_process_title ?? "Issue with the context analysis process title",
+                headingText: AppLocalizations.of(context)?.ca_process_page_title ?? "Issue with the context analysis process page title",
                 headingLevel: 1,
               ),
             ),
