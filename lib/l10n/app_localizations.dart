@@ -142,11 +142,17 @@ abstract class AppLocalizations {
   /// **'Group problem-solving'**
   String get app_bottom_bar_item_group_problem_solving;
 
-  /// The title of the context analysis process
+  /// The title of the context analysis process page
   ///
   /// In en, this message translates to:
   /// **'Context analysis'**
   String get ca_process_page_title;
+
+  /// The title question for the individual perspective
+  ///
+  /// In en, this message translates to:
+  /// **'As an individual:\nWhat problem\nam I trying to solve?'**
+  String get ca_process_individual_perspective_title_question;
 
   /// The l10n for 'Please click to toggle'
   ///
@@ -189,12 +195,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please describe the problem(s) that the groups/teams are trying to solve.'**
   String get ca_process_please_describe_problems_text_field_hint;
-
-  /// The title question for the individual perspective
-  ///
-  /// In en, this message translates to:
-  /// **'As an individual:\nWhat problem\nam I trying to solve?'**
-  String get ca_process_individual_perspective_title_question;
 
   /// The section question for the balance issue, in the individual perspective
   ///
