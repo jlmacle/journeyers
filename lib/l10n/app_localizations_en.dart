@@ -36,6 +36,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ca_process_page_title => 'Context analysis';
 
   @override
+  String get ca_process_individual_perspective_title_question =>
+      'As an individual:\nWhat problem\nam I trying to solve?';
+
+  @override
   String get ca_process_invitation_to_unfold_expansion_tile =>
       'Please click to toggle';
 
@@ -61,10 +65,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ca_process_please_describe_problems_text_field_hint =>
       'Please describe the problem(s) that the groups/teams are trying to solve.';
-
-  @override
-  String get ca_process_individual_perspective_title_question =>
-      'As an individual:\nWhat problem\nam I trying to solve?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
@@ -596,6 +596,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get ca_process_page_title => 'Context analysis';
 
   @override
+  String get ca_process_individual_perspective_title_question =>
+      'As an individual:\nWhat problem\nam I trying to solve?';
+
+  @override
   String get ca_process_invitation_to_unfold_expansion_tile =>
       'Please click to toggle';
 
@@ -621,10 +625,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get ca_process_please_describe_problems_text_field_hint =>
       'Please describe the problem(s) that the groups/teams are trying to solve.';
-
-  @override
-  String get ca_process_individual_perspective_title_question =>
-      'As an individual:\nWhat problem\nam I trying to solve?';
 
   @override
   String get ca_process_individual_perspective_balance_issue_section_question =>
