@@ -16,8 +16,8 @@
   "app_bottom_bar_item_group_problem_solving": "Group problem-solving",
   "@app_bottom_bar_item_group_problem_solving": {"description": "The 'Group problem-solving' bottom bar item label"},
 
-  "ca_process_title": "Context analysis",
-  "@ca_process_title": {"description": "The title of the context analysis process"},
+  "ca_process_page_title": "Context analysis",
+  "@ca_process_page_title": {"description": "The title of the context analysis process page"},
   "ca_process_invitation_to_unfold_expansion_tile": "Please click to toggle",
   "@ca_process_invitation_to_unfold_expansion_tile": {"description": "The l10n for 'Please click to toggle'"},
   "ca_process_title_text_field_hint": "Please enter a title for this analysis.",
