@@ -10,6 +10,7 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -509,31 +510,39 @@ class _CAPreviewState extends State<CAPreview>
   @override
   Widget build(BuildContext context) 
   {
+    // Getting the localized strings
+    LocalizedCAStrings lca = .new(context);
+
     return 
     _previewDataLoading
     // PREVIEW DATA NOT LOADED
-      ?  const Center(child:CircularProgressIndicator())
+      ?  const Center(child:RepaintBoundary(child: CircularProgressIndicator()))
 
     // PREVIEW DATA LOADED
       : 
-        // PREVIEW USED WITHIN TESTING
+        // Todo: to clean: PREVIEW USED WITHIN TESTING
         (pathsForTestFiles.contains(widget.pathToStoredData)) 
         ? const Text(testDataMessage)
         
         // PREVIEW NOT USED WITHIN TESTING
+        // CASE WITH PREVIEW WITH A MISMATCH BETWEEN CONTENT LANGUAGE/DASHBOARD LANGUAGE
         : (_sectionsGroup["title"] == null)
           ?
             Center
             (
+              // TEXT WIDGET WITH ERROR MESSAGE
               child: Text
               (
                 textAlign: .center,
                 AppLocalizations.of(context)?.dashboard_preview_mixed_languages_error_message ?? "Issue with the error message when previewing with a different interface language setting than the language used for the saved data"
               )
             )
+          
+          // CASE WITH PREVIEW WITH NO MISMATCH
           :  Column
             (
               crossAxisAlignment: CrossAxisAlignment.start,
+              // todo: to clean
               children: 
               [
                   Column
@@ -554,10 +563,10 @@ class _CAPreviewState extends State<CAPreview>
                       // Questions and potential answers for the individual perspective
                       ...
                       [
-                        // "questions": list of maps with "title" and "items" as keys
-                        // If no checkbox checked and no value for the text field only, a message to display
+                        // CASE WITH NO DATA STORED IN THE INDIVIDUAL PERSPECTIVE
                         if 
                         (
+                          // "questions": list of maps with "title" and "items" as keys
                           _sectionsIndividual["questions"].where
                           (
                             (question) => 
@@ -571,65 +580,68 @@ class _CAPreviewState extends State<CAPreview>
                             padding: const EdgeInsets.only(left:16, top:8, bottom:8),
                             child: Text
                             (
-                              AppLocalizations.of(context)?.ca_preview_no_data_stored ?? "Issue with the l10n for 'No question checked and no data in the last text field.'",
+                              key: const Key("ca-preview-no-data-in-individual-perspective"),
+                              lca.caPreviewNoDataInIndividualPerspective,
                               style: styleDataAbsent
                             ),
                           )
+
+                        // CASE WITH DATA STORED IN THE INDIVIDUAL PERSPECTIVE
                         else
-                          // Otherwise, an expansion tile for each title level 3 with a checked checkbox or a text field only answer
-                          for 
+                        for
+                        (
+                          final (questionIndex, question) in (_sectionsIndividual["questions"] as List).indexed
+                        )
+                          if
                           (
-                            var question in _sectionsIndividual["questions"].where
+                            (question["items"] as List).any((item) => item["checked"] == "yes")
+                            ||
+                            (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
+                          )                                                 
+                          
+                          ExpansionTile
+                          (
+                            key: Key("ca-preview-individual-perspective-$questionIndex"),
+                            // To remove the trailing icon
+                            showTrailingIcon: false,
+                            // to remove the borders
+                            shape: Border.all(color: Colors.transparent, width: 0),
+                            initiallyExpanded: true,
+                            title: Text
                             (
-                              (question) => 
-                                (question["items"] as List).any((item) => item["checked"] == "yes") 
-                                ||
-                                (question["items"] as List).any((item) => item["notesTextField"] != null && item["notesTextField"] != "")
-                            )
-                        
-                          )
-                            ExpansionTile
-                            (
-                              // To remove the trailing icon
-                              showTrailingIcon: false,
-                              // to remove the borders
-                              shape: Border.all(color: Colors.transparent, width: 0),
-                              initiallyExpanded: true,
-                              title: Text
-                              (
-                                question["title"],
-                                style: styleExpansionTileTitle
-                              ),
-                              children: 
-                              [
-                                // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
-                                for 
-                                (var item in (question["items"] as List).where
-                                  (
-                                    (item) => item["checked"] == "yes" 
-                                    ||
-                                    item["notesTextField"] != null && item["notesTextField"] != ""                          
-                                  )
+                              question["title"],
+                              style: styleExpansionTileTitle
+                            ),
+                            children: 
+                            [
+                              // "items" in the individual perspective: list of maps with "text", "checked", "notes" and "notesTextField" as keys
+                              for 
+                              (var item in (question["items"] as List).where
+                                (
+                                  (item) => item["checked"] == "yes" 
+                                  ||
+                                  item["notesTextField"] != null && item["notesTextField"] != ""                          
                                 )
-                                  ListTile
+                              )
+                                ListTile
+                                (
+                                  leading: Icon
                                   (
-                                    leading: Icon
-                                    (
-                                      item["checked"] != null
-                                      ? Icons.check_box
-                                      : Icons.text_snippet
-                                    ),
-                                    title: Text
-                                    (
-                                      item["text"] ?? ((item["notesTextField"] != null && item["notesTextField"] != "")
-                                      ? "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${item["notesTextField"]}"
-                                      : ""),
-                                      style: styleExpandedTitleSubTitle                              
-                                    ),
-                                    subtitle: (item["notes"] != null)
-                                      ? Text("${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${item["notes"]}", style: styleExpandedTitleSubTitle)
-                                      : null,
+                                    item["checked"] != null
+                                    ? Icons.check_box
+                                    : Icons.text_snippet
                                   ),
+                                  title: Text
+                                  (
+                                    item["text"] ?? ((item["notesTextField"] != null && item["notesTextField"] != "")
+                                    ? "${lca.caPreviewNotesIntroduction}${item["notesTextField"]}"
+                                    : ""),
+                                    style: styleExpandedTitleSubTitle                              
+                                  ),
+                                  subtitle: (item["notes"] != null)
+                                    ? Text("${lca.caPreviewNotesIntroduction}${item["notes"]}", style: styleExpandedTitleSubTitle)
+                                    : null,
+                                ),
                               ],
                             ),
                         ],
@@ -651,9 +663,15 @@ class _CAPreviewState extends State<CAPreview>
                         ),
                       ),
                       // Questions and potential answers for the group perspective
-                      for (var question in _sectionsGroup["questions"])
+                      
+                      for                       
+                      (
+                        final (questionIndex, question) in (_sectionsGroup["questions"] as List).indexed
+                        // var question in _sectionsGroup["questions"]
+                      )
                         ExpansionTile
                         (
+                          key: Key("ca-preview-group-perspective-$questionIndex"),
                           // To remove the trailing icon
                           showTrailingIcon: false,
                           // to remove the borders
@@ -673,10 +691,10 @@ class _CAPreviewState extends State<CAPreview>
                               ( 
                                 question["items"]["segValue"] == null
                                 ?
-                                "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                                "${lca.caPreviewNotesIntroduction}${question["items"]["notes"] ?? ""}"
                                 :
-                                "${AppLocalizations.of(context)?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): "}${question["items"]["segValue"] ?? ""}"
-                                "\n${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${question["items"]["notes"] ?? ""}"
+                                "${lca.caPreviewAnswersIntroduction}${question["items"]["segValue"] ?? ""}"
+                                "\n${lca.caPreviewNotesIntroduction}${question["items"]["notes"] ?? ""}"
                               ),
                             ),
                           ],
