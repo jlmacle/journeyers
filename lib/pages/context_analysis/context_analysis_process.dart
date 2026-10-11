@@ -226,7 +226,7 @@ class CAProcessState extends State<CAProcess>
     return 
     _dtoAssetLoading
     // Circular indicator if asset is loading
-    ? const CircularProgressIndicator()
+    ? const RepaintBoundary(child: CircularProgressIndicator())
     // else loading process widgets
     :
     Scrollbar
@@ -318,7 +318,7 @@ class CAProcessState extends State<CAProcess>
                     },
                     child: 
                     _isApplicationFolderPathLoading
-                    ? const Center(child: CircularProgressIndicator())
+                    ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
                     : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                         // Defining file name and saving file for mobile platforms 
                         ? SessionFileNameOnMobilePlatforms
