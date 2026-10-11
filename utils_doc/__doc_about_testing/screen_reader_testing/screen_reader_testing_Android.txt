@@ -32,3 +32,5 @@ Bulk deletetion label is read when selection is made: ✔️
 Session title is read: ✔️
 
 Date is read: ✔️
+
+"Keywords:" is read: ✔️
