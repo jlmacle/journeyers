@@ -159,7 +159,7 @@ class GPSPageState extends State<GPSPage>
         [
           // Circular progress indicator while preferences are loading
           if (_runtimeDataLoading)
-            const Center(child: CircularProgressIndicator())
+            const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
           // When preferences are loaded
           else ...
           [
