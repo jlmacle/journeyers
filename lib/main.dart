@@ -128,7 +128,7 @@ class _GPSappState extends State<GPSapp>
         (areFileNamesLoading)
         // Waiting on the stored file names
         ?
-          const CircularProgressIndicator()
+          const RepaintBoundary(child: CircularProgressIndicator())
         :
         // Loading the homepage when done
           HomePage
