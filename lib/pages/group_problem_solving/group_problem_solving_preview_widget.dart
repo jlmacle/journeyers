@@ -142,7 +142,7 @@ class _GPSPreviewState
   @override
   Widget build(BuildContext context) {
     if (_isPreviewDataLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: RepaintBoundary(child: CircularProgressIndicator()));
     }
 
     if (_dataIdeas.isEmpty) {
