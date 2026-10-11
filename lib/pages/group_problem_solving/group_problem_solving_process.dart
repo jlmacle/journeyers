@@ -604,7 +604,7 @@ void _handleCAMetadataSelection(Map<String, dynamic> session) {
                 child:         
                   // Button to start the data saving process                     
                   _isApplicationFolderPathLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
                   : (Platform.isAndroid || Platform.isIOS) // Unified logic for mobile
                       // Defining file name and saving file for mobile platforms 
                       ? SessionFileNameOnMobilePlatforms
