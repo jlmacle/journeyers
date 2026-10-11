@@ -219,7 +219,7 @@ class CAPageState extends State<CAPage>
         [
           // RUNTIME DATA LOADING: Circular progress indicator while runtime data is loading
           if (_runtimeDataLoading)
-            const Center(child: CircularProgressIndicator())
+            const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
 
           // OR RUNTIME DATA LOADED
           else ...
