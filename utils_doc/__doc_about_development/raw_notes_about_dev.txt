@@ -79,9 +79,6 @@ Some themes:
 - maintenance, logistics 
 - companionship, workplace appreciability, legacy
 
-Some keywords:
-Important, specifically important, not perceived as important
-
 -----------
 Learning by doing:
 to avoid lack of inspiration: top folder labels suggested for import at first run (imported keywords/labels list can be edited later + com about the feature) + ability to retrieve suggestions later  + top keywords
@@ -101,9 +98,6 @@ Storage of what can be positive credentials of our team life.
 ------------------------------------------
 Supportive technology for sound priorities (dashboard+todos)
 ------------------------------------------
-DPGs:
-- to ease building on win-wins where we dwell
-
 Let's suppose that we have the ability, assisted or not:
 
 - to identify the main priorities of our companionships, and of our workplace appreciability.
@@ -118,7 +112,7 @@ A potential process producing a to-do list relevant for most of our life?
 
 The context: most of our life is spent in teams, and problem-solving is central to our quality of life.
 
-A potential goal: to complement our problem-solving education, using learning-by-doing, multi-platform, open-source software, as digital public good (DPG).
+A potential goal: to complement our problem-solving education, using learning-by-doing (multi-platform software, spreadsheets, e.g.).
 
 The potential application: to learn to problem-solve toward:
 - harmony in our places of dwelling (households, nursing homes, homeless shelters, refugee camps, …)
