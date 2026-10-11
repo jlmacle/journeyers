@@ -295,7 +295,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
     LocalizedUtilsStrings lus =  .new(context);
 
     if (_loadingDB) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: RepaintBoundary(child: CircularProgressIndicator()));
     }
 
     if (_loadingDBError != null) {
@@ -312,7 +312,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
     return 
     _loadingDB
-    ? const Center(child: CircularProgressIndicator())
+    ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
     : Scaffold(
       appBar: AppBar(
         title: Text
