@@ -344,7 +344,7 @@ class DashboardPageState extends State<DashboardPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isDataLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
           : CustomScrollView(
               key: const Key("dashboard-scrollview"),
               // Using a CustomScrollView to coordinate the fade effect
