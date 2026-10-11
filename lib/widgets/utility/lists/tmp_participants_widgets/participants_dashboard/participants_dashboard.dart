@@ -372,7 +372,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
       (
         child: 
       _isDataLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
           : CustomScrollView(
               // Using a CustomScrollView to coordinate the fade effect
               slivers: [
