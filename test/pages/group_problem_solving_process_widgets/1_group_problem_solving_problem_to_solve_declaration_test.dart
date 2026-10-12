@@ -197,7 +197,8 @@ void main() {
               case("en"): { defaultTitle = "Problem To Solve"; }
               case("fr"): { defaultTitle = "Problème à résoudre"; }        
             }
-            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+
+            logt("defaultTitle", defaultTitle);
 
             // Clicking on the default title
             var titleFinder = find.text(defaultTitle);            
