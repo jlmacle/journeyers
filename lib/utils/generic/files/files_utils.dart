@@ -234,7 +234,7 @@ class FileUtils
     if (isInTestEnvironment) 
     {
       await File(filePath).delete();
-      if (testingDebug) pu.printd("Testing Debug: File deleted successfully: $filePath");     
+      logt("File deleted successfully", filePath);    
       return;
     }
 
