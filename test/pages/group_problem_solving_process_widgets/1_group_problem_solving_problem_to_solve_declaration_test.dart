@@ -106,7 +106,7 @@ void main() {
               }        
             }
             logt("defaultTitle", defaultTitle);
-            if (testingDebug) pu.printd("Testing Debug: defaultTextFieldHint: $defaultTextFieldHint");
+            logt("defaultTextFieldHint", defaultTextFieldHint);
 
             // Verifying consistency between hard-coded strings and localized strings
             expect(defaultTitle, lgps.gpsDefaultProcessSessionTitle); 
