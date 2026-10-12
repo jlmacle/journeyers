@@ -83,7 +83,8 @@ void main() {
           case("en"): { ideasListPlaceholder = "No ideas added yet."; }
           case("fr"): { ideasListPlaceholder = "Liste d'idées vide"; }        
         }
-        if (testingDebug) pu.printd("Testing Debug: ideasListPlaceholder: $ideasListPlaceholder");
+
+        logt("ideasListPlaceholder", ideasListPlaceholder);
 
         // Verifying consistency between hard-coded string and localized string
         expect(ideasListPlaceholder, lgps.ideasListPlaceholder);   
