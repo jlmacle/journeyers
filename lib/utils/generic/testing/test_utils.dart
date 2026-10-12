@@ -1,3 +1,4 @@
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
@@ -50,4 +51,29 @@ void isCircularProgressIndicatorPresent(WidgetTester tester)
     if (testingDebug) pu.printd("Testing Debug: CircularProgressIndicator absent");
   }
 
+}
+
+/// {@category Utils - Generic}
+/// A method used to print a total number of candidates for those that meet the requirements set by the finder.
+  int printFinderTotal(Finder finder, String label)
+  {
+    int totalFinder = finder.evaluate().length;
+    if (testingDebug) pu.printd("Testing Debug: Number of candidates for $label: $totalFinder");
+    return totalFinder;
+  }
+
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the testingDebug boolean.
+/// logt("msg"); -> Testing Debug: "msg"
+/// logt(anExpression);  -> Testing Debug: "anExpression": anExpression
+void logt(String msg, [ Object? anExpressionFResult ])
+{
+  if (anExpressionFResult == null) {
+    if (testingDebug) pu.printd("Testing Debug: $msg");
+  }
+  else{
+    if (testingDebug) pu.printd("Testing Debug: $msg: $anExpressionFResult");
+  }
+  
 }
