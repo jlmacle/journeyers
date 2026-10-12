@@ -178,7 +178,8 @@ void main() {
           case("en"): { newIdeaTextFieldHint = "Please enter an idea."; }
           case("fr"): { newIdeaTextFieldHint = "Veuillez entrer une idée."; }        
         }
-        if (testingDebug) pu.printd("Testing Debug: newIdeaTextFieldHint: $newIdeaTextFieldHint");
+
+        logt("newIdeaTextFieldHint", newIdeaTextFieldHint);
 
         // Verifying consistency between hard-coded string and localized string
         expect(newIdeaTextFieldHint, lgps.newIdeaTextFieldHint);     
