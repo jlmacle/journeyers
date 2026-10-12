@@ -105,7 +105,7 @@ void main() {
                 defaultTextFieldHint = "Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."; 
               }        
             }
-            if (testingDebug) pu.printd("Testing Debug: defaultTitle: $defaultTitle");
+            logt("defaultTitle", defaultTitle);
             if (testingDebug) pu.printd("Testing Debug: defaultTextFieldHint: $defaultTextFieldHint");
 
             // Verifying consistency between hard-coded strings and localized strings
