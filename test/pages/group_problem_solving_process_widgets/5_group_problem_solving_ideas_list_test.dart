@@ -120,8 +120,9 @@ void main() {
           case("en"): { ideasListAppBarTitle = "List of ideas"; }
           case("fr"): { ideasListAppBarTitle = "Liste des idées"; }        
         }
-        if (testingDebug) pu.printd("Testing Debug: ideasListAppBarTitle: $ideasListAppBarTitle");
 
+        logt("ideasListAppBarTitle", ideasListAppBarTitle);
+  
         // Verifying consistency between hard-coded string and localized string
         expect(ideasListAppBarTitle, lgps.ideasListAppBarTitle);     
 
