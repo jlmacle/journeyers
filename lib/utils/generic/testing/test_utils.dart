@@ -66,7 +66,7 @@ void isCircularProgressIndicatorPresent(WidgetTester tester)
 /// {@category Utils - Generic}
 /// A method used to log data related to the testingDebug boolean.
 /// logt("msg"); -> Testing Debug: "msg"
-/// logt(anExpression);  -> Testing Debug: "anExpression": anExpression
+/// logt(msg, anExpressionFResult);  -> Testing Debug: "msg": anExpressionFResult
 void logt(String msg, [ Object? anExpressionFResult ])
 {
   if (anExpressionFResult == null) {
