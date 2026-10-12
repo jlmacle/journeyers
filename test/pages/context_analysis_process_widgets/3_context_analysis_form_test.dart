@@ -15,6 +15,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 import "../../../integration_test/externalized_code/externalized_testing_code.dart";
@@ -871,7 +872,7 @@ void main()
             // Balance elements: title + items
           var listAllBalanceTextsNotUnderlined = List.filled(5, isNotUnderlined);
           var listAllBalanceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all balance elements not underlined"); 
+          logt("Testing Debug: Verifying all balance elements not underlined");
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 4));
