@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
@@ -91,7 +92,7 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   // Method used to refresh the keywords list after deletion of session data.
   Future<void> keywordsRefreshAfterSessionDeletion() async
   {
-    if (testingDebug) pu.printd("Testing Debug: DashboardFilteringByKeywords: keywordsRefreshAfterSessionDeletion");
+    logt("DashboardFilteringByKeywords: keywordsRefreshAfterSessionDeletion");
     // if no sessions left, nothing to do
     if (widget.sessionsMetadataAll == null) return;
     
