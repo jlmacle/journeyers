@@ -261,8 +261,8 @@ void main()
             logt("individualPerspectiveBalanceIssue",individualPerspectiveBalanceIssue);
             logt("individualPerspectiveWorkplaceIssue",individualPerspectiveWorkplaceIssue);
             logt("individualPerspectiveLegacyIssue",individualPerspectiveLegacyIssue);
+            logt("individualPerspectiveAnotherIssue",individualPerspectiveAnotherIssue);
        
-            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
 
             
             // Verifying consistency between hard-coded strings and localized strings
