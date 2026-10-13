@@ -260,9 +260,8 @@ void main()
 
             logt("individualPerspectiveBalanceIssue",individualPerspectiveBalanceIssue);
             logt("individualPerspectiveWorkplaceIssue",individualPerspectiveWorkplaceIssue);
-
+            logt("individualPerspectiveLegacyIssue",individualPerspectiveLegacyIssue);
        
-            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveLegacyIssue");
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
 
             
