@@ -7,6 +7,7 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
@@ -52,7 +53,8 @@ void main() {
         case("en"): { hintText = "Please enter a title for this analysis."; }
         case("fr"): { hintText = "Veuillez renseigner le titre\nde cette analyse."; }        
       }
-      if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
+
+      logt("hintText", hintText);
 
       // Verifying consistency between hard-coded string and localized string
       expect(hintText, lca.caTitleTextFieldHint);     
