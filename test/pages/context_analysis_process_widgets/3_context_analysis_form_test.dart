@@ -171,8 +171,9 @@ void main()
               case("en"): { invitationToUnfoldExpansionTile = "Please click to toggle"; }
               case("fr"): { invitationToUnfoldExpansionTile = "Veuillez cliquer pour commencer"; }        
             }
-            if (testingDebug) pu.printd("Testing Debug: invitationToUnfoldExpansionTile: $invitationToUnfoldExpansionTile"); 
 
+            logt("invitationToUnfoldExpansionTile", invitationToUnfoldExpansionTile);
+          
             // Verifying that the first expansion tile subtext is correct 
             var firstUnfoldedExpansionTileSubTextFinder = find.descendant
                                                     (
