@@ -376,8 +376,8 @@ void main()
             }
 
             logt("level3TitleBalanceIssueItem1", level3TitleBalanceIssueItem1);
+            logt("level3TitleBalanceIssueItem2", level3TitleBalanceIssueItem2);
 
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem2");
             if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
             if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
 
