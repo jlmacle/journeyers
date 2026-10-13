@@ -141,7 +141,8 @@ void main()
               case("en"): { level2TitleGroup = "As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?"; }
               case("fr"): { level2TitleGroup = "En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"; }        
             }
-            if (testingDebug) pu.printd("Testing Debug: hintText: $level2TitleGroup"); 
+
+            logt("level2TitleGroup", level2TitleGroup);
 
             // Verifying consistency between hard-coded string and localized string
             expect(level2TitleGroup, lqf.level2TitleGroup);     
