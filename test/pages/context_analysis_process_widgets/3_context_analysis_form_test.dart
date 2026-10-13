@@ -108,7 +108,7 @@ void main()
               case("en"): { level2TitleIndividual = "As an individual:\nWhat problem\nam I trying to solve?"; }
               case("fr"): { level2TitleIndividual = "En tant qu'individu:\nQuel problème\ndois-je résoudre ?"; }        
             }
-            if (testingDebug) pu.printd("Testing Debug: level2TitleIndividual: $level2TitleIndividual"); 
+            logt("level2TitleIndividual", level2TitleIndividual);
 
             // Verifying that the first expansion tile title is correct 
             var firstExpansionTileQuestionFinder = find.descendant
