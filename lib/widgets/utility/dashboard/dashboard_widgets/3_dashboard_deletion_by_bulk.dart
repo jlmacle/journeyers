@@ -7,6 +7,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart";
 
@@ -92,7 +93,8 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       (session) => 
       filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
     );
-    if (testingDebug) pu.printd("Testing Debug: DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll: ${widget.sessionsMetadataAll}");
+
+    logt("DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll:", widget.sessionsMetadataAll);
 
     // Clearing the list of the selected sessions
     widget.sessionsMetadataSelectedForDeletion!.clear();
