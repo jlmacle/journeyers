@@ -11,7 +11,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
-import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
@@ -282,8 +281,7 @@ void main()
           case("fr"): { placeholder = "Liste d'idées vide"; }        
         }
 
-        if (testingDebug) pu.printd("Testing Debug: placeholder: $placeholder"); 
-
+        logt("placeholder", placeholder);
         // Verifying consistency between hard-coded string and localized string
         expect(placeholder, lgps.ideasListPlaceholder);     
 
