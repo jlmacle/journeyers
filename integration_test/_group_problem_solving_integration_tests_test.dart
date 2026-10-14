@@ -511,7 +511,8 @@ Future<void> main() async {
               for (var i = 1; i <= 6; i++)
               {
                 logt("Index", i);
-                if (testingDebug) pu.printd("Testing Debug: Title: ${titlesListKwsSorting[i-1]}");
+                logt("Title", titlesListKwsSorting[i-1]);
+
                 if (testingDebug) pu.printd("Testing Debug: Kws: ${kwsListsKwsSorting[i-1]}");
               }              
               
