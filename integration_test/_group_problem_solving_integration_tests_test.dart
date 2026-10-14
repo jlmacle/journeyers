@@ -194,8 +194,8 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             CheckboxListTile checklistItemWidget = tester.widget<CheckboxListTile>(checkboxListTileFinder);
-            if (testingDebug) pu.printd("Testing Debug: checklistItemWidget.value: ${checklistItemWidget.value}");
-
+            logt("checklistItemWidget.value", checklistItemWidget.value);
+            
             Color activeColor = checklistItemWidget.activeColor!;
     
             expect (activeColor, checkboxCheckedColor);        
