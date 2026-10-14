@@ -377,10 +377,8 @@ void main()
 
             logt("level3TitleBalanceIssueItem1", level3TitleBalanceIssueItem1);
             logt("level3TitleBalanceIssueItem2", level3TitleBalanceIssueItem2);
-
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem3");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleBalanceIssueItem4");
-
+            logt("level3TitleBalanceIssueItem3", level3TitleBalanceIssueItem3);
+            logt("level3TitleBalanceIssueItem4", level3TitleBalanceIssueItem4);
             // Verifying consistency between hard-coded strings and localized strings
             expect(level3TitleBalanceIssueItem1, lqf.level3TitleBalanceIssueItem1);     
             expect(level3TitleBalanceIssueItem2, lqf.level3TitleBalanceIssueItem2);
@@ -438,9 +436,8 @@ void main()
               }              
             }
 
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem1");
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleWorkplaceIssueItem2");
-
+            logt("level3TitleWorkplaceIssueItem1", level3TitleWorkplaceIssueItem1);
+            logt("level3TitleWorkplaceIssueItem2", level3TitleWorkplaceIssueItem2);
             // Verifying consistency between hard-coded strings and localized strings
             expect(level3TitleWorkplaceIssueItem1, lqf.level3TitleWorkplaceIssueItem1);     
             expect(level3TitleWorkplaceIssueItem2, lqf.level3TitleWorkplaceIssueItem2);
@@ -491,8 +488,7 @@ void main()
               }              
             }
 
-            if (testingDebug) pu.printd("Testing Debug: data: $level3TitleLegacyIssueItem1");
-
+            logt("level3TitleLegacyIssueItem1", level3TitleLegacyIssueItem1);
             // Verifying consistency between hard-coded strings and localized strings
             expect(level3TitleLegacyIssueItem1, lqf.level3TitleLegacyIssueItem1);     
 
@@ -572,8 +568,7 @@ void main()
             );
 
             var totalCheckboxesFinders = checkboxesFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalCheckboxesFinders: $totalCheckboxesFinders");
-            
+            logt("totalCheckboxesFinders", totalCheckboxesFinders);
             for(var i = 0; i < checkboxesFinder.evaluate().length; i++)
             {
               await tester.scrollUntilVisible
@@ -602,8 +597,7 @@ void main()
             );
             
             var totalTextFinders = textFinders.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalTextFinders: $totalTextFinders");
-
+            logt("totalTextFinders", totalTextFinders);
             var localeLanguageCode = getLocaleLanguageCode(tester);
 
             var pastOutcomesHouseholdTextFieldHint = "";
@@ -629,11 +623,10 @@ void main()
               }              
             }
 
-            if (testingDebug) pu.printd("Testing Debug: data: $pastOutcomesHouseholdTextFieldHint");
-            if (testingDebug) pu.printd("Testing Debug: data: $pastOutcomesWorkplaceTextFieldHint");
-            if (testingDebug) pu.printd("Testing Debug: data: $helpingAndHouseholdTextFieldHint");
-            if (testingDebug) pu.printd("Testing Debug: data: $caFormPleaseDevelopTextFieldHint");
-
+            logt("pastOutcomesHouseholdTextFieldHint", pastOutcomesHouseholdTextFieldHint);
+            logt("pastOutcomesWorkplaceTextFieldHint", pastOutcomesWorkplaceTextFieldHint);
+            logt("helpingAndHouseholdTextFieldHint", helpingAndHouseholdTextFieldHint);
+            logt("caFormPleaseDevelopTextFieldHint", caFormPleaseDevelopTextFieldHint);
             // Verifying consistency between hard-coded strings and localized strings
             expect(pastOutcomesHouseholdTextFieldHint, lca.pastOutcomesHouseholdTextFieldHint);     
             expect(pastOutcomesWorkplaceTextFieldHint, lca.pastOutcomesWorkplaceTextFieldHint);     
@@ -716,12 +709,11 @@ void main()
               }              
             }
 
-            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveProblems");
-            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveSameProblems");
-            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveHarmonyHome");
-            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveAppreciabilityWork");
-            if (testingDebug) pu.printd("Testing Debug: data: $groupPerspectiveEarningAbility");
-
+            logt("groupPerspectiveProblems", groupPerspectiveProblems);
+            logt("groupPerspectiveSameProblems", groupPerspectiveSameProblems);
+            logt("groupPerspectiveHarmonyHome", groupPerspectiveHarmonyHome);
+            logt("groupPerspectiveAppreciabilityWork", groupPerspectiveAppreciabilityWork);
+            logt("groupPerspectiveEarningAbility", groupPerspectiveEarningAbility);
             // Verifying consistency between hard-coded strings and localized strings
             expect(groupPerspectiveProblems, lqf.level3TitleGroupsProblematics);     
             expect(groupPerspectiveSameProblems, lqf.level3TitleSameProblem);

@@ -8,7 +8,7 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
-import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
@@ -53,8 +53,7 @@ void main() {
           case("en"): { keywordsTitle = "Keywords"; }
           case("fr"): { keywordsTitle = "Mots-clés"; }        
         }
-        if (testingDebug) pu.printd("Testing Debug: defaultTitle: $keywordsTitle");
-
+        logt("keywordsTitle", keywordsTitle);
         // Verifying consistency between hard-coded string and localized string
         expect(keywordsTitle, lgps.gpsKeywordsTitle);     
 
@@ -90,8 +89,7 @@ void main() {
             keywordsAppBarTitle = "Mots-clés pour la\nsession de résolution du problème"; 
           }        
         }
-        if (testingDebug) pu.printd("Testing Debug: defaultTitle: $keywordsAppBarTitle");
-
+        logt("defaultTitle", keywordsAppBarTitle);
         // Tapping to open the overlay
         var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
         await tester.tap(keywordsTitleFinder);
@@ -131,8 +129,7 @@ void main() {
           case("en"): { hintText = "Please enter one keyword at a time\n(+ Enter key)."; }
           case("fr"): { hintText = "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."; }        
         }
-        if (testingDebug) pu.printd("Testing Debug: hintText: $hintText"); 
-
+        logt("hintText", hintText);
         // Verifying consistency between hard-coded string and localized string
         expect(hintText, lds.keywordsEntryTextFieldHint);     
 
@@ -190,8 +187,7 @@ void main() {
           case("en"): { appBarTitle = "Keywords for the\nproblem-solving session"; }
           case("fr"): { appBarTitle = "Mots-clés pour la\nsession de résolution du problème"; }        
         }
-        if (testingDebug) pu.printd("Testing Debug: appBarTitle: $appBarTitle"); 
-
+        logt("appBarTitle", appBarTitle);
         // Verifying consistency between hard-coded string and localized string
         expect(appBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);     
 

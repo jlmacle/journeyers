@@ -58,7 +58,7 @@ void isCircularProgressIndicatorPresent(WidgetTester tester)
   int printFinderTotal(Finder finder, String label)
   {
     int totalFinder = finder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: Number of candidates for $label: $totalFinder");
+    logt("Number of candidates for $label", totalFinder);
     return totalFinder;
   }
 
@@ -67,13 +67,13 @@ void isCircularProgressIndicatorPresent(WidgetTester tester)
 /// A method used to log data related to the testingDebug boolean.
 /// logt(msg); -> Testing Debug: "msg"
 /// logt(msg, anExpressionFResult);  -> Testing Debug: "msg": anExpressionFResult
-void logt(String msg, [ Object? anExpressionFResult ])
+void logt(String msg, [ Object? anExpressionResult ])
 {
-  if (anExpressionFResult == null) {
+  if (anExpressionResult == null) {
     if (testingDebug) pu.printd("Testing Debug: $msg");
   }
   else{
-    if (testingDebug) pu.printd("Testing Debug: $msg: $anExpressionFResult");
+    if (testingDebug) pu.printd("Testing Debug: $msg: $anExpressionResult");
   }
   
 }

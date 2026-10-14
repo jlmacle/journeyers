@@ -184,8 +184,7 @@ Future<void> main() async {
           );
 
           var totalCheckboxListTilesFinder = checkboxListTilesFinder.evaluate().length;
-          if (testingDebug) pu.printd("Testing Debug: totalCheckboxListTilesFinder: $totalCheckboxListTilesFinder");
-
+          logt("totalCheckboxListTilesFinder", totalCheckboxListTilesFinder);
           // Verifying their color after tapping them 
           for (var index = 0; index < totalCheckboxListTilesFinder; index++)
           {
@@ -272,8 +271,7 @@ Future<void> main() async {
             case("fr"): { snackbarMessage = "Session sauvegardée"; }        
           }
           
-          if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-          
+          logt("snackbarMessage", snackbarMessage);
           // Verifying consistency between hard-coded string and localized string
           // GPSProcess: lds.snackbarMessageSessionSavedSuccessfully
           expect(snackbarMessage, lds.snackbarMessageSessionSavedSuccessfully);  
@@ -355,8 +353,7 @@ Future<void> main() async {
             var titlesFinder = await dashboardGetAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalTitles: $totalTitles");
-
+            logt("totalTitles", totalTitles);
             // Verifying the alphabetical order
             for (var index = 0; index < totalTitles; index++)
             {
@@ -512,7 +509,7 @@ Future<void> main() async {
               // ───────────────────────────────────────────────────────────────────────────────
               for (var i = 1; i <= 6; i++)
               {
-                if (testingDebug) pu.printd("Testing Debug: Data: $i");
+                logt("Data", i);
                 if (testingDebug) pu.printd("Testing Debug: Title: ${titlesListKwsSorting[i-1]}");
                 if (testingDebug) pu.printd("Testing Debug: Kws: ${kwsListsKwsSorting[i-1]}");
               }              
@@ -541,7 +538,7 @@ Future<void> main() async {
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwMaintenance: $totalTitles");
+              logt("totalTitles for $kwMaintenance", totalTitles);
               for (var index = 0; index < totalTitles; index++)
               {
                 if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
@@ -564,7 +561,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
+              logt("totalTitles for $kwCompanionship", totalTitles);
               for (var index = 0; index < totalTitles; index++)
               {
                 if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
@@ -588,7 +585,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwWorkplace: $totalTitles");
+              logt("totalTitles for $kwWorkplace", totalTitles);
               for (var index = 0; index < totalTitles; index++)
               {
                 if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
@@ -968,8 +965,7 @@ Future<void> main() async {
 
             var editableDeletableTextListItemFinder = find.byType(EditableDeletableTextListItem);
             var totalEditableDeletableTextListItemFinder = editableDeletableTextListItemFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder");
-
+            logt("totalEditableDeletableTextListItemFinder", totalEditableDeletableTextListItemFinder);
               // Searching the editable/deletable field for idea1
             var idea1EditableDeletableFinder = find.byKey(const Key("editable-deletable-list-tile-0"));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
@@ -1193,8 +1189,7 @@ Future<void> main() async {
 
             var editableDeletableTextListItemFinder = find.byType(EditableDeletableTextListItem);
             var totalEditableDeletableTextListItemFinder = editableDeletableTextListItemFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder");
-
+            logt("totalEditableDeletableTextListItemFinder", totalEditableDeletableTextListItemFinder);
               // Searching the editable/deletable field for idea1
             var idea1EditableDeletableFinder = find.byKey(const Key("editable-deletable-list-tile-0"));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
@@ -1420,8 +1415,7 @@ Future<void> main() async {
 
             var editableDeletableTextListItemFinder = find.byType(EditableDeletableTextListItem);
             var totalEditableDeletableTextListItemFinder = editableDeletableTextListItemFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalEditableDeletableTextListItemFinder: $totalEditableDeletableTextListItemFinder");
-
+            logt("totalEditableDeletableTextListItemFinder", totalEditableDeletableTextListItemFinder);
               // Searching the editable/deletable field for idea1
             var idea1EditableDeletableFinder = find.byKey(const Key("editable-deletable-list-tile-0"));   // todo: to clean           
             await tester.tap(idea1EditableDeletableFinder);
@@ -1987,8 +1981,7 @@ Future<void> main() async {
             var listItemsFinder = await gpsGetNewListTextItems(tester);
 
             var totalItems = listItemsFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalItems: $totalItems");
-
+            logt("totalItems", totalItems);
             for (var itemIndex = 0; itemIndex < totalItems; itemIndex++)
             {
               expect(tester.widget<Text>(listItemsFinder.at(itemIndex)), names[itemIndex]);
@@ -2030,8 +2023,7 @@ Future<void> main() async {
             var listItemsFinder = await gpsGetNewListTextItems(tester);
 
             var totalItems = listItemsFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalItems: $totalItems");
-
+            logt("totalItems", totalItems);
             for (var itemIndex = 0; itemIndex < totalItems; itemIndex++)
             {
               expect(tester.widget<Text>(listItemsFinder.at(itemIndex)), names[itemIndex]);
@@ -2219,8 +2211,7 @@ Future<void> main() async {
                   case("fr"): { snackbarMessage = "Enregistrée en tant que "; }        
                 }
                 
-                if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-                
+                logt("snackbarMessage", snackbarMessage);
                 // Verifying consistency between hard-coded string and localized string
                 // NewParticipantsList: lps.savedAsSnackBarMessage
                 expect(snackbarMessage, lps.savedAsSnackBarMessage);  
@@ -2471,8 +2462,7 @@ Future<void> main() async {
               case("fr"): { snackbarMessage = "Données supprimées"; }        
             }
             
-            if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-            
+            logt("snackbarMessage", snackbarMessage);
             // Verifying consistency between hard-coded string and localized string
             // NewParticipantsDeletionByBulk: lds.snackbarMessageDataDeleted
             expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
@@ -2861,8 +2851,7 @@ Future<void> main() async {
               // Searching the list labels          
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalTitles: $totalTitles");
-
+              logt("totalTitles", totalTitles);
               // Verifying the alphabetical order
               for (var index = 0; index < totalTitles; index++)
               {
@@ -2938,8 +2927,7 @@ Future<void> main() async {
               // Verifying the titles present
               var titlesFinder = await dashboardGetAllSessionsTitles(tester);
               var totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
-
+              logt("totalTitles for $kwCompanionship", totalTitles);
               for (var index = 0; index < totalTitles; index++)
               {
                 expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesCompanionshipExpected[index]);
@@ -2956,8 +2944,7 @@ Future<void> main() async {
               // Verifying the titles present
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwWorkplace: $totalTitles");
-
+              logt("totalTitles for $kwWorkplace", totalTitles);
               for (var index = 0; index < totalTitles; index++)
               {
                 expect((tester.widget<Text>(titlesFinder.at(index)).data), titlesWorkplaceExpected[index]);
@@ -3029,8 +3016,7 @@ Future<void> main() async {
                 case("fr"): { snackbarMessage = "Liste supprimée"; }        
               }
               
-              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-              
+              logt("snackbarMessage", snackbarMessage);
               // Verifying consistency between hard-coded string and localized string
               // ParticipantsListsDashboard: lps.listDeletedSnackbarMessage
               expect(snackbarMessage, lps.listDeletedSnackbarMessage);  
@@ -3127,8 +3113,7 @@ Future<void> main() async {
                 case("fr"): { snackbarMessage = "Données supprimées"; }        
               }
               
-              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-              
+              logt("snackbarMessage", snackbarMessage);
               // Verifying consistency between hard-coded string and localized string
               // ParticipantsListsDashboardDeletionByBulk: lds.snackbarMessageDataDeleted
               expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
@@ -3194,8 +3179,7 @@ Future<void> main() async {
               // Searching for the label        
               var labelsFinder = await dashboardGetAllSessionsTitles(tester);
               var totalLabels = labelsFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalLabels: $totalLabels");
-
+              logt("totalLabels", totalLabels);
               // Verifying the label present
               expect((tester.widget<Text>(labelsFinder.first).data), listLabel1);
 
@@ -3228,8 +3212,7 @@ Future<void> main() async {
                 case("fr"): { snackbarMessage = "Nom de liste mis à jour"; }        
               }
               
-              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-              
+              logt("snackbarMessage", snackbarMessage);
               // Verifying consistency between hard-coded string and localized string
               // ParticipantsListsDashboard: lps.listUpdatedSnackBarMessage
               expect(snackbarMessage, lps.listUpdatedSnackBarMessage);  
@@ -3354,8 +3337,7 @@ Future<void> main() async {
               // Searching for the participants containers        
               var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
-
+              logt("totalNames", totalNames);
               // Searching for text within the container
               var aParticipant = 
                 find.descendant(of: participantsContainersFinder, matching: find.byType(Text));
@@ -3390,8 +3372,7 @@ Future<void> main() async {
                 case("fr"): { snackbarMessage = "Noms mis à jour"; }        
               }
               
-              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-              
+              logt("snackbarMessage", snackbarMessage);
               // Verifying consistency between hard-coded string and localized string
               // ParticipantsListsDashboard: lps.participantsUpdatedSnackBarMessage
               expect(snackbarMessage, lps.participantsUpdatedSnackBarMessage);  
@@ -3408,8 +3389,7 @@ Future<void> main() async {
                                       );
 
               var totalParticipants = participantsFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalParticipants: $totalParticipants");
-
+              logt("totalParticipants", totalParticipants);
               List<String> editedAndSortedParticipantsList = ["Alicia","Benny","Bob"];
               for (var index = 0; index < totalParticipants; index++)
               {
@@ -3459,8 +3439,7 @@ Future<void> main() async {
               // Searching for the participants containers        
               var participantsContainersFinder = await gpsGetParticipantsContainersOnParticipantsListsDashboard(tester);
               var totalNames = participantsContainersFinder.evaluate().length;
-              if (testingDebug) pu.printd("Testing Debug: totalNames: $totalNames");
-
+              logt("totalNames", totalNames);
               // Searching for text within the container
               var aParticipant = 
                 find.descendant(of: participantsContainersFinder, matching: find.byType(Text));
@@ -3564,8 +3543,7 @@ Future<void> main() async {
                 case("fr"): { snackbarMessage = "Mots-clés mis à jour"; }        
               }
               
-              if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
-              
+              logt("snackbarMessage", snackbarMessage);
               // Verifying consistency between hard-coded string and localized string
               // ParticipantsListsDashboard: lds.snackbarMessageKeywordsUpdated
               expect(snackbarMessage, lds.snackbarMessageKeywordsUpdated);  
