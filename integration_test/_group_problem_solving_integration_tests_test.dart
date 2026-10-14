@@ -542,7 +542,7 @@ Future<void> main() async {
               logt("totalTitles for $kwMaintenance", totalTitles);
               for (var index = 0; index < totalTitles; index++)
               {
-                if (testingDebug) pu.printd("Testing Debug: ${tester.widget<Text>(titlesFinder.at(index)).data}");
+                logt("tester.widget<Text>(titlesFinder.at(index)).data",tester.widget<Text>(titlesFinder.at(index)).data);
               }
 
               for (var index = 0; index < totalTitles; index++)
