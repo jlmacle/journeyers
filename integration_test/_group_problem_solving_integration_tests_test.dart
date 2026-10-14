@@ -1010,8 +1010,10 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             // pumpAndSettle timed out
             // await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));             
-            if (testingDebug) pu.printd("Testing Debug: idea3 added");  
+            await tester.pump(const Duration(seconds: 2));   
+
+            logt("idea3 added");          
+
 
             // ── Closing the ideas list  ───────────────────────
             // ───────────────────────────────────────────────────
