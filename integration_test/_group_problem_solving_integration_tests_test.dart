@@ -194,6 +194,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
 
             CheckboxListTile checklistItemWidget = tester.widget<CheckboxListTile>(checkboxListTileFinder);
+            
             logt("checklistItemWidget.value", checklistItemWidget.value);
             
             Color activeColor = checklistItemWidget.activeColor!;
@@ -509,7 +510,7 @@ Future<void> main() async {
               // ───────────────────────────────────────────────────────────────────────────────
               for (var i = 1; i <= 6; i++)
               {
-                logt("Data", i);
+                logt("Index", i);
                 if (testingDebug) pu.printd("Testing Debug: Title: ${titlesListKwsSorting[i-1]}");
                 if (testingDebug) pu.printd("Testing Debug: Kws: ${kwsListsKwsSorting[i-1]}");
               }              
