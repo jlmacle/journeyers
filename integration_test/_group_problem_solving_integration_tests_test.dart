@@ -512,8 +512,7 @@ Future<void> main() async {
               {
                 logt("Index", i);
                 logt("Title", titlesListKwsSorting[i-1]);
-
-                if (testingDebug) pu.printd("Testing Debug: Kws: ${kwsListsKwsSorting[i-1]}");
+                logt("Kws", kwsListsKwsSorting[i-1]); 
               }              
               
               await gpsEnterSeveralTimesNewProcessData
