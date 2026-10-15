@@ -632,12 +632,7 @@ void main()
             expect(pastOutcomesWorkplaceTextFieldHint, lca.pastOutcomesWorkplaceTextFieldHint);     
             expect(helpingAndHouseholdTextFieldHint, lca.helpingAndHouseholdTextFieldHint);
             expect(caFormPleaseDevelopTextFieldHint, lca.caFormPleaseDevelopTextFieldHint);
-
-            for(var i= 0; i < totalTextFinders; i++)
-            {
-              if (testingDebug) pu.printd("$i: ${tester.widget<Text>(textFinders.at(i)).data}");
-            }
-
+     
             // Verifying the hint texts present 
             expect(tester.widget<Text>(textFinders.at(4)).data, lca.pastOutcomesHouseholdTextFieldHint);
             expect(tester.widget<Text>(textFinders.at(7)).data, lca.pastOutcomesHouseholdTextFieldHint);
