@@ -892,13 +892,14 @@ void main()
           expect(listAllLegacyTextsValues, listAllLegacyTextsNotUnderlined);
 
           // ─── 2. FIRST BALANCE ITEM CHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
           // Clicking on the first balance item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleBalanceIssueItem1);
           // Verifying the formatting for the balance issue
           var expectedAllBalanceTextsFormatting = [isUnderlined, isUnderlined, ...List.filled(3, isNotUnderlined)];
           listAllBalanceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying the balance section question and the first checkbox checked"); 
+
+          logt("\n\nVerifying the balance section question and the first checkbox checked");
+ 
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
           // hint text + extra text
