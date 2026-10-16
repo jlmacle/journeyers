@@ -1048,7 +1048,9 @@ void main()
             // Balance elements: title + items
           var listAllBalanceTextsNotUnderlined = List.filled(5, isNotUnderlined);
           var listAllBalanceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all balance elements not underlined"); 
+
+          logt("Verifying all balance elements not underlined");
+          
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 4));
