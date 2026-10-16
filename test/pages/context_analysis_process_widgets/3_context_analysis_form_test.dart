@@ -997,7 +997,7 @@ void main()
           listAllWorkplaceTextsValues = [];
 
           logt("Verifying all workplace elements not underlined"); 
-          
+
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 9));
@@ -1007,7 +1007,9 @@ void main()
             // Legacy elements: title + items
           listAllLegacyTextsNotUnderlined = List.filled(2, isNotUnderlined);
           listAllLegacyTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all legacy elements not underlined"); 
+
+          logt("Verifying all legacy elements not underlined"); 
+          
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
           
