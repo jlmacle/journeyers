@@ -1062,7 +1062,9 @@ void main()
             // Workplace elements: title + items
           var listAllWorkplaceTextsNotUnderlined = List.filled(3, isNotUnderlined);
           var listAllWorkplaceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all workplace elements not underlined"); 
+
+          logt("Verifying all workplace elements not underlined"); 
+          
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 9));
