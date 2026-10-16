@@ -932,13 +932,15 @@ void main()
           expect(listAllLegacyTextsValues, expectedAllLegacyTextsFormatting);
 
           // ─── 3. SECOND BALANCE ITEM CHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
+
           // Clicking on the second balance item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleBalanceIssueItem2);
           // Verifying the formatting
           expectedAllBalanceTextsFormatting = [isUnderlined, isUnderlined, isUnderlined, ...List.filled(2, isNotUnderlined)];
           listAllBalanceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying the section question, the first and second checkbox checked"); 
+
+          logt("\n\nVerifying the section question, the first and second checkbox checked"); 
+          
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 2));
           listAllBalanceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 3));
           // hint text + extra text
