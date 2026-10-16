@@ -1083,13 +1083,15 @@ void main()
           expect(listAllLegacyTextsValues, listAllLegacyTextsNotUnderlined);
 
           // ─── 2. FIRST WORKPLACE ITEM CHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
+
           // Clicking on the first workplace item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleWorkplaceIssueItem1);
           // Verifying the formatting for the workplace issue
           var expectedAllWorkplaceTextsFormatting = [isUnderlined, isUnderlined, isNotUnderlined];
           listAllWorkplaceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying the workplace section question and the first checkbox checked"); 
+
+          logt("\n\nVerifying the workplace section question and the first checkbox checked"); 
+                    
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
           // hint text + extra text
