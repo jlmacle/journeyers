@@ -970,13 +970,14 @@ void main()
           expect(listAllBalanceTextsValues, expectedAllBalanceTextsFormatting);
 
           // ─── 5. FIRST BALANCE ITEM UNCHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
           // Re-clicking on the first balance item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleBalanceIssueItem1);
           // Verifying the formatting
           expectedAllBalanceTextsFormatting = [isUnderlined, isUnderlined, ...List.filled(3, isNotUnderlined)];
           listAllBalanceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all sections elements unchecked"); 
+
+          logt("\n\nVerifying all sections elements unchecked"); 
+          
             // Balance elements: title + items
           listAllBalanceTextsNotUnderlined = List.filled(5, isNotUnderlined);
           listAllBalanceTextsValues = [];
