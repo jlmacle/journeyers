@@ -1301,13 +1301,14 @@ void main()
           expect(listAllWorkplaceTextsValues, expectedAllWorkplaceTextsFormatting);          
 
           // ─── 3. FIRST LEGACY ITEM UNCHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
           // Re-clicking on the first legacy item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleLegacyIssueItem1);
           // Verifying the formatting
           expectedAllLegacyTextsFormatting = List.filled(2, isNotUnderlined);
           listAllLegacyTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all legacy elements not underlined"); 
+
+          logt("\n\nVerifying all legacy elements not underlined"); 
+
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
           
