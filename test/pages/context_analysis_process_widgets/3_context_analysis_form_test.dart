@@ -1254,7 +1254,9 @@ void main()
             // Legacy elements: title + items
           var listAllLegacyTextsNotUnderlined = List.filled(2, isNotUnderlined);
           var listAllLegacyTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all legacy elements not underlined"); 
+
+          logt("Verifying all legacy elements not underlined"); 
+           
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
           
