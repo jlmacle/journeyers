@@ -1156,13 +1156,14 @@ void main()
           expect(listAllWorkplaceTextsValues, expectedAllWorkplaceTextsFormatting);
 
           // ─── 5. FIRST WORKPLACE ITEM UNCHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
           // Re-clicking on the first workplace item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleWorkplaceIssueItem1);
           // Verifying the formatting
           expectedAllWorkplaceTextsFormatting = List.filled(3, isNotUnderlined);
           listAllWorkplaceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying all workplace elements not underlined"); 
+
+          logt("\n\nVerifying all workplace elements not underlined"); 
+          
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 9));
