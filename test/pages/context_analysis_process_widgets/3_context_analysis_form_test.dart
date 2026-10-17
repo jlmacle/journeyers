@@ -1140,13 +1140,14 @@ void main()
           expect(listAllBalanceTextsValues, expectedAllBalanceTextsFormatting);
 
           // ─── 4. SECOND WORKPLACE ITEM UNCHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
           // Re-clicking on the second workplace item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleWorkplaceIssueItem2);
           // Verifying the formatting
           expectedAllWorkplaceTextsFormatting = [isUnderlined, isUnderlined, isNotUnderlined];
           listAllWorkplaceTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying the section question, the first checkbox checked"); 
+
+          logt("\n\nVerifying the section question, the first checkbox checked"); 
+ 
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 7));
           listAllWorkplaceTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 8));
           // hint text + extra text
