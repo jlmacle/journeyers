@@ -1263,13 +1263,14 @@ void main()
           expect(listAllLegacyTextsValues, listAllLegacyTextsNotUnderlined);
 
           // ─── 2. LEGACY ITEM CHECKED ───────────────────────────────────────
-          if (testingDebug) pu.printd("\n\n"); 
           // Clicking on the first legacy item and verifying the new values
           await caCheckboxChangeValue(tester: tester, checkboxText: lqf.level3TitleLegacyIssueItem1);
           // Verifying the formatting for the legacy issue
           var expectedAllLegacyTextsFormatting = [isUnderlined, isUnderlined];
           listAllLegacyTextsValues = [];
-          if (testingDebug) pu.printd("Testing Debug: Verifying the legacy section question and the first checkbox checked"); 
+
+          logt("\n\nVerifying the legacy section question and the first checkbox checked"); 
+          
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 10));
           listAllLegacyTextsValues.add(caIsCheckboxTextUnderlined(tester: tester, textsFinder: indivTextsFinder, checkboxIndex: 11));
            expect(listAllLegacyTextsValues, expectedAllLegacyTextsFormatting);
