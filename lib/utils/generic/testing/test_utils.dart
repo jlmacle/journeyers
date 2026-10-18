@@ -1,4 +1,6 @@
 
+import "dart:io";
+
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
 
@@ -22,6 +24,46 @@ class PathProviderPlatformRedirectForTesting extends PathProviderPlatform {
 /// A getter to test if a test is being run.
 bool get isInTestEnvironment =>
     WidgetsBinding.instance.runtimeType.toString().contains("Test");
+
+/// {@category Utils - Generic}
+/// A method used to get a locale language code for a widget test.
+String getLocaleLanguageCode2(WidgetTester tester)
+{
+  var context = tester.element(find.byType(Scaffold).first);
+  Locale? currentLocale = (Localizations.localeOf(context));
+  var localeLanguageCode = currentLocale.languageCode;
+
+  if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
+  logt("localeLanguageCode", localeLanguageCode);
+  return localeLanguageCode;
+}
+
+/// {@category Utils - Generic}
+/// A method used to verify that text on-screen is consistent with what was expected.
+void verifyTextOnScreen(WidgetTester tester, String varName, Map<String,String> expectedTexts, String onScreenValue)
+{
+  var localeLanguageCode = getLocaleLanguageCode2(tester);
+
+  var expectedText = "";
+
+  switch(localeLanguageCode.toLowerCase())
+  {
+    case("en"): 
+    { 
+      expectedText = expectedTexts["en"] ?? "";
+    }
+    case("fr"): 
+    { 
+      expectedText = expectedTexts["fr"] ?? "";                
+    }              
+  }
+
+  logt(varName, expectedText);
+
+  // Verifying consistency between hard-coded string and localized string
+  expect(onScreenValue, expectedText);
+}
+
 
 /// {@category Utils - Generic}
 /// A method used to print all Text widgets data.
@@ -74,6 +116,5 @@ void logt(String msg, [ Object? anExpressionResult ])
   }
   else{
     if (testingDebug) pu.printd("Testing Debug: $msg: $anExpressionResult");
-  }
-  
+  }  
 }
