@@ -88,7 +88,7 @@ void isCircularProgressIndicatorPresent(WidgetTester tester)
   bool isPresent = ( circularProgressIndicatorFinder.evaluate().isNotEmpty );
   if(isPresent)
   {
-    if (testingDebug) pu.printd("Testing Debug: CircularProgressIndicator present");
+    logt("CircularProgressIndicator present");
   }
   else
   {
