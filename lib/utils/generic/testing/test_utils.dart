@@ -35,7 +35,7 @@ String getLocaleLanguageCode2(WidgetTester tester)
 
   logt("operatingSystem", Platform.operatingSystem);  
   logt("localeLanguageCode", localeLanguageCode);
-  
+
   return localeLanguageCode;
 }
 
@@ -75,7 +75,8 @@ void printTextData(WidgetTester tester)
     {
       var textFinder = textsFinder.at(i);
       var textWidget = tester.widget<Text>(textFinder);
-      if (testingDebug) pu.printd("Testing Debug: textWidget.data: ${textWidget.data}");
+
+      logt("textWidget.data", textWidget.data);
     }
 }
 
