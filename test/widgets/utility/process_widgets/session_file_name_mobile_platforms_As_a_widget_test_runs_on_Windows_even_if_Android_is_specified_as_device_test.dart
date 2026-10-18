@@ -8,6 +8,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 void main() {
   const textFieldHintPart = "Please add the";
@@ -40,7 +41,8 @@ void main() {
             );
             await tester.pumpAndSettle();
 
-            if (testingDebug) pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
+            logt("Platform", Platform.operatingSystem);
+            
             if (Platform.isAndroid || Platform.isIOS)
             {
               // Verifying the text field absent
