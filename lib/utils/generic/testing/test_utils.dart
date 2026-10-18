@@ -33,8 +33,9 @@ String getLocaleLanguageCode2(WidgetTester tester)
   Locale? currentLocale = (Localizations.localeOf(context));
   var localeLanguageCode = currentLocale.languageCode;
 
-  if (testingDebug) pu.printd("Testing Debug: operatingSystem: ${Platform.operatingSystem}");
+  logt("operatingSystem", Platform.operatingSystem);  
   logt("localeLanguageCode", localeLanguageCode);
+  
   return localeLanguageCode;
 }
 
