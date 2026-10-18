@@ -1,6 +1,7 @@
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 
 /// {@category Utils - Generic}
@@ -33,7 +34,7 @@ Future<List<dynamic>> sortSessionByDate
   if (sessionMetadataDebug && list.isNotEmpty) pu.printd("Session Metadata: Sorted by date:");
   for (var item in list)
   {
-    if (sessionMetadataDebug) pu.printd("Session Metadata: ${item[DashboardUtils.keyDateISO8601]}");
+    logm(item[DashboardUtils.keyDateISO8601]);
   }
 
   return list;   
