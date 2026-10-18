@@ -92,7 +92,7 @@ void isCircularProgressIndicatorPresent(WidgetTester tester)
   }
   else
   {
-    if (testingDebug) pu.printd("Testing Debug: CircularProgressIndicator absent");
+    logt("CircularProgressIndicator absent");
   }
 
 }
