@@ -120,3 +120,17 @@ void logt(String msg, [ Object? anExpressionResult ])
     if (testingDebug) pu.printd("Testing Debug: $msg: $anExpressionResult");
   }  
 }
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the sessionMetadataDebug boolean.
+/// logm(msg); -> Session Metadata: "msg"
+/// logm(msg, anExpressionFResult);  -> Session Metadata: "msg": anExpressionFResult
+void logm(String msg, [ Object? anExpressionResult ])
+{
+  if (anExpressionResult == null) {
+    if (sessionMetadataDebug) pu.printd("Session Metadata: $msg");
+  }
+  else{
+    if (sessionMetadataDebug) pu.printd("Session Metadata: $msg: $anExpressionResult");
+  }  
+}
