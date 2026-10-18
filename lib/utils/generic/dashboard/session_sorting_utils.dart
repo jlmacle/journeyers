@@ -31,7 +31,7 @@ Future<List<dynamic>> sortSessionByDate
       return 0;    
     });
 
-  if (sessionMetadataDebug && list.isNotEmpty) pu.printd("Session Metadata: Sorted by date:");
+  if (list.isNotEmpty) logm("Sorted by date:");
   for (var item in list)
   {
     logm(item[DashboardUtils.keyDateISO8601]);
