@@ -140,7 +140,8 @@ class DashboardUtils {
     updatedContent = jsonEncode(recordsList);
 
     await file.writeAsString(updatedContent);
-    if (sessionMetadataDebug) pu.printd("Session Metadata: new session metadata: $sessionMetadata saved to: ${file.path}"); 
+
+    logm("new session metadata: $sessionMetadata saved to", file.path);
   }
  
   /// Method used to parse a French or US English date to ISO 8601. 
