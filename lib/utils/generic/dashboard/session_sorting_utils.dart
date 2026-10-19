@@ -77,7 +77,7 @@ Future<void> sortDashboardSessionsByTitle
   logm("Sorted by title:");
   for (var item in list)
   {
-    if (sessionMetadataDebug) pu.printd("${item[DashboardUtils.keyTitleLowerCase]}");
+    logm(item[DashboardUtils.keyTitleLowerCase]);
   }
 }
 
