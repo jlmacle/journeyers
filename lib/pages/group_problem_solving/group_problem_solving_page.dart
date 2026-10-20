@@ -6,6 +6,7 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_page.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
@@ -72,7 +73,7 @@ class GPSPageState extends State<GPSPage>
   // after all session files have been deleted
   void gpsOnAllSessionsDataDeleted() 
   {
-    if (sessionDataDebug) pu.printd("Session Data: GPS page: onAllSessionFilesDeleted");
+    logd("GPS page: onAllSessionFilesDeleted");
 
     setState(() {
       _gpsSessionDataSaved = false;
