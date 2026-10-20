@@ -213,7 +213,7 @@ class CAFormState extends State<CAForm>
       await du.getStoredFileNamesOnMobile();
       logd("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
       
-      if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
+      logd("pathToCSVFile", pathToCSVFile);
     }
     
     // Saving the dashboard metadata if filePath not null
