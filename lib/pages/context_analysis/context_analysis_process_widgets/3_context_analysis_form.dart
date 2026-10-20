@@ -20,6 +20,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_segmented_button_with_text_field.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart" as tfu_proj; 
@@ -210,7 +211,8 @@ class CAFormState extends State<CAForm>
     if(Platform.isAndroid || Platform.isIOS) 
     {
       await du.getStoredFileNamesOnMobile();
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+      logd("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
+      
       if (sessionDataDebug) pu.printd("Session Data: pathToCSVFile: $pathToCSVFile");
     }
     
