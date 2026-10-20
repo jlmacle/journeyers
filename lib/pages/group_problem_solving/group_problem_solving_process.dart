@@ -172,7 +172,8 @@ class GPSProcessState extends State<GPSProcess>
           ? widget.titleWhenEdition
           : lgps.gpsDefaultSavedSessionTitle;
 
-    if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: sessionTitle: $sessionTitle");
+    logd("GPSProcess: _saveGPSDataAndMetadata: sessionTitle", sessionTitle);
+
     if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: _currentIdeas: $_currentIdeas");
 
     // Format ideas for the text file
