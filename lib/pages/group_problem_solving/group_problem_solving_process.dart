@@ -173,8 +173,7 @@ class GPSProcessState extends State<GPSProcess>
           : lgps.gpsDefaultSavedSessionTitle;
 
     logd("GPSProcess: _saveGPSDataAndMetadata: sessionTitle", sessionTitle);
-
-    if (sessionDataDebug) pu.printd("Session Data: GPSProcess: _saveGPSDataAndMetadata: _currentIdeas: $_currentIdeas");
+    logd("GPSProcess: _saveGPSDataAndMetadata: _currentIdeas", _currentIdeas);
 
     // Format ideas for the text file
     var now = DateTime.now();
