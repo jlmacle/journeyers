@@ -116,7 +116,7 @@ class CAProcessState extends State<CAProcess>
   void _analysisTitleUpdate(String titleValue)
   {
     analysisTitle = titleValue;
-    logd("CAProcess: _analysisTitleUpdate: analysisTitle:", analysisTitle);
+    logd("CAProcess: _analysisTitleUpdate: analysisTitle", analysisTitle);
   }
 
 
