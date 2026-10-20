@@ -94,7 +94,7 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
       filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
     );
 
-    logt("DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll:", widget.sessionsMetadataAll);
+    logt("DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll", widget.sessionsMetadataAll);
 
     // Clearing the list of the selected sessions
     widget.sessionsMetadataSelectedForDeletion!.clear();
