@@ -202,7 +202,7 @@ class GPSProcessState extends State<GPSProcess>
           filePath = await fu.saveFileOnAndroid(_fileName, _fileExtension, dataBytes);
           // Updating the file names list: saveFileOnAndroid
           await du.getStoredFileNamesOnMobile();
-          if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+          logt("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
      
         }
         else {
