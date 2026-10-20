@@ -16,6 +16,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
@@ -115,7 +116,7 @@ class CAProcessState extends State<CAProcess>
   void _analysisTitleUpdate(String titleValue)
   {
     analysisTitle = titleValue;
-    if (sessionDataDebug) pu.printd("Session Data: CAProcess: _analysisTitleUpdate: analysisTitle: $analysisTitle");
+    logd("CAProcess: _analysisTitleUpdate: analysisTitle:", analysisTitle);
   }
 
 
