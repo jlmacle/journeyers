@@ -126,7 +126,7 @@ class CAProcessState extends State<CAProcess>
   void _analysisKeywordsUpdate(Set<String> kws)
   {    
     analysisKeywords = kws;
-    if (sessionDataDebug) pu.printd("Session Data: CAProcess: _analysisKeywordsUpdate: analysisKeywords: $analysisKeywords");
+    logd("CAProcess: _analysisKeywordsUpdate: analysisKeywords:", analysisKeywords);
   }
   
   // FILE NAME
