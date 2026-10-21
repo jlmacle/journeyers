@@ -334,7 +334,7 @@ class DashboardUtils {
     // Updating currentListOfStoredFileNames
     currentListOfStoredFileNames = retrievedFileNames;
 
-    if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile: \ncurrentListOfStoredFileNames (after retrieval): $currentListOfStoredFileNames");
+    logd("getStoredFileNamesOnMobile: \ncurrentListOfStoredFileNames (after retrieval)", currentListOfStoredFileNames);
 
     return retrievedFileNames;
   }
