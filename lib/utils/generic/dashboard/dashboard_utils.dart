@@ -288,7 +288,8 @@ class DashboardUtils {
     // Adding the metadata to the file
     var savedContent = jsonEncode(sessionsMetadataAll);
     await sessionFile.writeAsString(savedContent);
-    if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName");
+
+    logd("Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName");    
   }
 
   /// Method used to retrieved all the file names, from the user application folder (mobile applications).
