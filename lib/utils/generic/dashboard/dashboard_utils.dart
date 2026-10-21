@@ -271,7 +271,7 @@ class DashboardUtils {
     } 
     else 
     {
-      if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
+      logd("Error: Unexpected type of dashboard context", typeOfDashboardContext);      
     }
 
     File sessionFile = File("$pathToApplicationSupportDirectory/$fileName");
