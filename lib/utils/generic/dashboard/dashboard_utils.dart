@@ -90,8 +90,8 @@ class DashboardUtils {
     required String filePath,
   }) 
   async {
-    logt("formattedDate", formattedDate);
-    logt("analysisTitle", title);
+    logd("formattedDate", formattedDate);
+    logd("analysisTitle", title);
 
     // Date value interception for testing purposes
     if (isInTestEnvironment)
@@ -271,7 +271,6 @@ class DashboardUtils {
     } 
     else 
     {
-      log
       if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
     }
 
