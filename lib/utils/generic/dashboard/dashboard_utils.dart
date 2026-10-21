@@ -244,12 +244,12 @@ class DashboardUtils {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
 
-        logt("Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");        
+        logm("Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");        
       } else {
-        logt("No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");        
+        logm("No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");        
       }
     } catch (e) {
-      logt("Error deleting session metadata from dashboard data: $e");
+      logm("Error deleting session metadata from dashboard data: $e");
     }
   }
 
