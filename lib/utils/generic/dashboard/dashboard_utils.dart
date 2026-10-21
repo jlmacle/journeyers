@@ -73,7 +73,8 @@ class DashboardUtils {
       List<Map<String, String>> records = [];
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
-      if (sessionDataDebug) pu.printd("Session Data: Session file for $typeOfDashboardContext created: $path/$fileName");
+
+      logt("Session file for $typeOfDashboardContext created", "$path/$fileName");
     }
     return sessionFile;
   }
