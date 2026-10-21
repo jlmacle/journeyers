@@ -74,7 +74,7 @@ class DashboardUtils {
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
 
-      logt("Session file for $typeOfDashboardContext created", "$path/$fileName");
+      logd("Session file for $typeOfDashboardContext created", "$path/$fileName");
     }
     return sessionFile;
   }
