@@ -212,7 +212,7 @@ class GPSProcessState extends State<GPSProcess>
           await fu.saveFileUsingWriteAsBytes(filePathWithExtension: filePath, dataBytes: dataBytes);
         }
 
-        if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+        logd("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
       } 
       else if (Platform.isIOS) 
       {
