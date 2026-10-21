@@ -63,7 +63,7 @@ class DashboardUtils {
     } else if (typeOfDashboardContext == gpsContext) {
       fileName = "dashboard_session_data_group_problem_solvings.json";
     } else {
-      logt("Unexpected type of dashboard context", typeOfDashboardContext);
+      logd("Unexpected type of dashboard context", typeOfDashboardContext);
     }
 
     File sessionFile = File("$path/$fileName");
@@ -271,6 +271,7 @@ class DashboardUtils {
     } 
     else 
     {
+      log
       if (sessionDataDebug) pu.printd("Session Data: Error: Unexpected type of dashboard context: $typeOfDashboardContext");
     }
 
