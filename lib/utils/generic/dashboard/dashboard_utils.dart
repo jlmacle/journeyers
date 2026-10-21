@@ -63,7 +63,7 @@ class DashboardUtils {
     } else if (typeOfDashboardContext == gpsContext) {
       fileName = "dashboard_session_data_group_problem_solvings.json";
     } else {
-      logt("Unexpected type of dashboard context", typeOfDashboardContext);
+      logd("Unexpected type of dashboard context", typeOfDashboardContext);
     }
 
     File sessionFile = File("$path/$fileName");
@@ -74,7 +74,7 @@ class DashboardUtils {
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
 
-      logt("Session file for $typeOfDashboardContext created", "$path/$fileName");
+      logd("Session file for $typeOfDashboardContext created", "$path/$fileName");
     }
     return sessionFile;
   }
@@ -90,8 +90,8 @@ class DashboardUtils {
     required String filePath,
   }) 
   async {
-    logt("formattedDate", formattedDate);
-    logt("analysisTitle", title);
+    logd("formattedDate", formattedDate);
+    logd("analysisTitle", title);
 
     // Date value interception for testing purposes
     if (isInTestEnvironment)
