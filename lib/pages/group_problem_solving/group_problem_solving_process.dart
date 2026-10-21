@@ -222,7 +222,7 @@ class GPSProcessState extends State<GPSProcess>
           // Updating the file names list: saveFileOniOS
           await du.getStoredFileNamesOnMobile();
 
-          logt("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
+          logd("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
         }
         else {
           // otherwise: using tmp files for testing
