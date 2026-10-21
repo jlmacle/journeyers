@@ -90,7 +90,8 @@ class DashboardUtils {
     required String filePath,
   }) 
   async {
-    if (sessionDataDebug) pu.printd("Session Data: formattedDate: $formattedDate");
+    logt("formattedDate", formattedDate);
+
     if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
       
     // Date value interception for testing purposes
