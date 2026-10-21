@@ -91,9 +91,8 @@ class DashboardUtils {
   }) 
   async {
     logt("formattedDate", formattedDate);
+    logt("analysisTitle", title);
 
-    if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
-      
     // Date value interception for testing purposes
     if (isInTestEnvironment)
     {
