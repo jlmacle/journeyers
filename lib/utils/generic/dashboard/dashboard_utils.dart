@@ -300,7 +300,7 @@ class DashboardUtils {
     String? fileExtension
   }) async
   {
-    if (sessionDataDebug) pu.printd("Session Data: getStoredFileNamesOnMobile:\ncurrentListOfStoredFileNames (before retrieval): $currentListOfStoredFileNames");
+    logd("getStoredFileNamesOnMobile:\ncurrentListOfStoredFileNames (before retrieval)", currentListOfStoredFileNames);
     // Getting the list of stored file names
     List<Object?> result = [];
 
