@@ -91,9 +91,8 @@ class DashboardUtils {
   }) 
   async {
     logt("formattedDate", formattedDate);
+    logt("analysisTitle", title);
 
-    if (sessionDataDebug) pu.printd("Session Data: analysisTitle: $title");
-      
     // Date value interception for testing purposes
     if (isInTestEnvironment)
     {
@@ -244,7 +243,8 @@ class DashboardUtils {
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
-        if (sessionDataDebug) pu.printd("Session Data: Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");
+
+        logt("Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");        
       } else {
         if (sessionDataDebug) pu.printd("Session Data: No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");
       }
