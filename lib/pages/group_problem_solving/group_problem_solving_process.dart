@@ -221,7 +221,8 @@ class GPSProcessState extends State<GPSProcess>
           filePath = await fu.saveFileOniOS(_fileName, _fileExtension, dataBytes);
           // Updating the file names list: saveFileOniOS
           await du.getStoredFileNamesOnMobile();
-          if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+
+          logt("currentListOfStoredFileNames (after retrieval)", du.currentListOfStoredFileNames);
         }
         else {
           // otherwise: using tmp files for testing
