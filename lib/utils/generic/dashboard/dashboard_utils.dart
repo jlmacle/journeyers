@@ -246,7 +246,7 @@ class DashboardUtils {
 
         logt("Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");        
       } else {
-        if (sessionDataDebug) pu.printd("Session Data: No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");
+        logt("No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");        
       }
     } catch (e) {
       if (sessionDataDebug) pu.printd("Session Data: Error deleting session metadata from dashboard data: $e");
