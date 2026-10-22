@@ -134,3 +134,21 @@ void logm(String msg, [ Object? anExpressionResult ])
     if (sessionMetadataDebug) pu.printd("Session Metadata: $msg: $anExpressionResult");
   }  
 }
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the sessionDataDebug boolean.
+/// logd(msg); -> Session Data: "msg"
+/// logd(msg, anExpressionFResult);  -> Session Data: "msg": anExpressionFResult
+void logd(String msg, [ Object? anExpressionResult ])
+{
+  if (anExpressionResult == null) {
+    if (sessionDataDebug) pu.printd("Session Data: $msg");
+  }
+  else{
+    if (sessionDataDebug) pu.printd("Session Data: $msg: $anExpressionResult");
+  }  
+}
+
+
+
+
