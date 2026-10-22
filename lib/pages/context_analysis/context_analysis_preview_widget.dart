@@ -515,17 +515,17 @@ class _CAPreviewState extends State<CAPreview>
 
     return 
     _previewDataLoading
-    // PREVIEW DATA NOT LOADED
+    // 1. PREVIEW DATA NOT LOADED
       ?  const Center(child:RepaintBoundary(child: CircularProgressIndicator()))
 
-    // PREVIEW DATA LOADED
+    // 2. PREVIEW DATA LOADED
       : 
-        // Todo: to clean: PREVIEW USED WITHIN TESTING
+        // 2.1. PREVIEW USED WITHIN TESTING (Todo: to clean)
         (pathsForTestFiles.contains(widget.pathToStoredData)) 
         ? const Text(testDataMessage)
         
-        // PREVIEW NOT USED WITHIN TESTING
-        // CASE WITH PREVIEW WITH A MISMATCH BETWEEN CONTENT LANGUAGE/DASHBOARD LANGUAGE
+        // 2.2 PREVIEW NOT USED WITHIN TESTING
+        // 2.2.1. CASE WITH PREVIEW WITH A MISMATCH BETWEEN CONTENT LANGUAGE/DASHBOARD LANGUAGE
         : (_sectionsGroup["title"] == null)
           ?
             Center
@@ -538,7 +538,7 @@ class _CAPreviewState extends State<CAPreview>
               )
             )
           
-          // CASE WITH PREVIEW WITH NO MISMATCH
+          // 2.2.2. CASE WITH PREVIEW WITH NO MISMATCH
           :  Column
             (
               crossAxisAlignment: CrossAxisAlignment.start,
