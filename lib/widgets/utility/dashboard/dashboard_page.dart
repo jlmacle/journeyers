@@ -13,6 +13,7 @@ import "package:journeyers/utils/generic/dashboard/session_sorting_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_helper_functions.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/1_dashboard_title.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2_dashboard_filtering_and_sorting_feature.dart";
@@ -95,8 +96,8 @@ class DashboardPageState extends State<DashboardPage>
     _sessionsMetadataFiltered!.clear();
     _sessionsMetadataFiltered!.addAll(retrievedSessionMetadata);
 
-    if (sessionDataDebug) pu.printd("Session Data: DashboardPage: initState: _sessionsMetadataAll (context): : $_sessionsMetadataAll (${widget.dashboardContext})");
-
+    logd("DashboardPage: initState: _sessionsMetadataAll (context): : $_sessionsMetadataAll (${widget.dashboardContext})");
+    
     // Data is not sorted by date by default, and needs sorting
     await sortSessionByDate
     (
