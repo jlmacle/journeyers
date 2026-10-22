@@ -265,7 +265,8 @@ class FileUtils
       if (await file.exists()) 
       {
         await file.delete();
-        if (sessionDataDebug) pu.printd("Session Data: File deleted successfully: $pathToCSV");
+        logd("File deleted successfully: $pathToCSV");
+
       } else 
       {
         if (sessionDataDebug) pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCSV");
