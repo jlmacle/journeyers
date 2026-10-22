@@ -162,7 +162,8 @@ class DashboardPageState extends State<DashboardPage>
   // Method used after keywords update
   Future<void> _keywordsUpdate({required Set<String> updatedKeywords, required String? filePath}) async
   {
-    if (sessionDataDebug) pu.printd("Session Data: updateKeywords: updatedKeywords: $updatedKeywords");
+    logd("updateKeywords: updatedKeywords: $updatedKeywords");
+    
     // To accomodate widget testing
     if (filePath != null)
     {
