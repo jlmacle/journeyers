@@ -291,9 +291,10 @@ class FileUtils
       final bool success = await platformAndroid.invokeMethod("deleteFile", {"fileName": fileName});
 
       if (success) 
-      {if (sessionDataDebug) pu.printd("Session Data: File deleted successfully from Android SAF storage.");} 
+      {logd("File deleted successfully from Android SAF storage.");} 
       else 
-      {pu.printd("Session Data: Failed to delete file: File not found or permission denied.");}
+      {logd("Failed to delete file: File not found or permission denied.");}
+
       return success;
     } 
     on PlatformException 
