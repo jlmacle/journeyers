@@ -150,13 +150,10 @@ class FileUtils
     String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/${fileName}.${fileExtension}";
 
-    if (sessionDataDebug) 
-    {
-      if (success) 
-      {pu.printd("Session Data: saveFileOniOS: File written successfully to $filePath on ${Platform.operatingSystem}");}
-      else
-      {pu.printd("Session Data: saveFileOniOS: Error while writing to $filePath on ${Platform.operatingSystem}");}
-    }
+    if (success) 
+    {logd("saveFileOniOS: File written successfully to $filePath on ${Platform.operatingSystem}");}
+    else
+    {logd("saveFileOniOS: Error while writing to $filePath on ${Platform.operatingSystem}");}
     
     return filePath;
   }
