@@ -269,7 +269,7 @@ class FileUtils
 
       } else 
       {
-        if (sessionDataDebug) pu.printd("Session Data: Deletion skipped: File does not exist at $pathToCSV");
+        logd("Deletion skipped: File does not exist at $pathToCSV");
         if (sessionDataDebug) pu.printd("Session Data: Current working directory: ${Directory.current.path}");
       }
     } on FileSystemException 
