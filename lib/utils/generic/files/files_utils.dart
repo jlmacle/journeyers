@@ -124,12 +124,13 @@ class FileUtils
     String? folderPath = await rtdu.getApplicationFolderPath();
     filePath = "$folderPath/${fileNameWithoutExtension}.${fileExtension}";
 
-    if (sessionDataDebug) 
+    if (success)
     {
-      if (success) 
-      {pu.printd("Session Data: saveFileOnAndroid: File written successfully to $filePath on ${Platform.operatingSystem}");}
-      else
-      {pu.printd("Session Data: saveFileOnAndroid: Error while writing to $filePath on ${Platform.operatingSystem}");}
+      logd("saveFileOnAndroid: File written successfully to $filePath on ${Platform.operatingSystem}");
+    }
+    else
+    {
+      logd("saveFileOnAndroid: Error while writing to $filePath on ${Platform.operatingSystem}");
     }
 
     return filePath;
