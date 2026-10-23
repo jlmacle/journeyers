@@ -239,7 +239,8 @@ class DashboardPageState extends State<DashboardPage>
     if(Platform.isAndroid || Platform.isIOS)
     {
       await du.getStoredFileNamesOnMobile();
-      if (sessionDataDebug) pu.printd("Session Data: currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
+
+      logd("currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");      
     }
     
      }
