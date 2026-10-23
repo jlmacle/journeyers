@@ -117,8 +117,8 @@ class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk>
     );
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.sessionsMetadataAll!.isEmpty?: ${widget.sessionsMetadataAll!.isEmpty}");
-
+    logd("widget.sessionsMetadataAll!.isEmpty?: ${widget.sessionsMetadataAll!.isEmpty}");
+    
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
     if (widget.sessionsMetadataAll!.isEmpty) 
