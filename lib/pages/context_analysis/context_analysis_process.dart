@@ -304,7 +304,8 @@ class CAProcessState extends State<CAProcess>
                       if(event.logicalKey == LogicalKeyboardKey.tab
                           && HardwareKeyboard.instance.isShiftPressed)
                       {
-                        if (accessibilityDebug) pu.printd("Accessibility: Shift-tab detected");
+                        loga("Shift-tab detected");
+
                         widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(false);
                         if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
                         return KeyEventResult.ignored;
