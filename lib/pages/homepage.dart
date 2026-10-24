@@ -14,6 +14,7 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pag
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/custom_language_switch.dart";
 
@@ -52,8 +53,9 @@ class _HomePageState extends State<HomePage>
       {
         // Switches the focusability of the bottom bar items
         setState(() {_bottomNavigationItemsFocusable = boolValue;});
-        if (accessibilityDebug) pu.printd("Accessibility: HomePage: _bottomNavigationItemsFocusable: $_bottomNavigationItemsFocusable");
-      }
+
+        loga("HomePage: _bottomNavigationItemsFocusable: $_bottomNavigationItemsFocusable");
+        }
     ),
 
     GPSPage
