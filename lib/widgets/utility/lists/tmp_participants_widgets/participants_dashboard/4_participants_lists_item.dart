@@ -6,6 +6,7 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
@@ -89,7 +90,8 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
         .where((e) => e.isNotEmpty)
         .toSet();
 
-    if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
+    logd("ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
+    
     // Calling the parent callback for state 
     await widget.onKeywordsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedKeywords, listData: listData);
 
