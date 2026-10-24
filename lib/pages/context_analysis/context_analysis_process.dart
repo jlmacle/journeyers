@@ -315,7 +315,9 @@ class CAProcessState extends State<CAProcess>
                       else
                       {
                         widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
-                        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: true");
+
+                        loga("_areBottomNavigationItemsFocusable: true");
+                        
                       } 
 
                       return KeyEventResult.ignored;
