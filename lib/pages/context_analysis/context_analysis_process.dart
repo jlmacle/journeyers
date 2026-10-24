@@ -307,7 +307,9 @@ class CAProcessState extends State<CAProcess>
                         loga("Shift-tab detected");
 
                         widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(false);
-                        if (accessibilityDebug) pu.printd("Accessibility: _areBottomNavigationItemsFocusable: false");
+
+                        loga("_areBottomNavigationItemsFocusable: false");
+                        
                         return KeyEventResult.ignored;
                       }
                       else
