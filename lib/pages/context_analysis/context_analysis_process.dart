@@ -207,7 +207,7 @@ class CAProcessState extends State<CAProcess>
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(
       (){
-        if (accessibilityDebug) pu.printd("Accessibility: Button used to save data reached");
+        loga("Button used to save data reached");
         // restoring focus capability to the bottom items
         widget.caPageCallbackFunctionToSetFocusabilityOfBottomBarItems(true);
         // data helping to know if the user tab navigates back up
