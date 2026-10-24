@@ -193,7 +193,8 @@ class CAFormState extends State<CAForm>
       perspectiveData: enteredData["groupPerspective"] as LinkedHashMap<String, Object>
     );
 
-    if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataIndividualPerspective");
+    logc("preCSVDataIndividualPerspective");
+
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataIndividualPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building");
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataGroupPerspective");
