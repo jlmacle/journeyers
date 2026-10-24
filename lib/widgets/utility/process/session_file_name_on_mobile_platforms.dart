@@ -10,6 +10,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/generic/text_fields/text_field_utils.dart" as tfu_gen;
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart";
@@ -83,7 +84,8 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
 
     String? folderPathData = await rtdu.getApplicationFolderPath();
 
-    if (sessionDataDebug) pu.printd("Session Data: Path to the application folder selected by the user: $folderPathData");
+    logd("Path to the application folder selected by the user: $folderPathData");
+    
     setState(() 
     {
       _applicationFolderPath = folderPathData ?? "";
