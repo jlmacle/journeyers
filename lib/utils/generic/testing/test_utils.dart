@@ -150,5 +150,34 @@ void logd(String msg, [ Object? anExpressionResult ])
 }
 
 
+/// {@category Utils - Generic}
+/// A method used to log data related to the accessibilityDebug boolean.
+/// loga(msg); -> Accessibility: "msg"
+/// loga(msg, anExpressionFResult);  -> Accessibility: "msg": anExpressionFResult
+void loga(String msg, [ Object? anExpressionResult ])
+{
+  if (anExpressionResult == null) {
+    if (accessibilityDebug) pu.printd("Accessibility: $msg");
+  }
+  else{
+    if (accessibilityDebug) pu.printd("Accessibility: $msg: $anExpressionResult");
+  }  
+}
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the csvBuildingDebug boolean.
+/// logc(msg); -> CSV Building: "msg"
+/// logc(msg, anExpressionFResult);  -> CSV Building: "msg": anExpressionFResult
+void logc(String msg, [ Object? anExpressionResult ])
+{
+  if (anExpressionResult == null) {
+    if (csvBuildingDebug) pu.printd("CSV Building: $msg");
+  }
+  else{
+    if (csvBuildingDebug) pu.printd("CSV Building: $msg: $anExpressionResult");
+  }  
+}
+
+
 
 
