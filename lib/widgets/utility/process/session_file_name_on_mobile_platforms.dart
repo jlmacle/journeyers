@@ -107,7 +107,8 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("SessionFileNameOnMobilePlatforms");
 
-    if (sessionDataDebug) pu.printd("Session Data: file extension: ${widget.fileExtension}");
+    logd("file extension: ${widget.fileExtension}");
+
     _getApplicationFolderPath();
 
     // Edited file name value if relevant
