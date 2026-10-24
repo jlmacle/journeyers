@@ -107,8 +107,8 @@ class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsL
     );
 
     // REFRESHING THE UI
-    if (sessionDataDebug) pu.printd("Session Data: widget.allLists!.isEmpty?: ${widget.participantsListsAll!.isEmpty}");
-
+    logd("widget.allLists!.isEmpty?: ${widget.participantsListsAll!.isEmpty}");
+    
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
     if (widget.participantsListsAll!.isEmpty) 
