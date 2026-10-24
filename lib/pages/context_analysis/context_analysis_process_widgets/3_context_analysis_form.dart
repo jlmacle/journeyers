@@ -195,8 +195,8 @@ class CAFormState extends State<CAForm>
 
     logc("preCSVDataIndividualPerspective");
     logc("$preCSVDataIndividualPerspective");
+    logc("CSV Building");
 
-    if (csvBuildingDebug) pu.printd("CSV Building");
     if (csvBuildingDebug) pu.printd("CSV Building: preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building: $preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building");
