@@ -125,7 +125,8 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
     // Updating _currentParticipants for list loading
     _participantsCurrent = updatedParticipants.toList();
 
-    if (sessionDataDebug) pu.printd("Session Data: ElevatedButton: onPressed: updatedParticipants: $updatedParticipants");
+    logd("ElevatedButton: onPressed: updatedParticipants: $updatedParticipants");
+    
     // Calling the parent callback for state 
     await widget.onParticipantsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedParticipants, listData: listData);
 
