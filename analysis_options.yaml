@@ -12,6 +12,14 @@ analyzer:
   errors:
     file_names: ignore
     unnecessary_brace_in_string_interps: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
 include: package:flutter_lints/flutter.yaml
 
 linter:
