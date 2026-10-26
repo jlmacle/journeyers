@@ -1,4 +1,5 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
+
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
@@ -17,7 +18,10 @@ void main()
     return await tester.pumpWidget(
         MaterialApp(
           theme: appTheme,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale(testingLocaleOption),
           home: Scaffold(
