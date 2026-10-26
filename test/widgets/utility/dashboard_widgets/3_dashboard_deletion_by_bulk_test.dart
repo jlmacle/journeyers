@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
@@ -6,12 +6,17 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart";
 
-
 void main() {
   // Test metadata
   final sessionsMetadata = [
-    {DashboardUtils.keyTitle: "Session 1", DashboardUtils.keyFilePath: "path/1"},
-    {DashboardUtils.keyTitle: "Session 2",  DashboardUtils.keyFilePath: "path/2", },
+    {
+      DashboardUtils.keyTitle: "Session 1",
+      DashboardUtils.keyFilePath: "path/1",
+    },
+    {
+      DashboardUtils.keyTitle: "Session 2",
+      DashboardUtils.keyFilePath: "path/2",
+    },
   ];
 
   List<dynamic>? sessionsMetadataAll;
@@ -21,7 +26,9 @@ void main() {
   setUp(() {
     sessionsMetadataAll = List.from(sessionsMetadata);
     sessionsMetadataFiltered = List.from(sessionsMetadata);
-    sessionsMetadataSelectedForDeletion = ["path/1"]; // Session selected by default
+    sessionsMetadataSelectedForDeletion = [
+      "path/1",
+    ]; // Session selected by default
   });
 
   Widget createWidgetUnderTest({
@@ -29,7 +36,10 @@ void main() {
     String context = DashboardUtils.caContext,
   }) {
     return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: DashboardDeletionByBulk(
@@ -37,7 +47,8 @@ void main() {
           areSessionsForDeletion: areSessionsForDeletion,
           sessionsMetadataAll: sessionsMetadataAll!,
           sessionsMetadataFiltered: sessionsMetadataFiltered!,
-          sessionsMetadataSelectedForDeletion: sessionsMetadataSelectedForDeletion!,
+          sessionsMetadataSelectedForDeletion:
+              sessionsMetadataSelectedForDeletion!,
           dashboardCallbackFunctionToRefreshTheSessionsList: () {},
           dashboardFilteringByKeywordsKey: GlobalKey(),
         ),
@@ -46,39 +57,43 @@ void main() {
   }
 
   group("DashboardDeletionByBulk UI Tests: \n", () {
+    testWidgets("Empty selection color is transparent", (
+      WidgetTester tester,
+    ) async {
+      sessionsMetadataSelectedForDeletion = [];
+      await tester.pumpWidget(
+        createWidgetUnderTest(areSessionsForDeletion: false),
+      );
 
-    testWidgets("Empty selection color is transparent", (WidgetTester tester) async 
-    {
-        sessionsMetadataSelectedForDeletion = [];
-        await tester.pumpWidget(createWidgetUnderTest(areSessionsForDeletion: false));
-
-        // Checks the delete icon is transparent
-        var iconDeleteFinder = find.byIcon(Icons.delete).first;
-        Icon deleteIcon = tester.widget(iconDeleteFinder);
-        expect(deleteIcon.color, transparent);
-
-        // Checks if the label is transparent
-        var textDeleteFinder = find.byType(Text).first;
-        Text textDelete = tester.widget(textDeleteFinder);
-        expect(textDelete.style?.color, transparent);
-      });
-
-    testWidgets("Non empty selection has 'Delete data: n item(s)' in label, and color is red", (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      var textDeleteFinder = find.byType(Text).first;
-      Text textDelete = tester.widget(textDeleteFinder);
-
-      // Checks if the label displays the correct count from sessionsMetadataSelectedForDeletion
-      expect(textDelete.data, "Delete data: 1 item");
-      // Checks if the label is red
-      expect(textDelete.style?.color, red);
-      
-      // Checks the delete icon is red
+      // Checks the delete icon is transparent
       var iconDeleteFinder = find.byIcon(Icons.delete).first;
       Icon deleteIcon = tester.widget(iconDeleteFinder);
-      expect(deleteIcon.color, red);
+      expect(deleteIcon.color, transparent);
+
+      // Checks if the label is transparent
+      var textDeleteFinder = find.byType(Text).first;
+      Text textDelete = tester.widget(textDeleteFinder);
+      expect(textDelete.style?.color, transparent);
     });
-  
-    });
-  }
+
+    testWidgets(
+      "Non empty selection has 'Delete data: n item(s)' in label, and color is red",
+      (WidgetTester tester) async {
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        var textDeleteFinder = find.byType(Text).first;
+        Text textDelete = tester.widget(textDeleteFinder);
+
+        // Checks if the label displays the correct count from sessionsMetadataSelectedForDeletion
+        expect(textDelete.data, "Delete data: 1 item");
+        // Checks if the label is red
+        expect(textDelete.style?.color, red);
+
+        // Checks the delete icon is red
+        var iconDeleteFinder = find.byIcon(Icons.delete).first;
+        Icon deleteIcon = tester.widget(iconDeleteFinder);
+        expect(deleteIcon.color, red);
+      },
+    );
+  });
+}
