@@ -1,6 +1,6 @@
 // ignore: file_names
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
@@ -14,39 +14,38 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
-
-void main() 
-{
-  
-  Future<void> pumpGPSProcess(WidgetTester tester) async
-  {
+void main() {
+  Future<void> pumpGPSProcess(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         locale: const Locale(testingLocaleOption),
         home: Scaffold(
-          body: GPSProcess
-          (
+          body: GPSProcess(
             dtoGPSFormWhenEdition: null,
-            parentCallbackFunctionToRefreshTheGPSPage: () {}, 
+            parentCallbackFunctionToRefreshTheGPSPage: () {},
           ),
         ),
       ),
     );
   }
 
-  Future<void> pumpGPSProblemToSolveDeclaration(WidgetTester tester) async
-  {
+  Future<void> pumpGPSProblemToSolveDeclaration(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         locale: const Locale(testingLocaleOption),
         home: Scaffold(
-          body: GPSProblemToSolveDeclaration
-          (
-            onSessionSelected:(_) {},
+          body: GPSProblemToSolveDeclaration(
+            onSessionSelected: (_) {},
             caPreviousSessions: const [],
             onTitleModified: () {},
             sessionTitleTec: TextEditingController(),
@@ -58,16 +57,11 @@ void main()
     );
   }
 
-  
-  group("GPSProcess Tests: \n", 
-  () 
-  {  
-    group("Title Tests: \n", 
-    () 
-    {  
-      testWidgets("A title can be added by clicking on the placeholder title", 
-      (WidgetTester tester) async 
-      {
+  group("GPSProcess Tests: \n", () {
+    group("Title Tests: \n", () {
+      testWidgets("A title can be added by clicking on the placeholder title", (
+        WidgetTester tester,
+      ) async {
         var aTitle = "aTitle";
 
         // Pumping the widget
@@ -77,18 +71,19 @@ void main()
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Searching the placeholder title 
-        var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
+        // Searching the placeholder title
+        var placeholderTitleFinder = find.text(
+          lgps.gpsDefaultProcessSessionTitle,
+        );
 
         // Tapping
         await tester.tap(placeholderTitleFinder);
         await tester.pumpAndSettle();
 
         // Searching the text field
-        var textFieldFinder = find.ancestor
-        (
-          of: find.text(lgps.gpsProcessTitleTextFieldHint), 
-          matching: find.byType(TextField)
+        var textFieldFinder = find.ancestor(
+          of: find.text(lgps.gpsProcessTitleTextFieldHint),
+          matching: find.byType(TextField),
         );
 
         // Entering a title
@@ -101,12 +96,11 @@ void main()
 
         // Verifying the title present
         expect(find.text(aTitle), findsOne);
-      }
-      );
-  
-      testWidgets("A title can be added by clicking on the edit emoji", 
-      (WidgetTester tester) async 
-      {
+      });
+
+      testWidgets("A title can be added by clicking on the edit emoji", (
+        WidgetTester tester,
+      ) async {
         var aTitle = "aTitle";
 
         // Pumping the widget
@@ -117,10 +111,9 @@ void main()
         LocalizedGPSStrings lgps = .new(context);
 
         // Searching the edit emoji
-        var editEmojiFinder = find.descendant
-        (
+        var editEmojiFinder = find.descendant(
           of: find.byType(GPSProblemToSolveDeclaration),
-          matching: find.text(editEmoji)
+          matching: find.text(editEmoji),
         );
 
         // Tapping
@@ -128,10 +121,9 @@ void main()
         await tester.pumpAndSettle();
 
         // Searching the text field
-        var textFieldFinder = find.ancestor
-        (
-          of: find.text(lgps.gpsProcessTitleTextFieldHint), 
-          matching: find.byType(TextField)
+        var textFieldFinder = find.ancestor(
+          of: find.text(lgps.gpsProcessTitleTextFieldHint),
+          matching: find.byType(TextField),
         );
 
         // Entering a title
@@ -144,151 +136,137 @@ void main()
 
         // Verifying the title present
         expect(find.text(aTitle), findsOne);
-      }
-      );
-  
+      });
     });
 
-  
-    group("Participants Identifiers Tests: \n", 
-    () 
-    {      
+    group("Participants Identifiers Tests: \n", () {
       // Tested at integration level:
       // - Addition
       // - Edition
-      // - Deletion (single/bulk)  
-      // - Change of identifiers' colors    
-
-
-      });
-    
-
-    group("Checklist Tests: \n", 
-    () 
-    {     
-      // Tested at integration level:   
-      // "The checklist (and checkboxes) turns to green when checked, and the rectangle goes from orange to transparent"
-      
+      // - Deletion (single/bulk)
+      // - Change of identifiers' colors
     });
 
-    group("Keywords Tests: \n", 
-    () 
-    { 
+    group("Checklist Tests: \n", () {
+      // Tested at integration level:
+      // "The checklist (and checkboxes) turns to green when checked, and the rectangle goes from orange to transparent"
+    });
+
+    group("Keywords Tests: \n", () {
       // Tested at integration level:
       // - Addition
       // - Deletion
-
     });
-  
-    group("List of Ideas Tests: \n", 
-    () 
-    { 
+
+    group("List of Ideas Tests: \n", () {
       // Tested at integration level:
       // - Addition
       // - Edition
       // - Single deletion
 
-      testWidgets("[Bulk deletion] 50 ideas added are found in the list of ideas, and can be bulk deleted", 
-      (WidgetTester tester) async 
-      {
-        var someText = "someText";
+      testWidgets(
+        "[Bulk deletion] 50 ideas added are found in the list of ideas, and can be bulk deleted",
+        (WidgetTester tester) async {
+          var someText = "someText";
 
-        // Pumping the widget
-        await pumpGPSProcess(tester);
+          // Pumping the widget
+          await pumpGPSProcess(tester);
 
-        // Accessing the localized data
-        var context = tester.element(find.byType(Scaffold).first);
-        LocalizedGPSStrings? lgps = .new(context); 
+          // Accessing the localized data
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings? lgps = .new(context);
 
-        // Searching the text field used to add ideas
-        var newIdeaTextFieldFinder = find.ancestor
-        (
-          of: find.text(lgps.newIdeaTextFieldHint), 
-          matching: find.byType(TextField)
-        );
+          // Searching the text field used to add ideas
+          var newIdeaTextFieldFinder = find.ancestor(
+            of: find.text(lgps.newIdeaTextFieldHint),
+            matching: find.byType(TextField),
+          );
 
-        for (var i = 0; i < 50; i++)
-        {
-          // Adding some text
-          await tester.enterText(newIdeaTextFieldFinder,"$someText$i");
-          await tester.testTextInput.receiveAction(TextInputAction.done);
+          for (var i = 0; i < 50; i++) {
+            // Adding some text
+            await tester.enterText(newIdeaTextFieldFinder, "$someText$i");
+            await tester.testTextInput.receiveAction(TextInputAction.done);
+            // pumpAndSettle timed out
+            // await tester.pumpAndSettle();
+            await tester.pump(const Duration(seconds: 2));
+
+            // Verifying the text present
+            var textFinder = find.descendant(
+              of: find.byType(GPSIdeasList),
+              matching: find.text("$someText$i"),
+            );
+            expect(textFinder.evaluate().length, 1);
+          }
+
+          // Verifying the placeholder text absent
+          expect(find.text(lgps.ideasListPlaceholder), findsNothing);
+
+          // Opening the overlay
+          await tester.tap(find.text(lgps.ideasListTitle));
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 2));              
+          await tester.pump(const Duration(seconds: 2));
 
-          // Verifying the text present
-          var textFinder = find.descendant
-          (
-            of: find.byType(GPSIdeasList), 
-            matching: find.text("$someText$i")
+          var checkboxesFinder = find.byType(Checkbox, skipOffstage: false);
+
+          // Tapping the first 2 checkboxes
+          await tester.tap(checkboxesFinder.at(0));
+          // pumpAndSettle timed out
+          // await tester.pumpAndSettle();
+          await tester.pump(const Duration(seconds: 2));
+          await tester.tap(checkboxesFinder.at(1));
+          await tester.pump(const Duration(seconds: 2));
+
+          if (testingDebug) printTextData(tester);
+
+          // Finding the bulk deletion
+          var ideasListBulkDeletionTextFinder = find.text(
+            "${lgps.ideasListBulkDeletionText} (2)",
           );
-          expect(textFinder.evaluate().length, 1);
-        }
+          await tester.tap(ideasListBulkDeletionTextFinder);
+          await tester.pump(const Duration(seconds: 2));
 
-        // Verifying the placeholder text absent
-        expect(find.text(lgps.ideasListPlaceholder), findsNothing);
-
-        // Opening the overlay
-        await tester.tap(find.text(lgps.ideasListTitle));
-        // pumpAndSettle timed out
-        // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2));  
-
-        var checkboxesFinder = find.byType(Checkbox, skipOffstage: false);
-        
-        // Tapping the first 2 checkboxes
-        await tester.tap(checkboxesFinder.at(0));
-        // pumpAndSettle timed out
-        // await tester.pumpAndSettle();
-        await tester.pump(const Duration(seconds: 2)); 
-        await tester.tap(checkboxesFinder.at(1));
-        await tester.pump(const Duration(seconds: 2)); 
-
-        if (testingDebug) printTextData(tester);
-
-        // Finding the bulk deletion
-        var ideasListBulkDeletionTextFinder = find.text("${lgps.ideasListBulkDeletionText} (2)");
-        await tester.tap(ideasListBulkDeletionTextFinder);
-        await tester.pump(const Duration(seconds: 2)); 
-
-        // Verifying absence by keys
-        expect(find.text("someText0"), findsNothing);
-        expect(find.text("someText1"), findsNothing);
-      });
-
+          // Verifying absence by keys
+          expect(find.text("someText0"), findsNothing);
+          expect(find.text("someText1"), findsNothing);
+        },
+      );
     });
-    group("Snackbar Tests: \n", 
-    () 
-    {
-      testWidgets("Should render the placeholder message (empty list of ideas) ", 
-      (WidgetTester tester) async 
-      {
-        // Pumping the widget
-        await pumpGPSProcess(tester);
+    group("Snackbar Tests: \n", () {
+      testWidgets(
+        "Should render the placeholder message (empty list of ideas) ",
+        (WidgetTester tester) async {
+          // Pumping the widget
+          await pumpGPSProcess(tester);
 
-        // Getting the localized strings
-        var context = tester.element(find.byType(Scaffold).first);
-        LocalizedGPSStrings lgps = .new(context);
-        
-        // placeholder hard-coded strings
-        var placeholder = "";
-        
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-        
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): { placeholder = "No ideas added yet."; }
-          case("fr"): { placeholder = "Liste d'idées vide"; }        
-        }
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
 
-        logt("placeholder", placeholder);
-        // Verifying consistency between hard-coded string and localized string
-        expect(placeholder, lgps.ideasListPlaceholder);     
+          // placeholder hard-coded strings
+          var placeholder = "";
 
-        // Verifying the placeholder present
-        expect(find.text(lgps.ideasListPlaceholder), findsOneWidget);
-    }
-    );    
+          var localeLanguageCode = getLocaleLanguageCode(tester);
+
+          switch (localeLanguageCode.toLowerCase()) {
+            case ("en"):
+              {
+                placeholder = "No ideas added yet.";
+              }
+            case ("fr"):
+              {
+                placeholder = "Liste d'idées vide";
+              }
+          }
+
+          logt("placeholder", placeholder);
+          // Verifying consistency between hard-coded string and localized string
+          expect(placeholder, lgps.ideasListPlaceholder);
+
+          // Verifying the placeholder present
+          expect(find.text(lgps.ideasListPlaceholder), findsOneWidget);
+        },
+      );
     });
   });
 }
