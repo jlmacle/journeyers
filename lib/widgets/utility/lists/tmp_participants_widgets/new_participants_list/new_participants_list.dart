@@ -1,5 +1,5 @@
 import "package:flutter/foundation.dart";
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -15,8 +15,7 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget used for a new participants list.
-class NewParticipantsList extends StatefulWidget 
-{
+class NewParticipantsList extends StatefulWidget {
   /// The theme data used.
   final ThemeData themeData;
 
@@ -34,16 +33,15 @@ class NewParticipantsList extends StatefulWidget
     super.key,
     this.initialParticipantsNamesList = const [],
     this.listLabelLoaded,
-    required this.themeData, 
-    required this.onParticipantsListLoadedCallbackFunction
-  });  
+    required this.themeData,
+    required this.onParticipantsListLoadedCallbackFunction,
+  });
 
   @override
   State<NewParticipantsList> createState() => _NewParticipantsListState();
 }
 
 class _NewParticipantsListState extends State<NewParticipantsList> {
-
   // bool: a list has been loaded
   bool get _listHasBeenLoaded => widget.listLabelLoaded != null;
 
@@ -60,24 +58,28 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
       _loadingDBError = null;
     });
     try {
-
-      List<List<String>> listOfGroupedTexts = await _listsDB.getListOfGroupedTexts(); 
+      List<List<String>> listOfGroupedTexts = await _listsDB
+          .getListOfGroupedTexts();
 
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;
         _loadingDB = false;
-        if (listDebug) pu.printd("List debug: NewParticipantsList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
+        if (listDebug)
+          pu.printd(
+            "List debug: NewParticipantsList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts",
+          );
       });
     } catch (e) {
       setState(() {
-        pu.printd("Exception: NewParticipantsList: _loadListOfGroupedTexts: $e");
+        pu.printd(
+          "Exception: NewParticipantsList: _loadListOfGroupedTexts: $e",
+        );
         _loadingDBError = e.toString();
         _loadingDB = false;
       });
     }
   }
 
-  
   // Data used to adding a text to the list
   final _newTextItemTec = TextEditingController();
   // To store the new grouped texts data
@@ -93,7 +95,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
   // Data related to deleting texts from the new list
   List<int> _textsSelectedForDeletionIndexes = [];
-  bool _areSomeTextItemsForDeletion = false;  
+  bool _areSomeTextItemsForDeletion = false;
 
   // Data related to saving the added texts in a list
   // True once the current list has been persisted.
@@ -104,28 +106,37 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
   final _labelTec = TextEditingController();
 
   // Method used to verify if the newly entered texts have been already saved in a list
-  bool _listOfPreviousGroupedTextsContainsNewListData(List<List<String>> listOfPreviousGroupedTexts, List<String> newListData)
-  {
+  bool _listOfPreviousGroupedTextsContainsNewListData(
+    List<List<String>> listOfPreviousGroupedTexts,
+    List<String> newListData,
+  ) {
     var listOfPreviousGroupedTextsCopy = List.from(listOfPreviousGroupedTexts);
     var newListDataCopy = List.from(newListData);
-    bool val = listOfPreviousGroupedTextsCopy.any((list) => listEquals(list..sort(), newListDataCopy..sort()));
+    bool val = listOfPreviousGroupedTextsCopy.any(
+      (list) => listEquals(list..sort(), newListDataCopy..sort()),
+    );
     return val;
   }
 
   bool get _canSave =>
       // list has not been loaded from existant list
-      !_listHasBeenLoaded 
+      !_listHasBeenLoaded
       // at least one text has been added
-      && _enteredTextItemsList.isNotEmpty 
+      &&
+      _enteredTextItemsList.isNotEmpty
       // added texts are not matching a saved list content
-      && !_listOfPreviousGroupedTextsContainsNewListData(_listOfPreviousGroupedTexts!, _enteredTextItemsList)  
+      &&
+      !_listOfPreviousGroupedTextsContainsNewListData(
+        _listOfPreviousGroupedTexts!,
+        _enteredTextItemsList,
+      )
       // the new list hasn"t been saved yet
-      && !_dataIsSaved ;
+      &&
+      !_dataIsSaved;
 
   /// Shows a dialog that asks for a list label.
   /// Requires for the label to not be used already.
   Future<String?> _labelShowDialog() async {
-
     String? errorText;
 
     return showDialog<String>(
@@ -136,18 +147,21 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
         return StatefulBuilder(
           builder: (ctx, setDialogState) {
-
             Future<void> onConfirm() async {
               final label = _labelTec.text.trim();
               if (label.isEmpty) {
-                setDialogState
-                (
-                  () => errorText = AppLocalizations.of(context)?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time"
+                setDialogState(
+                  () => errorText =
+                      AppLocalizations.of(
+                        context,
+                      )?.text_lists_new_list_empty_list_name_message ??
+                      "Issue with the message when the list name is empty at saving time",
                 );
                 return;
               }
               // Warn if the label already exists, and prevents the saving of data.
-              final listLabelAlreadyExists = await _listsDB.listLabelExistsAsync(label);
+              final listLabelAlreadyExists = await _listsDB
+                  .listLabelExistsAsync(label);
               if (!ctx.mounted) return;
               if (listLabelAlreadyExists) {
                 setDialogState(
@@ -156,7 +170,9 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                 return;
               }
               // Loading the list
-              widget.onParticipantsListLoadedCallbackFunction(_enteredTextItemsList);
+              widget.onParticipantsListLoadedCallbackFunction(
+                _enteredTextItemsList,
+              );
 
               // To close the dialog
               Navigator.of(ctx).pop(label);
@@ -167,20 +183,33 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
             }
 
             return AlertDialog(
-              title: Text(AppLocalizations.of(context)?.text_lists_new_list_save_dialog_title ?? "Issue with the l10n for the save dialog title"),
+              title: Text(
+                AppLocalizations.of(
+                      context,
+                    )?.text_lists_new_list_save_dialog_title ??
+                    "Issue with the l10n for the save dialog title",
+              ),
               content: TextField(
                 key: const Key("saveListField"),
                 controller: _labelTec,
                 autofocus: true,
                 textInputAction: TextInputAction.done,
-                onSubmitted: (_) async => await onConfirm(), 
+                onSubmitted: (_) async => await onConfirm(),
                 decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)?.text_lists_new_list_save_dialog_text_field_label ?? "Issue with the l10n for the save dialog text field label",
-                  hintText: AppLocalizations.of(context)?.text_lists_new_list_save_dialog_text_field_hint ?? "Issue with the l10n for the save dialog text field hint",
+                  labelText:
+                      AppLocalizations.of(
+                        context,
+                      )?.text_lists_new_list_save_dialog_text_field_label ??
+                      "Issue with the l10n for the save dialog text field label",
+                  hintText:
+                      AppLocalizations.of(
+                        context,
+                      )?.text_lists_new_list_save_dialog_text_field_hint ??
+                      "Issue with the l10n for the save dialog text field hint",
                   errorText: errorText,
                 ),
                 onChanged: (_) {
-                  // List label non empty or list label modified 
+                  // List label non empty or list label modified
                   if (errorText != null) {
                     setDialogState(() => errorText = null);
                   }
@@ -189,11 +218,17 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(ctx).pop(),
-                  child: Text(AppLocalizations.of(context)?.l10n_cancel ?? "Issue with the l10n for 'Cancel'"),
+                  child: Text(
+                    AppLocalizations.of(context)?.l10n_cancel ??
+                        "Issue with the l10n for 'Cancel'",
+                  ),
                 ),
                 FilledButton(
                   onPressed: onConfirm,
-                  child: Text(AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text"),
+                  child: Text(
+                    AppLocalizations.of(context)?.save_button_text ??
+                        "Issue with the l10n for the save button text",
+                  ),
                 ),
               ],
             );
@@ -216,9 +251,13 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
     setState(() => _dataSaving = true);
 
     try {
-      // List.from(_enteredTextItemsList)..sort() : 
+      // List.from(_enteredTextItemsList)..sort() :
       // to sort at saving time, without re-ordering the texts on-screen
-      await _listsDB.saveListData(listLabel, List.from(_enteredTextItemsList)..sort(), _newKeywords);      
+      await _listsDB.saveListData(
+        listLabel,
+        List.from(_enteredTextItemsList)..sort(),
+        _newKeywords,
+      );
 
       setState(() {
         _dataIsSaved = true;
@@ -227,35 +266,29 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar
-      (
-
-        SnackBar
-        (
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           content: Text("${lps.savedAsSnackBarMessage}$listLabel'"),
           duration: const Duration(seconds: 2),
         ),
       );
-    } 
-    catch (e, stackTrace) 
-    {
-      if (listDebug) pu.printd("List debug: NewParticipantsList: Error: Save failed: $e");
-      if (listDebug) pu.printd("List debug: NewParticipantsList: Error: $stackTrace");
+    } catch (e, stackTrace) {
+      if (listDebug)
+        pu.printd("List debug: NewParticipantsList: Error: Save failed: $e");
+      if (listDebug)
+        pu.printd("List debug: NewParticipantsList: Error: $stackTrace");
       setState(() => _dataSaving = false);
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar
-      (    
-        SnackBar
-        (
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
           content: Text(lps.savedFailedSnackBarMessage),
           duration: const Duration(seconds: 2),
         ),
       );
     }
   }
-
 
   @override
   void initState() {
@@ -266,8 +299,10 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
 
     // Loading the previous lists of grouped texts
     _listOfPreviousGroupedTextsLoad();
-    
-    _enteredTextItemsList = List<String>.from(widget.initialParticipantsNamesList);
+
+    _enteredTextItemsList = List<String>.from(
+      widget.initialParticipantsNamesList,
+    );
   }
 
   // Disposing of the TextEditingController instances
@@ -279,23 +314,25 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
     super.dispose();
   }
 
-  void _onUpdateTheListItemValue({required String stringParam, required int intParam})
-  {
+  void _onUpdateTheListItemValue({
+    required String stringParam,
+    required int intParam,
+  }) {
     setState(() {
       _enteredTextItemsList[intParam] = stringParam;
-    });  
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     // Accessing the localized data
     LocalizedParticipantsStrings lps = .new(context);
-    LocalizedUtilsStrings lus =  .new(context);
+    LocalizedUtilsStrings lus = .new(context);
 
     if (_loadingDB) {
-      return const Center(child: RepaintBoundary(child: CircularProgressIndicator()));
+      return const Center(
+        child: RepaintBoundary(child: CircularProgressIndicator()),
+      );
     }
 
     if (_loadingDBError != null) {
@@ -310,210 +347,233 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
       );
     }
 
-    return 
-    _loadingDB
-    ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
-    : Scaffold(
-      appBar: AppBar(
-        title: Text
-              (
-                _listHasBeenLoaded ? widget.listLabelLoaded! : AppLocalizations.of(context)?.text_lists_new_list_title ?? "Issue with the title of the new list page.", 
-                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.normal)
-              ),          
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        actions: [
-          // If data can be saved
-          if (_canSave) 
-          ...
-          [
-            _dataSaving
-                // Currently saving data
-                ? const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                  )
-                // Potentially saving data
-                : IconButton(
-                    tooltip: lps.saveListTooltipLabel,
-                    icon: const Icon(Icons.save_outlined),
-                    onPressed: _enteredTextItemsListSave,
-                  ),
-          ]
-          else 
-          // Otherwise
-          ...
-          [
-            // To avoid saving twice the same data, at new list declaration
-            // TODO: to move at saving time            
-            if (_enteredTextItemsList.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: Text(AppLocalizations.of(context)?.text_lists_new_list_content_already_saved_message ?? "Issue with the message when a list content is already saved."),
-              )
-          ],
-          IconButton
-          (
-            icon: const Icon(Icons.close),
-            tooltip: lus.overlayCloseButtonTooltip,
-            color: black,
-            onPressed: () => Navigator.of(context).pop(),
-          ),          
-        ],
-      ),
-    
-      // ── Texts display ──────────────────────────────────────────────────
-      body:
-      SafeArea
-      (
-        child: 
-        Column
-        (
-          children: 
-          [
-            const Divider(),
-            //-------------------------------
-            NewParticipantsListKeywordsDeclaration
-            (
-              keywordsCurrent: const {},
-              keywordsOnUpdateCallbackFunction: (newKeywords) 
-              {
-                if (listDebug) pu.printd("List debug: NewParticipantsList: build: newKeywords: $newKeywords");
-    
-                _newKeywords = newKeywords.toList()..sort();
-              }
-            ),
-            //-------------------------------
-            const Divider(),
-            // Deletion by bulk widget
-            NewParticipantsDeletionByBulk
-            (
-              areSomeTextItemsSelectedForDeletion: _areSomeTextItemsForDeletion,
-              enteredTextItemsList: _enteredTextItemsList,
-              textItemsSelectedForDeletionIndexes: _textsSelectedForDeletionIndexes,
-              callbackFunctionToRefreshTheList: () {setState(() {_areSomeTextItemsForDeletion = false;});}
-            ),
-            // List of added texts or placeholder message
-            Expanded(
-              child: 
-                // Is the participants list empty?
-                _enteredTextItemsList.isEmpty
-                // Placeholder message if empty list
-                ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+    return _loadingDB
+        ? const Center(
+            child: RepaintBoundary(child: CircularProgressIndicator()),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              title: Text(
+                _listHasBeenLoaded
+                    ? widget.listLabelLoaded!
+                    : AppLocalizations.of(context)?.text_lists_new_list_title ??
+                          "Issue with the title of the new list page.",
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              actions: [
+                // If data can be saved
+                if (_canSave) ...[
+                  _dataSaving
+                      // Currently saving data
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        )
+                      // Potentially saving data
+                      : IconButton(
+                          tooltip: lps.saveListTooltipLabel,
+                          icon: const Icon(Icons.save_outlined),
+                          onPressed: _enteredTextItemsListSave,
+                        ),
+                ] else
+                // Otherwise
+                ...[
+                  // To avoid saving twice the same data, at new list declaration
+                  // TODO: to move at saving time
+                  if (_enteredTextItemsList.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16.0),
                       child: Text(
-                        AppLocalizations.of(context)?.text_lists_new_list_placeholder_when_no_list_data ?? "Issue with the placeholder text when no participant's name has been added to the new list.",
-                        textAlign: TextAlign.center,
-                        style: widget.themeData.textTheme.bodyLarge
+                        AppLocalizations.of(
+                              context,
+                            )?.text_lists_new_list_content_already_saved_message ??
+                            "Issue with the message when a list content is already saved.",
                       ),
                     ),
-                  )
-                :                      
-                // List of added participants otherwise             
-                ListView.builder
-                (                  
-                  padding: const EdgeInsets.only(bottom: 96),
-                  itemCount: _enteredTextItemsList.length,
-                  itemBuilder: (_, index) 
-                  {
-                    return 
-                      // Text field (edition mode), or ListTile (reading mode)
-                      _isEdited && (index == _editedItemIndex)                        
-                        ?
-                        // Text field (edition mode)
-                        TextField
-                        (
-                          controller: _editionTec,
-                          autofocus: true,
-                          decoration: const InputDecoration
-                          (                    
-                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          ),
-                          textAlign: TextAlign.left,
-                          onSubmitted: 
-                            (value) => setState(() 
-                            {
-                              _enteredTextItemsList[index] = value; 
-                              _isEdited = false;
-                              _editionTec.clear();
-                            }),
-                          
-                        )
-                        // ListTile (reading mode)
-                        : 
-                        EditableDeletableTextListItem
-                        (
-                          key: ValueKey(_enteredTextItemsList[index]),
-                          itemIndex: index, 
-                          itemText: _enteredTextItemsList[index], 
-                          onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
-                                                              {                                                               
-                                                                if(boolParam!) 
-                                                                {                                                                    
-                                                                  // adding the index to _textsSelectedForDeletionIndexes
-                                                                  _textsSelectedForDeletionIndexes.add(index);
-                                                                  _textsSelectedForDeletionIndexes.sort();
-                                                                  _areSomeTextItemsForDeletion = true;
-    
-                                                                  // setState // todo later at bulk widget level
-                                                                  setState(() {
-                                                                    
-                                                                  });
-                                                                }
-                                                                else{
-                                                                   _textsSelectedForDeletionIndexes.remove(index);
-                                                                   if (_textsSelectedForDeletionIndexes.isEmpty) _areSomeTextItemsForDeletion = false;
-                                                                  // setState // todo later at bulk widget level
-                                                                  setState(() {
-                                                                    
-                                                                  });
-                                                                }
-                                                                if (listDebug) pu.printd("List debug: NewParticipantsList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
+                ],
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  tooltip: lus.overlayCloseButtonTooltip,
+                  color: black,
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            ),
 
-                                                              }, 
-                          parentCallbackFunctionToUpdateTheListItemValue: _onUpdateTheListItemValue,
-                          parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_textsSelectedForDeletionIndexes.add(index);}, 
-                          themeData: Theme.of(context),                          
-                        )                          
-                      ;
-                  },
-                ),
-              ),
-            // TextField used to add a new participant's name
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField
-              (
-                key: const Key("participantNameField"),
-                controller: _newTextItemTec,
-                textAlign: TextAlign.left,
-                decoration: InputDecoration
-                (
-                  hint: Text
-                  ( 
-                    AppLocalizations.of(context)?.text_lists_new_list_text_field_hint ?? "Issue with the text field hint for adding a participant's name.",
-                    textAlign: TextAlign.left,                                          
+            // ── Texts display ──────────────────────────────────────────────────
+            body: SafeArea(
+              child: Column(
+                children: [
+                  const Divider(),
+                  //-------------------------------
+                  NewParticipantsListKeywordsDeclaration(
+                    keywordsCurrent: const {},
+                    keywordsOnUpdateCallbackFunction: (newKeywords) {
+                      if (listDebug)
+                        pu.printd(
+                          "List debug: NewParticipantsList: build: newKeywords: $newKeywords",
+                        );
+
+                      _newKeywords = newKeywords.toList()..sort();
+                    },
                   ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
-                ),
-                onSubmitted: (value)
-                {
-                  setState(() {
-                    _enteredTextItemsList.add(value.trim());
-                  });
-                  _newTextItemTec.clear();
-                  if (listDebug) pu.printd("List debug: NewParticipantsList: build: _enteredTextItemsList: $_enteredTextItemsList");
-                },
+                  //-------------------------------
+                  const Divider(),
+                  // Deletion by bulk widget
+                  NewParticipantsDeletionByBulk(
+                    areSomeTextItemsSelectedForDeletion:
+                        _areSomeTextItemsForDeletion,
+                    enteredTextItemsList: _enteredTextItemsList,
+                    textItemsSelectedForDeletionIndexes:
+                        _textsSelectedForDeletionIndexes,
+                    callbackFunctionToRefreshTheList: () {
+                      setState(() {
+                        _areSomeTextItemsForDeletion = false;
+                      });
+                    },
+                  ),
+                  // List of added texts or placeholder message
+                  Expanded(
+                    child:
+                        // Is the participants list empty?
+                        _enteredTextItemsList.isEmpty
+                        // Placeholder message if empty list
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Text(
+                                AppLocalizations.of(
+                                      context,
+                                    )?.text_lists_new_list_placeholder_when_no_list_data ??
+                                    "Issue with the placeholder text when no participant's name has been added to the new list.",
+                                textAlign: TextAlign.center,
+                                style: widget.themeData.textTheme.bodyLarge,
+                              ),
+                            ),
+                          )
+                        :
+                          // List of added participants otherwise
+                          ListView.builder(
+                            padding: const EdgeInsets.only(bottom: 96),
+                            itemCount: _enteredTextItemsList.length,
+                            itemBuilder: (_, index) {
+                              return
+                              // Text field (edition mode), or ListTile (reading mode)
+                              _isEdited && (index == _editedItemIndex)
+                                  ?
+                                    // Text field (edition mode)
+                                    TextField(
+                                      controller: _editionTec,
+                                      autofocus: true,
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 8,
+                                        ),
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      onSubmitted: (value) => setState(() {
+                                        _enteredTextItemsList[index] = value;
+                                        _isEdited = false;
+                                        _editionTec.clear();
+                                      }),
+                                    )
+                                  // ListTile (reading mode)
+                                  : EditableDeletableTextListItem(
+                                      key: ValueKey(
+                                        _enteredTextItemsList[index],
+                                      ),
+                                      itemIndex: index,
+                                      itemText: _enteredTextItemsList[index],
+                                      onCheckboxChangedCallbackFunction:
+                                          ({
+                                            required bool? boolParam,
+                                            required int intParam,
+                                          }) {
+                                            if (boolParam!) {
+                                              // adding the index to _textsSelectedForDeletionIndexes
+                                              _textsSelectedForDeletionIndexes
+                                                  .add(index);
+                                              _textsSelectedForDeletionIndexes
+                                                  .sort();
+                                              _areSomeTextItemsForDeletion =
+                                                  true;
+
+                                              // setState // todo later at bulk widget level
+                                              setState(() {});
+                                            } else {
+                                              _textsSelectedForDeletionIndexes
+                                                  .remove(index);
+                                              if (_textsSelectedForDeletionIndexes
+                                                  .isEmpty)
+                                                _areSomeTextItemsForDeletion =
+                                                    false;
+                                              // setState // todo later at bulk widget level
+                                              setState(() {});
+                                            }
+                                            if (listDebug)
+                                              pu.printd(
+                                                "List debug: NewParticipantsList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes",
+                                              );
+                                          },
+                                      parentCallbackFunctionToUpdateTheListItemValue:
+                                          _onUpdateTheListItemValue,
+                                      parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion:
+                                          (index) {
+                                            _textsSelectedForDeletionIndexes
+                                                .add(index);
+                                          },
+                                      themeData: Theme.of(context),
+                                    );
+                            },
+                          ),
+                  ),
+                  // TextField used to add a new participant's name
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      key: const Key("participantNameField"),
+                      controller: _newTextItemTec,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        hint: Text(
+                          AppLocalizations.of(
+                                context,
+                              )?.text_lists_new_list_text_field_hint ??
+                              "Issue with the text field hint for adding a participant's name.",
+                          textAlign: TextAlign.left,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                      ),
+                      onSubmitted: (value) {
+                        setState(() {
+                          _enteredTextItemsList.add(value.trim());
+                        });
+                        _newTextItemTec.clear();
+                        if (listDebug)
+                          pu.printd(
+                            "List debug: NewParticipantsList: build: _enteredTextItemsList: $_enteredTextItemsList",
+                          );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ]
-      )
-      )
-    );
+          );
   }
 }

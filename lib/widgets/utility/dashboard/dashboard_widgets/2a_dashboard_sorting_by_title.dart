@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
@@ -8,41 +8,40 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling the sorting by title of session data.
-class DashboardSortingByTitle extends StatefulWidget 
-{
+class DashboardSortingByTitle extends StatefulWidget {
   /// List containing the filtered sessions to sort.
   final List<dynamic>? sessionsMetadataFilteredToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardSortingByTitle
-  ({
+  const DashboardSortingByTitle({
     super.key,
     required this.sessionsMetadataFilteredToSort,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList
+    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
   });
 
   @override
-  State<DashboardSortingByTitle> createState() => _DashboardSortingByTitleState();
+  State<DashboardSortingByTitle> createState() =>
+      _DashboardSortingByTitleState();
 }
 
-class _DashboardSortingByTitleState extends State<DashboardSortingByTitle> 
-{
+class _DashboardSortingByTitleState extends State<DashboardSortingByTitle> {
   // Random alphabetical order by default
-  bool _isAscendingTitle = false;   
+  bool _isAscendingTitle = false;
 
-  // Method used to sort session data by title 
-  Future<void> _sortSessionsByTitle() async
-  {
-    await sortDashboardSessionsByTitle(list: widget.sessionsMetadataFilteredToSort!, byAscendingTitle: _isAscendingTitle);
+  // Method used to sort session data by title
+  Future<void> _sortSessionsByTitle() async {
+    await sortDashboardSessionsByTitle(
+      list: widget.sessionsMetadataFilteredToSort!,
+      byAscendingTitle: _isAscendingTitle,
+    );
   }
-
 
   @override
   void initState() {
     super.initState();
-                                    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("DashboardSortingByTitle");
   }
@@ -52,40 +51,30 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle>
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
-    return 
-    Semantics
-    (
+    return Semantics(
       // To have the change voiced when the re-build occurs
       liveRegion: true,
-      label: "${lds.sortByTitleLabel} (${_isAscendingTitle ? "Z to A" : "A to Z"})",
-      child:    
-      TextButton.icon
-      (
-        onPressed: () async 
-        {
+      label:
+          "${lds.sortByTitleLabel} (${_isAscendingTitle ? "Z to A" : "A to Z"})",
+      child: TextButton.icon(
+        onPressed: () async {
           _isAscendingTitle = !_isAscendingTitle;
           // Updating the widget UI
-          setState((){});
-          
+          setState(() {});
+
           // Sorting
-          await _sortSessionsByTitle();        
+          await _sortSessionsByTitle();
           // Updating the sessions list UI
           widget.dashboardCallbackFunctionToRefreshTheSessionsList();
         },
-        icon: const Icon
-        (
-          Icons.sort_by_alpha,
-          color: Colors.black,
-        ),
-        label: Text
-        (
+        icon: const Icon(Icons.sort_by_alpha, color: Colors.black),
+        label: Text(
           semanticsLabel: "",
           "${lds.sortByTitleLabel} (${_isAscendingTitle ? "Z to A" : "A to Z"})",
           // TODO: style to externalize
           style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
         ),
-      )
-      
+      ),
     );
   }
 }

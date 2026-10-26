@@ -1,7 +1,7 @@
 import "dart:convert";
 import "dart:io";
 
-import "package:flutter/material.dart" hide DateUtils;
+import "package:material_ui/material_ui.dart" hide DateUtils;
 import "package:flutter/services.dart";
 
 import "package:path/path.dart" as path;
@@ -14,11 +14,9 @@ import "package:journeyers/utils/generic/date/date_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
-
 /// {@category Utils - Generic}
 /// A generic utility class used for the context analyses dashboard, and for the group problem-solvings dashboard (more to do on genericity).
 class DashboardUtils {
-
   /// String used to communicate a dashboard of context analyses.
   static const caContext = "context-analysis";
 
@@ -44,7 +42,7 @@ class DashboardUtils {
   static const keyFilePath = "filePath";
 
   /// The current list of stored file names (for the mobile applications).
-  List<String> currentListOfStoredFileNames = [];  
+  List<String> currentListOfStoredFileNames = [];
 
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
@@ -52,9 +50,11 @@ class DashboardUtils {
   // Android: storage access framework (reading/saving files)
   static const _platformIOS = MethodChannel("dev.journeyers/iossaf");
 
-  /// Method used to retrieve the file with all the dashboard session metadata, 
+  /// Method used to retrieve the file with all the dashboard session metadata,
   /// either for the context analyses, or for the group problem-solvings.
-  Future<File> getSessionMetadataFile({required String typeOfDashboardContext}) async {
+  Future<File> getSessionMetadataFile({
+    required String typeOfDashboardContext,
+  }) async {
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
     String fileName = "";
@@ -74,49 +74,45 @@ class DashboardUtils {
       String content = jsonEncode(records);
       await sessionFile.writeAsString(content);
 
-      logd("Session file for $typeOfDashboardContext created", "$path/$fileName");
+      logd(
+        "Session file for $typeOfDashboardContext created",
+        "$path/$fileName",
+      );
     }
     return sessionFile;
   }
 
   /// Method used to save dashboard metadata, either for a context analysis, or for a group problem-solving.
-  Future<void> saveDashboardMetadata
-  ({
+  Future<void> saveDashboardMetadata({
     required BuildContext? context,
     required String typeOfDashboardContext,
     required String? title,
     required List<String> keywords,
     required String formattedDate,
     required String filePath,
-  }) 
-  async {
+  }) async {
     logd("formattedDate", formattedDate);
     logd("analysisTitle", title);
 
     // Date value interception for testing purposes
-    if (isInTestEnvironment)
-    {
+    if (isInTestEnvironment) {
       // Unit testing
-      if (context == null)
-      {
-        formattedDate = datesForTestingList[dateForTestingIndex]; 
+      if (context == null) {
+        formattedDate = datesForTestingList[dateForTestingIndex];
       }
       // Widget/integration testing
-      else
-      {
+      else {
         // Getting the localized strings
         LocalizedTestingStrings lts = .new(context);
-        formattedDate = lts.datesForTestingList[dateForTestingIndex];        
+        formattedDate = lts.datesForTestingList[dateForTestingIndex];
       }
 
       // index increased for next date
       dateForTestingIndex++;
       if (dateForTestingIndex == 5) dateForTestingIndex = 0;
-      
     }
 
-    Map<String, dynamic> sessionMetadata = 
-    {
+    Map<String, dynamic> sessionMetadata = {
       keyTitle: title ?? "Untitled",
       keyTitleLowerCase: title?.toLowerCase() ?? "Untitled".toLowerCase(),
       keyKeywords: keywords,
@@ -126,8 +122,10 @@ class DashboardUtils {
     };
 
     // Saving the session metadata (file created in getSessionFile if needed)
-    File file = await getSessionMetadataFile(typeOfDashboardContext: typeOfDashboardContext);
-  
+    File file = await getSessionMetadataFile(
+      typeOfDashboardContext: typeOfDashboardContext,
+    );
+
     String updatedContent = "";
 
     // Reading and decoding the records content
@@ -144,51 +142,46 @@ class DashboardUtils {
 
     logm("new session metadata: $sessionMetadata saved to", file.path);
   }
- 
-  /// Method used to parse a French or US English date to ISO 8601. 
+
+  /// Method used to parse a French or US English date to ISO 8601.
   /// Tries the French format first, then falls back to US English.
   /// Returns the ISO 8601 string, or throws a [FormatException] if neither
   /// format matches.
   String _toIso8601(String input) {
-  var frFormat =  DateUtils.frFormat;
-  var enFormat =  DateUtils.enFormat;
+    var frFormat = DateUtils.frFormat;
+    var enFormat = DateUtils.enFormat;
 
-  DateTime parsed;
-  try {
-    parsed = frFormat.parseStrict(input);
-  } on FormatException {
+    DateTime parsed;
     try {
-      parsed = enFormat.parseStrict(input);
+      parsed = frFormat.parseStrict(input);
     } on FormatException {
-      throw FormatException("Unrecognized date format", input);
+      try {
+        parsed = enFormat.parseStrict(input);
+      } on FormatException {
+        throw FormatException("Unrecognized date format", input);
+      }
     }
+    return parsed.toIso8601String();
   }
-  return parsed.toIso8601String();
-}
 
   // Method used to patch the previous code
-  void addExtraFields(List<dynamic> sessionData)
-  { 
-    for (var item in sessionData)
-    {
-      item = item as Map<String,dynamic>;
+  void addExtraFields(List<dynamic> sessionData) {
+    for (var item in sessionData) {
+      item = item as Map<String, dynamic>;
       // Adding keyTitleLowerCase value if necessary
-      if (!item.keys.contains(keyTitleLowerCase))
-      {
-        item[keyTitleLowerCase] = (item[keyTitle] as String).toLowerCase();        
+      if (!item.keys.contains(keyTitleLowerCase)) {
+        item[keyTitleLowerCase] = (item[keyTitle] as String).toLowerCase();
       }
 
       // Adding keyDateISO8601 value if necessary
-      if (!item.keys.contains(keyDateISO8601))
-      {
+      if (!item.keys.contains(keyDateISO8601)) {
         var date = item[keyDate] as String;
         var sanitizedDate = DateUtils.sanitizeDate(date);
-        item[keyDateISO8601] = _toIso8601(sanitizedDate); 
-           
-      }  
+        item[keyDateISO8601] = _toIso8601(sanitizedDate);
+      }
     }
   }
-  
+
   /// Method used to retrieved all the session metadata used for a dashboard.
   /// This metadata is used in the context analyses dashboard, or in the group problem-solvings dashboard.
   /// The metadata retrieved has the format:
@@ -208,15 +201,11 @@ class DashboardUtils {
     //todo: to clean
     // Verifying presence of keyTitleLowerCase and keyDateISO8601
     // Adding them if necessary
-    addExtraFields(sessionData);      
+    addExtraFields(sessionData);
 
     //todo: to clean
     // Sorting metadata by date
-    await sortSessionByDate
-    (
-      list: sessionData, 
-      byAscendingDate: true
-    );
+    await sortSessionByDate(list: sessionData, byAscendingDate: true);
 
     return sessionData;
   }
@@ -229,112 +218,130 @@ class DashboardUtils {
   }) async {
     try {
       // Retrieving the correct JSON file based on the context
-      File file = await getSessionMetadataFile(typeOfDashboardContext: typeOfDashboardContext);
-      
+      File file = await getSessionMetadataFile(
+        typeOfDashboardContext: typeOfDashboardContext,
+      );
+
       // Reading and decoding the existing records
       String jsonContent = await file.readAsString();
       List<dynamic> recordsList = jsonDecode(jsonContent);
 
       // Removing the record where the filePath matches the target
       int originalLength = recordsList.length;
-      recordsList.removeWhere((session) => session[keyFilePath] == filePathRelatedToDataToDelete);
+      recordsList.removeWhere(
+        (session) => session[keyFilePath] == filePathRelatedToDataToDelete,
+      );
 
       // If a record was removed, saving the updated list back to the file
       if (recordsList.length < originalLength) {
         String updatedContent = jsonEncode(recordsList);
         await file.writeAsString(updatedContent);
 
-        logm("Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.");        
+        logm(
+          "Session metadata with path $filePathRelatedToDataToDelete removed from dashboard metadata.",
+        );
       } else {
-        logm("No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.");        
+        logm(
+          "No session metadata found with path $filePathRelatedToDataToDelete in dashboard metadata.",
+        );
       }
     } catch (e) {
       logm("Error deleting session metadata from dashboard data: $e");
     }
   }
 
-  /// Method used to save all sessions metadata.  
-  Future<void> saveAllSessionsMetadata({required String typeOfDashboardContext, required List<dynamic> sessionsMetadataAll}) async
-  {
+  /// Method used to save all sessions metadata.
+  Future<void> saveAllSessionsMetadata({
+    required String typeOfDashboardContext,
+    required List<dynamic> sessionsMetadataAll,
+  }) async {
     String fileName = "";
     final applicationSupportDirectory = await getApplicationSupportDirectory();
     final pathToApplicationSupportDirectory = applicationSupportDirectory.path;
 
     // Getting file name according to context
-    if (typeOfDashboardContext == caContext) 
-    {
+    if (typeOfDashboardContext == caContext) {
       fileName = "dashboard_session_data_context_analyses.json";
-    } 
-    else if (typeOfDashboardContext == gpsContext) 
-    {
+    } else if (typeOfDashboardContext == gpsContext) {
       fileName = "dashboard_session_data_group_problem_solvings.json";
-    } 
-    else 
-    {
-      logd("Error: Unexpected type of dashboard context", typeOfDashboardContext);      
+    } else {
+      logd(
+        "Error: Unexpected type of dashboard context",
+        typeOfDashboardContext,
+      );
     }
 
     File sessionFile = File("$pathToApplicationSupportDirectory/$fileName");
     // Creating session file if doesn"t exist
-    if (!sessionFile.existsSync()) {sessionFile.createSync();}
+    if (!sessionFile.existsSync()) {
+      sessionFile.createSync();
+    }
 
     // Sorting metadata by date
-    await sortSessionByDate
-    (
-      list: sessionsMetadataAll, 
-      byAscendingDate: true
-    );
+    await sortSessionByDate(list: sessionsMetadataAll, byAscendingDate: true);
 
     // Adding the metadata to the file
     var savedContent = jsonEncode(sessionsMetadataAll);
     await sessionFile.writeAsString(savedContent);
 
-    logd("Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName");    
+    logd(
+      "Session file for $typeOfDashboardContext restored: $pathToApplicationSupportDirectory/$fileName",
+    );
   }
 
   /// Method used to retrieved all the file names, from the user application folder (mobile applications).
   /// The parameters are optional, and for testing environment only.
-  Future<List<String>> getStoredFileNamesOnMobile
-  ({
+  Future<List<String>> getStoredFileNamesOnMobile({
     String? testDirectoryPath,
-    String? fileExtension
-  }) async
-  {
-    logd("getStoredFileNamesOnMobile:\ncurrentListOfStoredFileNames (before retrieval)", currentListOfStoredFileNames);
+    String? fileExtension,
+  }) async {
+    logd(
+      "getStoredFileNamesOnMobile:\ncurrentListOfStoredFileNames (before retrieval)",
+      currentListOfStoredFileNames,
+    );
     // Getting the list of stored file names
     List<Object?> result = [];
 
     // Case of one of the integration tests
-    if (testDirectoryPath == null && isInTestEnvironment) return result.cast<String>();
+    if (testDirectoryPath == null && isInTestEnvironment)
+      return result.cast<String>();
 
-    if (isInTestEnvironment) 
-    {
-      var filesList = await 
-      fu.getFilesWithExtensionInDirectory
-      (directoryPath: testDirectoryPath!, fileExtension: fileExtension!, searchIsRecursive: true);
+    if (isInTestEnvironment) {
+      var filesList = await fu.getFilesWithExtensionInDirectory(
+        directoryPath: testDirectoryPath!,
+        fileExtension: fileExtension!,
+        searchIsRecursive: true,
+      );
 
       result = [for (File item in filesList) path.basename(item.path)];
+    } else {
+      if (Platform.isAndroid) {
+        result = await _platformAndroid.invokeMethod("listFiles");
+      } else if (Platform.isIOS) {
+        result = await _platformIOS.invokeMethod("listFiles");
+      }
     }
-    else
-    {
-      if(Platform.isAndroid)
-      {result = await _platformAndroid.invokeMethod("listFiles");}
-      else if(Platform.isIOS)
-      {result = await _platformIOS.invokeMethod("listFiles");}   
-    }     
 
     List<String> retrievedFileNames = result.cast<String>();
     // Verifying that the lists are different, while not empty
-    if (cu.areListsEqualSets(currentListOfStoredFileNames, retrievedFileNames) && currentListOfStoredFileNames.isNotEmpty)
-    {
-      pu.printd("Error: retrievedFileNames and currentListOfStoredFileNames have the same elements.");
+    if (cu.areListsEqualSets(
+          currentListOfStoredFileNames,
+          retrievedFileNames,
+        ) &&
+        currentListOfStoredFileNames.isNotEmpty) {
+      pu.printd(
+        "Error: retrievedFileNames and currentListOfStoredFileNames have the same elements.",
+      );
       pu.printd("Error: retrievedFileNames: $retrievedFileNames");
     }
 
     // Updating currentListOfStoredFileNames
     currentListOfStoredFileNames = retrievedFileNames;
 
-    logd("getStoredFileNamesOnMobile: \ncurrentListOfStoredFileNames (after retrieval)", currentListOfStoredFileNames);
+    logd(
+      "getStoredFileNamesOnMobile: \ncurrentListOfStoredFileNames (after retrieval)",
+      currentListOfStoredFileNames,
+    );
 
     return retrievedFileNames;
   }

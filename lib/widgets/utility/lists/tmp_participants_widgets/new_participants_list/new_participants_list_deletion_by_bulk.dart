@@ -1,18 +1,16 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
-
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling bulk deletion of participants in a new participants list.
-class NewParticipantsDeletionByBulk extends StatefulWidget 
-{
+class NewParticipantsDeletionByBulk extends StatefulWidget {
   /// Boolean used to store if some text items are selected for deletion.
-  final bool areSomeTextItemsSelectedForDeletion; 
+  final bool areSomeTextItemsSelectedForDeletion;
 
   /// List containing the entered texts.
   final List<String> enteredTextItemsList;
@@ -23,8 +21,7 @@ class NewParticipantsDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the text items displayed.
   final VoidCallback callbackFunctionToRefreshTheList;
 
-  const NewParticipantsDeletionByBulk
-  ({
+  const NewParticipantsDeletionByBulk({
     super.key,
     required this.areSomeTextItemsSelectedForDeletion,
     required this.enteredTextItemsList,
@@ -33,28 +30,32 @@ class NewParticipantsDeletionByBulk extends StatefulWidget
   });
 
   @override
-  State<NewParticipantsDeletionByBulk> createState() => NewParticipantsListDeletionByBulkState();
+  State<NewParticipantsDeletionByBulk> createState() =>
+      NewParticipantsListDeletionByBulkState();
 }
 
-class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeletionByBulk> 
-{
+class NewParticipantsListDeletionByBulkState
+    extends State<NewParticipantsDeletionByBulk> {
   // ─── BULK DELETION OF LIST ITEMS ───────────────────────────────────────
   // Method used to delete several list items
-  Future<void> _selectedTextItemsDelete() async 
-  {
+  Future<void> _selectedTextItemsDelete() async {
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
-    
+
     // Creating a new list to update enteredTextItemsList
     List<String> updatedNewTextsList = widget.enteredTextItemsList
-    // to compare ints with ints
-    .asMap().entries
-    .where((entry) => !widget.textItemsSelectedForDeletionIndexes.contains(entry.key))
-    // to get the strings
-    .map((entry) => entry.value)
-    .toList();
+        // to compare ints with ints
+        .asMap()
+        .entries
+        .where(
+          (entry) =>
+              !widget.textItemsSelectedForDeletionIndexes.contains(entry.key),
+        )
+        // to get the strings
+        .map((entry) => entry.value)
+        .toList();
 
-    // Clearing textItemsSelectedForDeletionIndexes 
+    // Clearing textItemsSelectedForDeletionIndexes
     widget.textItemsSelectedForDeletionIndexes.clear();
 
     // Updating enteredTextItemsList
@@ -62,53 +63,52 @@ class NewParticipantsListDeletionByBulkState extends State<NewParticipantsDeleti
     widget.enteredTextItemsList.addAll(updatedNewTextsList);
 
     // Updating the UI
-    widget.callbackFunctionToRefreshTheList(); // setState    
-    
+    widget.callbackFunctionToRefreshTheList(); // setState
+
     // Displaying an informational message
-    ScaffoldMessenger.of(context).showSnackBar
-    (
-      SnackBar
-      (
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(lds.snackbarMessageDataDeleted),
         duration: const Duration(seconds: 2),
       ),
     );
- 
   }
 
   @override
   void initState() {
     super.initState();
-        
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("NewParticipantsDeletionByBulk");
   }
-  
+
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     // Getting the localized strings
     LocalizedGPSStrings lgps = .new(context);
 
-    return 
-    Semantics
-    (
+    return Semantics(
       excludeSemantics: !widget.areSomeTextItemsSelectedForDeletion,
-      child:
-        Center(
-            child:        
-              TextButton.icon(
-                onPressed: _selectedTextItemsDelete,
-                icon: Icon(Icons.delete, color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent),
-                label: Text(
-                  "${lgps.ideasListBulkDeletionText} (${widget.textItemsSelectedForDeletionIndexes.length})",
-                  style: TextStyle(
-                    color: (widget.areSomeTextItemsSelectedForDeletion == true)? Colors.red: Colors.transparent, 
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),    
-        )      
-    ); 
+      child: Center(
+        child: TextButton.icon(
+          onPressed: _selectedTextItemsDelete,
+          icon: Icon(
+            Icons.delete,
+            color: (widget.areSomeTextItemsSelectedForDeletion == true)
+                ? Colors.red
+                : Colors.transparent,
+          ),
+          label: Text(
+            "${lgps.ideasListBulkDeletionText} (${widget.textItemsSelectedForDeletionIndexes.length})",
+            style: TextStyle(
+              color: (widget.areSomeTextItemsSelectedForDeletion == true)
+                  ? Colors.red
+                  : Colors.transparent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

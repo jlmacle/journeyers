@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
@@ -7,8 +7,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Utils - Generic}
 /// A generic utility class related to text fields.
-class TextFieldUtils
- {
+class TextFieldUtils {
   // ─── COUNTERS ───────────────────────────────────────
 
   /// A counter displaying no data.
@@ -55,110 +54,101 @@ class TextFieldUtils
 
   // ─── STRING SANITIZER BUNDLES AND ERROR MESSAGES ───────────────────────────────────────
   /// A [StringSanitizerBundle] sanitizing straight double quotes, by replacing them by single quotes.
-  static 
-  ({
-    bool shouldStringBeSanitized, 
-    dynamic Function(dynamic) sanitizingFunction
-  }) 
-  containsAStraightQuote(String value) => 
-  (
-    shouldStringBeSanitized: value.contains(charQuote), 
-    sanitizingFunction: (value) 
-    {
+  static ({
+    bool shouldStringBeSanitized,
+    dynamic Function(dynamic) sanitizingFunction,
+  })
+  containsAStraightQuote(String value) => (
+    shouldStringBeSanitized: value.contains(charQuote),
+    sanitizingFunction: (value) {
       value = value.replaceAll(charQuote, intermediaryReplacementString);
       value = value.replaceAll(intermediaryReplacementString, "'");
       return value;
-    }
+    },
   );
 
   /// A [StringSanitizerBundle] sanitizing line returns, removing them.
-  static 
-  ({
-    bool shouldStringBeSanitized, 
-    dynamic Function(dynamic) sanitizingFunction
-  }) 
-  containsALineReturn(String value) => 
-  (
-    shouldStringBeSanitized: value.contains(charLF), 
-    sanitizingFunction: (value) 
-    {
+  static ({
+    bool shouldStringBeSanitized,
+    dynamic Function(dynamic) sanitizingFunction,
+  })
+  containsALineReturn(String value) => (
+    shouldStringBeSanitized: value.contains(charLF),
+    sanitizingFunction: (value) {
       // DOS vs. Unix Line Endings
       // https://www.cs.toronto.edu/~krueger/csc209h/tut/line-endings.html
       value = value.replaceAll(charCR, "");
       value = value.replaceAll(charLF, intermediaryReplacementString);
       value = value.replaceAll(intermediaryReplacementString, " ");
       return value;
-    }
+    },
   );
 
   /// An error message displayed if containsAStraightQuote returns true.
-  static const errorContainsAStraightQuote = 
-  "Straight double quotes\n"
-  "are replaced in the text typed\n"
-  "for CSV-export reasons.\nWith apologies.";
+  static const errorContainsAStraightQuote =
+      "Straight double quotes\n"
+      "are replaced in the text typed\n"
+      "for CSV-export reasons.\nWith apologies.";
 
   /// An error message displayed if containsAStraightQuote returns true.
-  static const errorContainsALineReturn = 
-  "Line returns\n"
-  "are removed in the text typed\n"
-  "for CSV-export reasons.\nWith apologies.";
+  static const errorContainsALineReturn =
+      "Line returns\n"
+      "are removed in the text typed\n"
+      "for CSV-export reasons.\nWith apologies.";
 
   /// A [StringSanitizerBundle] sanitizing dots.
-  static 
-  ({
-    bool shouldStringBeSanitized, 
-    dynamic Function(dynamic) sanitizingFunction
-  }) 
-  containsADot(String value) => 
-  (
-    shouldStringBeSanitized: value.contains(charDot), 
-    sanitizingFunction: (value) => value.replaceAll(charDot, "")
+  static ({
+    bool shouldStringBeSanitized,
+    dynamic Function(dynamic) sanitizingFunction,
+  })
+  containsADot(String value) => (
+    shouldStringBeSanitized: value.contains(charDot),
+    sanitizingFunction: (value) => value.replaceAll(charDot, ""),
   );
 
   /// An error message displayed if containsADot returns true.
-  static const errorContainsADot = 
-  "Dots are removed,\n"
-  "as no extension should be entered\n"
-  "in the file name.";
+  static const errorContainsADot =
+      "Dots are removed,\n"
+      "as no extension should be entered\n"
+      "in the file name.";
 
   // ─── BLACKLISTING FUNCTIONS AND ERROR MESSAGES ───────────────────────────────────────
-  
+
   /// Method checking if a file name is already used, assuming knowledge of its extension.
   /// This method assumes a fileExtension parameter with the format ".fileExtension".
-  static bool fileNameAlreadyUsed(String value, String fileExtension) 
-  {
+  static bool fileNameAlreadyUsed(String value, String fileExtension) {
     List<String> currentListOfStoredFileNames = du.currentListOfStoredFileNames;
-    currentListOfStoredFileNames = currentListOfStoredFileNames.where
-    (
-      (fileName) => fileName.contains(fileExtension)
-    ).toList();
+    currentListOfStoredFileNames = currentListOfStoredFileNames
+        .where((fileName) => fileName.contains(fileExtension))
+        .toList();
 
-    if (textFieldDebug) pu.printd("Text Field: currentListOfStoredFileNames for extension $fileExtension: $currentListOfStoredFileNames");
+    if (textFieldDebug)
+      pu.printd(
+        "Text Field: currentListOfStoredFileNames for extension $fileExtension: $currentListOfStoredFileNames",
+      );
     var valueWithExtension = "$value$fileExtension";
-    if (textFieldDebug) pu.printd("Text Field: valueWithExtension: $valueWithExtension");
+    if (textFieldDebug)
+      pu.printd("Text Field: valueWithExtension: $valueWithExtension");
     return currentListOfStoredFileNames.contains(valueWithExtension);
   }
 
   /// Method checking if a CSV file name is already used.
-  static bool fileNameAlreadyUsedCSV(String value) 
-  {
+  static bool fileNameAlreadyUsedCSV(String value) {
     return fileNameAlreadyUsed(value, ".$extensionCSV");
   }
 
   /// Method checking if a TXT file name is already used.
-  static bool fileNameAlreadyUsedTXT(String value) 
-  {
+  static bool fileNameAlreadyUsedTXT(String value) {
     return fileNameAlreadyUsed(value, ".$extensionTXT");
   }
 
   /// An error message displayed if a file name is already used.
-  static const errorFileNameAlreadyUsed = 
-  "File name not available.\n"
-  "Please use a different file name.";
+  static const errorFileNameAlreadyUsed =
+      "File name not available.\n"
+      "Please use a different file name.";
 
   /// Simple blacklisting function returning true.
-  static bool simpleBlacklistingFunction(String value) 
-  {
+  static bool simpleBlacklistingFunction(String value) {
     return true;
   }
 
@@ -167,8 +157,9 @@ class TextFieldUtils
 
   // ─── MAP WITH A BLACKLISTING FUNCTION AS KEY, AND AN ERROR MESSAGE AS VALUE (for automated testing) ───────────────────────────────────────
   /// Map with a simple blacklisting function as key, and an error message as value (for automated testing).
-  static const Map<BlacklistingFunction, String> simpleBlacklistingFunctionErrorMapping = 
-  {
-    TextFieldUtils.simpleBlacklistingFunction : TextFieldUtils.errorTextBlacklisted
+  static const Map<BlacklistingFunction, String>
+  simpleBlacklistingFunctionErrorMapping = {
+    TextFieldUtils.simpleBlacklistingFunction:
+        TextFieldUtils.errorTextBlacklisted,
   };
 }

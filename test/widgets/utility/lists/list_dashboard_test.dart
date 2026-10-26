@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:path_provider_platform_interface/path_provider_platform_interface.dart";
@@ -10,15 +10,18 @@ import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/participants_dashboard.dart";
 
-
 void main() {
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
-  
+
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp("group_problem_solving_integration_test_");
-    PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
+    testTmpDir = await Directory.systemTemp.createTemp(
+      "group_problem_solving_integration_test_",
+    );
+    PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(
+      testTmpDir!.path,
+    );
     // To intercept the way the date is saved
     dateForTestingIndex = 0;
   });
@@ -31,38 +34,36 @@ void main() {
     }
   });
 
-  Future<void> pumpTestableWidget(WidgetTester tester)
-  {
+  Future<void> pumpTestableWidget(WidgetTester tester) {
     // Building the widget
     return tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: ParticipantsListsDashboard
-          (
-            dashboardContext: "", 
-            onAllSessionFilesDeletedContextPageCallbackFunction: () {}, 
-            onParticipantsLoadedCallbackFunction: (_) {}, 
-            onRetrievedSessionDataBeforeEditionCallbackFunction: 
-            ({
-              required String dashboardContext,
-              required bool isSessionDataBeingEdited, 
-              required String titleWhenEdition, 
-              required Set<String> keywordsWhenEdition,
-              required Object dtoWhenEdition, 
-              required String fileNameWithoutExtensionWhenEdition,
-              required String filePathWhenEdition
-            }) {}, 
+          body: ParticipantsListsDashboard(
+            dashboardContext: "",
+            onAllSessionFilesDeletedContextPageCallbackFunction: () {},
+            onParticipantsLoadedCallbackFunction: (_) {},
+            onRetrievedSessionDataBeforeEditionCallbackFunction:
+                ({
+                  required String dashboardContext,
+                  required bool isSessionDataBeingEdited,
+                  required String titleWhenEdition,
+                  required Set<String> keywordsWhenEdition,
+                  required Object dtoWhenEdition,
+                  required String fileNameWithoutExtensionWhenEdition,
+                  required String filePathWhenEdition,
+                }) {},
             dashboardFilteringByKeywordsKey: null,
           ),
         ),
       ),
-    );    
+    );
   }
 
   group("ParticipantsListsDashboard Tests: \n", () {
-    testWidgets("Empty dashboard: button toward adding a new list", 
-    (WidgetTester tester) async 
-    {
+    testWidgets("Empty dashboard: button toward adding a new list", (
+      WidgetTester tester,
+    ) async {
       // Pumping the widget
       await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
@@ -74,7 +75,6 @@ void main() {
       // Verifying the new list button present
       var newListButtonFinder = find.text(lps.newListButtonLabel);
       expect(newListButtonFinder, findsOne);
-    });  
-  }); 
-
+    });
+  });
 }

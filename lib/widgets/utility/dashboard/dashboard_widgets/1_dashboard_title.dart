@@ -1,31 +1,21 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget used for the title of the dashboard.
-class DashboardTitle extends StatelessWidget 
-{
+class DashboardTitle extends StatelessWidget {
   /// The title for the dashboard.
   final String title;
 
-  const DashboardTitle
-  ({
-    super.key,
-    required this.title    
-  });
+  const DashboardTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding
-    (
+    return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
-      child: CustomHeading
-      (
-          headingText: title, headingLevel: 2
-      ),
+      child: CustomHeading(headingText: title, headingLevel: 2),
     );
   }
 }

@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
@@ -8,8 +8,7 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling the filtering by keywords of session data.
-class DashboardFilteringByKeywords extends StatefulWidget 
-{
+class DashboardFilteringByKeywords extends StatefulWidget {
   /// List containing all available session metadata.
   final List<dynamic>? sessionsMetadataAll;
 
@@ -25,8 +24,7 @@ class DashboardFilteringByKeywords extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardFilteringByKeywords
-  ({
+  const DashboardFilteringByKeywords({
     super.key,
     required this.sessionsMetadataAll,
     required this.sessionsMetadataFiltered,
@@ -36,33 +34,30 @@ class DashboardFilteringByKeywords extends StatefulWidget
   });
 
   @override
-  State<DashboardFilteringByKeywords> createState() => DashboardFilteringByKeywordsState();
+  State<DashboardFilteringByKeywords> createState() =>
+      DashboardFilteringByKeywordsState();
 }
 
-class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywords> 
-{  
+class DashboardFilteringByKeywordsState
+    extends State<DashboardFilteringByKeywords> {
   // Used in DashboardPage.
   // Method used to filter the session data by keywords.
-  Future<void> keywordsApplyFiltering() async
-  {
-    if (widget.keywordsSelected.isEmpty) 
-    {
+  Future<void> keywordsApplyFiltering() async {
+    if (widget.keywordsSelected.isEmpty) {
       // Working with the list while keeping the same reference
       widget.sessionsMetadataFiltered!.clear();
       widget.sessionsMetadataFiltered!.addAll(widget.sessionsMetadataAll!);
-    } 
-    else 
-    {
-      List <dynamic> sortingResults =
-      widget.sessionsMetadataAll!.where
-      ( 
-        (session) 
-        {
-          final sessionKeywords = session[DashboardUtils.keyKeywords].cast<String>();
-          return widget.keywordsSelected.every((k) => sessionKeywords.contains(k));
-        }
-      ).toList();
-      
+    } else {
+      List<dynamic> sortingResults = widget.sessionsMetadataAll!.where((
+        session,
+      ) {
+        final sessionKeywords = session[DashboardUtils.keyKeywords]
+            .cast<String>();
+        return widget.keywordsSelected.every(
+          (k) => sessionKeywords.contains(k),
+        );
+      }).toList();
+
       // Working with the list while keeping the same reference
       widget.sessionsMetadataFiltered!.clear();
       widget.sessionsMetadataFiltered!.addAll(sortingResults);
@@ -73,14 +68,10 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
   }
 
   // Method used to add/remove a keyword from the filtering criteria
-  Future<void> _keywordToggleSelection(String keyword) async
-  {
-     if (widget.keywordsSelected.contains(keyword)) 
-    {
+  Future<void> _keywordToggleSelection(String keyword) async {
+    if (widget.keywordsSelected.contains(keyword)) {
       widget.keywordsSelected.remove(keyword);
-    } 
-    else 
-    {
+    } else {
       widget.keywordsSelected.add(keyword);
     }
 
@@ -90,74 +81,61 @@ class DashboardFilteringByKeywordsState extends State<DashboardFilteringByKeywor
 
   // Used in DashboardPage.
   // Method used to refresh the keywords list after deletion of session data.
-  Future<void> keywordsRefreshAfterSessionDeletion() async
-  {
+  Future<void> keywordsRefreshAfterSessionDeletion() async {
     logt("DashboardFilteringByKeywords: keywordsRefreshAfterSessionDeletion");
     // if no sessions left, nothing to do
     if (widget.sessionsMetadataAll == null) return;
-    
+
     // Re-building the keywords" list from the remaining session data
     Set<String> remainingKws = {};
-    for (var sessionData in widget.sessionsMetadataAll!) 
-    {
+    for (var sessionData in widget.sessionsMetadataAll!) {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
       remainingKws.addAll(kws.cast<String>());
     }
-    
-    // Refreshing the used keywords" list, the selection of keywords, 
+
+    // Refreshing the used keywords" list, the selection of keywords,
     // and the DashboardFilteringByKeywords widget
     widget.keywordsAll.clear();
     widget.keywordsAll.addAll(remainingKws);
     // Removing selected filters if the keyword no longer exists
     widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
-    
-    setState((){});
+
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-                                            
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("DashboardFilteringByKeywords");
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding
-        (
-          padding: const EdgeInsets.only(left: 12.0, right:12, bottom: 12),
-          child: Wrap
-          (
-            spacing: 8.0,
-            children: 
-            (
-              widget.keywordsAll.toList()
-              ..sort
-              (
-                (a, b) 
-                {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
+      child: Wrap(
+        spacing: 8.0,
+        children:
+            (widget.keywordsAll.toList()..sort((a, b) {
                   // Different letters
-                  int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                  int comparison = a.toLowerCase().compareTo(b.toLowerCase());
                   // Same letter
-                  if (comparison == 0) {return b.compareTo(a);}                                                
+                  if (comparison == 0) {
+                    return b.compareTo(a);
+                  }
                   return comparison;
-                }
-              )
-            ).map
-            (
-              (kw) 
-              {
-                return FilterChip
-                (
-                  label: Text(kw),
-                  onSelected: (_) async => await _keywordToggleSelection(kw),
-                  selected: widget.keywordsSelected.contains(kw)
-                );
-              }
-            ).toList(),
-          ),
-        );
+                }))
+                .map((kw) {
+                  return FilterChip(
+                    label: Text(kw),
+                    onSelected: (_) async => await _keywordToggleSelection(kw),
+                    selected: widget.keywordsSelected.contains(kw),
+                  );
+                })
+                .toList(),
+      ),
+    );
   }
 }

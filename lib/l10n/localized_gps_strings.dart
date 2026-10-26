@@ -1,15 +1,14 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/l10n/app_localizations.dart";
 
-class LocalizedGPSStrings
-{
+class LocalizedGPSStrings {
   AppLocalizations? _l10n;
 
   // Dashboard customization
   var gpsTitleSuffix = "";
 
-  // GPSProcess  
+  // GPSProcess
   var gpsDefaultProcessSessionTitle = "";
   var gpsDefaultSavedSessionTitle = "";
   var participantIdentifiersSingleDeletionLabel = "";
@@ -55,63 +54,124 @@ class LocalizedGPSStrings
   // GPSNewIdea
   var newIdeaTextFieldHint = "";
 
-  LocalizedGPSStrings(BuildContext context)
-  { 
+  LocalizedGPSStrings(BuildContext context) {
     _l10n = AppLocalizations.of(context);
-    
+
     // Dashboard customization
-    gpsTitleSuffix = _l10n?.gps_title_suffix ?? "Issue with the title suffix for a problem-solving session.";
-  
+    gpsTitleSuffix =
+        _l10n?.gps_title_suffix ??
+        "Issue with the title suffix for a problem-solving session.";
+
     // GPSProcess
-    gpsDefaultProcessSessionTitle = _l10n?.gps_process_default_title ?? "Issue with the l10n for the default title for a problem-solving session.";
-    gpsDefaultSavedSessionTitle = _l10n?.gps_process_default_saved_title ?? "Issue with the default title when saving a problem-solving session.";
-    participantIdentifiersSingleDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_name ?? "Issue with the l10n for 'Clear\nOne'";
-    participantIdentifiersSingleDeletionTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_name_tooltip ?? "Issue with the l10n for the 'Please click to remove a specific member from the group' tooltip";
-    participantIdentifiersSingleDeletionIconTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_name_delete_icon_label?? "Issue with the l10n for 'Please click to remove the name from the group'";
-    participantIdentifiersBulkDeletionLabel = _l10n?.gps_process_edit_identifiers_clear_all ?? "Issue with the l10n for 'Clear\nAll'";
-    participantIdentifiersBulkDeletionTooltipLabel = _l10n?.gps_process_edit_identifiers_clear_all_tooltip ?? "Issue with the l10n for the 'Please click to remove all members from the group' tooltip";
-    
-    participantIdentifiersEditLabel = _l10n?.gps_process_edit_identifiers_edit_name ?? "Issue with the l10n for 'Edit name'";
-    participantIdentifiersEditTooltipLabel =  _l10n?.gps_process_edit_identifiers_edit_tooltip ?? "Issue with the l10n for the 'Please click to enter name edition mode' tooltip";
-    participantIdentifierEditDialogTitle = _l10n?.gps_process_edit_identifiers_dialog_label ?? "Issue with the label for the 'Edit Value' dialog";
-    
+    gpsDefaultProcessSessionTitle =
+        _l10n?.gps_process_default_title ??
+        "Issue with the l10n for the default title for a problem-solving session.";
+    gpsDefaultSavedSessionTitle =
+        _l10n?.gps_process_default_saved_title ??
+        "Issue with the default title when saving a problem-solving session.";
+    participantIdentifiersSingleDeletionLabel =
+        _l10n?.gps_process_edit_identifiers_clear_name ??
+        "Issue with the l10n for 'Clear\nOne'";
+    participantIdentifiersSingleDeletionTooltipLabel =
+        _l10n?.gps_process_edit_identifiers_clear_name_tooltip ??
+        "Issue with the l10n for the 'Please click to remove a specific member from the group' tooltip";
+    participantIdentifiersSingleDeletionIconTooltipLabel =
+        _l10n?.gps_process_edit_identifiers_clear_name_delete_icon_label ??
+        "Issue with the l10n for 'Please click to remove the name from the group'";
+    participantIdentifiersBulkDeletionLabel =
+        _l10n?.gps_process_edit_identifiers_clear_all ??
+        "Issue with the l10n for 'Clear\nAll'";
+    participantIdentifiersBulkDeletionTooltipLabel =
+        _l10n?.gps_process_edit_identifiers_clear_all_tooltip ??
+        "Issue with the l10n for the 'Please click to remove all members from the group' tooltip";
+
+    participantIdentifiersEditLabel =
+        _l10n?.gps_process_edit_identifiers_edit_name ??
+        "Issue with the l10n for 'Edit name'";
+    participantIdentifiersEditTooltipLabel =
+        _l10n?.gps_process_edit_identifiers_edit_tooltip ??
+        "Issue with the l10n for the 'Please click to enter name edition mode' tooltip";
+    participantIdentifierEditDialogTitle =
+        _l10n?.gps_process_edit_identifiers_dialog_label ??
+        "Issue with the label for the 'Edit Value' dialog";
+
     // GPSProblemToSolveDeclaration
-    gpsProcessTitleTextFieldHint = _l10n?.gps_process_edit_title_text_field_hint ?? "Issue with the l10n for the 'Please enter a title or select below' text field hint'";
+    gpsProcessTitleTextFieldHint =
+        _l10n?.gps_process_edit_title_text_field_hint ??
+        "Issue with the l10n for the 'Please enter a title or select below' text field hint'";
 
     // GPSChecklist
-    checkListTitle = _l10n?.l10n_checklist ?? "Issue with the title for the checklist-related widget.";
-    checkListAppBarTitle = _l10n?.gps_process_checklist_invitation ?? "Issue with the invitation before the checklist";
-    checkListQuestion1 = _l10n?.gps_process_checklist_question_1 ?? "Issue with the l10n for the checklist question 1";
-    checkListQuestion2 = _l10n?.gps_process_checklist_question_2 ?? "Issue with the l10n for the checklist question 2";
-    checkListQuestion3 = _l10n?.gps_process_checklist_question_3 ?? "Issue with the l10n for the checklist question 3";
-    checkListQuestion4 = _l10n?.gps_process_checklist_question_4 ?? "Issue with the l10n for the checklist question 4";
-    checkListQuestion5 = _l10n?.gps_process_checklist_question_5 ?? "Issue with the l10n for the checklist question 5";
-    checkListQuestion6 = _l10n?.gps_process_checklist_question_6 ?? "Issue with the l10n for the checklist question 6";
-    checkListQuestion7 = _l10n?.gps_process_checklist_question_7 ?? "Issue with the l10n for the checklist question 7";
-    checkListQuestion8 = _l10n?.gps_process_checklist_question_8 ?? "Issue with the l10n for the checklist question 8";
-    checkListQuestion9 = _l10n?.gps_process_checklist_question_9 ?? "Issue with the l10n for the checklist question 9";
+    checkListTitle =
+        _l10n?.l10n_checklist ??
+        "Issue with the title for the checklist-related widget.";
+    checkListAppBarTitle =
+        _l10n?.gps_process_checklist_invitation ??
+        "Issue with the invitation before the checklist";
+    checkListQuestion1 =
+        _l10n?.gps_process_checklist_question_1 ??
+        "Issue with the l10n for the checklist question 1";
+    checkListQuestion2 =
+        _l10n?.gps_process_checklist_question_2 ??
+        "Issue with the l10n for the checklist question 2";
+    checkListQuestion3 =
+        _l10n?.gps_process_checklist_question_3 ??
+        "Issue with the l10n for the checklist question 3";
+    checkListQuestion4 =
+        _l10n?.gps_process_checklist_question_4 ??
+        "Issue with the l10n for the checklist question 4";
+    checkListQuestion5 =
+        _l10n?.gps_process_checklist_question_5 ??
+        "Issue with the l10n for the checklist question 5";
+    checkListQuestion6 =
+        _l10n?.gps_process_checklist_question_6 ??
+        "Issue with the l10n for the checklist question 6";
+    checkListQuestion7 =
+        _l10n?.gps_process_checklist_question_7 ??
+        "Issue with the l10n for the checklist question 7";
+    checkListQuestion8 =
+        _l10n?.gps_process_checklist_question_8 ??
+        "Issue with the l10n for the checklist question 8";
+    checkListQuestion9 =
+        _l10n?.gps_process_checklist_question_9 ??
+        "Issue with the l10n for the checklist question 9";
 
+    closeChecklistTooltipLabel =
+        _l10n?.gps_process_checklist_close_overlay_tooltip ??
+        "Issue with the l10n for the 'Close checklist' tooltip";
 
-
-
-    closeChecklistTooltipLabel = _l10n?.gps_process_checklist_close_overlay_tooltip ?? "Issue with the l10n for the 'Close checklist' tooltip";
-    
     // GPSKeywordsDeclaration
-    gpsKeywordsTitle = _l10n?.l10n_keywords ?? "Issue with the l10n for 'Keywords'.";
-    gpsKeywordsDeclarationOverlayCloseIconButtonToolTip = _l10n?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip";                 
-    gpsKeywordsOverlayAppbarTitle = _l10n?.gps_process_keywords_overlay_appbar_title  ?? "Issue with the l10n for the GPS keywords overlay appbar title";                 
-
+    gpsKeywordsTitle =
+        _l10n?.l10n_keywords ?? "Issue with the l10n for 'Keywords'.";
+    gpsKeywordsDeclarationOverlayCloseIconButtonToolTip =
+        _l10n?.l10n_keywords_overlay_close_button_tooltip ??
+        "Issue with the l10n for the keywords overlay close button tooltip";
+    gpsKeywordsOverlayAppbarTitle =
+        _l10n?.gps_process_keywords_overlay_appbar_title ??
+        "Issue with the l10n for the GPS keywords overlay appbar title";
 
     // GPSIdeasList
-    ideasListTitle =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
-    ideasListAppBarTitle  =  _l10n?.gps_process_list_of_ideas_title ?? "Issue with the l10n for the 'List of ideas' title'";
-    ideasListPlaceholder = _l10n?.gps_process_list_of_ideas_placeholder ?? "Issue with the l10n for the 'No ideas added yet.";
-    ideasListEmptyListSnackbarMessage = _l10n?.gps_process_snackbar_message_no_ideas_to_save ?? "Issue with the l10n for the 'No ideas to save' snackbar message";
-    ideasListOverlayClosingTooltip = _l10n?.gps_process_ideas_overlay_close_button_tooltip ?? "Issue with the l10n for the ideas overlay close button tooltip";
-    ideasListBulkDeletionText = _l10n?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text";
+    ideasListTitle =
+        _l10n?.gps_process_list_of_ideas_title ??
+        "Issue with the l10n for the 'List of ideas' title'";
+    ideasListAppBarTitle =
+        _l10n?.gps_process_list_of_ideas_title ??
+        "Issue with the l10n for the 'List of ideas' title'";
+    ideasListPlaceholder =
+        _l10n?.gps_process_list_of_ideas_placeholder ??
+        "Issue with the l10n for the 'No ideas added yet.";
+    ideasListEmptyListSnackbarMessage =
+        _l10n?.gps_process_snackbar_message_no_ideas_to_save ??
+        "Issue with the l10n for the 'No ideas to save' snackbar message";
+    ideasListOverlayClosingTooltip =
+        _l10n?.gps_process_ideas_overlay_close_button_tooltip ??
+        "Issue with the l10n for the ideas overlay close button tooltip";
+    ideasListBulkDeletionText =
+        _l10n?.dashboard_bulk_delete ??
+        "Issue with the l10n for the 'Delete selected data' text";
 
     // GPSNewIdea
-    newIdeaTextFieldHint = _l10n?.gps_process_new_idea_text_field_hint ?? "Issue with the l10n for the 'Please enter an idea.' text field hint";
+    newIdeaTextFieldHint =
+        _l10n?.gps_process_new_idea_text_field_hint ??
+        "Issue with the l10n for the 'Please enter an idea.' text field hint";
   }
-
 }

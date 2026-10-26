@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
@@ -9,8 +9,8 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling sorting and filtering of lists on the participants lists dashboard.
-class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidget 
-{
+class ParticipantsListsDashboardSortingAndFilteringFeature
+    extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
@@ -30,10 +30,10 @@ class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidge
   final VoidCallback dashboardCallbackFunctionToRefreshTheParticipantsLists;
 
   /// Global key used to identify the widget handling the filtering by keywords.
-  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState>
+  dashboardFilteringByKeywordsKey;
 
-  const ParticipantsListsDashboardSortingAndFilteringFeature
-  ({
+  const ParticipantsListsDashboardSortingAndFilteringFeature({
     super.key,
     required this.dashboardContext,
     required this.participantsListsAll,
@@ -41,78 +41,77 @@ class ParticipantsListsDashboardSortingAndFilteringFeature extends StatefulWidge
     required this.keywordsAll,
     required this.keywordsSelected,
     required this.dashboardCallbackFunctionToRefreshTheParticipantsLists,
-    required this.dashboardFilteringByKeywordsKey
+    required this.dashboardFilteringByKeywordsKey,
   });
 
   @override
-  State<ParticipantsListsDashboardSortingAndFilteringFeature> createState() => _ParticipantsListsDashboardSortingAndFilteringFeatureState();
+  State<ParticipantsListsDashboardSortingAndFilteringFeature> createState() =>
+      _ParticipantsListsDashboardSortingAndFilteringFeatureState();
 }
 
-class _ParticipantsListsDashboardSortingAndFilteringFeatureState extends State<ParticipantsListsDashboardSortingAndFilteringFeature> 
-{  
+class _ParticipantsListsDashboardSortingAndFilteringFeatureState
+    extends State<ParticipantsListsDashboardSortingAndFilteringFeature> {
   @override
   void initState() {
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardSortingAndFilteringFeature");
+    if (widgetSequenceDebug)
+      pu.printd("ParticipantsListsDashboardSortingAndFilteringFeature");
   }
 
   @override
   Widget build(BuildContext context) {
-
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
-    
-    return Column
-    (      
-      children: 
-      [
-        Padding
-        (
+
+    return Column(
+      children: [
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column
-          (
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: 
-            [
+            children: [
               // Sorting by date/title wrapped for small screens
-              Wrap
-              (
-                spacing: 8.0,   // horizontal gap between buttons
+              Wrap(
+                spacing: 8.0, // horizontal gap between buttons
                 runSpacing: 4.0, // vertical gap between wrapped lines
                 alignment: WrapAlignment.start,
-                children: 
-                [
+                children: [
                   // Sorting by title
-                  ParticipantsListsDashboardSortingByLabel
-                  (
-                    participantsListsFilteredToSort: widget.participantsListsFiltered,
-                    featureCallbackFunctionToRefreshTheParticipantsLists: widget.dashboardCallbackFunctionToRefreshTheParticipantsLists
+                  ParticipantsListsDashboardSortingByLabel(
+                    participantsListsFilteredToSort:
+                        widget.participantsListsFiltered,
+                    featureCallbackFunctionToRefreshTheParticipantsLists: widget
+                        .dashboardCallbackFunctionToRefreshTheParticipantsLists,
                   ),
                 ],
-              ),              
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text // TODO: to move
-                (
-                  lds.filterByKeywordsLabel, 
-                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
-                ),
+                child:
+                    Text // TODO: to move
+                    (
+                      lds.filterByKeywordsLabel,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
               ),
             ],
           ),
         ),
         // Filtering by keywords
-        ParticipantsListsDashboardFilteringByKeywords
-        (
+        ParticipantsListsDashboardFilteringByKeywords(
           key: widget.dashboardFilteringByKeywordsKey,
-          participantsListsAll: widget.participantsListsAll, 
-          participantsListsFiltered: widget.participantsListsFiltered, 
+          participantsListsAll: widget.participantsListsAll,
+          participantsListsFiltered: widget.participantsListsFiltered,
           keywordsAll: widget.keywordsAll,
           keywordsSelected: widget.keywordsSelected,
-          featureCallbackFunctionToRefreshTheParticipantsLists: widget.dashboardCallbackFunctionToRefreshTheParticipantsLists
-        ),  
+          featureCallbackFunctionToRefreshTheParticipantsLists:
+              widget.dashboardCallbackFunctionToRefreshTheParticipantsLists,
+        ),
       ],
     );
   }

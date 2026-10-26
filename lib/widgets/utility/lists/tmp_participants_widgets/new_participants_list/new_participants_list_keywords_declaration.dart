@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -10,35 +10,32 @@ import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget used to declare keywords in a new participants list.
-class NewParticipantsListKeywordsDeclaration extends StatefulWidget 
-{
+class NewParticipantsListKeywordsDeclaration extends StatefulWidget {
   /// The keywords associated to the session data.
   final Set<String> keywordsCurrent;
 
   /// A callback function called to update the keywords describing the session.
-  final ValueChanged<Set<String>> keywordsOnUpdateCallbackFunction;  
+  final ValueChanged<Set<String>> keywordsOnUpdateCallbackFunction;
 
-  const NewParticipantsListKeywordsDeclaration
-  ({
+  const NewParticipantsListKeywordsDeclaration({
     super.key,
     required this.keywordsCurrent,
-    required this.keywordsOnUpdateCallbackFunction
+    required this.keywordsOnUpdateCallbackFunction,
   });
 
-
   @override
-  State<NewParticipantsListKeywordsDeclaration> createState() => _NewParticipantsListKeywordsDeclarationState();
+  State<NewParticipantsListKeywordsDeclaration> createState() =>
+      _NewParticipantsListKeywordsDeclarationState();
 }
 
-class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipantsListKeywordsDeclaration> 
-{
+class _NewParticipantsListKeywordsDeclarationState
+    extends State<NewParticipantsListKeywordsDeclaration> {
   // Initializes with the passed keywords instead of an empty list
   Set<String>? _keywords;
   final TextEditingController _keywordsTec = .new();
-    
+
   // Method used to add keywords to the _keywords list
-  void _keywordAdd(String value, [StateSetter? localSetState]) 
-  {
+  void _keywordAdd(String value, [StateSetter? localSetState]) {
     var trimmedValue = value.trim();
     if (trimmedValue.isNotEmpty && !_keywords!.contains(trimmedValue)) {
       // Updates the underlying data
@@ -46,12 +43,12 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
         _keywords!.add(trimmedValue);
         _keywordsTec.clear();
       });
-      
+
       // Redraws the Dialog/Overlay
       if (localSetState != null) {
         localSetState(() {});
       }
-      
+
       widget.keywordsOnUpdateCallbackFunction(_keywords!);
     }
   }
@@ -59,7 +56,7 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
   @override
   void initState() {
     super.initState();
-            
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("NewParticipantsKeywordsDeclaration");
 
@@ -69,7 +66,8 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
   @override
   void didUpdateWidget(NewParticipantsListKeywordsDeclaration oldWidget) {
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("NewParticipantsKeywordsDeclaration: didUpdateWidget");
+    if (widgetSequenceDebug)
+      pu.printd("NewParticipantsKeywordsDeclaration: didUpdateWidget");
 
     super.didUpdateWidget(oldWidget);
     // Checks if the pointer or the content of the list has changed
@@ -82,12 +80,10 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
   }
 
   @override
-  void dispose()
-  {
+  void dispose() {
     _keywordsTec.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -95,31 +91,36 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
     LocalizedGPSStrings lgps = .new(context);
 
     return GestureDetector(
-      onTap: () => showAddToSetOverlay
-                    (
-                      context: context, 
-                      appBarBackgroundColor: white,
-                      appBarForegroundColor: black,
-                      overlayTitle: AppLocalizations.of(context)?.text_lists_new_list_keywords_title ?? "Issue with the title of the new list page keywords overlay.",
-                      overlayTitleStyle: newParticipantsListKeywordsOverlayTitleStyle, 
-                      overlayCloseIconButtonToolTip: lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip,                  
-                      inputChipDeleteIconColor: appBarWhite,
-                      textEditingControllerKey: const Key("kwsFieldNewList"), 
-                      textEditingController: _keywordsTec, 
-                      textFieldStyle: analysisTextFieldStyle, 
-                      textFieldHintText: AppLocalizations.of(context)?.l10n_keywords_entry_text_field_hint ?? "Issue with the l10n for the keywords entry text field hint.", 
-                      textFieldHintStyle: analysisTextFieldHintStyle, 
-                      onSubmittedCallbackFunction: (value, setLocalState) => _keywordAdd(value, setLocalState), 
-                      setToUpdate: _keywords!, 
-                      onDeletedCallbackFunction: 
-                        (tag, setLocalState) 
-                        {
-                          setState( () {_keywords!.remove(tag);});
-                          setLocalState(() {});
-                          widget.keywordsOnUpdateCallbackFunction(_keywords!);
-                        }, 
-                    ),
-      child: Container(        
+      onTap: () => showAddToSetOverlay(
+        context: context,
+        appBarBackgroundColor: white,
+        appBarForegroundColor: black,
+        overlayTitle:
+            AppLocalizations.of(context)?.text_lists_new_list_keywords_title ??
+            "Issue with the title of the new list page keywords overlay.",
+        overlayTitleStyle: newParticipantsListKeywordsOverlayTitleStyle,
+        overlayCloseIconButtonToolTip:
+            lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip,
+        inputChipDeleteIconColor: appBarWhite,
+        textEditingControllerKey: const Key("kwsFieldNewList"),
+        textEditingController: _keywordsTec,
+        textFieldStyle: analysisTextFieldStyle,
+        textFieldHintText:
+            AppLocalizations.of(context)?.l10n_keywords_entry_text_field_hint ??
+            "Issue with the l10n for the keywords entry text field hint.",
+        textFieldHintStyle: analysisTextFieldHintStyle,
+        onSubmittedCallbackFunction: (value, setLocalState) =>
+            _keywordAdd(value, setLocalState),
+        setToUpdate: _keywords!,
+        onDeletedCallbackFunction: (tag, setLocalState) {
+          setState(() {
+            _keywords!.remove(tag);
+          });
+          setLocalState(() {});
+          widget.keywordsOnUpdateCallbackFunction(_keywords!);
+        },
+      ),
+      child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -129,16 +130,15 @@ class _NewParticipantsListKeywordsDeclarationState extends State<NewParticipants
               child: Icon(Icons.style_rounded),
             ),
             Center(
-              child: Text
-              (
-                AppLocalizations.of(context)?.l10n_keywords ?? "Issue with the l10n for 'Keywords'", 
-                style: gpsKeywordsTitleStyle
+              child: Text(
+                AppLocalizations.of(context)?.l10n_keywords ??
+                    "Issue with the l10n for 'Keywords'",
+                style: gpsKeywordsTitleStyle,
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
 }

@@ -1,5 +1,4 @@
-
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -11,17 +10,15 @@ import "package:journeyers/widgets/utility/lists/database/participants_lists_db.
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db_externalized_strings.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/2b_participants_dashboard_filtering_by_keywords.dart";
 
-
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling bulk deletion on the participants lists dashboard.
-class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget 
-{
+class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// Boolean used to store if some lists are selected for deletion.
-  final bool areListsForDeletion; 
+  final bool areListsForDeletion;
 
   /// List containing all available lists.
   final List<dynamic>? participantsListsAll;
@@ -35,132 +32,133 @@ class ParticipantsListsDashboardDeletionByBulk extends StatefulWidget
   /// Callback function used to refresh the lists displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheParticipantsLists;
 
-  const ParticipantsListsDashboardDeletionByBulk
-  ({
+  const ParticipantsListsDashboardDeletionByBulk({
     super.key,
     required this.dashboardContext,
     required this.areListsForDeletion,
     required this.participantsListsAll,
     required this.participantsListsFiltered,
     required this.dashboardCallbackFunctionToRefreshTheParticipantsLists,
-    this.participantsListsSelectedForDeletionKeys    
+    this.participantsListsSelectedForDeletionKeys,
   });
 
   @override
-  State<ParticipantsListsDashboardDeletionByBulk> createState() => _ParticipantsListsDashboardDeletionByBulkState();
+  State<ParticipantsListsDashboardDeletionByBulk> createState() =>
+      _ParticipantsListsDashboardDeletionByBulkState();
 }
 
-class _ParticipantsListsDashboardDeletionByBulkState extends State<ParticipantsListsDashboardDeletionByBulk> 
-{
+class _ParticipantsListsDashboardDeletionByBulkState
+    extends State<ParticipantsListsDashboardDeletionByBulk> {
   final _listsDB = ParticipantsListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = GlobalKey();
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState>
+  _dashboardFilteringByKeywordsKey = GlobalKey();
 
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several lists data
-  Future<void> _selectedListsDelete() async 
-  {
-      // Getting the localized strings
+  Future<void> _selectedListsDelete() async {
+    // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
-    
+
     // Creating a fixed list to iterate over so clearing doesn"t break the loop
-    final keysOfListsSelectedForDeletion = List<String>.from(widget.participantsListsSelectedForDeletionKeys!);
+    final keysOfListsSelectedForDeletion = List<String>.from(
+      widget.participantsListsSelectedForDeletionKeys!,
+    );
 
     // Updating the DB
-    await _listsDB.removeListData(keysOfListsSelectedForDeletion);    
+    await _listsDB.removeListData(keysOfListsSelectedForDeletion);
 
     // Updating the filtered sessions list
-    widget.participantsListsFiltered?.removeWhere
-    (
-      (session) => 
-      keysOfListsSelectedForDeletion.contains(session[itemKey])
+    widget.participantsListsFiltered?.removeWhere(
+      (session) => keysOfListsSelectedForDeletion.contains(session[itemKey]),
     );
 
     // Updating the _allLists list
-    widget.participantsListsAll?.removeWhere
-    (
-      (session) => 
-      keysOfListsSelectedForDeletion.contains(session[itemKey])
+    widget.participantsListsAll?.removeWhere(
+      (session) => keysOfListsSelectedForDeletion.contains(session[itemKey]),
     );
 
-    logd("Deletion by bulk: after deletion:  widget.allLists: ${widget.participantsListsAll}");
+    logd(
+      "Deletion by bulk: after deletion:  widget.allLists: ${widget.participantsListsAll}",
+    );
 
     // Clearing the list of the selected sessions
     widget.participantsListsSelectedForDeletionKeys!.clear();
 
     // Updating the keywords list
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsApplyFiltering();
 
     if (!mounted) return;
     // Displaying an informational message
-    ScaffoldMessenger.of(context).showSnackBar
-    (
-      SnackBar
-      (
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(lds.snackbarMessageDataDeleted),
-        duration: const Duration(seconds: 2)
+        duration: const Duration(seconds: 2),
       ),
     );
 
     // REFRESHING THE UI
     logd("widget.allLists!.isEmpty?: ${widget.participantsListsAll!.isEmpty}");
-    
+
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.participantsListsAll!.isEmpty) 
-    {
+    if (widget.participantsListsAll!.isEmpty) {
       // resetWasSessionDataSavedStatus to false
-      await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await rtdu.resetWasSessionDataSavedStatus(
+        context: widget.dashboardContext,
+      );
 
       widget.dashboardCallbackFunctionToRefreshTheParticipantsLists();
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
-    else
-    {
-
+    else {
       // Updating the keywords UI
-      _dashboardFilteringByKeywordsKey.currentState?.setState((){});
+      _dashboardFilteringByKeywordsKey.currentState?.setState(() {});
 
       // Updating the sessions list UI
-      widget.dashboardCallbackFunctionToRefreshTheParticipantsLists();      
+      widget.dashboardCallbackFunctionToRefreshTheParticipantsLists();
     }
-
   }
-  
+
   @override
   void initState() {
     super.initState();
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardDeletionByBulk");
+    if (widgetSequenceDebug)
+      pu.printd("ParticipantsListsDashboardDeletionByBulk");
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return 
-    Semantics
-    (
+  Widget build(BuildContext context) {
+    return Semantics(
       excludeSemantics: !widget.areListsForDeletion,
-      child:    
-        Center(
-            child:        
-              TextButton.icon(
-                onPressed: _selectedListsDelete,
-                icon: Icon(Icons.delete, color: (widget.areListsForDeletion == true)? Colors.red: transparent),
-                label: Text(
-                  "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
-                  style: TextStyle(
-                    color: (widget.areListsForDeletion == true)? Colors.red: transparent, 
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),    
-        )      
+      child: Center(
+        child: TextButton.icon(
+          onPressed: _selectedListsDelete,
+          icon: Icon(
+            Icons.delete,
+            color: (widget.areListsForDeletion == true)
+                ? Colors.red
+                : transparent,
+          ),
+          label: Text(
+            "${AppLocalizations.of(context)?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete selected data' text"} (${widget.participantsListsSelectedForDeletionKeys?.length ?? 0})",
+            style: TextStyle(
+              color: (widget.areListsForDeletion == true)
+                  ? Colors.red
+                  : transparent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,12 +1,11 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Custom widgets}
 /// A customizable expansion tile with callback functions for edition/deletion.
-class CustomExpansionTile extends StatefulWidget 
-{
+class CustomExpansionTile extends StatefulWidget {
   /// The text to display when the tile is not expanded.
   final String text;
 
@@ -49,8 +48,7 @@ class CustomExpansionTile extends StatefulWidget
   /// The tooltip label for the "Delete" icon.
   static const toolTipDelete = "Delete";
 
-  const CustomExpansionTile
-  ({
+  const CustomExpansionTile({
     super.key,
     this.text = "Default tile text",
     this.textStyle = defaultConstHeadingStyle,
@@ -61,8 +59,7 @@ class CustomExpansionTile extends StatefulWidget
     this.expandedContentWidget = const Text("Default expanded additional text"),
     this.expandedContentDividerHeight = 20.5,
     this.listActionIconsMainAxisAlignment = MainAxisAlignment.end,
-    this.listActionIconsData = const 
-    [
+    this.listActionIconsData = const [
       [Icons.edit, toolTipEdit, null],
       [Icons.delete, toolTipDelete, null],
     ],
@@ -74,67 +71,56 @@ class CustomExpansionTile extends StatefulWidget
   State<CustomExpansionTile> createState() => _CustomExpansionTileState();
 }
 
-class _CustomExpansionTileState extends State<CustomExpansionTile> 
-{
+class _CustomExpansionTileState extends State<CustomExpansionTile> {
   final FocusNode _expandedAdditionalTextFocusNode = .new();
 
   @override
-  void dispose() 
-  {
+  void dispose() {
     _expandedAdditionalTextFocusNode.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return 
-    ExpansionTile
-    (
-      title: 
-      Text
-      (
-        widget.text,
-        style: widget.textStyle,
-      ),
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: Text(widget.text, style: widget.textStyle),
       trailing: widget.actionIconSuggestingExpansion,
-      children: <Widget>
-      [
-        Padding
-        (
-          padding: EdgeInsets.symmetric(horizontal: widget.expandedContentPaddingHorizontal,vertical: widget.expandedContentPaddingVertical,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.expandedContentPaddingHorizontal,
+            vertical: widget.expandedContentPaddingVertical,
           ),
-          child: 
-          Column
-          (
+          child: Column(
             crossAxisAlignment: widget.expandedContentCrossAxisAlignment,
-            children: 
-            [
-              Focus
-              (
+            children: [
+              Focus(
                 focusNode: _expandedAdditionalTextFocusNode,
-                child: widget.expandedContentWidget
-                
+                child: widget.expandedContentWidget,
               ),
               Divider(height: widget.expandedContentDividerHeight),
 
               // Action icons
-              Row
-              (
+              Row(
                 mainAxisAlignment: widget.listActionIconsMainAxisAlignment,
                 children: //.toList()
-                widget.listActionIconsData.map((actionIconData) 
-                {
+                widget.listActionIconsData.map((actionIconData) {
                   final iconData = actionIconData[0] as IconData;
                   final toolTip = actionIconData[1] as String;
                   final VoidCallback onPressed;
-                  if (toolTip == CustomExpansionTile.toolTipEdit) {onPressed = widget.onEditPressedCallbackFunction;} 
-                  else if (toolTip == CustomExpansionTile.toolTipDelete) {onPressed = widget.onDeletePressedCallbackFunction;} 
-                  else {onPressed = () {pu.printd("Expansion tile: unexpected toolTipLabel value: $toolTip");};}
+                  if (toolTip == CustomExpansionTile.toolTipEdit) {
+                    onPressed = widget.onEditPressedCallbackFunction;
+                  } else if (toolTip == CustomExpansionTile.toolTipDelete) {
+                    onPressed = widget.onDeletePressedCallbackFunction;
+                  } else {
+                    onPressed = () {
+                      pu.printd(
+                        "Expansion tile: unexpected toolTipLabel value: $toolTip",
+                      );
+                    };
+                  }
 
-                  return 
-                  IconButton
-                  (
+                  return IconButton(
                     icon: Icon(iconData),
                     tooltip: toolTip,
                     onPressed: onPressed,

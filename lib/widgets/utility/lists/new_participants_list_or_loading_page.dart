@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/l10n/app_localizations.dart";
@@ -12,15 +12,13 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 /// ParticipantsGroupDeclaration offers two choices:
 ///   • Loading a list of previous groups of participants
 ///   • Adding a new group of participants
-class NewParticipantsListOrLoadingPage extends StatelessWidget 
-{
+class NewParticipantsListOrLoadingPage extends StatelessWidget {
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
 
-  const NewParticipantsListOrLoadingPage
-  ({
+  const NewParticipantsListOrLoadingPage({
     super.key,
-    required this.onParticipantsLoadedCallbackFunction   
+    required this.onParticipantsLoadedCallbackFunction,
   });
 
   @override
@@ -30,21 +28,18 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
     LocalizedUtilsStrings lus = .new(context);
 
     return Scaffold(
-      appBar: AppBar
-              (
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                actions: 
-                [
-                  IconButton
-                  (
-                    icon: const Icon(Icons.close),
-                    tooltip: lus.overlayCloseButtonTooltip,
-                    color: black,
-                    onPressed: () => Navigator.of(context).pop()
-                  )
-                ],
-              ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            tooltip: lus.overlayCloseButtonTooltip,
+            color: black,
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -63,11 +58,14 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_page_subtitle ?? "Issue with the default subtitle for the new list or loading list page.",
+                  AppLocalizations.of(
+                        context,
+                      )?.text_lists_new_list_or_loading_list_page_subtitle ??
+                      "Issue with the default subtitle for the new list or loading list page.",
                   textAlign: TextAlign.center,
                   style: appTheme.textTheme.bodyMedium?.copyWith(
                     color: black,
-                    fontSize: 16
+                    fontSize: 16,
                   ),
                 ),
                 const SizedBox(height: 48),
@@ -76,31 +74,35 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                 FilledButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => ParticipantsListsDashboard
-                                      (
-                                        dashboardContext: "", 
-                                        onAllSessionFilesDeletedContextPageCallbackFunction:  () {  }, 
-                                        onRetrievedSessionDataBeforeEditionCallbackFunction: 
-                                        ({
-                                          required String dashboardContext,
-                                          required bool isSessionDataBeingEdited, 
-                                          required String titleWhenEdition, 
-                                          required Set<String> keywordsWhenEdition,
-                                          required Object dtoWhenEdition, 
-                                          required String fileNameWithoutExtensionWhenEdition,
-                                          required String filePathWhenEdition
-                                        }) {}, 
-                                        onParticipantsLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
-                                        dashboardFilteringByKeywordsKey: null,
-                                    ),
+                      builder: (_) => ParticipantsListsDashboard(
+                        dashboardContext: "",
+                        onAllSessionFilesDeletedContextPageCallbackFunction:
+                            () {},
+                        onRetrievedSessionDataBeforeEditionCallbackFunction:
+                            ({
+                              required String dashboardContext,
+                              required bool isSessionDataBeingEdited,
+                              required String titleWhenEdition,
+                              required Set<String> keywordsWhenEdition,
+                              required Object dtoWhenEdition,
+                              required String
+                              fileNameWithoutExtensionWhenEdition,
+                              required String filePathWhenEdition,
+                            }) {},
+                        onParticipantsLoadedCallbackFunction:
+                            onParticipantsLoadedCallbackFunction,
+                        dashboardFilteringByKeywordsKey: null,
+                      ),
                     ),
                   ),
                   icon: const Icon(Icons.folder_open_outlined),
-                  label: Text
-                    (
-                      AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_group_loading_option ?? "Issue with the loading option text for the new list or loading list page.",
-                      textAlign: TextAlign.center
-                    ),
+                  label: Text(
+                    AppLocalizations.of(
+                          context,
+                        )?.text_lists_new_list_or_loading_list_group_loading_option ??
+                        "Issue with the loading option text for the new list or loading list page.",
+                    textAlign: TextAlign.center,
+                  ),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -111,18 +113,20 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget
                 FilledButton.icon(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => NewParticipantsList
-                                        (
-                                          themeData: Theme.of(context),
-                                          onParticipantsListLoadedCallbackFunction: onParticipantsLoadedCallbackFunction,
-                                        ),
+                      builder: (_) => NewParticipantsList(
+                        themeData: Theme.of(context),
+                        onParticipantsListLoadedCallbackFunction:
+                            onParticipantsLoadedCallbackFunction,
+                      ),
                     ),
                   ),
                   icon: const Icon(Icons.add_circle_outline),
-                  label: Text
-                  (
-                    AppLocalizations.of(context)?.text_lists_new_list_or_loading_list_new_group_option ?? "Issue with the new group option text for the new list or loading list page.", 
-                    textAlign: TextAlign.center
+                  label: Text(
+                    AppLocalizations.of(
+                          context,
+                        )?.text_lists_new_list_or_loading_list_new_group_option ??
+                        "Issue with the new group option text for the new list or loading list page.",
+                    textAlign: TextAlign.center,
                   ),
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),

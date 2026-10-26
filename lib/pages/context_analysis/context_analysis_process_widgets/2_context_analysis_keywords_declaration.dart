@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -7,39 +7,33 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
 /// A widget used for keywords declaration in the context analysis process.
-class CAKeywordsDeclaration extends StatefulWidget 
-{
+class CAKeywordsDeclaration extends StatefulWidget {
   /// A keywords value at edition time.
   final Set<String> keywordsWhenEdition;
 
   /// A callback function called to update the keywords describing the session.
   final ValueChanged<Set<String>> onKeywordsUpdatedProcessCallbackFunction;
 
-  const CAKeywordsDeclaration
-  ({
+  const CAKeywordsDeclaration({
     super.key,
     required this.keywordsWhenEdition,
-    required this.onKeywordsUpdatedProcessCallbackFunction
+    required this.onKeywordsUpdatedProcessCallbackFunction,
   });
 
   @override
   State<CAKeywordsDeclaration> createState() => _CAKeywordsDeclarationState();
 }
 
-class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> 
-{
-
+class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> {
   final Set<String> _keywordsSet = {};
   List<String> _keywordsListSorted = [];
   final TextEditingController _keywordsTec = .new();
-    
+
   // Method used to add keywords to the _keywords list
-  void _keywordAdd(String value)
-  {
+  void _keywordAdd(String value) {
     var trimmedValue = value.trim();
 
-    if (trimmedValue.isNotEmpty && !_keywordsSet.contains(trimmedValue))
-    {
+    if (trimmedValue.isNotEmpty && !_keywordsSet.contains(trimmedValue)) {
       // Adding the value to the set to avoid duplication
       _keywordsSet.add(trimmedValue);
 
@@ -48,7 +42,7 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
       _keywordsListSorted.sort();
 
       _keywordsTec.clear();
-      
+
       setState(() {});
     }
     widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
@@ -57,17 +51,19 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
   @override
   void initState() {
     super.initState();
-        
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("CAKeywordsDeclaration");
 
     _keywordsListSorted = widget.keywordsWhenEdition.toList();
-    if (editDebug) pu.printd("Editing: CAKeywordsDeclaration: initState: _keywordsListSorted: $_keywordsListSorted");
+    if (editDebug)
+      pu.printd(
+        "Editing: CAKeywordsDeclaration: initState: _keywordsListSorted: $_keywordsListSorted",
+      );
   }
 
   @override
-  void dispose()
-  {
+  void dispose() {
     _keywordsTec.dispose();
     super.dispose();
   }
@@ -77,28 +73,25 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
-    return Column
-    (
-      children: 
-      [                     
-        Padding
-        (
-          padding: const EdgeInsets.only(left:20, right:20, top:10, bottom:0),
-          child: TextField
-          (
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 10,
+            bottom: 0,
+          ),
+          child: TextField(
             controller: _keywordsTec,
-            decoration: InputDecoration
-            (
-              hint: Center
-              (
-                child: 
-                Text
-                (
-                  lds.keywordsEntryTextFieldHint, 
-                  textAlign: TextAlign.center,                   
-                  style: analysisTextFieldHintStyle
-                )
-              )
+            decoration: InputDecoration(
+              hint: Center(
+                child: Text(
+                  lds.keywordsEntryTextFieldHint,
+                  textAlign: TextAlign.center,
+                  style: analysisTextFieldHintStyle,
+                ),
+              ),
             ),
             textAlign: TextAlign.center,
             style: analysisTextFieldStyle,
@@ -106,52 +99,49 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration>
           ),
         ),
         // Display of the keywords
-        Center
-        (
-          child: Padding
-          (
+        Center(
+          child: Padding(
             padding: const EdgeInsets.only(bottom: 0),
-            child: Wrap
-            (
+            child: Wrap(
               spacing: 8.0,
               runSpacing: 4.0,
-              children: 
-              [
+              children: [
                 // List used to build the input chips
-                ..._keywordsListSorted.map
-                (
-                  (tag) => 
-                  InputChip
-                  (
-                    label: Text
-                            (
-                              tag, 
-                              style: const TextStyle(color: appBarWhite),
-                            ),
+                ..._keywordsListSorted.map(
+                  (tag) => InputChip(
+                    label: Text(
+                      tag,
+                      style: const TextStyle(color: appBarWhite),
+                    ),
                     deleteIcon: const Icon(Icons.close),
                     deleteIconColor: appBarWhite,
-                    onDeleted: () 
-                    {
+                    onDeleted: () {
                       // Removal from the reference set
-                      setState( () 
-                      {
-                        
-                        _keywordsSet.remove(tag);                        
+                      setState(() {
+                        _keywordsSet.remove(tag);
                         _keywordsListSorted.removeWhere((item) => item == tag);
 
-                        if (editDebug) pu.printd("Editing: CAKeywordsDeclaration: build: _keywordsSet: $_keywordsSet");               
-                        if (editDebug) pu.printd("Editing: CAKeywordsDeclaration: build: _keywordsListSorted: $_keywordsListSorted");               
+                        if (editDebug)
+                          pu.printd(
+                            "Editing: CAKeywordsDeclaration: build: _keywordsSet: $_keywordsSet",
+                          );
+                        if (editDebug)
+                          pu.printd(
+                            "Editing: CAKeywordsDeclaration: build: _keywordsListSorted: $_keywordsListSorted",
+                          );
                       });
-                      widget.onKeywordsUpdatedProcessCallbackFunction(_keywordsSet);
-                    }, 
-                  )
-                )
+                      widget.onKeywordsUpdatedProcessCallbackFunction(
+                        _keywordsSet,
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ],
-    ); 
+    );
     // TODO: to offer pre-defined keywords as well (household, workplace, studies)
   }
 }

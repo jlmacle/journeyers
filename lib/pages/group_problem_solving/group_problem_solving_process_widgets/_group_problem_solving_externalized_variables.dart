@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 
@@ -11,7 +11,3 @@ const identifierColors = [greenShade900, orange, red];
 const rectangleColor = orangeShade900;
 const checkboxCheckedColor = Colors.green;
 const checkboxCheckedListTileColor = Color(0xFFE8F5E9);
-
-
-
-

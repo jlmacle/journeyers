@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
@@ -7,7 +7,6 @@ import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
 /// {@category Lists}
 /// A widget used to edit text items in a list.
 class EditableTextListItem extends StatefulWidget {
-
   /// The index of the list item.
   final int itemIndex;
 
@@ -15,7 +14,7 @@ class EditableTextListItem extends StatefulWidget {
   final String itemText;
 
   /// The style for the text to display.
-  final TextStyle itemTextStyle;  
+  final TextStyle itemTextStyle;
 
   /// The left padding for the text field.
   final double paddingLeft;
@@ -30,27 +29,27 @@ class EditableTextListItem extends StatefulWidget {
   final double paddingBottom;
 
   /// Callback function used to update the list item value.
-  final OnListItemValueUpdatedCallbackFunctionType parentCallbackFunctionToUpdateTheListItemValue;
+  final OnListItemValueUpdatedCallbackFunctionType
+  parentCallbackFunctionToUpdateTheListItemValue;
 
-  const EditableTextListItem
-  ({
+  const EditableTextListItem({
     required this.itemText,
     required this.itemIndex,
-    this.itemTextStyle = const TextStyle(fontWeight: FontWeight.bold), 
+    this.itemTextStyle = const TextStyle(fontWeight: FontWeight.bold),
     this.paddingBottom = 8,
     this.paddingTop = 8,
     this.paddingLeft = 16,
     this.paddingRight = 16,
-    this.parentCallbackFunctionToUpdateTheListItemValue = placeHolderCallbackFunctionToUpdateTheListItemValue,
-    super.key
+    this.parentCallbackFunctionToUpdateTheListItemValue =
+        placeHolderCallbackFunctionToUpdateTheListItemValue,
+    super.key,
   });
 
   @override
   State<EditableTextListItem> createState() => _EditableTextListItemState();
 }
 
-class _EditableTextListItemState extends State<EditableTextListItem> 
-{
+class _EditableTextListItemState extends State<EditableTextListItem> {
   var _isEdited = false;
   final _tecEdition = TextEditingController();
 
@@ -62,45 +61,39 @@ class _EditableTextListItemState extends State<EditableTextListItem>
 
   @override
   Widget build(BuildContext context) {
-    return 
-    _isEdited
-    ?
-    // Text field if edition mode
-    TextField
-    (
-      controller: _tecEdition,
-      decoration: InputDecoration
-      (                    
-        contentPadding: EdgeInsets.only
-        (
-          bottom: widget.paddingBottom, top: widget.paddingTop,
-          left: widget.paddingLeft, right: widget.paddingRight
-        ),
-      ),
-      textAlign: TextAlign.left,
-      onSubmitted: 
-        (value) => setState(() 
-        {
-          _isEdited = false;
-          _tecEdition.clear();
-          widget.parentCallbackFunctionToUpdateTheListItemValue(stringParam: value, intParam: widget.itemIndex);
-        }),
-      
-    )
-    :
-    // Text with gesture detection outside of edition mode
-    GestureDetector
-    (
-      child:
-        Text(widget.itemText, style: widget.itemTextStyle),
-        onTap: () 
-            {
-              setState(() 
-              {
+    return _isEdited
+        ?
+          // Text field if edition mode
+          TextField(
+            controller: _tecEdition,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(
+                bottom: widget.paddingBottom,
+                top: widget.paddingTop,
+                left: widget.paddingLeft,
+                right: widget.paddingRight,
+              ),
+            ),
+            textAlign: TextAlign.left,
+            onSubmitted: (value) => setState(() {
+              _isEdited = false;
+              _tecEdition.clear();
+              widget.parentCallbackFunctionToUpdateTheListItemValue(
+                stringParam: value,
+                intParam: widget.itemIndex,
+              );
+            }),
+          )
+        :
+          // Text with gesture detection outside of edition mode
+          GestureDetector(
+            child: Text(widget.itemText, style: widget.itemTextStyle),
+            onTap: () {
+              setState(() {
                 _isEdited = true;
                 _tecEdition.text = widget.itemText;
               });
-            }
-    );
+            },
+          );
   }
 }
