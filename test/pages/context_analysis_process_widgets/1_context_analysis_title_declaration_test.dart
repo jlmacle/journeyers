@@ -1,4 +1,3 @@
-
 import "package:flutter_test/flutter_test.dart";
 
 import "package:material_ui/material_ui.dart";
@@ -12,32 +11,29 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
-
-  Future<void> pumpTestableWidget(WidgetTester tester) async
-  {
+  Future<void> pumpTestableWidget(WidgetTester tester) async {
     return await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            ...GlobalMaterialLocalizations.delegates,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: const Locale(testingLocaleOption),
-          home: Scaffold(
-            body: CATitleDeclaration
-            (
-              analysisTitleWhenEdition: "",
-              onAnalysisTitleUpdatedProcessCallbackFunction: (_){},
-            )
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale(testingLocaleOption),
+        home: Scaffold(
+          body: CATitleDeclaration(
+            analysisTitleWhenEdition: "",
+            onAnalysisTitleUpdatedProcessCallbackFunction: (_) {},
           ),
         ),
-      );
+      ),
+    );
   }
 
-  group("CATitleDeclaration Widget Tests: \n", () {    
-    testWidgets("Should render the correct text field hint", 
-    (WidgetTester tester) async 
-    {
+  group("CATitleDeclaration Widget Tests: \n", () {
+    testWidgets("Should render the correct text field hint", (
+      WidgetTester tester,
+    ) async {
       // Building the widget
       await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
@@ -45,31 +41,35 @@ void main() {
       // Getting the localized strings
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedCAStrings lca = .new(context);
-      
+
       // Hint text hard-coded strings
       var hintText = "";
-      
+
       var localeLanguageCode = getLocaleLanguageCode(tester);
-     
-      switch(localeLanguageCode.toLowerCase())
-      {
-        case("en"): { hintText = "Please enter a title for this analysis."; }
-        case("fr"): { hintText = "Veuillez renseigner le titre\nde cette analyse."; }        
+
+      switch (localeLanguageCode.toLowerCase()) {
+        case ("en"):
+          {
+            hintText = "Please enter a title for this analysis.";
+          }
+        case ("fr"):
+          {
+            hintText = "Veuillez renseigner le titre\nde cette analyse.";
+          }
       }
 
       logt("hintText", hintText);
 
       // Verifying consistency between hard-coded string and localized string
-      expect(hintText, lca.caTitleTextFieldHint);     
+      expect(hintText, lca.caTitleTextFieldHint);
 
       // Verifying the text field hint present
       expect(find.text(lca.caTitleTextFieldHint), findsOneWidget);
-    }
-    );    
-  
-    testWidgets("Starts not autofocused (to avoid the keyboard on mobile)", 
-    (WidgetTester tester) async 
-    {
+    });
+
+    testWidgets("Starts not autofocused (to avoid the keyboard on mobile)", (
+      WidgetTester tester,
+    ) async {
       // Building the widget
       await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
@@ -77,22 +77,17 @@ void main() {
       // Getting the text field
       var textFieldFinder = find.byType(TextField);
       var textField = tester.widget<TextField>(textFieldFinder);
-      expect (textField.autofocus, false);
-    }
-    );    
-  
-    testWidgets("The title length has a limit of 150 characters", 
-    (WidgetTester tester) async 
-    {
+      expect(textField.autofocus, false);
+    });
+
+    testWidgets("The title length has a limit of 150 characters", (
+      WidgetTester tester,
+    ) async {
       // Building the widget
       await pumpTestableWidget(tester);
       await tester.pumpAndSettle();
 
-      expect (find.textContaining("/150"), findsOne);
-    }
-    );    
-  
-  }
-);  
-
+      expect(find.textContaining("/150"), findsOne);
+    });
+  });
 }
