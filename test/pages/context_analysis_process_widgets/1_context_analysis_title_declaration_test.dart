@@ -1,6 +1,7 @@
 
-import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
+
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
@@ -16,7 +17,10 @@ void main() {
   {
     return await tester.pumpWidget(
         MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            ...GlobalMaterialLocalizations.delegates,
+          ],
           supportedLocales: AppLocalizations.supportedLocales,
           locale: const Locale(testingLocaleOption),
           home: Scaffold(
