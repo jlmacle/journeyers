@@ -1,4 +1,5 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
+
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
@@ -22,14 +23,22 @@ void main() {
       testKey = GlobalKey<DashboardFilteringByKeywordsState>();
       keywordsAll = ["Flutter", "Dart", "Testing"];
       keywordsSelected = [];
-      sessionsMetadataAll = [{"title": "A"}, {"title": "B"}];
-      sessionsMetadataFiltered = [{"title": "A"}];
+      sessionsMetadataAll = [
+        {"title": "A"},
+        {"title": "B"},
+      ];
+      sessionsMetadataFiltered = [
+        {"title": "A"},
+      ];
     });
 
     // Helper to wrap the widget under test
     Widget createWidgetUnderTest() {
       return MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         locale: const Locale(testingLocaleOption),
         home: Scaffold(
@@ -46,8 +55,9 @@ void main() {
       );
     }
 
-    testWidgets("Renders all sub-components labels and title text", (WidgetTester tester) async 
-    {
+    testWidgets("Renders all sub-components labels and title text", (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
       await tester.pumpAndSettle();
 
@@ -55,7 +65,7 @@ void main() {
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedDashboardStrings lds = .new(context);
 
-      // Checks for the children and pre-defined labels 
+      // Checks for the children and pre-defined labels
       // sorting by title
       expect(find.byType(DashboardSortingByTitle), findsOneWidget);
       // String interpolation used for the text
@@ -67,10 +77,12 @@ void main() {
 
       // filtering by keywords
       expect(find.byType(DashboardFilteringByKeywords), findsOneWidget);
-      expect(find.text(lds.filterByKeywordsLabel), findsOneWidget);     
+      expect(find.text(lds.filterByKeywordsLabel), findsOneWidget);
     });
 
-    testWidgets("Wraps sorting widgets inside a Wrap widget", (WidgetTester tester) async {
+    testWidgets("Wraps sorting widgets inside a Wrap widget", (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest());
 
       // Checks for Wrap widget
@@ -79,7 +91,10 @@ void main() {
 
       // Verifies sorting widgets are children of the Wrap
       expect(
-        find.descendant(of: wrapFinder, matching: find.byType(DashboardSortingByTitle)),
+        find.descendant(
+          of: wrapFinder,
+          matching: find.byType(DashboardSortingByTitle),
+        ),
         findsOneWidget,
       );
     });
