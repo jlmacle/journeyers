@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
@@ -10,8 +10,7 @@ import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashbo
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling sorting and filtering of session data.
-class DashboardSortingAndFilteringFeature extends StatefulWidget 
-{
+class DashboardSortingAndFilteringFeature extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
@@ -31,10 +30,10 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
   final VoidCallback parentCallbackFunctionToRefreshTheSessionsList;
 
   /// Global key used to identify the widget handling the filtering by keywords.
-  final GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
+  final GlobalKey<DashboardFilteringByKeywordsState>
+  dashboardFilteringByKeywordsKey;
 
-  const DashboardSortingAndFilteringFeature
-  ({
+  const DashboardSortingAndFilteringFeature({
     super.key,
     required this.dashboardContext,
     required this.sessionsMetadataAll,
@@ -42,84 +41,84 @@ class DashboardSortingAndFilteringFeature extends StatefulWidget
     required this.keywordsAll,
     required this.keywordsSelected,
     required this.parentCallbackFunctionToRefreshTheSessionsList,
-    required this.dashboardFilteringByKeywordsKey
+    required this.dashboardFilteringByKeywordsKey,
   });
 
   @override
-  State<DashboardSortingAndFilteringFeature> createState() => _DashboardSortingAndFilteringFeatureState();
+  State<DashboardSortingAndFilteringFeature> createState() =>
+      _DashboardSortingAndFilteringFeatureState();
 }
 
-class _DashboardSortingAndFilteringFeatureState extends State<DashboardSortingAndFilteringFeature> 
-{  
+class _DashboardSortingAndFilteringFeatureState
+    extends State<DashboardSortingAndFilteringFeature> {
   @override
   void initState() {
     super.initState();
-                                
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("DashboardSortingAndFilteringFeature");
   }
 
   @override
   Widget build(BuildContext context) {
-    // Getting the localized strings    
+    // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
-    return Column
-    ( 
+    return Column(
       crossAxisAlignment: .center,
-      children: 
-      [
-        Padding
-        (
+      children: [
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Column
-          (
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: 
-            [
+            children: [
               // Sorting by date/title wrapped for small screens
-              Wrap
-              (
-                spacing: 8.0,   // horizontal gap between buttons
+              Wrap(
+                spacing: 8.0, // horizontal gap between buttons
                 runSpacing: 4.0, // vertical gap between wrapped lines
                 alignment: WrapAlignment.center,
-                children: 
-                [
+                children: [
                   // Sorting by title
-                  DashboardSortingByTitle
-                  (
-                    sessionsMetadataFilteredToSort: widget.sessionsMetadataFiltered,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+                  DashboardSortingByTitle(
+                    sessionsMetadataFilteredToSort:
+                        widget.sessionsMetadataFiltered,
+                    dashboardCallbackFunctionToRefreshTheSessionsList:
+                        widget.parentCallbackFunctionToRefreshTheSessionsList,
                   ),
                   // Sorting by date
-                  DashboardSortingByDate
-                  (
-                    sessionsMetadataFilteredToSort: widget.sessionsMetadataFiltered,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
+                  DashboardSortingByDate(
+                    sessionsMetadataFilteredToSort:
+                        widget.sessionsMetadataFiltered,
+                    dashboardCallbackFunctionToRefreshTheSessionsList:
+                        widget.parentCallbackFunctionToRefreshTheSessionsList,
                   ),
                 ],
-              ),              
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text // TODO: to move
-                (
-                  lds.filterByKeywordsLabel, 
-                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16)
-                ),
+                child:
+                    Text // TODO: to move
+                    (
+                      lds.filterByKeywordsLabel,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                    ),
               ),
             ],
           ),
         ),
         // Filtering by keywords
-        DashboardFilteringByKeywords
-        (
+        DashboardFilteringByKeywords(
           key: widget.dashboardFilteringByKeywordsKey,
-          sessionsMetadataAll: widget.sessionsMetadataAll, 
-          sessionsMetadataFiltered: widget.sessionsMetadataFiltered, 
+          sessionsMetadataAll: widget.sessionsMetadataAll,
+          sessionsMetadataFiltered: widget.sessionsMetadataFiltered,
           keywordsAll: widget.keywordsAll,
           keywordsSelected: widget.keywordsSelected,
-          dashboardCallbackFunctionToRefreshTheSessionsList: widget.parentCallbackFunctionToRefreshTheSessionsList
-        ),  
+          dashboardCallbackFunctionToRefreshTheSessionsList:
+              widget.parentCallbackFunctionToRefreshTheSessionsList,
+        ),
       ],
     );
   }

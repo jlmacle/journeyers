@@ -1,12 +1,11 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/widgets/custom/text/custom_focusable_text.dart";
 
 /// {@category Custom widgets}
 /// A customizable heading (level 1 to 6).
-class CustomHeading extends StatefulWidget 
-{
+class CustomHeading extends StatefulWidget {
   /// The text of the heading.
   final String headingText;
 
@@ -16,31 +15,24 @@ class CustomHeading extends StatefulWidget
   /// The alignment of the heading.
   final TextAlign headingAlignment;
 
-  const CustomHeading
-  ({
+  const CustomHeading({
     super.key,
     required this.headingText,
     required this.headingLevel,
     this.headingAlignment = TextAlign.center,
   });
-  
+
   @override
-  State<CustomHeading> createState() =>  CustomHeadingState();
+  State<CustomHeading> createState() => CustomHeadingState();
 }
 
-
-class CustomHeadingState extends State<CustomHeading> 
-{
+class CustomHeadingState extends State<CustomHeading> {
   bool _headingStyleUnderlined = false;
-  
+
   TextStyle? _headerStyle;
 
-  TextStyle _getTextStyle(int headingLevel)
-  {
-
-
-    switch (headingLevel) 
-    {
+  TextStyle _getTextStyle(int headingLevel) {
+    switch (headingLevel) {
       case 1:
         return appTheme.textTheme.headlineLarge!;
       case 2:
@@ -63,19 +55,21 @@ class CustomHeadingState extends State<CustomHeading>
     _headerStyle = _getTextStyle(widget.headingLevel);
     super.initState();
   }
-  
+
   // Used in CAForm.
-  // Switches the heading decoration if a checkbox is checked.  
-  void switchCustomHeadingDecorationIfRelevant({required bool isOneItemChecked})
-  {
-    if (isOneItemChecked && !_headingStyleUnderlined) {      
+  // Switches the heading decoration if a checkbox is checked.
+  void switchCustomHeadingDecorationIfRelevant({
+    required bool isOneItemChecked,
+  }) {
+    if (isOneItemChecked && !_headingStyleUnderlined) {
       setState(() {
-        _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.underline);
+        _headerStyle = _headerStyle!.copyWith(
+          decoration: TextDecoration.underline,
+        );
       });
-      
+
       _headingStyleUnderlined = true;
-    }
-    else if (!isOneItemChecked){
+    } else if (!isOneItemChecked) {
       setState(() {
         _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.none);
       });
@@ -85,16 +79,16 @@ class CustomHeadingState extends State<CustomHeading>
 
   // Used in CAForm.
   // Switches the heading decoration if a text field is used.
-  void switchCustomHeadingDecorationIfTextFieldUsed(String value)
-  {
+  void switchCustomHeadingDecorationIfTextFieldUsed(String value) {
     if (!_headingStyleUnderlined && value.trim() != "") {
       setState(() {
-        _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.underline);
+        _headerStyle = _headerStyle!.copyWith(
+          decoration: TextDecoration.underline,
+        );
       });
-      
+
       _headingStyleUnderlined = true;
-    }
-    else if (_headingStyleUnderlined && value.trim() == "") {
+    } else if (_headingStyleUnderlined && value.trim() == "") {
       setState(() {
         _headerStyle = _headerStyle!.copyWith(decoration: TextDecoration.none);
       });
@@ -103,8 +97,11 @@ class CustomHeadingState extends State<CustomHeading>
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return CustomFocusableText(text: widget.headingText, textStyle: _headerStyle!, textAlignment: widget.headingAlignment);
+  Widget build(BuildContext context) {
+    return CustomFocusableText(
+      text: widget.headingText,
+      textStyle: _headerStyle!,
+      textAlignment: widget.headingAlignment,
+    );
   }
 }

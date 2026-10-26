@@ -3,7 +3,9 @@ import "dart:ui";
 
 // import "package:flutter/rendering.dart";
 import "package:flutter/services.dart";
-import "package:flutter_localizations/flutter_localizations.dart"; // https://docs.flutter.dev/ui/internationalization
+import "package:flutter_localizations/flutter_localizations.dart"
+    hide
+        GlobalMaterialLocalizations; // https://docs.flutter.dev/ui/internationalization
 
 import "package:material_ui/material_ui.dart";
 
@@ -13,127 +15,116 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/homepage.dart";
 
-void main() async
-{
+void main() async {
   // To help debug the layout
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
 
   // On mobile: keeping the app in portrait mode for usability
-  if (Platform.isAndroid || Platform.isIOS)
-  {
-    await SystemChrome.setPreferredOrientations
-    ([
-      DeviceOrientation.portraitUp,   
-      DeviceOrientation.portraitDown
+  if (Platform.isAndroid || Platform.isIOS) {
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
   }
-  
+
   runApp(const GPSapp());
 }
 
-class GPSapp extends StatefulWidget 
-{
+class GPSapp extends StatefulWidget {
   const GPSapp({super.key});
   @override
   State<GPSapp> createState() => _GPSappState();
 }
 
-class _GPSappState extends State<GPSapp> 
-{
+class _GPSappState extends State<GPSapp> {
   // to wait on the file names loading
   var areFileNamesLoading = true;
 
   @override
   void initState() {
     super.initState();
-    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSapp");
 
     // Getting the stored file names at start on mobile
-    if (Platform.isAndroid || Platform.isIOS)
-    {
+    if (Platform.isAndroid || Platform.isIOS) {
       du.getStoredFileNamesOnMobile();
       setState(() {
         areFileNamesLoading = false;
       });
-    }   
+    }
     // no file names to load on desktop
-    else
-    {
+    else {
       areFileNamesLoading = false;
-    } 
-    
+    }
   }
   // ─── LOCALE related data and methods ───────────────────────────────────────
 
   // Getting the locale from the platform
   Locale? _currentLocale = PlatformDispatcher.instance.locale;
   List<String> availableTranslationsCodes = ["fr", "fr_fr", "en", "en_us"];
-  
+
   // Method used to set a new locale value
-  Future<void> _setLocale(Locale newLocale) async
-  {
-    if (newLocale != _currentLocale) 
-    {
-      setState(() {        
+  Future<void> _setLocale(Locale newLocale) async {
+    if (newLocale != _currentLocale) {
+      setState(() {
         _currentLocale = newLocale;
-        if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: _setLocale: new locale: $newLocale");
+        if (runtimeDataDebug)
+          pu.printd("Runtime Data: GPSapp: _setLocale: new locale: $newLocale");
       });
     }
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    if (!availableTranslationsCodes.contains(_currentLocale!.languageCode.toLowerCase())) 
-    {
-      if (runtimeDataDebug) pu.printd("availableTranslationsCodes: $availableTranslationsCodes");
-      if (runtimeDataDebug) pu.printd("_currentLocale!.languageCode.toLowerCase(): ${_currentLocale!.languageCode.toLowerCase()}");
-      if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: Translations not available for ${_currentLocale!.languageCode}. Defaulting to English.");
-      _currentLocale = const Locale("en");      
+  Widget build(BuildContext context) {
+    if (!availableTranslationsCodes.contains(
+      _currentLocale!.languageCode.toLowerCase(),
+    )) {
+      if (runtimeDataDebug)
+        pu.printd("availableTranslationsCodes: $availableTranslationsCodes");
+      if (runtimeDataDebug)
+        pu.printd(
+          "_currentLocale!.languageCode.toLowerCase(): ${_currentLocale!.languageCode.toLowerCase()}",
+        );
+      if (runtimeDataDebug)
+        pu.printd(
+          "Runtime Data: GPSapp: Translations not available for ${_currentLocale!.languageCode}. Defaulting to English.",
+        );
+      _currentLocale = const Locale("en");
     }
-    if (runtimeDataDebug) pu.printd("Runtime Data: GPSapp: current locale language code: ${_currentLocale!.languageCode}");
-    
+    if (runtimeDataDebug)
+      pu.printd(
+        "Runtime Data: GPSapp: current locale language code: ${_currentLocale!.languageCode}",
+      );
 
-    return      
-      MaterialApp
-      (
+    return MaterialApp(
       // To visualize the semantics tree
       // showSemanticsDebugger: true,
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       localizationsDelegates: const [
         AppLocalizations.delegate,
-
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      // "By default only the American English locale is supported. 
+      // "By default only the American English locale is supported.
       // Apps should configure this list to match the locales they support."
-      supportedLocales: const
-      [
+      supportedLocales: const [
         Locale("en"), // English
         Locale("fr"), // French
       ],
 
       locale: _currentLocale, // to be able to swap translated strings,
-      home: 
-      SafeArea
-      (
-        child: 
-        (areFileNamesLoading)
-        // Waiting on the stored file names
-        ?
-          const RepaintBoundary(child: CircularProgressIndicator())
-        :
-        // Loading the homepage when done
-          HomePage
-          (
-            onUpdateLocaleCallbackFunction: _setLocale,
-          ),
+      home: SafeArea(
+        child: (areFileNamesLoading)
+            // Waiting on the stored file names
+            ? const RepaintBoundary(child: CircularProgressIndicator())
+            :
+              // Loading the homepage when done
+              HomePage(onUpdateLocaleCallbackFunction: _setLocale),
       ),
     );
   }

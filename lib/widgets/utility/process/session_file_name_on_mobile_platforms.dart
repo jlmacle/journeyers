@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
 
 import "package:shared_preferences/shared_preferences.dart";
@@ -11,17 +11,17 @@ import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
-import "package:journeyers/utils/generic/text_fields/text_field_utils.dart" as tfu_gen;
+import "package:journeyers/utils/generic/text_fields/text_field_utils.dart"
+    as tfu_gen;
 import "package:journeyers/utils/project_specific/text_fields/text_field_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/custom_text_field_sanitized_and_checked_using_a_blacklist.dart";
 
 /// {@category Utility widgets}
 /// {@category Process}
 /// A widget used for selecting a folder to save session files, defining a file name, and saving a session file, on mobile platforms.
-class SessionFileNameOnMobilePlatforms extends StatefulWidget 
-{
-  /// A boolean used to override blacklist check temporarily 
-  /// (e.g. if a file name has been pre-loaded for a session data edition, 
+class SessionFileNameOnMobilePlatforms extends StatefulWidget {
+  /// A boolean used to override blacklist check temporarily
+  /// (e.g. if a file name has been pre-loaded for a session data edition,
   /// to be able to save data using the same file name).
   final bool isBlacklistingToBeOverridenTemporarily;
 
@@ -30,7 +30,7 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
 
   /// The context of the text field (nullable, potentially context analysis or group problem-solving).
   final String? textFieldContext;
-  
+
   /// A file name value used at editing time.
   final String fileNameWithoutExtensionWhenEdition;
 
@@ -41,13 +41,12 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
   final ValueChanged<String> onFileNameSubmittedProcessCallbackFunction;
 
   /// A callback function called to save session data and metadata.
-  final VoidCallback parentCallbackFunctionToSaveDataAndMetadata; 
+  final VoidCallback parentCallbackFunctionToSaveDataAndMetadata;
 
   /// A parameter used for different reasons, e.g. to pass a file path related to a file name being loaded.
   final Object? versatileParameter;
 
-  const SessionFileNameOnMobilePlatforms
-  ({
+  const SessionFileNameOnMobilePlatforms({
     super.key,
     this.isBlacklistingToBeOverridenTemporarily = false,
     this.isExistentFileNamePreLoaded = false,
@@ -56,17 +55,18 @@ class SessionFileNameOnMobilePlatforms extends StatefulWidget
     required this.fileExtension,
     required this.onFileNameSubmittedProcessCallbackFunction,
     required this.parentCallbackFunctionToSaveDataAndMetadata,
-    this.versatileParameter
+    this.versatileParameter,
   });
 
   @override
-  State<SessionFileNameOnMobilePlatforms> createState() => _SessionFileNameOnMobilePlatformsState();
+  State<SessionFileNameOnMobilePlatforms> createState() =>
+      _SessionFileNameOnMobilePlatformsState();
 }
 
-class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobilePlatforms> 
-{
-  final TextEditingController _fileNameTec = .new();  
-  
+class _SessionFileNameOnMobilePlatformsState
+    extends State<SessionFileNameOnMobilePlatforms> {
+  final TextEditingController _fileNameTec = .new();
+
   // ─── SMARTPHONES CHANNELS ───────────────────────────────────────
   // Android: storage access framework (reading/saving files)
   static const _platformAndroid = MethodChannel("dev.journeyers/saf");
@@ -74,20 +74,21 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
   static const _platformIOS = MethodChannel("dev.journeyers/iossaf");
 
   // ─── PREFERENCES related data and methods ───────────────────────────────────────
-  String _applicationFolderPath = "";  
+  String _applicationFolderPath = "";
 
   // method used to get the set folder path for the application
-  void _getApplicationFolderPath() async
-  { 
+  void _getApplicationFolderPath() async {
     var prefs = await SharedPreferences.getInstance();
-    await prefs.reload(); // necessary to have access to the newly set preference
+    await prefs
+        .reload(); // necessary to have access to the newly set preference
 
     String? folderPathData = await rtdu.getApplicationFolderPath();
 
-    logd("Path to the application folder selected by the user: $folderPathData");
-    
-    setState(() 
-    {
+    logd(
+      "Path to the application folder selected by the user: $folderPathData",
+    );
+
+    setState(() {
       _applicationFolderPath = folderPathData ?? "";
     });
   }
@@ -97,7 +98,8 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
     super.didUpdateWidget(oldWidget);
 
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("SessionFileNameOnMobilePlatforms: didUpdateWidget");
+    if (widgetSequenceDebug)
+      pu.printd("SessionFileNameOnMobilePlatforms: didUpdateWidget");
   }
 
   @override
@@ -112,13 +114,15 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
     _getApplicationFolderPath();
 
     // Edited file name value if relevant
-    if (editDebug && widget.fileNameWithoutExtensionWhenEdition != "") pu.printd("Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWithoutExtensionWhenEdition}");
+    if (editDebug && widget.fileNameWithoutExtensionWhenEdition != "")
+      pu.printd(
+        "Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWithoutExtensionWhenEdition}",
+      );
     _fileNameTec.text = widget.fileNameWithoutExtensionWhenEdition;
   }
 
   @override
-  void dispose()
-  {
+  void dispose() {
     _fileNameTec.dispose();
     super.dispose();
   }
@@ -128,62 +132,63 @@ class _SessionFileNameOnMobilePlatformsState extends State<SessionFileNameOnMobi
     // Getting the localized strings
     LocalizedUtilsStrings lus = .new(context);
 
-    return 
-    _applicationFolderPath == ""
-    // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
-    ? ElevatedButton(
-      onPressed: () async 
-      {        
-        String? result;
-        if (Platform.isAndroid)
-          {result = await _platformAndroid.invokeMethod("openDirectory");}
-        else if (Platform.isIOS)
-          {result = await _platformIOS.invokeMethod("openDirectory");}
-        
-        if (result != null) {
-          // Refreshing local state with the new path/bookmark
-          _getApplicationFolderPath(); 
+    return _applicationFolderPath == ""
+        // Triggers UIDocumentPicker on iOS via the AppDelegate implementation
+        ? ElevatedButton(
+            onPressed: () async {
+              String? result;
+              if (Platform.isAndroid) {
+                result = await _platformAndroid.invokeMethod("openDirectory");
+              } else if (Platform.isIOS) {
+                result = await _platformIOS.invokeMethod("openDirectory");
+              }
 
-        // Retrieving the stored file names once the path to the folder is defined
-        await du.getStoredFileNamesOnMobile();  
-        }
-      },
-      child: Text
-      (
-        textAlign: TextAlign.center, 
-        AppLocalizations.of(context)?.folder_picker_on_mobile ?? "Issue with the label for folder selection/creation, for app storage",
-      ),
-    )
-    // Text field used to enter the file name
-    : TextFieldSanitizedAndCheckedUsingABlackList
-    (
-      textFieldStartValue: widget.fileNameWithoutExtensionWhenEdition,
-      textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
-      textFieldStyle: commonTextFieldStyle, 
-      textFieldHint: lus.fileNameTextFieldHint, 
-      textFieldHintStyle: commonTextFieldHintStyle, 
-      errorMessageStyle: commonTextFieldErrorMessageStyle, 
-      onTextFieldValueSubmittedCallbackFunction: (value) async
-      { 
-        widget.onFileNameSubmittedProcessCallbackFunction(value);
-      
-        if (value.isNotEmpty)
-        { // Saving data 
-          widget.parentCallbackFunctionToSaveDataAndMetadata();
-          await rtdu.reload();
-        }
-      }, 
-     
-      stringSanitizerBundlesErrorsMapping: TextFieldStringSanitizerBundlesErrorsMappings.stringSanitizerBundlesErrorsMappingForFileNames,
-      blacklistingFunctionsErrorsMapping: 
-      (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV) 
-        ? TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForCSVFileNames
-        // otherwise .txt
-        : TextFieldStringSanitizerBundlesErrorsMappings.blacklistingFunctionsErrorsMappingForTXTFileNames,
-      // for the file path
-      versatileParameterIsEmptyStringByDefault: widget.versatileParameter,
-      isExistentFileNamePreLoaded: widget.isExistentFileNamePreLoaded,
-      textFieldContext: widget.textFieldContext,
-    );
+              if (result != null) {
+                // Refreshing local state with the new path/bookmark
+                _getApplicationFolderPath();
+
+                // Retrieving the stored file names once the path to the folder is defined
+                await du.getStoredFileNamesOnMobile();
+              }
+            },
+            child: Text(
+              textAlign: TextAlign.center,
+              AppLocalizations.of(context)?.folder_picker_on_mobile ??
+                  "Issue with the label for folder selection/creation, for app storage",
+            ),
+          )
+        // Text field used to enter the file name
+        : TextFieldSanitizedAndCheckedUsingABlackList(
+            textFieldStartValue: widget.fileNameWithoutExtensionWhenEdition,
+            textFieldCounter: tfu_gen.TextFieldUtils.counterAbsent,
+            textFieldStyle: commonTextFieldStyle,
+            textFieldHint: lus.fileNameTextFieldHint,
+            textFieldHintStyle: commonTextFieldHintStyle,
+            errorMessageStyle: commonTextFieldErrorMessageStyle,
+            onTextFieldValueSubmittedCallbackFunction: (value) async {
+              widget.onFileNameSubmittedProcessCallbackFunction(value);
+
+              if (value.isNotEmpty) {
+                // Saving data
+                widget.parentCallbackFunctionToSaveDataAndMetadata();
+                await rtdu.reload();
+              }
+            },
+
+            stringSanitizerBundlesErrorsMapping:
+                TextFieldStringSanitizerBundlesErrorsMappings
+                    .stringSanitizerBundlesErrorsMappingForFileNames,
+            blacklistingFunctionsErrorsMapping:
+                (widget.fileExtension == tfu_gen.TextFieldUtils.extensionCSV)
+                ? TextFieldStringSanitizerBundlesErrorsMappings
+                      .blacklistingFunctionsErrorsMappingForCSVFileNames
+                // otherwise .txt
+                : TextFieldStringSanitizerBundlesErrorsMappings
+                      .blacklistingFunctionsErrorsMappingForTXTFileNames,
+            // for the file path
+            versatileParameterIsEmptyStringByDefault: widget.versatileParameter,
+            isExistentFileNamePreLoaded: widget.isExistentFileNamePreLoaded,
+            textFieldContext: widget.textFieldContext,
+          );
   }
 }

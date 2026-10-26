@@ -1,5 +1,4 @@
-
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:share_plus/share_plus.dart";
 
@@ -20,8 +19,7 @@ String tmpFilePath = "";
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling a session data.
-class SessionsListItem extends StatefulWidget 
-{
+class SessionsListItem extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
@@ -44,7 +42,8 @@ class SessionsListItem extends StatefulWidget
   final VoidCallback onEditPressedCallbackFunction;
 
   /// A callback function called when session data is retrieved before edition.
-  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType
+  onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
   final OnKeywordsUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction;
@@ -70,20 +69,18 @@ class SessionsListItem extends StatefulWidget
   State<SessionsListItem> createState() => _SessionsListItemState();
 }
 
-class _SessionsListItemState extends State<SessionsListItem> 
-{
+class _SessionsListItemState extends State<SessionsListItem> {
   final TextEditingController _kwsEditTec = .new();
 
   // Data related to deleting ideas from the overlay
   // List of ideas present before deletion
   final List<String> _ideasList = [];
 
-  bool _previewEditMode = false; 
+  bool _previewEditMode = false;
 
   // To clean
   // Method used to update the keywords
-  void _onKeywordsUpdated(String? filePath) async
-  {
+  void _onKeywordsUpdated(String? filePath) async {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedKeywords = _kwsEditTec.text
         .split(",")
@@ -92,24 +89,29 @@ class _SessionsListItemState extends State<SessionsListItem>
         .toSet();
 
     logd("ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
-    
+
     // Calling the parent callback function for state update
-    await widget.onKeywordsUpdatedCallbackFunction(filePath: filePath, updatedKeywords: updatedKeywords);
+    await widget.onKeywordsUpdatedCallbackFunction(
+      filePath: filePath,
+      updatedKeywords: updatedKeywords,
+    );
 
     if (!mounted) return;
     Navigator.of(context).pop();
   }
 
   // Method used to update the temporary file path used for session data sharing
-  void _updateTmpFilePath(String tmpFilePathFromPreview)
-  {    
+  void _updateTmpFilePath(String tmpFilePathFromPreview) {
     tmpFilePath = tmpFilePathFromPreview;
 
-    if (sessionDataDebug) pu.printd("Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
+    if (sessionDataDebug)
+      pu.printd(
+        "Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview",
+      );
   }
 
-  @override void dispose() 
-  {
+  @override
+  void dispose() {
     _kwsEditTec.dispose();
     super.dispose();
   }
@@ -125,29 +127,28 @@ class _SessionsListItemState extends State<SessionsListItem>
   @override
   void initState() {
     super.initState();
-                                                    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("SessionsListItem");
   }
-  
+
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     // Gets the title
     final String sessionTitle = widget.sessionMetadata[DashboardUtils.keyTitle];
     // Modifies the title according to context (ca or gps)
-    final String displayTitle = (widget.dashboardContext == DashboardUtils.gpsContext)
+    final String displayTitle =
+        (widget.dashboardContext == DashboardUtils.gpsContext)
         ? "$sessionTitle${AppLocalizations.of(context)?.gps_title_suffix ?? "Issue with the title suffix for a problem-solving session."}"
         : sessionTitle;
 
     // Sorting keywords for display
-    final Set<String> sortedKeywords = 
-    Set<String>.from(widget.sessionMetadata[DashboardUtils.keyKeywords])
-    ..toList().sort((a, b) 
-    {
-        int comparison = a.toLowerCase().compareTo(b.toLowerCase());
-        return comparison == 0 ? b.compareTo(a) : comparison;
-    });
+    final Set<String> sortedKeywords =
+        Set<String>.from(widget.sessionMetadata[DashboardUtils.keyKeywords])
+          ..toList().sort((a, b) {
+            int comparison = a.toLowerCase().compareTo(b.toLowerCase());
+            return comparison == 0 ? b.compareTo(a) : comparison;
+          });
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -167,41 +168,53 @@ class _SessionsListItemState extends State<SessionsListItem>
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [ 
-                      // Title                     
+                    children: [
+                      // Title
                       GestureDetector(
                         onTap: widget.onEditTitleCallbackFunction,
                         child: Text(
                           displayTitle,
                           key: Key("session-title-${widget.sessionDataIndex}"),
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                       // Session date
                       Text(
                         "(${widget.sessionMetadata[DashboardUtils.keyDate]})",
                         key: Key("session-date-${widget.sessionDataIndex}"),
-                        style: const TextStyle(fontSize: 14, color: Colors.grey),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
                         textAlign: .left,
-                      ),                 
+                      ),
                       const SizedBox(height: 4),
                       // For the edition of the keywords
                       GestureDetector(
-                        onTap: () => _showKeywordsEditSheet
-                        (
+                        onTap: () => _showKeywordsEditSheet(
                           context: context,
-                          dashboardContext: widget.dashboardContext,                          
-                          currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
-                          filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
+                          dashboardContext: widget.dashboardContext,
+                          currentKeywords: widget
+                              .sessionMetadata[DashboardUtils.keyKeywords],
+                          filePath: widget
+                              .sessionMetadata[DashboardUtils.keyFilePath],
                           kwsEditController: _kwsEditTec,
-                          onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                          onKeywordsUpdated: _onKeywordsUpdated
-                          ),
+                          onKeywordsUpdatedCallbackFunction:
+                              widget.onKeywordsUpdatedCallbackFunction,
+                          onKeywordsUpdated: _onKeywordsUpdated,
+                        ),
                         child: Text(
                           "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"} ${sortedKeywords.join(", ")}",
-                          key: Key("session-keywords-${widget.sessionDataIndex}"),
-                          style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                          key: Key(
+                            "session-keywords-${widget.sessionDataIndex}",
+                          ),
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 13,
+                          ),
                         ),
                       ),
                     ],
@@ -219,37 +232,56 @@ class _SessionsListItemState extends State<SessionsListItem>
                     // To preview the session data
                     IconButton(
                       icon: const Icon(Icons.find_in_page_rounded),
-                      onPressed: () => _showPreviewOverlay(context, widget.dashboardContext, widget.sessionMetadata, _updateTmpFilePath),
-                      tooltip: AppLocalizations.of(context)?.l10n_preview ?? "Issue with the l10n for the 'Preview' tooltip",
+                      onPressed: () => _showPreviewOverlay(
+                        context,
+                        widget.dashboardContext,
+                        widget.sessionMetadata,
+                        _updateTmpFilePath,
+                      ),
+                      tooltip:
+                          AppLocalizations.of(context)?.l10n_preview ??
+                          "Issue with the l10n for the 'Preview' tooltip",
                     ),
-                    // To edit the session file data                    
+                    // To edit the session file data
                     IconButton(
                       icon: const Icon(Icons.edit_document),
-                      onPressed: widget.onEditPressedCallbackFunction,                      
-                      tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip",
+                      onPressed: widget.onEditPressedCallbackFunction,
+                      tooltip:
+                          AppLocalizations.of(
+                            context,
+                          )?.dashboard_tooltip_edit_session_data ??
+                          "Issue with the l10n for the 'Edit session data' tooltip",
                     ),
                     // To edit the keywords
                     IconButton(
                       icon: const Icon(Icons.style_rounded),
-                      onPressed:  () => _showKeywordsEditSheet
-                      (
+                      onPressed: () => _showKeywordsEditSheet(
                         context: context,
                         dashboardContext: widget.dashboardContext,
-                        currentKeywords: widget.sessionMetadata[DashboardUtils.keyKeywords],
-                        filePath: widget.sessionMetadata[DashboardUtils.keyFilePath],
+                        currentKeywords:
+                            widget.sessionMetadata[DashboardUtils.keyKeywords],
+                        filePath:
+                            widget.sessionMetadata[DashboardUtils.keyFilePath],
                         kwsEditController: _kwsEditTec,
-                        onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
-                        onKeywordsUpdated: _onKeywordsUpdated
+                        onKeywordsUpdatedCallbackFunction:
+                            widget.onKeywordsUpdatedCallbackFunction,
+                        onKeywordsUpdated: _onKeywordsUpdated,
                       ),
-                      tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_keywords ?? "Issue with the l10n for the 'Edit Keywords' tooltip",
+                      tooltip:
+                          AppLocalizations.of(
+                            context,
+                          )?.dashboard_tooltip_edit_keywords ??
+                          "Issue with the l10n for the 'Edit Keywords' tooltip",
                     ),
                   ],
                 ),
                 // To delete session metadata and file
-                IconButton(                  
+                IconButton(
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
-                  tooltip: AppLocalizations.of(context)?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip",
+                  tooltip:
+                      AppLocalizations.of(context)?.dashboard_tooltip_delete ??
+                      "Issue with the l10n for the 'Delete data' tooltip",
                 ),
               ],
             ),
@@ -259,135 +291,147 @@ class _SessionsListItemState extends State<SessionsListItem>
     );
   }
 
-// Method used to display an overlay with a session data preview. 
-void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<String,dynamic> sessionMetadata, ValueChanged<String> updateTmpFilePath) async
-{
-  String title = sessionMetadata[DashboardUtils.keyTitle];
-  await showGeneralDialog
-  (
-    context: context,
-    transitionDuration: const Duration(milliseconds: 300),
-    pageBuilder: (context, anim1, anim2) 
-    {
-      // Moving StatefulBuilder to wrap the Scaffold so setLocalState is available everywhere inside
-      return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setLocalState) 
-        { 
-          return Scaffold
-          (
-            appBar: AppBar
-            (
-              centerTitle: true, 
-              title: 
-              Text
-              (
-                textAlign: TextAlign.center, maxLines: 20, overflow: TextOverflow.visible, 
-                softWrap: true, title, style: previewTitleStyle
-              ),
-              // Left side: Edit and Share Buttons
-              leadingWidth: 100,
-              leading: Row(
-                children: [
-                  IconButton
-                  (
-                    tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip",
-                    icon: const Icon(Icons.edit),
-                    color: appBarWhite,
-                    onPressed: () async
-                    {    
+  // Method used to display an overlay with a session data preview.
+  void _showPreviewOverlay(
+    BuildContext context,
+    String dashboardContext,
+    Map<String, dynamic> sessionMetadata,
+    ValueChanged<String> updateTmpFilePath,
+  ) async {
+    String title = sessionMetadata[DashboardUtils.keyTitle];
+    await showGeneralDialog(
+      context: context,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, anim1, anim2) {
+        // Moving StatefulBuilder to wrap the Scaffold so setLocalState is available everywhere inside
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setLocalState) {
+            return Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(
+                  textAlign: TextAlign.center,
+                  maxLines: 20,
+                  overflow: TextOverflow.visible,
+                  softWrap: true,
+                  title,
+                  style: previewTitleStyle,
+                ),
+                // Left side: Edit and Share Buttons
+                leadingWidth: 100,
+                leading: Row(
+                  children: [
+                    IconButton(
+                      tooltip:
+                          AppLocalizations.of(
+                            context,
+                          )?.dashboard_tooltip_edit_session_data ??
+                          "Issue with the l10n for the 'Edit session data' tooltip",
+                      icon: const Icon(Icons.edit),
+                      color: appBarWhite,
+                      onPressed: () async {
+                        _previewEditMode = true;
 
-                      _previewEditMode = true;
+                        if (widget.dashboardContext ==
+                            DashboardUtils.caContext) {
+                          // Starts the session data editing
+                          retrieveCASessionData(
+                            context: context,
+                            dashboardContext: DashboardUtils.caContext,
+                            filePathWhenEdition:
+                                sessionMetadata[DashboardUtils.keyFilePath],
+                            onRetrievedCASessionDataBeforeEditionCallbackFunction:
+                                widget
+                                    .onRetrievedSessionDataBeforeEditionCallbackFunction,
+                          );
+                          // Closes the modal preview overlay
+                          Navigator.of(context).pop();
+                        } else if (widget.dashboardContext ==
+                            DashboardUtils.gpsContext) {
+                          retrieveGPSSessionData(
+                            dashboardContext: dashboardContext,
+                            filePathWhenEdition:
+                                sessionMetadata[DashboardUtils.keyFilePath],
+                            onRetrievedGPSSessionDataBeforeEditionCallbackFunction:
+                                widget
+                                    .onRetrievedSessionDataBeforeEditionCallbackFunction,
+                          );
 
-                      if (widget.dashboardContext == DashboardUtils.caContext) 
-                      {                
-                        // Starts the session data editing
-                        retrieveCASessionData
-                        (
-                          context: context,
-                          dashboardContext: DashboardUtils.caContext,
-                          filePathWhenEdition: sessionMetadata[DashboardUtils.keyFilePath], 
-                          onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
-                        );
-                        // Closes the modal preview overlay
-                        Navigator.of(context).pop();
-                      }
-                      else if (widget.dashboardContext == DashboardUtils.gpsContext) 
-                      {
-                        retrieveGPSSessionData
-                        (
-                          dashboardContext: dashboardContext, 
-                          filePathWhenEdition: sessionMetadata[DashboardUtils.keyFilePath], 
-                          onRetrievedGPSSessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
-                        );
+                          // Closes the modal preview overlay
+                          Navigator.of(context).pop();
+                        } else {
+                          throw Exception(
+                            "Unexpected context: ${widget.dashboardContext}",
+                          );
+                        }
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.share),
+                      color: appBarWhite,
+                      onPressed: () {
+                        _shareSession(context, sessionMetadata, tmpFilePath);
+                      },
+                      tooltip:
+                          AppLocalizations.of(
+                            context,
+                          )?.dashboard_preview_share_session_data_tooltip ??
+                          "Issue with the l10n for the preview 'Share session data' tooltip",
+                    ),
+                  ],
+                ),
 
-                        // Closes the modal preview overlay
-                        Navigator.of(context).pop();
-                      }
-                      else 
-                      {
-                        throw Exception("Unexpected context: ${widget.dashboardContext}");
-                      }
-                    },
-                    
-                  ),
+                // Right side: Close Button
+                actions: [
                   IconButton(
-                    icon: const Icon(Icons.share),
+                    tooltip:
+                        AppLocalizations.of(
+                          context,
+                        )?.dashboard_preview_close_preview_tooltip ??
+                        "Issue with the l10n for the preview 'Close the preview' tooltip",
+                    icon: const Icon(Icons.close),
                     color: appBarWhite,
-                    onPressed: () 
-                    { _shareSession(context, sessionMetadata, tmpFilePath); },
-                    tooltip: AppLocalizations.of(context)?.dashboard_preview_share_session_data_tooltip ?? "Issue with the l10n for the preview 'Share session data' tooltip",
+                    onPressed: () async {
+                      if (!context.mounted) return;
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ],
               ),
-              
-              // Right side: Close Button
-              actions: [
-                IconButton(
-                  tooltip: AppLocalizations.of(context)?.dashboard_preview_close_preview_tooltip ?? "Issue with the l10n for the preview 'Close the preview' tooltip",
-                  icon: const Icon(Icons.close),
-                  color: appBarWhite,
-                  onPressed: () async
-                  {                    
-                    if (!context.mounted) return;
-                    Navigator.of(context).pop();
-                  },
-                  
-                ),
-              ],
-            ),
-            body: SafeArea
-            (
-              child: SingleChildScrollView(
-                key: const Key("context-analysis-preview-scrollview"),
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: 
-                  (sessionMetadata[DashboardUtils.keyFilePath] != null)
-                  ?
-                    (dashboardContext == DashboardUtils.caContext)
-                    ? CAPreview(
-                        context: context,
-                        pathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
-                        caPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
-                      )
-                    : GPSPreview(
-                        gpsPreviewPathToStoredData: sessionMetadata[DashboardUtils.keyFilePath], 
-                        gpsPreviewIdeasStored: _ideasList,                        
-                        gpsPreviewCallbackFunctionToUpdateTmpFilePath: updateTmpFilePath,
-                      )
-                  :
-                    const Text("Null file path"),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  key: const Key("context-analysis-preview-scrollview"),
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: (sessionMetadata[DashboardUtils.keyFilePath] != null)
+                        ? (dashboardContext == DashboardUtils.caContext)
+                              ? CAPreview(
+                                  context: context,
+                                  pathToStoredData:
+                                      sessionMetadata[DashboardUtils
+                                          .keyFilePath],
+                                  caPreviewCallbackFunctionToUpdateTmpFilePath:
+                                      updateTmpFilePath,
+                                )
+                              : GPSPreview(
+                                  gpsPreviewPathToStoredData:
+                                      sessionMetadata[DashboardUtils
+                                          .keyFilePath],
+                                  gpsPreviewIdeasStored: _ideasList,
+                                  gpsPreviewCallbackFunctionToUpdateTmpFilePath:
+                                      updateTmpFilePath,
+                                )
+                        : const Text("Null file path"),
+                  ),
                 ),
               ),
-            )
-          );
-        }
-      );
-    }
-  );
-}
- 
+            );
+          },
+        );
+      },
+    );
+  }
 }
 
 // TODO: code to move
@@ -396,12 +440,12 @@ void _showPreviewOverlay(BuildContext context, String dashboardContext, Map<Stri
 Future<void> _shareSession(
   BuildContext context,
   Map<String, dynamic> sessionMetadata,
-  String tmpFilePath
-) async
-{
-  final String title     = sessionMetadata[DashboardUtils.keyTitle]    ?? "";
-  final String date      = sessionMetadata[DashboardUtils.keyDate]     ?? "";
-  final List<dynamic> keywords = sessionMetadata[DashboardUtils.keyKeywords] ?? [];
+  String tmpFilePath,
+) async {
+  final String title = sessionMetadata[DashboardUtils.keyTitle] ?? "";
+  final String date = sessionMetadata[DashboardUtils.keyDate] ?? "";
+  final List<dynamic> keywords =
+      sessionMetadata[DashboardUtils.keyKeywords] ?? [];
 
   final String shareText =
       "Session: $title\n"
@@ -409,72 +453,73 @@ Future<void> _shareSession(
       "Keywords: ${keywords.join(", ")}";
 
   final ShareParams params = ShareParams(
-          subject: title,
-          text: shareText,
-          files: [XFile(tmpFilePath)],
-        );
+    subject: title,
+    text: shareText,
+    files: [XFile(tmpFilePath)],
+  );
 
   await SharePlus.instance.share(params);
 }
 
 // todo: to move/clean
-void _showKeywordsEditSheet
-({
-  required BuildContext context, required String dashboardContext, 
-  required List<dynamic> currentKeywords, required String? filePath, 
+void _showKeywordsEditSheet({
+  required BuildContext context,
+  required String dashboardContext,
+  required List<dynamic> currentKeywords,
+  required String? filePath,
   required TextEditingController kwsEditController,
-  required OnKeywordsUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction,
-  required ValueChanged<String?> onKeywordsUpdated
-
+  required OnKeywordsUpdatedCallbackFunctionType
+  onKeywordsUpdatedCallbackFunction,
+  required ValueChanged<String?> onKeywordsUpdated,
 }) {
   // Converting list to a comma-separated string for editing
-  kwsEditController.text = currentKeywords.join(", "); 
-  
-  showModalBottomSheet
-  (
+  kwsEditController.text = currentKeywords.join(", ");
+
+  showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     isScrollControlled: true,
-    builder: (context) => Padding
-    (
-      padding: EdgeInsets.only
-      (
+    builder: (context) => Padding(
+      padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 20, right: 20, top: 20,
+        left: 20,
+        right: 20,
+        top: 20,
       ),
-      child: Column
-      (
+      child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: 
-        [
-          TextField
-          (
+        children: [
+          TextField(
             key: const Key("kwsDashboardEditField"),
             controller: kwsEditController,
             autofocus: true,
-            decoration: InputDecoration
-            (
-              labelText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_label_text ?? "Issue with the l10n for the 'Keywords Edition' label text", 
+            decoration: InputDecoration(
+              labelText:
+                  AppLocalizations.of(
+                    context,
+                  )?.dashboard_edit_keywords_sheet_label_text ??
+                  "Issue with the l10n for the 'Keywords Edition' label text",
               labelStyle: const TextStyle(color: Colors.black),
-              hintText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_text_field_hint ?? "Issue with the l10n for the 'Keywords Edition' text field hint",
+              hintText:
+                  AppLocalizations.of(
+                    context,
+                  )?.dashboard_edit_keywords_sheet_text_field_hint ??
+                  "Issue with the l10n for the 'Keywords Edition' text field hint",
             ),
-            onSubmitted: (_) async => onKeywordsUpdated(filePath)
-          ),       
+            onSubmitted: (_) async => onKeywordsUpdated(filePath),
+          ),
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: () async =>  onKeywordsUpdated(filePath),
-            child: 
-            Text
-              (
-                AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save_button text",  
-                style: const TextStyle(color: Colors.black)
-              ),
+            onPressed: () async => onKeywordsUpdated(filePath),
+            child: Text(
+              AppLocalizations.of(context)?.save_button_text ??
+                  "Issue with the l10n for the save_button text",
+              style: const TextStyle(color: Colors.black),
+            ),
           ),
           const SizedBox(height: 20),
         ],
       ),
     ),
   );
-
 }
-

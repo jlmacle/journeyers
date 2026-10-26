@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
@@ -8,16 +8,14 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling the sorting by date of session data.
-class DashboardSortingByDate extends StatefulWidget 
-{
+class DashboardSortingByDate extends StatefulWidget {
   /// List containing the sessions to sort.
   final List<dynamic>? sessionsMetadataFilteredToSort;
 
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
-  const DashboardSortingByDate
-  ({
+  const DashboardSortingByDate({
     super.key,
     required this.sessionsMetadataFilteredToSort,
     required this.dashboardCallbackFunctionToRefreshTheSessionsList,
@@ -27,17 +25,14 @@ class DashboardSortingByDate extends StatefulWidget
   State<DashboardSortingByDate> createState() => DashboardSortingByDateState();
 }
 
-class DashboardSortingByDateState extends State<DashboardSortingByDate> 
-{
-  bool _isAscendingDate = false;   
+class DashboardSortingByDateState extends State<DashboardSortingByDate> {
+  bool _isAscendingDate = false;
 
   // Method used to sort session data by date
-  Future<void> _sortSessionsByDate() async
-  {
-    await sortSessionByDate
-    (
-      list: widget.sessionsMetadataFilteredToSort!, 
-      byAscendingDate: _isAscendingDate
+  Future<void> _sortSessionsByDate() async {
+    await sortSessionByDate(
+      list: widget.sessionsMetadataFilteredToSort!,
+      byAscendingDate: _isAscendingDate,
     );
     widget.dashboardCallbackFunctionToRefreshTheSessionsList();
   }
@@ -45,7 +40,7 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
   @override
   void initState() {
     super.initState();
-                                        
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("DashboardSortingByDate");
   }
@@ -55,36 +50,30 @@ class DashboardSortingByDateState extends State<DashboardSortingByDate>
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
-    return 
-    Semantics(
+    return Semantics(
       // To have the change voiced when the re-build occurs
       liveRegion: true,
-      label: "${lds.sortByDateLabel} (${_isAscendingDate ? "Newest first" : "Oldest first"})",
-      child:
-      TextButton.icon
-      (
-        onPressed: () async
-        {
-          _isAscendingDate = !_isAscendingDate;   
-          // Updating the widget     
-          setState((){});
+      label:
+          "${lds.sortByDateLabel} (${_isAscendingDate ? "Newest first" : "Oldest first"})",
+      child: TextButton.icon(
+        onPressed: () async {
+          _isAscendingDate = !_isAscendingDate;
+          // Updating the widget
+          setState(() {});
           // Sorting and updating the sessions list
           await _sortSessionsByDate();
         },
-        icon: Icon
-        (
+        icon: Icon(
           semanticLabel: "",
           _isAscendingDate ? Icons.arrow_upward : Icons.arrow_downward,
           color: Colors.black,
         ),
-        label: Text
-        (
+        label: Text(
           semanticsLabel: "",
           lds.sortByDateLabel,
           style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
         ),
-      )
-      
+      ),
     );
   }
 }

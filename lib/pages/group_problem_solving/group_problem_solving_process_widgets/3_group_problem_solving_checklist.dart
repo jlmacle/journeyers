@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -16,10 +16,10 @@ class GPSChecklist extends StatefulWidget {
   State<GPSChecklist> createState() => _GPSChecklistState();
 }
 
-class _GPSChecklistState extends State<GPSChecklist> {  
-
+class _GPSChecklistState extends State<GPSChecklist> {
   // Helper method to check if all items are completed
-  bool get _isAllChecked => checklistItems.values.every((element) => element == true);
+  bool get _isAllChecked =>
+      checklistItems.values.every((element) => element == true);
 
   late LocalizedGPSStrings lgps;
 
@@ -54,20 +54,17 @@ class _GPSChecklistState extends State<GPSChecklist> {
       lgps.checkListQuestion8: false,
       lgps.checkListQuestion9: false,
     };
-
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return 
-    GestureDetector(
+    return GestureDetector(
       onTap: () => _showChecklistOverlay(context),
       child: Container(
         decoration: BoxDecoration(
           // Logic: If all checked, color is white; otherwise, orangeShade900
           border: Border.all(
-            color: _isAllChecked ? Colors.transparent : rectangleColor, 
+            color: _isAllChecked ? Colors.transparent : rectangleColor,
             width: 5.0,
           ),
         ),
@@ -80,12 +77,12 @@ class _GPSChecklistState extends State<GPSChecklist> {
               child: Icon(Icons.checklist_rounded),
             ),
             Center(
-              child: Text
-              (
-                AppLocalizations.of(context)?.l10n_checklist ?? "Issue with the default title for the checklist-related widget.",
-                style: problemSolvingChecklistTitle
+              child: Text(
+                AppLocalizations.of(context)?.l10n_checklist ??
+                    "Issue with the default title for the checklist-related widget.",
+                style: problemSolvingChecklistTitle,
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -102,12 +99,10 @@ class _GPSChecklistState extends State<GPSChecklist> {
       pageBuilder: (context, anim1, anim2) {
         return Scaffold(
           appBar: AppBar(
-            centerTitle: true, 
+            centerTitle: true,
             toolbarHeight: 90.00,
-            title: 
-            Padding
-            (
-              padding: const EdgeInsets.all(8.0), 
+            title: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 title,
                 textAlign: TextAlign.center,
@@ -130,8 +125,7 @@ class _GPSChecklistState extends State<GPSChecklist> {
             child: StatefulBuilder(
               builder: (BuildContext context, StateSetter setLocalState) {
                 final keys = checklistItems.keys.toList();
-                return 
-                ListView(
+                return ListView(
                   key: const Key("gps-checklist-process-scrollview"),
                   children: keys.asMap().entries.map((entry) {
                     final int index = entry.key;
@@ -143,13 +137,15 @@ class _GPSChecklistState extends State<GPSChecklist> {
                       title: Text(key),
                       value: isChecked,
                       activeColor: checkboxCheckedColor,
-                      tileColor: isChecked ? checkboxCheckedListTileColor : white,
+                      tileColor: isChecked
+                          ? checkboxCheckedListTileColor
+                          : white,
                       onChanged: (bool? value) {
                         setLocalState(() {
                           checklistItems[key] = value ?? false;
                         });
                         // Triggers a rebuild of the main widget to update the border color
-                        setState(() {}); 
+                        setState(() {});
                       },
                     );
                   }).toList(),

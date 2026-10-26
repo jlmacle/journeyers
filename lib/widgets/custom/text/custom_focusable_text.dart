@@ -1,11 +1,9 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 /// {@category Custom widgets}
 /// A customizable focusable text.
 
-class CustomFocusableText extends StatefulWidget
-{
-
+class CustomFocusableText extends StatefulWidget {
   /// The text to display.
   final String text;
 
@@ -15,17 +13,14 @@ class CustomFocusableText extends StatefulWidget
   /// The alignment of the text.
   final TextAlign textAlignment;
 
-  const CustomFocusableText
-  ({
+  const CustomFocusableText({
     super.key,
     required this.text,
-    this.textStyle = const 
-        TextStyle
-        (
-          color: Colors.black,
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
+    this.textStyle = const TextStyle(
+      color: Colors.black,
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
     this.textAlignment = TextAlign.center,
   });
 
@@ -33,29 +28,26 @@ class CustomFocusableText extends StatefulWidget
   State<CustomFocusableText> createState() => _CustomFocusableTextState();
 }
 
-class _CustomFocusableTextState extends State<CustomFocusableText> 
-{
+class _CustomFocusableTextState extends State<CustomFocusableText> {
   final FocusNode _textFocusNode = .new();
 
   @override
-  void dispose() 
-  {
+  void dispose() {
     _textFocusNode.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return 
-    Semantics
-    (
+  Widget build(BuildContext context) {
+    return Semantics(
       focusable: true,
-      child: 
-      Focus
-      (
+      child: Focus(
         focusNode: _textFocusNode,
-        child: Text(widget.text, style: widget.textStyle, textAlign: widget.textAlignment),
+        child: Text(
+          widget.text,
+          style: widget.textStyle,
+          textAlign: widget.textAlignment,
+        ),
       ),
     );
   }

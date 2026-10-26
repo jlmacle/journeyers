@@ -1,7 +1,7 @@
 import "dart:async";
 import "dart:io";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter/rendering.dart";
 
 import "package:path/path.dart" as path;
@@ -18,10 +18,9 @@ import "package:journeyers/utils/generic/text_fields/text_field_utils.dart";
 /// {@category Custom widgets}
 /// A text field that checks the entered value with different functions,
 /// and prevents the value from being submitted, in any of the functions returns true.
-class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget 
-{
-  /// A boolean used to override blacklist check temporarily 
-  /// (e.g. if a file name has been pre-loaded for a session data edition, 
+class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget {
+  /// A boolean used to override blacklist check temporarily
+  /// (e.g. if a file name has been pre-loaded for a session data edition,
   /// to be able to save data using the same file name).
   final bool isBlacklistingToBeOverridenTemporarily;
 
@@ -49,7 +48,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// The style for the error message.
   final TextStyle errorMessageStyle;
 
-   /// The minLines value for the text field.
+  /// The minLines value for the text field.
   final int textFieldMinLines;
 
   /// The maxLength value for the text field.
@@ -74,7 +73,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   final Map<StringSanitizerBundle, String> stringSanitizerBundlesErrorsMapping;
 
   /// A map with blacklisting functions as keys, and error messages as values.
-  final Map<BlacklistingFunction,String> blacklistingFunctionsErrorsMapping;
+  final Map<BlacklistingFunction, String> blacklistingFunctionsErrorsMapping;
 
   /// The context of the text field (nullable, potentially context analysis or group problem-solving).
   final String? textFieldContext;
@@ -82,8 +81,7 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
   /// A parameter used for different reasons, e.g. to pass a file path related to a file name being loaded.
   final Object? versatileParameterIsEmptyStringByDefault;
 
-  const TextFieldSanitizedAndCheckedUsingABlackList
-  ({
+  const TextFieldSanitizedAndCheckedUsingABlackList({
     super.key,
     this.isBlacklistingToBeOverridenTemporarily = false,
     this.isExistentFileNamePreLoaded = false,
@@ -95,25 +93,28 @@ class TextFieldSanitizedAndCheckedUsingABlackList extends StatefulWidget
     this.errorMessageFieldKey,
     required this.errorMessageStyle,
     this.textFieldMinLines = 1,
-    this.textFieldMaxLength = CAFormMiscConstants.chars10Lines, // 10 lines as a reference
+    this.textFieldMaxLength =
+        CAFormMiscConstants.chars10Lines, // 10 lines as a reference
     this.textFieldCounter = TextFieldUtils.counterPresent,
-    this.onTextFieldValueChangedCallbackFunction = placeHolderVoidFunctionString,
-    this.onTextFieldValueSubmittedCallbackFunction = placeHolderVoidFunctionString,
+    this.onTextFieldValueChangedCallbackFunction =
+        placeHolderVoidFunctionString,
+    this.onTextFieldValueSubmittedCallbackFunction =
+        placeHolderVoidFunctionString,
     this.additionalOnChangedInstructions = placeHolderVoidFunctionString,
     this.additionalOnSubmittedInstructions = placeHolderVoidFunctionString,
     required this.stringSanitizerBundlesErrorsMapping,
     required this.blacklistingFunctionsErrorsMapping,
     this.textFieldContext,
-    this.versatileParameterIsEmptyStringByDefault = ""
-    
+    this.versatileParameterIsEmptyStringByDefault = "",
   });
 
   @override
-  State<TextFieldSanitizedAndCheckedUsingABlackList> createState() => _TextFieldSanitizedAndCheckedUsingABlackListState();
+  State<TextFieldSanitizedAndCheckedUsingABlackList> createState() =>
+      _TextFieldSanitizedAndCheckedUsingABlackListState();
 }
 
-class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldSanitizedAndCheckedUsingABlackList> 
-{
+class _TextFieldSanitizedAndCheckedUsingABlackListState
+    extends State<TextFieldSanitizedAndCheckedUsingABlackList> {
   // to clean
   final FocusNode _focusNode = .new();
 
@@ -121,17 +122,23 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     if (_focusNode.hasFocus) {
       // Callback function to update the process data
       widget.onTextFieldValueChangedCallbackFunction(_tfec.text);
-    } 
+    }
   }
 
   bool _submitIsBlocked = false;
 
   // Useful for automatic scrolling
-  final GlobalKey _errorMessageKeyCA = GlobalKey(debugLabel: "context-analysis-file-name-error-msg");
-  final GlobalKey _errorMessageKeyGPS = GlobalKey(debugLabel: "group-problem-solving-file-name-error-msg");
-  final GlobalKey _errorMessageKeyGeneric = GlobalKey(debugLabel: "generic-file-name-error-msg");
+  final GlobalKey _errorMessageKeyCA = GlobalKey(
+    debugLabel: "context-analysis-file-name-error-msg",
+  );
+  final GlobalKey _errorMessageKeyGPS = GlobalKey(
+    debugLabel: "group-problem-solving-file-name-error-msg",
+  );
+  final GlobalKey _errorMessageKeyGeneric = GlobalKey(
+    debugLabel: "generic-file-name-error-msg",
+  );
   late GlobalKey _errorMessageKey;
-  
+
   final TextEditingController _tfec = .new();
   String _errorMessage = "";
   Timer? _stringSanitizedErrorTimer;
@@ -151,8 +158,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   }
 
   @override
-  void dispose() 
-  {
+  void dispose() {
     _tfec.dispose();
     _focusNode.dispose();
     _stringSanitizedErrorTimer?.cancel();
@@ -160,8 +166,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
   }
 
   // Method used to scroll the text field and error message into view
-  Future<void> _scrollForBetterErrorViewing() async
-  {
+  Future<void> _scrollForBetterErrorViewing() async {
     final context = _errorMessageKey.currentContext;
 
     if (context != null) {
@@ -175,8 +180,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
 
   // Method to call to modify the text field value if a " or line return is found
   // and to modify the error message to display.
-  Future<String> _userInputSanitizing(String text) async
-  {
+  Future<String> _userInputSanitizing(String text) async {
     var cleanedValue = text;
     // Does the user input needs sanitization and does the submit needs to be blocked?
 
@@ -184,67 +188,72 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     StringSanitizerBundle? bundleWithSanitizingFunctionThatReturnedTrue;
 
     // Verifying for all string sanitizer bundles of the mapping
-    for (var stringSanitizerBundle in widget.stringSanitizerBundlesErrorsMapping.keys)
-    {
-        var recordResult = stringSanitizerBundle(cleanedValue);
-        // Getting the info from the record
-        bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
-        // Adding the sanitizing function to the list for later sanitizing
-        if (shouldStringBeSanitized) 
-        {
-          // Storing to add a delay, for the error message to be displayed long enough to be read
-          _wasStringSanitized = true; 
+    for (var stringSanitizerBundle
+        in widget.stringSanitizerBundlesErrorsMapping.keys) {
+      var recordResult = stringSanitizerBundle(cleanedValue);
+      // Getting the info from the record
+      bool shouldStringBeSanitized = recordResult.shouldStringBeSanitized;
+      // Adding the sanitizing function to the list for later sanitizing
+      if (shouldStringBeSanitized) {
+        // Storing to add a delay, for the error message to be displayed long enough to be read
+        _wasStringSanitized = true;
 
-          bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
-          if (textFieldDebug) pu.printd("Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
-        
-          // Blocking the submit
-          _submitIsBlocked = true;
-          if (textFieldDebug) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
+        bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
+        if (textFieldDebug)
+          pu.printd(
+            "Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}",
+          );
 
-          // Sanitizing the input
-          // DESIGN NOTES: after research, 
-          // it seems that only straight double quote are used to delimit text when importing CSV files
-          var bundleRecord = bundleWithSanitizingFunctionThatReturnedTrue(cleanedValue);
-          cleanedValue = bundleRecord.sanitizingFunction(cleanedValue);
+        // Blocking the submit
+        _submitIsBlocked = true;
+        if (textFieldDebug)
+          pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
 
-          if (textFieldDebug) pu.printd("Text Field: cleanedValue: $cleanedValue");
-   
-          setState(() 
-          {
-            // Updating the text editing controller's text with the sanitized input
-            _tfec.text = cleanedValue;
+        // Sanitizing the input
+        // DESIGN NOTES: after research,
+        // it seems that only straight double quote are used to delimit text when importing CSV files
+        var bundleRecord = bundleWithSanitizingFunctionThatReturnedTrue(
+          cleanedValue,
+        );
+        cleanedValue = bundleRecord.sanitizingFunction(cleanedValue);
 
-            // Letting the user know that the input was sanitized
-            _errorMessage = widget.stringSanitizerBundlesErrorsMapping[bundleWithSanitizingFunctionThatReturnedTrue]!;  
-          });    
+        if (textFieldDebug)
+          pu.printd("Text Field: cleanedValue: $cleanedValue");
 
-          // Scrolling for better error message communication to the user
-          await _scrollForBetterErrorViewing();
+        setState(() {
+          // Updating the text editing controller's text with the sanitized input
+          _tfec.text = cleanedValue;
 
-          // Updating the parental widget information with the sanitized value
-          // Un-related to onSubmit
-          widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
+          // Letting the user know that the input was sanitized
+          _errorMessage = widget
+              .stringSanitizerBundlesErrorsMapping[bundleWithSanitizingFunctionThatReturnedTrue]!;
+        });
 
-          // Unblocking the submit
-          _submitIsBlocked = false;
+        // Scrolling for better error message communication to the user
+        await _scrollForBetterErrorViewing();
 
-          if(!mounted) return cleanedValue;
-          // Screen reader voicing
-          // "The assertiveness level of the announcement is determined by assertiveness.
-          // Currently, this is only supported by the web engine and has no effect on other platforms.
-          // The default mode is Assertiveness.polite."      
-          // TODO:  TextDirection.ltr: code to modify for l10n
-          // Doesn"t seem effective yet. Left for later. 
-          SemanticsService.sendAnnouncement
-          (
-            View.of(context), _errorMessage, 
-            TextDirection.ltr, assertiveness: Assertiveness.assertive
-          );      
+        // Updating the parental widget information with the sanitized value
+        // Un-related to onSubmit
+        widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
+
+        // Unblocking the submit
+        _submitIsBlocked = false;
+
+        if (!mounted) return cleanedValue;
+        // Screen reader voicing
+        // "The assertiveness level of the announcement is determined by assertiveness.
+        // Currently, this is only supported by the web engine and has no effect on other platforms.
+        // The default mode is Assertiveness.polite."
+        // TODO:  TextDirection.ltr: code to modify for l10n
+        // Doesn"t seem effective yet. Left for later.
+        SemanticsService.sendAnnouncement(
+          View.of(context),
+          _errorMessage,
+          TextDirection.ltr,
+          assertiveness: Assertiveness.assertive,
+        );
       }
-        
     }
-
 
     // Updating the parental widget information with the value
     widget.onTextFieldValueChangedCallbackFunction(cleanedValue);
@@ -252,41 +261,40 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
     return cleanedValue;
   }
 
-  Future<void> _userInputBlacklistCheck(String text) async
-  {
+  Future<void> _userInputBlacklistCheck(String text) async {
     // Does the user input needs to be blacklisted and does the submit needs to be blocked?
 
     // Yes, because a blacklisting function returned true
     List<Function> blacklistingFunctionsReturnedTrueList = [];
-    if (widget.blacklistingFunctionsErrorsMapping
-        .keys
-        .any
-        (
-          (blacklistingFunction)
-          {
-            bool shouldStringBeBlocked = blacklistingFunction(text);
-            // Adding the sanitizing function to the list for later sanitizing
-            if (shouldStringBeBlocked) 
-            {
-              blacklistingFunctionsReturnedTrueList.add(blacklistingFunction);
-              if (textFieldDebug) pu.printd("Text Field: Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}");
-            }
-            return shouldStringBeBlocked;
-          }
-        )
-        ) 
-    {
-      if (textFieldDebug) pu.printd("Text Field: blacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}");
-      
+    if (widget.blacklistingFunctionsErrorsMapping.keys.any((
+      blacklistingFunction,
+    ) {
+      bool shouldStringBeBlocked = blacklistingFunction(text);
+      // Adding the sanitizing function to the list for later sanitizing
+      if (shouldStringBeBlocked) {
+        blacklistingFunctionsReturnedTrueList.add(blacklistingFunction);
+        if (textFieldDebug)
+          pu.printd(
+            "Text Field: Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}",
+          );
+      }
+      return shouldStringBeBlocked;
+    })) {
+      if (textFieldDebug)
+        pu.printd(
+          "Text Field: blacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}",
+        );
+
       // Blocking the submit
       _submitIsBlocked = true;
-      if (textFieldDebug) pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
-   
-      setState(() 
-      {
+      if (textFieldDebug)
+        pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
+
+      setState(() {
         // Letting the user know that the input was blocked
-        _errorMessage = widget.blacklistingFunctionsErrorsMapping[blacklistingFunctionsReturnedTrueList[0]]!;  
-      });       
+        _errorMessage = widget
+            .blacklistingFunctionsErrorsMapping[blacklistingFunctionsReturnedTrueList[0]]!;
+      });
 
       // Scrolling for better error message communication to the user
       await _scrollForBetterErrorViewing();
@@ -295,239 +303,254 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState extends State<TextFieldS
       // Screen reader voicing
       // "The assertiveness level of the announcement is determined by assertiveness.
       // Currently, this is only supported by the web engine and has no effect on other platforms.
-      // The default mode is Assertiveness.polite."      
+      // The default mode is Assertiveness.polite."
       // TODO:  TextDirection.ltr: code to modify for l10n
-      // Doesn"t seem effective yet. Left for later. 
-      SemanticsService.sendAnnouncement
-      (
-        View.of(context), _errorMessage, 
-        TextDirection.ltr, assertiveness: Assertiveness.assertive
+      // Doesn"t seem effective yet. Left for later.
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        _errorMessage,
+        TextDirection.ltr,
+        assertiveness: Assertiveness.assertive,
       );
 
       // Keeping the input blocked until new onChanged check
       // No need to update the parental widget
-    } 
-
+    }
     // No, because no blacklisting function returned true
-    else 
-    {
-      if (textFieldDebug) pu.printd("Text Field: No blacklisting needed: value: $text");
+    else {
+      if (textFieldDebug)
+        pu.printd("Text Field: No blacklisting needed: value: $text");
 
       // Removing the error message, after delay if string was sanitized
-      if (_wasStringSanitized) 
-      {
-        if (textFieldDebug) pu.printd("wasStringSanitized: $_wasStringSanitized: Timer started");
-        _stringSanitizedErrorTimer = Timer
-        (
-          const Duration(
-            seconds:5), 
-            ()
-            {
-              setState(() { _errorMessage = "";});
-            }
-        );
+      if (_wasStringSanitized) {
+        if (textFieldDebug)
+          pu.printd("wasStringSanitized: $_wasStringSanitized: Timer started");
+        _stringSanitizedErrorTimer = Timer(const Duration(seconds: 5), () {
+          setState(() {
+            _errorMessage = "";
+          });
+        });
       }
       // Otherwise, resetting the error message
-      else
-      {
-        setState(() {_errorMessage = "";});
+      else {
+        setState(() {
+          _errorMessage = "";
+        });
       }
-      
+
       // Updating the parental widget information with the value
       widget.onTextFieldValueChangedCallbackFunction(text);
     }
   }
 
   // Method used for the onChanged named parameter
-  _onTextFieldValueChanged(String newValue) async
-  {
+  _onTextFieldValueChanged(String newValue) async {
     // By default, submit is not blocked
     _submitIsBlocked = false;
 
-    if (textFieldDebug) pu.printd("Text Field: onChanged: submitIsBlocked: $_submitIsBlocked");
+    if (textFieldDebug)
+      pu.printd("Text Field: onChanged: submitIsBlocked: $_submitIsBlocked");
 
     // Sanitizing the text, and resetting the error message if relevant
-     var cleanedValue = await _userInputSanitizing(newValue);
+    var cleanedValue = await _userInputSanitizing(newValue);
 
     // Checking if the text is part of a blacklist
-    if (!widget.isBlacklistingToBeOverridenTemporarily) await _userInputBlacklistCheck(cleanedValue);
+    if (!widget.isBlacklistingToBeOverridenTemporarily)
+      await _userInputBlacklistCheck(cleanedValue);
 
-    // Additional onChanged instructions 
+    // Additional onChanged instructions
     widget.additionalOnChangedInstructions(newValue);
   }
 
   // Method used for the onSubmitted named parameter
-  _onTextFieldValueSubmitted
-  ({
-    required String newValue, 
-    required String filePathWhenEdition, 
-  }) async
-  {
+  _onTextFieldValueSubmitted({
+    required String newValue,
+    required String filePathWhenEdition,
+  }) async {
     // Additional onSubmitted instructions (before potentially saving data and exiting the process page)
     widget.additionalOnSubmittedInstructions(newValue);
 
-    if (textFieldDebug) pu.printd("TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ");
-    
+    if (textFieldDebug)
+      pu.printd(
+        "TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ",
+      );
+
     // Data submission if not blocked
     if (!_submitIsBlocked) {
-      
-      // Deleting the existing file with the same file name if this is for an edition   
-      if (filePathWhenEdition != "")
-      {
-        List<dynamic> sessionDataRetrieved  = await du.retrieveAllDashboardMetadata(typeOfDashboardContext: widget.textFieldContext!);
-      
-        // Deleting the previous file 
+      // Deleting the existing file with the same file name if this is for an edition
+      if (filePathWhenEdition != "") {
+        List<dynamic> sessionDataRetrieved = await du
+            .retrieveAllDashboardMetadata(
+              typeOfDashboardContext: widget.textFieldContext!,
+            );
+
+        // Deleting the previous file
         await deleteFile(filePath: filePathWhenEdition);
-        if (editDebug) pu.printd("Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (before file deletion): $sessionDataRetrieved");
-        
+        if (editDebug)
+          pu.printd(
+            "Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (before file deletion): $sessionDataRetrieved",
+          );
+
         // Deleting the metadata
-        sessionDataRetrieved.removeWhere
-        (
-          (session) => (session[DashboardUtils.keyFilePath]).contains(filePathWhenEdition)
+        sessionDataRetrieved.removeWhere(
+          (session) => (session[DashboardUtils.keyFilePath]).contains(
+            filePathWhenEdition,
+          ),
         );
-        if (editDebug) pu.printd("Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
-        
+        if (editDebug)
+          pu.printd(
+            "Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (after file deletion): $sessionDataRetrieved",
+          );
+
         // Saving the updated metadata
-        await du.saveAllSessionsMetadata(typeOfDashboardContext: widget.textFieldContext!, sessionsMetadataAll: sessionDataRetrieved);
+        await du.saveAllSessionsMetadata(
+          typeOfDashboardContext: widget.textFieldContext!,
+          sessionsMetadataAll: sessionDataRetrieved,
+        );
       }
 
-      // onTextFieldValueSubmittedCallbackFunction 
+      // onTextFieldValueSubmittedCallbackFunction
       widget.onTextFieldValueSubmittedCallbackFunction(newValue);
     }
-    
   }
 
-// todo: code to move
-Future<void> deleteFile({required String filePath}) async
-{
-  String fileNameWithExtension = path.basename(filePath);
-  String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
+  // todo: code to move
+  Future<void> deleteFile({required String filePath}) async {
+    String fileNameWithExtension = path.basename(filePath);
+    String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
 
-  if (editDebug) pu.printd("Editing: deleteFile: filePath: $filePath");
-  if (editDebug) pu.printd("Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension");
-  if (editDebug) pu.printd("Editing: deleteFile: fileNameWithoutExtension: $fileNameWithoutExtension");
+    if (editDebug) pu.printd("Editing: deleteFile: filePath: $filePath");
+    if (editDebug)
+      pu.printd(
+        "Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension",
+      );
+    if (editDebug)
+      pu.printd(
+        "Editing: deleteFile: fileNameWithoutExtension: $fileNameWithoutExtension",
+      );
 
-  // Removing existing file and metadata before saving
-  try 
-  {
+    // Removing existing file and metadata before saving
+    try {
       String? folderPath = await rtdu.getApplicationFolderPath();
       filePath = "$folderPath/$fileNameWithExtension";
       var fileExtension = fileNameWithExtension.split(".").last;
 
       // On Android
-      if (Platform.isAndroid) 
-      {
+      if (Platform.isAndroid) {
         if (!isInTestEnvironment) {
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
-        }
-        else {
+          await du.deleteSpecificSessionMetadata(
+            typeOfDashboardContext: widget.textFieldContext!,
+            filePathRelatedToDataToDelete: filePath,
+          );
+        } else {
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
+          filePath = path.join(
+            applicationFolderPath!,
+            "${fileNameWithoutExtension}.${fileExtension}",
+          );
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
+          await du.deleteSpecificSessionMetadata(
+            typeOfDashboardContext: widget.textFieldContext!,
+            filePathRelatedToDataToDelete: filePath,
+          );
         }
-      } 
-
+      }
       // On iOS
-      else if (Platform.isIOS) 
-      {
+      else if (Platform.isIOS) {
         if (!isInTestEnvironment) {
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
-           }
-        else {
+          await du.deleteSpecificSessionMetadata(
+            typeOfDashboardContext: widget.textFieldContext!,
+            filePathRelatedToDataToDelete: filePath,
+          );
+        } else {
           var applicationFolderPath = await rtdu.getApplicationFolderPath();
-          filePath = path.join(applicationFolderPath!, "${fileNameWithoutExtension}.${fileExtension}");
+          filePath = path.join(
+            applicationFolderPath!,
+            "${fileNameWithoutExtension}.${fileExtension}",
+          );
           await fu.deleteFile(filePath);
-          await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);
+          await du.deleteSpecificSessionMetadata(
+            typeOfDashboardContext: widget.textFieldContext!,
+            filePathRelatedToDataToDelete: filePath,
+          );
         }
-      } 
+      }
       // On desktop
-      else 
-      {
+      else {
         await fu.deleteFile(filePath);
-        await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.textFieldContext!, filePathRelatedToDataToDelete: filePath);     
-      }    
-  } catch (e, s) {
-    pu.printd("Delete Error: $e: $s");
-  }  
-
-}
-
+        await du.deleteSpecificSessionMetadata(
+          typeOfDashboardContext: widget.textFieldContext!,
+          filePathRelatedToDataToDelete: filePath,
+        );
+      }
+    } catch (e, s) {
+      pu.printd("Delete Error: $e: $s");
+    }
+  }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    switch (widget.textFieldContext) 
-    {
+  Widget build(BuildContext context) {
+    switch (widget.textFieldContext) {
       case null:
-      {
-        _errorMessageKey = _errorMessageKeyGeneric;
-      }      
+        {
+          _errorMessageKey = _errorMessageKeyGeneric;
+        }
       case DashboardUtils.caContext:
-      {
-        _errorMessageKey = _errorMessageKeyCA;
-      }
+        {
+          _errorMessageKey = _errorMessageKeyCA;
+        }
       case DashboardUtils.gpsContext:
-      {
-        _errorMessageKey = _errorMessageKeyGPS;
-      }
+        {
+          _errorMessageKey = _errorMessageKeyGPS;
+        }
     }
-    return TextField
-    (
+    return TextField(
       autofocus: widget.textFieldAutofocused,
       controller: _tfec,
       focusNode: _focusNode,
       keyboardType: TextInputType.text,
-      minLines: widget.textFieldMinLines,      
-      // "If this is null, there is no limit to the number of lines, 
-      // and the text container will start with enough vertical space for one line 
-      // and automatically grow to accommodate additional lines as they are entered, 
+      minLines: widget.textFieldMinLines,
+      // "If this is null, there is no limit to the number of lines,
+      // and the text container will start with enough vertical space for one line
+      // and automatically grow to accommodate additional lines as they are entered,
       // up to the height of its constraints."
       maxLines: null,
       maxLength: widget.textFieldMaxLength,
       buildCounter: widget.textFieldCounter,
       style: widget.textFieldStyle,
-      decoration: InputDecoration
-      (
-          hint: Center
-          (
-            child: 
-              Text
-              (
-                textAlign: TextAlign.center,
-                widget.textFieldHint,
-                style: widget.textFieldHintStyle
-              )
+      decoration: InputDecoration(
+        hint: Center(
+          child: Text(
+            textAlign: TextAlign.center,
+            widget.textFieldHint,
+            style: widget.textFieldHintStyle,
           ),
-          error: Center
-          (
-            key: widget.errorMessageFieldKey ?? _errorMessageKey,
-            child: Text
-            (
-              textAlign: TextAlign.center, 
-              _errorMessage, 
-              style: widget.errorMessageStyle
-            )
+        ),
+        error: Center(
+          key: widget.errorMessageFieldKey ?? _errorMessageKey,
+          child: Text(
+            textAlign: TextAlign.center,
+            _errorMessage,
+            style: widget.errorMessageStyle,
           ),
-          errorMaxLines: 3
+        ),
+        errorMaxLines: 3,
       ),
       onChanged: _onTextFieldValueChanged,
-      onSubmitted: 
-        (!_submitIsBlocked) 
-          ? (value) async 
-          {
-            
-            await _onTextFieldValueSubmitted
-                    (
-                      filePathWhenEdition: widget.versatileParameterIsEmptyStringByDefault as String, 
-                      newValue:value
-                    ) ;
-          }
-          : null,  
+      onSubmitted: (!_submitIsBlocked)
+          ? (value) async {
+              await _onTextFieldValueSubmitted(
+                filePathWhenEdition:
+                    widget.versatileParameterIsEmptyStringByDefault as String,
+                newValue: value,
+              );
+            }
+          : null,
       // on iOS, allows to dismiss the text field keyboard, if tapping outside the text field
-      onTapOutside: (PointerDownEvent event) => FocusManager.instance.primaryFocus?.unfocus(),
+      onTapOutside: (PointerDownEvent event) =>
+          FocusManager.instance.primaryFocus?.unfocus(),
     );
   }
 }

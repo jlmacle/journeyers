@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -11,17 +11,15 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashboard_filtering_by_keywords.dart";
 
-
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget handling bulk deletion of session data.
-class DashboardDeletionByBulk extends StatefulWidget 
-{
+class DashboardDeletionByBulk extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
   /// Boolean used to store if some sessions are selected for deletion.
-  final bool areSessionsForDeletion; 
+  final bool areSessionsForDeletion;
 
   /// List containing all available session metadata.
   final List<dynamic>? sessionsMetadataAll;
@@ -36,168 +34,169 @@ class DashboardDeletionByBulk extends StatefulWidget
   final VoidCallback dashboardCallbackFunctionToRefreshTheSessionsList;
 
   /// Global key for DashboardFilteringByKeywordsState.
-  final GlobalKey<DashboardFilteringByKeywordsState> dashboardFilteringByKeywordsKey;
+  final GlobalKey<DashboardFilteringByKeywordsState>
+  dashboardFilteringByKeywordsKey;
 
-  const DashboardDeletionByBulk
-  ({
+  const DashboardDeletionByBulk({
     super.key,
     required this.dashboardContext,
     required this.areSessionsForDeletion,
     required this.sessionsMetadataAll,
     required this.sessionsMetadataFiltered,
-    required this.dashboardCallbackFunctionToRefreshTheSessionsList,    
+    required this.dashboardCallbackFunctionToRefreshTheSessionsList,
     required this.sessionsMetadataSelectedForDeletion,
-    required this.dashboardFilteringByKeywordsKey,   
+    required this.dashboardFilteringByKeywordsKey,
   });
 
   @override
-  State<DashboardDeletionByBulk> createState() => DashboardDeletionByBulkState();
+  State<DashboardDeletionByBulk> createState() =>
+      DashboardDeletionByBulkState();
 }
 
-class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> 
-{
-
+class DashboardDeletionByBulkState extends State<DashboardDeletionByBulk> {
   // ─── BULK DELETION OF SESSION DATA ───────────────────────────────────────
   // Method used to delete several session data
-  Future<void> _sessionsMetadataSelectedDelete() async 
-  {
+  Future<void> _sessionsMetadataSelectedDelete() async {
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
-    
-    // Creating a fixed list to iterate over so clearing doesn"t break the loop
-    final filesToDeleteMetadata = List<String>.from(widget.sessionsMetadataSelectedForDeletion!);
 
-    for (String filePath in filesToDeleteMetadata) 
-    {
+    // Creating a fixed list to iterate over so clearing doesn"t break the loop
+    final filesToDeleteMetadata = List<String>.from(
+      widget.sessionsMetadataSelectedForDeletion!,
+    );
+
+    for (String filePath in filesToDeleteMetadata) {
       // Removing the file
-      await fu.deleteFile(filePath); 
-      
+      await fu.deleteFile(filePath);
+
       // Removing the metadata from the stored metadata
-      await du.deleteSpecificSessionMetadata
-      (
-        typeOfDashboardContext: widget.dashboardContext, 
-        filePathRelatedToDataToDelete: filePath
+      await du.deleteSpecificSessionMetadata(
+        typeOfDashboardContext: widget.dashboardContext,
+        filePathRelatedToDataToDelete: filePath,
       );
     }
 
     // Updating the filtered sessions list
-    widget.sessionsMetadataFiltered?.removeWhere
-    (
-      (session) => 
-      filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
+    widget.sessionsMetadataFiltered?.removeWhere(
+      (session) =>
+          filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath]),
     );
 
     // Updating the sessionsMetadataAll list
-    widget.sessionsMetadataAll?.removeWhere
-    (
-      (session) => 
-      filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath])
+    widget.sessionsMetadataAll?.removeWhere(
+      (session) =>
+          filesToDeleteMetadata.contains(session[DashboardUtils.keyFilePath]),
     );
 
-    logt("DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll", widget.sessionsMetadataAll);
+    logt(
+      "DashboardDeletionByBulk: _sessionsMetadataSelectedDelete: after deletion:  widget.sessionsMetadataAll",
+      widget.sessionsMetadataAll,
+    );
 
     // Clearing the list of the selected sessions
     widget.sessionsMetadataSelectedForDeletion!.clear();
 
     // Updating the keywords list
-    await widget.dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await widget.dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the keywords filtering
-    await widget.dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();    
+    await widget.dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsApplyFiltering();
 
     // Displaying an informational message
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar
-    (
-      SnackBar
-      (
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(lds.snackbarMessageDataDeleted),
         duration: const Duration(seconds: 2),
       ),
     );
 
     // REFRESHING THE UI
-    logd("widget.sessionsMetadataAll!.isEmpty?: ${widget.sessionsMetadataAll!.isEmpty}");
-    
+    logd(
+      "widget.sessionsMetadataAll!.isEmpty?: ${widget.sessionsMetadataAll!.isEmpty}",
+    );
+
     // 1. IF NO SESSION DATA LEFT
     // Refreshing and applying resetWasSessionDataSavedStatus
-    if (widget.sessionsMetadataAll!.isEmpty) 
-    {
+    if (widget.sessionsMetadataAll!.isEmpty) {
       // resetWasSessionDataSavedStatus to false
-      await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await rtdu.resetWasSessionDataSavedStatus(
+        context: widget.dashboardContext,
+      );
 
       // refreshing the page, to re-start in the process page
-      if (widget.dashboardContext == DashboardUtils.caContext) {caPageKey.currentState?.onAllSessionFilesDeleted();}
-      else if (widget.dashboardContext == DashboardUtils.gpsContext) {gpsPageKey.currentState?.gpsOnAllSessionsDataDeleted();}
-      else {pu.printd("Error: Unexpected context: ${widget.dashboardContext}");}
+      if (widget.dashboardContext == DashboardUtils.caContext) {
+        caPageKey.currentState?.onAllSessionFilesDeleted();
+      } else if (widget.dashboardContext == DashboardUtils.gpsContext) {
+        gpsPageKey.currentState?.gpsOnAllSessionsDataDeleted();
+      } else {
+        pu.printd("Error: Unexpected context: ${widget.dashboardContext}");
+      }
     }
     // 2. ELSE: SOME SESSION DATA LEFT AND TO REFRESH
-    else
-    {
-
+    else {
       // Updating the keywords UI
-      widget.dashboardFilteringByKeywordsKey.currentState?.setState((){});
+      widget.dashboardFilteringByKeywordsKey.currentState?.setState(() {});
 
       // Updating the sessions list UI
-      widget.dashboardCallbackFunctionToRefreshTheSessionsList();      
+      widget.dashboardCallbackFunctionToRefreshTheSessionsList();
     }
 
     // Updating the file names list: _deleteSelectedSessions
-    if(Platform.isAndroid || Platform.isIOS) 
-    {
+    if (Platform.isAndroid || Platform.isIOS) {
       await du.getStoredFileNamesOnMobile();
-      logd("currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");
-    }    
+      logd(
+        "currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}",
+      );
+    }
   }
-  
+
   @override
   void initState() {
-
     super.initState();
-                                                
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("DashboardDeletionByBulk");
   }
 
-
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     // todo: to clean
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
     var bulkDeletionTextEnd = "";
-    if (widget.sessionsMetadataSelectedForDeletion?.length == 1)
-    { bulkDeletionTextEnd = "1 item"; }
-    else 
-    { bulkDeletionTextEnd = "${widget.sessionsMetadataSelectedForDeletion?.length} items"; }
+    if (widget.sessionsMetadataSelectedForDeletion?.length == 1) {
+      bulkDeletionTextEnd = "1 item";
+    } else {
+      bulkDeletionTextEnd =
+          "${widget.sessionsMetadataSelectedForDeletion?.length} items";
+    }
 
-    return 
-    Semantics
-    (
+    return Semantics(
       excludeSemantics: !widget.areSessionsForDeletion,
-      child:Center
-      (
-        child: 
-        TextButton.icon
-        (
+      child: Center(
+        child: TextButton.icon(
           onPressed: _sessionsMetadataSelectedDelete,
-          icon: Icon
-                (
-                  Icons.delete,                    
-                  color: (widget.areSessionsForDeletion == true)? Colors.red: transparent
-                ),
-          label:          
-          Text(
+          icon: Icon(
+            Icons.delete,
+            color: (widget.areSessionsForDeletion == true)
+                ? Colors.red
+                : transparent,
+          ),
+          label: Text(
             "${lds.bulkDeletionText}: $bulkDeletionTextEnd",
             style: TextStyle(
-              color: (widget.areSessionsForDeletion == true)? Colors.red: transparent, 
+              color: (widget.areSessionsForDeletion == true)
+                  ? Colors.red
+                  : transparent,
               fontWeight: FontWeight.bold,
             ),
           ),
-        )
-      ),    
+        ),
+      ),
     );
   }
 }

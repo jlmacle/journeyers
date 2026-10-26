@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -7,23 +7,17 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to add a new idea to the list.
-class GPSNewIdea extends StatefulWidget 
-{
+class GPSNewIdea extends StatefulWidget {
   /// A callback function used to update the list of ideas.
   final ValueChanged<String> newIdeaOnAddedCallbackFunction;
 
-  const GPSNewIdea
-  ({
-    super.key,
-    required this.newIdeaOnAddedCallbackFunction
-  });
+  const GPSNewIdea({super.key, required this.newIdeaOnAddedCallbackFunction});
 
   @override
   State<GPSNewIdea> createState() => _GPSNewIdeaState();
 }
 
-class _GPSNewIdeaState extends State<GPSNewIdea> 
-{
+class _GPSNewIdeaState extends State<GPSNewIdea> {
   // TextEditingController for entering a new idea
   final TextEditingController _newIdeaTec = .new();
   // FocusNode used to keep the focus on the new idea field after an idea has been entered
@@ -40,8 +34,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
   }
 
   @override
-  void dispose() 
-  {
+  void dispose() {
     _newIdeaTec.dispose();
     super.dispose();
   }
@@ -49,7 +42,7 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
   @override
   void initState() {
     super.initState();
-                        
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSNewIdea");
   }
@@ -58,32 +51,34 @@ class _GPSNewIdeaState extends State<GPSNewIdea>
   Widget build(BuildContext context) {
     // Getting the localized strings
     LocalizedGPSStrings lgps = .new(context);
-    
-    return 
-    Container(
-          color: Theme.of(context).cardColor,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  key: const Key("gpsNewIdeaField"),
-                  focusNode: _newIdeaFocusNode,
-                  controller: _newIdeaTec,
-                  decoration: InputDecoration(
-                    hintText: lgps.newIdeaTextFieldHint,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  ),
-                  onSubmitted: (_) => _newIdeaSubmit(),
+
+    return Container(
+      color: Theme.of(context).cardColor,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              key: const Key("gpsNewIdeaField"),
+              focusNode: _newIdeaFocusNode,
+              controller: _newIdeaTec,
+              decoration: InputDecoration(
+                hintText: lgps.newIdeaTextFieldHint,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
                 ),
               ),
-              const SizedBox(width: 8),
-              IconButton(
-                icon: const Icon(Icons.send, color: navyBlue),
-                onPressed: _newIdeaSubmit,
-              ),
-            ],
+              onSubmitted: (_) => _newIdeaSubmit(),
+            ),
           ),
-        );
+          const SizedBox(width: 8),
+          IconButton(
+            icon: const Icon(Icons.send, color: navyBlue),
+            onPressed: _newIdeaSubmit,
+          ),
+        ],
+      ),
+    );
   }
 }

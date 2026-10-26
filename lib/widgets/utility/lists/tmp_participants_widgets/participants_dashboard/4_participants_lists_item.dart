@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -15,8 +15,7 @@ import "package:journeyers/widgets/utility/lists/database/participants_lists_db_
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling a single participants list data on the participants lists dashboard.
-class ParticipantsListsItem extends StatefulWidget 
-{
+class ParticipantsListsItem extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
@@ -27,23 +26,25 @@ class ParticipantsListsItem extends StatefulWidget
   final int listIndex;
 
   /// Boolean to indicate if the checkbox is checked.
-  final bool isChecked;  
+  final bool isChecked;
 
   /// A callback function called when the checkbox is checked/unchecked.
   final ValueChanged<bool?> onCheckboxChangedCallbackFunction;
 
   /// A callback function called when session data is retrieved before edition.
-  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType
+  onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the keywords are updated.
-  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction;
+  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType
+  onKeywordsUpdatedCallbackFunction;
 
   /// A callback function called when the participants are updated.
-  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction;
+  final OnParticipantListsItemSetStringUpdatedCallbackFunctionType
+  onParticipantsUpdatedCallbackFunction;
 
   /// A callback function called when the list is updated.
-  final OnListNameUpdatedCallbackFunctionType  onListNameUpdatedCallbackFunction;
- 
+  final OnListNameUpdatedCallbackFunctionType onListNameUpdatedCallbackFunction;
 
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
@@ -70,19 +71,19 @@ class ParticipantsListsItem extends StatefulWidget
   State<ParticipantsListsItem> createState() => _ParticipantsListsItemState();
 }
 
-class _ParticipantsListsItemState extends State<ParticipantsListsItem> 
-{
+class _ParticipantsListsItemState extends State<ParticipantsListsItem> {
   final _listsDB = ParticipantsListsDB();
   List<String> _participantsCurrent = [];
   final TextEditingController _listNameEditTec = .new();
   String? _listNameEditErrorText;
   final TextEditingController _participantsEditTec = .new();
   final TextEditingController _kwsEditTec = .new();
-  
 
   // To clean
-  Future<void> _onKeywordsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
-  {
+  Future<void> _onKeywordsUpdated({
+    required String? listKey,
+    required Map<String, dynamic> listData,
+  }) async {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedKeywords = _kwsEditTec.text
         .split(",")
@@ -91,30 +92,41 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
         .toSet();
 
     logd("ElevatedButton: onPressed: updatedKeywords: $updatedKeywords");
-    
-    // Calling the parent callback for state 
-    await widget.onKeywordsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedKeywords, listData: listData);
+
+    // Calling the parent callback for state
+    await widget.onKeywordsUpdatedCallbackFunction(
+      listKey: listKey,
+      updatedItems: updatedKeywords,
+      listData: listData,
+    );
 
     if (!mounted) return;
     Navigator.of(context).pop();
   }
 
   // To clean
-  Future<void> _onListNameUpdated({required String? listKey, required Map<String, dynamic> listData}) async
-  {
-    if (listDebug) pu.printd("List Debug: ParticipantsListsItem: _onListNameUpdated");
+  Future<void> _onListNameUpdated({
+    required String? listKey,
+    required Map<String, dynamic> listData,
+  }) async {
+    if (listDebug)
+      pu.printd("List Debug: ParticipantsListsItem: _onListNameUpdated");
 
-    // Calling the parent callback for state 
-    await widget.onListNameUpdatedCallbackFunction(listKey: listKey!, listData: listData);
+    // Calling the parent callback for state
+    await widget.onListNameUpdatedCallbackFunction(
+      listKey: listKey!,
+      listData: listData,
+    );
 
     if (!mounted) return;
     Navigator.of(context).pop();
   }
 
-
   // To clean
-  Future<void> _onParticipantsUpdated({required String? listKey, required Map<String, dynamic> listData}) async
-  {
+  Future<void> _onParticipantsUpdated({
+    required String? listKey,
+    required Map<String, dynamic> listData,
+  }) async {
     // Splitting string into list, trimming whitespaces, and removing empty entries
     final Set<String> updatedParticipants = _participantsEditTec.text
         .split(",")
@@ -125,32 +137,37 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
     // Updating _currentParticipants for list loading
     _participantsCurrent = updatedParticipants.toList();
 
-    logd("ElevatedButton: onPressed: updatedParticipants: $updatedParticipants");
-    
-    // Calling the parent callback for state 
-    await widget.onParticipantsUpdatedCallbackFunction(listKey: listKey, updatedItems: updatedParticipants, listData: listData);
+    logd(
+      "ElevatedButton: onPressed: updatedParticipants: $updatedParticipants",
+    );
+
+    // Calling the parent callback for state
+    await widget.onParticipantsUpdatedCallbackFunction(
+      listKey: listKey,
+      updatedItems: updatedParticipants,
+      listData: listData,
+    );
 
     if (!mounted) return;
     Navigator.of(context).pop();
   }
 
- @override
+  @override
   void initState() {
     super.initState();
-    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("ParticipantsListsItem");
 
     List<Map<String, dynamic>> subItemsDataList =
-    ((widget.listMetadata[subItemsDataListKey]) as List)
-        .cast<Map<String, dynamic>>();
+        ((widget.listMetadata[subItemsDataListKey]) as List)
+            .cast<Map<String, dynamic>>();
     Map<String, String> namesKeysMap = _listsDB.getNamesKeys(subItemsDataList);
-    _participantsCurrent =  namesKeysMap.keys.toList();
-
+    _participantsCurrent = namesKeysMap.keys.toList();
   }
- 
-  @override void dispose() 
-  {
+
+  @override
+  void dispose() {
     _kwsEditTec.dispose();
     _listNameEditTec.dispose();
     _participantsEditTec.dispose();
@@ -158,34 +175,36 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
   }
 
   // Method used to get the participants" list
-  List<String> _getParticipants(Map<String, dynamic> listData)
-  {
-
+  List<String> _getParticipants(Map<String, dynamic> listData) {
     List<String> participants = [];
 
     // Retrieving the text for each sub-item
     var subItemsDataList = listData[subItemsDataListKey];
 
-    for (var subItemDataIndex = 0; subItemDataIndex < subItemsDataList.length; subItemDataIndex++)
-    {
-      Map<String, dynamic> subItemsData = subItemsDataList[subItemDataIndex]
-                                        .values.first as Map<String, dynamic>;
+    for (
+      var subItemDataIndex = 0;
+      subItemDataIndex < subItemsDataList.length;
+      subItemDataIndex++
+    ) {
+      Map<String, dynamic> subItemsData =
+          subItemsDataList[subItemDataIndex].values.first
+              as Map<String, dynamic>;
       var name = subItemsData[itemTextKey];
       participants.add(name);
-    }    
+    }
 
     return participants;
   }
-  
+
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     // Gets the list name
     final String currentListName = widget.listMetadata[itemTextKey];
 
     // Sorting keywords for display
-    final List<String> sortedKeywords = 
-    List<String>.from(widget.listMetadata[itemKeywordsKey])..sort();
+    final List<String> sortedKeywords = List<String>.from(
+      widget.listMetadata[itemKeywordsKey],
+    )..sort();
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -212,117 +231,135 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                         children: [
                           // For the edition of the list label
                           GestureDetector(
-                            onTap: 
-                              () 
-                              => 
-                              showEditSheet
-                              (
-                                context: context, 
-                                textEditingController: _listNameEditTec, 
-                                textFieldKey: const Key("listLabelGroupsDashboardEditField"), 
-                                textFieldStartValue: currentListName, 
-                                textFieldLabelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_label_text ?? "Issue with the l10n for the 'List Name Edition' label text", 
-                                textFieldLabelStyle: const TextStyle(color: black),
-                                textFiedHint: Text(AppLocalizations.of(context)?.text_lists_dashboard_edit_list_name_sheet_text_field_hint ?? "Issue with the l10n for the 'List Name Edition' text field hint"),
-                                errorTextTriggerFunction: onConfirmFunctionEmptyValue,
-                                errorTextTriggerFunctionParameter: _listNameEditTec.text.trim(),
-                                textFieldErrorText: AppLocalizations.of(context)?.text_lists_new_list_empty_list_name_message ?? "Issue with the message when the list name is empty at saving time",
-                                onConfirmSuccessfulCallbackFunction: 
-                                (String updatedListName) async
-                                {
-                                   // Updating the list label
-                                  widget.listMetadata[itemTextKey] = updatedListName;
-                             
-                                  await _onListNameUpdated(listKey: widget.listMetadata[itemKey], listData: widget.listMetadata);
-                                },
-                                elevatedButtonText: AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text", 
-                                elevatedButtonStyle: const TextStyle(color: black)
-                              ),                            
+                            onTap: () => showEditSheet(
+                              context: context,
+                              textEditingController: _listNameEditTec,
+                              textFieldKey: const Key(
+                                "listLabelGroupsDashboardEditField",
+                              ),
+                              textFieldStartValue: currentListName,
+                              textFieldLabelText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )?.text_lists_dashboard_edit_list_name_sheet_label_text ??
+                                  "Issue with the l10n for the 'List Name Edition' label text",
+                              textFieldLabelStyle: const TextStyle(
+                                color: black,
+                              ),
+                              textFiedHint: Text(
+                                AppLocalizations.of(
+                                      context,
+                                    )?.text_lists_dashboard_edit_list_name_sheet_text_field_hint ??
+                                    "Issue with the l10n for the 'List Name Edition' text field hint",
+                              ),
+                              errorTextTriggerFunction:
+                                  onConfirmFunctionEmptyValue,
+                              errorTextTriggerFunctionParameter:
+                                  _listNameEditTec.text.trim(),
+                              textFieldErrorText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )?.text_lists_new_list_empty_list_name_message ??
+                                  "Issue with the message when the list name is empty at saving time",
+                              onConfirmSuccessfulCallbackFunction:
+                                  (String updatedListName) async {
+                                    // Updating the list label
+                                    widget.listMetadata[itemTextKey] =
+                                        updatedListName;
+
+                                    await _onListNameUpdated(
+                                      listKey: widget.listMetadata[itemKey],
+                                      listData: widget.listMetadata,
+                                    );
+                                  },
+                              elevatedButtonText:
+                                  AppLocalizations.of(
+                                    context,
+                                  )?.save_button_text ??
+                                  "Issue with the l10n for the save button text",
+                              elevatedButtonStyle: const TextStyle(
+                                color: black,
+                              ),
+                            ),
                             child: Text(
                               currentListName,
                               // todo: to clean
                               key: Key("session-title-${widget.listIndex}"),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                          
                         ],
                       ),
                       const SizedBox(height: 4),
                       // For the edition of the participants
-                      GestureDetector
-                      (
-                        onTap:  
-                          () => _showParticipantsEditSheet
-                                (
-                                  context: context,
-                                  dashboardContext: widget.dashboardContext,                          
-                                  currentParticipants: _participantsCurrent,
-                                  listKey: widget.listMetadata[itemKey],
-                                  participantsTec: _participantsEditTec,
-                                  onParticipantsUpdatedCallbackFunction: widget.onParticipantsUpdatedCallbackFunction,
-                                  onParticipantsUpdated: _onParticipantsUpdated,
-                                  listData: widget.listMetadata
-                                ),
-                        child: Wrap
-                        (
+                      GestureDetector(
+                        onTap: () => _showParticipantsEditSheet(
+                          context: context,
+                          dashboardContext: widget.dashboardContext,
+                          currentParticipants: _participantsCurrent,
+                          listKey: widget.listMetadata[itemKey],
+                          participantsTec: _participantsEditTec,
+                          onParticipantsUpdatedCallbackFunction:
+                              widget.onParticipantsUpdatedCallbackFunction,
+                          onParticipantsUpdated: _onParticipantsUpdated,
+                          listData: widget.listMetadata,
+                        ),
+                        child: Wrap(
                           spacing: 8.0,
-                          children: 
-                          (
-                            _getParticipants(widget.listMetadata)
-                            ..sort
-                            (
-                              (a, b) 
-                              {
-                                // Different letters
-                                int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
-                                // Same letter
-                                if (comparison == 0) {return b.compareTo(a);}                                                
-                                return comparison;
-                              }
-                            )
-                          ).map
-                          (
-                            (participant) 
-                            {
-                              return                  
-                              Container(
-                                key: Key("session-participants-container-${widget.listIndex}-${participant}"),
-                                decoration: BoxDecoration
-                                (
-                                  color: Colors.transparent,  
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: black), 
-                                ),
-                                padding: const EdgeInsets.all(8),
-                                child: Text
-                                (
-                                  participant,                                      
-                                ),
-                              );
-                            }
-                          ).toList(),
+                          children:
+                              (_getParticipants(widget.listMetadata)
+                                    ..sort((a, b) {
+                                      // Different letters
+                                      int comparison = a
+                                          .toLowerCase()
+                                          .compareTo(b.toLowerCase());
+                                      // Same letter
+                                      if (comparison == 0) {
+                                        return b.compareTo(a);
+                                      }
+                                      return comparison;
+                                    }))
+                                  .map((participant) {
+                                    return Container(
+                                      key: Key(
+                                        "session-participants-container-${widget.listIndex}-${participant}",
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(color: black),
+                                      ),
+                                      padding: const EdgeInsets.all(8),
+                                      child: Text(participant),
+                                    );
+                                  })
+                                  .toList(),
                         ),
                       ),
                       const SizedBox(height: 4),
                       // For the edition of the keywords
                       GestureDetector(
-                        onTap: () => _showKeywordsEditSheet
-                        (
+                        onTap: () => _showKeywordsEditSheet(
                           context: context,
-                          dashboardContext: widget.dashboardContext,                          
+                          dashboardContext: widget.dashboardContext,
                           currentKeywords: widget.listMetadata[itemKeywordsKey],
                           listKey: widget.listMetadata[itemKey],
                           kwsEditController: _kwsEditTec,
-                          onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
+                          onKeywordsUpdatedCallbackFunction:
+                              widget.onKeywordsUpdatedCallbackFunction,
                           onKeywordsUpdated: _onKeywordsUpdated,
-                          listData: widget.listMetadata
-                          ),
+                          listData: widget.listMetadata,
+                        ),
                         child: Text(
                           "${AppLocalizations.of(context)?.dashboard_keywords ?? "Issue with the 'Keywords' label"} ${sortedKeywords.join(", ")}",
                           key: Key("session-keywords-${widget.listIndex}"),
-                          style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 13,
+                          ),
                         ),
                       ),
                     ],
@@ -343,25 +380,36 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                     currentKeywords: widget.listMetadata[itemKeywordsKey],
                     listKey: widget.listMetadata[itemKey],
                     kwsEditController: _kwsEditTec,
-                    onKeywordsUpdatedCallbackFunction: widget.onKeywordsUpdatedCallbackFunction,
+                    onKeywordsUpdatedCallbackFunction:
+                        widget.onKeywordsUpdatedCallbackFunction,
                     onKeywordsUpdated: _onKeywordsUpdated,
                     listData: widget.listMetadata,
                   ),
-                  tooltip: AppLocalizations.of(context)?.dashboard_tooltip_edit_keywords ?? "Issue with the l10n for the 'Edit Keywords' tooltip",
+                  tooltip:
+                      AppLocalizations.of(
+                        context,
+                      )?.dashboard_tooltip_edit_keywords ??
+                      "Issue with the l10n for the 'Edit Keywords' tooltip",
                 ),
 
                 // Center content — wraps if needed
                 Wrap(
                   children: [
                     ElevatedButton(
-                      child: Text
-                      ( 
-                        AppLocalizations.of(context)?.text_lists_dashboard_list_loading_button_text ?? "Issue with the l10n for the list loading button text",
+                      child: Text(
+                        AppLocalizations.of(
+                              context,
+                            )?.text_lists_dashboard_list_loading_button_text ??
+                            "Issue with the l10n for the list loading button text",
                       ),
-                      onPressed: () 
-                      {
-                        if (listDebug) pu.printd("List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_participantsCurrent");
-                        widget.onParticipantsLoadedCallbackFunction(_participantsCurrent);
+                      onPressed: () {
+                        if (listDebug)
+                          pu.printd(
+                            "List debug: Participants Lists: Lists display: List: Click to load: _currentParticipants: $_participantsCurrent",
+                          );
+                        widget.onParticipantsLoadedCallbackFunction(
+                          _participantsCurrent,
+                        );
                         // To close the lists display
                         Navigator.pop(context);
                         // To close the list loading/creation menu
@@ -375,7 +423,9 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
                 IconButton(
                   icon: const Icon(Icons.delete_rounded),
                   onPressed: widget.onDeleteCallbackFunction,
-                  tooltip: AppLocalizations.of(context)?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip",
+                  tooltip:
+                      AppLocalizations.of(context)?.dashboard_tooltip_delete ??
+                      "Issue with the l10n for the 'Delete data' tooltip",
                 ),
               ],
             ),
@@ -386,57 +436,63 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem>
   }
 }
 
-void _showKeywordsEditSheet
-({
-  required BuildContext context, required String dashboardContext, 
-  required List<dynamic> currentKeywords, required String? listKey, 
+void _showKeywordsEditSheet({
+  required BuildContext context,
+  required String dashboardContext,
+  required List<dynamic> currentKeywords,
+  required String? listKey,
   required TextEditingController kwsEditController,
-  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onKeywordsUpdatedCallbackFunction,
-  required OnParticipantListsItemDataUpdatedCallbackFunctionType onKeywordsUpdated,
-  required Map<String, dynamic> listData
-
-
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType
+  onKeywordsUpdatedCallbackFunction,
+  required OnParticipantListsItemDataUpdatedCallbackFunctionType
+  onKeywordsUpdated,
+  required Map<String, dynamic> listData,
 }) {
   // Converting list to a comma-separated string for editing
-  kwsEditController.text = (currentKeywords..sort()).join(", "); 
-  
-  showModalBottomSheet
-  (
+  kwsEditController.text = (currentKeywords..sort()).join(", ");
+
+  showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     isScrollControlled: true,
-    builder: (context) => Padding
-    (
-      padding: EdgeInsets.only
-      (
+    builder: (context) => Padding(
+      padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
-        left: 20, right: 20, top: 20,
+        left: 20,
+        right: 20,
+        top: 20,
       ),
-      child: Column
-      (
+      child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: 
-        [
-          TextField
-          (
+        children: [
+          TextField(
             key: const Key("kwsGroupsDashboardEditField"),
             controller: kwsEditController,
             autofocus: true,
-            decoration: InputDecoration
-            (
-              labelText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_label_text ?? "Issue with the l10n for the 'Keywords Edition' label text", 
+            decoration: InputDecoration(
+              labelText:
+                  AppLocalizations.of(
+                    context,
+                  )?.dashboard_edit_keywords_sheet_label_text ??
+                  "Issue with the l10n for the 'Keywords Edition' label text",
               labelStyle: const TextStyle(color: Colors.black),
-              hintText: AppLocalizations.of(context)?.dashboard_edit_keywords_sheet_text_field_hint ?? "Issue with the l10n for the 'Keywords Edition' text field hint",
+              hintText:
+                  AppLocalizations.of(
+                    context,
+                  )?.dashboard_edit_keywords_sheet_text_field_hint ??
+                  "Issue with the l10n for the 'Keywords Edition' text field hint",
             ),
-            onSubmitted: (_) async => onKeywordsUpdated(listKey: listKey, listData: listData)
-          ),       
+            onSubmitted: (_) async =>
+                onKeywordsUpdated(listKey: listKey, listData: listData),
+          ),
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: () async =>  onKeywordsUpdated(listKey: listKey, listData: listData),
-            child: Text
-            (
-              AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text",
-              style: const TextStyle(color: Colors.black)
+            onPressed: () async =>
+                onKeywordsUpdated(listKey: listKey, listData: listData),
+            child: Text(
+              AppLocalizations.of(context)?.save_button_text ??
+                  "Issue with the l10n for the save button text",
+              style: const TextStyle(color: Colors.black),
             ),
           ),
           const SizedBox(height: 20),
@@ -444,7 +500,6 @@ void _showKeywordsEditSheet
       ),
     ),
   );
-
 }
 
 void _showParticipantsEditSheet({
@@ -453,8 +508,10 @@ void _showParticipantsEditSheet({
   required List<dynamic> currentParticipants,
   required String? listKey,
   required TextEditingController participantsTec,
-  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType onParticipantsUpdatedCallbackFunction,
-  required OnParticipantListsItemDataUpdatedCallbackFunctionType onParticipantsUpdated,
+  required OnParticipantListsItemSetStringUpdatedCallbackFunctionType
+  onParticipantsUpdatedCallbackFunction,
+  required OnParticipantListsItemDataUpdatedCallbackFunctionType
+  onParticipantsUpdated,
   required Map<String, dynamic> listData,
 }) {
   participantsTec.text = currentParticipants.join(", ");
@@ -464,13 +521,12 @@ void _showParticipantsEditSheet({
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     isScrollControlled: true,
     builder: (context) {
-      String? errorText; 
+      String? errorText;
       // StatefulBuilder gives a local setState scoped to this sheet
       return StatefulBuilder(
-        builder: (context, setState) {   
-
+        builder: (context, setState) {
           // Getting the localized strings
-          LocalizedParticipantsStrings lps = .new(context);       
+          LocalizedParticipantsStrings lps = .new(context);
 
           Future<void> onConfirm() async {
             final participants = participantsTec.text.trim();
@@ -484,7 +540,7 @@ void _showParticipantsEditSheet({
 
             setState(() {
               // Clearing error on valid input
-              errorText = null; 
+              errorText = null;
             });
 
             await onParticipantsUpdated(listKey: listKey, listData: listData);
@@ -505,9 +561,17 @@ void _showParticipantsEditSheet({
                   controller: participantsTec,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)?.text_lists_dashboard_edit_participants_sheet_label_text ?? "Issue with the l10n for the 'Participants Edition' label text", 
+                    labelText:
+                        AppLocalizations.of(
+                          context,
+                        )?.text_lists_dashboard_edit_participants_sheet_label_text ??
+                        "Issue with the l10n for the 'Participants Edition' label text",
                     labelStyle: const TextStyle(color: Colors.black),
-                    hintText: AppLocalizations.of(context)?.text_lists_dashboard_edit_participants_sheet_text_field_hint ?? "Issue with the l10n for the 'Participants Edition' text field hint", 
+                    hintText:
+                        AppLocalizations.of(
+                          context,
+                        )?.text_lists_dashboard_edit_participants_sheet_text_field_hint ??
+                        "Issue with the l10n for the 'Participants Edition' text field hint",
                     errorText: errorText,
                   ),
                   onSubmitted: (_) async => await onConfirm(),
@@ -515,10 +579,10 @@ void _showParticipantsEditSheet({
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () async => await onConfirm(),
-                  child: Text
-                  (
-                    AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save button text", 
-                    style: const TextStyle(color: Colors.black)
+                  child: Text(
+                    AppLocalizations.of(context)?.save_button_text ??
+                        "Issue with the l10n for the save button text",
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ),
                 const SizedBox(height: 20),

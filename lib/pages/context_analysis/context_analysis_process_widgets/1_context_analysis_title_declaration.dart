@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -8,8 +8,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Context analysis}
 /// A widget used for the title of the context analysis.
-class CATitleDeclaration extends StatefulWidget 
-{
+class CATitleDeclaration extends StatefulWidget {
   /// A boolean used to state if the title is autofocused.
   final bool analysisTitleAutofocused;
 
@@ -17,52 +16,50 @@ class CATitleDeclaration extends StatefulWidget
   final String analysisTitleWhenEdition;
 
   /// A boolean used to state if an edition is in progress.
-  final bool isSessionDataEdited;  
-  
+  final bool isSessionDataEdited;
+
   /// A callback function called after editing the title is complete.
   final ValueChanged<String> onAnalysisTitleUpdatedProcessCallbackFunction;
 
-  const CATitleDeclaration
-  ({
+  const CATitleDeclaration({
     super.key,
     this.isSessionDataEdited = false,
     this.analysisTitleAutofocused = false,
     required this.analysisTitleWhenEdition,
-    required this.onAnalysisTitleUpdatedProcessCallbackFunction
+    required this.onAnalysisTitleUpdatedProcessCallbackFunction,
   });
 
   @override
   State<CATitleDeclaration> createState() => _CATitleDeclarationState();
 }
 
-class _CATitleDeclarationState extends State<CATitleDeclaration> 
-{
-
+class _CATitleDeclarationState extends State<CATitleDeclaration> {
   @override
   void initState() {
     super.initState();
-    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("CATitleDeclaration");
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: CATextFieldSanitizedAndPadded
-      (
+      child: CATextFieldSanitizedAndPadded(
         autofocus: widget.analysisTitleAutofocused,
         textFieldStartValue: widget.analysisTitleWhenEdition,
-        textFieldStyle: analysisTextFieldStyle, 
-        textFieldHint: AppLocalizations.of(context)?.ca_process_title_text_field_hint ?? "Issue with the context analysis title text field hint", 
-        textFieldHintStyle: analysisTextFieldHintStyle, 
-        errorMessageStyle: analysisTextFieldErrorMessageStyle, 
+        textFieldStyle: analysisTextFieldStyle,
+        textFieldHint:
+            AppLocalizations.of(context)?.ca_process_title_text_field_hint ??
+            "Issue with the context analysis title text field hint",
+        textFieldHintStyle: analysisTextFieldHintStyle,
+        errorMessageStyle: analysisTextFieldErrorMessageStyle,
         stringSanitizerBundlesErrorsMap: const {},
         textFieldMaxLength: 150,
-        onTextFieldValueChangedCallbackFunction : widget.onAnalysisTitleUpdatedProcessCallbackFunction        
-      )
+        onTextFieldValueChangedCallbackFunction:
+            widget.onAnalysisTitleUpdatedProcessCallbackFunction,
+      ),
     );
   }
 }

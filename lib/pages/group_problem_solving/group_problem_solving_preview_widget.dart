@@ -2,7 +2,7 @@ import "dart:convert";
 import "dart:io";
 import "dart:typed_data";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:path/path.dart" as path;
 
@@ -27,18 +27,15 @@ class GPSPreview extends StatefulWidget {
     required this.gpsPreviewPathToStoredData,
     // todo: to clean
     required this.gpsPreviewIdeasStored,
-    required this.gpsPreviewCallbackFunctionToUpdateTmpFilePath
+    required this.gpsPreviewCallbackFunctionToUpdateTmpFilePath,
   });
 
   @override
-  State<GPSPreview> createState() =>
-      _GPSPreviewState();
+  State<GPSPreview> createState() => _GPSPreviewState();
 }
 
 // TODO: to clean
-class _GPSPreviewState
-    extends State<GPSPreview> {
-
+class _GPSPreviewState extends State<GPSPreview> {
   bool _isPreviewDataLoading = true;
   // Data displayed
   String _dataSessionTitle = "";
@@ -52,61 +49,72 @@ class _GPSPreviewState
 
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSPreview");
-    
-    if (editDebug) pu.printd("Editing: GPSPreview: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}");
-    
+
+    if (editDebug)
+      pu.printd(
+        "Editing: GPSPreview: initState: widget.ideas: ${widget.gpsPreviewIdeasStored}",
+      );
+
     _dataIdeas = widget.gpsPreviewIdeasStored;
-    if (_dataIdeas.isEmpty) 
-    {
+    if (_dataIdeas.isEmpty) {
       if (editDebug) pu.printd("Editing: GPSPreview: initState: _fetchingData");
       _fetchingData();
-    }
-    else
-    {
+    } else {
       setState(() {
         _isPreviewDataLoading = false;
       });
-    }     
+    }
   }
 
   Future<void> _fetchingData() async {
     List<String> txtLines = [];
 
     try {
-      if (pathsForTestFiles.contains(widget.gpsPreviewPathToStoredData)) 
-      {
+      if (pathsForTestFiles.contains(widget.gpsPreviewPathToStoredData)) {
         _dataIdeas = [testDataMessage];
         return;
       }
 
       // Retrieving the TXT content
-      final String content = await fu.readTextFile(filePath: widget.gpsPreviewPathToStoredData);
+      final String content = await fu.readTextFile(
+        filePath: widget.gpsPreviewPathToStoredData,
+      );
       txtLines = LineSplitter.split(content).toList();
-      
+
       // To clean
       // Writing the content in a temporary file for data sharing
-      Directory testTmpDir = await Directory.systemTemp.createTemp("group_problem_solving_preview_temp");
-      String tmpFilePathWithExtension = path.join(testTmpDir.path, widget.gpsPreviewPathToStoredData.split("/").last);
-      var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));      
-      String tmpFilePath = await fu.saveFileUsingWriteAsBytes(filePathWithExtension: tmpFilePathWithExtension, dataBytes: dataBytes);
-      if (previewBuildingDebug) pu.printd("Preview Building: GPSPreview: _fetchingData: saved tmp file path for file sharing: $tmpFilePath");
+      Directory testTmpDir = await Directory.systemTemp.createTemp(
+        "group_problem_solving_preview_temp",
+      );
+      String tmpFilePathWithExtension = path.join(
+        testTmpDir.path,
+        widget.gpsPreviewPathToStoredData.split("/").last,
+      );
+      var dataBytes = Uint8List.fromList(utf8.encode(txtLines.toString()));
+      String tmpFilePath = await fu.saveFileUsingWriteAsBytes(
+        filePathWithExtension: tmpFilePathWithExtension,
+        dataBytes: dataBytes,
+      );
+      if (previewBuildingDebug)
+        pu.printd(
+          "Preview Building: GPSPreview: _fetchingData: saved tmp file path for file sharing: $tmpFilePath",
+        );
       // Updating the value for the session list item
-      widget.gpsPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);   
+      widget.gpsPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);
 
       // Building the preview
       if (txtLines.length >= 2) {
         _dataSessionTitle = txtLines[1];
         // Extracting date from the second line: "Date: MMMM dd, yyyy h:mm a"
         _dataDateString = txtLines[2].replaceFirst("Date: ", "");
-        
+
         // Ideas start after the "---" separator (index 3 onwards)
         // Numbering prefixes "1. ", "2. " are stripped
         _dataIdeas = txtLines
             .skip(4)
             .where((line) => line.trim().isNotEmpty)
             .map((line) => line.replaceFirst(RegExp(r"^\d+\.\s"), ""))
-            .toList();         
-        
+            .toList();
       }
     } catch (e) {
       pu.printd("Error reading preview data: $e");
@@ -119,19 +127,25 @@ class _GPSPreviewState
     }
   }
 
-
   @override
   void didUpdateWidget(covariant GPSPreview oldWidget) {
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSPreview: didUpdateWidget");
-    
-    if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
-    if (editDebug) pu.printd("Editing: GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");
+
+    if (editDebug)
+      pu.printd(
+        "Editing: GPSPreview: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}",
+      );
+    if (editDebug)
+      pu.printd(
+        "Editing: GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}",
+      );
 
     super.didUpdateWidget(oldWidget);
 
     // Updating with new values
-    if (widget.gpsPreviewIdeasStored != oldWidget.gpsPreviewIdeasStored && widget.gpsPreviewIdeasStored.isNotEmpty) {
+    if (widget.gpsPreviewIdeasStored != oldWidget.gpsPreviewIdeasStored &&
+        widget.gpsPreviewIdeasStored.isNotEmpty) {
       setState(() {
         _dataIdeas = widget.gpsPreviewIdeasStored;
         _isPreviewDataLoading = false;
@@ -142,7 +156,9 @@ class _GPSPreviewState
   @override
   Widget build(BuildContext context) {
     if (_isPreviewDataLoading) {
-      return const Center(child: RepaintBoundary(child: CircularProgressIndicator()));
+      return const Center(
+        child: RepaintBoundary(child: CircularProgressIndicator()),
+      );
     }
 
     if (_dataIdeas.isEmpty) {
@@ -160,18 +176,20 @@ class _GPSPreviewState
           ),
         ),
         const Divider(),
-        ..._dataIdeas.map((idea) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              // Rows with the ideas texts
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.arrow_forward, size: 18),
-                  const SizedBox(width: 8),
-                  Expanded(child: Text(idea)),
-                ],
-              ),
-            )),
+        ..._dataIdeas.map(
+          (idea) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            // Rows with the ideas texts
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.arrow_forward, size: 18),
+                const SizedBox(width: 8),
+                Expanded(child: Text(idea)),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

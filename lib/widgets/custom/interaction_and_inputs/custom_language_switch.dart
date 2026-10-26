@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/l10n/app_localizations.dart";
@@ -7,16 +7,15 @@ import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
 
 /// {@category Custom widgets}
 /// A customizable dropdown menu to select a language.
-class CustomLanguageSwitch extends StatefulWidget 
-{
+class CustomLanguageSwitch extends StatefulWidget {
   /// The callback function called when a language value is selected.
-  final OnLanguageSelectedHomePageCallbackFunctionType onLanguageSelectedHomePageCallbackFunction;
+  final OnLanguageSelectedHomePageCallbackFunctionType
+  onLanguageSelectedHomePageCallbackFunction;
 
   /// The horizontal location of the dropdown menu.
   final MainAxisAlignment languageSwitchMainAxisAlignment;
 
-  const CustomLanguageSwitch
-  ({
+  const CustomLanguageSwitch({
     super.key,
     required this.onLanguageSelectedHomePageCallbackFunction,
     // By default, the language menu is on the right side of the screen
@@ -27,64 +26,59 @@ class CustomLanguageSwitch extends StatefulWidget
   State<CustomLanguageSwitch> createState() => _CustomLanguageSwitchState();
 
   /// Method used to get the language options in the current locale.
-  List<String> getLanguages(BuildContext context) 
-  {
-    List<String> dropdownItems = [];    
+  List<String> getLanguages(BuildContext context) {
+    List<String> dropdownItems = [];
     dropdownItems = L10nUtils.getLanguages(buildContext: context);
     return dropdownItems;
   }
 }
 
-class _CustomLanguageSwitchState extends State<CustomLanguageSwitch> 
-{
+class _CustomLanguageSwitchState extends State<CustomLanguageSwitch> {
   List<String> _dropdownItems = [];
   String? _selectedValue;
 
   // Getting the language options in the current locale.
-  void _getLanguages(BuildContext context) 
-  {
+  void _getLanguages(BuildContext context) {
     _dropdownItems = widget.getLanguages(context);
     var languageCode = (Localizations.localeOf(context)).languageCode;
-    switch(languageCode)
-    {
-      case "en": _selectedValue = AppLocalizations.of(context)?.app_lang_en ?? "Issue with the selected language value";
-      case "fr": _selectedValue = AppLocalizations.of(context)?.app_lang_fr ?? "Issue with the selected language value";
-    }  
+    switch (languageCode) {
+      case "en":
+        _selectedValue =
+            AppLocalizations.of(context)?.app_lang_en ??
+            "Issue with the selected language value";
+      case "fr":
+        _selectedValue =
+            AppLocalizations.of(context)?.app_lang_fr ??
+            "Issue with the selected language value";
+    }
   }
 
   @override
-  Widget build(BuildContext context) 
-  {
+  Widget build(BuildContext context) {
     // Context needed to get the languages
     _getLanguages(context);
 
-    return 
-    Row
-    (
+    return Row(
       mainAxisAlignment: widget.languageSwitchMainAxisAlignment,
-      children: 
-      [        
-        Semantics
-        (
-          child: 
-          DropdownMenu<String>
-          (
+      children: [
+        Semantics(
+          child: DropdownMenu<String>(
             width: 180,
             leadingIcon: const Icon(Icons.language),
-            inputDecorationTheme: appTheme.inputDecorationTheme.copyWith
-            (
+            inputDecorationTheme: appTheme.inputDecorationTheme.copyWith(
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none
+              focusedBorder: InputBorder.none,
             ),
             initialSelection: _selectedValue,
-            dropdownMenuEntries: _dropdownItems.map((String value) 
-            {
+            dropdownMenuEntries: _dropdownItems.map((String value) {
               return DropdownMenuEntry<String>(value: value, label: value);
             }).toList(),
-            onSelected: (String? newValue) async
-            {
-              if (newValue != null) await widget.onLanguageSelectedHomePageCallbackFunction(newValue);
+            onSelected: (String? newValue) async {
+              if (newValue != null)
+                await widget.onLanguageSelectedHomePageCallbackFunction(
+                  newValue,
+                );
             },
           ),
         ),

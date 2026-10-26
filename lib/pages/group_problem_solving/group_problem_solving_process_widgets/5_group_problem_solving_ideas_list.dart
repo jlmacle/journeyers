@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -9,45 +9,43 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_pa
 
 /// {@category Group problem-solving}
 /// A widget used to list the ideas found during a group problem-solving process.
-class GPSIdeasList extends StatefulWidget 
-{
+class GPSIdeasList extends StatefulWidget {
   /// The ideas for the group problem-solving process.
   final List<String> ideas;
 
-  const GPSIdeasList
-  ({
-    super.key,
-    required this.ideas
-  });
+  const GPSIdeasList({super.key, required this.ideas});
 
   @override
   State<GPSIdeasList> createState() => _GPSIdeasListState();
 }
 
 class _GPSIdeasListState extends State<GPSIdeasList> {
-
   // Data related to deleting texts from the new list
-  bool _ideasAreSomeForDeletion = false;  
+  bool _ideasAreSomeForDeletion = false;
   final List<int> _ideasSelectedForDeletionIndexes = [];
-  late final List<String> _ideasEnteredList;  
+  late final List<String> _ideasEnteredList;
   final _ideaNewTec = TextEditingController();
 
-
-  void _ideaOnUpdateTheValue({required String stringParam, required int intParam})
-  {
+  void _ideaOnUpdateTheValue({
+    required String stringParam,
+    required int intParam,
+  }) {
     setState(() {
       _ideasEnteredList[intParam] = stringParam;
-      if (editDebug) pu.printd("Editing: GPSIdeasList: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_ideasEnteredList");
-    });  
+      if (editDebug)
+        pu.printd(
+          "Editing: GPSIdeasList: onUpdateTheIdeaValue: _enteredIdeasList (updated): $_ideasEnteredList",
+        );
+    });
   }
 
   @override
   void initState() {
     super.initState();
-                    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("GPSIdeasList");
-    
+
     _ideasEnteredList = widget.ideas;
   }
 
@@ -61,26 +59,20 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
   Widget build(BuildContext context) {
     LocalizedGPSStrings lgps = .new(context);
 
-    return GestureDetector
-    (    
-      onTap: ()
-             {
-              // List edition if list not empty
-              if (widget.ideas.isNotEmpty)
-              {
-                _ideasShowEditOverlay(context);
-              }
-             },
-      child : 
-      Column(
+    return GestureDetector(
+      onTap: () {
+        // List edition if list not empty
+        if (widget.ideas.isNotEmpty) {
+          _ideasShowEditOverlay(context);
+        }
+      },
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           Center(
-             child: 
-             GestureDetector
-             (
+          Center(
+            child: GestureDetector(
               onTap: () => _ideasShowEditOverlay(context),
-              child: Container(        
+              child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -90,72 +82,73 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                       child: Icon(Icons.add_circle_outline),
                     ),
                     Center(
-                      child: Text(lgps.ideasListTitle, style: problemSolvingIdeasTitle),
-                    )
+                      child: Text(
+                        lgps.ideasListTitle,
+                        style: problemSolvingIdeasTitle,
+                      ),
+                    ),
                   ],
                 ),
               ),
-            )       
-           ),
+            ),
+          ),
           const SizedBox(height: 5),
           if (widget.ideas.isEmpty)
-            Padding
-            (
+            Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Text(lgps.ideasListPlaceholder, 
-              style: const TextStyle(fontStyle: FontStyle.italic)),
+              child: Text(
+                lgps.ideasListPlaceholder,
+                style: const TextStyle(fontStyle: FontStyle.italic),
+              ),
             ),
-          
-          ...widget.ideas.asMap().entries.map(
-          (entry) {
+
+          ...widget.ideas.asMap().entries.map((entry) {
             final index = entry.key;
             final idea = entry.value;
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 4.0,
+                horizontal: 16.0,
+              ),
               child: Card(
                 child: ListTile(
                   leading: const Icon(Icons.edit),
                   title: Text(
-                    key: Key("gps-process-idea-$index"), // Use the index in the key
+                    key: Key(
+                      "gps-process-idea-$index",
+                    ), // Use the index in the key
                     idea,
                   ),
                 ),
               ),
             );
-          },
-        ),
+          }),
         ],
-      )
-
+      ),
     );
   }
 
-
-  // Method used to display an overlay with the ideas to edit. 
-  void _ideasShowEditOverlay(BuildContext context) 
-  {
-    
-    showGeneralDialog
-    (
+  // Method used to display an overlay with the ideas to edit.
+  void _ideasShowEditOverlay(BuildContext context) {
+    showGeneralDialog(
       context: context,
       transitionDuration: const Duration(milliseconds: 300),
-      pageBuilder: (context, anim1, anim2) 
-      {
+      pageBuilder: (context, anim1, anim2) {
         // Getting the localized strings
         LocalizedGPSStrings lgps = .new(context);
 
-        return Scaffold
-        (
-          appBar:AppBar
-          (
-            centerTitle: true, 
-            title: 
-            Text
-            (
-              textAlign: TextAlign.center, maxLines:20, overflow: TextOverflow.visible, 
-              softWrap:true, lgps.ideasListAppBarTitle, style: previewTitleStyle
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              textAlign: TextAlign.center,
+              maxLines: 20,
+              overflow: TextOverflow.visible,
+              softWrap: true,
+              lgps.ideasListAppBarTitle,
+              style: previewTitleStyle,
             ),
- 
+
             // Right side: Close Button
             actions: [
               IconButton(
@@ -166,117 +159,117 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
               ),
             ],
           ),
-          body: 
-          SafeArea(
-            child:  
-            StatefulBuilder(
-              builder: (BuildContext context, StateSetter setLocalState) 
-              {   
-                return      
-                Column(
+          body: SafeArea(
+            child: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setLocalState) {
+                return Column(
                   children: [
-                    NewParticipantsDeletionByBulk
-                      (
-                        areSomeTextItemsSelectedForDeletion: _ideasAreSomeForDeletion,
-                        enteredTextItemsList: _ideasEnteredList,
-                        textItemsSelectedForDeletionIndexes: _ideasSelectedForDeletionIndexes,
-                        callbackFunctionToRefreshTheList: 
-                        () 
-                        {
-                          setLocalState((){});
-                          setState(() {_ideasAreSomeForDeletion = false;});
-                        }
-                      ),
+                    NewParticipantsDeletionByBulk(
+                      areSomeTextItemsSelectedForDeletion:
+                          _ideasAreSomeForDeletion,
+                      enteredTextItemsList: _ideasEnteredList,
+                      textItemsSelectedForDeletionIndexes:
+                          _ideasSelectedForDeletionIndexes,
+                      callbackFunctionToRefreshTheList: () {
+                        setLocalState(() {});
+                        setState(() {
+                          _ideasAreSomeForDeletion = false;
+                        });
+                      },
+                    ),
                     // List of added texts or placeholder message
                     Expanded(
-                      child: 
-                        ListView.builder
-                            (                  
-                              padding: const EdgeInsets.only(bottom: 96),
-                              itemCount: widget.ideas.length,
-                              itemBuilder: (_, index) 
-                              {
-                                var key = "editable-deletable-idea-$index";
-                                return 
-                                   
-                                    EditableDeletableTextListItem
-                                    (
-                                      key: Key(key),
-                                      itemIndex: index, 
-                                      itemText: widget.ideas[index], 
-                                      onCheckboxChangedCallbackFunction: ({required bool? boolParam, required int intParam}) 
-                                                                          { 
-                                                             
-                                                                            if(boolParam!) 
-                                                                            {                                                                    
-                                                                              // adding the index to _ideasSelectedForDeletionIndexes
-                                                                              _ideasSelectedForDeletionIndexes.add(index);
-                                                                              _ideasSelectedForDeletionIndexes.sort();
-                                                                              _ideasAreSomeForDeletion = true;                                    
-                                                                              
-                                                                              setLocalState(() {});
-                                                                            }
-                                                                            else{
-                                                                              _ideasSelectedForDeletionIndexes.remove(index);
-                                                                              if (_ideasSelectedForDeletionIndexes.isEmpty) _ideasAreSomeForDeletion = false;
-                                                                              
-                                                                              setLocalState(() {});
-                                                                            }
-                                                                            if (editDebug) pu.printd("Editing: GPSIdeasList: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes");
-                                                                          }, 
-                                      // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
-                                      parentCallbackFunctionToUpdateTheListItemValue: 
-                                      ({required intParam, required stringParam}) 
-                                      {
-                                        setLocalState(() {});
-                                        _ideaOnUpdateTheValue(stringParam: stringParam, intParam: intParam);
-                                      },
-                                      parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion: (index){_ideasSelectedForDeletionIndexes.add(index);}, 
-                                      themeData: Theme.of(context),                          
-                                    )                          
-                                  ;
-                              },
-                            )
+                      child: ListView.builder(
+                        padding: const EdgeInsets.only(bottom: 96),
+                        itemCount: widget.ideas.length,
+                        itemBuilder: (_, index) {
+                          var key = "editable-deletable-idea-$index";
+                          return EditableDeletableTextListItem(
+                            key: Key(key),
+                            itemIndex: index,
+                            itemText: widget.ideas[index],
+                            onCheckboxChangedCallbackFunction:
+                                ({
+                                  required bool? boolParam,
+                                  required int intParam,
+                                }) {
+                                  if (boolParam!) {
+                                    // adding the index to _ideasSelectedForDeletionIndexes
+                                    _ideasSelectedForDeletionIndexes.add(index);
+                                    _ideasSelectedForDeletionIndexes.sort();
+                                    _ideasAreSomeForDeletion = true;
+
+                                    setLocalState(() {});
+                                  } else {
+                                    _ideasSelectedForDeletionIndexes.remove(
+                                      index,
+                                    );
+                                    if (_ideasSelectedForDeletionIndexes
+                                        .isEmpty)
+                                      _ideasAreSomeForDeletion = false;
+
+                                    setLocalState(() {});
+                                  }
+                                  if (editDebug)
+                                    pu.printd(
+                                      "Editing: GPSIdeasList: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes",
+                                    );
+                                },
+                            // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
+                            parentCallbackFunctionToUpdateTheListItemValue:
+                                ({required intParam, required stringParam}) {
+                                  setLocalState(() {});
+                                  _ideaOnUpdateTheValue(
+                                    stringParam: stringParam,
+                                    intParam: intParam,
+                                  );
+                                },
+                            parentCallbackFunctionToUpdateTheListOfItemsSelectedForDeletion:
+                                (index) {
+                                  _ideasSelectedForDeletionIndexes.add(index);
+                                },
+                            themeData: Theme.of(context),
+                          );
+                        },
+                      ),
                     ),
                     // TextField used to add a new text
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextField
-                      (
+                      child: TextField(
                         key: const Key("ideaOverlayField"),
                         controller: _ideaNewTec,
                         textAlign: TextAlign.left,
-                        decoration: InputDecoration
-                        (
-                          hint: Text
-                          ( 
+                        decoration: InputDecoration(
+                          hint: Text(
                             lgps.newIdeaTextFieldHint,
-                            textAlign: TextAlign.left,                                          
+                            textAlign: TextAlign.left,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),                  
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
                         ),
-                        onSubmitted: (value)
-                        {
+                        onSubmitted: (value) {
                           setLocalState(() {
                             _ideasEnteredList.add(value.trim());
                           });
-                          setState(() {
-                            
-                          });
+                          setState(() {});
                           _ideaNewTec.clear();
-                          if (editDebug) pu.printd("Editing: GPSIdeasList: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList");
+                          if (editDebug)
+                            pu.printd(
+                              "Editing: GPSIdeasList: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList",
+                            );
                         },
                       ),
                     ),
-                  ]
-              );
-              }
+                  ],
+                );
+              },
+            ),
           ),
-        )
         );
-      }
+      },
     );
   }
-
-
 }

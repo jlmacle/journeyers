@@ -1,5 +1,4 @@
-
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
@@ -17,53 +16,54 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/3_participants_dashboard_deletion_by_bulk.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/participants_dashboard/4_participants_lists_item.dart";
 
-
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A participants lists dashboard widget.
-class ParticipantsListsDashboard extends StatefulWidget 
-{
+class ParticipantsListsDashboard extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
+  /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A callback function called when session data is retrieved before edition.
-  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType
+  onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A callback function called when the participants list is loaded.
   final ValueChanged<List<String>> onParticipantsLoadedCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
-  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState>?
+  dashboardFilteringByKeywordsKey;
 
-  const ParticipantsListsDashboard
-  ({
+  const ParticipantsListsDashboard({
     super.key,
     required this.dashboardContext,
     required this.onAllSessionFilesDeletedContextPageCallbackFunction,
     required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
     required this.onParticipantsLoadedCallbackFunction,
-    required this.dashboardFilteringByKeywordsKey
+    required this.dashboardFilteringByKeywordsKey,
   });
 
   @override
-  State<ParticipantsListsDashboard> createState() => ParticipantsListsDashboardState();
+  State<ParticipantsListsDashboard> createState() =>
+      ParticipantsListsDashboardState();
 }
 
-class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard> 
-{
+class ParticipantsListsDashboardState
+    extends State<ParticipantsListsDashboard> {
   // The DB
   final _listsDB = ParticipantsListsDB();
 
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
+  final GlobalKey<ParticipantsListsDashboardFilteringByKeywordsState>
+  _dashboardFilteringByKeywordsKey = .new();
 
   // ─── PREFERENCES and DATA RETRIEVAL related data and methods ───────────────────────────────────────
   // List data from the DB
   late List<dynamic> _listData;
-  
+
   // Starting by loading data
   bool _isDataLoading = true;
 
@@ -73,31 +73,39 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   // _filteredLists is what is used by build()
   List<dynamic> _listsDataFiltered = [];
 
-  // Method used to retrieve the session data, to get the list of used keywords, 
+  // Method used to retrieve the session data, to get the list of used keywords,
   // and the list of all sessions available
-  Future<void> _getStoredListsData() async 
-  {
-    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: getStoredListsData");
-    // Retrieving data 
+  Future<void> _getStoredListsData() async {
+    if (listDebug)
+      pu.printd("List debug: ParticipantsListsDashboard: getStoredListsData");
+    // Retrieving data
     _listData = await _listsDB.loadDataStructure();
-    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: _listData: _listData");
+    if (listDebug)
+      pu.printd("List debug: ParticipantsListsDashboard: _listData: _listData");
     // Getting the list labels
     final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
-    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: getStoredListsData: labels: $labels");
+    if (listDebug)
+      pu.printd(
+        "List debug: ParticipantsListsDashboard: getStoredListsData: labels: $labels",
+      );
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
-    for (var label in labels.reversed)
-    {
-      var listData = _listsDB.loadListDataByListLabelSync(label: label, dataStructure: _listData);
+    for (var label in labels.reversed) {
+      var listData = _listsDB.loadListDataByListLabelSync(
+        label: label,
+        dataStructure: _listData,
+      );
       _listsDataAll.add(listData);
     }
 
-    if (listDebug) pu.printd("List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_listsDataAll");
-    
+    if (listDebug)
+      pu.printd(
+        "List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_listsDataAll",
+      );
+
     // Getting the used keywords from the retrieved data
     _keywordsAll = await _keywordsGetAll(_listsDataAll);
-
 
     // _filteredLists is used in build
     _listsDataFiltered.clear();
@@ -106,7 +114,7 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     // todo: to clean
     // Data is not sorted by date by default, and needs sorting
     // await sortSessionByDateAddJm(list: _filteredListsData, dateFormat: DateFormatsUtils.dateFormatMMMMddyyyy, byAscendingDate: false);
-    
+
     // Re-build to display the lists data
     setState(() {
       _isDataLoading = false;
@@ -115,10 +123,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
 
   // Previous data retrieval; _allLists and _filteredLists are initialized
   @override
-  void initState() 
-  {
+  void initState() {
     super.initState();
-         
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboard");
 
@@ -136,12 +143,9 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   final List<String> _keywordsSelected = [];
 
   // Method used to get the list of keywords present in a session data
-  Future<List<String>> _keywordsGetAll(List<dynamic> listOfListData) async 
-  {
-
+  Future<List<String>> _keywordsGetAll(List<dynamic> listOfListData) async {
     Set<String> kwSet = {};
-    for (var listData in listOfListData) 
-    {
+    for (var listData in listOfListData) {
       List<dynamic> kws = listData[itemKeywordsKey];
       kwSet.addAll(kws.cast<String>());
     }
@@ -149,14 +153,17 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  Future<void> _keywordsRefreshAfterSessionDeletion() async
-  {
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+  Future<void> _keywordsRefreshAfterSessionDeletion() async {
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsRefreshAfterSessionDeletion();
   }
 
   // Method used to update the list keywords in the database
-  Future<void> _updateKeywordsInDB(String listKey, Set<String> updatedKeywords, Map<String, dynamic> listData) async 
-  {
+  Future<void> _updateKeywordsInDB(
+    String listKey,
+    Set<String> updatedKeywords,
+    Map<String, dynamic> listData,
+  ) async {
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
@@ -171,36 +178,44 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
 
     // Updating the local UI state
     setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar
-          (
-            content: Text(lds.snackbarMessageKeywordsUpdated),
-            duration: const Duration(seconds: 2),
-          )
-        );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(lds.snackbarMessageKeywordsUpdated),
+          duration: const Duration(seconds: 2),
+        ),
+      );
     });
   }
-    
+
   // Method used after keywords update
-  Future<void> _updateListKeywords({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
-  {
-    if (listDebug) pu.printd("List debug: updateKeywords: updatedKeywords: $updatedItems");
+  Future<void> _updateListKeywords({
+    required Set<String> updatedItems,
+    required String? listKey,
+    required Map<String, dynamic> listData,
+  }) async {
+    if (listDebug)
+      pu.printd("List debug: updateKeywords: updatedKeywords: $updatedItems");
     // To accomodate widget testing
-    if (listKey != null)
-    {
+    if (listKey != null) {
       // Updating the DB
-      await _updateKeywordsInDB(listKey, updatedItems, listData);            
-    }    
+      await _updateKeywordsInDB(listKey, updatedItems, listData);
+    }
   }
 
   // Method used to update the list participants
-  Future<void> _updateParticipantsInDB(String listKey, Set<String> updatedParticipants, Map<String, dynamic> listData) async 
-  {
+  Future<void> _updateParticipantsInDB(
+    String listKey,
+    Set<String> updatedParticipants,
+    Map<String, dynamic> listData,
+  ) async {
     // Getting the localized strings
     LocalizedParticipantsStrings lps = .new(context);
 
     // Updating listData with the new participants
-    listData[subItemsDataListKey] = await _listsDB.updateParticipants(updatedParticipants, listData);    
+    listData[subItemsDataListKey] = await _listsDB.updateParticipants(
+      updatedParticipants,
+      listData,
+    );
 
     // Updating the storage
     await _listsDB.updateListData(listKey, listData);
@@ -210,20 +225,21 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
 
     // Updating the local UI state
     setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar
-          (
-            content: Text(lps.participantsUpdatedSnackBarMessage),
-            duration: const Duration(seconds: 2),
-          ),
-        );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(lps.participantsUpdatedSnackBarMessage),
+          duration: const Duration(seconds: 2),
+        ),
+      );
     });
   }
 
   // TODO: To clean
   // Method used to update the list participants
-  Future<void> _updateListNameInDB(String listKey, Map<String, dynamic> listData) async 
-  {
+  Future<void> _updateListNameInDB(
+    String listKey,
+    Map<String, dynamic> listData,
+  ) async {
     // Getting the localized strings
     LocalizedParticipantsStrings lps = .new(context);
 
@@ -235,50 +251,51 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
 
     // Updating the local UI state
     setState(() {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar
-          (
-            content: Text(lps.listUpdatedSnackBarMessage),
-            duration: const Duration(seconds: 2),
-          )
-        );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(lps.listUpdatedSnackBarMessage),
+          duration: const Duration(seconds: 2),
+        ),
+      );
     });
   }
 
   // Method used to update the list name
-  Future<void> _updateListName
-  ({
-    required String? listKey, 
-    required Map<String, dynamic> listData
-  }) async
-  {
-    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: _updateListName");
+  Future<void> _updateListName({
+    required String? listKey,
+    required Map<String, dynamic> listData,
+  }) async {
+    if (listDebug)
+      pu.printd("List debug: ParticipantsListsDashboard: _updateListName");
     // To accomodate widget testing
-    if (listKey != null)
-    {
+    if (listKey != null) {
       // Updating the DB
-      await _updateListNameInDB(listKey, listData);            
-    }    
+      await _updateListNameInDB(listKey, listData);
+    }
   }
 
   // Method used after participants update
-  Future<void> _updateParticipants({required Set<String> updatedItems, required String? listKey, required Map<String, dynamic> listData}) async
-  {
-    if (listDebug) pu.printd("List debug: Lists display: updateParticipants: updatedItems: $updatedItems");
+  Future<void> _updateParticipants({
+    required Set<String> updatedItems,
+    required String? listKey,
+    required Map<String, dynamic> listData,
+  }) async {
+    if (listDebug)
+      pu.printd(
+        "List debug: Lists display: updateParticipants: updatedItems: $updatedItems",
+      );
     // To accomodate widget testing
-    if (listKey != null)
-    {
+    if (listKey != null) {
       // Updating the DB
-      await _updateParticipantsInDB(listKey, updatedItems, listData);            
-    }    
+      await _updateParticipantsInDB(listKey, updatedItems, listData);
+    }
   }
-  
+
   // ─── DELETION OF SINGLE LIST related data and methods ───────────────────────────────────────
-  final List<String> _listsSelectedForDeletionKeys = [];  
+  final List<String> _listsSelectedForDeletionKeys = [];
 
   // Method used to delete a single session data from the session list action icons
-  Future<void> _selectedSessionDelete(String listKey) async
-  {
+  Future<void> _selectedSessionDelete(String listKey) async {
     // Getting the localized strings
     LocalizedParticipantsStrings lps = .new(context);
 
@@ -286,49 +303,46 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     await _listsDB.removeListData([listKey]);
 
     // Updating the _allListsData list
-    _listsDataAll.removeWhere((listData) => listData[itemKey] == listKey); 
+    _listsDataAll.removeWhere((listData) => listData[itemKey] == listKey);
 
     // Updating the _filteredListsData list used by the UI
-    _listsDataFiltered.removeWhere((listData) => listData[itemKey] == listKey);     
-              
+    _listsDataFiltered.removeWhere((listData) => listData[itemKey] == listKey);
+
     // Updating the keys of the lists selected for bulk deletion
-    _listsSelectedForDeletionKeys.removeWhere
-    (
-      (_) => _listsSelectedForDeletionKeys.contains(listKey)
+    _listsSelectedForDeletionKeys.removeWhere(
+      (_) => _listsSelectedForDeletionKeys.contains(listKey),
     );
 
     // Updating the keywords list
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();
-    
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsApplyFiltering();
+
     if (!mounted) return;
     // Displaying an informational message
-    ScaffoldMessenger.of(context).showSnackBar
-    ( 
-      SnackBar
-      (
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(lps.listDeletedSnackbarMessage),
         duration: const Duration(seconds: 2),
-      )
+      ),
     );
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
-    if (_listsDataAll.isEmpty) 
-    {
+    if (_listsDataAll.isEmpty) {
       // resetWasSessionDataSavedStatus
-      await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await rtdu.resetWasSessionDataSavedStatus(
+        context: widget.dashboardContext,
+      );
       // refreshing the page
       widget.onAllSessionFilesDeletedContextPageCallbackFunction();
-    }
-    else
-    {
+    } else {
       // refreshing the page
       setState(() {});
     }
-    
-     }
+  }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
   final TextEditingController _titleTec = .new();
@@ -339,162 +353,167 @@ class ParticipantsListsDashboardState extends State<ParticipantsListsDashboard>
     super.dispose();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
-
-    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading"); 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered"); 
+    if (listDebug)
+      pu.printd(
+        "List debug: ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading",
+      );
+    if (listDebug)
+      pu.printd(
+        "List debug: ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered",
+      );
 
     // Getting the localized strings
     LocalizedParticipantsStrings lps = .new(context);
     LocalizedUtilsStrings lus = .new(context);
 
-    return 
-    Scaffold
-    (
-      appBar: AppBar
-              (
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                actions: 
-                [
-                  IconButton
-                  (
-                    icon: const Icon(Icons.close),
-                    tooltip: lus.overlayCloseButtonTooltip,
-                    color: black,
-                    onPressed: () => Navigator.of(context).pop()
-                  )
-                ],
-              ),
-      body: 
-      SafeArea
-      (
-        child: 
-      _isDataLoading
-          ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
-          : CustomScrollView(
-              // Using a CustomScrollView to coordinate the fade effect
-              slivers: [
-                // Static heading (Scrolls away normally)
-                // TODO: the sliver code to clean eventually
-    
-                // DASHBOARD TITLE
-                SliverToBoxAdapter(
-                  child: ParticipantsListsDashboardTitle
-                  (
-                    title: lps.listsDashboardTitle
-                  )
-                ),
-    
-                // DASHBOARD FILTERING FEATURES
-                SliverToBoxAdapter 
-                (
-                  child: ParticipantsListsDashboardSortingAndFilteringFeature
-                  (
-                    dashboardContext: widget.dashboardContext, 
-                    participantsListsAll: _listsDataAll, participantsListsFiltered: _listsDataFiltered,
-                    keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
-                    dashboardCallbackFunctionToRefreshTheParticipantsLists: () => setState(() {}),
-                    dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            tooltip: lus.overlayCloseButtonTooltip,
+            color: black,
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: _isDataLoading
+            ? const Center(
+                child: RepaintBoundary(child: CircularProgressIndicator()),
+              )
+            : CustomScrollView(
+                // Using a CustomScrollView to coordinate the fade effect
+                slivers: [
+                  // Static heading (Scrolls away normally)
+                  // TODO: the sliver code to clean eventually
+
+                  // DASHBOARD TITLE
+                  SliverToBoxAdapter(
+                    child: ParticipantsListsDashboardTitle(
+                      title: lps.listsDashboardTitle,
+                    ),
                   ),
-                ),
-    
-                // BULK DELETION
-                SliverToBoxAdapter(
-                  child: ParticipantsListsDashboardDeletionByBulk
-                  (
-                    dashboardContext: widget.dashboardContext,
-                    participantsListsAll: _listsDataAll,
-                    participantsListsFiltered: _listsDataFiltered,
-                    areListsForDeletion: _listsSelectedForDeletionKeys.isNotEmpty,
-                    participantsListsSelectedForDeletionKeys: _listsSelectedForDeletionKeys,
-                    dashboardCallbackFunctionToRefreshTheParticipantsLists: () => setState(() {})                    
-                  )
-                ),
-    
-                // Divider
-                const SliverToBoxAdapter
-                (
-                  child: Divider()                       
-                ), 
-                
-                if (_listsDataFiltered.isEmpty)
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Center(
-                      child: FilledButton.icon(
-                        onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute<void>(
-                            builder: (_) => NewParticipantsList
-                                              (
-                                                themeData: Theme.of(context),
-                                                onParticipantsListLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
-                                              ),
+
+                  // DASHBOARD FILTERING FEATURES
+                  SliverToBoxAdapter(
+                    child: ParticipantsListsDashboardSortingAndFilteringFeature(
+                      dashboardContext: widget.dashboardContext,
+                      participantsListsAll: _listsDataAll,
+                      participantsListsFiltered: _listsDataFiltered,
+                      keywordsAll: _keywordsAll,
+                      keywordsSelected: _keywordsSelected,
+                      dashboardCallbackFunctionToRefreshTheParticipantsLists:
+                          () => setState(() {}),
+                      dashboardFilteringByKeywordsKey:
+                          _dashboardFilteringByKeywordsKey,
+                    ),
+                  ),
+
+                  // BULK DELETION
+                  SliverToBoxAdapter(
+                    child: ParticipantsListsDashboardDeletionByBulk(
+                      dashboardContext: widget.dashboardContext,
+                      participantsListsAll: _listsDataAll,
+                      participantsListsFiltered: _listsDataFiltered,
+                      areListsForDeletion:
+                          _listsSelectedForDeletionKeys.isNotEmpty,
+                      participantsListsSelectedForDeletionKeys:
+                          _listsSelectedForDeletionKeys,
+                      dashboardCallbackFunctionToRefreshTheParticipantsLists:
+                          () => setState(() {}),
+                    ),
+                  ),
+
+                  // Divider
+                  const SliverToBoxAdapter(child: Divider()),
+
+                  if (_listsDataFiltered.isEmpty)
+                    SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(
+                        child: FilledButton.icon(
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => NewParticipantsList(
+                                themeData: Theme.of(context),
+                                onParticipantsListLoadedCallbackFunction:
+                                    widget.onParticipantsLoadedCallbackFunction,
+                              ),
+                            ),
+                          ),
+                          label: Text(
+                            lps.newListButtonLabel,
+                            textAlign: TextAlign.center,
+                          ),
+                          style: FilledButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 90,
+                            ),
                           ),
                         ),
-                        label:  
-                        Text
-                        (
-                          lps.newListButtonLabel, 
-                          textAlign: TextAlign.center
-                        ),
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 90),
-                        ),
+                      ),
+                    )
+                  else
+                    // List of lists
+                    SliverPadding(
+                      padding: const EdgeInsets.only(bottom: 0),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final listData = _listsDataFiltered[index];
+
+                          return ParticipantsListsItem(
+                            listMetadata: listData,
+                            listIndex: index,
+                            dashboardContext: widget.dashboardContext,
+                            isChecked: _listsSelectedForDeletionKeys.contains(
+                              listData[itemKey],
+                            ),
+                            onCheckboxChangedCallbackFunction: (bool? value) {
+                              setState(() {
+                                if (value == true) {
+                                  _listsSelectedForDeletionKeys.add(
+                                    listData[itemKey],
+                                  );
+                                } else {
+                                  _listsSelectedForDeletionKeys.remove(
+                                    listData[itemKey],
+                                  );
+                                }
+                              });
+                            },
+                            onRetrievedSessionDataBeforeEditionCallbackFunction:
+                                ({
+                                  required String dashboardContext,
+                                  required bool isSessionDataBeingEdited,
+                                  required String titleWhenEdition,
+                                  required Set<String> keywordsWhenEdition,
+                                  required Object dtoWhenEdition,
+                                  required String
+                                  fileNameWithoutExtensionWhenEdition,
+                                  required String filePathWhenEdition,
+                                }) {},
+                            onKeywordsUpdatedCallbackFunction:
+                                _updateListKeywords,
+                            onListNameUpdatedCallbackFunction: _updateListName,
+                            onParticipantsUpdatedCallbackFunction:
+                                _updateParticipants,
+                            onDeleteCallbackFunction: () async =>
+                                await _selectedSessionDelete(listData[itemKey]),
+                            onParticipantsLoadedCallbackFunction:
+                                widget.onParticipantsLoadedCallbackFunction,
+                          );
+                        }, childCount: _listsDataFiltered.length),
                       ),
                     ),
-                  )
-                else
-                // List of lists
-                  SliverPadding
-                  (
-                  padding: const EdgeInsets.only(bottom: 0),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final listData = _listsDataFiltered[index];
-    
-                        return ParticipantsListsItem(
-                          listMetadata: listData,
-                          listIndex: index,
-                          dashboardContext: widget.dashboardContext,
-                          isChecked: _listsSelectedForDeletionKeys.contains(listData[itemKey]),
-                          onCheckboxChangedCallbackFunction: (bool? value) {
-                            setState(() {
-                              if (value == true) {
-                                _listsSelectedForDeletionKeys.add(listData[itemKey]);
-                              } else {
-                                _listsSelectedForDeletionKeys.remove(listData[itemKey]);
-                              }
-                            });
-                          },
-                          onRetrievedSessionDataBeforeEditionCallbackFunction: 
-                          ({
-                            required String dashboardContext,
-                            required bool isSessionDataBeingEdited, 
-                            required String titleWhenEdition, 
-                            required Set<String> keywordsWhenEdition,
-                            required Object dtoWhenEdition, 
-                            required String fileNameWithoutExtensionWhenEdition,
-                            required String filePathWhenEdition
-                          }) {},
-                          onKeywordsUpdatedCallbackFunction: _updateListKeywords,
-                          onListNameUpdatedCallbackFunction: _updateListName,
-                          onParticipantsUpdatedCallbackFunction: _updateParticipants,
-                          onDeleteCallbackFunction: () async => await _selectedSessionDelete(listData[itemKey]),
-                          onParticipantsLoadedCallbackFunction: widget.onParticipantsLoadedCallbackFunction,
-                        );
-                      },
-                      childCount: _listsDataFiltered.length,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
+                ],
+              ),
+      ),
     );
-  
   }
-
 }

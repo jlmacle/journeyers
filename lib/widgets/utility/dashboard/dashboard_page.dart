@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:collection/collection.dart";
 
@@ -21,49 +21,47 @@ import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/2c_dashbo
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/3_dashboard_deletion_by_bulk.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 
-
 /// {@category Utility widgets}
 /// {@category Dashboard}
 /// A widget displaying a dashboard of session data, with assumption concerning the session data structure:
 /// \[{"title":"aTitle","keywords":\[kw,kw2\],"date":"March 20, 2026 4:51 PM","filePath":"path/a.ext"},
 /// {"title":"aTitle2","keywords":\[kw,kw3\],"date":"March 20, 2026 4:36 PM","filePath":"path/a2.ext"}\].
-/// For the context analyses, the extension is "CSV". 
+/// For the context analyses, the extension is "CSV".
 /// For the group problem-solvings, the extension is "TXT".
-class DashboardPage extends StatefulWidget 
-{
+class DashboardPage extends StatefulWidget {
   /// The context of the dashboard (context analyses or group problem-solving sessions).
   final String dashboardContext;
 
-  /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.  
+  /// A callback function called if all session data is deleted from the dashboard, and used to pass from the dashboard to a new session process.
   final VoidCallback onAllSessionFilesDeletedContextPageCallbackFunction;
 
   /// A callback function called when session data is retrieved before edition.
-  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType onRetrievedSessionDataBeforeEditionCallbackFunction;
+  final OnRetrievedSessionDataBeforeEditionCallbackFunctionType
+  onRetrievedSessionDataBeforeEditionCallbackFunction;
 
   /// A global key linked to the DashboardFilteringByKeywords widget.
-  final GlobalKey<DashboardFilteringByKeywordsState>? dashboardFilteringByKeywordsKey;
+  final GlobalKey<DashboardFilteringByKeywordsState>?
+  dashboardFilteringByKeywordsKey;
 
-  const DashboardPage
-  ({
+  const DashboardPage({
     super.key,
     required this.dashboardContext,
     required this.onAllSessionFilesDeletedContextPageCallbackFunction,
     required this.onRetrievedSessionDataBeforeEditionCallbackFunction,
-    required this.dashboardFilteringByKeywordsKey
+    required this.dashboardFilteringByKeywordsKey,
   });
 
   @override
   State<DashboardPage> createState() => DashboardPageState();
 }
 
-class DashboardPageState extends State<DashboardPage> 
-{
+class DashboardPageState extends State<DashboardPage> {
   // ─── GLOBAL KEYS ───────────────────────────────────────
-  final GlobalKey<DashboardFilteringByKeywordsState> _dashboardFilteringByKeywordsKey = .new();
+  final GlobalKey<DashboardFilteringByKeywordsState>
+  _dashboardFilteringByKeywordsKey = .new();
 
   // Method used to refresh the dashboard page
-  void _refreshDashboard()
-  {
+  void _refreshDashboard() {
     setState(() {});
   }
 
@@ -77,15 +75,14 @@ class DashboardPageState extends State<DashboardPage>
   // _sessionsMetadataFiltered is what is used by build()
   List<dynamic>? _sessionsMetadataFiltered;
 
-  // Method used to retrieve the session data, to get the list of used keywords, 
+  // Method used to retrieve the session data, to get the list of used keywords,
   // and the list of all sessions available
-  Future<void> _getStoredSessionData() async 
-  {
+  Future<void> _getStoredSessionData() async {
     // Retrieving data from file
-    final retrievedSessionMetadata = 
-      await du.retrieveAllDashboardMetadata
-                (typeOfDashboardContext: widget.dashboardContext);
-    
+    final retrievedSessionMetadata = await du.retrieveAllDashboardMetadata(
+      typeOfDashboardContext: widget.dashboardContext,
+    );
+
     // Getting the used keywords from the retrieved data
     _keywordsAll = await _keywordsAllGet(retrievedSessionMetadata);
 
@@ -96,15 +93,16 @@ class DashboardPageState extends State<DashboardPage>
     _sessionsMetadataFiltered!.clear();
     _sessionsMetadataFiltered!.addAll(retrievedSessionMetadata);
 
-    logd("DashboardPage: initState: _sessionsMetadataAll (context): : $_sessionsMetadataAll (${widget.dashboardContext})");
-    
-    // Data is not sorted by date by default, and needs sorting
-    await sortSessionByDate
-    (
-      list: _sessionsMetadataFiltered!, 
-      byAscendingDate: false
+    logd(
+      "DashboardPage: initState: _sessionsMetadataAll (context): : $_sessionsMetadataAll (${widget.dashboardContext})",
     );
-        
+
+    // Data is not sorted by date by default, and needs sorting
+    await sortSessionByDate(
+      list: _sessionsMetadataFiltered!,
+      byAscendingDate: false,
+    );
+
     // Re-build to display the sessions
     setState(() {
       _isDataLoading = false;
@@ -121,10 +119,9 @@ class DashboardPageState extends State<DashboardPage>
 
   // Previous session data retrieval; _sessionsMetadataAll and _sessionsMetadataFiltered are initialized
   @override
-  void initState() 
-  {
+  void initState() {
     super.initState();
-    
+
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("DashboardPage");
 
@@ -142,11 +139,9 @@ class DashboardPageState extends State<DashboardPage>
   final List<String> _keywordsSelected = [];
 
   // Method used to get the list of keywords present in a session data
-  Future<List<String>> _keywordsAllGet(List<dynamic> listOfSessionData) async 
-  {
+  Future<List<String>> _keywordsAllGet(List<dynamic> listOfSessionData) async {
     Set<String> kwSet = {};
-    for (var sessionData in listOfSessionData) 
-    {
+    for (var sessionData in listOfSessionData) {
       List<dynamic> kws = sessionData[DashboardUtils.keyKeywords];
       kwSet.addAll(kws.cast<String>());
     }
@@ -154,35 +149,34 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to refresh the keywords list after deletion of session data
-  Future<void> _keywordsRefreshAfterSessionDeletion() async
-  {
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+  Future<void> _keywordsRefreshAfterSessionDeletion() async {
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsRefreshAfterSessionDeletion();
   }
-    
+
   // Method used after keywords update
-  Future<void> _keywordsUpdate({required Set<String> updatedKeywords, required String? filePath}) async
-  {
+  Future<void> _keywordsUpdate({
+    required Set<String> updatedKeywords,
+    required String? filePath,
+  }) async {
     logd("updateKeywords: updatedKeywords: $updatedKeywords");
-    
+
     // To accomodate widget testing
-    if (filePath != null)
-    {
-      await _sessionKeywordsUpdate(filePath, updatedKeywords); 
-              
-      await du.saveAllSessionsMetadata
-      (
-        typeOfDashboardContext: widget.dashboardContext, 
+    if (filePath != null) {
+      await _sessionKeywordsUpdate(filePath, updatedKeywords);
+
+      await du.saveAllSessionsMetadata(
+        typeOfDashboardContext: widget.dashboardContext,
         sessionsMetadataAll: _sessionsMetadataAll!,
       );
-    }    
+    }
   }
 
   // ─── DELETION OF SINGLE SESSION DATA related data and methods ───────────────────────────────────────
-  final List<String> _sessionsMetadataSelectedForDeletion = [];  
+  final List<String> _sessionsMetadataSelectedForDeletion = [];
 
   // Method used to delete a single session data from the session list action icons
-  Future<void> _sessionSelectedDelete(String filePath) async
-  {
+  Future<void> _sessionSelectedDelete(String filePath) async {
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
@@ -190,60 +184,65 @@ class DashboardPageState extends State<DashboardPage>
     await fu.deleteFile(filePath);
 
     // Removing the related stored dashboard data
-    await du.deleteSpecificSessionMetadata(typeOfDashboardContext: widget.dashboardContext, filePathRelatedToDataToDelete: filePath);
-    
+    await du.deleteSpecificSessionMetadata(
+      typeOfDashboardContext: widget.dashboardContext,
+      filePathRelatedToDataToDelete: filePath,
+    );
+
     // Updating the _sessionsMetadataAll list
-    _sessionsMetadataAll?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath); 
+    _sessionsMetadataAll?.removeWhere(
+      (session) => session[DashboardUtils.keyFilePath] == filePath,
+    );
 
     // Updating the _sessionsMetadataFiltered list used by the UI
-    _sessionsMetadataFiltered?.removeWhere((session) => session[DashboardUtils.keyFilePath] == filePath);     
-              
+    _sessionsMetadataFiltered?.removeWhere(
+      (session) => session[DashboardUtils.keyFilePath] == filePath,
+    );
+
     // Updating the sessions selected for bulk deletion
-    _sessionsMetadataSelectedForDeletion.removeWhere
-    (
-      (session) => _sessionsMetadataSelectedForDeletion.contains(filePath)
+    _sessionsMetadataSelectedForDeletion.removeWhere(
+      (session) => _sessionsMetadataSelectedForDeletion.contains(filePath),
     );
 
     // Updating the keywords list
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsRefreshAfterSessionDeletion();
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsRefreshAfterSessionDeletion();
 
     // Re-applying the relevant filters
-    await _dashboardFilteringByKeywordsKey.currentState?.keywordsApplyFiltering();
-    
+    await _dashboardFilteringByKeywordsKey.currentState
+        ?.keywordsApplyFiltering();
+
     if (!mounted) return;
     // Displaying an informational message
-    ScaffoldMessenger.of(context).showSnackBar
-    (
-      SnackBar
-      (
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(lds.snackbarMessageDataDeleted),
         duration: const Duration(seconds: 2),
       ),
     );
 
     // Refreshing and resetWasSessionDataSavedStatus if no session data left
-    if (_sessionsMetadataAll != null  && _sessionsMetadataAll!.isEmpty) 
-    {
+    if (_sessionsMetadataAll != null && _sessionsMetadataAll!.isEmpty) {
       // resetWasSessionDataSavedStatus
-      await rtdu.resetWasSessionDataSavedStatus(context: widget.dashboardContext);
+      await rtdu.resetWasSessionDataSavedStatus(
+        context: widget.dashboardContext,
+      );
       // refreshing the page
       widget.onAllSessionFilesDeletedContextPageCallbackFunction();
-    }
-    else
-    {
+    } else {
       // refreshing the page
       setState(() {});
     }
 
     // Updating the file names list: _deleteSelectedSession
-    if(Platform.isAndroid || Platform.isIOS)
-    {
+    if (Platform.isAndroid || Platform.isIOS) {
       await du.getStoredFileNamesOnMobile();
 
-      logd("currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}");      
+      logd(
+        "currentListOfStoredFileNames (after retrieval): ${du.currentListOfStoredFileNames}",
+      );
     }
-    
-     }
+  }
 
   // ─── EDITION OF SESSION DATA ───────────────────────────────────────
   final TextEditingController _titleTec = .new();
@@ -255,8 +254,7 @@ class DashboardPageState extends State<DashboardPage>
   }
 
   // Method used to update the session title
-  Future<void> _sessionTitleUpdate(String filePath, String newTitle) async 
-  {
+  Future<void> _sessionTitleUpdate(String filePath, String newTitle) async {
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
@@ -266,88 +264,87 @@ class DashboardPageState extends State<DashboardPage>
     setState(() {
       // Finding the session in the session data, and updating its title
       final sessionIndex = _sessionsMetadataAll?.indexWhere(
-        (s) => s[DashboardUtils.keyFilePath] == filePath
+        (s) => s[DashboardUtils.keyFilePath] == filePath,
       );
 
       if (sessionIndex != null && sessionIndex != -1) {
-        previousTitle = _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle];
+        previousTitle =
+            _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle];
         _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitle] = newTitle;
-        _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitleLowerCase] = newTitle.toLowerCase();
+        _sessionsMetadataAll![sessionIndex][DashboardUtils.keyTitleLowerCase] =
+            newTitle.toLowerCase();
       }
-      
+
       // Notifying success
-      if (previousTitle!.trim() != newTitle.trim())
-      {
-        ScaffoldMessenger.of(context).showSnackBar
-        (
-          SnackBar
-          (
+      if (previousTitle!.trim() != newTitle.trim()) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
             content: Text(lds.snackbarMessageTitleUpdated),
             duration: const Duration(seconds: 2),
-          )
+          ),
         );
       }
     });
   }
 
   // Method used to update the session keywords
-  Future<void> _sessionKeywordsUpdate(String filePath, Set<String> newKeywords) async 
-  {
+  Future<void> _sessionKeywordsUpdate(
+    String filePath,
+    Set<String> newKeywords,
+  ) async {
     // Getting the localized strings
     LocalizedDashboardStrings lds = .new(context);
 
     Set<dynamic>? previousKeywords;
 
     final sessionIndex = _sessionsMetadataAll?.indexWhere(
-        (s) => s[DashboardUtils.keyFilePath] == filePath
-      );
+      (s) => s[DashboardUtils.keyFilePath] == filePath,
+    );
 
     if (sessionIndex != null && sessionIndex != -1) {
-      previousKeywords = Set.from(_sessionsMetadataAll![sessionIndex][DashboardUtils.keyKeywords]);
+      previousKeywords = Set.from(
+        _sessionsMetadataAll![sessionIndex][DashboardUtils.keyKeywords],
+      );
       // Updating the list with the new keywords
-      _sessionsMetadataAll![sessionIndex][DashboardUtils.keyKeywords] = 
-      newKeywords.toList()..sort
-                  (
-                    (a, b) 
-                    {
-                      // Different letters
-                      int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
-                      // Same letter
-                      if (comparison == 0) {return b.compareTo(a);}                                                
-                      return comparison;
-                    }
-                  );
+      _sessionsMetadataAll![sessionIndex][DashboardUtils.keyKeywords] =
+          newKeywords.toList()..sort((a, b) {
+            // Different letters
+            int comparison = a.toLowerCase().compareTo(b.toLowerCase());
+            // Same letter
+            if (comparison == 0) {
+              return b.compareTo(a);
+            }
+            return comparison;
+          });
     }
 
     await _keywordsRefreshAfterSessionDeletion();
-     // Updates the keywords list
-    
-    if ( ! previousKeywords!.toList().equals(newKeywords.toList()) )
-    {
-      setState((){ }); 
+    // Updates the keywords list
+
+    if (!previousKeywords!.toList().equals(newKeywords.toList())) {
+      setState(() {});
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar
-        (
+        SnackBar(
           content: Text(lds.snackbarMessageKeywordsUpdated),
           duration: const Duration(seconds: 2),
         ),
       );
     }
-    
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
   // Re-building of the widget
-  void _updateState()
-  {
+  void _updateState() {
     setState(() {});
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isDataLoading
-          ? const Center(child: RepaintBoundary(child: CircularProgressIndicator()))
+          ? const Center(
+              child: RepaintBoundary(child: CircularProgressIndicator()),
+            )
           : CustomScrollView(
               key: const Key("dashboard-scrollview"),
               // Using a CustomScrollView to coordinate the fade effect
@@ -357,180 +354,205 @@ class DashboardPageState extends State<DashboardPage>
 
                 // DASHBOARD TITLE
                 SliverToBoxAdapter(
-                  child: DashboardTitle(title: AppLocalizations.of(context)?.ca_dashboard_title ?? "Issue with the dashboard title")
+                  child: DashboardTitle(
+                    title:
+                        AppLocalizations.of(context)?.ca_dashboard_title ??
+                        "Issue with the dashboard title",
+                  ),
                 ),
 
                 // DASHBOARD FILTERING FEATURES
-                SliverToBoxAdapter 
-                (
-                  child: DashboardSortingAndFilteringFeature
-                  (
-                    dashboardContext: widget.dashboardContext, 
-                    sessionsMetadataAll: _sessionsMetadataAll, sessionsMetadataFiltered: _sessionsMetadataFiltered,
-                    keywordsAll: _keywordsAll, keywordsSelected: _keywordsSelected,
-                    parentCallbackFunctionToRefreshTheSessionsList: _updateState,
-                    dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey
+                SliverToBoxAdapter(
+                  child: DashboardSortingAndFilteringFeature(
+                    dashboardContext: widget.dashboardContext,
+                    sessionsMetadataAll: _sessionsMetadataAll,
+                    sessionsMetadataFiltered: _sessionsMetadataFiltered,
+                    keywordsAll: _keywordsAll,
+                    keywordsSelected: _keywordsSelected,
+                    parentCallbackFunctionToRefreshTheSessionsList:
+                        _updateState,
+                    dashboardFilteringByKeywordsKey:
+                        _dashboardFilteringByKeywordsKey,
                   ),
                 ),
 
                 // BULK DELETION
                 SliverToBoxAdapter(
-                  child: DashboardDeletionByBulk
-                  (
+                  child: DashboardDeletionByBulk(
                     dashboardContext: widget.dashboardContext,
                     sessionsMetadataAll: _sessionsMetadataAll,
                     sessionsMetadataFiltered: _sessionsMetadataFiltered,
-                    areSessionsForDeletion: _sessionsMetadataSelectedForDeletion.isNotEmpty,
-                    sessionsMetadataSelectedForDeletion: _sessionsMetadataSelectedForDeletion,
-                    dashboardCallbackFunctionToRefreshTheSessionsList: _refreshDashboard,
-                    dashboardFilteringByKeywordsKey: _dashboardFilteringByKeywordsKey                    
-                  )
+                    areSessionsForDeletion:
+                        _sessionsMetadataSelectedForDeletion.isNotEmpty,
+                    sessionsMetadataSelectedForDeletion:
+                        _sessionsMetadataSelectedForDeletion,
+                    dashboardCallbackFunctionToRefreshTheSessionsList:
+                        _refreshDashboard,
+                    dashboardFilteringByKeywordsKey:
+                        _dashboardFilteringByKeywordsKey,
+                  ),
                 ),
 
                 // Divider
-                const SliverToBoxAdapter
-                (
-                  child: Divider()                       
-                ), 
-                
+                const SliverToBoxAdapter(child: Divider()),
+
                 // Session List
-                SliverPadding
-                (
+                SliverPadding(
                   padding: const EdgeInsets.only(bottom: 0),
                   sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final session = _sessionsMetadataFiltered![index];
-                        final String filePath = session[DashboardUtils.keyFilePath];
-                        
-                        return SessionsListItem(
-                          sessionMetadata: session,
-                          sessionDataIndex: index,
-                          dashboardContext: widget.dashboardContext,
-                          isChecked: _sessionsMetadataSelectedForDeletion.contains(filePath),
-                          onCheckboxChangedCallbackFunction: (bool? value) {
-                            setState(() {
-                              if (value == true) {
-                                _sessionsMetadataSelectedForDeletion.add(filePath);
-                              } else {
-                                _sessionsMetadataSelectedForDeletion.remove(filePath);
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      final session = _sessionsMetadataFiltered![index];
+                      final String filePath =
+                          session[DashboardUtils.keyFilePath];
+
+                      return SessionsListItem(
+                        sessionMetadata: session,
+                        sessionDataIndex: index,
+                        dashboardContext: widget.dashboardContext,
+                        isChecked: _sessionsMetadataSelectedForDeletion
+                            .contains(filePath),
+                        onCheckboxChangedCallbackFunction: (bool? value) {
+                          setState(() {
+                            if (value == true) {
+                              _sessionsMetadataSelectedForDeletion.add(
+                                filePath,
+                              );
+                            } else {
+                              _sessionsMetadataSelectedForDeletion.remove(
+                                filePath,
+                              );
+                            }
+                          });
+                        },
+                        onEditTitleCallbackFunction: () => showEditSheet(
+                          context: context,
+                          textEditingController: _titleTec,
+                          textFieldKey: const Key("titleDashboardEditField"),
+                          textFieldStartValue: session[DashboardUtils.keyTitle],
+                          textFieldLabelText:
+                              AppLocalizations.of(
+                                context,
+                              )?.dashboard_edit_title_sheet_label_text ??
+                              "Issue with the l10n for the 'Edit Title' label text",
+                          textFieldLabelStyle: const TextStyle(color: black),
+                          textFiedHint: Text(
+                            AppLocalizations.of(
+                                  context,
+                                )?.dashboard_edit_title_sheet_text_field_hint ??
+                                "Issue with the l10n for the 'Title Edition' text field hint",
+                          ),
+                          errorTextTriggerFunction: onConfirmFunctionEmptyValue,
+                          errorTextTriggerFunctionParameter: _titleTec.text
+                              .trim(),
+                          textFieldErrorText:
+                              AppLocalizations.of(
+                                context,
+                              )?.dashboard_edit_title_error_empty_title ??
+                              "Issue with the l10n for the 'Title cannot be empty' error message",
+                          onConfirmSuccessfulCallbackFunction:
+                              (String value) async {
+                                // New title from the controller
+                                final String newTitle = _titleTec.text.trim();
+
+                                // Performing async work outside of setState
+                                // Updating session data
+                                await _sessionTitleUpdate(filePath, newTitle);
+
+                                // Storing the updated session data
+                                await du.saveAllSessionsMetadata(
+                                  typeOfDashboardContext:
+                                      widget.dashboardContext,
+                                  sessionsMetadataAll: _sessionsMetadataAll!,
+                                );
+
+                                if (!context.mounted) return;
+                                // Closing the modal sheet
+                                Navigator.pop(context);
+                              },
+                          elevatedButtonText:
+                              AppLocalizations.of(context)?.save_button_text ??
+                              "Issue with the l10n for the save_button text",
+                          elevatedButtonStyle: const TextStyle(color: black),
+                        ),
+                        onEditPressedCallbackFunction: () {
+                          if (widget.dashboardContext ==
+                              DashboardUtils.caContext) {
+                            retrieveCASessionData(
+                              context: context,
+                              dashboardContext: DashboardUtils.caContext,
+                              filePathWhenEdition: filePath,
+                              onRetrievedCASessionDataBeforeEditionCallbackFunction:
+                                  widget
+                                      .onRetrievedSessionDataBeforeEditionCallbackFunction,
+                            );
+                          } else if (widget.dashboardContext ==
+                              DashboardUtils.gpsContext) {
+                            // retrieveGPSIdeas(filePath, widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
+                            retrieveGPSSessionData(
+                              dashboardContext: DashboardUtils.gpsContext,
+                              filePathWhenEdition: filePath,
+                              onRetrievedGPSSessionDataBeforeEditionCallbackFunction:
+                                  widget
+                                      .onRetrievedSessionDataBeforeEditionCallbackFunction,
+                            );
+                          } else {
+                            throw Exception(
+                              "Unknown context: ${widget.dashboardContext}",
+                            );
+                          }
+                        },
+                        onRetrievedSessionDataBeforeEditionCallbackFunction:
+                            ({
+                              required String dashboardContext,
+                              required bool isSessionDataBeingEdited,
+                              required Object dtoWhenEdition,
+                              required String
+                              fileNameWithoutExtensionWhenEdition,
+                              required String titleWhenEdition,
+                              required Set<String> keywordsWhenEdition,
+                              required String filePathWhenEdition,
+                            }) {
+                              if (widget.dashboardContext ==
+                                  DashboardUtils.caContext) {
+                                widget
+                                    .onRetrievedSessionDataBeforeEditionCallbackFunction(
+                                      dashboardContext:
+                                          DashboardUtils.caContext,
+                                      isSessionDataBeingEdited:
+                                          isSessionDataBeingEdited,
+                                      titleWhenEdition: titleWhenEdition,
+                                      keywordsWhenEdition: keywordsWhenEdition,
+                                      dtoWhenEdition: dtoWhenEdition,
+                                      fileNameWithoutExtensionWhenEdition:
+                                          fileNameWithoutExtensionWhenEdition,
+                                      filePathWhenEdition: filePathWhenEdition,
+                                    );
+                              } else if (widget.dashboardContext ==
+                                  DashboardUtils.gpsContext) {
+                                widget
+                                    .onRetrievedSessionDataBeforeEditionCallbackFunction(
+                                      dashboardContext:
+                                          DashboardUtils.gpsContext,
+                                      isSessionDataBeingEdited:
+                                          isSessionDataBeingEdited,
+                                      titleWhenEdition: titleWhenEdition,
+                                      keywordsWhenEdition: keywordsWhenEdition,
+                                      dtoWhenEdition: dtoWhenEdition,
+                                      fileNameWithoutExtensionWhenEdition:
+                                          fileNameWithoutExtensionWhenEdition,
+                                      filePathWhenEdition: filePathWhenEdition,
+                                    );
                               }
-                            });
-                          },
-                          onEditTitleCallbackFunction: 
-                            () => showEditSheet
-                            (
-                              context: context, 
-                              textEditingController: _titleTec, 
-                              textFieldKey: const Key("titleDashboardEditField"),
-                              textFieldStartValue: session[DashboardUtils.keyTitle], 
-                              textFieldLabelText: AppLocalizations.of(context)?.dashboard_edit_title_sheet_label_text ?? "Issue with the l10n for the 'Edit Title' label text", 
-                              textFieldLabelStyle: const TextStyle(color: black), 
-                              textFiedHint:  Text(AppLocalizations.of(context)?.dashboard_edit_title_sheet_text_field_hint ?? "Issue with the l10n for the 'Title Edition' text field hint"),
-                              errorTextTriggerFunction: onConfirmFunctionEmptyValue,
-                              errorTextTriggerFunctionParameter: _titleTec.text.trim(),
-                              textFieldErrorText: AppLocalizations.of(context)?.dashboard_edit_title_error_empty_title ?? "Issue with the l10n for the 'Title cannot be empty' error message",
-                              onConfirmSuccessfulCallbackFunction: (String value) async
-                                {
-                                  // New title from the controller
-                                  final String newTitle = _titleTec.text.trim();
-
-                                  // Performing async work outside of setState
-                                  // Updating session data
-                                  await _sessionTitleUpdate(filePath, newTitle); 
-                                  
-                                  // Storing the updated session data
-                                  await du.saveAllSessionsMetadata
-                                  (
-                                    typeOfDashboardContext: widget.dashboardContext, 
-                                    sessionsMetadataAll: _sessionsMetadataAll!,
-                                  );
-
-                                  if (!context.mounted) return;
-                                  // Closing the modal sheet
-                                  Navigator.pop(context);
-                              },    
-                              elevatedButtonText: AppLocalizations.of(context)?.save_button_text ?? "Issue with the l10n for the save_button text",  
-                              elevatedButtonStyle: const TextStyle(color: black)
-                            ),
-                          onEditPressedCallbackFunction: 
-                          () 
-                          {
-                            if (widget.dashboardContext == DashboardUtils.caContext)
-                            {
-                              retrieveCASessionData
-                              (
-                                context: context,
-                                dashboardContext: DashboardUtils.caContext,
-                                filePathWhenEdition: filePath, 
-                                onRetrievedCASessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
-                              );
-                            }
-                            else if (widget.dashboardContext == DashboardUtils.gpsContext)
-                            {
-                              // retrieveGPSIdeas(filePath, widget.onRetrievedSessionDataBeforeEditionCallbackFunction);
-                              retrieveGPSSessionData
-                              (
-                                dashboardContext: DashboardUtils.gpsContext,
-                                filePathWhenEdition: filePath, 
-                                onRetrievedGPSSessionDataBeforeEditionCallbackFunction: widget.onRetrievedSessionDataBeforeEditionCallbackFunction
-                              );
-                            }
-                            else 
-                            {
-                              throw Exception("Unknown context: ${widget.dashboardContext}");
-                            }
-                          },
-                          onRetrievedSessionDataBeforeEditionCallbackFunction: 
-                          ({
-                            required String dashboardContext,
-                            required bool isSessionDataBeingEdited,
-                            required Object dtoWhenEdition,
-                            required String fileNameWithoutExtensionWhenEdition,
-                            required String titleWhenEdition,
-                            required Set<String> keywordsWhenEdition,
-                            required String filePathWhenEdition
-                          }) 
-                          { 
-                            if (widget.dashboardContext == DashboardUtils.caContext)
-                            {
-                              widget.onRetrievedSessionDataBeforeEditionCallbackFunction
-                              ( 
-                                dashboardContext: DashboardUtils.caContext,
-                                isSessionDataBeingEdited: isSessionDataBeingEdited,
-                                titleWhenEdition: titleWhenEdition, 
-                                keywordsWhenEdition: keywordsWhenEdition, 
-                                dtoWhenEdition: dtoWhenEdition,                                
-                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition, 
-                                filePathWhenEdition: filePathWhenEdition              
-                              );
-                            }
-                            else if (widget.dashboardContext == DashboardUtils.gpsContext)
-                            {                              
-                              widget.onRetrievedSessionDataBeforeEditionCallbackFunction
-                              ( 
-                                dashboardContext: DashboardUtils.gpsContext,
-                                isSessionDataBeingEdited: isSessionDataBeingEdited,
-                                titleWhenEdition: titleWhenEdition, 
-                                keywordsWhenEdition: keywordsWhenEdition, 
-                                dtoWhenEdition: dtoWhenEdition, 
-                                fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,
-                                filePathWhenEdition: filePathWhenEdition 
-                              );
-                            }                            
-                          },
-                          onKeywordsUpdatedCallbackFunction: _keywordsUpdate,
-                          onDeleteCallbackFunction: () async => await _sessionSelectedDelete(filePath),
-                        );
-                      },
-                      childCount: _sessionsMetadataFiltered?.length ?? 0,
-                    ),
+                            },
+                        onKeywordsUpdatedCallbackFunction: _keywordsUpdate,
+                        onDeleteCallbackFunction: () async =>
+                            await _sessionSelectedDelete(filePath),
+                      );
+                    }, childCount: _sessionsMetadataFiltered?.length ?? 0),
                   ),
                 ),
               ],
             ),
     );
   }
-
-
 }

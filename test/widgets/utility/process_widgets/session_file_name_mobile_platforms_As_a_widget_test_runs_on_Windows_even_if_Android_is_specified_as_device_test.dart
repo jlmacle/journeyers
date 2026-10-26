@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:shared_preferences/shared_preferences.dart";
@@ -13,86 +13,76 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 void main() {
   const textFieldHintPart = "Please add the";
 
-    group("SessionFileNameOnMobilePlatforms Tests: \n", () {      
-        // Important: As a widget test, runs on Windows, even if Android is selected as a device.
-        testWidgets("On mobile: The button to call the folder picker is available to the user, when the user didn't select of folder for its files yet.", 
-        (WidgetTester tester) async 
-        {
+  group("SessionFileNameOnMobilePlatforms Tests: \n", () {
+    // Important: As a widget test, runs on Windows, even if Android is selected as a device.
+    testWidgets(
+      "On mobile: The button to call the folder picker is available to the user, when the user didn't select of folder for its files yet.",
+      (WidgetTester tester) async {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues({
+          // Setting to "" to have the folder picker
+          "applicationFolderPath": "",
+        });
 
-            // Setting mock values for SharedPreferences
-            SharedPreferences.setMockInitialValues
-            ({
-                // Setting to "" to have the folder picker
-                "applicationFolderPath": ""
-            });
-
-            // Loading the widget
-            await tester.pumpWidget
-            (
-              MaterialApp(
-                home: Scaffold(
-                  body: CAProcess
-                  (
-                    caPageCallbackFunctionToRefreshThePage: (){},
-                    caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: (_){},              
-                  )
-                ),
-              )
-            );
-            await tester.pumpAndSettle();
-
-            logt("Platform", Platform.operatingSystem);
-            
-            if (Platform.isAndroid || Platform.isIOS)
-            {
-              // Verifying the text field absent
-              expect(find.textContaining(textFieldHintPart), findsNothing);
-              
-              // Verifying the elevated button present
-              expect(find.byType(ElevatedButton), findsOneWidget);  
-            }
-                      
-        }
+        // Loading the widget
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: CAProcess(
+                caPageCallbackFunctionToRefreshThePage: () {},
+                caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: (_) {},
+              ),
+            ),
+          ),
         );
+        await tester.pumpAndSettle();
 
-        // Important: As a widget test, runs on Windows, even if Android is selected as a device.
-        testWidgets("On mobile: The text field is available for the user to enter the file name, when the user did select a folder for its files.", 
-        (WidgetTester tester) async 
-        {
-            // Setting mock values for SharedPreferences
-            SharedPreferences.setMockInitialValues
-            ({
-                // Setting to "a/path" to not have the folder picker
-                "applicationFolderPath": "a/path"
-            });
+        logt("Platform", Platform.operatingSystem);
 
-            // Loading the widget
-            await tester.pumpWidget
-            (
-                MaterialApp(
-                home: Scaffold(
-                body: CAProcess
-                (
-                  caPageCallbackFunctionToRefreshThePage: (){},
-                  caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: (_){},              
-                )
-                ),
-            )
-            );
-            await tester.pumpAndSettle();
+        if (Platform.isAndroid || Platform.isIOS) {
+          // Verifying the text field absent
+          expect(find.textContaining(textFieldHintPart), findsNothing);
 
-            if (testingDebug) pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
-
-            if (Platform.isAndroid || Platform.isIOS)
-            {
-              // Verifying the elevated button absent
-              expect(find.byType(ElevatedButton), findsNothing);   
-
-              // Verifying the text field present
-              expect(find.textContaining(textFieldHintPart), findsOneWidget);   
-            }                  
+          // Verifying the elevated button present
+          expect(find.byType(ElevatedButton), findsOneWidget);
         }
-        );
+      },
+    );
 
-    });
+    // Important: As a widget test, runs on Windows, even if Android is selected as a device.
+    testWidgets(
+      "On mobile: The text field is available for the user to enter the file name, when the user did select a folder for its files.",
+      (WidgetTester tester) async {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues({
+          // Setting to "a/path" to not have the folder picker
+          "applicationFolderPath": "a/path",
+        });
+
+        // Loading the widget
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: CAProcess(
+                caPageCallbackFunctionToRefreshThePage: () {},
+                caPageCallbackFunctionToSetFocusabilityOfBottomBarItems: (_) {},
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        if (testingDebug)
+          pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
+
+        if (Platform.isAndroid || Platform.isIOS) {
+          // Verifying the elevated button absent
+          expect(find.byType(ElevatedButton), findsNothing);
+
+          // Verifying the text field present
+          expect(find.textContaining(textFieldHintPart), findsOneWidget);
+        }
+      },
+    );
+  });
 }

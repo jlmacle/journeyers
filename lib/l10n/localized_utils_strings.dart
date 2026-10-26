@@ -1,9 +1,8 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/l10n/app_localizations.dart";
 
-class LocalizedUtilsStrings
-{
+class LocalizedUtilsStrings {
   AppLocalizations? _l10n;
 
   // ─── LANGUAGES ───────────────────────────────────────
@@ -16,21 +15,25 @@ class LocalizedUtilsStrings
   // ─── OVERLAYS ───────────────────────────────────────
   var keywordsOverlayCloseButtonTooltip = "";
   var overlayCloseButtonTooltip = "";
-  
-  
-  LocalizedUtilsStrings(BuildContext context)
-  {
+
+  LocalizedUtilsStrings(BuildContext context) {
     _l10n = AppLocalizations.of(context);
 
     // ─── LANGUAGES ───────────────────────────────────────
-    englishL10n =  _l10n?.app_lang_en ?? "Issue with the l10 for 'English'";
-    frenchL10n =  _l10n?.app_lang_fr ?? "Issue with the l10 for 'French'";
-    
+    englishL10n = _l10n?.app_lang_en ?? "Issue with the l10 for 'English'";
+    frenchL10n = _l10n?.app_lang_fr ?? "Issue with the l10 for 'French'";
+
     // ─── FILE NAME ───────────────────────────────────────
-    fileNameTextFieldHint = _l10n?.file_name_process_text_field_hint_on_mobile ?? "Issue with the text field hint inviting to add a file name without extension";
-  
+    fileNameTextFieldHint =
+        _l10n?.file_name_process_text_field_hint_on_mobile ??
+        "Issue with the text field hint inviting to add a file name without extension";
+
     // ─── OVERLAYS ───────────────────────────────────────
-    keywordsOverlayCloseButtonTooltip  = _l10n?.l10n_keywords_overlay_close_button_tooltip ?? "Issue with the l10n for the keywords overlay close button tooltip";
-    overlayCloseButtonTooltip = _l10n?.text_lists_new_list_close_tooltip ?? "Issue with the l10n for the 'click to go to the previous page' tooltip.";
+    keywordsOverlayCloseButtonTooltip =
+        _l10n?.l10n_keywords_overlay_close_button_tooltip ??
+        "Issue with the l10n for the keywords overlay close button tooltip";
+    overlayCloseButtonTooltip =
+        _l10n?.text_lists_new_list_close_tooltip ??
+        "Issue with the l10n for the 'click to go to the previous page' tooltip.";
   }
 }

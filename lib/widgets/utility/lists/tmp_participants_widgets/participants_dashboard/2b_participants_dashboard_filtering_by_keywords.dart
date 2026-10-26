@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -7,8 +7,7 @@ import "package:journeyers/widgets/utility/lists/database/participants_lists_db_
 /// {@category Utils - Project-specific}
 /// {@category Lists}
 /// A widget handling the filtering by keywords on the participants lists dashboard.
-class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget 
-{
+class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget {
   /// List containing all available lists data.
   final List<dynamic>? participantsListsAll;
 
@@ -24,8 +23,7 @@ class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget
   /// Callback function used to refresh the sessions displayed.
   final VoidCallback featureCallbackFunctionToRefreshTheParticipantsLists;
 
-  const ParticipantsListsDashboardFilteringByKeywords
-  ({
+  const ParticipantsListsDashboardFilteringByKeywords({
     super.key,
     required this.participantsListsAll,
     required this.participantsListsFiltered,
@@ -35,33 +33,29 @@ class ParticipantsListsDashboardFilteringByKeywords extends StatefulWidget
   });
 
   @override
-  State<ParticipantsListsDashboardFilteringByKeywords> createState() => ParticipantsListsDashboardFilteringByKeywordsState();
+  State<ParticipantsListsDashboardFilteringByKeywords> createState() =>
+      ParticipantsListsDashboardFilteringByKeywordsState();
 }
 
-class ParticipantsListsDashboardFilteringByKeywordsState extends State<ParticipantsListsDashboardFilteringByKeywords> 
-{  
+class ParticipantsListsDashboardFilteringByKeywordsState
+    extends State<ParticipantsListsDashboardFilteringByKeywords> {
   // Used in ParticipantsListsDashboard.
   // Method used to filter the lists by keywords.
-  Future<void> keywordsApplyFiltering() async
-  {
-    if (widget.keywordsSelected.isEmpty) 
-    {
+  Future<void> keywordsApplyFiltering() async {
+    if (widget.keywordsSelected.isEmpty) {
       // Working with the list while keeping the same reference
       widget.participantsListsFiltered!.clear();
       widget.participantsListsFiltered!.addAll(widget.participantsListsAll!);
-    } 
-    else 
-    {
-      List <dynamic> sortingResults =
-      widget.participantsListsAll!.where
-      ( 
-        (session) 
-        {
-          final sessionKeywords = session[itemKeywordsKey].cast<String>();
-          return widget.keywordsSelected.every((k) => sessionKeywords.contains(k));
-        }
-      ).toList();
-      
+    } else {
+      List<dynamic> sortingResults = widget.participantsListsAll!.where((
+        session,
+      ) {
+        final sessionKeywords = session[itemKeywordsKey].cast<String>();
+        return widget.keywordsSelected.every(
+          (k) => sessionKeywords.contains(k),
+        );
+      }).toList();
+
       // Working with the list while keeping the same reference
       widget.participantsListsFiltered!.clear();
       widget.participantsListsFiltered!.addAll(sortingResults);
@@ -72,14 +66,10 @@ class ParticipantsListsDashboardFilteringByKeywordsState extends State<Participa
   }
 
   // Method used to add/remove a keyword from the filtering criteria
-  Future<void> _keywordToggleSelection(String keyword) async
-  {
-     if (widget.keywordsSelected.contains(keyword)) 
-    {
+  Future<void> _keywordToggleSelection(String keyword) async {
+    if (widget.keywordsSelected.contains(keyword)) {
       widget.keywordsSelected.remove(keyword);
-    } 
-    else 
-    {
+    } else {
       widget.keywordsSelected.add(keyword);
     }
 
@@ -89,77 +79,61 @@ class ParticipantsListsDashboardFilteringByKeywordsState extends State<Participa
 
   // Used in ParticipantsListsDashboard.
   // Method used to refresh the keywords list after deletion of session data.
-  Future<void> keywordsRefreshAfterSessionDeletion() async
-  {
+  Future<void> keywordsRefreshAfterSessionDeletion() async {
     // if no lists left, nothing to do
     if (widget.participantsListsAll == null) return;
-    
+
     // Re-building the keywords" list from the remaining lists data
     Set<String> remainingKws = {};
-    for (var currentListData in widget.participantsListsAll!) 
-    {
+    for (var currentListData in widget.participantsListsAll!) {
       List<dynamic> kws = currentListData[itemKeywordsKey];
       remainingKws.addAll(kws.cast<String>());
     }
-    
-    // Refreshing the used keywords" list, the selection of keywords, 
+
+    // Refreshing the used keywords" list, the selection of keywords,
     // and the DashboardFilteringByKeywords widget
-    setState
-    (
-      () 
-      {
-        widget.keywordsAll.clear();
-        widget.keywordsAll.addAll(remainingKws);
-        // Removing selected filters if the keyword no longer exists
-        widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
-      }
-    );
+    setState(() {
+      widget.keywordsAll.clear();
+      widget.keywordsAll.addAll(remainingKws);
+      // Removing selected filters if the keyword no longer exists
+      widget.keywordsSelected.removeWhere((kw) => !remainingKws.contains(kw));
+    });
   }
 
   @override
   void initState() {
     super.initState();
-            
+
     if (widgetSequenceDebug) pu.printdLine();
-    if (widgetSequenceDebug) pu.printd("ParticipantsListsDashboardFilteringByKeywords");
+    if (widgetSequenceDebug)
+      pu.printd("ParticipantsListsDashboardFilteringByKeywords");
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Padding
-        (
-          padding: const EdgeInsets.only(left: 12.0, right:12, bottom: 12),
-          child: Wrap
-          (
-            spacing: 8.0,
-            children: 
-            (
-              widget.keywordsAll.toList()
-              ..sort
-              (
-                (a, b) 
-                {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
+      child: Wrap(
+        spacing: 8.0,
+        children:
+            (widget.keywordsAll.toList()..sort((a, b) {
                   // Different letters
-                  int comparison = a.toLowerCase().compareTo(b.toLowerCase());  
+                  int comparison = a.toLowerCase().compareTo(b.toLowerCase());
                   // Same letter
-                  if (comparison == 0) {return b.compareTo(a);}                                                
+                  if (comparison == 0) {
+                    return b.compareTo(a);
+                  }
                   return comparison;
-                }
-              )
-            ).map
-            (
-              (kw) 
-              {
-                return FilterChip
-                (
-                  label: Text(kw),
-                  onSelected: (_) async => await _keywordToggleSelection(kw),
-                  selected: widget.keywordsSelected.contains(kw)
-                );
-              }
-            ).toList(),
-          ),
-        );
+                }))
+                .map((kw) {
+                  return FilterChip(
+                    label: Text(kw),
+                    onSelected: (_) async => await _keywordToggleSelection(kw),
+                    selected: widget.keywordsSelected.contains(kw),
+                  );
+                })
+                .toList(),
+      ),
+    );
   }
 }
