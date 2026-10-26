@@ -1,5 +1,5 @@
 // ignore: file_names
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
@@ -13,58 +13,61 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
-  Future<void> pumpGPSKeywordsDeclaration(WidgetTester tester) async
-  {
+  Future<void> pumpGPSKeywordsDeclaration(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         locale: const Locale(testingLocaleOption),
         home: Scaffold(
-          body: GPSKeywordsDeclaration
-          (
+          body: GPSKeywordsDeclaration(
             currentKeywords: const {},
-            onKeywordsUpdatedCallbackFunction: (_){},
+            onKeywordsUpdatedCallbackFunction: (_) {},
           ),
         ),
       ),
     );
   }
 
-  group("GPSKeywordsDeclaration Tests: \n", () {  
+  group("GPSKeywordsDeclaration Tests: \n", () {
     group("GPSKeywordsDeclaration default aspect: \n", () {
-      testWidgets("The correct title is present", 
-      (WidgetTester tester) async 
-      {
+      testWidgets("The correct title is present", (WidgetTester tester) async {
         // Pumping the widget
         await pumpGPSKeywordsDeclaration(tester);
 
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
-        
+
         // Title hard-coded strings
         var keywordsTitle = "";
-        
+
         var localeLanguageCode = getLocaleLanguageCode(tester);
 
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): { keywordsTitle = "Keywords"; }
-          case("fr"): { keywordsTitle = "Mots-clés"; }        
+        switch (localeLanguageCode.toLowerCase()) {
+          case ("en"):
+            {
+              keywordsTitle = "Keywords";
+            }
+          case ("fr"):
+            {
+              keywordsTitle = "Mots-clés";
+            }
         }
         logt("keywordsTitle", keywordsTitle);
         // Verifying consistency between hard-coded string and localized string
-        expect(keywordsTitle, lgps.gpsKeywordsTitle);     
-
+        expect(keywordsTitle, lgps.gpsKeywordsTitle);
 
         // Verifying the title present
-        expect(find.text(keywordsTitle), findsOne);        
-      });          
-    
-      testWidgets("The correct appbar title is present", 
-      (WidgetTester tester) async 
-      {
+        expect(find.text(keywordsTitle), findsOne);
+      });
+
+      testWidgets("The correct appbar title is present", (
+        WidgetTester tester,
+      ) async {
         // Pumping the widget
         await pumpGPSKeywordsDeclaration(tester);
         await tester.pumpAndSettle();
@@ -72,22 +75,22 @@ void main() {
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
-        
+
         // Appbar title hard-coded strings
         var keywordsAppBarTitle = "";
-        
+
         var localeLanguageCode = getLocaleLanguageCode(tester);
 
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): 
-          { 
-            keywordsAppBarTitle = "Keywords for the\nproblem-solving session"; 
-          }
-          case("fr"): 
-          { 
-            keywordsAppBarTitle = "Mots-clés pour la\nsession de résolution du problème"; 
-          }        
+        switch (localeLanguageCode.toLowerCase()) {
+          case ("en"):
+            {
+              keywordsAppBarTitle = "Keywords for the\nproblem-solving session";
+            }
+          case ("fr"):
+            {
+              keywordsAppBarTitle =
+                  "Mots-clés pour la\nsession de résolution du problème";
+            }
         }
         logt("defaultTitle", keywordsAppBarTitle);
         // Tapping to open the overlay
@@ -99,12 +102,12 @@ void main() {
         expect(keywordsAppBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);
 
         // Verifying the appbar title present
-        expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOne);        
-      });          
-    
-      testWidgets("The correct text hint is present", 
-      (WidgetTester tester) async 
-      {
+        expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOne);
+      });
+
+      testWidgets("The correct text hint is present", (
+        WidgetTester tester,
+      ) async {
         // Pumping the widget
         await pumpGPSKeywordsDeclaration(tester);
         await tester.pumpAndSettle();
@@ -112,90 +115,104 @@ void main() {
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
-        LocalizedDashboardStrings lds = .new(context);        
+        LocalizedDashboardStrings lds = .new(context);
 
         // Tapping to open the overlay
         var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
         await tester.tap(keywordsTitleFinder);
-        await tester.pumpAndSettle();        
+        await tester.pumpAndSettle();
 
         // Hint hard-coded strings
         var hintText = "";
-        
+
         var localeLanguageCode = getLocaleLanguageCode(tester);
-     
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): { hintText = "Please enter one keyword at a time\n(+ Enter key)."; }
-          case("fr"): { hintText = "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."; }        
+
+        switch (localeLanguageCode.toLowerCase()) {
+          case ("en"):
+            {
+              hintText = "Please enter one keyword at a time\n(+ Enter key).";
+            }
+          case ("fr"):
+            {
+              hintText =
+                  "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).";
+            }
         }
         logt("hintText", hintText);
         // Verifying consistency between hard-coded string and localized string
-        expect(hintText, lds.keywordsEntryTextFieldHint);     
+        expect(hintText, lds.keywordsEntryTextFieldHint);
 
         // Verifying the text field hint present
-        expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);     
-      });          
+        expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);
+      });
 
-      testWidgets("The correct appbar foreground color is present", 
-      /// "[foregroundColor], which specifies the color for icons and text within
-      ///  the app bar."
-      (WidgetTester tester) async 
-      {
+      testWidgets(
+        "The correct appbar foreground color is present",
+
+        /// "[foregroundColor], which specifies the color for icons and text within
+        ///  the app bar."
+        (WidgetTester tester) async {
+          // Pumping the widget
+          await pumpGPSKeywordsDeclaration(tester);
+          await tester.pumpAndSettle();
+
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedGPSStrings lgps = .new(context);
+
+          // Tapping to open the overlay
+          var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
+          await tester.tap(keywordsTitleFinder);
+          await tester.pumpAndSettle();
+
+          // Verifying the color
+          var iconButtonsFinder = find.byType(IconButton);
+          var iconButtonWidget = tester.widget<IconButton>(
+            iconButtonsFinder.last,
+          );
+          expect(iconButtonWidget.color, appBarWhite);
+        },
+      );
+
+      testWidgets("The correct appbar title is present", (
+        WidgetTester tester,
+      ) async {
         // Pumping the widget
         await pumpGPSKeywordsDeclaration(tester);
         await tester.pumpAndSettle();
 
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
-        LocalizedGPSStrings lgps = .new(context);      
+        LocalizedGPSStrings lgps = .new(context);
 
         // Tapping to open the overlay
         var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
         await tester.tap(keywordsTitleFinder);
-        await tester.pumpAndSettle();  
-
-        // Verifying the color
-        var iconButtonsFinder = find.byType(IconButton);
-        var iconButtonWidget = tester.widget<IconButton>(iconButtonsFinder.last);            
-        expect(iconButtonWidget.color, appBarWhite);        
-      });          
-
-      testWidgets("The correct appbar title is present", 
-      (WidgetTester tester) async 
-      {
-        // Pumping the widget
-        await pumpGPSKeywordsDeclaration(tester);
         await tester.pumpAndSettle();
-
-        // Getting the localized strings
-        var context = tester.element(find.byType(Scaffold).first);
-        LocalizedGPSStrings lgps = .new(context);      
-
-        // Tapping to open the overlay
-        var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
-        await tester.tap(keywordsTitleFinder);
-        await tester.pumpAndSettle();  
 
         // appBarTitle hard-coded strings
         var appBarTitle = "";
-        
+
         var localeLanguageCode = getLocaleLanguageCode(tester);
-     
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): { appBarTitle = "Keywords for the\nproblem-solving session"; }
-          case("fr"): { appBarTitle = "Mots-clés pour la\nsession de résolution du problème"; }        
+
+        switch (localeLanguageCode.toLowerCase()) {
+          case ("en"):
+            {
+              appBarTitle = "Keywords for the\nproblem-solving session";
+            }
+          case ("fr"):
+            {
+              appBarTitle =
+                  "Mots-clés pour la\nsession de résolution du problème";
+            }
         }
         logt("appBarTitle", appBarTitle);
         // Verifying consistency between hard-coded string and localized string
-        expect(appBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);     
+        expect(appBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);
 
         // Verifying the appBarTitle present
-        expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOneWidget);   
-          
-      });          
-     
+        expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOneWidget);
+      });
     });
   });
 }
