@@ -1,5 +1,5 @@
 // ignore: file_names
-import "package:flutter/material.dart";
+import "package:material_ui/material_ui.dart";
 import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/app_themes.dart";
@@ -12,85 +12,81 @@ import "../../../integration_test/externalized_code/externalized_testing_code.da
 
 void main() {
   Future<void> pumpIdentifierWidget({
-    required WidgetTester tester, 
-    required isEditMode, 
-  })  async
-    {
-      await tester.pumpWidget(
-        MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: const Locale(testingLocaleOption),
-          theme: appTheme,
-          home: Scaffold(
-            body: IdentifierWidget
-            (
-                isEditMode: isEditMode, 
-                isDeleteMode: !isEditMode,
-                onDelete:() {}, 
-                onEdit:() {}, 
-                onSwipe:(_) {}, 
-                onClick:(_) {}, 
-            ),
+    required WidgetTester tester,
+    required isEditMode,
+  }) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale(testingLocaleOption),
+        theme: appTheme,
+        home: Scaffold(
+          body: IdentifierWidget(
+            isEditMode: isEditMode,
+            isDeleteMode: !isEditMode,
+            onDelete: () {},
+            onEdit: () {},
+            onSwipe: (_) {},
+            onClick: (_) {},
           ),
         ),
-      );
-    }
+      ),
+    );
+  }
 
   group("GPSGroupMoods Tests: \n", () {
-    group("IdentifierWidget \n", () { 
-        group("IdentifierWidget: structure \n", () {  
-          testWidgets("The edit emoji is present", 
-          (WidgetTester tester) async 
-          {
-            // Pumping the widget
-            await pumpIdentifierWidget(tester: tester, isEditMode: true);
+    group("IdentifierWidget \n", () {
+      group("IdentifierWidget: structure \n", () {
+        testWidgets("The edit emoji is present", (WidgetTester tester) async {
+          // Pumping the widget
+          await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
-            // Searching the emoji 
-            var emojiFinder = find.textContaining(editEmoji);
+          // Searching the emoji
+          var emojiFinder = find.textContaining(editEmoji);
 
-            expect(emojiFinder, findsOne);
-          });    
-        
+          expect(emojiFinder, findsOne);
+        });
+      });
+
+      group("IdentifierWidget: default aspect: \n", () {
+        testWidgets("The default circle color is green", (
+          WidgetTester tester,
+        ) async {
+          // Pumping the widget
+          await pumpIdentifierWidget(tester: tester, isEditMode: true);
+
+          // Verifying the color
+          await gpsTestIdentifierColor(tester, find.byType(Container), green);
         });
 
-        group("IdentifierWidget: default aspect: \n", () { 
-          testWidgets("The default circle color is green", 
-          (WidgetTester tester) async 
-          {
-            // Pumping the widget
-            await pumpIdentifierWidget(tester: tester, isEditMode: true);
+        testWidgets("The delete icon is absent at addition of the identifier", (
+          WidgetTester tester,
+        ) async {
+          // Pumping the widget
+          await pumpIdentifierWidget(tester: tester, isEditMode: true);
 
-            // Verifying the color 
-            await gpsTestIdentifierColor(tester, find.byType(Container), green);
-          });          
-        
-          testWidgets("The delete icon is absent at addition of the identifier", 
-          (WidgetTester tester) async 
-          {
-            // Pumping the widget
-            await pumpIdentifierWidget(tester: tester, isEditMode: true);
+          // Searching the delete icon
+          var deleteIconFinder = find.byType(Icon);
 
-            // Searching the delete icon 
-            var deleteIconFinder = find.byType(Icon);
+          expect(deleteIconFinder, findsNothing);
+        });
 
-            expect(deleteIconFinder, findsNothing);
-          });   
+        testWidgets("The delete icon is present in 'delete' mode", (
+          WidgetTester tester,
+        ) async {
+          // Pumping the widget
+          await pumpIdentifierWidget(tester: tester, isEditMode: false);
 
-          testWidgets("The delete icon is present in 'delete' mode", 
-          (WidgetTester tester) async 
-          {
-            // Pumping the widget
-            await pumpIdentifierWidget(tester: tester, isEditMode: false);
+          // Searching the delete icon
+          var deleteIconFinder = find.byType(Icon);
 
-            // Searching the delete icon 
-            var deleteIconFinder = find.byType(Icon);
-
-            expect(deleteIconFinder, findsOne);
-          }); 
-      
+          expect(deleteIconFinder, findsOne);
+        });
       });
-      });
+    });
   });
-
 }
