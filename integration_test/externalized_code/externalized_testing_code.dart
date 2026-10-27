@@ -1,11 +1,10 @@
-import "package:flutter_test/flutter_test.dart";
-
 import "package:material_ui/material_ui.dart";
-
+import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_questions_fields.dart";
+import "package:journeyers/l10n/localized_ca_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
@@ -32,855 +31,1797 @@ import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_p
 
 import "../../test/_widget_testing_utils/widget_testing_utils.dart";
 
-
-
 // ─── CA  ───────────────────────────────────────────────────────────────
 // ───────────────────────────────────────────────────────────────────────
 
 // ─── EXPANSION TILES ───────────────────────────────────────────────────────────────
-  // Method used to open the expansion tile with the individual perspective
-  Future<void> caOpenIndividualExpansionTile(BuildContext context, WidgetTester tester) async
-  {
-    LocalizedCAQuestionsFields lqf = .new(context);
-    var tileFinder = find.text(lqf.level2TitleIndividual, skipOffstage: false);
-    await tester.scrollUntilVisible(tileFinder, 45, scrollable: find.byType(Scrollable).last);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 3));
+// Method used to open the expansion tile with the individual perspective
+Future<void> caOpenIndividualExpansionTile(
+  BuildContext context,
+  WidgetTester tester,
+) async {
+  LocalizedCAQuestionsFields lqf = .new(context);
+  var tileFinder = find.text(lqf.level2TitleIndividual, skipOffstage: false);
+  await tester.scrollUntilVisible(
+    tileFinder,
+    45,
+    scrollable: find.byType(Scrollable).last,
+  );
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 3));
 
-    // Opening the individual perspective expansion tile
-    await tester.tap(tileFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 3));
-  }
+  // Opening the individual perspective expansion tile
+  await tester.tap(tileFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 3));
+}
 
-  // Method used to open the expansion tile with the group/team perspective
-  Future<void> caOpenGroupExpansionTile(BuildContext context, WidgetTester tester) async
-  {
-    LocalizedCAQuestionsFields lqf = .new(context);
-    var tileFinder = find.text(lqf.level2TitleGroup, skipOffstage: false);
-    await tester.scrollUntilVisible(tileFinder, 45, scrollable: find.byType(Scrollable).last);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 3));
+// Method used to open the expansion tile with the group/team perspective
+Future<void> caOpenGroupExpansionTile(
+  BuildContext context,
+  WidgetTester tester,
+) async {
+  LocalizedCAQuestionsFields lqf = .new(context);
+  var tileFinder = find.text(lqf.level2TitleGroup, skipOffstage: false);
+  await tester.scrollUntilVisible(
+    tileFinder,
+    45,
+    scrollable: find.byType(Scrollable).last,
+  );
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 3));
 
-    // Opening the group/team perspective expansion tile
-    await tester.tap(tileFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 3));
-  }
+  // Opening the group/team perspective expansion tile
+  await tester.tap(tileFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 5));
+}
 
 // ─── CA PROCESS FILING ───────────────────────────────────────────────────────────────
-  // Method used to check that the new CA process button functions
-  Future<void> caCheckNewProcessButtonFunctions(WidgetTester tester) async
-  {
-    // To avoid intermittent test failures
-    await tester.pump(const Duration(seconds: 2)); 
+// Method used to check that the new CA process button functions
+Future<void> caCheckNewProcessButtonFunctions(WidgetTester tester) async {
+  // To avoid intermittent test failures
+  await tester.pump(const Duration(seconds: 2));
 
-    // Verifying the NewProcessButton present
-    expect(
-      find.byType(NewProcessButton),
-      findsOneWidget,
-      reason: "NewProcessButton should be visible when CA session data is already saved.",
-    );
+  // Verifying the NewProcessButton present
+  expect(
+    find.byType(NewProcessButton),
+    findsOneWidget,
+    reason:
+        "NewProcessButton should be visible when CA session data is already saved.",
+  );
 
-    // Tapping NewProcessButton
-    await tester.tap(find.byType(NewProcessButton));
-    // pumpAndSettle waits for CAProcess (and its _loadDTO / initState async work)
-    // to settle before searching for children widgets.
+  // Tapping NewProcessButton
+  await tester.tap(find.byType(NewProcessButton));
+  // pumpAndSettle waits for CAProcess (and its _loadDTO / initState async work)
+  // to settle before searching for children widgets.
+  await tester.pumpAndSettle();
+
+  // Verifying CAProcess displayed
+  expect(
+    find.byType(CAProcess),
+    findsOneWidget,
+    reason: "CAProcess should be visible after tapping NewProcessButton.",
+  );
+}
+
+// Method used to enter a title in the CA process
+Future<void> caEnterProcessTitle(WidgetTester tester, String aTitle) async {
+  // Searching the TextField inside CATitleDeclaration
+  Finder titleTextField = find.descendant(
+    of: find.byType(CATitleDeclaration),
+    matching: find.byType(TextField),
+  );
+
+  expect(
+    titleTextField,
+    findsOneWidget,
+    reason: "A TextField should exist inside CATitleDeclaration.",
+  );
+
+  // Entering a title
+  await tester.enterText(titleTextField, aTitle);
+}
+
+// Method used to enter keywords in the CA process
+Future<void> caEnterProcessKeywords(
+  WidgetTester tester,
+  List<String> keywordsList,
+) async {
+  // Searching the TextField inside CAKeywordsDeclaration
+  Finder keywordsTextField = find.descendant(
+    of: find.byType(CAKeywordsDeclaration),
+    matching: find.byType(TextField),
+  );
+
+  for (var kw in keywordsList) {
+    // Entering the keyword
+    await tester.enterText(keywordsTextField, kw);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
 
-    // Verifying CAProcess displayed
-    expect(
-      find.byType(CAProcess),
-      findsOneWidget,
-      reason: "CAProcess should be visible after tapping NewProcessButton.",
-    );
+    // Necessary for the next keyword to be added
+    await tester.tap(keywordsTextField);
+
+    await tester.pumpAndSettle();
   }
- 
-  // Method used to enter a title in the CA process
-  Future<void> caEnterProcessTitle (WidgetTester tester, String aTitle) async
-  {
-    // Searching the TextField inside CATitleDeclaration
-    Finder titleTextField = find.descendant(
-      of: find.byType(CATitleDeclaration),
-      matching: find.byType(TextField),
-    );
+}
 
-    expect(
-      titleTextField,
-      findsOneWidget,
-      reason: "A TextField should exist inside CATitleDeclaration.",
-    );
+// Method used to fill a context analyis form.
+Future<void> caFillForm(
+  WidgetTester tester,
+  List<bool> checkboxValues,
+  List<String> checkboxTextFieldValues,
+  String indivAnotherIssueStrValue,
+  String groupProblemsToSolveStrValue,
+  List<Set<String>> segmentedButtonValues,
+  List<String> segmentedButtonTextFieldValues,
+) async {
+  if (testingDebug) pu.printd("Entering caFillForm");
+  // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
+  // Opening the individual perspective expansion tile
+  // Getting the build context
+  final context = tester.element(find.byType(Scaffold).first);
+  await caOpenIndividualExpansionTile(context, tester);
 
-    // Entering a title
-    await tester.enterText(titleTextField, aTitle);
-  }
-  
-  // Method used to enter keywords in the CA process
-  Future<void> caEnterProcessKeywords (WidgetTester tester, List<String> keywordsList) async
-  {
-    // Searching the TextField inside CAKeywordsDeclaration
-    Finder keywordsTextField = find.descendant(
-      of: find.byType(CAKeywordsDeclaration),
-      matching: find.byType(TextField),
-    );
+  // 1. Searching for all custom checkboxes
+  var checkboxFinder = find.descendant(
+    of: find.byType(ExpansionTile).first,
+    matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+    skipOffstage: false,
+  );
 
-    for (var kw in keywordsList)
-    {
-      // Entering the keyword
-      await tester.enterText(keywordsTextField, kw);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
+  // Getting the total number of custom checkboxes
+  int totalCheckboxes = checkboxFinder.evaluate().length;
+  logt("Number of custom checkboxes", totalCheckboxes);
+  // Adding text to every text field under a custom checkbox
+  for (int index = 0; index < totalCheckboxes; index++) {
+    // Searching the custom checkboxes by index
+    var currentCheckbox = find
+        .descendant(
+          of: find.byType(ExpansionTile).first,
+          matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+          skipOffstage: false,
+        )
+        .at(index);
+
+    // if checkbox value is true, tapping the checkbox, and entering the text, if any.
+    if (checkboxValues[index] == true) {
+      await tester.scrollUntilVisible(
+        currentCheckbox,
+        45,
+        scrollable: find.byType(Scrollable).last,
+      );
       await tester.pumpAndSettle();
+      await tester.tap(currentCheckbox);
+      await tester.pumpAndSettle();
+      // await tester.pump(const Duration(seconds: 2));
 
-      // Necessary for the next keyword to be added
-      await tester.tap(keywordsTextField);
-      
+      // Searching the text field related to the current checkbox
+      var textFieldFinder = find.descendant(
+        of: currentCheckbox,
+        matching: find.byType(TextField),
+      );
+
+      // Adding text
+      await tester.scrollUntilVisible(
+        textFieldFinder,
+        45,
+        scrollable: find.byType(Scrollable).last,
+      );
+      await tester.enterText(textFieldFinder, checkboxTextFieldValues[index]);
       await tester.pumpAndSettle();
     }
-  }      
+  }
 
-  // Method used to fill a context analyis form.
-  Future<void> caFillForm
-  (
-    WidgetTester tester,
-    List<bool> checkboxValues, List<String> checkboxTextFieldValues, String indivAnotherIssueStrValue, 
-    String groupProblemsToSolveStrValue, List<Set<String>> segmentedButtonValues, List<String> segmentedButtonTextFieldValues
-  ) async
-  {
-    // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
-    // Opening the individual perspective expansion tile
-      // Getting the build context
-    final context = tester.element(find.byType(Scaffold).first);
-    await caOpenIndividualExpansionTile(context, tester);  
-
-    // 1. Searching for all custom checkboxes
-    var checkboxFinder = find.descendant(
-      of: find.byType(ExpansionTile).first, 
-      matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-      skipOffstage: false
-    );
-
-    // Getting the total number of custom checkboxes
-    int totalCheckboxes = checkboxFinder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: Number of custom checkboxes: $totalCheckboxes");
-
-    // Adding text to every text field under a custom checkbox
-    for (int index = 0; index < totalCheckboxes; index++) 
-    {
-      // Searching the custom checkboxes by index
-      var currentCheckbox = find.descendant(
+  // 2. Searching for the text field only
+  var indivTextFieldOnlyFinder = find
+      .descendant(
         of: find.byType(ExpansionTile).first,
-        matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
-        skipOffstage: false
-      ).at(index);
+        matching: find.byType(CATextFieldSanitizedAndPadded),
+        // Getting the last one
+      )
+      .last;
 
-      // if checkbox value is true, tapping the checkbox, and entering the text, if any.
-      if (checkboxValues[index] == true)
-      {
-        await tester.scrollUntilVisible(currentCheckbox, 45, scrollable: find.byType(Scrollable).last);
-        await tester.pumpAndSettle();
-        await tester.tap(currentCheckbox);
-        await tester.pumpAndSettle();
-        // await tester.pump(const Duration(seconds: 2));
+  // Adding text in the text field
+  await tester.ensureVisible(indivTextFieldOnlyFinder);
+  await tester.enterText(indivTextFieldOnlyFinder, indivAnotherIssueStrValue);
+  await tester.pumpAndSettle();
 
-        // Searching the text field related to the current checkbox
-        var textFieldFinder = find.descendant(
-          of: currentCheckbox, 
-          matching: find.byType(TextField),
+  // ── FORM SECTION : Group/Teams perspective ─────────────────────────────────────────────────────────────
+
+  // Opening the group/teams perspective expansion tile
+  await caOpenGroupExpansionTile(context, tester);
+
+  // 1. Searching for the text field only
+  var groupTextFieldOnlyFinder = find
+      .descendant(
+        of: find.byType(ExpansionTile).last,
+        matching: find.byType(CATextFieldSanitizedAndPadded),
+        // Getting the first one
+      )
+      .first;
+
+  // Adding text in the text field
+  await tester.ensureVisible(groupTextFieldOnlyFinder);
+  await tester.enterText(
+    groupTextFieldOnlyFinder,
+    groupProblemsToSolveStrValue,
+  );
+
+  // 2. Searching for all custom segmented buttons
+  var segmentedButtonsFinder = find.descendant(
+    of: find.byType(ExpansionTile).last,
+    matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
+  );
+
+  // Getting the total number of custom segmented buttons
+  int totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
+  logt("Number of custom segmented buttons", totalSegmentedButtons);
+  for (int index = 0; index < totalSegmentedButtons; index++) {
+    // Searching the custom segmented buttons by index
+    var currentSegButton = find
+        .descendant(
+          of: find.byType(ExpansionTile).last,
+          matching: find.byType(
+            CASegmentedButtonWithSanitizedAndPaddedTextField,
+          ),
+        )
+        .at(index);
+
+    // if a selection exists in the segmented button, tapping the segmented button, and entering the text, if any.
+    if (segmentedButtonValues[index].isNotEmpty) {
+      // Looping through each string in the Set for this specific SegmentedButton
+      for (String optionToSelect in segmentedButtonValues[index]) {
+        // Searching the specific segment by its text label
+        var optionFinder = find.descendant(
+          of: currentSegButton,
+          matching: find.text(optionToSelect),
         );
 
-        // Adding text        
-        await tester.scrollUntilVisible(textFieldFinder, 45, scrollable: find.byType(Scrollable).last);
-        await tester.enterText(textFieldFinder, checkboxTextFieldValues[index]);
+        await tester.ensureVisible(optionFinder);
+        await tester.tap(optionFinder);
         await tester.pumpAndSettle();
+        // await tester.pump(const Duration(seconds: 2));
+      }
+
+      // Searching the text field related to the current checkbox
+      var textFieldFinder = find.descendant(
+        of: currentSegButton,
+        matching: find.byType(TextField),
+      );
+
+      // Adding text
+      await tester.enterText(
+        textFieldFinder,
+        segmentedButtonTextFieldValues[index],
+      );
+      await tester.pumpAndSettle();
+    }
+  }
+}
+
+// Method used to enter new CA process data
+// 7 values are necessary in checkboxValues
+// 4 values are necessary in segmentedButtonValues
+Future<void> caEnterNewProcessDataOnMobile({
+  required WidgetTester tester,
+  bool formToFill = true,
+  required String title,
+  required List<String> kwsList,
+  List<bool> checkboxesValues = const [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  List<String> checkboxesTextFieldValues = const [],
+  String indivAnotherIssueStrValue = "",
+  String groupProblemsToSolveStrValue = "",
+  List<Set<String>> segmentedButtonsValues = const [{}, {}, {}, {}],
+  List<String> segmentedButtonsTextFieldValues = const [],
+  required String fileNameWithoutExtension,
+}) async {
+  // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────────────
+  // Verifying that the new process button functions
+  await caCheckNewProcessButtonFunctions(tester);
+
+  // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────────────
+
+  // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+  await caEnterProcessTitle(tester, title);
+  // await tester.pump(const Duration(seconds: 2));
+
+  // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+  await caEnterProcessKeywords(tester, kwsList);
+
+  if (formToFill) {
+    // ── FORM SECTION ─────────────────────────────────────────────────────────────
+    await caFillForm(
+      tester,
+      checkboxesValues,
+      checkboxesTextFieldValues,
+      indivAnotherIssueStrValue,
+      groupProblemsToSolveStrValue,
+      segmentedButtonsValues,
+      segmentedButtonsTextFieldValues,
+    );
+  }
+
+  // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
+  // Entering the file name and submitting data
+  await dashboardEnterFileNameAndSubmitDataOnMobile(
+    tester: tester,
+    fileNameWithoutExtension: fileNameWithoutExtension,
+  );
+}
+
+// Method used to add several times context analysis data
+// The method assumes all lists have the same number of elements
+Future<void> caEnterSeveralTimesNewProcessDataWithoutFormData({
+  required bool formToFill,
+  required WidgetTester tester,
+  required List<String> titlesList,
+  required List<List<String>> kwsLists,
+  required List<String> fileNamesWithoutExtensionList,
+}) async {
+  int listsLength = titlesList.length;
+  for (var index = 0; index < listsLength; index++) {
+    await caEnterNewProcessDataOnMobile(
+      formToFill: false,
+      tester: tester,
+      title: titlesList[index],
+      kwsList: kwsLists[index],
+      fileNameWithoutExtension: fileNamesWithoutExtensionList[index],
+    );
+  }
+}
+
+// Method used to add several times context analysis data
+// The method assumes all lists have the same number of elements
+Future<void> caEnterSeveralTimesNewProcessData({
+  required bool formToFill,
+  required WidgetTester tester,
+  required List<String> titlesList,
+  required List<List<String>> kwsLists,
+  required List<bool> checkboxValues,
+  required List<String> checkboxTextFieldValues,
+  required String indivAnotherIssueStrValue,
+  required String groupProblemsToSolveStrValue,
+  required List<Set<String>> segmentedButtonValues,
+  required List<String> segmentedButtonTextFieldValues,
+  required List<String> fileNamesWithoutExtensionList,
+}) async {
+  int listsLength = titlesList.length;
+  for (var index = 0; index < listsLength; index++) {
+    await caEnterNewProcessDataOnMobile(
+      tester: tester,
+      title: titlesList[index],
+      kwsList: kwsLists[index],
+      checkboxesValues: checkboxValues,
+      checkboxesTextFieldValues: checkboxTextFieldValues,
+      indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+      groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+      segmentedButtonsValues: segmentedButtonValues,
+      segmentedButtonsTextFieldValues: segmentedButtonTextFieldValues,
+      fileNameWithoutExtension: fileNamesWithoutExtensionList[index],
+    );
+  }
+}
+
+// Method used to reset the CA checkboxes
+Future<void> caResetCACheckboxes({
+  required BuildContext context,
+  required WidgetTester tester,
+  required List<bool> checkboxValues,
+}) async {
+  // Searching and re-setting the checkboxes
+  var checkboxesFinder = find.descendant(
+    of: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+    matching: find.byType(Checkbox),
+    skipOffstage: false,
+  );
+  var totalCheckboxesFinder = checkboxesFinder.evaluate().length;
+  logt("totalCheckboxesFinder", totalCheckboxesFinder);
+  for (var i = 0; i < totalCheckboxesFinder; i++) {
+    var checkboxFinder = checkboxesFinder.at(i);
+    var checkboxWidget = tester.widget<Checkbox>(checkboxFinder);
+    var checkboxValue = checkboxWidget.value;
+    // tapping if checkbox value is true
+    if (checkboxValue == true) {
+      await tester.scrollUntilVisible(
+        checkboxFinder,
+        45,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(checkboxFinder);
+      await tester.pumpAndSettle();
+    }
+  }
+}
+
+// Method used to reset the CA segmented buttons
+Future<void> caResetCASegmentedButtons({
+  required BuildContext context,
+  required WidgetTester tester,
+  required List<Set<String>> segmentedButtonsValues,
+}) async {
+  if (testingDebug) pu.printd("Entering caResetCASegmentedButtons");
+
+  // Getting the localized strings
+  LocalizedCAQuestionsFields lqf = .new(context);
+
+  // Scrolling to reach the title
+  await tester.scrollUntilVisible(
+    find.text(lqf.level3TitleSameProblem),
+    45,
+    scrollable: find.byType(Scrollable).last,
+  );
+  await tester.pumpAndSettle();
+
+  // Searching and tapping the segmented buttons options
+  var segmentedButtonsFinder = find.byType(
+    SegmentedButton<String>,
+    skipOffstage: false,
+  );
+  var totalSegmentedButtonsFinder = segmentedButtonsFinder.evaluate().length;
+
+  for (var i = 0; i < totalSegmentedButtonsFinder; i++) {
+    var currentSegmentedButtonFinder = segmentedButtonsFinder.at(i);
+    await tester.scrollUntilVisible(
+      currentSegmentedButtonFinder,
+      45,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.pumpAndSettle();
+
+    // retrieving the values
+    var currentSegmentedButtonWidget = tester.widget<SegmentedButton>(
+      currentSegmentedButtonFinder,
+    );
+    var currentSegmentedButtonValues = currentSegmentedButtonWidget.selected;
+
+    // unselecting the options
+    for (var segmentedButtonValue in currentSegmentedButtonValues) {
+      var segmentedButtonOptionFinder = find.descendant(
+        of: currentSegmentedButtonFinder,
+        matching: find.text(segmentedButtonValue),
+      );
+      await tester.tap(segmentedButtonOptionFinder);
+      await tester.pumpAndSettle();
+
+      await tester.pump(const Duration(seconds: 2));
+    }
+  }
+}
+
+// Method used to edit CA process data (todo: to finish)
+Future<void> caEditDataOnMobile({
+  required WidgetTester tester,
+  required String title,
+  required List<String> kwsList,
+  required List<String> newKwsList,
+  required List<bool> checkboxesValues,
+  required List<bool> newCheckboxesValues,
+  required List<String> checkboxesTextFieldValues,
+  required String indivAnotherIssueStrValue,
+  required String groupProblemsToSolveStrValue,
+  required List<Set<String>> segmentedButtonsValues,
+  required List<Set<String>> newSegmentedButtonsValues,
+  required List<String> segmentedButtonsTextFieldValues,
+  required String fileNameWithoutExtension,
+}) async {
+  if (testingDebug) pu.printd("Entering caEditDataOnMobile");
+
+  // Accessing the localized data
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedDashboardStrings lds = .new(context);
+  LocalizedTestingStrings lts = .new(context);
+
+  // ── ENTERING EDIT MODE ─────────────────────────────────────────────────────────────
+  // printTextData(tester);
+  // Clicking on the edit button
+  var sessionsListItemWithTitle = find.ancestor(
+    of: find.text(title),
+    matching: find.byType(SessionsListItem),
+  );
+  var editIconButton = find.descendant(
+    of: sessionsListItemWithTitle,
+    matching: find.byTooltip(lds.editFromDashboardItemTooltipLabel),
+  );
+  await tester.tap(editIconButton);
+  await tester.pumpAndSettle();
+
+  // Opening the expansion tiles
+  await caOpenIndividualExpansionTile(context, tester);
+  await caOpenGroupExpansionTile(context, tester);
+
+  // ── 1. EDITING THE TITLE ─────────────────────────────────────────────────────────────
+  // 1.a. EDITING THE TITLE
+  var titleTextFieldFinder = find.byType(TextField, skipOffstage: false).at(1);
+  await tester.enterText(titleTextFieldFinder, "$title${lts.editionSuffix}");
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 3));
+
+  // 1.b. VERIFYING THE TITLE EDITED
+  expect(find.text("$title${lts.editionSuffix}"), findsOne);
+
+  // ── 2. EDITING THE KEYWORDS ─────────────────────────────────────────────────────────────
+  // 2.a. REMOVING THE KEYWORDS
+  for (var kw in kwsList) {
+    var kwInputChipFinder = find.ancestor(
+      of: find.text(kw),
+      matching: find.byType(InputChip),
+    );
+    var closeInputChip = find.descendant(
+      of: kwInputChipFinder,
+      matching: find.byIcon(Icons.close),
+    );
+
+    await tester.tap(closeInputChip);
+    await tester.pumpAndSettle();
+  }
+
+  // 2.b. VERIFYING THE KEYWORDS REMOVED
+  for (var kw in kwsList) {
+    expect(find.text(kw), findsNothing);
+  }
+
+  // 2.c. ADDING NEW KEYWORDS
+  var keywordsTextFieldFinder = find
+      .byType(TextField, skipOffstage: false)
+      .at(2);
+  for (var newKw in newKwsList) {
+    await tester.enterText(keywordsTextFieldFinder, newKw);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+    // await tester.pump(const Duration(seconds: 3));
+  }
+
+  // 2.d. VERIFYING THE NEW KEYWORDS PRESENT
+  for (var newKw in newKwsList) {
+    expect(find.text(newKw), findsOne);
+  }
+
+  // ── EDITING FORM DATA ─────────────────────────────────────────────────────────────
+
+  // ── 3. RESETTING CHECKBOXES AND SEGMENTED BUTTONS ─────────────────────────────────────────────────────────────
+
+  // 3.a. Unselecting all checkboxes
+  await caResetCACheckboxes(
+    context: context,
+    tester: tester,
+    checkboxValues: checkboxesValues,
+  );
+
+  // 3.b. Unselecting all segmented buttons
+  await caResetCASegmentedButtons(
+    context: context,
+    tester: tester,
+    segmentedButtonsValues: segmentedButtonsValues,
+  );
+
+  // ── 4. SELECTING NEW CHECKBOXES AND SEGMENTED BUTTONS VALUES, AND EDITING/ADDING DATA IN THE TEXT FIELDS (INCLUDING TEXT FIELDS ONLY) ─────────────────────────────────────────────────────────────
+
+  // 4.a. Selecting the checkboxes, and editing/adding data in the text fields
+  var checkboxesFinder = find.byType(Checkbox, skipOffstage: false);
+  var checkboxesFinderTotal = printFinderTotal(
+    checkboxesFinder,
+    "checkboxesFinder",
+  );
+
+  for (var i = 0; i < checkboxesFinderTotal; i++) {
+    var currentCheckboxValueToSet = newCheckboxesValues[i];
+    if (currentCheckboxValueToSet == true) {
+      var currentCheckboxFinder = checkboxesFinder.at(i);
+
+      // Reaching the checkbox
+      await tester.scrollUntilVisible(
+        currentCheckboxFinder,
+        45,
+        scrollable: find.byType(Scrollable).last,
+      );
+      await tester.pumpAndSettle();
+
+      // Tapping on the checkbox before editing
+      await tester.tap(currentCheckboxFinder);
+      await tester.pumpAndSettle();
+
+      // Editing the text field value
+      var textFieldFinder = find.descendant(
+        of: find
+            .byType(
+              CACheckboxWithSanitizedAndPaddedTextField,
+              skipOffstage: false,
+            )
+            .at(i),
+        matching: find.byType(TextField),
+      );
+      var previousValue = checkboxesTextFieldValues[i];
+      var editedValue = "$previousValue${lts.editionSuffix}";
+
+      await tester.tap(textFieldFinder);
+      await tester.pumpAndSettle();
+
+      await tester.enterText(textFieldFinder, editedValue);
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+    }
+  }
+  // 4.b. Editing data in the individual perspective text field only
+  var anotherIssueTextFieldFinder = find.byKey(
+    const Key("ca-process-another-issue-widget"),
+  );
+  // Reaching the text field
+  await tester.scrollUntilVisible(
+    anotherIssueTextFieldFinder,
+    45,
+    scrollable: find.byType(Scrollable).last,
+  );
+  await tester.pumpAndSettle();
+  // Entering edited data
+  var editedValue = "$indivAnotherIssueStrValue${lts.editionSuffix}";
+  await tester.tap(anotherIssueTextFieldFinder);
+  await tester.pumpAndSettle();
+
+  await tester.enterText(anotherIssueTextFieldFinder, editedValue);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+
+  // 4.c. Editing data in the group perspective text field only
+  var problemsToSolveTextFieldFinder = find.byKey(
+    const Key("ca-process-group-problems-to-solve-widget"),
+  );
+  // Reaching the text field
+  await tester.scrollUntilVisible(
+    problemsToSolveTextFieldFinder,
+    45,
+    scrollable: find.byType(Scrollable).last,
+  );
+  await tester.pumpAndSettle();
+  // Entering edited data
+  editedValue = "$groupProblemsToSolveStrValue${lts.editionSuffix}";
+  await tester.tap(problemsToSolveTextFieldFinder);
+  await tester.pumpAndSettle();
+
+  await tester.enterText(problemsToSolveTextFieldFinder, editedValue);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+
+  // 4.d. Selecting options on the segmented buttons, and editing/adding data in the text fields
+  var segmentedButtonsFinder = find.byType(
+    SegmentedButton<String>,
+    skipOffstage: false,
+  );
+  var segmentedButtonsFinderTotal = printFinderTotal(
+    segmentedButtonsFinder,
+    "segmentedButtonsFinder",
+  );
+
+  for (var i = 0; i < segmentedButtonsFinderTotal; i++) {
+    var currentSegmentedButtonFinder = segmentedButtonsFinder.at(i);
+
+    // Reaching the segmented button
+    await tester.scrollUntilVisible(
+      currentSegmentedButtonFinder,
+      45,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await tester.pumpAndSettle();
+
+    // Setting the new segmented button values
+    var currentSegmentedButtonValuesToSet = newSegmentedButtonsValues[i];
+    for (var value in currentSegmentedButtonValuesToSet) {
+      var valueFinder = find.descendant(
+        of: currentSegmentedButtonFinder,
+        matching: find.text(value),
+      );
+
+      await tester.tap(valueFinder);
+      await tester.pumpAndSettle();
+    }
+
+    // Editing/adding data in the text fields
+    var textFieldFinder = find
+        .descendant(
+          of: find.byType(
+            CASegmentedButtonWithSanitizedAndPaddedTextField,
+            skipOffstage: false,
+          ),
+          matching: find.byType(TextField),
+        )
+        .at(i);
+    var previousValue = segmentedButtonsTextFieldValues[i];
+    var editedValue = "$previousValue${lts.editionSuffix}";
+
+    await tester.tap(textFieldFinder);
+    await tester.pumpAndSettle();
+
+    await tester.enterText(textFieldFinder, editedValue);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+
+  // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
+  // Entering the file name and submitting data
+  await dashboardEnterFileNameAndSubmitDataOnMobile(
+    tester: tester,
+    fileNameWithoutExtension: fileNameWithoutExtension,
+  );
+}
+
+// ─── CA PREVIEW ───────────────────────────────────────────────────────────────
+// Method used to test a CA preview.
+Future<void> caTestPreview({
+  required BuildContext context,
+  required WidgetTester tester,
+  Finder? previewFinder,
+  required String title,
+  List<String> individualStringValues = const ["", "", "", "", "", "", "", ""],
+  List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}, {}],
+  List<String> groupStringValues = const ["", "", "", "", ""],
+}) async {
+  // Accessing the localized form data
+  LocalizedCAQuestionsFields? qfl = .new(context);
+  LocalizedDashboardStrings lds = .new(context);
+
+  logt("Preview: Individual perspective values", individualStringValues);
+  logt("Preview: Group/team perspective values", groupStringValues);
+  // The total number of expansion tile for the individual perspective
+  int totalIndivExpansionTiles = 0;
+
+  await tester.pump(const Duration(seconds: 2));
+  // Opening the preview
+  var previewFinderVal =
+      previewFinder ??
+      find.byTooltip(lds.previewTooltipLabel, skipOffstage: false).last;
+  // Getting the scrollable
+  var scrollable = find
+      .descendant(
+        of: find.byKey(const Key("dashboard-scrollview")),
+        matching: find.byType(Scrollable),
+      )
+      .first;
+  await tester.scrollUntilVisible(previewFinderVal, 45, scrollable: scrollable);
+  await tester.pumpAndSettle();
+  await tester.tap(previewFinderVal);
+  await tester.pumpAndSettle();
+
+  await tester.pump(const Duration(seconds: 5));
+
+  // Verifying the title present
+  var titleFinder = find.descendant(
+    of: find.byType(StatefulBuilder),
+    matching: find.textContaining(title),
+  );
+  expect(titleFinder, findsOne);
+
+  if (testingDebug) pu.printd("Testing Debug: Title found in the preview");
+
+  //Searching for the expansion tiles
+  var expansionTilesFinder = find.descendant(
+    of: find.byType(CAPreview),
+    matching: find.byType(ExpansionTile),
+    skipOffstage: false,
+  );
+
+  // Getting the number of non empty individual perspective values
+  var totalNonEmptyIndivPerspectiveValues = individualStringValues
+      .where((item) => item.isNotEmpty)
+      .toList()
+      .length;
+  logt(
+    "Number of non empty individual perspective values",
+    totalNonEmptyIndivPerspectiveValues,
+  );
+  // Getting the total number of expansion tiles
+  int totalExpansionTiles = expansionTilesFinder.evaluate().length;
+  logt("Number of expansion tiles", totalExpansionTiles);
+  // Expansion tile indexes for the individual perspective
+  var indivIndexes = List.generate(
+    totalNonEmptyIndivPerspectiveValues,
+    (i) => i,
+  );
+
+  // Expansion tile indexes for the group/teams perspective
+  var groupIndexes = List.generate(5, (i) => i + 4);
+
+  logt("Expansion tile indexes for the individual perspective", indivIndexes);
+  logt("Expansion tile indexes for the group/teams perspective", groupIndexes);
+  // To have the index of the data for each perspective
+  // reset at the start of the group/teams perspective
+  int previewListTileDataIndex = -1;
+
+  // Accessing the expansion tiles by index
+  for (
+    int expansionTileIndex = 0;
+    expansionTileIndex < totalExpansionTiles;
+    expansionTileIndex++
+  ) {
+    // Searching the expansion tile by index
+    var currentExpansionTileFinder = find
+        .descendant(
+          of: find.byType(CAPreview),
+          matching: find.byType(ExpansionTile),
+          skipOffstage: false,
+        )
+        .at(expansionTileIndex);
+
+    // Getting the expansion tile title
+    ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(
+      currentExpansionTileFinder,
+    );
+    Text expansionTileTitleWidget = expansionTileWidget.title as Text;
+    String expansionTileTitle = expansionTileTitleWidget.data!;
+    logt("\n Expansion tile title", expansionTileTitle);
+    // Getting all the list tiles for the expansion tile
+    var listTilesFinder = find.descendant(
+      of: currentExpansionTileFinder,
+      matching: find.byType(ListTile),
+      skipOffstage: false,
+    );
+
+    // Getting the total number of list tiles for this expansion tile
+    int totalListTiles = listTilesFinder.evaluate().length;
+    if (testingDebug) {
+      pu.printd(
+        "Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
+        "(The expansion tile is included. The first index is skipped.)",
+      );
+    }
+
+    if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) {
+      totalIndivExpansionTiles++;
+    }
+
+    // Accessing each list tile by index
+    // Index starting at 1 to skip the expansion tile
+    for (
+      int listTileIndex = 1;
+      listTileIndex < totalListTiles;
+      listTileIndex++
+    ) {
+      // No expansion tile if the checkbox is not checked
+      // Resetting at the first group/teams expansion tile
+      if (expansionTileIndex == totalIndivExpansionTiles) {
+        if (testingDebug) {
+          pu.printd(
+            "Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex",
+          );
+        }
+        previewListTileDataIndex = 0;
+      } else {
+        previewListTileDataIndex++;
+      }
+
+      // Searching the tiles by index
+      var currentListTile = find
+          .descendant(
+            of: currentExpansionTileFinder,
+            matching: find.byType(ListTile),
+            skipOffstage: false,
+          )
+          .at(listTileIndex);
+
+      // Getting the list tile title
+      ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
+      Text listTileTitleWidget = listTileWidget.title as Text;
+      String listTileTitle = listTileTitleWidget.data!;
+      logt("List tiles title for: $expansionTileTitle", listTileTitle);
+      logt(
+        "expansionTileIndex: $expansionTileIndex, listTileIndex",
+        listTileIndex,
+      );
+      // Testing if the expansion tile is related to the individual perspective
+      if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) {
+        // The last individual perspective expansion tile is for a text field only data
+        // For a text field only, the notes are in the title
+        if (expansionTileTitle == qfl.level3TitleAnotherIssueForDataSaving &&
+            listTileIndex == 1) {
+          expect(
+            listTileTitle,
+            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}",
+          );
+        }
+        // Otherwise the notes are in the subtitle, for the individual perspective
+        else {
+          // Getting the list tile subtitle
+          Text listTileSubTitleWidget = listTileWidget.subtitle as Text;
+          String listTileSubTitle = listTileSubTitleWidget.data!;
+          logt("List tiles subtitle for $expansionTileTitle", listTileSubTitle);
+          expect(
+            listTileSubTitle,
+            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}",
+          );
+        }
+      }
+      // Group/teams expansion tiles
+      else {
+        // The first group/teams perspective expansion tile is for a text field only data
+        // For a text field only, the notes are in the title
+        if (expansionTileTitle ==
+                qfl.level3TitleGroupsProblematicsForDataSaving &&
+            listTileIndex == 1) {
+          logt("List tiles title", expansionTileTitle);
+          expect(
+            listTileTitle,
+            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}",
+          );
+        }
+        // Otherwise the notes are in the title with the segmented button answers
+        else {
+          var segButtonValue =
+              segmentedButtonValues[previewListTileDataIndex - 1];
+
+          if (segButtonValue.isNotEmpty) {
+            logt("List tiles title", expansionTileTitle);
+            var segButtonAnswersWithNotes =
+                "${AppLocalizations.of(context)?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
+                "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
+            expect(listTileTitle, segButtonAnswersWithNotes);
+          } else {
+            logt("List tiles title", expansionTileTitle);
+            expect(
+              listTileTitle,
+              AppLocalizations.of(context)?.ca_preview_notes_introduction ??
+                  "Issue with the l10n for Notes:",
+            );
+          }
+        }
+      }
+    }
+  }
+
+  // Closing the preview
+  var previewClosingTooltipLabelFinder = find.byTooltip(
+    lds.previewClosingTooltipLabel,
+  );
+  await tester.tap(previewClosingTooltipLabelFinder);
+  await tester.pumpAndSettle();
+
+  // await tester.pump(const Duration(seconds: 2));
+}
+
+// Method used to get the finder of the individual expansion tiles
+Future<Finder> caPreviewGetExpansionTilesIndividualPerspective() async {
+  var expansionTilesIndividualPerspectiveFinder = find.byWidgetPredicate((
+    widget,
+  ) {
+    if (widget.key is ValueKey<String>) {
+      return (widget.key as ValueKey<String>).value.contains(
+        "ca-preview-individual-perspective-",
+      );
+    }
+    return false;
+  }, skipOffstage: false);
+
+  return expansionTilesIndividualPerspectiveFinder;
+}
+
+// Method used to get the finder of the group expansion tiles
+Future<Finder> caPreviewGetExpansionTilesGroupPerspective() async {
+  var expansionTilesGroupPerspectiveFinder = find.byWidgetPredicate((widget) {
+    if (widget.key is ValueKey<String>) {
+      return (widget.key as ValueKey<String>).value.contains(
+        "ca-preview-group-perspective-",
+      );
+    }
+    return false;
+  });
+
+  return expansionTilesGroupPerspectiveFinder;
+}
+
+// Method used to test the content of a context analysis preview
+Future<void> caTestPreview2({
+  required BuildContext context,
+  required WidgetTester tester,
+  Finder? previewFinder,
+  required String title,
+  required List<bool> checkboxesValues,
+  required List<String> individualStringValues,
+  required List<Set<String>> segmentedButtonValues,
+  required List<String> groupStringValues,
+}) async {
+
+  await tester.pump(const Duration(seconds: 10));
+
+  // Accessing the localized strings
+  LocalizedDashboardStrings lds = .new(context);
+  LocalizedCAStrings lca = .new(context);
+
+  if (testingDebug) pu.printd("Entering caTestPreview2");
+  logt("---------> Parameters");
+  logt("Preview: Checkboxes values", checkboxesValues);
+  logt("Preview: Individual perspective values", individualStringValues);
+  logt("Preview: Segmented buttons values", segmentedButtonValues);
+  logt("Preview: Group/teams perspective values", groupStringValues);
+  // await tester.pump(const Duration(seconds: 2));
+
+  // ---------------------------------------------------------------------------
+  // 1. ACCESSING AND OPENING THE PREVIEW
+  // ---------------------------------------------------------------------------
+  var previewFinderVal =
+      previewFinder ??
+      find.byTooltip(lds.previewTooltipLabel, skipOffstage: false).last;
+  var scrollable = find.descendant(
+    of: find.byKey(const Key("dashboard-scrollview")),
+    matching: find.byType(Scrollable),
+  );
+  await tester.scrollUntilVisible(previewFinderVal, 45, scrollable: scrollable);
+  await tester.pumpAndSettle();
+
+  await tester.tap(previewFinderVal);
+  await tester.pumpAndSettle();
+
+  // await tester.pump(const Duration(seconds: 15));
+
+  // ---------------------------------------------------------------------------
+  // 2. VERIFYING THE TITLE PRESENT
+  // ---------------------------------------------------------------------------
+  var titleFinder = find.descendant(
+    of: find.byType(StatefulBuilder),
+    matching: find.textContaining(title),
+  );
+  expect(titleFinder, findsOne);
+  if (testingDebug) pu.printd("Testing Debug: ---------> Preview title found");
+
+  // ---------------------------------------------------------------------------
+  // 3. VERIFYING THE VALUES FOR THE INDIVIDUAL PERSPECTIVE
+  // ---------------------------------------------------------------------------
+
+  // Getting all expansionTilesIndividualPerpective
+  var expansionTilesIndividualPerpectiveFinder =
+      await caPreviewGetExpansionTilesIndividualPerspective();
+  int totalExpansionTilesIndividualPerpectiveFinder = printFinderTotal(
+    expansionTilesIndividualPerpectiveFinder,
+    "expansionTilesIndividualPerpectiveFinder",
+  );
+
+  // 3.1 case 1: no expansion tiles in the individual perpective: default message to check
+  // ---------------------------------------------------------------------------
+  // code to re-do
+  if (totalExpansionTilesIndividualPerpectiveFinder == 0) {
+    var caPreviewNoDataInIndividualPerspectiveFinder = find.byKey(
+      const Key("ca-preview-no-data-in-individual-perspective"),
+      skipOffstage: false,
+    );
+    var caPreviewNoDataInIndividualPerspectiveText = tester.widget<Text>(
+      caPreviewNoDataInIndividualPerspectiveFinder,
+    );
+    expect(
+      caPreviewNoDataInIndividualPerspectiveText.data,
+      lca.caPreviewNoDataInIndividualPerspective,
+    );
+    if (testingDebug)
+      pu.printd(
+        "Testing Debug: Found placeholder text for absence of individual data in preview",
+      );
+  }
+  // 3.2 case 2: expansion tiles in the group perpective: text field values to check
+  // ---------------------------------------------------------------------------
+  else {
+    // First 4 values: balance issue
+    // Next 2 values: work issue
+    // Next value: legacy issue
+    // Next value: another issue
+
+    // if checkboxesValues = [true, false, false, true, true, false, true];
+    // Balance issue: [true, false, false, true] -> 3 tiles: title + 2
+    // Workplace issue: [true, false] -> 2 tiles: title + 1
+    // Legacy issue: [true] -> 2 tiles: title + 1
+    // if indivAnotherIssueStrValue = "a8";
+    // Legacy issue: -> 2 tiles: title + 1;
+
+    // Indexes for all potential checkboxes
+    var balanceIssueCheckboxIndexes = [0, 1, 2, 3];
+    var workplaceIssueCheckboxIndexes = [4, 5];
+    var legacyIssueCheckboxIndexes = [6];
+
+    // Text values, potentially "", for each section
+    // List<String> balanceIssueStringValues = [for (var index in balanceIssueCheckboxIndexes) individualStringValues[index]];
+    // List<String> workplaceIssueStringValues = [for (var index in workplaceIssueCheckboxIndexes) individualStringValues[index]];
+    // List<String> legacyIssueStringValues = [for (var index in legacyIssueCheckboxIndexes) individualStringValues[index]];
+    // List<String> anotherIssueStringValues = [individualStringValues.last];
+
+    // Text values related to a checkbox checked
+    List<String> balanceIssueStringValuesForCheckedBoxesChecked = [
+      for (var index in balanceIssueCheckboxIndexes)
+        if (checkboxesValues[index] == true) individualStringValues[index],
+    ];
+    List<String> workplaceIssueStringValuesForCheckedBoxesChecked = [
+      for (var index in workplaceIssueCheckboxIndexes)
+        if (checkboxesValues[index] == true) individualStringValues[index],
+    ];
+    List<String> legacyIssueStringValuesForCheckedBoxesChecked = [
+      for (var index in legacyIssueCheckboxIndexes)
+        if (checkboxesValues[index] == true) individualStringValues[index],
+    ];
+
+    // Checkbox indexes related to a checkbox checked
+    var balanceIssueCheckboxIndexesForCheckedBoxesChecked = [
+      for (var index in balanceIssueCheckboxIndexes)
+        if (checkboxesValues[index] == true) index,
+    ];
+    var workplaceIssueCheckboxIndexesForCheckedBoxesChecked = [
+      for (var index in workplaceIssueCheckboxIndexes)
+        if (checkboxesValues[index] == true) index,
+    ];
+    var legacyIssueCheckboxIndexesForCheckedBoxesChecked = [
+      for (var index in legacyIssueCheckboxIndexes)
+        if (checkboxesValues[index] == true) index,
+    ];
+
+    logt("individualStringValues: $individualStringValues");
+    // logt("balanceIssueStringValues: $balanceIssueStringValues");
+    // logt("workplaceIssueStringValues: $workplaceIssueStringValues");
+    // logt("legacyIssueStringValues: $legacyIssueStringValues");
+    // logt("anotherIssueStringValues: $anotherIssueStringValues");
+
+    logt("---------> String Values For CheckedBoxes Checked:");
+    logt(
+      "balanceIssueStringValuesForCheckedBoxesChecked: $balanceIssueStringValuesForCheckedBoxesChecked",
+    );
+    logt(
+      "workplaceIssueStringValuesForCheckedBoxesChecked: $workplaceIssueStringValuesForCheckedBoxesChecked",
+    );
+    logt(
+      "legacyIssueStringValuesForCheckedBoxesChecked: $legacyIssueStringValuesForCheckedBoxesChecked",
+    );
+
+    logt("---------> Boolean Values For CheckedBoxes Checked Indexes:");
+    logt(
+      "balanceIssueCheckboxIndexesForCheckedBoxesChecked: $balanceIssueCheckboxIndexesForCheckedBoxesChecked",
+    );
+    logt(
+      "workplaceIssueCheckboxIndexesForCheckedBoxesChecked: $workplaceIssueCheckboxIndexesForCheckedBoxesChecked",
+    );
+    logt(
+      "legacyIssueCheckboxIndexesForCheckedBoxesChecked: $legacyIssueCheckboxIndexesForCheckedBoxesChecked",
+    );
+
+    // variable used to store the values of the section expansion tile indexes
+    // e.g. if only one section expansion tile has a true value, then index = 0
+    // if only two section expansion tiles have a true value, then index for the second should be one
+    int howManySectionsHaveTrueValues = 0;
+    List<int?> sectionsExpansionTilesIndexesList = [null, null, null, null];
+    List<bool> sectionsHaveTrueValuesList = [false, false, false, false];
+
+    // Processing the value of sectionsHaveTrueValuesList and sectionsExpansionTilesIndexesList for the balance issue
+    for (var i = 0; i < checkboxesValues.length; i++) {
+      if (balanceIssueCheckboxIndexes.contains(i) &&
+          checkboxesValues[i] == true) {
+        sectionsHaveTrueValuesList[0] = true;
+        sectionsExpansionTilesIndexesList[0] = howManySectionsHaveTrueValues;
+        howManySectionsHaveTrueValues++;
+        break;
       }
     }
 
-    // 2. Searching for the text field only
-    var indivTextFieldOnlyFinder = find.descendant(
-        of: find.byType(ExpansionTile).first,
-        matching: find.byType(CATextFieldSanitizedAndPadded)
-      // Getting the last one
-      ).last;
-
-    // Adding text in the text field
-    await tester.ensureVisible(indivTextFieldOnlyFinder);
-    await tester.enterText(indivTextFieldOnlyFinder, indivAnotherIssueStrValue);
-    await tester.pumpAndSettle();
-        
-    // ── FORM SECTION : Group/Teams perspective ─────────────────────────────────────────────────────────────
-    
-    // Opening the group/teams perspective expansion tile
-    await caOpenGroupExpansionTile(context, tester); 
-    
-    // 1. Searching for the text field only
-    var groupTextFieldOnlyFinder = find.descendant(
-        of: find.byType(ExpansionTile).last,
-        matching: find.byType(CATextFieldSanitizedAndPadded)
-      // Getting the first one
-      ).first;
-
-    // Adding text in the text field
-    await tester.ensureVisible(groupTextFieldOnlyFinder);
-    await tester.enterText(groupTextFieldOnlyFinder, groupProblemsToSolveStrValue);
-
-    // 2. Searching for all custom segmented buttons
-    var segmentedButtonsFinder = find.descendant(
-      of: find.byType(ExpansionTile).last, 
-      matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-    );
-
-    // Getting the total number of custom segmented buttons
-    int totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: Number of custom segmented buttons: $totalSegmentedButtons");
-
-     for (int index = 0; index < totalSegmentedButtons; index++) 
-    {
-      // Searching the custom segmented buttons by index
-      var currentSegButton = find.descendant(
-        of: find.byType(ExpansionTile).last,
-        matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField)
-      ).at(index);
-
-      // if a selection exists in the segmented button, tapping the segmented button, and entering the text, if any.
-      if (segmentedButtonValues[index].isNotEmpty)
-      {
-        // Looping through each string in the Set for this specific SegmentedButton
-        for (String optionToSelect in segmentedButtonValues[index]) {
-          // Searching the specific segment by its text label
-          var optionFinder = find.descendant(
-            of: currentSegButton,
-            matching: find.text(optionToSelect),
-          );
-
-          await tester.ensureVisible(optionFinder);
-          await tester.tap(optionFinder);
-          await tester.pumpAndSettle();
-          // await tester.pump(const Duration(seconds: 2));
-        }
-
-        // Searching the text field related to the current checkbox
-        var textFieldFinder = find.descendant(
-          of: currentSegButton, 
-          matching: find.byType(TextField)
-        );
-
-        // Adding text        
-        await tester.enterText(textFieldFinder, segmentedButtonTextFieldValues[index]);
-        await tester.pumpAndSettle();
-      }    
-    }
-  }
-
-  // Method used to enter new CA process data
-  // 7 values are necessary in checkboxValues
-  // 4 values are necessary in segmentedButtonValues
-  Future<void> caEnterNewProcessDataOnMobile 
-  ({
-    required WidgetTester tester, 
-    bool formToFill = true,
-    required String title,
-    required List<String> kwsList,
-    List<bool> checkboxValues = const [false, false, false, false, false, false, false], List<String> checkboxTextFieldValues = const [], String indivAnotherIssueStrValue = "", 
-    String groupProblemsToSolveStrValue = "", List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}], List<String> segmentedButtonTextFieldValues = const [],
-    required String fileNameWithoutExtension
-  }) async
-  {
-    // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
-    // ───────────────────────────────────────────────────────────────────────────────────
-    // Verifying that the new process button functions
-    await caCheckNewProcessButtonFunctions(tester);
-
-
-    // ── 2. CA PROCESS FILLING ──────────────────────────────────────────────────────────
-    // ───────────────────────────────────────────────────────────────────────────────────
-
-    // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-    await caEnterProcessTitle(tester, title);
-    // await tester.pump(const Duration(seconds: 2));
-
-    // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-    await caEnterProcessKeywords(tester, kwsList);
-    
-    if (formToFill)
-    {
-      // ── FORM SECTION ─────────────────────────────────────────────────────────────
-      await caFillForm(tester, checkboxValues, checkboxTextFieldValues, indivAnotherIssueStrValue, 
-      groupProblemsToSolveStrValue, segmentedButtonValues, segmentedButtonTextFieldValues);
+    // Processing the value of sectionsHaveTrueValuesList and sectionsExpansionTilesIndexesList for the workplace issue
+    for (var i = 0; i < checkboxesValues.length; i++) {
+      if (workplaceIssueCheckboxIndexes.contains(i) &&
+          checkboxesValues[i] == true) {
+        sectionsHaveTrueValuesList[1] = true;
+        sectionsExpansionTilesIndexesList[1] = howManySectionsHaveTrueValues;
+        howManySectionsHaveTrueValues++;
+        break;
+      }
     }
 
-    // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
-    // Entering the file name and submitting data
-    await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
-  }
-
-  // Method used to add several times context analysis data
-  // The method assumes all lists have the same number of elements
-  Future<void> caEnterSeveralTimesNewProcessDataWithoutFormData
-  ({
-    required bool formToFill,
-    required WidgetTester tester,
-    required List<String> titlesList,
-    required List<List<String>> kwsLists,
-    required List<String> fileNamesWithoutExtensionList
-  }) async
-  {
-    int listsLength = titlesList.length;
-    for (var index = 0; index < listsLength; index++)
-    {
-      await caEnterNewProcessDataOnMobile
-      (
-        formToFill: false,
-        tester: tester, 
-        title: titlesList[index],
-        kwsList: kwsLists[index],              
-        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
-      );
+    // Processing the value of sectionsHaveTrueValuesList and sectionsExpansionTilesIndexesList for the legacy issue
+    for (var i = 0; i < checkboxesValues.length; i++) {
+      if (legacyIssueCheckboxIndexes.contains(i) &&
+          checkboxesValues[i] == true) {
+        sectionsHaveTrueValuesList[2] = true;
+        sectionsExpansionTilesIndexesList[2] = howManySectionsHaveTrueValues;
+        howManySectionsHaveTrueValues++;
+        break;
+      }
     }
-  }
-
-  // Method used to add several times context analysis data
-  // The method assumes all lists have the same number of elements
-  Future<void> caEnterSeveralTimesNewProcessData
-  ({
-    required bool formToFill,
-    required WidgetTester tester,
-    required List<String> titlesList,
-    required List<List<String>> kwsLists,
-    required List<bool> checkboxValues,
-    required List<String> checkboxTextFieldValues,
-    required String indivAnotherIssueStrValue,
-    required String groupProblemsToSolveStrValue,
-    required List<Set<String>> segmentedButtonValues,
-    required List<String> segmentedButtonTextFieldValues,
-    required List<String> fileNamesWithoutExtensionList
-  }) async
-  {
-    int listsLength = titlesList.length;
-    for (var index = 0; index < listsLength; index++)
-    {
-      await caEnterNewProcessDataOnMobile
-      (
-        tester: tester, 
-        title: titlesList[index],
-        kwsList: kwsLists[index],    
-        checkboxValues: checkboxValues,
-        checkboxTextFieldValues: checkboxTextFieldValues,
-        indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-        groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-        segmentedButtonValues: segmentedButtonValues,
-        segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
-        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
-      );
-    }
-  }
-
-// ─── CA PREVIEW ───────────────────────────────────────────────────────────────
-  // Method used to test a CA preview.
-  Future<void> caTestPreview
-  ({
-    required BuildContext context,
-    required WidgetTester tester, 
-    Finder? previewFinder,
-    required String title,
-    List<String> individualStringValues = const ["", "", "", "", "", "", "", ""], 
-    List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}, {}], 
-    List<String> groupStringValues = const ["", "", "", "", ""]
-  }) async
-  {
-    // Accessing the localized form data
-    LocalizedCAQuestionsFields? qfl = .new(context);
-    LocalizedDashboardStrings lds = .new(context);
-
-    if (testingDebug) pu.printd("Testing Debug: Preview: Individual perspective values: $individualStringValues");
-    if (testingDebug) pu.printd("Testing Debug: Preview: Group/teams perspective values: $groupStringValues");
-
-    // The total number of expansion tile for the individual perspective
-    int totalIndivExpansionTiles = 0;
-
-    await tester.pump(const Duration(seconds: 2));
-    // Opening the preview
-    var previewFinderVal = previewFinder ?? find.byTooltip(AppLocalizations.of(context)?.l10n_preview ?? "Issue with the l10n for the 'Preview' tooltip", skipOffstage: false).last;
-        // Getting the scrollable
-    var scrollable =  find.descendant
-                (
-                  of: find.byKey(const Key("dashboard-scrollview")), 
-                  matching: find.byType(Scrollable)
-                ).first;
-    await tester.scrollUntilVisible(previewFinderVal, 45, scrollable: scrollable);
-    await tester.pumpAndSettle();
-    await tester.tap(previewFinderVal);
-    await tester.pumpAndSettle();
 
     await tester.pump(const Duration(seconds: 5));
 
-    // Verifying the title present
-    var titleFinder  = find.descendant(of: find.byType(StatefulBuilder), matching: find.textContaining(title));
-    expect(titleFinder, findsOne);  
+    // Processing the value of sectionsHaveTrueValuesList and sectionsExpansionTilesIndexesList for the other type of issue
+    if (individualStringValues.last != "") {
+      sectionsHaveTrueValuesList[3] = true;
+      sectionsExpansionTilesIndexesList[3] = howManySectionsHaveTrueValues;
+      howManySectionsHaveTrueValues++;
+    }
 
-    //Searching for the expansion tiles
-    var  expansionTilesFinder = find.descendant
-    (
-      of: find.byType(CAPreview), 
-      matching: find.byType(ExpansionTile),
-      skipOffstage: false
+    // linking a specific section expansion tile to the checkbox indexes to use
+    var currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked = [];
+    // linking a specific section expansion tile to the checkbox values to use
+    var currentSectionExpansionTileIndividualPerspectiveAnswersValues = [];
+
+    var sections = ["balance", "workplace", "legacy", "otherIssue"];
+
+    logt(
+      " ---------> sectionsHaveTrueValuesList / sectionsExpansionTilesIndexesList",
+    );
+    logt("sectionsHaveTrueValuesList: $sectionsHaveTrueValuesList");
+    logt(
+      "sectionsExpansionTilesIndexesList: $sectionsExpansionTilesIndexesList",
     );
 
-    // Getting the number of non empty individual perspective values
-    var totalNonEmptyIndivPerspectiveValues = 
-      individualStringValues.where((item) => item.isNotEmpty).toList().length;
-    if (testingDebug) pu.printd("Testing Debug: Number of non empty individual perspective values: $totalNonEmptyIndivPerspectiveValues");
+    // For each potantial individual expansion tile indexes
+    for (var sectionIndex = 0; sectionIndex <= 3; sectionIndex++) {
+      var currentSection = sections[sectionIndex];
+      logt(" ---------> currentSection: $currentSection");
 
-    // Getting the total number of expansion tiles
-    int totalExpansionTiles = expansionTilesFinder.evaluate().length;    
-    if (testingDebug) pu.printd("Testing Debug: Number of expansion tiles: $totalExpansionTiles");
+      // Matching each section to specific checkbox indexes and text values
+      switch (currentSection) {
+        // ["balance", "workplace", "legacy", "otherIssue"];
+        case "balance":
+          {
+            currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked =
+                balanceIssueCheckboxIndexesForCheckedBoxesChecked;
+            currentSectionExpansionTileIndividualPerspectiveAnswersValues =
+                balanceIssueStringValuesForCheckedBoxesChecked;
+          }
+        case "workplace":
+          {
+            currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked =
+                workplaceIssueCheckboxIndexesForCheckedBoxesChecked;
+            currentSectionExpansionTileIndividualPerspectiveAnswersValues =
+                workplaceIssueStringValuesForCheckedBoxesChecked;
+          }
+        case "legacy":
+          {
+            currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked =
+                legacyIssueCheckboxIndexesForCheckedBoxesChecked;
+            currentSectionExpansionTileIndividualPerspectiveAnswersValues =
+                legacyIssueStringValuesForCheckedBoxesChecked;
+          }
+        case "otherIssue":
+          {
+            logt(
+              "individualStringValues.last.isEmpty: ${individualStringValues.last.isEmpty}: individualStringValues.last: ${individualStringValues.last}",
+            );
+            if (individualStringValues.last.isEmpty) break;
+            // currentSectionExpansionTileIndividualPerspectiveAnswersValues = [individualStringValues.last];
+          }
+      }
 
-    // Expansion tile indexes for the individual perspective
-    var indivIndexes = List.generate(totalNonEmptyIndivPerspectiveValues, (i)=> i);
-
-    // Expansion tile indexes for the group/teams perspective
-    var groupIndexes = List.generate(5, (i)=> i+4);
-
-    if (testingDebug) pu.printd("Testing Debug: Expansion tile indexes for the individual perspective: $indivIndexes");
-    if (testingDebug) pu.printd("Testing Debug: Expansion tile indexes for the group/teams perspective: $groupIndexes");
-    
-    // To have the index of the data for each perspective
-    // reset at the start of the group/teams perspective
-    int previewListTileDataIndex = -1;
-
-    // Accessing the expansion tiles by index
-    for (int expansionTileIndex = 0; expansionTileIndex < totalExpansionTiles; expansionTileIndex++) 
-    {  
-      // Searching the expansion tile by index
-      var currentExpansionTileFinder = find.descendant(
-        of: find.byType(CAPreview),
-        matching: find.byType(ExpansionTile),
-        skipOffstage: false
-      ).at(expansionTileIndex);
-
-      // Getting the expansion tile title
-      ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(currentExpansionTileFinder);
-      Text expansionTileTitleWidget = expansionTileWidget.title as Text;
-      String expansionTileTitle = expansionTileTitleWidget.data!;
-      if (testingDebug) pu.printd("Testing Debug: \n Expansion tile title: $expansionTileTitle");
-      
-      // Getting all the list tiles for the expansion tile
-      var listTilesFinder = find.descendant
-      (
-        of: currentExpansionTileFinder, 
-        matching: find.byType(ListTile),
-        skipOffstage: false
+      logt(
+        " ---------> currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked: $currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked",
+      );
+      logt(
+        " ---------> currentSectionExpansionTileCheckboxValuesForCheckedBoxesChecked: $currentSectionExpansionTileIndividualPerspectiveAnswersValues",
       );
 
-      // Getting the total number of list tiles for this expansion tile
-      int totalListTiles = listTilesFinder.evaluate().length;
-      if (testingDebug) {
-        pu.printd("Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
-                  "(The expansion tile is included. The first index is skipped.)");
-      }
+      // if section has at least one true value, processing else skipping to the next sectionIndex
+      if (sectionsHaveTrueValuesList[sectionIndex]) {
+        var listTileIndex = 0;
+        var valueIndex = 0;
 
-      if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) 
-      {        
-        totalIndivExpansionTiles++;
-      }
-      
-      // Accessing each list tile by index 
-      // Index starting at 1 to skip the expansion tile
-      for (int listTileIndex = 1; listTileIndex < totalListTiles; listTileIndex++) 
-      {  
-        // No expansion tile if the checkbox is not checked
-        // Resetting at the first group/teams expansion tile
-        if ( expansionTileIndex == totalIndivExpansionTiles ) 
-        { 
-          if (testingDebug) {pu.printd("Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex");}
-          previewListTileDataIndex = 0; 
+        // if the section is not the another issue section
+        logt("currentSection: $currentSection");
+        if (currentSection != sections[3]) {
+          // 3.2.1 : or all section checkboxes values
+          for (var sectionCheckboxesIndex
+              in currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked) {
+            logt(
+              "--- sectionCheckboxesIndex in currentSectionExpansionTileCheckboxIndexesForCheckedBoxesChecked: $sectionCheckboxesIndex",
+            );
+            var individualExpansionTileIndex =
+                sectionsExpansionTilesIndexesList[sectionIndex];
+
+            // Getting the expansion tile
+            var currentExpansionTileIndividualPerpectiveFinder =
+                expansionTilesIndividualPerpectiveFinder.at(
+                  individualExpansionTileIndex!,
+                );
+            var currentExpansionTileIndividualPerpectiveWidget = tester
+                .widget<ExpansionTile>(
+                  currentExpansionTileIndividualPerpectiveFinder,
+                );
+            var title = currentExpansionTileIndividualPerpectiveWidget.title;
+
+            logt(
+              "individualExpansionTileIndex: $individualExpansionTileIndex: ${sections[sectionIndex]}: currentExpansionTileIndividualPerpectiveWidget title: $title",
+            );
+
+            // Getting the list tiles for each section expansion tile (The first list tile is for the section title)
+            var currentExpansionTileListTilesFinder = find.descendant(
+              of: currentExpansionTileIndividualPerpectiveFinder,
+              matching: find.byType(ListTile),
+              skipOffstage: false,
+            );
+            int currentExpansionTileListTileFinderTotal = printFinderTotal(
+              currentExpansionTileListTilesFinder,
+              "currentExpansionTileListTilesFinder",
+            );
+
+            listTileIndex++; // Title tile skipped
+            var currentListTileFinder = currentExpansionTileListTilesFinder.at(
+              listTileIndex,
+            );
+            var currentListTileWidget = tester.widget<ListTile>(
+              currentListTileFinder,
+            );
+            title = currentListTileWidget.title!;
+            logt(
+              "individualExpansionTileIndex: $individualExpansionTileIndex: listTileIndex: $listTileIndex: currentListTileWidget title: $title",
+            );
+
+            Finder? currentListTileNotesDataFinder;
+            Text? currentListTileNotesDataWidget;
+            String? currentListTileNotesData;
+
+            // Searching for the last Text widget for the notes
+            currentListTileNotesDataFinder = find
+                .descendant(
+                  of: currentListTileFinder,
+                  matching: find.byType(Text),
+                  skipOffstage: false,
+                )
+                .last;
+            printFinderTotal(
+              currentListTileNotesDataFinder,
+              "individualExpansionTileIndex: $individualExpansionTileIndex: listTileIndex: $listTileIndex: currentListTileNotesDataFinder",
+            );
+
+            currentListTileNotesDataWidget = tester.widget<Text>(
+              currentListTileNotesDataFinder,
+            );
+            currentListTileNotesData = currentListTileNotesDataWidget.data;
+
+            logt(
+              "individualExpansionTileIndex: $individualExpansionTileIndex: listTileIndex: $listTileIndex: $currentListTileNotesData",
+            );
+
+            valueIndex = listTileIndex - 1;
+
+            // Verifying Notes and data aggregated as expected
+            logt("currentListTileNotesData: ${currentListTileNotesData}");
+            logt(
+              "${lca.caPreviewNotesIntroduction}${currentSectionExpansionTileIndividualPerspectiveAnswersValues[valueIndex]}",
+            );
+            expect(
+              currentListTileNotesData,
+              "${lca.caPreviewNotesIntroduction}${currentSectionExpansionTileIndividualPerspectiveAnswersValues[valueIndex]}",
+            );
+            logt("Passed for 'Notes' and data in the text");
+          }
         }
-        else {previewListTileDataIndex++;}
+        // another issue section, and text field only
+        else {
+          logt("Another issue section, and text field only");
 
-        // Searching the tiles by index
-        var currentListTile = find.descendant(
-          of: currentExpansionTileFinder, 
-          matching: find.byType(ListTile),
-          skipOffstage: false
-        ).at(listTileIndex);
+          // Getting the expansion tile
+          var currentExpansionTileIndividualPerpectiveFinder =
+              expansionTilesIndividualPerpectiveFinder.last;
+          var currentExpansionTileIndividualPerpectiveWidget = tester
+              .widget<ExpansionTile>(
+                currentExpansionTileIndividualPerpectiveFinder,
+              );
+          var title = currentExpansionTileIndividualPerpectiveWidget.title;
+
+          var currentExpansionTileListTilesFinder = find.descendant(
+            of: currentExpansionTileIndividualPerpectiveFinder,
+            matching: find.byType(ListTile),
+            skipOffstage: false,
+          );
+          int currentExpansionTileListTileFinderTotal = printFinderTotal(
+            currentExpansionTileListTilesFinder,
+            "currentExpansionTileListTilesFinder",
+          );
+
+          var currentListTileFinder = currentExpansionTileListTilesFinder.last;
+          var currentListTileWidget = tester.widget<ListTile>(
+            currentListTileFinder,
+          );
+          title = currentListTileWidget.title!;
+
+          Finder? currentListTileNotesDataFinder;
+          Text? currentListTileNotesDataWidget;
+          String? currentListTileNotesData;
+
+          // Searching for the last Text widget for the notes
+          currentListTileNotesDataFinder = find
+              .descendant(
+                of: currentListTileFinder,
+                matching: find.byType(Text),
+                skipOffstage: false,
+              )
+              .last;
+
+          currentListTileNotesDataWidget = tester.widget<Text>(
+            currentListTileNotesDataFinder,
+          );
+          currentListTileNotesData = currentListTileNotesDataWidget.data;
+
+          valueIndex = listTileIndex;
+
+          // Verifying Notes and data aggregated as expected
+          var expectedData = individualStringValues.last;
+          logt("currentListTileNotesData: ${currentListTileNotesData}");
+          logt("${lca.caPreviewNotesIntroduction}${expectedData}");
+          expect(
+            currentListTileNotesData,
+            "${lca.caPreviewNotesIntroduction}${expectedData}",
+          );
+          logt("Passed for 'Notes' and data in the text");
+        }
+      }
+      // otherwise, skipping to the next sectionIndex
+      else {
+        continue;
+      }
+    }
+
+    // ---------------------------------------------------------------------------
+    // 4. VERIFYING THE VALUES FOR THE GROUP PERSPECTIVE
+    // ---------------------------------------------------------------------------
+
+    // String groupProblemsToSolveStrValue = "b1";
+    // List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+    // List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}")
+
+    var expansionTilesGroupPerpectiveFinder =
+        await caPreviewGetExpansionTilesGroupPerspective();
+    printFinderTotal(
+      expansionTilesGroupPerpectiveFinder,
+      "expansionTilesGroupPerpectiveFinder",
+    );
+
+    // For all segmented button values (Notes displayed, potentially empty)
+    for (var currentExpansionTileIndex = 0; currentExpansionTileIndex < segmentedButtonValues.length; currentExpansionTileIndex++) {
+      // Getting the expansion tile
+      var currentExpansionTileGroupPerpectiveFinder =
+          expansionTilesGroupPerpectiveFinder.at(currentExpansionTileIndex);
+
+      // For the text field only
+      if (currentExpansionTileIndex == 0)
+      {
+          var currentNotesDataWidget = getLastTextFromFinder(tester, currentExpansionTileGroupPerpectiveFinder);          
+          var currentNotesData = currentNotesDataWidget.data;
+
+          var expectedNotesData = "${lca.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";
+
+          logt("currentNotesData: $currentNotesData");
+          logt("expectedNotesData: $expectedNotesData");
+
+          expect(currentNotesData, expectedNotesData);
+      }
+      // for the segmented buttons with text fields
+      else
+      {
+        // Segmented button values + Notes in the same Text
+        var currentDataWidget = getLastTextFromFinder(tester, currentExpansionTileGroupPerpectiveFinder);          
+        var currentData = currentDataWidget.data;       
+
+        var currentSegmentedButtonsOptionsValues = segmentedButtonValues[currentExpansionTileIndex - 1]; // - Text field only
+        var currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
+        var expectedSegmentedButtonsOptionsData  = "${lca.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}";
         
-        // Getting the list tile title
-        ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
-        Text listTileTitleWidget = listTileWidget.title as Text;
-        String listTileTitle = listTileTitleWidget.data!;
-        if (testingDebug) pu.printd("Testing Debug: List tiles title for: $expansionTileTitle: $listTileTitle");
-        if (testingDebug) pu.printd("Testing Debug: expansionTileIndex: $expansionTileIndex, listTileIndex: $listTileIndex");
+        var expectedNotesData = "${lca.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";
+        
+        var expectedData = "$expectedSegmentedButtonsOptionsData\n$expectedNotesData";
 
-        // Testing if the expansion tile is related to the individual perspective
-        if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle))
-        {
-          // The last individual perspective expansion tile is for a text field only data
-          // For a text field only, the notes are in the title
-          if (expansionTileTitle == qfl.level3TitleAnotherIssueForDataSaving  && listTileIndex == 1)
-          {
-            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
-          }
-          // Otherwise the notes are in the subtitle, for the individual perspective
-          else {
-            // Getting the list tile subtitle
-            Text listTileSubTitleWidget = listTileWidget.subtitle as Text;
-            String listTileSubTitle = listTileSubTitleWidget.data!;
-            if (testingDebug) pu.printd("Testing Debug: List tiles subtitle for $expansionTileTitle: $listTileSubTitle");
-            
-            expect(listTileSubTitle, "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}");
-          }          
+        logt("currentData: $currentData");
+        logt("expectedData : $expectedData");
 
-        }
-        // Group/teams expansion tiles
-        else
-        {
-          // The first group/teams perspective expansion tile is for a text field only data
-          // For a text field only, the notes are in the title
-          if (expansionTileTitle == qfl.level3TitleGroupsProblematicsForDataSaving  && listTileIndex == 1)
-          {
-            if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
-            expect(listTileTitle, "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}");
-          }
-          // Otherwise the notes are in the title with the segmented button answers
-          else
-          {
-            var segButtonValue = segmentedButtonValues[previewListTileDataIndex-1];
-             
-            if(segButtonValue.isNotEmpty)
-            {
-              if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
-              var segButtonAnswersWithNotes = "${AppLocalizations.of(context)?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
-                                            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
-              expect(listTileTitle, segButtonAnswersWithNotes);
-            }
-            else
-            {
-              if (testingDebug) pu.printd("Testing Debug: List tiles title: $expansionTileTitle");
-              expect(listTileTitle,  AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:");
-            }
-          }             
-        }
+        expect(currentData, expectedData);
       }
-    }  
-  
-    // Closing the preview
-    var previewClosingTooltipLabelFinder = find.byTooltip(lds.previewClosingTooltipLabel);
-    await tester.tap(previewClosingTooltipLabelFinder);
-    await tester.pumpAndSettle();
 
-    // await tester.pump(const Duration(seconds: 2));
+    }
   }
+
+  // Closing the preview
+  var previewClosingTooltipLabelFinder = find.byTooltip(
+    lds.previewClosingTooltipLabel,
+  );
+  await tester.tap(previewClosingTooltipLabelFinder);
+  await tester.pumpAndSettle();
+
+  // await tester.pump(const Duration(seconds: 2));
+}
 
 // ─── CA FORM TESTING ───────────────────────────────────────────────────────────────
-  // Method used to verify empty content in the custom checkboxes.
-  Future<void> caCheckboxesVerifyEmptyContent
-  ({
-    required WidgetTester tester, 
-    required List<String> listOfTextsToFind,
-    required FinderBase<Element>? scrollable
-  }) async
-  {
-    for (var text in listOfTextsToFind)
-    {
-      if (testingDebug) pu.printd("Testing Debug: caCheckboxesVerifyEmptyContent: searching for: $text");
-      var textFinder = find.text(text, skipOffstage: false);
-      await tester.scrollUntilVisible(textFinder, scrollable: scrollable, 45);
-      await tester.pumpAndSettle();
-      var customCheckboxFinder = find.ancestor
-      (of: textFinder, matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)); 
-      // Tapping to display the text field
-      await tester.tap(customCheckboxFinder);
-      await tester.pumpAndSettle();
-      // Verifying the text field content
-      var textFieldFinder = find.descendant
-      (of: customCheckboxFinder, matching: find.byType(TextField));
-      var textField = tester.widget<TextField>(textFieldFinder);
-      expect(textField.controller!.text, "");
-    }
-  }
-
-  // Method used to verify empty content in custom segmented buttons.
-  Future<void> caSegmentedButtonsVerifyEmptyContent
-  ({
-    required BuildContext context, 
-    required WidgetTester tester, 
-    required List<Key> listOfKeysToFind,
-    required FinderBase<Element>? scrollable
-  }) async
-  {
-    for (var key in listOfKeysToFind)
-    {
-      var keyFinder = find.byKey(key, skipOffstage: false);
-      await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45); 
-      await tester.pumpAndSettle();   
-      // Tapping to display the text field
-      var iDontKnow = AppLocalizations.of(context)?.l10n_I_don_t_know ?? "Issue with the l10n for 'I don't know'";
-      var optionFinder = find.descendant
-        (
-          of: keyFinder,
-          matching: find.text(iDontKnow)
-        );   
-      await tester.tap(optionFinder);
-      await tester.pumpAndSettle();
-      // Verifying the text field content
-      var textFieldFinder = find.descendant
-      (of: keyFinder, matching: find.byType(TextField));
-      var textField = tester.widget<TextField>(textFieldFinder);
-      expect(textField.controller!.text, "");
-    }
-  }
-
-  // Method used to verify empty content in the text fields only.
-  Future<void> caTextFieldOnlyVerifyEmptyContent
-  ({
-    required WidgetTester tester, 
-    required Key key,
-    required FinderBase<Element>? scrollable
-  }) async
-  {
-    var textFieldWidgetFinder = find.byKey(key, skipOffstage: false);
-    var textFieldFinder = find.descendant
-      (of: textFieldWidgetFinder, matching: find.byType(TextField));
-    await tester.scrollUntilVisible(textFieldFinder, scrollable: scrollable, 45);
+// Method used to verify empty content in the custom checkboxes.
+Future<void> caCheckboxesVerifyEmptyContent({
+  required WidgetTester tester,
+  required List<String> listOfTextsToFind,
+  required FinderBase<Element>? scrollable,
+}) async {
+  for (var text in listOfTextsToFind) {
+    logt("caCheckboxesVerifyEmptyContent: searching for", text);
+    var textFinder = find.text(text, skipOffstage: false);
+    await tester.scrollUntilVisible(textFinder, scrollable: scrollable, 45);
     await tester.pumpAndSettle();
+    var customCheckboxFinder = find.ancestor(
+      of: textFinder,
+      matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+    );
+    // Tapping to display the text field
+    await tester.tap(customCheckboxFinder);
+    await tester.pumpAndSettle();
+    // Verifying the text field content
+    var textFieldFinder = find.descendant(
+      of: customCheckboxFinder,
+      matching: find.byType(TextField),
+    );
     var textField = tester.widget<TextField>(textFieldFinder);
-    expect(textField.controller!.text, "");    
+    expect(textField.controller!.text, "");
   }
+}
 
-  // Method used to determine if a checkbox text is underlined.
-  bool caIsCheckboxTextUnderlined
-  ({
-    required WidgetTester tester,
-    required textsFinder,
-    required int checkboxIndex
-  })
-  {
-    var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
-    if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
-    var decoration = indivTextWidget.style?.decoration;
-    if (testingDebug) pu.printd("______________ decoration: $decoration");
-    return(decoration == TextDecoration.underline);
+// Method used to verify empty content in custom segmented buttons.
+Future<void> caSegmentedButtonsVerifyEmptyContent({
+  required BuildContext context,
+  required WidgetTester tester,
+  required List<Key> listOfKeysToFind,
+  required FinderBase<Element>? scrollable,
+}) async {
+  for (var key in listOfKeysToFind) {
+    var keyFinder = find.byKey(key, skipOffstage: false);
+    await tester.scrollUntilVisible(keyFinder, scrollable: scrollable, 45);
+    await tester.pumpAndSettle();
+    // Tapping to display the text field
+    var iDontKnow =
+        AppLocalizations.of(context)?.l10n_I_don_t_know ??
+        "Issue with the l10n for 'I don't know'";
+    var optionFinder = find.descendant(
+      of: keyFinder,
+      matching: find.text(iDontKnow),
+    );
+    await tester.tap(optionFinder);
+    await tester.pumpAndSettle();
+    // Verifying the text field content
+    var textFieldFinder = find.descendant(
+      of: keyFinder,
+      matching: find.byType(TextField),
+    );
+    var textField = tester.widget<TextField>(textFieldFinder);
+    expect(textField.controller!.text, "");
   }
+}
+
+// Method used to verify empty content in the text fields only.
+Future<void> caTextFieldOnlyVerifyEmptyContent({
+  required WidgetTester tester,
+  required Key key,
+  required FinderBase<Element>? scrollable,
+}) async {
+  var textFieldWidgetFinder = find.byKey(key, skipOffstage: false);
+  var textFieldFinder = find.descendant(
+    of: textFieldWidgetFinder,
+    matching: find.byType(TextField),
+  );
+  await tester.scrollUntilVisible(textFieldFinder, scrollable: scrollable, 45);
+  await tester.pumpAndSettle();
+  var textField = tester.widget<TextField>(textFieldFinder);
+  expect(textField.controller!.text, "");
+}
+
+// Method used to determine if a checkbox text is underlined.
+bool caIsCheckboxTextUnderlined({
+  required WidgetTester tester,
+  required textsFinder,
+  required int checkboxIndex,
+}) {
+  var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
+  if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
+  var decoration = indivTextWidget.style?.decoration;
+  if (testingDebug) pu.printd("______________ decoration: $decoration");
+  return (decoration == TextDecoration.underline);
+}
 
 // ─── CA FORM MODIFYING ───────────────────────────────────────────────────────────────
-  // Method used to change a checkbox value. 
-  Future<void> caCheckboxChangeValue
-  ({
-    required WidgetTester tester,
-    required String checkboxText, 
-    bool scrollUpwards = false 
-  }) async
-  {
-    double delta = 45;
-    if(scrollUpwards) delta *= -1;
-    // Getting the scrollable
-    var firstScrollable =  find.descendant
-                (
-                  of: find.byKey(const Key("context-analysis-process-scrollview")), 
-                  matching: find.byType(Scrollable)
-                ).first;
-    
-    // Scrolling
-    // if (nextCheckboxText != null) checkboxText = nextCheckboxText;
-    var correctCACheckboxWithSanitizedAndPaddedTextField = find.ancestor
-    (
-      of: find.text(checkboxText),
-      matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField)
-    );
-    var checkboxFinder = find.descendant
-    (
-      of: correctCACheckboxWithSanitizedAndPaddedTextField, 
-      matching: find.byType(Checkbox)
-    );
-   
-    await tester.scrollUntilVisible(checkboxFinder, scrollable: firstScrollable, delta);
-    // pumpAndSettle timed out
-    await tester.pump(const Duration(seconds: 2));    
-    // To avoid a missed tap
-    await tester.ensureVisible(checkboxFinder);
-    await tester.tap(checkboxFinder);
-    // pumpAndSettle timed out
-    await tester.pump(const Duration(seconds: 2));
+// Method used to change a checkbox value.
+Future<void> caCheckboxChangeValue({
+  required WidgetTester tester,
+  required String checkboxText,
+  bool scrollUpwards = false,
+}) async {
+  double delta = 45;
+  if (scrollUpwards) delta *= -1;
+  // Getting the scrollable
+  var firstScrollable = find
+      .descendant(
+        of: find.byKey(const Key("context-analysis-process-scrollview")),
+        matching: find.byType(Scrollable),
+      )
+      .first;
 
-    return;
-  }
+  // Scrolling
+  // if (nextCheckboxText != null) checkboxText = nextCheckboxText;
+  var correctCACheckboxWithSanitizedAndPaddedTextField = find.ancestor(
+    of: find.text(checkboxText),
+    matching: find.byType(CACheckboxWithSanitizedAndPaddedTextField),
+  );
+  var checkboxFinder = find.descendant(
+    of: correctCACheckboxWithSanitizedAndPaddedTextField,
+    matching: find.byType(Checkbox),
+  );
 
+  await tester.scrollUntilVisible(
+    checkboxFinder,
+    scrollable: firstScrollable,
+    delta,
+  );
+  // pumpAndSettle timed out
+  await tester.pump(const Duration(seconds: 2));
+  // To avoid a missed tap
+  await tester.ensureVisible(checkboxFinder);
+  await tester.tap(checkboxFinder);
+  // pumpAndSettle timed out
+  await tester.pump(const Duration(seconds: 2));
+
+  return;
+}
 
 // ─── GPS ──────────────────────────────────────────────────────────────
 // ──────────────────────────────────────────────────────────────────────────────
 
 // ─── GPS PROCESS FILING ───────────────────────────────────────────────────────────────
-  // Method used to check that the new GPS process button functions
-  Future<void> gpsCheckNewProcessButtonFunctions(WidgetTester tester) async
-  {
-    // Verifying the NewProcessButton present
-    expect(
-      find.byType(NewProcessButton),
-      findsOneWidget,
-      reason: "NewProcessButton should be visible when GPS session data is already saved.",
-    );
+// Method used to check that the new GPS process button functions
+Future<void> gpsCheckNewProcessButtonFunctions(WidgetTester tester) async {
+  // Verifying the NewProcessButton present
+  expect(
+    find.byType(NewProcessButton),
+    findsOneWidget,
+    reason:
+        "NewProcessButton should be visible when GPS session data is already saved.",
+  );
 
-    // Tapping NewProcessButton
-    await tester.tap(find.byType(NewProcessButton));
-    await tester.pumpAndSettle();
+  // Tapping NewProcessButton
+  await tester.tap(find.byType(NewProcessButton));
+  await tester.pumpAndSettle();
 
-    // Verifying GPSProcess displayed
-    expect(
-      find.byType(GPSProcess),
-      findsOneWidget,
-      reason: "GPSProcess should be visible after tapping NewProcessButton.",
-    );
-  }
+  // Verifying GPSProcess displayed
+  expect(
+    find.byType(GPSProcess),
+    findsOneWidget,
+    reason: "GPSProcess should be visible after tapping NewProcessButton.",
+  );
+}
 
-  // Method used to enter a title in the GPS process
-  Future<void> gpsEnterProcessTitle (WidgetTester tester, String aTitle) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
+// Method used to enter a title in the GPS process
+Future<void> gpsEnterProcessTitle(WidgetTester tester, String aTitle) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
 
-    // Searching the placeholder title
-    var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
+  // Searching the placeholder title
+  var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
 
-    // Tapping on it
-    await tester.tap(placeholderTitleFinder);
-    await tester.pumpAndSettle();
+  // Tapping on it
+  await tester.tap(placeholderTitleFinder);
+  await tester.pumpAndSettle();
 
-    // Searching the text field
-    var textFieldFinder = find.ancestor
-    (
-      of: find.text(lgps.gpsProcessTitleTextFieldHint), 
-      matching: find.byType(TextField)
-    );
+  // Searching the text field
+  var textFieldFinder = find.ancestor(
+    of: find.text(lgps.gpsProcessTitleTextFieldHint),
+    matching: find.byType(TextField),
+  );
 
-    expect(
-      textFieldFinder,
-      findsOneWidget,
-    );
+  expect(textFieldFinder, findsOneWidget);
 
-    // Entering the title
-    await tester.enterText(textFieldFinder, aTitle);
+  // Entering the title
+  await tester.enterText(textFieldFinder, aTitle);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+}
+
+// Method used to enter keywords in the GPS process
+Future<void> gpsEnterProcessKeywords(
+  WidgetTester tester,
+  List<String> keywordsList,
+) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
+
+  // Searching the keywords declaration title
+  var keywordsDeclarationTitleFinder = find.descendant(
+    of: find.byType(GPSKeywordsDeclaration),
+    matching: find.text(lgps.gpsKeywordsTitle),
+  );
+
+  // Tapping on it to open the overlay
+  await tester.tap(keywordsDeclarationTitleFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
+
+  // The overlay should have opened
+  // Searching the text field
+  var textfieldFinder = find.descendant(
+    of: find.byType(StatefulBuilder),
+    matching: find.byType(TextField),
+  );
+
+  for (var kw in keywordsList) {
+    // Entering the keyword
+    await tester.enterText(textfieldFinder, kw);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
+    // await tester.pump(const Duration(seconds: 2));
+
+    // Necessary for the next keyword to be added
+    await tester.tap(textfieldFinder);
   }
 
-  // Method used to enter keywords in the GPS process
-  Future<void> gpsEnterProcessKeywords (WidgetTester tester, List<String> keywordsList) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
+  // Searching the tooltip to close the overlay
+  var closingIconFinder = find
+      .byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip)
+      .last;
 
-    // Searching the keywords declaration title
-    var keywordsDeclarationTitleFinder = find.descendant
-                                  (
-                                    of: find.byType(GPSKeywordsDeclaration), 
-                                    matching: find.text(lgps.gpsKeywordsTitle)
-                                  );
+  // Closing the overlay
+  await tester.tap(closingIconFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
 
-    // Tapping on it to open the overlay
-    await tester.tap(keywordsDeclarationTitleFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2)); 
+  // Verifying the overlay absent
+  expect(
+    find.descendant(
+      of: find.byType(GPSKeywordsDeclaration),
+      matching: find.byType(StatefulBuilder),
+    ),
+    findsNothing,
+  );
+}
 
-    // The overlay should have opened
-    // Searching the text field
-    var textfieldFinder = find.descendant
-                          (
-                            of: find.byType(StatefulBuilder), 
-                            matching: find.byType(TextField)
-                          );   
+// Method used to enter ideas
+Future<void> gpsEnterIdeas(WidgetTester tester, List<String> ideasList) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
 
-    for (var kw in keywordsList)
-    {
-      // Entering the keyword
-      await tester.enterText(textfieldFinder, kw);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-      // await tester.pump(const Duration(seconds: 2)); 
+  // Searching the text field used to add ideas
+  var newIdeaTextFieldFinder = find.ancestor(
+    of: find.text(lgps.newIdeaTextFieldHint),
+    matching: find.byType(TextField),
+  );
 
-      // Necessary for the next keyword to be added
-      await tester.tap(textfieldFinder);         
-    }
-
-    // Searching the tooltip to close the overlay
-    var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip).last;
-
-    // Closing the overlay
-    await tester.tap(closingIconFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2)); 
-
-    // Verifying the overlay absent
-    expect
-    (
-      find.descendant
-      (
-        of: find.byType(GPSKeywordsDeclaration), 
-        matching: find.byType(StatefulBuilder)
-      )        , 
-      findsNothing
-    );
-  }      
-
-  // Method used to enter ideas
-  Future<void> gpsEnterIdeas
-  (
-    WidgetTester tester,
-    List<String> ideasList
-  ) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
-
-    // Searching the text field used to add ideas
-    var newIdeaTextFieldFinder = find.ancestor
-    (
-      of: find.text(lgps.newIdeaTextFieldHint), 
-      matching: find.byType(TextField)
-    );
-
-    // Adding the ideas
-    for (var idea in ideasList)
-    {
-      await tester.enterText(newIdeaTextFieldFinder, idea);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      // pumpAndSettle timed out
-      // await tester.pumpAndSettle();
-      await tester.pump(const Duration(seconds: 2));  
-
-      await tester.tap(newIdeaTextFieldFinder); 
-    }
-      
-  }
-
-  // Method used to add an idea using the overlay
-  Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async
-  {
-    // Searching the text field used to add ideas
-    var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayField"));
-    // Adding the idea
-    await tester.ensureVisible(newIdeaTextFieldFinder);
-    await tester.tap(newIdeaTextFieldFinder);
-    await tester.pumpAndSettle(); 
+  // Adding the ideas
+  for (var idea in ideasList) {
     await tester.enterText(newIdeaTextFieldFinder, idea);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     // pumpAndSettle timed out
     // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));  
-  }
+    await tester.pump(const Duration(seconds: 2));
 
-  Future<void> gpsAddParticipantsAndKeywordsFromProcessPage
-(
-  WidgetTester tester, List<String> participantsNames, List<dynamic> keywords
-) async
-{ 
+    await tester.tap(newIdeaTextFieldFinder);
+  }
+}
+
+// Method used to add an idea using the overlay
+Future<void> gpsFromOverlayAddIdea(WidgetTester tester, String idea) async {
+  // Searching the text field used to add ideas
+  var newIdeaTextFieldFinder = find.byKey(const Key("ideaOverlayField"));
+  // Adding the idea
+  await tester.ensureVisible(newIdeaTextFieldFinder);
+  await tester.tap(newIdeaTextFieldFinder);
+  await tester.pumpAndSettle();
+  await tester.enterText(newIdeaTextFieldFinder, idea);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
+}
+
+Future<void> gpsAddParticipantsAndKeywordsFromProcessPage(
+  WidgetTester tester,
+  List<String> participantsNames,
+  List<dynamic> keywords,
+) async {
   // Getting the localized strings
   var context = tester.element(find.byType(Scaffold).first);
   LocalizedGPSStrings lgps = .new(context);
@@ -888,8 +1829,7 @@ import "../../test/_widget_testing_utils/widget_testing_utils.dart";
   // Loading the new list page from the GPS process page
   await gpsFromProcessPageToNewParticipantsListPage(tester);
 
-  if (keywords.isNotEmpty)
-  {
+  if (keywords.isNotEmpty) {
     // Searching for the keywords declaration title
     var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
     await tester.tap(keywordsTitleFinder);
@@ -897,15 +1837,14 @@ import "../../test/_widget_testing_utils/widget_testing_utils.dart";
 
     // Searching for the new keyword text field
     var newKeywordTextFieldFinder = find.byKey(const Key("kwsFieldNewList"));
-    await tester.ensureVisible(newKeywordTextFieldFinder); 
+    await tester.ensureVisible(newKeywordTextFieldFinder);
     expect(newKeywordTextFieldFinder, findsOne);
-    await tester.pumpAndSettle(); 
+    await tester.pumpAndSettle();
     await tester.tap(newKeywordTextFieldFinder);
-    await tester.pumpAndSettle();  
+    await tester.pumpAndSettle();
 
     // Adding the keywords
-    for (var keyword in keywords)
-    {   
+    for (var keyword in keywords) {
       // Adding the keyword
       await tester.enterText(newKeywordTextFieldFinder, keyword);
       await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -916,23 +1855,26 @@ import "../../test/_widget_testing_utils/widget_testing_utils.dart";
     }
 
     // Closing the overlay
-    var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
+    var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(
+      lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip,
+    );
     await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
     await tester.pumpAndSettle();
   }
-  
+
   // Searching for the new participant text field
   // Searching by placeholder text is not robust enough
-  var newParticipantTextFieldFinder = find.byKey(const Key("participantNameField"));
+  var newParticipantTextFieldFinder = find.byKey(
+    const Key("participantNameField"),
+  );
   expect(newParticipantTextFieldFinder, findsOne);
-  await tester.ensureVisible(newParticipantTextFieldFinder); 
-  await tester.pumpAndSettle(); 
+  await tester.ensureVisible(newParticipantTextFieldFinder);
+  await tester.pumpAndSettle();
   await tester.tap(newParticipantTextFieldFinder);
   await tester.pumpAndSettle();
 
   // Adding the names
-  for (var name in participantsNames)
-  {   
+  for (var name in participantsNames) {
     // Adding the name
     await tester.enterText(newParticipantTextFieldFinder, name);
     await tester.testTextInput.receiveAction(TextInputAction.done);
@@ -942,729 +1884,702 @@ import "../../test/_widget_testing_utils/widget_testing_utils.dart";
   }
 }
 
-  // Method used to add participants lists
-  // [
-  //   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
-  //   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
-  // ];
-  Future<void> gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage
-  ({
-    required WidgetTester tester, 
-    required List< Map<String,Map<String, dynamic>> > listDataMapsList
-  }) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
+// Method used to add participants lists
+// [
+//   {listName1:{"names":[name1,name2],"keywords":[kw1, kw2]}},
+//   {listName2:{"names":[name3,name4],"keywords":[kw3, kw4]}}
+// ];
+Future<void>
+gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage({
+  required WidgetTester tester,
+  required List<Map<String, Map<String, dynamic>>> listDataMapsList,
+}) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
 
-    for (var map in listDataMapsList)
-    {
-      List<String> names = (map.values.first)["names"];
-      List<dynamic> keywords = (map.values.first)["keywords"];
+  for (var map in listDataMapsList) {
+    List<String> names = (map.values.first)["names"];
+    List<dynamic> keywords = (map.values.first)["keywords"];
 
-      await gpsAddParticipantsAndKeywordsFromProcessPage(tester, names, keywords);
+    await gpsAddParticipantsAndKeywordsFromProcessPage(tester, names, keywords);
 
-      // Verifying the names present
-      for (var name in names)
-      {
-        expect(find.text(name), findsOne);    
-      }      
-
-      // Searching the "Save" icon
-      var saveListIconFinder = find.byIcon(Icons.save_outlined);
-      // await tester.pump(const Duration(seconds: 3));
-      expect(saveListIconFinder, findsOne);
-
-      // Tapping on it
-      await tester.tap(saveListIconFinder);
-      await tester.pumpAndSettle();
-
-      // Searching the text field to add the list name
-      var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
-      expect(listNameSavingTextFieldFinder, findsOne);
-
-      // Adding the list name
-      var listName = map.keys.first;
-      await tester.ensureVisible(listNameSavingTextFieldFinder);
-      await tester.tap(listNameSavingTextFieldFinder);
-      await tester.enterText(listNameSavingTextFieldFinder, listName);
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-
-      // Waiting on the "list saved" snackbar
-      await tester.pump(const Duration(seconds: 3));
-
-      // Verifying the names on the GPS process page
-
-      // Verifying the GPS process page present
-      expect(find.text(lgps.checkListTitle), findsOne);
-
-      // Verifying the names present
-      for (var name in names)
-      {
-        expect(find.text(name), findsOne);    
-      } 
+    // Verifying the names present
+    for (var name in names) {
+      expect(find.text(name), findsOne);
     }
-  }
 
-  // Method used to enter new GPS process data
-  Future<void> gpsEnterNewProcessDataOnMobile 
-  ({
-    required WidgetTester tester, 
-    required String title,
-    required List<String> kwsList,
-    required List<String> ideasList,
-    required String fileNameWithoutExtension
-  }) async
-  {
-    // ── 1. CLICK TOWARD A NEW GPS PROCESS ───────────────────────────────────────────────
-    // ───────────────────────────────────────────────────────────────────────────────────
-    // Verifying that the new process button functions
-    await gpsCheckNewProcessButtonFunctions(tester);
+    // Searching the "Save" icon
+    var saveListIconFinder = find.byIcon(Icons.save_outlined);
+    // await tester.pump(const Duration(seconds: 3));
+    expect(saveListIconFinder, findsOne);
 
-
-    // ── 2. GPS PROCESS FILLING ──────────────────────────────────────────────────────────
-    // ───────────────────────────────────────────────────────────────────────────────────
-
-    // ── TITLE SECTION ─────────────────────────────────────────────────────────────
-    await gpsEnterProcessTitle(tester, title);
-
-    // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
-    await gpsEnterProcessKeywords(tester, kwsList);
-    
-    // ── SOLUTIONS SECTION ─────────────────────────────────────────────────────────────
-    await gpsEnterIdeas(tester, ideasList);
-    
-    // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
-    // Entering the file name and submitting data
-    await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
-  }
-
-  // Method used to add several times group problem-solving data
-  // The method assumes all lists have the same number of elements
-  Future<void> gpsEnterSeveralTimesNewProcessData
-  ({
-    required WidgetTester tester,
-    required List<String> titlesList,
-    required List<List<String>> kwsLists,
-    required List<List<String>> ideasList,
-    required List<String> fileNamesWithoutExtensionList
-  }) async
-  {
-    int listsLength = titlesList.length;
-    for (var index = 0; index < listsLength; index++)
-    {
-      await gpsEnterNewProcessDataOnMobile 
-      (
-        tester: tester, 
-        title: titlesList[index],
-        kwsList: kwsLists[index], 
-        ideasList: ideasList[index],
-        fileNameWithoutExtension: fileNamesWithoutExtensionList[index]
-      );
-    }
-  }
-
-  // ─── GPS DATA EDITION ───────────────────────────────────────────────────────────────
-
-  // Method used to enter new GPS process data
-  Future<void> gpsEditDataOnMobile 
-  ({
-    required WidgetTester tester, 
-    required String titleWithoutSuffix,
-    required List<String> kwsList,
-    required List<String> ideasList,
-    required String fileNameWithoutExtension
-  }) async
-  {
-    // Accessing the localized data
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedDashboardStrings lds = .new(context);
-    LocalizedGPSStrings lgps = .new(context);
-    LocalizedTestingStrings lts = .new(context);
-
-    // ── ENTERING EDIT MODE ───────────────────────────────────────────────────────────── 
-    // printTextData(tester);
-    // Clicking on the edit button
-    var sessionsListItemWithTitle = find.ancestor
-    (of: find.text("$titleWithoutSuffix${lgps.gpsTitleSuffix}"), matching: find.byType(SessionsListItem));
-    var editIconButton = find.descendant
-    (of: sessionsListItemWithTitle, 
-    matching: find.byTooltip(lds.editFromDashboardItemTooltipLabel));
-    await tester.tap(editIconButton);
+    // Tapping on it
+    await tester.tap(saveListIconFinder);
     await tester.pumpAndSettle();
 
-    // ── Verifying the keywords present ──────────
-    // ────────────────────────────────────────────
-      // Opening the keywords overlay
-    var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
-    await tester.tap(keywordsWidgetTitleFinder);
-    await tester.pumpAndSettle();
-      // Verifying the keywords present
-      for (var kw in kwsList)
-      {
-        expect(find.text(kw), findsOne);
-      }
-      // Closing the keywords overlay
-      var closeKeywordsDeclarationTooltipLabelFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip).last;
-      await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
-      await tester.pumpAndSettle();
+    // Searching the text field to add the list name
+    var listNameSavingTextFieldFinder = find.byKey(const Key("saveListField"));
+    expect(listNameSavingTextFieldFinder, findsOne);
 
-    // ── Verifying the ideas present ─────────────
-    // ────────────────────────────────────────────
-    for (var idea in ideasList)
-    {
-      expect(find.textContaining(idea), findsNWidgets(1));
-    }            
-
-    // important for gpsTestPreview
-    // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
-    dateForTestingIndex = 0;
-    // ── Editing data ────────────────────────────
-    // ────────────────────────────────────────────
-      // TITLE EDITION
-    var titleFinder = find.text(titleWithoutSuffix);
-    await tester.tap(titleFinder);
-    await tester.pumpAndSettle();
-      // searching the text field
-    titleFinder = find.byKey(const Key("problemToSolveField"));
-    await tester.enterText(titleFinder, "${titleWithoutSuffix}${lts.editionSuffix}");
+    // Adding the list name
+    var listName = map.keys.first;
+    await tester.ensureVisible(listNameSavingTextFieldFinder);
+    await tester.tap(listNameSavingTextFieldFinder);
+    await tester.enterText(listNameSavingTextFieldFinder, listName);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
 
-      // KEYWORDS EDITION
-      // Opening the keywords overlay
-    keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
-    await tester.tap(keywordsWidgetTitleFinder);
-    await tester.pumpAndSettle();
-      // Modifying the keywords
-      for (var kw in kwsList)
-      {
-        // deleting the kw
-        var inputChipKw = find.ancestor(of: find.text(kw), matching: find.byType(InputChip));
-        var kwCloseIcon = find.descendant(of: inputChipKw, matching: find.byIcon(Icons.close));
-        await tester.tap(kwCloseIcon);
-        await tester.pumpAndSettle();
+    // Waiting on the "list saved" snackbar
+    await tester.pump(const Duration(seconds: 3));
 
-        // entering edited keywords
-        var kwEdited = "$kw${lts.editionSuffix}";
-        var gpsKeywordsTextFieldFinder = find.byKey(const Key("gpsKeywordsTextField"));
-        await tester.enterText(gpsKeywordsTextFieldFinder, kwEdited);
-        await tester.testTextInput.receiveAction(TextInputAction.done);
-        await tester.pumpAndSettle();
-        
-      }
-      // closing the overlay
-      var closeOverlayFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
-      await tester.tap(closeOverlayFinder);
-      await tester.pumpAndSettle();
+    // Verifying the names on the GPS process page
 
-      // IDEAS EDITION
-        // Clicking on an idea to access the list
-    await tester.tap(find.text(ideasList[0]));
-    await tester.pumpAndSettle();
-    // await tester.pump(const Duration(seconds: 5));
-        // Editing the ideas
-    for (var i = 0; i < ideasList.length; i ++)
-    {
-      // Clicking on the tile
-      await tester.tap(find.byKey(Key("editable-deletable-list-tile-$i")));
-      await tester.pumpAndSettle();
+    // Verifying the GPS process page present
+    expect(find.text(lgps.checkListTitle), findsOne);
 
-      var key = "editable-deletable-tf-$i";
-      var tfIdea1Finder = find.byKey(Key(key)).first;
-      await tester.ensureVisible(tfIdea1Finder);
-      await tester.enterText(tfIdea1Finder, "${ideasList[i]}${lts.editionSuffix}");
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pumpAndSettle();
-    }  
-    // await tester.pump(const Duration(seconds: 2));
-    
-    // ── Closing the ideas list  ───────────────────────
-    // ───────────────────────────────────────────────────
-    var closeFinder = find.byIcon(Icons.close);  
-    await tester.tap(closeFinder);
-    await tester.pumpAndSettle();
-
-    // await tester.pump(const Duration(seconds: 2));
-
-    // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────        
-    // Entering the file name and submitting data
-    await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtension);
+    // Verifying the names present
+    for (var name in names) {
+      expect(find.text(name), findsOne);
+    }
   }
+}
+
+// Method used to enter new GPS process data
+Future<void> gpsEnterNewProcessDataOnMobile({
+  required WidgetTester tester,
+  required String title,
+  required List<String> kwsList,
+  required List<String> ideasList,
+  required String fileNameWithoutExtension,
+}) async {
+  // ── 1. CLICK TOWARD A NEW GPS PROCESS ───────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────────────
+  // Verifying that the new process button functions
+  await gpsCheckNewProcessButtonFunctions(tester);
+
+  // ── 2. GPS PROCESS FILLING ──────────────────────────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────────────
+
+  // ── TITLE SECTION ─────────────────────────────────────────────────────────────
+  await gpsEnterProcessTitle(tester, title);
+
+  // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
+  await gpsEnterProcessKeywords(tester, kwsList);
+
+  // ── SOLUTIONS SECTION ─────────────────────────────────────────────────────────────
+  await gpsEnterIdeas(tester, ideasList);
+
+  // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
+  // Entering the file name and submitting data
+  await dashboardEnterFileNameAndSubmitDataOnMobile(
+    tester: tester,
+    fileNameWithoutExtension: fileNameWithoutExtension,
+  );
+}
+
+// Method used to add several times group problem-solving data
+// The method assumes all lists have the same number of elements
+Future<void> gpsEnterSeveralTimesNewProcessData({
+  required WidgetTester tester,
+  required List<String> titlesList,
+  required List<List<String>> kwsLists,
+  required List<List<String>> ideasList,
+  required List<String> fileNamesWithoutExtensionList,
+}) async {
+  int listsLength = titlesList.length;
+  for (var index = 0; index < listsLength; index++) {
+    await gpsEnterNewProcessDataOnMobile(
+      tester: tester,
+      title: titlesList[index],
+      kwsList: kwsLists[index],
+      ideasList: ideasList[index],
+      fileNameWithoutExtension: fileNamesWithoutExtensionList[index],
+    );
+  }
+}
+
+// ─── GPS DATA EDITION ───────────────────────────────────────────────────────────────
+
+// Method used to enter new GPS process data
+Future<void> gpsEditDataOnMobile({
+  required WidgetTester tester,
+  required String titleWithoutSuffix,
+  required List<String> kwsList,
+  required List<String> ideasList,
+  required String fileNameWithoutExtension,
+}) async {
+  // Accessing the localized data
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedDashboardStrings lds = .new(context);
+  LocalizedGPSStrings lgps = .new(context);
+  LocalizedTestingStrings lts = .new(context);
+
+  // ── ENTERING EDIT MODE ─────────────────────────────────────────────────────────────
+  // printTextData(tester);
+  // Clicking on the edit button
+  var sessionsListItemWithTitle = find.ancestor(
+    of: find.text("$titleWithoutSuffix${lgps.gpsTitleSuffix}"),
+    matching: find.byType(SessionsListItem),
+  );
+  var editIconButton = find.descendant(
+    of: sessionsListItemWithTitle,
+    matching: find.byTooltip(lds.editFromDashboardItemTooltipLabel),
+  );
+  await tester.tap(editIconButton);
+  await tester.pumpAndSettle();
+
+  // ── Verifying the keywords present ──────────
+  // ────────────────────────────────────────────
+  // Opening the keywords overlay
+  var keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
+  await tester.tap(keywordsWidgetTitleFinder);
+  await tester.pumpAndSettle();
+  // Verifying the keywords present
+  for (var kw in kwsList) {
+    expect(find.text(kw), findsOne);
+  }
+  // Closing the keywords overlay
+  var closeKeywordsDeclarationTooltipLabelFinder = find
+      .byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip)
+      .last;
+  await tester.tap(closeKeywordsDeclarationTooltipLabelFinder);
+  await tester.pumpAndSettle();
+
+  // ── Verifying the ideas present ─────────────
+  // ────────────────────────────────────────────
+  for (var idea in ideasList) {
+    expect(find.textContaining(idea), findsNWidgets(1));
+  }
+
+  // important for gpsTestPreview
+  // expect(find.textContaining(datesForTestingList[0]), findsNWidgets(2));
+  dateForTestingIndex = 0;
+  // ── Editing data ────────────────────────────
+  // ────────────────────────────────────────────
+  // TITLE EDITION
+  var titleFinder = find.text(titleWithoutSuffix);
+  await tester.tap(titleFinder);
+  await tester.pumpAndSettle();
+  // searching the text field
+  titleFinder = find.byKey(const Key("problemToSolveField"));
+  await tester.enterText(
+    titleFinder,
+    "${titleWithoutSuffix}${lts.editionSuffix}",
+  );
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+
+  // KEYWORDS EDITION
+  // Opening the keywords overlay
+  keywordsWidgetTitleFinder = find.text(lgps.gpsKeywordsTitle);
+  await tester.tap(keywordsWidgetTitleFinder);
+  await tester.pumpAndSettle();
+  // Modifying the keywords
+  for (var kw in kwsList) {
+    // deleting the kw
+    var inputChipKw = find.ancestor(
+      of: find.text(kw),
+      matching: find.byType(InputChip),
+    );
+    var kwCloseIcon = find.descendant(
+      of: inputChipKw,
+      matching: find.byIcon(Icons.close),
+    );
+    await tester.tap(kwCloseIcon);
+    await tester.pumpAndSettle();
+
+    // entering edited keywords
+    var kwEdited = "$kw${lts.editionSuffix}";
+    var gpsKeywordsTextFieldFinder = find.byKey(
+      const Key("gpsKeywordsTextField"),
+    );
+    await tester.enterText(gpsKeywordsTextFieldFinder, kwEdited);
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+  // closing the overlay
+  var closeOverlayFinder = find.byTooltip(
+    lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip,
+  );
+  await tester.tap(closeOverlayFinder);
+  await tester.pumpAndSettle();
+
+  // IDEAS EDITION
+  // Clicking on an idea to access the list
+  await tester.tap(find.text(ideasList[0]));
+  await tester.pumpAndSettle();
+  // await tester.pump(const Duration(seconds: 5));
+  // Editing the ideas
+  for (var i = 0; i < ideasList.length; i++) {
+    // Clicking on the tile
+    await tester.tap(find.byKey(Key("editable-deletable-list-tile-$i")));
+    await tester.pumpAndSettle();
+
+    var key = "editable-deletable-tf-$i";
+    var tfIdea1Finder = find.byKey(Key(key)).first;
+    await tester.ensureVisible(tfIdea1Finder);
+    await tester.enterText(
+      tfIdea1Finder,
+      "${ideasList[i]}${lts.editionSuffix}",
+    );
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+  }
+  // await tester.pump(const Duration(seconds: 2));
+
+  // ── Closing the ideas list  ───────────────────────
+  // ───────────────────────────────────────────────────
+  var closeFinder = find.byIcon(Icons.close);
+  await tester.tap(closeFinder);
+  await tester.pumpAndSettle();
+
+  // await tester.pump(const Duration(seconds: 2));
+
+  // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
+  // Entering the file name and submitting data
+  await dashboardEnterFileNameAndSubmitDataOnMobile(
+    tester: tester,
+    fileNameWithoutExtension: fileNameWithoutExtension,
+  );
+}
 
 // ─── GPS ADDED DATA TESTING ───────────────────────────────────────────────────────────────
-  // Method used to test a GPS preview.
-  Future<void> gpsTestPreview
-  ({
-    required BuildContext context,
-    required WidgetTester tester, 
-    required String title,
-    required List<String> ideasList
-  }) async
-  {
-    // Getting the localized strings
-    LocalizedDashboardStrings lds = .new(context);
-    LocalizedGPSStrings lgps = .new(context);
-    LocalizedTestingStrings lts = .new(context);
+// Method used to test a GPS preview.
+Future<void> gpsTestPreview({
+  required BuildContext context,
+  required WidgetTester tester,
+  required String title,
+  required List<String> ideasList,
+}) async {
 
-    // Searching the preview tooltip for the session
-    var listItemFinder = find.ancestor
-                        (
-                          of: find.text("$title${lgps.gpsTitleSuffix}"), 
-                          matching: find.byType(SessionsListItem)
-                        );
+  // Getting the localized strings
+  LocalizedDashboardStrings lds = .new(context);
+  LocalizedGPSStrings lgps = .new(context);
+  LocalizedTestingStrings lts = .new(context);
 
-    var previewTooltipFinder = find.descendant
-    (
-      of: listItemFinder,       
-      matching: find.byTooltip(lds.previewTooltipLabel)
-    );
+  // Searching the preview tooltip for the session
+  var listItemFinder = find.ancestor(
+    of: find.text("$title${lgps.gpsTitleSuffix}"),
+    matching: find.byType(SessionsListItem),
+  );
 
-    // Opening the preview
-    await tester.tap(previewTooltipFinder);
-    await tester.pumpAndSettle();
+  var previewTooltipFinder = find.descendant(
+    of: listItemFinder,
+    matching: find.byTooltip(lds.previewTooltipLabel),
+  );
 
-    await tester.pump(const Duration(seconds: 2)); 
+  // Opening the preview
+  await tester.tap(previewTooltipFinder);
+  await tester.pumpAndSettle();
 
-    // Searching for the title
-    var titleFinder = find.textContaining(title);
-      // Verifying the title present
-    expect (titleFinder, findsNWidgets(2));
+  await tester.pump(const Duration(seconds: 20));
 
-    // Searching for the date
-    dateForTestingIndex = 0;
-    expect(find.textContaining(lts.datesForTestingList[0]), findsNWidgets(2));
-      
-    // Verifying the ideas present
-    for (var idea in ideasList)
-    {
-      expect(find.text(idea), findsOne);
-    }
+  // Searching for the title
+  var titleFinder = find.textContaining(title);
+  // Verifying the title present
+  expect(titleFinder, findsNWidgets(2));
 
-    // Closing the preview
-    await tester.tap(find.byTooltip(lds.previewClosingTooltipLabel));
-    await tester.pumpAndSettle();
+  // Searching for the date
+  dateForTestingIndex = 0;
+  expect(find.textContaining(lts.datesForTestingList[0]), findsNWidgets(2));
+
+  // Verifying the ideas present
+  for (var idea in ideasList) {
+    expect(find.text(idea), findsOne);
   }
+
+  // Closing the preview
+  await tester.tap(find.byTooltip(lds.previewClosingTooltipLabel));
+  await tester.pumpAndSettle();
+}
 
 // ─── GPS PROCESS TESTING ───────────────────────────────────────────────────────────────
- // Method used to test the color of an identifier
-  Future<void> gpsTestIdentifierColor(WidgetTester tester, Finder containerFinder, Color color) async
-  {
-    Container container = tester.widget<Container>(containerFinder);
-    var boxDecoration = container.decoration as BoxDecoration;
-    var border = boxDecoration.border as Border;
+// Method used to test the color of an identifier
+Future<void> gpsTestIdentifierColor(
+  WidgetTester tester,
+  Finder containerFinder,
+  Color color,
+) async {
+  Container container = tester.widget<Container>(containerFinder);
+  var boxDecoration = container.decoration as BoxDecoration;
+  var border = boxDecoration.border as Border;
 
-    // Verifying the default circle color
-    expect(
-      border.top.color,
-      color,
-    );
+  // Verifying the default circle color
+  expect(border.top.color, color);
 
-    expect(
-      border.bottom.color,
-      color,
-    );
+  expect(border.bottom.color, color);
 
-    expect(
-      border.right.color,
-      color,
-    );
+  expect(border.right.color, color);
 
-    expect(
-      border.left.color,
-      color,
-    );
-  }
+  expect(border.left.color, color);
+}
 
-  // Method used to test the color of the checklist title border
-  Future<void> gpsTestChecklistTitleBorderColor(WidgetTester tester, Color color) async
-  {
-    // Searching the container
-    var containerFinder = find.descendant
-    (
-      of: find.byType(GPSChecklist), 
-      matching: find.byType(Container)
-    );
+// Method used to test the color of the checklist title border
+Future<void> gpsTestChecklistTitleBorderColor(
+  WidgetTester tester,
+  Color color,
+) async {
+  // Searching the container
+  var containerFinder = find.descendant(
+    of: find.byType(GPSChecklist),
+    matching: find.byType(Container),
+  );
 
-    var totalContainers = containerFinder.evaluate().length;
-    if (testingDebug) pu.printd("Testing Debug: totalContainers: $totalContainers");
+  var totalContainers = containerFinder.evaluate().length;
+  logt("totalContainers", totalContainers);
+  Container container = tester.widget<Container>(containerFinder);
+  var boxDecoration = container.decoration as BoxDecoration;
+  var border = boxDecoration.border as Border;
 
-    Container container = tester.widget<Container>(containerFinder);
-    var boxDecoration = container.decoration as BoxDecoration;
-    var border = boxDecoration.border as Border;
+  // Verifying the color
+  expect(border.top.color, color);
 
-    // Verifying the color
-    expect(
-      border.top.color,
-      color,
-    );
+  expect(border.bottom.color, color);
 
-    expect(
-      border.bottom.color,
-      color,
-    );
+  expect(border.right.color, color);
 
-    expect(
-      border.right.color,
-      color,
-    );
-
-    expect(
-      border.left.color,
-      color,
-    );
-    
-  }
+  expect(border.left.color, color);
+}
 
 // ─── GPS: GOING FROM PAGE TO PAGE/OVERLAY ───────────────────────────────────────────────────────────────
-  // Method used to go from the home page to the GPS page
-  Future<void> gpsFromHomePageToGPSPage(WidgetTester tester) async
-  {
-    
-    // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-    // ────────────────────────────────────────────────────────────────────────────
-    var bottomItemGPSFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-gps"));
-    await tester.tap(bottomItemGPSFinder);
-    await tester.pumpAndSettle();
+// Method used to go from the home page to the GPS page
+Future<void> gpsFromHomePageToGPSPage(WidgetTester tester) async {
+  // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────
+  var bottomItemGPSFinder = find.byKey(
+    const Key("homepage-bottom-navigation-bar-item-gps"),
+  );
+  await tester.tap(bottomItemGPSFinder);
+  await tester.pumpAndSettle();
 
-    // Verifying the GPS page present
-    expect(find.byType(GPSPage), findsOne);
-  }
+  // Verifying the GPS page present
+  expect(find.byType(GPSPage), findsOne);
+}
 
-  // Method used to go from the GPS page to the CA page
-  Future<void> gpsFromGPSPageToCAPage(WidgetTester tester) async
-  {
-    
-    // ── CLICKING TO DISPLAY THE CA PAGE  ──────────────────────────────────────
-    // ────────────────────────────────────────────────────────────────────────────
-    var bottomItemCAPageFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-ca"));
-    await tester.ensureVisible(bottomItemCAPageFinder);
-    await tester.tap(bottomItemCAPageFinder);
-    await tester.pumpAndSettle();
+// Method used to go from the GPS page to the CA page
+Future<void> gpsFromGPSPageToCAPage(WidgetTester tester) async {
+  // ── CLICKING TO DISPLAY THE CA PAGE  ──────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────
+  var bottomItemCAPageFinder = find.byKey(
+    const Key("homepage-bottom-navigation-bar-item-ca"),
+  );
+  await tester.ensureVisible(bottomItemCAPageFinder);
+  await tester.tap(bottomItemCAPageFinder);
+  await tester.pumpAndSettle();
 
-    // await tester.pump(const Duration(seconds: 5));
+  // await tester.pump(const Duration(seconds: 5));
 
-    // Verifying the CA page present
-    expect(find.byType(CAPage), findsOne);
-  }
+  // Verifying the CA page present
+  expect(find.byType(CAPage), findsOne);
+}
 
-  
-  // Method used to go from the home page to the GPS process page
-  Future<void> gpsFromHomePageToProcessPage(WidgetTester tester) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
-    
-    // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
-    // ────────────────────────────────────────────────────────────────────────────
-    var bottomItemGPSFinder = find.byKey(const Key("homepage-bottom-navigation-bar-item-gps"));
-    await tester.tap(bottomItemGPSFinder);
-    await tester.pumpAndSettle();
+// Method used to go from the home page to the GPS process page
+Future<void> gpsFromHomePageToProcessPage(WidgetTester tester) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
 
-    // Verifying the GPS page present
-    expect(find.byType(GPSPage), findsOne);
+  // ── CLICKING TO DISPLAY THE GPS PAGE  ──────────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────────
+  var bottomItemGPSFinder = find.byKey(
+    const Key("homepage-bottom-navigation-bar-item-gps"),
+  );
+  await tester.tap(bottomItemGPSFinder);
+  await tester.pumpAndSettle();
 
-    // ── STARTING A NEW GPS PROCESS ────────────────────────────────────
-    // ───────────────────────────────────────────────────────────────────────────
+  // Verifying the GPS page present
+  expect(find.byType(GPSPage), findsOne);
 
-    // Clicking on the GPS new process button
-    await gpsCheckNewProcessButtonFunctions(tester);
+  // ── STARTING A NEW GPS PROCESS ────────────────────────────────────
+  // ───────────────────────────────────────────────────────────────────────────
 
-    // Searching the placeholder title
-    var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
-    expect(placeholderTitleFinder, findsOne);
-  }
+  // Clicking on the GPS new process button
+  await gpsCheckNewProcessButtonFunctions(tester);
 
-  // Method used to go from the GPS page to the GPS process page
-  Future<void> gpsFromGPSPageToProcessPage(WidgetTester tester) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedGPSStrings lgps = .new(context);
+  // Searching the placeholder title
+  var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
+  expect(placeholderTitleFinder, findsOne);
+}
 
-    if (testingDebug) isCircularProgressIndicatorPresent(tester);
-    if (testingDebug) printTextData(tester);
+// Method used to go from the GPS page to the GPS process page
+Future<void> gpsFromGPSPageToProcessPage(WidgetTester tester) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedGPSStrings lgps = .new(context);
 
-    // Clicking on the GPS new process button
-    await gpsCheckNewProcessButtonFunctions(tester);
+  if (testingDebug) isCircularProgressIndicatorPresent(tester);
+  // if (testingDebug) printTextData(tester);
 
-    // Searching the placeholder title
-    var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
-    expect(placeholderTitleFinder, findsOne);
-  }
+  // Clicking on the GPS new process button
+  await gpsCheckNewProcessButtonFunctions(tester);
 
-  // Method used to go from the GPS process page to the participants lists options page
-  Future<void> gpsFromProcessPageToparticipantsListsOptionsPage(WidgetTester tester) async
-  {
-    // Searching the add emoji    
-    var addEmojiFinder = find.text(addEmoji);
+  // Searching the placeholder title
+  var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
+  expect(placeholderTitleFinder, findsOne);
+}
 
-    // Verifying the add emoji present
-    expect(addEmojiFinder, findsOne);
+// Method used to go from the GPS process page to the participants lists options page
+Future<void> gpsFromProcessPageToparticipantsListsOptionsPage(
+  WidgetTester tester,
+) async {
+  // Searching the add emoji
+  var addEmojiFinder = find.text(addEmoji);
 
-    // Tapping to reach the page with the loading/new group options
-    await tester.tap(addEmojiFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 2));
-  }
+  // Verifying the add emoji present
+  expect(addEmojiFinder, findsOne);
 
-  // Method used to go from the GPS process page to new list page
-  Future<void> gpsFromProcessPageToNewParticipantsListPage(WidgetTester tester) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedParticipantsStrings lps = .new(context);
+  // Tapping to reach the page with the loading/new group options
+  await tester.tap(addEmojiFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 2));
+}
 
-    // Searching the add emoji    
-    var addEmojiFinder = find.text(addEmoji);
+// Method used to go from the GPS process page to new list page
+Future<void> gpsFromProcessPageToNewParticipantsListPage(
+  WidgetTester tester,
+) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedParticipantsStrings lps = .new(context);
 
-    // Verifying the add emoji present
-    expect(addEmojiFinder, findsOne);
+  // Searching the add emoji
+  var addEmojiFinder = find.text(addEmoji);
 
-    // Tapping to reach the page with the loading/new group options
-    await tester.tap(addEmojiFinder);
+  // Verifying the add emoji present
+  expect(addEmojiFinder, findsOne);
 
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 5));
+  // Tapping to reach the page with the loading/new group options
+  await tester.tap(addEmojiFinder);
 
-    if (testingDebug) printTextData(tester);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 5));
 
-    // Verifying the options page present
-    var optionsPageFinder = find.text(lps.participantsListsSubTitle);
-    expect(optionsPageFinder, findsOne);
+  // if (testingDebug) printTextData(tester);
 
-    // Searching the new group button
-    var newParticipantsGroupFinder = find.text(lps.newParticipantsGroupOptionLabel);
-    await tester.ensureVisible(newParticipantsGroupFinder);
-    expect(newParticipantsGroupFinder, findsOne);
+  // Verifying the options page present
+  var optionsPageFinder = find.text(lps.participantsListsSubTitle);
+  expect(optionsPageFinder, findsOne);
 
-    // Tapping on it
-    await tester.tap(newParticipantsGroupFinder);
-    await tester.pumpAndSettle();
-    // await tester.pump(const Duration(seconds: 2));
-  }
+  // Searching the new group button
+  var newParticipantsGroupFinder = find.text(
+    lps.newParticipantsGroupOptionLabel,
+  );
+  await tester.ensureVisible(newParticipantsGroupFinder);
+  expect(newParticipantsGroupFinder, findsOne);
 
-  // Method used to go from GPS process page to list loading dashboard
-  Future<void> gpsFromProcessPageToListLoadingDashboard(WidgetTester tester) async
-  {
-    // Getting the localized strings
-    var context = tester.element(find.byType(Scaffold).first);
-    LocalizedParticipantsStrings lps = .new(context);
+  // Tapping on it
+  await tester.tap(newParticipantsGroupFinder);
+  await tester.pumpAndSettle();
+  // await tester.pump(const Duration(seconds: 2));
+}
 
-    // Searching the add emoji    
-    var addEmojiFinder = find.text(addEmoji);
+// Method used to go from GPS process page to list loading dashboard
+Future<void> gpsFromProcessPageToListLoadingDashboard(
+  WidgetTester tester,
+) async {
+  // Getting the localized strings
+  var context = tester.element(find.byType(Scaffold).first);
+  LocalizedParticipantsStrings lps = .new(context);
 
-    // Verifying the add emoji present
-    expect(addEmojiFinder, findsOne);
+  // Searching the add emoji
+  var addEmojiFinder = find.text(addEmoji);
 
-    // Tapping to reach the page with the loading/new group options
-    await tester.tap(addEmojiFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    // Intermittent failure at 2s
-    await tester.pump(const Duration(seconds: 5));
+  // Verifying the add emoji present
+  expect(addEmojiFinder, findsOne);
 
-    // Verifying the options page present
-    var optionsPageFinder = find.text(lps.participantsListsSubTitle);
-    expect(optionsPageFinder, findsOne);
+  // Tapping to reach the page with the loading/new group options
+  await tester.tap(addEmojiFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  // Intermittent failure at 2s
+  await tester.pump(const Duration(seconds: 5));
 
-    // Searching the list loading option button
-    var loadingAListOptionFinder = find.text(lps.loadingAListOptionLabel);
-    await tester.ensureVisible(loadingAListOptionFinder);
-    expect(loadingAListOptionFinder, findsOne);
+  // Verifying the options page present
+  var optionsPageFinder = find.text(lps.participantsListsSubTitle);
+  expect(optionsPageFinder, findsOne);
 
-    // Tapping on it
-    await tester.tap(loadingAListOptionFinder);
-    await tester.pumpAndSettle();
+  // Searching the list loading option button
+  var loadingAListOptionFinder = find.text(lps.loadingAListOptionLabel);
+  await tester.ensureVisible(loadingAListOptionFinder);
+  expect(loadingAListOptionFinder, findsOne);
 
-    // Verifying the lists dashboard title present
-    var participantsListsDashboardTitleFinder = find.text(lps.listsDashboardTitle);
-    expect(participantsListsDashboardTitleFinder, findsOne);
-  }
+  // Tapping on it
+  await tester.tap(loadingAListOptionFinder);
+  await tester.pumpAndSettle();
 
-  // Method used to go from the GPS process page to the ideas overlay
-  Future<void> gpsFromProcessPageToIdeasOverlay
-  ({
-    required BuildContext context,
-    required WidgetTester tester
-  }) async
-  {
-    // Accessing the localized data
-    LocalizedGPSStrings? lgps = .new(context);
+  // Verifying the lists dashboard title present
+  var participantsListsDashboardTitleFinder = find.text(
+    lps.listsDashboardTitle,
+  );
+  expect(participantsListsDashboardTitleFinder, findsOne);
+}
 
-    // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
-    // ────────────────────────────────────────────────────────────────────────
-    var ideasListTitleFinder = find.text(lgps.ideasListTitle);
-    await tester.tap(ideasListTitleFinder);
-    await tester.pumpAndSettle();
+// Method used to go from the GPS process page to the ideas overlay
+Future<void> gpsFromProcessPageToIdeasOverlay({
+  required BuildContext context,
+  required WidgetTester tester,
+}) async {
+  // Accessing the localized data
+  LocalizedGPSStrings? lgps = .new(context);
 
-    // ── OVERLAY  ───────────────────────────────────
-    // ───────────────────────────────────────────────
-    // Verifying the overlay present
-    expect(find.byKey(const Key("ideaOverlayField")), findsOne);
-  }
+  // ── CLICKING ON THE IDEAS LIST TITLE  ───────────────────────────────────
+  // ────────────────────────────────────────────────────────────────────────
+  var ideasListTitleFinder = find.text(lgps.ideasListTitle);
+  await tester.tap(ideasListTitleFinder);
+  await tester.pumpAndSettle();
+
+  // ── OVERLAY  ───────────────────────────────────
+  // ───────────────────────────────────────────────
+  // Verifying the overlay present
+  expect(find.byKey(const Key("ideaOverlayField")), findsOne);
+}
 
 // ─── GPS: MISC. ───────────────────────────────────────────────────────────────
-  // Method used to get the finder of a new list text items
-  Future<Finder> gpsGetNewListTextItems(WidgetTester tester) async
-  {
-    var listItemsFinder = find.byWidgetPredicate
-              (
-                (widget) 
-                {
-                  if (widget.key is ValueKey<String>) {
-                    return (widget.key as ValueKey<String>).value.contains("editable-deletable-text-item-");
-                  }
-                  return false;
-                }
-              );  
-    return listItemsFinder;
-  }
+// Method used to get the finder of a new list text items
+Future<Finder> gpsGetNewListTextItems(WidgetTester tester) async {
+  var listItemsFinder = find.byWidgetPredicate((widget) {
+    if (widget.key is ValueKey<String>) {
+      return (widget.key as ValueKey<String>).value.contains(
+        "editable-deletable-text-item-",
+      );
+    }
+    return false;
+  });
+  return listItemsFinder;
+}
 
-  // Method used to get the finder of the participants containers
-  Future<Finder> gpsGetParticipantsContainersOnParticipantsListsDashboard(WidgetTester tester) async
-  {
-    var participantsContainersFinder = find.byWidgetPredicate
-    (
-      (widget) 
-      {
-        if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains("session-participants-container-");
-        }
-        return false;
-      }
-    );  
+// Method used to get the finder of the participants containers
+Future<Finder> gpsGetParticipantsContainersOnParticipantsListsDashboard(
+  WidgetTester tester,
+) async {
+  var participantsContainersFinder = find.byWidgetPredicate((widget) {
+    if (widget.key is ValueKey<String>) {
+      return (widget.key as ValueKey<String>).value.contains(
+        "session-participants-container-",
+      );
+    }
+    return false;
+  });
 
-    return participantsContainersFinder;
-  } 
-
+  return participantsContainersFinder;
+}
 
 // ─── DASHBOARD TESTING ───────────────────────────────────────────────────────────────
 
-  // Method used to enter a file name and to submit the CA process data on mobile device
-  // (Assuming an already selected path to the user session data folder)
-  Future<void> dashboardEnterFileNameAndSubmitDataOnMobile({required WidgetTester tester, required String fileNameWithoutExtension}) async
-  {
-    Finder fileNameWidgetFinder =  find.byType(SessionFileNameOnMobilePlatforms);
+// Method used to enter a file name and to submit the CA process data on mobile device
+// (Assuming an already selected path to the user session data folder)
+Future<void> dashboardEnterFileNameAndSubmitDataOnMobile({
+  required WidgetTester tester,
+  required String fileNameWithoutExtension,
+}) async {
+  Finder fileNameWidgetFinder = find.byType(SessionFileNameOnMobilePlatforms);
 
-    // Path to folder already declared 
-    // Scrolling to make the text field visible for small screens
-    await tester.ensureVisible(fileNameWidgetFinder);
-    // pumpAndSettle timed out
-    // await tester.pumpAndSettle();
-    await tester.pump(const Duration(seconds: 5));
+  // Path to folder already declared
+  // Scrolling to make the text field visible for small screens
+  await tester.ensureVisible(fileNameWidgetFinder);
+  // pumpAndSettle timed out
+  // await tester.pumpAndSettle();
+  await tester.pump(const Duration(seconds: 5));
 
-    // Entering a file name
-    await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
-    await tester.testTextInput.receiveAction(TextInputAction.done);
-    await tester.pumpAndSettle();  
-  }  
+  // Entering a file name
+  await tester.enterText(fileNameWidgetFinder, fileNameWithoutExtension);
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+}
 
-  // Method used to search a title and keywords on the dashboard
-  Future<void> testTitleAndKeywords({required String title, required List<String> kws, String? titleSuffix}) async
-    {
-      if (titleSuffix != null) title = "$title$titleSuffix";
-      // Searching for the title
-      expect(find.text(title), findsOne);
+// Method used to search a title and keywords on the dashboard
+Future<void> testTitleAndKeywords({
+  required String title,
+  required List<String> kws,
+  String? titleSuffix,
+}) async {
+  if (titleSuffix != null) title = "$title$titleSuffix";
+  // Searching for the title
+  expect(find.text(title), findsOne);
 
-      // Searching for the keywords
-      for (var kw in kws)
-      {
-        expect(find.text(kw), findsOne);
-      }
-
-    }
-
-  // Method used to test keywords on the dashboard.  
- Future<void> testKeywordsOnDashboardAndOnSession
-  ({
-    required BuildContext context,
-    required WidgetTester tester, 
-    required List<String> kwsList
-  }) async
-  {
-    for (var kw in kwsList)
-    {
-      // one as input chip, one as keyword
-      expect(find.textContaining(kw), findsNWidgets(2));
-    }
+  // Searching for the keywords
+  for (var kw in kws) {
+    expect(find.text(kw), findsOne);
   }
+}
 
-  // Method used to get the finder of the keywords
-  Future<Finder> dashboardGetKeywordsOnDashboard(WidgetTester tester) async
-  {
-    var participantsContainersFinder = find.byWidgetPredicate
-    (
-      (widget) 
-      {
-        if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains("session-keywords-");
-        }
-        return false;
-      }
-    );  
-
-    return participantsContainersFinder;
-  } 
-
-  // Method used to get the finder of a sessions list item by title
-  Future<Finder> dashboardGetSessionListItemFinderByTitle({required WidgetTester tester, required String title, String? titleSuffix}) async 
-  {
-    if (titleSuffix != null) title = "$title$titleSuffix";
-    Finder sessionListItemFinder = find.text(title);
-    return sessionListItemFinder;
+// Method used to test keywords on the dashboard.
+Future<void> testKeywordsOnDashboardAndOnSession({
+  required BuildContext context,
+  required WidgetTester tester,
+  required List<String> kwsList,
+}) async {
+  for (var kw in kwsList) {
+    // one as input chip, one as keyword
+    expect(find.textContaining(kw), findsNWidgets(2));
   }
+}
 
-  // Method used to get the finder of the sessions titles
-  Future<Finder> dashboardGetAllSessionsTitles(WidgetTester tester) async
-  {
-    var titlesFinder = find.byWidgetPredicate
-    (
-      (widget) 
-      {
-        if (widget.key is ValueKey<String>) {
-          return (widget.key as ValueKey<String>).value.contains("session-title-");
-        }
-        return false;
-      }
-    );  
-
-    return titlesFinder;
-  }
-
-  // Method used to get the finder of a keyword FilterChip
-  Future<Finder> dashboardGetKwFilterChip(WidgetTester tester, String kw) async
-    {
-      var filterChipFinder = find.byWidgetPredicate
-      (
-        (widget) 
-        {
-          if (widget is FilterChip) {
-            final label = widget.label;
-            if (label is Text) {
-              return (label.data ?? "").contains(kw);
-            }
-          }
-          return false;
-        }      
-      );  
-
-      return filterChipFinder;
+// Method used to get the finder of the keywords
+Future<Finder> dashboardGetKeywordsOnDashboard(WidgetTester tester) async {
+  var participantsContainersFinder = find.byWidgetPredicate((widget) {
+    if (widget.key is ValueKey<String>) {
+      return (widget.key as ValueKey<String>).value.contains(
+        "session-keywords-",
+      );
     }
+    return false;
+  });
+
+  return participantsContainersFinder;
+}
+
+// Method used to get the finder of a sessions list item by title
+Future<Finder> dashboardGetSessionListItemFinderByTitle({
+  required WidgetTester tester,
+  required String title,
+  String? titleSuffix,
+}) async {
+  if (titleSuffix != null) title = "$title$titleSuffix";
+  Finder sessionListItemFinder = find.text(title);
+  return sessionListItemFinder;
+}
+
+// Method used to get the finder of the sessions titles
+Future<Finder> dashboardGetAllSessionsTitles(WidgetTester tester) async {
+  var titlesFinder = find.byWidgetPredicate((widget) {
+    if (widget.key is ValueKey<String>) {
+      return (widget.key as ValueKey<String>).value.contains("session-title-");
+    }
+    return false;
+  });
+
+  return titlesFinder;
+}
+
+// Method used to get the finder of a keyword FilterChip
+Future<Finder> dashboardGetKwFilterChip(WidgetTester tester, String kw) async {
+  var filterChipFinder = find.byWidgetPredicate((widget) {
+    if (widget is FilterChip) {
+      final label = widget.label;
+      if (label is Text) {
+        return (label.data ?? "").contains(kw);
+      }
+    }
+    return false;
+  });
+
+  return filterChipFinder;
+}
 
 // ─── L10N ───────────────────────────────────────────────────────────────
 // Method used to select a specific language, using a language code, "en" for English, "fr" for French.
-Future<void> selectLanguage
-({
-  required WidgetTester tester, 
-  required String languageCodeToSet
-}) async
-{
-  if (sessionMetadataDebug) pu.printd("Session Metadata: -----------> language to select: $languageCodeToSet");
+Future<void> selectLanguage({
+  required WidgetTester tester,
+  required String languageCodeToSet,
+}) async {
+  if (sessionMetadataDebug)
+    pu.printd(
+      "Session Metadata: -----------> language to select: $languageCodeToSet",
+    );
 
   // Getting the localized strings
   var context = tester.element(find.byType(Scaffold).first);
@@ -1678,64 +2593,72 @@ Future<void> selectLanguage
 
   final dropdownButtonFinder = find.byType(DropdownMenu<String>);
   // Otherwise: languageCodeToSet is different from currentLocaleLanguageCode
-  switch(languageCodeToSet.toLowerCase().trim())
-  {
+  switch (languageCodeToSet.toLowerCase().trim()) {
     // English to set, from interface in French
     case "en":
-    {
-      await tester.tap(dropdownButtonFinder);
-      await tester.pumpAndSettle();
+      {
+        await tester.tap(dropdownButtonFinder);
+        await tester.pumpAndSettle();
 
-      var anglaisFinder = find.widgetWithText(MenuItemButton, lus.englishL10n).last; 
-      // Need to click on "Anglais"
-      await tester.ensureVisible(anglaisFinder);
-      await tester.tap(anglaisFinder);
-      await tester.pumpAndSettle();    
-    }
+        var anglaisFinder = find
+            .widgetWithText(MenuItemButton, lus.englishL10n)
+            .last;
+        // Need to click on "Anglais"
+        await tester.ensureVisible(anglaisFinder);
+        await tester.tap(anglaisFinder);
+        await tester.pumpAndSettle();
+      }
 
     // French to set, from interface in English
     case "fr":
-    {
-      await tester.tap(dropdownButtonFinder);
-      await tester.pumpAndSettle();
+      {
+        await tester.tap(dropdownButtonFinder);
+        await tester.pumpAndSettle();
 
-      var frenchFinder = find.widgetWithText(MenuItemButton, lus.frenchL10n).last;
-      // Need to click on "French"
-      await tester.ensureVisible(frenchFinder);
-      await tester.tap(frenchFinder);
-      await tester.pumpAndSettle();    
-    }
-
+        var frenchFinder = find
+            .widgetWithText(MenuItemButton, lus.frenchL10n)
+            .last;
+        // Need to click on "French"
+        await tester.ensureVisible(frenchFinder);
+        await tester.tap(frenchFinder);
+        await tester.pumpAndSettle();
+      }
   }
-  
 }
 
 // ─── MISC. ───────────────────────────────────────────────────────────────
 
-  // Serialises a segmented-button selection to a slash-separated string.
-  String _segmentedButtonToString(Set<String> values) => values.join("/");
+// Method used to serialize a segmented-button selection to a slash-separated string.
+String _segmentedButtonToString(Set<String> values) => values.join("/");
 
-  /// Method used to scroll up the screen (-200 as default delta value to go up the list).
-  /// The method assumes that the first descendant is the right one.
-  Future<int> scrollListUpScrollableByFirstDescendant({required WidgetTester tester, required Finder listFinder, required elementToReachFinder , double delta = -200}) async
-  {
+// Method used to serialize a list to a slash-separated string.
+String _ListToString(List<String> values) => values.join("/");
+
+/// Method used to scroll up the screen (-200 as default delta value to go up the list).
+/// The method assumes that the first descendant is the right one.
+Future<int> scrollListUpScrollableByFirstDescendant({
+  required WidgetTester tester,
+  required Finder listFinder,
+  required elementToReachFinder,
+  double delta = -200,
+}) async {
   if (testingDebug) pu.printd("Testing Debug: scrollListUpScreen");
 
-  var scrollablesFinder = find.descendant
-  (
+  var scrollablesFinder = find.descendant(
     of: listFinder,
     matching: find.byType(Scrollable),
   );
 
-  if (testingDebug) pu.printd("Testing Debug: Scrollable count: ${scrollablesFinder.evaluate().length}");
+  if (testingDebug)
+    pu.printd(
+      "Testing Debug: Scrollable count: ${scrollablesFinder.evaluate().length}",
+    );
 
-  await tester.scrollUntilVisible
-  (
-    elementToReachFinder, 
-    -200 , // getting back up the list
-    scrollable: scrollablesFinder.first
+  await tester.scrollUntilVisible(
+    elementToReachFinder,
+    -200, // getting back up the list
+    scrollable: scrollablesFinder.first,
   );
-  return await tester.pumpAndSettle(); 
+  return await tester.pumpAndSettle();
 }
 
-   
