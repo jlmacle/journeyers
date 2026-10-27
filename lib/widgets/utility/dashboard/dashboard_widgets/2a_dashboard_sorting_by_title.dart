@@ -67,7 +67,7 @@ class _DashboardSortingByTitleState extends State<DashboardSortingByTitle> {
           // Updating the sessions list UI
           widget.dashboardCallbackFunctionToRefreshTheSessionsList();
         },
-        icon: const Icon(Icons.sort_by_alpha, color: Colors.black),
+        icon: const Icon(Icons.sort_by_alpha, semanticLabel: "", color: Colors.black),
         label: Text(
           semanticsLabel: "",
           "${lds.sortByTitleLabel} (${_isAscendingTitle ? "Z to A" : "A to Z"})",
