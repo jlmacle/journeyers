@@ -127,6 +127,19 @@ Text getTextBeforeLastFromFinder(WidgetTester tester, Finder finder)
 }
 
 /// {@category Utils - Generic}
+/// A method used to log data related to the accessibilityDebug boolean.
+/// loga(msg); -> Accessibility: "msg"
+/// loga(msg, anExpressionFResult);  -> Accessibility: "msg": anExpressionFResult
+void loga(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (accessibilityDebug) pu.printd("Accessibility: $msg");
+  } else {
+    if (accessibilityDebug)
+      pu.printd("Accessibility: $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
 /// A method used to log data related to the testingDebug boolean.
 /// logt(msg); -> Testing Debug: "msg"
 /// logt(msg, anExpressionFResult);  -> Testing Debug: "msg": anExpressionFResult
@@ -163,18 +176,7 @@ void logd(String msg, [Object? anExpressionResult]) {
   }
 }
 
-/// {@category Utils - Generic}
-/// A method used to log data related to the accessibilityDebug boolean.
-/// loga(msg); -> Accessibility: "msg"
-/// loga(msg, anExpressionFResult);  -> Accessibility: "msg": anExpressionFResult
-void loga(String msg, [Object? anExpressionResult]) {
-  if (anExpressionResult == null) {
-    if (accessibilityDebug) pu.printd("Accessibility: $msg");
-  } else {
-    if (accessibilityDebug)
-      pu.printd("Accessibility: $msg: $anExpressionResult");
-  }
-}
+
 
 /// {@category Utils - Generic}
 /// A method used to log data related to the csvBuildingDebug boolean.
