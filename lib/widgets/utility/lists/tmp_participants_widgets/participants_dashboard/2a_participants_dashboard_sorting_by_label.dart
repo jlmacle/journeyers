@@ -61,7 +61,7 @@ class _ParticipantsListsDashboardSortingByLabelState
         // Updating the sessions list UI
         widget.featureCallbackFunctionToRefreshTheParticipantsLists();
       },
-      icon: const Icon(Icons.sort_by_alpha, color: Colors.black),
+      icon: const Icon(Icons.sort_by_alpha, semanticLabel: "", color: Colors.black),
       label: Text(
         "${AppLocalizations.of(context)?.text_lists_dashboard_sort_by_list_name ?? "Issue with the 'List sort' label"} (${_isAscendingLabel ? "Z-A" : "A-Z"})",
         // TODO: style to externalize
