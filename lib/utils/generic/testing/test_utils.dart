@@ -139,18 +139,7 @@ void loga(String msg, [Object? anExpressionResult]) {
 }
 
 
-/// {@category Utils - Generic}
-/// A method used to log data related to the sessionMetadataDebug boolean.
-/// logm(msg); -> Session Metadata: "msg"
-/// logm(msg, anExpressionFResult);  -> Session Metadata: "msg": anExpressionFResult
-void logm(String msg, [Object? anExpressionResult]) {
-  if (anExpressionResult == null) {
-    if (sessionMetadataDebug) pu.printd("Session Metadata: $msg");
-  } else {
-    if (sessionMetadataDebug)
-      pu.printd("Session Metadata: $msg: $anExpressionResult");
-  }
-}
+
 
 /// {@category Utils - Generic}
 /// A method used to log data related to the sessionDataDebug boolean.
@@ -175,6 +164,19 @@ void logc(String msg, [Object? anExpressionResult]) {
     if (csvBuildingDebug) pu.printd("CSV Building: $msg");
   } else {
     if (csvBuildingDebug) pu.printd("CSV Building: $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the sessionMetadataDebug boolean.
+/// logm(msg); -> Session Metadata: "msg"
+/// logm(msg, anExpressionFResult);  -> Session Metadata: "msg": anExpressionFResult
+void logm(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (sessionMetadataDebug) pu.printd("Session Metadata: $msg");
+  } else {
+    if (sessionMetadataDebug)
+      pu.printd("Session Metadata: $msg: $anExpressionResult");
   }
 }
 
