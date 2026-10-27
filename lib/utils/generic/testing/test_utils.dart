@@ -175,8 +175,7 @@ void logm(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (sessionMetadataDebug) pu.printd("Session Metadata: $msg");
   } else {
-    if (sessionMetadataDebug)
-      pu.printd("Session Metadata: $msg: $anExpressionResult");
+    if (sessionMetadataDebug)  pu.printd("Session Metadata: $msg: $anExpressionResult");
   }
 }
 
