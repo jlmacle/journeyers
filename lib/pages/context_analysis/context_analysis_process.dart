@@ -193,10 +193,8 @@ class CAProcessState extends State<CAProcess> {
     _loadDTO(dtoAssetPathToJson: "");
     //_loadDTO(dtoAssetPathToJson: "assets/caFormLoading/context_analysis_form_data_for_preloading.json");
     analysisKeywords = widget.keywordsWhenEdition.toSet();
-    if (editDebug)
-      pu.printd(
-        "Editing: CAProcess: initState: analysisKeywords: $analysisKeywords",
-      );
+    
+    loge("CAProcess: initState: analysisKeywords: $analysisKeywords");
 
     // Listeners to know when some elements receive focus
     _saveDataButtonFocusNode.addListener(() {
