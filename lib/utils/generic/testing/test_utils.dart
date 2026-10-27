@@ -98,6 +98,34 @@ int printFinderTotal(Finder finder, String label) {
   return totalFinder;
 }
 
+/// Method used get the last Text descendant from a Finder
+Text getLastTextFromFinder(WidgetTester tester, Finder finder)
+{
+  var textFinders = find.descendant(of: finder, matching: find.byType(Text), skipOffstage: false);
+  int totalTextFinders = textFinders.evaluate().length;
+
+  var delta = totalTextFinders - 1;
+  if (delta < 0) throw Exception("No Text widget found");
+
+  Finder textFinder = textFinders.last;
+  Text textWidget = tester.widget<Text>(textFinder);
+  return textWidget;
+}
+
+/// Method used get the Text descendant before the last Text descendant (if existant) from a Finder
+Text getTextBeforeLastFromFinder(WidgetTester tester, Finder finder)
+{
+  var textFinders = find.descendant(of: finder, matching: find.byType(Text), skipOffstage: false);
+  int totalTextFinders = textFinders.evaluate().length;
+
+  var delta = totalTextFinders - 2;
+  if (delta < 0) throw Exception("Only $totalTextFinders Text widget");
+
+  Finder textFinder = textFinders.at(totalTextFinders-2);
+  Text textWidget = tester.widget<Text>(textFinder);
+  return textWidget;
+}
+
 /// {@category Utils - Generic}
 /// A method used to log data related to the testingDebug boolean.
 /// logt(msg); -> Testing Debug: "msg"
