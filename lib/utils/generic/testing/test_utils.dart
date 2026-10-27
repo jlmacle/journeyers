@@ -134,8 +134,7 @@ void loga(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (accessibilityDebug) pu.printd("Accessibility: $msg");
   } else {
-    if (accessibilityDebug)
-      pu.printd("Accessibility: $msg: $anExpressionResult");
+    if (accessibilityDebug) pu.printd("Accessibility: $msg: $anExpressionResult");
   }
 }
 
