@@ -4,6 +4,7 @@ import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 /// {@category Context analysis}
 /// A widget used for keywords declaration in the context analysis process.
@@ -56,10 +57,8 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> {
     if (widgetSequenceDebug) pu.printd("CAKeywordsDeclaration");
 
     _keywordsListSorted = widget.keywordsWhenEdition.toList();
-    if (editDebug)
-      pu.printd(
-        "Editing: CAKeywordsDeclaration: initState: _keywordsListSorted: $_keywordsListSorted",
-      );
+    
+    loge("CAKeywordsDeclaration: initState: _keywordsListSorted: $_keywordsListSorted");
   }
 
   @override
