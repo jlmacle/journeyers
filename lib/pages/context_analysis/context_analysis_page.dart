@@ -160,7 +160,7 @@ class CAPageState extends State<CAPage>
     required String filePathWhenEdition
   })
   {
-    if (editDebug) pu.printd("Editing: CAPage: onEditSessionData");
+    loge("CAPage: onEditSessionData");
 
     setState(() {
       // To have the CAProcess widget loaded with the values to edit
