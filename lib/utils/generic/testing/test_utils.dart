@@ -141,17 +141,7 @@ void loga(String msg, [Object? anExpressionResult]) {
 
 
 
-/// {@category Utils - Generic}
-/// A method used to log data related to the sessionDataDebug boolean.
-/// logd(msg); -> Session Data: "msg"
-/// logd(msg, anExpressionFResult);  -> Session Data: "msg": anExpressionFResult
-void logd(String msg, [Object? anExpressionResult]) {
-  if (anExpressionResult == null) {
-    if (sessionDataDebug) pu.printd("Session Data: $msg");
-  } else {
-    if (sessionDataDebug) pu.printd("Session Data: $msg: $anExpressionResult");
-  }
-}
+
 
 
 
@@ -164,6 +154,18 @@ void logc(String msg, [Object? anExpressionResult]) {
     if (csvBuildingDebug) pu.printd("CSV Building: $msg");
   } else {
     if (csvBuildingDebug) pu.printd("CSV Building: $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the sessionDataDebug boolean.
+/// logd(msg); -> Session Data: "msg"
+/// logd(msg, anExpressionFResult);  -> Session Data: "msg": anExpressionFResult
+void logd(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (sessionDataDebug) pu.printd("Session Data: $msg");
+  } else {
+    if (sessionDataDebug) pu.printd("Session Data: $msg: $anExpressionResult");
   }
 }
 
