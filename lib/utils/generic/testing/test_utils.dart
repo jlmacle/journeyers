@@ -139,12 +139,6 @@ void loga(String msg, [Object? anExpressionResult]) {
 }
 
 
-
-
-
-
-
-
 /// {@category Utils - Generic}
 /// A method used to log data related to the csvBuildingDebug boolean.
 /// logc(msg); -> CSV Building: "msg"
