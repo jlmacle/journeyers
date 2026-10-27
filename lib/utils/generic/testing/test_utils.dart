@@ -152,6 +152,18 @@ void logc(String msg, [Object? anExpressionResult]) {
 }
 
 /// {@category Utils - Generic}
+/// A method used to log data related to the editDebug boolean.
+/// loge(msg); -> Editing: : "msg"
+/// loge(msg, anExpressionFResult);  -> Editing: "msg": anExpressionFResult
+void loge(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (editDebug) pu.printd("Editing:  $msg");
+  } else {
+    if (editDebug) pu.printd("Editing:  $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
 /// A method used to log data related to the sessionDataDebug boolean.
 /// logd(msg); -> Session Data: "msg"
 /// logd(msg, anExpressionFResult);  -> Session Data: "msg": anExpressionFResult
