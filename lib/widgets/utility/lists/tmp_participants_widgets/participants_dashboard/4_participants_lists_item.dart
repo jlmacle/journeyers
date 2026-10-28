@@ -75,7 +75,6 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem> {
   final _listsDB = ParticipantsListsDB();
   List<String> _participantsCurrent = [];
   final TextEditingController _listNameEditTec = .new();
-  String? _listNameEditErrorText;
   final TextEditingController _participantsEditTec = .new();
   final TextEditingController _kwsEditTec = .new();
 
