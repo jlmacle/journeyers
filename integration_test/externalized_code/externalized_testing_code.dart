@@ -1615,7 +1615,7 @@ bool caIsCheckboxTextUnderlined({
   required int checkboxIndex,
 }) {
   var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
-  if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
+  logt("Text: ${indivTextWidget.data}");
   var decoration = indivTextWidget.style?.decoration;
   if (testingDebug) pu.printd("______________ decoration: $decoration");
   return (decoration == TextDecoration.underline);
