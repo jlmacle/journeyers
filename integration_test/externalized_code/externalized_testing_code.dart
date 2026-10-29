@@ -1076,7 +1076,7 @@ Future<void> caTestPreview2({
     matching: find.textContaining(title),
   );
   expect(titleFinder, findsOne);
-  if (testingDebug) pu.printd("Testing Debug: ---------> Preview title found");
+  logt("---------> Preview title found");
 
   // ---------------------------------------------------------------------------
   // 3. VERIFYING THE VALUES FOR THE INDIVIDUAL PERSPECTIVE
