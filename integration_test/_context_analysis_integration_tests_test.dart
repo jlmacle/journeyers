@@ -813,29 +813,29 @@ Future<void> main() async {
 
           // Individual perspective testing values
           // 7 values are necessary
-          List<bool> checkboxValues = List.filled(7, true);
+          List<bool> checkboxesValues = List.filled(7, true);
           // a1 to a7
-          List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
+          List<String> checkboxesTextFieldValues = List.generate(7, (i) => "a${i+1}");
           String indivAnotherIssueStrValue = "a8";        
 
           // Group/teams perspective testing values
           String groupProblemsToSolveStrValue = "b1";
           // 4 values are necessary
-          List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+          List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
           // b2 to b5
-          List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+          List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
           await caEnterNewProcessDataOnMobile
           (
             tester: tester, 
             title: testAnalysisTitle2,
             kwsList: kwsList2Keywords,
-            checkboxValues: checkboxValues,
-            checkboxTextFieldValues: checkboxTextFieldValues,
+            checkboxesValues: checkboxesValues,
+            checkboxesTextFieldValues: checkboxesTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-            segmentedButtonValues: segmentedButtonValues,
-            segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            segmentedButtonsValues: segmentedButtonsValues,
+            segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
             fileNameWithoutExtension: fileName1WithoutExtension
           );
 
@@ -850,11 +850,11 @@ Future<void> main() async {
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
           // Putting all string values together, to retrieve them by index
-          List<String> individualStringValues = [...checkboxTextFieldValues, indivAnotherIssueStrValue];
-          List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+          List<String> individualStringValues = [...checkboxesTextFieldValues, indivAnotherIssueStrValue];
+          List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
           await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2 , individualStringValues: individualStringValues, 
-          segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+          segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
 
           // await tester.pump(const Duration(seconds: 2));
         }
@@ -898,27 +898,27 @@ Future<void> main() async {
 
         // Individual perspective testing values
         // 7 values are necessary
-        List<bool> checkboxValues = [true, false, false, true, true, true, false];
-        List<String> checkboxTextFieldValues = ["a1", "", "", "a4", "a5", "a6", ""];       
+        List<bool> checkboxesValues = [true, false, false, true, true, true, false];
+        List<String> checkboxesTextFieldValues = ["a1", "", "", "a4", "a5", "a6", ""];       
         String indivAnotherIssueStrValue = "";        
 
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonValues = [{lca.yes},{},{lca.iDontKnow},{}];
-        List<String> segmentedButtonTextFieldValues = ["b2", "", "b4",""];
+        List<Set<String>> segmentedButtonsValues = [{lca.yes},{},{lca.iDontKnow},{}];
+        List<String> segmentedButtonsTextFieldValues = ["b2", "", "b4",""];
 
         await caEnterNewProcessDataOnMobile
           (
             tester: tester, 
             title: testAnalysisTitle2,
             kwsList: kwsList2Keywords,
-            checkboxValues: checkboxValues,
-            checkboxTextFieldValues: checkboxTextFieldValues,
+            checkboxesValues: checkboxesValues,
+            checkboxesTextFieldValues: checkboxesTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-            segmentedButtonValues: segmentedButtonValues,
-            segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            segmentedButtonsValues: segmentedButtonsValues,
+            segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
             fileNameWithoutExtension: fileName1WithoutExtension
           );
         
@@ -934,14 +934,14 @@ Future<void> main() async {
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
-          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          [...checkboxesTextFieldValues, indivAnotherIssueStrValue]
           .where((string) => string.isNotEmpty)
           .toList();
 
-        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
         await caTestPreview(context: context, tester: tester, title:testAnalysisTitle2 ,individualStringValues: individualStringValues, 
-        segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+        segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
 
         // await tester.pump(const Duration(seconds: 2));
       }
@@ -985,27 +985,27 @@ Future<void> main() async {
         
         // Individual perspective testing values
         // 7 values are necessary
-        List<bool> checkboxValues = [false, true, false, false, true, true, false];
-        List<String> checkboxTextFieldValues = ["", "a2",  "", "", "a5", "a6", ""];       
+        List<bool> checkboxesValues = [false, true, false, false, true, true, false];
+        List<String> checkboxesTextFieldValues = ["", "a2",  "", "", "a5", "a6", ""];       
         String indivAnotherIssueStrValue = "";        
 
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "b1";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonValues = [{},{lca.no},{},{lca.iDontKnow}];
-        List<String> segmentedButtonTextFieldValues = ["", "b3", "", "b5"];
+        List<Set<String>> segmentedButtonsValues = [{},{lca.no},{},{lca.iDontKnow}];
+        List<String> segmentedButtonsTextFieldValues = ["", "b3", "", "b5"];
 
         await caEnterNewProcessDataOnMobile
         (
           tester: tester, 
           title: testAnalysisTitle2,
           kwsList: kwsList2Keywords,
-          checkboxValues: checkboxValues,
-          checkboxTextFieldValues: checkboxTextFieldValues,
+          checkboxesValues: checkboxesValues,
+          checkboxesTextFieldValues: checkboxesTextFieldValues,
           indivAnotherIssueStrValue: indivAnotherIssueStrValue,
           groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-          segmentedButtonValues: segmentedButtonValues,
-          segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+          segmentedButtonsValues: segmentedButtonsValues,
+          segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
           fileNameWithoutExtension: fileName1WithoutExtension
         );
         
@@ -1021,14 +1021,14 @@ Future<void> main() async {
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
-          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          [...checkboxesTextFieldValues, indivAnotherIssueStrValue]
           .where((string) => string.isNotEmpty)
           .toList();
 
-        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
         await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
-        segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+        segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
 
         // await tester.pump(const Duration(seconds: 2));
       }
@@ -1072,27 +1072,27 @@ Future<void> main() async {
         
         // Individual perspective testing values
         // 7 values are necessary
-        List<bool> checkboxValues = [true, false, false, false, true, true, true];
-        List<String> checkboxTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
+        List<bool> checkboxesValues = [true, false, false, false, true, true, true];
+        List<String> checkboxesTextFieldValues = ["a1", "",  "", "", "a5", "a6", "a7"];       
         String indivAnotherIssueStrValue = "a8";        
 
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{},{lca.iDontKnow}];
-        List<String> segmentedButtonTextFieldValues = ["b2", "b3", "", "b5"];
+        List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{},{lca.iDontKnow}];
+        List<String> segmentedButtonsTextFieldValues = ["b2", "b3", "", "b5"];
         
         await caEnterNewProcessDataOnMobile
         (
           tester: tester, 
           title: testAnalysisTitle2,
           kwsList: kwsList2Keywords,
-          checkboxValues: checkboxValues,
-          checkboxTextFieldValues: checkboxTextFieldValues,
+          checkboxesValues: checkboxesValues,
+          checkboxesTextFieldValues: checkboxesTextFieldValues,
           indivAnotherIssueStrValue: indivAnotherIssueStrValue,
           groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-          segmentedButtonValues: segmentedButtonValues,
-          segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+          segmentedButtonsValues: segmentedButtonsValues,
+          segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
           fileNameWithoutExtension: fileName1WithoutExtension
         );
 
@@ -1108,14 +1108,14 @@ Future<void> main() async {
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
-          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
+          [...checkboxesTextFieldValues, indivAnotherIssueStrValue]
           .where((string) => string.isNotEmpty)
           .toList();
 
-        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+        List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
         await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
-        segmentedButtonValues: segmentedButtonValues, groupStringValues: groupStringValues);
+        segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
 
         // await tester.pump(const Duration(seconds: 2));
       }
@@ -1406,9 +1406,9 @@ Future<void> main() async {
             
             // Individual perspective testing values
             // All checkboxes checked
-            List<bool> checkboxValues = List.filled(7, true);
+            List<bool> checkboxesValues = List.filled(7, true);
             // Values from a1 to a7 for the checkboxes text fields
-            List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");  
+            List<String> checkboxesTextFieldValues = List.generate(7, (i) => "a${i+1}");  
             // a8 for the text field only (indiv. persp.)        
             String indivAnotherIssueStrValue = "a8";        
 
@@ -1416,21 +1416,21 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
+            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
             // Values from b2 to b5 for the segmented button text fields
-            List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+            List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
             await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: title,
               kwsList: kwsList2Keywords,
-              checkboxValues: checkboxValues,
-              checkboxTextFieldValues: checkboxTextFieldValues,
+              checkboxesValues: checkboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-              segmentedButtonValues: segmentedButtonValues,
-              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              segmentedButtonsValues: segmentedButtonsValues,
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -1481,7 +1481,7 @@ Future<void> main() async {
                 await tester.scrollUntilVisible(currentCheckboxFinder, 45, scrollable: find.byType(Scrollable).last);
                 await tester.pumpAndSettle();
                 var currentCheckboxWidget = tester.widget<Checkbox>(currentCheckboxFinder);
-                expect(currentCheckboxWidget.value, checkboxValues[cbIndex]);
+                expect(currentCheckboxWidget.value, checkboxesValues[cbIndex]);
               }
             }
 
@@ -1498,7 +1498,7 @@ Future<void> main() async {
 
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
-                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonValues[sbIndex]);
+                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonsValues[sbIndex]);
             }
 
             // ── Verifying text field data present ────────────────────────────
@@ -1511,8 +1511,8 @@ Future<void> main() async {
             // Should have 16 values
             // 1 + 1 + 7 + 1
             // + 1 + 4 + 1
-            var expectedData = [title, null, ...checkboxTextFieldValues, indivAnotherIssueStrValue,
-                                groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues, fileName1WithoutExtension];
+            var expectedData = [title, null, ...checkboxesTextFieldValues, indivAnotherIssueStrValue,
+                                groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues, fileName1WithoutExtension];
 
             for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
             {
@@ -1535,8 +1535,8 @@ Future<void> main() async {
             // ── Leaving the checkboxes as is ────────────────────────────
  
             // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
-            List<Set<String>> newSegmentedButtonValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow , lca.no, lca.yes}];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
+            List<Set<String>> newsegmentedButtonsValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow , lca.no, lca.yes}];
             List<String> segmentedButtonsAddedValues = [lca.no, lca.yes, lca.yes, lca.iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
@@ -1574,15 +1574,15 @@ Future<void> main() async {
 
             // ── Editing data in the text fields ────────────────────────────
 
-            List<String> newCheckboxTextFieldValues = 
-            [for (var value in checkboxTextFieldValues) "${value}${editionSuffix}"]; 
+            List<String> newcheckboxesTextFieldValues = 
+            [for (var value in checkboxesTextFieldValues) "${value}${editionSuffix}"]; 
 
             String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
 
             String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
 
-            List<String> newSegmentedButtonTextFieldValues = 
-            [ for (var value in segmentedButtonTextFieldValues) "${value}${editionSuffix}" ]; 
+            List<String> newsegmentedButtonsTextFieldValues = 
+            [ for (var value in segmentedButtonsTextFieldValues) "${value}${editionSuffix}" ]; 
 
             textFieldsFinder = find.byType(TextField, skipOffstage: false);
             totalTextFields = textFieldsFinder.evaluate().length;
@@ -1593,8 +1593,8 @@ Future<void> main() async {
             // Should have 16 values
             // 1 + 1 + 7 + 1
             // + 1 + 4 + 1
-            var dataList = [title, null, ...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue,
-                                newGroupProblemsToSolveStrValue, ...newSegmentedButtonTextFieldValues, null];
+            var dataList = [title, null, ...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue,
+                                newGroupProblemsToSolveStrValue, ...newsegmentedButtonsTextFieldValues, null];
 
             for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
             {
@@ -1708,9 +1708,9 @@ Future<void> main() async {
               context: context, 
               tester: tester, 
               title: title,
-              individualStringValues: [...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue], 
-              groupStringValues: [newGroupProblemsToSolveStrValue,...newSegmentedButtonTextFieldValues],
-              segmentedButtonValues: newSegmentedButtonValues
+              individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
+              groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
+              segmentedButtonValues: newsegmentedButtonsValues
             );          
           } // platform-related if
 
@@ -1746,9 +1746,9 @@ Future<void> main() async {
             
             // Individual perspective testing values
             // All checkboxes checked
-            List<bool> checkboxValues = List.filled(7, true);
+            List<bool> checkboxesValues = List.filled(7, true);
             // Values from a1 to a7 for the checkboxes text fields
-            List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");  
+            List<String> checkboxesTextFieldValues = List.generate(7, (i) => "a${i+1}");  
             // a8 for the text field only (indiv. persp.)        
             String indivAnotherIssueStrValue = "a8";        
 
@@ -1756,21 +1756,21 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
+            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
             // Values from b2 to b5 for the segmented button text fields
-            List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+            List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
             await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: title,
               kwsList: kwsList2Keywords,
-              checkboxValues: checkboxValues,
-              checkboxTextFieldValues: checkboxTextFieldValues,
+              checkboxesValues: checkboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-              segmentedButtonValues: segmentedButtonValues,
-              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              segmentedButtonsValues: segmentedButtonsValues,
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -1804,7 +1804,7 @@ Future<void> main() async {
               // cbIndex = 1: keywords: skipping the text field
               if (cbIndex != 1) 
               {
-                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxValues[cbIndex]);
+                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxesValues[cbIndex]);
               }
             }
 
@@ -1821,7 +1821,7 @@ Future<void> main() async {
 
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
-                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonValues[sbIndex]);
+                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonsValues[sbIndex]);
             }
 
             // ── Verifying text field data present ────────────────────────────
@@ -1834,8 +1834,8 @@ Future<void> main() async {
             // Should have 16 values
             // 1 + 1 + 7 + 1
             // + 1 + 4 + 1
-            var expectedData = [title, null, ...checkboxTextFieldValues, indivAnotherIssueStrValue,
-                                groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues, fileName1WithoutExtension];
+            var expectedData = [title, null, ...checkboxesTextFieldValues, indivAnotherIssueStrValue,
+                                groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues, fileName1WithoutExtension];
 
             for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
             {
@@ -1858,8 +1858,8 @@ Future<void> main() async {
             // ── Leaving the checkboxes as is ────────────────────────────
  
             // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
-            List<Set<String>> newSegmentedButtonValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow ,lca.no, lca.yes}];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
+            List<Set<String>> newsegmentedButtonsValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow ,lca.no, lca.yes}];
             List<String> segmentedButtonsAddedValues = [lca.no, lca.yes, lca.yes, lca.iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
@@ -1897,15 +1897,15 @@ Future<void> main() async {
 
             // ── Editing data in the text fields ────────────────────────────
 
-            List<String> newCheckboxTextFieldValues = 
-            [for (var value in checkboxTextFieldValues) "${value}${editionSuffix}"]; 
+            List<String> newcheckboxesTextFieldValues = 
+            [for (var value in checkboxesTextFieldValues) "${value}${editionSuffix}"]; 
 
             String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
 
             String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
 
-            List<String> newSegmentedButtonTextFieldValues = 
-            [ for (var value in segmentedButtonTextFieldValues) "${value}${editionSuffix}" ]; 
+            List<String> newsegmentedButtonsTextFieldValues = 
+            [ for (var value in segmentedButtonsTextFieldValues) "${value}${editionSuffix}" ]; 
 
             textFieldsFinder = find.byType(TextField);
             totalTextFields = textFieldsFinder.evaluate().length;
@@ -1916,8 +1916,8 @@ Future<void> main() async {
             // Should have 16 values
             // 1 + 1 + 7 + 1
             // + 1 + 4 + 1
-            var dataList = [title, null, ...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue,
-                                newGroupProblemsToSolveStrValue, ...newSegmentedButtonTextFieldValues, null];
+            var dataList = [title, null, ...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue,
+                                newGroupProblemsToSolveStrValue, ...newsegmentedButtonsTextFieldValues, null];
 
             for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
             {
@@ -2031,9 +2031,9 @@ Future<void> main() async {
               context: context,
               tester: tester, 
               title: title,
-              individualStringValues: [...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue], 
-              groupStringValues: [newGroupProblemsToSolveStrValue,...newSegmentedButtonTextFieldValues],
-              segmentedButtonValues: newSegmentedButtonValues
+              individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
+              groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
+              segmentedButtonValues: newsegmentedButtonsValues
             );          
           } // platform-related if
 
@@ -2071,9 +2071,9 @@ Future<void> main() async {
             
             // Individual perspective testing values
             // All checkboxes checked
-            List<bool> checkboxValues = List.filled(7, true);
+            List<bool> checkboxesValues = List.filled(7, true);
             // Values from a1 to a7 for the checkboxes text fields
-            List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");  
+            List<String> checkboxesTextFieldValues = List.generate(7, (i) => "a${i+1}");  
             // a8 for the text field only (indiv. persp.)        
             String indivAnotherIssueStrValue = "a8";        
 
@@ -2081,21 +2081,21 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
+            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
             // Values from b2 to b5 for the segmented button text fields
-            List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+            List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
             await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: title,
               kwsList: kwsList2Keywords,
-              checkboxValues: checkboxValues,
-              checkboxTextFieldValues: checkboxTextFieldValues,
+              checkboxesValues: checkboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-              segmentedButtonValues: segmentedButtonValues,
-              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              segmentedButtonsValues: segmentedButtonsValues,
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
 
@@ -2129,7 +2129,7 @@ Future<void> main() async {
               // cbIndex = 1: keywords: skipping the text field
               if (cbIndex != 1) 
               {
-                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxValues[cbIndex]);
+                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxesValues[cbIndex]);
               }
             }
 
@@ -2146,7 +2146,7 @@ Future<void> main() async {
 
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
-                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonValues[sbIndex]);
+                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonsValues[sbIndex]);
             }
 
             // ── Verifying text field data present ────────────────────────────
@@ -2159,8 +2159,8 @@ Future<void> main() async {
             // Should have 16 values
             // 1 + 1 + 7 + 1
             // + 1 + 4 + 1
-            var expectedData = [title, null, ...checkboxTextFieldValues, indivAnotherIssueStrValue,
-                                groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues, fileName1WithoutExtension];
+            var expectedData = [title, null, ...checkboxesTextFieldValues, indivAnotherIssueStrValue,
+                                groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues, fileName1WithoutExtension];
 
             for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
             {
@@ -2183,8 +2183,8 @@ Future<void> main() async {
             // ── Leaving the checkboxes as is ────────────────────────────
  
             // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
-            List<Set<String>> newSegmentedButtonValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow,lca.no,lca.yes}];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
+            List<Set<String>> newsegmentedButtonsValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow,lca.no,lca.yes}];
             List<String> segmentedButtonsAddedValues = [lca.no, lca.yes, lca.yes, lca.iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
@@ -2222,15 +2222,15 @@ Future<void> main() async {
 
             // ── Editing data in the text fields ────────────────────────────
 
-            List<String> newCheckboxTextFieldValues = 
-            [for (var value in checkboxTextFieldValues) "${value}${editionSuffix}"]; 
+            List<String> newcheckboxesTextFieldValues = 
+            [for (var value in checkboxesTextFieldValues) "${value}${editionSuffix}"]; 
 
             String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
 
             String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
 
-            List<String> newSegmentedButtonTextFieldValues = 
-            [ for (var value in segmentedButtonTextFieldValues) "${value}${editionSuffix}" ]; 
+            List<String> newsegmentedButtonsTextFieldValues = 
+            [ for (var value in segmentedButtonsTextFieldValues) "${value}${editionSuffix}" ]; 
 
             textFieldsFinder = find.byType(TextField);
             totalTextFields = textFieldsFinder.evaluate().length;
@@ -2241,8 +2241,8 @@ Future<void> main() async {
             // Should have 16 values
             // 1 + 1 + 7 + 1
             // + 1 + 4 + 1
-            var dataList = [title, null, ...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue,
-                                newGroupProblemsToSolveStrValue, ...newSegmentedButtonTextFieldValues, null];
+            var dataList = [title, null, ...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue,
+                                newGroupProblemsToSolveStrValue, ...newsegmentedButtonsTextFieldValues, null];
 
             for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
             {
@@ -2356,9 +2356,9 @@ Future<void> main() async {
               context: context,
               tester: tester, 
               title: title,
-              individualStringValues: [...newCheckboxTextFieldValues, newIndivAnotherIssueStrValue], 
-              groupStringValues: [newGroupProblemsToSolveStrValue,...newSegmentedButtonTextFieldValues],
-              segmentedButtonValues: newSegmentedButtonValues
+              individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
+              groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
+              segmentedButtonValues: newsegmentedButtonsValues
             ); 
 
             // ── STARTING A NEW CA PROCESS ──────────────────
@@ -2585,30 +2585,30 @@ Future<void> main() async {
             // Building data for the form
               // Individual perspective testing values
               // 7 values are necessary
-            List<bool> checkboxValues = List.filled(7, true);
+            List<bool> checkboxesValues = List.filled(7, true);
               // Getting the complex data              
             var data = await rootBundle.loadString("assets/caFormLoading/complex_data.txt");           
-            List<String> checkboxTextFieldValues = [data, ...List.filled(7, "")];
+            List<String> checkboxesTextFieldValues = [data, ...List.filled(7, "")];
             String indivAnotherIssueStrValue = "";        
 
              // Group/teams perspective testing values
             String groupProblemsToSolveStrValue = "b1";
               // 4 values are necessary   
-            List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
               // b2 to b5
-            List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+            List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
             await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: "",
               kwsList: [],
-              checkboxValues: checkboxValues,
-              checkboxTextFieldValues: checkboxTextFieldValues,
+              checkboxesValues: checkboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-              segmentedButtonValues: segmentedButtonValues,
-              segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+              segmentedButtonsValues: segmentedButtonsValues,
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
               fileNameWithoutExtension: fileName1WithoutExtension
             );
            
