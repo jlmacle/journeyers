@@ -2639,10 +2639,7 @@ Future<int> scrollListUpScrollableByFirstDescendant({
     matching: find.byType(Scrollable),
   );
 
-  if (testingDebug)
-    pu.printd(
-      "Testing Debug: Scrollable count: ${scrollablesFinder.evaluate().length}",
-    );
+  logt("Scrollable count: ${scrollablesFinder.evaluate().length}");
 
   await tester.scrollUntilVisible(
     elementToReachFinder,
