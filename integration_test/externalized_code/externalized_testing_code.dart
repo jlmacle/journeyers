@@ -2642,7 +2642,7 @@ Future<int> scrollListUpScrollableByFirstDescendant({
   required elementToReachFinder,
   double delta = -200,
 }) async {
-  if (testingDebug) pu.printd("Testing Debug: scrollListUpScreen");
+  logt("scrollListUpScreen");
 
   var scrollablesFinder = find.descendant(
     of: listFinder,
