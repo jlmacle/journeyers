@@ -893,11 +893,7 @@ Future<void> caTestPreview({
       // No expansion tile if the checkbox is not checked
       // Resetting at the first group/teams expansion tile
       if (expansionTileIndex == totalIndivExpansionTiles) {
-        if (testingDebug) {
-          pu.printd(
-            "Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex",
-          );
-        }
+        logt("Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex");
         previewListTileDataIndex = 0;
       } else {
         previewListTileDataIndex++;
