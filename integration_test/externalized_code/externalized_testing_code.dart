@@ -161,7 +161,7 @@ Future<void> caFillForm(
   List<Set<String>> segmentedButtonValues,
   List<String> segmentedButtonTextFieldValues,
 ) async {
-  if (testingDebug) pu.printd("Entering caFillForm");
+  logt("Entering caFillForm");
   // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
   // Opening the individual perspective expansion tile
   // Getting the build context
