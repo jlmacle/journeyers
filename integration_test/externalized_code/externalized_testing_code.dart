@@ -1042,7 +1042,7 @@ Future<void> caTestPreview2({
   LocalizedDashboardStrings lds = .new(context);
   LocalizedCAStrings lca = .new(context);
 
-  if (testingDebug) pu.printd("Entering caTestPreview2");
+  logt("Entering caTestPreview2");
   logt("---------> Parameters");
   logt("Preview: Checkboxes values", checkboxesValues);
   logt("Preview: Individual perspective values", individualStringValues);
