@@ -1098,10 +1098,7 @@ Future<void> caTestPreview2({
       caPreviewNoDataInIndividualPerspectiveText.data,
       lca.caPreviewNoDataInIndividualPerspective,
     );
-    if (testingDebug)
-      pu.printd(
-        "Testing Debug: Found placeholder text for absence of individual data in preview",
-      );
+    logt("Found placeholder text for absence of individual data in preview");
   }
   // 3.2 case 2: expansion tiles in the group perpective: text field values to check
   // ---------------------------------------------------------------------------
