@@ -457,7 +457,7 @@ Future<void> caResetCASegmentedButtons({
   required WidgetTester tester,
   required List<Set<String>> segmentedButtonsValues,
 }) async {
-  if (testingDebug) pu.printd("Entering caResetCASegmentedButtons");
+  logt("Entering caResetCASegmentedButtons");
 
   // Getting the localized strings
   LocalizedCAQuestionsFields lqf = .new(context);
