@@ -808,7 +808,7 @@ Future<void> caTestPreview({
   );
   expect(titleFinder, findsOne);
 
-  if (testingDebug) pu.printd("Testing Debug: Title found in the preview");
+  logt("Title found in the preview");
 
   //Searching for the expansion tiles
   var expansionTilesFinder = find.descendant(
