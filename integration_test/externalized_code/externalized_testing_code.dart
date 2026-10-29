@@ -522,7 +522,7 @@ Future<void> caEditDataOnMobile({
   required List<String> segmentedButtonsTextFieldValues,
   required String fileNameWithoutExtension,
 }) async {
-  if (testingDebug) pu.printd("Entering caEditDataOnMobile");
+  logt("Entering caEditDataOnMobile");
 
   // Accessing the localized data
   var context = tester.element(find.byType(Scaffold).first);
