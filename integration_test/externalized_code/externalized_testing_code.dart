@@ -875,12 +875,9 @@ Future<void> caTestPreview({
 
     // Getting the total number of list tiles for this expansion tile
     int totalListTiles = listTilesFinder.evaluate().length;
-    if (testingDebug) {
-      pu.printd(
-        "Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
-        "(The expansion tile is included. The first index is skipped.)",
-      );
-    }
+    logt("Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
+        "The expansion tile is included. The first index is skipped.");
+    
 
     if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) {
       totalIndivExpansionTiles++;
