@@ -2566,10 +2566,9 @@ Future<void> selectLanguage({
   required WidgetTester tester,
   required String languageCodeToSet,
 }) async {
-  if (sessionMetadataDebug)
-    pu.printd(
-      "Session Metadata: -----------> language to select: $languageCodeToSet",
-    );
+
+  logm("-----------> language to select: $languageCodeToSet");
+  
 
   // Getting the localized strings
   var context = tester.element(find.byType(Scaffold).first);
