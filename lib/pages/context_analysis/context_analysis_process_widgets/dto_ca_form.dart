@@ -391,10 +391,8 @@ class DTOCAForm {
 
         logc("Error: itemOrTitleLabel: $itemOrTitleLabel");
 
-        if (csvBuildingDebug)
-          pu.printd(
-            "CSV Building: Error: qfl.questionsToInputItemsMapping[itemOrTitleLabel: ${qfl.questionsToInputItemsMapping[itemOrTitleLabel]}",
-          );
+        logc("Error: qfl.questionsToInputItemsMapping[itemOrTitleLabel: ${qfl.questionsToInputItemsMapping[itemOrTitleLabel]}");
+       
         if (csvBuildingDebug)
           pu.printd(
             "CSV Building: Error: questionsToInputItemsMapping: ${qfl.questionsToInputItemsMapping}",
