@@ -161,7 +161,7 @@ Future<void> caFillForm(
   List<Set<String>> segmentedButtonValues,
   List<String> segmentedButtonTextFieldValues,
 ) async {
-  if (testingDebug) pu.printd("Entering caFillForm");
+  logt("Entering caFillForm");
   // ── FORM SECTION : Individual perspective ─────────────────────────────────────────────────────────────
   // Opening the individual perspective expansion tile
   // Getting the build context
@@ -457,7 +457,7 @@ Future<void> caResetCASegmentedButtons({
   required WidgetTester tester,
   required List<Set<String>> segmentedButtonsValues,
 }) async {
-  if (testingDebug) pu.printd("Entering caResetCASegmentedButtons");
+  logt("Entering caResetCASegmentedButtons");
 
   // Getting the localized strings
   LocalizedCAQuestionsFields lqf = .new(context);
@@ -522,7 +522,7 @@ Future<void> caEditDataOnMobile({
   required List<String> segmentedButtonsTextFieldValues,
   required String fileNameWithoutExtension,
 }) async {
-  if (testingDebug) pu.printd("Entering caEditDataOnMobile");
+  logt("Entering caEditDataOnMobile");
 
   // Accessing the localized data
   var context = tester.element(find.byType(Scaffold).first);
@@ -808,7 +808,7 @@ Future<void> caTestPreview({
   );
   expect(titleFinder, findsOne);
 
-  if (testingDebug) pu.printd("Testing Debug: Title found in the preview");
+  logt("Title found in the preview");
 
   //Searching for the expansion tiles
   var expansionTilesFinder = find.descendant(
@@ -875,12 +875,9 @@ Future<void> caTestPreview({
 
     // Getting the total number of list tiles for this expansion tile
     int totalListTiles = listTilesFinder.evaluate().length;
-    if (testingDebug) {
-      pu.printd(
-        "Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
-        "(The expansion tile is included. The first index is skipped.)",
-      );
-    }
+    logt("Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
+        "The expansion tile is included. The first index is skipped.");
+    
 
     if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) {
       totalIndivExpansionTiles++;
@@ -896,11 +893,7 @@ Future<void> caTestPreview({
       // No expansion tile if the checkbox is not checked
       // Resetting at the first group/teams expansion tile
       if (expansionTileIndex == totalIndivExpansionTiles) {
-        if (testingDebug) {
-          pu.printd(
-            "Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex",
-          );
-        }
+        logt("Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex");
         previewListTileDataIndex = 0;
       } else {
         previewListTileDataIndex++;
@@ -1042,7 +1035,7 @@ Future<void> caTestPreview2({
   LocalizedDashboardStrings lds = .new(context);
   LocalizedCAStrings lca = .new(context);
 
-  if (testingDebug) pu.printd("Entering caTestPreview2");
+  logt("Entering caTestPreview2");
   logt("---------> Parameters");
   logt("Preview: Checkboxes values", checkboxesValues);
   logt("Preview: Individual perspective values", individualStringValues);
@@ -1076,7 +1069,7 @@ Future<void> caTestPreview2({
     matching: find.textContaining(title),
   );
   expect(titleFinder, findsOne);
-  if (testingDebug) pu.printd("Testing Debug: ---------> Preview title found");
+  logt("---------> Preview title found");
 
   // ---------------------------------------------------------------------------
   // 3. VERIFYING THE VALUES FOR THE INDIVIDUAL PERSPECTIVE
@@ -1105,10 +1098,7 @@ Future<void> caTestPreview2({
       caPreviewNoDataInIndividualPerspectiveText.data,
       lca.caPreviewNoDataInIndividualPerspective,
     );
-    if (testingDebug)
-      pu.printd(
-        "Testing Debug: Found placeholder text for absence of individual data in preview",
-      );
+    logt("Found placeholder text for absence of individual data in preview");
   }
   // 3.2 case 2: expansion tiles in the group perpective: text field values to check
   // ---------------------------------------------------------------------------
@@ -1615,9 +1605,9 @@ bool caIsCheckboxTextUnderlined({
   required int checkboxIndex,
 }) {
   var indivTextWidget = tester.widget<Text>(textsFinder.at(checkboxIndex));
-  if (testingDebug) pu.printd("Testing Debug: text: ${indivTextWidget.data}");
+  logt("Text: ${indivTextWidget.data}");
   var decoration = indivTextWidget.style?.decoration;
-  if (testingDebug) pu.printd("______________ decoration: $decoration");
+  logt("______________ decoration: $decoration");
   return (decoration == TextDecoration.underline);
 }
 
@@ -2576,10 +2566,9 @@ Future<void> selectLanguage({
   required WidgetTester tester,
   required String languageCodeToSet,
 }) async {
-  if (sessionMetadataDebug)
-    pu.printd(
-      "Session Metadata: -----------> language to select: $languageCodeToSet",
-    );
+
+  logm("-----------> language to select: $languageCodeToSet");
+  
 
   // Getting the localized strings
   var context = tester.element(find.byType(Scaffold).first);
@@ -2642,17 +2631,14 @@ Future<int> scrollListUpScrollableByFirstDescendant({
   required elementToReachFinder,
   double delta = -200,
 }) async {
-  if (testingDebug) pu.printd("Testing Debug: scrollListUpScreen");
+  logt("scrollListUpScreen");
 
   var scrollablesFinder = find.descendant(
     of: listFinder,
     matching: find.byType(Scrollable),
   );
 
-  if (testingDebug)
-    pu.printd(
-      "Testing Debug: Scrollable count: ${scrollablesFinder.evaluate().length}",
-    );
+  logt("Scrollable count: ${scrollablesFinder.evaluate().length}");
 
   await tester.scrollUntilVisible(
     elementToReachFinder,
