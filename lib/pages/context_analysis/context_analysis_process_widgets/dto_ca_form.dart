@@ -385,10 +385,10 @@ class DTOCAForm {
       } else {
         
         if (csvBuildingDebug) pu.printd("CSV Building");
-        if (csvBuildingDebug)
-          pu.printd(
-            "CSV Building: Error: treatmentAccordingToInputType: no mapping found",
-          );
+
+        
+        logc("Error: treatmentAccordingToInputType: no mapping found");
+
         if (csvBuildingDebug)
           pu.printd("CSV Building: Error: itemOrTitleLabel: $itemOrTitleLabel");
         if (csvBuildingDebug)
