@@ -2299,7 +2299,6 @@ Future<void> gpsFromGPSPageToProcessPage(WidgetTester tester) async {
   LocalizedGPSStrings lgps = .new(context);
 
   if (testingDebug) isCircularProgressIndicatorPresent(tester);
-  // if (testingDebug) printTextData(tester);
 
   // Clicking on the GPS new process button
   await gpsCheckNewProcessButtonFunctions(tester);
