@@ -389,8 +389,8 @@ class DTOCAForm {
         
         logc("Error: treatmentAccordingToInputType: no mapping found");
 
-        if (csvBuildingDebug)
-          pu.printd("CSV Building: Error: itemOrTitleLabel: $itemOrTitleLabel");
+        logc("Error: itemOrTitleLabel: $itemOrTitleLabel");
+
         if (csvBuildingDebug)
           pu.printd(
             "CSV Building: Error: qfl.questionsToInputItemsMapping[itemOrTitleLabel: ${qfl.questionsToInputItemsMapping[itemOrTitleLabel]}",
