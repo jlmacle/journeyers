@@ -2346,8 +2346,6 @@ Future<void> gpsFromProcessPageToNewParticipantsListPage(
   // await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 5));
 
-  // if (testingDebug) printTextData(tester);
-
   // Verifying the options page present
   var optionsPageFinder = find.text(lps.participantsListsSubTitle);
   expect(optionsPageFinder, findsOne);
