@@ -213,9 +213,8 @@ class CAFormState extends State<CAForm> {
     logc("CSV Building");
 
     logc("preCSVDataGroupPerspective");
+    logc("$preCSVDataGroupPerspective");
 
-    if (csvBuildingDebug)
-      pu.printd("CSV Building: $preCSVDataGroupPerspective");
     if (csvBuildingDebug) pu.printd("CSV Building");
 
     List<List<String?>> csvDataIndividualPerspective = await _dtoCAForm!
