@@ -84,9 +84,8 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedUtilsStrings lus = .new(context);
 
-        if (testingDebug)
-          pu.printd("Testing Debug: Platform: ${Platform.operatingSystem}");
-
+        logt("Platform: ${Platform.operatingSystem}");
+        
         if (Platform.isAndroid || Platform.isIOS) {
           // Verifying the elevated button absent
           expect(find.byType(ElevatedButton), findsNothing);
