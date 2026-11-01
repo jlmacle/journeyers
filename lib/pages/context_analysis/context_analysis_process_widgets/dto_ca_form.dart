@@ -389,7 +389,7 @@ class DTOCAForm {
         logc("Error: itemOrTitleLabel: $itemOrTitleLabel");
         logc("Error: qfl.questionsToInputItemsMapping[itemOrTitleLabel: ${qfl.questionsToInputItemsMapping[itemOrTitleLabel]}");
         logc("Error: questionsToInputItemsMapping: ${qfl.questionsToInputItemsMapping}");
-        if (csvBuildingDebug) pu.printd("CSV Building");
+        logc("");   
       }
       return preCSVData;
     }
