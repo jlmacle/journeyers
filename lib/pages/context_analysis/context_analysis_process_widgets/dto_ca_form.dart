@@ -384,17 +384,11 @@ class DTOCAForm {
         preCSVData.add(textFieldpreCSVData[0]);
       } else {
         
-        if (csvBuildingDebug) pu.printd("CSV Building");
-
-        
+        logc("");        
         logc("Error: treatmentAccordingToInputType: no mapping found");
-
         logc("Error: itemOrTitleLabel: $itemOrTitleLabel");
-
         logc("Error: qfl.questionsToInputItemsMapping[itemOrTitleLabel: ${qfl.questionsToInputItemsMapping[itemOrTitleLabel]}");
-
         logc("Error: questionsToInputItemsMapping: ${qfl.questionsToInputItemsMapping}");
-
         if (csvBuildingDebug) pu.printd("CSV Building");
       }
       return preCSVData;
