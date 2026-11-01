@@ -120,10 +120,8 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> {
                         _keywordsSet.remove(tag);
                         _keywordsListSorted.removeWhere((item) => item == tag);
 
-                        if (editDebug)
-                          pu.printd(
-                            "Editing: CAKeywordsDeclaration: build: _keywordsSet: $_keywordsSet",
-                          );
+                        loge("CAKeywordsDeclaration: build: _keywordsSet: $_keywordsSet");
+  
                         if (editDebug)
                           pu.printd(
                             "Editing: CAKeywordsDeclaration: build: _keywordsListSorted: $_keywordsListSorted",
