@@ -3,9 +3,6 @@ import "dart:ui";
 
 // import "package:flutter/rendering.dart";
 import "package:flutter/services.dart";
-import "package:flutter_localizations/flutter_localizations.dart"
-    hide
-        GlobalMaterialLocalizations; // https://docs.flutter.dev/ui/internationalization
 
 import "package:material_ui/material_ui.dart";
 
@@ -105,11 +102,9 @@ class _GPSappState extends State<GPSapp> {
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
       // "By default only the American English locale is supported.
       // Apps should configure this list to match the locales they support."
       supportedLocales: const [
