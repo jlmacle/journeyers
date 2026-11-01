@@ -108,7 +108,8 @@ class GPSPageState extends State<GPSPage>
       _fileNameWithoutExtensionWhenEdition = fileNameWithoutExtensionWhenEdition;
       _filePathWhenEdition = filePathWhenEdition;
 
-      if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: titleWhenEdition: $titleWhenEdition");
+      loge("GPSPage: _onEditSessionData: titleWhenEdition: $titleWhenEdition");
+
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: keywordsWhenEdition: $keywordsWhenEdition");
       if (editDebug) pu.printd("Editing: GPSPage: _onEditSessionData: dtoGPSFormWhenEdition");
       if (editDebug) dtoGPSFormWhenEdition!.printToConsole();
