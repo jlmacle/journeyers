@@ -699,10 +699,9 @@ class DTOCAForm {
     logc("csvDataIndividualPerspective:$csvDataIndividualPerspective");
 
     if (csvBuildingDebug) pu.printd("CSV Building");
-    if (csvBuildingDebug)
-      pu.printd(
-        "CSV Building: csvDataGroupPerspective:$csvDataGroupPerspective",
-      );
+
+    logc("csvDataGroupPerspective:$csvDataGroupPerspective");
+
     if (csvBuildingDebug) pu.printd("CSV Building");
 
     final dataBytes = Uint8List.fromList(utf8.encode(content));
