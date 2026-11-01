@@ -690,9 +690,7 @@ class DTOCAForm {
 
     logc("");
     logc("csvDataIndividualPerspective:$csvDataIndividualPerspective");
-
-    if (csvBuildingDebug) pu.printd("CSV Building");
-
+    logc("");
     logc("csvDataGroupPerspective:$csvDataGroupPerspective");
 
     if (csvBuildingDebug) pu.printd("CSV Building");
