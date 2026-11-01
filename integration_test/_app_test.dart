@@ -462,7 +462,7 @@ Future<void> main() async {
 
           // Individual perspective testing values
           // 7 values are necessary
-          List<bool> checkboxValues = List.filled(7, true);
+          List<bool> checkboxesValues = List.filled(7, true);
           // a1 to a7
           List<String> checkboxTextFieldValues = List.generate(
             7,
@@ -473,7 +473,7 @@ Future<void> main() async {
           // Group/teams perspective testing values
           String groupProblemsToSolveStrValue = "b1";
           // 4 values are necessary
-          List<Set<String>> segmentedButtonValues = [
+          List<Set<String>> segmentedButtonsValues = [
             {lca.yes},
             {lca.no},
             {lca.iDontKnow},
@@ -496,11 +496,11 @@ Future<void> main() async {
             formToFill: false,
             titlesList: titlesList,
             kwsLists: kwsLists,
-            checkboxValues: checkboxValues,
+            checkboxValues: checkboxesValues,
             checkboxTextFieldValues: checkboxTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-            segmentedButtonValues: segmentedButtonValues,
+            segmentedButtonValues: segmentedButtonsValues,
             segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
             fileNamesWithoutExtensionList: fileNamesWithoutExtensionList,
           );
@@ -578,14 +578,15 @@ Future<void> main() async {
               matching: find.byIcon(Icons.find_in_page_rounded),
             );
 
-            await caTestPreview(
+            await caTestPreview2(
               context: context,
               tester: tester,
               previewFinder: previewFinder,
               title: titlesList[i],
               individualStringValues: individualStringValues,
               groupStringValues: groupStringValues,
-              segmentedButtonValues: segmentedButtonValues,
+              segmentedButtonsValues: segmentedButtonsValues, 
+              checkboxesValues: checkboxesValues,
             );
           }
 
@@ -765,7 +766,7 @@ Future<void> main() async {
             title: title,
             checkboxesValues: newCheckboxesValues,
             individualStringValues: individualStringValuesEdited,
-            segmentedButtonValues: newSegmentedButtonsValues,
+            segmentedButtonsValues: newSegmentedButtonsValues,
             groupStringValues: groupStringValueEdited,
           );
 

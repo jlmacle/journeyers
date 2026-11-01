@@ -1024,7 +1024,7 @@ Future<void> caTestPreview2({
   required String title,
   required List<bool> checkboxesValues,
   required List<String> individualStringValues,
-  required List<Set<String>> segmentedButtonValues,
+  required List<Set<String>> segmentedButtonsValues,
   required List<String> groupStringValues,
 }) async {
 
@@ -1038,7 +1038,7 @@ Future<void> caTestPreview2({
   logt("---------> Parameters");
   logt("Preview: Checkboxes values", checkboxesValues);
   logt("Preview: Individual perspective values", individualStringValues);
-  logt("Preview: Segmented buttons values", segmentedButtonValues);
+  logt("Preview: Segmented buttons values", segmentedButtonsValues);
   logt("Preview: Group/teams perspective values", groupStringValues);
   // await tester.pump(const Duration(seconds: 2));
 
@@ -1468,7 +1468,7 @@ Future<void> caTestPreview2({
     );
 
     // For all segmented button values (Notes displayed, potentially empty)
-    for (var currentExpansionTileIndex = 0; currentExpansionTileIndex < segmentedButtonValues.length; currentExpansionTileIndex++) {
+    for (var currentExpansionTileIndex = 0; currentExpansionTileIndex < segmentedButtonsValues.length; currentExpansionTileIndex++) {
       // Getting the expansion tile
       var currentExpansionTileGroupPerpectiveFinder =
           expansionTilesGroupPerpectiveFinder.at(currentExpansionTileIndex);
@@ -1493,7 +1493,7 @@ Future<void> caTestPreview2({
         var currentDataWidget = getLastTextFromFinder(tester, currentExpansionTileGroupPerpectiveFinder);          
         var currentData = currentDataWidget.data;       
 
-        var currentSegmentedButtonsOptionsValues = segmentedButtonValues[currentExpansionTileIndex - 1]; // - Text field only
+        var currentSegmentedButtonsOptionsValues = segmentedButtonsValues[currentExpansionTileIndex - 1]; // - Text field only
         var currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
         var expectedSegmentedButtonsOptionsData  = "${lca.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}";
         
