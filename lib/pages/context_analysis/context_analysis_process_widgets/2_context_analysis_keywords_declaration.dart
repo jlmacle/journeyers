@@ -121,11 +121,8 @@ class _CAKeywordsDeclarationState extends State<CAKeywordsDeclaration> {
                         _keywordsListSorted.removeWhere((item) => item == tag);
 
                         loge("CAKeywordsDeclaration: build: _keywordsSet: $_keywordsSet");
+                        loge("CAKeywordsDeclaration: build: _keywordsListSorted: $_keywordsListSorted");
   
-                        if (editDebug)
-                          pu.printd(
-                            "Editing: CAKeywordsDeclaration: build: _keywordsListSorted: $_keywordsListSorted",
-                          );
                       });
                       widget.onKeywordsUpdatedProcessCallbackFunction(
                         _keywordsSet,
