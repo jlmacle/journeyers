@@ -94,7 +94,7 @@ class GPSPageState extends State<GPSPage>
     required String filePathWhenEdition
   })
   {
-    if (editDebug) pu.printd("Editing: GPSPage: onEditSessionData");
+    loge("GPSPage: onEditSessionData");
 
     setState(() {
       // To have the GPSProcess widget loaded with the values to edit
